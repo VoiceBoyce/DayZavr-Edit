@@ -1,0 +1,539 @@
+FrameWidgetClass FrameBankingMenu {
+ visible 1
+ clipchildren 0
+ position 0 0
+ size 547 466
+ halign center_ref
+ valign center_ref
+ hexactpos 0
+ vexactpos 0
+ hexactsize 1
+ vexactsize 1
+ {
+  PanelWidgetClass PanelBankingBackground {
+   visible 1
+   ignorepointer 1
+   keepsafezone 0
+   position 0 0
+   size 1 1
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   color 0.094 0.11 0.15 0.97
+   style rover_sim_colorable
+  }
+  TextWidgetClass TextTitle {
+   visible 1
+   ignorepointer 1
+   position 0 -0.42
+   size 0.7 0.055
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style Normal
+   text "БАНКОВСКИЙ СЕЙФ"
+   font "gui/fonts/Metron-Bold28"
+   color 1 1 1 0.25
+   "text halign" center
+   "text valign" center
+  }
+  FrameWidgetClass FramePlayerData {
+   ignorepointer 1
+   position -0.005 -0.14
+   size 0.909 0.309
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   priority 1
+   {
+    PanelWidgetClass PanelCardBank {
+     visible 1
+     clipchildren 1
+     ignorepointer 1
+     position -0.25 0.01
+     size 0.48 0.88
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     color 1 1 1 0.035
+     style rover_sim_colorable
+     {
+      TextWidgetClass TextOwned {
+       ignorepointer 1
+       position 0.06 -0.28
+       size 0.88 0.22
+       halign left_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style Normal
+       text "В БАНКЕ"
+       font "gui/fonts/Metron-Bold28"
+       color 0.55 0.8 0.45 1
+       "text halign" left
+       "text valign" center
+      }
+      TextWidgetClass TextOwnedAmount {
+       clipchildren 0
+       ignorepointer 1
+       position 0.06 -0.02
+       size 0.88 0.38
+       halign left_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style Normal
+       text "-1"
+       font "gui/fonts/MetronBlack28"
+       "text halign" left
+       "text valign" center
+      }
+      PanelWidgetClass PanelProgressBg {
+       ignorepointer 1
+       position 0.06 0.3
+       size 0.88 0.04
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       color 1 1 1 0.06
+       style rover_sim_colorable
+      }
+      TextWidgetClass TextMaxOwnedAmount {
+       ignorepointer 1
+       position 0.06 0.42
+       size 0.88 0.18
+       halign left_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style Normal
+       text "-1"
+       font "gui/fonts/Metron-Bold28"
+       color 1 1 1 0.22
+       "text halign" left
+       "text valign" center
+      }
+     }
+    }
+    PanelWidgetClass PanelCardCash {
+     visible 1
+     clipchildren 1
+     ignorepointer 1
+     position 0.25 0.01
+     size 0.48 0.88
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     color 1 1 1 0.035
+     style rover_sim_colorable
+     {
+      TextWidgetClass TextOnPlayer {
+       ignorepointer 1
+       position 0.06 -0.15
+       size 0.88 0.25
+       halign left_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style Normal
+       text "ПРИ СЕБЕ"
+       font "gui/fonts/Metron-Bold28"
+       color 0.45 0.72 0.85 1
+       "text halign" left
+       "text valign" center
+      }
+      TextWidgetClass TextOnPlayerAmount {
+       clipchildren 0
+       ignorepointer 1
+       position 0.06 0.1
+       size 0.88 0.55
+       halign left_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style Normal
+       text "0"
+       font "gui/fonts/MetronBlack28"
+       "text halign" left
+       "text valign" center
+      }
+     }
+    }
+   }
+  }
+  FrameWidgetClass FramePlayerInput {
+   clipchildren 1
+   ignorepointer 1
+   position -0.005 0.2595
+   size 0.909 0.46
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   priority 1
+   {
+    TextWidgetClass TextAmount {
+     ignorepointer 1
+     position -0.33 -0.36
+     size 0.2 0.14
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Normal
+     text "СУММА"
+     font "gui/fonts/Metron-Bold28"
+     color 1 1 1 0.28
+     "text halign" left
+     "text valign" center
+    }
+    PanelWidgetClass PanelAmountInput {
+     visible 1
+     disabled 0
+     clipchildren 1
+     ignorepointer 0
+     keepsafezone 0
+     position -0.05 -0.36
+     size 0.6 0.22
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     color 1 1 1 0.04
+     style rover_sim_colorable
+     {
+      TextWidgetClass TextAmountInput {
+       visible 1
+       disabled 0
+       clipchildren 1
+       ignorepointer 1
+       color 1 1 1 0
+       size 1 1
+       halign right_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       scaled 1
+       style Normal
+       text "0"
+       "exact text" 0
+       "size to text h" 0
+       "size to text v" 0
+       "text halign" right
+       "text valign" center
+       {
+        EditBoxWidgetClass EditBoxAmountInput {
+         visible 1
+         disabled 0
+         clipchildren 1
+         ignorepointer 1
+         size 1 1
+         halign right_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style Default
+         text "0"
+         "limit visible" 0
+         "Use default text" 0
+         "exact text" 1
+         font "gui/fonts/Metron-Bold28"
+        }
+       }
+      }
+     }
+    }
+    ButtonWidgetClass ButtonPresetCashAll {
+     visible 1
+     clipchildren 1
+     position -0.33 -0.16
+     size 0.15 0.1
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     color 1 1 1 0.06
+     style rover_sim_colorable
+     text "ВСЁ С РУК"
+     font "gui/fonts/Metron-Bold28"
+     "text color" 1 1 1 0.45
+    }
+    ButtonWidgetClass ButtonPresetBankAll {
+     visible 1
+     clipchildren 1
+     position -0.16 -0.16
+     size 0.15 0.1
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     color 1 1 1 0.06
+     style rover_sim_colorable
+     text "ВСЁ ИЗ БАНКА"
+     font "gui/fonts/Metron-Bold28"
+     "text color" 1 1 1 0.45
+    }
+    ButtonWidgetClass ButtonPresetHalf {
+     visible 1
+     clipchildren 1
+     position 0.01 -0.16
+     size 0.15 0.1
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     color 1 1 1 0.06
+     style rover_sim_colorable
+     text "ПОЛОВИНА"
+     font "gui/fonts/Metron-Bold28"
+     "text color" 1 1 1 0.45
+    }
+    ButtonWidgetClass ButtonPreset10k {
+     visible 1
+     clipchildren 1
+     position 0.18 -0.16
+     size 0.12 0.1
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     color 1 1 1 0.06
+     style rover_sim_colorable
+     text "10 000"
+     font "gui/fonts/Metron-Bold28"
+     "text color" 1 1 1 0.45
+    }
+    ButtonWidgetClass ButtonPreset100k {
+     visible 1
+     clipchildren 1
+     position 0.32 -0.16
+     size 0.14 0.1
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     color 1 1 1 0.06
+     style rover_sim_colorable
+     text "100 000"
+     font "gui/fonts/Metron-Bold28"
+     "text color" 1 1 1 0.45
+    }
+    TextWidgetClass TextHint {
+     visible 1
+     ignorepointer 1
+     position 0 -0.03
+     size 0.7 0.06
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Normal
+     text ""
+     font "gui/fonts/Metron-Bold28"
+     color 1 1 1 0.18
+     "text halign" center
+     "text valign" center
+    }
+    PanelWidgetClass PanelButtonDeposit {
+     clipchildren 0
+     ignorepointer 1
+     position -0.32 0.375
+     size 0.31 0.191
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     priority 2
+     color 0.25 0.39 0.13 0.9
+     style rover_sim_colorable
+     {
+      ButtonWidgetClass ButtonDeposit {
+       clipchildren 0
+       position 0 0
+       size 0.85 0.7
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       priority 5
+       text "ВЛОЖИТЬ"
+       font "gui/fonts/Metron-Bold28"
+       text_proportion 0.85
+       "text color" 1 1 1 1
+      }
+     }
+    }
+    PanelWidgetClass PanelButtonWithdraw {
+     clipchildren 0
+     ignorepointer 1
+     position 0 0.375
+     size 0.31 0.191
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     priority 2
+     color 0.43 0.30 0.09 0.9
+     style rover_sim_colorable
+     {
+      ButtonWidgetClass ButtonWithdraw {
+       clipchildren 0
+       position 0 0
+       size 0.85 0.7
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       priority 3
+       text "СНЯТЬ"
+       font "gui/fonts/Metron-Bold28"
+       text_proportion 0.85
+       "text color" 1 1 1 1
+      }
+     }
+    }
+    PanelWidgetClass PanelButtonClose {
+     clipchildren 0
+     ignorepointer 1
+     position 0.32 0.375
+     size 0.31 0.191
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     priority 5
+     color 0.38 0.11 0.09 0.9
+     style rover_sim_colorable
+     {
+      ButtonWidgetClass ButtonClose {
+       position 0 0
+       size 0.85 0.7
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       priority 5
+       text "ЗАКРЫТЬ"
+       font "gui/fonts/Metron-Bold28"
+       text_proportion 0.85
+       "text color" 1 1 1 1
+      }
+     }
+    }
+   }
+  }
+  PanelWidgetClass PanelMessage {
+   visible 0
+   clipchildren 1
+   ignorepointer 1
+   color 0 0 0 0.502
+   position 0.00037 -0.30446
+   size 0.98976 0.3
+   halign center_ref
+   valign bottom_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style rover_sim_colorable
+   {
+    PanelWidgetClass PanelMessageBackground {
+     ignorepointer 1
+     color 0 0 0 0.502
+     position 0 0
+     size 0.9 0.9
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style rover_sim_colorable
+     {
+      MultilineTextWidgetClass MultilineTextMessage {
+       visible 1
+       disabled 0
+       inheritalpha 0
+       ignorepointer 1
+       keepsafezone 0
+       color 1 1 0 1
+       size 0.98 1
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       text "You do not have enough space to carry that amount of currency. The not carryable amount has been readded to your account."
+       "exact text" 0
+       text_proportion 0.5
+       "size to text h" 0
+       "size to text v" 0
+       "text halign" center
+       "text valign" center
+       wrap 1
+      }
+     }
+    }
+   }
+  }
+ }
+}

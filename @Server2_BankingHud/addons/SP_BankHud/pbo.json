@@ -1,0 +1,22 @@
+{
+    "compress": {
+        "exclude": [
+        ],
+        "include": [
+        ]
+    },
+    "headers": [
+        {
+            "name": "product",
+            "value": "dayz ugc"
+        },
+        {
+            "name": "version",
+            "value": "2"
+        },
+        {
+            "name": "prefix",
+            "value": "SP_BankHud"
+        }
+    ]
+}
