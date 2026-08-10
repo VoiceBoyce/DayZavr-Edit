@@ -95,7 +95,7 @@ OOTS_ART_Glaz2:
 OOTS_ART_Glaz + OOTS_ART_myaso + MSFZ_Crystal_Stone + MSFZ_RuneStone_Orel
 
 OOTS_ART_Crustal2:
-OOTS_ART_Crustal + OOTS_ART_Angel + MSFZ_Crystal_Pyrite + BRDK_Silver_Sand + MSFZ_RuneStone_Ice
+OOTS_ART_Crustal + OOTS_ART_JellyFish + MSFZ_Crystal_Pyrite + BRDK_Silver_Sand + MSFZ_RuneStone_Ice
 
 OOTS_ART_Drop2:
 OOTS_ART_Drop + OOTS_ART_svet + BRDK_Silver_Sand + BRDK_Gold_Sand + MSFZ_RuneStone_Bereza
@@ -232,10 +232,10 @@ OOTS_ART_Monolit:
 OOTS_ART_krov_kamnya + OOTS_ART_Crustal3 + OOTS_ART_Dummy + OOTS_ART_Braen + MSFZ_Crystal_Damascus + MSFZ_Crystal_Mithril + MSFZ_RuneStone_Nasledie
 
 OOTS_ART_Oasis:
-OOTS_ART_puzir + OOTS_ART_Flower + OOTS_ART_ShineOfTheForest + OOTS_ART_Drop3 + BRDK_Gold_Sand + MSFZ_Crystal_Stone + MSFZ_RuneStone_Bereza
+OOTS_ART_puzir + OOTS_ART_Flower + OOTS_ART_Drop3 + BRDK_Gold_Sand + MSFZ_Crystal_Stone + MSFZ_RuneStone_Bereza
 
 OOTS_ART_Spring:
-OOTS_ART_snejinka + OOTS_ART_Gravi + OOTS_ART_vivert + BRDK_Iron + BRDK_Bronze + MSFZ_RuneStone_Tis
+OOTS_ART_snejinka + OOTS_ART_ShineOfTheForest + OOTS_ART_vivert + BRDK_Iron + BRDK_Bronze + MSFZ_RuneStone_Tis
 
 
 ====================================================
