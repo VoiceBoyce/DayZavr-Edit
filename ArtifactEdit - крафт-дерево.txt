@@ -1,0 +1,197 @@
+АРТЕФАКТЫ — КРАФТ-ДЕРЕВО
+========================
+
+ПРАВИЛО ФОРМАТА
+--------------
+Название результата:
+Компонент + Компонент + Компонент
+
+Названия — только из картотеки (OOTS_ART_*).
+T1 (базовые) крафтятся из ресурсов, без других артефактов.
+T2/T3/T4 — из артефактов + редкие материалы (не указаны).
+
+
+====================================================
+T1 — БАЗОВЫЕ (из ресурсов, без артефактов)
+====================================================
+OOTS_ART_Braen
+OOTS_ART_JellyFish
+OOTS_ART_Dummy
+OOTS_ART_MomisBeads
+OOTS_ART_myaso
+OOTS_ART_kolobok
+OOTS_ART_svet
+OOTS_ART_Crustal
+OOTS_ART_Drop
+OOTS_ART_Plamya
+OOTS_ART_Glaz
+OOTS_ART_kameniy_cvetok
+OOTS_ART_Battery
+OOTS_ART_SeaUrchin
+
+
+====================================================
+T2 — СРЕДНИЕ
+====================================================
+OOTS_ART_Plamya2:
+OOTS_ART_Plamya + OOTS_ART_Braen
+
+OOTS_ART_Glaz2:
+OOTS_ART_Glaz + OOTS_ART_myaso
+
+OOTS_ART_Crustal2:
+OOTS_ART_Crustal + OOTS_ART_Angel
+
+OOTS_ART_Drop2:
+OOTS_ART_Drop + OOTS_ART_svet
+
+OOTS_ART_kameniy_cvetok2:
+OOTS_ART_kameniy_cvetok + OOTS_ART_SeaUrchin
+
+OOTS_ART_Battery3:
+OOTS_ART_Battery + OOTS_ART_Mohovik
+
+OOTS_ART_Light:
+OOTS_ART_myaso + OOTS_ART_JellyFish
+
+OOTS_ART_Klyaksa:
+OOTS_ART_Drop2 + OOTS_ART_Braen
+
+OOTS_ART_Mohovik:
+OOTS_ART_Battery + OOTS_ART_kolobok
+
+OOTS_ART_Angel:
+OOTS_ART_svet + OOTS_ART_myaso + OOTS_ART_Braen
+
+OOTS_ART_AngelFool:
+OOTS_ART_Angel + OOTS_ART_svet
+
+OOTS_ART_vspishka:
+OOTS_ART_Plamya + OOTS_ART_svet
+
+OOTS_ART_Plasma:
+OOTS_ART_Crustal + OOTS_ART_svet
+
+OOTS_ART_Sparkler:
+OOTS_ART_Plamya + OOTS_ART_Battery
+
+OOTS_ART_snejinka:
+OOTS_ART_Battery3 + OOTS_ART_Braen
+
+OOTS_ART_Gravi:
+OOTS_ART_Crustal + OOTS_ART_JellyFish
+
+OOTS_ART_vivert:
+OOTS_ART_Crustal2 + OOTS_ART_Gravi
+
+OOTS_ART_NightStar:
+OOTS_ART_Glaz + OOTS_ART_Dummy
+
+OOTS_ART_Thorn:
+OOTS_ART_Crustal + OOTS_ART_MomisBeads
+
+OOTS_ART_Mikrob:
+OOTS_ART_Glaz2 + OOTS_ART_Dummy
+
+
+====================================================
+T3 — ДОРОГИЕ
+====================================================
+OOTS_ART_Plamya3:
+OOTS_ART_Plamya2 + OOTS_ART_vspishka
+
+OOTS_ART_Glaz3:
+OOTS_ART_Glaz2 + OOTS_ART_MomisBeads
+
+OOTS_ART_Crustal3:
+OOTS_ART_Crustal2 + OOTS_ART_Plasma + OOTS_ART_Sparkler
+
+OOTS_ART_Drop3:
+OOTS_ART_Drop2 + OOTS_ART_Plamya2
+
+OOTS_ART_kameniy_cvetok3:
+OOTS_ART_kameniy_cvetok2 + OOTS_ART_izolator
+
+OOTS_ART_Flower:
+OOTS_ART_Drop3 + OOTS_ART_Braen
+
+OOTS_ART_busy2:
+OOTS_ART_Crustal3 + OOTS_ART_Thorn + OOTS_ART_Mikrob
+
+OOTS_ART_krov_kamnya:
+OOTS_ART_Crustal3 + OOTS_ART_JellyFish
+
+OOTS_ART_FireBall:
+OOTS_ART_Plamya3 + OOTS_ART_Light
+
+OOTS_ART_Burn:
+OOTS_ART_Plamya2 + OOTS_ART_Light
+
+OOTS_ART_izolator:
+OOTS_ART_AngelFool + OOTS_ART_Thorn
+
+OOTS_ART_DemonEye:
+OOTS_ART_Glaz3 + OOTS_ART_MomisBeads
+
+OOTS_ART_Soul:
+OOTS_ART_kameniy_cvetok3 + OOTS_ART_Glaz3
+
+OOTS_ART_puzir:
+OOTS_ART_Drop3 + OOTS_ART_Klyaksa
+
+OOTS_ART_BloodStone_New:
+OOTS_ART_CrustalThorn + OOTS_ART_JellyFish
+
+OOTS_ART_ShineOfTheForest:
+OOTS_ART_snejinka + OOTS_ART_NightStar
+
+OOTS_ART_CrustalThorn:
+OOTS_ART_Crustal2 + OOTS_ART_Thorn
+
+OOTS_ART_ribka:
+OOTS_ART_JellyFish + OOTS_ART_Light
+
+OOTS_ART_MoonLight:
+OOTS_ART_DemonEye + OOTS_ART_Plasma
+
+
+====================================================
+T4 — ЭНДГЕЙМ
+====================================================
+OOTS_ART_Compas:
+OOTS_ART_Glaz3 + OOTS_ART_Plamya3 + OOTS_ART_kameniy_cvetok3 + OOTS_ART_Braen
+
+OOTS_ART_DevelHert:
+OOTS_ART_Crustal3 + OOTS_ART_Drop3 + OOTS_ART_Battery3
+
+OOTS_ART_DarkSoul:
+OOTS_ART_Soul + OOTS_ART_MoonLight
+
+OOTS_ART_shturval:
+OOTS_ART_kolobok + OOTS_ART_DemonEye + OOTS_ART_Sparkler
+
+OOTS_ART_NanoCell:
+OOTS_ART_Angel + OOTS_ART_Battery3 + OOTS_ART_krov_kamnya + OOTS_ART_Mikrob
+
+OOTS_ART_Monolit:
+OOTS_ART_krov_kamnya + OOTS_ART_Crustal3 + OOTS_ART_Dummy + OOTS_ART_Braen
+
+OOTS_ART_Oasis:
+OOTS_ART_puzir + OOTS_ART_ShineOfTheForest + OOTS_ART_Drop3
+
+OOTS_ART_Spring:
+OOTS_ART_snejinka + OOTS_ART_Gravi + OOTS_ART_vivert
+
+
+====================================================
+ПРИМЕЧАНИЯ
+====================================================
+- 61 артефакт: 14 базовых (T1), 20 средних (T2), 19 дорогих (T3), 8 эндгейм (T4).
+- Семейства-лестницы: Пламя, Глаз, Кристалл, Капля, Каменный цветок, Батарея.
+- Негатив (svet, AngelFool, vspishka, Plasma, kolobok, SeaUrchin, MomisBeads)
+  и плацебо (Braen) работают как катализаторы/сырьё.
+- Ветки собираются в 4 билда T4:
+    Танк/выживание: Oasis, Monolit, NanoCell
+    Вампир/кровь:   Compas, DevelHert, DarkSoul
+    Комарик/стам:   Spring, shturval
+    Универсал:      любой один T4 + связка под стиль
