@@ -9,8 +9,11 @@
 Названия артефактов — только из картотеки (OOTS_ART_*).
 Материалы — реальные предметы из других модов:
   BRDK_*   — руда/крупицы (добыча в породах и реках)
-  MSFZ_*   — кристаллы и руны (доп. минералы)
-Там, где подходящего предмета нет — остаётся плейсхолдер [X].
+  MSFZ_*   — кристаллы, руны и трофеи мутантов
+  SFP_*    — трофеи мутантов (руки, глаза, когти, зубы)
+  Mutant*  — стейки мутантов
+Трофеи мутантов — органика: глаза в ветку Глаза, головы Энтов в Каменный
+цветок, когти в хищников/мощь, стейки в мясо и культуры.
 
 Руны задают суть артефакта (стихия/создание). Логика рун:
   Огонь → пламенные (Plamya, FireBall, Burn, vspishka, Sparkler, Plasma)
@@ -61,7 +64,7 @@ OOTS_ART_Glaz:
 OOTS_ART_Plamya + MSFZ_Crystal_Amethyst + MSFZ_RuneStone_Orel
 
 OOTS_ART_kameniy_cvetok:
-OOTS_ART_Glaz + MSFZ_Crystal_Stone + BRDK_Nephrite + MSFZ_RuneStone_Solnce
+OOTS_ART_Glaz + MSFZ_Crystal_Stone + BRDK_Nephrite + MSFZ_Ent_head + MSFZ_RuneStone_Solnce
 
 OOTS_ART_JellyFish:
 OOTS_ART_kameniy_cvetok + BRDK_Nephrite_Sand + MSFZ_RuneStone_Zmey
@@ -70,16 +73,16 @@ OOTS_ART_SeaUrchin:
 OOTS_ART_JellyFish + BRDK_Titanium + MSFZ_RuneStone_Osa
 
 OOTS_ART_myaso:
-OOTS_ART_SeaUrchin + [Биоматерия] + MSFZ_RuneStone_Zayac
+OOTS_ART_SeaUrchin + MutantRicarSteakMeat + MSFZ_RuneStone_Zayac
 
 OOTS_ART_kolobok:
-OOTS_ART_myaso + [Клейкая масса] + MSFZ_RuneStone_Cherepaha
+OOTS_ART_myaso + MSFZ_Spider_Lapka + MSFZ_RuneStone_Cherepaha
 
 OOTS_ART_MomisBeads:
 OOTS_ART_kolobok + MSFZ_Crystal_Silver + MSFZ_RuneStone_Nasledie
 
 OOTS_ART_Dummy:
-OOTS_ART_MomisBeads + [Наполнитель] + MSFZ_RuneStone_Day
+OOTS_ART_MomisBeads + SFP_ZombieCivilian_hand + MSFZ_RuneStone_Day
 
 OOTS_ART_Battery:
 OOTS_ART_Dummy + BRDK_Bronze + BRDK_Titanium + MSFZ_RuneStone_StormSmall
@@ -92,7 +95,7 @@ OOTS_ART_Plamya2:
 OOTS_ART_Plamya + OOTS_ART_Braen + BRDK_Coal + BRDK_Sulfur + MSFZ_RuneStone_Fire
 
 OOTS_ART_Glaz2:
-OOTS_ART_Glaz + OOTS_ART_myaso + MSFZ_Crystal_Stone + MSFZ_RuneStone_Orel
+OOTS_ART_Glaz + OOTS_ART_myaso + MSFZ_Crystal_Stone + MSFZ_Zanoza_eye + MSFZ_RuneStone_Orel
 
 OOTS_ART_Crustal2:
 OOTS_ART_Crustal + OOTS_ART_JellyFish + MSFZ_Crystal_Pyrite + BRDK_Silver_Sand + MSFZ_RuneStone_Ice
@@ -101,7 +104,7 @@ OOTS_ART_Drop2:
 OOTS_ART_Drop + OOTS_ART_svet + BRDK_Silver_Sand + BRDK_Gold_Sand + MSFZ_RuneStone_Bereza
 
 OOTS_ART_kameniy_cvetok2:
-OOTS_ART_kameniy_cvetok + OOTS_ART_SeaUrchin + BRDK_Nephrite + MSFZ_Crystal_Stone + MSFZ_RuneStone_Solnce
+OOTS_ART_kameniy_cvetok + OOTS_ART_SeaUrchin + BRDK_Nephrite + MSFZ_Crystal_Stone + MSFZ_Ent_head_medium + MSFZ_RuneStone_Solnce
 
 OOTS_ART_Battery3:
 OOTS_ART_Battery + OOTS_ART_Mohovik + BRDK_Sulfur + BRDK_Bronze + MSFZ_RuneStone_Storm
@@ -110,7 +113,7 @@ OOTS_ART_Light:
 OOTS_ART_myaso + OOTS_ART_JellyFish + MSFZ_Crystal_Gold + MSFZ_RuneStone_Solnce
 
 OOTS_ART_Klyaksa:
-OOTS_ART_Drop2 + OOTS_ART_Braen + MSFZ_Crystal_Obsidian + MSFZ_RuneStone_Zmey
+OOTS_ART_Drop2 + OOTS_ART_Braen + MSFZ_Crystal_Obsidian + SFP_Shum_jaw + MSFZ_RuneStone_Zmey
 
 OOTS_ART_Mohovik:
 OOTS_ART_Battery + OOTS_ART_kolobok + BRDK_Bronze + BRDK_Iron + MSFZ_RuneStone_Storm
@@ -119,7 +122,7 @@ OOTS_ART_Angel:
 OOTS_ART_svet + OOTS_ART_myaso + OOTS_ART_Braen + BRDK_Silver + MSFZ_Crystal_Silver + MSFZ_RuneStone_Bog
 
 OOTS_ART_AngelFool:
-OOTS_ART_svet + OOTS_ART_myaso + MSFZ_Crystal_Amethyst + MSFZ_RuneStone_Orel
+OOTS_ART_svet + OOTS_ART_myaso + MSFZ_Crystal_Amethyst + MSFZ_Ricar_Head + MSFZ_RuneStone_Orel
 
 OOTS_ART_vspishka:
 OOTS_ART_Plamya + OOTS_ART_svet + BRDK_Sulfur + BRDK_Coal + MSFZ_RuneStone_Fire
@@ -143,10 +146,10 @@ OOTS_ART_NightStar:
 OOTS_ART_Glaz + OOTS_ART_Dummy + MSFZ_Crystal_Blue + MSFZ_Crystal_Gold + MSFZ_RuneStone_Solnce
 
 OOTS_ART_Thorn:
-OOTS_ART_Crustal + OOTS_ART_MomisBeads + BRDK_Iron + MSFZ_RuneStone_Kaban
+OOTS_ART_Crustal + OOTS_ART_MomisBeads + BRDK_Iron + SFP_Shipastiy_Teeth + MSFZ_RuneStone_Kaban
 
 OOTS_ART_Mikrob:
-OOTS_ART_Glaz2 + OOTS_ART_Dummy + [Питательный бульон] + [Бактериальная культура] + MSFZ_RuneStone_Osa
+OOTS_ART_Glaz2 + OOTS_ART_Dummy + MutantTrollSteakMeat + SFP_Piyavka_Yazik + MSFZ_RuneStone_Osa
 
 
 ====================================================
@@ -156,7 +159,7 @@ OOTS_ART_Plamya3:
 OOTS_ART_Plamya2 + OOTS_ART_vspishka + BRDK_Rubin + BRDK_Sulfur + MSFZ_RuneStone_Fire
 
 OOTS_ART_Glaz3:
-OOTS_ART_Glaz2 + OOTS_ART_MomisBeads + MSFZ_Crystal_Obsidian + MSFZ_RuneStone_Tigr
+OOTS_ART_Glaz2 + OOTS_ART_MomisBeads + MSFZ_Crystal_Obsidian + SFP_tenevnik_eye + MSFZ_RuneStone_Tigr
 
 OOTS_ART_Crustal3:
 OOTS_ART_Crustal2 + OOTS_ART_Plasma + OOTS_ART_Sparkler + MSFZ_Crystal_Pyrite + BRDK_Silver_Sand + MSFZ_RuneStone_Ice
@@ -165,16 +168,16 @@ OOTS_ART_Drop3:
 OOTS_ART_Drop2 + OOTS_ART_Plamya2 + BRDK_Gold_Sand + MSFZ_RuneStone_Bereza
 
 OOTS_ART_kameniy_cvetok3:
-OOTS_ART_kameniy_cvetok2 + OOTS_ART_izolator + MSFZ_Crystal_Pink + BRDK_Nephrite + MSFZ_RuneStone_Solnce
+OOTS_ART_kameniy_cvetok2 + OOTS_ART_izolator + MSFZ_Crystal_Pink + BRDK_Nephrite + MSFZ_Ent_head_hard + MSFZ_RuneStone_Solnce
 
 OOTS_ART_Flower:
 OOTS_ART_Drop3 + OOTS_ART_Braen + MSFZ_Crystal_Pink + MSFZ_RuneStone_Solnce
 
 OOTS_ART_busy2:
-OOTS_ART_Crustal3 + OOTS_ART_Thorn + OOTS_ART_Mikrob + BRDK_Coal + BRDK_Sulfur + MSFZ_RuneStone_Medved
+OOTS_ART_Crustal3 + OOTS_ART_Thorn + OOTS_ART_Mikrob + BRDK_Coal + BRDK_Sulfur + SFP_BearZMB_Kogot + MSFZ_RuneStone_Medved
 
 OOTS_ART_krov_kamnya:
-OOTS_ART_Crustal3 + OOTS_ART_JellyFish + BRDK_Rubin + BRDK_Iron + MSFZ_RuneStone_Wolf
+OOTS_ART_Crustal3 + OOTS_ART_JellyFish + BRDK_Rubin + BRDK_Iron + SFP_MutoWolf_kogot + MSFZ_RuneStone_Wolf
 
 OOTS_ART_FireBall:
 OOTS_ART_Plamya3 + OOTS_ART_Light + BRDK_Coal + BRDK_Sulfur + MSFZ_RuneStone_Fire
@@ -183,7 +186,7 @@ OOTS_ART_Burn:
 OOTS_ART_Plamya2 + OOTS_ART_Light + BRDK_Coal + MSFZ_RuneStone_Fire
 
 OOTS_ART_izolator:
-OOTS_ART_AngelFool + OOTS_ART_Thorn + MSFZ_Crystal_Stone + BRDK_Nephrite + MSFZ_RuneStone_Ice
+OOTS_ART_AngelFool + OOTS_ART_Thorn + MSFZ_Crystal_Stone + BRDK_Nephrite + MSFZ_Zanoza_stick + MSFZ_RuneStone_Ice
 
 OOTS_ART_DemonEye:
 OOTS_ART_Glaz3 + OOTS_ART_MomisBeads + MSFZ_Crystal_Obsidian + MSFZ_RuneStone_Tigr
@@ -198,7 +201,7 @@ OOTS_ART_BloodStone_New:
 OOTS_ART_CrustalThorn + OOTS_ART_JellyFish + BRDK_Rubin + MSFZ_RuneStone_Wolf
 
 OOTS_ART_ShineOfTheForest:
-OOTS_ART_snejinka + OOTS_ART_NightStar + BRDK_Nephrite_Sand + MSFZ_Crystal_Stone + MSFZ_RuneStone_Bereza
+OOTS_ART_snejinka + OOTS_ART_NightStar + BRDK_Nephrite_Sand + MSFZ_Crystal_Stone + MSFZ_Ent_head_medium + MSFZ_RuneStone_Bereza
 
 OOTS_ART_CrustalThorn:
 OOTS_ART_Crustal2 + OOTS_ART_Thorn + BRDK_Iron + MSFZ_Crystal_Stone + MSFZ_RuneStone_Kaban
@@ -217,16 +220,16 @@ OOTS_ART_Compas:
 OOTS_ART_Glaz3 + OOTS_ART_Plamya3 + OOTS_ART_kameniy_cvetok3 + OOTS_ART_Braen + MSFZ_Crystal_Mithril + BRDK_Iron + MSFZ_RuneStone_Puti
 
 OOTS_ART_DevelHert:
-OOTS_ART_Crustal3 + OOTS_ART_Drop3 + OOTS_ART_Battery3 + MSFZ_Crystal_Obsidian + BRDK_Rubin + MSFZ_RuneStone_Medved
+OOTS_ART_Crustal3 + OOTS_ART_Drop3 + OOTS_ART_Battery3 + MSFZ_Crystal_Obsidian + BRDK_Rubin + SFP_Trupojor_Kogot + MSFZ_RuneStone_Medved
 
 OOTS_ART_DarkSoul:
-OOTS_ART_Soul + OOTS_ART_MoonLight + MSFZ_Crystal_Obsidian + BRDK_Coal + MSFZ_RuneStone_Chelovek
+OOTS_ART_Soul + OOTS_ART_MoonLight + MSFZ_Crystal_Obsidian + BRDK_Coal + SFP_MozgoTrasRed_ear + MSFZ_RuneStone_Chelovek
 
 OOTS_ART_shturval:
-OOTS_ART_kolobok + OOTS_ART_DemonEye + OOTS_ART_Sparkler + BRDK_Iron + BRDK_Titanium + MSFZ_RuneStone_Puti
+OOTS_ART_kolobok + OOTS_ART_DemonEye + OOTS_ART_Sparkler + BRDK_Iron + BRDK_Titanium + SFP_MozgoTras_ear + MSFZ_RuneStone_Puti
 
 OOTS_ART_NanoCell:
-OOTS_ART_Angel + OOTS_ART_Battery3 + OOTS_ART_krov_kamnya + OOTS_ART_Mikrob + MSFZ_Crystal_Mithril + BRDK_Titanium + MSFZ_RuneStone_KladesPamyati
+OOTS_ART_Angel + OOTS_ART_Battery3 + OOTS_ART_krov_kamnya + OOTS_ART_Mikrob + MSFZ_Crystal_Mithril + BRDK_Titanium + MSFZ_Troll_Hand + MSFZ_RuneStone_KladesPamyati
 
 OOTS_ART_Monolit:
 OOTS_ART_krov_kamnya + OOTS_ART_Crustal3 + OOTS_ART_Dummy + OOTS_ART_Braen + MSFZ_Crystal_Damascus + MSFZ_Crystal_Mithril + MSFZ_RuneStone_Nasledie
@@ -248,8 +251,9 @@ OOTS_ART_snejinka + OOTS_ART_ShineOfTheForest + OOTS_ART_vivert + BRDK_Iron + BR
 - Малая версия руны (*Small) — только в T1. T2 и выше — большие руны.
 - Ключевой артефакт: Glaz3 (нужен для DemonEye, Soul, Compas, shturval и
   дважды для DarkSoul). Сознательно «горячий» узел геймплея — фича, не баг.
-- Постоянные плейсхолдеры [X]: [Биоматерия], [Клейкая масса], [Наполнитель],
-  [Питательный бульон], [Бактериальная культура].
+- Трофеи мутантов по смыслу: глаза (Zanoza/tenevnik) — ветка Глаз,
+  головы Энтов (Ent_head) — Каменный цветок/Лес, когти (Wolf/Bear/Trupojor)
+  — хищники и мощь, стейки — мясо/культуры, остальное — по веткам.
 - Ветки собираются в 4 билда T4:
     Танк/выживание: Oasis, Monolit, NanoCell
     Вампир/кровь:   Compas, DevelHert, DarkSoul
