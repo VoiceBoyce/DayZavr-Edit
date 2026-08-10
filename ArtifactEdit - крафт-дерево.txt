@@ -8,8 +8,7 @@
 
 Названия — только из картотеки (OOTS_ART_*).
 T1 — линейная лестница: каждый следующий = предыдущий артефакт + материал.
-T2/T3/T4 — из артефактов + редкие материалы (не указаны).
-Материалы в T1 — плейсхолдеры, позже заменишь на свои.
+T2/T3/T4 — из артефактов + материалы (названия — плейсхолдеры, заменишь на свои).
 
 
 ====================================================
@@ -62,153 +61,153 @@ OOTS_ART_Dummy + Заряженная ячейка
 T2 — СРЕДНИЕ
 ====================================================
 OOTS_ART_Plamya2:
-OOTS_ART_Plamya + OOTS_ART_Braen
+OOTS_ART_Plamya + OOTS_ART_Braen + Огненная зола + Горючая эссенция
 
 OOTS_ART_Glaz2:
-OOTS_ART_Glaz + OOTS_ART_myaso
+OOTS_ART_Glaz + OOTS_ART_myaso + Хрустальная линза
 
 OOTS_ART_Crustal2:
-OOTS_ART_Crustal + OOTS_ART_Angel
+OOTS_ART_Crustal + OOTS_ART_Angel + Кристаллическая крошка + Соляной раствор
 
 OOTS_ART_Drop2:
-OOTS_ART_Drop + OOTS_ART_svet
+OOTS_ART_Drop + OOTS_ART_svet + Чистая вода + Конденсат
 
 OOTS_ART_kameniy_cvetok2:
-OOTS_ART_kameniy_cvetok + OOTS_ART_SeaUrchin
+OOTS_ART_kameniy_cvetok + OOTS_ART_SeaUrchin + Минеральная пыль
 
 OOTS_ART_Battery3:
-OOTS_ART_Battery + OOTS_ART_Mohovik
+OOTS_ART_Battery + OOTS_ART_Mohovik + Электролит + Медная пластина
 
 OOTS_ART_Light:
-OOTS_ART_myaso + OOTS_ART_JellyFish
+OOTS_ART_myaso + OOTS_ART_JellyFish + Светящийся гриб
 
 OOTS_ART_Klyaksa:
-OOTS_ART_Drop2 + OOTS_ART_Braen
+OOTS_ART_Drop2 + OOTS_ART_Braen + Тёмная слизь
 
 OOTS_ART_Mohovik:
-OOTS_ART_Battery + OOTS_ART_kolobok
+OOTS_ART_Battery + OOTS_ART_kolobok + Шестерёнка
 
 OOTS_ART_Angel:
-OOTS_ART_svet + OOTS_ART_myaso + OOTS_ART_Braen
+OOTS_ART_svet + OOTS_ART_myaso + OOTS_ART_Braen + Перо + Святая вода
 
 OOTS_ART_AngelFool:
-OOTS_ART_Angel + OOTS_ART_svet
+OOTS_ART_Angel + OOTS_ART_svet + Перо + Пепел
 
 OOTS_ART_vspishka:
-OOTS_ART_Plamya + OOTS_ART_svet
+OOTS_ART_Plamya + OOTS_ART_svet + Порох
 
 OOTS_ART_Plasma:
-OOTS_ART_Crustal + OOTS_ART_svet
+OOTS_ART_Crustal + OOTS_ART_svet + Плазменный концентрат
 
 OOTS_ART_Sparkler:
-OOTS_ART_Plamya + OOTS_ART_Battery
+OOTS_ART_Plamya + OOTS_ART_Battery + Магний
 
 OOTS_ART_snejinka:
-OOTS_ART_Battery3 + OOTS_ART_Braen
+OOTS_ART_Battery3 + OOTS_ART_Braen + Лёд + Иней
 
 OOTS_ART_Gravi:
-OOTS_ART_Crustal + OOTS_ART_JellyFish
+OOTS_ART_Crustal + OOTS_ART_JellyFish + Гравитационная крошка
 
 OOTS_ART_vivert:
-OOTS_ART_Crustal2 + OOTS_ART_Gravi
+OOTS_ART_Crustal2 + OOTS_ART_Gravi + Вихревая пыль
 
 OOTS_ART_NightStar:
-OOTS_ART_Glaz + OOTS_ART_Dummy
+OOTS_ART_Glaz + OOTS_ART_Dummy + Звёздная пыль
 
 OOTS_ART_Thorn:
-OOTS_ART_Crustal + OOTS_ART_MomisBeads
+OOTS_ART_Crustal + OOTS_ART_MomisBeads + Шип
 
 OOTS_ART_Mikrob:
-OOTS_ART_Glaz2 + OOTS_ART_Dummy
+OOTS_ART_Glaz2 + OOTS_ART_Dummy + Питательный бульон + Бактериальная культура
 
 
 ====================================================
 T3 — ДОРОГИЕ
 ====================================================
 OOTS_ART_Plamya3:
-OOTS_ART_Plamya2 + OOTS_ART_vspishka
+OOTS_ART_Plamya2 + OOTS_ART_vspishka + Огненный камень + Горючая эссенция
 
 OOTS_ART_Glaz3:
-OOTS_ART_Glaz2 + OOTS_ART_MomisBeads
+OOTS_ART_Glaz2 + OOTS_ART_MomisBeads + Демонический зрачок
 
 OOTS_ART_Crustal3:
-OOTS_ART_Crustal2 + OOTS_ART_Plasma + OOTS_ART_Sparkler
+OOTS_ART_Crustal2 + OOTS_ART_Plasma + OOTS_ART_Sparkler + Кристаллическая крошка + Соляной раствор
 
 OOTS_ART_Drop3:
-OOTS_ART_Drop2 + OOTS_ART_Plamya2
+OOTS_ART_Drop2 + OOTS_ART_Plamya2 + Живая вода
 
 OOTS_ART_kameniy_cvetok3:
-OOTS_ART_kameniy_cvetok2 + OOTS_ART_izolator
+OOTS_ART_kameniy_cvetok2 + OOTS_ART_izolator + Редкая каменная почка
 
 OOTS_ART_Flower:
-OOTS_ART_Drop3 + OOTS_ART_Braen
+OOTS_ART_Drop3 + OOTS_ART_Braen + Цветочная пыльца
 
 OOTS_ART_busy2:
-OOTS_ART_Crustal3 + OOTS_ART_Thorn + OOTS_ART_Mikrob
+OOTS_ART_Crustal3 + OOTS_ART_Thorn + OOTS_ART_Mikrob + Биотопливо
 
 OOTS_ART_krov_kamnya:
-OOTS_ART_Crustal3 + OOTS_ART_JellyFish
+OOTS_ART_Crustal3 + OOTS_ART_JellyFish + Кровавый камень + Железная руда
 
 OOTS_ART_FireBall:
-OOTS_ART_Plamya3 + OOTS_ART_Light
+OOTS_ART_Plamya3 + OOTS_ART_Light + Пирокластический пепел
 
 OOTS_ART_Burn:
-OOTS_ART_Plamya2 + OOTS_ART_Light
+OOTS_ART_Plamya2 + OOTS_ART_Light + Огарки
 
 OOTS_ART_izolator:
-OOTS_ART_AngelFool + OOTS_ART_Thorn
+OOTS_ART_AngelFool + OOTS_ART_Thorn + Резина + Керамика
 
 OOTS_ART_DemonEye:
-OOTS_ART_Glaz3 + OOTS_ART_MomisBeads
+OOTS_ART_Glaz3 + OOTS_ART_MomisBeads + Демонический зрачок
 
 OOTS_ART_Soul:
-OOTS_ART_kameniy_cvetok3 + OOTS_ART_Glaz3
+OOTS_ART_kameniy_cvetok3 + OOTS_ART_Glaz3 + Прах душ + Тёмная эссенция
 
 OOTS_ART_puzir:
-OOTS_ART_Drop3 + OOTS_ART_Klyaksa
+OOTS_ART_Drop3 + OOTS_ART_Klyaksa + Мыльный раствор + Пузырьковая камера
 
 OOTS_ART_BloodStone_New:
-OOTS_ART_CrustalThorn + OOTS_ART_JellyFish
+OOTS_ART_CrustalThorn + OOTS_ART_JellyFish + Кровавый камень
 
 OOTS_ART_ShineOfTheForest:
-OOTS_ART_snejinka + OOTS_ART_NightStar
+OOTS_ART_snejinka + OOTS_ART_NightStar + Лесная роса
 
 OOTS_ART_CrustalThorn:
-OOTS_ART_Crustal2 + OOTS_ART_Thorn
+OOTS_ART_Crustal2 + OOTS_ART_Thorn + Шип + Кристаллическая крошка
 
 OOTS_ART_ribka:
-OOTS_ART_JellyFish + OOTS_ART_Light
+OOTS_ART_JellyFish + OOTS_ART_Light + Чешуя
 
 OOTS_ART_MoonLight:
-OOTS_ART_DemonEye + OOTS_ART_Plasma
+OOTS_ART_DemonEye + OOTS_ART_Plasma + Лунный концентрат + Серебро
 
 
 ====================================================
 T4 — ЭНДГЕЙМ
 ====================================================
 OOTS_ART_Compas:
-OOTS_ART_Glaz3 + OOTS_ART_Plamya3 + OOTS_ART_kameniy_cvetok3 + OOTS_ART_Braen
+OOTS_ART_Glaz3 + OOTS_ART_Plamya3 + OOTS_ART_kameniy_cvetok3 + OOTS_ART_Braen + Странный металл + Магнитная игла
 
 OOTS_ART_DevelHert:
-OOTS_ART_Crustal3 + OOTS_ART_Drop3 + OOTS_ART_Battery3
+OOTS_ART_Crustal3 + OOTS_ART_Drop3 + OOTS_ART_Battery3 + Дьявольское сердце + Демоническая кровь
 
 OOTS_ART_DarkSoul:
-OOTS_ART_Soul + OOTS_ART_MoonLight
+OOTS_ART_Soul + OOTS_ART_MoonLight + Чёрная эссенция + Проклятый прах
 
 OOTS_ART_shturval:
-OOTS_ART_kolobok + OOTS_ART_DemonEye + OOTS_ART_Sparkler
+OOTS_ART_kolobok + OOTS_ART_DemonEye + OOTS_ART_Sparkler + Прокалённая сталь
 
 OOTS_ART_NanoCell:
-OOTS_ART_Angel + OOTS_ART_Battery3 + OOTS_ART_krov_kamnya + OOTS_ART_Mikrob
+OOTS_ART_Angel + OOTS_ART_Battery3 + OOTS_ART_krov_kamnya + OOTS_ART_Mikrob + Нано-контур + Редкий металл
 
 OOTS_ART_Monolit:
-OOTS_ART_krov_kamnya + OOTS_ART_Crustal3 + OOTS_ART_Dummy + OOTS_ART_Braen
+OOTS_ART_krov_kamnya + OOTS_ART_Crustal3 + OOTS_ART_Dummy + OOTS_ART_Braen + Камень силы
 
 OOTS_ART_Oasis:
-OOTS_ART_puzir + OOTS_ART_ShineOfTheForest + OOTS_ART_Drop3
+OOTS_ART_puzir + OOTS_ART_ShineOfTheForest + OOTS_ART_Drop3 + Живая вода + Плодородная почва
 
 OOTS_ART_Spring:
-OOTS_ART_snejinka + OOTS_ART_Gravi + OOTS_ART_vivert
+OOTS_ART_snejinka + OOTS_ART_Gravi + OOTS_ART_vivert + Пружина + Смазка
 
 
 ====================================================
