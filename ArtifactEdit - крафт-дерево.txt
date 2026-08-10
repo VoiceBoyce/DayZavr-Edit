@@ -7,27 +7,55 @@
 Компонент + Компонент + Компонент
 
 Названия — только из картотеки (OOTS_ART_*).
-T1 (базовые) крафтятся из ресурсов, без других артефактов.
+T1 — линейная лестница: каждый следующий = предыдущий артефакт + материал.
 T2/T3/T4 — из артефактов + редкие материалы (не указаны).
+Материалы в T1 — плейсхолдеры, позже заменишь на свои.
 
 
 ====================================================
-T1 — БАЗОВЫЕ (из ресурсов, без артефактов)
+T1 — БАЗОВАЯ ЛЕСТНИЦА (путь от Braen)
 ====================================================
-OOTS_ART_Braen
-OOTS_ART_JellyFish
-OOTS_ART_Dummy
-OOTS_ART_MomisBeads
-OOTS_ART_myaso
-OOTS_ART_kolobok
-OOTS_ART_svet
-OOTS_ART_Crustal
-OOTS_ART_Drop
-OOTS_ART_Plamya
-OOTS_ART_Glaz
-OOTS_ART_kameniy_cvetok
-OOTS_ART_Battery
-OOTS_ART_SeaUrchin
+OOTS_ART_Braen:
+[базовые ресурсы]
+
+OOTS_ART_svet:
+OOTS_ART_Braen + Люминофор
+
+OOTS_ART_Crustal:
+OOTS_ART_svet + Кристаллический наполнитель
+
+OOTS_ART_Drop:
+OOTS_ART_Crustal + Дистиллят
+
+OOTS_ART_Plamya:
+OOTS_ART_Drop + Воспламенитель
+
+OOTS_ART_Glaz:
+OOTS_ART_Plamya + Фокусирующая линза
+
+OOTS_ART_kameniy_cvetok:
+OOTS_ART_Glaz + Каменная почка
+
+OOTS_ART_JellyFish:
+OOTS_ART_kameniy_cvetok + Морская колония
+
+OOTS_ART_SeaUrchin:
+OOTS_ART_JellyFish + Игольчатый фрагмент
+
+OOTS_ART_myaso:
+OOTS_ART_SeaUrchin + Биоматерия
+
+OOTS_ART_kolobok:
+OOTS_ART_myaso + Клейкая масса
+
+OOTS_ART_MomisBeads:
+OOTS_ART_kolobok + Нанизанные бусины
+
+OOTS_ART_Dummy:
+OOTS_ART_MomisBeads + Наполнитель
+
+OOTS_ART_Battery:
+OOTS_ART_Dummy + Заряженная ячейка
 
 
 ====================================================
