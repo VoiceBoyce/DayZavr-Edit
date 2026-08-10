@@ -250,34 +250,6 @@ modded class DD_Artifact_DemonEye
 		m_Absolutes.Set("Radiation", 3);
 	}
 }
-modded class DD_Artifact_CrustalThorn
-{
-	override void Init()
-	{
-		super.Init();
-		
-		m_Absolutes.Set("Health", -1);
-		//m_Relatives.Set("Health", 0.25);
-		
-		//m_Absolutes.Set("Water", -15);
-		//m_Relatives.Set("Water", 5);
-		
-		//m_Absolutes.Set("Energy", -15);
-		//m_Relatives.Set("Energy", 5);
-		
-		//m_Absolutes.Set("Shock", -25);
-		
-		m_Absolutes.Set("Blood", -1);
-		//m_Relatives.Set("Blood", -2);
-		
-		m_Absolutes.Set("Bleeds", 0.15); // шанс добавить кровотечение
-		
-		
-		//m_Absolutes.Set("Stamina", -0.2); //this is stamina percent coef, e.g. -50% per tick
-		
-		m_Absolutes.Set("Radiation", -10);
-	}
-}
 modded class DD_Artifact_DarkSoul
 {
 	override void Init()
