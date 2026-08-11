@@ -205,8 +205,8 @@ OOTS_ART_vivert:
 OOTS_ART_NightStar:
 +0.5% воды, +2.5% энергии
 
-OOTS_ART_JellyFish:
-+0.1% воды, +0.1% энергии, +0.1% крови
+OOTS_ART_Medusa:
+-0.15% здоровья, -0.05% энергии
 
 OOTS_ART_Dummy:
 +2% крови
