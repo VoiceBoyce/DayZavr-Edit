@@ -14,7 +14,22 @@ class ActionOpenDRLWorkbench : ActionInteractBase
         Object obj = target.GetObject();
         if (!obj) return false;
 		
-        return obj.IsKindOf("DRL_Craft_WB");
+        if (obj.IsKindOf("DRL_Craft_WB"))
+            return true;
+		
+        if (obj.IsKindOf("OH_workbench"))
+            return true;
+		
+        if (obj.IsKindOf("SRS_Toolsbench"))
+            return true;
+		
+        if (obj.IsKindOf("SRS_Toolsbench_Red"))
+            return true;
+		
+        if (obj.IsKindOf("SRS_Toolsbench_Blue"))
+            return true;
+		
+        return false;
     }
 
     override void OnStartClient(ActionData action_data)

@@ -14,7 +14,7 @@ class CfgPatches
 		units[] = {"DRL_Craft_Sewing_scissors","DRL_Craft_Metalic_thimble","DRL_Craft_ScrewDriver","DRL_Craft_Lamp","DRL_Craft_Table","DRL_Craft_Sewing_Table","DRL_Craft_Tools","DRL_Craft_DrillSmal","DRL_Craft_Paints","DRL_Craft_Anvil","DRL_Craft_Box","DRL_Craft_Grinder","DRL_Craft_Vise","DRL_Craft_Anvil2","DRL_Craft_Drill2","DRL_Craft_Micro","DRL_Craft_lab_bunsen","DRL_Craft_Kit","DRL_Craft_Kit1","DRL_Craft_Kit2","DRL_Craft_Kit3","DRL_Craft_Kit4","DRL_Craft_Kit5","DRL_Craft_Kit6","DRL_Craft_Kit7","DRL_Craft_Kit8","DRL_Craft_Kit9","DRL_Craft_Garden_Kit","DRL_Craft_Cook_Kit","DRL_Craft_Build_Kit","DRL_Craft_Workbench_Kit","DRL_Craft_WB","DRL_Craft_WB1","DRL_Craft_WB2","DRL_Craft_WB3","DRL_Craft_WB4","DRL_Craft_WB5","DRL_Craft_WB6","DRL_Craft_WB7","DRL_Craft_WB8","DRL_Craft_WB9","DRL_Craft_Garden","DRL_Craft_Cook","DRL_Craft_Build","DRL_Craft_Workbench","DRL_Craft_Welding_Machine","DRL_Craft_Sewing","DRL_Craft_Microwave","DRL_Craft_NoteBook","DRL_Craft_Microscope","DRL_Craft_Circular"};
 		weapons[] = {};
 		requiredVersion = 0.1;
-		requiredAddons[] = {"DZ_Data","DZ_Gear_Tools","DZ_Gear_Camping"};
+		requiredAddons[] = {"DZ_Data","DZ_Gear_Tools","DZ_Gear_Camping", "OH_Furniture_CUSTOM", "SRS_Furniture"};
 	};
 };
 class CfgMods

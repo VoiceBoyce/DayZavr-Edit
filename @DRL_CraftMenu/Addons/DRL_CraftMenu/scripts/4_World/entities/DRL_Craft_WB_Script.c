@@ -113,3 +113,44 @@ class DRL_Craft_WB6: DRL_Craft_WB{};
 class DRL_Craft_WB7: DRL_Craft_WB{};
 class DRL_Craft_WB8: DRL_Craft_WB{};
 class DRL_Craft_WB9: DRL_Craft_WB{};
+
+
+modded class OH_workbench
+{
+    override void SetActions()
+    {
+        super.SetActions();
+		
+        AddAction(ActionOpenDRLWorkbench);
+    }
+};
+
+modded class SRS_Toolsbench
+{
+    override void SetActions()
+    {
+        super.SetActions();
+		
+        AddAction(ActionOpenDRLWorkbench);
+    }
+};
+
+modded class SRS_Toolsbench_Red
+{
+    override void SetActions()
+    {
+        super.SetActions();
+		
+        AddAction(ActionOpenDRLWorkbench);
+    }
+};
+
+modded class SRS_Toolsbench_Blue
+{
+    override void SetActions()
+    {
+        super.SetActions();
+		
+        AddAction(ActionOpenDRLWorkbench);
+    }
+};
