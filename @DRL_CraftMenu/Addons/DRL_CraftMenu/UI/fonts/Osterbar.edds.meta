@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{BB43E7571CB19153}DRL_CraftMenu/UI/fonts/Osterbar.edds"
+ Author "win-hv5vr6npefg"
+ ChangeDate 311112472
+ Configurations {
+  TGAResourceClass PC {
+   SourceFile "Osterbar.tga"
+  }
+  TGAResourceClass XBOX_ONE : PC {
+  }
+  TGAResourceClass PS4 : PC {
+  }
+  TGAResourceClass LINUX : PC {
+  }
+ }
+}
