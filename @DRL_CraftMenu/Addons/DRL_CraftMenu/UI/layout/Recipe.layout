@@ -1,7 +1,7 @@
 ButtonWidgetClass RecipesSelectionButtonWidget {
  visible 1
  clipchildren 0
- color 0.5373 0.3569 0.1412 1
+ color 0.157 0.624 0.624 1
  size 1 56
  hexactpos 1
  vexactpos 1
@@ -12,7 +12,7 @@ ButtonWidgetClass RecipesSelectionButtonWidget {
   PanelWidgetClass FonButtonPanelWidget {
    clipchildren 1
    ignorepointer 1
-   color 0.1137 0.0745 0.0471 0.1961
+   color 0.12 0.12 0.12 0.1961
    size 1 1
    halign center_ref
    valign center_ref
@@ -25,7 +25,7 @@ ButtonWidgetClass RecipesSelectionButtonWidget {
   PanelWidgetClass BoardSelectionButtonWidget {
    visible 1
    ignorepointer 1
-   color 0.0863 0.0902 0.0745 1
+   color 0.086 0.086 0.086 1
    size 1 1
    halign center_ref
    valign center_ref

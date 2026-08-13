@@ -1,7 +1,7 @@
 ButtonWidgetClass CategorySelectionButtonWidget {
  visible 1
  clipchildren 0
- color 0.5373 0.3569 0.1412 1
+ color 0.157 0.624 0.624 1
  position 0.232 0
  size 45 45
  hexactpos 1
@@ -13,7 +13,7 @@ ButtonWidgetClass CategorySelectionButtonWidget {
   PanelWidgetClass CategoryFonPanelWidget {
    clipchildren 1
    ignorepointer 1
-   color 0.1137 0.0745 0.0471 0.1961
+   color 0.12 0.12 0.12 0.1961
    position 0 0
    size 1 1
    halign center_ref
@@ -27,7 +27,7 @@ ButtonWidgetClass CategorySelectionButtonWidget {
   PanelWidgetClass CategoryBoardSelectionButtonWidget {
    visible 1
    ignorepointer 1
-   color 0.0863 0.0902 0.0745 1
+   color 0.086 0.086 0.086 1
    position 0 0
    size 40 40
    halign center_ref

@@ -20,7 +20,7 @@ ButtonWidgetClass AtachIngridientButton {
    {
     PanelWidgetClass AtachIngridientItemPanelW {
      ignorepointer 1
-     color 0.3373 0.302 0.2824 1
+     color 0.337 0.337 0.337 1
      position 0 0
      size 1 1
      halign center_ref
