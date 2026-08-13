@@ -1,0 +1,7 @@
+Particle {
+ AlbedoMap "{8CBF766B519E64E2}MSFZ_Mifical_Pack/Particles/edds/MSFZ_Japan_light.edds" 
+ Emissive 1 1 1 0
+ BlendMode Additive_AlphaModulate
+ TileU 4
+ TileV 4
+}
