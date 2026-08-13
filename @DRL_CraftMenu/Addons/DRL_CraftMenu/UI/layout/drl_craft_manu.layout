@@ -19,7 +19,7 @@ FrameWidgetClass rootFrame {
    vexactpos 0
    hexactsize 0
    vexactsize 0
-   imageTexture "{29EC099D3D3418CB}DRL_CraftMenu/UI/data/work5.edds"
+   imageTexture "{A31FE069AA9CACEB}DRL_CraftMenu/UI/data/fon1.edds"
    mode opaque
    "src alpha" 0
    "clamp mode" wrap
@@ -44,8 +44,8 @@ FrameWidgetClass rootFrame {
     }
     TextWidgetClass PlayerName {
      ignorepointer 1
-     color 0.5373 0.3569 0.1412 1
-     position 1210.81006 22.072
+     color 0.157 0.624 0.624 1
+     position 1210.81 22.072
      size 244.504 37.264
      hexactpos 1
      vexactpos 1
@@ -80,8 +80,8 @@ FrameWidgetClass rootFrame {
    vexactsize 1
    {
     EditBoxWidgetClass SearchEditBox {
-     color 0.1373 0.0706 0.0157 1
-     position 0.88001 0
+     color 0.337 0.337 0.337 1
+     position 0.88 0
      size 1 1
      hexactpos 1
      vexactpos 1
@@ -95,7 +95,7 @@ FrameWidgetClass rootFrame {
      "Use default text" 0
      "exact text" 1
      font "gui/fonts/metron-bold22"
-     "text color" 0.3882 0.2941 0.1412 1
+     "text color" 0.467 0.467 0.467 1
      "text halign" center
      "text valign" center
     }
@@ -103,7 +103,7 @@ FrameWidgetClass rootFrame {
   }
   PanelWidgetClass ButtonOutWidget {
    ignorepointer 1
-   color 0.3647 0.3098 0.2235 1
+   color 0.365 0.31 0.223 1
    position 734 -391
    size 38 38
    halign center_ref
@@ -127,7 +127,7 @@ FrameWidgetClass rootFrame {
       PanelWidgetClass OutButtonPanelWidget {
        visible 1
        ignorepointer 1
-       color 0 0 0 0.2353
+       color 0 0 0 0.235
        position 0 0
        size 1 1
        halign center_ref
@@ -140,7 +140,7 @@ FrameWidgetClass rootFrame {
        {
         ImageWidgetClass OutButtonImageWidget {
          ignorepointer 1
-         color 0.5373 0.3569 0.1412 1
+         color 0.345 0.345 0.345 1
          size 22 22
          halign center_ref
          valign center_ref
@@ -184,8 +184,8 @@ FrameWidgetClass rootFrame {
       PanelWidgetClass AllCategoryColorWidget {
        visible 1
        ignorepointer 1
-       color 0.5373 0.3569 0.1412 1
-       position 10 10
+       color 0.157 0.624 0.624 1
+       position 6.808 7.872
        size 8 25
        hexactpos 1
        vexactpos 1
@@ -218,7 +218,7 @@ FrameWidgetClass rootFrame {
      ignorepointer 1
      ignoregloballv 0
      keepsafezone 0
-     color 0.1569 0.1569 0.1569 0.5098
+     color 0.157 0.157 0.157 0.51
      position 3.28 72.36
      size 43 711
      hexactpos 1
@@ -232,7 +232,7 @@ FrameWidgetClass rootFrame {
      {
       WrapSpacerWidgetClass CategoryWrapSpacerWidget {
        ignorepointer 1
-       position -2.38401 0
+       position -2.384 0
        size 51.384 690
        hexactpos 1
        vexactpos 1
@@ -261,7 +261,7 @@ FrameWidgetClass rootFrame {
           ScrollWidgetClass ScrollCategoryListWidget {
            visible 1
            ignorepointer 0
-           color 0.3647 0.3098 0.2235 1
+           color 0.157 0.624 0.624 1
            position 0 0
            size 1 1
            hexactpos 1
@@ -288,7 +288,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass CategorySelectionButtonWidget {
                visible 1
                clipchildren 0
-               color 0.5373 0.3569 0.1412 1
+               color 0.424 0.424 0.424 1
                size 45 45
                halign center_ref
                valign center_ref
@@ -301,7 +301,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryFonPanelWidget {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.286 0.286 0.286 1
                  position 0 0
                  size 1 1
                  halign center_ref
@@ -315,7 +315,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryBoardSelectionButtonWidget {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  position 0 0
                  size 40 40
                  halign center_ref
@@ -350,7 +350,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass CategorySelectionButtonWidget0 {
                visible 1
                clipchildren 0
-               color 0.5373 0.3569 0.1412 1
+               color 0.537 0.357 0.141 1
                size 45 45
                halign center_ref
                valign center_ref
@@ -363,7 +363,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryFonPanelWidget0 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  position 0 0
                  size 1 1
                  halign center_ref
@@ -377,7 +377,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryBoardSelectionButtonWidget0 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  position 0 0
                  size 40 40
                  halign center_ref
@@ -412,7 +412,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass CategorySelectionButtonWidget1 {
                visible 1
                clipchildren 0
-               color 0.5373 0.3569 0.1412 1
+               color 0.537 0.357 0.141 1
                size 45 45
                halign center_ref
                valign center_ref
@@ -425,7 +425,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryFonPanelWidget1 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  position 0 0
                  size 1 1
                  halign center_ref
@@ -439,7 +439,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryBoardSelectionButtonWidget1 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  position 0 0
                  size 40 40
                  halign center_ref
@@ -474,7 +474,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass CategorySelectionButtonWidget2 {
                visible 1
                clipchildren 0
-               color 0.5373 0.3569 0.1412 1
+               color 0.537 0.357 0.141 1
                size 45 45
                halign center_ref
                valign center_ref
@@ -487,7 +487,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryFonPanelWidget2 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  position 0 0
                  size 1 1
                  halign center_ref
@@ -501,7 +501,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryBoardSelectionButtonWidget2 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  position 0 0
                  size 40 40
                  halign center_ref
@@ -536,7 +536,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass CategorySelectionButtonWidget3 {
                visible 1
                clipchildren 0
-               color 0.5373 0.3569 0.1412 1
+               color 0.537 0.357 0.141 1
                size 45 45
                halign center_ref
                valign center_ref
@@ -549,7 +549,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryFonPanelWidget3 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  position 0 0
                  size 1 1
                  halign center_ref
@@ -563,7 +563,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryBoardSelectionButtonWidget3 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  position 0 0
                  size 40 40
                  halign center_ref
@@ -598,7 +598,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass CategorySelectionButtonWidget4 {
                visible 1
                clipchildren 0
-               color 0.5373 0.3569 0.1412 1
+               color 0.537 0.357 0.141 1
                size 45 45
                halign center_ref
                valign center_ref
@@ -611,7 +611,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryFonPanelWidget4 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  position 0 0
                  size 1 1
                  halign center_ref
@@ -625,7 +625,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryBoardSelectionButtonWidget4 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  position 0 0
                  size 40 40
                  halign center_ref
@@ -660,7 +660,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass CategorySelectionButtonWidget5 {
                visible 1
                clipchildren 0
-               color 0.5373 0.3569 0.1412 1
+               color 0.537 0.357 0.141 1
                size 45 45
                halign center_ref
                valign center_ref
@@ -673,7 +673,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryFonPanelWidget5 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  position 0 0
                  size 1 1
                  halign center_ref
@@ -687,7 +687,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryBoardSelectionButtonWidget5 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  position 0 0
                  size 40 40
                  halign center_ref
@@ -722,7 +722,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass CategorySelectionButtonWidget6 {
                visible 1
                clipchildren 0
-               color 0.5373 0.3569 0.1412 1
+               color 0.537 0.357 0.141 1
                size 45 45
                halign center_ref
                valign center_ref
@@ -735,7 +735,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryFonPanelWidget6 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  position 0 0
                  size 1 1
                  halign center_ref
@@ -749,7 +749,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryBoardSelectionButtonWidget6 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  position 0 0
                  size 40 40
                  halign center_ref
@@ -784,7 +784,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass CategorySelectionButtonWidget7 {
                visible 1
                clipchildren 0
-               color 0.5373 0.3569 0.1412 1
+               color 0.537 0.357 0.141 1
                size 45 45
                halign center_ref
                valign center_ref
@@ -797,7 +797,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryFonPanelWidget7 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  position 0 0
                  size 1 1
                  halign center_ref
@@ -811,7 +811,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryBoardSelectionButtonWidget7 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  position 0 0
                  size 40 40
                  halign center_ref
@@ -846,7 +846,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass CategorySelectionButtonWidget8 {
                visible 1
                clipchildren 0
-               color 0.5373 0.3569 0.1412 1
+               color 0.537 0.357 0.141 1
                size 45 45
                halign center_ref
                valign center_ref
@@ -859,7 +859,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryFonPanelWidget8 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  position 0 0
                  size 1 1
                  halign center_ref
@@ -873,7 +873,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryBoardSelectionButtonWidget8 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  position 0 0
                  size 40 40
                  halign center_ref
@@ -908,7 +908,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass CategorySelectionButtonWidget9 {
                visible 1
                clipchildren 0
-               color 0.5373 0.3569 0.1412 1
+               color 0.537 0.357 0.141 1
                size 45 45
                halign center_ref
                valign center_ref
@@ -921,7 +921,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryFonPanelWidget9 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  position 0 0
                  size 1 1
                  halign center_ref
@@ -935,7 +935,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryBoardSelectionButtonWidget9 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  position 0 0
                  size 40 40
                  halign center_ref
@@ -970,7 +970,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass CategorySelectionButtonWidget10 {
                visible 1
                clipchildren 0
-               color 0.5373 0.3569 0.1412 1
+               color 0.537 0.357 0.141 1
                size 45 45
                halign center_ref
                valign center_ref
@@ -983,7 +983,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryFonPanelWidget10 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  position 0 0
                  size 1 1
                  halign center_ref
@@ -997,7 +997,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryBoardSelectionButtonWidget10 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  position 0 0
                  size 40 40
                  halign center_ref
@@ -1032,7 +1032,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass CategorySelectionButtonWidget11 {
                visible 1
                clipchildren 0
-               color 0.5373 0.3569 0.1412 1
+               color 0.537 0.357 0.141 1
                size 45 45
                halign center_ref
                valign center_ref
@@ -1045,7 +1045,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryFonPanelWidget11 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  position 0 0
                  size 1 1
                  halign center_ref
@@ -1059,7 +1059,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryBoardSelectionButtonWidget11 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  position 0 0
                  size 40 40
                  halign center_ref
@@ -1094,7 +1094,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass CategorySelectionButtonWidget12 {
                visible 1
                clipchildren 0
-               color 0.5373 0.3569 0.1412 1
+               color 0.537 0.357 0.141 1
                size 45 45
                halign center_ref
                valign center_ref
@@ -1107,7 +1107,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryFonPanelWidget12 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  position 0 0
                  size 1 1
                  halign center_ref
@@ -1121,7 +1121,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryBoardSelectionButtonWidget12 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  position 0 0
                  size 40 40
                  halign center_ref
@@ -1156,7 +1156,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass CategorySelectionButtonWidget13 {
                visible 1
                clipchildren 0
-               color 0.5373 0.3569 0.1412 1
+               color 0.537 0.357 0.141 1
                size 45 45
                halign center_ref
                valign center_ref
@@ -1169,7 +1169,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryFonPanelWidget13 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  position 0 0
                  size 1 1
                  halign center_ref
@@ -1183,7 +1183,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryBoardSelectionButtonWidget13 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  position 0 0
                  size 40 40
                  halign center_ref
@@ -1218,7 +1218,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass CategorySelectionButtonWidget14 {
                visible 1
                clipchildren 0
-               color 0.5373 0.3569 0.1412 1
+               color 0.537 0.357 0.141 1
                size 45 45
                halign center_ref
                valign center_ref
@@ -1231,7 +1231,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryFonPanelWidget14 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  position 0 0
                  size 1 1
                  halign center_ref
@@ -1245,7 +1245,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryBoardSelectionButtonWidget14 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  position 0 0
                  size 40 40
                  halign center_ref
@@ -1280,7 +1280,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass CategorySelectionButtonWidget15 {
                visible 1
                clipchildren 0
-               color 0.5373 0.3569 0.1412 1
+               color 0.537 0.357 0.141 1
                size 45 45
                halign center_ref
                valign center_ref
@@ -1293,7 +1293,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryFonPanelWidget15 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  position 0 0
                  size 1 1
                  halign center_ref
@@ -1307,7 +1307,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryBoardSelectionButtonWidget15 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  position 0 0
                  size 40 40
                  halign center_ref
@@ -1342,7 +1342,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass CategorySelectionButtonWidget16 {
                visible 1
                clipchildren 0
-               color 0.5373 0.3569 0.1412 1
+               color 0.537 0.357 0.141 1
                size 45 45
                halign center_ref
                valign center_ref
@@ -1355,7 +1355,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryFonPanelWidget16 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  position 0 0
                  size 1 1
                  halign center_ref
@@ -1369,7 +1369,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass CategoryBoardSelectionButtonWidget16 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  position 0 0
                  size 40 40
                  halign center_ref
@@ -1418,7 +1418,7 @@ FrameWidgetClass rootFrame {
      ignorepointer 1
      ignoregloballv 0
      keepsafezone 0
-     color 0.1569 0.1569 0.1569 0.5098
+     color 0.157 0.157 0.157 0.51
      position 50 70
      size 285 711
      hexactpos 1
@@ -1461,9 +1461,9 @@ FrameWidgetClass rootFrame {
           ScrollWidgetClass ScrollAllRecipesListWidget {
            visible 1
            ignorepointer 0
-           color 0.3647 0.3098 0.2235 1
+           color 0 0.502 0.502 1
            position 0 0
-           size 1 0.99985
+           size 1 1
            hexactpos 1
            vexactpos 1
            hexactsize 0
@@ -1487,7 +1487,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass RecipesSelectionButtonWidget {
                visible 1
                clipchildren 0
-               color 0.1922 0.0745 0.051 1
+               color 0.412 0.412 0.412 1
                size 1 55
                halign center_ref
                valign center_ref
@@ -1500,7 +1500,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass FonButtonPanelWidget {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.412 0.412 0.412 1
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -1513,7 +1513,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass BoardSelectionButtonWidget {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -1611,7 +1611,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass RecipesSelectionButtonWidget0 {
                visible 1
                clipchildren 0
-               color 0.1922 0.0745 0.051 1
+               color 0.192 0.075 0.051 1
                size 1 55
                halign center_ref
                valign center_ref
@@ -1624,7 +1624,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass FonButtonPanelWidget0 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -1637,7 +1637,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass BoardSelectionButtonWidget0 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -1735,7 +1735,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass RecipesSelectionButtonWidget1 {
                visible 1
                clipchildren 0
-               color 0.1922 0.0745 0.051 1
+               color 0.192 0.075 0.051 1
                size 1 55
                halign center_ref
                valign center_ref
@@ -1748,7 +1748,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass FonButtonPanelWidget1 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -1761,7 +1761,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass BoardSelectionButtonWidget1 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -1859,7 +1859,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass RecipesSelectionButtonWidget2 {
                visible 1
                clipchildren 0
-               color 0.1922 0.0745 0.051 1
+               color 0.192 0.075 0.051 1
                size 1 55
                halign center_ref
                valign center_ref
@@ -1872,7 +1872,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass FonButtonPanelWidget2 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -1885,7 +1885,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass BoardSelectionButtonWidget2 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -1983,7 +1983,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass RecipesSelectionButtonWidget3 {
                visible 1
                clipchildren 0
-               color 0.1922 0.0745 0.051 1
+               color 0.192 0.075 0.051 1
                size 1 55
                halign center_ref
                valign center_ref
@@ -1996,7 +1996,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass FonButtonPanelWidget3 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -2009,7 +2009,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass BoardSelectionButtonWidget3 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -2107,7 +2107,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass RecipesSelectionButtonWidget4 {
                visible 1
                clipchildren 0
-               color 0.1922 0.0745 0.051 1
+               color 0.192 0.075 0.051 1
                size 1 55
                halign center_ref
                valign center_ref
@@ -2120,7 +2120,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass FonButtonPanelWidget4 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -2133,7 +2133,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass BoardSelectionButtonWidget4 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -2231,7 +2231,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass RecipesSelectionButtonWidget5 {
                visible 1
                clipchildren 0
-               color 0.1922 0.0745 0.051 1
+               color 0.192 0.075 0.051 1
                size 1 55
                halign center_ref
                valign center_ref
@@ -2244,7 +2244,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass FonButtonPanelWidget5 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -2257,7 +2257,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass BoardSelectionButtonWidget5 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -2355,7 +2355,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass RecipesSelectionButtonWidget6 {
                visible 1
                clipchildren 0
-               color 0.1922 0.0745 0.051 1
+               color 0.192 0.075 0.051 1
                size 1 55
                halign center_ref
                valign center_ref
@@ -2368,7 +2368,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass FonButtonPanelWidget6 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -2381,7 +2381,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass BoardSelectionButtonWidget6 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -2479,7 +2479,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass RecipesSelectionButtonWidget7 {
                visible 1
                clipchildren 0
-               color 0.1922 0.0745 0.051 1
+               color 0.192 0.075 0.051 1
                size 1 55
                halign center_ref
                valign center_ref
@@ -2492,7 +2492,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass FonButtonPanelWidget7 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -2505,7 +2505,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass BoardSelectionButtonWidget7 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -2603,7 +2603,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass RecipesSelectionButtonWidget8 {
                visible 1
                clipchildren 0
-               color 0.1922 0.0745 0.051 1
+               color 0.192 0.075 0.051 1
                size 1 55
                halign center_ref
                valign center_ref
@@ -2616,7 +2616,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass FonButtonPanelWidget8 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -2629,7 +2629,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass BoardSelectionButtonWidget8 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -2727,7 +2727,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass RecipesSelectionButtonWidget9 {
                visible 1
                clipchildren 0
-               color 0.1922 0.0745 0.051 1
+               color 0.192 0.075 0.051 1
                size 1 55
                halign center_ref
                valign center_ref
@@ -2740,7 +2740,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass FonButtonPanelWidget9 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -2753,7 +2753,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass BoardSelectionButtonWidget9 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -2851,7 +2851,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass RecipesSelectionButtonWidget10 {
                visible 1
                clipchildren 0
-               color 0.1922 0.0745 0.051 1
+               color 0.192 0.075 0.051 1
                size 1 55
                halign center_ref
                valign center_ref
@@ -2864,7 +2864,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass FonButtonPanelWidget10 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -2877,7 +2877,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass BoardSelectionButtonWidget10 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -2975,7 +2975,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass RecipesSelectionButtonWidget11 {
                visible 1
                clipchildren 0
-               color 0.1922 0.0745 0.051 1
+               color 0.192 0.075 0.051 1
                size 1 55
                halign center_ref
                valign center_ref
@@ -2988,7 +2988,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass FonButtonPanelWidget11 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -3001,7 +3001,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass BoardSelectionButtonWidget11 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -3099,7 +3099,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass RecipesSelectionButtonWidget12 {
                visible 1
                clipchildren 0
-               color 0.1922 0.0745 0.051 1
+               color 0.192 0.075 0.051 1
                size 1 55
                halign center_ref
                valign center_ref
@@ -3112,7 +3112,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass FonButtonPanelWidget12 {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -3125,7 +3125,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass BoardSelectionButtonWidget12 {
                  visible 1
                  ignorepointer 1
-                 color 0.0863 0.0902 0.0745 1
+                 color 0.086 0.09 0.075 1
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -3251,8 +3251,8 @@ FrameWidgetClass rootFrame {
   PanelWidgetClass RigthPanelWidget {
    visible 1
    ignorepointer 1
-   position 0 0.04653
-   size 0.77877 0.89306
+   position 0 0.047
+   size 0.779 0.893
    halign right_ref
    valign center_ref
    hexactpos 0
@@ -3262,8 +3262,8 @@ FrameWidgetClass rootFrame {
    {
     PanelWidgetClass CraftRecipePanelWidget {
      ignorepointer 1
-     position -7.46001 8.57799
-     size 0.9893 0.9467
+     position -7.46 8.578
+     size 0.989 0.947
      halign center_ref
      valign center_ref
      hexactpos 1
@@ -3280,7 +3280,7 @@ FrameWidgetClass rootFrame {
        vexactpos 1
        hexactsize 0
        vexactsize 0
-       imageTexture "{6F887FB98B567CFA}DRL_CraftMenu/UI/data/recipemanust.edds"
+       imageTexture "{FDF7C92A151122E4}DRL_CraftMenu/UI/data/fon2.edds"
        mode blend
        "src alpha" 0
        "clamp mode" wrap
@@ -3290,7 +3290,7 @@ FrameWidgetClass rootFrame {
        visible 1
        ignorepointer 1
        position 11.48 0
-       size 357.51999 0.99
+       size 357.52 0.99
        hexactpos 1
        vexactpos 1
        hexactsize 1
@@ -3309,8 +3309,8 @@ FrameWidgetClass rootFrame {
           PanelWidgetClass ColorWidget0 {
            visible 1
            ignorepointer 1
-           color 0.5373 0.3569 0.1412 1
-           position 2 10
+           color 0.157 0.624 0.624 1
+           position 4.531 7.975
            size 8 25
            hexactpos 1
            vexactpos 1
@@ -3320,8 +3320,8 @@ FrameWidgetClass rootFrame {
           }
           RichTextWidgetClass CraftIngridientTitel {
            ignorepointer 1
-           position 19.32 0.76
-           size 0.95 40
+           position 19.32 -0.119
+           size 0.95 38.241
            valign center_ref
            hexactpos 1
            vexactpos 1
@@ -3339,9 +3339,9 @@ FrameWidgetClass rootFrame {
         }
         PanelWidgetClass CraftIngridientListWidget {
          ignorepointer 1
-         color 0.4275 0.4235 0.4235 0.7059
+         color 0.428 0.424 0.424 0.706
          position 0 42
-         size 0.99 240
+         size 0.99 307.567
          halign center_ref
          hexactpos 1
          vexactpos 1
@@ -3350,10 +3350,14 @@ FrameWidgetClass rootFrame {
          style blank
          {
           ScrollWidgetClass CraftIngridientListScrollWidget {
+           visible 1
+           disabled 0
            ignorepointer 0
-           color 0.3647 0.3098 0.2235 1
+           ignoregloballv 0
+           keepsafezone 0
+           color 0.365 0.365 0.365 1
            position 5 4
-           size 1.0149 1
+           size 1.015 0.993
            halign center_ref
            hexactpos 1
            vexactpos 1
@@ -3383,7 +3387,7 @@ FrameWidgetClass rootFrame {
                {
                 PanelWidgetClass CraftIngridientItemPanelWidget {
                  ignorepointer 1
-                 color 0.098 0.098 0.098 0.2353
+                 color 0.141 0.141 0.141 0.235
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -3395,7 +3399,7 @@ FrameWidgetClass rootFrame {
                  {
                   PanelWidgetClass CraftIngridientItemPanelW {
                    ignorepointer 1
-                   color 0.149 0.1333 0.1255 1
+                   color 0.212 0.212 0.212 1
                    position 0 0
                    size 1 1
                    halign center_ref
@@ -3420,7 +3424,7 @@ FrameWidgetClass rootFrame {
                 }
                 TextWidgetClass CraftIngridientItemQuantity {
                  ignorepointer 1
-                 color 1 1 1 0.8627
+                 color 1 1 1 0.863
                  position 4 4
                  size -0.768 16.644
                  halign right_ref
@@ -3448,7 +3452,7 @@ FrameWidgetClass rootFrame {
                {
                 PanelWidgetClass CraftIngridientItemPanelWidget0 {
                  ignorepointer 1
-                 color 0.098 0.098 0.098 0.2353
+                 color 0.106 0.106 0.106 0.235
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -3460,7 +3464,7 @@ FrameWidgetClass rootFrame {
                  {
                   PanelWidgetClass CraftIngridientItemPanelW0 {
                    ignorepointer 1
-                   color 0.149 0.1333 0.1255 1
+                   color 0.145 0.145 0.145 1
                    position 0 0
                    size 1 1
                    halign center_ref
@@ -3485,7 +3489,7 @@ FrameWidgetClass rootFrame {
                 }
                 TextWidgetClass CraftIngridientItemQuantity0 {
                  ignorepointer 1
-                 color 1 1 1 0.8627
+                 color 1 1 1 0.863
                  position 4 4
                  size -0.768 16.644
                  halign right_ref
@@ -3512,9 +3516,9 @@ FrameWidgetClass rootFrame {
         PanelWidgetClass CraftIngridientDetail {
          visible 1
          ignorepointer 1
-         color 0.4275 0.4235 0.4235 0.7059
-         position 0 2
-         size 345 200
+         color 0.428 0.424 0.424 0.706
+         position -2.394 2
+         size 349.788 200
          halign center_ref
          valign bottom_ref
          hexactpos 1
@@ -3547,8 +3551,8 @@ FrameWidgetClass rootFrame {
              {
               ImageWidgetClass IngridientDetailIcon {
                ignorepointer 1
-               color 0.7373 0.4941 0.2 1
-               position 0.96597 0
+               color 0.157 0.624 0.624 1
+               position 3.574 0.652
                size 18 18
                valign center_ref
                hexactpos 1
@@ -3583,7 +3587,7 @@ FrameWidgetClass rootFrame {
             }
             PanelWidgetClass PanelWidget0 {
              ignorepointer 1
-             color 0.1608 0.1412 0.1098 1
+             color 0.329 0.329 0.329 1
              position 10 10
              size 221 2
              hexactpos 1
@@ -3596,9 +3600,9 @@ FrameWidgetClass rootFrame {
           }
           MultilineTextWidgetClass IngridientDetailMultiline {
            ignorepointer 1
-           color 1 1 1 0.8235
+           color 1 1 1 0.823
            position 0 32
-           size 337.54401 45
+           size 347.068 58.127
            hexactpos 1
            vexactpos 1
            hexactsize 1
@@ -3637,7 +3641,8 @@ FrameWidgetClass rootFrame {
              {
               ImageWidgetClass IngridientDetailIcon0 {
                ignorepointer 1
-               color 0.7373 0.4941 0.2 1
+               color 0.157 0.624 0.624 1
+               position 0.326 0.326
                size 15 15
                halign center_ref
                valign center_ref
@@ -3673,7 +3678,7 @@ FrameWidgetClass rootFrame {
             }
             PanelWidgetClass PanelWidget5 {
              ignorepointer 1
-             color 0.1608 0.1412 0.1098 1
+             color 0.329 0.329 0.329 1
              size 220 1
              hexactpos 1
              vexactpos 1
@@ -3685,7 +3690,7 @@ FrameWidgetClass rootFrame {
           }
           PanelWidgetClass IngridientDetailItemInfo {
            ignorepointer 1
-           color 0.0627 0.0471 0.0196 0.5882
+           color 0.063 0.047 0.02 0.588
            position 0 120
            size 325 78
            hexactpos 1
@@ -3762,8 +3767,8 @@ FrameWidgetClass rootFrame {
         PanelWidgetClass AtachIngridientListWidget {
          visible 0
          ignorepointer 1
-         color 0.4275 0.4235 0.4235 0.7059
-         position 1 350
+         color 0.428 0.424 0.424 0.706
+         position 1 351.613
          size 0.99 105
          halign center_ref
          hexactpos 1
@@ -3785,8 +3790,8 @@ FrameWidgetClass rootFrame {
             PanelWidgetClass AtachColorWidget {
              visible 1
              ignorepointer 1
-             color 0.5373 0.3569 0.1412 1
-             position 2 9
+             color 0.157 0.624 0.624 1
+             position 2.283 7.413
              size 8 25
              hexactpos 1
              vexactpos 1
@@ -3815,9 +3820,9 @@ FrameWidgetClass rootFrame {
           }
           ScrollWidgetClass AtachIngridientListScrollWidget {
            ignorepointer 0
-           color 0.3647 0.3098 0.2235 1
-           position 3.68 41
-           size 1.0149 0.6
+           color 0 0.502 0.502 1
+           position 3.302 43.643
+           size 1.015 0.6
            halign center_ref
            hexactpos 1
            vexactpos 1
@@ -3847,7 +3852,7 @@ FrameWidgetClass rootFrame {
                {
                 PanelWidgetClass AtachIngridientItemPanelWidget {
                  ignorepointer 1
-                 color 0.098 0.098 0.098 0.2353
+                 color 0.122 0.122 0.122 0.235
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -3859,7 +3864,7 @@ FrameWidgetClass rootFrame {
                  {
                   PanelWidgetClass AtachIngridientItemPanelW {
                    ignorepointer 1
-                   color 0.3373 0.302 0.2824 1
+                   color 0.318 0.318 0.318 1
                    position 0 0
                    size 1 1
                    halign center_ref
@@ -3874,7 +3879,7 @@ FrameWidgetClass rootFrame {
                 }
                 ImageWidgetClass AttachmentIconImage {
                  ignorepointer 1
-                 color 0.4549 0.4549 0.4549 0.4157
+                 color 0.455 0.455 0.455 0.416
                  size 45 45
                  halign center_ref
                  valign center_ref
@@ -3911,6 +3916,7 @@ FrameWidgetClass rootFrame {
       PanelWidgetClass CraftRecipeInfoWidget {
        visible 1
        ignorepointer 1
+       ignoregloballv 0
        position 372 0
        size 498 0.99
        hexactpos 1
@@ -3930,8 +3936,8 @@ FrameWidgetClass rootFrame {
          {
           PanelWidgetClass ColorWidget {
            ignorepointer 1
-           color 0.5373 0.3569 0.1412 1
-           position 2 10
+           color 0.157 0.624 0.624 1
+           position 5.432 6.997
            size 8 25
            hexactpos 1
            vexactpos 1
@@ -3941,8 +3947,8 @@ FrameWidgetClass rootFrame {
           }
           RichTextWidgetClass CraftRecipeTitel {
            ignorepointer 1
-           position 19.32 0
-           size 326 40
+           position 19.32 -1.51
+           size 326 36.98
            valign center_ref
            hexactpos 1
            vexactpos 1
@@ -3971,7 +3977,8 @@ FrameWidgetClass rootFrame {
          {
           WrapSpacerWidgetClass CraftRecipeDetailWrapSpacer {
            ignorepointer 1
-           size 1 36
+           position 0 -5.337
+           size 1 41.336
            halign center_ref
            hexactpos 1
            vexactpos 1
@@ -3994,8 +4001,8 @@ FrameWidgetClass rootFrame {
              {
               ImageWidgetClass CraftRecipeDetailIcon {
                ignorepointer 1
-               color 0.7373 0.4941 0.2 1
-               position 0.96597 0
+               color 0.157 0.624 0.624 1
+               position 2.021 -1.227
                size 22 22
                valign center_ref
                hexactpos 1
@@ -4041,7 +4048,7 @@ FrameWidgetClass rootFrame {
            {
             ScrollWidgetClass ScrollWidget1 {
              ignorepointer 0
-             color 0.3647 0.3098 0.2235 1
+             color 0 0.502 0.502 1
              position 0 0
              size 450 102
              hexactpos 1
@@ -4052,7 +4059,7 @@ FrameWidgetClass rootFrame {
              {
               MultilineTextWidgetClass CraftRecipeDetailMultiline {
                ignorepointer 1
-               color 1 1 1 0.8235
+               color 1 1 1 0.823
                size 451 125
                hexactpos 1
                vexactpos 1
@@ -4134,7 +4141,7 @@ FrameWidgetClass rootFrame {
                {
                 ImageWidgetClass AttachmentImageWidget {
                  ignorepointer 1
-                 color 0.5373 0.3569 0.1412 1
+                 color 0.157 0.624 0.624 1
                  size 16 16
                  halign center_ref
                  valign center_ref
@@ -4184,8 +4191,8 @@ FrameWidgetClass rootFrame {
         }
         PanelWidgetClass ReCraftRecipeDetail {
          ignorepointer 1
-         position 0 0
-         size 456 180
+         position -3.209 3.196
+         size 449.582 196.401
          halign center_ref
          valign bottom_ref
          hexactpos 1
@@ -4219,8 +4226,8 @@ FrameWidgetClass rootFrame {
              {
               ImageWidgetClass ReCraftRecipeDetailIcon {
                ignorepointer 1
-               color 0.7373 0.4941 0.2 1
-               position 0.96597 0
+               color 0.157 0.624 0.624 1
+               position 1.944 0.326
                size 22 22
                valign center_ref
                hexactpos 1
@@ -4258,7 +4265,7 @@ FrameWidgetClass rootFrame {
           PanelWidgetClass ReButtonCraftWidget {
            visible 1
            ignorepointer 1
-           position 290 30
+           position 282.072 30.755
            size 160 35
            hexactpos 1
            vexactpos 1
@@ -4279,7 +4286,7 @@ FrameWidgetClass rootFrame {
               PanelWidgetClass ReButtonCraftPanelWidget {
                visible 1
                ignorepointer 1
-               color 0.4667 0.1333 0.1294 1
+               color 0.498 0.498 0.498 1
                size 1 1
                halign center_ref
                valign center_ref
@@ -4291,7 +4298,7 @@ FrameWidgetClass rootFrame {
                {
                 ProgressBarWidgetClass ReCraftButtonProgressBar {
                  ignorepointer 1
-                 color 0.0863 0.3176 0.102 0.6392
+                 color 0.086 0.318 0.102 0.639
                  size 1 1
                  hexactpos 1
                  vexactpos 1
@@ -4302,7 +4309,7 @@ FrameWidgetClass rootFrame {
                 WrapSpacerWidgetClass ReButtonCraftWrapSpacer {
                  ignorepointer 1
                  position 0 -0.624
-                 size 1.00385 1.0121
+                 size 1.004 1.012
                  halign center_ref
                  valign center_ref
                  hexactpos 1
@@ -4316,7 +4323,7 @@ FrameWidgetClass rootFrame {
                  {
                   TextWidgetClass ReButtonCraftText {
                    ignorepointer 1
-                   color 1 1 1 0.8627
+                   color 1 1 1 0.863
                    position -3 0
                    size 0.7 25
                    halign center_ref
@@ -4371,10 +4378,11 @@ FrameWidgetClass rootFrame {
            }
           }
           ScrollWidgetClass ReCraftScrollWidget {
+           clipchildren 1
            ignorepointer 0
-           color 0.5373 0.4745 0.4235 0.2353
+           color 0.157 0.624 0.624 0.255
            position 2 30
-           size 280 147
+           size 273.136 165.155
            hexactpos 1
            vexactpos 1
            hexactsize 1
@@ -4389,7 +4397,7 @@ FrameWidgetClass rootFrame {
              clipchildren 1
              ignorepointer 0
              position 6 3
-             size 270 199
+             size 256.958 215.576
              hexactpos 1
              vexactpos 1
              hexactsize 1
@@ -4397,7 +4405,7 @@ FrameWidgetClass rootFrame {
              scaled 1
              draggable 0
              "no focus" 0
-             Padding 15
+             Padding 10
              Margin 0
              "Size To Content V" 1
              {
@@ -4413,7 +4421,7 @@ FrameWidgetClass rootFrame {
                {
                 PanelWidgetClass ReCraftIngridientItemPanelWidget {
                  ignorepointer 1
-                 color 0.098 0.098 0.098 0.2353
+                 color 0.098 0.098 0.098 0.235
                  size 55 55
                  hexactpos 1
                  vexactpos 1
@@ -4423,7 +4431,7 @@ FrameWidgetClass rootFrame {
                  {
                   PanelWidgetClass ReCraftIngridientItemPanelW {
                    ignorepointer 1
-                   color 0.149 0.1333 0.1255 1
+                   color 0.149 0.133 0.125 1
                    size 55 55
                    hexactpos 1
                    vexactpos 1
@@ -4445,7 +4453,7 @@ FrameWidgetClass rootFrame {
                 }
                 TextWidgetClass ReCraftIngridientItemQuantity {
                  ignorepointer 1
-                 color 1 1 1 0.8627
+                 color 1 1 1 0.863
                  size -0.78 14
                  halign right_ref
                  valign bottom_ref
@@ -4475,7 +4483,7 @@ FrameWidgetClass rootFrame {
                {
                 PanelWidgetClass ReCraftIngridientItemPanelWidget0 {
                  ignorepointer 1
-                 color 0.098 0.098 0.098 0.2353
+                 color 0.098 0.098 0.098 0.235
                  size 55 55
                  hexactpos 1
                  vexactpos 1
@@ -4485,7 +4493,7 @@ FrameWidgetClass rootFrame {
                  {
                   PanelWidgetClass ReCraftIngridientItemPanelW0 {
                    ignorepointer 1
-                   color 0.149 0.1333 0.1255 1
+                   color 0.149 0.133 0.125 1
                    size 55 55
                    hexactpos 1
                    vexactpos 1
@@ -4507,7 +4515,7 @@ FrameWidgetClass rootFrame {
                 }
                 TextWidgetClass ReCraftIngridientItemQuantity0 {
                  ignorepointer 1
-                 color 1 1 1 0.8627
+                 color 1 1 1 0.863
                  size -0.78 14
                  halign right_ref
                  valign bottom_ref
@@ -4537,7 +4545,7 @@ FrameWidgetClass rootFrame {
                {
                 PanelWidgetClass ReCraftIngridientItemPanelWidget2 {
                  ignorepointer 1
-                 color 0.098 0.098 0.098 0.2353
+                 color 0.098 0.098 0.098 0.235
                  size 55 55
                  hexactpos 1
                  vexactpos 1
@@ -4547,7 +4555,7 @@ FrameWidgetClass rootFrame {
                  {
                   PanelWidgetClass ReCraftIngridientItemPanelW2 {
                    ignorepointer 1
-                   color 0.149 0.1333 0.1255 1
+                   color 0.149 0.133 0.125 1
                    size 55 55
                    hexactpos 1
                    vexactpos 1
@@ -4569,7 +4577,7 @@ FrameWidgetClass rootFrame {
                 }
                 TextWidgetClass ReCraftIngridientItemQuantity2 {
                  ignorepointer 1
-                 color 1 1 1 0.8627
+                 color 1 1 1 0.863
                  size -0.78 14
                  halign right_ref
                  valign bottom_ref
@@ -4599,7 +4607,7 @@ FrameWidgetClass rootFrame {
                {
                 PanelWidgetClass ReCraftIngridientItemPanelWidget3 {
                  ignorepointer 1
-                 color 0.098 0.098 0.098 0.2353
+                 color 0.098 0.098 0.098 0.235
                  size 55 55
                  hexactpos 1
                  vexactpos 1
@@ -4609,7 +4617,7 @@ FrameWidgetClass rootFrame {
                  {
                   PanelWidgetClass ReCraftIngridientItemPanelW3 {
                    ignorepointer 1
-                   color 0.149 0.1333 0.1255 1
+                   color 0.149 0.133 0.125 1
                    size 55 55
                    hexactpos 1
                    vexactpos 1
@@ -4631,7 +4639,7 @@ FrameWidgetClass rootFrame {
                 }
                 TextWidgetClass ReCraftIngridientItemQuantity3 {
                  ignorepointer 1
-                 color 1 1 1 0.8627
+                 color 1 1 1 0.863
                  size -0.78 14
                  halign right_ref
                  valign bottom_ref
@@ -4661,7 +4669,7 @@ FrameWidgetClass rootFrame {
                {
                 PanelWidgetClass ReCraftIngridientItemPanelWidget4 {
                  ignorepointer 1
-                 color 0.098 0.098 0.098 0.2353
+                 color 0.098 0.098 0.098 0.235
                  size 55 55
                  hexactpos 1
                  vexactpos 1
@@ -4671,7 +4679,7 @@ FrameWidgetClass rootFrame {
                  {
                   PanelWidgetClass ReCraftIngridientItemPanelW4 {
                    ignorepointer 1
-                   color 0.149 0.1333 0.1255 1
+                   color 0.149 0.133 0.125 1
                    size 55 55
                    hexactpos 1
                    vexactpos 1
@@ -4693,7 +4701,7 @@ FrameWidgetClass rootFrame {
                 }
                 TextWidgetClass ReCraftIngridientItemQuantity4 {
                  ignorepointer 1
-                 color 1 1 1 0.8627
+                 color 1 1 1 0.863
                  size -0.78 14
                  halign right_ref
                  valign bottom_ref
@@ -4723,7 +4731,7 @@ FrameWidgetClass rootFrame {
                {
                 PanelWidgetClass ReCraftIngridientItemPanelWidget5 {
                  ignorepointer 1
-                 color 0.098 0.098 0.098 0.2353
+                 color 0.098 0.098 0.098 0.235
                  size 55 55
                  hexactpos 1
                  vexactpos 1
@@ -4733,7 +4741,7 @@ FrameWidgetClass rootFrame {
                  {
                   PanelWidgetClass ReCraftIngridientItemPanelW5 {
                    ignorepointer 1
-                   color 0.149 0.1333 0.1255 1
+                   color 0.149 0.133 0.125 1
                    size 55 55
                    hexactpos 1
                    vexactpos 1
@@ -4755,7 +4763,7 @@ FrameWidgetClass rootFrame {
                 }
                 TextWidgetClass ReCraftIngridientItemQuantity5 {
                  ignorepointer 1
-                 color 1 1 1 0.8627
+                 color 1 1 1 0.863
                  size -0.78 14
                  halign right_ref
                  valign bottom_ref
@@ -4785,7 +4793,7 @@ FrameWidgetClass rootFrame {
                {
                 PanelWidgetClass ReCraftIngridientItemPanelWidget1 {
                  ignorepointer 1
-                 color 0.098 0.098 0.098 0.2353
+                 color 0.098 0.098 0.098 0.235
                  size 55 55
                  hexactpos 1
                  vexactpos 1
@@ -4795,7 +4803,7 @@ FrameWidgetClass rootFrame {
                  {
                   PanelWidgetClass ReCraftIngridientItemPanelW1 {
                    ignorepointer 1
-                   color 0.149 0.1333 0.1255 1
+                   color 0.149 0.133 0.125 1
                    size 55 55
                    hexactpos 1
                    vexactpos 1
@@ -4817,7 +4825,7 @@ FrameWidgetClass rootFrame {
                 }
                 TextWidgetClass ReCraftIngridientItemQuantity1 {
                  ignorepointer 1
-                 color 1 1 1 0.8627
+                 color 1 1 1 0.863
                  size -0.78 14
                  halign right_ref
                  valign bottom_ref
@@ -4847,7 +4855,7 @@ FrameWidgetClass rootFrame {
                {
                 PanelWidgetClass ReCraftIngridientItemPanelWidget6 {
                  ignorepointer 1
-                 color 0.098 0.098 0.098 0.2353
+                 color 0.098 0.098 0.098 0.235
                  size 55 55
                  hexactpos 1
                  vexactpos 1
@@ -4857,7 +4865,7 @@ FrameWidgetClass rootFrame {
                  {
                   PanelWidgetClass ReCraftIngridientItemPanelW6 {
                    ignorepointer 1
-                   color 0.149 0.1333 0.1255 1
+                   color 0.149 0.133 0.125 1
                    size 55 55
                    hexactpos 1
                    vexactpos 1
@@ -4879,7 +4887,7 @@ FrameWidgetClass rootFrame {
                 }
                 TextWidgetClass ReCraftIngridientItemQuantity6 {
                  ignorepointer 1
-                 color 1 1 1 0.8627
+                 color 1 1 1 0.863
                  size -0.78 14
                  halign right_ref
                  valign bottom_ref
@@ -4909,7 +4917,7 @@ FrameWidgetClass rootFrame {
                {
                 PanelWidgetClass ReCraftIngridientItemPanelWidget7 {
                  ignorepointer 1
-                 color 0.098 0.098 0.098 0.2353
+                 color 0.098 0.098 0.098 0.235
                  size 55 55
                  hexactpos 1
                  vexactpos 1
@@ -4919,7 +4927,7 @@ FrameWidgetClass rootFrame {
                  {
                   PanelWidgetClass ReCraftIngridientItemPanelW7 {
                    ignorepointer 1
-                   color 0.149 0.1333 0.1255 1
+                   color 0.149 0.133 0.125 1
                    size 55 55
                    hexactpos 1
                    vexactpos 1
@@ -4941,7 +4949,7 @@ FrameWidgetClass rootFrame {
                 }
                 TextWidgetClass ReCraftIngridientItemQuantity7 {
                  ignorepointer 1
-                 color 1 1 1 0.8627
+                 color 1 1 1 0.863
                  size -0.78 14
                  halign right_ref
                  valign bottom_ref
@@ -4969,7 +4977,7 @@ FrameWidgetClass rootFrame {
          visible 0
          ignorepointer 1
          position 180 2
-         size 0.28 40
+         size 0.28 36.98
          halign center_ref
          hexactpos 1
          vexactpos 1
@@ -4978,8 +4986,8 @@ FrameWidgetClass rootFrame {
          {
           PanelWidgetClass SelectColorWidget {
            ignorepointer 1
-           color 0.5373 0.3569 0.1412 1
-           position 10 10
+           color 0.157 0.624 0.624 1
+           position 4.861 5.993
            size 8 25
            hexactpos 1
            vexactpos 1
@@ -5013,7 +5021,7 @@ FrameWidgetClass rootFrame {
          ignorepointer 0
          ignoregloballv 0
          keepsafezone 0
-         color 0.1569 0.1569 0.1569 0.5098
+         color 0.157 0.157 0.157 0.51
          position 420 45
          size 78 235
          hexactpos 1
@@ -5054,7 +5062,8 @@ FrameWidgetClass rootFrame {
               ScrollWidgetClass SelectCrafttListScrollWidget {
                visible 1
                ignorepointer 0
-               color 0.3647 0.3098 0.2235 1
+               color 0 0.502 0.502 1
+               position 0 0
                size 1 1
                hexactpos 1
                vexactpos 1
@@ -5079,7 +5088,7 @@ FrameWidgetClass rootFrame {
                   ButtonWidgetClass SelectCraftButton {
                    visible 1
                    clipchildren 0
-                   color 0.1922 0.0745 0.051 1
+                   color 0.396 0.396 0.396 0.6
                    size 60 60
                    hexactpos 1
                    vexactpos 1
@@ -5108,7 +5117,7 @@ FrameWidgetClass rootFrame {
                         PanelWidgetClass SelectCraftItemPanelW {
                          visible 1
                          ignorepointer 1
-                         color 0.149 0.1333 0.1255 1
+                         color 0.157 0.157 0.157 1
                          position 0 0
                          size 1 1
                          halign center_ref
@@ -5138,7 +5147,7 @@ FrameWidgetClass rootFrame {
                   ButtonWidgetClass SelectCraftButton0 {
                    visible 1
                    clipchildren 0
-                   color 0.1922 0.0745 0.051 1
+                   color 0.192 0.075 0.051 1
                    size 60 60
                    halign center_ref
                    valign center_ref
@@ -5171,7 +5180,7 @@ FrameWidgetClass rootFrame {
                         PanelWidgetClass SelectCraftItemPanelW0 {
                          visible 1
                          ignorepointer 1
-                         color 0.149 0.1333 0.1255 1
+                         color 0.149 0.133 0.125 1
                          position 0 0
                          size 1 1
                          halign center_ref
@@ -5201,7 +5210,7 @@ FrameWidgetClass rootFrame {
                   ButtonWidgetClass SelectCraftButton1 {
                    visible 1
                    clipchildren 0
-                   color 0.1922 0.0745 0.051 1
+                   color 0.192 0.075 0.051 1
                    size 60 60
                    halign center_ref
                    valign center_ref
@@ -5234,7 +5243,7 @@ FrameWidgetClass rootFrame {
                         PanelWidgetClass SelectCraftItemPanelW1 {
                          visible 1
                          ignorepointer 1
-                         color 0.149 0.1333 0.1255 1
+                         color 0.149 0.133 0.125 1
                          position 0 0
                          size 1 1
                          halign center_ref
@@ -5264,7 +5273,7 @@ FrameWidgetClass rootFrame {
                   ButtonWidgetClass SelectCraftButton2 {
                    visible 1
                    clipchildren 0
-                   color 0.1922 0.0745 0.051 1
+                   color 0.192 0.075 0.051 1
                    size 60 60
                    halign center_ref
                    valign center_ref
@@ -5297,7 +5306,7 @@ FrameWidgetClass rootFrame {
                         PanelWidgetClass SelectCraftItemPanelW2 {
                          visible 1
                          ignorepointer 1
-                         color 0.149 0.1333 0.1255 1
+                         color 0.149 0.133 0.125 1
                          position 0 0
                          size 1 1
                          halign center_ref
@@ -5327,7 +5336,7 @@ FrameWidgetClass rootFrame {
                   ButtonWidgetClass SelectCraftButton3 {
                    visible 1
                    clipchildren 0
-                   color 0.1922 0.0745 0.051 1
+                   color 0.192 0.075 0.051 1
                    size 60 60
                    halign center_ref
                    valign center_ref
@@ -5360,7 +5369,7 @@ FrameWidgetClass rootFrame {
                         PanelWidgetClass SelectCraftItemPanelW3 {
                          visible 1
                          ignorepointer 1
-                         color 0.149 0.1333 0.1255 1
+                         color 0.149 0.133 0.125 1
                          position 0 0
                          size 1 1
                          halign center_ref
@@ -5404,7 +5413,7 @@ FrameWidgetClass rootFrame {
          ignorepointer 0
          ignoregloballv 0
          keepsafezone 0
-         color 0.1569 0.1569 0.1569 0.5098
+         color 0.157 0.157 0.157 0.51
          position 10 50
          size 78 205
          hexactpos 1
@@ -5446,7 +5455,7 @@ FrameWidgetClass rootFrame {
               ScrollWidgetClass WBListScrollWidget {
                visible 1
                ignorepointer 0
-               color 0.3647 0.3098 0.2235 1
+               color 0.365 0.31 0.223 1
                size 1 1
                hexactpos 1
                vexactpos 1
@@ -5471,7 +5480,7 @@ FrameWidgetClass rootFrame {
                   ButtonWidgetClass WBButton {
                    visible 1
                    clipchildren 0
-                   color 0.1922 0.0745 0.051 1
+                   color 0.192 0.075 0.051 1
                    size 60 60
                    halign center_ref
                    valign center_ref
@@ -5507,8 +5516,8 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass CraftRecipeStatsWidget {
        ignorepointer 0
-       color 0.098 0.098 0.098 0.1176
-       position 872 0
+       color 0.098 0.098 0.098 0.118
+       position 872.532 0
        size 310 0.99
        hexactpos 1
        vexactpos 1
@@ -5528,8 +5537,8 @@ FrameWidgetClass rootFrame {
          {
           PanelWidgetClass ResultColorWidget {
            ignorepointer 1
-           color 0.5373 0.3569 0.1412 1
-           position 10 10
+           color 0.157 0.624 0.624 1
+           position 6.13 8.241
            size 8 25
            hexactpos 1
            vexactpos 1
@@ -5540,7 +5549,7 @@ FrameWidgetClass rootFrame {
           RichTextWidgetClass ResultCraftRecipeTitel {
            ignorepointer 1
            position 19.32 0
-           size 326 40
+           size 292.161 40
            valign center_ref
            hexactpos 1
            vexactpos 1
@@ -5595,7 +5604,7 @@ FrameWidgetClass rootFrame {
              {
               ImageWidgetClass CraftInfoTimeIcon {
                ignorepointer 1
-               color 0.7373 0.4941 0.2 1
+               color 0.157 0.624 0.624 1
                position 0 0
                size 18 18
                valign center_ref
@@ -5615,7 +5624,7 @@ FrameWidgetClass rootFrame {
             }
             RichTextWidgetClass CraftInfoTimeText {
              ignorepointer 1
-             color 1 1 1 0.8235
+             color 1 1 1 0.823
              size 250 35
              halign center_ref
              valign center_ref
@@ -5634,8 +5643,8 @@ FrameWidgetClass rootFrame {
         }
         PanelWidgetClass CraftCountTimePanelWidget {
          ignorepointer 1
-         position -3 383
-         size 1 100
+         position -3 374.935
+         size 1 108.065
          hexactpos 1
          vexactpos 1
          hexactsize 0
@@ -5644,8 +5653,8 @@ FrameWidgetClass rootFrame {
           WrapSpacerWidgetClass WrapSpacerWidget0 {
            visible 1
            ignorepointer 1
-           position 0 0
-           size 1 55
+           position 20.163 1.21
+           size 0.873 64.275
            hexactpos 1
            vexactpos 1
            hexactsize 0
@@ -5656,7 +5665,7 @@ FrameWidgetClass rootFrame {
            content_valign center
            {
             ButtonWidgetClass CraftCountButtonMin {
-             color 0.0902 0.0706 0.0353 1
+             color 0.192 0.192 0.192 1
              size 48 48
              hexactpos 1
              vexactpos 1
@@ -5666,7 +5675,7 @@ FrameWidgetClass rootFrame {
              {
               PanelWidgetClass PanelWidget2 {
                ignorepointer 1
-               color 0.3647 0.3451 0.3137 0.2353
+               color 0.365 0.345 0.314 0.235
                size 1 1
                hexactpos 1
                vexactpos 1
@@ -5678,7 +5687,7 @@ FrameWidgetClass rootFrame {
               }
               TextWidgetClass TitelButtonMin {
                ignorepointer 1
-               color 1 1 1 0.8627
+               color 1 1 1 0.863
                position 0 0
                size 1 1
                halign center_ref
@@ -5702,7 +5711,7 @@ FrameWidgetClass rootFrame {
              visible 1
              ignorepointer 1
              position 0 10
-             size 150 48
+             size 156.855 48
              hexactpos 1
              vexactpos 1
              hexactsize 1
@@ -5710,7 +5719,8 @@ FrameWidgetClass rootFrame {
              {
               TextWidgetClass CraftCountText {
                ignorepointer 1
-               size 1 1
+               position 0 0
+               size 0.868 1
                halign center_ref
                valign center_ref
                hexactpos 1
@@ -5726,7 +5736,7 @@ FrameWidgetClass rootFrame {
              }
             }
             ButtonWidgetClass CraftCountButtonPlus {
-             color 0.0902 0.0706 0.0353 1
+             color 0.192 0.192 0.192 1
              size 48 48
              halign right_ref
              valign bottom_ref
@@ -5738,7 +5748,7 @@ FrameWidgetClass rootFrame {
              {
               PanelWidgetClass PanelWidget1 {
                ignorepointer 1
-               color 0.3647 0.3451 0.3137 0.2353
+               color 0.365 0.345 0.314 0.235
                size 1 1
                hexactpos 1
                vexactpos 1
@@ -5748,7 +5758,7 @@ FrameWidgetClass rootFrame {
               }
               TextWidgetClass TitelButtonPlus {
                ignorepointer 1
-               color 1 1 1 0.8627
+               color 1 1 1 0.863
                position 0 0
                size 1 1
                halign center_ref
@@ -5775,15 +5785,15 @@ FrameWidgetClass rootFrame {
         PanelWidgetClass ButtonCraftWidget {
          visible 1
          ignorepointer 1
-         position 16.96 657.50403
-         size 270.832 48.744
+         position 12.756 654.802
+         size 275.336 47.843
          hexactpos 1
          vexactpos 1
          hexactsize 1
          vexactsize 1
          {
           ButtonWidgetClass CraftButton {
-           position 0 -0.83198
+           position 0 -0.832
            size 1 48.328
            halign center_ref
            valign bottom_ref
@@ -5796,7 +5806,8 @@ FrameWidgetClass rootFrame {
             PanelWidgetClass ButtonCraftPanelWidget {
              visible 1
              ignorepointer 1
-             color 0.3451 0.2157 0.0588 0.2353
+             color 0.345 0.216 0.059 0.235
+             position 0 0
              size 1 1
              halign center_ref
              valign center_ref
@@ -5808,7 +5819,7 @@ FrameWidgetClass rootFrame {
              {
               ProgressBarWidgetClass CraftButtonProgressBar {
                ignorepointer 1
-               color 0.0863 0.3176 0.102 0.6392
+               color 0.086 0.318 0.102 0.639
                size 1 1
                hexactpos 1
                vexactpos 1
@@ -5820,7 +5831,7 @@ FrameWidgetClass rootFrame {
               WrapSpacerWidgetClass ButtonCraftWrapSpacer {
                ignorepointer 1
                position 0 -0.624
-               size 1.00385 1.0121
+               size 1.004 1.012
                halign center_ref
                valign center_ref
                hexactpos 1
@@ -5834,8 +5845,8 @@ FrameWidgetClass rootFrame {
                {
                 TextWidgetClass ButtonCraftText {
                  ignorepointer 1
-                 color 1 1 1 0.8627
-                 position -3.04001 0
+                 color 1 1 1 0.863
+                 position -3.04 0
                  size 0.7 25
                  halign center_ref
                  valign center_ref
@@ -5890,8 +5901,8 @@ FrameWidgetClass rootFrame {
         }
         PanelWidgetClass PreviewItemWidgetPanel {
          ignorepointer 1
-         position 16.4 39.6
-         size 273.60001 100.4
+         position 13.998 43.444
+         size 273.6 100.4
          hexactpos 1
          vexactpos 1
          hexactsize 1
@@ -6003,8 +6014,8 @@ FrameWidgetClass rootFrame {
           ScrollWidgetClass ScrollWidget0 {
            visible 1
            ignorepointer 0
-           color 0.3647 0.3098 0.2235 1
-           size 281.07999 120
+           color 0.365 0.31 0.223 1
+           size 281.08 120
            hexactpos 1
            vexactpos 1
            hexactsize 1
@@ -6143,7 +6154,7 @@ FrameWidgetClass rootFrame {
               ButtonWidgetClass TerjeSkillsButtonWidget {
                visible 1
                clipchildren 0
-               color 0.1922 0.0745 0.051 1
+               color 0.192 0.075 0.051 1
                position 0 0
                size 1 25
                halign center_ref
@@ -6157,7 +6168,7 @@ FrameWidgetClass rootFrame {
                 PanelWidgetClass TerjeSkillsFonButton {
                  clipchildren 1
                  ignorepointer 1
-                 color 0.1137 0.0745 0.0471 0.1961
+                 color 0.114 0.075 0.047 0.196
                  size 1 1
                  halign center_ref
                  valign center_ref
@@ -6278,8 +6289,8 @@ FrameWidgetClass rootFrame {
         }
         PanelWidgetClass PanelWidget7 {
          ignorepointer 1
-         position 17.6 177.12001
-         size 270.43201 32.64
+         position 17.6 177.12
+         size 270.432 32.64
          hexactpos 1
          vexactpos 1
          hexactsize 1
