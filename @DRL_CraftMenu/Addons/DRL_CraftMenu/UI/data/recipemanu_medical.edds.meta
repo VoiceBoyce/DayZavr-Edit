@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{81BF36DCBEA1F0C4}DRL_CraftMenu/UI/data/recipemanu_medical.edds"
+ Author "win-hv5vr6npefg"
+ ChangeDate 768832405
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "recipemanu_medical.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

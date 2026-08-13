@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<modded_inputs>
+	<inputs>
+		<actions>
+			<input name="UADRL_OpenCraftMenu" loc="#STR_DRL_OPEN_CRAFT_MENU"/>
+			<input name="UADRL_ReloadCraftConfig" loc="#STR_DRL_RELOAD_CRAFT_CONFIG"/>
+		</actions>
+		
+		<sorting name="DRL" loc="#STR_DRL_CRAFT_GROUP">
+			<input name="UADRL_OpenCraftMenu"/>
+			<input name="UADRL_ReloadCraftConfig"/>
+		</sorting>
+	</inputs>
+	
+	<preset>
+		<input name="UADRL_OpenCraftMenu">
+			<btn name="kF9"/>
+		</input>
+		<input name="UADRL_ReloadCraftConfig">
+            <btn name="kRControl">
+				<btn name="kQ" />
+			</btn>
+		</input>
+	</preset>
+</modded_inputs>

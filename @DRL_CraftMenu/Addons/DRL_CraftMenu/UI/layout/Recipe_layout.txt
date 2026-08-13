@@ -1,0 +1,132 @@
+ButtonWidgetClass RecipesSelectionButtonWidget {
+ visible 1
+ clipchildren 0
+ color 0.5373 0.3569 0.1412 1
+ size 1 56
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 1
+ style ServerBrowserCollapse
+ {
+  PanelWidgetClass FonButtonPanelWidget {
+   clipchildren 1
+   ignorepointer 1
+   color 0.1137 0.0745 0.0471 0.1961
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   style rover_sim_colorable
+  }
+  PanelWidgetClass BoardSelectionButtonWidget {
+   visible 1
+   ignorepointer 1
+   color 0.0863 0.0902 0.0745 1
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   style dashed
+   "no focus" 0
+   {
+    WrapSpacerWidgetClass RecipesWrapSpacerWidget {
+     ignorepointer 1
+     size 264 55
+     halign center_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     Padding 0
+     Margin 0
+     {
+      PanelWidgetClass RecipesPreviewPanelWidget {
+       ignorepointer 1
+       color 0 0 0 0.2353
+       position 0 0
+       size 55 55
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style rover_sim_colorable
+       {
+        ImageWidgetClass RecipesImagePreview {
+         visible 1
+         ignorepointer 1
+         position 0 0
+         size 50 50
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         scaled 1
+         imageTexture "{1005B95D20AF526E}DRL_CraftMenu/UI/data/error.edds"
+         mode blend
+         "src alpha" 1
+         "clamp mode" wrap
+         "stretch mode" stretch_w_h
+         filter 1
+        }
+        ItemPreviewWidgetClass RecipesItemPreview {
+         visible 1
+         ignorepointer 1
+         size 50 50
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+        }
+       }
+      }
+      PanelWidgetClass NameRecipesPanelWidget {
+       ignorepointer 1
+       position 0 0
+       size 207 55
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       {
+        RichTextWidgetClass NameRecipesButton {
+         ignorepointer 1
+         keepsafezone 0
+         size 207 55
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         draggable 0
+         style DayZNormal
+         text "Name Recipes"
+         font "DRL_CraftMenu/UI/fonts/MouseMemoirs"
+         "text offset" 5 0
+         "exact text" 1
+         "exact text size" 22
+         "size to text h" 0
+         "text valign" center
+         wrap 1
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

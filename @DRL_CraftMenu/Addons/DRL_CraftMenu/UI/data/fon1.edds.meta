@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{A31FE069AA9CACEB}DRL_CraftMenu/UI/data/fon1.edds"
+ Author "desktop-ca3cvvt"
+ ChangeDate 1001207053
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "fon1.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

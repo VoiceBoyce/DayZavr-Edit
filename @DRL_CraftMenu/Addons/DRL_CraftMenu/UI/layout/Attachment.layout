@@ -1,0 +1,63 @@
+ButtonWidgetClass AtachIngridientButton {
+ size 60 60
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ style Empty
+ {
+  PanelWidgetClass AtachIngridientItemPanelWidget {
+   ignorepointer 1
+   color 0.098 0.098 0.098 0.2353
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   style rover_sim_colorable
+   {
+    PanelWidgetClass AtachIngridientItemPanelW {
+     ignorepointer 1
+     color 0.3373 0.302 0.2824 1
+     position 0 0
+     size 1 1
+     halign center_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     style dashed
+    }
+   }
+  }
+  ImageWidgetClass AttachmentIconImage {
+   ignorepointer 1
+   color 0.4549 0.4549 0.4549 0.4157
+   size 45 45
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   imageTexture "{1005B95D20AF526E}DRL_CraftMenu/UI/data/error.edds"
+   mode blend
+   "src alpha" 1
+   "clamp mode" wrap
+   "stretch mode" stretch_w_h
+  }
+  ItemPreviewWidgetClass AtachIngridientItemPreview {
+   ignorepointer 1
+   size 50 50
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+  }
+ }
+}
