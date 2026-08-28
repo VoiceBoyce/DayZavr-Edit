@@ -3280,7 +3280,7 @@ FrameWidgetClass rootFrame {
        vexactpos 1
        hexactsize 0
        vexactsize 0
-       imageTexture "{6F887FB98B567CFA}DRL_CraftMenu/UI/data/recipemanust.edds"
+       imageTexture "{6F887FB98B567CFA}DRL_CraftMenu/UI/data/fon2.edds"
        mode blend
        "src alpha" 0
        "clamp mode" wrap

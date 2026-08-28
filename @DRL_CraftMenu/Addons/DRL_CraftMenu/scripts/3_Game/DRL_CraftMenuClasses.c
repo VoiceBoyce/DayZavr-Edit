@@ -17,8 +17,8 @@ class DRL_Craft_Settings
 	void DRL_Craft_Settings()
 	{
 		EnableFreeMenu    = 1;
-		FonImagePath      = "DRL_CraftMenu/UI/data/work.edds";
-		CraftFonImagePath = "DRL_CraftMenu/UI/data/recipemanust.edds";
+		FonImagePath      = "DRL_CraftMenu/UI/data/fon1.edds";
+		CraftFonImagePath = "DRL_CraftMenu/UI/data/fon2.edds";
 		
 		if (CraftSoundSet == "")
 		{
