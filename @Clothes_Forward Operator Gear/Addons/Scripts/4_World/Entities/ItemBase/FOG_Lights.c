@@ -1,1 +1,0 @@
-class FOG_HMTL_Light_Base extends UniversalLight{};

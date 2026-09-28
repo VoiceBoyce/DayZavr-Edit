@@ -1,1 +1,0 @@
-class FOG_Helmet_MICH2000_Base : FOG_Helmet_Base{};
