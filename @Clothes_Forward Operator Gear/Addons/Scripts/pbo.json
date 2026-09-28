@@ -1,0 +1,23 @@
+{
+    "compress": {
+        "exclude": [
+        ],
+        "include": [
+            "\\.xml$"
+        ]
+    },
+    "headers": [
+        {
+            "name": "prefix",
+            "value": "FOG_MOD\\Scripts"
+        },
+        {
+            "name": "Mikero",
+            "value": "DePbo.dll.9.87"
+        },
+        {
+            "name": "version",
+            "value": "25022723"
+        }
+    ]
+}

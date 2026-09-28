@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<modded_inputs>
+    <inputs>
+        <actions>
+            <input name="UAToggleSleeves" loc="Toggle Sleeves" />
+            <input name="UAToggleNVGPosition" loc="Toggle NVG Position" />
+        </actions>
+        <sorting name="FOG" loc="FOG">
+            <input name="UAToggleSleeves"/>
+            <input name="UAToggleNVGPosition"/>
+        </sorting>
+    </inputs>
+    <preset>
+        <input name="UAToggleSleeves">
+            <btn name="kI"/>
+                <event name="hold" />
+        </input>
+        <input name="UAToggleNVGPosition">
+            <btn name="kSemicolon"/>
+        </input>
+    </preset>
+</modded_inputs>
