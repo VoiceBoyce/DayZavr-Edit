@@ -1,0 +1,22 @@
+{
+    "compress": {
+        "exclude": [
+        ],
+        "include": [
+        ]
+    },
+    "headers": [
+        {
+            "name": "prefix",
+            "value": "FOG_MOD\\Vests"
+        },
+        {
+            "name": "Mikero",
+            "value": "DePbo.dll.9.98"
+        },
+        {
+            "name": "version",
+            "value": "26021623"
+        }
+    ]
+}

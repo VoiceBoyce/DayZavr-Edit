@@ -1,1 +1,0 @@
-class FOG_Helmet_Exfil_Base : FOG_Helmet_Base{};

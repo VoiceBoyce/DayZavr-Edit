@@ -1,0 +1,85 @@
+FrameWidgetClass rootFrame {
+ inheritalpha 1
+ ignorepointer 1
+ position 0 0
+ size 1 1
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ {
+  FrameWidgetClass FOG_OccluderEffects {
+   visible 1
+   inheritalpha 1
+   ignorepointer 1
+   position 0 0
+   size 1 1
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   {
+    FrameWidgetClass FOG_Occlusion_Dual {
+     visible 0
+     inheritalpha 1
+     ignorepointer 1
+     position 0 0
+     size 1 1
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     userID 742001
+     {
+        ImageWidgetClass FOG_Occlusion_Dual_Texture {
+         visible 1
+         inheritalpha 1
+         ignorepointer 1
+         color 1 1 1 1
+         position 0 0
+         size 1 1
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         imageTexture "FOG_MOD/Scripts/GUI/FOG_Dual_Occluder.edds"
+         mode blend
+         "src alpha" 1
+         stretch 1
+        }
+     }
+    }
+    FrameWidgetClass FOG_Occlusion_GPNVG {
+     visible 0
+     inheritalpha 1
+     ignorepointer 1
+     position 0 0
+     size 1 1
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     userID 742002
+     {
+        ImageWidgetClass FOG_Occlusion_GPNVG_Texture {
+         visible 1
+         inheritalpha 1
+         ignorepointer 1
+         color 1 1 1 1
+         position 0 0
+         size 1 1
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         imageTexture "FOG_MOD/Scripts/GUI/FOG_GPNVG_Occluder.edds"
+         mode blend
+         "src alpha" 1
+         stretch 1
+        }
+     }
+    }
+   }
+  }
+ }
+}
