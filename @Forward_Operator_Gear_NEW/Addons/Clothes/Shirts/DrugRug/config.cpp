@@ -30,7 +30,7 @@ class CfgVehicles
 	class FOG_DrugRug_ColorBase: Clothing
 	{
 		displayName="Drug Rug Hoodie";
-		descriptionShort="Наркоманская худи — вязаный байя-свитер из толстой узорчатой ткани с мягкой пушистой текстурой. | A drug rug hoodie is a woven, Baja style pullover made from thick, patterned fabric with a soft, rugged feel. Known for their comfort and unique style.";
+		descriptionShort="Спортивная худи — вязаный байя-свитер из толстой узорчатой ткани с мягкой пушистой текстурой. | A sport hoodie is a woven, Baja style pullover made from thick, patterned fabric with a soft, rugged feel. Known for their comfort and unique style.";
 		model="\FOG_MOD\Clothes\Shirts\DrugRug\FOG_DrugRug_G.p3d";
 		inventorySlot[]=
 		{

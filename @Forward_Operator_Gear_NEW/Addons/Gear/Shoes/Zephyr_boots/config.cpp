@@ -41,7 +41,7 @@ class CfgVehicles
 		};
 		itemSize[]={3,3};
 		weight=400;
-		varWetMax=0.5;
+		varWetMax=0.39000003;
 		heatIsolation=0.60000002;
 		repairableWithKits[]={5,2};
 		repairCosts[]={25,25};
@@ -139,7 +139,7 @@ class CfgVehicles
 	class FOG_Zypher_Boots_Tan_Socks: FOG_Zypher_Boots_Base
 	{
 		scope=2;
-		varWetMax=0.40000001;
+		varWetMax=0.39000003;
 		heatIsolation=0.89999998;
 		hiddenSelectionsTextures[]=
 		{
@@ -150,7 +150,7 @@ class CfgVehicles
 	class FOG_Zypher_Boots_Black_Socks: FOG_Zypher_Boots_Base
 	{
 		scope=2;
-		varWetMax=0.40000001;
+		varWetMax=0.39000003;
 		heatIsolation=0.89999998;
 		hiddenSelectionsTextures[]=
 		{
@@ -161,7 +161,7 @@ class CfgVehicles
 	class FOG_Zypher_Boots_RG_Socks: FOG_Zypher_Boots_Base
 	{
 		scope=2;
-		varWetMax=0.40000001;
+		varWetMax=0.39000003;
 		heatIsolation=0.89999998;
 		hiddenSelectionsTextures[]=
 		{
@@ -172,7 +172,7 @@ class CfgVehicles
 	class FOG_Zypher_Boots_CB_Socks: FOG_Zypher_Boots_Base
 	{
 		scope=2;
-		varWetMax=0.40000001;
+		varWetMax=0.39000003;
 		heatIsolation=0.89999998;
 		hiddenSelectionsTextures[]=
 		{

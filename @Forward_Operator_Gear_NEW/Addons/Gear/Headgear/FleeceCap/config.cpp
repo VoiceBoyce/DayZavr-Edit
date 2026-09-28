@@ -25,7 +25,7 @@ class CfgVehicles
 	{
 		scope=0;
 		displayName="Fleece Cap";
-		descriptionShort="Штатная флисовая шапка Армии США, носится в холодную погоду. | Standard Issue US Army Fleece Cap, typically worn in cold weather environments by soldiers in the field.";
+		descriptionShort="Штатная флисовая шапка Армии, носится в холодную погоду. | The standard Army fleece hat, worn in cold weather.";
 		model="\FOG_MOD\Gear\Headgear\FleeceCap\FOG_FleeceCap_G.p3d";
 		repairableWithKits[]={5,2};
 		repairCosts[]={30,25};

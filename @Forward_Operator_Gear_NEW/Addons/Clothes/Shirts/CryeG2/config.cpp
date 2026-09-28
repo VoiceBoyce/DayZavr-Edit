@@ -31,7 +31,7 @@ class CfgVehicles
 	class FOG_Crye_G2_Shirt_ColorBase: Clothing
 	{
 		displayName="Crye G2 Combat Shirt";
-		descriptionShort="Crye G2 Combat Shirt. Нажмите и удерживайте O чтобы закатать рукава. | Crye G2 Combat Shirt. Press and hold O to roll your sleeves.";
+		descriptionShort="Crye G2 Combat Shirt. Нажмите и удерживайте I чтобы закатать рукава. | Crye G2 Combat Shirt. Press and hold I to roll your sleeves.";
 		model="\FOG_MOD\Clothes\Shirts\CryeG2\CryeG2_Shirt_G.p3d";
 		inventorySlot[]=
 		{
@@ -46,7 +46,7 @@ class CfgVehicles
 		itemSize[]={5,4};
 		itemsCargoSize[]={9,5};
 		quickBarBonus=1;
-		varWetMax=0.69999999;
+		varWetMax=0.2;
 		heatIsolation=0.5;
 		ragQuantity=4;
 		repairableWithKits[]={5,2};

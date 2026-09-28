@@ -32,7 +32,7 @@ class CfgVehicles
 	class FOG_L9_PatagoniaPants_ColorBase: Clothing
 	{
 		displayName="L9 Patagonia Pants";
-		descriptionShort="Штаны L9 Patagonia — текущая штатная боевая форма для групп специальных операций США. | The L9 Patagonia Pants are the current standard issue combat pants for US Special Operations Groups and some Ranger Regiments.";
+		descriptionShort="Штаны L9 Patagonia — штатная боевая форма для групп специальных операций. | L9 Patagonia pants are the standard combat uniform for special operations units.";
 		model="\FOG_MOD\Clothes\Pants\L9_Patagonia\FOG_L9_PatagoniaPants_G.p3d";
 		inventorySlot[]=
 		{
@@ -47,7 +47,7 @@ class CfgVehicles
 		itemSize[]={4,3};
 		itemsCargoSize[]={10,5};
 		quickBarBonus=1;
-		varWetMax=0.5;
+		varWetMax=0.30000001;
 		heatIsolation=0.69999999;
 		ragQuantity=4;
 		repairableWithKits[]={5,2};

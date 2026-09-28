@@ -21,7 +21,7 @@ class CfgVehicles
 	{
 		scope=0;
 		displayName="Patrol Cap";
-		descriptionShort="Штатная кепка Армии США. Носится параллельно поверхности марша. | Standard Issue US Army Softcap, typically worn parallel with the marching surface, displaying the wearers rank and last name.";
+		descriptionShort="Штатная кепка Армии. | The standard Army cap.";
 		model="\FOG_MOD\Gear\Headgear\SoftCap\FOG_SoftCap_G.p3d";
 		repairableWithKits[]={5,2};
 		repairCosts[]={30,25};

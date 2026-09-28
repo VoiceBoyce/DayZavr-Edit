@@ -38,7 +38,7 @@ class CfgVehicles
 	{
 		scope=0;
 		displayName="MTEK Flux Helmet";
-		descriptionShort="Этот шлем здесь только ради кб. | This is literally only in Fog for kb.";
+		descriptionShort="Шлем MTEK FLUX — это лёгкий тактический шлем с усиленной стекловолокном полимерной оболочкой, рельсами M-LOK и креплением для NVG. | The MTEK FLUX is a lightweight tactical helmet featuring a glass fiber reinforced polymer shell, M-LOK accessory rails, and an NVG mount.";
 		model="\FOG_MOD\Helmets\MTEK_Flux\FOG_MTEK_Flux_G.p3d";
 		repairableWithKits[]={8};
 		repairCosts[]={25};
@@ -149,7 +149,7 @@ class CfgVehicles
 				{
 					class Health
 					{
-						damage=0.25;
+						damage=0.23;
 					};
 					class Blood
 					{
@@ -164,7 +164,7 @@ class CfgVehicles
 				{
 					class Health
 					{
-						damage=0.55000001;
+						damage=0.23;
 					};
 					class Blood
 					{
@@ -179,7 +179,7 @@ class CfgVehicles
 				{
 					class Health
 					{
-						damage=0.55000001;
+						damage=0.23;
 					};
 					class Blood
 					{
@@ -194,7 +194,7 @@ class CfgVehicles
 				{
 					class Health
 					{
-						damage=0.5;
+						damage=0.23;
 					};
 					class Blood
 					{

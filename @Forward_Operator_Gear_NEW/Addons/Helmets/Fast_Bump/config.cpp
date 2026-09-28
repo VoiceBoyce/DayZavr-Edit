@@ -145,7 +145,7 @@ class CfgVehicles
 				{
 					class Health
 					{
-						damage=0.3;
+						damage=0.23;
 					};
 					class Blood
 					{
@@ -160,7 +160,7 @@ class CfgVehicles
 				{
 					class Health
 					{
-						damage=0.3;
+						damage=0.23;
 					};
 					class Blood
 					{
@@ -175,7 +175,7 @@ class CfgVehicles
 				{
 					class Health
 					{
-						damage=0.3;
+						damage=0.23;
 					};
 					class Blood
 					{
@@ -190,7 +190,7 @@ class CfgVehicles
 				{
 					class Health
 					{
-						damage=0.3;
+						damage=0.23;
 					};
 					class Blood
 					{

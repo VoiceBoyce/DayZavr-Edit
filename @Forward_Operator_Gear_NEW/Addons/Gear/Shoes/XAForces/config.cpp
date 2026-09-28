@@ -38,7 +38,7 @@ class CfgVehicles
 		};
 		itemSize[]={3,3};
 		weight=400;
-		varWetMax=0.40000001;
+		varWetMax=0.39000003;
 		heatIsolation=0.64999998;
 		repairableWithKits[]={5,2};
 		repairCosts[]={25,25};

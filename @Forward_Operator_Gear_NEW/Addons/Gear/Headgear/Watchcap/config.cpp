@@ -27,7 +27,7 @@ class CfgVehicles
 	{
 		scope=0;
 		displayName="Watch Cap";
-		descriptionShort="Штатная подшлемник Армии США, носится в холодную погоду. | Standard Issue US Army Watch Cap, typically worn in cold weather environments by soldiers in the field.";
+		descriptionShort="Штатная подшлемник Армии, носится в холодную погоду. | The standard Army helmet liner, worn in cold weather.";
 		model="\FOG_MOD\Gear\Headgear\Watchcap\FOG_Watchcap_G.p3d";
 		repairableWithKits[]={5,2};
 		repairCosts[]={30,25};

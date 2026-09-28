@@ -56,7 +56,7 @@ class CfgVehicles
 		itemSize[]={3,4};
 		itemsCargoSize[]={8,6};
 		quickBarBonus=1;
-		varWetMax=0.79000002;
+		varWetMax=0.2;
 		heatIsolation=0.69999999;
 		ragQuantity=4;
 		repairableWithKits[]={5,2};
