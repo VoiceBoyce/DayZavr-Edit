@@ -1,0 +1,19 @@
+{
+    "compress": {
+        "exclude": [
+        ],
+        "include": [
+            "\\.csv$"
+        ]
+    },
+    "headers": [
+        {
+            "name": "\n\n===================================================================\n\n\tPacker: PBO Tools v1.7.1\n\tWebsite: https://pbo.tools\n\tDiscord: https://discord.pbo.tools\n\tVersion: 0kLIzca84+9/UjuNosdqyhfb+zXqP3fYldiR/UchOcE=\n\tPrefix: tgk_russiansoldier_v2\n\n===================================================================\n\n",
+            "value": ""
+        },
+        {
+            "name": "prefix",
+            "value": "tgk_russiansoldier_v2"
+        }
+    ]
+}

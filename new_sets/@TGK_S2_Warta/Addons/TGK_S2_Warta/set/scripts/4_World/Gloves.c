@@ -1,0 +1,1 @@
+class TGK_S2_WartaGloves_Colorbase : Gloves_Base {};

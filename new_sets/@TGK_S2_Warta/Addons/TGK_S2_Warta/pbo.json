@@ -1,0 +1,19 @@
+{
+    "compress": {
+        "exclude": [
+        ],
+        "include": [
+            "\\.csv$"
+        ]
+    },
+    "headers": [
+        {
+            "name": "\n\n===================================================================\n\n\tPacker: PBO Tools v1.8.1\n\tWebsite: https://pbo.tools\n\tDiscord: https://discord.pbo.tools\n\tVersion: z8a4kmkhx4Ku3Ah0I+D+fRW02q/6Tb9+IagyP2X2Ax4=\n\tPrefix: tgk_s2_warta\n\n===================================================================\n\n",
+            "value": ""
+        },
+        {
+            "name": "prefix",
+            "value": "tgk_s2_warta"
+        }
+    ]
+}

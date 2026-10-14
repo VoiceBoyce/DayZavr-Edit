@@ -1,0 +1,448 @@
+class CfgPatches
+{
+	class TGK_SetComplete_EOD_Specialist
+	{
+		units[]={};
+		weapons[]={};
+		requiredVersion=1;
+		requiredAddons[]=
+		{
+			"DZ_Data",
+			"DZ_Characters",
+			"DZ_Characters_Vests"
+		};
+	};
+};
+class cfgVehicles
+{
+	class Clothing_Base;
+	class Clothing: Clothing_Base
+	{
+	};
+	class TGK_SetComplete_EOD_Specialist_Vest_Colorbase: Clothing
+	{
+		scope=0;
+		displayName="$STR_EOD_Specialist_Vest01";
+		descriptionShort="$STR_EOD_Specialist_Vest02";
+		model="SetComplete_EOD_Specialist\set\Vest\Vest_g.p3d";
+		inventorySlot[]=
+		{
+			"Vest"
+		};
+		itemInfo[]=
+		{
+			"Clothing",
+			"Vest"
+		};
+		weight=8000;
+		itemSize[]={5,5};
+		quickBarBonus=2;
+		displayWeight=1;
+		varWetMin=0.048999999;
+		varWetMax=0.34999999;
+		absorbency=0.40000001;
+		heatIsolation=0.34999999;
+		itemsCargoSize[]={7,4};
+		ragQuantity=3;
+		repairableWithKits[]={3,8};
+		repairCosts[]={75,50};
+		hiddenSelections[]=
+		{
+			"belt",
+			"belt_granads",
+			"bundle",
+			"clips",
+			"def_1",
+			"def_4_neck",
+			"def_5_ruka",
+			"granad",
+			"granade_strap",
+			"helmet_strap",
+			"karm",
+			"karm2",
+			"knife",
+			"knife_holster1",
+			"magazine",
+			"magazine_pouch1",
+			"magazine_pouch2",
+			"patch_ruka",
+			"pocket",
+			"racia_scotch",
+			"racia_strap",
+			"raciya",
+			"raciya1_2",
+			"raciya1_3",
+			"raciya1_4",
+			"radio",
+			"radio_holster",
+			"radio_pocket",
+			"rope",
+			"smoke_granad",
+			"vest"
+		};
+		class ClothingTypes
+		{
+			male="SetComplete_EOD_Specialist\set\Vest\Vest_m.p3d";
+			female="SetComplete_EOD_Specialist\set\Vest\Vest_m.p3d";
+		};
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health
+				{
+					hitpoints=350;
+					transferToAttachmentsCoef=0.5;
+					healthLevels[]=
+					{
+						
+						{
+							1,
+							
+							{
+								"SetComplete_EOD_Specialist\set\data\belt\Belt.rvmat",
+								"SetComplete_EOD_Specialist\set\data\belt_granads\Belt_granads.rvmat",
+								"SetComplete_EOD_Specialist\set\data\bundle\bundle.rvmat",
+								"SetComplete_EOD_Specialist\set\data\clips\clips.rvmat",
+								"SetComplete_EOD_Specialist\set\data\def_1\def_1.rvmat",
+								"SetComplete_EOD_Specialist\set\data\def_4_neck\def_4_neck.rvmat",
+								"SetComplete_EOD_Specialist\set\data\def_5_ruka\def_5_ruka.rvmat",
+								"SetComplete_EOD_Specialist\set\data\granad\granad.rvmat",
+								"SetComplete_EOD_Specialist\set\data\granade_strap\granade_strap.rvmat",
+								"SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap.rvmat",
+								"SetComplete_EOD_Specialist\set\data\knife_holster\knife_holster.rvmat",
+								"SetComplete_EOD_Specialist\set\data\karm2\karm2.rvmat",
+								"SetComplete_EOD_Specialist\set\data\knife\knife.rvmat",
+								"SetComplete_EOD_Specialist\set\data\knife_holster1\knife_holster1.rvmat",
+								"SetComplete_EOD_Specialist\set\data\magazine\magazine.rvmat",
+								"SetComplete_EOD_Specialist\set\data\magazine_pouch1\magazine_pouch1.rvmat",
+								"SetComplete_EOD_Specialist\set\data\magazine_pouch2\magazine_pouch2.rvmat",
+								"SetComplete_EOD_Specialist\set\data\patch_ruka\patch_ruka.rvmat",
+								"SetComplete_EOD_Specialist\set\data\pocket\pocket.rvmat",
+								"SetComplete_EOD_Specialist\set\data\racia_scotch\racia_scotch.rvmat",
+								"SetComplete_EOD_Specialist\set\data\racia_strap\racia_strap.rvmat",
+								"SetComplete_EOD_Specialist\set\data\raciya\raciya.rvmat",
+								"SetComplete_EOD_Specialist\set\data\raciya1_2\raciya1_2.rvmat",
+								"SetComplete_EOD_Specialist\set\data\raciya1_3\raciya1_3.rvmat",
+								"SetComplete_EOD_Specialist\set\data\raciya1_4\raciya1_4.rvmat",
+								"SetComplete_EOD_Specialist\set\data\radio\radio.rvmat",
+								"SetComplete_EOD_Specialist\set\data\radio_holster\radio_holster.rvmat",
+								"SetComplete_EOD_Specialist\set\data\radio_pocket\radio_pocket.rvmat",
+								"SetComplete_EOD_Specialist\set\data\rope\rope.rvmat",
+								"SetComplete_EOD_Specialist\set\data\smoke_granad\smoke_granad.rvmat",
+								"SetComplete_EOD_Specialist\set\data\vest\vest.rvmat"
+							}
+						},
+						
+						{
+							0.69999999,
+							
+							{
+								"SetComplete_EOD_Specialist\set\data\belt\Belt.rvmat",
+								"SetComplete_EOD_Specialist\set\data\belt_granads\Belt_granads.rvmat",
+								"SetComplete_EOD_Specialist\set\data\bundle\bundle.rvmat",
+								"SetComplete_EOD_Specialist\set\data\clips\clips.rvmat",
+								"SetComplete_EOD_Specialist\set\data\def_1\def_1.rvmat",
+								"SetComplete_EOD_Specialist\set\data\def_4_neck\def_4_neck.rvmat",
+								"SetComplete_EOD_Specialist\set\data\def_5_ruka\def_5_ruka.rvmat",
+								"SetComplete_EOD_Specialist\set\data\granad\granad.rvmat",
+								"SetComplete_EOD_Specialist\set\data\granade_strap\granade_strap.rvmat",
+								"SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap.rvmat",
+								"SetComplete_EOD_Specialist\set\data\knife_holster\knife_holster.rvmat",
+								"SetComplete_EOD_Specialist\set\data\karm2\karm2.rvmat",
+								"SetComplete_EOD_Specialist\set\data\knife\knife.rvmat",
+								"SetComplete_EOD_Specialist\set\data\knife_holster1\knife_holster1.rvmat",
+								"SetComplete_EOD_Specialist\set\data\magazine\magazine.rvmat",
+								"SetComplete_EOD_Specialist\set\data\magazine_pouch1\magazine_pouch1.rvmat",
+								"SetComplete_EOD_Specialist\set\data\magazine_pouch2\magazine_pouch2.rvmat",
+								"SetComplete_EOD_Specialist\set\data\patch_ruka\patch_ruka.rvmat",
+								"SetComplete_EOD_Specialist\set\data\pocket\pocket.rvmat",
+								"SetComplete_EOD_Specialist\set\data\racia_scotch\racia_scotch.rvmat",
+								"SetComplete_EOD_Specialist\set\data\racia_strap\racia_strap.rvmat",
+								"SetComplete_EOD_Specialist\set\data\raciya\raciya.rvmat",
+								"SetComplete_EOD_Specialist\set\data\raciya1_2\raciya1_2.rvmat",
+								"SetComplete_EOD_Specialist\set\data\raciya1_3\raciya1_3.rvmat",
+								"SetComplete_EOD_Specialist\set\data\raciya1_4\raciya1_4.rvmat",
+								"SetComplete_EOD_Specialist\set\data\radio\radio.rvmat",
+								"SetComplete_EOD_Specialist\set\data\radio_holster\radio_holster.rvmat",
+								"SetComplete_EOD_Specialist\set\data\radio_pocket\radio_pocket.rvmat",
+								"SetComplete_EOD_Specialist\set\data\rope\rope.rvmat",
+								"SetComplete_EOD_Specialist\set\data\smoke_granad\smoke_granad.rvmat",
+								"SetComplete_EOD_Specialist\set\data\vest\vest.rvmat"
+							}
+						},
+						
+						{
+							0.5,
+							
+							{
+								"SetComplete_EOD_Specialist\set\data\belt\Belt_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\belt_granads\Belt_granads_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\bundle\bundle_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\clips\clips.rvmat",
+								"SetComplete_EOD_Specialist\set\data\def_1\def_1_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\def_4_neck\def_4_neck_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\def_5_ruka\def_5_ruka_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\granad\granad_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\granade_strap\granade_strap_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\knife_holster\knife_holster_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\karm2\karm2_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\knife\knife_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\knife_holster1\knife_holster1_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\magazine\magazine_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\magazine_pouch1\magazine_pouch1_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\magazine_pouch2\magazine_pouch2_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\patch_ruka\patch_ruka_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\pocket\pocket_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\racia_scotch\racia_scotch_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\racia_strap\racia_strap_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\raciya\raciya_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\raciya1_2\raciya1_2_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\raciya1_3\raciya1_3_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\raciya1_4\raciya1_4_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\radio\radio_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\radio_holster\radio_holster_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\radio_pocket\radio_pocket_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\rope\rope_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\smoke_granad\smoke_granad_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\vest\vest_damage.rvmat"
+							}
+						},
+						
+						{
+							0.30000001,
+							
+							{
+								"SetComplete_EOD_Specialist\set\data\belt\Belt_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\belt_granads\Belt_granads_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\bundle\bundle_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\clips\clips.rvmat",
+								"SetComplete_EOD_Specialist\set\data\def_1\def_1_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\def_4_neck\def_4_neck_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\def_5_ruka\def_5_ruka_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\granad\granad_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\granade_strap\granade_strap_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\knife_holster\knife_holster_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\karm2\karm2_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\knife\knife_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\knife_holster1\knife_holster1_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\magazine\magazine_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\magazine_pouch1\magazine_pouch1_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\magazine_pouch2\magazine_pouch2_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\patch_ruka\patch_ruka_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\pocket\pocket_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\racia_scotch\racia_scotch_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\racia_strap\racia_strap_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\raciya\raciya_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\raciya1_2\raciya1_2_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\raciya1_3\raciya1_3_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\raciya1_4\raciya1_4_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\radio\radio_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\radio_holster\radio_holster_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\radio_pocket\radio_pocket_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\rope\rope_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\smoke_granad\smoke_granad_damage.rvmat",
+								"SetComplete_EOD_Specialist\set\data\vest\vest_damage.rvmat"
+							}
+						},
+						
+						{
+							0,
+							
+							{
+								"SetComplete_EOD_Specialist\set\data\belt\Belt_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\belt_granads\Belt_granads_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\bundle\bundle_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\clips\clips.rvmat",
+								"SetComplete_EOD_Specialist\set\data\def_1\def_1_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\def_4_neck\def_4_neck_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\def_5_ruka\def_5_ruka_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\granad\granad_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\granade_strap\granade_strap_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\knife_holster\knife_holster_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\karm2\karm2_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\knife\knife_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\knife_holster1\knife_holster1_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\magazine\magazine_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\magazine_pouch1\magazine_pouch1_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\magazine_pouch2\magazine_pouch2_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\patch_ruka\patch_ruka_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\pocket\pocket_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\racia_scotch\racia_scotch_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\racia_strap\racia_strap_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\raciya\raciya_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\raciya1_2\raciya1_2_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\raciya1_3\raciya1_3_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\raciya1_4\raciya1_4_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\radio\radio_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\radio_holster\radio_holster_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\radio_pocket\radio_pocket_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\rope\rope_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\smoke_granad\smoke_granad_destruct.rvmat",
+								"SetComplete_EOD_Specialist\set\data\vest\vest_destruct.rvmat"
+							}
+						}
+					};
+				};
+			};
+			class GlobalArmor
+			{
+				class Projectile
+				{
+					class Health
+					{
+						damage=0.30000001;
+					};
+					class Blood
+					{
+						damage=0.20999999;
+					};
+					class Shock
+					{
+						damage=0.30000001;
+					};
+				};
+				class Melee
+				{
+					class Health
+					{
+						damage=0.20999999;
+					};
+					class Blood
+					{
+						damage=0.20999999;
+					};
+					class Shock
+					{
+						damage=0.20999999;
+					};
+				};
+				class Infected
+				{
+					class Health
+					{
+						damage=0.20999999;
+					};
+					class Blood
+					{
+						damage=0.20999999;
+					};
+					class Shock
+					{
+						damage=0.20999999;
+					};
+				};
+				class FragGrenade
+				{
+					class Health
+					{
+						damage=0.20999999;
+					};
+					class Blood
+					{
+						damage=0.20999999;
+					};
+					class Shock
+					{
+						damage=0.20999999;
+					};
+				};
+			};
+		};
+		class AnimEvents
+		{
+			class SoundWeapon
+			{
+				class pickUpItem
+				{
+					soundSet="SmershVest_pickup_SoundSet";
+					id=797;
+				};
+				class drop
+				{
+					soundset="SmershVest_drop_SoundSet";
+					id=898;
+				};
+			};
+		};
+	};
+	class TGK_EOD_Specialist_Vest_Green: TGK_SetComplete_EOD_Specialist_Vest_Colorbase
+	{
+		scope=2;
+		hiddenSelectionsTextures[]=
+		{
+			"SetComplete_EOD_Specialist\set\data\belt\Belt_co.paa",
+			"SetComplete_EOD_Specialist\set\data\belt_granads\Belt_granads_co.paa",
+			"SetComplete_EOD_Specialist\set\data\bundle\bundle_co.paa",
+			"SetComplete_EOD_Specialist\set\data\clips\clips_co.paa",
+			"SetComplete_EOD_Specialist\set\data\def_1\def_1_co.paa",
+			"SetComplete_EOD_Specialist\set\data\def_4_neck\def_4_neck_co.paa",
+			"SetComplete_EOD_Specialist\set\data\def_5_ruka\def_5_ruka_co.paa",
+			"SetComplete_EOD_Specialist\set\data\granad\granad_co.paa",
+			"SetComplete_EOD_Specialist\set\data\granade_strap\granade_strap_co.paa",
+			"SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap_co.paa",
+			"SetComplete_EOD_Specialist\set\data\knife_holster\knife_holster_co.paa",
+			"SetComplete_EOD_Specialist\set\data\karm2\karm2_co.paa",
+			"SetComplete_EOD_Specialist\set\data\knife\knife_co.paa",
+			"SetComplete_EOD_Specialist\set\data\knife_holster1\knife_holster1_co.paa",
+			"SetComplete_EOD_Specialist\set\data\magazine\magazine_co.paa",
+			"SetComplete_EOD_Specialist\set\data\magazine_pouch1\magazine_pouch1_co.paa",
+			"SetComplete_EOD_Specialist\set\data\magazine_pouch2\magazine_pouch2_co.paa",
+			"SetComplete_EOD_Specialist\set\data\patch_ruka\patch_ruka_co.paa",
+			"SetComplete_EOD_Specialist\set\data\pocket\pocket_co.paa",
+			"SetComplete_EOD_Specialist\set\data\racia_scotch\racia_scotch_co.paa",
+			"SetComplete_EOD_Specialist\set\data\racia_strap\racia_strap_co.paa",
+			"SetComplete_EOD_Specialist\set\data\raciya\raciya_co.paa",
+			"SetComplete_EOD_Specialist\set\data\raciya1_2\raciya1_2_co.paa",
+			"SetComplete_EOD_Specialist\set\data\raciya1_3\raciya1_3_co.paa",
+			"SetComplete_EOD_Specialist\set\data\raciya1_4\raciya1_4_co.paa",
+			"SetComplete_EOD_Specialist\set\data\radio\radio_co.paa",
+			"SetComplete_EOD_Specialist\set\data\radio_holster\radio_holster_co.paa",
+			"SetComplete_EOD_Specialist\set\data\radio_pocket\radio_pocket_co.paa",
+			"SetComplete_EOD_Specialist\set\data\rope\rope_co.paa",
+			"SetComplete_EOD_Specialist\set\data\smoke_granad\smoke_granad_co.paa",
+			"SetComplete_EOD_Specialist\set\data\vest\vest_co.paa"
+		};
+	};
+	class TGK_EOD_Specialist_Vest_Black: TGK_SetComplete_EOD_Specialist_Vest_Colorbase
+	{
+		scope=2;
+		hiddenSelectionsTextures[]=
+		{
+			"SetComplete_EOD_Specialist\set\data\belt\Belt_BaO.paa",
+			"SetComplete_EOD_Specialist\set\data\belt_granads\Belt_granads_co.paa",
+			"SetComplete_EOD_Specialist\set\data\bundle\bundle_BaO.paa",
+			"SetComplete_EOD_Specialist\set\data\clips\clips_co.paa",
+			"SetComplete_EOD_Specialist\set\data\def_1\def_1_BaO.paa",
+			"SetComplete_EOD_Specialist\set\data\def_4_neck\def_4_neck_bao.paa",
+			"SetComplete_EOD_Specialist\set\data\def_5_ruka\def_5_ruka_bao.paa",
+			"SetComplete_EOD_Specialist\set\data\granad\granad_co.paa",
+			"SetComplete_EOD_Specialist\set\data\granade_strap\granade_strap_co.paa",
+			"SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap_Bao.paa",
+			"SetComplete_EOD_Specialist\set\data\knife_holster\knife_holster_co.paa",
+			"SetComplete_EOD_Specialist\set\data\karm2\karm2_Bao.paa",
+			"SetComplete_EOD_Specialist\set\data\knife\knife_co.paa",
+			"SetComplete_EOD_Specialist\set\data\knife_holster1\knife_holster1_Bao.paa",
+			"SetComplete_EOD_Specialist\set\data\magazine\magazine_co.paa",
+			"SetComplete_EOD_Specialist\set\data\magazine_pouch1\magazine_pouch1_Bao.paa",
+			"SetComplete_EOD_Specialist\set\data\magazine_pouch2\magazine_pouch2_Bao.paa",
+			"SetComplete_EOD_Specialist\set\data\patch_ruka\patch_ruka_co.paa",
+			"SetComplete_EOD_Specialist\set\data\pocket\pocket_Bao.paa",
+			"SetComplete_EOD_Specialist\set\data\racia_scotch\racia_scotch_co.paa",
+			"SetComplete_EOD_Specialist\set\data\racia_strap\racia_strap_co.paa",
+			"SetComplete_EOD_Specialist\set\data\raciya\raciya_co.paa",
+			"SetComplete_EOD_Specialist\set\data\raciya1_2\raciya1_2_co.paa",
+			"SetComplete_EOD_Specialist\set\data\raciya1_3\raciya1_3_co.paa",
+			"SetComplete_EOD_Specialist\set\data\raciya1_4\raciya1_4_co.paa",
+			"SetComplete_EOD_Specialist\set\data\radio\radio_co.paa",
+			"SetComplete_EOD_Specialist\set\data\radio_holster\radio_holster_co.paa",
+			"SetComplete_EOD_Specialist\set\data\radio_pocket\radio_pocket_Bao.paa",
+			"SetComplete_EOD_Specialist\set\data\rope\rope_Bao.paa",
+			"SetComplete_EOD_Specialist\set\data\smoke_granad\smoke_granad_co.paa",
+			"SetComplete_EOD_Specialist\set\data\vest\vest_Bao.paa"
+		};
+	};
+};

@@ -1,0 +1,1 @@
+class TGK_Burya_vest_Colorbase extends Vest_Base {};

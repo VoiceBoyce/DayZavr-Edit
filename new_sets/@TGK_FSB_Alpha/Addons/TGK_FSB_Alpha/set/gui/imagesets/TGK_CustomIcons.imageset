@@ -1,0 +1,73 @@
+ImageSetClass {
+ Name "TGK_CustomIcons"
+ RefSize 2048 2048
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "TGK_FSB_Alpha/set/gui/imagesets/TGK_Icons.edds"
+  }
+ }
+ Images {
+ }
+ Groups {
+  ImageSetGroupClass Icons {
+   Name "Icons"
+   Images {
+    ImageSetDefClass AbdominalProtection {
+     Name "AbdominalProtection"
+     Pos 0 0
+     Size 170 170
+     Flags 0
+    }
+    ImageSetDefClass Backpanel {
+     Name "Backpanel"
+     Pos 170 0
+     Size 170 170
+     Flags 0
+    }
+    ImageSetDefClass Backpouch {
+     Name "Backpouch"
+     Pos 340 0
+     Size 170 170
+     Flags 0
+    }
+    ImageSetDefClass Cover {
+     Name "Cover"
+     Pos 510 -1
+     Size 170 170
+     Flags 0
+    }
+    ImageSetDefClass DumpPouch {
+     Name "DumpPouch"
+     Pos 680 0
+     Size 170 170
+     Flags 0
+    }
+    ImageSetDefClass HeadPhones {
+     Name "HeadPhones"
+     Pos 850 0
+     Size 170 170
+     Flags 0
+    }
+    ImageSetDefClass IFAK {
+     Name "IFAK"
+     Pos 1020 0
+     Size 170 170
+     Flags 0
+    }
+    ImageSetDefClass MedPouch {
+     Name "MedPouch"
+     Pos 1190 0
+     Size 170 170
+     Flags 0
+    }
+    ImageSetDefClass SixPouch {
+     Name "SixPouch"
+     Pos 1360 0
+     Size 170 170
+     Flags 0
+    }
+   }
+  }
+ }
+}

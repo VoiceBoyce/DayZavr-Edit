@@ -1,0 +1,201 @@
+class CfgPatches
+{
+	class TGK_S2_Warta
+	{
+		units[]={};
+		weapons[]={};
+		requiredVersion=0.1;
+		requiredAddons[]=
+		{
+			"DZ_Characters"
+		};
+	};
+};
+class CfgVehicles
+{
+	class Clothing_Base;
+	class Clothing: Clothing_Base
+	{
+	};
+	class TGK_S2_WartaVest_ColorBase: Clothing
+	{
+		scope=0;
+		displayName="$STR_WartaVest_01";
+		descriptionShort="$STR_WartaVest_02";
+		model="TGK_S2_Warta\set\Vest\models\Vest_Warta_g.p3d";
+		inventorySlot[]=
+		{
+			"Vest"
+		};
+		itemInfo[]=
+		{
+			"Clothing",
+			"Vest"
+		};
+		attachments[]=
+		{
+			"WartaPouches1"
+		};
+		weight=6000;
+		itemSize[]={5,5};
+		itemsCargoSize[]={10,2};
+		displayWeight=1;
+		varWetMin=0.048999999;
+		varWetMax=0.34999999;
+		absorbency=0.40000001;
+		heatIsolation=0.34999999;
+		repairableWithKits[]={2,3};
+		repairCosts[]={75,50};
+		ragQuantity=1;
+		hiddenSelections[]=
+		{
+			"camo"
+		};
+		class ClothingTypes
+		{
+			male="TGK_S2_Warta\set\Vest\models\Vest_Warta_m.p3d";
+			female="TGK_S2_Warta\set\Vest\models\Vest_Warta_m.p3d";
+		};
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health
+				{
+					hitpoints=450;
+					transferToAttachmentsCoef=0.5;
+					healthLevels[]=
+					{
+						
+						{
+							1,
+							
+							{
+								"TGK_S2_Warta\set\Vest\data\Vest.rvmat"
+							}
+						},
+						
+						{
+							0.89999998,
+							
+							{
+								"TGK_S2_Warta\set\Vest\data\Vest.rvmat"
+							}
+						},
+						
+						{
+							0.40000001,
+							
+							{
+								"TGK_S2_Warta\set\Vest\data\Vest_damage.rvmat"
+							}
+						},
+						
+						{
+							0.30000001,
+							
+							{
+								"TGK_S2_Warta\set\Vest\data\Vest_damage.rvmat"
+							}
+						},
+						
+						{
+							0,
+							
+							{
+								"TGK_S2_Warta\set\Vest\data\Vest_destruct.rvmat"
+							}
+						}
+					};
+				};
+			};
+			class GlobalArmor
+			{
+				class Projectile
+				{
+					class Health
+					{
+						damage=0.34999999;
+					};
+					class Blood
+					{
+						damage=0.2;
+					};
+					class Shock
+					{
+						damage=0.44999999;
+					};
+				};
+				class Melee
+				{
+					class Health
+					{
+						damage=0.25;
+					};
+					class Blood
+					{
+						damage=0.15000001;
+					};
+					class Shock
+					{
+						damage=0.40000001;
+					};
+				};
+				class Infected
+				{
+					class Health
+					{
+						damage=0.25;
+					};
+					class Blood
+					{
+						damage=0.15000001;
+					};
+					class Shock
+					{
+						damage=0.40000001;
+					};
+				};
+				class FragGrenade
+				{
+					class Health
+					{
+						damage=0.40000001;
+					};
+					class Blood
+					{
+						damage=0.40000001;
+					};
+					class Shock
+					{
+						damage=0.40000001;
+					};
+				};
+			};
+		};
+		class AnimEvents
+		{
+			class SoundWeapon
+			{
+				class pickUpItem
+				{
+					soundSet="SmershVest_pickup_SoundSet";
+					id=797;
+				};
+				class drop
+				{
+					soundset="SmershVest_drop_SoundSet";
+					id=898;
+				};
+			};
+		};
+	};
+	class TGK_S2_WartaVest: TGK_S2_WartaVest_ColorBase
+	{
+		scope=2;
+		hiddenSelectionsTextures[]=
+		{
+			"TGK_S2_Warta\set\Vest\data\Vest_co.paa"
+		};
+	};
+};

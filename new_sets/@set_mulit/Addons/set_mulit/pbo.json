@@ -1,0 +1,18 @@
+{
+    "compress": {
+        "exclude": [
+        ],
+        "include": [
+        ]
+    },
+    "headers": [
+        {
+            "name": "\n\n===================================================================\n\n\tPacker: PBO Tools v1.8.1\n\tWebsite: https://pbo.tools\n\tDiscord: https://discord.pbo.tools\n\tVersion: kHtZ0lEgMfwpHdaRlseT3d+HFIDu8TjnvkiSc6YvCUA=\n\tPrefix: set_mulit\n\n===================================================================\n\n",
+            "value": ""
+        },
+        {
+            "name": "prefix",
+            "value": "set_mulit"
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "compress": {
+        "exclude": [
+        ],
+        "include": [
+            "\\.csv$"
+        ]
+    },
+    "headers": [
+        {
+            "name": "\n\n===================================================================\n\n\tPacker: PBO Tools v1.8.1\n\tWebsite: https://pbo.tools\n\tDiscord: https://discord.pbo.tools\n\tVersion: e7bxZSBsq8b7QK5rJxHdw4hld1yoOfGc8RC4NzVRtv0=\n\tPrefix: sm_set_rabbit\n\n===================================================================\n\n",
+            "value": ""
+        },
+        {
+            "name": "prefix",
+            "value": "sm_set_rabbit"
+        }
+    ]
+}

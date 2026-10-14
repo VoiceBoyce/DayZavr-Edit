@@ -1,0 +1,23 @@
+{
+    "compress": {
+        "exclude": [
+        ],
+        "include": [
+            "\\.csv$"
+        ]
+    },
+    "headers": [
+        {
+            "name": "prefix",
+            "value": "set_moto"
+        },
+        {
+            "name": "Mikero",
+            "value": "DePbo.dll.9.45"
+        },
+        {
+            "name": "version",
+            "value": "24050220"
+        }
+    ]
+}

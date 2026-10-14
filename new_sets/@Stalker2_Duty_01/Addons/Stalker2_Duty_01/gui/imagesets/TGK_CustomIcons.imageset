@@ -1,0 +1,55 @@
+ImageSetClass {
+ Name "TGK_CustomIcons"
+ RefSize 2048 2048
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "Stalker2_Duty_01/gui/imagesets/TGK_Icons.edds"
+  }
+ }
+ Images {
+ }
+ Groups {
+  ImageSetGroupClass Icons {
+   Name "Icons"
+   Images {
+    ImageSetDefClass Fonarik {
+     Name "Fonarik"
+     Pos 0 0
+     Size 170 170
+     Flags 0
+    }
+    ImageSetDefClass Leg_small_pouches {
+     Name "Leg_small_pouches"
+     Pos 170 0
+     Size 170 170
+     Flags 0
+    }
+    ImageSetDefClass MapPouch {
+     Name "MapPouch"
+     Pos 340 0
+     Size 170 170
+     Flags 0
+    }
+    ImageSetDefClass PNV {
+     Name "PNV"
+     Pos 510 -1
+     Size 170 170
+     Flags 0
+    }
+    ImageSetDefClass Small_Pouch {
+     Name "Small_Pouch"
+     Pos 680 0
+     Size 170 170
+     Flags 0
+    }
+    ImageSetDefClass Small_Pouch_System {
+     Name "Small_Pouch_System"
+     Pos 850 0
+     Size 170 170
+     Flags 0
+    }
+   }
+  }
+ }
+}

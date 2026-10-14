@@ -1,0 +1,19 @@
+{
+    "compress": {
+        "exclude": [
+        ],
+        "include": [
+            "\\.csv$"
+        ]
+    },
+    "headers": [
+        {
+            "name": "\n\n===================================================================\n\n\tPacker: PBO Tools v1.8.1\n\tWebsite: https://pbo.tools\n\tDiscord: https://discord.pbo.tools\n\tVersion: dBspOtP3SlHUmLOENGcDD1kNgdxqq9i/6xVjJV1ra30=\n\tPrefix: stalker2_monolith_02\n\n===================================================================\n\n",
+            "value": ""
+        },
+        {
+            "name": "prefix",
+            "value": "stalker2_monolith_02"
+        }
+    ]
+}

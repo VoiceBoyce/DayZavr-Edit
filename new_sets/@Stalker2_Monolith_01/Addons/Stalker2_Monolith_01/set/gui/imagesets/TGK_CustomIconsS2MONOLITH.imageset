@@ -1,0 +1,37 @@
+ImageSetClass {
+ Name "TGK_CustomIconsS2MONOLITH"
+ RefSize 1024 1024
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "Stalker2_Monolith_01/set/gui/imagesets/TGK_Icons.edds"
+  }
+ }
+ Images {
+ }
+ Groups {
+  ImageSetGroupClass Icons {
+   Name "Icons"
+   Images {
+    ImageSetDefClass MagPouch {
+     Name "MagPouch"
+     Pos 0 0
+     Size 170 170
+     Flags 0
+    }
+    ImageSetDefClass LegPouch {
+     Name "LegPouch"
+     Pos 170 0
+     Size 170 170
+     Flags 0
+    }
+    ImageSetDefClass GranadePouch {
+     Name "GranadePouch"
+     Pos 340 0
+     Size 170 170
+     Flags 0
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,1 @@
+class SM_Rabbit_Boots_ColorBase extends Shoes_Base {};

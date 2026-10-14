@@ -1,0 +1,131 @@
+class CfgPatches {
+	class Vp_SET22 {
+		units[] = {};
+		weapons[] = {};
+		requiredVersion = 0.1;
+		requiredAddons[] = {"DZ_Data", "DZ_Characters", "DZ_Scripts"};
+	};
+};
+
+class cfgVehicles {
+	class Clothing_Base;
+	class Clothing : Clothing_Base {};
+	
+	class Vp_Set22_cap_ColorBase : Clothing {
+		scope = 0;
+		displayName = "$STR_set_DEMON_cap";
+		descriptionShort = "";
+		model = "\set_demon\set\cap\model\cap_g.p3d";
+		attachments[] = {};
+		inventorySlot[] = {"Headgear"};
+		simulation = "clothing";
+		vehicleClass = "Clothing";
+		itemInfo[] = {"Clothing", "Helmet"};
+		ragQuantity = 6;
+		quickBarBonus = 2;
+		weight = 310;
+		itemSize[] = {3, 3};
+		varWetMax = 0.05;
+		heatIsolation = 0.5;
+		repairableWithKits[] = {3, 8};
+		repairCosts[] = {75.0, 50.0};
+		hiddenSelections[] = {"cap"};
+		headSelectionsToHide[] = {"Clipping_Balaclava"};
+		
+		class ClothingTypes {
+			male = "\set_demon\set\cap\model\cap_mf.p3d";
+			female = "\set_demon\set\cap\model\cap_mf.p3d";
+		};
+		
+		class DamageSystem {
+			class GlobalHealth {
+				class Health {
+					hitpoints = 500;
+					transferToAttachmentsCoef = 0.5;
+					healthLevels[] = {{1.0, {"\set_demon\set\cap\data\cap.rvmat"}},
+									 {0.7, {"\set_demon\set\cap\data\cap.rvmat"}},
+									 {0.5, {"\set_demon\set\cap\data\cap_damage.rvmat"}},
+									 {0.3, {"\set_demon\set\cap\data\cap_damage.rvmat"}},
+									 {0.0, {"\set_demon\set\cap\data\cap_destruct.rvmat"}}};
+				};
+			};
+			
+			class GlobalArmor {
+				class Projectile {
+					class Health {
+						damage = 0.85;
+					};
+					
+					class Blood {
+						damage = 0.8;
+					};
+					
+					class Shock {
+						damage = 0.8;
+					};
+				};
+				
+				class Melee {
+					class Health {
+						damage = 0.85;
+					};
+					
+					class Blood {
+						damage = 0.8;
+					};
+					
+					class Shock {
+						damage = 0.8;
+					};
+				};
+				
+				class Infected {
+					class Health {
+						damage = 0.85;
+					};
+					
+					class Blood {
+						damage = 0.8;
+					};
+					
+					class Shock {
+						damage = 0.8;
+					};
+				};
+				
+				class FragGrenade {
+					class Health {
+						damage = 0.2;
+					};
+					
+					class Blood {
+						damage = 0.2;
+					};
+					
+					class Shock {
+						damage = 0.2;
+					};
+				};
+			};
+		};
+		
+		class AnimEvents {
+			class SoundWeapon {
+				class pickUpItem {
+					soundSet = "Shirt_pickup_SoundSet";
+					id = 797;
+				};
+				
+				class drop {
+					soundset = "Shirt_drop_SoundSet";
+					id = 898;
+				};
+			};
+		};
+	};
+	
+	class Vp_Set22_CAP_Red : Vp_Set22_cap_ColorBase {
+		scope = 2;
+		hiddenSelectionsTextures[] = {"\set_demon\set\cap\data\cap_co.paa"};
+	};
+};
