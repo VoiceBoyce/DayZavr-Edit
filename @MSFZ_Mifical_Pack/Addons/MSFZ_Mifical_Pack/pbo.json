@@ -1,0 +1,23 @@
+{
+    "compress": {
+        "exclude": [
+        ],
+        "include": [
+            "\\.csv$"
+        ]
+    },
+    "headers": [
+        {
+            "name": "prefix",
+            "value": "MSFZ_Mifical_Pack"
+        },
+        {
+            "name": "product",
+            "value": "dayz ugc"
+        },
+        {
+            "name": "version",
+            "value": "1"
+        }
+    ]
+}
