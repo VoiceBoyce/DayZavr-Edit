@@ -1,0 +1,18 @@
+ImageSetClass {
+ Name "drl_craft_recipemanu_medical"
+ RefSize 1054 634
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "DRL_CraftMenu/UI/data/recipemanu_medical.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass recipemanu_medical {
+   Name "recipemanu_medical"
+   Pos 0 0
+   Size 1054 634
+   Flags 0
+  }
+ }
+}

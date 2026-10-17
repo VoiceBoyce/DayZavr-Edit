@@ -1,0 +1,86 @@
+{
+ "ActionFillBottleBaseCB": {
+  "msg": "Obsolete(\"1.30: replaced by ActionObtainLiquidBaseCB\")",
+  "at": "4_world/classes/useractionscomponent/actions/continuous/actionfillbottlebase.c:2"
+ },
+ "ActionFillBottleBase": {
+  "msg": "Obsolete(\"1.30: replaced by class ActionObtainLiquidBase\")",
+  "at": "4_world/classes/useractionscomponent/actions/continuous/actionfillbottlebase.c:28"
+ },
+ "ActionCarHornBase": {
+  "msg": "Obsolete(\"replaced by ActionVehicleHornBase\")",
+  "at": "4_world/classes/useractionscomponent/actions/continuous/vehicles/actioncarhorn.c:1"
+ },
+ "ActionCarHornShortCB": {
+  "msg": "Obsolete(\"replaced by ActionVehicleHornShortCB\")",
+  "at": "4_world/classes/useractionscomponent/actions/continuous/vehicles/actioncarhorn.c:66"
+ },
+ "ActionCarHornShort": {
+  "msg": "Obsolete(\"replaced by ActionVehicleHornShort\")",
+  "at": "4_world/classes/useractionscomponent/actions/continuous/vehicles/actioncarhorn.c:69"
+ },
+ "ActionCarHornLong": {
+  "msg": "Obsolete(\"replaced by ActionVehicleHornLong\")",
+  "at": "4_world/classes/useractionscomponent/actions/continuous/vehicles/actioncarhorn.c:213"
+ },
+ "ActionBuildShelter": {
+  "msg": "Obsolete(\"1.30: driven by ActionBuildPart\")",
+  "at": "4_world/classes/useractionscomponent/actions/interact/actionbuildshelter.c:1"
+ },
+ "ActionWashHandsWaterOneCB": {
+  "msg": "Obsolete(\"1.30: Not used!\")",
+  "at": "4_world/classes/useractionscomponent/actions/interact/actionwashhandswaterone.c:2"
+ },
+ "ActionWashHandsWaterOne": {
+  "msg": "Obsolete(\"1.30: Not used and not registered in action constructor!\")",
+  "at": "4_world/classes/useractionscomponent/actions/interact/actionwashhandswaterone.c:11"
+ },
+ "ActionWashHandsWellOneCB": {
+  "msg": "Obsolete(\"1.30: Not used!\")",
+  "at": "4_world/classes/useractionscomponent/actions/interact/actionwashhandswellone.c:2"
+ },
+ "ActionWashHandsWellOne": {
+  "msg": "Obsolete(\"1.30: Not used and not registered in action constructor!\")",
+  "at": "4_world/classes/useractionscomponent/actions/interact/actionwashhandswellone.c:11"
+ },
+ "ActionWashHandsItem": {
+  "msg": "Obsolete(\"1.30: Not used and not registered in action constructor!\")",
+  "at": "4_world/classes/useractionscomponent/actions/singleuse/actionwashhandsitem.c:1"
+ },
+ "CCTWaterSurface": {
+  "msg": "Obsolete(\"1.30: replaced by CCTLiquid\")",
+  "at": "4_world/classes/useractionscomponent/targetconditionscomponents/cctwatersurface.c:2"
+ },
+ "CCTWaterSurfaceEx": {
+  "msg": "Obsolete(\"1.30: replaced by CCTLiquid\")",
+  "at": "4_world/classes/useractionscomponent/targetconditionscomponents/cctwatersurface.c:59"
+ },
+ "SurrenderDummyItem": {
+  "msg": "Obsolete(\"1.30: no replacement - no longer in use\")",
+  "at": "4_world/entities/itembase/surrenderdummyitem.c:1"
+ },
+ "CivilianSedanFrontLight": {
+  "msg": "Obsolete(\"use VehicleLightBase and VehicleLightProfileBase instead\")",
+  "at": "4_world/entities/scriptedlightbase/spotlightbase/carlightbase/civiliansedanfrontlight.c:1"
+ },
+ "Hatchback_02FrontLight": {
+  "msg": "Obsolete(\"use VehicleLightBase and VehicleLightProfileBase instead\")",
+  "at": "4_world/entities/scriptedlightbase/spotlightbase/carlightbase/hatchback_02frontlight.c:1"
+ },
+ "Offroad_02FrontLight": {
+  "msg": "Obsolete(\"use VehicleLightBase and VehicleLightProfileBase instead\")",
+  "at": "4_world/entities/scriptedlightbase/spotlightbase/carlightbase/offroad_02frontlight.c:1"
+ },
+ "OffroadHatchbackFrontLight": {
+  "msg": "Obsolete(\"use VehicleLightBase and VehicleLightProfileBase instead\")",
+  "at": "4_world/entities/scriptedlightbase/spotlightbase/carlightbase/offroadhatchbackfrontlight.c:1"
+ },
+ "Sedan_02FrontLight": {
+  "msg": "Obsolete(\"use VehicleLightBase and VehicleLightProfileBase instead\")",
+  "at": "4_world/entities/scriptedlightbase/spotlightbase/carlightbase/sedan_02frontlight.c:1"
+ },
+ "Truck_01FrontLight": {
+  "msg": "Obsolete(\"use VehicleLightBase and VehicleLightProfileBase instead\")",
+  "at": "4_world/entities/scriptedlightbase/spotlightbase/carlightbase/truck_01frontlight.c:1"
+ }
+}

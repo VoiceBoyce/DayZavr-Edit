@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<modded_inputs>
+	<inputs>
+		<actions>
+			<input name="UAIntUifDemo" loc="STR_INT_UIF_INPUT_DEMO"/>
+		</actions>
+		<sorting name="int_uif" loc="STR_INT_UIF_INPUT_GROUP">
+			<input name="UAIntUifDemo"/>
+		</sorting>
+	</inputs>
+	<preset>
+		<input name="UAIntUifDemo">
+			<btn name="kLControl">
+				<btn name="kF10"/>
+			</btn>
+		</input>
+	</preset>
+</modded_inputs>

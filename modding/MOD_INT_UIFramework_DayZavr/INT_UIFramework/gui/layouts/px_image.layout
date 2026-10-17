@@ -1,0 +1,12 @@
+ImageWidgetClass Image {
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ position 0 0
+ size 10 10
+ mode blend
+ "src alpha" 1
+ stretch 1
+ ignorepointer 1
+}

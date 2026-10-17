@@ -1,1 +1,0 @@
-class TGK_S2_WartaBoots_Colorbase : Shoes_Base {};

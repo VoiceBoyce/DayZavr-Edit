@@ -1,0 +1,45 @@
+FrameWidgetClass IufList {
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ position 0 0
+ size 1 1
+ {
+  ScrollWidgetClass Scroll {
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0 0
+   size 1 1
+   style blank
+   "Scrollbar V" 1
+   clipchildren 1
+   {
+    FrameWidgetClass Rows {
+     hexactpos 0
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     position 0 0
+     size 1 10
+    }
+   }
+  }
+  TextWidgetClass Empty {
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0 0
+   size 1 1
+   text ""
+   font "gui/fonts/sdf_MetronBook24"
+   "text valign" center
+   "text halign" center
+   "exact text" 1
+   ignorepointer 1
+  }
+ }
+}

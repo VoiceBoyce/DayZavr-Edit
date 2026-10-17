@@ -1,0 +1,18 @@
+ImageSetClass {
+ Name "drl_craft_ak47u"
+ RefSize 75 75
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "DRL_CraftMenu/UI/data/ak47u.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass ak47u {
+   Name "ak47u"
+   Pos 0 0
+   Size 75 75
+   Flags 0
+  }
+ }
+}

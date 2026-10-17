@@ -1,1 +1,0 @@
-class TGK_FSB_ALPHA_Helmet_Black extends Mich2001Helmet {};

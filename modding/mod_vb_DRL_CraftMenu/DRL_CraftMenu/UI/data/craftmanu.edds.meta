@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{E787E194ABC7139B}DRL_CraftMenu/UI/data/craftmanu.edds"
+ Author "win-hv5vr6npefg"
+ ChangeDate 69022514
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "craftmanu.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

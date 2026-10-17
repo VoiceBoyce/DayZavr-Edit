@@ -1,0 +1,18 @@
+ImageSetClass {
+ Name "drl_craft_backward_time"
+ RefSize 75 75
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "DRL_CraftMenu/UI/data/backward-time.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass backward_time {
+   Name "backward_time"
+   Pos 0 0
+   Size 75 75
+   Flags 0
+  }
+ }
+}

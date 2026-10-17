@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{3D3741343DC8A2AD}DRL_CraftMenu/UI/fonts/MouseMemoirs.edds"
+ Author "win-hv5vr6npefg"
+ ChangeDate -956615912
+ Configurations {
+  TGAResourceClass PC {
+   SourceFile "MouseMemoirs.tga"
+  }
+  TGAResourceClass XBOX_ONE : PC {
+  }
+  TGAResourceClass PS4 : PC {
+  }
+  TGAResourceClass LINUX : PC {
+  }
+ }
+}

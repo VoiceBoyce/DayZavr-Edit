@@ -1,0 +1,94 @@
+# Process gates: negative fixtures and promoted rules
+
+Extracted from `SKILL.md` (cut 3, 2026-08-15). Here lives the DETAIL; the short
+statement and when to read this are in the `## LESSONS ARCHIVE` index of SKILL.md.
+Nothing in this file is superseded: they are active lessons, ordered by topic
+instead of by date.
+
+---
+
+## An import gate rule is not deliverable without a negative fixture (SP-096, added 2026-07-27)
+
+SP-091 established the method rule: calibrate every gate rule against a model that WORKS. That is
+necessary and NOT sufficient. The LFHeli OH-1 gates were calibrated against a good reference and
+still shipped a gate that passed the broken model, failed the good one, and accepted absurd input.
+An adversarial review with in-memory mutation took them apart in one pass:
+
+- 12 proxies displaced by 100/200/300 m -> **PASS**. The distance rule existed and fired, but it
+  emitted INFO, and the verdict counted only FAIL.
+- 30.419 faces repointed to a texture that does not exist -> **PASS**, with zero findings naming it.
+  The rule walked the inventory looking for unreferenced files, never the reverse direction.
+- The "corrected" reference fixture itself carried `dot(geometric, stored) = -1.0` on 24 of its 48
+  proxy vertices - the exact defect SP-093 is about - and the suite asserted it must PASS.
+- The suite advertised as "11 tests green" was 7 tests with 4 red, and could not even start from the
+  official layout because it pointed at a directory that did not exist there.
+
+RULES for any model-import gate:
+
+1. **Every rule ships with TWO fixtures, both executed by the suite**: a positive (the good
+   reference AND the current clean model both pass) and a **negative mutant** built in memory from a
+   good model with the exact defect the rule claims to detect, which the rule MUST fail. A rule
+   without a mutant that makes it fail is not deliverable - that is the hole every false PASS above
+   came through.
+2. **No INFO, no WARN inside the verdict.** If it should block, it is a FAIL; if it should not, it
+   is a diagnostic print and stays out of the verdict and the exit code. A severity that cannot
+   change the outcome is a rule that does not exist.
+3. **Regenerate the reference fixture and verify it against the rules it is supposed to certify.**
+   A fixture is an artifact like any other; it rots, and a corrupt one converts the whole suite into
+   theatre.
+4. **Prefer few solid rules to many plausible ones.** The rebuild kept three - proxy-normal
+   coherence, referenced-texture existence, finite UVs - each with its mutant, and that suite is
+   worth more than the twelve rules it replaced.
+5. **A rule whose threshold is a bare literal is a smell.** Derive it from measurement on the good
+   case and leave the number and its derivation in the code.
+6. **When a gate change makes a previously green tree go red, fix the RULE or accept the finding -
+   never re-baseline the expected value to make it pass.** Deciding between the two is the user's
+   call, not implementation.
+
+Origin: LFHeli OH-1 2026-07-27, R21 dual (Codex + Claude subagent). The rebuilt gate lives at
+`LFHeli_dev\tools\import_gates_v2\`; the retired one at `tools\import_gates_RETIRED_20260726\` as a
+negative reference.
+
+## Rules promoted from lessons corpus (added 2026-07-27)
+
+Promoted from `AI/20_Knowledge/lessons-learned.md` so that they arrive via trigger instead
+of depending on someone remembering to look them up. Each rule cites its originating `LL-NNN`;
+the full entry (symptom, origin, evidence) lives there. Do not remove the citation: the
+`lessons-index.md` index detects promotion by searching for that reference inside skills.
+
+- **LL-076** — Before deferring a feature, classify the severity of its absence and validate the minimums required by the engine. Every `CarScript` must include at least `DamageSystem.GlobalHealth`; its absence can kill the process even if damage is a later feature.
+- **LL-172** — When facing black or see-through panels, first decode the deployed `_co` and measure dark pixels. If the texture is clean, treat the symptom as winding and require an in-game capture before flipping regions.
+
+## Match transformed data by identity, never rounded position (SP-163, added 2026-08-31)
+
+A glTF/FBX seam can hold several source vertices at the same position with different
+normal and UV values. Nearest/rounded-position matching can select the wrong twin
+and report 180° normal drift or UV drift of 1.0 on an unchanged mesh. Carry the
+source vertex/primitive identity through the operation. Before trusting the gate,
+run source against itself through the same correspondence and require approximately
+zero residual.
+
+## Copy the whole lifecycle of a paired mechanism (SP-206, added 2026-08-31)
+
+Before adopting a mechanism from a working reference, enumerate every call site.
+Paired state (`SetDisabled`, active input excludes, focus, active flags) is usually
+set on the happy path and cleared across normal exit, force-exit, watchdog, abort
+and rejected entry. Half an adoption creates the same lock on the least-tested
+path. Track ownership with a dedicated flag, make cleanup idempotent, and invoke it
+from every transition out of the state.
+
+## A control calibrated from the candidate is circular (SP-254, added 2026-08-31)
+
+A known-good artifact is not an independent control if the axis map, orientation or
+measurement chain used to read it was calibrated from the candidate. Derive the
+instrument convention independently and require an asymmetric witness that changes
+under the defect. Repeating the same circular chain across more controls does not
+add evidence.
+
+## Every executable gate has three outcomes (SP-294, added 2026-08-31)
+
+Reserve exit `0` for `PASS`, `1` for a confirmed product/contract defect, and `2`
+for `COULD_NOT_INSPECT`. Missing or wrong-format input, parser/import/tool failure,
+an absent report, or a missing target row is state 2. A deliberate product mutant
+must produce 1, and an unreadable-input fixture must produce 2. Never treat state 2
+as PASS or as evidence that product geometry or configuration needs repair.

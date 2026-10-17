@@ -1,0 +1,18 @@
+ImageSetClass {
+ Name "drl_craft_button_def"
+ RefSize 250 64
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "DRL_CraftMenu/UI/data/button_def.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass button_def {
+   Name "button_def"
+   Pos 0 0
+   Size 250 64
+   Flags 0
+  }
+ }
+}

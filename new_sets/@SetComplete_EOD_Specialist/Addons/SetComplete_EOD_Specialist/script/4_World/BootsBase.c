@@ -1,1 +1,0 @@
-class TGK_SetComplete_EOD_Specialist_Boots_Colorbase : Shoes_Base {};

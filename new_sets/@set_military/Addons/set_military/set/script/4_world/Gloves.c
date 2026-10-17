@@ -1,1 +1,0 @@
-class Vp_SET19_Gloves_ColorBase extends Gloves_Base {};

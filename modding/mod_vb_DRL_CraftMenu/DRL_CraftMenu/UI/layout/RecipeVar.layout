@@ -1,0 +1,288 @@
+ButtonWidgetClass RecipesDopButton {
+ size 100 100
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ style Empty
+ {
+  PanelWidgetClass RecipesDopItemPanelWidget {
+   ignorepointer 1
+   color 0.098 0.098 0.098 0.745
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   style rover_sim_colorable
+   {
+    PanelWidgetClass RecipesDopPanelW {
+     ignorepointer 1
+     color 0.149 0.133 0.125 1
+     position 0 0
+     size 1 1
+     halign center_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     style dashed
+    }
+   }
+  }
+  ImageWidgetClass RecipesImagePreview {
+   ignorepointer 1
+   position 0 0
+   size 66 66
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+  }
+  ItemPreviewWidgetClass RecipesItemPreview {
+   ignorepointer 1
+   position 0 0
+   size 66 66
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+  }
+  ButtonWidgetClass InfoRecipesDopButton {
+   position 1 1
+   size 20 20
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style Empty
+   {
+    ImageWidgetClass InfoRecipesDopIcon {
+     ignorepointer 1
+     size 18 18
+     halign center_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     imageTexture "{4E81B7A9655BA9E3}DRL_CraftMenu/UI/data/info.edds"
+     mode blend
+     "src alpha" 1
+     "clamp mode" wrap
+     "stretch mode" stretch_w_h
+     filter 1
+    }
+   }
+  }
+  CheckBoxWidgetClass RecipesDopCheckBox {
+   color 0.855 0.455 0.38 1
+   position 1 1
+   size 18 18
+   halign right_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style NewStyle
+  }
+  ImageWidgetClass RecipesDopLockIcon {
+   visible 0
+   ignorepointer 1
+   color 0.906 0.906 0.906 1
+   position 1 1
+   size 18 18
+   halign right_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   imageTexture "{BA00A0469BBA9806}DRL_CraftMenu/UI/data/lock1.edds"
+   mode blend
+   "src alpha" 1
+   "clamp mode" wrap
+   "stretch mode" stretch_w_h
+   filter 1
+  }
+  PanelWidgetClass VarSelectCraftPanel {
+   ignorepointer 1
+   position 0 3
+   size 92 15
+   halign center_ref
+   valign bottom_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   {
+    ScrollWidgetClass VarSelectCraftScroll {
+     ignorepointer 1
+     position 0 4
+     size 1 25
+     halign center_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     "Scrollbar H" 1
+     {
+      GridSpacerWidgetClass VarSelectCraftGridSpacer {
+       ignorepointer 1
+       size 1 16
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       Padding 1
+       Margin 1
+       "Size To Content H" 1
+       content_valign center
+       Columns 20
+       Rows 1
+       {
+        ButtonWidgetClass VarSelectCraftButton {
+         size 15 15
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style Empty
+         {
+          PanelWidgetClass VarSelectCraftP {
+           ignorepointer 1
+           color 0.753 0.741 0.741 0.235
+           size 1 1
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           style dashed
+          }
+          TextWidgetClass VarSelectCraftNumber {
+           ignorepointer 1
+           size 1 1
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           text "1"
+           font "gui/fonts/metron-bold14"
+           "exact text" 1
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+  PanelWidgetClass QuantityNumberPanel {
+   ignorepointer 1
+   position 2 0
+   size 18 48
+   halign right_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   {
+    WrapSpacerWidgetClass QuantityNumberWrapSpacer {
+     ignorepointer 1
+     color 0.216 0.216 0.216 1
+     size 1 1
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     style DayZDefaultPanelLeft
+     Padding 0
+     Margin 0
+     "Size To Content H" 1
+     content_halign center
+     content_valign center
+     {
+      PanelWidgetClass PanelWidget0 {
+       ignorepointer 1
+       color 0.024 0.663 0.404 0.447
+       size 1 0.33
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        ButtonWidgetClass MinusQuantityNumberButton {
+         color 1 1 1 0.706
+         size 1 1
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         style Empty
+         text "-"
+         font "gui/fonts/metron16"
+        }
+       }
+      }
+      TextWidgetClass QuantityNumberText {
+       ignorepointer 1
+       size 1 0.33
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       text "1"
+       font "gui/fonts/metron-bold16"
+       "exact text" 1
+       "text halign" center
+       "text valign" center
+      }
+      PanelWidgetClass PanelWidget1 {
+       ignorepointer 1
+       color 0.024 0.663 0.404 0.447
+       size 1 0.33
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        ButtonWidgetClass PlusQuantityNumberButton {
+         color 1 1 1 0.706
+         size 1 1
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         style Empty
+         text "+"
+         font "gui/fonts/metron16"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

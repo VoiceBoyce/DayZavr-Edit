@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{BA00A0469BBA9806}DRL_CraftMenu/UI/data/lock1.edds"
+ Author "win-hv5vr6npefg"
+ ChangeDate 227358010
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "lock1.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

@@ -1,0 +1,38 @@
+PanelWidgetClass RequirementHeaderRoot {
+ ignorepointer 1
+ size 1 22
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 1
+ {
+  PanelWidgetClass RequirementHeaderAccent {
+   ignorepointer 1
+   color 0.537 0.357 0.141 1
+   position 2 0
+   size 3 16
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style rover_sim_colorable
+  }
+  RichTextWidgetClass RequirementHeaderText {
+   ignorepointer 1
+   color 0.85 0.65 0.35 1
+   position 10 0
+   size 0.96 18
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 1
+   text "#STR_DRL_AdditionalTasks_Titel"
+   font "gui/fonts/metron-bold16"
+   "exact text" 1
+   "exact text size" 14
+   "text valign" center
+  }
+ }
+}

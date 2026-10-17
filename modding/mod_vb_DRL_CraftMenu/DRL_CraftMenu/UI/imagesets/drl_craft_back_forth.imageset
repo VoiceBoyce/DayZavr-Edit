@@ -1,0 +1,18 @@
+ImageSetClass {
+ Name "drl_craft_back_forth"
+ RefSize 75 75
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "DRL_CraftMenu/UI/data/back-forth.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass back_forth {
+   Name "back_forth"
+   Pos 0 0
+   Size 75 75
+   Flags 0
+  }
+ }
+}

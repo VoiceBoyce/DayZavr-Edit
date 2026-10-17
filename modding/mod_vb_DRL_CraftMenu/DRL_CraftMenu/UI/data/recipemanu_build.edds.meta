@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{358E5A39FDE97A26}DRL_CraftMenu/UI/data/recipemanu_build.edds"
+ Author "win-hv5vr6npefg"
+ ChangeDate 1718858645
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "recipemanu_build.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

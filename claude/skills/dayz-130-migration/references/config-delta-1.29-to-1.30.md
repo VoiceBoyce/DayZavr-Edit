@@ -1,0 +1,3856 @@
+# Config delta: DayZ 1.29 → 1.30 (stable 1.30.164078)
+
+<!-- Generated 2026-10-15 from every config.cpp under P:\DZ (1.30.164078) against the 1.29 extraction. Keys are Root/Class paths as written in the source (case kept). Paths relative to P:\DZ. -->
+
+Sound tables/shaders/sets are summarised by count only (thousands of new Nasdara/motorbike entries).
+
+
+## Removed classes
+
+| Class | 1.29 file | Base |
+|---|---|---|
+| `CfgAmmo/LandMineExplosion` | `gear/traps/config.cpp` | `DefaultAmmo` |
+| `CfgAmmo/LandMineExplosion/DamageApplied` | `gear/traps/config.cpp` | `None` |
+| `CfgAmmo/LandMineExplosion/DamageApplied/Blood` | `gear/traps/config.cpp` | `None` |
+| `CfgAmmo/LandMineExplosion/DamageApplied/Health` | `gear/traps/config.cpp` | `None` |
+| `CfgAmmo/LandMineExplosion/DamageApplied/Shock` | `gear/traps/config.cpp` | `None` |
+| `CfgAmmo/LandMineExplosion/NoiseExplosion` | `gear/traps/config.cpp` | `None` |
+| `CfgNonAIVehicles/ProxyBp_rope` | `gear/crafting/config.cpp` | `ProxyAttachment` |
+| `CfgSoundSets/Music_Menu_R2B_SoundSet` | `sounds/hpp/config.cpp` | `None` |
+| `CfgSoundSets/runProne_water_Zmb_Soundset` | `sounds/hpp/config.cpp` | `baseFootstepsZmb_SoundSet` |
+| `CfgSoundShaders/IZH43_Tail_Forest_2D_SoundShader` | `sounds/hpp/config.cpp` | `tail_2D_Forest_SoundShader` |
+| `CfgSoundShaders/IZH43_Tail_Trees_2D_SoundShader` | `sounds/hpp/config.cpp` | `tail_2D_Trees_SoundShader` |
+| `CfgSoundShaders/IZH43_tailDistant_SoundShader` | `sounds/hpp/config.cpp` | `tailDistantRifle_SoundShader` |
+| `CfgSoundShaders/IZH43_tailForest_SoundShader` | `sounds/hpp/config.cpp` | `tailForestRifle_SoundShader` |
+| `CfgSoundShaders/IZH43_tailHouses_SoundShader` | `sounds/hpp/config.cpp` | `tailHousesRifle_SoundShader` |
+| `CfgSoundShaders/IZH43_tailMeadows_SoundShader` | `sounds/hpp/config.cpp` | `tailMeadowsRifle_SoundShader` |
+| `CfgSoundShaders/IZH43_tailTrees_SoundShader` | `sounds/hpp/config.cpp` | `tailTreesRifle_SoundShader` |
+| `CfgSoundShaders/IZH43sawed_tailDistant_SoundShader` | `sounds/hpp/config.cpp` | `tailDistantRifle_SoundShader` |
+| `CfgSoundShaders/IZH43sawed_tailForest_SoundShader` | `sounds/hpp/config.cpp` | `tailForestRifle_SoundShader` |
+| `CfgSoundShaders/IZH43sawed_tailHouses_SoundShader` | `sounds/hpp/config.cpp` | `tailHousesRifle_SoundShader` |
+| `CfgSoundShaders/IZH43sawed_tailMeadows_SoundShader` | `sounds/hpp/config.cpp` | `tailMeadowsRifle_SoundShader` |
+| `CfgSoundShaders/IZH43sawed_tailTrees_SoundShader` | `sounds/hpp/config.cpp` | `tailTreesRifle_SoundShader` |
+| `CfgSoundShaders/Music_Menu_R2B_SoundShader` | `sounds/hpp/config.cpp` | `None` |
+| `CfgVehicles/BarbedWire/AnimEvents/SoundWeapon/rope_struggle` | `gear/camping/config.cpp` | `None` |
+| `CfgVehicles/BarbedWire/AnimEvents/SoundWeapon/rope_untie` | `gear/camping/config.cpp` | `None` |
+| `CfgVehicles/BarbedWireLocked/AnimEvents/SoundWeapon/rope_struggle` | `gear/camping/config.cpp` | `None` |
+| `CfgVehicles/BarbedWireLocked/AnimEvents/SoundWeapon/rope_untie` | `gear/camping/config.cpp` | `None` |
+| `CfgVehicles/DuctTape/AnimEvents/SoundWeapon/rope_tieup_back` | `gear/consumables/config.cpp` | `None` |
+| `CfgVehicles/DuctTape/AnimEvents/SoundWeapon/rope_tieup_end` | `gear/consumables/config.cpp` | `None` |
+| `CfgVehicles/FireplaceBase/DamageSystem/GlobalArmor/Melee` | `gear/cooking/config.cpp` | `None` |
+| `CfgVehicles/FireplaceBase/DamageSystem/GlobalArmor/Melee/Blood` | `gear/cooking/config.cpp` | `None` |
+| `CfgVehicles/FireplaceBase/DamageSystem/GlobalArmor/Melee/Health` | `gear/cooking/config.cpp` | `None` |
+| `CfgVehicles/FireplaceBase/DamageSystem/GlobalArmor/Melee/Shock` | `gear/cooking/config.cpp` | `None` |
+| `CfgVehicles/FireplaceBase/DamageSystem/GlobalArmor/Projectile` | `gear/cooking/config.cpp` | `None` |
+| `CfgVehicles/FireplaceBase/DamageSystem/GlobalArmor/Projectile/Blood` | `gear/cooking/config.cpp` | `None` |
+| `CfgVehicles/FireplaceBase/DamageSystem/GlobalArmor/Projectile/Health` | `gear/cooking/config.cpp` | `None` |
+| `CfgVehicles/FireplaceBase/DamageSystem/GlobalArmor/Projectile/Shock` | `gear/cooking/config.cpp` | `None` |
+| `CfgVehicles/MetalWire/AnimEvents/SoundWeapon/rope_struggle` | `gear/crafting/config.cpp` | `None` |
+| `CfgVehicles/MetalWire/AnimEvents/SoundWeapon/rope_untie` | `gear/crafting/config.cpp` | `None` |
+| `CfgVehicles/MetalWireLocked/AnimEvents/SoundWeapon/rope_struggle` | `gear/crafting/config.cpp` | `None` |
+| `CfgVehicles/MetalWireLocked/AnimEvents/SoundWeapon/rope_untie` | `gear/crafting/config.cpp` | `None` |
+| `CfgVehicles/Offroad_02_Door_1_1/DamageSystem/GlobalHealth` | `vehicles/wheeled/config.cpp` | `GlobalHealth` |
+| `CfgVehicles/Offroad_02_Door_1_1_Rust/DamageSystem/DamageZones/Window` | `vehicles/wheeled/config.cpp` | `Window` |
+| `CfgVehicles/Offroad_02_Door_1_1_Rust/DamageSystem/DamageZones/Window/Health` | `vehicles/wheeled/config.cpp` | `Health` |
+| `CfgVehicles/Offroad_02_Door_1_1_Rust/DamageSystem/GlobalHealth` | `vehicles/wheeled/config.cpp` | `GlobalHealth` |
+| `CfgVehicles/Offroad_02_Door_1_2_Rust/DamageSystem/DamageZones/Window` | `vehicles/wheeled/config.cpp` | `Window` |
+| `CfgVehicles/Offroad_02_Door_1_2_Rust/DamageSystem/DamageZones/Window/Health` | `vehicles/wheeled/config.cpp` | `Health` |
+| `CfgVehicles/Offroad_02_Door_1_2_Rust/DamageSystem/GlobalHealth` | `vehicles/wheeled/config.cpp` | `GlobalHealth` |
+| `CfgVehicles/Offroad_02_Door_2_1_Rust/DamageSystem/DamageZones/Window` | `vehicles/wheeled/config.cpp` | `Window` |
+| `CfgVehicles/Offroad_02_Door_2_1_Rust/DamageSystem/DamageZones/Window/Health` | `vehicles/wheeled/config.cpp` | `Health` |
+| `CfgVehicles/Offroad_02_Door_2_1_Rust/DamageSystem/GlobalHealth` | `vehicles/wheeled/config.cpp` | `GlobalHealth` |
+| `CfgVehicles/Offroad_02_Door_2_2_Rust/DamageSystem/DamageZones/Window` | `vehicles/wheeled/config.cpp` | `Window` |
+| `CfgVehicles/Offroad_02_Door_2_2_Rust/DamageSystem/DamageZones/Window/Health` | `vehicles/wheeled/config.cpp` | `Health` |
+| `CfgVehicles/Offroad_02_Door_2_2_Rust/DamageSystem/GlobalHealth` | `vehicles/wheeled/config.cpp` | `GlobalHealth` |
+| `CfgVehicles/Rag/AnimEvents/SoundWeapon/Bandage_end` | `gear/consumables/config.cpp` | `None` |
+| `CfgVehicles/Rag/AnimEvents/SoundWeapon/Bandage_loop1` | `gear/consumables/config.cpp` | `None` |
+| `CfgVehicles/Rag/AnimEvents/SoundWeapon/Bandage_loop2` | `gear/consumables/config.cpp` | `None` |
+| `CfgVehicles/Rag/AnimEvents/SoundWeapon/Bandage_loop3` | `gear/consumables/config.cpp` | `None` |
+| `CfgVehicles/Rag/AnimEvents/SoundWeapon/Bandage_start` | `gear/consumables/config.cpp` | `None` |
+| `CfgVehicles/Rope/AnimEvents/SoundWeapon/rope_tieup` | `gear/crafting/config.cpp` | `None` |
+| `CfgVehicles/Rope/AnimEvents/SoundWeapon/rope_tieup_back` | `gear/crafting/config.cpp` | `None` |
+| `CfgVehicles/Rope/AnimEvents/SoundWeapon/rope_tieup_end` | `gear/crafting/config.cpp` | `None` |
+| `CfgVehicles/StaticObj_Airfield_Light_Control` | `structures/specific/config.cpp` | `HouseNoDestruct` |
+| `CfgVehicles/StaticObj_Airfield_Light_Hangar` | `structures/specific/config.cpp` | `HouseNoDestruct` |
+| `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Hanckuff_Close_1` | `characters/data/config.cpp` | `None` |
+| `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Hanckuff_Close_2` | `characters/data/config.cpp` | `None` |
+| `CfgVehicles/SurvivorBase/Skinning/Lard` | `characters/data/config.cpp` | `None` |
+| `CfgVehicles/WaterPouch_ColorBase` | `gear/drinks/config.cpp` | `Bottle_Base` |
+| `CfgVehicles/WaterPouch_ColorBase/AnimEvents` | `gear/drinks/config.cpp` | `None` |
+| `CfgVehicles/WaterPouch_ColorBase/AnimEvents/SoundWeapon` | `gear/drinks/config.cpp` | `None` |
+| `CfgVehicles/WaterPouch_ColorBase/AnimEvents/SoundWeapon/PondBottle_loop` | `gear/drinks/config.cpp` | `None` |
+| `CfgVehicles/WaterPouch_ColorBase/AnimEvents/SoundWeapon/WaterBottle_in_C1` | `gear/drinks/config.cpp` | `None` |
+| `CfgVehicles/WaterPouch_ColorBase/AnimEvents/SoundWeapon/WaterPouch_in_B` | `gear/drinks/config.cpp` | `None` |
+| `CfgVehicles/WaterPouch_ColorBase/AnimEvents/SoundWeapon/WaterPouch_in_C` | `gear/drinks/config.cpp` | `None` |
+| `CfgVehicles/WaterPouch_ColorBase/AnimEvents/SoundWeapon/WaterPouch_out_A` | `gear/drinks/config.cpp` | `None` |
+| `CfgVehicles/WaterPouch_ColorBase/AnimEvents/SoundWeapon/WaterPouch_out_B` | `gear/drinks/config.cpp` | `None` |
+| `CfgVehicles/WaterPouch_ColorBase/AnimEvents/SoundWeapon/WellBottle_loop` | `gear/drinks/config.cpp` | `None` |
+| `CfgVehicles/WaterPouch_ColorBase/DamageSystem` | `gear/drinks/config.cpp` | `None` |
+| `CfgVehicles/WaterPouch_ColorBase/DamageSystem/GlobalHealth` | `gear/drinks/config.cpp` | `None` |
+| `CfgVehicles/WaterPouch_ColorBase/DamageSystem/GlobalHealth/Health` | `gear/drinks/config.cpp` | `None` |
+| `CfgVehicles/WaterPouch_Natural` | `gear/drinks/config.cpp` | `WaterPouch_ColorBase` |
+| `CfgVehicles/WaterPouch_Natural/AnimEvents` | `gear/drinks/config.cpp` | `None` |
+| `CfgVehicles/WaterPouch_Natural/AnimEvents/SoundWeapon` | `gear/drinks/config.cpp` | `None` |
+| `CfgVehicles/WaterPouch_Natural/AnimEvents/SoundWeapon/PondBottle_loop` | `gear/drinks/config.cpp` | `None` |
+| `CfgVehicles/WaterPouch_Natural/AnimEvents/SoundWeapon/WaterBottle_in_C1` | `gear/drinks/config.cpp` | `None` |
+| `CfgVehicles/WaterPouch_Natural/AnimEvents/SoundWeapon/WaterPouch_in_B` | `gear/drinks/config.cpp` | `None` |
+| `CfgVehicles/WaterPouch_Natural/AnimEvents/SoundWeapon/WaterPouch_in_C` | `gear/drinks/config.cpp` | `None` |
+| `CfgVehicles/WaterPouch_Natural/AnimEvents/SoundWeapon/WaterPouch_out_A` | `gear/drinks/config.cpp` | `None` |
+| `CfgVehicles/WaterPouch_Natural/AnimEvents/SoundWeapon/WaterPouch_out_B` | `gear/drinks/config.cpp` | `None` |
+| `CfgVehicles/WaterPouch_Natural/AnimEvents/SoundWeapon/WellBottle_loop` | `gear/drinks/config.cpp` | `None` |
+| `CfgVideoOptions/OverallSettingsXBOXONE` | `ui/config.cpp` | `OverallSettingsConsole` |
+
+## Changed classes (non-sound)
+
+Only property-level differences; `+` added, `-` removed, `~` value changed (old → new). Values are cut at 160 chars.
+
+- `AIParams` (`data/aiconfigs/config.cpp`)
+  - + `snowfallToNoiseMultiplier` = `5`
+  - + `fogToNoiseMultiplier` = `10`
+  - + `windToNoiseMultiplier` = `10`
+  - + `sandstormToNoiseMultiplier` = `10`
+- `CfgAIBehaviours/Herbivores_CapraHircus/BehaviourHLDomestic/SlotAlerted/BehaviourGoToTarget/Movement` (`AI/config.cpp`)
+  - ~ `pathFilter`: `"NoJumping"` → `"GoatOnRun"`
+- `CfgAIBehaviours/Herbivores_CapraHircus/BehaviourHLDomestic/SlotAlerted/BehaviourGoToTarget/RunMovementInjured1` (`AI/config.cpp`)
+  - ~ `pathFilter`: `"NoJumping"` → `"GoatOnRun"`
+- `CfgAIBehaviours/Herbivores_CapraHircus/BehaviourHLDomestic/SlotAlerted/BehaviourGoToTarget/RunMovementInjured2` (`AI/config.cpp`)
+  - ~ `pathFilter`: `"NoJumping"` → `"GoatOnRun"`
+- `CfgAIBehaviours/Herbivores_CapraHircus/BehaviourHLDomestic/SlotCalmGrazing/BehaviourCalm/CatchUpMovement` (`AI/config.cpp`)
+  - ~ `pathFilter`: `"NoJumping"` → `"GoatOnRun"`
+- `CfgAIBehaviours/Herbivores_CapraHircus/BehaviourHLDomestic/SlotCalmGrazing/BehaviourCalm/GrazeMovement` (`AI/config.cpp`)
+  - ~ `pathFilter`: `"NoJumping"` → `"GoatOnRun"`
+- `CfgAIBehaviours/Herbivores_CapraHircus/BehaviourHLDomestic/SlotCalmGrazing/BehaviourCalm/TravelingMovement` (`AI/config.cpp`)
+  - ~ `pathFilter`: `"NoJumping"` → `"GoatOnRun"`
+- `CfgAIBehaviours/Herbivores_CapraHircus/BehaviourHLDomestic/SlotCalmResting/BehaviourCalm/CatchUpMovement` (`AI/config.cpp`)
+  - ~ `pathFilter`: `"NoJumping"` → `"GoatOnRun"`
+- `CfgAIBehaviours/Herbivores_CapraHircus/BehaviourHLDomestic/SlotCalmResting/BehaviourCalm/GrazeMovement` (`AI/config.cpp`)
+  - ~ `pathFilter`: `"NoJumping"` → `"GoatOnRun"`
+- `CfgAIBehaviours/Herbivores_CapraHircus/BehaviourHLDomestic/SlotCalmResting/BehaviourCalm/TravelingMovement` (`AI/config.cpp`)
+  - ~ `pathFilter`: `"NoJumping"` → `"GoatOnRun"`
+- `CfgAIBehaviours/Herbivores_CapraHircus/BehaviourHLDomestic/SlotCalmTravelling/BehaviourCalm/CatchUpMovement` (`AI/config.cpp`)
+  - ~ `pathFilter`: `"NoJumping"` → `"GoatOnRun"`
+- `CfgAIBehaviours/Herbivores_CapraHircus/BehaviourHLDomestic/SlotCalmTravelling/BehaviourCalm/GrazeMovement` (`AI/config.cpp`)
+  - ~ `pathFilter`: `"NoJumping"` → `"GoatOnRun"`
+- `CfgAIBehaviours/Herbivores_CapraHircus/BehaviourHLDomestic/SlotCalmTravelling/BehaviourCalm/TravelingMovement` (`AI/config.cpp`)
+  - ~ `pathFilter`: `"NoJumping"` → `"GoatOnRun"`
+- `CfgAIBehaviours/Herbivores_CapraHircus/BehaviourHLDomestic/SlotDrinking/BehaviourCalm/CatchUpMovement` (`AI/config.cpp`)
+  - ~ `pathFilter`: `"NoJumping"` → `"GoatOnRun"`
+- `CfgAIBehaviours/Herbivores_CapraHircus/BehaviourHLDomestic/SlotDrinking/BehaviourCalm/DrinkingMovement` (`AI/config.cpp`)
+  - ~ `pathFilter`: `"NoJumping"` → `"GoatOnRun"`
+- `CfgAIBehaviours/Herbivores_CapraHircus/BehaviourHLDomestic/SlotDrinking/BehaviourCalm/GrazeMovement` (`AI/config.cpp`)
+  - ~ `pathFilter`: `"NoJumping"` → `"GoatOnRun"`
+- `CfgAIBehaviours/Herbivores_CapraHircus/BehaviourHLDomestic/SlotDrinking/BehaviourCalm/TravelingMovement` (`AI/config.cpp`)
+  - ~ `pathFilter`: `"NoJumping"` → `"GoatOnRun"`
+- `CfgAIBehaviours/Herbivores_CapraHircus/BehaviourHLDomestic/SlotNonSpecificThreat/BehaviourSpecificThreat/WalkingMovement` (`AI/config.cpp`)
+  - ~ `pathFilter`: `"NoJumping"` → `"GoatOnRun"`
+- `CfgAIBehaviours/Herbivores_CapraHircus/BehaviourHLDomestic/SlotSpecificThreat/BehaviourSpecificThreat/WalkingMovement` (`AI/config.cpp`)
+  - ~ `pathFilter`: `"NoJumping"` → `"GoatOnRun"`
+- `CfgAmmo/Bullet_Base` (`sounds_bliss/config.cpp`)
+  - + `soundSand1[]` = `{"DZ\sounds_takistan\Weapons\Hits\sand_01",0.60000002,1,40}`
+  - + `soundSand2[]` = `{"DZ\sounds_takistan\Weapons\Hits\sand_02",0.60000002,1,40}`
+  - + `soundSand3[]` = `{"DZ\sounds_takistan\Weapons\Hits\sand_03",0.60000002,1,40}`
+  - + `soundSand4[]` = `{"DZ\sounds_takistan\Weapons\Hits\sand_04",0.60000002,1,40}`
+  - + `soundSand5[]` = `{"DZ\sounds_takistan\Weapons\Hits\sand_05",0.60000002,1,40}`
+  - + `soundSand6[]` = `{"DZ\sounds_takistan\Weapons\Hits\sand_06",0.60000002,1,40}`
+  - + `soundSand7[]` = `{"DZ\sounds_takistan\Weapons\Hits\sand_07",0.60000002,1,40}`
+  - + `soundSand8[]` = `{"DZ\sounds_takistan\Weapons\Hits\sand_08",0.60000002,1,40}`
+  - + `soundGrass1[]` = `{"DZ\sounds_takistan\Weapons\Hits\grass_01",0.60000002,1,40}`
+  - + `soundGrass2[]` = `{"DZ\sounds_takistan\Weapons\Hits\grass_02",0.60000002,1,40}`
+  - + `soundGrass3[]` = `{"DZ\sounds_takistan\Weapons\Hits\grass_03",0.60000002,1,40}`
+  - + `soundGrass4[]` = `{"DZ\sounds_takistan\Weapons\Hits\grass_04",0.60000002,1,40}`
+  - + `soundGrass5[]` = `{"DZ\sounds_takistan\Weapons\Hits\grass_05",0.60000002,1,40}`
+  - + `soundGrass6[]` = `{"DZ\sounds_takistan\Weapons\Hits\grass_06",0.60000002,1,40}`
+  - + `soundGrass7[]` = `{"DZ\sounds_takistan\Weapons\Hits\grass_07",0.60000002,1,40}`
+  - + `soundGrass8[]` = `{"DZ\sounds_takistan\Weapons\Hits\grass_08",0.60000002,1,40}`
+  - + `soundMudDry1[]` = `{"DZ\sounds_takistan\Weapons\Hits\mud_dry_01",0.60000002,1,40}`
+  - + `soundMudDry2[]` = `{"DZ\sounds_takistan\Weapons\Hits\mud_dry_02",0.60000002,1,40}`
+  - + `soundMudDry3[]` = `{"DZ\sounds_takistan\Weapons\Hits\mud_dry_03",0.60000002,1,40}`
+  - + `soundMudDry4[]` = `{"DZ\sounds_takistan\Weapons\Hits\mud_dry_04",0.60000002,1,40}`
+  - + `soundMudDry5[]` = `{"DZ\sounds_takistan\Weapons\Hits\mud_dry_05",0.60000002,1,40}`
+  - + `soundMudDry6[]` = `{"DZ\sounds_takistan\Weapons\Hits\mud_dry_06",0.60000002,1,40}`
+  - + `soundMudDry7[]` = `{"DZ\sounds_takistan\Weapons\Hits\mud_dry_07",0.60000002,1,40}`
+  - + `soundMudDry8[]` = `{"DZ\sounds_takistan\Weapons\Hits\mud_dry_08",0.60000002,1,40}`
+  - + `soundBrick1[]` = `{"DZ\sounds_takistan\Weapons\Hits\bulet_hit_wall_Bricks_01",0.60000002,1,60}`
+  - + `soundBrick2[]` = `{"DZ\sounds_takistan\Weapons\Hits\bulet_hit_wall_Bricks_02",0.60000002,1,60}`
+  - + `soundBrick3[]` = `{"DZ\sounds_takistan\Weapons\Hits\bulet_hit_wall_Bricks_03",0.60000002,1,60}`
+  - + `soundBrick4[]` = `{"DZ\sounds_takistan\Weapons\Hits\bulet_hit_wall_Bricks_04",0.60000002,1,60}`
+  - + `soundBrick5[]` = `{"DZ\sounds_takistan\Weapons\Hits\bulet_hit_wall_Bricks_05",0.60000002,1,60}`
+  - + `soundBrick6[]` = `{"DZ\sounds_takistan\Weapons\Hits\bulet_hit_wall_Bricks_06",0.60000002,1,60}`
+  - + `soundBrick7[]` = `{"DZ\sounds_takistan\Weapons\Hits\bulet_hit_wall_Bricks_07",0.60000002,1,60}`
+  - + `soundBrick8[]` = `{"DZ\sounds_takistan\Weapons\Hits\bulet_hit_wall_Bricks_08",0.60000002,1,60}`
+  - + `hitBrick[]` = `{"soundBrick1",0.125,"soundBrick2",0.125,"soundBrick3",0.125,"soundBrick4",0.125,"soundBrick5",0.125,"soundBrick6",0.125,"soundBrick7",0.125,"soundBrick8",0....`
+  - + `hitSand[]` = `{"soundSand1",0.125,"soundSand2",0.125,"soundSand3",0.125,"soundSand4",0.125,"soundSand5",0.125,"soundSand6",0.125,"soundSand7",0.125,"soundSand8",0.125}`
+  - + `hitGrass[]` = `{"soundGrass1",0.125,"soundGrass2",0.125,"soundGrass3",0.125,"soundGrass4",0.125,"soundGrass5",0.125,"soundGrass6",0.125,"soundGrass7",0.125,"soundGrass8",0....`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+- `CfgAmmo/Bullet_Flare/DamageApplied` (`weapons/projectiles/config.cpp`)
+  - ~ `defaultDamageOverride[]`: `{{ 0.5 , 1 }}` → `{{ 0.69999999 , 1 }}`
+- `CfgAmmo/Bullet_Flare/DamageApplied/Health` (`weapons/projectiles/config.cpp`)
+  - ~ `damage`: `10` → `30`
+- `CfgAmmo/Bullet_Flare/DamageApplied/Shock` (`weapons/projectiles/config.cpp`)
+  - ~ `damage`: `0` → `10`
+- `CfgAmmo/ClaymoreMine_Ammo` (`weapons/explosives/config.cpp`)
+  - + `particle` = `"explosion_claymore_01"`
+- `CfgAmmo/Dummy_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/Explosion_40mm_Ammo` (`weapons/explosives/config.cpp`)
+  - + `particle` = `"explosion_landmine_01"`
+- `CfgAmmo/FinisherHit` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/FinisherHitNeck` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/FirearmHit_Pistol` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/FirearmHit_Rifle` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/FirearmHit_Rifle_Bayonet` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/FirearmHit_Rifle_Bayonet_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",1,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",1,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",1,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",1,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",1,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",1,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/FirearmHit_Rifle_Buttstock` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/Fireworks_Ammo` (`weapons/explosives/config.cpp`)
+  - + `particle` = `""`
+- `CfgAmmo/FlashGrenade_Ammo` (`weapons/explosives/config.cpp`)
+  - + `particle` = `"explosion_M84_01"`
+- `CfgAmmo/GasCanister_Ammo` (`weapons/explosives/config.cpp`)
+  - + `particle` = `"explosion_RGD5_01"`
+- `CfgAmmo/GrenadeM4` (`weapons/projectiles/config.cpp`)
+  - ~ `proxyShape`: `"\dz\weapons\projectiles\rocket_rpg7_inflight.p3d"` → `"\dz\weapons\ammunition\rocket_rpg7_inflight.p3d"`
+- `CfgAmmo/LandFuelFeed_Ammo` (`weapons/explosives/config.cpp`)
+  - + `particle` = `""`
+- `CfgAmmo/LandMineExplosion_CarWheel` (`gear/traps/config.cpp`)
+  - base: `LandMineExplosion` → `LandMineExplosion_Ammo`
+- `CfgAmmo/M67Grenade_Ammo` (`weapons/explosives/config.cpp`)
+  - + `particle` = `"explosion_M67_01"`
+- `CfgAmmo/MeleeAxe` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeAxe_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeBat` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_01",0.5,1,80}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_02",0.5,1,80}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_03",0.5,1,80}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_04",0.5,1,80}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_05",0.5,1,80}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_06",0.5,1,80}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeBatNails` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_01",0.5,1,80}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_02",0.5,1,80}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_03",0.5,1,80}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_04",0.5,1,80}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_05",0.5,1,80}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_06",0.5,1,80}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeBatNails_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_01",1,1,80}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_02",1,1,80}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_03",1,1,80}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_04",1,1,80}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_05",1,1,80}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_06",1,1,80}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeBat_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_01",1,1,80}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_02",1,1,80}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_03",1,1,80}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_04",1,1,80}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_05",1,1,80}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_06",1,1,80}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeBear` (`animals_bliss/ursus_arctos/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeBearShock` (`animals_bliss/ursus_arctos/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeBearShock_Heavy` (`animals_bliss/ursus_arctos/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",1,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",1,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",1,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",1,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",1,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",1,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeBear_Heavy` (`animals_bliss/ursus_arctos/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",1,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",1,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",1,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",1,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",1,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",1,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeBlunt` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeBluntHeavy_1` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeBluntLight_1` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeBluntStick` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_01",0.5,1,80}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_02",0.5,1,80}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_03",0.5,1,80}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_04",0.5,1,80}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_05",0.5,1,80}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_06",0.5,1,80}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeBluntStick_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_01",1,1,80}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_02",1,1,80}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_03",1,1,80}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_04",1,1,80}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_05",1,1,80}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_06",1,1,80}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeBlunt_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeBrassKnuckles` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeBrassKnuckles_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeChainsaw` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeChainsaw_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeCraftedHeavy_1` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",1,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",1,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",1,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",1,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",1,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",1,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeCraftedHeavy_3` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_01",1,1,80}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_02",1,1,80}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_03",1,1,80}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_04",1,1,80}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_05",1,1,80}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_06",1,1,80}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeCraftedHeavy_4` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_01",1,1,80}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_02",1,1,80}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_03",1,1,80}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_04",1,1,80}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_05",1,1,80}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_06",1,1,80}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeCraftedLight_1` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeCraftedLight_3` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_01",0.5,1,80}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_02",0.5,1,80}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_03",0.5,1,80}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_04",0.5,1,80}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_05",0.5,1,80}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_06",0.5,1,80}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeCraftedLight_4` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_01",0.5,1,80}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_02",0.5,1,80}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_03",0.5,1,80}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_04",0.5,1,80}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_05",0.5,1,80}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_06",0.5,1,80}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeCrowbar` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeCrowbar_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeFFAxeLight` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeFFAxelHeavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeFarmingHoe` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_01",0.5,1,80}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_02",0.5,1,80}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_03",0.5,1,80}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_04",0.5,1,80}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_05",0.5,1,80}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_06",0.5,1,80}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeFarmingHoe_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_01",1,1,80}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_02",1,1,80}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_03",1,1,80}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_04",1,1,80}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_05",1,1,80}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_06",1,1,80}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeFieldShovel` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeFieldShovel_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeFireAxe` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeFireAxe_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeFireExtinguisher` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeFireExtinguisher_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeFist` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeFistHeavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeFistLight` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeFist_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeHacksaw` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeHacksaw_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",1,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",1,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",1,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",1,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",1,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",1,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeHammer` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeHammer_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeHatchet` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeHatchet_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeHeavybat` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeHeavybat_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeInfected` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeInfectedLong` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeInfectedLong_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeInfected_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeKnife` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeKnife_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",1,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",1,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",1,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",1,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",1,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",1,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeLightBlunt` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeLightBlunt2` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_01",0.5,1,80}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_02",0.5,1,80}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_03",0.5,1,80}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_04",0.5,1,80}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_05",0.5,1,80}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_06",0.5,1,80}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeLightBlunt2_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_01",1,1,80}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_02",1,1,80}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_03",1,1,80}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_04",1,1,80}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_05",1,1,80}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_06",1,1,80}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeLightBluntShock` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeLightBluntShock_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",1,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",1,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",1,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",1,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",1,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",1,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeLightBlunt_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeMace` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeMace_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeMachete` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeMachete_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeMeatTenderizer` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeMeatTenderizer_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeMummyInfected` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeMummyInfectedLong` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeMummyInfectedLong_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeMummyInfected_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleePickaxe` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleePickaxe_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleePipeWrench` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleePipeWrench_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleePitchfork` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleePitchfork_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleePliers` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleePliers_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleePoliceInfected` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleePoliceInfectedLong` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleePoliceInfectedLong_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleePoliceInfected_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeProd` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeProd_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",1,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",1,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",1,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",1,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",1,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",1,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeScrewdriver` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeScrewdriver_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",1,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",1,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",1,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",1,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",1,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",1,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeSharpHeavy_1` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",1,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",1,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",1,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",1,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",1,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",1,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeSharpHeavy_2` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeSharpHeavy_5` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeSharpLight_1` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeSharpLight_2` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeSharpLight_5` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeSharpWoodenStick` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeSharpWoodenStick_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeShovel` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeShovel_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeSickle` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeSickle_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",1,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",1,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",1,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",1,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",1,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",1,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeSlash` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeSlash2` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeSlash2_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeSlash_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",1,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",1,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",1,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",1,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",1,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",1,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeSledgeHammer` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeSledgeHammer_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeSoft` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeSoft_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeSoldierInfected` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeSoldierInfectedLong` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeSoldierInfectedLong_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeSoldierInfected_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeSpear` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeSpear_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeStab` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_01",0.5,1,80}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_02",0.5,1,80}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_03",0.5,1,80}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_04",0.5,1,80}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_05",0.5,1,80}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_06",0.5,1,80}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeStab_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_01",1,1,80}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_02",1,1,80}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_03",1,1,80}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_04",1,1,80}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_05",1,1,80}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_06",1,1,80}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeStoneKnife` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeStoneKnife_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",1,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",1,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",1,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",1,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",1,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",1,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeSword` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeSword_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\long_blade_weapon_hits\long_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeWAxeLight` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeWAxelHeavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeWolf` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeWolf/DamageApplied/Health` (`weapons/melee/config.cpp`)
+  - + `armorDamage` = `1.2`
+- `CfgAmmo/MeleeWolf_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_01",1,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_02",1,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_03",1,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_04",1,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_05",1,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\short_blade_weapon_hits\short_blade_weapon_Dry_Dirt_hit_06",1,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeWoodBlunt` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_01",0.5,1,80}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_02",0.5,1,80}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_03",0.5,1,80}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_04",0.5,1,80}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_05",0.5,1,80}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_06",0.5,1,80}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeWoodBlunt_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_01",1,1,80}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_02",1,1,80}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_03",1,1,80}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_04",1,1,80}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_05",1,1,80}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Bricks_hit_06",1,1,80}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_wood_weapon_hits\blunt_wood_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeWrench` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",0.5,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",0.5,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",0.5,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",0.5,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",0.5,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",0.5,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeWrench_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_01",1,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_02",1,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_03",1,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_04",1,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_05",1,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Bricks_hit_06",1,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_01",0.5,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_02",0.5,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_03",0.5,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_04",0.5,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_05",0.5,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\blunt_metal_weapon_hits\blunt_metal_weapon_Dry_Dirt_hit_06",0.5,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125}`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125}`
+- `CfgAmmo/MeleeZombie` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombieFemale` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombieFemaleLong` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombieFemaleLong_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombieFemale_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombieFirefighter` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombieFirefighterLong` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombieFirefighterLong_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombieFirefighter_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombieMale` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombieMaleLong` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombieMaleLong_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombieMale_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombieMummy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombieMummyLong` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombieMummyLong_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombieMummy_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombiePolice` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombiePoliceLong` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombiePoliceLong_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombiePolice_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombieSoldier` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombieSoldierLong` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.31622776,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.31622776,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.31622776,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.31622776,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.31622776,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.31622776,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.31622776,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.31622776,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.31622776,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.31622776,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.31622776,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.31622776,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.31622776,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.31622776,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.31622776,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.31622776,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombieSoldierLong_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombieSoldier_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/MeleeZombie_Heavy` (`weapons/melee/config.cpp`)
+  - + `soundHitBricks1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_01",0.63095737,1,60}`
+  - + `soundHitBricks2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_02",0.63095737,1,60}`
+  - + `soundHitBricks3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_03",0.63095737,1,60}`
+  - + `soundHitBricks4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_04",0.63095737,1,60}`
+  - + `soundHitBricks5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_05",0.63095737,1,60}`
+  - + `soundHitBricks6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_06",0.63095737,1,60}`
+  - + `soundHitBricks7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_07",0.63095737,1,60}`
+  - + `soundHitBricks8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_concrete_hit_08",0.63095737,1,60}`
+  - + `soundMudDry1[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_01",0.63095737,1,60}`
+  - + `soundMudDry2[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_02",0.63095737,1,60}`
+  - + `soundMudDry3[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_03",0.63095737,1,60}`
+  - + `soundMudDry4[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_04",0.63095737,1,60}`
+  - + `soundMudDry5[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_05",0.63095737,1,60}`
+  - + `soundMudDry6[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_06",0.63095737,1,60}`
+  - + `soundMudDry7[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_07",0.63095737,1,60}`
+  - + `soundMudDry8[]` = `{"dz\sounds\weapons\meleehits\fist_hits\fist_dirt_hit_08",0.63095737,1,60}`
+  - + `hitMudDry[]` = `{"soundMudDry1",0.125,"soundMudDry2",0.125,"soundMudDry3",0.125,"soundMudDry4",0.125,"soundMudDry5",0.125,"soundMudDry6",0.125,"soundMudDry7",0.125,"soundMud...`
+  - + `hitBricks[]` = `{"soundHitBricks1",0.125,"soundHitBricks2",0.125,"soundHitBricks3",0.125,"soundHitBricks4",0.125,"soundHitBricks5",0.125,"soundHitBricks6",0.125,"soundHitBri...`
+- `CfgAmmo/Plastic_Explosive_Ammo` (`weapons/explosives/config.cpp`)
+  - + `particle` = `"explosion_plastic_01"`
+- `CfgAmmo/RGD5Grenade_Ammo` (`weapons/explosives/config.cpp`)
+  - + `particle` = `"explosion_RGD5_01"`
+- `CfgAmmo/Rocket_LAW_Base` (`weapons/projectiles/config.cpp`)
+  - ~ `proxyShape`: `"\dz\weapons\projectiles\rocket_rpg7_inflight.p3d"` → `"\dz\weapons\ammunition\rocket_rpg7_inflight.p3d"`
+- `CfgAmmo/Rocket_RPG7_Base` (`weapons/projectiles/config.cpp`)
+  - ~ `proxyShape`: `"\dz\weapons\projectiles\rocket_rpg7_inflight.p3d"` → `"\dz\weapons\ammunition\rocket_rpg7_inflight.p3d"`
+- `CfgFaces/MaleAdamHeadDecayed/Default` (`characters/heads/config.cpp`)
+  - ~ `texture`: `"dz\characters\heads\data\m_Adam\Adam_body_shaved_decayed.paa"` → `"dz\characters\heads\data\m_Adam\hhl_Adam_body_shaved_decayed.paa"`
+- `CfgFaces/MaleAdamHeadDecayedDark/Default` (`characters/heads/config.cpp`)
+  - ~ `texture`: `"dz\characters\heads\data\m_Adam\Adam_body_shaved_decayed_dark.paa"` → `"dz\characters\heads\data\m_Adam\hhl_Adam_body_shaved_decayed_dark.paa"`
+- `CfgFaces/MaleAdamHeadDecayedLighterDark/Default` (`characters/heads/config.cpp`)
+  - ~ `texture`: `"dz\characters\heads\data\m_Adam\Adam_body_shaved_decayed_lighter_dark.paa"` → `"dz\characters\heads\data\m_Adam\hhl_Adam_body_shaved_decayed_lighter_dark.paa"`
+- `CfgHeads/Default/Grimaces/AwareFace` (`characters/heads/config.cpp`)
+  - ~ `anim`: `"dz\anims\data\anim\fce\Aware.rtm"` → `"dz\characters\heads\anim\aware.rtm"`
+- `CfgHeads/Default/Grimaces/CombatFace` (`characters/heads/config.cpp`)
+  - ~ `anim`: `"dz\anims\data\anim\fce\Combat.rtm"` → `"dz\characters\heads\anim\combat.rtm"`
+- `CfgHeads/Default/Grimaces/DangerFace` (`characters/heads/config.cpp`)
+  - ~ `anim`: `"dz\anims\data\anim\fce\Danger.rtm"` → `"dz\characters\heads\anim\danger.rtm"`
+- `CfgHeads/Default/Grimaces/DeadFace` (`characters/heads/config.cpp`)
+  - ~ `anim`: `"dz\anims\data\anim\fce\Dead.rtm"` → `"dz\characters\heads\anim\dead.rtm"`
+- `CfgHeads/Default/Grimaces/HurtFace` (`characters/heads/config.cpp`)
+  - ~ `anim`: `"dz\anims\data\anim\fce\Hurt.rtm"` → `"dz\characters\heads\anim\hurt.rtm"`
+- `CfgHeads/Default/Grimaces/Lipsync` (`characters/heads/config.cpp`)
+  - ~ `vizem[]`: `{"dz\anims\data\anim\fce\Neutral.rtm","dz\anims\data\anim\fce\vizem\a.rtm","dz\anims\data\anim\fce\vizem\e2.rtm","dz\anims\data\anim\fce\vizem\f.rtm","dz\ani...` → `{"dz\characters\heads\anim\neutral.rtm","dz\characters\heads\anim\vizem\A.rtm","dz\characters\heads\anim\vizem\E2.rtm","dz\characters\heads\anim\vizem\F.rtm"...`
+- `CfgHeads/Default/Grimaces/NeutralFace` (`characters/heads/config.cpp`)
+  - ~ `anim`: `"dz\anims\data\anim\fce\Neutral.rtm"` → `"dz\characters\heads\anim\neutral.rtm"`
+- `CfgHeads/Default/Grimaces/RTM_Face` (`characters/heads/config.cpp`)
+  - ~ `anim`: `"dz\anims\data\anim\fce\Neutral.rtm"` → `"dz\characters\heads\anim\neutral.rtm"`
+- `CfgHeads/Default/Grimaces/SafeFace` (`characters/heads/config.cpp`)
+  - ~ `anim`: `"dz\anims\data\anim\fce\Safe.rtm"` → `"dz\characters\heads\anim\safe.rtm"`
+- `CfgMagazines/Mag_AK101_30Rnd_Black` (`weapons/attachments/magazine/config.cpp`)
+  - − `descriptionShort` (was `"$STR_CfgMagazines_Mag_AK101_30Rnd_Black0"`)
+- `CfgMagazines/Mag_AK101_30Rnd_Green` (`weapons/attachments/magazine/config.cpp`)
+  - − `descriptionShort` (was `"$STR_CfgMagazines_Mag_AK101_30Rnd_Green0"`)
+- `CfgMagazines/Mag_AK74_30Rnd_Black` (`weapons/attachments/magazine/config.cpp`)
+  - − `descriptionShort` (was `"$STR_CfgMagazines_Mag_AK74_30Rnd_Black0"`)
+- `CfgMagazines/Mag_AK74_30Rnd_Green` (`weapons/attachments/magazine/config.cpp`)
+  - − `descriptionShort` (was `"$STR_CfgMagazines_Mag_AK74_30Rnd_Green0"`)
+- `CfgMagazines/Mag_CMAG_10Rnd_Black` (`weapons/attachments/magazine/config.cpp`)
+  - − `descriptionShort` (was `"$STR_CfgMagazines_Mag_CMAG_10Rnd_Black0"`)
+- `CfgMagazines/Mag_CMAG_10Rnd_Green` (`weapons/attachments/magazine/config.cpp`)
+  - − `descriptionShort` (was `"$STR_CfgMagazines_Mag_CMAG_10Rnd_Green0"`)
+- `CfgMagazines/Mag_CMAG_20Rnd_Black` (`weapons/attachments/magazine/config.cpp`)
+  - − `descriptionShort` (was `"$STR_CfgMagazines_Mag_CMAG_20Rnd_Black0"`)
+- `CfgMagazines/Mag_CMAG_20Rnd_Green` (`weapons/attachments/magazine/config.cpp`)
+  - − `descriptionShort` (was `"$STR_CfgMagazines_Mag_CMAG_20Rnd_Green0"`)
+- `CfgMagazines/Mag_CMAG_30Rnd_Black` (`weapons/attachments/magazine/config.cpp`)
+  - − `descriptionShort` (was `"$STR_CfgMagazines_Mag_CMAG_30Rnd_Black0"`)
+- `CfgMagazines/Mag_CMAG_30Rnd_Green` (`weapons/attachments/magazine/config.cpp`)
+  - − `descriptionShort` (was `"$STR_CfgMagazines_Mag_CMAG_30Rnd_Green0"`)
+- `CfgMagazines/Mag_CMAG_40Rnd_Black` (`weapons/attachments/magazine/config.cpp`)
+  - − `descriptionShort` (was `"$STR_CfgMagazines_Mag_CMAG_40Rnd_Black0"`)
+- `CfgMagazines/Mag_CMAG_40Rnd_Green` (`weapons/attachments/magazine/config.cpp`)
+  - − `descriptionShort` (was `"$STR_CfgMagazines_Mag_CMAG_40Rnd_Green0"`)
+- `CfgMods/sakhal` (`data_sakhal/config.cpp`)
+  - ~ `picture`: `"DZ\data_bliss\gui\textures\picture_bliss_ca.paa"` → `"gui\textures\dlc_panel_frostline.edds"`
+- `CfgNonAIVehicles/ProxyCombinationLock` (`gear/camping/config.cpp`)
+  - ~ `inventorySlot[]`: `{"Att_CombinationLock"}` → `{"Att_CombinationLock","Att_CombinationLock1_Wood","Att_CombinationLock1_Metal","Att_CombinationLock2_Wood","Att_CombinationLock2_Metal","Att_CombinationLock...`
+- `CfgNonAIVehicles/ProxyHatchback_02_Wheel_destroyed` (`vehicles/wheeled/config.cpp`)
+  - ~ `model`: `"DZ\vehicles\wheeled\Hatchback_02\proxy\Hatchback_02_.p3d"` → `"DZ\vehicles\wheeled\Hatchback_02\proxy\Hatchback_02_ruined.p3d"`
+- `CfgNonAIVehicles/ProxyNails_loose_10` (`gear/camping/config.cpp`)
+  - ~ `inventorySlot[]`: `{"Material_Nails","Material_L1_Nails","Material_L1W1_Nails","Material_L1W2_Nails","Material_L1W3_Nails","Material_L2_Nails","Material_L2W1_Nails","Material_L...` → `{"Material_Nails","Material_L1_Nails","Material_L1W1_Nails","Material_L1W2_Nails","Material_L1W3_Nails","Material_L2_Nails","Material_L2W1_Nails","Material_L...`
+- `CfgNonAIVehicles/ProxyOffroad_02_Wheel_ruined` (`vehicles/wheeled/config.cpp`)
+  - ~ `model`: `"DZ\vehicles\wheeled\Offroad_02\proxy\Offroad_02_Wheel_ruined.p3d"` → `"DZ\vehicles\wheeled\Offroad_02\proxy\Offroad_02_Wheel_destroyed.p3d"`
+- `CfgNonAIVehicles/ProxySingle_Metal_Sheet` (`gear/camping/config.cpp`)
+  - ~ `inventorySlot[]`: `{"Material_MetalSheets","Material_L3_MetalSheets","Material_L1W1_MetalSheets","Material_L1W2_MetalSheets","Material_L1W3_MetalSheets","Material_L2W1_MetalShe...` → `{"Material_MetalSheets","Material_L3_MetalSheets","Material_L1W1_MetalSheets","Material_L1W2_MetalSheets","Material_L1W3_MetalSheets","Material_L2W1_MetalShe...`
+- `CfgNonAIVehicles/ProxyString_MetalWire` (`gear/crafting/config.cpp`)
+  - ~ `inventorySlot[]`: `{"MetalWire","Material_FPole_MetalWire"}` → `{"MetalWire","Material_FPole_MetalWire","RB_LvL1_MetalWire","RB_LvL2_MetalWire","RB_LvL3_MetalWire"}`
+- `CfgNonAIVehicles/ProxyWooden_stick` (`gear/crafting/config.cpp`)
+  - ~ `inventorySlot[]`: `{"Material_FPole_MagicStick"}` → `{"Material_FPole_MagicStick","RB_LvL1_Stick","RB_LvL2_Stick"}`
+- `CfgNonAIVehicles/Proxybait` (`gear/traps/config.cpp`)
+  - ~ `model`: `"\dz\gear\cooking\proxy\bait.p3d"` → `"\dz\gear\traps\proxy\bait.p3d"`
+- `CfgNonAIVehicles/Proxybp_wooden_stick` (`gear/camping/config.cpp`)
+  - ~ `inventorySlot[]`: `{"Material_Shelter_Sticks"}` → `{"WoodenStick","Material_Shelter_Sticks","RB_LvL1_Stick","RB_LvL2_Stick"}`
+- `CfgNonAIVehicles/Proxydummyscope` (`weapons/launchers/m79/config.cpp`)
+  - ~ `model`: `"\dz\weapons\firearms\aug\proxy\dummyscope.p3d"` → `"\dz\weapons\launchers\m79\proxy\dummyscope.p3d"`
+- `CfgNonAIVehicles/Proxysingle_plank` (`gear/camping/config.cpp`)
+  - ~ `inventorySlot[]`: `{"Material_WoodenPlanks","Material_L1_WoodenPlanks","Material_L1W1_WoodenPlanks","Material_L1W2_WoodenPlanks","Material_L1W3_WoodenPlanks","Material_L2_Woode...` → `{"Material_WoodenPlanks","Material_L1_WoodenPlanks","Material_L1W1_WoodenPlanks","Material_L1W2_WoodenPlanks","Material_L1W3_WoodenPlanks","Material_L2_Woode...`
+- `CfgNonAIVehicles/Proxywooden_log` (`gear/camping/config.cpp`)
+  - ~ `inventorySlot[]`: `{"Material_FPole_WoodenLog","Material_FPole_WoodenLog2"}` → `{"Material_FPole_WoodenLog","Material_FPole_WoodenLog2","RB_LvL1_Log","RB_LvL2_Log","RB_LvL3_Log"}`
+- `CfgVehicleSurfaces/Dirt` (`surfaces/config.cpp`)
+  - ~ `friction`: `0.88` → `0.91000003`
+- `CfgVehicleSurfaces/Forest` (`surfaces/config.cpp`)
+  - ~ `friction`: `0.81` → `0.88`
+- `CfgVehicleSurfaces/Grass` (`surfaces/config.cpp`)
+  - ~ `friction`: `0.82999998` → `0.89999998`
+- `CfgVehicleSurfaces/Gravel` (`surfaces/config.cpp`)
+  - ~ `friction`: `0.75` → `0.85000002`
+- `CfgVehicleSurfaces/Ice` (`surfaces/config.cpp`)
+  - ~ `drag`: `0.34999999` → `0.25`
+- `CfgVehicles/AirborneMask/Protection` (`characters/masks/config.cpp`)
+  - − `biological` (was `1`)
+  - − `dust_particle_breath` (was `1`)
+- `CfgVehicles/Animal_CanisLupus/Skinning/ObtainedHead` (`animals/canis_lupus/config.cpp`)
+  - + `transferPartDamageCoef` = `1`
+  - − `quantityMinMaxCoef[]` (was `{0,0.55000001}`)
+- `CfgVehicles/Animal_UrsusArctos/Skinning/ObtainedHead` (`animals_bliss/ursus_arctos/config.cpp`)
+  - + `transferPartDamageCoef` = `1`
+  - − `quantityMinMaxCoef[]` (was `{0,0.55000001}`)
+- `CfgVehicles/AthleticShoes_ColorBase` (`characters/shoes/config.cpp`)
+  - ~ `itemSize[]`: `{4,2}` → `{3,2}`
+- `CfgVehicles/AviatorGlasses/Protection` (`characters/glasses/config.cpp`)
+  - ~ `dust_particle_eyes`: `0.5` → `0.40000001`
+- `CfgVehicles/Ballerinas_ColorBase` (`characters/shoes/config.cpp`)
+  - ~ `itemSize[]`: `{4,2}` → `{3,2}`
+- `CfgVehicles/BallisticHelmet_ColorBase/DamageSystem/GlobalHealth/Health` (`characters/headgear/config.cpp`)
+  - ~ `hitpoints`: `75` → `85`
+- `CfgVehicles/BandageDressing` (`gear/medical/config.cpp`)
+  - + `varWetMax` = `1`
+- `CfgVehicles/Bandana_ColorBase/DamageSystem/GlobalHealth/Health` (`characters/headgear/config.cpp`)
+  - ~ `healthLevels[]`: `{{ 1 , { "DZ\characters\headgear\data\BandanaH.rvmat" } },{ 0.69999999 , { "DZ\characters\headgear\data\BandanaH.rvmat" } },{ 0.5 , { "DZ\characters\headgear...` → `{{ 1 , { "DZ\characters\headgear\data\BandanaFH_ground.rvmat" , "DZ\characters\headgear\data\BandanaH.rvmat" , "DZ\characters\headgear\data\BandanaF.rvmat" }...`
+- `CfgVehicles/BarbedWire` (`gear/camping/config.cpp`)
+  - ~ `repairableWithKits[]`: `{5,7}` → `{7}`
+  - ~ `repairCosts[]`: `{30,25}` → `{25}`
+- `CfgVehicles/Bark_ColorBase` (`gear/consumables/config.cpp`)
+  - + `varWetMax` = `0.249`
+- `CfgVehicles/BrassKnuckles_Shiny` (`weapons/melee/blunt/config.cpp`)
+  - ~ `hiddenSelectionsMaterials[]`: `{"dz\weapons\melee\blunt\Data\Brassknuckles_shiny.rvmat"}` → `{"dz\weapons\melee\blunt\data\brassknuckles_shiny.rvmat"}`
+  - ~ `hiddenSelectionsTextures[]`: `{"dz\weapons\melee\blunt\data\BrassKnuckles_shiny_co.paa"}` → `{"dz\weapons\melee\blunt\data\brassknuckles_shiny_co.paa"}`
+- `CfgVehicles/BrassKnuckles_Shiny/DamageSystem/GlobalHealth/Health` (`weapons/melee/blunt/config.cpp`)
+  - + `RefTexsMats[]` = `{"dz\weapons\melee\blunt\data\brassknuckles_dull.rvmat"}`
+  - ~ `healthLevels[]`: `{{ 1 , { "DZ\weapons\melee\blunt\Data\Brassknuckles_shiny.rvmat" } },{ 0.69999999 , { "DZ\weapons\melee\blunt\Data\Brassknuckles_shiny.rvmat" } },{ 0.5 , { "...` → `{{ 1 , { "dz\weapons\melee\blunt\data\brassknuckles_shiny.rvmat" } },{ 0.69999999 , { "dz\weapons\melee\blunt\data\brassknuckles_shiny.rvmat" } },{ 0.5 , { "...`
+- `CfgVehicles/Broom` (`gear/tools/config.cpp`)
+  - + `varWetMax` = `0.49000001`
+- `CfgVehicles/BurlapSack` (`gear/crafting/config.cpp`)
+  - ~ `itemSize[]`: `{3,2}` → `{2,2}`
+- `CfgVehicles/Candycane_Colorbase` (`gear/food/config.cpp`)
+  - − `varWetMax` (was `0.249`)
+- `CfgVehicles/CanisterGasoline` (`vehicles/parts/config.cpp`)
+  - ~ `weightPerQuantityUnit`: `0.69999999` → `1`
+  - ~ `soundImpactType`: `"plastic"` → `"metal"`
+- `CfgVehicles/CarTentPlacing` (`gear/camping/config.cpp`)
+  - ~ `hiddenSelectionsTextures[]`: `{"dz\gear\camping\data\car_tent_co.tga"}` → `{"dz\gear\camping\data\car_tent_CO.paa"}`
+- `CfgVehicles/Chemlight_ColorBase/DamageSystem/GlobalHealth/Health` (`gear/consumables/config.cpp`)
+  - ~ `healthLevels[]`: `{{ 1 , { "DZ\gear\consumables\data\"""".rvmat" } },{ 0.69999999 , { "DZ\gear\consumables\data\"""".rvmat" } },{ 0.5 , { "DZ\gear\consumables\data\""""_damage...` → `{{ 1 , { "DZ\gear\consumables\data\chemlight_white_off.rvmat" } },{ 0.69999999 , { "DZ\gear\consumables\data\chemlight_white_off.rvmat" } },{ 0.5 , { "DZ\gea...`
+- `CfgVehicles/ChernarusMap` (`gear/navigation/config.cpp`)
+  - + `varWetMax` = `1`
+- `CfgVehicles/CivSedanWheel` (`vehicles/wheeled/config.cpp`)
+  - + `tyreType` = `0`
+  - + `tyreRoughness` = `1`
+  - + `tyreLongitudinalFriction` = `0.85000002`
+  - + `tyreLateralFriction` = `0.94999999`
+- `CfgVehicles/CivSedanWheel_Ruined` (`vehicles/wheeled/config.cpp`)
+  - + `tyreType` = `0`
+  - + `tyreRoughness` = `0.2`
+  - + `tyreLongitudinalFriction` = `0.34999999`
+  - + `tyreLateralFriction` = `4.9499998`
+- `CfgVehicles/CivilianSedan` (`sounds/hpp/config.cpp`)
+  - ~ `hiddenSelectionsMaterials[]`: `{"dz\vehicles\wheeled\offroadhatchback\data\offroadhatchback_lights.rvmat","dz\vehicles\wheeled\offroadhatchback\data\offroadhatchback_lights.rvmat","dz\vehi...` → `{"dz\vehicles\wheeled\offroadhatchback\data\offroadhatchback_lights.rvmat","dz\vehicles\wheeled\offroadhatchback\data\offroadhatchback_lights.rvmat","dz\vehi...`
+- `CfgVehicles/CivilianSedan_Black` (`vehicles/wheeled/config.cpp`)
+  - ~ `hiddenSelectionsMaterials[]`: `{"dz\vehicles\wheeled\offroadhatchback\data\offroadhatchback_lights.rvmat","dz\vehicles\wheeled\offroadhatchback\data\offroadhatchback_lights.rvmat","dz\vehi...` → `{"dz\vehicles\wheeled\offroadhatchback\data\offroadhatchback_lights.rvmat","dz\vehicles\wheeled\offroadhatchback\data\offroadhatchback_lights.rvmat","dz\vehi...`
+- `CfgVehicles/CivilianSedan_Wine` (`vehicles/wheeled/config.cpp`)
+  - ~ `hiddenSelectionsMaterials[]`: `{"dz\vehicles\wheeled\offroadhatchback\data\offroadhatchback_lights.rvmat","dz\vehicles\wheeled\offroadhatchback\data\offroadhatchback_lights.rvmat","dz\vehi...` → `{"dz\vehicles\wheeled\offroadhatchback\data\offroadhatchback_lights.rvmat","dz\vehicles\wheeled\offroadhatchback\data\offroadhatchback_lights.rvmat","dz\vehi...`
+- `CfgVehicles/ClaymoreMine` (`weapons/explosives/config.cpp`)
+  - + `ammoType` = `"ClaymoreMine_Ammo"`
+- `CfgVehicles/ColdOperationBoots_ColorBase` (`characters/shoes/config.cpp`)
+  - ~ `itemSize[]`: `{4,4}` → `{3,4}`
+- `CfgVehicles/CombatBoots_ColorBase` (`characters/shoes/config.cpp`)
+  - ~ `itemSize[]`: `{4,4}` → `{3,3}`
+- `CfgVehicles/CombinationLock` (`gear/camping/config.cpp`)
+  - ~ `inventorySlot[]`: `{"Att_CombinationLock","Att_CombinationLock1_Wood","Att_CombinationLock1_Metal","Att_CombinationLock2_Wood","Att_CombinationLock2_Metal","Att_CombinationLock...` → `{"Att_CombinationLock","Att_CombinationLock1_Wood","Att_CombinationLock1_Metal","Att_CombinationLock2_Wood","Att_CombinationLock2_Metal","Att_CombinationLock...`
+- `CfgVehicles/DesignerGlasses/Protection` (`characters/glasses/config.cpp`)
+  - ~ `dust_particle_eyes`: `0.69999999` → `0.40000001`
+- `CfgVehicles/DressShoes_ColorBase` (`characters/shoes/config.cpp`)
+  - ~ `itemSize[]`: `{4,2}` → `{3,2}`
+- `CfgVehicles/DuctTape/AnimEvents/SoundWeapon/rope_struggle` (`gear/consumables/config.cpp`)
+  - ~ `soundSet`: `"rope_struggle_SoundSet"` → `"ducttape_tieup_SoundSet"`
+- `CfgVehicles/DuctTapeLocked` (`gear/consumables/config.cpp`)
+  - ~ `CanBeUnrestrainedBy[]`: `{"Sickle",3,"BoneKnife",3,"Hacksaw",3,"KitchenKnife",3,"SteakKnife",3,"HayHook",3,"StoneKnife",3,"Cleaver",3,"CombatKnife",3,"HuntingKnife",3,"Machete",3,"Sc...` → `{"Sickle",3,"BoneKnife",3,"Hacksaw",3,"KitchenKnife",3,"SteakKnife",3,"HayHook",3,"StoneKnife",3,"Cleaver",3,"CombatKnife",3,"HuntingKnife",3,"Machete",3,"Sc...`
+  - ~ `CanBeUnrestrainedByDMG[]`: `{12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12}` → `{12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12}`
+- `CfgVehicles/ExplosivesBase` (`data/config.cpp`)
+  - + `isMeleeWeapon` = `0`
+- `CfgVehicles/EyeMask_ColorBase` (`characters/glasses/config.cpp`)
+  - − `varWetMax` (was `0.79000002`)
+  - ~ `hiddenSelectionsTextures[]`: `{"DZ\characters\glasses\data\EyeMask_CO.paa","DZ\characters\glasses\data\EyeMask_CO.paa","DZ\characters\glasses\data\EyeMask_CO.paa"}` → `{"DZ\characters\glasses\data\EyeMask_Black_CO.paa","DZ\characters\glasses\data\EyeMask_Black_CO.paa","DZ\characters\glasses\data\EyeMask_Black_CO.paa"}`
+- `CfgVehicles/Fence` (`gear/camping/config.cpp`)
+  - ~ `attachments[]`: `{"Wall_Barbedwire_1","Wall_Barbedwire_2","Wall_Camonet","Att_CombinationLock","Material_Nails","Material_WoodenPlanks","Material_MetalSheets","Material_Woode...` → `{"Wall_Barbedwire_1","Wall_Barbedwire_2","Wall_Camonet","Att_CombinationLock","Att_CodeLock","Material_Nails","Material_WoodenPlanks","Material_MetalSheets",...`
+- `CfgVehicles/Fence/Construction/wall/wall_gate` (`gear/camping/config.cpp`)
+  - ~ `essential_attachments[]`: `{"Att_CombinationLock"}` → `{"Att_CodeLock","Att_CombinationLock"}`
+- `CfgVehicles/Fence/Construction/wall/wall_platform` (`gear/camping/config.cpp`)
+  - + `item_falling_data[]` = `{"wall_platform_fall_min","wall_platform_fall_max"}`
+- `CfgVehicles/Fence/Construction/wall/wall_platform_stairs_left` (`gear/camping/config.cpp`)
+  - + `item_falling_data[]` = `{"wall_platform_stairs_left_fall_min","wall_platform_stairs_left_fall_max"}`
+- `CfgVehicles/Fence/Construction/wall/wall_platform_stairs_right` (`gear/camping/config.cpp`)
+  - + `item_falling_data[]` = `{"wall_platform_stairs_right_fall_min","wall_platform_stairs_right_fall_max"}`
+- `CfgVehicles/Fence/GUIInventoryAttachmentsProps/Attachments` (`gear/camping/config.cpp`)
+  - ~ `attachmentSlots[]`: `{"Wall_Camonet","Wall_Barbedwire_1","Wall_Barbedwire_2","Att_CombinationLock"}` → `{"Wall_Camonet","Wall_Barbedwire_1","Wall_Barbedwire_2","Att_CombinationLock","Att_CodeLock"}`
+- `CfgVehicles/FenceKitPlacing` (`gear/camping/config.cpp`)
+  - ~ `hiddenSelectionsTextures[]`: `{"dz\gear\consumables\data\pile_of_planks_co.tga"}` → `{"dz\gear\consumables\data\pile_of_planks_CO.paa"}`
+- `CfgVehicles/FireplaceBase/DamageSystem/GlobalArmor/FragGrenade/Blood` (`gear/cooking/config.cpp`)
+  - ~ `damage`: `0` → `8`
+- `CfgVehicles/FireplaceBase/DamageSystem/GlobalArmor/FragGrenade/Health` (`gear/cooking/config.cpp`)
+  - ~ `damage`: `0` → `8`
+- `CfgVehicles/FireplaceBase/DamageSystem/GlobalArmor/FragGrenade/Shock` (`gear/cooking/config.cpp`)
+  - ~ `damage`: `0` → `8`
+- `CfgVehicles/FireplaceBase/DamageSystem/GlobalHealth/Health` (`gear/cooking/config.cpp`)
+  - ~ `hitpoints`: `100` → `900`
+  - ~ `transferToAttachmentsCoef`: `0.5` → `1`
+- `CfgVehicles/Firewood` (`gear/consumables/config.cpp`)
+  - + `varWetMax` = `0.49000001`
+- `CfgVehicles/FlashGrenade` (`weapons/explosives/config.cpp`)
+  - + `ammoType` = `"FlashGrenade_Ammo"`
+- `CfgVehicles/GP5GasMask/Protection` (`characters/masks/config.cpp`)
+  - − `biological` (was `1`)
+  - − `dust_particle_breath` (was `1`)
+- `CfgVehicles/GP5GasMask_Filter/Protection` (`characters/masks/config.cpp`)
+  - + `dust_particle_breath` = `1`
+- `CfgVehicles/GPSReceiver` (`gear/navigation/config.cpp`)
+  - + `hiddenSelectionsMaterials[]` = `{"dz\gear\navigation\data\GPSReceiver_digits.rvmat","dz\gear\navigation\data\GPSReceiver_digits.rvmat","dz\gear\navigation\data\GPSReceiver_digits.rvmat","dz...`
+  - ~ `hiddenSelectionsTextures[]`: `{"dz\gear\navigation\data\GPS_dash_ca.paa","dz\gear\navigation\data\GPS_dash_ca.paa","dz\gear\navigation\data\GPS_dash_ca.paa","dz\gear\navigation\data\GPS_d...` → `{"dz\gear\navigation\data\gps_0_ca.paa","dz\gear\navigation\data\gps_0_ca.paa","dz\gear\navigation\data\gps_0_ca.paa","dz\gear\navigation\data\gps_0_ca.paa",...`
+- `CfgVehicles/GPSReceiver/EnergyManager` (`gear/navigation/config.cpp`)
+  - ~ `autoSwitchOffWhenInCargo`: `1` → `0`
+- `CfgVehicles/GardenPlotPlacing` (`gear/cultivation/config.cpp`)
+  - ~ `hiddenSelectionsTextures[]`: `{"dz\gear\cultivation\data\tile_co.tga"}` → `{"dz\gear\cultivation\data\tile_co.paa"}`
+- `CfgVehicles/GasMask_Filter` (`gear/consumables/config.cpp`)
+  - − `varWetMax` (was `0.249`)
+- `CfgVehicles/GasMask_Filter_Improvised` (`gear/crafting/config.cpp`)
+  - − `varWetMax` (was `0.249`)
+  - ~ `hiddenSelectionsTextures[]`: `{"\dz\gear\crafting\gasmask_filter_improvised_co.paa"}` → `{"\dz\gear\crafting\data\gasmask_filter_improvised_co.paa"}`
+- `CfgVehicles/GorkaEJacket_ColorBase/DamageSystem/GlobalArmor/Infected/Blood` (`characters/tops/config.cpp`)
+  - ~ `damage`: `1` → `0.89999998`
+- `CfgVehicles/GorkaEJacket_ColorBase/DamageSystem/GlobalArmor/Infected/Health` (`characters/tops/config.cpp`)
+  - ~ `damage`: `0.94999999` → `0.89999998`
+- `CfgVehicles/GorkaEJacket_ColorBase/DamageSystem/GlobalArmor/Melee/Blood` (`characters/tops/config.cpp`)
+  - ~ `damage`: `1` → `0.89999998`
+- `CfgVehicles/GorkaEJacket_ColorBase/DamageSystem/GlobalArmor/Melee/Health` (`characters/tops/config.cpp`)
+  - ~ `damage`: `0.94999999` → `0.89999998`
+- `CfgVehicles/GorkaHelmet/DamageSystem/GlobalHealth/Health` (`characters/headgear/config.cpp`)
+  - ~ `hitpoints`: `100` → `120`
+- `CfgVehicles/GorkaHelmetVisor/DamageSystem/GlobalHealth/Health` (`gear/crafting/config.cpp`)
+  - ~ `healthLevels[]`: `{{ 1 , { "dz\characters\headgear\data\maska.rvmat" } },{ 0.69999999 , { "dz\characters\headgear\data\maska.rvmat" } },{ 0.5 , { "dz\characters\headgear\data\...` → `{{ 1 , { "dz\characters\headgear\data\maska.rvmat" , "dz\characters\headgear\data\maska_glass.rvmat" } },{ 0.69999999 , { "dz\characters\headgear\data\maska....`
+- `CfgVehicles/GorkaPants_ColorBase/DamageSystem/GlobalArmor/Infected/Blood` (`characters/pants/config.cpp`)
+  - ~ `damage`: `1` → `0.89999998`
+- `CfgVehicles/GorkaPants_ColorBase/DamageSystem/GlobalArmor/Infected/Health` (`characters/pants/config.cpp`)
+  - ~ `damage`: `0.94999999` → `0.89999998`
+- `CfgVehicles/GorkaPants_ColorBase/DamageSystem/GlobalArmor/Melee/Blood` (`characters/pants/config.cpp`)
+  - ~ `damage`: `1` → `0.89999998`
+- `CfgVehicles/GorkaPants_ColorBase/DamageSystem/GlobalArmor/Melee/Health` (`characters/pants/config.cpp`)
+  - ~ `damage`: `0.94999999` → `0.89999998`
+- `CfgVehicles/Grenade_ChemGas` (`weapons/explosives/config.cpp`)
+  - + `ammoType` = `"ChemGasGrenade_Ammo"`
+- `CfgVehicles/HatchbackWheel` (`vehicles/wheeled/config.cpp`)
+  - + `tyreType` = `0`
+  - + `tyreRoughness` = `1`
+  - + `tyreLongitudinalFriction` = `0.85000002`
+  - + `tyreLateralFriction` = `0.94999999`
+- `CfgVehicles/HatchbackWheel_Ruined` (`vehicles/wheeled/config.cpp`)
+  - + `tyreType` = `0`
+  - + `tyreRoughness` = `0.2`
+  - + `tyreLongitudinalFriction` = `0.34999999`
+  - + `tyreLateralFriction` = `4.9499998`
+- `CfgVehicles/Hatchback_02_Wheel` (`vehicles/wheeled/config.cpp`)
+  - + `tyreType` = `0`
+  - + `tyreRoughness` = `1`
+  - + `tyreLongitudinalFriction` = `1.5`
+  - + `tyreLateralFriction` = `1.8`
+- `CfgVehicles/Hatchback_02_Wheel_Ruined` (`vehicles/wheeled/config.cpp`)
+  - + `tyreType` = `0`
+  - + `tyreRoughness` = `0.2`
+  - + `tyreLongitudinalFriction` = `0.25`
+  - + `tyreLateralFriction` = `4.9499998`
+- `CfgVehicles/HeadlightH7` (`vehicles/parts/config.cpp`)
+  - + `attachSoundSet[]` = `{"headlightbulb_attach_SoundSet","headlightbulb_attach_SoundSet"}`
+  - + `attachSoundSlot[]` = `{"Reflector_1_1","Reflector_2_1"}`
+  - + `detachSoundSet[]` = `{"headlightbulb_detach_SoundSet","headlightbulb_detach_SoundSet"}`
+  - + `detachSoundSlot[]` = `{"Reflector_1_1","Reflector_2_1"}`
+- `CfgVehicles/HikingBootsLow_ColorBase` (`characters/shoes/config.cpp`)
+  - ~ `itemSize[]`: `{4,3}` → `{3,2}`
+- `CfgVehicles/HikingBoots_ColorBase` (`characters/shoes/config.cpp`)
+  - ~ `itemSize[]`: `{4,4}` → `{3,3}`
+- `CfgVehicles/Inventory_Base` (`data/config.cpp`)
+  - ~ `varWetMax`: `0.249` → `0.048999999`
+- `CfgVehicles/JoggingShoes_ColorBase` (`characters/shoes/config.cpp`)
+  - ~ `itemSize[]`: `{4,2}` → `{3,2}`
+- `CfgVehicles/JungleBoots_ColorBase` (`characters/shoes/config.cpp`)
+  - ~ `itemSize[]`: `{4,4}` → `{3,3}`
+- `CfgVehicles/LandMineTrap` (`gear/traps/config.cpp`)
+  - ~ `ammoType`: `"LandMineExplosion"` → `"LandMineExplosion_Ammo"`
+- `CfgVehicles/Land_Castle_Bastion` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Bastion"` → `"\DZ\structures\Specific\Castles\Castle_Bastion.p3d"`
+- `CfgVehicles/Land_Castle_Bastion_nolc` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Bastion_nolc"` → `"\DZ\structures\Specific\Castles\Castle_Bastion_nolc.p3d"`
+- `CfgVehicles/Land_Castle_Gate` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Gate"` → `"\DZ\structures\Specific\Castles\Castle_Gate.p3d"`
+- `CfgVehicles/Land_Castle_Stairs` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Stairs"` → `"\DZ\structures\Specific\Castles\Castle_Stairs.p3d"`
+- `CfgVehicles/Land_Castle_Stairs_nolc` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Stairs_nolc"` → `"\DZ\structures\Specific\Castles\Castle_Stairs_nolc.p3d"`
+- `CfgVehicles/Land_Castle_Wall1_20` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall1_20"` → `"\DZ\structures\Specific\Castles\Castle_Wall1_20.p3d"`
+- `CfgVehicles/Land_Castle_Wall1_20_Turn` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall1_20_Turn"` → `"\DZ\structures\Specific\Castles\Castle_Wall1_20_Turn.p3d"`
+- `CfgVehicles/Land_Castle_Wall1_20_Turn_nolc` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall1_20_Turn_nolc"` → `"\DZ\structures\Specific\Castles\Castle_Wall1_20_Turn_nolc.p3d"`
+- `CfgVehicles/Land_Castle_Wall1_20_nolc` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall1_20_nolc"` → `"\DZ\structures\Specific\Castles\Castle_Wall1_20_nolc.p3d"`
+- `CfgVehicles/Land_Castle_Wall1_Corner1` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall1_Corner1"` → `"\DZ\structures\Specific\Castles\Castle_Wall1_Corner1.p3d"`
+- `CfgVehicles/Land_Castle_Wall1_Corner1_nolc` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall1_Corner1_nolc"` → `"\DZ\structures\Specific\Castles\Castle_Wall1_Corner1_nolc.p3d"`
+- `CfgVehicles/Land_Castle_Wall1_Corner2` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall1_Corner2"` → `"\DZ\structures\Specific\Castles\Castle_Wall1_Corner2.p3d"`
+- `CfgVehicles/Land_Castle_Wall1_Corner2_nolc` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall1_Corner2_nolc"` → `"\DZ\structures\Specific\Castles\Castle_Wall1_Corner2_nolc.p3d"`
+- `CfgVehicles/Land_Castle_Wall1_End1` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall1_End1"` → `"\DZ\structures\Specific\Castles\Castle_Wall1_End1.p3d"`
+- `CfgVehicles/Land_Castle_Wall1_End1_nolc` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall1_End1_nolc"` → `"\DZ\structures\Specific\Castles\Castle_Wall1_End1_nolc.p3d"`
+- `CfgVehicles/Land_Castle_Wall1_End2` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall1_End2"` → `"\DZ\structures\Specific\Castles\Castle_Wall1_End2.p3d"`
+- `CfgVehicles/Land_Castle_Wall1_End2_nolc` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall1_End2_nolc"` → `"\DZ\structures\Specific\Castles\Castle_Wall1_End2_nolc.p3d"`
+- `CfgVehicles/Land_Castle_Wall2_30` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall2_30"` → `"\DZ\structures\Specific\Castles\Castle_Wall2_30.p3d"`
+- `CfgVehicles/Land_Castle_Wall2_30_nolc` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall2_30_nolc"` → `"\DZ\structures\Specific\Castles\Castle_Wall2_30_nolc.p3d"`
+- `CfgVehicles/Land_Castle_Wall2_Corner1` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall2_Corner1"` → `"\DZ\structures\Specific\Castles\Castle_Wall2_Corner1.p3d"`
+- `CfgVehicles/Land_Castle_Wall2_Corner1_nolc` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall2_Corner1_nolc"` → `"\DZ\structures\Specific\Castles\Castle_Wall2_Corner1_nolc.p3d"`
+- `CfgVehicles/Land_Castle_Wall2_Corner2` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall2_Corner2"` → `"\DZ\structures\Specific\Castles\Castle_Wall2_Corner2.p3d"`
+- `CfgVehicles/Land_Castle_Wall2_Corner2_nolc` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall2_Corner2_nolc"` → `"\DZ\structures\Specific\Castles\Castle_Wall2_Corner2_nolc.p3d"`
+- `CfgVehicles/Land_Castle_Wall2_End1` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall2_End1"` → `"\DZ\structures\Specific\Castles\Castle_Wall2_End1.p3d"`
+- `CfgVehicles/Land_Castle_Wall2_End1_nolc` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall2_End1_nolc"` → `"\DZ\structures\Specific\Castles\Castle_Wall2_End1_nolc.p3d"`
+- `CfgVehicles/Land_Castle_Wall2_End2` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall2_End2"` → `"\DZ\structures\Specific\Castles\Castle_Wall2_End2.p3d"`
+- `CfgVehicles/Land_Castle_Wall2_End2_nolc` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_Wall2_End2_nolc"` → `"\DZ\structures\Specific\Castles\Castle_Wall2_End2_nolc.p3d"`
+- `CfgVehicles/Land_Castle_WallS_10` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_WallS_10"` → `"\DZ\structures\Specific\Castles\Castle_WallS_10.p3d"`
+- `CfgVehicles/Land_Castle_WallS_10_nolc` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_WallS_10_nolc"` → `"\DZ\structures\Specific\Castles\Castle_WallS_10_nolc.p3d"`
+- `CfgVehicles/Land_Castle_WallS_5_D` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_WallS_5_D"` → `"\DZ\structures\Specific\Castles\Castle_WallS_5_D.p3d"`
+- `CfgVehicles/Land_Castle_WallS_5_D_nolc` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_WallS_5_D_nolc"` → `"\DZ\structures\Specific\Castles\Castle_WallS_5_D_nolc.p3d"`
+- `CfgVehicles/Land_Castle_WallS_End` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_WallS_End"` → `"\DZ\structures\Specific\Castles\Castle_WallS_End.p3d"`
+- `CfgVehicles/Land_Castle_WallS_End_nolc` (`structures/specific/config.cpp`)
+  - ~ `model`: `"\DZ\structures\Specific\Castles\Castle_WallS_End_nolc"` → `"\DZ\structures\Specific\Castles\Castle_WallS_End_nolc.p3d"`
+- `CfgVehicles/Land_CementWorks_ExpeditionB` (`structures/industrial/config.cpp`)
+  - ~ `model`: `"\dz\structures\industrial\cementworks\CementWorks_ExpeditionB"` → `"\dz\structures\industrial\cementworks\CementWorks_ExpeditionB.p3d"`
+- `CfgVehicles/Land_CementWorks_ExpeditionC` (`structures/industrial/config.cpp`)
+  - ~ `model`: `"\dz\structures\industrial\cementworks\CementWorks_ExpeditionC"` → `"\dz\structures\industrial\cementworks\CementWorks_ExpeditionC.p3d"`
+- `CfgVehicles/Land_Container_1Bo` (`structures/industrial/config.cpp`)
+  - ~ `model`: `"\dz\structures\Industrial\Containers\Container_1Bo"` → `"\dz\structures\Industrial\Containers\Container_1Bo.p3d"`
+- `CfgVehicles/Land_Mil_Fortified_Nest_Big` (`structures/military/config.cpp`)
+  - ~ `model`: `"dz\structures\military\improvised\Mil_Fortified_Nest_Big"` → `"dz\structures\military\improvised\Mil_Fortified_Nest_Big.p3d"`
+- `CfgVehicles/Land_Mil_Fortified_Nest_Small` (`structures/military/config.cpp`)
+  - ~ `model`: `"dz\structures\military\improvised\Mil_Fortified_Nest_Small"` → `"dz\structures\military\improvised\Mil_Fortified_Nest_Small.p3d"`
+- `CfgVehicles/Land_Mil_Fortified_Nest_Watchtower` (`structures/military/config.cpp`)
+  - ~ `model`: `"dz\structures\military\improvised\Mil_Fortified_Nest_Watchtower"` → `"dz\structures\military\improvised\Mil_Fortified_Nest_Watchtower.p3d"`
+- `CfgVehicles/Land_Mil_GuardShed` (`structures/military/config.cpp`)
+  - ~ `model`: `"dz\structures\military\improvised\Mil_GuardShed"` → `"dz\structures\military\improvised\Mil_GuardShed.p3d"`
+- `CfgVehicles/Land_Mil_Tent_Big1_1` (`structures/military/config.cpp`)
+  - ~ `model`: `"dz\structures\military\improvised\Mil_Tent_Big1_1"` → `"dz\structures\military\improvised\Mil_Tent_Big1_1.p3d"`
+- `CfgVehicles/Land_Mil_Tent_Big1_2` (`structures/military/config.cpp`)
+  - ~ `model`: `"dz\structures\military\improvised\Mil_Tent_Big1_2"` → `"dz\structures\military\improvised\Mil_Tent_Big1_2.p3d"`
+- `CfgVehicles/Land_Mil_Tent_Big1_3` (`structures/military/config.cpp`)
+  - ~ `model`: `"dz\structures\military\improvised\Mil_Tent_Big1_3"` → `"dz\structures\military\improvised\Mil_Tent_Big1_3.p3d"`
+- `CfgVehicles/Land_Mil_Tent_Big1_4` (`structures/military/config.cpp`)
+  - ~ `model`: `"dz\structures\military\improvised\Mil_Tent_Big1_4"` → `"dz\structures\military\improvised\Mil_Tent_Big1_4.p3d"`
+- `CfgVehicles/Land_Mil_Tent_Big1_5` (`structures/military/config.cpp`)
+  - ~ `model`: `"dz\structures\military\improvised\Mil_Tent_Big1_5"` → `"dz\structures\military\improvised\Mil_Tent_Big1_5.p3d"`
+- `CfgVehicles/Land_Mil_Tent_Big2_1` (`structures/military/config.cpp`)
+  - ~ `model`: `"dz\structures\military\improvised\Mil_Tent_Big2_1"` → `"dz\structures\military\improvised\Mil_Tent_Big2_1.p3d"`
+- `CfgVehicles/Land_Mil_Tent_Big2_2` (`structures/military/config.cpp`)
+  - ~ `model`: `"dz\structures\military\improvised\Mil_Tent_Big2_2"` → `"dz\structures\military\improvised\Mil_Tent_Big2_2.p3d"`
+- `CfgVehicles/Land_Mil_Tent_Big2_3` (`structures/military/config.cpp`)
+  - ~ `model`: `"dz\structures\military\improvised\Mil_Tent_Big2_3"` → `"dz\structures\military\improvised\Mil_Tent_Big2_3.p3d"`
+- `CfgVehicles/Land_Mil_Tent_Big2_4` (`structures/military/config.cpp`)
+  - ~ `model`: `"dz\structures\military\improvised\Mil_Tent_Big2_4"` → `"dz\structures\military\improvised\Mil_Tent_Big2_4.p3d"`
+- `CfgVehicles/Land_Mil_Tent_Big2_5` (`structures/military/config.cpp`)
+  - ~ `model`: `"dz\structures\military\improvised\Mil_Tent_Big2_5"` → `"dz\structures\military\improvised\Mil_Tent_Big2_5.p3d"`
+- `CfgVehicles/Land_Mil_Tent_Big3` (`structures/military/config.cpp`)
+  - ~ `model`: `"dz\structures\military\improvised\Mil_Tent_Big3"` → `"dz\structures\military\improvised\Mil_Tent_Big3.p3d"`
+- `CfgVehicles/Land_Mil_Tent_Big4` (`structures/military/config.cpp`)
+  - ~ `model`: `"dz\structures\military\improvised\Mil_Tent_Big4"` → `"dz\structures\military\improvised\Mil_Tent_Big4.p3d"`
+- `CfgVehicles/Land_Pipe_Big_BuildL` (`structures/industrial/config.cpp`)
+  - ~ `model`: `"\dz\structures\Industrial\Pipes\Pipe_Big_BuildL"` → `"\dz\structures\Industrial\Pipes\Pipe_Big_BuildL.p3d"`
+- `CfgVehicles/Land_Pipe_Big_BuildR` (`structures/industrial/config.cpp`)
+  - ~ `model`: `"\dz\structures\Industrial\Pipes\Pipe_Big_BuildR"` → `"\dz\structures\Industrial\Pipes\Pipe_Big_BuildR.p3d"`
+- `CfgVehicles/Land_Pipe_Big_CornerL` (`structures/industrial/config.cpp`)
+  - ~ `model`: `"\dz\structures\Industrial\Pipes\Pipe_Big_CornerL"` → `"\dz\structures\Industrial\Pipes\Pipe_Big_CornerL.p3d"`
+- `CfgVehicles/Land_Pipe_Big_CornerR` (`structures/industrial/config.cpp`)
+  - ~ `model`: `"\dz\structures\Industrial\Pipes\Pipe_Big_CornerR"` → `"\dz\structures\Industrial\Pipes\Pipe_Big_CornerR.p3d"`
+- `CfgVehicles/Land_Pipe_Big_Ground1` (`structures/industrial/config.cpp`)
+  - ~ `model`: `"\dz\structures\Industrial\Pipes\Pipe_Big_Ground1"` → `"\dz\structures\Industrial\Pipes\Pipe_Big_Ground1.p3d"`
+- `CfgVehicles/Land_Pipe_Big_Ground2` (`structures/industrial/config.cpp`)
+  - ~ `model`: `"\dz\structures\Industrial\Pipes\Pipe_Big_Ground2"` → `"\dz\structures\Industrial\Pipes\Pipe_Big_Ground2.p3d"`
+- `CfgVehicles/Land_Wreck_hb02_aban1_black` (`structures/wrecks/config.cpp`)
+  - ~ `model`: `"DZ\structures\Wrecks\Vehicles\Wreck_hb02_aban1_black"` → `"DZ\structures\Wrecks\Vehicles\Wreck_hb02_aban1_black.p3d"`
+- `CfgVehicles/Land_Wreck_hb02_aban1_blue` (`structures/wrecks/config.cpp`)
+  - ~ `model`: `"DZ\structures\Wrecks\Vehicles\Wreck_hb02_aban1_blue"` → `"DZ\structures\Wrecks\Vehicles\Wreck_hb02_aban1_blue.p3d"`
+- `CfgVehicles/Land_Wreck_hb02_aban1_red` (`structures/wrecks/config.cpp`)
+  - ~ `model`: `"DZ\structures\Wrecks\Vehicles\Wreck_hb02_aban1_red"` → `"DZ\structures\Wrecks\Vehicles\Wreck_hb02_aban1_red.p3d"`
+- `CfgVehicles/Land_Wreck_hb02_aban2_black` (`structures/wrecks/config.cpp`)
+  - ~ `model`: `"DZ\structures\Wrecks\Vehicles\Wreck_hb02_aban2_black"` → `"DZ\structures\Wrecks\Vehicles\Wreck_hb02_aban2_black.p3d"`
+- `CfgVehicles/Land_Wreck_hb02_aban2_blue` (`structures/wrecks/config.cpp`)
+  - ~ `model`: `"DZ\structures\Wrecks\Vehicles\Wreck_hb02_aban2_blue"` → `"DZ\structures\Wrecks\Vehicles\Wreck_hb02_aban2_blue.p3d"`
+- `CfgVehicles/Land_Wreck_hb02_aban2_red` (`structures/wrecks/config.cpp`)
+  - ~ `model`: `"DZ\structures\Wrecks\Vehicles\Wreck_hb02_aban2_red"` → `"DZ\structures\Wrecks\Vehicles\Wreck_hb02_aban2_red.p3d"`
+- `CfgVehicles/Land_Wreck_sed01_aban1_black` (`structures/wrecks/config.cpp`)
+  - ~ `model`: `"DZ\structures\Wrecks\Vehicles\Wreck_sed01_aban1_black"` → `"DZ\structures\Wrecks\Vehicles\Wreck_sed01_aban1_black.p3d"`
+- `CfgVehicles/Land_Wreck_sed01_aban1_white` (`structures/wrecks/config.cpp`)
+  - ~ `model`: `"DZ\structures\Wrecks\Vehicles\Wreck_sed01_aban1_white"` → `"DZ\structures\Wrecks\Vehicles\Wreck_sed01_aban1_white.p3d"`
+- `CfgVehicles/Land_Wreck_sed01_aban1_wine` (`structures/wrecks/config.cpp`)
+  - ~ `model`: `"DZ\structures\Wrecks\Vehicles\Wreck_sed01_aban1_wine"` → `"DZ\structures\Wrecks\Vehicles\Wreck_sed01_aban1_wine.p3d"`
+- `CfgVehicles/Land_Wreck_sed01_aban2_black` (`structures/wrecks/config.cpp`)
+  - ~ `model`: `"DZ\structures\Wrecks\Vehicles\Wreck_sed01_aban2_black"` → `"DZ\structures\Wrecks\Vehicles\Wreck_sed01_aban2_black.p3d"`
+- `CfgVehicles/Land_Wreck_sed01_aban2_white` (`structures/wrecks/config.cpp`)
+  - ~ `model`: `"DZ\structures\Wrecks\Vehicles\Wreck_sed01_aban2_white"` → `"DZ\structures\Wrecks\Vehicles\Wreck_sed01_aban2_white.p3d"`
+- `CfgVehicles/Land_Wreck_sed01_aban2_wine` (`structures/wrecks/config.cpp`)
+  - ~ `model`: `"DZ\structures\Wrecks\Vehicles\Wreck_sed01_aban2_wine"` → `"DZ\structures\Wrecks\Vehicles\Wreck_sed01_aban2_wine.p3d"`
+- `CfgVehicles/Land_Wreck_sed02_aban1_grey` (`structures/wrecks/config.cpp`)
+  - ~ `model`: `"DZ\structures\Wrecks\Vehicles\Wreck_sed02_aban1_grey"` → `"DZ\structures\Wrecks\Vehicles\Wreck_sed02_aban1_grey.p3d"`
+- `CfgVehicles/Land_Wreck_sed02_aban1_red` (`structures/wrecks/config.cpp`)
+  - ~ `model`: `"DZ\structures\Wrecks\Vehicles\Wreck_sed02_aban1_red"` → `"DZ\structures\Wrecks\Vehicles\Wreck_sed02_aban1_red.p3d"`
+- `CfgVehicles/Land_Wreck_sed02_aban1_yellow` (`structures/wrecks/config.cpp`)
+  - ~ `model`: `"DZ\structures\Wrecks\Vehicles\Wreck_sed02_aban1_yellow"` → `"DZ\structures\Wrecks\Vehicles\Wreck_sed02_aban1_yellow.p3d"`
+- `CfgVehicles/Land_Wreck_sed02_aban2_grey` (`structures/wrecks/config.cpp`)
+  - ~ `model`: `"DZ\structures\Wrecks\Vehicles\Wreck_sed02_aban2_grey"` → `"DZ\structures\Wrecks\Vehicles\Wreck_sed02_aban2_grey.p3d"`
+- `CfgVehicles/Land_Wreck_sed02_aban2_red` (`structures/wrecks/config.cpp`)
+  - ~ `model`: `"DZ\structures\Wrecks\Vehicles\Wreck_sed02_aban2_red"` → `"DZ\structures\Wrecks\Vehicles\Wreck_sed02_aban2_red.p3d"`
+- `CfgVehicles/Land_Wreck_sed02_aban2_yellow` (`structures/wrecks/config.cpp`)
+  - ~ `model`: `"DZ\structures\Wrecks\Vehicles\Wreck_sed02_aban2_yellow"` → `"DZ\structures\Wrecks\Vehicles\Wreck_sed02_aban2_yellow.p3d"`
+- `CfgVehicles/Land_wreck_sed02_aban1_police_DE` (`structures_sakhal/config.cpp`)
+  - ~ `scope`: `1` → `2`
+- `CfgVehicles/Land_wreck_sed02_aban2_police_DE` (`structures_sakhal/config.cpp`)
+  - ~ `scope`: `1` → `2`
+- `CfgVehicles/LargeTentPlacing` (`gear/camping/config.cpp`)
+  - ~ `hiddenSelectionsTextures[]`: `{"dz\gear\camping\data\large_tent_co.tga"}` → `{"dz\gear\camping\data\large_tent_co.paa"}`
+- `CfgVehicles/LongWoodenStick` (`gear/crafting/config.cpp`)
+  - + `varWetMax` = `0.49000001`
+- `CfgVehicles/M65Jacket_ColorBase` (`characters/tops/config.cpp`)
+  - + `ragQuantity` = `3`
+- `CfgVehicles/M67Grenade` (`weapons/explosives/config.cpp`)
+  - + `ammoType` = `"M67Grenade_Ammo"`
+- `CfgVehicles/Matchbox` (`gear/consumables/config.cpp`)
+  - + `varWetMax` = `0.49000001`
+- `CfgVehicles/MedievalBoots` (`characters/shoes/config.cpp`)
+  - ~ `itemSize[]`: `{4,3}` → `{3,4}`
+- `CfgVehicles/MediumTentPlacing` (`gear/camping/config.cpp`)
+  - ~ `hiddenSelectionsTextures[]`: `{"dz\gear\camping\data\tent_medium_pitched_b_co.tga"}` → `{"dz\gear\camping\data\tent_medium_pitched_b_CO.paa"}`
+- `CfgVehicles/MetalPlate` (`gear/consumables/config.cpp`)
+  - + `greyscale_icon` = `"set:dayz_resources_grayscale image:metalsheet"`
+  - ~ `inventorySlot[]`: `{"Truck_01_MetalSheets","Material_MetalSheets","Material_L3_MetalSheets","Material_L1W1_MetalSheets","Material_L1W2_MetalSheets","Material_L1W3_MetalSheets",...` → `{"Truck_01_MetalSheets","Material_MetalSheets","Material_L3_MetalSheets","Material_L1W1_MetalSheets","Material_L1W2_MetalSheets","Material_L1W3_MetalSheets",...`
+- `CfgVehicles/MetalWire` (`gear/crafting/config.cpp`)
+  - + `varQuantityDestroyOnMin` = `1`
+  - + `canBeSplit` = `1`
+  - + `varQuantityInit` = `1`
+  - + `varQuantityMin` = `0`
+  - + `varQuantityMax` = `50`
+  - + `varStackMax` = `1`
+  - + `greyscale_icon` = `"set:dayz_resources_grayscale image:metalwire"`
+  - ~ `inventorySlot[]`: `{"MetalWire","Material_MetalWire","Material_FPole_MetalWire"}` → `{"MetalWire","Material_MetalWire","Material_FPole_MetalWire","RB_LvL1_MetalWire","RB_LvL2_MetalWire","RB_LvL3_MetalWire"}`
+  - ~ `repairableWithKits[]`: `{5,7}` → `{7}`
+  - ~ `repairCosts[]`: `{30,25}` → `{25}`
+- `CfgVehicles/Mich2001Helmet/DamageSystem/GlobalHealth/Health` (`characters/headgear/config.cpp`)
+  - ~ `hitpoints`: `80` → `100`
+- `CfgVehicles/MilitaryBeret_ColorBase` (`characters/headgear/config.cpp`)
+  - ~ `headSelectionsToHide[]`: `{"Clipping_MilitaryBeret_xx"}` → `{"Clipping_prison_cap"}`
+- `CfgVehicles/MilitaryBoots_ColorBase` (`characters/shoes/config.cpp`)
+  - ~ `itemSize[]`: `{4,4}` → `{3,3}`
+- `CfgVehicles/MotoHelmet_ColorBase/Protection` (`characters/headgear/config.cpp`)
+  - − `dust_particle_eyes` (was `1`)
+  - ~ `dust_particle_breath`: `1` → `0.25`
+- `CfgVehicles/NBCBootsBase` (`characters/shoes/config.cpp`)
+  - ~ `inventorySlot[]`: `{"Feet"}` → `{"Feet","NBCBoots"}`
+- `CfgVehicles/NBCGloves_ColorBase` (`characters/gloves/config.cpp`)
+  - ~ `inventorySlot[]`: `{"Gloves"}` → `{"Gloves","NBCGloves"}`
+- `CfgVehicles/NBCHoodBase` (`characters/headgear/config.cpp`)
+  - ~ `inventorySlot[]`: `{"Headgear"}` → `{"Headgear","NBCHead"}`
+- `CfgVehicles/NBCJacketBase` (`characters/tops/config.cpp`)
+  - ~ `inventorySlot[]`: `{"Body"}` → `{"Body","NBCTop"}`
+- `CfgVehicles/NBCPantsBase` (`characters/pants/config.cpp`)
+  - ~ `inventorySlot[]`: `{"Legs"}` → `{"Legs","NBCPants"}`
+- `CfgVehicles/Nail` (`gear/consumables/config.cpp`)
+  - + `varStackMax` = `99`
+  - + `greyscale_icon` = `"set:dayz_resources_grayscale image:nails"`
+  - ~ `varQuantityMax`: `99` → `999`
+  - ~ `inventorySlot[]`: `{"Material_Nails","Material_L1_Nails","Material_L1W1_Nails","Material_L1W2_Nails","Material_L1W3_Nails","Material_L2_Nails","Material_L2W1_Nails","Material_L...` → `{"Material_Nails","Material_L1_Nails","Material_L1W1_Nails","Material_L1W2_Nails","Material_L1W3_Nails","Material_L2_Nails","Material_L2W1_Nails","Material_L...`
+- `CfgVehicles/NioshFaceMask` (`characters/masks/config.cpp`)
+  - ~ `weight`: `340` → `10`
+- `CfgVehicles/NorseHelm` (`characters/headgear/config.cpp`)
+  - ~ `heatIsolation`: `0` → `0.1`
+- `CfgVehicles/OMKJacket_ColorBase` (`characters/tops/config.cpp`)
+  - + `ragQuantity` = `3`
+- `CfgVehicles/OMKPants_ColorBase` (`characters/pants/config.cpp`)
+  - + `ragQuantity` = `3`
+- `CfgVehicles/OffroadHatchback` (`sounds/hpp/config.cpp`)
+  - − `descriptionShort` (was `"$STR_OffroadHatchback1"`)
+- `CfgVehicles/Offroad_02` (`sounds/hpp/config.cpp`)
+  - ~ `hiddenSelections[]`: `{"light_1_1","light_2_1","light_brake_1_2","light_brake_2_2","light_reverse_1_2","light_reverse_2_2","light_1_2","light_2_2","light_dashboard"}` → `{"light_1_1","light_2_1","light_brake_1_2","light_brake_2_2","light_reverse_1_2","light_reverse_2_2","light_1_2","light_2_2","light_dashboard","camo","camo_i...`
+  - ~ `hiddenSelectionsTextures[]`: `{"","","","","","","","",""}` → `{"","","","","","","","","","","dz\vehicles\wheeled\offroad_02\data\offroad_02_base_co.paa","","dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_co.paa"}`
+  - ~ `hiddenSelectionsMaterials[]`: `{"dz\vehicles\wheeled\Offroad_02\data\offroad_02_lights_nolight.rvmat","dz\vehicles\wheeled\Offroad_02\data\offroad_02_lights_nolight.rvmat","dz\vehicles\whe...` → `{"dz\vehicles\wheeled\offroad_02\data\offroad_02_lights_nolight.rvmat","dz\vehicles\wheeled\offroad_02\data\offroad_02_lights_nolight.rvmat","dz\vehicles\whe...`
+- `CfgVehicles/Offroad_02/DamageSystem/DamageZones/Chassis/Health` (`vehicles/wheeled/config.cpp`)
+  - + `healthLevels[]` = `{{ 1 , { "dz\vehicles\wheeled\offroad_02\data\offroad_02_base_multi.rvmat" , "dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rvmat" , "dz\vehicles...`
+- `CfgVehicles/Offroad_02/DamageSystem/DamageZones/Fender_1_1/Health` (`vehicles/wheeled/config.cpp`)
+  - ~ `healthLevels[]`: `{{ 1 , { "dz\vehicles\wheeled\offroad_02\data\offroad_02_base_multi.rvmat" , "dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rvmat" } },{ 0.699999...` → `{{ 1 , { "dz\vehicles\wheeled\offroad_02\data\offroad_02_base_multi.rvmat" , "dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rvmat" , "dz\vehicles...`
+- `CfgVehicles/Offroad_02/DamageSystem/DamageZones/Front` (`vehicles/wheeled/config.cpp`)
+  - ~ `componentNames[]`: `{"dmgZone_front","dmgZone_bumper_1"}` → `{"dmgZone_front"}`
+- `CfgVehicles/Offroad_02/DamageSystem/DamageZones/Reflector_1_1/Health` (`vehicles/wheeled/config.cpp`)
+  - ~ `healthLevels[]`: `{{ 1 , { "dz\vehicles\wheeled\offroad_02\data\glass_frontlights.rvmat" } },{ 0.69999999 , { "dz\vehicles\wheeled\offroad_02\data\glass_frontlights_damaged.rv...` → `{{ 1 , { "dz\vehicles\wheeled\Sedan_02\data\glass_frontlights.rvmat" } },{ 0.69999999 , { "dz\vehicles\wheeled\Sedan_02\data\glass_frontlights_damaged.rvmat"...`
+- `CfgVehicles/Offroad_02/DamageSystem/DamageZones/Roof/Health` (`vehicles/wheeled/config.cpp`)
+  - ~ `healthLevels[]`: `{{ 1 , { "dz\vehicles\wheeled\offroad_02\data\offroad_02_base_multi.rvmat" , "dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rvmat" } },{ 0.699999...` → `{{ 1 , { "dz\vehicles\wheeled\offroad_02\data\offroad_02_base_multi.rvmat" , "dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rvmat" , "dz\vehicles...`
+- `CfgVehicles/Offroad_02/DamageSystem/DamageZones/WindowLeft/Health` (`vehicles/wheeled/config.cpp`)
+  - ~ `healthLevels[]`: `{{ 1 , { "dz\vehicles\wheeled\offroad_02\data\offroad_02_windows.rvmat" , "dz\vehicles\wheeled\offroad_02\data\default_glassint.rvmat" , "dz\vehicles\wheeled...` → `{{ 1 , { "dz\vehicles\wheeled\offroad_02\data\offroad_02_glass_ca.paa" , "dz\vehicles\wheeled\offroad_02\data\offroad_02_windows.rvmat" , "dz\vehicles\wheele...`
+- `CfgVehicles/Offroad_02_Door_1_1` (`vehicles/wheeled/config.cpp`)
+  - + `hiddenSelections[]` = `{"texture_roof_ext","texture_roof_int"}`
+  - + `hiddenSelectionsTextures[]` = `{"","dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_co.paa"}`
+  - ~ `hiddenSelectionsMaterials[]`: `{"dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rvmat"}` → `{"dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rvmat","dz\vehicles\wheeled\offroad_02\data\offroad_02_roof.rvmat"}`
+- `CfgVehicles/Offroad_02_Door_1_1/DamageSystem/DamageZones/Doors/Health` (`vehicles/wheeled/config.cpp`)
+  - ~ `RefTexsMats[]`: `{"dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rvmat"}` → `{"dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rvmat","dz\vehicles\wheeled\offroad_02\data\offroad_02_roof.rvmat"}`
+  - ~ `healthLevels[]`: `{{ 1 , { "dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rvmat" } },{ 0.69999999 , { "dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rv...` → `{{ 1 , { "dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rvmat" , "dz\vehicles\wheeled\offroad_02\data\offroad_02_roof.rvmat" } },{ 0.69999999 , {...`
+- `CfgVehicles/Offroad_02_Door_1_1/DamageSystem/DamageZones/Window/Health` (`vehicles/wheeled/config.cpp`)
+  - ~ `healthLevels[]`: `{{ 1 , { "dz\vehicles\wheeled\offroad_02\data\offroad_02_windows.rvmat" , "dz\vehicles\wheeled\offroad_02\data\default_glassint.rvmat" , "dz\vehicles\wheeled...` → `{{ 1 , { "dz\vehicles\wheeled\offroad_02\data\offroad_02_windows.rvmat" , "dz\vehicles\wheeled\offroad_02\data\default_glassint.rvmat" , "dz\vehicles\wheeled...`
+- `CfgVehicles/Offroad_02_Door_1_1_Rust` (`vehicles/wheeled/config.cpp`)
+  - + `hiddenSelectionsTextures[]` = `{"","dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof_co.paa"}`
+  - ~ `hiddenSelectionsMaterials[]`: `{"dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof_multi.rvmat"}` → `{"dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof_multi.rvmat","dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof.rvmat"}`
+- `CfgVehicles/Offroad_02_Door_1_1_Rust/DamageSystem/DamageZones/Doors/Health` (`vehicles/wheeled/config.cpp`)
+  - ~ `RefTexsMats[]`: `{"dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rvmat"}` → `{"dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rvmat","dz\vehicles\wheeled\offroad_02\data\offroad_02_roof.rvmat"}`
+  - ~ `healthLevels[]`: `{{ 1 , { "dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof_multi.rvmat" } },{ 0.69999999 , { "dz\vehicles\wheeled\offroad_02\data\abandoned\offr...` → `{{ 1 , { "dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof_multi.rvmat" , "dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof.rvmat" ...`
+- `CfgVehicles/Offroad_02_Door_1_2_Rust` (`vehicles/wheeled/config.cpp`)
+  - + `hiddenSelectionsTextures[]` = `{"","dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof_co.paa"}`
+  - ~ `hiddenSelectionsMaterials[]`: `{"dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof_multi.rvmat"}` → `{"dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof_multi.rvmat","dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof.rvmat"}`
+- `CfgVehicles/Offroad_02_Door_1_2_Rust/DamageSystem/DamageZones/Doors/Health` (`vehicles/wheeled/config.cpp`)
+  - ~ `RefTexsMats[]`: `{"dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rvmat"}` → `{"dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rvmat","dz\vehicles\wheeled\offroad_02\data\offroad_02_roof.rvmat"}`
+  - ~ `healthLevels[]`: `{{ 1 , { "dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof_multi.rvmat" } },{ 0.69999999 , { "dz\vehicles\wheeled\offroad_02\data\abandoned\offr...` → `{{ 1 , { "dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof_multi.rvmat" , "dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof.rvmat" ...`
+- `CfgVehicles/Offroad_02_Door_2_1_Rust` (`vehicles/wheeled/config.cpp`)
+  - + `hiddenSelectionsTextures[]` = `{"","dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof_co.paa"}`
+  - ~ `hiddenSelectionsMaterials[]`: `{"dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof_multi.rvmat"}` → `{"dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof_multi.rvmat","dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof.rvmat"}`
+- `CfgVehicles/Offroad_02_Door_2_1_Rust/DamageSystem/DamageZones/Doors/Health` (`vehicles/wheeled/config.cpp`)
+  - ~ `RefTexsMats[]`: `{"dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rvmat"}` → `{"dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rvmat","dz\vehicles\wheeled\offroad_02\data\offroad_02_roof.rvmat"}`
+  - ~ `healthLevels[]`: `{{ 1 , { "dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof_multi.rvmat" } },{ 0.69999999 , { "dz\vehicles\wheeled\offroad_02\data\abandoned\offr...` → `{{ 1 , { "dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof_multi.rvmat" , "dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof.rvmat" ...`
+- `CfgVehicles/Offroad_02_Door_2_2_Rust` (`vehicles/wheeled/config.cpp`)
+  - + `hiddenSelectionsTextures[]` = `{"","dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof_co.paa"}`
+  - ~ `hiddenSelectionsMaterials[]`: `{"dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof_multi.rvmat"}` → `{"dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof_multi.rvmat","dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof.rvmat"}`
+- `CfgVehicles/Offroad_02_Door_2_2_Rust/DamageSystem/DamageZones/Doors/Health` (`vehicles/wheeled/config.cpp`)
+  - ~ `RefTexsMats[]`: `{"dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rvmat"}` → `{"dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rvmat","dz\vehicles\wheeled\offroad_02\data\offroad_02_roof.rvmat"}`
+  - ~ `healthLevels[]`: `{{ 1 , { "dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof_multi.rvmat" } },{ 0.69999999 , { "dz\vehicles\wheeled\offroad_02\data\abandoned\offr...` → `{{ 1 , { "dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof_multi.rvmat" , "dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof.rvmat" ...`
+- `CfgVehicles/Offroad_02_Trunk_Rust` (`vehicles/wheeled/config.cpp`)
+  - ~ `hiddenSelectionsMaterials[]`: `{"dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rvmat"}` → `{"dz\vehicles\wheeled\offroad_02\data\abandoned\offroad_02_roof_multi.rvmat"}`
+- `CfgVehicles/Offroad_02_Trunk_Rust/DamageSystem/GlobalHealth/Health` (`vehicles/wheeled/config.cpp`)
+  - ~ `RefTexsMats[]`: `{"dz\vehicles\wheeled\offroad_02\data\offroad_02_base_multi.rvmat"}` → `{"dz\vehicles\wheeled\offroad_02\data\offroad_02_roof_multi.rvmat"}`
+- `CfgVehicles/Offroad_02_Wheel` (`vehicles/wheeled/config.cpp`)
+  - + `tyreType` = `0`
+  - + `tyreRoughness` = `1`
+  - + `tyreLongitudinalFriction` = `1.5`
+  - + `tyreLateralFriction` = `1.8`
+- `CfgVehicles/Offroad_02_Wheel_Ruined` (`vehicles/wheeled/config.cpp`)
+  - + `tyreType` = `0`
+  - + `tyreRoughness` = `0.2`
+  - + `tyreLongitudinalFriction` = `0.25`
+  - + `tyreLateralFriction` = `4.9499998`
+- `CfgVehicles/Pitchfork` (`weapons/melee/blade/config.cpp`)
+  - + `repairableWithKits[]` = `{4}`
+  - + `repairCosts[]` = `{25}`
+- `CfgVehicles/Plastic_Explosive` (`weapons/explosives/config.cpp`)
+  - + `ammoType` = `"Plastic_Explosive_Ammo"`
+  - ~ `hiddenSelectionsTextures[]`: `{"dz\weapons\explosives\data\Plastic_Explosive.paa"}` → `{"dz\weapons\explosives\data\Plastic_Explosive_co.paa"}`
+- `CfgVehicles/Plastic_Explosive_Placing` (`weapons/explosives/config.cpp`)
+  - ~ `hiddenSelectionsTextures[]`: `{"dz\weapons\explosives\data\Plastic_Explosive.paa"}` → `{"dz\weapons\explosives\data\Plastic_Explosive_co.paa"}`
+- `CfgVehicles/PoliceBaton` (`weapons/melee/blunt/config.cpp`)
+  - − `fragility` (was `0.0020000001`)
+  - ~ `inventorySlot[]`: `{"Shoulder","Melee"}` → `{"Backpack_1"}`
+  - ~ `weight`: `540` → `680`
+  - ~ `itemSize[]`: `{2,5}` → `{1,4}`
+  - ~ `openItemSpillRange[]`: `{35,55}` → `{40,80}`
+- `CfgVehicles/PoliceBaton/MeleeModes/Default` (`weapons/melee/blunt/config.cpp`)
+  - ~ `ammo`: `"MeleeBlunt"` → `"MeleeBluntLight_2"`
+  - ~ `range`: `1.6` → `1.8`
+- `CfgVehicles/PoliceBaton/MeleeModes/Heavy` (`weapons/melee/blunt/config.cpp`)
+  - ~ `ammo`: `"MeleeBlunt_Heavy"` → `"MeleeBluntLight_2"`
+- `CfgVehicles/PoliceBaton/MeleeModes/Sprint` (`weapons/melee/blunt/config.cpp`)
+  - ~ `ammo`: `"MeleeBlunt_Heavy"` → `"MeleeBluntLight_2"`
+- `CfgVehicles/PolicePants` (`characters/pants/config.cpp`)
+  - ~ `quickBarBonus`: `0` → `1`
+- `CfgVehicles/RGD5Grenade` (`weapons/explosives/config.cpp`)
+  - + `ammoType` = `"RGD5Grenade_Ammo"`
+- `CfgVehicles/Rag` (`gear/consumables/config.cpp`)
+  - + `varWetMax` = `1`
+- `CfgVehicles/Rope` (`gear/crafting/config.cpp`)
+  - + `varQuantityDestroyOnMin` = `1`
+  - + `canBeSplit` = `1`
+  - + `varQuantityInit` = `1`
+  - + `varQuantityMin` = `0`
+  - + `varQuantityMax` = `50`
+  - + `varStackMax` = `1`
+  - + `greyscale_icon` = `"set:dayz_resources_grayscale image:rope"`
+  - ~ `inventorySlot[]`: `{"Rope","Material_FPole_Rope","Material_Shelter_Rope"}` → `{"Rope","Material_FPole_Rope","Material_Shelter_Rope","RB_LvL1_Rope","RB_LvL2_Rope","Backpack_1"}`
+- `CfgVehicles/RopeLocked` (`gear/crafting/config.cpp`)
+  - ~ `CanBeUnrestrainedBy[]`: `{"Sickle",3,"BoneKnife",3,"Hacksaw",3,"KitchenKnife",3,"SteakKnife",3,"HayHook",3,"StoneKnife",3,"Cleaver",3,"CombatKnife",3,"HuntingKnife",3,"Machete",3,"Sc...` → `{"Sickle",3,"BoneKnife",3,"Hacksaw",3,"KitchenKnife",3,"SteakKnife",3,"HayHook",3,"StoneKnife",3,"Cleaver",3,"CombatKnife",3,"HuntingKnife",3,"Machete",3,"Sc...`
+  - ~ `CanBeUnrestrainedByDMG[]`: `{12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12}` → `{12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12}`
+- `CfgVehicles/SalineBag` (`gear/medical/config.cpp`)
+  - ~ `weight`: `1000` → `260`
+- `CfgVehicles/SalineBagIV` (`gear/medical/config.cpp`)
+  - ~ `weight`: `500` → `280`
+- `CfgVehicles/Sedan_02_Wheel` (`vehicles/wheeled/config.cpp`)
+  - + `tyreType` = `0`
+  - + `tyreRoughness` = `1`
+  - + `tyreLongitudinalFriction` = `0.85000002`
+  - + `tyreLateralFriction` = `0.94999999`
+- `CfgVehicles/Sedan_02_Wheel_Ruined` (`vehicles/wheeled/config.cpp`)
+  - + `tyreType` = `0`
+  - + `tyreRoughness` = `0.2`
+  - + `tyreLongitudinalFriction` = `0.34999999`
+  - + `tyreLateralFriction` = `4.9499998`
+- `CfgVehicles/SharpWoodenStick` (`gear/crafting/config.cpp`)
+  - + `varWetMax` = `0.49000001`
+- `CfgVehicles/ShelterKitPlacing` (`gear/camping/config.cpp`)
+  - ~ `hiddenSelectionsTextures[]`: `{"dz\gear\consumables\data\pile_of_planks_co.tga"}` → `{"dz\gear\consumables\data\pile_of_planks_CO.paa"}`
+- `CfgVehicles/ShelterSite/Construction/site/fabric` (`gear/camping/config.cpp`)
+  - ~ `build_text_override`: `"$build_shelter_fabric"` → `"#build_shelter_fabric"`
+- `CfgVehicles/ShelterSite/Construction/site/leather` (`gear/camping/config.cpp`)
+  - ~ `build_text_override`: `"$build_shelter_leather"` → `"#build_shelter_leather"`
+- `CfgVehicles/ShelterSite/Construction/site/stick` (`gear/camping/config.cpp`)
+  - ~ `build_text_override`: `"$build_shelter_stick"` → `"#build_shelter_stick"`
+- `CfgVehicles/Shirt_ColorBase` (`characters/tops/config.cpp`)
+  - ~ `itemsCargoSize[]`: `{3,3}` → `{4,3}`
+- `CfgVehicles/SkiGoggles_ColorBase` (`characters/glasses/config.cpp`)
+  - ~ `itemSize[]`: `{2,2}` → `{2,1}`
+- `CfgVehicles/Sneakers_ColorBase` (`characters/shoes/config.cpp`)
+  - ~ `itemSize[]`: `{4,2}` → `{3,2}`
+- `CfgVehicles/SportGlasses_ColorBase/Protection` (`characters/glasses/config.cpp`)
+  - ~ `dust_particle_eyes`: `0.80000001` → `0.69999999`
+- `CfgVehicles/Ssh68Helmet/DamageSystem/GlobalHealth/Health` (`characters/headgear/config.cpp`)
+  - ~ `hitpoints`: `85` → `100`
+- `CfgVehicles/StaticObj_Furniture_PlasticBucket` (`structures/furniture/config.cpp`)
+  - ~ `model`: `"DZ\structures\Furniture\Decoration\bucket\PlasticBucket.p3d"` → `"DZ\structures\Furniture\Decoration\bucket\bucket.p3d"`
+- `CfgVehicles/StaticObj_Geoplant_PowerHall_Wire` (`structures_sakhal/config.cpp`)
+  - ~ `model`: `"DZ\structures_sakhal\powerplant\Geoplant_PowerHall_Wire.p3d"` → `"DZ\structures_sakhal\industrial\powerplant\Geoplant_PowerHall_Wire.p3d"`
+- `CfgVehicles/StaticObj_Misc_WoodTable_Indoor` (`structures/residential/config.cpp`)
+  - ~ `model`: `"DZ\structures\Residential\Misc\Misc_WoodTable_Indoor"` → `"DZ\structures\Residential\Misc\Misc_WoodTable_Indoor.p3d"`
+- `CfgVehicles/StaticObj_Platform2_Stairs_Block` (`structures/residential/config.cpp`)
+  - ~ `model`: `"DZ\structures\Residential\Platforms\Platform2_Stairs_Block.p3d"` → `"DZ\structures\Residential\Platforms\Platform2_Staris_Block.p3d"`
+- `CfgVehicles/StaticObj_Taxiway_0_2000` (`structures/roads/config.cpp`)
+  - ~ `model`: `"DZ\structures\Roads\Sidewalks\Taxiway_0 2000.p3d"` → `"DZ\structures\Roads\Parts\Taxiway_0 2000.p3d"`
+- `CfgVehicles/StaticObj_Taxiway_10_100` (`structures/roads/config.cpp`)
+  - ~ `model`: `"DZ\structures\Roads\Sidewalks\Taxiway_10 100.p3d"` → `"DZ\structures\Roads\Parts\Taxiway_10 100.p3d"`
+- `CfgVehicles/StaticObj_Taxiway_10_25` (`structures/roads/config.cpp`)
+  - ~ `model`: `"DZ\structures\Roads\Sidewalks\Taxiway_10 25.p3d"` → `"DZ\structures\Roads\Parts\Taxiway_10 25.p3d"`
+- `CfgVehicles/StaticObj_Taxiway_10_50` (`structures/roads/config.cpp`)
+  - ~ `model`: `"DZ\structures\Roads\Sidewalks\Taxiway_10 50.p3d"` → `"DZ\structures\Roads\Parts\Taxiway_10 50.p3d"`
+- `CfgVehicles/StaticObj_Taxiway_10_75` (`structures/roads/config.cpp`)
+  - ~ `model`: `"DZ\structures\Roads\Sidewalks\Taxiway_10 75.p3d"` → `"DZ\structures\Roads\Parts\Taxiway_10 75.p3d"`
+- `CfgVehicles/StaticObj_Taxiway_12` (`structures/roads/config.cpp`)
+  - ~ `model`: `"DZ\structures\Roads\Sidewalks\Taxiway_12.p3d"` → `"DZ\structures\Roads\Parts\Taxiway_12.p3d"`
+- `CfgVehicles/StaticObj_Taxiway_15_75` (`structures/roads/config.cpp`)
+  - ~ `model`: `"DZ\structures\Roads\Sidewalks\Taxiway_15 75.p3d"` → `"DZ\structures\Roads\Parts\Taxiway_15 75.p3d"`
+- `CfgVehicles/StaticObj_Taxiway_1_1000` (`structures/roads/config.cpp`)
+  - ~ `model`: `"DZ\structures\Roads\Sidewalks\Taxiway_1 1000.p3d"` → `"DZ\structures\Roads\Parts\Taxiway_1 1000.p3d"`
+- `CfgVehicles/StaticObj_Taxiway_22_50` (`structures/roads/config.cpp`)
+  - ~ `model`: `"DZ\structures\Roads\Sidewalks\Taxiway_22 50.p3d"` → `"DZ\structures\Roads\Parts\Taxiway_22 50.p3d"`
+- `CfgVehicles/StaticObj_Taxiway_25` (`structures/roads/config.cpp`)
+  - ~ `model`: `"DZ\structures\Roads\Sidewalks\Taxiway_25.p3d"` → `"DZ\structures\Roads\Parts\Taxiway_25.p3d"`
+- `CfgVehicles/StaticObj_Taxiway_30_25` (`structures/roads/config.cpp`)
+  - ~ `model`: `"DZ\structures\Roads\Sidewalks\Taxiway_30 25.p3d"` → `"DZ\structures\Roads\Parts\Taxiway_30 25.p3d"`
+- `CfgVehicles/StaticObj_Taxiway_6` (`structures/roads/config.cpp`)
+  - ~ `model`: `"DZ\structures\Roads\Sidewalks\Taxiway_6.p3d"` → `"DZ\structures\Roads\Parts\Taxiway_6.p3d"`
+- `CfgVehicles/StaticObj_Taxiway_60_10` (`structures/roads/config.cpp`)
+  - ~ `model`: `"DZ\structures\Roads\Sidewalks\Taxiway_60 10.p3d"` → `"DZ\structures\Roads\Parts\Taxiway_60 10.p3d"`
+- `CfgVehicles/StaticObj_Taxiway_6konec` (`structures/roads/config.cpp`)
+  - ~ `model`: `"DZ\structures\Roads\Sidewalks\Taxiway_6konec.p3d"` → `"DZ\structures\Roads\Parts\Taxiway_6konec.p3d"`
+- `CfgVehicles/StaticObj_Taxiway_7_100` (`structures/roads/config.cpp`)
+  - ~ `model`: `"DZ\structures\Roads\Sidewalks\Taxiway_7 100.p3d"` → `"DZ\structures\Roads\Parts\Taxiway_7 100.p3d"`
+- `CfgVehicles/Stone` (`gear/consumables/config.cpp`)
+  - + `greyscale_icon` = `"set:dayz_resources_grayscale image:bigstone"`
+- `CfgVehicles/SurgicalMask` (`characters/masks/config.cpp`)
+  - ~ `weight`: `340` → `4`
+- `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Saiga12_jamming5` (`characters/data/config.cpp`)
+  - ~ `id`: `"1067 - 1275"` → `1275`
+- `CfgVehicles/SurvivorBase/AnimEvents/Sounds/dry_SCAR_fire` (`characters/data/config.cpp`)
+  - ~ `id`: `3483` → `3522`
+- `CfgVehicles/SurvivorBase/AnimEvents/Sounds/rld_SCAR_charge_bulet_in` (`characters/data/config.cpp`)
+  - ~ `id`: `3484` → `3523`
+- `CfgVehicles/SurvivorBase/AnimEvents/Sounds/rld_SCAR_charge_close` (`characters/data/config.cpp`)
+  - ~ `id`: `3485` → `3524`
+- `CfgVehicles/SurvivorBase/AnimEvents/Sounds/rld_SCAR_charge_open` (`characters/data/config.cpp`)
+  - ~ `id`: `3486` → `3525`
+- `CfgVehicles/SurvivorBase/AnimEvents/Sounds/rld_SCAR_charging` (`characters/data/config.cpp`)
+  - ~ `id`: `3487` → `3526`
+- `CfgVehicles/SurvivorBase/AnimEvents/Sounds/rld_SCAR_handling` (`characters/data/config.cpp`)
+  - ~ `id`: `3480` → `3519`
+- `CfgVehicles/SurvivorBase/AnimEvents/Sounds/rld_SCAR_jam` (`characters/data/config.cpp`)
+  - ~ `id`: `3488` → `3527`
+- `CfgVehicles/SurvivorBase/AnimEvents/Sounds/rld_SCAR_jamming_01` (`characters/data/config.cpp`)
+  - ~ `id`: `3489` → `3528`
+- `CfgVehicles/SurvivorBase/AnimEvents/Sounds/rld_SCAR_jamming_02` (`characters/data/config.cpp`)
+  - ~ `id`: `3490` → `3529`
+- `CfgVehicles/SurvivorBase/AnimEvents/Sounds/rld_SCAR_jamming_03` (`characters/data/config.cpp`)
+  - ~ `id`: `3491` → `3530`
+- `CfgVehicles/SurvivorBase/AnimEvents/Sounds/rld_SCAR_jamming_04` (`characters/data/config.cpp`)
+  - ~ `id`: `3492` → `3531`
+- `CfgVehicles/SurvivorBase/AnimEvents/Sounds/rld_SCAR_jamming_05` (`characters/data/config.cpp`)
+  - ~ `id`: `3493` → `3532`
+- `CfgVehicles/SurvivorBase/AnimEvents/Sounds/rld_SCAR_mag_in` (`characters/data/config.cpp`)
+  - ~ `id`: `3481` → `3520`
+- `CfgVehicles/SurvivorBase/AnimEvents/Sounds/rld_SCAR_mag_out` (`characters/data/config.cpp`)
+  - ~ `id`: `3482` → `3521`
+- `CfgVehicles/SurvivorBase/enfAnimSys` (`characters/data/config.cpp`)
+  - + `ragdoll` = `"DZ/characters/bodies/human.ragdoll"`
+- `CfgVehicles/Sweater_ColorBase` (`characters/tops/config.cpp`)
+  - ~ `hiddenSelectionsTextures[]`: `{"\dz\characters\tops\data\sweater_g_co.paa","\dz\characters\tops\data\sweater_co.paa","\dz\characters\tops\data\sweater_co.paa"}` → `{"\dz\characters\tops\data\sweater_chalkstone_co.paa","\dz\characters\tops\data\sweater_chalkstone_co.paa","\dz\characters\tops\data\sweater_chalkstone_co.paa"}`
+- `CfgVehicles/TTSKOBoots` (`characters/shoes/config.cpp`)
+  - ~ `itemSize[]`: `{4,4}` → `{3,3}`
+- `CfgVehicles/TannedLeather` (`gear/consumables/config.cpp`)
+  - + `greyscale_icon` = `"set:dayz_resources_grayscale image:leather"`
+- `CfgVehicles/ThickFramesGlasses/Protection` (`characters/glasses/config.cpp`)
+  - ~ `dust_particle_eyes`: `0.69999999` → `0.40000001`
+- `CfgVehicles/ThinFramesGlasses/Protection` (`characters/glasses/config.cpp`)
+  - ~ `dust_particle_eyes`: `0.69999999` → `0.30000001`
+- `CfgVehicles/TraditionalBoots_ColorBase` (`characters/shoes/config.cpp`)
+  - ~ `itemSize[]`: `{4,4}` → `{3,4}`
+- `CfgVehicles/Truck_01_Base/SimulationModule/Throttle` (`vehicles/wheeled/config.cpp`)
+  - + `slopeCoef` = `0.75`
+- `CfgVehicles/Truck_01_Wheel` (`vehicles/wheeled/config.cpp`)
+  - + `tyreType` = `0`
+  - + `tyreRoughness` = `1`
+  - + `tyreLongitudinalFriction` = `1.5`
+  - + `tyreLateralFriction` = `1.8`
+- `CfgVehicles/Truck_01_WheelDouble` (`vehicles/wheeled/config.cpp`)
+  - + `tyreType` = `0`
+  - + `tyreRoughness` = `1`
+  - + `tyreLongitudinalFriction` = `2.5`
+  - + `tyreLateralFriction` = `2.8`
+- `CfgVehicles/Truck_01_WheelDouble_Ruined` (`vehicles/wheeled/config.cpp`)
+  - + `tyreType` = `0`
+  - + `tyreRoughness` = `0.2`
+  - + `tyreLongitudinalFriction` = `0.34999999`
+  - + `tyreLateralFriction` = `4.9499998`
+- `CfgVehicles/Truck_01_Wheel_Ruined` (`vehicles/wheeled/config.cpp`)
+  - + `tyreType` = `0`
+  - + `tyreRoughness` = `0.2`
+  - + `tyreLongitudinalFriction` = `0.34999999`
+  - + `tyreLateralFriction` = `4.9499998`
+- `CfgVehicles/UKAssVest_Black` (`characters/vests/config.cpp`)
+  - ~ `hiddenSelectionsTextures[]`: `{"\dz\characters\vests\data\UKAssVest_ground_black_co.paa","\dz\characters\vests\data\UKAssVest_black_co.paa","\dz\characters\vests\data\UKAssVest_black_co.p...` → `{"\dz\characters\vests\data\UKAssVest_black_co.paa","\dz\characters\vests\data\UKAssVest_black_co.paa","\dz\characters\vests\data\UKAssVest_black_co.paa"}`
+- `CfgVehicles/UKAssVest_Camo` (`characters/vests/config.cpp`)
+  - ~ `hiddenSelectionsTextures[]`: `{"\dz\characters\vests\data\UKAssVest_ground_camo_co.paa","\dz\characters\vests\data\UKAssVest_camo_co.paa","\dz\characters\vests\data\UKAssVest_camo_co.paa"}` → `{"\dz\characters\vests\data\UKAssVest_camo_co.paa","\dz\characters\vests\data\UKAssVest_camo_co.paa","\dz\characters\vests\data\UKAssVest_camo_co.paa"}`
+- `CfgVehicles/UKAssVest_ColorBase/DamageSystem/GlobalHealth/Health` (`characters/vests/config.cpp`)
+  - ~ `healthLevels[]`: `{{ 1 , { "DZ\characters\vests\Data\UKAssVest.rvmat" , "DZ\characters\vests\Data\UKAssVest_ground.rvmat" } },{ 0.69999999 , { "DZ\characters\vests\Data\UKAssV...` → `{{ 1 , { "DZ\characters\vests\Data\UKAssVest.rvmat" } },{ 0.69999999 , { "DZ\characters\vests\Data\UKAssVest.rvmat" } },{ 0.5 , { "DZ\characters\vests\Data\U...`
+- `CfgVehicles/UKAssVest_Khaki` (`characters/vests/config.cpp`)
+  - ~ `hiddenSelectionsTextures[]`: `{"\dz\characters\vests\data\UKAssVest_ground_Khaki_co.paa","\dz\characters\vests\data\UKAssVest_Khaki_co.paa","\dz\characters\vests\data\UKAssVest_Khaki_co.p...` → `{"\dz\characters\vests\data\UKAssVest_Khaki_co.paa","\dz\characters\vests\data\UKAssVest_Khaki_co.paa","\dz\characters\vests\data\UKAssVest_Khaki_co.paa"}`
+- `CfgVehicles/UKAssVest_Olive` (`characters/vests/config.cpp`)
+  - ~ `hiddenSelectionsTextures[]`: `{"\dz\characters\vests\data\UKAssVest_ground_Olive_co.paa","\dz\characters\vests\data\UKAssVest_Olive_co.paa","\dz\characters\vests\data\UKAssVest_Olive_co.p...` → `{"\dz\characters\vests\data\UKAssVest_Olive_co.paa","\dz\characters\vests\data\UKAssVest_Olive_co.paa","\dz\characters\vests\data\UKAssVest_Olive_co.paa"}`
+- `CfgVehicles/UKAssVest_Winter` (`characters/vests/config.cpp`)
+  - ~ `hiddenSelectionsTextures[]`: `{"\dz\characters\vests\data\UKAssVest_ground_winter_co.paa","\dz\characters\vests\data\UKAssVest_winter_co.paa","\dz\characters\vests\data\UKAssVest_winter_c...` → `{"\dz\characters\vests\data\UKAssVest_winter_co.paa","\dz\characters\vests\data\UKAssVest_winter_co.paa","\dz\characters\vests\data\UKAssVest_winter_co.paa"}`
+- `CfgVehicles/USMCJacket_ColorBase` (`characters/tops/config.cpp`)
+  - + `ragQuantity` = `3`
+- `CfgVehicles/USMCPants_ColorBase` (`characters/pants/config.cpp`)
+  - + `ragQuantity` = `3`
+- `CfgVehicles/Watchtower/Construction/level_1/level_1_roof` (`gear/camping/config.cpp`)
+  - + `item_falling_data[]` = `{"level_1_roof_fall_min","level_1_roof_fall_max"}`
+- `CfgVehicles/Watchtower/Construction/level_1/level_1_stairs` (`gear/camping/config.cpp`)
+  - + `item_falling_data[]` = `{"level_1_stairs_fall_min","level_1_stairs_fall_max"}`
+- `CfgVehicles/Watchtower/Construction/level_2/level_2_roof` (`gear/camping/config.cpp`)
+  - + `item_falling_data[]` = `{"level_2_roof_fall_min","level_2_roof_fall_max"}`
+- `CfgVehicles/Watchtower/Construction/level_2/level_2_stairs` (`gear/camping/config.cpp`)
+  - + `item_falling_data[]` = `{"level_2_stairs_fall_min","level_2_stairs_fall_max"}`
+- `CfgVehicles/Watchtower/Construction/level_3/level_3_roof` (`gear/camping/config.cpp`)
+  - + `item_falling_data[]` = `{"level_3_roof_fall_min","level_3_roof_fall_max"}`
+- `CfgVehicles/WatchtowerKitPlacing` (`gear/camping/config.cpp`)
+  - ~ `hiddenSelectionsTextures[]`: `{"dz\gear\consumables\data\pile_of_planks_co.tga"}` → `{"dz\gear\consumables\data\pile_of_planks_CO.paa"}`
+- `CfgVehicles/Wellies_ColorBase` (`characters/shoes/config.cpp`)
+  - ~ `itemSize[]`: `{4,4}` → `{3,4}`
+- `CfgVehicles/WoodenLog` (`gear/consumables/config.cpp`)
+  - + `greyscale_icon` = `"set:dayz_resources_grayscale image:woodenlog"`
+  - ~ `inventorySlot[]`: `{"Truck_01_WoodenLogs","Material_WoodenLogs","Material_L1_WoodenLogs","Material_L2_WoodenLogs","Material_L3_WoodenLogs","Material_FPole_WoodenLog","Material_...` → `{"Truck_01_WoodenLogs","Material_WoodenLogs","Material_L1_WoodenLogs","Material_L2_WoodenLogs","Material_L3_WoodenLogs","Material_FPole_WoodenLog","Material_...`
+- `CfgVehicles/WoodenPlank` (`gear/consumables/config.cpp`)
+  - + `greyscale_icon` = `"set:dayz_resources_grayscale image:woodenplank"`
+  - ~ `inventorySlot[]`: `{"Truck_01_WoodenPlanks","Material_WoodenPlanks","Material_L1_WoodenPlanks","Material_L1W1_WoodenPlanks","Material_L1W2_WoodenPlanks","Material_L1W3_WoodenPl...` → `{"Truck_01_WoodenPlanks","Material_WoodenPlanks","Material_L1_WoodenPlanks","Material_L1W1_WoodenPlanks","Material_L1W2_WoodenPlanks","Material_L1W3_WoodenPl...`
+- `CfgVehicles/WoodenStick` (`gear/crafting/config.cpp`)
+  - + `varWetMax` = `0.49000001`
+  - + `greyscale_icon` = `"set:dayz_resources_grayscale image:shortstick"`
+  - ~ `inventorySlot[]`: `{"WoodenStick","Material_Shelter_Sticks"}` → `{"WoodenStick","Material_Shelter_Sticks","RB_LvL1_Stick","RB_LvL2_Stick"}`
+- `CfgVehicles/WoolCoat_ColorBase` (`characters/tops/config.cpp`)
+  - + `ragQuantity` = `3`
+- `CfgVehicles/WorkingBoots_ColorBase` (`characters/shoes/config.cpp`)
+  - ~ `itemSize[]`: `{4,3}` → `{3,3}`
+- `CfgVehicles/Worm/DamageSystem/GlobalHealth/Health` (`gear/food/config.cpp`)
+  - ~ `healthLevels[]`: `{{ 1 , { "DZ\gear\food\data\"""".rvmat" } },{ 0.69999999 , { "DZ\gear\food\data\"""".rvmat" } },{ 0.5 , { "DZ\gear\food\data\""""_damage.rvmat" } },{ 0.30000...` → `{{ 1 , { } },{ 0.69999999 , { } },{ 0.5 , { } },{ 0.30000001 , { } },{ 0 , { } }}`
+- `CfgVehicles/XmasBaseballBat` (`weapons/melee/blunt/config.cpp`)
+  - ~ `model`: `"\dz\weapons\melee\blunt\Baseballbat_xmas.p3d"` → `"\dz\weapons\melee\blunt\BaseballBat_xmas.p3d"`
+- `CfgVideoOptions/OverallSettingsConsole/Normal` (`ui/config.cpp`)
+  - ~ `TextureFiltering`: `1` → `2`
+- `CfgVideoOptions/OverallSettingsPC/High` (`ui/config.cpp`)
+  - ~ `Visibility`: `2` → `3`
+  - ~ `ObjectsVisibility`: `2` → `3`
+- `CfgVideoOptions/OverallSettingsPC/Low` (`ui/config.cpp`)
+  - ~ `Visibility`: `0` → `1`
+  - ~ `ObjectsVisibility`: `0` → `1`
+  - ~ `TextureFiltering`: `1` → `2`
+- `CfgVideoOptions/OverallSettingsPC/Normal` (`ui/config.cpp`)
+  - ~ `Visibility`: `1` → `2`
+  - ~ `ObjectsVisibility`: `1` → `2`
+- `CfgVideoOptions/OverallSettingsPC/VeryHigh` (`ui/config.cpp`)
+  - ~ `Visibility`: `3` → `4`
+  - ~ `ObjectsVisibility`: `3` → `4`
+- `CfgVideoOptions/OverallSettingsPC/VeryLow` (`ui/config.cpp`)
+  - ~ `TextureFiltering`: `0` → `2`
+- `CfgVideoOptions/OverallSettingsPS4` (`ui/config.cpp`)
+  - + `defaultPreset` = `0`
+- `CfgWorlds/Enoch` (`sounds_bliss/config.cpp`)
+  - + `hasOcean` = `0`
+- `cfgVehicles/AKS74U_Bttstck` (`weapons/attachments/support/config.cpp`)
+  - ~ `itemSize[]`: `{2,1}` → `{3,1}`
+- `cfgVehicles/AK_WoodBttstck` (`weapons/attachments/support/config.cpp`)
+  - ~ `hiddenSelections[]`: `{"camo"}` → `{"camo","camo2"}`
+  - ~ `hiddenSelectionsTextures[]`: `{"dz\weapons\attachments\data\akm_wood_co.paa"}` → `{"dz\weapons\attachments\data\akm_wood_co.paa","dz\weapons\attachments\data\akm_wood_co.paa"}`
+  - ~ `hiddenSelectionsMaterials[]`: `{"dz\weapons\attachments\data\akm_wood.rvmat"}` → `{"dz\weapons\attachments\data\akm_wood.rvmat","dz\weapons\attachments\data\akm_wood_metal.rvmat"}`
+- `cfgVehicles/AK_WoodBttstck_Black` (`weapons/attachments/support/config.cpp`)
+  - ~ `hiddenSelectionsTextures[]`: `{"dz\weapons\attachments\data\akm_wood_black_co.paa"}` → `{"dz\weapons\attachments\data\akm_wood_black_co.paa","dz\weapons\attachments\data\akm_wood_black_co.paa"}`
+- `cfgVehicles/AK_WoodBttstck_Camo` (`weapons/attachments/support/config.cpp`)
+  - ~ `hiddenSelectionsTextures[]`: `{"dz\weapons\attachments\data\akm_wood_camo_co.paa"}` → `{"dz\weapons\attachments\data\akm_wood_camo_co.paa","dz\weapons\attachments\data\akm_wood_camo_co.paa"}`
+- `cfgVehicles/AK_WoodHndgrd` (`weapons/attachments/support/config.cpp`)
+  - + `hiddenSelectionsMaterials[]` = `{"dz\weapons\attachments\data\akm_wood.rvmat","dz\weapons\attachments\data\akm_wood_metal.rvmat"}`
+  - ~ `hiddenSelections[]`: `{"camo"}` → `{"camo","camo2"}`
+  - ~ `hiddenSelectionsTextures[]`: `{"dz\weapons\attachments\data\akm_wood_co.paa"}` → `{"dz\weapons\attachments\data\akm_wood_co.paa","dz\weapons\attachments\data\akm_wood_co.paa"}`
+- `cfgVehicles/AK_WoodHndgrd_Black` (`weapons/attachments/support/config.cpp`)
+  - ~ `hiddenSelectionsTextures[]`: `{"dz\weapons\attachments\data\akm_wood_black_co.paa"}` → `{"dz\weapons\attachments\data\akm_wood_black_co.paa","dz\weapons\attachments\data\akm_wood_black_co.paa"}`
+- `cfgVehicles/AK_WoodHndgrd_Camo` (`weapons/attachments/support/config.cpp`)
+  - ~ `hiddenSelectionsTextures[]`: `{"dz\weapons\attachments\data\akm_wood_camo_co.paa"}` → `{"dz\weapons\attachments\data\akm_wood_camo_co.paa","dz\weapons\attachments\data\akm_wood_camo_co.paa"}`
+- `cfgVehicles/AliceBag_ColorBase` (`characters/backpacks/config.cpp`)
+  - ~ `attachments[]`: `{"Chemlight","WalkieTalkie","Backpack_1"}` → `{"Chemlight","WalkieTalkie","Backpack_1","NBCBag"}`
+- `cfgVehicles/AssaultBag_ColorBase` (`characters/backpacks/config.cpp`)
+  - ~ `attachments[]`: `{"Chemlight","WalkieTalkie","Backpack_1"}` → `{"Chemlight","WalkieTalkie","Backpack_1","NBCBag"}`
+- `cfgVehicles/Attack2Bag_ColorBase` (`characters/backpacks/config.cpp`)
+  - ~ `attachments[]`: `{"Chemlight","WalkieTalkie","Backpack_1"}` → `{"Chemlight","WalkieTalkie","Backpack_1","NBCBag"}`
+- `cfgVehicles/CoyoteBag_ColorBase` (`characters/backpacks/config.cpp`)
+  - ~ `attachments[]`: `{"Chemlight","WalkieTalkie","Backpack_1"}` → `{"Chemlight","WalkieTalkie","Backpack_1","NBCBag"}`
+- `cfgVehicles/DryBag_ColorBase` (`characters/backpacks/config.cpp`)
+  - ~ `attachments[]`: `{"Chemlight","WalkieTalkie","Backpack_1"}` → `{"Chemlight","WalkieTalkie","Backpack_1","NBCBag"}`
+  - ~ `hiddenSelectionsTextures[]`: `{"\dz\characters\backpacks\data\drybag_co.paa","\dz\characters\backpacks\data\drybag_co.paa","\dz\characters\backpacks\data\drybag_co.paa"}` → `{"\dz\characters\backpacks\data\drybag_blue_co.paa","\dz\characters\backpacks\data\drybag_blue_co.paa","\dz\characters\backpacks\data\drybag_blue_co.paa"}`
+- `cfgVehicles/HuntingBag` (`characters/backpacks/config.cpp`)
+  - ~ `attachments[]`: `{"Chemlight","WalkieTalkie","Backpack_1"}` → `{"Chemlight","WalkieTalkie","Backpack_1","NBCBag"}`
+- `cfgVehicles/KazuarOptic` (`weapons/attachments/optics/config.cpp`)
+  - ~ `itemSize[]`: `{4,3}` → `{3,3}`
+- `cfgVehicles/Magnum_Cylinder` (`weapons/pistols/magnum/config.cpp`)
+  - + `hiddenSelections[]` = `{"camo"}`
+  - + `hiddenSelectionsTextures[]` = `{"dz\weapons\pistols\magnum\data\magnum_co.paa"}`
+  - + `hiddenSelectionsMaterials[]` = `{"dz\weapons\pistols\magnum\data\magnum.rvmat"}`
+- `cfgVehicles/Magnum_Ejector` (`weapons/pistols/magnum/config.cpp`)
+  - + `hiddenSelectionsTextures[]` = `{"dz\weapons\pistols\magnum\data\magnum_co.paa"}`
+  - + `hiddenSelectionsMaterials[]` = `{"dz\weapons\pistols\magnum\data\magnum.rvmat"}`
+  - + `hiddenSelections[]` = `{"camo"}`
+- `cfgVehicles/MountainBag_ColorBase` (`characters/backpacks/config.cpp`)
+  - ~ `attachments[]`: `{"Chemlight","WalkieTalkie","Backpack_1"}` → `{"Chemlight","WalkieTalkie","Backpack_1","NBCBag"}`
+- `cfgVehicles/PSO6Optic` (`weapons/attachments/optics/config.cpp`)
+  - base: `PSO1Optic` → `ItemOptics_Base`
+  - ~ `hiddenSelectionsTextures[]`: `{"","dz\weapons\attachments\optics\data\Reticle_Pso1Glow_ca.paa"}` → `{"","dz\weapons\attachments\optics\data\Reticle_Pso1Glow_ca.paa","dz\weapons\attachments\data\svd_scope_co.paa","dz\weapons\attachments\data\svd_scope_ca.paa"}`
+  - ~ `hiddenSelectionsMaterials[]`: `{"","dz\weapons\attachments\optics\data\default_black.rvmat"}` → `{"","dz\weapons\attachments\optics\data\default_black.rvmat","dz\weapons\attachments\data\svd_scope.rvmat",""}`
+- `cfgVehicles/SCAR_PrecisionBttstck` (`weapons/attachments/support/config.cpp`)
+  - ~ `itemSize[]`: `{3,1}` → `{2,1}`
+- `cfgVehicles/TaloonBag_ColorBase` (`characters/backpacks/config.cpp`)
+  - ~ `attachments[]`: `{"Chemlight","WalkieTalkie","Backpack_1"}` → `{"Chemlight","WalkieTalkie","Backpack_1","NBCBag"}`
+- `cfgVehicles/TortillaBag` (`characters/backpacks/config.cpp`)
+  - ~ `attachments[]`: `{"Chemlight","WalkieTalkie","Backpack_1"}` → `{"Chemlight","WalkieTalkie","Backpack_1","NBCBag"}`
+- `cfgWeapons/AK74/Particles/OnFire/MuzzleFlash` (`weapons/firearms/ak74/config.cpp`)
+  - ~ `positionOffset[]`: `{0,0,0}` → `{-0.1,0,0}`
+- `cfgWeapons/AKM` (`weapons/firearms/akm/config.cpp`)
+  - ~ `hiddenSelectionsTextures[]`: `{"dz\weapons\firearms\AKM\data\akm_co.paa"}` → `{"dz\weapons\firearms\AKM\data\akm_co.paa","dz\weapons\firearms\AKM\data\akm_co.paa"}`
+  - ~ `hiddenSelectionsMaterials[]`: `{"dz\weapons\firearms\AKM\data\AKM.rvmat"}` → `{"dz\weapons\firearms\AKM\data\AKM.rvmat","dz\weapons\firearms\AKM\data\AKM_grip.rvmat"}`
+- `cfgWeapons/AKM/DamageSystem/GlobalHealth/Health` (`weapons/firearms/akm/config.cpp`)
+  - ~ `healthLevels[]`: `{{ 1 , { "DZ\weapons\firearms\AKM\data\AKM.rvmat" } },{ 0.69999999 , { "DZ\weapons\firearms\AKM\data\AKM.rvmat" } },{ 0.5 , { "DZ\weapons\firearms\AKM\data\A...` → `{{ 1 , { "DZ\weapons\firearms\AKM\data\AKM.rvmat" , "DZ\weapons\firearms\AKM\data\AKM_grip.rvmat" } },{ 0.69999999 , { "DZ\weapons\firearms\AKM\data\AKM.rvma...`
+- `cfgWeapons/AKM_Base` (`weapons/firearms/akm/config.cpp`)
+  - ~ `magazines[]`: `{"Mag_AKM_30Rnd","Mag_AKM_Palm30Rnd","Mag_AKM_Palm30Rnd_Black","Mag_AKM_Palm30Rnd_Green","Mag_AKM_Drum75Rnd","Mag_AKM_Drum75Rnd_Green","Mag_AKM_Drum75Rnd_Bla...` → `{"Mag_AKM_30Rnd","Mag_AKM_30Rnd_Gold","Mag_AKM_Palm30Rnd","Mag_AKM_Palm30Rnd_Black","Mag_AKM_Palm30Rnd_Green","Mag_AKM_Drum75Rnd","Mag_AKM_Drum75Rnd_Green","...`
+  - ~ `hiddenSelections[]`: `{"camo"}` → `{"camo","camo2"}`
+- `cfgWeapons/AKS74U_Black` (`weapons/firearms/ak74/config.cpp`)
+  - − `descriptionShort` (was `"$STR_cfgWeapons_AKS74U_Black0"`)
+- `cfgWeapons/AKS74U_Green` (`weapons/firearms/ak74/config.cpp`)
+  - − `descriptionShort` (was `"$STR_cfgWeapons_AKS74U_Green0"`)
+- `cfgWeapons/CZ527_Black` (`weapons/firearms/cz527/config.cpp`)
+  - + `hiddenSelectionsMaterials[]` = `{"dz\weapons\firearms\cz527\data\cz527_black.rvmat"}`
+  - − `descriptionShort` (was `"$STR_cfgWeapons_CZ527_Black0"`)
+  - − `color` (was `"Black"`)
+  - ~ `hiddenSelectionsTextures[]`: `{"#(argb,8,8,3)color(0.15,0.15,0.15,1.0,CO)"}` → `{"dz\weapons\firearms\cz527\data\cz527_black_co.paa"}`
+- `cfgWeapons/FAL_Base` (`weapons/firearms/fal/config.cpp`)
+  - ~ `initSpeedMultiplier`: `0.89999998` → `0.94999999`
+- `cfgWeapons/Flaregun_Base` (`weapons/pistols/flaregun/config.cpp`)
+  - ~ `isSuicideWeapon`: `0` → `1`
+- `cfgWeapons/Glock19` (`weapons/pistols/glock/config.cpp`)
+  - + `hiddenSelections[]` = `{"zasleh","zbytek","magazine","bullet"}`
+  - + `hiddenSelectionsTextures[]` = `{"","dz\weapons\pistols\glock\data\glock19_co.paa","",""}`
+  - + `hiddenSelectionsMaterials[]` = `{"","dz\weapons\pistols\glock\data\glock19.rvmat","",""}`
+- `cfgWeapons/Glock19/DamageSystem/GlobalHealth/Health` (`weapons/pistols/glock/config.cpp`)
+  - ~ `healthLevels[]`: `{{ 1 , { "DZ\weapons\pistols\glock\data\glock19.rvmat" } },{ 0.69999999 , { "DZ\weapons\pistols\glock\data\glock19.rvmat" } },{ 0.5 , { "DZ\weapons\pistols\g...` → `{{ 1 , { "dz\weapons\pistols\glock\data\glock19.rvmat" } },{ 0.69999999 , { "dz\weapons\pistols\glock\data\glock19.rvmat" } },{ 0.5 , { "dz\weapons\pistols\g...`
+- `cfgWeapons/Izh18_Base/Single` (`weapons/firearms/izh18/config.cpp`)
+  - ~ `soundSetShotExt[]`: `{{ "BK18_silencerHomeMade_SoundSet" , "BK18_silencerHomeMadeTail_SoundSet" , "BK18_silencerInteriorHomeMadeTail_SoundSet" }}` → `{{ "IZH18_Rifle_silencerHomeMade_SoundSet" , "IZH18_Rifle_silencerHomeMadeTail_SoundSet" , "IZH18_Rifle_silencerInteriorHomeMadeTail_SoundSet" }}`
+- `cfgWeapons/Magnum` (`weapons/pistols/magnum/config.cpp`)
+  - + `hiddenSelectionsTextures[]` = `{"dz\weapons\pistols\magnum\data\magnum_co.paa","dz\weapons\pistols\magnum\data\magnum_co.paa"}`
+  - + `hiddenSelectionsMaterials[]` = `{"dz\weapons\pistols\magnum\data\magnum.rvmat","dz\weapons\pistols\magnum\data\magnum_grip.rvmat"}`
+- `cfgWeapons/Magnum/DamageSystem/GlobalHealth/Health` (`weapons/pistols/magnum/config.cpp`)
+  - ~ `healthLevels[]`: `{{ 1 , { "DZ\weapons\pistols\magnum\data\magnum.rvmat" } },{ 0.69999999 , { "DZ\weapons\pistols\magnum\data\magnum.rvmat" } },{ 0.5 , { "DZ\weapons\pistols\m...` → `{{ 1 , { "DZ\weapons\pistols\magnum\data\magnum.rvmat" , "DZ\weapons\pistols\magnum\data\magnum_grip.rvmat" } },{ 0.69999999 , { "DZ\weapons\pistols\magnum\d...`
+- `cfgWeapons/Magnum_Base` (`weapons/pistols/magnum/config.cpp`)
+  - + `hiddenSelections[]` = `{"camo","camo2"}`
+- `cfgWeapons/Mosin9130_Black` (`weapons/firearms/mosin9130/config.cpp`)
+  - − `color` (was `"Black"`)
+  - ~ `hiddenSelectionsTextures[]`: `{"#(argb,8,8,3)color(0.15,0.15,0.15,1.0,CO)"}` → `{"dz\weapons\firearms\mosin9130\data\mosin_9130_black_co.paa"}`
+  - ~ `hiddenSelectionsMaterials[]`: `{"dz\weapons\firearms\mosin9130\data\mosin_9130_bk.rvmat"}` → `{"dz\weapons\firearms\mosin9130\data\mosin_9130_black.rvmat"}`
+- `cfgWeapons/Mosin9130_Camo` (`weapons/firearms/mosin9130/config.cpp`)
+  - + `hiddenSelectionsMaterials[]` = `{"dz\weapons\firearms\mosin9130\data\mosin_9130_winter.rvmat"}`
+- `cfgWeapons/SCARH` (`weapons/firearms/scarh/config.cpp`)
+  - − `hiddenSelections[]` (was `{"camo1","camo2"}`)
+- `cfgWeapons/SCARH_Base` (`weapons/firearms/scarh/config.cpp`)
+  - ~ `WeaponLength`: `0.80000001` → `0.94999999`
+  - ~ `ObstructionDistance`: `0.5` → `0.69999999`
+  - ~ `barrelArmor`: `2.4000001` → `2.5999999`
+  - ~ `initSpeedMultiplier`: `0.97500002` → `0.92500001`
+  - ~ `swayModifier[]`: `{2.3,2.3,0.89999998}` → `{2.0999999,2.3,0.85000002}`
+- `cfgWeapons/SCARH_Black` (`weapons/firearms/scarh/config.cpp`)
+  - ~ `hiddenSelectionsTextures[]`: `{"DZ\weapons\firearms\SCARH\data\scarh_mat1_black_co.paa","DZ\weapons\firearms\SCARH\data\scarh_mat2_black_co.paa"}` → `{"dz\weapons\firearms\scarh\data\scarh_mat1_black_co.paa","dz\weapons\firearms\scarh\data\scarh_mat2_black_co.paa"}`
+  - ~ `hiddenSelectionsMaterials[]`: `{"DZ\weapons\firearms\SCARH\data\scarh_mat1_black.rvmat","DZ\weapons\firearms\SCARH\data\scarh_mat2_black.rvmat"}` → `{"dz\weapons\firearms\scarh\data\scarh_mat1_black.rvmat","dz\weapons\firearms\scarh\data\scarh_mat2_black.rvmat"}`
+- `cfgWeapons/SKS` (`weapons/firearms/sks/config.cpp`)
+  - + `hiddenSelections[]` = `{"camoGround","Clip_rounds","clip"}`
+  - ~ `hiddenSelectionsTextures[]`: `{"dz\weapons\firearms\SKS\data\sks_co.paa","",""}` → `{"dz\weapons\firearms\sks\data\sks_co.paa","",""}`
+  - ~ `hiddenSelectionsMaterials[]`: `{"dz\weapons\firearms\SKS\data\sks.rvmat","",""}` → `{"dz\weapons\firearms\sks\data\sks.rvmat","",""}`
+- `cfgWeapons/SKS/DamageSystem/GlobalHealth/Health` (`weapons/firearms/sks/config.cpp`)
+  - ~ `healthLevels[]`: `{{ 1 , { "DZ\weapons\firearms\SKS\data\sks.rvmat" } },{ 0.69999999 , { "DZ\weapons\firearms\SKS\data\sks.rvmat" } },{ 0.5 , { "DZ\weapons\firearms\SKS\data\s...` → `{{ 1 , { "dz\weapons\firearms\sks\data\sks.rvmat" } },{ 0.69999999 , { "dz\weapons\firearms\sks\data\sks.rvmat" } },{ 0.5 , { "dz\weapons\firearms\sks\data\s...`
+- `cfgWeapons/SKS_Black` (`weapons/firearms/sks/config.cpp`)
+  - + `hiddenSelections[]` = `{"camoGround","Clip_rounds","clip"}`
+  - − `descriptionShort` (was `"$STR_cfgWeapons_SKS_Black0"`)
+  - − `color` (was `"Black"`)
+  - ~ `hiddenSelectionsTextures[]`: `{"dz\weapons\firearms\SKS\data\sks_black_co.paa","",""}` → `{"dz\weapons\firearms\sks\data\sks_black_co.paa","",""}`
+  - ~ `hiddenSelectionsMaterials[]`: `{"dz\weapons\firearms\SKS\data\sks_painted.rvmat","",""}` → `{"dz\weapons\firearms\sks\data\sks_black.rvmat","",""}`
+- `cfgWeapons/SKS_Green` (`weapons/firearms/sks/config.cpp`)
+  - − `descriptionShort` (was `"$STR_cfgWeapons_SKS_Green0"`)
+  - ~ `hiddenSelectionsTextures[]`: `{"dz\weapons\firearms\SKS\data\sks_green_co.paa","",""}` → `{"dz\weapons\firearms\sks\data\sks_green_co.paa","",""}`
+  - ~ `hiddenSelectionsMaterials[]`: `{"dz\weapons\firearms\SKS\data\sks_painted.rvmat","",""}` → `{"dz\weapons\firearms\sks\data\sks_painted.rvmat","",""}`
+- `cfgWeapons/SawedoffIzh18/Single` (`weapons/firearms/izh18/config.cpp`)
+  - ~ `soundSetShotExt[]`: `{{ "BK18_silencerHomeMade_SoundSet" , "BK18_silencerHomeMadeTail_SoundSet" , "BK18_silencerInteriorHomeMadeTail_SoundSet" }}` → `{{ "IZH18_Rifle_silencerHomeMade_SoundSet" , "IZH18_Rifle_silencerHomeMadeTail_SoundSet" , "IZH18_Rifle_silencerInteriorHomeMadeTail_SoundSet" }}`
+- `cfgWeapons/SawedoffMagnum` (`weapons/pistols/magnum/config.cpp`)
+  - + `hiddenSelectionsTextures[]` = `{"dz\weapons\pistols\magnum\data\magnum_co.paa","dz\weapons\pistols\magnum\data\magnum_co.paa"}`
+  - + `hiddenSelectionsMaterials[]` = `{"dz\weapons\pistols\magnum\data\magnum.rvmat","dz\weapons\pistols\magnum\data\magnum_grip.rvmat"}`
+- `cfgWeapons/SawedoffMagnum/DamageSystem/GlobalHealth/Health` (`weapons/pistols/magnum/config.cpp`)
+  - ~ `healthLevels[]`: `{{ 1 , { "DZ\weapons\pistols\magnum\data\magnum.rvmat" } },{ 0.69999999 , { "DZ\weapons\pistols\magnum\data\magnum.rvmat" } },{ 0.5 , { "DZ\weapons\pistols\m...` → `{{ 1 , { "DZ\weapons\pistols\magnum\data\magnum.rvmat" , "DZ\weapons\pistols\magnum\data\magnum_grip.rvmat" } },{ 0.69999999 , { "DZ\weapons\pistols\magnum\d...`
+- `cfgWeapons/SawedoffMosin9130_Black` (`weapons/firearms/mosin9130/config.cpp`)
+  - − `color` (was `"Black"`)
+  - ~ `hiddenSelectionsTextures[]`: `{"#(argb,8,8,3)color(0.15,0.15,0.15,1.0,CO)"}` → `{"dz\weapons\firearms\mosin9130\data\mosin_sawn_black_co.paa"}`
+  - ~ `hiddenSelectionsMaterials[]`: `{"dz\weapons\firearms\mosin9130\data\mosin_sawn_bk.rvmat"}` → `{"dz\weapons\firearms\mosin9130\data\mosin_sawn_black.rvmat"}`
+- `cfgWeapons/Winchester70_Base` (`weapons/firearms/winchester70/config.cpp`)
+  - + `ObstructionDistance` = `0.95499998`
+- `cfgWeapons/Winchester70_Black` (`weapons/firearms/winchester70/config.cpp`)
+  - − `descriptionShort` (was `"$STR_cfgWeapons_Winchester70_Black0"`)
+- `cfgWeapons/Winchester70_Green` (`weapons/firearms/winchester70/config.cpp`)
+  - − `descriptionShort` (was `"$STR_cfgWeapons_Winchester70_Green0"`)
+
+Sound classes changed (not listed): CfgSoundSets: 90, CfgSoundShaders: 53, CfgSoundTables: 13
+
+
+## Added classes (non-sound)
+
+- **AI/config.cpp** — `CfgAIBehaviours/AmbientLife/BehaviourHLAmbientLife/SlotCowering`, `CfgAIBehaviours/AmbientLife/BehaviourHLAmbientLife/SlotCowering/BehaviourCowering`, `CfgAIBehaviours/AmbientLife_Gallus_Gallus_Domesticus/BehaviourHLAmbientLife/SlotCowering`, `CfgAIBehaviours/AmbientLife_Gallus_Gallus_Domesticus/BehaviourHLAmbientLife/SlotCowering/BehaviourCowering`, `CfgAIBehaviours/AmbientLife_Lepus_Europaeus/BehaviourHLAmbientLife/SlotCowering`, `CfgAIBehaviours/AmbientLife_Lepus_Europaeus/BehaviourHLAmbientLife/SlotCowering/BehaviourCowering`, `CfgAIBehaviours/AmbientLife_Vulpes_Vulpes/BehaviourHLAmbientLife/SlotCowering`, `CfgAIBehaviours/AmbientLife_Vulpes_Vulpes/BehaviourHLAmbientLife/SlotCowering/BehaviourCowering`, `CfgAIBehaviours/Herbivores/BehaviourHLDeer/SlotCowering`, `CfgAIBehaviours/Herbivores/BehaviourHLDeer/SlotCowering/BehaviourCowering`, `CfgAIBehaviours/Herbivores_BosTaurus/BehaviourHLDomestic/SlotCowering`, `CfgAIBehaviours/Herbivores_BosTaurus/BehaviourHLDomestic/SlotCowering/BehaviourCowering`, `CfgAIBehaviours/Herbivores_CapraHircus/BehaviourHLDomestic/SlotCowering`, `CfgAIBehaviours/Herbivores_CapraHircus/BehaviourHLDomestic/SlotCowering/BehaviourCowering`, `CfgAIBehaviours/Herbivores_CapreolusCapreolus/BehaviourHLDeer/SlotCowering`, `CfgAIBehaviours/Herbivores_CapreolusCapreolus/BehaviourHLDeer/SlotCowering/BehaviourCowering`, `CfgAIBehaviours/Herbivores_CervusElaphus/BehaviourHLDeer/SlotCowering`, `CfgAIBehaviours/Herbivores_CervusElaphus/BehaviourHLDeer/SlotCowering/BehaviourCowering`, `CfgAIBehaviours/Herbivores_CervusElaphusFem/BehaviourHLDeer/SlotCowering`, `CfgAIBehaviours/Herbivores_CervusElaphusFem/BehaviourHLDeer/SlotCowering/BehaviourCowering`, `CfgAIBehaviours/Herbivores_OvisAries/BehaviourHLDomestic/SlotCowering`, `CfgAIBehaviours/Herbivores_OvisAries/BehaviourHLDomestic/SlotCowering/BehaviourCowering`, `CfgAIBehaviours/Herbivores_SusDomesticus/BehaviourHLDomestic/SlotCowering`, `CfgAIBehaviours/Herbivores_SusDomesticus/BehaviourHLDomestic/SlotCowering/BehaviourCowering`, `CfgAIBehaviours/Herbivores_SusScrofa/BehaviourHLDeer/SlotCowering`, `CfgAIBehaviours/Herbivores_SusScrofa/BehaviourHLDeer/SlotCowering/BehaviourCowering`, `CfgAIBehaviours/Predators_Wolf/BehaviourHLPredator/SlotCowering`, `CfgAIBehaviours/Predators_Wolf/BehaviourHLPredator/SlotCowering/BehaviourCowering`, `CfgDamages/DogBiteDamage`, `CfgDamages/DogLowBiteDamage`
+- **AI_bliss/config.cpp** — `CfgAIBehaviours/Predator_UrsusArctos/BehaviourHLBear/SlotCowering`, `CfgAIBehaviours/Predator_UrsusArctos/BehaviourHLBear/SlotCowering/BehaviourCowering`
+- **characters/data/config.cpp** — `CfgVehicles/SurvivorBase/AnimEvents/SoundVoice/eating_bread : SoundVoiceEvent`, `CfgVehicles/SurvivorBase/AnimEvents/SoundVoice/eating_sausage : SoundVoiceEvent`, `CfgVehicles/SurvivorBase/AnimEvents/SoundVoice/heavyBreathing_SoundVoice : SoundVoiceEvent`, `CfgVehicles/SurvivorBase/AnimEvents/SoundWeapon/BrickTrowel_ApplyingMortar`, `CfgVehicles/SurvivorBase/AnimEvents/SoundWeapon/BrickTrowel_PickUpMortar`, `CfgVehicles/SurvivorBase/AnimEvents/SoundWeapon/BrickTrowel_PlacingMortar`, `CfgVehicles/SurvivorBase/AnimEvents/SoundWeapon/BrickTrowel_Spread`, `CfgVehicles/SurvivorBase/AnimEvents/SoundWeapon/BrickTrowel_Tapping`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/BrickTrowel_end`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/BrickTrowel_loop`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/CommonBrick_Drop`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/LugerP08_bullet_in`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/LugerP08_chamber`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/LugerP08_chamber_close`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/LugerP08_chamber_open`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/LugerP08_dry`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/LugerP08_jamm`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/LugerP08_jamming_01`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/LugerP08_jamming_02`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/LugerP08_jamming_03`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/LugerP08_jamming_04`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/LugerP08_jamming_05`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/LugerP08_jamming_06`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/LugerP08_jamming_07`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/LugerP08_mag_in`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/LugerP08_mag_out`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/LugerP08_shake`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/MP18_Jamm`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/MP18_dry_fire`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/MP18_empty_fire`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/MP18_jamming_01`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/MP18_jamming_02`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/MP18_jamming_03`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/MP18_jamming_04`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/MP18_jamming_05`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/MP18_jamming_06`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/MP18_jamming_07`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/MP18_jamming_08`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/MP18_jamming_09`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/MP18_rld_bolt`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/MP18_rld_handling`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/MP18_rld_mag_in`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/MP18_rld_mag_out`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Mortar_mix_in_loop`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Mortar_mix_out`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_01_DriverGetIn`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_01_DriverGetOut`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_01_DriverJumpOut`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_01_DriverStand2Drive`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_01_Gear`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_01_Horn_End`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_01_Horn_Start`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_01_Kickstart_FoldOut`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_01_Starting_Engine_Off`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_01_hit_character`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_01_horn`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_01_lights`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_02_DriverDrive2Stand`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_02_DriverGetIn`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_02_DriverGetOut`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_02_DriverJumpOut`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_02_DriverStand2Drive`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_02_Gear`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_02_Horn_End`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_02_Horn_Start`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_02_Starting_Engine_Off`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_02_hit_character`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_02_horn`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Motorbike_02_lights`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/RopeLadder_loop`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/RopeLadder_out`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Ruger1022_jamming_01`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Ruger1022_jamming_02`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Ruger1022_jamming_03`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Ruger1022_jamming_04`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Ruger1022_jamming_05`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Ruger1022_jamming_06`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/Ruger1022_jamming_07`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/TakeBrick`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/leeEnfield_rld_chamber_close`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/leeEnfield_rld_chamber_open`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/leeEnfield_rld_dty_fire`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/leeEnfield_rld_handling`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/leeEnfield_rld_mag_in`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/leeEnfield_rld_mag_out`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/leeEnfield_rld_reloads`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/sharpening_axe_loop`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/sharpening_hay_hook_loop`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/sharpening_knives_loop`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/sharpening_pitchfork_loop`, `CfgVehicles/SurvivorBase/AnimEvents/Sounds/sharpening_swords_loop`
+- **characters/zombies/config.cpp** — `CfgVehicles/ZmbF_ArmyOfficer : ZmbF_SoldierNormal_Base`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/SoundVoice`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/SoundVoice/Attack`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/SoundVoice/CallToArmsShort`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/SoundVoice/HeavyHit`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/SoundVoice/Jump`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/SoundVoice/Land`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/SoundVoice/LightHit`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Sounds`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Sounds/Attack_Heavy1`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Sounds/Attack_Heavy2`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Sounds/Attack_Light1`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Sounds/Attack_Light2`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Sounds/TwoHands`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Bodyfall`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Bodyfall_Hand`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Bodyfall_Slide`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Prone_Run_L`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Prone_Run_R`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Prone_Walk_L`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Prone_Walk_R`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Run1`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Run2`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Run3`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Run4`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Sccuff3`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Scuff1`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Scuff2`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Scuff4`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Sprint1`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Sprint2`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Sprint3`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Sprint4`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Walk1`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Walk2`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Walk3`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/Walk4`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/landFeetErc`, `CfgVehicles/ZmbF_ArmyOfficer/AnimEvents/Steps/landFootErc`, `CfgVehicles/ZmbF_SoldierNormal : ZmbF_SoldierNormal_Base`, `CfgVehicles/ZmbF_SoldierNormal_Base : ZombieFemaleBase`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/SoundVoice`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/SoundVoice/Attack`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/SoundVoice/CallToArmsShort`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/SoundVoice/HeavyHit`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/SoundVoice/Jump`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/SoundVoice/Land`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/SoundVoice/LightHit`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Sounds`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Sounds/Attack_Heavy1`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Sounds/Attack_Heavy2`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Sounds/Attack_Light1`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Sounds/Attack_Light2`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Sounds/TwoHands`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Bodyfall`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Bodyfall_Hand`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Bodyfall_Slide`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Prone_Run_L`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Prone_Run_R`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Prone_Walk_L`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Prone_Walk_R`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Run1`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Run2`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Run3`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Run4`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Sccuff3`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Scuff1`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Scuff2`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Scuff4`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Sprint1`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Sprint2`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Sprint3`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Sprint4`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Walk1`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Walk2`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Walk3`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/Walk4`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/landFeetErc`, `CfgVehicles/ZmbF_SoldierNormal_Base/AnimEvents/Steps/landFootErc`, `CfgVehicles/ZmbF_eastSoldier_Base : ZmbF_usSoldier_normal_Base`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/SoundVoice`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/SoundVoice/Attack`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/SoundVoice/CallToArmsShort`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/SoundVoice/HeavyHit`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/SoundVoice/Jump`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/SoundVoice/Land`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/SoundVoice/LightHit`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Sounds`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Sounds/Attack_Heavy1`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Sounds/Attack_Heavy2`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Sounds/Attack_Light1`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Sounds/Attack_Light2`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Sounds/TwoHands`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Bodyfall`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Bodyfall_Hand`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Bodyfall_Slide`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Prone_Run_L`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Prone_Run_R`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Prone_Walk_L`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Prone_Walk_R`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Run1`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Run2`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Run3`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Run4`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Sccuff3`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Scuff1`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Scuff2`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Scuff4`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Sprint1`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Sprint2`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Sprint3`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Sprint4`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Walk1`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Walk2`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Walk3`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/Walk4`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/landFeetErc`, `CfgVehicles/ZmbF_eastSoldier_Base/AnimEvents/Steps/landFootErc`, `CfgVehicles/ZmbF_eastSoldier_Heavy_Navy : ZmbF_eastSoldier_Normal_Navy`, `CfgVehicles/ZmbF_eastSoldier_Normal_Navy : ZmbF_eastSoldier_Base`
+- **data/aiconfigs/config.cpp** — `PathGraphFilters/GoatOnRun`, `PathGraphFilters/GoatOnRun/Costs`, `PathGraphFilters/GoatOnRun/Flags`
+- **data/config.cpp** — `CfgVehicles/HouseDestructible : House`, `CfgWorlds/CAWorld/Weather/Sandstorm`
+- **gear/camping/config.cpp** — `CfgVehicles/BarbedWire/AnimEvents/SoundWeapon/wire_struggle`, `CfgVehicles/BarbedWire/AnimEvents/SoundWeapon/wire_tieup`, `CfgVehicles/BarbedWire/AnimEvents/SoundWeapon/wire_tieup_back`, `CfgVehicles/BarbedWire/AnimEvents/SoundWeapon/wire_tieup_end`, `CfgVehicles/BarbedWire/AnimEvents/SoundWeapon/wire_untie`, `CfgVehicles/BarbedWireLocked/AnimEvents/SoundWeapon/wire_struggle`, `CfgVehicles/BarbedWireLocked/AnimEvents/SoundWeapon/wire_tieup`, `CfgVehicles/BarbedWireLocked/AnimEvents/SoundWeapon/wire_tieup_back`, `CfgVehicles/BarbedWireLocked/AnimEvents/SoundWeapon/wire_tieup_end`, `CfgVehicles/BarbedWireLocked/AnimEvents/SoundWeapon/wire_untie`
+- **gear/consumables/config.cpp** — `CfgVehicles/Rag/AnimEvents/SoundWeapon/Rags_Bandage_end`, `CfgVehicles/Rag/AnimEvents/SoundWeapon/Rags_Bandage_loop1`, `CfgVehicles/Rag/AnimEvents/SoundWeapon/Rags_Bandage_loop2`, `CfgVehicles/Rag/AnimEvents/SoundWeapon/Rags_Bandage_loop3`, `CfgVehicles/Rag/AnimEvents/SoundWeapon/Rags_Bandage_start`
+- **gear/crafting/config.cpp** — `CfgNonAIVehicles/Proxybp_rope : ProxyAttachment`, `CfgVehicles/HandDrillKitBirch : HandDrillKit`, `CfgVehicles/MetalWire/AnimEvents/SoundWeapon/wire_struggle`, `CfgVehicles/MetalWire/AnimEvents/SoundWeapon/wire_tieup`, `CfgVehicles/MetalWire/AnimEvents/SoundWeapon/wire_tieup_back`, `CfgVehicles/MetalWire/AnimEvents/SoundWeapon/wire_tieup_end`, `CfgVehicles/MetalWire/AnimEvents/SoundWeapon/wire_untie`, `CfgVehicles/MetalWireLocked/AnimEvents/SoundWeapon/wire_struggle`, `CfgVehicles/MetalWireLocked/AnimEvents/SoundWeapon/wire_tieup`, `CfgVehicles/MetalWireLocked/AnimEvents/SoundWeapon/wire_tieup_back`, `CfgVehicles/MetalWireLocked/AnimEvents/SoundWeapon/wire_tieup_end`, `CfgVehicles/MetalWireLocked/AnimEvents/SoundWeapon/wire_untie`, `CfgVehicles/Rope/InventorySlotsOffsets`, `CfgVehicles/Rope/InventorySlotsOffsets/Backpack_1`
+- **gear/drinks/config.cpp** — `CfgVehicles/Waterskin_ColorBase : Bottle_Base`, `CfgVehicles/Waterskin_ColorBase/AnimEvents`, `CfgVehicles/Waterskin_ColorBase/AnimEvents/SoundWeapon`, `CfgVehicles/Waterskin_ColorBase/AnimEvents/SoundWeapon/PondBottle_loop`, `CfgVehicles/Waterskin_ColorBase/AnimEvents/SoundWeapon/WaterBottle_in_C1`, `CfgVehicles/Waterskin_ColorBase/AnimEvents/SoundWeapon/WaterPouch_in_B`, `CfgVehicles/Waterskin_ColorBase/AnimEvents/SoundWeapon/WaterPouch_in_C`, `CfgVehicles/Waterskin_ColorBase/AnimEvents/SoundWeapon/WaterPouch_out_A`, `CfgVehicles/Waterskin_ColorBase/AnimEvents/SoundWeapon/WaterPouch_out_B`, `CfgVehicles/Waterskin_ColorBase/AnimEvents/SoundWeapon/WellBottle_loop`, `CfgVehicles/Waterskin_ColorBase/DamageSystem`, `CfgVehicles/Waterskin_ColorBase/DamageSystem/GlobalHealth`, `CfgVehicles/Waterskin_ColorBase/DamageSystem/GlobalHealth/Health`, `CfgVehicles/Waterskin_Natural : Waterskin_ColorBase`, `CfgVehicles/Waterskin_Natural/AnimEvents`, `CfgVehicles/Waterskin_Natural/AnimEvents/SoundWeapon`, `CfgVehicles/Waterskin_Natural/AnimEvents/SoundWeapon/PondBottle_loop`, `CfgVehicles/Waterskin_Natural/AnimEvents/SoundWeapon/WaterBottle_in_C1`, `CfgVehicles/Waterskin_Natural/AnimEvents/SoundWeapon/WaterPouch_in_B`, `CfgVehicles/Waterskin_Natural/AnimEvents/SoundWeapon/WaterPouch_in_C`, `CfgVehicles/Waterskin_Natural/AnimEvents/SoundWeapon/WaterPouch_out_A`, `CfgVehicles/Waterskin_Natural/AnimEvents/SoundWeapon/WaterPouch_out_B`, `CfgVehicles/Waterskin_Natural/AnimEvents/SoundWeapon/WellBottle_loop`
+- **gear/food/config.cpp** — `CfgVehicles/AgaricusMushroom/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/AgaricusMushroom/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/AgaricusMushroom/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/AmanitaMushroom/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/AmanitaMushroom/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/AmanitaMushroom/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/AuriculariaMushroom/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/AuriculariaMushroom/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/AuriculariaMushroom/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/BakedBeansCan_Opened/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/BakedBeansCan_Opened/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/BakedBeansCan_Opened/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/BearSteakMeat/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/BearSteakMeat/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/BearSteakMeat/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/Bitterlings/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/Bitterlings/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/Bitterlings/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/BoarSteakMeat/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/BoarSteakMeat/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/BoarSteakMeat/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/BoletusMushroom/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/BoletusMushroom/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/BoletusMushroom/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/Carp/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/Carp/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/Carp/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/CarpFilletMeat/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/CarpFilletMeat/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/CarpFilletMeat/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/Catfish : Edible_Base`, `CfgVehicles/Catfish/AnimEvents`, `CfgVehicles/Catfish/AnimEvents/SoundWeapon`, `CfgVehicles/Catfish/AnimEvents/SoundWeapon/Eating_BoxEnd`, `CfgVehicles/Catfish/AnimEvents/SoundWeapon/Eating_BoxOpen`, `CfgVehicles/Catfish/AnimEvents/SoundWeapon/Eating_BoxShake`, `CfgVehicles/Catfish/AnimEvents/SoundWeapon/Eating_TakeFood`, `CfgVehicles/Catfish/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/Catfish/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/Catfish/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/Catfish/AnimEvents/SoundWeapon/openTunaCan`, `CfgVehicles/Catfish/AnimationSources : FoodAnimationSources`, `CfgVehicles/Catfish/DamageSystem`, `CfgVehicles/Catfish/DamageSystem/GlobalHealth`, `CfgVehicles/Catfish/DamageSystem/GlobalHealth/Health`, `CfgVehicles/Catfish/Food`, `CfgVehicles/Catfish/Food/FoodStageTransitions : NotCookable`, `CfgVehicles/Catfish/Food/FoodStages`, `CfgVehicles/Catfish/Food/FoodStages/Raw`, `CfgVehicles/Catfish/Food/FoodStages/Rotten`, `CfgVehicles/Catfish/MeleeModes`, `CfgVehicles/Catfish/MeleeModes/Default`, `CfgVehicles/Catfish/MeleeModes/Heavy`, `CfgVehicles/Catfish/MeleeModes/Sprint`, `CfgVehicles/Catfish/Skinning`, `CfgVehicles/Catfish/Skinning/BloodInfectionSettings`, `CfgVehicles/Catfish/Skinning/BloodInfectionSettings/Salmonella`, `CfgVehicles/CatfishFilletMeat : Edible_Base`, `CfgVehicles/CatfishFilletMeat/AnimEvents`, `CfgVehicles/CatfishFilletMeat/AnimEvents/SoundWeapon`, `CfgVehicles/CatfishFilletMeat/AnimEvents/SoundWeapon/Eating_BoxEnd`, `CfgVehicles/CatfishFilletMeat/AnimEvents/SoundWeapon/Eating_BoxOpen`, `CfgVehicles/CatfishFilletMeat/AnimEvents/SoundWeapon/Eating_BoxShake`, `CfgVehicles/CatfishFilletMeat/AnimEvents/SoundWeapon/Eating_TakeFood`, `CfgVehicles/CatfishFilletMeat/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/CatfishFilletMeat/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/CatfishFilletMeat/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/CatfishFilletMeat/AnimEvents/SoundWeapon/openTunaCan`, `CfgVehicles/CatfishFilletMeat/AnimationSources : FoodAnimationSources`, `CfgVehicles/CatfishFilletMeat/DamageSystem`, `CfgVehicles/CatfishFilletMeat/DamageSystem/GlobalHealth`, `CfgVehicles/CatfishFilletMeat/DamageSystem/GlobalHealth/Health`, `CfgVehicles/CatfishFilletMeat/Food`, `CfgVehicles/CatfishFilletMeat/Food/FoodStageTransitions : MeatStageTransitions`, `CfgVehicles/CatfishFilletMeat/Food/FoodStages`, `CfgVehicles/CatfishFilletMeat/Food/FoodStages/Baked`, `CfgVehicles/CatfishFilletMeat/Food/FoodStages/Boiled`, `CfgVehicles/CatfishFilletMeat/Food/FoodStages/Burned`, `CfgVehicles/CatfishFilletMeat/Food/FoodStages/Dried`, `CfgVehicles/CatfishFilletMeat/Food/FoodStages/Raw`, `CfgVehicles/CatfishFilletMeat/Food/FoodStages/Rotten`, `CfgVehicles/CatfishFilletMeat/NoiseImpact`, `CfgVehicles/CatfishFilletMeat/Trapping`, `CfgVehicles/ChickenBreastMeat/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/ChickenBreastMeat/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/ChickenBreastMeat/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/CowSteakMeat/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/CowSteakMeat/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/CowSteakMeat/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/CraterellusMushroom/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/CraterellusMushroom/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/CraterellusMushroom/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/DeadChicken_ColorBase/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/DeadChicken_ColorBase/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/DeadChicken_ColorBase/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/DeadFox/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/DeadFox/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/DeadFox/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/DeadRabbit/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/DeadRabbit/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/DeadRabbit/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/DeerSteakMeat/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/DeerSteakMeat/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/DeerSteakMeat/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/FoodCan_100g_ColorBase/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/FoodCan_100g_ColorBase/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/FoodCan_100g_ColorBase/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/FoodCan_250g_ColorBase/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/FoodCan_250g_ColorBase/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/FoodCan_250g_ColorBase/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/FoodCan_250g_Opened_ColorBase/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/FoodCan_250g_Opened_ColorBase/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/FoodCan_250g_Opened_ColorBase/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/FoxSteakMeat/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/FoxSteakMeat/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/FoxSteakMeat/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/GoatSteakMeat/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/GoatSteakMeat/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/GoatSteakMeat/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/Guts/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/Guts/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/Guts/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/HumanSteakMeat/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/HumanSteakMeat/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/HumanSteakMeat/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/LactariusMushroom/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/LactariusMushroom/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/LactariusMushroom/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/Lard/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/Lard/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/Lard/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/Mackerel/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/Mackerel/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/Mackerel/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/MackerelFilletMeat/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/MackerelFilletMeat/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/MackerelFilletMeat/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/MacrolepiotaMushroom/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/MacrolepiotaMushroom/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/MacrolepiotaMushroom/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/MouflonSteakMeat/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/MouflonSteakMeat/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/MouflonSteakMeat/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/PeachesCan/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/PeachesCan/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/PeachesCan/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/PeachesCan_Opened/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/PeachesCan_Opened/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/PeachesCan_Opened/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/PigSteakMeat/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/PigSteakMeat/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/PigSteakMeat/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/PleurotusMushroom/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/PleurotusMushroom/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/PleurotusMushroom/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/PsilocybeMushroom/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/PsilocybeMushroom/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/PsilocybeMushroom/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/RabbitLegMeat/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/RabbitLegMeat/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/RabbitLegMeat/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/RedCaviar/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/RedCaviar/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/RedCaviar/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/ReindeerSteakMeat/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/ReindeerSteakMeat/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/ReindeerSteakMeat/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/Rice/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/Rice/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/Rice/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/Sardines/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/Sardines/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/Sardines/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/SardinesCan/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/SardinesCan/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/SardinesCan/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/SardinesCan_Opened/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/SardinesCan_Opened/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/SardinesCan_Opened/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/SheepSteakMeat/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/SheepSteakMeat/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/SheepSteakMeat/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/Shrimp/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/Shrimp/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/Shrimp/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/SmallGuts/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/SmallGuts/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/SmallGuts/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/SpaghettiCan/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/SpaghettiCan/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/SpaghettiCan/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/SpaghettiCan_Opened/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/SpaghettiCan_Opened/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/SpaghettiCan_Opened/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/SteelheadTrout/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/SteelheadTrout/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/SteelheadTrout/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/SteelheadTroutFilletMeat/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/SteelheadTroutFilletMeat/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/SteelheadTroutFilletMeat/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/TacticalBaconCan/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/TacticalBaconCan/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/TacticalBaconCan/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/TacticalBaconCan_Opened/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/TacticalBaconCan_Opened/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/TacticalBaconCan_Opened/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/TunaCan/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/TunaCan/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/TunaCan/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/TunaCan_Opened/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/TunaCan_Opened/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/TunaCan_Opened/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/UnknownFoodCan/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/UnknownFoodCan/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/UnknownFoodCan/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/UnknownFoodCan_Opened/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/UnknownFoodCan_Opened/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/UnknownFoodCan_Opened/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/WalleyePollock/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/WalleyePollock/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/WalleyePollock/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/WalleyePollockFilletMeat/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/WalleyePollockFilletMeat/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/WalleyePollockFilletMeat/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/WolfSteakMeat/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/WolfSteakMeat/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/WolfSteakMeat/AnimEvents/SoundWeapon/animalSkinning_out`, `CfgVehicles/Worm/AnimEvents/SoundWeapon/animalSkinning`, `CfgVehicles/Worm/AnimEvents/SoundWeapon/animalSkinning_in`, `CfgVehicles/Worm/AnimEvents/SoundWeapon/animalSkinning_out`
+- **gear/tools/config.cpp** — `CfgVehicles/Handcuffs/AnimEvents/SoundWeapon/Handcuff_handling`, `CfgVehicles/HandcuffsLocked/AnimEvents/SoundWeapon/Handcuff_Close_1`, `CfgVehicles/HandcuffsLocked/AnimEvents/SoundWeapon/Handcuff_Close_2`, `CfgVehicles/KitchenKnife/InventorySlotsOffsets`, `CfgVehicles/KitchenKnife/InventorySlotsOffsets/Knife`, `CfgVehicles/SteakKnife/InventorySlotsOffsets`, `CfgVehicles/SteakKnife/InventorySlotsOffsets/Knife`, `CfgVehicles/UndergroundBreadcrumbHandle : Inventory_Base`, `CfgVehicles/UndergroundTriggerHandle : Inventory_Base`
+- **gear/traps/config.cpp** — `CfgAmmo/LandMineExplosion_Ammo : DefaultAmmo`, `CfgAmmo/LandMineExplosion_Ammo/DamageApplied`, `CfgAmmo/LandMineExplosion_Ammo/DamageApplied/Blood`, `CfgAmmo/LandMineExplosion_Ammo/DamageApplied/Health`, `CfgAmmo/LandMineExplosion_Ammo/DamageApplied/Shock`, `CfgAmmo/LandMineExplosion_Ammo/NoiseExplosion`
+- **plants/config.cpp** — `CfgVehicles/StaticObj_d_FagusSylvatica_fallen : HouseNoDestruct`, `CfgVehicles/StaticObj_d_FagusSylvatica_fallen_DE : HouseNoDestruct`, `CfgVehicles/StaticObj_d_FagusSylvatica_fallenb : HouseNoDestruct`, `CfgVehicles/StaticObj_d_FagusSylvatica_fallenb_DE : HouseNoDestruct`, `CfgVehicles/StaticObj_d_FagusSylvatica_fallenc : HouseNoDestruct`, `CfgVehicles/StaticObj_d_FagusSylvatica_fallenc_DE : HouseNoDestruct`, `CfgVehicles/StaticObj_d_FagusSylvatica_stump : HouseNoDestruct`, `CfgVehicles/StaticObj_d_FagusSylvatica_stump_DE : HouseNoDestruct`
+- **sounds/hpp/config.cpp** — `CfgActionSounds/doorMetalRebuildClose`, `CfgActionSounds/doorMetalRebuildOpen`, `CfgActionSounds/doorMetalsmallSlideClose`, `CfgActionSounds/doorMetalsmallSlideOpen`, `CfgActionSounds/doorWoodRebuildClose`, `CfgActionSounds/doorWoodRebuildOpen`, `CfgActionSounds/doorWoodSmallSlideClose`, `CfgActionSounds/doorWoodSmallSlideOpen`, `CfgActionSounds/doorWoodSmallSlideOpenABit`, `CfgActionSounds/doorWoodSmallSlideRattle`, `CfgSoundCurves/objectOilPitAttenuationCurve`, `CfgSounds/doorMetalRebuildClose_1 : default`, `CfgSounds/doorMetalRebuildClose_2 : default`, `CfgSounds/doorMetalRebuildOpen_1 : default`, `CfgSounds/doorMetalRebuildOpen_2 : default`, `CfgSounds/doorMetalsmallSlideClose_1 : default`, `CfgSounds/doorMetalsmallSlideClose_2 : default`, `CfgSounds/doorMetalsmallSlideOpen_1 : default`, `CfgSounds/doorMetalsmallSlideOpen_2 : default`, `CfgSounds/doorWoodRebuildClose_1 : default`, `CfgSounds/doorWoodRebuildClose_2 : default`, `CfgSounds/doorWoodRebuildOpen_1 : default`, `CfgSounds/doorWoodRebuildOpen_2 : default`, `CfgSounds/doorWoodSmallSlideClose_1 : default`, `CfgSounds/doorWoodSmallSlideClose_2 : default`, `CfgSounds/doorWoodSmallSlideOpen_1 : default`, `CfgSounds/doorWoodSmallSlideOpen_2 : default`, `CfgVehicles/Motorbike_01_ColorBase : MotorbikeScript`, `CfgVehicles/Motorbike_01_ColorBase/Sounds`, `CfgVehicles/Motorbike_02_ColorBase : MotorbikeScript`, `CfgVehicles/Motorbike_02_ColorBase/Sounds`
+- **structures/furniture/config.cpp** — `CfgVehicles/StaticObj_Furniture_PlasticBucket_DE : HouseNoDestruct`, `CfgVehicles/StaticObj_Stretcher_Green_DE : HouseNoDestruct`
+- **structures/industrial/config.cpp** — `CfgVehicles/StaticObj_Misc_ConcretePipe_DE : HouseNoDestruct`
+- **structures/military/config.cpp** — `CfgVehicles/Land_Roadblock_Table_DE : Land_Roadblock_Table`, `CfgVehicles/Land_Roadblock_WoodenCrate_DE : Land_Roadblock_WoodenCrate`, `CfgVehicles/StaticObj_Misc_Barbedwire_DE : HouseNoDestruct`, `CfgVehicles/StaticObj_Misc_Hedgehog_Concrete_DE : HouseNoDestruct`, `CfgVehicles/StaticObj_Roadblock_CncBlock_DE : HouseNoDestruct`, `CfgVehicles/StaticObj_Roadblock_CncBlocks_Long_DE : HouseNoDestruct`
+- **structures/residential/config.cpp** — `CfgVehicles/StaticObj_Garbage_GroundSq_5m_DE : HouseNoDestruct`
+- **structures/ruins/config.cpp** — `CfgVehicles/StaticObj_Rubble_DirtPile_Large_DE : HouseNoDestruct`, `CfgVehicles/StaticObj_Rubble_DirtPile_Medium1_DE : HouseNoDestruct`, `CfgVehicles/StaticObj_Rubble_Glass_DE : HouseNoDestruct`
+- **structures/signs/config.cpp** — `CfgVehicles/StaticObj_Sign_Roadblock_Arrow : HouseNoDestruct`, `CfgVehicles/StaticObj_Sign_Roadblock_Arrow_DE : HouseNoDestruct`, `CfgVehicles/StaticObj_Sign_Roadblock_Stop : HouseNoDestruct`, `CfgVehicles/StaticObj_Sign_Roadblock_Stop_DE : HouseNoDestruct`
+- **structures/specific/config.cpp** — `CfgVehicles/StaticObj_Airfield_Small_Control : HouseNoDestruct`, `CfgVehicles/StaticObj_Airfield_Small_Hangar : HouseNoDestruct`
+- **structures/wrecks/config.cpp** — `CfgVehicles/Land_Ship_Big_FrontA2 : HouseNoDestruct`, `CfgVehicles/StaticObj_Wreck_Bulldozer_DE : HouseNoDestruct`
+- **structures_bliss/walls/config.cpp** — `CfgVehicles/StaticObj_Wall_FenVineyard_DE : HouseNoDestruct`
+- **structures_sakhal/config.cpp** — `CfgVehicles/Land_Misc_Pallet_Spawn_DE : Land_Misc_Pallet_Spawn`, `CfgVehicles/Land_Misc_WoodenCrate_Spawn_DE : Land_Misc_WoodenCrate_Spawn`
+- **surfaces/config.cpp** — `CfgSurfaces/clean_water_int : DZ_SurfacesInt`, `CfgSurfaces/dirt_notdig_ext : DZ_SurfacesExt`, `CfgSurfaces/trash_notdig_ext : DZ_SurfacesExt`, `CfgSurfaces/trash_notdig_ext/Visible`, `CfgVehicleSurfaces/Sand`
+- **ui/config.cpp** — `CfgVideoOptions/OverallSettingsConsole/High : DefaultSettings`, `CfgVideoOptions/OverallSettingsPS5 : OverallSettingsConsole`, `CfgVideoOptions/OverallSettingsXB1 : OverallSettingsConsole`, `CfgVideoOptions/OverallSettingsXBS : OverallSettingsConsole`, `CfgVideoOptions/PresetTest : OverallSettings`, `CfgVideoOptions/PresetTest/Test1 : DefaultSettings`, `CfgVideoOptions/PresetTest/Test2 : DefaultSettings`
+- **vehicles/parts/config.cpp** — `CfgVehicles/HeadlightH7/AnimEvents`, `CfgVehicles/HeadlightH7/AnimEvents/SoundWeapon`, `CfgVehicles/HeadlightH7/AnimEvents/SoundWeapon/drop`
+- **vehicles/singletrack/config.cpp** — `CfgNonAIVehicles/ProxyMotorbike_01_wheel_1 : ProxyVehiclePart`, `CfgNonAIVehicles/ProxyMotorbike_01_wheel_2 : ProxyVehiclePart`, `CfgNonAIVehicles/ProxyMotorbike_02_shieldleft : ProxyVehiclePart`, `CfgNonAIVehicles/ProxyMotorbike_02_shieldright : ProxyVehiclePart`, `CfgNonAIVehicles/ProxyMotorbike_02_wheel_1 : ProxyVehiclePart`, `CfgNonAIVehicles/ProxyMotorbike_02_wheel_2 : ProxyVehiclePart`, `CfgNonAIVehicles/ProxyMotorbike_02_windshield : ProxyVehiclePart`, `CfgPatches/DZ_Vehicles_Singletrack`, `CfgVehicles/MotorbikeScript : Motorbike`, `CfgVehicles/MotorbikeScript/AnimationSources`, `CfgVehicles/MotorbikeScript/AnimationSources/AnimHitWheel_1`, `CfgVehicles/MotorbikeScript/AnimationSources/AnimHitWheel_2 : AnimHitWheel_1`, `CfgVehicles/MotorbikeScript/AnimationSources/HideDestroyed_1_1`, `CfgVehicles/MotorbikeScript/AnimationSources/HideDestroyed_1_2`, `CfgVehicles/MotorbikeScript/AnimationSources/HideDestroyed_2_1`, `CfgVehicles/MotorbikeScript/AnimationSources/HideDestroyed_2_2`, `CfgVehicles/MotorbikeScript/Crew`, `CfgVehicles/MotorbikeScript/Crew/CoDriver : Driver`, `CfgVehicles/MotorbikeScript/Crew/Driver`, `CfgVehicles/MotorbikeScript/NoiseCarHorn`, `CfgVehicles/MotorbikeScript/SimulationModule`, `CfgVehicles/MotorbikeScript/SimulationModule/Wheels`, `CfgVehicles/MotorbikeScript/SimulationModule/Wheels/Front`, `CfgVehicles/MotorbikeScript/SimulationModule/Wheels/Rear`, `CfgVehicles/MotorbikeWheel : CarWheel`, `CfgVehicles/Motorbike_01_Blue : Motorbike_01_ColorBase`, `CfgVehicles/Motorbike_01_ColorBase/AnimationSources : AnimationSources`, `CfgVehicles/Motorbike_01_ColorBase/AnimationSources/SeatDriver`, `CfgVehicles/Motorbike_01_ColorBase/AnimationSources/damper_1`, `CfgVehicles/Motorbike_01_ColorBase/AnimationSources/damper_2`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem/DamageZones`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem/DamageZones/Back`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem/DamageZones/Back/Health`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem/DamageZones/Chassis`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem/DamageZones/Chassis/Health`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem/DamageZones/Engine`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem/DamageZones/Engine/Health`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem/DamageZones/Fender`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem/DamageZones/Fender/Health`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem/DamageZones/Front`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem/DamageZones/Front/Health`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem/DamageZones/FuelTank`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem/DamageZones/FuelTank/Health`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem/DamageZones/Reflector_1_1`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem/DamageZones/Reflector_1_1/Health`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem/GUIInventoryAttachmentsProps`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem/GUIInventoryAttachmentsProps/Body`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem/GUIInventoryAttachmentsProps/Chassis`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem/GUIInventoryAttachmentsProps/Engine`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem/GlobalHealth`, `CfgVehicles/Motorbike_01_ColorBase/DamageSystem/GlobalHealth/Health`, `CfgVehicles/Motorbike_01_ColorBase/SimulationModule : SimulationModule`, `CfgVehicles/Motorbike_01_ColorBase/SimulationModule/Aerodynamics`, `CfgVehicles/Motorbike_01_ColorBase/SimulationModule/Brakes`, `CfgVehicles/Motorbike_01_ColorBase/SimulationModule/Brakes/Front`, `CfgVehicles/Motorbike_01_ColorBase/SimulationModule/Brakes/Rear`, `CfgVehicles/Motorbike_01_ColorBase/SimulationModule/Clutch`, `CfgVehicles/Motorbike_01_ColorBase/SimulationModule/Engine`, `CfgVehicles/Motorbike_01_ColorBase/SimulationModule/Gearbox`, `CfgVehicles/Motorbike_01_ColorBase/SimulationModule/Steering`, `CfgVehicles/Motorbike_01_ColorBase/SimulationModule/Throttle`, `CfgVehicles/Motorbike_01_ColorBase/SimulationModule/Wheels : Wheels`, `CfgVehicles/Motorbike_01_ColorBase/SimulationModule/Wheels/Front : Front`, `CfgVehicles/Motorbike_01_ColorBase/SimulationModule/Wheels/Front/Suspension`, `CfgVehicles/Motorbike_01_ColorBase/SimulationModule/Wheels/Rear : Rear`, `CfgVehicles/Motorbike_01_ColorBase/SimulationModule/Wheels/Rear/Suspension`, `CfgVehicles/Motorbike_01_Red : Motorbike_01_ColorBase`, `CfgVehicles/Motorbike_01_Wheel_1 : MotorbikeWheel`, `CfgVehicles/Motorbike_01_Wheel_1_Ruined : Motorbike_01_Wheel_1`, `CfgVehicles/Motorbike_01_Wheel_2 : MotorbikeWheel`, `CfgVehicles/Motorbike_01_Wheel_2_Ruined : Motorbike_01_Wheel_2`, `CfgVehicles/Motorbike_01_Yellow : Motorbike_01_ColorBase`, `CfgVehicles/Motorbike_02_Blue : Motorbike_02_ColorBase`, `CfgVehicles/Motorbike_02_ColorBase/AnimationSources : AnimationSources`, `CfgVehicles/Motorbike_02_ColorBase/AnimationSources/coolant`, `CfgVehicles/Motorbike_02_ColorBase/AnimationSources/damper_1`, `CfgVehicles/Motorbike_02_ColorBase/AnimationSources/damper_2`, `CfgVehicles/Motorbike_02_ColorBase/DamageSystem`, `CfgVehicles/Motorbike_02_ColorBase/DamageSystem/DamageZones`, `CfgVehicles/Motorbike_02_ColorBase/DamageSystem/DamageZones/Back`, `CfgVehicles/Motorbike_02_ColorBase/DamageSystem/DamageZones/Back/Health`, `CfgVehicles/Motorbike_02_ColorBase/DamageSystem/DamageZones/Chassis`, `CfgVehicles/Motorbike_02_ColorBase/DamageSystem/DamageZones/Chassis/Health`, `CfgVehicles/Motorbike_02_ColorBase/DamageSystem/DamageZones/Engine`, `CfgVehicles/Motorbike_02_ColorBase/DamageSystem/DamageZones/Engine/Health`, `CfgVehicles/Motorbike_02_ColorBase/DamageSystem/DamageZones/FenderFront`, `CfgVehicles/Motorbike_02_ColorBase/DamageSystem/DamageZones/FenderFront/Health`, `CfgVehicles/Motorbike_02_ColorBase/DamageSystem/DamageZones/FenderRear`, `CfgVehicles/Motorbike_02_ColorBase/DamageSystem/DamageZones/FenderRear/Health`, `CfgVehicles/Motorbike_02_ColorBase/DamageSystem/DamageZones/Front`, `CfgVehicles/Motorbike_02_ColorBase/DamageSystem/DamageZones/Front/Health`, `CfgVehicles/Motorbike_02_ColorBase/DamageSystem/DamageZones/FuelTank`, `CfgVehicles/Motorbike_02_ColorBase/DamageSystem/DamageZones/FuelTank/Health`, `CfgVehicles/Motorbike_02_ColorBase/DamageSystem/DamageZones/Reflector_1_1`, `CfgVehicles/Motorbike_02_ColorBase/DamageSystem/DamageZones/Reflector_1_1/Health`, `CfgVehicles/Motorbike_02_ColorBase/DamageSystem/GlobalHealth`, `CfgVehicles/Motorbike_02_ColorBase/DamageSystem/GlobalHealth/Health`, `CfgVehicles/Motorbike_02_ColorBase/GUIInventoryAttachmentsProps`, `CfgVehicles/Motorbike_02_ColorBase/GUIInventoryAttachmentsProps/Body`, `CfgVehicles/Motorbike_02_ColorBase/GUIInventoryAttachmentsProps/Chassis`, `CfgVehicles/Motorbike_02_ColorBase/GUIInventoryAttachmentsProps/Engine`, `CfgVehicles/Motorbike_02_ColorBase/SimulationModule : SimulationModule`, `CfgVehicles/Motorbike_02_ColorBase/SimulationModule/Aerodynamics`, `CfgVehicles/Motorbike_02_ColorBase/SimulationModule/Brakes`, `CfgVehicles/Motorbike_02_ColorBase/SimulationModule/Brakes/Front`, `CfgVehicles/Motorbike_02_ColorBase/SimulationModule/Brakes/Rear`, `CfgVehicles/Motorbike_02_ColorBase/SimulationModule/Clutch`, `CfgVehicles/Motorbike_02_ColorBase/SimulationModule/Engine`, `CfgVehicles/Motorbike_02_ColorBase/SimulationModule/Gearbox`, `CfgVehicles/Motorbike_02_ColorBase/SimulationModule/Steering`, `CfgVehicles/Motorbike_02_ColorBase/SimulationModule/Throttle`, `CfgVehicles/Motorbike_02_ColorBase/SimulationModule/Wheels : Wheels`, `CfgVehicles/Motorbike_02_ColorBase/SimulationModule/Wheels/Front : Front`, `CfgVehicles/Motorbike_02_ColorBase/SimulationModule/Wheels/Front/Suspension`, `CfgVehicles/Motorbike_02_ColorBase/SimulationModule/Wheels/Rear : Rear`, `CfgVehicles/Motorbike_02_ColorBase/SimulationModule/Wheels/Rear/Suspension`, `CfgVehicles/Motorbike_02_Green : Motorbike_02_ColorBase`, `CfgVehicles/Motorbike_02_Red : Motorbike_02_ColorBase`, `CfgVehicles/Motorbike_02_ShieldFront_Blue : Motorbike_02_ShieldFront_ColorBase`, `CfgVehicles/Motorbike_02_ShieldFront_ColorBase : Inventory_Base`, `CfgVehicles/Motorbike_02_ShieldFront_ColorBase/DamageSystem`, `CfgVehicles/Motorbike_02_ShieldFront_ColorBase/DamageSystem/GlobalHealth`, `CfgVehicles/Motorbike_02_ShieldFront_ColorBase/DamageSystem/GlobalHealth/Health`, `CfgVehicles/Motorbike_02_ShieldFront_Green : Motorbike_02_ShieldFront_ColorBase`, `CfgVehicles/Motorbike_02_ShieldFront_Red : Motorbike_02_ShieldFront_ColorBase`, `CfgVehicles/Motorbike_02_ShieldFront_Yellow : Motorbike_02_ShieldFront_ColorBase`, `CfgVehicles/Motorbike_02_ShieldLeft_Blue : Motorbike_02_ShieldLeft_ColorBase`, `CfgVehicles/Motorbike_02_ShieldLeft_ColorBase : Motorbike_02_ShieldFront_ColorBase`, `CfgVehicles/Motorbike_02_ShieldLeft_ColorBase/DamageSystem`, `CfgVehicles/Motorbike_02_ShieldLeft_ColorBase/DamageSystem/GlobalHealth`, `CfgVehicles/Motorbike_02_ShieldLeft_ColorBase/DamageSystem/GlobalHealth/Health`, `CfgVehicles/Motorbike_02_ShieldLeft_Green : Motorbike_02_ShieldLeft_ColorBase`, `CfgVehicles/Motorbike_02_ShieldLeft_Red : Motorbike_02_ShieldLeft_ColorBase`, `CfgVehicles/Motorbike_02_ShieldLeft_Yellow : Motorbike_02_ShieldLeft_ColorBase`, `CfgVehicles/Motorbike_02_ShieldRight_Blue : Motorbike_02_ShieldRight_ColorBase`, `CfgVehicles/Motorbike_02_ShieldRight_ColorBase : Motorbike_02_ShieldFront_ColorBase`, `CfgVehicles/Motorbike_02_ShieldRight_ColorBase/DamageSystem`, `CfgVehicles/Motorbike_02_ShieldRight_ColorBase/DamageSystem/GlobalHealth`, `CfgVehicles/Motorbike_02_ShieldRight_ColorBase/DamageSystem/GlobalHealth/Health`, `CfgVehicles/Motorbike_02_ShieldRight_Green : Motorbike_02_ShieldRight_ColorBase`, `CfgVehicles/Motorbike_02_ShieldRight_Red : Motorbike_02_ShieldRight_ColorBase`, `CfgVehicles/Motorbike_02_ShieldRight_Yellow : Motorbike_02_ShieldRight_ColorBase`, `CfgVehicles/Motorbike_02_Wheel_1 : MotorbikeWheel`, `CfgVehicles/Motorbike_02_Wheel_1_Ruined : Motorbike_02_Wheel_1`, `CfgVehicles/Motorbike_02_Wheel_2 : MotorbikeWheel`, `CfgVehicles/Motorbike_02_Wheel_2_Ruined : Motorbike_02_Wheel_2`, `CfgVehicles/Motorbike_02_Yellow : Motorbike_02_ColorBase`
+- **vehicles/water/config.cpp** — `CfgVehicles/BoatScript/NoiseBoatEngine`
+- **vehicles/wheeled/config.cpp** — `CfgVehicles/Offroad_02_Beige : Offroad_02`, `CfgVehicles/Offroad_02_Beige/DamageSystem : DamageSystem`, `CfgVehicles/Offroad_02_Beige/DamageSystem/DamageZones : DamageZones`, `CfgVehicles/Offroad_02_Beige/DamageSystem/DamageZones/Back : Back`, `CfgVehicles/Offroad_02_Beige/DamageSystem/DamageZones/Back/Health : Health`, `CfgVehicles/Offroad_02_Beige/DamageSystem/DamageZones/Chassis : Chassis`, `CfgVehicles/Offroad_02_Beige/DamageSystem/DamageZones/Chassis/Health : Health`, `CfgVehicles/Offroad_02_Beige/DamageSystem/DamageZones/Fender_1_1 : Fender_1_1`, `CfgVehicles/Offroad_02_Beige/DamageSystem/DamageZones/Fender_1_1/Health : Health`, `CfgVehicles/Offroad_02_Beige/DamageSystem/DamageZones/Fender_1_2 : Fender_1_2`, `CfgVehicles/Offroad_02_Beige/DamageSystem/DamageZones/Fender_1_2/Health : Health`, `CfgVehicles/Offroad_02_Beige/DamageSystem/DamageZones/Fender_2_1 : Fender_2_1`, `CfgVehicles/Offroad_02_Beige/DamageSystem/DamageZones/Fender_2_1/Health : Health`, `CfgVehicles/Offroad_02_Beige/DamageSystem/DamageZones/Fender_2_2 : Fender_2_2`, `CfgVehicles/Offroad_02_Beige/DamageSystem/DamageZones/Fender_2_2/Health : Health`, `CfgVehicles/Offroad_02_Beige/DamageSystem/DamageZones/Front : Front`, `CfgVehicles/Offroad_02_Beige/DamageSystem/DamageZones/Front/Health : Health`, `CfgVehicles/Offroad_02_Beige/DamageSystem/DamageZones/Roof : Roof`, `CfgVehicles/Offroad_02_Beige/DamageSystem/DamageZones/Roof/Health : Health`, `CfgVehicles/Offroad_02_Door_1_1_Beige : Offroad_02_Door_1_1`, `CfgVehicles/Offroad_02_Door_1_1_Beige/DamageSystem : DamageSystem`, `CfgVehicles/Offroad_02_Door_1_1_Beige/DamageSystem/DamageZones : DamageZones`, `CfgVehicles/Offroad_02_Door_1_1_Beige/DamageSystem/DamageZones/Doors : Doors`, `CfgVehicles/Offroad_02_Door_1_1_Beige/DamageSystem/DamageZones/Doors/Health : Health`, `CfgVehicles/Offroad_02_Door_1_1_BeigeRust : Offroad_02_Door_1_1`, `CfgVehicles/Offroad_02_Door_1_1_BeigeRust/DamageSystem : DamageSystem`, `CfgVehicles/Offroad_02_Door_1_1_BeigeRust/DamageSystem/DamageZones : DamageZones`, `CfgVehicles/Offroad_02_Door_1_1_BeigeRust/DamageSystem/DamageZones/Doors : Doors`, `CfgVehicles/Offroad_02_Door_1_1_BeigeRust/DamageSystem/DamageZones/Doors/Health : Health`, `CfgVehicles/Offroad_02_Door_1_2_Beige : Offroad_02_Door_1_2`, `CfgVehicles/Offroad_02_Door_1_2_Beige/DamageSystem : DamageSystem`, `CfgVehicles/Offroad_02_Door_1_2_Beige/DamageSystem/DamageZones : DamageZones`, `CfgVehicles/Offroad_02_Door_1_2_Beige/DamageSystem/DamageZones/Doors : Doors`, `CfgVehicles/Offroad_02_Door_1_2_Beige/DamageSystem/DamageZones/Doors/Health : Health`, `CfgVehicles/Offroad_02_Door_1_2_BeigeRust : Offroad_02_Door_1_2`, `CfgVehicles/Offroad_02_Door_1_2_BeigeRust/DamageSystem : DamageSystem`, `CfgVehicles/Offroad_02_Door_1_2_BeigeRust/DamageSystem/DamageZones : DamageZones`, `CfgVehicles/Offroad_02_Door_1_2_BeigeRust/DamageSystem/DamageZones/Doors : Doors`, `CfgVehicles/Offroad_02_Door_1_2_BeigeRust/DamageSystem/DamageZones/Doors/Health : Health`, `CfgVehicles/Offroad_02_Door_2_1_Beige : Offroad_02_Door_2_1`, `CfgVehicles/Offroad_02_Door_2_1_Beige/DamageSystem : DamageSystem`, `CfgVehicles/Offroad_02_Door_2_1_Beige/DamageSystem/DamageZones : DamageZones`, `CfgVehicles/Offroad_02_Door_2_1_Beige/DamageSystem/DamageZones/Doors : Doors`, `CfgVehicles/Offroad_02_Door_2_1_Beige/DamageSystem/DamageZones/Doors/Health : Health`, `CfgVehicles/Offroad_02_Door_2_1_BeigeRust : Offroad_02_Door_2_1`, `CfgVehicles/Offroad_02_Door_2_1_BeigeRust/DamageSystem : DamageSystem`, `CfgVehicles/Offroad_02_Door_2_1_BeigeRust/DamageSystem/DamageZones : DamageZones`, `CfgVehicles/Offroad_02_Door_2_1_BeigeRust/DamageSystem/DamageZones/Doors : Doors`, `CfgVehicles/Offroad_02_Door_2_1_BeigeRust/DamageSystem/DamageZones/Doors/Health : Health`, `CfgVehicles/Offroad_02_Door_2_2_Beige : Offroad_02_Door_2_2`, `CfgVehicles/Offroad_02_Door_2_2_Beige/DamageSystem : DamageSystem`, `CfgVehicles/Offroad_02_Door_2_2_Beige/DamageSystem/DamageZones : DamageZones`, `CfgVehicles/Offroad_02_Door_2_2_Beige/DamageSystem/DamageZones/Doors : Doors`, `CfgVehicles/Offroad_02_Door_2_2_Beige/DamageSystem/DamageZones/Doors/Health : Health`, `CfgVehicles/Offroad_02_Door_2_2_BeigeRust : Offroad_02_Door_2_2`, `CfgVehicles/Offroad_02_Door_2_2_BeigeRust/DamageSystem : DamageSystem`, `CfgVehicles/Offroad_02_Door_2_2_BeigeRust/DamageSystem/DamageZones : DamageZones`, `CfgVehicles/Offroad_02_Door_2_2_BeigeRust/DamageSystem/DamageZones/Doors : Doors`, `CfgVehicles/Offroad_02_Door_2_2_BeigeRust/DamageSystem/DamageZones/Doors/Health : Health`, `CfgVehicles/Offroad_02_Hood_Beige : Offroad_02_Hood`, `CfgVehicles/Offroad_02_Hood_Beige/DamageSystem : DamageSystem`, `CfgVehicles/Offroad_02_Hood_Beige/DamageSystem/GlobalHealth : GlobalHealth`, `CfgVehicles/Offroad_02_Hood_Beige/DamageSystem/GlobalHealth/Health : Health`, `CfgVehicles/Offroad_02_Hood_BeigeRust : Offroad_02_Hood`, `CfgVehicles/Offroad_02_Hood_BeigeRust/DamageSystem : DamageSystem`, `CfgVehicles/Offroad_02_Hood_BeigeRust/DamageSystem/GlobalHealth : GlobalHealth`, `CfgVehicles/Offroad_02_Hood_BeigeRust/DamageSystem/GlobalHealth/Health : Health`, `CfgVehicles/Offroad_02_Trunk_Beige : Offroad_02_Trunk`, `CfgVehicles/Offroad_02_Trunk_Beige/DamageSystem : DamageSystem`, `CfgVehicles/Offroad_02_Trunk_Beige/DamageSystem/GlobalHealth : GlobalHealth`, `CfgVehicles/Offroad_02_Trunk_Beige/DamageSystem/GlobalHealth/Health : Health`, `CfgVehicles/Offroad_02_Trunk_BeigeRust : Offroad_02_Trunk`, `CfgVehicles/Offroad_02_Trunk_BeigeRust/DamageSystem : DamageSystem`, `CfgVehicles/Offroad_02_Trunk_BeigeRust/DamageSystem/GlobalHealth : GlobalHealth`, `CfgVehicles/Offroad_02_Trunk_BeigeRust/DamageSystem/GlobalHealth/Health : Health`
+- **water_sakhal/config.cpp** — `CfgVehicles/Land_WaterSpring_Water : HouseNoDestruct`
+- **weapons/attachments/muzzle/config.cpp** — `cfgVehicles/AK_Bayonet/InventorySlotsOffsets`, `cfgVehicles/AK_Bayonet/InventorySlotsOffsets/Knife`, `cfgVehicles/M9A1_Bayonet/InventorySlotsOffsets`, `cfgVehicles/M9A1_Bayonet/InventorySlotsOffsets/Knife`
+- **weapons/firearms/cz527/config.cpp** — `cfgWeapons/CZ527_Black/DamageSystem`, `cfgWeapons/CZ527_Black/DamageSystem/GlobalHealth`, `cfgWeapons/CZ527_Black/DamageSystem/GlobalHealth/Health`, `cfgWeapons/CZ527_Woodland : CZ527`, `cfgWeapons/CZ527_Woodland/DamageSystem`, `cfgWeapons/CZ527_Woodland/DamageSystem/GlobalHealth`, `cfgWeapons/CZ527_Woodland/DamageSystem/GlobalHealth/Health`, `cfgWeapons/CZ527_desert : CZ527`, `cfgWeapons/CZ527_desert/DamageSystem`, `cfgWeapons/CZ527_desert/DamageSystem/GlobalHealth`, `cfgWeapons/CZ527_desert/DamageSystem/GlobalHealth/Health`, `cfgWeapons/CZ527_winter : CZ527`, `cfgWeapons/CZ527_winter/DamageSystem`, `cfgWeapons/CZ527_winter/DamageSystem/GlobalHealth`, `cfgWeapons/CZ527_winter/DamageSystem/GlobalHealth/Health`
+- **weapons/firearms/mosin9130/config.cpp** — `cfgWeapons/Mosin9130_Black/DamageSystem`, `cfgWeapons/Mosin9130_Black/DamageSystem/GlobalHealth`, `cfgWeapons/Mosin9130_Black/DamageSystem/GlobalHealth/Health`, `cfgWeapons/Mosin9130_Camo/DamageSystem`, `cfgWeapons/Mosin9130_Camo/DamageSystem/GlobalHealth`, `cfgWeapons/Mosin9130_Camo/DamageSystem/GlobalHealth/Health`, `cfgWeapons/Mosin9130_Desert : Mosin9130`, `cfgWeapons/Mosin9130_Desert/DamageSystem`, `cfgWeapons/Mosin9130_Desert/DamageSystem/GlobalHealth`, `cfgWeapons/Mosin9130_Desert/DamageSystem/GlobalHealth/Health`, `cfgWeapons/Mosin9130_Winter : Mosin9130`, `cfgWeapons/Mosin9130_Winter/DamageSystem`, `cfgWeapons/Mosin9130_Winter/DamageSystem/GlobalHealth`, `cfgWeapons/Mosin9130_Winter/DamageSystem/GlobalHealth/Health`, `cfgWeapons/Mosin9130_Woodland : Mosin9130`, `cfgWeapons/Mosin9130_Woodland/DamageSystem`, `cfgWeapons/Mosin9130_Woodland/DamageSystem/GlobalHealth`, `cfgWeapons/Mosin9130_Woodland/DamageSystem/GlobalHealth/Health`, `cfgWeapons/SawedoffMosin9130_Black/DamageSystem`, `cfgWeapons/SawedoffMosin9130_Black/DamageSystem/GlobalHealth`, `cfgWeapons/SawedoffMosin9130_Black/DamageSystem/GlobalHealth/Health`, `cfgWeapons/SawedoffMosin9130_Desert : SawedoffMosin9130`, `cfgWeapons/SawedoffMosin9130_Desert/DamageSystem`, `cfgWeapons/SawedoffMosin9130_Desert/DamageSystem/GlobalHealth`, `cfgWeapons/SawedoffMosin9130_Desert/DamageSystem/GlobalHealth/Health`, `cfgWeapons/SawedoffMosin9130_Winter : SawedoffMosin9130`, `cfgWeapons/SawedoffMosin9130_Winter/DamageSystem`, `cfgWeapons/SawedoffMosin9130_Winter/DamageSystem/GlobalHealth`, `cfgWeapons/SawedoffMosin9130_Winter/DamageSystem/GlobalHealth/Health`, `cfgWeapons/SawedoffMosin9130_Woodland : SawedoffMosin9130`, `cfgWeapons/SawedoffMosin9130_Woodland/DamageSystem`, `cfgWeapons/SawedoffMosin9130_Woodland/DamageSystem/GlobalHealth`, `cfgWeapons/SawedoffMosin9130_Woodland/DamageSystem/GlobalHealth/Health`
+- **weapons/firearms/sks/config.cpp** — `cfgWeapons/SKS_Black/DamageSystem`, `cfgWeapons/SKS_Black/DamageSystem/GlobalHealth`, `cfgWeapons/SKS_Black/DamageSystem/GlobalHealth/Health`, `cfgWeapons/SKS_Desert : SKS`, `cfgWeapons/SKS_Desert/DamageSystem`, `cfgWeapons/SKS_Desert/DamageSystem/GlobalHealth`, `cfgWeapons/SKS_Desert/DamageSystem/GlobalHealth/Health`, `cfgWeapons/SKS_Winter : SKS`, `cfgWeapons/SKS_Winter/DamageSystem`, `cfgWeapons/SKS_Winter/DamageSystem/GlobalHealth`, `cfgWeapons/SKS_Winter/DamageSystem/GlobalHealth/Health`, `cfgWeapons/SKS_Woodland : SKS`, `cfgWeapons/SKS_Woodland/DamageSystem`, `cfgWeapons/SKS_Woodland/DamageSystem/GlobalHealth`, `cfgWeapons/SKS_Woodland/DamageSystem/GlobalHealth/Health`
+- **weapons/melee/blade/config.cpp** — `CfgVehicles/CombatKnife/InventorySlotsOffsets`, `CfgVehicles/CombatKnife/InventorySlotsOffsets/Knife`, `CfgVehicles/FangeKnife/InventorySlotsOffsets`, `CfgVehicles/FangeKnife/InventorySlotsOffsets/Knife`, `CfgVehicles/HuntingKnife/InventorySlotsOffsets`, `CfgVehicles/HuntingKnife/InventorySlotsOffsets/Knife`
+- **weapons/pistols/glock/config.cpp** — `cfgWeapons/Glock19_Tan : Glock19`, `cfgWeapons/Glock19_Tan/DamageSystem`, `cfgWeapons/Glock19_Tan/DamageSystem/GlobalHealth`, `cfgWeapons/Glock19_Tan/DamageSystem/GlobalHealth/Health`
+- **worlds/enoch/world/config.cpp** — `CfgWorlds/Enoch/Holes`, `CfgWorlds/Enoch/Holes/Dambog`
+
+Sound classes added (not listed): CfgSoundSets: 529, CfgSoundShaders: 560, CfgSoundTables: 3331
+

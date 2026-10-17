@@ -1,0 +1,18 @@
+ImageSetClass {
+ Name "drl_craft_cross_mark"
+ RefSize 75 75
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "DRL_CraftMenu/UI/data/cross-mark.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass cross_mark {
+   Name "cross_mark"
+   Pos 0 0
+   Size 75 75
+   Flags 0
+  }
+ }
+}

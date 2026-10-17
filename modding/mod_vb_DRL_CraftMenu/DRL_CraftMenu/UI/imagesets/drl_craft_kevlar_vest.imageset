@@ -1,0 +1,18 @@
+ImageSetClass {
+ Name "drl_craft_kevlar_vest"
+ RefSize 75 75
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "DRL_CraftMenu/UI/data/kevlar-vest.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass kevlar_vest {
+   Name "kevlar_vest"
+   Pos 0 0
+   Size 75 75
+   Flags 0
+  }
+ }
+}

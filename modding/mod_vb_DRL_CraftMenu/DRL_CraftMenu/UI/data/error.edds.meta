@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{1005B95D20AF526E}DRL_CraftMenu/UI/data/error.edds"
+ Author "win-hv5vr6npefg"
+ ChangeDate 399864598
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "error.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

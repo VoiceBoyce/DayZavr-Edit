@@ -1,0 +1,16 @@
+{
+    "compress": {
+        "exclude": [
+        ],
+        "include": [
+            "\\.xml$",
+            "\\.csv$"
+        ]
+    },
+    "headers": [
+        {
+            "name": "prefix",
+            "value": "INT_UIFramework"
+        }
+    ]
+}

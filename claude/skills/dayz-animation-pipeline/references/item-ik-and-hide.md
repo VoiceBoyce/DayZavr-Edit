@@ -1,0 +1,189 @@
+# Item carry-IK and hide-on-attach (Layer 1)
+
+Two production-proven patterns, both Layer 1 (Claude produces in-sandbox), both sourced from working mods in this vault (`AI/10_Projects/DayZ_Vehicle_Skill/patterns/` — specifically `vanilla-ik-anim-reuse.md` and `slot-attached-item-hide-animation.md`). They reuse the vanilla animation system instead of authoring new clips — zero animator work, accepted visual debt.
+
+## Pattern A — carry IK by reusing vanilla `.anm`
+
+When the player picks up a large item (wheel, door, barrel), DayZ needs an IK animation describing how to hold it across poses. Authoring custom `.anm` is animator work; instead point the item at a similar vanilla `.anm`.
+
+```c
+modded class ModItemRegisterCallbacks
+{
+    override void RegisterHeavy(DayZPlayerType pType, DayzPlayerItemBehaviorCfg pBehavior)
+    {
+        super.RegisterHeavy(pType, pBehavior);
+        pType.AddItemInHandsProfileIK(
+            "my_Wheel",                                                       // my item class
+            "dz/anims/workspaces/player/player_main/player_main_heavy.asi",   // workspace
+            pBehavior,
+            "dz/anims/anm/player/ik/vehicles/hatchback_02/Hatchback_02_Wheel.anm" // vanilla anm
+        );
+    }
+};
+```
+
+Vanilla `.anm` catalog (observed in kt_roadkill; on 1.30.164078 the files exist under `P:\DZ\anims\anm\player\ik\vehicles\` with lower-case names, e.g. `hatchback_02\hatchback_02_wheel.anm`, `sedan_02\sedan_02_wheel.anm`; 1.30 adds `motorbike_02\jawa_*_shield.anm`. Whether each fits your item is still an in-game check):
+
+| item type | anm path |
+|---|---|
+| wheel (medium) | `dz/anims/anm/player/ik/vehicles/hatchback_02/Hatchback_02_Wheel.anm` |
+| wheel (large/truck) | `dz/anims/anm/player/ik/vehicles/sedan_02/Sedan_02_Wheel.anm` |
+| door | `.../hatchback_02/Hatchback_02_Door_PassengerL.anm` (L/R, Driver/Passenger variants) |
+| hood / trunk | `.../hatchback_02/Hatchback_02_Hood.anm` / `..._Trunk.anm` |
+
+Gotchas: the workspace (`player_main_heavy.asi`) is fixed per item weight class — pick the vanilla item closest to yours. IK can clip through the player if your item's proportions differ a lot from the vanilla reference — Layer 3 in-game test required. Using `PassengerL` for both door sides looks mirrored/odd; accepted compromise.
+
+When to use: early-stage mod, no animator, item proportions close to a vanilla equivalent. When not: strong visual identity, or a wildly different shape (a 1.5 m tractor wheel on Hatchback IK looks wrong).
+
+### Turn the model, not the ikpose (CocaLab, added 2026-10-03)
+
+[EXACT][CLAIM-ANIM-ITEM-TURN-MODEL] When a vanilla ikpose already gives a natural pose and only the direction the item points in the hands is wrong, turn the item's geometry about its vertical, keeping its origin, instead of editing the ikpose. Confirmed in game by the user (DayZDiag 1.29, 2026-09-27, CocaLab commit `0569fea`): the tray `clab_tray.p3d`, turned 90° at assembly (`assemble_p3d.py --yaw 90`; `--yaw 0` rebuilds the previous p3d byte for byte) so that its 43 cm length lies along X, registered in `RegisterTwoHanded` with no ikpose of its own:
+
+```c
+pType.AddItemInHandsProfileIK("CLab_CocaTray", "dz/anims/workspaces/player/player_main/props/player_main_2h_pot.asi", pBehavior, "dz/anims/anm/player/ik/vehicles/BatteryTruck.anm");
+```
+
+That is the truck battery's ikpose (vanilla `TruckBattery`, `P:\scripts\4_world\entities\manbase\dayzplayer\dayzplayercfgbase.c:867` on 1.30.164078; 1.29: `:849`; wrists at +29.4 and −28.0 cm from the origin on X) with the pot's animation set, a pairing vanilla also makes for `GiftBox_Small` (`:1042`; 1.29: `:1006`: the pot's `.asi` with the cauldron's ikpose). The hands took the tray by its short ends in the battery's natural pose, and the pot's pour stayed. Before that, the pot's own ikpose put the hands through the tray, and an own ikpose with `RightHand_Dummy` turned about the wrong SEAnim axis broke the pose (frames and axes: `player-skeleton.md` §The frame an ikpose keys its helpers in). The grip was chosen in game among six vanilla ikposes, one test subclass of the item per grip, the method `weapon-in-hands.md` §Testing ikpose / grip variants uses for weapons. To shortlist candidates by size, the wrist's distance from the item's origin (`|t|` of the `RightHand_Dummy` key, measured offline 2026-10-03): pot 16.9 cm, cauldron 16.3, car battery 18.4, truck battery 31.0, car radiator 36.9.
+
+## Pattern B — hide-on-attach (animation source of type `hide`)
+
+An item that lives in the `.p3d` (geometry + texture already there) appears/disappears based on whether it is attached to its slot. Visibility is a `hide` animation driven by a `user` source, toggled in the attach/detach lifecycle events.
+
+`config.cpp`:
+```cpp
+class AnimationSources
+{
+    class hide_barrel1 { source="user"; animPeriod=0.1; initPhase=1; }; // start HIDDEN
+};
+```
+
+`model.cfg` `class Animations`:
+```cpp
+class hide_barrel1 { type="hide"; source="hide_barrel1"; selection="barrel_1"; minValue=0; maxValue=1; hideValue=0.5; }; // hideValue: [TBD-verify], see note
+```
+
+> **`hideValue` is [TBD-verify], not a settled constant.** The `0.5` above is the working default observed in kt_roadkill, but the exact threshold and the comparison direction (selection hidden when phase ≥ or ≤ `hideValue`) are not in the PMC wiki type table. Whenever you emit a `hideValue` in output, label it `[TBD-verify]` and tell the user to confirm it against a vanilla `hide` config on `P:\` before shipping — do not present the number as verified just to make the block look complete. This is anchor 2 applied to the one key most easily copied as if it were fact.
+
+script `4_World/MyVehicle.c`:
+```c
+override void EEItemAttached(EntityAI item, string slot_name)
+{
+    super.EEItemAttached(item, slot_name);
+    if (slot_name == "my_barrel1") SetAnimationPhase("hide_barrel1", 0); // phase 0 = VISIBLE
+}
+override void EEItemDetached(EntityAI item, string slot_name)
+{
+    super.EEItemDetached(item, slot_name);
+    if (slot_name == "my_barrel1") SetAnimationPhase("hide_barrel1", 1); // phase 1 = HIDDEN
+}
+```
+
+Key points: `initPhase=1` starts hidden (object spawns without the attachment); `_attached` sets phase 0 (visible), `_detached` sets phase 1 (hidden). DayZ fires `EEItemAttached` during `CreateInInventory`, so OnDebugSpawn-created items update automatically. The attached item is still a real inventory item — the hide only affects its representation on the host.
+When to use: vehicles/objects with visible exterior cargo (jerry cans, barrels, spare wheels), modular elements where you do not want N `.p3d` variants. When not: if the item affects the collision (Geometry LOD) — then you need real `.p3d` variants, not a hide.
+
+## Pattern C -- model swap by attach-state (two selections, item-side)
+
+A cousin of Pattern B. Instead of hiding one selection, the item carries TWO full
+selections -- a detailed `not_attached` model and a lighter `attached` model -- and swaps
+which one renders when the item is attached to its slot (performance: show the cheap model
+while attached/proxied). Driven from the ITEM's attach hooks, not the parent's.
+
+Difference vs Pattern B:
+- Pattern B: one selection, hidden/shown via a `hide` animation, toggled on the PARENT
+  (`EEItemAttached`/`EEItemDetached`).
+- Pattern C: two selections (two models), toggled on the ITEM
+  (`OnWasAttached`/`OnWasDetached`) with `Show/HideSelection`.
+
+`model.cfg` (own skeleton, both selections as bones; mirrors the vanilla flag's
+folded/opened selections):
+```cpp
+class CfgSkeletons { class MyItemSkeleton { skeletonInherit=""; isDiscrete=0;
+    SkeletonBones[]={ "attached","", "not_attached","" }; }; };
+// class Animations: a hide-type anim per selection, source-driven; initPhase sets default.
+```
+`config.cpp`: an `AnimationSources` entry drives the swap; `hiddenSelections` still lists
+only the texture selections.
+
+script (item side) -- APIs verified vs vanilla (see `enforce-script-reference` ->
+`verified-api-catalog.md`; entityai.c:3356/3365, inventoryitem.c OnWasAttached):
+```c
+void MyItem()  // constructor: default to the ground model
+{
+    ShowSelection("not_attached");
+    HideSelection("attached");
+}
+override void OnWasAttached(EntityAI parent, int slot_id)
+{
+    super.OnWasAttached(parent, slot_id);
+    HideSelection("not_attached");
+    ShowSelection("attached");
+}
+override void OnWasDetached(EntityAI parent, int slot_id)
+{
+    super.OnWasDetached(parent, slot_id);
+    ShowSelection("not_attached");
+    HideSelection("attached");
+}
+```
+Source: community technique (YouTube "How to change the model of a proxy attachment",
+RXIFoFo5stY, 2026); author credits the vanilla flag (folded/opened) as the reference. The
+script APIs are verified; the exact `AnimationSource`/`initPhase` wiring is `[verify]`
+against the vanilla flag config before shipping. Selections must exist in Resolution + View
+Geometry (and Geometry if the attached model needs collision).
+
+## Pattern D — Dynamic Animation Instance Switching (new in 1.30) [EXACT]
+
+1.30 adds native Enforce Script methods to switch the player character's animation instance (`.asi`) at runtime without swapping physical items in hands. Before 1.30 the instance followed the item in hands only (a dummy item was the workaround, see surrender below).
+
+### Native `Human.SetAnimationInstanceByName`
+```c
+// [EXACT] P:\scripts\3_game\human.c:1383-1384
+	//! sets the animation instance of the player character - careful when using, could create desync if not used properly
+	proto native	void		SetAnimationInstanceByName(string animationInstanceName, float blendingTime);
+```
+
+### Decoupling Hand Item Changes from Animation Instances
+`HumanItemAccessor` allows mods to decouple item-in-hands changes from automatic animation instance transitions (the second parameter of `OnItemInHandsChanged` and the two `AutoAnimInst` methods are new in 1.30; 1.29: `OnItemInHandsChanged(bool pInstant = false)` only, `O:\…\scripts\3_game\humanitems.c:112`). Script reaches it through `Man.OnItemInHandsChangedEx(bool pInstant = false, bool pChangeAnimationInstance = true)` (`P:\scripts\3_game\entities\man.c:168`, implemented in `4_world\entities\dayzplayerimplement.c:1002-1015`); the old no-argument `OnItemInHandsChanged()` forwards to it with the defaults (`man.c:163-166`):
+```c
+// [EXACT] P:\scripts\3_game\humanitems.c:111-118
+	//! signalization from script to engine that item in hands changed
+	proto native void	OnItemInHandsChanged(bool pInstant = false, bool pChangeAnimationInstance = true);
+	
+	//! enable whether the animation instance should change when switching the item in hand
+	proto native void	EnableAutoAnimInstUpdateOnHandsChange(bool pNewValue);
+	
+	//! get whether the animation instance should change when switching the item in hand
+	proto native bool	IsAutoAnimInstUpdateOnHandsChangeEnabled();
+```
+
+### Resetting to Unarmed Hands via "Empty" Profile
+To return the player character cleanly to the default unarmed state, 1.30 registers an `"Empty"` hands profile in `DayZPlayerCfgBase.c`:
+```c
+// [EXACT] P:\scripts\4_world\entities\manbase\dayzplayer\dayzplayercfgbase.c:1546-1549
+	//! Empty profile to be able to switch back to this using SetAnimationInstanceByName
+	{
+		pType.AddItemInHandsProfileIK("Empty", "dz/anims/workspaces/player/player_main/player_main.asi", emptyHanded, "");
+	}
+```
+The profile only makes that instance loaded: vanilla switches back by the `.asi` path, `SetAnimationInstanceByName("dz/anims/workspaces/player/player_main/player_main.asi", 1)` (`P:\scripts\4_world\entities\manbase\playerbase.c:2107`), and a mod's child `.asi` registered the same way was switched to by its path (2026-09-28, measured on 1.30 Exp 164014, `vehicle-rider-ik-pose.md` §Per-vehicle pose without a graph change). [UNVERIFIED] Passing the profile name `"Empty"` instead of a path has not been tried.
+
+### Native Surrender System (No Dummy Item)
+Before 1.30 the surrender emote (`HandsUp`) spawned an invisible `SurrenderDummyItem` in hands (1.29: `O:\…\scripts\4_world\classes\emotemanager.c:309`). In 1.30 nothing goes into the hands any more: the class is `[Obsolete("1.30: no replacement - no longer in use")]` (`P:\scripts\4_world\entities\itembase\surrenderdummyitem.c:1`), but its profile is still registered so that `player_main_surrender.asi` is preloaded (`dayzplayercfgbase.c:1541-1544`, preload at `:1653`), and `PlayerBase` switches to it with `SetAnimationInstanceByName`:
+```c
+// [EXACT] P:\scripts\4_world\entities\manbase\playerbase.c:2081-2090
+	protected void OnStartTransitionToSurrender()
+	{		
+		m_StartedSurrenderTransition = true;
+		HumanInputController hic = GetInputController();
+		hic.DisableProneCameraHorizontalRotation(true);
+		g_Game.GetMission().AddActiveInputRestriction(EInputRestrictors.SURRENDER_TRANSITION);
+		GetItemAccessor().EnableAutoAnimInstUpdateOnHandsChange(false);
+		SetAnimationInstanceByName("dz/anims/workspaces/player/player_main/player_main_surrender.asi", 1);	
+		m_SurrenderTransitionTimer = m_SurrenderAnimationTransitionTime;
+	}
+```
+State is controlled via `player.SetSurrenderState(bool)` (`playerbase.c:2116`) and queried via `player.IsSurrendered()` (`P:\scripts\3_game\entities\man.c:67`), so there is no dummy item to desync. A ≤1.29 mod that checks `SurrenderDummyItem.Cast(player.GetItemInHands())` to detect surrender no longer sees it on 1.30; use `IsSurrendered()`.
+
+## Syncing an object's pose to a continuous action (SP-442, added 2026-09-28)
+
+(pot-emptying, 7 measured runs, client-server deltas within ±3 ms; measured on 1.30 Exp 164014) [EXACT]: probe first — a test `modded class` of the action logging the `OnStart*`/loop events, every `HumanCommandActionCallback.GetState()` change (states `P:\scripts\3_game\human.c:369-383`; 1.29: `:349-363`) and one sample per 0.1 s from `OnUpdateClient`/`OnUpdateServer` (both run every frame; `P:\scripts\4_world\classes\useractionscomponent\actionbase.c:1356`, `:1372`), each sample carrying the object's `GetAnimationPhase`. A `user` source has ONE `animPeriod` for both directions: if out and back take different times, drive the return with per-frame client targets. Two writers (the owning client locally and the server replicated) coexist only if they write the same target: the server writes start and end, the owning client carries intermediate states. State timings alone do not suffice: the engine starts the final segment 0.03-0.05 s after the loop and plays it 5-10% faster than at 30 fps, and the curve inside a segment is not linear — moving the object inside the animation removes the problem instead of softening it. Even with states matched to the millisecond, the non-anchor hand follows the vanilla graph curve.

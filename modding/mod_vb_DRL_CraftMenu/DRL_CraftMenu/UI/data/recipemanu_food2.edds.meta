@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{CD0DFCA957376544}DRL_CraftMenu/UI/data/recipemanu_food2.edds"
+ Author "win-hv5vr6npefg"
+ ChangeDate 514569109
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "recipemanu_food2.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

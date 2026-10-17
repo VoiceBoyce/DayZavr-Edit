@@ -1,0 +1,18 @@
+ImageSetClass {
+ Name "drl_craft_battery_pack_alt"
+ RefSize 75 75
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "DRL_CraftMenu/UI/data/battery-pack-alt.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass battery_pack_alt {
+   Name "battery_pack_alt"
+   Pos 0 0
+   Size 75 75
+   Flags 0
+  }
+ }
+}

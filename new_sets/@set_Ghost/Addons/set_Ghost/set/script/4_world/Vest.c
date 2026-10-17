@@ -1,1 +1,0 @@
-class Vp_SET14_Vest_ColorBase extends Vest_Base {};

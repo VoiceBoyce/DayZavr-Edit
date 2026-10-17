@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{364D8098243999B9}DRL_CraftMain/UI/data/button_off.edds"
+ Author "win-hv5vr6npefg"
+ ChangeDate -142576878
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "button_off.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

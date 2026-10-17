@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{665448C369919820}DRL_CraftMenu/UI/fonts/Revard.edds"
+ Author "win-hv5vr6npefg"
+ ChangeDate -871681256
+ Configurations {
+  TGAResourceClass PC {
+   SourceFile "Revard.tga"
+  }
+  TGAResourceClass XBOX_ONE : PC {
+  }
+  TGAResourceClass PS4 : PC {
+  }
+  TGAResourceClass LINUX : PC {
+  }
+ }
+}

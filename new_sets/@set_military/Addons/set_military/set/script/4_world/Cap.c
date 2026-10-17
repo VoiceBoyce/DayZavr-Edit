@@ -1,1 +1,0 @@
-class Vp_SET19_cap_ColorBase extends HeadGear_Base {};

@@ -1,0 +1,18 @@
+ImageSetClass {
+ Name "drl_craft_ironcloth1"
+ RefSize 75 75
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "DRL_CraftMenu/UI/data/ironcloth1.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass ironcloth1 {
+   Name "ironcloth1"
+   Pos 0 0
+   Size 75 75
+   Flags 0
+  }
+ }
+}

@@ -1,0 +1,1539 @@
+FrameWidgetClass rootFrame {
+ size 0.8 0.8
+ halign center_ref
+ valign center_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 0
+ {
+  PanelWidgetClass LearningMenuFonPanelWidget {
+   ignorepointer 1
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   style rover_sim_black
+   {
+    ImageWidgetClass ImageWidget0 {
+     visible 1
+     ignorepointer 1
+     size 1 1
+     halign center_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     imageTexture "{5D46CAE0031B0C93}DRL_CraftMenu/UI/data/Learning_fon.edds"
+     mode blend
+     "src alpha" 1
+     "clamp mode" wrap
+     "stretch mode" stretch_w_h
+    }
+   }
+  }
+  PanelWidgetClass UpPanelWidget {
+   ignorepointer 1
+   color 0.659 0.91 0.506 1
+   size 1 0.1
+   halign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   style rover_sim_black_2
+   {
+    PanelWidgetClass LearningTitlePanelWidget {
+     ignorepointer 1
+     position 10 0
+     size 0.2 0.8
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     {
+      ImageWidgetClass LearningTitleIcon {
+       ignorepointer 1
+       color 0.835 0.537 0.192 1
+       size 40 40
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       imageTexture "{7EF5E978B4915614}DRL_CraftMenu/UI/data/baitinfo.edds"
+       mode blend
+       "src alpha" 1
+       "clamp mode" wrap
+       "stretch mode" stretch_w_h
+       filter 1
+      }
+      WrapSpacerWidgetClass LearningTitleWrapSpacer {
+       ignorepointer 1
+       size 0.86 0.84
+       halign right_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       Padding 0
+       Margin 0
+       content_halign right
+       content_valign center
+       {
+        TextWidgetClass TitleTextWidget {
+         ignorepointer 1
+         position 0 0
+         size 0.96 0.6
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         text "#STR_Craft"
+         font "gui/fonts/metron-bold22"
+         "text valign" center
+        }
+        TextWidgetClass DescriptionTextWidget {
+         ignorepointer 1
+         color 0.784 0.784 0.784 1
+         size 0.96 0.38
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         text "#STR_Studying_Recipes"
+         font "gui/fonts/metron16"
+        }
+       }
+      }
+     }
+    }
+    PanelWidgetClass ButtonOutWidget {
+     ignorepointer 1
+     color 0.365 0.31 0.224 0
+     position 10 10
+     size 30 30
+     halign right_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style dashed
+     {
+      ButtonWidgetClass ButtonOut {
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       style Empty
+       {
+        PanelWidgetClass OutButtonPanelWidget {
+         visible 1
+         ignorepointer 1
+         color 0 0 0 0
+         position 0 0
+         size 1 1
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         style rover_sim_colorable
+         {
+          ImageWidgetClass OutButtonImageWidget {
+           ignorepointer 1
+           size 22 22
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           image0 ""
+           imageTexture "{7AE94857D79A0D26}DRL_CraftMenu/UI/data/cross-mark.edds"
+           mode blend
+           "src alpha" 1
+           "clamp mode" wrap
+           "stretch mode" stretch_w_h
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+  PanelWidgetClass LeftPanelWidget {
+   visible 1
+   ignorepointer 1
+   color 0.137 0.106 0.067 0.949
+   position 7 7
+   size 0.22 0.88
+   valign bottom_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   draggable 0
+   style rover_sim_black_2
+   {
+    PanelWidgetClass AllLearningCategoryList {
+     visible 1
+     ignorepointer 1
+     ignoregloballv 0
+     keepsafezone 0
+     position 0 6
+     size 0.94 0.92
+     halign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     draggable 0
+     "no focus" 0
+     {
+      ScrollWidgetClass ScrollAllLearningCategoryList {
+       visible 1
+       ignorepointer 0
+       color 0.365 0.31 0.223 1
+       position 0 0
+       size 1.02 1
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       "Scrollbar V" 1
+       {
+        WrapSpacerWidgetClass SpacerAllLearningCategoryList {
+         visible 1
+         clipchildren 1
+         ignorepointer 1
+         size 1 5
+         halign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         Padding 4
+         Margin 0
+         "Size To Content V" 1
+        }
+       }
+      }
+     }
+    }
+    ButtonWidgetClass StudiedCategoryButton {
+     visible 1
+     clipchildren 0
+     color 0.361 0.235 0.094 1
+     position 0 6
+     size 0.96 40
+     halign center_ref
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     style ServerBrowserCollapse
+     {
+      PanelWidgetClass FonButtonPanelWidget {
+       clipchildren 1
+       ignorepointer 1
+       color 0.537 0.357 0.141 0.094
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       style rover_sim_colorable
+      }
+      PanelWidgetClass BoardSelectionButtonWidget {
+       visible 1
+       ignorepointer 1
+       color 0.157 0.125 0.09 0.294
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       style dashed
+       "no focus" 0
+       {
+        WrapSpacerWidgetClass StudiedCategoryWrapSpacerWidget {
+         ignorepointer 1
+         size 1 0.99
+         halign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         Padding 0
+         Margin 0
+         {
+          PanelWidgetClass StudiedCategoryColorWidget {
+           visible 1
+           ignorepointer 1
+           color 0.537 0.357 0.141 1
+           size 0.01 1
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           style rover_sim_colorable
+          }
+          PanelWidgetClass StudiedCategoryPreviewPanelWidget {
+           visible 1
+           ignorepointer 1
+           position 0 0
+           size 0.1 1
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           draggable 0
+           {
+            ImageWidgetClass StudiedCategoryImagePreview {
+             ignorepointer 1
+             position 0 0
+             size 24 24
+             halign center_ref
+             valign center_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 1
+             vexactsize 1
+             imageTexture "{7EF5E978B4915614}DRL_CraftMenu/UI/data/baitinfo.edds"
+             mode blend
+             "src alpha" 1
+             "clamp mode" wrap
+             "stretch mode" stretch_w_h
+            }
+           }
+          }
+          PanelWidgetClass NameStudiedCategoryPanelWidget {
+           ignorepointer 1
+           position 0 0
+           size 0.75 1
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           {
+            RichTextWidgetClass NameStudiedCategoryButton {
+             ignorepointer 1
+             keepsafezone 0
+             position 0 0
+             size 1 1
+             valign center_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 0
+             draggable 0
+             style DayZNormal
+             text "#STR_StudiedCategory"
+             font "gui/fonts/metron16"
+             "text offset" 5 0
+             "exact text" 1
+             "size to text h" 0
+             "text valign" center
+             wrap 1
+            }
+           }
+          }
+          PanelWidgetClass AmountStudiedCategoryPanelWidget {
+           ignorepointer 1
+           position 0 0
+           size 0.14 1
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           {
+            RichTextWidgetClass AmountStudiedCategory {
+             ignorepointer 1
+             keepsafezone 0
+             size 1 1
+             valign center_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 0
+             draggable 0
+             style DayZNormal
+             text "999"
+             font "gui/fonts/metron14"
+             "text offset" 5 0
+             "exact text" 1
+             "size to text h" 0
+             "text halign" right
+             "text valign" center
+             wrap 0
+            }
+           }
+          }
+         }
+        }
+        PanelWidgetClass BPanelWidget {
+         visible 1
+         ignorepointer 1
+         color 0.267 0.267 0.267 1
+         size 1 0.02
+         halign center_ref
+         valign bottom_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         style rover_sim_colorable
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+  PanelWidgetClass RightPanelWidget {
+   ignorepointer 1
+   color 0.157 0.133 0.09 0.565
+   position 0 7
+   size 0.77 0.88
+   halign right_ref
+   valign bottom_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   style rover_sim_colorable
+   {
+    PanelWidgetClass LearningListPanelWidget {
+     visible 1
+     ignorepointer 1
+     color 0.157 0.125 0.09 0.839
+     size 0.71 1
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     style rover_sim_black
+     {
+      PanelWidgetClass SearchPanelWidget {
+       ignorepointer 1
+       position 7 4
+       size 0.25 0.05
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       {
+        EditBoxWidgetClass SearchEditBox {
+         color 0.537 0.357 0.141 1
+         position 0 0
+         size 0.8 0.8
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         style Editor
+         text "Search recipes"
+         "limit visible" 0
+         "exact text" 1
+         font "gui/fonts/metron14"
+         "text color" 0.753 0.753 0.753 1
+        }
+       }
+      }
+      PanelWidgetClass LearningCraftListPanel {
+       visible 1
+       ignorepointer 1
+       color 0.114 0.086 0.051 0.784
+       position 0 7
+       size 0.99 0.93
+       halign center_ref
+       valign bottom_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       style rover_sim_black_2
+       {
+        ScrollWidgetClass LearningCraftListScrollWidget {
+         visible 1
+         ignorepointer 0
+         color 0.365 0.31 0.224 1
+         size 1.005 1
+         valign bottom_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         style blank
+         "Scrollbar V" 1
+         {
+          WrapSpacerWidgetClass LearningCrafttListWrap {
+           ignorepointer 1
+           position 0 0
+           size 1 280
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 1
+           Padding 8
+           Margin 6
+           "Size To Content V" 1
+           {
+            ButtonWidgetClass LearningCraftButton {
+             color 0.357 0.294 0.2 0.38
+             size 150 150
+             hexactpos 1
+             vexactpos 1
+             hexactsize 1
+             vexactsize 1
+             style Empty
+             {
+              PanelWidgetClass LearningCraftItemPanelWidget {
+               visible 1
+               ignorepointer 1
+               color 0.114 0.086 0.051 0.784
+               size 1 1
+               halign center_ref
+               valign center_ref
+               hexactpos 1
+               vexactpos 1
+               hexactsize 0
+               vexactsize 0
+               style rover_sim_colorable
+               {
+                PanelWidgetClass LearningCraftItemPanelW {
+                 visible 1
+                 ignorepointer 1
+                 color 0.267 0.267 0.267 1
+                 position 0 0
+                 size 1 1
+                 halign center_ref
+                 valign center_ref
+                 hexactpos 1
+                 vexactpos 1
+                 hexactsize 0
+                 vexactsize 0
+                 style Outline
+                }
+               }
+              }
+              PanelWidgetClass LearningCraftItemPanelW0 {
+               ignorepointer 1
+               color 0.149 0.133 0.125 0.318
+               position 0 0
+               size 1 0.76
+               halign center_ref
+               hexactpos 1
+               vexactpos 1
+               hexactsize 0
+               vexactsize 0
+               style Outline
+               {
+                ItemPreviewWidgetClass LearningCraftItemPreview {
+                 ignorepointer 1
+                 size 130 98
+                 halign center_ref
+                 valign center_ref
+                 hexactpos 1
+                 vexactpos 1
+                 hexactsize 1
+                 vexactsize 1
+                }
+               }
+              }
+              MultilineTextWidgetClass LearningCraftTitleText {
+               ignorepointer 1
+               color 0.867 0.867 0.867 1
+               position 0 4
+               size 0.94 30
+               halign center_ref
+               valign bottom_ref
+               hexactpos 1
+               vexactpos 1
+               hexactsize 0
+               vexactsize 1
+               text "#STR_Bonfire"
+               font "gui/fonts/metron-bold14"
+               "exact text" 1
+               "text halign" center
+               wrap 1
+              }
+              PanelWidgetClass PanelWidget0 {
+               ignorepointer 1
+               position 2 2
+               size 24 24
+               halign right_ref
+               hexactpos 1
+               vexactpos 1
+               hexactsize 1
+               vexactsize 1
+               {
+                ImageWidgetClass LockIcon {
+                 ignorepointer 1
+                 color 0.882 0.882 0.882 1
+                 size 20 20
+                 halign center_ref
+                 valign center_ref
+                 hexactpos 1
+                 vexactpos 1
+                 hexactsize 1
+                 vexactsize 1
+                 imageTexture "{BA00A0469BBA9806}DRL_CraftMenu/UI/data/lock1.edds"
+                 mode blend
+                 "src alpha" 1
+                 "clamp mode" wrap
+                 "stretch mode" stretch_w_h
+                 filter 0
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+    PanelWidgetClass LearningPanelWidget {
+     visible 1
+     ignorepointer 1
+     color 0.098 0.067 0.035 0.949
+     position 0 0
+     size 0.285 1
+     halign right_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     style rover_sim_black_2
+     {
+      PanelWidgetClass LearningLockTitelWidget {
+       visible 1
+       ignorepointer 1
+       position 0 0
+       size 0.96 0.04
+       halign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       {
+        PanelWidgetClass LearningLockPanelWidget1 {
+         ignorepointer 1
+         position 0 0
+         size 0.08 1
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         {
+          ImageWidgetClass LearningLockIcon {
+           ignorepointer 1
+           size 20 20
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           imageTexture "{BA00A0469BBA9806}DRL_CraftMenu/UI/data/lock1.edds"
+           mode blend
+           "src alpha" 1
+           "clamp mode" wrap
+           "stretch mode" stretch_w_h
+           filter 0
+          }
+         }
+        }
+        RichTextWidgetClass LearningRecipeTitel {
+         ignorepointer 1
+         size 0.92 1
+         halign right_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         text "#STR_LearningLockTitel"
+         font "gui/fonts/metron-bold22"
+         "text offset" 10 0
+         "exact text" 1
+         "exact text size" 22
+         "text valign" center
+         wrap 1
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget1 {
+       ignorepointer 1
+       color 0.267 0.267 0.267 1
+       position 0 30
+       size 0.96 1
+       halign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       style rover_sim_colorable
+      }
+      PanelWidgetClass LearningInfoPanelWidget {
+       ignorepointer 1
+       color 0.235 0.216 0.192 0.286
+       position 0 8
+       size 0.96 0.93
+       halign center_ref
+       valign bottom_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       style Outline
+       {
+        PanelWidgetClass LearningPrewPanelWidget {
+         ignorepointer 1
+         position 0 4
+         size 0.96 0.28
+         halign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         style rover_sim_black
+         {
+          ItemPreviewWidgetClass LearningPreview {
+           ignorepointer 1
+           size 0.96 0.96
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget4 {
+         ignorepointer 1
+         color 0.267 0.267 0.267 1
+         position 0 205
+         size 0.96 1
+         halign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style rover_sim_colorable
+        }
+        PanelWidgetClass LearningDescriptionPanelWidget {
+         ignorepointer 1
+         position 0 212
+         size 0.96 0.16
+         halign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         {
+          PanelWidgetClass LearningNameTitelWidget {
+           ignorepointer 1
+           position 0 0
+           size 1 0.2
+           halign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           {
+            PanelWidgetClass LearningColorWidget {
+             ignorepointer 1
+             color 0.537 0.357 0.141 1
+             size 0.01 0.7
+             valign center_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 0
+             style rover_sim_colorable
+            }
+            RichTextWidgetClass LearningNameTite {
+             ignorepointer 1
+             position 5 0
+             size 0.98 1
+             valign center_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 0
+             text "#STR_Recipe_name"
+             font "DRL_CraftMenu/UI/fonts/MouseMemoirs"
+             "text offset" 10 0
+             "exact text" 1
+             "exact text size" 18
+             "text valign" center
+             wrap 1
+            }
+           }
+          }
+          PanelWidgetClass LearningDescriptionPanel {
+           visible 1
+           ignorepointer 1
+           size 1 0.8
+           valign bottom_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           {
+            ScrollWidgetClass LearningDescriptionScroll {
+             ignorepointer 0
+             color 0.365 0.31 0.223 1
+             position 0 0
+             size 1.024 1
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 0
+             "Scrollbar V" 1
+             {
+              MultilineTextWidgetClass LearningDescriptionMultiline {
+               ignorepointer 1
+               color 1 1 1 0.823
+               size 1 1
+               hexactpos 1
+               vexactpos 1
+               hexactsize 0
+               vexactsize 0
+               draggable 0
+               text "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galler took a galley of type and scrambled it to make a ey of type and scrambled it er took a galley of type and scrambled it to make a to make a "
+               font "gui/fonts/metron14"
+               "exact text" 1
+               "size to text h" 0
+               "size to text v" 1
+               wrap 1
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+        PanelWidgetClass StudyPanel {
+         visible 0
+         ignorepointer 1
+         position 0 0
+         size 1 0.53
+         halign center_ref
+         valign bottom_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         {
+          PanelWidgetClass PanelWidget5 {
+           ignorepointer 1
+           color 0.267 0.267 0.267 1
+           position 0 3
+           size 0.96 2
+           halign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 1
+           style rover_sim_colorable
+          }
+          PanelWidgetClass StudyVariationPanelWidget {
+           ignorepointer 1
+           position 0 8
+           size 0.96 0.44
+           halign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           {
+            PanelWidgetClass StudyVariationTitelWidget {
+             ignorepointer 1
+             position 0 0
+             size 1 0.14
+             halign center_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 0
+             {
+              PanelWidgetClass StudyVariationWidget {
+               ignorepointer 1
+               color 0.537 0.357 0.141 1
+               size 0.01 0.7
+               valign center_ref
+               hexactpos 1
+               vexactpos 1
+               hexactsize 0
+               vexactsize 0
+               style rover_sim_colorable
+              }
+              RichTextWidgetClass StudyVariationTitel {
+               ignorepointer 1
+               position 5 0
+               size 0.98 1
+               valign center_ref
+               hexactpos 1
+               vexactpos 1
+               hexactsize 0
+               vexactsize 0
+               text "#STR_Methods_of_study"
+               font "DRL_CraftMenu/UI/fonts/MouseMemoirs"
+               "text offset" 10 0
+               "exact text" 1
+               "exact text size" 18
+               "text valign" center
+               wrap 1
+              }
+             }
+            }
+            ScrollWidgetClass StudyVariationListScrollWidget {
+             ignorepointer 0
+             color 0.365 0.31 0.224 1
+             size 1.024 0.86
+             valign bottom_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 0
+             style blank
+             "Scrollbar V" 1
+             {
+              WrapSpacerWidgetClass StudyVariationListWrap {
+               ignorepointer 1
+               position 0 0
+               size 1 270
+               hexactpos 1
+               vexactpos 1
+               hexactsize 0
+               vexactsize 1
+               "Size To Content V" 1
+               {
+                ButtonWidgetClass StudyVariationButton {
+                 color 0.129 0.114 0.094 0.647
+                 size 0.99 60
+                 hexactpos 1
+                 vexactpos 1
+                 hexactsize 0
+                 vexactsize 1
+                 style Colorable
+                 {
+                  PanelWidgetClass BordPanelWidget {
+                   visible 1
+                   ignorepointer 1
+                   color 0.357 0.294 0.2 0.082
+                   size 1 1
+                   halign center_ref
+                   valign center_ref
+                   hexactpos 1
+                   vexactpos 1
+                   hexactsize 0
+                   vexactsize 0
+                   style Outline
+                  }
+                  PanelWidgetClass StudyVariationItemPanelW {
+                   visible 1
+                   ignorepointer 1
+                   color 0.149 0.133 0.125 0.318
+                   size 1 1
+                   valign center_ref
+                   hexactpos 1
+                   vexactpos 1
+                   hexactsize 0
+                   vexactsize 0
+                   style blank
+                   {
+                    PanelWidgetClass StudyVariationItemPrevPanel {
+                     ignorepointer 1
+                     color 0.18 0.149 0.114 0.647
+                     position 4 0
+                     size 0.17 52
+                     valign center_ref
+                     hexactpos 1
+                     vexactpos 1
+                     hexactsize 0
+                     vexactsize 1
+                     style Outline
+                     {
+                      ItemPreviewWidgetClass StudyVariationItemPreview {
+                       ignorepointer 1
+                       size 1 1
+                       halign center_ref
+                       valign center_ref
+                       hexactpos 1
+                       vexactpos 1
+                       hexactsize 0
+                       vexactsize 0
+                      }
+                     }
+                    }
+                    PanelWidgetClass StudyVariationInfoPanelWidget {
+                     ignorepointer 1
+                     position 60 0
+                     size 0.78 0.86
+                     valign center_ref
+                     hexactpos 1
+                     vexactpos 1
+                     hexactsize 0
+                     vexactsize 0
+                     {
+                      WrapSpacerWidgetClass StudyVariationInfoWrapSpacer {
+                       ignorepointer 1
+                       size 1 1
+                       hexactpos 1
+                       vexactpos 1
+                       hexactsize 0
+                       vexactsize 0
+                       Padding 0
+                       Margin 0
+                       {
+                        TextWidgetClass UseitemText {
+                         ignorepointer 1
+                         color 0.812 0.812 0.812 1
+                         size 1 0.28
+                         hexactpos 1
+                         vexactpos 1
+                         hexactsize 0
+                         vexactsize 0
+                         text "#STR_Use_item"
+                         font "gui/fonts/metron12"
+                         "exact text" 1
+                         "text valign" center
+                        }
+                        TextWidgetClass NameItemTitle {
+                         ignorepointer 1
+                         size 1 0.44
+                         hexactpos 1
+                         vexactpos 1
+                         hexactsize 0
+                         vexactsize 0
+                         text "Required: Blueprint x3"
+                         font "gui/fonts/metron14"
+                         "exact text" 1
+                         "text valign" center
+                        }
+                        TextWidgetClass AvailableText {
+                         ignorepointer 1
+                         color 0.812 0.812 0.812 1
+                         size 1 0.28
+                         hexactpos 1
+                         vexactpos 1
+                         hexactsize 0
+                         vexactsize 0
+                         text "Available: 0/3"
+                         font "gui/fonts/metron12"
+                         "exact text" 1
+                         "text valign" center
+                        }
+                       }
+                      }
+                     }
+                    }
+                   }
+                  }
+                  CheckBoxWidgetClass StudyVariationCheckBox {
+                   ignorepointer 1
+                   color 0.835 0.537 0.192 1
+                   size 20 18
+                   halign right_ref
+                   valign center_ref
+                   hexactpos 1
+                   vexactpos 1
+                   hexactsize 1
+                   vexactsize 1
+                   font "gui/fonts/metronblack22"
+                   checked 0
+                  }
+                 }
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+          PanelWidgetClass PanelWidget7 {
+           ignorepointer 1
+           color 0.267 0.267 0.267 1
+           position 0 -9
+           size 0.96 1
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 1
+           style rover_sim_colorable
+          }
+          PanelWidgetClass CraftIngridientListWidget {
+           ignorepointer 1
+           color 0.428 0.424 0.424 0.706
+           position 0 60
+           size 0.96 0.34
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           style blank
+           {
+            PanelWidgetClass StudyRecipeTitelWidget {
+             ignorepointer 1
+             position 0 0
+             size 1 0.14
+             halign center_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 0
+             {
+              PanelWidgetClass StudyRecipeWidget {
+               ignorepointer 1
+               color 0.537 0.357 0.141 1
+               size 0.01 0.7
+               valign center_ref
+               hexactpos 1
+               vexactpos 1
+               hexactsize 0
+               vexactsize 0
+               style rover_sim_colorable
+              }
+              RichTextWidgetClass StudyRecipeTitel {
+               ignorepointer 1
+               position 5 0
+               size 0.98 1
+               valign center_ref
+               hexactpos 1
+               vexactpos 1
+               hexactsize 0
+               vexactsize 0
+               text "#STR_StudyRecipe"
+               font "DRL_CraftMenu/UI/fonts/MouseMemoirs"
+               "text offset" 10 0
+               "exact text" 1
+               "exact text size" 18
+               "text valign" center
+               wrap 1
+              }
+             }
+            }
+            ScrollWidgetClass StudyRecipeListScrollWidget {
+             ignorepointer 0
+             color 0.365 0.31 0.223 1
+             size 1.025 0.82
+             valign bottom_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 0
+             "Scrollbar V" 1
+             {
+              WrapSpacerWidgetClass StudyRecipeListWrap {
+               ignorepointer 1
+               position 1 0
+               size 1 280
+               hexactpos 1
+               vexactpos 1
+               hexactsize 0
+               vexactsize 1
+               Padding 4
+               Margin 4
+               "Size To Content V" 1
+               {
+                ButtonWidgetClass StudyRecipeButton {
+                 size 70 70
+                 hexactpos 1
+                 vexactpos 1
+                 hexactsize 1
+                 vexactsize 1
+                 style Empty
+                 {
+                  PanelWidgetClass StudyRecipeItemPanelWidget {
+                   ignorepointer 1
+                   color 0.098 0.098 0.098 0.235
+                   size 1 1
+                   halign center_ref
+                   valign center_ref
+                   hexactpos 1
+                   vexactpos 1
+                   hexactsize 0
+                   vexactsize 0
+                   style rover_sim_colorable
+                   {
+                    PanelWidgetClass CraftIngridientItemPanelW {
+                     ignorepointer 1
+                     color 0.149 0.133 0.125 1
+                     position 0 0
+                     size 1 1
+                     halign center_ref
+                     valign center_ref
+                     hexactpos 1
+                     vexactpos 1
+                     hexactsize 0
+                     vexactsize 0
+                     style dashed
+                    }
+                   }
+                  }
+                  ItemPreviewWidgetClass StudyRecipeItemPreview {
+                   ignorepointer 1
+                   size 55 55
+                   halign center_ref
+                   valign center_ref
+                   hexactpos 1
+                   vexactpos 1
+                   hexactsize 1
+                   vexactsize 1
+                  }
+                 }
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+          PanelWidgetClass StudyButtonPanelWidget {
+           ignorepointer 1
+           position 0 6
+           size 0.9 0.1
+           halign center_ref
+           valign bottom_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           {
+            ButtonWidgetClass StudyButton {
+             color 0.835 0.537 0.192 0.376
+             size 1 1
+             halign center_ref
+             valign center_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 0
+             style Empty
+             {
+              PanelWidgetClass StudyButtonFon {
+               visible 1
+               ignorepointer 1
+               color 0.835 0.537 0.192 0.353
+               size 1 1
+               halign center_ref
+               valign center_ref
+               hexactpos 1
+               vexactpos 1
+               hexactsize 0
+               vexactsize 0
+               style UIDefaultPanel
+              }
+              WrapSpacerWidgetClass StudyButtonWrapSpacer {
+               visible 1
+               ignorepointer 1
+               position 0 0
+               size 0.96 0.8
+               halign center_ref
+               valign center_ref
+               hexactpos 1
+               vexactpos 1
+               hexactsize 0
+               vexactsize 0
+               Padding 0
+               Margin 0
+               content_halign center
+               content_valign center
+               {
+                PanelWidgetClass PanelWidget3 {
+                 ignorepointer 1
+                 size 0.12 1
+                 valign center_ref
+                 hexactpos 1
+                 vexactpos 1
+                 hexactsize 0
+                 vexactsize 0
+                 {
+                  ImageWidgetClass StudyButtonIcon {
+                   ignorepointer 1
+                   size 18 18
+                   halign center_ref
+                   valign center_ref
+                   hexactpos 1
+                   vexactpos 1
+                   hexactsize 1
+                   vexactsize 1
+                   imageTexture "{7EF5E978B4915614}DRL_CraftMenu/UI/data/baitinfo.edds"
+                   mode blend
+                   "src alpha" 1
+                   "clamp mode" wrap
+                   "stretch mode" stretch_w_h
+                  }
+                 }
+                }
+                TextWidgetClass StudyButtonText {
+                 ignorepointer 1
+                 size 0.84 1
+                 valign center_ref
+                 hexactpos 1
+                 vexactpos 1
+                 hexactsize 0
+                 vexactsize 0
+                 text "#STR_VIEW_RECIPE"
+                 font "gui/fonts/metron-bold22"
+                 "size to text h" 1
+                 "text valign" center
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+        PanelWidgetClass LockStudyPanel {
+         visible 0
+         ignorepointer 1
+         position 0 13
+         size 1 0.5
+         halign center_ref
+         valign bottom_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         {
+          PanelWidgetClass PanelWidget8 {
+           ignorepointer 1
+           color 0.267 0.267 0.267 1
+           size 0.96 1
+           halign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 1
+           style rover_sim_colorable
+          }
+          PanelWidgetClass LockStudyTitelWidget {
+           ignorepointer 1
+           position 0 4
+           size 0.96 0.06
+           halign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           {
+            PanelWidgetClass LockStudyWidget {
+             ignorepointer 1
+             color 0.537 0.357 0.141 1
+             size 0.01 0.7
+             valign center_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 0
+             style rover_sim_colorable
+            }
+            RichTextWidgetClass LockStudyTitel {
+             ignorepointer 1
+             position 5 0
+             size 0.98 1
+             valign center_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 0
+             text "#STR_ToStudyRecipe"
+             font "DRL_CraftMenu/UI/fonts/MouseMemoirs"
+             "text offset" 10 0
+             "exact text" 1
+             "exact text size" 18
+             "text valign" center
+             wrap 1
+            }
+           }
+          }
+          ScrollWidgetClass LockStudyRecipeListScrollWidget {
+           ignorepointer 0
+           color 0.365 0.31 0.223 1
+           position 0 2
+           size 1.025 0.92
+           valign bottom_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           "Scrollbar V" 1
+           {
+            WrapSpacerWidgetClass LockStudyRecipeListWrap {
+             ignorepointer 1
+             position 1 0
+             size 1 280
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 1
+             Padding 4
+             Margin 4
+             "Size To Content V" 1
+             {
+              ButtonWidgetClass LearningCraftButton0 {
+               color 0.357 0.294 0.2 0.38
+               size 150 150
+               hexactpos 1
+               vexactpos 1
+               hexactsize 1
+               vexactsize 1
+               style Empty
+               {
+                PanelWidgetClass LearningCraftItemPanelWidget0 {
+                 visible 1
+                 ignorepointer 1
+                 color 0.114 0.086 0.051 0.784
+                 size 1 1
+                 halign center_ref
+                 valign center_ref
+                 hexactpos 1
+                 vexactpos 1
+                 hexactsize 0
+                 vexactsize 0
+                 style rover_sim_colorable
+                 {
+                  PanelWidgetClass LearningCraftItemPanelW1 {
+                   visible 1
+                   ignorepointer 1
+                   color 0.267 0.267 0.267 1
+                   position 0 0
+                   size 1 1
+                   halign center_ref
+                   valign center_ref
+                   hexactpos 1
+                   vexactpos 1
+                   hexactsize 0
+                   vexactsize 0
+                   style Outline
+                  }
+                 }
+                }
+                PanelWidgetClass LearningCraftItemPanelW2 {
+                 ignorepointer 1
+                 color 0.149 0.133 0.125 0.318
+                 position 0 0
+                 size 1 0.76
+                 halign center_ref
+                 hexactpos 1
+                 vexactpos 1
+                 hexactsize 0
+                 vexactsize 0
+                 style Outline
+                 {
+                  ItemPreviewWidgetClass LearningCraftItemPreview0 {
+                   ignorepointer 1
+                   size 130 98
+                   halign center_ref
+                   valign center_ref
+                   hexactpos 1
+                   vexactpos 1
+                   hexactsize 1
+                   vexactsize 1
+                  }
+                 }
+                }
+                MultilineTextWidgetClass LearningCraftTitleText0 {
+                 ignorepointer 1
+                 color 0.867 0.867 0.867 1
+                 position 0 4
+                 size 0.94 30
+                 halign center_ref
+                 valign bottom_ref
+                 hexactpos 1
+                 vexactpos 1
+                 hexactsize 0
+                 vexactsize 1
+                 text "#STR_Bonfire"
+                 font "gui/fonts/metron-bold14"
+                 "exact text" 1
+                 "text halign" center
+                 wrap 1
+                }
+                PanelWidgetClass PanelWidget6 {
+                 ignorepointer 1
+                 position 4 4
+                 size 20 20
+                 halign right_ref
+                 hexactpos 1
+                 vexactpos 1
+                 hexactsize 1
+                 vexactsize 1
+                 {
+                  ImageWidgetClass LockIcon0 {
+                   ignorepointer 1
+                   color 0.737 0.737 0.737 1
+                   size 20 20
+                   halign center_ref
+                   valign center_ref
+                   hexactpos 1
+                   vexactpos 1
+                   hexactsize 1
+                   vexactsize 1
+                   imageTexture "{3A3189A20159B9E9}DRL_CraftMenu/UI/data/lock.edds"
+                   mode blend
+                   "src alpha" 1
+                   "clamp mode" wrap
+                   "stretch mode" stretch_w_h
+                   filter 1
+                  }
+                 }
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

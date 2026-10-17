@@ -1,0 +1,41 @@
+FrameWidgetClass Ring {
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ position 0 0
+ size 10 10
+ ignorepointer 1
+ clipchildren 0
+ {
+  ImageWidgetClass Track {
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0 0
+   size 1 1
+   image0 "INT_UIFramework/gui/textures/iuf_ring_ca.paa"
+   mode blend
+   "src alpha" 1
+   stretch 1
+   ignorepointer 1
+  }
+  ImageWidgetClass Arc {
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0 0
+   size 1 1
+   image0 "INT_UIFramework/gui/textures/iuf_ring_ca.paa"
+   Mask "INT_UIFramework/gui/textures/iuf_ring_mask_ca.paa"
+   "Transition width" 0.004
+   Progress 0
+   mode blend
+   "src alpha" 1
+   stretch 1
+   ignorepointer 1
+  }
+ }
+}

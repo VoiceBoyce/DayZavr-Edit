@@ -1,0 +1,18 @@
+ImageSetClass {
+ Name "drl_craft_achievement"
+ RefSize 75 75
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "DRL_CraftMenu/UI/data/achievement.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass achievement {
+   Name "achievement"
+   Pos 0 0
+   Size 75 75
+   Flags 0
+  }
+ }
+}

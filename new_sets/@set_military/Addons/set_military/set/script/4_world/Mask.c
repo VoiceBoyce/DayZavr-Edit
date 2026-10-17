@@ -1,1 +1,0 @@
-class Vp_Set19_Mask_ColorBase extends Mask_Base {};

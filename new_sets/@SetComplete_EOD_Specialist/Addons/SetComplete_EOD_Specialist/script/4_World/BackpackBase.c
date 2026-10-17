@@ -1,1 +1,0 @@
-class TGK_SetComplete_EOD_Specialist_Backpack_Colorbase : Backpack_Base {};

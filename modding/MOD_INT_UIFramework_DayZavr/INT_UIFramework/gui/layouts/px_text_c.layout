@@ -1,0 +1,14 @@
+TextWidgetClass Text {
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ position 0 0
+ size 10 10
+ text ""
+ font "gui/fonts/sdf_MetronBook24"
+ "text valign" center
+ "text halign" center
+ "exact text" 1
+ ignorepointer 1
+}

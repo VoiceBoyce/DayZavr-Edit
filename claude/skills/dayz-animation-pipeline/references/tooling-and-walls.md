@@ -1,0 +1,81 @@
+# Tooling inventory, the seam, and the walls
+
+Where every tool lives on the sandbox/GUI seam, the verified walls, and signing. Sources are the fase-0 research (2026-05-20), labelled [VERIFIED] (primary source read) or [TBD-verify] (secondary/single source).
+
+## Tool inventory
+
+| Tool | Does | Where it runs | Source |
+|---|---|---|---|
+| `model.cfg` / `config.cpp` editing | config-driven animation (Layer 1) | sandbox (Claude) | [VERIFIED] PMC wiki |
+| `scripts/seanim_writer.py` (this skill) | write SEAnim from keyframes | sandbox (Claude) | open SEAnim spec |
+| Blender headless (`bpy`) | author/edit keyframes | sandbox (Claude) | [VERIFIED] Blender |
+| **DayZATool** (DTZxPorter) | `.anm` extract→SEAnim and SEAnim→`.anm` (`--generate-anim`) | Windows, closed binary, .NET 4.5 | [VERIFIED] dtzxporter.com/tools/dayzatool |
+| **Arma3ObjectBuilder** (MrClock8163) | Blender 4.2+ addon, RTM import AND export | Windows, interactive Blender | [VERIFIED] github.com/MrClock8163/Arma3ObjectBuilder |
+| ArmAToolbox (Alwarren) | older Blender RTM export | Windows, interactive Blender | [VERIFIED] github.com/AlwarrenSidh/ArmAToolbox |
+| **FBXToRTMGui.exe** | FBX → `.rtm` | Windows, ships with DayZ Tools | [VERIFIED] BI wiki FBX_to_RTM |
+| `jdfnc24/DayZAnimationPluginDemo` | Blender → `.txa`/`.txo` | Windows, interactive Blender | [VERIFIED] github.com/jdfnc24/DayZAnimationPluginDemo |
+| **Workbench** (DayZ Tools) | compile `.txa`→`.anm`, `.txo`→`.xob` | Windows GUI | [VERIFIED] DayZ Tools, Steam 830640 |
+| `4d4a5852/rtm_import` | read RTM into Blender (import only, no write) | Windows, Blender 2.80 | [VERIFIED] github.com/4d4a5852/rtm_import |
+| SEAnim Blender plugin (SE2Dev) | import/export SEAnim in Blender | Windows, interactive Blender | [VERIFIED] github.com/SE2Dev/io_anim_seanim |
+| Addon Builder / Publisher (DayZ Tools) | PBO pack, sign, Workshop upload | Windows GUI | [VERIFIED] DayZ Tools |
+
+## The two formats (do not conflate)
+
+- **RTM** — legacy Real Virtuality. Used for config-driven prop animation and legacy man animations. Binary, reverse-engineered (BI wiki carries an explicit "internal undocumented, use may violate BI rights" notice). Authored via Blender (Arma3ObjectBuilder) or FBX→FBXToRTM.
+- **`.anm` / `.txa`** — Enfusion. Used for character/infected/animal and weapon animations. `.txa` is text, compiled by Workbench to binary `.anm`. Bridged from the open **SEAnim** format via DayZATool.
+
+DayZ Standalone runs a hybrid engine — characters go Enfusion (`.anm`), config-driven props go RTM. Most community confusion comes from mixing the two routes.
+
+## The walls [VERIFIED]
+
+1. **One animation mod at a time.** Only one mod modifying player/creature animations can load; two crash the client/server. Enfusion engine limit, not policy. Flag on every character/creature-anim plan. (Confirmed across multiple Workshop mod descriptions.) Does NOT affect config-driven object animation.
+2. **RTM is reverse-engineered.** No open-source RTM writer in pure Python exists; only Blender plugins write RTM. The format spec is community RE, not an official contract — it can change between engine versions.
+3. **`.anm` is proprietary.** DayZATool writes it but is a closed binary with its own EULA. No open-source `.anm` writer.
+4. **Skeleton bone names are exact.** Target is `OFP2_ManSkeleton`; any mismatch logs `Error: Bone X doesn't exist in skeleton OFP2_ManSkeleton` and the bone does not animate. [VERIFIED] BI forums.
+5. **Cannot restructure the vanilla skeleton.** You can overlay animations on vanilla bones; adding/removing bones breaks vanilla anim compatibility. [TBD-verify: community consensus, no primary BI doc read.]
+
+## Signing and deploy (Layer 3, user/computer-use)
+
+All mod PBOs must be signed (bikey/bisign) via DayZ Tools. Animation mods are no different. See the vault runbook `AI/20_Runbooks/dayz-mod-build-sign-deploy.md`. None of this runs in the sandbox.
+
+## What to hand the user
+
+When Claude produces a Layer 2 intermediate (a SEAnim file, a `.txa`, a Blender `.blend`), the handoff MUST state:
+- the exact converter command/tool the user runs next (e.g. `DayZATool --generate-anim my.seanim`),
+- the target skeleton and that bone names must match,
+- the one-mod-anim wall if it is a character/creature anim,
+- that signing + in-game test are still required.
+
+Never imply Claude ran Workbench / FBXToRTM / DayZATool in-sandbox — it cannot.
+
+## [2026-06-28] Weapon-anim corrections (verified)
+
+### CORRECTION to wall #1 — it is the GRAPH-replacement wall, not a weapon-anim wall [VERIFIED-vanilla]
+
+Wall #1 above ("one animation mod at a time") applies ONLY to mods that REPLACE the player/creature animation GRAPH (`player_main.aw`/`.agr`, e.g. Expansion-Animations). Custom WEAPON animations authored via the ASI route do NOT touch the graph and are **conflict-free across mods** — multiple weapon-anim mods coexist. The ASI route binds per-item through Enforce Script (`AddItemInHandsProfileIK(itemClass, asi, behavior, ikPose.anm, weaponStates.anm)` at `dayzplayer.c:243` + `AddItemBoneRemap`) and a per-weapon `.asi` parent chain — it never edits `.agr`/`.aw`. Do NOT warn about the one-anim-mod wall on a custom-weapon-animation plan; it is a false blocker. (Vehicles were written up as the unsupported exception; corrected 2026-09-28: a child `.asi` swaps one vehicle class's rider pose without a graph change, measured on 1.30 Exp 164014, `vehicle-rider-ik-pose.md`.)
+
+### Plugin/Blender-version split — the maintained fork inverts the version requirement [VERIFIED]
+
+The tool table lists `jdfnc24/DayZAnimationPluginDemo` (original) which needs **Blender 3.6.8–4.0** (on ≥4.1 it throws `AttributeError: 'Mesh' object has no attribute 'calc_normals_split'`). The **MAINTAINED Sanitoeter05 fork** is the opposite — it calls Blender 4.4+/5.x APIs (`action.fcurve_ensure_for_datablock`, `generate_fcurves_bl51`) and will NOT run on 3.6.8; its `bl_info` `'blender': (2,80,0)` is meaningless, do not trust it. Always check the import code's API calls against your Blender version before choosing. Install = manual folder copy into `…/scripts/addons/DayzAnimationTools` (the download is a plain folder, NOT a zip — "Install from file" fails).
+
+### `.txa` → Workbench is the canonical PLAYER weapon route [VERIFIED]
+
+For a playable-character weapon animation use Route A (`.txa` via the DayZAnimationPlugin → Workbench compiles `.anm`), as the JD demo and community do. SEAnim/DayZATool (Route B) is a fallback — its extracted rig is a reference, NOT a clean round-trip (community: extracted rigs "always wrong" for empties/IK-helper bones). RTM is the #1 wrong turn — never use it for a player weapon anim.
+
+## DayZ 1.30 tooling and architecture changes
+
+Re-verified on 1.30.164078 (`P:\`) where a file is cited; `[CHANGELOG 1.30]` items come from the 1.30 notes and were not tried on this host.
+
+### Workbench Animation & Ragdoll Editors (Enfusion 2021)
+- **Live Editing Support [CHANGELOG 1.30]**: The Animation Editor in Workbench 1.30 supports Live Editing against a running game client, enabling hot-reloading of animation states.
+- **Ragdoll Editor [CHANGELOG 1.30]**: Workbench introduces a dedicated editor for `.ragdoll` files. [EXACT] Vanilla ships `P:\DZ\characters\bodies\human.ragdoll`, bound by `ragdoll=` in `SurvivorBase` `enfAnimSys` (`P:\DZ\characters\data\config.cpp:160`).
+- **Event table**: [EXACT] the 1.30 workspace declares `EventTable "…Player_EventTable.ae"` as a field (`P:\DZ\anims\workspaces\player\player_main\player_main.aw:15`) instead of the 1.29 `#eventtable` line. [UNVERIFIED] whether the 2021 editor opens the player workspace without the old deletion trick (this bullet used to state it as fact).
+
+### Named Filesystems for Mods — no sub-graph merging (corrected 2026-09-28)
+[CHANGELOG 1.30] mods have dedicated named filesystems (`-resolveFilePatchingUsingEnfusion=1`). [UNVERIFIED] This section used to add that, because sub-graphs are modular text files (`.agf`), mods can patch individual sub-graphs without replacing the entire workspace hierarchy. Nothing in the files supports that and the evidence points the other way, so treat wall #1 (one graph-replacing mod at a time) as still in force for 1.30:
+- [EXACT][CLAIM-ANIM-VEHICLETYPE-PATHS-130] Adding one vehicle type touches files that all sit at vanilla paths under `DZ/anims/workspaces/player/player_main/`. In `Vehicles.agf`: a new `VehicleMaster` state (`:2913-3004`, one `StartCondition "VehicleType == N"` per type), two `AnimSrcNodeGroupSelect` nodes like `Jawa_BitrakActionG`/`Jawa_BitrakG` (`:1381-1392`), and the five literal `VehicleType == 10 || VehicleType == 11` conditions that send types 10 and 11 down the motorbike path (`:1429, 1474, 1529, 1570, 2806`). In `player_main.ast`, both column lists (`:1114-1127`, `:1154-1167`). The lines in `player_main.asi`. Above 12, `player_main.agr` too, which declares `VehicleType` with `MaxValue 12` (`:108-112`). The config names a single graph for the player (`SurvivorBase` `enfAnimSys` `graphName`, `P:\DZ\characters\data\config.cpp:153-161`, graph at `:156`; corrected from `:106-114`), so pointing it at a mod copy replaces the whole graph as well. All `Vehicles.agf` / `.ast` lines above were re-read on 1.30.164078.
+- [INFERRED] Shipping any of these files means shadowing the vanilla file, which is exactly the one-graph-mod wall. Survivor Animations does this: its `player_main.pbo` carries the vanilla prefix `DZ\anims\workspaces\player\player_main` and prints a warning when Expansion Animations is also loaded. Whether a PBO with the vanilla prefix shadows file by file or the whole folder is not established.
+- [VERIFIED] The official @DayZ post of 2026-09-16 says graph mods must redo their graph changes from scratch for 1.30 and that new limits apply, such as the number of groups ([x.com/DayZ](https://x.com/DayZ/status/2100152871580823661)). Neither it nor the 1.30 notes say graph mods can now be layered or merged.
+
+### Vehicles as Plain-Text Graphs
+DayZ 1.30 provides the full vehicle animation graph as plain-text Enfusion Config in `P:\DZ\anims\workspaces\player\player_main\vehicles.agf` (3654 lines), for inspection of vehicle state machines like `MotorBikeSTM`. (corrected 2026-09-28) This used to open with "Vehicles are no longer an opaque binary exception" and to promise extension. 1.29 already shipped the vehicle sub-graph as text (`Vehicles.agr`, `$AnimGraph 7`; see `anim-graph.md` §Vehicles.agf), and extending the state machine means shipping the vanilla-path files listed above.

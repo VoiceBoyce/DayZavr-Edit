@@ -1,1 +1,0 @@
-class VP_SET23_Belt_ColorBase : Belt_Base {};

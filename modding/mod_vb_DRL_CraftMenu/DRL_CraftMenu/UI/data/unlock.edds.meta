@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{A970983F08D4506E}DRL_CraftMenu/UI/data/unlock.edds"
+ Author "win-hv5vr6npefg"
+ ChangeDate 428684602
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "unlock.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

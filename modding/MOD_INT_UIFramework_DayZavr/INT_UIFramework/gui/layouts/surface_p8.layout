@@ -1,0 +1,33 @@
+FrameWidgetClass Surface {
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ position 0 0
+ size 10 10
+ ignorepointer 1
+ {
+  ButtonWidgetClass Fill {
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0 0
+   size 1 1
+   text ""
+   style IufP8
+   ignorepointer 1
+  }
+  ButtonWidgetClass Border {
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0 0
+   size 1 1
+   text ""
+   style IufPO8
+   ignorepointer 1
+  }
+ }
+}

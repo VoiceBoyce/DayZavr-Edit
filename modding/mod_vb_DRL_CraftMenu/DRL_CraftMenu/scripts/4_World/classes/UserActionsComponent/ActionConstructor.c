@@ -1,0 +1,12 @@
+modded class ActionConstructor
+{
+	override void RegisterActions(TTypenameArray actions)
+	{
+		super.RegisterActions(actions);
+
+		actions.Insert(ActionOpenDRLWorkbench);
+		actions.Insert(ActionDeconstructDRLWorkbench);
+		actions.Insert(ActionOpenDRLResearchTable);
+		actions.Insert(ActionOpenDRLResearchBookInHands);
+	}
+}

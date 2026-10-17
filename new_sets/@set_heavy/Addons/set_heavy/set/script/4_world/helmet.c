@@ -1,1 +1,0 @@
-class Vp_Set16_Helmet_ColorBase extends Mich2001Helmet {};

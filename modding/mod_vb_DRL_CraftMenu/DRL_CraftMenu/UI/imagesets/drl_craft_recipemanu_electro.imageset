@@ -1,0 +1,18 @@
+ImageSetClass {
+ Name "drl_craft_recipemanu_electro"
+ RefSize 1054 634
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "DRL_CraftMenu/UI/data/recipemanu_electro.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass recipemanu_electro {
+   Name "recipemanu_electro"
+   Pos 0 0
+   Size 1054 634
+   Flags 0
+  }
+ }
+}

@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{A5A30A7D684A57FC}DRL_CraftMenu/UI/fonts/Sclate.edds"
+ Author "win-hv5vr6npefg"
+ ChangeDate -337972456
+ Configurations {
+  TGAResourceClass PC {
+   SourceFile "Sclate.tga"
+  }
+  TGAResourceClass XBOX_ONE : PC {
+  }
+  TGAResourceClass PS4 : PC {
+  }
+  TGAResourceClass LINUX : PC {
+  }
+ }
+}

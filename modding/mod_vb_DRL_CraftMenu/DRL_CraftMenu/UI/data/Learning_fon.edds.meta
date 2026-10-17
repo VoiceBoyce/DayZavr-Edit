@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{5D46CAE0031B0C93}DRL_CraftMenu/UI/data/Learning_fon.edds"
+ Author "win-hv5vr6npefg"
+ ChangeDate -647711438
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "Learning_fon.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

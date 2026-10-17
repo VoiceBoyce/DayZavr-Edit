@@ -1,0 +1,18 @@
+ImageSetClass {
+ Name "drl_craft_learning_fon"
+ RefSize 1671 941
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "DRL_CraftMenu/UI/data/Learning_fon.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass learning_fon {
+   Name "learning_fon"
+   Pos 0 0
+   Size 1671 941
+   Flags 0
+  }
+ }
+}

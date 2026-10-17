@@ -1,0 +1,98 @@
+PanelWidgetClass VariationPartSectionRoot {
+ ignorepointer 1
+ color 0.098 0.098 0.098 0.235
+ position 0 0
+ size 1 114
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 1
+ style rover_sim_colorable
+ {
+  PanelWidgetClass VariationPartBorder {
+   ignorepointer 1
+   color 0.149 0.133 0.125 1
+   position 0 0
+   size 1 1
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   style dashed
+  }
+  PanelWidgetClass VariationPartHeader {
+   ignorepointer 1
+   position 0 4
+   size 0.995 20
+   halign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 1
+   {
+    PanelWidgetClass VariationPartAccent {
+     ignorepointer 1
+     color 0.537 0.357 0.141 1
+     position 0 0
+     size 3 16
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style rover_sim_colorable
+    }
+    RichTextWidgetClass VariationPartTitle {
+     ignorepointer 1
+     color 0.85 0.78 0.68 1
+     position 6 0
+     size 0.82 18
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     text "#STR_DRL_PART"
+     font "gui/fonts/metron-bold16"
+     "exact text" 1
+     "exact text size" 14
+     "text valign" center
+    }
+    RichTextWidgetClass VariationPartQtyBadge {
+     ignorepointer 1
+     color 0.65 0.6 0.52 1
+     position 0 0
+     size 0.17 18
+     halign right_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     text "0/1"
+     font "gui/fonts/metron14"
+     "exact text" 1
+     "exact text size" 13
+     "text halign" right
+     "text valign" center
+    }
+   }
+  }
+  WrapSpacerWidgetClass VariationPartTilesWrap {
+   visible 1
+   clipchildren 1
+   ignorepointer 1
+   position 0 26
+   size 0.995 84
+   halign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 1
+   Padding 4
+   Margin 0
+   "Size To Content H" 1
+   "Size To Content V" 1
+  }
+ }
+}

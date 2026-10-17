@@ -1,0 +1,196 @@
+Алтари для добычи:
+
+MSFZ_Obelisk
+MSFZ_Obelisk_NoActive
+msfz_stone_1
+msfz_stone_2
+msfz_stone_1_NoActive
+msfz_stone_2_NoActive
+msfz_stone_altar_1
+msfz_stone_altar_2
+msfz_stone_altar_3
+msfz_stone_altar_4
+msfz_stone_altar_1_NoActive
+msfz_stone_altar_2_NoActive
+msfz_stone_altar_3_NoActive
+msfz_stone_altar_4_NoActive
+
+Оружие:
+
+MSFZ_Magic_Kirka
+MSFZ_Magic_Hatchet
+MSFZ_Magic_Sword
+MSFZ_Magic_Knife
+MSFZ_Magic_Knife_Blue
+MSFZ_Magic_Knife_Green
+MSFZ_Magic_Knife_Purple
+MSFZ_Magic_Knife_Red
+MSFZ_Magic_Hammer
+
+Арбалет:
+
+MSFZ_Crossbow_Mag_10Rnd
+MSFZ_Crossbow_Mag_25Rnd
+MSFZ_Crossbow_Mag_50Rnd
+MSFZ_Crossbow_AP_Mag_10Rnd
+MSFZ_Crossbow_AP_Mag_25Rnd
+MSFZ_Crossbow_AP_Mag_50Rnd
+MSFZ_Crossbow_Cupid_Mag_10Rnd
+MSFZ_Crossbow_Cupid_Mag_25Rnd
+MSFZ_Crossbow_Cupid_Mag_50Rnd
+MSFZ_Crossbow_BoltStack
+MSFZ_Crossbow_BoltStack_AP
+MSFZ_Ammo_CupidsBolt
+MSFZ_Crossbow
+MSFZ_Crossbow_Black
+MSFZ_Crossbow_Cosmos
+MSFZ_Crossbow_Forest
+MSFZ_Crossbow_Mix
+MSFZ_Crossbow_Old
+
+Руны:
+
+MSFZ_RuneStone_Fire
+MSFZ_RuneStone_FireSmall
+MSFZ_RuneStone_Ice
+MSFZ_RuneStone_IceSmall
+MSFZ_RuneStone_Storm
+MSFZ_RuneStone_StormSmall
+
+MSFZ_RuneStone_Bereza
+MSFZ_RuneStone_Bog
+MSFZ_RuneStone_Chelovek
+MSFZ_RuneStone_Day
+MSFZ_RuneStone_KladesPamyati
+MSFZ_RuneStone_Los
+MSFZ_RuneStone_Nasledie
+MSFZ_RuneStone_Puti
+MSFZ_RuneStone_Solnce
+MSFZ_RuneStone_Tis
+
+MSFZ_RuneStone_Busk
+MSFZ_RuneStone_Cherepaha
+MSFZ_RuneStone_Kaban
+MSFZ_RuneStone_Medved
+MSFZ_RuneStone_Orel
+MSFZ_RuneStone_Osa
+MSFZ_RuneStone_Tigr
+MSFZ_RuneStone_Wolf
+MSFZ_RuneStone_Zayac
+MSFZ_RuneStone_Zmey
+
+Энты:
+
+MSFZ_Ent_head
+MSFZ_Ent_head_medium
+MSFZ_Ent_head_hard
+
+MSFZ_Mutant_Ent
+MSFZ_Mutant_Ent_Medium
+MSFZ_Mutant_Ent_Hard
+
+Пауки:
+
+MSFZ_Spider_Lapka
+MSFZ_Mutant_Spider1
+MSFZ_Mutant_Spider2
+MSFZ_Mutant_Spider3
+
+Заноза:
+
+MSFZ_Zanoza_eye
+MSFZ_Zanoza_stick
+MSFZ_Mutant_Zanoza1
+MSFZ_Mutant_Zanoza2
+MSFZ_Mutant_Zanoza3
+
+Троль:
+
+MSFZ_Troll_Hand
+MutantTrollSteakMeat
+MSFZ_Troll
+
+Рыцарь:
+
+MSFZ_Ricar_Head
+MutantRicarSteakMeat
+MSFZ_Ricar
+
+Статика:
+
+MSFZ_Eggs
+MSFZ_Pautina_1
+MSFZ_Pautina_2
+MSFZ_Pautina_3
+MSFZ_Pautina_4
+MSFZ_Pautina_5
+MSFZ_Pautina_6
+MSFZ_Pautina_7
+msfz_stone_gate
+MSFZ_Japan_light
+MSFZ_Old_Pillar
+
+Портал:
+
+MSFZ_Portal
+MSFZ_Portal_Exit
+
+
+Крафты 1 уровень:
+
+Craft MSFZ_RuneStone_Bereza        =   MSFZ_RuneStone_FireSmall     +  MSFZ_RuneStone_FireSmall
+Craft MSFZ_RuneStone_Bog           =   MSFZ_RuneStone_Fire          +  MSFZ_RuneStone_Fire
+Craft MSFZ_RuneStone_Chelovek      =   MSFZ_RuneStone_Ice           +  MSFZ_RuneStone_FireSmall
+Craft MSFZ_RuneStone_Day           =   MSFZ_RuneStone_IceSmall      +  MSFZ_RuneStone_Ice
+Craft MSFZ_RuneStone_KladesPamyati =   MSFZ_RuneStone_Ice           +  MSFZ_RuneStone_Ice
+Craft MSFZ_RuneStone_Los           =   MSFZ_RuneStone_IceSmall      +  MSFZ_RuneStone_Storm
+Craft MSFZ_RuneStone_Nasledie      =   MSFZ_RuneStone_Storm         +  MSFZ_RuneStone_Storm
+Craft MSFZ_RuneStone_Puti          =   MSFZ_RuneStone_Ice           +  MSFZ_RuneStone_StormSmall
+Craft MSFZ_RuneStone_Solnce        =   MSFZ_RuneStone_FireSmall     +  MSFZ_RuneStone_StormSmall
+Craft MSFZ_RuneStone_Tis           =   MSFZ_RuneStone_Storm         +  MSFZ_RuneStone_Ice
+																	  
+Крафты 2 уровень: 
+                                                     
+Craft MSFZ_RuneStone_Busk          =   MSFZ_RuneStone_Tis           +  MSFZ_RuneStone_Fire
+Craft MSFZ_RuneStone_Cherepaha     =   MSFZ_RuneStone_FireSmall     +  MSFZ_RuneStone_FireSmall
+Craft MSFZ_RuneStone_Bereza        =   MSFZ_RuneStone_Solnce        +  MSFZ_RuneStone_FireSmall
+Craft MSFZ_RuneStone_Kaban         =   MSFZ_RuneStone_Puti          +  MSFZ_RuneStone_Ice
+Craft MSFZ_RuneStone_Medved        =   MSFZ_RuneStone_Nasledie      +  MSFZ_RuneStone_IceSmall
+Craft MSFZ_RuneStone_Orel          =   MSFZ_RuneStone_Los           +  MSFZ_RuneStone_Storm
+Craft MSFZ_RuneStone_Osa           =   MSFZ_RuneStone_KladesPamyati +  MSFZ_RuneStone_StormSmall
+Craft MSFZ_RuneStone_Tigr          =   MSFZ_RuneStone_Day           +  MSFZ_RuneStone_Fire
+Craft MSFZ_RuneStone_Wolf          =   MSFZ_RuneStone_Chelovek      +  MSFZ_RuneStone_Ice
+Craft MSFZ_RuneStone_Zayac         =   MSFZ_RuneStone_Bog           +  MSFZ_RuneStone_Storm
+Craft MSFZ_RuneStone_Zmey          =   MSFZ_RuneStone_Bereza        +  MSFZ_RuneStone_IceSmall
+																	  
+Крафты 3 уровень:   
+                                                   
+Craft MSFZ_Magic_Hatchet           =   MSFZ_RuneStone_Medved        +  Hatchet
+Craft MSFZ_Magic_Sword             =   MSFZ_RuneStone_Zmey          +  Sword
+Craft MSFZ_Magic_Knife             =   MSFZ_RuneStone_Wolf          +  KukriKnife
+Craft MSFZ_Magic_Hammer            =   MSFZ_RuneStone_Cherepaha     +  Hammer                                             
+Craft MSFZ_Crossbow_BoltStack      =   MSFZ_RuneStone_Osa           +  MSFZ_Zanoza_stick
+Craft MSFZ_Crossbow_BoltStack_AP   =   MSFZ_RuneStone_Orel          +  MSFZ_Zanoza_stick
+Craft MSFZ_Crossbow                =   MSFZ_RuneStone_Bereza        +  Scout_Chernarus
+Craft MSFZ_Crossbow_Mag_10Rnd      =   MSFZ_RuneStone_Medved        +  PlateCarrierPouches
+Craft MSFZ_Crossbow_AP_Mag_10Rnd   =   MSFZ_RuneStone_Zayac         +  PlateCarrierPouches
+Craft MSFZ_Crossbow_AP_Mag_25Rnd   =   MSFZ_RuneStone_Zayac         +  MSFZ_Crossbow_AP_Mag_10Rnd
+Craft MSFZ_Crossbow_Mag_25Rnd      =   MSFZ_RuneStone_Medved        +  MSFZ_Crossbow_Mag_10Rnd
+Craft MSFZ_Crossbow_Mag_50Rnd      =   MSFZ_RuneStone_Medved        +  MSFZ_Crossbow_Mag_25Rnd
+Craft MSFZ_Crossbow_AP_Mag_50Rnd   =   MSFZ_RuneStone_Zayac         +  MSFZ_Crossbow_AP_Mag_25Rnd
+Craft MSFZ_Crossbow_Black          =   MSFZ_RuneStone_Kaban         +  Scout_Chernarus
+Craft MSFZ_Crossbow_Cosmos         =   MSFZ_RuneStone_Osa           +  Scout_Chernarus
+Craft MSFZ_Crossbow_Forest         =   MSFZ_RuneStone_Zmey          +  Scout_Chernarus
+Craft MSFZ_Crossbow_Old            =   MSFZ_RuneStone_Cherepaha     +  Scout_Chernarus
+Craft MSFZ_Crossbow_Mix            =   MSFZ_RuneStone_Busk          +  Scout_Chernarus
+
+всего:
+33 крафта
+11 статик обьектов
+2 телепорта (вход и выход)
+3 мутанта со скинингом по 3 уровня сложности
+1 мутант босс 
+1 мутант для босса
+26 видов рун
+5 видов инструментов
+13 обелисков

@@ -1,1 +1,0 @@
-class Vp_Set22_cap_ColorBase extends HeadGear_Base {};

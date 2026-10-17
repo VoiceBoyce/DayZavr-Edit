@@ -1,0 +1,18 @@
+ImageSetClass {
+ Name "drl_craft_work3"
+ RefSize 1369 775
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "DRL_CraftMenu/UI/data/work3.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass work3 {
+   Name "work3"
+   Pos 0 0
+   Size 1369 775
+   Flags 0
+  }
+ }
+}

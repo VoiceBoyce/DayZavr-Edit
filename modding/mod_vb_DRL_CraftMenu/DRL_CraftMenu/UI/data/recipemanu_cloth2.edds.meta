@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{48830BDFA678FC3F}DRL_CraftMenu/UI/data/recipemanu_cloth2.edds"
+ Author "win-hv5vr6npefg"
+ ChangeDate 1266398101
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "recipemanu_cloth2.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

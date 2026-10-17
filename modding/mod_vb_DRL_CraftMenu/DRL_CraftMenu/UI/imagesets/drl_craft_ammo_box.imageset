@@ -1,0 +1,18 @@
+ImageSetClass {
+ Name "drl_craft_ammo_box"
+ RefSize 75 75
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "DRL_CraftMenu/UI/data/ammo-box.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass ammo_box {
+   Name "ammo_box"
+   Pos 0 0
+   Size 75 75
+   Flags 0
+  }
+ }
+}

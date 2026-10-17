@@ -1,0 +1,2012 @@
+[
+ {
+  "class": "ActionDrinkPondContinuous",
+  "method": "GetLiquidSource",
+  "kind": "obsolete",
+  "msg": "1.30: No replacement. Method is no longer needed as liquid source is now checked and provided by the CCTLiquid target condition.",
+  "at": "4_world/classes/useractionscomponent/actions/continuous/actiondrinkpondcontinuous.c:136",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/classes/useractionscomponent/actions/continuous/actiondrinkpondcontinuous.c:70"
+  ]
+ },
+ {
+  "class": "ActionTargetsCursor",
+  "method": "SetContinuousInteractXboxIcon",
+  "kind": "obsolete",
+  "msg": "no replacement",
+  "at": "5_mission/gui/actiontargetscursor.c:1370",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "ActionTargetsCursor",
+  "method": "SetContinuousXboxIcon",
+  "kind": "obsolete",
+  "msg": "no replacement",
+  "at": "5_mission/gui/actiontargetscursor.c:1374",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "ActionTargetsCursor",
+  "method": "SetInteractXboxIcon",
+  "kind": "obsolete",
+  "msg": "no replacement",
+  "at": "5_mission/gui/actiontargetscursor.c:1368",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "ActionTargetsCursor",
+  "method": "SetSingleXboxIcon",
+  "kind": "obsolete",
+  "msg": "no replacement",
+  "at": "5_mission/gui/actiontargetscursor.c:1372",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "ActionTargetsCursor",
+  "method": "SetXboxIcon",
+  "kind": "obsolete",
+  "msg": "no replacement",
+  "at": "5_mission/gui/actiontargetscursor.c:1376",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "AgentBase",
+  "method": "GrowDuringAntibioticsAttack",
+  "kind": "obsolete",
+  "msg": "replaced by GrowDuringMedicalDrugsAttack",
+  "at": "4_world/classes/transmissionagents/agents/agentbase.c:153",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "AmmoTypesAPI",
+  "method": "GetExplosionParticleID",
+  "kind": "removed",
+  "msg": null,
+  "at": "3_game/global/ammotypes.c:57",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "3_game/dayzgame.c:3534"
+  ]
+ },
+ {
+  "class": "BaseBuildingBase",
+  "method": "DebugCustomState",
+  "kind": "obsolete",
+  "msg": "obsolete debug method",
+  "at": "4_world/entities/itembase/basebuildingbase.c:1285",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/itembase/basebuildingbase.c:549"
+  ]
+ },
+ {
+  "class": "BaseBuildingBase",
+  "method": "HandleItemFalling",
+  "kind": "obsolete",
+  "msg": "handled in the Construction component directly",
+  "at": "4_world/entities/itembase/basebuildingbase.c:1275",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "BaseBuildingBase",
+  "method": "ItemFall",
+  "kind": "obsolete",
+  "msg": "handled in the Construction component directly",
+  "at": "4_world/entities/itembase/basebuildingbase.c:1280",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/itembase/basebuildingbase.c:741"
+  ]
+ },
+ {
+  "class": "BoxDraw",
+  "method": "InverseTransformPointByMatrix",
+  "kind": "removed",
+  "msg": null,
+  "at": "4_world/plugins/pluginbase/plugindiagmenu/undergrounddiag.c:124",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "BoxDraw",
+  "method": "OnGlobalRotationChanged",
+  "kind": "removed",
+  "msg": null,
+  "at": "4_world/plugins/pluginbase/plugindiagmenu/undergrounddiag.c:195",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "BoxDraw",
+  "method": "TransformPointByMatrix",
+  "kind": "removed",
+  "msg": null,
+  "at": "4_world/plugins/pluginbase/plugindiagmenu/undergrounddiag.c:119",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/plugins/pluginbase/plugindiagmenu/undergrounddiag.c:226"
+  ]
+ },
+ {
+  "class": "CGame",
+  "method": "GoBuyWorldDLC",
+  "kind": "removed",
+  "msg": null,
+  "at": "3_game/global/game.c:941",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "5_mission/gui/newui/serverbrowsermenu/serverbrowsermenunew.c:719"
+  ]
+ },
+ {
+  "class": "CGame",
+  "method": "VerifyWorldOwnership",
+  "kind": "removed",
+  "msg": null,
+  "at": "3_game/global/game.c:940",
+  "calls_129": 3,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "5_mission/gui/newui/serverbrowsermenu/serverbrowserentry.c:462",
+   "5_mission/gui/newui/serverbrowsermenu/serverbrowsermenunew.c:673",
+   "5_mission/gui/newui/serverbrowsermenu/serverbrowsermenunew.c:708"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "BrakeAndReverseRearLight",
+  "kind": "obsolete",
+  "msg": "1.30: use VehicleLightsComponent instead",
+  "at": "4_world/entities/vehicles/carscript.c:2841",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:2204"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "BrakeLightsShineOff",
+  "kind": "obsolete",
+  "msg": "1.30: use VehicleLightsComponent instead",
+  "at": "4_world/entities/vehicles/carscript.c:2895",
+  "calls_129": 4,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:2307",
+   "4_world/entities/vehicles/carscript.c:2312",
+   "4_world/entities/vehicles/carscript.c:2329",
+   "4_world/entities/vehicles/carscript.c:2335"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "BrakeLightsShineOn",
+  "kind": "obsolete",
+  "msg": "1.30: VehicleLightsComponent instead",
+  "at": "4_world/entities/vehicles/carscript.c:2889",
+  "calls_129": 3,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:2301",
+   "4_world/entities/vehicles/carscript.c:2318",
+   "4_world/entities/vehicles/carscript.c:2324"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "BrakesRearLight",
+  "kind": "obsolete",
+  "msg": "1.30: use VehicleLightsComponent instead",
+  "at": "4_world/entities/vehicles/carscript.c:2829",
+  "calls_129": 2,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:2193",
+   "4_world/entities/vehicles/carscript.c:2206"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "CarPartsHealthCheck",
+  "kind": "obsolete",
+  "msg": "1.30: use Transport::PartsHealthCheck instead",
+  "at": "4_world/entities/vehicles/carscript.c:2976",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:984"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "CreateFrontLight",
+  "kind": "obsolete",
+  "msg": "1.30: use VehicleLightsComponent instead",
+  "at": "4_world/entities/vehicles/carscript.c:2944",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:2120"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "CreateRearLight",
+  "kind": "obsolete",
+  "msg": "1.30: use VehicleLightsComponent instead",
+  "at": "4_world/entities/vehicles/carscript.c:2937",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:2181"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "DashboardShineOff",
+  "kind": "obsolete",
+  "msg": "1.30: use VehicleLightsComponent instead",
+  "at": "4_world/entities/vehicles/carscript.c:2930",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:2268"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "DashboardShineOn",
+  "kind": "obsolete",
+  "msg": "1.30: use VehicleLightsComponent instead",
+  "at": "4_world/entities/vehicles/carscript.c:2924",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:2241"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "ForceUpdateLightsEnd",
+  "kind": "obsolete",
+  "msg": "1.30: no replacement",
+  "at": "4_world/entities/vehicles/carscript.c:2808",
+  "calls_129": 5,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/classes/useractionscomponent/actions/interact/actiongetintransport.c:137",
+   "4_world/classes/useractionscomponent/actions/interact/actiongetouttransport.c:254",
+   "4_world/classes/useractionscomponent/actions/interact/vehicles/actionanimatecarselection.c:84",
+   "4_world/classes/useractionscomponent/actions/interact/vehicles/actioncardoors.c:109"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "ForceUpdateLightsStart",
+  "kind": "obsolete",
+  "msg": "1.30: no replacement",
+  "at": "4_world/entities/vehicles/carscript.c:2805",
+  "calls_129": 6,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/classes/useractionscomponent/actions/interact/actiongetintransport.c:107",
+   "4_world/classes/useractionscomponent/actions/interact/actiongetouttransport.c:198",
+   "4_world/classes/useractionscomponent/actions/interact/vehicles/actionanimatecarselection.c:73",
+   "4_world/classes/useractionscomponent/actions/interact/vehicles/actioncardoors.c:91"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "GenerateCarHornAINoise",
+  "kind": "removed",
+  "msg": null,
+  "at": "4_world/entities/vehicles/carscript.c:3079",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:3075"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "IsScriptedLightsOn",
+  "kind": "obsolete",
+  "msg": "1.30: use Transport.LightIsOn",
+  "at": "4_world/entities/vehicles/carscript.c:2823",
+  "calls_129": 3,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/classes/useractionscomponent/actions/interact/vehicles/actionswitchlights.c:40",
+   "4_world/entities/vehicles/carscript.c:832",
+   "4_world/entities/vehicles/carscript.c:3044"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "IsVitalCarBattery",
+  "kind": "obsolete",
+  "msg": "1.30: use Transport.NeedElectricitySourceDevice",
+  "at": "4_world/entities/vehicles/carscript.c:2811",
+  "calls_129": 4,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/classes/useractionscomponent/actions/interact/vehicles/actionswitchlights.c:44",
+   "4_world/entities/vehicles/carscript.c:1996",
+   "4_world/entities/vehicles/carscript.c:3017",
+   "4_world/entities/vehicles/carscript.c:3129"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "IsVitalTruckBattery",
+  "kind": "obsolete",
+  "msg": "1.30: use Transport.NeedElectricitySourceDevice",
+  "at": "4_world/entities/vehicles/carscript.c:2817",
+  "calls_129": 4,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/classes/useractionscomponent/actions/interact/vehicles/actionswitchlights.c:45",
+   "4_world/entities/vehicles/carscript.c:1996",
+   "4_world/entities/vehicles/carscript.c:3021",
+   "4_world/entities/vehicles/carscript.c:3135"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "LeftFrontLightShineOff",
+  "kind": "obsolete",
+  "msg": "1.30: use VehicleLightsComponent instead",
+  "at": "4_world/entities/vehicles/carscript.c:2865",
+  "calls_129": 3,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:2251",
+   "4_world/entities/vehicles/carscript.c:2259",
+   "4_world/entities/vehicles/carscript.c:2269"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "LeftFrontLightShineOn",
+  "kind": "obsolete",
+  "msg": "1.30: use VehicleLightsComponent instead",
+  "at": "4_world/entities/vehicles/carscript.c:2853",
+  "calls_129": 2,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:2247",
+   "4_world/entities/vehicles/carscript.c:2255"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "NoRearLight",
+  "kind": "obsolete",
+  "msg": "1.30: use VehicleLightsComponent instead",
+  "at": "4_world/entities/vehicles/carscript.c:2847",
+  "calls_129": 3,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:2199",
+   "4_world/entities/vehicles/carscript.c:2210",
+   "4_world/entities/vehicles/carscript.c:2217"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "ReverseLightsShineOff",
+  "kind": "obsolete",
+  "msg": "1.30: use VehicleLightsComponent instead",
+  "at": "4_world/entities/vehicles/carscript.c:2883",
+  "calls_129": 5,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:2300",
+   "4_world/entities/vehicles/carscript.c:2311",
+   "4_world/entities/vehicles/carscript.c:2323",
+   "4_world/entities/vehicles/carscript.c:2328"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "ReverseLightsShineOn",
+  "kind": "obsolete",
+  "msg": "1.30: use VehicleLightsComponent instead",
+  "at": "4_world/entities/vehicles/carscript.c:2877",
+  "calls_129": 2,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:2306",
+   "4_world/entities/vehicles/carscript.c:2319"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "ReverseRearLight",
+  "kind": "obsolete",
+  "msg": "1.30: use VehicleLightsComponent instead",
+  "at": "4_world/entities/vehicles/carscript.c:2835",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:2197"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "RightFrontLightShineOff",
+  "kind": "obsolete",
+  "msg": "1.30: use VehicleLightsComponent instead",
+  "at": "4_world/entities/vehicles/carscript.c:2871",
+  "calls_129": 3,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:2248",
+   "4_world/entities/vehicles/carscript.c:2260",
+   "4_world/entities/vehicles/carscript.c:2270"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "RightFrontLightShineOn",
+  "kind": "obsolete",
+  "msg": "1.30: use VehicleLightsComponent instead",
+  "at": "4_world/entities/vehicles/carscript.c:2859",
+  "calls_129": 2,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:2252",
+   "4_world/entities/vehicles/carscript.c:2256"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "TailLightsShineOff",
+  "kind": "obsolete",
+  "msg": "1.30: use VehicleLightsComponent instead",
+  "at": "4_world/entities/vehicles/carscript.c:2918",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:2267"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "TailLightsShineOn",
+  "kind": "obsolete",
+  "msg": "1.30: use VehicleLightsComponent instead",
+  "at": "4_world/entities/vehicles/carscript.c:2901",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:2242"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "ToggleHeadlights",
+  "kind": "removed",
+  "msg": null,
+  "at": "4_world/entities/vehicles/carscript.c:2088",
+  "calls_129": 3,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/classes/useractionscomponent/actions/interact/vehicles/actionswitchlights.c:75",
+   "4_world/entities/vehicles/carscript.c:834",
+   "4_world/entities/vehicles/carscript.c:3061"
+  ]
+ },
+ {
+  "class": "CombinationLock",
+  "method": "IsLockedOnGate",
+  "kind": "obsolete",
+  "msg": "1.30: Use IsLocked instead",
+  "at": "4_world/entities/itembase/combinationlock.c:846",
+  "calls_129": 2,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/classes/useractionscomponent/actions/continuous/actiondialcombinationlockontarget.c:71",
+   "4_world/entities/itembase/combinationlock.c:410"
+  ]
+ },
+ {
+  "class": "CombinationLock",
+  "method": "SoundLockChangeDial",
+  "kind": "obsolete",
+  "msg": "1.30: Use ItemSoundHandler instead",
+  "at": "4_world/entities/itembase/combinationlock.c:840",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/itembase/combinationlock.c:439"
+  ]
+ },
+ {
+  "class": "CombinationLock",
+  "method": "SoundLockChangeNumber",
+  "kind": "obsolete",
+  "msg": "1.30: Use ItemSoundHandler instead",
+  "at": "4_world/entities/itembase/combinationlock.c:834",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/itembase/combinationlock.c:445"
+  ]
+ },
+ {
+  "class": "CombinationLock",
+  "method": "SoundLockClose",
+  "kind": "obsolete",
+  "msg": "1.30: Use ItemSoundHandler instead",
+  "at": "4_world/entities/itembase/combinationlock.c:828",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/itembase/combinationlock.c:427"
+  ]
+ },
+ {
+  "class": "CombinationLock",
+  "method": "SoundLockOpen",
+  "kind": "obsolete",
+  "msg": "1.30: Use ItemSoundHandler instead",
+  "at": "4_world/entities/itembase/combinationlock.c:822",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/itembase/combinationlock.c:433"
+  ]
+ },
+ {
+  "class": "CombinationLock",
+  "method": "UnlockServer",
+  "kind": "removed",
+  "msg": null,
+  "at": "4_world/entities/itembase/combinationlock.c:299",
+  "calls_129": 4,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/classes/useractionscomponent/actions/continuous/actiondestroycombinationlock.c:55",
+   "4_world/classes/useractionscomponent/actions/continuous/actiondialcombinationlockontarget.c:79",
+   "4_world/entities/itembase/basebuildingbase/fence.c:319",
+   "4_world/entities/itembase/basebuildingbase/fence.c:781"
+  ]
+ },
+ {
+  "class": "ConstructionPart",
+  "method": "SetRequestBuiltState",
+  "kind": "obsolete",
+  "msg": "1.30: Use 'SetBuiltState' directly",
+  "at": "4_world/classes/basebuilding/constructionpart.c:504",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "DayZPlayerImplementMeleeCombat",
+  "method": "HitZoneSelection",
+  "kind": "obsolete",
+  "msg": "replaced by HitZoneSelectionRaycast",
+  "at": "4_world/entities/dayzplayerimplementmeleecombat.c:603",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "EffWheelSmoke",
+  "method": "SetSurface",
+  "kind": "obsolete",
+  "msg": "1.30: use SelectFromSurface instead",
+  "at": "4_world/entities/effects/wheelsmoke.c:32",
+  "calls_129": 2,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:1172",
+   "4_world/entities/vehicles/carscript.c:1182"
+  ]
+ },
+ {
+  "class": "EmoteManager",
+  "method": "CheckEmoteLockedState",
+  "kind": "obsolete",
+  "msg": "1.30: no replacement",
+  "at": "4_world/classes/emotemanager.c:1211",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "EmoteManager",
+  "method": "ForceSurrenderState",
+  "kind": "obsolete",
+  "msg": "1.30: Use PlayerBase::SetSurrenderState instead",
+  "at": "4_world/classes/emotemanager.c:1255",
+  "calls_129": 4,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/itembase/surrenderdummyitem.c:21",
+   "4_world/entities/manbase/playerbase.c:2978",
+   "4_world/entities/manbase/playerbase.c:2995",
+   "4_world/entities/manbase/playerbase.c:4073"
+  ]
+ },
+ {
+  "class": "EntityAI",
+  "method": "LocalTakeEntityAsAttachment",
+  "kind": "obsolete",
+  "msg": "1.30: Use LocalTakeEntityToTargetAttachment instead",
+  "at": "3_game/entities/entityai.c:4901",
+  "calls_129": 4,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/classes/useractionscomponent/actions/singleuse/actionattachwheels.c:90",
+   "4_world/classes/useractionscomponent/actions/singleuse/actionattachwheels.c:99",
+   "4_world/classes/useractionscomponent/actions/singleuse/actioninstallsparkplug.c:36",
+   "4_world/classes/useractionscomponent/actions/singleuse/actioninstallsparkplug.c:41"
+  ]
+ },
+ {
+  "class": "EntityAI",
+  "method": "LocalTakeEntityAsAttachmentEx",
+  "kind": "obsolete",
+  "msg": "1.30: Use LocalTakeEntityToTargetAttachmentEx instead",
+  "at": "3_game/entities/entityai.c:4880",
+  "calls_129": 3,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/classes/introscenecharacter.c:431",
+   "4_world/classes/useractionscomponent/actions/singleuse/actionattachwheels.c:89",
+   "4_world/classes/useractionscomponent/actions/singleuse/actionattachwheels.c:98"
+  ]
+ },
+ {
+  "class": "EntityAI",
+  "method": "LocalTakeEntityToCargo",
+  "kind": "obsolete",
+  "msg": "1.30: Use LocalTakeEntityToTargetCargo instead",
+  "at": "3_game/entities/entityai.c:4843",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "EntityAI",
+  "method": "LocalTakeEntityToCargoEx",
+  "kind": "obsolete",
+  "msg": "1.30: Use LocalTakeEntityToTargetCargoEx instead",
+  "at": "3_game/entities/entityai.c:4864",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "EntityAI",
+  "method": "OnCEUpdate",
+  "kind": "obsolete",
+  "msg": "1.30: Use OnCEIterate(float currentTime, float elapsedTime)instead",
+  "at": "3_game/entities/entityai.c:4924",
+  "calls_129": 4,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/classes/contaminatedarea/effectarea.c:192",
+   "4_world/entities/explosivesbase.c:112",
+   "4_world/entities/explosivesbase/remotedetonator.c:99",
+   "4_world/entities/itembase/basebuildingbase/totem.c:159"
+  ]
+ },
+ {
+  "class": "EntityAI",
+  "method": "PredictiveTakeEntityAsAttachment",
+  "kind": "obsolete",
+  "msg": "1.30: Use PredictiveTakeEntityToTargetAttachment instead",
+  "at": "3_game/entities/entityai.c:4893",
+  "calls_129": 3,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "3_game/entities/man.c:643",
+   "4_world/systems/bot/bot_testattachanddropcycle.c:112",
+   "5_mission/gui/inventorynew/inventory.c:562"
+  ]
+ },
+ {
+  "class": "EntityAI",
+  "method": "PredictiveTakeEntityAsAttachmentEx",
+  "kind": "obsolete",
+  "msg": "1.30: Use PredictiveTakeEntityToTargetAttachmentEx instead",
+  "at": "3_game/entities/entityai.c:4872",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/systems/bot/bot_testitemmovebackandforth.c:108"
+  ]
+ },
+ {
+  "class": "EntityAI",
+  "method": "PredictiveTakeEntityToCargo",
+  "kind": "obsolete",
+  "msg": "1.30: Use PredictiveTakeEntityToTargetCargo instead",
+  "at": "3_game/entities/entityai.c:4835",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "EntityAI",
+  "method": "PredictiveTakeEntityToCargoEx",
+  "kind": "obsolete",
+  "msg": "1.29: Use PredictiveTakeEntityToTargetCargoEx instead",
+  "at": "3_game/entities/entityai.c:4856",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "EntityAI",
+  "method": "ServerTakeEntityAsAttachment",
+  "kind": "obsolete",
+  "msg": "1.30: Use ServerTakeEntityToTargetAttachment instead",
+  "at": "3_game/entities/entityai.c:4906",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "EntityAI",
+  "method": "ServerTakeEntityAsAttachmentEx",
+  "kind": "obsolete",
+  "msg": "1.30: Use ServerTakeEntityToTargetAttachmentEx instead",
+  "at": "3_game/entities/entityai.c:4885",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "EntityAI",
+  "method": "ServerTakeEntityToCargo",
+  "kind": "obsolete",
+  "msg": "1.30: Use ServerTakeEntityToTargetCargo instead",
+  "at": "3_game/entities/entityai.c:4848",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "ExplosivesBase",
+  "method": "AddExplosionEffectForSurface",
+  "kind": "obsolete",
+  "msg": "1.30: Handled in AmmoTypes instead",
+  "at": "4_world/entities/explosivesbase.c:386",
+  "calls_129": 2,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/itembase/grenade_base.c:309",
+   "4_world/entities/itembase/grenade_base.c:310"
+  ]
+ },
+ {
+  "class": "ExplosivesBase",
+  "method": "GetParticleExplosionID",
+  "kind": "obsolete",
+  "msg": "1.30: Handled in AmmoTypes instead",
+  "at": "4_world/entities/explosivesbase.c:394",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/explosivesbase.c:77"
+  ]
+ },
+ {
+  "class": "ExplosivesBase",
+  "method": "InitSpecificsExplosionEffectForSurface",
+  "kind": "obsolete",
+  "msg": "1.30: Handled in AmmoTypes instead",
+  "at": "4_world/entities/explosivesbase.c:380",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/explosivesbase.c:409"
+  ]
+ },
+ {
+  "class": "ExplosivesBase",
+  "method": "SetParticleExplosion",
+  "kind": "obsolete",
+  "msg": "1.30: Handled in AmmoTypes instead",
+  "at": "4_world/entities/explosivesbase.c:306",
+  "calls_129": 7,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/explosivesbase.c:48",
+   "4_world/entities/explosivesbase/claymoremine.c:15",
+   "4_world/entities/explosivesbase/plastic_explosive.c:15",
+   "4_world/entities/grenade_base/flashgrenade.c:84"
+  ]
+ },
+ {
+  "class": "GetServersInput",
+  "method": "SetIsDLC",
+  "kind": "removed",
+  "msg": null,
+  "at": "3_game/services/bioslobbyservice.c:645",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "Icon",
+  "method": "GetRelevantInventoryAction",
+  "kind": "obsolete",
+  "msg": "no replacement",
+  "at": "5_mission/gui/inventorynew/containeditems/icon.c:1773",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "InviteMenu",
+  "method": "OnInputPresetChanged",
+  "kind": "removed",
+  "msg": null,
+  "at": "5_mission/gui/invitemenu.c:140",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "ItemBase",
+  "method": "ClearStartItemSoundServer",
+  "kind": "obsolete",
+  "msg": "1.30: No replacement",
+  "at": "4_world/entities/itembase.c:4944",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "ItemBase",
+  "method": "GetHeatIsolationInit",
+  "kind": "obsolete",
+  "msg": "1.30: No replacement",
+  "at": "4_world/entities/itembase.c:4938",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/itembase.c:231"
+  ]
+ },
+ {
+  "class": "Man",
+  "method": "JunctureTakeEntityAsAttachment",
+  "kind": "obsolete",
+  "msg": "1.30: Use JunctureTakeEntityToTargetAttachment instead",
+  "at": "3_game/entities/man.c:901",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "3_game/entities/man.c:459"
+  ]
+ },
+ {
+  "class": "Man",
+  "method": "JunctureTakeEntityAsAttachmentEx",
+  "kind": "obsolete",
+  "msg": "1.30: Use JunctureTakeEntityToTargetAttachmentEx instead",
+  "at": "3_game/entities/man.c:918",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "3_game/entities/man.c:498"
+  ]
+ },
+ {
+  "class": "Man",
+  "method": "JunctureTakeEntityToCargo",
+  "kind": "obsolete",
+  "msg": "1.30: Use JunctureTakeEntityToTargetCargo instead",
+  "at": "3_game/entities/man.c:884",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "3_game/entities/man.c:420"
+  ]
+ },
+ {
+  "class": "MiscGameplayFunctions",
+  "method": "GenerateAINoiseAtPosition",
+  "kind": "obsolete",
+  "msg": "Use MiscGameplayFunctions.GenerateAINoiseAtPositionEx instead!",
+  "at": "4_world/static/miscgameplayfunctions.c:2072",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/firearms/flaresimulation.c:138"
+  ]
+ },
+ {
+  "class": "ModInfo",
+  "method": "GetDLCImage",
+  "kind": "obsolete",
+  "msg": "1.30: no replacement",
+  "at": "3_game/modinfo.c:25",
+  "calls_129": 2,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "5_mission/gui/newui/mainmenu/mainmenudata.c:104",
+   "5_mission/gui/newui/mainmenu/mainmenudata.c:118"
+  ]
+ },
+ {
+  "class": "NoiseAIEvaluate",
+  "method": "GetNoiseReduction",
+  "kind": "obsolete",
+  "msg": "Use GetNoiseReductionEx instead!",
+  "at": "4_world/static/sensesaievaluate.c:92",
+  "calls_129": 23,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/classes/useractionscomponent/actions/interact/actionclosedoors.c:70",
+   "4_world/classes/useractionscomponent/actions/interact/actionclosefence.c:60",
+   "4_world/classes/useractionscomponent/actions/interact/actionopendoors.c:81",
+   "4_world/classes/useractionscomponent/actions/interact/actionopenfence.c:60"
+  ]
+ },
+ {
+  "class": "OptionsMenu",
+  "method": "ToggleDependentOptions",
+  "kind": "obsolete",
+  "msg": "1.29: No replacement",
+  "at": "5_mission/gui/newui/options/optionsmenu.c:917",
+  "calls_129": 4,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "5_mission/gui/newui/options/optionsmenu.c:544",
+   "5_mission/gui/newui/options/optionsmenu.c:545",
+   "5_mission/gui/newui/options/optionsmenu.c:546",
+   "5_mission/gui/newui/options/optionsmenu.c:548"
+  ]
+ },
+ {
+  "class": "OptionsMenuControls",
+  "method": "ToggleDependentOptions",
+  "kind": "obsolete",
+  "msg": "1.29: No replacement",
+  "at": "5_mission/gui/newui/options/optionsmenucontrols.c:932",
+  "calls_129": 4,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "5_mission/gui/newui/options/optionsmenu.c:544",
+   "5_mission/gui/newui/options/optionsmenu.c:545",
+   "5_mission/gui/newui/options/optionsmenu.c:546",
+   "5_mission/gui/newui/options/optionsmenu.c:548"
+  ]
+ },
+ {
+  "class": "OptionsMenuGame",
+  "method": "ToggleDependentOptions",
+  "kind": "obsolete",
+  "msg": "1.29: No replacement",
+  "at": "5_mission/gui/newui/options/optionsmenugame.c:714",
+  "calls_129": 4,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "5_mission/gui/newui/options/optionsmenu.c:544",
+   "5_mission/gui/newui/options/optionsmenu.c:545",
+   "5_mission/gui/newui/options/optionsmenu.c:546",
+   "5_mission/gui/newui/options/optionsmenu.c:548"
+  ]
+ },
+ {
+  "class": "OptionsMenuSounds",
+  "method": "ToggleDependentOptions",
+  "kind": "obsolete",
+  "msg": "1.29: No replacement",
+  "at": "5_mission/gui/newui/options/optionsmenusounds.c:419",
+  "calls_129": 4,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "5_mission/gui/newui/options/optionsmenu.c:544",
+   "5_mission/gui/newui/options/optionsmenu.c:545",
+   "5_mission/gui/newui/options/optionsmenu.c:546",
+   "5_mission/gui/newui/options/optionsmenu.c:548"
+  ]
+ },
+ {
+  "class": "OptionsMenuVideo",
+  "method": "ToggleDependentOptions",
+  "kind": "obsolete",
+  "msg": "1.29: No replacement",
+  "at": "5_mission/gui/newui/options/optionsmenuvideo.c:674",
+  "calls_129": 4,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "5_mission/gui/newui/options/optionsmenu.c:544",
+   "5_mission/gui/newui/options/optionsmenu.c:545",
+   "5_mission/gui/newui/options/optionsmenu.c:546",
+   "5_mission/gui/newui/options/optionsmenu.c:548"
+  ]
+ },
+ {
+  "class": "PluginDiagMenuClient",
+  "method": "UpdateUndegroundDiag",
+  "kind": "removed",
+  "msg": null,
+  "at": "4_world/plugins/pluginbase/plugindiagmenu/plugindiagmenuclient.c:631",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/plugins/pluginbase/plugindiagmenu/plugindiagmenuclient.c:325"
+  ]
+ },
+ {
+  "class": "PluginTransmissionAgents",
+  "method": "GrowDuringAntibioticsAttack",
+  "kind": "obsolete",
+  "msg": "replaced by GrowDuringMedicalDrugsAttack",
+  "at": "4_world/plugins/pluginbase/plugintransmissionagents.c:685",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "ScriptConsole",
+  "method": "SelectTabByButton",
+  "kind": "removed",
+  "msg": null,
+  "at": "5_mission/gui/scriptconsole.c:409",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "5_mission/gui/scriptconsole.c:325"
+  ]
+ },
+ {
+  "class": "ScriptConsoleItemsTab",
+  "method": "GetItemsClasses",
+  "kind": "removed",
+  "msg": null,
+  "at": "5_mission/gui/scriptconsoleitemstab.c:1547",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "5_mission/gui/scriptconsoleitemstab.c:1575"
+  ]
+ },
+ {
+  "class": "ServerBrowserMenuNew",
+  "method": "GetOfficalTab",
+  "kind": "removed",
+  "msg": null,
+  "at": "5_mission/gui/newui/serverbrowsermenu/serverbrowsermenunew.c:931",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "ServerBrowserMenuNew",
+  "method": "GetTabberUI",
+  "kind": "removed",
+  "msg": null,
+  "at": "5_mission/gui/newui/serverbrowsermenu/serverbrowsermenunew.c:926",
+  "calls_129": 2,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "5_mission/gui/newui/serverbrowsermenu/serverbrowsermenunew.c:653",
+   "5_mission/gui/newui/serverbrowsermenu/serverbrowsermenunew.c:654"
+  ]
+ },
+ {
+  "class": "ServerBrowserMenuNew",
+  "method": "SwitchToOfficalTab",
+  "kind": "removed",
+  "msg": null,
+  "at": "5_mission/gui/newui/serverbrowsermenu/serverbrowsermenunew.c:651",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "ServerBrowserTab",
+  "method": "IsLoadingServers",
+  "kind": "removed",
+  "msg": null,
+  "at": "5_mission/gui/newui/serverbrowsermenu/serverbrowsertab.c:135",
+  "calls_129": 0,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": []
+ },
+ {
+  "class": "StaticConstructionMethods",
+  "method": "SpawnConstructionMaterialPiles",
+  "kind": "obsolete",
+  "msg": "1.30: Use SpawnConstructionMaterialPilesEx instead",
+  "at": "4_world/classes/constructionbase.c:1908",
+  "calls_129": 2,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/classes/basebuilding/construction.c:735",
+   "4_world/entities/itembase/tentbase/shelter.c:34"
+  ]
+ },
+ {
+  "class": "Surface",
+  "method": "GetStepsParticleID",
+  "kind": "obsolete",
+  "msg": "1.30: use SurfaceInfo.GetStepParticleId directly",
+  "at": "4_world/static/surface.c:64",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/dayzplayerimplement.c:3255"
+  ]
+ },
+ {
+  "class": "UndergroundStash",
+  "method": "PlaceOnGround",
+  "kind": "obsolete",
+  "msg": "1.30: No replacement",
+  "at": "4_world/entities/undergroundstash.c:51",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/classes/useractionscomponent/actions/continuous/actiondiginstash.c:165"
+  ]
+ },
+ {
+  "class": "VicinityItemManager",
+  "method": "GetFixedHeadHeightAdjustment",
+  "kind": "obsolete",
+  "msg": "use MiscGameplayFunctions.GetPlayerHeadHeight instead",
+  "at": "5_mission/gui/inventorynew/vicinityitemmanager.c:480",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "5_mission/gui/inventorynew/vicinityitemmanager.c:219"
+  ]
+ },
+ {
+  "class": "WeaponDebug",
+  "method": "CycleDebugMode",
+  "kind": "removed",
+  "msg": null,
+  "at": "4_world/classes/weapondebug.c:146",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/classes/weapondebug.c:124"
+  ]
+ },
+ {
+  "class": "WeaponDebug",
+  "method": "DrawBarrelMemoryPoints",
+  "kind": "removed",
+  "msg": null,
+  "at": "4_world/classes/weapondebug.c:206",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/classes/weapondebug.c:194"
+  ]
+ },
+ {
+  "class": "WeaponDebug",
+  "method": "DrawEyePoint",
+  "kind": "removed",
+  "msg": null,
+  "at": "4_world/classes/weapondebug.c:266",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/classes/weapondebug.c:193"
+  ]
+ },
+ {
+  "class": "WeaponDebug",
+  "method": "DrawLineOfFire",
+  "kind": "removed",
+  "msg": null,
+  "at": "4_world/classes/weapondebug.c:216",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/classes/weapondebug.c:171"
+  ]
+ },
+ {
+  "class": "WeaponDebug",
+  "method": "DrawLineOfFireCameraHybrid",
+  "kind": "removed",
+  "msg": null,
+  "at": "4_world/classes/weapondebug.c:354",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/classes/weapondebug.c:181"
+  ]
+ },
+ {
+  "class": "WeaponDebug",
+  "method": "GetEyePointPosition",
+  "kind": "removed",
+  "msg": null,
+  "at": "4_world/classes/weapondebug.c:272",
+  "calls_129": 1,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/classes/weapondebug.c:268"
+  ]
+ },
+ {
+  "class": "World",
+  "method": "Is3rdPersonDisabled",
+  "kind": "obsolete",
+  "msg": "1.30: replaced by World::GetThirdPersonViewMode returning current thrid person mode",
+  "at": "3_game/global/world.c:291",
+  "calls_129": 3,
+  "calls_130": 0,
+  "sample_130": [],
+  "sample_129": [
+   "4_world/entities/dayzplayerimplement.c:192",
+   "4_world/entities/dayzplayerimplement.c:2026",
+   "4_world/plugins/pluginbase/plugindeveloper.c:752"
+  ]
+ },
+ {
+  "class": "ActionBuildPart",
+  "method": "SetBuildingAnimation",
+  "kind": "obsolete",
+  "msg": "Use 'SetBuildingAnimationEx' instead",
+  "at": "4_world/classes/useractionscomponent/actions/continuous/actionbuildpart.c:370",
+  "calls_129": 2,
+  "calls_130": 1,
+  "sample_130": [
+   "4_world/classes/useractionscomponent/actions/continuous/actiondismantlepart.c:120"
+  ],
+  "sample_129": [
+   "4_world/classes/useractionscomponent/actions/continuous/actionbuildpart.c:148",
+   "4_world/classes/useractionscomponent/actions/continuous/actiondismantlepart.c:117"
+  ]
+ },
+ {
+  "class": "CachedEquipmentItemAttribute",
+  "method": "HasParent",
+  "kind": "removed",
+  "msg": null,
+  "at": "3_game/entities/cachedequipmentstoragebase.c:19",
+  "calls_129": 1,
+  "calls_130": 1,
+  "sample_130": [
+   "3_game/anim/animphysagent.c:123"
+  ],
+  "sample_129": [
+   "3_game/anim/animphysagent.c:123"
+  ]
+ },
+ {
+  "class": "CarScript",
+  "method": "CheckVitalItem",
+  "kind": "obsolete",
+  "msg": "1.30: use Transport::CheckVitalItemCallback instead",
+  "at": "4_world/entities/vehicles/carscript.c:2951",
+  "calls_129": 3,
+  "calls_130": 1,
+  "sample_130": [
+   "4_world/entities/vehicles/carscript.c:2973"
+  ],
+  "sample_129": [
+   "4_world/entities/vehicles/carscript.c:996",
+   "4_world/entities/vehicles/carscript.c:997",
+   "4_world/entities/vehicles/carscript.c:2533"
+  ]
+ },
+ {
+  "class": "ConstructionActionData",
+  "method": "GetSlotId",
+  "kind": "obsolete",
+  "msg": "1.30: Unsafe, overridden ActionData used in-system instead",
+  "at": "4_world/classes/basebuilding/constructionactiondata.c:623",
+  "calls_129": 31,
+  "calls_130": 27,
+  "sample_130": [
+   "3_game/entities/entityai.c:4312",
+   "3_game/entities/entityai.c:4372",
+   "3_game/entities/entityai.c:4426",
+   "3_game/entities/man.c:545",
+   "3_game/systems/inventory/humaninventory.c:508",
+   "4_world/classes/environment/environment.c:2048"
+  ],
+  "sample_129": [
+   "3_game/entities/entityai.c:4248",
+   "3_game/entities/entityai.c:4308",
+   "3_game/entities/entityai.c:4362",
+   "3_game/entities/man.c:651"
+  ]
+ },
+ {
+  "class": "ConstructionActionData",
+  "method": "SetSlotId",
+  "kind": "obsolete",
+  "msg": "1.30: Unsafe, overridden ActionData used in-system instead",
+  "at": "4_world/classes/basebuilding/constructionactiondata.c:617",
+  "calls_129": 3,
+  "calls_130": 1,
+  "sample_130": [
+   "4_world/entities/gardenbase.c:170"
+  ],
+  "sample_129": [
+   "4_world/classes/useractionscomponent/actions/singleuse/actionattachtoconstruction.c:36",
+   "4_world/classes/useractionscomponent/actions/singleuse/actionattachtoconstruction.c:55",
+   "4_world/entities/gardenbase.c:170"
+  ]
+ },
+ {
+  "class": "ContentDLC",
+  "method": "OnChange",
+  "kind": "removed",
+  "msg": null,
+  "at": "3_game/services/contentdlc.c:49",
+  "calls_129": 23,
+  "calls_130": 23,
+  "sample_130": [
+   "3_game/tools/uiscriptedmenu.c:484",
+   "4_world/plugins/pluginbase/plugindayzinfecteddebug.c:14",
+   "4_world/plugins/pluginbase/plugindayzinfecteddebug.c:15",
+   "4_world/plugins/pluginbase/plugindayzplayerdebug.c:64",
+   "4_world/plugins/pluginbase/plugindayzplayerdebug.c:65",
+   "4_world/plugins/pluginbase/plugindayzplayerdebug.c:1027"
+  ],
+  "sample_129": [
+   "3_game/tools/uiscriptedmenu.c:484",
+   "4_world/plugins/pluginbase/plugindayzinfecteddebug.c:14",
+   "4_world/plugins/pluginbase/plugindayzinfecteddebug.c:15",
+   "4_world/plugins/pluginbase/plugindayzplayerdebug.c:64"
+  ]
+ },
+ {
+  "class": "DayZPlayerImplement",
+  "method": "GetSurfaceType",
+  "kind": "obsolete",
+  "msg": "1.30: uses CGame GetSurfaceInfo* methods instead",
+  "at": "4_world/entities/dayzplayerimplement.c:4121",
+  "calls_129": 14,
+  "calls_130": 21,
+  "sample_130": [
+   "3_game/entities/dayzanimal.c:365",
+   "3_game/global/game.c:1276",
+   "3_game/global/game.c:1282",
+   "3_game/global/game.c:1289",
+   "4_world/classes/dust/dusteffectceilinghandler.c:39",
+   "4_world/classes/dust/dusteffectsmanager.c:267"
+  ],
+  "sample_129": [
+   "3_game/entities/dayzanimal.c:365",
+   "4_world/classes/environment/environment.c:1965",
+   "4_world/classes/soundevents/replacesoundevents/events/actionsurfaceevents.c:33",
+   "4_world/classes/soundevents/replacesoundevents/events/actionsurfaceevents.c:72"
+  ]
+ },
+ {
+  "class": "DayZPlayerImplementMeleeCombat",
+  "method": "IsObstructed",
+  "kind": "obsolete",
+  "msg": "replaced by MeleeTargeting.IsMeleeTargetObstructed",
+  "at": "4_world/entities/dayzplayerimplementmeleecombat.c:670",
+  "calls_129": 1,
+  "calls_130": 1,
+  "sample_130": [
+   "5_mission/gui/inventorynew/vicinityitemmanager.c:406"
+  ],
+  "sample_129": [
+   "5_mission/gui/inventorynew/vicinityitemmanager.c:399"
+  ]
+ },
+ {
+  "class": "EntityAI",
+  "method": "CanDisplayAttachmentSlot",
+  "kind": "obsolete",
+  "msg": "1.30: Use CanDisplayAttachmentSlot(int slot_id)instead",
+  "at": "3_game/entities/entityai.c:4918",
+  "calls_129": 11,
+  "calls_130": 15,
+  "sample_130": [
+   "3_game/entities/entityai.c:1804",
+   "3_game/entities/entityai.c:4918",
+   "3_game/entities/entityai.c:4921",
+   "4_world/classes/basebuilding/constructionactiondata.c:489",
+   "4_world/entities/game/super/building.c:254",
+   "4_world/entities/itembase/trapspawnbase.c:718"
+  ],
+  "sample_129": [
+   "3_game/entities/entityai.c:1768",
+   "4_world/classes/basebuilding/constructionactiondata.c:285",
+   "4_world/entities/itembase/trapspawnbase.c:718",
+   "4_world/entities/itembase/vehiclebattery.c:123"
+  ]
+ },
+ {
+  "class": "GameInventory",
+  "method": "TakeEntityAsAttachment",
+  "kind": "obsolete",
+  "msg": "1.30: Use TakeEntityAsTargetAttachment instead",
+  "at": "3_game/systems/inventory/inventory.c:1382",
+  "calls_129": 7,
+  "calls_130": 5,
+  "sample_130": [
+   "3_game/entities/entityai.c:4897",
+   "3_game/entities/entityai.c:4899",
+   "3_game/entities/entityai.c:4904",
+   "3_game/entities/entityai.c:4909",
+   "3_game/entities/man.c:911"
+  ],
+  "sample_129": [
+   "3_game/entities/entityai.c:2075",
+   "3_game/entities/entityai.c:2077",
+   "3_game/entities/entityai.c:2081",
+   "3_game/entities/entityai.c:2085"
+  ]
+ },
+ {
+  "class": "GameInventory",
+  "method": "TakeEntityAsAttachmentEx",
+  "kind": "obsolete",
+  "msg": "1.30: Use TakeEntityAsTargetAttachmentEx instead",
+  "at": "3_game/systems/inventory/inventory.c:1374",
+  "calls_129": 7,
+  "calls_130": 5,
+  "sample_130": [
+   "3_game/entities/entityai.c:4876",
+   "3_game/entities/entityai.c:4878",
+   "3_game/entities/entityai.c:4883",
+   "3_game/entities/entityai.c:4888",
+   "3_game/entities/man.c:928"
+  ],
+  "sample_129": [
+   "3_game/entities/entityai.c:2008",
+   "3_game/entities/entityai.c:2010",
+   "3_game/entities/entityai.c:2014",
+   "3_game/entities/entityai.c:2018"
+  ]
+ },
+ {
+  "class": "GameInventory",
+  "method": "TakeEntityToCargo",
+  "kind": "obsolete",
+  "msg": "1.30: Use TakeEntityToTargetCargo instead",
+  "at": "3_game/systems/inventory/inventory.c:1345",
+  "calls_129": 5,
+  "calls_130": 5,
+  "sample_130": [
+   "3_game/entities/entityai.c:4839",
+   "3_game/entities/entityai.c:4841",
+   "3_game/entities/entityai.c:4846",
+   "3_game/entities/entityai.c:4851",
+   "3_game/entities/man.c:894"
+  ],
+  "sample_129": [
+   "3_game/entities/entityai.c:1944",
+   "3_game/entities/entityai.c:1946",
+   "3_game/entities/entityai.c:1950",
+   "3_game/entities/entityai.c:1954"
+  ]
+ },
+ {
+  "class": "GameInventory",
+  "method": "TakeEntityToCargoEx",
+  "kind": "obsolete",
+  "msg": "1.30: Use TakeEntityToTargetCargoEx instead",
+  "at": "3_game/systems/inventory/inventory.c:1357",
+  "calls_129": 5,
+  "calls_130": 3,
+  "sample_130": [
+   "3_game/entities/entityai.c:4860",
+   "3_game/entities/entityai.c:4862",
+   "3_game/entities/entityai.c:4867"
+  ],
+  "sample_129": [
+   "3_game/entities/entityai.c:1978",
+   "3_game/entities/entityai.c:1980",
+   "3_game/entities/entityai.c:1984",
+   "3_game/systems/inventory/humaninventory.c:297"
+  ]
+ },
+ {
+  "class": "HudDebugWinCharAgents",
+  "method": "DebugGrowAgentsRequest",
+  "kind": "removed",
+  "msg": null,
+  "at": "5_mission/gui/scriptshuddebug/huddebugwincharagents.c:170",
+  "calls_129": 2,
+  "calls_130": 2,
+  "sample_130": [
+   "5_mission/gui/scriptshuddebug/huddebugwincharagents.c:56",
+   "5_mission/gui/scriptshuddebug/huddebugwincharagents.c:61"
+  ],
+  "sample_129": [
+   "5_mission/gui/scriptshuddebug/huddebugwincharagents.c:152",
+   "5_mission/gui/scriptshuddebug/huddebugwincharagents.c:158"
+  ]
+ },
+ {
+  "class": "HudDebugWinCharAgents",
+  "method": "FitWindow",
+  "kind": "removed",
+  "msg": null,
+  "at": "5_mission/gui/scriptshuddebug/huddebugwincharagents.c:228",
+  "calls_129": 4,
+  "calls_130": 3,
+  "sample_130": [
+   "5_mission/gui/scriptshuddebug/huddebugwincharlevels.c:12",
+   "5_mission/gui/scriptshuddebug/huddebugwincharlevels.c:113",
+   "5_mission/gui/scriptshuddebug/huddebugwincharmodifiers.c:179"
+  ],
+  "sample_129": [
+   "5_mission/gui/scriptshuddebug/huddebugwincharlevels.c:12",
+   "5_mission/gui/scriptshuddebug/huddebugwincharlevels.c:115",
+   "5_mission/gui/scriptshuddebug/huddebugwincharmodifiers.c:179",
+   "5_mission/gui/scriptshuddebug/huddebugwincharstats.c:121"
+  ]
+ },
+ {
+  "class": "HudDebugWinCharStats",
+  "method": "FitWindow",
+  "kind": "obsolete",
+  "msg": "no replacement",
+  "at": "5_mission/gui/scriptshuddebug/huddebugwincharstats.c:306",
+  "calls_129": 4,
+  "calls_130": 3,
+  "sample_130": [
+   "5_mission/gui/scriptshuddebug/huddebugwincharlevels.c:12",
+   "5_mission/gui/scriptshuddebug/huddebugwincharlevels.c:113",
+   "5_mission/gui/scriptshuddebug/huddebugwincharmodifiers.c:179"
+  ],
+  "sample_129": [
+   "5_mission/gui/scriptshuddebug/huddebugwincharlevels.c:12",
+   "5_mission/gui/scriptshuddebug/huddebugwincharlevels.c:115",
+   "5_mission/gui/scriptshuddebug/huddebugwincharmodifiers.c:179",
+   "5_mission/gui/scriptshuddebug/huddebugwincharstats.c:121"
+  ]
+ },
+ {
+  "class": "InviteMenu",
+  "method": "Cancel",
+  "kind": "removed",
+  "msg": null,
+  "at": "5_mission/gui/invitemenu.c:131",
+  "calls_129": 15,
+  "calls_130": 14,
+  "sample_130": [
+   "4_world/classes/emotemanager.c:307",
+   "4_world/classes/emotemanager.c:432",
+   "4_world/classes/useractionscomponent/animatedactionbase.c:381",
+   "4_world/classes/useractionscomponent/actioncomponents/cabase.c:36",
+   "4_world/classes/useractionscomponent/actions/actioncontinuousbase.c:114",
+   "4_world/classes/useractionscomponent/actions/singleuse/actionunfoldmap.c:231"
+  ],
+  "sample_129": [
+   "4_world/classes/emotemanager.c:327",
+   "4_world/classes/emotemanager.c:452",
+   "4_world/classes/useractionscomponent/animatedactionbase.c:368",
+   "4_world/classes/useractionscomponent/actioncomponents/cabase.c:36"
+  ]
+ },
+ {
+  "class": "InviteMenu",
+  "method": "OnInputDeviceChanged",
+  "kind": "removed",
+  "msg": null,
+  "at": "5_mission/gui/invitemenu.c:147",
+  "calls_129": 15,
+  "calls_130": 17,
+  "sample_130": [
+   "5_mission/gui/connectiondialogue.c:45",
+   "5_mission/gui/controlsxboxnew.c:224",
+   "5_mission/gui/digitalcodelockui.c:584",
+   "5_mission/gui/ingamemenuxbox.c:714",
+   "5_mission/gui/itemdropwarningmenu.c:47",
+   "5_mission/gui/logoutmenu.c:80"
+  ],
+  "sample_129": [
+   "5_mission/gui/connectiondialogue.c:45",
+   "5_mission/gui/controlsxboxnew.c:224",
+   "5_mission/gui/ingamemenuxbox.c:714",
+   "5_mission/gui/invitemenu.c:65"
+  ]
+ },
+ {
+  "class": "InviteMenu",
+  "method": "UpdateControlsElementVisibility",
+  "kind": "removed",
+  "msg": null,
+  "at": "5_mission/gui/invitemenu.c:161",
+  "calls_129": 23,
+  "calls_130": 22,
+  "sample_130": [
+   "5_mission/gui/connectiondialogue.c:75",
+   "5_mission/gui/controlsxboxnew.c:67",
+   "5_mission/gui/controlsxboxnew.c:93",
+   "5_mission/gui/controlsxboxnew.c:204",
+   "5_mission/gui/itemdropwarningmenu.c:90",
+   "5_mission/gui/logoutmenu.c:217"
+  ],
+  "sample_129": [
+   "5_mission/gui/connectiondialogue.c:75",
+   "5_mission/gui/controlsxboxnew.c:67",
+   "5_mission/gui/controlsxboxnew.c:93",
+   "5_mission/gui/controlsxboxnew.c:204"
+  ]
+ },
+ {
+  "class": "InviteMenu",
+  "method": "UpdateControlsElements",
+  "kind": "removed",
+  "msg": null,
+  "at": "5_mission/gui/invitemenu.c:153",
+  "calls_129": 49,
+  "calls_130": 48,
+  "sample_130": [
+   "5_mission/gui/controlsxboxnew.c:66",
+   "5_mission/gui/controlsxboxnew.c:203",
+   "5_mission/gui/controlsxboxnew.c:382",
+   "5_mission/gui/gesturesmenu.c:186",
+   "5_mission/gui/gesturesmenu.c:328",
+   "5_mission/gui/ingamemenuxbox.c:78"
+  ],
+  "sample_129": [
+   "5_mission/gui/controlsxboxnew.c:66",
+   "5_mission/gui/controlsxboxnew.c:203",
+   "5_mission/gui/controlsxboxnew.c:382",
+   "5_mission/gui/gesturesmenu.c:186"
+  ]
+ },
+ {
+  "class": "ItemBase",
+  "method": "GetDryingIncrement",
+  "kind": "obsolete",
+  "msg": "1.30: replaced by GetDryingIncrement taking enum/int arguments",
+  "at": "4_world/entities/itembase.c:3668",
+  "calls_129": 6,
+  "calls_130": 6,
+  "sample_130": [
+   "4_world/classes/environment/environment.c:1169",
+   "4_world/classes/environment/environment.c:1171",
+   "4_world/entities/itembase.c:4581",
+   "4_world/entities/itembase.c:4587",
+   "4_world/systems/universaltemperaturesource/universaltemperaturesourcelambdabaseimpl.c:24",
+   "4_world/systems/universaltemperaturesource/universaltemperaturesourcelambdabaseimpl.c:39"
+  ],
+  "sample_129": [
+   "4_world/classes/environment/environment.c:888",
+   "4_world/classes/environment/environment.c:890",
+   "4_world/entities/itembase.c:4580",
+   "4_world/entities/itembase.c:4586"
+  ]
+ },
+ {
+  "class": "ItemBase",
+  "method": "GetSoakingIncrement",
+  "kind": "obsolete",
+  "msg": "1.30: replaced by GetSoakingIncrement taking enum/int arguments",
+  "at": "4_world/entities/itembase.c:3678",
+  "calls_129": 3,
+  "calls_130": 3,
+  "sample_130": [
+   "4_world/classes/environment/environment.c:1081",
+   "4_world/classes/environment/environment.c:1221",
+   "4_world/classes/environment/environment.c:1231"
+  ],
+  "sample_129": [
+   "4_world/classes/environment/environment.c:780",
+   "4_world/classes/environment/environment.c:958",
+   "4_world/classes/environment/environment.c:968"
+  ]
+ },
+ {
+  "class": "Man",
+  "method": "TakeEntityAsAttachmentExImpl",
+  "kind": "obsolete",
+  "msg": "1.30: Use TakeEntityToTargetAttachmentExImpl instead",
+  "at": "3_game/entities/man.c:924",
+  "calls_129": 4,
+  "calls_130": 1,
+  "sample_130": [
+   "3_game/entities/man.c:921"
+  ],
+  "sample_129": [
+   "3_game/entities/man.c:486",
+   "3_game/entities/man.c:500",
+   "3_game/entities/man.c:505",
+   "3_game/entities/man.c:510"
+  ]
+ },
+ {
+  "class": "Man",
+  "method": "TakeEntityAsAttachmentImpl",
+  "kind": "obsolete",
+  "msg": "1.30: Use TakeEntityToTargetAttachmentImpl instead",
+  "at": "3_game/entities/man.c:907",
+  "calls_129": 5,
+  "calls_130": 1,
+  "sample_130": [
+   "3_game/entities/man.c:904"
+  ],
+  "sample_129": [
+   "3_game/entities/man.c:447",
+   "3_game/entities/man.c:461",
+   "3_game/entities/man.c:466",
+   "3_game/entities/man.c:471"
+  ]
+ },
+ {
+  "class": "Man",
+  "method": "TakeEntityToCargoImpl",
+  "kind": "obsolete",
+  "msg": "1.30: Use TakeEntityToTargetCargoImpl instead",
+  "at": "3_game/entities/man.c:890",
+  "calls_129": 5,
+  "calls_130": 1,
+  "sample_130": [
+   "3_game/entities/man.c:887"
+  ],
+  "sample_129": [
+   "3_game/entities/man.c:408",
+   "3_game/entities/man.c:422",
+   "3_game/entities/man.c:427",
+   "3_game/entities/man.c:432"
+  ]
+ },
+ {
+  "class": "MiscGameplayFunctions",
+  "method": "BuildCondition",
+  "kind": "obsolete",
+  "msg": "Obsolete collision checking method, use the other 'BuildCondition'",
+  "at": "4_world/static/miscgameplayfunctions.c:2066",
+  "calls_129": 1,
+  "calls_130": 1,
+  "sample_130": [
+   "4_world/static/miscgameplayfunctions.c:988"
+  ],
+  "sample_129": [
+   "4_world/static/miscgameplayfunctions.c:884"
+  ]
+ },
+ {
+  "class": "MiscGameplayFunctions",
+  "method": "ComplexBuildCollideCheckClient",
+  "kind": "obsolete",
+  "msg": "Obsolete collision checking method, use the other 'ComplexBuildCollideCheckClient'",
+  "at": "4_world/static/miscgameplayfunctions.c:2060",
+  "calls_129": 2,
+  "calls_130": 4,
+  "sample_130": [
+   "4_world/classes/useractionscomponent/actions/continuous/actionbuildpart.c:115",
+   "4_world/classes/useractionscomponent/actions/continuous/actionbuildpart.c:451",
+   "4_world/classes/useractionscomponent/actions/instant/actionbuildpartinstant.c:78",
+   "4_world/classes/useractionscomponent/actions/interact/actionbuildshelter.c:122"
+  ],
+  "sample_129": [
+   "4_world/classes/useractionscomponent/actions/continuous/actionbuildpart.c:80",
+   "4_world/classes/useractionscomponent/actions/interact/actionbuildshelter.c:121"
+  ]
+ },
+ {
+  "class": "OptionsMenuControls",
+  "method": "InitDependentOptionsVisibility",
+  "kind": "obsolete",
+  "msg": "1.29: No replacement",
+  "at": "5_mission/gui/newui/options/optionsmenucontrols.c:935",
+  "calls_129": 1,
+  "calls_130": 1,
+  "sample_130": [
+   "5_mission/gui/newui/options/optionsmenugame.c:144"
+  ],
+  "sample_129": [
+   "5_mission/gui/newui/options/optionsmenugame.c:143"
+  ]
+ },
+ {
+  "class": "OptionsMenuSounds",
+  "method": "InitDependentOptionsVisibility",
+  "kind": "obsolete",
+  "msg": "1.29: No replacement",
+  "at": "5_mission/gui/newui/options/optionsmenusounds.c:422",
+  "calls_129": 1,
+  "calls_130": 1,
+  "sample_130": [
+   "5_mission/gui/newui/options/optionsmenugame.c:144"
+  ],
+  "sample_129": [
+   "5_mission/gui/newui/options/optionsmenugame.c:143"
+  ]
+ },
+ {
+  "class": "OptionsMenuVideo",
+  "method": "InitDependentOptionsVisibility",
+  "kind": "obsolete",
+  "msg": "1.29: No replacement",
+  "at": "5_mission/gui/newui/options/optionsmenuvideo.c:677",
+  "calls_129": 1,
+  "calls_130": 1,
+  "sample_130": [
+   "5_mission/gui/newui/options/optionsmenugame.c:144"
+  ],
+  "sample_129": [
+   "5_mission/gui/newui/options/optionsmenugame.c:143"
+  ]
+ },
+ {
+  "class": "Surface",
+  "method": "GetWheelParticleID",
+  "kind": "obsolete",
+  "msg": "1.30: use SurfaceInfo.GetWheelParticleId directly",
+  "at": "4_world/static/surface.c:70",
+  "calls_129": 2,
+  "calls_130": 1,
+  "sample_130": [
+   "4_world/entities/effects/wheelsmoke.c:35"
+  ],
+  "sample_129": [
+   "4_world/entities/effects/wheelsmoke.c:11",
+   "4_world/entities/vehicles/carscript.c:1180"
+  ]
+ },
+ {
+  "class": "Weather",
+  "method": "GetNoiseReductionByWeather",
+  "kind": "obsolete",
+  "msg": "Use Weather.GetNoiseReductionByWeatherEx instead!",
+  "at": "3_game/weather.c:454",
+  "calls_129": 6,
+  "calls_130": 1,
+  "sample_130": [
+   "4_world/static/sensesaievaluate.c:96"
+  ],
+  "sample_129": [
+   "3_game/dayzgame.c:3517",
+   "3_game/dayzgame.c:3692",
+   "3_game/dayzgame.c:3730",
+   "3_game/entities/dayzanimal.c:338"
+  ]
+ },
+ {
+  "class": "World",
+  "method": "UpdatePathgraphDoorByAnimationSourceName",
+  "kind": "obsolete",
+  "msg": "1.30: Use UpdatePathgraphEntityState",
+  "at": "3_game/global/world.c:122",
+  "calls_129": 1,
+  "calls_130": 1,
+  "sample_130": [
+   "4_world/entities/building/underground/entrance/land_underground_entrance.c:149"
+  ],
+  "sample_129": [
+   "4_world/entities/building/underground/entrance/land_underground_entrance.c:141"
+  ]
+ }
+]

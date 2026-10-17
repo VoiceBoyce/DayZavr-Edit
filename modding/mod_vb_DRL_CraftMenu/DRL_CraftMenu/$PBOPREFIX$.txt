@@ -1,0 +1,7 @@
+//<'DRL_CraftMenu.pbo' properties via Mikero's dos tools, dll version 10.13>
+prefix=DRL_CraftMenu;
+Mikero=DePbo.dll.10.04;
+product=dayz ugc;
+version=26012120;
+//PboType=Arma Addon;
+//</properties>

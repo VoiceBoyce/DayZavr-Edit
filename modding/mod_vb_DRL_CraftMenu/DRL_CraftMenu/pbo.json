@@ -1,0 +1,21 @@
+{
+    "compress": {
+        "exclude": [
+        ],
+        "include": [
+            "\\.txt$",
+            "\\.xml$",
+            "\\.csv$"
+        ]
+    },
+    "headers": [
+        {
+            "name": "product",
+            "value": "dayz ugc"
+        },
+        {
+            "name": "prefix",
+            "value": "DRL_CraftMenu"
+        }
+    ]
+}

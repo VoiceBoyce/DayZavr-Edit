@@ -1,0 +1,175 @@
+ButtonWidgetClass CategorySelectionButton {
+ visible 1
+ clipchildren 0
+ color 0.361 0.235 0.094 1
+ position 0 0
+ size 1 40
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 1
+ style ServerBrowserCollapse
+ {
+  PanelWidgetClass FonButtonPanelWidget {
+   clipchildren 1
+   ignorepointer 1
+   color 0.114 0.075 0.047 0.196
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   style rover_sim_colorable
+  }
+  PanelWidgetClass BoardSelectionButtonWidget {
+   visible 1
+   ignorepointer 1
+   color 0.157 0.125 0.09 0.294
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   style dashed
+   "no focus" 0
+   {
+    WrapSpacerWidgetClass CategoryWrapSpacerWidget {
+     ignorepointer 1
+     size 1 0.99
+     halign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     Padding 0
+     Margin 0
+     {
+      PanelWidgetClass AllCategoryColorWidget {
+       visible 1
+       ignorepointer 1
+       color 0.537 0.357 0.141 1
+       size 0.01 1
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       style rover_sim_colorable
+      }
+      PanelWidgetClass CategoryPreviewPanelWidget {
+       visible 1
+       ignorepointer 1
+       position 0 0
+       size 0.1 1
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       draggable 0
+       {
+        ImageWidgetClass CategoryImagePreview {
+         ignorepointer 1
+         position 0 0
+         size 24 24
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         imageTexture "{51F13543EB343E3A}DRL_CraftMenu/UI/data/abstract-050.edds"
+         mode blend
+         "src alpha" 1
+         "clamp mode" wrap
+         "stretch mode" stretch_w_h
+        }
+       }
+      }
+      PanelWidgetClass NameCategoryPanelWidget {
+       ignorepointer 1
+       position 0 0
+       size 0.75 1
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       {
+        RichTextWidgetClass NameCategoryButton {
+         ignorepointer 1
+         keepsafezone 0
+         position 0 0
+         size 1 1
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         draggable 0
+         style DayZNormal
+         text "#STR_All_Resipe"
+         font "gui/fonts/metron16"
+         "text offset" 5 0
+         "exact text" 1
+         "size to text h" 0
+         "text valign" center
+         wrap 1
+        }
+       }
+      }
+      PanelWidgetClass AmountCategoryPanelWidget {
+       ignorepointer 1
+       position 0 0
+       size 0.14 1
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       {
+        RichTextWidgetClass AmountCategory {
+         ignorepointer 1
+         keepsafezone 0
+         size 1 1
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         draggable 0
+         style DayZNormal
+         text "999"
+         font "gui/fonts/metron14"
+         "text offset" 5 0
+         "exact text" 1
+         "size to text h" 0
+         "text halign" right
+         "text valign" center
+         wrap 0
+        }
+       }
+      }
+     }
+    }
+    PanelWidgetClass BPanelWidget {
+     visible 1
+     ignorepointer 1
+     color 0.267 0.267 0.267 1
+     size 1 0.02
+     halign center_ref
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     style rover_sim_colorable
+    }
+   }
+  }
+ }
+}

@@ -1,1 +1,0 @@
-class Belt_SET6_ColorBase : Belt_Base {};

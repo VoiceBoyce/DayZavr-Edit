@@ -1,0 +1,43 @@
+FrameWidgetClass IufMenu {
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ position 0 0
+ size 1 1
+ {
+  ImageWidgetClass Dim {
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0 0
+   size 1 1
+   image0 "INT_UIFramework/gui/textures/white.paa"
+   mode blend
+   "src alpha" 1
+   stretch 1
+   ignorepointer 1
+  }
+  FrameWidgetClass Window {
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   position 0 0
+   size 960 640
+   halign center_ref
+   valign center_ref
+   clipchildren 0
+  }
+  FrameWidgetClass ModalLayer {
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0 0
+   size 1 1
+   visible 0
+  }
+ }
+}

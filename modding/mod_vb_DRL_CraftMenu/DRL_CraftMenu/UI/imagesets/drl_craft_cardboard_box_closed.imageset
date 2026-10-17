@@ -1,0 +1,18 @@
+ImageSetClass {
+ Name "drl_craft_cardboard_box_closed"
+ RefSize 75 75
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "DRL_CraftMenu/UI/data/cardboard-box-closed.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass cardboard_box_closed {
+   Name "cardboard_box_closed"
+   Pos 0 0
+   Size 75 75
+   Flags 0
+  }
+ }
+}
