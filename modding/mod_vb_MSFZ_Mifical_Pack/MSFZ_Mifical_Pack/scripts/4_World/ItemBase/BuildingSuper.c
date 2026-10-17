@@ -45,7 +45,7 @@ class MSFZ_RuneGathering_Base extends BuildingSuper
 	            return "MSFZ_RuneStone_FireSmall";
 	            break;
 	        case "msfz_stone_2":
-	            return "MSFZ_RuneStone_FireSmall";
+	            return "MSFZ_RuneStone_Fire";
 	            break;
 	        case "msfz_stone_altar_1":
 	            return "MSFZ_RuneStone_Ice";

@@ -11,6 +11,18 @@
 - **Конфиги в исходниках только текстовые** (`config.cpp`). `config.bin` получается только при сборке.
 - Временные файлы складывать в scratchpad сессии, не в репозиторий.
 
+## Тест мода в игре (основной способ)
+
+Тестовый сервер `D:\DayZavr\DayZavr-Servers\DayZServer111` (порт 3202) + клиент `G:\Games\DayZavr`:
+1. `build` мода → скопировать `@Мод` в `G:\Games\DayZavr\@Мод` (старую версию сначала в бэкап `G:\DayZ_Test\backup\<время>`).
+2. Добавить `@Мод` в `modlist_111server.txt` (сервер берёт моды из `G:\Games\DayZavr\`)
+   и в `-mod=` в `G:\Games\DayZavr\DayZServer_111_client.bat`. Перед правкой — копии в тот же бэкап.
+3. Запуск: `!Start_server_test.bat` (из папки сервера) → дождаться загрузки → `DayZServer_111_client.bat`.
+   Запускать через WMI (`Invoke-CimMethod Win32_Process Create`) с CurrentDirectory = папка батника.
+4. Логи сервера: `DayZServer111\Instance_1\` (script_*.log, *.RPT, *.ADM); клиента: `%LOCALAPPDATA%\DayZ\`.
+   `ANIMATION (E): Can't load ...skeletons.anim.xml` — безвредный шум для любого мода.
+`!Start_server.bat` в папке 111 — копия от сервера 16 (боевой 2602), его не запускать.
+
 ## Структура
 
 - `modding/<папка_мода>/` — общая папка мода:
