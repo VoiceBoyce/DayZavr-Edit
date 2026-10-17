@@ -1,0 +1,61 @@
+# Строки нового интерфейса DRL_CraftMenu: KEY<TAB>english<TAB>russian
+# Применяются в DRL_CraftMenu/stringtable.csv скриптом drl_add_strings.py (остальные языки = english).
+STR_DRL_UI_TITLE	Crafting	Изготовление
+STR_DRL_UI_SUB_FREE	Free crafting	Свободный крафт
+STR_DRL_UI_CATEGORIES	Categories	Категории
+STR_DRL_UI_LEARNING	Research	Изучение
+STR_DRL_UI_SLOTS	Free %1 of %2	Свободно %1 из %2
+STR_DRL_UI_RECIPES_COUNT	Recipes: %1	Рецептов: %1
+STR_DRL_UI_CHIP_CAN	Ready	Можно
+STR_DRL_UI_CHIP_CANNOT	Missing	Нет ресурсов
+STR_DRL_UI_CHIP_LOCKED	Not learned	Не изучен
+STR_DRL_UI_EMPTY	No recipes	Рецептов нет
+STR_DRL_UI_EMPTY_SUB	Pick another category or change the search	Выберите другую категорию или измените поиск
+STR_DRL_UI_SELECT_HINT	Select a recipe	Выберите рецепт
+STR_DRL_UI_NO_PREVIEW	No preview	Нет превью
+STR_DRL_UI_PV_HINT	Drag to rotate, wheel to zoom	Тяните — вращать, колесо — масштаб
+STR_DRL_UI_TIME_S	%1 s	%1 с
+STR_DRL_UI_TIME_M	%1 min	%1 мин
+STR_DRL_UI_TIME_MS	%1 min %2 s	%1 мин %2 с
+STR_DRL_UI_KEY_LMB	LMB	ЛКМ
+STR_DRL_UI_KEY_WHEEL	Wheel	Колесо
+STR_DRL_UI_KEY_DRAG	Drag	Тянуть
+STR_DRL_UI_HINT_SELECT	select	выбрать
+STR_DRL_UI_HINT_SCROLL	scroll	листать
+STR_DRL_UI_HINT_ROTATE	rotate preview	вращать превью
+STR_DRL_UI_TAB_COMP	Composition	Состав
+STR_DRL_UI_TAB_INFO	Details	Описание
+STR_DRL_UI_TAB_RECRAFT	Dismantle	Разбор
+STR_DRL_UI_SEC_DOP	Attachments to craft	Доп. навесное
+STR_DRL_UI_VARIANTS	Result variants	Варианты результата
+STR_DRL_UI_VARIANTS_MORE	%1 total, wheel to scroll	Всего %1, колесо — листать
+STR_DRL_UI_REQS	Requirements	Требования
+STR_DRL_UI_PICK_VARIANT	Click to choose a variant	Нажмите, чтобы выбрать вариант
+STR_DRL_UI_NO_SLOT	No suitable slot	Нет подходящего слота
+STR_DRL_UI_DOP_TIME	+%1 to craft time	+%1 к времени крафта
+STR_DRL_UI_NO_INGR	No ingredients	Без ингредиентов
+STR_DRL_UI_COUNT	Quantity	Количество
+STR_DRL_UI_TOTAL	Output: %1 pcs	Итог: %1 шт.
+STR_DRL_UI_TOTAL_TIME	Total time	Общее время
+STR_DRL_UI_STATS	Characteristics	Характеристики
+STR_DRL_UI_STAT_HP	Durability	Прочность
+STR_DRL_UI_STAT_BULLET	Bullets	Пули
+STR_DRL_UI_STAT_MELEE	Melee	Холодное
+STR_DRL_UI_STAT_INFECTED	Infected	Заражённые
+STR_DRL_UI_STAT_GRENADE	Explosions	Взрывы
+STR_DRL_UI_SLOTS_TITLE	Attachment slots	Слоты навесного
+STR_DRL_UI_NO_SLOTS	None	Нет
+STR_DRL_UI_RECRAFT_GET	You get back	Вы получите
+STR_DRL_UI_RECRAFT_EMPTY	This item can't be dismantled	Этот предмет не разбирается
+STR_DRL_UI_RECRAFT_CHANCE	Chance %1	Шанс %1
+STR_DRL_UI_RECRAFT_TIME	Dismantle time: %1	Время разбора: %1
+STR_DRL_UI_QUEUE	Queue	Очередь
+STR_DRL_UI_LEARN_TITLE	Research	Изучение
+STR_DRL_UI_LEARN_SUB	Learned %1 of %2	Изучено %1 из %2
+STR_DRL_UI_LEARNED_CAT	Learned	Изученные
+STR_DRL_UI_LS_LEARNED	Learned	Изучен
+STR_DRL_UI_LS_AVAILABLE	Can study	Можно изучить
+STR_DRL_UI_LS_LOCKED	Unavailable	Недоступен
+STR_DRL_UI_LEARN_METHODS	Ways to study: %1	Способов изучения: %1
+STR_DRL_UI_LEARN_GIVES	Unlocks recipes: %1	Откроет рецептов: %1
+STR_DRL_UI_NO_METHODS	No ways to study	Нет способов изучения

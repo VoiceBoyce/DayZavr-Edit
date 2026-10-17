@@ -1,0 +1,15 @@
+{
+  "id": "build-1791796868-20",
+  "kind": "build",
+  "status": "done",
+  "started": 1791796868.580127,
+  "finished": 1791796869.0904434,
+  "exit_code": 0,
+  "artifacts": [
+    "H:\\Полезное\\1_КОДИНГ\\__Intenso_Mod_Base__\\mod_Intenso_UIFramework\\.dayz-mcp\\jobs\\build-1791796868-20\\pack-INT_UIFramework.cfgconvert.log",
+    "H:\\Полезное\\1_КОДИНГ\\__Intenso_Mod_Base__\\mod_Intenso_UIFramework\\.dayz-mcp\\jobs\\build-1791796868-20\\pack-INT_UIFramework.log",
+    "H:\\Полезное\\1_КОДИНГ\\__Intenso_Mod_Base__\\mod_Intenso_UIFramework\\.dayz-mcp\\jobs\\build-1791796868-20\\pack-INT_UIFramework.sign.log"
+  ],
+  "summary": "INT_UIFramework 644756B",
+  "error": ""
+}

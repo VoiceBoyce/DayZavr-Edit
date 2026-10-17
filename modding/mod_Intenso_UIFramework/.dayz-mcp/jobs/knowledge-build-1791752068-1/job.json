@@ -1,0 +1,13 @@
+{
+  "id": "knowledge-build-1791752068-1",
+  "kind": "knowledge-build",
+  "status": "done",
+  "started": 1791752068.607232,
+  "finished": 1791752124.9884713,
+  "exit_code": 0,
+  "artifacts": [
+    "H:\\Полезное\\1_КОДИНГ\\__Intenso_Mod_Base__\\mod_Intenso_UIFramework\\.dayz-mcp\\jobs\\knowledge-build-1791752068-1\\knowledge-build.json"
+  ],
+  "summary": "core rebuilt in 36.26s: 2927 sources, 131697 declarations (2927 read, 0 unchanged) | deps rebuilt in 11.43s: 7 sources, 10966 declarations (7 read, 0 unchanged) | project rebuilt in 6.02s: 24 sources, 631 declarations (24 read, 0 unchanged) | core: unpacked scripts.pbo with BankRev into H:\\Полезное\\1_КОДИНГ\\__Intenso_Mod_Base__\\mod_Intenso_UIFramework\\.dayz-mcp\\corpus\\scripts",
+  "error": ""
+}

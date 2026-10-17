@@ -81,7 +81,7 @@ class CfgPatches
 		};
 		weapons[] = {};
 		requiredVersion = 0.1;
-		requiredAddons[] = {"DZ_Data","DZ_Gear_Tools","DZ_Gear_Camping","DZ_Gear_Food"};
+		requiredAddons[] = {"DZ_Data","DZ_Gear_Tools","DZ_Gear_Camping","DZ_Gear_Food","INT_UIFramework"};
 	};
 };
 class CfgMods

@@ -1,0 +1,53 @@
+{
+  "layers": {
+    "core": {
+      "layer": "core",
+      "root": "H:\\Полезное\\1_КОДИНГ\\__Intenso_Mod_Base__\\mod_Intenso_UIFramework\\.dayz-mcp\\corpus\\scripts",
+      "sources": 2927,
+      "declarations": 131697,
+      "indexed": 2927,
+      "removed": 0,
+      "unchanged": 0,
+      "lost": 0,
+      "seconds": 36.265,
+      "incremental": false,
+      "skipped": [],
+      "notes": [
+        "unpacked scripts.pbo with BankRev into H:\\Полезное\\1_КОДИНГ\\__Intenso_Mod_Base__\\mod_Intenso_UIFramework\\.dayz-mcp\\corpus\\scripts"
+      ],
+      "summary": "core rebuilt in 36.26s: 2927 sources, 131697 declarations (2927 read, 0 unchanged)"
+    },
+    "deps": {
+      "layer": "deps",
+      "root": "F:\\Games\\DayZavr",
+      "sources": 7,
+      "declarations": 10966,
+      "indexed": 7,
+      "removed": 0,
+      "unchanged": 0,
+      "lost": 0,
+      "seconds": 11.433,
+      "incremental": false,
+      "skipped": [],
+      "notes": [],
+      "summary": "deps rebuilt in 11.43s: 7 sources, 10966 declarations (7 read, 0 unchanged)"
+    },
+    "project": {
+      "layer": "project",
+      "root": "H:\\Полезное\\1_КОДИНГ\\__Intenso_Mod_Base__\\mod_Intenso_UIFramework",
+      "sources": 24,
+      "declarations": 631,
+      "indexed": 24,
+      "removed": 0,
+      "unchanged": 0,
+      "lost": 0,
+      "seconds": 6.019,
+      "incremental": false,
+      "skipped": [],
+      "notes": [],
+      "summary": "project rebuilt in 6.02s: 24 sources, 631 declarations (24 read, 0 unchanged)"
+    }
+  },
+  "skipped": {},
+  "failed": []
+}

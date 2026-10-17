@@ -11,7 +11,20 @@
 - **Конфиги в исходниках только текстовые** (`config.cpp`). `config.bin` получается только при сборке.
 - Временные файлы складывать в scratchpad сессии, не в репозиторий.
 
-## Тест мода в игре (основной способ)
+## Тест мода через dayz-mcp (агент сам)
+
+`dayz_test_run(project="<Мод>", mode="all", mission="livonia", player_name="Voice", server_wait_s=180,
+base_mods=["@CF","@VPPAdminTools_v2"])` → `session_acquire_wait` → инструменты
+(world_spawn, player_teleport, capture_screenshot, logs_since…) → `dayz_test_stop(run_id)`.
+- Полный modlist 111 в DayZDiag не компилируется (@Notifications, @INT_Trader — строгий компилятор diag); рабочий набор — CF + VPP.
+- Серверные моды — параметром `server_mods=["@Servermod"]` (лежит в `G:\DayZ_Test\env111\servermods`).
+- Тестовый serverDZ.cfg: `allowFilePatching = 1`; ключи сервера — `G:\Games\DayZavr\keys` (копия keys 111).
+- VPP-админка в тесте: конфиг с 111 + ID пользователя `76561198903710848`, пароль как на 111.
+- Не блокировать долгим `wait_for` — запустить, сообщить, ждать пользователя.
+Перед запуском: `build` мода и копия `@Мод` в `G:\Games\DayZavr`. После смены регистрации MCP
+(аргументы в ~/.claude.json) нужно переподключить MCP-сервер в Claude Code (`/mcp`), иначе `daemon_policy_drift`.
+
+## Тест мода в игре вручную (retail сервер 111)
 
 Тестовый сервер `D:\DayZavr\DayZavr-Servers\DayZServer111` (порт 3202) + клиент `G:\Games\DayZavr`:
 1. `build` мода → скопировать `@Мод` в `G:\Games\DayZavr\@Мод` (старую версию сначала в бэкап `G:\DayZ_Test\backup\<время>`).
@@ -49,10 +62,10 @@
 | CfgConvert, FileBank (упаковка) | `D:\SteamLibrary\steamapps\common\DayZ Tools\Bin\CfgConvert`, `...\Bin\PboUtils` |
 | DsUtils + ключ DayZavrN | `D:\SteamLibrary\steamapps\common\DayZ Tools\Bin\DsUtils` |
 | Серверы (keys) | `D:\DayZavr\DayZavr-Servers\DayZServer*\keys` (боевые, без запроса не трогать) |
-| **dayz-mcp** (тест модов агентом) | `G:\DayZ_Test\dayz-mcp` (v1.4), venv `tools\.venv-mcp` |
-| Тестовая среда dayz-mcp | `G:\DayZ_Test\env\_server` (serverDZ.cfg, profiles, mpmissions) и `\_client\profiles` |
-| Моды для теста | `G:\DayZ_Test\mods` (`@DayZ_MCP` — мост, плюс копии тестируемых `@Мод`) |
-| Политика лаунчера | `%LOCALAPPDATA%\DayZ_MCP\launcher-policy.json` (один проект на каждый тестируемый мод) |
+| **dayz-mcp** (тест модов агентом) | `G:\DayZ_Test\dayz-mcp` (v1.4), venv `tools\.venv-mcp`, лаунчер зарегистрирован |
+| Игра для dayz-mcp | `G:\Games\DayZavr` (клиент сервера 111 + скопированный `DayZDiag_x64.exe` + `@DayZ_MCP`); `--game-path` в регистрации |
+| Тестовая среда dayz-mcp | `G:\DayZ_Test\env111\_server` (копии serverDZ.cfg и миссий 111, без storage) и `\_client\profiles`; `env111\servermods\@Servermod` |
+| Политика лаунчера | `%LOCALAPPDATA%\DayZ_MCP\launcher-policy.json`: проект на мод, base_mods = modlist 111. После правки — `build_native_launcher.py --verify-reproducible` + `launcher_registry_update replace-dayz-test-v1 --expected-sha256 <sha256 текущего approved-launchers.json>` |
 
 На `P:\` распакована вся ванилла 1.30 (ExtractPbo по префиксам: `P:\DZ\...`, `P:\scripts\...`).
 **Перед тем как писать код против ванильного API, проверять классы и сигнатуры в `P:\scripts`**, а не по памяти.

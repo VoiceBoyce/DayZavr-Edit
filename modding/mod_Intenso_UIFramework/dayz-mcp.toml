@@ -1,0 +1,13 @@
+[project]
+name = "INT_UIFramework"
+
+[build]
+mods = ["INT_UIFramework"]
+project_root = "."
+
+[expect]
+ready_line = "[INT_UIF] ready"
+forbid = ["Bad type", "Can't compile", "NULL pointer to instance", "Cannot open layout", "wrong ImageSet"]
+error_regex = ["SCRIPT\\s+\\(E\\).*INT_UIF"]
+
+[expect.counters]

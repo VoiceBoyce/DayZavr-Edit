@@ -114,6 +114,22 @@ modded class MissionGameplay
 				menu = new DRL_LearningMenuUI();
 				break;
 			}
+
+			// Новое окно крафта на INT_UIFramework (в разработке, пока на отдельном ID).
+			case DRL_UI_MENU_CRAFT:
+			{
+				menu = new DRL_CraftWindow();
+				menu.SetID(id);
+				break;
+			}
+
+			// Новое окно изучения на INT_UIFramework (в разработке, отдельный ID).
+			case DRL_UI_MENU_LEARNING:
+			{
+				menu = new DRL_LearnWindow();
+				menu.SetID(id);
+				break;
+			}
 		}
 
 		if (!menu)
@@ -140,6 +156,9 @@ modded class MissionGameplay
 	override void OnUpdate(float timeslice)
 	{
 		super.OnUpdate(timeslice);
+
+		// Тестовый хук нового интерфейса (маркер drl_ui_test.txt в профиле клиента).
+		DRL_UITest.Tick(timeslice);
 
 		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
 		Input gameInput = Input.Cast(GetGame().GetInput());

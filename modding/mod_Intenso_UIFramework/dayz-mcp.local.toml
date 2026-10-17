@@ -1,0 +1,12 @@
+[machine]
+game = "F:/Games/DayZavr"
+server = "G:/DayZServers_TEST/DayZServer3_TEST"
+tools = "T:/AllFiles/Games/Steam/steamapps/common/DayZ Tools"
+stand_root = "G:/DayZServers_TEST/DS-Server MCP Stand"
+port = 3203
+config = "serverDZ.cfg"
+window = [1920, 1080]
+skip_be_launcher = true
+
+[mods]
+extra = ["F:/Games/DayZavr/@CF", "F:/Games/DayZavr/@VPPAdminTools_v2", "F:/Games/DayZavr/@DZMCP_Bridge"]
