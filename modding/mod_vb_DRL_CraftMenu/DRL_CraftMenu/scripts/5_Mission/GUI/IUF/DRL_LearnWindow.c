@@ -256,7 +256,7 @@ class DRL_LearnWindow extends INT_UIF_Menu
 
 	int GetRecipeLearningState(int recipeId)
 	{
-		if (DRL_CraftMenuUI.DRL_ClientHasLearnedRecipe(recipeId))
+		if (DRL_LearnState.HasLearned(recipeId))
 			return LS_LEARNED;
 		DRL_Learning_Config lcfg = GetLearning_Config();
 		if (!lcfg)
@@ -266,7 +266,7 @@ class DRL_LearnWindow extends INT_UIF_Menu
 		{
 			for (int i = 0; i < lr.RequiredRecipeIds.Count(); i++)
 			{
-				if (!DRL_CraftMenuUI.DRL_ClientHasLearnedRecipe(lr.RequiredRecipeIds[i]))
+				if (!DRL_LearnState.HasLearned(lr.RequiredRecipeIds[i]))
 					return LS_LOCKED;
 			}
 		}
@@ -278,7 +278,7 @@ class DRL_LearnWindow extends INT_UIF_Menu
 	{
 		if (!IsRecipeStudyable(recipeId))
 			return false;
-		if (DRL_CraftMenuUI.DRL_ClientHasLearnedRecipe(recipeId))
+		if (DRL_LearnState.HasLearned(recipeId))
 			return false;
 		return GetRecipeLearningState(recipeId) == LS_AVAILABLE;
 	}
@@ -895,7 +895,7 @@ class DRL_LearnWindow extends INT_UIF_Menu
 	{
 		if (!m_SelectedRecipe || m_SelectedVariationIndex < 0 || m_StudyPending)
 			return;
-		if (DRL_CraftMenuUI.DRL_ClientHasLearnedRecipe(m_SelectedRecipe.RecipeId))
+		if (DRL_LearnState.HasLearned(m_SelectedRecipe.RecipeId))
 			return;
 
 		DRL_Study_Variation studiedVar = null;

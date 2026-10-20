@@ -1,5 +1,10 @@
 # DRL_CraftMenu — переделка интерфейса на INT_UIFramework
 
+**Статус (2026-10-18): завершено.** Весь интерфейс мода — на INT_UIFramework, старые окна удалены.
+Окна: крафт 9501 (F9), верстак 9502 (`ActionOpenDRLWorkbench`), изучение 9503 (кнопка «Изучение»,
+книга, стол исследований). Код: `DRL_CraftMenu/scripts/5_Mission/GUI/IUF/`.
+Ниже — исходная инвентаризация старого UI и история этапов.
+
 Цель: полностью заменить интерфейс мода на `@INT_UIFramework` в стиле `@INT_Trader`.
 Функционал 1:1, меняется только внешний вид и раскладка (решение от 2026-10-17).
 Образец стиля: исходники INT_Trader (`TraderMenu.c`, `INT_Trader*.c`) и демо фреймворка (Ctrl+F10).
@@ -92,8 +97,9 @@
 | 2б | Детали: варианты результата, ингредиенты (+вариации, подсказка), навесное, доп. рецепты, требования, характеристики, количество, кнопка крафта | готово, проверено в игре (`after/2b_*.jpg`) |
 | 3 | Очередь процессов, разбор | готово вместе с 2б: очередь в шапке, вкладка «Разбор» |
 | 4 | Меню изучения | готово, проверено в игре (ID 9513, `after/4_*.jpg`) |
-| 5 | Уведомления → тосты | — |
-| 6 | Тестовый хук (маркер-файл) для dayz-mcp | готово: `drl_ui_test.txt` в профиле клиента (`open`, `cat N`, `recipe N`, `search X`, `hover N`, `close`) |
+| 5 | Уведомления → тосты | готово, проверено в игре (`after/5_*.jpg`) |
+| 6 | Тестовый хук (маркер-файл) для dayz-mcp | готово: `drl_ui_test.txt` в профиле клиента (`open`, `learn`, команды окон, `close`) |
+| 7 | Переключение: 9501/9502/9503 → новые окна, удаление старых | готово, проверено в игре (верстак — реальным действием, `after/6_workbench_window.jpg`) |
 
 ## Что сделано в 2б–3 (окно 9511, старое F9 пока не тронуто)
 
@@ -127,10 +133,31 @@
 - Подзаголовок окна: «Изучено N из M». Кнопка «Изучение» нового окна крафта открывает новое окно изучения.
 - Фон `LearningFonImagePath` (картинка старого меню) не используется.
 
-Осталось: этап 5 (тосты), контекст верстака (`DRL_WorkbenchMenuUI` → новое окно
-с `SetWorkbench`), переключение F9/9501/9502/9503 и действий (книга, стол исследований) на новые окна.
+## Что сделано в 5 (действует сразу, и для старых меню)
 
-## Как тестировать новое окно
+- `DRL_CraftNotificationManager.Show/ShowByType` выводит `INT_UIF_Toast` (справа сверху, до 4 на экране,
+  остальные в очереди, клик закрывает). В тост идёт текст уведомления (заголовок — если текста нет).
+- Тип → вид: успех и «рецепт изучен» — SUCCESS; отмена вручную, очередь заполнена — WARNING (6 с);
+  прервано расстоянием, нет ингредиентов/места/инструментов, не изучен — ERROR (6,5 с); остальное — INFO (5 с).
+- Уведомление о перезагрузке конфига — тоже тост (сообщение в чат осталось).
+- Превью предмета тост не показывает. Откат на старый виджет: `DRL_NOTIF_USE_TOASTS = false`
+  в `4_World/GUI/DRL_CraftNotificationManager.c`.
+
+## Что сделано в 7 (переключение)
+
+- `MissionGameplay.CreateScriptedMenu`: 9501 → `DRL_CraftWindow`, 9502 → `DRL_CraftWindow` с
+  `SetWorkbench(DRL_WorkbenchBG.Take())` (рецепты верстака, его имя в подзаголовке, слоты с хранилищем
+  верстака, `DRL_SetCurrentWorkbench`), 9503 → `DRL_LearnWindow`. F9 и действия не менялись — открывают те же ID.
+- Удалены: `DRL_CraftMenuUI`, `DRL_WorkbenchMenuUI`, `DRL_LearningMenuUI`, `DRL_RecipeVarWidget`,
+  `DRL_CraftProcessEntryWidget`, `GUI/SubPanels/*` и их layout'ы. Оставлены используемые:
+  `AttachmentIcon.layout`, `CraftNotifications.layout` (запасной виджет уведомлений), `ItemBlock.layout`
+  (замок на предметах, занятых крафтом). Серверный PBO на удалённые классы не ссылается (проверено).
+- `DRL_ClientHasLearnedRecipe` перенесён в `DRL_LearnState.HasLearned` (`IUF/DRL_UIKit.c`).
+- Esc обрабатывает сам `INT_UIF_Menu` (старый перехват в `MissionGameplay.OnKeyPress` убран).
+- Тестовый хук остаётся в моде: раз в 2 с проверяет наличие `drl_ui_test.txt` в профиле клиента,
+  у игроков файла нет — ничего не делает.
+
+## Как тестировать окна
 
 1. `pbo.ps1 build` → копия `@DRL_CraftMenu` в `G:\Games\DayZavr`.
 2. `dayz_test_run(project="MSFZ_Mifical_Pack", project_mod_override=true, base_mods=["@CF","@VPPAdminTools_v2"],
@@ -138,6 +165,7 @@
    server_mods=["G:\\DayZ_Test\\env111\\servermods\\@DRL_Server"], mission="livonia")`.
 3. Когда персонаж в игре — записать команды в `G:\DayZ_Test\env111\_client\profiles\drl_ui_test.txt`
    (хук открывает окно; если записать до входа в мир, окно закроется загрузкой).
+   Верстак: `world_spawn(DRL_Craft_WB)` рядом с игроком → `action_use(ActionOpenDRLWorkbench, classname=DRL_Craft_WB)`.
 4. `capture_screenshot`; клики — `ui_click` по уникальным именам (`DRL_Card_<n>`, `DRL_Cat_<n>`, `DRL_CraftBtn`,
    `DRL_ReqBtn`, `DRL_CountPlus`, `DRL_Comp_<слот>[_chk|_plus|_minus|_info|_v<n>]`, `DRL_Pop_<слот>`, `DRL_Var_<n>`, `DRL_Q_<n>`…).
    Команды хука для деталей (`tab`, `row`, `chk`, `prow`, `reqs`, `craft`, `recraft`, `hrow`, `state`…) — в шапке `DRL_UITest.c`.

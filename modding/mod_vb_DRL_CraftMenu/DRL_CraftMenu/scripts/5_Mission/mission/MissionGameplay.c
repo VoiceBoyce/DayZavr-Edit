@@ -86,7 +86,10 @@ modded class MissionGameplay
 			msg = "#STR_DRL_RELOAD_CRAFT_CONFIG";
 		}
 
-		NotificationSystem.AddNotificationExtended(5.0, "DRL Craft", msg, "");
+		if (DRL_NOTIF_USE_TOASTS)
+			INT_UIF_Toast.Show(msg, INT_UIF_ToastKind.INFO, 5.0);
+		else
+			NotificationSystem.AddNotificationExtended(5.0, "DRL Craft", msg, "");
 		GetGame().ChatPlayer(msg);
 	}
 
@@ -96,38 +99,31 @@ modded class MissionGameplay
 
 		switch (id)
 		{
-			case 9501:
-			{
-				menu = new DRL_CraftMenuUI();
-				break;
-			}
-
-			case 9502:
-			{
-				EntityAI bench = DRL_WorkbenchBG.Take();
-				menu = new DRL_WorkbenchMenuUI(bench);
-				break;
-			}
-
-			case 9503:
-			{
-				menu = new DRL_LearningMenuUI();
-				break;
-			}
-
-			// Новое окно крафта на INT_UIFramework (в разработке, пока на отдельном ID).
+			// Все окна мода — на INT_UIFramework (старые DRL_CraftMenuUI,
+			// DRL_WorkbenchMenuUI и DRL_LearningMenuUI удалены).
 			case DRL_UI_MENU_CRAFT:
 			{
-				menu = new DRL_CraftWindow();
-				menu.SetID(id);
+				DRL_CraftWindow craft = new DRL_CraftWindow();
+				craft.SetID(id);
+				menu = craft;
 				break;
 			}
 
-			// Новое окно изучения на INT_UIFramework (в разработке, отдельный ID).
+			case DRL_UI_MENU_WORKBENCH:
+			{
+				// Верстак кладёт ActionOpenDRLWorkbench; контекст задаётся до Init.
+				DRL_CraftWindow bench = new DRL_CraftWindow();
+				bench.SetWorkbench(DRL_WorkbenchBG.Take());
+				bench.SetID(id);
+				menu = bench;
+				break;
+			}
+
 			case DRL_UI_MENU_LEARNING:
 			{
-				menu = new DRL_LearnWindow();
-				menu.SetID(id);
+				DRL_LearnWindow learn = new DRL_LearnWindow();
+				learn.SetID(id);
+				menu = learn;
 				break;
 			}
 		}
@@ -138,19 +134,6 @@ modded class MissionGameplay
 		}
 
 		return menu;
-	}
-
-	override void OnKeyPress(int key)
-	{
-		UIScriptedMenu m = GetGame().GetUIManager().GetMenu();
-
-		if (m && (m.IsInherited(DRL_CraftMenuUI) || m.IsInherited(DRL_LearningMenuUI)) && key == KeyCode.KC_ESCAPE)
-		{
-			GetGame().GetUIManager().Back();
-			return;
-		}
-
-		super.OnKeyPress(key);
 	}
 
 	override void OnUpdate(float timeslice)

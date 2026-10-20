@@ -174,6 +174,9 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		{
 			m_WorkbenchCls = workbench.GetType();
 			m_WorkbenchCls = m_WorkbenchCls.Trim();
+			PlayerBase pb = PlayerBase.Cast(GetGame().GetPlayer());
+			if (pb)
+				pb.DRL_SetCurrentWorkbench(workbench);
 		}
 	}
 
@@ -735,7 +738,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 						continue;
 					if (curCat && curCat.ShowOnlyAvailableCraft == 1)
 					{
-						if (!DRL_CraftMenuUI.DRL_ClientHasLearnedRecipe(r.RecipeId))
+						if (!DRL_LearnState.HasLearned(r.RecipeId))
 							continue;
 					}
 					entries.Insert(MakeEntry(r, cachedItems));
@@ -765,7 +768,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 
 	protected int RecipeStatus(DRL_Craft_Recipe r, array<EntityAI> cachedItems)
 	{
-		if (!DRL_CraftMenuUI.DRL_ClientHasLearnedRecipe(r.RecipeId))
+		if (!DRL_LearnState.HasLearned(r.RecipeId))
 			return DRL_UI_STATUS_LOCKED;
 		if (CanCraftRecipe(r, cachedItems))
 			return DRL_UI_STATUS_CAN;
@@ -1242,7 +1245,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		}
 
 		// Строка или чекбокс: включить / выключить.
-		if (!DRL_CraftMenuUI.DRL_ClientHasLearnedRecipe(id))
+		if (!DRL_LearnState.HasLearned(id))
 			return;
 		if (isChecked)
 		{
@@ -1645,7 +1648,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 					continue;
 				bool isChecked = m_SelectedAttachedRecipeIds.Find(attachedId) > -1;
 				bool allowed = RecipeAllowedByContext(dopR);
-				bool learned = DRL_CraftMenuUI.DRL_ClientHasLearnedRecipe(attachedId);
+				bool learned = DRL_LearnState.HasLearned(attachedId);
 				array<string> dvars = DopVariants(dopR);
 				int dvi = DopVariantIndex(attachedId, dvars);
 				bool slotOk = isChecked;
@@ -2080,7 +2083,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		DRL_Learning_Config lcfg = GetLearning_Config();
 		if (lcfg && lcfg.RecipeRequiresLearning(r.RecipeId))
 		{
-			if (!DRL_CraftMenuUI.DRL_ClientHasLearnedRecipe(r.RecipeId))
+			if (!DRL_LearnState.HasLearned(r.RecipeId))
 				return false;
 		}
 		if (lcfg)
@@ -2092,7 +2095,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			{
 				for (int i = 0; i < lr.RequiredRecipeIds.Count(); i++)
 				{
-					if (!DRL_CraftMenuUI.DRL_ClientHasLearnedRecipe(lr.RequiredRecipeIds[i]))
+					if (!DRL_LearnState.HasLearned(lr.RequiredRecipeIds[i]))
 						return false;
 				}
 			}
@@ -2159,7 +2162,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			rows.Insert(DRL_UIRowData.Header("#STR_Studying_Recipes"));
 			if (recipeNeedsLearning)
 			{
-				bool isLearned = DRL_CraftMenuUI.DRL_ClientHasLearnedRecipe(r.RecipeId);
+				bool isLearned = DRL_LearnState.HasLearned(r.RecipeId);
 				string studyPrevCls = r.PreviewClassname;
 				if (studyPrevCls == "")
 					studyPrevCls = r.Result;
@@ -2187,7 +2190,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 						if (pPrev == "")
 							pPrev = prereqR.Result;
 					}
-					bool pLearned = DRL_CraftMenuUI.DRL_ClientHasLearnedRecipe(prereqId);
+					bool pLearned = DRL_LearnState.HasLearned(prereqId);
 					string pStatusStr = "#STR_RequiredToStudy";
 					if (pLearned)
 						pStatusStr = "#STR_DRL_LEARNED";
@@ -2677,7 +2680,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			SetCraftButton("#STR_No_Recipe", INT_UIF_Variant.SECONDARY, "error");
 			return;
 		}
-		if (!DRL_CraftMenuUI.DRL_ClientHasLearnedRecipe(m_SelectedRecipe.RecipeId))
+		if (!DRL_LearnState.HasLearned(m_SelectedRecipe.RecipeId))
 		{
 			m_CraftBtn.SetEnabled(false);
 			SetCraftButton("#STR_LearningLockTitel", INT_UIF_Variant.DANGER, "lock");
@@ -2763,7 +2766,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			return;
 		if (m_Procs.Count() >= MaxQueueSlots())
 			return;
-		if (!DRL_CraftMenuUI.DRL_ClientHasLearnedRecipe(m_SelectedRecipe.RecipeId))
+		if (!DRL_LearnState.HasLearned(m_SelectedRecipe.RecipeId))
 		{
 			m_CraftBtn.SetEnabled(false);
 			SetCraftButton("#STR_LearningLockTitel", INT_UIF_Variant.DANGER, "lock");

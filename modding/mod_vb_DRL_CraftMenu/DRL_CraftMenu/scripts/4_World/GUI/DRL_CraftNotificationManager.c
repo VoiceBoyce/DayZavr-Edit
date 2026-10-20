@@ -1,3 +1,7 @@
+// Уведомления крафта показываются тостами INT_UIFramework (справа сверху, со
+// стопкой и очередью). false — вернуть старый виджет CraftNotifications.layout.
+const bool DRL_NOTIF_USE_TOASTS = true;
+
 class DRL_CraftNotificationWidget
 {
 	protected Widget m_Root;
@@ -163,10 +167,33 @@ class DRL_CraftNotificationManager
 {
 	protected static ref array<ref DRL_CraftNotificationWidget> s_ActiveNotifications = new array<ref DRL_CraftNotificationWidget>();
 
-	static void Show(string title, string text, string itemClass = "", string statusIcon = "", string bigIcon = "", float duration = 5.0)
+	// toastKind — INT_UIF_ToastKind (-1: INFO). В тост идёт текст (он у DRL
+	// самодостаточный: «AKM успешно изготовлен!»), заголовок — только если текста нет.
+	// Превью предмета тост не показывает: тип задаёт цвет и иконку.
+	static void Show(string title, string text, string itemClass = "", string statusIcon = "", string bigIcon = "", float duration = 5.0, int toastKind = -1)
 	{
 		if (!GetGame() || !GetGame().GetWorkspace())
 		{
+			return;
+		}
+
+		if (DRL_NOTIF_USE_TOASTS)
+		{
+			string msg = text;
+			if (msg == "")
+			{
+				msg = title;
+			}
+			if (msg == "")
+			{
+				return;
+			}
+			int kind = toastKind;
+			if (kind < 0)
+			{
+				kind = INT_UIF_ToastKind.INFO;
+			}
+			INT_UIF_Toast.Show(msg, kind, duration);
 			return;
 		}
 
@@ -191,6 +218,8 @@ class DRL_CraftNotificationManager
 		string text = customText;
 		string statusIcon = "DRL_CraftMenu/UI/data/craft_icon.edds";
 		string bigIcon = "";
+		int toastKind = INT_UIF_ToastKind.INFO;
+		float duration = 5.0;
 
 		switch (notifType)
 		{
@@ -220,6 +249,7 @@ class DRL_CraftNotificationManager
 
 			case EDRLCraftNotifType.SUCCESS:
 			{
+				toastKind = INT_UIF_ToastKind.SUCCESS;
 				if (title == "") title = Widget.TranslateString("#STR_DRL_NOTIF_TITLE_SUCCESS");
 				if (text == "") text = string.Format(Widget.TranslateString("#STR_DRL_NOTIF_MSG_SUCCESS"), dName);
 				statusIcon = "DRL_CraftMenu/UI/data/craft_icon.edds";
@@ -228,6 +258,8 @@ class DRL_CraftNotificationManager
 
 			case EDRLCraftNotifType.CANCELLED_DISTANCE:
 			{
+				toastKind = INT_UIF_ToastKind.ERROR;
+				duration = 6.5;
 				if (title == "") title = Widget.TranslateString("#STR_DRL_NOTIF_TITLE_CANCELLED");
 				if (text == "") text = string.Format(Widget.TranslateString("#STR_DRL_NOTIF_MSG_DISTANCE"), dName);
 				statusIcon = "DRL_CraftMenu/UI/data/error.edds";
@@ -236,6 +268,8 @@ class DRL_CraftNotificationManager
 
 			case EDRLCraftNotifType.NO_INGREDIENTS:
 			{
+				toastKind = INT_UIF_ToastKind.ERROR;
+				duration = 6.5;
 				if (title == "") title = Widget.TranslateString("#STR_DRL_NOTIF_TITLE_NO_INGREDIENTS");
 				if (text == "") text = string.Format(Widget.TranslateString("#STR_DRL_NOTIF_MSG_NO_INGR"), dName);
 				statusIcon = "DRL_CraftMenu/UI/data/error.edds";
@@ -244,6 +278,8 @@ class DRL_CraftNotificationManager
 
 			case EDRLCraftNotifType.SPACE_BLOCKED:
 			{
+				toastKind = INT_UIF_ToastKind.ERROR;
+				duration = 6.5;
 				if (title == "") title = Widget.TranslateString("#STR_DRL_NOTIF_TITLE_SPACE_BLOCKED");
 				if (text == "") text = string.Format(Widget.TranslateString("#STR_DRL_NOTIF_MSG_BLOCKED"), dName);
 				statusIcon = "DRL_CraftMenu/UI/data/error.edds";
@@ -252,6 +288,8 @@ class DRL_CraftNotificationManager
 
 			case EDRLCraftNotifType.QUEUE_FULL:
 			{
+				toastKind = INT_UIF_ToastKind.WARNING;
+				duration = 6.0;
 				if (title == "") title = Widget.TranslateString("#STR_DRL_NOTIF_TITLE_QUEUE_FULL");
 				if (text == "") text = string.Format(Widget.TranslateString("#STR_DRL_NOTIF_MSG_QUEUE_FULL"), extraParam, extraParam);
 				statusIcon = "DRL_CraftMenu/UI/data/watch.edds";
@@ -260,6 +298,8 @@ class DRL_CraftNotificationManager
 
 			case EDRLCraftNotifType.CANCELLED_MANUAL:
 			{
+				toastKind = INT_UIF_ToastKind.WARNING;
+				duration = 6.0;
 				if (title == "") title = Widget.TranslateString("#STR_DRL_NOTIF_TITLE_CANCELLED");
 				if (text == "") text = string.Format(Widget.TranslateString("#STR_DRL_NOTIF_MSG_CANCELLED"), dName);
 				statusIcon = "DRL_CraftMenu/UI/data/cross-mark.edds";
@@ -268,6 +308,8 @@ class DRL_CraftNotificationManager
 
 			case EDRLCraftNotifType.MISSING_TOOLS:
 			{
+				toastKind = INT_UIF_ToastKind.ERROR;
+				duration = 6.5;
 				if (title == "") title = Widget.TranslateString("#STR_DRL_NOTIF_TITLE_MISSING_TOOLS");
 				if (text == "") text = string.Format(Widget.TranslateString("#STR_DRL_NOTIF_MSG_TOOLS"), dName);
 				statusIcon = "DRL_CraftMenu/UI/data/anvil-impact.edds";
@@ -276,6 +318,8 @@ class DRL_CraftNotificationManager
 
 			case EDRLCraftNotifType.NOT_LEARNED:
 			{
+				toastKind = INT_UIF_ToastKind.ERROR;
+				duration = 6.5;
 				if (title == "") title = Widget.TranslateString("#STR_DRL_NOTIF_TITLE_NOT_LEARNED");
 				if (text == "") text = string.Format(Widget.TranslateString("#STR_DRL_NOTIF_MSG_NOT_LEARNED"), dName);
 				statusIcon = "DRL_CraftMenu/UI/data/lock.edds";
@@ -284,6 +328,7 @@ class DRL_CraftNotificationManager
 
 			case EDRLCraftNotifType.RECIPE_LEARNED:
 			{
+				toastKind = INT_UIF_ToastKind.SUCCESS;
 				if (title == "") title = Widget.TranslateString("#STR_DRL_NOTIF_TITLE_LEARNED");
 				if (text == "") text = string.Format(Widget.TranslateString("#STR_DRL_NOTIF_MSG_LEARNED"), dName);
 				statusIcon = "DRL_CraftMenu/UI/data/unlock.edds";
@@ -300,7 +345,7 @@ class DRL_CraftNotificationManager
 			}
 		}
 
-		Show(title, text, itemClass, statusIcon, bigIcon, 5.0);
+		Show(title, text, itemClass, statusIcon, bigIcon, duration, toastKind);
 	}
 
 	static void AddNotification(DRL_CraftNotificationWidget notif)

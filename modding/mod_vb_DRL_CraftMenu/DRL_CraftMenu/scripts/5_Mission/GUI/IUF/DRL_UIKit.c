@@ -5,9 +5,26 @@
 // 3D-превью на «сцене». Все размеры — дизайн-пиксели холста 1920x1080.
 // ============================================================================
 
-// ID новых окон (старые: 9501 крафт, 9502 верстак, 9503 изучение).
-const int DRL_UI_MENU_CRAFT = 9511;
-const int DRL_UI_MENU_LEARNING = 9513;
+// ID окон мода (те же, что у старых меню, — их открывают действия и F9).
+const int DRL_UI_MENU_CRAFT = 9501;
+const int DRL_UI_MENU_WORKBENCH = 9502;
+const int DRL_UI_MENU_LEARNING = 9503;
+
+// Изучен ли рецепт на клиенте (перенесено из старого DRL_CraftMenuUI.DRL_ClientHasLearnedRecipe):
+// при выключенном изучении или рецепте без изучения — «изучен».
+class DRL_LearnState
+{
+	static bool HasLearned(int recipeId)
+	{
+		DRL_Craft_Config cfg = g_Craft_Config;
+		if (!cfg || !cfg.IsLearningEnabled())
+			return true;
+		DRL_Learning_Config lcfg = GetLearning_Config();
+		if (!lcfg || !lcfg.RecipeRequiresLearning(recipeId))
+			return true;
+		return DRL_LearningBridge.HasLearnedRecipe(recipeId);
+	}
+}
 
 // Приоритеты отрисовки: 3D-модель рисуется поверх любого 2D-виджета с
 // приоритетом не выше своего, поэтому чипы поверх превью берут больший.
