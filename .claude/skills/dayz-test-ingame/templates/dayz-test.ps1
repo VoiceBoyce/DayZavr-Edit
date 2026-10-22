@@ -95,10 +95,13 @@ $ClientWs       = Join-Path $DevRoot '_client'
 $ServerCfg      = Join-Path $ServerWs 'serverDZ.cfg'
 $ServerProfiles = Join-Path $ServerWs 'profiles'
 $ClientProfiles = Join-Path $ClientWs 'profiles'
-# DayZ 1.30 [reported: bzed]: FindFile() ignores $profile: (DZEXP-134) and the CF.FindFileEx
+# DayZ 1.30.164078 [reported: bzed]: FindFile() ignored $profile: (DZEXP-134) and the CF.FindFileEx
 # workaround resolves $profile: relative to the exe folder. These profiles live OUTSIDE the
-# DayZ folder, so mods that ENUMERATE $profile: files (CF/Expansion) find nothing here.
+# DayZ folder, so on 164078 mods that ENUMERATE $profile: files (CF/Expansion) found nothing here.
+# 1.30.164200 fixes FindFile [reported: BI 1.30.164200 notes; not re-measured].
 # Mods that only open known file names are unaffected. See SKILL.md "DayZ 1.30 changes".
+# Launch flags: this script passes neither -resolveFilePatchingUsingEnfusion nor its 1.30.164200
+# name -loadRVFilesViaEnfusionFS; add the new name to the argv below if you need it.
 
 # Refuse to run from inside a skill store. DevRoot is derived from the script's own
 # location, so an in-place run sprays server/client profiles, logs and VPP debug

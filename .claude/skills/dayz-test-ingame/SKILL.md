@@ -13,14 +13,16 @@ and config edits are picked up without re-binarizing. Three launch modes (offlin
 client / all) driven by one orchestrator script and double-click `.bat` wrappers, generated
 per mod into `<Mod>_dev\tools\`.
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
-The installed DayZ, DayZDiag and DayZServer on this machine are 1.30.164.078 (FileVersion, 2026-10-15), so
-every managed or `.bat` launch of them runs 1.30. What 1.30 adds to the launch side: `-mod` may point at an
+The installed DayZ, DayZDiag and DayZServer on this machine are 1.30.164.200 (FileVersion, ProductVersion
+1.30.164200.56, read 2026-10-21), so every managed or `.bat` launch of them runs 1.30. What 1.30 adds to the
+launch side: `-mod` may point at an
 **unpacked** source folder [CHANGELOG 1.30] — measured on 1.30 Exp 164014 it loads the folder's scripts but
 does not merge its `config.cpp`, so classes and world configs still need a PBO; new flags `-cacheP3D=0/1`
-and `-resolveFilePatchingUsingEnfusion=0/1` [CHANGELOG 1.30] (both strings are in `DayZDiag_x64.exe`
-1.30.164.078). The script log's `defines:` line carries `DAYZ_1_30`; a mod that fails to compile can crash
+and `-loadRVFilesViaEnfusionFS=0/1` (renamed in 1.30.164200; the old name `-resolveFilePatchingUsingEnfusion`
+was used before) [CHANGELOG 1.30] (both current strings are in the 1.30.164.200 exes, the old name is gone).
+The script log's `defines:` line carries `DAYZ_1_30`; a mod that fails to compile can crash
 a 1.30 server right after `Can't compile "World" script module!`; mods that enumerate `$profile:` need the
 profile folder inside the exe folder. Before 1.30: packed `@Mod` folders only. Details: § DayZ 1.30 changes
 (end of this file) and [dayz-1-30-test-ingame.md](references/dayz-1-30-test-ingame.md).
@@ -99,7 +101,7 @@ With the box free of run DayZ processes and explicit user authorization, the pat
 - Recipe: agent writes `.bat` (server/client argv, literal quotes on each value with spaces) and user double-clicks to execute them in interactive session. [EXACT - this skill, SP-077] Read script.log/RPT with `FileShare.ReadWrite`. UI closure, not by PID, except agent's own zombie (then exact `Stop-Process -Id`).
 - [DESIGN] Server argv: `-server "-config=<serverDZ.cfg>" "-profiles=<server-profiles>" "-mission=<mission-abs>" "-mod=<mod-abs-semicolon-list>" -filePatching -port=2302`
 - [DESIGN] Client argv: `"-mod=<mod-abs-semicolon-list>" -connect=127.0.0.1 -port=2302 "-profiles=<client-profiles>" -name=Dev -window -filePatching`
-[CHANGELOG 1.30] Optional on both: `-cacheP3D=1` (unbinarized `.p3d` sibling cache) and `-resolveFilePatchingUsingEnfusion=1` (requires `-filePatching`; always on in Workbench). `-mod=` may name an unpacked source folder, not only a packed `@Mod` (scripts only, measured on 1.30 Exp 164014). Keep `-profiles=` short and, if the modset enumerates `$profile:` files (CF `FindFileEx`, Expansion), inside the exe folder [reported: bzed]. See `references/dayz-1-30-test-ingame.md`.
+[CHANGELOG 1.30] Optional on both: `-cacheP3D=1` (unbinarized `.p3d` sibling cache) and `-loadRVFilesViaEnfusionFS=1` (renamed in 1.30.164200; `-resolveFilePatchingUsingEnfusion=1` before; requires `-filePatching`; always on in Workbench). `-mod=` may name an unpacked source folder, not only a packed `@Mod` (scripts only, measured on 1.30 Exp 164014). Keep `-profiles=` short and, if the modset enumerates `$profile:` files (CF `FindFileEx`, Expansion), inside the exe folder [reported: bzed]. See `references/dayz-1-30-test-ingame.md`.
 
 Three gotchas that bite along this same path and are not from argv (SP-228, measured):
 
@@ -1027,7 +1029,7 @@ them again (measured on 1.29; the vanilla line numbers below were re-pointed to 
    (actionmanagerclient.c:804, 1.29: 762; in MP enters through ActionStart, synchronized flow mirrored by
    server; in SP 1.30 added a pending guard, see `references/dayz-1-30-test-ingame.md`). Target
    componentIndex is obtained iterating `CrewPositionIndex(c)` until
-   it returns desired seat (transport.c:179, 1.29: 116). Success is observed with `GetCommand_Vehicle()`
+   it returns desired seat (transport.c:182, 1.29: 116). Success is observed with `GetCommand_Vehicle()`
    on next tick (with retry), not marking done upon injecting. NOTE: `ActionCondition` is
    protected — cannot be pre-validated from outside; manager validates on both sides.
 
@@ -1035,7 +1037,7 @@ them again (measured on 1.29; the vanilla line numbers below were re-pointed to 
    crew membership and vehicle command are TWO distinct things, and only real action
    produces both. Crew is NATIVE engine state, not a script netsync:
    `Transport` registers a single variable (`m_EngineZoneReceivedHit`, transport.c:110, 1.29: 73) and
-   `CrewMember`/`CrewDriver` are `proto native` (transport.c:179-191, 1.29: 111-128), readable from any
+   `CrewMember`/`CrewDriver` are `proto native` (transport.c:182-194, 1.29: 111-128), readable from any
    client — that is why a client wanting to get in can reject an already occupied seat
    (actiongetintransport.c:46-52, 1.29: 57-60). `HumanCommandVehicle`, on the other hand, is created by
    `StartCommand_Vehicle` on THE MACHINE that calls it, and across the tree's 3,042 files (1.30; 2,810
@@ -1804,13 +1806,16 @@ Evidencia y recetas: `<vault>\30_Sessions\2026-09-13-LFHeli-el-bote-sigue-al-foc
 
 ## DayZ 1.30 changes
 
-Installed builds (FileVersion read 2026-10-15): `DayZ_x64.exe`, `DayZDiag_x64.exe`, `DayZServer_x64.exe` =
-1.30.164.078 (ProductVersion 1.30.164078.38). `dayz-preflight` checks this. Measurements in this file dated
-before 2026-10-15 ran on 1.29 unless they say "1.30 Exp".
+Installed builds (FileVersion read 2026-10-21): `DayZ_x64.exe`, `DayZDiag_x64.exe`, `DayZServer_x64.exe` =
+1.30.164.200 (ProductVersion 1.30.164200.56); 2026-10-15 to 2026-10-21 they were 1.30.164.078
+(ProductVersion 1.30.164078.38). `dayz-preflight` checks this. Measurements in this file dated
+before 2026-10-15 ran on 1.29 unless they say "1.30 Exp"; those dated 2026-10-15..21 ran on 1.30.164078.
 
-**Launch flags.** `-cacheP3D=0/1` and `-resolveFilePatchingUsingEnfusion=0/1` [CHANGELOG 1.30]; both strings,
-plus `limitFPS`, are in the 1.30.164.078 client, Diag and server exes (byte grep). Their behaviour has not
-been measured here. `-headlessMode` appears only in `DayZDiag_x64.exe`.
+**Launch flags.** `-cacheP3D=0/1` and `-loadRVFilesViaEnfusionFS=0/1` [CHANGELOG 1.30]. The second one was
+called `-resolveFilePatchingUsingEnfusion=0/1` until 1.30.164200, which renamed it (§DayZ 1.30.164200
+changes). `cacheP3D`, `loadRVFilesViaEnfusionFS` and `limitFPS` are in the 1.30.164.200 client, Diag and
+server exes; `resolveFilePatchingUsingEnfusion` is in none of them (byte grep, 2026-10-21). Their behaviour
+has not been measured here. `-headlessMode` appears only in `DayZDiag_x64.exe`.
 
 **Unpacked `-mod` folder** [CHANGELOG 1.30]: mounts as `Adding relative directory ...`, loads the folder's
 scripts and its `CfgMods` define, but does not merge its `config.cpp` (`ConfigIsExisting("CfgPatches <mod>")`
@@ -1836,9 +1841,12 @@ problem, and run the Step 0 linter first: the crash costs more than the lint.
 `references/session-findings.md`) is not a 1.30 baseline: [reported: bzed] vanilla World on 1.30.164014 was
 2321. Compare a mod boot against a vanilla boot of the same build.
 
-**Profile folder inside the exe folder** [reported: bzed, announced with DayZ Expansion 1.9.74]. On 1.30,
-`FindFile()` ignores `$profile:`/`$mission:`/`$storage:`/`$saves:` and lists the working directory instead
-(BI ticket DZEXP-134, not fixed at release). The script declaration is unchanged
+**Profile folder inside the exe folder** [reported: bzed, announced with DayZ Expansion 1.9.74]. On
+1.30.164078, `FindFile()` ignored `$profile:`/`$mission:`/`$storage:`/`$saves:` and listed the working
+directory instead (BI ticket DZEXP-134). [reported: BI 1.30.164200 notes] 1.30.164200 fixes it: `FindFile`
+"now searches through the requested file system and normalises any path given to the internal engine
+delimiter '/'". Not re-measured here, so the rest of this paragraph describes 164078 and is the fallback if
+the fix does not hold for your case. The script declaration is unchanged
 (`P:\scripts\1_core\proto\ensystem.c:520`, same as 1.29), so this is native behaviour and only shows at
 runtime. The workaround (`CF.FindFileEx` in CF 1.5.9+) resolves `$profile:` relative to the exe folder and
 cuts an absolute `-profiles=` down to its last component, so mods that enumerate profile files find nothing
@@ -1846,9 +1854,46 @@ when the profile folder lives elsewhere. This skill's template puts profiles in 
 and `_client\profiles`, outside the DayZ folder: fine for mods that only open known file names, wrong for a
 modset with CF/Expansion that lists `$profile:` folders. bzed's fix is a symlink inside the server folder
 plus `-profiles=<name>`; the Windows equivalent (a junction under the DayZ folder) has not been tested
-here. A missing-file symptom on 1.30 with such a modset is this before it is the mod.
+here. On 1.30.164078 a missing-file symptom with such a modset was this before it was the mod; on
+1.30.164200 re-test the vanilla `FindFile("$profile:…")` first (a few lines in a test mod), and keep the
+junction/CF route only if it still lists the wrong folder.
 
 **Experimental vs stable.** 1.30 is stable; the Experimental branch carries the next build and runs a diag
 build with more defines and noisier logs (`Error()` shows as `Virtual Machine Exception`) [reported: bzed].
 A measurement labelled "1.30 Exp 164014" in these skills was taken on the pre-release build; its static
 API was re-checked against `P:\` 1.30.164078.
+
+### DayZ 1.30.164200 changes
+
+Patch 1.30.164200 (released 2026-10-21; Scripts Rev 127662). What it changes for launching and testing:
+
+- **Launch flag renamed.** `-resolveFilePatchingUsingEnfusion=0/1` is now `-loadRVFilesViaEnfusionFS=0/1`
+  [reported: BI 1.30.164200 notes: "Renamed 'resolveFilePatchingUsingEnfusion' to
+  'loadRVFilesViaEnfusionFS'"]. Byte grep 2026-10-21: the new string is in `DayZ_x64.exe`,
+  `DayZDiag_x64.exe` and `DayZServer_x64.exe` 1.30.164.200, the old one in none of them, so a `.bat` or
+  launcher profile that still passes the old name passes an unknown switch (what the engine does with it
+  was not measured). The value form `=0/1` is assumed unchanged. `dayz-130-migration`'s scanner flags the
+  old name in launch files (`launch-param-renamed`). This skill's `templates\dayz-test.ps1` passes neither
+  name, so it needs no change.
+- **`FindFile` fixed** [reported: BI 1.30.164200 notes, DZEXP-134] — see the profile-folder paragraph
+  above; not re-measured.
+- **`#include` in scripts fixed** [reported: BI 1.30.164200 notes, DZEXP-85]; circular-inheritance compile
+  errors fixed "for all cases". A mod that worked around either on 164078 may now compile differently:
+  run the Step 0 linter and read the first `Can't compile` line as usual.
+- **New compile breakers for 164078 mods** (script log `Can't compile "World"/"Mission" script module`):
+  `vector.Cross` removed, `Transport.HasCrew()` now native, Workbench API now `#ifdef WORKBENCH` only
+  (`Can't find variable 'Workbench'` [reported: Dabs Framework PR #50]). Scan with `dayz-130-migration`
+  before blaming the launch.
+- **Workbench** (`DayZ Tools\Bin\Workbench\WorkbenchApp.exe` 1.30.164.200): known issue "Workbench requires
+  the command line argument '-filePatching'" [reported: BI 1.30.164200 notes]; it gained a Diag menu.
+- **Navmesh v9.** Vanilla navmeshes are now format v9 and the 164200 server most likely rejects a custom
+  map's v7 navmesh (exe analysis, `dayz-ai-patterns` §Navmesh). On a test server with a community map,
+  grep the server RPT for `Navmesh could not be loaded` before debugging "infected/animals stand still".
+- Diag-only: `EDiagMenuGame` gained `ENF_DIAG_DENavmesh` (`P:\scripts\3_game\enums\ediagmenugame.c:7`);
+  the test classes `NavmeshTest*` are now `Land_NavmeshTest*`
+  (`P:\scripts\4_world\entities\navmeshtest\navmeshtest.c:2`).
+- `Debug.LOG_DEBUG_AUTOTEST` is now `"AutotestLog"` (`P:\scripts\3_game\tools\debug.c:19`; was
+  `"Autotest"`), the channel `Debug.AutotestLog(...)` writes to (`:272-275`): a log filter or autotest
+  reader that matched the old channel name must match the new one.
+- Everything else in this section (unpacked `-mod`, `defines:` oracle, compile crash, headless) was not
+  touched by the patch.

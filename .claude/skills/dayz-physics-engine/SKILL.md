@@ -13,7 +13,7 @@ citations are `path:line` relative to `P:\scripts` (1.30) unless written `1.29: 
 files moved. When something common-sounding is missing here, check section "What does NOT exist"
 before assuming it exists.
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 ## How to use this skill
 
@@ -38,14 +38,14 @@ The three deep-dives were written against v1.24/1.29 sources; each now opens wit
    with default `ObjIntersectView` (`4_world/classes/useractionscomponent/actiontargets.c:255`; 1.29: `:214-219`;
    default type at `3_game/global/dayzphysics.c:88`). No View Geometry LOD in the .p3d → no action, no
    admin-tool selection, regardless of any physics body. New in 1.30: liquid surfaces with no object are
-   also scored action targets at utility 0.01 (`actiontargets.c:532-534`), and the `ActionTarget` constructor
+   also scored action targets at utility 0.01 (`actiontargets.c:535-537`), and the `ActionTarget` constructor
    gained a trailing `string surfaceName = ""` (`actiontargets.c:125`; 1.29 had five parameters) with
    `GetSurfaceLiquidType()` at `:184`. A ≤1.29 call with five arguments still compiles; a subclass that
    overrides the constructor must match the new signature.
    *(Qualified 2026-10-03 from the 1.29 source, not measured; the same code is in 1.30: at a camera pitch of −45° or
    lower, targeting also takes the objects of a 30°, 3 m cone (`DayZPlayerUtils.GetEntitiesInCone`, `actiontargets.c:324-325`,
-   `c_MaxTargetDistance = 3.0` / `c_ConeAngle = 30.0` at `:841-843`; 1.29: `:269-270`) and scores them by their distance to
-   the cursor ray (`ComputeUtility`, `:490-529`), with no hit on them needed, so an item on
+   `c_MaxTargetDistance = 3.0` / `c_ConeAngle = 30.0` at `:844-846`; 1.29: `:269-270`) and scores them by their distance to
+   the cursor ray (`ComputeUtility`, `:490-532`), with no hit on them needed, so an item on
    the ground can become a target without any View Geometry hit. See `dayz-mcp-verify`, "Picking an item up proves
    nothing about its collision".)*
 3. **`dSetInteractionLayer` is GLOBAL.** It edits the world's layer↔layer interaction matrix
@@ -73,7 +73,7 @@ The three deep-dives were written against v1.24/1.29 sources; each now opens wit
    collision as unverified until tested in-game.
 7. **Drop/throw physics is temporary by design.** It is governed by a lifetime:
    `StopItemDynamicPhysics()` kills it via `SetDynamicPhysicsLifeTime(0.01)`
-   (`4_world/entities/itembase.c:4530-4534`). A long-rolling object must renew/extend the lifetime or
+   (`4_world/entities/itembase.c:4534-4538`). A long-rolling object must renew/extend the lifetime or
    avoid depending on the drop path. Measured (BenchRE 2026-08-26): the default lifetime is exactly
    **15 s** (n=2, `dBodyIsDynamic` polled at 4 Hz flips at t=15.00); `SetDynamicPhysicsLifeTime(3600)`
    is honored (still dynamic past a 300 s watchdog).
@@ -158,7 +158,7 @@ DYNAMICITEM_NOCHAR, ROADWAY, VEHICLE_NOTERRAIN, CHARACTER_NO_GRAVITY, RAGDOLL_NO
 DOOR, RAGDOLL, WATERLAYER, TERRAIN, GHOST, WORLDBOUNDS, FENCE, AI, AI_NO_COLLISION, AI_COMPLEX,
 TINYCAPSULE, TRIGGER, TRIGGER_NOTERRAIN, ITEM_SMALL, ITEM_LARGE, CAMERA, TEMP.
 
-Runtime query pattern (vanilla, `3_game/vehicles/transport.c:787-788`; 1.29: `:556-557`):
+Runtime query pattern (vanilla, `3_game/vehicles/transport.c:790-791`; 1.29: `:556-557`):
 ```c
 int layer = dBodyGetInteractionLayer(obj);
 bool blocksPlayer = dGetInteractionLayer(this, PhxInteractionLayers.CHARACTER, layer);
@@ -188,8 +188,8 @@ Two separate worlds — pick the right one:
 `extra.RelativeVelocityBefore.Length()` (`3_game/entities/inventoryitem.c:202`, threshold 0.3,
 throttled 0.33 s) — not with `Impulse`. Vehicle contacts arrive through `Transport.OnContact(string zoneName,
 vector localPos, IEntity other, Contact data)`, which in 1.30 has a body on `Transport` itself
-(`3_game/vehicles/transport.c:315-343`): server-only, it caches one `VehicleContactData` (`SetData(localPos,
-other, momentumDelta)`, class at `:1144-1156`) per frame in `m_ContactCache`, and `CarScript`/`MotorbikeScript`
+(`3_game/vehicles/transport.c:318-346`): server-only, it caches one `VehicleContactData` (`SetData(localPos,
+other, momentumDelta)`, class at `:1153-1165`) per frame in `m_ContactCache`, and `CarScript`/`MotorbikeScript`
 consume it in `EOnPostSimulate` → `CheckContactCache()` (`4_world/entities/vehicles/carscript.c:807-826`,
 `:1279`). The engine can call it many times per frame ("Can be called very frequently in one frame",
 `4_world/entities/vehicles/boatscript.c:425`): buffer contacts, process once per tick.
@@ -211,7 +211,9 @@ proto native void EnableDynamicCCD(bool state);                // :457 (1.29: :4
 proto native void SetDynamicPhysicsLifeTime(float lifeTime);   // :458 (1.29: :464)
 ```
 Lifecycle: throw (`3_game/systems/inventory/hand_actions.c:62-88`, server+owner) · inventory dump uses
-`ThrowPhysically(null, force, false)` (`4_world/static/miscgameplayfunctions.c:1321-1345`; 1.29: `:1164-1220`) · admin
+`ThrowPhysically(null, force, false)` (`4_world/static/miscgameplayfunctions.c:1323-1347`; 1.29: `:1164-1220`), and since
+1.30.164200 `ThrowAllItemsInInventoryEx` passes `-GetVelocity(parent)` as that force whatever its own `force` argument
+says (`:1295`; see §DayZ 1.30.164200 changes) · admin
 spawn-with-gravity uses `item.ThrowPhysically(null, "0 0 0")` server-side
 (`4_world/plugins/pluginbase/plugindeveloper.c:430,553,593`; 1.29: `:381,504`) · re-config hook
 `override void OnCreatePhysics()` → `RefreshPhysics()` (`4_world/entities/itembase.c:1150-1155`; 1.29: `:1224-1227`; real
@@ -335,7 +337,7 @@ on sleeping bodies are lost.
 | `EOnSimulate` on CarScript | car physics is 100% native; script only calls Set* controls (no `EOnSimulate` override in `3_game/vehicles/` or `4_world/entities/vehicles/` on 1.30) |
 | vanilla script call to `CreateDynamicPhysics` | declared but never called from script — no vanilla usage pattern |
 | `Synchronize()` on EntityAI/ItemBase | Transport-only (`3_game/vehicles/transport.c:171-172`; 1.29: `:108-109`) |
-| `CarScript.OnContact` override in vanilla | gone in 1.30: the contact cache lives in `Transport.OnContact` (`transport.c:315`); only `BoatScript` still overrides it (`boatscript.c:426`) |
+| `CarScript.OnContact` override in vanilla | gone in 1.30: the contact cache lives in `Transport.OnContact` (`transport.c:318`); only `BoatScript` still overrides it (`boatscript.c:426`) |
 
 ## Sleep/active enum
 
@@ -424,7 +426,7 @@ What changes:
 - Death-state handling: the non-command death branch calls `PhysicsSetSimpleDeath(true)` (`4_world/entities/dayzplayerimplement.c:745`). Before 1.30 it called `PhysicsSetRagdoll(true)` (1.29: `dayzplayerimplement.c:736`). `PhysicsSetRagdoll` remains and `PhysicsIsRagdoll` is new (`3_game/human.c:1451-1452`).
 - Unconscious ragdoll unhooks vehicle re-attach: `if (hcu && hcu.IsRagdoll()) m_TransportCache = null` (`4_world/entities/manbase/playerbase.c:3346-3350`).
 - Fall damage is exponential `CurveExp` with much lower height gates (health from **2 m**, shock from **0 m**, broken legs from **3 m**; `4_world/entities/dayzplayerimplementfalldamage.c:26-32`, `:92-97`). `Randomize` no longer rolls a lethal 1.0 coef back down (`:160-163`). Detail in `references/dayz-1-30-ragdoll-and-fall.md`.
-- Vehicles: `CarScript` contact handling moved up to `Transport` (`OnContact` body and `m_ContactCache` on `Transport`, `3_game/vehicles/transport.c:90`, `:315-343`; `CarScript`'s own `EEHitBy` override, 1.29 `carscript.c:531-537`, is gone and `Transport.EEHitBy`, `:144-151`, now also schedules the light update), so boats and the new `Motorbike` share it. `VehicleContactData` replaces the old `CarContactData` fields (`transport.c:1144-1156`; `CarContactData : VehicleContactData {}` kept for compatibility, `carscript.c:53`). Motorbikes have their own contact thresholds (`GameConstants.MOTORBIKES_CONTACT_DMG_*`, `3_game/constants.c:898-901`) and their own `RegisterTransportHit` branch (`entityai.c:4166-4184`). `CarFluid` is now `enum CarFluid : ETransportFluid {}` (`3_game/vehicles/car.c:18`, values at `transport.c:52-61`); `CarFluid.FUEL` still compiles (vanilla uses it, `carscript.c:850`).
+- Vehicles: `CarScript` contact handling moved up to `Transport` (`OnContact` body and `m_ContactCache` on `Transport`, `3_game/vehicles/transport.c:90`, `:318-346`; `CarScript`'s own `EEHitBy` override, 1.29 `carscript.c:531-537`, is gone and `Transport.EEHitBy`, `:144-151`, now also schedules the light update), so boats and the new `Motorbike` share it. `VehicleContactData` replaces the old `CarContactData` fields (`transport.c:1153-1165`; `CarContactData : VehicleContactData {}` kept for compatibility, `carscript.c:53`). Motorbikes have their own contact thresholds (`GameConstants.MOTORBIKES_CONTACT_DMG_*`, `3_game/constants.c:898-901`) and their own `RegisterTransportHit` branch (`entityai.c:4166-4184`). `CarFluid` is now `enum CarFluid : ETransportFluid {}` (`3_game/vehicles/car.c:18`, values at `transport.c:52-61`); `CarFluid.FUEL` still compiles (vanilla uses it, `carscript.c:850`).
 - Surfaces: `CGame.GetSurfaceInfoOn/GetSurfaceInfoUnderObject/GetSurfaceInfoUnderObjectByBone` return a `SurfaceInfo` (`3_game/global/game.c:1171-1173`); `DayZPlayerImplement.GetSurfaceType` is obsolete (`dayzplayerimplement.c:4121`). See §Surfaces.
 - Action cursor still uses View Geometry (`RaycastRVProxy` + `ObjIntersectView`). Liquid surfaces without an object are now targets (utility 0.01); `ActionTarget` ctor gained `string surfaceName = ""` (`actiontargets.c:125`).
 - Uncon wake-up is refused while `PhysicsIsFalling(false)` (`playerbase.c:3423-3431`).
@@ -442,7 +444,39 @@ Migration checklist:
 - [ ] Custom uncon wake: keep `m_UnconsciousTime > 2` AND `PhysicsIsFalling(false) == false`.
 - [ ] Action targeting over water: expect a surface target even with no object (`ActionTarget.GetSurfaceLiquidType`, `actiontargets.c:184`).
 - [ ] Death path: `PhysicsSetSimpleDeath(true)` is the script-visible non-ragdoll death branch.
-- [ ] Vehicle contact damage mods: port `CarContactData` usage to `VehicleContactData`; motorbikes use `MotorbikeScript.CheckContactCache` (`4_world/entities/vehicles/motorbikescript.c:1252`) with their own constants.
+- [ ] Vehicle contact damage mods: port `CarContactData` usage to `VehicleContactData`; motorbikes use `MotorbikeScript.CheckContactCache` (`4_world/entities/vehicles/motorbikescript.c:1267`) with their own constants.
 - [ ] Surface reads: move `SurfaceUnderObject*` / `GetSurfaceType` code to `GetSurfaceInfo*` → `SurfaceInfo`.
 
 Detail: `references/dayz-1-30-ragdoll-and-fall.md`, `references/transport-netsync-vehiculos.md` (vehicle contact path), `references/fisica-engine-deep-dive.md`.
+
+### DayZ 1.30.164200 changes (patch of 2026-10-21)
+
+Script side (static reading of `P:\scripts` 1.30.164200, not measured):
+- **Inventory dump velocity.** `MiscGameplayFunctions.ThrowAllItemsInInventoryEx(parent, flags, force)` now throws every
+  attachment and cargo item with `-GetVelocity(parent)` (`4_world/static/miscgameplayfunctions.c:1295`); the `force`
+  argument is no longer used anywhere in the function (`:1251-1297`). `ThrowAllItemsInInventory` already passed
+  `-GetVelocity(parent)` (`:1246-1249`). Vanilla callers: tents and base-building pass `vector.Zero`
+  (`tentbase.c:1003`, `basebuildingbase.c:1212`), fireplace / barrel pass nothing (`fireplace.c:81`,
+  `barrelholes_colorbase.c:576`). A mod that calls the `Ex` variant to scatter loot with its own impulse (explosion,
+  wreck) gets none of it on 164200: call `ThrowEntityFromInventory(ent, pos, quat, force, flags)` per item (`:1299`) or
+  `ThrowPhysically` yourself. For a resting parent the result is ~zero velocity, as before.
+- **Split-to-ground.** Right-click splitting a stack (`ItemBase.OnRightClick`, client, `4_world/entities/itembase.c:2059`)
+  with no cargo space now drops the new stack with `GameInventory.PrepareDropEntityPos(player, this, m4, false,
+  GameConstants.INVENTORY_ENTITY_DROP_OVERLAP_DEPTH)` + `dst.SetGround(this, m4)` (`itembase.c:2087-2091`) instead of
+  `SetInventoryLocationToVicinityOrCurrent`. That is the same call `GameInventory.SetGroundPosByOwner` makes
+  (`3_game/systems/inventory/inventory.c:1214-1220`): it snaps the transform out of conflicting entities such as cars, depth
+  `INVENTORY_ENTITY_DROP_OVERLAP_DEPTH = 2` (`3_game/constants.c:1115`; proto and doc `inventory.c:606-615`). Use the same
+  pair when a mod drops an item next to a player.
+- **Transport.** `HasCrew()` (proto native) and `IsMoving()` are new on `Transport` (`3_game/vehicles/transport.c:175`,
+  `:819-823`, base logs an error; only `CarScript` implements it). Motorbikes refuse detaching any attachment while the
+  engine runs or a crew member is seated (`4_world/entities/vehicles/motorbikescript.c:612-625`). Naming rule and recipes:
+  `dayz-vehicles/references/dayz-1-30-vehicles.md` §11, `dayz-motorbikes` §DayZ 1.30.164200 changes.
+
+Engine side, not visible in scripts [reported: BI 1.30.164200 notes]:
+- "Motorbikes could be launched into air when colliding with small objects or on bridges" — fixed. Bike contact damage
+  scripts and constants are unchanged; re-test any 164078 "bike flies off a bridge" repro before tuning a mod for it.
+- "Items appeared to be bouncing on terrain after being thrown" and "Thrown items could sometimes pass through thin
+  walls" — fixed in the native item path (`ThrowPhysically` and the drop/throw bodies). The rebound numbers in truth 4
+  and the BenchRE results in §Script bodies on vanilla items were measured on 1.29: re-measure before relying on them
+  for thrown items. No script API changed for this (`ThrowPhysically`, `EnableDynamicCCD` and
+  `SetDynamicPhysicsLifeTime` have the same signatures).

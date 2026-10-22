@@ -228,6 +228,11 @@ proto native float GetMaskTransitionWidth();
 proto native void SetMaskTransitionWidth(float value);  // [0,1] softness
 ```
 
+Colour space: images loaded by `LoadImageFile` lacked the SRGB flag before 1.30.164200 and rendered brighter than
+their pixels (measured on 1.30.164078: `28,31,35` → `105,107,111`); 164200 fixes that [reported: BI 1.30.164200 notes],
+not re-measured, layout-set images not mentioned. White mask + `SetColor` works on both builds; see SKILL.md
+"DayZ 1.30 changes" item 11.
+
 **Pattern for colored background:**
 ```
 string tex = "#(argb,8,8,3)color(1,1,1,1,CO)";

@@ -2,6 +2,9 @@
 
 <!-- Generated 2026-10-15 from a declaration-level parse of P:\scripts (DayZ 1.30.164078 stable) against the 1.29 extraction (O:\DayZ 1.29 ...\scripts). Paths are relative to P:\scripts. A parser, not the compiler: confirm a line with grep before you quote it. -->
 
+> Generated against 1.30.164078. Its `P:\scripts` line refs were re-pointed to 1.30.164200 on 2026-10-21 (`_shared/tools/remap_vanilla_refs.py`). What 164200 changed on top: `api-delta-1.30.164078-to-164200.md`.
+
+
 
 Methods and fields that 1.30 added to classes that already existed in 1.29 (new classes: see `api-delta-1.29-to-1.30.md` §11). `from ancestor` = it existed on an ancestor in 1.29 and was moved down/duplicated.
 
@@ -15,7 +18,7 @@ Methods and fields that 1.30 added to classes that already existed in 1.29 (new 
 - `static string EnumFlagsToString(typename, int)`
 
 ### `vector` — `1_core/proto/enconvert.c`
-- `vector Cross(vector)`
+- ~~`vector Cross(vector)`~~ — new in 1.30.164078, **removed in 1.30.164200**; use `a * b` (cross product operator)
 - `static void SanitizeMinsMaxs(inout vector, inout vector)`
 
 

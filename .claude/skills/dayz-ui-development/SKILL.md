@@ -1,6 +1,6 @@
 ---
 name: dayz-ui-development
-description: "Use when: DayZ UI, menu, .layout, widget, HUD, CreateWidgets, ShowScriptedMenu, UI doesn't look like the design, or porting a <=1.29 UI/HUD mod to DayZ 1.30 (HUD action cursor, preview widgets, GUID-form layouts). Full UI/layout/Dabs. Not general Enforce: enforce-script-reference; not in-game launch: dayz-test-ingame."
+description: "Use when: DayZ UI, menu, .layout, widget, HUD, CreateWidgets, ShowScriptedMenu, UI doesn't look like the design, or porting a <=1.29 UI/HUD mod to DayZ 1.30 (HUD action cursor, preview widgets, GUID-form layouts; 164200: item-action arrows, LoadImageFile brightness, Workbench API in Dabs). Full UI/layout/Dabs. Not general Enforce: enforce-script-reference; not in-game launch: dayz-test-ingame."
 ---
 
 # DayZ UI Development — Verified Reference (v3)
@@ -11,12 +11,14 @@ archives — every load-bearing claim carries a path:line or URL. Local ground t
 vanilla scripts at `<dayz-projects>\scripts\`, vanilla GUI data at
 `...\DayZ Projects\gui\` (verify any cite by opening the file).
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 Vanilla line numbers in this skill were re-checked against `P:\` (1.30.164078) on 2026-10-15 where a
 sentence cites them; `enwidgets.c` and `dbgui.c` are byte-identical between 1.29 and 1.30, so every
-widget-API cite and every widget-rendering measurement taken on 1.29 still applies. What 1.30 changed
-for UI is collected in **DayZ 1.30 changes** at the end of this file.
+widget-API cite and every widget-rendering measurement taken on 1.29 still applies (`enwidgets.c` is also
+unchanged in 1.30.164200). What 1.30 changed for UI is collected in **DayZ 1.30 changes** at the end of this
+file, including what patch 1.30.164200 changed (`day_z_hud.layout` in GUID form, item-action arrow alpha,
+`LoadImageFile` SRGB fix, Workbench API under `#ifdef WORKBENCH`, camera look limits).
 
 ## TASK ROUTER — open the right reference for the task, then come back here
 
@@ -143,7 +145,8 @@ Read the relevant file BEFORE writing code:
 - **.styles system — complete dissection (states, 9-slice item contracts, Colorable mechanism,
   custom-style recipe, ActionWidget 9-slice gradient in 1.30)** → `references/styles-format.md`
 - **Layout file format (.layout Enfusion)** → `references/layout-format.md` (includes the 1.30
-  GUID-form widget header, `PanelWidgetClass "{GUID}" { Name "x" … }`, that 9 vanilla layouts now use)
+  GUID-form widget header, `PanelWidgetClass "{GUID}" { Name "x" … }`, that 10 vanilla layouts now use —
+  `day_z_hud.layout` joined them in 1.30.164200)
 - **Starting layouts (modal, HUD overlay, form row, scroll list)** → [`templates/README.md`](templates/README.md#the-four-construction-traps) — four copy-paste `.layout` files and the four construction traps they exist to stop. Offline gate is `tools/dayz-ui-lab` (`parse.py --check`); `ui_rect_lint.py` is not distributed with this pack.
 - **★ Hot iteration — edit a `.layout` on disk and reload it into the RUNNING client (measured 2026-08-19 on 1.29)** → `references/hot-iteration.md` — the addon prefix is served by the PBO and only the PBO, but `$profile:` is re-read on every load, so a design can be iterated in seconds instead of one repack-and-boot per change. Carries the guard that keeps `CreateWidgets` from killing the client, the fact that a second load STACKS instead of replacing, and the two silent failures (a missing texture paints flat WHITE and logs nothing; perfect rects say nothing about whether anything is drawn).
 - **Advanced UI patterns (toggles, anti-overlap, tabs, hover, drag)** → `references/advanced-patterns.md` — ⚠️ contains 3 confabulated APIs (see the CORRECTIONS banner at the top of that file before copying any code).
@@ -192,7 +195,7 @@ Every rule below caused a real crash or visual failure in production.
 
 1. **Empty `{ }` child block on leaves is a SAFE CONVENTION, not a hard requirement.**
    *(Corrected 2026-07-03 against vanilla ground truth.)* Vanilla layouts routinely
-   OMIT the child block on leaf widgets — e.g. `RichTextWidgetClass DefaultActionWidget`
+   OMIT the child block on leaf widgets — e.g. the `RichTextWidgetClass` named `DefaultActionWidget`
    and every `ActionListItem0..N` in `gui/layouts/day_z_hud.layout` have no `{ }` and
    ship in the production HUD. So a missing leaf block does NOT reliably crash. What DOES
    break loading: **unbalanced braces** and **XML-format layouts** (`<?xml?>` / `<GUI><class type=...>`,
@@ -216,10 +219,12 @@ Every rule below caused a real crash or visual failure in production.
    second form: the new style `ActionWidget` (9-slice of `ActionWidgetGradient*` images from
    `dayz_gui`, declared for PanelWidget, GridSpacerWidget and WrapSpacerWidget,
    `P:\gui\looknfeel\dayzwidgets.styles:3700, 4280, 4570`) sits on the two cursor GridSpacers
-   (`day_z_hud.layout:2287` on `ActionTargetsCursorWidget`, `:3859` on `ItemActions`), and their
-   prompt rows `item`, `interact`, `continuous_interact`, `single`, `continuous` (`:2294, 2477, 2755,
-   3033, 3249`) and the `ia_*` twins (`ia_item` `:3869`, `ia_interact` `:4083`,
-   `ia_continuous_interact` `:4306`, plus `ia_single`, `ia_continuous`) became plain `PanelWidgetClass`.
+   (`style ActionWidget` at `day_z_hud.layout:2417` on `ActionTargetsCursorWidget`, `:4077` on `ItemActions`), and their
+   prompt rows `item`, `interact`, `continuous_interact`, `single`, `continuous` (`:2424, 2617, 2910,
+   3203, 3431`) and the `ia_*` twins (`ia_item` `:4087`, `ia_interact` `:4314`,
+   `ia_continuous_interact` `:4549`, `ia_single` `:4784`, `ia_continuous` `:4953`) became plain `PanelWidgetClass`
+   (1.30.164200 line numbers: the file is GUID-form since that patch, so the class sits on the cited line
+   and `Name "…"` on the next).
    Before 1.30: those ten rows were `ImageWidgetClass` with `imageTexture … linear_gradient.edds`
    (1.29: `O:\…\gui\layouts\day_z_hud.layout:2292-2307`).
    ⚠️ **Breaking change 1.30:** `ImageWidget.Cast(root.FindAnyWidget("interact"))` (or `"item"`,
@@ -956,7 +961,7 @@ Useful for feature flags across mod boundaries.
 | A UI image comes out as a flat WHITE box | The texture path does not resolve | Check the path first, not the color or the style: a missing UI texture fills the slot with white (255,255,255, deviation 0,0) and writes **nothing** to the RPT (measured 2026-08-19) |
 | Reloading a layout at runtime draws two copies, or clicks land on nothing | `CreateWidgets` STACKS a second tree, it does not replace the first | `Unlink()` the previous root before every load (hot-iteration.md trap 2) |
 | ImageWidget invisible in script | No image loaded | `LoadImageFile(0, "#(argb,8,8,3)color(1,1,1,1,CO)")` then SetColor. ⚠️ this procedural texture FAILED on DayZ 1.29 ("Bad texture name", LFPowerGrid RPT; measured on 1.29) — if it fails, ship a 1×1 white .edds (or use a Colorable style, styles-format.md §5) |
-| `ImageWidget.Cast(FindAnyWidget("interact"/"item"/"single"/"continuous"/"continuous_interact"/"ia_*"))` is null on 1.30 (worked on 1.29) | 1.30 `day_z_hud.layout` made those ten rows `PanelWidgetClass`; the gradient now comes from `style ActionWidget` on the parent GridSpacer (`:2287`, `:3859`) | Cast to `Widget` (or `PanelWidget`); do not `LoadImageFile` on them. See Rule 2 and **DayZ 1.30 changes** |
+| `ImageWidget.Cast(FindAnyWidget("interact"/"item"/"single"/"continuous"/"continuous_interact"/"ia_*"))` is null on 1.30 (worked on 1.29) | 1.30 `day_z_hud.layout` made those ten rows `PanelWidgetClass`; the gradient now comes from `style ActionWidget` on the parent GridSpacer (`:2417`, `:4077` on 164200) | Cast to `Widget` (or `PanelWidget`); do not `LoadImageFile` on them. See Rule 2 and **DayZ 1.30 changes** |
 | A mod's copy of a vanilla layout/imageset looks wrong or breaks vanilla script on 1.30 | The copy is the 1.29 file; 1.30 changed 13 vanilla layouts, `dayzwidgets.styles` and 3 imagesets (`dayz_inventory` atlas repacked) | Re-diff the copy against `P:\gui` (**DayZ 1.30 changes** lists the files) |
 | ViewBinding not updating UI | Binding_Name mismatch | Verify ScriptParams Binding_Name matches controller property exactly |
 | CreateWidgets crashes | Called from RPC or early init | Pre-create views in MissionInit when GetWorkspace() is valid (Rule 9) |
@@ -1182,7 +1187,7 @@ captures `capture_20260829_003222_408` / `_003807_235`.
    there; +10-15% margin over width measured at 1080p.
 3. **Typographic hierarchy in default font-only mode = sized faces**:
    `gui/fonts/Metron12/14/16` and `MetronBook12/14` exist and vanilla uses them
-   (`day_z_hud.layout:1965` Metron14). Unnumbered faces ("Metron",
+   (`day_z_hud.layout:2077` Metron14 on 1.30.164200; `:1965` on 1.29/164078). Unnumbered faces ("Metron",
    "MetronBook") take their size from the box (TEXT SIZING LAWS), so with them the
    hierarchy is the box heights. Sized bitmap faces keep their pixel size at every
    resolution; text that must scale with the panel wants an SDF face with
@@ -1258,9 +1263,18 @@ usually appears on exit, after the feature itself looked complete.
    specific: first person works, while third person remains pinned to the former camera transform
    and player actions are absent.
 4. **Do not reuse a continuous-action binding as the exit binding.** Use a separate key such as
-   SPACE or ESC. Otherwise the ActionManager can retain an action in progress, and vanilla blocks
-   third-person look while a non-freelook action is active
-   (`VANILLA/scripts/4_world/.../dayzplayercamera_base.c:175-197`; 1.29: `:157-177`).
+   SPACE or ESC. Otherwise the ActionManager can retain an action in progress, and its look limits
+   stay narrowed: for a full-body continuous action with `IsCameraLockOnPerform()` the
+   `ActionManagerBase` sets `SetLookLimits(angleUD.x, angleUD.y, -160, 160)` and restores
+   `(-85, 85, -160, 160)` only when no such action runs
+   (`VANILLA/scripts/4_world/classes/useractionscomponent/actionmanagerbase.c:130-153`). On 1.30.164200
+   the camera has no script-side action lock of its own any more: `DayZPlayerCameraBase.UpdateUDAngleUnlocked`
+   / `UpdateLRAngleUnlocked` replace the `pMin`/`pMax` they are given with `m_pPlayer.GetLookLimits(...)`
+   on every update, freelook included (`dayzplayercamera_base.c:154-156`, `:200-202`; "match the ones that
+   are used in C++"). A custom camera that passes its own limits to those two methods now gets the
+   player's look limits instead: clamp after the call or set the limits on the player. Before 1.30.164200
+   (1.30.164078 `:175-197`; 1.29 `:157-177`) the camera script itself smoothed the U/D angle into the
+   action's limits, outside freelook only.
 
 Verification boundary: rules 1-2 were checked against an author-owned production implementation.
 Rules 3-4 were source-checked and matched the observed 1PP/3PP asymmetry, but the originating
@@ -1281,9 +1295,9 @@ mode blend
 
 Without them, the canonical symptom is an opaque black rectangle the size of the widget with the
 art still visible inside. This was isolated by an in-game A/B and matches the vanilla projected
-crosshair (`VANILLA/gui/layouts/day_z_hud.layout:2263-2264`). Add this check during layout authoring
+crosshair (`VANILLA/gui/layouts/day_z_hud.layout:2392-2393` on 1.30.164200; `:2263-2264` on 1.29/164078). Add this check during layout authoring
 and again at delivery. For a strip or tape that must be clipped by its parent, the real attribute is
-`clipchildren 1` (`day_z_hud.layout:555`), not `clipping`.
+`clipchildren 1` (`day_z_hud.layout:595` on 1.30.164200, `:555` before), not `clipping`.
 
 ## In-seat interfaces: interrupt before excluding input (added 2026-08-31)
 
@@ -1750,19 +1764,26 @@ Everything below was checked on 2026-10-15 against `P:\` (1.30.164078 stable) an
 side, `O:\DayZ 1.29 …` (paths below are relative to those roots). It replaces the "DayZ 1.30 Exp
 (build 1.30.164014)" section this file carried; four of its statements do not match 1.30 stable and
 are corrected inline (marked *Corrected*; whether Exp differed or the text was wrong was not checked). The full API delta is in the `dayz-130-migration` skill.
+Patch 1.30.164200 (2026-10-21) changed `day_z_hud.layout` (GUID form, line numbers below are 164200's),
+`dayz_inventory.imageset` (item 9), the item-action arrows (item 4) and the script-loaded image colour space
+(item 11); the camera action lock is in "Scripted cameras", rule 4.
 
 ### What changed for UI in DayZ 1.30
 
 1. **Action cursor rows are panels now (`gui/layouts/day_z_hud.layout`)** — details in Rule 2.
-   - `item` (`:2294`), `interact` (`:2477`), `continuous_interact` (`:2755`), `single` (`:3033`),
-     `continuous` (`:3249`) and the `ia_*` twins (`ia_item` `:3869`, `ia_interact` `:4083`,
-     `ia_continuous_interact` `:4306`, `ia_single`, `ia_continuous`) went from `ImageWidgetClass`
-     (with `linear_gradient.edds`) to `PanelWidgetClass`. Widget names are unchanged (292 names in both
-     versions), so `FindAnyWidget` still finds them; only an `ImageWidget` cast fails.
+   - `item` (`:2424`), `interact` (`:2617`), `continuous_interact` (`:2910`), `single` (`:3203`),
+     `continuous` (`:3431`) and the `ia_*` twins (`ia_item` `:4087`, `ia_interact` `:4314`,
+     `ia_continuous_interact` `:4549`, `ia_single` `:4784`, `ia_continuous` `:4953`) went from `ImageWidgetClass`
+     (with `linear_gradient.edds`) to `PanelWidgetClass`. Widget names are unchanged (292 names in 1.29,
+     164078 and 164200), so `FindAnyWidget` still finds them; only an `ImageWidget` cast fails.
    - The gradient now comes from the new style `ActionWidget` on the two parent GridSpacers
-     (`:2287` `ActionTargetsCursorWidget`, `:3859` `ItemActions`), a 9-slice of `ActionWidgetGradient*`
+     (`style` line `:2417` in `ActionTargetsCursorWidget`, `:4077` in `ItemActions`), a 9-slice of `ActionWidgetGradient*`
      images in `dayz_gui` (`gui/looknfeel/dayzwidgets.styles:3700, 4280, 4570`).
      *Corrected:* the Exp note said each row carries `style ActionWidget` and put `continuous` at `:3311`.
+   - 1.30.164200 re-saved `day_z_hud.layout` in GUID form (`PanelWidgetClass "{…}" {` + `Name "…"`) and rounded
+     colours to 3 decimals (`0.314 0.314 0.314 0.627`); the only behavioural change is the 12 `*_mtl_down` /
+     `*_mtl_down_not_select` arrow images going from `mode additive` to `mode blend` (e.g. `ia_interact_mtl_down`
+     `:4353`). Re-copy the file if the mod ships an overriding copy; line numbers from 164078 no longer match.
 2. **`ActionTargetsCursor` override breakers** (`scripts/5_mission/gui/actiontargetscursor.c`):
    `void Update(bool fullUpdate = true)` (`:310`) and `protected void BuildFixedCursor(bool forceRebuild = true)`
    (`:267`) gained a parameter, so a 1.29 `override void Update()` / `override void BuildFixedCursor()`
@@ -1780,6 +1801,14 @@ are corrected inline (marked *Corrected*; whether Exp differed or the text was w
 4. **Dimmed prompts**: when `!action.CanBeStarted()` the `<row>_btn_icon` and `<row>_btn_icon_xbox`
    widgets get `SetAlpha(0.149)`, else `1.0` (`actiontargetscursor.c:1118-1127`). A mod that sets alpha
    on those widgets is overwritten on every cursor content rebuild.
+   1.30.164200 does the same to the item-action scroll arrows: `ItemActionsWidget.BuildCursor`
+   (`5_mission/gui/itemactionswidget.c:183-186`, run from `Update` `:216`) calls `SetMultipleActionArrowsState`
+   (`:700-711`), which sets `SetAlpha(0.235)` (`ARROW_ALPHA_NOT_SELECTED`, `:5`) or `1.0` (`ARROW_ALPHA_SELECTED`,
+   `:6`) on `ia_interact_mtl_up/_down`, `ia_continuous_interact_mtl_*`, `ia_single_mtl_*`, `ia_continuous_mtl_*`,
+   depending on whether that category is the one the scroll wheel controls (`m_SelectedActionCategory`, `:266`).
+   A HUD mod that recolours or fades those arrows with `SetAlpha` is overwritten on every rebuild: tint with
+   `SetColor` RGB, override `SetArrowAlpha` (`:713`), or apply your alpha after `super` in a modded
+   `BuildCursor`. The lookups are null-checked, so a custom layout without those widgets is fine.
 5. **`Set*XboxIcon` are `[Obsolete("no replacement")]`** (`actiontargetscursor.c:1368-1377`). They were
    already body-less prototypes under a `//! DEPRECATED` comment in 1.29 (1.29:
    `scripts/5_mission/gui/actiontargetscursor.c:130-136`), so calls to them did nothing then either:
@@ -1811,10 +1840,11 @@ are corrected inline (marked *Corrected*; whether Exp differed or the text was w
      (`:102`), `EffectParticle.DisableParticleInUI(bool)` / `IsDisableParticleInUI()`
      (`scripts/3_game/effects/effectparticle.c:569-580`); vanilla sets it in `EffCloudDust`
      (`scripts/4_world/entities/effects/effclouddust.c:5`). Particle side: `dayz-particles` skill.
-8. **GUID-form layouts**: 9 vanilla layouts are now saved as `XWidgetClass "{0000000012345678}" {` with
+8. **GUID-form layouts**: 10 vanilla layouts are now saved as `XWidgetClass "{0000000012345678}" {` with
    the widget name in a `Name "…"` line (e.g. `gui/layouts/debug/day_z_debug_monitor.layout:287-288`,
-   still found by `FindAnyWidget("VersionValue")` at `scripts/5_mission/gui/debugmonitor.c:31`). The
-   other 218 keep the classic `XWidgetClass name {` form, which 1.30 still loads. Files and tooling
+   still found by `FindAnyWidget("VersionValue")` at `scripts/5_mission/gui/debugmonitor.c:31`): 9 since
+   1.30.164078, plus `day_z_hud.layout` since 1.30.164200 (its root `FrameWidgetClass {` has no GUID but
+   also carries `Name "HudFrameWidget"`). The other 217 keep the classic `XWidgetClass name {` form, which 1.30 still loads. Files and tooling
    impact: `references/layout-format.md` §"1.30: GUID-form widget headers". [CHANGELOG 1.30] attributes
    this to the Layout Editor moving to Enfusion 2023.
 9. **Vanilla GUI files changed** (re-diff any copy your mod ships):
@@ -1830,11 +1860,15 @@ are corrected inline (marked *Corrected*; whether Exp differed or the text was w
      `new_ui/hud/action_info_spacer`, `new_ui/hud/simpleicontemplate`,
      `script_console/script_console_menu_element`, `underground_trigger_editor/*`.
    - Imagesets: `dayz_gui` lost `externallink`, gained the nine `ActionWidgetGradient*` and
-     `icon_inappropriate`; `dayz_inventory` lost `woodcrate`, gained `bricklayingtools`, `bricks`,
-     `digitallock`, `hammertools`, `handsactive`, `pickaxetools`, `plierstools`, `rb_material_storage`,
-     `shoveltools`, `sladgehammertools`, and its atlas was repacked (135 of the 138 images both versions
-     share have a new `Pos`/`Size`): `set:dayz_inventory image:x` references keep working, copied
-     coordinates or an overriding copy of the imageset do not. `dayz_additional_gui` went from
+     `icon_inappropriate`; `dayz_inventory` gained `bricklayingtools`, `bricks`, `digitallock`,
+     `hammertools`, `pickaxetools`, `plierstools`, `rb_material_storage`, `shoveltools`,
+     `sladgehammertools` (148 images on 1.30.164200), and its atlas was repacked (the images shared with
+     1.29 got a new `Pos`/`Size`, e.g. `woodcrate` `Pos 1710 1368` → `1707 1365`): `set:dayz_inventory image:x`
+     references keep working, copied coordinates or an overriding copy of the imageset do not.
+     1.30.164078 had renamed `woodcrate` to `handsactive`, so the truck crate slots' ghost icons
+     (`CfgSlots` `Slot_Truck_01_WoodenCrate1-4`, `P:\scripts\config.cpp:1603-1621`, `image:woodcrate`) showed no
+     icon; 1.30.164200 named it `woodcrate` again (`P:\gui\imagesets\dayz_inventory.imageset:683`). A mod that
+     switched to `image:handsactive` on 164078 gets no image on 164200 — use `woodcrate`. `dayz_additional_gui` went from
      `RefSize 128 128` to `256 256` and gained `ButtonDigitalLock_*`, `ButtonIconCorrect`,
      `ButtonIconKey`, `Empty`. New imagesets: `dayz_inventory_additional` (30 images),
      `dayz_resources_grayscale` (11), `xbox_buttons2`, `playstation_buttons2` (1 each).
@@ -1876,12 +1910,39 @@ are corrected inline (marked *Corrected*; whether Exp differed or the text was w
       tested in game.
     - Debug HUD windows: `HudDebugWin*.Update()` became `Update(float)`
       (`5_mission/gui/scriptshuddebug/huddebugwinbase.c:31` and subclasses).
+11. **UI image brightness (1.30.164200).** Measured on 1.30.164078 (this machine, INT_Garage, 2026-10-17): a UI
+    PAA (ImageToPAA) shown through an `ImageWidget` rendered brighter than its pixels — dark steel `28,31,35`
+    baked into the texture came out `105,107,111` — while a widget colour set with `SetColor` was exact. The
+    workaround then was to bake UI textures as WHITE masks (shape in alpha) and tint them with `SetColor`, never
+    to bake dark colours (pre-compensating would band in DXT 5-6-5). 1.30.164200 notes: "Widget images loaded
+    using scripted `ImageWidget.LoadImageFile` were missing the SRGB flag and so were appearing brighter than
+    intended" — fixed [reported: BI 1.30.164200 notes]. Not re-measured here, and the note says nothing about
+    images set in the `.layout` (`image0 "…"`). So: a texture loaded by script should now render as authored,
+    and a texture pre-darkened or pre-gamma'd for 164078 will now look too dark. The white-mask + `SetColor`
+    route is correct on both builds. Re-measure (screenshot vs source pixels, script-loaded and layout-set) before
+    changing any tone curve; the loading-screen hypothesis in `dayz-texture-pipeline` step 6 is in the same family.
+12. **Workbench API is Workbench-only (1.30.164200).** `Workbench`, `WBModuleDef`, `ScriptEditor`,
+    `WorkbenchPluginAttribute`, `ButtonAttribute`… are declared only under `#ifdef WORKBENCH`; `ResourceBrowser`,
+    `WorldEditor*` are gone. A UI framework or mod that references them outside that guard no longer compiles in the
+    game: `Can't find variable 'Workbench'` → `Can't compile "Mission" script module!` (Dabs Framework's
+    `gui/mvc/samplemvc.c` line 33 [reported: Dabs Framework PR #50]). See `references/dabs-framework.md`.
+13. **Asset path separators (measured on 1.30.164200, 2026-10-21).** Retail client 1.30.164200.56, packed PBO
+    (`$PBOPREFIX$` = mod name), every form pointing at its own file copy: `CreateWidgets`, `ImageWidget.LoadImageFile`
+    (`.edds` / `.paa`, mod and vanilla), `image0 "…"` inside a `.layout`, `FileExist` and `FindFile` all load with
+    `/`, with `\\` (`"MyMod\\gui\\x.layout"`), with mixed separators and with the wrong letter case. What fails is a
+    path that **starts** with a separator — `"\\MyMod\\gui\\x.layout"` or `"/MyMod/gui/x.layout"`: `CreateWidgets`
+    returns `null`, `LoadImageFile` returns `false` and the RPT says `SCRIPT (E): Cannot open layout '\MyMod\…'` /
+    `GUI (E): ImageWidget::LoadImageFile can't load '\MyMod\…'` (same for `image0` in a layout). So the community
+    claim "after 164200 every `\\` layout/icon path broke, switch to `/`" is wrong as stated; whether a leading `\`
+    worked on 164078 is unknown (no 164078 client left). Rule: prefix-relative, no leading separator; `/` is the
+    convention (all 217 vanilla `.layout` literals use it). Config.cpp paths (`picture="\dz\…"`) are a different
+    system and keep their leading backslash. Migration scanner: `asset-path-leading-separator`.
 
 ### What breaks and how to migrate
 
 | Breakage on 1.30 | Severity | Cause (1.30 source) | How to migrate |
 |---|---|---|---|
-| `ImageWidget.Cast(FindAnyWidget("interact"))` (any of the ten cursor rows) is `null` → VM null-pointer on the next call | **CRITICAL** (runtime) | Rows are `PanelWidgetClass` (`day_z_hud.layout:2294, 2477, 2755, 3033, 3249, 3869, 4083, 4306…`) | Cast to `Widget`/`PanelWidget`. To restyle, edit or shadow the `ActionWidget` style (styles-format.md) — there is no `Widget.SetStyle` in `enwidgets.c`, only `GetStyleName()` (`:133`). |
+| `ImageWidget.Cast(FindAnyWidget("interact"))` (any of the ten cursor rows) is `null` → VM null-pointer on the next call | **CRITICAL** (runtime) | Rows are `PanelWidgetClass` (`day_z_hud.layout:2424, 2617, 2910, 3203, 3431, 4087, 4314, 4549, 4784, 4953`, 164200) | Cast to `Widget`/`PanelWidget`. To restyle, edit or shadow the `ActionWidget` style (styles-format.md) — there is no `Widget.SetStyle` in `enwidgets.c`, only `GetStyleName()` (`:133`). |
 | `override void Update()` / `override void BuildFixedCursor()` in `modded class ActionTargetsCursor` | **CRITICAL** (compile) | `Update(bool fullUpdate = true)` `:310`, `BuildFixedCursor(bool forceRebuild = true)` `:267` | Add the parameter, pass it to `super`, gate heavy work on it (item 2). |
 | Override of `IngameHudVisibility.UpdateElement(EHudElement)` / `UpdateVisibility(EHudElement, bool)` silently never runs | **HIGH** (silent) | Vanilla calls only the new overloads (`ingamehudvisibility.c:100, 169`) | Override `UpdateElement(EHudElement, bool)` / `UpdateVisibility(EHudElement, bool, bool)`. |
 | Mod menu registered as ID 47 or 48 | **HIGH** | `MENU_DIGITAL_CODELOCK = 47`, `MENU_UNDERGROUND_TRIGGER_EDITOR = 48` | Move to an arbitrary high ID. |
@@ -1890,6 +1951,11 @@ are corrected inline (marked *Corrected*; whether Exp differed or the text was w
 | `MainMenuConsole` / `ServerBrowserTab.OnDLCChange(EDLCId)`, `ServerBrowserMenuNew.Play()`, `EDLCId.DLC_*`, removed `InviteMenu` members, `ScriptConsole*Tab(…)` ctors | **MEDIUM** (compile) | Item 10 | Match the 1.30 signatures / names. |
 | `SetInteractXboxIcon` & co. → `SCRIPT (W)` obsolete warnings | **LOW** | `[Obsolete("no replacement")]` `:1368-1377` | Delete the calls (already body-less no-ops on 1.29). |
 | Expecting `WorldToScreen`/`ScreenToWorld` on preview widgets | **LOW** | Not declared (`gameplay.c:276-313`) | See item 7 for `ApplyToCamera` + `ProjectWorldToViewport` (unmeasured). |
+| (164200) `Can't find variable 'Workbench'` → `Can't compile "Mission" script module!` | **CRITICAL** (compile) | Workbench API only under `#ifdef WORKBENCH` (item 12) | Wrap the code in `#ifdef WORKBENCH`, or update the framework (Dabs). |
+| (164200) Item-action arrow alpha set by the mod is lost | **LOW** | `ItemActionsWidget.SetMultipleActionArrowsState` sets 0.235 / 1.0 on every rebuild (item 4) | Tint with `SetColor`, or override `SetArrowAlpha`. |
+| (164200) `set:dayz_inventory image:handsactive` shows nothing | **LOW** | Renamed back to `woodcrate` (item 9) | Use `woodcrate`. |
+| (164200) Script-loaded UI image now darker than on 164078 | **MEDIUM** (visual) | `LoadImageFile` SRGB fix (item 11) | Remove 164078-only pre-compensation; re-measure. |
+| Layout/image path starting with `\` or `/` → `Cannot open layout '\…'`, `LoadImageFile can't load '\…'`, null root | **HIGH** (runtime) | Measured on 164200 (item 13); backslashes inside the path are fine | Drop the leading separator: `"MyMod/gui/layouts/x.layout"`. |
 
 ### 1.30 migration checklist for UI developers
 
@@ -1902,9 +1968,14 @@ are corrected inline (marked *Corrected*; whether Exp differed or the text was w
 - [ ] Delete calls to `Set*XboxIcon` (they never did anything on 1.29 either).
 - [ ] Custom menu IDs are not 47 or 48.
 - [ ] Every vanilla layout / imageset / styles copy shipped by the mod re-diffed against `P:\gui`
-      (item 9); offline layout tools re-run on any GUID-form file (layout-format.md).
+      (item 9); offline layout tools re-run on any GUID-form file (layout-format.md). After 1.30.164200
+      re-copy `day_z_hud.layout` and `dayz_inventory.imageset` again.
 - [ ] For new cursor inspection panels, see `references/hud-action-info-panels.md`; for the
       `ActionWidget` 9-slice, `references/styles-format.md`.
+- [ ] (164200) No Workbench API outside `#ifdef WORKBENCH` (also in bundled frameworks); HUD alpha on
+      `ia_*_mtl_up/down` arrows survives the rebuild; script-loaded images re-checked for brightness (item 11);
+      custom cameras do not rely on the limits they pass to `UpdateUDAngleUnlocked` / `UpdateLRAngleUnlocked`
+      ("Scripted cameras", rule 4).
 
 ### Detailed references for DayZ 1.30
 - **Modular cursor panels and construction grids**: `references/hud-action-info-panels.md`

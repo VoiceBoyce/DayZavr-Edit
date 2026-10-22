@@ -203,6 +203,8 @@ and `WorkbenchApp.exe` 1.30.164.078 (byte grep, 2026-10-15); behaviour not measu
   164014: scripts load from it, its `config.cpp` is not merged (see `dayz-1-30-test-ingame.md`).
 - `-cacheP3D=0` / `-cacheP3D=1` — disable / enable P3D cache.
 - `-resolveFilePatchingUsingEnfusion=0` / `-resolveFilePatchingUsingEnfusion=1` — Enfusion path for filePatching.
+  Renamed in 1.30.164200 to `-loadRVFilesViaEnfusionFS=0/1` [reported: BI 1.30.164200 notes] (old name before);
+  byte grep 2026-10-21: only the new string is in the 1.30.164.200 client, Diag and server exes.
 
 Before 1.30: `-mod` took packed `@Mod` folders only. Pair unpacked `-mod` with the filePatching caveats already
 in this file (empty-PBO compile, `-NoFilePatching` for production replica — a `dayz-test.ps1` switch that

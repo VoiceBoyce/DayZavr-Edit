@@ -1,6 +1,6 @@
 # Terrain holes: evidence (DayZ 1.30)
 
-> Target: DayZ 1.30 stable (1.30.164078). Labels: ../../_shared/dayz-version-policy.md.
+> Target: DayZ 1.30 stable (1.30.164200). Labels: ../../_shared/dayz-version-policy.md.
 
 First measured 2026-09-24 comparing the 1.30.164.014 Exp install with 1.29 stable;
 re-checked on stable 1.30.164078 on 2026-10-15 (`P:\` unpack, stable `DayZDiag_x64.exe`
@@ -62,7 +62,8 @@ been disassembled to see how that path is constructed.
 `P:\DZ\worlds\chernarusplus\world\config.cpp` contains neither `Holes` nor `tiles`.
 The Sakhal world is in `sakhal\addons\worlds_sakhal.ebo` and Nasdara's in
 `nasdara\addons\worlds_nasdara.ebo`, both encrypted; neither could be read (there is no
-`P:\DZ\worlds\sakhal\world\`, and Nasdara is not unpacked on `P:\`).
+`P:\DZ\worlds\sakhal\world\` or `P:\DZ\worlds\nasdara\world\`; the 1.30.164200 unpack of Nasdara
+holds only `ce\`, `data\` and `navmesh\`).
 `P:\DZ\worlds\enoch\ce\cfgundergroundtriggers.json` is byte-for-byte identical to 1.29
 (`cmp`, 2026-10-15): holes did not arrive with new triggers.
 

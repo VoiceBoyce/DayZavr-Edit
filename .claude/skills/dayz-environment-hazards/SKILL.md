@@ -14,7 +14,7 @@ description: >
 
 # DayZ Environment Hazards (1.30)
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 DayZ 1.30 adds native environmental hazards that did not exist on 1.29: a hybrid engine+script sandstorm (`Weather.GetSandstorm()`, `P:\scripts\3_game\weather.c:210`; `SandstormController`, `P:\scripts\3_game\sandstorm.c:6-135`), exposure with shelter fade in `ScriptedSandstormController`, heat stroke via the `ThermalBiasHandler` accumulator (high heat no longer damages health from `HeatComfortMdfr`), eye irritation and silicosis via `AGT_AIRBOURNE_SOLID`, `OilPitArea` oil pits, dust via `SurfaceInfo`, and sun exposure gated by `Environment.IsInShadow()`. The script side of the Nasdara world (DLC Badlands) ships in `P:\scripts\4_world\classes\worlds\nasdara.c` (sand weather, solar table); the Nasdara world data is **not** unpacked on `P:\`, so map/config facts about it come from 1.30 Exp and are labelled as such.
 
@@ -46,7 +46,7 @@ Recommendation: a new environmental hazard inherits the vanilla pattern (`Effect
 3. [EXACT] **JSON frequency**: `"SandstormData": { "sandstormFrequency": 1.0 }` in `cfggameplay.json` (`ITEM_SandstormData`, `P:\scripts\3_game\cfggameplaydatajson.c:440-459`; getter `CfgGameplayHandler.GetSandstormFrequency()`, `P:\scripts\3_game\cfggameplayhandler.c:533-536`). Default 1.0; negative values are clamped to 0 (`P:\scripts\3_game\worlddata.c:427-443`). `0` disables weather-triggered storms; `2` doubles Nasdara's 8 % bad-weather roll to 16 % (`P:\scripts\4_world\classes\worlds\nasdara.c:563-566`). The vanilla `cfggameplay.json` files on `P:\DZ\worlds\{chernarusplus,enoch,sakhal}\ce\` have no `SandstormData` block, so the script default applies.
 4. [DESIGN] **WorldData**: for automatic storms like Nasdara, copy the `CalculateWind` + `StartSandstorm` pattern (`nasdara.c:318-323` start, `:561-579` chance roll; helper `WorldData.StartSandstorm`, `P:\scripts\3_game\worlddata.c:477-490`). Only `NasdaraData` calls `StartSandstorm` in vanilla; ChernarusPlus never starts a sandstorm.
 5. [EXACT] **Shelter**: per-player intensity is `GetIntensity(head)` attenuated over 1.5 s if underground, interior (roof **and** `IsSoundInsideBuilding`) or `Car` (`P:\scripts\4_world\systems\sandstorm\scriptedsandstormcontroller.c:15, 142-178, 213-248, 250-282`). Motorbike and boat do **not** count as shelter.
-6. [EXACT] **PPE**: `DEF_DUST_PARTICLE_BREATH` on a MASK-category item against silicosis; `DEF_DUST_PARTICLE_EYES` on EYEWEAR/MASK/NVG-category items against irritation (`P:\scripts\3_game\constants.c:545-550`, `P:\scripts\4_world\plugins\pluginbase\plugintransmissionagents.c:414-436`). Config keys are `class Protection { dust_particle_breath; dust_particle_eyes; }` (`P:\scripts\4_world\entities\itembase.c:4073-4102`); see [references/ppe-agents.md](references/ppe-agents.md) for the category trap.
+6. [EXACT] **PPE**: `DEF_DUST_PARTICLE_BREATH` on a MASK-category item against silicosis; `DEF_DUST_PARTICLE_EYES` on EYEWEAR/MASK/NVG-category items against irritation (`P:\scripts\3_game\constants.c:545-550`, `P:\scripts\4_world\plugins\pluginbase\plugintransmissionagents.c:414-436`). Config keys are `class Protection { dust_particle_breath; dust_particle_eyes; }` (`P:\scripts\4_world\entities\itembase.c:4077-4106`); see [references/ppe-agents.md](references/ppe-agents.md) for the category trap.
 7. [EXACT] **Heat**: `HeatComfortMdfr` feeds `ThermalBiasHandler.Add` above comfort thresholds (`P:\scripts\4_world\classes\playermodifiers\modifiers\heatcomfortmdfr.c:74-111`). The 4 phases of `HeatStroke` read `GetThermalBiasHandler().Get()` (`P:\scripts\4_world\classes\playermodifiers\modifiers\diseases\heatstroke.c:4, 58-61`).
 8. [EXACT] **Shadow and sun**: `CheckShadowPresence` every `ENVIRO_TICK_SHADOW_RC_CHECK` = 30 s, not 5 (`P:\scripts\3_game\constants.c:760`; `P:\scripts\4_world\classes\environment\environment.c:405-414, 665-720`). The sun term is only added when the world filled `m_TemperatureUnderSunModifier` (`environment.c:868-872`); vanilla fills it only in `NasdaraData.Init` (`nasdara.c:67-73`).
 9. [DESIGN] **Economy / CE**: register `OilPitArea` zones via `cfgeffectarea.json` like any `EffectArea`. Detail in [references/dust-oilpit-nasdara.md](references/dust-oilpit-nasdara.md).
@@ -63,7 +63,7 @@ Paths below are relative to `P:\scripts\` unless they start with `P:\`; `1.29: �
 ### 2. Interior = roof **and** building sound
 - **Symptom**: being under an eave or a `CrashBase` does not turn off the storm.
 - **Cause**: `isCurrentlyInside = (isUnderRoof && isInInterior)` and `EXCLUDED_SHELTER_TYPES = {CrashBase, Plant}` (`scriptedsandstormcontroller.c:20, 222-228`).
-- **Remedy**: modded buildings must trigger `IsSoundInsideBuilding()` and have `ObjIntersectIFire` geometry for `MiscGameplayFunctions.IsUnder` (`4_world\static\miscgameplayfunctions.c:1105`).
+- **Remedy**: modded buildings must trigger `IsSoundInsideBuilding()` and have `ObjIntersectIFire` geometry for `MiscGameplayFunctions.IsUnder` (`4_world\static\miscgameplayfunctions.c:1107`).
 
 ### 3. Lethal heat no longer lives in `HeatComfortMdfr`
 - **Symptom**: a 1.29 mod trimming heat damage in `HeatComfortMdfr` stops doing anything (player still dies from `HeatStrokePhase4`).
@@ -129,9 +129,20 @@ None of the sandstorm, thermal-bias, silicosis, eye-irritation, shadow/sun or oi
 7. **Persistence**: 1.30 `PlayerBase` appends `ThermalBiasHandler` to the player stream with no `version` gate (`playerbase.c:7395, 7520`; `thermalbiashandler.c:72-78`). A `modded PlayerBase.OnStoreSave/Load` must keep `super` order. Effect on characters saved by 1.29 not measured — see `dayz-persistence`.
 8. Do not wrap 1.30 code in `#ifdef DAYZ_1_30` (policy rule 1).
 
-## Known issues in 1.30.164078 (static reading of the source)
+### DayZ 1.30.164200 changes
 
-1. **Nasdara data**: on 1.30 Exp 164014 the Nasdara data PBO was a 6-file stub without `.wrp`/navmesh. The DLC world data is not unpacked on `P:\`, so its state on stable is **not verified**; scripts reference `DZ\worlds\nasdara\data\lighting\lighting_nasdara.txt` (`P:\scripts\3_game\worldlighting.c:6`).
+Patch 1.30.164200 (2026-10-21). No sandstorm, thermal-bias, heat-stroke, silicosis, eye-irritation, oil-pit or effect-area script changed (script delta file list). What did:
+
+1. **Irrigation tunnel water no longer gives cholera** [reported: BI 1.30.164200 notes]. The data fix (`dayz-130-migration` config-delta §2.8): 38 irrigation-tunnel / water-stream models use the roadway surface `clean_water_int` (`liquidType=4194304`, `LIQUID_CLEANWATER`, `P:\DZ\surfaces\config.cpp:1803-1809`) instead of `still_water_int` (`liquidType=512`, `LIQUID_WATER`, `:1775-1781`). Drinking a `LIQUID_CLEANWATER` surface counts as `ENVIRO_WELL`, any other liquid as `ENVIRO_POND` (`P:\scripts\4_world\classes\useractionscomponent\actions\continuous\actiondrinkpondcontinuous.c:78-86`), and only `ENVIRO_POND` adds `CHOLERA` (`P:\scripts\4_world\entities\manbase\playerbase.c:7696-7704`). Water in a custom hazard map follows the same rule.
+2. **Action order on pots.** `Pot` now removes and re-adds Wash Hands / Wash Head / Wet Clothing after `ActionDrinkCookingPot` (`P:\scripts\4_world\entities\itembase\edible_base\bottle_base\pot.c:137-144`; `cauldron.c:113-117` has the same order), and `ActionDrinkCan` moved up in `ActionConstructor` (`actionconstructor.c:208`), so Drink is offered before washing (BI: "'Wash Face' action was incorrectly offered first instead of 'Drink'", DZEXP-164). The wash actions themselves (eye irritation, thermal bias; see How to verify) are unchanged. [reported: BI 1.30.164200 notes, known issue] no audio when performing Wash Head or Wet Clothes.
+3. **`vector.Cross` removed.** The shadow capsule in `Environment.CheckShadowPresence` now builds its axes with `(forward * up)` / `(up * right)` (`P:\scripts\4_world\classes\environment\environment.c:696-697`; `vector * vector` is the cross product). Same behaviour; a mod that copied this function with `.Cross(` no longer compiles.
+4. **Interior detection** [reported: BI 1.30.164200 notes, known issue]: "Incorrect interior/exterior detection in some buildings". Invariant 2 (shelter = roof **and** `IsSoundInsideBuilding`) depends on that detection: if a vanilla building does not shelter from the storm on 164200, suspect this before your mod. Not measured.
+5. **Night vision in a storm** (client PPE): an optic in day mode underground during a sandstorm now gets its own profile `NV_UNDERGROUND_SANDSTORM_DAYTIME_OPTICS = 18`; `NVTypes` values after `NV_OPTICS_UNDERGROUND` moved (+1/+2). Surface sandstorm optics/goggles are unchanged. Detail: `dayz-underground` §Night vision underground.
+6. **Badlands data on `P:\`.** The 1.30.164200 unpack added the Nasdara CE, lighting, navmesh and `*_takistan` data (`references/dust-oilpit-nasdara.md` §Nasdara); `worlds_nasdara.ebo` stays encrypted. Vanilla navmeshes are now format v9 (`dayz-ai-patterns` §Navmesh).
+
+## Known issues in 1.30.164078, still present in 1.30.164200 unless noted (static reading of the source)
+
+1. **Nasdara data**: on 1.30 Exp 164014 the Nasdara data PBO was a 6-file stub without `.wrp`/navmesh. Resolved for `P:\` by the 1.30.164200 unpack: the data PBO (8 files), CE, navmesh and the lighting file the scripts reference (`P:\DZ\worlds\nasdara\data\lighting\lighting_nasdara.txt`, `P:\scripts\3_game\worldlighting.c:6`) are there; only the world config `worlds_nasdara.ebo` is encrypted (`references/dust-oilpit-nasdara.md`).
 2. **Wash Head with frozen bottle** [CHANGELOG 1.30, known issue]: `ActionWashHeadItemContinuous.ActionCondition` only rejects gasoline, no `IsFrozen()` test (`actionwashheaditemcontinuous.c:32-38`, unchanged on 164078).
 3. **Sickness icons**: `HeatStrokePhase1` + `HasDisease` counter imbalance (invariant 4).
 4. **No sun outside Nasdara**: `ChernarusPlusData.Init` does not fill `m_TemperatureUnderSunModifier` (`P:\scripts\4_world\classes\worlds\chernarusplus.c:31-80`; `EnochData`/`SakhalData` do not either — only `nasdara.c` writes the map), and `Environment` adds the sun term only if the current daytime is a key of that map (`environment.c:868-872`, `P:\scripts\3_game\worlddata.c:645-654`). A custom map gets sun exposure only if its `WorldData.Init` fills the map like `nasdara.c:67-73`.
@@ -141,7 +152,7 @@ None of the sandstorm, thermal-bias, silicosis, eye-irritation, shadow/sun or oi
 
 ## Cite-then-verify
 
-`[EXACT]` citations point at `P:\` (1.30.164078). Before trusting any line number, grep `P:\scripts` (policy rule 3). Older third-party notes about this content shifted many citations (e.g. "5 s" shadow tick); never copy an `[EXACT]` block from them.
+`[EXACT]` citations point at `P:\` (1.30.164200). Before trusting any line number, grep `P:\scripts` (policy rule 3). Older third-party notes about this content shifted many citations (e.g. "5 s" shadow tick); never copy an `[EXACT]` block from them.
 
 ## References index
 
@@ -154,7 +165,7 @@ None of the sandstorm, thermal-bias, silicosis, eye-irritation, shadow/sun or oi
 ## What could not be verified
 
 1. **`SandstormController` C++**: progression, magnitude and `GetPointOnEdge` live in the exe.
-2. **Nasdara world data** (`.wrp`, configs, animals): not unpacked on `P:\`.
+2. **Nasdara world config** (`worlds_nasdara.ebo`, with the `.wrp`): encrypted. CE, animals (`P:\DZ\animals_takistan\`) and AI templates are on `P:\` since the 1.30.164200 unpack.
 3. **`.p3d` / `.ptc` / `.edds` binaries**: existence only (e.g. `P:\graphics\particles\sandstorm\sandstorm.ptc`); emitter curves [UNVERIFIED].
 4. **`Object.IsInfluencedBySandstorm()` / `OnClientSandstormEnter/Leave()`** (`P:\scripts\3_game\entities\object.c:1375-1381`): declared only; no vanilla script overrides or calls them, presumably engine-driven. Not measured.
 5. **Runtime**: no tick was measured in-game, neither on 1.30 Exp nor on stable.

@@ -18,7 +18,7 @@ description: >
 
 The DayZ-adapted spine of spec-driven development: define *what done means* and *how it will be verified* before touching code, then gate the artifacts for consistency before spending an in-game test cycle.
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 This is the local adaptation of GitHub's [spec-kit](https://github.com/github/spec-kit) `specify → clarify → analyze → implement` flow. The generic app scaffolding (TDD red-green, contract tests, user-story-as-independent-MVP slicing, the `specify` CLI, GitHub-issue export, extension marketplace) is intentionally dropped — see "What this drops" below. What is kept is the discipline that already maps to R7/R8/R8-extended and G1–G3, plus one thing they lack: an explicit **artifact-level** consistency gate.
 

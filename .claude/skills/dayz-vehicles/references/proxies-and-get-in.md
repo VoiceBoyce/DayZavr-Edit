@@ -1,6 +1,6 @@
 # Proxies, get-in and detachable parts: the contract
 
-> Target: DayZ 1.30 stable (1.30.164078); vanilla cites renumbered against `P:\scripts` (1.30) on 2026-10-15.
+> Target: DayZ 1.30 stable (1.30.164200); vanilla cites renumbered against `P:\scripts` (1.30) on 2026-10-15.
 > In-game measurements here were taken on 1.29 unless marked; the APIs they use are unchanged unless a line says otherwise.
 
 Extracted from `SKILL.md` (cut 3, 2026-08-15). Here lives the DETAIL; the short
@@ -424,7 +424,7 @@ mounted, override the gate `ActionGetInTransport` already consults; do not add a
 parallel condition.
 
 ```c
-// scripts/3_game/vehicles/transport.c:724
+// scripts/3_game/vehicles/transport.c:727
 bool CrewCanGetThrough( int posIdx )
 
 // scripts/4_world/.../actiongetintransport.c:54 (1.30; 1.29 called IsAreaAtDoorFree at :63)

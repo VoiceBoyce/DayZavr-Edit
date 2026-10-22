@@ -1,12 +1,12 @@
 # DayZ 1.30 — ragdoll data-driven and fall damage
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 Lane P04 overflow for `dayz-physics-engine`. SKILL.md keeps the 90% working set; this file holds
 1.30 physics-engine detail that would blow the 500-line cap. Character bind path (`ragdoll =` on
 `SurvivorBase`) is `dayz-characters`. Animation-graph / surrender ASI is `dayz-animation-pipeline`.
 
-Citations are `P:\…` (1.30.164078) unless marked `1.29:` (`O:\DayZ 1.29 Старый распакованный клиент\…`). This file was
+Citations are `P:\…` (1.30.164200) unless marked `1.29:` (`O:\DayZ 1.29 Старый распакованный клиент\…`). This file was
 first written against the 1.30 Exp 164014 extract; every `[EXACT]` block below was re-read on stable and holds
 unless a correction says otherwise. `[UNVERIFIED]` = no script call-site or no in-game test.
 
@@ -227,7 +227,7 @@ Truth #2 is still true. Line drift plus the liquid-surface target:
 ```
 
 ```c
-// [EXACT] P:\scripts\4_world\classes\useractionscomponent\actiontargets.c:532
+// [EXACT] P:\scripts\4_world\classes\useractionscomponent\actiontargets.c:535
 		//! surfaces with liquid source
 		if (m_SurfaceInfo && m_SurfaceInfo.GetLiquidType() != LIQUID_NONE)
 			return 0.01;

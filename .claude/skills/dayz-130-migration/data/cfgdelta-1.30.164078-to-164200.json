@@ -1,0 +1,4642 @@
+{
+ "added": {
+  "CfgSoundSets/Bodyfall_grass_dry_ext_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_grass_dry_ext_Zmb_SoundSet": {
+   "base": "baseZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_hand_grass_dry_ext_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_hand_grass_dry_ext_Zmb_SoundSet": {
+   "base": "baseZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_hand_light_grass_dry_ext_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_hand_light_wood_planks_ext_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_hand_light_wood_planks_int_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_hand_nasdara_desert_Zmb_SoundSet": {
+   "base": "baseZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_hand_nasdara_grass_dry_Zmb_SoundSet": {
+   "base": "baseZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_hand_nasdara_mud_Zmb_SoundSet": {
+   "base": "baseZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_hand_wood_planks_ext_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_hand_wood_planks_int_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_nasdara_desert_Zmb_SoundSet": {
+   "base": "baseZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_nasdara_grass_dry_Zmb_SoundSet": {
+   "base": "baseZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_nasdara_mud_Zmb_SoundSet": {
+   "base": "baseZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_rollHard_grass_dry_ext_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_rollHard_wood_planks_ext_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_rollHard_wood_planks_int_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_roll_grass_dry_ext_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_roll_wood_planks_ext_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_roll_wood_planks_int_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_slide_grass_dry_ext_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_slide_grass_dry_ext_Zmb_SoundSet": {
+   "base": "baseZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_slide_light_grass_dry_ext_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_slide_light_wood_planks_ext_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_slide_light_wood_planks_int_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_slide_nasdara_desert_Zmb_SoundSet": {
+   "base": "baseZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_slide_nasdara_grass_dry_Zmb_SoundSet": {
+   "base": "baseZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_slide_nasdara_mud_Zmb_SoundSet": {
+   "base": "baseZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_slide_wood_planks_ext_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_slide_wood_planks_int_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_wood_planks_ext_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Bodyfall_wood_planks_int_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Handsstep_wood_planks_ext_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Handsstep_wood_planks_int_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Handstep_Hard_wood_planks_ext_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Handstep_Hard_wood_planks_int_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Handstep_wood_planks_ext_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Handstep_wood_planks_int_Char_SoundSet": {
+   "base": "baseCharacter_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Motorbike_02_Engine_Ext_Broken_High_SoundSet": {
+   "base": "baseEngine_EXT_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Motorbike_02_Engine_Ext_Broken_Low_SoundSet": {
+   "base": "baseEngine_EXT_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/dog_Shepherd_Pain_SoundSet": {
+   "base": null,
+   "file": "sounds_takistan/config.cpp"
+  },
+  "CfgSoundSets/jumpErc_en_deforested_Char_SoundSet": {
+   "base": "runErc_en_deforested_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/jumpErc_nasdara_lake_Char_SoundSet": {
+   "base": "runErc_nasdara_lake_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/jumpErc_nasdara_soil_Char_SoundSet": {
+   "base": "runErc_nasdara_soil_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/jumpErc_sakhal_snow_forest_Char_SoundSet": {
+   "base": "runErc_sakhal_snow_forest_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_building_dirt_ext_bare_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_building_dirt_ext_boots_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_building_dirt_ext_sneakers_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_building_dirt_int_bare_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_building_dirt_int_boots_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_building_dirt_int_sneakers_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_nasdara_desert_bare_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_nasdara_desert_boots_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_nasdara_desert_sneakers_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_nasdara_forest_pine_bare_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_nasdara_forest_pine_boots_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_nasdara_forest_pine_sneakers_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_nasdara_grass_dry_bare_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_nasdara_grass_dry_boots_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_nasdara_grass_dry_sneakers_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_nasdara_mud_bare_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_nasdara_mud_boots_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_nasdara_mud_sneakers_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_nasdara_soil_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_nasdara_soil_bare_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_nasdara_soil_boots_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_nasdara_soil_sneakers_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_nasdara_stony_bare_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_nasdara_stony_boots_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_nasdara_stony_sneakers_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFeetErc_sakhal_snow_forest_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFootErc_en_deforested_Char_SoundSet": {
+   "base": "runErc_en_deforested_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFootErc_nasdara_lake_Char_SoundSet": {
+   "base": "runErc_nasdara_lake_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFootErc_nasdara_soil_Char_SoundSet": {
+   "base": "runErc_nasdara_soil_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/landFootErc_sakhal_snow_forest_Char_SoundSet": {
+   "base": "runErc_sakhal_snow_forest_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runCro_nasdara_lake_Char_SoundSet": {
+   "base": "runErc_nasdara_lake_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runCro_nasdara_soil_Char_SoundSet": {
+   "base": "runErc_nasdara_soil_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runCro_sakhal_snow_forest_Char_SoundSet": {
+   "base": "runErc_sakhal_snow_forest_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runErc_nasdara_stony_bare_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runErc_nasdara_stony_boots_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runErc_nasdara_stony_sneakers_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProneElbow_cp_grass_tall_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProneElbow_wood_planks_ext_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProneElbow_wood_planks_int_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_cp_grass_tall_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_cp_grass_tall_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_nasdara_desert_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_nasdara_grass_dry_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_nasdara_mud_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_water_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_wood_planks_ext_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_wood_planks_ext_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_wood_planks_int_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_wood_planks_int_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runRasErc_en_deforested_Char_SoundSet": {
+   "base": "runErc_en_deforested_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runRasErc_nasdara_lake_Char_SoundSet": {
+   "base": "runErc_nasdara_lake_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runRasErc_nasdara_soil_Char_SoundSet": {
+   "base": "runErc_nasdara_soil_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runRasErc_sakhal_snow_forest_Char_SoundSet": {
+   "base": "runErc_sakhal_snow_forest_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_building_dirt_ext_bare_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_building_dirt_ext_boots_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_building_dirt_ext_sneakers_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_building_dirt_int_bare_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_building_dirt_int_boots_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_building_dirt_int_sneakers_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_nasdara_desert_bare_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_nasdara_desert_boots_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_nasdara_desert_sneakers_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_nasdara_forest_pine_bare_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_nasdara_forest_pine_boots_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_nasdara_forest_pine_sneakers_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_nasdara_grass_dry_bare_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_nasdara_grass_dry_boots_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_nasdara_grass_dry_sneakers_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_nasdara_mud_bare_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_nasdara_mud_boots_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_nasdara_mud_sneakers_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_nasdara_soil_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_nasdara_soil_bare_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_nasdara_soil_boots_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_nasdara_soil_sneakers_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_nasdara_stony_bare_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_nasdara_stony_boots_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_nasdara_stony_sneakers_Zmb_SoundSet": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/scuffErc_sakhal_snow_forest_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/sprintErc_nasdara_stony_bare_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/sprintErc_nasdara_stony_boots_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/sprintErc_nasdara_stony_sneakers_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkCro_nasdara_lake_Char_SoundSet": {
+   "base": "walkErc_nasdara_lake_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkCro_nasdara_soil_Char_SoundSet": {
+   "base": "walkErc_nasdara_soil_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkCro_sakhal_snow_forest_Char_SoundSet": {
+   "base": "walkErc_sakhal_snow_forest_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkErc_nasdara_stony_bare_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkErc_nasdara_stony_boots_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkErc_nasdara_stony_sneakers_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProneElbow_cp_grass_tall_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProneElbow_wood_planks_ext_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProneElbow_wood_planks_int_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProneLong_noHS_asphalt_int_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProneLong_noHS_building_dirt_ext_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProneLong_noHS_building_dirt_int_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProneLong_noHS_cp_grass_tall_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProneLong_noHS_dirt_int_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProneLong_noHS_wood_planks_int_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProne_cp_grass_tall_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProne_cp_grass_tall_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProne_nasdara_desert_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProne_nasdara_grass_dry_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProne_nasdara_mud_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProne_noHS_asphalt_int_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProne_noHS_building_dirt_ext_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProne_noHS_building_dirt_int_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProne_noHS_cp_grass_tall_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProne_noHS_dirt_int_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProne_noHS_wood_planks_int_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProne_wood_planks_ext_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProne_wood_planks_ext_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProne_wood_planks_int_Char_SoundSet": {
+   "base": "baseFootsteps_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkProne_wood_planks_int_Zmb_Soundset": {
+   "base": "baseFootstepsZmb_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkRasErc_en_deforested_Char_SoundSet": {
+   "base": "walkErc_en_deforested_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkRasErc_nasdara_lake_Char_SoundSet": {
+   "base": "walkErc_nasdara_lake_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkRasErc_nasdara_soil_Char_SoundSet": {
+   "base": "walkErc_nasdara_soil_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/walkRasErc_sakhal_snow_forest_Char_SoundSet": {
+   "base": "walkErc_sakhal_snow_forest_Char_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundShaders/Motorbike_02_Engine_Ext_Broken_High_SoundShader": {
+   "base": "baseEngineLoud_SoundShader",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundShaders/Motorbike_02_Engine_Ext_Broken_Low_SoundShader": {
+   "base": "baseEngineLoud_SoundShader",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundShaders/bodyfall_hand_nasdara_mud_Zmb_SoundShader": {
+   "base": "baseCharacter_SoundShader",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundShaders/bodyfall_nasdara_mud_Zmb_SoundShader": {
+   "base": "baseCharacter_SoundShader",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundShaders/bodyfall_slide_nasdara_mud_Zmb_SoundShader": {
+   "base": "baseCharacter_SoundShader",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundShaders/dog_Shepherd_Pain_SoundShader": {
+   "base": null,
+   "file": "sounds_takistan/config.cpp"
+  },
+  "CfgSoundShaders/landFeetErc_nasdara_forest_pine_bare_grass_dry_ext_landFeetErc_Char_SoundShader": {
+   "base": "baseCharacterFootsteps_SoundShader",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundShaders/landFeetErc_nasdara_forest_pine_bare_grass_dry_ext_landFeetErc_Zmb_SoundShader": {
+   "base": "baseCharacterFootsteps_SoundShader",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundShaders/landFeetErc_nasdara_forest_pine_boots_grass_dry_ext_landFeetErc_Char_SoundShader": {
+   "base": "baseCharacterFootsteps_SoundShader",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundShaders/landFeetErc_nasdara_forest_pine_boots_grass_dry_ext_landFeetErc_Zmb_SoundShader": {
+   "base": "baseCharacterFootsteps_SoundShader",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundShaders/landFeetErc_nasdara_forest_pine_sneakers_grass_dry_ext_landFeetErc_Char_SoundShader": {
+   "base": "baseCharacterFootsteps_SoundShader",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundShaders/landFeetErc_nasdara_forest_pine_sneakers_grass_dry_ext_landFeetErc_Zmb_SoundShader": {
+   "base": "baseCharacterFootsteps_SoundShader",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundShaders/scuffErc_nasdara_forest_pine_bare_grass_dry_ext_scuffErc_Char_SoundShader": {
+   "base": "baseCharacterFootsteps_SoundShader",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundShaders/scuffErc_nasdara_forest_pine_bare_grass_dry_ext_scuffErc_Zmb_SoundShader": {
+   "base": "baseCharacterFootsteps_SoundShader",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundShaders/scuffErc_nasdara_forest_pine_boots_grass_dry_ext_scuffErc_Char_SoundShader": {
+   "base": "baseCharacterFootsteps_SoundShader",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundShaders/scuffErc_nasdara_forest_pine_boots_grass_dry_ext_scuffErc_Zmb_SoundShader": {
+   "base": "baseCharacterFootsteps_SoundShader",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundShaders/scuffErc_nasdara_forest_pine_sneakers_grass_dry_ext_scuffErc_Char_SoundShader": {
+   "base": "baseCharacterFootsteps_SoundShader",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundShaders/scuffErc_nasdara_forest_pine_sneakers_grass_dry_ext_scuffErc_Zmb_SoundShader": {
+   "base": "baseCharacterFootsteps_SoundShader",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundTables/CfgStepSoundTables/drop_item_LookupTable/building_dirt_ext": {
+   "base": null,
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundTables/CfgStepSoundTables/drop_item_LookupTable/building_dirt_int": {
+   "base": null,
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundTables/CfgStepSoundTables/drop_item_LookupTable/nasdara_forest_pine": {
+   "base": null,
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundTables/CfgStepSoundTables/drop_item_LookupTable/nasdara_soil": {
+   "base": null,
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundTables/CfgStepSoundTables/drop_item_LookupTable/nasdara_stony": {
+   "base": null,
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgVehicles/Animal_CanisFamiliaris_GermanShepherd_ColorBase/AnimEvents/Sounds/Pain": {
+   "base": null,
+   "file": "animals_takistan/canis_familiaris_german_shepherd/config.cpp"
+  },
+  "CfgVehicles/Fence/Navmesh": {
+   "base": null,
+   "file": "gear/camping/config.cpp"
+  },
+  "CfgVehicles/Fence/Navmesh/TransformParts": {
+   "base": null,
+   "file": "gear/camping/config.cpp"
+  },
+  "CfgVehicles/Fence/Navmesh/TransformParts/Gate": {
+   "base": null,
+   "file": "gear/camping/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/AnimationSources/util_dyn_roadway_floor2_ext": {
+   "base": "AnimSourceHidden",
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/AnimationSources/util_dyn_roadway_floor2_int": {
+   "base": "AnimSourceHidden",
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/AnimationSources/util_dyn_roadway_floor3_ext": {
+   "base": "AnimSourceHidden",
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/AnimationSources/util_dyn_roadway_floor3_int": {
+   "base": "AnimSourceHidden",
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_roof1/roof1/StaticsSupportData/SupportProviders": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_roof1/roof1/StaticsSupportData/SupportProviders/floorSwitcher1Category1": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_roof2/roof2/StaticsSupportData/SupportProviders": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_roof2/roof2/StaticsSupportData/SupportProviders/floorSwitcher1Category2": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_roof2/roof2/StaticsSupportData/SupportProviders/floorSwitcher2Category1": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_roof3/roof3/StaticsSupportData/SupportProviders": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_roof3/roof3/StaticsSupportData/SupportProviders/floorSwitcher1Category3": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_roof3/roof3/StaticsSupportData/SupportProviders/floorSwitcher2Category2": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_roof3/roof3/StaticsSupportData/SupportProviders/floorSwitcher3Category1": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall1/wall1_wood/StaticsSupportData/SupportProviders/floorSwitcher1Category1": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall1/wall1_wood/StaticsSupportData/SupportProviders/floorSwitcher1Category2": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall1/wall1_wood/StaticsSupportData/SupportProviders/floorSwitcher1Category3": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall2/wall2_wood/StaticsSupportData/SupportProviders/floorSwitcher1Category1": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall2/wall2_wood/StaticsSupportData/SupportProviders/floorSwitcher1Category2": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall2/wall2_wood/StaticsSupportData/SupportProviders/floorSwitcher1Category3": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall3/wall3_wood/StaticsSupportData/SupportProviders/floorSwitcher1Category2": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall3/wall3_wood/StaticsSupportData/SupportProviders/floorSwitcher1Category3": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall3/wall3_wood/StaticsSupportData/SupportProviders/floorSwitcher2Category1": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall3/wall3_wood/StaticsSupportData/SupportProviders/floorSwitcher2Category2": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall4/wall4_wood/StaticsSupportData/SupportProviders/floorSwitcher1Category2": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall4/wall4_wood/StaticsSupportData/SupportProviders/floorSwitcher1Category3": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall4/wall4_wood/StaticsSupportData/SupportProviders/floorSwitcher2Category1": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall4/wall4_wood/StaticsSupportData/SupportProviders/floorSwitcher2Category2": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall5/wall5_wood/StaticsSupportData/SupportProviders/floorSwitcher1Category3": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall5/wall5_wood/StaticsSupportData/SupportProviders/floorSwitcher2Category2": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall5/wall5_wood/StaticsSupportData/SupportProviders/floorSwitcher3Category1": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall6/wall6_wood/StaticsSupportData/SupportProviders/floorSwitcher1Category3": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall6/wall6_wood/StaticsSupportData/SupportProviders/floorSwitcher2Category2": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall6/wall6_wood/StaticsSupportData/SupportProviders/floorSwitcher3Category1": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_1/StaticsSupportData": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_1/StaticsSupportData/SupportRequirements": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_1/StaticsSupportData/SupportRequirements/floorSwitcher1Category1": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_1/StaticsSupportData/SupportRequirements/floorSwitcher1Category2": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_1/StaticsSupportData/SupportRequirements/floorSwitcher1Category3": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_2/StaticsSupportData": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_2/StaticsSupportData/SupportRequirements": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_2/StaticsSupportData/SupportRequirements/floorSwitcher2Category1": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_2/StaticsSupportData/SupportRequirements/floorSwitcher2Category2": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_3/StaticsSupportData": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_3/StaticsSupportData/SupportRequirements": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_3/StaticsSupportData/SupportRequirements/floorSwitcher3Category1": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/util_dyn_roadway_floor2_ext": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/util_dyn_roadway_floor2_ext/StaticsSupportData": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/util_dyn_roadway_floor2_ext/StaticsSupportData/SupportRequirements": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/util_dyn_roadway_floor2_ext/StaticsSupportData/SupportRequirements/floorSwitcher2Category1": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/util_dyn_roadway_floor2_ext/StaticsSupportData/SupportRequirements/floorSwitcher2Category2": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/util_dyn_roadway_floor2_int": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/util_dyn_roadway_floor2_int/StaticsSupportData": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/util_dyn_roadway_floor2_int/StaticsSupportData/SupportRequirements": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/util_dyn_roadway_floor2_int/StaticsSupportData/SupportRequirements/floorSwitcher2Category1": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/util_dyn_roadway_floor2_int/StaticsSupportData/SupportRequirements/floorSwitcher2Category2": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/util_dyn_roadway_floor3_ext": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/util_dyn_roadway_floor3_ext/StaticsSupportData": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/util_dyn_roadway_floor3_ext/StaticsSupportData/SupportRequirements": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/util_dyn_roadway_floor3_ext/StaticsSupportData/SupportRequirements/floorSwitcher3Category1": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/util_dyn_roadway_floor3_int": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/util_dyn_roadway_floor3_int/StaticsSupportData": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/util_dyn_roadway_floor3_int/StaticsSupportData/SupportRequirements": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/util_dyn_roadway_floor3_int/StaticsSupportData/SupportRequirements/floorSwitcher3Category1": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_IrrigationTunnel_Entrance_01/AnimationSources/proxyroadway_block_01": {
+   "base": "AnimSourceShown",
+   "file": "structures_takistan/Industrial/config.cpp"
+  },
+  "CfgVehicles/Land_IrrigationTunnel_Entrance_01/Navmesh": {
+   "base": null,
+   "file": "structures_takistan/Industrial/config.cpp"
+  },
+  "CfgVehicles/Land_IrrigationTunnel_Entrance_01/Navmesh/HideParts": {
+   "base": null,
+   "file": "structures_takistan/Industrial/config.cpp"
+  },
+  "CfgVehicles/Land_IrrigationTunnel_Entrance_01/Navmesh/HideParts/proxyblock": {
+   "base": null,
+   "file": "structures_takistan/Industrial/config.cpp"
+  },
+  "CfgVehicles/Land_Mil_ContainerHabitat_Armory_Locked_Green_DE/Doors": {
+   "base": null,
+   "file": "structures_takistan/Military/config.cpp"
+  },
+  "CfgVehicles/Land_Mil_ContainerHabitat_Armory_Locked_Green_DE/Doors/DoorsTwin1": {
+   "base": null,
+   "file": "structures_takistan/Military/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors10": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors10/ArmorType": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors10/ArmorType/FragGrenade": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors10/ArmorType/FragGrenade/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors10/ArmorType/FragGrenade/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors10/ArmorType/FragGrenade/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors10/ArmorType/Melee": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors10/ArmorType/Melee/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors10/ArmorType/Melee/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors10/ArmorType/Melee/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors10/ArmorType/Projectile": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors10/ArmorType/Projectile/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors10/ArmorType/Projectile/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors10/ArmorType/Projectile/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors10/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors7": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors7/ArmorType": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors7/ArmorType/FragGrenade": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors7/ArmorType/FragGrenade/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors7/ArmorType/FragGrenade/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors7/ArmorType/FragGrenade/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors7/ArmorType/Melee": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors7/ArmorType/Melee/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors7/ArmorType/Melee/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors7/ArmorType/Melee/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors7/ArmorType/Projectile": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors7/ArmorType/Projectile/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors7/ArmorType/Projectile/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors7/ArmorType/Projectile/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors7/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors8": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors8/ArmorType": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors8/ArmorType/FragGrenade": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors8/ArmorType/FragGrenade/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors8/ArmorType/FragGrenade/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors8/ArmorType/FragGrenade/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors8/ArmorType/Melee": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors8/ArmorType/Melee/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors8/ArmorType/Melee/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors8/ArmorType/Melee/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors8/ArmorType/Projectile": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors8/ArmorType/Projectile/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors8/ArmorType/Projectile/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors8/ArmorType/Projectile/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors8/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors9": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors9/ArmorType": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors9/ArmorType/FragGrenade": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors9/ArmorType/FragGrenade/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors9/ArmorType/FragGrenade/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors9/ArmorType/FragGrenade/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors9/ArmorType/Melee": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors9/ArmorType/Melee/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors9/ArmorType/Melee/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors9/ArmorType/Melee/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors9/ArmorType/Projectile": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors9/ArmorType/Projectile/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors9/ArmorType/Projectile/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors9/ArmorType/Projectile/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors9/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_WaterWell_Brick/Construction/rebuild_roof/roof/EffectsData": {
+   "base": null,
+   "file": "structures_takistan/Props/config.cpp"
+  },
+  "CfgVehicles/Land_WaterWell_Brick/Construction/rebuild_well/well_brick/EffectsData": {
+   "base": null,
+   "file": "structures_takistan/Props/config.cpp"
+  }
+ },
+ "removed": {
+  "CfgSoundSets/Motorbike_02_Engine_Ext_Broken_SoundSet": {
+   "base": "baseEngineLoud_EXT_SoundSet",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundShaders/Motorbike_02_Engine_Ext_Broken_SoundShader": {
+   "base": "baseEngineLoud_SoundShader",
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgVehicles/Land_House_1M3_Dam2/AnimationSources/phx_wall1_part1": {
+   "base": "AnimSourceHidden",
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_1/RequiredPartsVariants": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_1/RequiredPartsVariants/variants1": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_1/RequiredPartsVariants/variants2": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_2/RequiredPartsVariants": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_2/RequiredPartsVariants/variants1": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_2/RequiredPartsVariants/variants2": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_3/RequiredPartsVariants": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_3/RequiredPartsVariants/variants1": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_3/RequiredPartsVariants/variants2": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors24": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors24/ArmorType": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors24/ArmorType/FragGrenade": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors24/ArmorType/FragGrenade/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors24/ArmorType/FragGrenade/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors24/ArmorType/FragGrenade/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors24/ArmorType/Melee": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors24/ArmorType/Melee/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors24/ArmorType/Melee/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors24/ArmorType/Melee/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors24/ArmorType/Projectile": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors24/ArmorType/Projectile/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors24/ArmorType/Projectile/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors24/ArmorType/Projectile/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors24/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors26": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors26/ArmorType": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors26/ArmorType/FragGrenade": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors26/ArmorType/FragGrenade/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors26/ArmorType/FragGrenade/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors26/ArmorType/FragGrenade/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors26/ArmorType/Melee": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors26/ArmorType/Melee/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors26/ArmorType/Melee/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors26/ArmorType/Melee/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors26/ArmorType/Projectile": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors26/ArmorType/Projectile/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors26/ArmorType/Projectile/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors26/ArmorType/Projectile/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors26/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors27": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors27/ArmorType": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors27/ArmorType/FragGrenade": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors27/ArmorType/FragGrenade/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors27/ArmorType/FragGrenade/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors27/ArmorType/FragGrenade/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors27/ArmorType/Melee": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors27/ArmorType/Melee/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors27/ArmorType/Melee/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors27/ArmorType/Melee/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors27/ArmorType/Projectile": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors27/ArmorType/Projectile/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors27/ArmorType/Projectile/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors27/ArmorType/Projectile/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors27/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors28": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors28/ArmorType": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors28/ArmorType/FragGrenade": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors28/ArmorType/FragGrenade/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors28/ArmorType/FragGrenade/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors28/ArmorType/FragGrenade/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors28/ArmorType/Melee": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors28/ArmorType/Melee/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors28/ArmorType/Melee/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors28/ArmorType/Melee/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors28/ArmorType/Projectile": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors28/ArmorType/Projectile/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors28/ArmorType/Projectile/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors28/ArmorType/Projectile/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors28/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors29": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors29/ArmorType": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors29/ArmorType/FragGrenade": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors29/ArmorType/FragGrenade/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors29/ArmorType/FragGrenade/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors29/ArmorType/FragGrenade/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors29/ArmorType/Melee": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors29/ArmorType/Melee/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors29/ArmorType/Melee/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors29/ArmorType/Melee/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors29/ArmorType/Projectile": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors29/ArmorType/Projectile/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors29/ArmorType/Projectile/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors29/ArmorType/Projectile/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors29/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors30": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors30/ArmorType": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors30/ArmorType/FragGrenade": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors30/ArmorType/FragGrenade/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors30/ArmorType/FragGrenade/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors30/ArmorType/FragGrenade/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors30/ArmorType/Melee": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors30/ArmorType/Melee/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors30/ArmorType/Melee/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors30/ArmorType/Melee/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors30/ArmorType/Projectile": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors30/ArmorType/Projectile/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors30/ArmorType/Projectile/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors30/ArmorType/Projectile/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors30/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors31": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors31/ArmorType": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors31/ArmorType/FragGrenade": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors31/ArmorType/FragGrenade/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors31/ArmorType/FragGrenade/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors31/ArmorType/FragGrenade/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors31/ArmorType/Melee": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors31/ArmorType/Melee/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors31/ArmorType/Melee/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors31/ArmorType/Melee/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors31/ArmorType/Projectile": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors31/ArmorType/Projectile/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors31/ArmorType/Projectile/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors31/ArmorType/Projectile/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors31/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors32": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors32/ArmorType": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors32/ArmorType/FragGrenade": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors32/ArmorType/FragGrenade/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors32/ArmorType/FragGrenade/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors32/ArmorType/FragGrenade/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors32/ArmorType/Melee": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors32/ArmorType/Melee/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors32/ArmorType/Melee/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors32/ArmorType/Melee/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors32/ArmorType/Projectile": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors32/ArmorType/Projectile/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors32/ArmorType/Projectile/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors32/ArmorType/Projectile/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors32/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors33": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors33/ArmorType": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors33/ArmorType/FragGrenade": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors33/ArmorType/FragGrenade/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors33/ArmorType/FragGrenade/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors33/ArmorType/FragGrenade/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors33/ArmorType/Melee": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors33/ArmorType/Melee/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors33/ArmorType/Melee/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors33/ArmorType/Melee/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors33/ArmorType/Projectile": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors33/ArmorType/Projectile/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors33/ArmorType/Projectile/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors33/ArmorType/Projectile/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors33/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors34": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors34/ArmorType": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors34/ArmorType/FragGrenade": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors34/ArmorType/FragGrenade/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors34/ArmorType/FragGrenade/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors34/ArmorType/FragGrenade/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors34/ArmorType/Melee": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors34/ArmorType/Melee/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors34/ArmorType/Melee/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors34/ArmorType/Melee/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors34/ArmorType/Projectile": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors34/ArmorType/Projectile/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors34/ArmorType/Projectile/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors34/ArmorType/Projectile/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors34/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors35": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors35/ArmorType": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors35/ArmorType/FragGrenade": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors35/ArmorType/FragGrenade/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors35/ArmorType/FragGrenade/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors35/ArmorType/FragGrenade/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors35/ArmorType/Melee": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors35/ArmorType/Melee/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors35/ArmorType/Melee/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors35/ArmorType/Melee/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors35/ArmorType/Projectile": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors35/ArmorType/Projectile/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors35/ArmorType/Projectile/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors35/ArmorType/Projectile/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors35/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors36": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors36/ArmorType": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors36/ArmorType/FragGrenade": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors36/ArmorType/FragGrenade/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors36/ArmorType/FragGrenade/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors36/ArmorType/FragGrenade/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors36/ArmorType/Melee": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors36/ArmorType/Melee/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors36/ArmorType/Melee/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors36/ArmorType/Melee/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors36/ArmorType/Projectile": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors36/ArmorType/Projectile/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors36/ArmorType/Projectile/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors36/ArmorType/Projectile/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors36/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors37": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors37/ArmorType": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors37/ArmorType/FragGrenade": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors37/ArmorType/FragGrenade/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors37/ArmorType/FragGrenade/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors37/ArmorType/FragGrenade/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors37/ArmorType/Melee": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors37/ArmorType/Melee/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors37/ArmorType/Melee/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors37/ArmorType/Melee/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors37/ArmorType/Projectile": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors37/ArmorType/Projectile/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors37/ArmorType/Projectile/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors37/ArmorType/Projectile/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors37/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors38": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors38/ArmorType": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors38/ArmorType/FragGrenade": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors38/ArmorType/FragGrenade/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors38/ArmorType/FragGrenade/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors38/ArmorType/FragGrenade/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors38/ArmorType/Melee": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors38/ArmorType/Melee/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors38/ArmorType/Melee/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors38/ArmorType/Melee/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors38/ArmorType/Projectile": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors38/ArmorType/Projectile/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors38/ArmorType/Projectile/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors38/ArmorType/Projectile/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors38/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors39": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors39/ArmorType": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors39/ArmorType/FragGrenade": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors39/ArmorType/FragGrenade/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors39/ArmorType/FragGrenade/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors39/ArmorType/FragGrenade/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors39/ArmorType/Melee": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors39/ArmorType/Melee/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors39/ArmorType/Melee/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors39/ArmorType/Melee/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors39/ArmorType/Projectile": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors39/ArmorType/Projectile/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors39/ArmorType/Projectile/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors39/ArmorType/Projectile/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors39/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin4": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin4/ArmorType": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin4/ArmorType/FragGrenade": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin4/ArmorType/FragGrenade/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin4/ArmorType/FragGrenade/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin4/ArmorType/FragGrenade/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin4/ArmorType/Melee": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin4/ArmorType/Melee/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin4/ArmorType/Melee/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin4/ArmorType/Melee/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin4/ArmorType/Projectile": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin4/ArmorType/Projectile/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin4/ArmorType/Projectile/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin4/ArmorType/Projectile/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin4/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin5": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin5/ArmorType": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin5/ArmorType/FragGrenade": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin5/ArmorType/FragGrenade/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin5/ArmorType/FragGrenade/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin5/ArmorType/FragGrenade/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin5/ArmorType/Melee": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin5/ArmorType/Melee/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin5/ArmorType/Melee/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin5/ArmorType/Melee/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin5/ArmorType/Projectile": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin5/ArmorType/Projectile/Blood": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin5/ArmorType/Projectile/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin5/ArmorType/Projectile/Shock": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/twin5/Health": {
+   "base": null,
+   "file": "structures_takistan/Residential/config.cpp"
+  }
+ },
+ "changed": {
+  "CfgVehicles/SodaCan_ColorBase/Nutrition": {
+   "props_added": {
+    "fullnessIndex": "1"
+   },
+   "props_removed": {
+    "totalVolume": "1"
+   },
+   "file": "gear/drinks/config.cpp"
+  },
+  "CfgVehicles/GunCase_ColorBase": {
+   "props_changed": {
+    "hiddenSelectionsMaterials[]": [
+     "{\"\\dz\\gear_takistan\\containers\\data\\guncase_black.rvmat\",\"\\dz\\gear_takistan\\containers\\data\\guncase_black.rvmat\"}",
+     "{\"dz\\gear_takistan\\containers\\data\\guncase_black.rvmat\",\"dz\\gear_takistan\\containers\\data\\guncase_black.rvmat\"}"
+    ]
+   },
+   "file": "gear_takistan/containers/config.cpp"
+  },
+  "CfgVehicles/GunCase_ColorBase/DamageSystem/GlobalHealth/Health": {
+   "props_changed": {
+    "healthLevels[]": [
+     "{{1,{\"DZ\\gear_takistan\\containers\\data\\guncase_black.rvmat\"}},{0.69999999,{\"DZ\\gear_takistan\\containers\\data\\guncase_black.rvmat\"}},{0.5,{\"DZ\\gear_takistan\\containers\\data\\guncase_black_damage.rvmat\"}},{0.30000001,{\"DZ\\gear_takistan\\containers\\data\\guncase_black_damage.rvmat\"}},{0,{\"DZ\\gear_takistan\\containers\\data\\guncase_black_destruct.rvmat\"}}}",
+     "{{1,{\"DZ\\gear_takistan\\containers\\data\\guncase_black.rvmat\"}},{0.69999999,{}},{0.5,{\"DZ\\gear_takistan\\containers\\data\\guncase_black_damage.rvmat\"}},{0.30000001,{}},{0,{\"DZ\\gear_takistan\\containers\\data\\guncase_black_destruct.rvmat\"}}}"
+    ]
+   },
+   "file": "gear_takistan/containers/config.cpp"
+  },
+  "CfgVehicles/GunCase_Orange": {
+   "props_changed": {
+    "hiddenSelectionsMaterials[]": [
+     "{\"\\dz\\gear_takistan\\containers\\data\\guncase_orange.rvmat\",\"\\dz\\gear_takistan\\containers\\data\\guncase_orange.rvmat\"}",
+     "{\"dz\\gear_takistan\\containers\\data\\guncase_orange.rvmat\",\"dz\\gear_takistan\\containers\\data\\guncase_orange.rvmat\"}"
+    ]
+   },
+   "file": "gear_takistan/containers/config.cpp"
+  },
+  "CfgVehicles/GunCase_Orange/DamageSystem": {
+   "base": [
+    null,
+    "DamageSystem"
+   ],
+   "file": "gear_takistan/containers/config.cpp"
+  },
+  "CfgVehicles/GunCase_Orange/DamageSystem/GlobalHealth": {
+   "base": [
+    null,
+    "GlobalHealth"
+   ],
+   "file": "gear_takistan/containers/config.cpp"
+  },
+  "CfgVehicles/GunCase_Orange/DamageSystem/GlobalHealth/Health": {
+   "base": [
+    null,
+    "Health"
+   ],
+   "props_added": {
+    "RefTexsMats[]": "{\"dz\\gear_takistan\\containers\\data\\guncase_black.rvmat\"}"
+   },
+   "props_removed": {
+    "hitpoints": "750"
+   },
+   "props_changed": {
+    "healthLevels[]": [
+     "{{1,{\"DZ\\gear_takistan\\containers\\data\\guncase_orange.rvmat\"}},{0.69999999,{\"DZ\\gear_takistan\\containers\\data\\guncase_orange.rvmat\"}},{0.5,{\"DZ\\gear_takistan\\containers\\data\\guncase_orange_damage.rvmat\"}},{0.30000001,{\"DZ\\gear_takistan\\containers\\data\\guncase_orange_damage.rvmat\"}},{0,{\"DZ\\gear_takistan\\containers\\data\\guncase_orange_destruct.rvmat\"}}}",
+     "{{1,{\"DZ\\gear_takistan\\containers\\data\\guncase_orange.rvmat\"}},{0.69999999,{}},{0.5,{\"DZ\\gear_takistan\\containers\\data\\guncase_orange_damage.rvmat\"}},{0.30000001,{}},{0,{\"DZ\\gear_takistan\\containers\\data\\guncase_orange_destruct.rvmat\"}}}"
+    ]
+   },
+   "file": "gear_takistan/containers/config.cpp"
+  },
+  "CfgVehicles/GunCase_White": {
+   "props_changed": {
+    "hiddenSelectionsMaterials[]": [
+     "{\"\\dz\\gear_takistan\\containers\\data\\guncase_white.rvmat\",\"\\dz\\gear_takistan\\containers\\data\\guncase_white.rvmat\"}",
+     "{\"dz\\gear_takistan\\containers\\data\\guncase_white.rvmat\",\"dz\\gear_takistan\\containers\\data\\guncase_white.rvmat\"}"
+    ]
+   },
+   "file": "gear_takistan/containers/config.cpp"
+  },
+  "CfgVehicles/GunCase_White/DamageSystem": {
+   "base": [
+    null,
+    "DamageSystem"
+   ],
+   "file": "gear_takistan/containers/config.cpp"
+  },
+  "CfgVehicles/GunCase_White/DamageSystem/GlobalHealth": {
+   "base": [
+    null,
+    "GlobalHealth"
+   ],
+   "file": "gear_takistan/containers/config.cpp"
+  },
+  "CfgVehicles/GunCase_White/DamageSystem/GlobalHealth/Health": {
+   "base": [
+    null,
+    "Health"
+   ],
+   "props_added": {
+    "RefTexsMats[]": "{\"dz\\gear_takistan\\containers\\data\\guncase_black.rvmat\"}"
+   },
+   "props_removed": {
+    "hitpoints": "750"
+   },
+   "props_changed": {
+    "healthLevels[]": [
+     "{{1,{\"DZ\\gear_takistan\\containers\\data\\guncase_white.rvmat\"}},{0.69999999,{\"DZ\\gear_takistan\\containers\\data\\guncase_white.rvmat\"}},{0.5,{\"DZ\\gear_takistan\\containers\\data\\guncase_white_damage.rvmat\"}},{0.30000001,{\"DZ\\gear_takistan\\containers\\data\\guncase_white_damage.rvmat\"}},{0,{\"DZ\\gear_takistan\\containers\\data\\guncase_white_destruct.rvmat\"}}}",
+     "{{1,{\"DZ\\gear_takistan\\containers\\data\\guncase_white.rvmat\"}},{0.69999999,{}},{0.5,{\"DZ\\gear_takistan\\containers\\data\\guncase_white_damage.rvmat\"}},{0.30000001,{}},{0,{\"DZ\\gear_takistan\\containers\\data\\guncase_white_destruct.rvmat\"}}}"
+    ]
+   },
+   "file": "gear_takistan/containers/config.cpp"
+  },
+  "CfgVehicles/Ayran/Nutrition": {
+   "props_added": {
+    "fullnessIndex": "1"
+   },
+   "props_removed": {
+    "totalVolume": "1"
+   },
+   "file": "gear_takistan/drinks/config.cpp"
+  },
+  "CfgVehicles/Lassi_ColorBase/Nutrition": {
+   "props_added": {
+    "fullnessIndex": "1"
+   },
+   "props_removed": {
+    "totalVolume": "1"
+   },
+   "file": "gear_takistan/drinks/config.cpp"
+  },
+  "CfgVehicles/SmallGlassBottle_Afza/Nutrition": {
+   "props_added": {
+    "fullnessIndex": "1"
+   },
+   "props_removed": {
+    "totalVolume": "1"
+   },
+   "file": "gear_takistan/drinks/config.cpp"
+  },
+  "CfgVehicles/SmallGlassBottle_Jallab/Nutrition": {
+   "props_added": {
+    "fullnessIndex": "1"
+   },
+   "props_removed": {
+    "totalVolume": "1"
+   },
+   "file": "gear_takistan/drinks/config.cpp"
+  },
+  "CfgSoundSets/Handsstep_nasdara_grass_dry_Char_SoundSet": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"Handstep_nasdara_grass_dry_Char_SoundShader\",\"Handstep_nasdara_grass_dry_Char_SoundShader\"}",
+     "{\"Handstep_grass_dry_ext_Char_SoundShader\",\"Handstep_grass_dry_ext_Char_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Handstep_Hard_nasdara_grass_dry_Char_SoundSet": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"Handstep_Hard_nasdara_grass_dry_Char_SoundShader\"}",
+     "{\"Handstep_Hard_grass_dry_ext_Char_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Handstep_nasdara_grass_dry_Char_SoundSet": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"Handstep_nasdara_grass_dry_Char_SoundShader\"}",
+     "{\"Handstep_grass_dry_ext_Char_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Motorbike_01_Horn_Short_SoundSet": {
+   "props_changed": {
+    "volumefactor": [
+     "0.80000001",
+     "0.40000001"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Motorbike_01_Horn_SoundSet": {
+   "props_changed": {
+    "volumefactor": [
+     "0.60000002",
+     "0.5"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Motorbike_02_Horn_Short_SoundSet": {
+   "props_changed": {
+    "volumefactor": [
+     "0.80000001",
+     "0.40000001"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/Motorbike_02_Horn_SoundSet": {
+   "props_changed": {
+    "volumefactor": [
+     "0.60000002",
+     "0.5"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_asphalt_destroyed_ext_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_asphalt_ext_ZMB_SoundShader\",\"Handstep_asphalt_destroyed_ext_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_asphalt_ext_Char_SoundShader\",\"Handstep_asphalt_destroyed_ext_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_asphalt_destroyed_int_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_asphalt_ext_ZMB_SoundShader\",\"Handstep_asphalt_destroyed_int_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_asphalt_ext_Char_SoundShader\",\"Handstep_asphalt_destroyed_int_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_asphalt_ext_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_asphalt_ext_ZMB_SoundShader\",\"Handstep_asphalt_ext_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_asphalt_ext_Char_SoundShader\",\"Handstep_asphalt_ext_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_asphalt_int_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_asphalt_ext_ZMB_SoundShader\",\"Handstep_asphalt_int_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_asphalt_ext_Char_SoundShader\",\"Handstep_asphalt_int_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_carpet_ext_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_asphalt_ext_ZMB_SoundShader\",\"Handstep_carpet_ext_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_asphalt_ext_Char_SoundShader\",\"Handstep_carpet_ext_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_carpet_int_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_asphalt_ext_ZMB_SoundShader\",\"Handstep_carpet_int_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_asphalt_ext_Char_SoundShader\",\"Handstep_carpet_int_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_ceramicTiles_ext_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_asphalt_ext_ZMB_SoundShader\",\"Handstep_ceramicTiles_ext_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_asphalt_ext_Char_SoundShader\",\"Handstep_ceramicTiles_ext_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_ceramicTiles_int_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_asphalt_ext_ZMB_SoundShader\",\"Handstep_ceramicTiles_int_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_asphalt_ext_Char_SoundShader\",\"Handstep_ceramicTiles_int_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_cp_broadleaf_dense1_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_cp_broadleaf_dense1_ZMB_SoundShader\",\"Handstep_cp_broadleaf_dense1_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_cp_broadleaf_dense1_Char_SoundShader\",\"Handstep_cp_broadleaf_dense1_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_dirt_ext_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_dirt_ext_ZMB_SoundShader\",\"Handstep_dirt_ext_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_dirt_ext_Char_SoundShader\",\"Handstep_dirt_ext_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_dirt_int_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_dirt_ext_ZMB_SoundShader\",\"Handstep_dirt_int_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_dirt_ext_Char_SoundShader\",\"Handstep_dirt_int_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_forestConifer_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_cp_broadleaf_dense1_ZMB_SoundShader\",\"Handstep_forestConifer_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_cp_broadleaf_dense1_Char_SoundShader\",\"Handstep_forestConifer_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_grassTall_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_grass_dry_ext_ZMB_SoundShader\",\"Handstep_grassTall_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_grass_dry_ext_Char_SoundShader\",\"Handstep_grassTall_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_grass_dry_ext_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_grass_dry_ext_ZMB_SoundShader\",\"Handstep_grass_dry_ext_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_grass_dry_ext_Char_SoundShader\",\"Handstep_grass_dry_ext_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_gravelLarge_ext_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_gravel_large_ext_ZMB_SoundShader\",\"Handstep_gravelSmall_ext_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_gravel_large_ext_Char_SoundShader\",\"Handstep_gravelSmall_ext_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_gravelLarge_int_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_gravel_large_ext_ZMB_SoundShader\",\"Handstep_gravelSmall_int_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_gravel_large_ext_Char_SoundShader\",\"Handstep_gravelSmall_int_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_gravelSmall_ext_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_gravel_small_ext_ZMB_SoundShader\",\"Handstep_gravelSmall_ext_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_gravel_small_ext_Char_SoundShader\",\"Handstep_gravelSmall_ext_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_gravelSmall_int_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_gravel_small_ext_ZMB_SoundShader\",\"Handstep_gravelSmall_int_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_gravel_small_ext_Char_SoundShader\",\"Handstep_gravelSmall_int_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_linoleum_ext_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_asphalt_ext_ZMB_SoundShader\",\"Handstep_linoleum_ext_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_asphalt_ext_Char_SoundShader\",\"Handstep_linoleum_ext_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_linoleum_int_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_asphalt_ext_ZMB_SoundShader\",\"Handstep_linoleum_int_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_asphalt_ext_Char_SoundShader\",\"Handstep_linoleum_int_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_metalThick_ext_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_asphalt_ext_ZMB_SoundShader\",\"Handstep_metalThick_ext_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_asphalt_ext_Char_SoundShader\",\"Handstep_metalThick_ext_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_metalThinMesh_ext_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_asphalt_ext_ZMB_SoundShader\",\"Handstep_metalThinMesh_ext_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_asphalt_ext_Char_SoundShader\",\"Handstep_metalThinMesh_ext_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_metalThinMesh_int_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_asphalt_ext_ZMB_SoundShader\",\"Handstep_metalThinMesh_int_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_asphalt_ext_Char_SoundShader\",\"Handstep_metalThinMesh_int_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_metalThin_ext_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_asphalt_ext_ZMB_SoundShader\",\"Handstep_metalThin_ext_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_asphalt_ext_Char_SoundShader\",\"Handstep_metalThin_ext_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_metalThin_int_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_asphalt_ext_ZMB_SoundShader\",\"Handstep_metalThin_int_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_asphalt_ext_Char_SoundShader\",\"Handstep_metalThin_int_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_metal_ext_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_asphalt_ext_ZMB_SoundShader\",\"Handstep_metal_ext_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_asphalt_ext_Char_SoundShader\",\"Handstep_metal_ext_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_metal_int_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_asphalt_ext_ZMB_SoundShader\",\"Handstep_metal_int_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_asphalt_ext_Char_SoundShader\",\"Handstep_metal_int_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_rubbleLarge_ext_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_gravel_large_ext_ZMB_SoundShader\",\"Handstep_rubbleLarge_ext_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_gravel_large_ext_Char_SoundShader\",\"Handstep_rubbleLarge_ext_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_rubbleLarge_int_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_gravel_large_ext_ZMB_SoundShader\",\"Handstep_rubbleLarge_int_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_gravel_large_ext_Char_SoundShader\",\"Handstep_rubbleLarge_int_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_rubbleSmall_ext_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_gravel_small_ext_ZMB_SoundShader\",\"Handstep_rubbleSmall_ext_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_gravel_small_ext_Char_SoundShader\",\"Handstep_rubbleSmall_ext_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_rubbleSmall_int_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_gravel_small_ext_ZMB_SoundShader\",\"Handstep_rubbleSmall_int_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_gravel_small_ext_Char_SoundShader\",\"Handstep_rubbleSmall_int_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_sakhal_grass_brown_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_sakhal_grass_brown_ZMB_SoundShader\",\"Handstep_sakhal_grass_brown_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_sakhal_grass_brown_Char_SoundShader\",\"Handstep_sakhal_grass_brown_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_sakhal_ice_lake_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_sakhal_ice_lake_ZMB_SoundShader\",\"Handstep_sakhal_ice_lake_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_sakhal_ice_lake_Char_SoundShader\",\"Handstep_sakhal_ice_lake_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_sakhal_snow_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_sakhal_snow_ZMB_SoundShader\",\"Handstep_sakhal_snow_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_sakhal_snow_Char_SoundShader\",\"Handstep_sakhal_snow_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_sand_ext_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_dirt_ext_ZMB_SoundShader\",\"Handstep_sand_ext_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_dirt_ext_Char_SoundShader\",\"Handstep_sand_ext_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_sand_int_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_dirt_ext_ZMB_SoundShader\",\"Handstep_sand_int_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_dirt_ext_Char_SoundShader\",\"Handstep_sand_int_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_woodParquet_ext_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_wood_planks_ext_ZMB_SoundShader\",\"Handstep_woodParquet_ext_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_wood_planks_ext_Char_SoundShader\",\"Handstep_woodParquet_ext_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_woodParquet_int_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_wood_planks_ext_ZMB_SoundShader\",\"Handstep_woodParquet_int_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_wood_planks_ext_Char_SoundShader\",\"Handstep_woodParquet_int_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_woodPlanks_ext_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_wood_planks_ext_ZMB_SoundShader\",\"Handstep_woodPlanks_ext_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_wood_planks_ext_Char_SoundShader\",\"Handstep_woodPlanks_ext_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundSets/runProne_woodPlanks_int_Zmb_Soundset": {
+   "props_changed": {
+    "soundShaders[]": [
+     "{\"walkProne_wood_planks_ext_ZMB_SoundShader\",\"Handstep_woodPlanks_int_ZMB_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}",
+     "{\"walkProne_wood_planks_ext_Char_SoundShader\",\"Handstep_woodPlanks_int_Char_SoundShader\",\"walkErc_cloth_Zmb_SoundShader\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundShaders/Motorbike_01_Engine_Ext_Broken_SoundShader": {
+   "props_changed": {
+    "samples[]": [
+     "{{\"\\DZ\\sounds\\vehicles\\shared\\add_layers\\Motorbike_01_Engine_Ext_Broken\",1}}",
+     "{{\"\\DZ\\sounds\\vehicles\\Motorbike_01\\Motorbike_01_Engine_Ext_Broken\",1}}"
+    ],
+    "frequency": [
+     "0.94999999",
+     "1"
+    ],
+    "volume": [
+     "\"3 * (0.65 * (1.0 - 0.08 * campos)) * (0.6 + 0.4 * (rpm factor[1200,7000])) * (0.8 + 0.2 * (speed factor [10,60])) * engineon * 0.9 * ((1200 + ((rpm - 1200)/(7000/7000)) + thrust * 100) factor [(((6300    + 7020   ) / 2)      - 2.5*250),(((6300    + 7020   ) / 2)      + 250)]) * (rpm factor[2000,4000])\"",
+     "\"0.9 * (0.65 * (1.0 - 0.08 * campos)) * (0.6 + 0.4 * (rpm factor[1200,7000])) * (0.8 + 0.2 * (speed factor [10,60])) * engineon * (1.0 * ((1200 + ((rpm - 1200)/(7000/7000)) + thrust * 100) factor [(((5400    + 6300   ) / 2)    - 2.5*300),(((5400    + 6300   ) / 2)    + 300)]) * ((1200 + ((rpm - 1200)/(7000/7000)) + thrust * 100) factor [(((6300    + 7020   ) / 2)      + 2.5*250),(((6300    + 7020   ) / 2)      - 250)])+0.9 * ((1200 + ((rpm - 1200)/(7000/7000)) + thrust * 100) factor [(((6300    + 7020   ) / 2)      - 2.5*250),(((6300    + 7020   ) / 2)      + 250)]))/2 * (rpm factor[4500,7000])\""
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundShaders/Motorbike_01_Horn_Short_SoundShader": {
+   "props_changed": {
+    "volume": [
+     "1.4",
+     "0.89999998"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgSoundShaders/Motorbike_02_Horn_Short_SoundShader": {
+   "props_changed": {
+    "volume": [
+     "1.4",
+     "0.89999998"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgVehicles/Motorbike_02_ColorBase/Sounds": {
+   "props_changed": {
+    "soundSetsFilter[]": [
+     "{\"Motorbike_02_Engine_Offload_Ext_Rpm1_SoundSet\",\"Motorbike_02_Engine_Offload_Ext_Rpm2_SoundSet\",\"Motorbike_02_Engine_Offload_Ext_Rpm3_SoundSet\",\"Motorbike_02_Engine_Offload_Ext_Rpm4_SoundSet\",\"Motorbike_02_Engine_Offload_Ext_Rpm5_SoundSet\",\"Motorbike_02_Engine_Offload_Ext_Rpm6_SoundSet\",\"Motorbike_02_Engine_Offload_Ext_Rpm7_SoundSet\",\"Motorbike_02_Engine_Ext_Rpm0_SoundSet\",\"Motorbike_02_Engine_Ext_Rpm1_SoundSet\",\"Motorbike_02_Engine_Ext_Rpm2_SoundSet\",\"Motorbike_02_Engine_Ext_Rpm3_SoundSet\",\"Motorbike_02_Engine_Ext_Rpm4_SoundSet\",\"Motorbike_02_Engine_Ext_Rpm5_SoundSet\",\"Motorbike_02_Engine_Ext_Rpm6_SoundSet\",\"Motorbike_02_Engine_Ext_Rpm7_SoundSet\",\"Motorbike_02_Engine_Ext_Broken_SoundSet\",\"Motorbike_02_Tires_rock_slow_Ext_SoundSet\",\"Motorbike_02_Tires_rock_fast_Ext_SoundSet\",\"Motorbike_02_Tires_mud_slow_Ext_SoundSet\",\"Motorbike_02_Tires_mud_fast_Ext_SoundSet\",\"Motorbike_02_Tires_desert_slow_Ext_SoundSet\",\"Motorbike_02_Tires_desert_fast_Ext_SoundSet\",\"Motorbike_02_Tires_grass_slow_Ext_SoundSet\",\"Motorbike_02_Tires_grass_fast_Ext_SoundSet\",\"Motorbike_02_Tires_drygrass_slow_Ext_SoundSet\",\"Motorbike_02_Tires_drygrass_fast_Ext_SoundSet\",\"Motorbike_02_Tires_gravel_slow_Ext_SoundSet\",\"Motorbike_02_Tires_gravel_fast_Ext_SoundSet\",\"Motorbike_02_Tires_gravel_dust_fast_EXT_SoundSet\",\"Motorbike_02_Tires_asphalt_slow_Ext_SoundSet\",\"Motorbike_02_Tires_asphalt_fast_Ext_SoundSet\",\"Motorbike_02_Tires_water_slow_Ext_SoundSet\",\"Motorbike_02_Tires_water_fast_Ext_SoundSet\",\"Motorbike_02_skid_dirt_SoundSet\",\"Motorbike_02_dirt_turn_SoundSet\",\"Motorbike_02_damper_front_SoundSet\",\"Motorbike_02_damper_rear_SoundSet\",\"Motorbike_02_Rain_Ext_SoundSet\",\"Motorbike_02_Rattle_Slow_SoundSet\",\"Motorbike_02_Rattle_Medium_SoundSet\",\"Motorbike_02_Rattle_Fast_SoundSet\",\"Motorbike_02_NoEngine_Push_SoundSet\",\"Motorbike_02_EngineOn_Push_SoundSet\"}",
+     "{\"Motorbike_02_Engine_Offload_Ext_Rpm1_SoundSet\",\"Motorbike_02_Engine_Offload_Ext_Rpm2_SoundSet\",\"Motorbike_02_Engine_Offload_Ext_Rpm3_SoundSet\",\"Motorbike_02_Engine_Offload_Ext_Rpm4_SoundSet\",\"Motorbike_02_Engine_Offload_Ext_Rpm5_SoundSet\",\"Motorbike_02_Engine_Offload_Ext_Rpm6_SoundSet\",\"Motorbike_02_Engine_Offload_Ext_Rpm7_SoundSet\",\"Motorbike_02_Engine_Ext_Rpm0_SoundSet\",\"Motorbike_02_Engine_Ext_Rpm1_SoundSet\",\"Motorbike_02_Engine_Ext_Rpm2_SoundSet\",\"Motorbike_02_Engine_Ext_Rpm3_SoundSet\",\"Motorbike_02_Engine_Ext_Rpm4_SoundSet\",\"Motorbike_02_Engine_Ext_Rpm5_SoundSet\",\"Motorbike_02_Engine_Ext_Rpm6_SoundSet\",\"Motorbike_02_Engine_Ext_Rpm7_SoundSet\",\"Motorbike_02_Engine_Ext_Broken_High_SoundSet\",\"Motorbike_02_Engine_Ext_Broken_Low_SoundSet\",\"Motorbike_02_Tires_rock_slow_Ext_SoundSet\",\"Motorbike_02_Tires_rock_fast_Ext_SoundSet\",\"Motorbike_02_Tires_mud_slow_Ext_SoundSet\",\"Motorbike_02_Tires_mud_fast_Ext_SoundSet\",\"Motorbike_02_Tires_desert_slow_Ext_SoundSet\",\"Motorbike_02_Tires_desert_fast_Ext_SoundSet\",\"Motorbike_02_Tires_grass_slow_Ext_SoundSet\",\"Motorbike_02_Tires_grass_fast_Ext_SoundSet\",\"Motorbike_02_Tires_drygrass_slow_Ext_SoundSet\",\"Motorbike_02_Tires_drygrass_fast_Ext_SoundSet\",\"Motorbike_02_Tires_gravel_slow_Ext_SoundSet\",\"Motorbike_02_Tires_gravel_fast_Ext_SoundSet\",\"Motorbike_02_Tires_gravel_dust_fast_EXT_SoundSet\",\"Motorbike_02_Tires_asphalt_slow_Ext_SoundSet\",\"Motorbike_02_Tires_asphalt_fast_Ext_SoundSet\",\"Motorbike_02_Tires_water_slow_Ext_SoundSet\",\"Motorbike_02_Tires_water_fast_Ext_SoundSet\",\"Motorbike_02_skid_dirt_SoundSet\",\"Motorbike_02_dirt_turn_SoundSet\",\"Motorbike_02_damper_front_SoundSet\",\"Motorbike_02_damper_rear_SoundSet\",\"Motorbike_02_Rain_Ext_SoundSet\",\"Motorbike_02_Rattle_Slow_SoundSet\",\"Motorbike_02_Rattle_Medium_SoundSet\",\"Motorbike_02_Rattle_Fast_SoundSet\",\"Motorbike_02_NoEngine_Push_SoundSet\",\"Motorbike_02_EngineOn_Push_SoundSet\"}"
+    ]
+   },
+   "file": "sounds/hpp/config.cpp"
+  },
+  "CfgVehicles/Land_IrrigationTunnel_Entrance_01/Construction/rebuild_ladder/ladder_rebuild": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "file": "structures_takistan/Industrial/config.cpp"
+  },
+  "CfgVehicles/Land_IrrigationTunnel_Entrance_01/Construction/rebuild_ladder_inside/ladder_rebuild_inside": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "file": "structures_takistan/Industrial/config.cpp"
+  },
+  "CfgVehicles/Land_IrrigationTunnel_Entrance_01/Construction/utility_nonparts/ladder_utility": {
+   "props_added": {
+    "proxyroadway_names[]": "{\"proxyroadway_block_01\"}",
+    "proxyroadway_behaviors_invert[]": "{1}"
+   },
+   "file": "structures_takistan/Industrial/config.cpp"
+  },
+  "CfgVehicles/Land_Mil_ContainerHabitat_Armory_Locked_Green_DE": {
+   "base": [
+    "Land_Mil_ContainerHabitat_Armory",
+    "HouseNoDestruct"
+   ],
+   "file": "structures_takistan/Military/config.cpp"
+  },
+  "CfgVehicles/Land_Hospital_Takistan/Doors/Doors13": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodSmallOpen\"",
+     "\"doorWoodSmallOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodSmallClose\"",
+     "\"doorWoodSmallClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodSmallRattle\"",
+     "\"doorWoodSmallRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodSmallOpenABit\"",
+     "\"doorWoodSmallOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_Hospital_Takistan/Doors/Doors14": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodSmallOpen\"",
+     "\"doorWoodSmallOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodSmallClose\"",
+     "\"doorWoodSmallClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodSmallRattle\"",
+     "\"doorWoodSmallRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodSmallOpenABit\"",
+     "\"doorWoodSmallOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_Hospital_Takistan/Doors/DoorsTwin1": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodTwinOpen\"",
+     "\"doorWoodTwinOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodTwinClose\"",
+     "\"doorWoodTwinClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodTwinRattle\"",
+     "\"doorWoodTwinRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodTwinOpenABit\"",
+     "\"doorWoodTwinOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_Hospital_Takistan/Doors/DoorsTwin2": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodTwinOpen\"",
+     "\"doorWoodTwinOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodTwinClose\"",
+     "\"doorWoodTwinClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodTwinRattle\"",
+     "\"doorWoodTwinRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodTwinOpenABit\"",
+     "\"doorWoodTwinOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_Hospital_Takistan/Doors/DoorsTwin3": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodTwinOpen\"",
+     "\"doorWoodTwinOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodTwinClose\"",
+     "\"doorWoodTwinClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodTwinRattle\"",
+     "\"doorWoodTwinRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodTwinOpenABit\"",
+     "\"doorWoodTwinOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_Hospital_Takistan/Doors/DoorsTwin4": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodTwinOpen\"",
+     "\"doorWoodTwinOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodTwinClose\"",
+     "\"doorWoodTwinClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodTwinRattle\"",
+     "\"doorWoodTwinRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodTwinOpenABit\"",
+     "\"doorWoodTwinOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_Hospital_Takistan/Doors/DoorsTwin5": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodTwinOpen\"",
+     "\"doorWoodTwinOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodTwinClose\"",
+     "\"doorWoodTwinClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodTwinRattle\"",
+     "\"doorWoodTwinRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodTwinOpenABit\"",
+     "\"doorWoodTwinOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_Hospital_Takistan/Doors/DoorsTwin6": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodTwinOpen\"",
+     "\"doorWoodTwinOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodTwinClose\"",
+     "\"doorWoodTwinClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodTwinRattle\"",
+     "\"doorWoodTwinRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodTwinOpenABit\"",
+     "\"doorWoodTwinOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1M2_Dam2/Construction/rebuild_roof1/roof1": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1M2_Dam2/Construction/rebuild_wall1/wall1_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1M2_Dam2/Construction/rebuild_wall2/wall2_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1M2_Dam2/Construction/rebuild_wall3/wall3_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1M2_Dam2/Construction/rebuild_wall4/wall4_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1M3_Dam2/Construction/rebuild_roof1/roof1": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1M3_Dam2/Construction/rebuild_wall1/wall1_window_brick": {
+   "props_changed": {
+    "physics_geom_names[]": [
+     "{\"phx_wall1_main\",\"phx_wall1_part1\"}",
+     "{\"phx_wall1_main\",\"phx_door1\"}"
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1M3_Dam2/Construction/rebuild_wall1/wall1_window_wood": {
+   "props_changed": {
+    "physics_geom_names[]": [
+     "{\"phx_wall1_main\",\"phx_wall1_part1\"}",
+     "{\"phx_wall1_main\",\"phx_door1\"}"
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1M3_Dam2/Construction/rebuild_wall1/wall1_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "props_changed": {
+    "physics_geom_names[]": [
+     "{\"phx_wall1_main\",\"phx_wall1_part1\",\"phx_window1_right\",\"phx_window1_left\"}",
+     "{\"phx_wall1_main\",\"phx_door1\",\"phx_window1_right\",\"phx_window1_left\"}"
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1M3_Dam2/Construction/rebuild_wall2/wall2_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1M3_Dam2/Construction/rebuild_wall3/wall3_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1M4_Dam2/Construction/rebuild_roof1/roof1": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1M4_Dam2/Construction/rebuild_wall1/wall1_window_brick": {
+   "props_added": {
+    "physics_geom_names[]": "{\"phx_wall1_main\"}",
+    "physics_geom_behaviors_invert[]": "{0}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1M4_Dam2/Construction/rebuild_wall1/wall1_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1M4_Dam2/Construction/rebuild_wall2/wall2_window_brick": {
+   "props_added": {
+    "physics_geom_names[]": "{\"phx_wall2_main\"}",
+    "physics_geom_behaviors_invert[]": "{0}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1M4_Dam2/Construction/rebuild_wall2/wall2_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1M5/Construction/rebuild_roof1/roof1": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1M5/Construction/rebuild_wall1/wall1_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1M5/Construction/rebuild_wall2/wall2_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1M5/Construction/rebuild_wall3/wall3_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1S1/AnimationSources/phx_door1": {
+   "base": [
+    null,
+    "AnimSourceHidden"
+   ],
+   "props_removed": {
+    "type": "\"hide\"",
+    "source": "\"phx_door1\"",
+    "minValue": "0",
+    "maxValue": "1",
+    "hideValue": "0.0099999998",
+    "selection": "\"phx_door1\""
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1S1/AnimationSources/phx_window1_frame": {
+   "base": [
+    null,
+    "AnimSourceHidden"
+   ],
+   "props_removed": {
+    "type": "\"hide\"",
+    "source": "\"phx_window1_frame\"",
+    "minValue": "0",
+    "maxValue": "1",
+    "hideValue": "0.0099999998",
+    "selection": "\"phx_window1_frame\""
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1S1/AnimationSources/phx_window1_left": {
+   "base": [
+    null,
+    "AnimSourceHidden"
+   ],
+   "props_removed": {
+    "type": "\"hide\"",
+    "source": "\"phx_window1_left\"",
+    "minValue": "0",
+    "maxValue": "1",
+    "hideValue": "0.0099999998",
+    "selection": "\"phx_window1_left\""
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1S1/AnimationSources/phx_window1_right": {
+   "base": [
+    null,
+    "AnimSourceHidden"
+   ],
+   "props_removed": {
+    "type": "\"hide\"",
+    "source": "\"phx_window1_right\"",
+    "minValue": "0",
+    "maxValue": "1",
+    "hideValue": "0.0099999998",
+    "selection": "\"phx_window1_right\""
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1S1/AnimationSources/phx_window2_frame": {
+   "base": [
+    null,
+    "AnimSourceHidden"
+   ],
+   "props_removed": {
+    "type": "\"hide\"",
+    "source": "\"phx_window2_frame\"",
+    "minValue": "0",
+    "maxValue": "1",
+    "hideValue": "0.0099999998",
+    "selection": "\"phx_window2_frame\""
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1S1/AnimationSources/phx_window2_left": {
+   "base": [
+    null,
+    "AnimSourceHidden"
+   ],
+   "props_removed": {
+    "type": "\"hide\"",
+    "source": "\"phx_window2_left\"",
+    "minValue": "0",
+    "maxValue": "1",
+    "hideValue": "0.0099999998",
+    "selection": "\"phx_window2_left\""
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1S1/AnimationSources/phx_window2_right": {
+   "base": [
+    null,
+    "AnimSourceHidden"
+   ],
+   "props_removed": {
+    "type": "\"hide\"",
+    "source": "\"phx_window2_right\"",
+    "minValue": "0",
+    "maxValue": "1",
+    "hideValue": "0.0099999998",
+    "selection": "\"phx_window2_right\""
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1S1/AnimationSources/phx_window3_frame": {
+   "base": [
+    null,
+    "AnimSourceHidden"
+   ],
+   "props_removed": {
+    "type": "\"hide\"",
+    "source": "\"phx_window3_frame\"",
+    "minValue": "0",
+    "maxValue": "1",
+    "hideValue": "0.0099999998",
+    "selection": "\"phx_window3_frame\""
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1S1/AnimationSources/phx_window3_left": {
+   "base": [
+    null,
+    "AnimSourceHidden"
+   ],
+   "props_removed": {
+    "type": "\"hide\"",
+    "source": "\"phx_window3_left\"",
+    "minValue": "0",
+    "maxValue": "1",
+    "hideValue": "0.0099999998",
+    "selection": "\"phx_window3_left\""
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1S1/AnimationSources/phx_window3_right": {
+   "base": [
+    null,
+    "AnimSourceHidden"
+   ],
+   "props_removed": {
+    "type": "\"hide\"",
+    "source": "\"phx_window3_right\"",
+    "minValue": "0",
+    "maxValue": "1",
+    "hideValue": "0.0099999998",
+    "selection": "\"phx_window3_right\""
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1S1/AnimationSources/phx_window4_frame": {
+   "base": [
+    null,
+    "AnimSourceHidden"
+   ],
+   "props_removed": {
+    "type": "\"hide\"",
+    "source": "\"phx_window4_frame\"",
+    "minValue": "0",
+    "maxValue": "1",
+    "hideValue": "0.0099999998",
+    "selection": "\"phx_window4_frame\""
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1S1/AnimationSources/phx_window4_right": {
+   "base": [
+    null,
+    "AnimSourceHidden"
+   ],
+   "props_removed": {
+    "type": "\"hide\"",
+    "source": "\"phx_window4_right\"",
+    "minValue": "0",
+    "maxValue": "1",
+    "hideValue": "0.0099999998",
+    "selection": "\"phx_window4_right\""
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1S2_Dam2/AnimationSources/proxyroadway_floor1_ext": {
+   "base": [
+    "AnimSourceHidden",
+    "AnimSourceShown"
+   ],
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1S2_Dam2/AnimationSources/proxyroadway_floor1_int": {
+   "base": [
+    "AnimSourceShown",
+    "AnimSourceHidden"
+   ],
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1S2_Dam2/Construction/rebuild_roof1/roof1": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1S2_Dam2/Construction/rebuild_wall1/wall1_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1S2_Dam2/Construction/rebuild_wall2/wall2_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1S2_Dam2/Construction/rebuild_wall3/wall3_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_1S2_Dam2/Construction/rebuild_wall4/wall4_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_2M1_Dam2/Construction/rebuild_roof1/roof1": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_2M1_Dam2/Construction/rebuild_wall1/wall1_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_2M1_Dam2/Construction/rebuild_wall2/wall2_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_2M1_Dam2/Construction/rebuild_wall3/wall3_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_2M2/Construction/rebuild_window8/window8_wood": {
+   "props_changed": {
+    "physics_geom_names[]": [
+     "{\"phx_window8_frame\",\"phx_window8_right\"}",
+     "{\"phx_window8_frame\",\"phx_window8_left\"}"
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_2M2_Dam2/Construction/rebuild_roof1/roof1": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_2M2_Dam2/Construction/rebuild_rubble/rubble_rubble1": {
+   "props_changed": {
+    "build_text_override": [
+     "\"Clear Room 1 Rubble 1[WIP]\"",
+     "\"$STR_ClearRubble\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_2M2_Dam2/Construction/rebuild_rubble2/rubble_rubble2": {
+   "props_changed": {
+    "build_text_override": [
+     "\"Clear Room 1 Rubble 2[WIP]\"",
+     "\"$STR_ClearRubble\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_2M2_Dam2/Construction/rebuild_wall1/wall1_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_2M2_Dam2/Construction/rebuild_wall2/wall2_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_2S1/Construction/rebuild_door2/door2_barricade": {
+   "props_changed": {
+    "physics_geom_names[]": [
+     "{\"phx_door1\"}",
+     "{\"phx_door2\"}"
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_2S1_Dam3/Construction/rebuild_roof1/roof1": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_2S1_Dam3/Construction/rebuild_wall1/wall1_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_2S1_Dam3/Construction/rebuild_wall2/wall2_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_roof1/roof1": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "proxyroadway_names[]": "{\"roof1\"}",
+    "proxyroadway_behaviors_invert[]": "{0}",
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_roof2/roof2": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "proxyroadway_names[]": "{\"roof2\"}",
+    "proxyroadway_behaviors_invert[]": "{0}",
+    "utility_build[]": "{\"floor_switcher_server_2\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_roof3/roof3": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_3\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall1/wall1_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall2/wall2_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall3/wall3_window_brick": {
+   "props_added": {
+    "physics_geom_names[]": "{\"phx_wall3_main\"}",
+    "physics_geom_behaviors_invert[]": "{0}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall3/wall3_window_wood": {
+   "props_added": {
+    "physics_geom_names[]": "{\"phx_wall3_main\"}",
+    "physics_geom_behaviors_invert[]": "{0}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall3/wall3_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_2\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall4/wall4_window_brick": {
+   "props_added": {
+    "physics_geom_names[]": "{\"phx_wall4_main\"}",
+    "physics_geom_behaviors_invert[]": "{0}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall4/wall4_window_wood": {
+   "props_added": {
+    "physics_geom_names[]": "{\"phx_wall4_main\"}",
+    "physics_geom_behaviors_invert[]": "{0}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall4/wall4_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_2\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall5/wall5_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_3\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall6/wall6_window_brick": {
+   "props_added": {
+    "physics_geom_names[]": "{\"phx_wall6_main\"}",
+    "physics_geom_behaviors_invert[]": "{0}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall6/wall6_window_wood": {
+   "props_added": {
+    "physics_geom_names[]": "{\"phx_wall6_main\"}",
+    "physics_geom_behaviors_invert[]": "{0}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/rebuild_wall6/wall6_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_3\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_1": {
+   "props_added": {
+    "physics_geom_names[]": "{\"proxyroadway_floor1_int\",\"proxyroadway_floor1_ext\"}",
+    "physics_geom_behaviors_invert[]": "{0,1}"
+   },
+   "props_removed": {
+    "override_animsource_names[]": "{\"proxyroadway_floor1_int\",\"proxyroadway_floor1_ext\"}",
+    "override_animsource_behaviors_invert[]": "{0,1}",
+    "required_parts[]": "{\"roof1\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_2": {
+   "props_added": {
+    "physics_geom_names[]": "{\"proxyroadway_floor2_int\",\"proxyroadway_floor2_ext\"}",
+    "physics_geom_behaviors_invert[]": "{0,1}"
+   },
+   "props_removed": {
+    "override_animsource_names[]": "{\"proxyroadway_floor2_int\",\"proxyroadway_floor2_ext\"}",
+    "override_animsource_behaviors_invert[]": "{0,1}",
+    "required_parts[]": "{\"roof2\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S1_Dam3/Construction/utility_nonparts/floor_switcher_server_3": {
+   "props_added": {
+    "physics_geom_names[]": "{\"proxyroadway_floor3_int\",\"proxyroadway_floor3_ext\"}",
+    "physics_geom_behaviors_invert[]": "{0,1}"
+   },
+   "props_removed": {
+    "override_animsource_names[]": "{\"proxyroadway_floor3_int\",\"proxyroadway_floor3_ext\"}",
+    "override_animsource_behaviors_invert[]": "{0,1}",
+    "required_parts[]": "{\"roof3\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S2_Dam2/Construction/rebuild_roof2/roof2": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_2\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S2_Dam2/Construction/rebuild_wall2/wall2_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_2\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S2_Dam2/Construction/rebuild_wall3/wall3_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_2\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_House_3S2_Dam2/Construction/rebuild_wall4/wall4_wood": {
+   "props_added": {
+    "toggle_utility_part_update": "1"
+   },
+   "props_removed": {
+    "utility_build[]": "{\"floor_switcher_server_2\"}"
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors25/ArmorType/FragGrenade/Health": {
+   "props_changed": {
+    "damage": [
+     "3",
+     "10"
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors25/ArmorType/Melee/Health": {
+   "props_changed": {
+    "damage": [
+     "2.5",
+     "5"
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/DamageSystem/DamageZones/doors25/ArmorType/Projectile/Health": {
+   "props_changed": {
+    "damage": [
+     "2",
+     "3"
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doors10": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodSmallOpen\"",
+     "\"doorWoodSmallOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodSmallClose\"",
+     "\"doorWoodSmallClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodSmallRattle\"",
+     "\"doorWoodSmallRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodSmallOpenABit\"",
+     "\"doorWoodSmallOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doors11": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodSmallOpen\"",
+     "\"doorWoodSmallOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodSmallClose\"",
+     "\"doorWoodSmallClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodSmallRattle\"",
+     "\"doorWoodSmallRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodSmallOpenABit\"",
+     "\"doorWoodSmallOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doors12": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodSmallOpen\"",
+     "\"doorWoodSmallOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodSmallClose\"",
+     "\"doorWoodSmallClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodSmallRattle\"",
+     "\"doorWoodSmallRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodSmallOpenABit\"",
+     "\"doorWoodSmallOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doors13": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodSmallOpen\"",
+     "\"doorWoodSmallOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodSmallClose\"",
+     "\"doorWoodSmallClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodSmallRattle\"",
+     "\"doorWoodSmallRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodSmallOpenABit\"",
+     "\"doorWoodSmallOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doors14": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodSmallOpen\"",
+     "\"doorWoodSmallOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodSmallClose\"",
+     "\"doorWoodSmallClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodSmallRattle\"",
+     "\"doorWoodSmallRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodSmallOpenABit\"",
+     "\"doorWoodSmallOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doors15": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodSmallOpen\"",
+     "\"doorWoodSmallOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodSmallClose\"",
+     "\"doorWoodSmallClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodSmallRattle\"",
+     "\"doorWoodSmallRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodSmallOpenABit\"",
+     "\"doorWoodSmallOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doors16": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door MetalSmallOpen\"",
+     "\"doorMetalSmallOpen\""
+    ],
+    "soundClose": [
+     "\"door MetalSmallClose\"",
+     "\"doorMetalSmallClose\""
+    ],
+    "soundLocked": [
+     "\"door MetalSmallRattle\"",
+     "\"doorMetalSmallRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door MetalSmallOpenABit\"",
+     "\"doorMetalSmallOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doors17": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door MetalSmallOpen\"",
+     "\"doorMetalSmallOpen\""
+    ],
+    "soundClose": [
+     "\"door MetalSmallClose\"",
+     "\"doorMetalSmallClose\""
+    ],
+    "soundLocked": [
+     "\"door MetalSmallRattle\"",
+     "\"doorMetalSmallRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door MetalSmallOpenABit\"",
+     "\"doorMetalSmallOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doors18": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door MetalSmallOpen\"",
+     "\"doorMetalSmallOpen\""
+    ],
+    "soundClose": [
+     "\"door MetalSmallClose\"",
+     "\"doorMetalSmallClose\""
+    ],
+    "soundLocked": [
+     "\"door MetalSmallRattle\"",
+     "\"doorMetalSmallRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door MetalSmallOpenABit\"",
+     "\"doorMetalSmallOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doors19": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door MetalSmallOpen\"",
+     "\"doorMetalSmallOpen\""
+    ],
+    "soundClose": [
+     "\"door MetalSmallClose\"",
+     "\"doorMetalSmallClose\""
+    ],
+    "soundLocked": [
+     "\"door MetalSmallRattle\"",
+     "\"doorMetalSmallRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door MetalSmallOpenABit\"",
+     "\"doorMetalSmallOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doors20": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodSmallOpen\"",
+     "\"doorWoodSmallOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodSmallClose\"",
+     "\"doorWoodSmallClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodSmallRattle\"",
+     "\"doorWoodSmallRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodSmallOpenABit\"",
+     "\"doorWoodSmallOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doors21": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodSmallOpen\"",
+     "\"doorWoodSmallOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodSmallClose\"",
+     "\"doorWoodSmallClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodSmallRattle\"",
+     "\"doorWoodSmallRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodSmallOpenABit\"",
+     "\"doorWoodSmallOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doors22": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodSmallOpen\"",
+     "\"doorWoodSmallOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodSmallClose\"",
+     "\"doorWoodSmallClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodSmallRattle\"",
+     "\"doorWoodSmallRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodSmallOpenABit\"",
+     "\"doorWoodSmallOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doors23": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodSmallOpen\"",
+     "\"doorWoodSmallOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodSmallClose\"",
+     "\"doorWoodSmallClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodSmallRattle\"",
+     "\"doorWoodSmallRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodSmallOpenABit\"",
+     "\"doorWoodSmallOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doors24": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodSmallOpen\"",
+     "\"doorWoodSmallOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodSmallClose\"",
+     "\"doorWoodSmallClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodSmallRattle\"",
+     "\"doorWoodSmallRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodSmallOpenABit\"",
+     "\"doorWoodSmallOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doors25": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodSmallOpen\"",
+     "\"doorWoodSmallOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodSmallClose\"",
+     "\"doorWoodSmallClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodSmallRattle\"",
+     "\"doorWoodSmallRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodSmallOpenABit\"",
+     "\"doorWoodSmallOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doors7": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodSmallOpen\"",
+     "\"doorWoodSmallOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodSmallClose\"",
+     "\"doorWoodSmallClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodSmallRattle\"",
+     "\"doorWoodSmallRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodSmallOpenABit\"",
+     "\"doorWoodSmallOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doors8": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodSmallOpen\"",
+     "\"doorWoodSmallOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodSmallClose\"",
+     "\"doorWoodSmallClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodSmallRattle\"",
+     "\"doorWoodSmallRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodSmallOpenABit\"",
+     "\"doorWoodSmallOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doors9": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodSmallOpen\"",
+     "\"doorWoodSmallOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodSmallClose\"",
+     "\"doorWoodSmallClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodSmallRattle\"",
+     "\"doorWoodSmallRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodSmallOpenABit\"",
+     "\"doorWoodSmallOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doorstwin1": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodTwinOpen\"",
+     "\"doorWoodTwinOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodTwinClose\"",
+     "\"doorWoodTwinClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodTwinRattle\"",
+     "\"doorWoodTwinRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodTwinOpenABit\"",
+     "\"doorWoodTwinOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doorstwin2": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodTwinOpen\"",
+     "\"doorWoodTwinOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodTwinClose\"",
+     "\"doorWoodTwinClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodTwinRattle\"",
+     "\"doorWoodTwinRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodTwinOpenABit\"",
+     "\"doorWoodTwinOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Land_PoliceStation_Large_Takistan/Doors/Doorstwin3": {
+   "props_changed": {
+    "soundOpen": [
+     "\"door WoodTwinOpen\"",
+     "\"doorWoodTwinOpen\""
+    ],
+    "soundClose": [
+     "\"door WoodTwinClose\"",
+     "\"doorWoodTwinClose\""
+    ],
+    "soundLocked": [
+     "\"door WoodTwinRattle\"",
+     "\"doorWoodTwinRattle\""
+    ],
+    "soundOpenABit": [
+     "\"door WoodTwinOpenABit\"",
+     "\"doorWoodTwinOpenABit\""
+    ]
+   },
+   "file": "structures_takistan/Residential/config.cpp"
+  },
+  "CfgVehicles/Motorbike_01_ColorBase": {
+   "props_added": {
+    "frontReflectorMatOn": "\"dz\\vehicles\\singletrack\\motorbike_01\\data\\motorbike_01_lights_front_e.rvmat\"",
+    "frontReflectorMatOff": "\"dz\\vehicles\\singletrack\\motorbike_01\\data\\motorbike_01_lights_nolight.rvmat\"",
+    "brakeReflectorMatOn": "\"dz\\vehicles\\singletrack\\motorbike_01\\data\\motorbike_01_lights_rear_brake.rvmat\"",
+    "brakeReflectorMatOff": "\"dz\\vehicles\\singletrack\\motorbike_01\\data\\motorbike_01_lights_nolight.rvmat\""
+   },
+   "file": "vehicles/singletrack/config.cpp"
+  },
+  "CfgVehicles/Motorbike_02_ColorBase": {
+   "props_added": {
+    "frontReflectorMatOn": "\"dz\\vehicles\\singletrack\\motorbike_02\\data\\motorbike_02_lights_front_e.rvmat\"",
+    "frontReflectorMatOff": "\"dz\\vehicles\\singletrack\\motorbike_02\\data\\motorbike_02_lights_nolight.rvmat\"",
+    "brakeReflectorMatOn": "\"dz\\vehicles\\singletrack\\motorbike_02\\data\\motorbike_02_lights_rear_brake.rvmat\"",
+    "brakeReflectorMatOff": "\"dz\\vehicles\\singletrack\\motorbike_02\\data\\motorbike_02_lights_nolight.rvmat\""
+   },
+   "props_changed": {
+    "hiddenSelections[]": [
+     "{\"camo\",\"camo_exhaust\",\"camo_fenderfront\",\"camo_fenderrear\",\"light_1_1\",\"light_1_2\",\"light_brake_1_2\"}",
+     "{\"camo\",\"camo_exhaust\",\"camo_fenderfront\",\"camo_fenderrear\",\"lights_front\",\"lights_rear\",\"lights_brake\"}"
+    ]
+   },
+   "file": "vehicles/singletrack/config.cpp"
+  },
+  "CfgVehicles/Motorbike_02_ShieldFront_ColorBase": {
+   "props_removed": {
+    "itemBehaviour": "0"
+   },
+   "file": "vehicles/singletrack/config.cpp"
+  },
+  "CfgVehicles/PoliceBaton/MeleeModes/Heavy": {
+   "props_changed": {
+    "ammo": [
+     "\"MeleeBluntLight_2\"",
+     "\"MeleeBluntHeavy_2\""
+    ]
+   },
+   "file": "weapons/melee/blunt/config.cpp"
+  },
+  "CfgVehicles/PoliceBaton/MeleeModes/Sprint": {
+   "props_changed": {
+    "ammo": [
+     "\"MeleeBluntLight_2\"",
+     "\"MeleeBluntHeavy_2\""
+    ]
+   },
+   "file": "weapons/melee/blunt/config.cpp"
+  },
+  "CfgMagazines/Mag_LeeEnfield_10Rnd": {
+   "props_changed": {
+    "ammoItems[]": [
+     "{\"Ammo_762x54\"}",
+     "{\"Ammo_762x54\",\"Ammo_762x54Tracer\"}"
+    ]
+   },
+   "file": "weapons_takistan/attachments/magazine/config.cpp"
+  },
+  "CfgSlots/Slot_Att_CodeLock": {
+   "props_changed": {
+    "displayName": [
+     "\"#STR_CodeLock0\"",
+     "\"#STR_CfgVehicles_codelock0\""
+    ]
+   },
+   "file": "../scripts/config.cpp"
+  },
+  "CfgSlots/Slot_Att_CodeLock10_Metal": {
+   "props_changed": {
+    "displayName": [
+     "\"#STR_CodeLock0\"",
+     "\"#STR_CfgVehicles_codelock0\""
+    ]
+   },
+   "file": "../scripts/config.cpp"
+  },
+  "CfgSlots/Slot_Att_CodeLock10_Wood": {
+   "props_changed": {
+    "displayName": [
+     "\"#STR_CodeLock0\"",
+     "\"#STR_CfgVehicles_codelock0\""
+    ]
+   },
+   "file": "../scripts/config.cpp"
+  },
+  "CfgSlots/Slot_Att_CodeLock1_Metal": {
+   "props_changed": {
+    "displayName": [
+     "\"#STR_CodeLock0\"",
+     "\"#STR_CfgVehicles_codelock0\""
+    ]
+   },
+   "file": "../scripts/config.cpp"
+  },
+  "CfgSlots/Slot_Att_CodeLock1_Wood": {
+   "props_changed": {
+    "displayName": [
+     "\"#STR_CodeLock0\"",
+     "\"#STR_CfgVehicles_codelock0\""
+    ]
+   },
+   "file": "../scripts/config.cpp"
+  },
+  "CfgSlots/Slot_Att_CodeLock2_Metal": {
+   "props_changed": {
+    "displayName": [
+     "\"#STR_CodeLock0\"",
+     "\"#STR_CfgVehicles_codelock0\""
+    ]
+   },
+   "file": "../scripts/config.cpp"
+  },
+  "CfgSlots/Slot_Att_CodeLock2_Wood": {
+   "props_changed": {
+    "displayName": [
+     "\"#STR_CodeLock0\"",
+     "\"#STR_CfgVehicles_codelock0\""
+    ]
+   },
+   "file": "../scripts/config.cpp"
+  },
+  "CfgSlots/Slot_Att_CodeLock3_Metal": {
+   "props_changed": {
+    "displayName": [
+     "\"#STR_CodeLock0\"",
+     "\"#STR_CfgVehicles_codelock0\""
+    ]
+   },
+   "file": "../scripts/config.cpp"
+  },
+  "CfgSlots/Slot_Att_CodeLock3_Wood": {
+   "props_changed": {
+    "displayName": [
+     "\"#STR_CodeLock0\"",
+     "\"#STR_CfgVehicles_codelock0\""
+    ]
+   },
+   "file": "../scripts/config.cpp"
+  },
+  "CfgSlots/Slot_Att_CodeLock4_Metal": {
+   "props_changed": {
+    "displayName": [
+     "\"#STR_CodeLock0\"",
+     "\"#STR_CfgVehicles_codelock0\""
+    ]
+   },
+   "file": "../scripts/config.cpp"
+  },
+  "CfgSlots/Slot_Att_CodeLock4_Wood": {
+   "props_changed": {
+    "displayName": [
+     "\"#STR_CodeLock0\"",
+     "\"#STR_CfgVehicles_codelock0\""
+    ]
+   },
+   "file": "../scripts/config.cpp"
+  },
+  "CfgSlots/Slot_Att_CodeLock5_Metal": {
+   "props_changed": {
+    "displayName": [
+     "\"#STR_CodeLock0\"",
+     "\"#STR_CfgVehicles_codelock0\""
+    ]
+   },
+   "file": "../scripts/config.cpp"
+  },
+  "CfgSlots/Slot_Att_CodeLock5_Wood": {
+   "props_changed": {
+    "displayName": [
+     "\"#STR_CodeLock0\"",
+     "\"#STR_CfgVehicles_codelock0\""
+    ]
+   },
+   "file": "../scripts/config.cpp"
+  },
+  "CfgSlots/Slot_Att_CodeLock6_Metal": {
+   "props_changed": {
+    "displayName": [
+     "\"#STR_CodeLock0\"",
+     "\"#STR_CfgVehicles_codelock0\""
+    ]
+   },
+   "file": "../scripts/config.cpp"
+  },
+  "CfgSlots/Slot_Att_CodeLock6_Wood": {
+   "props_changed": {
+    "displayName": [
+     "\"#STR_CodeLock0\"",
+     "\"#STR_CfgVehicles_codelock0\""
+    ]
+   },
+   "file": "../scripts/config.cpp"
+  },
+  "CfgSlots/Slot_Att_CodeLock7_Metal": {
+   "props_changed": {
+    "displayName": [
+     "\"#STR_CodeLock0\"",
+     "\"#STR_CfgVehicles_codelock0\""
+    ]
+   },
+   "file": "../scripts/config.cpp"
+  },
+  "CfgSlots/Slot_Att_CodeLock7_Wood": {
+   "props_changed": {
+    "displayName": [
+     "\"#STR_CodeLock0\"",
+     "\"#STR_CfgVehicles_codelock0\""
+    ]
+   },
+   "file": "../scripts/config.cpp"
+  },
+  "CfgSlots/Slot_Att_CodeLock8_Metal": {
+   "props_changed": {
+    "displayName": [
+     "\"#STR_CodeLock0\"",
+     "\"#STR_CfgVehicles_codelock0\""
+    ]
+   },
+   "file": "../scripts/config.cpp"
+  },
+  "CfgSlots/Slot_Att_CodeLock8_Wood": {
+   "props_changed": {
+    "displayName": [
+     "\"#STR_CodeLock0\"",
+     "\"#STR_CfgVehicles_codelock0\""
+    ]
+   },
+   "file": "../scripts/config.cpp"
+  },
+  "CfgSlots/Slot_Att_CodeLock9_Metal": {
+   "props_changed": {
+    "displayName": [
+     "\"#STR_CodeLock0\"",
+     "\"#STR_CfgVehicles_codelock0\""
+    ]
+   },
+   "file": "../scripts/config.cpp"
+  },
+  "CfgSlots/Slot_Att_CodeLock9_Wood": {
+   "props_changed": {
+    "displayName": [
+     "\"#STR_CodeLock0\"",
+     "\"#STR_CfgVehicles_codelock0\""
+    ]
+   },
+   "file": "../scripts/config.cpp"
+  }
+ }
+}

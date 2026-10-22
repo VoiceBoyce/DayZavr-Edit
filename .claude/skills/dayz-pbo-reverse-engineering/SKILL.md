@@ -7,7 +7,7 @@ description: "Use when: reverse engineer PBO, extract patterns from mod, worksho
 
 Workflow for systematically extracting patterns from another author's DayZ mod(s). Distilled from the LM_Planes extraction project (workshop 3730564764, Llama+Itspete-Here) where 130 patterns were extracted across 2 passes / ~30 loop iterations.
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 **Sister skill**: [[dayz-pbo-build]] handles the opposite direction (packaging your own PBO for release).
 
@@ -191,7 +191,7 @@ When emitting a finding about another author's code:
 **Anti-confabulation rule when reading another author's code**: their code may use undocumented engine APIs, non-obvious patterns, or have bugs. Don't assume their patterns are correct — document the pattern AND note suspected issues separately.
 
 **Version rule (1.30):** most Workshop mods were written against 1.29 or older. Before a finding that
-calls or overrides a vanilla API goes into a skill, grep `P:\scripts` (1.30.164078) for that signature;
+calls or overrides a vanilla API goes into a skill, grep `P:\scripts` (1.30.164200 since 2026-10-21) for that signature;
 if it changed, record the finding with `"pattern": "... (1.29 API; 1.30: <new form>)"` or route it to
 `dayz-130-migration` instead of copying the old form into a skill. See § DayZ 1.30 changes at the end
 for the cheap markers that tell which version a PBO was built for.
@@ -467,6 +467,8 @@ extraction not re-run). What changed in 1.30 is inside the PBO (ODOL v56, script
 | `#ifdef DAYZ_1_29` / `DAYZ_1_30` in `.c` | grep the extracted scripts | the author gated code by version (the engine defines only the current one, e.g. `DAYZ_1_30` on 1.30 [reported: bzed]) |
 | backslashes in CfgMods `files[]` | `config.cpp` / debinarized `config.bin` | [reported: bzed] on a 1.30 Linux server none of the mod's scripts compile; a porting item, see `dayz-pbo-build` check 2 |
 | removed/changed vanilla API | grep the `.c` for identifiers in `dayz-130-migration/references/api-delta-1.29-to-1.30.md` | the mod is pre-1.30 and will not compile on 1.30 as-is |
+| 1.30.164078-only API (`vector.Cross`, 1-argument `GetSupportProvided`, unguarded `Workbench`/`WorkbenchPluginAttribute`) | grep the `.c`; list in `dayz-130-migration/references/api-delta-1.30.164078-to-164200.md` | built for 1.30.164078; will not compile on 1.30.164200 as-is |
+| PBO header property `fsShadowing=1` | PBO header (`key=value` pairs after `\0sreV`; reader in `dayz-pbo-build` § Named PBO properties) | built for ≥ 1.30.164200 and meant to load although its prefix matches another PBO (override of Enfusion config files such as `.layout`, [reported: BI 1.30.164200 notes]); find which PBO it shadows before extracting patterns from it |
 
 A pre-1.30 pattern is still a valid finding about the *mod*; it is not a valid pattern for a *skill*
 until it has been re-checked against `P:\scripts`.

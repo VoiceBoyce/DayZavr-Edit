@@ -207,7 +207,7 @@ class BuildingBase : Building
 	class Slot_Att_CodeLock
 	{
 		name="Att_CodeLock";
-		displayName="#STR_CodeLock0";
+		displayName="#STR_CfgVehicles_codelock0";
 		selection="att_codelock";
 		ghostIcon="set:dayz_inventory image:digitallock";
 	};
@@ -276,7 +276,7 @@ The holder keys each `AdditionalDoorInfo` by the position of its child inside **
 6. A construction component: `ActionAttachToConstruction` is only offered when `CanUseConstruction()` is true (`P:\scripts\4_world\classes\useractionscomponent\actions\singleuse\actionattachtoconstruction.c:47-48,151`), and the building's inventory is only shown under the same condition (`P:\scripts\3_game\entities\building.c:328-331`). `EntityAI` creates the component only when `cfgVehicles <class> Construction` exists (`P:\scripts\3_game\entities\entityai.c:248-249,3464-3488`); for a `BuildingBase` it is a `Rebuilding` (`P:\scripts\4_world\entities\game\super\building.c:23-27`). ? What the smallest working `class Construction` for a lock-only custom house looks like was not tested.
 7. A script class derived from `House`, not `Building` (Open / Close cast to `BuildingBase`; see [Hooks vanilla 1.30 calls](door-model-cfg-and-config.md#hooks-vanilla-130-calls-and-hooks-it-does-not)).
 
-**[UNVERIFIED]** No `config.cpp` under `P:\DZ` (1.30.164078) contains a **class Doors** child with `relatedInventorySlots[]`. The parser and `BuildingBase` / `ActionAttachToConstruction` consumers are verified; a shipped vanilla house block with those keys is not in the extract.
+Vanilla reference (the 1.30.164200 `P:\DZ` extract has the Takistan houses; the 164078 extract here did not): `Land_House_1M1` (`P:\DZ\structures_takistan\Residential\config.cpp:18-45`) — door `door1_door_wood` with `relatedInventorySlots[]={"Att_CodeLock1_Wood","Att_CombinationLock1_Wood"};`, `lockCompatibilityBitMask=0;`, `doorConstructionPart="door1_wood";`, `doorConstructionPhysicsSource="phx_door1_move";` (`:25-45`); its windows add `interactPositionPoint` / `interactDirPoint` (`:80-81`). The house also sets `disableSimulation=1;` (`:22`). These are rebuildable doors; a plain custom house needs only the lock keys (items 1-7 above).
 
 ### Attaching a lock to a building door
 
@@ -366,7 +366,7 @@ override void OnStoreSave( ParamsWriteContext ctx )
 
 ### Digital code lock
 
-Script item class is `DigitalCodeLock` (`P:\scripts\4_world\entities\itembase\codelock.c:1`), with subclass `DigitalCodeLock_Bunker` (`:567`). **[UNVERIFIED]** config classname: no `config.cpp` under `P:\DZ` (1.30.164078) declares a `DigitalCodeLock` `CfgVehicles` class. It owns `CodeLockComponent` and `CodeLockVisualManager` (`codelock.c:9-10`). Battery slot `BatteryD`, item `Battery9V` (`codelock.c:6,307-309`). PIN 4–6 digits (`P:\scripts\4_world\classes\codelockcomponent.c:23-24`). UI: `DigitalCodeLockUI.GetLayout()` returns `"gui/layouts/day_z_digital_lock.layout"` (`P:\scripts\5_mission\gui\digitalcodelockui.c:127-129`; the file is `P:\gui\layouts\day_z_digital_lock.layout`). Memory on the **item**: `ce_center`, `inside` (`codelock.c:3-4`).
+Script item class is `DigitalCodeLock` (`P:\scripts\4_world\entities\itembase\codelock.c:1`), with subclass `DigitalCodeLock_Bunker` (`:567`). Config: `class DigitalCodeLock: Inventory_Base` (`P:\DZ\gear_takistan\camping\config.cpp:19`, model `\dz\gear_takistan\camping\codelock.p3d`; `inventorySlot[]` = `Att_CodeLock` + `Att_CodeLock1_Wood` … `Att_CodeLock10_Metal` `:96-119`; AnimationSources `CodelockBackTranslation` / `CodelockFrontTranslation` / `CodelockBackRotation` / `CodelockRotation` `:286-297`), `DigitalCodeLock_Bunker` at `:315` (the 1.30.164078 extract here lacked `gear_takistan`). It owns `CodeLockComponent` and `CodeLockVisualManager` (`codelock.c:9-10`). `CodeLockVisualManager` poses the lock on its hierarchy root: on a `House` the back part is at phase `0.50` and the front part at `0.50` only when reversed; on a `BaseBuildingBase` (Fence) the back part is at `0.92` (`P:\scripts\4_world\classes\codelockvisualmanager.c:43-52,438-465`). 1.30.164200 changed the `House` back part from 0.60 (0.50 reversed) to a constant 0.50 and made all these numbers `private const`; a custom lock pose belongs in an override of the `protected` `GetAnimationPhaseForFrontPart` / `GetAnimationPhaseForBackPart`. Battery slot `BatteryD`, item `Battery9V` (`codelock.c:6,307-309`). PIN 4–6 digits (`P:\scripts\4_world\classes\codelockcomponent.c:23-24`). UI: `DigitalCodeLockUI.GetLayout()` returns `"gui/layouts/day_z_digital_lock.layout"` (`P:\scripts\5_mission\gui\digitalcodelockui.c:127-129`; the file is `P:\gui\layouts\day_z_digital_lock.layout`). Memory on the **item**: `ce_center`, `inside` (`codelock.c:3-4`).
 
 ```c
 // [EXACT] P:\scripts\4_world\classes\codelockcomponent.c:4
@@ -408,13 +408,13 @@ Component persist order: `m_LockPIN` (string), `m_IsLocked` (bool), `m_DoorIndex
 	}
 ```
 
-If you copy this pattern, test `MemoryPointExists` for both names first: `MemPointDirectionalCheck` returns true when a point is missing or `m_Caller` is null (`P:\scripts\4_world\static\miscgameplayfunctions.c:940-944,967`), so a model without `Door1_action` / `Door1_inside` would open from "inside" everywhere (read from code, not tested in game).
+If you copy this pattern, test `MemoryPointExists` for both names first: `MemPointDirectionalCheck` returns true when a point is missing or `m_Caller` is null (`P:\scripts\4_world\static\miscgameplayfunctions.c:942-946,969`), so a model without `Door1_action` / `Door1_inside` would open from "inside" everywhere (read from code, not tested in game).
 
 `BroadcastedBunker` binds `DigitalCodeLock_Bunker` on slot string `"att_codelock"`: the server creates it in that slot if it is empty, and the client retries every 200 ms until the attachment has replicated (`bunker.c:170-224`).
 
 ### Rebuildable house doors
 
-`Rebuilding.OnConstructionDoorOpenStart` / `OnConstructionDoorCloseStart` set `doorConstructionPhysicsSource` phase 1.0 / 0.0 (`P:\scripts\4_world\classes\rebuilding\rebuilding.c:439-463`). When that construction part is dismantled or destroyed, `ConstructionPart.CloseDoorOnPartUnbuild` closes every open door whose `doorConstructionPart` names it (`P:\scripts\4_world\classes\basebuilding\constructionpart.c:436-458`). Put `doorConstructionPart` and `doorConstructionPhysicsSource` on the Doors child if the door is a rebuildable construction part.
+`Rebuilding.OnConstructionDoorOpenStart` / `OnConstructionDoorCloseStart` set `doorConstructionPhysicsSource` phase 1.0 / 0.0 (`P:\scripts\4_world\classes\rebuilding\rebuilding.c:439-463`). When that construction part is dismantled or destroyed, `ConstructionPart.CloseDoorOnPartUnbuild` closes every open door whose `doorConstructionPart` names it (`P:\scripts\4_world\classes\basebuilding\constructionpart.c:442-464`). Put `doorConstructionPart` and `doorConstructionPhysicsSource` on the Doors child if the door is a rebuildable construction part.
 
 ### Script override trap
 

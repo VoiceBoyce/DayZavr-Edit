@@ -90,7 +90,7 @@ Groups shaders into a "set" that script references by string name.
 |---|---|
 | `soundShaders[]` | Array of CfgSoundShaders names to combine |
 
-**Additional properties** (as set on vanilla bases; `Rifle_Shot_Base_SoundSet` at `P:\DZ\sounds\hpp\config.cpp:323687-323700`, `baseCharacter_SoundSet` at `:318381-318389`): `volumeFactor`, `volumeCurve`, `sound3DProcessingType`, `distanceFilter`, `occlusionFactor`, `obstructionFactor`, `spatial`, `doppler`, `loop`, `soundShadersLimit`, `soundObjectsLimit`. Both bases recommended here still exist on 1.30 (`base_closeShot_SoundShader` at `:17117`).
+**Additional properties** (as set on vanilla bases; `Rifle_Shot_Base_SoundSet` at `P:\DZ\sounds\hpp\config.cpp:324357-324370`, `baseCharacter_SoundSet` at `:319051-319059`): `volumeFactor`, `volumeCurve`, `sound3DProcessingType`, `distanceFilter`, `occlusionFactor`, `obstructionFactor`, `spatial`, `doppler`, `loop`, `soundShadersLimit`, `soundObjectsLimit`. Both bases recommended here still exist on 1.30 (`base_closeShot_SoundShader` at `:17117`).
 
 **Ejemplo real** (heredando de base vanilla):
 ```cpp
@@ -370,15 +370,15 @@ Official mechanism for triggering sounds from server and delivering them to clie
        handler.AddSound(SoundConstants.ITEM_DEPLOY_LOOP, "MiMod_DeployLoop_SoundSet", params);
    }
    ```
-   [scripts\4_world\entities\itembase.c:4416-4433]
+   [scripts\4_world\entities\itembase.c:4420-4437]
 
 3. **Fire from the server**:
    ```
    StartItemSoundServer(SoundConstants.ITEM_DEPLOY);           // one-shot (or (id, slotId))
    StopItemSoundServer(SoundConstants.ITEM_DEPLOY_LOOP);       // para loop
    ```
-   [scripts\4_world\entities\itembase.c:4436-4454, :4495-4503]
-   1.30: `StartItemSoundServer` returns unless `GetGame().IsServer()` and `id > 0`, queues an `ItemSoundEvent` and flushes the queue once per frame as one `ERPCs.RPC_ITEM_SOUND_PLAY` RPC (count + id/slot pairs) [itembase.c:4436-4479]; `StopItemSoundServer` sends `RPC_ITEM_SOUND_STOP` at once [:4495-4503].
+   [scripts\4_world\entities\itembase.c:4440-4458, :4499-4507]
+   1.30: `StartItemSoundServer` returns unless `GetGame().IsServer()` and `id > 0`, queues an `ItemSoundEvent` and flushes the queue once per frame as one `ERPCs.RPC_ITEM_SOUND_PLAY` RPC (count + id/slot pairs) [itembase.c:4440-4483]; `StopItemSoundServer` sends `RPC_ITEM_SOUND_STOP` at once [:4499-4507].
 
 4. **Client reception** (1.30) via `ItemBase.OnRPC`:
    ```
@@ -387,9 +387,9 @@ Official mechanism for triggering sounds from server and delivering them to clie
    case ERPCs.RPC_ITEM_SOUND_STOP:
        m_ItemSoundHandler.StopItemSoundClient(soundIdStop);
    ```
-   [scripts\4_world\entities\itembase.c:2796-2825], inside `#ifndef SERVER` / `#ifndef NO_GUI` [:2763-2764]. An item that overrides `OnRPC` must call `super.OnRPC(...)`.
+   [scripts\4_world\entities\itembase.c:2800-2829], inside `#ifndef SERVER` / `#ifndef NO_GUI` [:2767-2768]. An item that overrides `OnRPC` must call `super.OnRPC(...)`.
 
-**Before 1.30 (legacy):** `StartItemSoundServer` set the network variables `m_SoundSyncPlay`, `m_SoundSyncSlotID` (and `StopItemSoundServer` `m_SoundSyncStop`) + `SetSynchDirty()`, cleared 100 ms later via `CallLater(ClearStartItemSoundServer/ClearStopItemSoundServer)`; `ItemBase.OnVariablesSynchronized` dispatched them to `PlayItemSoundClient/StopItemSoundClient` (1.29: `itembase.c:4468-4509`, `:3319-3332`). So only one play and one stop could be in flight per sync. On 1.30 the vars are still registered [itembase.c:208-213] but vanilla no longer sets `m_SoundSyncPlay`; `ClearStartItemSoundServer` is `[Obsolete("1.30: No replacement")]` [:4944-4949]; old-style delivery needs `LegacyStopItemSoundServer(id)` + `LegacyItemSoundSync()` called from your `OnVariablesSynchronized` [:4481-4493, :3291-3310].
+**Before 1.30 (legacy):** `StartItemSoundServer` set the network variables `m_SoundSyncPlay`, `m_SoundSyncSlotID` (and `StopItemSoundServer` `m_SoundSyncStop`) + `SetSynchDirty()`, cleared 100 ms later via `CallLater(ClearStartItemSoundServer/ClearStopItemSoundServer)`; `ItemBase.OnVariablesSynchronized` dispatched them to `PlayItemSoundClient/StopItemSoundClient` (1.29: `itembase.c:4468-4509`, `:3319-3332`). So only one play and one stop could be in flight per sync. On 1.30 the vars are still registered [itembase.c:208-213] but vanilla no longer sets `m_SoundSyncPlay`; `ClearStartItemSoundServer` is `[Obsolete("1.30: No replacement")]` [:4948-4953]; old-style delivery needs `LegacyStopItemSoundServer(id)` + `LegacyItemSoundSync()` called from your `OnVariablesSynchronized` [:4485-4497, :3295-3314].
 
 **Limitation (1.30):** plays queued in the same frame are batched into one RPC, so several sounds can start together. The header comment at [scripts\4_world\classes\soundhandlers\itemsoundhandler.c:19-20] still describes the old single-variable limit — stale. The client still ignores a play for an id it already tracks in `m_PlayingSounds` [itemsoundhandler.c:67-68]. An RPC is not replayed to clients that stream the item in later; a persistent loop needs a state SyncVar.
 
@@ -565,7 +565,7 @@ Available controllers (documented in proto comment):
 | `OnSoundEvent` or automatic callback in ItemBase | NO such override exists. Item sounds are activated manually via `StartItemSoundServer` or `PlaySoundSet`. |
 | `PlaySoundSet` working on server | Has guard `!g_Game.IsDedicatedServer()` — **silent on DS**. [object.c:1249] Still true on 1.30 (other sound paths additionally use `IsHeadlessOrDedicatedServer()`). |
 | Public `DynamicMusicPlayer.PlayTrack(string)` | The `PlayTrack` method is **private**. Public API is `SetCategory`. [dynamicmusicplayer.c:511, :272] |
-| Multiple simultaneous sounds with `StartItemSoundServer` impossible | Before 1.30 only (one play + one stop per sync). 1.30 batches all plays of a frame into one RPC [itembase.c:4436-4479]; the comment at [itemsoundhandler.c:19-20] is stale. |
+| Multiple simultaneous sounds with `StartItemSoundServer` impossible | Before 1.30 only (one play + one stop per sync). 1.30 batches all plays of a frame into one RPC [itembase.c:4440-4483]; the comment at [itemsoundhandler.c:19-20] is stale. |
 | `GetNoiseReductionEx` / `GetNoiseReductionByWeatherEx` replace the old weather helpers | Both are `[Obsolete]` on 1.30 too [sensesaievaluate.c:18; weather.c:407] — dampening is native (`AIParams`); drop the factor. |
 | `SurfaceInfo.GetSoundHitType()` / `SoundHitType` | `[CHANGELOG 1.30]` names them (T189758); no such identifier exists in `P:\scripts` on 164078. Do not call. |
 
@@ -653,7 +653,7 @@ g_Game.GetNoiseSystem().AddNoise(this, np, 2.0);  // multiplicador x2
 
 Detalle `[EXACT]` en `references/dayz-1-30-sound.md`.
 
-- **Item sounds:** batched `RPC_ITEM_SOUND_PLAY` / `RPC_ITEM_SOUND_STOP` instead of sync vars (§4) [scripts\4_world\entities\itembase.c:4436-4503, :2796-2825].
+- **Item sounds:** batched `RPC_ITEM_SOUND_PLAY` / `RPC_ITEM_SOUND_STOP` instead of sync vars (§4) [scripts\4_world\entities\itembase.c:4440-4507, :2800-2829].
 - **Radio / bunker:** `TransmitterBase.SOUND_BUNKER_STATIC_NOISE`; `UseBunkerStaticNoise()` = `IsTunedToBunkerFrequency() && SOUND_BUNKER_STATIC_NOISE != ""` [scripts\4_world\entities\itembase\transmitterbase.c:5-6, :135-138]. Proto in `ItemTransmitter` [scripts\4_world\entities\core\inherited\inventoryitem.c:25]. `PersonalRadio` / `BaseRadio` assign `"bunkerbroadcast_staticnoise_SoundSet"` [transmitterbase\personalradio.c:6, baseradio.c:6] (that SoundSet is not defined in the unpacked `P:\DZ` configs — unverified).
 - **Static vegetation:** `StaticObjectType` reads `CfgNonAIVehicles <Name> VegetationSounds` [scripts\3_game\entities\staticobjecttype.c:11-50]. Macro `CUSTOM_PLAYER_MOVEMENT_SOUNDSETS` in [P:\DZ\data\basicdefines.hpp:310-338].
 - **Event destructor:** `~SoundEventBase` does `if (g_Game) Stop();` [scripts\4_world\classes\soundevents\soundevents.c:12-16]; `~InfectedSoundEventBase` was removed (1.29: `infectedsoundeventbase.c:15-18`). Do not reimplement the 1.29 unguarded destructor in `InfectedSoundEventBase` subclasses.
@@ -675,8 +675,8 @@ Detalle `[EXACT]` en `references/dayz-1-30-sound.md`.
 | `scripts\3_game\noise.c` | NoiseSystem (+ `GetEnvironmentNoiseReduction`, 1.30), NoiseParams |
 | `scripts\3_game\constants.c:422-464` | SoundConstants |
 | `scripts\3_game\systems\dynamicmusicplayer\dynamicmusicplayer.c` | DynamicMusicPlayer |
-| `scripts\4_world\entities\itembase.c:4416-4503` | InitItemSounds, StartItemSoundServer (queue + RPC), StopItemSoundServer (RPC) |
-| `scripts\4_world\entities\itembase.c:2796-2825` | 1.30 OnRPC item-sound dispatch (1.29: OnVariablesSynchronized `itembase.c:3319-3332`) |
+| `scripts\4_world\entities\itembase.c:4420-4507` | InitItemSounds, StartItemSoundServer (queue + RPC), StopItemSoundServer (RPC) |
+| `scripts\4_world\entities\itembase.c:2800-2829` | 1.30 OnRPC item-sound dispatch (1.29: OnVariablesSynchronized `itembase.c:3319-3332`) |
 | `scripts\4_world\classes\soundhandlers\itemsoundhandler.c` | ItemSoundHandler |
 | `scripts\4_world\classes\soundhandlers\playersoundmanager.c` | PlayerSoundManagerBase |
 | `scripts\4_world\entities\dayzplayerimplement.c:3258,3269` | AddNoise, OnStepEvent |

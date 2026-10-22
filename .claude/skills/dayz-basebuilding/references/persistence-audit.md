@@ -78,7 +78,7 @@ Before declaring a base-building persistence change release-safe, confirm with `
 
 ## 7. Out of scope for this pass
 
-`[UNVERIFIED]` `TerritoryFlag: BaseBuildingBase` exists at `P:\DZ\gear\camping\config.cpp:12470` and
+`[UNVERIFIED]` `TerritoryFlag: BaseBuildingBase` exists at `P:\DZ\gear\camping\config.cpp:12480` and
 `staticflagpole.c:46-47` calls `AnimateFlagEx` / `AddRefresherTime01` (declared on `Totem`, `totem.c:506`), but the
 territory system (radius, decay, flag-refresher mechanics) was not opened here — do not assume its persistence
 follows the same bitmask model without tracing it. The `show_on_init` config field is no longer read on 1.30
@@ -125,7 +125,7 @@ Verified unchanged on `BaseBuildingBase` (1.30.164078):
 - 2 bits reserved per part (`ConstructionPart.BITWISE_SYNCINFO_SIZE_BASE = 2` at `constructionpart.c:6`)
 - capacity [DESIGN]: `BIT_INT_SIZE = 32` (`3_game/tools/bitarray.c:4`) × 10 / 2 = **160 part ids**
 - bit 0 = built (`constructionpart.c:111-117`); the reversible parts (`ConstructionPartRebuildReversibleBase`,
-  `:1049`) store their facing in bit 1 (`:1065-1071`)
+  `:1041`) store their facing in bit 1 (`:1057-1063`)
 
 Do **not** put Rebuilding parts on a `BaseBuildingBase` entity or write the ten-int blob from a Fence/Watchtower
 subclass. Fence extra fields still go **after** `super.OnStoreSave` (`fence.c:246-254`).
@@ -144,5 +144,5 @@ R9 extras for 1.30:
 10. `DigitalCodeLock` / `CodeLockComponent` persist `m_LockPIN`, `m_IsLocked`, `m_DoorIndex` (`4_world/classes/codelockcomponent.c:257-262`).
 11. Decay: since 1.30 a part whose config sets `can_part_decay` (or `can_decay_general`) loses health over time even
     on a `BaseBuildingBase`, clamped at `part_decay_threshold` × max health, so decay alone never ruins it
-    (`4_world/classes/constructionbase.c:307-331`); it is skipped when `cfggameplay.json`
+    (`4_world/classes/constructionbase.c:308-332`); it is skipped when `cfggameplay.json`
     `GeneralData.disableBaseDecay` is true. Health is not part of the bitmask stream.

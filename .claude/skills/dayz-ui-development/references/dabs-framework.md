@@ -10,6 +10,19 @@ Every statement verified against actual source code.
 > `https://raw.githubusercontent.com/InclementDab/DayZ-Dabs-Framework/production/DabsFramework/Scripts/3_Game/DabsFramework/MVC/<File>.c`.
 > The `Debug_Logging` field mentioned in older notes was NOT found at HEAD 2026-05-13 — treat as removed.
 
+> **⚠️ DayZ 1.30.164200 (2026-10-21): a Dabs build that references the Workbench API does not compile.**
+> The patch moved `Workbench`, `WBModuleDef`, `ScriptEditor`, `WorkbenchPluginAttribute`, `ButtonAttribute` …
+> under `#ifdef WORKBENCH` (`P:\scripts\1_core\workbenchapi.c:6-93`, `1_core\workbenchapi\**\*.c`) and removed
+> `ResourceBrowser`, `WorldEditor`, `WorldEditorAPI`, `WorldEditorTool`; only `ResourceName` and `WorkbenchPlugin`
+> stay visible to the game. The game and server do not define `WORKBENCH`. Dabs Framework's `gui/mvc/samplemvc.c`
+> (line 33) uses `Workbench` outside such a guard, so script compilation stops at `Can't find variable 'Workbench'` →
+> `Can't compile "Mission" script module!` [reported: Dabs Framework PR #50; not reproduced here]. Before using
+> Dabs (or any UI framework, admin tool or editor mod) on 164200: take a release built after the fix, or check
+> that every Workbench symbol in its `.c` files sits inside `#ifdef WORKBENCH`
+> (`grep -rn "Workbench\|WorkbenchPlugin\|ButtonAttribute\|WorldEditor\|ResourceBrowser"`). The `SampleMVC.c`
+> examples cited below (`:153`, `:185`) describe MVC behaviour and are unaffected; the breakage is the file
+> compiling at all. Same rule for your own mod: Workbench-only code goes inside `#ifdef WORKBENCH`.
+
 ---
 
 ## Class Hierarchy

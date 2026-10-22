@@ -17,7 +17,7 @@ the host model + every proxy, lets you drag/rotate each anchor with a TransformC
 gizmo against the real worn clothing, and writes the edited triangles straight back into
 the MLOD with py3d — losslessly.
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 ## When to reach for it
 

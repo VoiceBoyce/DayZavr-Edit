@@ -14,7 +14,7 @@ Full round-trip pipeline for DayZ .p3d files:
 Extract model data, visualize everything in Three.js, drag memory points
 interactively, export the edited Recipe, and rebuild a fresh .p3d from it.
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 1.30 did not change the MLOD format this skill reads and writes. Vanilla `.p3d` under `P:\DZ` are ODOL **v56** on 1.30 (1.29: v54), so the ODOL→MLOD pre-step must support v56 for a vanilla reference.
 

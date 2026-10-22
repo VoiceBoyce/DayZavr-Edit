@@ -5,9 +5,9 @@ description: Use when designing, implementing, debugging, or auditing DayZ persi
 
 # DayZ Persistence
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
-`VANILLA/` in this skill = `P:\scripts` (unpacked 1.30.164078); line numbers were re-checked there on 2026-10-15.
+`VANILLA/` in this skill = `P:\scripts` (unpacked 1.30.164200); line numbers were re-checked there on 2026-10-15.
 
 ## Router: choose one contract first
 
@@ -365,8 +365,9 @@ Mission-file exception: [references/sidecar-files.md](references/sidecar-files.m
 - Treating the bunker `.bin` as `JsonFileLoader` or as an atomic replace.
   `DeleteFile` works only on `$profile:`/`$saves:` and `CopyFile` writes only there
   (`VANILLA/1_core/proto/ensystem.c:527-531`).
-- Sidecar enumeration with `FindFile("$profile:…")` silently lists the wrong folder on a 1.30 server
-  [reported: bzed, DZEXP-134]: see [references/sidecar-files.md](references/sidecar-files.md).
+- Sidecar enumeration with `FindFile("$profile:…")` silently listed the wrong folder on 1.30.164014
+  [reported: bzed, DZEXP-134] and 1.30.164078 (measured on 1.30.164078); 1.30.164200 fixes it per BI
+  [reported: BI 1.30.164200 notes]. Keep a runtime probe + fallback: see [references/sidecar-files.md](references/sidecar-files.md).
 
 `JsonFileLoader` (`VANILLA/3_game/tools/jsonfileloader.c:7-40`, deprecated `:99-133`) is unchanged
 in 1.30. CF ModStorage was not re-verified for 1.30 (CF is not part of `P:\`).

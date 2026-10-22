@@ -2,7 +2,7 @@
 
 > Family B. This body was moved without rewriting in CAMBIO-1; status notes and paths remain exactly as they were in the origin.
 >
-> **Target: DayZ 1.30 stable (1.30.164078); labels `../../../_shared/dayz-version-policy.md`.** The hashed block below quotes
+> **Target: DayZ 1.30 stable (1.30.164200); labels `../../../_shared/dayz-version-policy.md`.** The hashed block below quotes
 > **1.29** line numbers and is kept byte-exact; read it with the "1.30 deltas" section that follows it.
 
 <!-- MOVED-EXACT source="dayz-vehicles/SKILL.md:344" sha256="E7A04C3A464FDD6735E3D7D564267E9464762A811903E504F50E02147BA727F1" -->
@@ -63,16 +63,16 @@ seat BEFORE editing the model, the config or the script.
 ## 1.30 deltas to the block above (re-verified on `P:\scripts`, 1.30.164078, 2026-10-15)
 
 - 1.30 adds a guard **before** guard 1: `if (!transport.CanGetIn()) return false;`
-  (`actiongetintransport.c:36`; default `true`, `transport.c:672-675`). Vanilla bikes override it (`motorbikescript.c:225-231`).
+  (`actiongetintransport.c:36`; default `true`, `transport.c:675-678`). Vanilla bikes override it (`motorbikescript.c:225-231`).
 - Guard 4 is called as `IsAreaAtDoorFreeDiag(crewIndex)` (`actiongetintransport.c:54`), which only adds a DayZDiag bypass
-  switch in front of `IsAreaAtDoorFree` (`transport.c:901-915`); guards 3 and 4 share that line. Variables are renamed
+  switch in front of `IsAreaAtDoorFree` (`transport.c:910-924`); guards 3 and 4 share that line. Variables are renamed
   `transport` / `crewIndex`.
 - Line numbers on 1.30: `ActionCondition` `actiongetintransport.c:26-69` (guards at `:45-66`, reach loop `:62-66`, still
   passing `1.0`); `OffroadHatchback.CrewCanGetThrough` `offroadhatchback.c:225-263`; `CarScript.GetDoorConditionPointFromSelection`
   `carscript.c:2141-2160`, `CarScript.CanReachSeatFromDoors` `carscript.c:2177-2198`; `OffroadHatchback.GetDoorConditionPointFromSelection`
   `offroadhatchback.c:364-378`. The guard order and every sub-condition are otherwise unchanged.
 - Separate 1.30 trap for a ripped car on a bare `CarScript` class: get-in works once the guards pass, but the engine never
-  starts unless the script class also overrides `GetElectricitySourceDevice()` (base returns `null`, `transport.c:826-829`;
+  starts unless the script class also overrides `GetElectricitySourceDevice()` (base returns `null`, `transport.c:835-838`;
   pattern `civiliansedan.c:59-74`). See `dayz-vehicles/references/dayz-1-30-vehicles.md` §2.
 
 ## Fourth subcause of guard 5 (measured, WRX STI B-01): the base seat->door table is LEFT-HAND-DRIVE

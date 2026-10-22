@@ -2,7 +2,7 @@
 
 A scripted pattern that snaps the player to the correct side of a vehicle seat **before** the engine plays the get-in animation, so approaching from the "wrong" side does not produce a 180+° spin in the air. Layer 1.5: it is Enforce Script (not raw config, but no SEAnim/Workbench either).
 
-> Target: DayZ 1.30 stable (1.30.164078). On 1.30, single-track vehicles can use the native directional get-in instead (§DayZ 1.30: native directional in/out, below). The LFQuad measurements in this file were made before 1.30; the call order they rely on is unchanged in 1.30 (next section).
+> Target: DayZ 1.30 stable (1.30.164200). On 1.30, single-track vehicles can use the native directional get-in instead (§DayZ 1.30: native directional in/out, below). The LFQuad measurements in this file were made before 1.30; the call order they rely on is unchanged in 1.30 (next section).
 
 ## The bug this fixes
 
@@ -186,7 +186,7 @@ If step 4 misbehaves, the bail-out check is wrong — likely you whitelisted a t
 1.30 adds a native mechanism for directional get-in / get-out on single-track vehicles (motorcycles), which removes the need for scripted player snaps on vehicles implementing this contract. Before 1.30: `ActionGetInTransport.Start` always used `GetSeatAnimationType(crew_index)` (1.29: `actiongetintransport.c:90`), so the snap above was the only way.
 
 ### Engine flow in `ActionGetInTransport.c`
-When `transport.HasDirectionalInOutAction()` returns `true` (`P:\scripts\3_game\vehicles\transport.c:677`), `ActionGetInTransport.Start` computes the approach side using the dot product between the target direction vector and the vehicle's right-normal vector:
+When `transport.HasDirectionalInOutAction()` returns `true` (`P:\scripts\3_game\vehicles\transport.c:680`), `ActionGetInTransport.Start` computes the approach side using the dot product between the target direction vector and the vehicle's right-normal vector:
 
 ```c
 // [EXACT] P:\scripts\4_world\classes\useractionscomponent\actions\interact\actiongetintransport.c:81-102
@@ -216,7 +216,7 @@ When `transport.HasDirectionalInOutAction()` returns `true` (`P:\scripts\3_game\
 
 ### Transport interface methods in `Transport.c`
 ```c
-// [EXACT] P:\scripts\3_game\vehicles\transport.c:677-680
+// [EXACT] P:\scripts\3_game\vehicles\transport.c:680-683
 	bool HasDirectionalInOutAction()
 	{
 		return false;
@@ -224,7 +224,7 @@ When `transport.HasDirectionalInOutAction()` returns `true` (`P:\scripts\3_game\
 ```
 and:
 ```c
-// [EXACT] P:\scripts\3_game\vehicles\transport.c:690-696
+// [EXACT] P:\scripts\3_game\vehicles\transport.c:693-699
 	int GetSeatAnimationTypeDirectional(int posIdx, int directionIndex)
 	{
 #ifndef CFGMODS_DEFINE_TEST

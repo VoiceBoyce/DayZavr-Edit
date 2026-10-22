@@ -1,6 +1,6 @@
 # DayZ 1.30 — implementation-workflow deltas
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 Companion to `SKILL.md`. The six-layer debug hierarchy, offline gates, and SyncVar rules still hold. This file is
 the 1.30 contract delta for actions, CE rootclasses, `cfggameplay.json`, the underground trigger editor, NV type
@@ -8,6 +8,8 @@ switches, headless guards and version defines.
 
 Every `[EXACT]` block was re-opened in `P:\` (1.30.164078, 2026-10-15); this file was first written against 1.30
 Experimental 164014 and the stable line numbers below replace the Exp ones. `1.29: O:\…` cites the old tree.
+Patch 1.30.164200 (2026-10-21): the `NVTypes` block and the server-side cursor check below were updated to it; its
+compile breakers are in `references/error-catalog.md` E24–E26.
 
 ## Action pipeline: `CanBeStarted` + `CCTLiquid`
 
@@ -76,6 +78,31 @@ diverge from vanilla. A listed action that never starts is often `CanBeStarted()
 `ActionFillBottleBase` is `[Obsolete]` on 1.30 (replaced by `ActionObtainLiquidBase`, `actionfillbottlebase.c:28-29`,
 `actionconstructor.c:156`) — domain detail in `enforce-script-reference` / `dayz-basebuilding`. Workflow implication:
 do not `modded` an obsolete vanilla action that `ActionConstructor` no longer registers.
+
+### 1.30.164200: the server no longer validates the cursor
+
+`CCTCursor`, `CCTCursorNoRuinCheck` and `CCTCursorParent` return early on the server with an origin-to-origin distance
+test, widened by the target's collision radius; the cursor-hit / head test runs on the client only:
+
+```
+// [EXACT] P:\scripts\4_world\classes\useractionscomponent\targetconditionscomponents\cctcursor.c:29-33
+		if (player.GetInstanceType() == DayZPlayerInstanceType.INSTANCETYPE_SERVER)
+		{
+			float maxDistanceWithSize = m_MaximalActionDistance + targetObject.GetCollisionRadius();
+			return (vector.DistanceSq(targetObject.GetPosition(), player.GetPosition()) <= maxDistanceWithSize * maxDistanceWithSize);
+		}
+```
+
+Debug and data-mapping implications (step 2.5 client/server map):
+- "Prompt shows, F starts, action is rejected at the edge of reach" on a small or raised target: client and server
+  now measure different distances (cursor hit vs object origin). Test such actions at the maximum distance, from
+  below and above.
+- The server does not know what the player aims at any more (and never checked line of sight). Anything that must
+  hold for security — target behind a wall, the right selection/component, owner, lock state — goes into the
+  action's `ActionCondition` with data the server has, and is mapped as a server-side check in 2.5.
+- Also 164200: 23 target-player actions no longer lock the target (`IsLockTargetOnUse()` false), and the runtime action
+  ids moved (`ActionDrinkCan` re-registered earlier). Details: `enforce-script-reference`
+  `references/dayz-1-30-enforce-script.md` §7.5, §7.10.
 
 ## CE rootclasses: `MotorbikeScript` and `HouseDestructible`
 
@@ -157,10 +184,13 @@ and terrain holes are in `dayz-underground`.
 ## NVTypes environmental variants (custom cameras)
 
 1.30 adds underground and sandstorm variants; a `switch` over the enum that is not exhaustive will miss them. Before
-1.30: `NVTypes` ended at the optics/pumpkin night variants.
+1.30: `NVTypes` ended at the optics/pumpkin night variants. 1.30.164200 inserted two more optics values,
+`NV_OPTICS_UNDERGROUND_DAY` and `NV_OPTICS_UNDERGROUND_SANDSTORM_DAY` (`:69`, `:73`), so every value after
+`NV_OPTICS_UNDERGROUND` moved by +1 and every value after `NV_OPTICS_UNDERGROUND_SANDSTORM` by +2 compared with
+1.30.164078 (e.g. `NV_OPTICS_SANDSTORM_DAY` 12 → 13, `NV_GOGGLES_DAY` 15 → 17, `MAX` 24 → 26).
 
 ```
-// [EXACT] P:\scripts\4_world\entities\manbase\dayzplayer\dayzplayercamera_base.c:54-78
+// [EXACT] P:\scripts\4_world\entities\manbase\dayzplayer\dayzplayercamera_base.c:54-89
 enum NVTypes
 {
 	NONE = 0,
@@ -177,20 +207,37 @@ enum NVTypes
 	
 	// ---- Optics condition variants ----
 	NV_OPTICS_UNDERGROUND,
+	NV_OPTICS_UNDERGROUND_DAY,
 	NV_OPTICS_SANDSTORM_DAY,
 	NV_OPTICS_SANDSTORM_NIGHT,
 	NV_OPTICS_UNDERGROUND_SANDSTORM,
+	NV_OPTICS_UNDERGROUND_SANDSTORM_DAY,
 	
 	// ---- Glasses/goggles condition variants ----
 	NV_GOGGLES_DAY,
 	NV_GOGGLES_UNDERGROUND,
 	NV_GOGGLES_SANDSTORM,
 	NV_GOGGLES_UNDERGROUND_SANDSTORM,
+	
+	// ---- Pumpkin condition variants ----
+	NV_PUMPKIN_DAY,
+	NV_PUMPKIN_UNDERGROUND,
+	NV_PUMPKIN_SANDSTORM,
+	NV_PUMPKIN_UNDERGROUND_SANDSTORM,
+	
+	MAX
+}
 ```
 
+`ResolveNVType` (`dayzplayercamera_base.c:664`) now keeps the day/night distinction for underground optics (Kazuar /
+Starlight day variants resolve to the new `_DAY` values); `SetNVPostprocess` (`:487`) maps them to
+`PPERequester_CameraNV.NV_UNDERGROUND_DAYTIME_OPTICS = 17` / `NV_UNDERGROUND_SANDSTORM_DAYTIME_OPTICS = 18`
+(`3_game\ppemanager\requesters\ppercameranv.c:28-29`, new `GetUndergroundExposureCoef()` `:82`).
+
 [DESIGN] Custom NV cameras: handle the new values or call vanilla `ResolveNVType` (used at
-`4_world\entities\manbase\dayzplayer\dayzplayercameraironsights.c:272`) instead of applying the raw type directly.
-Domain cameras: `enforce-script-reference`.
+`4_world\entities\manbase\dayzplayer\dayzplayercameraironsights.c:274`) instead of applying the raw type directly.
+Never store, send or compare `NVTypes` as a raw int (config, JSON, RPC, `switch` on literals): the values moved in 1.30 and
+again in 164200. Domain cameras: `enforce-script-reference`.
 
 ## Headless vs dedicated guards
 
@@ -263,9 +310,14 @@ static bool MyMod_IsHeadlessOrDedicated()
 1. Action mods: implement `CanBeStarted`; do not treat a visible widget as startable. Water actions: `CCTLiquid`.
 2. Custom CE: add `MotorbikeScript` / `HouseDestructible` rootclasses.
 3. Mission `cfggameplay.json`: merge new keys; do not assume `disableBaseDecay` is wired from server.cfg (commented `InitServer`).
-4. Exhaustive `NVTypes` switches: add underground/sandstorm cases.
+4. Exhaustive `NVTypes` switches: add underground/sandstorm cases (164200: also `NV_OPTICS_UNDERGROUND_DAY`,
+   `NV_OPTICS_UNDERGROUND_SANDSTORM_DAY`); never persist or send `NVTypes` as an int.
 5. FX that must not run on roboclients: `IsHeadlessOrDedicatedServer()`.
 6. No `#ifdef DAYZ_1_30`; legacy-only code under `#ifdef DAYZ_1_29` + `#else`.
 7. Boot on a 1.30 server and read `script_*.log` for `(E)` and `SCRIPT (W): '…' is obsolete` [reported: bzed] — obsolete
    APIs compile but some are never called by vanilla (`OnCEUpdate`); see `enforce-script-reference`
    `references/dayz-1-30-enforce-script.md`.
+8. (164200) Security-relevant actions re-check aim / line of sight / ownership in `ActionCondition` on the server; test
+   reach at the edge of distance. No Workbench API outside `#ifdef WORKBENCH`; no `vector.Cross`; no own `HasCrew()`
+   on vehicle classes (E24–E26). Design rules for surviving the next patch: `enforce-script-reference`
+   `references/dayz-1-30-enforce-script.md` §9.1.

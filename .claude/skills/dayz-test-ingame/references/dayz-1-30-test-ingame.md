@@ -1,12 +1,13 @@
-# DayZ 1.30 — launch / session-test changes (build 1.30.164078)
+# DayZ 1.30 — launch / session-test changes (build 1.30.164200)
 
 Companion to `SKILL.md` § DayZ 1.30 changes. Diag-only managed lifecycle, absolute
 `-mod` paths, and the filepatching-vs-PBO caveats still hold. This file is the
 1.30 launch-flag and action-injection delta.
 
-Script line numbers below point at `P:\scripts` (1.30.164078), re-checked
-2026-10-15. The installed exes are 1.30.164.078; the new flags exist as strings
-in them, but their runtime behaviour is [CHANGELOG 1.30] (not measured here).
+Script line numbers below point at `P:\scripts` (1.30.164200), re-checked
+2026-10-15. The installed exes are 1.30.164.200 since 2026-10-21 (1.30.164.078
+before); the new flags exist as strings in them, but their runtime behaviour is
+[CHANGELOG 1.30] (not measured here).
 Runtime observations from the pre-release build are labelled
 "(measured on 1.30 Exp 164014)".
 
@@ -37,18 +38,28 @@ filepatching-does-not-reload-binaries rule. A shipping test still packs.
 > next to .p3d files to allow for quicker subsequent launches of the
 > Game/Buldozer when working with unbinarized assets
 
+**Renamed in 1.30.164200** [reported: BI 1.30.164200 notes, Modding: "Renamed
+'resolveFilePatchingUsingEnfusion' to 'loadRVFilesViaEnfusionFS'"]: the flag
+is now `-loadRVFilesViaEnfusionFS=0/1`. The changelog quote above keeps the
+1.30.164078 name. The value form `=0/1` is assumed unchanged (not checked).
+
 [DESIGN] Append to Diag argv when iterating unpacked / MLOD assets, for
 example:
 
-`-filePatching -resolveFilePatchingUsingEnfusion=1 -cacheP3D=1`
+`-filePatching -loadRVFilesViaEnfusionFS=1 -cacheP3D=1`
 
+(on 1.30.164078: `-filePatching -resolveFilePatchingUsingEnfusion=1 -cacheP3D=1`).
 Requires `-filePatching`. Workbench always enables the resolve flag.
 `.p3dcache` siblings are local caches — do not commit them as product.
 
 Static check (2026-10-15): the strings `cacheP3D`, `resolveFilePatchingUsingEnfusion`
-and `limitFPS` are present in `DayZ_x64.exe`, `DayZDiag_x64.exe` and
+and `limitFPS` were present in `DayZ_x64.exe`, `DayZDiag_x64.exe` and
 `DayZServer_x64.exe` 1.30.164.078; `headlessMode` only in `DayZDiag_x64.exe`.
-That proves the switches are parsed, not what they do.
+Re-check 2026-10-21 on the 1.30.164.200 exes: `cacheP3D`, `loadRVFilesViaEnfusionFS`
+and `limitFPS` present in all three, `resolveFilePatchingUsingEnfusion` in none.
+That proves the switches are parsed, not what they do. A launch file that still
+passes the old name should be updated; `dayz-130-migration`'s scanner reports it
+as `launch-param-renamed`.
 
 ## Script log `defines:` line, compile crashes, profile folder
 
@@ -59,11 +70,14 @@ That proves the switches are parsed, not what they do.
 - [reported: bzed] On the pre-release 1.30 Linux server a script compile failure
   was followed by a segfault right after `Can't compile "World" script module!`.
   A crash at boot is first a compile error: read `script_*.log`.
-- [reported: bzed, Expansion 1.9.74 announcement] On 1.30 the `-profiles=` folder
+- [reported: bzed, Expansion 1.9.74 announcement] On 1.30.164078 the `-profiles=` folder
   must sit inside the server exe's folder (a symlink there works) for mods that
   enumerate `$profile:` via `CF.FindFileEx` (CF 1.5.9+): the vanilla `FindFile()`
-  ignores `$profile:` on 1.30 (DZEXP-134) and the workaround resolves profile
-  paths relative to the exe folder. `FindFile`'s declaration did not change
+  ignored `$profile:` on 1.30.164078 (DZEXP-134) and the workaround resolves profile
+  paths relative to the exe folder. [reported: BI 1.30.164200 notes] 1.30.164200
+  fixes `FindFile` (searches the requested file system, normalises paths to `/`);
+  not re-measured here, so test vanilla `FindFile("$profile:…")` before keeping the
+  workaround. `FindFile`'s declaration did not change
   (`P:\scripts\1_core\proto\ensystem.c:520`, identical on 1.29), so no compile
   error warns you. The managed template's `<Mod>_dev\_server\profiles` is outside
   the DayZ folder; a Windows junction as the fix is untested here.
@@ -93,7 +107,7 @@ dummy bots.
 When these traps were measured (2026-09-26) the managed launcher ran the 1.29
 install and the 1.30 Exp install was probed by hand (evidence in
 `VAULT/AI/10_Projects/DayZ_MCP/lanes/2026-09-26-roboclient-130/`). Since
-2026-10-15 the installed game itself is 1.30.164078, so any launch runs 1.30;
+2026-10-15 the installed game itself is 1.30 (1.30.164078; 1.30.164200 since 2026-10-21), so any launch runs 1.30;
 the traps are about the host and the launch, not the build. Six traps, each
 costing a run (measured on 1.30 Exp 164014):
 
@@ -226,5 +240,23 @@ MP path is unchanged: `PerformActionStart` still calls `ActionStart` directly
 ## Navmesh / Tools (session awareness)
 
 Custom terrains: regenerate `.nm` (no backwards compatibility) [CHANGELOG 1.30].
+The format moved again in 1.30.164200: vanilla navmeshes are v9 (1.29: v6,
+1.30.164078: v7; header `TESM`, uint32 version at offset 4), and the server's
+version check is strict (`cmp r9d,9`, exe analysis by the config-delta pass,
+not run in game), so a custom map's v7 navmesh most likely fails with
+`Navmesh could not be loaded: Invalid version. (Navmesh version: 7, Desired version: 9)`.
+Regeneration recipe: `dayz-ai-patterns` §Navmesh.
 Workbench 1.30 is installed with DayZ Tools (`Bin\Workbench\WorkbenchApp.exe`,
-FileVersion 1.30.164.078); its new editors are [CHANGELOG 1.30] and unused here.
+FileVersion 1.30.164.200 since 2026-10-21; 1.30.164.078 before); its new editors are
+[CHANGELOG 1.30] and unused here. [reported: BI 1.30.164200 notes] Known issue:
+Workbench requires the command-line argument `-filePatching`; it gained a Diag menu.
+
+## DayZ 1.30.164200 changes (summary)
+
+- `-resolveFilePatchingUsingEnfusion` → `-loadRVFilesViaEnfusionFS` (§New launch flags).
+- `FindFile` fixed, `#include` fixed, circular-inheritance compile error fixed
+  [reported: BI 1.30.164200 notes]; not re-measured.
+- Navmesh v9 (above); `ENF_DIAG_DENavmesh` diag entry
+  (`P:\scripts\3_game\enums\ediagmenugame.c:7`); `NavmeshTest*` → `Land_NavmeshTest*`.
+- `Debug.LOG_DEBUG_AUTOTEST` = `"AutotestLog"` (`P:\scripts\3_game\tools\debug.c:19`).
+- `UA_AM_*` constants, `PerformActionStart` and `IsHeadless` are unchanged.

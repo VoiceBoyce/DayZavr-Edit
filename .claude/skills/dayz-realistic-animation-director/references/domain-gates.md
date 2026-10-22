@@ -1,6 +1,6 @@
 # Domain gates
 
-> Target: DayZ 1.30 stable (1.30.164078). `P:\…` paths are 1.30, `1.29: O:\…` the old build; every `[EXACT]` below was re-read on 1.30.164078 (first written against 1.30 Exp 164014).
+> Target: DayZ 1.30 stable (1.30.164200). `P:\…` paths are 1.30, `1.29: O:\…` the old build; every `[EXACT]` below was re-read on 1.30.164078 (first written against 1.30 Exp 164014).
 
 Use only the sections relevant to the task, in addition to the common contract and the current `dayz-animation-pipeline` route.
 

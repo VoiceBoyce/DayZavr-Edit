@@ -21,6 +21,12 @@ is rotated with the gate. `CanOpenFence()` requires hinges, closed and `!IsLocke
 The open/close actions are `interact\actionopenfence.c` and `interact\actionclosefence.c`. Opening/closing
 plays the gate animation and toggles `m_IsOpened`.
 
+Since 1.30.164200 the Fence config also moves the navmesh with the gate leaf:
+`class Navmesh { class TransformParts { class Gate { transformAnimationSource="Wall_Gate_Rotate"; }; }; };`
+(`P:\DZ\gear\camping\config.cpp:4418-4427`). No script reads it (engine-side). A mod gate that inherits `Fence`
+inherits the block; if its model has no `Wall_Gate_Rotate` AnimationSource, re-declare or override the block
+(untested either way). Every later line of the camping config moved +10 with this block.
+
 ## 2. Barbed-wire area damage
 
 `CreateAreaDamage` (`basebuildingbase.c:981-1026`) builds an `AreaDamageLoopedDeferred_NoVehicle` from the
@@ -51,8 +57,8 @@ wrong loses every fence on the server → treat as data-critical (R9, `persisten
 ## 4. Repair
 
 `Fence.CanBeRepairedToPristine()→true` (`fence.c:466-469`). Repair scales the material requirement by
-`REPAIR_MATERIAL_PERCENTAGE=0.15` (`constructionbase.c:34`, applied in `HasMaterialsEx` `:1103-1107` and
-`TakeMaterialsServer` `:1165-1168`), floor min 1; materials flagged `skipOnRepair` are not consumed (`:1149-1150`).
+`REPAIR_MATERIAL_PERCENTAGE=0.15` (`constructionbase.c:34`, applied in `HasMaterialsEx` `:1144-1148` and
+`TakeMaterialsServer` `:1206-1209`), floor min 1; materials flagged `skipOnRepair` are not consumed (`:1190-1191`).
 The repair action itself is the generic `ActionRepairPart` / kit path (not in `fence.c`).
 
 ## 5. What to copy when authoring your own stateful entity
@@ -88,8 +94,8 @@ unlocked/detached it (1.29: `actiondialcombinationlockontarget.c:66-79`).
 (`CanDisplayAttachmentSlot`, `fence.c:200-226`) and `CanReceiveAttachment` refuses a second lock or an open gate
 (`:438-445`). `IsLocked()` — and therefore `CanOpenFence()` — is true for a locked combination lock **or** a locked
 code lock (`:127-141,472-478`). When the `wall_gate` part is dismantled or destroyed, both locks are dropped by its
-`essential_attachments[]` (`P:\DZ\gear\camping\config.cpp:4903-4907`; `DropEssentialAttachments`,
-`constructionbase.c:1338`); when `wall_base_down` / `wall_base_up` is destroyed, `Fence.OnPartDestroyedServer`
+`essential_attachments[]` (`P:\DZ\gear\camping\config.cpp:4913-4917`; `DropEssentialAttachments`,
+`constructionbase.c:1376`); when `wall_base_down` / `wall_base_up` is destroyed, `Fence.OnPartDestroyedServer`
 drops them too (`fence.c:391-403`). Note: the branch at `fence.c:378-390` that also drops barbed
 wire / camonet and closes the gate needs `destroyed_by_connected_part == true`, which vanilla 1.30 never passes
 (see `dayz-1-30-construction-rebuilding.md` §3.1; static reading, not measured).
@@ -107,7 +113,9 @@ The code lock (`DigitalCodeLock`, `4_world\entities\itembase\codelock.c:1`) pers
 `CodeLockComponent` (`m_LockPIN`, `m_IsLocked`, `m_DoorIndex`, `4_world\classes\codelockcomponent.c:257-262`); its
 brute-force protection is tuned in `cfggameplay.json` `ExternalLockData` (`3_game\cfggameplaydatajson.c:421-438`).
 Building-door lock slots on `BuildingBase` (`4_world\entities\game\super\building.c:10-11`) are documented in
-`dayz-doors`. This file only covers the Fence attachment.
+`dayz-doors`. This file only covers the Fence attachment. On a Fence the lock's back part is posed at animation
+phase `0.92` (`CodeLockVisualManager`, `4_world\classes\codelockvisualmanager.c:48,459-462`); 1.30.164200 turned
+these numbers into `private const` without changing the Fence value (the `House` value changed, see `dayz-doors`).
 
 `Fence.OnStoreSave` (unchanged from 1.29 except its line numbers):
 

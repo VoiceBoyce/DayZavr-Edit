@@ -5,7 +5,7 @@ Added 2026-07-04. Source: sweep of `scripts/5_mission` (209 files) + `3_game/too
 Paths relative to `<dayz-projects>\scripts\`. Use this file to find
 WHICH vanilla menu to copy from, and the contracts that make copied code behave.
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../../_shared/dayz-version-policy.md.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../../_shared/dayz-version-policy.md.
 > Line numbers re-mapped from 1.29 to 1.30.164078 on 2026-10-15 (a line-diff of each cited file
 > against `P:\scripts`); where a number moved, the 1.29 value is kept as "1.29: :N" only when it helps
 > to read an old mod. 1.30 additions are marked "(new in 1.30)".
@@ -117,12 +117,15 @@ From `3_game/tools/uiscriptedmenu.c`:
 - `IngameHud.Init` resolves ~31 sub-widgets by name (+~35 generated in InitBadgesAndNotifiers)
   (`ingamehud.c:143-243`) — **the widget names AND types in day_z_hud.layout are load-bearing API**.
   1.30 kept all 292 widget names of `day_z_hud.layout` but changed the class of the ten action-cursor
-  rows `item` (`:2294`), `interact` (`:2477`), `continuous_interact` (`:2755`), `single` (`:3033`),
-  `continuous` (`:3249`), `ia_item` (`:3869`), `ia_interact` (`:4083`), `ia_continuous_interact`
-  (`:4306`), `ia_single`, `ia_continuous` to `PanelWidgetClass`; the gradient moved to `style
-  ActionWidget` on their parent GridSpacers (`:2287`, `:3859`; style at
+  rows `item` (`:2424`), `interact` (`:2617`), `continuous_interact` (`:2910`), `single` (`:3203`),
+  `continuous` (`:3431`), `ia_item` (`:4087`), `ia_interact` (`:4314`), `ia_continuous_interact`
+  (`:4549`), `ia_single` (`:4784`), `ia_continuous` (`:4953`) to `PanelWidgetClass`; the gradient moved to `style
+  ActionWidget` on their parent GridSpacers (`:2417`, `:4077`; style at
   `gui/looknfeel/dayzwidgets.styles:3700, 4280, 4570`). Before 1.30: those rows were `ImageWidgetClass`
-  with `imageTexture … Gui/textures/linear_gradient.edds`.
+  with `imageTexture … Gui/textures/linear_gradient.edds`. Line numbers are 1.30.164200's: that patch
+  re-saved `day_z_hud.layout` in GUID form (class on the cited line, `Name "…"` on the next), kept all 292
+  names, and switched the 12 `*_mtl_down` arrow images from `mode additive` to `mode blend`
+  (e.g. `ia_interact_mtl_down` `:4353`), which `ItemActionsWidget` now dims with `SetAlpha(0.235)`.
   ⚠️ **Breaking change 1.30:** `ImageWidget.Cast(root.FindAnyWidget("interact"))` (or any of the ten)
   returns `null`; the next `LoadImageFile`/`SetColor` on it is a null-pointer VM error. Cast to
   `Widget` / `PanelWidget`.

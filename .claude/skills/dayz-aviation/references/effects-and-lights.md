@@ -2,7 +2,7 @@
 
 Seaplane water spray effects, custom navigation lights and per-aircraft headlights.
 
-_Extracted from `dayz-aviation/SKILL.md` 2026-07-07 (F3). Target: DayZ 1.30 stable (1.30.164078); labels `../../_shared/dayz-version-policy.md`._
+_Extracted from `dayz-aviation/SKILL.md` 2026-07-07 (F3). Target: DayZ 1.30 stable (1.30.164200); labels `../../_shared/dayz-version-policy.md`._
 
 ### Custom nav lights
 

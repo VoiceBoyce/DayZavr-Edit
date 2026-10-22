@@ -136,19 +136,33 @@ record. It is never a promotion or deletion criterion.
 - (1.30) A `$mission:` `FileSerializer` overwrite is not this
   contract. See the bunker exception below.
 
-## DayZ 1.30: enumerating sidecar files [reported: bzed]
+## DayZ 1.30: enumerating sidecar files
 
-A Linux 1.30.164014 server was reported (third-party guide, not reproduced here) to ignore the
-`$profile:` / `$mission:` / `$storage:` / `$saves:` placeholders in `FindFile` and to list the server's
-working directory instead, with no error (BI ticket DZEXP-134, not fixed at release). The declaration
-is unchanged (`VANILLA/1_core/proto/ensystem.c:520`). Consequences for this contract:
+History of `FindFile` enumeration on 1.30 (the declaration never changed, `VANILLA/1_core/proto/ensystem.c:520`):
+
+- 1.30.164014 [reported: bzed, Linux server]: the `$profile:` / `$mission:` / `$storage:` / `$saves:`
+  placeholders were ignored and the server's working directory was listed instead, with no error
+  (BI ticket DZEXP-134).
+- 1.30.164078 (measured on 1.30.164078, this machine's Windows server, 2026-10-15): `$profile:` and absolute
+  paths were ignored, `..` did not work; only the server working folder and its subfolders were listed. A
+  P2P board booted with zero lots and accounts and would have written fresh accounts over existing files.
+- 1.30.164200 [reported: BI 1.30.164200 notes]: fixed — "searches through the requested file system and
+  normalises any path given to the internal engine delimiter '/'" (DZEXP-134). Not re-measured here.
+
+Consequences for this contract:
 
 - Reading or writing a known file name through a placeholder (`OpenFile`, `FileExist`, `MakeDirectory`,
-  `CopyFile`, `DeleteFile`, `JsonFileLoader`) keeps working.
-- Orphan scans that **enumerate** `.tmp`/`.bak` candidates with `FindFile` find nothing or the wrong
-  files. Use `CF.FindFileEx` (CF 1.5.9+) or a resolver that turns the placeholder into a path
-  relative to the game folder, open results through the placeholder path, and treat "no candidates"
-  as unverified until the scan is proven to see a known test file.
+  `CopyFile`, `DeleteFile`, `JsonFileLoader`) kept working on every 1.30 build.
+- Orphan scans that **enumerate** `.tmp`/`.bak` candidates must not trust `FindFile` blindly. Probe at
+  runtime: write a known sentinel through the placeholder, enumerate, and use the listing only if the
+  sentinel is in it. Otherwise fall back to a resolver that turns the placeholder into a path relative to the
+  server folder, `CF.FindFileEx` (CF 1.5.9+), or an id/index file written next to the data (the pattern that
+  worked on 164078: INT_P2P_Trading `INT_P2P_FileStore`). Open results through the placeholder path. Treat
+  "no candidates" as unverified until the scan has seen the sentinel, and never delete, overwrite or re-create
+  data because a listing came back empty.
+- The probe switches the workaround off by itself once BI's fix holds on the running build; re-test a 164078
+  workaround on 164200 before removing it. Build patterns with `/` (BI normalises the given path to `/`); do not
+  assume either separator in returned names (unmeasured).
 - `$storage:` was reported unusable before the first `MissionServer.OnUpdate` / `CallLater` tick after
   `OnMissionStart`, and on an instance's very first boot.
 - `g_Game.GetMissionFolderPath()` returns `""` when the engine passes a forward-slash mission path:

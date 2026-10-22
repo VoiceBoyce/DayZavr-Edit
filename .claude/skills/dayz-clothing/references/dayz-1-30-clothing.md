@@ -65,7 +65,8 @@ clothing". On 1.30.164078 the player does **not** expose them: `SurvivorBase.att
 Hips, Legs, Feet, Splint_Right` (`P:\DZ\characters\data\config.cpp:122`), and no config under `P:\DZ`
 other than the NBC pieces themselves mentions `NBCHead` / `NBCTop` / `NBCPants` / `NBCBoots` /
 `NBCGloves`. The secondary slot is what lets a piece be attached **into** something that exposes it —
-most likely the NBC pack below `[UNVERIFIED]` (its config is not in `P:\DZ`). Do not promise
+the NBC pack below, whose Badlands config lists exactly those five slots in `attachments[]`
+(`P:\DZ\gear_takistan\containers\config.cpp:30-37`, on `P:\` since the 1.30.164200 unpack). Do not promise
 "wear the NBC suit over normal clothes" in a mod.
 
 ## NBCBag on backpacks — not universal
@@ -106,8 +107,11 @@ bases that never gained the slot.
 The attachable pack is scripted as `NBCPack_ColorBase : Container_Base` (+ `NBCPack_Grey` / `_White` /
 `_Yellow`) with `CanDisplayAttachmentCargo` forced false and `CanReceiveAttachment` refusing any
 attachment that still holds cargo (`P:\scripts\4_world\entities\itembase\gear\containers\containers.c:83-107`).
-No `class NBCPack*` appears in any `P:\DZ\**\config.cpp` on 1.30.164078. `[UNVERIFIED]`: the pack item's
-`inventorySlot` (expected `"NBCBag"`), its `attachments[]`, cargo size, model path.
+Its config is Badlands DLC data (`P:\DZ\gear_takistan\containers\config.cpp`, on `P:\` since the
+1.30.164200 unpack; corrected 2026-10-21, this used to say no config existed): `class NBCPack_ColorBase:
+Container_Base` (`:20`), `inventorySlot[] = {"NBCBag"}`, `attachments[] = {"NBCHead","NBCTop","NBCGloves",
+"NBCPants","NBCBoots"}` (`:26-37`), `itemSize[]={3,3}`, `itemsCargoSize[]={0,0}`, `varWetMax=0.249`, model
+`\dz\gear_takistan\containers\NBCPack.p3d`; variants `NBCPack_White` / `_Grey` / `_Yellow` (`:112`, `:123`, `:134`).
 
 ## Gas masks and `GasMask_Filter`
 
@@ -243,7 +247,7 @@ onto the type:
 Instance accessors read the type:
 
 ```c
-// [EXACT] P:\scripts\4_world\entities\itembase.c:4518
+// [EXACT] P:\scripts\4_world\entities\itembase.c:4522
 	array<string> GetHeadHidingSelection()
 	{
 		return ItemBaseType.Cast(GetEntityType()).m_HeadHidingSelections;
@@ -256,7 +260,7 @@ Instance accessors read the type:
 ```
 
 `InitItemVariables` copies `m_VarWet` from `itemBaseType.m_VarWetInit` (`itembase.c:165`);
-`SetWet` clamps to `GetWetMin()..GetWetMax()` (`:3688-3698`), both read from the type (`:3722-3730`).
+`SetWet` clamps to `GetWetMin()..GetWetMax()` (`:3692-3702`), both read from the type (`:3726-3734`).
 
 **Porting break (compile):** the 1.29 instance fields `ItemBase.m_HeadHidingSelections`,
 `m_HideSelectionsBySlot`, `m_VarWetInit`, `m_VarWetMin`, `m_VarWetMax`, `m_TemperaturePerQuantityWeight`,
@@ -266,16 +270,16 @@ constructor no longer compiles: set the value in `config.cpp` (`varWetMax = 1;`)
 per-type value now.
 
 **Porting break (silent): heat isolation.** `ItemBase.GetHeatIsolation()` returns
-`ItemBaseType.m_HeatIsolation` (`itembase.c:3653-3656`), i.e. the config `heatIsolation`.
-`GetHeatIsolationInit()` is `[Obsolete("1.30: No replacement")]` (`:4938-4942`) and nothing calls it.
+`ItemBaseType.m_HeatIsolation` (`itembase.c:3657-3660`), i.e. the config `heatIsolation`.
+`GetHeatIsolationInit()` is `[Obsolete("1.30: No replacement")]` (`:4942-4946`) and nothing calls it.
 (Before 1.30: `InitItemVariables` did `m_HeatIsolation = GetHeatIsolationInit();` and
 `GetHeatIsolation()` returned that instance field — 1.29: `O:\…\itembase.c:231`, `:3674-3682`.) A 1.29
 mod that overrode `GetHeatIsolationInit()` or wrote `m_HeatIsolation` still compiles but no longer
 changes insulation; override `GetHeatIsolation()` or set `heatIsolation` in config.
 
 `GetDryingIncrement(string)` / `GetSoakingIncrement(string)` are `[Obsolete]`
-(`itembase.c:3668`, `:3678`); 1.30 adds overloads taking `EEnvironmentDryingCategories` /
-`EEnvironmentSoakingCategories` (`:3658-3666`) that read the type's cached maps.
+(`itembase.c:3672`, `:3682`); 1.30 adds overloads taking `EEnvironmentDryingCategories` /
+`EEnvironmentSoakingCategories` (`:3662-3670`) that read the type's cached maps.
 
 ### `varWetMax` default dropped to 0.049
 
@@ -441,8 +445,9 @@ Craft (`P:\scripts\4_world\classes\recipes\recipes\craftwaterskin.c:26-44`): ing
 De-craft (`decraftwaterskin.c:26-90`): ingredient 0 `Waterskin_ColorBase` destroyed; ingredient 1 a long
 knife/axe list including `Jambiya`, `Scimitar`, `DonerKnife`, `BrickTrowel`, `Akinaka`;
 `m_IngredientAddHealth[1] = -12`; result 1 `TannedLeather`. `CanDo` is `return ingredients[0].IsEmpty();`
-(`:90`). Note: `Jambiya`, `Scimitar`, `DonerKnife`, `Akinaka` exist as scripts
-(`P:\scripts\4_world\entities\itembase\jambiya.c` etc.) but have no config class in `P:\DZ`.
+(`:90`). Note: `Jambiya`, `Scimitar`, `DonerKnife`, `Akinaka` have scripts
+(`P:\scripts\4_world\entities\itembase\jambiya.c` etc.) and Badlands DLC configs
+(`P:\DZ\weapons_takistan\melee\blade\config.cpp:17,156,317,584`; on `P:\` since the 1.30.164200 unpack).
 
 `[DESIGN]` persistence alias if a 1.29 world still stores `WaterPouch_Natural`:
 
@@ -497,7 +502,7 @@ reduces `eAgents.EYES_IRRITATION` and calls `GetThermalBiasHandler().Add(-THERMA
 Heat-stroke coupling beyond these constants is out of scope here (medical lane). `[DESIGN]`: do not
 treat wash-head as a full heat-stroke API.
 
-## New garments: scripts without configs
+## New garments: Badlands DLC clothing
 
 1.30.164078 adds clothing scripts under `P:\scripts\4_world\entities\itembase\clothing\` (class names
 as declared — the Exp draft's `Kameez_ColorBase` / `Sandals_ColorBase` / `Shalwar_ColorBase` were wrong):
@@ -517,10 +522,14 @@ as declared — the Exp draft's `Kameez_ColorBase` / `Sandals_ColorBase` / `Shal
 
 Several have in-hands IK registrations (`dayzplayercfgbase.c:1336` `KameezShirt_ColorBase`, `:1342`
 `OBRJacket_ColorBase`, `:1449` `DustGoggles_ColorBase`, `:1498` `SandalsShoes_Colorbase`), and the
-Nasdara world script yields `SandalsShoes_*` (`P:\scripts\4_world\classes\worlds\nasdara.c:112-115`), but
-**no** matching `class` exists in any `P:\DZ\**\config.cpp` (grep 2026-10-15). `[UNVERIFIED]`: whether
-their configs/p3ds ship in a separate (DLC/map) PBO that is not unpacked on `P:\`; their isolation,
-cargo and `ClothingTypes` paths. Do not inherit from them in a mod config or list them in `types.xml`.
+Nasdara world script yields `SandalsShoes_*` (`P:\scripts\4_world\classes\worlds\nasdara.c:112-115`).
+Their configs and models ship in the Badlands DLC data, `P:\DZ\characters_takistan\` since the 1.30.164200
+unpack (corrected 2026-10-21; the 2026-10-15 grep found nothing because `P:\` held no DLC data): e.g.
+`KameezShirt_ColorBase` `tops\config.cpp:651`, `ShortSleeveShirt_ColorBase` `:929`,
+`PoliceShortSleeveShirt_ColorBase` `:1168`, `OBRJacket_ColorBase` `:1319`, `DustGoggles_ColorBase`
+`glasses\config.cpp:25`, `SandalsShoes_ColorBase` `shoes\config.cpp:786`, `LeatherHipPack_Colorbase` (sic)
+`belts\config.cpp:175` (all `: Clothing`). Read isolation, cargo and `ClothingTypes` there before
+inheriting; whether a non-Badlands server or a player without the DLC can use them was not checked.
 
 `LeatherHipPack_ColorBase` blocks `CanPutInCargo` unless empty; `CanReceiveAttachment` refuses non-`Man`
 parents.

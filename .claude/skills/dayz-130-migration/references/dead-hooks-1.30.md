@@ -2,9 +2,12 @@
 
 <!-- Generated 2026-10-15: call sites (non-declaration lines) of every method that is [Obsolete] or removed in 1.30, counted in 1.29 vanilla (O:\) and 1.30.164078 vanilla (P:\scripts). Grep-based: a call through a variable of another name is not seen. -->
 
+> Generated against 1.30.164078. Its `P:\scripts` line refs were re-pointed to 1.30.164200 on 2026-10-21 (`_shared/tools/remap_vanilla_refs.py`). What 164200 changed on top: `api-delta-1.30.164078-to-164200.md`.
+
+
 **DEAD** = vanilla 1.29 called it, vanilla 1.30 never does. A mod that *overrides* it still compiles (with an obsolete warning) and silently stops working. A mod that *calls* an obsolete one usually still works (most are thin wrappers) — read the 1.30 body before relying on that.
 
-Also dead, found by hand (moved to a new class, so not in the table below): `Construction/ConstructionBase.BuildPartServer` and `DismantlePartServer` — vanilla calls `BuildPartServerEx` / `DismantlePartServerEx(Man player, string part_name, int action_id)` (P:\scripts\4_world\classes\constructionbase.c:179, :190); the old ones only forward (constructionbase.c:1702-1716). `EntityAI.CanDisplayAttachmentSlot(string)` — vanilla calls only the `int slot_id` overload (entityai.c:1788, :1804).
+Also dead, found by hand (moved to a new class, so not in the table below): `Construction/ConstructionBase.BuildPartServer` and `DismantlePartServer` — vanilla calls `BuildPartServerEx` / `DismantlePartServerEx(Man player, string part_name, int action_id)` (P:\scripts\4_world\classes\constructionbase.c:180, :191); the old ones only forward (constructionbase.c:1751-1765). `EntityAI.CanDisplayAttachmentSlot(string)` — vanilla calls only the `int slot_id` overload (entityai.c:1788, :1804).
 
 | Status | Kind | Class.Method | 1.29 calls | 1.30 calls | 1.30 message / where it still is called |
 |---|---|---|---|---|---|
@@ -137,7 +140,7 @@ Also dead, found by hand (moved to a new class, so not in the table below): `Con
 | still called | obsolete | `Man.TakeEntityAsAttachmentExImpl` | 4 | 1 | 3_game/entities/man.c:921 |
 | still called | obsolete | `Man.TakeEntityAsAttachmentImpl` | 5 | 1 | 3_game/entities/man.c:904 |
 | still called | obsolete | `Man.TakeEntityToCargoImpl` | 5 | 1 | 3_game/entities/man.c:887 |
-| still called | obsolete | `MiscGameplayFunctions.BuildCondition` | 1 | 1 | 4_world/static/miscgameplayfunctions.c:988 |
+| still called | obsolete | `MiscGameplayFunctions.BuildCondition` | 1 | 1 | 4_world/static/miscgameplayfunctions.c:990 |
 | still called | obsolete | `MiscGameplayFunctions.ComplexBuildCollideCheckClient` | 2 | 4 | 4_world/classes/useractionscomponent/actions/continuous/actionbuildpart.c:115, 4_world/classes/useractionscomponent/actions/continuous/actionbuildpart.c:451 |
 | still called | obsolete | `OptionsMenuControls.InitDependentOptionsVisibility` | 1 | 1 | 5_mission/gui/newui/options/optionsmenugame.c:144 |
 | still called | obsolete | `OptionsMenuSounds.InitDependentOptionsVisibility` | 1 | 1 | 5_mission/gui/newui/options/optionsmenugame.c:144 |

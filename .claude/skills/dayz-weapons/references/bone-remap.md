@@ -92,9 +92,10 @@ fire/reload/chamber/jam-unjam, `AddItemInHandsProfileIK` IK-pose semantics, the 
 ## DayZ 1.30 changes — vanilla IK + extra remaps
 
 `[VERIFIED-vanilla]` 1.30.164078: `P:\scripts\4_world\entities\manbase\dayzplayer\dayzplayercfgbase.c`.
-IK paths are entity-side registration only; `.anm` authoring stays on the anim skill. The script-only
-weapons (W-STAGING1 in `dayz-1-30-weapons.md`) have no packed `.p3d` — remap arrays below are the
-**selection names** you would cover if you shipped a stand-in model, not a debinarize source.
+IK paths are entity-side registration only; `.anm` authoring stays on the anim skill. The new 1.30
+weapons ship as Badlands DLC data (W-STAGING1 in `dayz-1-30-weapons.md`; packed `.p3d` under
+`P:\DZ\weapons_takistan\` since the 1.30.164200 unpack — corrected 2026-10-21, this used to say they had
+none). The remap arrays below name the selections those models must carry; debinarize them to compare.
 
 Default rifle remap still applies to anything under `Rifle_Base` (`:1579-1580`; Exp 164014 had it at
 `:1568-1569`): `bolt`, `magazine`, `trigger`, `charging`, `bullet`, `mag_release`, `boltrelease`.

@@ -1,6 +1,6 @@
 # Network, physics, and ownership: who controls the pose
 
-> Target: DayZ 1.30 stable (1.30.164078); unlabelled vanilla cites point at `P:\scripts` (1.30, renumbered
+> Target: DayZ 1.30 stable (1.30.164200); unlabelled vanilla cites point at `P:\scripts` (1.30, renumbered
 > 2026-10-15). The measurements below were taken on 1.29; the Pawn / ownership API they rely on is unchanged in 1.30.
 
 Extracted from `SKILL.md` (cut 3, 2026-08-15). The DETAILS live here; the short

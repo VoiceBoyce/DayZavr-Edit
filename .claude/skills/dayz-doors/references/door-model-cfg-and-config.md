@@ -117,10 +117,10 @@ The button is absent from its skeleton because it does not animate (**Door_w_But
 | **soundClose** | Closing sound name. | Full door entries Simple/button/expert **:27**. |
 | **soundLocked** | Locked/rattle sound. | Full door entries Simple/button/expert **:28**. |
 | **soundOpenABit** | Partial-opening sound. | Full door entries Simple/button/expert **:29**. |
-| **relatedInventorySlots[]** (new in 1.30) | Names of inventory slots tied to this door (locks). Parsed into `AdditionalDoorInfo.m_RelatedInventorySlotNames`. Absent from the tutorial's examples. | `P:\scripts\3_game\entities\additionaldoorsinfo.c:23-27`. **[UNVERIFIED]** no `config.cpp` under `P:\DZ` (1.30.164078) sets the property in a **class Doors** entry. |
+| **relatedInventorySlots[]** (new in 1.30) | Names of inventory slots tied to this door (locks). Parsed into `AdditionalDoorInfo.m_RelatedInventorySlotNames`. Absent from the tutorial's examples. | `P:\scripts\3_game\entities\additionaldoorsinfo.c:23-27`. Vanilla use: `P:\DZ\structures_takistan\Residential\config.cpp:37-41` (`Land_House_1M1`, door `door1_door_wood`; in the 1.30.164200 extract). |
 | **lockCompatibilityBitMask** (new in 1.30) | Integer already in bitwise form. If omitted, script default is `1 << EBuildingLockType.LOCKPICK`. | `P:\scripts\3_game\entities\additionaldoorsinfo.c:29-32`, `P:\scripts\3_game\enums\ebuildinglocktypes.c:7-16`. |
 | **interactPositionPoint** / **interactDirPoint** (new in 1.30) | Memory point names for one-sided open/close. Config keys are these two strings; members are `m_InteractLimitingPositionPoint` / `m_InteractLimitingDirPoint`. | `P:\scripts\3_game\entities\additionaldoorsinfo.c:34-38`, `P:\scripts\4_world\entities\game\super\building.c:335-342`. |
-| **doorConstructionPart** / **doorConstructionPhysicsSource** (new in 1.30) | Rebuildable-house door: construction part name and AnimationSource that toggles door physics. | `P:\scripts\3_game\entities\additionaldoorsinfo.c:40-44`, `P:\scripts\4_world\classes\rebuilding\rebuilding.c:439-463`, `P:\scripts\4_world\classes\basebuilding\constructionpart.c:455`. |
+| **doorConstructionPart** / **doorConstructionPhysicsSource** (new in 1.30) | Rebuildable-house door: construction part name and AnimationSource that toggles door physics. | `P:\scripts\3_game\entities\additionaldoorsinfo.c:40-44`, `P:\scripts\4_world\classes\rebuilding\rebuilding.c:439-463`, `P:\scripts\4_world\classes\basebuilding\constructionpart.c:461`. |
 
 Tutorial sound list: **DZ\sounds\hpp\config.cpp** (**WELCOME TO novoGODS Shit Door Tutorial.txt:255-256**). Verify a sound there before adding it.
 
@@ -167,7 +167,7 @@ Remaining:
 - ? Duplicate skeleton names causing a server crash: tutorial warning, not independently reproduced. Treat skeleton-name uniqueness as a cheap preventive convention.
 - Conflict (resolved by authority, not a ?): the one-source/one-Doors rule is contradicted by Expert -- two Doors entries share component `door1_open`. A real quirk of the tutorial's example.
 - Conflict (resolved by authority): Expert prose has `soundOpen = "switchOpen"` / `soundClose = "switchClose"`, but the tutorial's real `Doors_Buttons_Lesson/Expert_Mode/config.cpp:31-38` omits both. The real file wins.
-- ? No `config.cpp` under `P:\DZ` (1.30.164078, 208 files) sets `relatedInventorySlots[]`, `lockCompatibilityBitMask`, `interactPositionPoint`, `interactDirPoint`, `doorConstructionPart` or `doorConstructionPhysicsSource`; the configs of the script classes most likely to use them (rebuildable `Land_House_*`, `Land_Bunker_*`) are not in the `P:\DZ` extract at all. The parser and script consumers are verified; a copy-paste vanilla Doors block with those keys is **[UNVERIFIED]**. The only config trace is the macro `PART_DOOR_ESSENTIAL_ATTACHMENTS(doorID, doorMaterial)` → `Att_CodeLock<n>_<material>` / `Att_CombinationLock<n>_<material>` (`P:\DZ\data\basicdefines.hpp:662-663`). Fence lists `"Att_CombinationLock"` and `"Att_CodeLock"` in entity-level `attachments[]` (`P:\DZ\gear\camping\config.cpp:4362-4374`), but `Fence` is a `BaseBuildingBase` item (`:3252`), not a `Building`, so per-door `AdditionalDoorInfo` does not apply to it.
+- Resolved on the 1.30.164200 extract: the Takistan configs are now in `P:\DZ\structures_takistan\`, and `Residential\config.cpp` uses all six keys (`relatedInventorySlots` 150×, `lockCompatibilityBitMask` / `doorConstructionPart` / `doorConstructionPhysicsSource` 566×, `interactPositionPoint` / `interactDirPoint` 416×). Copy-paste reference: `Land_House_1M1` Doors (`Residential\config.cpp:23-100`; door `:25-45`, window with interact points `:67-84`). The 1.30.164078 extract on this machine (208 files) had none of them. Config macro: `PART_DOOR_ESSENTIAL_ATTACHMENTS(doorID, doorMaterial)` → `Att_CodeLock<n>_<material>` / `Att_CombinationLock<n>_<material>` (`P:\DZ\data\basicdefines.hpp:662-663`). Fence lists `"Att_CombinationLock"` and `"Att_CodeLock"` in entity-level `attachments[]` (`P:\DZ\gear\camping\config.cpp:4362-4374`), but `Fence` is a `BaseBuildingBase` item (`:3252`), not a `Building`, so per-door `AdditionalDoorInfo` does not apply to it.
 
 ## Door open conditions and locks (DayZ 1.30)
 
@@ -286,7 +286,7 @@ Directional check (missing/empty memory points pass — the helper returns true)
 ```
 
 ```c
-// [EXACT] P:\scripts\4_world\static\miscgameplayfunctions.c:940
+// [EXACT] P:\scripts\4_world\static\miscgameplayfunctions.c:942
 	//! Intentionally returns true (no restriction) when the check cannot be performed (missing player/entity or memory points)
 	//! Callers where a failed check must deny access have to verify the preconditions (e.g. MemoryPointExists) themselves
 	static bool MemPointDirectionalCheck(PlayerBase player, EntityAI targetEnt, string memPointStartName, string memPointEndName, float toleranceAngle = Math.PI_HALF)
@@ -303,7 +303,7 @@ Directional check (missing/empty memory points pass — the helper returns true)
 			memDir.Normalize();
 ```
 
-If that `if` fails (null player, empty names or missing Memory points), the function returns `true` (`miscgameplayfunctions.c:967`). The 1.30 comment above it makes that explicit: a caller that must deny access on a failed check has to test `MemoryPointExists` itself. `DoorsDirectionalCheck` also dereferences `GetDoorInfo(...)` without a null check (`building.c:338-339`); every child of **class Doors** gets an info object (`P:\scripts\3_game\entities\additionaldoorsinfo.c:65-78`), so this only bites if the engine door index and the config child order disagree.
+If that `if` fails (null player, empty names or missing Memory points), the function returns `true` (`miscgameplayfunctions.c:969`). The 1.30 comment above it makes that explicit: a caller that must deny access on a failed check has to test `MemoryPointExists` itself. `DoorsDirectionalCheck` also dereferences `GetDoorInfo(...)` without a null check (`building.c:338-339`); every child of **class Doors** gets an info object (`P:\scripts\3_game\entities\additionaldoorsinfo.c:65-78`), so this only bites if the engine door index and the config child order disagree.
 
 ### `EBuildingLockType` (not attachment locks)
 
@@ -331,7 +331,7 @@ Native engine locks are unchanged: `LockDoor`, `UnlockDoor`, `IsDoorLocked` (`P:
 
 ## Hooks vanilla 1.30 calls, and hooks it does not
 
-From a grep of every `.c` under `P:\scripts` (1.30.164078). "No vanilla caller" means no script calls it; engine-side callers are not visible and were not tested.
+From a grep of every `.c` under `P:\scripts` (1.30.164078; the door scripts — `building.c`, `additionaldoorsinfo.c`, the open/close/lock actions — did not change in 164200, refs renumbered where other files moved). "No vanilla caller" means no script calls it; engine-side callers are not visible and were not tested.
 
 | Hook | Vanilla script callers on 1.30 | Status for a mod override |
 |---|---|---|

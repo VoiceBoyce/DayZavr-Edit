@@ -17,7 +17,7 @@ description: >
 > Material source: salutesh/DayZ-Expansion-Scripts @ 8f75d554fda209b257c00deb8f01c181e67c980a
 > Research: dual-arm (Claude + Codex), adversarially verified. All path:line cites are confirmed.
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 The PC-* patterns below cite that Expansion commit, which targets DayZ ≤1.29; no Expansion source is on
 this machine, so those cites were **not** re-verified for 1.30. The vanilla parts (NoiseSystem, infected
@@ -232,15 +232,19 @@ On 1.30.164078 `P:\DZ\data\aiconfigs\config.cpp:77` has the same five as 1.29 (`
 `DZWolfGroupBeh`, `DZDeerGroupBeh`, `DZdomesticGroupBeh`, `DZSheepGroupBeh`); Bliss adds
 `BlissBearGroupBeh` (`P:\DZ\data_bliss\aiconfigs\config.cpp:9`).
 
-Seen on 1.30 Exp 164014 only, in the Nasdara data PBO (`data_takistan\aiconfigs\config.cpp`), which is
-**not** unpacked on `P:\` — `[UNVERIFIED on 1.30.164078]`:
+Badlands (Nasdara) adds two templates in its data PBO, on `P:\` since the 1.30.164200 unpack
+(`P:\DZ\data_takistan\aiconfigs\config.cpp`; first seen on 1.30 Exp 164014):
 
-- `DZMouflonGroupBeh` — `type = "DomesticHerbivores"`: graze/rest lifecycle, `safeKeeperIntervalMin/Max`, catch-up radii.
-- `DZDogGroupBeh` — `type = "Predators"`: `zoneType = "HuntingGround"`, `siegeAttackCountdownMin/Max`, `huntAttackCountdownMin/Max`, `safeKeeperIntervalMin/Max`.
+- `DZMouflonGroupBeh` (`:9`) — `type = "DomesticHerbivores"`: graze/rest lifecycle, `safeKeeperIntervalMin/Max`, catch-up radii.
+- `DZDogGroupBeh` (`:61`) — `type = "Predators"`: `zoneType = "HuntingGround"`, `siegeAttackCountdownMin/Max` 10/15, `huntAttackCountdownMin/Max` 1/4, `safeKeeperIntervalMin/Max` 20/40 (`:85-90`).
 
 The matching animal scripts (`Animal_OvisGmelini`, `Animal_CanisFamiliaris_Dobermann_*` /
-`_GermanShepherd_*`, `Animal_VaranusGriseus`) exist in `P:\scripts\4_world\entities\creatures\animals\`
-but have no config class in `P:\DZ`.
+`_GermanShepherd_*`, `Animal_VaranusGriseus`) in `P:\scripts\4_world\entities\creatures\animals\` have
+their configs in the Badlands data too: `P:\DZ\animals_takistan\<animal>\config.cpp` (e.g.
+`class Animal_CanisFamiliaris_Dobermann_ColorBase: AnimalBase`, `canis_familiaris_dobermann\config.cpp:24`),
+and their behaviour trees in `P:\DZ\AI_takistan\config.cpp` (`Predators_Dobermann` `:3`,
+`Predators_GermanShepherd` `:676`, `Herbivores_OvisGmelini` `:1338`, `AmbientLife_Varanus_Griseus` `:2010`).
+(Until 2026-10-21 this section said they had no config; `P:\` held no DLC data before the 164200 unpack.)
 
 `[DESIGN]` Custom maps that want the same packs copy these classes (or inherit them) in their own `aiconfigs` rather than reimplementing predator/herbivore FSMs in script. Details: `references/dayz-1-30-ai.md`.
 
@@ -262,8 +266,8 @@ Re-verified on 1.30.164078 (`P:\scripts\3_game\noise.c:1-26`; first written agai
 - `AddNoiseTarget` creates a positional **decoy with a duration** — infected/AI investigate a
   position with no entity attached (distraction devices, impacts). Helper:
   `MiscGameplayFunctions.GenerateAINoiseAtPositionEx(source, lifeTime, params)`
-  (`P:\scripts\4_world\static\miscgameplayfunctions.c:1886`); the old position-based
-  `GenerateAINoiseAtPosition` is `[Obsolete]` (`:2072`).
+  (`P:\scripts\4_world\static\miscgameplayfunctions.c:1824`); the old position-based
+  `GenerateAINoiseAtPosition` is `[Obsolete]` (`:2010`).
 - `NoiseParams.Load("CfgNoises_entry")` or `LoadFromPath(path)`.
 - Weather dampening is native in 1.30. Tune rain/snow/fog/wind/sandstorm in `class AIParams`
   (`P:\DZ\data\aiconfigs\config.cpp:12-22`). Query what the AI applies at a point with
@@ -303,10 +307,13 @@ blocks and line numbers: `references/dayz-1-30-ai.md`.
   Animals: `SlotCowering` added to their `CfgAIBehaviours`.
 - Surrender: `Man.IsSurrendered()` / `PlayerBase.SetSurrenderState(bool)`; `EmoteManager.ForceSurrenderState`
   and `SurrenderDummyItem` are obsolete.
-- New animal scripts (mouflon, dogs, monitor lizard) without configs in `P:\DZ`; the Nasdara group templates
-  `DZMouflonGroupBeh` / `DZDogGroupBeh` were seen on Exp only (not in `P:\DZ`, unverified on stable).
+- New animals (mouflon, dogs, monitor lizard): scripts in `P:\scripts`, configs and behaviour trees in the
+  Badlands data (`P:\DZ\animals_takistan\`, `P:\DZ\AI_takistan\config.cpp`); group templates
+  `DZMouflonGroupBeh` / `DZDogGroupBeh` in `P:\DZ\data_takistan\aiconfigs\config.cpp:9,61` (on `P:\` since
+  the 1.30.164200 unpack).
 - `[CHANGELOG 1.30]` navmesh file version has **no** backwards compatibility — regenerate navmesh for custom
   terrains (matters to eAI PC-15/PC-16). Navmesh can use a hide animation source via EntityType Navmesh config.
+  Measured: 1.29 = v6, 1.30.164078 = v7, **1.30.164200 = v9** (§DayZ 1.30.164200 changes).
 
 **What breaks for a ≤1.29 AI / stealth mod**
 
@@ -319,7 +326,8 @@ blocks and line numbers: `references/dayz-1-30-ai.md`.
    double-damps the event.
 4. Threat code that detects a surrendered player by `SurrenderDummyItem` in hands stops working.
 5. Code that switches on infected mind state without a `MINDSTATE_COWER` case.
-6. Custom terrains: old navmesh files will not load. `[CHANGELOG 1.30]`
+6. Custom terrains: old navmesh files will not load. `[CHANGELOG 1.30]` A v7 navmesh made for 1.30.164078
+   most likely fails on 1.30.164200 too (v9 required; §DayZ 1.30.164200 changes).
 
 **Migration checklist**
 
@@ -333,10 +341,46 @@ blocks and line numbers: `references/dayz-1-30-ai.md`.
       `GenerateAINoiseAtPositionEx`.
 - [ ] If you spawn custom infected, keep `m_MindState` sync range covering `MINDSTATE_COWER` (5).
 - [ ] Surrender checks: `IsSurrendered()`, not an item in hands.
-- [ ] Custom maps: regenerate navmesh. Copy/inherit group templates only after checking they exist in your
-      1.30 data.
+- [ ] Custom maps: regenerate navmesh with the 1.30.164200 tools and check the header reads v9. Copy/inherit
+      group templates only after checking they exist in your 1.30 data.
 - [ ] eAI-style `PlayerBase` bots: run the 8-point re-check in `references/dayz-1-30-ai.md` § "What an
       eAI-style mod must re-check" (hearing, emitted noise, surrender, cower, inventory/hands, weapons,
       `ProcessVariables(float)`/`OnCEIterate`/storage 144, navmesh).
 - [ ] Expansion eAI PC-5..PC-18 were **not** re-verified for 1.30 (no Expansion source on this machine).
       Treat those cites as ≤1.29 Expansion research and re-check them against the Expansion build you run.
+
+### DayZ 1.30.164200 changes
+
+Patch 1.30.164200 (2026-10-21). No AI, noise, infected, animal or `AIWorld`/path-filter script changed
+(script delta file list). What matters to AI:
+
+1. **Navmesh format v9, checked strictly.** All four vanilla `navmesh.nm` (`P:\DZ\worlds\{chernarusplus,enoch,nasdara,sakhal}\navmesh\navmesh.nm`,
+   header `TESM` + uint32 version at offset 4) read **9**; 1.30.164078 vanilla was 7, 1.29 was 6 (measured).
+   In `DayZServer_x64.exe` the code before `Navmesh could not be loaded: Invalid version. (Navmesh version: %d, Desired version: %d)`
+   compares with `cmp r9d,9` (164078: `cmp r9d,7`) — derived from exe analysis (`dayz-130-migration`
+   config-delta §2.9), not run in game. So a custom/community map whose navmesh was (re)built for 164078
+   most likely logs `Navmesh version: 7, Desired version: 9` and `Unable to load navmesh`, and its infected,
+   animals and native AI stand still. Check the RPT for that line first.
+2. **Regenerate with the 164200 tools.** Data server: `DayZServer_x64.exe` (or `DayZDiag_x64.exe`)
+   1.30.164200 with `-startNavmeshDataServer`, the map and its mods, an empty mission; then
+   `DayZ Tools\Bin\NavMeshGenerator\NavMeshGenerator_x64.exe` (1.30.164.165, updated with the patch)
+   `-c -k -a 127.0.0.1 <out.nm>` (console / kill server when done / server address). This recipe was
+   measured on this machine on 1.30.164078 (2026-10-21, `__Intenso_Mod_Base__\mod_Intenso_NavmeshGenerator\`
+   README + `tools\kit`), not repeated on 164200; confirm the new file's header reads 9 before shipping.
+3. **Config-driven navmesh for dynamic parts.** A structure config can carry `class Navmesh` with
+   `HideParts { class x { hideAnimationSource="…"; } }` (plus `generateWithRoadway`, `generateWithProxies`) or
+   `TransformParts { class x { transformAnimationSource="…"; } }`. 164200 adds them to
+   `Land_IrrigationTunnel_Entrance_01` (`P:\DZ\structures_takistan\Industrial\config.cpp:25-35`) and to
+   `Fence` (`P:\DZ\gear\camping\config.cpp:4418-4427`, the gate leaf `Wall_Gate_Rotate`); every class
+   inheriting `Fence` inherits it. [reported: BI 1.30.164200 notes] "Infected and animals had numerous issues
+   navigating rebuildable structures" is fixed. Mod gates on `Fence` whose model lacks `Wall_Gate_Rotate`
+   are untested.
+4. **Diag/test only:** `EDiagMenuGame.ENF_DIAG_DENavmesh` (`P:\scripts\3_game\enums\ediagmenugame.c:7`,
+   DayZDiag); the navmesh test buildings are `Land_NavmeshTest*` now (were `NavmeshTest*`,
+   `P:\scripts\4_world\entities\navmeshtest\navmeshtest.c:2`; no config class or model ships for them).
+5. **Badlands dogs** [reported: BI 1.30.164200 notes, "Dogs did not produce any sound when hit"]: the German
+   Shepherd got `AnimEvents/Sounds/Pain` and new dog `.asi`/hit `.anm` (`dayz-130-migration` config-delta §2.5).
+6. **Script-AI bots on `PlayerBase`** inherit the player-side patch changes: target actions no longer lock
+   the target (`IsLockTargetOnUse() → false` on 21 medical/restrain/gag actions), the server checks only
+   distance for `CCTCursor*` targets, `vector.Cross` is gone, and a bot vehicle class that declares its own
+   `HasCrew()` / `IsMoving()` collides with the new `Transport` members. Scan with `dayz-130-migration`.

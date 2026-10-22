@@ -1,7 +1,7 @@
 # Porting recipes: 1.29 → 1.30
 
 Each recipe: symptom (scanner `kind`), the old code, the 1.30 code, and the vanilla line it was taken from
-(`P:\scripts`, build 1.30.164078). Read the cited line before you paste — some bodies matter, not just signatures.
+(`P:\scripts`, build 1.30.164200). Read the cited line before you paste — some bodies matter, not just signatures.
 
 ---
 
@@ -28,7 +28,7 @@ compiles and silently never runs. `m_LastUpdatedTime` is gone too.
 ## 2. `ProcessVariables()` → `ProcessVariables(float elapsedTime)` (`override-signature`)
 
 ```c
-override void ProcessVariables(float elapsedTime)   // entityai.c:3913, itembase.c:4659
+override void ProcessVariables(float elapsedTime)   // entityai.c:3913, itembase.c:4663
 {
 	super.ProcessVariables(elapsedTime);
 }
@@ -81,7 +81,7 @@ class MyCar : CarScript
 The light position still comes from the model's memory points and the reflector selections/materials registered in
 `CarScript` (`carscript.c:230-266`); if your model uses other selection names or materials, call
 `m_LightsComponent.RegisterSelection(...)` the same way. Toggle: `LightToggle()` / state: `LightIsOn()` (`Transport`,
-`3_game\vehicles\transport.c:227,236`). Brake/reverse/tail helpers (`BrakesRearLight`, `TailLightsShineOn`, …) are obsolete
+`3_game\vehicles\transport.c:230,239`). Brake/reverse/tail helpers (`BrakesRearLight`, `TailLightsShineOn`, …) are obsolete
 and uncalled. Details: `dayz-vehicles`.
 
 ## 4. Car battery / "needs no battery" (`dead-hook IsVitalCarBattery/IsVitalTruckBattery`)
@@ -90,7 +90,7 @@ and uncalled. Details: `dayz-vehicles`.
 // Before 1.30 (uncalled)
 override bool IsVitalCarBattery() { return false; }
 
-// 1.30 — transport.c:821-829; vanilla overrides: inheritedcars\civiliansedan.c:59-68, truck_01_base.c:60-74
+// 1.30 — transport.c:830-838; vanilla overrides: inheritedcars\civiliansedan.c:59-68, truck_01_base.c:60-74
 override bool NeedElectricitySourceDevice() { return false; }          // no battery needed
 // or, battery in a custom slot:
 override bool NeedElectricitySourceDevice() { return true; }
@@ -98,7 +98,7 @@ override EntityAI GetElectricitySourceDevice() { super.GetElectricitySourceDevic
 override string GetElectricitySourceDeviceType() { return "CarBattery"; }
 ```
 `CheckVitalItem(...)` → `CheckVitalItemCallback(bool isVital, int slotId, Object caller = null, string callbackMethodName = "", Param params = null)`
-(protected, `transport.c:420`). `CarPartsHealthCheck` → `PartsHealthCheck`.
+(protected, `transport.c:423`). `CarPartsHealthCheck` → `PartsHealthCheck`.
 
 ## 5. Car horn (`dead-field m_CarHornShortSoundName`, `call-removed GenerateCarHornAINoise`)
 
@@ -120,7 +120,7 @@ inputs now just inherit from them). AI noise of the horn is inside `VehicleHornC
 // Before 1.30 — compiles, never called (vanilla 1.30 calls the Ex versions)
 override void BuildPartServer(notnull Man player, string part_name, int action_id) { MyHook(); super.BuildPartServer(player, part_name, action_id); }
 
-// 1.30 — 4_world\classes\constructionbase.c:179 / :190 (Construction : ConstructionBase)
+// 1.30 — 4_world\classes\constructionbase.c:180 / :191 (Construction : ConstructionBase)
 override void BuildPartServerEx(Man player, string part_name, int action_id)
 {
 	MyHook(player, part_name);
@@ -132,10 +132,10 @@ override void DismantlePartServerEx(Man player, string part_name, int action_id)
 }
 ```
 - `Construction.SetParent(BaseBuildingBase)` → `protected void SetParent(EntityAI parent)` (`construction.c:44`); ctor gained an
-  `EntityAI` overload (`:6`). `IsColliding(string)` → `IsCollidingEx(CollisionCheckData)` (`constructionbase.c:1481`).
+  `EntityAI` overload (`:6`). `IsColliding(string)` → `IsCollidingEx(CollisionCheckData)` (`constructionbase.c:1527`).
 - `ConstructionPart.m_Name/m_PartName/m_Id/m_IsBase/m_IsGate/...` are obsolete → `ConstructionPartTypeData`.
 - `ConstructionActionData.SetSlotId/GetSlotId` obsolete; `ActionBuildPart.SetBuildingAnimation` → `SetBuildingAnimationEx`.
-- `DestroyPartServer(Man, string, int, bool destroyed_by_connected_part = false)` is at `constructionbase.c:209`.
+- `DestroyPartServer(Man, string, int, bool destroyed_by_connected_part = false)` is at `constructionbase.c:210`.
 - Raid-protection / anti-build mods: also check the new instant actions (`ActionBuildPartInstant`, `ActionDismantlePartInstant`,
   `ActionDestroyPartInstant`) and map-structure rebuilding (`Rebuilding`, `RebuildingSpawner`) — they reach `BuildPartServerEx`
   through other paths. Details: `dayz-basebuilding`.
@@ -346,7 +346,7 @@ modded class IngameHudVisibility
 ```c
 // Before 1.30 — vanilla called GetDryingIncrement("player") (1.29 environment.c:888)
 override float GetDryingIncrement(string pIncrementName) { ... }
-// 1.30 — vanilla calls the enum overload (environment.c:1169, itembase.c:4581, universaltemperaturesourcelambdabaseimpl.c:24)
+// 1.30 — vanilla calls the enum overload (environment.c:1169, itembase.c:4585, universaltemperaturesourcelambdabaseimpl.c:24)
 override float GetDryingIncrement(EEnvironmentDryingCategories category) { return super.GetDryingIncrement(category) * 2; }
 override float GetSoakingIncrement(EEnvironmentSoakingCategories category) { return super.GetSoakingIncrement(category); }
 ```

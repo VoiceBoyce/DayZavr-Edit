@@ -20,7 +20,7 @@ Primary path uses Blender for pro-grade geometry (bevel, subdiv, booleans, Smart
 AO baking, auto LODs via decimate) + py3d for .p3d assembly. Fallback path uses
 py3d only for quick prototyping without Blender.
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 The LOD table, Rule 14 visual-LOD proxies and the AddonBuilder packing loop below are unchanged in 1.30. What 1.30 adds: vanilla P3Ds are ODOL v56 (1.29: v54); inventory-attachment proxies should also sit in ViewGeometry for the dedicated server [CHANGELOG 1.30]; an optional ViewGeometry `liquid_source` selection limits well actions to that component; `-cacheP3D` for unbinarized meshes [CHANGELOG 1.30]; `disableSimulation` on static houses [CHANGELOG 1.30]. Details: [dayz-1-30-model-pipeline.md](references/dayz-1-30-model-pipeline.md) and ## DayZ 1.30 changes.
 
@@ -916,4 +916,15 @@ A custom well without `liquid_source` does NOT break: the selection is optional 
 - [ ] Unbinarized mesh loop: `-cacheP3D=1` on Diag/Buldozer [CHANGELOG 1.30].
 - [ ] Vanilla reference extraction: check the ODOL version (56) first.
 - [ ] Character/infected graphs: `.agf` via Workbench — not `model.cfg` here.
+
+### DayZ 1.30.164200 changes
+
+Patch 1.30.164200 (2026-10-21); details in [dayz-1-30-model-pipeline.md](references/dayz-1-30-model-pipeline.md) § DayZ 1.30.164200 changes.
+
+- Vanilla models stay ODOL v56 (3 377 re-binarized); DayZ Tools binarize/Workbench are 1.30.164.200, AddonBuilder unchanged.
+- Workbench "Importing FBX files as models" fixed (DZEXP-151) [reported: BI 1.30.164200 notes]; not tried here.
+- The roadway surface texture decides the liquid: the irrigation-tunnel cholera fix swapped `still_water_int` (`LIQUID_WATER`, drinks as pond → cholera) for `clean_water_int` (`LIQUID_CLEANWATER`) in 38 models (`P:\DZ\surfaces\config.cpp:1775-1781`, `:1803-1809`).
+- Config `class Navmesh { HideParts / TransformParts }` hides or moves parts by AnimationSource for navmesh generation (irrigation tunnel entrance, `Fence` gate `P:\DZ\gear\camping\config.cpp:4418-4427`); vanilla navmeshes are v9 now.
+- ACOG, cooking pot, GunCase and 5.45×39 materials changed: retextures that copied the old `.rvmat` diverge from vanilla.
+- Launch flag `-resolveFilePatchingUsingEnfusion` → `-loadRVFilesViaEnfusionFS`; new PBO property `fsShadowing=1` [reported, not yet measured] (`dayz-pbo-build`).
 

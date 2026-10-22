@@ -22,8 +22,9 @@ Weapon (native)
 Verified: `boltactionrifle_base.c:5` `class BoltActionRifle_Base extends Weapon_Base`;
 `pistol_base.c:149` `class Pistol_Base extends Weapon_Base`. Do not assume a common `Rifle_Base` parent.
 
-Further branches, `[VERIFIED-vanilla]` on 1.30.164078 (same `Weapon_Base` root; the 1.30 additions are
-script-only — full staging warning: `dayz-1-30-weapons.md`):
+Further branches, `[VERIFIED-vanilla]` on 1.30.164078 (same `Weapon_Base` root; the 1.30 additions'
+configs and models are Badlands DLC data under `P:\DZ\weapons_takistan\` — W-STAGING1 in
+`dayz-1-30-weapons.md`, corrected 2026-10-21):
 
 - `RifleBoltLock_Base extends Rifle_Base` — `rifleboltlock_base.c:119`. `SCARH_Base : RifleBoltLock_Base`
   (`automaticrifle\scarh.c:1`); `SCARL_Base : SCARH_Base` (`automaticrifle\scarl.c:1`, new in 1.30).

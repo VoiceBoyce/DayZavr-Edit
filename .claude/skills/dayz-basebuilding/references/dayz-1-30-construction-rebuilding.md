@@ -6,6 +6,10 @@ re-copied from the stable file named in its header (paths relative to `P:\script
 `P:\DZ`). The construction code did not differ between Exp and stable except for line numbers; the few
 statements that were wrong on both builds are corrected in place. Nothing here was exercised in-game unless
 a sentence says so. `Before 1.30:` notes cite `1.29: O:\DayZ 1.29 …\scripts\…`.
+**Updated 2026-10-21 for 1.30.164200** (line refs renumbered by tool, content re-read by hand): the support
+getters, utility parts, `IgnoreHouseCollisions` and `DropNonUsableMaterialsServer` changed — see §4 (support
+graph), §9.2, §9.4 and the new §11. `P:\DZ` of 164200 also contains the Takistan data (`structures_takistan`,
+`gear_takistan`), so the "not unpacked here" notes of earlier versions are resolved in §5 and §9.4.
 
 ## 1. Type hierarchy
 
@@ -60,7 +64,7 @@ Before 1.30: `BaseBuildingBase.ConstructionInit()` was public, created `new Cons
 ```
 
 ```c
-// [EXACT] 4_world/entities/game/super/building.c:23-26
+// [EXACT] 4_world/entities/game/super/building.c:23-27
 	override protected ConstructionBasic CreateConstructionComponent()
 	{
 		m_Construction = new Rebuilding(this);
@@ -89,7 +93,7 @@ Before 1.30: `BaseBuildingBase.ConstructionInit()` was public, created `new Cons
 ```
 
 `SetParent` is `override protected void SetParent( EntityAI parent )` (`construction.c:44-49`; base
-`constructionbase.c:119-122`). Before 1.30: `protected void SetParent( BaseBuildingBase parent )`
+`constructionbase.c:120-123`). Before 1.30: `protected void SetParent( BaseBuildingBase parent )`
 (1.29: `construction.c:44`) — a 1.29 override of that signature no longer compiles (also reported by bzed, tested).
 
 [DESIGN] Mods that stored `Construction m_Construction` on a `BaseBuildingBase` subclass should switch to `GetConstruction()` (already a `Construction.Cast`) or `Construction.Cast(GetConstructionBasic())`. Direct field access from outside the class no longer compiles (`protected`). To install your own `Construction` subclass, override `CreateConstructionComponent()`.
@@ -124,7 +128,7 @@ class ConstructionPart
 Digest J claimed a new ctor `ConstructionPart(notnull ConstructionPartTypeData)`. That ctor is **not** in the file. Type data is assigned after spawn:
 
 ```c
-// [EXACT] 4_world/classes/basebuilding/constructionpart.c:395-401
+// [EXACT] 4_world/classes/basebuilding/constructionpart.c:401-407
 	void SetPartTypeData(ConstructionPartTypeData ptd)
 	{
 		if (!m_PartTypeData)
@@ -134,12 +138,12 @@ Digest J claimed a new ctor `ConstructionPart(notnull ConstructionPartTypeData)`
 	}
 ```
 
-`UpdateConstructionParts` (`4_world/classes/constructionbase.c:516-546`) reads `entityType.GetConstructionDataHolderBasic()`, spawns each part from its custom instance typename or from `GetDefaultPartInstanceTypename()` (`ConstructionPart` for `Construction`, `construction.c:34-37`), then calls `part.SetPartTypeData(typeData)` (`:531-538`). The map is keyed by `typeData.GetPartName()` (`:543`). Config field readers (`name`, `id`, `is_base`, `is_gate`, `required_parts`, `build_action_type`, …) live on `ConstructionPartTypeData.InitPartTypeData` (`typeconstructiondata/constructionparttyped.c:45-71`, basic strings `:75-86`, action masks `:95-107`).
+`UpdateConstructionParts` (`4_world/classes/constructionbase.c:517-547`) reads `entityType.GetConstructionDataHolderBasic()`, spawns each part from its custom instance typename or from `GetDefaultPartInstanceTypename()` (`ConstructionPart` for `Construction`, `construction.c:34-37`), then calls `part.SetPartTypeData(typeData)` (`:531-538`). The map is keyed by `typeData.GetPartName()` (`:543`). Config field readers (`name`, `id`, `is_base`, `is_gate`, `required_parts`, `build_action_type`, …) live on `ConstructionPartTypeData.InitPartTypeData` (`typeconstructiondata/constructionparttyped.c:45-71`, basic strings `:75-86`, action masks `:95-107`).
 
 The old public fields are still declared but **never written** — reading them gives `""` / `0` / `false` / null:
 
 ```c
-// [EXACT] 4_world/classes/basebuilding/constructionpart.c:490-502
+// [EXACT] 4_world/classes/basebuilding/constructionpart.c:496-508
 	[Obsolete("1.30: data stored on ConstructionPartTypeData")]
 	string 	m_Name;
 	[Obsolete("1.30: data stored on ConstructionPartTypeData")]
@@ -157,18 +161,18 @@ The old public fields are still declared but **never written** — reading them 
 
 Use `GetName()`, `GetPartName()`, `GetMainPartName()`, `GetId()`, `IsBase()`, `IsGate()`, `GetRequiredParts()` (`constructionpart.c:193-286`), which forward to `m_PartTypeData`.
 
-`SetRequestBuiltState` is `[Obsolete("1.30: Use 'SetBuiltState' directly")]` (`constructionpart.c:504-512`). Its body is the same as on 1.29 (sets the flag only in multiplayer), and neither 1.29 nor 1.30 vanilla calls it.
+`SetRequestBuiltState` is `[Obsolete("1.30: Use 'SetBuiltState' directly")]` (`constructionpart.c:510-518`). Its body is the same as on 1.29 (sets the flag only in multiplayer), and neither 1.29 nor 1.30 vanilla calls it.
 
 ## 3. `*ServerEx` and collision
 
 **No vanilla 1.30 script calls `BuildPartServer`, `DismantlePartServer` or `IsColliding(string)`** (grep of
 `P:\scripts`: every caller uses `BuildPartServerEx` / `DismantlePartServerEx` / `IsCollidingEx` —
 `actionbuildpart.c:140,167,170,476`, `actiondismantlepart.c:107`, `actionbuildshelter.c:194,240`,
-`actionpartinfo.c:192`, `miscgameplayfunctions.c:1010`, the rebuildable-house debug spawns). A 1.29 mod that
+`actionpartinfo.c:192`, `miscgameplayfunctions.c:1012`, the rebuildable-house debug spawns). A 1.29 mod that
 overrides one of the old three still compiles (obsolete warning) and is then **silently never called**.
 
 ```c
-// [EXACT] 4_world/classes/constructionbase.c:1702-1716
+// [EXACT] 4_world/classes/constructionbase.c:1751-1765
 	[Obsolete("call BuildPartServerEx instead")]
 	void BuildPartServer(notnull Man player, string part_name, int action_id)
 	{
@@ -186,10 +190,10 @@ overrides one of the old three still compiles (obsolete warning) and is then **s
 	}
 ```
 
-`IsColliding(string)` is `[Obsolete("call IsCollidingEx instead")]` right below (`constructionbase.c:1718-1754`).
+`IsColliding(string)` is `[Obsolete("call IsCollidingEx instead")]` right below (`constructionbase.c:1767-1803`).
 
 ```c
-// [EXACT] 4_world/classes/constructionbase.c:179-184
+// [EXACT] 4_world/classes/constructionbase.c:180-185
 	void BuildPartServerEx(Man player, string part_name, int action_id)
 	{
 		if (LogManager.IsBaseBuildingLogEnable()) bsbDebugPrint("[bsb] Construction BuildPartServerEx | " + part_name);
@@ -198,10 +202,10 @@ overrides one of the old three still compiles (obsolete warning) and is then **s
 	}
 ```
 
-Note: `player` **can be null** (comment at `:177`). `Construction` then resets the damage zone and calls
+Note: `player` **can be null** (comment at `:178`). `Construction` then resets the damage zone and calls
 `m_Parent.OnPartBuiltServer` (`construction.c:52-74`) — that hook is `notnull Man player`
 (`basebuildingbase.c:549`), so only `Rebuilding` (which uses `ProcessOnPartBuiltServer`, `rebuilding.c:32-37`)
-tolerates a null player in practice. `DismantlePartServerEx` (`constructionbase.c:190-206`) refunds materials only
+tolerates a null player in practice. `DismantlePartServerEx` (`constructionbase.c:191-207`) refunds materials only
 when `player` is set, then drops non-usable materials, drops the part's `essential_attachments[]` and makes items
 on the part fall unless `disableItemFalling` is set. Vanilla `ActionBuildPart` calls Ex:
 
@@ -216,7 +220,7 @@ on the part fall unless `disableItemFalling` is set. Vanilla `ActionBuildPart` c
 `IsCollidingEx` takes a `CollisionCheckData`, not a string:
 
 ```c
-// [EXACT] 4_world/classes/constructionbase.c:1481-1482
+// [EXACT] 4_world/classes/constructionbase.c:1527-1528
 	bool IsCollidingEx(CollisionCheckData check_data)
 	{
 ```
@@ -227,7 +231,7 @@ Before 1.30: `IsCollidingEx(CollisionCheckData)` and `CollisionCheckData` **alre
 `miscgameplayfunctions.c:908,944`).
 
 ```c
-// [EXACT] 4_world/classes/constructionbase.c:1916-1930
+// [EXACT] 4_world/classes/constructionbase.c:1965-1979
 class CollisionCheckData
 {
 	ref array<Object> m_AdditionalExcludes;
@@ -248,13 +252,13 @@ class CollisionCheckData
 Collision-trigger helpers still exist, marked obsolete with **no replacement**:
 
 ```c
-// [EXACT] 4_world/classes/constructionbase.c:1756-1757
+// [EXACT] 4_world/classes/constructionbase.c:1805-1806
 	[Obsolete("no replacement")]
 	void CreateCollisionTrigger(string part_name, vector min_max[2], vector center)
 ```
 
 ```c
-// [EXACT] 4_world/classes/constructionbase.c:1784-1795
+// [EXACT] 4_world/classes/constructionbase.c:1833-1844
 	[Obsolete("no replacement")]
 	void DestroyCollisionTrigger()
 	{
@@ -269,7 +273,7 @@ Collision-trigger helpers still exist, marked obsolete with **no replacement**:
 	bool IsTriggerColliding()
 ```
 
-`m_ConstructionBoxTrigger` is tagged `//! Deprecated` (`constructionbase.c:1803`). 1.29 never created the
+`m_ConstructionBoxTrigger` is tagged `//! Deprecated` (`constructionbase.c:1852`). 1.29 never created the
 trigger either (the call was commented out, 1.29: `construction.c:1046`).
 
 ### 3.1 Destroy path
@@ -277,7 +281,7 @@ trigger either (the call was commented out, 1.29: `construction.c:1046`).
 Part ruin no longer runs in `BaseBuildingBase.EEHealthLevelChanged` (1.30: only `super`,
 `basebuildingbase.c:497-503`). `EntityAI.EEHealthLevelChanged` forwards to the component on the server
 (`3_game/entities/entityai.c:1061-1062,1094-1099`), and `ConstructionBase.OnHealthLevelChanged` destroys the part
-whose name equals the lowercased zone (`constructionbase.c:352-367`). `Construction.DestroyPartServer` then
+whose name equals the lowercased zone (`constructionbase.c:353-368`). `Construction.DestroyPartServer` then
 notifies the parent and destroys dependent parts itself:
 
 ```c
@@ -304,8 +308,8 @@ notifies the parent and destroys dependent parts itself:
 Consequence (static reading, not measured): vanilla `Fence.OnPartDestroyedServer`'s
 `IsGate() && destroyed_by_connected_part` branch (`fence.c:378-390`, drops barbed wire / camonet / locks and
 closes the gate) cannot be reached through vanilla code; the locks are still dropped by the gate's
-`essential_attachments[]` (`P:\DZ\gear\camping\config.cpp:4903-4907`; `DropEssentialAttachments`,
-`constructionbase.c:1338`).
+`essential_attachments[]` (`P:\DZ\gear\camping\config.cpp:4913-4917`; `DropEssentialAttachments`,
+`constructionbase.c:1376`).
 
 ## 4. Rebuilding persistence (map buildings only)
 
@@ -359,8 +363,8 @@ Packing math [DESIGN]:
 - 10 ints × 32 bits / 2 bits/part = 160 part ids (1..160)
 
 Default `CalculateBitMaskOnBuild` sets only bit 0 at `offset` (`constructionpart.c:111-117`). The reversible
-rebuild parts (`ConstructionPartRebuildReversibleBase`, `constructionpart.c:1049`, used by the reversible door
-and barricade parts `:1101,1133`) also OR their facing into bit 1 (`:1065-1071`); the plain
+rebuild parts (`ConstructionPartRebuildReversibleBase`, `constructionpart.c:1041`, used by the reversible door
+and barricade parts `:1093,1125`) also OR their facing into bit 1 (`:1057-1063`); the plain
 `ConstructionPartRebuild` does not. Digest J's 00=ruin / 01=built / 10=destroyed mapping is not in those
 methods — there is no three-state ruin encoding.
 
@@ -381,7 +385,7 @@ methods — there is no three-state ruin encoding.
 	}
 ```
 
-Support graph: `ConstructionPartStaticsSupportData` parses `StaticsSupportData { SupportProviders / SupportRequirements }` (`4_world/classes/rebuilding/constructionstatics.c:1-60`). `ConstructionBase.SupportRemovalCheck` defaults to true (`constructionbase.c:785-789`); `Rebuilding` overrides it (`rebuilding.c:645`). `CanBuildPartEx` also requires `PartHasAnySupportFulfilled` (`constructionbase.c:598-599,698`). [DESIGN] Do not treat `required_parts[]` as the only structural gate on rebuildable houses.
+Support graph: `ConstructionPartStaticsSupportData` parses `StaticsSupportData { SupportProviders / SupportRequirements }` (`4_world/classes/rebuilding/constructionstatics.c:6-78`); since 1.30.164200 a side that the config does not declare is stored as `-1` (`:63-76`) and the getters return `bool` + `out int`, `false` for "not configured" (`:80-96`; §11). `ConstructionBase.SupportRemovalCheck` defaults to true (`constructionbase.c:826-830`); `Rebuilding` overrides it (`rebuilding.c:654-666`: removal fails when a category the part provides would drop below the summed requirement). `CanBuildPartEx` also requires `PartHasAnySupportFulfilled` (`constructionbase.c:599-600,739`; always true on `ConstructionBase`, overridden by `Rebuilding` at `rebuilding.c:624-652`). [DESIGN] Do not treat `required_parts[]` as the only structural gate on rebuildable houses.
 
 ## 5. Masonry items and `TOOL_BRICKLAYING`
 
@@ -453,7 +457,7 @@ enum ConstructionMaterialType
 }
 ```
 
-`[UNVERIFIED]` `CfgVehicles` `build_action_type` for `BrickTrowel` — the class name appears in scripts and in the character sound config (`P:\DZ\characters\data\config.cpp:7296,8694`), but no `class BrickTrowel` CfgVehicles block is in any unpacked `P:\DZ\**\config.cpp` of 1.30.164078 (same for `CommonBrick`, `MortarMix`, `PileOfBricks`, `DigitalCodeLock`). They ship in packages that are not unpacked on this machine.
+Configs (in the 1.30.164200 `P:\DZ`; the 164078 extract here lacked them): `class BrickTrowel: Inventory_Base` with `build_action_type=256` = `TOOL_BRICKLAYING` (`P:\DZ\gear_takistan\tools\config.cpp:20,29`); `PileOfBricks` (`varQuantityMax=252`), `CommonBrick`, `MortarMix`, `MortarMix_Opened` (`P:\DZ\gear_takistan\consumables\config.cpp:18,30,101,286,349`); `DigitalCodeLock` and `DigitalCodeLock_Bunker` (`P:\DZ\gear_takistan\camping\config.cpp:19,315`). The trowel sounds are in the character sound config (`P:\DZ\characters\data\config.cpp:7296,8694`).
 
 ## 6. Fence `DigitalCodeLock` and combo-lock unlock
 
@@ -487,7 +491,7 @@ that references the old names no longer compiles. Config: `Att_CodeLock` is in F
 "Attachments" GUI category (`P:\DZ\gear\camping\config.cpp:4362-4374,4388-4402`); the slot class is
 `Slot_Att_CodeLock` (`P:\scripts\config.cpp:2768-2774`).
 
-`DigitalCodeLock` owns a `CodeLockComponent` (`4_world/entities/itembase/codelock.c:1,9,30`). PIN length 4..6 (`4_world/classes/codelockcomponent.c:23-24`). Persist order on the component: `m_LockPIN`, `m_IsLocked`, `m_DoorIndex` (`codelockcomponent.c:257-262`). Wrong-code brute-force protection reads `cfggameplay.json` `ExternalLockData` (`3_game/cfggameplaydatajson.c:421-438`: `protectionCountStageOne=3`, `protectionCountStageTwo=1`, `protectionTime=30.0`, `protectionResetTime=3600.0`; used at `codelockcomponent.c:66-67,474-479`). Building-door lock slots (`Att_CombinationLock` / `Att_CodeLock` on `BuildingBase`, `building.c:10-11`) are owned by `dayz-doors`; Fence is the base-building attachment point.
+`DigitalCodeLock` owns a `CodeLockComponent` (`4_world/entities/itembase/codelock.c:1,9,30`). PIN length 4..6 (`4_world/classes/codelockcomponent.c:23-24`). Persist order on the component: `m_LockPIN`, `m_IsLocked`, `m_DoorIndex` (`codelockcomponent.c:257-262`). Wrong-code brute-force protection reads `cfggameplay.json` `ExternalLockData` (`3_game/cfggameplaydatajson.c:421-438`: `protectionCountStageOne=3`, `protectionCountStageTwo=1`, `protectionTime=30.0`, `protectionResetTime=3600.0`; used at `codelockcomponent.c:66-67,474-479`). Building-door lock slots (`Att_CombinationLock` / `Att_CodeLock` on `BuildingBase`, `building.c:10-11`) are owned by `dayz-doors`; Fence is the base-building attachment point. The lock's look on its parent comes from `CodeLockVisualManager` (`4_world/classes/codelockvisualmanager.c`): the back part sits at phase `0.92` on a `BaseBuildingBase` such as the Fence and at `0.50` on a `House` (`:46-48,452-465`); since 1.30.164200 these values are `private const` and the `House` value no longer depends on the reversed state (164078: 0.60, or 0.50 reversed). Override `GetAnimationPhaseForFrontPart` / `GetAnimationPhaseForBackPart` (`:438,452`, `protected`) for a custom parent. Item config: `P:\DZ\gear_takistan\camping\config.cpp:19` (slots `:96-119`, animation sources `:286-297`).
 
 ### 6.1 `CombinationLock` inside/outside API
 
@@ -572,8 +576,8 @@ digest, `work/changelog-1.30-exp-modding.md:13`). **Not confirmed on stable:** n
 
 ## 9. Activation, new per-part keys and rebuildable buildings
 
-First written 2026-09-24 from the Exp `scripts.pbo`; re-verified 2026-10-15 on 1.30.164078. Nothing in this
-section has been exercised in-game.
+First written 2026-09-24 from the Exp `scripts.pbo`; re-verified 2026-10-15 on 1.30.164078; §9.2 utility/support
+rows and §9.4 updated 2026-10-21 on 1.30.164200. Nothing in this section has been exercised in-game.
 
 ### 9.1 What turns construction on
 
@@ -602,24 +606,25 @@ paths are relative to `Construction <main_part> <part>`. Keys marked † are new
 |---|---|---|
 | `name`, `id`, `is_base`, `is_gate` | `:75-86` | as on 1.29 |
 | `required_parts[]`, `conflicted_parts[]` | `:88-93`, `:139-145` | as on 1.29 |
-| `build_action_type`, `dismantle_action_type` | `:95-107` | `EConstructionTools` masks; `TOOL_HANDS` lets `ActionBuildPartHandsGeneric` build with empty hands (`constructionbase.c:1404-1441`) |
-| `Materials` > `<material>` > `type`, `slot_name`, `quantity`, `lockable`, † `skipOnRepair`, † `skipOnDismantle` | `4_world/classes/basebuilding/constructionmaterials.c:26-32` | `skipOnRepair`: not consumed on repair (`constructionbase.c:1149-1150`, still required by `HasMaterialsEx`); `skipOnDismantle`: skipped when a base part's materials are dropped (`:1237-1238`) |
+| `build_action_type`, `dismantle_action_type` | `:95-107` | `EConstructionTools` masks; `TOOL_HANDS` lets `ActionBuildPartHandsGeneric` build with empty hands (`constructionbase.c:1442-1479`) |
+| `Materials` > `<material>` > `type`, `slot_name`, `quantity`, `lockable`, † `skipOnRepair`, † `skipOnDismantle` | `4_world/classes/basebuilding/constructionmaterials.c:26-32` | `skipOnRepair`: not consumed on repair (`constructionbase.c:1190-1191`, still required by `HasMaterialsEx`); `skipOnDismantle`: skipped when a base part's materials are dropped (`:1278-1279`) |
 | `material_type`, `collision_data[]` | `:129-137`, `:147-157` | as on 1.29 |
-| † `custom_part_type` | `constructionparttypedholder.c:34-45` | names the part **instance** class; the type-data class spawned is `<value>TypeData` (e.g. `ConstructionPartRebuild` → `ConstructionPartRebuildTypeData`) |
+| † `custom_part_type` | `constructionparttypedholder.c:34-45` | names the part **instance** class; the type-data class spawned is `<value>TypeData` (e.g. `ConstructionPartRebuild` → `ConstructionPartRebuildTypeData`). If `<value>TypeData` does not exist the holder silently falls back to `ConstructionPartTypeData` and the default instance class (`:42-45`; `constructionbase.c:532-537`). Vanilla values: `ConstructionPartRebuildRubble`, `…ReversibleDoor`, `…ReversibleBarricade`, and since 1.30.164200 `ConstructionPartRebuildInvertedSupport` (§11) |
 | † `can_decay_general` (on the `Construction` class itself) | `constructionparttypedholder.c:53-55` | applied after the per-part read, so it overrides `can_part_decay` for every part |
-| † `can_part_decay`, `part_decay_threshold`, `part_decay_rate` | `:199-218` | per-part decay, defaults threshold 0.3 / rate −1 HP/s (`constructionbase.c:36-37`), ×1.5 during a sandstorm (`:39,333-339`); processed from `EntityAI.OnCEIterate` (`entityai.c:3904-3911`). Global switch `GeneralData.disableBaseDecay` (`3_game/cfggameplaydatajson.c:60`, `cfggameplayhandler.c:172-175`, `construction_basic.c:37-40`). No vanilla `P:\DZ` config sets these keys. |
+| † `can_part_decay`, `part_decay_threshold`, `part_decay_rate` | `:199-218` | per-part decay, defaults threshold 0.3 / rate −1 HP/s (`constructionbase.c:36-37`), ×1.5 during a sandstorm (`:39,334-340`); processed from `EntityAI.OnCEIterate` (`entityai.c:3904-3911`). Global switch `GeneralData.disableBaseDecay` (`3_game/cfggameplaydatajson.c:60`, `cfggameplayhandler.c:172-175`, `construction_basic.c:37-40`). No vanilla `P:\DZ` config sets these keys. |
 | † `insider_minMaxs[]` | `:159-186` | inner box, next to `collision_data` |
-| † `item_falling_data[]` | `:188-197` | box from which items fall when the part is dismantled/destroyed (`constructionbase.c:241-247` + `ItemFall`), unless `BaseBuildingData.ConstructionData.disableItemFalling` (`cfggameplaydatajson.c:279`). Vanilla now sets it on Fence platform parts and Watchtower roofs/stairs (config delta). |
+| † `item_falling_data[]` | `:188-197` | box from which items fall when the part is dismantled/destroyed (`constructionbase.c:242-248` + `ItemFall`), unless `BaseBuildingData.ConstructionData.disableItemFalling` (`cfggameplaydatajson.c:279`). Vanilla now sets it on Fence platform parts and Watchtower roofs/stairs (config delta). |
 | † `hand_build_FB_anim_override` | `:220-226` | FB animation for empty-hand building |
-| † `essential_attachments[]` | `:228-237` | attachments dropped when the part is dismantled/destroyed (`DropEssentialAttachments`, `constructionbase.c:1338`); vanilla Fence `wall_gate` lists `Att_CodeLock`, `Att_CombinationLock` (`P:\DZ\gear\camping\config.cpp:4903-4907`; 1.29 listed only the combination lock) |
+| † `essential_attachments[]` | `:228-237` | attachments dropped when the part is dismantled/destroyed (`DropEssentialAttachments`, `constructionbase.c:1376`); vanilla Fence `wall_gate` lists `Att_CodeLock`, `Att_CombinationLock` (`P:\DZ\gear\camping\config.cpp:4913-4917`; 1.29 listed only the combination lock) |
 | † `related_GUI_categories[]` | `:239-248` | ties the part to `GUIInventoryAttachmentsProps` categories |
 | † `damage_hands_on_build` | `:250-258` | empty-hand build can damage gloves or cause bleeding (`actionbuildpart.c:183-202`) |
-| † `is_utility`, † `utility_build[]` | `:260-274` | helper parts without a valid id; skipped by `HasDependentPart` (`constructionbase.c:776`) |
+| † `is_utility` | `:260-264` | helper ("utility") part with `id=-1`: never synced or saved (`rebuilding.c:379-390`), built/unbuilt locally on every machine by `ConstructionBase.UpdateUtilityParts` from its own `required_parts[]` / `conflicted_parts[]` / `SupportRequirements` (`constructionbase.c:614-666`); skipped by `HasDependentPart` (`constructionbase.c:817`; `rebuilding.c:741`) and by `GetValidDepenentPartsArray` (`rebuilding.c:772`) |
+| † `toggle_utility_part_update` (int, since 1.30.164200) | `:266-274` | on a normal part: its build/dismantle queues a re-evaluation of all utility parts (`ConstructionPartRebuild.TryQueueUtilityPartsUpdate`, `constructionpart.c:885-891`). Vanilla: 46 Takistan parts, e.g. `P:\DZ\structures_takistan\Industrial\config.cpp:411,461`, `Residential\config.cpp:9059`. Replaces `utility_build[]`, which 164200 no longer reads (dead leftovers at `Industrial\config.cpp:402-405,462-465`); 1.30.164078 read `utility_build[]` as the list of utility parts to (un)build directly. §11 |
 | † `RequiredPartsVariants` > `<child>` > `partVariants[]` | `:276-300` | alternative requirement sets |
 | † `build_text_override`, † `dismantle_text_override` | `:315-336` | action text (`ShelterSite` already used `build_text_override` in 1.29 config) |
-| † `physics_geom_names[]` + `physics_geom_behaviors_invert[]`, † `override_animsource_names[]` + `override_animsource_behaviors_invert[]`, † `proxyroadway_names[]` + `proxyroadway_behaviors_invert[]` | `:339-405` | per-part overrides of which geometry / animation source / roadway is toggled; counts must match or the pair is cleared (`ErrorEx` for geoms/roadways). Used by the `ConstructionPartRebuild*` handlers (`constructionpart.c:538+`); a plain `ConstructionPart` still toggles `SetAnimationPhase(part_name)` / `AddProxyPhysics(part_name)` (`:412-430`) |
+| † `physics_geom_names[]` + `physics_geom_behaviors_invert[]`, † `override_animsource_names[]` + `override_animsource_behaviors_invert[]`, † `proxyroadway_names[]` + `proxyroadway_behaviors_invert[]` | `:339-405` | per-part overrides of which geometry / animation source / roadway is toggled; counts must match or the pair is cleared (`ErrorEx` for geoms/roadways). Used by the `ConstructionPartRebuild*` handlers (`constructionpart.c:544+`); a plain `ConstructionPart` still toggles `SetAnimationPhase(part_name)` / `AddProxyPhysics(part_name)` (`:418-436`) |
 | † `EffectsData` > `soundEffectPositions[]`, `particleEffectPositions[]`, `build_soundset_override`, `dismantle_soundset_override`, `destroy_soundset_override`, `destroy_particle_override` | `4_world/classes/rebuilding/constructioneffects.c:19-58` | memory points and overrides for build effects |
-| † `StaticsSupportData` > `SupportProviders` / `SupportRequirements` > `<child>` > `supportCategory` (string, hashed), `supportStrength` (int) | `4_world/classes/rebuilding/constructionstatics.c:13,26,37-38,45,56-57` | structural support: what a part provides and needs, by category |
+| † `StaticsSupportData` > `SupportProviders` / `SupportRequirements` > `<child>` > `supportCategory` (string, hashed), `supportStrength` (int) | `4_world/classes/rebuilding/constructionstatics.c:13,26,37-38,45,56-57` | structural support: what a part provides and needs, by category. A side not declared for a category is stored as `-1` and its getter returns `false` (since 1.30.164200, `:63-96`; §11). `Rebuilding` sums provided/required strength of built parts per category; a part with requirements needs **any one** category met (`rebuilding.c:624-652`) |
 
 No longer read on 1.30: `show_on_init` (1.29: `construction.c:259`) and `platform_support` (1.29:
 `construction.c:792`) — grep of `P:\scripts` finds no reader.
@@ -631,21 +636,32 @@ slot classes `Att_CodeLock1_Wood` … `Att_CodeLock10_Metal` and `Att_Combinatio
 A door cannot hold both lock types (`HasConflictingDoorAttachment`, `building.c:224-228,258-261,344`), and
 `CanDoorBeOpened(notnull DoorManipulationParams)` is overridden (`:307`). Door details: `dayz-doors`.
 
-### 9.4 What 1.30.164078 ships and what is not visible here
+### 9.4 What 1.30 ships for rebuildable buildings
 
 - **Script classes.** The Nasdara houses (`4_world/entities/building/rebuildable/house_*.c`),
   `Land_IrrigationTunnel_Entrance_01 : BuildingSuper` (`irrigationtunnel_entrance.c:1-11`, whose debug spawn puts a
   `WoodenStick` and a `Rope` in its inventory) and `Land_WaterWell_Brick : Well`, whose water is clean only when the
   `roof` part is built (`4_world/entities/building/land_waterwell_brick.c:1-20`).
-- **Configs/models not unpacked.** `P:\DZ` (1.30.164078) has no config for `Land_House_2M1`,
-  `Land_IrrigationTunnel_Entrance_01`, `Land_WaterWell_Brick`, `wall1_wood` or `rubble_rubble1`; the Nasdara data is
-  not unpacked on this machine (it ships encrypted per the `dayz-underground` survey). Treat the real part lists as
-  `[UNVERIFIED]`. Exp note (2026-09-24): `nasdara\addons\data_nasdara.pbo` carried only the DLC `CfgMods` entry and
-  a `mud_brick` surface.
+- **Configs and models (unpacked on 1.30.164200).** `P:\DZ\structures_takistan\` holds them: houses in
+  `Residential\config.cpp` (e.g. `Land_House_1M1` `:18`, `Land_House_2M1` `:35149`, `Land_House_3S1_Dam3` `:91187`),
+  `Land_IrrigationTunnel_Entrance_01` in `Industrial\config.cpp:20` (its `Construction` block `:383-529` is the
+  smallest complete rebuild example: two ladder parts + one utility part), `Land_WaterWell_Brick` in
+  `Props\config.cpp:18`. Models sit next to them (e.g. `Industrial\construction\*.p3d`). The 1.30.164078 extract on
+  this machine lacked these folders, which is why earlier versions of this file marked the part lists `[UNVERIFIED]`.
+  Real part-class pattern: `Land_House_1M2_Dam2 > Construction > rebuild_wall1 > wall1_wood` (`Residential:7993-8075`:
+  `physics_geom_names[]`, `required_parts[]`, `conflicted_parts[]`, `collision_data[]`, `item_falling_data[]`,
+  `toggle_utility_part_update=1;`, `insider_minMaxs[]`, `Materials`, `StaticsSupportData`, `EffectsData`).
 - **Example part names.** `Land_House_2M1_Dam2.OnDebugSpawn` builds `rubble_rubble1`, `rubble_rubble2`,
   `wall1_wood`, `wall2_wood`, `wall3_brick` and `roof1` with `BuildPartServerEx(null, <part>, -1)`
   (`house_2m1.c:11-21`); `Land_WaterWell_Brick` builds `rubble_rubble1`, `well_brick`, `roof`
-  (`land_waterwell_brick.c:20-27`).
+  (`land_waterwell_brick.c:20-27`). The full lists are in the configs above.
+- **1.30.164200 config changes on these buildings** (from `dayz-130-migration` →
+  `references/config-delta-1.30.164078-to-164200.md` §2.2): `toggle_utility_part_update=1;` added to 46 parts and
+  43 `utility_build[]` arrays removed; `Land_House_3S1_Dam3` floor logic rebuilt on `SupportProviders` +
+  `RequiredPartsVariants` with new utility parts `util_dyn_roadway_floor{2,3}_{ext,int}` (the `_ext` ones inverted,
+  `Residential:103151,103238`); `Land_IrrigationTunnel_Entrance_01` gained a `Navmesh { HideParts }` block
+  (`Industrial:25`) and the roadway `proxyroadway_block_01` toggled by `ladder_utility` (`Industrial:63,511-515`);
+  several `physics_geom_names[]` fixes.
 - **`RebuildingSpawner` is diag-only** (`4_world/classes/basebuilding/rebuildingspawner.c:1`, `#ifdef DIAG_DEVELOPER`),
   as are the instant build/dismantle/destroy debug actions (`actions/instant/actionbuildpartinstant.c:2`).
 
@@ -661,23 +677,304 @@ A door cannot hold both lock types (`HasConflictingDoorAttachment`, `building.c:
 
 ## 10. Porting a ≤1.29 base-building mod — hooks that compile but no longer run
 
-Static reading of `P:\scripts` (1.30.164078) against 1.29; none measured in-game.
+Static reading of `P:\scripts` (written on 1.30.164078, refs renumbered to 164200) against 1.29; none measured
+in-game. For a mod already ported to 164078, see §11.5.
 
 | 1.29 hook / call | On 1.30 | Use instead |
 |---|---|---|
-| `override BuildPartServer(...)` | obsolete forwarder, no vanilla caller (`constructionbase.c:1702-1708`) | `BuildPartServerEx` or `BaseBuildingBase.OnPartBuiltServer` |
-| `override DismantlePartServer(...)` | same (`:1710-1716`) | `DismantlePartServerEx` or `OnPartDismantledServer` |
-| `override IsColliding(string)` | same (`:1718-1754`) | `IsCollidingEx(CollisionCheckData)` |
+| `override BuildPartServer(...)` | obsolete forwarder, no vanilla caller (`constructionbase.c:1751-1757`) | `BuildPartServerEx` or `BaseBuildingBase.OnPartBuiltServer` |
+| `override DismantlePartServer(...)` | same (`:1759-1765`) | `DismantlePartServerEx` or `OnPartDismantledServer` |
+| `override IsColliding(string)` | same (`:1767-1803`) | `IsCollidingEx(CollisionCheckData)` |
 | `override ActionBuildPart.SetBuildingAnimation(ItemBase)` | obsolete, not called (`actionbuildpart.c:227,370-374`) | `SetBuildingAnimationEx(player, target, item, action_data, extra_data)` |
-| `part.m_PartName` / `m_Name` / `m_Id` / `m_IsBase` / `m_IsGate` / `m_MainPartName` / `m_RequiredParts` | declared, never written (`constructionpart.c:490-502`) | getters |
+| `part.m_PartName` / `m_Name` / `m_Id` / `m_IsBase` / `m_IsGate` / `m_MainPartName` / `m_RequiredParts` | declared, never written (`constructionpart.c:496-508`) | getters |
 | `new ConstructionPart(name, part_name, …)` | empty constructor, no type data | let `UpdateConstructionParts` create parts; custom class via `custom_part_type` or `GetDefaultPartInstanceTypename()` |
-| `CanBuildPart(part, tool, false)` to skip the tool check | `use_tool` ignored (`constructionbase.c:583-611`) | `CanBuildPartEx` and read the failure mask, or give the part `TOOL_HANDS` |
+| `CanBuildPart(part, tool, false)` to skip the tool check | `use_tool` ignored (`constructionbase.c:584-612`) | `CanBuildPartEx` and read the failure mask, or give the part `TOOL_HANDS` |
 | `ConstructionActionData.GetSlotId()` | never set (`constructionactiondata.c:617-627`) | `AttachToConstructionActionData.m_SlotID` |
 | `ActionBuildShelter`, `ActionActionBuildPartNoTool`, `ConstructionActionData.OnUpdateActionsNoTool` | obsolete / unregistered (`actionbuildshelter.c:1`; `actionbuildpart.c:543`; `constructionactiondata.c:205`) | `ActionBuildPartHandsGeneric` + `TOOL_HANDS` parts |
-| `override ShelterSite.CanUseHandConstruction()` | vanilla override removed; value comes from `TOOL_HANDS` parts (`constructionbase.c:347-350,545`) | config masks |
+| `override ShelterSite.CanUseHandConstruction()` | vanilla override removed; value comes from `TOOL_HANDS` parts (`constructionbase.c:348-351,546`) | config masks |
 | `OnPartDestroyedServer(..., destroyed_by_connected_part)` branch | flag always false (§3.1) | check `GetConstruction()` state / dependencies yourself |
 | logic after `super` in `BaseBuildingBase.EEHealthLevelChanged` meant to run before vanilla destroys the part | vanilla destroys inside `super` (`entityai.c:1061-1062`) | `modded class Construction` → `OnHealthLevelChanged` / `DestroyPartServer` |
 | `show_on_init`, `platform_support` config keys | not read | — |
 | "last dial unlocks the lock" automation; `UnlockServer` | dial only dials; `UnlockServer` removed | `ActionCombinationLockUnlock` / `UnlockOnServer` |
 
 Terrain holes, underground triggers and the underground placement block are in `dayz-underground`.
+
+## 11. 1.30.164200 delta — support API, utility parts, house collisions
+
+Written 2026-10-21 from `P:\scripts` / `P:\DZ` of 1.30.164200 (Scripts Rev 127662) and the 164078 → 164200 script
+diff. Static reading; nothing here was exercised in-game. Short version for authors: `SKILL.md` →
+"1.30.164200 changes". The scanner side: `dayz-130-migration` → `references/api-delta-1.30.164078-to-164200.md`.
+
+### 11.1 Support getters: `bool` + `out int`, `-1` = not configured
+
+```c
+// [EXACT] 4_world/classes/rebuilding/constructionstatics.c:63-96
+			//now insert as 'StaticsSupportCategoryValues'
+			foreach (int category : m_ConfiguredCategories)
+			{
+				//default invalid values
+				int provided = -1;
+				if (providerMap.Contains(category))
+					provided = providerMap.Get(category);
+				
+				int required = -1;
+				if (requirementMap.Contains(category))
+					required = requirementMap.Get(category);
+				
+				m_ValueMap.Insert(category, new StaticsSupportCategoryValues(category, provided, required));
+			}
+		}
+	}
+	
+	bool GetSupportProvided(int category, out int providedStrength)
+	{
+		if (!m_ValueMap || !m_ValueMap.Contains(category))
+			return false;
+		
+		providedStrength = m_ValueMap.Get(category).m_ProvidedSupport;
+		return providedStrength > -1;
+	}
+	
+	bool GetSupportRequirement(int category, out int requiredStrength)
+	{
+		if (!m_ValueMap || !m_ValueMap.Contains(category))
+			return false;
+		
+		requiredStrength = m_ValueMap.Get(category).m_RequiredSupport;
+		return requiredStrength > -1;
+	}
+```
+
+The same signatures forward through `ConstructionPartTypeData.GetPartTypeSupportProvided/Requirement`
+(`typeconstructiondata/constructionparttyped.c:633-641`) and `ConstructionPart.GetSupportProvided/Requirement`
+(`basebuilding/constructionpart.c:371-379`). Before 164200 all six returned `int`, and a side missing from the
+config read as `0`. A category is listed by `GetConfiguredSupportCategories()` when **either** side declares it,
+so always test the `bool`.
+
+[DESIGN] Override and call pattern on 164200 (a 164078 `override int GetSupportProvided(int category)` no longer
+compiles):
+
+```c
+modded class ConstructionPartRebuild
+{
+	override bool GetSupportProvided(int category, out int providedStrength)
+	{
+		if (!super.GetSupportProvided(category, providedStrength))
+			return false;	// not configured on this part: keep it "not configured", do not invent a 0
+
+		// adjust providedStrength here
+		return true;
+	}
+}
+
+// caller
+int required;
+if (part.GetSupportRequirement(category, required))
+{
+	// configured; 'required' may legitimately be 0 (always met)
+}
+```
+
+### 11.2 `Rebuilding.PartHasAnySupportFulfilled` and inverted parts
+
+```c
+// [EXACT] 4_world/classes/rebuilding/rebuilding.c:624-652
+	override protected bool PartHasAnySupportFulfilled(string part_name)
+	{
+		if (!super.PartHasAnySupportFulfilled(part_name))
+			return false;
+		
+		ConstructionPartRebuild rebPart = GetRebuildingPart(part_name);
+		set<int> tmp = rebPart.GetConfiguredSupportCategories();
+		if (tmp.Count() > 0) //can fail only if some REQUIREMENT support category is defined
+		{
+			bool validRequirementDefined;
+			foreach (int category : tmp)
+			{
+				int requirement;
+				if (rebPart.GetSupportRequirement(category, requirement))
+				{
+					validRequirementDefined = true;
+					if (requirement <= m_SupportFulfillment.Get(category))
+						return !rebPart.InvertSupportBehavior();
+				}
+			}
+			
+			if (validRequirementDefined)
+				return rebPart.InvertSupportBehavior();
+			
+			return true;
+		}
+		
+		return true;
+	}
+```
+
+| Part declares | Normal part | Inverted part (`InvertSupportBehavior()` true) |
+|---|---|---|
+| no `StaticsSupportData`, or only `SupportProviders` | `true` | `true` |
+| `SupportRequirements`, at least one category met | `true` | `false` |
+| `SupportRequirements`, none met | `false` | `true` |
+
+`m_SupportFulfillment` is the per-category sum of `supportStrength` provided by the **built** parts, kept by
+`Add/RemoveSupportFulfillmentFromSourcePart` (`rebuilding.c:668-696`); `m_SupportRequirement` sums the
+requirements of built non-utility parts (`:698-734`) and feeds `SupportRemovalCheck` (`:654-666`). Since 164200
+both maps change only for categories the part actually configures.
+
+```c
+// [EXACT] 4_world/classes/basebuilding/typeconstructiondata/constructionpartrebuildinvertedsupport.c:1-13
+//type
+class ConstructionPartRebuildInvertedSupportTypeData : ConstructionPartRebuildTypeData
+{
+}
+
+//instance
+class ConstructionPartRebuildInvertedSupport : ConstructionPartRebuild
+{
+	override bool InvertSupportBehavior()
+	{
+		return true;
+	}
+}
+```
+
+Selected by `custom_part_type="ConstructionPartRebuildInvertedSupport";` (`constructionparttypedholder.c:34-45`
+spawns `"<value>TypeData"`). Vanilla pair in `Land_House_3S1_Dam3`: `util_dyn_roadway_floor2_ext`
+(`P:\DZ\structures_takistan\Residential\config.cpp:103121-103152`, inverted, `required_parts[]={"roof1"}`) and
+`util_dyn_roadway_floor2_int` (`:103153-103183`, normal) share the requirements
+`support_utility_floor_switcher2_category1` (3) / `…category2` (5), so once `roof1` is built exactly one of the
+two roadway proxies is active, depending on whether the floor is supported.
+
+### 11.3 Utility parts: post-update queue instead of an explicit list
+
+```c
+// [EXACT] 4_world/classes/basebuilding/constructionpart.c:884-891
+	//! Queues utility part update, if needed
+	override void TryQueueUtilityPartsUpdate(ConstructionBase con)
+	{
+		super.TryQueueUtilityPartsUpdate(con);
+		
+		if (m_PartTypeData.TriggersUtilityPartsUpdate())
+			con.QueueUpdateUtilityParts();
+	}
+```
+
+```c
+// [EXACT] 4_world/classes/constructionbase.c:613-666
+	//! Simplified condition for utility (non-)parts
+	bool CanBuildUtilityPart(string partName)
+	{
+		if (!HasRequiredPart(partName))
+			return false;
+		if (!PartHasAnySupportFulfilled(partName))
+			return false;
+		if (HasConflictPart(partName))
+			return false;
+		
+		return true;
+	}
+	
+	void QueueUpdateUtilityParts()
+	{
+		if (!m_UpdateUtilityParts)
+		{
+			m_UpdateUtilityParts = true;
+			g_Game.GetPostUpdateQueue(CALL_CATEGORY_SYSTEM).Insert(this.UpdateUtilityParts);
+		}
+	}
+	
+	//! returns 'true' if changed
+	bool UpdateUtilityParts()
+	{
+		m_UpdateUtilityParts = false;
+		bool changed = false;
+		
+		foreach (ConstructionPart part : m_ConstructionPartArray)
+		{
+			if (part.IsUtilityPart())
+			{
+				bool built = part.IsBuilt();
+				string partName = part.GetPartName();
+				if (CanBuildUtilityPart(partName))
+				{
+					if (!built)
+					{
+						AddToConstructedParts(partName);
+						ConstructionManagerStatic.AddPartToProcess(this, part);
+					}
+				}
+				else if (built)
+				{
+					RemoveFromConstructedParts(partName);
+					ConstructionManagerStatic.AddPartToProcess(this, part);
+				}
+			}
+		}
+		
+		g_Game.GetPostUpdateQueue(CALL_CATEGORY_SYSTEM).Remove(this.UpdateUtilityParts);
+		
+		return changed;
+	}
+```
+
+- The trigger is per part: `toggle_utility_part_update` (int) read by `InitUtilityBuildData`
+  (`constructionparttyped.c:266-274`); the plain `ConstructionPart.TryQueueUtilityPartsUpdate` is an empty
+  declaration (`constructionpart.c:491`), so a player `Construction` part never queues.
+- It is called from `AddToConstructedParts` / `RemoveFromConstructedParts` (`constructionbase.c:148,166`), which
+  `Rebuilding` reaches on the server when a part is built and on clients from `SetPartStateLocal` when synced parts
+  arrive (`rebuilding.c:392-418`). Utility parts (`id=-1`) are skipped by the sync (`UpdatePartSyncStateLocal`,
+  `:379-390`), so each machine derives them itself. The post-update queue runs once per frame
+  (`DayZGame.OnPostUpdate`, `3_game/dayzgame.c:3097`).
+- `UpdateUtilityParts` always returns `false` (`changed` is never assigned). Do not branch on it.
+- Before 164200: `ConstructionPartRebuild.TryHandleUtilityParts(EntityAI)` immediately (un)built the utility parts
+  named in the trigger part's `utility_build[]`, and `CanBuildUtilityPart` returned `false` for a part already
+  built.
+
+Vanilla minimal example, `Land_IrrigationTunnel_Entrance_01` (`P:\DZ\structures_takistan\Industrial\config.cpp:383-529`):
+`ladder_rebuild` and `ladder_rebuild_inside` conflict with each other, each provides support `"ladder"` 1 and sets
+`toggle_utility_part_update=1;` (`:411`, `:461`); `utility_nonparts > ladder_utility` (`is_utility=1; id=-1;`,
+`:494-528`) requires `"ladder"` 1 and, through inverted `override_animsource_*`, `physics_geom_*` and
+`proxyroadway_*` arrays, hides the destroyed ladder and removes the blocking roadway `proxyroadway_block_01`
+while a ladder stands. The `utility_build[]` arrays still at `:402-405` and `:462-465` are not read.
+
+[DESIGN] Do not put `toggle_utility_part_update=1;` on an `is_utility` part. `UpdateUtilityParts` resets the flag,
+builds that part, the part re-queues (`Insert` appends the same method), and the closing `Remove` drops every copy
+(`ScriptInvoker.Remove(func fn, int flags = EScriptInvokerRemoveFlags.ALL)`, `2_gamelib/tools.c:122`) while
+`m_UpdateUtilityParts` is left `true` — after that `QueueUpdateUtilityParts` is a no-op for the entity. Static
+reading, not measured; no vanilla `structures_takistan` part sets both keys (checked by script over all three
+configs).
+
+### 11.4 House collisions and the dismantle error
+
+```c
+// [EXACT] 4_world/classes/constructionbase.c:1518-1524
+	//! Whether House entities are skipped in the part collision check.
+	//! Rebuildable buildings are static, so a part may legitimately overlap
+	//! a House placed touching the rebuilt one (map authoring decision).
+	bool IgnoreHouseCollisions()
+	{
+		return false;
+	}
+```
+
+`IsCollidingEx` skips a collided `House` when it returns true (`constructionbase.c:1568-1569`); `Rebuilding`
+returns true (`rebuilding.c:805-810`). A modded building that must still block on neighbouring houses overrides
+`IgnoreHouseCollisions()` in its own `Rebuilding` subclass (installed through `CreateConstructionComponent()`).
+
+`DropNonUsableMaterialsServer` (`constructionbase.c:1262-1314`) now `continue`s when the material slot of the base
+part is empty (`:1288-1290`). 1.30.164078 raised `ErrorEx("Attachment is not present for material type '%1' on
+part %2")` there; a Namalsk fence dismantle was reported to end in a VM exception at that line on 164078
+[reported: SumrakDZN/DayZNamalsk#4]. The `ErrorEx` for an invalid cached slot id stays (`:1282-1286`).
+
+### 11.5 Porting table (mod written on 1.30.164078)
+
+| 164078 code | On 164200 | Use instead |
+|---|---|---|
+| `override int GetSupportProvided(int)` / `GetSupportRequirement(int)` (ConstructionPart*), `GetPartTypeSupportProvided/Requirement(int)` (TypeData), `ConstructionPartStaticsSupportData.GetSupport*(int)` | compile error | `override bool …(int category, out int strength)` (§11.1) |
+| `int v = part.GetSupportProvided(cat);` | compile error | `int v; if (part.GetSupportProvided(cat, v)) …` |
+| `override void TryHandleUtilityParts(EntityAI parent)` / calls | compile error (removed) | `TryQueueUtilityPartsUpdate(ConstructionBase con)`; force with `con.QueueUpdateUtilityParts()` |
+| `GetPartTypeUtilityAutobuildPartsList()`, `m_UtilityAutomaticBuild` | compile error (removed) | iterate `GetConstructionParts()` (`constructionbase.c:574`) and test `IsUtilityPart()` |
+| own members `InvertSupportBehavior`, `IgnoreHouseCollisions`, `QueueUpdateUtilityParts`, `UpdateUtilityParts`, `m_UpdateUtilityParts` | name meets a new vanilla member | rename, or `override` if it is meant to be the vanilla one |
+| config `utility_build[]={"x_utility"};` | not read, the utility part never switches | `toggle_utility_part_update=1;` on the trigger part; describe the utility part's state through its own `required_parts[]` / `conflicted_parts[]` / `SupportRequirements` |
+| logic expecting `CanBuildUtilityPart` false for a built part | now true while the conditions hold | compare with `IsBuilt()` yourself |
+| reading a utility part's state right after `BuildPartServerEx` | still the old state until the same frame's post-update | react in `UpdateUtilityParts` (override + `super`) or later |

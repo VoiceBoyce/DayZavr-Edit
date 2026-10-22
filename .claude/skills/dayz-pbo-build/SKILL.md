@@ -14,12 +14,14 @@ description: >
 
 Complete pre-build validation pipeline for DayZ mod addons. Catches configuration errors, missing assets, and structural problems BEFORE packing into PBOs—avoiding in-game crashes and deployment failures.
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 Folder structure, `$PBOPREFIX$`, stringtable.csv and the AddonBuilder include-list behave on 1.30 as they did on
 1.29. What 1.30 adds to the pre-build gate: a member written twice in one class body stops the binarizer
 [CHANGELOG 1.30], and CfgMods script-module paths must use forward slashes [reported: bzed]. Unpacked `-mod`
-folders are a diag iteration path, not a shipping substitute. Details: § DayZ 1.30 changes at the end and
+folders are a diag iteration path, not a shipping substitute. 1.30.164200 adds the PBO named property
+`fsShadowing=1` (load a PBO whose prefix matches another; [reported: BI 1.30.164200 notes], not yet measured;
+FileBank and Mikero MakePbo can write it, AddonBuilder cannot). Details: § DayZ 1.30 changes at the end and
 [dayz-1-30-pbo-build.md](references/dayz-1-30-pbo-build.md).
 
 ## Overview
@@ -432,7 +434,8 @@ mymod\myaddon
 - Use backslashes `\` (not forward slashes)
 - No trailing backslash
 - No quotes or extra whitespace
-- Must be unique across all addons (namespace collision = invisible mod)
+- Must be unique across all addons (namespace collision = invisible mod). Since 1.30.164200 the
+  PBO named property `fsShadowing=1` is the announced exception — see § Named PBO properties below.
 
 **Example folder structure:**
 ```
@@ -451,6 +454,48 @@ DayZ_Addons\
 With `$PBOPREFIX$` containing: `mymod\myaddon`
 
 When packed, this becomes `mymod\myaddon.pbo` in the mod directory.
+
+### Named PBO properties and `fsShadowing` (1.30.164200)
+
+The prefix is one of the PBO's **named properties**: `key=value` pairs in the PBO header (first entry
+`\0sreV`, then `key\0value\0` pairs ending with an empty key). All 158 vanilla 1.30.164200 `.pbo` carry
+exactly `product`, `prefix` and `version` (e.g. `dta\scripts.pbo`: `product=dayz`, `prefix=scripts`,
+`version=127662`; header scan 2026-10-21).
+
+**`fsShadowing=1`** [reported: BI 1.30.164200 notes, not yet measured]. Official wording (Modding,
+"Added"): *"Named property to PBO 'fsShadowing=1' which will allow loading of the PBO even if it's prefix
+matches another, to allow overriding of Enfusion config files such as .layout' through 'Variants'"*.
+What is established here: the string `fsShadowing` sits next to `prefix` and `Version: %s (Shadowed)` in
+the PBO-loader strings of `DayZ_x64.exe`, `DayZDiag_x64.exe` and `DayZServer_x64.exe` 1.30.164.200 (byte
+grep 2026-10-21), so the engine reads it as a header property like `prefix`, and the bank log probably
+tags such a PBO "(Shadowed)". No vanilla PBO sets it. Not established: load order between the shadowing
+and the shadowed PBO, whether it works for anything but Enfusion config files (`.layout` …) and what
+'Variants' means. Do not use it to replace a vanilla RV `config.cpp` or script PBO until it is measured.
+
+Which packers can write it (checked on this machine 2026-10-21; "measured" = a test PBO was packed and its
+header read back with the reader below; the game was not started with it):
+
+| Packer | Can write `fsShadowing=1`? |
+|---|---|
+| `DayZ Tools\Bin\PboUtils\FileBank.exe` | Yes, measured: `FileBank -property prefix=<prefix> -property fsShadowing=1 -dst <outdir> <srcdir>` → header `prefix`, `fsShadowing=1` (usage text: `-property name=value   Store a named property`) |
+| Mikero `MakePbo.exe` 2.16 (`H:\Полезное\1_КОДИНГ\MikeroTools\DePboTools\bin`) | Yes, measured: extra `var=value` lines in `$PBOPREFIX$` become header properties (MakePbo.Fixes.txt 1.85). `$PBOPREFIX$` = `prefix=<prefix>` + `fsShadowing=1` → header `prefix`, `Mikero`, `fsShadowing=1`, `version`. pboProject not tested |
+| AddonBuilder 1.0.240.639 | No option for it: usage lists only `-prefix=` and `-pboversion` (`-property version=<version>`); it calls FileBank with a fixed argument template `-exclude "{0}" -property "product=dayz ugc" -property prefix={1} -dst "{3}" "{2}"` (strings in `AddonBuilder.exe`). Binarize with AddonBuilder, then pack the output with FileBank or MakePbo |
+| dayz-mcp `mod_build` | No: `packer.py` `filebank_cmd` passes only `-property prefix=<name>` |
+
+Read a built PBO's properties back (tested on vanilla PBOs; run with `python -I`):
+
+```python
+def pbo_properties(path):
+    head = open(path, 'rb').read(65536)
+    if not head.startswith(b'\0sreV'):
+        return {}
+    i, props = 21, {}
+    while True:
+        j = head.index(b'\0', i); key = head[i:j].decode('utf-8', 'replace')
+        if not key:
+            return props
+        k = head.index(b'\0', j + 1); props[key] = head[j + 1:k].decode('utf-8', 'replace'); i = k + 1
+```
 
 ---
 
@@ -1205,13 +1250,15 @@ compilation: there gate measures what it shouldn't, here it measures something a
 
 ## DayZ 1.30 changes
 
-Tools on this machine (2026-10-15): `DayZ Tools\Bin\Binarize\binarize.exe` 1.30.164.078,
-`Bin\Workbench\WorkbenchApp.exe` 1.30.164.078, `Bin\AddonBuilder\AddonBuilder.exe` 1.0.240.639 (the same
-AddonBuilder version the 1.29 measurements in this skill used), `Bin\CfgConvert\CfgConvert.exe` 1.2.0.1.
+Tools on this machine (2026-10-21): `DayZ Tools\Bin\Binarize\binarize.exe` 1.30.164.200,
+`Bin\Workbench\WorkbenchApp.exe` 1.30.164.200, `Bin\NavMeshGenerator\NavMeshGenerator_x64.exe` 1.30.164.165
+(all three updated 2026-10-21; binarize and Workbench were 1.30.164.078 before),
+`Bin\AddonBuilder\AddonBuilder.exe` 1.0.240.639 and `Bin\PboUtils\FileBank.exe` unchanged since 2026-10-05
+(the same AddonBuilder version the 1.29 measurements in this skill used), `Bin\CfgConvert\CfgConvert.exe` 1.2.0.1.
 
 | Gate | 1.30 rule | Label |
 |---|---|---|
-| Duplicate member in one class body | binarize stops; remove the repeat (check 2) | [CHANGELOG 1.30]; message string `Member already defined` present in binarize.exe 1.30.164.078 |
+| Duplicate member in one class body | binarize stops; remove the repeat (check 2) | [CHANGELOG 1.30]; message string `Member already defined` present in binarize.exe 1.30.164.078 and 1.30.164.200 |
 | CfgMods `files[]` paths | forward slashes only (check 2, SP-347 item 1b) | [reported: bzed] Linux 1.30.164014; vanilla 1.30 uses `/` (`P:\DZ\data_sakhal\config.cpp:26`) |
 | Unpacked `-mod` folder | diag iteration only; Workshop / dedicated release still needs a PBO | [CHANGELOG 1.30] |
 | Folder structure, `$PBOPREFIX$`, stringtable.csv, include-list, ODOL non-determinism | unchanged | measured on 1.29; AddonBuilder unchanged |
@@ -1220,3 +1267,27 @@ Porting a ≤1.29 mod: run `config_cpp_validator.py` on every `config.cpp` (the 
 are in it), then the script side with `dayz-130-migration`. A mod whose scripts fail to compile on 1.30
 can take the server down right after `Can't compile "World" script module!` (see `dayz-test-ingame`), so
 the offline gates are worth more on a port than on new work.
+
+### DayZ 1.30.164200 changes
+
+Patch 1.30.164200 (2026-10-21). For packaging:
+
+- **New PBO named property `fsShadowing=1`** [reported: BI 1.30.164200 notes, not yet measured]: "allow
+  loading of the PBO even if it's prefix matches another, to allow overriding of Enfusion config files such
+  as .layout' through 'Variants'". The string is in the 1.30.164.200 exes next to `prefix`; FileBank
+  (`-property fsShadowing=1`) and Mikero MakePbo (extra `$PBOPREFIX$` line) write it (header checked on test
+  PBOs), AddonBuilder and dayz-mcp `mod_build` cannot. Details and a header reader: § Named PBO properties
+  and `fsShadowing`. Until the engine side is measured, keep the rule "a prefix must be unique".
+- **`#include` in scripts fixed** [reported: BI 1.30.164200 notes, DZEXP-85]: check 7's `#include` path
+  test still applies; a script `#include` that silently failed on 164078 may now pull its file in, so
+  re-lint and re-compile mods that used it.
+- **Launch flag renamed** `-resolveFilePatchingUsingEnfusion` → `-loadRVFilesViaEnfusionFS` (old name
+  before 1.30.164200): only matters for unpacked-mod iteration (`dayz-test-ingame`).
+- **Navmesh v9.** Vanilla `navmesh.nm` moved to format v9 (164078: v7); a custom map's navmesh must be
+  regenerated with the 164200 tools (`dayz-ai-patterns` §Navmesh). Still not a linter check here.
+- Vanilla 164200 models are still ODOL v56 (3 377 vanilla `.p3d` were re-binarized, all v56;
+  `dayz-130-migration` config-delta §1). What binarize 1.30.164.200 writes for your own model: read the
+  header of your output. The 1.30 rules in the table above are unchanged.
+- Data that pack checks may meet in vanilla diffs: every vanilla PBO header `version` moved (`127638` for
+  most data PBOs, `127662` for `dta\scripts`); compare content, not the header, when diffing a mod's copy
+  of a vanilla file.

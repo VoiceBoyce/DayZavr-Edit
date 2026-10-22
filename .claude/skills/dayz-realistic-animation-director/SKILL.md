@@ -7,7 +7,7 @@ description: Dirige de principio a fin la creación, corrección, pulido, export
 
 Produce a credible animation and close its integration with honest evidence. This skill directs the work; Blender and DayZ skills retain technical authority.
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 ## Authority boundary
 
@@ -169,7 +169,7 @@ Re-verified on 1.30.164078 (`P:\`); first written against 1.30 Exp 164014. `P:\s
 ### What changes in 1.30 for realistic animation direction
 
 1. **Motorbike riders [EXACT]:**
-   - Rider animation instances `MOTO1 = 10` (`Motorbike_01`, "Jana 50") and `MOTO2 = 11` (`Motorbike_02`, "Bitrak 682"), both two-wheelers (`P:\scripts\4_world\entities\vehicles\vehicleaniminstances.c:13-14`; mapping in `inheritedmotorbikes\motorbike_01.c:48-50`, `motorbike_02.c:49-51`; names from `STR_Motorbike1/2` in `P:\languagecore\stringtable.csv`; front and rear wheels in `P:\DZ\vehicles\singletrack\config.cpp`). The graph columns are named `Jawa_05` / `Jawa_Bitrak` (`player_main.ast:1119-1120`). (corrected on 1.30.164078: this item used to call them "Jawa 50cc" and a "Jawa Bitrak tricycle".)
+   - Rider animation instances `MOTO1 = 10` (`Motorbike_01`, "Jana 50") and `MOTO2 = 11` (`Motorbike_02`, "Bitrak 682"), both two-wheelers (`P:\scripts\4_world\entities\vehicles\vehicleaniminstances.c:13-14`; mapping in `inheritedmotorbikes\motorbike_01.c:45-47`, `motorbike_02.c:46-48`; names from `STR_Motorbike1/2` in `P:\languagecore\stringtable.csv`; front and rear wheels in `P:\DZ\vehicles\singletrack\config.cpp`). The graph columns are named `Jawa_05` / `Jawa_Bitrak` (`player_main.ast:1119-1120`). (corrected on 1.30.164078: this item used to call them "Jawa 50cc" and a "Jawa Bitrak tricycle".)
    - Third-person motorbike camera: `DAYZCAMERA_3RD_VEHICLE_MOTORBIKE = 32` (`P:\scripts\4_world\entities\manbase\dayzplayer\dayzplayercameras.c:20`).
    - Hands on the bars by two-bone IK (`AnimSrcNodeIK2` / `AnimSrcNodeIK2Target`, `P:\DZ\anims\workspaces\player\player_main\vehicles.agf:17-46`); the steering pose is read from `VehicleSteering` over ±45° of wheel angle (`vehicles.agf:50`). The graph also declares `VehicleThrottle`, `VehicleLean` and `VehicleSuspension` (`player_main.agr:118`, `:197`, `:205`).
    - `HumanCommandVehicle.IsTransitioning()` (`P:\scripts\3_game\human.c:735-738`) = getting in, getting out or switching seat.
@@ -206,6 +206,16 @@ Re-verified on 1.30.164078 (`P:\`); first written against 1.30 Exp 164014. `P:\s
 - [ ] **Creature terrain:** Check that animal paw contacts include procedural angular offset of `AnimSrcNodeProcTransform` against slopes (`SlopeAngleX`).
 - [ ] **Templates and Instances:** Audit that delivery `.ast` files declare `Name` on all groups and `.asi` files use `AnimSetInstanceSource` class.
 - [ ] **Live validation:** [CHANGELOG 1.30] Workbench Enfusion 2021 live editing may help verify continuous blend parameters on an active client before final packaging; not tried on this host.
+
+### DayZ 1.30.164200 changes
+
+Patch 1.30.164200 (2026-10-21). No player/weapon animation file, graph or animation script API of the base game changed (detail: `dayz-animation-pipeline` §5. DayZ 1.30.164200 changes). What touches direction and evidence:
+
+- **Camera framing in captures.** `DayZPlayerCameraBase.UpdateUDAngleUnlocked` / `UpdateLRAngleUnlocked` now take their limits from `GetLookLimits` and no longer smooth toward an action's locked pitch (`P:\scripts\4_world\entities\manbase\dayzplayer\dayzplayercamera_base.c:152`, `:198`); the motorbike 3rd-person camera clamps its angles to `CONST_UD_MIN/MAX` (`dayzplayercameravehicles.c:407-408`). Review clips captured on 1.30.164078 may frame differently on 164200; re-capture before judging a pose against an old video.
+- **Workbench** [reported: BI 1.30.164200 notes, not tried here]: Animation Editor context menus (Rename/Copy/Cut/Paste), Locate-resource buttons, no crash after script reload with the Animation or Particle Editor open; Workbench needs `-filePatching`.
+- **Launch flag** `-resolveFilePatchingUsingEnfusion` is now `-loadRVFilesViaEnfusionFS` (references updated).
+- **`fsShadowing=1`** PBO property [reported, not yet measured]: may allow shadowing Enfusion config files (graphs, `.asi`, `.ast` are such files); it does not remove the one-graph-mod wall (`dayz-animation-pipeline` → `references/tooling-and-walls.md`).
+- **Creatures**: Badlands dog `.asi` (2) and hit `.anm` (4) were replaced and the German Shepherd got a pain sound event (`dayz-130-migration` config-delta §2.5).
 
 ## Resource index
 

@@ -7,7 +7,7 @@ description: "Use when: P:\\ not mounted, DayZ Tools missing, workshop folder, v
 
 Verify the DayZ modding environment before doing any DayZ work. Halts with a clear error if `P:\` is not mounted (per `_shared/dayz-conventions.md`); warns on optional checks so the user can decide whether to proceed.
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 **Read-only.** Preflight inspects state and reports. It never mounts drives, creates junctions, or otherwise mutates the filesystem — fixes belong to dedicated setup skills.
 
@@ -24,8 +24,9 @@ Follow `_shared/dayz-conventions.md`.
 | 3 | Vanilla DayZ data unpacked under `P:\` | warn |
 | 4 | `P:\Mods\` is a directory junction to `<DayZ install>\!Workshop\` (not a regular folder, not missing, not dangling) | warn — build-pbo hard-fails on the same condition |
 | 5 | `DayZDiag_x64.exe` locatable (required for `-filePatching` iteration; retail exes block past loading) | warn |
-| 6 | **Version probe, vanilla scripts:** `P:\scripts\3_game\vehicles\motorbike.c` exists (new in 1.30) **and** `P:\scripts\3_game\global\game.c` declares `GAME_STORAGE_VERSION = 144` (`game.c:5` on 1.30.164078; it is `142` on 1.29). 142 / no `motorbike.c` → `P:\ holds pre-1.30 vanilla data; skills target 1.30 - re-extract`. >144 → newer than the skills' target. | warn |
-| 7 | **Version probe, executables:** FileVersion of `DayZ_x64.exe`, `DayZDiag_x64.exe` and `DayZServer_x64.exe` (each one that is locatable) is `1.30.x`. Read with `ctypes` + `version.dll` (no pywin32, no subprocess). Not 1.30 → WARN with the path; 1.30 but not build 164078 → OK with a "skills verified on 1.30.164078" note. | warn |
+| 6 | **Version probe, vanilla scripts:** `P:\scripts\3_game\vehicles\motorbike.c` exists (new in 1.30) **and** `P:\scripts\3_game\global\game.c` declares `GAME_STORAGE_VERSION = 144` (`game.c:5` on 1.30.164200; it is `142` on 1.29). 142 / no `motorbike.c` → `P:\ holds pre-1.30 vanilla data; skills target 1.30 - re-extract`. >144 → newer than the skills' target. | warn |
+| 7 | **Version probe, scripts revision:** `P:\scripts.txt` `version=` equals the target Scripts Rev `127662` (1.30.164200). Another value → WARN `P:\ extracted from another build` (`127250` = 1.30.164078): the skills' vanilla line refs are numbered for the target build. Missing file / no `version=` line → WARN. | warn |
+| 8 | **Version probe, executables:** FileVersion of `DayZ_x64.exe`, `DayZDiag_x64.exe` and `DayZServer_x64.exe` (each one that is locatable) is `1.30.x`. Read with `ctypes` + `version.dll` (no pywin32, no subprocess). Not 1.30 → WARN with the path; 1.30 but not build 164200 → OK with a "skills verified on 1.30.164200" note. | warn |
 
 Exit code 0 = ready (or warnings only). Non-zero = hard environment issue, named in stderr. The version probe never changes the exit code.
 
@@ -76,14 +77,23 @@ DayZ preflight
 [OK]    Vanilla data found: P:\dz
 [OK]    P:\Mods -> C:\Program Files (x86)\Steam\steamapps\common\DayZ\!Workshop
 [OK]    P:\scripts is DayZ 1.30 vanilla (GAME_STORAGE_VERSION = 144, motorbike.c present)
-[OK]    DayZ_x64.exe 1.30.164.078 (product 1.30.164078.38)
-[OK]    DayZDiag_x64.exe 1.30.164.078 (product 1.30.164078.38)
-[OK]    DayZServer_x64.exe 1.30.164.078 (product 1.30.164078.38)
+[OK]    P:\scripts.txt version=127662 (Scripts Rev of 1.30.164200)
+[OK]    DayZ_x64.exe 1.30.164.200 (product 1.30.164200.56)
+[OK]    DayZDiag_x64.exe 1.30.164.200 (product 1.30.164200.56)
+[OK]    DayZServer_x64.exe 1.30.164.200 (product 1.30.164200.56)
 
 Preflight complete.
 ```
 
-`FileVersion` of the 1.30 stable exes is `1.30.164.078`; the `ProductVersion` string carries the build as `1.30.164078.38` (measured on this machine, 2026-10-15). The skills' "build 164078" is that number.
+`FileVersion` of the 1.30 stable exes is `1.30.164.200`; the `ProductVersion` string carries the build as `1.30.164200.56` and `P:\scripts.txt` reads `version=127662` (measured on this machine, 2026-10-21). The skills' "build 164200" is that number. The previous stable read `1.30.164.078` / `1.30.164078.38` / Scripts Rev 127250 (measured 2026-10-15); patch history: `../_shared/dayz-version-policy.md`.
+
+A `P:\` extracted from another build (exes already updated, `P:\` not re-extracted) prints:
+
+```
+[WARN]  P:\scripts.txt version=127250, expected 127662 (1.30.164200): P:\ extracted from another build (1.30.164078)
+        Vanilla line refs in the skills are numbered for the target build; re-extract scripts.pbo
+        from the installed game, or grep P:\scripts before trusting a line number.
+```
 
 A `P:\` that still holds 1.29 data prints instead (exit code stays 0):
 
@@ -143,8 +153,9 @@ Not verified yet: that Buldozer opens a *custom* `.p3d` with its rvmats. Do not 
 
 ## DayZ 1.30 changes
 
-Checks 1–5 are version-independent and unchanged on 1.30. Checks 6–7 (the version probe) are new for 1.30
-stable: they confirm that `P:\scripts` and the installed exes are the 1.30 the skills describe.
+Checks 1–5 are version-independent and unchanged on 1.30. Checks 6–8 (the version probe) are new for 1.30
+stable: they confirm that `P:\scripts` and the installed exes are the 1.30 the skills describe (check 7, the
+`scripts.txt` revision, was added with 1.30.164200, when a patch shifted vanilla line numbers inside 1.30).
 
 What 1.30 changes around this skill (Tools/launch awareness; preflight itself still does not launch):
 

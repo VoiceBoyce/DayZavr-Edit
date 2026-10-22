@@ -1,6 +1,6 @@
 # Sandstorm: architecture and shelter
 
-Source: DayZ 1.30 stable `1.30.164078`, citations re-opened on `P:\scripts` (paths below relative to it unless they start with `P:\`). The native controller lives in the exe and is not inspected. Sandstorm does not exist on 1.29.
+Source: DayZ 1.30 stable `1.30.164200`, citations re-opened on `P:\scripts` (paths below relative to it unless they start with `P:\`). The native controller lives in the exe and is not inspected. Sandstorm does not exist on 1.29.
 
 ## How to obtain and trigger the phenomenon
 

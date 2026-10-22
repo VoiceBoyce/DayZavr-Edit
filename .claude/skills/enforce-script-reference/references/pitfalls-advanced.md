@@ -456,7 +456,7 @@ against vanilla DayZ source where applicable. Each entry notes verification stat
   ```
 
   Vanilla itself uses both patterns (`hologram.c:1128` uses `SurfaceIsSea/Pond`,
-  `transport.c:537` and `playerbase.c:7138` use `GetWaterDepth`). When you control
+  `transport.c:540` and `playerbase.c:7138` use `GetWaterDepth`). When you control
   the call site, prefer `GetWaterDepth`.
 
 - **Surface Y position fast pattern**:
@@ -603,7 +603,7 @@ Anti-confabulation. Vanilla has APIs guarded by `#ifdef DEVELOPER` (e.g. `DayZPl
 
 ### PluginDeveloper is dead in release — use the retail substitutes (SP-287)
 
-`PluginDeveloper` registers ONLY under `#ifdef DIAG_DEVELOPER` (`4_World/plugins/pluginmanager.c:65,:247-252`): in `DayZServer_x64` release, `GetPlugin(PluginDeveloper)` returns null and any teleport/give built on it (`TeleportAtCursor`, `SpawnEntityInInventory`…) is DEAD even though it compiles and works in DayZDiag. The retail substitutes (the pattern VPP/COT use, which run on retail):
+`PluginDeveloper` registers ONLY under `#ifdef DIAG_DEVELOPER` (`4_World/plugins/pluginmanager.c:66,:248-253`): in `DayZServer_x64` release, `GetPlugin(PluginDeveloper)` returns null and any teleport/give built on it (`TeleportAtCursor`, `SpawnEntityInInventory`…) is DEAD even though it compiles and works in DayZDiag. The retail substitutes (the pattern VPP/COT use, which run on retail):
 
 - **Teleport**: `player.SetPosition(pos)` (if y==0, resolve `GetGame().SurfaceY(x, z)` first).
 - **Seated player + vehicle**: `HumanCommandVehicle vc = player.GetCommand_Vehicle();` (`3_game\human.c:1528`) → `Transport veh = vc.GetTransport();` (`3_game\human.c:716`) → `veh.GetTransform(mat); mat[3] = pos; veh.SetTransform(mat);` — vehicle and occupant move together. **The occupant's position lags one frame**: to report the applied position, read `veh.GetPosition()`, not `player.GetPosition()`.
@@ -650,9 +650,19 @@ Re-verified on 1.30.164078 (`P:\scripts`). 1.30 traps (each line: 1.30 fact, the
 - `World.Is3rdPersonDisabled()` `[Obsolete]` (`3_game\global\world.c:291-292`). `GetNoiseReductionByWeather` was **not** deleted; both Weather methods exist and are `[Obsolete]` (`3_game\weather.c:407`, `:454`), and no live vanilla code calls them.
 - `CanDisplayAttachmentSlot(string)` `[Obsolete]` (`entityai.c:4918-4922`); vanilla UI calls only the int overload, so string overrides are never consulted.
 
+Patch 1.30.164200 traps (each line: 164200 fact, then the 164078 form a mod may have):
+
+- `vector.Cross` is gone (it existed only in 164078, `1_core\proto\enconvert.c:239-246` there); write `a * b`, the vector cross operator vanilla uses (`4_world\classes\environment\environment.c:696-697`). Before 164200: `a.Cross(b)`.
+- `Transport.HasCrew()` is a new `proto native` (`3_game\vehicles\transport.c:175`) and `Transport.IsMoving()` a new script method (`:819`, base logs an `Error`); a mod `HasCrew()` on a vehicle class collides, a mod `IsMoving()` without `override` shadows. Rename yours with a mod prefix (`dayz-vehicles`).
+- Workbench API (`Workbench`, `WBModuleDef`, `ScriptEditor`, `WorkbenchPluginAttribute`, `ButtonAttribute`…) exists only under `#ifdef WORKBENCH` (`1_core\workbenchapi.c:6-93`, `1_core\workbenchapi\**`); `WorldEditor*` / `ResourceBrowser` are gone; `Workbench.GetModule(typename)`. Unguarded use → `Can't find variable 'Workbench'` → `Can't compile "Mission" script module!` [reported: Dabs Framework PR #50]. Before 164200: declared unguarded, `GetModule(string)`.
+- `NVTypes` got two values inserted after `NV_OPTICS_UNDERGROUND` / `NV_OPTICS_UNDERGROUND_SANDSTORM` (`4_world\entities\manbase\dayzplayer\dayzplayercamera_base.c:69`, `:73`): every later value moved +1/+2. Never store or send it as an int.
+- Server-side `CCTCursor*` returns an origin-distance test (`cctcursor.c:29-33`); the cursor hit is no longer validated on the server — re-check aim / line of sight in `ActionCondition`.
+- Asset paths in script (`CreateWidgets`, `LoadImageFile`, `FileExist`, layout `image0`): a path that STARTS with `\` or `/` fails (`Cannot open layout '\…'`, `LoadImageFile can't load '\…'`); `\\` inside the path, mixed separators and wrong case load fine (measured on 1.30.164200 retail client, packed PBO, 2026-10-21 — a community "all `\\` paths broke" report is wrong as stated). Use `"MyMod/gui/x.layout"` (`dayz-ui-development` item 13).
+- Rules that keep a mod alive across patches: `dayz-1-30-enforce-script.md` §9.1.
+
 ### Looping `CombineItems`: an emptied stack is deleted only on the next frame (added 2026-09-19)
 
-`ItemBase.CombineItems` empties the donor with `AddQuantity(-used)`, which goes through `SetQuantity`. For items with `varQuantityDestroyOnMin = 1` (e.g. `Rag`), `SetQuantity` at the minimum calls `this.Delete()` (`4_world\entities\itembase.c:3329-3345`). `EntityAI.Delete()` only sets `m_PendingDelete` (`3_game\entities\entityai.c:779-783`), and `Object.Delete()` queues `ObjectDelete` for the next frame (`3_game\entities\object.c:82-85`). Until then the emptied stack is still a cargo child with quantity 0, and `CanBeCombined` (`itembase.c:2137-2197`) has no pending-delete check: an empty stack is "not full", so it is a valid target.
+`ItemBase.CombineItems` empties the donor with `AddQuantity(-used)`, which goes through `SetQuantity`. For items with `varQuantityDestroyOnMin = 1` (e.g. `Rag`), `SetQuantity` at the minimum calls `this.Delete()` (`4_world\entities\itembase.c:3333-3349`). `EntityAI.Delete()` only sets `m_PendingDelete` (`3_game\entities\entityai.c:779-783`), and `Object.Delete()` queues `ObjectDelete` for the next frame (`3_game\entities\object.c:82-85`). Until then the emptied stack is still a cargo child with quantity 0, and `CanBeCombined` (`itembase.c:2141-2201`) has no pending-delete check: an empty stack is "not full", so it is a valid target.
 
 Any loop that performs several merges in one call (auto-stack, stack-all, loot consolidation) can therefore pick the emptied stack as a later target and move live quantity into it. Everything merged into it disappears on the next frame. Rag stacks 2/2/5: A←B (B=0, pending), A←C (A full, C=3), B←C (C=0) → 9 rags become 6.
 

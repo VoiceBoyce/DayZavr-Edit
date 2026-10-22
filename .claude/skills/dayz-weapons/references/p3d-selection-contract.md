@@ -102,19 +102,20 @@ The validator that renders + checks these — `scripts/weapon_grip_viewer.py` �
 - `[TBD-verify]` memory-point semantics for `magazine_axis`, `recoil`, `weapon back` carry over from
   `weapon-in-hands.md` — not independently confirmed here.
 
-## DayZ 1.30 changes — do not debinarize script-only classnames
+## DayZ 1.30 changes — the new firearms' models are Badlands DLC data
 
-1.30: `SCARL` / `Luger` / `LeeEnfield` / `MP18` / `P1907_Bayonet` scripts exist, but 1.30.164078 has no
-matching model folder under `P:\DZ\weapons\firearms\` / `P:\DZ\weapons\pistols\` (and no config class).
-`P:\DZ\weapons\firearms\scarh\scarh.p3d` **is** packed — use that (or AKM / CZ61 / P1 / Glock) as the
-memory-LOD reference. (Before 1.30: PARITY-FIRST could always unpack the vanilla weapon whose **script**
-you inherit.)
+Corrected 2026-10-21. 1.30 `SCARL` / `Luger` / `LeeEnfield` / `MP18` / `P1907_Bayonet` have no folder under
+`P:\DZ\weapons\firearms\` / `P:\DZ\weapons\pistols\`, but they do ship: ODOL v56 models and configs in the
+Badlands PBO `nasdara\addons\weapons_nasdara.pbo`, on `P:\DZ\weapons_takistan\` since the 1.30.164200 unpack
+(`firearms\{scarl,leeenfield,mp18}\*.p3d`, `pistols\luger\luger.p3d`, `attachments\muzzle\bayonet_p1907.p3d`,
+`attachments\magazine\magazine_{luger_8rnd,leeenfield_10rnd,mp18_drum}.p3d`). This section used to say there
+was no model; that was a gap in `P:\`, which held no DLC data before 164200. PARITY-FIRST applies to them
+like any vanilla weapon.
 
-If you author a stand-in mesh for those classnames anyway, W-SEL1 extra names from vanilla remaps
-(`bone-remap.md`): Luger `slide` / `toggle1` / `toggle2`; Lee-Enfield `bolthandle` / `boltbody` /
-`bullet1`. MP18 drum mag script expects AnimationSource `"drum"` and memory point `"drum_sound"`
-(`P:\scripts\4_world\entities\itembase\magazine\magazines.c:81-95`) — still no mag `.p3d` in
-`P:\DZ\weapons\attachments\magazine\` on 1.30.164078.
+W-SEL1 extra names from vanilla remaps (`bone-remap.md`): Luger `slide` / `toggle1` / `toggle2`;
+Lee-Enfield `bolthandle` / `boltbody` / `bullet1`. MP18 drum mag script expects AnimationSource `"drum"` and
+memory point `"drum_sound"` (`P:\scripts\4_world\entities\itembase\magazine\magazines.c:81-95`); check them
+against the debinarized `magazine_mp18_drum.p3d`.
 
-ADS `eye` vs `usti hlavne` alignment for Luger / Lee-Enfield is **not** measurable (no body `.p3d` on
-1.30.164078). `[UNVERIFIED]` leave those points until Bohemia ships the mesh.
+ADS `eye` vs `usti hlavne` alignment for Luger / Lee-Enfield: now measurable on the Badlands models; not
+measured yet `[UNVERIFIED]`.

@@ -515,11 +515,11 @@ get-in's **gate-1** (`CrewPositionIndex(componentIndex) >= 0`). It is necessary 
 `CarScript` or `Car`** — only by the concrete car classes (CivilianSedan etc.). A ripped racing-game car whose config is
 `class <MOD>: CarScript` with NO Enforce Script class runs as **bare `CarScript`** (verified in-game: telemetry
 `class_name:"CarScript"`), so `CrewCanGetThrough` falls to the base stub `Transport.CrewCanGetThrough`
-(scripts/3_game/vehicles/transport.c:724-731) which returns `false` in the normal build (`#ifndef CFGMODS_DEFINE_TEST`).
+(scripts/3_game/vehicles/transport.c:727-734) which returns `false` in the normal build (`#ifndef CFGMODS_DEFINE_TEST`).
 → gate-2 false → **get-in action NEVER appears**, no matter how perfect the crew bone is. Same trap for
-`GetSeatAnimationType` (transport.c:682-688 → `Error("not implemented")`) and `GetAnimInstance` (used in Start()).
+`GetSeatAnimationType` (transport.c:685-691 → `Error("not implemented")`) and `GetAnimInstance` (used in Start()).
 On 1.30 a bare `CarScript` also never STARTS: `GetElectricitySourceDevice()` returns `null` in `Transport`
-(transport.c:826-829) → `NO_BATTERY`; the thin script class must override the battery trio too (pattern
+(transport.c:835-838) → `NO_BATTERY`; the thin script class must override the battery trio too (pattern
 `civiliansedan.c:59-74`).
 
 **THE FIX = ship a thin `<MOD>_Base.c` script class (PIPELINE requirement — add to Phase 4).** Modeled on FC

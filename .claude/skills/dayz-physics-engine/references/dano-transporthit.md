@@ -11,7 +11,7 @@
 > `ProcessDirectDamage` `3_game/entities/object.c:1138`; `RegisterTransportHit` `entityai.c:4134-4224` (new Motorbike branch `:4166-4184`);
 > `DayZPlayerImplement.EEHitBy` `4_world/entities/dayzplayerimplement.c:1563` (guard reset `:1567`, `"Brain"` `:1592`),
 > `EvaluateDamageHitAnimation` `:1485`, `EOnContact` `:3958-3973`. Vehicle-side contact damage moved from `CarScript.OnContact` to
-> `Transport.OnContact` with `VehicleContactData` (`3_game/vehicles/transport.c:315-343`, `:1144-1156`); see `transport-netsync-vehiculos.md`.
+> `Transport.OnContact` with `VehicleContactData` (`3_game/vehicles/transport.c:318-346`, `:1153-1165`); see `transport-netsync-vehiculos.md`.
 > Fall damage changed shape and thresholds: §DayZ 1.30 changes at the end and `dayz-1-30-ragdoll-and-fall.md`.
 
 ---
@@ -143,7 +143,7 @@ void EEHitBy(
 **Called**: server only. Fires AFTER C++ applies damage.  
 **Inheritance chain**:
 1. `EntityAI.EEHitBy` — invokes `m_OnHitByInvoker` (`entityai.c:1117-1124`)
-2. `ItemBase.EEHitBy` — random damage to cargo/attachments for clothing (`itembase.c:1522-1560`)
+2. `ItemBase.EEHitBy` — random damage to cargo/attachments for clothing (`itembase.c:1450-1489`)
 3. `PlayerBase.EEHitBy` — bleeding, shock check, broken legs, unconRefill (`playerbase.c:1224-1347`)
 4. `DayZPlayerImplement.EEHitBy` — reset `m_TransportHitRegistered`, damage/death animations (`dayzplayerimplement.c:1547-1600+`)
 
@@ -401,7 +401,7 @@ class MyCar : Transport
 ### GetProtectionLevel (verificado)
 
 ```c
-// scripts/4_world/entities/itembase.c:4094
+// scripts/4_world/entities/itembase.c:4077
 float GetProtectionLevel(int type, bool consider_filter = false, int system = 0)
 ```
 
@@ -413,7 +413,7 @@ Clothing damage absorption is a **100% C++ mechanism** configured via `CfgAmmo`.
 
 1. `ItemBase.EEHitBy` (the EQUIPPED item receives the callback):
    ```c
-   // scripts/4_world/entities/itembase.c:1522-1560
+   // scripts/4_world/entities/itembase.c:1450-1489
    override void EEHitBy(TotalDamageResult damageResult, ...)
    {
        super.EEHitBy(...);
@@ -568,7 +568,7 @@ When `directHitObject == null`, system applies damage in radius defined in CfgAm
 
 ### DealAbsoluteDmg (script helper)
 ```c
-// scripts/4_world/static/miscgameplayfunctions.c:1597
+// scripts/4_world/static/miscgameplayfunctions.c:1668
 static void DealAbsoluteDmg(ItemBase item, float dmg)
 {
     item.DecreaseHealth(dmg, false);  // false = no auto-delete
@@ -687,12 +687,12 @@ class CfgAmmo {
 | `scripts/4_world/entities/itembase.c` | `EEHitBy` ropa (1522-1560), `GetProtectionLevel` (4094-4128) |
 | `scripts/4_world/classes/shockhandler.c` | `ShockHandler` completo (1-206) |
 | `scripts/4_world/classes/bleedingsources/bleedingsourcesmanagerserver.c` | `ProcessHit` bleeding (167-198) |
-| `scripts/4_world/entities/vehicles/carscript.c` | v1.24/1.29: `OnContact`/`CheckContactCache` (1454-1530), `m_dmgContactCoef` (197-198). 1.30: `OnContact` lives on `Transport` (`3_game/vehicles/transport.c:315-343`); `CarScript.CheckContactCache` at `carscript.c:1279`, `m_dmgContactCoef = 0.058` at `:224` |
+| `scripts/4_world/entities/vehicles/carscript.c` | v1.24/1.29: `OnContact`/`CheckContactCache` (1454-1530), `m_dmgContactCoef` (197-198). 1.30: `OnContact` lives on `Transport` (`3_game/vehicles/transport.c:318-346`); `CarScript.CheckContactCache` at `carscript.c:1279`, `m_dmgContactCoef = 0.058` at `:224` |
 | `scripts/3_game/effects/destructioneffects/destructioneffectbase.c` | `DealExplosionDamage`, `HasExplosionDamage` |
 | `scripts/4_world/classes/areadamage/.../areadamagecomponent.c` | `AreaDamageComponent.EvaluateDamageInternal` |
 | `scripts/3_game/constants.c:851-855` | `STATE_PRISTINE`..`STATE_RUINED` |
 | `scripts/4_world/classes/useractionscomponent/actions/actionconstants.c:146-156` | `UADamageApplied` constantes |
-| `scripts/4_world/static/miscgameplayfunctions.c:1597-1599` | `DealAbsoluteDmg` |
+| `scripts/4_world/static/miscgameplayfunctions.c:1668-1670` | `DealAbsoluteDmg` |
 
 ## DayZ 1.30 changes
 
@@ -702,7 +702,7 @@ Re-verified on 1.30.164078 (`P:\scripts`); first written against 1.30 Exp 164014
 
 Before 1.30: `HEALTH_HEIGHT_LOW = 5`, `HEALTH_HEIGHT_HIGH = 14`, `SHOCK_HEIGHT_LOW = 3`, `SHOCK_HEIGHT_HIGH = 12`, `BROKENLEGS_HEIGHT_LOW = 5`, `BROKENLEGS_HEIGHT_HIGH = 9`; `HandleFallDamage` used plain `Math.InverseLerp` (1.29: `scripts\4_world\entities\dayzplayerimplementfalldamage.c:26-32`, `:97`). The ammo names (`FallDamageHealth`, `FallDamageShock`) did not change (`:20-21`).
 
-**Vehicle contact.** The momentum-delta contact cache moved from `CarScript.OnContact` to `Transport.OnContact` (`P:\scripts\3_game\vehicles\transport.c:315-343`), storing `VehicleContactData` (`m_LocalPos`, `m_Other`, `m_Impulse`; `:1144-1156`). Motorbikes process it in `MotorbikeScript.CheckContactCache` (`4_world\entities\vehicles\motorbikescript.c:1252`) with `GameConstants.MOTORBIKES_CONTACT_DMG_MIN/THRESHOLD_SMALL/THRESHOLD_MID/KILLCREW` = 10/25/40/80 (`3_game\constants.c:898-901`; cars: 150/750/1200 at `:888-890`).
+**Vehicle contact.** The momentum-delta contact cache moved from `CarScript.OnContact` to `Transport.OnContact` (`P:\scripts\3_game\vehicles\transport.c:318-346`), storing `VehicleContactData` (`m_LocalPos`, `m_Other`, `m_Impulse`; `:1153-1165`). Motorbikes process it in `MotorbikeScript.CheckContactCache` (`4_world\entities\vehicles\motorbikescript.c:1267`) with `GameConstants.MOTORBIKES_CONTACT_DMG_MIN/THRESHOLD_SMALL/THRESHOLD_MID/KILLCREW` = 10/25/40/80 (`3_game\constants.c:898-901`; cars: 150/750/1200 at `:888-890`).
 
 **TransportHit Motorbike branch** (new in 1.30):
 

@@ -2,7 +2,7 @@
 
 The animation **graph** is the layer DayZ uses to drive characters and creatures: state machines, transitions, commands fired by the engine/AI/script, variables that conduct blending, and the **ASI** (animsetinstance) catalog that maps state names to `.anm` files. This reference covers the parts of that system that you can read in plain text from vanilla unpacked data — and refuses the parts that don't exist.
 
-> Target: DayZ 1.30 stable (1.30.164078). `DZ/…` paths below are read on `P:\DZ\…` (1.30); `1.29: O:\…\DZ\…` marks the old build. Every `[VERIFIED-vanilla]` / `[EXACT]` item was re-read on 1.30.164078 unless it says otherwise.
+> Target: DayZ 1.30 stable (1.30.164200). `DZ/…` paths below are read on `P:\DZ\…` (1.30); `1.29: O:\…\DZ\…` marks the old build. Every `[VERIFIED-vanilla]` / `[EXACT]` item was re-read on 1.30.164078 unless it says otherwise.
 
 The `[VERIFIED-vanilla]` items were first greped against the unpacked vanilla in `DZ/` + `SurvivorAnims/` (sprint 2026-05-28, 1.29-era files); they were re-checked on 1.30 and rewritten where the 1.30 file format differs. Cross-ref vault: `20_Knowledge/dayz-animations-creatures-weapons.md`.
 

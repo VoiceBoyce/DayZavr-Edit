@@ -1,6 +1,6 @@
 # Get-in actions and proxied-submodel pose
 
-> Target: DayZ 1.30 stable (1.30.164078); unlabelled cites point at `P:\scripts` (1.30), `1.29:` at the old build.
+> Target: DayZ 1.30 stable (1.30.164200); unlabelled cites point at `P:\scripts` (1.30), `1.29:` at the old build.
 > Labels: `../../_shared/dayz-version-policy.md`.
 
 This reference isolates three commonly conflated layers: resolving a seat under
@@ -11,7 +11,7 @@ of a `.p3d` instantiated by proxy.
 
 [EXACT][CLAIM-R21-VEHICLE-GETIN-CHAIN] `ActionGetInTransport.ActionCondition`
 accepts a seat only when all four links pass (1.30 first rejects when `!transport.CanGetIn()`,
-`actiongetintransport.c:36`; default `true`, `transport.c:672-675`):
+`actiongetintransport.c:36`; default `true`, `transport.c:675-678`):
 
 1. The cursor-hit ViewGeometry component maps through
    `Transport.CrewPositionIndex(componentIndex)` to a crew index. A single
@@ -23,7 +23,7 @@ accepts a seat only when all four links pass (1.30 first rejects when `!transpor
 3. `IsAreaAtDoorFree(crewIndex)` passes its collision-box check around the
    `CrewEntry` transform. On 1.30 the action calls `IsAreaAtDoorFreeDiag(crewIndex)`
    (`actiongetintransport.c:54`), which only adds a DayZDiag bypass switch in front of
-   `IsAreaAtDoorFree` (`transport.c:901-915`), so overriding `IsAreaAtDoorFree` still works.
+   `IsAreaAtDoorFree` (`transport.c:910-924`), so overriding `IsAreaAtDoorFree` still works.
 4. At least one action selection passes `CanReachSeatFromDoors`. `CarScript`
    maps `seat_driver`, `seat_codriver`, `seat_cargo1` and `seat_cargo2` to
    `seat_con_1_1`, `seat_con_2_1`, `seat_con_1_2` and `seat_con_2_2`
@@ -34,16 +34,16 @@ Before 1.30: no `CanGetIn()` gate, and gate 3 called `IsAreaAtDoorFree` directly
 `actiongetintransport.c:63`). Gate 4 is called from script on both builds (1.30: `:64`; 1.29: `:73`).
 1.30 vanilla `CanGetIn()` overrides: `MotorbikeScript` refuses while the bike lies on its side
 (`motorbikescript.c:225-231`) and `Motorbike_01` additionally requires `GetAnimationPhase("SeatDriver") == 0.0`
-(`inheritedmotorbikes\motorbike_01.c:92-98`).
+(`inheritedmotorbikes\motorbike_01.c:89-95`).
 
 Inspect and fix them in that order. Rebuilding `seat_con_*` cannot help while
 the cursor resolves an envelope component, and script changes cannot help while
 the model lacks the final memory point.
 
-Source anchors (1.30.164078; re-verified 2026-10-15):
+Source anchors (1.30.164200; re-verified 2026-10-15):
 
 - `scripts/4_world/classes/useractionscomponent/actions/interact/actiongetintransport.c:26-69`
-- `scripts/3_game/vehicles/transport.c:177-179` (`CrewPositionIndex`), `:672-675` (`CanGetIn`), `:724-731` (`CrewCanGetThrough`), `:844-915` (`IsAreaAtDoorFree` + `...Diag`)
+- `scripts/3_game/vehicles/transport.c:180-182` (`CrewPositionIndex`), `:675-678` (`CanGetIn`), `:727-734` (`CrewCanGetThrough`), `:853-924` (`IsAreaAtDoorFree` + `...Diag`)
 - `scripts/4_world/entities/vehicles/carscript.c:2141-2160` (`GetDoorConditionPointFromSelection`), `:2177-2199` (`CanReachSeatFromDoors`)
 - Before 1.30 (1.29.0.163451): `actiongetintransport.c:26-80`, `transport.c:114-116,493-500,634-676`, `carscript.c:2674-2693,2710-2732`.
 

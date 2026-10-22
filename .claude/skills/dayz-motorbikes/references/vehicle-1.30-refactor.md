@@ -1,6 +1,6 @@
 # Vehicle Refactor in DayZ 1.30 (1.29 -> 1.30 Migration Guide)
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: `../../_shared/dayz-version-policy.md`. Full API delta: the `dayz-130-migration` skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: `../../_shared/dayz-version-policy.md`. Full API delta: the `dayz-130-migration` skill.
 
 This document details the internal restructuring of the vehicle system introduced in DayZ 1.30 (first read on Exp 164014; every cite below re-checked on stable 1.30.164078 on 2026-10-15, script line numbers unchanged). It covers the modular decomposition of `CarScript`, the escalation of responsibilities to `Transport`, the adoption of specialized components, and the migration guide for existing car mods.
 
@@ -12,9 +12,10 @@ In DayZ 1.30, `CarScript.c` (-1155 / +877 lines) ceases to be a self-contained m
 - **Moved to `Transport.c` (+438 lines)**:
   - Unified fluids definition: `enum ETransportFluid` (`Transport.c:52-63`), from which `CarFluid`, `BoatFluid`, and `MotorbikeFluid` inherit.
   - Physics collision caching and handling: `m_ContactCache`, `m_MomentumPrevTick`, `m_VelocityPrevTick`, `m_dmgContactCoef`, `m_VehicleContactDamageCoef`, `m_CrewContactDamageCoef` (`Transport.c:90-96`).
-  - Impact callback: `OnContact(...)` (`Transport.c:315`).
-  - Electrical source detection: `NeedElectricitySourceDevice()`, `GetElectricitySourceDevice()`, `GetElectricitySourceDeviceType()` (`Transport.c:821-834`; default returns `true`, `null`, and `""`).
-  - Vital parts check with callback: `CheckVitalItemCallback(...)` and virtual declaration `PartsHealthCheck()` (`Transport.c:420, 437`).
+  - Impact callback: `OnContact(...)` (`Transport.c:318`).
+  - Electrical source detection: `NeedElectricitySourceDevice()`, `GetElectricitySourceDevice()`, `GetElectricitySourceDeviceType()` (`Transport.c:830-843`; default returns `true`, `null`, and `""`).
+  - Vital parts check with callback: `CheckVitalItemCallback(...)` and virtual declaration `PartsHealthCheck()` (`Transport.c:423, 440`).
+  - Added in patch 1.30.164200: `proto native bool HasCrew()` (`Transport.c:175`) and `bool IsMoving()` (`Transport.c:819-823`, base logs `Error("IsMoving() not implemented")`; `CarScript.IsMoving` became its `override`, `CarScript.c:2221`). A car mod written for 164078 that declares its own `bool HasCrew()` on a `Transport` subclass must rename it; an `IsMoving()` without `override` on a `Transport` subclass that is not a `CarScript` now shadows the base. Prefix helper names on vehicle classes.
 - **Moved to Modular Components (`P:\scripts\4_World\Entities\Vehicles\Components\`)**:
   - Lights and reflectors -> `VehicleLightsComponent`.
   - Horn and AI acoustic noise -> `VehicleHornComponent`.
@@ -30,7 +31,7 @@ In DayZ 1.30, `CarScript.c` (-1155 / +877 lines) ceases to be a self-contained m
 |---|---|---|
 | `CreateFrontLight()` | `[Obsolete("1.30: use VehicleLightsComponent instead")]` | Register `VehicleLightProfileFront` in `m_LightsComponent`. |
 | `CreateRearLight()` | `[Obsolete("1.30: use VehicleLightsComponent instead")]` | Register `VehicleLightProfileRear` in `m_LightsComponent`. |
-| `IsVitalCarBattery()` | `[Obsolete("1.30: use Transport.NeedElectricitySourceDevice")]` | Override `NeedElectricitySourceDevice()` (no parameters, `Transport.c:821`) to return `true` **and** `GetElectricitySourceDevice()` to return the attached battery: the base returns `null` (`Transport.c:826-829`), which `CarScript.CheckOperationalRequirements` turns into `NO_BATTERY` (`CarScript.c:1768-1774`). |
+| `IsVitalCarBattery()` | `[Obsolete("1.30: use Transport.NeedElectricitySourceDevice")]` | Override `NeedElectricitySourceDevice()` (no parameters, `Transport.c:830`) to return `true` **and** `GetElectricitySourceDevice()` to return the attached battery: the base returns `null` (`Transport.c:835-838`), which `CarScript.CheckOperationalRequirements` turns into `NO_BATTERY` (`CarScript.c:1768-1774`). |
 | `IsVitalTruckBattery()` | `[Obsolete("1.30: use Transport.NeedElectricitySourceDevice")]` | Same as above with `TruckBattery.SLOT_ID` / `"TruckBattery"` (`truck_01_base.c:60-75`). |
 | `IsScriptedLightsOn()` | `[Obsolete("1.30: use Transport.LightIsOn")]` | Invoke `LightIsOn()`. |
 | `CarPartsHealthCheck()` | `[Obsolete("1.30: use Transport::PartsHealthCheck instead")]` | Rename signature to `override protected void PartsHealthCheck()` (the tick calls `PartsHealthCheck()` directly, `CarScript.c:843`; the old name only forwards, `:2976-2980`). |
@@ -93,7 +94,7 @@ Follow this step-by-step list to update an existing car:
   ```
 - [EXACT] **Step 5: Rename signatures and collision data access**:
   - If you had `protected void CarPartsHealthCheck()`, change it to `override protected void PartsHealthCheck()`.
-  - If you were reading `data[0].impulse`, update it to `data[0].m_Impulse`: it is a public member of `VehicleContactData` (`Transport.c:1144-1148`), and `CarContactData` remains as an empty subclass (`CarScript.c:53`).
+  - If you were reading `data[0].impulse`, update it to `data[0].m_Impulse`: it is a public member of `VehicleContactData` (`Transport.c:1153-1157`), and `CarContactData` remains as an empty subclass (`CarScript.c:53`).
 - [EXACT] **Step 6: Update horn actions**:
   Verify that your vehicle actions register `ActionVehicleHornShort` and `ActionVehicleHornLong` instead of the legacy `ActionCarHorn*`.
 - [DESIGN] **Step 7: Add modern friction in wheel config.cpp**:
@@ -103,13 +104,13 @@ Follow this step-by-step list to update an existing car:
 
 ## 6. Claims in 1.29 Guides That Become False in 1.30
 
-| Common claim in 1.29 guides | Reality in DayZ 1.30 (stable 1.30.164078) | Evidence citation |
+| Common claim in 1.29 guides | Reality in DayZ 1.30 (checked on 1.30.164078, unchanged on 1.30.164200) | Evidence citation |
 |---|---|---|
 | *"To add lights to a car you must override `CreateFrontLight()` and create a `CarLightBase`"* | **FALSE**. Those methods are deprecated (`[Obsolete]`). The engine does not invoke them; you must create a `VehicleLightProfileBase` and register it in `m_LightsComponent`. | `CarScript.c:2937-2948` and `VehicleLightsComponent.c:61-64` |
 | *"The horn is scripted with `SetCarHornState(ECarHornState)` and `ActionCarHorn`"* | **FALSE**. The `ActionCarHorn*` classes still exist, but marked `[Obsolete("replaced by ActionVehicleHornBase")]`, and cars now register `ActionVehicleHornShort/Long`. The horn is operated with `m_HornComponent.SetMode(VehicleHornMode)`. | `ActionCarHorn.c:1-2`, `CarScript.c:2319-2320`, and `VehicleHornComponent.c:41-53` |
-| *"The battery is validated with `IsVitalCarBattery()`"* | **FALSE**. Obsolete method with no effect on starting. `Transport.NeedElectricitySourceDevice()` is consulted now. | `CarScript.c:2811-2817` and `Transport.c:821` |
-| *"Engine parts checking is scripted in `CarPartsHealthCheck()`"* | **FALSE**. The signature was absorbed by `Transport.c` and renamed to `PartsHealthCheck()`. | `Transport.c:437`, `CarScript.c:2121`, and `CarScript.c:2976-2979` |
-| *"Collision impulses are read in `data[0].impulse`"* | **FALSE**. The field is now `m_Impulse`, public, in the base class `VehicleContactData`; `CarContactData` is an empty subclass. No `impulse` member exists, so `.impulse` should not compile [UNVERIFIED: not compiled]. | `Transport.c:1144-1148` and `CarScript.c:53` |
+| *"The battery is validated with `IsVitalCarBattery()`"* | **FALSE**. Obsolete method with no effect on starting. `Transport.NeedElectricitySourceDevice()` is consulted now. | `CarScript.c:2811-2817` and `Transport.c:830` |
+| *"Engine parts checking is scripted in `CarPartsHealthCheck()`"* | **FALSE**. The signature was absorbed by `Transport.c` and renamed to `PartsHealthCheck()`. | `Transport.c:440`, `CarScript.c:2121`, and `CarScript.c:2976-2979` |
+| *"Collision impulses are read in `data[0].impulse`"* | **FALSE**. The field is now `m_Impulse`, public, in the base class `VehicleContactData`; `CarContactData` is an empty subclass. No `impulse` member exists, so `.impulse` should not compile [UNVERIFIED: not compiled]. | `Transport.c:1153-1157` and `CarScript.c:53` |
 | *"Exhaust smoke is controlled directly via `m_exhaustFx`"* | **FALSE**. Manual FX variables are obsolete. The entire particle pipeline is managed in `VehicleVFXComponent`. | `CarScript.c:477-478` (`m_VFXComponent.PlayEffect`) and `CarScript.c:2760, 2779` (`m_exhaustFx` remains in the `//! DEPRECATED` section) |
 | *"Vehicle animation graphs are inaccessible `.agr` binary files"* | **FALSE**. In 1.30, `Vehicles.agf` is shipped as editable Enfusion structured text. (corrected 2026-09-28) It was already false in 1.29, so it is not a 1.29 truth that 1.30 broke: 1.29 ships the vehicle sub-graph as the text `Vehicles.agr` in the old `$AnimGraph 7` format, and 1.30 changed the syntax. | `Vehicles.agf:1-3655`; 1.29: `O:\...\DZ\anims\workspaces\player\player_main\vehicles.agr:1` (`$AnimGraph 7 {`) |
 | *"Bailing out while moving always uses the unique 8 km/h threshold of cars"* | **FALSE**. Dedicated thresholds exist: 8 km/h for cars, 5 km/h for boats, and 10 km/h for motorbikes (`MOTO_JUMPOUT_THRESHOLD`). | `ActionGetOutTransport.c:34-36` |

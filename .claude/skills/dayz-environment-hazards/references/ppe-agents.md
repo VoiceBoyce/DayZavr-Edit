@@ -1,6 +1,6 @@
 # Dust agents, PPE, and symptoms
 
-Source: DayZ 1.30 stable `1.30.164078`; paths relative to `P:\scripts\` unless they start with `P:\`. All of these agents, modifiers and constants are new in 1.30 (api-delta §9-10).
+Source: DayZ 1.30 stable `1.30.164200`; paths relative to `P:\scripts\` unless they start with `P:\`. All of these agents, modifiers and constants are new in 1.30 (api-delta §9-10).
 
 ## Enums
 
@@ -90,7 +90,7 @@ Cough: `HandleCoughing` takes the first EYEWEAR|MASK item (not NVG) with non-zer
 
 ## PPE item authoring
 
-Config: protection values live in `class Protection` of the item's `CfgVehicles` class. `ItemBase.GetProtectionLevel` maps `DEF_DUST_PARTICLE_BREATH` → `dust_particle_breath` and `DEF_DUST_PARTICLE_EYES` → `dust_particle_eyes` and returns 0 if the item is ruined or has quantity ≤ 0 (`4_world\entities\itembase.c:4073-4102`).
+Config: protection values live in `class Protection` of the item's `CfgVehicles` class. `ItemBase.GetProtectionLevel` maps `DEF_DUST_PARTICLE_BREATH` → `dust_particle_breath` and `DEF_DUST_PARTICLE_EYES` → `dust_particle_eyes` and returns 0 if the item is ruined or has quantity ≤ 0 (`4_world\entities\itembase.c:4077-4106`).
 
 ```cpp
 // [EXACT] P:\DZ\characters\masks\config.cpp:256  (NioshFaceMask)

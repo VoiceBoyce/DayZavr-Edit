@@ -184,7 +184,7 @@ Tutorial Memory LOD (axes, `soundPos`, interaction) is unchanged. 1.30 adds extr
 | Role | Config / script name | Memory name(s) verified | Source |
 |---|---|---|---|
 | Lock attachment proxy | `CfgSlots` `selection` | `att_combinationlock`, `att_codelock` (and numbered `_wood` / `_metal` variants) | `P:\scripts\config.cpp:2316-2322,2768-2774` |
-| One-sided open/close | `interactPositionPoint` + `interactDirPoint` on the Doors child | Whatever strings you put there; empty/missing → `MemPointDirectionalCheck` returns true | `P:\scripts\3_game\entities\additionaldoorsinfo.c:34-38`, `P:\scripts\4_world\static\miscgameplayfunctions.c:940-968` |
+| One-sided open/close | `interactPositionPoint` + `interactDirPoint` on the Doors child | Whatever strings you put there; empty/missing → `MemPointDirectionalCheck` returns true | `P:\scripts\3_game\entities\additionaldoorsinfo.c:34-38`, `P:\scripts\4_world\static\miscgameplayfunctions.c:942-970` |
 | Bunker inside vs outside | `Bunker.CanDoorBeOpened` formats `"%1_action"` and `"%1_inside"` from `doorInfo.m_DoorType` | Example: Doors subclass `Door1` → `Door1_action` and `Door1_inside` | `P:\scripts\4_world\entities\building\bunker.c:47-55` |
 | Code lock facing | `DigitalCodeLock.MEMPOINT_CENTER` / `MEMPOINT_INSIDE` on the **item** P3D | `ce_center`, `inside` | `P:\scripts\4_world\entities\itembase\codelock.c:3-4,221` |
 | Combination lock faces | item selections | `lock_attached_outside`, `lock_attached_inside` | `P:\scripts\4_world\entities\itembase\combinationlock.c:27-30` |

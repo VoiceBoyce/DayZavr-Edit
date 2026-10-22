@@ -17,7 +17,7 @@ description: >
 
 # DayZ Aviation Modding
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 >
 > Unlabelled vanilla cites point at `P:\scripts` (1.30, renumbered 2026-10-15). Community-mod cites (LM_Planes, RFFS, SIB,
 > MH6, Expansion) are those mods' own files and were not re-checked. In-game measurements dated before 2026-09-16 were
@@ -224,14 +224,30 @@ A plane/heli that inherits `CarScript` inherits the 1.30 vehicle refactor. Detai
   are empty `[Obsolete]` stubs (`carscript.c:2805-2809`); `ToggleHeadlights()` is gone (the action calls native
   `LightToggle()`, `actionswitchlights.c:57-65`).
 - **Battery:** `IsVitalCarBattery`/`IsVitalTruckBattery` are obsolete and unread (`carscript.c:2811-2821`). Override
-  `GetElectricitySourceDevice()` (base returns `null`, `transport.c:826-829`) plus `NeedElectricitySourceDevice()` /
+  `GetElectricitySourceDevice()` (base returns `null`, `transport.c:835-838`) plus `NeedElectricitySourceDevice()` /
   `GetElectricitySourceDeviceType()`; the light and horn actions read it directly (`actionswitchlights.c:38-46`,
   `actionvehiclehorn.c:15-17`). Return `false` from `NeedElectricitySourceDevice()` for a magneto engine.
 - **Horn:** `m_HornComponent.RegisterSound(VehicleHornMode.SHORT/LONG, ...)` (`civiliansedan.c:24-25`); the old
   `m_CarHorn*SoundName` fields are never read (`carscript.c:2765-2766`).
-- **Contact damage:** `data[0].impulse` → `data[0].m_Impulse` (`transport.c:1144-1148`, `carscript.c:1291`).
+- **Contact damage:** `data[0].impulse` → `data[0].m_Impulse` (`transport.c:1153-1157`, `carscript.c:1291`).
 - **Unchanged:** the event-mask facts above (only line numbers moved), the `HelicopterScript` stub, the Pawn/network
   model, input APIs and `dBody*` physics calls.
+
+### DayZ 1.30.164200 changes (patch of 2026-10-21; static reading of `P:\scripts`)
+- **`Transport.HasCrew()` / `Transport.IsMoving()` are new** (`transport.c:175` proto native; `transport.c:819-823`, base
+  logs `Error("IsMoving() not implemented")`). A CarScript aircraft inherits `CarScript.IsMoving()` =
+  `GetSpeedometerAbsolute() > 3.5` (`carscript.c:2221-2224`), which reads the native `Car.GetSpeedometer()`
+  (`car.c:102`); whether that reports airspeed in flight was not measured — for "is the aircraft moving" read
+  `GetVelocity(this).Length()`. A heli/plane mod that declares its own `bool HasCrew()` (auto-hover, engine cut-off,
+  despawn checks) or an un-`override`d `IsMoving()` must rename it with a mod prefix; it now collides with / shadows
+  the `Transport` member. Rule: prefix every helper on the airframe class (`LFH_HasPilot()`), use `override` + `super`
+  only when you mean to change vanilla behaviour.
+- **Look limits:** the base `UpdateUDAngleUnlocked` / `UpdateLRAngleUnlocked` now overwrite the `pMin/pMax` you pass
+  with `m_pPlayer.GetLookLimits(...)` (`dayzplayercamera_base.c:152-156`, `:197-202`). A custom cockpit / chase camera
+  that relied on its own limits through those methods must clamp its result itself.
+- **Wheel VFX:** `CarScript` registers the wheel smoke / contact groups with a 2.0 s restart cooldown (was 5.0,
+  `carscript.c:381-382`); an aircraft that keeps `CarScript.InitializeParticles` inherits it.
+- Detail and naming rule: `dayz-vehicles/references/dayz-1-30-vehicles.md` §11.
 
 ## Helicopters
 A **real rotary-wing flight model is documented from FOUR author/teams across five aircraft** (plus
@@ -821,7 +837,7 @@ confident, fully cited "the nose is at negative Z" came out of that, and it was 
 **The arbiter is the engine, and it is one line.** `GetDirection()` returned `<-0.005, -0.019,
 +0.9998>` with the aircraft pointing where the pilot calls forward, and `ModelToWorld("0 0 5")`
 landed 5 m toward the nose. Engine forward is `+Z` (yaw 0 → +Z, documented at
-`1_core/proto/enconvert.c:376-389`: `AnglesToVector` of yaw 45 returns `<0.707,0,0.707>`).
+`1_core/proto/enconvert.c:355-368`: `AnglesToVector` of yaw 45 returns `<0.707,0,0.707>`).
 
 **Rules.**
 1. NEVER hand a py3d-derived offset to `ModelToWorld` without one runtime probe first:
@@ -891,7 +907,7 @@ jitter must satisfy all of these safeguards:
    without logging an error. Everything gated by `EngineIsOn()` can then close through
    `OnEngineStop` as well, including cameras, FLIR sessions and HUD state.
 2. **[VERIFIED by source] The vanilla super implementation above `CarScript` is empty:**
-   `Transport.OnDriverExit(Human) {}` (`transport.c:224`). In the vanilla chain, omitting `super`
+   `Transport.OnDriverExit(Human) {}` (`transport.c:227`). In the vanilla chain, omitting `super`
    loses only the gear-triggered stop. Battery and plug detach handling (`carscript.c:556,572`),
    fluids (`:989-992`), unconscious/dead handling (`:1893,1904`) and vitals (`:2523`) live in other
    callbacks.

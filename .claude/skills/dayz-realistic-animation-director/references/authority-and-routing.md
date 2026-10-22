@@ -41,7 +41,7 @@ From the DayZ authority, request:
 - authoritative rig/skeleton and bone/channel mask (1.30, [CHANGELOG]: global bone index derived from the bone name, 250-bone limit removed);
 - timeline and event/notetrack constraints;
 - runtime state(s), stance(s), handedness and camera modes (1.30: includes `DAYZCAMERA_3RD_VEHICLE_MOTORBIKE = 32`, speed limits per posture, and stance camera horizontal rotation lock);
-- compile, wiring, build and deployment path (1.30, [CHANGELOG]: Workbench Enfusion 2021 Animation Editor with live editing, `-resolveFilePatchingUsingEnfusion=1`; not tried on this host);
+- compile, wiring, build and deployment path (1.30, [CHANGELOG]: Workbench Enfusion 2021 Animation Editor with live editing, `-loadRVFilesViaEnfusionFS=1` (renamed in 1.30.164200; `-resolveFilePatchingUsingEnfusion=1` before); not tried on this host);
 - exact in-game evidence required.
 
 To the Blender authority, provide:

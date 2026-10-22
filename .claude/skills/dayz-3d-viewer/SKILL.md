@@ -8,7 +8,7 @@ description: "Use when: 3D viewer, p3d viewer, PAA to PNG, glTF export, GLB conv
 Converts DayZ mod assets into interactive 3D viewers for chat and web.
 Battle-tested with real LFPG Push Button model (328 verts, 640 faces, 4 materials, DXT1+LZO textures).
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 The executable lives in the pack tool `tools/dayz-3d-viewer`. This skill is
 the playbook; do not look for `scripts/` or a vendored py3d wheel here.

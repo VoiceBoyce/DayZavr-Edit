@@ -1,8 +1,8 @@
-# DayZ 1.30 — MCP / script-console tooling (build 1.30.164078)
+# DayZ 1.30 — MCP / script-console tooling (build 1.30.164200)
 
 Companion to `SKILL.md` § DayZ 1.30 changes. The managed `dayz_test_run` /
 `dayz_test_stop` lifecycle and Mode=all capture rule still hold. Script paths
-below point at `P:\scripts` 1.30.164078 (re-checked 2026-10-15). Runtime
+below point at `P:\scripts` 1.30.164200 (re-checked 2026-10-15). Runtime
 results from the pre-release build are labelled "(measured on 1.30 Exp 164014)".
 
 ## `ScriptConsoleTabRegistry` (inject a Diag console tab)
@@ -58,7 +58,7 @@ headless roboclient as the MCP client_peer.
 Build 1.30.164014 Exp, public DayZDiag, local server outside the managed
 lifecycle. Evidence: `VAULT/AI/10_Projects/DayZ_MCP/lanes/2026-09-26-roboclient-130/`
 (`evidence_extracts.txt`, `results/`). Source paths below are under
-`P:\scripts\` (1.30.164078; every line re-checked 2026-10-15).
+`P:\scripts\` (1.30.164200; every line re-checked 2026-10-15).
 
 [EXACT][CLAIM-DZ130-ROBOCLIENT-DEFINE-PUBLIC-DIAG] The public 1.30 Exp DayZDiag
 compiles every script module with `ROBOCLIENT` and `INPUT_OVERRIDE` defined, as
@@ -145,7 +145,7 @@ Method and traps:
 [DESIGN] For the MCP: server verbs `bot_dummy_spawn(n, pos)` plus `bot_start(action)`
 and `bot_stop()` on this path would give N moving players on one machine for load
 and soak tests. Since the 2026-10-15 update the installed DayZDiag the managed
-launcher starts is 1.30.164078, so no separate 1.30 lane is needed (not checked:
+launcher starts is 1.30 (1.30.164078, then 1.30.164200 from 2026-10-21), so no separate 1.30 lane is needed (not checked:
 whether the launcher's sealed registry accepts the updated game exe on its first
 run); the `ROBOCLIENT` define on that exe is the open question (above). This
 is not a way to offload simulation: dummies and roboclients alike run under server
@@ -159,3 +159,13 @@ already do not complete via MCP (existing SKILL.md limitation). Instant
 actions: if a second inject returns `setup_failed` / no-op, wait for
 `GetActionState()` to leave `UA_AM_INIT`. Detail:
 `dayz-test-ingame/references/dayz-1-30-test-ingame.md`.
+
+## 1.30.164200: server-side action distance
+
+Patch 1.30.164200 changed what the server checks when an injected action reaches it: `CCTCursor.Can`,
+`CCTCursorNoRuinCheck.Can` and `CCTCursorParent.Can` return early on the server with a plain distance test
+(`m_MaximalActionDistance` + the target's collision radius), and the cursor-hit / head-position logic runs
+on the client only (`P:\scripts\4_world\classes\useractionscomponent\targetconditionscomponents\cctcursor.c:29-33`).
+Action ids after `ActionWashHandsWell` moved (`ActionDrinkCan` registered earlier,
+`actionconstructor.c:208`), and 21 target actions no longer lock the target player. Inject by class name and
+treat 164078 targeting/obstruction results as stale. Table: `SKILL.md` § DayZ 1.30.164200 changes.

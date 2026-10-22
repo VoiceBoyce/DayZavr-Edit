@@ -23,7 +23,7 @@ Source-verified vs vanilla v1.24 + real mods: recipes/crafting (PluginRecipesMan
   same item in both slots and the craft cancelled itself (`SKILL.md`, Override Rules, rule 42).
 - `m_ResultToInventory`: only `-1` (to inventory) works; the swap branch `>= 0` is commented out in
   `SpawnItems`. `SetIsCacheable` does not exist.
-- 1.30: a result with `m_ResultReplacesIngredient` no longer takes the ingredient's health — vanilla calls `TransferItemProperties(ingr, res, true, true, false, false)` (`transfer_health = false`, `4_world\classes\recipes\recipebase.c:353`; signature unchanged, `4_world\static\miscgameplayfunctions.c:269`); set `m_ResultInheritsHealth` if the result must inherit it. Before 1.30: `TransferItemProperties(ingr, res)` copied health. `PluginRecipesManager.GetRecipeClassName(int recipe_id)` is at `pluginrecipesmanager.c:84`.
+- 1.30: a result with `m_ResultReplacesIngredient` no longer takes the ingredient's health — vanilla calls `TransferItemProperties(ingr, res, true, true, false, false)` (`transfer_health = false`, `4_world\classes\recipes\recipebase.c:353`; signature unchanged, `4_world\static\miscgameplayfunctions.c:271`); set `m_ResultInheritsHealth` if the result must inherit it. Before 1.30: `TransferItemProperties(ingr, res)` copied health. `PluginRecipesManager.GetRecipeClassName(int recipe_id)` is at `pluginrecipesmanager.c:84`.
 
 ### ComponentEnergyManager (quick facts)
 - `MAX_SOCKETS_COUNT = 4` hardcoded (`3_game\tools\component\componentenergymanager.c:73`).
@@ -37,10 +37,12 @@ Source-verified vs vanilla v1.24 + real mods: recipes/crafting (PluginRecipesMan
 ### Action system (additions)
 - `AddAction(typename)` in `SetActions()` registers a **global singleton per input type** — there are no
   per-instance actions nor dynamic runtime registration.
-- `CCTCursor` measures from the hit-pos of the `ObjIntersectView` raycast (requires View Geometry LOD);
+- `CCTCursor` measures, on the client, from the hit-pos of the `ObjIntersectView` raycast (requires View Geometry LOD);
   `CCTObject` measures from target's `GetPosition()`. If an action does not appear and the model lacks
   ViewGeo, check the LOD first (skill `dayz-physics-engine`, truth #2).
-- 1.30: `CCTCursor` and `CCTCursorInherited` also measure from `MiscGameplayFunctions.GetPlayerHeadPosition` — a stance-based height, not the Head bone (`cctcursor.c:28`, `cctcursorinherited.c:28-30`, `4_world\static\miscgameplayfunctions.c:759-787`). New `CCTLiquid` (ctor `cctliquid.c:37`) replaces vanilla use of `CCTWaterSurfaceEx` in fill/drink/wash. `Can()` of a custom CCT keeps its signature. Before 1.30: distance from hit-pos / `GetPosition()` only.
+- 1.30: on the client `CCTCursor` and `CCTCursorInherited` also measure from `MiscGameplayFunctions.GetPlayerHeadPosition` — a stance-based height, not the Head bone (`cctcursor.c:36`, `cctcursorinherited.c:28-30`, `4_world\static\miscgameplayfunctions.c:761-789`). New `CCTLiquid` (ctor `cctliquid.c:37`) replaces vanilla use of `CCTWaterSurfaceEx` in fill/drink/wash. `Can()` of a custom CCT keeps its signature. Before 1.30: distance from hit-pos / `GetPosition()` only.
+- 1.30.164200: on the **server** `CCTCursor`, `CCTCursorNoRuinCheck` and `CCTCursorParent` no longer look at the cursor hit or the head; they return `DistanceSq(target.GetPosition(), player.GetPosition()) <= (maxDist + target.GetCollisionRadius())^2` (`cctcursor.c:29-33`, `cctcursornoruincheck.c:29-33`, `cctcursorparent.c:26-30`, parent object for the last one). So a small or raised target (origin above or beside the aimed spot, collision radius near 0) can be refused by the server at the edge of reach while the client shows the prompt, and nothing on the server checks what the player aims at or whether a wall is in between (CCTCursor never had a line-of-sight test). Security-relevant actions re-check aim, line of sight, ownership and lock state in their own server-side `ActionCondition`. Details: `dayz-1-30-enforce-script.md` §7.5. Before 1.30.164200: the server ran the client's head/root cursor-hit test.
+- 1.30.164200: 23 target-player actions (medical, restrain/handcuff, gag, cover head, shave) override `IsLockTargetOnUse()` → `false`, so the server no longer reserves the target with an inventory juncture (`actionbase.c:1178-1190`); a mod action extending one inherits that. `ActionDrinkCan` moved in `RegisterActions` (`actionconstructor.c:208`): runtime action ids are list positions (`SetID(actionsArray.Count())`, `:19`), never persist or send them. Details: `dayz-1-30-enforce-script.md` §7.10.
 
 ### Damage pipeline (quick facts)
 - `ProcessDirectDamage(damageType, source, componentName, ammoName, modelPos, damageCoef, flags)`

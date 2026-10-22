@@ -1,6 +1,6 @@
 # Sources and Extraction Evidence (1.30 Exp 164014, re-verified on stable 1.30.164078)
 
-> Target: DayZ 1.30 stable (1.30.164078). This file is the PROVENANCE record of the original Exp extraction; the
+> Target: DayZ 1.30 stable (1.30.164200). This file is the PROVENANCE record of the original Exp extraction; the
 > `exp\...` paths below are that extraction, not the current tree. Current tree: `P:\` (see the stable section).
 
 ## Stable re-verification (2026-10-15, `P:\` = 1.30.164078)
@@ -15,7 +15,7 @@
   24,369 (Exp 8,357), `P:\DZ\sounds\hpp\config.cpp` 523,051 (Exp 183,928), `P:\DZ\sounds\vehicles\config.cpp` 10 (Exp 31,
   still only `CfgPatches`). All config cites in the skill were renumbered to the stable files; every key/value in the
   `config-contract.md` `[EXACT]` blocks was found in the stable range (checked by script).
-- Motorbike sound classes on stable: `CfgSoundShaders` motorbike classes start at `P:\DZ\sounds\hpp\config.cpp:316513`
+- Motorbike sound classes on stable: `CfgSoundShaders` motorbike classes start at `P:\DZ\sounds\hpp\config.cpp:317170`
   and end at `:318240`; `CfgSoundSets` motorbike classes span `:383946-385029` (class start lines).
 - `motorbike_01.p3d` / `motorbike_02.p3d`: ODOL v56, same byte sizes as on Exp (2,302,438 / 1,895,327).
 

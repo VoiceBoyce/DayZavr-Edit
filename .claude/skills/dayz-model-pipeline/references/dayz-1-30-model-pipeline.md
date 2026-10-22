@@ -1,10 +1,10 @@
-# DayZ 1.30 changes — model pipeline (build 1.30.164078)
+# DayZ 1.30 changes — model pipeline (build 1.30.164200)
 
 Companion to `SKILL.md` § DayZ 1.30 changes. The LOD resolution table, py3d assembly
 path, winding rules, and artist-return preflight (SP-246) still hold. This file
 is the 1.30 engine/config delta for meshes, proxies, houses, and cache.
 
-Script and config line numbers point at `P:\` (unpacked 1.30.164078), re-checked
+Script and config line numbers point at `P:\` (unpacked 1.30.164200), re-checked
 2026-10-15. Changelog quotes come from the official 1.30 modding changelog
 transcription (`work\changelog-1.30-exp-modding.md`, not shipped in this pack);
 a statement that rests only on it is tagged `[CHANGELOG 1.30]`. Digest O/F/H
@@ -209,7 +209,44 @@ to 13 `.agr` (e.g. `P:\DZ\anims\workspaces\player\player_main\locomotion.agf`);
 unpacked; mods get a named filesystem — `work\changelog-1.30-exp-modding.md:25-28`.
 Iteration of **config.cpp** no longer always requires AddonBuilder. Unbinarized
 `.p3d` still benefit from `-cacheP3D`. Shipping / Workshop still packs a PBO.
-Operational launch: `dayz-test-ingame`.
+Operational launch: `dayz-test-ingame` (the Enfusion file-patching flag is
+`-loadRVFilesViaEnfusionFS=0/1` since 1.30.164200, `-resolveFilePatchingUsingEnfusion` before).
+
+## DayZ 1.30.164200 changes (model / config)
+
+Patch 1.30.164200 (2026-10-21). Data side from `dayz-130-migration`
+`config-delta-1.30.164078-to-164200.md` (install-vs-install comparison); notes
+items are [reported: BI 1.30.164200 notes].
+
+- **ODOL stays v56.** 3 377 vanilla `.p3d` were re-binarized, all still v56;
+  69 changed the textures/materials they embed. Binarize and Workbench in DayZ
+  Tools are 1.30.164.200 now (AddonBuilder unchanged, 1.0.240.639).
+- **Workbench FBX import fixed** [reported: BI notes, "Importing FBX files as
+  models (DZEXP-151)"]. Not tried here; this skill's path stays Blender → py3d.
+- **Roadway surfaces carry the liquid type.** 38 irrigation-tunnel and water-stream
+  models swapped the roadway texture `dz\surfaces\data\roadway\still_water_int.paa`
+  for `clean_water_int.paa`, which is how "Irrigation tunnel water gave character
+  cholera" was fixed: `still_water_int` is `liquidType=512` (`LIQUID_WATER`, drinks
+  as pond → cholera), `clean_water_int` is `liquidType=4194304` (`LIQUID_CLEANWATER`,
+  drinks as well) (`P:\DZ\surfaces\config.cpp:1775-1781`, `:1803-1809`). For water
+  in a custom model, the roadway texture name picks the surface and so the liquid.
+- **Navmesh blocks on dynamic structures.** `class Navmesh` in an entity config can
+  hide or move model parts for navmesh generation: `HideParts { class x {
+  hideAnimationSource="…"; } }` (+ `generateWithRoadway`, `generateWithProxies`) on
+  `Land_IrrigationTunnel_Entrance_01` (`P:\DZ\structures_takistan\Industrial\config.cpp:25-35`)
+  and `TransformParts { class Gate { transformAnimationSource="Wall_Gate_Rotate"; } }`
+  on `Fence` (`P:\DZ\gear\camping\config.cpp:4418-4427`). The named AnimationSource
+  must exist in the model's `model.cfg`/config. Vanilla navmeshes are now format v9
+  (`dayz-ai-patterns` §Navmesh).
+- **Material changes that retextures inherit**: ACOG (`acog.rvmat` re-lit, new
+  `acog_as.paa`, new unused `acog_tan*` set), cooking pot (own `_as/_damage/_destruct`),
+  GunCase (`RefTexsMats[]` damage swap, `healthLevels[]` 0.7/0.3 empty), 5.45×39
+  rounds (`545x39_smdi.paa`). A mod that copied the old rvmat now looks different
+  from vanilla.
+- **`fsShadowing=1`** PBO property [reported: BI notes, not yet measured]: loads a PBO
+  whose prefix matches another, aimed at Enfusion config files (`.layout`) via
+  'Variants'. RV models/configs are not named; do not use it to override a vanilla
+  `.p3d` until measured (`dayz-pbo-build`).
 
 ## Migration checklist (model / config)
 

@@ -1,9 +1,11 @@
-# DayZ 1.30 (stable 1.30.164078) — Particles, explosions, dust, vehicle VFX, sandstorm
+# DayZ 1.30 (stable 1.30.164200) — Particles, explosions, dust, vehicle VFX, sandstorm
 
 Verified against the unpacked 1.30.164078 stable tree: `P:\scripts\`, `P:\graphics\` (plain-text `.ptc` / `.emat`)
 and `P:\DZ\` configs. `Before 1.30` notes were checked against the 1.29 unpack (`O:\DayZ 1.29 …`). An earlier
 version of this page was written against 1.30 Experimental 164014; every static claim was re-checked on stable and
-paths/lines below are the stable ones. Labels: `../../_shared/dayz-version-policy.md`.
+paths/lines below are the stable ones. Labels: `../../_shared/dayz-version-policy.md`. Re-pointed to 1.30.164200 on
+2026-10-21; that patch added the `FishingSplashEffecter` pattern (§Server particle with a sound) and changed the wheel VFX
+cooldown (§`ParticleParamsOverrideData` and vehicle VFX).
 
 ## Client gate: `IsHeadlessOrDedicatedServer`
 
@@ -87,6 +89,97 @@ Before 1.30: `ParticleEffecter` always created `new EffectParticleGeneral()`.
 
 [DESIGN] PlayOnObject remains client-only. Use `CreateParticleServer` when every nearby client must see the same short-lived effecter.
 
+## Server particle with a sound: the `FishingSplashEffecter` pattern (1.30.164200)
+
+1.30.164200 gives fishing its own effecter so the synced splash also makes a sound. Static reading of `P:\scripts`
+1.30.164200; not measured in game.
+
+```
+// [EXACT] P:\scripts\4_world\classes\useractionscomponent\actions\continuous\actionfishingnew.c:462-486
+class FishingSplashEffecter : ParticleEffecter
+{
+	override protected typename GetEffectTypename()
+	{
+		return FishingSplashEffect;
+	}
+}
+
+class FishingSplashEffect : EffectParticleGeneral
+{
+	void FishingSplashEffect()
+	{
+		Event_OnEffectStarted.Insert(PlaySound);
+	}
+	
+	void ~FishingSplashEffect()
+	{
+		Event_OnEffectStarted.Remove(PlaySound);
+	}
+	
+	protected void PlaySound()
+	{
+		SEffectManager.PlaySound("Fishing_splash_SoundSet", m_Position).SetAutodestroy(true);
+	}
+}
+```
+
+Server side (`actionfishingnew.c:319-334`): first time `SEffectManager.CreateParticleServer(pos, new
+ParticleEffecterParameters("FishingSplashEffecter", EffecterBase.NOT_DEFINED_LIFESPAN, particleId))`, later
+`ReinitParticleServer(id, …)` (new particle id) + `ReactivateParticleServer(id)`; the action deletes it with
+`DestroyEffecterParticleServer` (`:144-147`). Before 1.30.164200 the same calls passed `"ParticleEffecter"`.
+
+How it works (all `P:\scripts\3_game\effectmanager.c` unless noted):
+- The server creates the effecter entity by its script class name (`g_Game.CreateObjectEx(m_EffecterType, pos,
+  ECE_PLACE_ON_SURFACE)`, `:586-599`) and syncs the particle id and start/stop commands as net-sync ints. No vanilla
+  effecter has a `CfgVehicles` entry (0 hits for `Effecter` in `P:\DZ` and `P:\bin` configs).
+- Each client builds `GetEffectTypename().Spawn()` in `ParticleEffecter.OnVariablesSynchronized` (`:801-813`, then
+  `SEffectManager.PlayInWorld`). The cast is to `EffectParticleGeneral` (`:811`), so the effect class must derive from it.
+- `Event_OnEffectStarted` fires when the effect's particle starts (`EffectParticle.SetParticle` hooks it to
+  `Event_OnParticleStart`, `3_game\effects\effectparticle.c:155`; invoker `3_game\effect.c:320-325`). The sound therefore
+  plays locally on every client that receives the effecter; there is no server sound or RPC.
+- Lifespan: a finite lifespan counts down in `SEffectManager.OnUpdate` and deletes the effecter (`:654-660`,
+  `EffecterBase.DecreaseLifespan` `:715-725`); `NOT_DEFINED_LIFESPAN` (-1) keeps it until
+  `DestroyEffecterParticleServer(id)` (`:639-647`).
+- Same shape as the 1.30.164078 ceiling dust (`CeilingDustEffecter` / `CeilingDustEffectBase`,
+  `4_world\classes\dust\dusteffectceilinghandler.c:105`, `:116`, sound hook `:120`, `:128-131`), which picks its SoundSet per surface.
+
+[DESIGN] Recipe for a mod ("a server-triggered splash/impact everybody sees and hears"), not compiled here:
+
+```
+// 4_World
+class MyMod_SplashEffecter : ParticleEffecter
+{
+	override protected typename GetEffectTypename()
+	{
+		return MyMod_SplashEffect;
+	}
+}
+
+class MyMod_SplashEffect : EffectParticleGeneral
+{
+	void MyMod_SplashEffect()
+	{
+		Event_OnEffectStarted.Insert(MyMod_PlaySound);
+	}
+
+	void ~MyMod_SplashEffect()
+	{
+		Event_OnEffectStarted.Remove(MyMod_PlaySound);
+	}
+
+	protected void MyMod_PlaySound()
+	{
+		SEffectManager.PlaySound("MyMod_Splash_SoundSet", m_Position).SetAutodestroy(true);	// CfgSoundSets class
+	}
+}
+
+// server only
+SEffectManager.CreateParticleServer(pos, new ParticleEffecterParameters("MyMod_SplashEffecter", 2.0, ParticleList.MYMOD_SPLASH));
+```
+
+Use a finite lifespan for fire-and-forget effects; with `NOT_DEFINED_LIFESPAN` keep the id and destroy it yourself.
+Prefix the class and method names: the effecter class name travels as a string.
+
 ## SurfaceInfo particle IDs
 
 1.30: `Surface.GetStepsParticleID(string)` / `GetWheelParticleID(string)` are `[Obsolete]` wrappers (they still
@@ -166,6 +259,8 @@ class ParticleParamsOverrideData
 `EffWheelSmoke.SetSurface(string)` is `[Obsolete("1.30: use SelectFromSurface instead")]` (`P:\scripts\4_world\entities\effects\wheelsmoke.c:32-48`). The live path is `SelectFromSurface(SurfaceInfo)` → `GetWheelParticleId()` (`:5-17`).
 
 `VehicleVFXComponent` (`P:\scripts\4_world\entities\vehicles\components\vehiclevfxcomponent.c:96`) registers single effects with `RegisterEffect(EVehicleVFXEffect, typename, VehicleVFXDataParams)` (`:126`) and groups with `RegisterEffectGroup(EVehicleVFXEffectGroup, typename, int count, VehicleVFXDataParams)` (`:139`); enums `EVehicleVFXEffect` (`INVALID`, `DUST_BEHIND`, `ENGINE_SMOKE`, `COOLANT_STEAM`, `EXHAUST_SMOKE`) and `EVehicleVFXEffectGroup` (`INVALID`, `WHEEL_SMOKE`, `WHEEL_CONTACT`) are in `P:\scripts\3_game\enums\evehiclevfxtypes.c:2-17`. `GetParticleParamsOverrideData` (`:373`) / `GetEffectGroupParticleParamsOverrideData` (`:530`) hand the caller the data object to fill. `PlayEffectData` calls `ParticleParamsOverride` on first play and, on later calls, `SelectFromSurface(surfaceInfo)` then `ParticleParamsOverride` (`:171-221`). CarScript wires it in `InitializeParticles()` (`P:\scripts\4_world\entities\vehicles\carscript.c:343-382`; memory points `ptcDustPos`, `ptcEnginePos`, `ptcCoolantPos`, `ptcExhaust_start` / `ptcExhaust_end`) and skips it on `IsHeadlessOrDedicatedServer()` (`:345`).
+
+`VehicleVFXDataParams` (`vehiclevfxcomponent.c:82-93`) carries position, orientation and `m_CooldownSec`: the minimum seconds between two (re)starts of an effect, enforced by `VehicleVFXData.CanPlay()` (`:43-50`) before `PlayEffectData` does anything (`:171-175`); 0 = no guard. The wheel groups register one effect per wheel with `new VehicleVFXDataParams(vector.Zero, "0 1 -1", 2.0)` (smoke) and `(vector.Zero, vector.Up, 2.0)` (contact) (`carscript.c:381-382`, `motorbikescript.c:203-204`). 1.30.164200 lowered that cooldown from 5.0 to 2.0 s, so a wheel's puff can restart every 2 s.
 
 [DESIGN] Porting a modded car: 1.30 `CarScript` still declares `m_coolantFx`, `m_engineFx`, `m_exhaustFx`, `m_WheelSmokeFx` under `//! old particles` (`carscript.c:2776-2781`) but never assigns them. Code that tweaks those fields compiles and does nothing; go through `m_VFXComponent`.
 

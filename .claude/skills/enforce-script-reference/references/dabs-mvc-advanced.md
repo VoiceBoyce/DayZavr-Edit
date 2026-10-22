@@ -11,6 +11,15 @@ Dabs MVC provides data-binding UI for DayZ:
 - **Two_Way_Binding** — bidirectional binding (e.g., EditBox ↔ property)
 - **NotifyPropertyChanged** — triggers UI update from controller
 
+> **DayZ 1.30.164200: check the Dabs build before anything below.** The patch put the Workbench script API
+> (`Workbench`, `WBModuleDef`, `ScriptEditor`, `WorkbenchPluginAttribute`, `ButtonAttribute` …) under
+> `#ifdef WORKBENCH`, which the game and server never define. Dabs Framework's `gui/mvc/samplemvc.c` (line 33)
+> used `Workbench` unguarded, so the whole script module fails: `Can't find variable 'Workbench'` →
+> `Can't compile "Mission" script module!` [reported: Dabs Framework PR #50; not reproduced here]. Use a Dabs
+> release built after that fix, and keep any Workbench helper in your own mod inside `#ifdef WORKBENCH`
+> (`references/dayz-1-30-enforce-script.md` §9). Full warning: `dayz-ui-development`
+> `references/dabs-framework.md`.
+
 ---
 
 ## CRITICAL GOTCHAS — Battle-Tested in Production

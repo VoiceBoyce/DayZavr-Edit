@@ -387,7 +387,7 @@ class MyEntity : EntityAI
         super.EEDelete(parent);
     }
     
-    override void CleanupEffects()  // only on vehicles: 1.30 declares it on Transport (3_game\vehicles\transport.c:998;
+    override void CleanupEffects()  // only on vehicles: 1.30 declares it on Transport (3_game\vehicles\transport.c:1007;
                                     // CarScript/BoatScript/MotorbikeScript override it). Not on EntityAI — drop this
                                     // override in a plain EntityAI subclass. Before 1.30: CarScript (public), BoatScript (protected).
     {

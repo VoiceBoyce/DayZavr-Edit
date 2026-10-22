@@ -2,6 +2,9 @@
 
 <!-- Generated 2026-10-15 from every config.cpp under P:\DZ (1.30.164078) against the 1.29 extraction. Keys are Root/Class paths as written in the source (case kept). Paths relative to P:\DZ. -->
 
+> Generated against 1.30.164078. 1.30.164200 changed 15 config PBOs (motorbikes, Badlands/Nasdara structures and gear, camping (+10 lines after `gear/camping/config.cpp:4418`), drinks, blunt melee, sounds_hpp, scripts): line numbers in those files below are 164078 numbers — see `config-delta-1.30.164078-to-164200.md`.
+
+
 Sound tables/shaders/sets are summarised by count only (thousands of new Nasdara/motorbike entries).
 
 

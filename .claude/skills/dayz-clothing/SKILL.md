@@ -8,7 +8,7 @@ description: "Use when: clothing mod, worn model, ClothingTypes, chaleco, armadu
 Distilled from ArmorHneck (2026-08-03): third-party body armor RAR → fully working
 worn item, ~6 in-game cycles to isolate three independent SILENT failure modes.
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 The in-game results below were measured on DayZ 1.29 diag unless labeled otherwise
 (measured on 1.29). They rest on the worn-mesh contract (text config, worn frame,
@@ -107,8 +107,8 @@ config.cpp (text!):
 - `inventorySlot[]` names the worn slots. 1.30: vanilla NBC pieces list a primary slot plus an
   `NBCHead`/`NBCTop`/`NBCPants`/`NBCBoots`/`NBCGloves` secondary slot. The player body does **not**
   expose those slots (`SurvivorBase.attachments[]`, `P:\DZ\characters\data\config.cpp:122`), so they
-  do not let the suit be worn over regular clothing; they are slots for a container (likely the NBC
-  pack, config not in `P:\DZ`) — see the reference. (Before 1.30: primary slot only.)
+  do not let the suit be worn over regular clothing; they are slots for a container (the NBC pack,
+  `NBCPack_ColorBase`, `P:\DZ\gear_takistan\containers\config.cpp:20-37`) — see the reference. (Before 1.30: primary slot only.)
 - `hiddenSelections[]` per model section; textures/materials arrays aligned.
 - **Declare `varWetMax` on every garment.** 1.30 lowered the `Inventory_Base` default to `0.049` (=
   `varWetMin`; `P:\DZ\data\config.cpp:3229-3231`; before 1.30: `0.249`), so a garment without its own
@@ -253,7 +253,8 @@ Details, line numbers and `[EXACT]` blocks: [dayz-1-30-clothing.md](references/d
 - **NBC secondary slots.** Vanilla NBC hood/jacket/pants/boots/gloves list both the primary clothing
   slot and `NBCHead` / `NBCTop` / `NBCPants` / `NBCBoots` / `NBCGloves` (`CfgSlots` in
   `P:\scripts\config.cpp:3115-3150`). The player (`SurvivorBase`) has none of these slots; they are
-  container slots (most likely the NBC pack — its config is not in `P:\DZ`, `[UNVERIFIED]`), not a
+  container slots (the NBC pack: Badlands config `P:\DZ\gear_takistan\containers\config.cpp:30-37` lists
+  all five in `attachments[]`), not a
   way to layer the suit over clothes. (The Exp draft said "coexist with regular clothing": wrong.)
 - **`NBCBag` on some backpacks, not all.** `TaloonBag_ColorBase`, `TortillaBag`,
   `DryBag_ColorBase`, `HuntingBag`, `MountainBag_ColorBase`, `AssaultBag_ColorBase`,
@@ -284,17 +285,19 @@ Details, line numbers and `[EXACT]` blocks: [dayz-1-30-clothing.md](references/d
   De-craft: empty `Waterskin_ColorBase` + blade (−12 HP) → 1 `TannedLeather`.
 - **`CraftArmbandFlag.CanDo`** no longer requires `IsEmpty()`; it only rejects a flag that is already
   an attachment. Extra knives (`Jambiya`, `Scimitar`, `DonerKnife`, `Akinaka`) are listed as tools
-  (script-only classes on 1.30.164078 — no config in `P:\DZ`).
+  (Badlands DLC items, configs in `P:\DZ\weapons_takistan\melee\blade\config.cpp`).
 - **Wash head / wet clothing.** New `ActionWashHead*` / `ActionWetClothing*` apply per-slot wetness
   (capped by `varWetMax`) and `GetThermalBiasHandler().Add(-THERMAL_BIAS_WASH_HEAD_DECREMENT)`.
   `[CHANGELOG 1.30]` known issue "bottles can still Wash Head while frozen" — still true in
   `P:\scripts`: `ActionWashHeadItemContinuous.ActionCondition` does not call `GetIsFrozen()`.
-- **New garments, script-only.** `OBRCap/OBRJacket/OBRPants_ColorBase`, `FNOJacket`, `FNOPants`,
+- **New garments (Badlands DLC).** `OBRCap/OBRJacket/OBRPants_ColorBase`, `FNOJacket`, `FNOPants`,
   `KameezShirt_ColorBase`, `Mens/WomensShalwarPants_ColorBase`, `TurbanHat_ColorBase`,
   `PakolHat_ColorBase`, `SandalsShoes_ColorBase`, `TraditionalSandalShoes_ColorBase`,
   `DustGoggles_ColorBase`, `ChestRigVest/LinenVest/RobeVest_ColorBase`, `ShortSleeveShirt_ColorBase`,
-  `PoliceShortSleeveShirt_ColorBase`, `LeatherHipPack_ColorBase` have scripts (some with IK) but **no**
-  config class in `P:\DZ` on 1.30.164078 (`[UNVERIFIED]` whether a DLC/map PBO ships them).
+  `PoliceShortSleeveShirt_ColorBase`, `LeatherHipPack_ColorBase` have scripts (some with IK); their
+  configs and models are Badlands DLC data in `P:\DZ\characters_takistan\` (on `P:\` since the 1.30.164200
+  unpack; corrected 2026-10-21 — this used to say they had no config). Same for the NBC pack
+  (`NBCPack_ColorBase`, `P:\DZ\gear_takistan\containers\config.cpp:20`, exposes the five `NBC*` slots).
 
 ### What breaks for a ≤1.29 clothing/gear mod
 

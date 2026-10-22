@@ -616,7 +616,7 @@ host-direct BEFORE committing a plan — reframes scope and is cheap. Origin: Me
     front 0/1, brake 2/3, reverse 4/5, tail 6/7, dashboard 8). A config putting `color/glass/interior` into
     0-2 and lights behind DEVIATES → risk of broken lights.
   - refueling: vanilla loads position only if `MemoryPointExists("refill")` and `GetActionCompNameFuel()`
-    returns `"refill"` (`scripts/3_game/vehicles/transport.c:112-113,459-461`). A p3d with `fuelpoint` (not
+    returns `"refill"` (`scripts/3_game/vehicles/transport.c:112-113,462-464`). A p3d with `fuelpoint` (not
     `refill`) leaves the fuel action without position (falls back to 0,0,0).
 
 ---
@@ -797,9 +797,9 @@ that BOTH must pass (1.30 also checks `transport.CanGetIn()` first, `:36`, defau
 
 `CrewCanGetThrough` is **NOT overridden by `CarScript` or `Car`** — only by the concrete vanilla car classes
 (`CivilianSedan` etc.). A vehicle running as **bare `CarScript`** falls to the base stub
-`Transport.CrewCanGetThrough` (`scripts/3_game/vehicles/transport.c:724-731`), which returns **false** in the
+`Transport.CrewCanGetThrough` (`scripts/3_game/vehicles/transport.c:727-734`), which returns **false** in the
 normal build (`#ifndef CFGMODS_DEFINE_TEST`) → gate-2 false → get-in never appears, no matter how perfect the
-crew bone is. The same trap hits `GetSeatAnimationType` (`transport.c:682-688` → `Error("not implemented")`) and
+crew bone is. The same trap hits `GetSeatAnimationType` (`transport.c:685-691` → `Error("not implemented")`) and
 `GetAnimInstance` (used in `ActionGetInTransport.Start`), both of which also `Error()`/false in the base.
 
 ### Fix — ship a thin `<MOD>_Base.c` script class (PIPELINE requirement; for an import pipeline add to the config/script phase)
@@ -807,7 +807,7 @@ crew bone is. The same trap hits `GetSeatAnimationType` (`transport.c:682-688` �
 Minimal M1 set (the three are mandatory; door mappers / `CanReach*` / `GetSeatIndexFromDoor` /
 `GetAnimSourceFromSelection` are M2 — needed for openable doors and seat-switching, not for entering+driving).
 Signatures verbatim from `CivilianSedan` (`scripts/4_world/.../civiliansedan.c:109,119`; 1.29: `:85,95`). On 1.30 a
-car that must also START needs the battery trio (base `GetElectricitySourceDevice()` returns `null`, `transport.c:826-829`):
+car that must also START needs the battery trio (base `GetElectricitySourceDevice()` returns `null`, `transport.c:835-838`):
 
 ```c
 class <PREFIX>_Base extends CarScript
@@ -945,7 +945,7 @@ The "Get in" radial and the seated player are governed by TWO ViewGeometry struc
 
 ### 1. Get-in appears for driver but NOT codriver (raycast "always driver")
 
-DayZ resolves the seat with **`Transport.CrewPositionIndex(componentIdx)`** (proto native, `P:\scripts\3_game\vehicles\transport.c:179`) over the **collision component the cursor raycast HITS in the ViewGeometry LOD** (`ObjIntersectView`, `dayzphysics.c:88`; consumed at `actiongetintransport.c:44-45`) — NOT by memory-point proximity. So each seat needs its OWN dedicated, clean, closed-convex component:
+DayZ resolves the seat with **`Transport.CrewPositionIndex(componentIdx)`** (proto native, `P:\scripts\3_game\vehicles\transport.c:182`) over the **collision component the cursor raycast HITS in the ViewGeometry LOD** (`ObjIntersectView`, `dayzphysics.c:88`; consumed at `actiongetintransport.c:44-45`) — NOT by memory-point proximity. So each seat needs its OWN dedicated, clean, closed-convex component:
 
 - `seat_driver` = 1 dedicated `ComponentNN` (its own cube); `seat_codriver` = 1 dedicated `ComponentNN`. Dual-tag: the seat selection and its `ComponentNN` share the SAME faces (100% overlap).
 - Seats painted across a multi-component grid -> the raycast never lands cleanly on the 2nd seat -> "always driver". (LFQuad N1.5: `seat_driver/codriver` spread over 88/112 points across ~23 components -> codriver never appeared.)
@@ -965,7 +965,7 @@ Seated position AND orientation come from the **crew-proxy triangle** (`crewdriv
 ### Builder fix (so future cars never hit this)
 source-game/regen builders create crew proxies via `add_proxy(..., scale=0.1)` -> tiny ambiguous triangles, and may paint seats over the collision grid. Change crew-proxy creation to emit the **canonical triangle (edges ~1.0/2.0, 3 distinct angles)** with the model-correct frame, in BOTH ViewGeo and FireGeo, and build seats as **2 dedicated clean cubes** (one ComponentNN each) from the start.
 
-> Origen: LFQuad "Bloque A — Crew" D34 (`30_Sessions/2026-06-05-LFQuad-crew-resuelto-postura.md`, in-game confirmed) + MercedesAMGLF get-in/seated-pose (2026-06-27). Cross-ref: `CrewPositionIndex` transport.c:179, `ActionGetInTransport.ActionCondition` actiongetintransport.c:44-66, `CanReachSeatFromDoors` carscript.c:2177. The earlier "codriver needs crew proxies in FireGeo" diagnosis was REFUTED — the cause is collision-component cleanliness + canonical proxy, not FireGeo presence.
+> Origen: LFQuad "Bloque A — Crew" D34 (`30_Sessions/2026-06-05-LFQuad-crew-resuelto-postura.md`, in-game confirmed) + MercedesAMGLF get-in/seated-pose (2026-06-27). Cross-ref: `CrewPositionIndex` transport.c:182, `ActionGetInTransport.ActionCondition` actiongetintransport.c:44-66, `CanReachSeatFromDoors` carscript.c:2177. The earlier "codriver needs crew proxies in FireGeo" diagnosis was REFUTED — the cause is collision-component cleanliness + canonical proxy, not FireGeo presence.
 
 > **VALUE CORRECTED 2026-08-18 — the flag is `0x0000003F`, not `0x02000000`.**
 > Measured directly on the sealed vanilla control with py3d 1.4.0:
@@ -1106,7 +1106,7 @@ telemetry `ClassName()` ≠ base. For telemetry to read the EXACT config-class n
 > (telemetry `comp=0 crewIdx=0`, "native mapping works"). Source of truth is **Addendum 2026-06-27
 > "Crew get-in" of `references/vehicle-structural-parity.md`** (VERIFIED in-game LFQuad D34 + MercedesAMGLF). Summary:
 
-`CrewPositionIndex(componentIdx)` (native, transport.c:179) resolves the seat by the **collision component
+`CrewPositionIndex(componentIdx)` (native, transport.c:182) resolves the seat by the **collision component
 hit by cursor raycast in ViewGeo** (`ObjIntersectView`, actiongetintransport.c:44-45) — NOT by
 `GetCrewIndex` nor by memory points. The two real blockers, both geometric:
 - an **occluding solid box** in ViewGeo (e.g., a central "spine") → cursor hits it BEFORE the seat

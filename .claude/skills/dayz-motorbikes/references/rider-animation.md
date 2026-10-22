@@ -1,6 +1,6 @@
 # Rider Animation, Vehicles.agf Graph, and Camera
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: `../../_shared/dayz-version-policy.md`. Script, `.agf`,
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: `../../_shared/dayz-version-policy.md`. Script, `.agf`,
 > `.asi` and `.ast` line numbers were read on 1.30 Exp 164014 and are unchanged on stable (identical line counts,
 > sampled cites re-read 2026-10-15); `config.cpp` cites point at stable `P:\DZ` / `P:\bin`.
 
@@ -46,7 +46,7 @@ In `ActionGetInTransport.c:81-100`, vector math determines whether the rider get
 			seat = transport.GetSeatAnimationTypeDirectional(crewIndex, direction);
 		}
 ```
-In `Motorbike_01.c:58-69` and `Motorbike_02.c:59-70`, `GetSeatAnimationTypeDirectional` returns animation indices associated with `GetIn_L` (0) and `GetIn_R` (1).
+In `Motorbike_01.c:55-66` and `Motorbike_02.c:56-67`, `GetSeatAnimationTypeDirectional` returns animation indices associated with `GetIn_L` (0) and `GetIn_R` (1).
 
 ### Ejection on Tipover and Collapse on Death
 - **Ejection**: In `DayZPlayerImplement.c:2452-2459`, if `transport.CrewShouldEject(seatPos)` returns `true` (on motorbikes `IsFallen()`), the server provisionally activates `eModifiers.MDF_UNCONSCIOUSNESS` to force the rider's ejection from the seat while the native ragdoll command is unavailable.
@@ -57,7 +57,7 @@ In `Motorbike_01.c:58-69` and `Motorbike_02.c:59-70`, `GetSeatAnimationTypeDirec
 ## 2. Third-Person Camera: `DayZPlayerCamera3rdPersonVehicleMotorbike`
 
 - **Registration**: `DAYZCAMERA_3RD_VEHICLE_MOTORBIKE = 32;` in `P:\scripts\4_World\Entities\ManBase\DayZPlayer\DayZPlayerCameras.c:20, 63`.
-- **Implementation**: `DayZPlayerCamera3rdPersonVehicleMotorbike` in `P:\scripts\4_World\Entities\ManBase\DayZPlayer\DayZPlayerCameraVehicles.c:239-470`.
+- **Implementation**: `DayZPlayerCamera3rdPersonVehicleMotorbike` in `P:\scripts\4_World\Entities\ManBase\DayZPlayer\DayZPlayerCameraVehicles.c:239-473`.
 - **Spring Damping (Spring Smooth Time)**:
   Like the car camera (`DayZPlayerCameraVehicles.c:142-148`, with fixed time `0.3`), uses `Math.SmoothCD` and `Math.SmoothCDPI2PI` (`:369-375`), but with dedicated per-axis constants (`:256-265`):
   - `CONST_SPRING_SMOOTHTIME_YAW = 0.5;`
@@ -73,6 +73,12 @@ In `Motorbike_01.c:58-69` and `Motorbike_02.c:59-70`, `GetSeatAnimationTypeDirec
   rot[0] = -lagYaw * CONST_YAW_LAG_REVERSE; // CONST_YAW_LAG_REVERSE = 0.3
   ```
   Reverses and dampens the camera yaw swing when turning (vanilla comment: "reverse + dampen the yaw lag swing").
+- **Final clamp (new in 1.30.164200)**: after the `UP_ANGLE_CAP = 10` cap (`:402-405`) the camera now clamps
+  `rot[0]` and `rot[1]` to the class constants `CONST_UD_MIN = -60` / `CONST_UD_MAX = 80` (`:241-242`, `:407-408`)
+  before building the matrix. Vanilla applies the pitch limits to the yaw component as well; the effect on side
+  free-look was not measured. Also new in 164200: the base `UpdateUDAngleUnlocked` / `UpdateLRAngleUnlocked` replace the
+  `pMin/pMax` they are passed with `m_pPlayer.GetLookLimits(...)` (`dayzplayercamera_base.c:152-156`, `:197-202`), so
+  the limits this camera passes at `:336-337` no longer bound the look input.
 
 ---
 

@@ -1,4 +1,4 @@
-# Sources — dayz-environment-hazards (1.30.164078)
+# Sources — dayz-environment-hazards (1.30.164200)
 
 Every file below was re-opened on `P:\` (DayZ 1.30 stable 1.30.164078) on 2026-10-15; existence checked with Glob/find. The skill was first written against the 1.30 Experimental unpack (1.30.164014, `E:\DayZ-Exp-Extract\…`, no longer on this machine); those Exp paths were replaced. 1.29 comparisons use `O:\DayZ 1.29 Старый распакованный клиент\`.
 
@@ -18,7 +18,7 @@ Every file below was re-opened on `P:\` (DayZ 1.30 stable 1.30.164078) on 2026-1
 | `P:\scripts\3_game\surfaceinfo.c` | dust protos :49-70, `GetByName` :16 |
 | `P:\scripts\3_game\dustkickupeffects.c` | kickup :43-45 |
 | `P:\scripts\3_game\ppemanager\requesters\ppersandstorm.c` | PPE requester |
-| `P:\scripts\3_game\vehicles\transport.c` | `GetWeightCoef` :475-478 |
+| `P:\scripts\3_game\vehicles\transport.c` | `GetWeightCoef` :478-481 |
 | `P:\scripts\3_game\entities\entityai.c` | `OnCEIterate` :3893-3911, obsolete `OnCEUpdate` :4924-4925, `GetCachedEquipmentCategory` :322-325 |
 | `P:\scripts\3_game\entities\object.c` | `IsInfluencedBySandstorm`, `OnClientSandstormEnter/Leave` :1375-1381 |
 | `P:\scripts\3_game\dayzgame.c` | noise calls without weather multiplier :3618/3793/3833; DEVELOPER sandstorm RPCs :3408-3463 |
@@ -37,7 +37,7 @@ Every file below was re-opened on `P:\` (DayZ 1.30 stable 1.30.164078) on 2026-1
 | `P:\scripts\4_world\classes\transmissionagents\agents\eyesirritation.c` | die-off |
 | `P:\scripts\4_world\plugins\pluginbase\plugintransmissionagents.c` | `AGT_AIRBOURNE_SOLID` :414-436, cached protection :577-592 |
 | `P:\scripts\4_world\entities\cachedequipmentstorage.c` | category gate :31 |
-| `P:\scripts\4_world\entities\itembase.c` | `GetProtectionLevel` config keys :4073-4102 |
+| `P:\scripts\4_world\entities\itembase.c` | `GetProtectionLevel` config keys :4077-4106 |
 | `P:\scripts\4_world\entities\itembase\clothing_base.c` | `Glasses_Base` EYEWEAR :176-179, `Mask_Base` MASK :196-199 |
 | `P:\scripts\4_world\entities\itembase\clothing\gp5gasmask.c` | filter-driven protection :13-28 |
 | `P:\scripts\4_world\entities\itembase\nvgoggles.c` | NVG category :11-14, lowered eye protection :83-95 |
@@ -83,7 +83,7 @@ Every file below was re-opened on `P:\` (DayZ 1.30 stable 1.30.164078) on 2026-1
 
 ## Not available on this machine (Exp-only sources)
 
-- Nasdara data PBO (`DZ\data_takistan` `config.cpp`, `basicDefines.hpp`, `aiconfigs\config.cpp`) and the Exp PBO listing: seen on 1.30 Exp 164014 only; not unpacked on `P:\`.
+- Nasdara data PBO (`DZ\data_takistan` `config.cpp`, `basicDefines.hpp`, `aiconfigs\config.cpp`): seen on 1.30 Exp 164014; on `P:\DZ\data_takistan\` since the 1.30.164200 unpack (re-read 2026-10-21, see `dust-oilpit-nasdara.md`). The Nasdara world config `worlds_nasdara.ebo` stays encrypted.
 - The 1.30 Exp modding changelog: source of the `[CHANGELOG 1.30]` labels.
 
 ## Located but not reviewed

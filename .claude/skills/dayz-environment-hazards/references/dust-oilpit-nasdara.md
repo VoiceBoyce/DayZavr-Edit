@@ -1,6 +1,6 @@
 # Surface dust, oil pits, and Nasdara
 
-Source: DayZ 1.30 stable `1.30.164078`; paths relative to `P:\scripts\` unless they start with `P:\`. Detail for `.ptc` / `ParticleParamsOverrideData` / headless belongs to `dayz-particles`. Here only hazard and world contract.
+Source: DayZ 1.30 stable `1.30.164200`; paths relative to `P:\scripts\` unless they start with `P:\`. Detail for `.ptc` / `ParticleParamsOverrideData` / headless belongs to `dayz-particles`. Here only hazard and world contract.
 
 ## SurfaceInfo
 
@@ -29,7 +29,7 @@ Obsolete wrappers (still compile with `SCRIPT (W)`):
 
 ## Vehicles
 
-`VehicleVFXComponent.PlayEffectData` detects ground with `g_Game.GetSurface` and passes `SurfaceInfo` (`4_world\entities\vehicles\components\vehiclevfxcomponent.c:171-185, 213`). `EffVehicleDust.SelectFromSurface` uses `GetVehicleDustParticleId()`; `ParticleParamsOverride` sets LIFETIME/REPEAT/WIND/VELOCITY/SIZE/AIR_RESISTANCE from speed × weight (`4_world\entities\effects\vehicledust.c:5-36`). `Transport.GetWeightCoef()` default 1.0 (`3_game\vehicles\transport.c:475-478`); overrides: `Offroad_02` 1.5 (`4_world\entities\vehicles\inheritedcars\offroad_02.c:133-136`), `Truck_01_Base` 2.0 (`4_world\entities\vehicles\inheritedcars\truck_01_base.c:120-123`), `Motorbike_01` 0.5 (`4_world\entities\vehicles\inheritedmotorbikes\motorbike_01.c:87-90`), `Motorbike_02` 0.75 (`4_world\entities\vehicles\inheritedmotorbikes\motorbike_02.c:77-80`). An older note quoting "motorbike 0.25" is wrong for 164078.
+`VehicleVFXComponent.PlayEffectData` detects ground with `g_Game.GetSurface` and passes `SurfaceInfo` (`4_world\entities\vehicles\components\vehiclevfxcomponent.c:171-185, 213`). `EffVehicleDust.SelectFromSurface` uses `GetVehicleDustParticleId()`; `ParticleParamsOverride` sets LIFETIME/REPEAT/WIND/VELOCITY/SIZE/AIR_RESISTANCE from speed × weight (`4_world\entities\effects\vehicledust.c:5-36`). `Transport.GetWeightCoef()` default 1.0 (`3_game\vehicles\transport.c:478-481`); overrides: `Offroad_02` 1.5 (`4_world\entities\vehicles\inheritedcars\offroad_02.c:133-136`), `Truck_01_Base` 2.0 (`4_world\entities\vehicles\inheritedcars\truck_01_base.c:120-123`), `Motorbike_01` 0.5 (`4_world\entities\vehicles\inheritedmotorbikes\motorbike_01.c:84-87`), `Motorbike_02` 0.75 (`4_world\entities\vehicles\inheritedmotorbikes\motorbike_02.c:74-77`). An older note quoting "motorbike 0.25" is wrong for 164078.
 
 `EffWheelContact.SelectFromSurface` (`4_world\entities\effects\effwheelcontact.c:25-58`): `GetWheelContactParticleId` + `GetWheelContactSoundSetName`.
 
@@ -72,13 +72,13 @@ Client: `BonfireLight` at +2.5 m (inside `#ifndef SERVER` / `#ifndef NO_GUI`); f
 
 Stable 1.30 script side (verified on `P:\`): `NasdaraData : WorldData` (`4_world\classes\worlds\nasdara.c:2`), sand weather + `CalculateWind` (see [sandstorm-shelter.md](sandstorm-shelter.md)), July max temperature 38.4 (`nasdara.c:49`), solar table (`:67-73`), dust ground/cloud ON (`:152-169`). Lighting path `DZ\worlds\nasdara\data\lighting\lighting_nasdara.txt` (`3_game\worldlighting.c:6`); DLC id `EDLCId.BADLANDS` (`3_game\services\contentdlc.c:7`); dynamic music `DynamicMusicPlayerRegistryNasdara` (`3_game\systems\dynamicmusicplayer\dynamicmusicplayerregistrynasdara.c:1-5`); Nasdara houses use `BuildingWithFireplaceNasdara` (`4_world\entities\building\buildingwithfireplace.c:19`).
 
-World data — **observed on 1.30 Exp 164014 only; the Nasdara DLC data is not unpacked on `P:\`, so none of this was re-verified on stable**:
+World data — first seen on 1.30 Exp 164014; **re-verified on the 1.30.164200 unpack**, which put the Badlands data on `P:\` (`P:\DZ\data_takistan\`, `*_takistan\`, `P:\DZ\worlds\nasdara\{ce,data,navmesh}\`; the world config `worlds_nasdara.ebo` stays encrypted):
 
-- `CfgMods.nasdara` `appId = 3816030`; internal prefix `DZ\data_takistan`; the Exp data PBO had 6 files (`aiconfigs\config.bin`, `basicdefines.hpp`, `config.bin`, plus an impact-test `.p3d`/`.bisurf`/`.rvmat`) and no `.wrp`/navmesh.
-- Skinning (`basicDefines.hpp`): mouflon 10 steaks / 2 guts / 1 lard / 1 bones; dog + head; lizard 1 of each.
-- AI: `DZMouflonGroupBeh` type `DomesticHerbivores`; `DZDogGroupBeh` type `Predators` with `siegeAttackCountdownMin/Max` 10–15.
+- `CfgMods.nasdara` `appId = 3816030` (`P:\DZ\data_takistan\config.cpp:16-20`); internal prefix `DZ\data_takistan`. The data PBO now holds 8 files (`aiconfigs\config.cpp`, `basicdefines.hpp`, `config.cpp`, the impact-test `.p3d` and `mud_brick`/`mud_brick_impenetrable` `.bisurf`/`.rvmat`; Exp had 6). No `.wrp` in it; the navmesh is in `worlds_nasdara_nav.pbo` (`P:\DZ\worlds\nasdara\navmesh\navmesh.nm`). Lighting file present: `P:\DZ\worlds\nasdara\data\lighting\lighting_nasdara.txt`.
+- Skinning (`P:\DZ\data_takistan\basicdefines.hpp:5-17`): mouflon 10 steaks / 2 guts / 1 lard / 1 bones; dog + head; lizard 1 of each.
+- AI: `DZMouflonGroupBeh` type `DomesticHerbivores` (`P:\DZ\data_takistan\aiconfigs\config.cpp:9`); `DZDogGroupBeh` type `Predators` with `siegeAttackCountdownMin/Max` 10–15 (`:61`, `:87-88`).
 
-[CHANGELOG 1.30] The 1.30 navmesh format is not backwards compatible: regenerate navmeshes for custom terrains.
+[CHANGELOG 1.30] The 1.30 navmesh format is not backwards compatible: regenerate navmeshes for custom terrains. 1.30.164200 moved it again: every vanilla `navmesh.nm` (Nasdara included) is format v9 (1.29: v6, 1.30.164078: v7; uint32 at offset 4 after `TESM`) and the server's version check is strict (exe analysis, not run in game), so a desert map built on 164078 needs a new navmesh (`dayz-ai-patterns` §Navmesh).
 
 ## AI noise (pointer)
 

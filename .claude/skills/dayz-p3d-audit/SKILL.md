@@ -19,7 +19,7 @@ Validates .p3d model files, config.cpp, model.cfg, and .rvmat materials against
 DayZ engine requirements. Built from production debugging where models rendered
 correctly but had zero collision, missing animations, or broken textures.
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 In-game measurements here that name a build were made on DayZDiag 1.29 (1.29.163709) — read them as (measured on 1.29); none was repeated on 1.30. The MLOD format py3d reads and the collision/LOD rules did not change in 1.30. What did change: every vanilla `.p3d` under `P:\DZ` is now ODOL **v56** (1.29: v54; header census 2026-10-15), so a vanilla reference must go through an ODOL→MLOD converter that supports v56 before you diff against it.
 

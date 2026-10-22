@@ -10,7 +10,7 @@ router in `../SKILL.md`.
 The engine hooks are `EntityAI.OnStoreSave(ParamsWriteContext)` and
 `EntityAI.OnStoreLoad(ParamsReadContext, int)` returning `bool`
 (`VANILLA/3_game/entities/entityai.c:2910`; `VANILLA/3_game/entities/entityai.c:2978`; `VANILLA/` = `P:\scripts`,
-1.30.164078). The stream has no field names or
+1.30.164200). The stream has no field names or
 random access: correctness is the exact sequence of typed writes and reads.
 
 ## Normative write/load order
@@ -104,7 +104,7 @@ have. Before 1.30: energy-or-nothing was the only optional prefix. Bodies:
 ## Vanilla stream version gates on 1.30
 
 Engine `version` cuts that matter on 1.30 (the hook argument from `g_Game.SaveVersion()`, not a mod
-`storageVersion`); cites are `VANILLA/` = `P:\scripts` 1.30.164078:
+`storageVersion`); cites are `VANILLA/` = `P:\scripts` 1.30.164200:
 
 | Engine `version` | Writer | Extra field | Load gate |
 |---|---|---|---|

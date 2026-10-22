@@ -1,6 +1,6 @@
 # DayZ 1.30 — persistence deltas
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 Companion to `dayz-persistence`. Every `[EXACT]` block below was re-opened in `P:\scripts` (1.30.164078,
 2026-10-15). This file was first written against 1.30 Experimental 164014; stable shifted several line numbers
@@ -395,8 +395,9 @@ own a version header, check every `Read`, and pick a location (`$profile:` / `$s
    construction data first when the component is present.
 6. Claiming a `$mission:` `FileSerializer` overwrite is atomic, or that `BunkerBroadcastPersistenceStorage` follows
    `JsonFileLoader` + backup.
-7. Sidecar code that enumerates files with `FindFile("$profile:…")` — on a 1.30 server it silently lists the server's
-   working directory [reported: bzed, DZEXP-134]; see `sidecar-files.md`.
+7. Sidecar code that enumerates files with `FindFile("$profile:…")` — on 1.30.164014 [reported: bzed, DZEXP-134] and
+   1.30.164078 (measured on 1.30.164078, also for absolute paths) it silently listed the server's working directory;
+   1.30.164200 fixes it per BI [reported: BI 1.30.164200 notes], not re-measured. See `sidecar-files.md`.
 
 `JsonFileLoader<T>.LoadFile` / deprecated `JsonLoadFile` are at `3_game\tools\jsonfileloader.c:7-40` / `:99-133` on 1.30.
 `DeleteFile` / `CopyFile` at `1_core\proto\ensystem.c:528,531`. CF ModStorage is not part of `P:\` and was not re-verified for 1.30.
@@ -415,4 +416,5 @@ own a version header, check every `Read`, and pick a location (`$profile:` / `$s
       player-built fences.
 - [ ] If persisting mission-wide bunker state, do not clone vanilla's unchecked `FileSerializer` overwrite. Use the sidecar
       contract on `$profile:` / `$saves:`.
-- [ ] Replace sidecar `FindFile` enumeration with `CF.FindFileEx` or a placeholder resolver on 1.30 servers.
+- [ ] Sidecar `FindFile` enumeration: keep it behind a sentinel-file probe with a resolver / index-file fallback (broken
+      on 164014/164078, fixed per BI in 164200); never delete or overwrite on the strength of an empty listing.

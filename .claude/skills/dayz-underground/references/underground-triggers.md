@@ -1,8 +1,8 @@
 # Underground triggers: schema and recipes (DayZ 1.30)
 
-> Target: DayZ 1.30 stable (1.30.164078). Labels: ../../_shared/dayz-version-policy.md.
+> Target: DayZ 1.30 stable (1.30.164200). Labels: ../../_shared/dayz-version-policy.md.
 
-Citations are `P:\scripts\…` (1.30.164078), re-opened on 2026-10-15; a short file name
+Citations are `P:\scripts\…` (1.30.164200), re-opened on 2026-10-15; a short file name
 repeats the full path given earlier, and a bare `:line` refers to the file cited just
 before it in the same paragraph or list, else to `undergroundarealoader.c`.
 `1.29: O:\…` = the unpacked 1.29 client.
@@ -67,7 +67,8 @@ Cap: `m_TriggerIndex` synchronizes in `-1..4095` (`undergroundtrigger.c:10`), so
 a JSON supports up to 4096 triggers. Before 1.30: `-1..255`, i.e. 256
 (1.29: `O:\…\undergroundtrigger.c:10`). Vanilla sizes on 1.30: Chernarus 0 triggers,
 Livonia 8, Sakhal 30 (`P:\DZ\worlds\<world>\ce\cfgundergroundtriggers.json`), Nasdara 1076
-(stable install `nasdara\addons\worlds_nasdara_ce.pbo`, read 2026-10-15).
+(stable install `nasdara\addons\worlds_nasdara_ce.pbo`, read 2026-10-15; on `P:\DZ\worlds\nasdara\ce\`
+since the 1.30.164200 unpack, still 1076).
 
 ## Triggers parented to an object
 

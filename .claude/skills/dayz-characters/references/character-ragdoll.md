@@ -1,6 +1,6 @@
 # Character ragdoll (DayZ 1.30)
 
-> Target: DayZ 1.30 stable (1.30.164078); re-verified against `P:\` (first written on 1.30 Exp 164014).
+> Target: DayZ 1.30 stable (1.30.164200); re-verified against `P:\` (first written on 1.30 Exp 164014).
 
 1.30: survivor death physics is data-driven. `SurvivorBase` points `enfAnimSys.ragdoll` at
 `DZ/characters/bodies/human.ragdoll`. `[CHANGELOG 1.30]` Workbench ships a ragdoll editor for `.ragdoll`

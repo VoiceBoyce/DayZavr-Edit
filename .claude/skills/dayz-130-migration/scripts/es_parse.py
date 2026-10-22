@@ -1,9 +1,10 @@
 """Extract a declaration-level API model from an Enforce Script tree (DayZ scripts).
 
-Usage: python -I es_api.py <scripts_root> <out.json>
+Usage: python -I es_parse.py <scripts_root> <out.json>   (raw model; the scanner index is built by build_api_index.py)
 Output: {"classes": {...}, "enums": {...}, "globals": {...}, "typedefs": {...}}
 Every declaration carries file (relative), line and the preprocessor condition stack.
 """
+import hashlib
 import json
 import os
 import re
@@ -81,6 +82,10 @@ def norm(s):
     s = re.sub(r"\s+", " ", s).strip()
     s = re.sub(r"\s*([<>,()\[\]])\s*", r"\1", s)
     s = s.replace(",", ", ")
+    # keep the space between a closing generic and the declared name: `array<string> GetList()`,
+    # `ref array<string> m_List;`, `typedef array<string> TStringArray;` (gluing them hid every generic-typed
+    # method/field/typedef from the index before 2026-10-21)
+    s = re.sub(r">(?=[A-Za-z_~])", "> ", s)
     return s
 
 
@@ -136,6 +141,45 @@ def strip_attrs(stmt):
     return attrs, s
 
 
+PP_RX = re.compile(r"#\s*(ifdef|ifndef|else|endif|if|define|undef|include)\b\s*(.*)")
+
+
+def preprocess(lines):
+    """Blank preprocessor lines and return (lines, cond_per_line); cond = the #ifdef stack joined with ' && '
+    (`X` for #ifdef X, `!X` for #ifndef X / the #else branch, `(expr)` for #if)."""
+    lines = list(lines)
+    cond_stack, line_cond = [], []
+    for idx, ln in enumerate(lines):
+        st = ln.strip()
+        if st.startswith("#"):
+            m = PP_RX.match(st)
+            if m:
+                d, arg = m.group(1), m.group(2).strip()
+                if d == "ifdef":
+                    cond_stack.append(arg)
+                elif d == "ifndef":
+                    cond_stack.append("!" + arg)
+                elif d == "if":
+                    cond_stack.append("(" + arg + ")")
+                elif d == "else" and cond_stack:
+                    top = cond_stack.pop()
+                    cond_stack.append(top[1:] if top.startswith("!") else "!" + top)
+                elif d == "endif" and cond_stack:
+                    cond_stack.pop()
+            line_cond.append(" && ".join(cond_stack))
+            lines[idx] = " " * len(ln)
+        else:
+            line_cond.append(" && ".join(cond_stack))
+            if re.match(r"^\s*typedef\b[^;{]*$", ln):
+                lines[idx] = ln + ";"  # vanilla 1.29 has a typedef without ';' (inventorygrid.c)
+    return lines, line_cond
+
+
+def body_hash(body):
+    """Whitespace-insensitive fingerprint of a method body (comments are already blanked by clean())."""
+    return hashlib.md5(re.sub(r"\s+", "", body).encode("utf-8")).hexdigest()[:10]
+
+
 class Parser:
     def __init__(self, root):
         self.root = root
@@ -143,6 +187,7 @@ class Parser:
         self.enums = {}
         self.globals = {}
         self.typedefs = {}
+        self._last_rec = None
 
     def cls(self, name):
         return self.classes.setdefault(name, {"decls": [], "methods": {}, "fields": {}})
@@ -151,36 +196,8 @@ class Parser:
         rel = os.path.relpath(path, self.root).replace("\\", "/")
         with open(path, "r", encoding="utf-8", errors="replace") as fh:
             raw = fh.read()
-        text = clean(raw)
-        lines = text.split("\n")
-        # preprocessor: blank lines starting with #, record condition per line
-        cond_stack = []
-        line_cond = []
-        for idx, ln in enumerate(lines):
-            st = ln.strip()
-            if st.startswith("#"):
-                m = re.match(r"#\s*(ifdef|ifndef|else|endif|if|define|undef|include)\b\s*(.*)", st)
-                if m:
-                    d, arg = m.group(1), m.group(2).strip()
-                    if d == "ifdef":
-                        cond_stack.append(arg)
-                    elif d == "ifndef":
-                        cond_stack.append("!" + arg)
-                    elif d == "if":
-                        cond_stack.append("(" + arg + ")")
-                    elif d == "else" and cond_stack:
-                        top = cond_stack.pop()
-                        cond_stack.append(top[1:] if top.startswith("!") else "!" + top)
-                    elif d == "endif" and cond_stack:
-                        cond_stack.pop()
-                line_cond.append(" && ".join(cond_stack))
-                lines[idx] = " " * len(ln)
-            else:
-                line_cond.append(" && ".join(cond_stack))
-                if re.match(r"^\s*typedef\b[^;{]*$", ln):
-                    lines[idx] = ln + ";"  # vanilla 1.29 has a typedef without ';' (inventorygrid.c)
-        text = "\n".join(lines)
-        self._scan(text, rel, line_cond)
+        lines, line_cond = preprocess(clean(raw).split("\n"))
+        self._scan("\n".join(lines), rel, line_cond)
 
     def _scan(self, text, rel, line_cond):
         ctx = [("global", None)]
@@ -227,6 +244,8 @@ class Parser:
                                 elif text[j] == "}":
                                     depth -= 1
                                 j += 1
+                            if res and res[0] == "method" and self._last_rec is not None:
+                                self._last_rec["body"] = body_hash(text[i:j])
                             line += text[i:j].count("\n")
                             i = j
                             if res and res[0] == "init":
@@ -252,6 +271,12 @@ class Parser:
             part = norm(part)
             if not part:
                 continue
+            # vanilla 1.29 ecachedequipmentitemcategory.c:5 has `NVG = 2` with no trailing comma before `OPTICS = 4,`
+            m = re.match(r"^([A-Za-z_]\w*) ?= ?(.+?) ([A-Za-z_]\w* ?=.*)$", part)
+            while m and "=" not in m.group(2):
+                vals.append([m.group(1), m.group(2).strip()])
+                part = m.group(3)
+                m = re.match(r"^([A-Za-z_]\w*) ?= ?(.+?) ([A-Za-z_]\w* ?=.*)$", part)
             k, v = (part.split("=", 1) + [None])[:2] if "=" in part else (part, None)
             names = k.split()
             # vanilla 1.30 dayzplayer.c:767 has `CMD_ACTIONMOD_WASHFACE` with no trailing comma; the compiler accepts it
@@ -332,6 +357,7 @@ class Parser:
             rec = {"ret": ret, "mods": mods, "params": params, "attrs": attrs, "file": rel, "line": line,
                    "cond": cond, "proto": "proto" in mods or (terminated and "native" in mods), "tail": tail}
             rec["sig"] = sig_of(mname, rec)
+            self._last_rec = rec
             if owner == "<global>":
                 self.globals.setdefault(mname, []).append(rec)
             else:

@@ -1,6 +1,6 @@
 # ThermalBias, heat stroke, shadow, and cooling
 
-Source: DayZ 1.30 stable `1.30.164078`; paths relative to `P:\scripts\` unless they start with `P:\`. None of these APIs exist on 1.29.
+Source: DayZ 1.30 stable `1.30.164200`; paths relative to `P:\scripts\` unless they start with `P:\`. None of these APIs exist on 1.29.
 
 ## ThermalBiasHandler
 

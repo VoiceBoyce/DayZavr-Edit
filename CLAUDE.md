@@ -54,7 +54,7 @@ base_mods=["@CF","@VPPAdminTools_v2"])` → `session_acquire_wait` → инст�
 
 | Что | Где |
 |---|---|
-| DayZ (клиент, актуальная 1.30.164.078) | `D:\SteamLibrary\steamapps\common\DayZ` |
+| DayZ (клиент, актуальная 1.30.164.200) | `D:\SteamLibrary\steamapps\common\DayZ` |
 | **Диск `P:\`** (распакованная ванилла) | `subst P: G:\DayZ_P`. Автоподключение: HKCU\...\Run\DayZ_P_Drive. В DayZ Tools `settings.ini` → ProjectDrive |
 | DayZ Tools | `D:\SteamLibrary\steamapps\common\DayZ Tools` |
 | DayZ Server | `G:\SteamLibrary\steamapps\common\DayZServer` |

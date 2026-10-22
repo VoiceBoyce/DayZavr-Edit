@@ -6,7 +6,8 @@ Added 2026-05-13. Append-only. Source: full grep of 459 `.layout` files in `P:\`
 > Version note (2026-10-15): the counts below were taken on a pre-1.30 `P:\` (vanilla 1.29-era plus
 > mod layouts). 1.30.164078 ships 227 vanilla layouts (216 in 1.29), 9 of them in the new GUID-form
 > header that the regexes behind these counts do not read (`layout-format.md`, "1.30: GUID-form
-> widget headers"). Treat the numbers as proportions, not exact 1.30 counts.
+> widget headers"); 1.30.164200 adds `day_z_hud.layout` to them (10). Treat the numbers as proportions,
+> not exact 1.30 counts; examples quoted from `day_z_hud.layout` with a `Class name {` header are pre-164200.
 
 This file complements (does not replace) `layout-format.md`, `widget-api.md`,
 `dabs-framework.md`. Use it when you need:

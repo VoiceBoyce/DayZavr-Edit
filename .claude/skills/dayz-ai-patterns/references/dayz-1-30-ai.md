@@ -53,12 +53,12 @@ emitter: player steps (`O:\…\scripts\4_world\entities\dayzplayerimplement.c:33
 
 `MiscGameplayFunctions.GenerateAINoiseAtPosition(vector, float, NoiseParams)` is
 `[Obsolete("Use MiscGameplayFunctions.GenerateAINoiseAtPositionEx instead!")]`
-(`P:\scripts\4_world\static\miscgameplayfunctions.c:2072-2083`); the replacement
-`GenerateAINoiseAtPositionEx(notnull Object source, float lifeTime, NoiseParams)` (`:1886-1896`) calls
+(`P:\scripts\4_world\static\miscgameplayfunctions.c:2010-2021`); the replacement
+`GenerateAINoiseAtPositionEx(notnull Object source, float lifeTime, NoiseParams)` (`:1824-1834`) calls
 `AddNoiseTarget(source.GetPosition(), lifeTime, noiseParams)` with no weather factor. `CarScript.GenerateCarHornAINoise`
 is gone; the horn lives in `VehicleHornComponent`
 (`P:\scripts\4_world\entities\vehicles\components\vehiclehorncomponent.c:10`, reached through
-`Transport.GetVehicleHornComponent()`, `P:\scripts\3_game\vehicles\transport.c:842`).
+`Transport.GetVehicleHornComponent()`, `P:\scripts\3_game\vehicles\transport.c:851`).
 
 ## Obsolete script weather helpers (kept for HUD / old mods)
 
@@ -184,21 +184,41 @@ templates as 1.29: `DZAmbientLifeGroupBeh` (`:79`), `DZWolfGroupBeh` (`:87`), `D
 `DZdomesticGroupBeh` (`:201`), `DZSheepGroupBeh` (`:252`); Bliss adds `BlissBearGroupBeh`
 (`P:\DZ\data_bliss\aiconfigs\config.cpp:9`).
 
-The Exp draft quoted two Nasdara templates from `exp\nasdara__data_nasdara\DZ\data_takistan\aiconfigs\config.cpp`
-(seen on 1.30 Exp 164014): `DZMouflonGroupBeh` (`type = "DomesticHerbivores"`, graze/rest lifecycle,
-`safeKeeperIntervalMin/Max`, catch-up radii) and `DZDogGroupBeh` (`type = "Predators"`,
-`zoneType = "HuntingGround"`, `siegeAttackCountdownMin/Max = 10/15`, `huntAttackCountdownMin/Max`,
-`safeKeeperIntervalMin/Max = 20/40`). **They are not in `P:\DZ`** (no `data_takistan` on this machine), and
-the new animal scripts `Animal_OvisGmelini`, `Animal_CanisFamiliaris_Dobermann_*` /
-`_GermanShepherd_*`, `Animal_VaranusGriseus` (`P:\scripts\4_world\entities\creatures\animals\`) have no
-config class in `P:\DZ`. `[UNVERIFIED on 1.30.164078]` — re-check in the Nasdara data PBO before copying
-them.
+Badlands (Nasdara) adds two templates; first quoted from the Exp 164014 data, now on `P:\` since the
+1.30.164200 unpack (`P:\DZ\data_takistan\aiconfigs\config.cpp`): `DZMouflonGroupBeh` (`:9`,
+`type = "DomesticHerbivores"`, graze/rest lifecycle, `safeKeeperIntervalMin/Max`, catch-up radii) and
+`DZDogGroupBeh` (`:61`, `type = "Predators"`, `zoneType = "HuntingGround"`,
+`siegeAttackCountdownMin/Max = 10/15`, `huntAttackCountdownMin/Max = 1/4`, `safeKeeperIntervalMin/Max = 20/40`,
+`:85-90`). The new animal scripts `Animal_OvisGmelini`, `Animal_CanisFamiliaris_Dobermann_*` /
+`_GermanShepherd_*`, `Animal_VaranusGriseus` (`P:\scripts\4_world\entities\creatures\animals\`) have their
+configs in `P:\DZ\animals_takistan\<animal>\config.cpp` (e.g. `Animal_OvisGmelini: AnimalBase`,
+`ovis_gmelini\config.cpp:20`) and their `CfgAIBehaviours` in `P:\DZ\AI_takistan\config.cpp`
+(`Predators_Dobermann` `:3`, `Predators_GermanShepherd` `:676`, `Herbivores_OvisGmelini` `:1338`,
+`AmbientLife_Varanus_Griseus` `:2010`; `Predators_Dobermann` names `defaultGroupTemplateName="DZDogGroupBeh"`,
+`:7`). (Corrected 2026-10-21: this paragraph used to say none of it was in `P:\DZ`; `P:\` held no DLC data
+before the 164200 unpack.)
 
 ## Navmesh (eAI pathfinding on custom maps)
 
 `[CHANGELOG 1.30]`: the navmesh file is a newer version with no backwards compatibility — regenerate for
 custom terrains. Navmesh can use a hide animation source if configured in the EntityType Navmesh config.
-Not verifiable statically (binary `.nm` files are not on `P:\`).
+
+Measured since (header `TESM` + uint32 version at offset 4): 1.29 vanilla = **6**
+(`O:\…\DZ\worlds\*\navmesh\navmesh.nm`), 1.30.164078 vanilla = **7**, 1.30.164200 vanilla = **9**
+(`P:\DZ\worlds\{chernarusplus,enoch,nasdara,sakhal}\navmesh\navmesh.nm`, and the installed
+`worlds_*_nav.pbo`, PBO header `version` 127639-127643). 1.30.164078 rejected v6 with
+`AI (E): Navmesh could not be loaded: Invalid version. (Navmesh version: 6, Desired version: 7)` and
+`AI (F): Unable to load navmesh for '<world>'` (measured on this machine; infected do not spawn, animals and
+native AI freeze). For 164200 the exe compares with `cmp r9d,9` (164078: `cmp r9d,7`; exe analysis in
+`dayz-130-migration` config-delta §2.9, not run in game), so a v7 navmesh most likely fails the same way.
+Regenerate with the 164200 data server (`-startNavmeshDataServer`) and `NavMeshGenerator_x64.exe`
+1.30.164.165: `SKILL.md` § DayZ 1.30.164200 changes.
+
+Config side (1.30.164200 vanilla): `class Navmesh { HideParts { class x { hideAnimationSource="…"; } } }` with
+`generateWithRoadway` / `generateWithProxies` on `Land_IrrigationTunnel_Entrance_01`
+(`P:\DZ\structures_takistan\Industrial\config.cpp:25-35`) and
+`class Navmesh { TransformParts { class Gate { transformAnimationSource="Wall_Gate_Rotate"; } } }` on `Fence`
+(`P:\DZ\gear\camping\config.cpp:4418-4427`).
 
 ## What an eAI-style (script AI on `PlayerBase`) mod must re-check on 1.30
 
@@ -230,4 +250,5 @@ Expansion eAI bots are `PlayerBase` subclasses driven by script FSMs, so they in
    `P:\scripts\3_game\entities\entityai.c:3913`); `OnCEUpdate` is obsolete in favour of
    `OnCEIterate(float, float)`; `GAME_STORAGE_VERSION` is 144 — version-gate any `OnStoreLoad` reads.
 8. **Navmesh.** Regenerate navmesh for custom terrains (`[CHANGELOG 1.30]`), which matters to
-   `ExpansionPathHandler` path filters (PC-15/PC-16).
+   `ExpansionPathHandler` path filters (PC-15/PC-16). On 1.30.164200 the required format is v9; a v7
+   navmesh built for 164078 most likely no longer loads (§Navmesh above).

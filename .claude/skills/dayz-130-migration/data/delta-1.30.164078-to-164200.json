@@ -1,0 +1,2395 @@
+{
+ "classes_removed": [
+  {
+   "class": "NavmeshTest",
+   "file": "4_world/entities/navmeshtest/navmeshtest.c",
+   "base": "Building"
+  },
+  {
+   "class": "NavmeshTest_A",
+   "file": "4_world/entities/navmeshtest/navmeshtest.c",
+   "base": "NavmeshTest"
+  },
+  {
+   "class": "NavmeshTest_B",
+   "file": "4_world/entities/navmeshtest/navmeshtest.c",
+   "base": "NavmeshTest"
+  },
+  {
+   "class": "NavmeshTest_C",
+   "file": "4_world/entities/navmeshtest/navmeshtest.c",
+   "base": "NavmeshTest"
+  },
+  {
+   "class": "NavmeshTest_D",
+   "file": "4_world/entities/navmeshtest/navmeshtest.c",
+   "base": "NavmeshTest"
+  },
+  {
+   "class": "NavmeshTest_E",
+   "file": "4_world/entities/navmeshtest/navmeshtest.c",
+   "base": "NavmeshTest"
+  },
+  {
+   "class": "NavmeshTest_F",
+   "file": "4_world/entities/navmeshtest/navmeshtest.c",
+   "base": "NavmeshTest"
+  },
+  {
+   "class": "ResourceBrowser",
+   "file": "1_core/workbenchapi.c",
+   "base": "WBModuleDef"
+  },
+  {
+   "class": "WorldEditor",
+   "file": "1_core/workbenchapi.c",
+   "base": "WBModuleDef"
+  },
+  {
+   "class": "WorldEditorAPI",
+   "file": "1_core/workbenchapi.c",
+   "base": null
+  },
+  {
+   "class": "WorldEditorTool",
+   "file": "1_core/workbenchapi.c",
+   "base": null
+  }
+ ],
+ "classes_added": [
+  {
+   "class": "AnimEditor",
+   "file": "1_core/workbenchapi/modules/animeditor.c",
+   "base": "WBModuleDef",
+   "cond": "WORKBENCH",
+   "line": "1_core/workbenchapi/modules/animeditor.c:4"
+  },
+  {
+   "class": "BuildResourceContext",
+   "file": "1_core/workbenchapi/buildresourcecontext.c",
+   "base": "Managed",
+   "cond": "WORKBENCH",
+   "line": "1_core/workbenchapi/buildresourcecontext.c:3"
+  },
+  {
+   "class": "ConstructionPartRebuildInvertedSupport",
+   "file": "4_world/classes/basebuilding/typeconstructiondata/constructionpartrebuildinvertedsupport.c",
+   "base": "ConstructionPartRebuild",
+   "line": "4_world/classes/basebuilding/typeconstructiondata/constructionpartrebuildinvertedsupport.c:7"
+  },
+  {
+   "class": "ConstructionPartRebuildInvertedSupportTypeData",
+   "file": "4_world/classes/basebuilding/typeconstructiondata/constructionpartrebuildinvertedsupport.c",
+   "base": "ConstructionPartRebuildTypeData",
+   "line": "4_world/classes/basebuilding/typeconstructiondata/constructionpartrebuildinvertedsupport.c:2"
+  },
+  {
+   "class": "DateTimeUtcAsInt",
+   "file": "1_core/workbenchapi.c",
+   "base": null,
+   "cond": "WORKBENCH",
+   "line": "1_core/workbenchapi.c:9"
+  },
+  {
+   "class": "FishingSplashEffect",
+   "file": "4_world/classes/useractionscomponent/actions/continuous/actionfishingnew.c",
+   "base": "EffectParticleGeneral",
+   "line": "4_world/classes/useractionscomponent/actions/continuous/actionfishingnew.c:470"
+  },
+  {
+   "class": "FishingSplashEffecter",
+   "file": "4_world/classes/useractionscomponent/actions/continuous/actionfishingnew.c",
+   "base": "ParticleEffecter",
+   "line": "4_world/classes/useractionscomponent/actions/continuous/actionfishingnew.c:462"
+  },
+  {
+   "class": "GameViewer",
+   "file": "1_core/workbenchapi/modules/gameviewer.c",
+   "base": "WBModuleDef",
+   "cond": "WORKBENCH",
+   "line": "1_core/workbenchapi/modules/gameviewer.c:4"
+  },
+  {
+   "class": "GeneratedResources",
+   "file": "1_core/workbenchapi/generatedresources.c",
+   "base": "Managed",
+   "cond": "WORKBENCH",
+   "line": "1_core/workbenchapi/generatedresources.c:14"
+  },
+  {
+   "class": "Land_NavmeshTest",
+   "file": "4_world/entities/navmeshtest/navmeshtest.c",
+   "base": "Building",
+   "line": "4_world/entities/navmeshtest/navmeshtest.c:2"
+  },
+  {
+   "class": "Land_NavmeshTest_A",
+   "file": "4_world/entities/navmeshtest/navmeshtest.c",
+   "base": "Land_NavmeshTest",
+   "line": "4_world/entities/navmeshtest/navmeshtest.c:118"
+  },
+  {
+   "class": "Land_NavmeshTest_B",
+   "file": "4_world/entities/navmeshtest/navmeshtest.c",
+   "base": "Land_NavmeshTest",
+   "line": "4_world/entities/navmeshtest/navmeshtest.c:126"
+  },
+  {
+   "class": "Land_NavmeshTest_C",
+   "file": "4_world/entities/navmeshtest/navmeshtest.c",
+   "base": "Land_NavmeshTest",
+   "line": "4_world/entities/navmeshtest/navmeshtest.c:136"
+  },
+  {
+   "class": "Land_NavmeshTest_D",
+   "file": "4_world/entities/navmeshtest/navmeshtest.c",
+   "base": "Land_NavmeshTest",
+   "line": "4_world/entities/navmeshtest/navmeshtest.c:145"
+  },
+  {
+   "class": "Land_NavmeshTest_E",
+   "file": "4_world/entities/navmeshtest/navmeshtest.c",
+   "base": "Land_NavmeshTest",
+   "line": "4_world/entities/navmeshtest/navmeshtest.c:154"
+  },
+  {
+   "class": "Land_NavmeshTest_F",
+   "file": "4_world/entities/navmeshtest/navmeshtest.c",
+   "base": "Land_NavmeshTest",
+   "line": "4_world/entities/navmeshtest/navmeshtest.c:165"
+  },
+  {
+   "class": "MetaFile",
+   "file": "1_core/workbenchapi/metafile.c",
+   "base": "BaseContainer",
+   "cond": "WORKBENCH",
+   "line": "1_core/workbenchapi/metafile.c:4"
+  },
+  {
+   "class": "ParticleEditor",
+   "file": "1_core/workbenchapi/modules/particleeditor.c",
+   "base": "WBModuleDef",
+   "cond": "WORKBENCH",
+   "line": "1_core/workbenchapi/modules/particleeditor.c:4"
+  },
+  {
+   "class": "ResourceManager",
+   "file": "1_core/workbenchapi/modules/resourcemanager.c",
+   "base": "WBModuleDef",
+   "cond": "WORKBENCH",
+   "line": "1_core/workbenchapi/modules/resourcemanager.c:4"
+  },
+  {
+   "class": "ResourceManagerPlugin",
+   "file": "1_core/workbenchapi/plugins/resourcemanagerplugin.c",
+   "base": "WorkbenchPlugin",
+   "cond": "WORKBENCH",
+   "line": "1_core/workbenchapi/plugins/resourcemanagerplugin.c:14"
+  },
+  {
+   "class": "WBProgressDialog",
+   "file": "1_core/workbenchapi/wbprogressdialog.c",
+   "base": "Managed",
+   "cond": "WORKBENCH",
+   "line": "1_core/workbenchapi/wbprogressdialog.c:33"
+  }
+ ],
+ "base_changed": [],
+ "class_changes": {
+  "ActionBandageTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/continuous/medical/actionbandagetarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/continuous/medical/actionbandagetarget.c:71",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionBurnSewTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/continuous/medical/actionburnsewtarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/continuous/medical/actionburnsewtarget.c:51",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionCheckPulseTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/continuous/medical/actioncheckpulsetarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/continuous/medical/actioncheckpulsetarget.c:112",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionCollectBloodTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/continuous/medical/actioncollectbloodtarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/continuous/medical/actioncollectbloodtarget.c:49",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionCollectSampleTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/continuous/medical/actioncollectsampletarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/continuous/medical/actioncollectsampletarget.c:46",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionConstructor": {
+   "file": "4_world/classes/useractionscomponent/actionconstructor.c",
+   "body_changed": [
+    {
+     "name": "RegisterActions",
+     "sig": "void RegisterActions(TTypenameArray)",
+     "line": "4_world/classes/useractionscomponent/actionconstructor.c:27"
+    }
+   ]
+  },
+  "ActionCoverHeadTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/continuous/actioncoverheadtarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/continuous/actioncoverheadtarget.c:60",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionDefibrilateTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/continuous/medical/actiondefibrilatetarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/continuous/medical/actiondefibrilatetarget.c:45",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionDisinfectTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/singleuse/medical/actiondisinfecttarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/singleuse/medical/actiondisinfecttarget.c:54",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionFishingNew": {
+   "file": "4_world/classes/useractionscomponent/actions/continuous/actionfishingnew.c",
+   "body_changed": [
+    {
+     "name": "PlaySplashEffectSynced",
+     "sig": "void PlaySplashEffectSynced(FishingActionData)",
+     "line": "4_world/classes/useractionscomponent/actions/continuous/actionfishingnew.c:319"
+    }
+   ]
+  },
+  "ActionGagTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/continuous/actiongagtarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/continuous/actiongagtarget.c:72",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionGiveBloodTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/continuous/medical/actiongivebloodtarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/continuous/medical/actiongivebloodtarget.c:104",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionGiveSalineTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/continuous/medical/actiongivesalinetarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/continuous/medical/actiongivesalinetarget.c:40",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionHandcuffTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/singleuse/actionhandcufftarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/singleuse/actionhandcufftarget.c:30",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionInjectTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/singleuse/medical/actioninjecttarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/singleuse/medical/actioninjecttarget.c:47",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionMeasureTemperatureTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/continuous/medical/actionmeasuretemperaturetarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/continuous/medical/actionmeasuretemperaturetarget.c:38",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionRestrainTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/continuous/actionrestraintarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/continuous/actionrestraintarget.c:158",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionSewTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/continuous/medical/actionsewtarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/continuous/medical/actionsewtarget.c:65",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionShaveTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/continuous/actionshavetarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/continuous/actionshavetarget.c:52",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionSplintTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/continuous/medical/actionsplinttarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/continuous/medical/actionsplinttarget.c:65",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionTargets": {
+   "file": "4_world/classes/useractionscomponent/actiontargets.c",
+   "body_changed": [
+    {
+     "name": "ComputeUtility",
+     "sig": "private float ComputeUtility(Object, vector, vector, Object, vector)",
+     "line": "4_world/classes/useractionscomponent/actiontargets.c:490"
+    },
+    {
+     "name": "IsObstructedEx",
+     "sig": "private bool IsObstructedEx(Object, IsObjectObstructedCache)",
+     "line": "4_world/classes/useractionscomponent/actiontargets.c:447"
+    }
+   ]
+  },
+  "ActionTestBloodTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/continuous/medical/actiontestbloodtarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/continuous/medical/actiontestbloodtarget.c:61",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionUncoverHeadTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/continuous/actionuncoverheadtarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/continuous/actionuncoverheadtarget.c:64",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionUngagTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/continuous/actionungagtarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/continuous/actionungagtarget.c:65",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionUnrestrainTarget": {
+   "file": "4_world/classes/useractionscomponent/actions/continuous/actionunrestraintarget.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/continuous/actionunrestraintarget.c:145",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "ActionUnrestrainTargetHands": {
+   "file": "4_world/classes/useractionscomponent/actions/continuous/actionunrestraintargetempty.c",
+   "methods_added": [
+    {
+     "name": "IsLockTargetOnUse",
+     "new": [
+      "bool IsLockTargetOnUse()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ActionBase",
+     "line": "4_world/classes/useractionscomponent/actions/continuous/actionunrestraintargetempty.c:100",
+     "proto": false,
+     "shadows": {
+      "class": "ActionBase",
+      "sigs": [
+       "bool IsLockTargetOnUse()"
+      ]
+     }
+    }
+   ]
+  },
+  "CCTCursor": {
+   "file": "4_world/classes/useractionscomponent/targetconditionscomponents/cctcursor.c",
+   "body_changed": [
+    {
+     "name": "CCTCursor",
+     "sig": "void CCTCursor(float=UAMaxDistances.DEFAULT)",
+     "line": "4_world/classes/useractionscomponent/targetconditionscomponents/cctcursor.c:11"
+    },
+    {
+     "name": "Can",
+     "sig": "bool Can(PlayerBase, ActionTarget)",
+     "line": "4_world/classes/useractionscomponent/targetconditionscomponents/cctcursor.c:17"
+    }
+   ],
+   "fields_added": [
+    {
+     "name": "m_MaximalActionDistance",
+     "type": "float",
+     "init": null,
+     "obsolete": null,
+     "line": "4_world/classes/useractionscomponent/targetconditionscomponents/cctcursor.c:4"
+    }
+   ]
+  },
+  "CCTCursorNoRuinCheck": {
+   "file": "4_world/classes/useractionscomponent/targetconditionscomponents/cctcursornoruincheck.c",
+   "body_changed": [
+    {
+     "name": "CCTCursorNoRuinCheck",
+     "sig": "void CCTCursorNoRuinCheck(float=UAMaxDistances.DEFAULT)",
+     "line": "4_world/classes/useractionscomponent/targetconditionscomponents/cctcursornoruincheck.c:11"
+    },
+    {
+     "name": "Can",
+     "sig": "bool Can(PlayerBase, ActionTarget)",
+     "line": "4_world/classes/useractionscomponent/targetconditionscomponents/cctcursornoruincheck.c:17"
+    }
+   ],
+   "fields_added": [
+    {
+     "name": "m_MaximalActionDistance",
+     "type": "float",
+     "init": null,
+     "obsolete": null,
+     "line": "4_world/classes/useractionscomponent/targetconditionscomponents/cctcursornoruincheck.c:4"
+    }
+   ]
+  },
+  "CCTCursorParent": {
+   "file": "4_world/classes/useractionscomponent/targetconditionscomponents/cctcursorparent.c",
+   "body_changed": [
+    {
+     "name": "CCTCursorParent",
+     "sig": "void CCTCursorParent(float=UAMaxDistances.DEFAULT)",
+     "line": "4_world/classes/useractionscomponent/targetconditionscomponents/cctcursorparent.c:11"
+    },
+    {
+     "name": "Can",
+     "sig": "bool Can(PlayerBase, ActionTarget)",
+     "line": "4_world/classes/useractionscomponent/targetconditionscomponents/cctcursorparent.c:17"
+    }
+   ],
+   "fields_added": [
+    {
+     "name": "m_MaximalActionDistance",
+     "type": "float",
+     "init": null,
+     "obsolete": null,
+     "line": "4_world/classes/useractionscomponent/targetconditionscomponents/cctcursorparent.c:4"
+    }
+   ]
+  },
+  "CarScript": {
+   "file": "4_world/entities/vehicles/carscript.c",
+   "body_changed": [
+    {
+     "name": "InitializeParticles",
+     "sig": "protected void InitializeParticles()",
+     "line": "4_world/entities/vehicles/carscript.c:343"
+    }
+   ]
+  },
+  "Cauldron": {
+   "file": "4_world/entities/itembase/edible_base/bottle_base/cauldron.c",
+   "body_changed": [
+    {
+     "name": "SetActions",
+     "sig": "void SetActions()",
+     "line": "4_world/entities/itembase/edible_base/bottle_base/cauldron.c:104"
+    }
+   ]
+  },
+  "CodeLockVisualManager": {
+   "file": "4_world/classes/codelockvisualmanager.c",
+   "body_changed": [
+    {
+     "name": "CalculateVisibleBars",
+     "sig": "protected int CalculateVisibleBars(float)",
+     "line": "4_world/classes/codelockvisualmanager.c:509"
+    },
+    {
+     "name": "GetAnimationPhaseForBackPart",
+     "sig": "protected float GetAnimationPhaseForBackPart(EntityAI, bool)",
+     "line": "4_world/classes/codelockvisualmanager.c:452"
+    },
+    {
+     "name": "GetAnimationPhaseForFrontPart",
+     "sig": "protected float GetAnimationPhaseForFrontPart(EntityAI, bool)",
+     "line": "4_world/classes/codelockvisualmanager.c:438"
+    },
+    {
+     "name": "UpdateAttachedAnimations",
+     "sig": "protected void UpdateAttachedAnimations(EntityAI)",
+     "line": "4_world/classes/codelockvisualmanager.c:412"
+    }
+   ],
+   "fields_added": [
+    {
+     "name": "BACK_PART_BB",
+     "type": "float",
+     "init": "0.92",
+     "obsolete": null,
+     "line": "4_world/classes/codelockvisualmanager.c:48"
+    },
+    {
+     "name": "BACK_PART_DEFAULT",
+     "type": "float",
+     "init": "0.0",
+     "obsolete": null,
+     "line": "4_world/classes/codelockvisualmanager.c:46"
+    },
+    {
+     "name": "BACK_PART_HOUSE",
+     "type": "float",
+     "init": "0.50",
+     "obsolete": null,
+     "line": "4_world/classes/codelockvisualmanager.c:47"
+    },
+    {
+     "name": "BACK_PART_ROTATION",
+     "type": "float",
+     "init": "90.0",
+     "obsolete": null,
+     "line": "4_world/classes/codelockvisualmanager.c:52"
+    },
+    {
+     "name": "FRONT_PART_DEFAULT",
+     "type": "float",
+     "init": "0.0",
+     "obsolete": null,
+     "line": "4_world/classes/codelockvisualmanager.c:43"
+    },
+    {
+     "name": "FRONT_PART_HOUSE_REVERSED",
+     "type": "float",
+     "init": "0.50",
+     "obsolete": null,
+     "line": "4_world/classes/codelockvisualmanager.c:44"
+    },
+    {
+     "name": "FRONT_PART_ROTATION_DEFAULT",
+     "type": "float",
+     "init": "0.0",
+     "obsolete": null,
+     "line": "4_world/classes/codelockvisualmanager.c:50"
+    },
+    {
+     "name": "FRONT_PART_ROTATION_REVERSED",
+     "type": "float",
+     "init": "180.0",
+     "obsolete": null,
+     "line": "4_world/classes/codelockvisualmanager.c:51"
+    },
+    {
+     "name": "MAX_BATTERY_INDICATORS",
+     "type": "int",
+     "init": "6",
+     "obsolete": null,
+     "line": "4_world/classes/codelockvisualmanager.c:74"
+    }
+   ]
+  },
+  "Compass": {
+   "file": "4_world/entities/itembase/compass.c",
+   "methods_added": [
+    {
+     "name": "EEItemLocationChanged",
+     "new": [
+      "void EEItemLocationChanged(notnull InventoryLocation, notnull InventoryLocation)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ItemBase",
+     "line": "4_world/entities/itembase/compass.c:63",
+     "proto": false,
+     "shadows": {
+      "class": "ItemBase",
+      "sigs": [
+       "void EEItemLocationChanged(notnull InventoryLocation, notnull InventoryLocation)"
+      ]
+     }
+    }
+   ]
+  },
+  "ConstructionBase": {
+   "file": "4_world/classes/constructionbase.c",
+   "methods_added": [
+    {
+     "name": "IgnoreHouseCollisions",
+     "new": [
+      "bool IgnoreHouseCollisions()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "4_world/classes/constructionbase.c:1521",
+     "proto": false,
+     "shadows": null
+    },
+    {
+     "name": "QueueUpdateUtilityParts",
+     "new": [
+      "void QueueUpdateUtilityParts()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "4_world/classes/constructionbase.c:626",
+     "proto": false,
+     "shadows": null
+    },
+    {
+     "name": "UpdateUtilityParts",
+     "new": [
+      "bool UpdateUtilityParts()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "4_world/classes/constructionbase.c:636",
+     "proto": false,
+     "shadows": null
+    }
+   ],
+   "body_changed": [
+    {
+     "name": "AddToConstructedParts",
+     "sig": "void AddToConstructedParts(string)",
+     "line": "4_world/classes/constructionbase.c:141"
+    },
+    {
+     "name": "CanBuildUtilityPart",
+     "sig": "bool CanBuildUtilityPart(string)",
+     "line": "4_world/classes/constructionbase.c:614"
+    },
+    {
+     "name": "DropNonUsableMaterialsServer",
+     "sig": "void DropNonUsableMaterialsServer(Man, string)",
+     "line": "4_world/classes/constructionbase.c:1262"
+    },
+    {
+     "name": "IsCollidingEx",
+     "sig": "bool IsCollidingEx(CollisionCheckData)",
+     "line": "4_world/classes/constructionbase.c:1527"
+    },
+    {
+     "name": "RemoveFromConstructedParts",
+     "sig": "void RemoveFromConstructedParts(string)",
+     "line": "4_world/classes/constructionbase.c:159"
+    }
+   ],
+   "fields_added": [
+    {
+     "name": "m_UpdateUtilityParts",
+     "type": "bool",
+     "init": null,
+     "obsolete": null,
+     "line": "4_world/classes/constructionbase.c:47"
+    }
+   ]
+  },
+  "ConstructionPart": {
+   "file": "4_world/classes/basebuilding/constructionpart.c",
+   "methods_removed": [
+    {
+     "name": "TryHandleUtilityParts",
+     "old": [
+      "void TryHandleUtilityParts(EntityAI)"
+     ],
+     "moved_to": null,
+     "new_in_ancestor": null,
+     "old_line": "4_world/classes/basebuilding/constructionpart.c:485"
+    }
+   ],
+   "methods_added": [
+    {
+     "name": "InvertSupportBehavior",
+     "new": [
+      "bool InvertSupportBehavior()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "4_world/classes/basebuilding/constructionpart.c:387",
+     "proto": false,
+     "shadows": null
+    },
+    {
+     "name": "TryQueueUtilityPartsUpdate",
+     "new": [
+      "void TryQueueUtilityPartsUpdate(ConstructionBase)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "4_world/classes/basebuilding/constructionpart.c:491",
+     "proto": false,
+     "shadows": null
+    }
+   ],
+   "sig_changed": [
+    {
+     "name": "GetSupportProvided",
+     "old": [
+      "int GetSupportProvided(int)"
+     ],
+     "new": [
+      "bool GetSupportProvided(int, out int)"
+     ],
+     "line": "4_world/classes/basebuilding/constructionpart.c:371",
+     "old_line": "4_world/classes/basebuilding/constructionpart.c:371"
+    },
+    {
+     "name": "GetSupportRequirement",
+     "old": [
+      "int GetSupportRequirement(int)"
+     ],
+     "new": [
+      "bool GetSupportRequirement(int, out int)"
+     ],
+     "line": "4_world/classes/basebuilding/constructionpart.c:376",
+     "old_line": "4_world/classes/basebuilding/constructionpart.c:376"
+    }
+   ]
+  },
+  "ConstructionPartRebuild": {
+   "file": "4_world/classes/basebuilding/constructionpart.c",
+   "methods_removed": [
+    {
+     "name": "TryHandleUtilityParts",
+     "old": [
+      "void TryHandleUtilityParts(EntityAI)"
+     ],
+     "moved_to": null,
+     "new_in_ancestor": null,
+     "old_line": "4_world/classes/basebuilding/constructionpart.c:879"
+    }
+   ],
+   "methods_added": [
+    {
+     "name": "TryQueueUtilityPartsUpdate",
+     "new": [
+      "void TryQueueUtilityPartsUpdate(ConstructionBase)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "4_world/classes/basebuilding/constructionpart.c:885",
+     "proto": false,
+     "shadows": {
+      "class": "ConstructionPart",
+      "sigs": [
+       "void TryQueueUtilityPartsUpdate(ConstructionBase)"
+      ]
+     }
+    }
+   ]
+  },
+  "ConstructionPartStaticsSupportData": {
+   "file": "4_world/classes/rebuilding/constructionstatics.c",
+   "sig_changed": [
+    {
+     "name": "GetSupportProvided",
+     "old": [
+      "int GetSupportProvided(int)"
+     ],
+     "new": [
+      "bool GetSupportProvided(int, out int)"
+     ],
+     "line": "4_world/classes/rebuilding/constructionstatics.c:80",
+     "old_line": "4_world/classes/rebuilding/constructionstatics.c:71"
+    },
+    {
+     "name": "GetSupportRequirement",
+     "old": [
+      "int GetSupportRequirement(int)"
+     ],
+     "new": [
+      "bool GetSupportRequirement(int, out int)"
+     ],
+     "line": "4_world/classes/rebuilding/constructionstatics.c:89",
+     "old_line": "4_world/classes/rebuilding/constructionstatics.c:79"
+    }
+   ],
+   "body_changed": [
+    {
+     "name": "Init",
+     "sig": "void Init(string)",
+     "line": "4_world/classes/rebuilding/constructionstatics.c:6"
+    }
+   ]
+  },
+  "ConstructionPartTypeData": {
+   "file": "4_world/classes/basebuilding/typeconstructiondata/constructionparttyped.c",
+   "methods_removed": [
+    {
+     "name": "GetPartTypeUtilityAutobuildPartsList",
+     "old": [
+      "array<string> GetPartTypeUtilityAutobuildPartsList()"
+     ],
+     "moved_to": null,
+     "new_in_ancestor": null,
+     "old_line": "4_world/classes/basebuilding/typeconstructiondata/constructionparttyped.c:674"
+    }
+   ],
+   "methods_added": [
+    {
+     "name": "TriggersUtilityPartsUpdate",
+     "new": [
+      "bool TriggersUtilityPartsUpdate()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "4_world/classes/basebuilding/typeconstructiondata/constructionparttyped.c:478",
+     "proto": false,
+     "shadows": null
+    }
+   ],
+   "sig_changed": [
+    {
+     "name": "GetPartTypeSupportProvided",
+     "old": [
+      "int GetPartTypeSupportProvided(int)"
+     ],
+     "new": [
+      "bool GetPartTypeSupportProvided(int, out int)"
+     ],
+     "line": "4_world/classes/basebuilding/typeconstructiondata/constructionparttyped.c:633",
+     "old_line": "4_world/classes/basebuilding/typeconstructiondata/constructionparttyped.c:628"
+    },
+    {
+     "name": "GetPartTypeSupportRequirement",
+     "old": [
+      "int GetPartTypeSupportRequirement(int)"
+     ],
+     "new": [
+      "bool GetPartTypeSupportRequirement(int, out int)"
+     ],
+     "line": "4_world/classes/basebuilding/typeconstructiondata/constructionparttyped.c:638",
+     "old_line": "4_world/classes/basebuilding/typeconstructiondata/constructionparttyped.c:633"
+    }
+   ],
+   "body_changed": [
+    {
+     "name": "InitUtilityBuildData",
+     "sig": "protected void InitUtilityBuildData()",
+     "line": "4_world/classes/basebuilding/typeconstructiondata/constructionparttyped.c:267"
+    }
+   ],
+   "fields_added": [
+    {
+     "name": "m_TriggersUtilityPartUpdate",
+     "type": "bool",
+     "init": null,
+     "obsolete": null,
+     "line": "4_world/classes/basebuilding/typeconstructiondata/constructionparttyped.c:18"
+    }
+   ],
+   "fields_removed": [
+    {
+     "name": "m_UtilityAutomaticBuild",
+     "type": "array<string>",
+     "moved_to": null
+    }
+   ]
+  },
+  "DayZPlayerCamera3rdPersonVehicleMotorbike": {
+   "file": "4_world/entities/manbase/dayzplayer/dayzplayercameravehicles.c",
+   "body_changed": [
+    {
+     "name": "OnUpdate",
+     "sig": "void OnUpdate(float, out DayZPlayerCameraResult)",
+     "line": "4_world/entities/manbase/dayzplayer/dayzplayercameravehicles.c:320"
+    }
+   ]
+  },
+  "DayZPlayerCameraBase": {
+   "file": "4_world/entities/manbase/dayzplayer/dayzplayercamera_base.c",
+   "body_changed": [
+    {
+     "name": "ResolveNVType",
+     "sig": "int ResolveNVType(int, PlayerBase)",
+     "line": "4_world/entities/manbase/dayzplayer/dayzplayercamera_base.c:664"
+    },
+    {
+     "name": "SetNVPostprocess",
+     "sig": "void SetNVPostprocess(int)",
+     "line": "4_world/entities/manbase/dayzplayer/dayzplayercamera_base.c:487"
+    },
+    {
+     "name": "UpdateLRAngleUnlocked",
+     "sig": "float UpdateLRAngleUnlocked(out float, out float, float, float, float)",
+     "line": "4_world/entities/manbase/dayzplayer/dayzplayercamera_base.c:198"
+    },
+    {
+     "name": "UpdateUDAngleUnlocked",
+     "sig": "float UpdateUDAngleUnlocked(out float, out float, float, float, float)",
+     "line": "4_world/entities/manbase/dayzplayer/dayzplayercamera_base.c:152"
+    }
+   ]
+  },
+  "DayZPlayerCameraIronsights": {
+   "file": "4_world/entities/manbase/dayzplayer/dayzplayercameraironsights.c",
+   "body_changed": [
+    {
+     "name": "SetCameraPP",
+     "sig": "void SetCameraPP(bool, DayZPlayerCamera)",
+     "line": "4_world/entities/manbase/dayzplayer/dayzplayercameraironsights.c:256"
+    }
+   ]
+  },
+  "Debug": {
+   "file": "3_game/tools/debug.c",
+   "const_changed": [
+    {
+     "name": "LOG_DEBUG_AUTOTEST",
+     "old": "\"Autotest\"",
+     "new": "\"AutotestLog\""
+    }
+   ]
+  },
+  "Environment": {
+   "file": "4_world/classes/environment/environment.c",
+   "body_changed": [
+    {
+     "name": "CheckShadowPresence",
+     "sig": "protected void CheckShadowPresence()",
+     "line": "4_world/classes/environment/environment.c:665"
+    }
+   ]
+  },
+  "GPSReceiver": {
+   "file": "4_world/entities/itembase/gear/navigation/gpsreceiver.c",
+   "methods_added": [
+    {
+     "name": "EEItemLocationChanged",
+     "new": [
+      "void EEItemLocationChanged(notnull InventoryLocation, notnull InventoryLocation)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "ItemBase",
+     "line": "4_world/entities/itembase/gear/navigation/gpsreceiver.c:169",
+     "proto": false,
+     "shadows": {
+      "class": "ItemBase",
+      "sigs": [
+       "void EEItemLocationChanged(notnull InventoryLocation, notnull InventoryLocation)"
+      ]
+     }
+    }
+   ]
+  },
+  "IsObjectObstructedCache": {
+   "file": "4_world/static/miscgameplayfunctions.c",
+   "methods_added": [
+    {
+     "name": "GetRaycastParams",
+     "new": [
+      "RaycastRVParams GetRaycastParams(vector, vector, Object)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "4_world/static/miscgameplayfunctions.c:2072",
+     "proto": false,
+     "shadows": null
+    }
+   ],
+   "body_changed": [
+    {
+     "name": "ClearCache",
+     "sig": "void ClearCache()",
+     "line": "4_world/static/miscgameplayfunctions.c:2089"
+    }
+   ],
+   "fields_added": [
+    {
+     "name": "RaycastEnd",
+     "type": "vector",
+     "init": "\"0 0 0\"",
+     "obsolete": null,
+     "line": "4_world/static/miscgameplayfunctions.c:2056"
+    },
+    {
+     "name": "RaycastParams",
+     "type": "RaycastRVParams",
+     "init": "new RaycastRVParams(\"0 0 0\", \"0 0 0\")",
+     "obsolete": null,
+     "line": "4_world/static/miscgameplayfunctions.c:2063"
+    }
+   ]
+  },
+  "ItemActionsWidget": {
+   "file": "5_mission/gui/itemactionswidget.c",
+   "methods_added": [
+    {
+     "name": "SetArrowAlpha",
+     "new": [
+      "protected void SetArrowAlpha(Widget, float)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "5_mission/gui/itemactionswidget.c:713",
+     "proto": false,
+     "shadows": null
+    },
+    {
+     "name": "SetMultipleActionArrowsState",
+     "new": [
+      "protected void SetMultipleActionArrowsState(Widget, string, bool)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "5_mission/gui/itemactionswidget.c:700",
+     "proto": false,
+     "shadows": null
+    }
+   ],
+   "body_changed": [
+    {
+     "name": "GetActions",
+     "sig": "protected void GetActions()",
+     "line": "5_mission/gui/itemactionswidget.c:240"
+    },
+    {
+     "name": "SetMultipleContinuousInteractAction",
+     "sig": "protected void SetMultipleContinuousInteractAction(string)",
+     "line": "5_mission/gui/itemactionswidget.c:668"
+    },
+    {
+     "name": "SetMultipleContinuousItemAction",
+     "sig": "protected void SetMultipleContinuousItemAction(string)",
+     "line": "5_mission/gui/itemactionswidget.c:689"
+    },
+    {
+     "name": "SetMultipleInteractAction",
+     "sig": "protected void SetMultipleInteractAction(string)",
+     "line": "5_mission/gui/itemactionswidget.c:657"
+    },
+    {
+     "name": "SetMultipleItemAction",
+     "sig": "protected void SetMultipleItemAction(string)",
+     "line": "5_mission/gui/itemactionswidget.c:678"
+    }
+   ],
+   "fields_added": [
+    {
+     "name": "ARROW_ALPHA_NOT_SELECTED",
+     "type": "float",
+     "init": "0.235",
+     "obsolete": null,
+     "line": "5_mission/gui/itemactionswidget.c:5"
+    },
+    {
+     "name": "ARROW_ALPHA_SELECTED",
+     "type": "float",
+     "init": "1.0",
+     "obsolete": null,
+     "line": "5_mission/gui/itemactionswidget.c:6"
+    },
+    {
+     "name": "m_SelectedActionCategory",
+     "type": "typename",
+     "init": null,
+     "obsolete": null,
+     "line": "5_mission/gui/itemactionswidget.c:23"
+    }
+   ]
+  },
+  "ItemBase": {
+   "file": "4_world/entities/itembase.c",
+   "body_changed": [
+    {
+     "name": "OnRightClick",
+     "sig": "void OnRightClick()",
+     "line": "4_world/entities/itembase.c:2059"
+    }
+   ]
+  },
+  "ItemCompass": {
+   "file": "4_world/entities/core/inherited/inventoryitem.c",
+   "body_changed": [
+    {
+     "name": "OnInventoryEnter",
+     "sig": "void OnInventoryEnter(Man)",
+     "line": "4_world/entities/core/inherited/inventoryitem.c:118"
+    },
+    {
+     "name": "OnWasDetached",
+     "sig": "void OnWasDetached(EntityAI, int)",
+     "line": "4_world/entities/core/inherited/inventoryitem.c:171"
+    }
+   ]
+  },
+  "ItemGPS": {
+   "file": "4_world/entities/core/inherited/inventoryitem.c",
+   "body_changed": [
+    {
+     "name": "OnWasDetached",
+     "sig": "void OnWasDetached(EntityAI, int)",
+     "line": "4_world/entities/core/inherited/inventoryitem.c:98"
+    }
+   ]
+  },
+  "MiscGameplayFunctions": {
+   "file": "4_world/static/miscgameplayfunctions.c",
+   "body_changed": [
+    {
+     "name": "FilterObstructedObjectsByGrouping",
+     "sig": "static void FilterObstructedObjectsByGrouping(vector, float, float, array<Object>, array<Object>, out array<Object>, bool=false, bool=false, float=0)",
+     "line": "4_world/static/miscgameplayfunctions.c:1438"
+    },
+    {
+     "name": "IsObjectObstructedEx",
+     "sig": "static bool IsObjectObstructedEx(Object, IsObjectObstructedCache, bool=false, vector=\"0 0 0\", float=0)",
+     "line": "4_world/static/miscgameplayfunctions.c:1510"
+    },
+    {
+     "name": "IsObjectObstructedFilterEx",
+     "sig": "static bool IsObjectObstructedFilterEx(Object, IsObjectObstructedCache, PlayerBase, int=-1)",
+     "line": "4_world/static/miscgameplayfunctions.c:1593"
+    },
+    {
+     "name": "IsObjectObstructedProxy",
+     "sig": "static bool IsObjectObstructedProxy(Object, IsObjectObstructedCache, PlayerBase)",
+     "line": "4_world/static/miscgameplayfunctions.c:1535"
+    },
+    {
+     "name": "ThrowAllItemsInInventoryEx",
+     "sig": "static void ThrowAllItemsInInventoryEx(notnull EntityAI, int, vector)",
+     "line": "4_world/static/miscgameplayfunctions.c:1251"
+    }
+   ],
+   "fields_added": [
+    {
+     "name": "OBJECT_OBSTRUCTION_MIN_DISTANCE_SQ",
+     "type": "float",
+     "init": "0.0625",
+     "obsolete": null,
+     "line": "4_world/static/miscgameplayfunctions.c:215"
+    }
+   ]
+  },
+  "MotorbikeScript": {
+   "file": "4_world/entities/vehicles/motorbikescript.c",
+   "methods_added": [
+    {
+     "name": "CanReleaseAttachment",
+     "new": [
+      "bool CanReleaseAttachment(EntityAI)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": "EntityAI",
+     "line": "4_world/entities/vehicles/motorbikescript.c:612",
+     "proto": false,
+     "shadows": {
+      "class": "EntityAI",
+      "sigs": [
+       "bool CanReleaseAttachment(EntityAI)"
+      ]
+     }
+    }
+   ],
+   "body_changed": [
+    {
+     "name": "InitializeParticles",
+     "sig": "protected void InitializeParticles()",
+     "line": "4_world/entities/vehicles/motorbikescript.c:174"
+    },
+    {
+     "name": "UpdateLightsServer",
+     "sig": "protected void UpdateLightsServer(int=-1)",
+     "line": "4_world/entities/vehicles/motorbikescript.c:1183"
+    }
+   ]
+  },
+  "Motorbike_01LightProfileFront": {
+   "file": "4_world/entities/scriptedlightbase/spotlightbase/vehiclelightprofiles/motorbike_01.c",
+   "body_changed": [
+    {
+     "name": "Motorbike_01LightProfileFront",
+     "sig": "void Motorbike_01LightProfileFront()",
+     "line": "4_world/entities/scriptedlightbase/spotlightbase/vehiclelightprofiles/motorbike_01.c:3"
+    }
+   ]
+  },
+  "Motorbike_01_ColorBase": {
+   "file": "4_world/entities/vehicles/inheritedmotorbikes/motorbike_01.c",
+   "methods_removed": [
+    {
+     "name": "HasGangedTailAndBrakeLights",
+     "old": [
+      "bool HasGangedTailAndBrakeLights()"
+     ],
+     "moved_to": "MotorbikeScript",
+     "new_in_ancestor": [
+      "bool HasGangedTailAndBrakeLights()"
+     ],
+     "old_line": "4_world/entities/vehicles/inheritedmotorbikes/motorbike_01.c:28"
+    }
+   ],
+   "body_changed": [
+    {
+     "name": "Motorbike_01_ColorBase",
+     "sig": "void Motorbike_01_ColorBase()",
+     "line": "4_world/entities/vehicles/inheritedmotorbikes/motorbike_01.c:3"
+    }
+   ]
+  },
+  "Motorbike_02LightProfileFront": {
+   "file": "4_world/entities/scriptedlightbase/spotlightbase/vehiclelightprofiles/motorbike_02.c",
+   "body_changed": [
+    {
+     "name": "Motorbike_02LightProfileFront",
+     "sig": "void Motorbike_02LightProfileFront()",
+     "line": "4_world/entities/scriptedlightbase/spotlightbase/vehiclelightprofiles/motorbike_02.c:3"
+    }
+   ]
+  },
+  "Motorbike_02_ColorBase": {
+   "file": "4_world/entities/vehicles/inheritedmotorbikes/motorbike_02.c",
+   "methods_removed": [
+    {
+     "name": "HasGangedTailAndBrakeLights",
+     "old": [
+      "bool HasGangedTailAndBrakeLights()"
+     ],
+     "moved_to": "MotorbikeScript",
+     "new_in_ancestor": [
+      "bool HasGangedTailAndBrakeLights()"
+     ],
+     "old_line": "4_world/entities/vehicles/inheritedmotorbikes/motorbike_02.c:29"
+    }
+   ],
+   "body_changed": [
+    {
+     "name": "Motorbike_02_ColorBase",
+     "sig": "void Motorbike_02_ColorBase()",
+     "line": "4_world/entities/vehicles/inheritedmotorbikes/motorbike_02.c:3"
+    }
+   ]
+  },
+  "PPERequester_CameraNV": {
+   "file": "3_game/ppemanager/requesters/ppercameranv.c",
+   "methods_added": [
+    {
+     "name": "GetUndergroundExposureCoef",
+     "new": [
+      "float GetUndergroundExposureCoef()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "3_game/ppemanager/requesters/ppercameranv.c:82",
+     "proto": false,
+     "shadows": null
+    }
+   ],
+   "body_changed": [
+    {
+     "name": "SetNVMode",
+     "sig": "protected void SetNVMode(int)",
+     "line": "3_game/ppemanager/requesters/ppercameranv.c:87"
+    }
+   ],
+   "fields_added": [
+    {
+     "name": "NV_UNDERGROUND_DAYTIME_OPTICS",
+     "type": "int",
+     "init": "17",
+     "obsolete": null,
+     "line": "3_game/ppemanager/requesters/ppercameranv.c:28"
+    },
+    {
+     "name": "NV_UNDERGROUND_SANDSTORM_DAYTIME_OPTICS",
+     "type": "int",
+     "init": "18",
+     "obsolete": null,
+     "line": "3_game/ppemanager/requesters/ppercameranv.c:29"
+    }
+   ]
+  },
+  "PluginManager": {
+   "file": "4_world/plugins/pluginmanager.c",
+   "body_changed": [
+    {
+     "name": "Init",
+     "sig": "void Init()",
+     "line": "4_world/plugins/pluginmanager.c:39"
+    }
+   ]
+  },
+  "Pot": {
+   "file": "4_world/entities/itembase/edible_base/bottle_base/pot.c",
+   "body_changed": [
+    {
+     "name": "SetActions",
+     "sig": "void SetActions()",
+     "line": "4_world/entities/itembase/edible_base/bottle_base/pot.c:131"
+    }
+   ]
+  },
+  "Rebuilding": {
+   "file": "4_world/classes/rebuilding/rebuilding.c",
+   "methods_added": [
+    {
+     "name": "IgnoreHouseCollisions",
+     "new": [
+      "bool IgnoreHouseCollisions()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "4_world/classes/rebuilding/rebuilding.c:807",
+     "proto": false,
+     "shadows": {
+      "class": "ConstructionBase",
+      "sigs": [
+       "bool IgnoreHouseCollisions()"
+      ]
+     }
+    }
+   ],
+   "body_changed": [
+    {
+     "name": "AddSupportFulfillmentFromSourcePart",
+     "sig": "protected void AddSupportFulfillmentFromSourcePart(string)",
+     "line": "4_world/classes/rebuilding/rebuilding.c:668"
+    },
+    {
+     "name": "AddSupportRequirementFromSourcePart",
+     "sig": "protected void AddSupportRequirementFromSourcePart(string)",
+     "line": "4_world/classes/rebuilding/rebuilding.c:698"
+    },
+    {
+     "name": "GetValidDepenentPartsArray",
+     "sig": "protected array<string> GetValidDepenentPartsArray(string, array<string>=null)",
+     "line": "4_world/classes/rebuilding/rebuilding.c:764"
+    },
+    {
+     "name": "PartHasAnySupportFulfilled",
+     "sig": "protected bool PartHasAnySupportFulfilled(string)",
+     "line": "4_world/classes/rebuilding/rebuilding.c:624"
+    },
+    {
+     "name": "RemoveSupportFulfillmentFromSourcePart",
+     "sig": "protected void RemoveSupportFulfillmentFromSourcePart(string)",
+     "line": "4_world/classes/rebuilding/rebuilding.c:683"
+    },
+    {
+     "name": "RemoveSupportRequirementFromSourcePart",
+     "sig": "protected void RemoveSupportRequirementFromSourcePart(string)",
+     "line": "4_world/classes/rebuilding/rebuilding.c:717"
+    },
+    {
+     "name": "SupportRemovalCheck",
+     "sig": "bool SupportRemovalCheck(string)",
+     "line": "4_world/classes/rebuilding/rebuilding.c:654"
+    }
+   ]
+  },
+  "ScriptEditor": {
+   "file": "1_core/workbenchapi/modules/scripteditor.c",
+   "methods_added": [
+    {
+     "name": "GetLineText",
+     "new": [
+      "proto bool GetLineText(out string, int=-1)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/modules/scripteditor.c:10",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "GetLinesCount",
+     "new": [
+      "proto int GetLinesCount()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/modules/scripteditor.c:8",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "InsertLine",
+     "new": [
+      "proto void InsertLine(string, int=-1)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/modules/scripteditor.c:14",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "RemoveLine",
+     "new": [
+      "proto void RemoveLine(int=-1)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/modules/scripteditor.c:16",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "SetLineText",
+     "new": [
+      "proto void SetLineText(string, int=-1)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/modules/scripteditor.c:12",
+     "proto": true,
+     "shadows": null
+    }
+   ],
+   "sig_changed": [
+    {
+     "name": "GetCurrentLine",
+     "old": [
+      "proto native int GetCurrentLine()"
+     ],
+     "new": [
+      "proto int GetCurrentLine()"
+     ],
+     "line": "1_core/workbenchapi/modules/scripteditor.c:7",
+     "old_line": "1_core/workbenchapi.c:32"
+    }
+   ]
+  },
+  "Transport": {
+   "file": "3_game/vehicles/transport.c",
+   "methods_added": [
+    {
+     "name": "HasCrew",
+     "new": [
+      "proto native bool HasCrew()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "3_game/vehicles/transport.c:175",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "IsMoving",
+     "new": [
+      "bool IsMoving()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "3_game/vehicles/transport.c:819",
+     "proto": false,
+     "shadows": null
+    }
+   ]
+  },
+  "WBModuleDef": {
+   "file": "1_core/workbenchapi/modules/wbmoduledef.c",
+   "methods_added": [
+    {
+     "name": "ExecuteAction",
+     "new": [
+      "proto bool ExecuteAction(notnull array<string>, bool=true)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/modules/wbmoduledef.c:12",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "GetPlugin",
+     "new": [
+      "proto WorkbenchPlugin GetPlugin(typename)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/modules/wbmoduledef.c:13",
+     "proto": true,
+     "shadows": null
+    }
+   ],
+   "sig_changed": [
+    {
+     "name": "Close",
+     "old": [
+      "proto native bool Close()"
+     ],
+     "new": [
+      "proto bool Close()"
+     ],
+     "line": "1_core/workbenchapi/modules/wbmoduledef.c:11",
+     "old_line": "1_core/workbenchapi.c:26"
+    },
+    {
+     "name": "GetContainer",
+     "old": [
+      "proto native BaseContainer GetContainer(int=0)"
+     ],
+     "new": [
+      "proto BaseContainer GetContainer(int=0)"
+     ],
+     "line": "1_core/workbenchapi/modules/wbmoduledef.c:7",
+     "old_line": "1_core/workbenchapi.c:23"
+    },
+    {
+     "name": "GetNumContainers",
+     "old": [
+      "proto native int GetNumContainers()"
+     ],
+     "new": [
+      "proto int GetNumContainers()"
+     ],
+     "line": "1_core/workbenchapi/modules/wbmoduledef.c:8",
+     "old_line": "1_core/workbenchapi.c:22"
+    },
+    {
+     "name": "Save",
+     "old": [
+      "proto native bool Save()"
+     ],
+     "new": [
+      "proto bool Save()"
+     ],
+     "line": "1_core/workbenchapi/modules/wbmoduledef.c:9",
+     "old_line": "1_core/workbenchapi.c:25"
+    },
+    {
+     "name": "SetOpenedResource",
+     "old": [
+      "proto native bool SetOpenedResource(string)"
+     ],
+     "new": [
+      "proto bool SetOpenedResource(string)"
+     ],
+     "line": "1_core/workbenchapi/modules/wbmoduledef.c:6",
+     "old_line": "1_core/workbenchapi.c:21"
+    }
+   ]
+  },
+  "Workbench": {
+   "file": "1_core/workbenchapi/workbench.c",
+   "methods_added": [
+    {
+     "name": "Exit",
+     "new": [
+      "static proto void Exit(int)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/workbench.c:55",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "FinishProcess",
+     "new": [
+      "static proto void FinishProcess(ProcessHandle)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/workbench.c:45",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "GenerateGloballyUniqueID64",
+     "new": [
+      "static proto string GenerateGloballyUniqueID64()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/workbench.c:54",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "GetCurrentGameProjectFile",
+     "new": [
+      "static proto string GetCurrentGameProjectFile()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/workbench.c:51",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "GetExecutableFilePath",
+     "new": [
+      "static proto void GetExecutableFilePath(out string)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/workbench.c:49",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "GetGameProjectSettings",
+     "new": [
+      "static proto BaseContainer GetGameProjectSettings()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/workbench.c:53",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "GetPackedUtcTime",
+     "new": [
+      "static proto DateTimeUtcAsInt GetPackedUtcTime()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/workbench.c:56",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "GetResourceName",
+     "new": [
+      "static proto ResourceName GetResourceName(string)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/workbench.c:57",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "GetUserName",
+     "new": [
+      "static proto void GetUserName(out string)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/workbench.c:47",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "GetWBGameScriptModule",
+     "new": [
+      "static proto ref ScriptModule GetWBGameScriptModule()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/workbench.c:60",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "GetWBScriptModule",
+     "new": [
+      "static proto ref ScriptModule GetWBScriptModule()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/workbench.c:59",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "IsRunningProcess",
+     "new": [
+      "static proto bool IsRunningProcess(ProcessHandle)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/workbench.c:37",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "JumpToScriptSymbol",
+     "new": [
+      "static proto bool JumpToScriptSymbol(string)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/workbench.c:24",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "KillProcess",
+     "new": [
+      "static proto bool KillProcess(ProcessHandle)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/workbench.c:33",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "OpenResource",
+     "new": [
+      "static proto bool OpenResource(string)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/workbench.c:58",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "RunProcess",
+     "new": [
+      "static proto ProcessHandle RunProcess(string)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/workbench.c:28",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "WaitProcess",
+     "new": [
+      "static proto int WaitProcess(ProcessHandle, int=-1)"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/workbench.c:41",
+     "proto": true,
+     "shadows": null
+    },
+    {
+     "name": "Workbench",
+     "new": [
+      "private void Workbench()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/workbench.c:7",
+     "proto": false,
+     "shadows": null
+    },
+    {
+     "name": "~Workbench",
+     "new": [
+      "private void ~Workbench()"
+     ],
+     "obsolete": null,
+     "was_in_ancestor": null,
+     "line": "1_core/workbenchapi/workbench.c:8",
+     "proto": false,
+     "shadows": null
+    }
+   ],
+   "sig_changed": [
+    {
+     "name": "CloseModule",
+     "old": [
+      "static proto native bool CloseModule(string)"
+     ],
+     "new": [
+      "static proto bool CloseModule(typename)"
+     ],
+     "line": "1_core/workbenchapi/workbench.c:12",
+     "old_line": "1_core/workbenchapi.c:10"
+    },
+    {
+     "name": "Dialog",
+     "old": [
+      "static proto native void Dialog(string, string)"
+     ],
+     "new": [
+      "static proto void Dialog(string, string, string=string.Empty)"
+     ],
+     "line": "1_core/workbenchapi/workbench.c:13",
+     "old_line": "1_core/workbenchapi.c:11"
+    },
+    {
+     "name": "GetAbsolutePath",
+     "old": [
+      "static proto bool GetAbsolutePath(string, out string)"
+     ],
+     "new": [
+      "static proto bool GetAbsolutePath(string, out string, bool=true)"
+     ],
+     "line": "1_core/workbenchapi/workbench.c:48",
+     "old_line": "1_core/workbenchapi.c:16"
+    },
+    {
+     "name": "GetModule",
+     "old": [
+      "static proto native WBModuleDef GetModule(string)"
+     ],
+     "new": [
+      "static proto WBModuleDef GetModule(typename)"
+     ],
+     "line": "1_core/workbenchapi/workbench.c:10",
+     "old_line": "1_core/workbenchapi.c:8"
+    },
+    {
+     "name": "OpenModule",
+     "old": [
+      "static proto native bool OpenModule(string)"
+     ],
+     "new": [
+      "static proto bool OpenModule(typename)"
+     ],
+     "line": "1_core/workbenchapi/workbench.c:11",
+     "old_line": "1_core/workbenchapi.c:9"
+    },
+    {
+     "name": "RunCmd",
+     "old": [
+      "static proto native int RunCmd(string, bool=false)"
+     ],
+     "new": [
+      "static proto int RunCmd(string, bool=false)"
+     ],
+     "line": "1_core/workbenchapi/workbench.c:16",
+     "old_line": "1_core/workbenchapi.c:14"
+    }
+   ]
+  },
+  "WorkbenchPluginAttribute": {
+   "file": "1_core/workbenchapi.c",
+   "sig_changed": [
+    {
+     "name": "WorkbenchPluginAttribute",
+     "old": [
+      "void WorkbenchPluginAttribute(string, string=\"\", string=\"\", string=\"\", array<string>=null)"
+     ],
+     "new": [
+      "void WorkbenchPluginAttribute(string, string=\"\", string=\"\", string=\"\", array<string>=null, string=\"\", int=0, array<string>=null)"
+     ],
+     "line": "1_core/workbenchapi.c:75",
+     "old_line": "1_core/workbenchapi.c:145"
+    }
+   ],
+   "fields_added": [
+    {
+     "name": "m_AwesomeFontCode",
+     "type": "int",
+     "init": null,
+     "obsolete": null,
+     "line": "1_core/workbenchapi.c:70"
+    },
+    {
+     "name": "m_Category",
+     "type": "string",
+     "init": null,
+     "obsolete": null,
+     "line": "1_core/workbenchapi.c:69"
+    },
+    {
+     "name": "m_ResourceTypes",
+     "type": "array<string>",
+     "init": null,
+     "obsolete": null,
+     "line": "1_core/workbenchapi.c:73"
+    }
+   ]
+  },
+  "vector": {
+   "file": "1_core/proto/enconvert.c",
+   "methods_removed": [
+    {
+     "name": "Cross",
+     "old": [
+      "vector Cross(vector)"
+     ],
+     "moved_to": null,
+     "new_in_ancestor": null,
+     "old_line": "1_core/proto/enconvert.c:239"
+    }
+   ]
+  }
+ },
+ "guard_changed": [
+  {
+   "class": "ButtonAttribute",
+   "old": "",
+   "new": "WORKBENCH",
+   "file": "1_core/workbenchapi.c",
+   "line": "1_core/workbenchapi.c:42"
+  },
+  {
+   "class": "ScriptEditor",
+   "old": "",
+   "new": "WORKBENCH",
+   "file": "1_core/workbenchapi/modules/scripteditor.c",
+   "line": "1_core/workbenchapi/modules/scripteditor.c:4"
+  },
+  {
+   "class": "WBModuleDef",
+   "old": "",
+   "new": "WORKBENCH",
+   "file": "1_core/workbenchapi/modules/wbmoduledef.c",
+   "line": "1_core/workbenchapi/modules/wbmoduledef.c:4"
+  },
+  {
+   "class": "Workbench",
+   "old": "",
+   "new": "WORKBENCH",
+   "file": "1_core/workbenchapi/workbench.c",
+   "line": "1_core/workbenchapi/workbench.c:5"
+  },
+  {
+   "class": "WorkbenchPluginAttribute",
+   "old": "",
+   "new": "WORKBENCH",
+   "file": "1_core/workbenchapi.c",
+   "line": "1_core/workbenchapi.c:63"
+  },
+  {
+   "class": "WorkbenchToolAttribute",
+   "old": "",
+   "new": "WORKBENCH",
+   "file": "1_core/workbenchapi.c",
+   "line": "1_core/workbenchapi.c:89"
+  }
+ ],
+ "enums_removed": [],
+ "enums_added": [],
+ "enum_changes": {
+  "EDiagMenuGame": {
+   "file": "3_game/enums/ediagmenugame.c",
+   "removed": [],
+   "added": [
+    "ENF_DIAG_DENavmesh"
+   ],
+   "shifted_count": 0,
+   "shifted_sample": [],
+   "shifted": [],
+   "line": "3_game/enums/ediagmenugame.c:3"
+  },
+  "NVTypes": {
+   "file": "4_world/entities/manbase/dayzplayer/dayzplayercamera_base.c",
+   "removed": [],
+   "added": [
+    "NV_OPTICS_UNDERGROUND_DAY",
+    "NV_OPTICS_UNDERGROUND_SANDSTORM_DAY"
+   ],
+   "shifted_count": 12,
+   "shifted_sample": [
+    {
+     "name": "NV_OPTICS_SANDSTORM_DAY",
+     "old": 12,
+     "new": 13
+    },
+    {
+     "name": "NV_OPTICS_SANDSTORM_NIGHT",
+     "old": 13,
+     "new": 14
+    },
+    {
+     "name": "NV_OPTICS_UNDERGROUND_SANDSTORM",
+     "old": 14,
+     "new": 15
+    },
+    {
+     "name": "NV_GOGGLES_DAY",
+     "old": 15,
+     "new": 17
+    },
+    {
+     "name": "NV_GOGGLES_UNDERGROUND",
+     "old": 16,
+     "new": 18
+    },
+    {
+     "name": "NV_GOGGLES_SANDSTORM",
+     "old": 17,
+     "new": 19
+    },
+    {
+     "name": "NV_GOGGLES_UNDERGROUND_SANDSTORM",
+     "old": 18,
+     "new": 20
+    },
+    {
+     "name": "NV_PUMPKIN_DAY",
+     "old": 19,
+     "new": 21
+    }
+   ],
+   "shifted": [
+    {
+     "name": "NV_OPTICS_SANDSTORM_DAY",
+     "old": 12,
+     "new": 13
+    },
+    {
+     "name": "NV_OPTICS_SANDSTORM_NIGHT",
+     "old": 13,
+     "new": 14
+    },
+    {
+     "name": "NV_OPTICS_UNDERGROUND_SANDSTORM",
+     "old": 14,
+     "new": 15
+    },
+    {
+     "name": "NV_GOGGLES_DAY",
+     "old": 15,
+     "new": 17
+    },
+    {
+     "name": "NV_GOGGLES_UNDERGROUND",
+     "old": 16,
+     "new": 18
+    },
+    {
+     "name": "NV_GOGGLES_SANDSTORM",
+     "old": 17,
+     "new": 19
+    },
+    {
+     "name": "NV_GOGGLES_UNDERGROUND_SANDSTORM",
+     "old": 18,
+     "new": 20
+    },
+    {
+     "name": "NV_PUMPKIN_DAY",
+     "old": 19,
+     "new": 21
+    },
+    {
+     "name": "NV_PUMPKIN_UNDERGROUND",
+     "old": 20,
+     "new": 22
+    },
+    {
+     "name": "NV_PUMPKIN_SANDSTORM",
+     "old": 21,
+     "new": 23
+    },
+    {
+     "name": "NV_PUMPKIN_UNDERGROUND_SANDSTORM",
+     "old": 22,
+     "new": 24
+    },
+    {
+     "name": "MAX",
+     "old": 23,
+     "new": 25
+    }
+   ],
+   "line": "4_world/entities/manbase/dayzplayer/dayzplayercamera_base.c:54"
+  }
+ },
+ "globals": {},
+ "typedefs": {
+  "DateTimeUtcAsInt": {
+   "change": "added",
+   "new": "int"
+  }
+ },
+ "classes_became_obsolete": [],
+ "_meta": {
+  "label": "1.30.164078 -> 1.30.164200",
+  "missing_enrichment": [],
+  "old": "api130_164078-index.json",
+  "new": "api130-index.json"
+ }
+}

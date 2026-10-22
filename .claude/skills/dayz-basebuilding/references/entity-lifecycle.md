@@ -32,7 +32,7 @@ once. `BaseBuildingBase` overrides the factory to `m_Construction = new Construc
 m_Construction` (`:15`); its own constructor (`:51`) and `OnCreatePhysics()` (`:489-495`) call `ConstructionInit()`
 again, which is then a no-op. `GetConstruction()` is `Construction.Cast(m_Construction)` (`:883-886`).
 `Construction.Init()` → `ConstructionBase.UpdateConstructionParts()` (`construction.c:21-24`;
-`4_world\classes\constructionbase.c:516-546`) creates one `ConstructionPart` per entry of the type's cached
+`4_world\classes\constructionbase.c:517-547`) creates one `ConstructionPart` per entry of the type's cached
 `ConstructionDataTypeHolder` and fills `map<string, ref ConstructionPart> m_ConstructionParts`
 (`constructionbase.c:42`), keyed by part config-class name. `EntityAI.EEInit` then calls
 `EEInitConstruction()` and `InitBaseState()` on the component (`entityai.c:937-942`).
@@ -58,56 +58,56 @@ builds the `base` part (`is_base=1`). Building the base sets `HasBase()=true`, s
    `construction.BuildPartServerEx(action_data.m_Player, partName, AT_BUILD_PART)` (`:170`) and damages the tool
    (or, for empty-hand parts with `damage_hands_on_build`, the gloves / hands) (`:178-202`).
    Before 1.30: `construction.BuildPartServer(...)` (1.29: `actionbuildpart.c:112-130`). That method is now an
-   obsolete forwarder with no vanilla caller (`constructionbase.c:1702-1708`).
-3. `ConstructionBase.BuildPartServerEx` (`constructionbase.c:179-184`) runs `TakeMaterialsServer`
-   (`:1139-1179` — `lockable=1` locks the slot; else subtract `quantity`, or delete on `quantity==-1`). The
+   obsolete forwarder with no vanilla caller (`constructionbase.c:1751-1757`).
+3. `ConstructionBase.BuildPartServerEx` (`constructionbase.c:180-185`) runs `TakeMaterialsServer`
+   (`:1180-1220` — `lockable=1` locks the slot; else subtract `quantity`, or delete on `quantity==-1`). The
    `Construction` override (`construction.c:52-74`) then resets the part's damage-zone health and calls
    `m_Parent.OnPartBuiltServer` (`basebuildingbase.c:549-579`).
    Before 1.30: `BuildPartServer` also destroyed a construction-box trigger; the trigger helpers still exist as
-   `[Obsolete("no replacement")]` (`constructionbase.c:1756-1801`). Do not write new trigger calls.
+   `[Obsolete("no replacement")]` (`constructionbase.c:1805-1850`). Do not write new trigger calls.
 4. `OnPartBuiltServer` → `RegisterPartForSync` (sets the part's `id` bit in `m_SyncParts01/02/03`
    `basebuildingbase.c:137-164`), `RegisterActionForSync`, sync, `SetPartFromSyncData` (show physics + visual),
    regen navmesh (`:549-579`).
 
 ### CanBuildPart / CanDismantlePart / CanDestroyPart gates
 
-- `CanBuildPart(part, tool, use_tool)` (`constructionbase.c:583-587`) → `CanBuildPartEx` (`:590-611`):
+- `CanBuildPart(part, tool, use_tool)` (`constructionbase.c:584-588`) → `CanBuildPartEx` (`:591-612`):
   `!IsPartConstructed && HasRequiredPart && PartHasAnySupportFulfilled && !HasConflictPart && HasMaterials &&
   !MaterialIsRuined && CanUseToolToBuildPart`; failure bits in `EConstructionInfoCategories`
   (`constructionconstants.c:1-11`). **`use_tool` is ignored** — the tool check always runs, and a null tool passes
   only for `TOOL_HANDS` parts (`:1404-1441`). Before 1.30: `(!use_tool || CanUseToolToBuildPart)` (1.29:
   `construction.c:296-304`).
-- `CanDismantlePart` (`constructionbase.c:739-741`): `IsPartConstructed && !HasDependentPart &&
+- `CanDismantlePart` (`constructionbase.c:780-782`): `IsPartConstructed && !HasDependentPart &&
   SupportRemovalCheck && CanUseToolToDismantlePart`.
-- `CanDestroyPart` (`:1022-1028`): `IsPartConstructed && !HasDependentPart && SupportRemovalCheck` (no
+- `CanDestroyPart` (`:1063-1069`): `IsPartConstructed && !HasDependentPart && SupportRemovalCheck` (no
   tool/material gate). Damage-driven destruction does not go through this gate (see §6).
 
 ## 5. Upgrade
 
-Just building further parts whose `required_parts[]` are satisfied (`HasRequiredPart` `constructionbase.c:682-696`)
-and whose `conflicted_parts[]` are not built (`HasConflictPart` `:704-735`). E.g. `wall_wood_down` requires
+Just building further parts whose `required_parts[]` are satisfied (`HasRequiredPart` `constructionbase.c:723-737`)
+and whose `conflicted_parts[]` are not built (`HasConflictPart` `:745-776`). E.g. `wall_wood_down` requires
 `wall_base_down` and conflicts with `wall_metal_down`. Radial variants: multiple buildable parts under one
 selection produce N action variants — `ActionBuildPart` uses `m_VariantID`; `ConstructionActionData.OnUpdateActions`
-(`constructionactiondata.c:163-203`) calls `ConstructionBase.GetConstructionPartsToBuild(...)` (`constructionbase.c:642-654`)
+(`constructionactiondata.c:163-203`) calls `ConstructionBase.GetConstructionPartsToBuild(...)` (`constructionbase.c:683-695`)
 for every action component name under the cursor and sets the variant count (`constructionactiondata.c:187`).
 Empty-hand parts use `OnUpdateActionsHandsGeneric` (`:236`).
 
 ## 6. Dismantle / destroy / fold
 
 - `ActionDismantlePart` (`actiondismantlepart.c:23`) → `DismantlePartServerEx` (`:107`;
-  `constructionbase.c:190-206`): refunds materials only if `player` is set (`ReceiveMaterialsServer` →
-  `StaticConstructionMethods.SpawnConstructionMaterialPilesEx`, `:1183-1194,1809`), drops non-usable materials of a
+  `constructionbase.c:191-207`): refunds materials only if `player` is set (`ReceiveMaterialsServer` →
+  `StaticConstructionMethods.SpawnConstructionMaterialPilesEx`, `:1224-1235,1858`), drops non-usable materials of a
   base part, drops `essential_attachments[]`, lets items in the `item_falling_data[]` box fall (unless
   `disableItemFalling`), then `Construction` calls `OnPartDismantledServer` (`construction.c:77-90`). Blocked if
-  the part `HasDependentPart` (`constructionbase.c:772-783`). Dismantling the **base** destroys the whole
+  the part `HasDependentPart` (`constructionbase.c:813-824`). Dismantling the **base** destroys the whole
   construction (`basebuildingbase.c:614-619`).
-  Before 1.30: `DismantlePartServer` (now an obsolete forwarder, `constructionbase.c:1710-1716`) and
-  `SpawnConstructionMaterialPiles` (obsolete → `…Ex`, `:1908-1912`).
+  Before 1.30: `DismantlePartServer` (now an obsolete forwarder, `constructionbase.c:1759-1765`) and
+  `SpawnConstructionMaterialPiles` (obsolete → `…Ex`, `:1957-1961`).
 - Destroy on ruin: `EntityAI.EEHealthLevelChanged` → `HandleDamageLevelConstruction` (`3_game\entities\entityai.c:1061-1062,1094-1099`)
-  → `ConstructionBase.OnHealthLevelChanged` (`constructionbase.c:352-367`): when a zone hits `STATE_RUINED`,
+  → `ConstructionBase.OnHealthLevelChanged` (`constructionbase.c:353-368`): when a zone hits `STATE_RUINED`,
   `DestroyPartServer(null, part, AT_DESTROY_PART)`. `Construction.DestroyPartServer` (`construction.c:93-114`)
   calls `OnPartDestroyedServer` (without the `destroyed_by_connected_part` argument) and then
-  `DestroyConnectedParts` (`constructionbase.c:223-238`, dependents, with the gate exception `ExceptionCheck`
+  `DestroyConnectedParts` (`constructionbase.c:224-239`, dependents, with the gate exception `ExceptionCheck`
   `construction.c:136-149`). `Construction.OnHealthLevelChanged` also unmounts ruined barbed wire
   (`construction.c:116-133`).
   Before 1.30: all of this sat in `BaseBuildingBase.EEHealthLevelChanged` (1.29: `basebuildingbase.c:496-528`).
@@ -151,10 +151,10 @@ destroy actions exist only under `DIAG_DEVELOPER` (`instant\actionbuildpartinsta
 
 No-tool shelter path on 1.30: `ShelterSite` adds `ActionBuildPart` (`entities\itembase\basebuildingbase\sheltersite.c:164`)
 and its parts are buildable with empty hands through `ActionBuildPartHandsGeneric`; `CanUseHandConstruction()`
-comes from the component (`TOOL_HANDS` parts, `constructionbase.c:347-350,545`). `ActionBuildShelter` is
+comes from the component (`TOOL_HANDS` parts, `constructionbase.c:348-351,546`). `ActionBuildShelter` is
 `[Obsolete("1.30: driven by ActionBuildPart")]` and no longer registered (`interact\actionbuildshelter.c:1`), and
 `ActionActionBuildPartNoTool` is an empty, unregistered subclass of `ActionBuildPartHandsGeneric`
-(`actionbuildpart.c:543`). `[UNVERIFIED]` the `ShelterSite` part masks in config (`P:\DZ\gear\camping\config.cpp:11712+`)
+(`actionbuildpart.c:543`). `[UNVERIFIED]` the `ShelterSite` part masks in config (`P:\DZ\gear\camping\config.cpp:11722+`)
 were not re-traced. Before 1.30: `ShelterSite` added `ActionBuildShelter` and overrode `CanUseHandConstruction()→true`
 (1.29: `sheltersite.c:83-87,172`).
 
@@ -164,5 +164,5 @@ were not re-traced. Before 1.30: `ShelterSite` added `ActionBuildShelter` and ov
   `references/dayz-1-30-construction-rebuilding.md` §1 for EXACT getters.
 - `BuildingBase` uses the same hooks to install `Rebuilding` (`4_world\entities\game\super\building.c:23-51`). That
   path does **not** go through `FenceKit.OnPlacementComplete`.
-- `SetRequestBuiltState` is obsolete (`constructionpart.c:504-512`); use `SetBuiltState`.
+- `SetRequestBuiltState` is obsolete (`constructionpart.c:510-518`); use `SetBuiltState`.
 - Silent porting traps (hooks that compile but no longer run): `references/dayz-1-30-construction-rebuilding.md` §10.

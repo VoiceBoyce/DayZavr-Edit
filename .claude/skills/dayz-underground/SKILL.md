@@ -9,7 +9,7 @@ description: >
   trigger editor, disallowedTypesInUnderground, bunker broadcast,
   cfgbunkerbroadcast.json, Buldozer MarkUnderground or CopyTileCoord, GetUndergroundPresence,
   underground night vision, porting a 1.29 underground mod. DayZ 1.30 stable
-  (1.30.164078). Not construction parts, rebuilding or code locks: dayz-basebuilding.
+  (1.30.164200). Not construction parts, rebuilding or code locks: dayz-basebuilding.
   Not the bunker-broadcast storage file: dayz-persistence. Not sandstorm or heat:
   dayz-environment-hazards.
 ---
@@ -21,9 +21,9 @@ the underground triggers that darken and change the environment, the player's
 "underground" state, and what Badlands builds on top (radio-announced bunkers,
 irrigation tunnel entrance).
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
-Script citations are `P:\scripts\…` (unpacked 1.30.164078), config/data citations
+Script citations are `P:\scripts\…` (unpacked 1.30.164200), config/data citations
 `P:\DZ\…` and `P:\bin\…`; `1.29: O:\…` points at the unpacked 1.29 client
 (`O:\DayZ 1.29 Старый распакованный клиент\`). The skill was first written against
 1.30 Exp 164014; every `source_verified` claim was re-opened on stable 164078
@@ -174,8 +174,8 @@ proto native bool		SurfaceIsHole(float x, float z);
 - [EXACT][CLAIM-UG-TRIGGER-LIMIT-130] Cap of 4096 triggers per JSON: `m_TriggerIndex` is
   synchronized in `-1..4095` (`undergroundtrigger.c:10`). Before 1.30: `-1..255`
   (1.29: `O:\…\scripts\4_world\entities\scriptedentities\triggers\undergroundtrigger.c:10`).
-  Nasdara's vanilla JSON alone has 1076 triggers (stable install,
-  `nasdara\addons\worlds_nasdara_ce.pbo`, not unpacked on `P:\`), so a 1.29-sized index
+  Nasdara's vanilla JSON alone has 1076 triggers (`P:\DZ\worlds\nasdara\ce\cfgundergroundtriggers.json`,
+  from `nasdara\addons\worlds_nasdara_ce.pbo`), so a 1.29-sized index
   would not fit it.
 - Triggers bound to an object (`CustomSpawn`): via `ParentNetworkId` for map
   objects, or via `Tag`. Both fields already existed in 1.29.
@@ -242,15 +242,36 @@ proto native bool		SurfaceIsHole(float x, float z);
 ### Night vision underground (new in 1.30)
 
 - The camera now re-resolves the NV type from the environment in `UpdateCameraNV`
-  (`P:\scripts\4_world\entities\manbase\dayzplayer\dayzplayercamera_base.c:429-448`):
-  `ResolveNVType` (`:662`) maps
-  `NV_OPTICS_ON`/`NV_GOGGLES`/`NV_PUMPKIN`… to `*_UNDERGROUND`, `*_SANDSTORM` or
-  `*_UNDERGROUND_SANDSTORM` variants (`NVTypes`, `:69-84`) when
-  `IsPlayerUnderground` (`:722-731`, `GetUndergroundPresence() != NONE`) or a sandstorm is
-  active. `SetCameraPP` passes the **resolved** type to `SetNVPostprocess`
-  (`:451-473`); the PPE profiles are `PPERequester_CameraNV.NV_UNDERGROUND_*`
-  (`P:\scripts\3_game\ppemanager\requesters\ppercameranv.c:11-25`).
-- Before 1.30: `NVTypes` ended at `NV_OPTICS_STARLIGHT_NIGHT`, `MAX` was 11 (now 23), and
+  (`P:\scripts\4_world\entities\manbase\dayzplayer\dayzplayercamera_base.c:419-438`):
+  `ResolveNVType` (`:664-724`) maps a device that is on (`NV_OPTICS_ON`, the Kazuar/Starlight
+  `*_DAY`/`*_NIGHT` modes, `NV_GOGGLES`/`NV_GOGGLES_2D`, `NV_PUMPKIN`) to its `*_UNDERGROUND`,
+  `*_SANDSTORM` or `*_UNDERGROUND_SANDSTORM` variant (`NVTypes` `:54-89`, condition variants `:69-86`)
+  when `IsPlayerUnderground` (`:728-737`, `GetUndergroundPresence() != NONE`) or a sandstorm is
+  active (`IsSandstormActiveForPlayer`, intensity > `SANDSTORM_NVG_THRESHOLD` = 0.15, `:741-755`).
+- **Weapon optics keep their day/night mode underground.** A night mode (`NV_OPTICS_ON`,
+  `NV_OPTICS_KAZUAR_NIGHT`, `NV_OPTICS_STARLIGHT_NIGHT`) resolves to `NV_OPTICS_UNDERGROUND` /
+  `NV_OPTICS_UNDERGROUND_SANDSTORM`; a day mode (`OPTICS_STATE_DAY` → `NV_OPTICS_KAZUAR_DAY` /
+  `NV_OPTICS_STARLIGHT_DAY`, `P:\scripts\4_world\entities\itembase\inventory_base\optics.c:74,147`)
+  resolves to `NV_OPTICS_UNDERGROUND_DAY` / `NV_OPTICS_UNDERGROUND_SANDSTORM_DAY` (`:689-702`).
+  "Day" is the optic's mode, not the time of day. Goggles and pumpkin have no day split underground.
+- `SetCameraPP` passes the **resolved** type to `SetNVPostprocess` (`:441-463`); the ironsights and
+  optics cameras do the same (`dayzplayercameraironsights.c:274`, `:305`, `:485`, `:530`, `:572`), except a
+  1x non-NV optic used with NV goggles on, which still gets the raw type (`:538`). The PPE
+  profiles are the `PPERequester_CameraNV` constants
+  (`P:\scripts\3_game\ppemanager\requesters\ppercameranv.c:3-29`): `NV_UNDERGROUND_OPTICS = 6`,
+  `NV_UNDERGROUND_SANDSTORM_OPTICS = 8`, `NV_UNDERGROUND_GLASSES = 10`, `NV_UNDERGROUND_PUMPKIN = 14`, …, and
+  for optics in day mode `NV_UNDERGROUND_DAYTIME_OPTICS = 17` (`ApplyOpticsProfile(2.0, 1.0)`) and
+  `NV_UNDERGROUND_SANDSTORM_DAYTIME_OPTICS = 18` (`ApplyOpticsProfile(1.0, 1.0)`) (`:28-29`, `:103-110`).
+  `UndergroundHandlerClient` scales the underground exposure through
+  `SetUndergroundExposureCoef` (`ppercameranv.c:146`, called at `undergroundhandlerclient.c:404`);
+  `GetUndergroundExposureCoef()` (`ppercameranv.c:82`) reads it back.
+- Do not store or send `NVTypes` as raw ints. 1.30.164200 inserted `NV_OPTICS_UNDERGROUND_DAY` and
+  `NV_OPTICS_UNDERGROUND_SANDSTORM_DAY`, so every later value moved by +1/+2 (e.g. `NV_GOGGLES_DAY` 15 → 17)
+  and `MAX` is now 25.
+- Before 1.30.164200 (1.30.164078): any optic underground resolved to the night variant
+  `NV_OPTICS_UNDERGROUND(_SANDSTORM)` whatever its mode, the ironsights camera passed the raw type on its
+  second branch, and `NVTypes.MAX` was 23.
+- Before 1.30: `NVTypes` ended at `NV_OPTICS_STARLIGHT_NIGHT`, `MAX` was 11, and
   `SetNVPostprocess` received the raw type (1.29: `O:\…\dayzplayercamera_base.c:442`).
 
 ## Badlands in 1.30 scripts
@@ -270,12 +291,17 @@ proto native bool		SurfaceIsHole(float x, float z);
 - **Irrigation tunnel.** `Land_IrrigationTunnel_Entrance_01` is in
   `P:\scripts\4_world\entities\building\rebuildable\irrigationtunnel_entrance.c:1-11`: the
   entrance is rebuildable, and its debug spawn populates it with sticks and rope.
-  Rebuilding is covered by `dayz-basebuilding`.
+  Rebuilding is covered by `dayz-basebuilding`. Since 1.30.164200 its config carries
+  `class Navmesh { generateWithRoadway=1; generateWithProxies=1; class HideParts {…
+  hideAnimationSource="proxyroadway_block_01"; } }` and its ladder part sets
+  `toggle_utility_part_update=1;` (`P:\DZ\structures_takistan\Industrial\config.cpp:20,25-35,461`).
+  The tunnel water no longer gives cholera (§DayZ 1.30.164200 changes).
 - Nasdara ships in the stable install under `<DayZ>\nasdara\addons\` (structures, CE,
   navmesh); its world config is `worlds_nasdara.ebo` (encrypted, so its `Holes` cannot be
-  read) and `worlds_nasdara_ce.pbo` holds `cfgundergroundtriggers.json` (1076 plain
-  triggers: no `CustomSpawn`, `Tag` or `ParentNetworkId`) and `cfgbunkerbroadcast.json`.
-  None of it is unpacked on `P:\`. (On 1.30 Exp 164014 only Nasdara's scripts shipped.)
+  read). Since the 1.30.164200 unpack the rest is on `P:\`: `P:\DZ\worlds\nasdara\ce\` holds
+  `cfgundergroundtriggers.json` (1076 triggers, each `CustomSpawn: 0`, no `Tag` or `ParentNetworkId`)
+  and `cfgbunkerbroadcast.json`, plus `data\` and `navmesh\`. (On 1.30 Exp 164014 only Nasdara's
+  scripts shipped.)
 - Bohemia (Dev Blog Recap 2, Steam, 2026-09-22): Badlands underground facilities
   use the terrain holes system, which will be available for other maps and
   for the modding community.
@@ -292,7 +318,7 @@ What an old underground mod meets on 1.30. Full API delta: `dayz-130-migration`.
 | Mapping trigger type → presence inside `UndergroundHandlerClient.SetUndergroundPresence` | moved to `UndergroundTrigger.TranslateTriggerTypeToPresence()` (`undergroundtrigger.c:190-203`), still called from `undergroundhandlerclient.c:470` | an override of `SetUndergroundPresence` still runs; to change the mapping, override `TranslateTriggerTypeToPresence` |
 | > 256 triggers in one JSON | cap 4096 (`undergroundtrigger.c:10`) | 1.29 synced the index only in `-1..255` (what happened above that was not measured); 1.30 syncs up to 4095 |
 | `modded class UndergroundDiag`, `PluginDiagMenuClient.m_UndergroundDiag`, `DiagMenuIDs.UNDERGROUND_DEBUG` | removed; `undergrounddiag.c` now holds the editor gizmos (`BoxDraw(vector position, vector orientation = "0 0 0", vector size = "1 1 1")`, `P:\scripts\4_world\plugins\pluginbase\plugindiagmenu\undergrounddiag.c:276`) | compile error: the classes were `#ifdef DEVELOPER` (1.29: `O:\…\undergrounddiag.c:1`), so DayZDiag only; the `DiagMenuIDs` value is unguarded, so every build |
-| `modded DayZPlayerCameraBase.SetNVPostprocess` switching on `NV_GOGGLES`/`NV_OPTICS_ON`… | receives the resolved `*_UNDERGROUND*`/`*_SANDSTORM*` type underground or in a sandstorm (`dayzplayercamera_base.c:451-473`) | compiles; your branch is silently skipped underground. Arrays sized by `NVTypes.MAX` grow from 11 to 23 |
+| `modded DayZPlayerCameraBase.SetNVPostprocess` switching on `NV_GOGGLES`/`NV_OPTICS_ON`… | receives the resolved `*_UNDERGROUND*`/`*_SANDSTORM*` type underground or in a sandstorm (`dayzplayercamera_base.c:441-463`) | compiles; your branch is silently skipped underground. Arrays sized by `NVTypes.MAX` grow from 11 to 25 (23 on 1.30.164078) |
 | `modded UndergroundStash.PlaceOnGround()` | `[Obsolete("1.30: No replacement")]` (`P:\scripts\4_world\entities\undergroundstash.c:51`) and no longer called by `ActionDigInStash` (stash spawned with `ECE_PLACE_ON_SURFACE`, `P:\scripts\4_world\classes\useractionscomponent\actions\continuous\actiondiginstash.c:161`; 1.29 called it at `O:\…\actiondiginstash.c:165`) | compiles; the override is silently dead. (Buried stash, not this skill's trigger system.) |
 | `CreateObject(type, pos, local, ai, physics)` / `CreateStaticObjectUsingP3D(p3d, pos, ori, scale, local)` | new trailing `bool objSpawner = false` (`P:\scripts\3_game\global\game.c:691`, `:680`) | existing calls compile unchanged |
 | `cfgundergroundtriggers.json` from 1.29 | loads unchanged; 1.30 only adds optional `Comment` on triggers and breadcrumbs (`undergroundarealoader.c:48,71`) | no change needed |
@@ -303,11 +329,44 @@ Unchanged between 1.29 and 1.30 (diff): `hologram.c`, `objectspawner.c` apart fr
 `Land_Underground_Entrance`/`_Panel`/`_WaterReservoir` and `Land_WarheadStorage_Main` only
 gained `#ifndef NO_GUI` guards around client-only bodies.
 
+### DayZ 1.30.164200 changes
+
+What the 1.30.164200 patch (2026-10-21) changes for an underground mod written on 1.30.164078. Full
+delta: `dayz-130-migration` (`api-delta-1.30.164078-to-164200.md`, `config-delta-1.30.164078-to-164200.md`).
+
+- **NV types.** `NVTypes` gained `NV_OPTICS_UNDERGROUND_DAY` and `NV_OPTICS_UNDERGROUND_SANDSTORM_DAY`;
+  later values moved by +1/+2 and `MAX` is 25. `ResolveNVType` keeps the optic's day/night mode
+  underground; two new PPE profiles `NV_UNDERGROUND_DAYTIME_OPTICS = 17` and
+  `NV_UNDERGROUND_SANDSTORM_DAYTIME_OPTICS = 18`. A `modded SetNVPostprocess` that switches on the
+  underground optics types needs the two `*_DAY` cases. Detail: §Night vision underground.
+- **Irrigation tunnel water.** [reported: BI 1.30.164200 notes] "Irrigation tunnel water gave character
+  cholera" is fixed. The data change behind it (config-delta §2.8): 38 irrigation-tunnel and water-stream
+  `.p3d` now use the roadway surface `clean_water_int` instead of `still_water_int`. In
+  `P:\DZ\surfaces\config.cpp` `still_water_int` is `liquidType=512` (`LIQUID_WATER`, `:1775-1781`) and
+  `clean_water_int` is `liquidType=4194304` (`LIQUID_CLEANWATER`, `:1803-1809`). Drinking a
+  `LIQUID_CLEANWATER` surface counts as `ENVIRO_WELL`, anything else as `ENVIRO_POND`
+  (`actiondrinkpondcontinuous.c:78-86`), and only `ENVIRO_POND` adds `CHOLERA` (`playerbase.c:7696-7704`).
+  For water inside your own tunnel model, pick the surface material by the liquid you want.
+- **Navmesh.** All four vanilla `navmesh.nm` (`P:\DZ\worlds\*\navmesh\`) are now format v9 (1.29: v6,
+  1.30.164078: v7; header `TESM`, uint32 version at offset 4). The 164200 server compares the version
+  strictly (`cmp r9d,9` before the `Navmesh could not be loaded: Invalid version` string, derived from exe
+  analysis in config-delta §2.9, not run in game), so a custom map's v7 navmesh most likely no longer loads
+  and its infected/animals stand still. Regenerate it with DayZ Tools 1.30.164200 (`dayz-ai-patterns`
+  §Navmesh). [reported: BI 1.30.164200 notes] "Infected and animals had numerous issues navigating
+  rebuildable structures" is fixed; config-wise the tunnel entrance and the `Fence` gate got `Navmesh`
+  blocks (above; `P:\DZ\gear\camping\config.cpp:4418`).
+- **Known issue** [reported: BI 1.30.164200 notes]: "Incorrect interior/exterior detection in some
+  buildings". The note does not say which test; the trigger-driven `EUndergroundPresence` is script and did
+  not change, so the likely candidates are the engine's inside-building checks (e.g. `IsSoundInsideBuilding`,
+  used by the sandstorm shelter, `dayz-environment-hazards`) [inference, not measured].
+- No underground trigger, breadcrumb, `UndergroundHandlerClient` or bunker-broadcast script changed in
+  164200 (script delta file list).
+
 ## Verification status
 
 | Claim | Level |
 |---|---|
-| Format `Holes`/`tiles[]`, `SurfaceIsHole`, presence synchronization, trigger cap, JSON schema, NV variants, editor export order | `source_verified` (re-opened on 1.30.164078) |
+| Format `Holes`/`tiles[]`, `SurfaceIsHole`, presence synchronization, trigger cap, JSON schema, NV variants, editor export order | `source_verified` (re-opened on 1.30.164078; NV variants re-read on 1.30.164200) |
 | One entry in `tiles[]` is a heightmap cell; 6.25 m in Livonia | `cross_checked` (fit with triggers) |
 | Holes reside in config, not in `.wrp` | `cross_checked` (`.wrp` grows identically with and without holes) |
 | Per-object "underground" flag is a Terrain Builder import column | `cross_checked` (strings in DayZ Tools of 2026-10-15) |

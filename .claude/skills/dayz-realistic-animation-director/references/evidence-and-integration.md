@@ -7,7 +7,7 @@
 3. **Motion evidence:** full-speed preview plus contact/extreme/recovery frames.
 4. **Numeric evidence:** sampled report and audit JSON, including failed checks and worst frames.
 5. **Artifact evidence:** exported file exists, is non-trivial and carries the intended channel/event mask. In DayZ 1.30, verify that animation graphs conform to Enfusion Config `.agf` subgraphs referenced by an `AnimSrcGraph` master index (`.agr`, e.g. `P:\DZ\anims\workspaces\player\player_main\player_main.agr:1587-1589`), and `.asi` instances conform to `AnimSetInstanceSource`.
-6. **Build/deploy evidence:** compiled/packed artifact actually deployed, with hash/path when stale copies are possible. In DayZ 1.30, [CHANGELOG 1.30] named mod filesystems and `-resolveFilePatchingUsingEnfusion=1` may let you mount and verify unbinarized `.agf` subgraphs directly (not tried on this host).
+6. **Build/deploy evidence:** compiled/packed artifact actually deployed, with hash/path when stale copies are possible. In DayZ 1.30, [CHANGELOG 1.30] named mod filesystems and `-loadRVFilesViaEnfusionFS=1` (renamed in 1.30.164200; `-resolveFilePatchingUsingEnfusion=1` before) may let you mount and verify unbinarized `.agf` subgraphs directly (not tried on this host).
 7. **In-game evidence:** target states exercised, RPT reviewed and visual behavior confirmed. In DayZ 1.30, [CHANGELOG 1.30] the Workbench Animation Editor (Enfusion 2021) supports **live editing of running graphs**, which should allow live parameter tuning (`VehicleSteering`, `SlopeAngleX`, blend weights) on a running client (not tried on this host).
 
 Never promote evidence upward. A clean script run is not a clean animation; an offline render is not an exported artifact; an exported artifact is not the deployed PBO; a deployed PBO is not an in-game PASS.
@@ -40,7 +40,7 @@ Send `dayz-animation-pipeline`:
 - audit and render paths;
 - current evidence state.
 
-Then follow its current compile, wiring, build and test procedures. In DayZ 1.30, test workflows may use ([CHANGELOG 1.30], not tried on this host) Workbench Enfusion 2021 live editing, the ragdoll editor for `.ragdoll` files, and `-resolveFilePatchingUsingEnfusion=1`. Do not reproduce them here.
+Then follow its current compile, wiring, build and test procedures. In DayZ 1.30, test workflows may use ([CHANGELOG 1.30], not tried on this host) Workbench Enfusion 2021 live editing, the ragdoll editor for `.ragdoll` files, and `-loadRVFilesViaEnfusionFS=1` (`-resolveFilePatchingUsingEnfusion=1` before 1.30.164200). Do not reproduce them here.
 
 ## Output states
 

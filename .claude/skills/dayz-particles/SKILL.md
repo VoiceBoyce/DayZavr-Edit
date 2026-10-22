@@ -5,7 +5,7 @@ description: "Use when: particles, .ptc, .emat, ParticleSource, SEffectManager, 
 
 # DayZ Particle Effects — Complete Modding Reference
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 ## CRITICAL: .ptc AND .emat ARE PLAIN TEXT
 
@@ -435,8 +435,8 @@ Tick hook on 1.30 is `override void OnCEIterate(float currentTime, float elapsed
 ### Safe positions and schema
 
 `SafePositions` is global, not attached to one area. `GetClosestSafePos` searches the whole array in
-2D (`P:\scripts\4_world\static\miscgameplayfunctions.c:1831,1850`) during the early-presence
-rescue path (`:1825`; caller `P:\scripts\4_world\classes\playermodifiers\modifiers\conditions\areaexposure.c:44`;
+2D (`P:\scripts\4_world\static\miscgameplayfunctions.c:1769,1788`) during the early-presence
+rescue path (`:1763`; caller `P:\scripts\4_world\classes\playermodifiers\modifiers\conditions\areaexposure.c:44`;
 1.29 lines were `:1698,1717,1692`). After any radius change, measure every safe
 position against every area; a rescue point inside another cylinder can teleport a reconnecting
 player from gas to gas.
@@ -552,6 +552,22 @@ played it with `PlayOnObject` at `m_ParticlePosition` (1.29: `explosivesbase.c:6
 - [ ] Vehicle dust/exhaust: register through `VehicleVFXComponent` and override `ParticleParamsOverride`; stop using `m_exhaustFx` & co.
 - [ ] `GetParticleIDByName` callers: pass the bare file name.
 - [ ] Do not copy `sandstorm.emat` as a particle material — shader is `SnowEffect`.
+
+### DayZ 1.30.164200 changes (patch of 2026-10-21)
+Static reading of `P:\scripts` 1.30.164200; nothing here was measured in game.
+- **Server particle + sound in one effecter.** Fishing now spawns its synced splash with a custom effecter,
+  `ParticleEffecterParameters("FishingSplashEffecter", EffecterBase.NOT_DEFINED_LIFESPAN, particleId)`
+  (`P:\scripts\4_world\classes\useractionscomponent\actions\continuous\actionfishingnew.c:326,330`). The new classes
+  (`:462-486`): `FishingSplashEffecter : ParticleEffecter` overrides `GetEffectTypename()` to return
+  `FishingSplashEffect : EffectParticleGeneral`, whose constructor hooks `Event_OnEffectStarted` and plays
+  `SEffectManager.PlaySound("Fishing_splash_SoundSet", m_Position).SetAutodestroy(true)`. Reusable recipe (sound on every
+  client, no RPC): `references/dayz-1-30-particles.md` §Server particle with a sound. Before 1.30.164200 fishing used
+  the plain `"ParticleEffecter"` (no sound).
+- **Vehicle wheel VFX cooldown.** `RegisterEffectGroup(WHEEL_SMOKE | WHEEL_CONTACT, …, new VehicleVFXDataParams(pos, dir, 2.0))`
+  in `CarScript` and `MotorbikeScript` (`carscript.c:381-382`, `motorbikescript.c:203-204`): the third argument is
+  `m_CooldownSec`, the minimum seconds between two (re)starts of one wheel's effect (`vehiclevfxcomponent.c:82-93`,
+  guard `VehicleVFXData.CanPlay()` `:43-50`). It went 5.0 → 2.0.
+- No `ParticleList`, `.ptc` or `EffectParticle` API changed in this patch.
 
 ### 1.30 references in this skill
 - [DayZ 1.30 particles](references/dayz-1-30-particles.md)

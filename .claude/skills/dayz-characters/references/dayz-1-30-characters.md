@@ -31,9 +31,13 @@ Script bases (`P:\scripts\4_world\entities\creatures\infected\`):
   (`zombiemalebase.c:160-250`).
 - Nasdara female: `ZmbF_takiCitizenUrbanA_Base` … `ZmbF_takiOilRigWorker_Base` (`zombiefemalebase.c:163-194`)
   plus `Zmbf_IonSoldier_Normal_1` (`:155`).
-- **None of the `taki*` / `IonSoldier` classes has a config class in `P:\DZ`** on 1.30.164078 (only
-  sound sets reference `ZmbM_IonSoldier_*`). `[UNVERIFIED]` whether they ship in a DLC/map PBO that is not
-  unpacked here. Do not inherit them in a mod config.
+- Their configs and models are Badlands DLC data, on `P:\` since the 1.30.164200 unpack:
+  `P:\DZ\characters_takistan\zombies\config.cpp` (e.g. `class ZmbM_takiCitizenUrbanA_Base: ZombieMaleBase`
+  `:17`, `class Zmbf_IonSoldier_Normal_1: ZombieFemaleBase` `:5103` with model
+  `\DZ\characters_takistan\zombies\zmbf_ionsoldier_normal_1.p3d`, `ZmbM_IonSoldier_Normal_1_Base` `:5330`).
+  (Corrected 2026-10-21: this item used to say none of them had a config; the 2026-10-15 grep could not
+  see DLC data.) Inherit them only where the Badlands data is loaded; whether a non-Badlands server can
+  spawn them was not checked.
 
 [DESIGN] Inherit `ZombieFemaleBase` (or one of the 1.30 soldier bases with a config) for a custom female
 military infected; do not invent a parallel AI driver.

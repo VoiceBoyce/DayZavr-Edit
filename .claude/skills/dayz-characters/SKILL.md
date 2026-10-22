@@ -24,7 +24,7 @@ config — so the only thing you author is a new mesh. The real cost of the whol
 **rigging that custom mesh to `OFP2_ManSkeleton`**. Everything else is generic pipeline work delegated to
 the skills below.
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 This skill is the character-specific layer on top of `dayz-model-pipeline` (generic geometry / LODs),
 `dayz-texture-pipeline` (textures), `dayz-animation-pipeline` (the skeleton/anim deep-dive), and
@@ -35,8 +35,9 @@ Scope: anything that walks on the player skeleton — infected, survivors, NPCs 
 from scratch, or imported from another game.
 1.30 adds female military infected with configs (`ZmbF_SoldierNormal_Base` / `ZmbF_SoldierNormal` /
 `ZmbF_ArmyOfficer` / `ZmbF_eastSoldier_*`, `P:\DZ\characters\zombies\config.cpp:11119-11807`) and
-script-only Nasdara `Zmb*_taki*` / `Zmbf_IonSoldier_Normal_1` bases (no config class in `P:\DZ`) —
-`references/dayz-1-30-characters.md`.
+Nasdara `Zmb*_taki*` / `Zmbf_IonSoldier_Normal_1` infected whose configs and models are Badlands DLC data
+(`P:\DZ\characters_takistan\zombies\config.cpp`, on `P:\` since the 1.30.164200 unpack; corrected
+2026-10-21, this used to say they had no config) — `references/dayz-1-30-characters.md`.
 
 ## PREFLIGHT
 
@@ -598,7 +599,7 @@ Re-verified on 1.30.164078 (`P:\`); details and line numbers in `references/dayz
 
 What changes: `SurvivorBase.enfAnimSys` binds `ragdoll = "DZ/characters/bodies/human.ragdoll"`
 (`P:\DZ\characters\data\config.cpp:160`); infected and player `.agr` are Enfusion `AnimSrcGraph` indexes
-over `.agf` subgraphs; new female military infected configs + script-only Nasdara (`taki`) infected;
+over `.agf` subgraphs; new female military infected configs + Nasdara (`taki`) infected (Badlands DLC configs in `P:\DZ\characters_takistan\zombies\`);
 `DayZInfectedConstants.MINDSTATE_COWER` (sandstorm cowering); human `Skinning` drops `Lard`; sandstorm
 PPE/agents via `DEF_DUST_PARTICLE_BREATH` / `DEF_DUST_PARTICLE_EYES` on `MASK`/`EYEWEAR` equipment;
 `CfgHeads` grimace `.rtm` paths moved to `dz\characters\heads\anim\`; `SurrenderDummyItem` obsolete.

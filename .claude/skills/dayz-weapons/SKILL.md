@@ -13,7 +13,8 @@ description: >
   reload, fire and jam animations belong to dayz-animation-pipeline. Use
   dayz-vehicles/dayz-characters/dayz-model-pipeline for those domains.
   DayZ 1.30: GetExplosiveEffectData, CfgAmmo particle, LandMineExplosion_Ammo,
-  Get*PistolAnimState, script-only SCARL/Luger/LeeEnfield/MP18.
+  Get*PistolAnimState, Badlands SCARL/Luger/LeeEnfield/MP18 (weapons_takistan);
+  164200: NV optics underground day/night, NVTypes shift.
 ---
 
 # DayZ Firearm Modding — the ENTITY side
@@ -25,7 +26,7 @@ and the import transform. This skill is the **entity** layer: the `.p3d` selecti
 contract, the bone-remap glue, the CfgWeapons config, and the model-path / winding / serve-binarized
 invariants that gate whether the build loads at all.
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 **FRONTIER — this skill is NOT weapon animation.** Grip / hand pose / ADS line, and the MOTION of the
 bolt / trigger / reload / fire / jam-unjam (the `.anm` / `.asi` authoring) belong to
@@ -68,13 +69,15 @@ pointer. Firearm test cycles are as expensive as any DayZ rebuild — a prefligh
    `class CfgWeapons`.** `[VERIFIED in-game]` SR2M. Forward-declaring `Mode_FullAuto` INSIDE `CfgWeapons`
    makes an empty stub without `autoFire=1` → the mode is dropped → weapon stuck in single.
    → `cfgweapons-contract.md` §"root-scope Mode_*".
-7. **W-STAGING1 — a firearm script under `4_world/entities/firearms/` does NOT imply a packed `.p3d` or
-   `CfgWeapons` class.** `[VERIFIED-vanilla]` 1.30.164078. `SCARL_Base`, `Luger_Base`/`Luger`,
-   `LeeEnfield_Base`, `MP18_Base` (and `P1907_Bayonet`, `AKM_Gold`, `Magnum_Gold`, `SawedoffMagnum_Gold`)
-   have scripts and (for the four firearms) IK registrations + packed `.asi`/`.anm`, but there is no
-   model folder under `P:\DZ\weapons\firearms\` / `P:\DZ\weapons\pistols\` and no `CfgWeapons` /
-   `CfgMagazines` class for them in any `P:\DZ\**\config.cpp`. Nothing to debinarize — inherit a shipped
-   peer (`SCARH` / `P1` / `Glock` / `CZ527` / `Mosin` / `CZ61`). → `dayz-1-30-weapons.md`.
+7. **W-STAGING1 — look for a firearm's config and model in the DLC data too, not only in
+   `P:\DZ\weapons\`.** `[VERIFIED-vanilla]` 1.30.164200. `SCARL`, `Luger`, `LeeEnfield`, `MP18` (and
+   `P1907_Bayonet`, `AKM_Gold`, `Magnum_Gold`, `SawedoffMagnum_Gold`, their magazines) are **Badlands DLC
+   items**: configs and ODOL models under `P:\DZ\weapons_takistan\` (PBO
+   `<DayZ>\nasdara\addons\weapons_nasdara.pbo`, prefix `DZ\weapons_takistan`, `product=dayz nasdara`), e.g.
+   `class LeeEnfield_Base: BoltActionRifle_ExternalMagazine_Base`
+   (`P:\DZ\weapons_takistan\firearms\leeenfield\config.cpp:27`). They were in the 1.30.164078 install as
+   well; this skill called them "script-only" until 2026-10-21 because `P:\` held no DLC data before the
+   164200 unpack. Debinarize them like any shipped peer. → `dayz-1-30-weapons.md`.
 
 **Memory-point sanity** (each was a real AI-mesh bug on MK47): `usti hlavne`/`konec hlavne` share Y and
 Z (level bore); `bolt_axis` parallel to bore; eject direction within ~25° of the reference; `eye` height
@@ -88,11 +91,11 @@ its **config**, and match: named selections present, memory points shaped the sa
 for its ammo / mags / recoil / sounds / anims. Every preflight item above falls out of this one diff
 instead of error-by-error in-game. → `p3d-selection-contract.md`, `cfgweapons-contract.md`.
 
-1.30: **W-STAGING1** — scripts for `SCARL` / `Luger` / `LeeEnfield` / `MP18` are not a licence to unpack
-those classnames; 1.30.164078 ships no model or config for them. Debinarize
-`P:\DZ\weapons\firearms\scarh\scarh.p3d` (config `class SCARH_Base: Rifle_Base`,
-`P:\DZ\weapons\firearms\scarh\config.cpp:26`) or another packed peer. Details: `dayz-1-30-weapons.md`.
-(Before 1.30: every scripted vanilla firearm also had its model in the matching `weapons_*.pbo`.)
+1.30: **W-STAGING1** — `SCARL` / `Luger` / `LeeEnfield` / `MP18` are shipped peers too, in the Badlands
+DLC data: `P:\DZ\weapons_takistan\firearms\{scarl,leeenfield,mp18}\`, `pistols\luger\` (config + ODOL
+`.p3d`; corrected 2026-10-21, see the preflight item). Note the split parent of the SCAR-L: script
+`SCARL_Base : SCARH_Base`, config `class SCARL_Base: Rifle_Base`
+(`P:\DZ\weapons_takistan\firearms\scarl\config.cpp:26`). Details: `dayz-1-30-weapons.md`.
 
 ## QUICK TRIAGE
 
@@ -109,7 +112,7 @@ those classnames; 1.30.164078 ships no model or config for them. Debinarize
 | Optics / attachment slot won't accept X | `attachments[]` slot name vs the attachment's `inventorySlot`; mount-gated optics | `cfgweapons-contract.md` §attachments |
 | **Grip / hands / ADS / rider pose wrong** | NOT this skill — anim | `dayz-animation-pipeline` → `weapon-in-hands.md` |
 | **Bolt-slide / reload / fire / jam-unjam MOTION** | NOT this skill — anim (`.anm`/`.asi` authoring) | `dayz-animation-pipeline` → `weapon-anim-*` |
-| Spawn/class missing for SCARL/Luger/LeeEnfield/MP18 | W-STAGING1 — script+IK present, no CfgWeapons / `.p3d` in 1.30.164078 | `dayz-1-30-weapons.md` |
+| Spawn/class missing for SCARL/Luger/LeeEnfield/MP18 | W-STAGING1 — Badlands DLC classes (`weapons_nasdara.pbo`, `P:\DZ\weapons_takistan\`): check the server loads the `nasdara\addons` data and the CE lists them | `dayz-1-30-weapons.md` |
 | Compile fail on `GetExplosionParticleID` (mod written for ≤1.29) | removed in 1.30; use `AmmoTypesAPI.GetExplosiveEffectData(ammo, surface)` | `dayz-1-30-weapons.md` §ammo |
 | Custom explosive explodes with no particle on 1.30 | `SetParticleExplosion` is now a no-op for FX; the particle comes from `CfgAmmo <ammoType> particle` | `dayz-1-30-weapons.md` §ammo |
 | Config error `LandMineExplosion` undefined base / ammo not found | 1.30 renamed `CfgAmmo LandMineExplosion` → `LandMineExplosion_Ammo` | `dayz-1-30-weapons.md` §CfgAmmo |
@@ -211,11 +214,14 @@ Luger/LeeEnfield bone remaps: `bone-remap.md`, `cfgweapons-contract.md`. Paths b
 **What changes**
 
 - Four firearm scripts (`SCARL_Base : SCARH_Base`, `Luger_Base`, `LeeEnfield_Base`, `MP18_Base`) plus
-  `P1907_Bayonet` and mag stubs — scripts and (for Luger/LeeEnfield) extra `AddItemBoneRemap` arrays;
-  IK `.asi`/`.anm` packed under `P:\DZ\anims\`; **no** `CfgWeapons` / `CfgMagazines` / weapon `.p3d`
-  in 1.30.164078 (W-STAGING1). Same for the script-only `AKM_Gold`
-  (`4_world\entities\firearms\automaticrifle\akm.c:61`) and `Magnum_Gold` / `SawedoffMagnum_Gold`
-  (`4_world\entities\firearms\pistol\magnum.c:402,417`).
+  `P1907_Bayonet` and mag scripts — scripts and (for Luger/LeeEnfield) extra `AddItemBoneRemap` arrays;
+  IK `.asi`/`.anm` packed under `P:\DZ\anims\`. Their `CfgWeapons` / `CfgMagazines` classes and `.p3d`
+  ship in the Badlands DLC data (`P:\DZ\weapons_takistan\`, W-STAGING1; corrected 2026-10-21 — earlier
+  text said "none", because `P:\` held no DLC data before the 164200 unpack). Same for `AKM_Gold`
+  (script `4_world\entities\firearms\automaticrifle\akm.c:61`, config
+  `P:\DZ\weapons_takistan\firearms\akm\config.cpp:24`) and `Magnum_Gold` / `SawedoffMagnum_Gold`
+  (script `4_world\entities\firearms\pistol\magnum.c:402,417`, config
+  `P:\DZ\weapons_takistan\pistols\magnum\config.cpp:20,95`).
 - Pistol FSM anim IDs are virtual getters on `Pistol_Base` (`pistol_base.c:611-629`, wired at `:203-212`).
 - `OpenBolt_Base.SetActions()` adds `FirearmActionDetachMagazine` (`openbolt_base.c:388`).
 - `Weapon_Base.EEItemDetached` calls `ValidateAndRepair()` when the detached item is a magazine
@@ -258,8 +264,10 @@ Luger/LeeEnfield bone remaps: `bone-remap.md`, `cfgweapons-contract.md`. Paths b
 3. A config that inherits or references `CfgAmmo LandMineExplosion` fails (class gone).
 4. Reload never starts if `TestAttachMagazine` is too strict/wrong on a custom muzzle.
 5. Open-bolt mag-detach workarounds fight the new `AddAction(FirearmActionDetachMagazine)`.
-6. Spawning `SCARL` / `Luger` / `LeeEnfield` / `MP18` / `Mag_Luger_8Rnd` / `Mag_MP18_Drum32Rnd` from
-   types/traders fails — no config class.
+6. `SCARL` / `Luger` / `LeeEnfield` / `MP18` / `Mag_Luger_8Rnd` / `Mag_MP18_Drum32Rnd` are Badlands DLC
+   classes (`P:\DZ\weapons_takistan\`); they spawn only where that DLC data is loaded. (Corrected
+   2026-10-21: this item used to say "no config class".) Whether a non-Badlands server or a player
+   without the DLC can use them was not checked here.
 7. `[CHANGELOG 1.30]` `SoundHitType` / `SurfaceInfo.GetSoundHitType()` (T189758) do **not** exist in
    `P:\scripts` on 1.30.164078 (grep: no hit; `3_game\surfaceinfo.c` has only particle/sound-set getters);
    do not call them from weapon scripts.
@@ -274,5 +282,38 @@ Luger/LeeEnfield bone remaps: `bone-remap.md`, `cfgweapons-contract.md`. Paths b
 - [ ] Atypical pistols: override `Get*PistolAnimState()`, keep the stock pistol FSM.
 - [ ] Confirm `TestAttachMagazine` for custom mag/bolt states.
 - [ ] Use `LocalAcquireCartridgeEx` in custom chamber helpers.
-- [ ] Parity-first: debinarize a **packed** peer, not the 1.30 script-only classnames.
-- [ ] Do not add script-only classnames to `types.xml` until Bohemia ships CfgWeapons + `.p3d`.
+- [ ] Parity-first: debinarize a **packed** peer; the Badlands weapons in `P:\DZ\weapons_takistan\` count
+      as packed peers now.
+- [ ] Before adding a Badlands classname to `types.xml` / traders, make sure the server runs with the
+      Badlands data (vanilla `P:\DZ\worlds\nasdara\ce\db\types.xml` lists them).
+
+### DayZ 1.30.164200 changes
+
+Patch 1.30.164200 (2026-10-21). No firearm, FSM, recoil or ammo script changed (script delta file
+list). What did:
+
+- **NV optics underground keep day/night mode.** `ResolveNVType` now maps a Kazuar/Starlight in day mode
+  (`NV_OPTICS_KAZUAR_DAY` / `NV_OPTICS_STARLIGHT_DAY`, `P:\scripts\4_world\entities\itembase\inventory_base\optics.c:74,147`)
+  underground to the new `NV_OPTICS_UNDERGROUND_DAY` / `NV_OPTICS_UNDERGROUND_SANDSTORM_DAY`, with PPE
+  profiles `NV_UNDERGROUND_DAYTIME_OPTICS = 17` / `NV_UNDERGROUND_SANDSTORM_DAYTIME_OPTICS = 18`
+  (`P:\scripts\3_game\ppemanager\requesters\ppercameranv.c:28-29`). On 164078 every optic underground
+  got the night profile. The ironsights camera now resolves the NV type on both branches
+  (`P:\scripts\4_world\entities\manbase\dayzplayer\dayzplayercameraironsights.c:274`, `:305`). Detail:
+  `dayz-underground` §Night vision underground.
+- **`NVTypes` values shifted** (+1 after `NV_OPTICS_UNDERGROUND`, +2 after
+  `NV_OPTICS_UNDERGROUND_SANDSTORM`; `MAX` 23 → 25). A custom NV optic whose `GetCurrentNVType()` returns
+  the enum names keeps working; one that stores or syncs the int must re-map.
+- **Vanilla gap, unchanged:** `DayZPlayerCameraOptics.SetCameraPP` still passes the **raw**
+  `GetCameraNVType()` when a 1x non-NV optic is used with NV goggles on
+  (`dayzplayercameraironsights.c:536-539`), so that case gets no underground/sandstorm variant.
+- **Config fixes:** `PoliceBaton` heavy and sprint attacks now use `MeleeBluntHeavy_2` (were
+  `MeleeBluntLight_2`; `P:\DZ\weapons\melee\blunt\config.cpp:1255,1260`); `Mag_LeeEnfield_10Rnd.ammoItems[]`
+  now also lists `Ammo_762x54Tracer` (`P:\DZ\weapons_takistan\attachments\magazine\config.cpp:327`).
+- **Materials:** ACOG `acog.rvmat` (+ damage/destruct) re-lit, new `acog_as.paa` and an unused
+  `acog_tan*` set; 5.45×39 rvmats use `545x39_smdi.paa`. A retexture that copied the old rvmat now
+  looks different from vanilla (`dayz-130-migration` config-delta §2.3).
+- **Compile:** `vector.Cross` is removed (write `a * b`); ballistic/aim helpers that used it no longer
+  compile.
+- **Actions:** the server now checks only distance for `CCTCursor`-based actions
+  (`m_MaximalActionDistance` + target collision radius); weapon-item actions that relied on the server
+  re-validating the cursor hit lost that check (`dayz-130-migration` api-delta §0b).

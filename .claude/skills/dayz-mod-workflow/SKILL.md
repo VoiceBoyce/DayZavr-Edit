@@ -11,7 +11,7 @@ description: >
   "fix the bug", "debug this", "it doesn't work", "actions not showing",
   sprint execution, or any transition from plan to code/fix. Concurrent
   sessions, skill snapshot, live promote during an open session.
-  Also: CanBeStarted, CCTLiquid, MotorbikeScript, HouseDestructible, cfggameplay ExternalLockData/SandstormData, PluginUndergroundTriggerManager, NVTypes underground/sandstorm, IsHeadless.
+  Also: CanBeStarted, CCTLiquid, MotorbikeScript, cfggameplay ExternalLockData/SandstormData, NVTypes, IsHeadless; 164200: server CCTCursor distance, Can't find variable 'Workbench', vector.Cross, HasCrew clash.
 ---
 
 # DayZ Mod Implementation & Debug Protocol
@@ -20,13 +20,15 @@ Process skill for implementing and fixing DayZ mods. Does not contain domain
 knowledge (that lives in domain skills). Ensures domain knowledge is correctly
 applied and gaps are detected before they become bugs.
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
-The six-layer debug hierarchy, SyncVar rules and the E01–E20 catalog below are version-independent and hold on 1.30.
+The six-layer debug hierarchy, SyncVar rules and the E01–E20 catalog below are version-independent and hold on 1.30 (E21–E26 are 1.30 / 164200 errors).
 1.30 adds to the implementation contract: the client starts an action only if `CanBeStarted()` is true; vanilla
 water actions use `CCTLiquid`; CE rootclasses `MotorbikeScript`/`HouseDestructible`; `cfggameplay.json` lock/sandstorm
 keys; headless guards; and the version-define rule (write plain 1.30 code, never `#ifdef DAYZ_1_30`). Details and
-`P:\` cites: [dayz-1-30-mod-workflow.md](references/dayz-1-30-mod-workflow.md).
+`P:\` cites: [dayz-1-30-mod-workflow.md](references/dayz-1-30-mod-workflow.md). Patch 1.30.164200: the server checks only
+origin distance in `CCTCursor*` (security checks belong in a server-side `ActionCondition`), and E24–E26 below are its
+compile breakers.
 
 ---
 
@@ -252,7 +254,7 @@ Defer to `enforce-script-reference` for full rules. Key verified restrictions:
 6. ActionCondition()  - custom override, runs CLIENT (menu) AND SERVER (start gate, actionmanagerserver.c:168)
 7. FullBody stance    - if full body, verify stance transition
 ```
-On 1.30 steps 1–7 are not the whole client start gate: after the widget lists the action, `CanBeStarted()` must be true or the client never calls `ActionStart` (`actionmanagerclient.c:336-337`). Vanilla pond wash/drink/fill uses `CCTLiquid`, not `CCTWaterSurfaceEx` (`actionwashhandswater.c:28`; fill: `actionobtainliquidbase.c:57`). Before 1.30: steps 1–7 were the full gate.
+On 1.30.164200 step 4 differs by side: for `CCTCursor`, `CCTCursorNoRuinCheck` and `CCTCursorParent` the client tests the cursor hit against feet/head, the server only `DistanceSq(target origin, player origin) <= (maxDist + target.GetCollisionRadius())^2` (`cctcursor.c:29-33`) — the server never sees what the player aims at, so aim / line-of-sight / ownership checks go into `ActionCondition` with server data (see `references/dayz-1-30-mod-workflow.md`). On 1.30 steps 1–7 are not the whole client start gate: after the widget lists the action, `CanBeStarted()` must be true or the client never calls `ActionStart` (`actionmanagerclient.c:336-337`). Vanilla pond wash/drink/fill uses `CCTLiquid`, not `CCTWaterSurfaceEx` (`actionwashhandswater.c:28`; fill: `actionobtainliquidbase.c:57`). Before 1.30: steps 1–7 were the full gate.
 
 - [ ] CreateConditionComponents overridden with correct CCT/CCI
 - [ ] `CanBeStarted()` returns true for performable actions; info-only overrides return false (1.30)
@@ -338,6 +340,9 @@ Verified errors committed more than once. Check ACTIVELY during implementation. 
 - **E21** — (1.30) custom-map `cfgeconomycore.xml` missing `MotorbikeScript` / `HouseDestructible` rootclasses — `P:\DZ\worlds\chernarusplus\ce\cfgeconomycore.xml:17-18`
 - **E22** — (1.30) visible action widget but F does nothing, or custom pond drink never lists — `CanBeStarted()` / `CCTLiquid` (see E21/E22 in `references/error-catalog.md` and `references/dayz-1-30-mod-workflow.md`)
 - **E23** — (1.30) version gate written as `#ifdef DAYZ_1_30` (the code silently disappears on 1.31) or `DIAG_DEVELOPER`/`BUILD_EXPERIMENTAL` used as "is 1.30" — write plain 1.30 code; put only legacy code under `#ifdef DAYZ_1_29` (`references/dayz-1-30-mod-workflow.md` § Version defines)
+- **E24** — (164200) `Can't find variable 'Workbench'` → `Can't compile "Mission" script module!` — Workbench API is only under `#ifdef WORKBENCH` now; guard the code or update the framework (Dabs `samplemvc.c`)
+- **E25** — (164200) `a.Cross(b)` no longer compiles (unknown method `Cross`) — `vector.Cross` existed only in 164078; write `(a * b)`
+- **E26** — (164200) own `HasCrew()` / `IsMoving()` on a vehicle class clashes with the new `Transport.HasCrew()` (proto native) / `Transport.IsMoving()` — rename with a mod prefix, or `override bool IsMoving()`
 
 ---
 

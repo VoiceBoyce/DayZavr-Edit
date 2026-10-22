@@ -1,7 +1,8 @@
-# DayZ 1.30 changes for CarScript-as-aviation (verified on 1.30.164078)
+# DayZ 1.30 changes for CarScript-as-aviation (verified on 1.30.164078, updated for 1.30.164200)
 
-> Target: DayZ 1.30 stable (1.30.164078). Cites point at `P:\scripts` (1.30) unless marked `1.29:`; re-verified
-> 2026-10-15 (first written on 1.30 Exp 164014; the script files involved have identical line counts on stable).
+> Target: DayZ 1.30 stable (1.30.164200). Cites point at `P:\scripts` (1.30) unless marked `1.29:`; re-verified
+> 2026-10-15 (first written on 1.30 Exp 164014; the script files involved have identical line counts on stable) and
+> re-pointed to 1.30.164200 on 2026-10-21 (patch changes: last section).
 > Labels: `../../_shared/dayz-version-policy.md`. Full API delta: the `dayz-130-migration` skill.
 
 A plane or helicopter that **inherits `CarScript`** inherits the whole 1.30 vehicle refactor: lights through
@@ -39,7 +40,7 @@ Do not inherit it expecting a flight model. CarScript-as-aviation stays the patt
 ```
 
 `EOnPostSimulate` is at `carscript.c:807`; `OnDriverExit` gear-stop at `carscript.c:940-948`; empty
-`Transport.OnDriverExit` at `transport.c:224`; `CleanupEffects` is now declared on `Transport` (`transport.c:998`)
+`Transport.OnDriverExit` at `transport.c:227`; `CleanupEffects` is now declared on `Transport` (`transport.c:1007`)
 and overridden by `CarScript` (`carscript.c:390`). Before 1.30 (1.29): `carscript.c:325-326`, `:948`, `:1207-1215`,
 `transport.c:161`, `CleanupEffects` on `CarScript` (`carscript.c:553`).
 
@@ -71,7 +72,7 @@ Nav/strobe lights built on `PointLightBase` + `ScriptedLightBase.CreateLight` (`
 ## Battery and vital parts
 
 Battery: `NeedElectricitySourceDevice()` (no parameters) / `GetElectricitySourceDevice()` /
-`GetElectricitySourceDeviceType()` on `Transport` (`transport.c:821-834`; defaults `true` / `null` / `""`).
+`GetElectricitySourceDeviceType()` on `Transport` (`transport.c:830-843`; defaults `true` / `null` / `""`).
 `IsVitalCarBattery`/`IsVitalTruckBattery` are obsolete and never called (`carscript.c:2811-2821`).
 Who reads what (static reading of `P:\`):
 - engine start: `CarScript.CheckOperationalRequirements` → `NeedElectricitySourceDevice()` then `GetBattery()`
@@ -81,10 +82,10 @@ Who reads what (static reading of `P:\`):
 
 So an aircraft must override `GetElectricitySourceDevice()` to return its battery (e.g. an aviation battery slot), or
 return `false` from `NeedElectricitySourceDevice()` for a magneto engine (vanilla bikes do:
-`inheritedmotorbikes\motorbike_01.c:33-36`, `motorbike_02.c:34-37`). A 1.29 aircraft that overrode only `GetBattery()`
+`inheritedmotorbikes\motorbike_01.c:30-33`, `motorbike_02.c:31-34`). A 1.29 aircraft that overrode only `GetBattery()`
 (the RFFS pattern, `helicopters.md` "Aviation attachments") still passes the start check on 1.30, but the light and horn
 actions see `null` — override `GetElectricitySourceDevice()` as well. Overrides of `IsVitalSparkPlug`/`IsVitalGlowPlug`
-(now on `Transport`, `transport.c:404-412`) and `IsVitalRadiator`/`IsVitalEngineBelt` (`carscript.c:2201-2209`) still work.
+(now on `Transport`, `transport.c:407-415`) and `IsVitalRadiator`/`IsVitalEngineBelt` (`carscript.c:2201-2209`) still work.
 
 ## Horn
 
@@ -95,8 +96,8 @@ them in the aircraft's `SetActions` override if the aircraft has no horn.
 
 ## Contact damage
 
-`OnContact` moved to `Transport` and caches `VehicleContactData` with field `m_Impulse` (`transport.c:315-342`,
-`:1144-1148`); `CarScript.CheckContactCache` reads `data[0].m_Impulse` (`carscript.c:1291-1292`). An aircraft that read
+`OnContact` moved to `Transport` and caches `VehicleContactData` with field `m_Impulse` (`transport.c:318-345`,
+`:1153-1157`); `CarScript.CheckContactCache` reads `data[0].m_Impulse` (`carscript.c:1291-1292`). An aircraft that read
 `data[0].impulse` (1.29 `CarContactData`) must switch to `m_Impulse`.
 
 ## Wreck scripts without models (new in 1.30)
@@ -117,3 +118,26 @@ No `config.cpp` under `P:\DZ` declares those classnames and `P:\DZ\structures_wr
 6. `data[0].impulse` → `data[0].m_Impulse`.
 7. Bind cockpit light toggle to `UAToggleVehicleLights` if it should use `ActionSwitchLights`; keep custom `UA*` flight axes.
 8. Do not switch the entity base to `HelicopterScript`.
+9. (1.30.164200) Rename any own `HasCrew()` / un-`override`d `IsMoving()` on the airframe class (next section).
+
+## DayZ 1.30.164200 changes (patch of 2026-10-21)
+
+Static reading of `P:\scripts` 1.30.164200; not measured in flight.
+
+- `Transport` gained `proto native bool HasCrew()` (`P:\scripts\3_game\vehicles\transport.c:175`) and `bool IsMoving()`
+  (`transport.c:819-823`, base body `Error("IsMoving() not implemented"); return false;`). `CarScript.IsMoving()`
+  (`GetSpeedometerAbsolute() > 3.5`, `carscript.c:2221-2224`) became its `override`, so a CarScript aircraft keeps a
+  working `IsMoving()`, but its value comes from the native `Car.GetSpeedometer()` (`car.c:102`), which was never
+  measured on an airborne CarScript. `CarScript.CanReleaseAttachment` still refuses detaching while
+  `EngineIsOn() && IsMoving()` (`carscript.c:638-667`). An aircraft on `HelicopterScript` / `Helicopter : Transport`
+  (`helicopter.c:9`) gets the base `IsMoving()` that logs an error.
+- Breaks: an airframe class (or `modded class`) written for 164078 that declares `bool HasCrew()` collides with the new
+  native; `bool IsMoving()` without `override` on a non-`CarScript` airframe shadows the base. Rename with a mod prefix.
+  Scanner kinds `transport-hascrew` / `transport-ismoving` (`dayz-130-migration`).
+- Cameras: `DayZPlayerCameraBase.UpdateUDAngleUnlocked` / `UpdateLRAngleUnlocked` now ignore the `pMin/pMax` arguments
+  and use `m_pPlayer.GetLookLimits(...)` (`4_world\entities\manbase\dayzplayer\dayzplayercamera_base.c:152-156`,
+  `:197-202`). Custom aviation cameras that call them get the player's look limits; clamp the returned angle yourself
+  if the camera needs other limits.
+- Wheel VFX of `CarScript`: smoke / contact groups restart at most every 2.0 s per wheel (was 5.0;
+  `carscript.c:381-382`, cooldown field `VehicleVFXDataParams.m_CooldownSec`, `vehiclevfxcomponent.c:82-93`).
+- Nothing else in the 164078 → 164200 delta touches `CarScript` aircraft (lights, battery, horn, contact damage unchanged).

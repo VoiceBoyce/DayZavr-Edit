@@ -624,7 +624,7 @@ full model.cfg (§11–12) — it is self-contained and the Landrover proves it 
 | Symptom | Likely cause | Check / fix |
 |---|---|---|
 | Engine won't start at all | Missing engine-part slots | `CarBattery` + `SparkPlug` (and often `CarRadiator`) must be in `attachments[]` and physically attached in-game; a car with no battery/plug cranks but won't run |
-| Won't start even WITH a SparkPlug attached | Default `IsVitalGlowPlug()=true` demands a GlowPlug too (`carscript.c:1783`); a bare `CarScript` needs BOTH plugs (all `IsVital*` default true, `transport.c:404-417`, `carscript.c:2201-2209`); on 1.30 it also needs `GetElectricitySourceDevice()` overridden or it reports `NO_BATTERY` (`carscript.c:1768-1774`) | Override the unused igniter — petrol: `IsVitalGlowPlug()→false` (`civiliansedan.c:370`) keep SparkPlug; diesel: `IsVitalSparkPlug()→false` (`offroad_02.c:415`) keep GlowPlug; 1.30: override the battery trio (`civiliansedan.c:59-74`). Declare ONLY the vital plug in `attachments[]` + attach it in `OnDebugSpawn`. `IsVitalGlowPlug→false` is the vanilla petrol pattern, NOT a removed check. Bit SUB_BRZ 2026-06-28 |
+| Won't start even WITH a SparkPlug attached | Default `IsVitalGlowPlug()=true` demands a GlowPlug too (`carscript.c:1783`); a bare `CarScript` needs BOTH plugs (all `IsVital*` default true, `transport.c:407-420`, `carscript.c:2201-2209`); on 1.30 it also needs `GetElectricitySourceDevice()` overridden or it reports `NO_BATTERY` (`carscript.c:1768-1774`) | Override the unused igniter — petrol: `IsVitalGlowPlug()→false` (`civiliansedan.c:370`) keep SparkPlug; diesel: `IsVitalSparkPlug()→false` (`offroad_02.c:415`) keep GlowPlug; 1.30: override the battery trio (`civiliansedan.c:59-74`). Declare ONLY the vital plug in `attachments[]` + attach it in `OnDebugSpawn`. `IsVitalGlowPlug→false` is the vanilla petrol pattern, NOT a removed check. Bit SUB_BRZ 2026-06-28 |
 | Engine drowns instantly at spawn | Missing `drown_engine` memory point ⇒ it defaults to (0,0,0) | Add `drown_engine` at the engine in the Memory LOD (`vehicle-structural-parity.md` Addendum 2026-05-30 #9) |
 | RPT: `unknown animation source damper` | `AnimationSources` damper class missing | Add `class damper_X_Y { source="user"; ... }` for all four (§10) |
 | Revs but no torque / stalls weirdly | `torqueCurve[]` starts/ends nonzero or rpm bands wrong | Curve must start at 0 Nm (stall rpm) and return to 0 at redline; keep `rpmIdle<rpmMin<rpmClutch<rpmRedline` |
@@ -690,7 +690,7 @@ MCP / admin spawn), or a "wheels missing / engine won't start" verdict is a fals
 ### 17.1 Get-in is resolved per COLLISION COMPONENT (not per selection, not per memory point)
 
 The engine maps a get-in to a seat through **`Transport.CrewPositionIndex(int componentIndex)`** —
-`proto native int CrewPositionIndex(int position)` at `P:\scripts\3_game\vehicles\transport.c:179`
+`proto native int CrewPositionIndex(int position)` at `P:\scripts\3_game\vehicles\transport.c:182`
 (opaque; no script body). The `componentIndex` is the **collision component** that the cursor's raycast
 hits when the player presses "enter". The engine pre-associates each crew slot with the component(s) that
 contain that slot's `actionSel` selection (the `seat_driver` / `seat_codriver` named selection from the

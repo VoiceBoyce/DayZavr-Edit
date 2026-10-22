@@ -10,9 +10,11 @@ Path resolution order (DayZ Tools, game, server, vanilla data):
     3. Sibling folders in the same steamapps\\common as a found install
     4. Hard-coded common-default fallbacks
 
-Version probe (skills target DayZ 1.30 stable, 1.30.164078):
+Version probe (skills target DayZ 1.30 stable, 1.30.164200):
     - P:\\scripts holds 1.30 vanilla scripts: 3_game\\vehicles\\motorbike.c exists
       and 3_game\\global\\game.c declares GAME_STORAGE_VERSION = 144 (142 on 1.29)
+    - P:\\scripts.txt version= is the target Scripts Rev (127662 = 1.30.164200); another
+      value means P:\\ was extracted from another build
     - DayZ_x64.exe / DayZDiag_x64.exe / DayZServer_x64.exe FileVersion is 1.30.x
       (read with ctypes + version.dll; no pywin32, no subprocess)
 
@@ -33,8 +35,10 @@ FAIL = "[FAIL] "
 
 # Version the skills are written and verified against.
 TARGET_MAJOR_MINOR = (1, 30)
-TARGET_BUILD = "1.30.164078"
-TARGET_STORAGE_VERSION = 144  # P:\scripts\3_game\global\game.c:5 on 1.30.164078 (142 on 1.29)
+TARGET_BUILD = "1.30.164200"  # FileVersion 1.30.164.200, ProductVersion 1.30.164200.56
+TARGET_SCRIPTS_REV = 127662  # P:\scripts.txt "version=" of the unpacked 1.30.164200 scripts.pbo
+KNOWN_SCRIPTS_REVS = {127250: "1.30.164078", 127662: "1.30.164200"}
+TARGET_STORAGE_VERSION = 144  # P:\scripts\3_game\global\game.c:5 on 1.30.164200 (142 on 1.29)
 
 # Steam app ids (used for the "Steam App <id>" uninstall registry key).
 STEAM_APP_DAYZ = 221100
@@ -395,7 +399,7 @@ def read_exe_version(path: Path) -> Optional[tuple[tuple[int, int, int, int], Op
 
     Pure ctypes: no pywin32, no subprocess. Returns ((a, b, c, d), product_version)
     or None when the version resource cannot be read (non-Windows, no resource).
-    DayZ 1.30.164078 reads as ((1, 30, 164, 78), "1.30.164078.38").
+    DayZ 1.30.164200 reads as ((1, 30, 164, 200), "1.30.164200.56").
     """
     if sys.platform != "win32":
         return None
@@ -481,6 +485,38 @@ def check_vanilla_scripts_version() -> None:
     print(f"        Skills were verified on {TARGET_BUILD}; grep P:\\scripts before trusting an API claim.")
 
 
+def check_scripts_revision() -> None:
+    """P:\\scripts.txt `version=` must be the Scripts Rev of the target build. Warn only.
+
+    The skills' vanilla line refs are numbered against the target build's scripts; a P:\\ extracted
+    from another build (an older stable, Experimental) shifts them.
+    """
+    scripts_txt = Path(r"P:\scripts.txt")
+    if not scripts_txt.exists():
+        print(f"{WARN} {scripts_txt} not found - cannot tell which build P:\\scripts was extracted from")
+        print("        Re-extract scripts.pbo with DayZ Tools 'Extract Game Data' (it writes scripts.txt).")
+        return
+    rev: Optional[int] = None
+    try:
+        match = re.search(r"^\s*version\s*=\s*(\d+)", scripts_txt.read_text(encoding="utf-8", errors="replace"),
+                          re.MULTILINE)
+        if match:
+            rev = int(match.group(1))
+    except OSError:
+        rev = None
+    if rev is None:
+        print(f"{WARN} No 'version=' line in {scripts_txt}")
+        return
+    if rev == TARGET_SCRIPTS_REV:
+        print(f"{OK} P:\\scripts.txt version={rev} (Scripts Rev of {TARGET_BUILD})")
+        return
+    known = KNOWN_SCRIPTS_REVS.get(rev)
+    print(f"{WARN} P:\\scripts.txt version={rev}, expected {TARGET_SCRIPTS_REV} ({TARGET_BUILD}): "
+          f"P:\\ extracted from another build{f' ({known})' if known else ''}")
+    print("        Vanilla line refs in the skills are numbered for the target build; re-extract scripts.pbo")
+    print("        from the installed game, or grep P:\\scripts before trusting a line number.")
+
+
 def check_game_versions() -> None:
     """DayZ_x64.exe / DayZDiag_x64.exe / DayZServer_x64.exe FileVersion is 1.30.x. Warn only."""
     game_root = find_dayz_game()
@@ -522,6 +558,7 @@ def main() -> int:
     check_vanilla_data()
     check_workshop_deploy()
     check_vanilla_scripts_version()
+    check_scripts_revision()
     check_game_versions()
     print("\nPreflight complete.")
     return 0

@@ -1,6 +1,6 @@
 # Motorbike Script API (`Motorbike.c` and `MotorbikeScript.c`)
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: `../../_shared/dayz-version-policy.md`. Script, `.agf`,
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: `../../_shared/dayz-version-policy.md`. Script, `.agf`,
 > `.asi` and `.ast` line numbers were read on 1.30 Exp 164014 and are unchanged on stable (identical line counts,
 > sampled cites re-read 2026-10-15); `config.cpp` cites point at stable `P:\DZ` / `P:\bin`.
 
@@ -143,8 +143,8 @@ proto native void Fill(MotorbikeFluid fluid, float amount);
 - `float GetSpeedometer()` (`Motorbike.c:45-52`): Returns longitudinal speed by multiplying projection by 3.6 (km/h).
 - `float GetSpeedometerAbsolute()` (`Motorbike.c:55-58`): `Math.AbsFloat(GetSpeedometer())`.
 - `override bool IsAreaAtDoorFree(...)` (`Motorbike.c:60-68`): Unconditionally returns `true` (motorbikes have no doors).
-- `bool OnBeforeEngineStart()` (`Motorbike.c:312-316`): Callback evaluated before allowing engine start. `MotorbikeScript.c:1558-1564` checks that operational state is `EMotorbikeOperationalState.OK`.
-- `void OnEngineStart()` (`Motorbike.c:321`, empty): invoked upon starting. The override in `MotorbikeScript.c:1003-1024` updates headlights and plays `START_OK`.
+- `bool OnBeforeEngineStart()` (`Motorbike.c:312-316`): Callback evaluated before allowing engine start. `MotorbikeScript.c:1573-1579` checks that operational state is `EMotorbikeOperationalState.OK`.
+- `void OnEngineStart()` (`Motorbike.c:321`, empty): invoked upon starting. The override in `MotorbikeScript.c:1018-1039` updates headlights and plays `START_OK`.
 - `void OnEngineStop()` (`Motorbike.c:326`): Invoked upon engine stopping.
 - `void OnGearChanged(int newGear, int oldGear)` (`Motorbike.c:334`): Invoked upon changing gear.
 - `void OnFluidChanged(MotorbikeFluid fluid, float newValue, float oldValue)` (`Motorbike.c:344`): Invoked on the owner upon fluid changes.
@@ -159,7 +159,9 @@ proto native void Fill(MotorbikeFluid fluid, float amount);
 ### Constructor (`MotorbikeScript.c:105-148`)
 1. Activates event mask: `SetEventMask(EntityEvent.POSTSIMULATE | EntityEvent.POSTFRAME);` (`line 111`).
 2. Instantiates `m_LightsComponent = VehicleLightsComponent(this);` and registers selections:
-   - `"FrontOn"`, `"FrontOff"`, `"BrakeOn"`, `"BrakeOff"`, `"TailOn"`, `"TailOff"`, `"DashboardOn"`, `"DashboardOff"`.
+   - `"FrontOn"`, `"FrontOff"`, `"BrakeOn"`, `"BrakeOff"`, `"TailOn"`, `"TailOff"`, `"DashboardOn"`, `"DashboardOff"` on
+     default indices 0-3 (`MotorbikeScript.c:114-122`). Since 1.30.164200 the vanilla subclasses re-register Front/Brake on
+     their own `hiddenSelections[]` slots (`Motorbike_01.c:19-22`: 3/2; `Motorbike_02.c:20-23`: 4/6).
    - Registers base profiles: `VehicleLightProfileFront` and `VehicleLightProfileRear`.
 3. Instantiates `m_HornComponent = VehicleHornComponent(this);` in `OFF` mode.
 4. Initializes particles via `InitializeParticles()` (`lines 174-205`).
@@ -200,8 +202,18 @@ Located in `P:\scripts\3_Game\constants.c`:
 | Doors (`CarDoor`) | **Nonexistent** | No doors; `IsAreaAtDoorFree` always returns `true` (`Motorbike.c:60-68`) |
 | Radiator / Coolant circuit | **Nonexistent / Non-vital** | `IsVitalRadiator()` returns `false` (`MotorbikeScript.c:321-324`). No temperature gauge in HUD (`MotorBikeHud.c:191-194`) |
 | Oil / Brake fluid circuit | Declared in config, unused in script | `MotorbikeScript` declares capacities (`P:\DZ\vehicles\singletrack\config.cpp:30-33`), but `MotorbikeScript.c` only uses `MotorbikeFluid.FUEL` |
-| Battery mandatory for ignition | **Depends on override** | `Transport.NeedElectricitySourceDevice()` returns `true` (`Transport.c:821-824`) and `MotorbikeScript` does not change it; `Motorbike_01`/`_02` override it to `false` (`Motorbike_01.c:33-36`, `Motorbike_02.c:34-37`). A bike inheriting from `MotorbikeScript` must override it |
+| Battery mandatory for ignition | **Depends on override** | `Transport.NeedElectricitySourceDevice()` returns `true` (`Transport.c:830-833`) and `MotorbikeScript` does not change it; `Motorbike_01`/`_02` override it to `false` (`Motorbike_01.c:30-33`, `Motorbike_02.c:31-34`). A bike inheriting from `MotorbikeScript` must override it |
 | Door actions (`ActionOpenCarDoors`) | **Nonexistent** | In `Motorbike_01` flip-up seat `SeatDriver` exists |
-| Parking handbrake | **Nonexistent** | Handbrake channel actuates front brake (`SetHandbrake`, `Motorbike.c:135-139`; `Brakes.Front.input = 1`, `P:\DZ\vehicles\singletrack\config.cpp:292`); handbrake indicator light is hidden in HUD (`MotorBikeHud.c:196`) |
+| Parking handbrake | **Nonexistent** | Handbrake channel actuates front brake (`SetHandbrake`, `Motorbike.c:135-139`; `Brakes.Front.input = 1`, `P:\DZ\vehicles\singletrack\config.cpp:296`); handbrake indicator light is hidden in HUD (`MotorBikeHud.c:196`) |
 | Symmetrical 4-wheel steering | **Nonexistent** | Simulation with dynamic lean (`maxLeanAngle[]`) and `tipoverAngle` |
 | Dismount in gear without stalling | **Nonexistent** | If driver exits in gear, engine stops (`OnDriverExit` → `EngineStop()`, `MotorbikeScript.c:217-222`) |
+| `IsMoving()` (1.30.164200) | **Not implemented** | New base `Transport.IsMoving()` logs `Error("IsMoving() not implemented")` and returns `false` (`Transport.c:819-823`); only `CarScript` overrides it (`> 3.5` km/h, `CarScript.c:2221-2224`). On a bike read `GetSpeedometerAbsolute()` (`Motorbike.c:55-58`) or add your own `override bool IsMoving()` |
+| Detaching parts while running (1.30.164200) | **Blocked for every attachment** | `MotorbikeScript.CanReleaseAttachment` returns `false` while `EngineIsOn() \|\| HasCrew()` (`MotorbikeScript.c:612-625`; `HasCrew()` is the new `proto native` on `Transport`, `Transport.c:175`). Cars block only while `EngineIsOn() && IsMoving()` (`CarScript.c:638-667`). Own-slot exemption: `../SKILL.md` §DayZ 1.30.164200 changes |
+
+### 1.30.164200 additions on `Transport` that bikes inherit
+
+- `proto native bool HasCrew()` — "true if at least one member of crew is present" (`P:\scripts\3_game\vehicles\transport.c:175`).
+- `bool IsMoving()` — base logs an error; see the table row above (`transport.c:819-823`).
+- Naming rule: a bike class (or `modded class MotorbikeScript`) written for 164078 that declares its own `bool HasCrew()`
+  or `bool IsMoving()` now collides with the native / shadows the script member; rename it with a mod prefix or make it a
+  real `override`. Scanner kinds `transport-hascrew` / `transport-ismoving` in `dayz-130-migration`.

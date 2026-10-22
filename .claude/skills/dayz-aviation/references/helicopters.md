@@ -545,7 +545,7 @@ health. Global `hitpoints=8000`. Contact/collision damage flows through `m_Conta
 (`P:\scripts\4_world\entities\vehicles\carscript.c:2811-2821`); the engine start still goes through `GetBattery()`
 (`carscript.c:1768-1774`), but the light and horn actions read `GetElectricitySourceDevice()` directly
 (`actionswitchlights.c:38-46`, `actionvehiclehorn.c:15-17`), which returns `null` unless overridden
-(`transport.c:826-829`) — a port must override it to return the aviation battery. `CarFluid.FUEL/OIL` still compile:
+(`transport.c:835-838`) — a port must override it to return the aviation battery. `CarFluid.FUEL/OIL` still compile:
 `enum CarFluid : ETransportFluid {}`, `car.c:18`. Static reading; RFFS itself was not re-run on 1.30.)
 
 [VERIFIED-RFFS] **HUD** — `modded class IngameHud` (`headsUpDisplay.c:1`) creates

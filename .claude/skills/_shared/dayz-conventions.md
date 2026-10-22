@@ -305,7 +305,7 @@ proto native void ThrowPhysically(DayZPlayer player, vector force, bool collideW
 Internally calls `CreateDynamicPhysics(ITEM_LARGE)`,
 `SetDynamicPhysicsLifeTime(...)`, and applies `force` as an impulse. This is
 the pattern vanilla itself uses — see
-`P:\scripts\4_world\static\miscgameplayfunctions.c` lines 1188 / 1204 / 1212
+`P:\scripts\4_world\static\miscgameplayfunctions.c` lines 1323 / 1339 / 1347
 for examples.
 
 ```c
@@ -335,7 +335,7 @@ Verified APIs:
   (`DYNAMICITEM`, `DYNAMICITEM_NOCHAR`, ...).
 - `P:\scripts\1_core\proto\enphysics.c:64-69, 141` — `dBodyDynamic`,
   `dBodyEnableGravity`, `dBodyApplyImpulse`.
-- `P:\scripts\4_world\entities\itembase.c:4530` — `StopItemDynamicPhysics`
+- `P:\scripts\4_world\entities\itembase.c:4534` — `StopItemDynamicPhysics`
   reduces `SetDynamicPhysicsLifeTime` to `0.01` to "park" the body.
 
 The `SetDynamicPhysicsLifeTime` call is mandatory — without it the engine

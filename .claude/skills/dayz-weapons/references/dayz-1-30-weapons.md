@@ -6,32 +6,35 @@ below are relative to `P:\scripts\` unless they start with `P:\DZ`). `[VERIFIED-
 `Before 1.30:` lines cite the 1.29 extraction (`O:\DayZ 1.29 Старый распакованный клиент\`, shortened to
 `O:\…`). Anim motion stays with `dayz-animation-pipeline`. Labels: `../../_shared/dayz-version-policy.md`.
 
-## W-STAGING1 — scripts without CfgWeapons / `.p3d`
+## W-STAGING1 — the new 1.30 firearms are Badlands DLC data
 
-1.30.164078 ships four new firearm scripts plus a bayonet that compile, register IK (packed `.asi` /
-`.anm` under `P:\DZ\anims\`), and in two cases have dedicated bone remaps — but there is **no** model
-folder for them under `P:\DZ\weapons\firearms\` / `P:\DZ\weapons\pistols\`, and no `CfgWeapons` /
-`CfgMagazines` class for them in any `P:\DZ\**\config.cpp` (grep, 2026-10-15). Debinarize a **shipped**
-peer instead — SCAR-H for a SCAR-L-shaped rifle, P1/Glock for a pistol, CZ527/Mosin for a bolt gun,
-CZ61/PM73 for an open-bolt SMG. (Before 1.30: every vanilla firearm with a script under
-`4_world\entities\firearms\` also shipped a debinarizable `.p3d` + `CfgWeapons` class.)
+**Corrected 2026-10-21.** Until then this section said the four new firearm scripts plus the bayonet had
+no `.p3d` and no `CfgWeapons` / `CfgMagazines` class "in any `P:\DZ\**\config.cpp`". That grep was right
+for `P:\` as it was (no DLC data unpacked) and wrong for the game: the classes and ODOL models ship in the
+Badlands DLC PBO `<DayZ>\nasdara\addons\weapons_nasdara.pbo` (header `prefix=DZ\weapons_takistan`,
+`product=dayz nasdara`), present in the 1.30.164078 install too and on `P:\DZ\weapons_takistan\` since
+the 1.30.164200 unpack. They compile, register IK (packed `.asi` / `.anm` under `P:\DZ\anims\`), and in
+two cases have dedicated bone remaps. Debinarize them like any shipped peer.
 
-| Script class | Script path | Script parent | CfgWeapons / `.p3d` on 1.30.164078 |
+| Script class | Script path | Script parent | Config / model (1.30.164200, `P:\DZ\weapons_takistan\…`) |
 |---|---|---|---|
-| `SCARL_Base` | `4_world\entities\firearms\automaticrifle\scarl.c:1` | `SCARH_Base` (not `RifleBoltFree_Base`) | None. Shipped peer: `P:\DZ\weapons\firearms\scarh\scarh.p3d` + `class SCARH_Base: Rifle_Base` (`P:\DZ\weapons\firearms\scarh\config.cpp:26`). |
-| `Luger_Base`, `Luger` | `4_world\entities\firearms\pistol\luger.c:1,25` | `Pistol_Base` | None (no `luger` folder under `P:\DZ\weapons\pistols\`). |
-| `LeeEnfield_Base` | `4_world\entities\firearms\rifle\leeenfield.c:1` | `BoltActionRifle_ExternalMagazine_Base` | None. |
-| `MP18_Base` | `4_world\entities\firearms\smg\mp18.c:1` | `OpenBolt_Base` | None. |
-| `P1907_Bayonet` | `4_world\entities\itembase\inventory_base\p1907_bayonet.c:1` | `Inventory_Base` | Script only; no config class found. |
+| `SCARL_Base` | `4_world\entities\firearms\automaticrifle\scarl.c:1` | `SCARH_Base` (not `RifleBoltFree_Base`) | `class SCARL_Base: Rifle_Base` (`firearms\scarl\config.cpp:26`; note the config parent differs from the script parent), `SCARL` `:278` (model `scarl.p3d`), `SCARL_Black` `:361`. |
+| `Luger_Base`, `Luger` | `4_world\entities\firearms\pistol\luger.c:1,25` | `Pistol_Base` | `class Luger_Base: Pistol_Base` (`pistols\luger\config.cpp:26`), `Luger` `:170` (model `luger.p3d`). |
+| `LeeEnfield_Base` | `4_world\entities\firearms\rifle\leeenfield.c:1` | `BoltActionRifle_ExternalMagazine_Base` | `class LeeEnfield_Base: BoltActionRifle_ExternalMagazine_Base` (`firearms\leeenfield\config.cpp:27`), `LeeEnfield` `:172` (model `leeenfield.p3d`). |
+| `MP18_Base` | `4_world\entities\firearms\smg\mp18.c:1` | `OpenBolt_Base` | `class MP18_Base: Rifle_Base` (`firearms\mp18\config.cpp:26`), `MP18` `:196` (model `mp18.p3d`). |
+| `P1907_Bayonet` | `4_world\entities\itembase\inventory_base\p1907_bayonet.c:1` | `Inventory_Base` | `class P1907_Bayonet: Inventory_Base` (`attachments\muzzle\config.cpp:21`, model `bayonet_p1907.p3d`). |
 
-Also script-only on 1.30.164078 (no config class in `P:\DZ`): `AKM_Gold : AKM_Base`
-(`4_world\entities\firearms\automaticrifle\akm.c:61`), `Magnum_Gold`, `SawedoffMagnum_Gold`,
-`Magnum_Cylinder_Gold` (`4_world\entities\firearms\pistol\magnum.c:402-435`). `Deagle_Gold` **does** have a
-config class (`P:\DZ\weapons\pistols\de\config.cpp:236`).
+Gold variants: `AKM_Gold : AKM_Base` (script `4_world\entities\firearms\automaticrifle\akm.c:61`; config
+`firearms\akm\config.cpp:24`), `Magnum_Gold`, `SawedoffMagnum_Gold`, `Magnum_Cylinder_Gold`
+(script `4_world\entities\firearms\pistol\magnum.c:402-435`; config `pistols\magnum\config.cpp:20,95,175`),
+also gold AKM magazines and furniture (`attachments\magazine\config.cpp:466,534`,
+`attachments\support\config.cpp:18,97`). `Deagle_Gold` is base-game (`P:\DZ\weapons\pistols\de\config.cpp:236`).
 
-Magazine script stubs exist (`Mag_Luger_8Rnd`, `Mag_LeeEnfield_10Rnd`, `Mag_MP18_Drum32Rnd` in
-`4_world\entities\itembase\magazine\magazines.c:65-67`) but `P:\DZ\weapons\attachments\magazine\config.cpp`
-has **no** matching `CfgMagazines` classes. Do not put these classnames in `types.xml` or trader lists.
+Magazines (scripts `4_world\entities\itembase\magazine\magazines.c:65-67`): `Mag_Luger_8Rnd`,
+`Mag_MP18_Drum32Rnd`, `Mag_LeeEnfield_10Rnd` (`P:\DZ\weapons_takistan\attachments\magazine\config.cpp:21,158,316`;
+164200 added `Ammo_762x54Tracer` to the Lee-Enfield's `ammoItems[]`, `:327`). The vanilla Badlands CE lists
+all of them (`P:\DZ\worlds\nasdara\ce\db\types.xml`). Whether a server on another map, or a player
+without the DLC, can use them was not checked here.
 
 IK / reload `.anm` **are** packed (entity side only records the registration path; motion is anim-skill).
 Registrations in `4_world\entities\manbase\dayzplayer\dayzplayercfgbase.c`:
@@ -70,15 +73,17 @@ class SCARL_Base : SCARH_Base
 
 `SCARH_Base` itself is `RifleBoltLock_Base` (`4_world\entities\firearms\automaticrifle\scarh.c:1`) and
 config `SCARH_Base: Rifle_Base` (`P:\DZ\weapons\firearms\scarh\config.cpp:26`). A 5.56 SCAR-L-shaped mod
-that wants this family inherits **SCAR-H config + `RifleBoltLock_Base` script**, then overrides
-ammo/mags/recoil — there is no SCAR-L body to debinarize on 1.30.164078. Note 1.30 also changed
+can now debinarize the Badlands `SCARL` itself (`P:\DZ\weapons_takistan\firearms\scarl\scarl.p3d`, config
+`:26`/`:278`) or inherit **SCAR-H config + `RifleBoltLock_Base` script** and override ammo/mags/recoil
+(corrected 2026-10-21: this used to say there was no SCAR-L body). Note 1.30 also changed
 `SCARH_Base` config: `WeaponLength` 0.8→0.95, `ObstructionDistance` 0.5→0.7, `barrelArmor` 2.4→2.6,
 `initSpeedMultiplier` 0.975→0.925 (config-delta; `P:\DZ\weapons\firearms\scarh\config.cpp:37`).
 
 `P1907_Bayonet` is dual-use as attachment + melee tool: `CanPutAsAttachment` refuses the slot when
 `suppressorImpro` or `weaponMuzzle` is reserved/occupied (`p1907_bayonet.c:13-26`), and
 `OnWasAttached` / `OnWasDetached` call `parent.SetBayonetAttached(...)` when `parent.IsWeapon()`
-(`:28-46`). `[DESIGN]` treat it as a bayonet-slot pattern, not as a shipped item in 1.30.164078.
+(`:28-46`). It is a shipped Badlands item (`P:\DZ\weapons_takistan\attachments\muzzle\config.cpp:21`,
+proxy `ProxyBayonet_P1907` `:173`).
 
 ## Pistol FSM — virtual anim-state getters (do not duplicate the FSM)
 
@@ -360,12 +365,21 @@ From `dayz-130-migration/references/config-delta-1.29-to-1.30.md`, each spot-che
   to `\dz\weapons\ammunition\rocket_rpg7_inflight.p3d`. A mod that hard-codes the old proxy path must
   update it.
 
-## MP18 drum magazine (script only)
+## MP18 drum magazine
 
 `Mag_MP18_Drum32Rnd` is not an empty stub. It drives AnimationSource `"drum"`, stops the anim at 12
 rounds (`m_AmmoOffset = 12`), plays `wpn_mp18_drum_mag_SoundSet` at memory point `"drum_sound"`, and
 persists `m_LastAnimPhase` from save version `>= 144` (`4_world\entities\itembase\magazine\magazines.c:67-121`;
-144 = `GAME_STORAGE_VERSION` on 1.30). Still no `CfgMagazines` entry on 1.30.164078 — W-STAGING1 applies.
+144 = `GAME_STORAGE_VERSION` on 1.30). Its `CfgMagazines` class is Badlands DLC data
+(`P:\DZ\weapons_takistan\attachments\magazine\config.cpp:158`, model `magazine_mp18_drum.p3d`; W-STAGING1).
+
+## DayZ 1.30.164200 changes (entity layer)
+
+Summary in `SKILL.md` § DayZ 1.30.164200 changes. In short: no firearm/FSM/recoil/ammo script changed;
+NV optics (Kazuar/Starlight) in day mode get their own underground PPE profiles
+(`NV_OPTICS_UNDERGROUND_DAY`, `NV_OPTICS_UNDERGROUND_SANDSTORM_DAY`; `NVTypes` values after
+`NV_OPTICS_UNDERGROUND` shifted, `MAX` 25); `PoliceBaton` heavy/sprint ammo fixed to `MeleeBluntHeavy_2`;
+Lee-Enfield magazine accepts tracers; ACOG and 5.45×39 materials re-lit; `vector.Cross` removed.
 
 ## Changelog T189758 vs scripts
 

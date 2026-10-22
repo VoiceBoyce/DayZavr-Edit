@@ -1,6 +1,6 @@
 # HUD Action Info Panels & Cursor Construction Grids — DayZ 1.30 Reference
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../../_shared/dayz-version-policy.md.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../../_shared/dayz-version-policy.md.
 
 Added 2026-09-16 from the 1.30 Experimental build (1.30.164014); re-verified line by line on 2026-10-15
 against 1.30.164078 stable (`P:\`). Paths are relative to `P:\scripts\` or `P:\gui\layouts\`:
@@ -11,7 +11,9 @@ actioninfogrids,constructioninfoicons,genericicon,slotsiconbase}.c`,
 unless a line says "1.29". Corrected on re-verification (marked *Corrected* below): the separator
 widget, the icon template tree, the tool-icon mapping, the materials data source (§3, §4) and the
 history of `SetControllerIcon` (§2.4). Whether Exp really differed there or the earlier text was simply
-wrong was not checked (no Exp tree was compared); the text now matches 164078.
+wrong was not checked (no Exp tree was compared); the text now matches 164078. Patch 1.30.164200 changed
+nothing in the info-panel scripts; it added the item-action arrow dimming (§2.3) and re-saved
+`day_z_hud.layout` in GUID form, so `day_z_hud.layout` line numbers from 164078 no longer match.
 
 ---
 
@@ -132,6 +134,35 @@ if (!action.CanBeStarted())
 	widget.FindAnyWidget(actionWidget + "_btn_icon").SetAlpha(0.149);
 }
 ```
+
+**1.30.164200: the item-action scroll arrows are dimmed the same way.** `ItemActionsWidget` (the in-hands action
+list, `5_mission/gui/itemactionswidget.c`) now stores the category the scroll wheel controls
+(`m_SelectedActionCategory = m_AM.GetSelectedActionCategory()`, `:266`) and, on every `BuildCursor` (`:183-186`),
+sets the alpha of `<prefix>_mtl_up` / `<prefix>_mtl_down` for the prefixes `ia_interact`,
+`ia_continuous_interact`, `ia_single`, `ia_continuous`:
+
+```c
+// [EXACT] P:\scripts\5_mission\gui\itemactionswidget.c:700-711
+	protected void SetMultipleActionArrowsState(Widget multiActionsWidget, string arrowWidgetPrefix, bool selected)
+	{
+		if (!multiActionsWidget)
+			return;
+
+		float alpha = ARROW_ALPHA_NOT_SELECTED;
+		if (selected)
+			alpha = ARROW_ALPHA_SELECTED;
+
+		SetArrowAlpha(multiActionsWidget.FindAnyWidget(arrowWidgetPrefix + "_mtl_up"), alpha);
+		SetArrowAlpha(multiActionsWidget.FindAnyWidget(arrowWidgetPrefix + "_mtl_down"), alpha);
+	}
+```
+
+`ARROW_ALPHA_NOT_SELECTED = 0.235`, `ARROW_ALPHA_SELECTED = 1.0` (`:5-6`); `SetArrowAlpha` (`:713`) null-checks the
+widget, so a custom layout without those arrows is fine. The same patch switched the 12 `*_mtl_down` arrow images
+in `day_z_hud.layout` from `mode additive` to `mode blend` (e.g. `ia_interact_mtl_down`, `day_z_hud.layout:4353`).
+A HUD mod that sets its own alpha on these arrows loses it on the next rebuild: tint them with `SetColor` RGB,
+override `SetArrowAlpha` in a `modded class ItemActionsWidget`, or re-apply after `super` in `BuildCursor`.
+Before 1.30.164200: nothing touched the arrows' alpha.
 
 ### 2.4. Controller Icon Binding (Gamepad / Console)
 

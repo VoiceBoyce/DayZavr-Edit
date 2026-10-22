@@ -1,7 +1,8 @@
 # DayZ 1.30 — sound, item-sound RPC, NoiseSystem, music, radios
 
 DayZ 1.30 stable, build 1.30.164078 (2026-10-15). Every `[EXACT]` block below was re-opened in the unpacked
-stable tree `P:\scripts` / `P:\DZ`; line numbers are from those files. `1.29:` cites point at
+stable tree `P:\scripts` / `P:\DZ`; line numbers are from those files, re-pointed to 1.30.164200 on 2026-10-21 (no
+sound script changed in that patch; config and pattern changes: last section). `1.29:` cites point at
 `O:\DayZ 1.29 Старый распакованный клиент\` and exist only to recognise old code. Labels:
 `../../_shared/dayz-version-policy.md`.
 
@@ -10,7 +11,7 @@ stable tree `P:\scripts` / `P:\DZ`; line numbers are from those files. `1.29:` c
 `StartItemSoundServer` queues events and sends one batched RPC per frame; `StopItemSoundServer` sends its own RPC:
 
 ```c
-// [EXACT] P:\scripts\4_world\entities\itembase.c:4436
+// [EXACT] P:\scripts\4_world\entities\itembase.c:4440
 	void StartItemSoundServer(int id, int slotId)
 	{
 		if (!GetGame().IsServer() || id <= 0)
@@ -28,7 +29,7 @@ stable tree `P:\scripts` / `P:\DZ`; line numbers are from those files. `1.29:` c
 ```
 
 ```c
-// [EXACT] P:\scripts\4_world\entities\itembase.c:4469
+// [EXACT] P:\scripts\4_world\entities\itembase.c:4473
 		ScriptRPC rpc = new ScriptRPC();
 		rpc.Write(m_SoundEventQueue.Count());
 		foreach (ItemSoundEvent ev : m_SoundEventQueue)
@@ -40,7 +41,7 @@ stable tree `P:\scripts` / `P:\DZ`; line numbers are from those files. `1.29:` c
 ```
 
 ```c
-// [EXACT] P:\scripts\4_world\entities\itembase.c:4495
+// [EXACT] P:\scripts\4_world\entities\itembase.c:4499
 	void StopItemSoundServer(int id)
 	{
 		if (!g_Game.IsServer())
@@ -52,12 +53,12 @@ stable tree `P:\scripts` / `P:\DZ`; line numbers are from those files. `1.29:` c
 	}
 ```
 
-The client side lives in `ItemBase.OnRPC`, inside `#ifndef SERVER` / `#ifndef NO_GUI` (`itembase.c:2763-2764`,
-cases `:2796-2825`), and calls `m_ItemSoundHandler.PlayItemSoundClient(soundIdPlay, slotIdPlay)` /
+The client side lives in `ItemBase.OnRPC`, inside `#ifndef SERVER` / `#ifndef NO_GUI` (`itembase.c:2767-2768`,
+cases `:2800-2829`), and calls `m_ItemSoundHandler.PlayItemSoundClient(soundIdPlay, slotIdPlay)` /
 `StopItemSoundClient(soundIdStop)`. Enum values: `P:\scripts\3_game\enums\erpcs.c:114-115`.
 `[DESIGN]` Any `OnRPC` override on an item must call `super.OnRPC(sender, rpc_type, ctx)`.
 
-Legacy, kept "for modding support" (`itembase.c:115-119`, `:208-213`, `:3291-3310`, `:4481-4493`, `:4944-4949`):
+Legacy, kept "for modding support" (`itembase.c:115-119`, `:208-213`, `:3295-3314`, `:4485-4497`, `:4948-4953`):
 the sync vars `m_SoundSyncPlay/m_SoundSyncStop/m_SoundSyncSlotID` are still registered when the item has a
 handler, but no vanilla code sets `m_SoundSyncPlay` to an id any more and nothing in vanilla calls
 `LegacyStopItemSoundServer(id)` (the only writer of `m_SoundSyncStop`); the vars are dispatched only if your
@@ -343,7 +344,7 @@ no vanilla script calls any of the four. Vanilla noise calls without a weather f
 "weather dampening is applied engine-side now".
 
 ```c
-// [EXACT] P:\scripts\4_world\static\miscgameplayfunctions.c:1886
+// [EXACT] P:\scripts\4_world\static\miscgameplayfunctions.c:1824
 	static void GenerateAINoiseAtPositionEx(notnull Object source, float lifeTime, NoiseParams noiseParams)
 	{
 		if (g_Game.IsServer())
@@ -358,7 +359,7 @@ no vanilla script calls any of the four. Vanilla noise calls without a weather f
 ```
 
 `GenerateAINoiseAtPosition(vector, float, NoiseParams)` is `[Obsolete("Use MiscGameplayFunctions.GenerateAINoiseAtPositionEx instead!")]`
-(`miscgameplayfunctions.c:2072`). Before 1.30 it passed `NoiseAIEvaluate.GetNoiseReduction(g_Game.GetWeather())`
+(`miscgameplayfunctions.c:2010`). Before 1.30 it passed `NoiseAIEvaluate.GetNoiseReduction(g_Game.GetWeather())`
 as the strength multiplier (1.29: `miscgameplayfunctions.c:1753-1763`).
 
 ## Vehicle horn component
@@ -385,3 +386,42 @@ Vanilla cars register their sets with `m_HornComponent.RegisterSound(VehicleHorn
 (e.g. `inheritedcars\civiliansedan.c:24-25`); the old `m_CarHornShortSoundName/m_CarHornLongSoundName`
 are still assigned there but marked deprecated and no longer read (`carscript.c:2765-2766`).
 Before 1.30: `HandleCarHornSound` played `m_CarHornShortSoundName`/`LongSoundName` directly (1.29: `carscript.c:1767-1772`).
+
+## 1.30.164200: synced particle with a sound, and config-only audio changes
+
+```c
+// [EXACT] P:\scripts\4_world\classes\useractionscomponent\actions\continuous\actionfishingnew.c:470-486
+class FishingSplashEffect : EffectParticleGeneral
+{
+	void FishingSplashEffect()
+	{
+		Event_OnEffectStarted.Insert(PlaySound);
+	}
+	
+	void ~FishingSplashEffect()
+	{
+		Event_OnEffectStarted.Remove(PlaySound);
+	}
+	
+	protected void PlaySound()
+	{
+		SEffectManager.PlaySound("Fishing_splash_SoundSet", m_Position).SetAutodestroy(true);
+	}
+}
+```
+
+`FishingSplashEffecter : ParticleEffecter` (`:462-468`) returns this class from `GetEffectTypename()`; the server spawns it
+with `SEffectManager.CreateParticleServer(pos, new ParticleEffecterParameters("FishingSplashEffecter", ...))`
+(`:326`, re-armed with `ReinitParticleServer` + `ReactivateParticleServer` at `:330-331`). Clients build the effect from
+the synced effecter and the `Event_OnEffectStarted` hook plays the SoundSet locally, so the audio needs no RPC and never
+runs on the dedicated server (where `SEffectManager.Init()` sound maps do not exist). The 164078 ceiling dust uses the
+same hook (`4_world\classes\dust\dusteffectceilinghandler.c:120`, `:128-131`). Mod recipe and lifecycle:
+`dayz-particles/references/dayz-1-30-particles.md` §Server particle with a sound. Before 1.30.164200 fishing spawned the
+plain `ParticleEffecter` and the splash had no sound from this path.
+
+Config-only audio changes in 164200 (`P:\DZ`): German shepherd `AnimEvents/Sounds/Pain` (`id = 6`,
+`animals_takistan\canis_familiaris_german_shepherd\config.cpp:489-494`) + `dog_Shepherd_Pain_SoundSet`
+(`sounds_takistan\config.cpp:327713`) — the "dogs no hit sound" fix; motorbike horn `volumefactor` / shader `volume`
+lowered (`sounds\hpp\config.cpp:386288`, `:386297`, `:386851`, `:386860`, `:317961`, `:318877`);
+`Motorbike_02_Engine_Ext_Broken_SoundSet` replaced by `_High` / `_Low` (`:386435`, `:386443`). Known vanilla bugs on 164200
+[reported: BI 1.30.164200 notes]: "Wash Head" and "Wet Clothes" play no audio; no footsteps on top of walls or small props.

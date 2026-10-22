@@ -437,7 +437,7 @@ Memory points needed in p3d: `ptcfxfront`, `ptcfxback`, `ptcfxside1`, `ptcfxside
 
 ### Triple cleanup hook pattern (effect lifecycle)
 
-(1.30: `CleanupEffects()` is declared on `Transport` and overridden by `CarScript`, `P:\scripts\3_game\vehicles\transport.c:998`, `P:\scripts\4_world\entities\vehicles\carscript.c:390`; the override below still compiles. `BoatScript.CleanupEffects` went from protected to public.)
+(1.30: `CleanupEffects()` is declared on `Transport` and overridden by `CarScript`, `P:\scripts\3_game\vehicles\transport.c:1007`, `P:\scripts\4_world\entities\vehicles\carscript.c:390`; the override below still compiles. `BoatScript.CleanupEffects` went from protected to public.)
 
 ```cpp
 override void EEDelete(EntityAI parent) {

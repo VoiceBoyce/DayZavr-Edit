@@ -9,7 +9,7 @@ CreateWidgets). Syntax: `WidgetClassName WidgetName { properties { children } }`
 crashes" claim here was refuted — vanilla omits them 99.6% of the time). What actually breaks
 loading: unbalanced braces and XML format. See SKILL.md Rule 1 for the full corrected semantics.
 
-> Target: DayZ 1.30 stable (1.30.164078). In-game measurements in this file were taken on 1.29
+> Target: DayZ 1.30 stable (1.30.164200). In-game measurements in this file were taken on 1.29
 > (builds noted where they are); the layout parser and `enwidgets.c` protos they exercise did not
 > change in a way visible to script, but they were not re-measured on 1.30.
 
@@ -18,7 +18,7 @@ loading: unbalanced braces and XML format. See SKILL.md Rule 1 for the full corr
 ## 1.30: GUID-form widget headers
 
 DayZ 1.30 ships a second header form. 9 of the 227 vanilla layouts in 1.30.164078 use it for every
-widget; none of the 216 layouts of 1.29 did:
+widget, 10 in 1.30.164200 (that patch re-saved `day_z_hud.layout` this way); none of the 216 layouts of 1.29 did:
 
 ```
 FrameWidgetClass "{00000000EE70746B}" {        // class + quoted 16-hex-digit GUID instead of a name
@@ -35,12 +35,15 @@ FrameWidgetClass "{00000000EE70746B}" {        // class + quoted 16-hex-digit GU
 
 - Files: `debug/day_z_debug_monitor`, `debug/day_z_hud_debug`, `new_ui/main_menu_console`,
   `new_ui/main_menu_msstore`, `new_ui/tutorials/xbox/tutorials_720p`, `script_console/script_console`,
-  `underground_trigger_editor/day_z_underground_trigger_editor(_list_item)`, `xbox/day_z_ingamemenu_xbox`.
-  Each file is entirely one form (header count = `Name` count); no vanilla file mixes the two.
+  `underground_trigger_editor/day_z_underground_trigger_editor(_list_item)`, `xbox/day_z_ingamemenu_xbox`,
+  and since 1.30.164200 `day_z_hud`. Each file is entirely one form (header count = `Name` count); no vanilla
+  file mixes the two. One variant in `day_z_hud.layout` (164200): its root is `FrameWidgetClass {` with no
+  GUID, followed by `Name "HudFrameWidget"` (291 GUID headers + this root = 292 `Name` lines). A parser
+  must accept a header with neither name nor GUID.
 - `FindAnyWidget` matches the `Name` value: vanilla `DebugMonitor` still does
   `FindAnyWidget("VersionValue")` on that file (`P:\scripts\5_mission\gui\debugmonitor.c:28-31`).
   Properties, child block `{ }` and `style` are written exactly as in the classic form.
-- The classic `XWidgetClass name {` form is still what 218 vanilla 1.30 layouts use, so mods keep
+- The classic `XWidgetClass name {` form is still what 217 vanilla 1.30.164200 layouts use (218 on 164078), so mods keep
   authoring it; nothing requires converting. [CHANGELOG 1.30] attributes the change to the Layout
   Editor moving to Enfusion 2023 — expect files re-saved by the 1.30 Workbench to come out in GUID form
   (not tested here).
@@ -573,7 +576,7 @@ Before delivering ANY .layout file:
 - [ ] No `scriptclass "ViewBinding"` on root widget (causes double controller)
 - [ ] EditBox/Button widgets do NOT have `ignorepointer 1` (need mouse events)
 - [ ] `ScriptParamsClass` with `Relay_Command` inside every bound Button
-- [ ] Layout path uses forward slashes, correct case (Linux-sensitive PBO)
+- [ ] Layout path is prefix-relative with NO leading `\` or `/` (fails on 1.30.164200, measured); use forward slashes and the real case by convention (`\\` and other case also loaded on the Windows 164200 client; Linux servers untested)
 - [ ] No trailing whitespace or BOM characters
 - [ ] Consistent positioning strategy (all-pixel or all-proportional per widget)
 - [ ] Color values as 0.0-1.0 floats (not 0-255 integers)

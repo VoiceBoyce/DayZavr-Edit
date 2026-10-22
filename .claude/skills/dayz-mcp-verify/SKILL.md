@@ -16,7 +16,7 @@ description: >
 
 # DayZ MCP verify — auto-test in-game vía tools MCP
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
 The managed `dayz_test_run` / `dayz_test_stop` lifecycle and the Mode=all capture rule are unchanged on 1.30.
 What 1.30 changes for this skill: Diag Script Console tabs register via `ScriptConsoleTabRegistry`;
@@ -357,8 +357,8 @@ All start from spawn. `world_spawn(type=<classname>, pos=[x,y,z])` → PASS if `
   targeting casts `RaycastRVProxy` from the camera, 5 m, with the default `ObjIntersectView`
   (`4_world/classes/useractionscomponent/actiontargets.c:245-255`, `3_game/global/dayzphysics.c:88`; 1.29: `actiontargets.c:211-219`),
   and at a camera pitch of −45° or lower it also takes the objects of a 30°, 3 m cone and scores them
-  by their distance to that ray, with no hit on them needed (`actiontargets.c:323-325`, `:528-529`,
-  constants `:840-850`). The take action's target condition then checks only the distance to the object's
+  by their distance to that ray, with no hit on them needed (`actiontargets.c:323-325`, `:531-532`,
+  constants `:843-853`). The take action's target condition then checks only the distance to the object's
   position: `ActionTakeItemToHands` uses `CCTObject`
   (`4_world/classes/useractionscomponent/actions/interact/actiontakeitemtohands.c:13`,
   `4_world/classes/useractionscomponent/targetconditionscomponents/cctobject.c:10-22`), and its other
@@ -1356,8 +1356,8 @@ revision.
 
 ## DayZ 1.30 changes
 
-The installed DayZDiag is 1.30.164.078 (2026-10-15), so any managed run that starts runs 1.30 (whether
-the launcher's seal accepts the updated game exe was not checked). Measurements in this
+The installed DayZDiag is 1.30.164.200 (2026-10-21; it was 1.30.164.078 from 2026-10-15), so any managed
+run that starts runs 1.30 (whether the launcher's seal accepts the updated game exe was not checked). Measurements in this
 file labelled "DayZDiag 1.29.163709" were taken before the update; the vanilla code they read was
 re-pointed to `P:\scripts` 1.30 and is unchanged in substance (targeting ray and cone in
 `actiontargets.c`, `CCTObject`, `RaycastRVParams` defaults, `GetDoorIndex`, `ECE_*` values). Re-measure a
@@ -1373,3 +1373,24 @@ re-pointed to `P:\scripts` 1.30 and is unchanged in substance (targeting ray and
 
 Detail and the measured roboclient / dummy-bot results (measured on 1.30 Exp 164014):
 `references/dayz-1-30-mcp-verify.md`.
+
+### DayZ 1.30.164200 changes
+
+Patch 1.30.164200 (2026-10-21) touched the targeting and action code this skill drives. Static reading of
+`P:\scripts` (164200) and the script delta; none of it re-measured through the MCP yet:
+
+| Change | Where (164200) | Effect on MCP verification |
+|---|---|---|
+| Server-side `CCTCursor` / `CCTCursorNoRuinCheck` / `CCTCursorParent.Can` return early with a plain distance test `DistanceSq(target, player) <= (m_MaximalActionDistance + target.GetCollisionRadius())^2`; the cursor-hit / head-position check runs on the client only | `4_world\classes\useractionscomponent\targetconditionscomponents\cctcursor.c:29`, `cctcursornoruincheck.c:29`, `cctcursorparent.c:26` | a server-side action inject on a target within reach now passes even without line of sight; big objects get a larger allowance. A "server refused, too far" verdict means beyond `m_MaximalActionDistance` + collision radius |
+| `ActionTargets` obstruction raycast capped at 10 m, trees/bushes utility 0.1 | `actiontargets.c:449`, `:505` | which target wins near vegetation can differ from a 164078 baseline |
+| `MiscGameplayFunctions.IsObjectObstructedFilterEx`: cheap `RaycastRV` first, skip targets closer than 0.25 m; `FilterObstructedObjectsByGrouping` no longer groups | `4_world\static\miscgameplayfunctions.c:1593`, `:215`, `:1438` | obstruction verdicts from 164078 runs are not a baseline |
+| 21 target actions (`*Target` medical, restrain, gag, cover head, shave) `IsLockTargetOnUse() → false` | e.g. `…\continuous\medical\actionbandagetarget.c:71` | the target player is no longer locked while the action runs; a two-player fixture can move mid-action |
+| `ActionDrinkCan` registered earlier | `actionconstructor.c:208` | runtime action ids of `ActionDrinkCan` and the five wash/wet actions after it changed; inject by class name, never by a stored id |
+| Split-to-ground uses `GameInventory.PrepareDropEntityPos(..., INVENTORY_ENTITY_DROP_OVERLAP_DEPTH)`; items thrown out of a parent get `-GetVelocity(parent)` | `4_world\entities\itembase.c:2090`; `miscgameplayfunctions.c:1248`, `:1295` | drop/scatter positions differ from 164078 captures |
+| `Debug.LOG_DEBUG_AUTOTEST` = `"AutotestLog"` (was `"Autotest"`) | `3_game\tools\debug.c:19` | a log reader that greps the autotest channel by name must use the new one |
+| `PluginInventoryRepair` is a regular client plugin (was debug-only) | `4_world\plugins\pluginmanager.c:58` | expect it in client plugin lists |
+
+Also: `vector.Cross` removed and Workbench API `#ifdef WORKBENCH` only — an MCP bridge or test mod that
+used either no longer compiles (`dayz-130-migration`). Vanilla navmeshes are v9 now; on a community map
+whose navmesh was not rebuilt, infected/animals stand still (`dayz-ai-patterns` §Navmesh) — not a bug in
+the mod under test.

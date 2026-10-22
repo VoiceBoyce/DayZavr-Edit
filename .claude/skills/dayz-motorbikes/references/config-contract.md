@@ -2,10 +2,14 @@
 
 This document contains the literal (`[EXACT]`) configuration blocks for single-track vehicles, along with the table of analyzed parameters and their readers in Enforce Script.
 
-> Target: DayZ 1.30 stable (1.30.164078). The blocks below were copied on 2026-09-16..19 from the 1.30 Exp 164014
+> Target: DayZ 1.30 stable (1.30.164200). The blocks below were copied on 2026-09-16..19 from the 1.30 Exp 164014
 > DeRap of `vehicles_singletrack` (arrays on one line). On stable they live in `P:\DZ\vehicles\singletrack\config.cpp`,
 > a DeRap with one array element per line, so the line ranges in the `// [EXACT]` headers are the STABLE ranges and the
 > text layout differs. Every key/value cited in the parameter table was re-read on stable on 2026-10-15 and is unchanged.
+> 1.30.164200 (2026-10-21): line ranges re-pointed to the 164200 `P:\DZ` (+4 after `:255`, +7 in the Motorbike_02
+> block). Content changes: the four `*ReflectorMatOn/Off` keys were added to both bikes and Motorbike_02's light slots in
+> `hiddenSelections[]` were renamed (table rows "Light slots" / "Light materials"); the blocks below (Exp copy) do not
+> show those keys. Everything else in the blocks and the table is unchanged.
 
 ---
 
@@ -137,7 +141,7 @@ This document contains the literal (`[EXACT]`) configuration blocks for single-t
 
 ### 2. Complete `SimulationModule` of `Motorbike_01_ColorBase`
 ```cpp
-// [EXACT values; Exp layout] P:\DZ\vehicles\singletrack\config.cpp:263-378 (Exp DeRap: 228-343)
+// [EXACT values; Exp layout] P:\DZ\vehicles\singletrack\config.cpp:267-382 (Exp DeRap: 228-343)
 		class SimulationModule: SimulationModule
 		{
 			neutralGearMaxSpeed = 1.3;
@@ -260,7 +264,7 @@ This document contains the literal (`[EXACT]`) configuration blocks for single-t
 
 ### 3. Animation Sources in `Motorbike_01_ColorBase`
 ```cpp
-// [EXACT values; Exp layout] P:\DZ\vehicles\singletrack\config.cpp:379-399 (Exp DeRap: 344-364)
+// [EXACT values; Exp layout] P:\DZ\vehicles\singletrack\config.cpp:383-403 (Exp DeRap: 344-364)
 		class AnimationSources: AnimationSources
 		{
 			class damper_1
@@ -289,7 +293,7 @@ This document contains the literal (`[EXACT]`) configuration blocks for single-t
 
 ### 4. `DamageSystem` and `DamageZones` of `Motorbike_01_ColorBase`
 ```cpp
-// [EXACT values; Exp layout] P:\DZ\vehicles\singletrack\config.cpp:400-989 (Exp DeRap: 365-515)
+// [EXACT values; Exp layout] P:\DZ\vehicles\singletrack\config.cpp:404-993 (Exp DeRap: 365-515)
 		class DamageSystem
 		{
 			class GlobalHealth
@@ -517,26 +521,29 @@ This document contains the literal (`[EXACT]`) configuration blocks for single-t
 | Parameter / Block | Physical / functional meaning | Motorbike_01 value | Motorbike_02 value | Who reads / consumes it (Citation) |
 |---|---|---|---|---|
 | `simulation` | Enfusion physical simulation model | `"motorbike"` | `"motorbike"` | Native engine (`P:\bin\config.cpp:1486`) |
-| `speedGeomActivation` | Distance / threshold to toggle hidden geometry | `0.29` | `0.27` | C++ engine (`config.cpp:258, 1448`) |
-| `speedGeoms[]` | Component array to disable while moving | `{"geotohide"}` | `{"geotohide"}` | C++ engine (`config.cpp:259-262, 1449-1452`) |
-| `tipoverAngle` | Critical tipover lean angle | `50.0` | `60.0` | C++ engine / Steering (`config.cpp:268, 1458`) |
-| `maxLeanAngle[]` | Maximum lean curve by speed (km/h, degrees) | `{1,0,5,8,15,10,30,17,40,22,80,30}` | `{1,0.0,5,8.0,10,12.0,30,20.0,60,30.0,120,40.0}` | C++ engine / Steering (`config.cpp:270, 1460`) |
-| `maxSteeringAngle[]` | Maximum handlebar steering angle by speed | `{1,40,5,40,15,20,30,5,40,3,80,1}` | `{1,40.0,5,40.0,10,35.0,30,12.0,60,3.0,120,1.0}` | C++ engine / Steering (`config.cpp:269, 1459`) |
-| `directControl[]` | Rider direct control factor vs auto-balance | `{0.0,1.0, ..., 80.0,0.0}` | `{0.0,1.0, ..., 80.0,0.0}` | C++ engine / Steering (`config.cpp:277, 1467`) |
-| `Brakes.Front.input` | Input channel assigned to front brake | `1` (handbrake / lever) | `1` (handbrake / lever) | C++ engine / Brakes (`config.cpp:292, 1482`) |
-| `Brakes.Rear.input` | Input channel assigned to rear brake | `0` (brake / pedal) | `0` (brake / pedal) | C++ engine / Brakes (`config.cpp:301, 1491`) |
-| `Engine.torqueCurve[]` | Engine torque curve [RPM, Nm] | `{400,0, ..., 7000,0}` (peak 8 Nm at 4500 RPM) | `{400,4, ..., 7000,0}` (peak 36 Nm, plateau 3830-5142 RPM) | C++ engine (`config.cpp:318, 1508`) |
-| `Engine.rpmIdle` | Revolutions per minute at idle | `1200` | `1300` | `EngineGetRPMIdle()` (`Motorbike.c:151`); value in `config.cpp:323, 1513` |
-| `Engine.rpmRedline` | Over-rev threshold with mechanical damage | `6000` | `6000` | `EngineGetRPMRedline()` (`MotorbikeScript.c:788`); value in `config.cpp:326, 1516` |
-| `Gearbox.ratios[]` | Transmission ratios per gear | `{3.93, 2.43, 0.83}` (3 gears) | `{2.5, 1.3, 0.95, 0.55}` (4 gears) | C++ engine / Gearbox (`config.cpp:338, 1528`) |
-| `Wheels.Front.casterAngle` | Fork forward rake angle (caster in degrees) | `25.0` | `27.0` | C++ engine (`config.cpp:348, 1538`) |
-| `Wheels.Front.animDamper` | Front suspension animation name | `"damperfront"` | `"damperfront"` | C++ engine / AnimationSources (`config.cpp:357, 1547`) |
-| `Wheels.Rear.animDamper` | Rear suspension animation name | `"damperback"` | `"damperback"` | C++ engine / AnimationSources (`config.cpp:374, 1564`) |
+| `speedGeomActivation` | Distance / threshold to toggle hidden geometry | `0.29` | `0.27` | C++ engine (`config.cpp:262, 1455`) |
+| `speedGeoms[]` | Component array to disable while moving | `{"geotohide"}` | `{"geotohide"}` | C++ engine (`config.cpp:263-266, 1456-1459`) |
+| `tipoverAngle` | Critical tipover lean angle | `50.0` | `60.0` | C++ engine / Steering (`config.cpp:272, 1465`) |
+| `maxLeanAngle[]` | Maximum lean curve by speed (km/h, degrees) | `{1,0,5,8,15,10,30,17,40,22,80,30}` | `{1,0.0,5,8.0,10,12.0,30,20.0,60,30.0,120,40.0}` | C++ engine / Steering (`config.cpp:274, 1467`) |
+| `maxSteeringAngle[]` | Maximum handlebar steering angle by speed | `{1,40,5,40,15,20,30,5,40,3,80,1}` | `{1,40.0,5,40.0,10,35.0,30,12.0,60,3.0,120,1.0}` | C++ engine / Steering (`config.cpp:273, 1466`) |
+| `directControl[]` | Rider direct control factor vs auto-balance | `{0.0,1.0, ..., 80.0,0.0}` | `{0.0,1.0, ..., 80.0,0.0}` | C++ engine / Steering (`config.cpp:281, 1474`) |
+| `Brakes.Front.input` | Input channel assigned to front brake | `1` (handbrake / lever) | `1` (handbrake / lever) | C++ engine / Brakes (`config.cpp:296, 1489`) |
+| `Brakes.Rear.input` | Input channel assigned to rear brake | `0` (brake / pedal) | `0` (brake / pedal) | C++ engine / Brakes (`config.cpp:305, 1498`) |
+| `Engine.torqueCurve[]` | Engine torque curve [RPM, Nm] | `{400,0, ..., 7000,0}` (peak 8 Nm at 4500 RPM) | `{400,4, ..., 7000,0}` (peak 36 Nm, plateau 3830-5142 RPM) | C++ engine (`config.cpp:322, 1515`) |
+| `Engine.rpmIdle` | Revolutions per minute at idle | `1200` | `1300` | `EngineGetRPMIdle()` (`Motorbike.c:151`); value in `config.cpp:327, 1520` |
+| `Engine.rpmRedline` | Over-rev threshold with mechanical damage | `6000` | `6000` | `EngineGetRPMRedline()` (`MotorbikeScript.c:803`); value in `config.cpp:330, 1523` |
+| `Gearbox.ratios[]` | Transmission ratios per gear | `{3.93, 2.43, 0.83}` (3 gears) | `{2.5, 1.3, 0.95, 0.55}` (4 gears) | C++ engine / Gearbox (`config.cpp:342, 1535`) |
+| `Wheels.Front.casterAngle` | Fork forward rake angle (caster in degrees) | `25.0` | `27.0` | C++ engine (`config.cpp:352, 1545`) |
+| `Wheels.Front.animDamper` | Front suspension animation name | `"damperfront"` | `"damperfront"` | C++ engine / AnimationSources (`config.cpp:361, 1554`) |
+| `Wheels.Rear.animDamper` | Rear suspension animation name | `"damperback"` | `"damperback"` | C++ engine / AnimationSources (`config.cpp:378, 1571`) |
 | `NoiseCarHorn.strength` | Acoustic loudness for AI detection when sounding horn | `30.0` | `30.0` | `VehicleHornComponent.c:86` |
-| `m_VehicleContactDamageCoef` | Collision damage multiplier to vehicle | `0.03` | `0.035` | `MotorbikeScript.c:1263` (`Motorbike_01.c:5`, `Motorbike_02.c:5`) |
-| `m_CrewContactDamageCoef` | Collision damage multiplier to occupants | `0.018` | `0.012` | `MotorbikeScript.c:1264` (`Motorbike_01.c:6`, `Motorbike_02.c:6`) |
-| `GetAnimInstance()` | Animation profile ID in Enfusion graph | `10` (`VehicleAnimInstances.MOTO1`) | `11` (`VehicleAnimInstances.MOTO2`) | `Vehicles.agf:1570`, `VehicleAnimInstances.c:13-14`, `Motorbike_01.c:50` and `Motorbike_02.c:51` |
-| `GetTransportCameraDistance()` | 3rd person camera distance (script override, not config key) | `2.5` | `3.0` | `DayZPlayerCameraVehicles.c:279`; value in `Motorbike_01.c:40`, `Motorbike_02.c:41` |
-| `GetTransportCameraOffset()` | Camera offset in model space (script override, not config key) | `"0 1.3 -0.25"` | `"0 1.4 -0.3"` | `DayZPlayerCameraVehicles.c:280`; value in `Motorbike_01.c:45`, `Motorbike_02.c:46` |
+| Light slots in `hiddenSelections[]` | Index = `VehicleLightSelectionData` id used by the light code | `lights_brake` 2, `lights_front` 3, `lights_rear` 4 | `lights_front` 4, `lights_rear` 5, `lights_brake` 6 (1.30.164200; on 164078 `light_1_1`, `light_1_2`, `light_brake_1_2`) | `RegisterSelection` in `Motorbike_01.c:19-22`, `Motorbike_02.c:20-23` → `SetObjectMaterial(id, …)` (`VehicleLightsComponent.c:79`); `config.cpp:232-239, 1419-1428` |
+| `frontReflectorMatOn/Off`, `brakeReflectorMatOn/Off` | rvmat put on the light slot when the light / brake switches | `motorbike_01_lights_front_e.rvmat` / `_lights_nolight` / `_lights_rear_brake` / `_lights_nolight` | same files under `motorbike_02\data\motorbike_02_*` | `ConfigGetString` in `VehicleLightsComponent.c:77`; `config.cpp:256-259, 1449-1452` (new in 1.30.164200; before, no bike declared them and the swaps were no-ops) |
+| `m_VehicleContactDamageCoef` | Collision damage multiplier to vehicle | `0.03` | `0.035` | `MotorbikeScript.c:1278` (`Motorbike_01.c:5`, `Motorbike_02.c:5`) |
+| `m_CrewContactDamageCoef` | Collision damage multiplier to occupants | `0.018` | `0.012` | `MotorbikeScript.c:1279` (`Motorbike_01.c:6`, `Motorbike_02.c:6`) |
+| `GetAnimInstance()` | Animation profile ID in Enfusion graph | `10` (`VehicleAnimInstances.MOTO1`) | `11` (`VehicleAnimInstances.MOTO2`) | `Vehicles.agf:1570`, `VehicleAnimInstances.c:13-14`, `Motorbike_01.c:47` and `Motorbike_02.c:48` |
+| `GetTransportCameraDistance()` | 3rd person camera distance (script override, not config key) | `2.5` | `3.0` | `DayZPlayerCameraVehicles.c:279`; value in `Motorbike_01.c:37`, `Motorbike_02.c:38` |
+| `GetTransportCameraOffset()` | Camera offset in model space (script override, not config key) | `"0 1.3 -0.25"` | `"0 1.4 -0.3"` | `DayZPlayerCameraVehicles.c:280`; value in `Motorbike_01.c:42`, `Motorbike_02.c:43` |
 
+> 1.30.164200 (2026-10-21): config line numbers re-pointed to the 164200 `P:\DZ`; values unchanged except the two light rows.
 > Table re-verified row by row on 2026-10-15 against stable `P:\DZ\vehicles\singletrack\config.cpp` (1.30.164078, different DeRap layout, sha256 `c8f3f028bc128f9283bea42ea3494f365a2cd0642d8a4cf74d9b09a5532f210b`; config line numbers above are stable). First verified on 2026-09-19 against the Exp DeRap (48,853 bytes, sha256 `a33166fb0893b9078e376169d6997a4c3ce1ab0d0b34ce9c45c0309780b62e4e`) and cited scripts from 1.30.164014. Motorbike_02 values for tipover, steering, lean, torque, idle, redline, and ratios were corrected, along with shifted line citations in both columns. Units and meanings are not verifiable in config.cpp. Previous copy: `config-contract.md.bak-20260919`.

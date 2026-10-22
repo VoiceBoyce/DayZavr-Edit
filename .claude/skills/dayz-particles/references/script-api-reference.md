@@ -350,6 +350,12 @@ wrappers around `SurfaceInfo.GetByName(name).GetStepParticleId()` / `GetWheelPar
 `RegisterEffect(EVehicleVFXEffect, typename, VehicleVFXDataParams)` (`:126`), `RegisterEffectGroup(EVehicleVFXEffectGroup, typename, int, VehicleVFXDataParams)` (`:139`),
 `PlayEffect` (`:270`), `StopEffect` (`:282`), `SetEffectParticleState` (`:364`), `GetParticleParamsOverrideData` (`:373`),
 `PlayEffectGroup` (`:390`), `GetEffectGroupParticleParamsOverrideData` (`:530`). Enums in `P:\scripts\3_game\enums\evehiclevfxtypes.c`.
+`VehicleVFXDataParams(vector position = vector.Zero, vector orientation = vector.Up, float cooldownSec = 0.0)` (`:82-93`):
+`cooldownSec` is the minimum time between two (re)starts of that effect, checked by `VehicleVFXData.CanPlay()` (`:43-50`) at
+the top of `PlayEffectData` (`:171-175`); 0 disables the guard. `SetEffectCooldown` (`:303`) / `GetEffectRemainingCooldown`
+(`:323`) change / read it later. Vanilla wheel smoke and wheel contact groups use 2.0 since 1.30.164200 (5.0 before;
+`carscript.c:381-382`, `motorbikescript.c:203-204`).
+Synced particle + sound effecter pattern (`FishingSplashEffecter`, 1.30.164200): `dayz-1-30-particles.md` §Server particle with a sound.
 
 `EffWheelSmoke.SetSurface(string)` is `[Obsolete("1.30: use SelectFromSurface instead")]` (`P:\scripts\4_world\entities\effects\wheelsmoke.c:32`).
 

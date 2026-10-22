@@ -2,6 +2,9 @@
 
 <!-- Generated 2026-10-15 from a declaration-level parse of P:\scripts (DayZ 1.30.164078 stable) against the 1.29 extraction (O:\DayZ 1.29 ...\scripts). Paths are relative to P:\scripts. A parser, not the compiler: confirm a line with grep before you quote it. -->
 
+> Generated against 1.30.164078. Its `P:\scripts` line refs were re-pointed to 1.30.164200 on 2026-10-21 (`_shared/tools/remap_vanilla_refs.py`). What 164200 changed on top: `api-delta-1.30.164078-to-164200.md`.
+
+
 
 How to read this file: every row is a declaration that exists in one version and not the other, or whose declaration changed. `old`/`new` are normalised signatures: modifiers, return type, name, parameter **types** (names dropped) and defaults. Line refs point at the 1.30 file. **An override whose parameter list no longer matches does not compile** (`marked as override, but there is no function with this name` / `Overloaded function not compatible`), even if the new parameter has a default.
 
@@ -56,11 +59,11 @@ One row per method whose set of declarations changed in a class that exists in b
 | `CGame` | `CreateObject` | `proto native Object CreateObject(string, vector, bool=false, bool=false, bool=true)` | `proto native Object CreateObject(string, vector, bool=false, bool=false, bool=true, bool=false)` | `3_game/global/game.c:691` |
 | `CGame` | `CreateStaticObjectUsingP3D` | `proto native Object CreateStaticObjectUsingP3D(string, vector, vector, float=1.0, bool=false)` | `proto native Object CreateStaticObjectUsingP3D(string, vector, vector, float=1.0, bool=false, bool=false)` | `3_game/global/game.c:680` |
 | `ContentDLC` | `IsDLCInstalled` | `proto native bool IsDLCInstalled(EDLCId)` | `proto bool IsDLCInstalled(EDLCId)` | `3_game/services/contentdlc.c:42` |
-| `CrashDebugData` | `SendData` | `static void SendData(PlayerBase)` | `static void SendData(DayZPlayer)` | `3_game/vehicles/transport.c:1090` |
+| `CrashDebugData` | `SendData` | `static void SendData(PlayerBase)` | `static void SendData(DayZPlayer)` | `3_game/vehicles/transport.c:1099` |
 | `EntityAI` | `ProcessVariables` | `void ProcessVariables()` | `void ProcessVariables(float)` | `3_game/entities/entityai.c:3913` |
 | `HumanItemAccessor` | `OnItemInHandsChanged` | `proto native void OnItemInHandsChanged(bool=false)` | `proto native void OnItemInHandsChanged(bool=false, bool=true)` | `3_game/humanitems.c:112` |
 | `InventoryItemType` | `InventoryItemType` | `void InventoryItemType()` | `private void InventoryItemType()` | `3_game/inventoryitemtype.c:147` |
-| `Transport` | `IsAnyCrewPresent` | `bool IsAnyCrewPresent()` | `bool IsAnyCrewPresent()`<br>`bool IsAnyCrewPresent(TIntArray)` | `3_game/vehicles/transport.c:621` |
+| `Transport` | `IsAnyCrewPresent` | `bool IsAnyCrewPresent()` | `bool IsAnyCrewPresent()`<br>`bool IsAnyCrewPresent(TIntArray)` | `3_game/vehicles/transport.c:624` |
 
 ### 4_world
 
@@ -89,9 +92,9 @@ One row per method whose set of declarations changed in a class that exists in b
 | `Environment` | `ApplyDrynessToItemEx` | `protected void ApplyDrynessToItemEx(ItemBase, EnvironmentDrynessData)` | `private void ApplyDrynessToItemEx(EnvironmentDrynessData, notnull map<ItemBase, ref EnvironmentEntityData>itemDataCached)`<br>`protected void ApplyDrynessToItemEx(ItemBase, EnvironmentDrynessData, EnvironmentEntityData=null)` | `4_world/classes/environment/environment.c:1159` |
 | `Environment` | `ApplyWetnessToItem` | `protected void ApplyWetnessToItem(ItemBase)` | `private void ApplyWetnessToItem(notnull map<ItemBase, ref EnvironmentEntityData>itemDataCached)`<br>`protected void ApplyWetnessToItem(ItemBase, EnvironmentEntityData=null)` | `4_world/classes/environment/environment.c:1040` |
 | `ExplosivesBase` | `AddExplosionEffectForSurface` | `void AddExplosionEffectForSurface(string, int)` | `void AddExplosionEffectForSurface(ExplosionEffectsData)`<br>`void AddExplosionEffectForSurface(string, int)` | `4_world/entities/explosivesbase.c:386` |
-| `ItemBase` | `GetDryingIncrement` | `float GetDryingIncrement(string)` | `float GetDryingIncrement(EEnvironmentDryingCategories)`<br>`float GetDryingIncrement(string)` | `4_world/entities/itembase.c:3658` |
-| `ItemBase` | `GetSoakingIncrement` | `float GetSoakingIncrement(string)` | `float GetSoakingIncrement(EEnvironmentSoakingCategories)`<br>`float GetSoakingIncrement(string)` | `4_world/entities/itembase.c:3663` |
-| `ItemBase` | `ProcessVariables` | `void ProcessVariables()` | `void ProcessVariables(float)` | `4_world/entities/itembase.c:4659` |
+| `ItemBase` | `GetDryingIncrement` | `float GetDryingIncrement(string)` | `float GetDryingIncrement(EEnvironmentDryingCategories)`<br>`float GetDryingIncrement(string)` | `4_world/entities/itembase.c:3662` |
+| `ItemBase` | `GetSoakingIncrement` | `float GetSoakingIncrement(string)` | `float GetSoakingIncrement(EEnvironmentSoakingCategories)`<br>`float GetSoakingIncrement(string)` | `4_world/entities/itembase.c:3667` |
+| `ItemBase` | `ProcessVariables` | `void ProcessVariables()` | `void ProcessVariables(float)` | `4_world/entities/itembase.c:4663` |
 | `MapNavigationBehaviour` | `IsOutOfMap` | `static bool IsOutOfMap(EntityAI)` | `static bool IsOutOfMap(EntityAI)`<br>`static bool IsOutOfMap(vector)` | `4_world/entities/itembase/mapnavigationbehaviour.c:188` |
 | `PluginSceneManager` | `DeselectObject` | `private void DeselectObject()` | `protected void DeselectObject()` | `4_world/plugins/pluginbase/pluginscenemanager.c:1137` |
 | `PluginSceneManager` | `EditorUpdateRuler` | `private void EditorUpdateRuler()` | `protected void EditorUpdateRuler()` | `4_world/plugins/pluginbase/pluginscenemanager.c:1242` |
@@ -645,7 +648,7 @@ Vanilla's own message is quoted. An obsolete method may still compile but **neve
 | `CombinationLock` | `protected void SoundLockOpen()` | 1.30: Use ItemSoundHandler instead | `4_world/entities/itembase/combinationlock.c:822` |
 | `ConstructionActionData` | `int GetSlotId()` | 1.30: Unsafe, overridden ActionData used in-system instead | `4_world/classes/basebuilding/constructionactiondata.c:623` |
 | `ConstructionActionData` | `void SetSlotId(int)` | 1.30: Unsafe, overridden ActionData used in-system instead | `4_world/classes/basebuilding/constructionactiondata.c:617` |
-| `ConstructionPart` | `void SetRequestBuiltState(bool)` | 1.30: Use 'SetBuiltState' directly | `4_world/classes/basebuilding/constructionpart.c:504` |
+| `ConstructionPart` | `void SetRequestBuiltState(bool)` | 1.30: Use 'SetBuiltState' directly | `4_world/classes/basebuilding/constructionpart.c:510` |
 | `DayZPlayerImplement` | `string GetSurfaceType(SurfaceAnimationBone)` | 1.30: uses CGame GetSurfaceInfo* methods instead | `4_world/entities/dayzplayerimplement.c:4121` |
 | `DayZPlayerImplementMeleeCombat` | `protected void HitZoneSelection()` | replaced by HitZoneSelectionRaycast | `4_world/entities/dayzplayerimplementmeleecombat.c:603` |
 | `DayZPlayerImplementMeleeCombat` | `protected bool IsObstructed(Object)` | replaced by MeleeTargeting.IsMeleeTargetObstructed | `4_world/entities/dayzplayerimplementmeleecombat.c:670` |
@@ -675,19 +678,19 @@ Vanilla's own message is quoted. An obsolete method may still compile but **neve
 | `GameInventory` | `bool TakeEntityToCargoEx(InventoryMode, notnull EntityAI, int, int, int)` | 1.30: Use TakeEntityToTargetCargoEx instead | `3_game/systems/inventory/inventory.c:1357` |
 | `HudDebugWinCharStats` | `void FitWindow()` | no replacement | `5_mission/gui/scriptshuddebug/huddebugwincharstats.c:306` |
 | `Icon` | `int GetRelevantInventoryAction(int)` | no replacement | `5_mission/gui/inventorynew/containeditems/icon.c:1773` |
-| `ItemBase` | `protected void ClearStartItemSoundServer()` | 1.30: No replacement | `4_world/entities/itembase.c:4944` |
-| `ItemBase` | `float GetDryingIncrement(string)` | 1.30: replaced by GetDryingIncrement taking enum/int arguments | `4_world/entities/itembase.c:3668` |
-| `ItemBase` | `float GetHeatIsolationInit()` | 1.30: No replacement | `4_world/entities/itembase.c:4938` |
-| `ItemBase` | `float GetSoakingIncrement(string)` | 1.30: replaced by GetSoakingIncrement taking enum/int arguments | `4_world/entities/itembase.c:3678` |
+| `ItemBase` | `protected void ClearStartItemSoundServer()` | 1.30: No replacement | `4_world/entities/itembase.c:4948` |
+| `ItemBase` | `float GetDryingIncrement(string)` | 1.30: replaced by GetDryingIncrement taking enum/int arguments | `4_world/entities/itembase.c:3672` |
+| `ItemBase` | `float GetHeatIsolationInit()` | 1.30: No replacement | `4_world/entities/itembase.c:4942` |
+| `ItemBase` | `float GetSoakingIncrement(string)` | 1.30: replaced by GetSoakingIncrement taking enum/int arguments | `4_world/entities/itembase.c:3682` |
 | `Man` | `bool JunctureTakeEntityAsAttachment(notnull EntityAI)` | 1.30: Use JunctureTakeEntityToTargetAttachment instead | `3_game/entities/man.c:901` |
 | `Man` | `bool JunctureTakeEntityAsAttachmentEx(notnull EntityAI, int)` | 1.30: Use JunctureTakeEntityToTargetAttachmentEx instead | `3_game/entities/man.c:918` |
 | `Man` | `bool JunctureTakeEntityToCargo(notnull EntityAI)` | 1.30: Use JunctureTakeEntityToTargetCargo instead | `3_game/entities/man.c:884` |
 | `Man` | `protected bool TakeEntityAsAttachmentExImpl(InventoryMode, notnull EntityAI, int)` | 1.30: Use TakeEntityToTargetAttachmentExImpl instead | `3_game/entities/man.c:924` |
 | `Man` | `protected bool TakeEntityAsAttachmentImpl(InventoryMode, notnull EntityAI)` | 1.30: Use TakeEntityToTargetAttachmentImpl instead | `3_game/entities/man.c:907` |
 | `Man` | `protected bool TakeEntityToCargoImpl(InventoryMode, notnull EntityAI)` | 1.30: Use TakeEntityToTargetCargoImpl instead | `3_game/entities/man.c:890` |
-| `MiscGameplayFunctions` | `static bool BuildCondition(PlayerBase, ActionTarget, ItemBase, bool)` | Obsolete collision checking method, use the other 'BuildCondition' | `4_world/static/miscgameplayfunctions.c:2066` |
-| `MiscGameplayFunctions` | `static bool ComplexBuildCollideCheckClient(PlayerBase, ActionTarget, ItemBase, string="")` | Obsolete collision checking method, use the other 'ComplexBuildCollideCheckClient' | `4_world/static/miscgameplayfunctions.c:2060` |
-| `MiscGameplayFunctions` | `static void GenerateAINoiseAtPosition(vector, float, NoiseParams)` | Use MiscGameplayFunctions.GenerateAINoiseAtPositionEx instead! | `4_world/static/miscgameplayfunctions.c:2072` |
+| `MiscGameplayFunctions` | `static bool BuildCondition(PlayerBase, ActionTarget, ItemBase, bool)` | Obsolete collision checking method, use the other 'BuildCondition' | `4_world/static/miscgameplayfunctions.c:2004` |
+| `MiscGameplayFunctions` | `static bool ComplexBuildCollideCheckClient(PlayerBase, ActionTarget, ItemBase, string="")` | Obsolete collision checking method, use the other 'ComplexBuildCollideCheckClient' | `4_world/static/miscgameplayfunctions.c:1998` |
+| `MiscGameplayFunctions` | `static void GenerateAINoiseAtPosition(vector, float, NoiseParams)` | Use MiscGameplayFunctions.GenerateAINoiseAtPositionEx instead! | `4_world/static/miscgameplayfunctions.c:2010` |
 | `ModInfo` | `static string GetDLCImage(string)` | 1.30: no replacement | `3_game/modinfo.c:25` |
 | `NoiseAIEvaluate` | `static float GetNoiseReduction(Weather)` | Use GetNoiseReductionEx instead! | `4_world/static/sensesaievaluate.c:92` |
 | `OptionsMenu` | `void ToggleDependentOptions(int, bool)` | 1.29: No replacement | `5_mission/gui/newui/options/optionsmenu.c:917` |
@@ -699,7 +702,7 @@ Vanilla's own message is quoted. An obsolete method may still compile but **neve
 | `OptionsMenuVideo` | `void InitDependentOptionsVisibility()` | 1.29: No replacement | `5_mission/gui/newui/options/optionsmenuvideo.c:677` |
 | `OptionsMenuVideo` | `void ToggleDependentOptions(int, bool)` | 1.29: No replacement | `5_mission/gui/newui/options/optionsmenuvideo.c:674` |
 | `PluginTransmissionAgents` | `bool GrowDuringAntibioticsAttack(int, PlayerBase)` | replaced by GrowDuringMedicalDrugsAttack | `4_world/plugins/pluginbase/plugintransmissionagents.c:685` |
-| `StaticConstructionMethods` | `static void SpawnConstructionMaterialPiles(notnull EntityAI, Man, string, string, string="", bool=false)` | 1.30: Use SpawnConstructionMaterialPilesEx instead | `4_world/classes/constructionbase.c:1908` |
+| `StaticConstructionMethods` | `static void SpawnConstructionMaterialPiles(notnull EntityAI, Man, string, string, string="", bool=false)` | 1.30: Use SpawnConstructionMaterialPilesEx instead | `4_world/classes/constructionbase.c:1957` |
 | `Surface` | `static int GetStepsParticleID(string)` | 1.30: use SurfaceInfo.GetStepParticleId directly | `4_world/static/surface.c:64` |
 | `Surface` | `static int GetWheelParticleID(string)` | 1.30: use SurfaceInfo.GetWheelParticleId directly | `4_world/static/surface.c:70` |
 | `UndergroundStash` | `void PlaceOnGround()` | 1.30: No replacement | `4_world/entities/undergroundstash.c:51` |

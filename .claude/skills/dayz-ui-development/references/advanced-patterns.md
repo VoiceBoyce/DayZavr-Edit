@@ -8,8 +8,10 @@
 >
 > 1. **`OnMouseMove(Widget w, int x, int y, int oldx, int oldy)`** (the §6 draggable-window pattern) —
 >    `ScriptedWidgetEventHandler` has **no `OnMouseMove` event** (`enwidgets.c:656-686` lists
->    `OnClick`…`OnEvent`; the only `OnMouseMove*` in the dump is `workbenchapi.c:91`, a Workbench
->    plugin hook, not a widget event). The override is never called → dragging silently does nothing.
+>    `OnClick`…`OnEvent`; on 1.30.164200 no `OnMouseMove*` exists anywhere in `P:\scripts`. Up to
+>    1.30.164078 the only one was `WorldEditorTool.OnMouseMoveEvent` in `1_core\workbenchapi.c:91`, a
+>    Workbench tool hook, not a widget event; 164200 removed `WorldEditorTool` and split the Workbench API
+>    into `1_core\workbenchapi\*.c` under `#ifdef WORKBENCH`). The override is never called → dragging silently does nothing.
 >    **Fix:** drive drag from `OnMouseButtonDown` + per-frame `Update()` polling `GetMousePos()`
 >    (the approach `admin-ui-patterns.md §1` actually uses), or use the native `DRAGGABLE` flag +
 >    `OnDrag`/`OnDragging`/`OnDrop` events.

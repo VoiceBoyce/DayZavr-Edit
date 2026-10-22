@@ -5,7 +5,7 @@ description: "Use when: ripped racing-game Grub, rip vehicle import, non-Forza G
 
 # Ripped racing-game vehicle → DayZ — family B adapter (CAMBIO-2)
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 > 1.30 note for the script class every family-B car ships (`<MOD>_Base extends CarScript`): besides `CrewCanGetThrough` /
 > `GetAnimInstance` / `GetSeatAnimationType`, it must override the battery trio (`NeedElectricitySourceDevice` /
 > `GetElectricitySourceDevice` / `GetElectricitySourceDeviceType`) or the engine never starts (static reading of `P:scripts`) — see

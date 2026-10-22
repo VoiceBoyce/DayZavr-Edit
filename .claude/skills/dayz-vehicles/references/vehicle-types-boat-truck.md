@@ -49,7 +49,7 @@ lives:
 1.30: `enum ETransportFluid` on `Transport` (`transport.c:52-63`) is the shared fluid enum; `CarFluid`
 (`car.c:18`), `BoatFluid` (`boat.c:13`) and `MotorbikeFluid` (`motorbike.c:14`) are empty `: ETransportFluid {}`
 enums that inherit its values. Generic code uses `GetFluidCapacityScript/GetFluidFractionScript/FillScript(ETransportFluid, ...)`
-(`transport.c:440-450`).
+(`transport.c:443-453`).
 
 A **truck is just a `CarScript` config** with more axles and double wheels — no
 new class (see §4).
@@ -57,24 +57,26 @@ new class (see §4).
 ### 1.1 What Transport OWNS (shared by Car AND Boat)
 
 - Crew system (native): `CrewSize/CrewMemberIndex/CrewMember/CrewDriver/CrewEntry/
-  CrewEntryWS/CrewTransform/CrewGetIn/CrewGetOut/CrewDeath` — `transport.c:175-212`.
-  `OnDriverEnter/OnDriverExit` hooks — `transport.c:218-224`.
+  CrewEntryWS/CrewTransform/CrewGetIn/CrewGetOut/CrewDeath` — `transport.c:178-215`; 1.30.164200 adds
+  `HasCrew()` (`transport.c:175`) and a script `IsMoving()` that only `CarScript` implements (`:819-823`; boats log an
+  error — see `dayz-1-30-vehicles.md` §11).
+  `OnDriverEnter/OnDriverExit` hooks — `transport.c:221-227`.
 - Lights: `LightIsOn/LightOn/LightOff/LightToggle`, `OnBeforeLightOn`,
-  `UpdateLights` — `transport.c:227-255,362`.
+  `UpdateLights` — `transport.c:230-258,365`.
 - Fuel refill point: `m_fuelPos` from memory point `"refill"`,
-  `GetRefillPointPosWS` — `transport.c:112-115,459-472`.
+  `GetRefillPointPosWS` — `transport.c:112-115,462-475`.
 - Flip detection scaffolding: `DetectFlipped` (override per-impl), `IsFlipped`,
   `DetectFlippedUsingSurface` (water-aware, uses `GetWaterDepth`) —
-  `transport.c:522-619`.
+  `transport.c:525-622`.
 - Deterministic physics helpers: `ApplyForce/ApplyTorque/ApplyImpulseAt/...` —
-  `transport.c:260-275`.
-- Get-in door-clearance: `IsAreaAtDoorFree` — `transport.c:844-899`; 1.30 adds the
-  `IsAreaAtDoorFreeDiag` wrappers the actions call (`:901-915`) and `CanGetIn()` (`:672-675`).
+  `transport.c:263-278`.
+- Get-in door-clearance: `IsAreaAtDoorFree` — `transport.c:853-908`; 1.30 adds the
+  `IsAreaAtDoorFreeDiag` wrappers the actions call (`:910-924`) and `CanGetIn()` (`:675-678`).
 - `GetVehicleType()` returns `"VehicleTypeUndefined"` on base —
-  `transport.c:454-457` (each subclass overrides).
+  `transport.c:457-460` (each subclass overrides).
 - 1.30: battery trio `NeedElectricitySourceDevice/GetElectricitySourceDevice/GetElectricitySourceDeviceType`
-  (`transport.c:821-834`), `OnContact` + `VehicleContactData` (`:315-342`, `:1144-1148`),
-  `CheckVitalItemCallback` (`:420-435`), `PartsHealthCheck` (`:437`), `GetWeightCoef` (`:475-478`).
+  (`transport.c:830-843`), `OnContact` + `VehicleContactData` (`:318-345`, `:1153-1157`),
+  `CheckVitalItemCallback` (`:423-438`), `PartsHealthCheck` (`:440`), `GetWeightCoef` (`:478-481`).
 
 ### 1.2 CAR-only additions (`car.c`)
 
@@ -254,7 +256,7 @@ observed in the heli/RaG research pass.) Everything else is the standard
 1.30 ships `class Motorbike: Transport` with `simulation="motorbike"` (`P:\bin\config.cpp:1481-1486`),
 `MotorbikeScript` (`4_world\entities\vehicles\motorbikescript.c:53`, not a `CarScript`), two vanilla bikes
 (`Motorbike_01_ColorBase` / `Motorbike_02_ColorBase : MotorbikeScript`, `P:\DZ\vehicles\singletrack\config.cpp:220`,
-`:1401`) and a 2-wheel `SimulationModule` (`Wheels{Front,Rear}` instead of `Axles`). The contract, script API,
+`:1404` on 1.30.164200) and a 2-wheel `SimulationModule` (`Wheels{Front,Rear}` instead of `Axles`). The contract, script API,
 actions, sounds and rider animation live in the `dayz-motorbikes` skill.
 
 Before 1.30: no vanilla motorbike and no community source on disk. The warning from that time still holds: do not

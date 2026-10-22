@@ -17,7 +17,7 @@ Redeclaring WITH `: Mode_*` is only correct when inheriting from `Rifle_Base` (w
 Verified mechanism (vanilla, line numbers re-checked on 1.30.164078, `P:\scripts`):
 - Mode count = config `modes[]` + valid subclasses.
 - Mode switch = native input `IsFireModeChange()` (default X key) → `GetWeaponManager().SetNextMuzzleMode()` (`4_world\entities\dayzplayerimplement.c:1102-1104`).
-- Mode name in HUD = `GetCurrentModeName()` (`4_world\classes\weapons\weaponmanager.c:1335` → `5_mission\gui\itemactionswidget.c:585`); empty string = engine sees 1 mode.
+- Mode name in HUD = `GetCurrentModeName()` (`4_world\classes\weapons\weaponmanager.c:1335` → `5_mission\gui\itemactionswidget.c:593`); empty string = engine sees 1 mode.
 - Player animation profile (`pType.AddItemInHandsProfileIK(class, .asi, behaviorCfg, ik.anm, weaponStates.anm)` in `dayzplayercfgbase.c:409+`) and `behaviorCfg` (`SetFirearms`/`SetPistols`/`SetToolsOneHanded` → `ItemBehaviorType`, def. `dayzplayercfgbase.c:167-239`) DO NOT control mode count; but registering a weapon with `RegisterOneHanded` does make it behave like a one-handed tool (no selector).
 
 Anti-confabulation: a "protected base" whose `config.bin` "cannot be read" must be VERIFIED by de-rapifying with `CfgConvert -txt` before assuming it. A6_PP19 case (2026-06-26): config.bin de-rapifies completely and already had `modes[]={"SemiAuto","FullAuto"}` — the "protected/single-mode" assumption was false.

@@ -1,13 +1,14 @@
 ---
 name: dayz-sound-system
-description: "Use when: sonido DayZ, CfgSoundShaders, SoundSet, sound not playing, no sound on dedicated server, PlaySoundSet, StartItemSoundServer, ItemSoundHandler, RPC_ITEM_SOUND_PLAY, NoiseSystem, AIParams noise, bunker radio, HEAVY_BREATHING, GetEnvironmentNoiseReduction, IsHeadlessOrDedicatedServer, VehicleHornComponent, VegetationSounds. DayZ 1.30 (164078); porting 1.29 audio/noise code. Audio is client-only. Not particles: dayz-particles; not UI: dayz-ui-development."
+description: "Use when: sonido DayZ, CfgSoundShaders, SoundSet, sound not playing, no sound on dedicated server, PlaySoundSet, StartItemSoundServer, ItemSoundHandler, RPC_ITEM_SOUND_PLAY, NoiseSystem, AIParams noise, bunker radio, HEAVY_BREATHING, GetEnvironmentNoiseReduction, IsHeadlessOrDedicatedServer, VehicleHornComponent, VegetationSounds. DayZ 1.30 (164200); porting 1.29 audio/noise code. Audio is client-only. Not particles: dayz-particles; not UI: dayz-ui-development."
 ---
 
 # DayZ Sound System (Enforce Script + config)
 
-> Target: DayZ 1.30 stable (1.30.164078). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
+> Target: DayZ 1.30 stable (1.30.164200). Version labels: ../_shared/dayz-version-policy.md. Porting a ≤1.29 mod: dayz-130-migration skill.
 
-Verified reference for mod audio. Vanilla citations are `path:line` re-checked against DayZ 1.30.164078
+Verified reference for mod audio. Vanilla citations are `path:line` re-checked against DayZ 1.30.164078 and
+re-pointed to 1.30.164200 on 2026-10-21 (patch changes: end of §DayZ 1.30 changes)
 (short paths are relative to `P:\scripts\`; config paths to `P:\DZ\`) unless written `1.29:`. Two real
 mods are used as prior art (IMPWMODPart2 weapons, DoorLockSystem; their citations are unchanged). The
 deep-dive with every signature lives in `references/sonido-deep-dive.md` — load it for AbstractWave
@@ -37,7 +38,7 @@ synchronize a state change and let each client play it: the official vehicle for
 |---|---|
 | One-shot 3D sound at a position (client code) | `SEffectManager.PlaySound("Set", pos)` (`3_game/effectmanager.c:178`) |
 | Sound that follows an object (client code) | `SEffectManager.PlaySoundOnObject("Set", obj)` (`effectmanager.c:256`) or `obj.PlaySoundSet(snd, "Set", fadeIn, fadeOut, loop)` (`3_game/entities/object.c:1247-1325`) |
-| Server-driven item sound, sent to all clients | `StartItemSoundServer(id)` / `StopItemSoundServer(id)` (`4_world/entities/itembase.c:4436-4503`; 1.30: batched RPC, see below) |
+| Server-driven item sound, sent to all clients | `StartItemSoundServer(id)` / `StopItemSoundServer(id)` (`4_world/entities/itembase.c:4440-4507`; 1.30: batched RPC, see below) |
 | Persistent server state with a sound (horn, alarm on/off) | Own SyncVar + play in `OnVariablesSynchronized` — vanilla 1.30 example `VehicleHornComponent` (below) |
 | Sound at a memory point of the model | `PlaySoundSetAtMemoryPoint(...)` (`object.c:1294`) |
 | Animation-bound audio (footsteps, gestures) | AnimEvents in the anim config — engine plays them client-side automatically |
@@ -102,7 +103,7 @@ Both vanilla bases above still exist on 1.30 (`P:\DZ\sounds\hpp\config.cpp:17117
 `closeShotCurve` is a `CfgSoundCurves` class (`:59`, `:930`). The only sound classes 1.30 removed are
 `IZH43*` tail shaders, `Music_Menu_R2B_*` and `runProne_water_Zmb_Soundset` (config delta) — none is a base
 this skill recommends.
-Extra SoundSet properties, as set on vanilla bases (`P:\DZ\sounds\hpp\config.cpp:323687-323700`
+Extra SoundSet properties, as set on vanilla bases (`P:\DZ\sounds\hpp\config.cpp:324357-324370`
 `Rifle_Shot_Base_SoundSet`; `:318381-318389` `baseCharacter_SoundSet`): `volumeFactor`, `volumeCurve`
 (a `CfgSoundCurves` name), `sound3DProcessingType` (a class in `CfgSound3DProcessors`, `:2587`),
 `distanceFilter` (`CfgDistanceFilters`, `:2422`), `occlusionFactor`, `obstructionFactor`, `spatial`,
@@ -133,7 +134,7 @@ Extra SoundSet properties, as set on vanilla bases (`P:\DZ\sounds\hpp\config.cpp
 
 ## Server→client item sound (the official pattern)
 
-1. Register sets in `InitItemSounds()` (`4_world/entities/itembase.c:4416-4433`; vanilla overrides it
+1. Register sets in `InitItemSounds()` (`4_world/entities/itembase.c:4420-4437`; vanilla overrides it
    as `override void InitItemSounds()`, e.g. `4_world/entities/itembase/combinationlock.c:808-819`):
 ```c
 override void InitItemSounds()
@@ -147,15 +148,15 @@ override void InitItemSounds()
 }
 ```
 2. Fire from server: `StartItemSoundServer(SoundConstants.ITEM_DEPLOY)` (or `(id, slotId)`) /
-   `StopItemSoundServer(SoundConstants.ITEM_DEPLOY_LOOP)` (`itembase.c:4436-4454`, `:4495-4503`).
+   `StopItemSoundServer(SoundConstants.ITEM_DEPLOY_LOOP)` (`itembase.c:4440-4458`, `:4499-4507`).
 3. Client side is automatic. 1.30 transport is an **RPC**, not sync vars:
    - `StartItemSoundServer` returns unless `GetGame().IsServer()` and `id > 0`, queues an `ItemSoundEvent`
      and flushes the queue once per frame (`CallLater(FlushItemSoundQueue)`) as ONE
-     `ERPCs.RPC_ITEM_SOUND_PLAY` RPC (count + id/slot pairs) to all clients (`itembase.c:4436-4479`;
+     `ERPCs.RPC_ITEM_SOUND_PLAY` RPC (count + id/slot pairs) to all clients (`itembase.c:4440-4483`;
      `ItemSoundEvent` at `:9-19`; enum `3_game/enums/erpcs.c:114-115`).
-   - `StopItemSoundServer` sends `RPC_ITEM_SOUND_STOP` immediately (`itembase.c:4495-4503`).
+   - `StopItemSoundServer` sends `RPC_ITEM_SOUND_STOP` immediately (`itembase.c:4499-4507`).
    - The client handles both in `ItemBase.OnRPC` → `ItemSoundHandler.PlayItemSoundClient/StopItemSoundClient`
-     (`itembase.c:2796-2825`, inside `#ifndef SERVER` / `#ifndef NO_GUI`). **If your item overrides
+     (`itembase.c:2800-2829`, inside `#ifndef SERVER` / `#ifndef NO_GUI`). **If your item overrides
      `OnRPC`, call `super.OnRPC(...)`** or its handler sounds never play.
 
 Limits (1.30): several `StartItemSoundServer` calls in the same frame are batched into one RPC, so the
@@ -167,8 +168,8 @@ outside those. `ITEM_SOUNDS_MAX = 63` (`itembase.c:116`) only bounds the legacy 
 (`:208-213`); the RPC writes full ints. `[DESIGN]` keep ids ≤ 63 anyway so the legacy path stays usable.
 An RPC is a one-off event: a client that streams the item in later does not hear a loop that is
 already running — for a persistent loop keep a state SyncVar (next paragraph).
-Also new in 1.30: `StartItemSoundClient(id, slotId)` plays locally on a client (`itembase.c:4456-4462`);
-`CanPlayAttachSound()/CanPlayDetachSound()` gate the vanilla attach/detach sounds (`:1335,1346`, `:4853-4861`);
+Also new in 1.30: `StartItemSoundClient(id, slotId)` plays locally on a client (`itembase.c:4460-4466`);
+`CanPlayAttachSound()/CanPlayDetachSound()` gate the vanilla attach/detach sounds (`:1335,1346`, `:4857-4865`);
 `ItemSoundHandler` falls back to the registered `ITEM_ATTACH/ITEM_DETACH` set when the slot has none
 (`itemsoundhandler.c:94-109`). Not verified here: whether the RPC reaches the local client in offline
 single-player (1.29 had an explicit `|| !g_Game.IsMultiplayer()` branch; 1.30 checks only `IsServer()`).
@@ -178,10 +179,10 @@ Before 1.30: `StartItemSoundServer` set the sync vars `m_SoundSyncPlay`/`m_Sound
 them in `ItemBase.OnVariablesSynchronized` (1.29: `itembase.c:4468-4509`, `:3319-3332`), so only ONE
 play + ONE stop per sync tick. Porting: calls to `StartItemSoundServer`/`StopItemSoundServer` compile and
 work unchanged; but `ClearStartItemSoundServer()` is `[Obsolete("1.30: No replacement")]`
-(`itembase.c:4944-4949`), vanilla no longer writes `m_SoundSyncPlay` (a mod that reads it in its own
+(`itembase.c:4948-4953`), vanilla no longer writes `m_SoundSyncPlay` (a mod that reads it in its own
 `OnVariablesSynchronized` sees nothing), and the old behaviour survives only as
 `LegacyStopItemSoundServer(id)` + calling `LegacyItemSoundSync()` from your `OnVariablesSynchronized`
-override (`itembase.c:4481-4493`, `:3291-3310`). Vanilla migration example: `CombinationLock` registers
+override (`itembase.c:4485-4497`, `:3295-3314`). Vanilla migration example: `CombinationLock` registers
 its sets in `InitItemSounds` and fires `StartItemSoundServer(ITEM_COMBINATION_LOCK_*)`
 (`combinationlock.c:808-819`, `:625-643`); its old `SoundLockOpen/Close/ChangeNumber/ChangeDial` are
 `[Obsolete("1.30: Use ItemSoundHandler instead")]` (`:822-845`).
@@ -226,9 +227,9 @@ Obsolete in 1.30 (no vanilla caller left in `P:\scripts`):
   are themselves `[Obsolete("1.30: AI noise dampening is now done natively via AIParams config parameters. Kept for HUD and old mods.")]`.
   Use neither in new code; drop the factor.
 - `MiscGameplayFunctions.GenerateAINoiseAtPosition(vector, float, NoiseParams)` →
-  `[Obsolete("Use MiscGameplayFunctions.GenerateAINoiseAtPositionEx instead!")]` (`4_world/static/miscgameplayfunctions.c:2072-2083`);
+  `[Obsolete("Use MiscGameplayFunctions.GenerateAINoiseAtPositionEx instead!")]` (`4_world/static/miscgameplayfunctions.c:2010-2021`);
   new `static void GenerateAINoiseAtPositionEx(notnull Object source, float lifeTime, NoiseParams noiseParams)`
-  calls `AddNoiseTarget(source.GetPosition(), lifeTime, noiseParams)` on the server (`:1886-1896`; used by `flaresimulation.c:138`).
+  calls `AddNoiseTarget(source.GetPosition(), lifeTime, noiseParams)` on the server (`:1824-1834`; used by `flaresimulation.c:138`).
 
 Before 1.30: vanilla multiplied noise by `NoiseAIEvaluate.GetNoiseReduction(g_Game.GetWeather())`
 (1.29: `dayzplayerimplement.c:3344`, `zombiebase.c:594`, `miscgameplayfunctions.c:1760`). Porting: remove that
@@ -256,8 +257,8 @@ daytime, shooting, coast, waterDepth, overcast, fog, snowfall, caveSmall, caveBi
 | `GetGame().CreateSoundOnObject(...)` returns EffectSound | Returns `SoundOnVehicle` entity (`game.c:692`; class `3_game/entities/soundonvehicle.c:1-4`) — legacy, prefer SEffectManager |
 | `DynamicMusicPlayer.PlayTrack("...")` | Private; public API is `SetCategory(...)` + `RegisterDynamicLocation` (`dynamicmusicplayer.c:511,272,289`) |
 | `OnSoundEvent` override on ItemBase | Does not exist — use ItemSoundHandler or PlaySoundSet manually |
-| Only one synced play per tick via StartItemSoundServer | Before 1.30 only. 1.30 batches all plays of a frame into one RPC (`itembase.c:4436-4479`) |
-| Item sounds arrive in `OnVariablesSynchronized` / via `m_SoundSyncPlay` | Before 1.30 only. 1.30: `ItemBase.OnRPC` `RPC_ITEM_SOUND_PLAY/STOP` (`itembase.c:2796-2825`) |
+| Only one synced play per tick via StartItemSoundServer | Before 1.30 only. 1.30 batches all plays of a frame into one RPC (`itembase.c:4440-4483`) |
+| Item sounds arrive in `OnVariablesSynchronized` / via `m_SoundSyncPlay` | Before 1.30 only. 1.30: `ItemBase.OnRPC` `RPC_ITEM_SOUND_PLAY/STOP` (`itembase.c:2800-2829`) |
 | `GetNoiseReductionEx` / `GetNoiseReductionByWeatherEx` are the replacement | Both are `[Obsolete]` too (`sensesaievaluate.c:18`, `weather.c:407`); dampening is native (`AIParams`) |
 | Multiply `AddNoise` by `GetEnvironmentNoiseReduction(pos)` | It is an absolute reduction the engine already applies (`noise.c:12-13`) — do not feed it back |
 | Per-sound master volume API | Only `SetVolumeRelative(0..1)` per wave; shader `volume` is fixed config |
@@ -295,7 +296,7 @@ g_Game.GetNoiseSystem().AddNoiseTarget(pos, 30, np, 2.0);
 ```
 1.30: do not multiply that `2.0` by a weather reduction you computed in script — dampening is native.
 (For an entity source, `MiscGameplayFunctions.GenerateAINoiseAtPositionEx(obj, lifeTime, np)` does the
-same at `obj.GetPosition()`, `miscgameplayfunctions.c:1886-1896`.)
+same at `obj.GetPosition()`, `miscgameplayfunctions.c:1824-1834`.)
 
 **D. Music zone** — `g_Game.GetMission().GetDynamicMusicPlayer()` (`3_game/gameplay.c:752`) →
 `RegisterDynamicLocation(this, DynamicMusicLocationTypes.X, radius)` on spawn,
@@ -321,7 +322,7 @@ in `P:\scripts` / `P:\DZ`; the body above already states the 1.30 behaviour. `[E
 
 **What changes**
 
-- Item sounds: `StartItemSoundServer`/`StopItemSoundServer` now send `ERPCs.RPC_ITEM_SOUND_PLAY/STOP` (play batched per frame) handled in `ItemBase.OnRPC`; the sync vars are legacy (`itembase.c:4436-4503`, `:2796-2825`).
+- Item sounds: `StartItemSoundServer`/`StopItemSoundServer` now send `ERPCs.RPC_ITEM_SOUND_PLAY/STOP` (play batched per frame) handled in `ItemBase.OnRPC`; the sync vars are legacy (`itembase.c:4440-4507`, `:2800-2829`).
 - Native AI-noise attenuation; `AIParams` adds snowfall/fog/wind/sandstorm multipliers (`P:\DZ\data\aiconfigs\config.cpp:16-20`); read-only `NoiseSystem.GetEnvironmentNoiseReduction(pos)` (`3_game/noise.c:12-13`); all script weather-reduction helpers and `GenerateAINoiseAtPosition` obsolete (`…Ex` replacement takes an `Object`).
 - `IsHeadless()` / `IsHeadlessOrDedicatedServer()` (`game.c:1130,1136`) on several sound paths; `Object.PlaySoundSet` still uses `IsDedicatedServer()`.
 - `EffectSound` zeros volume at wave start when fade-in is set (`effectsound.c:549-555`).
@@ -329,10 +330,10 @@ in `P:\scripts` / `P:\DZ`; the body above already states the 1.30 behaviour. `[E
 - `DynamicMusicPlayerTimeOfDay` gains `Translate` (MORNING/NOON/AFTERNOON→DAY, EVENING→NIGHT) and `ToString`, and the player translates the current daytime with it (`dynamicmusicplayer.c:733,737`, `:1053-1096`); new `DynamicMusicPlayerRegistryNasdara` (the per-world registry mechanism itself predates 1.30).
 - Transmitters: `SOUND_BUNKER_STATIC_NOISE` / `IsTunedToBunkerFrequency()`.
 - `StaticObjectType` + `CUSTOM_PLAYER_MOVEMENT_SOUNDSETS` for vegetation step sounds.
-- Vehicles: horn moved to `VehicleHornComponent` on `Transport` (`GetVehicleHornComponent()`, `3_game/vehicles/transport.c:842`); horn sets are registered with `m_HornComponent.RegisterSound(VehicleHornMode.SHORT/LONG, "…_SoundSet")` (e.g. `inheritedcars/civiliansedan.c:24-25`); `CarScript.GenerateCarHornAINoise` is gone; `CarHorn*ActionInput` → `VehicleHorn*ActionInput`; crash-sound members moved from `CarScript` to `Transport` (api delta). `CarWheel.m_AttachSound/m_DetachSound` are gone — `CarWheel` registers `ITEM_ATTACH/DETACH` and `CarWheel_Ruined` `ITEM_CARWHEEL_EXPLOSION_*` with the item sound handler (`4_world/entities/core/inherited/inventoryitem.c:255-256,374-375`).
+- Vehicles: horn moved to `VehicleHornComponent` on `Transport` (`GetVehicleHornComponent()`, `3_game/vehicles/transport.c:851`); horn sets are registered with `m_HornComponent.RegisterSound(VehicleHornMode.SHORT/LONG, "…_SoundSet")` (e.g. `inheritedcars/civiliansedan.c:24-25`); `CarScript.GenerateCarHornAINoise` is gone; `CarHorn*ActionInput` → `VehicleHorn*ActionInput`; crash-sound members moved from `CarScript` to `Transport` (api delta). `CarWheel.m_AttachSound/m_DetachSound` are gone — `CarWheel` registers `ITEM_ATTACH/DETACH` and `CarWheel_Ruined` `ITEM_CARWHEEL_EXPLOSION_*` with the item sound handler (`4_world/entities/core/inherited/inventoryitem.c:255-256,374-375`).
 - `CombinationLock` sounds go through `ItemSoundHandler` (new `SoundConstants.ITEM_COMBINATION_LOCK_*` 30-35, `ITEM_DIGITAL_LOCK_*` 40-46, `ITEM_CARWHEEL_EXPLOSION_*` 50-51, `ITEM_ARMY_FLASHLIGHT_*` 60-61, `constants.c:444-463`).
 - `SurfaceInfo` exposes sound-set names: `GetStepSoundSetName`, `GetWheelSoundSetName`, `GetWheelContactSoundSetName`, `GetVehicleDustSoundSetName`, `GetCloudEffectSoundSetName`, `GetGroundEffectSoundSetName` (`3_game/surfaceinfo.c:50-67`).
-- `ItemBase.m_LockSoundSet` field is gone; the value lives in `ItemBaseType.m_LockSoundSet` and `ItemBase.GetLockSoundSet()` still returns it (`itembase.c:3822-3825`, `itembasetype.c:49,97`).
+- `ItemBase.m_LockSoundSet` field is gone; the value lives in `ItemBaseType.m_LockSoundSet` and `ItemBase.GetLockSoundSet()` still returns it (`itembase.c:3826-3829`, `itembasetype.c:49,97`).
 - `[CHANGELOG 1.30]` `SoundHitType` / `GetSoundHitType()` (T189758): **not** present anywhere in `P:\scripts` on 164078 (`3_game/surfaceinfo.c` has no such member). Do not call them.
 
 **What breaks for a 1.29 audio / stealth mod**
@@ -358,3 +359,32 @@ in `P:\scripts` / `P:\DZ`; the body above already states the 1.30 behaviour. `[E
 - [ ] Custom bushes: `VegetationSounds` on the `CfgNonAIVehicles` class, or the `CUSTOM_PLAYER_MOVEMENT_SOUNDSETS` macro.
 - [ ] Do not call `SurfaceInfo.GetSoundHitType`.
 - [ ] Load `references/sonido-deep-dive.md` for player-event and NoiseSystem signature tables.
+
+**DayZ 1.30.164200 changes (patch of 2026-10-21)**
+
+Static reading of `P:\scripts` / `P:\DZ` 1.30.164200 plus the official notes; nothing here was measured in game. No
+sound API changed in the script diff (`SEffectManager`, `EffectSound`, `ItemSoundHandler`, `NoiseSystem`, horn component).
+- **Synced particle that plays a sound** — new vanilla pattern: `FishingSplashEffecter : ParticleEffecter` returns
+  `FishingSplashEffect : EffectParticleGeneral`, which plays `SEffectManager.PlaySound("Fishing_splash_SoundSet",
+  m_Position).SetAutodestroy(true)` from its `Event_OnEffectStarted` hook
+  (`4_world/classes/useractionscomponent/actions/continuous/actionfishingnew.c:462-486`; SoundSet
+  `P:\DZ\sounds\hpp\config.cpp:320216`). The server only creates the effecter (`SEffectManager.CreateParticleServer`,
+  `actionfishingnew.c:326`); the sound is played locally by each client when the synced particle starts — no RPC, no
+  server-side audio. Use it for "server event that everyone should see and hear" (recipe: `dayz-particles` →
+  `references/dayz-1-30-particles.md` §Server particle with a sound). Same shape as the 1.30 ceiling dust
+  (`4_world/classes/dust/dusteffectceilinghandler.c:116-131`).
+- **Dog hit sound** ("Dogs did not produce any sound when hit") was a config fix: the German shepherd got
+  `AnimEvents/Sounds/Pain { soundSet = "dog_Shepherd_Pain_SoundSet"; id = 6; }`
+  (`P:\DZ\animals_takistan\canis_familiaris_german_shepherd\config.cpp:489-494`; SoundSet
+  `P:\DZ\sounds_takistan\config.cpp:327713`). A custom animal whose hits are silent needs that `AnimEvents/Sounds`
+  entry, not script.
+- **Motorbike horn quieter** (config): `*_Horn_SoundSet` `volumefactor` 0.6 → 0.5, `*_Horn_Short_SoundSet` 0.8 → 0.4
+  (`P:\DZ\sounds\hpp\config.cpp:386288`, `:386297`, `:386851`, `:386860`), short-horn shaders `volume` 1.4 → 0.9
+  (`:317961`, `:318877`); `Motorbike_02_Engine_Ext_Broken_SoundSet` replaced by `_High` / `_Low` (`:386435`, `:386443`).
+  Detail: `dayz-motorbikes` §DayZ 1.30.164200 changes.
+- **Other config-only sound data**: about 180 new sound classes (Nasdara/Sakhal steps and falls, the dog pain set) and
+  43 SoundSets whose `soundShaders[]` changed (e.g. infected `runProne_*_Zmb_Soundset` now use `*_Char_SoundShader`
+  layers, `:375274` onwards). Mods that inherit or reuse those vanilla SoundSets inherit the new shaders.
+- **Known issues** [reported: BI 1.30.164200 notes]: no audio for the "Wash Head" and "Wet Clothes" actions; no
+  footstep audio when walking on top of walls or small props. These are vanilla bugs on 164200 — do not debug a mod
+  for them.

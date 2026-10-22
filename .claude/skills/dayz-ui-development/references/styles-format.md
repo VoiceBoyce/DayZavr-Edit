@@ -175,10 +175,13 @@ Highlights per type (full inventory in the styles file itself):
 on the style, so the widget's own `color` decides the tint.
 
 **Where vanilla uses it:** only on the two action-cursor **GridSpacers** in `day_z_hud.layout` —
-`GridSpacerWidgetClass ActionTargetsCursorWidget` (`style ActionWidget` at `:2287`, `color 0.3137
-0.3137 0.3137 0.6275`) and `GridSpacerWidgetClass ItemActions` (`:3859`). Their rows (`item` `:2294`,
-`interact` `:2477`, `continuous_interact` `:2755`, `single` `:3033`, `continuous` `:3249` and the
-`ia_*` twins) became plain `PanelWidgetClass` without a style. Before 1.30: each row was an
+the `GridSpacerWidgetClass` named `ActionTargetsCursorWidget` (`style ActionWidget` at `:2417`, `color 0.314
+0.314 0.314 0.627`) and the one named `ItemActions` (`style` at `:4077`). Their rows (`item` `:2424`,
+`interact` `:2617`, `continuous_interact` `:2910`, `single` `:3203`, `continuous` `:3431` and the
+`ia_*` twins) became plain `PanelWidgetClass` without a style. (Line numbers and colours are
+1.30.164200's: that patch re-saved the file in GUID form, `GridSpacerWidgetClass "{…}" { Name "…"`, and
+rounded colours to 3 decimals; on 1.30.164078 the lines were `:2287`, `:3859`, `:2294`… and the colour
+`0.3137 0.3137 0.3137 0.6275`.) Before 1.30: each row was an
 `ImageWidgetClass` with `imageTexture "{E262CF82FD5DFF31}Gui/textures/linear_gradient.edds"` (1.29:
 `day_z_hud.layout:2292-2307`) and the GridSpacer had no style.
 *(Corrected 2026-10-15: the Exp-era text said each row is a PanelWidget styled `ActionWidget`, and

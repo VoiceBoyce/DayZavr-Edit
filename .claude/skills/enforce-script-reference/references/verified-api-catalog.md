@@ -120,6 +120,10 @@ if (fh) {
     CloseFindFile(fh);
 }
 ```
+1.30: the call shape is unchanged (`1_core\proto\ensystem.c:520-522`), but what it lists is not. On 1.30.164078 a
+`$profile:` or absolute `dir` listed the server working folder instead (measured on 1.30.164078, this machine);
+1.30.164200 fixes it per BI [reported: BI 1.30.164200 notes], not re-measured. Enumerate behind a sentinel-file
+probe with a fallback: `references/dayz-1-30-enforce-script.md` §8.7.
 
 ### REST API (verified production use)
 ```
@@ -452,14 +456,14 @@ A failed write is not harmless. When `SetClassVar` returns `0`, abort the oracle
 
 ## DayZ 1.30 — engine / inventory catalog
 
-Re-verified on 1.30.164078 (`P:\scripts`). Before 1.30 this catalog did not list these APIs.
+Re-verified on 1.30.164078 (`P:\scripts`); corrected for 1.30.164200 on 2026-10-21. Before 1.30 this catalog did not list these APIs.
 
 - Inventory takes: `TakeEntityToCargo` / `TakeEntityToCargoEx` / `TakeEntityAsAttachment` / `TakeEntityAsAttachmentEx` are `[Obsolete]` (`3_game\systems\inventory\inventory.c:1345-1386`). Use `TakeEntityToTargetCargo` `:1077`, `TakeEntityToTargetCargoEx` `:1084`, `TakeEntityAsTargetAttachmentEx` `:1100`, `TakeEntityAsTargetAttachment` `:1142`; on entities `Predictive/Local/ServerTakeEntityToTargetAttachmentEx` (`3_game\entities\entityai.c:2020-2033`).
 - Third person: `World.Is3rdPersonDisabled()` is `[Obsolete]` (`3_game\global\world.c:291-292`); `GetThirdPersonViewMode()` (`:177`) returns `ThirdPersonMode` {`DISABLED`,`ENABLED`,`VEHICLES_ONLY`} (`:301-306`). Before 1.30: the bool getter.
 - Weather noise: `Weather.GetNoiseReductionByWeather()` is **not deleted** but `[Obsolete]` (`3_game\weather.c:454-455`) → `GetNoiseReductionByWeatherEx(notnull Object object)` (`:407-408`), itself `[Obsolete]` ("Kept for HUD and old mods") because AI damping is native AIParams. The only remaining caller is the obsolete wrapper `NoiseAIEvaluate.GetNoiseReductionEx` (`4_world\static\sensesaievaluate.c:18-23`).
-- `vector.Cross(vector v)` is a script method with a body, not `proto native` (`1_core\proto\enconvert.c:239-246`); `vector.SanitizeMinsMaxs` `:542`.
+- `vector.Cross(vector v)` existed only in 1.30.164078 (a script method, `1_core\proto\enconvert.c:239-246` on that build) and was removed in 1.30.164200: `a.Cross(b)` no longer compiles. The cross product is the `*` operator between two vectors (vanilla `(forward * up)`, `4_world\classes\environment\environment.c:696-697`; `vector.Perpend()` = `value * vector.Up`, `enconvert.c:222-224`), valid on 1.29 and every 1.30 build. `vector.SanitizeMinsMaxs` `:521`.
 - `array<T>.Slice(int from, int to)` inclusive-`to` (`1_core\proto\enscript.c:720-727`).
-- `typename.EnumFlagsToString` / `EnumTools.EnumFlagsToString` (`enconvert.c:614`, `:704`).
+- `typename.EnumFlagsToString` / `EnumTools.EnumFlagsToString` (`enconvert.c:593`, `:683`).
 - `class DoOnce` (`3_game\doonce.c:1`); `DayZPlayer.IsFirstRenderFrame()` (`3_game\dayzplayer.c:1186-1189`). Not new: `Entity.DisableSimulation` / `GetIsSimulationDisabled` (`3_game\entities\entity.c:3-6`, same on 1.29).
 - `CGame.IsHeadless()` / `IsHeadlessOrDedicatedServer()` (`3_game\global\game.c:1130`, `:1136`); `CreateObject(…, bool objSpawner = false)` (`:691`); `GetSurfaceInfoOn/UnderObject/UnderObjectByBone` (`:1171-1173`).
 - `GAME_STORAGE_VERSION = 144` (`3_game\global\game.c:5`; 1.29 was `142` at the same line). `OnCEIterate` replaces `OnCEUpdate` (`3_game\entities\entityai.c:3904`, `:4924-4925`).
