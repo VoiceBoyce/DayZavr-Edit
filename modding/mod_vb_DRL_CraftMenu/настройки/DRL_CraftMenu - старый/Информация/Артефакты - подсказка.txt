@@ -1,0 +1,240 @@
+КАК ЧИТАТЬ ЭФФЕКТЫ
+Все цифры с «каждые 3 сек» действуют постоянно, пока артефакт при себе.
+Вода / сытость / здоровье / шок / кровь указаны в очках (ед.).
+  Вода и сытость: 0–5000 очков (в ХУД — 0–100%).
+  Здоровье и шок: 0–100 очков. Кровь: 0–5000 очков.
+Стамина — проценты от текущей.
+Шансы кровотечения проверяются раз в 10 сек. «Множитель ×N» изменяет эффекты
+того же стата от других надетых артефактов, сам по себе ничего не даёт.
+<===
+Артефакт - Мозг / OOTS_ART_Braen
+Рецепт: BRDK_Coal + BRDK_Iron + MSFZ_RuneStone_Day
+Эффект: эффектов нет.
+
+Артефакт - Луна / OOTS_ART_svet
+Рецепт: OOTS_ART_Braen + MSFZ_Crystal_Gold + BRDK_Gold_Sand + MSFZ_RuneStone_Day
+Эффект: каждые 3 сек −0.25 ед. здоровья, −2 ед. воды, −1 ед. сытости, −1 ед. крови.
+
+Артефакт - Кристалл / OOTS_ART_Crustal
+Рецепт: OOTS_ART_svet + MSFZ_Crystal_Stone + MSFZ_RuneStone_IceSmall
+Эффект: каждые 3 сек −2 ед. воды и −2 ед. сытости; 20% шанс добавить кровотечение (раз в 10 сек).
+
+Артефакт - Капля / OOTS_ART_Drop
+Рецепт: OOTS_ART_Crustal + BRDK_Gold_Sand + MSFZ_RuneStone_Bereza
+Эффект: каждые 3 сек −0.2 ед. здоровья, −1 ед. воды, −1 ед. сытости.
+
+Артефакт - Пламя / OOTS_ART_Plamya
+Рецепт: OOTS_ART_Drop + BRDK_Sulfur + BRDK_Coal + MSFZ_RuneStone_FireSmall
+Эффект: каждые 3 сек −2 ед. здоровья и −50 ед. воды; 30% шанс залечить кровотечение (раз в 10 сек).
+
+Артефакт - Глаз / OOTS_ART_Glaz
+Рецепт: OOTS_ART_Plamya + MSFZ_Crystal_Amethyst + MSFZ_RuneStone_Orel
+Эффект: каждые 3 сек −0.75 ед. здоровья и −15 ед. шока; множитель ×0.25 к воде и сытости.
+
+Артефакт - Каменный цветок / OOTS_ART_kameniy_cvetok
+Рецепт: OOTS_ART_Glaz + MSFZ_Crystal_Stone + BRDK_Nephrite + MSFZ_Ent_head + MSFZ_RuneStone_Solnce
+Эффект: каждые 3 сек −0.5 ед. здоровья, −1 ед. воды, −2 ед. сытости, −20 ед. шока; множитель ×2 к крови; 10% шанс добавить кровотечение (раз в 10 сек).
+
+Артефакт - Медуза / OOTS_ART_Medusa
+Рецепт: OOTS_ART_kameniy_cvetok + BRDK_Nephrite_Sand + MSFZ_RuneStone_Zmey
+Эффект: множитель ×0.1 к воде, сытости и крови (почти гасит эффекты этих статов от других артефактов).
+
+Артефакт - Морской еж / OOTS_ART_SeaUrchin
+Рецепт: OOTS_ART_Medusa + BRDK_Titanium + MSFZ_RuneStone_Osa
+Эффект: каждые 3 сек −0.35 ед. здоровья, −2 ед. воды, −0.5 ед. сытости, −15 ед. шока, −2 ед. крови.
+
+Артефакт - Ломоть мяса / OOTS_ART_myaso
+Рецепт: OOTS_ART_SeaUrchin + MutantRicarSteakMeat + MSFZ_RuneStone_Zayac
+Эффект: каждые 3 сек +0.5 ед. здоровья, но −2.5 ед. воды, −2.5 ед. сытости, −0.5 ед. крови.
+
+Артефакт - Колобок / OOTS_ART_kolobok
+Рецепт: OOTS_ART_myaso + MSFZ_Spider_Lapka + MSFZ_RuneStone_Cherepaha
+Эффект: каждые 3 сек −0.75 ед. здоровья, −1 ед. воды, −0.8 ед. сытости, −5 ед. шока, −1 ед. крови.
+
+Артефакт - Батарейка / OOTS_ART_Battery
+Рецепт: OOTS_ART_kolobok + BRDK_Bronze + BRDK_Titanium + MSFZ_RuneStone_StormSmall
+Эффект: каждые 3 сек −15 ед. воды, −15 ед. сытости; стамина +5% от текущей.
+
+Артефакт - Пламя II / OOTS_ART_Plamya2
+Рецепт: OOTS_ART_Plamya + OOTS_ART_Braen + BRDK_Coal + BRDK_Sulfur + MSFZ_RuneStone_Fire
+Эффект: каждые 3 сек −0.25 ед. здоровья, −25 ед. воды, +1.5 ед. крови.
+
+Артефакт - Глаз II / OOTS_ART_Glaz2
+Рецепт: OOTS_ART_Glaz + OOTS_ART_myaso + MSFZ_Crystal_Stone + MSFZ_Zanoza_eye + MSFZ_RuneStone_Orel
+Эффект: каждые 3 сек −0.25 ед. здоровья, +2 ед. сытости, +15 ед. шока; множитель ×0.1 к воде; 20% шанс залечить кровотечение (раз в 10 сек).
+
+Артефакт - Кристалл II / OOTS_ART_Crustal2
+Рецепт: OOTS_ART_Crustal + OOTS_ART_Medusa + MSFZ_Crystal_Pyrite + BRDK_Silver_Sand + MSFZ_RuneStone_Ice
+Эффект: каждые 3 сек −0.1 ед. здоровья, +1 ед. воды, +1 ед. сытости; 20% шанс залечить кровотечение (раз в 10 сек).
+
+Артефакт - Капля II / OOTS_ART_Drop2
+Рецепт: OOTS_ART_Drop + OOTS_ART_svet + BRDK_Silver_Sand + BRDK_Gold_Sand + MSFZ_RuneStone_Bereza
+Эффект: каждые 3 сек −0.2 ед. здоровья, +1 ед. воды, +1 ед. сытости.
+
+Артефакт - Каменный цветок II / OOTS_ART_kameniy_cvetok2
+Рецепт: OOTS_ART_kameniy_cvetok + OOTS_ART_SeaUrchin + BRDK_Nephrite + MSFZ_Crystal_Stone + MSFZ_Ent_head_medium + MSFZ_RuneStone_Solnce
+Эффект: каждые 3 сек +0.5 ед. здоровья, но −50 ед. воды, −65 ед. сытости, −20 ед. шока, −25 ед. крови; 5% шанс добавить кровотечение (раз в 10 сек).
+
+Артефакт - Батарейка III / OOTS_ART_Battery3
+Рецепт: OOTS_ART_Battery + OOTS_ART_Mohovik + BRDK_Sulfur + BRDK_Bronze + MSFZ_RuneStone_Storm
+Эффект: каждые 3 сек −5 ед. воды, −5 ед. сытости, −10 ед. шока; множитель ×0.25 к крови; 5% шанс добавить кровотечение (раз в 10 сек); стамина +15% от текущей.
+
+Артефакт - Светляк / OOTS_ART_Light
+Рецепт: OOTS_ART_myaso + OOTS_ART_Medusa + MSFZ_Crystal_Gold + MSFZ_RuneStone_Solnce
+Эффект: каждые 3 сек −0.25 ед. воды, +0.5 ед. сытости, +0.5 ед. крови; 5% шанс залечить кровотечение (раз в 10 сек).
+
+Артефакт - Клякса / OOTS_ART_Klyaksa
+Рецепт: OOTS_ART_Drop2 + OOTS_ART_Braen + MSFZ_Crystal_Obsidian + SFP_Shum_jaw + MSFZ_RuneStone_Zmey
+Эффект: каждые 3 сек −0.5 ед. здоровья, +40 ед. воды, +25 ед. сытости, +15 ед. шока; 10% шанс залечить кровотечение (раз в 10 сек).
+
+Артефакт - Моховик / OOTS_ART_Mohovik
+Рецепт: OOTS_ART_Battery + OOTS_ART_kolobok + BRDK_Bronze + BRDK_Iron + MSFZ_RuneStone_Storm
+Эффект: каждые 3 сек −3 ед. воды, −3 ед. сытости, +1 ед. крови; 5% шанс добавить кровотечение (раз в 10 сек).
+
+Артефакт - Ангел / OOTS_ART_Angel
+Рецепт: OOTS_ART_svet + OOTS_ART_myaso + OOTS_ART_Braen + BRDK_Silver + MSFZ_Crystal_Silver + MSFZ_RuneStone_Bog
+Эффект: каждые 3 сек −5 ед. воды; множитель ×0.1 к сытости.
+
+Артефакт - Темный ангел / OOTS_ART_AngelFool
+Рецепт: OOTS_ART_svet + OOTS_ART_myaso + MSFZ_Crystal_Amethyst + MSFZ_Ricar_Head + MSFZ_RuneStone_Orel
+Эффект: каждые 3 сек −3 ед. здоровья, −10 ед. воды, −10 ед. сытости, −2.5 ед. крови.
+
+Артефакт - Вспышка / OOTS_ART_vspishka
+Рецепт: OOTS_ART_Plamya + OOTS_ART_svet + BRDK_Sulfur + BRDK_Coal + MSFZ_RuneStone_Fire
+Эффект: каждые 3 сек −2.5 ед. здоровья, −10 ед. воды, −10 ед. сытости, −3 ед. крови; 10% шанс добавить кровотечение (раз в 10 сек).
+
+Артефакт - Плазма / OOTS_ART_Plasma
+Рецепт: OOTS_ART_Crustal + OOTS_ART_svet + MSFZ_Crystal_Blue + MSFZ_RuneStone_Fire
+Эффект: каждые 3 сек −2 ед. здоровья, −25 ед. воды, −25 ед. сытости; стамина −15% от текущей.
+
+Артефакт - Бенгальский огонь / OOTS_ART_Sparkler
+Рецепт: OOTS_ART_Plamya + OOTS_ART_Battery + MSFZ_Crystal_Pink + MSFZ_RuneStone_Fire
+Эффект: каждые 3 сек −1 ед. здоровья, −15 ед. воды, −15 ед. сытости, +20 ед. шока, +1 ед. крови.
+
+Артефакт - Снежинка / OOTS_ART_snejinka
+Рецепт: OOTS_ART_Battery3 + OOTS_ART_Braen + MSFZ_Crystal_Blue + MSFZ_RuneStone_Ice
+Эффект: каждые 3 сек −3 ед. здоровья, −10 ед. воды, −10 ед. сытости; 20% шанс добавить кровотечение (раз в 10 сек); стамина +20% от текущей.
+
+Артефакт - Грави / OOTS_ART_Gravi
+Рецепт: OOTS_ART_Crustal + OOTS_ART_Medusa + MSFZ_Crystal_Mithril + MSFZ_RuneStone_Storm
+Эффект: множитель ×2.5 к воде и ×2.5 к сытости.
+
+Артефакт - Выверт / OOTS_ART_vivert
+Рецепт: OOTS_ART_Crustal2 + OOTS_ART_Gravi + BRDK_Titanium_Sand + MSFZ_RuneStone_Storm
+Эффект: множитель ×2.5 к воде и ×0.5 к сытости.
+
+Артефакт - Ночная звезда / OOTS_ART_NightStar
+Рецепт: OOTS_ART_Glaz + OOTS_ART_svet + MSFZ_Crystal_Blue + MSFZ_Crystal_Gold + MSFZ_RuneStone_Solnce
+Эффект: множитель ×0.5 к воде и ×2.5 к сытости.
+
+Артефакт - Колючка / OOTS_ART_Thorn
+Рецепт: OOTS_ART_Crustal + OOTS_ART_SeaUrchin + BRDK_Iron + SFP_Shipastiy_Teeth + MSFZ_RuneStone_Kaban
+Эффект: множитель ×0.2 к крови; 25% шанс добавить кровотечение (раз в 10 сек).
+
+Артефакт - Микроб / OOTS_ART_Mikrob
+Рецепт: OOTS_ART_Glaz2 + OOTS_ART_kolobok + MutantTrollSteakMeat + SFP_Piyavka_Yazik + MSFZ_RuneStone_Osa
+Эффект: каждые 3 сек +0.5 ед. здоровья; множитель −1.25 к воде и ×0.5 к крови; 10% шанс добавить кровотечение (раз в 10 сек); стамина +10% от текущей.
+
+Артефакт - Пламя III / OOTS_ART_Plamya3
+Рецепт: OOTS_ART_Plamya2 + OOTS_ART_vspishka + BRDK_Rubin + BRDK_Sulfur + MSFZ_RuneStone_Fire
+Эффект: каждые 3 сек +0.35 ед. здоровья, −2.5 ед. воды, +5 ед. крови; 50% шанс залечить кровотечение (раз в 10 сек).
+
+Артефакт - Глаз III / OOTS_ART_Glaz3
+Рецепт: OOTS_ART_Glaz2 + OOTS_ART_kolobok + MSFZ_Crystal_Obsidian + SFP_tenevnik_eye + MSFZ_RuneStone_Tigr
+Эффект: каждые 3 сек +0.25 ед. здоровья, −50 ед. воды, +10 ед. сытости, +25 ед. шока; 75% шанс залечить кровотечение (раз в 10 сек).
+
+Артефакт - Кристалл III / OOTS_ART_Crustal3
+Рецепт: OOTS_ART_Crustal2 + OOTS_ART_Plasma + OOTS_ART_Sparkler + MSFZ_Crystal_Pyrite + BRDK_Silver_Sand + MSFZ_RuneStone_Ice
+Эффект: каждые 3 сек +50 ед. крови; 20% шанс добавить кровотечение (раз в 10 сек).
+
+Артефакт - Капля III / OOTS_ART_Drop3
+Рецепт: OOTS_ART_Drop2 + OOTS_ART_Plamya2 + BRDK_Gold_Sand + MSFZ_RuneStone_Bereza
+Эффект: каждые 3 сек +0.5 ед. здоровья, +5 ед. воды, +5 ед. сытости, +5 ед. крови.
+
+Артефакт - Каменный цветок III / OOTS_ART_kameniy_cvetok3
+Рецепт: OOTS_ART_kameniy_cvetok2 + OOTS_ART_izolator + MSFZ_Crystal_Pink + BRDK_Nephrite + MSFZ_Ent_head_hard + MSFZ_RuneStone_Solnce
+Эффект: каждые 3 сек +0.7 ед. здоровья, но −12.5 ед. воды, −12.5 ед. сытости, −15 ед. шока, −5 ед. крови; 10% шанс залечить кровотечение (раз в 10 сек); стамина +3.5% от текущей.
+
+Артефакт - Аномальное растение / OOTS_ART_Flower
+Рецепт: OOTS_ART_Drop3 + OOTS_ART_Braen + MSFZ_Crystal_Pink + MSFZ_RuneStone_Solnce
+Эффект: каждые 3 сек +20 ед. воды, +20 ед. сытости, +20 ед. крови; стамина +10% от текущей.
+
+Артефакт - Мамины бусы II / OOTS_ART_busy2
+Рецепт: OOTS_ART_Crustal3 + OOTS_ART_Thorn + OOTS_ART_Mikrob + BRDK_Coal + BRDK_Sulfur + SFP_BearZMB_Kogot + MSFZ_RuneStone_Medved
+Эффект: каждые 3 сек +0.5 ед. здоровья, +50 ед. шока, +1.5 ед. крови; 25% шанс залечить кровотечение (раз в 10 сек).
+
+Артефакт - Кровь камня / OOTS_ART_krov_kamnya
+Рецепт: OOTS_ART_Crustal3 + OOTS_ART_Medusa + BRDK_Rubin + BRDK_Iron + SFP_MutoWolf_kogot + MSFZ_RuneStone_Wolf
+Эффект: каждые 3 сек +2 ед. крови; множитель ×2 к крови; 20% шанс залечить кровотечение (раз в 10 сек).
+
+Артефакт - Огенный шар / OOTS_ART_FireBall
+Рецепт: OOTS_ART_Plamya3 + OOTS_ART_Light + BRDK_Coal + BRDK_Sulfur + MSFZ_RuneStone_Fire
+Эффект: каждые 3 сек −1 ед. здоровья, −25 ед. воды, −25 ед. сытости; 80% шанс залечить кровотечение (раз в 10 сек).
+
+Артефакт - Огонь / OOTS_ART_Burn
+Рецепт: OOTS_ART_Plamya2 + OOTS_ART_Light + BRDK_Coal + MSFZ_RuneStone_Fire
+Эффект: каждые 3 сек +0.75 ед. здоровья, но −10 ед. воды, −10 ед. сытости, +1.5 ед. крови.
+
+Артефакт - Видоизменненный изолятор / OOTS_ART_izolator
+Рецепт: OOTS_ART_AngelFool + OOTS_ART_Thorn + MSFZ_Crystal_Stone + BRDK_Nephrite + MSFZ_Zanoza_stick + MSFZ_RuneStone_Ice
+Эффект: каждые 3 сек −50 ед. крови; 50% шанс залечить кровотечение (раз в 10 сек).
+
+Артефакт - Демонический глаз / OOTS_ART_DemonEye
+Рецепт: OOTS_ART_Glaz3 + OOTS_ART_kolobok + MSFZ_Crystal_Obsidian + MSFZ_RuneStone_Tigr
+Эффект: каждые 3 сек +0.6 ед. здоровья, −25 ед. шока; 50% шанс залечить кровотечение (раз в 10 сек); стамина −20% от текущей.
+
+Артефакт - Пузырь / OOTS_ART_puzir
+Рецепт: OOTS_ART_Drop3 + OOTS_ART_Klyaksa + BRDK_Silver_Sand + MSFZ_Crystal_Blue + MSFZ_RuneStone_Bereza
+Эффект: каждые 3 сек +25 ед. воды, −35 ед. сытости, +1 ед. крови; множитель ×0.25 к здоровью; стамина −10% от текущей.
+
+Артефакт - Кровь камня / OOTS_ART_BloodStone_New
+Рецепт: OOTS_ART_CrustalThorn + OOTS_ART_Medusa + BRDK_Rubin + MSFZ_RuneStone_Wolf
+Эффект: каждые 3 сек −10 ед. воды, −1.5 ед. крови; стамина −5% от текущей.
+
+Артефакт - Сияние леса / OOTS_ART_ShineOfTheForest
+Рецепт: OOTS_ART_snejinka + OOTS_ART_NightStar + BRDK_Nephrite_Sand + MSFZ_Crystal_Stone + MSFZ_Ent_head_medium + MSFZ_RuneStone_Bereza
+Эффект: каждые 3 сек −3 ед. воды, −3 ед. сытости, +10 ед. крови; стамина +15% от текущей.
+
+Артефакт - Кристальная колючка / OOTS_ART_CrustalThorn
+Рецепт: OOTS_ART_Crustal2 + OOTS_ART_Thorn + BRDK_Iron + MSFZ_Crystal_Stone + MSFZ_RuneStone_Kaban
+Эффект: каждые 3 сек −20 ед. шока; множитель ×5 к крови; 5% шанс добавить кровотечение (раз в 10 сек); стамина −10% от текущей.
+
+Артефакт - Золотая рыбка / OOTS_ART_ribka
+Рецепт: OOTS_ART_Medusa + OOTS_ART_Light + BRDK_Gold + MSFZ_Crystal_Gold + MSFZ_RuneStone_Bog
+Эффект: каждые 3 сек +0.25 ед. здоровья; множитель ×2 к здоровью; стамина −10% от текущей.
+
+Артефакт - Лунный свет / OOTS_ART_MoonLight
+Рецепт: OOTS_ART_DemonEye + OOTS_ART_Plasma + MSFZ_Crystal_Silver + BRDK_Silver + MSFZ_RuneStone_Ice
+Эффект: каждые 3 сек −1 ед. здоровья, −30 ед. воды, +30 ед. сытости, −15 ед. шока, −2.5 ед. крови.
+
+Артефакт - Компас / OOTS_ART_Compas
+Рецепт: OOTS_ART_Glaz3 + OOTS_ART_Plamya3 + OOTS_ART_kameniy_cvetok3 + OOTS_ART_Braen + MSFZ_Crystal_Mithril + BRDK_Iron + MSFZ_RuneStone_Puti
+Эффект: каждые 3 сек +1.5 ед. здоровья, +250 ед. воды, +250 ед. сытости, +250 ед. крови, −30 ед. шока; гарантированно залечивает одно кровотечение (раз в 10 сек).
+
+Артефакт - Демоническое сердце / OOTS_ART_DevelHert
+Рецепт: OOTS_ART_Crustal3 + OOTS_ART_Drop3 + OOTS_ART_Battery3 + MSFZ_Crystal_Obsidian + BRDK_Rubin + SFP_Trupojor_Kogot + MSFZ_RuneStone_Medved
+Эффект: каждые 3 сек −10 ед. здоровья, но +100 ед. воды, +100 ед. сытости, +100 ед. крови, +15 ед. шока.
+
+Артефакт - Темная душа / OOTS_ART_DarkSoul
+Рецепт: OOTS_ART_kameniy_cvetok3 + OOTS_ART_MoonLight + MSFZ_Crystal_Obsidian + BRDK_Coal + SFP_MozgoTrasRed_ear + MSFZ_RuneStone_Chelovek
+Эффект: каждые 3 сек +0.5 ед. здоровья, но −250 ед. воды, −250 ед. сытости, −25 ед. крови, −15 ед. шока.
+
+Артефакт - Видоизменненный штурвал / OOTS_ART_shturval
+Рецепт: OOTS_ART_kolobok + OOTS_ART_DemonEye + OOTS_ART_Sparkler + BRDK_Iron + BRDK_Titanium + SFP_MozgoTras_ear + MSFZ_RuneStone_Puti
+Эффект: каждые 3 сек −10 ед. здоровья; 35% шанс залечить кровотечение (раз в 10 сек).
+
+Артефакт - Нано клетка / OOTS_ART_NanoCell
+Рецепт: OOTS_ART_Angel + OOTS_ART_Battery3 + OOTS_ART_krov_kamnya + OOTS_ART_Mikrob + MSFZ_Crystal_Mithril + BRDK_Titanium + MSFZ_Troll_Hand + MSFZ_RuneStone_KladesPamyati
+Эффект: каждые 3 сек +3 ед. здоровья.
+
+Артефакт - Монолит / OOTS_ART_Monolit
+Рецепт: OOTS_ART_krov_kamnya + OOTS_ART_Crustal3 + OOTS_ART_kameniy_cvetok + OOTS_ART_Braen + MSFZ_Crystal_Damascus + MSFZ_Crystal_Mithril + MSFZ_RuneStone_Nasledie
+Эффект: каждые 3 сек +3 ед. здоровья.
+
+Артефакт - Сердце Оазиса / OOTS_ART_Oasis
+Рецепт: OOTS_ART_puzir + OOTS_ART_Flower + OOTS_ART_Drop3 + BRDK_Gold_Sand + MSFZ_Crystal_Stone + MSFZ_RuneStone_Bereza
+Эффект: каждые 3 сек +2.5 ед. здоровья, +15 ед. воды, +15 ед. сытости, +10 ед. шока, +10 ед. крови; 10% шанс залечить кровотечение (раз в 10 сек); стамина +15% от текущей.
+
+Артефакт - Пружина / OOTS_ART_Spring
+Рецепт: OOTS_ART_snejinka + OOTS_ART_ShineOfTheForest + OOTS_ART_vivert + BRDK_Iron + BRDK_Bronze + MSFZ_RuneStone_Tis
+Эффект: множитель ×1.2 к здоровью и ×2 к стамине.

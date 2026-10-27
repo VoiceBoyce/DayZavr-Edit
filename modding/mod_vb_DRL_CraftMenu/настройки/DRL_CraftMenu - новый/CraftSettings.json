@@ -1,0 +1,19 @@
+{
+    "EnableFreeMenu": 1,
+    "EnableFreeLearningMenu": 1,
+    "MaxQueueSlots": 2,
+    "FonImagePath": "set:drl_craft_work image:work",
+    "CraftFonImagePath": "set:drl_craft_recipemanust image:recipemanust",
+    "LearningFonImagePath": "set:drl_craft_learning_fon image:learning_fon",
+    "CraftSoundSet": "DRLCraft_Paper_SoundSet",
+    "LearningSoundSet": "DRLLearning_Study_SoundSet",
+    "WorkbenchFons": [
+        {
+            "WB_Name": "DRL_Craft_WB",
+            "FonWBImagePath": "set:drl_craft_work image:work"
+        }
+    ],
+    "AdminsID": [
+        "76561200715668795"
+    ]
+}

@@ -1,0 +1,9 @@
+[13:03:56] [INFO] === DRL CraftMenu Log Started ===
+[13:03:56] [INFO] Config Load started...
+[13:03:56] [INFO] Loaded CraftSettings.json OK
+[13:03:56] [INFO] Loaded CraftCategories.json OK (Categories: 10)
+[13:03:56] [INFO] Loaded CraftConfig.json OK (Recipes: 73)
+[13:03:56] [WARN] CraftLearningConfig.json not found. Default file created: $profile:\DRL_CraftMenu\CraftLearningConfig.json
+[13:03:56] [INFO] Config Load finished successfully.
+[13:06:12] [INFO] [DRL_PlayerLearningManager] Saved player data: 76561202007535715
+[13:06:12] [INFO] [DRL_PlayerLearningManager] Created new player file: $profile:\DRL_CraftMenu\Players\76561202007535715.json

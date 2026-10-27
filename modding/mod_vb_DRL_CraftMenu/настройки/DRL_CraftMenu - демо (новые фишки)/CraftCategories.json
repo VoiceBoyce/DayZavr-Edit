@@ -1,0 +1,259 @@
+[
+    {
+        "Name": "Все рецепты",
+        "Icon": "DRL_Core/Icon/drl_abstract-050.edds",
+        "ShowAll": 1,
+        "UseList": 0,
+        "ShowOnlyAvailableCraft": 0,
+        "ShowOnlyAvailableStudy": 0,
+        "CategoryFonImagePath": "set:drl_craft_work image:work",
+        "CategoryCraftFonImagePath": "set:drl_craft_recipemanust image:recipemanust",
+        "CategoryCraftSoundSet": "DRLCraft_SoundSet",
+        "List": []
+    },
+    {
+        "Name": "Детали и ингридиенты",
+        "Icon": "DRL_Core/Icon/drl_cog.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "set:drl_craft_work image:work",
+        "CategoryCraftFonImagePath": "set:drl_craft_recipemanu_part image:recipemanu_part",
+        "CategoryCraftSoundSet": "DRLCraft_Generic1_SoundSet",
+        "List": [
+            89,
+            90,
+            91
+        ]
+    },
+    {
+        "Name": "Кулинария",
+        "Icon": "DRL_Core/Icon/drl_barbecue.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "set:drl_craft_work image:work",
+        "CategoryCraftFonImagePath": "set:drl_craft_recipemanu_food image:recipemanu_food",
+        "CategoryCraftSoundSet": "DRLCraft_Food_SoundSet",
+        "List": [
+            10,
+            11
+        ]
+    },
+    {
+        "Name": "Обмундирование",
+        "Icon": "DRL_Core/Icon/drl_clothes.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "set:drl_craft_work image:work",
+        "CategoryCraftFonImagePath": "set:drl_craft_recipemanu_cloth image:recipemanu_cloth",
+        "CategoryCraftSoundSet": "DRLCraft_Clothing_SoundSet",
+        "List": [
+            1,
+            4,
+            7,
+            8,
+            16,
+            20,
+            26,
+            97,
+            98,
+            99,
+            100
+        ]
+    },
+    {
+        "Name": "Броня и защита",
+        "Icon": "DRL_Core/Icon/drl_armor-vest.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "set:drl_craft_work image:work",
+        "CategoryCraftFonImagePath": "set:drl_craft_recipemanu_armor image:recipemanu_armor",
+        "CategoryCraftSoundSet": "DRLCraft_Forge_SoundSet",
+        "List": [
+            2,
+            3,
+            5,
+            6,
+            84,
+            85,
+            86,
+            87,
+            88
+        ]
+    },
+    {
+        "Name": "Оружие",
+        "Icon": "DRL_Core/Icon/drl_ak47.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "set:drl_craft_work image:work",
+        "CategoryCraftFonImagePath": "set:drl_craft_recipemanu_wepon image:recipemanu_wepon",
+        "CategoryCraftSoundSet": "DRLCraft_Repair_SoundSet",
+        "List": [
+            9,
+            46,
+            60
+        ]
+    },
+    {
+        "Name": "Патроны",
+        "Icon": "DRL_Core/Icon/drl_ammo-box.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "set:drl_craft_work image:work",
+        "CategoryCraftFonImagePath": "set:drl_craft_recipemanu_wepon2 image:recipemanu_wepon2",
+        "CategoryCraftSoundSet": "DRLCraft_Generic2_SoundSet",
+        "List": [
+            36,
+            47,
+            48,
+            67,
+            68,
+            69,
+            93,
+            94
+        ]
+    },
+    {
+        "Name": "Акссесуары",
+        "Icon": "DRL_Core/Icon/drl_crosshair.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "set:drl_craft_work image:work",
+        "CategoryCraftFonImagePath": "set:drl_craft_recipemanu_wepon image:recipemanu_wepon",
+        "CategoryCraftSoundSet": "DRLCraft_Generic3_SoundSet",
+        "List": [
+            31,
+            32,
+            33,
+            35,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            70,
+            71,
+            72,
+            73,
+            92
+        ]
+    },
+    {
+        "Name": "Электроника",
+        "Icon": "DRL_Core/Icon/drl_battery-pack.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "set:drl_craft_work image:work",
+        "CategoryCraftFonImagePath": "set:drl_craft_recipemanu_electro image:recipemanu_electro",
+        "CategoryCraftSoundSet": "DRLCraft_Welding_SoundSet",
+        "List": [
+            15,
+            30,
+            34
+        ]
+    },
+    {
+        "Name": "Медицина",
+        "Icon": "DRL_Core/Icon/drl_bandage-roll.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "set:drl_craft_work image:work",
+        "CategoryCraftFonImagePath": "set:drl_craft_recipemanu_medical image:recipemanu_medical",
+        "CategoryCraftSoundSet": "DRLCraft_WaterMix_SoundSet",
+        "List": [
+            23,
+            24,
+            108
+        ]
+    },
+    {
+        "Name": "Транспорт",
+        "Icon": "DRL_Core/Icon/drl_car-wheel.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "set:drl_craft_work image:work",
+        "CategoryCraftFonImagePath": "set:drl_craft_recipemanu_parts2 image:recipemanu_parts2",
+        "CategoryCraftSoundSet": "DRLCraft_Avto_SoundSet",
+        "List": [
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            59,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81
+        ]
+    },
+    {
+        "Name": "Инструменты",
+        "Icon": "DRL_Core/Icon/drl_claw-hammer.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "set:drl_craft_work image:work",
+        "CategoryCraftFonImagePath": "set:drl_craft_recipemanu_part image:recipemanu_part",
+        "CategoryCraftSoundSet": "DRLCraft_Metal_SoundSet",
+        "List": [
+            12,
+            13,
+            14,
+            18,
+            21,
+            22,
+            25,
+            95,
+            101,
+            102,
+            103
+        ]
+    },
+    {
+        "Name": "Стройка",
+        "Icon": "DRL_Core/Icon/drl_brick-wall.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "set:drl_craft_work image:work",
+        "CategoryCraftFonImagePath": "set:drl_craft_recipemanu_build image:recipemanu_build",
+        "CategoryCraftSoundSet": "DRLCraft_HammerWood_SoundSet",
+        "List": [
+            19,
+            27,
+            28,
+            104,
+            105,
+            106,
+            107
+        ]
+    },
+    {
+        "Name": "Разное",
+        "Icon": "DRL_Core/Icon/drl_cardboard-box.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "set:drl_craft_work image:work",
+        "CategoryCraftFonImagePath": "set:drl_craft_recipemanust image:recipemanust",
+        "CategoryCraftSoundSet": "DRLCraft_SoundSet",
+        "List": [
+            17,
+            29,
+            96
+        ]
+    }
+]

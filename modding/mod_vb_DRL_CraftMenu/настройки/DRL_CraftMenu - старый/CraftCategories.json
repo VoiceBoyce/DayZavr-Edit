@@ -1,0 +1,193 @@
+[
+    {
+        "Name": "Все рецепты",
+        "Icon": "DRL_CraftMenu/UI/data/abstract-050.edds",
+        "ShowAll": 1,
+        "UseList": 0,
+        "CategoryFonImagePath": "DRL_CraftMenu/UI/data/fon1.edds",
+        "CategoryCraftFonImagePath": "DRL_CraftMenu/UI/data/fon2.edds",
+        "CategoryCraftSoundSet": "",
+        "List": []
+    },
+    {
+        "Name": "Материалы",
+        "Icon": "DRL_CraftMenu/UI/data/cardboard-box-closed.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "DRL_CraftMenu/UI/data/fon1.edds",
+        "CategoryCraftFonImagePath": "DRL_CraftMenu/UI/data/fon2.edds",
+        "CategoryCraftSoundSet": "DRLCraft_SoundSet",
+        "List": [
+            1
+        ]
+    },
+    {
+        "Name": "Электроника",
+        "Icon": "DRL_CraftMenu/UI/data/battery-pack-alt.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "DRL_CraftMenu/UI/data/fon1.edds",
+        "CategoryCraftFonImagePath": "DRL_CraftMenu/UI/data/fon2.edds",
+        "CategoryCraftSoundSet": "DRLCraft_SoundSet",
+        "List": [
+            15,
+            30
+        ]
+    },
+    {
+        "Name": "Инструменты",
+        "Icon": "DRL_CraftMenu/UI/data/build3.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "DRL_CraftMenu/UI/data/fon1.edds",
+        "CategoryCraftFonImagePath": "DRL_CraftMenu/UI/data/fon2.edds",
+        "CategoryCraftSoundSet": "DRLCraft_SoundSet",
+        "List": [
+            300,
+            301,
+			302,
+			303,
+			304,
+			305
+        ]
+    },
+    {
+        "Name": "Оружие",
+        "Icon": "DRL_CraftMenu/UI/data/ak47u.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "DRL_CraftMenu/UI/data/fon1.edds",
+        "CategoryCraftFonImagePath": "DRL_CraftMenu/UI/data/fon2.edds",
+        "CategoryCraftSoundSet": "DRLCraft_SoundSet",
+        "List": [
+            400,
+            401,
+			402
+        ]
+    },
+    {
+        "Name": "Боеприпасы",
+        "Icon": "DRL_CraftMenu/UI/data/ammo-box.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "DRL_CraftMenu/UI/data/fon1.edds",
+        "CategoryCraftFonImagePath": "DRL_CraftMenu/UI/data/fon2.edds",
+        "CategoryCraftSoundSet": "DRLCraft_SoundSet",
+        "List": [
+            500,
+            501,
+			502,
+			503
+        ]
+    },
+    {
+        "Name": "Обмундирование",
+        "Icon": "DRL_CraftMenu/UI/data/kevlar-vest.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "DRL_CraftMenu/UI/data/fon1.edds",
+        "CategoryCraftFonImagePath": "DRL_CraftMenu/UI/data/fon2.edds",
+        "CategoryCraftSoundSet": "DRLCraft_SoundSet",
+        "List": [
+            600,
+            601,
+			602,
+			603
+        ]
+    },
+    {
+        "Name": "Еда и напитки",
+        "Icon": "DRL_CraftMenu/UI/data/barbecue.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "DRL_CraftMenu/UI/data/fon1.edds",
+        "CategoryCraftFonImagePath": "DRL_CraftMenu/UI/data/fon2.edds",
+        "CategoryCraftSoundSet": "DRLCraft2_SoundSet",
+        "List": [
+            10,
+            11
+        ]
+    },
+    {
+        "Name": "Артефакты",
+        "Icon": "DRL_CraftMenu/UI/data/acid.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "DRL_CraftMenu/UI/data/fon1.edds",
+        "CategoryCraftFonImagePath": "DRL_CraftMenu/UI/data/fon2.edds",
+        "CategoryCraftSoundSet": "DRLCraft_SoundSet",
+		"List": [
+			800,
+			801,
+			802,
+			803,
+			804,
+			805,
+			806,
+			807,
+			808,
+			809,
+			810,
+			811,
+			812,
+			813,
+			814,
+			815,
+			816,
+			817,
+			818,
+			819,
+			820,
+			821,
+			822,
+			823,
+			824,
+			825,
+			826,
+			827,
+			828,
+			829,
+			830,
+			831,
+			832,
+			833,
+			834,
+			835,
+			836,
+			837,
+			838,
+			839,
+			840,
+			841,
+			842,
+			843,
+			844,
+			845,
+			846,
+			847,
+			848,
+			849,
+			850,
+			851,
+			852,
+			853,
+			854,
+			855,
+			856,
+			857
+		]
+    },
+	{
+        "Name": "Улучшения для верстака",
+        "Icon": "DRL_CraftMenu/UI/data/acid.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "DRL_CraftMenu/UI/data/fon1.edds",
+        "CategoryCraftFonImagePath": "DRL_CraftMenu/UI/data/fon2.edds",
+        "CategoryCraftSoundSet": "DRLCraft_SoundSet",
+        "List": [
+            23,
+            24
+        ]
+    }
+]

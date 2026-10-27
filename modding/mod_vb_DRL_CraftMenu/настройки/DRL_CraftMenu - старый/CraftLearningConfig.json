@@ -1,0 +1,46 @@
+{
+    "EnableLearning": 1,
+    "ResetLearnedOnDeath": 0,
+    "LearningSoundSet": "DRLCraft_SoundSet",
+    "LearningRecipes": [
+        {
+            "RecipeIds": [
+                1,
+                2
+            ],
+            "StudyMain": 1,
+            "RequiredRecipeIds": [],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить через чертежи",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 3,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "TShirt_Grey",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                3
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [
+                1
+            ],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить через чертежи",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 5,
+                    "Delete": 1
+                }
+            ]
+        }
+    ]
+}

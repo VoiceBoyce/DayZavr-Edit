@@ -1,0 +1,681 @@
+{
+    "EnableLearning": 1,
+    "ResetLearnedOnDeath": 0,
+    "LearningRecipes": [
+        {
+            "RecipeIds": [
+                1
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 1,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "TShirt_Grey",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                2
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [
+                1
+            ],
+            "ReputationRequired": 1,
+            "ReputationAmount": 50,
+            "ReputationConsume": 0,
+            "ReputationIncrease": 10,
+            "NeedFactionMember": "",
+            "NeedFactionRep": 0,
+            "SkillsRequired": [],
+            "SkillGateMode": 0,
+            "SkillsReward": [
+                "Crafting"
+            ],
+            "PerkRequired": [
+                "Crafting:1"
+            ],
+            "SkillsExp": 25,
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 2,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "UKAssVest_Khaki",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                3
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [],
+            "ReputationRequired": 1,
+            "ReputationAmount": 100,
+            "ReputationConsume": 0,
+            "ReputationIncrease": 15,
+            "NeedFactionMember": "Survivors",
+            "NeedFactionRep": 50,
+            "SkillsRequired": [],
+            "SkillGateMode": 0,
+            "SkillsReward": [
+                "Crafting"
+            ],
+            "PerkRequired": [
+                "Crafting:2"
+            ],
+            "SkillsExp": 50,
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 3,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "BallisticHelmet_Black",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                6
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [
+                2,
+                3
+            ],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 5,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "PlateCarrierVest",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                7,
+                8
+            ],
+            "StudyMain": 1,
+            "RequiredRecipeIds": [
+                1
+            ],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить комплект одежды по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 3,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через набор для шитья",
+                    "RequiredItem": "SewingKit",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                9
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [
+                12,
+                13
+            ],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить чертеж автомата АКМ",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 6,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через набор чистки оружия",
+                    "RequiredItem": "WeaponCleaningKit",
+                    "Amount": 2,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                10,
+                11
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить консервацию еды и напитков",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                12,
+                13
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить изготовление инструментов",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 2,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                15
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 2,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через батарейку",
+                    "RequiredItem": "Battery9V",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                23
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить изготовление физраствора",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 2,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через бинты",
+                    "RequiredItem": "BandageDressing",
+                    "Amount": 2,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                89
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 1,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "Rope",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                90
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 1,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "MetalWire",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                91
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 1,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "BurlapStrip",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                92
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 1,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "ImprovisedSuppressor",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                93
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 1,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "AmmoBox_762x39_20Rnd",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                94
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 1,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "AmmoBox_556x45_20Rnd",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                95
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 1,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "HandDrillKit",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                96
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 1,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "Torch",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                97
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [
+                89
+            ],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 1,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "CourierBag",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                98
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [
+                97
+            ],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 2,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "ImprovisedBag",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                99
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [
+                91
+            ],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 1,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "GhillieAtt_Tan",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                100
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [
+                99
+            ],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 2,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "GhillieHood_Tan",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                101
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 1,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "BoneKnife",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                102
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 1,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "StoneKnife",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                103
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 1,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "Whetstone",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                104
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [
+                89
+            ],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 1,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "FenceKit",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                105
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [
+                104
+            ],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 2,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "WatchtowerKit",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                106
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 1,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "WoodenCrate",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                107
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [
+                90
+            ],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 1,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "Tripod",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        },
+        {
+            "RecipeIds": [
+                108
+            ],
+            "StudyMain": 0,
+            "RequiredRecipeIds": [],
+            "StudyVariations": [
+                {
+                    "DisplayName": "Изучить по чертежу",
+                    "RequiredItem": "DRL_Craft_Blueprint",
+                    "Amount": 1,
+                    "Delete": 1
+                },
+                {
+                    "DisplayName": "Изучить через предмет",
+                    "RequiredItem": "BandageDressing",
+                    "Amount": 1,
+                    "Delete": 1
+                }
+            ]
+        }
+    ]
+}

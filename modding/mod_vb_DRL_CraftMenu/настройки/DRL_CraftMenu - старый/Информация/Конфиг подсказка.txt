@@ -1,0 +1,78 @@
+    {
+        "RecipeId": 800,		// номер рецепта
+        "ShowInFreeMenu": 1,	// виден ли в меню ф9
+        "WorkbenchClasses": [
+            "DRL_Craft_Workbench"
+        ],
+        "RecipeName": "Артефакт - Мозг",
+        "Result": "OOTS_ART_Braen",
+        "ResultClasses": [],		//вариации
+        "PreviewClassname": "",		//можно заменить картинку в рецепте из предмета
+        "CraftIcon": "",			//кастомная картинка рецепта
+        "Description": "Нет эффектов.",
+        "CraftTimeSec": 3,
+        "ResultCount": 1,
+        "ResultQuantityFrac": 0.0,	// наполнение 
+        "ResultDamageFrac": 0.0,	// прочность
+        "RecraftNeedAttachments": 0,	// требовать ли обвесы для разборки
+        "AttachmentsEx": [			// должны быть в ивентаре (слотах) и на верстаке обвесы
+            {
+                "Token": "DRL_Craft_lab_bunsen",
+                "DamagePct": 0.0
+            },
+            {
+                "Token": "TacticalGloves_Black",
+                "DamagePct": 0.25
+            },
+            {
+                "Token": "DRL_Craft_Grinder",
+                "DamagePct": 1.0
+            }
+        ],
+        "CraftComponents": [
+            {
+                "Classname": "BRDK_Coal",
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 1.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0
+            },
+            {
+                "Classname": "BRDK_Iron",
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 1.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0
+            },
+            {
+                "Classname": "MSFZ_RuneStone_Day",
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 1.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0
+            }
+        ],
+        "CurrentCraftCount": 1,		// не трогать
+        "ReputationRequired": 0,	// не трогать
+        "ReputationAmount": 0,		// не трогать
+        "ReputationConsume": 0,
+        "ReputationIncrease": 0,
+        "SkillsRequired": [],
+        "SkillsReward": [],
+        "SkillGateMode": 0
+    },

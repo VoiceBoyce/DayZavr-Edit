@@ -1,0 +1,129 @@
+[
+    {
+        "Name": "Все рецепты",
+        "Icon": "DRL_CraftMenu/UI/data/abstract-050.edds",
+        "ShowAll": 1,
+        "UseList": 0,
+        "CategoryFonImagePath": "",
+        "CategoryCraftFonImagePath": "",
+        "CategoryCraftSoundSet": "",
+        "List": []
+    },
+    {
+        "Name": "Еда и вода",
+        "Icon": "DRL_CraftMenu/UI/data/barbecue.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "DRL_CraftMenu/UI/data/work.edds",
+        "CategoryCraftFonImagePath": "DRL_CraftMenu/UI/data/recipemanu_food.edds",
+        "CategoryCraftSoundSet": "DRLCraft2_SoundSet",
+        "List": [
+            10,
+            11
+        ]
+    },
+    {
+        "Name": "Обмундирование",
+        "Icon": "DRL_CraftMenu/UI/data/ironcloth1.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "DRL_CraftMenu/UI/data/work.edds",
+        "CategoryCraftFonImagePath": "DRL_CraftMenu/UI/data/recipemanu_cloth.edds",
+        "CategoryCraftSoundSet": "DRLCraft_SoundSet",
+        "List": [
+            7,
+            8
+        ]
+    },
+    {
+        "Name": "Броня",
+        "Icon": "DRL_CraftMenu/UI/data/kevlar-vest.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "DRL_CraftMenu/UI/data/work.edds",
+        "CategoryCraftFonImagePath": "DRL_CraftMenu/UI/data/recipemanu_armor.edds",
+        "CategoryCraftSoundSet": "DRLCraft_SoundSet",
+        "List": [
+            2,
+            3,
+            5,
+            6
+        ]
+    },
+    {
+        "Name": "Оружие",
+        "Icon": "DRL_CraftMenu/UI/data/ak47u.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "DRL_CraftMenu/UI/data/work.edds",
+        "CategoryCraftFonImagePath": "DRL_CraftMenu/UI/data/recipemanu_wepon.edds",
+        "CategoryCraftSoundSet": "DRLCraft_SoundSet",
+        "List": [
+            9,
+            29
+        ]
+    },
+    {
+        "Name": "Електроника",
+        "Icon": "DRL_CraftMenu/UI/data/battery-pack-alt.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "DRL_CraftMenu/UI/data/work.edds",
+        "CategoryCraftFonImagePath": "DRL_CraftMenu/UI/data/recipemanu_electro.edds",
+        "CategoryCraftSoundSet": "DRLCraft_SoundSet",
+        "List": [
+            15,
+            30
+        ]
+    },
+    {
+        "Name": "Медицина",
+        "Icon": "DRL_CraftMenu/UI/data/acid.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "DRL_CraftMenu/UI/data/work.edds",
+        "CategoryCraftFonImagePath": "DRL_CraftMenu/UI/data/recipemanu_medical.edds",
+        "CategoryCraftSoundSet": "DRLCraft_SoundSet",
+        "List": [
+            23,
+            24
+        ]
+    },
+    {
+        "Name": "Инструменты",
+        "Icon": "DRL_CraftMenu/UI/data/build3.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "DRL_CraftMenu/UI/data/work.edds",
+        "CategoryCraftFonImagePath": "DRL_CraftMenu/UI/data/recipemanu_part.edds",
+        "CategoryCraftSoundSet": "DRLCraft_SoundSet",
+        "List": [
+            12,
+            13,
+            14,
+            18,
+            21,
+            22,
+            25
+        ]
+    },
+    {
+        "Name": "Дополнительно",
+        "Icon": "DRL_CraftMenu/UI/data/cardboard-box-closed.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "CategoryFonImagePath": "",
+        "CategoryCraftFonImagePath": "",
+        "CategoryCraftSoundSet": "",
+        "List": [
+            1,
+            4,
+            16,
+            19,
+            20,
+            26,
+            27,
+            28
+        ]
+    }
+]

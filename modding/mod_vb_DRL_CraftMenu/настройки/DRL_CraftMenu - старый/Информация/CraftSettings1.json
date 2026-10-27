@@ -1,0 +1,10 @@
+{
+    "EnableFreeMenu": 1,
+    "FonImagePath": "DRL_CraftMenu/UI/data/work.edds",
+    "CraftFonImagePath": "DRL_CraftMenu/UI/data/recipemanust.edds",
+    "CraftSoundSet": "DRLCraft_SoundSet",
+    "WorkbenchFons": [],
+    "AdminsID": [
+        "76561200715668795"
+    ]
+}
