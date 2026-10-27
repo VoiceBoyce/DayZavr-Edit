@@ -1,0 +1,11 @@
+{
+  "id": "boot-1792333492-24",
+  "kind": "boot",
+  "status": "failed",
+  "started": 1792333492.9138496,
+  "finished": 1792333912.9844499,
+  "exit_code": null,
+  "artifacts": [],
+  "summary": "",
+  "error": "no ready line within 420s -- but pid 40156 holds udp/3203, so the server itself is up and listening: it is the mod's ready line that never appeared, not the boot that failed"
+}

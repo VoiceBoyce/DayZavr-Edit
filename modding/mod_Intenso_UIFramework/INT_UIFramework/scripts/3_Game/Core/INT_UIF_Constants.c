@@ -4,7 +4,7 @@
 // available here, so consumer mods can use the framework from 4_World and up.
 // ============================================================================
 
-const string INT_UIF_VERSION = "2.0.0";
+const string INT_UIF_VERSION = "2.0.3";
 
 const string INT_UIF_LAYOUTS = "INT_UIFramework/gui/layouts/";
 const string INT_UIF_IMAGESET_FILE = "INT_UIFramework/gui/imagesets/iuf_ui.imageset";

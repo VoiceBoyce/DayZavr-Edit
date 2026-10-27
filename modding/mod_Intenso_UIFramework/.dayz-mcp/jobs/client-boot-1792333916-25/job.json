@@ -1,0 +1,11 @@
+{
+  "id": "client-boot-1792333916-25",
+  "kind": "client-boot",
+  "status": "done",
+  "started": 1792333916.341828,
+  "finished": 1792333946.4863505,
+  "exit_code": 0,
+  "artifacts": [],
+  "summary": "connected: the bridge reports 1 player(s) 30s after launch (pid 3836, windowed). Readiness is the player count in the bridge state, not a timer",
+  "error": ""
+}

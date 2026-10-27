@@ -282,9 +282,38 @@ class INT_UIF_Menu extends UIScriptedMenu
 			if (ours)
 				ours.CloseNow();
 			else
-				um.CloseMenu(current.GetID());
+				CloseVanillaMenu(um, current);
 		}
 		return um.EnterScriptedMenu(id, null) != null;
+	}
+
+	// Closes a vanilla menu the way vanilla itself does. The input excludes
+	// and restrictions of the inventory, the pause menu and the map are set
+	// and released by the MISSION, not by the menus: UIManager.CloseMenu alone
+	// skips the release. Measured symptom (BaseProtection "you were moved"
+	// notice over an open inventory, 2026-10-20): the 'inventory' exclude
+	// group (aiming, stances, optics, actions, gestures) stayed on and the
+	// player could not raise a weapon or use F until relog.
+	//   inventory -> Mission.HideInventory (missiongameplay.c:1211-1221)
+	//   pause     -> Mission.Continue      (missiongameplay.c:1334-1348)
+	//   map       -> MapMenu.CloseMapMenu  (mapmenu.c:332; 5_Mission class,
+	//                reached by name from this layer)
+	// Anything else closes as before.
+	static void CloseVanillaMenu(UIManager um, UIScriptedMenu menu)
+	{
+		if (!um || !menu)
+			return;
+		int id = menu.GetID();
+		Mission mission = GetGame().GetMission();
+		if (id == MENU_INVENTORY && mission)
+			mission.HideInventory();
+		else if (id == MENU_INGAME && mission)
+			mission.Continue();
+		else if (id == MENU_MAP)
+			GetGame().GameScript.CallFunction(menu, "CloseMapMenu", null, 0);
+		// Whatever the vanilla path did, the menu must be gone now.
+		if (um.GetMenu() == menu)
+			um.CloseMenu(id);
 	}
 
 	static INT_UIF_Menu Current()

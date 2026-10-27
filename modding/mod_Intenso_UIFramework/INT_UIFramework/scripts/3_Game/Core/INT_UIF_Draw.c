@@ -312,29 +312,32 @@ class INT_UIF_Surface extends Managed
 	ButtonWidget m_Fill;
 	ButtonWidget m_Border;
 
-	// radius snaps down to 4/6/8/10/12/14.
+	// radius snaps down to 4/6/8/10/12/14 SCREEN px. The 9-slice corners of the styles have a fixed screen size
+	// while the widget scales with the screen, so the choice is made on radius x Factor (2.0.2; before it was the
+	// design radius: torn pills under 1080p, flat-ended ones on 1440p / 4K — INT_PDA resolution pass 2026-10-23).
 	static INT_UIF_Surface Box(Widget parent, float x, float y, float w, float h, int radius, int fill, int border = 0)
 	{
 		Widget root = null;
-		if (radius >= 14)
+		float rs = radius * INT_UIF_Scale.Factor();
+		if (rs >= 14)
 			root = INT_UIF_Widgets.Create("surface_r14.layout", parent);
-		else if (radius >= 12)
+		else if (rs >= 12)
 			root = INT_UIF_Widgets.Create("surface_r12.layout", parent);
-		else if (radius >= 10)
+		else if (rs >= 10)
 			root = INT_UIF_Widgets.Create("surface_r10.layout", parent);
-		else if (radius >= 8)
+		else if (rs >= 8)
 			root = INT_UIF_Widgets.Create("surface_r8.layout", parent);
-		else if (radius >= 6)
+		else if (rs >= 6)
 			root = INT_UIF_Widgets.Create("surface_r6.layout", parent);
 		else
 			root = INT_UIF_Widgets.Create("surface_r4.layout", parent);
 		return Wrap(root, x, y, w, h, fill, border);
 	}
 
-	// Fully rounded ends: radius = h / 2, snapped down to an available pill.
+	// Fully rounded ends: radius = h / 2 in SCREEN px (see Box), snapped down to an available pill.
 	static INT_UIF_Surface Pill(Widget parent, float x, float y, float w, float h, int fill, int border = 0)
 	{
-		float r = h * 0.5;
+		float r = h * 0.5 * INT_UIF_Scale.Factor();
 		Widget root = null;
 		if (r >= 20)
 			root = INT_UIF_Widgets.Create("surface_p20.layout", parent);

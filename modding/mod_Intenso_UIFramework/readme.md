@@ -295,7 +295,7 @@ list.Reveal(0.2);                          // строки въезжают по
 |---|---|---|
 | **Toggle** | `Create(bag, parent, x, y, w, text, on = false, sub = "", h = 0)` | `OnChanged()` → `(bool on, INT_UIF_Toggle t)`; `IsOn`, `SetOn(on, notify = false, animate = true)`. Трек справа становится бирюзовым и светится, ручка перепрыгивает с пружинкой. С подстрокой `sub` высота 44, без неё 32 |
 | **Checkbox** | `Create(bag, parent, x, y, w, text, checked = false, h = 28)` | `OnChanged()` → `(bool checked, INT_UIF_Checkbox c)`; `IsChecked`, `SetChecked(v, notify, animate)` |
-| **TextInput** | `Create(bag, parent, x, y, w, h = 40, placeholder = "", maxLength = 0, icon = "", hintKey = "")` | `OnChanged()` → `(string text, INT_UIF_TextInput t)` на каждый символ; `OnSubmit()` → то же по Enter. `GetText`, `SetText`, `SetPlaceholder`, `Focus`. `maxLength` считает **символы UTF-8**, а не байты. `hintKey` рисует keycap справа, например `"Enter"`. Фокус подсвечивает рамку бирюзой |
+| **TextInput** | `Create(bag, parent, x, y, w, h = 40, placeholder = "", maxLength = 0, icon = "", hintKey = "")` | `OnChanged()` → `(string text, INT_UIF_TextInput t)` на каждый символ; `OnSubmit()` → то же по Enter (один раз на нажатие; уход фокуса не отправляет, с 2.0.3). `GetText`, `SetText`, `SetPlaceholder`, `Focus`. `maxLength` считает **символы UTF-8**, а не байты. `hintKey` рисует keycap справа, например `"Enter"`. Фокус подсвечивает рамку бирюзой |
 | **Slider** | `Create(bag, parent, x, y, w, min, max, value, step = 0, label = "", h = 0)` | `OnChanged()` → `(float value, INT_UIF_Slider s, bool isFinal)`: во время перетаскивания `isFinal = false`, при отпускании `true`. `GetValue`, `SetValue(v, notify, animate)`, `SetRange(min, max, step)`, `SetFormat(decimals, suffix)`. Работают перетаскивание, клик по дорожке и колесо |
 | **Stepper** | `Create(bag, parent, x, y, w, min, max, value, step = 1, suffix = "", h = 36)` | `OnChanged()` → `(float value, INT_UIF_Stepper s)`; `GetValue`, `SetValue(v, notify)`. Кнопки ± гаснут на границах |
 | **Dropdown** | `Create(bag, parent, x, y, w, options, selected = -1, placeholder = "", h = 40, icon = "")` | `OnSelected()` → `(int index, string text, INT_UIF_Dropdown d)`; `SetOptions`, `GetSelected`, `GetSelectedText`, `SetSelected(i, notify)`, `OpenPopup`, `ClosePopup`, `IsOpen`, `static CloseActive()` |
@@ -377,6 +377,14 @@ INT_UIF_Dialog.Alert("#STR_TITLE", "#STR_TEXT", INT_UIF_ToastKind.SUCCESS);
 
 Если открыто наше окно, диалог становится оверлеем внутри него: клики за ним блокируются, Esc закрывает
 сначала диалог. Если окна нет, фреймворк сам откроет хост `INT_UIF_DialogMenu`.
+
+Если в этот момент открыто **ванильное** меню, фреймворк его закрывает. Так же работает любой
+`INT_UIF_Menu.Open`. Инвентарь, пауза и карта закрываются ванильным путём (`INT_UIF_Menu.CloseVanillaMenu`:
+`Mission.HideInventory`, `Mission.Continue`, `MapMenu.CloseMapMenu`), остальные меню — через `UIManager.CloseMenu`.
+До 20.10.2026 инвентарь закрывался голым `CloseMenu`, и у игрока оставалась группа исключений ввода
+`inventory`: до перезахода нельзя было поднять оружие, прицелиться, сменить стойку, нажать F
+(тикет по уведомлению BaseProtection «Вас переместили»). Свои ванильные меню закрывайте той же функцией,
+не `CloseMenu`.
 Свой набор кнопок: `new INT_UIF_Dialog()` → `SetContent(..)` → `AddButton(label, variant)` → `INT_UIF_Dialog.Present(d)`.
 Результат — индекс кнопки в порядке `AddButton`.
 
@@ -517,6 +525,7 @@ INT_UIF_Animator.Get().Cancel(w);                        // остановить
 | `keep forms` | Демо остаётся открытым на вкладке «Формы» |
 | `keep forms popup` | То же, плюс открытый выпадающий список часового пояса |
 | `keep forms popup scrolled` | То же, и список прокручен до конца (проверка прокрутки и индикатора) |
+| `legacy` | Обычный прогон, плюс в конце контроль старого пути: инвентарь закрывается голым `UIManager.CloseMenu`, и в лог пишется `[TEST] CONTROL ...`, осталось ли исключение `inventory`. Контроль нарочно ломает инвентарь до перезахода, поэтому по умолчанию он выключен |
 
 Что проверяется:
 
@@ -525,7 +534,11 @@ INT_UIF_Animator.Get().Cancel(w);                        // остановить
   выбор в выпадающем списке и закрытие по Esc, длина ввода в символах UTF-8, отправка по Enter,
   страницы вкладок, подсказка;
 - настоящий путь меню `EnterScriptedMenu`;
-- диалог подтверждения: «Да» возвращает `RESULT_YES`, «Нет» — `RESULT_NO` (`dialog.yes_reports_yes`, `dialog.no_reports_no`).
+- диалог подтверждения: «Да» возвращает `RESULT_YES`, «Нет» — `RESULT_NO` (`dialog.yes_reports_yes`, `dialog.no_reports_no`);
+- диалог поверх открытого ванильного инвентаря (без `keep`): инвентарь закрыт ванильным путём, группа
+  исключений `inventory` снята сразу, а после закрытия диалога не осталось ни `inventory`, ни `menu`,
+  ни ограничения `INVENTORY` (`vanilla.inventory_opened`, `vanilla.dialog_on_top`,
+  `vanilla.inventory_exclude_released`, `vanilla.dialog_closed`, `vanilla.inputs_free_after_dialog`).
 
 После прогона **удалите маркер**.
 
@@ -570,6 +583,7 @@ CLI AddonBuilder и самодельные Python-упаковщики не ис
 | Поворот виджета в плоскости экрана задаёт **третий** угол: `SetRotation(0, 0, deg)` (ваниль: `mapmenu.c`, `carhud.c`) | Так устроен твин `ROTATION` |
 | Обычный EditBox подгоняет шрифт под **свою высоту**: `"exact text size"` (его понимает только MultilineEditBox) и `text_proportion` он игнорирует | Один `px_edit`; `Draw.Edit` делает поле высотой ровно с кегль и центрирует его, а клик по всему полю ловит отдельная хит-зона |
 | Зажатую кнопку мыши опрашивают через `GetMouseState(MouseState.LEFT) & MB_PRESSED_MASK` | Перетаскивание слайдера, клик мимо выпадающего списка |
+| Исключения ввода инвентаря, паузы и карты ставит и снимает **миссия**: `UIManager.CloseMenu(MENU_INVENTORY)` закрывает окно, но группа `inventory` (прицел, стойки, F, жесты) остаётся включённой до перезахода | `INT_UIF_Menu.CloseVanillaMenu`: `Mission.HideInventory` / `Mission.Continue` / `MapMenu.CloseMapMenu` |
 | Нативный скроллбар ScrollWidget — белая полоса, которую не берёт ни один стиль (в `dayzwidgets.styles` нет секции ScrollWidget); без него `VScrollToPos01` не двигает содержимое | Выпадающий список не использует ScrollWidget: строки лежат во фрейме с обрезкой (`Draw.Clip`), листаются целыми строками, а невидимые строки скрываются |
 | В Enforce нет тернарного оператора; имена вида `ref1080` ломают лексер; `%` внутри float-выражения не компилируется | Стиль кода фреймворка |
 

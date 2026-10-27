@@ -349,8 +349,16 @@ class INT_UIF_SelfTest
 			Check(typed == "Приве", "textinput.max_utf8", "text='" + typed + "'");
 			m_Events = 0;
 			ti.OnSubmit().Insert(OnInputEvt);
+			// Enter comes as OnChange(finished); a "finished" with Enter up (focus moving away) submits nothing (2.0.3)
+			ti.OnChange(editW, 0, 0, true);
+			Check(m_Events == 0, "textinput.finished_without_enter", "events=" + m_Events.ToString());
+			INT_UIF_TextInput.s_TestEnterDown = true;
+			ti.OnChange(editW, 0, 0, true);
+			INT_UIF_TextInput.s_TestEnterDown = false;
+			Check(m_Events == 1, "textinput.submit_on_enter", "events=" + m_Events.ToString());
+			// the same press seen again as a key press is not a second submit
 			ti.OnKeyPress(editW, 0, 0, KeyCode.KC_RETURN);
-			Check(m_Events == 1, "textinput.submit", "events=" + m_Events.ToString());
+			Check(m_Events == 1, "textinput.submit_once", "events=" + m_Events.ToString());
 		}
 
 		INT_UIF_Slider sl = INT_UIF_Slider.Create(m_Bag, m_Host, 0, 0, 300, 0, 100, 50, 5, "Label");
@@ -519,10 +527,98 @@ class INT_UIF_SelfTest
 		Check(frames == 1, "menu.single_frame", "frames=" + frames.ToString());
 		CheckDialogResults();
 		if (!m_Keep)
+		{
 			m.CloseNow();
-		else if (m_Command != "")
+			GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(RunVanillaClose, 1000, false);
+			return;
+		}
+		if (m_Command != "")
 			m.OnTestCommand(m_Command);
 		Finish();
+	}
+
+	// A framework dialog over the open vanilla inventory must close it the way
+	// the mission does, so the inventory's input excludes go with it. Until
+	// 2026-10-20 Open() used UIManager.CloseMenu: the 'inventory' exclude group
+	// (aiming, stances, optics, actions) stayed on until relog.
+	void RunVanillaClose()
+	{
+		Mission mission = GetGame().GetMission();
+		UIManager um = GetGame().GetUIManager();
+		if (!mission || !um || um.GetMenu())
+		{
+			Check(false, "vanilla.precondition", "no mission or a menu is still open");
+			Finish();
+			return;
+		}
+		mission.ShowInventory();
+		bool invOpen = um.IsMenuOpen(MENU_INVENTORY);
+		bool invExcl = mission.IsInputExcludeActive("inventory");
+		Check(invOpen && invExcl, "vanilla.inventory_opened", "open=" + invOpen.ToString() + " exclude=" + invExcl.ToString());
+		if (!invOpen)
+		{
+			Finish();
+			return;
+		}
+		INT_UIF_Dialog d = INT_UIF_Dialog.Alert("Self-test", "Over the inventory", INT_UIF_ToastKind.INFO, "#STR_INT_UIF_OK");
+		UIScriptedMenu top = um.GetMenu();
+		int topId = -1;
+		if (top)
+			topId = top.GetID();
+		bool exclAfter = mission.IsInputExcludeActive("inventory");
+		Check(topId == INT_UIF_MENU_DIALOG, "vanilla.dialog_on_top", "top=" + topId.ToString());
+		Check(!exclAfter, "vanilla.inventory_exclude_released");
+		bool pressed = false;
+		if (d)
+			pressed = d.PressLabel("#STR_INT_UIF_OK");
+		Check(pressed, "vanilla.dialog_closed");
+		GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(CheckVanillaClosed, 1000, false);
+	}
+
+	void CheckVanillaClosed()
+	{
+		Mission mission = GetGame().GetMission();
+		if (!mission)
+		{
+			Finish();
+			return;
+		}
+		bool restr = mission.IsInputRestrictionActive(EInputRestrictors.INVENTORY);
+		bool invExcl = mission.IsInputExcludeActive("inventory");
+		bool menuExcl = mission.IsInputExcludeActive("menu");
+		bool inputsFree = !restr && !invExcl && !menuExcl;
+		Check(inputsFree, "vanilla.inputs_free_after_dialog", "restriction=" + restr.ToString() + " inventory=" + invExcl.ToString() + " menu=" + menuExcl.ToString());
+		Finish();
+		if (m_Command.IndexOf("legacy") >= 0 || ReadMarker().IndexOf("legacy") >= 0)
+			GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(RunLegacyControl, 1000, false);
+	}
+
+	// Opt-in control (marker line contains "legacy"): the OLD close path, a bare
+	// UIManager.CloseMenu on the vanilla inventory, must leak the exclude group,
+	// or the vanilla.* checks above prove nothing. Destructive on purpose: the
+	// inventory may stay broken until relog, so it runs last and never by default.
+	void RunLegacyControl()
+	{
+		Mission mission = GetGame().GetMission();
+		UIManager um = GetGame().GetUIManager();
+		if (!mission || !um || um.GetMenu())
+		{
+			INT_UIF_Log.Info("[TEST] CONTROL skipped: no mission or a menu is open");
+			return;
+		}
+		mission.ShowInventory();
+		bool opened = um.IsMenuOpen(MENU_INVENTORY);
+		um.CloseMenu(MENU_INVENTORY);
+		bool leaked = mission.IsInputExcludeActive("inventory");
+		bool restrLeaked = mission.IsInputRestrictionActive(EInputRestrictors.INVENTORY);
+		INT_UIF_Log.Info("[TEST] CONTROL legacy CloseMenu: opened=" + opened.ToString() + " inventoryExclude=" + leaked.ToString() + " inventoryRestriction=" + restrLeaked.ToString());
+		mission.RemoveActiveInputExcludes({"inventory"}, false);
+		mission.RemoveActiveInputRestriction(EInputRestrictors.INVENTORY);
+		mission.ShowInventory();
+		bool reopened = um.IsMenuOpen(MENU_INVENTORY);
+		INT_UIF_Log.Info("[TEST] CONTROL reopen after legacy close: open=" + reopened.ToString());
+		if (reopened)
+			mission.HideInventory();
 	}
 
 	// Confirm() buttons report their AddButton index: "yes" -> RESULT_YES and

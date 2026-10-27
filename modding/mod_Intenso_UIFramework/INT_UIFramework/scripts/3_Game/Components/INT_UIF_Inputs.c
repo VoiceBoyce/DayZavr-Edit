@@ -399,6 +399,10 @@ class INT_UIF_TextInput extends INT_UIF_Component
 	protected TextWidget m_Placeholder;
 	protected EditBoxWidget m_Edit;
 	protected ButtonWidget m_BodyHit;
+	protected int m_LastSubmitMs = -100000;
+
+	static const int SUBMIT_GAP_MS = 150;
+	static bool s_TestEnterDown;		// self-test only: Enter counts as held
 
 	void INT_UIF_TextInput()
 	{
@@ -591,6 +595,10 @@ class INT_UIF_TextInput extends INT_UIF_Component
 		RefreshPlaceholder();
 		INT_UIF_TextInput keep = this;
 		m_OnChanged.Invoke(text, this);
+		// Enter arrives here, as finished = true: its key press never reaches OnKeyPress (2.0.3). The key must be down
+		// right now, so a "finished" that is not Enter (the focus moving away) submits nothing.
+		if (finished && EnterDown())
+			Submit();
 		return true;
 	}
 
@@ -600,11 +608,28 @@ class INT_UIF_TextInput extends INT_UIF_Component
 			return false;
 		if (key == KeyCode.KC_RETURN || key == KeyCode.KC_NUMPADENTER)
 		{
-			INT_UIF_TextInput keep = this;
-			m_OnSubmit.Invoke(GetText(), this);
+			Submit();
 			return true;
 		}
 		return false;
+	}
+
+	protected static bool EnterDown()
+	{
+		if (s_TestEnterDown)
+			return true;
+		return KeyState(KeyCode.KC_RETURN) != 0 || KeyState(KeyCode.KC_NUMPADENTER) != 0;
+	}
+
+	// One OnSubmit per press, whichever of the two events brings it.
+	protected void Submit()
+	{
+		int now = GetGame().GetTime();
+		if (now - m_LastSubmitMs < SUBMIT_GAP_MS)
+			return;
+		m_LastSubmitMs = now;
+		INT_UIF_TextInput keep = this;
+		m_OnSubmit.Invoke(GetText(), this);
 	}
 
 	override bool OnFocus(Widget w, int x, int y)

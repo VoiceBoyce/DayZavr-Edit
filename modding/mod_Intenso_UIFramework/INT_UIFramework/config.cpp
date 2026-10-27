@@ -20,7 +20,7 @@ class CfgMods
 		dir = "INT_UIFramework";
 		name = "INT UI Framework";
 		author = "Intenso";
-		version = "2.0.0";
+		version = "2.0.3";
 		inputs = "INT_UIFramework/inputs.xml";
 		class defs
 		{
