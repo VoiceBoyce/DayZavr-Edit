@@ -26,7 +26,7 @@ STR_DRL_UI_HINT_ROTATE	rotate preview	вращать превью
 STR_DRL_UI_TAB_COMP	Composition	Состав
 STR_DRL_UI_TAB_INFO	Details	Описание
 STR_DRL_UI_TAB_RECRAFT	Dismantle	Разбор
-STR_DRL_UI_SEC_DOP	Attachments to craft	Доп. навесное
+STR_DRL_UI_SEC_DOP	Additional attachments	Дополнительное навесное
 STR_DRL_UI_VARIANTS	Result variants	Варианты результата
 STR_DRL_UI_VARIANTS_MORE	%1 total, wheel to scroll	Всего %1, колесо — листать
 STR_DRL_UI_REQS	Requirements	Требования
@@ -59,3 +59,34 @@ STR_DRL_UI_LS_LOCKED	Unavailable	Недоступен
 STR_DRL_UI_LEARN_METHODS	Ways to study: %1	Способов изучения: %1
 STR_DRL_UI_LEARN_GIVES	Unlocks recipes: %1	Откроет рецептов: %1
 STR_DRL_UI_NO_METHODS	No ways to study	Нет способов изучения
+# v2: окно крафта в четыре колонки (2026-10-27)
+STR_DRL_UI_COL_RECIPES	Recipes	Рецепты
+STR_DRL_UI_COL_TOOLS	Additional items	Дополнительные предметы
+STR_DRL_UI_COL_RESULT	Crafting result	Результат крафта
+STR_DRL_UI_IN_STOCK	%1 of %2 in stock	%1 из %2 в наличии
+STR_DRL_UI_OF	%1 of %2	%1 из %2
+STR_DRL_UI_ONLY_AVAILABLE	Only craftable now	Только доступные к крафту
+STR_DRL_UI_NO_TOOLS	Not required	Не требуются
+STR_DRL_UI_VARIANTS_SHORT	Variants	Варианты
+STR_DRL_UI_SLOTS_FILL	%1 of %2 will be filled	заполнится %1 из %2
+STR_DRL_UI_RECIPE_DETAILS	Recipe details	Детали рецепта
+STR_DRL_UI_DOP_PICKED	selected %1 of %2	выбрано %1 из %2
+STR_DRL_UI_NO_DOP	No additional attachments	Нет дополнительного навесного
+STR_DRL_UI_ING_HINT	Hover over an ingredient	Наведите на ингредиент
+STR_DRL_UI_ING_VARIANTS	Has variants — click to choose	Есть варианты — нажмите, чтобы выбрать
+STR_DRL_UI_ING_NEED	Required	Нужно
+STR_DRL_UI_ING_HAVE	In stock	В наличии
+STR_DRL_UI_ING_MINSTATE	Min. condition	Мин. состояние
+STR_DRL_UI_ING_FILL	Contents	Наполнение
+STR_DRL_UI_ING_WEAR	Wear	Износ
+STR_DRL_UI_ING_CONSUMED	Consumed	Расходуется
+STR_DRL_UI_YES	Yes	Да
+STR_DRL_UI_NO	No	Нет
+STR_DRL_UI_RES_TIME	Time	Время
+STR_DRL_UI_RES_COUNT	Quantity	Количество
+STR_DRL_UI_RES_STATE	Condition	Состояние
+STR_DRL_UI_RES_VARIANT	Variant %1 of %2	Вариант %1 из %2
+STR_DRL_UI_COUNT_TO_MAKE	Quantity to craft	Количество к созданию
+STR_DRL_UI_COUNT_MAX	max. %1	макс. %1
+STR_DRL_UI_CRAFT_TIME	Crafting time	Время создания
+STR_DRL_UI_NO_ITEM	No item	Нет предмета

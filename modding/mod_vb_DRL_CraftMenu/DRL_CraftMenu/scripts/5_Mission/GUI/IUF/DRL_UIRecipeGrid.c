@@ -6,6 +6,8 @@
 // одновременно живёт не больше cols*rows превью-объектов. Как у INT_Trader.
 // Карточка: 3D-превью результата (или иконка рецепта CraftIcon), чип статуса,
 // название в две строки, время крафта и количество результата.
+// Режим списка (SetRowMode, окно крафта): одна колонка строк — превью слева,
+// справа название, чип статуса и время.
 // Хит-зоны названы DRL_Card_<slot> для dayz-mcp.
 // ============================================================================
 
@@ -58,14 +60,24 @@ class DRL_UIRecipeCard extends Managed
 	bool m_HasModel;
 	bool m_Many;
 	bool m_OverlayShown = true;
+	bool m_RowMode;
 	float m_Spin;
 
-	void Build(Widget parent, int slot, float x, float y, float w, float h, ScriptedWidgetEventHandler handler)
+	static const float ROW_THUMB_W = 64;
+	static const float ROW_TEXT_X = 80;
+
+	void Build(Widget parent, int slot, float x, float y, float w, float h, ScriptedWidgetEventHandler handler, bool rowMode = false)
 	{
 		m_W = w;
 		m_H = h;
 		m_X = x;
 		m_Y = y;
+		m_RowMode = rowMode;
+		if (rowMode)
+		{
+			BuildRow(parent, slot, handler);
+			return;
+		}
 		m_StageH = h - 92;
 		m_Root = INT_UIF_Draw.Frame(parent, x, y, w, h, "DRL_RecipeCard");
 		m_Glow = INT_UIF_Surface.Glow(m_Root, -14, -12, w + 28, h + 24, 0);
@@ -110,6 +122,51 @@ class DRL_UIRecipeCard extends Managed
 		Paint();
 	}
 
+	// Строка списка: превью ROW_THUMB_W слева, текст справа.
+	protected void BuildRow(Widget parent, int slot, ScriptedWidgetEventHandler handler)
+	{
+		float w = m_W;
+		float h = m_H;
+		float tw = ROW_THUMB_W;
+		float th = h - 12;
+		m_StageH = th;
+		m_Root = INT_UIF_Draw.Frame(parent, m_X, m_Y, w, h, "DRL_RecipeRow");
+		m_Glow = INT_UIF_Surface.Glow(m_Root, -10, -8, w + 20, h + 16, 0);
+		m_Glow.Show(false);
+		m_Bg = INT_UIF_Surface.Box(m_Root, 0, 0, w, h, 10, 0, 0);
+		int thumbFill = INT_UIF.Color(INT_UIF_ThemeKeys.TILE);
+		INT_UIF_Surface.Box(m_Root, 6, 6, tw, th, 8, thumbFill, ARGB(14, 255, 255, 255));
+		m_StageGlow = INT_UIF_Draw.Image(m_Root, 6, 6, tw, th, "iuf_radial", ARGB(22, 255, 255, 255));
+		m_Floor = INT_UIF_Draw.Image(m_Root, 14, th - 4, tw - 16, 12, "iuf_radial", ARGB(120, 0, 0, 0));
+		Widget clip = INT_UIF_Draw.Clip(m_Root, 8, 8, tw - 4, th - 4, "DRL_RowPreview");
+		m_View = new DRL_UIItemView();
+		m_View.Create(clip, true);
+		m_View.SetOrientation(Vector(0, 0, 0));
+
+		float isz = th - 8;
+		m_IconImage = INT_UIF_Draw.Image(m_Root, 6 + (tw - isz) * 0.5, 10, isz, isz, "iuf_white", ARGB(230, 255, 255, 255));
+		m_IconImage.Show(false);
+		m_NoPreview = INT_UIF_Draw.Frame(m_Root, 6, 6, tw, th, "DRL_RowNoPreview");
+		INT_UIF_Draw.Icon(m_NoPreview, (tw - 20) * 0.5, (th - 20) * 0.5, 20, "info", ARGB(70, 255, 255, 255));
+		m_NoPreview.Show(false);
+
+		m_Count = new DRL_UIChip();
+		m_Count.Build(m_Root, tw - 30, th - 14, 16, "DRL_RowCount");
+		m_Count.SetSort(DRL_UI_SORT_OVER_MODEL);
+		m_Count.Show(false);
+
+		float tx = ROW_TEXT_X;
+		m_Name = INT_UIF_Draw.MText(m_Root, tx, 5, w - tx - 8, 34, "", 13, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT));
+		m_Status = new DRL_UIChip();
+		m_Status.Build(m_Root, tx, h - 25, 19, "DRL_RowStatus");
+		m_ClockIcon = INT_UIF_Draw.Icon(m_Root, tx, h - 22, 12, "clock", INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_FAINT));
+		m_Time = INT_UIF_Draw.Text(m_Root, tx, h - 27, 80, 22, "", 12, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_MUTED));
+
+		m_Hit = INT_UIF_Draw.Hit(m_Root, 0, 0, w, h, handler);
+		DRL_UIKitUtil.ExposeHit(m_Hit, "DRL_Card_" + slot.ToString(), handler);
+		Paint();
+	}
+
 	void Bind(int index, DRL_UIRecipeEntry e)
 	{
 		m_Index = index;
@@ -146,14 +203,15 @@ class DRL_UIRecipeCard extends Managed
 		if (!e)
 			return;
 		INT_UIF_ThemeManager tm = INT_UIF_ThemeManager.Get();
+		float sw = 0;
 		if (e.m_ChipText != "")
-			m_Status.Set(e.m_ChipText, e.m_ChipIcon, e.m_ChipHue);
+			sw = m_Status.Set(e.m_ChipText, e.m_ChipIcon, e.m_ChipHue);
 		else if (e.m_Status == DRL_UI_STATUS_LOCKED)
-			m_Status.Set("#STR_DRL_UI_CHIP_LOCKED", "lock", tm.Color(INT_UIF_ThemeKeys.AMBER));
+			sw = m_Status.Set("#STR_DRL_UI_CHIP_LOCKED", "lock", tm.Color(INT_UIF_ThemeKeys.AMBER));
 		else if (e.m_Status == DRL_UI_STATUS_CAN)
-			m_Status.Set("#STR_DRL_UI_CHIP_CAN", "check", tm.Color(INT_UIF_ThemeKeys.GREEN));
+			sw = m_Status.Set("#STR_DRL_UI_CHIP_CAN", "check", tm.Color(INT_UIF_ThemeKeys.GREEN));
 		else
-			m_Status.Set("#STR_DRL_UI_CHIP_CANNOT", "close", tm.Color(INT_UIF_ThemeKeys.RED));
+			sw = m_Status.Set("#STR_DRL_UI_CHIP_CANNOT", "close", tm.Color(INT_UIF_ThemeKeys.RED));
 
 		bool many = e.m_ResultCount > 1;
 		m_Many = many;
@@ -161,7 +219,17 @@ class DRL_UIRecipeCard extends Managed
 		if (many)
 		{
 			float cw = m_Count.Set("x" + e.m_ResultCount.ToString(), "", tm.Color(INT_UIF_ThemeKeys.TEAL));
-			INT_UIF_Draw.Move(m_Count.m_Root, m_W - 10 - cw, m_StageH - 16);
+			if (m_RowMode)
+				INT_UIF_Draw.Move(m_Count.m_Root, 6 + ROW_THUMB_W - 2 - cw, m_H - 24);
+			else
+				INT_UIF_Draw.Move(m_Count.m_Root, m_W - 10 - cw, m_StageH - 16);
+		}
+		// В строке время стоит сразу за чипом статуса.
+		if (m_RowMode)
+		{
+			float cx = ROW_TEXT_X + sw + 8;
+			INT_UIF_Draw.Move(m_ClockIcon, cx, m_H - 21);
+			INT_UIF_Draw.Place(m_Time, cx + 17, m_H - 27, m_W - cx - 25, 22);
 		}
 		if (e.m_FootText != "")
 		{
@@ -202,7 +270,8 @@ class DRL_UIRecipeCard extends Managed
 			return;
 		m_Selected = selected;
 		Paint(true);
-		if (selected)
+		// В списке строки стоят плотно: свечение залезло бы на соседей.
+		if (selected && !m_RowMode)
 		{
 			m_Glow.Show(true);
 			INT_UIF_Animator.FadeInTo(m_Glow.GetRoot(), 1, 0.2);
@@ -301,7 +370,14 @@ class DRL_UIRecipeGrid extends ScriptedWidgetEventHandler
 	protected int m_Selected = -1;
 	protected int m_HoverSlot = -1;
 	protected bool m_ModelsHidden;
+	protected bool m_RowMode;
 	protected ref ScriptInvoker m_OnSelected;
+
+	// Строки вместо карточек; вызывать до Build (обычно cols = 1).
+	void SetRowMode(bool on)
+	{
+		m_RowMode = on;
+	}
 
 	void DRL_UIRecipeGrid()
 	{
@@ -340,7 +416,7 @@ class DRL_UIRecipeGrid extends ScriptedWidgetEventHandler
 			for (int c = 0; c < cols; c++)
 			{
 				DRL_UIRecipeCard card = new DRL_UIRecipeCard();
-				card.Build(m_Root, slot, c * (m_CardW + gap), r * (m_CardH + gap), m_CardW, m_CardH, this);
+				card.Build(m_Root, slot, c * (m_CardW + gap), r * (m_CardH + gap), m_CardW, m_CardH, this, m_RowMode);
 				card.m_Root.Show(false);
 				m_Cards.Insert(card);
 				slot++;
@@ -354,7 +430,10 @@ class DRL_UIRecipeGrid extends ScriptedWidgetEventHandler
 		INT_UIF_Draw.Image(m_Empty, (w - 14) * 0.5 - 120, h * 0.5 - 150, 240, 240, "iuf_radial", ARGB(16, 255, 255, 255));
 		INT_UIF_Draw.Icon(m_Empty, (w - 14) * 0.5 - 24, h * 0.5 - 64, 48, "search", INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_FAINT));
 		m_EmptyText = INT_UIF_Draw.Text(m_Empty, 0, h * 0.5 + 2, w - 14, 24, "#STR_DRL_UI_EMPTY", 17, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_MUTED), INT_UIF_Align.CENTER);
-		m_EmptySub = INT_UIF_Draw.MText(m_Empty, (w - 14) * 0.5 - 220, h * 0.5 + 34, 440, 40, "#STR_DRL_UI_EMPTY_SUB", 13, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_FAINT));
+		float subW = w - 14;
+		if (subW > 440)
+			subW = 440;
+		m_EmptySub = INT_UIF_Draw.MText(m_Empty, (w - 14 - subW) * 0.5, h * 0.5 + 34, subW, 40, "#STR_DRL_UI_EMPTY_SUB", 13, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_FAINT));
 		m_Empty.Show(false);
 	}
 

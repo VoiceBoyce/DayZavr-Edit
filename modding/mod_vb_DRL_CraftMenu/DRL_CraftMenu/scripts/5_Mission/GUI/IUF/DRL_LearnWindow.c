@@ -134,9 +134,9 @@ class DRL_LearnWindow extends INT_UIF_Menu
 		// --- справа: детали -------------------------------------------------------------
 		BuildDetails(body, bw - DETAILS_W, 0, DETAILS_W, bh);
 
-		AddHint("#STR_DRL_UI_KEY_LMB", "#STR_DRL_UI_HINT_SELECT");
-		AddHint("#STR_DRL_UI_KEY_WHEEL", "#STR_DRL_UI_HINT_SCROLL");
-		AddHint("#STR_DRL_UI_KEY_DRAG", "#STR_DRL_UI_HINT_ROTATE");
+		// Подсказки клавиш под окном не нужны (как в окне крафта).
+		if (m_Hints)
+			INT_UIF_Widgets.ClearChildren(m_Hints);
 	}
 
 	protected void BuildDetails(Widget parent, float x, float y, float w, float h)

@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Верстак — крафт</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+button{font:inherit;cursor:pointer;margin:0}
+a{color:#f8bc5a}a:hover{color:#f5a524}
+</style>
+</helmet>
+<div style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #0b0d10; font-family: 'Manrope', system-ui, sans-serif; color: #eceff2;">
+<img src="/_blob/b174106734bace284221857dffea9731" alt="" style="position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; object-fit: cover;">
+<div style="position: absolute; inset: 0; background: rgba(5, 7, 10, 0.45);"></div>
+
+<!-- Окно -->
+<div style="position: absolute; left: 120px; top: 64px; width: 1680px; height: 900px; box-sizing: border-box; background: rgba(16, 19, 22, 0.98); border: 1px solid rgba(255, 255, 255, 0.086); border-radius: 14px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); display: flex; flex-direction: column; overflow: hidden;">
+
+<!-- Шапка -->
+<div style="height: 72px; flex-shrink: 0; box-sizing: border-box; padding: 0 20px; display: flex; align-items: center; gap: 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0));">
+<div style="width: 42px; height: 42px; border-radius: 10px; background: #f5a524; color: #1c1406; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+<div style="font-size: 20px; font-weight: 700; letter-spacing: 0.01em;">Стационарный автоподъёмник</div>
+<div style="font-size: 13px; color: #a2aab3;">Верстак · Survivor</div>
+</div>
+<div style="flex-grow: 1;"></div>
+<!-- Очередь -->
+<div style="display: flex; align-items: center; gap: 10px;">
+<div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px;">
+<div style="font-size: 12px; color: #a2aab3; display: flex; align-items: center; gap: 5px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0M12 7v5l3 2"></path></svg>Очередь</div>
+<div style="font-size: 17px; font-weight: 700;">0/5</div>
+</div>
+<sc-for list="{{ queue }}" as="q" hint-placeholder-count="5">
+<div style="width: 42px; height: 42px; box-sizing: border-box; border-radius: 9px; border: 1px dashed rgba(255, 255, 255, 0.12); background: rgba(255, 255, 255, 0.02);"></div>
+</sc-for>
+</div>
+<div style="width: 1px; height: 36px; background: rgba(255, 255, 255, 0.07); margin: 0 4px;"></div>
+<div style="height: 36px; box-sizing: border-box; padding: 0 12px; border-radius: 8px; background: rgba(105, 169, 255, 0.12); border: 1px solid rgba(105, 169, 255, 0.32); color: #69a9ff; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 8l10 5 10-5zM2 13l10 5 10-5"></path></svg>
+Свободно 538 из 1174
+</div>
+<button type="button" style="height: 40px; box-sizing: border-box; padding: 0 16px; border-radius: 9px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.09); color: #eceff2; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"></path></svg>
+Изучение
+</button>
+<button type="button" aria-label="Закрыть" style="width: 40px; height: 40px; box-sizing: border-box; border-radius: 9px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.09); color: #a2aab3; display: flex; align-items: center; justify-content: center; padding: 0;">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+</button>
+</div>
+
+<!-- Тело: 4 колонки -->
+<div style="flex-grow: 1; min-height: 0; box-sizing: border-box; padding: 16px; display: flex; gap: 12px;">
+
+<!-- 1. Рецепты -->
+<div style="width: 336px; flex-shrink: 0; box-sizing: border-box; padding: 14px; background: #15191d; border: 1px solid rgba(255, 255, 255, 0.067); border-radius: 12px; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; align-items: baseline; justify-content: space-between;">
+<div style="font-size: 16px; font-weight: 700;">Рецепты</div>
+<div style="font-size: 13px; color: #a2aab3;">Все рецепты · 1</div>
+</div>
+<label style="height: 40px; box-sizing: border-box; padding: 0 12px; border-radius: 9px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.07); display: flex; align-items: center; gap: 8px; color: #a2aab3;">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a7 7 0 1 0 14 0a7 7 0 1 0 -14 0M20 20l-3.6-3.6"></path></svg>
+<input type="text" placeholder="Найти рецепт" aria-label="Найти рецепт" style="flex-grow: 1; min-width: 0; background: transparent; border: 0; outline: none; color: #eceff2; font: inherit; font-size: 14px;">
+</label>
+<div style="flex-grow: 1; min-height: 0; display: flex; gap: 10px;">
+<div style="width: 44px; flex-shrink: 0; display: flex; flex-direction: column; gap: 6px;">
+<sc-for list="{{ cats }}" as="c" hint-placeholder-count="2">
+<button type="button" aria-label="{{ c.label }}" style="{{ c.style }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ c.icon }}"></path></svg>
+</button>
+</sc-for>
+</div>
+<div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px;">
+<sc-for list="{{ recipes }}" as="r" hint-placeholder-count="1">
+<button type="button" style="{{ r.style }}">
+<div style="width: 68px; height: 48px; flex-shrink: 0; border-radius: 8px; background: #1a1f24; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+<img src="{{ r.img }}" alt="" style="max-width: 62px; max-height: 42px; object-fit: contain;">
+</div>
+<div style="display: flex; flex-direction: column; gap: 5px; min-width: 0; text-align: left;">
+<div style="font-size: 14px; font-weight: 600; color: #eceff2; line-height: 1.25;">{{ r.name }}</div>
+<div style="display: flex; align-items: center; gap: 6px;">
+<span style="{{ r.chipStyle }}">{{ r.chip }}</span>
+<span style="font-size: 12px; color: #a2aab3;">{{ r.time }}</span>
+</div>
+</div>
+</button>
+</sc-for>
+</div>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.06);">
+<span style="font-size: 13px; color: #a2aab3;">Только доступные к крафту</span>
+<button type="button" role="switch" aria-checked="false" aria-label="Только доступные к крафту" style="width: 40px; height: 22px; box-sizing: border-box; border-radius: 11px; background: rgba(255, 255, 255, 0.078); border: 0; padding: 3px; display: flex; align-items: center;">
+<span style="width: 16px; height: 16px; border-radius: 8px; background: #f0f4f8; display: block;"></span>
+</button>
+</div>
+</div>
+
+<!-- 2. Ингредиенты + доп. предметы -->
+<div style="width: 352px; flex-shrink: 0; box-sizing: border-box; padding: 14px; background: #15191d; border: 1px solid rgba(255, 255, 255, 0.067); border-radius: 12px; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; align-items: baseline; justify-content: space-between;">
+<div style="font-size: 16px; font-weight: 700;">Ингредиенты</div>
+<div style="font-size: 13px; color: #a2aab3;">1 из 1 в наличии</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px;">
+<sc-for list="{{ ingredients }}" as="i" hint-placeholder-count="1">
+<button type="button" aria-label="{{ i.name }}" style="{{ i.style }}">
+<sc-if value="{{ i.vars }}" hint-placeholder-val="{{ true }}">
+<span style="position: absolute; left: 5px; top: 5px; color: #f8bc5a; display: flex;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"></path></svg></span>
+</sc-if>
+<img src="{{ i.img }}" alt="" style="width: 54px; height: 44px; object-fit: contain; margin-top: 6px;">
+<span style="{{ i.countStyle }}">{{ i.count }}</span>
+</button>
+</sc-for>
+</div>
+
+<div style="display: flex; align-items: baseline; justify-content: space-between; margin-top: 6px;">
+<div style="font-size: 16px; font-weight: 700;">Дополнительные предметы</div>
+<div style="font-size: 13px; color: #f26666;">0 из 1</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px;">
+<sc-for list="{{ tools }}" as="i" hint-placeholder-count="1">
+<button type="button" aria-label="{{ i.name }}" style="{{ i.style }}">
+<img src="{{ i.img }}" alt="" style="width: 54px; height: 44px; object-fit: contain; margin-top: 6px;">
+<span style="{{ i.countStyle }}">{{ i.count }}</span>
+</button>
+</sc-for>
+</div>
+
+<div style="flex-grow: 1;"></div>
+<!-- Карточка выбранного ингредиента (вместо всплывающей подсказки) -->
+<div style="box-sizing: border-box; padding: 14px; border-radius: 10px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.055); display: flex; flex-direction: column; gap: 10px;">
+<div style="display: flex; align-items: center; gap: 12px;">
+<div style="width: 56px; height: 48px; border-radius: 8px; background: #15191d; display: flex; align-items: center; justify-content: center;">
+<img src="/_blob/f5edf5b9c6050d521e9417a1137b5ff2" alt="" style="max-width: 48px; max-height: 40px; object-fit: contain;">
+</div>
+<div style="display: flex; flex-direction: column; gap: 3px;">
+<div style="font-size: 15px; font-weight: 700;">Листовой металл</div>
+<div style="font-size: 12px; color: #f8bc5a; display: flex; align-items: center; gap: 5px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"></path></svg>Есть варианты — нажмите, чтобы выбрать</div>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 12px; font-size: 13px;">
+<span style="color: #a2aab3;">Нужно</span><span style="text-align: right; font-weight: 600;">24 шт.</span>
+<span style="color: #a2aab3;">В наличии</span><span style="text-align: right; font-weight: 600; color: #62d6a0;">60 шт.</span>
+<span style="color: #a2aab3;">Мин. состояние</span><span style="text-align: right; font-weight: 600;">Любое</span>
+<span style="color: #a2aab3;">Расходуется</span><span style="text-align: right; font-weight: 600;">Да</span>
+</div>
+</div>
+</div>
+
+<!-- 3. Предмет -->
+<div style="width: 600px; flex-shrink: 0; box-sizing: border-box; padding: 14px; background: #15191d; border: 1px solid rgba(255, 255, 255, 0.067); border-radius: 12px; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; align-items: center; gap: 10px;">
+<div style="font-size: 18px; font-weight: 700; flex-grow: 1;">Седан (Ольга 24)</div>
+<button type="button" style="height: 32px; box-sizing: border-box; padding: 0 12px; border-radius: 8px; background: rgba(242, 102, 102, 0.12); border: 1px solid rgba(242, 102, 102, 0.4); color: #f26666; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z"></path></svg>
+Требования
+</button>
+</div>
+<!-- Сцена превью + варианты -->
+<div style="height: 268px; flex-shrink: 0; position: relative; border-radius: 10px; overflow: hidden; background: radial-gradient(ellipse 46% 52% at 44% 55%, rgba(245, 165, 36, 0.16), rgba(245, 165, 36, 0) 70%), #1a1f24; border: 1px solid rgba(255, 255, 255, 0.055);">
+<img src="/_blob/90b591a9359469da86e13757d5e8681a" alt="Седан (Ольга 24)" style="position: absolute; left: 70px; top: 6px; width: 360px; height: 240px; object-fit: contain;">
+<div style="position: absolute; left: 14px; bottom: 12px; font-size: 12px; color: #a2aab3; display: flex; align-items: center; gap: 6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7L20 8M20 3v5h-5"></path></svg>Тяните — вращать, колесо — масштаб</div>
+<div style="position: absolute; right: 12px; top: 12px; bottom: 12px; width: 84px; display: flex; flex-direction: column; gap: 8px;">
+<div style="font-size: 12px; color: #a2aab3; text-align: center;">Варианты</div>
+<sc-for list="{{ variants }}" as="v" hint-placeholder-count="3">
+<button type="button" aria-label="{{ v.label }}" style="{{ v.style }}">
+<img src="{{ v.img }}" alt="" style="max-width: 70px; max-height: 50px; object-fit: contain;">
+</button>
+</sc-for>
+</div>
+</div>
+<!-- Слоты навесного -->
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<div style="display: flex; align-items: baseline; justify-content: space-between;">
+<div style="font-size: 13px; font-weight: 700; color: #a2aab3; text-transform: uppercase; letter-spacing: 0.06em;">Слоты навесного</div>
+<div style="font-size: 12px; color: #a2aab3;">заполнится 9 из 13</div>
+</div>
+<div style="display: flex; gap: 6px;">
+<sc-for list="{{ slots }}" as="s" hint-placeholder-count="13">
+<div title="{{ s.label }}" style="{{ s.style }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ s.icon }}"></path></svg>
+</div>
+</sc-for>
+</div>
+</div>
+<!-- Описание -->
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<div style="font-size: 13px; font-weight: 700; color: #a2aab3; text-transform: uppercase; letter-spacing: 0.06em;">Детали рецепта</div>
+<div style="font-size: 15px; line-height: 1.45; color: #eceff2;">Сборка классического советского заднеприводного седана ГАЗ-24 (Ольга 24).</div>
+</div>
+<!-- Доп. навесное -->
+<div style="display: flex; flex-direction: column; gap: 8px; min-height: 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between;">
+<div style="font-size: 13px; font-weight: 700; color: #a2aab3; text-transform: uppercase; letter-spacing: 0.06em;">Дополнительное навесное</div>
+<div style="font-size: 12px; color: #a2aab3;">выбрано 6 из 8 · +время крафта</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px;">
+<sc-for list="{{ extras }}" as="e" hint-placeholder-count="8">
+<div style="{{ e.style }}">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<button type="button" aria-label="Подробнее" style="width: 22px; height: 22px; padding: 0; border-radius: 6px; background: transparent; border: 0; color: #a2aab3; display: flex; align-items: center; justify-content: center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0M12 11v5M12 8h.01"></path></svg></button>
+<button type="button" aria-label="Добавить к крафту" aria-pressed="{{ e.on }}" style="{{ e.chkStyle }}">
+<sc-if value="{{ e.on }}" hint-placeholder-val="{{ true }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg></sc-if>
+</button>
+</div>
+<div style="height: 50px; display: flex; align-items: center; justify-content: center;">
+<img src="{{ e.img }}" alt="" style="{{ e.imgStyle }}">
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 4px;">
+<div style="display: flex; gap: 2px;">
+<sc-for list="{{ e.vars }}" as="n" hint-placeholder-count="3">
+<span style="{{ n.style }}">{{ n.n }}</span>
+</sc-for>
+</div>
+<sc-if value="{{ e.hasQty }}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; align-items: center; height: 20px; border-radius: 5px; background: #15191d; border: 1px solid rgba(255, 255, 255, 0.07);">
+<button type="button" aria-label="Меньше" style="width: 18px; height: 18px; padding: 0; background: transparent; border: 0; color: #a2aab3; display: flex; align-items: center; justify-content: center;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+<span style="min-width: 16px; text-align: center; font-size: 12px; font-weight: 700;">{{ e.qty }}</span>
+<button type="button" aria-label="Больше" style="width: 18px; height: 18px; padding: 0; background: transparent; border: 0; color: #a2aab3; display: flex; align-items: center; justify-content: center;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+</div>
+</sc-if>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<!-- 4. Результат крафта -->
+<div style="width: 324px; flex-shrink: 0; box-sizing: border-box; padding: 14px; background: #15191d; border: 1px solid rgba(255, 255, 255, 0.067); border-radius: 12px; display: flex; flex-direction: column; gap: 14px;">
+<div style="font-size: 16px; font-weight: 700;">Результат крафта</div>
+<div style="display: flex; gap: 12px; align-items: center;">
+<div style="width: 92px; height: 64px; flex-shrink: 0; border-radius: 9px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.055); display: flex; align-items: center; justify-content: center;">
+<img src="/_blob/1a55dc12ffde2766da7081eefdc4daa4" alt="" style="max-width: 80px; max-height: 54px; object-fit: contain;">
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px;">
+<div style="font-size: 16px; font-weight: 700;">Olga 24</div>
+<div style="font-size: 12px; color: #a2aab3;">Вариант 2 из 3</div>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px 10px; font-size: 13px;">
+<span style="color: #a2aab3;">Время</span><span style="text-align: right; font-weight: 600;">2 мин 52 с</span>
+<span style="color: #a2aab3;">Количество</span><span style="text-align: right; font-weight: 600;">1</span>
+<span style="color: #a2aab3;">Наполнение</span><span style="text-align: right; font-weight: 600;">—</span>
+<span style="color: #a2aab3;">Состояние</span><span style="text-align: right; font-weight: 600; color: #62d6a0;">Нетронутое</span>
+</div>
+<div style="box-sizing: border-box; padding: 12px; border-radius: 10px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.055); display: flex; flex-direction: column; gap: 7px;">
+<div style="font-size: 12px; font-weight: 700; color: #a2aab3; text-transform: uppercase; letter-spacing: 0.06em;">Характеристики</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 10px; font-size: 13px;">
+<span style="color: #a2aab3;">Прочность</span><span style="text-align: right; font-weight: 700; color: #4fd8b6;">1000 hp</span>
+<span style="color: #a2aab3;">Защита от пуль</span><span style="text-align: right;">—</span>
+<span style="color: #a2aab3;">Защита от ножа</span><span style="text-align: right;">—</span>
+<span style="color: #a2aab3;">От заражённых</span><span style="text-align: right;">—</span>
+<span style="color: #a2aab3;">От гранат</span><span style="text-align: right;">—</span>
+</div>
+</div>
+<!-- Количество -->
+<div style="display: flex; flex-direction: column; gap: 10px;">
+<div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="color: #a2aab3;">Количество к созданию</span><span style="color: #a2aab3;">макс. 1</span></div>
+<div style="display: flex; gap: 8px;">
+<button type="button" aria-label="Меньше" style="width: 48px; height: 44px; border-radius: 9px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.09); color: #a2aab3; display: flex; align-items: center; justify-content: center; padding: 0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+<div style="flex-grow: 1; height: 44px; box-sizing: border-box; border-radius: 9px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.09); display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 800;">1</div>
+<button type="button" aria-label="Больше" style="width: 48px; height: 44px; border-radius: 9px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.09); color: #a2aab3; display: flex; align-items: center; justify-content: center; padding: 0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+</div>
+<div style="height: 4px; border-radius: 2px; background: rgba(255, 255, 255, 0.078); position: relative;">
+<div style="position: absolute; left: 0; top: -5px; width: 14px; height: 14px; border-radius: 7px; background: #f0f4f8;"></div>
+</div>
+</div>
+<!-- Разбор -->
+<div style="display: flex; flex-direction: column; gap: 8px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.06);">
+<div style="display: flex; align-items: center; justify-content: space-between;">
+<div style="font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7L20 8M20 3v5h-5"></path></svg>Разбор · 12 с</div>
+<button type="button" disabled="disabled" style="height: 28px; box-sizing: border-box; padding: 0 10px; border-radius: 7px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.07); color: #a2aab3; font-size: 12px; font-weight: 600; cursor: default;">Нет предмета</button>
+</div>
+<div style="display: flex; gap: 8px;">
+<div style="width: 56px; height: 48px; position: relative; border-radius: 8px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.055); display: flex; align-items: center; justify-content: center;">
+<img src="/_blob/f5edf5b9c6050d521e9417a1137b5ff2" alt="Листовой металл" style="max-width: 40px; max-height: 34px; object-fit: contain;">
+<span style="position: absolute; right: 4px; bottom: 2px; font-size: 11px; font-weight: 700;">×5</span>
+</div>
+</div>
+</div>
+<div style="flex-grow: 1;"></div>
+<div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px;">
+<span style="color: #a2aab3; display: flex; align-items: center; gap: 6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0M12 7v5l3 2"></path></svg>Время создания</span>
+<span style="font-size: 16px; font-weight: 700;">2 мин 52 с</span>
+</div>
+<button type="button" style="height: 54px; border-radius: 10px; background: rgba(242, 102, 102, 0.14); border: 1px solid rgba(242, 102, 102, 0.45); color: #f26666; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px;">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.5 20h19zM12 10v4M12 17h.01"></path></svg>
+Требуются обвесы
+</button>
+</div>
+
+</div>
+</div>
+
+<!-- Подсказки клавиш -->
+<div style="position: absolute; left: 124px; top: 980px; display: flex; gap: 22px; font-size: 13px; color: #c3c9d0;">
+<sc-for list="{{ hints }}" as="h" hint-placeholder-count="4">
+<span style="display: flex; align-items: center; gap: 8px;"><kbd style="font-family: inherit; font-size: 12px; font-weight: 700; padding: 3px 7px; border-radius: 5px; background: rgba(26, 31, 36, 0.9); border: 1px solid rgba(255, 255, 255, 0.12); color: #eceff2;">{{ h.k }}</kbd>{{ h.t }}</span>
+</sc-for>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1920,"height":1080}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const C = { tile: '#1a1f24', amber: '#f5a524', amberT: '#f8bc5a', teal: '#4fd8b6', red: '#f26666', green: '#62d6a0', muted: '#a2aab3' };
+    const soft = (rgb, txt) => 'display: inline-flex; align-items: center; height: 20px; padding: 0 7px; border-radius: 6px; font-size: 11px; font-weight: 700; background: rgba(' + rgb + ', 0.12); border: 1px solid rgba(' + rgb + ', 0.35); color: ' + txt + ';';
+    const ICON = {
+      grid: 'M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z',
+      wheel: 'M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0M9 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0M12 3v6M12 15v6M3 12h6M15 12h6',
+      radiator: 'M3 6h18v12H3zM7.5 6v12M12 6v12M16.5 6v12',
+      battery: 'M3 8h18v11H3zM7 5v3M17 5v3M6.5 13.5h3M14.5 13.5h3M16 12v3',
+      plug: 'M9 3h6v5H9zM12 8v3M8 11h8l-1 6h-6zM12 17v4',
+      door: 'M4 20V11l6-7h10v16zM4 12h16M15 15h3',
+      hood: 'M3 17l3-9h12l3 9zM8 13h8',
+      trunk: 'M4 8h16l-2 10H6zM10 12h4'
+    };
+    const catStyle = (on) => 'width: 44px; height: 44px; padding: 0; border-radius: 9px; display: flex; align-items: center; justify-content: center; ' + (on ? 'background: rgba(245, 165, 36, 0.14); border: 1px solid rgba(245, 165, 36, 0.45); color: #f5a524;' : 'background: transparent; border: 1px solid transparent; color: #a2aab3;');
+    const cats = [
+      { label: 'Все рецепты', icon: ICON.grid, style: catStyle(true) },
+      { label: 'Транспорт', icon: ICON.wheel, style: catStyle(false) }
+    ];
+    const rowStyle = (sel) => 'width: 100%; box-sizing: border-box; padding: 6px; border-radius: 10px; display: flex; align-items: center; gap: 10px; ' + (sel ? 'background: #21272d; border: 1px solid rgba(245, 165, 36, 0.55);' : 'background: transparent; border: 1px solid transparent;');
+    const recipes = [
+      { name: 'Седан (Ольга 24)', img: '/_blob/1a55dc12ffde2766da7081eefdc4daa4', chip: 'Нужны обвесы', chipStyle: soft('242, 102, 102', C.red), time: '2 мин 52 с', style: rowStyle(true) }
+    ];
+    const tileStyle = (state) => {
+      const b = state === 'ok' ? 'rgba(98, 214, 160, 0.35)' : state === 'bad' ? 'rgba(242, 102, 102, 0.45)' : 'rgba(255, 255, 255, 0.055)';
+      return 'position: relative; height: 88px; box-sizing: border-box; padding: 0; border-radius: 9px; background: #1a1f24; border: 1px solid ' + b + '; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding-bottom: 6px;';
+    };
+    const countStyle = (color) => 'font-size: 12px; font-weight: 700; color: ' + color + ';';
+    const ingredients = [
+      { name: 'Листовой металл', img: '/_blob/f5edf5b9c6050d521e9417a1137b5ff2', count: '60/24', vars: true, style: tileStyle('ok') + ' outline: 2px solid rgba(245, 165, 36, 0.6); outline-offset: 1px;', countStyle: countStyle(C.green) }
+    ];
+    const tools = [
+      { name: 'Рабочие перчатки', img: '/_blob/e67c19cdfb2845d042132e5558bb1e1d', count: '0/1', style: tileStyle('bad'), countStyle: countStyle(C.red) }
+    ];
+    const varStyle = (sel) => 'width: 100%; height: 56px; flex-shrink: 0; padding: 0; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: rgba(21, 25, 29, 0.85); ' + (sel ? 'border: 1px solid #f5a524;' : 'border: 1px solid rgba(255, 255, 255, 0.08);');
+    const variants = [
+      { label: 'Вариант 1', img: '/_blob/e22b096f8a8cd71dd398660b8cda7317', style: varStyle(false) },
+      { label: 'Вариант 2', img: '/_blob/1a55dc12ffde2766da7081eefdc4daa4', style: varStyle(true) },
+      { label: 'Вариант 3', img: '/_blob/3d6187f4c1af9e993e41c3c9dcc9235f', style: varStyle(false) }
+    ];
+    const slotStyle = (on) => 'width: 38px; height: 38px; box-sizing: border-box; border-radius: 8px; display: flex; align-items: center; justify-content: center; ' + (on ? 'background: rgba(79, 216, 182, 0.12); border: 1px solid rgba(79, 216, 182, 0.4); color: #4fd8b6;' : 'background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.055); color: #a2aab3;');
+    const slotDefs = [
+      ['Радиатор', 'radiator', false], ['Аккумулятор', 'battery', false], ['Свеча зажигания', 'plug', false],
+      ['Дверь водителя', 'door', false], ['Дверь пассажира', 'door', true], ['Задняя левая дверь', 'door', true], ['Задняя правая дверь', 'door', true],
+      ['Капот', 'hood', true], ['Багажник', 'trunk', true],
+      ['Колесо', 'wheel', true], ['Колесо', 'wheel', true], ['Колесо', 'wheel', true], ['Колесо', 'wheel', true]
+    ];
+    const slots = slotDefs.map(([label, ic, on]) => ({ label, icon: ICON[ic], style: slotStyle(on) }));
+    const segStyle = (sel) => 'width: 18px; height: 18px; border-radius: 4px; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; ' + (sel ? 'background: #f5a524; color: #1c1406;' : 'background: #15191d; color: #a2aab3;');
+    const extraStyle = (on) => 'box-sizing: border-box; padding: 7px; border-radius: 10px; display: flex; flex-direction: column; gap: 4px; ' + (on ? 'background: #1f252b; border: 1px solid rgba(79, 216, 182, 0.4);' : 'background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.055);');
+    const chkStyle = (on) => 'width: 22px; height: 22px; padding: 0; border-radius: 6px; display: flex; align-items: center; justify-content: center; ' + (on ? 'background: #4fd8b6; border: 1px solid #4fd8b6; color: #10241f;' : 'background: transparent; border: 1px solid rgba(255, 255, 255, 0.22); color: transparent;');
+    const ex = (img, on, sel, qty) => ({
+      img, on, qty, hasQty: on,
+      vars: sel ? [1, 2, 3].map((n) => ({ n, style: segStyle(n === sel) })) : [],
+      style: extraStyle(on), chkStyle: chkStyle(on),
+      imgStyle: 'max-width: 100px; max-height: 50px; object-fit: contain;' + (on ? '' : ' opacity: 0.55;')
+    });
+    const extras = [
+      ex('/_blob/dfb4ae6e55ddd4f69b19465f7dfbbbbe', false, 2, 1),
+      ex('/_blob/4012871a7c98218e4692c85c056bf051', true, 1, 1),
+      ex('/_blob/52944e43c8d3442ed3b25e0230eb6d96', true, 2, 1),
+      ex('/_blob/5dfcff2bac36b714ee970297962441db', true, 3, 1),
+      ex('/_blob/20031d4189dd80eda81d7c9f38ed51d0', true, 1, 1),
+      ex('/_blob/044e0dd339ef23ade3005369ccbb07f9', true, 2, 1),
+      ex('/_blob/581c2dd432bef2e24d35ae0129226829', true, 0, 4),
+      ex('/_blob/fe10410f34c1652498608b7473b0e626', false, 0, 1)
+    ];
+    return {
+      queue: [1, 2, 3, 4, 5],
+      cats, recipes, ingredients, tools, variants, slots, extras,
+      hints: [{ k: 'Esc', t: 'закрыть' }, { k: 'ЛКМ', t: 'выбрать' }, { k: 'Колесо', t: 'листать' }, { k: 'Тянуть', t: 'вращать превью' }]
+    };
+  }
+}
+</script>
+</body>
+</html>

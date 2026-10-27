@@ -20,18 +20,19 @@ class DRL_UIVariantTile extends Managed
 	bool m_Hover;
 	bool m_Selected;
 
-	void Build(Widget parent, int slot, float x, float s, ScriptedWidgetEventHandler handler)
+	void Build(Widget parent, int slot, float x, float y, float w, float h, ScriptedWidgetEventHandler handler)
 	{
-		m_Root = INT_UIF_Draw.Frame(parent, x, 0, s, s, "DRL_VarTile");
-		m_Bg = INT_UIF_Surface.Box(m_Root, 0, 0, s, s, 8, 0, 0);
-		Widget clip = INT_UIF_Draw.Clip(m_Root, 3, 3, s - 6, s - 6, "DRL_VarClip");
+		m_Root = INT_UIF_Draw.Frame(parent, x, y, w, h, "DRL_VarTile");
+		int fill = ARGB(215, 21, 25, 29);
+		m_Bg = INT_UIF_Surface.Box(m_Root, 0, 0, w, h, 8, fill, 0);
+		Widget clip = INT_UIF_Draw.Clip(m_Root, 3, 3, w - 6, h - 6, "DRL_VarClip");
 		m_View = new DRL_UIItemView();
 		m_View.Create(clip, true);
-		m_Glyph = INT_UIF_Draw.Icon(m_Root, (s - 18) * 0.5, (s - 18) * 0.5, 18, "info", INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_FAINT));
+		m_Glyph = INT_UIF_Draw.Icon(m_Root, (w - 18) * 0.5, (h - 18) * 0.5, 18, "info", INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_FAINT));
 		m_Glyph.Show(false);
-		m_Num = INT_UIF_Draw.Text(m_Root, 4, s - 16, 20, 14, "", 10, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_MUTED));
+		m_Num = INT_UIF_Draw.Text(m_Root, 5, h - 16, 20, 14, "", 10, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_MUTED));
 		m_Num.SetSort(DRL_UI_SORT_OVER_MODEL);
-		m_Hit = INT_UIF_Draw.Hit(m_Root, 0, 0, s, s, handler);
+		m_Hit = INT_UIF_Draw.Hit(m_Root, 0, 0, w, h, handler);
 		DRL_UIKitUtil.ExposeHit(m_Hit, "DRL_Var_" + slot.ToString(), handler);
 	}
 
@@ -55,8 +56,8 @@ class DRL_UIVariantTile extends Managed
 	void Paint()
 	{
 		INT_UIF_ThemeManager tm = INT_UIF_ThemeManager.Get();
-		int fill = tm.Color(INT_UIF_ThemeKeys.TILE);
-		int border = tm.Color(INT_UIF_ThemeKeys.TILE_BORDER);
+		int fill = ARGB(215, 21, 25, 29);
+		int border = ARGB(22, 255, 255, 255);
 		if (m_Selected)
 		{
 			fill = INT_UIF_Color.WithAlpha(tm.Color(INT_UIF_ThemeKeys.AMBER), 40);
@@ -72,6 +73,7 @@ class DRL_UIVariantTile extends Managed
 	}
 }
 
+// Варианты результата — колонкой плиток справа на сцене превью (как в старом меню).
 class DRL_UIVariantStrip extends ScriptedWidgetEventHandler
 {
 	protected Widget m_Root;
@@ -81,6 +83,8 @@ class DRL_UIVariantStrip extends ScriptedWidgetEventHandler
 	protected int m_First;
 	protected int m_Selected = -1;
 	protected float m_Tile;
+	protected bool m_Wanted;
+	protected bool m_Covered;
 	protected ref ScriptInvoker m_OnSelected;
 
 	void DRL_UIVariantStrip()
@@ -101,19 +105,20 @@ class DRL_UIVariantStrip extends ScriptedWidgetEventHandler
 		return m_OnSelected;
 	}
 
-	// Высота: подпись 20 + плитка.
-	void Build(Widget parent, float x, float y, float w, float tile)
+	// Сверху подпись 18, снизу строка «+N» 14, между ними плитки w x tileH.
+	void Build(Widget parent, float x, float y, float w, float h, float tileH)
 	{
-		m_Tile = tile;
-		m_Root = INT_UIF_Draw.Frame(parent, x, y, w, tile + 20, "DRL_Variants");
-		INT_UIF_Draw.Caption(m_Root, 2, 0, w - 80, "#STR_DRL_UI_VARIANTS", "swap");
-		m_More = INT_UIF_Draw.Text(m_Root, w - 120, 0, 118, 14, "", 11, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_FAINT), INT_UIF_Align.RIGHT);
-		Widget row = INT_UIF_Draw.Frame(m_Root, 0, 20, w, tile, "DRL_VariantsRow");
-		int count = (int)((w + 8) / (tile + 8));
+		m_Tile = tileH;
+		int muted = INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_MUTED);
+		m_Root = INT_UIF_Draw.Frame(parent, x, y, w, h, "DRL_Variants");
+		INT_UIF_Draw.Text(m_Root, 0, 0, w, 16, "#STR_DRL_UI_VARIANTS_SHORT", 11, muted, INT_UIF_Align.CENTER);
+		m_More = INT_UIF_Draw.Text(m_Root, 0, h - 14, w, 14, "", 11, muted, INT_UIF_Align.CENTER);
+		float top = 20;
+		int count = (int)((h - top - 16 + 6) / (tileH + 6));
 		for (int i = 0; i < count; i++)
 		{
 			DRL_UIVariantTile t = new DRL_UIVariantTile();
-			t.Build(row, i, i * (tile + 8), tile, this);
+			t.Build(m_Root, i, 0, top + i * (tileH + 6), w, tileH, this);
 			t.m_Root.Show(false);
 			m_Tiles.Insert(t);
 		}
@@ -126,7 +131,8 @@ class DRL_UIVariantStrip extends ScriptedWidgetEventHandler
 
 	void Show(bool show)
 	{
-		m_Root.Show(show);
+		m_Wanted = show;
+		m_Root.Show(m_Wanted && !m_Covered);
 	}
 
 	void SetItems(array<string> classes, int selected)
@@ -181,21 +187,25 @@ class DRL_UIVariantStrip extends ScriptedWidgetEventHandler
 				t.Bind(-1, "");
 			}
 		}
-		// Больше, чем помещается: подсказка и прокрутка колесом.
-		int hidden = m_Classes.Count() - m_Tiles.Count();
+		// Больше, чем помещается: сколько ещё ниже, прокрутка колесом.
+		int hidden = m_Classes.Count() - m_First - m_Tiles.Count();
 		if (hidden > 0)
-			m_More.SetText(DRL_UIText.Fmt("#STR_DRL_UI_VARIANTS_MORE", m_Classes.Count().ToString()));
+			m_More.SetText("+" + hidden.ToString());
 		else
 			m_More.SetText("");
 	}
 
+	// Колонка лежит на сцене: пока её перекрывает выезжающая панель, прячется
+	// вся (номера плиток подняты над моделями и легли бы поверх панели).
 	void HideModels(bool hide)
 	{
+		m_Covered = hide;
 		foreach (DRL_UIVariantTile t : m_Tiles)
 		{
 			if (t.m_Index >= 0)
 				t.m_View.Show(!hide);
 		}
+		m_Root.Show(m_Wanted && !m_Covered);
 	}
 
 	void Clear()
@@ -395,7 +405,7 @@ class DRL_UIPopover
 		int popFill = INT_UIF.Color(INT_UIF_ThemeKeys.PANEL);
 		int popBorder = INT_UIF.Soft(INT_UIF_ThemeKeys.AMBER, 90);
 		INT_UIF_Surface.Box(m_Root, 0, 0, w, h, 14, popFill, popBorder);
-		INT_UIF_Draw.Image(m_Root, 0, 0, w, 90, "iuf_grad_v", ARGB(14, 255, 255, 255));
+		INT_UIF_Draw.Image(m_Root, 14, 0, w - 28, 90, "iuf_grad_v", ARGB(14, 255, 255, 255));
 		m_IconHost = INT_UIF_Draw.Frame(m_Root, 16, 16, 40, 40, "DRL_PopIcon");
 		m_Title = INT_UIF_Draw.Text(m_Root, 68, 14, w - 120, 24, "", 17, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT));
 		m_Title.SetBold(true);

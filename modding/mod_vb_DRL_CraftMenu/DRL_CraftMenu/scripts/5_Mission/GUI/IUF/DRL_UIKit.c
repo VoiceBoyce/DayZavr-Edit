@@ -310,6 +310,7 @@ class DRL_UIStage extends ScriptedWidgetEventHandler
 	protected Widget m_Clip;
 	protected ButtonWidget m_Hit;
 	protected ImageWidget m_Glow;
+	protected ImageWidget m_Floor;
 	protected ImageWidget m_Backdrop;
 	protected Widget m_Missing;
 	protected Widget m_HintRow;
@@ -334,9 +335,10 @@ class DRL_UIStage extends ScriptedWidgetEventHandler
 		// Фон категории/верстака из конфига — приглушённой подложкой.
 		m_Backdrop = INT_UIF_Draw.Image(m_Root, 1, 1, w - 2, h - 2, "iuf_white", ARGB(46, 255, 255, 255));
 		m_Backdrop.Show(false);
-		INT_UIF_Draw.Image(m_Root, 0, 0, w, h * 0.6, "iuf_grad_v", ARGB(14, 255, 255, 255));
+		// Блик с отступом на радиус: углы прямоугольника не выходят за скругление.
+		INT_UIF_Draw.Image(m_Root, 12, 0, w - 24, h * 0.6, "iuf_grad_v", ARGB(14, 255, 255, 255));
 		m_Glow = INT_UIF_Draw.Image(m_Root, w * 0.5 - 150, h * 0.5 - 130, 300, 260, "iuf_radial", ARGB(40, 245, 165, 36));
-		INT_UIF_Draw.Image(m_Root, w * 0.5 - 130, h - 58, 260, 40, "iuf_radial", ARGB(120, 0, 0, 0));
+		m_Floor = INT_UIF_Draw.Image(m_Root, w * 0.5 - 130, h - 58, 260, 40, "iuf_radial", ARGB(120, 0, 0, 0));
 
 		m_Clip = INT_UIF_Draw.Clip(m_Root, 10, 10, w - 20, h - 40, "DRL_StageClip");
 		m_View = new DRL_UIItemView();
@@ -374,6 +376,19 @@ class DRL_UIStage extends ScriptedWidgetEventHandler
 	{
 		if (m_Glow)
 			m_Glow.SetColor(INT_UIF_Color.WithAlpha(color, 44));
+	}
+
+	// Справа на сцене лежит колонка вариантов: модель, подсветка и «пол»
+	// сдвигаются в оставшуюся часть, чтобы модель не рисовалась поверх плиток.
+	void SetModelInset(float right)
+	{
+		float mw = m_W - right;
+		if (m_Clip)
+			INT_UIF_Draw.Resize(m_Clip, mw - 20, m_H - 40);
+		if (m_Glow)
+			INT_UIF_Draw.Move(m_Glow, mw * 0.5 - 150, m_H * 0.5 - 130);
+		if (m_Floor)
+			INT_UIF_Draw.Move(m_Floor, mw * 0.5 - 130, m_H - 58);
 	}
 
 	void SetBackdrop(string path)

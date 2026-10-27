@@ -1,14 +1,16 @@
 // ============================================================================
 // DRL_CraftMenu - окно крафта на INT_UIFramework (замена DRL_CraftMenuUI).
 //
-// Раскладка как у INT_Trader (окно 1640x920):
-//   шапка  — название, верстак/свободный крафт, очередь процессов, слоты, «Изучение»;
-//   слева  — сайдбар категорий;
-//   центр  — заголовок категории, поиск, сетка карточек рецептов
-//            (поверх правой части выезжает панель вариаций / требований);
-//   справа — детали рецепта: сцена с 3D-превью (+ доп. навесное), чипы,
-//            варианты результата, вкладки «Состав / Описание / Разбор»,
-//            количество и кнопка крафта с прогрессом.
+// Раскладка v2 — четыре колонки, как в старом меню (окно 1680x920):
+//   шапка      — название, верстак/свободный крафт, очередь процессов, слоты, «Изучение»;
+//   рецепты    — поиск, полоса иконок категорий, список рецептов, «только доступные»;
+//   ингредиенты — плитки ингредиентов и доп. предметов (инструменты, AttachmentsEx),
+//                карточка наведённого ингредиента;
+//   предмет    — сцена с 3D-превью и колонкой вариантов, слоты навесного,
+//                описание, плитки доп. навесного (поверх колонки выезжает
+//                панель вариаций ингредиента / требований);
+//   результат  — что получится, характеристики, количество, разбор,
+//                время и кнопка крафта с прогрессом.
 // Логика выбора, фильтров, проверок, состояний кнопки и RPC повторяет старое
 // меню 1:1 и идёт через те же хелперы (DRL_CraftInventoryHelper,
 // DRL_CraftMergedHelper, DRL_CraftComponentResolver и т.д.).
@@ -17,23 +19,25 @@
 
 class DRL_CraftWindow extends INT_UIF_Menu
 {
-	static const float SIDE_W = 250;
-	static const float DETAILS_W = 540;
-	static const float GAP = 16;
-	static const float STAGE_H = 200;
-	static const float DETAILS_FOOT_H = 104;
-	static const float VARIANT_TILE = 52;
-	static const float ROW_H = 50;
-	static const float ROW_GAP = 6;
-	static const float POPOVER_W = 440;
+	// Колонки тела (1648 x 814 при окне 1680x920).
+	static const float COL1_W = 336;
+	static const float COL2_W = 352;
+	static const float COL3_W = 600;
+	static const float COL4_W = 324;
+	static const float COL_GAP = 12;
+	static const float CPAD = 14;
+	static const float STAGE_H = 268;
+	static const float VARIANT_W = 84;
+	static const float VARIANT_TILE_H = 56;
+	static const float RECIPE_ROW_H = 60;
+	static const float RECIPE_ROW_GAP = 6;
+	static const float INGR_TILE_H = 88;
+	static const float DOP_TILE_H = 118;
+	static const float RET_TILE_H = 52;
+	static const float CARD_H = 206;
 
-	static const int TAB_COMP = 0;
-	static const int TAB_INFO = 1;
-	static const int TAB_RECRAFT = 2;
-
-	// Теги строк «Состава»: ингредиент (индекс в m_Merged), инструмент, доп. рецепт.
+	// Теги плиток ингредиентов: ингредиент (индекс в m_Merged) или инструмент.
 	static const int TAG_TOOL = 1000;
-	static const int TAG_DOP = 2000;
 
 	// = DRL_RecipeVarWidget.MAX_ATTACHED_QUANTITY
 	static const int MAX_ATTACHED_QUANTITY = 10;
@@ -69,62 +73,63 @@ class DRL_CraftWindow extends INT_UIF_Menu
 	protected float m_ReCraftDuration;
 
 	// Компоненты.
-	protected ref DRL_UISidebar m_Sidebar;
+	protected ref DRL_UICategoryRail m_Rail;
 	protected ref DRL_UIRecipeGrid m_Grid;
 	protected ref DRL_UIStage m_Stage;
 	protected ref DRL_UIVariantStrip m_Variants;
-	protected ref DRL_UIRowList m_CompList;
-	protected ref DRL_UIRowList m_RecraftList;
+	protected ref DRL_UITileList m_IngrList;
+	protected ref DRL_UITileList m_DopList;
+	protected ref DRL_UITileList m_RetList;
+	protected ref DRL_UIIngrCard m_IngrCard;
+	protected ref DRL_UISlotStrip m_SlotStrip;
+	protected ref DRL_UIItemView m_ResView;
 	protected ref DRL_UIPopover m_Popover;
-	protected ref DRL_UIHoverCard m_HoverCard;
 	protected ref DRL_UIQueueBar m_Queue;
 	protected INT_UIF_TextInput m_Search;
+	protected INT_UIF_Toggle m_OnlyAvail;
 	protected INT_UIF_Button m_LearningBtn;
 	protected INT_UIF_Badge m_SlotsBadge;
 	protected TextWidget m_ListTitle;
-	protected TextWidget m_ListSub;
+	protected string m_CatTitle;
+	protected bool m_OnlyAvailable;
 
-	// Детали.
-	protected Widget m_Details;
-	protected Widget m_DetailsEmpty;
-	protected Widget m_DetailsBody;
+	// Колонки: тело показывается, когда выбран рецепт.
+	protected Widget m_IngrBody;
+	protected Widget m_ItemBody;
+	protected Widget m_ItemEmpty;
+	protected Widget m_ResBody;
+
+	// Ингредиенты.
+	protected TextWidget m_IngrSummary;
+	protected int m_CardTag = -1;
+
+	// Предмет.
 	protected TextWidget m_RecipeTitle;
 	protected INT_UIF_Button m_ReqBtn;
-	protected ref DRL_UIChip m_ChipStatus;
-	protected ref DRL_UIChip m_ChipTime;
-	protected ref DRL_UIChip m_ChipCount;
-	protected float m_ChipY;
-	protected float m_VariantsY;
-
-	protected Widget m_TabsHost;
-	protected INT_UIF_Tabs m_Tabs;
-	protected Widget m_PageComp;
-	protected Widget m_PageInfo;
-	protected Widget m_PageRecraft;
-	protected float m_PageMaxH;
-
-	// Вкладка «Описание».
-	protected TextWidget m_InfoName;
-	protected TextWidget m_InfoState;
-	protected TextWidget m_InfoFill;
+	protected TextWidget m_SlotsFill;
 	protected MultilineTextWidget m_RecipeDesc;
+	protected TextWidget m_DopSummary;
+
+	// Результат.
+	protected Widget m_ResThumbGlyph;
+	protected TextWidget m_ResName;
+	protected TextWidget m_ResSub;
+	protected ref array<TextWidget> m_ResValues;
 	protected Widget m_StatsBox;
 	protected ref array<TextWidget> m_StatValues;
-	protected Widget m_SlotsRow;
-	protected Widget m_SlotIcons;
-	protected TextWidget m_SlotsNone;
 
-	// Вкладка «Разбор».
-	protected Widget m_RecraftFoot;
-	protected TextWidget m_RecraftTime;
+	// Разбор.
+	protected TextWidget m_RecraftHead;
 	protected INT_UIF_Button m_RecraftBtn;
 	protected INT_UIF_ProgressBar m_RecraftBar;
 	protected string m_RecraftText;
 
-	// Низ деталей: количество и кнопка крафта.
+	// Количество и кнопка крафта.
 	protected INT_UIF_IconButton m_CountMinus;
 	protected INT_UIF_IconButton m_CountPlus;
+	protected INT_UIF_Slider m_CountSlider;
 	protected TextWidget m_CountText;
+	protected TextWidget m_CountMax;
 	protected TextWidget m_TotalText;
 	protected TextWidget m_FootTime;
 	protected INT_UIF_Button m_CraftBtn;
@@ -135,15 +140,19 @@ class DRL_CraftWindow extends INT_UIF_Menu
 
 	void DRL_CraftWindow()
 	{
-		m_Sidebar = new DRL_UISidebar();
+		m_Rail = new DRL_UICategoryRail();
 		m_Grid = new DRL_UIRecipeGrid();
 		m_Stage = new DRL_UIStage();
 		m_Variants = new DRL_UIVariantStrip();
-		m_CompList = new DRL_UIRowList();
-		m_RecraftList = new DRL_UIRowList();
+		m_IngrList = new DRL_UITileList();
+		m_DopList = new DRL_UITileList();
+		m_RetList = new DRL_UITileList();
+		m_IngrCard = new DRL_UIIngrCard();
+		m_SlotStrip = new DRL_UISlotStrip();
+		m_ResView = new DRL_UIItemView();
 		m_Popover = new DRL_UIPopover();
-		m_HoverCard = new DRL_UIHoverCard();
 		m_Queue = new DRL_UIQueueBar();
+		m_ResValues = new array<TextWidget>();
 
 		m_SelectedComponentVariations = new map<int, string>();
 		m_SelectedAttachedRecipeIds = new array<int>();
@@ -212,7 +221,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 
 	override void GetWindowSize(out float w, out float h)
 	{
-		w = 1640;
+		w = 1680;
 		h = 920;
 	}
 
@@ -247,207 +256,254 @@ class DRL_CraftWindow extends INT_UIF_Menu
 
 	override void OnBuild(Widget body)
 	{
-		float bw = GetBodyW();
 		float bh = GetBodyH();
-		int faint = INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_FAINT);
+		float x2 = COL1_W + COL_GAP;
+		float x3 = x2 + COL2_W + COL_GAP;
+		float x4 = x3 + COL3_W + COL_GAP;
 
-		// --- слева: категории ---------------------------------------------------------
-		Widget left = INT_UIF_Draw.Frame(body, 0, 0, SIDE_W, bh, "DRL_Left");
-		RevealOnOpen(left);
-		INT_UIF_Draw.Caption(left, 4, 2, SIDE_W, "#STR_DRL_UI_CATEGORIES", "list");
-		m_Sidebar.Build(left, 0, 24, SIDE_W, bh - 24);
-		m_Sidebar.OnSelected().Insert(OnCategorySelected);
+		BuildRecipesCol(Column(body, 0, COL1_W, bh, "DRL_ColRecipes"), COL1_W, bh);
+		BuildIngrCol(Column(body, x2, COL2_W, bh, "DRL_ColIngr"), COL2_W, bh);
+		BuildItemCol(Column(body, x3, COL3_W, bh, "DRL_ColItem"), COL3_W, bh);
+		BuildResultCol(Column(body, x4, COL4_W, bh, "DRL_ColResult"), COL4_W, bh);
 
-		// --- центр: заголовок, поиск, сетка ---------------------------------------------
-		float gx = SIDE_W + GAP;
-		float gw = bw - SIDE_W - GAP - DETAILS_W - GAP;
-		Widget mid = INT_UIF_Draw.Frame(body, gx, 0, gw, bh, "DRL_Mid");
-		RevealOnOpen(mid);
-		m_ListTitle = INT_UIF_Draw.Text(mid, 2, 0, gw - 340, 24, "", 19, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT));
-		m_ListTitle.SetBold(true);
-		m_ListSub = INT_UIF_Draw.Text(mid, 2, 24, gw - 340, 16, "", 11, faint);
-		m_Search = INT_UIF_TextInput.Create(m_Bag, mid, gw - 320, 0, 320, 40, "#STR_SEARCH_RECIPE", 40, "search", "");
-		m_Search.OnChanged().Insert(OnSearchChanged);
-		m_Search.GetRoot().SetName("DRL_Search");
-		m_Grid.Build(mid, 0, 52, gw, bh - 52, 4, 3, 12);
-		m_Grid.OnSelected().Insert(OnGridSelected);
-
-		// Панель вариаций / требований выезжает поверх правой части сетки.
-		m_Popover.Build(m_Bag, body, gx + gw - POPOVER_W, 0, POPOVER_W, bh);
+		// Панель вариаций ингредиента / требований выезжает поверх колонки предмета.
+		m_Popover.Build(m_Bag, body, x3, 0, COL3_W, bh);
 		m_Popover.OnClose().Insert(OnPopoverClosed);
 		m_Popover.GetList().OnAction().Insert(OnPopAction);
 		m_Popover.GetList().OnHover().Insert(OnPopHover);
 
-		// --- справа: детали рецепта ----------------------------------------------------
-		BuildDetails(body, bw - DETAILS_W, 0, DETAILS_W, bh);
+		ShowDetails(false, false);
 
-		AddHint("#STR_DRL_UI_KEY_LMB", "#STR_DRL_UI_HINT_SELECT");
-		AddHint("#STR_DRL_UI_KEY_WHEEL", "#STR_DRL_UI_HINT_SCROLL");
-		AddHint("#STR_DRL_UI_KEY_DRAG", "#STR_DRL_UI_HINT_ROTATE");
+		// Подсказки клавиш под окном не нужны (решение 2026-10-27). «Esc» фреймворк
+		// добавляет сам; сам контейнер оставляем — его анимирует открытие/закрытие.
+		if (m_Hints)
+			INT_UIF_Widgets.ClearChildren(m_Hints);
 	}
 
-	protected void BuildDetails(Widget parent, float x, float y, float w, float h)
+	// Колонка — панель на всю высоту тела.
+	protected Widget Column(Widget body, float x, float w, float h, string name)
 	{
-		m_Details = INT_UIF_Draw.Frame(parent, x, y, w, h, "DRL_Details");
-		RevealOnOpen(m_Details);
+		Widget col = INT_UIF_Draw.Frame(body, x, 0, w, h, name);
+		int panelFill = INT_UIF.Color(INT_UIF_ThemeKeys.PANEL);
+		int panelBorder = INT_UIF.Color(INT_UIF_ThemeKeys.PANEL_BORDER);
+		INT_UIF_Surface.Box(col, 0, 0, w, h, 12, panelFill, panelBorder);
+		RevealOnOpen(col);
+		return col;
+	}
+
+	protected TextWidget ColTitle(Widget col, string text)
+	{
+		TextWidget t = INT_UIF_Draw.Text(col, CPAD, CPAD - 2, 220, 24, text, 16, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT));
+		t.SetBold(true);
+		return t;
+	}
+
+	// --- 1. рецепты: поиск, полоса категорий, список, «только доступные» -------------
+	protected void BuildRecipesCol(Widget col, float w, float h)
+	{
+		float cw = w - 2 * CPAD;
+		int muted = INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_MUTED);
+		ColTitle(col, "#STR_DRL_UI_COL_RECIPES");
+		m_ListTitle = INT_UIF_Draw.Text(col, CPAD + 110, CPAD, cw - 110, 20, "", 12, muted, INT_UIF_Align.RIGHT);
+		m_Search = INT_UIF_TextInput.Create(m_Bag, col, CPAD, 46, cw, 40, "#STR_SEARCH_RECIPE", 40, "search", "");
+		m_Search.OnChanged().Insert(OnSearchChanged);
+		m_Search.GetRoot().SetName("DRL_Search");
+
+		float ly = 98;
+		float toggleH = 32;
+		float lh = h - ly - CPAD - toggleH - 12;
+		m_Rail.Build(col, CPAD, ly, 40, lh);
+		m_Rail.OnSelected().Insert(OnCategorySelected);
+
+		float gx = CPAD + 40 + 12;
+		float gw = w - CPAD - gx + 6;
+		int rows = (int)((lh + RECIPE_ROW_GAP) / (RECIPE_ROW_H + RECIPE_ROW_GAP));
+		if (rows < 1)
+			rows = 1;
+		float gh = rows * RECIPE_ROW_H + (rows - 1) * RECIPE_ROW_GAP;
+		m_Grid.SetRowMode(true);
+		m_Grid.Build(col, gx, ly, gw, gh, 1, rows, RECIPE_ROW_GAP);
+		m_Grid.OnSelected().Insert(OnGridSelected);
+
+		float ty = h - CPAD - toggleH;
+		INT_UIF_Draw.Line(col, CPAD, ty - 7, cw, 1, INT_UIF.Color(INT_UIF_ThemeKeys.DIVIDER));
+		m_OnlyAvail = INT_UIF_Toggle.Create(m_Bag, col, CPAD, ty, cw, "#STR_DRL_UI_ONLY_AVAILABLE", false);
+		m_OnlyAvail.OnChanged().Insert(OnOnlyAvailChanged);
+		DRL_UIKitUtil.Expose(m_OnlyAvail, "DRL_OnlyAvail");
+	}
+
+	// --- 2. ингредиенты и доп. предметы, карточка ингредиента -----------------------
+	protected void BuildIngrCol(Widget col, float w, float h)
+	{
+		float cw = w - 2 * CPAD;
+		ColTitle(col, "#STR_DRL_Craft_Ingridient_Titel");
+		m_IngrBody = INT_UIF_Draw.Frame(col, 0, 0, w, h, "DRL_IngrBody");
+		m_IngrSummary = INT_UIF_Draw.Text(m_IngrBody, CPAD + 120, CPAD, cw - 120, 20, "", 12, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_MUTED), INT_UIF_Align.RIGHT);
+		float ly = 48;
+		float lh = h - ly - CPAD - CARD_H - 12;
+		m_IngrList.Build(m_IngrBody, CPAD, ly, cw + 8, lh, 4, INGR_TILE_H, 8, false, "DRL_Ingr");
+		m_IngrList.SetTooltips(true);
+		m_IngrList.SetEmptyText("#STR_DRL_UI_NO_INGR");
+		m_IngrList.OnAction().Insert(OnIngrAction);
+		m_IngrList.OnHover().Insert(OnIngrHover);
+		m_IngrCard.Build(m_IngrBody, CPAD, h - CPAD - CARD_H, cw, CARD_H);
+	}
+
+	// --- 3. предмет: сцена и варианты, слоты, описание, доп. навесное ---------------
+	protected void BuildItemCol(Widget col, float w, float h)
+	{
+		float cw = w - 2 * CPAD;
+		int muted = INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_MUTED);
 		int faint = INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_FAINT);
 
 		// Пусто: ничего не выбрано.
-		m_DetailsEmpty = INT_UIF_Draw.Frame(m_Details, 0, 0, w, h, "DRL_DetailsEmpty");
-		// Цвета — в локальные: два вызова одной функции в аргументах Enforce
-		// сводит к результату последнего.
-		int panelFill = INT_UIF.Color(INT_UIF_ThemeKeys.PANEL);
-		int panelBorder = INT_UIF.Color(INT_UIF_ThemeKeys.PANEL_BORDER);
-		INT_UIF_Surface.Box(m_DetailsEmpty, 0, 0, w, h, 12, panelFill, panelBorder);
-		INT_UIF_Draw.Image(m_DetailsEmpty, w * 0.5 - 120, h * 0.5 - 150, 240, 240, "iuf_radial", ARGB(16, 255, 255, 255));
-		INT_UIF_Draw.Icon(m_DetailsEmpty, w * 0.5 - 22, h * 0.5 - 56, 44, "gear", faint);
-		INT_UIF_Draw.Text(m_DetailsEmpty, 0, h * 0.5 + 4, w, 24, "#STR_DRL_UI_SELECT_HINT", 16, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_MUTED), INT_UIF_Align.CENTER);
+		m_ItemEmpty = INT_UIF_Draw.Frame(col, 0, 0, w, h, "DRL_ItemEmpty");
+		INT_UIF_Draw.Image(m_ItemEmpty, w * 0.5 - 120, h * 0.5 - 150, 240, 240, "iuf_radial", ARGB(16, 255, 255, 255));
+		INT_UIF_Draw.Icon(m_ItemEmpty, w * 0.5 - 22, h * 0.5 - 56, 44, "gear", faint);
+		INT_UIF_Draw.Text(m_ItemEmpty, 0, h * 0.5 + 4, w, 24, "#STR_DRL_UI_SELECT_HINT", 16, muted, INT_UIF_Align.CENTER);
 
-		// Рецепт выбран.
-		m_DetailsBody = INT_UIF_Draw.Frame(m_Details, 0, 0, w, h, "DRL_DetailsBody");
-		m_Stage.Build(m_DetailsBody, 0, 0, w, STAGE_H);
-		m_Stage.SetAccent(INT_UIF.Color(INT_UIF_ThemeKeys.AMBER));
-
-		float ty = STAGE_H + 12;
-		m_RecipeTitle = INT_UIF_Draw.Text(m_DetailsBody, 2, ty, w - 170, 26, "", 20, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT));
+		m_ItemBody = INT_UIF_Draw.Frame(col, 0, 0, w, h, "DRL_ItemBody");
+		m_RecipeTitle = INT_UIF_Draw.Text(m_ItemBody, CPAD, CPAD - 3, cw - 166, 26, "", 18, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT));
 		m_RecipeTitle.SetBold(true);
-		m_ReqBtn = INT_UIF_Button.Create(m_Bag, m_DetailsBody, w - 156, ty - 4, 156, 34, "#STR_DRL_UI_REQS", INT_UIF_Variant.SUCCESS, "shield");
+		m_ReqBtn = INT_UIF_Button.Create(m_Bag, m_ItemBody, w - CPAD - 150, CPAD - 6, 150, 34, "#STR_DRL_UI_REQS", INT_UIF_Variant.SUCCESS, "shield");
 		m_ReqBtn.OnClick().Insert(OnReqClick);
 		DRL_UIKitUtil.Expose(m_ReqBtn, "DRL_ReqBtn");
 
-		m_ChipY = ty + 34;
-		m_ChipStatus = new DRL_UIChip();
-		m_ChipStatus.Build(m_DetailsBody, 2, m_ChipY, 22, "DRL_DetailStatus");
-		m_ChipTime = new DRL_UIChip();
-		m_ChipTime.Build(m_DetailsBody, 120, m_ChipY, 22, "DRL_DetailTime");
-		m_ChipCount = new DRL_UIChip();
-		m_ChipCount.Build(m_DetailsBody, 240, m_ChipY, 22, "DRL_DetailCount");
-
-		m_VariantsY = m_ChipY + 32;
-		m_Variants.Build(m_DetailsBody, 0, m_VariantsY, w, VARIANT_TILE);
+		float y = 50;
+		m_Stage.Build(m_ItemBody, CPAD, y, cw, STAGE_H);
+		m_Stage.SetAccent(INT_UIF.Color(INT_UIF_ThemeKeys.AMBER));
+		m_Variants.Build(m_Stage.GetRoot(), cw - VARIANT_W - 10, 10, VARIANT_W, STAGE_H - 20, VARIANT_TILE_H);
 		m_Variants.OnSelected().Insert(OnVariantSelected);
+		m_Variants.Show(false);
 
-		// Вкладки: область между вариантами (если есть) и низом панели.
-		float footY = h - DETAILS_FOOT_H;
-		m_PageMaxH = footY - 8 - m_VariantsY - 46;
-		m_TabsHost = INT_UIF_Draw.Frame(m_DetailsBody, 0, m_VariantsY, w, footY - 8 - m_VariantsY, "DRL_TabsHost");
-		m_Tabs = INT_UIF_Tabs.Create(m_Bag, m_TabsHost, 0, 0, w, 38);
-		m_Tabs.AddTab("#STR_DRL_UI_TAB_COMP", "list");
-		m_Tabs.AddTab("#STR_DRL_UI_TAB_INFO", "info");
-		m_Tabs.AddTab("#STR_DRL_UI_TAB_RECRAFT", "refresh");
-		m_Tabs.OnChanged().Insert(OnTabChanged);
-		m_PageComp = INT_UIF_Draw.Frame(m_TabsHost, 0, 46, w, m_PageMaxH, "DRL_PageComp");
-		m_PageInfo = INT_UIF_Draw.Frame(m_TabsHost, 0, 46, w, m_PageMaxH, "DRL_PageInfo");
-		m_PageRecraft = INT_UIF_Draw.Frame(m_TabsHost, 0, 46, w, m_PageMaxH, "DRL_PageRecraft");
+		y = y + STAGE_H + 14;
+		INT_UIF_Draw.Caption(m_ItemBody, CPAD + 2, y, cw - 200, "#STR_DRL_UI_SLOTS_TITLE", "list");
+		m_SlotsFill = INT_UIF_Draw.Text(m_ItemBody, CPAD + cw - 240, y - 2, 240, 18, "", 12, muted, INT_UIF_Align.RIGHT);
+		m_SlotStrip.Build(m_ItemBody, CPAD, y + 22, cw, 38);
 
-		m_CompList.Build(m_PageComp, 0, 0, w, m_PageMaxH, ROW_H, ROW_GAP, "DRL_Comp");
-		m_CompList.SetEmptyText("#STR_DRL_UI_NO_INGR");
-		m_CompList.OnAction().Insert(OnCompAction);
-		m_CompList.OnHover().Insert(OnCompHover);
-		BuildInfoPage(m_PageInfo, w);
-		BuildRecraftPage(m_PageRecraft, w);
-		ShowPage(TAB_COMP, false);
+		y = y + 22 + 38 + 14;
+		INT_UIF_Draw.Caption(m_ItemBody, CPAD + 2, y, cw, "#STR_DRL_UI_RECIPE_DETAILS", "info");
+		m_RecipeDesc = INT_UIF_Draw.MText(m_ItemBody, CPAD + 2, y + 22, cw - 4, 60, "", 14, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT));
 
-		BuildFooter(m_DetailsBody, footY, w);
-
-		// Подсказка ингредиента ложится поверх сцены превью.
-		m_HoverCard.Build(m_DetailsBody, 0, 0, w, STAGE_H);
-
-		m_DetailsBody.Show(false);
+		y = y + 22 + 60 + 12;
+		INT_UIF_Draw.Caption(m_ItemBody, CPAD + 2, y, cw - 220, "#STR_DRL_UI_SEC_DOP", "plus");
+		m_DopSummary = INT_UIF_Draw.Text(m_ItemBody, CPAD + cw - 260, y - 2, 260, 18, "", 12, muted, INT_UIF_Align.RIGHT);
+		float dy = y + 24;
+		m_DopList.Build(m_ItemBody, CPAD, dy, cw + 8, h - CPAD - dy, 4, DOP_TILE_H, 8, true, "DRL_Dop");
+		m_DopList.SetTooltips(true);
+		m_DopList.SetEmptyText("#STR_DRL_UI_NO_DOP");
+		m_DopList.OnAction().Insert(OnDopAction);
 	}
 
-	protected void BuildInfoPage(Widget page, float w)
+	// --- 4. результат: предмет, характеристики, количество, разбор, кнопка ----------
+	protected void BuildResultCol(Widget col, float w, float h)
 	{
+		float cw = w - 2 * CPAD;
 		int text = INT_UIF.Color(INT_UIF_ThemeKeys.TEXT);
 		int muted = INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_MUTED);
 		int faint = INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_FAINT);
-		float half = (w - 4) * 0.5;
-		m_InfoName = INT_UIF_Draw.Text(page, 2, 0, w - 4, 18, "", 13, text);
-		m_InfoState = INT_UIF_Draw.Text(page, 2, 20, half, 18, "", 12, muted);
-		m_InfoFill = INT_UIF_Draw.Text(page, 2 + half, 20, half, 18, "", 12, muted);
-		m_RecipeDesc = INT_UIF_Draw.MText(page, 2, 46, w - 4, 80, "", 13, muted);
-
-		m_StatsBox = INT_UIF_Draw.Frame(page, 0, 0, w, 64, "DRL_Stats");
-		INT_UIF_Draw.Caption(m_StatsBox, 2, 0, w, "#STR_DRL_UI_STATS", "shield");
-		TStringArray labels = {"#STR_DRL_UI_STAT_HP", "#STR_DRL_UI_STAT_BULLET", "#STR_DRL_UI_STAT_MELEE", "#STR_DRL_UI_STAT_INFECTED", "#STR_DRL_UI_STAT_GRENADE"};
-		float tw = (w - 4 * 8) / 5;
 		int tileFill = INT_UIF.Color(INT_UIF_ThemeKeys.TILE);
 		int tileBorder = INT_UIF.Color(INT_UIF_ThemeKeys.TILE_BORDER);
-		for (int i = 0; i < labels.Count(); i++)
+		ColTitle(col, "#STR_DRL_UI_COL_RESULT");
+		m_ResBody = INT_UIF_Draw.Frame(col, 0, 0, w, h, "DRL_ResBody");
+
+		// Что получится.
+		float y = 48;
+		INT_UIF_Surface.Box(m_ResBody, CPAD, y, 92, 64, 9, tileFill, tileBorder);
+		Widget clip = INT_UIF_Draw.Clip(m_ResBody, CPAD + 3, y + 3, 86, 58, "DRL_ResClip");
+		m_ResView.Create(clip, true);
+		m_ResView.SetOrientation(Vector(-8, 30, 0));
+		m_ResThumbGlyph = INT_UIF_Draw.Icon(m_ResBody, CPAD + 36, y + 22, 20, "info", faint);
+		m_ResThumbGlyph.Show(false);
+		m_ResName = INT_UIF_Draw.Text(m_ResBody, CPAD + 104, y + 8, cw - 104, 24, "", 16, text);
+		m_ResName.SetBold(true);
+		m_ResSub = INT_UIF_Draw.Text(m_ResBody, CPAD + 104, y + 34, cw - 104, 18, "", 12, muted);
+
+		y = y + 64 + 14;
+		TStringArray resLabels = {"#STR_DRL_UI_RES_TIME", "#STR_DRL_UI_RES_COUNT", "#STR_DRL_UI_ING_FILL", "#STR_DRL_UI_RES_STATE"};
+		for (int i = 0; i < resLabels.Count(); i++)
 		{
-			float tx = i * (tw + 8);
-			INT_UIF_Surface.Box(m_StatsBox, tx, 18, tw, 46, 8, tileFill, tileBorder);
-			INT_UIF_Draw.Text(m_StatsBox, tx + 10, 22, tw - 16, 14, labels.Get(i), 10, faint);
-			TextWidget val = INT_UIF_Draw.Text(m_StatsBox, tx + 10, 37, tw - 16, 22, "—", 15, text);
+			INT_UIF_Draw.Text(m_ResBody, CPAD, y, cw * 0.5, 20, resLabels.Get(i), 13, muted);
+			TextWidget rv = INT_UIF_Draw.Text(m_ResBody, CPAD + cw * 0.4, y, cw * 0.6, 20, "", 13, text, INT_UIF_Align.RIGHT);
+			rv.SetBold(true);
+			m_ResValues.Insert(rv);
+			y = y + 22;
+		}
+
+		// Характеристики (= DRL_CraftStatsHelper.UpdateResultStats).
+		y = y + 10;
+		m_StatsBox = INT_UIF_Draw.Frame(m_ResBody, CPAD, y, cw, 138, "DRL_Stats");
+		INT_UIF_Surface.Box(m_StatsBox, 0, 0, cw, 138, 10, tileFill, tileBorder);
+		INT_UIF_Draw.Caption(m_StatsBox, 12, 10, cw - 24, "#STR_DRL_UI_STATS", "shield");
+		TStringArray labels = {"#STR_DRL_UI_STAT_HP", "#STR_DRL_UI_STAT_BULLET", "#STR_DRL_UI_STAT_MELEE", "#STR_DRL_UI_STAT_INFECTED", "#STR_DRL_UI_STAT_GRENADE"};
+		for (int s = 0; s < labels.Count(); s++)
+		{
+			float sy = 32 + s * 20;
+			INT_UIF_Draw.Text(m_StatsBox, 12, sy, cw * 0.6, 19, labels.Get(s), 13, muted);
+			TextWidget val = INT_UIF_Draw.Text(m_StatsBox, cw * 0.4, sy, cw * 0.6 - 12, 19, "—", 13, text, INT_UIF_Align.RIGHT);
 			val.SetBold(true);
 			m_StatValues.Insert(val);
 		}
 
-		m_SlotsRow = INT_UIF_Draw.Frame(page, 0, 0, w, 24, "DRL_SlotsRow");
-		INT_UIF_Draw.Caption(m_SlotsRow, 2, 5, 150, "#STR_DRL_UI_SLOTS_TITLE", "list");
-		m_SlotIcons = INT_UIF_Draw.Frame(m_SlotsRow, 160, 0, w - 160, 24, "DRL_SlotIcons");
-		m_SlotsNone = INT_UIF_Draw.Text(m_SlotsRow, 160, 3, w - 160, 18, "#STR_DRL_UI_NO_SLOTS", 12, faint);
-	}
-
-	protected void BuildRecraftPage(Widget page, float w)
-	{
-		m_RecraftList.Build(page, 0, 0, w, m_PageMaxH - 60, ROW_H, ROW_GAP, "DRL_Recraft");
-		m_RecraftList.SetEmptyText("#STR_DRL_UI_RECRAFT_EMPTY");
-		m_RecraftList.OnHover().Insert(OnRecraftHover);
-		m_RecraftFoot = INT_UIF_Draw.Frame(page, 0, m_PageMaxH - 52, w, 52, "DRL_RecraftFoot");
-		m_RecraftBar = INT_UIF_ProgressBar.Create(m_Bag, m_RecraftFoot, 0, 0, w, 4, 0, "amber");
-		m_RecraftBar.Show(false);
-		INT_UIF_Draw.Icon(m_RecraftFoot, 2, 24, 14, "clock", INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_FAINT));
-		m_RecraftTime = INT_UIF_Draw.Text(m_RecraftFoot, 22, 12, w - 260, 38, "", 13, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_MUTED));
-		m_RecraftBtn = INT_UIF_Button.Create(m_Bag, m_RecraftFoot, w - 230, 10, 230, 42, "#STR_DRL_RECRAFT", INT_UIF_Variant.WARNING, "refresh");
-		m_RecraftBtn.OnClick().Insert(OnRecraftClick);
-		DRL_UIKitUtil.Expose(m_RecraftBtn, "DRL_RecraftBtn");
-	}
-
-	protected void BuildFooter(Widget parent, float y, float w)
-	{
-		int faint = INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_FAINT);
-		m_CountMinus = INT_UIF_IconButton.Create(m_Bag, parent, 0, y, 36, "minus", INT_UIF_Variant.SECONDARY);
+		// Количество к созданию.
+		y = y + 138 + 14;
+		INT_UIF_Draw.Text(m_ResBody, CPAD, y, cw * 0.7, 18, "#STR_DRL_UI_COUNT_TO_MAKE", 13, muted);
+		m_CountMax = INT_UIF_Draw.Text(m_ResBody, CPAD + cw * 0.5, y, cw * 0.5, 18, "", 12, faint, INT_UIF_Align.RIGHT);
+		float qy = y + 24;
+		m_CountMinus = INT_UIF_IconButton.Create(m_Bag, m_ResBody, CPAD, qy, 44, "minus", INT_UIF_Variant.SECONDARY);
 		m_CountMinus.OnClick().Insert(OnCountMinus);
 		DRL_UIKitUtil.Expose(m_CountMinus, "DRL_CountMinus");
-		INT_UIF_Surface.Box(parent, 44, y, 64, 36, 8, INT_UIF.Color(INT_UIF_ThemeKeys.TILE), ARGB(24, 255, 255, 255));
-		m_CountText = INT_UIF_Draw.Text(parent, 44, y, 64, 36, "1", 16, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT), INT_UIF_Align.CENTER);
+		INT_UIF_Surface.Box(m_ResBody, CPAD + 52, qy, cw - 104, 44, 9, tileFill, ARGB(24, 255, 255, 255));
+		m_CountText = INT_UIF_Draw.Text(m_ResBody, CPAD + 52, qy, cw - 104, 44, "1", 22, text, INT_UIF_Align.CENTER, true);
 		m_CountText.SetBold(true);
-		m_CountPlus = INT_UIF_IconButton.Create(m_Bag, parent, 116, y, 36, "plus", INT_UIF_Variant.SECONDARY);
+		m_CountPlus = INT_UIF_IconButton.Create(m_Bag, m_ResBody, CPAD + cw - 44, qy, 44, "plus", INT_UIF_Variant.SECONDARY);
 		m_CountPlus.OnClick().Insert(OnCountPlus);
 		DRL_UIKitUtil.Expose(m_CountPlus, "DRL_CountPlus");
-		INT_UIF_Draw.Text(parent, 166, y, 170, 16, "#STR_DRL_UI_COUNT", 11, faint);
-		m_TotalText = INT_UIF_Draw.Text(parent, 166, y + 16, 200, 20, "", 13, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_MUTED));
-		INT_UIF_Draw.Text(parent, w - 200, y, 200, 16, "#STR_DRL_UI_TOTAL_TIME", 11, faint, INT_UIF_Align.RIGHT);
-		m_FootTime = INT_UIF_Draw.Text(parent, w - 200, y + 16, 200, 20, "", 14, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT), INT_UIF_Align.RIGHT);
-		m_FootTime.SetBold(true);
-		m_CraftBar = INT_UIF_ProgressBar.Create(m_Bag, parent, 0, y + 44, w, 4, 0, "teal");
-		m_CraftBar.Show(false);
-		m_CraftBtn = INT_UIF_Button.Create(m_Bag, parent, 0, y + 52, w, 52, "#STR_DRL_START", INT_UIF_Variant.PRIMARY, "gear");
+		m_CountSlider = INT_UIF_Slider.Create(m_Bag, m_ResBody, CPAD, qy + 50, cw, 1, 2, 1, 1, "", 24);
+		m_CountSlider.OnChanged().Insert(OnCountSlider);
+		m_TotalText = INT_UIF_Draw.Text(m_ResBody, CPAD, qy + 76, cw, 18, "", 12, muted);
+
+		// Разбор (= BuildReCraftList / UpdateReCraftButtonState).
+		y = qy + 104;
+		INT_UIF_Draw.Line(m_ResBody, CPAD, y, cw, 1, INT_UIF.Color(INT_UIF_ThemeKeys.DIVIDER));
+		y = y + 10;
+		INT_UIF_Draw.Icon(m_ResBody, CPAD, y + 8, 14, "refresh", muted);
+		m_RecraftHead = INT_UIF_Draw.Text(m_ResBody, CPAD + 20, y, cw - 160, 30, "", 13, text);
+		m_RecraftHead.SetBold(true);
+		m_RecraftBtn = INT_UIF_Button.Create(m_Bag, m_ResBody, CPAD + cw - 136, y, 136, 30, "#STR_DRL_RECRAFT", INT_UIF_Variant.WARNING, "refresh");
+		m_RecraftBtn.OnClick().Insert(OnRecraftClick);
+		DRL_UIKitUtil.Expose(m_RecraftBtn, "DRL_RecraftBtn");
+		m_RecraftBar = INT_UIF_ProgressBar.Create(m_Bag, m_ResBody, CPAD, y + 34, cw, 3, 0, "amber");
+		m_RecraftBar.Show(false);
+		m_RetList.Build(m_ResBody, CPAD, y + 40, cw + 8, RET_TILE_H, 5, RET_TILE_H, 6, false, "DRL_Ret");
+		m_RetList.SetTooltips(true);
+		m_RetList.SetEmptyText("#STR_DRL_UI_RECRAFT_EMPTY");
+
+		// Низ: общее время, прогресс и кнопка крафта.
+		float by = h - CPAD - 54;
+		m_CraftBtn = INT_UIF_Button.Create(m_Bag, m_ResBody, CPAD, by, cw, 54, "#STR_DRL_START", INT_UIF_Variant.PRIMARY, "gear");
 		m_CraftBtn.OnClick().Insert(OnCraftClick);
 		DRL_UIKitUtil.Expose(m_CraftBtn, "DRL_CraftBtn");
+		m_CraftBar = INT_UIF_ProgressBar.Create(m_Bag, m_ResBody, CPAD, by - 10, cw, 4, 0, "teal");
+		m_CraftBar.Show(false);
+		INT_UIF_Draw.Icon(m_ResBody, CPAD, by - 36, 14, "clock", muted);
+		INT_UIF_Draw.Text(m_ResBody, CPAD + 20, by - 40, cw * 0.6, 22, "#STR_DRL_UI_CRAFT_TIME", 13, muted);
+		m_FootTime = INT_UIF_Draw.Text(m_ResBody, CPAD + cw * 0.4, by - 41, cw * 0.6, 24, "", 16, text, INT_UIF_Align.RIGHT);
+		m_FootTime.SetBold(true);
 	}
 
-	// Высота вкладок зависит от того, есть ли у рецепта варианты результата.
-	protected void LayoutDetails(bool hasVariants)
+	// Тело колонок: пусто или выбран рецепт.
+	protected void ShowDetails(bool show, bool animate)
 	{
-		float w = DETAILS_W;
-		float footY = GetBodyH() - DETAILS_FOOT_H;
-		float tabsY = m_VariantsY;
-		if (hasVariants)
-			tabsY = m_VariantsY + VARIANT_TILE + 28;
-		float hostH = footY - 8 - tabsY;
-		float pageH = hostH - 46;
-		INT_UIF_Draw.Place(m_TabsHost, 0, tabsY, w, hostH);
-		INT_UIF_Draw.Resize(m_PageComp, w, pageH);
-		INT_UIF_Draw.Resize(m_PageInfo, w, pageH);
-		INT_UIF_Draw.Resize(m_PageRecraft, w, pageH);
-		m_CompList.SetViewportH(pageH);
-		INT_UIF_Draw.Place(m_SlotsRow, 0, pageH - 26, w, 24);
-		INT_UIF_Draw.Place(m_StatsBox, 0, pageH - 26 - 8 - 64, w, 64);
-		INT_UIF_Draw.Resize(m_RecipeDesc, w - 4, pageH - 26 - 8 - 64 - 8 - 46);
-		m_RecraftList.SetViewportH(pageH - 60);
-		INT_UIF_Draw.Move(m_RecraftFoot, 0, pageH - 52);
+		m_ItemEmpty.Show(!show);
+		m_IngrBody.Show(show);
+		m_ItemBody.Show(show);
+		m_ResBody.Show(show);
+		if (!show || !animate)
+			return;
+		DRL_UIAnim.Reveal(m_IngrBody, 0, 0, 0, 8, 0.24);
+		DRL_UIAnim.Reveal(m_ItemBody, 0, 0, 0.04, 8, 0.24);
+		DRL_UIAnim.Reveal(m_ResBody, 0, 0, 0.08, 8, 0.24);
 	}
 
 	override void OnReady()
@@ -468,7 +524,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		super.OnHide();
 		UnhookProcesses();
 		StopCraftSound();
-		HideHoverCard();
+		INT_UIF_Tooltip.HideTip();
 		ReleaseModels();
 		PlayerBase pb = PlayerBase.Cast(GetGame().GetPlayer());
 		if (pb)
@@ -483,10 +539,16 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			m_Stage.Clear();
 		if (m_Variants)
 			m_Variants.Clear();
-		if (m_CompList)
-			m_CompList.ClearModels();
-		if (m_RecraftList)
-			m_RecraftList.ClearModels();
+		if (m_IngrList)
+			m_IngrList.ClearModels();
+		if (m_DopList)
+			m_DopList.ClearModels();
+		if (m_RetList)
+			m_RetList.ClearModels();
+		if (m_IngrCard)
+			m_IngrCard.Clear();
+		if (m_ResView)
+			m_ResView.Clear();
 		if (m_Popover)
 			m_Popover.Close();
 		if (m_Queue)
@@ -546,7 +608,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		array<ref DRL_UICategoryEntry> entries = new array<ref DRL_UICategoryEntry>();
 		if (!cfg || !cfg.Categories)
 		{
-			m_Sidebar.SetEntries(entries, -1);
+			m_Rail.SetEntries(entries, -1);
 			SelectCategory(-1);
 			return;
 		}
@@ -571,17 +633,17 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		}
 		if (defaultEntry < 0 && entries.Count() > 0)
 			defaultEntry = 0;
-		m_Sidebar.SetEntries(entries, defaultEntry);
+		m_Rail.SetEntries(entries, defaultEntry);
 		int key = -1;
-		DRL_UICategoryEntry def = m_Sidebar.GetEntry(defaultEntry);
+		DRL_UICategoryEntry def = m_Rail.GetEntry(defaultEntry);
 		if (def)
 			key = def.m_Key;
 		SelectCategory(key);
 	}
 
-	protected void OnCategorySelected(int entryIndex, DRL_UISidebar sidebar)
+	protected void OnCategorySelected(int entryIndex, DRL_UICategoryRail rail)
 	{
-		DRL_UICategoryEntry e = sidebar.GetEntry(entryIndex);
+		DRL_UICategoryEntry e = rail.GetEntry(entryIndex);
 		if (e)
 			SelectCategory(e.m_Key);
 	}
@@ -594,7 +656,16 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		string title = "#STR_DRL_ALL_RECIPES";
 		if (cat && cat.Name != "")
 			title = cat.Name;
-		m_ListTitle.SetText(title);
+		m_CatTitle = DRL_UIText.Tr(title);
+		RebuildRecipes();
+	}
+
+	// «Только доступные к крафту»: в списке остаются рецепты со статусом «можно».
+	protected void OnOnlyAvailChanged(bool on, INT_UIF_Toggle t)
+	{
+		if (m_OnlyAvailable == on)
+			return;
+		m_OnlyAvailable = on;
 		RebuildRecipes();
 	}
 
@@ -741,12 +812,15 @@ class DRL_CraftWindow extends INT_UIF_Menu
 						if (!DRL_LearnState.HasLearned(r.RecipeId))
 							continue;
 					}
-					entries.Insert(MakeEntry(r, cachedItems));
+					DRL_UIRecipeEntry entry = MakeEntry(r, cachedItems);
+					if (m_OnlyAvailable && entry.m_Status != DRL_UI_STATUS_CAN)
+						continue;
+					entries.Insert(entry);
 				}
 			}
 		}
 		m_Grid.SetItems(entries, m_SelectedRecipe);
-		m_ListSub.SetText(DRL_UIText.Fmt("#STR_DRL_UI_RECIPES_COUNT", entries.Count().ToString()));
+		m_ListTitle.SetText(m_CatTitle + " · " + entries.Count().ToString());
 	}
 
 	protected DRL_UIRecipeEntry MakeEntry(DRL_Craft_Recipe r, array<EntityAI> cachedItems)
@@ -1232,8 +1306,11 @@ class DRL_CraftWindow extends INT_UIF_Menu
 				return;
 			m_SelectedAttachedVariants.Set(id, dvars[arg]);
 			if (isChecked)
+			{
 				RebuildMainPreview();
-			BuildCompRows(true);
+				FillSlots(m_SelectedRecipe);
+			}
+			BuildDopTiles(true);
 			return;
 		}
 
@@ -1329,21 +1406,25 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		m_SelectedComponentVariations.Clear();
 		ClearSelectedAttached();
 		ClosePopover();
-		HideHoverCard();
+		m_CardTag = -1;
 		if (m_Stage)
 			m_Stage.Clear();
 		if (m_Variants)
 			m_Variants.Clear();
-		if (m_CompList)
-			m_CompList.ClearModels();
-		if (m_RecraftList)
-			m_RecraftList.ClearModels();
+		if (m_IngrList)
+			m_IngrList.ClearModels();
+		if (m_DopList)
+			m_DopList.ClearModels();
+		if (m_RetList)
+			m_RetList.ClearModels();
+		if (m_IngrCard)
+			m_IngrCard.ShowEmpty();
+		if (m_ResView)
+			m_ResView.Clear();
 		if (m_CraftBar)
 			m_CraftBar.Show(false);
-		if (m_DetailsBody)
-			m_DetailsBody.Show(false);
-		if (m_DetailsEmpty)
-			m_DetailsEmpty.Show(true);
+		if (m_ItemBody)
+			ShowDetails(false, false);
 	}
 
 	protected string ChosenResult()
@@ -1365,43 +1446,48 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			return;
 		bool sameRecipe = r == m_ShownRecipe;
 		m_ShownRecipe = r;
-		m_DetailsEmpty.Show(false);
-		if (!sameRecipe || !m_DetailsBody.IsVisible())
-		{
-			m_DetailsBody.Show(true);
-			DRL_UIAnim.Reveal(m_DetailsBody, 0, 0, 0, 8, 0.24);
-		}
+		if (!sameRecipe)
+			m_CardTag = -1;
+		if (!sameRecipe || !m_ItemBody.IsVisible())
+			ShowDetails(true, true);
 		HideVariationList();
-		HideHoverCard();
 
 		m_RecipeTitle.SetText(r.RecipeName);
 		RebuildMainPreview();
 		ApplyBackdrop(r);
-		FillChips(r);
 		FillVariants(r);
-		BuildCompRows(sameRecipe);
-		FillInfoPage(r);
-		BuildRecraftRows(r, sameRecipe);
+		BuildIngrTiles(sameRecipe);
+		BuildDopTiles(sameRecipe);
+		FillItemInfo(r);
+		FillResult(r);
+		BuildRecraftTiles(r, sameRecipe);
 		UpdateRecraftButton();
 		RefreshCountUI();
 		UpdateCraftButtonState();
 		RefreshStatuses();
 	}
 
-	// Главное превью: PreviewClassname / Result или выбранный вариант,
-	// с выбранным доп. навесным (= RebuildMainPreviewWithAttachments).
-	protected void RebuildMainPreview()
+	// Класс главного превью: PreviewClassname / Result или выбранный вариант.
+	protected string MainPreviewClass()
 	{
 		DRL_Craft_Recipe r = m_SelectedRecipe;
 		if (!r)
-			return;
+			return "";
 		string mainCls = r.PreviewClassname;
 		if (mainCls == "")
 			mainCls = r.Result;
 		string selRes = m_SelectedResultClass;
 		if (selRes != "" && ((r.ResultClasses && r.ResultClasses.Find(selRes) > -1) || selRes == r.Result))
 			mainCls = selRes;
+		return mainCls;
+	}
 
+	// Главное превью с выбранным доп. навесным (= RebuildMainPreviewWithAttachments).
+	protected void RebuildMainPreview()
+	{
+		if (!m_SelectedRecipe)
+			return;
+		string mainCls = MainPreviewClass();
 		array<string> atts = new array<string>();
 		DRL_Craft_Config cfg = Cfg();
 		if (cfg)
@@ -1434,32 +1520,8 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		m_Stage.SetBackdrop("");
 	}
 
-	protected void FillChips(DRL_Craft_Recipe r)
-	{
-		INT_UIF_ThemeManager tm = INT_UIF_ThemeManager.Get();
-		array<EntityAI> cachedItems = new array<EntityAI>();
-		GetInventorySnapshot(cachedItems);
-		int status = RecipeStatus(r, cachedItems);
-		float x = 2;
-		float w = 0;
-		if (status == DRL_UI_STATUS_LOCKED)
-			w = m_ChipStatus.Set("#STR_DRL_UI_CHIP_LOCKED", "lock", tm.Color(INT_UIF_ThemeKeys.AMBER));
-		else if (status == DRL_UI_STATUS_CAN)
-			w = m_ChipStatus.Set("#STR_DRL_UI_CHIP_CAN", "check", tm.Color(INT_UIF_ThemeKeys.GREEN));
-		else
-			w = m_ChipStatus.Set("#STR_DRL_UI_CHIP_CANNOT", "close", tm.Color(INT_UIF_ThemeKeys.RED));
-		x = x + w + 8;
-		INT_UIF_Draw.Move(m_ChipTime.m_Root, x, m_ChipY);
-		w = m_ChipTime.Set(DRL_UIText.Time(r.CraftTimeSec), "clock", tm.Color(INT_UIF_ThemeKeys.TEAL));
-		x = x + w + 8;
-		int cnt = r.ResultCount;
-		if (cnt <= 0)
-			cnt = 1;
-		INT_UIF_Draw.Move(m_ChipCount.m_Root, x, m_ChipY);
-		m_ChipCount.Set("x" + cnt.ToString(), "", tm.Color(INT_UIF_ThemeKeys.TEXT_MUTED));
-	}
-
-	// Варианты результата (= BuildSelectResultList / UpdateSelectCraftHighlight).
+	// Варианты результата (= BuildSelectResultList / UpdateSelectCraftHighlight):
+	// колонка справа на сцене, модель сдвигается левее.
 	protected void FillVariants(DRL_Craft_Recipe r)
 	{
 		bool has = r.ResultClasses && r.ResultClasses.Count() > 0;
@@ -1474,12 +1536,13 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			if (sel < 0)
 				sel = 0;
 			m_Variants.SetItems(r.ResultClasses, sel);
+			m_Stage.SetModelInset(VARIANT_W + 10);
 		}
 		else
 		{
 			m_Variants.Clear();
+			m_Stage.SetModelInset(0);
 		}
-		LayoutDetails(has);
 	}
 
 	// = HandleSelectResultClick
@@ -1495,39 +1558,28 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		FillDetails();
 	}
 
-	// --- вкладки ------------------------------------------------------------------------
-	protected void OnTabChanged(int index, INT_UIF_Tabs tabs)
+	// Выезжающая панель лежит поверх колонки предмета: 3D-модели под ней прячутся
+	// (рисуются поверх 2D).
+	protected void SetCovered(bool covered)
 	{
-		ShowPage(index, true);
+		if (m_Stage)
+			m_Stage.SetHidden(DRL_UIStage.HIDE_POPOVER, covered);
+		if (m_Variants)
+			m_Variants.HideModels(covered);
+		if (m_DopList)
+			m_DopList.HideModels(covered);
 	}
 
-	protected void ShowPage(int index, bool animate)
-	{
-		m_PageComp.Show(index == TAB_COMP);
-		m_PageInfo.Show(index == TAB_INFO);
-		m_PageRecraft.Show(index == TAB_RECRAFT);
-		HideHoverCard();
-		if (!animate)
-			return;
-		Widget page = m_PageComp;
-		if (index == TAB_INFO)
-			page = m_PageInfo;
-		else if (index == TAB_RECRAFT)
-			page = m_PageRecraft;
-		DRL_UIAnim.Reveal(page, 0, 46, 0, 8, 0.2);
-	}
-
-	// --- «Состав»: ингредиенты, инструменты, доп. навесное ------------------------------
-	protected void BuildCompRows(bool keepScroll)
+	// --- ингредиенты и доп. предметы (= BuildIngredientsListUI + BuildAtachIngridientListUI)
+	protected void BuildIngrTiles(bool keepScroll)
 	{
 		DRL_Craft_Recipe r = m_SelectedRecipe;
-		array<ref DRL_UIRowData> rows = new array<ref DRL_UIRowData>();
+		array<ref DRL_UITileData> items = new array<ref DRL_UITileData>();
 		m_ToolComps.Clear();
-		m_DopRecipes.Clear();
 		if (!r)
 		{
 			m_Merged.Clear();
-			m_CompList.SetItems(rows);
+			m_IngrList.SetItems(items);
 			return;
 		}
 		m_Merged = BuildMergedComponents(r);
@@ -1538,8 +1590,8 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		int amber = tm.Color(INT_UIF_ThemeKeys.AMBER);
 		int red = tm.Color(INT_UIF_ThemeKeys.RED);
 
-		// Ингредиенты (= BuildIngredientsListUI).
-		bool ingrHeader = false;
+		int total = 0;
+		int ready = 0;
 		for (int i = 0; i < m_Merged.Count(); i++)
 		{
 			DRL_CraftMergedComponent mc = m_Merged[i];
@@ -1548,11 +1600,6 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			DRL_Craft_Component c = mc.ToCraftComponent();
 			if (!c || c.AttachmentsEx > 0)
 				continue;
-			if (!ingrHeader)
-			{
-				rows.Insert(DRL_UIRowData.Header("#STR_DRL_Craft_Ingridient_Titel"));
-				ingrHeader = true;
-			}
 			string activeCls = mc.Classname;
 			if (activeCls == "")
 				activeCls = c.Classname;
@@ -1560,31 +1607,45 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			bool hasVariations = variations && variations.Count() > 1 && c.EnableVariationSelection == 1;
 			int have = ComputeHaveForClass(activeCls, c.MinHealthFrac, cachedItems, c.QuantityFrac, c.UseInheritance == 1);
 			int need = NeedForClassCount(activeCls, c, r.CurrentCraftCount);
-
-			DRL_UIRowData d = new DRL_UIRowData();
-			d.m_Title = DRL_UIText.DisplayName(activeCls);
-			if (hasVariations)
-			{
-				d.m_Sub = DRL_UIText.Tr("#STR_DRL_UI_PICK_VARIANT");
-				d.m_Badge = "swap";
-			}
-			d.m_Right = DRL_CraftInventoryHelper.FormatIngredientAmount(activeCls, c, have, need);
 			int col = red;
 			if (have >= need)
 				col = green;
 			else if (have > 0)
 				col = amber;
-			d.m_RightColor = col;
-			d.m_Accent = col;
+
+			DRL_UITileData d = new DRL_UITileData();
+			d.m_Title = DRL_UIText.DisplayName(activeCls);
+			d.m_Count = DRL_CraftInventoryHelper.FormatIngredientAmount(activeCls, c, have, need);
+			d.m_CountColor = col;
+			d.m_State = col;
 			d.m_PreviewClass = activeCls;
-			d.m_Clickable = hasVariations;
+			if (hasVariations)
+				d.m_Badge = "swap";
 			d.m_Tag = i;
-			rows.Insert(d);
+			items.Insert(d);
+			total++;
+			if (have >= need)
+				ready++;
+		}
+		if (total == 0)
+			items.Insert(DRL_UITileData.Note("#STR_DRL_UI_NO_INGR"));
+		if (total > 0)
+		{
+			m_IngrSummary.SetText(DRL_UIText.Fmt("#STR_DRL_UI_IN_STOCK", ready.ToString(), total.ToString()));
+			if (ready == total)
+				m_IngrSummary.SetColor(green);
+			else
+				m_IngrSummary.SetColor(red);
+		}
+		else
+		{
+			m_IngrSummary.SetText("");
 		}
 
-		// Инструменты и оснащение (= BuildAtachIngridientListUI).
+		// Инструменты и оснащение (AttachmentsEx) — «Дополнительные предметы».
 		string activeResult = m_SelectedResultClass;
-		bool toolHeader = false;
+		array<ref DRL_UITileData> tools = new array<ref DRL_UITileData>();
+		int toolsOk = 0;
 		if (r.CraftComponents)
 		{
 			for (int t = 0; t < r.CraftComponents.Count(); t++)
@@ -1605,41 +1666,212 @@ class DRL_CraftWindow extends INT_UIF_Menu
 					prevCls = present.GetType();
 				else
 					prevCls = DRL_ItemTypeHelper.GetSafePreviewClass(token);
-				if (!toolHeader)
-				{
-					rows.Insert(DRL_UIRowData.Header("#STR_WB_TOOLS"));
-					toolHeader = true;
-				}
-				DRL_UIRowData td = new DRL_UIRowData();
+				DRL_UITileData td = new DRL_UITileData();
 				td.m_Title = ToolName(token);
-				if (tc.ApplyDamageFrac > 0.0)
-					td.m_Sub = DRL_UIText.Label("#STR_DRL_DAMAGE", DRL_UIText.Pct(tc.ApplyDamageFrac));
+				int tcol = red;
 				if (present)
 				{
-					td.m_Right = DRL_UIText.Tr("#STR_DRL_ATTACHMENT_INSTALLED");
-					td.m_RightColor = green;
-					td.m_Accent = green;
+					td.m_Count = "1/1";
+					tcol = green;
+					toolsOk++;
 				}
 				else
 				{
-					td.m_Right = DRL_UIText.Tr("#STR_DRL_ATTACHMENT_MISSING");
-					td.m_RightColor = red;
-					td.m_Accent = red;
+					td.m_Count = "0/1";
 				}
+				td.m_CountColor = tcol;
+				td.m_State = tcol;
 				td.m_PreviewClass = prevCls;
 				td.m_Glyph = "key";
-				td.m_Clickable = false;
 				td.m_Tag = TAG_TOOL + m_ToolComps.Count();
 				m_ToolComps.Insert(tc);
-				rows.Insert(td);
+				tools.Insert(td);
 			}
 		}
-
-		// Доп. рецепты-навесное (= BuildAttachedRecipesList + UpdateAttachedSlotsAvailability).
-		DRL_Craft_Config cfg = Cfg();
-		if (r.HasAttachedRecipes() && cfg)
+		string toolsRight = "";
+		int toolsColor = 0;
+		if (tools.Count() > 0)
 		{
-			rows.Insert(DRL_UIRowData.Header("#STR_DRL_UI_SEC_DOP"));
+			toolsRight = DRL_UIText.Fmt("#STR_DRL_UI_OF", toolsOk.ToString(), tools.Count().ToString());
+			toolsColor = red;
+			if (toolsOk == tools.Count())
+				toolsColor = green;
+		}
+		items.Insert(DRL_UITileData.Header("#STR_DRL_UI_COL_TOOLS", toolsRight, toolsColor));
+		if (tools.Count() == 0)
+			items.Insert(DRL_UITileData.Note("#STR_DRL_UI_NO_TOOLS"));
+		foreach (DRL_UITileData tool : tools)
+		{
+			items.Insert(tool);
+		}
+		m_IngrList.SetItems(items, keepScroll);
+		RefreshIngrCard();
+	}
+
+	// Выделить ингредиент, чьи вариации открыты в выезжающей панели.
+	protected void RefreshIngrSelection()
+	{
+		for (int i = 0; i < m_IngrList.Count(); i++)
+		{
+			DRL_UITileData d = m_IngrList.GetItem(i);
+			if (!d || d.m_Kind != DRL_UI_TILE_ITEM)
+				continue;
+			bool sel = false;
+			if (m_ActiveVariationMerged && d.m_Tag >= 0 && d.m_Tag < TAG_TOOL && d.m_Tag < m_Merged.Count())
+				sel = m_Merged[d.m_Tag] == m_ActiveVariationMerged;
+			d.m_Selected = sel;
+		}
+		m_IngrList.Refresh();
+	}
+
+	// Имя инструмента: класс предмета или слот (как в панели требований).
+	protected string ToolName(string token)
+	{
+		string n = "";
+		if (DRL_CraftUIHelper.GetDisplayNameForClass(token, n) && n != "")
+			return n;
+		int slotId = InventorySlots.GetSlotIdFromString(token);
+		if (slotId > -1)
+			return InventorySlots.GetSlotDisplayName(slotId);
+		return token;
+	}
+
+	// Клик по ингредиенту с вариациями — панель выбора варианта (как в старом меню).
+	protected void OnIngrAction(int index, string action, int arg, DRL_UITileList list)
+	{
+		DRL_UITileData d = list.GetItem(index);
+		if (!d || d.m_Tag < 0)
+			return;
+		m_CardTag = d.m_Tag;
+		ShowIngrCardForTag(d.m_Tag);
+		if (d.m_Tag >= TAG_TOOL || action != "tile")
+			return;
+		if (d.m_Tag < m_Merged.Count())
+			ToggleVariationList(m_Merged[d.m_Tag]);
+	}
+
+	// Наведение — карточка ингредиента; курсор ушёл — карточка остаётся.
+	protected void OnIngrHover(int index, DRL_UITileList list)
+	{
+		if (index < 0)
+			return;
+		DRL_UITileData d = list.GetItem(index);
+		if (!d || d.m_Kind != DRL_UI_TILE_ITEM || d.m_Tag < 0)
+			return;
+		m_CardTag = d.m_Tag;
+		ShowIngrCardForTag(d.m_Tag);
+	}
+
+	// Карточка — на последней наведённой плитке, если она осталась, иначе на первой.
+	protected void RefreshIngrCard()
+	{
+		int first = -1;
+		bool found = false;
+		for (int i = 0; i < m_IngrList.Count(); i++)
+		{
+			DRL_UITileData d = m_IngrList.GetItem(i);
+			if (!d || d.m_Kind != DRL_UI_TILE_ITEM)
+				continue;
+			if (first < 0)
+				first = d.m_Tag;
+			if (d.m_Tag == m_CardTag)
+			{
+				found = true;
+				break;
+			}
+		}
+		if (!found)
+			m_CardTag = first;
+		ShowIngrCardForTag(m_CardTag);
+	}
+
+	// = FillIngredientDetailInfo для плитки (ингредиент или инструмент).
+	protected void ShowIngrCardForTag(int tag)
+	{
+		DRL_Craft_Recipe r = m_SelectedRecipe;
+		if (!r || tag < 0)
+		{
+			m_IngrCard.ShowEmpty();
+			return;
+		}
+		INT_UIF_ThemeManager tm = INT_UIF_ThemeManager.Get();
+		if (tag >= TAG_TOOL)
+		{
+			int ti = tag - TAG_TOOL;
+			if (ti >= m_ToolComps.Count() || !m_ToolComps[ti])
+			{
+				m_IngrCard.ShowEmpty();
+				return;
+			}
+			DRL_Craft_Component tc = m_ToolComps[ti];
+			string token = tc.Classname;
+			if (token == "" && tc.Classnames && tc.Classnames.Count() > 0)
+				token = tc.Classnames[0];
+			EntityAI present = FindAttachment(tc);
+			string toolCls = "";
+			string haveT = "";
+			int haveC = 0;
+			if (present)
+			{
+				toolCls = present.GetType();
+				haveT = DRL_UIText.Tr("#STR_DRL_ATTACHMENT_INSTALLED");
+				haveC = tm.Color(INT_UIF_ThemeKeys.GREEN);
+			}
+			else
+			{
+				toolCls = DRL_ItemTypeHelper.GetSafePreviewClass(token);
+				haveT = DRL_UIText.Tr("#STR_DRL_ATTACHMENT_MISSING");
+				haveC = tm.Color(INT_UIF_ThemeKeys.RED);
+			}
+			m_IngrCard.ShowFor(toolCls, tc, "1", haveT, haveC, false);
+			return;
+		}
+		if (tag >= m_Merged.Count() || !m_Merged[tag])
+		{
+			m_IngrCard.ShowEmpty();
+			return;
+		}
+		DRL_CraftMergedComponent mc = m_Merged[tag];
+		DRL_Craft_Component c = mc.ToCraftComponent();
+		if (!c)
+		{
+			m_IngrCard.ShowEmpty();
+			return;
+		}
+		string activeCls = mc.Classname;
+		if (activeCls == "")
+			activeCls = c.Classname;
+		int have = ComputeHaveForClass(activeCls, c.MinHealthFrac, null, c.QuantityFrac, c.UseInheritance == 1);
+		int need = NeedForClassCount(activeCls, c, r.CurrentCraftCount);
+		array<string> variations = DRL_CraftMergedHelper.GetVariationsForComponent(c);
+		bool hasVariations = variations && variations.Count() > 1 && c.EnableVariationSelection == 1;
+		ShowIngrCard(activeCls, c, have, need, hasVariations);
+	}
+
+	protected void ShowIngrCard(string cls, DRL_Craft_Component c, int have, int need, bool hasVariations)
+	{
+		INT_UIF_ThemeManager tm = INT_UIF_ThemeManager.Get();
+		int col = tm.Color(INT_UIF_ThemeKeys.RED);
+		if (have >= need)
+			col = tm.Color(INT_UIF_ThemeKeys.GREEN);
+		else if (have > 0)
+			col = tm.Color(INT_UIF_ThemeKeys.AMBER);
+		string needT = DRL_CraftInventoryHelper.FormatIngredientNeed(cls, c, need);
+		string haveT = DRL_CraftInventoryHelper.FormatIngredientNeed(cls, c, have);
+		m_IngrCard.ShowFor(cls, c, needT, haveT, col, hasVariations);
+	}
+
+	// --- доп. рецепты-навесное (= BuildAttachedRecipesList + UpdateAttachedSlotsAvailability)
+	protected void BuildDopTiles(bool keepScroll)
+	{
+		DRL_Craft_Recipe r = m_SelectedRecipe;
+		array<ref DRL_UITileData> items = new array<ref DRL_UITileData>();
+		m_DopRecipes.Clear();
+		DRL_Craft_Config cfg = Cfg();
+		int picked = 0;
+		if (r && r.HasAttachedRecipes() && cfg)
+		{
+			int red = INT_UIF.Color(INT_UIF_ThemeKeys.RED);
 			for (int k = 0; k < r.AttachedRecipeIds.Count(); k++)
 			{
 				int attachedId = r.AttachedRecipeIds[k];
@@ -1655,8 +1887,22 @@ class DRL_CraftWindow extends INT_UIF_Menu
 				if (!slotOk)
 					slotOk = CanAttachToCurrentBuild(dopR.Result);
 
-				DRL_UIRowData dd = new DRL_UIRowData();
-				dd.m_Title = dopR.RecipeName;
+				DRL_UITileData dd = new DRL_UITileData();
+				string sub = "";
+				if (!learned)
+				{
+					sub = DRL_UIText.Tr("#STR_DRL_UI_CHIP_LOCKED");
+				}
+				else if (!slotOk)
+				{
+					sub = DRL_UIText.Tr("#STR_DRL_UI_NO_SLOT");
+				}
+				else
+				{
+					string dopTime = DRL_UIText.Time(dopR.CraftTimeSec);
+					sub = DRL_UIText.Fmt("#STR_DRL_UI_DOP_TIME", dopTime);
+				}
+				dd.m_Title = dopR.RecipeName + " · " + sub;
 				if (learned)
 				{
 					dd.m_Check = 0;
@@ -1666,120 +1912,47 @@ class DRL_CraftWindow extends INT_UIF_Menu
 				else
 				{
 					dd.m_Locked = true;
+					dd.m_State = red;
 				}
 				if (isChecked)
+				{
 					dd.m_Qty = GetSelectedAttachedQuantity(attachedId);
+					picked++;
+				}
 				if (dvars.Count() > 1)
 				{
 					int vc = dvars.Count();
-					if (vc > DRL_UI_ROW_MAX_VARS)
-						vc = DRL_UI_ROW_MAX_VARS;
+					if (vc > DRL_UI_TILE_MAX_VARS)
+						vc = DRL_UI_TILE_MAX_VARS;
 					dd.m_VarCount = vc;
 					dd.m_VarSelected = dvi;
 				}
 				dd.m_Info = true;
 				dd.m_InfoEnabled = allowed;
 				dd.m_Dim = learned && !slotOk;
-				if (!learned)
-					dd.m_Sub = DRL_UIText.Tr("#STR_DRL_UI_CHIP_LOCKED");
-				else if (!slotOk)
-					dd.m_Sub = DRL_UIText.Tr("#STR_DRL_UI_NO_SLOT");
-				else
-				{
-					string dopTime = DRL_UIText.Time(dopR.CraftTimeSec);
-					dd.m_Sub = DRL_UIText.Fmt("#STR_DRL_UI_DOP_TIME", dopTime);
-				}
 				if (dopR.CraftIcon != "")
 					dd.m_IconPath = DRL_CraftUIHelper.ResolveImagePath(dopR.CraftIcon);
 				else if (dvi < dvars.Count())
 					dd.m_PreviewClass = dvars[dvi];
-				if (isChecked)
-					dd.m_Accent = green;
-				else if (!learned)
-					dd.m_Accent = red;
 				dd.m_Clickable = learned;
-				dd.m_Tag = TAG_DOP + m_DopRecipes.Count();
+				dd.m_Tag = m_DopRecipes.Count();
 				m_DopRecipes.Insert(dopR);
-				rows.Insert(dd);
+				items.Insert(dd);
 			}
 		}
-		m_CompList.SetItems(rows, keepScroll);
+		m_DopList.SetItems(items, keepScroll);
+		if (items.Count() > 0)
+			m_DopSummary.SetText(DRL_UIText.Fmt("#STR_DRL_UI_DOP_PICKED", picked.ToString(), items.Count().ToString()));
+		else
+			m_DopSummary.SetText("");
 	}
 
-	// Имя инструмента: класс предмета или слот (как в панели требований).
-	protected string ToolName(string token)
+	protected void OnDopAction(int index, string action, int arg, DRL_UITileList list)
 	{
-		string n = "";
-		if (DRL_CraftUIHelper.GetDisplayNameForClass(token, n) && n != "")
-			return n;
-		int slotId = InventorySlots.GetSlotIdFromString(token);
-		if (slotId > -1)
-			return InventorySlots.GetSlotDisplayName(slotId);
-		return token;
-	}
-
-	protected void OnCompAction(int index, string action, int arg, DRL_UIRowList list)
-	{
-		DRL_UIRowData d = list.GetItem(index);
-		if (!d)
+		DRL_UITileData d = list.GetItem(index);
+		if (!d || d.m_Tag < 0)
 			return;
-		int tag = d.m_Tag;
-		if (tag >= TAG_DOP)
-		{
-			HandleDopAction(tag - TAG_DOP, action, arg);
-			return;
-		}
-		if (tag >= TAG_TOOL || tag < 0 || action != "row")
-			return;
-		if (tag < m_Merged.Count())
-			ToggleVariationList(m_Merged[tag]);
-	}
-
-	// Наведение на ингредиент / инструмент — подсказка поверх сцены.
-	protected void OnCompHover(int index, DRL_UIRowList list)
-	{
-		DRL_UIRowData d = list.GetItem(index);
-		if (!d || d.m_Tag < 0 || d.m_Tag >= TAG_DOP)
-		{
-			HideHoverCard();
-			return;
-		}
-		DRL_Craft_Component comp = null;
-		if (d.m_Tag >= TAG_TOOL)
-		{
-			int ti = d.m_Tag - TAG_TOOL;
-			if (ti < m_ToolComps.Count())
-				comp = m_ToolComps[ti];
-		}
-		else if (d.m_Tag < m_Merged.Count() && m_Merged[d.m_Tag])
-		{
-			comp = m_Merged[d.m_Tag].ToCraftComponent();
-		}
-		if (!comp)
-		{
-			HideHoverCard();
-			return;
-		}
-		ShowHoverCard(comp.Classname, comp);
-	}
-
-	protected void OnRecraftHover(int index, DRL_UIRowList list)
-	{
-		HideHoverCard();
-	}
-
-	protected void ShowHoverCard(string cls, DRL_Craft_Component comp)
-	{
-		m_HoverCard.ShowFor(cls, comp);
-		m_Stage.SetHidden(DRL_UIStage.HIDE_HOVERCARD, true);
-	}
-
-	protected void HideHoverCard()
-	{
-		if (m_HoverCard)
-			m_HoverCard.Hide();
-		if (m_Stage)
-			m_Stage.SetHidden(DRL_UIStage.HIDE_HOVERCARD, false);
+		HandleDopAction(d.m_Tag, action, arg);
 	}
 
 	// --- вариации ингредиента (= DRL_CraftVariationsController) -------------------------
@@ -1887,7 +2060,8 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		string popSub = DRL_UIText.DisplayName(activeCls);
 		int popHue = INT_UIF.Color(INT_UIF_ThemeKeys.AMBER);
 		m_Popover.Open("var", popTitle, popSub, "swap", popHue, rows);
-		m_Grid.HideModels(true);
+		SetCovered(true);
+		RefreshIngrSelection();
 	}
 
 	// = DRL_CraftVariationsController.CreateVariationTile
@@ -1995,13 +2169,17 @@ class DRL_CraftWindow extends INT_UIF_Menu
 
 	protected void ClosePopover()
 	{
+		bool wasOpen = m_Popover && m_Popover.IsOpen();
 		if (m_Popover)
 			m_Popover.Close();
 		m_ActiveVariationMerged = null;
 		m_VarInfos.Clear();
-		if (m_Grid)
-			m_Grid.HideModels(false);
-		HideHoverCard();
+		SetCovered(false);
+		if (wasOpen && m_IngrList)
+		{
+			RefreshIngrSelection();
+			RefreshIngrCard();
+		}
 	}
 
 	// Закрыта крестиком.
@@ -2009,8 +2187,9 @@ class DRL_CraftWindow extends INT_UIF_Menu
 	{
 		m_ActiveVariationMerged = null;
 		m_VarInfos.Clear();
-		m_Grid.HideModels(false);
-		HideHoverCard();
+		SetCovered(false);
+		RefreshIngrSelection();
+		RefreshIngrCard();
 	}
 
 	protected void OnPopAction(int index, string action, int arg, DRL_UIRowList list)
@@ -2032,21 +2211,38 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		}
 	}
 
+	// Наведение на вариацию — карточка ингредиента показывает её; ушли — снова свою плитку.
 	protected void OnPopHover(int index, DRL_UIRowList list)
 	{
 		DRL_UIRowData d = list.GetItem(index);
 		if (!d || m_Popover.GetKind() != "var" || d.m_Tag < 0 || d.m_Tag >= m_VarInfos.Count())
 		{
-			HideHoverCard();
+			RefreshIngrCard();
 			return;
 		}
 		DRL_VariationClickInfo info = m_VarInfos[d.m_Tag];
 		if (!info || !info.MergedComp)
 		{
-			HideHoverCard();
+			RefreshIngrCard();
 			return;
 		}
-		ShowHoverCard(info.VariantClass, info.MergedComp.ToCraftComponent());
+		DRL_Craft_Component comp = null;
+		if (info.TargetKey >= 0)
+			comp = GetComponentByKey(info.TargetKey);
+		if (!comp)
+			comp = info.MergedComp.ToCraftComponent();
+		if (!comp)
+		{
+			RefreshIngrCard();
+			return;
+		}
+		int craftCount = 1;
+		if (m_SelectedRecipe)
+			craftCount = Math.Max(1, m_SelectedRecipe.CurrentCraftCount);
+		string varCls = info.VariantClass;
+		int have = ComputeHaveForClass(varCls, comp.MinHealthFrac, null, comp.QuantityFrac);
+		int need = NeedForClassCount(varCls, comp, craftCount);
+		ShowIngrCard(varCls, comp, have, need, false);
 	}
 
 	// --- требования (= DRL_CraftRequirementsController) ---------------------------------
@@ -2073,7 +2269,8 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		array<ref DRL_UIRowData> rows = BuildRequirementRows(r);
 		string popTitle = DRL_UIText.Tr("#STR_DRL_UI_REQS");
 		m_Popover.Open("req", popTitle, r.RecipeName, "shield", hue, rows);
-		m_Grid.HideModels(true);
+		SetCovered(true);
+		RefreshIngrSelection();
 	}
 
 	bool AreAllRecipeRequirementsMet(DRL_Craft_Recipe r)
@@ -2312,17 +2509,9 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		}
 	}
 
-	// --- «Описание» -------------------------------------------------------------------
-	protected void FillInfoPage(DRL_Craft_Recipe r)
+	// --- предмет: описание и слоты навесного --------------------------------------------
+	protected void FillItemInfo(DRL_Craft_Recipe r)
 	{
-		string chosen = ChosenResult();
-		m_InfoName.SetText(DRL_UIText.Label("#STR_DRL_NAME", DRL_UIText.DisplayName(chosen)));
-		m_InfoState.SetText(DRL_UIText.Label("#STR_DRL_STATE", DRL_UIText.StateFromDamage(r.ResultDamageFrac)));
-		string qs = "—";
-		if (r.ResultQuantityFrac > 0.0)
-			qs = DRL_UIText.Pct(r.ResultQuantityFrac);
-		m_InfoFill.SetText(DRL_UIText.Label("#STR_DRL_FILL", qs));
-
 		string body = "";
 		if (r.Description != "")
 		{
@@ -2337,16 +2526,98 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		if (body == "")
 			body = "#STR_DRL_Craft_Recipe_Detail";
 		m_RecipeDesc.SetText(body);
+		FillSlots(r);
+	}
 
-		FillStats(chosen);
-		string attachClass = chosen;
+	// Слоты навесного результата (= RenderAttachmentIconsForClass); бирюзовые —
+	// их займёт выбранное доп. навесное.
+	protected void FillSlots(DRL_Craft_Recipe r)
+	{
+		if (!r)
+			return;
+		string attachClass = ChosenResult();
 		if (attachClass == "")
 		{
 			attachClass = r.PreviewClassname;
 			if (attachClass == "")
 				attachClass = r.Result;
 		}
-		FillSlotIcons(attachClass);
+		array<string> slots;
+		DRL_CraftStatsHelper.GetAttachmentSlotsForClass(attachClass, slots);
+
+		TStringArray taken = new TStringArray();
+		DRL_Craft_Config cfg = Cfg();
+		if (cfg)
+		{
+			for (int i = 0; i < m_SelectedAttachedRecipeIds.Count(); i++)
+			{
+				int dopId = m_SelectedAttachedRecipeIds[i];
+				DRL_Craft_Recipe dopR = cfg.FindById(dopId);
+				string dopCls = GetSelectedAttachedClass(dopId, dopR);
+				TStringArray dslots;
+				if (dopCls != "" && DRL_AttachmentHelper.GetAttachmentSlots(dopCls, dslots))
+				{
+					foreach (string ds : dslots)
+					{
+						taken.Insert(ds);
+					}
+				}
+			}
+		}
+		array<bool> filled = new array<bool>();
+		int nFilled = 0;
+		for (int s = 0; s < slots.Count(); s++)
+		{
+			string low = slots[s];
+			low.ToLower();
+			bool isTaken = taken.Find(low) > -1;
+			filled.Insert(isTaken);
+			if (isTaken)
+				nFilled++;
+		}
+		m_SlotStrip.SetSlots(slots, filled);
+		if (slots.Count() > 0)
+			m_SlotsFill.SetText(DRL_UIText.Fmt("#STR_DRL_UI_SLOTS_FILL", nFilled.ToString(), slots.Count().ToString()));
+		else
+			m_SlotsFill.SetText("");
+	}
+
+	// --- результат: что получится, характеристики ---------------------------------------
+	protected void FillResult(DRL_Craft_Recipe r)
+	{
+		INT_UIF_ThemeManager tm = INT_UIF_ThemeManager.Get();
+		string chosen = ChosenResult();
+		bool ok = m_ResView.SetClass(MainPreviewClass());
+		m_ResThumbGlyph.Show(!ok);
+		m_ResName.SetText(DRL_UIText.DisplayName(chosen));
+		string sub = "";
+		if (r.ResultClasses && r.ResultClasses.Count() > 1)
+		{
+			int vi = r.ResultClasses.Find(chosen);
+			if (vi < 0)
+				vi = 0;
+			int vn = vi + 1;
+			sub = DRL_UIText.Fmt("#STR_DRL_UI_RES_VARIANT", vn.ToString(), r.ResultClasses.Count().ToString());
+		}
+		m_ResSub.SetText(sub);
+
+		int cnt = r.ResultCount;
+		if (cnt <= 0)
+			cnt = 1;
+		string fill = "—";
+		if (r.ResultQuantityFrac > 0.0)
+			fill = DRL_UIText.Pct(r.ResultQuantityFrac);
+		string timeText = DRL_UIText.Time(GetTotalCraftTimeSec(r));
+		string stateText = DRL_UIText.StateFromDamage(r.ResultDamageFrac);
+		m_ResValues[0].SetText(timeText);
+		m_ResValues[1].SetText(cnt.ToString());
+		m_ResValues[2].SetText(fill);
+		m_ResValues[3].SetText(stateText);
+		int stateCol = tm.Color(INT_UIF_ThemeKeys.TEXT);
+		if (r.ResultDamageFrac <= 0.0)
+			stateCol = tm.Color(INT_UIF_ThemeKeys.GREEN);
+		m_ResValues[3].SetColor(stateCol);
+		FillStats(chosen);
 	}
 
 	// = DRL_CraftStatsHelper.UpdateResultStats, значения по плиткам.
@@ -2401,34 +2672,10 @@ class DRL_CraftWindow extends INT_UIF_Menu
 	}
 
 	// = RenderAttachmentIconsForClass
-	protected void FillSlotIcons(string cls)
-	{
-		INT_UIF_Widgets.ClearChildren(m_SlotIcons);
-		array<string> slots;
-		DRL_CraftStatsHelper.GetAttachmentSlotsForClass(cls, slots);
-		int n = 0;
-		if (slots)
-			n = slots.Count();
-		m_SlotsNone.Show(n == 0);
-		float maxW = DETAILS_W - 160;
-		float x = 0;
-		for (int i = 0; i < n; i++)
-		{
-			if (x + 24 > maxW)
-				break;
-			string path = "set:dayz_inventory image:missing";
-			string iconPath;
-			if (DRL_CraftStatsHelper.GetSlotIconPath(slots[i], iconPath))
-				path = DRL_CraftUIHelper.ResolveImagePath(iconPath);
-			INT_UIF_Draw.Texture(m_SlotIcons, x, 0, 24, 24, path, ARGB(210, 255, 255, 255));
-			x = x + 28;
-		}
-	}
-
 	// --- «Разбор» (= BuildReCraftList / UpdateReCraftButtonState) ----------------------
-	protected void BuildRecraftRows(DRL_Craft_Recipe r, bool keepScroll)
+	protected void BuildRecraftTiles(DRL_Craft_Recipe r, bool keepScroll)
 	{
-		array<ref DRL_UIRowData> rows = new array<ref DRL_UIRowData>();
+		array<ref DRL_UITileData> items = new array<ref DRL_UITileData>();
 		string targetRes = ChosenResult();
 		if (r && r.CraftComponents)
 		{
@@ -2441,14 +2688,15 @@ class DRL_CraftWindow extends INT_UIF_Menu
 					continue;
 				if (c.RecraftDropChance <= 0.0)
 					continue;
-				if (rows.Count() == 0)
-					rows.Insert(DRL_UIRowData.Header("#STR_DRL_UI_RECRAFT_GET"));
-				DRL_UIRowData d = new DRL_UIRowData();
-				d.m_Title = DRL_UIText.DisplayName(c.Classname);
+				DRL_UITileData d = new DRL_UITileData();
+				string name = DRL_UIText.DisplayName(c.Classname);
+				d.m_Title = name;
 				if (c.RecraftDropChance < 1.0)
 				{
 					string chance = DRL_UIText.Pct(c.RecraftDropChance);
-					d.m_Sub = DRL_UIText.Fmt("#STR_DRL_UI_RECRAFT_CHANCE", chance);
+					string chanceText = DRL_UIText.Fmt("#STR_DRL_UI_RECRAFT_CHANCE", chance);
+					d.m_Corner = chance;
+					d.m_Title = name + " · " + chanceText;
 				}
 				string t = "";
 				if (DRL_CraftInventoryHelper.IsFillingByClass(c.Classname) && c.RecraftQuantityFrac > 0.0)
@@ -2462,22 +2710,23 @@ class DRL_CraftWindow extends INT_UIF_Menu
 						cnt = 1;
 					t = "x" + cnt.ToString();
 				}
-				d.m_Right = t;
-				d.m_RightColor = INT_UIF.Color(INT_UIF_ThemeKeys.TEXT);
+				d.m_Count = t;
 				d.m_PreviewClass = c.Classname;
 				d.m_Clickable = false;
 				d.m_Tag = i;
-				rows.Insert(d);
+				items.Insert(d);
 			}
 		}
-		m_RecraftList.SetItems(rows, keepScroll);
-		bool hasDrops = rows.Count() > 0;
-		m_RecraftFoot.Show(hasDrops);
-		if (r)
+		m_RetList.SetItems(items, keepScroll);
+		bool hasDrops = items.Count() > 0;
+		m_RecraftBtn.Show(hasDrops);
+		string head = DRL_UIText.Tr("#STR_DRL_UI_TAB_RECRAFT");
+		if (r && hasDrops)
 		{
 			string recraftTime = DRL_UIText.Time(r.GetRecraftTimeSec());
-			m_RecraftTime.SetText(DRL_UIText.Fmt("#STR_DRL_UI_RECRAFT_TIME", recraftTime));
+			head = head + " · " + recraftTime;
 		}
+		m_RecraftHead.SetText(head);
 	}
 
 	protected void UpdateRecraftButton()
@@ -2491,13 +2740,13 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		}
 		if (!m_SelectedRecipe)
 		{
-			SetRecraftButton(false, "#STR_DRL_NO_INGREDIENTS");
+			SetRecraftButton(false, "#STR_DRL_UI_NO_ITEM");
 			return;
 		}
 		if (HasResultItemForRecraft(m_SelectedRecipe))
 			SetRecraftButton(true, "#STR_DRL_RECRAFT");
 		else
-			SetRecraftButton(false, "#STR_DRL_NO_INGREDIENTS");
+			SetRecraftButton(false, "#STR_DRL_UI_NO_ITEM");
 	}
 
 	protected void SetRecraftButton(bool enabled, string text)
@@ -2637,12 +2886,40 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		int n = Math.Max(1, r.CurrentCraftCount);
 		m_CountText.SetText(n.ToString());
 		int maxN = GetMaxCraftable(r);
+		int top = Math.Max(1, maxN);
 		m_CountMinus.SetEnabled(n > 1);
-		m_CountPlus.SetEnabled(n < Math.Max(1, maxN));
+		m_CountPlus.SetEnabled(n < top);
+		m_CountMax.SetText(DRL_UIText.Fmt("#STR_DRL_UI_COUNT_MAX", top.ToString()));
+		// Слайдер повторяет ±: диапазон 1..максимум (у слайдера максимум > минимума).
+		m_CountSlider.SetRange(1, Math.Max(2, top), 1);
+		m_CountSlider.SetValue(n, false, false);
+		m_CountSlider.SetEnabled(top > 1);
 		int total = r.ResultCount * n;
 		m_TotalText.SetText(DRL_UIText.Fmt("#STR_DRL_UI_TOTAL", total.ToString()));
 		int t = Math.Max(0, GetTotalCraftTimeSec(r) * n);
 		m_FootTime.SetText(DRL_UIText.Time(t));
+	}
+
+	// Перетаскивание — только число на экране; отпустили — пересчёт деталей.
+	protected void OnCountSlider(float value, INT_UIF_Slider s, bool isFinal)
+	{
+		DRL_Craft_Recipe r = m_SelectedRecipe;
+		if (!r)
+			return;
+		int top = Math.Max(1, GetMaxCraftable(r));
+		int n = Math.Clamp(Math.Round(value), 1, top);
+		if (!isFinal)
+		{
+			m_CountText.SetText(n.ToString());
+			return;
+		}
+		if (n == r.CurrentCraftCount)
+		{
+			RefreshCountUI();
+			return;
+		}
+		r.CurrentCraftCount = n;
+		FillDetails();
 	}
 
 	// =================================================================================
@@ -3087,12 +3364,12 @@ class DRL_CraftWindow extends INT_UIF_Menu
 	// =================================================================================
 	int TestCategoryCount()
 	{
-		return m_Sidebar.Count();
+		return m_Rail.Count();
 	}
 
 	void TestSelectCategory(int entryIndex)
 	{
-		m_Sidebar.Select(entryIndex, true);
+		m_Rail.Select(entryIndex, true);
 	}
 
 	int TestRecipeCount()
@@ -3141,19 +3418,33 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			TestHover(n);
 			return "hover";
 		}
-		if (cmd == "tab")
+		if (cmd == "avail")
 		{
-			m_Tabs.Select(n, true);
-			return "tab=" + m_Tabs.GetActive().ToString();
+			bool on = n != 0;
+			m_OnlyAvail.SetOn(on, false, false);
+			OnOnlyAvailChanged(on, m_OnlyAvail);
+			return "only=" + m_OnlyAvailable.ToString() + " recipes=" + TestRecipeCount().ToString();
 		}
 		if (cmd == "var")
 		{
 			m_Variants.TestSelect(n);
 			return "result=" + m_SelectedResultClass + " " + TestState();
 		}
-		if (cmd == "row" || cmd == "chk" || cmd == "qplus" || cmd == "qminus" || cmd == "info")
+		// Плитка ингредиента: клик (вариации) и наведение (карточка).
+		if (cmd == "row")
 		{
-			string act = "row";
+			m_IngrList.TestAction(n, "tile", 0);
+			return TestState();
+		}
+		if (cmd == "hrow")
+		{
+			OnIngrHover(n, m_IngrList);
+			return "card=" + m_CardTag.ToString();
+		}
+		// Плитка доп. навесного.
+		if (cmd == "drow" || cmd == "chk" || cmd == "qplus" || cmd == "qminus" || cmd == "info")
+		{
+			string act = "tile";
 			if (cmd == "chk")
 				act = "check";
 			else if (cmd == "qplus")
@@ -3162,16 +3453,16 @@ class DRL_CraftWindow extends INT_UIF_Menu
 				act = "minus";
 			else if (cmd == "info")
 				act = "info";
-			m_CompList.TestAction(n, act, 0);
+			m_DopList.TestAction(n, act, 0);
 			return TestState();
 		}
 		if (cmd == "dv")
 		{
-			DRL_UIRowData d = m_CompList.GetItem(n);
+			DRL_UITileData d = m_DopList.GetItem(n);
 			int nextVar = 0;
 			if (d && d.m_VarCount > 1)
 				nextVar = (d.m_VarSelected + 1) % d.m_VarCount;
-			m_CompList.TestAction(n, "var", nextVar);
+			m_DopList.TestAction(n, "var", nextVar);
 			return "var=" + nextVar.ToString() + " " + TestState();
 		}
 		if (cmd == "prow")
@@ -3199,6 +3490,11 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			OnCountMinus(null);
 			return TestState();
 		}
+		if (cmd == "count")
+		{
+			OnCountSlider(n, m_CountSlider, true);
+			return TestState();
+		}
 		if (cmd == "craft")
 		{
 			if (m_CraftBtn.IsEnabled())
@@ -3210,16 +3506,6 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			if (m_RecraftBtn.IsEnabled())
 				OnRecraftClick(m_RecraftBtn);
 			return "recraft='" + m_RecraftText + "' active=" + m_ReCraftActive.ToString();
-		}
-		if (cmd == "hrow")
-		{
-			OnCompHover(n, m_CompList);
-			return "card=" + m_HoverCard.IsShown().ToString();
-		}
-		if (cmd == "hoff")
-		{
-			HideHoverCard();
-			return "card=off";
 		}
 		if (cmd == "qsel")
 		{
@@ -3246,7 +3532,8 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			count = m_SelectedRecipe.CurrentCraftCount;
 		}
 		string s = "recipe='" + name + "' count=" + count.ToString();
-		s = s + " button='" + m_CraftText + "' rows=" + m_CompList.Count().ToString();
+		s = s + " button='" + m_CraftText + "' ingr=" + m_IngrList.Count().ToString();
+		s = s + " dop=" + m_DopList.Count().ToString() + " ret=" + m_RetList.Count().ToString();
 		s = s + " attached=" + m_SelectedAttachedRecipeIds.Count().ToString();
 		s = s + " procs=" + m_Procs.Count().ToString() + " pop=" + m_Popover.GetKind();
 		return s;
@@ -3257,7 +3544,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		DRL_UITest.Apply(this, command);
 	}
 
-	// Мышь попадает в хит-зону, у которой свой обработчик (сетка, сайдбар).
+	// Мышь попадает в хит-зону, у которой свой обработчик (список рецептов, категории).
 	// dayz-mcp ui_click вызывает обработчик меню — пробрасываем клик дальше.
 	override bool OnClick(Widget w, int x, int y, int button)
 	{
@@ -3266,7 +3553,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			string n = w.GetName();
 			if (n.IndexOf("DRL_Card_") == 0 && m_Grid && m_Grid.OnClick(w, x, y, button))
 				return true;
-			if (n.IndexOf("DRL_Cat_") == 0 && m_Sidebar && m_Sidebar.OnClick(w, x, y, button))
+			if (n.IndexOf("DRL_Cat_") == 0 && m_Rail && m_Rail.OnClick(w, x, y, button))
 				return true;
 		}
 		return super.OnClick(w, x, y, button);

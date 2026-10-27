@@ -165,11 +165,12 @@ class DRL_CraftInventoryHelper
 				{
 					needPct = 1;
 				}
+				// Один знак процента на пару: «0/25%».
 				if (withSpaces)
 				{
-					return havePct.ToString() + "% / " + needPct.ToString() + "%";
+					return havePct.ToString() + " / " + needPct.ToString() + "%";
 				}
-				return havePct.ToString() + "%/" + needPct.ToString() + "%";
+				return havePct.ToString() + "/" + needPct.ToString() + "%";
 			}
 		}
 

@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Свободный крафт</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+button{font:inherit;cursor:pointer;margin:0}
+a{color:#f8bc5a}a:hover{color:#f5a524}
+</style>
+</helmet>
+<div style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #0b0d10; font-family: 'Manrope', system-ui, sans-serif; color: #eceff2;">
+<img src="/_blob/155f638686b1abe040c331d3c4a188d9" alt="" style="position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; object-fit: cover;">
+<div style="position: absolute; inset: 0; background: rgba(5, 7, 10, 0.45);"></div>
+
+<div style="position: absolute; left: 120px; top: 64px; width: 1680px; height: 900px; box-sizing: border-box; background: rgba(16, 19, 22, 0.98); border: 1px solid rgba(255, 255, 255, 0.086); border-radius: 14px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); display: flex; flex-direction: column; overflow: hidden;">
+
+<!-- Шапка -->
+<div style="height: 72px; flex-shrink: 0; box-sizing: border-box; padding: 0 20px; display: flex; align-items: center; gap: 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0));">
+<div style="width: 42px; height: 42px; border-radius: 10px; background: #f5a524; color: #1c1406; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+<div style="font-size: 20px; font-weight: 700; letter-spacing: 0.01em;">Меню изготовления</div>
+<div style="font-size: 13px; color: #a2aab3;">Свободный крафт · Survivor</div>
+</div>
+<div style="flex-grow: 1;"></div>
+<div style="display: flex; align-items: center; gap: 10px;">
+<div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px;">
+<div style="font-size: 12px; color: #a2aab3; display: flex; align-items: center; gap: 5px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0M12 7v5l3 2"></path></svg>Очередь</div>
+<div style="font-size: 17px; font-weight: 700;">0/5</div>
+</div>
+<sc-for list="{{ queue }}" as="q" hint-placeholder-count="5">
+<div style="width: 42px; height: 42px; box-sizing: border-box; border-radius: 9px; border: 1px dashed rgba(255, 255, 255, 0.12); background: rgba(255, 255, 255, 0.02);"></div>
+</sc-for>
+</div>
+<div style="width: 1px; height: 36px; background: rgba(255, 255, 255, 0.07); margin: 0 4px;"></div>
+<div style="height: 36px; box-sizing: border-box; padding: 0 12px; border-radius: 8px; background: rgba(105, 169, 255, 0.12); border: 1px solid rgba(105, 169, 255, 0.32); color: #69a9ff; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 8l10 5 10-5zM2 13l10 5 10-5"></path></svg>
+Свободно 59 из 74
+</div>
+<button type="button" style="height: 40px; box-sizing: border-box; padding: 0 16px; border-radius: 9px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.09); color: #eceff2; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"></path></svg>
+Изучение
+</button>
+<button type="button" aria-label="Закрыть" style="width: 40px; height: 40px; box-sizing: border-box; border-radius: 9px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.09); color: #a2aab3; display: flex; align-items: center; justify-content: center; padding: 0;">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+</button>
+</div>
+
+<div style="flex-grow: 1; min-height: 0; box-sizing: border-box; padding: 16px; display: flex; gap: 12px;">
+
+<!-- 1. Рецепты -->
+<div style="width: 336px; flex-shrink: 0; box-sizing: border-box; padding: 14px; background: #15191d; border: 1px solid rgba(255, 255, 255, 0.067); border-radius: 12px; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; align-items: baseline; justify-content: space-between;">
+<div style="font-size: 16px; font-weight: 700;">Рецепты</div>
+<div style="font-size: 13px; color: #a2aab3;">Все рецепты · 99</div>
+</div>
+<label style="height: 40px; box-sizing: border-box; padding: 0 12px; border-radius: 9px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.07); display: flex; align-items: center; gap: 8px; color: #a2aab3;">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a7 7 0 1 0 14 0a7 7 0 1 0 -14 0M20 20l-3.6-3.6"></path></svg>
+<input type="text" placeholder="Найти рецепт" aria-label="Найти рецепт" style="flex-grow: 1; min-width: 0; background: transparent; border: 0; outline: none; color: #eceff2; font: inherit; font-size: 14px;">
+</label>
+<div style="flex-grow: 1; min-height: 0; display: flex; gap: 10px; overflow: hidden;">
+<div style="width: 40px; flex-shrink: 0; display: flex; flex-direction: column; gap: 4px;">
+<sc-for list="{{ cats }}" as="c" hint-placeholder-count="14">
+<button type="button" aria-label="{{ c.label }}" title="{{ c.label }}" style="{{ c.style }}">
+<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ c.icon }}"></path></svg>
+</button>
+</sc-for>
+</div>
+<div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; overflow: hidden;">
+<sc-for list="{{ recipes }}" as="r" hint-placeholder-count="10">
+<button type="button" style="{{ r.style }}">
+<div style="width: 60px; height: 46px; flex-shrink: 0; border-radius: 8px; background: #1a1f24; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+<img src="{{ r.img }}" alt="" style="max-width: 54px; max-height: 40px; object-fit: contain;">
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; min-width: 0; text-align: left;">
+<div style="font-size: 13px; font-weight: 600; color: #eceff2; line-height: 1.25;">{{ r.name }}</div>
+<div style="display: flex; align-items: center; gap: 6px;">
+<span style="{{ r.chipStyle }}">{{ r.chip }}</span>
+<span style="font-size: 12px; color: #a2aab3;">{{ r.time }}</span>
+</div>
+</div>
+</button>
+</sc-for>
+</div>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.06);">
+<span style="font-size: 13px; color: #a2aab3;">Только доступные к крафту</span>
+<button type="button" role="switch" aria-checked="false" aria-label="Только доступные к крафту" style="width: 40px; height: 22px; box-sizing: border-box; border-radius: 11px; background: rgba(255, 255, 255, 0.078); border: 0; padding: 3px; display: flex; align-items: center;">
+<span style="width: 16px; height: 16px; border-radius: 8px; background: #f0f4f8; display: block;"></span>
+</button>
+</div>
+</div>
+
+<!-- 2. Ингредиенты + доп. предметы -->
+<div style="width: 352px; flex-shrink: 0; box-sizing: border-box; padding: 14px; background: #15191d; border: 1px solid rgba(255, 255, 255, 0.067); border-radius: 12px; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; align-items: baseline; justify-content: space-between;">
+<div style="font-size: 16px; font-weight: 700;">Ингредиенты</div>
+<div style="font-size: 13px; color: #f26666;">0 из 4 в наличии</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px;">
+<sc-for list="{{ ingredients }}" as="i" hint-placeholder-count="4">
+<button type="button" aria-label="{{ i.name }}" style="{{ i.style }}">
+<img src="{{ i.img }}" alt="" style="width: 54px; height: 44px; object-fit: contain; margin-top: 6px;">
+<span style="{{ i.countStyle }}">{{ i.count }}</span>
+</button>
+</sc-for>
+</div>
+
+<div style="display: flex; align-items: baseline; justify-content: space-between; margin-top: 6px;">
+<div style="font-size: 16px; font-weight: 700;">Дополнительные предметы</div>
+<div style="font-size: 13px; color: #a2aab3;">—</div>
+</div>
+<div style="height: 64px; box-sizing: border-box; border-radius: 9px; border: 1px dashed rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center; font-size: 13px; color: #a2aab3;">Не требуются</div>
+
+<div style="flex-grow: 1;"></div>
+<div style="box-sizing: border-box; padding: 14px; border-radius: 10px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.055); display: flex; flex-direction: column; gap: 10px;">
+<div style="display: flex; align-items: center; gap: 12px;">
+<div style="width: 56px; height: 48px; border-radius: 8px; background: #15191d; display: flex; align-items: center; justify-content: center;">
+<img src="/_blob/9d93dac779a1c880bdae701369756d08" alt="" style="max-width: 44px; max-height: 40px; object-fit: contain;">
+</div>
+<div style="display: flex; flex-direction: column; gap: 3px;">
+<div style="font-size: 15px; font-weight: 700;">Изолента</div>
+<div style="font-size: 12px; color: #a2aab3;">Считается по наполнению</div>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 12px; font-size: 13px;">
+<span style="color: #a2aab3;">Нужно</span><span style="text-align: right; font-weight: 600;">180%</span>
+<span style="color: #a2aab3;">В наличии</span><span style="text-align: right; font-weight: 600; color: #f26666;">0%</span>
+<span style="color: #a2aab3;">Мин. состояние</span><span style="text-align: right; font-weight: 600;">Любое</span>
+<span style="color: #a2aab3;">Расходуется</span><span style="text-align: right; font-weight: 600;">Да</span>
+</div>
+</div>
+</div>
+
+<!-- 3. Предмет -->
+<div style="width: 600px; flex-shrink: 0; box-sizing: border-box; padding: 14px; background: #15191d; border: 1px solid rgba(255, 255, 255, 0.067); border-radius: 12px; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; align-items: center; gap: 10px;">
+<div style="font-size: 18px; font-weight: 700; flex-grow: 1;">Штурмовая винтовка M4A1</div>
+<button type="button" style="height: 32px; box-sizing: border-box; padding: 0 12px; border-radius: 8px; background: rgba(242, 102, 102, 0.12); border: 1px solid rgba(242, 102, 102, 0.4); color: #f26666; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z"></path></svg>
+Требования
+</button>
+</div>
+<div style="height: 268px; flex-shrink: 0; position: relative; border-radius: 10px; overflow: hidden; background: radial-gradient(ellipse 46% 52% at 50% 55%, rgba(245, 165, 36, 0.16), rgba(245, 165, 36, 0) 70%), #1a1f24; border: 1px solid rgba(255, 255, 255, 0.055);">
+<img src="/_blob/400d337d632ca4371b652d62473835c0" alt="Штурмовая винтовка M4A1" style="position: absolute; left: 76px; top: 40px; width: 420px; height: 180px; object-fit: contain;">
+<div style="position: absolute; left: 14px; bottom: 12px; font-size: 12px; color: #a2aab3; display: flex; align-items: center; gap: 6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7L20 8M20 3v5h-5"></path></svg>Тяните — вращать, колесо — масштаб</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<div style="display: flex; align-items: baseline; justify-content: space-between;">
+<div style="font-size: 13px; font-weight: 700; color: #a2aab3; text-transform: uppercase; letter-spacing: 0.06em;">Слоты навесного</div>
+<div style="font-size: 12px; color: #a2aab3;">заполнится 2 из 7</div>
+</div>
+<div style="display: flex; gap: 6px;">
+<sc-for list="{{ slots }}" as="s" hint-placeholder-count="7">
+<div title="{{ s.label }}" style="{{ s.style }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ s.icon }}"></path></svg>
+</div>
+</sc-for>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<div style="font-size: 13px; font-weight: 700; color: #a2aab3; text-transform: uppercase; letter-spacing: 0.06em;">Детали рецепта</div>
+<div style="font-size: 15px; line-height: 1.45; color: #eceff2;">Штурмовая автоматическая винтовка M4A1 калибра 5.56x45мм с широкими возможностями кастомизации.</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; min-height: 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between;">
+<div style="font-size: 13px; font-weight: 700; color: #a2aab3; text-transform: uppercase; letter-spacing: 0.06em;">Дополнительное навесное</div>
+<div style="font-size: 12px; color: #a2aab3;">выбрано 2 из 5 · +время крафта</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px;">
+<sc-for list="{{ extras }}" as="e" hint-placeholder-count="5">
+<div style="{{ e.style }}">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<button type="button" aria-label="Подробнее" style="width: 22px; height: 22px; padding: 0; border-radius: 6px; background: transparent; border: 0; color: #a2aab3; display: flex; align-items: center; justify-content: center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0M12 11v5M12 8h.01"></path></svg></button>
+<button type="button" aria-label="Добавить к крафту" aria-pressed="{{ e.on }}" style="{{ e.chkStyle }}">
+<sc-if value="{{ e.on }}" hint-placeholder-val="{{ true }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg></sc-if>
+</button>
+</div>
+<div style="height: 50px; display: flex; align-items: center; justify-content: center;">
+<img src="{{ e.img }}" alt="" style="{{ e.imgStyle }}">
+</div>
+<div style="height: 20px; display: flex; align-items: center; justify-content: flex-end;">
+<sc-if value="{{ e.on }}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; align-items: center; height: 20px; border-radius: 5px; background: #15191d; border: 1px solid rgba(255, 255, 255, 0.07);">
+<button type="button" aria-label="Меньше" style="width: 18px; height: 18px; padding: 0; background: transparent; border: 0; color: #a2aab3; display: flex; align-items: center; justify-content: center;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+<span style="min-width: 16px; text-align: center; font-size: 12px; font-weight: 700;">1</span>
+<button type="button" aria-label="Больше" style="width: 18px; height: 18px; padding: 0; background: transparent; border: 0; color: #a2aab3; display: flex; align-items: center; justify-content: center;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+</div>
+</sc-if>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<!-- 4. Результат крафта -->
+<div style="width: 324px; flex-shrink: 0; box-sizing: border-box; padding: 14px; background: #15191d; border: 1px solid rgba(255, 255, 255, 0.067); border-radius: 12px; display: flex; flex-direction: column; gap: 14px;">
+<div style="font-size: 16px; font-weight: 700;">Результат крафта</div>
+<div style="display: flex; gap: 12px; align-items: center;">
+<div style="width: 92px; height: 64px; flex-shrink: 0; border-radius: 9px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.055); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+<img src="/_blob/400d337d632ca4371b652d62473835c0" alt="" style="max-width: 86px; max-height: 54px; object-fit: contain;">
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px;">
+<div style="font-size: 16px; font-weight: 700;">M4-A1</div>
+<div style="font-size: 12px; color: #a2aab3;">Штурмовая винтовка</div>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px 10px; font-size: 13px;">
+<span style="color: #a2aab3;">Время</span><span style="text-align: right; font-weight: 600;">1 мин 42 с</span>
+<span style="color: #a2aab3;">Количество</span><span style="text-align: right; font-weight: 600;">1</span>
+<span style="color: #a2aab3;">Наполнение</span><span style="text-align: right; font-weight: 600;">—</span>
+<span style="color: #a2aab3;">Состояние</span><span style="text-align: right; font-weight: 600; color: #62d6a0;">Нетронутое</span>
+</div>
+<div style="box-sizing: border-box; padding: 12px; border-radius: 10px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.055); display: flex; flex-direction: column; gap: 7px;">
+<div style="font-size: 12px; font-weight: 700; color: #a2aab3; text-transform: uppercase; letter-spacing: 0.06em;">Характеристики</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 10px; font-size: 13px;">
+<span style="color: #a2aab3;">Прочность</span><span style="text-align: right; font-weight: 700; color: #4fd8b6;">200 hp</span>
+<span style="color: #a2aab3;">Защита от пуль</span><span style="text-align: right;">—</span>
+<span style="color: #a2aab3;">Защита от ножа</span><span style="text-align: right;">—</span>
+<span style="color: #a2aab3;">От заражённых</span><span style="text-align: right;">—</span>
+<span style="color: #a2aab3;">От гранат</span><span style="text-align: right;">—</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px;">
+<div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="color: #a2aab3;">Количество к созданию</span><span style="color: #a2aab3;">макс. 0</span></div>
+<div style="display: flex; gap: 8px;">
+<button type="button" aria-label="Меньше" style="width: 48px; height: 44px; border-radius: 9px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.09); color: #a2aab3; display: flex; align-items: center; justify-content: center; padding: 0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+<div style="flex-grow: 1; height: 44px; box-sizing: border-box; border-radius: 9px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.09); display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 800;">1</div>
+<button type="button" aria-label="Больше" style="width: 48px; height: 44px; border-radius: 9px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.09); color: #a2aab3; display: flex; align-items: center; justify-content: center; padding: 0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+</div>
+<div style="height: 4px; border-radius: 2px; background: rgba(255, 255, 255, 0.078); position: relative;">
+<div style="position: absolute; left: 0; top: -5px; width: 14px; height: 14px; border-radius: 7px; background: #f0f4f8;"></div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.06);">
+<div style="display: flex; align-items: center; justify-content: space-between;">
+<div style="font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7L20 8M20 3v5h-5"></path></svg>Разбор · 30 с</div>
+<button type="button" disabled="disabled" style="height: 28px; box-sizing: border-box; padding: 0 10px; border-radius: 7px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.07); color: #a2aab3; font-size: 12px; font-weight: 600; cursor: default;">Нет предмета</button>
+</div>
+<div style="display: flex; gap: 8px;">
+<div style="width: 56px; height: 48px; position: relative; border-radius: 8px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.055); display: flex; align-items: center; justify-content: center;">
+<img src="/_blob/f5edf5b9c6050d521e9417a1137b5ff2" alt="Листовой металл" style="max-width: 40px; max-height: 34px; object-fit: contain;">
+<span style="position: absolute; right: 4px; bottom: 2px; font-size: 11px; font-weight: 700;">×1</span>
+</div>
+<div style="width: 56px; height: 48px; position: relative; border-radius: 8px; background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.055); display: flex; align-items: center; justify-content: center;">
+<img src="/_blob/a6ed0a33a4dd5259449e0bdbb7e33fef" alt="Отвёртка" style="max-width: 40px; max-height: 38px; object-fit: contain;">
+<span style="position: absolute; right: 4px; bottom: 2px; font-size: 11px; font-weight: 700;">×1</span>
+</div>
+</div>
+</div>
+<div style="flex-grow: 1;"></div>
+<div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px;">
+<span style="color: #a2aab3; display: flex; align-items: center; gap: 6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0M12 7v5l3 2"></path></svg>Время создания</span>
+<span style="font-size: 16px; font-weight: 700;">1 мин 42 с</span>
+</div>
+<button type="button" style="height: 54px; border-radius: 10px; background: rgba(242, 102, 102, 0.14); border: 1px solid rgba(242, 102, 102, 0.45); color: #f26666; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px;">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.5 20h19zM12 10v4M12 17h.01"></path></svg>
+Нет ингредиентов
+</button>
+</div>
+
+</div>
+</div>
+
+<div style="position: absolute; left: 124px; top: 980px; display: flex; gap: 22px; font-size: 13px; color: #c3c9d0;">
+<sc-for list="{{ hints }}" as="h" hint-placeholder-count="4">
+<span style="display: flex; align-items: center; gap: 8px;"><kbd style="font-family: inherit; font-size: 12px; font-weight: 700; padding: 3px 7px; border-radius: 5px; background: rgba(26, 31, 36, 0.9); border: 1px solid rgba(255, 255, 255, 0.12); color: #eceff2;">{{ h.k }}</kbd>{{ h.t }}</span>
+</sc-for>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1920,"height":1080}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const C = { amberT: '#f8bc5a', red: '#f26666', green: '#62d6a0' };
+    const soft = (rgb, txt) => 'display: inline-flex; align-items: center; height: 19px; padding: 0 6px; border-radius: 6px; font-size: 11px; font-weight: 700; background: rgba(' + rgb + ', 0.12); border: 1px solid rgba(' + rgb + ', 0.35); color: ' + txt + ';';
+    const CHIP = {
+      ok: ['Можно', soft('98, 214, 160', C.green)],
+      no: ['Нет ресурсов', soft('242, 102, 102', C.red)],
+      lock: ['Не изучен', soft('245, 165, 36', C.amberT)]
+    };
+    const ICON = {
+      grid: 'M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z',
+      gear: 'M9 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1',
+      flame: 'M12 3c1 3 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5 0 2 1 3 2 3 0-3-1-5 1-8.5z',
+      shirt: 'M8 3 3 6l2 4 2-1v12h10V9l2 1 2-4-5-3a4 4 0 0 1-8 0z',
+      shield: 'M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z',
+      rifle: 'M2 13h13l2-2h5v3h-4l-2 2h-3l-1 4H9l1-4H2z',
+      ammo: 'M5 20V9l2-5 2 5v11zM15 20V9l2-5 2 5v11z',
+      ring: 'M4 12a8 8 0 1 0 16 0a8 8 0 1 0 -16 0M12 2v5M12 17v5M2 12h5M17 12h5',
+      bolt: 'M13 2 4 14h7l-1 8 9-12h-7z',
+      med: 'M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM9 7V4h6v3M12 10v7M8.5 13.5h7',
+      wheel: 'M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0M9 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0M12 3v6M12 15v6M3 12h6M15 12h6',
+      hammer: 'M3 21 13 11M11 5l3-3 7 7-3 3zM9 7l8 8',
+      bricks: 'M3 5h18v14H3zM3 9.7h18M3 14.3h18M9 5v4.7M15 5v4.7M6 9.7v4.6M12 9.7v4.6M18 9.7v4.6M9 14.3V19M15 14.3V19',
+      box: 'M3 7l9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10',
+      stock: 'M2 10h9l3 3h8v3H11l-4 3H2z',
+      hguard: 'M2 9h20v6H2zM6 9v6M10 9v6M14 9v6M18 9v6',
+      optic: 'M3 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0M15 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0M9 11h6M8 7h8',
+      mag: 'M9 3h6l1.5 18h-6zM9.6 8h5.8',
+      muzzle: 'M2 10h14v4H2zM16 9h6v6h-6z',
+      light: 'M3 9h10v6H3zM13 8l6-3v14l-6-3z',
+      knife: 'M3 21 17 7l2-4 2 2-4 2L5 21zM14 10l2 2'
+    };
+    const catStyle = (on) => 'width: 40px; height: 40px; padding: 0; border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; ' + (on ? 'background: rgba(245, 165, 36, 0.14); border: 1px solid rgba(245, 165, 36, 0.45); color: #f5a524;' : 'background: transparent; border: 1px solid transparent; color: #a2aab3;');
+    const cats = [
+      ['Все рецепты', 'grid'], ['Детали и ингредиенты', 'gear'], ['Кулинария', 'flame'], ['Обмундирование', 'shirt'],
+      ['Броня и защита', 'shield'], ['Оружие', 'rifle'], ['Патроны', 'ammo'], ['Аксессуары', 'ring'],
+      ['Электроника', 'bolt'], ['Медицина', 'med'], ['Транспорт', 'wheel'], ['Инструменты', 'hammer'],
+      ['Стройка', 'bricks'], ['Разное', 'box']
+    ].map(([label, ic], n) => ({ label, icon: ICON[ic], style: catStyle(n === 0) }));
+    const rowStyle = (sel) => 'width: 100%; flex-shrink: 0; box-sizing: border-box; padding: 5px; border-radius: 10px; display: flex; align-items: center; gap: 10px; ' + (sel ? 'background: #21272d; border: 1px solid rgba(245, 165, 36, 0.55);' : 'background: transparent; border: 1px solid transparent;');
+    const r = (name, img, st, time, sel) => ({ name, img, chip: CHIP[st][0], chipStyle: CHIP[st][1], time: time || '', style: rowStyle(!!sel) });
+    const recipes = [
+      r('Пластиковое цевьё АК', '/_blob/1498c0b8e25b1a490157fe692cc943d0', 'ok'),
+      r('Тактическое цевьё АК (с планками)', '/_blob/62ee88b70102e068838d9b6182cb294b', 'no'),
+      r('Оптический прицел ПСО-1', '/_blob/b6630c06d174ddbff4228ed29634be98', 'lock'),
+      r('Штык-нож АК', '/_blob/9379db8ef8495eb6d2034c146a3102c6', 'ok'),
+      r('Автомобильная лампа H7', '/_blob/8b93b6adf45119677c661cf2adb872ab', 'no'),
+      r('Штурмовая винтовка M4A1', '/_blob/58ecf59641dd00115b012336dcf21660', 'no', '1 мин 42 с', true),
+      r('Пластиковое цевьё M4A1', '/_blob/f26e574d538fb6ceb51cf23bd730939c', 'lock'),
+      r('RIS цевьё M4A1', '/_blob/a0b089a7983e7372b9bd56981cdbb9f1', 'no'),
+      r('Цевьё Magpul M4A1', '/_blob/afd00ea1f0337ac5bf3c0b539d50b937', 'lock'),
+      r('Приклад CQB M4A1', '/_blob/6886b4c4d1fba8beeb75f5cdde20084e', 'ok')
+    ];
+    const tileStyle = (state) => {
+      const b = state === 'ok' ? 'rgba(98, 214, 160, 0.35)' : state === 'bad' ? 'rgba(242, 102, 102, 0.45)' : 'rgba(255, 255, 255, 0.055)';
+      return 'position: relative; height: 88px; box-sizing: border-box; padding: 0 0 6px 0; border-radius: 9px; background: #1a1f24; border: 1px solid ' + b + '; display: flex; flex-direction: column; align-items: center; justify-content: space-between;';
+    };
+    const countStyle = 'font-size: 12px; font-weight: 700; color: ' + C.red + ';';
+    const ing = (name, img, count, sel) => ({ name, img, count, countStyle, style: tileStyle('bad') + (sel ? ' outline: 2px solid rgba(245, 165, 36, 0.6); outline-offset: 1px;' : '') });
+    const ingredients = [
+      ing('Листовой металл', '/_blob/f5edf5b9c6050d521e9417a1137b5ff2', '0/6'),
+      ing('Отвёртка', '/_blob/a6ed0a33a4dd5259449e0bdbb7e33fef', '0/1'),
+      ing('Изолента', '/_blob/9d93dac779a1c880bdae701369756d08', '0%/180%', true),
+      ing('Проволока', '/_blob/c6f0fd109c2d0536cb25df8a507c5c0e', '0/2')
+    ];
+    const slotStyle = (on) => 'width: 38px; height: 38px; box-sizing: border-box; border-radius: 8px; display: flex; align-items: center; justify-content: center; ' + (on ? 'background: rgba(79, 216, 182, 0.12); border: 1px solid rgba(79, 216, 182, 0.4); color: #4fd8b6;' : 'background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.055); color: #a2aab3;');
+    const slots = [
+      ['Приклад', 'stock', false], ['Цевьё', 'hguard', false], ['Оптика', 'optic', true], ['Магазин', 'mag', false],
+      ['Дульное устройство', 'muzzle', true], ['Фонарь', 'light', false], ['Штык-нож', 'knife', false]
+    ].map(([label, ic, on]) => ({ label, icon: ICON[ic], style: slotStyle(on) }));
+    const extraStyle = (on) => 'box-sizing: border-box; padding: 7px; border-radius: 10px; display: flex; flex-direction: column; gap: 4px; ' + (on ? 'background: #1f252b; border: 1px solid rgba(79, 216, 182, 0.4);' : 'background: #1a1f24; border: 1px solid rgba(255, 255, 255, 0.055);');
+    const chkStyle = (on) => 'width: 22px; height: 22px; padding: 0; border-radius: 6px; display: flex; align-items: center; justify-content: center; ' + (on ? 'background: #4fd8b6; border: 1px solid #4fd8b6; color: #10241f;' : 'background: transparent; border: 1px solid rgba(255, 255, 255, 0.22); color: transparent;');
+    const ex = (img, on) => ({ img, on, style: extraStyle(on), chkStyle: chkStyle(on), imgStyle: 'max-width: 100px; max-height: 50px; object-fit: contain;' + (on ? '' : ' opacity: 0.55;') });
+    const extras = [
+      ex('/_blob/2f60bdcaa33da5880c63ef679c15c476', false),
+      ex('/_blob/78a81a943b3d9e3a3d839adc0c21418e', true),
+      ex('/_blob/eedbad532033bb91343e9c33bbcb2b16', false),
+      ex('/_blob/244e3b3c21b14cd2651146c74c5ff6b1', false),
+      ex('/_blob/6cd2e692efc2032c781d47f743e44abe', true)
+    ];
+    return {
+      queue: [1, 2, 3, 4, 5],
+      cats, recipes, ingredients, slots, extras,
+      hints: [{ k: 'Esc', t: 'закрыть' }, { k: 'ЛКМ', t: 'выбрать' }, { k: 'Колесо', t: 'листать' }, { k: 'Тянуть', t: 'вращать превью' }]
+    };
+  }
+}
+</script>
+</body>
+</html>
