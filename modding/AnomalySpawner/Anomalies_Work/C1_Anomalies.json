@@ -1,6 +1,6 @@
 [
     {
-        "Unique_Group_Title": "Anomaly_BlackHole 4 тир опасности (НЕТ АРТЕФАКТОВ ВНУТРИ) / Всего 5 / Отспавнено 5",
+        "Unique_Group_Title": "Anomaly_BlackHole 4 тир опасности (НЕТ АРТЕФАКТОВ ВНУТРИ)",
         "Classname_Anomaly_Object": "Anomaly_BlackHole",
         "Chance_To_Spawn": 0,
         "Positions_Spawn_Anomaly": [],
@@ -10,9 +10,9 @@
         "ArtefactsWithDetectors": {}
     },
     {
-        "Unique_Group_Title": "Anomaly_Atom 4 тир опасности  ( Артефакты 1 тира - полезные ) / Всего: 5   / Отспавнено:  2 / Шанс выпадения артефакта 10",
+        "Unique_Group_Title": "Anomaly_Atom 4 тир опасности (Артефакты 1 тира - полезные)",
         "Classname_Anomaly_Object": "Anomaly_Atom",
-        "Chance_To_Spawn": 50,
+        "Chance_To_Spawn": 20,
         "Positions_Spawn_Anomaly": [],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
@@ -24,11 +24,11 @@
                     "Classname_Detector": "Anomaly_Detector_Svarog",
                     "Detect_Artefacts_Settings": [
                         {
-                            "Classname": "OOTS_ART_NanoCell",
+                            "Classname": "OOTS_ART_Plasma",
                             "Chance": 1
                         },
                         {
-                            "Classname": "OOTS_ART_Light",
+                            "Classname": "OOTS_ART_AngelFool",
                             "Chance": 1
                         },
                         {
@@ -40,11 +40,7 @@
                             "Chance": 1
                         },
                         {
-                            "Classname": "OOTS_ART_Oasis",
-                            "Chance": 1
-                        },
-                        {
-                            "Classname": "OOTS_ART_Flower",
+                            "Classname": "OOTS_ART_Sparkler",
                             "Chance": 1
                         },
                         {
@@ -52,7 +48,15 @@
                             "Chance": 1
                         },
                         {
-                            "Classname": "OOTS_ART_Monolit",
+                            "Classname": "OOTS_ART_Flower",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_Oasis",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_Light",
                             "Chance": 1
                         },
                         {
@@ -60,7 +64,7 @@
                             "Chance": 1
                         },
                         {
-                            "Classname": "OOTS_ART_vivert",
+                            "Classname": "OOTS_ART_Glaz2",
                             "Chance": 1
                         }
                     ]
@@ -69,16 +73,44 @@
         }
     },
     {
-        "Unique_Group_Title": "Anomaly_Electra 4 тир опасности  ( Артефакты 1 тира - полезные ) / Всего 1006 / Отспавнено 130 / Шанс выпадения артефакта 9",
+        "Unique_Group_Title": "Anomaly_Electra 4 тир опасности (Артефакты 1 тира - полезные)",
         "Classname_Anomaly_Object": "Anomaly_Electra",
         "Chance_To_Spawn": 20,
         "Positions_Spawn_Anomaly": [
-            [4893.767578, 4.2, 11170.539063],
-            [4841.54541, 4.225938, 11261.398438],
-            [5046.94043, 2.830004, 11403.991211],
-            [4861.972656, 2.830122, 11357.271484],
-            [4911.118164, 4.208751, 11277.936523],
-            [4883.678223, 4.212555, 11213.053711]
+            [3510.563965, 138.493347, 12197.831055],
+            [4152.314453, 110.541496, 13090.271484],
+            [4149.99707, 110.214203, 13105.494141],
+            [4162.905762, 110.248962, 13132.297852],
+            [4161.297363, 110.214203, 13107.683594],
+            [2161.752686, 118.40004, 11155.991211],
+            [4162.216797, 110.284058, 13085.785156],
+            [1953.036987, 101.400002, 11185.46582],
+            [4170.690918, 110.214203, 13094.55957],
+            [1913.558716, 102.342545, 10830.286133],
+            [4121.527832, 118.454514, 14759.405273],
+            [4134.848145, 118.585884, 14755.450195],
+            [4149.446289, 118.545891, 14758.717773],
+            [3534.841797, 138.505646, 12167.793945],
+            [4200.022461, 118.72361, 14746.783203],
+            [2085.161377, 118.400002, 11188.798828],
+            [3545.596191, 138.511826, 12177.351563],
+            [4186.898926, 118.587631, 14752.233398],
+            [2107.921875, 118.400002, 11181.55957],
+            [4133.206055, 118.586815, 14718.396484],
+            [3531.556641, 138.495605, 12210.766602],
+            [3242.624023, 104.107185, 14542.765625],
+            [2129.18457, 118.400009, 11172.450195],
+            [3521.327637, 138.490005, 12168.123047],
+            [3547.298828, 138.501709, 12200.844727],
+            [3243.121094, 104.055656, 14554.833984],
+            [3939.182861, 145.795364, 12048.177734],
+            [2885.0896, 109.876221, 14859.469727],
+            [2053.749512, 101.121689, 10975.584961],
+            [3932.608887, 145.552917, 12060.654297],
+            [3933.495117, 145.552963, 12056.455078],
+            [2065.114502, 118.400002, 11189.260742],
+            [3358.061035, 115.473251, 12221.941406],
+            [3440.775146, 144.844788, 11961.095703]
         ],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
@@ -123,12 +155,10 @@
         }
     },
     {
-        "Unique_Group_Title": "Anomaly_Voronka 4 тир опасности  ( Артефакты 1 тира - полезные ) / Всего 150  / Отспавнено 30 / Шанс выпадения артефакта 11",
+        "Unique_Group_Title": "Anomaly_Voronka 4 тир опасности (Артефакты 1 тира - полезные)",
         "Classname_Anomaly_Object": "Anomaly_Voronka",
         "Chance_To_Spawn": 20,
-        "Positions_Spawn_Anomaly": [
-            [4925.874512, 2.830063, 11395.618164]
-        ],
+        "Positions_Spawn_Anomaly": [],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
         "ArtefactsWithoutDetectors": {},
@@ -172,10 +202,28 @@
         }
     },
     {
-        "Unique_Group_Title": "Anomaly_LinceAgr 4 тир опасности  ( Артефакты 1 тира - полезные) / Всего 150  / Отспавнено 30 / Шанс выпадения артефакта 11",
+        "Unique_Group_Title": "Anomaly_LinceAgr 4 тир опасности (Артефакты 1 тира - полезные)",
         "Classname_Anomaly_Object": "Anomaly_LinceAgr",
         "Chance_To_Spawn": 20,
-        "Positions_Spawn_Anomaly": [],
+        "Positions_Spawn_Anomaly": [
+            [3444.681396, 97.959991, 10782.331055],
+            [3386.390381, 99.443893, 10302.62207],
+            [3128.032959, 100.700096, 10379.532227],
+            [2832.341309, 96.252991, 10533.680664],
+            [2779.865479, 95.177704, 10459.589844],
+            [2657.372803, 98.657272, 10459.766602],
+            [2554.558838, 101.736008, 10428.158203],
+            [2313.526855, 104.354187, 10784.466797],
+            [2171.730957, 103.215721, 10818.564453],
+            [2033.096191, 102.307762, 10797.042969],
+            [2009.968018, 104.370956, 10778.793945],
+            [1983.525635, 104.66983, 10763.518555],
+            [1953.575073, 105.210991, 10738.637695],
+            [1911.577271, 94.850227, 10930.665039],
+            [1874.186401, 98.980003, 11068.837891],
+            [1901.112061, 108.551949, 11365.240234],
+            [3084.084717, 99.753235, 10275.25293]
+        ],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
         "ArtefactsWithoutDetectors": {},
@@ -215,228 +263,146 @@
         }
     },
     {
-        "Unique_Group_Title": "Anomaly_Studen 3 тир опасности  ( артефакты 3 тира - не сильно вредят, но и не сильно помогают) / Всего 1200 / Отспавнено 91 / Шанс выпадения артефакта 30",
+        "Unique_Group_Title": "Anomaly_Studen 3 тир опасности (артефакты 3 тира - не сильно вредят, но и не сильно помогают)",
         "Classname_Anomaly_Object": "Anomaly_Studen",
-        "Chance_To_Spawn": 10,
-        "Positions_Spawn_Anomaly": [],
-        "Enable_Spawn_ArtefactsWithoutDetectors": 0,
-        "Enable_Spawn_ArtefactsWithDetectors": 1,
-        "ArtefactsWithoutDetectors": {},
-        "ArtefactsWithDetectors": {
-            "MaxInOnePoint": 1,
-            "ArtefactsList": [
-                {
-                    "Classname_Detector": "Anomaly_Detector_Svarog",
-                    "Detect_Artefacts_Settings": [
-                        {
-                            "Classname": "OOTS_ART_DarkSoul",
-                            "Chance": 1
-                        },
-                        {
-                            "Classname": "OOTS_ART_kameniy_cvetok3",
-                            "Chance": 1
-                        },
-                        {
-                            "Classname": "OOTS_ART_kameniy_cvetok2",
-                            "Chance": 1
-                        },
-                        {
-                            "Classname": "OOTS_ART_puzir",
-                            "Chance": 1
-                        },
-                        {
-                            "Classname": "OOTS_ART_Burn",
-                            "Chance": 2
-                        },
-                        {
-                            "Classname": "OOTS_ART_Glaz3",
-                            "Chance": 2
-                        },
-                        {
-                            "Classname": "OOTS_ART_Glaz2",
-                            "Chance": 2
-                        },
-                        {
-                            "Classname": "OOTS_ART_Glaz",
-                            "Chance": 2
-                        },
-                        {
-                            "Classname": "OOTS_ART_Crustal2",
-                            "Chance": 2
-                        },
-                        {
-                            "Classname": "OOTS_ART_Crustal",
-                            "Chance": 2
-                        },
-                        {
-                            "Classname": "OOTS_ART_CrustalThorn",
-                            "Chance": 2
-                        },
-                        {
-                            "Classname": "OOTS_ART_Crustal3",
-                            "Chance": 2
-                        },
-                        {
-                            "Classname": "OOTS_ART_busy2",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_Plamya3",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_Plamya",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_Angel",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_MoonLight",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_FireBall",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_Klyaksa",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_Mohovik",
-                            "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_DemonEye",
-                            "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_snejinka",
-                            "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_vspishka",
-                            "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_Sparkler",
-                            "Chance": 5
-                        }
-                    ]
-                },
-                {
-                    "Classname_Detector": "Anomaly_Detector_Medved",
-                    "Detect_Artefacts_Settings": [
-                        {
-                            "Classname": "OOTS_ART_DarkSoul",
-                            "Chance": 1
-                        },
-                        {
-                            "Classname": "OOTS_ART_kameniy_cvetok3",
-                            "Chance": 1
-                        },
-                        {
-                            "Classname": "OOTS_ART_kameniy_cvetok2",
-                            "Chance": 1
-                        },
-                        {
-                            "Classname": "OOTS_ART_puzir",
-                            "Chance": 1
-                        },
-                        {
-                            "Classname": "OOTS_ART_Burn",
-                            "Chance": 2
-                        },
-                        {
-                            "Classname": "OOTS_ART_Glaz3",
-                            "Chance": 2
-                        },
-                        {
-                            "Classname": "OOTS_ART_Glaz2",
-                            "Chance": 2
-                        },
-                        {
-                            "Classname": "OOTS_ART_Glaz",
-                            "Chance": 2
-                        },
-                        {
-                            "Classname": "OOTS_ART_Crustal2",
-                            "Chance": 2
-                        },
-                        {
-                            "Classname": "OOTS_ART_Crustal",
-                            "Chance": 2
-                        },
-                        {
-                            "Classname": "OOTS_ART_CrustalThorn",
-                            "Chance": 2
-                        },
-                        {
-                            "Classname": "OOTS_ART_Crustal3",
-                            "Chance": 2
-                        },
-                        {
-                            "Classname": "OOTS_ART_busy2",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_Plamya3",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_Plamya",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_Angel",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_MoonLight",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_FireBall",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_Klyaksa",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_Mohovik",
-                            "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_DemonEye",
-                            "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_snejinka",
-                            "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_vspishka",
-                            "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_Sparkler",
-                            "Chance": 5
-                        }
-                    ]
-                }
-            ]
-        }
-    },
-    {
-        "Unique_Group_Title": "Anomaly_Groza 3 тир опасности  ( артефакты 3 тира - не сильно вредят, но и не сильно помогают) / Всего 150 / Отспавнено 30 / Шанс выпадения артефакта 30",
-        "Classname_Anomaly_Object": "Anomaly_Groza",
         "Chance_To_Spawn": 20,
         "Positions_Spawn_Anomaly": [
-            [4996.758301, 4.200008, 11237.333984],
-            [4789.15332, 2.829996, 11287.652344]
+            [3937.104492, 100.728363, 13173.680664],
+            [3972.115234, 99.414238, 13176.255859],
+            [3913.063965, 88.676407, 15310.734375],
+            [4082.468994, 101.418793, 13224.397461],
+            [3931.707275, 88.902924, 15327.884766],
+            [4089.371094, 101.448395, 13198.775391],
+            [3951.800293, 82.011314, 12819.749023],
+            [4006.164063, 82.30732, 12785.349609],
+            [4029.978027, 82.181412, 12796.978516],
+            [4113.939453, 101.445824, 13170.623047],
+            [4011.673096, 81.253357, 12726.324219],
+            [4000.10083, 81.800278, 12735.951172],
+            [3958.820801, 82.113228, 12678.554688],
+            [4261.620117, 105.018303, 13319.639648],
+            [3905.799316, 83.06382, 12659.255859],
+            [3913.559814, 82.269257, 12720.31543],
+            [3896.778564, 82.190193, 12748.976563],
+            [4305.635742, 103.029404, 13289.817383],
+            [4309.925293, 104.774498, 13253.989258],
+            [4260.834961, 103.839767, 13255.308594],
+            [4307.436035, 103.717705, 13202.944336],
+            [4245.287598, 102.713898, 13182.398438],
+            [4012.955811, 94.712311, 14533.237305],
+            [4018.087158, 94.785355, 14513.09668],
+            [4036.449951, 93.932877, 14526.019531],
+            [4064.009766, 94.12175, 14518.025391],
+            [4053.424316, 93.976021, 14506.744141],
+            [3974.644775, 93.351318, 14567.21582],
+            [2857.392334, 90.387924, 10481.446289],
+            [3616.056885, 88.919365, 14601.408203],
+            [2806.536621, 90.196304, 10472.165039],
+            [3649.656982, 88.169792, 14632.756836],
+            [2750.88916, 92.059494, 10507.18457],
+            [3652.874023, 89.315323, 14674.391602],
+            [2836.340088, 90.382538, 10486.920898],
+            [3599.05542, 88.562584, 14690.179688],
+            [3947.255615, 88.24456, 15319.478516],
+            [3561.967041, 88.695, 14673.043945],
+            [3562.220459, 87.732109, 14627.060547],
+            [3581.102783, 88.437233, 14594.667969],
+            [3768.125977, 88.345078, 15292.477539],
+            [3681.77124, 88.073967, 14695.928711],
+            [3633.325195, 88.344498, 14593.199219],
+            [3674.866943, 89.310287, 14716.224609],
+            [3213.558838, 89.534462, 15346.170898],
+            [3575.668213, 88.62207, 14732.921875],
+            [4317.874023, 94.994972, 14125.926758],
+            [3217.115723, 90.086945, 15334.800781],
+            [3253.421387, 89.215118, 15301.426758],
+            [3293.751221, 88.741898, 15333.943359],
+            [3546.555908, 88.278374, 14716.483398],
+            [4326.10498, 95.565727, 14067.071289],
+            [3329.969971, 89.366623, 15356.18457],
+            [3584.120605, 88.994781, 14812.896484],
+            [4357.927734, 94.428139, 14166.334961],
+            [3491.790771, 88.635818, 14741.071289],
+            [4392.406738, 94.670639, 14186.854492],
+            [3682.413818, 88.805023, 15212.291992],
+            [3711.029541, 88.390503, 15291.975586],
+            [3508.770996, 89.06163, 14803.501953],
+            [4448.677246, 94.641533, 14161.859375],
+            [4437.449219, 94.464386, 14175.71582],
+            [3474.01709, 89.405006, 14824.06543],
+            [4408.756836, 94.608757, 14076.44043],
+            [3440.571289, 90.618248, 14761.419922],
+            [3424.232178, 88.069504, 14807.567383],
+            [3420.048584, 89.24868, 14831.501953],
+            [3225.549561, 101.971123, 12245.514648],
+            [3417.158447, 88.601181, 14759.720703],
+            [3439.686035, 88.381943, 14690.001953],
+            [3462.043213, 87.987015, 14657.109375],
+            [3235.045654, 101.629173, 12300.919922],
+            [3431.545166, 89.402176, 14656.982422],
+            [3378.427002, 90.129608, 14694.529297],
+            [3453.833252, 89.421707, 14626.411133],
+            [3223.059326, 101.697021, 12328.99707],
+            [3361.290527, 88.360031, 14779.232422],
+            [3371.114258, 88.553001, 14844.583008],
+            [3397.70874, 87.634834, 14852.523438],
+            [3198.483154, 101.797775, 12291.719727],
+            [3536.414795, 87.574783, 15119.941406],
+            [3521.131592, 87.681404, 15084.960938],
+            [3573.206299, 88.173096, 15166.81543],
+            [3256.937744, 101.649956, 12253.430664],
+            [3598.128906, 87.375671, 15183.398438],
+            [3857.568359, 88.182205, 15219.457031],
+            [3866.28125, 87.652756, 15248.728516],
+            [3240.129883, 101.722511, 12207.332031],
+            [3876.815186, 88.125473, 15244.709961],
+            [3825.493896, 87.957687, 15251.994141],
+            [3931.233887, 88.414375, 15280.555664],
+            [3180.61792, 101.994064, 12213.993164],
+            [3947.050537, 88.713318, 15289.564453],
+            [3169.958252, 102.159821, 12267.688477],
+            [3975.120605, 88.524406, 15323.957031],
+            [3209.280762, 101.76741, 12362.558594],
+            [3907.336914, 87.957672, 15328.958984],
+            [3864.173096, 88.624855, 15128.753906],
+            [3841.20874, 87.811501, 15152.9375],
+            [3263.058594, 101.728813, 12334.169922],
+            [3847.644287, 88.182007, 15178.828125],
+            [3862.395508, 88.051071, 15190.09375],
+            [3805.092041, 87.958, 15083.070313],
+            [3266.168945, 102.09169, 12291.916016],
+            [3755.484619, 88.491241, 15084.289063],
+            [3687.795898, 88.228111, 14815.180664],
+            [3660.988281, 88.583725, 14814.897461],
+            [3720.847656, 88.644333, 14811.493164],
+            [3731.491211, 88.253616, 14739.253906],
+            [3769.024902, 88.765976, 14665.227539],
+            [3755.375977, 88.626015, 14617.387695],
+            [2948.670166, 90.20668, 15002.856445],
+            [2967.491211, 88.385628, 15058.15332],
+            [2922.047852, 89.215462, 15052.207031],
+            [2926.240723, 89.582657, 15020.142578],
+            [2909.742676, 89.183998, 15000.46875],
+            [2892.474854, 88.947525, 15028.892578],
+            [2937.341797, 89.259682, 15091.892578],
+            [2834.414795, 90.312332, 10453.859375],
+            [2797.818604, 92.035522, 10520.109375],
+            [2740.993408, 90.867691, 10561.375],
+            [2785.5354, 91.253189, 10529.669922],
+            [1975.380249, 91.000076, 10909.458984],
+            [1976.380493, 89.928421, 10874.955078],
+            [1920.505127, 90.862595, 10911.863281],
+            [1914.273926, 90.739349, 10880.658203],
+            [1893.517212, 91.118195, 10920.492188],
+            [3857.165283, 134.758408, 12025.494141],
+            [3820.535889, 134.758209, 12031.826172],
+            [3833.937256, 134.758423, 12031.579102],
+            [3816.634277, 134.75827, 12119.40332],
+            [3802.481201, 134.758362, 12110.194336],
+            [3806.77832, 134.758972, 12083.56543],
+            [4046.099121, 99.408867, 13218.34375],
+            [4053.381104, 99.342407, 13272.608398],
+            [4001.477295, 99.671959, 13182.333984]
         ],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
@@ -465,83 +431,83 @@
                         },
                         {
                             "Classname": "OOTS_ART_Burn",
-                            "Chance": 1
+                            "Chance": 2
                         },
                         {
                             "Classname": "OOTS_ART_Glaz3",
-                            "Chance": 1
+                            "Chance": 2
                         },
                         {
                             "Classname": "OOTS_ART_Glaz2",
-                            "Chance": 1
+                            "Chance": 2
                         },
                         {
                             "Classname": "OOTS_ART_Glaz",
-                            "Chance": 1
+                            "Chance": 2
                         },
                         {
                             "Classname": "OOTS_ART_Crustal2",
-                            "Chance": 1
+                            "Chance": 2
                         },
                         {
                             "Classname": "OOTS_ART_Crustal",
-                            "Chance": 1
+                            "Chance": 2
                         },
                         {
                             "Classname": "OOTS_ART_CrustalThorn",
-                            "Chance": 1
+                            "Chance": 2
                         },
                         {
                             "Classname": "OOTS_ART_Crustal3",
-                            "Chance": 1
+                            "Chance": 2
                         },
                         {
                             "Classname": "OOTS_ART_busy2",
-                            "Chance": 2
+                            "Chance": 3
                         },
                         {
                             "Classname": "OOTS_ART_Plamya3",
-                            "Chance": 2
+                            "Chance": 3
                         },
                         {
                             "Classname": "OOTS_ART_Plamya",
-                            "Chance": 2
+                            "Chance": 3
                         },
                         {
                             "Classname": "OOTS_ART_Angel",
-                            "Chance": 2
+                            "Chance": 3
                         },
                         {
                             "Classname": "OOTS_ART_MoonLight",
-                            "Chance": 2
+                            "Chance": 3
                         },
                         {
                             "Classname": "OOTS_ART_FireBall",
-                            "Chance": 2
+                            "Chance": 3
                         },
                         {
                             "Classname": "OOTS_ART_Klyaksa",
-                            "Chance": 2
+                            "Chance": 3
                         },
                         {
                             "Classname": "OOTS_ART_Mohovik",
-                            "Chance": 3
+                            "Chance": 4
                         },
                         {
                             "Classname": "OOTS_ART_DemonEye",
-                            "Chance": 3
+                            "Chance": 4
                         },
                         {
                             "Classname": "OOTS_ART_snejinka",
-                            "Chance": 3
+                            "Chance": 4
                         },
                         {
                             "Classname": "OOTS_ART_vspishka",
-                            "Chance": 3
+                            "Chance": 4
                         },
                         {
                             "Classname": "OOTS_ART_Sparkler",
-                            "Chance": 4
+                            "Chance": 5
                         }
                     ]
                 },
@@ -566,83 +532,83 @@
                         },
                         {
                             "Classname": "OOTS_ART_Burn",
-                            "Chance": 1
+                            "Chance": 2
                         },
                         {
                             "Classname": "OOTS_ART_Glaz3",
-                            "Chance": 1
+                            "Chance": 2
                         },
                         {
                             "Classname": "OOTS_ART_Glaz2",
-                            "Chance": 1
+                            "Chance": 2
                         },
                         {
                             "Classname": "OOTS_ART_Glaz",
-                            "Chance": 1
+                            "Chance": 2
                         },
                         {
                             "Classname": "OOTS_ART_Crustal2",
-                            "Chance": 1
+                            "Chance": 2
                         },
                         {
                             "Classname": "OOTS_ART_Crustal",
-                            "Chance": 1
+                            "Chance": 2
                         },
                         {
                             "Classname": "OOTS_ART_CrustalThorn",
-                            "Chance": 1
+                            "Chance": 2
                         },
                         {
                             "Classname": "OOTS_ART_Crustal3",
-                            "Chance": 1
+                            "Chance": 2
                         },
                         {
                             "Classname": "OOTS_ART_busy2",
-                            "Chance": 2
+                            "Chance": 3
                         },
                         {
                             "Classname": "OOTS_ART_Plamya3",
-                            "Chance": 2
+                            "Chance": 3
                         },
                         {
                             "Classname": "OOTS_ART_Plamya",
-                            "Chance": 2
+                            "Chance": 3
                         },
                         {
                             "Classname": "OOTS_ART_Angel",
-                            "Chance": 2
+                            "Chance": 3
                         },
                         {
                             "Classname": "OOTS_ART_MoonLight",
-                            "Chance": 2
+                            "Chance": 3
                         },
                         {
                             "Classname": "OOTS_ART_FireBall",
-                            "Chance": 2
+                            "Chance": 3
                         },
                         {
                             "Classname": "OOTS_ART_Klyaksa",
-                            "Chance": 2
+                            "Chance": 3
                         },
                         {
                             "Classname": "OOTS_ART_Mohovik",
-                            "Chance": 3
+                            "Chance": 4
                         },
                         {
                             "Classname": "OOTS_ART_DemonEye",
-                            "Chance": 3
+                            "Chance": 4
                         },
                         {
                             "Classname": "OOTS_ART_snejinka",
-                            "Chance": 3
+                            "Chance": 4
                         },
                         {
                             "Classname": "OOTS_ART_vspishka",
-                            "Chance": 3
+                            "Chance": 4
                         },
                         {
                             "Classname": "OOTS_ART_Sparkler",
-                            "Chance": 4
+                            "Chance": 5
                         }
                     ]
                 }
@@ -650,9 +616,9 @@
         }
     },
     {
-        "Unique_Group_Title": "Anomaly_Par 3 тир опасности  ( артефакты 3 тира - не сильно вредят, но и не сильно помогают) / Всего 1000 / Отспавнено 81 / Шанс выпадения артефакта 30",
-        "Classname_Anomaly_Object": "Anomaly_Par",
-        "Chance_To_Spawn": 8,
+        "Unique_Group_Title": "Anomaly_Groza 3 тир опасности (артефакты 3 тира - не сильно вредят, но и не сильно помогают)",
+        "Classname_Anomaly_Object": "Anomaly_Groza",
+        "Chance_To_Spawn": 25,
         "Positions_Spawn_Anomaly": [],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
@@ -681,6 +647,332 @@
                         },
                         {
                             "Classname": "OOTS_ART_Burn",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_Glaz3",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_Glaz2",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_Glaz",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_Crustal2",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_Crustal",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_CrustalThorn",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_Crustal3",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_busy2",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya3",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Angel",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_MoonLight",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_FireBall",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Klyaksa",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Mohovik",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_DemonEye",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_snejinka",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_vspishka",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Sparkler",
+                            "Chance": 4
+                        }
+                    ]
+                },
+                {
+                    "Classname_Detector": "Anomaly_Detector_Medved",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_DarkSoul",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_kameniy_cvetok3",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_kameniy_cvetok2",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_puzir",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_Burn",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_Glaz3",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_Glaz2",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_Glaz",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_Crustal2",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_Crustal",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_CrustalThorn",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_Crustal3",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_busy2",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya3",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Angel",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_MoonLight",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_FireBall",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Klyaksa",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Mohovik",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_DemonEye",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_snejinka",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_vspishka",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Sparkler",
+                            "Chance": 4
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Unique_Group_Title": "Anomaly_Par 3 тир опасности (артефакты 3 тира - не сильно вредят, но и не сильно помогают)",
+        "Classname_Anomaly_Object": "Anomaly_Par",
+        "Chance_To_Spawn": 15,
+        "Positions_Spawn_Anomaly": [
+            [4058.953369, 85.890076, 10514.613281],
+            [4073.864014, 85.173538, 10486.670898],
+            [3416.852051, 100.939125, 10294.144531],
+            [3412.930908, 99.990967, 10272.80957],
+            [3397.71875, 99.506645, 10282.959961],
+            [3389.622803, 98.575439, 10321.09082],
+            [3361.392578, 103.790901, 10291.263672],
+            [3371.193604, 103.868858, 10264.410156],
+            [3390.962158, 99.887314, 10288.297852],
+            [3373.612793, 101.62738, 10303.754883],
+            [3418.532715, 97.096405, 10582.25293],
+            [3415.068848, 98.484528, 10605.03125],
+            [3426.270752, 101.50145, 10637.603516],
+            [3387.308105, 96.273842, 10584.75],
+            [3494.260742, 97.959999, 10801.834961],
+            [3491.548828, 97.959999, 10790.205078],
+            [3466.696045, 97.959999, 10791.045898],
+            [3437.617432, 97.961746, 10771.507813],
+            [3433.059814, 97.962151, 10790.537109],
+            [3420.961182, 97.310066, 11167.412109],
+            [3661.637939, 142.05307, 12055.15332],
+            [3630.674316, 140.491699, 12094.150391],
+            [3603.92041, 142.739365, 12066.452148],
+            [3647.337158, 141.212234, 12070.233398],
+            [3651.840332, 142.614624, 12029.984375],
+            [3665.355225, 142.477142, 12044.391602],
+            [3642.755859, 141.623642, 12056.157227],
+            [3629.487793, 141.301865, 12072.810547],
+            [3483.768799, 138.818481, 12195.224609],
+            [3473.552002, 138.742584, 12204.068359],
+            [3492.590332, 138.821014, 12194.993164],
+            [3482.581299, 138.803497, 12182.081055],
+            [3478.96875, 138.905807, 12179.62207],
+            [3487.717285, 138.872467, 12202.574219],
+            [3410.289551, 144.759995, 11988.552734],
+            [3402.404297, 144.981308, 11974.570313],
+            [3411.681396, 144.759995, 11963.428711],
+            [3155.757813, 104.588455, 12967.680664],
+            [3157.969727, 103.66684, 12939.692383],
+            [3153.679443, 103.688263, 12922.963867],
+            [3145.262695, 103.863274, 12929.299805],
+            [3122.262695, 103.732376, 12896.118164],
+            [3115.093506, 104.076569, 12922.282227],
+            [3088.809082, 103.760406, 12893.476563],
+            [3084.098145, 103.660088, 12879.542969],
+            [3361.951904, 120.983765, 13137.972656],
+            [3365.45166, 120.983757, 13137.620117],
+            [3369.622314, 120.983749, 13141.483398],
+            [3358.852295, 120.983757, 13144.011719],
+            [4137.277832, 110.214211, 13104.888672],
+            [4109.95459, 110.214203, 13114.03418],
+            [4094.429199, 110.550781, 13100.47168],
+            [4123.529297, 110.214211, 13140.219727],
+            [4103.305664, 123.801697, 14348.853516],
+            [4100.102051, 124.735214, 14345.796875],
+            [4099.682129, 120.536697, 14359.791992],
+            [4090.612305, 120.536705, 14361.753906],
+            [4084.843994, 120.49411, 14371.866211],
+            [4079.050049, 116.034912, 14373.455078],
+            [4085.454346, 120.494118, 14403.181641],
+            [4006.424072, 124.176025, 14338.701172],
+            [3983.170654, 120.534042, 14331.672852],
+            [3994.422363, 123.032043, 14349.197266],
+            [4029.973633, 120.538139, 14354.566406],
+            [3979.465332, 120.53154, 14292.43457],
+            [3918.114014, 104.25853, 14354.141602],
+            [3904.093262, 104.117996, 14360.202148],
+            [3907.742188, 102.658119, 14379.541016],
+            [3672.333252, 96.085503, 14525.790039],
+            [3670.625488, 96.098503, 14506.34668],
+            [3677.538086, 96.098495, 14498.575195],
+            [3786.397705, 99.869919, 14782.279297],
+            [3792.037354, 99.857422, 14735.731445],
+            [3802.365723, 99.864914, 14725.017578],
+            [3784.880371, 99.867409, 14798.387695],
+            [3780.312988, 99.867409, 14803.552734],
+            [2928.585449, 101.232025, 15347.443359],
+            [2890.447266, 110.146896, 14871.643555],
+            [2885.207764, 109.876221, 14855.055664],
+            [2889.598633, 109.876221, 14838.333984],
+            [2862.111572, 109.869019, 14878.501953],
+            [2838.936279, 109.869019, 14877.101563],
+            [2771.03418, 96.836472, 14989.158203],
+            [2761.673828, 98.206749, 14984.250977],
+            [2774.717285, 96.313126, 14998.963867],
+            [2777.025391, 96.084557, 14984.023438],
+            [3005.269775, 93.578491, 15155.914063],
+            [2973.155762, 96.645844, 15213.451172],
+            [3080.634033, 95.6138, 15214.636719],
+            [4956.69873, 136.103973, 11228.219727],
+            [4925.525391, 136.239563, 11245.092773],
+            [4860.379883, 136.463196, 11277.095703],
+            [4879.50293, 136.087357, 11276.729492],
+            [4809.029785, 136.093109, 11251.688477],
+            [4839.685547, 137.677933, 11248.948242],
+            [4867.517578, 136.467209, 11252.179688],
+            [4825.045898, 137.25708, 11499.064453],
+            [4824.402344, 137.25708, 11481.452148],
+            [4834.358398, 129.667877, 11476.245117],
+            [3847.047607, 141.271835, 12176.800781],
+            [3865.331787, 141.271515, 12179.826172],
+            [3877.254639, 141.271545, 12253.821289],
+            [3807.178955, 134.758255, 12278.543945],
+            [3803.492676, 134.758408, 12210.581055],
+            [3805.439697, 134.758301, 12186.804688],
+            [3490.016113, 104.925278, 12451.513672],
+            [3498.033936, 105.549973, 12424.59082],
+            [3522.63208, 105.665375, 12431.155273],
+            [3357.952637, 110.175797, 12520.291016]
+        ],
+        "Enable_Spawn_ArtefactsWithoutDetectors": 0,
+        "Enable_Spawn_ArtefactsWithDetectors": 1,
+        "ArtefactsWithoutDetectors": {},
+        "ArtefactsWithDetectors": {
+            "MaxInOnePoint": 1,
+            "ArtefactsList": [
+                {
+                    "Classname_Detector": "Anomaly_Detector_Svarog",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_DarkSoul",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_kameniy_cvetok3",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_kameniy_cvetok2",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_puzir",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_Burn",
                             "Chance": 2
                         },
                         {
@@ -866,13 +1158,226 @@
         }
     },
     {
-        "Unique_Group_Title": "Anomaly_DeadZone 3 тир опасности  ( артефакты 3 тира - не сильно вредят, но и не сильно помогают) / Всего: 150  / Отспавнено 30 / Шанс выпадения артефакта 30",
+        "Unique_Group_Title": "Anomaly_DeadZone 3 тир опасности (артефакты 3 тира - не сильно вредят, но и не сильно помогают)",
         "Classname_Anomaly_Object": "Anomaly_DeadZone",
-        "Chance_To_Spawn": 25,
+        "Chance_To_Spawn": 10,
         "Positions_Spawn_Anomaly": [
-            [5030.744141, 2.830009, 11354.155273],
-            [5051.302734, 2.830008, 11386.80957],
-            [5004.133789, 2.829999, 11382.231445]
+            [1864.335815, 103.362434, 10828.917969],
+            [1844.35022, 103.18924, 10817.15332],
+            [1829.398438, 102.989998, 10828.5625],
+            [1984.845337, 101.309998, 10985.801758],
+            [2028.706055, 101.282883, 10961.28418],
+            [2018.339844, 99.711853, 10947.907227],
+            [2006.418945, 100.876579, 10949.379883],
+            [1972.242432, 106.910004, 11029.862305],
+            [1877.304321, 99.028198, 11050.286133],
+            [1925.165161, 102.279236, 11083.719727],
+            [1970.821899, 104.522995, 11087.944336],
+            [1936.484375, 101.400002, 11137.017578],
+            [2055.114746, 109.105469, 11286.532227],
+            [1984.11853, 108.620003, 11334.703125],
+            [2022.38269, 108.784866, 11354.457031],
+            [1913.530518, 108.620003, 11358.732422],
+            [1887.887451, 107.842262, 11362.720703],
+            [1899.388794, 108.620003, 11378.915039],
+            [1903.597412, 108.128868, 11424.80957],
+            [1909.897949, 117.257935, 11482.02832],
+            [1900.703613, 119.630127, 11509.394531],
+            [1923.146606, 99.518776, 11933.648438],
+            [1966.479736, 97.656891, 11952.391602],
+            [2041.375977, 91.195114, 11969.72168],
+            [2168.092529, 84.353256, 11944.988281],
+            [2209.779053, 83.292534, 11941.703125],
+            [2132.848145, 85.879074, 11995.717773],
+            [2332.218018, 85.113953, 11987.711914],
+            [2355.037354, 88.393738, 12022.820313],
+            [2538.413086, 105.536499, 12048.253906],
+            [2573.592041, 107.188408, 12064.880859],
+            [3423.040283, 97.284248, 11170.665039],
+            [3406.737305, 97.317581, 11173.217773],
+            [3399.389893, 99.221481, 11106.904297],
+            [3647.743896, 132.735077, 11776.777344],
+            [3735.83374, 143.016205, 12174.905273],
+            [3807.329834, 141.237549, 12177.825195],
+            [3853.484375, 141.271164, 12150.996094],
+            [3876.39209, 141.271545, 12188.275391],
+            [3872.498047, 143.992798, 12128.620117],
+            [3883.415527, 145.552612, 12108.950195],
+            [5114.990234, 135.806183, 11301.272461],
+            [3868.729736, 145.553238, 12101.097656],
+            [5077.202637, 135.801193, 11291.956055],
+            [3883.399658, 145.552567, 12066.398438],
+            [4845.227051, 137.685501, 11290.169922],
+            [3903.922607, 145.552765, 12067.400391],
+            [4856.760742, 136.091644, 11258.106445],
+            [3909.040771, 145.553467, 12053.652344],
+            [4811.355469, 136.286835, 11257.792969],
+            [3925.044922, 145.55246, 12069.237305],
+            [4808.970215, 136.098953, 11277.675781],
+            [3954.185791, 145.5, 12096.216797],
+            [4212.625, 144.699997, 12076.092773],
+            [3966.254883, 145.483765, 12078.541992],
+            [3352.304932, 115.355118, 12222.834961],
+            [3973.743164, 145.218216, 12061.506836],
+            [3355.039307, 114.510872, 12245.295898],
+            [3990.942139, 145.35144, 12070.348633],
+            [3345.680664, 113.995247, 12248.87207],
+            [3981.990479, 145.496017, 12098.578125],
+            [3987.799561, 144.738998, 12395.066406],
+            [4004.655762, 146.826584, 12446.821289],
+            [3993.057373, 145.935654, 12440.920898],
+            [4027.188232, 147.53627, 12434.625],
+            [4177.258301, 111.059998, 12550.183594],
+            [4163.02002, 111.059998, 12536.4375],
+            [4170.353027, 111.517517, 12482.716797],
+            [4026.503174, 145.15033, 12332.536133],
+            [4062.035156, 144.699997, 12272.486328],
+            [4185.554688, 144.699997, 12271.96582],
+            [4168.278809, 145.20253, 12172.27832],
+            [4151.395996, 145.20253, 12172.4375],
+            [4075.656494, 139.586441, 12180.915039],
+            [4108.35791, 145.203247, 12102.701172],
+            [4116.088379, 145.203247, 12098.859375],
+            [4107.566895, 145.203247, 12114.495117],
+            [4057.558105, 145.201508, 12145.225586],
+            [4058.115967, 145.214035, 12192.5625],
+            [3495.918213, 104.764732, 12454.072266],
+            [3493.124756, 105.482941, 12414.894531],
+            [3470.493408, 105.387405, 12440.666992],
+            [3470.246338, 106.366287, 12396.697266],
+            [3486.08252, 139.450226, 12153.236328],
+            [3453.16333, 143.100037, 12110.606445],
+            [3431.181885, 144.759995, 12049.396484],
+            [3445.986816, 144.759995, 12023.063477],
+            [3433.385986, 144.759995, 12022.084961],
+            [3454.977295, 144.759995, 11985.166016],
+            [3404.978271, 144.760864, 11978.28125],
+            [3468.186523, 144.759995, 11969.620117],
+            [3082.296387, 105.629997, 12154.631836],
+            [3079.483398, 105.629997, 12179.205078],
+            [3063.628418, 105.629997, 12167.979492],
+            [3057.178711, 105.629997, 12190.759766],
+            [3077.871094, 105.629997, 12125.03125],
+            [3332.758301, 101.339798, 12736.430664],
+            [3336.552246, 100.920677, 12756.40625],
+            [3378.979248, 101.544449, 12772.323242],
+            [3373.968018, 101.42868, 12791.639648],
+            [3109.716553, 104.05954, 12901.444336],
+            [3055.714111, 104.481895, 12835.196289],
+            [3120.246582, 103.865936, 12937.196289],
+            [3102.899414, 104.107956, 12832.710938],
+            [3124.178223, 103.991585, 12876.037109],
+            [3386.842773, 89.49823, 13101.870117],
+            [3391.625732, 89.638443, 13112.013672],
+            [3366.821289, 92.705246, 13095.925781],
+            [3358.737793, 95.444305, 13056.90918],
+            [3344.373047, 93.714867, 13071.311523],
+            [3506.467285, 110.040001, 13032.050781],
+            [3726.097412, 109.924889, 13091.875977],
+            [3832.65332, 107.698494, 12942.974609],
+            [4109.004883, 110.413788, 13090.663086],
+            [4116.552734, 110.321838, 13077.189453],
+            [4126.432617, 110.349052, 13096.268555],
+            [4213.32666, 109.25, 13268.911133],
+            [4221.206543, 109.25, 13314.694336],
+            [4214.694336, 109.25, 13325.258789],
+            [4209.998047, 109.250076, 13373.797852],
+            [4165.80127, 119.364174, 14346.564453],
+            [4148.719727, 119.41069, 14339.599609],
+            [4099.741211, 120.496704, 14359.707031],
+            [4105.850586, 123.735168, 14335.311523],
+            [4113.946289, 123.635002, 14346.847656],
+            [4136.23877, 120.298561, 14324.430664],
+            [4135.794922, 121.743958, 14293.03418],
+            [4108.84668, 121.743965, 14290.492188],
+            [4010.010986, 121.733963, 14278.15625],
+            [3983.70459, 120.531532, 14307.106445],
+            [3955.039551, 117.92894, 14296.813477],
+            [3923.173828, 109.391594, 14296.908203],
+            [3901.057861, 107.9188, 14298.610352],
+            [3990.223633, 120.534004, 14397.69043],
+            [4009.391113, 120.61412, 14410.59375],
+            [4029.313477, 120.614105, 14411.170898],
+            [4031.953369, 94.146973, 14507.775391],
+            [4011.926025, 94.274681, 14512.003906],
+            [4178.250977, 118.057587, 14459.728516],
+            [4181.094238, 118.227829, 14453.568359],
+            [4178.772461, 118.01236, 14451.647461],
+            [4180.221191, 118.57756, 14445.128906],
+            [4180.906738, 118.916924, 14467.018555],
+            [4178.489746, 118.618599, 14474.179688],
+            [4178.397461, 118.618614, 14537.347656],
+            [4172.275879, 118.915184, 14537.126953],
+            [4180.529785, 118.88559, 14544.306641],
+            [4172.276855, 118.915062, 14544.813477],
+            [4175.898438, 118.9851, 14608.310547],
+            [4178.75293, 118.985092, 14624.586914],
+            [3828.430176, 99.833466, 14879.914063],
+            [3807.02417, 99.840523, 14867.900391],
+            [3804.952881, 99.864914, 14723.942383],
+            [3258.304932, 102.59848, 14538.43457],
+            [3240.708008, 104.282043, 14530.037109],
+            [3223.503906, 105.381264, 14526.448242],
+            [3196.490234, 106.798172, 14528.587891],
+            [3187.077881, 106.457268, 14539.983398],
+            [2820.440674, 123.946609, 14462.376953],
+            [2805.763428, 124.9944, 14455.040039],
+            [2790.201172, 128.562576, 14463.547852],
+            [2752.808105, 134.251114, 14460.929688],
+            [2722.482422, 134.263611, 14460.929688],
+            [2731.675293, 134.260468, 14439.47168],
+            [2732.274414, 134.260468, 14415.986328],
+            [2877.423584, 109.869019, 14879.03125],
+            [2852.976807, 109.869019, 14874.953125],
+            [2867.331543, 109.869019, 14880.860352],
+            [2883.821289, 109.868027, 14864.981445],
+            [2888.863281, 109.876221, 14857.919922],
+            [2889.51001, 109.876221, 14830.055664],
+            [2882.946045, 109.876221, 14844.239258],
+            [2886.449707, 107.484833, 14742.280273],
+            [2957.055908, 100.295662, 15350.038086],
+            [2916.798828, 100.614571, 15321.326172],
+            [3487.046875, 96.990753, 15286.6875],
+            [4809.193848, 136.949966, 12585.467773],
+            [4841.763672, 137.69313, 12552.932617],
+            [4854.976563, 137.920013, 12544.538086],
+            [4888.039063, 137.491684, 12565.023438],
+            [4035.225098, 89.971519, 10325.280273],
+            [3936.26416, 93.293282, 10299.890625],
+            [4013.060303, 90.13205, 10384.072266],
+            [3980.404541, 89.37619, 10395.610352],
+            [4023.577148, 96.957565, 10418.255859],
+            [4005.290527, 95.256447, 10426.549805],
+            [3992.471436, 96.087738, 10486.255859],
+            [3988.927979, 95.732384, 10526.670898],
+            [4054.62793, 99.670242, 10427.022461],
+            [4110.758789, 95.93512, 10432.491211],
+            [3092.970947, 104.013809, 10387.560547],
+            [3074.664063, 104.875732, 10430.961914],
+            [3111.66333, 102.791435, 10404.599609],
+            [3038.115479, 104.007568, 10452.157227],
+            [3041.566406, 103.487297, 10472.118164],
+            [3013.917236, 103.121582, 10457.999023],
+            [2999.006104, 103.340714, 10472.644531],
+            [2990.043457, 104.193657, 10501.987305],
+            [2842.054688, 96.6651, 10530.023438],
+            [2846.351318, 96.032524, 10505.504883],
+            [2656.367676, 97.582428, 10441.017578],
+            [2630.167725, 97.41275, 10421.420898],
+            [2630.815674, 98.212753, 10446.43457],
+            [2047.462158, 102.233902, 10805.742188],
+            [2014.809814, 103.784454, 10775.953125],
+            [2014.223633, 98.529999, 10843.681641],
+            [1974.615967, 104.507065, 10750.393555],
+            [1968.312744, 106.546822, 10784.953125],
+            [1950.899536, 107.311813, 10768.234375],
+            [1902.540894, 93.300423, 10919.949219],
+            [1911.491943, 93.352089, 10917.355469],
+            [1895.927368, 94.296066, 10854.182617],
+            [1882.702637, 95.60907, 10868.924805],
+            [1876.475464, 97.436844, 10859.145508],
+            [1884.891968, 100.055038, 10840.011719],
+            [1889.896118, 104.297272, 10826.116211]
         ],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
@@ -1086,9 +1591,9 @@
         }
     },
     {
-        "Unique_Group_Title": "Anomaly_Tramplin 2 уровень опасности( артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры ) Всего 900 Отспавнено 124 / Шанс выпадения артефакта 55",
+        "Unique_Group_Title": "Anomaly_Tramplin 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_Tramplin",
-        "Chance_To_Spawn": 13,
+        "Chance_To_Spawn": 20,
         "Positions_Spawn_Anomaly": [],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
@@ -1110,10 +1615,6 @@
                         {
                             "Classname": "OOTS_ART_Battery",
                             "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
                         },
                         {
                             "Classname": "OOTS_ART_BloodStone_New",
@@ -1151,10 +1652,6 @@
                         {
                             "Classname": "OOTS_ART_Battery",
                             "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
                         },
                         {
                             "Classname": "OOTS_ART_BloodStone_New",
@@ -1194,10 +1691,6 @@
                             "Chance": 3.0
                         },
                         {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 4.0
-                        },
-                        {
                             "Classname": "OOTS_ART_BloodStone_New",
                             "Chance": 5.0
                         },
@@ -1223,10 +1716,69 @@
         }
     },
     {
-        "Unique_Group_Title": "Anomaly_Zharka 2 уровень опасности ( артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры ) / Всего 1000 / Отспавнено 140 / Шанс выпадения артефакта 55",
+        "Unique_Group_Title": "Anomaly_Zharka 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_Zharka",
-        "Chance_To_Spawn": 25,
-        "Positions_Spawn_Anomaly": [],
+        "Chance_To_Spawn": 15,
+        "Positions_Spawn_Anomaly": [
+            [4886.941895, 132.172638, 12905.90918],
+            [4890.554688, 132.587357, 12884.400391],
+            [4908.334961, 132.289139, 12918.873047],
+            [4922.216309, 132.745956, 12898.235352],
+            [4947.793945, 132.541656, 12918.46582],
+            [4963.705566, 132.521378, 12895.004883],
+            [4996.933105, 130.982773, 12900.30957],
+            [4489.668457, 131.091919, 12913.629883],
+            [4492.174805, 131.290314, 12900.685547],
+            [4483.509766, 131.351761, 12894.539063],
+            [4172.891602, 118.86467, 14471.863281],
+            [4171.938477, 118.942543, 14491.799805],
+            [4171.480469, 118.980911, 14523.331055],
+            [4181.023438, 118.824318, 14557.484375],
+            [4176.76123, 118.56884, 14583.091797],
+            [4175.96875, 118.985092, 14628.574219],
+            [4189.194336, 118.591965, 14648.474609],
+            [4114.21582, 118.600372, 14631.536133],
+            [4092.14917, 118.470947, 14698.398438],
+            [4089.639893, 118.470947, 14735.924805],
+            [4087.092285, 118.470222, 14787.00293],
+            [3316.610352, 88.301254, 14893.725586],
+            [3294.817139, 90.211273, 14963.727539],
+            [3286.963867, 89.962402, 14939.770508],
+            [3304.734619, 90.380356, 14982.166992],
+            [3320.897461, 90.661621, 14999.00293],
+            [3306.561523, 90.549072, 15012.357422],
+            [2968.594727, 99.339172, 15327.193359],
+            [2927.962891, 100.903786, 15338.851563],
+            [3881.309326, 138.260468, 12439.125977],
+            [3870.156982, 137.865341, 12450.75293],
+            [3825.154053, 138.494049, 12428.476563],
+            [3913.382568, 140.564819, 12431.138672],
+            [3952.666992, 142.144531, 12430.492188],
+            [3974.532471, 141.658234, 12465.099609],
+            [3973.351807, 136.829834, 12495.429688],
+            [3994.650879, 138.392105, 12493.679688],
+            [3918.352539, 115.270531, 12514.524414],
+            [3889.61499, 119.051949, 12503.257813],
+            [3413.06543, 115.001755, 13130.24707],
+            [3423.320557, 115.136635, 13127.780273],
+            [3393.849365, 89.638443, 13111.992188],
+            [3400.939697, 89.706642, 13111.958008],
+            [3360.305908, 120.983749, 13137.182617],
+            [3189.633057, 114.350479, 12543.179688],
+            [3137.821533, 114.061859, 12539.892578],
+            [3166.169922, 114.41713, 12514.321289],
+            [3054.54248, 105.629997, 12150.024414],
+            [3028.561523, 105.634682, 12147.239258],
+            [3081.926514, 105.629997, 12125.730469],
+            [3298.479736, 97.863663, 10492.59375],
+            [3276.738037, 97.270523, 10460.678711],
+            [4097.312988, 85.609093, 10490.660156],
+            [4122.561035, 96.590355, 10480.544922],
+            [4097.898926, 86.327301, 10516.90332],
+            [4077.381104, 88.302879, 10538.411133],
+            [4031.989502, 96.943344, 10564.824219],
+            [3988.306396, 92.486099, 10576.90918]
+        ],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
         "ArtefactsWithoutDetectors": {},
@@ -1247,10 +1799,6 @@
                         {
                             "Classname": "OOTS_ART_Battery",
                             "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
                         },
                         {
                             "Classname": "OOTS_ART_BloodStone_New",
@@ -1290,10 +1838,6 @@
                             "Chance": 4
                         },
                         {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
-                        },
-                        {
                             "Classname": "OOTS_ART_BloodStone_New",
                             "Chance": 6
                         },
@@ -1331,10 +1875,6 @@
                             "Chance": 4
                         },
                         {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
-                        },
-                        {
                             "Classname": "OOTS_ART_BloodStone_New",
                             "Chance": 6
                         },
@@ -1360,10 +1900,135 @@
         }
     },
     {
-        "Unique_Group_Title": "Anomaly_Zastoy 2 уровень опасности ( артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры ) / Всего 1000 / Отспавнено 140 / Шанс выпадения артефакта 55",
+        "Unique_Group_Title": "Anomaly_Zastoy 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_Zastoy",
-        "Chance_To_Spawn": 14,
-        "Positions_Spawn_Anomaly": [],
+        "Chance_To_Spawn": 20,
+        "Positions_Spawn_Anomaly": [
+            [3424.244141, 101.082413, 10261.068359],
+            [3377.41626, 100.819794, 10304.886719],
+            [3339.859131, 104.453476, 10312.088867],
+            [3360.660645, 103.859673, 10289.80957],
+            [3278.577148, 100.625565, 10795.144531],
+            [3274.273926, 100.603287, 10814.064453],
+            [3259.328369, 100.327118, 10831.441406],
+            [3263.483887, 100.857674, 10786.275391],
+            [3848.623779, 108.057785, 12555.646484],
+            [3883.500977, 97.039009, 12603.897461],
+            [3821.324707, 92.134888, 12674.165039],
+            [3814.137695, 106.093628, 12628.979492],
+            [3966.69751, 145.486053, 12079.010742],
+            [3972.643555, 145.338745, 12065.485352],
+            [3988.757813, 145.408783, 12071.636719],
+            [3979.563232, 145.5, 12092.925781],
+            [3959.664551, 145.5, 12093.341797],
+            [3962.061768, 145.496597, 12083.295898],
+            [4000.485107, 144.943863, 12091.922852],
+            [3996.518066, 144.70697, 12389.219727],
+            [4017.404541, 144.699997, 12388.647461],
+            [4282.898438, 146.310516, 12389.233398],
+            [4299.741699, 146.587402, 12388.000977],
+            [4603.319824, 141.554382, 12280.155273],
+            [4588.713867, 141.676544, 12262.549805],
+            [4591.036621, 141.852417, 12250.985352],
+            [4579.752441, 142.861115, 12183.744141],
+            [4579.518555, 145.244095, 12056.699219],
+            [4569.399902, 144.634186, 12087.344727],
+            [4580.318848, 144.57811, 12093.987305],
+            [4837.456543, 147.550629, 11992.451172],
+            [4866.375, 147.735031, 11991.90332],
+            [5102.240723, 113.597221, 11994.857422],
+            [5020.192383, 127.403183, 11994.151367],
+            [4228.75293, 109.645103, 12924.097656],
+            [4203.076172, 109.794754, 13026.452148],
+            [3373.259277, 118.202667, 12593.452148],
+            [3049.450928, 110.124596, 11940.28125],
+            [2751.200684, 114.97506, 12058.756836],
+            [2645.426025, 111.197433, 12062.976563],
+            [2097.218506, 86.586868, 11983.579102],
+            [1907.263184, 99.384903, 11934.936523],
+            [1892.761475, 108.250717, 11362.636719],
+            [1905.659302, 108.620003, 11349.362305],
+            [1921.286377, 108.620003, 11331.918945],
+            [1929.658325, 108.620003, 11351.785156],
+            [1960.374146, 108.797867, 11357.049805],
+            [2045.176514, 110.821121, 11279.975586],
+            [2037.078613, 116.57399, 11256.924805],
+            [1826.811157, 95.938171, 11030.592773],
+            [1807.971558, 100.220001, 10985.200195],
+            [1873.184692, 97.600533, 10864.463867],
+            [2057.572754, 102.790573, 10799.131836],
+            [2074.821045, 101.841454, 10818.924805],
+            [2198.286621, 101.461922, 10806.289063],
+            [2259.659668, 102.72802, 10798.506836],
+            [2374.71167, 102.278717, 10715.658203],
+            [2391.757568, 104.867111, 10660.819336],
+            [3398.80249, 119.276527, 11651.306641],
+            [3442.642334, 118.888863, 11690.869141],
+            [4058.919189, 92.321533, 10314.847656],
+            [3477.746826, 119.044632, 11689.046875],
+            [4045.616943, 89.341682, 10330.821289],
+            [3546.881348, 123.068375, 11715.666992],
+            [3952.288086, 88.254631, 10359.602539],
+            [3498.917236, 119.234756, 11678.040039],
+            [3938.660889, 88.401833, 10371.032227],
+            [1908.323975, 114.058289, 11592.773438],
+            [3985.422607, 88.42099, 10277.595703],
+            [1903.690918, 106.999382, 11586.231445],
+            [3999.808838, 88.878685, 10377.408203],
+            [1896.853882, 106.998871, 11587.793945],
+            [3986.702393, 90.321732, 10311.445313],
+            [1897.175171, 106.998871, 11596.991211],
+            [3990.186279, 92.310814, 10583.794922],
+            [1911.577637, 114.512825, 11456.484375],
+            [3993.33374, 95.612717, 10520.178711],
+            [1938.878906, 113.905533, 11464.584961],
+            [3969.237061, 93.246574, 10515.405273],
+            [1886.971558, 110.671127, 11427.754883],
+            [3988.232178, 95.916931, 10491.040039],
+            [1880.144409, 109.176971, 11408.668945],
+            [3988.829346, 91.99791, 10413.635742],
+            [1990.187378, 108.513809, 11385.254883],
+            [4020.143066, 98.637207, 10445.416016],
+            [2028.395386, 108.728279, 11379.411133],
+            [4047.414551, 97.44883, 10439.15332],
+            [2638.670654, 97.858231, 10436.722656],
+            [2627.716064, 98.329262, 10448.775391],
+            [2627.950439, 97.540436, 10423.78125],
+            [3278.707031, 97.528717, 10344.770508],
+            [3346.951416, 100.093704, 10497.265625],
+            [3312.618408, 100.862946, 10540.694336],
+            [3302.43335, 96.556381, 10484.920898],
+            [3345.545166, 97.272148, 10563.323242],
+            [3411.545654, 101.713608, 10646.331055],
+            [3433.08252, 101.187485, 10665.263672],
+            [3431.723145, 100.253685, 10696.911133],
+            [3838.699463, 93.984879, 12636.727539],
+            [3797.212158, 107.499474, 12612.380859],
+            [3827.936523, 92.032166, 12693.285156],
+            [3802.654053, 93.786194, 12746.951172],
+            [3782.572998, 110.619385, 12648.005859],
+            [3859.301025, 96.701744, 12608.024414],
+            [3829.582031, 102.058548, 12621.828125],
+            [3862.134277, 89.379929, 12662.481445],
+            [5054.234863, 126.836243, 12899.808594],
+            [5031.463867, 128.603592, 12917.40918],
+            [4960.462891, 132.626099, 12894.90625],
+            [4777.169434, 133.464417, 12794.212891],
+            [4748.499023, 132.585022, 12829.499023],
+            [4784.106445, 132.100189, 12857.101563],
+            [4808.863281, 133.451294, 12802.479492],
+            [4826.254395, 134.207611, 12766.661133],
+            [4887.673828, 134.920624, 12743.794922],
+            [4895.700195, 134.432861, 12781.420898],
+            [4859.073242, 133.751541, 12804.052734],
+            [4791.603027, 136.337875, 12619.665039],
+            [4788.630371, 136.136414, 12633.174805],
+            [4346.768555, 106.260338, 12922.243164],
+            [4218.692871, 115.788643, 12613.03418],
+            [4213.102051, 136.882538, 12467.210938],
+            [4184.850586, 111.948441, 12507.895508],
+            [4178.986816, 111.517517, 12500.474609]
+        ],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
         "ArtefactsWithoutDetectors": {},
@@ -1384,10 +2049,6 @@
                         {
                             "Classname": "OOTS_ART_Battery",
                             "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
                         },
                         {
                             "Classname": "OOTS_ART_BloodStone_New",
@@ -1427,10 +2088,6 @@
                             "Chance": 4
                         },
                         {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
-                        },
-                        {
                             "Classname": "OOTS_ART_BloodStone_New",
                             "Chance": 6
                         },
@@ -1468,10 +2125,6 @@
                             "Chance": 4
                         },
                         {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
-                        },
-                        {
                             "Classname": "OOTS_ART_BloodStone_New",
                             "Chance": 6
                         },
@@ -1497,11 +2150,63 @@
         }
     },
     {
-        "Unique_Group_Title": "Anomaly_Holera 2 уровень опасности ( артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры ) / Всего 600 / Отспавнено 70 / Шанс выпадения артефакта 55 ",
+        "Unique_Group_Title": "Anomaly_Holera 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_Holera",
-        "Chance_To_Spawn": 60,
+        "Chance_To_Spawn": 15,
         "Positions_Spawn_Anomaly": [
-            [4852.099121, 2.868051, 11209.716797]
+            [3470.641113, 97.959999, 10780.554688],
+            [3462.89502, 100.587685, 10692.457031],
+            [3429.169922, 100.701019, 10721.951172],
+            [1804.223267, 99.551338, 10936.634766],
+            [1804.673218, 100.219063, 11015.792969],
+            [1877.211914, 99.015518, 11049.22168],
+            [1882.703857, 99.231308, 11074.635742],
+            [1868.314575, 99.022202, 11079.196289],
+            [1949.430664, 101.400002, 11138.130859],
+            [1944.68457, 101.400002, 11184.802734],
+            [2003.313599, 106.854454, 11051.40918],
+            [2106.406982, 99.586853, 11080.525391],
+            [2044.066162, 111.208549, 11278.386719],
+            [1814.207031, 99.591591, 11368.880859],
+            [1793.40564, 99.063362, 11382.418945],
+            [1907.063843, 107.011871, 11600.105469],
+            [1908.659302, 114.056458, 11627.086914],
+            [1896.237793, 114.000732, 11626.961914],
+            [1942.964233, 101.309982, 11920.597656],
+            [2198.983643, 84.373093, 11934.640625],
+            [2459.401123, 99.25618, 12032.761719],
+            [2570.827881, 108.531967, 12031.908203],
+            [2694.056641, 115.355782, 12049.950195],
+            [2732.77002, 115.037277, 12064.349609],
+            [3020.086426, 109.038322, 11946.40625],
+            [3056.859863, 110.300606, 11942.632813],
+            [3145.027344, 106.288902, 12115.307617],
+            [3146.008545, 105.623924, 12153.936523],
+            [3174.718018, 105.158226, 12151.712891],
+            [3201.978027, 102.346359, 12198.385742],
+            [3145.515869, 105.398636, 12368.235352],
+            [3262.250732, 116.718765, 12622.291016],
+            [3208.535889, 116.126183, 12689.37207],
+            [3084.689697, 103.630196, 12884.951172],
+            [3061.099121, 103.61364, 12889.089844],
+            [3039.085205, 105.060905, 12864.917969],
+            [3116.923096, 103.954712, 12929.304688],
+            [4080.397217, 86.935585, 12799.588867],
+            [4078.385498, 92.043678, 12873.982422],
+            [4066.54834, 88.258331, 12732.149414],
+            [3467.039063, 97.960045, 10740.573242],
+            [3459.316895, 98.609749, 10513.754883],
+            [3430.492676, 101.019859, 10472.645508],
+            [3348.108643, 99.389412, 10431.000977],
+            [3299.168701, 102.222031, 10401.041016],
+            [3292.307861, 96.2099, 10245.583008],
+            [4208.175781, 144.699997, 12020.242188],
+            [4011.384521, 144.699997, 12009.108398],
+            [4035.873047, 144.699997, 11999.583984],
+            [3827.478516, 134.758545, 12035.487305],
+            [3802.979004, 134.759079, 12043.243164],
+            [3824.262939, 134.758316, 12128.283203],
+            [3806.521973, 134.758255, 12277.81543]
         ],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
@@ -1523,10 +2228,6 @@
                         {
                             "Classname": "OOTS_ART_Battery",
                             "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
                         },
                         {
                             "Classname": "OOTS_ART_BloodStone_New",
@@ -1566,10 +2267,6 @@
                             "Chance": 4
                         },
                         {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
-                        },
-                        {
                             "Classname": "OOTS_ART_BloodStone_New",
                             "Chance": 6
                         },
@@ -1607,10 +2304,6 @@
                             "Chance": 4
                         },
                         {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
-                        },
-                        {
                             "Classname": "OOTS_ART_BloodStone_New",
                             "Chance": 6
                         },
@@ -1636,399 +2329,1692 @@
         }
     },
     {
-        "Unique_Group_Title": "Anomaly_Snow 1 уровень опасности ( артефакты 1 тира - Очень вредные ) / Всего 150 / Отспавнено: 30 / Шанс выпадения артефакта 50",
+        "Unique_Group_Title": "Anomaly_Snow 1 уровень опасности (артефакты 1 тира - Очень вредные)",
         "Classname_Anomaly_Object": "Anomaly_Snow",
-        "Chance_To_Spawn": 18,
-        "Positions_Spawn_Anomaly": [
-            [5030.073242, 3.299082, 11319.875977],
-            [916.624329, 25.928455, 11148.55957]
-        ],
-        "Enable_Spawn_ArtefactsWithoutDetectors": 0,
-        "Enable_Spawn_ArtefactsWithDetectors": 1,
-        "ArtefactsWithoutDetectors": {},
-        "ArtefactsWithDetectors": {
-            "MaxInOnePoint": 1,
-            "ArtefactsList": [
-                {
-                    "Classname_Detector": "Anomaly_Detector_Svarog",
-                    "Detect_Artefacts_Settings": [
-                        {
-                            "Classname": "OOTS_ART_izolator",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_Klyaksa",
-                            "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_kameniy_cvetok",
-                            "Chance": 5
-                        },
-                        {
-                            "Classname": "OOTS_ART_kolobok",
-                            "Chance": 6
-                        },
-                        {
-                            "Classname": "OOTS_ART_Plasma",
-                            "Chance": 7
-                        },
-                        {
-                            "Classname": "OOTS_ART_snejinka",
-                            "Chance": 8
-                        },
-                        {
-                            "Classname": "OOTS_ART_shturval",
-                            "Chance": 8
-                        },
-                        {
-                            "Classname": "OOTS_ART_DevelHert",
-                            "Chance": 9
-                        }
-                    ]
-                },
-                {
-                    "Classname_Detector": "Anomaly_Detector_Medved",
-                    "Detect_Artefacts_Settings": [
-                        {
-                            "Classname": "OOTS_ART_izolator",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_Klyaksa",
-                            "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_kameniy_cvetok",
-                            "Chance": 5
-                        },
-                        {
-                            "Classname": "OOTS_ART_kolobok",
-                            "Chance": 6
-                        },
-                        {
-                            "Classname": "OOTS_ART_Plasma",
-                            "Chance": 7
-                        },
-                        {
-                            "Classname": "OOTS_ART_snejinka",
-                            "Chance": 8
-                        },
-                        {
-                            "Classname": "OOTS_ART_shturval",
-                            "Chance": 8
-                        },
-                        {
-                            "Classname": "OOTS_ART_DevelHert",
-                            "Chance": 9
-                        }
-                    ]
-                },
-                {
-                    "Classname_Detector": "Anomaly_Detector_Otklik",
-                    "Detect_Artefacts_Settings": [
-                        {
-                            "Classname": "OOTS_ART_izolator",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_Klyaksa",
-                            "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_kameniy_cvetok",
-                            "Chance": 5
-                        },
-                        {
-                            "Classname": "OOTS_ART_kolobok",
-                            "Chance": 6
-                        },
-                        {
-                            "Classname": "OOTS_ART_Plasma",
-                            "Chance": 7
-                        },
-                        {
-                            "Classname": "OOTS_ART_snejinka",
-                            "Chance": 8
-                        },
-                        {
-                            "Classname": "OOTS_ART_shturval",
-                            "Chance": 8
-                        },
-                        {
-                            "Classname": "OOTS_ART_DevelHert",
-                            "Chance": 9
-                        }
-                    ]
-                }
-            ]
-        }
-    },
-    {
-        "Unique_Group_Title": "Anomaly_Steklo 1 уровень опасности ( артефакты 1 тира - Очень вредные / Всего 150 / Отспавнено: 30 / Шанс выпадения артефакта 50",
-        "Classname_Anomaly_Object": "Anomaly_Steklo",
-        "Chance_To_Spawn": 14,
-        "Positions_Spawn_Anomaly": [
-            [4835.243164, 4.200014, 11261.017578],
-            [5063.731934, 2.869511, 11407.636719]
-        ],
-        "Enable_Spawn_ArtefactsWithoutDetectors": 0,
-        "Enable_Spawn_ArtefactsWithDetectors": 1,
-        "ArtefactsWithoutDetectors": {},
-        "ArtefactsWithDetectors": {
-            "MaxInOnePoint": 1,
-            "ArtefactsList": [
-                {
-                    "Classname_Detector": "Anomaly_Detector_Svarog",
-                    "Detect_Artefacts_Settings": [
-                        {
-                            "Classname": "OOTS_ART_izolator",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_Klyaksa",
-                            "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_kameniy_cvetok",
-                            "Chance": 5
-                        },
-                        {
-                            "Classname": "OOTS_ART_kolobok",
-                            "Chance": 6
-                        },
-                        {
-                            "Classname": "OOTS_ART_Plasma",
-                            "Chance": 7
-                        },
-                        {
-                            "Classname": "OOTS_ART_snejinka",
-                            "Chance": 8
-                        },
-                        {
-                            "Classname": "OOTS_ART_shturval",
-                            "Chance": 8
-                        },
-                        {
-                            "Classname": "OOTS_ART_DevelHert",
-                            "Chance": 9
-                        }
-                    ]
-                },
-                {
-                    "Classname_Detector": "Anomaly_Detector_Medved",
-                    "Detect_Artefacts_Settings": [
-                        {
-                            "Classname": "OOTS_ART_izolator",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_Klyaksa",
-                            "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_kameniy_cvetok",
-                            "Chance": 5
-                        },
-                        {
-                            "Classname": "OOTS_ART_kolobok",
-                            "Chance": 6
-                        },
-                        {
-                            "Classname": "OOTS_ART_Plasma",
-                            "Chance": 7
-                        },
-                        {
-                            "Classname": "OOTS_ART_snejinka",
-                            "Chance": 8
-                        },
-                        {
-                            "Classname": "OOTS_ART_shturval",
-                            "Chance": 8
-                        },
-                        {
-                            "Classname": "OOTS_ART_DevelHert",
-                            "Chance": 9
-                        }
-                    ]
-                },
-                {
-                    "Classname_Detector": "Anomaly_Detector_Otklik",
-                    "Detect_Artefacts_Settings": [
-                        {
-                            "Classname": "OOTS_ART_izolator",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_Klyaksa",
-                            "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_kameniy_cvetok",
-                            "Chance": 5
-                        },
-                        {
-                            "Classname": "OOTS_ART_kolobok",
-                            "Chance": 6
-                        },
-                        {
-                            "Classname": "OOTS_ART_Plasma",
-                            "Chance": 7
-                        },
-                        {
-                            "Classname": "OOTS_ART_snejinka",
-                            "Chance": 8
-                        },
-                        {
-                            "Classname": "OOTS_ART_shturval",
-                            "Chance": 8
-                        },
-                        {
-                            "Classname": "OOTS_ART_DevelHert",
-                            "Chance": 9
-                        }
-                    ]
-                }
-            ]
-        }
-    },
-    {
-        "Unique_Group_Title": "Anomaly_EMP_Blast 1 уровень опасности ( артефакты 1 тира - Очень вредные / Всего 150 / Отспавнено: 30 / Шанс выпадения артефакта 50",
-        "Classname_Anomaly_Object": "Anomaly_EMP_Blast",
-        "Chance_To_Spawn": 70,
-        "Positions_Spawn_Anomaly": [
-            [4820.467285, 4.199986, 11152.00293]
-        ],
-        "Enable_Spawn_ArtefactsWithoutDetectors": 0,
-        "Enable_Spawn_ArtefactsWithDetectors": 1,
-        "ArtefactsWithoutDetectors": {},
-        "ArtefactsWithDetectors": {
-            "MaxInOnePoint": 1,
-            "ArtefactsList": [
-                {
-                    "Classname_Detector": "Anomaly_Detector_Svarog",
-                    "Detect_Artefacts_Settings": [
-                        {
-                            "Classname": "OOTS_ART_izolator",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_Klyaksa",
-                            "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_kameniy_cvetok",
-                            "Chance": 5
-                        },
-                        {
-                            "Classname": "OOTS_ART_kolobok",
-                            "Chance": 6
-                        },
-                        {
-                            "Classname": "OOTS_ART_Plasma",
-                            "Chance": 7
-                        },
-                        {
-                            "Classname": "OOTS_ART_snejinka",
-                            "Chance": 8
-                        },
-                        {
-                            "Classname": "OOTS_ART_shturval",
-                            "Chance": 8
-                        },
-                        {
-                            "Classname": "OOTS_ART_DevelHert",
-                            "Chance": 9
-                        }
-                    ]
-                },
-                {
-                    "Classname_Detector": "Anomaly_Detector_Medved",
-                    "Detect_Artefacts_Settings": [
-                        {
-                            "Classname": "OOTS_ART_izolator",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_Klyaksa",
-                            "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_kameniy_cvetok",
-                            "Chance": 5
-                        },
-                        {
-                            "Classname": "OOTS_ART_kolobok",
-                            "Chance": 6
-                        },
-                        {
-                            "Classname": "OOTS_ART_Plasma",
-                            "Chance": 7
-                        },
-                        {
-                            "Classname": "OOTS_ART_snejinka",
-                            "Chance": 8
-                        },
-                        {
-                            "Classname": "OOTS_ART_shturval",
-                            "Chance": 8
-                        },
-                        {
-                            "Classname": "OOTS_ART_DevelHert",
-                            "Chance": 9
-                        }
-                    ]
-                },
-                {
-                    "Classname_Detector": "Anomaly_Detector_Otklik",
-                    "Detect_Artefacts_Settings": [
-                        {
-                            "Classname": "OOTS_ART_izolator",
-                            "Chance": 3
-                        },
-                        {
-                            "Classname": "OOTS_ART_Klyaksa",
-                            "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_kameniy_cvetok",
-                            "Chance": 5
-                        },
-                        {
-                            "Classname": "OOTS_ART_kolobok",
-                            "Chance": 6
-                        },
-                        {
-                            "Classname": "OOTS_ART_Plasma",
-                            "Chance": 7
-                        },
-                        {
-                            "Classname": "OOTS_ART_snejinka",
-                            "Chance": 8
-                        },
-                        {
-                            "Classname": "OOTS_ART_shturval",
-                            "Chance": 8
-                        },
-                        {
-                            "Classname": "OOTS_ART_DevelHert",
-                            "Chance": 9
-                        }
-                    ]
-                }
-            ]
-        }
-    },
-    {
-        "Unique_Group_Title": "Anomaly_Lince ( ЛЕЧИТ HP ИГРОКА - Полезная аномалия В НЕЙ НЕТ АРТЕФАКТОВ / Всего 18 / Отспавнено: 6 ",
-        "Classname_Anomaly_Object": "Anomaly_Lince",
-        "Chance_To_Spawn": 85,
+        "Chance_To_Spawn": 0,
         "Positions_Spawn_Anomaly": [],
+        "Enable_Spawn_ArtefactsWithoutDetectors": 0,
+        "Enable_Spawn_ArtefactsWithDetectors": 1,
+        "ArtefactsWithoutDetectors": {},
+        "ArtefactsWithDetectors": {
+            "MaxInOnePoint": 1,
+            "ArtefactsList": [
+                {
+                    "Classname_Detector": "Anomaly_Detector_Svarog",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_izolator",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Klyaksa",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_kameniy_cvetok",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_kolobok",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plasma",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_snejinka",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_shturval",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_DevelHert",
+                            "Chance": 9
+                        }
+                    ]
+                },
+                {
+                    "Classname_Detector": "Anomaly_Detector_Medved",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_izolator",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Klyaksa",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_kameniy_cvetok",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_kolobok",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plasma",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_snejinka",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_shturval",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_DevelHert",
+                            "Chance": 9
+                        }
+                    ]
+                },
+                {
+                    "Classname_Detector": "Anomaly_Detector_Otklik",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_izolator",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Klyaksa",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_kameniy_cvetok",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_kolobok",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plasma",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_snejinka",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_shturval",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_DevelHert",
+                            "Chance": 9
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Unique_Group_Title": "Anomaly_Steklo 1 уровень опасности (артефакты 1 тира - Очень вредные)",
+        "Classname_Anomaly_Object": "Anomaly_Steklo",
+        "Chance_To_Spawn": 15,
+        "Positions_Spawn_Anomaly": [
+            [3471.050781, 98.385574, 10755.932617],
+            [4176.674316, 118.618599, 14488.642578],
+            [1772.293213, 96.749268, 11172.289063],
+            [1791.303467, 102.989998, 10857.095703],
+            [4178.084473, 118.600388, 14659.734375],
+            [4279.878906, 107.581024, 12920.916016],
+            [1871.436279, 107.889999, 10764.976563],
+            [1877.119995, 107.889999, 10792.061523],
+            [1815.956909, 106.470001, 10620.5],
+            [1848.817749, 106.470001, 10641.365234],
+            [1844.390991, 106.56852, 10601.553711],
+            [1876.586182, 106.795113, 10595.826172],
+            [1861.332886, 110.970001, 10525.208984],
+            [1877.368652, 98.980003, 11057.322266],
+            [2023.135376, 108.745995, 11319.34668],
+            [4119.495117, 145.500641, 12319.856445],
+            [4133.318848, 145.500671, 12309.380859],
+            [4178.648926, 144.699997, 12269.664063],
+            [4215.333496, 144.699997, 11971.795898],
+            [4150.678223, 110.40004, 13116.30957],
+            [3159.38501, 103.64389, 12909.268555],
+            [3174.90332, 108.357536, 12607.365234],
+            [3138.402344, 101.627838, 12333.871094],
+            [3860.615234, 141.271225, 12166.555664],
+            [3669.014648, 96.09771, 14490.662109],
+            [3327.531494, 101.149223, 12728.378906],
+            [3990.037109, 145.375778, 12104.110352],
+            [4099.77832, 118.473938, 14646.101563],
+            [4001.748779, 144.873047, 12074.243164],
+            [4176.075195, 118.618622, 14475.429688],
+            [4021.523193, 120.582932, 14319.37207],
+            [4176.97168, 118.618423, 14502.839844],
+            [3820.009033, 107.986763, 12944.151367],
+            [3479.306885, 97.960022, 10791.173828],
+            [3095.143311, 105.629997, 12152.666992],
+            [3261.641357, 100.330002, 10821.037109],
+            [3251.299316, 99.861099, 10867.775391]
+        ],
+        "Enable_Spawn_ArtefactsWithoutDetectors": 0,
+        "Enable_Spawn_ArtefactsWithDetectors": 1,
+        "ArtefactsWithoutDetectors": {},
+        "ArtefactsWithDetectors": {
+            "MaxInOnePoint": 1,
+            "ArtefactsList": [
+                {
+                    "Classname_Detector": "Anomaly_Detector_Svarog",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_izolator",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Klyaksa",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_kameniy_cvetok",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_kolobok",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_snejinka",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_shturval",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_DevelHert",
+                            "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_NanoCell",
+                            "Chance": 3
+                        }
+                    ]
+                },
+                {
+                    "Classname_Detector": "Anomaly_Detector_Medved",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_izolator",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Klyaksa",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_kameniy_cvetok",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_kolobok",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_snejinka",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_shturval",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_DevelHert",
+                            "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_NanoCell",
+                            "Chance": 3
+                        }
+                    ]
+                },
+                {
+                    "Classname_Detector": "Anomaly_Detector_Otklik",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_izolator",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Klyaksa",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_kameniy_cvetok",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_kolobok",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_snejinka",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_shturval",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_DevelHert",
+                            "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_NanoCell",
+                            "Chance": 3
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Unique_Group_Title": "Anomaly_EMP_Blast 1 уровень опасности (артефакты 1 тира - Очень вредные)",
+        "Classname_Anomaly_Object": "Anomaly_EMP_Blast",
+        "Chance_To_Spawn": 15,
+        "Positions_Spawn_Anomaly": [
+            [4010.909668, 144.707108, 12108.550781],
+            [4042.512939, 144.699997, 12274.336914],
+            [4009.733398, 144.699997, 12396.129883],
+            [4165.713867, 144.699997, 12398.643555],
+            [4355.32959, 146.180649, 12394.957031],
+            [4527.283691, 139.479019, 12383.641602],
+            [4573.614746, 144.401535, 12102.076172],
+            [3390.683838, 92.788414, 10542.726563],
+            [3427.555664, 98.049103, 10763.004883]
+        ],
+        "Enable_Spawn_ArtefactsWithoutDetectors": 0,
+        "Enable_Spawn_ArtefactsWithDetectors": 1,
+        "ArtefactsWithoutDetectors": {},
+        "ArtefactsWithDetectors": {
+            "MaxInOnePoint": 1,
+            "ArtefactsList": [
+                {
+                    "Classname_Detector": "Anomaly_Detector_Svarog",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_izolator",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Klyaksa",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_kameniy_cvetok",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_kolobok",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plasma",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_snejinka",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_shturval",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_DevelHert",
+                            "Chance": 9
+                        }
+                    ]
+                },
+                {
+                    "Classname_Detector": "Anomaly_Detector_Medved",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_izolator",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Klyaksa",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_kameniy_cvetok",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_kolobok",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plasma",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_snejinka",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_shturval",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_DevelHert",
+                            "Chance": 9
+                        }
+                    ]
+                },
+                {
+                    "Classname_Detector": "Anomaly_Detector_Otklik",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_izolator",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Klyaksa",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_kameniy_cvetok",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_kolobok",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plasma",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_snejinka",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_shturval",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_DevelHert",
+                            "Chance": 9
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Unique_Group_Title": "Anomaly_Lince (ЛЕЧИТ HP ИГРОКА - Полезная аномалия В НЕЙ НЕТ АРТЕФАКТОВ)",
+        "Classname_Anomaly_Object": "Anomaly_Lince",
+        "Chance_To_Spawn": 50,
+        "Positions_Spawn_Anomaly": [
+            [2665.244873, 97.464577, 10437.210938],
+            [1765.567505, 100.312775, 10943.829102],
+            [3975.748535, 120.519066, 14321.776367],
+            [3673.772461, 96.085503, 14521.417969],
+            [3438.762939, 98.61264, 15226.914063],
+            [3457.69458, 97.398636, 15198.833008],
+            [3851.298584, 87.798828, 15205.774414],
+            [3918.796387, 88.953423, 15233.004883],
+            [4180.357422, 111.059998, 12544.12793],
+            [4165.466797, 111.056656, 12570.166016],
+            [3659.778076, 133.4375, 11778.378906],
+            [2562.463379, 106.772583, 12064.805664],
+            [1901.221313, 128.780594, 11793.670898],
+            [1868.328979, 107.591675, 11314.214844],
+            [2143.872314, 91.025703, 10877.847656]
+        ],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
         "ArtefactsWithoutDetectors": {},
         "ArtefactsWithDetectors": {
             "MaxInOnePoint": 1,
             "ArtefactsList": []
+        }
+    },
+    {
+        "Unique_Group_Title": "Anomaly_FireIskra 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
+        "Classname_Anomaly_Object": "Anomaly_FireIskra",
+        "Chance_To_Spawn": 20,
+        "Positions_Spawn_Anomaly": [
+            [2652.170166, 98.314026, 10400.329102],
+            [2852.598877, 110.655632, 12058.901367],
+            [2638.054199, 98.598373, 10400.68457],
+            [2648.80127, 102.802055, 10379.057617],
+            [2657.479004, 97.050369, 10411.503906],
+            [2813.215088, 114.370331, 12036.155273],
+            [2765.338867, 95.401405, 10453.71582],
+            [2781.227051, 96.119217, 10444.282227],
+            [2773.946289, 94.905006, 10470.821289],
+            [2733.062988, 116.851311, 12029.970703],
+            [2844.700439, 96.823273, 10530.017578],
+            [2992.175049, 104.253281, 10493.290039],
+            [3086.888672, 104.519501, 10400.641602],
+            [2728.740479, 114.956116, 12068.380859],
+            [3097.834717, 102.011955, 10355.68457],
+            [3074.7854, 104.782112, 10438.162109],
+            [2698.4375, 113.432968, 12088.09375],
+            [2990.868896, 107.909073, 14573.456055],
+            [3057.926758, 112.537689, 14523.064453],
+            [2940.330566, 102.191551, 14658.521484],
+            [2870.321533, 110.835426, 14588.134766],
+            [2858.349121, 111.078407, 14595.362305],
+            [2815.852295, 111.211006, 14633.560547],
+            [2802.095703, 125.339401, 14451.21582],
+            [2814.169922, 123.906586, 14468.15918],
+            [2847.48877, 123.364685, 14452.430664],
+            [2843.708008, 121.921677, 14476.707031],
+            [3379.516113, 102.093224, 10240.150391],
+            [3389.883301, 100.019592, 10288.633789],
+            [3416.123291, 101.333389, 10444.035156],
+            [3495.94751, 99.690361, 10705.415039],
+            [3637.005859, 141.173584, 12072.561523],
+            [3629.522217, 144.105377, 12023.416992],
+            [3399.321777, 119.458847, 11665.088867],
+            [3411.30127, 119.422638, 11633.929688],
+            [3570.790039, 125.462387, 11729.71875],
+            [3609.699707, 128.099258, 11719.600586],
+            [3868.658691, 143.962997, 12331.819336],
+            [4011.051514, 144.699997, 12370.47168],
+            [4239.602539, 109.258102, 12786.012695],
+            [4027.070068, 145.207031, 12324.762695],
+            [4327.390625, 107.231125, 12780.569336],
+            [4081.731934, 145.500641, 12333.212891],
+            [3009.781494, 118.177055, 12975.907227],
+            [4103.821777, 145.500641, 12339.765625],
+            [3065.255859, 108.935379, 13005.732422],
+            [4107.546387, 145.500641, 12322.246094],
+            [3219.790039, 104.635483, 12254.183594],
+            [4063.15918, 145.500641, 12321.179688],
+            [3215.679932, 102.315231, 12304.878906],
+            [4071.982422, 145.500641, 12345.378906],
+            [3276.813232, 104.07914, 12283.349609],
+            [4132.508789, 145.500671, 12334.418945],
+            [3354.724121, 124.716995, 12141.03125],
+            [4130.575195, 145.501251, 12313.575195],
+            [3403.560791, 143.182632, 12074.895508],
+            [3931.652344, 125.732925, 12462.991211],
+            [3421.838867, 143.359161, 12101.777344],
+            [3939.824707, 123.017242, 12475.128906],
+            [3542.022217, 140.418915, 12141.037109],
+            [3924.584717, 120.126785, 12477.347656],
+            [4116.67334, 118.60038, 14631.4375],
+            [4105.030762, 118.600372, 14631.456055],
+            [4102.577148, 118.47393, 14660.087891],
+            [4140.404785, 118.577309, 14631.890625],
+            [4180.871582, 118.465515, 14642.286133],
+            [4175.668945, 118.56884, 14587.860352],
+            [4177.226074, 118.56884, 14557.248047],
+            [4172.540039, 118.893478, 14539.146484],
+            [4127.844238, 120.588127, 14425.074219],
+            [4113.949707, 120.705315, 14422.619141],
+            [4101.057617, 95.614136, 14480.262695],
+            [4046.249268, 94.164368, 14492.666992],
+            [4052.479492, 93.990982, 14505.635742],
+            [3987.819092, 120.534012, 14395.023438],
+            [3892.783447, 100.857483, 14407.915039],
+            [3839.382324, 101.813774, 14417.635742],
+            [3871.387207, 98.373756, 14444.743164],
+            [3774.440186, 98.822693, 14463.256836],
+            [3702.498535, 98.104752, 14468.942383],
+            [3641.249268, 101.821068, 14433.030273],
+            [3581.85376, 98.031013, 14458.519531],
+            [3456.710693, 93.611954, 14518.719727],
+            [3304.869629, 90.271599, 14968.185547],
+            [3301.965332, 89.862984, 14938.755859],
+            [3393.330322, 95.995605, 15116.052734],
+            [3193.137207, 89.419014, 15268.908203],
+            [3094.013916, 96.013382, 15325.220703],
+            [3109.17041, 95.314972, 15309.081055],
+            [3013.462646, 98.419373, 15328.193359],
+            [3025.366943, 98.281868, 15340.889648],
+            [3009.869629, 98.311676, 15280.18457],
+            [2943.424316, 100.347374, 15338.439453],
+            [3111.62207, 112.163284, 11816.030273],
+            [3093.138428, 114.961678, 11786.074219],
+            [3136.498535, 112.633575, 11790.78125],
+            [3166.560059, 112.710876, 11774.599609],
+            [2217.081299, 84.704697, 12001.661133],
+            [3148.271484, 109.853241, 11834.729492],
+            [2227.074951, 85.60453, 12017.55957],
+            [1902.483887, 114.003349, 11705.649414],
+            [1967.922241, 108.620003, 11365.380859],
+            [3065.94043, 117.856705, 11787.423828],
+            [1982.642456, 108.620003, 11334.895508],
+            [1915.287231, 108.620003, 11339.930664],
+            [2044.952515, 110.282433, 11283.017578],
+            [3039.908691, 117.320938, 11823.686523],
+            [2002.287964, 106.797638, 11053.704102],
+            [2236.284424, 101.410057, 10800.935547],
+            [2391.68335, 115.751038, 10528.049805],
+            [2886.532227, 114.338448, 11958.185547],
+            [2412.065674, 116.313797, 10493.479492],
+            [2406.764893, 111.586029, 10540.530273],
+            [2435.980957, 113.943649, 10468.751953],
+            [2834.796387, 118.797806, 11945.519531],
+            [2423.339355, 115.405624, 10482.918945],
+            [5077.986328, 124.141037, 10579.707031],
+            [2436.792236, 112.361359, 10490.637695],
+            [5015.835449, 123.006203, 10454.15332],
+            [2417.817383, 117.430588, 10458.962891],
+            [2895.452148, 105.894928, 12040.894531],
+            [4927.243164, 131.130493, 10403.634766],
+            [2601.402832, 103.185226, 10476.669922],
+            [4959.876953, 126.385895, 10400.791016],
+            [2576.641602, 105.242393, 10480.960938]
+        ],
+        "Enable_Spawn_ArtefactsWithoutDetectors": 0,
+        "Enable_Spawn_ArtefactsWithDetectors": 1,
+        "ArtefactsWithoutDetectors": {},
+        "ArtefactsWithDetectors": {
+            "MaxInOnePoint": 1,
+            "ArtefactsList": [
+                {
+                    "Classname_Detector": "Anomaly_Detector_Svarog",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_svet",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery3",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_BloodStone_New",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya2",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_CrustalThorn",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_SeaUrchin",
+                            "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_myaso",
+                            "Chance": 11
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plasma",
+                            "Chance": 2
+                        }
+                    ]
+                },
+                {
+                    "Classname_Detector": "Anomaly_Detector_Medved",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_svet",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery3",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_BloodStone_New",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya2",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_CrustalThorn",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_SeaUrchin",
+                            "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_myaso",
+                            "Chance": 11
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plasma",
+                            "Chance": 2
+                        }
+                    ]
+                },
+                {
+                    "Classname_Detector": "Anomaly_Detector_Otklik",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_svet",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery3",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_BloodStone_New",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya2",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_CrustalThorn",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_SeaUrchin",
+                            "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_myaso",
+                            "Chance": 11
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plasma",
+                            "Chance": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Unique_Group_Title": "Anomaly_FireShtorm 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
+        "Classname_Anomaly_Object": "Anomaly_FireShtorm",
+        "Chance_To_Spawn": 15,
+        "Positions_Spawn_Anomaly": [
+            [4622.354004, 131.00293, 12900.883789],
+            [4640.388184, 130.860626, 12907.363281],
+            [4577.23584, 130.65564, 12937.529297],
+            [4528.165039, 131.140503, 12906.842773],
+            [4301.858398, 107.074829, 12923.020508],
+            [4242.964355, 108.467392, 12927.996094],
+            [4216.509766, 111.018379, 12858.949219],
+            [4218.335938, 111.618416, 12690.963867],
+            [4222.833984, 134.000214, 12513.925781],
+            [4166.218262, 111.059998, 12567.336914],
+            [4209.560059, 138.117935, 12451.041992],
+            [4213.385742, 139.314545, 12436.630859],
+            [4216.733398, 144.3759, 12389.492188],
+            [4195.298828, 144.682541, 12377.709961],
+            [4236.483398, 144.703918, 12365.326172],
+            [4009.145996, 144.699997, 12263.592773],
+            [4949.424805, 136.078049, 11284.510742],
+            [4918.585449, 136.008057, 11286.520508],
+            [4848.79248, 136.433136, 11275.891602],
+            [4845.924805, 137.685501, 11287.344727],
+            [4851.953613, 137.684906, 11241.754883],
+            [4828.955566, 137.677628, 11251.942383],
+            [4841.818848, 153.069901, 11579.291992]
+        ],
+        "Enable_Spawn_ArtefactsWithoutDetectors": 0,
+        "Enable_Spawn_ArtefactsWithDetectors": 1,
+        "ArtefactsWithoutDetectors": {},
+        "ArtefactsWithDetectors": {
+            "MaxInOnePoint": 1,
+            "ArtefactsList": [
+                {
+                    "Classname_Detector": "Anomaly_Detector_Svarog",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_svet",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery3",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_AngelFool",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_BloodStone_New",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya2",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_CrustalThorn",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_SeaUrchin",
+                            "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_myaso",
+                            "Chance": 11
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plasma",
+                            "Chance": 2
+                        }
+                    ]
+                },
+                {
+                    "Classname_Detector": "Anomaly_Detector_Medved",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_svet",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery3",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_AngelFool",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_BloodStone_New",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya2",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_CrustalThorn",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_SeaUrchin",
+                            "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_myaso",
+                            "Chance": 11
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plasma",
+                            "Chance": 2
+                        }
+                    ]
+                },
+                {
+                    "Classname_Detector": "Anomaly_Detector_Otklik",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_svet",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery3",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_AngelFool",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_BloodStone_New",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya2",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_CrustalThorn",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_SeaUrchin",
+                            "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_myaso",
+                            "Chance": 11
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plasma",
+                            "Chance": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Unique_Group_Title": "Anomaly_Flash 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
+        "Classname_Anomaly_Object": "Anomaly_Flash",
+        "Chance_To_Spawn": 25,
+        "Positions_Spawn_Anomaly": [
+            [3431.901611, 100.439552, 10673.107422],
+            [3448.084229, 101.143059, 10708.602539],
+            [3414.715088, 101.779495, 10655.134766],
+            [3363.847656, 99.502731, 10780.46875],
+            [3373.95874, 101.500809, 10747.133789],
+            [3393.797852, 99.43486, 10772.368164],
+            [3349.844238, 100.827652, 10748.792969],
+            [3267.137207, 100.906792, 10780.447266],
+            [3303.512451, 104.851105, 10741.067383],
+            [3242.889893, 99.339363, 10813.148438],
+            [3266.135498, 100.10968, 10885.675781],
+            [3522.801758, 122.254555, 11719.236328],
+            [3572.216797, 124.146446, 11696.029297],
+            [3653.076904, 132.668945, 11766.941406],
+            [3615.459717, 130.981842, 11763.019531],
+            [3957.582764, 145.5, 12091.767578],
+            [3972.412109, 145.459427, 12073.460938],
+            [3996.837891, 145.146271, 12076.088867],
+            [3914.88916, 145.552444, 12066.46875],
+            [3907.20459, 145.553467, 12053.106445],
+            [3887.2771, 145.552246, 12067.165039],
+            [3882.128662, 145.552551, 12089.973633],
+            [3850.640381, 141.271149, 12144.96875],
+            [3873.886963, 141.271545, 12184.080078],
+            [3867.18335, 141.271698, 12212.123047],
+            [4019.656982, 144.699997, 12079.362305],
+            [4006.737549, 144.708832, 12055.577148],
+            [4021.719238, 144.699997, 12025.44043],
+            [4029.890137, 144.699997, 12029.452148],
+            [4010.053955, 144.699997, 12128.300781],
+            [4251.430664, 104.11647, 12951.330078],
+            [4315.899414, 106.096756, 12952.200195],
+            [4252.585938, 104.135712, 13045.114258],
+            [4307.899902, 104.220688, 13029.275391],
+            [4101.973145, 120.574097, 14420.578125],
+            [4106.640625, 120.541412, 14422.546875],
+            [4073.234863, 120.579132, 14427.40918],
+            [4056.795898, 120.576645, 14427.294922],
+            [4050.863037, 120.611588, 14414.105469],
+            [3872.386963, 99.385742, 14432.821289],
+            [3868.014893, 98.111534, 14448.883789],
+            [3838.953613, 97.463074, 14464.490234],
+            [3669.732666, 96.097717, 14484.249023],
+            [3690.500977, 96.588913, 14480.415039],
+            [3239.695801, 104.183289, 14551.334961],
+            [3241.01001, 104.057556, 14543.689453],
+            [2990.616699, 92.72757, 14848.237305],
+            [2981.891846, 94.878815, 14791.314453],
+            [3010.968018, 88.908218, 15074.841797],
+            [3007.909424, 88.73793, 15050.599609],
+            [3033.43457, 89.240135, 15083.711914],
+            [3033.676514, 93.881859, 15159.44043],
+            [3480.298584, 86.462921, 15173.915039],
+            [3452.230713, 98.201378, 15221.549805],
+            [3424.655029, 97.898682, 15166.699219],
+            [3411.361084, 98.363548, 15168.289063],
+            [3341.580811, 91.341438, 15023.884766],
+            [3308.487793, 90.939209, 15054.568359],
+            [3284.677246, 95.758026, 10285.325195],
+            [3370.736816, 103.041656, 10291.015625],
+            [3391.792969, 100.443657, 10280.760742],
+            [3426.969238, 102.502991, 10294.741211],
+            [3383.647949, 99.832512, 10302.933594],
+            [3354.130127, 103.989265, 10311.677734],
+            [3399.64624, 98.935638, 10292.298828],
+            [3429.836426, 102.578079, 10276.597656]
+        ],
+        "Enable_Spawn_ArtefactsWithoutDetectors": 0,
+        "Enable_Spawn_ArtefactsWithDetectors": 1,
+        "ArtefactsWithoutDetectors": {},
+        "ArtefactsWithDetectors": {
+            "MaxInOnePoint": 1,
+            "ArtefactsList": [
+                {
+                    "Classname_Detector": "Anomaly_Detector_Svarog",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_svet",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery3",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_AngelFool",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_BloodStone_New",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya2",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_CrustalThorn",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_SeaUrchin",
+                            "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_myaso",
+                            "Chance": 11
+                        }
+                    ]
+                },
+                {
+                    "Classname_Detector": "Anomaly_Detector_Medved",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_svet",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery3",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_AngelFool",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_BloodStone_New",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya2",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_CrustalThorn",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_SeaUrchin",
+                            "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_myaso",
+                            "Chance": 11
+                        }
+                    ]
+                },
+                {
+                    "Classname_Detector": "Anomaly_Detector_Otklik",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_svet",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery3",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_AngelFool",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_BloodStone_New",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya2",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_CrustalThorn",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_SeaUrchin",
+                            "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_myaso",
+                            "Chance": 11
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Unique_Group_Title": "Anomaly_Lomka 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
+        "Classname_Anomaly_Object": "Anomaly_Lomka",
+        "Chance_To_Spawn": 15,
+        "Positions_Spawn_Anomaly": [
+            [4785.649414, 136.349075, 12617.900391],
+            [4804.301758, 136.63739, 12601.951172],
+            [4828.302734, 137.10199, 12579.0],
+            [4810.503906, 137.053452, 12579.87793],
+            [4851.20752, 137.960953, 12542.144531],
+            [4889.202637, 138.252945, 12531.893555],
+            [5033.942871, 129.37381, 12385.012695],
+            [5076.009277, 125.343971, 12345.650391],
+            [5024.966309, 130.610245, 12402.360352],
+            [5041.62207, 128.313522, 12429.576172],
+            [5059.001953, 126.546562, 12401.686523],
+            [5115.936523, 124.215645, 12399.694336],
+            [5005.652344, 133.538223, 12386.920898],
+            [4298.170898, 107.171402, 12925.160156],
+            [4238.563477, 108.728638, 12922.807617],
+            [4246.193848, 106.432945, 12949.426758],
+            [3882.969727, 91.546616, 12873.925781],
+            [3862.030273, 89.270935, 12848.28418],
+            [3917.63208, 103.67099, 12936.636719],
+            [3509.662598, 104.985367, 12453.743164],
+            [3507.351807, 105.281799, 12442.439453],
+            [3368.41748, 109.342834, 12520.287109],
+            [3380.756348, 108.412643, 12528.712891],
+            [3388.094971, 110.004448, 12548.165039],
+            [3344.620117, 114.086288, 12242.03418],
+            [3350.443359, 115.296982, 12223.654297],
+            [3327.125488, 108.596962, 12242.087891],
+            [3326.588379, 107.891174, 12259.116211],
+            [3351.053467, 113.607887, 12269.791992],
+            [3227.209961, 114.63652, 12601.783203],
+            [3701.335449, 110.040001, 13079.208008],
+            [3696.853516, 110.040001, 13067.085938],
+            [3722.302734, 110.040001, 13067.432617],
+            [3774.366943, 110.040001, 13073.358398],
+            [4153.76416, 110.313614, 13136.704102],
+            [4168.382324, 110.353539, 13129.665039],
+            [4215.79541, 110.902649, 13406.097656],
+            [4217.621582, 113.619278, 13453.621094],
+            [4164.108887, 121.415825, 13680.200195],
+            [4160.305176, 121.154854, 13708.576172],
+            [4166.835938, 120.803314, 13750.043945],
+            [4162.068848, 120.246628, 13815.535156],
+            [4165.192383, 117.733284, 13886.96582],
+            [4174.349121, 108.186852, 14076.881836],
+            [4176.488281, 118.600372, 14655.467773],
+            [4177.48291, 118.591354, 14688.202148],
+            [4179.20166, 118.591362, 14719.584961],
+            [4133.957031, 118.563744, 14705.87207],
+            [4134.181641, 118.584839, 14739.365234],
+            [4081.92749, 116.340034, 14830.317383],
+            [4063.378174, 115.146133, 14850.963867],
+            [3461.834473, 94.222008, 14510.087891],
+            [3439.755615, 93.7342, 14525.301758],
+            [3405.292236, 90.834869, 14590.553711],
+            [3336.189209, 91.901947, 14640.251953],
+            [3272.057129, 89.605026, 14739.685547],
+            [3236.295166, 88.54483, 14805.592773],
+            [3220.336182, 88.709412, 14809.114258],
+            [3298.233398, 88.727356, 14895.518555],
+            [3297.26001, 90.1968, 14961.132813],
+            [3313.540771, 90.184898, 14963.295898],
+            [3443.430908, 96.846031, 15162.500977],
+            [3472.562012, 97.08931, 15213.166016],
+            [3441.004395, 98.105011, 15197.814453],
+            [3462.310791, 95.726067, 15165.169922],
+            [3415.630859, 98.302094, 15169.992188],
+            [3424.615723, 98.423103, 15217.06543],
+            [3101.317627, 95.683098, 15264.063477],
+            [3135.855225, 93.679634, 15341.298828],
+            [3090.608887, 96.244324, 15300.023438],
+            [3097.720947, 95.504356, 15242.401367],
+            [3045.804688, 97.815598, 15261.65332],
+            [3086.572266, 94.698364, 15204.079102],
+            [3012.776611, 97.196327, 15212.947266],
+            [3044.56665, 93.862068, 15161.575195],
+            [2975.704102, 99.042313, 15319.149414],
+            [2955.044678, 99.870163, 15335.046875],
+            [2909.875244, 100.380516, 15309.905273],
+            [2921.440918, 101.32457, 15342.90918]
+        ],
+        "Enable_Spawn_ArtefactsWithoutDetectors": 0,
+        "Enable_Spawn_ArtefactsWithDetectors": 1,
+        "ArtefactsWithoutDetectors": {},
+        "ArtefactsWithDetectors": {
+            "MaxInOnePoint": 1,
+            "ArtefactsList": [
+                {
+                    "Classname_Detector": "Anomaly_Detector_Svarog",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_svet",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery3",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_AngelFool",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_BloodStone_New",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya2",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_CrustalThorn",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_SeaUrchin",
+                            "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_myaso",
+                            "Chance": 11
+                        }
+                    ]
+                },
+                {
+                    "Classname_Detector": "Anomaly_Detector_Medved",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_svet",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery3",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_AngelFool",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_BloodStone_New",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya2",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_CrustalThorn",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_SeaUrchin",
+                            "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_myaso",
+                            "Chance": 11
+                        }
+                    ]
+                },
+                {
+                    "Classname_Detector": "Anomaly_Detector_Otklik",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_svet",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery3",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_AngelFool",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_BloodStone_New",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya2",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_CrustalThorn",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_SeaUrchin",
+                            "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_myaso",
+                            "Chance": 11
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Unique_Group_Title": "Anomaly_MlechniPut 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
+        "Classname_Anomaly_Object": "Anomaly_MlechniPut",
+        "Chance_To_Spawn": 20,
+        "Positions_Spawn_Anomaly": [
+            [4832.382324, 147.762848, 11980.072266],
+            [3219.9021, 102.433014, 12305.267578],
+            [4832.767578, 137.534775, 12559.261719],
+            [3212.920898, 102.453857, 12274.155273],
+            [4860.029297, 137.673035, 12554.500977],
+            [4207.946289, 109.41925, 13008.696289],
+            [4208.612793, 109.679474, 13046.03125],
+            [3211.187256, 102.206444, 12252.260742],
+            [4085.661133, 110.890167, 13004.970703],
+            [3965.662598, 90.147491, 12897.269531],
+            [3950.559326, 82.570396, 12810.320313],
+            [3518.419434, 138.57637, 12167.199219],
+            [3971.395752, 82.453941, 12762.31543],
+            [3837.389648, 89.453682, 12804.421875],
+            [3696.79126, 108.410141, 12752.125],
+            [3624.467041, 146.884537, 12152.748047],
+            [3550.19751, 109.098053, 12596.568359],
+            [3563.60791, 116.277199, 12549.072266],
+            [3345.236328, 105.778084, 12453.632813],
+            [3593.969727, 145.209671, 12170.194336],
+            [3151.26001, 100.137039, 11922.543945],
+            [3169.515625, 100.431915, 11951.421875],
+            [3118.546387, 102.351273, 11964.785156],
+            [3659.904053, 141.817612, 12059.414063],
+            [2669.449951, 113.242813, 12059.759766],
+            [2218.417236, 85.283966, 11924.327148],
+            [2182.842529, 83.276505, 11963.34668],
+            [3980.773438, 145.498444, 12099.189453],
+            [2307.954346, 85.295547, 11946.515625],
+            [2183.465576, 85.390015, 12008.767578],
+            [2143.802979, 96.924446, 10941.295898],
+            [2064.058594, 89.293068, 11964.74707],
+            [3995.57373, 145.234879, 12089.366211],
+            [4947.413086, 136.469788, 11229.882813],
+            [1939.437012, 99.325806, 11935.743164],
+            [1945.085938, 107.954369, 11889.856445],
+            [1991.409302, 109.735672, 11296.375],
+            [2030.869385, 109.92749, 11286.036133],
+            [2046.528076, 116.458969, 11260.581055],
+            [1949.361816, 101.399971, 11136.081055],
+            [1944.220825, 101.40004, 11178.848633],
+            [2003.334351, 106.873947, 11050.756836],
+            [1983.163208, 104.50676, 11083.235352],
+            [2011.068359, 102.842995, 10806.231445],
+            [1991.661743, 100.319679, 10833.984375],
+            [2058.411621, 104.841492, 10767.586914],
+            [2096.344971, 97.430649, 10841.923828],
+            [5014.668945, 129.080887, 11983.179688],
+            [2410.347656, 106.677505, 10752.760742],
+            [5101.925293, 113.122246, 12012.912109],
+            [2455.695068, 109.692535, 10737.841797],
+            [2350.981934, 103.049103, 10706.765625],
+            [2369.417969, 103.420334, 10766.306641],
+            [3974.551514, 145.382629, 12067.675781],
+            [2728.994629, 97.273247, 10434.598633],
+            [4012.682373, 144.699997, 12124.336914],
+            [2708.362061, 98.652176, 10465.27832],
+            [4031.839844, 144.699997, 12075.591797],
+            [2856.994385, 109.941376, 10330.650391],
+            [4174.526855, 144.699997, 12076.894531],
+            [2891.462158, 107.133659, 10356.425781],
+            [4234.211914, 144.699997, 12077.77832],
+            [3024.900146, 103.80188, 10433.836914],
+            [4209.208008, 144.699997, 12102.040039],
+            [3057.324219, 104.828522, 10495.370117],
+            [4208.63623, 144.699997, 12193.168945],
+            [3073.527344, 100.162384, 10353.191406],
+            [4217.562988, 143.005341, 12408.587891],
+            [4182.044434, 144.699997, 12393.438477],
+            [4218.619141, 136.843964, 12469.99707],
+            [4215.753418, 119.398766, 12586.142578],
+            [4330.169434, 146.237473, 12395.418945],
+            [4428.181152, 145.997238, 12388.868164],
+            [4509.589844, 139.477051, 12381.229492],
+            [4576.32959, 140.06781, 12359.861328],
+            [4600.484375, 141.045593, 12311.015625],
+            [4584.501465, 142.306412, 12217.810547],
+            [4696.716309, 146.268585, 12024.242188],
+            [4717.369629, 146.436462, 12020.376953],
+            [5097.987793, 123.698036, 12946.585938],
+            [4694.305664, 147.530899, 11968.595703],
+            [4951.534668, 132.821442, 12892.833008],
+            [4723.010254, 147.429672, 11974.833984],
+            [2956.220459, 100.595673, 12033.50293],
+            [2833.85376, 109.142395, 12213.112305],
+            [3035.84668, 105.630005, 12119.571289],
+            [2872.150879, 108.60128, 12151.756836],
+            [3048.630859, 105.629997, 12121.569336],
+            [3033.491943, 105.629997, 12141.681641],
+            [2828.748779, 109.582382, 12116.879883],
+            [3077.720215, 105.629997, 12123.658203],
+            [4781.284668, 146.549835, 12029.326172]
+        ],
+        "Enable_Spawn_ArtefactsWithoutDetectors": 0,
+        "Enable_Spawn_ArtefactsWithDetectors": 1,
+        "ArtefactsWithoutDetectors": {},
+        "ArtefactsWithDetectors": {
+            "MaxInOnePoint": 1,
+            "ArtefactsList": [
+                {
+                    "Classname_Detector": "Anomaly_Detector_Svarog",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_svet",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery3",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_AngelFool",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_BloodStone_New",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya2",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_CrustalThorn",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_SeaUrchin",
+                            "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_myaso",
+                            "Chance": 11
+                        }
+                    ]
+                },
+                {
+                    "Classname_Detector": "Anomaly_Detector_Medved",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_svet",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery3",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_AngelFool",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_BloodStone_New",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya2",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_CrustalThorn",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_SeaUrchin",
+                            "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_myaso",
+                            "Chance": 11
+                        }
+                    ]
+                },
+                {
+                    "Classname_Detector": "Anomaly_Detector_Otklik",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_svet",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery3",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_AngelFool",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_BloodStone_New",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya2",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_CrustalThorn",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_SeaUrchin",
+                            "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_myaso",
+                            "Chance": 11
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "Unique_Group_Title": "Anomaly_Roy 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
+        "Classname_Anomaly_Object": "Anomaly_Roy",
+        "Chance_To_Spawn": 20,
+        "Positions_Spawn_Anomaly": [
+            [4819.802734, 136.899811, 12588.989258],
+            [4841.564453, 137.665909, 12554.106445],
+            [4838.952148, 137.072296, 12581.780273],
+            [4789.428711, 136.620514, 12601.146484],
+            [4800.396973, 136.942551, 12584.387695],
+            [4820.902344, 136.376617, 12620.242188],
+            [4783.45752, 135.976334, 12643.392578],
+            [4771.407715, 136.246292, 12621.068359],
+            [5024.290039, 130.697968, 12411.775391],
+            [5006.241699, 132.981918, 12467.921875],
+            [5077.50293, 125.21405, 12438.458008],
+            [4959.345215, 139.703217, 12425.115234]
+        ],
+        "Enable_Spawn_ArtefactsWithoutDetectors": 0,
+        "Enable_Spawn_ArtefactsWithDetectors": 1,
+        "ArtefactsWithoutDetectors": {},
+        "ArtefactsWithDetectors": {
+            "MaxInOnePoint": 1,
+            "ArtefactsList": [
+                {
+                    "Classname_Detector": "Anomaly_Detector_Svarog",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_svet",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery3",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_AngelFool",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_BloodStone_New",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya2",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_CrustalThorn",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_SeaUrchin",
+                            "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_myaso",
+                            "Chance": 11
+                        }
+                    ]
+                },
+                {
+                    "Classname_Detector": "Anomaly_Detector_Medved",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_svet",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery3",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_AngelFool",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_BloodStone_New",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya2",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_CrustalThorn",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_SeaUrchin",
+                            "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_myaso",
+                            "Chance": 11
+                        }
+                    ]
+                },
+                {
+                    "Classname_Detector": "Anomaly_Detector_Otklik",
+                    "Detect_Artefacts_Settings": [
+                        {
+                            "Classname": "OOTS_ART_svet",
+                            "Chance": 2
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery3",
+                            "Chance": 3
+                        },
+                        {
+                            "Classname": "OOTS_ART_Battery",
+                            "Chance": 4
+                        },
+                        {
+                            "Classname": "OOTS_ART_AngelFool",
+                            "Chance": 5
+                        },
+                        {
+                            "Classname": "OOTS_ART_BloodStone_New",
+                            "Chance": 6
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plamya2",
+                            "Chance": 7
+                        },
+                        {
+                            "Classname": "OOTS_ART_CrustalThorn",
+                            "Chance": 8
+                        },
+                        {
+                            "Classname": "OOTS_ART_SeaUrchin",
+                            "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_myaso",
+                            "Chance": 11
+                        }
+                    ]
+                }
+            ]
         }
     }
 ]

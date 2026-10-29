@@ -12,7 +12,7 @@
     {
         "Unique_Group_Title": "Anomaly_Atom 4 тир опасности (Артефакты 1 тира - полезные)",
         "Classname_Anomaly_Object": "Anomaly_Atom",
-        "Chance_To_Spawn": 50,
+        "Chance_To_Spawn": 20,
         "Positions_Spawn_Anomaly": [],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
@@ -75,7 +75,7 @@
     {
         "Unique_Group_Title": "Anomaly_Electra 4 тир опасности (Артефакты 1 тира - полезные)",
         "Classname_Anomaly_Object": "Anomaly_Electra",
-        "Chance_To_Spawn": 75,
+        "Chance_To_Spawn": 20,
         "Positions_Spawn_Anomaly": [
             [7994.584961, 137.440002, 6171.600098],
             [7990.885742, 137.440002, 6186.848633],
@@ -268,7 +268,7 @@
     {
         "Unique_Group_Title": "Anomaly_Voronka 4 тир опасности (Артефакты 1 тира - полезные)",
         "Classname_Anomaly_Object": "Anomaly_Voronka",
-        "Chance_To_Spawn": 70,
+        "Chance_To_Spawn": 20,
         "Positions_Spawn_Anomaly": [
             [7853.229004, 137.440002, 6153.041992],
             [7934.729492, 137.440002, 6115.800293],
@@ -383,7 +383,7 @@
     {
         "Unique_Group_Title": "Anomaly_LinceAgr 4 тир опасности (Артефакты 1 тира - полезные)",
         "Classname_Anomaly_Object": "Anomaly_LinceAgr",
-        "Chance_To_Spawn": 50,
+        "Chance_To_Spawn": 20,
         "Positions_Spawn_Anomaly": [
             [7631.814941, 137.449997, 6480.672852],
             [7635.187988, 137.440002, 6539.812988],
@@ -438,7 +438,7 @@
     {
         "Unique_Group_Title": "Anomaly_Studen 3 тир опасности (артефакты 3 тира - не сильно вредят, но и не сильно помогают)",
         "Classname_Anomaly_Object": "Anomaly_Studen",
-        "Chance_To_Spawn": 65,
+        "Chance_To_Spawn": 20,
         "Positions_Spawn_Anomaly": [],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
@@ -654,7 +654,7 @@
     {
         "Unique_Group_Title": "Anomaly_Groza 3 тир опасности (артефакты 3 тира - не сильно вредят, но и не сильно помогают)",
         "Classname_Anomaly_Object": "Anomaly_Groza",
-        "Chance_To_Spawn": 50,
+        "Chance_To_Spawn": 25,
         "Positions_Spawn_Anomaly": [
             [5720.586914, 143.845459, 8222.445313],
             [5847.208008, 144.379486, 8050.819824],
@@ -931,7 +931,7 @@
     {
         "Unique_Group_Title": "Anomaly_Par 3 тир опасности (артефакты 3 тира - не сильно вредят, но и не сильно помогают)",
         "Classname_Anomaly_Object": "Anomaly_Par",
-        "Chance_To_Spawn": 50,
+        "Chance_To_Spawn": 15,
         "Positions_Spawn_Anomaly": [],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
@@ -1147,7 +1147,7 @@
     {
         "Unique_Group_Title": "Anomaly_DeadZone 3 тир опасности (артефакты 3 тира - не сильно вредят, но и не сильно помогают)",
         "Classname_Anomaly_Object": "Anomaly_DeadZone",
-        "Chance_To_Spawn": 45,
+        "Chance_To_Spawn": 10,
         "Positions_Spawn_Anomaly": [
             [7839.681641, 137.440002, 6136.28418],
             [7887.86377, 137.440002, 6154.393555],
@@ -1491,7 +1491,7 @@
     {
         "Unique_Group_Title": "Anomaly_Tramplin 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_Tramplin",
-        "Chance_To_Spawn": 80,
+        "Chance_To_Spawn": 20,
         "Positions_Spawn_Anomaly": [
             [6662.481445, 86.42569, 10178.560547],
             [5302.357422, 113.181915, 5271.239746],
@@ -1673,7 +1673,7 @@
     {
         "Unique_Group_Title": "Anomaly_Zharka 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_Zharka",
-        "Chance_To_Spawn": 70,
+        "Chance_To_Spawn": 15,
         "Positions_Spawn_Anomaly": [
             [7635.602051, 140.857376, 6945.498047],
             [7681.919922, 140.81012, 6920.32373],
@@ -1851,7 +1851,7 @@
     {
         "Unique_Group_Title": "Anomaly_Zastoy 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_Zastoy",
-        "Chance_To_Spawn": 50,
+        "Chance_To_Spawn": 20,
         "Positions_Spawn_Anomaly": [
             [7658.192383, 126.849434, 7651.885254],
             [7657.124512, 125.803917, 7685.286133],
@@ -2147,7 +2147,7 @@
     {
         "Unique_Group_Title": "Anomaly_Holera 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_Holera",
-        "Chance_To_Spawn": 50,
+        "Chance_To_Spawn": 15,
         "Positions_Spawn_Anomaly": [
             [8199.769531, 131.260101, 9268.357422],
             [8168.722168, 133.731766, 9333.836914],
@@ -2438,7 +2438,7 @@
     {
         "Unique_Group_Title": "Anomaly_Steklo 1 уровень опасности (артефакты 1 тира - Очень вредные)",
         "Classname_Anomaly_Object": "Anomaly_Steklo",
-        "Chance_To_Spawn": 85,
+        "Chance_To_Spawn": 15,
         "Positions_Spawn_Anomaly": [
             [8032.989746, 137.440002, 6179.143066],
             [8158.764648, 137.440002, 6518.918457],
@@ -2728,7 +2728,7 @@
     {
         "Unique_Group_Title": "Anomaly_EMP_Blast 1 уровень опасности (артефакты 1 тира - Очень вредные)",
         "Classname_Anomaly_Object": "Anomaly_EMP_Blast",
-        "Chance_To_Spawn": 75,
+        "Chance_To_Spawn": 15,
         "Positions_Spawn_Anomaly": [
             [7922.311523, 157.132858, 6512.950195],
             [7927.513184, 149.028351, 6458.460938],
@@ -2887,7 +2887,7 @@
     {
         "Unique_Group_Title": "Anomaly_FireIskra 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_FireIskra",
-        "Chance_To_Spawn": 60,
+        "Chance_To_Spawn": 20,
         "Positions_Spawn_Anomaly": [],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
@@ -3024,7 +3024,7 @@
     {
         "Unique_Group_Title": "Anomaly_FireShtorm 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_FireShtorm",
-        "Chance_To_Spawn": 60,
+        "Chance_To_Spawn": 15,
         "Positions_Spawn_Anomaly": [
             [5829.539063, 151.0448, 8089.066406],
             [5837.271973, 150.767822, 8083.904785],
@@ -3230,7 +3230,7 @@
     {
         "Unique_Group_Title": "Anomaly_Flash 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_Flash",
-        "Chance_To_Spawn": 60,
+        "Chance_To_Spawn": 25,
         "Positions_Spawn_Anomaly": [
             [7731.719727, 134.898071, 7784.811523],
             [5124.299805, 134.44458, 8765.013672],
@@ -3407,7 +3407,7 @@
     {
         "Unique_Group_Title": "Anomaly_Lomka 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_Lomka",
-        "Chance_To_Spawn": 60,
+        "Chance_To_Spawn": 15,
         "Positions_Spawn_Anomaly": [],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
@@ -3544,7 +3544,7 @@
     {
         "Unique_Group_Title": "Anomaly_MlechniPut 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_MlechniPut",
-        "Chance_To_Spawn": 50,
+        "Chance_To_Spawn": 20,
         "Positions_Spawn_Anomaly": [],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
@@ -3681,7 +3681,7 @@
     {
         "Unique_Group_Title": "Anomaly_Roy 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_Roy",
-        "Chance_To_Spawn": 70,
+        "Chance_To_Spawn": 20,
         "Positions_Spawn_Anomaly": [
             [6703.182129, 100.379974, 9776.458984],
             [6681.306152, 104.75679, 9744.696289],
