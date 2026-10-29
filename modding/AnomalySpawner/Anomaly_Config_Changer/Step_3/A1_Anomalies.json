@@ -12,7 +12,7 @@
     {
         "Unique_Group_Title": "Anomaly_Atom 4 тир опасности (Артефакты 1 тира - полезные)",
         "Classname_Anomaly_Object": "Anomaly_Atom",
-        "Chance_To_Spawn": 40,
+        "Chance_To_Spawn": 50,
         "Positions_Spawn_Anomaly": [],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
@@ -24,11 +24,11 @@
                     "Classname_Detector": "Anomaly_Detector_Svarog",
                     "Detect_Artefacts_Settings": [
                         {
-                            "Classname": "OOTS_ART_NanoCell",
+                            "Classname": "OOTS_ART_Plasma",
                             "Chance": 1
                         },
                         {
-                            "Classname": "OOTS_ART_Light",
+                            "Classname": "OOTS_ART_AngelFool",
                             "Chance": 1
                         },
                         {
@@ -40,11 +40,7 @@
                             "Chance": 1
                         },
                         {
-                            "Classname": "OOTS_ART_Oasis",
-                            "Chance": 1
-                        },
-                        {
-                            "Classname": "OOTS_ART_Flower",
+                            "Classname": "OOTS_ART_Sparkler",
                             "Chance": 1
                         },
                         {
@@ -52,7 +48,15 @@
                             "Chance": 1
                         },
                         {
-                            "Classname": "OOTS_ART_Monolit",
+                            "Classname": "OOTS_ART_Flower",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_Oasis",
+                            "Chance": 1
+                        },
+                        {
+                            "Classname": "OOTS_ART_Light",
                             "Chance": 1
                         },
                         {
@@ -60,7 +64,7 @@
                             "Chance": 1
                         },
                         {
-                            "Classname": "OOTS_ART_vivert",
+                            "Classname": "OOTS_ART_Glaz2",
                             "Chance": 1
                         }
                     ]
@@ -71,7 +75,7 @@
     {
         "Unique_Group_Title": "Anomaly_Electra 4 тир опасности (Артефакты 1 тира - полезные)",
         "Classname_Anomaly_Object": "Anomaly_Electra",
-        "Chance_To_Spawn": 13,
+        "Chance_To_Spawn": 75,
         "Positions_Spawn_Anomaly": [
             [2190.727783, 37.839996, 4846.556641],
             [2066.637695, 28.898163, 4018.272217],
@@ -160,7 +164,7 @@
     {
         "Unique_Group_Title": "Anomaly_Voronka 4 тир опасности (Артефакты 1 тира - полезные)",
         "Classname_Anomaly_Object": "Anomaly_Voronka",
-        "Chance_To_Spawn": 20,
+        "Chance_To_Spawn": 70,
         "Positions_Spawn_Anomaly": [
             [2848.788086, 121.755981, 2880.998535]
         ],
@@ -209,7 +213,7 @@
     {
         "Unique_Group_Title": "Anomaly_LinceAgr 4 тир опасности (Артефакты 1 тира - полезные)",
         "Classname_Anomaly_Object": "Anomaly_LinceAgr",
-        "Chance_To_Spawn": 20,
+        "Chance_To_Spawn": 50,
         "Positions_Spawn_Anomaly": [
             [1985.943237, 29.185738, 4881.838867],
             [4996.321777, 114.290001, 4053.309326],
@@ -279,7 +283,7 @@
     {
         "Unique_Group_Title": "Anomaly_Studen 3 тир опасности (артефакты 3 тира - не сильно вредят, но и не сильно помогают)",
         "Classname_Anomaly_Object": "Anomaly_Studen",
-        "Chance_To_Spawn": 8,
+        "Chance_To_Spawn": 65,
         "Positions_Spawn_Anomaly": [
             [2447.022949, 81.906586, 2164.222168],
             [2413.717285, 80.176254, 2212.957764],
@@ -651,7 +655,7 @@
     {
         "Unique_Group_Title": "Anomaly_Groza 3 тир опасности (артефакты 3 тира - не сильно вредят, но и не сильно помогают)",
         "Classname_Anomaly_Object": "Anomaly_Groza",
-        "Chance_To_Spawn": 20,
+        "Chance_To_Spawn": 50,
         "Positions_Spawn_Anomaly": [
             [5091.519531, 119.096649, 4168.652344],
             [4987.782715, 117.573212, 4175.336426],
@@ -898,7 +902,7 @@
     {
         "Unique_Group_Title": "Anomaly_Par 3 тир опасности (артефакты 3 тира - не сильно вредят, но и не сильно помогают)",
         "Classname_Anomaly_Object": "Anomaly_Par",
-        "Chance_To_Spawn": 8,
+        "Chance_To_Spawn": 50,
         "Positions_Spawn_Anomaly": [
             [5006.996094, 92.084694, 1940.781372],
             [5071.907227, 92.488998, 1957.530151],
@@ -1139,7 +1143,7 @@
     {
         "Unique_Group_Title": "Anomaly_DeadZone 3 тир опасности (артефакты 3 тира - не сильно вредят, но и не сильно помогают)",
         "Classname_Anomaly_Object": "Anomaly_DeadZone",
-        "Chance_To_Spawn": 20,
+        "Chance_To_Spawn": 45,
         "Positions_Spawn_Anomaly": [
             [3656.278076, 107.489998, 2415.191162],
             [3634.198486, 107.48999, 2430.425537],
@@ -1385,7 +1389,7 @@
     {
         "Unique_Group_Title": "Anomaly_Tramplin 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_Tramplin",
-        "Chance_To_Spawn": 13,
+        "Chance_To_Spawn": 80,
         "Positions_Spawn_Anomaly": [
             [2439.641846, 82.209999, 2312.114258],
             [2433.851074, 82.549835, 2278.89502],
@@ -1449,10 +1453,6 @@
                             "Chance": 4
                         },
                         {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
-                        },
-                        {
                             "Classname": "OOTS_ART_BloodStone_New",
                             "Chance": 6
                         },
@@ -1488,10 +1488,6 @@
                         {
                             "Classname": "OOTS_ART_Battery",
                             "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
                         },
                         {
                             "Classname": "OOTS_ART_BloodStone_New",
@@ -1531,10 +1527,6 @@
                             "Chance": 3.0
                         },
                         {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 4.0
-                        },
-                        {
                             "Classname": "OOTS_ART_BloodStone_New",
                             "Chance": 5.0
                         },
@@ -1562,7 +1554,7 @@
     {
         "Unique_Group_Title": "Anomaly_Zharka 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_Zharka",
-        "Chance_To_Spawn": 14,
+        "Chance_To_Spawn": 70,
         "Positions_Spawn_Anomaly": [
             [4963.572266, 114.290009, 4054.877197],
             [4987.255859, 118.082298, 4063.046387],
@@ -1597,10 +1589,6 @@
                             "Chance": 4
                         },
                         {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
-                        },
-                        {
                             "Classname": "OOTS_ART_BloodStone_New",
                             "Chance": 6
                         },
@@ -1636,10 +1624,6 @@
                         {
                             "Classname": "OOTS_ART_Battery",
                             "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
                         },
                         {
                             "Classname": "OOTS_ART_BloodStone_New",
@@ -1679,10 +1663,6 @@
                             "Chance": 4
                         },
                         {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
-                        },
-                        {
                             "Classname": "OOTS_ART_BloodStone_New",
                             "Chance": 6
                         },
@@ -1710,7 +1690,7 @@
     {
         "Unique_Group_Title": "Anomaly_Zastoy 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_Zastoy",
-        "Chance_To_Spawn": 14,
+        "Chance_To_Spawn": 50,
         "Positions_Spawn_Anomaly": [
             [4113.166992, 98.916016, 2202.292236],
             [3620.043701, 93.389313, 2649.844482],
@@ -1741,10 +1721,6 @@
                             "Chance": 4
                         },
                         {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
-                        },
-                        {
                             "Classname": "OOTS_ART_BloodStone_New",
                             "Chance": 6
                         },
@@ -1780,10 +1756,6 @@
                         {
                             "Classname": "OOTS_ART_Battery",
                             "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
                         },
                         {
                             "Classname": "OOTS_ART_BloodStone_New",
@@ -1823,10 +1795,6 @@
                             "Chance": 4
                         },
                         {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
-                        },
-                        {
                             "Classname": "OOTS_ART_BloodStone_New",
                             "Chance": 6
                         },
@@ -1854,7 +1822,7 @@
     {
         "Unique_Group_Title": "Anomaly_Holera 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_Holera",
-        "Chance_To_Spawn": 11,
+        "Chance_To_Spawn": 50,
         "Positions_Spawn_Anomaly": [
             [1421.284668, 47.88002, 4988.376465],
             [1514.090088, 46.896858, 4941.962402],
@@ -1933,10 +1901,6 @@
                             "Chance": 4
                         },
                         {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
-                        },
-                        {
                             "Classname": "OOTS_ART_BloodStone_New",
                             "Chance": 6
                         },
@@ -1972,10 +1936,6 @@
                         {
                             "Classname": "OOTS_ART_Battery",
                             "Chance": 4
-                        },
-                        {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
                         },
                         {
                             "Classname": "OOTS_ART_BloodStone_New",
@@ -2015,10 +1975,6 @@
                             "Chance": 4
                         },
                         {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
-                        },
-                        {
                             "Classname": "OOTS_ART_BloodStone_New",
                             "Chance": 6
                         },
@@ -2046,7 +2002,7 @@
     {
         "Unique_Group_Title": "Anomaly_Snow 1 уровень опасности (артефакты 1 тира - Очень вредные)",
         "Classname_Anomaly_Object": "Anomaly_Snow",
-        "Chance_To_Spawn": 20,
+        "Chance_To_Spawn": 0,
         "Positions_Spawn_Anomaly": [],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
@@ -2171,7 +2127,7 @@
     {
         "Unique_Group_Title": "Anomaly_Steklo 1 уровень опасности (артефакты 1 тира - Очень вредные)",
         "Classname_Anomaly_Object": "Anomaly_Steklo",
-        "Chance_To_Spawn": 20,
+        "Chance_To_Spawn": 85,
         "Positions_Spawn_Anomaly": [
             [2721.41333, 83.529999, 2022.787842],
             [2448.984375, 37.840004, 4786.419434],
@@ -2221,10 +2177,6 @@
                             "Chance": 6
                         },
                         {
-                            "Classname": "OOTS_ART_Plasma",
-                            "Chance": 7
-                        },
-                        {
                             "Classname": "OOTS_ART_snejinka",
                             "Chance": 8
                         },
@@ -2235,6 +2187,10 @@
                         {
                             "Classname": "OOTS_ART_DevelHert",
                             "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_NanoCell",
+                            "Chance": 3
                         }
                     ]
                 },
@@ -2258,10 +2214,6 @@
                             "Chance": 6
                         },
                         {
-                            "Classname": "OOTS_ART_Plasma",
-                            "Chance": 7
-                        },
-                        {
                             "Classname": "OOTS_ART_snejinka",
                             "Chance": 8
                         },
@@ -2272,6 +2224,10 @@
                         {
                             "Classname": "OOTS_ART_DevelHert",
                             "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_NanoCell",
+                            "Chance": 3
                         }
                     ]
                 },
@@ -2295,10 +2251,6 @@
                             "Chance": 6
                         },
                         {
-                            "Classname": "OOTS_ART_Plasma",
-                            "Chance": 7
-                        },
-                        {
                             "Classname": "OOTS_ART_snejinka",
                             "Chance": 8
                         },
@@ -2309,6 +2261,10 @@
                         {
                             "Classname": "OOTS_ART_DevelHert",
                             "Chance": 9
+                        },
+                        {
+                            "Classname": "OOTS_ART_NanoCell",
+                            "Chance": 3
                         }
                     ]
                 }
@@ -2318,7 +2274,7 @@
     {
         "Unique_Group_Title": "Anomaly_EMP_Blast 1 уровень опасности (артефакты 1 тира - Очень вредные)",
         "Classname_Anomaly_Object": "Anomaly_EMP_Blast",
-        "Chance_To_Spawn": 20,
+        "Chance_To_Spawn": 75,
         "Positions_Spawn_Anomaly": [
             [2320.144531, 37.968475, 4851.873535],
             [2467.46167, 37.84, 4773.710938],
@@ -2474,7 +2430,7 @@
     {
         "Unique_Group_Title": "Anomaly_Lince (ЛЕЧИТ HP ИГРОКА - Полезная аномалия В НЕЙ НЕТ АРТЕФАКТОВ)",
         "Classname_Anomaly_Object": "Anomaly_Lince",
-        "Chance_To_Spawn": 30,
+        "Chance_To_Spawn": 50,
         "Positions_Spawn_Anomaly": [
             [4955.770508, 138.34111, 3217.385254],
             [4936.344238, 138.464203, 3207.312256],
@@ -2496,7 +2452,7 @@
     {
         "Unique_Group_Title": "Anomaly_FireIskra 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_FireIskra",
-        "Chance_To_Spawn": 20,
+        "Chance_To_Spawn": 60,
         "Positions_Spawn_Anomaly": [],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
@@ -2520,10 +2476,6 @@
                             "Chance": 4
                         },
                         {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
-                        },
-                        {
                             "Classname": "OOTS_ART_BloodStone_New",
                             "Chance": 6
                         },
@@ -2542,6 +2494,10 @@
                         {
                             "Classname": "OOTS_ART_myaso",
                             "Chance": 11
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plasma",
+                            "Chance": 2
                         }
                     ]
                 },
@@ -2561,10 +2517,6 @@
                             "Chance": 4
                         },
                         {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
-                        },
-                        {
                             "Classname": "OOTS_ART_BloodStone_New",
                             "Chance": 6
                         },
@@ -2583,6 +2535,10 @@
                         {
                             "Classname": "OOTS_ART_myaso",
                             "Chance": 11
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plasma",
+                            "Chance": 2
                         }
                     ]
                 },
@@ -2602,10 +2558,6 @@
                             "Chance": 4
                         },
                         {
-                            "Classname": "OOTS_ART_AngelFool",
-                            "Chance": 5
-                        },
-                        {
                             "Classname": "OOTS_ART_BloodStone_New",
                             "Chance": 6
                         },
@@ -2624,6 +2576,10 @@
                         {
                             "Classname": "OOTS_ART_myaso",
                             "Chance": 11
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plasma",
+                            "Chance": 2
                         }
                     ]
                 }
@@ -2633,7 +2589,7 @@
     {
         "Unique_Group_Title": "Anomaly_FireShtorm 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_FireShtorm",
-        "Chance_To_Spawn": 20,
+        "Chance_To_Spawn": 60,
         "Positions_Spawn_Anomaly": [],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
@@ -2679,6 +2635,10 @@
                         {
                             "Classname": "OOTS_ART_myaso",
                             "Chance": 11
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plasma",
+                            "Chance": 2
                         }
                     ]
                 },
@@ -2720,6 +2680,10 @@
                         {
                             "Classname": "OOTS_ART_myaso",
                             "Chance": 11
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plasma",
+                            "Chance": 2
                         }
                     ]
                 },
@@ -2761,6 +2725,10 @@
                         {
                             "Classname": "OOTS_ART_myaso",
                             "Chance": 11
+                        },
+                        {
+                            "Classname": "OOTS_ART_Plasma",
+                            "Chance": 2
                         }
                     ]
                 }
@@ -2770,7 +2738,7 @@
     {
         "Unique_Group_Title": "Anomaly_Flash 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_Flash",
-        "Chance_To_Spawn": 20,
+        "Chance_To_Spawn": 60,
         "Positions_Spawn_Anomaly": [
             [4857.03125, 92.702469, 2111.214844],
             [4844.031738, 92.753586, 2126.992188],
@@ -2941,7 +2909,7 @@
     {
         "Unique_Group_Title": "Anomaly_Lomka 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_Lomka",
-        "Chance_To_Spawn": 20,
+        "Chance_To_Spawn": 60,
         "Positions_Spawn_Anomaly": [],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
@@ -3078,7 +3046,7 @@
     {
         "Unique_Group_Title": "Anomaly_MlechniPut 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_MlechniPut",
-        "Chance_To_Spawn": 20,
+        "Chance_To_Spawn": 50,
         "Positions_Spawn_Anomaly": [],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
@@ -3215,7 +3183,7 @@
     {
         "Unique_Group_Title": "Anomaly_Roy 2 уровень опасности (артефакты 2 тира - наносят вред или сильно уменьшают полезные параметры)",
         "Classname_Anomaly_Object": "Anomaly_Roy",
-        "Chance_To_Spawn": 20,
+        "Chance_To_Spawn": 70,
         "Positions_Spawn_Anomaly": [],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
