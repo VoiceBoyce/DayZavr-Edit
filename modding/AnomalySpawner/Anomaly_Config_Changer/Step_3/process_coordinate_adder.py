@@ -13,7 +13,8 @@ def parse_anomaly_txt(file_path):
 
     for line in lines:
         # Ищем строки с названием аномалии
-        anomaly_match = re.match(r'Аномалия (?P<name>\w+):', line)
+        # Пробел перед двоеточием допустим: "Аномалия Holera :" (из имени файла с пробелом)
+        anomaly_match = re.match(r'Аномалия\s+(?P<name>\w+)\s*:', line)
         if anomaly_match:
             current_anomaly = f"Anomaly_{anomaly_match.group('name')}"
             anomalies[current_anomaly] = []

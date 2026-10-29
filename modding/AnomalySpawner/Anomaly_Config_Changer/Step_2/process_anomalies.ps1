@@ -63,7 +63,8 @@ $anomalyFiles = Get-ChildItem -Path .\* -Include Anomaly_*.txt
 # Обрабатываем каждый файл с аномалиями
 foreach ($file in $anomalyFiles) {
     $content = Get-Content -Path $file.FullName
-    $anomalyName = $file.BaseName -replace "Anomaly_", ""
+    # Trim: в именах файлов бывает пробел перед расширением ("Anomaly_Holera .txt")
+    $anomalyName = ($file.BaseName -replace "Anomaly_", "").Trim()
 
     Write-Host "Обработка файла: $($file.Name)"
 
