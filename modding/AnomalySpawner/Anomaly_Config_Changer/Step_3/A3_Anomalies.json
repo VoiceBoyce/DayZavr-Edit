@@ -1621,11 +1621,7 @@
         "Unique_Group_Title": "Anomaly_Snow 1 уровень опасности ( артефакты 1 тира - Очень вредные ) / Всего 150 / Отспавнено: 30 / Шанс выпадения артефакта 50",
         "Classname_Anomaly_Object": "Anomaly_Snow",
         "Chance_To_Spawn": 20,
-        "Positions_Spawn_Anomaly": [
-            [12537.717773, 8.237099, 2400.668213],
-            [12549.212891, 5.762793, 2426.674561],
-            [12593.164063, 4.418183, 2424.918701]
-        ],
+        "Positions_Spawn_Anomaly": [],
         "Enable_Spawn_ArtefactsWithoutDetectors": 0,
         "Enable_Spawn_ArtefactsWithDetectors": 1,
         "ArtefactsWithoutDetectors": {},
