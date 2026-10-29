@@ -1,0 +1,40 @@
+{
+    "interval": 10900,
+    "sigma": 0,
+    "warning": 5,
+    "lifetime": 3,
+    "damagetime": 5,
+    "damagevalue": 5,
+    "unconscioustime": 3.5,
+    "psistorm" : 
+    {
+        "chance" : 0.3,
+        "damagetime" : 10.0,
+        "damagevalue" : 5
+    },
+    "alertitems": [
+    ],
+    "monolithitems": [
+    	
+    ],
+    "protectitems" : 
+    [
+    ],
+    "enablehidezonemessage": 0,
+    "usehidezonenotification": 0,
+    "hidezonenotificationtitle": "Сообщение",
+    "hidezonenotificationicon": "set:ccgui_enforce image:MapRadar",
+    "hidezonenotificationshowtime": 3.0,
+    "hidezoneentrymessage": "Выглядит как надежное укрытие",
+    "hidezoneleavemessage": "Вы покинули укрытие",
+    "hidezoneisunderroofs": 1,
+    "hidezoneswhenactive": 0,
+    "hidezones": 
+	[],
+    "enablepsitowers" : 1,
+	"psihelmets": ["OOTS_item_PsyHelmet", "OOTS_Helmet_Exo"],
+	"psitowers" : 
+	[
+		
+	] 
+}
