@@ -1,0 +1,4500 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<types>
+  <type name="Boat_01_Orange">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Boat_01_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Boat_01_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Boat_01_Camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="OffroadHatchback">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="OffroadHatchback_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="OffroadHatchback_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CivilianSedan">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CivilianSedan_Wine">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CivilianSedan_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Hatchback_02">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Hatchback_02_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Hatchback_02_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sedan_02">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sedan_02_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sedan_02_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Truck_01_Covered">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Truck_01_Covered_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Truck_01_Covered_Orange">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Offroad_02">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GMC_BOSS_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GMC_BOSS_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GMC_BOSS_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GMC_BOSS_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GMC_BOSS_White_Lomik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GMC_BOSS_White_Mengele">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Tahoe_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Tahoe_White_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Tahoe_LightBlue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Tahoe_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Tahoe_Black_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Tahoe_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Tahoe_Brown">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Tahoe_DarkBlue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Tahoe_DarkBlue_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Tahoe_Green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Tahoe_Pink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Tahoe_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="MotorHome_Apo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="MotorHome_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="MotorHome_Rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="MotorHome_GreenCamo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="MotorHome_GreenCamo_POLGRAF">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Porsche_911RWB_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Porsche_911RWB_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Porsche_911RWB_Pink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Porsche_911RWB_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Porsche_911RWB_Orange">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Porsche_911RWB_Green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Porsche_911RWB_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RAPTOR">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RAPTOR_grey_AKAME">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_Batmobile">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_Batmobile_Partizan">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_Batmobile_mcam">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_buggy_starii">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_buggy_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_buggy_yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_Def110">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_Def110_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_Def110_yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_Def110_white_rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_Def110_rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_Def110_camogreen">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_DM917">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_DM917_vedmak519">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_DM917_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_DM917_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_HMMR2">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_HMMR2_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_HMMR2_beige">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_HMMR2_Friend">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_HMMR2_automatic">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_HMMR2_black_automatic">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_HMMR2_beige_automatic">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_M3GTR">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_M3GTR_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_M3GTR_Dudez">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_RezvaniH">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_RezvaniH_gray">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_RezvaniH_camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_RezvaniH_Mr_Hedin">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_RezvaniT">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_RezvaniT_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_RezvaniT_Haksli">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_Tacoma">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_Tacoma_Alcatraz">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_Tacoma_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_Tacoma_gray">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_Tacoma_Pink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_VWAtlas_Dudez">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_VWAtlas_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_VWAtlas_mcam">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_VWAtlas_black_ATCLB_Dudez">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_VWAtlas_mcam_ATCLB_Dudez">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_VWAtlas_camogreen">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Tahoe_Black_FeaGor">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Tahoe_Black_KARA">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Tahoe_Black_lal0ve">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Tahoe_Black_PeasDos">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Tahoe_Black_Vladimir">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Tahoe_Pink_izzi">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Tahoe_Red_Mimiso">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Tahoe_White_Skidrow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_Black_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_camoblack">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_camopurple">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_camogreen">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_camogreen_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_camowhite">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_white_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_BOSS">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_pink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_camored">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_camopink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_camoblue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_Black_Akella">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_camoblack_Lady_di">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_camoblack_Maks">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_camoblack_MartaXXL">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_camoblack_Tartar">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_camoblue_EgipetskayaSila">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_camogreen_CHOPSN">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_camogreen_jstepler">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_camogreen_kiZZary">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_camogreen_Serega">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_camopink_DJIN">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ToyotaRunner_white_DovitelbBomjey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="dodgechargerhellcat_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="dodgechargerhellcat_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="dodgechargerhellcat_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="dodgechargerhellcat_lightblue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="dodgechargerhellcat_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="dodgechargerhellcat_pink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="dodgechargerhellcat_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="dodgechargerhellcat_green_GreenS">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="dodgechargerhellcat_green_Shuriges">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="dodgechargerhellcat_red_Akula">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="dodgechargerhellcat_red_KOTIK">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_Green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_camoblue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_Teal">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_camoblack">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_camowhite">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_camored">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_camogreen">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_camonuke">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_Yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_black_EVGEN">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_Black_Vladimir">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_Blue_Kamish">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_camoblack_Deda">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_camoblack_Morfin">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_camoblue_Booz">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_camoblue_MrHedin">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_camogreen_terexa">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_camonuke_Baksik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_camonuke_Dimarik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_camonuke_Kepka">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_camonuke_KOMI11">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_camonuke_Mercvud">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_camowhite_Bomj">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeRam_BOSS_Yellow_blinchik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="EGER">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="F1_Pickup">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="F1_Pickup_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="F1_Pickup_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ21_Volga">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ21_Volga_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ21_Volga_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ66bort">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ66">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_13_Chaika">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_13_Chaika_automatic">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_13_Chaika_black_rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_13_Chaika_black_rust_automatic">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_13_Chaika_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_13_Chaika_white_automatic">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_13_Chaika_white_rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_13_Chaika_white_rust_automatic">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_3110_volga">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_3110_volga_taxi">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_3110_volga_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_3110_volga_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_33081">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_33081_camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Gaz_53RF">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Gaz_53RF_petrol_truck">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_66">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_66_camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_66_zima_camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_66_kuzov">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_66_kuzov_camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_66_kuzov_zima_camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_69_rus">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_69_rus_yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_69_rus_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_M20">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_M20_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_M20_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_M20_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_M20_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ_M20_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Gelenvagen">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Gerph_Zil130">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Gerph_Zil130_Green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Gerph_Zil130_legacy">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Gerph_Zil130_Green_legacy">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="H4_TRAKOL39294_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="H4_TRAKOL39294_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="H4_TRAKOL39294_Green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="H4_TRAKOL39294_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="H4_TRAKOL39294_Yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="H4_TRAKOL39294_Skin1">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="H4_UAZ452A_Medical">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="H4_UAZ452A_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="H4_UAZ452A_Green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="H4_UAZ452A_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="H4_UAZ452A_Police">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="HAMMER_H1">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ij_2715_RF">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ij_2715_RF_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ij_2715_RF_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ij_2715_RF_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="VAZ21032_Medic">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="VAZ21032_Beige">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="VAZ21032_Green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="VAZ21032_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="VAZ21032_Camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="VAZ21032_Police">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="VAZ21032_Flower">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="VAZ21032_Anime">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Interceptor">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Jeep_Wrangler">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_4310RUS">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_4310RUS_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_4310RUS_orange">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_4310RUS_kung">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_4310RUS_kung_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_4310RUS_kung_orange">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_4310RUS_kung_oon">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_65228">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_65228_camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_old">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_camo_zoom">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_camo_ASK">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_smertnik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_marabunta">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_winter">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_camo2">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_TYK_TYK">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_camo_Partizan">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_camo_mta93">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_camo_ABRAUDURSO">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_camo2_Pablo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_camo_El_Capone">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_camo_ELITE">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_camo_Fantom">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_camo_Hunter">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_camo_lal0ve">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_camo_Rocket">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_camo_Serega">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_camo_Volkodav">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_DimiaN">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_GRY">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_naim">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_old_Galim">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_old_Medoed">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_old_raduga">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_Shumbar">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kamaz_tayfunR_winter_Tvoyyasher">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_Typhoon">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kart">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kart_Orange">
+    <lifetime>345600</lifetime>
+  </type>
+  <type name="kraz_255B">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="kraz_255B_kung">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kraz_6322">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Niva2329">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Niva2329_camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="LandCruiser">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Land_Rover_Defender_110">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Land_Rover_Defender_110_Green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Land_Rover_Defender_110_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Land_Rover_Defender_110_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="LIAZ_677RF">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="LIAZ_677RF_camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="LUAZ_969">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="LUAZ_969_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="LUAZ_969_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="LUAZ_969_orang">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="m4_tractor">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="m4_tractor_usa">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="m4_tractor_winter">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="mad_truck_RUS">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="W140_byKIRM4N">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Mercedes_G4_W31">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="EGER_Pixel">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="EGER_Kamo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="EGER_Green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ66bort_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ66_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="GAZ66_Nastik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Gelenvagen_carbon">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Gelenvagen_flecktarn">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Gelenvagen_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Gelenvagen_white_camo1">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Gelenvagen_white_camo2">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Gelenvagen_white_camo2_buksaf">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Gelenvagen_carbon_pay_day_z">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Gelenvagen_white_camo1_vetalek">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Gelenvagen_white_camo1_stalker">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Gelenvagen_white_camo2_Moonshiner">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="HAMMER_H1_dirty">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="HAMMER_H1_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="HAMMER_H1_black_rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="HAMMER_H1_camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="HAMMER_H1_rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="HAMMER_H1_WINTER">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Interceptor_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Interceptor_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Interceptor_yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Interceptor_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Interceptor_Sonic">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Jeep_Wrangler_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Jeep_Wrangler_kamo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Jeep_Wrangler_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Jeep_Wrangler_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Jeep_Wrangler_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Jeep_Wrangler_Yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_flora">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_pixel">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_winter">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_old">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_soili">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_black_ma4o">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_flora">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_pixel">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_old">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_winter">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_pixel_tayfun">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_black_Aliaksanddr">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_pixel_vitok">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_winter_lasomat">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_Typhoon_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_Typhoon_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_Typhoon_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_Typhoon_rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_Typhoon_flecktarn">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_Typhoon_Dozer">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_Typhoon_Murza">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_Typhoon_Grimlock">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_Typhoon_Miron">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_Typhoon_Artchaos">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_Typhoon_HmH">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kraz_6322_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kraz_6322_Black2">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kraz_6322_rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kraz_6322_kamo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kraz_Fiona">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kraz_Fiona_Desert">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kraz_Fiona_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kraz_Fiona_Camouflage">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kraz_Fiona_Pixel">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kraz_Fiona_Rescue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="LandCruiser_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="LandCruiser_kamo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="LandCruiser_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="LandCruiser_skul">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="LandCruiser_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="LandCruiser_kamo2">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="moskvich_407">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="moskvich_407_double_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="moskvich_407_double_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="moskvich_407_grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="MotorHome_Apo_Boltun">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="MotorHome_Apo_mirovoi">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="MUSTANG">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="MUSTANG_rust_AUTOCLUB_VangSTA">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Nissan_GTR_Limit">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Nissan_GTR_Limit_Alien4566">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Nissan_GTR_Limit_Vladimir">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Niva_028">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Niva_028_trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Niva_028_Alteslager">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Niva_028_Boroda">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Niva_028_Salvatorik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="NivaPickup">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Oshkosh">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_green_Codegren">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_rust_raduga">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_white_aisen">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_white_Asmodey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_white_dragonofthevoid">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_woodland_Artei">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_woodland_Sanya96">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_woodland_SlavaKF">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZprison">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZprison_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZprison_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZprison_yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RAPTOR_green_lexus">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RAPTOR_green_lexus_1">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RAPTOR_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RAPTOR_red_Divan">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_EC135">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_EC135_BlackCamo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_Ka26">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_LittleBird">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_Mi2">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_Mi2_Hornet">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_R22">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_S76">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_S76_WoodlandCamo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_UH1H">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="savage_ural06">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="savage_ural06_ckungom">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="savage_ural06_ckungom_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="savage_ural06_ckungom_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="savage_ural06_bortovoi">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="savage_ural06_bortovoi_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="savage_ural06_bortovoi_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="silvia_s15">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="silvia_s15_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="silvia_s15_grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="silvia_s15_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="silvia_s15_khaki">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="silvia_s15_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_Boxer">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_Boxer_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_Boxer_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_Boxer_mim161">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_Def110_black_vedmak519">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_Def110_black_Walker">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_F750">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_F750_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_F750_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_F750_Green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_F750_Yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_MRAPMP">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_MRAPMP_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_MRAPMP_vedmak519">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_T96APC">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_T96APC_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_T96APC_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_T96APC_Alii">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_UralNext">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_UralNext_yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_UralNext_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_UralNext_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_UralNext_police">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_UralNext_police_deadok">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_AM_Victor">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_AM_Victor_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_AM_Victor_Mustard">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_AM_Victor_Dark_Green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_AM_Victor_Hype">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_AM_Victor_Sunder">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_AM_Victor_AUTOCLUB">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_AM_Victor_Black_AUTOCLUB">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_AM_Victor_Dark_Green_AUTOCLUB">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_Ferrari_SF_90">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_Ferrari_SF_90_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_Ferrari_SF_90_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_Ferrari_SF_90_Sunder">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_Ferrari_SF_90_Hyper_Beast">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_Ferrari_SF_90_AUTOCLUB">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_Ferrari_SF_90_Black_AUTOCLUB">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_Ferrari_SF_90_Red_AUTOCLUB">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_Ferrari_SF_90_ArT17">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_Lada_Priora">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_Lada_Priora_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_Lada_Priora_Gold">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_Lada_Priora_Sanya">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_Lada_Priora_Tatarin">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_Lada_Priora_Boogeyman">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_Lada_Priora_AUTOCLUB">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_Lada_Priora_Black_AUTOCLUB">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Sunder_Lada_Priora_Gold_AUTOCLUB">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ469_offroad">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ469_offroad_Gugan013">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_27722_mchs">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_27722_ambulancia">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_27722_ambulancia2">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_27722_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_27722_yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_27722_brown">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_27722_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_3163">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_3163_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_3163_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_3163_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_3163_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_3163_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_3163_gamekeeper">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_3163_Police">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_3163_MP">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_3163_MHS">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_3163_Fire">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_3163_Desert">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_3163_Ambulance">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_3163_AGS">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_33094">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_33094_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_33094_gray">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_3909">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_3909_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_469_Hunter">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Uaz_hunter_offroad_6x6">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Uaz_hunter_offroad_6x6_welder">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Uaz_hunter_offroad_6x6_N1NT3ND0">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Uaz_hunter_offroad_6x6_markovka">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Uaz_hunter_offroad_6x6_Medoed">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Uaz_hunter_offroad_6x6_Rohn">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Uaz_hunter_offroad_6x6_Ron">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Uaz_hunter_offroad_6x6_Smartx">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Uaz_hunter_offroad_6x6_ucakoB">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Uaz_hunter_offroad_6x6_vakutagin">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_Patrot_Pikap">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_Patrot_Pikap_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_Patrot_Pikap_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_Patrot_Pikap_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_Patrot_Pikap_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ_Patrot_Pikap_camo_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="URAL_375_1964">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="URAL_375_1964_zima">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="URAL_4320">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="URAL_4320_Kung">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="vaz_2106_RF">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="vaz_2106_RF_light_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="vaz_2106_RF_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="vaz_2106_RF_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="vaz_2106_RF_wine">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="vaz_2106_RF_yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="vaz_2106_milicia">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="VBL">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Willys_MB">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZAZ_965">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZAZ_965_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZAZ_965_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZAZ_965_bk">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZAZ_968">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZAZ_968_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZAZ_968_yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZAZ_968_milicia">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZAZ_968M">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZAZ_968M_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZAZ_968M_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZIL130">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZIL130Kung">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZIL130_REFILL">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZIL130_REPAIR">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZIL_131">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZIL_131_tent">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZiS5_Benzovoz">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZiS5_kung">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="A_Charger">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="A_Charger_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="A_Charger_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="A_Charger_yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="A_Charger_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_Charger_Friend">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="AEC_Matador">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="AEC_Matador_camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="artillery_tractor">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="artillery_tractor_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="artillery_tractor_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="artillery_tractor_camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="artillery_tractor_kung">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="artillery_tractor_kung_camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="artillery_tractor_kung_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="artillery_tractor_kung_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="AZLK_2141RF">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="AZLK_2141RF_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="AZLK_2141RF_beige">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="AZLK_2141RF_Lettuce">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="AZLK_2141RF_milicia">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="AZLK_2141RF_milicia_PG">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="azov_4220">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="azov_4220_Daedra63rus">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_bmw_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_bmw_yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_bmw_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_bmw_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_bmw_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_escalade_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_escalade_purple">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_escalade_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_escalade_tan">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_escalade_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_escalade_yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_escalade_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_escalade_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Bastard_Rover_stock">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Bastard_Rover_skin1">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Bastard_Rover_skin2">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Bastard_Rover_tan">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Bastard_w123_stock">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Bastard_w123_skin1">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Bastard_w123_skin2">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Bastard_w123_skin3">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Bastard_w123_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BMW_Wagon_RUS">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BMW_Wagon_RUS_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BMW_Wagon_RUS_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BMW_Wagon_RUS_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BMW_X5">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BRDM2_RF">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BRDM2_RF_camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BRDM2_RF_winter">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BTR_80">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BTR_80_camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BTR_80_camo2">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BTR_80_rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BTR_80_P">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BTR_80_P_camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BTR_80_P_camo2">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BTR_80_P_rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BTR_80_P_Ali">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BTR_80_P_camo_Medoed">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BTR_80_P_El_Capone">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BTR_80_P_Tkachev">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BTR">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BTR_Sekyra">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Camper">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Bronco6x6">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Bronco6x6_Yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Bronco6x6_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Bronco6x6_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Bronco6x6_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Bronco6x6_Brown">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Bronco6x6_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Bronco6x6_Pink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Bronco6x6_Rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Bronco6x6_Camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Bronco6x6_Arlekino">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Bronco6x6_Camo_moroz774">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Bronco6x6_Rochevnik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_BroncoMonster">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_BroncoMonster_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_BroncoMonster_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_BroncoMonster_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_BroncoMonster_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_BroncoMonster_Brown">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_BroncoMonster_Forged">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_BroncoMonster_Rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_Yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_Brown">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_Pink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_Forged">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_Rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_Rust_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_Rust_Pink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_Rust_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_BERKYT">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_FMayweatherTMT">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_Grey_67_RUS">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_Grey_Bars">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_Joker">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_Polkovnik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_Rust_Black_Jakobs">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_Rust_Pink_AK47_Gambit">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_Rust_Pink_Evgen">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_serenka030">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_Sub51">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_G63Brabus_White_Bygagaha">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Generic_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Generic_Raider_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Generic_Raider_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Generic_Raider_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Generic_Raider_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Generic_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Generic_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Generic_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_HuracanLW">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_HuracanLW_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_HuracanLW_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_HuracanLW_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_HuracanLW_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_HuracanLW_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_HuracanLW_Yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_HuracanLW_Police">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_HuracanLW_Black_Art17">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_HuracanLW_Black_MrHedin">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_HuracanLW_Police_Andreyka">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_HuracanLW_Police_Sanitar">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_LX570ES">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_LX570ES_Yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_LX570ES_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_LX570ES_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_LX570ES_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_LX570ES_Brown">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_LX570ES_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_LX570ES_Pink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_LX570ES_Sticker">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_LX570ES_Yellow_MiM161">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_LX570ES_Sticker_Kassiel">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_LX570ES_Black_Eshik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_LX570ES_Eshik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_LX570ES_Black_Gator">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_LX570ES_x777am">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_M8Manhart">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_M8Manhart_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_M8Manhart_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_M8Manhart_Purple">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_M8Manhart_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_M8Manhart_Lucifer">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Mark2">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Mark2_Yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Mark2_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Mark2_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Mark2_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Mark2_Brown">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Mark2_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Mark2_Pink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Mark2_Body">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Mark2_Body_Deda">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Mark2_GuessWho">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Mark2_Pornostar">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Mark2_Retry">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Mark2_White_dobryak">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MercS63Mansory">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MercS63Mansory_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MercS63Mansory_Pink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MercS63Mansory_Yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MercS63Mansory_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MercS63Mansory_oper_ypolnomo4ennij">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_NoGun">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_NoGun_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_NoGun_White_icecoffee">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_konstanting">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_777VOR777">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_xVOLKOLAKx">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_Adrenalin">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_El_Capone">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_Pink_Evgeny">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_Hari">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_Mark">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_moroz774">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_Moryachok">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_MUxA">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_NoGun_Pablito">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_NoGun_rippo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_NoGun_White_El_Capone">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_NoGun_White_FloydMayweather">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_NoGun_White_Myxa">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_SENTINEL">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_TETYAKLAVA">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_Tofy">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_White_BrazzerS">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_White_FALL1N1">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_White_Xellas">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_PorscheCTGT">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_PorscheCTGT_Yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_PorscheCTGT_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_PorscheCTGT_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_PorscheCTGT_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_PorscheCTGT_Brown">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_PorscheCTGT_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_PorscheCTGT_Pink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_PorscheCTGT_Grey_Palych">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_PorscheCTGT_Artei">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_PorscheCTGT_tiRex">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_R34Hycade">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_R34Hycade_Brown">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_R34Hycade_Orange">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_R34Hycade_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_R34Hycade_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_R34Hycade_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_R34Hycade_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_R34Hycade_Yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_R34Hycade_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_R34Hycade_Pink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_R34Hycade_Sticker">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_R34Hycade_777BOP777">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_R34Hycade_Anarchist">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_R34Hycade_Black_zuzya39">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_R34Hycade_dragonofthevoid">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_R34Hycade_Kepka">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_R34Hycade_Liberty">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_R34Hycade_Marin">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_R34Hycade_Ninja_777_38_">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_R34Hycade_White_SHELBY">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_R34Hycade_White_West">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Brown">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Pink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Police">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Andy">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Art17">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_BadSanta">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Blatta">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Grey_Muxalych">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Korka">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Police_El_Capone">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Police_Finik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Police_LATIH">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Police_Mendurio">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Police_NagisaShiota">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Police_Shumbar">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Red_Grizlik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Red_Lihoi29">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Red_Mr_Hedin">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Red_nake">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Red_Zeleniy">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Rust_Akella">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Rust_Askeladd">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Rust_Deda">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Rust_Kolovrat">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Rust_raduga">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Rust_Ural">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_Rust_ybil">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_STRANIK">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_TETYAKLAVA">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Raptor_WXY">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Supra">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Supra_Yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Supra_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Supra_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Supra_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Supra_Brown">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Supra_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Supra_Pink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_SWATSUV">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_SWATSUV_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_SWATSUV_Green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_SWATSUV_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_SWATSUV_Rust_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_SWATSUV_Rust_Green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_SWATSUV_Rust_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_SWATSUV_Black_aleksandr08">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_SWATSUV_Black_WETER">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_SWATSUV_Grey_Olmaris">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_SWATSUV_Rust_Green_ELITE">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Raider">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Pink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Rust_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Rust_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Rust_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Rust_Pink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Raider_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Raider_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Raider_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Raider_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Raider_Pink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Raider_Rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Raider_Rust_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Raider_Rust_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Raider_Rust_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Raider_Rust_Pink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Avantre89">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Bars">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Black_Artyr">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Black_DRAG">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Black_Nikolaych">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Black_YAGA">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Blue_PornoStar">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_denis">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_evgenii">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Raider_Black_lyntik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Raider_Rust_Black_Kosmos">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Raider_Taverbuh">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Red_Barakuda">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Rust_Black_Alii">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Rust_Black_Hallerik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Rust_Black_Mangust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Rust_Volkodav">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Serega">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_sharko">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Raider_Rust_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Raider_Rust_Black_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Rust_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_Tundra_Rust_Black_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Chevrolet_Camaro">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Chevrolet_Camaro_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Chevrolet_Camaro_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Chevrolet_Camaro_yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Chevrolet_Camaro_kamo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Chevrolet_Camaro_pink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Chevrolet_Camaro_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Chevrolet_Camaro_police">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Bentley_Continental_GT_Conv_20">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Bentley_Continental_GT_Conv_20_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Bentley_Continental_GT_Conv_20_Green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Bentley_Continental_GT_Conv_20_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Bentley_Continental_GT_Conv_20_Yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Bentley_Continental_GT_Conv_20_Green_Loc666">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Bentley_Continental_GT_Conv_20_Katrin">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_525i_E34">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_525i_E34_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_525i_E34_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_525i_E34_Purple">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_525i_E34_Green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_525i_E34_Beater">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_525i_E34_Beater_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_M5_E60">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_M5_E60_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_M5_E60_Chrome">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_M5_F90_CS">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_M5_F90_CS_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_M5_F90_CS_Green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_M5_F90_CS_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_M5_F90_CS_Sooup">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_M5_F90_CS_Gold">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_M5_F90_CS_Monster">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_M5_F90_CS_Error">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_M5_F90_CS_Anime">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_M5_F90_CS_Pipiu">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BMW_M5_Sochi_PornHub">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BMW_M5_Sunder">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_M8_F92_Comp">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_M8_F92_Comp_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_M8_F92_Comp_Sacred">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_M8_F92_Comp_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_M8_F92_Comp_sapeha">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_M8_F92_Comp_sapeha_valkira">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_M8_F92_Comp_Black_ma4o">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_M8_F92_Comp_sapeha_Pornostar">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_X5_E53">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_X5_E53_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_X5_E53_Ghosts">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_X5_E53_MaksRnD">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_X5_E53_proshliy">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_X5_E53_svarshik59">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_X5_E53_Sergey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_X5_E53_Anni">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_X5_E53_Blue_SCF2010">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_X5_E53_Blue_Terexa">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_X5_E53_Boroda">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_X5_E53_cocain">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_X5_E53_deman">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_X5_E53_Lexx">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_X5_E53_mOntana1982">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_X5_E53_Morfin">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_BMW_X5_E53_SP">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Chevrolet_Tahoe_08">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Chevrolet_Tahoe_08_Police">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Chevrolet_Tahoe_08_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Chevrolet_Tahoe_08_Camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Chevrolet_Tahoe_08_Wild">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Ford_Bronco_Offroad_86">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Ford_Bronco_Offroad_86_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_3309">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_3309_Cargo_Green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Black_SEREGAT">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_MP">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Black_ZNXR">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Camo_Proshliy">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_CamoBlack">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Winter">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Tan">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Skull">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Rofl">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_CamoBlack_greml1n90">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Black_Alex">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Camo_STICphc">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Skull_pipka">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Alone">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Black_SHAMS">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Bober">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Camo_Haygrim">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_CamoBlack_Tyr1st">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Noga">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_OverThrash">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Skull_1mb1key">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Skull_Vermuth">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Tan_Monnoks">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Tan_Tkachev">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_GAZ_Tigr_M_Tan_Volkodav">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Hennessey_Velociraptor_6x6">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Hennessey_Velociraptor_6x6_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Hennessey_Velociraptor_6x6_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Hennessey_Velociraptor_6x6_KD">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Hennessey_Velociraptor_6x6_NHY">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Hennessey_Velociraptor_6x6_Tan">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Hennessey_Velociraptor_6x6_REW">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Hennessey_Velociraptor_6x6_EvaR">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Hennessey_Velociraptor_6x6_TEST">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Hennessey_Velociraptor_6x6_luck124">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Hennessey_Velociraptor_6x6_Tan_despod">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Hennessey_Velociraptor_6x6_hackie">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Hennessey_Velociraptor_6x6_camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Hennessey_Velociraptor_6x6_BartMarley">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_HMMWV_M1151">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_HMMWV_M1151_BureniePopki">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_HMMWV_M1151_Eshik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_HMMWV_M1151_raduga">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Insurgent_SUV">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Insurgent_SUV_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Insurgent_SUV_Winter">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Insurgent_SUV_Tan">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Insurgent_SUV_Soldier">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Insurgent_SUV_Umbrella">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Insurgent_SUV_Termos">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Insurgent_SUV_Darkness">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Insurgent_SUV_HardLike">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Insurgent_SUV_Rocky">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Insurgent_SUV_Djek">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Insurgent_SUV_IIIYM">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Insurgent_SUV_Boom">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Insurgent_SUV_Black_Mangust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Insurgent_SUV_Black_Maric">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Insurgent_SUV_Black_PUMPURUM">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Insurgent_SUV_Bugimen">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Insurgent_SUV_Darkness_Arbat">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Insurgent_SUV_IIIYM_Cocain">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Insurgent_SUV_Tan_Tesak">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Insurgent_SUV_Winter_Lomik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_International_4700_SWAT">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_International_4700_SWAT_Tan">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_International_4700_SWAT_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Kawasaki_Mule_SX_4x4">
+    <lifetime>1814400</lifetime>
+  </type>
+  <type name="CrSk_Lamborghini_Huracan_Perf">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Lamborghini_Huracan_Perf_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Lamborghini_Huracan_MELISSA">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Lamborghini_Huracan_Perf_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Lamborghini_Huracan_Perf_Orange">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Lamborghini_Huracan_Perf_Purple">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Lamborghini_Huracan_Perf_Yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Lamborghini_Huracan_Perf_Black_Aliaksanddr">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Lamborghini_Huracan_Perf_BratSerg">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Lamborghini_Huracan_Perf_Feagor">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Lamborghini_Urus">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Lamborghini_Urus_Pink">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Lamborghini_Urus_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Lamborghini_Urus_Basota">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Lamborghini_Urus_HardLike">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Lamborghini_Urus_Fazer">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Lamborghini_Urus_Wild">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Lamborghini_Urus_Boom">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Land_Rover_RR_Sport_12">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Land_Rover_RR_Sport_12_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Land_Rover_RR_Sport_12_Black_fraerok">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Land_Rover_RR_Sport_12_gerr">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Land_Rover_RR_Sport_12_Sector">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mazda_RX7_FD3S">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mazda_RX7_FD3S_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mazda_RX7_FD3S_Black_ask">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mazda_RX7_FD3S_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mazda_RX7_FD3S_Black_qwil">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mazda_RX7_FD3S_Black_DoctorZoldberg">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mazda_RX7_FD3S_Black_qwil_1">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_AMG_GT63S">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_AMG_GT63S_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_AMG_GT63S_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_AMG_GT63S_Fear">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_AMG_GT63S_Sapeha">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_AMG_GT63S_Sapeha_VeryBad">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_AMG_GT63S_Sapeha_pay_day_z">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_AMG_GT63S_Blue_GuessWho">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_AMG_GT63S_Blue_Oleg2024">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_AMG_GT63S_Moroz134">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_AMG_GT63S_PornoStar">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_AMG_GT63S_SEKTOR">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G63_AMG_19">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G63_AMG_19_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G63_AMG_19_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G63_AMG_19_Camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G63_AMG_19_Uspenskiy">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G63_AMG_19_Alex">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G63_AMG_19_rus0057">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G63_AMG_19_korka">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G63_AMG_19_Camo_dimbim">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G63_AMG_19_Camo_Arbuz">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G63_AMG_19_fynj">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G63_AMG_19_week3y">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G63_AMG_6x6_17">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G63_AMG_6x6_17_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G63_AMG_6x6_17_Camo2">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G63_AMG_6x6_17_Camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G63_AMG_6x6_17_Camo_KPA">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G65_AMG_13">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G65_AMG_13_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G65_AMG_13_Camo2">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G65_AMG_13_Povar">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G65_AMG_13_KlanWars">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G65_AMG_Hamann">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G65_AMG_Hamann_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G65_AMG_Hamann_Green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G65_AMG_Hamann_Suetolog">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_G65_AMG_Hamann_GrimLock">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_V250d_19">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_V250d_19_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_V250d_19_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_V250d_19_White2">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_V250d_19_Black2">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_V250d_19_CSN">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_V250d_19_SMP">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_V250d_19_SMP2">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_V250d_19_Police">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_V250d_19_3000S">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_V250d_19_White2_greml1n90">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_V250d_19_Black_lasomat">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_V250d_19_CSN_Qvadr">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_V250d_19_FSB">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_V250d_19_morphine">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mercedes_V250d_19_Vladimir">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mitsubishi_Lancer_Evo_X">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mitsubishi_Lancer_Evo_X_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mitsubishi_Lancer_Evo_X_EVAR">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Mitsubishi_Lancer_Evo_X_GREEZ">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Nissan_Skyline_GTR_BNR34">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Nissan_Skyline_GTR_BNR34_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Nissan_Skyline_GTR_BNR34_Blue_Kepka">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Nissan_Skyline_GTR_BNR34_kanektik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Oshkosh_M_ATV">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Oshkosh_M_ATV_HA">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Oshkosh_M_ATV_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Oshkosh_M_ATV_SWAT">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Oshkosh_M_ATV_HA_Winter">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Pitbull_VX">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Pitbull_VX_Khaki">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Pitbull_VX_Tan">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Pitbull_VX_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Pitbull_VX_lost">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Pitbull_VX_Fugas">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Pitbull_VX_Fugasik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Pitbull_VX_Grey_PornoStar">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Pitbull_VX_Kelt">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Pitbull_VX_Khaki_Alberto">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Pitbull_VX_Khaki_Deda">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Pitbull_VX_Khaki_Gans">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Pitbull_VX_Khaki_Killzetsu">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Pitbull_VX_Khaki_Kolobok">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Pitbull_VX_OneSun">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Pitbull_VX_Tan_Tkachev">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Porsche_911_GT2RS_18">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Porsche_911_GT2RS_18_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Porsche_911_GT2RS_18_Black_ask">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Porsche_911_GT2RS_18_Black_nomed">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Porsche_911_GT2RS_18_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Porsche_911_GT2RS_18_PAYDAYZ">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Porsche_911_GT2RS_18_Black_Alcatraz">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Porsche_911_GT2RS_18_Blitz">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Porsche_911_GT2RS_18_Blue_Deda">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Porsche_911_GT2RS_18_Blue_Podpivas">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Porsche_911_GT2RS_18_EvaR">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Punisher_4x4">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Punisher_4x4_barabashka1">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Punisher_4x4_ASK">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Punisher_4x4_Green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Punisher_4x4_Sand">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Punisher_4x4_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Punisher_4x4_Peace">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Punisher_4x4_gator">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Punisher_4x4_Aran">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Punisher_4x4_Slava">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Khaki">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Tan">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Clean">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Clean_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Clean_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Clean_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Clean_Khaki">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Clean_Tan">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Clean_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Clean_Yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_Hennessey_Mammoth_900">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_Hennessey_Mammoth_900_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_Hennessey_Mammoth_900_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_Hennessey_Mammoth_900_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_Hennessey_Mammoth_900_Khaki">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_Hennessey_Mammoth_900_Tan">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_Hennessey_Mammoth_900_Clean">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_Hennessey_Mammoth_900_Clean_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_Hennessey_Mammoth_900_Clean_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_Hennessey_Mammoth_900_Clean_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_Hennessey_Mammoth_900_Clean_Khaki">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_Hennessey_Mammoth_900_Clean_Tan">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_Hennessey_Mammoth_900_Clean_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_Hennessey_Mammoth_900_Clean_Yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Clean_Khaki_negaren">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_Hennessey_Mammoth_900_Khaki_Lost">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_Hennessey_Mammoth_900_Clean_Black_Evgen">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_Hennessey_Mammoth_900_Clean_Black_Pozetiv4ik_204">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_Hennessey_Mammoth_900_Clean_Grey_Antonio77732">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_Hennessey_Mammoth_900_Clean_Yellow_Sergey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Clean_Khaki_Z_PAY_DAY_Z">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Clean_Red_SlavaKF">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Black_BugsBunny">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Blue_Exceder">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Clean_Black_Gerts">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Clean_Black_pivko">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Clean_Black_watfro24">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_1500_TRX_Khaki_HiroAssasin">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_RAM_Hennessey_Mammoth_900_Clean_Black_Kochevnik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Rolls_Royce_Cullinan">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Rolls_Royce_Cullinan_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Rolls_Royce_Cullinan_BlackBadge">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Rolls_Royce_Cullinan_BlackBadge_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Rolls_Royce_Cullinan_Space">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Rolls_Royce_Cullinan_Lightning">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Rolls_Royce_Cullinan_Sincama">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Rolls_Royce_Phantom_18">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Rolls_Royce_Phantom_18_BlackBadge">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Rolls_Royce_Phantom_18_BlackBadge_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Rolls_Royce_Phantom_18_BlackBadge_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Rolls_Royce_Phantom_18_BlackGrey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Rolls_Royce_Phantom_18_WhiteRed">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Rolls_Royce_Phantom_18_GreenBlack">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Rolls_Royce_Wraith">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Rolls_Royce_Wraith_OrangeTop">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Rolls_Royce_Wraith_BlueTop">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Camry_XV70_18">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Camry_XV70_18_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Camry_XV70_18_Khann">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Camry_XV70_18_Black_Z_PAY_DAY_Z">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Land_Cruiser_200_16">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Land_Cruiser_200_16_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Land_Cruiser_200_16_Khann">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Land_Cruiser_200_16_Khann_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Land_Cruiser_200_16_MTR">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Land_Cruiser_200_16_MTR_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Land_Cruiser_200_16_MTR_White_BOGOMOL">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Land_Cruiser_200_16_MTR_White_OrangeJS">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Land_Cruiser_200_16_Khann_stas">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Land_Cruiser_200_16_Khann_34RUS">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Land_Cruiser_200_16_Khann_PAY_DAY">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Land_Cruiser_svarshik59">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Land_Cruiser_200_16_Khann_lagovazz">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Land_Cruiser_200_16_Lost">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Land_Cruiser_200_16_Khann_inotu">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Land_Cruiser_200_16_akulenok">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Land_Cruiser_200_16_SP">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Land_Cruiser_200_16_Sumrak23">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Land_Cruiser_200_16_Den_Pir">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Land_Cruiser_200_16_Ruby">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Toyota_Land_Cruiser_svarshik59_1">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Typhoon_K_53949">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Typhoon_K_53949_khaki">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Typhoon_K_53949_Tan">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Typhoon_K_53949_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Typhoon_K_53949_FroDo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_Typhoon_K_53949_Grey_Viiy">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_BlueWhite">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Sand">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_OpenTop">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_OpenTop_BlueWhite">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_OpenTop_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_OpenTop_Sand">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_OpenTop_Camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_OpenTop_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_OpenTop_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_OpenTop_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Expedition">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Expedition_BlueWhite">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Expedition_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Expedition_Sand">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Expedition_Camo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Expedition_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Expedition_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Expedition_Grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_OpenTop_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_OpenTop_BlueWhite_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_OpenTop_White_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_OpenTop_Sand_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_OpenTop_Camo_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_OpenTop_Red_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_OpenTop_Blue_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_OpenTop_Grey_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Expedition_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Expedition_BlueWhite_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Expedition_White_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Expedition_Sand_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Expedition_Camo_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Expedition_Red_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Expedition_Blue_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Expedition_Grey_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_VAZ_2107">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_VAZ_2107_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_VAZ_2107_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_VAZ_2107_Beige">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_VAZ_2107_AWD">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_VAZ_2107_AWD_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_VAZ_2107_AWD_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_VAZ_2107_AWD_Beige">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_VAZ_2107_RWD">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_VAZ_2107_RWD_White">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_VAZ_2107_RWD_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_VAZ_2107_RWD_Beige">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSkUAZ_469_Expedition_Askeladd">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSkUAZ_469_Expedition_Eger">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSkUAZ_469_Expedition_Minor">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSkUAZ_469_Expedition_PastorNapas">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSkUAZ_469_Expedition_Professor">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSkUAZ_469_Expedition_Tkachev">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSkUAZ_469_Expedition_White_Otmychka">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Dodge_Challenger_1970">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Dodge_Challenger_1970_Denis">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Dodge_Challenger_1970_dragonofthevoid">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Dodge_Challenger_1970_Strannik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="dodge_rust_Z">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="dodge_rust_Z_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="dodge_rust_Z_mpg">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="dodge_rust_Z_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="dodge_rust_Z_Trader">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeChallengerDemon">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeChallengerDemon_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeChallengerDemon_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeChallengerDemon_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeChallengerDemon_khaki">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeChallengerDemon_khaki_Chillcrusher">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeChallengerDemon_chrome">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeChallengerDemon_camo1">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeChallengerDemon_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeChallengerDemon_orange">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeChallengerDemon_purple">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeChallengerDemon_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeChallengerDemon_silver">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeChallengerDemon_yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeChallengerDemon_lime">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeChallengerDemon_gold">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeChallengerDemon_Gene">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="DodgeChallengerDemon_black_Sector">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="dodgechargerhellcat_black_TEREXA">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Jiboh">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_black_Borov">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_black_Dragon">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_black_Graf">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_black_Shumbar">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_black_Tesak2">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_flora_Killzetsu">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_old_PolGraf">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_pixel_PeasDos">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_pixel_PornoStar">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_winter_Aurus">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_4350_Kung_winter_Lasomat_1">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kamaz_Typhoon_black_MrBanny">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kraz_6322_Black_Rocket">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Kraz_6322_rust_Tkachev">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BMW_X5_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BMW_X5_flecktarn">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BMW_X5_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BMW_X5_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BMW_X5_Greg77">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BTR_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BTR_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BTR_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="BTR_kamo_1">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Camper_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Camper_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="MUSTANG_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="MUSTANG_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="MUSTANG_rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="MUSTANG_nastik">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="NivaPickup_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="NivaPickup_kamo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="NivaPickup_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="NivaPickup_skul">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="NivaPickup_kamo2">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Oshkosh_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Oshkosh_grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Oshkosh_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Oshkosh_pixel">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Oshkosh_flecktarn">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Oshkosh_GriMLoCk">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_woodland">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_woodland_leiiia">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_woodland_kivi161">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_flecktarn">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_Shved">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_IceCoffee">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_black_starii">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_flecktarn_Moonshiner">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RAPTOR_grey">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RAPTOR_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RAPTOR_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RAPTOR_body_fire">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RAPTOR_body_old">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RAPTOR_DJeniDJo_body_old">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RAPTOR_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RAPTOR_winter">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RAPTOR_Gvardeec">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RAPTOR_VanyaAbu">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RAPTOR_body_old_leiiia">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ469_offroad_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ469_offroad_Yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="UAZ469_offroad_Red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="URAL_4320_rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="URAL_4320_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="URAL_4320_yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="URAL_4320_kamo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="URAL_4320_Kung_rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="URAL_4320_Kung_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="URAL_4320_Kung_yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="URAL_4320_Kung_kamo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZIL130_rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZIL130_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZIL130_green_rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZIL130Kung_rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZIL130Kung_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="ZIL130Kung_green_rust">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="MUSTANG_AUTOCLUB">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="MUSTANG_white_AUTOCLUB">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="MUSTANG_red_AUTOCLUB">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="MUSTANG_rust_AUTOCLUB">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_black_Alexander">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_black_CrazyTapok">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="PAZ_BANDIT_black_EVEREST">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_Apache">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_Apache_Desert">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_AS350">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_Blackhawk">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_Blackhawk_Cargo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_Blackhawk_Budhawk">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_Bo105m">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_Bo105m_blackcamo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_CH47">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_CH53e">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_NoGun_BugsBunny">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_NoGun_Fantom">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_NoGun_FireFly">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_NoGun_GIKON45">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_NoGun_Giwi_krpi4">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_NoGun_Nookie">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Candy_MustFrank_NoGun_White_MrHedin">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_lx470_stock">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_lx470_skin1">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_lx470_skin2">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_lx470_skin3">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_lx470_skin4">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_suv_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_suv_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_suv_white">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_suv_orange">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_suv_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_suv_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_t4_stock">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_t4_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_t4_yellow">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_t4_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Chevrolet_Camaro_Alcatraz">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Chevrolet_Camaro_black_Kurd">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Expedition_Camo_Azme96">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Expedition_Camo_Shuriges">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="CrSk_UAZ_469_Expedition_Camo_Xtreamal">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_dnepr_green">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_dnepr_black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_dnepr_blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_dnepr_red">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_dnepr_brown">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_dnepr_soviettrash">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_dnepr_green_speed">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_dnepr_black_speed">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_dnepr_blue_speed">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_dnepr_red_speed">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_dnepr_brown_speed">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="bastard_dnepr_soviettrash_speed">
+    <lifetime>3888000</lifetime>
+  </type>
+</types>

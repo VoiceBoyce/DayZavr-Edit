@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<types>
+
+		<!-- Лодки модовые и ванильные -->
+		
+		
+		
+  <type name="SP_motorboat">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_motorboat_green">
+    <lifetime>3888000</lifetime>
+  </type>  
+  		
+	
+		
+  <type name="SP_motorboat_speed">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="SP_motorboat_green_speed">
+    <lifetime>3888000</lifetime>
+  </type>
+  
+
+
+  
+  <type name="Boat_01_Orange">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Boat_01_Blue">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Boat_01_Black">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="Boat_01_Camo">
+    <lifetime>3888000</lifetime>
+  </type>
+
+
+
+</types>

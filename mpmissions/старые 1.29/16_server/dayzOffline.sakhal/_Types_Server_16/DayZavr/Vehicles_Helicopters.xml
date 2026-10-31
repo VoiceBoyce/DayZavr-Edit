@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<types>
+  
+  <!-- верты добавленные к 1.29 -->
+  
+	<type name="RFFSHeli_Apache">
+	<lifetime>3888000</lifetime>
+	</type>
+	
+	<type name="RFFSHeli_Apache_Desert">
+	<lifetime>3888000</lifetime>
+	</type>
+	
+	<type name="RFFSHeli_AS350">
+	<lifetime>3888000</lifetime>
+	</type>
+	
+	<type name="RFFSHeli_CH47">
+	<lifetime>3888000</lifetime>
+	</type>
+	
+	<type name="RFFSHeli_EC135">
+	<lifetime>3888000</lifetime>
+	</type>
+	
+	<type name="RFFSHeli_EC135_BlackCamo">
+	<lifetime>3888000</lifetime>
+	</type>
+	
+	<type name="RFFSHeli_R22">
+	<lifetime>3888000</lifetime>
+	</type>
+	
+	<type name="RFFSHeli_S76">
+	<lifetime>3888000</lifetime>
+	</type>
+	
+	<type name="RFFSHeli_S76_WoodlandCamo">
+	<lifetime>3888000</lifetime>
+	</type> 
+  
+  
+  
+  <type name="RFFSHeli_LittleBird">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_CH53e">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_Bo105m">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_Bo105m_blackcamo">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_Ka26">
+    <lifetime>3888000</lifetime>
+  </type>
+  
+  <!-- BlackHawk -->
+  <type name="RFFSHeli_Blackhawk">
+    <lifetime>3888000</lifetime>
+  </type> 
+  <type name="RFFSHeli_Blackhawk_Budhawk">
+    <lifetime>3888000</lifetime>
+  </type> 
+  
+  <type name="RFFSHeli_Mi2">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_Mi2_Hornet">
+    <lifetime>3888000</lifetime>
+  </type>
+  <type name="RFFSHeli_UH1H">
+    <lifetime>3888000</lifetime>
+  </type>
+ 
+ 
+ 
+ 
+ 
+  
+</types>
+
+
+
+
+
+
+
+

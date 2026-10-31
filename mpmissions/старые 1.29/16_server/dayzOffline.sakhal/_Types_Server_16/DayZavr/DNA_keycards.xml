@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<types>
+
+	<type name="DNA_KeyCard_Red">
+        <nominal>1</nominal>
+        <lifetime>604800</lifetime>
+        <restock>86400</restock>
+        <min>1</min>
+        <quantmin>10</quantmin>
+        <quantmax>10</quantmax>
+        <cost>100</cost>
+        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+        <category name="weapons"/>
+        <usage name="Military"/>
+		<value name="Tier4"/>
+    </type> 	
+	<type name="DNA_KeyCard_Purple">
+        <nominal>1</nominal>
+        <lifetime>604800</lifetime>
+        <restock>86400</restock>
+        <min>1</min>
+        <quantmin>10</quantmin>
+        <quantmax>10</quantmax>
+        <cost>100</cost>
+        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+        <category name="weapons"/>
+        <usage name="Military"/>
+		<value name="Tier3"/>
+    </type>		
+	<type name="DNA_KeyCard_Blue">
+        <nominal>1</nominal>
+        <lifetime>604800</lifetime>
+        <restock>86400</restock>
+        <min>1</min>
+        <quantmin>10</quantmin>
+        <quantmax>10</quantmax>
+        <cost>100</cost>
+        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+        <category name="weapons"/>
+        <usage name="Military"/>
+		<value name="Tier2"/>
+    </type>		
+
+	<type name="DNA_KeyCard_Green">
+        <nominal>1</nominal>
+        <lifetime>604800</lifetime>
+        <restock>86400</restock>
+        <min>1</min>
+        <quantmin>10</quantmin>
+        <quantmax>10</quantmax>
+        <cost>100</cost>
+        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+        <category name="weapons"/>
+        <usage name="Military"/>
+        <value name="Tier1"/>
+		<value name="Tier2"/>
+    </type> 	
+	<type name="DNA_KeyCard_Yellow">
+        <nominal>1</nominal>
+        <lifetime>604800</lifetime>
+        <restock>86400</restock>
+        <min>1</min>
+        <quantmin>10</quantmin>
+        <quantmax>10</quantmax>
+        <cost>100</cost>
+        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+        <category name="weapons"/>
+        <usage name="Military"/>
+        <value name="Tier1"/>
+		<value name="Tier2"/>
+    </type>		
+	
+
+
+  
+  
+</types>
+
+
+
+
+
+
+
+

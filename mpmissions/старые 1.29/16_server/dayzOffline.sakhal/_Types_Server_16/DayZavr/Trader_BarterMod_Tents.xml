@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<types>
+  
+    <type name="MarketTent_CamoRoze">
+        <lifetime>3888000</lifetime>
+    </type>		
+    <type name="MarketTent_Color">
+        <lifetime>3888000</lifetime>
+    </type>	
+    <type name="MarketTent_Color2">
+        <lifetime>3888000</lifetime>
+    </type>	
+    <type name="MarketTent_GreenWhite">
+        <lifetime>3888000</lifetime>
+    </type>	
+    <type name="MarketTent_PurpleBlue">
+        <lifetime>3888000</lifetime>
+    </type>		   
+    <type name="MarketTent_PurpleWhite">
+        <lifetime>3888000</lifetime>
+    </type>		   
+    <type name="MarketTent_RedWhite">
+        <lifetime>3888000</lifetime>
+    </type>		   
+    <type name="MarketTent_BlueWhite">
+        <lifetime>3888000</lifetime>
+    </type>		   
+    <type name="MarketTent_camo">
+        <lifetime>3888000</lifetime>
+    </type>		   
+    <type name="MarketTent_Redsss">
+        <lifetime>3888000</lifetime>
+    </type>		   
+    <type name="MarketTent_Bluesss">
+        <lifetime>3888000</lifetime>
+    </type>		   
+ 
+   
+</types>
+
+
+
+
+
+
+
+

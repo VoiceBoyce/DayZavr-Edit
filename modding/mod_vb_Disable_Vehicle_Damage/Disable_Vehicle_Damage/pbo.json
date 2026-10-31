@@ -1,0 +1,22 @@
+{
+    "compress": {
+        "exclude": [
+        ],
+        "include": [
+        ]
+    },
+    "headers": [
+        {
+            "name": "prefix",
+            "value": "Disable_Vehicle_Damage"
+        },
+        {
+            "name": "product",
+            "value": "dayz ugc"
+        },
+        {
+            "name": "version",
+            "value": "1"
+        }
+    ]
+}

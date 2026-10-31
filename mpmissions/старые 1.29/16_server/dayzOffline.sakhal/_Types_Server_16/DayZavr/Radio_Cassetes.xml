@@ -1,0 +1,1146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<types>
+
+	<!-- МАГНИТОФОНЫ ДЛЯ РАДИО -->
+	<type name="RadioRecorderSSS">
+        <nominal>1</nominal>
+        <lifetime>300000</lifetime>
+        <restock>0</restock>
+        <min>1</min>
+        <quantmin>-1</quantmin>
+        <quantmax>-1</quantmax>
+        <cost>100</cost>
+        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+        <category name="tools"/>
+        <tag name="shelves"/>
+        <usage name="Industrial"/>
+    </type>  
+	<type name="RadioBelarusSSS">
+        <nominal>1</nominal>
+        <lifetime>300000</lifetime>
+        <restock>0</restock>
+        <min>1</min>
+        <quantmin>-1</quantmin>
+        <quantmax>-1</quantmax>
+        <cost>100</cost>
+        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+        <category name="tools"/>
+        <tag name="shelves"/>
+        <usage name="Industrial"/>
+    </type>   
+
+  <!--   audiocasset аудиокассеты танины -->
+
+<type name="AudioCassette_BOBER">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+<type name="AudioCassette_BOBER1">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+<type name="AudioCassette_EGK41">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+<type name="AudioCassette_kosmos">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+<type name="AudioCassette_Dudez">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+<type name="AudioCassette_bububu">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Lyube">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Aqua">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Bumer">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Serega">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Ivanushki">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_RukiVverh">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_LinkinPark">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_30SecondToMars">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_ACDC">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_ImagineDragons">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Neffex">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Oxxxymiron">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Sbornik">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_EvaR">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_NissanSky">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Soil">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Proshliy">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_luck124">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Professor">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_morz1k">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_EvaR_2">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_EvaR_3">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_FEAR">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_SkyHanter">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Qwil">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Stan">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Luna">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_VeryBad">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Monturano">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_STALKER">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_VeRsuta">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_IceCoffee">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_IceCoffee1">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_VoiceBoyce">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_NOMAD1">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Apostol">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Mentos">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Ruby">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Raspil">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Raspil1">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_FeliX">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Prokuror">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Prokuror1">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Prokuror2">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Linkoln">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Sector">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Intenso">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Alone">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Er1taga">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Er1taga1">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Tushkan">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Er1taga2">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Garsios">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Liberty">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Liberty1">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_MaxRed">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_MaxRed1">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Moroz">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Naruto">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_NOMAD2">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_MocKBa">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_izzi">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_izzi2">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_izzi3">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_izzi4">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_izzi5">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_ucakoB">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Huleeo">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Viiy">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Shelby">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_RoiMang">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>a
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_Tizer">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+
+<type name="AudioCassette_DoMoVoi">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+  
+
+
+  
+<type name="AudioCassette_SMERTNIK39">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+<type name="AudioCassette_TECAK">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+<type name="AudioCassette_Shuler">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+<type name="AudioCassette_EGK4">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+<type name="AudioCassette_Qvadr">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type>
+<type name="AudioCassette_Qvadr1">
+    <nominal>1</nominal>
+    <lifetime>86400</lifetime>
+    <restock>3200</restock>
+    <min>0</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="clothes" />
+    <usage name="Military" />
+</type> 
+  
+  
+  
+  
+  
+  
+
+</types>
+
+
+
+
+
+
+
+

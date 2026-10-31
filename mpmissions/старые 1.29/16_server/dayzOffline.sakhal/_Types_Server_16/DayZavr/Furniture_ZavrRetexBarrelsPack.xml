@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<types>
+  
+  
+    <type name="ZAVR_Barrel_Caticorn">
+        <lifetime>3888000</lifetime>
+    </type>
+    <type name="ZAVR_Barrel_Food">
+        <lifetime>3888000</lifetime>
+    </type>	
+    <type name="ZAVR_Barrel_Ammunition">
+        <lifetime>3888000</lifetime>
+    </type>		
+    <type name="ZAVR_Barrel_MedicalSupplies">
+        <lifetime>3888000</lifetime>
+    </type>		
+    <type name="ZAVR_Barrel_Tools">
+        <lifetime>3888000</lifetime>
+    </type>		
+    <type name="ZAVR_Barrel_Weapons">
+        <lifetime>3888000</lifetime>
+    </type>		
+    <type name="ZAVR_Barrel_Attachments">
+        <lifetime>3888000</lifetime>
+    </type>		
+    <type name="ZAVR_Barrel_TIGERSTRIPE">
+        <lifetime>3888000</lifetime>
+    </type>		
+    <type name="ZAVR_Barrel_VSR02">
+        <lifetime>3888000</lifetime>
+    </type>	
+    <type name="ZAVR_Barrel_WOODLAND">
+        <lifetime>3888000</lifetime>
+    </type>	
+    <type name="ZAVR_Barrel_GREENTRI">
+        <lifetime>3888000</lifetime>
+    </type>	
+    <type name="ZAVR_Barrel_ATACS">
+        <lifetime>3888000</lifetime>
+    </type>		   
+    <type name="ZAVR_Barrel_CONCAMO">
+        <lifetime>3888000</lifetime>
+    </type>		   
+    <type name="ZAVR_Barrel_KRAUSER">
+        <lifetime>3888000</lifetime>
+    </type>		   
+    <type name="ZAVR_Barrel_TTSKO">
+        <lifetime>3888000</lifetime>
+    </type>		   
+    <type name="ZAVR_Barrel_PLETSLORING">
+        <lifetime>3888000</lifetime>
+    </type>		   
+    <type name="ZAVR_Barrel_REDCAMO">
+        <lifetime>3888000</lifetime>
+    </type>		   
+    <type name="ZAVR_Barrel_M90WL">
+        <lifetime>3888000</lifetime>
+    </type>		   
+    <type name="ZAVR_Barrel_HEERES">
+        <lifetime>3888000</lifetime>
+    </type>		   
+    <type name="ZAVR_Barrel_GFT">
+        <lifetime>3888000</lifetime>
+    </type>		   
+    <type name="ZAVR_Barrel_BWFT">
+        <lifetime>3888000</lifetime>
+    </type>		   
+    <type name="ZAVR_Barrel_DPM">
+        <lifetime>3888000</lifetime>
+    </type>		   
+    <type name="ZAVR_Barrel_DARKTRI">
+        <lifetime>3888000</lifetime>
+    </type>		   
+    <type name="ZAVR_Barrel_CADPAT">
+        <lifetime>3888000</lifetime>
+    </type>		   
+    <type name="ZAVR_Barrel_PINKFOREST">
+        <lifetime>3888000</lifetime>
+    </type>		   
+    <type name="ZAVR_Barrel_BLACKCAM">
+        <lifetime>3888000</lifetime>
+    </type>		   
+   
+</types>
+
+
+
+
+
+
+
+

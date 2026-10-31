@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<types>
+
+
+	<type name="KTPrivateComputer">		<!-- ЮЗАЕМ ЕГО!!!!!!!!!!!!!!!! -->
+		<lifetime>3888000</lifetime>
+	</type>
+
+<!-- KTPrivateComputerKit это кит  -->
+
+
+
+
+
+<!-- это более простой аналог! а так тоже самое -->
+	<type name="KTPrivateElectricPanel">
+		<lifetime>3888000</lifetime>
+	</type>
+
+
+
+	
+	
+	
+</types>

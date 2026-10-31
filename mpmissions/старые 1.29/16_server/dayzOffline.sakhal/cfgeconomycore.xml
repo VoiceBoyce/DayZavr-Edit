@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<economycore>
+	<classes>
+<!--
+These are rootclasses to be used by economy.
+Do not forget to add attribute act="character", if root class represents character (player, infected, animal)
+Do not forget to add attribute act="car", if root class represents moveable vehicles
+-->
+		<rootclass name="DefaultWeapon" /> <!-- weapons -->
+		<rootclass name="DefaultMagazine" /> <!-- magazines -->
+		<rootclass name="Inventory_Base" /> <!-- inventory items -->
+		<rootclass name="HouseNoDestruct" reportMemoryLOD="no" /> <!-- houses, wrecks -->
+		<rootclass name="SurvivorBase" act="character" reportMemoryLOD="no" /> <!-- player characters -->
+		<rootclass name="DZ_LightAI" act="character" reportMemoryLOD="no" /> <!-- infected, animals -->
+		<rootclass name="CarScript" act="car" reportMemoryLOD="no" /> <!-- cars (sedan, hatchback, transitBus, V3S, ...) -->
+		<rootclass name="BoatScript" act="car" reportMemoryLOD="no" /> <!-- boats -->
+		<rootclass name="MotorbikeScript" act="car" reportMemoryLOD="no" /> <!-- Motorbike -->
+	</classes>
+	<defaults>
+		<default name="dyn_radius" value="30" />
+		<default name="dyn_smin" value="0" />
+		<default name="dyn_smax" value="0" />
+		<default name="dyn_dmin" value="1" />
+		<default name="dyn_dmax" value="5" />
+		<default name="log_ce_loop" value="false"/>
+		<default name="log_ce_dynamicevent" value="false"/>
+		<default name="log_ce_vehicle" value="false"/>
+		<default name="log_ce_lootspawn" value="false"/>
+		<default name="log_ce_lootcleanup" value="false"/>
+		<default name="log_ce_lootrespawn" value="false"/>
+		<default name="log_ce_statistics" value="false"/>
+		<default name="log_ce_zombie" value="false"/>
+		<default name="log_storageinfo" value="false"/>
+		<default name="log_hivewarning" value="true"/>
+		<default name="log_missionfilewarning" value="true"/>
+		<default name="save_events_startup" value="true"/>
+		<default name="save_types_startup" value="true"/>
+	</defaults>
+	
+	
+
+	<ce folder="_Types_Server_16/DayZavr">	
+		<file name="Building_Codelock.xml" type="types" />	
+		<file name="Clothes_Zavr_Clothes.xml" type="types" />
+		<file name="Clothes_FOG.xml" type="types" />
+		<file name="Clothes_IMP.xml" type="types" />
+		<file name="Clothes_OOTS.xml" type="types" />
+		<file name="NewYear_Tree.xml" type="types" />
+		<file name="World_Winch_FlipCar.xml" type="types" />
+		<file name="World_Coocking_STRANNIK.xml" type="types" />
+		<file name="Radio_Cassetes.xml" type="types" />
+		<file name="DNA_keycards.xml" type="types" />
+		<file name="Vehicles_Boats.xml" type="types" />
+		<file name="Vehicles_Mod.xml" type="types" />
+		<file name="Vehicles_Helicopters.xml" type="types" />
+		<file name="Furniture_Zavr.xml" type="types" />
+		<file name="Furniture_dp_tents.xml" type="types" />
+		<file name="Furniture_OH.xml" type="types" />
+		<file name="Furniture_SRS.xml" type="types" />
+		<file name="Furniture_FC.xml" type="types" />
+		<file name="World_Garage_Virtual_Parking.xml" type="types" />
+		<file name="Building_BaseBuildingPlus.xml" type="types" />
+		<file name="SFP.xml" type="types" />
+		<file name="Weapons_KOD.xml" type="types" />
+		<file name="AdvansWeapScope.xml" type="types" />
+		<file name="Notes.xml" type="types" />
+		<file name="AdditionalMedicSupplies.xml" type="types" />
+		<file name="Bablo5000Rubley.xml" type="types" />
+		<file name="Others.xml" type="types" />
+		<file name="Building_KT_PrivateShelfTerritory.xml" type="types" />
+		<file name="EDO_WEAPONS.xml" type="types" />
+		<file name="Trader_BarterMod_Tents.xml" type="types" />
+		<file name="Furniture_ZavrRetexBarrelsPack.xml" type="types" />
+		<file name="Building_INT_BaseProtection.xml" type="types" />
+	</ce>		
+	
+	
+	<ce folder="_Types_Server_16/Vanilla">
+		<file name="Vanilla_Types.xml" type="types" />	
+		<file name="vanilla_128_types.xml" type="types" />		
+		<file name="vanilla_129_types.xml" type="types" />
+	</ce>		
+	
+	
+</economycore>

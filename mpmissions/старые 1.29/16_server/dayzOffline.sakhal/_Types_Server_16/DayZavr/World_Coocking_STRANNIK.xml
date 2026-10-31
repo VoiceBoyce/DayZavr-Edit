@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<types>
+
+
+<!-- ================================================================== ЧАЙНИК ===================================================================== -->
+
+
+	<!-- ЧАЙНИК -->
+   <type name="STRNK_TeaPot">
+    <nominal>12</nominal>
+    <lifetime>21600</lifetime>
+    <restock>0</restock>
+    <min>12</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="food" />
+    <tag name="shelves" />
+    <usage name="Farm" />
+    <usage name="Village" />
+    <usage name="Coast" />
+    <usage name="Town" />
+  </type>
+  
+	<!-- Крышка от чайника -->
+   <type name="STRNK_TeaPot_LID">
+    <nominal>12</nominal>
+    <lifetime>21600</lifetime>
+    <restock>0</restock>
+    <min>12</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="tools"/>
+    <tag name="shelves"/>
+    <usage name="Town"/>
+    <usage name="Village"/>
+  </type>  
+ 
+<!-- ============================================================== Крышка от кастрюли ========================================================================= -->
+
+	<!-- Крышка от кастрюли -->
+   <type name="STRNK_POT_LID">
+    <nominal>25</nominal>
+    <lifetime>21600</lifetime>
+    <restock>0</restock>
+    <min>25</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="tools"/>
+    <tag name="shelves"/>
+    <usage name="Town"/>
+    <usage name="Village"/>
+  </type> 
+
+
+<!-- ================================================================= ТЕРМОС ====================================================================== -->
+ 
+	<!-- ТЕРМОС -->
+   <type name="STRNK_Thermos_Big">
+    <nominal>20</nominal>
+    <lifetime>21600</lifetime>
+    <restock>0</restock>
+    <min>20</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="tools"/>
+    <tag name="shelves"/>
+    <usage name="Town"/>
+    <usage name="Village"/>
+  </type>   
+	<!-- КРЫШКА ОТ ТЕРМОСА -->
+   <type name="STRNK_Thermos_LID">
+    <nominal>20</nominal>
+    <lifetime>21600</lifetime>
+    <restock>0</restock>
+    <min>20</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="tools"/>
+    <tag name="shelves"/>
+    <usage name="Town"/>
+    <usage name="Village"/>
+  </type>     
+  
+<!-- ================================================================= ингридиенты ====================================================================== -->
+
+	<!-- ПАЧКА КОФЕ -->
+   <type name="STRNK_CoffeeBox">
+    <nominal>17</nominal>
+    <lifetime>21600</lifetime>
+    <restock>0</restock>
+    <min>17</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="food" />
+    <tag name="shelves" />
+    <usage name="Farm" />
+    <usage name="Village" />
+    <usage name="Coast" />
+    <usage name="Town" />
+  </type>
+  
+	<!-- ПАЧКА ЧАЯ -->
+   <type name="STRNK_TeaBox">
+    <nominal>12</nominal>
+    <lifetime>21600</lifetime>
+    <restock>0</restock>
+    <min>12</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="food" />
+    <tag name="shelves" />
+    <usage name="Farm" />
+    <usage name="Village" />
+    <usage name="Coast" />
+    <usage name="Town" />
+  </type>  
+    
+	
+	<!-- ПАЧКА СОЛИ -->
+   <type name="STRNK_SaltPack">
+    <nominal>12</nominal>
+    <lifetime>21600</lifetime>
+    <restock>0</restock>
+    <min>12</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="food" />
+    <tag name="shelves" />
+    <usage name="Farm" />
+    <usage name="Village" />
+    <usage name="Coast" />
+    <usage name="Town" />
+  </type>  	
+	
+<!-- ======================================================================================================================================= -->
+	
+	
+  
+
+<!-- ванильные ягоды (что бы работали - надо из ваниллы убрать их -->
+
+  <type name="CaninaBerry">
+    <nominal>40</nominal>
+    <lifetime>21600</lifetime>
+    <restock>0</restock>
+    <min>40</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="food" />
+    <tag name="shelves" />
+    <usage name="Farm" />
+    <usage name="Village" />
+    <usage name="Coast" />
+    <usage name="Town" />
+  </type>
+   <type name="SambucusBerry">
+    <nominal>40</nominal>
+    <lifetime>21600</lifetime>
+    <restock>0</restock>
+    <min>40</min>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>100</cost>
+    <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+    <category name="food" />
+    <tag name="shelves" />
+    <usage name="Farm" />
+    <usage name="Village" />
+    <usage name="Coast" />
+    <usage name="Town" />
+  </type>
+
+  
+  
+  
+</types>
+
+
+
+
+
+
+
+
