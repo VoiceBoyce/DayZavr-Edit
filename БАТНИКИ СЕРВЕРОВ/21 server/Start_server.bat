@@ -303,7 +303,7 @@ if exist "%INT_SRC%\INT_AdminGameLogger\Logs\*.log" (
 REM =====================================================================ОЧИСТКА СТАРЫХ ЛОГОВ==================================================
 
 REM Удаление файлов старше 30 дней
-forfiles /p "%DESTINATION_PATH%" /s /m *.* /d -30 /c "cmd /c if @isdir==FALSE del /q @path"
+forfiles /p "%DESTINATION_PATH%" /s /m *.* /d -30 /c "cmd /c if @isdir==FALSE del /q @path" 2>nul
 
 REM Удаление пустых папок (цикл для удаления всех вложенных пустых папок)
 :delete_empty_dirs
@@ -322,7 +322,7 @@ timeout /t 20 /nobreak >nul
 REM Применяем affinity к процессу 
 echo Do affinity to cores 4 5 6 7
 powershell -Command ^
-    "$p = Get-Process -Name 'DayZServer_x6414' -ErrorAction SilentlyContinue; " ^
+    "$p = Get-Process -Name 'DayZServer_x6421' -ErrorAction SilentlyContinue; " ^
     "if ($p) { $p.ProcessorAffinity = 0xF0; Write-Host 'Affinity done correctly, all ok (cores 4-7)' } " ^
     "else { Write-Host 'process not found, try to do bigger timeout' }"
 

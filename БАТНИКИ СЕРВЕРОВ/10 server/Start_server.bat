@@ -322,7 +322,7 @@ if exist "%INT_SRC%\INT_AdminGameLogger\Logs\*.log" (
 REM =====================================================================ОЧИСТКА СТАРЫХ ЛОГОВ==================================================
 
 REM Удаление файлов старше 30 дней
-forfiles /p "%DESTINATION_PATH%" /s /m *.* /d -30 /c "cmd /c if @isdir==FALSE del /q @path"
+forfiles /p "%DESTINATION_PATH%" /s /m *.* /d -30 /c "cmd /c if @isdir==FALSE del /q @path" 2>nul
 
 REM Удаление пустых папок (цикл для удаления всех вложенных пустых папок)
 :delete_empty_dirs

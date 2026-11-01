@@ -70,36 +70,6 @@ REM Правильный порт сервера: 2502
 REM Правильный путь к модам: C:\D\MODS\
 
 
-REM ===================================================================
-REM Начало региона перемещение обновлений Servermod из папки @_Update_Servermod_On_Restart
-REM ===================================================================
-
-set "SCRIPT_DIR=%~dp0"
-set "UPDATE_DIR=%SCRIPT_DIR%@_Update_Servermod_On_Restart"
-set "SERVERMOD_ADDONS=%SCRIPT_DIR%@Servermod\Addons"
-
-if exist "%UPDATE_DIR%" (
-    if exist "%SERVERMOD_ADDONS%" (
-        echo Перемещаем PBO-файлы из %UPDATE_DIR% в %SERVERMOD_ADDONS%...
-        move /Y "%UPDATE_DIR%\*.pbo" "%SERVERMOD_ADDONS%\" >nul 2>&1
-        if errorlevel 1 (
-            echo Ошибка при перемещении некоторых файлов.
-        ) else (
-            echo Перемещение успешно завершено.
-        )
-    ) else (
-        echo ВНИМАНИЕ: %SERVERMOD_ADDONS% не найдена. Перемещение пропущено.
-    )
-) else (
-    echo Папка обновлений не найдена, пропускаем перемещение.
-)
-
-
-REM ===================================================================
-REM Конец региона Перемещение обновлений Servermod из папки @_Update_Servermod_On_Restart
-REM ===================================================================
-
-
 REM =====================================================================ПЕРЕМЕЩЕНИЕ ЛОГОВ==================================================
 
 REM Определение полного пути к текущему .bat файлу
@@ -279,7 +249,7 @@ if exist "%INT_SRC%\INT_AdminGameLogger\Logs\*.log" (
 REM =====================================================================ОЧИСТКА СТАРЫХ ЛОГОВ==================================================
 
 REM Удаление файлов старше 30 дней
-forfiles /p "%DESTINATION_PATH%" /s /m *.* /d -30 /c "cmd /c if @isdir==FALSE del /q @path"
+forfiles /p "%DESTINATION_PATH%" /s /m *.* /d -30 /c "cmd /c if @isdir==FALSE del /q @path" 2>nul
 
 REM Удаление пустых папок (цикл для удаления всех вложенных пустых папок)
 :delete_empty_dirs
