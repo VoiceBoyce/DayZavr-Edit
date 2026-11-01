@@ -123,7 +123,10 @@ move "%FULL_PATH%Instance_1\*.mdmp" %TO%
 move "%FULL_PATH%Instance_1\*.ljson" %TO%
 
 REM Перемещение из папки Airdrop
-move "%FULL_PATH%Instance_1\Airdrop\Logs\*.log" %TO%
+if exist "%FULL_PATH%Instance_1\Airdrop\Logs\*.log" (
+    mkdir "%DESTINATION_PATH%\%FOLDER_NAME%\Airdrop" 2>nul
+    move /Y "%FULL_PATH%Instance_1\Airdrop\Logs\*.log" "%DESTINATION_PATH%\%FOLDER_NAME%\Airdrop\"
+)
 
 
 REM Перемещение из папки Codelock
@@ -185,7 +188,7 @@ REM =====================================================================ЛОГ�
 REM Каждая папка переносится, только если в ней есть файлы, поэтому пустые подпапки не создаются
 
 set "INT_SRC=%FULL_PATH%Instance_1\INT_Mods"
-set "INT_TO=%DESTINATION_PATH%\%FOLDER_NAME%\INT_Mods"
+set "INT_TO=%DESTINATION_PATH%\%FOLDER_NAME%"
 
 REM Перемещение всех .log из корня папки сервера (error_*.log и прочие)
 if exist "%FULL_PATH%*.log" (
