@@ -62,7 +62,6 @@ REM Конец региона Перемещение обновлений Server
 REM ===================================================================
 
 
-
 REM ОРИГИНАЛЬНЫЙ БАТНИК
 start DayZServer_x644.exe -port=2342 "-mod=%modList%" -serverMod=@Servermod -config=serverDZ.cfg -cfg=Instance_1\basic.cfg -profiles=Instance_1 -name=server -noLogs -adminlog -freezecheck -noFilePatching
 
@@ -71,15 +70,6 @@ REM start DayZServer_x644.exe -port=3202 "-mod=%modList%" -serverMod=@Servermod 
 
 
 REM Правильный порт сервера: 2342
-
-
-
-
-
-
-
-
-
 
 
 REM =====================================================================ПЕРЕМЕЩЕНИЕ ЛОГОВ==================================================
@@ -135,8 +125,6 @@ move "%FULL_PATH%Instance_1\*.ljson" %TO%
 REM Перемещение из папки Airdrop
 move "%FULL_PATH%Instance_1\Airdrop\Logs\*.log" %TO%
 
-REM Перемещение из папки BodyDeleter
-move "%FULL_PATH%Instance_1\BodyDeleter\Logs\*.txt" %TO%
 
 REM Перемещение из папки Codelock
 move "%FULL_PATH%Instance_1\CodeLock\Logs\Access\*.log" %TO_Access%
@@ -160,8 +148,6 @@ move "%FULL_PATH%Instance_1\VPPAdminTools\Logging\*.txt" %TO_VPP%
 REM Перемещение из подпапки WheelLog
 move "%FULL_PATH%Instance_1\WheelLog\*.log" %TO%
 
-REM Перемещение из подпапки LogArchives(VehicleLogs)
-move "%FULL_PATH%Instance_1\LogArchives\VehicleActivity\*.log" %TO%
 
 REM Перемещение из подпапки KGB/DupeCheckSystem
 set TO_DUPE_CHECK_LOGS="%DESTINATION_PATH%\%FOLDER_NAME%\DUPE_CHECK_REPORTS\"
@@ -172,11 +158,6 @@ REM Перемещение из подпапки BRDK_MODS\DeathBox
 set TO_DEATH_BOX="%DESTINATION_PATH%\%FOLDER_NAME%\DEATH_BOX\"
 if not exist "%TO_DEATH_BOX%" mkdir "%TO_DEATH_BOX%"
 move "%FULL_PATH%Instance_1\BRDK_MODS\DeathBox\*.log" %TO_Death_BOX%
-
-REM Перемещение из подпапки RF\KILLFEED\PLAYERS
-set TO_KILLFEED="%DESTINATION_PATH%\%FOLDER_NAME%\KILLFEED\"
-if not exist "%TO_KILLFEED%" mkdir "%TO_KILLFEED%"
-move "%FULL_PATH%Instance_1\RF\KILLFEED\PLAYERS\*.json" %TO_KILLFEED%
 
 
 REM Перемещение из подпапки RF\LOGGER\
@@ -210,15 +191,65 @@ if not exist "%TO_EventManagerLog%" mkdir "%TO_EventManagerLog%"
 move "%FULL_PATH%Instance_1\EventManagerLog\*.log" %TO_EventManagerLog%
 
 
-REM Перемещение MF_Banking логов
-set TO_MF_Banking="%DESTINATION_PATH%\%FOLDER_NAME%\MF_Banking\"
-if not exist "%TO_MF_Banking%" mkdir "%TO_MF_Banking%"
-move "%FULL_PATH%Instance_1\MF_Mods\MF_Banking\logs\*.log" %TO_MF_Banking%
+REM =====================================================================ЛОГИ INT_Mods И КОРНЯ СЕРВЕРА==================================================
+REM Каждая папка переносится, только если в ней есть файлы, поэтому пустые подпапки не создаются
 
-REM Перемещение MF_Lib логов
-set TO_MF_Lib="%DESTINATION_PATH%\%FOLDER_NAME%\MF_Lib\"
-if not exist "%TO_MF_Lib%" mkdir "%TO_MF_Lib%"
-move "%FULL_PATH%Instance_1\MF_Lib\logs\*.log" %TO_MF_Lib%
+set "INT_SRC=%FULL_PATH%Instance_1\INT_Mods"
+set "INT_TO=%DESTINATION_PATH%\%FOLDER_NAME%\INT_Mods"
+
+REM Перемещение всех .log из корня папки сервера (error_*.log и прочие)
+if exist "%FULL_PATH%*.log" (
+    mkdir "%DESTINATION_PATH%\%FOLDER_NAME%\Server_Root" 2>nul
+    move /Y "%FULL_PATH%*.log" "%DESTINATION_PATH%\%FOLDER_NAME%\Server_Root\"
+)
+
+REM Перемещение логов INT_CarImmobilizer
+if exist "%INT_SRC%\INT_CarImmobilizer\INT_CarImmobilizerLogs\*.log" (
+    mkdir "%INT_TO%\INT_CarImmobilizer" 2>nul
+    move /Y "%INT_SRC%\INT_CarImmobilizer\INT_CarImmobilizerLogs\*.log" "%INT_TO%\INT_CarImmobilizer\"
+)
+
+REM Перемещение логов INT_Banking
+if exist "%INT_SRC%\INT_Banking\INT_BankingLogs\*.log" (
+    mkdir "%INT_TO%\INT_Banking" 2>nul
+    move /Y "%INT_SRC%\INT_Banking\INT_BankingLogs\*.log" "%INT_TO%\INT_Banking\"
+)
+
+REM Перемещение логов INT_Garage
+if exist "%INT_SRC%\INT_Garage\INT_GarageLogs\*.log" (
+    mkdir "%INT_TO%\INT_Garage" 2>nul
+    move /Y "%INT_SRC%\INT_Garage\INT_GarageLogs\*.log" "%INT_TO%\INT_Garage\"
+)
+
+REM Перемещение логов INT_P2P_Trading
+if exist "%INT_SRC%\INT_P2P_Trading\Logs_P2P_Trading\*.log" (
+    mkdir "%INT_TO%\INT_P2P_Trading" 2>nul
+    move /Y "%INT_SRC%\INT_P2P_Trading\Logs_P2P_Trading\*.log" "%INT_TO%\INT_P2P_Trading\"
+)
+
+REM Перемещение логов INT_PartyMode
+if exist "%INT_SRC%\INT_PartyMode\PartyHistory\*.log" (
+    mkdir "%INT_TO%\INT_PartyMode" 2>nul
+    move /Y "%INT_SRC%\INT_PartyMode\PartyHistory\*.log" "%INT_TO%\INT_PartyMode\"
+)
+
+REM Перемещение логов INT_QUESTS
+if exist "%INT_SRC%\INT_QUESTS\Logs\*.log" (
+    mkdir "%INT_TO%\INT_QUESTS" 2>nul
+    move /Y "%INT_SRC%\INT_QUESTS\Logs\*.log" "%INT_TO%\INT_QUESTS\"
+)
+
+REM Перемещение логов INT_BaseProtection
+if exist "%INT_SRC%\INT_BaseProtection\Logs\*.log" (
+    mkdir "%INT_TO%\INT_BaseProtection" 2>nul
+    move /Y "%INT_SRC%\INT_BaseProtection\Logs\*.log" "%INT_TO%\INT_BaseProtection\"
+)
+
+REM Перемещение логов INT_AdminGameLogger
+if exist "%INT_SRC%\INT_AdminGameLogger\Logs\*.log" (
+    mkdir "%INT_TO%\INT_AdminGameLogger" 2>nul
+    move /Y "%INT_SRC%\INT_AdminGameLogger\Logs\*.log" "%INT_TO%\INT_AdminGameLogger\"
+)
 
 REM =====================================================================ОЧИСТКА СТАРЫХ ЛОГОВ==================================================
 
