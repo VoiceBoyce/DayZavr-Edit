@@ -1,0 +1,387 @@
+{
+    "isPresetEnabled": 0,
+    "weapons": [],
+    "equipments": [],
+    "minimumItems": 1,
+    "maximumItems": 3,
+    "simpleLootList": [
+        {
+            "spawnChance": 1.0,
+            "className": "TacticalBaconCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TacticalBaconCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SodaCan_Cola",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SodaCan_Cola",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SodaCan_Fronta",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SodaCan_Fronta",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SodaCan_Kvass",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SodaCan_Kvass",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SodaCan_Pipsi",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SodaCan_Pipsi",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SodaCan_Spite",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SodaCan_Spite",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Zagorky",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Zagorky",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "ZagorkyChocolate",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "ZagorkyChocolate",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "ZagorkyPeanuts",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "ZagorkyPeanuts",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BakedBeansCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BakedBeansCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BakedBeansCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BakedBeansCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PowderedMilk",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PowderedMilk",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PowderedMilk",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PowderedMilk",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TunaCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Canteen",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Canteen",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BoxCerealCrunchin",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BoxCerealCrunchin",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BoxCerealCrunchin",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SpaghettiCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SpaghettiCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "CatFoodCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "CatFoodCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "CatFoodCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "DogFoodCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "DogFoodCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PeachesCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PeachesCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TunaCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Rice",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Rice",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Pajka",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Pajka",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Marmalade",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Marmalade",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "WaterBottle",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "WaterBottle",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "WaterBottle",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Honey",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Honey",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SaltySticks",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        }
+    ]
+}

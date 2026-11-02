@@ -1,0 +1,2613 @@
+{
+    "isPresetEnabled": 0,
+    "weapons": [],
+    "equipments": [],
+    "minimumItems": 1,
+    "maximumItems": 3,
+    "simpleLootList": [
+        {
+            "spawnChance": 1.0,
+            "className": "MountainBag_Red",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "MountainBag_Blue",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "MountainBag_Orange",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "MountainBag_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AliceBag_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AliceBag_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AliceBag_Camo",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "GorkaHelmet",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "GorkaHelmetVisor",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TacticalGloves_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "OMNOGloves_Brown",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "OMNOGloves_Brown",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AssaultBag_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTSKOBoots",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "MilitaryBoots_Redpunk",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "MilitaryBoots_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "CombatBoots_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "CombatBoots_Beige",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "JungleBoots_Olive",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Balaclava3Holes_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Balaclava3Holes_Beige",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BalaclavaMask_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BallisticHelmet_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BallisticHelmet_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M65Jacket_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M65Jacket_Khaki",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "USMCJacket_Desert",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M65Jacket_Olive",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTsKOJacket_Camo",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "GorkaEJacket_Autumn",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "GorkaEJacket_Summer",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "GorkaPants_Autumn",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "GorkaPants_Flat",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "USMCPants_Desert",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTSKOPants",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PlateCarrierVest",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PlateCarrierVest_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PlateCarrierVest_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PlateCarrierVest_Camo",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PlateCarrierHolster",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PlateCarrierHolster_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PlateCarrierHolster_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PlateCarrierHolster_Camo",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PlateCarrierPouches",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PlateCarrierPouches_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PlateCarrierPouches_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PlateCarrierPouches_Camo",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "MilitaryBelt",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SmershBag",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SmershVest",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "NBCBootsYellow",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "NBCGlovesYellow",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "NBCHoodYellow",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "NBCPantsYellow",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "NBCJacketYellow",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "NBCBootsGrey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "NBCGlovesGrey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "NBCHoodGrey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "NBCPantsGrey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "NBCJacketGrey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "HikingJacket_Red",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "HunterPants_Autumn",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "HunterPants_Brown",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "HikingBoots_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "NVGoggles",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Jacket_USMC_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Jacket_USMC_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Jacket_USMC_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Jacket_Gorka_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Jacket_Gorka_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Jacket_Gorka_Forest",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_G2_Hoodie_MC",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_G3_Hoodie_MC",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_G3_Hoodie_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Hoodie_Jacket_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Hoodie_Jacket_Nike_G",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Hoodie_Jacket_Patagonia",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Hoodie_Jacket_Rolled_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Hoodie_Jacket_Rolled_Nike_G",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Hoodie_Jacket_Rolled_Patagonia",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_UFJ_Shirt_MC",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_UFJ_Shirt_MCB",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_UFJ_Shirt_RG",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Enhanced_PCU_MC",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Enhanced_PCU_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Enhanced_PCU_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Jacket_SoftShell_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Jacket_SoftShell_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Jacket_SoftShell_RG",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Jacket_TacticalShirt_60_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Jacket_TacticalShirt_60_EMR",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Jacket_TacticalShirt_60_NWU",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_HeavyRiders_Jacket_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_HeavyRiders_Jacket_Teal",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Tactical_Fleece_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Tactical_Fleece_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Tactical_Fleece_RG",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Jacket_TacticalShirt_80_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Jacket_TacticalShirt_80_EMR",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Jacket_TacticalShirt_80_NWU",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Gorka_Jacket_Khaki",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Gorka_Jacket_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Gorka_Jacket_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_ButtonUp_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_ButtonUp_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_ButtonUp_Red",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_ButtonUp_RG",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_RugbyShirt_BLK",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_RugbyShirt_CB",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_RugbyShirt_KHK",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Cronen_Shirt_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Cronen_Shirt_RG",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Cronen_Shirt_CB",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Cronen_Shirt_MC",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_511_Shirt_Flanel",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_511_Shirt_Flanel_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_511_Shirt_Flanel_Red",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_L9Patagonia_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_L9Patagonia_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_L9Patagonia_White",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_MTF_Shirt_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_MTF_Shirt_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_MTF_Shirt_Blue",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pants_ABR_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pants_ABR_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pants_ABR_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pants_Gorka",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pants_Gorka_Gray",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pants_Cargo_EMR",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pants_Cargo_UCP",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pants_Cargo_NWU",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pants_Cargo_MARPAT",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pants_Military_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pants_Military_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pants_Military_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_MTF_Pants_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_MTF_Pants_Blue",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_MTF_Pants_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_FieldPants_White",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_FieldPants_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_FieldPants_RG",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_UFP_Pants_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_UFP_Pants_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_UFP_Pants_RG",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Pants_Crye_G3_M81",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Pants_Crye_G3_MC",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Pants_Crye_G3_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_G99_Pants_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_G99_Pants_White",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_G99_Pants_CB",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Gorka_Pants_Khaki",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Gorka_Pants_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Gorka_Pants_White",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Boots_Sneakers_Red",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Boots_Sneakers_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Boots_Sneakers_Blue",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Boots_Sneakers_EMR",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Combat_HikingBoots_Brown",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Combat_HikingBoots_Khaki",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Combat_HikingBoots_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Combat_HikingBoots_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Boots_Lowa_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Boots_Lowa_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Boots_Lowa_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Operator_Boots_CB",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Operator_Boots_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Operator_Boots_RG",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Zypher_Boots_Tan_Socks",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Zypher_Boots_Black_Socks",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Zypher_Boots_RG_Socks",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_DEFCONVans_Shoes_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_DEFCONVans_Shoes_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_DEFCONVans_Shoes_RG",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Tactical_Fingerless_Gloves_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Tactical_Fingerless_Gloves_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Tactical_Fingerless_Gloves_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_GunGloves_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_GunGloves_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_GunGloves_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_FerroGloves_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_FerroGloves_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_FerroGloves_Red",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Belt_BagBelt_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Belt_BagBelt_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Belt_BagBelt_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Belt_BagBelt_UCP",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Belt_BeltSystem_Medium_60_NWU",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Belt_BeltSystem_Medium_60_EMR",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Belt_BeltSystem_Medium_60_MARPAT",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Belt_BeltSystem_Medium_60_UCP",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Belt_BeltSystem_Large_80_MARPAT",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Belt_BeltSystem_Large_80_NWU",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Belt_BeltSystem_Large_80_EMR",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Belt_BeltSystem_Large_80_UCP",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Boonie_MC",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Boonie_MCB",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Boonie_AOR1",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Ronin_Hat",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Ronin_Hat_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Mich_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Mich_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Mich_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Dominator2_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Dominator2_Flecktarn",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Dominator2_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Heavy_Dominator2_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Heavy_Dominator2_Flecktarn",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Heavy_Dominator2_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_PBR",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Silencer",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_6B47_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_6B47_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_6B47_Desert",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Tactic_Beige",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Tactic_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Tactic_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Tactic_Camo",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_RoninHeavy_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_RoninHeavy_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_RoninHeavy_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_RoninMedium",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Mandalor_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Mandalor_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Mandalor_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_AM95_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_AM95_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_AM95_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_K63_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_K63_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_K63_NWU",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Vulkan_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Vulkan_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Vulkan_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Altyn_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Altyn_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Helmet_Altyn_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_KillaHelmet_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_HPouch_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_HPouch_Flecktarn",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_HPouch_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Visor_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Visor_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Visor_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Goggles_Ballistic_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Goggles_Ballistic_Desert",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Goggles_Ballistic_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Goggles_BolleCobra",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Goggles_ESSICE",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Goggles_ESSRollbar",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Goggles_BolleContour",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Mask_Balaclava_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Mask_Balaclava_Wolf",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Mask_Balaclava_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Mask_TacticalMask_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Mask_TacticalMask_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Mask_TacticalMask_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Arcteryx_Balaclava_CB",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Arcteryx_Balaclava_RG",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Arcteryx_Balaclava_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_AACVest_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_AACVest_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_AACVest_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_TacTec_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_TacTec_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_TacTec_MARPAT",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_MTV_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_MTV_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_MTV_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_UnloadingVest_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_UnloadingVest_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_UnloadingVest_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_FBIVest_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_FBIVest_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_FBIVest_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_JPC_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_JPC_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_JPC_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_MediumVest_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_MediumVest_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_MediumVest_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_IOTVMini_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_IOTVMini_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_IOTVMini_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_Defender_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_Defender_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_Defender_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_IOTV_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_IOTV_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_IOTV_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_6B45_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_6B45_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_6B45_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_6B43n_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_6B43n_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_6B43n_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_Armis_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_Armis_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_Armis_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_BombVest_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Vest_BombVest_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pouch_MagPouch2_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pouch_MagPouch2_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pouch_MagPouch2_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pouch_MagPouch3_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pouch_MagPouch3_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pouch_MagPouch3_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pouch_MagPouch1_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pouch_MagPouch1_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pouch_MagPouch1_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pouch_PlateCarrierHolster_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pouch_PlateCarrierHolster_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pouch_PlateCarrierHolster_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pouch_EM_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pouch_EM_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pouch_EM_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pouch_NBCBag",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pouch_NBCBag_EMR",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pouch_NBCBag_NWU",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pouch_Tactical_MARPAT",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pouch_Tactical_NWU",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Pouch_Tactical_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_RushBag_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_RushBag_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_RushBag_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_MRASAP_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_MRASAP_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_MRASAP_RG",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_ScoutBag_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_ScoutBag_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_ScoutBag_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_Trizip_Puke",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_Trizip_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_Trizip_RG",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_DrawBridge_MCAL",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_DrawBridge_MCB",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_DrawBridge_White",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_SSO_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_SSO_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_SSO_MC",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_BlackJack_MC",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_BlackJack_MCB",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_BlackJack_MCT",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_CommsBag_CB",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_CommsBag_RG",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_CommsBag_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_BigMilitaryBag_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_BigMilitaryBag_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_BigMilitaryBag_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_Rifle_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_Rifle_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_Rifle_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_Rifle_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_Rifle_EMR",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_Rifle_NWU",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_Rifle_UCP",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_Rifle_MARPAT",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_MarchingBag_black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_MarchingBag_co",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bergen_Rucksack_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bergen_Rucksack_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bergen_Rucksack_Woodland",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_RuckSack_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_RuckSack_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bag_RuckSack_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_SATL_MC",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_SATL_RG",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_SATL_CB",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_F4Terminator_RG",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_F4Terminator_OD",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FOG_Bag_F4Terminator_CB",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Respirator_red",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_NBC_Gloves",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        }
+    ]
+}

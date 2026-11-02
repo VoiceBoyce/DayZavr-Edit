@@ -1,0 +1,1388 @@
+{
+    "isPresetEnabled": 0,
+    "weapons": [],
+    "equipments": [],
+    "minimumItems": 2,
+    "maximumItems": 4,
+    "simpleLootList": [
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_22",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_380",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_9x19",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_Ammo_762x25",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_45ACP",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_9x39",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_9x39AP",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_357",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Ammo_4630",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Ammo_50AE",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_12gaRubberSlug",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_12gaPellets",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_12gaSlug",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_545x39",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_545x39Tracer",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_556x45",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_556x45Tracer",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_762x39",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_762x39Tracer",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Ammo_303",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Ammo_3006",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Ammo_4570",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Ammo_8mm",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_308Win",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_308WinTracer",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_762x54",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_762x54Tracer",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "DZVR_Ammo_338LM_HiDamage",
+            "quantity": 3,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "DZVR_Ammo_50BMG_LowDamage",
+            "quantity": 3,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_P1_8Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_IJ70_8Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_MKII_10Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_1911_7Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_Kimber1911_10Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_Glock_15Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Deagle_Magazine_7rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Mag_M9_15Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CZ75_15Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Mag_Glock_17Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_Deagle_9rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_P320_17Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_FNX45_15Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Mag_Beretta_M9A3_17Rnd_BLK",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Mag_Beretta_M9A3_17Rnd_FDE",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Mag_CZ_Shadow_2_Compact_15Rnd_Blue",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Mag_CZ_Shadow_2_Compact_15Rnd_Red",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Mag_M9_Custom_20Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_Mag_Glock_Big_Stick_33Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "DZVR_APS_20rdMag",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_Mag_Glock_SGM_Tactical_50Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "DZVR_Mag_Glock18C_50rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_Saiga_5Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Mag_VRBP_100_5Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_Saiga_8Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Vepr12_8Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Vepr12_Camo_8Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Mag_Pancor_JackHammer_10Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_USAS12_10rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Vepr12_16Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Vepr12_camo_16Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Mag_Pancor_JackHammer_20Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_Saiga_Drum20Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Mag_SFP_P12_20rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Mag_Origin_12_20Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_USAS12_Drum",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Mag_Pancor_JackHammer_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "DZVR_Mag_AA12_20rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Vepr12_32Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Vepr12_camo_32Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Raptr_Drum_45rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_PM73_15Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_PP91_Mag_20rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CZ61_20Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_MP5_15Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_PM73_25Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Kiparis_Mag",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_UMP_25Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "DZVR_Sten_32rdMag",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_UZI_Mag_30rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_MP5_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_mag_9A_91_20Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_MPX_Mag_30rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Mag_Agram_2000_32Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_Mag_PPSh_41_35Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_MP7A1_Mag_40rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_Mag_MP5_60Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_MPX_Mag_60rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_PP19_64Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_Mag_PPSh_41_71Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CMAG_10Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CMAG_10Rnd_Green",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_VSS_10Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_Vikhr_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_AKM_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Mag_savz58_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_AK74_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_AK101_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_AK101_30Rnd_Green",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_STANAG_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_VAL_20Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CMAG_20Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_AK107_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_SOC94_7rnd_Mag",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Magazine_KAC_10Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_AKM_Palm30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CMAG_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_556Stanag_30rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_556Stanag_30rnd_camo",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_556Stanag_30rnd_Digitan",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_556Stanag_30rnd_Tan",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_556Stanag_30rnd_UPC",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_FAMAS_25Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Mag_RK62_30rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_Aug_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_556Pmag_30rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_556Pmag_30rnd_camo",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_556Pmag_30rnd_Digitan",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_556Pmag_30rnd_Tan",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_556Pmag_30rnd_UPC",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Mag_G36A2_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "DZVR_PPSKN_30rndMag",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_TAVOR_Magazine_30rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Mag_KrebsAK_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Mag_KrebsAK_apoc_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Mag_KrebsAK_FactoryNew_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_Mag_STANAG_30Rnd_Black",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_Mag_AK12_Izhmash_std_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_G3_Magazine_20rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_Mag_SS2V5_30Rnd_Black",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_Mag_AK74_Magpul_PMAG_Gen_M3_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_Mag_AKM_Magpul_PMAG_Gen_M3_Black_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_Mag_AKM_Magpul_PMAG_Gen_M3_Beige_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_308Stanag",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_STG44_Magazine_30rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_AK74_45Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Magazine_KAC_20Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_FAL_20Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_SG_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CMAG_40Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CMAG_40Rnd_Green",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_Mag_AKM_Magpul_PMAG_Gen_M3_Banana_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_Mag_AK74_45Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_MCX_Spear_Magazine_20rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_FAL_Magazine",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_HK417_Magazine_20rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_556Pmag_40rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_556Pmag_40rnd_camo",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_556Pmag_40rnd_Digitan",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_556Pmag_40rnd_Tan",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_556Pmag_40rnd_UPC",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_STANAGCoupled_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_STANAG_60Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_SCARHMag",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_Mag_AK74_60Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Coupled_FAL_Magazine",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_AG3_Coupled_Magazine_40rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_AKMod_762x54_30rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Mag_Killo_141_60Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_Mag_STANAG_Magpul_PMAG_Drum_60Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_TAVOR_Magazine_60rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "DZVR_Mag_D60_60rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_AKM_Drum75Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_556Stanag_100rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_Ruger1022_10Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_Ruger1022_15Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_Ruger1022_30Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_M14_10Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_SVD_10Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_762Stanag_10rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_762Stanag_10rnd_camo",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_762Stanag_10rnd_Digitan",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_762Stanag_10rnd_Tan",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_762Stanag_10rnd_UPC",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_338mag_10rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Magazine_HK417_G28_10Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_AVS36_Mag_10rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_Mag_SVT_40_10Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Mag_SVT40_10rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_GEVAR43_Magazine_10rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_M14_20Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_762Stanag_20rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_762Stanag_20rnd_camo",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_762Stanag_20rnd_Digitan",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_762Stanag_20rnd_Tan",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_762Stanag_20rnd_UPC",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_Mag_M14_20Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_M14_Mag_20rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Mag_SVD_20Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Magazine_HK417_G28_20Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_Scout_5Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CZ527_5rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_SSG82_5rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CZ550_4rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_SV98_10Rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "DZVR_Mag_SAKOTRG_5rnd338",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Magazine_Remington_700_10Rnd_Black",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CZ550_10rnd",
+            "quantity": 10,
+            "amount": 1,
+            "attachments": []
+        }
+    ]
+}

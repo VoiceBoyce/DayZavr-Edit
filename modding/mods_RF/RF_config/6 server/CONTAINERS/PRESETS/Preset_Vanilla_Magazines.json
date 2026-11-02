@@ -1,0 +1,373 @@
+{
+    "isPresetEnabled": 0,
+    "weapons": [],
+    "equipments": [],
+    "minimumItems": 1,
+    "maximumItems": 4,
+    "simpleLootList": [
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_P1_8Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_IJ70_8Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_MKII_10Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_1911_7Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_Kimber1911_10Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_Glock_15Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CZ75_15Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_Deagle_9rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_FNX45_15Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_Saiga_5Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_Saiga_8Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_Saiga_Drum20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_PM73_15Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CZ61_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_MP5_15Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_PM73_25Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_UMP_25Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_MP5_30Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_PP19_64Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CMAG_10Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CMAG_10Rnd_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_VSS_10Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_Vikhr_30Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_AKM_30Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_AK74_30Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_AK101_30Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_AK101_30Rnd_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_STANAG_30Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_VAL_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CMAG_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_AK107_30Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_AKM_Palm30Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CMAG_30Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_FAMAS_25Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_Aug_30Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_AK74_45Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_FAL_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_SG_30Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CMAG_40Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CMAG_40Rnd_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_STANAGCoupled_30Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_STANAG_60Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_AKM_Drum75Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_M14_10Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_SVD_10Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_M14_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CZ527_5rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_SSG82_5rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CZ550_4rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_SV98_10Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_CZ550_10rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mag_Scout_5Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        }
+    ]
+}

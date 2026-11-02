@@ -1,0 +1,1262 @@
+{
+    "isPresetEnabled": 0,
+    "weapons": [],
+    "equipments": [],
+    "minimumItems": 1,
+    "maximumItems": 2,
+    "simpleLootList": [
+        {
+            "spawnChance": 1.0,
+            "className": "MKII",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "MakarovIJ70",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FNX45",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "P1",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Colt1911",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Engraved1911",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Glock19",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "CZ75",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Deagle",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Deagle_Gold",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Derringer_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Derringer_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Derringer_Pink",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "LongHorn",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mp133Shotgun",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Izh43Shotgun",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "R12",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Saiga",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PM73Rak",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "UMP45",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PP19",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "CZ61",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "MP5K",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AKS74U",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AK74",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M16A2",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AKM",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AK101",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AK101_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AugShort",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "ASVAL",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Vikhr",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "VSS",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Aug",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FAL",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M4A1",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M4A1_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FAMAS",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ruger1022",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SKS",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SKS_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SKS_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M14",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "B95",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SVD",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Repeater",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Scout",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SSG82",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "CZ527",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Winchester70",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mosin9130",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mosin9130_Camo",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SV98",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "CZ550",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_G36C",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_AN94",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_Groza_762",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_TKB0146",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_AKM_FDE",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_AKM",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_USAS12",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_AK5C",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_SCARH_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_T5000",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_TheFix",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_TheFix_BlueTiger",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_TheFix_RedTiger",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_TheFix_Multicam",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_Tigr_Tactical",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_HKG28",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_Delta5",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_Delta5_Camo1",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_Delta5_Camo2",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_Delta5_Camo3",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_Delta5_Camo4",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_Delta5_Camo5",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_Delta5_Camo6",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_Delta5_Camo7",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_Delta5_Camo8",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_Delta5_Camo9",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_Delta5_Camo10",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_R700Timberwolf",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_VR80",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_M4A1_CQB",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_ASVAL",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_PKM",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_Winchester1873",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_PP2000",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_RPK16",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_Mk14",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_DVL10M1",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_MCXTacops_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_SVU",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BO_WA2000",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_Glock17_Custom_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_Glock17_Custom_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_Glock17_Custom_BlackTan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_Glock17_Custom_TanBlack",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_Vector",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_M1928A1",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_DrumShotgun",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_Scorpion",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_SUB2000_Suppressed",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_VR80",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_SUB2000",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_KS23",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_VSK94",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_MP5SD",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_TAR21_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_TAR21_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_TAR21_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_DVL10",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_ASH12",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_Kivaari_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_Kivaari_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_Kivaari_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_Kivaari_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_SV98_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_SV98_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_MBR_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_MBR_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_MBR_UCPCamo",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_MBR_WoodlandCamo",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_MBR_DesertCamo",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_M200_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_M200_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_AEK971",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_MCR_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_MCR_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_MCR_BlackTan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_MCR_TanCamo",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_MCR_UCPCamo",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_MCR_WoodlandCamo",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_AX50",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_AX50_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_SVU",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_RPK16",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_AR15Skeleton",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_AS50_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_AS50_Camo1",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_AS50_Camo2",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_AS50_Camo3",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_AS50_Camo4",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_Beowulf",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_Mk18",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_FAMAS",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_AK47",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_GM6Lynx",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_CS5",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_AKALPHA",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_M110_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_M110_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_M82A2_Grey",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_M82A2_Tan",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_M82A2_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_M82A2_Red",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_M82A2_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_M82A2_CamoBlue",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_M82A2_Leaves",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_AK15",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_Alligator",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_R700",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_HK21_Old",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_VSSK",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_M249",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_HK21_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_KSVK",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_AWM",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_HK417",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_Evolys",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_SA58",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_AR50A1",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_M60E3",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_SCARH",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_PKM",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_PKP",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_PKP_Tac_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_PKP_Tac_FDE",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KOD_K98",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        }
+    ]
+}

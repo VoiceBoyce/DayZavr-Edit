@@ -1,0 +1,275 @@
+{
+    "isPresetEnabled": 0,
+    "weapons": [],
+    "equipments": [],
+    "minimumItems": 1,
+    "maximumItems": 4,
+    "simpleLootList": [
+        {
+            "spawnChance": 1.0,
+            "className": "SaltySticks",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Chips",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Crackers",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Pajka",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_Kukuruza_closed",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_Goroh_closed",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BakedBeansCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Pate",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_Maslin_closed",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SpaghettiCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Food_Kolbasa",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_FasolWhite_closed",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_FasolRed_closed",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SardinesCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_Kotlet_closed",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BrisketSpread",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_shprota01_closed",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_shprota03_closed",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TunaCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_shprota07_closed",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PeachesCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_shprota02_closed",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TacticalBaconCan",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SodaCan_Kvass",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SodaCan_Fronta",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SodaCan_Cola",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SodaCan_Pipsi",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SodaCan_Spite",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_Stalker",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_NonStop",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_Monster",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_RedBull",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_Zhigulevskoe",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_Baltica9",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_Kozel",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_ESSA",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_Tuborg",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_GinTonik",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        }
+    ]
+}

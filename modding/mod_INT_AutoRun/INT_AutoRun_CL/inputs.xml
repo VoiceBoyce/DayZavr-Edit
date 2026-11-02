@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<modded_inputs>
+	<inputs>
+		<actions>
+			<input name="UAAutoRunToggle" loc="STR_INT_AR_INPUT"/>
+		</actions>
+		<sorting name="int_autorun" loc="STR_INT_AR_INPUT_GROUP">
+			<input name="UAAutoRunToggle"/>
+		</sorting>
+	</inputs>
+	<preset>
+		<input name="UAAutoRunToggle">
+			<btn name="kAdd"/>
+		</input>
+	</preset>
+</modded_inputs>

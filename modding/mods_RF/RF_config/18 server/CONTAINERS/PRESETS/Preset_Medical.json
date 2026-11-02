@@ -1,0 +1,303 @@
+{
+    "isPresetEnabled": 0,
+    "weapons": [],
+    "equipments": [],
+    "minimumItems": 1,
+    "maximumItems": 3,
+    "simpleLootList": [
+        {
+            "spawnChance": 1.0,
+            "className": "SurgicalMask",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "GasMask_Filter",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "GasMask",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Heatpack",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Thermometer",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AMS_BandAid",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FirstAidKit",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AMS_Absorbent",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AMS_AntiSept",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BandageDressing",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AMS_Tourniquet",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BloodBagEmpty",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AMS_Polaris",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "CharcoalTablets",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AMS_Aspirin",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PurificationTablets",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BloodTestKit",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AMS_Poter",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AMS_Energy",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "DisinfectantAlcohol",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AMS_Splint",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AMS_Heatpack",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AMS_Vikasol",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Epinephrine",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AMS_Narcotics",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PainkillerTablets",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AMS_Methadone",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Morphine",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "DisinfectantSpray",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "VitaminBottle",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TetracyclineAntibiotics",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AntiChemInjector",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Express_Syringe25",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Express_Syringe50",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Express_Syringe75",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Express_Syringe100",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_ingalator_Morphine",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_ingalator_Tetracycline",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_AI2_medkit_standart",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_AI2_medkit_Yello",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_AI2_medkit_Blue",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_AI2_medkit_Green",
+            "quantity": 1000,
+            "amount": 1,
+            "attachments": []
+        }
+    ]
+}

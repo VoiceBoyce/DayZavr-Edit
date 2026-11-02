@@ -1,0 +1,457 @@
+{
+    "isPresetEnabled": 0,
+    "weapons": [],
+    "equipments": [],
+    "minimumItems": 1,
+    "maximumItems": 3,
+    "simpleLootList": [
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_22",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_380",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_9x19",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_45ACP",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_9x39",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_9x39AP",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_357",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_12gaRubberSlug",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_12gaPellets",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_12gaSlug",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_545x39",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_545x39Tracer",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_556x45",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_556x45Tracer",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_762x39",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_762x39Tracer",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_308Win",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_308WinTracer",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_762x54",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_762x54Tracer",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_40mm_Smoke_Red",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_40mm_Smoke_Green",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_40mm_Smoke_White",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_40mm_Smoke_Black",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_40mm_ChemGas",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_22_50Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_22_50Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_380_35rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_380_35rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_9x19_25rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_9x19_25rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_45ACP_25rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_45ACP_25rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_00buck_10rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_00buck_10rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_12gaSlug_10Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_12gaSlug_10Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_9x39_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_9x39_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_9x39AP_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_9x39AP_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_357_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_357_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_545x39_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_545x39_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_545x39Tracer_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_545x39Tracer_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_556x45_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_556x45_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_556x45Tracer_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_556x45Tracer_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_762x39_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_762x39_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_762x39Tracer_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_762x39Tracer_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_308Win_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_308Win_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_308WinTracer_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_308WinTracer_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_762x54_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_762x54_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_762x54Tracer_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_762x54Tracer_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AmmoBox_762x54Tracer_20Rnd",
+            "quantity": 100,
+            "amount": 1,
+            "attachments": []
+        }
+    ]
+}

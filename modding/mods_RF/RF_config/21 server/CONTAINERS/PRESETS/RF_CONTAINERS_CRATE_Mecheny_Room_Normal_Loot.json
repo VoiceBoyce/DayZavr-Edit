@@ -1,0 +1,1171 @@
+{
+    "isPresetEnabled": 0,
+    "weapons": [],
+    "equipments": [],
+    "minimumItems": 4,
+    "maximumItems": 7,
+    "simpleLootList": [
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "LugWrench",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "BurlapSack",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "Megaphone",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "Bear_Beige",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "Bear_Dark",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "Bear_Pink",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "Bear_White",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "SmallProtectorCase",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "BaseRadio",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Nails_pack",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_battery_AA",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_battery_D",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Bolts",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_crikent",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Helix",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_incandescentlamp",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Insulatingtape",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_KEK",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_kusajki",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Magnet",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_matches",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_OrgGlass",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Powerbank",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Poxearm",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Rele",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_roulette",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Salt",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_skoth",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Screw_pack",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Screwdriver",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Screwdriver_krest",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Shilo",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Soda",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Tee",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_zibbo",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Wires",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Sewing",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Coffe",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Hose",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_MetalParts",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Nyball2",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Nyball3",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Nyball",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Beardoil",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Lupo",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Surv",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Cablecutter",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Klean",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Kresalo",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Tea",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_chain",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Mediator",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Fuel",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_GreenBat",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_Letter1",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_Letter2",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_model_nuts",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Lens",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Soap",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Bleach",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_RatKiller",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_paperA4",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_PipeCleaner",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Repellent",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Household",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_ClochingBook1",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_RecipeBook",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_ClochingBook2",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Antiinsect",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_Jurnals1",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Advwrench",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Cloth_fleece",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_MetalScissors",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Ratchetwrench",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Screwdriver_long",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Antique_teapot",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_PressureGauge",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_diary",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Shampoo",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Videocassette",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Dobby",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_horse",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Parrot",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Raven",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Mounting_foam",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Kerosin",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_propan",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Ballon_gas",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Electric_Drill",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Engine",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Teddy",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_LootLord",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Old_vase",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Gasolin",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_HandDrill",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Carbattery",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Airfilter",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Hunter_match",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_ProtectedCase0013",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_ProtectedCase0022",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_ProtectedCase0031",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_ProtectedCase0048",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_ProtectedCase0052",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_ProtectedCase0060",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_USBadapter",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Uzrgm",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_GPhone",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_SSD",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Military_board",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_armband_white",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_armband_alpha",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_armband_bear",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_armband_blue",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_armband_dead",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_armband_evasion",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_armband_green",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_armband_kibaarms",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_armband_labs",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_armband_red",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_armband_revals",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_armband_russia",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_armband_terragroup",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_armband_un",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_armband_usec",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Cloth_ripstop",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_Jurnals2",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_Jurnals3",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_WeaponParts",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Powder",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Powder_red",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Powder_green",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_LCD_broken",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_PowerCord",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Carbonecase",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "Watch_Montana",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_PowerFilter",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_doc_Goshan",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_doc_IDEA",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_doc_OLI",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_doc_OLIroute",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Securedtape",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Cyclon",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_geger",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Maps",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Capacitors",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Termite",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Filtr",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_gasanalyze",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Military_cable",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Hose_military",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Cloth_aramid",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Cloth_cordura",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Cloth_paracord",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_Document1",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_Document2",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_Document3",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_Document4",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_Document5",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_Document6",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "SFP_Item_mednaya_provoloka",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "SFP_Item_tools_1",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Bage",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "SFP_GoPro10",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "SFP_Camera_old",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "SFP_Document02",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "BBP_TapeMeasure",
+            "attachments": []
+        }
+    ]
+}

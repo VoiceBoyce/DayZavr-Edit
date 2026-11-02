@@ -1,0 +1,41 @@
+{
+    "isPresetEnabled": 1,
+    "weapons": [
+        {
+            "spawnChance": 1.0,
+            "className": "M4A1",
+            "magName": "Mag_STANAG_30Rnd",
+            "attachments": [
+                "M4_OEBttstck",
+                "M4_RISHndgrd",
+                "ACOGOptic"
+            ]
+        }
+    ],
+    "equipments": [
+        {
+            "spawnChance": 1.0,
+            "className": "PlateCarrierVest",
+            "quantity": 1,
+            "amount": 1,
+            "attachments": [
+                "PlateCarrierPouches",
+                "PlateCarrierHolster"
+            ]
+        }
+    ],
+    "minimumItems": 1,
+    "maximumItems": 10,
+    "simpleLootList": [
+        {
+            "spawnChance": 1.0,
+            "className": "PlateCarrierVest",
+            "quantity": 1,
+            "amount": 1,
+            "attachments": [
+                "PlateCarrierPouches",
+                "PlateCarrierHolster"
+            ]
+        }
+    ]
+}

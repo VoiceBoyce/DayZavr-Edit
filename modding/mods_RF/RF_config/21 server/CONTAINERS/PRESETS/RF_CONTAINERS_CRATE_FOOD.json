@@ -1,0 +1,1108 @@
+{
+    "isPresetEnabled": 0,
+    "weapons": [],
+    "equipments": [],
+    "minimumItems": 2,
+    "maximumItems": 4,
+    "simpleLootList": [
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_slivki",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_Cofe6",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Food_Doshirak_Priprava",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_Cofe",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_SuhouNapitokKlubnika",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_Sahar",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SaltySticks",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_SuhouNapitokCherry",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_SuhouNapitokSmorodina",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Crackers",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Chips",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_Goletos_Blue",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_Goletos_Green",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_OfficerShocolade",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_ArmyShocolade6",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_PovidloApple",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Pajka",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BrisketSpread",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Pate",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SardinesCan",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_ApplePure",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_Farsh",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_ikraFresh",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_PastetPecen",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_Plavleniy",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_Farsh6",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_PastetPecenka6",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_ApplePure6",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_RaguFresh6",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_Plavleniy6",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_Spik6",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Food_LomtikHleb",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Food_ogurec",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "CatFoodCan",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TunaCan",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_shprota01_closed",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_shprota02_closed",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_shprota03_closed",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_shprota04_closed",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_shprota05_closed",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_shprota06_closed",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_shprota07_closed",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_shprota08_closed",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_shprota09_closed",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "DogFoodCan",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Rice",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "CrabCan",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_Maslin_closed",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_Goroh_closed",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Tarelka_KolbasaOgurecTomat",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_FasolWhite_closed",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_FasolRed_closed",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_Kukuruza_closed",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Marmalade",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PeachesCan",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PowderedMilk",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SpaghettiCan",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_Milk_closed",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BakedBeansCan",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Tarelka_KolbasaOgurec",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "UnknownFoodCan",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Honey",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Food_Kolbasa",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TacticalBaconCan",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_Meat_closed",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_Buckwheat",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_Lard",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_Lard2",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_GulashMeatTomato",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_Meat",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_KashaRice",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_MeatFasol6",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_TeftelMeat6",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_FrecodelMeat",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_KashaGrecaMeat",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_MeatFasolFresh",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_RusIRP_Shpik",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_Kotlet_closed",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Food_Buhanka",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Food_DoshirakYellou_pack",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Food_DoshirakGreen_pack",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Food_DoshirakRed_pack",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Food_DoshirakBlue_pack",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Food_DoshirakBrown_pack",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Food_DoshirakPink_pack",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Food_Shawerma",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_StakanRumka",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_USSR_Kruzka",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_StakanGranen",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Can_water_closed",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SodaCan_Pipsi",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SodaCan_Cola",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SodaCan_Spite",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SodaCan_Kvass",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SodaCan_Fronta",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_Baltica9",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Juice_box_00",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Juice_box_01",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Juice_box_02",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Juice_box_03",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Juice_box_04",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Juice_box_05",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Juice_box_06",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Juice_box_07",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Juice_box_08",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Juice_box_09",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Juice_box_10",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Juice_box_11",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Juice_box_12",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Juice_box_13",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Juice_box_14",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Juice_box_15",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Juice_box_16",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_GinTonik",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_Tuborg",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_Kozel",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_ESSA",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_Cola",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_NonStop",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_Stalker",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_RedBull",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_Monster",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_MonsterTheDoc",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_DrinkCan_Zhigulevskoe",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "EFT_food_Icegreen",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "WaterBottle",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Canteen",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_CantenUssr",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_CantenUssr2",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Soivet_Canten",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bottle_BottlePouch_MARPAT",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bottle_BottlePouch_NWU",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bottle_BottlePouch_EMR",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bottle_BottlePouch_Desert",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bottle_BottlePouch_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bottle_BottlePouch_Green",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "IMP_Bottle_BottlePouch_UCP",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_SAMOGON_NastoyX2",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_SAMOGON_Krotovuha",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_SAMOGON_Rabina",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_SAMOGON_Maykish",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "EFT_food_HotRod",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Vodka_Pseno",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Vodka_Rus",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Vodka_Sibir",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Vodka_istrinka",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Vodka_Kazak",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "EFT_food_Tarcola",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "EFT_food_MaxEnergy",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "STRNK_POT_LID",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "STRNK_TeaPot",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "STRNK_TeaPot_LID",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "STRNK_Thermos_Big",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "STRNK_Thermos_LID",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "STRNK_CoffeeBox",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "STRNK_TeaBox",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "STRNK_SaltPack",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        }
+    ]
+}

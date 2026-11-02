@@ -1,0 +1,20 @@
+{
+    "compress": {
+        "exclude": [],
+        "include": []
+    },
+    "headers": [
+        {
+            "name": "prefix",
+            "value": "RF_CONTAINERS_CL\\models\\MillitaryCrate_07"
+        },
+        {
+            "name": "product",
+            "value": "dayz ugc"
+        },
+        {
+            "name": "version",
+            "value": "1"
+        }
+    ]
+}

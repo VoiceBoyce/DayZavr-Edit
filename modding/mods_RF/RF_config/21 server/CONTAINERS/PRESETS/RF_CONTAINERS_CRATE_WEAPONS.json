@@ -1,0 +1,1486 @@
+{
+    "isPresetEnabled": 0,
+    "weapons": [],
+    "equipments": [],
+    "minimumItems": 2,
+    "maximumItems": 4,
+    "simpleLootList": [
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_SVT40_Optic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AD_G33",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PistolOptic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M4_CarryHandleOptic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "MK4Optic_Tan",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "MK4Optic_Green",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "MK4Optic_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "BUISOptic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FNP45_MRDSOptic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "ReflexOptic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "ACOGOptic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "ACOGOptic_6x",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M68Optic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M4_T3NRDSOptic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AD_RMR",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KobraOptic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_SVT_40_Optic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KashtanOptic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Aimpoint2000",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PUScopeOptic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "HuntingOptic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AD_RMR_LM",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AD_MRS",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AD_XPS34",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PSO1Optic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_HAMR",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Elcan",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_HAMR_AK",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Elcan_AK",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Holo",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PSO11Optic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AD_XPS34_HHS",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AD_RMR_TM",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_BugBuster",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Razor",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Car15V2_Black_Optic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Car15V2_Optic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AD_OKP7",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AD_Pilad",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AD_ACOG",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_VortexSE_Optic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_VortexRHDAMG_Optic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_EotechVudu_Optic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AD_ACOG_RMR",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KazuarOptic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "StarlightOptic",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AD_B13Mount",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AD_MosinMount",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_AKMount",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "DZVR_LaserSight",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ri_Laser_Anpeq2",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Buttstock",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Buttstock2",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Buttstock3",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Buttstock_Camo",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Buttstock_Digitan",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Buttstock_Tan",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Buttstock_UPC",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AK_WoodBttstck",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AK_WoodBttstck_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AK_PlasticBttstck_Green",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_AK107_PlasticBttstck",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_AKS74u_Izhmash_stdBttstck",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Buttstock_AK12",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_AKMod_bttstk",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_SVD_IzhmashBttstck_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_9A_91_Buttstock",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_AK_ProMag_ArchangelBttstck_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_AK_Fab_Defense_UasBttstck_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_AK_Magpul_ZhukovBttstck_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_AK_Hexagon_KochergaBttstck_Red",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_AK_Hexagon_KochergaBttstck_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_AKMod_Gold_bttstk",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_AKMod_Snow_bttstk",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_AKMod_Multi_bttstk",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M4_OEBttstck_Green",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M4_OEBttstck",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Buttstock_CAR15",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_M4_Double_Star_ACE_Socom_Gen_4Bttstck_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Saiga_Bttstck",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Fal_OeBttstck",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Buttstock_Honey",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_FAL_Wood_Bttstck",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_Buttstock_Morty",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AK_PlasticHndgrd",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AK_RailHndgrd_Green",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_AK_Red_Head_AgressorHndgrd_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_AK_TDI_AKM_LHndgrd_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M4_MPHndgrd_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M4_MPHndgrd",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M4_MPHndgrd_Green",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_M4_Adar_Wood_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "MP5_RailHndgrd",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_FAL_Wood_Hndgrd",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_FAL_Poly_Hndgrd",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_AK74_Reciever_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_RD_704_Reciever_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_AK_Akademia_Bastion_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_AK_Pistolgrip_AK_12_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_AK_Pistolgrip_Custom_Arms_AGS_74_PRO_Sniper_Kit_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_AK_Pistolgrip_TAPCO_SAW_Style_BLK",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_AK_Pistolgrip_TAPCO_SAW_Style_FDE",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_AK_Pistolgrip_KGB_MG_47_FDE",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_AK_Pistolgrip_Aeroknox_Scorpius_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_AK_Pistolgrip_FAB_Defense_AGR_47_FDE",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_AK_Pistolgrip_Strike_Industries_Enhanced_BLK",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_AK_Pistolgrip_Strike_Industries_Enhanced_FDE",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_Zenit_PK1_B25u_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_Zenit_PK0_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_Zenit_PK1_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_Zenit_PK2_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_AK_Pistolgrip_KGB_MG_47_RED",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_AK_Pistolgrip_TangoDown_Battle_Grip_BLK",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_AK_Pistolgrip_TangoDown_Battle_Grip_FDE",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_AK_Pistolgrip_Zenit_PK_3_BLK",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_Zenit_PK4_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_Zenit_PK5_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_Zenit_PK6_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_M4_Pistolgrip_DLG_Tactical_123_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_M4_Pistolgrip_Aeroknox_Orion_Grip_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_M4_Pistolgrip_Tactical_Dynamics_Hexgrip_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_M4_Pistolgrip_Magpul_MIAD_FDE",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_M4_Pistolgrip_Naroh_Arms_GRAL_S_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_M4_Pistolgrip_HK_Ergo_PSG_1_Style_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_M4_Pistolgrip_Tactical_Dynamics_Skeletonized_Grip_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_M4_Pistolgrip_F1_FireArms_Skeletonized_Style_1_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_AFG",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_AFG_Green",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_AFG_Tan",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_AKMOD_AFG",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_Magpul_AFG_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_Magpul_AFG_Olive",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_Magpul_AFG_Forest_Green",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_Magpul_AFG_Desert",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_VFG",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_VFG_Green",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_DMR_VFG_Tan",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_CKIB_Std_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_BCM_Mod_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_KAC_Vertical_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_Hera_Arms_CQR_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_Magpul_RVG_Desert",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_Magpul_RVG_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_Viking_Tactics_UVG_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_Fortis_Shift_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_HK_Sturmgriff_Desert",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_RTM_Osovets_P2_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_RTM_Osovets_P2_Desert",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_RTM_Pillau_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_RTM_Pillau_Desert",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_RTM_Pillau_P2_Red",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_Stark_SE_5_Express_Forward_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_Stark_SE_5_Express_Forward_Desert",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_Strike_Industries_Cobra_Tactical_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_Strike_Industries_Cobra_Tactical_Desert",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_TangoDown_Stubby_BGV_MK46K_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_TangoDown_Stubby_BGV_MK46K_Desert",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Foregrip_TangoDown_Stubby_BGV_MK46K_Gray",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PistolSuppressor",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Pistol_Suppressor_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Pistol_Suppressor_Beige",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Pistol_Suppressor_Camo",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_PistolSuppressor",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Suppressor_12ga",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "DZVR_Suppressor12ga",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Sobr_9A_91_Suppressor",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Muzzle_AK_Izhmash_AKS_74U",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Muzzle_AK_Izhmash_AK105",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Muzzle_AK_Izhmash_6p20_0_20",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Muzzle_AK_DTK_1",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Muzzle_AK_PWS_CQB",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "MP5_Compensator",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Compensator_MDR_556x45",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M18SmokeGrenade_White",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M18SmokeGrenade_Red",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M18SmokeGrenade_Green",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M18SmokeGrenade_Yellow",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M18SmokeGrenade_Purple",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M18SmokeGrenade_Red_Contaminated",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "RDG2SmokeGrenade_White",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "RDG2SmokeGrenade_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FlashGrenade",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "RGD5Grenade",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M67Grenade",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_40mm_Smoke_White",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_40mm_Smoke_Red",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_40mm_Smoke_Green",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Ammo_40mm_Smoke_Black",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Melee_SVT_40_Bayonet",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KitchenKnife",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Melee_Knife_Bars_A_2607_95x18",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Melee_Knife_Bars_A_2607_Damask",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "EFT_Fulcrum",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "EFT_MillerBros",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "EFT_SP8",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_knife_handmade",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "EFT_Taiga1",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SFP_Knife_Kerambit",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "PipeWrench",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SKS_Bayonet",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Mosin_Bayonet",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "TTC_SVT40_Bayonet",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "FangeKnife",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "Machete",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "OrientalMachete",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "KukriKnife",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "HuntingKnife",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "CombatKnife",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "M9A1_Bayonet",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "AK_Bayonet",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "className": "SM_Melee_Ice_Axe_Red_Rebel",
+            "quantity": 10000,
+            "amount": 1,
+            "attachments": []
+        }
+    ]
+}

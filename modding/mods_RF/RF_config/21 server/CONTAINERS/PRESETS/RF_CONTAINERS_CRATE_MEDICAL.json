@@ -1,0 +1,135 @@
+{
+    "isPresetEnabled": 0,
+    "weapons": [],
+    "equipments": [],
+    "minimumItems": 2,
+    "maximumItems": 3,
+    "simpleLootList": [
+        {
+            "quantity": 1,
+            "amount": 1,
+            "className": "Thermometer",
+            "attachments": []
+        },
+        {
+            "quantity": 10000,
+            "amount": 1,
+            "className": "Heatpack",
+            "attachments": []
+        },
+        {
+            "quantity": 10000,
+            "amount": 1,
+            "className": "BloodTestKit",
+            "attachments": []
+        },
+        {
+            "quantity": 10000,
+            "amount": 1,
+            "className": "StartKitIV",
+            "attachments": []
+        },
+        {
+            "quantity": 10000,
+            "amount": 1,
+            "className": "SalineBag",
+            "attachments": []
+        },
+        {
+            "quantity": 0,
+            "amount": 1,
+            "className": "BloodBagEmpty",
+            "attachments": []
+        },
+        {
+            "quantity": 10000,
+            "amount": 1,
+            "className": "BandageDressing",
+            "attachments": []
+        },
+        {
+            "quantity": 10000,
+            "amount": 2,
+            "className": "BandageDressing",
+            "attachments": []
+        },
+        {
+            "quantity": 10000,
+            "amount": 3,
+            "className": "BandageDressing",
+            "attachments": []
+        },
+        {
+            "quantity": 10000,
+            "amount": 1,
+            "className": "CharcoalTablets",
+            "attachments": []
+        },
+        {
+            "quantity": 10000,
+            "amount": 1,
+            "className": "PurificationTablets",
+            "attachments": []
+        },
+        {
+            "quantity": 10000,
+            "amount": 1,
+            "className": "ChelatingTablets",
+            "attachments": []
+        },
+        {
+            "quantity": 10000,
+            "amount": 1,
+            "className": "VitaminBottle",
+            "attachments": []
+        },
+        {
+            "quantity": 10000,
+            "amount": 1,
+            "className": "TetracyclineAntibiotics",
+            "attachments": []
+        },
+        {
+            "quantity": 10000,
+            "amount": 1,
+            "className": "PainkillerTablets",
+            "attachments": []
+        },
+        {
+            "quantity": 10000,
+            "amount": 1,
+            "className": "Morphine",
+            "attachments": []
+        },
+        {
+            "quantity": 10000,
+            "amount": 1,
+            "className": "Epinephrine",
+            "attachments": []
+        },
+        {
+            "quantity": 10000,
+            "amount": 1,
+            "className": "RF_MEDS_Injector_Obdolbos",
+            "attachments": []
+        },
+        {
+            "quantity": 10000,
+            "amount": 1,
+            "className": "ZenSleep_StimSyringe",
+            "attachments": []
+        },
+        {
+            "quantity": 10000,
+            "amount": 1,
+            "className": "RF_MEDS_Injector_Kostelom",
+            "attachments": []
+        },
+        {
+            "quantity": 10000,
+            "amount": 1,
+            "className": "RF_MEDS_Injector_Mule_60",
+            "attachments": []
+        }
+    ]
+}

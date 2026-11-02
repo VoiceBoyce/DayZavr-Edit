@@ -1,0 +1,268 @@
+{
+    "isPresetEnabled": 0,
+    "weapons": [],
+    "equipments": [],
+    "minimumItems": 1,
+    "maximumItems": 2,
+    "simpleLootList": [
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "BookTheArtOfWar",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "BookCrimeAndPunishment",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "BookThePictureOfDorianGray",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "BookTheRaven",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "BookAndersen",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "BookAroundTheWorldIn80Days",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "BookAfterLondon",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Tank_Accum",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_OFZ",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "SFP_xFiles_01",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "SFP_xFiles_02",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "SFP_xFiles_03",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "SFP_xFiles_04",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "SFP_xFiles_05",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "SFP_xFiles_06",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "SFP_xFiles_07",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "SFP_xFiles_08",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "SFP_xFiles_09",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Sheloch",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_H2O2",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "Pen_Red",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Powerbank",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_q_GALSD3",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Iridium",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Military_flash",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Cat",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Rolex",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_FAR",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Rele",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_Nails_pack",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_MetalParts",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "EFT_gege",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "SFP_HardDisk_WD",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "SFP_HardDisk_WD",
+            "attachments": []
+        },
+        {
+            "spawnChance": 1.0,
+            "quantity": 1,
+            "amount": 1,
+            "className": "SFP_Item_mednaya_provoloka",
+            "attachments": []
+        },
+        {
+            "spawnChance": 0.1,
+            "className": "DNA_KeyCard_Orange",
+            "quantity": 1,
+            "amount": 1,
+            "attachments": []
+        },
+        {
+            "spawnChance": 0.1,
+            "className": "DNA_KeyCard_Red",
+            "quantity": 1,
+            "amount": 1,
+            "attachments": []
+        }
+    ]
+}
