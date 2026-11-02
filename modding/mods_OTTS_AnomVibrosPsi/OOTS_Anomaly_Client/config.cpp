@@ -19,7 +19,7 @@ class CfgMods
 		{
 			class imageSets
 			{
-				files[] = {"OOTS_Anomaly_Client\GUI\imagesets\ootspsy.imageset"};
+				files[] = {"OOTS_Anomaly_Client/GUI/imagesets/ootspsy.imageset"};
 			};
 		};
 	};

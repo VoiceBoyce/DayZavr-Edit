@@ -257,6 +257,14 @@ class AnomalyBaseConfig
 		return "";
 	}
 	
+	// DayZavr, фикс 1.30: у HouseNoDestruct в 1.30 появился storageCategory, и аномалии, созданные
+	// обычным CreateObject, получили время жизни CE (~30 мин) — CE их удалял. Создаём как ванильный
+	// ObjectSpawner: без времени жизни (ECE_NOLIFETIME) и без сохранения в базу (ECE_DYNAMIC_PERSISTENCY).
+	static Object CreateAnomalyObject(string type, vector pos)
+	{
+		return GetGame().CreateObjectEx(type, pos, ECE_SETUP | ECE_CREATEPHYSICS | ECE_NOLIFETIME | ECE_DYNAMIC_PERSISTENCY);
+	}
+
 	protected bool WillBeSpawned(float chance)
 	{
 		if(Math.RandomFloat01() <= chance)
@@ -371,7 +379,7 @@ class AnomalyTypeConfig: AnomalyBaseConfig
 					else
 					{
 						PrintFormat("[AnomalySpawner]: Create anomaly \"%1\" at %2", Classname_Anomaly_Object, pos.ToString());
-						anomaly = OOTS_AnomalyBase.Cast( GetGame().CreateObject(Classname_Anomaly_Object, pos) );
+						anomaly = OOTS_AnomalyBase.Cast( CreateAnomalyObject(Classname_Anomaly_Object, pos) );
 						if(anomaly)
 						{
 							if(m_Parent.IsHandlerExists())
@@ -423,7 +431,7 @@ class AnomalyTypeConfig: AnomalyBaseConfig
 				}
 				else
 				{
-					anomaly = OOTS_AnomalyBase.Cast( GetGame().CreateObject(Classname_Anomaly_Object, position) );
+					anomaly = OOTS_AnomalyBase.Cast( CreateAnomalyObject(Classname_Anomaly_Object, position) );
 					if(anomaly)
 					{
 						PrintFormat("[AnomalySpawner]: Create anomaly \"%1\" at %2", Classname_Anomaly_Object, position.ToString());
@@ -649,7 +657,7 @@ class AnomalyTypeConfig: AnomalyBaseConfig
 			OOTS_AnomalyBase new_anomaly;
 			foreach(vector position: m_AnomaliesPoses)
 			{
-				new_anomaly = OOTS_AnomalyBase.Cast( GetGame().CreateObject(Classname_Anomaly_Object, position) );
+				new_anomaly = OOTS_AnomalyBase.Cast( CreateAnomalyObject(Classname_Anomaly_Object, position) );
 				m_Anomalies.Insert(new_anomaly);
 			}
 		}
@@ -1042,7 +1050,7 @@ class AnomalyTeleportConfig: AnomalyBaseConfig
 				}
 				else
 				{
-					entry_teleport = Anomaly_Teleport_Entry.Cast( GetGame().CreateObject("Anomaly_Teleport_Entry", entry_pos) );
+					entry_teleport = Anomaly_Teleport_Entry.Cast( CreateAnomalyObject("Anomaly_Teleport_Entry", entry_pos) );
 					if(entry_teleport)
 					{
 						m_Anomalies.Insert(entry_teleport);
@@ -1052,7 +1060,7 @@ class AnomalyTeleportConfig: AnomalyBaseConfig
 						{
 							foreach(vector output_pos: Outputs)
 							{
-								output_teleport = Anomaly_Teleport_Output.Cast( GetGame().CreateObject("Anomaly_Teleport_Output", output_pos) );
+								output_teleport = Anomaly_Teleport_Output.Cast( CreateAnomalyObject("Anomaly_Teleport_Output", output_pos) );
 								outputs_tp_array.Insert(output_teleport);
 								entry_teleport.AddOutput(output_teleport);
 							}
@@ -1100,7 +1108,7 @@ class AnomalyTeleportConfig: AnomalyBaseConfig
 			
 			foreach(vector position: m_AnomaliesPoses)
 			{
-				entry_teleport = Anomaly_Teleport_Entry.Cast( GetGame().CreateObject("Anomaly_Teleport_Entry", position) );
+				entry_teleport = Anomaly_Teleport_Entry.Cast( CreateAnomalyObject("Anomaly_Teleport_Entry", position) );
 				if(entry_teleport)
 				{
 					m_Anomalies.Insert(entry_teleport);
@@ -1109,7 +1117,7 @@ class AnomalyTeleportConfig: AnomalyBaseConfig
 					{
 						foreach(vector output_pos: Outputs)
 						{
-							output_teleport = Anomaly_Teleport_Output.Cast( GetGame().CreateObject("Anomaly_Teleport_Output", output_pos) );
+							output_teleport = Anomaly_Teleport_Output.Cast( CreateAnomalyObject("Anomaly_Teleport_Output", output_pos) );
 							outputs_tp_array.Insert(output_teleport);
 							entry_teleport.AddOutput(output_teleport);
 						}
