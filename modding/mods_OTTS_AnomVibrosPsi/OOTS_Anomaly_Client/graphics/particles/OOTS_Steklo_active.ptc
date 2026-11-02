@@ -1,0 +1,191 @@
+EffectDef {
+ Emitors {
+  EmitorDef Glass {
+   ShapeType Sphere
+   ShapeSize 15 3 15
+   ConeAngle 360 0 0
+   MaxNum 300
+   BirthRate 100
+   BirthRateRND 50
+   Offset 0 2 0
+   Material "{EFD31CE137DF4995}graphics/particles/materials/enviroment/glass_01.emat"
+   SizeMultiplier 0.01
+   SizeRND 0.04
+   RandomRotDir 1
+   RotMultiplier 100
+   StretchMultiplier 1
+   RandomAngle 1
+   BillboardingType Full
+   Velocity 0.2
+   VelocityRND 0.1
+   VelAffect 10
+   AirResistance 0.3
+   AirResistanceRND 0.1
+   GravityMultiply 0
+   GravityMultiplyRND 1
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 0
+   RandomFrame 1
+   LifeTime 1
+   LifeTimeRND 1
+   Alpha {
+    0 0 0.12026 1 0.73268 1 0.78889 0.45185 0.86863 0.11111 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 5
+   Repeat 0
+   AlphaMast {
+    0 0 0.05882 0.66667 0.14052 1 0.61895 1 0.88758 1 1 0
+   }
+   VelocityMast {
+    0 1 1 1
+   }
+  }
+  EmitorDef GlassNew1 {
+   ShapeType Sphere
+   ShapeSize 15 3 15
+   ConeAngle 360 0 0
+   MaxNum 300
+   BirthRate 50
+   BirthRateRND 50
+   Offset 0 2 0
+   Material "{FB1FE78E75A354CA}OOTS_Anomaly_Client/graphics/particles/materials/Glass/Glass1.emat"
+   SizeMultiplier 0.02
+   SizeRND 0.06
+   RandomRotDir 1
+   RotMultiplier 20
+   StretchMultiplier 1
+   RandomAngle 1
+   Velocity 1
+   VelocityRND 0.1
+   VelAffect 10
+   AirResistance 1
+   AirResistanceRND 0.1
+   GravityMultiply 0.005
+   GravityMultiplyRND 0.005
+   Spring 0.0005
+   Wind 0
+   AnimOnce 0
+   AnimFPS 0
+   RandomFrame 1
+   LifeTime 2
+   LifeTimeRND 1
+   Color {
+    0 0.7704 0.6519 0.837 0.3059 0.8963 0.4889 0.4889 0.4163 0.8667 0.6593 0.7111 0.5569 0.8074 0.4444 0.4444 0.7314 0.9259 0.8074 0.6 1 1 0.5037 0.6815
+   }
+   Alpha {
+    0 0 0.12026 1 0.73268 1 0.78889 0.45185 0.86863 0.11111 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 5
+   Repeat 0
+   AlphaMast {
+    0 0 0.05882 0.66667 0.14052 1 0.61895 1 0.88758 1 1 0
+   }
+   VelocityMast {
+    0 1 1 1
+   }
+  }
+  EmitorDef GlassNew2 {
+   ShapeType Sphere
+   ShapeSize 15 3 15
+   ConeAngle 360 0 0
+   MaxNum 300
+   BirthRate 50
+   BirthRateRND 50
+   Offset 0 2 0
+   Material "{A5F7CECDCA2EDAC5}OOTS_Anomaly_Client/graphics/particles/materials/Glass/Glass2.emat"
+   SizeMultiplier 0.02
+   SizeRND 0.08
+   RandomRotDir 1
+   RotMultiplier 100
+   StretchMultiplier 1
+   RandomAngle 1
+   Velocity 0.2
+   VelocityRND 0.1
+   VelAffect 10
+   AirResistance 0.3
+   AirResistanceRND 0.05
+   GravityMultiply 0.003
+   GravityMultiplyRND 0.005
+   Spring 0.005
+   Wind 0
+   AnimOnce 0
+   AnimFPS 0
+   RandomFrame 1
+   LifeTime 1
+   LifeTimeRND 0.6
+   Color {
+    0 0.637 0.6519 1 0.3039 0.8963 0.6593 0.4889 0.4163 0.8667 0.6593 0.7111 0.5575 0.8074 0.5778 0.4444 0.7307 0.9259 0.8074 0.637 1 1 0.9481 0.7926
+   }
+   Alpha {
+    0 0 0.12026 1 0.73268 1 0.78889 0.45185 0.86863 0.11111 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 5
+   Repeat 0
+   AlphaMast {
+    0 0 0.05882 0.66667 0.14052 1 0.61895 1 0.88758 1 1 0
+   }
+   VelocityMast {
+    0 1 1 1
+   }
+  }
+  EmitorDef GlassNew3 {
+   ShapeType Sphere
+   ShapeSize 15 3 15
+   ConeAngle 360 0 0
+   MaxNum 300
+   BirthRate 50
+   BirthRateRND 50
+   Offset 0 2 0
+   Material "{51FF8955C7F3B2B1}OOTS_Anomaly_Client/graphics/particles/materials/Glass/Glass3.emat"
+   SizeMultiplier 0.05
+   SizeRND 0.08
+   RandomRotDir 1
+   RotMultiplier 100
+   StretchMultiplier 1
+   StreakFullUV 1
+   RandomAngle 1
+   Velocity 0
+   VelocityRND 0.1
+   VelAffect 10
+   AirResistance 0.3
+   AirResistanceRND 0.1
+   GravityMultiply 1
+   GravityMultiplyRND 2
+   Spring 0.00001
+   Wind 0
+   AnimOnce 0
+   AnimFPS 0
+   RandomFrame 1
+   LifeTime 1
+   LifeTimeRND 0.7
+   Color {
+    0 0.637 0.6519 1 0.3039 0.8963 0.6593 0.4889 0.4163 0.8667 0.6593 0.7111 0.5575 0.8074 0.5778 0.4444 0.7307 0.9259 0.8074 0.637 1 1 0.9481 0.7926
+   }
+   Alpha {
+    0 0 0.12026 1 0.73268 1 0.78889 0.45185 0.86863 0.11111 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 5
+   Repeat 0
+   AlphaMast {
+    0 0 0.05882 0.66667 0.14052 1 0.61895 1 0.88758 1 1 0
+   }
+   VelocityMast {
+    0 1 1 1
+   }
+  }
+ }
+}

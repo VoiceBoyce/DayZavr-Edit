@@ -1,0 +1,134 @@
+EffectDef {
+ Emitors {
+  EmitorDef Leavse2 {
+   ShapeType Sphere
+   ShapeSize 5 5 5
+   ConeAngle 360 360 10
+   MaxNum 20
+   BirthRate 2
+   BirthRateRND 2
+   Offset 0 1 0
+   Material "{4369448B822FD818}graphics/particles/materials/enviroment/leaves_02.emat"
+   SizeMultiplier 0.1
+   SizeRND 0.05
+   RandomRotDir 1
+   RotMultiplier 10
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   Spring 0.01
+   AnimFPS 24
+   RandomFrame 0
+   LifeTime 2
+   LifeTimeRND 3
+   Alpha {
+    0 0 0.07646 1 0.37017 0.9507 0.49432 0 0.86298 0 1 0
+   }
+  }
+  EmitorDef Leavse2_cloned {
+   ShapeType Box
+   ShapeSize 3 3 3
+   ConeAngle 360 360 10
+   MaxNum 20
+   BirthRate 2
+   BirthRateRND 2
+   Offset 0 1 0
+   Material "{4369448B822FD818}graphics/particles/materials/enviroment/leaves_02.emat"
+   SizeMultiplier 0.1
+   SizeRND 0.05
+   RandomRotDir 1
+   RotMultiplier 10
+   RandomAngle 1
+   Sort 0
+   Velocity 0.5
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   Spring 0.001
+   AnimFPS 24
+   RandomFrame 0
+   LifeTime 2
+   LifeTimeRND 3
+   Alpha {
+    0 0 0.07646 1 0.37017 0.9507 0.49432 0 0.86298 0 1 0
+   }
+  }
+  EmitorDef LeavseRing {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 360 360 0
+   MaxNum 20
+   BirthRate 2
+   BirthRateRND 2
+   Offset 0 1 0
+   LocalTransform 0
+   Material "{4369448B822FD818}graphics/particles/materials/enviroment/leaves_02.emat"
+   SizeMultiplier 0.05
+   SizeRND 0.02
+   RandomRotDir 1
+   RotMultiplier 20
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 1
+   VelocityRND 1
+   VelAffect 0
+   AirResistance 1
+   AirResistanceRND 1
+   GravityMultiply 0.001
+   GravityMultiplyRND 0.01
+   Restitution 0
+   Spring 0.0005
+   AnimFPS 24
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 6
+   LifeTimeRND 4
+   Alpha {
+    0 0 0.35276 0 0.44587 1 0.89553 1 1 0
+   }
+   RotationSpeed {
+    0 0 1 1
+   }
+  }
+  EmitorDef smoke {
+   MaxNum 10
+   BirthRate 4
+   BirthRateRND 2
+   Offset 0 1 0
+   Material "{55020E0786F83004}graphics/particles/materials/smoke/smoke_anim_01.emat"
+   SizeMultiplier 6
+   SizeRND 1
+   Spring 1
+   AnimFPS 0
+   RandomFrame 1
+   LifeTime 2
+   LifeTimeRND 1
+   Color {
+    0 1 0 0 1 1 0.5 0
+   }
+   Alpha {
+    0 0 0.17411 0.07746 0.25889 0.09155 0.29372 0.00704 0.36109 0.09155 0.42695 0.01408 0.55413 0.12676 0.58819 0.01408 0.63134 0.06338 0.64799 0.11268 0.66843 0.04225 0.6972 0.07746 0.73429 0.1338 0.78123 0.03521 0.83346 0.05634 1 0
+   }
+   EffectTime 10
+   ColorMast {
+    0 1 0.5 0 1 1 0.5 0
+   }
+   AlphaMast {
+    0 0.0493 1 0.0493
+   }
+   SizeMast {
+    0 1 1 0.5
+   }
+   BRateMast {
+    0 0.5 1 1
+   }
+  }
+ }
+}

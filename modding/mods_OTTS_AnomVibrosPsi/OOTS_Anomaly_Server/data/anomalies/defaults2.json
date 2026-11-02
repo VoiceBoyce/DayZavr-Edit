@@ -1,0 +1,364 @@
+[
+	{
+		"Unique_Group_Title" : "Anomaly_Tramplin_Tir1",
+		"Classname_Anomaly_Object": "Anomaly_Tramplin",
+		"Chance_To_Spawn": 70,
+		"Positions_Spawn_Anomaly": [
+			[3495.822510, 42.326794, 1184.921875],
+			[3436.218994, 85.588821, 1403.495117]
+		],
+		"m_SpawnByRadius": {
+			"position": [
+				3731.720947,
+				70.003830,
+				3404.044678
+			],
+			"use_chance": 0,
+			"count_minmax": [
+				100,
+				101
+			],
+			"min_radius_minmax": [
+				10,
+				20
+			],
+			"max_radius_minmax": [
+				300,
+				350
+			]
+		},
+		"Enable_Spawn_ArtefactsWithoutDetectors": 1,
+		"Enable_Spawn_ArtefactsWithDetectors": 1,
+		"ArtefactsWithoutDetectors": {
+			"MaxInOnePoint": 1,
+			"ArtefactsList": [
+				{
+					"Classname": "OOTS_ART_Gravi",
+					"Chance": 5
+				}
+			]
+		},
+		"ArtefactsWithDetectors": {
+		   "MaxInOnePoint": 2,
+			"ArtefactsList": [
+				{
+					"Classname_Detector": "Anomaly_Detector_Otklik",
+					"Detect_Artefacts_Settings": [
+						{
+							"Classname": "OOTS_ART_Gravi",
+							"Chance": 1
+						},
+						{
+							"Classname": "OOTS_ART_Medusa",
+							"Chance": 1
+						}
+					]
+				},
+				{
+					"Classname_Detector": "Anomaly_Detector_Medved",
+					"Detect_Artefacts_Settings": [
+						{
+							"Classname": "OOTS_ART_Gravi",
+							"Chance": 1
+						},
+						{
+							"Classname": "OOTS_ART_Spring",
+							"Chance": 1
+						},
+						{
+							"Classname": "OOTS_ART_Medusa",
+							"Chance": 1
+						},
+						{
+							"Classname": "OOTS_ART_Braen",
+							"Chance": 2
+						}
+					]
+				},
+				{
+					"Classname_Detector": "Anomaly_Detector_Svarog",
+					"Detect_Artefacts_Settings": [
+						{
+							"Classname": "OOTS_ART_Gravi",
+							"Chance": 2
+						},
+						{
+							"Classname": "OOTS_ART_Spring",
+							"Chance": 1
+						},
+						{
+							"Classname": "OOTS_ART_pustishka",
+							"Chance": 1
+						},
+						{
+							"Classname": "OOTS_ART_Braen",
+							"Chance": 2
+						}
+					]
+				}
+			]
+		}
+	},
+	{
+		"Unique_Group_Title" : "Anomaly_Voronka_Tir1",
+		"Classname_Anomaly_Object": "Anomaly_Voronka",
+		"Chance_To_Spawn": 70,
+		"Positions_Spawn_Anomaly": [
+			[3479.858643, 42.136482, 1196.064697],
+			[3720.234375, 54.934601, 1298.486084]
+		],
+		"m_SpawnByRadius": {
+			"position": [
+				3763.173584,
+				73.595848,
+				3925.571777
+			],
+			"use_chance": 0,
+			"count_minmax": [
+				100,
+				101
+			],
+			"min_radius_minmax": [
+				10,
+				20
+			],
+			"max_radius_minmax": [
+				300,
+				350
+			]
+		},
+		"Enable_Spawn_ArtefactsWithoutDetectors": 1,
+		"Enable_Spawn_ArtefactsWithDetectors": 1,
+		"ArtefactsWithoutDetectors": {
+			"MaxInOnePoint": 1,
+			"ArtefactsList": [
+				{
+					"Classname": "OOTS_ART_vivert",
+					"Chance": 1
+				}
+			]
+		},
+		"ArtefactsWithDetectors": {
+			"MaxInOnePoint": 2,
+			"ArtefactsList": [
+				{
+					"Classname_Detector": "Anomaly_Detector_Otklik",
+					"Detect_Artefacts_Settings": [
+						{
+							"Classname": "OOTS_ART_vivert",
+							"Chance": 3
+						}
+					]
+				},
+				{
+					"Classname_Detector": "Anomaly_Detector_Medved",
+					"Detect_Artefacts_Settings": [
+						{
+							"Classname": "OOTS_ART_vivert",
+							"Chance": 3
+						},
+						{
+							"Classname": "OOTS_ART_Thorn",
+							"Chance": 3
+						},
+						{
+							"Classname": "OOTS_ART_Medusa",
+							"Chance": 2
+						},
+						{
+							"Classname": "OOTS_ART_Braen",
+							"Chance": 2
+						}
+					]
+				},
+				{
+					"Classname_Detector": "Anomaly_Detector_Svarog",
+					"Detect_Artefacts_Settings": [
+						{
+							"Classname": "OOTS_ART_vivert",
+							"Chance": 2
+						},
+						{
+							"Classname": "OOTS_ART_Thorn",
+							"Chance": 3
+						},
+						{
+							"Classname": "OOTS_ART_CrustalThorn",
+							"Chance": 3
+						},
+						{
+							"Classname": "OOTS_ART_Medusa",
+							"Chance": 2
+						},
+						{
+							"Classname": "OOTS_ART_Braen",
+							"Chance": 2
+						}
+					]
+				}
+			]
+		}
+	},
+	{
+		"Unique_Group_Title" : "Anomaly_EMP_Blast_Tir1",
+		"Classname_Anomaly_Object": "Anomaly_EMP_Blast",
+		"Chance_To_Spawn": 100,
+		"Positions_Spawn_Anomaly": [
+			[3565.199951, 24.900152, 904.512268],
+			[3564.425049, 25.021610, 967.890564]
+		],
+		"m_SpawnByRadius": {
+			"position": [
+				4149.791992,
+				83.694511,
+				4873.059082
+			],
+			"use_chance": 0,
+			"count_minmax": [
+				100,
+				101
+			],
+			"min_radius_minmax": [
+				10,
+				20
+			],
+			"max_radius_minmax": [
+				300,
+				350
+			]
+		},
+		"Enable_Spawn_ArtefactsWithoutDetectors": 1,
+		"Enable_Spawn_ArtefactsWithDetectors": 1,
+		"ArtefactsWithoutDetectors": {
+			"MaxInOnePoint": 1,
+			"ArtefactsList": [
+				{
+					"Classname": "OOTS_ART_vivert",
+					"Chance": 1
+				}
+			]
+		},
+		"ArtefactsWithDetectors": {
+			"MaxInOnePoint": 2,
+			"ArtefactsList": [
+				{
+					"Classname_Detector": "Anomaly_Detector_Otklik",
+					"Detect_Artefacts_Settings": [
+						{
+							"Classname": "OOTS_ART_vivert",
+							"Chance": 3
+						}
+					]
+				}
+			]
+		}
+	},
+	{
+		"Unique_Group_Title" : "Anomaly_Steklo_Tir1",
+		"Classname_Anomaly_Object": "Anomaly_Steklo",
+		"Chance_To_Spawn": 100,
+		"Positions_Spawn_Anomaly": [
+			[3589.297852, 42.185726, 1055.763672],
+			[3611.201416, 46.898670, 1090.578735]
+		],
+		"m_SpawnByRadius": {
+			"position": [
+				4182.772949,
+				134.910751,
+				6088.472168
+			],
+			"use_chance": 0,
+			"count_minmax": [
+				100,
+				101
+			],
+			"min_radius_minmax": [
+				10,
+				20
+			],
+			"max_radius_minmax": [
+				300,
+				350
+			]
+		},
+		"Enable_Spawn_ArtefactsWithoutDetectors": 1,
+		"Enable_Spawn_ArtefactsWithDetectors": 1,
+		"ArtefactsWithoutDetectors": {
+			"MaxInOnePoint": 1,
+			"ArtefactsList": [
+				{
+					"Classname": "OOTS_ART_vivert",
+					"Chance": 1
+				}
+			]
+		},
+		"ArtefactsWithDetectors": {
+			"MaxInOnePoint": 2,
+			"ArtefactsList": [
+				{
+					"Classname_Detector": "Anomaly_Detector_Otklik",
+					"Detect_Artefacts_Settings": [
+						{
+							"Classname": "OOTS_ART_vivert",
+							"Chance": 3
+						}
+					]
+				}
+			]
+		}
+	},
+	{
+		"Unique_Group_Title" : "Anomaly_DeadZone_Tir1",
+		"Classname_Anomaly_Object": "Anomaly_DeadZone",
+		"Chance_To_Spawn": 100,
+		"Positions_Spawn_Anomaly": [
+			[3632.040039, 47.677132, 1117.974487],
+			[3686.829346, 50.056847, 1175.543945]
+		],
+		"m_SpawnByRadius": {
+			"position": [
+				3457.470215,
+				112.000000,
+				6600.370117
+			],
+			"use_chance": 0,
+			"count_minmax": [
+				100,
+				101
+			],
+			"min_radius_minmax": [
+				10,
+				20
+			],
+			"max_radius_minmax": [
+				300,
+				350
+			]
+		},
+		"Enable_Spawn_ArtefactsWithoutDetectors": 1,
+		"Enable_Spawn_ArtefactsWithDetectors": 1,
+		"ArtefactsWithoutDetectors": {
+			"MaxInOnePoint": 1,
+			"ArtefactsList": [
+				{
+					"Classname": "OOTS_ART_vivert",
+					"Chance": 1
+				}
+			]
+		},
+		"ArtefactsWithDetectors": {
+			"MaxInOnePoint": 2,
+			"ArtefactsList": [
+				{
+					"Classname_Detector": "Anomaly_Detector_Otklik",
+					"Detect_Artefacts_Settings": [
+						{
+							"Classname": "OOTS_ART_vivert",
+							"Chance": 3
+						}
+					]
+				}
+			]
+		}
+	}
+]

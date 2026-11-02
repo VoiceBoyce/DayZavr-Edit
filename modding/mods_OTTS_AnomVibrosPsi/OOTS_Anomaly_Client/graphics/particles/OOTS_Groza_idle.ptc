@@ -1,0 +1,131 @@
+EffectDef {
+ MinFPS 30
+ Emitors {
+  EmitorDef Smoke {
+   ShapeType Ellipse
+   ShapeSize 35 3 35
+   MaxNum 300
+   BirthRate 30
+   BirthRateRND 30
+   Material "{0105FA7C517744F7}graphics/particles/materials/smoke/smoke_cloud_01_b.emat"
+   SizeMultiplier 6
+   SizeRND 3
+   RandomRotDir 1
+   RotMultiplier 30
+   StreakFullUV 0
+   RandomAngle 1
+   Sort 1
+   Velocity 1
+   VelocityRND 0.1
+   Spring 0.001
+   Wind 0
+   AnimFPS 10
+   RandomFrame 1
+   LifeTime 5
+   LifeTimeRND 3
+   Color {
+    0 0.4148 0.4148 0.4148 1 0.3778 0.3926 0.4
+   }
+   Alpha {
+    0 0 0.44706 0.2 1 0
+   }
+   Size {
+    0 0.35556 0.05817 0.47407 0.14052 0.65185 0.2817 0.92593 0.46144 1 1 1
+   }
+   AlphaMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 0 0.18301 0.22222 0.24248 0.57037 0.31111 0.87407 0.37647 1 1 1
+   }
+  }
+  EmitorDef Electro {
+   ShapeType Ellipse
+   ShapeSize 30 5 30
+   MaxNum 10
+   BirthRate 3
+   BirthRateRND 2
+   Offset 0 3 0
+   Material "{4E3998CCD97CB908}OOTS_Anomaly_Client/graphics/particles/materials/electra/Lighting01/Lighting001.emat"
+   SizeMultiplier 0.3
+   SizeRND 1
+   RandomRotDir 1
+   RandomAngle 1
+   Velocity 0
+   AnimOnce 0
+   AnimFPS 30
+   LifeTime 2
+   LifeTimeRND 3
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0.62222 0.04837 0.5037 0.10654 0.91111 0.18627 0.25926 0.25098 0.78519 0.31111 0.47407 0.43922 1 0.56863 0.53333 0.65752 0.65185 0.73399 0.25185 0.80392 0.39259 0.89542 0.97778 1 0
+   }
+   AlphaMast {
+    0 0 0.4634 1 1 0
+   }
+  }
+  EmitorDef Electro2 {
+   ShapeType Ellipse
+   ShapeSize 30 10 30
+   MaxNum 5
+   BirthRateRND 3
+   Offset 0 3 0
+   Material "{564BE4EF62ECAEBF}OOTS_Anomaly_Client/graphics/particles/materials/electra/Lighting02/Lighting002.emat"
+   SizeMultiplier 0.1
+   SizeRND 0.5
+   RandomRotDir 1
+   VelAngle 0
+   RandomAngle 1
+   Velocity 0
+   AnimOnce 0
+   AnimFPS 30
+   LifeTimeRND 2
+   Alpha {
+    0 1 0.04379 0.12593 0.08497 0.42963 0.18627 0.25926 0.25098 0.78519 0.31111 0.47407 0.43922 1 0.56863 0.53333 0.65752 0.65185 0.69542 0.14815 0.76144 0.96296 0.80392 0.39259 0.91503 0.95556 1 0
+   }
+   AlphaMast {
+    0 0 0.50654 1 1 0
+   }
+  }
+  EmitorDef Electro3 {
+   ShapeType Ellipse
+   ShapeSize 25 10 25
+   MaxNum 2
+   BirthRate 1
+   BirthRateRND 1
+   Offset 0 4 0
+   Material "{4E3998CCD97CB908}OOTS_Anomaly_Client/graphics/particles/materials/electra/Lighting01/Lighting001.emat"
+   SizeMultiplier 3
+   SizeRND 1
+   RandomRotDir 1
+   RandomAngle 1
+   Velocity 0
+   AnimOnce 0
+   AnimFPS 30
+   LifeTime 2
+   Alpha {
+    0 1 0.04967 0.78519 0.11373 0.97037 0.18627 0.25926 0.25098 0.78519 0.31111 0.47407 0.43922 1 0.51765 0.41481 0.61307 0.98519 0.67516 0.3037 0.73268 0.99259 0.80392 0.39259 0.85294 0.92593 0.9085 0.17778 1 0.72593
+   }
+   AlphaMast {
+    0 0 0.50654 1 1 0
+   }
+  }
+  EmitorDef Sparller {
+   ShapeType Ellipse
+   ShapeSize 30 10 30
+   Offset 0 3 0
+   Material "{5855301D1406CEBF}OOTS_Anomaly_Client/graphics/particles/materials/electra/Lighting02/SparkElectra.emat"
+   SizeMultiplier 0.1
+   SizeRND 0.05
+   Velocity 0.2
+   VelocityRND 0.4
+   LifeTime 4
+   LifeTimeRND 2
+   Color {
+    0 0.3481 0.363 0.5926 1 0.3333 0.3407 0.6
+   }
+  }
+ }
+}

@@ -1,0 +1,8 @@
+Particle {
+ AlbedoMap "{6045BF8516D5275A}OOTS_Anomaly_Client/graphics/particles/materials/snow/WhiteSmoke.edds" 
+ Emissive 1 1 1 1
+ NormalMap "{F316ECCF052EDA39}OOTS_Anomaly_Client/graphics/particles/materials/snow/WhiteSmokeNorm.edds" 
+ TileU 2
+ TileV 2
+ Softness 2
+}

@@ -1,0 +1,10 @@
+Particle {
+ AlbedoMap "{044F071BEDA0F0DC}OOTS_Anomaly_Client/graphics/particles/materials/BlackHole/LightSphire.edds" 
+ Emissive 1 0.7255 0 1
+ CastShadow 1
+ BlendMode Additive_AlphaModulate
+ TileU 5
+ TileV 5
+ Softness 1
+ CameraBlendFar 0.001
+}

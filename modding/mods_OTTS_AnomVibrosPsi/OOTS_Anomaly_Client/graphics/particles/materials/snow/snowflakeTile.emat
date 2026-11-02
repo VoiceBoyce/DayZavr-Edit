@@ -1,0 +1,9 @@
+Particle {
+ AlbedoMap "{C9133E36B2A77599}OOTS_Anomaly_Client/graphics/particles/materials/snow/snowflakeTile.edds" 
+ Emissive 1 1 1 1
+ NormalMap "{C9133E36B2A77599}OOTS_Anomaly_Client/graphics/particles/materials/snow/snowflakeTile.edds" 
+ BlendMode Additive_AlphaModulate
+ TileU 8
+ TileV 8
+ Softness 2
+}

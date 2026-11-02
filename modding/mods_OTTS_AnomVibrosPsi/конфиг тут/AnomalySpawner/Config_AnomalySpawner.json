@@ -1,0 +1,172 @@
+{
+    "DebugLogs_enabled": 1,
+    "DetectorsConfig": [
+        {
+			"Comment__": "САМОЕ ГОВНО ДЕТЕКТОР",
+            "ClassName": "Anomaly_Detector_Otklik",
+			"Radius": 10.0
+        },
+        {
+			"Comment__": "Средний детектор",
+            "ClassName": "Anomaly_Detector_Medved",
+			"Radius": 15.0
+        },
+        {
+			"Comment__": "Самый лучший детектор",
+            "ClassName": "Anomaly_Detector_Svarog",
+			"Radius": 20.0
+        }
+    ],
+    "AnomalyList": [
+		{	"m_Title" : "A1_Anomalies",
+			"m_Handler" : 
+			{
+				
+			},
+			"m_Files" : 
+			[
+				"Anomalies_Work\\A1_Anomalies.json"
+			]
+		},
+		{	"m_Title" : "A2_Anomalies",
+			"m_Handler" : 
+			{
+			},
+			"m_Files" : 
+			[
+				"Anomalies_Work\\A2_Anomalies.json"
+			]
+		},
+		{	"m_Title" : "A3_Anomalies",
+			"m_Handler" : 
+			{	
+			},
+			"m_Files" : 
+			[
+				"Anomalies_Work\\A3_Anomalies.json"
+			]
+		},
+		{	"m_Title" : "A4_Anomalies",
+			"m_Handler" : 
+			{			
+			},
+			"m_Files" : 
+			[
+				"Anomalies_Work\\A4_Anomalies.json"
+			]
+		},
+		
+		{	"m_Title" : "B1_Anomalies",
+			"m_Handler" : 
+			{		
+			},
+			"m_Files" : 
+			[
+				"Anomalies_Work\\B1_Anomalies.json"
+			]
+		},
+		{	"m_Title" : "B2_Anomalies",
+			"m_Handler" : 
+			{			
+			},
+			"m_Files" : 
+			[
+				"Anomalies_Work\\B2_Anomalies.json"
+			]
+		},
+		{	"m_Title" : "B3_Anomalies",
+			"m_Handler" : 
+			{		
+			},
+			"m_Files" : 
+			[
+				"Anomalies_Work\\B3_Anomalies.json"
+			]
+		},
+		{	"m_Title" : "B4_Anomalies",
+			"m_Handler" : 
+			{			
+			},
+			"m_Files" : 
+			[
+				"Anomalies_Work\\B4_Anomalies.json"
+			]
+		},
+		
+		{	"m_Title" : "C1_Anomalies",
+			"m_Handler" : 
+			{		
+			},
+			"m_Files" : 
+			[
+				"Anomalies_Work\\C1_Anomalies.json"
+			]
+		},
+		{	"m_Title" : "C2_Anomalies",
+			"m_Handler" : 
+			{
+			},
+			"m_Files" : 
+			[
+				"Anomalies_Work\\C2_Anomalies.json"
+			]
+		},
+		{	"m_Title" : "C3_Anomalies",
+			"m_Handler" : 
+			{		
+			},
+			"m_Files" : 
+			[
+				"Anomalies_Work\\C3_Anomalies.json"
+			]
+		},
+		{	"m_Title" : "C4_Anomalies",
+			"m_Handler" : 
+			{		
+			},
+			"m_Files" : 
+			[
+				"Anomalies_Work\\C4_Anomalies.json"
+			]
+		},
+		
+		{	"m_Title" : "D1_Anomalies",
+			"m_Handler" : 
+			{		
+			},
+			"m_Files" : 
+			[
+				"Anomalies_Work\\D1_Anomalies.json"
+			]
+		},
+		{	"m_Title" : "D2_Anomalies",
+			"m_Handler" : 
+			{		
+			},
+			"m_Files" : 
+			[
+				"Anomalies_Work\\D2_Anomalies.json"
+			]
+		},
+		{	"m_Title" : "D3_Anomalies",
+			"m_Handler" : 
+			{		
+			},
+			"m_Files" : 
+			[
+				"Anomalies_Work\\D3_Anomalies.json"
+			]
+		},
+		{	"m_Title" : "D4_Anomalies",
+			"m_Handler" : 
+			{		
+			},
+			"m_Files" : 
+			[
+				"Anomalies_Work\\D4_Anomalies.json"
+			]
+		}
+    ],
+	"Teleports" : 
+	[]
+}

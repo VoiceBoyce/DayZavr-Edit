@@ -1,0 +1,10 @@
+Particle {
+ AlbedoMap "{723D9ED725459763}OOTS_Anomaly_Client/graphics/particles/materials/BlackHole/Hole.edds" 
+ Color 0 0 0 1
+ Diffuse 0 0 0 1
+ Ambient 0 0 0 1
+ Emissive 0.8745 1 1 1
+ BlendMode ColorModulate
+ Softness 1
+ CameraBlendFar 0.001
+}

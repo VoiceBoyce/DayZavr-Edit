@@ -1,0 +1,10 @@
+Particle {
+ AlbedoMap "{37085B5E3EF20C9B}OOTS_Anomaly_Client/graphics/particles/materials/deathzone/BubbleBlack.edds" 
+ Ambient 0 0 0 1
+ Emissive 0 0 0 1
+ NormalMap "{37085B5E3EF20C9B}OOTS_Anomaly_Client/graphics/particles/materials/deathzone/BubbleBlack.edds" 
+ HeightMap "{37085B5E3EF20C9B}OOTS_Anomaly_Client/graphics/particles/materials/deathzone/BubbleBlack.edds" 
+ TileU 4
+ TileV 2
+ CameraBlendFar 0.001
+}

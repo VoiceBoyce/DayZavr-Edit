@@ -1,0 +1,9 @@
+Particle {
+ AlbedoMap "{A7F447FD996F55FC}OOTS_Anomaly_Client/graphics/particles/materials/BlackHole/HoleRing.edds" 
+ Emissive 1 0.7412 0 1
+ CastShadow 1
+ BlendMode Additive_AlphaModulate
+ TileV 0
+ Softness 2
+ CameraBlendFar 0.001
+}

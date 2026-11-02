@@ -1,0 +1,159 @@
+EffectDef {
+ MinFPS 60
+ Emitors {
+  EmitorDef Lg_Strong02 {
+   ShapeType Box
+   ShapeSize 3 0 3
+   MaxNum 5
+   BirthRate 2
+   BirthRateRND 1
+   Offset 0 0.4 0
+   Material "{564BE4EF62ECAEBF}OOTS_Anomaly_Client/graphics/particles/materials/electra/Lighting02/Lighting002.emat"
+   SizeMultiplier 0.7
+   SizeRND 1.5
+   RandomRotDir 1
+   RotMultiplier 30
+   RandomAngle 1
+   Velocity 1
+   Wind 0
+   AnimOnce 1
+   AnimFPS 65
+   LifetimeByAnim 1
+   RandomFrame 0
+   Color {
+    0 0.85 0.5125 1 0.3523 0.6625 0.4187 0.9563 1 1 1 1
+   }
+   EffectTime 5
+   Repeat 1
+   BRateMast {
+    0 0 0.02093 0 0.02481 1 0.14264 1 0.14651 0 0.35271 0 0.35659 1 0.47829 1 0.48217 0 0.8031 0 0.80698 1 1 1
+   }
+  }
+  EmitorDef Ground {
+   ShapeType Box
+   ShapeSize 3 3 0
+   ConeAngle 0 0 0
+   MaxNum 3
+   BirthRate 2
+   BirthRateRND 1
+   BirthRateVel 1
+   Angles 90 90 0
+   LocalTransform 1
+   Material "{564BE4EF62ECAEBF}OOTS_Anomaly_Client/graphics/particles/materials/electra/Lighting02/Lighting002.emat"
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 1
+   SizeRND 2
+   RandomRotDir 0
+   RotMultiplier 0
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   BillboardingType None
+   Velocity 0
+   AnimOnce 1
+   AnimFPS 30
+   LifetimeByAnim 1
+   RandomFrame 0
+   LifeTime 4
+   LifeTimeRND 5
+   Color {
+    0 0.6812 0.5562 1 0.3528 0.7563 0.5 0.925 1 1 1 1
+   }
+   Alpha {
+    0 0 0.10094 0.88028 0.17919 0.61268 0.25117 1 0.27934 0.78169 0.33099 1 0.38185 0.76056 0.43505 1 0.518 0.71831 0.58607 1 0.67684 0.71127 0.73239 1 0.80908 0.76761 0.86307 1 0.91706 0.28169 1 0
+   }
+   Size {
+    0 0 0.12989 0 0.1338 1 0.19327 1 0.19718 0 0.26995 0 0.27387 1 0.51643 0.95775 0.74022 1 0.74413 0 0.84194 0 0.84585 1 0.92332 1 0.92723 0 1 0
+   }
+   EffectTime 5
+   Repeat 1
+   AlphaMast {
+    0 1 1 1
+   }
+  }
+  EmitorDef Spark {
+   ShapeType Box
+   ShapeSize 1 0 1
+   ConeAngle 360 0 180
+   MaxNum 10
+   BirthRate 0
+   BirthRateRND 5
+   Offset 0 0 0
+   Angles 0 0 0
+   Material "{5855301D1406CEBF}OOTS_Anomaly_Client/graphics/particles/materials/electra/Lighting02/SparkElectra.emat"
+   SizeMultiplier 0.09
+   SizeRND 0.1
+   StretchMultiplier 1.03
+   RandomAngle 1
+   Velocity 4
+   VelocityRND 0.1
+   VelAffect 3
+   AirResistance 1
+   GravityMultiply 0.5
+   GravityMultiplyRND 0.2
+   Spring 0
+   Wind 1
+   LifetimeByAnim 0
+   Color {
+    0 0 0.7778 1 1 0 0.8222 1
+   }
+   Alpha {
+    0 1 0.01473 0.46479 0.03876 0.76761 0.06822 0.16197 0.08372 1 0.10465 0 0.11395 1 0.12713 0.11972 0.16202 1 0.16589 0.12676 0.17364 1 0.18992 0 0.21163 1 0.23178 0.35211 0.2907 0.52113 1 0
+   }
+   Size {
+    0 0.75352 1 1
+   }
+   EffectTime 5
+   Repeat 1
+   SizeMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 0 0.21008 0 0.21395 1 0.2845 1 0.28837 0 0.5 0 0.50388 1 0.62403 1 0.62791 0 0.76202 0 0.76589 1 1 1
+   }
+  }
+  EmitorDef SparkLow04 {
+   ShapeType Box
+   ShapeSize 3 0.2 3
+   ConeAngle 360 0 180
+   MaxNum 15
+   BirthRate 5
+   BirthRateRND 10
+   Offset 0 1 0
+   Angles 0 0 0
+   Material "{5855301D1406CEBF}OOTS_Anomaly_Client/graphics/particles/materials/electra/Lighting02/SparkElectra.emat"
+   SizeMultiplier 0.05
+   SizeRND 0.1
+   StretchMultiplier 1.03
+   RandomAngle 1
+   Velocity 4
+   VelocityRND 0.1
+   VelAffect 3
+   AirResistance 1
+   GravityMultiply 0.5
+   GravityMultiplyRND 0.2
+   Spring 0
+   Wind 1
+   LifetimeByAnim 0
+   Color {
+    0 0 0.9111 1 1 0 0.8815 1
+   }
+   Alpha {
+    0 1 0.03333 0.5493 0.06202 1 0.07054 0.16901 0.08372 1 0.10155 0.20423 0.11395 1 0.12946 0.23239 0.16202 1 0.16589 0.12676 0.17364 1 0.1907 0.10563 0.21163 1 0.23178 0.35211 0.28682 0.23239 1 0.32394
+   }
+   Size {
+    0 0.75352 1 1
+   }
+   EffectTime 5
+   Repeat 1
+   SizeMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 1 0.01163 1 0.0155 0 0.23798 0 0.24186 1 0.33178 1 0.33566 0 0.49225 0 0.49612 1 0.59457 1 0.59845 0 0.71473 0 0.7186 1 0.91473 1 0.9186 0 1 0
+   }
+  }
+ }
+}

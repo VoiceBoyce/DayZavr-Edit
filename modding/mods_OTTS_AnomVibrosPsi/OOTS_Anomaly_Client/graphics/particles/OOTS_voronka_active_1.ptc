@@ -1,0 +1,271 @@
+EffectDef {
+ MinFPS 30
+ Emitors {
+  EmitorDef Leavse2 {
+   ShapeType Sphere
+   ShapeSize 8 8 8
+   ConeAngle 0 0 0
+   MaxNum 300
+   BirthRate 100
+   BirthRateRND 15
+   Offset 0 1 0
+   Material "{4369448B822FD818}graphics/particles/materials/enviroment/leaves_02.emat"
+   SizeMultiplier 0.1
+   SizeRND 0.05
+   RandomRotDir 1
+   RotMultiplier 10
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   Spring 0.2
+   AnimFPS 10
+   RandomFrame 0
+   LifeTime 2
+   LifeTimeRND 1
+   Alpha {
+    0 1 0.03052 1 0.08529 0 0.49432 0 0.86298 0 1 0
+   }
+   Repeat 1
+  }
+  EmitorDef Glass {
+   ShapeType Sphere
+   ShapeSize 8 8 8
+   ConeAngle 0 0 0
+   MaxNum 100
+   BirthRate 5
+   BirthRateRND 5
+   Offset 0 1 0
+   Material "{EFD31CE137DF4995}graphics/particles/materials/enviroment/glass_01.emat"
+   SizeMultiplier 0.02
+   SizeRND 0.05
+   RandomRotDir 1
+   RotMultiplier 10
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   Spring 0.1
+   AnimFPS 10
+   RandomFrame 0
+   LifeTime 2
+   LifeTimeRND 1
+   Alpha {
+    0 1 0.11737 1 0.21127 0.03521 0.49432 0 0.86298 0 1 0
+   }
+   Repeat 1
+  }
+  EmitorDef Show {
+   ShapeType Sphere
+   ShapeSize 8 8 8
+   ConeAngle 0 0 0
+   MaxNum 2000
+   BirthRate 900
+   BirthRateRND 1000
+   Offset 0 1 0
+   Material "{CB7AF4FD8ACBFDFC}graphics/particles/materials/glow/glow1.emat"
+   SizeMultiplier 0.002
+   SizeRND 0.005
+   RandomRotDir 1
+   RotMultiplier 10
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   Spring 0.1
+   AnimFPS 10
+   RandomFrame 0
+   LifeTime 0.5
+   LifeTimeRND 1
+   Alpha {
+    0 1 0.11737 1 0.21127 0.03521 0.49432 0 0.86298 0 1 0
+   }
+   Repeat 1
+  }
+  EmitorDef Stone {
+   ShapeType Sphere
+   ShapeSize 8 8 8
+   ConeAngle 0 0 0
+   MaxNum 15
+   BirthRate 2
+   BirthRateRND 1
+   BirthRateVel 1
+   Offset 0 1 0
+   Material "{118F069016CE1546}graphics/particles/materials/enviroment/stones.emat"
+   SizeMultiplier 0.05
+   SizeRND 0.1
+   RandomRotDir 1
+   RotMultiplier 10
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   Spring 0.05
+   AnimFPS 0
+   RandomFrame 1
+   LifeTime 2
+   LifeTimeRND 1
+   Alpha {
+    0 1 0.11737 1 0.21127 0.03521 0.49432 0 0.86298 0 1 0
+   }
+   Repeat 1
+  }
+  EmitorDef JukeOne {
+   ShapeType Sphere
+   ShapeSize 6 6 6
+   ConeAngle 0 0 0
+   MaxNum 1000
+   BirthRate 700
+   BirthRateRND 300
+   BirthRateVel 700
+   Offset 0 1 0
+   Material "{37F2C835954FBAF0}graphics/particles/materials/enviroment/fly_swarm_01.emat"
+   SizeMultiplier 2
+   SizeRND 3
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 5
+   VelocityRND 1
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 1
+   GravityMultiplyRND 2
+   Spring 0.1
+   AnimFPS 0
+   RandomFrame 1
+   LifeTime 0.2
+   LifeTimeRND 0.5
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.14632 1 0.80673 1 1 0
+   }
+   Size {
+    0 1 1 0.14789
+   }
+   EffectTime 10
+   Repeat 1
+   ColorMast {
+    0 1 1 1 1 1 1 1
+   }
+   AlphaMast {
+    0 1 1 1
+   }
+   SizeMast {
+    0 1 1 0.5
+   }
+   BRateMast {
+    0 0.5 1 1
+   }
+  }
+  EmitorDef Juke {
+   ShapeType Sphere
+   ShapeSize 6 6 6
+   ConeAngle 0 0 0
+   MaxNum 1000
+   BirthRate 700
+   BirthRateRND 900
+   BirthRateVel 700
+   Offset 0 1 0
+   Material "{37F2C835954FBAF0}graphics/particles/materials/enviroment/fly_swarm_01.emat"
+   SizeMultiplier 0.5
+   SizeRND 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 5
+   VelocityRND 1
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 1
+   GravityMultiplyRND 2
+   Spring 0.1
+   AnimFPS 0
+   RandomFrame 1
+   LifeTime 0.2
+   LifeTimeRND 0.5
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.14632 1 0.80673 1 1 0
+   }
+   Size {
+    0 1 1 0.14789
+   }
+   EffectTime 10
+   Repeat 1
+   ColorMast {
+    0 1 1 1 1 1 1 1
+   }
+   AlphaMast {
+    0 1 1 1
+   }
+   SizeMast {
+    0 1 1 0.5
+   }
+   BRateMast {
+    0 0.5 1 1
+   }
+  }
+  EmitorDef SMOKE {
+   ShapeType Box
+   ShapeSize 7 7 7
+   ConeAngle 0 0 0
+   MaxNum 200
+   BirthRate 50
+   BirthRateRND 49
+   Offset 0 1 0
+   Material "{0BEA27443975BE0B}graphics/particles/materials/smoke/smoke_anim_02.emat"
+   SizeMultiplier 5
+   SizeRND 3
+   RandomAngle 1
+   Velocity 0
+   VelocityRND 0
+   Spring 0.2
+   AnimFPS 0
+   RandomFrame 1
+   LifeTime 2
+   LifeTimeRND 3
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0.61972 1 0.5
+   }
+   Size {
+    0 1 0.05556 0 1 0
+   }
+   EffectTime 10
+   Repeat 1
+   ColorMast {
+    0 1 1 1 1 1 1 1
+   }
+   AlphaMast {
+    0 0.07042 1 0.05634
+   }
+   SizeMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 1 1 1
+   }
+  }
+ }
+}

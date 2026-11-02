@@ -1,0 +1,162 @@
+EffectDef {
+ Emitors {
+  EmitorDef Snow {
+   ShapeType Sphere
+   ShapeSize 9 9 9
+   ConeAngle 360 360 10
+   MaxNum 50
+   BirthRate 40
+   BirthRateRND 10
+   Offset 0 1.5 0
+   Material "{009C2EBAACD2D72A}graphics/particles/materials/fire/sparks1.emat"
+   SizeMultiplier 0.01
+   SizeRND 0.05
+   RandomRotDir 1
+   RotMultiplier 10
+   RandomAngle 1
+   Sort 0
+   Velocity 1
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   Spring 0.1
+   AnimFPS 10
+   RandomFrame 0
+   LifeTime 2
+   LifeTimeRND 1
+   Alpha {
+    0 1 0.04147 1 0.37017 0.9507 0.61895 0 0.86298 0 1 0
+   }
+   Size {
+    0 1 0.24961 0 1 0
+   }
+   EffectTime 2
+   Repeat 0
+   AlphaMast {
+    0 0.5493 1 0.5493
+   }
+  }
+  EmitorDef Snow2 {
+   ShapeType Sphere
+   ShapeSize 9 9 9
+   ConeAngle 360 360 10
+   MaxNum 50
+   BirthRate 100
+   BirthRateRND 20
+   Offset 0 1.5 0
+   Material "{009C2EBAACD2D72A}graphics/particles/materials/fire/sparks1.emat"
+   SizeMultiplier 0.05
+   SizeRND 0.1
+   RandomRotDir 1
+   RotMultiplier 10
+   RandomAngle 1
+   Sort 0
+   Velocity 1
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   Spring 0.2
+   AnimFPS 10
+   RandomFrame 0
+   LifeTime 2
+   LifeTimeRND 1
+   Alpha {
+    0 1 0.04147 1 0.37017 0.9507 0.49432 0 0.86298 0 1 0
+   }
+   Size {
+    0 1 0.24961 0 1 0
+   }
+   EffectTime 2
+   Repeat 0
+   AlphaMast {
+    0 0.5493 1 0.5493
+   }
+  }
+  EmitorDef HolerING {
+   ConeAngle 0 0 0
+   MaxNum 40
+   BirthRate 3
+   BirthRateRND 5
+   BirthRateVel 1
+   Offset 0 1.5 0
+   Material "{B4E68553BD67D074}OOTS_Anomaly_Client/graphics/particles/materials/teleport/GalaxyTwo.emat"
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 6
+   SizeRND 6
+   RandomRotDir 0
+   RotMultiplier 105
+   StreakFullUV 1
+   VelAngle 0
+   RandomAngle 1
+   Velocity 15
+   Spring 1
+   AnimOnce 0
+   AnimFPS 0
+   RandomFrame 0
+   LifeTime 1
+   LifeTimeRND 1
+   Color {
+    0 0 1 1 1 1 0.5 1
+   }
+   Alpha {
+    0 0.05185 0.05752 0.17037 0.18235 0.06667 0.41503 0 1 0
+   }
+   Size {
+    0 1 0.40376 0 1 0
+   }
+   EffectTime 2
+   Repeat 0
+   ColorMast {
+    0 1 0.5 1 1 1 0.5 1
+   }
+   AlphaMast {
+    0 0.19718 1 0.20423
+   }
+   SizeMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 1 1 1
+   }
+  }
+  EmitorDef Light {
+   BirthRate 10
+   BirthRateRND 10
+   Offset 0 1.5 0
+   Material "{009C2EBAACD2D72A}graphics/particles/materials/fire/sparks1.emat"
+   SizeMultiplier 15
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 300
+   RandomAngle 1
+   Velocity 0
+   Spring 0
+   AnimFPS 0
+   RandomFrame 1
+   LifeTime 5
+   Color {
+    0 0.2148 0.9407 1 1 0.6831 0.5 1
+   }
+   Alpha {
+    0 0.02222 0.22353 0 0.27908 1 0.28235 0 1 0
+   }
+   Size {
+    0 0 0.22418 0 0.27908 1 0.28235 0 1 0
+   }
+   EffectTime 2
+   Repeat 0
+   ColorMast {
+    0 1 1 1 1 1 1 1
+   }
+   AlphaMast {
+    0 0.32394 1 0.3169
+   }
+   BRateMast {
+    0 0 0.15621 0 0.1902 1 0.19346 0 1 0
+   }
+  }
+ }
+}

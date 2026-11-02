@@ -1,0 +1,86 @@
+EffectDef {
+ Emitors {
+  EmitorDef Snow {
+   ShapeType Sphere
+   ShapeSize 5 5 5
+   ConeAngle 360 360 10
+   MaxNum 50
+   BirthRate 10
+   BirthRateRND 5
+   Offset 0 1.5 0
+   Material "{009C2EBAACD2D72A}graphics/particles/materials/fire/sparks1.emat"
+   SizeMultiplier 0.01
+   SizeRND 0.05
+   RandomRotDir 1
+   RotMultiplier 10
+   RandomAngle 1
+   Sort 0
+   Velocity 1
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   Spring 0.02
+   AnimFPS 10
+   RandomFrame 0
+   LifeTime 2
+   LifeTimeRND 1
+   Alpha {
+    0 0 0.07646 1 0.37017 0.9507 0.49432 0 0.86298 0 1 0
+   }
+   Size {
+    0 1 1 0
+   }
+   AlphaMast {
+    0 0.19718 1 0.24648
+   }
+  }
+  EmitorDef HolerING {
+   ConeAngle 0 0 0
+   MaxNum 40
+   BirthRate 3
+   BirthRateRND 5
+   BirthRateVel 1
+   Offset 0 1.5 0
+   Material "{B4E68553BD67D074}OOTS_Anomaly_Client/graphics/particles/materials/teleport/GalaxyTwo.emat"
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 5
+   SizeRND 5
+   RandomRotDir 0
+   RotMultiplier 105
+   StreakFullUV 1
+   VelAngle 0
+   RandomAngle 1
+   Velocity 15
+   Spring 1
+   AnimOnce 0
+   AnimFPS 0
+   RandomFrame 0
+   LifeTime 1
+   LifeTimeRND 1
+   Color {
+    0 0 1 1 1 1 0.5 1
+   }
+   Alpha {
+    0 0.03704 0.37793 0.11268 1 0.47887
+   }
+   Size {
+    0 1 1 0
+   }
+   EffectTime 10
+   ColorMast {
+    0 1 0.5 1 1 1 0.5 1
+   }
+   AlphaMast {
+    0 0.06338 1 0.06338
+   }
+   SizeMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 1 1 1
+   }
+  }
+ }
+}

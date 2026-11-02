@@ -1,0 +1,26 @@
+ImageSetClass {
+ Name "ootspsy"
+ RefSize 2048 2048
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "{36A1B794925C2603}OOTS_Anomaly_Client/GUI/imagesets/ootspsy.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass battery {
+   Name "battery"
+   Pos 54 179
+   Size 139 139
+   Flags 0
+  }
+  ImageSetDefClass osnova {
+   Name "osnova"
+   Pos 224 179
+   Size 139 139
+   Flags 0
+  }
+ }
+ Groups {
+ }
+}
