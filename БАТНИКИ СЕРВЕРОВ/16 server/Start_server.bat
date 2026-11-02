@@ -247,6 +247,12 @@ if exist "%INT_SRC%\INT_AdminGameLogger\Logs\*.log" (
     move /Y "%INT_SRC%\INT_AdminGameLogger\Logs\*.log" "%INT_TO%\INT_AdminGameLogger\"
 )
 
+REM Перемещение логов INT_BaseBoxAuthorization
+if exist "%INT_SRC%\INT_BaseBoxAuthorization\INT_BaseBoxAuthorization_Logs\*.log" (
+    mkdir "%INT_TO%\INT_BaseBoxAuthorization" 2>nul
+    move /Y "%INT_SRC%\INT_BaseBoxAuthorization\INT_BaseBoxAuthorization_Logs\*.log" "%INT_TO%\INT_BaseBoxAuthorization\"
+)
+
 
 REM =====================================================================ОЧИСТКА СТАРЫХ ЛОГОВ==================================================
 
