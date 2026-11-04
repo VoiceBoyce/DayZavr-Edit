@@ -15,8 +15,8 @@ class cfgVehicles
 	class Vp_SET13_Pants_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_Oni_Pants";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Samurai_Pants";
+		descriptionShort = "$STR_VBC_Samurai_Pants_Desc";
 		model = "Set_Oni\set\Pants\model\Pants_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Legs"};

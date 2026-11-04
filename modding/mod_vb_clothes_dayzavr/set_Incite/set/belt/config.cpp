@@ -16,8 +16,8 @@ class cfgVehicles
 	{
 		scope = 0;
 		RankLevel = 3;
-		displayName = "$STR_set_Incite_Belt";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Exo_Belt";
+		descriptionShort = "$STR_VBC_Exo_Belt_Desc";
 		model = "\set_Incite\set\belt\model\belt_g.p3d";
 		attachments[] = {"VestGrenadeA","VestGrenadeB","magazine","magazine2"};
 		vehicleClass = "Clothing";

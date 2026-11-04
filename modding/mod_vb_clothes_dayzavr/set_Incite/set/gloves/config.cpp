@@ -14,8 +14,8 @@ class cfgVehicles
 	class Vp_SET17_Gloves_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_set_Incite_Gloves";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Exo_Gloves";
+		descriptionShort = "$STR_VBC_Exo_Gloves_Desc";
 		model = "\set_Incite\set\gloves\model\gloves_g.p3d";
 		inventorySlot[] = {"Gloves"};
 		simulation = "clothing";

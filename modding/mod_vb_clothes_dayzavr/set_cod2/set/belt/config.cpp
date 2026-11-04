@@ -24,8 +24,8 @@ class cfgVehicles
 	class Belt_SET6_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "Разгрузочная система на пояс";
-		descriptionShort = "";
+		displayName = "$STR_VBC_King_Belt";
+		descriptionShort = "$STR_VBC_King_Belt_Desc";
 		model = "set_cod2\set\belt\model\belt_g.p3d";
 		attachments[] = {};
 		vehicleClass = "Clothing";

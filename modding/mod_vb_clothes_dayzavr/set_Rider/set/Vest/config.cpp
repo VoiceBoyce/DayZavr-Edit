@@ -15,8 +15,8 @@ class cfgVehicles
 	class Vp_SET12_Vest_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_Rider_Vest";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Rider_Vest";
+		descriptionShort = "$STR_VBC_Rider_Vest_Desc";
 		model = "set_Rider\set\Vest\Vest_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Vest"};

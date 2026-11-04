@@ -15,8 +15,8 @@ class cfgVehicles
 	class Vp_SET15_Top_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_Elegant_Top";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Moriarty_Top";
+		descriptionShort = "$STR_VBC_Moriarty_Top_Desc";
 		model = "set_Elegant\set\Top\model\top_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Body"};

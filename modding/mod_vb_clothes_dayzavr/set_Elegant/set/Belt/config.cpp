@@ -15,8 +15,8 @@ class cfgVehicles
 	class VP_SET15_Belt_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_Elegant_Belt";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Moriarty_Belt";
+		descriptionShort = "$STR_VBC_Moriarty_Belt_Desc";
 		model = "set_Elegant\set\Belt\model\belt_g.p3d";
 		attachments[] = {};
 		vehicleClass = "Clothing";

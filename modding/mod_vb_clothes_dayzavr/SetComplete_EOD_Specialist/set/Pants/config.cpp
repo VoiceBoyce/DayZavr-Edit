@@ -15,8 +15,8 @@ class CfgVehicles
 	class TGK_SetComplete_EOD_Specialist_Pants_Colorbase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_EOD_Specialist_Pants01";
-		descriptionShort = "$STR_EOD_Specialist_Pants02";
+		displayName = "$STR_VBC_Alpha_Pants";
+		descriptionShort = "$STR_VBC_Alpha_Pants_Desc";
 		model = "SetComplete_EOD_Specialist\set\Pants\Pants_g.p3d";
 		inventorySlot[] = {"Legs"};
 		itemInfo[] = {"Clothing","Legs"};

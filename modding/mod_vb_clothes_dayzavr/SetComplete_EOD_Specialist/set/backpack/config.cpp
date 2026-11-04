@@ -14,8 +14,8 @@ class cfgVehicles
 	class Clothing: Clothing_Base{};
 	class TGK_SetComplete_EOD_Specialist_Backpack_Colorbase: Clothing
 	{
-		displayName = "$STR_EOD_Specialist_Backpack01";
-		descriptionShort = "$STR_EOD_Specialist_Backpack02";
+		displayName = "$STR_VBC_Alpha_Backpack";
+		descriptionShort = "$STR_VBC_Alpha_Backpack_Desc";
 		model = "SetComplete_EOD_Specialist\set\backpack\Backpack_g.p3d";
 		debug_ItemCategory = 9;
 		inventorySlot[] = {"Back"};

@@ -13,8 +13,8 @@ class cfgVehicles {
 	
 	class VP_SET23_Belt_ColorBase : Clothing {
 		scope = 0;
-		displayName = "$STR_set_OPERATOR_Belt";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Operator_Belt";
+		descriptionShort = "$STR_VBC_Operator_Belt_Desc";
 		model = "\set_operator\set\belt\model\belt_g.p3d";
 		attachments[] = {};
 		vehicleClass = "Clothing";

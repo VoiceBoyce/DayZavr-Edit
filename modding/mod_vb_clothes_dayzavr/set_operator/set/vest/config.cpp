@@ -13,8 +13,8 @@ class cfgVehicles {
 	
 	class Vp_SET23_Vest_ColorBase : Clothing {
 		scope = 0;
-		displayName = "$STR_set_OPERATOR_vest";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Operator_Vest";
+		descriptionShort = "$STR_VBC_Operator_Vest_Desc";
 		model = "\set_operator\set\vest\model\vest_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Vest"};

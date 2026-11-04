@@ -24,8 +24,8 @@ class cfgVehicles
 	class Vp_Set6_top_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "Куртка";
-		descriptionShort = "";
+		displayName = "$STR_VBC_King_Top";
+		descriptionShort = "$STR_VBC_King_Top_Desc";
 		model = "set_cod2\set\top\model\top_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Body"};

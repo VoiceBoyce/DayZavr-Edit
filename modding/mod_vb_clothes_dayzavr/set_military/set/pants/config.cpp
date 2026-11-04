@@ -15,8 +15,8 @@ class cfgVehicles
 	class Vp_SET19_Pants_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_set_military_Pants";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Spetsnaz_Pants";
+		descriptionShort = "$STR_VBC_Spetsnaz_Pants_Desc";
 		model = "\set_military\set\pants\model\Pants_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Legs"};

@@ -14,8 +14,8 @@ class CfgVehicles
 	class Clothing: Clothing_Base{};
 	class TGK_SetComplete_EOD_Specialist_Boots_Colorbase: Clothing
 	{
-		displayName = "$STR_EOD_Specialist_Boots01";
-		descriptionShort = "$STR_EOD_Specialist_Boots02";
+		displayName = "$STR_VBC_Alpha_Boots";
+		descriptionShort = "$STR_VBC_Alpha_Boots_Desc";
 		model = "SetComplete_EOD_Specialist\set\Boots\Boots_g.p3d";
 		inventorySlot[] = {"Feet"};
 		itemInfo[] = {"Clothing","Feet"};

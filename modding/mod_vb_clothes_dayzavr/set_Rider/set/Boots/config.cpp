@@ -14,8 +14,8 @@ class CfgVehicles
 	class VP_SET12_Shoes_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_Rider_Boots";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Rider_Boots";
+		descriptionShort = "$STR_VBC_Rider_Boots_Desc";
 		model = "set_Rider\set\Boots\Boots_g.p3d";
 		inventorySlot[] = {"Feet"};
 		itemInfo[] = {"Clothing","Feet"};

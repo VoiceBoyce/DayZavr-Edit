@@ -16,8 +16,8 @@ class cfgVehicles
 	{
 		scope = 0;
 		RankLevel = 3;
-		displayName = "$STR_Rider_Belt";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Rider_Belt";
+		descriptionShort = "$STR_VBC_Rider_Belt_Desc";
 		model = "set_Rider\set\Belt\Belt_g.p3d";
 		attachments[] = {};
 		vehicleClass = "Clothing";

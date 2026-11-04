@@ -13,8 +13,8 @@ class cfgVehicles {
 	
 	class Vp_SET23_Top_ColorBase : Clothing {
 		scope = 0;
-		displayName = "$STR_set_OPERATOR_Top";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Operator_Top";
+		descriptionShort = "$STR_VBC_Operator_Top_Desc";
 		model = "\set_operator\set\top\model\top_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Body"};

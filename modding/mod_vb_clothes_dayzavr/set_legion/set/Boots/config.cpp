@@ -14,8 +14,8 @@ class CfgVehicles
 	class VP_SET20_Shoes_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_Legion_Boots";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Legion_Boots";
+		descriptionShort = "$STR_VBC_Legion_Boots_Desc";
 		model = "\set_legion\set\Boots\model\Boots_g.p3d";
 		inventorySlot[] = {"Feet"};
 		itemInfo[] = {"Clothing","Feet"};

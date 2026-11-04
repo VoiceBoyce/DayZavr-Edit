@@ -14,8 +14,8 @@ class CfgVehicles
 	class Clothing: Clothing_Base{};
 	class Vp_SET20_Helmet_ColorBase: Clothing
 	{
-		displayName = "$STR_Legion_Helmet";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Legion_Helmet";
+		descriptionShort = "$STR_VBC_Legion_Helmet_Desc";
 		model = "set_legion\set\Helmet\model\Helmet_g.p3d";
 		weight = 2000;
 		itemSize[] = {4,3};
@@ -130,6 +130,7 @@ class CfgVehicles
 	};
 	class Vp_SET20_Helmet: Vp_SET20_Helmet_ColorBase
 	{
+		displayName = "$STR_VBC_Legion_HelmetPlume";
 		scope = 2;
 		hiddenSelectionsTextures[] = {"set_legion\set\Helmet\data\bolti_co.paa","set_legion\set\Helmet\data\helmet_co.paa","set_legion\set\Helmet\data\krep_helmet_co.paa","set_legion\set\Helmet\data\krep_xvost_co.paa","set_legion\set\Helmet\data\naushnik_co.paa","set_legion\set\Helmet\data\xvost_co.paa","set_legion\set\Helmet\data\zalypa1_co.paa","set_legion\set\Helmet\data\zalypa2_co.paa"};
 	};

@@ -13,8 +13,8 @@ class cfgVehicles {
 	
 	class Vp_Set23_Helmet_ColorBase : Clothing {
 		scope = 0;
-		displayName = "$STR_set_OPETATOR_cap";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Operator_Helmet";
+		descriptionShort = "$STR_VBC_Operator_Helmet_Desc";
 		model = "\set_operator\set\helmet\model\helmet_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Headgear"};

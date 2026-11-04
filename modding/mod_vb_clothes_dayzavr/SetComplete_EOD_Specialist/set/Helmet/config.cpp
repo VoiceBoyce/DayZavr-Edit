@@ -15,8 +15,8 @@ class cfgVehicles
 	class TGK_SetComplete_EOD_Specialist_Helmet_Colorbase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_EOD_Specialist_Helmet01";
-		descriptionShort = "$STR_EOD_Specialist_Helmet02";
+		displayName = "$STR_VBC_Alpha_Helmet";
+		descriptionShort = "$STR_VBC_Alpha_Helmet_Desc";
 		model = "SetComplete_EOD_Specialist\set\Helmet\Helmet_g.p3d";
 		attachments[] = {};
 		repairableWithKits[] = {8};

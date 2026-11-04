@@ -24,8 +24,8 @@ class cfgVehicles
 	class Vp_Set6_Vest_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "Бронежилет";
-		descriptionShort = "";
+		displayName = "$STR_VBC_King_Vest";
+		descriptionShort = "$STR_VBC_King_Vest_Desc";
 		model = "set_cod2\set\vest\model\vest_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Vest"};

@@ -16,8 +16,8 @@ class cfgVehicles
 	{
 		scope = 0;
 		RankLevel = 3;
-		displayName = "$STR_Oni_Belt";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Samurai_Belt";
+		descriptionShort = "$STR_VBC_Samurai_Belt_Desc";
 		model = "Set_Oni\set\Belt\model\Belt_g.p3d";
 		attachments[] = {""};
 		vehicleClass = "Clothing";

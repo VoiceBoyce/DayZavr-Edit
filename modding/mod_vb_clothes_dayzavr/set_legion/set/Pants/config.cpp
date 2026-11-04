@@ -14,8 +14,8 @@ class cfgVehicles
 	class Clothing: Clothing_Base{};
 	class Vp_SET20_Pants_ColorBase: Clothing
 	{
-		displayName = "$STR_Legion_Pants";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Legion_Pants";
+		descriptionShort = "$STR_VBC_Legion_Pants_Desc";
 		model = "set_legion\set\Pants\model\Pants_g.p3d";
 		inventorySlot[] = {"Legs"};
 		simulation = "clothing";

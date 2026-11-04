@@ -15,8 +15,8 @@ class cfgVehicles
 	class Vp_SET16_Top_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_Heavy_Top";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Assault_Top";
+		descriptionShort = "$STR_VBC_Assault_Top_Desc";
 		model = "set_heavy\set\Top\model\top_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Body"};

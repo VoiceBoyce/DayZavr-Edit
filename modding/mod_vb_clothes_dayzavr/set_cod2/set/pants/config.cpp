@@ -24,8 +24,8 @@ class cfgVehicles
 	class Vp_Set6_Pants_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "Штаны";
-		descriptionShort = "";
+		displayName = "$STR_VBC_King_Pants";
+		descriptionShort = "$STR_VBC_King_Pants_Desc";
 		model = "set_cod2\set\pants\model\pants_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Legs"};

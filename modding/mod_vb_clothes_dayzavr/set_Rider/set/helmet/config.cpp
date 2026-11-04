@@ -15,8 +15,8 @@ class cfgVehicles
 	class Vp_SET12_MotoHelmet_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_Rider_Helmet";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Rider_Helmet";
+		descriptionShort = "$STR_VBC_Rider_Helmet_Desc";
 		model = "set_Rider\set\helmet\Helmet_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Headgear"};

@@ -14,8 +14,8 @@ class CfgVehicles
 	class Clothing: Clothing_Base{};
 	class Vp_SET20_Top_ColorBase: Clothing
 	{
-		displayName = "$STR_Legion_Top";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Legion_Top";
+		descriptionShort = "$STR_VBC_Legion_Top_Desc";
 		model = "set_legion\set\Top\model\top_g.p3d";
 		inventorySlot[] = {"Body"};
 		itemInfo[] = {"Clothing","Body"};

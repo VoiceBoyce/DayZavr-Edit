@@ -14,8 +14,8 @@ class CfgVehicles
 	class VP_SET17_Boots_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_set_Incite_Boots";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Exo_Shoes";
+		descriptionShort = "$STR_VBC_Exo_Shoes_Desc";
 		model = "\set_Incite\set\boots\model\boots_g.p3d";
 		inventorySlot[] = {"Feet"};
 		itemInfo[] = {"Clothing","Feet"};

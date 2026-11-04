@@ -15,8 +15,8 @@ class cfgVehicles
 	class Vp_Set14_Helmet_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_Ghost_Helmet";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Ghost_Helmet";
+		descriptionShort = "$STR_VBC_Ghost_Helmet_Desc";
 		model = "set_Ghost\set\Helmet\model\Helmet_g.p3d";
 		attachments[] = {"NVG"};
 		inventorySlot[] = {"Headgear"};

@@ -14,8 +14,8 @@ class cfgVehicles
 	class Vp_SET13_Gloves_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_Oni_Gloves";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Samurai_Gloves";
+		descriptionShort = "$STR_VBC_Samurai_Gloves_Desc";
 		model = "Set_Oni\set\Gloves\model\Gloves_g.p3d";
 		inventorySlot[] = {"Gloves"};
 		simulation = "clothing";

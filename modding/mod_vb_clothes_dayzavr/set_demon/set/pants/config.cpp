@@ -13,8 +13,8 @@ class cfgVehicles {
 	
 	class Vp_SET22_Pants_ColorBase : Clothing {
 		scope = 0;
-		displayName = "$STR_set_DEMON_Pants";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Demon_Pants";
+		descriptionShort = "$STR_VBC_Demon_Pants_Desc";
 		model = "\set_demon\set\pants\model\pants_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Legs"};

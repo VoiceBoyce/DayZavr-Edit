@@ -23,8 +23,8 @@ class CfgVehicles
 	class VP_Set6_Shoes_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "Ботинки";
-		descriptionShort = "";
+		displayName = "$STR_VBC_King_Shoes";
+		descriptionShort = "$STR_VBC_King_Shoes_Desc";
 		model = "set_cod2\set\boots\model\shoes_g.p3d";
 		inventorySlot[] = {"Feet"};
 		itemInfo[] = {"Clothing","Feet"};

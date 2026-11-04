@@ -16,8 +16,8 @@ class cfgVehicles
 	{
 		scope = 0;
 		RankLevel = 3;
-		displayName = "$STR_Elegant_Mask";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Moriarty_Mask";
+		descriptionShort = "$STR_VBC_Moriarty_Mask_Desc";
 		model = "set_Elegant\set\Mask\model\Mask_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Mask"};

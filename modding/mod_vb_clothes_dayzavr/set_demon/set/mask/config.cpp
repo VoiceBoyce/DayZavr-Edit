@@ -13,8 +13,8 @@ class cfgVehicles {
 	
 	class Vp_Set22_Mask_ColorBase : Clothing {
 		scope = 0;
-		displayName = "$STR_set_DEMON_Mask";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Demon_Mask";
+		descriptionShort = "$STR_VBC_Demon_Mask_Desc";
 		model = "\set_demon\set\mask\model\mask_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Mask"};

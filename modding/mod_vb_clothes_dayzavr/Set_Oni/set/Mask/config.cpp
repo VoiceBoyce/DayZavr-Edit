@@ -15,8 +15,8 @@ class cfgVehicles
 	class Vp_SET13_Mask_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_Oni_Mask";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Samurai_Mask";
+		descriptionShort = "$STR_VBC_Samurai_Mask_Desc";
 		model = "Set_Oni\set\Mask\model\Mask_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Mask"};

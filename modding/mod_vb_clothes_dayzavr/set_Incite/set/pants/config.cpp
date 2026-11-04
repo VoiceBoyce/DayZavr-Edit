@@ -15,8 +15,8 @@ class cfgVehicles
 	class Vp_SET17_Pants_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_set_Incite_Pants";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Exo_Pants";
+		descriptionShort = "$STR_VBC_Exo_Pants_Desc";
 		model = "\set_Incite\set\pants\model\pants_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Legs"};

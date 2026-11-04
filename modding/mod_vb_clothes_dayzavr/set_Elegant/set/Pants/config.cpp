@@ -15,8 +15,8 @@ class cfgVehicles
 	class Vp_SET15_Pants_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_Elegant_Pants";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Moriarty_Pants";
+		descriptionShort = "$STR_VBC_Moriarty_Pants_Desc";
 		model = "set_Elegant\set\Pants\model\Pants_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Legs"};

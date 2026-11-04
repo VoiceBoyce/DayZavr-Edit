@@ -14,8 +14,8 @@ class CfgVehicles
 	class Clothing: Clothing_Base{};
 	class Vp_SET20_Mask_ColorBase: Clothing
 	{
-		displayName = "$STR_Legion_Mask";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Legion_Mask";
+		descriptionShort = "$STR_VBC_Legion_Mask_Desc";
 		model = "set_legion\set\Mask\model\balaclava_g.p3d";
 		inventorySlot[] = {"Mask"};
 		itemInfo[] = {"Clothing","Mask"};

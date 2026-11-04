@@ -15,8 +15,8 @@ class cfgVehicles
 	class Vp_SET19_cap_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_set_military_cap";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Spetsnaz_Cap";
+		descriptionShort = "$STR_VBC_Spetsnaz_Cap_Desc";
 		model = "\set_military\set\cap\model\cap_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Headgear"};

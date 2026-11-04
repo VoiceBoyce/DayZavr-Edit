@@ -13,8 +13,8 @@ class cfgVehicles {
 	
 	class Vp_Set22_cap_ColorBase : Clothing {
 		scope = 0;
-		displayName = "$STR_set_DEMON_cap";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Demon_Cap";
+		descriptionShort = "$STR_VBC_Demon_Cap_Desc";
 		model = "\set_demon\set\cap\model\cap_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Headgear"};

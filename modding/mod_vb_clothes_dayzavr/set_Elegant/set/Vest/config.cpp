@@ -15,8 +15,8 @@ class cfgVehicles
 	class Vp_SET15_Vest_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_Elegant_Vest";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Moriarty_Vest";
+		descriptionShort = "$STR_VBC_Moriarty_Vest_Desc";
 		model = "set_Elegant\set\Vest\model\vest_g.p3d";
 		attachments[] = {"pistol"};
 		inventorySlot[] = {"Vest"};

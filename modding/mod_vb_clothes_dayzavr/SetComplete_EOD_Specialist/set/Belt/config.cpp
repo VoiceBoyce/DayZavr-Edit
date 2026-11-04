@@ -15,8 +15,8 @@ class cfgVehicles
 	class TGK_SetComplete_EOD_Specialist_Belt_Colorbase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_EOD_Specialist_Belt01";
-		descriptionShort = "$STR_EOD_Specialist_Belt02";
+		displayName = "$STR_VBC_Alpha_Belt";
+		descriptionShort = "$STR_VBC_Alpha_Belt_Desc";
 		model = "SetComplete_EOD_Specialist\set\Belt\Belt_g.p3d";
 		vehicleClass = "Clothing";
 		simulation = "clothing";

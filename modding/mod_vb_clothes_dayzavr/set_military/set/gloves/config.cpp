@@ -14,8 +14,8 @@ class cfgVehicles
 	class Vp_SET19_Gloves_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_set_military_Gloves";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Spetsnaz_Gloves";
+		descriptionShort = "$STR_VBC_Spetsnaz_Gloves_Desc";
 		model = "\set_military\set\gloves\model\Gloves_g.p3d";
 		inventorySlot[] = {"Gloves"};
 		simulation = "clothing";

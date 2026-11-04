@@ -1,0 +1,371 @@
+Названия и описания предметов. Внесены в stringtable модов (ключи STR_VBC_<Сет>_<Предмет> и ..._Desc).
+Название и описание общие для всех расцветок предмета.
+
+========================set_cod2 — Король========================
+
+Балаклава «Король»  /  King Balaclava
+  Плотная балаклава с полосами. Закрывает лицо целиком, греет в холод и оставляет простор для догадок, кто под ней.
+  A thick striped balaclava. Covers the whole face, keeps you warm and leaves everyone guessing who is underneath.
+
+Куртка «Король»  /  King Jacket
+  Лёгкая куртка с топографическим узором и контрастными линиями. Не стесняет движений и точно не даст затеряться в толпе.
+  A light jacket with a topographic pattern and contrasting lines. Does not restrict movement and will not let you get lost in a crowd.
+
+Бронежилет «Король»  /  King Plate Carrier
+  Плитник с черепом в короне на передней пластине. Держит удар и сразу объясняет, кто здесь главный.
+  A plate carrier with a crowned skull on the front plate. Takes a hit and makes it clear who is in charge.
+
+Бронежилет «Король» со змеем  /  King Snake Plate Carrier
+  Плитник с рисунком змея, обвившего переднюю пластину. Для тех, кто играет по-крупному.
+  A plate carrier with a snake coiled around the front plate. For those who play for high stakes.
+
+Разгрузочный пояс «Король»  /  King Utility Belt
+  Поясная разгрузка с вместительными подсумками. Всё нужное под рукой, а руки свободны для главного.
+  A belt rig with roomy pouches. Everything you need within reach, hands free for what matters.
+
+Штаны «Король»  /  King Pants
+  Плотные штаны с наколенниками и яркими линиями. Переживут и ползание по кустам, и долгий марш.
+  Sturdy pants with knee pads and bold lines. They will survive crawling through bushes and long marches alike.
+
+Кроссовки «Король»  /  King Sneakers
+  Высокие кроссовки на мягкой подошве. Бегать в них удобно, а убегать ещё удобнее.
+  High-top sneakers with a soft sole. Great for running, even better for running away.
+
+
+========================set_demon — Демон========================
+
+Кепка «Демон»  /  Demon Cap
+  Кепка с маленькими рожками. От пули не спасёт, но настроение противнику испортит заранее.
+  A cap with little horns. Will not stop a bullet, but it will ruin your enemy's mood in advance.
+
+Маска «Демон»  /  Demon Mask
+  Вязаная маска со встроенными защитными очками. Спасает лицо от ветра, пыли и лишних взглядов.
+  A knitted mask with built-in protective goggles. Shields your face from wind, dust and unwanted looks.
+
+Куртка «Демон»  /  Demon Jacket
+  Тактическая куртка в мраморном камуфляже. Удобная, практичная и заметная ровно настолько, насколько ты этого хочешь.
+  A tactical jacket in marble camo. Comfortable, practical and exactly as noticeable as you want it to be.
+
+Бронежилет «Демон»  /  Demon Plate Carrier
+  Плитник в мраморном камуфляже с вместительными карманами. Броский снаружи, надёжный внутри.
+  A marble camo plate carrier with roomy pockets. Flashy outside, reliable inside.
+
+Штаны «Демон»  /  Demon Pants
+  Тактические штаны с набедренными подсумками. Карманов много, лишнего веса на поясе нет.
+  Tactical pants with thigh pouches. Plenty of pockets, no extra weight on the belt.
+
+Перчатки «Демон»  /  Demon Gloves
+  Тактические перчатки с усиленными костяшками. Надёжный хват и целые руки после любой стычки.
+  Tactical gloves with reinforced knuckles. A solid grip and intact hands after any scuffle.
+
+Кроссовки «Демон»  /  Demon Sneakers
+  Лёгкие спортивные кроссовки. Отлично подходят для быстрых появлений и ещё более быстрых уходов.
+  Light sports sneakers. Perfect for quick entrances and even quicker exits.
+
+
+========================set_Elegant — Мориарти========================
+
+Маска «Мориарти»  /  Moriarty Mask
+  Маска-череп для тех, кто предпочитает оставаться инкогнито, но со вкусом.
+  A skull mask for those who prefer to stay incognito, but with style.
+
+Рубашка с жилетом «Мориарти»  /  Moriarty Shirt and Waistcoat
+  Рубашка с галстуком и строгий жилет с узором. Подходит и для переговоров, и для их неудачного завершения.
+  A shirt with a tie and a strict patterned waistcoat. Suitable for negotiations and for when they go wrong.
+
+Плечевая кобура «Мориарти»  /  Moriarty Shoulder Holster
+  Ременно-плечевая система с кобурой под пистолет. Оружие всегда под рукой и не портит силуэт костюма.
+  A shoulder harness with a pistol holster. Your sidearm is always at hand and never spoils the silhouette of the suit.
+
+Поясная система «Мориарти»  /  Moriarty Belt Rig
+  Ремень с подсумками, который вмещает больше, чем кажется. Джентльмен всегда готов к неожиданностям.
+  A belt with pouches that holds more than it seems. A gentleman is always ready for surprises.
+
+Брюки «Мориарти»  /  Moriarty Trousers
+  Классические брюки с наколенником. Строгий крой, который не порвётся на коленях в самый неподходящий момент.
+  Classic trousers with a knee pad. A strict cut that will not tear at the knees at the worst possible moment.
+
+Перчатки «Мориарти»  /  Moriarty Gloves
+  Перчатки с рисунком костей на пальцах. Не оставляют отпечатков, зато оставляют впечатление.
+  Gloves with a finger bone print. They leave no fingerprints, only an impression.
+
+Ботинки «Мориарти»  /  Moriarty Shoes
+  Строгие ботинки, начищенные до блеска. Блестят даже после прогулки по грязи.
+  Strict shoes polished to a shine. They gleam even after a walk through the mud.
+
+
+========================set_Ghost — Призрак========================
+
+Шлем «Призрак»  /  Ghost Helmet
+  Тактический шлем с маской-черепом и креплением под ПНВ. Маска уже встроена, отдельную под него не надеть.
+  A tactical helmet with a skull face mask and an NVG mount. The mask is built in, so no other mask fits under it.
+
+Куртка «Призрак»  /  Ghost Jacket
+  Куртка с узорными вставками на плечах. Неприметная ночью, эффектная днём.
+  A jacket with patterned shoulder inserts. Inconspicuous at night, striking by day.
+
+Бронежилет «Призрак»  /  Ghost Plate Carrier
+  Бронежилет с подсумками под два магазина и вместительными карманами. Перезарядка без лишних движений.
+  A plate carrier with pouches for two magazines and roomy pockets. Reload without wasted motion.
+
+Штаны «Призрак»  /  Ghost Pants
+  Штаны с топографическим узором, наколенниками и набедренными ремнями. Сидят плотно и не шуршат.
+  Pants with a topographic pattern, knee pads and thigh straps. Snug fit and no rustling.
+
+Перчатки «Призрак»  /  Ghost Gloves
+  Тактические перчатки с рисунком на пальцах. Тёплые, цепкие и стильные.
+  Tactical gloves with a print on the fingers. Warm, grippy and stylish.
+
+Ботинки «Призрак»  /  Ghost Boots
+  Крепкие ботинки на шнуровке. Тихий шаг и устойчивость на любой поверхности.
+  Sturdy lace-up boots. A quiet step and stable footing on any surface.
+
+
+========================set_heavy — Штурмовик========================
+
+Шлем «Штурмовик»  /  Assault Helmet
+  Штурмовой шлем с креплениями под ПНВ и фонарь. Для тех, кто первым заходит в тёмное помещение.
+  An assault helmet with NVG and flashlight mounts. For those who are first into a dark room.
+
+Куртка «Штурмовик»  /  Assault Jacket
+  Плотная куртка со встроенной защитой плеч и предплечий. Руки целее, движения свободнее.
+  A thick jacket with built-in shoulder and forearm protection. Safer arms, freer movement.
+
+Бронежилет «Штурмовик»  /  Assault Body Armor
+  Массивный бронежилет с наборными пластинами на груди и животе. Тяжёлый, но именно за это его и ценят.
+  Massive body armor with segmented plates on the chest and stomach. Heavy, and that is exactly why it is valued.
+
+Штаны «Штурмовик»  /  Assault Pants
+  Штурмовые штаны с защитой паха, наколенниками и набедренными подсумками. Готовы к штурму, даже если ты не готов.
+  Assault pants with groin protection, knee pads and thigh pouches. Ready for the breach even if you are not.
+
+Перчатки «Штурмовик»  /  Assault Gloves
+  Тактические перчатки с плотными вставками. Удобно держать оружие, удобно выбивать двери.
+  Tactical gloves with dense inserts. Comfortable for holding a weapon and for knocking down doors.
+
+Ботинки «Штурмовик»  /  Assault Boots
+  Тяжёлые армейские ботинки. Уверенный шаг по битому стеклу, грязи и чужим планам.
+  Heavy army boots. A confident step over broken glass, mud and other people's plans.
+
+
+========================set_Incite — Экзо========================
+
+Шлем «Экзо»  /  Exo Helmet
+  Закрытый шлем с тонированным визором. Маска под него не влезет, да она и не нужна.
+  A closed helmet with a tinted visor. No mask fits under it, and you will not need one.
+
+Кофта «Экзо»  /  Exo Sweater
+  Кофта с лёгкими каркасными накладками на плечи и предплечья. Выглядит как техника будущего, носится как обычная одежда.
+  A sweater with light frame plates on the shoulders and forearms. Looks like future tech, wears like regular clothing.
+
+Бронежилет «Экзо»  /  Exo Body Armor
+  Каркасный бронежилет со встроенным рюкзаком и креплениями под шесть магазинов. Боезапас на целый рейд.
+  Frame body armor with a built-in backpack and mounts for six magazines. Enough ammo for a whole raid.
+
+Набедренная система «Экзо»  /  Exo Leg Rig
+  Пояс с двойной набедренной разгрузкой: места под две гранаты и два магазина. Всё самое важное на уровне руки.
+  A belt with a double thigh rig: room for two grenades and two magazines. The essentials right at hand level.
+
+Штаны «Экзо»  /  Exo Pants
+  Камуфляжные штаны с плотными вставками на коленях. Простые, крепкие, без лишнего.
+  Camo pants with dense knee inserts. Simple, tough, nothing extra.
+
+Перчатки «Экзо»  /  Exo Gloves
+  Перчатки с каркасными накладками на кисти. Хват уверенный, пальцы защищены.
+  Gloves with frame plates on the backs of the hands. A confident grip with protected fingers.
+
+Кроссовки «Экзо»  /  Exo Sneakers
+  Лёгкие спортивные кроссовки. Броня бронёй, а бегать всё равно придётся.
+  Light sports sneakers. Armor is armor, but you will still have to run.
+
+
+========================set_legion — Легион========================
+
+Шлем «Легион»  /  Legion Helmet
+  Тактический шлем с гарнитурой и креплением под ПНВ. Связь и обзор в одном комплекте.
+  A tactical helmet with a headset and an NVG mount. Comms and vision in one package.
+  Вариант Vp_SET20_Helmet: Шлем «Легион» с плюмажем  /  Legion Plumed Helmet
+
+Маска «Легион»  /  Legion Mask
+  Маска-шарф, прикрывающая лицо от пыли и ветра. Немного защищает дыхание, когда вокруг становится грязно.
+  A scarf mask that covers the face from dust and wind. Gives your breathing a little protection when things get dirty.
+
+Куртка «Легион»  /  Legion Jacket
+  Куртка с контрастными стропами. Плотная ткань, удобный крой и заметные акценты.
+  A jacket with contrasting straps. Dense fabric, a comfortable cut and eye-catching accents.
+
+Бронежилет «Легион»  /  Legion Plate Carrier
+  Тяжёлый плитник с карманами. Весит прилично, но защищает ещё приличнее.
+  A heavy plate carrier with pockets. It weighs a lot, but protects even more.
+
+Штаны «Легион»  /  Legion Pants
+  Тактические штаны с наколенниками. Выдержат и бег по полю, и стрельбу с колена.
+  Tactical pants with knee pads. They will handle a run across a field and shooting from the knee.
+
+Перчатки «Легион»  /  Legion Gloves
+  Перчатки из плотного материала. Руки в них защищены от грязи и всякой гадости.
+  Gloves made of dense material. They keep your hands safe from dirt and all sorts of nasty stuff.
+
+Ботинки «Легион»  /  Legion Boots
+  Высокие ботинки на прочной шнуровке. Хорошо держат ногу и удобны в долгом переходе.
+  High boots with strong laces. They hold your foot well and are comfortable on long marches.
+
+
+========================set_military — Спецназ========================
+
+Кепка «Спецназ»  /  Spetsnaz Cap
+  Тактическая кепка с гарнитурой. Слышно команды, не слышно лишнего.
+  A tactical cap with a headset. You hear the orders, not the noise.
+
+Балаклава «Спецназ»  /  Spetsnaz Balaclava
+  Тактическая балаклава из плотной ткани. Тепло, анонимно и по уставу.
+  A tactical balaclava made of dense fabric. Warm, anonymous and by the book.
+
+Куртка «Спецназ»  /  Spetsnaz Jacket
+  Тактическая куртка с удобными карманами. Рабочая одежда для тех, у кого работа беспокойная.
+  A tactical jacket with handy pockets. Work clothes for those whose work is restless.
+
+Бронежилет «Спецназ»  /  Spetsnaz Plate Carrier
+  Плитник с мягкими секциями и вместительными карманами. Надёжный стандарт, проверенный в деле.
+  A plate carrier with padded sections and roomy pockets. A reliable standard, proven in action.
+
+Штаны «Спецназ»  /  Spetsnaz Pants
+  Тактические штаны с наколенниками и объёмными карманами. Для засад, перебежек и долгого ожидания.
+  Tactical pants with knee pads and large pockets. For ambushes, dashes and long waits.
+
+Перчатки «Спецназ»  /  Spetsnaz Gloves
+  Плотные тактические перчатки. Защищают руки от грязи и грубой работы.
+  Thick tactical gloves. They protect your hands from dirt and rough work.
+
+Ботинки «Спецназ»  /  Spetsnaz Boots
+  Тактические ботинки с высокой шнуровкой. Крепко держат ногу на любом рельефе.
+  Tactical boots with high lacing. They hold your foot firmly on any terrain.
+
+
+========================Set_Oni — Самурай========================
+
+Маска «Самурай»  /  Samurai Mask
+  Маска в стиле японских масок «они». Скрывает лицо и пугает противника ещё до начала разговора.
+  A mask styled after Japanese oni masks. Hides your face and scares the enemy before a word is said.
+
+Футболка «Самурай»  /  Samurai T-Shirt
+  Футболка с защитными рукавами. Свобода движений и немного дерзости.
+  A T-shirt with protective sleeves. Freedom of movement and a bit of attitude.
+
+Бронежилет «Самурай»  /  Samurai Plate Carrier
+  Плитник с подсумками. Современные доспехи для того, кто выбрал свой путь.
+  A plate carrier with pouches. Modern armor for those who have chosen their path.
+
+Пояс «Самурай»  /  Samurai Belt
+  Тактический пояс с подсумками. Мелочи всегда на своих местах и под рукой.
+  A tactical belt with pouches. Small items always in their place and within reach.
+
+Штаны «Самурай»  /  Samurai Pants
+  Штаны с наколенниками. Удобны и в долгом переходе, и в бою.
+  Pants with knee pads. Comfortable on long marches and in a fight.
+
+Перчатки «Самурай»  /  Samurai Gloves
+  Тактические перчатки с защитой костяшек. Крепкий хват и целые руки.
+  Tactical gloves with knuckle protection. A firm grip and intact hands.
+
+Таби «Самурай»  /  Samurai Tabi
+  Обувь с раздельным носком в духе японских таби. Мягкий, тихий и устойчивый шаг.
+  Split-toe footwear in the spirit of Japanese tabi. A soft, quiet and steady step.
+
+
+========================set_operator — Оператор========================
+
+Шлем «Оператор»  /  Operator Helmet
+  Лёгкий шлем с очками и балаклавой в комплекте. Лицо уже закрыто, отдельная маска не нужна.
+  A light helmet that comes with goggles and a balaclava. Your face is already covered, no extra mask needed.
+
+Футболка «Оператор»  /  Operator T-Shirt
+  Тактическая футболка с камуфляжными рукавами. Удобна в жару и не мешает работать с оружием.
+  A tactical T-shirt with camo sleeves. Comfortable in the heat and does not get in the way of weapon handling.
+
+Бронежилет «Оператор»  /  Operator Plate Carrier
+  Плитник с принтом на передней пластине. Защищает корпус и даёт место под самое нужное.
+  A plate carrier with a print on the front plate. Protects the torso and leaves room for the essentials.
+
+Пояс «Оператор»  /  Operator Belt
+  Тактический ремень с подсумками. Всё под рукой и ничего не болтается.
+  A tactical belt with pouches. Everything at hand and nothing dangling.
+
+Штаны «Оператор»  /  Operator Pants
+  Камуфляжные тактические штаны с объёмными карманами. Классика, которая не подводит.
+  Camo tactical pants with large pockets. A classic that never lets you down.
+
+Кроссовки «Оператор»  /  Operator Sneakers
+  Лёгкие кроссовки. Когда нужно быстро сменить позицию, ботинки только мешают.
+  Light sneakers. When you need to change position fast, boots only get in the way.
+
+
+========================set_Rider — Райдер========================
+
+Мотошлем «Райдер»  /  Rider Motocross Helmet
+  Кроссовый мотошлем с очками. Закрывает голову и лицо, поэтому маску под него не надеть.
+  A motocross helmet with goggles. It covers the head and face, so no mask fits under it.
+
+Мотокуртка «Райдер»  /  Rider Moto Jacket
+  Мотокуртка из плотной ткани с узором на рукавах. Защищает от ветра и асфальта.
+  A moto jacket made of dense fabric with patterned sleeves. Protects from wind and asphalt.
+
+Мотозащита «Райдер»  /  Rider Body Protector
+  Защитный панцирь для груди и спины. С ним падение с мотоцикла уже просто неприятность.
+  A chest and back protector. With it, falling off a bike is just a nuisance.
+
+Разгрузочный пояс «Райдер»  /  Rider Utility Belt
+  Поясная разгрузка с подсумками. Удобно и в седле, и пешком.
+  A belt rig with pouches. Handy both in the saddle and on foot.
+
+Мотоштаны «Райдер»  /  Rider Moto Pants
+  Мотоштаны с защитой колен. Жёсткое приземление уже не так страшно.
+  Moto pants with knee protection. A hard landing is not so scary anymore.
+
+Мотоперчатки «Райдер»  /  Rider Moto Gloves
+  Мотоперчатки с защитными вставками. Руль держать удобно, оружие тоже.
+  Moto gloves with protective inserts. Comfortable on the handlebars, and on a weapon too.
+
+Мотоботы «Райдер»  /  Rider Moto Boots
+  Высокие мотоботы с защитой голени. Нога закрыта от щиколотки до колена.
+  High moto boots with shin protection. Your leg is covered from ankle to knee.
+
+
+========================SetComplete_EOD_Specialist — Альфа========================
+
+Шлем «Альфа»  /  Alpha Helmet
+  Тактический шлем с очками и закрытым лицевым щитком в виде оскала. Прочный, защищает от осколков и ударов.
+  A tactical helmet with goggles and a closed face shield shaped like a grin. Tough, protects against shrapnel and blows.
+
+Шарф «Альфа»  /  Alpha Scarf
+  Тёплый шарф, который можно натянуть на лицо. Простая вещь, без которой зимой не обойтись.
+  A warm scarf you can pull up over your face. A simple thing you cannot do without in winter.
+
+Куртка «Альфа»  /  Alpha Jacket
+  Тактическая куртка с налокотниками и усиленными вставками. Рассчитана на тяжёлую работу в полевых условиях.
+  A tactical jacket with elbow pads and reinforced inserts. Built for hard work in the field.
+
+Бронежилет «Альфа»  /  Alpha Body Armor
+  Тяжёлый модульный бронежилет, увешанный подсумками, гранатами и магазинами. Целый склад на груди.
+  Heavy modular body armor hung with pouches, grenades and magazines. A whole armory on your chest.
+
+Тактический ремень «Альфа»  /  Alpha Tactical Belt
+  Тактический ремень с кобурой под пистолет и поясной сумкой. Запасной ствол и мелочи всегда при тебе.
+  A tactical belt with a pistol holster and a hip bag. A backup gun and small items always with you.
+
+Штаны «Альфа»  /  Alpha Pants
+  Тактические штаны с наколенниками и множеством карманов. Удобны и в обычный день, и в самый плохой.
+  Tactical pants with knee pads and plenty of pockets. Comfortable on an ordinary day and on the worst one.
+
+Перчатки «Альфа»  /  Alpha Gloves
+  Тактические перчатки с надёжным хватом. Работа с оружием и инструментом без потери чувствительности.
+  Tactical gloves with a reliable grip. Handle weapons and tools without losing sensitivity.
+
+Ботинки «Альфа»  /  Alpha Boots
+  Высокие армейские ботинки с усиленной подошвой. Устойчивы на камнях, грязи и обломках.
+  High army boots with a reinforced sole. Stable on rocks, mud and debris.
+
+Рюкзак «Альфа»  /  Alpha Backpack
+  Компактный тактический рюкзак с множеством отделений. Боеприпасы, медицина и паёк в одном месте.
+  A compact tactical backpack with many compartments. Ammo, meds and rations in one place.
+

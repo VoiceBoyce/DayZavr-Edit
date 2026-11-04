@@ -15,8 +15,8 @@ class cfgVehicles
 	class Vp_Set19_Mask_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_set_military_Mask";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Spetsnaz_Mask";
+		descriptionShort = "$STR_VBC_Spetsnaz_Mask_Desc";
 		model = "\set_military\set\balaclava\model\mask_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Mask"};

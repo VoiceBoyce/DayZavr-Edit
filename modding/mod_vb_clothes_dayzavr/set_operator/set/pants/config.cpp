@@ -13,8 +13,8 @@ class cfgVehicles {
 	
 	class Vp_SET23_Pants_ColorBase : Clothing {
 		scope = 0;
-		displayName = "$STR_set_OPERATOR_Pants";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Operator_Pants";
+		descriptionShort = "$STR_VBC_Operator_Pants_Desc";
 		model = "\set_operator\set\pants\model\pants_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Legs"};

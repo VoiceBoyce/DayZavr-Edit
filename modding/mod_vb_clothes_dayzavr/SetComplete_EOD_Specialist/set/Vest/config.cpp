@@ -15,8 +15,8 @@ class cfgVehicles
 	class TGK_SetComplete_EOD_Specialist_Vest_Colorbase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_EOD_Specialist_Vest01";
-		descriptionShort = "$STR_EOD_Specialist_Vest02";
+		displayName = "$STR_VBC_Alpha_Vest";
+		descriptionShort = "$STR_VBC_Alpha_Vest_Desc";
 		model = "SetComplete_EOD_Specialist\set\Vest\Vest_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

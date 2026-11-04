@@ -14,8 +14,8 @@ class cfgVehicles
 	class TGK_SetComplete_EOD_Specialist_Gloves_Colorbase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_EOD_Specialist_Gloves01";
-		descriptionShort = "$STR_EOD_Specialist_Gloves02";
+		displayName = "$STR_VBC_Alpha_Gloves";
+		descriptionShort = "$STR_VBC_Alpha_Gloves_Desc";
 		model = "SetComplete_EOD_Specialist\set\Gloves\Gloves_g.p3d";
 		inventorySlot[] = {"Gloves"};
 		simulation = "clothing";

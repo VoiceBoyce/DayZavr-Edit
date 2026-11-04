@@ -15,8 +15,8 @@ class cfgVehicles
 	class Vp_SET13_Top_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_Oni_Top";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Samurai_Top";
+		descriptionShort = "$STR_VBC_Samurai_Top_Desc";
 		model = "Set_Oni\set\Top\model\Top_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Body"};

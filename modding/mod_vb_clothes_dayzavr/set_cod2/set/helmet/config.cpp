@@ -24,8 +24,8 @@ class cfgVehicles
 	class Vp_Set6_Mask_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "Маска";
-		descriptionShort = "";
+		displayName = "$STR_VBC_King_Mask";
+		descriptionShort = "$STR_VBC_King_Mask_Desc";
 		model = "set_cod2\set\helmet\model\mask_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"Mask"};

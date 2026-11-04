@@ -16,8 +16,8 @@ class cfgVehicles
 	class TGK_SetComplete_EOD_Specialist_Mask_Colorbase: BalaclavaMask_ColorBase
 	{
 		scope = 0;
-		displayName = "$STR_EOD_Specialist_Mask01";
-		descriptionShort = "$STR_EOD_Specialist_Mask02";
+		displayName = "$STR_VBC_Alpha_Mask";
+		descriptionShort = "$STR_VBC_Alpha_Mask_Desc";
 		inventorySlot[] = {"Mask"};
 		itemSize[] = {2,2};
 		rotationFlags = 17;

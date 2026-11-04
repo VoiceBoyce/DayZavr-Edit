@@ -15,8 +15,8 @@ class cfgVehicles
 	class Vp_Set17_Helmet_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "$STR_set_Incite_Helmet";
-		descriptionShort = "";
+		displayName = "$STR_VBC_Exo_Helmet";
+		descriptionShort = "$STR_VBC_Exo_Helmet_Desc";
 		model = "\set_Incite\set\helmet\model\helmet_g.p3d";
 		inventorySlot[] = {"Headgear","Helmet"};
 		simulation = "clothing";
