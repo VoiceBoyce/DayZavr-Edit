@@ -107,7 +107,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 	protected TextWidget m_RecipeTitle;
 	protected INT_UIF_Button m_ReqBtn;
 	protected TextWidget m_SlotsFill;
-	protected MultilineTextWidget m_RecipeDesc;
+	protected ref DZV_UIScrollText m_RecipeDesc;   // DayZavr: описание с прокруткой (было MultilineTextWidget)
 	protected TextWidget m_DopSummary;
 
 	// Результат.
@@ -383,7 +383,8 @@ class DRL_CraftWindow extends INT_UIF_Menu
 
 		y = y + 22 + 38 + 14;
 		INT_UIF_Draw.Caption(m_ItemBody, CPAD + 2, y, cw, "#STR_DRL_UI_RECIPE_DETAILS", "info");
-		m_RecipeDesc = INT_UIF_Draw.MText(m_ItemBody, CPAD + 2, y + 22, cw - 4, 60, "", 14, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT));
+		m_RecipeDesc = new DZV_UIScrollText();
+		m_RecipeDesc.Build(m_ItemBody, CPAD + 2, y + 22, cw - 4, 60, 14, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT));
 
 		y = y + 22 + 60 + 12;
 		INT_UIF_Draw.Caption(m_ItemBody, CPAD + 2, y, cw - 220, "#STR_DRL_UI_SEC_DOP", "plus");
