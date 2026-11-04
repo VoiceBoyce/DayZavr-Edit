@@ -12,7 +12,7 @@ class CfgVehicles {
 	
 	class VP_SET23_Shoes_ColorBase : Clothing {
 		scope = 0;
-		displayName = "$STR_set_DEMON_Shoes";
+		displayName = "$STR_set_OPERATOR_Shoes";
 		descriptionShort = "";
 		model = "\set_operator\set\shoes\model\shoes_g.p3d";
 		inventorySlot[] = {"Feet"};

@@ -5,7 +5,8 @@ modded class ModItemRegisterCallbacks
         super.RegisterOneHanded( pType, pBehavior ); 
 
 		pType.AddItemInHandsProfileIK("VP_SET23_Shoes_ColorBase", "dz/anims/workspaces/player/player_main/player_main_1h.asi", pBehavior, "dz/anims/anm/player/ik/clothing/Skirt.anm");
-		pType.AddItemInHandsProfileIK("Vp_Set23_Mask_ColorBase", "dz/anims/workspaces/player/player_main/player_main_1h.asi", pBehavior, "dz/anims/anm/player/ik/gear/balaclava_mask.anm");
+		// DayZavr: было Vp_Set23_Mask_ColorBase (такого класса в сете нет), теперь шлем, поза как у шлемов других сетов
+		pType.AddItemInHandsProfileIK("Vp_Set23_Helmet_ColorBase", "dz/anims/workspaces/player/player_main/player_main_1h.asi", pBehavior, "dz/anims/anm/player/ik/gear/gorka_helmet.anm");
 		pType.AddItemInHandsProfileIK("Vp_SET23_Pants_ColorBase", "dz/anims/workspaces/player/player_main/player_main_1h.asi", pBehavior, "dz/anims/anm/player/ik/camping/fabric.anm");
 		pType.AddItemInHandsProfileIK("Vp_SET23_Top_ColorBase", "dz/anims/workspaces/player/player_main/player_main_1h.asi", pBehavior, "dz/anims/anm/player/ik/camping/fabric.anm");	
 	};

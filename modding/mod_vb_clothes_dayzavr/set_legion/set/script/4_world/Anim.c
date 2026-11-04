@@ -12,7 +12,7 @@ modded class ModItemRegisterCallbacks
 
 	override void RegisterTwoHanded(DayZPlayerType pType, DayzPlayerItemBehaviorCfg pBehavior)
     {
-        super.RegisterOneHanded(pType, pBehavior);
+        super.RegisterTwoHanded(pType, pBehavior); // DayZavr: было super.RegisterOneHanded, рвало цепочку двуручных
 		pType.AddItemInHandsProfileIK("Vp_SET20_Vest_ColorBase","dz/anims/workspaces/player/player_main/weapons/player_main_2h_extinguisher.asi",pBehavior,"dz/anims/anm/player/ik/two_handed/vest_police.anm");
     };
 };

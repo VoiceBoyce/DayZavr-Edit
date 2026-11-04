@@ -12,7 +12,7 @@ modded class Clothing extends Clothing_Base
 			EntityAI cargoParent = parent.GetHierarchyParent();
 			ClothingBase parentClothing = ClothingBase.Cast(parent);
 			if (cargoParent && parentClothing)
-				return !(parent.IsClothing() && cargoParent.IsClothing()));			
+				return !(parent.IsClothing() && cargoParent.IsClothing()); // DayZavr: убрана лишняя ")" (FIX-ME: Syntax error)
 			return true;
 		}
 		
