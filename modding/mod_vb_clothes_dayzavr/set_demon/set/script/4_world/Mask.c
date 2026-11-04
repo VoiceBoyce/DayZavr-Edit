@@ -1,0 +1,1 @@
+class Vp_Set22_Mask_ColorBase extends Mask_Base {};

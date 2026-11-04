@@ -1,0 +1,3 @@
+class TGK_SetComplete_EOD_Specialist_Vest_Colorbase : Vest_Base {};
+class TGK_EOD_Specialist_Vest_Green extends TGK_SetComplete_EOD_Specialist_Vest_Colorbase {};
+class TGK_EOD_Specialist_Vest_Black extends TGK_SetComplete_EOD_Specialist_Vest_Colorbase {};

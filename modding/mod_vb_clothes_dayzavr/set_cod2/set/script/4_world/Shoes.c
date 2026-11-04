@@ -1,0 +1,1 @@
+class VP_Set6_Shoes_ColorBase extends Shoes_Base {};
