@@ -2275,22 +2275,23 @@ class CfgVehicles
 		allowOwnedCargoManipulation = 1;
 		lootTag[] = { "Work" };
 		hiddenSelections[] = { "camoGround" };
+		// DayZavr: закомментированы навесы, которые не используются в рецептах
 		attachments[] =
 		{
 			"DRL_Craftattach1",
 			"DRL_Craftattach2",
 			"DRL_CraftattachDrill",
-			"DRL_CraftattachMICRO",
+			//"DRL_CraftattachMICRO",	// микроволновка
 			"DRL_Craftattach5",
 			"DRL_CraftattachT",
-			"DRL_CraftattachC",
-			"DRL_CraftattachLMP",
-			"DRL_CraftattachP",
+			//"DRL_CraftattachC",		// циркулярка
+			//"DRL_CraftattachLMP",		// лампа
+			//"DRL_CraftattachP",		// столешница
 			"DRL_CraftattachSEWTAB",
 			"DRL_CraftattachBX",
-			"DRL_CraftattachPaints",
-			"DRL_CraftattachMP",
-			"DRL_CraftattachNB"
+			//"DRL_CraftattachPaints",	// краски
+			"DRL_CraftattachMP"
+			//"DRL_CraftattachNB"		// ноутбук
 		};
 		class Cargo
 		{
@@ -2311,9 +2312,9 @@ class CfgVehicles
 					"DRL_Craftattach2",
 					"DRL_CraftattachDrill",
 					"DRL_Craftattach5",
-					"DRL_CraftattachT",
-					"DRL_CraftattachLMP",
-					"DRL_CraftattachPaints"
+					"DRL_CraftattachT"
+					//"DRL_CraftattachLMP",		// лампа
+					//"DRL_CraftattachPaints"	// краски
 				};
 			};
 			class Engine
@@ -2321,14 +2322,14 @@ class CfgVehicles
 				name = "Улучшения";
 				description = "Раширение видов изготовления";
 				icon = "cat_bb_watchtower_wall";
-				attachmentSlots[] = { "DRL_CraftattachMICRO", "DRL_CraftattachMP", "DRL_CraftattachNB", "DRL_CraftattachC" };
+				attachmentSlots[] = { "DRL_CraftattachMP" };	// было: MICRO, MP, NB, C
 			};
 			class Body
 			{
 				name = "Расширения";
 				description = "Дополнительные установки";
 				icon = "cat_bb_watchtower_wall_3";
-				attachmentSlots[] = { "DRL_CraftattachP", "DRL_CraftattachSEWTAB", };
+				attachmentSlots[] = { "DRL_CraftattachSEWTAB" };	// было: P (столешница), SEWTAB
 			};
 			class Storage
 			{
@@ -2835,10 +2836,12 @@ class CfgVehicles
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"DRL_CraftMenu\model\Truck_Lift\Truck_Lift_co.paa"};
 		hiddenSelectionsMaterials[] = {"DRL_CraftMenu\model\Truck_Lift\Truck_Lift.rvmat"};
-		attachments[] = {"DRL_CraftattachJack", "DRL_CraftattachBX"};
+		// DayZavr: 5 ванильных слотов под листовой металл (40 + 4×20 = 120 пластин), чтобы пластины 10×10 не занимали хранилище
+		attachments[] = {"DRL_CraftattachJack", "DRL_CraftattachBX", "Truck_01_MetalSheets", "Material_L1W1_MetalSheets", "Material_L1W2_MetalSheets", "Material_L1W3_MetalSheets", "Material_L2W1_MetalSheets"};
 		class Cargo
 		{
-			itemsCargoSize[] = {10,10};
+			// DayZavr: 650 слотов, чтобы влезли все ингредиенты машины (без пластин нужно до 630)
+			itemsCargoSize[] = {10,65};
 			openable = 0;
 			allowOwnedCargoManipulation = 1;
 		};
@@ -2857,6 +2860,13 @@ class CfgVehicles
 				description = "Расширение хранения";
 				icon = "cat_common_cargo";
 				attachmentSlots[] = {"DRL_CraftattachBX"};
+			};
+			class MetalSheets
+			{
+				name = "MetalSheets";
+				description = "Листовой металл";
+				icon = "cat_bb_material";
+				attachmentSlots[] = {"Truck_01_MetalSheets", "Material_L1W1_MetalSheets", "Material_L1W2_MetalSheets", "Material_L1W3_MetalSheets", "Material_L2W1_MetalSheets"};
 			};
 		};
 		class DamageSystem

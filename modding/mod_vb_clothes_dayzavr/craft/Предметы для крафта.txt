@@ -1,0 +1,246 @@
+ПРЕДМЕТЫ, КОТОРЫЕ ИСПОЛЬЗУЮТСЯ В КРАФТАХ (конфиг DRL_CraftMenu сервера 18)
+
+Колонки «расход»: сколько уходит на ОДНУ сборку всего — одежда: каждая вещь _vb по разу (все 12 сетов);
+машины: все 3 машины полностью (кузов + все детали + колёса); материалы/прочее/артефакты: каждый рецепт по разу.
+Роль: расход — тратится; инструмент — не тратится, изнашивается (из инвентаря или навес верстака); обвес — ставится на станок.
+«крафтится» — предмет сам делается в этом же крафт-меню (можно не спавнить или спавнить реже).
+
+============================== EFT (бартер, мод Escape From Tarkov) — 57 шт. ==============================
+
+класснейм                            название                               роль                       расход: одежда / машины / материалы / прочее / артефакты
+EFT_Cloth_aramid                     Ткань из арамидного волокна            расход                     231 / - / - / - / -
+EFT_MetalParts                       Набор металлических деталей            расход, крафтится          121 / 63 / - / - / -
+EFT_skoth                            Армированный скотч                     расход, крафтится          157 / 5 / - / - / -
+EFT_Cloth_paracord                   Шнур Паракорд                          расход                     161 / - / - / - / -
+EFT_Cloth_cordura                    Ткань Кордура                          расход                     141 / - / - / - / -
+EFT_Cloth_ripstop                    Ткань Рипстоп                          расход                     116 / - / - / - / -
+EFT_Bolts                            Болты                                  расход, крафтится          - / 111 / 1 / - / -
+EFT_model_nuts                       Горсть гаек                            расход, крафтится          - / 97 / 1 / - / -
+EFT_Mounting_foam                    Монтажная пена                         расход                     83 / 15 / - / - / -
+EFT_Cloth_fleece                     Ткань Флис                             расход                     89 / 5 / - / - / -
+EFT_Poxearm                          Тюбик холодной сварки                  расход                     27 / 36 / - / - / -
+EFT_Screw_pack                       Упаковка черных саморезов              расход                     25 / 36 / - / - / -
+EFT_Wires                            Моток медной электропроводки           расход, крафтится          7 / 42 / - / - / -
+EFT_OrgGlass                         Кусок оргстекла                        расход                     14 / 29 / - / - / -
+EFT_Insulatingtape                   Изолента                               расход                     1 / 28 / - / - / -
+EFT_SiliconTube                      Силиконовая трубка                     расход                     - / 24 / - / - / -
+EFT_Hose                             Гофрированный шланг                    расход                     - / 17 / - / - / -
+EFT_Klean                            Смазка FireClean                       расход                     1 / 14 / - / - / -
+EFT_Rele                             Реле фазового контроля                 расход                     - / 15 / - / - / -
+EFT_Filtr                            Фильтр противогаза МехВЗ-1             расход                     14 / - / - / - / -
+EFT_Carbonecase                      Углепластиковый кейс                   расход                     11 / - / - / - / -
+EFT_gold_chain                       Золотая цепочка                        расход                     11 / - / - / - / -
+EFT_Lens                             Фото объектив                          расход                     10 / - / - / - / -
+EFT_Bloodset                         Медицинский пакет крови                расход                     8 / - / - / - / -
+EFT_Sheloch                          Щелочной очиститель                    расход                     - / 7 / - / - / -
+EFT_Capacitors                       Конденсаторы для электроники           расход                     - / 6 / - / - / -
+EFT_Bleach                           Отбеливатель Белизна                   расход                     5 / - / - / - / -
+EFT_GreenBat                         Литиевый аккумулятор GB                расход                     5 / - / - / - / -
+EFT_Hose_military                    Военный гофрированный шланг            расход                     - / 5 / - / - / -
+EFT_Military_cable                   Армированный военный кабель            расход                     - / 5 / - / - / -
+EFT_incandescentlamp                 Лампа накаливания                      расход                     - / 4 / - / - / -
+EFT_Carbattery                       Аккумулятор УРАЛБАТ                    расход                     - / 3 / - / - / -
+EFT_chain                            Серебряная цепочка                     расход                     3 / - / - / - / -
+EFT_Engine                           Электродвигатель                       расход                     - / 3 / - / - / -
+EFT_Gasolin                          Металлическая канистра для топлива     расход                     - / 3 / - / - / -
+EFT_GP                               Золотой жетон GP                       расход                     3 / - / - / - / -
+EFT_Magnet                           Электромагнит                          расход                     - / 3 / - / - / -
+EFT_Egg                              Золотое яйцо                           расход                     2 / - / - / - / -
+EFT_Elibadge                         Серебряный жетон                       расход                     2 / - / - / - / -
+EFT_Modem                            Сетевой модем                          расход                     2 / - / - / - / -
+EFT_PressureGauge                    Манометр                               расход                     - / 2 / - / - / -
+EFT_SkullRing                        Золотое кольцо-печатка с черепом       расход                     2 / - / - / - / -
+EFT_Chiken                           Золотой петух                          расход                     1 / - / - / - / -
+EFT_dogtag                           Жетон PMC                              расход                     1 / - / - / - / -
+EFT_Kerosin                          Канистра для керосина                  расход                     - / 1 / - / - / -
+EFT_Advwrench                        Гаечный ключ Ridgid                    инструмент                 
+EFT_Cablecutter                      Кабелерез                              инструмент                 
+EFT_Electric_Drill                   Электрическая дрель                    инструмент                 
+EFT_HandDrill                        Ручная дрель                           инструмент                 
+EFT_kusajki                          Кусачки                                инструмент                 
+EFT_MetalScissors                    Ножницы по металлу                     инструмент                 
+EFT_PowerCord                        Сетевой кабель питания                 расход (замена)            
+EFT_Ratchetwrench                    Накидная трещетка-ключ                 инструмент                 
+EFT_Screwdriver                      Отвёртка плоская                       инструмент                 
+EFT_Screwdriver_krest                Отвёртка крестовая                     инструмент                 
+EFT_Sewing                           Набор для шитья -Красавчик-            инструмент                 
+EFT_Shilo                            Шило с деревянной ручкой               инструмент                 
+
+============================== ВАНИЛЬНЫЕ предметы DayZ — 27 шт. ==============================
+
+класснейм                            название                               роль                       расход: одежда / машины / материалы / прочее / артефакты
+MetalPlate                           Листовой металл                        расход                     110 / 285 / - / - / -
+Rag                                  Тряпка                                 расход                     333 / - / - / - / -
+TannedLeather                        Дубленая кожа                          расход                     146 / 47 / - / - / -
+TireRepairKit                        Набор для ремонта шин                  расход                     - / 60 / - / - / -
+ChickenFeather                       Куриные перья                          расход                     10 / - / - / 20 / -
+MetalWire                            Металлическая проволока                расход                     - / 23 / 3 / 1 / -
+SparkPlug                            Свеча зажигания                        расход                     - / 24 / - / - / -
+Pipe                                 Труба                                  расход                     - / 14 / 2 / 6 / -
+EngineOil                            Моторное масло                         расход                     - / 18 / - / - / -
+HeadlightH7                          Автомобильная лампа                    расход                     - / 10 / - / - / -
+Nail                                 Гвозди                                 расход, крафтится          - / - / 10 / - / -
+Bone                                 Кости                                  расход                     6 / - / - / - / -
+CarRadiator                          Автомобильный радиатор                 расход                     - / 3 / - / - / -
+AirborneMask                         Респиратор химкостюма                  расход                     - / - / - / 1 / -
+CableReel                            Кабельная катушка                      расход                     - / - / 1 / - / -
+DuctTape                             Скотч                                  расход                     - / - / 1 / - / -
+MilitaryBoots_ColorBase              Штурмовые ботинки                      расход                     - / - / - / 1 / -
+RopeBelt                             Веревочный ремень                      расход                     - / - / - / 1 / -
+Scout_Chernarus                      Винтовка Scout                         расход                     - / - / - / 1 / -
+Blowtorch                            Паяльная лампа                         инструмент                 
+Hacksaw                              Слесарная ножовка                      инструмент                 
+Hammer                               Молоток                                инструмент                 
+HandSaw                              Пила                                   инструмент                 
+LugWrench                            Монтировка                             инструмент                 
+Pliers                               Плоскогубцы                            инструмент                 
+Screwdriver                          Отвертка                               инструмент                 
+Wrench                               Гаечный ключ                           инструмент                 
+
+============================== DRL_CraftMenu (станки и обвесы верстаков) — 11 шт. ==============================
+
+класснейм                            название                               роль                       расход: одежда / машины / материалы / прочее / артефакты
+DRL_Craft_Anvil                      Наковальня                             обвес/навес                
+DRL_Craft_Anvil2                     Наковальня (второй вид)                обвес/навес                
+DRL_Craft_Box                        Ящик                                   обвес/навес                
+DRL_Craft_Car_Jack                   Домкрат                                обвес/навес                
+DRL_Craft_DrillSmal                  Дрель                                  обвес/навес                
+DRL_Craft_lab_bunsen                 Штатив                                 обвес/навес                
+DRL_Craft_Metalic_thimble            Шпуля                                  обвес/навес                
+DRL_Craft_Microscope                 Микроскоп                              обвес/навес                
+DRL_Craft_Sewing_scissors            Швейные ножницы                        обвес/навес                
+DRL_Craft_Tools                      Инструменты                            обвес/навес                
+DRL_Craft_Vise                       Тиски                                  обвес/навес                
+
+============================== ДРУГИЕ МОДЫ (только класснеймы, моды не открывал) — 128 шт. ==============================
+
+класснейм                            название                               роль                       расход: одежда / машины / материалы / прочее / артефакты
+MSFZ_Zanoza_stick                                                           расход                     - / - / - / 60 / 1
+BRDK_Titanium                                                               расход                     - / - / - / 34 / 4
+BRDK_Iron                                                                   расход                     - / - / - / 19 / 8
+MSFZ_Crystal_Obsidian                                                       расход                     - / - / - / 15 / 5
+BRDK_BigTitanium                                                            расход                     - / - / - / 19 / -
+BRDK_Bronze                                                                 расход                     - / - / - / 15 / 4
+MSFZ_Crystal_Mithril                                                        расход                     - / - / - / 10 / 4
+MSFZ_Crystal_Blue                                                           расход                     - / - / - / 7 / 4
+MSFZ_Crystal_Gold                                                           расход                     - / - / - / 7 / 4
+MSFZ_RuneStone_Fire                                                         расход                     - / - / - / 3 / 7
+MSFZ_Crystal_Stone                                                          расход                     - / - / - / 1 / 8
+BRDK_Coal                                                                   расход                     - / - / - / - / 8
+MSFZ_RuneStone_Ice                                                          расход                     - / - / - / 3 / 5
+MSFZ_RuneStone_Solnce                                                       расход                     - / - / - / 2 / 6
+OOTS_ART_Braen                                                              расход, крафтится          - / - / - / - / 8
+BRDK_Sulfur                                                                 расход                     - / - / - / - / 7
+MSFZ_RuneStone_Bereza                                                       расход                     - / - / - / 1 / 6
+MSFZ_RuneStone_Storm                                                        расход                     - / - / - / 3 / 4
+OOTS_ART_Medusa                                                             расход, крафтится          - / - / - / - / 7
+OOTS_ART_svet                                                               расход, крафтится          - / - / - / - / 7
+MSFZ_Crystal_Pyrite                                                         расход                     - / - / - / 4 / 2
+MSFZ_RuneStone_Nasledie                                                     расход                     - / - / - / 5 / 1
+OOTS_ART_kolobok                                                            расход, крафтится          - / - / - / - / 6
+SFP_Item_box_condensers                                                     расход                     - / - / - / 6 / -
+BRDK_Gold_Sand                                                              расход                     - / - / - / - / 5
+MSFZ_RuneStone_Osa                                                          расход                     - / - / - / 3 / 2
+OOTS_ART_Crustal                                                            расход, крафтится          - / - / - / - / 5
+OOTS_ART_myaso                                                              расход, крафтится          - / - / - / - / 5
+SFP_ModuleSystem_BoneFix                                                    расход                     - / - / - / 5 / -
+BRDK_Nephrite                                                               расход                     - / - / - / - / 4
+BRDK_Rubin                                                                  расход                     - / - / - / - / 4
+BRDK_Silver_Sand                                                            расход                     - / - / - / - / 4
+MSFZ_Crystal_Cooper                                                         расход                     - / - / - / 4 / -
+MSFZ_Crystal_Pink                                                           расход                     - / - / - / 1 / 3
+MSFZ_RuneStone_Day                                                          расход                     - / - / - / 2 / 2
+MSFZ_RuneStone_Orel                                                         расход                     - / - / - / 1 / 3
+MSFZ_RuneStone_Puti                                                         расход                     - / - / - / 2 / 2
+MSFZ_RuneStone_Wolf                                                         расход                     - / - / - / 2 / 2
+OOTS_ART_Crustal3                                                           расход, крафтится          - / - / - / - / 4
+OOTS_ART_Drop3                                                              расход, крафтится          - / - / - / - / 4
+OOTS_ART_Plamya                                                             расход, крафтится          - / - / - / - / 4
+OOTS_ART_Plamya2                                                            расход, крафтится          - / - / - / 1 / 3
+SFP_Item_box_transistors                                                    расход                     - / - / - / 4 / -
+MSFZ_Crystal_Amethyst                                                       расход                     - / - / - / 1 / 2
+MSFZ_Crystal_Silver                                                         расход                     - / - / - / 1 / 2
+MSFZ_RuneStone_Chelovek                                                     расход                     - / - / - / 2 / 1
+MSFZ_RuneStone_Kaban                                                        расход                     - / - / - / 1 / 2
+MSFZ_RuneStone_KladesPamyati                                                расход                     - / - / - / 2 / 1
+MSFZ_RuneStone_Medved                                                       расход                     - / - / - / 1 / 2
+MSFZ_RuneStone_Tigr                                                         расход                     - / - / - / 1 / 2
+OOTS_ART_Battery                                                            расход, крафтится          - / - / - / - / 3
+OOTS_ART_Battery3                                                           расход, крафтится          - / - / - / - / 3
+OOTS_ART_Crustal2                                                           расход, крафтится          - / - / - / - / 3
+OOTS_ART_DemonEye                                                           расход, крафтится          - / - / - / 1 / 2
+OOTS_ART_Glaz                                                               расход, крафтится          - / - / - / - / 3
+OOTS_ART_kameniy_cvetok                                                     расход, крафтится          - / - / - / - / 3
+OOTS_ART_Light                                                              расход, крафтится          - / - / - / - / 3
+OOTS_ART_SeaUrchin                                                          расход, крафтится          - / - / - / - / 3
+OOTS_ART_snejinka                                                           расход, крафтится          - / - / - / 1 / 2
+OOTS_ART_Sparkler                                                           расход, крафтится          - / - / - / 1 / 2
+OOTS_ART_Thorn                                                              расход, крафтится          - / - / - / - / 3
+BRDK_Nephrite_Sand                                                          расход                     - / - / - / - / 2
+BRDK_Silver                                                                 расход                     - / - / - / - / 2
+MSFZ_Crystal_Damascus                                                       расход                     - / - / - / 1 / 1
+MSFZ_Ent_head_medium                                                        расход                     - / - / - / - / 2
+MSFZ_RuneStone_Bog                                                          расход                     - / - / - / - / 2
+MSFZ_RuneStone_Cherepaha                                                    расход                     - / - / - / 1 / 1
+MSFZ_RuneStone_Zmey                                                         расход                     - / - / - / - / 2
+OOTS_ART_Drop                                                               расход, крафтится          - / - / - / - / 2
+OOTS_ART_Drop2                                                              расход, крафтится          - / - / - / - / 2
+OOTS_ART_Glaz2                                                              расход, крафтится          - / - / - / - / 2
+OOTS_ART_Glaz3                                                              расход, крафтится          - / - / - / - / 2
+OOTS_ART_Gravi                                                              расход, крафтится          - / - / - / 1 / 1
+OOTS_ART_kameniy_cvetok3                                                    расход, крафтится          - / - / - / - / 2
+OOTS_ART_krov_kamnya                                                        расход, крафтится          - / - / - / - / 2
+OOTS_ART_Mikrob                                                             расход, крафтится          - / - / - / - / 2
+OOTS_ART_NightStar                                                          расход, крафтится          - / - / - / 1 / 1
+OOTS_ART_Plamya3                                                            расход, крафтится          - / - / - / - / 2
+OOTS_ART_Plasma                                                             расход, крафтится          - / - / - / - / 2
+OOTS_GasMaskFilter_Exo_GeX1                                                 расход                     - / - / - / 2 / -
+BRDK_Gold                                                                   расход                     - / - / - / - / 1
+BRDK_Titanium_Sand                                                          расход                     - / - / - / - / 1
+MSFZ_Crossbow_AP_Mag_25Rnd                                                  расход                     - / - / - / 1 / -
+MSFZ_Crossbow_Mag_25Rnd                                                     расход                     - / - / - / 1 / -
+MSFZ_Ent_head                                                               расход                     - / - / - / - / 1
+MSFZ_Ent_head_hard                                                          расход                     - / - / - / - / 1
+MSFZ_Ricar_Head                                                             расход                     - / - / - / - / 1
+MSFZ_RuneStone_Busk                                                         расход                     - / - / - / 1 / -
+MSFZ_RuneStone_FireSmall                                                    расход                     - / - / - / - / 1
+MSFZ_RuneStone_IceSmall                                                     расход                     - / - / - / - / 1
+MSFZ_RuneStone_StormSmall                                                   расход                     - / - / - / - / 1
+MSFZ_RuneStone_Tis                                                          расход                     - / - / - / - / 1
+MSFZ_RuneStone_Zayac                                                        расход                     - / - / - / - / 1
+MSFZ_Spider_Lapka                                                           расход                     - / - / - / - / 1
+MSFZ_Troll_Hand                                                             расход                     - / - / - / - / 1
+MSFZ_Zanoza_eye                                                             расход                     - / - / - / - / 1
+MutantRicarSteakMeat                                                        расход                     - / - / - / - / 1
+MutantTrollSteakMeat                                                        расход                     - / - / - / - / 1
+OOTS_ART_Angel                                                              расход, крафтится          - / - / - / - / 1
+OOTS_ART_AngelFool                                                          расход, крафтится          - / - / - / - / 1
+OOTS_ART_CrustalThorn                                                       расход, крафтится          - / - / - / - / 1
+OOTS_ART_DevelHert                                                          расход, крафтится          - / - / - / 1 / -
+OOTS_ART_FireBall                                                           расход, крафтится          - / - / - / 1 / -
+OOTS_ART_Flower                                                             расход, крафтится          - / - / - / - / 1
+OOTS_ART_izolator                                                           расход, крафтится          - / - / - / - / 1
+OOTS_ART_kameniy_cvetok2                                                    расход, крафтится          - / - / - / - / 1
+OOTS_ART_Klyaksa                                                            расход, крафтится          - / - / - / - / 1
+OOTS_ART_Mohovik                                                            расход, крафтится          - / - / - / - / 1
+OOTS_ART_MoonLight                                                          расход, крафтится          - / - / - / - / 1
+OOTS_ART_puzir                                                              расход, крафтится          - / - / - / - / 1
+OOTS_ART_ShineOfTheForest                                                   расход, крафтится          - / - / - / - / 1
+OOTS_ART_vivert                                                             расход, крафтится          - / - / - / - / 1
+OOTS_ART_vspishka                                                           расход, крафтится          - / - / - / - / 1
+SFP_BearZMB_Kogot                                                           расход                     - / - / - / - / 1
+SFP_BM06_Gloves                                                             расход                     - / - / - / 1 / -
+SFP_CosplayMantisBlade_Arsk                                                 расход                     - / - / - / 1 / -
+SFP_ModuleSystem_Stamina                                                    расход                     - / - / - / 1 / -
+SFP_MozgoTras_ear                                                           расход                     - / - / - / - / 1
+SFP_MozgoTrasRed_ear                                                        расход                     - / - / - / - / 1
+SFP_MutoWolf_kogot                                                          расход                     - / - / - / - / 1
+SFP_Piyavka_Yazik                                                           расход                     - / - / - / - / 1
+SFP_Shipastiy_Teeth                                                         расход                     - / - / - / - / 1
+SFP_Shum_jaw                                                                расход                     - / - / - / - / 1
+SFP_tenevnik_eye                                                            расход                     - / - / - / - / 1
+SFP_Trupojor_Kogot                                                          расход                     - / - / - / - / 1
+IMP_NBC_Gloves                                                              обвес/навес                
+MSFZ_Magic_Hammer                                                           инструмент, крафтится      
+SFP_Respirator_red                                                          обвес/навес, крафтится     
+

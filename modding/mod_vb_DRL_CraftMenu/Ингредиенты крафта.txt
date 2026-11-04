@@ -1,0 +1,98 @@
+Проверить что предметы есть на сервере, а если их нет, то распределить тут по конфигам:
+D:\DayZavr\DayZavr-Servers\DayZServer16\Instance_1\AI_Bandits - DynamicAIB.json
+D:\DayZavr\DayZavr-Servers\DayZServer16\Instance_1\Airdrop - AirdropSettings.json
+D:\DayZavr\DayZavr-Servers\DayZServer16\Instance_1\BRDK_MODS - Koth.json
+D:\DayZavr\DayZavr-Servers\DayZServer16\Instance_1\ConvoySettings - Settings.json
+D:\DayZavr\DayZavr-Servers\DayZServer16\Instance_1\DNA_Keycards
+D:\DayZavr\DayZavr-Servers\DayZServer16\Instance_1\SpawnerBubaku
+D:\DayZavr\DayZavr-Servers\DayZServer16\Instance_1\StashSearch - сюда дубли каких либо предметов закинуть
+
+Так же добавить тайпысы EFT предметов
+
+=== Предметы EFT (57) ===
+EFT_Advwrench - гаечный ключ Ridgid
+EFT_Bleach - отбеливатель Белизна
+EFT_Bloodset - медицинский пакет крови
+EFT_Bolts - болты
+EFT_Cablecutter - кабелерез
+EFT_Capacitors - конденсаторы для электроники
+EFT_Carbattery - аккумулятор УРАЛБАТ
+EFT_Carbonecase - углепластиковый кейс
+EFT_chain - серебряная цепочка
+EFT_Chiken - золотой петух
+EFT_Cloth_aramid - ткань из арамидного волокна
+EFT_Cloth_cordura - ткань Кордура
+EFT_Cloth_fleece - ткань Флис
+EFT_Cloth_paracord - шнур Паракорд
+EFT_Cloth_ripstop - ткань Рипстоп
+EFT_dogtag - жетон PMC
+EFT_Egg - золотое яйцо
+EFT_Electric_Drill - электрическая дрель
+EFT_Elibadge - серебряный жетон
+EFT_Engine - электродвигатель
+EFT_Filtr - фильтр противогаза МехВЗ-1
+EFT_Gasolin - металлическая канистра для топлива
+EFT_gold_chain - золотая цепочка
+EFT_GP - золотой жетон GP
+EFT_GreenBat - литиевый аккумулятор GB
+EFT_HandDrill - ручная дрель
+EFT_Hose - гофрированный шланг
+EFT_Hose_military - военный гофрированный шланг
+EFT_incandescentlamp - лампа накаливания
+EFT_Insulatingtape - изолента
+EFT_Kerosin - канистра для керосина
+EFT_Klean - смазка FireClean
+EFT_kusajki - кусачки
+EFT_Lens - фото объектив
+EFT_Magnet - электромагнит
+EFT_MetalParts - набор металлических деталей
+EFT_MetalScissors - ножницы по металлу
+EFT_Military_cable - армированный военный кабель
+EFT_model_nuts - горсть гаек
+EFT_Modem - сетевой модем
+EFT_Mounting_foam - монтажная пена
+EFT_OrgGlass - кусок оргстекла
+EFT_PowerCord - сетевой кабель питания
+EFT_Poxearm - тюбик холодной сварки
+EFT_PressureGauge - манометр
+EFT_Ratchetwrench - накидная трещетка-ключ
+EFT_Rele - реле фазового контроля
+EFT_Screw_pack - упаковка черных саморезов
+EFT_Screwdriver - отвёртка плоская
+EFT_Screwdriver_krest - отвёртка крестовая
+EFT_Sewing - набор для шитья -Красавчик-
+EFT_Sheloch - щелочной очиститель
+EFT_Shilo - шило с деревянной ручкой
+EFT_SiliconTube - силиконовая трубка
+EFT_skoth - армированный скотч
+EFT_SkullRing - золотое кольцо-печатка с черепом
+EFT_Wires - моток медной электропроводки
+
+=== Ванильные предметы (27) ===
+AirborneMask - респиратор химкостюма
+Blowtorch - паяльная лампа
+Bone - кости
+CableReel - кабельная катушка
+CarRadiator - автомобильный радиатор
+ChickenFeather - куриные перья
+DuctTape - скотч
+EngineOil - моторное масло
+Hacksaw - слесарная ножовка
+Hammer - молоток
+HandSaw - пила
+HeadlightH7 - автомобильная лампа
+LugWrench - монтировка
+MetalPlate - листовой металл
+MetalWire - металлическая проволока
+MilitaryBoots_ColorBase - штурмовые ботинки
+Nail - гвозди
+Pipe - труба
+Pliers - плоскогубцы
+Rag - тряпка
+RopeBelt - веревочный ремень
+Scout_Chernarus - винтовка Scout
+Screwdriver - отвертка
+SparkPlug - свеча зажигания
+TannedLeather - дубленая кожа
+TireRepairKit - набор для ремонта шин
+Wrench - гаечный ключ
