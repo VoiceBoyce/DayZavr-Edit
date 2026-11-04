@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{782BFA403D3EBA4D}RF_ESCAPE_FROM_DAYZ_CL/GUI/icons/icon_focus.edds"
+ Author "fedor"
+ ChangeDate 1942238283
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "icon_focus.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

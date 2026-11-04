@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{D1C6DA7A5892BC12}RF_ESCAPE_FROM_DAYZ_CL/GUI/Images/MiddleLoadingScreen/RF_MiddleLoadingScreen_01.edds"
+ Author "fedor"
+ ChangeDate 1187312721
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "RF_MiddleLoadingScreen_01.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

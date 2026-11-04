@@ -1,0 +1,119 @@
+GridSpacerWidgetClass rootFrame {
+ color 0.5451 0.5451 0.5451 0
+ position 0 150
+ size 100 100
+ halign center_ref
+ valign bottom_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ Padding 10
+ Margin 0
+ "Size To Content H" 1
+ "Size To Content V" 1
+ Columns 2
+ Rows 1
+ {
+  GridSpacerWidgetClass WrapSpacerWidget0 {
+   ignorepointer 1
+   color 0.5765 0.8588 0.0824 0.8
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   Padding 15
+   Margin 15
+   "Size To Content H" 1
+   "Size To Content V" 1
+   content_valign center
+   Rows 1
+   {
+    ImageWidgetClass IconWidget {
+     ignorepointer 1
+     size 48 48
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     imageTexture "{782BFA403D3EBA4D}RF_ESCAPE_FROM_DAYZ_CL/GUI/icons/icon_focus.edds"
+     mode blend
+     "src alpha" 1
+     "clamp mode" wrap
+     "stretch mode" stretch_w_h
+    }
+    TextWidgetClass TimerMessageTextWidget {
+     ignorepointer 1
+     color 0 0 0 1
+     position 10 10
+     size 48 48
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#Teleport_StayInPlaceMessage"
+     font "gui/fonts/etelkatextpro22"
+     "size to text h" 1
+     "size to text v" 1
+     "text valign" center
+    }
+    ImageWidgetClass IconWidget0 {
+     ignorepointer 1
+     color 0.8784 0.8784 0.8784 1
+     size 38 48
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     imageTexture "{0856DD701CE5BAF0}RF_ESCAPE_FROM_DAYZ_CL/GUI/icons/icon_exit.edds"
+     mode blend
+     "src alpha" 1
+     "clamp mode" wrap
+     "stretch mode" stretch_w_h
+    }
+   }
+  }
+  GridSpacerWidgetClass GridSpacerWidget0 {
+   ignorepointer 1
+   color 0.1686 0.1686 0.1686 0.8118
+   size 100 1
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 0
+   Padding 15
+   Margin 15
+   "Size To Content H" 1
+   "Size To Content V" 1
+   content_halign center
+   content_valign center
+   Columns 1
+   Rows 1
+   {
+    TextWidgetClass TimerValueTextWidget {
+     ignorepointer 1
+     color 0.7882 0 0 1
+     position 10 10
+     size 100 0.66
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 0
+     text "3:13"
+     font "gui/fonts/etelkatextpro28"
+     "size to text h" 0
+     "size to text v" 0
+     "text halign" center
+     "text valign" center
+    }
+   }
+  }
+ }
+}

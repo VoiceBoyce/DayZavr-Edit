@@ -1,0 +1,830 @@
+FrameWidgetClass rootFrame {
+ size 1 1
+ halign center_ref
+ valign center_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 0
+ {
+  PanelWidgetClass PanelWidget3 {
+   visible 1
+   ignorepointer 1
+   color 0 0 0 1
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   style rover_sim_colorable
+   {
+    ImageWidgetClass MainImageWidget {
+     visible 1
+     ignorepointer 1
+     size 1 1
+     halign center_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     imageTexture "{83B1139ADD091992}RF_ESCAPE_FROM_DAYZ_CL/GUI/Images/content.edds"
+     mode blend
+     "src alpha" 1
+     "clamp mode" clamp
+     "stretch mode" fit_w_center
+    }
+    WrapSpacerWidgetClass GridSpacerWidget5 {
+     ignorepointer 1
+     size 1 208
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     Padding 0
+     Margin 0
+     content_valign bottom
+     {
+      FrameWidgetClass FrameWidget10 {
+       ignorepointer 1
+       position 10 10
+       size 1 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+      }
+      GridSpacerWidgetClass GridSpacerWidget8 {
+       ignorepointer 1
+       size 1 160
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       Padding 0
+       Margin 0
+       "Size To Content H" 1
+       "Size To Content V" 1
+       Rows 1
+       {
+        FrameWidgetClass FrameWidget11 {
+         ignorepointer 1
+         position 10 10
+         size 48 71
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+        }
+        ImageWidgetClass ImageWidget0 {
+         ignorepointer 1
+         color 1 1 1 0.392
+         size 259 160
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         scaled 1
+         imageTexture "{5067B6CECB0CA1F6}RF_ESCAPE_FROM_DAYZ_CL/GUI/Images/escape_from_dayz.edds"
+         mode blend
+         "src alpha" 1
+         "clamp mode" invalid
+         "stretch mode" fit_w
+        }
+        FrameWidgetClass FrameWidget14 {
+         ignorepointer 1
+         position 10 10
+         size 1 1
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+  PanelWidgetClass PanelWidget0 {
+   ignorepointer 1
+   position 0 0
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   {
+    GridSpacerWidgetClass GridSpacerWidget0 {
+     ignorepointer 1
+     size 0.65 0.8
+     halign center_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     Padding 0
+     Margin 0
+     "Size To Content V" 1
+     Columns 1
+     Rows 6
+     {
+      TextWidgetClass TextWidget0 {
+       ignorepointer 1
+       size 1 48
+       halign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "#RF_PreloadScreen_MainTitle"
+       font "gui/fonts/etelkatextpro48"
+       "size to text h" 1
+       "size to text v" 1
+       "text halign" center
+       "text valign" center
+      }
+      FrameWidgetClass FrameWidget0 {
+       visible 0
+       ignorepointer 1
+       position 0 0
+       size 10 10
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+      }
+      TextWidgetClass TextWidget3 {
+       ignorepointer 1
+       size 1 48
+       halign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "#RF_PreloadScreen_MainDescription"
+       font "gui/fonts/etelkatextpro28"
+       "size to text h" 1
+       "size to text v" 1
+       "text halign" center
+       "text valign" center
+      }
+      FrameWidgetClass FrameWidget4 {
+       ignorepointer 1
+       position 0 0
+       size 1 20
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+      }
+      GridSpacerWidgetClass GridSpacerWidget1 {
+       visible 1
+       ignorepointer 1
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       Padding 0
+       Margin 0
+       Columns 2
+       Rows 1
+       {
+        GridSpacerWidgetClass PanelWrap0 {
+         ignorepointer 1
+         position 10 10
+         size 48 48
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         Padding 0
+         Margin 0
+         "Size To Content H" 1
+         "Size To Content V" 1
+         Rows 1
+         {
+          FrameWidgetClass FrameWidget110 {
+           ignorepointer 1
+           size 15 1
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 0
+          }
+          ButtonWidgetClass ButtonRandomPreset {
+           color 0 0 0 0.059
+           size 1 1
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           {
+            GridSpacerWidgetClass GridSpacerWidget2 {
+             ignorepointer 1
+             position 0 0
+             size 1 1
+             halign center_ref
+             valign center_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 0
+             Padding 0
+             Margin 0
+             "Size To Content H" 1
+             "Size To Content V" 1
+             Columns 1
+             {
+              FrameWidgetClass FrameWidget111 {
+               ignorepointer 1
+               size 1 15
+               valign center_ref
+               hexactpos 1
+               vexactpos 1
+               hexactsize 0
+               vexactsize 1
+              }
+              GridSpacerWidgetClass MainViewWithPaddings0 {
+               ignorepointer 1
+               color 0 0 0 0
+               position 0 0
+               size 1 1
+               hexactpos 1
+               vexactpos 1
+               hexactsize 0
+               vexactsize 0
+               style DayZDefaultPanel
+               Padding 0
+               Margin 0
+               "Size To Content H" 1
+               "Size To Content V" 1
+               Columns 1
+               Rows 2
+               {
+                PlayerPreviewWidgetClass RandomPlayerPreviewWidget {
+                 ignorepointer 1
+                 size 1 1
+                 halign center_ref
+                 valign center_ref
+                 hexactpos 1
+                 vexactpos 1
+                 hexactsize 0
+                 vexactsize 0
+                 priority 1
+                }
+                GridSpacerWidgetClass GridSpacerWidget13 {
+                 ignorepointer 1
+                 size 0.065 48
+                 halign center_ref
+                 valign bottom_ref
+                 hexactpos 1
+                 vexactpos 1
+                 hexactsize 0
+                 vexactsize 1
+                 priority 1
+                 Padding 0
+                 Margin 0
+                 "Size To Content V" 1
+                 Columns 1
+                 {
+                  TextWidgetClass TextWidget1 {
+                   visible 0
+                   ignorepointer 1
+                   position 10 10
+                   size 48 48
+                   hexactpos 1
+                   vexactpos 1
+                   hexactsize 1
+                   vexactsize 1
+                   text "#RF_PreloadScreen_RandomTitle"
+                   font "gui/fonts/etelkatextpro28"
+                   "size to text h" 1
+                   "size to text v" 1
+                   "text halign" center
+                   "text valign" center
+                  }
+                  FrameWidgetClass FrameWidget112 {
+                   visible 0
+                   ignorepointer 1
+                   size 1 15
+                   valign center_ref
+                   hexactpos 1
+                   vexactpos 1
+                   hexactsize 0
+                   vexactsize 1
+                  }
+                  FrameWidgetClass FrameWidget5 {
+                   ignorepointer 1
+                   position 10 10
+                   size 48 48
+                   hexactpos 1
+                   vexactpos 1
+                   hexactsize 1
+                   vexactsize 1
+                   {
+                    PanelWidgetClass RandomPresetPanelWidget {
+                     ignorepointer 1
+                     color 0.376 0.369 0.267 1
+                     size 0.5 48
+                     halign center_ref
+                     valign center_ref
+                     hexactpos 1
+                     vexactpos 1
+                     hexactsize 0
+                     vexactsize 1
+                     style DayZDefaultPanel
+                     "no focus" 0
+                     {
+                      TextWidgetClass TextWidget2 {
+                       ignorepointer 1
+                       size 1 1
+                       halign center_ref
+                       valign center_ref
+                       hexactpos 1
+                       vexactpos 1
+                       hexactsize 0
+                       vexactsize 0
+                       text "#RF_PreloadScreen_RandomTitle"
+                       font "gui/fonts/etelkatextpro22"
+                       "text halign" center
+                       "text valign" center
+                      }
+                      ButtonWidgetClass ButtonRandomPreset1 {
+                       visible 0
+                       color 1 1 1 0
+                       size 1 1
+                       halign center_ref
+                       valign center_ref
+                       hexactpos 1
+                       vexactpos 1
+                       hexactsize 0
+                       vexactsize 0
+                       "text color" 1 1 1 0
+                       "disabled text color" 1 1 1 0
+                      }
+                     }
+                    }
+                   }
+                  }
+                 }
+                }
+               }
+              }
+              FrameWidgetClass FrameWidget113 {
+               ignorepointer 1
+               size 1 20
+               valign center_ref
+               hexactpos 1
+               vexactpos 1
+               hexactsize 0
+               vexactsize 1
+              }
+             }
+            }
+           }
+          }
+          FrameWidgetClass FrameWidget114 {
+           ignorepointer 1
+           size 1 1
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 0
+          }
+         }
+        }
+        GridSpacerWidgetClass PanelWrap3 {
+         ignorepointer 1
+         position 10 10
+         size 48 48
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         Padding 0
+         Margin 0
+         "Size To Content H" 1
+         "Size To Content V" 1
+         Rows 1
+         {
+          FrameWidgetClass FrameWidget115 {
+           ignorepointer 1
+           size 1 1
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 0
+          }
+          ButtonWidgetClass ButtonCustomPreset {
+           color 0 0 0 0.051
+           size 1 1
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           {
+            GridSpacerWidgetClass GridSpacerWidget14 {
+             ignorepointer 1
+             position 0 0
+             size 1 1
+             halign center_ref
+             valign center_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 0
+             Padding 0
+             Margin 0
+             "Size To Content H" 1
+             "Size To Content V" 1
+             Columns 1
+             {
+              FrameWidgetClass FrameWidget116 {
+               ignorepointer 1
+               size 1 15
+               valign center_ref
+               hexactpos 1
+               vexactpos 1
+               hexactsize 0
+               vexactsize 1
+              }
+              GridSpacerWidgetClass MainViewWithPaddings3 {
+               ignorepointer 1
+               color 0 0 0 0
+               position 0 0
+               size 1 1
+               hexactpos 1
+               vexactpos 1
+               hexactsize 0
+               vexactsize 0
+               style DayZDefaultPanel
+               Padding 0
+               Margin 0
+               "Size To Content H" 1
+               "Size To Content V" 1
+               Columns 1
+               Rows 2
+               {
+                PlayerPreviewWidgetClass CustomPlayerPreviewWidget {
+                 ignorepointer 1
+                 size 1 1
+                 halign center_ref
+                 valign center_ref
+                 hexactpos 1
+                 vexactpos 1
+                 hexactsize 0
+                 vexactsize 0
+                 priority 1
+                }
+                GridSpacerWidgetClass GridSpacerWidget15 {
+                 ignorepointer 1
+                 size 0.065 48
+                 halign center_ref
+                 valign bottom_ref
+                 hexactpos 1
+                 vexactpos 1
+                 hexactsize 0
+                 vexactsize 1
+                 priority 1
+                 Padding 0
+                 Margin 0
+                 "Size To Content V" 1
+                 Columns 1
+                 {
+                  TextWidgetClass TextWidget4 {
+                   visible 0
+                   ignorepointer 1
+                   position 10 10
+                   size 48 48
+                   hexactpos 1
+                   vexactpos 1
+                   hexactsize 1
+                   vexactsize 1
+                   text "#RF_PreloadScreen_CustomTitle"
+                   font "gui/fonts/etelkatextpro28"
+                   "size to text h" 1
+                   "size to text v" 1
+                   "text halign" center
+                   "text valign" center
+                  }
+                  FrameWidgetClass FrameWidget23 {
+                   visible 0
+                   ignorepointer 1
+                   size 1 15
+                   valign center_ref
+                   hexactpos 1
+                   vexactpos 1
+                   hexactsize 0
+                   vexactsize 1
+                  }
+                  FrameWidgetClass FrameWidget6 {
+                   ignorepointer 1
+                   position 10 10
+                   size 48 48
+                   hexactpos 1
+                   vexactpos 1
+                   hexactsize 1
+                   vexactsize 1
+                   {
+                    PanelWidgetClass CustomPresetPanelWidget {
+                     ignorepointer 1
+                     color 0.376 0.369 0.267 1
+                     size 0.5 48
+                     halign center_ref
+                     valign center_ref
+                     hexactpos 1
+                     vexactpos 1
+                     hexactsize 0
+                     vexactsize 1
+                     style DayZDefaultPanel
+                     {
+                      ImageWidgetClass ImageWidget1 {
+                       visible 0
+                       ignorepointer 1
+                       size 1 1
+                       halign center_ref
+                       valign center_ref
+                       hexactpos 1
+                       vexactpos 1
+                       hexactsize 0
+                       vexactsize 0
+                       imageTexture "{9895715DFC7DF4B4}RF_ESCAPE_FROM_DAYZ_CL/GUI/Images/buttonBackground.edds"
+                       mode blend
+                      }
+                      TextWidgetClass TextWidget8 {
+                       ignorepointer 1
+                       size 1 1
+                       halign center_ref
+                       valign center_ref
+                       hexactpos 1
+                       vexactpos 1
+                       hexactsize 0
+                       vexactsize 0
+                       text "#RF_PreloadScreen_CustomTitle"
+                       font "gui/fonts/etelkatextpro22"
+                       "text halign" center
+                       "text valign" center
+                      }
+                      ButtonWidgetClass ButtonCustomPreset1 {
+                       visible 0
+                       color 1 1 1 0
+                       size 1 1
+                       halign center_ref
+                       valign center_ref
+                       hexactpos 1
+                       vexactpos 1
+                       hexactsize 0
+                       vexactsize 0
+                      }
+                     }
+                    }
+                   }
+                  }
+                  TextWidgetClass TextWidget5 {
+                   visible 1
+                   ignorepointer 1
+                   position 10 10
+                   size 48 20
+                   hexactpos 1
+                   vexactpos 1
+                   hexactsize 1
+                   vexactsize 1
+                   text "#RF_PreloadScreen_CustomYourCurrentPlayer"
+                   font "gui/fonts/etelkatextpro16"
+                   "size to text h" 1
+                   "size to text v" 1
+                   "text halign" center
+                   "text valign" center
+                  }
+                 }
+                }
+               }
+              }
+              FrameWidgetClass FrameWidget24 {
+               visible 0
+               ignorepointer 1
+               size 1 15
+               valign center_ref
+               hexactpos 1
+               vexactpos 1
+               hexactsize 0
+               vexactsize 1
+              }
+             }
+            }
+           }
+          }
+          FrameWidgetClass FrameWidget25 {
+           ignorepointer 1
+           size 15 1
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 0
+          }
+         }
+        }
+       }
+      }
+      FrameWidgetClass FrameWidget2 {
+       ignorepointer 1
+       position 0 0
+       size 1 50
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+      }
+      FrameWidgetClass FrameWidget3 {
+       ignorepointer 1
+       size 1 48
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       {
+        MultilineTextWidgetClass RandomInfoDescription {
+         ignorepointer 1
+         size 0.5 48
+         halign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         text "#RF_PreloadScreen_RandomInfoDescription"
+         font "gui/fonts/etelkatextpro16"
+         "exact text" 1
+         "size to text h" 1
+         "size to text v" 1
+         "text halign" center
+         "text valign" center
+         wrap 1
+        }
+        MultilineTextWidgetClass CustomInfoDescription {
+         visible 0
+         ignorepointer 1
+         size 0.5 48
+         halign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         text "#RF_PreloadScreen_CustomInfoDescription"
+         font "gui/fonts/etelkatextpro16"
+         "exact text" 1
+         "size to text h" 1
+         "size to text v" 1
+         "text halign" center
+         "text valign" center
+         wrap 1
+        }
+       }
+      }
+      FrameWidgetClass FrameWidget7 {
+       ignorepointer 1
+       position 0 0
+       size 1 35
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+      }
+      FrameWidgetClass FrameWidget1 {
+       ignorepointer 1
+       position 10 10
+       size 48 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       {
+        PanelWidgetClass PanelWidget4 {
+         ignorepointer 1
+         color 0.686 0.686 0.686 0.196
+         size 0.25 48
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style blank
+         {
+          TextWidgetClass TextWidget6 {
+           ignorepointer 1
+           size 1 1
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           style Normal
+           text "#RF_PreloadScreen_Forward"
+           font "gui/fonts/etelkatextpro16"
+           "text halign" center
+           "text valign" center
+          }
+          ButtonWidgetClass ButtonMoveForward {
+           color 1 1 1 0.031
+           size 1 1
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           style Default
+          }
+         }
+        }
+       }
+      }
+      FrameWidgetClass FrameWidget8 {
+       ignorepointer 1
+       position 10 10
+       size 48 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       {
+        PanelWidgetClass PanelWidget5 {
+         ignorepointer 1
+         color 0.686 0.259 0.259 0.392
+         size 0.25 48
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         style rover_sim_colorable
+         {
+          TextWidgetClass TextWidget7 {
+           ignorepointer 1
+           size 1 1
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           style Normal
+           text "#RF_PreloadScreen_Back"
+           font "gui/fonts/etelkatextpro16"
+           "text halign" center
+           "text valign" center
+          }
+          ButtonWidgetClass ButtonCloseMenu {
+           color 0 0 0 0.353
+           size 1 1
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           style Default
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

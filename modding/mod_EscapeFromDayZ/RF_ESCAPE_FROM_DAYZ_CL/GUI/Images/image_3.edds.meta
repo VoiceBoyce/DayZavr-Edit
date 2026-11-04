@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{059DA610D76ED4C5}RF_ESCAPE_FROM_DAYZ_CL/GUI/Images/image_3.edds"
+ Author "fedor"
+ ChangeDate 932050000
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "image_3.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

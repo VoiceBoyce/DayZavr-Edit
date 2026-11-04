@@ -1,6 +1,6 @@
 class CfgPatches
 {
-	class DZ_Characters_Tops
+	class set_Legion_Top // DayZavr: было DZ_Characters_Tops — переписывало ванильный патч
 	{
 		units[] = {"Vp_SET20_Top"};
 		weapons[] = {};

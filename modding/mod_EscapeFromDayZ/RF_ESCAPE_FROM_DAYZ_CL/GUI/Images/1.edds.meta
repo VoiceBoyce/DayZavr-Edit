@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{A137C6A5FBE737DB}RF_ESCAPE_FROM_DAYZ_CL/GUI/Images/1.edds"
+ Author "fedor"
+ ChangeDate 122926161
+ Configurations {
+  JPGResourceClass PC {
+   SourceFile "1.jpg"
+  }
+  JPGResourceClass XBOX_ONE : PC {
+  }
+  JPGResourceClass PS4 : PC {
+  }
+  JPGResourceClass LINUX : PC {
+  }
+ }
+}

@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{A31E07368F6BC041}RF_ESCAPE_FROM_DAYZ_CL/models/roadflare/particles/fire_small_rfflare_green_02.ptc"
+ Author "imperator"
+ ChangeDate -747801503
+ Configurations {
+  PTCResourceClass PC {
+  }
+  PTCResourceClass XBOX_ONE : PC {
+  }
+  PTCResourceClass PS4 : PC {
+  }
+  PTCResourceClass LINUX : PC {
+  }
+ }
+}

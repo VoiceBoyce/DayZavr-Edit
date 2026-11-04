@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{0856DD701CE5BAF0}RF_ESCAPE_FROM_DAYZ_CL/GUI/icons/icon_exit.edds"
+ Author "fedor"
+ ChangeDate 1740911691
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "icon_exit.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

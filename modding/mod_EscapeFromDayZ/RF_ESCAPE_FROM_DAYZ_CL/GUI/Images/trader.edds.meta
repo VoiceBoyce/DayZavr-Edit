@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{061B1A05E00953CD}RF_ESCAPE_FROM_DAYZ_CL/GUI/Images/trader.edds"
+ Author "fedor"
+ ChangeDate 693351505
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "trader.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{5067B6CECB0CA1F6}RF_ESCAPE_FROM_DAYZ_CL/GUI/Images/escape_from_dayz.edds"
+ Author "fedor"
+ ChangeDate 1545335889
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "escape_from_dayz.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

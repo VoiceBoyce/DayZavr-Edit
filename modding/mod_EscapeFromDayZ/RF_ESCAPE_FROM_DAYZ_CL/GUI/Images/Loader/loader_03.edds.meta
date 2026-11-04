@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{411B130042199B08}RF_ESCAPE_FROM_DAYZ_CL/GUI/Images/Loader/loader_03.edds"
+ Author "fedor"
+ ChangeDate -1082854319
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "loader_03.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

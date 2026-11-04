@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{9895715DFC7DF4B4}RF_ESCAPE_FROM_DAYZ_CL/GUI/Images/buttonBackground.edds"
+ Author "fedor"
+ ChangeDate 180122801
+ Configurations {
+  JPGResourceClass PC {
+   SourceFile "buttonBackground.jpg"
+  }
+  JPGResourceClass XBOX_ONE : PC {
+  }
+  JPGResourceClass PS4 : PC {
+  }
+  JPGResourceClass LINUX : PC {
+  }
+ }
+}
