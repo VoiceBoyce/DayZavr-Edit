@@ -16,9 +16,10 @@ class CfgVehicles
 	{
 		displayName = "$STR_VBC_Legion_Helmet";
 		descriptionShort = "$STR_VBC_Legion_Helmet_Desc";
+		quickBarBonus = 0;
 		model = "set_legion\set\Helmet\model\Helmet_g.p3d";
-		weight = 2000;
-		itemSize[] = {4,3};
+		weight = 1500;
+		itemSize[] = {3,3};
 		repairableWithKits[] = {8};
 		attachments[] = {"NVG"};
 		repairCosts[] = {25};
@@ -42,7 +43,7 @@ class CfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 75;
+					hitpoints = 400;
 					healthLevels[] = {{1,{"set_legion\set\Helmet\data\bolti.rvmat","set_legion\set\Helmet\data\helmet.rvmat","set_legion\set\Helmet\data\krep_helmet.rvmat","set_legion\set\Helmet\data\krep_xvost.rvmat","set_legion\set\Helmet\data\naushnik.rvmat","set_legion\set\Helmet\data\xvost.rvmat","set_legion\set\Helmet\data\zalypa1.rvmat","set_legion\set\Helmet\data\zalypa2.rvmat"}},{0.7,{"set_legion\set\Helmet\data\bolti.rvmat","set_legion\set\Helmet\data\helmet.rvmat","set_legion\set\Helmet\data\krep_helmet.rvmat","set_legion\set\Helmet\data\krep_xvost.rvmat","set_legion\set\Helmet\data\naushnik.rvmat","set_legion\set\Helmet\data\xvost.rvmat","set_legion\set\Helmet\data\zalypa1.rvmat","set_legion\set\Helmet\data\zalypa2.rvmat"}},{0.5,{"set_legion\set\Helmet\data\bolti_damage.rvmat","set_legion\set\Helmet\data\helmet_damage.rvmat","set_legion\set\Helmet\data\krep_helmet_damage.rvmat","set_legion\set\Helmet\data\krep_xvost_damage.rvmat","set_legion\set\Helmet\data\naushnik_damage.rvmat","set_legion\set\Helmet\data\xvost_damage.rvmat","set_legion\set\Helmet\data\zalypa1_damage.rvmat","set_legion\set\Helmet\data\zalypa2_damage.rvmat"}},{0.3,{"set_legion\set\Helmet\data\bolti_damage.rvmat","set_legion\set\Helmet\data\helmet_damage.rvmat","set_legion\set\Helmet\data\krep_helmet_damage.rvmat","set_legion\set\Helmet\data\krep_xvost_damage.rvmat","set_legion\set\Helmet\data\naushnik_damage.rvmat","set_legion\set\Helmet\data\xvost_damage.rvmat","set_legion\set\Helmet\data\zalypa1_damage.rvmat","set_legion\set\Helmet\data\zalypa2_damage.rvmat"}},{0,{"set_legion\set\Helmet\data\bolti_destruct.rvmat","set_legion\set\Helmet\data\helmet_destruct.rvmat","set_legion\set\Helmet\data\krep_helmet_destruct.rvmat","set_legion\set\Helmet\data\krep_xvost_destruct.rvmat","set_legion\set\Helmet\data\naushnik_destruct.rvmat","set_legion\set\Helmet\data\xvost_destruct.rvmat","set_legion\set\Helmet\data\zalypa1_destruct.rvmat","set_legion\set\Helmet\data\zalypa2_destruct.rvmat"}}};
 				};
 			};
@@ -52,7 +53,7 @@ class CfgVehicles
 				{
 					class Health
 					{
-						damage = 0.25;
+						damage = 0.2;
 					};
 					class Blood
 					{
@@ -67,33 +68,18 @@ class CfgVehicles
 				{
 					class Health
 					{
-						damage = 0.55;
+						damage = 0.5;
 					};
 					class Blood
 					{
-						damage = 0.2;
+						damage = 0;
 					};
 					class Shock
 					{
-						damage = 0.5;
+						damage = 0.4;
 					};
 				};
 				class Infected
-				{
-					class Health
-					{
-						damage = 0.55;
-					};
-					class Blood
-					{
-						damage = 0.2;
-					};
-					class Shock
-					{
-						damage = 0.5;
-					};
-				};
-				class FragGrenade
 				{
 					class Health
 					{
@@ -105,7 +91,22 @@ class CfgVehicles
 					};
 					class Shock
 					{
-						damage = 0.26;
+						damage = 0.5;
+					};
+				};
+				class FragGrenade
+				{
+					class Health
+					{
+						damage = 0.4;
+					};
+					class Blood
+					{
+						damage = 0;
+					};
+					class Shock
+					{
+						damage = 0.4;
 					};
 				};
 			};

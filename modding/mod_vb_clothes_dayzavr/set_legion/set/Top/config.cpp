@@ -19,12 +19,12 @@ class CfgVehicles
 		model = "set_legion\set\Top\model\top_g.p3d";
 		inventorySlot[] = {"Body"};
 		itemInfo[] = {"Clothing","Body"};
-		weight = 3000;
-		itemSize[] = {5,5};
-		itemsCargoSize[] = {6,4};
-		varWetMax = 1;
-		heatIsolation = 1;
-		quickBarBonus = 1;
+		weight = 1500;
+		itemSize[] = {4,3};
+		itemsCargoSize[] = {10,6};
+		varWetMax = 0.249;
+		heatIsolation = 0.7;
+		quickBarBonus = 0;
 		featherQuantity = 20;
 		repairableWithKits[] = {5,2};
 		repairCosts[] = {25,25};
@@ -40,13 +40,13 @@ class CfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 1500;
+					hitpoints = 500;
 					healthLevels[] = {{1,{"set_legion\set\Top\data\top.rvmat","set_legion\set\Top\data\top1.rvmat","set_legion\set\Top\data\top2.rvmat","set_legion\set\Top\data\znak.rvmat"}},{0.7,{"set_legion\set\Top\data\top.rvmat","set_legion\set\Top\data\top1.rvmat","set_legion\set\Top\data\top2.rvmat","set_legion\set\Top\data\znak.rvmat"}},{0.5,{"set_legion\set\Top\data\top_damage.rvmat","set_legion\set\Top\data\top1_damage.rvmat","set_legion\set\Top\data\top2_damage.rvmat","set_legion\set\Top\data\znak_damage.rvmat"}},{0.3,{"set_legion\set\Top\data\top_damage.rvmat","set_legion\set\Top\data\top1_damage.rvmat","set_legion\set\Top\data\top2_damage.rvmat","set_legion\set\Top\data\znak_damage.rvmat"}},{0,{"set_legion\set\Top\data\top_destruct.rvmat","set_legion\set\Top\data\top1_destruct.rvmat","set_legion\set\Top\data\top2_destruct.rvmat","set_legion\set\Top\data\znak_destruct.rvmat"}}};
 				};
 			};
 			class GlobalArmor
 			{
-				class Melee
+				class Projectile
 				{
 					class Health
 					{
@@ -54,26 +54,56 @@ class CfgVehicles
 					};
 					class Blood
 					{
-						damage = 0.8;
+						damage = 0.85;
 					};
 					class Shock
 					{
-						damage = 0.8;
+						damage = 0.85;
+					};
+				};
+				class Melee
+				{
+					class Health
+					{
+						damage = 0.75;
+					};
+					class Blood
+					{
+						damage = 0.75;
+					};
+					class Shock
+					{
+						damage = 0.75;
 					};
 				};
 				class Infected
 				{
 					class Health
 					{
+						damage = 0.75;
+					};
+					class Blood
+					{
+						damage = 0.75;
+					};
+					class Shock
+					{
+						damage = 0.75;
+					};
+				};
+				class FragGrenade
+				{
+					class Health
+					{
 						damage = 0.85;
 					};
 					class Blood
 					{
-						damage = 0.8;
+						damage = 0.85;
 					};
 					class Shock
 					{
-						damage = 0.8;
+						damage = 0.85;
 					};
 				};
 			};

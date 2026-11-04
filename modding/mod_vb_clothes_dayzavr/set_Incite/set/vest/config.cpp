@@ -18,13 +18,13 @@ class cfgVehicles
 		displayName = "$STR_VBC_Exo_Vest";
 		descriptionShort = "$STR_VBC_Exo_Vest_Desc";
 		model = "\set_Incite\set\vest\model\vest_g.p3d";
-		attachments[] = {"Magazine","Magazine2","Magazine3","Magazine4","Magazine5","Magazine6"};
+		attachments[] = {"VestPouch","Magazine","Magazine2","Magazine3","Magazine4","Magazine5","Magazine6"}; // DayZavr: VestPouch — в модели есть прокси plate_carrier_pouches_g
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};
 		quickBarBonus = 2;
-		weight = 10000;
-		itemSize[] = {4,4};
-		varWetMax = 0.05;
+		weight = 7000;
+		itemSize[] = {5,4};
+		varWetMax = 0.249;
 		heatIsolation = 0.5;
 		itemsCargoSize[] = {10,4};
 		repairableWithKits[] = {3,8};
@@ -41,7 +41,7 @@ class cfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 1000;
+					hitpoints = 800;
 					transferToAttachmentsCoef = 0.5;
 					healthLevels[] = {{1.0,{"\set_Incite\set\vest\data\backpack.rvmat","\set_Incite\set\vest\data\karmani_vest.rvmat","\set_Incite\set\vest\data\krep_knife_vest.rvmat","\set_Incite\set\vest\data\ruka_knief_vest.rvmat","\set_Incite\set\vest\data\small_magazi_vest.rvmat","\set_Incite\set\vest\data\vest.rvmat","\set_Incite\set\vest\data\vest_podushki.rvmat","\set_Incite\set\vest\data\vest_relief.rvmat","\set_Incite\set\vest\data\vest1.rvmat"}},{0.7,{"\set_Incite\set\vest\data\backpack.rvmat","\set_Incite\set\vest\data\karmani_vest.rvmat","\set_Incite\set\vest\data\krep_knife_vest.rvmat","\set_Incite\set\vest\data\ruka_knief_vest.rvmat","\set_Incite\set\vest\data\small_magazi_vest.rvmat","\set_Incite\set\vest\data\vest.rvmat","\set_Incite\set\vest\data\vest_podushki.rvmat","\set_Incite\set\vest\data\vest_relief.rvmat","\set_Incite\set\vest\data\vest1.rvmat"}},{0.5,{"\set_Incite\set\vest\data\backpack_damage.rvmat","\set_Incite\set\vest\data\karmani_vest_damage.rvmat","\set_Incite\set\vest\data\krep_knife_vest_damage.rvmat","\set_Incite\set\vest\data\ruka_knief_vest_damage.rvmat","\set_Incite\set\vest\data\small_magazi_vest_damage.rvmat","\set_Incite\set\vest\data\vest_damage.rvmat","\set_Incite\set\vest\data\vest_podushki_damage.rvmat","\set_Incite\set\vest\data\vest_relief_damage.rvmat","\set_Incite\set\vest\data\vest1_damage.rvmat"}},{0.3,{"\set_Incite\set\vest\data\backpack_damage.rvmat","\set_Incite\set\vest\data\karmani_vest_damage.rvmat","\set_Incite\set\vest\data\krep_knife_vest_damage.rvmat","\set_Incite\set\vest\data\ruka_knief_vest_damage.rvmat","\set_Incite\set\vest\data\small_magazi_vest_damage.rvmat","\set_Incite\set\vest\data\vest_damage.rvmat","\set_Incite\set\vest\data\vest_podushki_damage.rvmat","\set_Incite\set\vest\data\vest_relief_damage.rvmat","\set_Incite\set\vest\data\vest1_damage.rvmat"}},{0.0,{"\set_Incite\set\vest\data\backpack_destruct.rvmat","\set_Incite\set\vest\data\karmani_vest_destruct.rvmat","\set_Incite\set\vest\data\krep_knife_vest_destruct.rvmat","\set_Incite\set\vest\data\ruka_knief_vest_destruct.rvmat","\set_Incite\set\vest\data\small_magazi_vest_destruct.rvmat","\set_Incite\set\vest\data\vest_destruct.rvmat","\set_Incite\set\vest\data\vest_podushki_destruct.rvmat","\set_Incite\set\vest\data\vest_relief_destruct.rvmat","\set_Incite\set\vest\data\vest1_destruct.rvmat"}}};
 				};
@@ -52,7 +52,7 @@ class cfgVehicles
 				{
 					class Health
 					{
-						damage = 0.10000001;
+						damage = 0.2;
 					};
 					class Blood
 					{
@@ -60,14 +60,14 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0.10000002;
+						damage = 0.5;
 					};
 				};
 				class Melee
 				{
 					class Health
 					{
-						damage = 0.1;
+						damage = 0.25;
 					};
 					class Blood
 					{
@@ -75,14 +75,14 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0.1;
+						damage = 0.25;
 					};
 				};
 				class Infected
 				{
 					class Health
 					{
-						damage = 0.05;
+						damage = 0.25;
 					};
 					class Blood
 					{
@@ -90,14 +90,14 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0.01;
+						damage = 0.25;
 					};
 				};
 				class FragGrenade
 				{
 					class Health
 					{
-						damage = 0.1;
+						damage = 0.4;
 					};
 					class Blood
 					{
@@ -105,7 +105,7 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0.26;
+						damage = 0.4;
 					};
 				};
 			};

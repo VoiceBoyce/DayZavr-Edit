@@ -25,11 +25,11 @@ class cfgVehicles
 		simulation = "clothing";
 		vehicleClass = "Clothing";
 		itemInfo[] = {"Clothing","Headgear"};
-		weight = 2500;
+		weight = 1500;
 		quickBarBonus = 0;
-		itemSize[] = {4,4};
-		varWetMax = 0.049;
-		heatIsolation = 0.85;
+		itemSize[] = {3,3};
+		varWetMax = 0.249;
+		heatIsolation = 0.3;
 		hiddenSelections[] = {"belt","helmet_strap","clips","def_2_ear","glass","helm","helm1","manda","patch_golova","patch_golova2","pnv"};
 		headSelectionsToHide[] = {"Clipping_Mich2001"};
 		class ClothingTypes
@@ -43,7 +43,7 @@ class cfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 300;
+					hitpoints = 400;
 					healthLevels[] = {{1.0,{"SetComplete_EOD_Specialist\set\data\belt\Belt.rvmat","SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap.rvmat","SetComplete_EOD_Specialist\set\data\clips\clips.rvmat","SetComplete_EOD_Specialist\set\data\def_2_ear\def_2_ear.rvmat","SetComplete_EOD_Specialist\set\data\glass\glass.rvmat","SetComplete_EOD_Specialist\set\data\helm\helm.rvmat","SetComplete_EOD_Specialist\set\data\helm1\helm1.rvmat","SetComplete_EOD_Specialist\set\data\manda\manda.rvmat","SetComplete_EOD_Specialist\set\data\patch_golova\patch_golova.rvmat","SetComplete_EOD_Specialist\set\data\patch_golova2\patch_golova2.rvmat","SetComplete_EOD_Specialist\set\data\pnv\pnv.rvmat"}},{0.7,{"SetComplete_EOD_Specialist\set\data\belt\Belt.rvmat","SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap.rvmat","SetComplete_EOD_Specialist\set\data\clips\clips.rvmat","SetComplete_EOD_Specialist\set\data\def_2_ear\def_2_ear.rvmat","SetComplete_EOD_Specialist\set\data\glass\glass.rvmat","SetComplete_EOD_Specialist\set\data\helm\helm.rvmat","SetComplete_EOD_Specialist\set\data\helm1\helm1.rvmat","SetComplete_EOD_Specialist\set\data\manda\manda.rvmat","SetComplete_EOD_Specialist\set\data\patch_golova\patch_golova.rvmat","SetComplete_EOD_Specialist\set\data\patch_golova2\patch_golova2.rvmat","SetComplete_EOD_Specialist\set\data\pnv\pnv.rvmat"}},{0.5,{"SetComplete_EOD_Specialist\set\data\belt\Belt_damage.rvmat","SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap_damage.rvmat","SetComplete_EOD_Specialist\set\data\clips\clips_damage.rvmat","SetComplete_EOD_Specialist\set\data\def_2_ear\def_2_ear_damage.rvmat","SetComplete_EOD_Specialist\set\data\glass\glass_damage.rvmat","SetComplete_EOD_Specialist\set\data\helm\helm_damage.rvmat","SetComplete_EOD_Specialist\set\data\helm1\helm1_damage.rvmat","SetComplete_EOD_Specialist\set\data\manda\manda_damage.rvmat","SetComplete_EOD_Specialist\set\data\patch_golova\patch_golova_damage.rvmat","SetComplete_EOD_Specialist\set\data\patch_golova2\patch_golova2_damage.rvmat","SetComplete_EOD_Specialist\set\data\pnv\pnv_damage.rvmat"}},{0.3,{"SetComplete_EOD_Specialist\set\data\belt\Belt_damage.rvmat","SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap_damage.rvmat","SetComplete_EOD_Specialist\set\data\clips\clips_damage.rvmat","SetComplete_EOD_Specialist\set\data\def_2_ear\def_2_ear_damage.rvmat","SetComplete_EOD_Specialist\set\data\glass\glass_damage.rvmat","SetComplete_EOD_Specialist\set\data\helm\helm_damage.rvmat","SetComplete_EOD_Specialist\set\data\helm1\helm1_damage.rvmat","SetComplete_EOD_Specialist\set\data\manda\manda_damage.rvmat","SetComplete_EOD_Specialist\set\data\patch_golova\patch_golova_damage.rvmat","SetComplete_EOD_Specialist\set\data\patch_golova2\patch_golova2_damage.rvmat","SetComplete_EOD_Specialist\set\data\pnv\pnv_damage.rvmat"}},{0.0,{"SetComplete_EOD_Specialist\set\data\belt\Belt_destruct.rvmat","SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap_destruct.rvmat","SetComplete_EOD_Specialist\set\data\clips\clips_destruct.rvmat","SetComplete_EOD_Specialist\set\data\def_2_ear\def_2_ear_destruct.rvmat","SetComplete_EOD_Specialist\set\data\glass\glass_destruct.rvmat","SetComplete_EOD_Specialist\set\data\helm\helm_destruct.rvmat","SetComplete_EOD_Specialist\set\data\helm1\helm1_destruct.rvmat","SetComplete_EOD_Specialist\set\data\manda\manda_destruct.rvmat","SetComplete_EOD_Specialist\set\data\patch_golova\patch_golova_destruct.rvmat","SetComplete_EOD_Specialist\set\data\patch_golova2\patch_golova2_destruct.rvmat","SetComplete_EOD_Specialist\set\data\pnv\pnv_destruct.rvmat"}}};
 				};
 			};
@@ -53,60 +53,60 @@ class cfgVehicles
 				{
 					class Health
 					{
-						damage = 0.31;
+						damage = 0.2;
 					};
 					class Blood
 					{
-						damage = 0.31;
+						damage = 0;
 					};
 					class Shock
 					{
-						damage = 0.31;
+						damage = 0.5;
 					};
 				};
 				class Melee
 				{
 					class Health
 					{
-						damage = 0.31;
+						damage = 0.5;
 					};
 					class Blood
 					{
-						damage = 0.31;
+						damage = 0;
 					};
 					class Shock
 					{
-						damage = 0.31;
+						damage = 0.4;
 					};
 				};
 				class Infected
 				{
 					class Health
 					{
-						damage = 0.31;
+						damage = 0.5;
 					};
 					class Blood
 					{
-						damage = 0.31;
+						damage = 0;
 					};
 					class Shock
 					{
-						damage = 0.31;
+						damage = 0.5;
 					};
 				};
 				class FragGrenade
 				{
 					class Health
 					{
-						damage = 0.31;
+						damage = 0.4;
 					};
 					class Blood
 					{
-						damage = 0.31;
+						damage = 0;
 					};
 					class Shock
 					{
-						damage = 0.31;
+						damage = 0.4;
 					};
 				};
 			};

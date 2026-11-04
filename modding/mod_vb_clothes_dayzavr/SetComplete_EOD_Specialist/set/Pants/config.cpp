@@ -21,13 +21,13 @@ class CfgVehicles
 		inventorySlot[] = {"Legs"};
 		itemInfo[] = {"Clothing","Legs"};
 		weight = 1200;
-		itemSize[] = {4,6};
+		itemSize[] = {4,3};
 		varWetMin = 0.049;
-		varWetMax = 0.55;
+		varWetMax = 0.249;
 		absorbency = 0.55;
-		heatIsolation = 0.5;
-		quickBarBonus = 2;
-		itemsCargoSize[] = {7,5};
+		heatIsolation = 0.6;
+		quickBarBonus = 0;
+		itemsCargoSize[] = {10,5};
 		repairableWithKits[] = {2,3};
 		repairCosts[] = {75,50};
 		hiddenSelections[] = {"pants","pads"};
@@ -42,7 +42,7 @@ class CfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 150;
+					hitpoints = 500;
 					transferToAttachmentsCoef = 0.5;
 					healthLevels[] = {{1,{"SetComplete_EOD_Specialist\set\data\pants\pants.rvmat","SetComplete_EOD_Specialist\set\data\pads\pads.rvmat"}},{0.7,{"SetComplete_EOD_Specialist\set\data\pants\pants.rvmat","SetComplete_EOD_Specialist\set\data\pads\pads.rvmat"}},{0.5,{"SetComplete_EOD_Specialist\set\data\pants\pants_damage.rvmat","SetComplete_EOD_Specialist\set\data\pads\pads_damage.rvmat"}},{0.3,{"SetComplete_EOD_Specialist\set\data\pants\pants_damage.rvmat","SetComplete_EOD_Specialist\set\data\pads\pads_damage.rvmat"}},{0,{"SetComplete_EOD_Specialist\set\data\pants\pants_destruct.rvmat","SetComplete_EOD_Specialist\set\data\pads\pads_destruct.rvmat"}}};
 				};
@@ -53,60 +53,60 @@ class CfgVehicles
 				{
 					class Health
 					{
-						damage = 0.95;
+						damage = 0.85;
 					};
 					class Blood
 					{
-						damage = 0.95;
+						damage = 0.85;
 					};
 					class Shock
 					{
-						damage = 0;
+						damage = 0.85;
 					};
 				};
 				class Melee
 				{
 					class Health
 					{
-						damage = 0.95;
+						damage = 0.75;
 					};
 					class Blood
 					{
-						damage = 0.95;
+						damage = 0.75;
 					};
 					class Shock
 					{
-						damage = 0.45;
+						damage = 0.75;
 					};
 				};
 				class Infected
 				{
 					class Health
 					{
-						damage = 0.1;
+						damage = 0.75;
 					};
 					class Blood
 					{
-						damage = 0.5;
+						damage = 0.75;
 					};
 					class Shock
 					{
-						damage = 0.15;
+						damage = 0.75;
 					};
 				};
 				class FragGrenade
 				{
 					class Health
 					{
-						damage = 1;
+						damage = 0.85;
 					};
 					class Blood
 					{
-						damage = 0.1;
+						damage = 0.85;
 					};
 					class Shock
 					{
-						damage = 0.1;
+						damage = 0.85;
 					};
 				};
 			};

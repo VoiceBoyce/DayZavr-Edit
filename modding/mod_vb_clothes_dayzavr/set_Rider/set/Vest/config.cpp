@@ -22,11 +22,11 @@ class cfgVehicles
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};
 		quickBarBonus = 2;
-		weight = 3000;
-		itemSize[] = {4,4};
-		varWetMax = 0.05;
+		weight = 7000;
+		itemSize[] = {5,4};
+		varWetMax = 0.249;
 		heatIsolation = 0.5;
-		itemsCargoSize[] = {5,5};
+		itemsCargoSize[] = {10,4};
 		repairableWithKits[] = {3,8};
 		repairCosts[] = {75.0,50.0};
 		hiddenSelections[] = {"fast","fast2","karman","karman_ra","monster2","Plita","ra","verevka","Vest"};
@@ -41,7 +41,7 @@ class cfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 500;
+					hitpoints = 800;
 					transferToAttachmentsCoef = 0.5;
 					healthLevels[] = {{1.0,{"set_Rider\set\Vest\data\fast.rvmat","set_Rider\set\Vest\data\fast2.rvmat","set_Rider\set\Vest\data\Karman.rvmat","set_Rider\set\Vest\data\Karman_ra.rvmat","set_Rider\set\Vest\data\Monster2.rvmat","set_Rider\set\Vest\data\Plita.rvmat","set_Rider\set\Vest\data\ra.rvmat","set_Rider\set\Vest\data\Verevka.rvmat","set_Rider\set\Vest\data\Vest.rvmat"}},{0.7,{"set_Rider\set\Vest\data\fast.rvmat","set_Rider\set\Vest\data\fast2.rvmat","set_Rider\set\Vest\data\Karman.rvmat","set_Rider\set\Vest\data\Karman_ra.rvmat","set_Rider\set\Vest\data\Monster2.rvmat","set_Rider\set\Vest\data\Plita.rvmat","set_Rider\set\Vest\data\ra.rvmat","set_Rider\set\Vest\data\Verevka.rvmat","set_Rider\set\Vest\data\Vest.rvmat"}},{0.5,{"set_Rider\set\Vest\data\fast_damage.rvmat","set_Rider\set\Vest\data\fast2_damage.rvmat","set_Rider\set\Vest\data\Karman_damage.rvmat","set_Rider\set\Vest\data\Karman_ra_damage.rvmat","set_Rider\set\Vest\data\Monster2_damage.rvmat","set_Rider\set\Vest\data\Plita_damage.rvmat","set_Rider\set\Vest\data\ra_damage.rvmat","set_Rider\set\Vest\data\Verevka_damage.rvmat","set_Rider\set\Vest\data\Vest_damage.rvmat"}},{0.3,{"set_Rider\set\Vest\data\fast_damage.rvmat","set_Rider\set\Vest\data\fast2_damage.rvmat","set_Rider\set\Vest\data\Karman_damage.rvmat","set_Rider\set\Vest\data\Karman_ra_damage.rvmat","set_Rider\set\Vest\data\Monster2_damage.rvmat","set_Rider\set\Vest\data\Plita_damage.rvmat","set_Rider\set\Vest\data\ra_damage.rvmat","set_Rider\set\Vest\data\Verevka_damage.rvmat","set_Rider\set\Vest\data\Vest_damage.rvmat"}},{0.0,{"set_Rider\set\Vest\data\fast_destruct.rvmat","set_Rider\set\Vest\data\fast2_destruct.rvmat","set_Rider\set\Vest\data\Karman_destruct.rvmat","set_Rider\set\Vest\data\Karman_ra_destruct.rvmat","set_Rider\set\Vest\data\Monster2_destruct.rvmat","set_Rider\set\Vest\data\Plita_destruct.rvmat","set_Rider\set\Vest\data\ra_destruct.rvmat","set_Rider\set\Vest\data\Verevka_destruct.rvmat","set_Rider\set\Vest\data\Vest_destruct.rvmat"}},"_destruct"};
 				};
@@ -52,7 +52,7 @@ class cfgVehicles
 				{
 					class Health
 					{
-						damage = 0.3;
+						damage = 0.2;
 					};
 					class Blood
 					{
@@ -60,14 +60,14 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0;
+						damage = 0.5;
 					};
 				};
 				class Melee
 				{
 					class Health
 					{
-						damage = 0.3;
+						damage = 0.25;
 					};
 					class Blood
 					{
@@ -75,14 +75,14 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0;
+						damage = 0.25;
 					};
 				};
 				class Infected
 				{
 					class Health
 					{
-						damage = 0.3;
+						damage = 0.25;
 					};
 					class Blood
 					{
@@ -90,14 +90,14 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0;
+						damage = 0.25;
 					};
 				};
 				class FragGrenade
 				{
 					class Health
 					{
-						damage = 0.3;
+						damage = 0.4;
 					};
 					class Blood
 					{
@@ -105,7 +105,7 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0;
+						damage = 0.4;
 					};
 				};
 			};

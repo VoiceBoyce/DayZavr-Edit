@@ -16,15 +16,16 @@ class CfgVehicles
 	{
 		displayName = "$STR_VBC_Legion_Mask";
 		descriptionShort = "$STR_VBC_Legion_Mask_Desc";
+		quickBarBonus = 0;
 		model = "set_legion\set\Mask\model\balaclava_g.p3d";
 		inventorySlot[] = {"Mask"};
 		itemInfo[] = {"Clothing","Mask"};
 		rotationFlags = 17;
-		weight = 500;
+		weight = 150;
 		itemSize[] = {2,2};
 		ragQuantity = 2;
-		varWetMax = 0.5;
-		heatIsolation = 0.5;
+		varWetMax = 0.249;
+		heatIsolation = 0.6;
 		repairableWithKits[] = {5,2};
 		repairCosts[] = {30,25};
 		headSelectionsToHide[] = {"Clipping_Balaclava"};
@@ -44,10 +45,6 @@ class CfgVehicles
 					healthLevels[] = {{1,{"set_legion\set\Mask\data\balaclava.rvmat"}},{0.7,{"set_legion\set\Mask\data\balaclava.rvmat"}},{0.5,{"set_legion\set\Mask\data\balaclava_damage.rvmat"}},{0.3,{"set_legion\set\Mask\data\balaclava_damage.rvmat"}},{0,{"set_legion\set\Mask\data\balaclava_destruct.rvmat"}}};
 				};
 			};
-		};
-		class Protection
-		{
-			biological = 0.25;
 		};
 		class AnimEvents
 		{

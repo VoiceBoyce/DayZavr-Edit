@@ -22,11 +22,11 @@ class cfgVehicles
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};
 		quickBarBonus = 2;
-		weight = 3000;
-		itemSize[] = {4,4};
-		varWetMax = 0.05;
+		weight = 7000;
+		itemSize[] = {5,4};
+		varWetMax = 0.249;
 		heatIsolation = 0.5;
-		itemsCargoSize[] = {5,5};
+		itemsCargoSize[] = {10,4};
 		repairableWithKits[] = {3,8};
 		repairCosts[] = {75.0,50.0};
 		hiddenSelections[] = {"camo","karman","karman_ra","magaz","ra","zalypa1"};
@@ -41,7 +41,7 @@ class cfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 1500;
+					hitpoints = 800;
 					transferToAttachmentsCoef = 0.5;
 					healthLevels[] = {{1.0,{"Set_Oni\set\Vest\data\Vest.rvmat","Set_Oni\set\Vest\data\Karman.rvmat","Set_Oni\set\Vest\data\Karman_ra.rvmat","Set_Oni\set\Vest\data\Mag.rvmat","Set_Oni\set\Vest\data\ra.rvmat","Set_Oni\set\Vest\data\zalypa_ra.rvmat"}},{0.7,{"Set_Oni\set\Vest\data\Vest.rvmat","Set_Oni\set\Vest\data\Karman.rvmat","Set_Oni\set\Vest\data\Karman_ra.rvmat","Set_Oni\set\Vest\data\Mag.rvmat","Set_Oni\set\Vest\data\ra.rvmat","Set_Oni\set\Vest\data\zalypa_ra.rvmat"}},{0.5,{"Set_Oni\set\Vest\data\Vest_damage.rvmat","Set_Oni\set\Vest\data\Karman_damage.rvmat","Set_Oni\set\Vest\data\Karman_ra_damage.rvmat","Set_Oni\set\Vest\data\Mag_damage.rvmat","Set_Oni\set\Vest\data\ra_damage.rvmat","Set_Oni\set\Vest\data\zalypa_ra_damage.rvmat"}},{0.3,{"Set_Oni\set\Vest\data\Vest_damage.rvmat","Set_Oni\set\Vest\data\Karman_damage.rvmat","Set_Oni\set\Vest\data\Karman_ra_damage.rvmat","Set_Oni\set\Vest\data\Mag_damage.rvmat","Set_Oni\set\Vest\data\ra_damage.rvmat","Set_Oni\set\Vest\data\zalypa_ra_damage.rvmat"}},{0.0,{"Set_Oni\set\Vest\data\Vest_destruct.rvmat","Set_Oni\set\Vest\data\Karman_destruct.rvmat","Set_Oni\set\Vest\data\Karman_ra_destruct.rvmat","Set_Oni\set\Vest\data\Mag_destruct.rvmat","Set_Oni\set\Vest\data\ra_destruct.rvmat","Set_Oni\set\Vest\data\zalypa_ra_destruct.rvmat"}}};
 				};
@@ -52,7 +52,7 @@ class cfgVehicles
 				{
 					class Health
 					{
-						damage = 0.3;
+						damage = 0.2;
 					};
 					class Blood
 					{
@@ -60,14 +60,14 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0;
+						damage = 0.5;
 					};
 				};
 				class Melee
 				{
 					class Health
 					{
-						damage = 0.3;
+						damage = 0.25;
 					};
 					class Blood
 					{
@@ -75,14 +75,14 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0;
+						damage = 0.25;
 					};
 				};
 				class Infected
 				{
 					class Health
 					{
-						damage = 0.3;
+						damage = 0.25;
 					};
 					class Blood
 					{
@@ -90,14 +90,14 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0;
+						damage = 0.25;
 					};
 				};
 				class FragGrenade
 				{
 					class Health
 					{
-						damage = 0.3;
+						damage = 0.4;
 					};
 					class Blood
 					{
@@ -105,7 +105,7 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0;
+						damage = 0.4;
 					};
 				};
 			};

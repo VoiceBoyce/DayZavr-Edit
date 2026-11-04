@@ -32,12 +32,12 @@ class cfgVehicles
 		simulation = "clothing";
 		inventorySlot[] = {"Hips"};
 		itemInfo[] = {"Clothing","Hips"};
-		itemSize[] = {5,5};
-		itemsCargoSize[] = {4,10};
-		quickBarBonus = 2;
-		varWetMax = 0.049;
-		heatIsolation = 0.5;
-		weight = 550;
+		itemSize[] = {3,2};
+		itemsCargoSize[] = {10,3};
+		quickBarBonus = 1;
+		varWetMax = 0.249;
+		heatIsolation = 0;
+		weight = 800;
 		repairableWithKits[] = {5,3};
 		repairCosts[] = {30.0,25.0};
 		lootCategory = "Crafted";
@@ -56,69 +56,6 @@ class cfgVehicles
 				{
 					hitpoints = 500;
 					healthLevels[] = {{1,{"set_cod2\set\belt\data\belt.rvmat","set_cod2\set\belt\data\fast.rvmat","set_cod2\set\belt\data\kabura.rvmat","set_cod2\set\belt\data\left_poush.rvmat","set_cod2\set\belt\data\right_poush.rvmat"}},{0.7,{"set_cod2\set\belt\data\belt.rvmat","set_cod2\set\belt\data\fast.rvmat","set_cod2\set\belt\data\kabura.rvmat","set_cod2\set\belt\data\left_poush.rvmat","set_cod2\set\belt\data\right_poush.rvmat"}},{0.5,{"set_cod2\set\belt\data\belt_damage.rvmat","set_cod2\set\belt\data\fast_damage.rvmat","set_cod2\set\belt\data\kabura_damage.rvmat","set_cod2\set\belt\data\left_poush_damage.rvmat","set_cod2\set\belt\data\right_poush_damage.rvmat"}},{0.3,{"set_cod2\set\belt\data\belt_damage.rvmat","set_cod2\set\belt\data\fast_damage.rvmat","set_cod2\set\belt\data\kabura_damage.rvmat","set_cod2\set\belt\data\left_poush_damage.rvmat","set_cod2\set\belt\data\right_poush_damage.rvmat"}},{0,{"set_cod2\set\belt\data\belt_destruct.rvmat","set_cod2\set\belt\data\fast_destruct.rvmat","set_cod2\set\belt\data\kabura_destruct.rvmat","set_cod2\set\belt\data\left_poush_destruct.rvmat","set_cod2\set\belt\data\right_poush_destruct.rvmat"}}};
-				};
-			};
-			class GlobalArmor
-			{
-				class Projectile
-				{
-					class Health
-					{
-						damage = 0.85;
-					};
-					class Blood
-					{
-						damage = 0.8;
-					};
-					class Shock
-					{
-						damage = 0.8;
-					};
-				};
-				class Melee
-				{
-					class Health
-					{
-						damage = 0.85;
-					};
-					class Blood
-					{
-						damage = 0.8;
-					};
-					class Shock
-					{
-						damage = 0.8;
-					};
-				};
-				class Infected
-				{
-					class Health
-					{
-						damage = 0.85;
-					};
-					class Blood
-					{
-						damage = 0.8;
-					};
-					class Shock
-					{
-						damage = 0.8;
-					};
-				};
-				class FragGrenade
-				{
-					class Health
-					{
-						damage = 0.2;
-					};
-					class Blood
-					{
-						damage = 0.2;
-					};
-					class Shock
-					{
-						damage = 0.2;
-					};
 				};
 			};
 		};

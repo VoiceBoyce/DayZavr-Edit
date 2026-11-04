@@ -16,14 +16,15 @@ class CfgVehicles
 		scope = 0;
 		displayName = "$STR_VBC_Samurai_Shoes";
 		descriptionShort = "$STR_VBC_Samurai_Shoes_Desc";
+		quickBarBonus = 0;
 		model = "Set_Oni\set\Boots\model\Boots_g.p3d";
 		inventorySlot[] = {"Feet"};
 		itemInfo[] = {"Clothing","Feet"};
-		itemSize[] = {4,2};
-		weight = 500;
+		itemSize[] = {3,2};
+		weight = 1300;
 		durability = 1;
-		varWetMax = 1;
-		heatIsolation = 1;
+		varWetMax = 0.249;
+		heatIsolation = 0.8;
 		visibilityModifier = 0.9;
 		repairableWithKits[] = {3};
 		repairCosts[] = {25};
@@ -41,8 +42,41 @@ class CfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 90;
+					hitpoints = 500;
 					healthLevels[] = {{1,{"Set_Oni\set\Boots\data\Boots.rvmat"}},{0.7,{"Set_Oni\set\Boots\data\Boots.rvmat"}},{0.5,{"Set_Oni\set\Boots\data\Boots_damage.rvmat"}},{0.3,{"Set_Oni\set\Boots\data\Boots_damage.rvmat"}},{0,{"Set_Oni\set\Boots\data\Boots_destruct.rvmat"}}};
+				};
+			};
+			class GlobalArmor
+			{
+				class Melee
+				{
+					class Health
+					{
+						damage = 0.75;
+					};
+					class Blood
+					{
+						damage = 0.75;
+					};
+					class Shock
+					{
+						damage = 0.75;
+					};
+				};
+				class Infected
+				{
+					class Health
+					{
+						damage = 0.75;
+					};
+					class Blood
+					{
+						damage = 0.75;
+					};
+					class Shock
+					{
+						damage = 0.75;
+					};
 				};
 			};
 		};

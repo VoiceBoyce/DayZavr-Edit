@@ -23,8 +23,8 @@ class cfgVehicles
 		rotationFlags = 16;
 		weight = 1500;
 		itemSize[] = {4,3};
-		itemsCargoSize[] = {7,4};
-		varWetMax = 0.25;
+		itemsCargoSize[] = {10,5};
+		varWetMax = 0.249;
 		heatIsolation = 0.25;
 		repairableWithKits[] = {5,2};
 		repairCosts[] = {30,25};
@@ -42,7 +42,7 @@ class cfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 200;
+					hitpoints = 400;
 					transferToAttachmentsCoef = 0.5;
 					healthLevels[] = {{1,{"SetComplete_EOD_Specialist\set\data\backpack\backpack.rvmat","SetComplete_EOD_Specialist\set\data\clips\clips.rvmat","SetComplete_EOD_Specialist\set\data\velcro\velcro.rvmat"}},{0.7,{"SetComplete_EOD_Specialist\set\data\backpack\backpack.rvmat","SetComplete_EOD_Specialist\set\data\clips\clips.rvmat","SetComplete_EOD_Specialist\set\data\velcro\velcro.rvmat"}},{0.5,{"SetComplete_EOD_Specialist\set\data\backpack\backpack_damage.rvmat","SetComplete_EOD_Specialist\set\data\clips\clips_damage.rvmat","SetComplete_EOD_Specialist\set\data\velcro\velcro_damage.rvmat"}},{0.3,{"SetComplete_EOD_Specialist\set\data\backpack\backpack_damage.rvmat","SetComplete_EOD_Specialist\set\data\clips\clips_damage.rvmat","SetComplete_EOD_Specialist\set\data\velcro\velcro_damage.rvmat"}},{0,{"SetComplete_EOD_Specialist\set\data\backpack\backpack_destruct.rvmat","SetComplete_EOD_Specialist\set\data\clips\clips_destruct.rvmat","SetComplete_EOD_Specialist\set\data\velcro\velcro_destruct.rvmat"}}};
 				};

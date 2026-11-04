@@ -16,19 +16,20 @@ class cfgVehicles
 	{
 		displayName = "$STR_VBC_Legion_Pants";
 		descriptionShort = "$STR_VBC_Legion_Pants_Desc";
+		heatIsolation = 0.6;
 		model = "set_legion\set\Pants\model\Pants_g.p3d";
 		inventorySlot[] = {"Legs"};
 		simulation = "clothing";
 		itemInfo[] = {"Clothing","Legs"};
 		itemSize[] = {4,3};
-		itemsCargoSize[] = {5,4};
-		weight = 630;
+		itemsCargoSize[] = {10,5};
+		weight = 1200;
 		ragQuantity = 3;
-		varWetMax = 0.49;
+		varWetMax = 0.249;
 		visibilityModifier = 0.8;
 		repairableWithKits[] = {5,2};
 		repairCosts[] = {30,25};
-		quickBarBonus = 2;
+		quickBarBonus = 0;
 		hiddenSelections[] = {"koleno","pants","personality"};
 		hiddenSelectionsTextures[] = {};
 		class ClothingTypes
@@ -42,13 +43,13 @@ class cfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 150;
+					hitpoints = 500;
 					healthLevels[] = {{1,{"set_legion\set\Pants\data\koleno.rvmat","set_legion\set\Pants\data\pants.rvmat"}},{0.7,{"set_legion\set\Pants\data\koleno.rvmat","set_legion\set\Pants\data\pants.rvmat"}},{0.5,{"set_legion\set\Pants\data\koleno_damage.rvmat","set_legion\set\Pants\data\pants_damage.rvmat"}},{0.3,{"set_legion\set\Pants\data\koleno_damage.rvmat","set_legion\set\Pants\data\pants_damage.rvmat"}},{0,{"set_legion\set\Pants\data\koleno_destruct.rvmat","set_legion\set\Pants\data\pants_destruct.rvmat"}}};
 				};
 			};
 			class GlobalArmor
 			{
-				class Melee
+				class Projectile
 				{
 					class Health
 					{
@@ -56,26 +57,56 @@ class cfgVehicles
 					};
 					class Blood
 					{
-						damage = 0.8;
+						damage = 0.85;
 					};
 					class Shock
 					{
-						damage = 0.9;
+						damage = 0.85;
+					};
+				};
+				class Melee
+				{
+					class Health
+					{
+						damage = 0.75;
+					};
+					class Blood
+					{
+						damage = 0.75;
+					};
+					class Shock
+					{
+						damage = 0.75;
 					};
 				};
 				class Infected
 				{
 					class Health
 					{
+						damage = 0.75;
+					};
+					class Blood
+					{
+						damage = 0.75;
+					};
+					class Shock
+					{
+						damage = 0.75;
+					};
+				};
+				class FragGrenade
+				{
+					class Health
+					{
 						damage = 0.85;
 					};
 					class Blood
 					{
-						damage = 0.8;
+						damage = 0.85;
 					};
 					class Shock
 					{
-						damage = 0.9;
+						damage = 0.85;
 					};
 				};
 			};

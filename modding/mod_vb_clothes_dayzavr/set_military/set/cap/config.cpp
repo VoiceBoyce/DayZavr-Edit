@@ -24,11 +24,11 @@ class cfgVehicles
 		vehicleClass = "Clothing";
 		itemInfo[] = {"Clothing","Helmet"};
 		ragQuantity = 6;
-		quickBarBonus = 2;
-		weight = 310;
-		itemSize[] = {4,4};
-		varWetMax = 0.05;
-		heatIsolation = 1;
+		quickBarBonus = 0;
+		weight = 300;
+		itemSize[] = {2,2};
+		varWetMax = 0.249;
+		heatIsolation = 0.5;
 		repairableWithKits[] = {3,8};
 		repairCosts[] = {25.0};
 		hiddenSelections[] = {"cap","Headgears"};
@@ -44,28 +44,13 @@ class cfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 500;
+					hitpoints = 300;
 					transferToAttachmentsCoef = 0.5;
 					healthLevels[] = {{1.0,{"\set_military\set\cap\data\cap.rvmat","\set_military\set\cap\data\Headgears.rvmat"}},{0.7,{"\set_military\set\cap\data\cap.rvmat","\set_military\set\cap\data\Headgears.rvmat"}},{0.5,{"\set_military\set\cap\data\cap_damage.rvmat","\set_military\set\cap\data\Headgears_damage.rvmat"}},{0.3,{"\set_military\set\cap\data\cap_damage.rvmat","\set_military\set\cap\data\Headgears_damage.rvmat"}},{0.0,{"\set_military\set\cap\data\cap_destruct.rvmat","\set_military\set\cap\data\Headgears_damage.rvmat"}}};
 				};
 			};
 			class GlobalArmor
 			{
-				class Projectile
-				{
-					class Health
-					{
-						damage = 0.85;
-					};
-					class Blood
-					{
-						damage = 0.8;
-					};
-					class Shock
-					{
-						damage = 0.8;
-					};
-				};
 				class Melee
 				{
 					class Health
@@ -74,11 +59,11 @@ class cfgVehicles
 					};
 					class Blood
 					{
-						damage = 0.8;
+						damage = 0.85;
 					};
 					class Shock
 					{
-						damage = 0.8;
+						damage = 0.85;
 					};
 				};
 				class Infected
@@ -89,26 +74,11 @@ class cfgVehicles
 					};
 					class Blood
 					{
-						damage = 0.8;
+						damage = 0.85;
 					};
 					class Shock
 					{
-						damage = 0.8;
-					};
-				};
-				class FragGrenade
-				{
-					class Health
-					{
-						damage = 0.2;
-					};
-					class Blood
-					{
-						damage = 0.2;
-					};
-					class Shock
-					{
-						damage = 0.2;
+						damage = 0.85;
 					};
 				};
 			};

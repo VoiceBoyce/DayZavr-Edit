@@ -18,6 +18,10 @@ class cfgVehicles
 		scope = 0;
 		displayName = "$STR_VBC_Alpha_Mask";
 		descriptionShort = "$STR_VBC_Alpha_Mask_Desc";
+		quickBarBonus = 0;
+		varWetMax = 0.249;
+		heatIsolation = 0.6;
+		weight = 150;
 		inventorySlot[] = {"Mask"};
 		itemSize[] = {2,2};
 		rotationFlags = 17;
@@ -29,7 +33,7 @@ class cfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 100;
+					hitpoints = 300;
 					healthLevels[] = {{1.0,{"SetComplete_EOD_Specialist\set\data\scarf\scarf.rvmat"}},{0.7,{"SetComplete_EOD_Specialist\set\data\scarf\scarf.rvmat"}},{0.5,{"SetComplete_EOD_Specialist\set\data\scarf\scarf_damage.rvmat"}},{0.3,{"SetComplete_EOD_Specialist\set\data\scarf\scarf_damage.rvmat"}},{0.0,{"SetComplete_EOD_Specialist\set\data\scarf\scarf_destruct.rvmat"}}};
 				};
 			};

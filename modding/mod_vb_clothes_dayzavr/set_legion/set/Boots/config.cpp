@@ -16,14 +16,15 @@ class CfgVehicles
 		scope = 0;
 		displayName = "$STR_VBC_Legion_Boots";
 		descriptionShort = "$STR_VBC_Legion_Boots_Desc";
+		quickBarBonus = 0;
 		model = "\set_legion\set\Boots\model\Boots_g.p3d";
 		inventorySlot[] = {"Feet"};
 		itemInfo[] = {"Clothing","Feet"};
-		itemSize[] = {4,2};
-		weight = 500;
+		itemSize[] = {3,2};
+		weight = 1300;
 		durability = 1;
-		varWetMax = 1;
-		heatIsolation = 1;
+		varWetMax = 0.249;
+		heatIsolation = 0.8;
 		visibilityModifier = 0.9;
 		repairableWithKits[] = {3};
 		repairCosts[] = {25};
@@ -41,70 +42,40 @@ class CfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 90;
+					hitpoints = 500;
 					healthLevels[] = {{1,{"set_legion\set\Boots\data\Boots.rvmat"}},{0.7,{"set_legion\set\Boots\data\Boots.rvmat"}},{0.5,{"set_legion\set\Boots\data\Boots_damage.rvmat"}},{0.3,{"set_legion\set\Boots\data\Boots_damage.rvmat"}},{0,{"set_legion\set\Boots\data\Boots_destruct.rvmat"}}};
 				};
 			};
 			class GlobalArmor
 			{
-				class Projectile
-				{
-					class Health
-					{
-						damage = 0.03;
-					};
-					class Blood
-					{
-						damage = 0;
-					};
-					class Shock
-					{
-						damage = 0;
-					};
-				};
 				class Melee
 				{
 					class Health
 					{
-						damage = 0.03;
+						damage = 0.75;
 					};
 					class Blood
 					{
-						damage = 0;
+						damage = 0.75;
 					};
 					class Shock
 					{
-						damage = 0;
+						damage = 0.75;
 					};
 				};
 				class Infected
 				{
 					class Health
 					{
-						damage = 0.03;
+						damage = 0.75;
 					};
 					class Blood
 					{
-						damage = 0;
+						damage = 0.75;
 					};
 					class Shock
 					{
-						damage = 0;
-					};
-				};
-				class FragGrenade
-				{
-					class Health
-					{
-						damage = 0.03;
-					};
-					class Blood
-					{
-						damage = 0;
-					};
-					class Shock
-					{
-						damage = 0;
+						damage = 0.75;
 					};
 				};
 			};

@@ -24,11 +24,11 @@ class cfgVehicles
 		vehicleClass = "Clothing";
 		itemInfo[] = {"Clothing","Helmet"};
 		ragQuantity = 6;
-		quickBarBonus = 2;
-		weight = 310;
-		itemSize[] = {4,4};
-		varWetMax = 0.05;
-		heatIsolation = 1;
+		quickBarBonus = 0;
+		weight = 1500;
+		itemSize[] = {3,3};
+		varWetMax = 0.249;
+		heatIsolation = 0.3;
 		repairableWithKits[] = {3,8};
 		repairCosts[] = {25.0};
 		hiddenSelections[] = {"AKB","ebalo","Fast_helmet","Flag","Helmet","Mask","Meshok","Mikro_naushniki","Naushniki","PNV","Truba","zalypa","zalypa2_helmet","Zaplatka"};
@@ -44,7 +44,7 @@ class cfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 500;
+					hitpoints = 400;
 					transferToAttachmentsCoef = 0.5;
 					healthLevels[] = {{1.0,{"set_Ghost\set\Helmet\data\Akb_helmet.rvmat","set_Ghost\set\Helmet\data\Ebalo.rvmat","set_Ghost\set\Helmet\data\Fast_helmet.rvmat","set_Ghost\set\Helmet\data\Flag_helmet.rvmat","set_Ghost\set\Helmet\data\Helmet.rvmat","set_Ghost\set\Helmet\data\Mask.rvmat","set_Ghost\set\Helmet\data\Meshok_helmet.rvmat","set_Ghost\set\Helmet\data\Mikro_helmet.rvmat","set_Ghost\set\Helmet\data\Haushnik.rvmat","set_Ghost\set\Helmet\data\PNV_kper.rvmat","set_Ghost\set\Helmet\data\Truba_helmet.rvmat","set_Ghost\set\Helmet\data\Zalypa_Helmet.rvmat","set_Ghost\set\Helmet\data\Zalypa2_helmet.rvmat","set_Ghost\set\Helmet\data\Zapladka_helmet.rvmat"}},{0.7,{"set_Ghost\set\Helmet\data\Akb_helmet.rvmat","set_Ghost\set\Helmet\data\Ebalo.rvmat","set_Ghost\set\Helmet\data\Fast_helmet.rvmat","set_Ghost\set\Helmet\data\Flag_helmet.rvmat","set_Ghost\set\Helmet\data\Helmet.rvmat","set_Ghost\set\Helmet\data\Mask.rvmat","set_Ghost\set\Helmet\data\Meshok_helmet.rvmat","set_Ghost\set\Helmet\data\Mikro_helmet.rvmat","set_Ghost\set\Helmet\data\Haushnik.rvmat","set_Ghost\set\Helmet\data\PNV_kper.rvmat","set_Ghost\set\Helmet\data\Truba_helmet.rvmat","set_Ghost\set\Helmet\data\Zalypa_Helmet.rvmat","set_Ghost\set\Helmet\data\Zalypa2_helmet.rvmat","set_Ghost\set\Helmet\data\Zapladka_helmet.rvmat"}},{0.5,{"set_Ghost\set\Helmet\data\Akb_helmet_damage.rvmat","set_Ghost\set\Helmet\data\Ebalo_damage.rvmat","set_Ghost\set\Helmet\data\Fast_helmet_damage.rvmat","set_Ghost\set\Helmet\data\Flag_helmet_damage.rvmat","set_Ghost\set\Helmet\data\Helmet_damage.rvmat","set_Ghost\set\Helmet\data\Mask_damage.rvmat","set_Ghost\set\Helmet\data\Meshok_helmet_damage.rvmat","set_Ghost\set\Helmet\data\Haushnik_damage.rvmat","set_Ghost\set\Helmet\data\Mikro_helmet_damage.rvmat","set_Ghost\set\Helmet\data\PNV_kper_damage.rvmat","set_Ghost\set\Helmet\data\Truba_helmet_damage.rvmat","set_Ghost\set\Helmet\data\Zalypa_Helmet_damage.rvmat","set_Ghost\set\Helmet\data\Zalypa2_helmet_damage.rvmat","set_Ghost\set\Helmet\data\Zapladka_helmet_damage.rvmat"}},{0.3,{"set_Ghost\set\Helmet\data\Akb_helmet_damage.rvmat","set_Ghost\set\Helmet\data\Ebalo_damage.rvmat","set_Ghost\set\Helmet\data\Fast_helmet_damage.rvmat","set_Ghost\set\Helmet\data\Flag_helmet_damage.rvmat","set_Ghost\set\Helmet\data\Haushnik_damage.rvmat","set_Ghost\set\Helmet\data\Helmet_damage.rvmat","set_Ghost\set\Helmet\data\Mask_damage.rvmat","set_Ghost\set\Helmet\data\Meshok_helmet_damage.rvmat","set_Ghost\set\Helmet\data\Haushnik_damage.rvmat","set_Ghost\set\Helmet\data\Mikro_helmet_damage.rvmat","set_Ghost\set\Helmet\data\PNV_kper_damage.rvmat","set_Ghost\set\Helmet\data\Truba_helmet_damage.rvmat","set_Ghost\set\Helmet\data\Zalypa_Helmet_damage.rvmat","set_Ghost\set\Helmet\data\Zalypa2_helmet_damage.rvmat","set_Ghost\set\Helmet\data\Zapladka_helmet_damage.rvmat"}},{0.0,{"set_Ghost\set\Helmet\data\Akb_helmet_destruct.rvmat","set_Ghost\set\Helmet\data\Ebalo_destruct.rvmat","set_Ghost\set\Helmet\data\Fast_helmet_destruct.rvmat","set_Ghost\set\Helmet\data\Flag_helmet_destruct.rvmat","set_Ghost\set\Helmet\data\Helmet_destruct.rvmat","set_Ghost\set\Helmet\data\Mask_destruct.rvmat","set_Ghost\set\Helmet\data\Meshok_helmet_destruct.rvmat","set_Ghost\set\Helmet\data\Mikro_helmet_destruct.rvmat","set_Ghost\set\Helmet\data\Haushnik_destruct.rvmat","set_Ghost\set\Helmet\data\PNV_kper_destruct.rvmat","set_Ghost\set\Helmet\data\Truba_helmet_destruct.rvmat","set_Ghost\set\Helmet\data\Zalypa_Helmet_destruct.rvmat","set_Ghost\set\Helmet\data\Zalypa2_helmet_destruct.rvmat","set_Ghost\set\Helmet\data\Zapladka_helmet_destruct.rvmat"}}};
 				};
@@ -55,7 +55,7 @@ class cfgVehicles
 				{
 					class Health
 					{
-						damage = 0.5;
+						damage = 0.2;
 					};
 					class Blood
 					{
@@ -63,7 +63,7 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0;
+						damage = 0.5;
 					};
 				};
 				class Melee
@@ -78,7 +78,7 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0;
+						damage = 0.4;
 					};
 				};
 				class Infected
@@ -93,14 +93,14 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0;
+						damage = 0.5;
 					};
 				};
 				class FragGrenade
 				{
 					class Health
 					{
-						damage = 0.5;
+						damage = 0.4;
 					};
 					class Blood
 					{
@@ -108,7 +108,7 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0;
+						damage = 0.4;
 					};
 				};
 			};

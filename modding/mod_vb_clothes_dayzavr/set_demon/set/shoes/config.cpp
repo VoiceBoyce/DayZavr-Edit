@@ -14,14 +14,15 @@ class CfgVehicles {
 		scope = 0;
 		displayName = "$STR_VBC_Demon_Shoes";
 		descriptionShort = "$STR_VBC_Demon_Shoes_Desc";
+		quickBarBonus = 0;
 		model = "\set_demon\set\shoes\model\shoes_g.p3d";
 		inventorySlot[] = {"Feet"};
 		itemInfo[] = {"Clothing", "Feet"};
-		itemSize[] = {4, 2};
-		weight = 500;
+		itemSize[] = {3,2};
+		weight = 1300;
 		durability = 1;
-		varWetMax = 1;
-		heatIsolation = 1;
+		varWetMax = 0.249;
+		heatIsolation = 0.8;
 		visibilityModifier = 0.9;
 		repairableWithKits[] = {3};
 		repairCosts[] = {25};
@@ -37,7 +38,7 @@ class CfgVehicles {
 		class DamageSystem {
 			class GlobalHealth {
 				class Health {
-					hitpoints = 290;
+					hitpoints = 500;
 					healthLevels[] = {{1, {"\set_demon\set\shoes\data\shoes.rvmat"}},
 									{0.7, {"\set_demon\set\shoes\data\shoes.rvmat"}},
 									{0.5, {"\set_demon\set\shoes\data\shoes_damage.rvmat"}},
@@ -46,69 +47,42 @@ class CfgVehicles {
 				};
 			};
 			
-			class GlobalArmor {
-				class Projectile {
-					class Health {
+			class GlobalArmor
+			{
+				class Melee
+				{
+					class Health
+					{
 						damage = 0.75;
 					};
-					
-					class Blood {
-						damage = 0.6;
-					};
-					
-					class Shock {
+					class Blood
+					{
 						damage = 0.75;
 					};
-				};
-				
-				class Melee {
-					class Health {
-						damage = 0.75;
-					};
-					
-					class Blood {
-						damage = 0.6;
-					};
-					
-					class Shock {
+					class Shock
+					{
 						damage = 0.75;
 					};
 				};
-				
-				class Infected {
-					class Health {
+				class Infected
+				{
+					class Health
+					{
 						damage = 0.75;
 					};
-					
-					class Blood {
-						damage = 0.6;
-					};
-					
-					class Shock {
+					class Blood
+					{
 						damage = 0.75;
 					};
-				};
-				
-				class FragGrenade {
-					class Health {
-						damage = 0.2;
-					};
-					
-					class Blood {
-						damage = 0.2;
-					};
-					
-					class Shock {
-						damage = 0.2;
+					class Shock
+					{
+						damage = 0.75;
 					};
 				};
 			};
 		};
 		
-		class Protection {
-			biological = 1;
-			chemical = 1;
-		};		
+		
 		
 		class AnimEvents {
 			class SoundWeapon {

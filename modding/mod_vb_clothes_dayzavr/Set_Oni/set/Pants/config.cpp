@@ -21,12 +21,12 @@ class cfgVehicles
 		attachments[] = {};
 		inventorySlot[] = {"Legs"};
 		itemInfo[] = {"Clothing","Legs"};
-		quickBarBonus = 2;
-		weight = 310;
+		quickBarBonus = 0;
+		weight = 1200;
 		ragQuantity = 6;
-		itemSize[] = {3,2};
-		varWetMax = 0.05;
-		heatIsolation = 0.5;
+		itemSize[] = {4,3};
+		varWetMax = 0.249;
+		heatIsolation = 0.6;
 		itemsCargoSize[] = {10,5};
 		repairableWithKits[] = {5,2};
 		repairCosts[] = {75.0,50.0};
@@ -45,6 +45,69 @@ class cfgVehicles
 					hitpoints = 500;
 					transferToAttachmentsCoef = 0.5;
 					healthLevels[] = {{1.0,{"Set_Oni\set\Pants\data\Pants.rvmat"}},{0.7,{"Set_Oni\set\Pants\data\Pants.rvmat"}},{0.5,{"Set_Oni\set\Pants\data\Pants_damage.rvmat"}},{0.3,{"Set_Oni\set\Pants\data\Pants_damage.rvmat"}},{0.0,{"Set_Oni\set\Pants\data\Pants_destruct.rvmat"}}};
+				};
+			};
+			class GlobalArmor
+			{
+				class Projectile
+				{
+					class Health
+					{
+						damage = 0.85;
+					};
+					class Blood
+					{
+						damage = 0.85;
+					};
+					class Shock
+					{
+						damage = 0.85;
+					};
+				};
+				class Melee
+				{
+					class Health
+					{
+						damage = 0.75;
+					};
+					class Blood
+					{
+						damage = 0.75;
+					};
+					class Shock
+					{
+						damage = 0.75;
+					};
+				};
+				class Infected
+				{
+					class Health
+					{
+						damage = 0.75;
+					};
+					class Blood
+					{
+						damage = 0.75;
+					};
+					class Shock
+					{
+						damage = 0.75;
+					};
+				};
+				class FragGrenade
+				{
+					class Health
+					{
+						damage = 0.85;
+					};
+					class Blood
+					{
+						damage = 0.85;
+					};
+					class Shock
+					{
+						damage = 0.85;
+					};
 				};
 			};
 		};

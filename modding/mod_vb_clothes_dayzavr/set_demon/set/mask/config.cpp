@@ -20,11 +20,11 @@ class cfgVehicles {
 		inventorySlot[] = {"Mask"};
 		itemInfo[] = {"Clothing", "Mask"};
 		ragQuantity = 6;
-		quickBarBonus = 2;
-		weight = 310;
-		itemSize[] = {3, 3};
-		varWetMax = 0.05;
-		heatIsolation = 0.5;
+		quickBarBonus = 0;
+		weight = 150;
+		itemSize[] = {2,2};
+		varWetMax = 0.249;
+		heatIsolation = 0.6;
 		repairableWithKits[] = {3, 8};
 		repairCosts[] = {75.0, 50.0};
 		hiddenSelections[] = {"mask", "mask2"};
@@ -38,7 +38,7 @@ class cfgVehicles {
 		class DamageSystem {
 			class GlobalHealth {
 				class Health {
-					hitpoints = 500;
+					hitpoints = 300;
 					transferToAttachmentsCoef = 0.5;
 					healthLevels[] = {{1.0, {"\set_demon\set\mask\data\mask.rvmat", "\set_demon\set\mask\data\mask2.rvmat"}},
 									 {0.7, {"\set_demon\set\mask\data\mask.rvmat", "\set_demon\set\mask\data\mask2.rvmat"}},
@@ -47,64 +47,7 @@ class cfgVehicles {
 									 {0.0, {"\set_demon\set\mask\data\mask_destruct.rvmat", "\set_demon\set\mask\data\mask2_destruct.rvmat"}}};
 				};
 			};
-			
-			class GlobalArmor {
-				class Projectile {
-					class Health {
-						damage = 0.85;
-					};
-					
-					class Blood {
-						damage = 0.8;
-					};
-					
-					class Shock {
-						damage = 0.8;
-					};
-				};
-				
-				class Melee {
-					class Health {
-						damage = 0.85;
-					};
-					
-					class Blood {
-						damage = 0.8;
-					};
-					
-					class Shock {
-						damage = 0.8;
-					};
-				};
-				
-				class Infected {
-					class Health {
-						damage = 0.85;
-					};
-					
-					class Blood {
-						damage = 0.8;
-					};
-					
-					class Shock {
-						damage = 0.8;
-					};
-				};
-				
-				class FragGrenade {
-					class Health {
-						damage = 0.2;
-					};
-					
-					class Blood {
-						damage = 0.2;
-					};
-					
-					class Shock {
-						damage = 0.2;
-					};
-				};
-			};
+
 		};
 		
 		class AnimEvents {

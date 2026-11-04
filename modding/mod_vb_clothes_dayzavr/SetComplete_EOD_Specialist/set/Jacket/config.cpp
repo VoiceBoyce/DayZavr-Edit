@@ -20,15 +20,15 @@ class CfgVehicles
 		model = "SetComplete_EOD_Specialist\set\Jacket\Jacket_g.p3d";
 		inventorySlot[] = {"Body"};
 		itemInfo[] = {"Clothing","Body"};
-		weight = 1000;
-		itemSize[] = {4,6};
+		weight = 1500;
+		itemSize[] = {4,3};
 		varWetMin = 0.049;
-		varWetMax = 0.55;
+		varWetMax = 0.249;
 		absorbency = 0.55;
-		heatIsolation = 0.5;
-		quickBarBonus = 2;
+		heatIsolation = 0.7;
+		quickBarBonus = 0;
 		repairableWithKits[] = {2,3};
-		itemsCargoSize[] = {7,6};
+		itemsCargoSize[] = {10,6};
 		repairCosts[] = {75,50};
 		hiddenSelections[] = {"jacket"};
 		class ClothingTypes
@@ -42,7 +42,7 @@ class CfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 200;
+					hitpoints = 500;
 					transferToAttachmentsCoef = 0.5;
 					healthLevels[] = {{1,{"SetComplete_EOD_Specialist\set\data\top\top.rvmat"}},{0.7,{"SetComplete_EOD_Specialist\set\data\top\top.rvmat"}},{0.5,{"SetComplete_EOD_Specialist\set\data\top\top_damage.rvmat"}},{0.3,{"SetComplete_EOD_Specialist\set\data\top\top_damage.rvmat"}},{0,{"SetComplete_EOD_Specialist\set\data\top\top_destruct.rvmat"}}};
 				};
@@ -53,60 +53,60 @@ class CfgVehicles
 				{
 					class Health
 					{
-						damage = 0.95;
+						damage = 0.85;
 					};
 					class Blood
 					{
-						damage = 0.95;
+						damage = 0.85;
 					};
 					class Shock
 					{
-						damage = 0;
+						damage = 0.85;
 					};
 				};
 				class Melee
 				{
 					class Health
 					{
-						damage = 0.95;
+						damage = 0.75;
 					};
 					class Blood
 					{
-						damage = 0.95;
+						damage = 0.75;
 					};
 					class Shock
 					{
-						damage = 0.45;
+						damage = 0.75;
 					};
 				};
 				class Infected
 				{
 					class Health
 					{
-						damage = 0.1;
+						damage = 0.75;
 					};
 					class Blood
 					{
-						damage = 0.5;
+						damage = 0.75;
 					};
 					class Shock
 					{
-						damage = 0.15;
+						damage = 0.75;
 					};
 				};
 				class FragGrenade
 				{
 					class Health
 					{
-						damage = 1;
+						damage = 0.85;
 					};
 					class Blood
 					{
-						damage = 0.1;
+						damage = 0.85;
 					};
 					class Shock
 					{
-						damage = 0.1;
+						damage = 0.85;
 					};
 				};
 			};

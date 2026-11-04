@@ -16,15 +16,16 @@ class cfgVehicles
 		scope = 0;
 		displayName = "$STR_VBC_Ghost_Gloves";
 		descriptionShort = "$STR_VBC_Ghost_Gloves_Desc";
+		quickBarBonus = 0;
 		model = "set_Ghost\set\Gloves\model\Gloves_g.p3d";
 		inventorySlot[] = {"Gloves"};
 		simulation = "clothing";
 		itemInfo[] = {"Clothing","Gloves"};
 		rotationFlags = 34;
-		weight = 454;
+		weight = 400;
 		itemSize[] = {2,2};
-		varWetMax = 0.049;
-		heatIsolation = 1;
+		varWetMax = 0.249;
+		heatIsolation = 0.7;
 		repairableWithKits[] = {5,2};
 		repairCosts[] = {30,25};
 		hiddenSelections[] = {"camo","personality"};
@@ -39,70 +40,40 @@ class cfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 500;
+					hitpoints = 400;
 					healthLevels[] = {{1.0,{"set_Ghost\set\Gloves\data\Gloves.rvmat"}},{0.7,{"set_Ghost\set\Gloves\data\Gloves.rvmat"}},{0.5,{"set_Ghost\set\Gloves\data\Gloves_damage.rvmat"}},{0.3,{"set_Ghost\set\Gloves\data\Gloves_damage.rvmat"}},{0.0,{"set_Ghost\set\Gloves\data\Gloves_destruct.rvmat"}}};
 				};
 			};
 			class GlobalArmor
 			{
-				class Projectile
-				{
-					class Health
-					{
-						damage = 0.85;
-					};
-					class Blood
-					{
-						damage = 0.8;
-					};
-					class Shock
-					{
-						damage = 0.8;
-					};
-				};
 				class Melee
 				{
 					class Health
 					{
-						damage = 0.85;
+						damage = 0.75;
 					};
 					class Blood
 					{
-						damage = 0.8;
+						damage = 0.75;
 					};
 					class Shock
 					{
-						damage = 0.8;
+						damage = 0.75;
 					};
 				};
 				class Infected
 				{
 					class Health
 					{
-						damage = 0.85;
+						damage = 0.75;
 					};
 					class Blood
 					{
-						damage = 0.8;
+						damage = 0.75;
 					};
 					class Shock
 					{
-						damage = 0.8;
-					};
-				};
-				class FragGrenade
-				{
-					class Health
-					{
-						damage = 0.2;
-					};
-					class Blood
-					{
-						damage = 0.2;
-					};
-					class Shock
-					{
-						damage = 0.2;
+						damage = 0.75;
 					};
 				};
 			};

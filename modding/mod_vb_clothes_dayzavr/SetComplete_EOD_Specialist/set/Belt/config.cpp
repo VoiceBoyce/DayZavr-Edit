@@ -23,11 +23,11 @@ class cfgVehicles
 		inventorySlot = "Hips";
 		itemInfo[] = {"Clothing","Hips"};
 		attachments[] = {"Pistol"};
-		itemSize[] = {5,2};
-		quickBarBonus = 2;
-		varWetMax = 0.049;
-		heatIsolation = 0.5;
-		weight = 860;
+		itemSize[] = {3,2};
+		quickBarBonus = 1;
+		varWetMax = 0.249;
+		heatIsolation = 0;
+		weight = 800;
 		itemsCargoSize[] = {10,3};
 		repairableWithKits[] = {5,3};
 		repairCosts[] = {30.0,25.0};
@@ -44,7 +44,7 @@ class cfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 220;
+					hitpoints = 500;
 					healthLevels[] = {{1,{"SetComplete_EOD_Specialist\set\data\belt\Belt.rvmat","SetComplete_EOD_Specialist\set\data\belt_medical\Belt_medical.rvmat","SetComplete_EOD_Specialist\set\data\belt_stap\belt_stap.rvmat","SetComplete_EOD_Specialist\set\data\clips\clips.rvmat","SetComplete_EOD_Specialist\set\data\def_1\def_1.rvmat","SetComplete_EOD_Specialist\set\data\def_3_groin\def_3_groin.rvmat","SetComplete_EOD_Specialist\set\data\granad_pocket\granad_pocket.rvmat","SetComplete_EOD_Specialist\set\data\granad\granad.rvmat","SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap.rvmat","SetComplete_EOD_Specialist\set\data\holster\holster.rvmat","SetComplete_EOD_Specialist\set\data\karm3\karm3.rvmat","SetComplete_EOD_Specialist\set\data\tourniq\tourniq.rvmat","SetComplete_EOD_Specialist\set\data\velcro\velcro.rvmat"}},{0.7,{"SetComplete_EOD_Specialist\set\data\belt\Belt.rvmat","SetComplete_EOD_Specialist\set\data\belt_medical\Belt_medical.rvmat","SetComplete_EOD_Specialist\set\data\belt_stap\belt_stap.rvmat","SetComplete_EOD_Specialist\set\data\clips\clips.rvmat","SetComplete_EOD_Specialist\set\data\def_1\def_1.rvmat","SetComplete_EOD_Specialist\set\data\def_3_groin\def_3_groin.rvmat","SetComplete_EOD_Specialist\set\data\granad_pocket\granad_pocket.rvmat","SetComplete_EOD_Specialist\set\data\granad\granad.rvmat","SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap.rvmat","SetComplete_EOD_Specialist\set\data\holster\holster.rvmat","SetComplete_EOD_Specialist\set\data\karm3\karm3.rvmat","SetComplete_EOD_Specialist\set\data\tourniq\tourniq.rvmat","SetComplete_EOD_Specialist\set\data\velcro\velcro.rvmat"}},{0.5,{"SetComplete_EOD_Specialist\set\data\belt\Belt_damage.rvmat","SetComplete_EOD_Specialist\set\data\belt_medical\Belt_medical_damage.rvmat","SetComplete_EOD_Specialist\set\data\belt_stap\belt_stap_damage.rvmat","SetComplete_EOD_Specialist\set\data\clips\clips_damage.rvmat","SetComplete_EOD_Specialist\set\data\def_1\def_1_damage.rvmat","SetComplete_EOD_Specialist\set\data\def_3_groin\def_3_groin_damage.rvmat","SetComplete_EOD_Specialist\set\data\granad_pocket\granad_pocket_damage.rvmat","SetComplete_EOD_Specialist\set\data\granad\granad_damage.rvmat","SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap_damage.rvmat","SetComplete_EOD_Specialist\set\data\holster\holster_damage.rvmat","SetComplete_EOD_Specialist\set\data\karm3\karm3_damage.rvmat","SetComplete_EOD_Specialist\set\data\tourniq\tourniq_damage.rvmat","SetComplete_EOD_Specialist\set\data\velcro\velcro_damage.rvmat"}},{0.3,{"SetComplete_EOD_Specialist\set\data\belt\Belt_damage.rvmat","SetComplete_EOD_Specialist\set\data\belt_medical\Belt_medical_damage.rvmat","SetComplete_EOD_Specialist\set\data\belt_stap\belt_stap_damage.rvmat","SetComplete_EOD_Specialist\set\data\clips\clips_damage.rvmat","SetComplete_EOD_Specialist\set\data\def_1\def_1_damage.rvmat","SetComplete_EOD_Specialist\set\data\def_3_groin\def_3_groin_damage.rvmat","SetComplete_EOD_Specialist\set\data\granad_pocket\granad_pocket_damage.rvmat","SetComplete_EOD_Specialist\set\data\granad\granad_damage.rvmat","SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap_damage.rvmat","SetComplete_EOD_Specialist\set\data\holster\holster_damage.rvmat","SetComplete_EOD_Specialist\set\data\karm3\karm3_damage.rvmat","SetComplete_EOD_Specialist\set\data\tourniq\tourniq_damage.rvmat","SetComplete_EOD_Specialist\set\data\velcro\velcro_damage.rvmat"}},{0,{"SetComplete_EOD_Specialist\set\data\belt\Belt_destruct.rvmat","SetComplete_EOD_Specialist\set\data\belt_medical\Belt_medical_destruct.rvmat","SetComplete_EOD_Specialist\set\data\belt_stap\belt_stap_destruct.rvmat","SetComplete_EOD_Specialist\set\data\clips\clips_destruct.rvmat","SetComplete_EOD_Specialist\set\data\def_1\def_1_destruct.rvmat","SetComplete_EOD_Specialist\set\data\def_3_groin\def_3_groin_destruct.rvmat","SetComplete_EOD_Specialist\set\data\granad_pocket\granad_pocket_destruct.rvmat","SetComplete_EOD_Specialist\set\data\granad\granad_destruct.rvmat","SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap_destruct.rvmat","SetComplete_EOD_Specialist\set\data\holster\holster_destruct.rvmat","SetComplete_EOD_Specialist\set\data\karm3\karm3_destruct.rvmat","SetComplete_EOD_Specialist\set\data\tourniq\tourniq_destruct.rvmat","SetComplete_EOD_Specialist\set\data\velcro\velcro_destruct.rvmat"}}};
 				};
 			};

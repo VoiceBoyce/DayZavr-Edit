@@ -30,13 +30,13 @@ class cfgVehicles
 		attachments[] = {};
 		inventorySlot[] = {"Body"};
 		itemInfo[] = {"Clothing","Body"};
-		quickBarBonus = 2;
-		weight = 310;
+		quickBarBonus = 0;
+		weight = 1500;
 		ragQuantity = 6;
-		itemSize[] = {3,2};
-		varWetMax = 0.05;
-		heatIsolation = 0.5;
-		itemsCargoSize[] = {9,5};
+		itemSize[] = {4,3};
+		varWetMax = 0.249;
+		heatIsolation = 0.7;
+		itemsCargoSize[] = {10,6};
 		repairableWithKits[] = {3,8};
 		repairCosts[] = {75.0,50.0};
 		hiddenSelections[] = {"camo"};
@@ -66,56 +66,56 @@ class cfgVehicles
 					};
 					class Blood
 					{
-						damage = 0.8;
+						damage = 0.85;
 					};
 					class Shock
 					{
-						damage = 0.8;
+						damage = 0.85;
 					};
 				};
 				class Melee
 				{
 					class Health
 					{
-						damage = 0.85;
+						damage = 0.75;
 					};
 					class Blood
 					{
-						damage = 0.8;
+						damage = 0.75;
 					};
 					class Shock
 					{
-						damage = 0.8;
+						damage = 0.75;
 					};
 				};
 				class Infected
 				{
 					class Health
 					{
-						damage = 0.85;
+						damage = 0.75;
 					};
 					class Blood
 					{
-						damage = 0.8;
+						damage = 0.75;
 					};
 					class Shock
 					{
-						damage = 0.8;
+						damage = 0.75;
 					};
 				};
 				class FragGrenade
 				{
 					class Health
 					{
-						damage = 0.2;
+						damage = 0.85;
 					};
 					class Blood
 					{
-						damage = 0.2;
+						damage = 0.85;
 					};
 					class Shock
 					{
-						damage = 0.2;
+						damage = 0.85;
 					};
 				};
 			};

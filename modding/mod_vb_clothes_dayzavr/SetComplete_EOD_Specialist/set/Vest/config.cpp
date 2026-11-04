@@ -20,15 +20,15 @@ class cfgVehicles
 		model = "SetComplete_EOD_Specialist\set\Vest\Vest_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};
-		weight = 8000;
-		itemSize[] = {5,5};
+		weight = 7000;
+		itemSize[] = {5,4};
 		quickBarBonus = 2;
 		displayWeight = 1;
 		varWetMin = 0.049;
-		varWetMax = 0.35;
+		varWetMax = 0.249;
 		absorbency = 0.4;
-		heatIsolation = 0.35;
-		itemsCargoSize[] = {7,4};
+		heatIsolation = 0.5;
+		itemsCargoSize[] = {10,4};
 		ragQuantity = 3;
 		repairableWithKits[] = {3,8};
 		repairCosts[] = {75.0,50.0};
@@ -44,7 +44,7 @@ class cfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 350;
+					hitpoints = 800;
 					transferToAttachmentsCoef = 0.5;
 					healthLevels[] = {{1.0,{"SetComplete_EOD_Specialist\set\data\belt\Belt.rvmat","SetComplete_EOD_Specialist\set\data\belt_granads\Belt_granads.rvmat","SetComplete_EOD_Specialist\set\data\bundle\bundle.rvmat","SetComplete_EOD_Specialist\set\data\clips\clips.rvmat","SetComplete_EOD_Specialist\set\data\def_1\def_1.rvmat","SetComplete_EOD_Specialist\set\data\def_4_neck\def_4_neck.rvmat","SetComplete_EOD_Specialist\set\data\def_5_ruka\def_5_ruka.rvmat","SetComplete_EOD_Specialist\set\data\granad\granad.rvmat","SetComplete_EOD_Specialist\set\data\granade_strap\granade_strap.rvmat","SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap.rvmat","SetComplete_EOD_Specialist\set\data\knife_holster\knife_holster.rvmat","SetComplete_EOD_Specialist\set\data\karm2\karm2.rvmat","SetComplete_EOD_Specialist\set\data\knife\knife.rvmat","SetComplete_EOD_Specialist\set\data\knife_holster1\knife_holster1.rvmat","SetComplete_EOD_Specialist\set\data\magazine\magazine.rvmat","SetComplete_EOD_Specialist\set\data\magazine_pouch1\magazine_pouch1.rvmat","SetComplete_EOD_Specialist\set\data\magazine_pouch2\magazine_pouch2.rvmat","SetComplete_EOD_Specialist\set\data\patch_ruka\patch_ruka.rvmat","SetComplete_EOD_Specialist\set\data\pocket\pocket.rvmat","SetComplete_EOD_Specialist\set\data\racia_scotch\racia_scotch.rvmat","SetComplete_EOD_Specialist\set\data\racia_strap\racia_strap.rvmat","SetComplete_EOD_Specialist\set\data\raciya\raciya.rvmat","SetComplete_EOD_Specialist\set\data\raciya1_2\raciya1_2.rvmat","SetComplete_EOD_Specialist\set\data\raciya1_3\raciya1_3.rvmat","SetComplete_EOD_Specialist\set\data\raciya1_4\raciya1_4.rvmat","SetComplete_EOD_Specialist\set\data\radio\radio.rvmat","SetComplete_EOD_Specialist\set\data\radio_holster\radio_holster.rvmat","SetComplete_EOD_Specialist\set\data\radio_pocket\radio_pocket.rvmat","SetComplete_EOD_Specialist\set\data\rope\rope.rvmat","SetComplete_EOD_Specialist\set\data\smoke_granad\smoke_granad.rvmat","SetComplete_EOD_Specialist\set\data\vest\vest.rvmat"}},{0.7,{"SetComplete_EOD_Specialist\set\data\belt\Belt.rvmat","SetComplete_EOD_Specialist\set\data\belt_granads\Belt_granads.rvmat","SetComplete_EOD_Specialist\set\data\bundle\bundle.rvmat","SetComplete_EOD_Specialist\set\data\clips\clips.rvmat","SetComplete_EOD_Specialist\set\data\def_1\def_1.rvmat","SetComplete_EOD_Specialist\set\data\def_4_neck\def_4_neck.rvmat","SetComplete_EOD_Specialist\set\data\def_5_ruka\def_5_ruka.rvmat","SetComplete_EOD_Specialist\set\data\granad\granad.rvmat","SetComplete_EOD_Specialist\set\data\granade_strap\granade_strap.rvmat","SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap.rvmat","SetComplete_EOD_Specialist\set\data\knife_holster\knife_holster.rvmat","SetComplete_EOD_Specialist\set\data\karm2\karm2.rvmat","SetComplete_EOD_Specialist\set\data\knife\knife.rvmat","SetComplete_EOD_Specialist\set\data\knife_holster1\knife_holster1.rvmat","SetComplete_EOD_Specialist\set\data\magazine\magazine.rvmat","SetComplete_EOD_Specialist\set\data\magazine_pouch1\magazine_pouch1.rvmat","SetComplete_EOD_Specialist\set\data\magazine_pouch2\magazine_pouch2.rvmat","SetComplete_EOD_Specialist\set\data\patch_ruka\patch_ruka.rvmat","SetComplete_EOD_Specialist\set\data\pocket\pocket.rvmat","SetComplete_EOD_Specialist\set\data\racia_scotch\racia_scotch.rvmat","SetComplete_EOD_Specialist\set\data\racia_strap\racia_strap.rvmat","SetComplete_EOD_Specialist\set\data\raciya\raciya.rvmat","SetComplete_EOD_Specialist\set\data\raciya1_2\raciya1_2.rvmat","SetComplete_EOD_Specialist\set\data\raciya1_3\raciya1_3.rvmat","SetComplete_EOD_Specialist\set\data\raciya1_4\raciya1_4.rvmat","SetComplete_EOD_Specialist\set\data\radio\radio.rvmat","SetComplete_EOD_Specialist\set\data\radio_holster\radio_holster.rvmat","SetComplete_EOD_Specialist\set\data\radio_pocket\radio_pocket.rvmat","SetComplete_EOD_Specialist\set\data\rope\rope.rvmat","SetComplete_EOD_Specialist\set\data\smoke_granad\smoke_granad.rvmat","SetComplete_EOD_Specialist\set\data\vest\vest.rvmat"}},{0.5,{"SetComplete_EOD_Specialist\set\data\belt\Belt_damage.rvmat","SetComplete_EOD_Specialist\set\data\belt_granads\Belt_granads_damage.rvmat","SetComplete_EOD_Specialist\set\data\bundle\bundle_damage.rvmat","SetComplete_EOD_Specialist\set\data\clips\clips.rvmat","SetComplete_EOD_Specialist\set\data\def_1\def_1_damage.rvmat","SetComplete_EOD_Specialist\set\data\def_4_neck\def_4_neck_damage.rvmat","SetComplete_EOD_Specialist\set\data\def_5_ruka\def_5_ruka_damage.rvmat","SetComplete_EOD_Specialist\set\data\granad\granad_damage.rvmat","SetComplete_EOD_Specialist\set\data\granade_strap\granade_strap_damage.rvmat","SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap_damage.rvmat","SetComplete_EOD_Specialist\set\data\knife_holster\knife_holster_damage.rvmat","SetComplete_EOD_Specialist\set\data\karm2\karm2_damage.rvmat","SetComplete_EOD_Specialist\set\data\knife\knife_damage.rvmat","SetComplete_EOD_Specialist\set\data\knife_holster1\knife_holster1_damage.rvmat","SetComplete_EOD_Specialist\set\data\magazine\magazine_damage.rvmat","SetComplete_EOD_Specialist\set\data\magazine_pouch1\magazine_pouch1_damage.rvmat","SetComplete_EOD_Specialist\set\data\magazine_pouch2\magazine_pouch2_damage.rvmat","SetComplete_EOD_Specialist\set\data\patch_ruka\patch_ruka_damage.rvmat","SetComplete_EOD_Specialist\set\data\pocket\pocket_damage.rvmat","SetComplete_EOD_Specialist\set\data\racia_scotch\racia_scotch_damage.rvmat","SetComplete_EOD_Specialist\set\data\racia_strap\racia_strap_damage.rvmat","SetComplete_EOD_Specialist\set\data\raciya\raciya_damage.rvmat","SetComplete_EOD_Specialist\set\data\raciya1_2\raciya1_2_damage.rvmat","SetComplete_EOD_Specialist\set\data\raciya1_3\raciya1_3_damage.rvmat","SetComplete_EOD_Specialist\set\data\raciya1_4\raciya1_4_damage.rvmat","SetComplete_EOD_Specialist\set\data\radio\radio_damage.rvmat","SetComplete_EOD_Specialist\set\data\radio_holster\radio_holster_damage.rvmat","SetComplete_EOD_Specialist\set\data\radio_pocket\radio_pocket_damage.rvmat","SetComplete_EOD_Specialist\set\data\rope\rope_damage.rvmat","SetComplete_EOD_Specialist\set\data\smoke_granad\smoke_granad_damage.rvmat","SetComplete_EOD_Specialist\set\data\vest\vest_damage.rvmat"}},{0.3,{"SetComplete_EOD_Specialist\set\data\belt\Belt_damage.rvmat","SetComplete_EOD_Specialist\set\data\belt_granads\Belt_granads_damage.rvmat","SetComplete_EOD_Specialist\set\data\bundle\bundle_damage.rvmat","SetComplete_EOD_Specialist\set\data\clips\clips.rvmat","SetComplete_EOD_Specialist\set\data\def_1\def_1_damage.rvmat","SetComplete_EOD_Specialist\set\data\def_4_neck\def_4_neck_damage.rvmat","SetComplete_EOD_Specialist\set\data\def_5_ruka\def_5_ruka_damage.rvmat","SetComplete_EOD_Specialist\set\data\granad\granad_damage.rvmat","SetComplete_EOD_Specialist\set\data\granade_strap\granade_strap_damage.rvmat","SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap_damage.rvmat","SetComplete_EOD_Specialist\set\data\knife_holster\knife_holster_damage.rvmat","SetComplete_EOD_Specialist\set\data\karm2\karm2_damage.rvmat","SetComplete_EOD_Specialist\set\data\knife\knife_damage.rvmat","SetComplete_EOD_Specialist\set\data\knife_holster1\knife_holster1_damage.rvmat","SetComplete_EOD_Specialist\set\data\magazine\magazine_damage.rvmat","SetComplete_EOD_Specialist\set\data\magazine_pouch1\magazine_pouch1_damage.rvmat","SetComplete_EOD_Specialist\set\data\magazine_pouch2\magazine_pouch2_damage.rvmat","SetComplete_EOD_Specialist\set\data\patch_ruka\patch_ruka_damage.rvmat","SetComplete_EOD_Specialist\set\data\pocket\pocket_damage.rvmat","SetComplete_EOD_Specialist\set\data\racia_scotch\racia_scotch_damage.rvmat","SetComplete_EOD_Specialist\set\data\racia_strap\racia_strap_damage.rvmat","SetComplete_EOD_Specialist\set\data\raciya\raciya_damage.rvmat","SetComplete_EOD_Specialist\set\data\raciya1_2\raciya1_2_damage.rvmat","SetComplete_EOD_Specialist\set\data\raciya1_3\raciya1_3_damage.rvmat","SetComplete_EOD_Specialist\set\data\raciya1_4\raciya1_4_damage.rvmat","SetComplete_EOD_Specialist\set\data\radio\radio_damage.rvmat","SetComplete_EOD_Specialist\set\data\radio_holster\radio_holster_damage.rvmat","SetComplete_EOD_Specialist\set\data\radio_pocket\radio_pocket_damage.rvmat","SetComplete_EOD_Specialist\set\data\rope\rope_damage.rvmat","SetComplete_EOD_Specialist\set\data\smoke_granad\smoke_granad_damage.rvmat","SetComplete_EOD_Specialist\set\data\vest\vest_damage.rvmat"}},{0.0,{"SetComplete_EOD_Specialist\set\data\belt\Belt_destruct.rvmat","SetComplete_EOD_Specialist\set\data\belt_granads\Belt_granads_destruct.rvmat","SetComplete_EOD_Specialist\set\data\bundle\bundle_destruct.rvmat","SetComplete_EOD_Specialist\set\data\clips\clips.rvmat","SetComplete_EOD_Specialist\set\data\def_1\def_1_destruct.rvmat","SetComplete_EOD_Specialist\set\data\def_4_neck\def_4_neck_destruct.rvmat","SetComplete_EOD_Specialist\set\data\def_5_ruka\def_5_ruka_destruct.rvmat","SetComplete_EOD_Specialist\set\data\granad\granad_destruct.rvmat","SetComplete_EOD_Specialist\set\data\granade_strap\granade_strap_destruct.rvmat","SetComplete_EOD_Specialist\set\data\helmet_strap\helmet_strap_destruct.rvmat","SetComplete_EOD_Specialist\set\data\knife_holster\knife_holster_destruct.rvmat","SetComplete_EOD_Specialist\set\data\karm2\karm2_destruct.rvmat","SetComplete_EOD_Specialist\set\data\knife\knife_destruct.rvmat","SetComplete_EOD_Specialist\set\data\knife_holster1\knife_holster1_destruct.rvmat","SetComplete_EOD_Specialist\set\data\magazine\magazine_destruct.rvmat","SetComplete_EOD_Specialist\set\data\magazine_pouch1\magazine_pouch1_destruct.rvmat","SetComplete_EOD_Specialist\set\data\magazine_pouch2\magazine_pouch2_destruct.rvmat","SetComplete_EOD_Specialist\set\data\patch_ruka\patch_ruka_destruct.rvmat","SetComplete_EOD_Specialist\set\data\pocket\pocket_destruct.rvmat","SetComplete_EOD_Specialist\set\data\racia_scotch\racia_scotch_destruct.rvmat","SetComplete_EOD_Specialist\set\data\racia_strap\racia_strap_destruct.rvmat","SetComplete_EOD_Specialist\set\data\raciya\raciya_destruct.rvmat","SetComplete_EOD_Specialist\set\data\raciya1_2\raciya1_2_destruct.rvmat","SetComplete_EOD_Specialist\set\data\raciya1_3\raciya1_3_destruct.rvmat","SetComplete_EOD_Specialist\set\data\raciya1_4\raciya1_4_destruct.rvmat","SetComplete_EOD_Specialist\set\data\radio\radio_destruct.rvmat","SetComplete_EOD_Specialist\set\data\radio_holster\radio_holster_destruct.rvmat","SetComplete_EOD_Specialist\set\data\radio_pocket\radio_pocket_destruct.rvmat","SetComplete_EOD_Specialist\set\data\rope\rope_destruct.rvmat","SetComplete_EOD_Specialist\set\data\smoke_granad\smoke_granad_destruct.rvmat","SetComplete_EOD_Specialist\set\data\vest\vest_destruct.rvmat"}}};
 				};
@@ -55,60 +55,60 @@ class cfgVehicles
 				{
 					class Health
 					{
-						damage = 0.3;
+						damage = 0.2;
 					};
 					class Blood
 					{
-						damage = 0.21;
+						damage = 0;
 					};
 					class Shock
 					{
-						damage = 0.3;
+						damage = 0.5;
 					};
 				};
 				class Melee
 				{
 					class Health
 					{
-						damage = 0.21;
+						damage = 0.25;
 					};
 					class Blood
 					{
-						damage = 0.21;
+						damage = 0;
 					};
 					class Shock
 					{
-						damage = 0.21;
+						damage = 0.25;
 					};
 				};
 				class Infected
 				{
 					class Health
 					{
-						damage = 0.21;
+						damage = 0.25;
 					};
 					class Blood
 					{
-						damage = 0.21;
+						damage = 0;
 					};
 					class Shock
 					{
-						damage = 0.21;
+						damage = 0.25;
 					};
 				};
 				class FragGrenade
 				{
 					class Health
 					{
-						damage = 0.21;
+						damage = 0.4;
 					};
 					class Blood
 					{
-						damage = 0.21;
+						damage = 0;
 					};
 					class Shock
 					{
-						damage = 0.21;
+						damage = 0.4;
 					};
 				};
 			};

@@ -159,8 +159,8 @@
   A sweater with light frame plates on the shoulders and forearms. Looks like future tech, wears like regular clothing.
 
 Бронежилет «Экзо»  /  Exo Body Armor
-  Каркасный бронежилет со встроенным рюкзаком и креплениями под шесть магазинов. Боезапас на целый рейд.
-  Frame body armor with a built-in backpack and mounts for six magazines. Enough ammo for a whole raid.
+  Каркасный бронежилет со встроенным рюкзаком, местом под подсумок и креплениями под шесть магазинов. Боезапас на целый рейд.
+  Frame body armor with a built-in backpack, a pouch mount and mounts for six magazines. Enough ammo for a whole raid.
 
 Набедренная система «Экзо»  /  Exo Leg Rig
   Пояс с двойной набедренной разгрузкой: места под две гранаты и два магазина. Всё самое важное на уровне руки.
@@ -315,8 +315,8 @@
   A chest and back protector. With it, falling off a bike is just a nuisance.
 
 Разгрузочный пояс «Райдер»  /  Rider Utility Belt
-  Поясная разгрузка с подсумками. Удобно и в седле, и пешком.
-  A belt rig with pouches. Handy both in the saddle and on foot.
+  Поясная разгрузка с подсумками и кобурой под пистолет. Удобно и в седле, и пешком.
+  A belt rig with pouches and a pistol holster. Handy both in the saddle and on foot.
 
 Мотоштаны «Райдер»  /  Rider Moto Pants
   Мотоштаны с защитой колен. Жёсткое приземление уже не так страшно.

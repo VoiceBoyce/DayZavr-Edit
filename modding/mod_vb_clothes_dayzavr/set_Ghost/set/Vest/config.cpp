@@ -22,9 +22,9 @@ class cfgVehicles
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};
 		quickBarBonus = 2;
-		weight = 3000;
-		itemSize[] = {4,4};
-		varWetMax = 0.05;
+		weight = 7000;
+		itemSize[] = {5,4};
+		varWetMax = 0.249;
 		heatIsolation = 0.5;
 		itemsCargoSize[] = {10,4};
 		repairableWithKits[] = {3,8};
@@ -41,7 +41,7 @@ class cfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 1500;
+					hitpoints = 800;
 					transferToAttachmentsCoef = 0.5;
 					healthLevels[] = {{1.0,{"set_Ghost\set\Vest\data\Vest1.rvmat","set_Ghost\set\Vest\data\Vest2.rvmat","set_Ghost\set\Vest\data\Vest3.rvmat","set_Ghost\set\Vest\data\Vest4.rvmat","set_Ghost\set\Vest\data\vest6.rvmat","set_Ghost\set\Vest\data\vest7.rvmat","set_Ghost\set\Vest\data\Vest10.rvmat","set_Ghost\set\Vest\data\Vest11.rvmat","set_Ghost\set\Vest\data\Vest12.rvmat","set_Ghost\set\Vest\data\Vest13.rvmat","set_Ghost\set\Vest\data\Vest14.rvmat","set_Ghost\set\Vest\data\Vest15.rvmat","set_Ghost\set\Vest\data\Vest16.rvmat","set_Ghost\set\Vest\data\Vest17.rvmat","set_Ghost\set\Vest\data\Vest19.rvmat","set_Ghost\set\Vest\data\Vest20.rvmat","set_Ghost\set\Vest\data\Vest21.rvmat","set_Ghost\set\Vest\data\Vest22.rvmat","set_Ghost\set\Vest\data\Vest23.rvmat","set_Ghost\set\Vest\data\Vest24.rvmat"}},{0.7,{"set_Ghost\set\Vest\data\Vest1.rvmat","set_Ghost\set\Vest\data\Vest2.rvmat","set_Ghost\set\Vest\data\Vest3.rvmat","set_Ghost\set\Vest\data\Vest4.rvmat","set_Ghost\set\Vest\data\vest6.rvmat","set_Ghost\set\Vest\data\vest7.rvmat","set_Ghost\set\Vest\data\Vest10.rvmat","set_Ghost\set\Vest\data\Vest11.rvmat","set_Ghost\set\Vest\data\Vest12.rvmat","set_Ghost\set\Vest\data\Vest13.rvmat","set_Ghost\set\Vest\data\Vest14.rvmat","set_Ghost\set\Vest\data\Vest15.rvmat","set_Ghost\set\Vest\data\Vest16.rvmat","set_Ghost\set\Vest\data\Vest17.rvmat","set_Ghost\set\Vest\data\Vest19.rvmat","set_Ghost\set\Vest\data\Vest20.rvmat","set_Ghost\set\Vest\data\Vest21.rvmat","set_Ghost\set\Vest\data\Vest22.rvmat","set_Ghost\set\Vest\data\Vest23.rvmat","set_Ghost\set\Vest\data\Vest24.rvmat"}},{0.5,{"set_Ghost\set\Vest\data\Vest1_damage.rvmat","set_Ghost\set\Vest\data\Vest2_damage.rvmat","set_Ghost\set\Vest\data\Vest3_damage.rvmat","set_Ghost\set\Vest\data\Vest4_damage.rvmat","set_Ghost\set\Vest\data\vest6_damage.rvmat","set_Ghost\set\Vest\data\vest7_damage.rvmat","set_Ghost\set\Vest\data\Vest10_damage.rvmat","set_Ghost\set\Vest\data\Vest11_damage.rvmat","set_Ghost\set\Vest\data\Vest12_damage.rvmat","set_Ghost\set\Vest\data\Vest13_damage.rvmat","set_Ghost\set\Vest\data\Vest14_damage.rvmat","set_Ghost\set\Vest\data\Vest15_damage.rvmat","set_Ghost\set\Vest\data\Vest16_damage.rvmat","set_Ghost\set\Vest\data\Vest17_damage.rvmat","set_Ghost\set\Vest\data\Vest19_damage.rvmat","set_Ghost\set\Vest\data\Vest20_damage.rvmat","set_Ghost\set\Vest\data\Vest21_damage.rvmat","set_Ghost\set\Vest\data\Vest22_damage.rvmat","set_Ghost\set\Vest\data\Vest23_damage.rvmat","set_Ghost\set\Vest\data\Vest24_damage.rvmat"}},{0.3,{"set_Ghost\set\Vest\data\Vest1_damage.rvmat","set_Ghost\set\Vest\data\Vest2_damage.rvmat","set_Ghost\set\Vest\data\Vest3_damage.rvmat","set_Ghost\set\Vest\data\Vest4_damage.rvmat","set_Ghost\set\Vest\data\vest6_damage.rvmat","set_Ghost\set\Vest\data\vest7_damage.rvmat","set_Ghost\set\Vest\data\Vest10_damage.rvmat","set_Ghost\set\Vest\data\Vest11_damage.rvmat","set_Ghost\set\Vest\data\Vest12_damage.rvmat","set_Ghost\set\Vest\data\Vest13_damage.rvmat","set_Ghost\set\Vest\data\Vest14_damage.rvmat","set_Ghost\set\Vest\data\Vest15_damage.rvmat","set_Ghost\set\Vest\data\Vest16_damage.rvmat","set_Ghost\set\Vest\data\Vest17_damage.rvmat","set_Ghost\set\Vest\data\Vest19_damage.rvmat","set_Ghost\set\Vest\data\Vest20_damage.rvmat","set_Ghost\set\Vest\data\Vest21_damage.rvmat","set_Ghost\set\Vest\data\Vest22_damage.rvmat","set_Ghost\set\Vest\data\Vest23_damage.rvmat","set_Ghost\set\Vest\data\Vest24_damage.rvmat"}},{0.0,{"set_Ghost\set\Vest\data\Vest1_destruct.rvmat","set_Ghost\set\Vest\data\Vest2_destruct.rvmat","set_Ghost\set\Vest\data\Vest3_destruct.rvmat","set_Ghost\set\Vest\data\Vest4_destruct.rvmat","set_Ghost\set\Vest\data\vest6_destruct.rvmat","set_Ghost\set\Vest\data\vest7_destruct.rvmat","set_Ghost\set\Vest\data\Vest10_destruct.rvmat","set_Ghost\set\Vest\data\Vest11_destruct.rvmat","set_Ghost\set\Vest\data\Vest12_destruct.rvmat","set_Ghost\set\Vest\data\Vest13_destruct.rvmat","set_Ghost\set\Vest\data\Vest14_destruct.rvmat","set_Ghost\set\Vest\data\Vest15_destruct.rvmat","set_Ghost\set\Vest\data\Vest16_destruct.rvmat","set_Ghost\set\Vest\data\Vest17_destruct.rvmat","set_Ghost\set\Vest\data\Vest19_destruct.rvmat","set_Ghost\set\Vest\data\Vest20_destruct.rvmat","set_Ghost\set\Vest\data\Vest21_destruct.rvmat","set_Ghost\set\Vest\data\Vest22_destruct.rvmat","set_Ghost\set\Vest\data\Vest23_destruct.rvmat","set_Ghost\set\Vest\data\Vest24_destruct.rvmat"}}};
 				};
@@ -52,7 +52,7 @@ class cfgVehicles
 				{
 					class Health
 					{
-						damage = 0.1;
+						damage = 0.2;
 					};
 					class Blood
 					{
@@ -60,14 +60,14 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0.1;
+						damage = 0.5;
 					};
 				};
 				class Melee
 				{
 					class Health
 					{
-						damage = 0.1;
+						damage = 0.25;
 					};
 					class Blood
 					{
@@ -75,14 +75,14 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0.1;
+						damage = 0.25;
 					};
 				};
 				class Infected
 				{
 					class Health
 					{
-						damage = 0.05;
+						damage = 0.25;
 					};
 					class Blood
 					{
@@ -90,14 +90,14 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0.01;
+						damage = 0.25;
 					};
 				};
 				class FragGrenade
 				{
 					class Health
 					{
-						damage = 0.1;
+						damage = 0.4;
 					};
 					class Blood
 					{
@@ -105,7 +105,7 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0.26;
+						damage = 0.4;
 					};
 				};
 			};

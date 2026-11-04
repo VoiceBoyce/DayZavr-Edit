@@ -16,13 +16,14 @@ class CfgVehicles
 	{
 		displayName = "$STR_VBC_Alpha_Boots";
 		descriptionShort = "$STR_VBC_Alpha_Boots_Desc";
+		quickBarBonus = 0;
 		model = "SetComplete_EOD_Specialist\set\Boots\Boots_g.p3d";
 		inventorySlot[] = {"Feet"};
 		itemInfo[] = {"Clothing","Feet"};
-		itemSize[] = {4,2};
-		weight = 1000;
+		itemSize[] = {3,2};
+		weight = 1300;
 		durability = 0.35;
-		varWetMax = 1.0;
+		varWetMax = 0.249;
 		heatIsolation = 0.8;
 		visibilityModifier = 0.9;
 		repairableWithKits[] = {3};
@@ -41,8 +42,41 @@ class CfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 100;
+					hitpoints = 500;
 					healthLevels[] = {{1.0,{"SetComplete_EOD_Specialist\set\data\boots\Boots.rvmat"}},{0.7,{"SetComplete_EOD_Specialist\set\data\boots\Boots.rvmat"}},{0.5,{"SetComplete_EOD_Specialist\set\data\boots\Boots_damage.rvmat"}},{0.3,{"SetComplete_EOD_Specialist\set\data\boots\Boots_damage.rvmat"}},{0.0,{"SetComplete_EOD_Specialist\set\data\boots\Boots_destruct.rvmat"}}};
+				};
+			};
+			class GlobalArmor
+			{
+				class Melee
+				{
+					class Health
+					{
+						damage = 0.75;
+					};
+					class Blood
+					{
+						damage = 0.75;
+					};
+					class Shock
+					{
+						damage = 0.75;
+					};
+				};
+				class Infected
+				{
+					class Health
+					{
+						damage = 0.75;
+					};
+					class Blood
+					{
+						damage = 0.75;
+					};
+					class Shock
+					{
+						damage = 0.75;
+					};
 				};
 			};
 		};

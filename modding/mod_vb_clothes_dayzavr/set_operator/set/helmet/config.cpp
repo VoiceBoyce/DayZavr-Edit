@@ -22,11 +22,11 @@ class cfgVehicles {
 		vehicleClass = "Clothing";
 		itemInfo[] = {"Clothing", "Helmet"};
 		ragQuantity = 6;
-		quickBarBonus = 2;
-		weight = 310;
-		itemSize[] = {3, 3};
-		varWetMax = 0.05;
-		heatIsolation = 0.5;
+		quickBarBonus = 0;
+		weight = 1500;
+		itemSize[] = {3,3};
+		varWetMax = 0.249;
+		heatIsolation = 0.3;
 		repairableWithKits[] = {3, 8};
 		repairCosts[] = {75.0, 50.0};
 		hiddenSelections[] = {"head1", "head2", "head3", "head4", "head5", "head6", "head7"};
@@ -40,7 +40,7 @@ class cfgVehicles {
 		class DamageSystem {
 			class GlobalHealth {
 				class Health {
-					hitpoints = 500;
+					hitpoints = 400;
 					transferToAttachmentsCoef = 0.5;
 					healthLevels[] = {{1.0, {"\set_operator\set\helmet\data\head1.rvmat", "\set_operator\set\helmet\data\head2.rvmat", "\set_operator\set\helmet\data\head3.rvmat", "\set_operator\set\helmet\data\head4.rvmat", "\set_operator\set\helmet\data\head5.rvmat", "\set_operator\set\helmet\data\head6.rvmat", "\set_operator\set\helmet\data\head7.rvmat"}},
 									 {0.7, {"\set_operator\set\helmet\data\head1.rvmat", "\set_operator\set\helmet\data\head2.rvmat", "\set_operator\set\helmet\data\head3.rvmat", "\set_operator\set\helmet\data\head4.rvmat", "\set_operator\set\helmet\data\head5.rvmat", "\set_operator\set\helmet\data\head6.rvmat", "\set_operator\set\helmet\data\head7.rvmat"}},
@@ -50,60 +50,66 @@ class cfgVehicles {
 				};
 			};
 			
-			class GlobalArmor {
-				class Projectile {
-					class Health {
-						damage = 0.85;
-					};
-					
-					class Blood {
-						damage = 0.8;
-					};
-					
-					class Shock {
-						damage = 0.8;
-					};
-				};
-				
-				class Melee {
-					class Health {
-						damage = 0.85;
-					};
-					
-					class Blood {
-						damage = 0.8;
-					};
-					
-					class Shock {
-						damage = 0.8;
-					};
-				};
-				
-				class Infected {
-					class Health {
-						damage = 0.85;
-					};
-					
-					class Blood {
-						damage = 0.8;
-					};
-					
-					class Shock {
-						damage = 0.8;
-					};
-				};
-				
-				class FragGrenade {
-					class Health {
+			class GlobalArmor
+			{
+				class Projectile
+				{
+					class Health
+					{
 						damage = 0.2;
 					};
-					
-					class Blood {
-						damage = 0.2;
+					class Blood
+					{
+						damage = 0;
 					};
-					
-					class Shock {
-						damage = 0.2;
+					class Shock
+					{
+						damage = 0.5;
+					};
+				};
+				class Melee
+				{
+					class Health
+					{
+						damage = 0.5;
+					};
+					class Blood
+					{
+						damage = 0;
+					};
+					class Shock
+					{
+						damage = 0.4;
+					};
+				};
+				class Infected
+				{
+					class Health
+					{
+						damage = 0.5;
+					};
+					class Blood
+					{
+						damage = 0;
+					};
+					class Shock
+					{
+						damage = 0.5;
+					};
+				};
+				class FragGrenade
+				{
+					class Health
+					{
+						damage = 0.4;
+					};
+					class Blood
+					{
+						damage = 0;
+					};
+					class Shock
+					{
+						damage = 0.4;
 					};
 				};
 			};

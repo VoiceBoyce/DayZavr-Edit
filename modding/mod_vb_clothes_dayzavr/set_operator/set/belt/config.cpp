@@ -21,12 +21,12 @@ class cfgVehicles {
 		simulation = "clothing";
 		inventorySlot[] = {"Hips"};
 		itemInfo[] = {"Clothing", "Hips"};
-		itemSize[] = {5, 5};
-		itemsCargoSize[] = {10, 4};
-		quickBarBonus = 2;
-		varWetMax = 0.049;
-		heatIsolation = 0.5;
-		weight = 550;
+		itemSize[] = {3,2};
+		itemsCargoSize[] = {10,3};
+		quickBarBonus = 1;
+		varWetMax = 0.249;
+		heatIsolation = 0;
+		weight = 800;
 		repairableWithKits[] = {5, 3};
 		repairCosts[] = {30.0, 25.0};
 		hiddenSelections[] = {"belt", "belt2", "belt3", "belt4"};
@@ -47,70 +47,9 @@ class cfgVehicles {
 									{0, {"\set_operator\set\belt\data\belt_destruct.rvmat", "\set_operator\set\belt\data\belt2_destruct.rvmat", "\set_operator\set\belt\data\belt3_destruct.rvmat", "\set_operator\set\belt\data\belt4_destruct.rvmat"}}};
 				};
 			};
-			
-			class GlobalArmor {
-				class Projectile {
-					class Health {
-						damage = 0.75;
-					};
-					
-					class Blood {
-						damage = 0.6;
-					};
-					
-					class Shock {
-						damage = 0.75;
-					};
-				};
-				
-				class Melee {
-					class Health {
-						damage = 0.75;
-					};
-					
-					class Blood {
-						damage = 0.6;
-					};
-					
-					class Shock {
-						damage = 0.75;
-					};
-				};
-				
-				class Infected {
-					class Health {
-						damage = 0.75;
-					};
-					
-					class Blood {
-						damage = 0.6;
-					};
-					
-					class Shock {
-						damage = 0.75;
-					};
-				};
-				
-				class FragGrenade {
-					class Health {
-						damage = 0.75;
-					};
-					
-					class Blood {
-						damage = 0.6;
-					};
-					
-					class Shock {
-						damage = 0.75;
-					};
-				};
-			};
+
 		};
 		
-		class Protection {
-			biological = 1;
-			chemical = 1;
-		};
 		
 		class AnimEvents {
 			class SoundWeapon {

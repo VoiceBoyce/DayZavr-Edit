@@ -14,15 +14,16 @@ class cfgVehicles {
 		scope = 0;
 		displayName = "$STR_VBC_Demon_Gloves";
 		descriptionShort = "$STR_VBC_Demon_Gloves_Desc";
+		quickBarBonus = 0;
 		model = "\set_demon\set\gloves\model\gloves_g.p3d";
 		inventorySlot[] = {"Gloves"};
 		simulation = "clothing";
 		itemInfo[] = {"Clothing", "Gloves"};
 		rotationFlags = 34;
-		weight = 454;
-		itemSize[] = {2, 2};
-		varWetMax = 0.049;
-		heatIsolation = 1;
+		weight = 400;
+		itemSize[] = {2,2};
+		varWetMax = 0.249;
+		heatIsolation = 0.7;
 		repairableWithKits[] = {5, 2};
 		repairCosts[] = {30, 25};
 		hiddenSelections[] = {"camo", "personality"};
@@ -35,7 +36,7 @@ class cfgVehicles {
 		class DamageSystem {
 			class GlobalHealth {
 				class Health {
-					hitpoints = 500;
+					hitpoints = 400;
 					healthLevels[] = {{1.0, {"\set_demon\set\gloves\data\Gloves.rvmat"}},
 									 {0.7, {"\set_demon\set\gloves\data\Gloves.rvmat"}},
 									 {0.5, {"\set_demon\set\gloves\data\Gloves_damage.rvmat"}},
@@ -44,60 +45,36 @@ class cfgVehicles {
 				};
 			};
 			
-			class GlobalArmor {
-				class Projectile {
-					class Health {
-						damage = 0.85;
+			class GlobalArmor
+			{
+				class Melee
+				{
+					class Health
+					{
+						damage = 0.75;
 					};
-					
-					class Blood {
-						damage = 0.8;
+					class Blood
+					{
+						damage = 0.75;
 					};
-					
-					class Shock {
-						damage = 0.8;
-					};
-				};
-				
-				class Melee {
-					class Health {
-						damage = 0.85;
-					};
-					
-					class Blood {
-						damage = 0.8;
-					};
-					
-					class Shock {
-						damage = 0.8;
+					class Shock
+					{
+						damage = 0.75;
 					};
 				};
-				
-				class Infected {
-					class Health {
-						damage = 0.85;
+				class Infected
+				{
+					class Health
+					{
+						damage = 0.75;
 					};
-					
-					class Blood {
-						damage = 0.8;
+					class Blood
+					{
+						damage = 0.75;
 					};
-					
-					class Shock {
-						damage = 0.8;
-					};
-				};
-				
-				class FragGrenade {
-					class Health {
-						damage = 0.2;
-					};
-					
-					class Blood {
-						damage = 0.2;
-					};
-					
-					class Shock {
-						damage = 0.2;
+					class Shock
+					{
+						damage = 0.75;
 					};
 				};
 			};

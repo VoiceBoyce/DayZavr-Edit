@@ -1,314 +1,316 @@
-========================set_cod2========================
+Защита = % снижения урона здоровью: пуля / ближний бой / заражённые / осколки (100 = полная защита, - = нет).
+Слоты = карго вещи. Навешенный подсумок добавляет своё карго.
+
+========================set_cod2========================  Король
 Маска
-Vp_Set6_Mask_Black
-Vp_Set6_Mask_Silver
-Vp_Set6_Mask_Silver_Away
+Vp_Set6_Mask_Black // без слотов, без брони
+Vp_Set6_Mask_Silver // без слотов, без брони
+Vp_Set6_Mask_Silver_Away // без слотов, без брони
 
 Верх
-Vp_Set6_top_Black
-Vp_Set6_top_Silver
-Vp_Set6_top_silver_Away
+Vp_Set6_top_Black // 60 слотов, защита 15/25/25/15
+Vp_Set6_top_Silver // 60 слотов, защита 15/25/25/15
+Vp_Set6_top_silver_Away // 60 слотов, защита 15/25/25/15
 
 Жилет
-Vp_Set6_Vest_black
+Vp_Set6_Vest_black // 40 слотов, защита 80/75/75/60
 
 Жилет 2
-Vp_Set6_vest2_Silver
-Vp_Set6_vest2_Silver_Away
+Vp_Set6_vest2_Silver // 40 слотов, защита 80/75/75/60
+Vp_Set6_vest2_Silver_Away // 40 слотов, защита 80/75/75/60
 
 Пояс
-Belt_SET6_Black
-Belt_SET6_Silver
-Belt_SET6_Silver_Away
+Belt_SET6_Black // 30 слотов, без брони
+Belt_SET6_Silver // 30 слотов, без брони
+Belt_SET6_Silver_Away // 30 слотов, без брони
 
 Штаны
-Vp_Set6_Pants_Black
-Vp_Set6_Pants_Silver
-Vp_Set6_Pants_Silver_Away
+Vp_Set6_Pants_Black // 50 слотов, защита 15/25/25/15
+Vp_Set6_Pants_Silver // 50 слотов, защита 15/25/25/15
+Vp_Set6_Pants_Silver_Away // 50 слотов, защита 15/25/25/15
 
 Обувь
-VP_Set6_Shoes_Away
-VP_Set6_Shoes_Black
-VP_Set6_Shoes_Silver
+VP_Set6_Shoes_Away // без слотов, защита -/25/25/-
+VP_Set6_Shoes_Black // без слотов, защита -/25/25/-
+VP_Set6_Shoes_Silver // без слотов, защита -/25/25/-
 
 
-========================set_demon========================
+========================set_demon========================  Демон
 Кепка
-Vp_Set22_CAP_Red
+Vp_Set22_CAP_Red // без слотов, защита -/15/15/-
 
 Маска
-Vp_Set22_Mask_Red
+Vp_Set22_Mask_Red // без слотов, без брони
 
 Верх
-Vp_SET22_Top_Red
+Vp_SET22_Top_Red // 60 слотов, защита 15/25/25/15
 
 Жилет
-Vp_SET22_Vest_Red
+Vp_SET22_Vest_Red // 40 слотов, защита 80/75/75/60
 
 Штаны
-Vp_SET22_Pants_Red
+Vp_SET22_Pants_Red // 50 слотов, защита 15/25/25/15
 
 Перчатки
-Vp_SET22_Gloves_Red
+Vp_SET22_Gloves_Red // без слотов, защита -/25/25/-
 
 Обувь
-VP_SET22_Shoes_Red
+VP_SET22_Shoes_Red // без слотов, защита -/25/25/-
 
 
-========================set_Elegant========================
+========================set_Elegant========================  Мориарти
 Маска
-Vp_Set15_Mask_Black
+Vp_Set15_Mask_Black // без слотов, без брони
 
 Верх
-Vp_SET15_Top_Black
+Vp_SET15_Top_Black // 60 слотов, защита 15/25/25/15
 
 Жилет
-Vp_SET15_Vest_Black
+Vp_SET15_Vest_Black // 40 слотов, защита 80/75/75/60, навесы: пистолет
 
 Пояс
-VP_SET15_Belt_Black
+VP_SET15_Belt_Black // 30 слотов, без брони
 
 Штаны
-Vp_SET15_Pants_Black
+Vp_SET15_Pants_Black // 50 слотов, защита 15/25/25/15
 
 Перчатки
-Vp_SET15_Gloves_Black
+Vp_SET15_Gloves_Black // без слотов, защита -/25/25/-
 
 Обувь
-VP_SET15_Shoes_Black
+VP_SET15_Shoes_Black // без слотов, защита -/25/25/-
 
 
-========================set_Ghost========================
+========================set_Ghost========================  Призрак
 Шлем
-Vp_Set14_Helmet
+Vp_Set14_Helmet // без слотов, защита 80/50/50/60, навесы: ПНВ
 
 Верх
-Vp_SET14_Top_Black
+Vp_SET14_Top_Black // 60 слотов, защита 15/25/25/15
 
 Жилет
-Vp_SET14_Vest_Black
+Vp_SET14_Vest_Black // 40 слотов, защита 80/75/75/60, навесы: магазины ×2
 
 Штаны
-Vp_SET14_Pants_Black
+Vp_SET14_Pants_Black // 50 слотов, защита 15/25/25/15
 
 Перчатки
-VP_SET14_Gloves_Black
+VP_SET14_Gloves_Black // без слотов, защита -/25/25/-
 
 Обувь
-VP_SET14_Boots_Black
+VP_SET14_Boots_Black // без слотов, защита -/25/25/-
 
 
-========================set_heavy========================
+========================set_heavy========================  Штурмовик
 Шлем
-Vp_Set16_Helmet_Black
+Vp_Set16_Helmet_Black // без слотов, защита 80/50/50/60, навесы: ПНВ, фонарь
 
 Верх
-Vp_SET16_Top_Black
+Vp_SET16_Top_Black // 60 слотов, защита 15/25/25/15
 
 Жилет
-Vp_SET16_Vest_Black
+Vp_SET16_Vest_Black // 40 слотов, защита 80/75/75/60
 
 Штаны
-Vp_SET16_Pants_Black
+Vp_SET16_Pants_Black // 50 слотов, защита 15/25/25/15
 
 Перчатки
-Vp_SET16_Gloves_Black
+Vp_SET16_Gloves_Black // без слотов, защита -/25/25/-
 
 Обувь
-VP_SET16_Boots_Black
+VP_SET16_Boots_Black // без слотов, защита -/25/25/-
 
 
-========================set_Incite========================
+========================set_Incite========================  Экзо
 Шлем
-Vp_Set17_Helmet_Black
+Vp_Set17_Helmet_Black // без слотов, защита 80/50/50/60
 
 Верх
-Vp_SET17_Top_Black
+Vp_SET17_Top_Black // 60 слотов, защита 15/25/25/15
 
 Жилет
-Vp_SET17_Vest_Black
+Vp_SET17_Vest_Black // 40 слотов, защита 80/75/75/60, навесы: подсумок, магазины ×6
 
 Пояс
-VP_SET17_Belt_Black
+VP_SET17_Belt_Black // 30 слотов, без брони, навесы: магазины ×2, гранаты ×2
 
 Штаны
-Vp_SET17_Pants_Black
+Vp_SET17_Pants_Black // 50 слотов, защита 15/25/25/15
 
 Перчатки
-Vp_SET17_Gloves_Black
+Vp_SET17_Gloves_Black // без слотов, защита -/25/25/-
 
 Обувь
-VP_SET17_Boots_Black
+VP_SET17_Boots_Black // без слотов, защита -/25/25/-
 
 
-========================set_legion========================
+========================set_legion========================  Легион
 Шлем
-Vp_SET20_Helmet
-Vp_SET20_Helmet_No_Tail
+Vp_SET20_Helmet // без слотов, защита 80/50/50/60, навесы: ПНВ
+Vp_SET20_Helmet_No_Tail // без слотов, защита 80/50/50/60, навесы: ПНВ
 
 Маска
-Vp_SET20_Mask
+Vp_SET20_Mask // без слотов, без брони
 
 Верх
-Vp_SET20_Top
+Vp_SET20_Top // 60 слотов, защита 15/25/25/15
 
 Жилет
-Vp_SET20_Vest
+Vp_SET20_Vest // 40 слотов, защита 80/75/75/60
 
 Штаны
-Vp_SET20_Pants
+Vp_SET20_Pants // 50 слотов, защита 15/25/25/15
 
 Перчатки
-Vp_SET20_Gloves
+Vp_SET20_Gloves // без слотов, защита -/25/25/-
 
 Обувь
-VP_SET20_Shoes
+VP_SET20_Shoes // без слотов, защита -/25/25/-
 
 
-========================set_military========================
+========================set_military========================  Спецназ
 Кепка
-Vp_SET19_cap_Black
-Vp_SET19_cap_Black_Pink
-Vp_SET19_cap_Black_Pixel
-Vp_SET19_cap_Desert
+Vp_SET19_cap_Black // без слотов, защита -/15/15/-
+Vp_SET19_cap_Black_Pink // без слотов, защита -/15/15/-
+Vp_SET19_cap_Black_Pixel // без слотов, защита -/15/15/-
+Vp_SET19_cap_Desert // без слотов, защита -/15/15/-
 
 Маска
-Vp_Set19_Mask_Black
-Vp_Set19_Mask_Black_Pink
-Vp_Set19_Mask_Black_Pixel
-Vp_Set19_Mask_Desert
+Vp_Set19_Mask_Black // без слотов, без брони
+Vp_Set19_Mask_Black_Pink // без слотов, без брони
+Vp_Set19_Mask_Black_Pixel // без слотов, без брони
+Vp_Set19_Mask_Desert // без слотов, без брони
 
 Верх
-Vp_SET19_Top_Black
-Vp_SET19_Top_Black_Pink
-Vp_SET19_Top_Black_Pixel
-Vp_SET19_Top_Desert
+Vp_SET19_Top_Black // 60 слотов, защита 15/25/25/15
+Vp_SET19_Top_Black_Pink // 60 слотов, защита 15/25/25/15
+Vp_SET19_Top_Black_Pixel // 60 слотов, защита 15/25/25/15
+Vp_SET19_Top_Desert // 60 слотов, защита 15/25/25/15
 
 Жилет
-Vp_SET19_Vest_Black
-Vp_SET19_Vest_Black_Pink
-Vp_SET19_Vest_Black_Pixel
-Vp_SET19_Vest_Desert
+Vp_SET19_Vest_Black // 40 слотов, защита 80/75/75/60
+Vp_SET19_Vest_Black_Pink // 40 слотов, защита 80/75/75/60
+Vp_SET19_Vest_Black_Pixel // 40 слотов, защита 80/75/75/60
+Vp_SET19_Vest_Desert // 40 слотов, защита 80/75/75/60
 
 Штаны
-Vp_SET19_Pants_Black
-Vp_SET19_Pants_Black_Pink
-Vp_SET19_Pants_Black_Pixel
-Vp_SET19_Pants_Desert
+Vp_SET19_Pants_Black // 50 слотов, защита 15/25/25/15
+Vp_SET19_Pants_Black_Pink // 50 слотов, защита 15/25/25/15
+Vp_SET19_Pants_Black_Pixel // 50 слотов, защита 15/25/25/15
+Vp_SET19_Pants_Desert // 50 слотов, защита 15/25/25/15
 
 Перчатки
-Vp_SET19_Gloves_Black
-Vp_SET19_Gloves_Black_Pink
-Vp_SET19_Gloves_Black_Pixel
-Vp_SET19_Gloves_Desert
+Vp_SET19_Gloves_Black // без слотов, защита -/25/25/-
+Vp_SET19_Gloves_Black_Pink // без слотов, защита -/25/25/-
+Vp_SET19_Gloves_Black_Pixel // без слотов, защита -/25/25/-
+Vp_SET19_Gloves_Desert // без слотов, защита -/25/25/-
 
 Обувь
-VP_SET19_Boots_Black
-VP_SET19_Boots_Black_Pink
-VP_SET19_Boots_Black_Pixel
-VP_SET19_Boots_Desert
+VP_SET19_Boots_Black // без слотов, защита -/25/25/-
+VP_SET19_Boots_Black_Pink // без слотов, защита -/25/25/-
+VP_SET19_Boots_Black_Pixel // без слотов, защита -/25/25/-
+VP_SET19_Boots_Desert // без слотов, защита -/25/25/-
 
 
-========================Set_Oni========================
+========================Set_Oni========================  Самурай
 Маска
-Vp_SET13_Mask_Black
+Vp_SET13_Mask_Black // без слотов, без брони
 
 Верх
-Vp_SET13_Top_Black
+Vp_SET13_Top_Black // 60 слотов, защита 15/25/25/15
 
 Жилет
-Vp_SET13_Vest_Black
+Vp_SET13_Vest_Black // 40 слотов, защита 80/75/75/60
 
 Пояс
-Vp_SET13_Belt_Black
+Vp_SET13_Belt_Black // 30 слотов, без брони
 
 Штаны
-Vp_SET13_Pants_Black
+Vp_SET13_Pants_Black // 50 слотов, защита 15/25/25/15
 
 Перчатки
-Vp_SET13_Gloves_Black
+Vp_SET13_Gloves_Black // без слотов, защита -/25/25/-
 
 Обувь
-VP_SET13_Shoes_Black
+VP_SET13_Shoes_Black // без слотов, защита -/25/25/-
 
 
-========================set_operator========================
+========================set_operator========================  Оператор
 Шлем
-Vp_Set23_Helmet_Black
+Vp_Set23_Helmet_Black // без слотов, защита 80/50/50/60
 
 Верх
-Vp_SET23_Top_Black
+Vp_SET23_Top_Black // 60 слотов, защита 15/25/25/15
 
 Жилет
-Vp_SET23_Vest_Black
+Vp_SET23_Vest_Black // 40 слотов, защита 80/75/75/60
 
 Пояс
-VP_SET23_Belt_Black
+VP_SET23_Belt_Black // 30 слотов, без брони
 
 Штаны
-Vp_SET23_Pants_Black
+Vp_SET23_Pants_Black // 50 слотов, защита 15/25/25/15
 
 Обувь
-VP_SET23_Shoes_Black
+VP_SET23_Shoes_Black // без слотов, защита -/25/25/-
 
 
-========================set_Rider========================
+========================set_Rider========================  Райдер
 Шлем
-Vp_SET12_MotoHelmet
+Vp_SET12_MotoHelmet // без слотов, защита 80/50/50/60
 
 Верх
-Vp_SET12_Top_Black
+Vp_SET12_Top_Black // 60 слотов, защита 15/25/25/15
 
 Жилет
-Vp_SET12_Vest_Black
+Vp_SET12_Vest_Black // 40 слотов, защита 80/75/75/60
 
 Пояс
-VP_SET12_Belt_Black
+VP_SET12_Belt_Black // 30 слотов, без брони, навесы: пистолет
 
 Штаны
-Vp_SET12_Pants_Black
+Vp_SET12_Pants_Black // 50 слотов, защита 15/25/25/15
 
 Перчатки
-Vp_SET12_Gloves_Black
+Vp_SET12_Gloves_Black // без слотов, защита -/25/25/-
 
 Обувь
-VP_SET12_Shoes_Black
+VP_SET12_Shoes_Black // без слотов, защита -/25/25/-
 
 
-========================SetComplete_EOD_Specialist========================
+========================SetComplete_EOD_Specialist========================  Альфа
 Шлем
-TGK_EOD_Specialist_Helmet_Black
-TGK_EOD_Specialist_Helmet_Green
+TGK_EOD_Specialist_Helmet_Black // без слотов, защита 80/50/50/60
+TGK_EOD_Specialist_Helmet_Green // без слотов, защита 80/50/50/60
 
 Маска
-TGK_EOD_Specialist_Mask_Black
-TGK_EOD_Specialist_Mask_Orange
+TGK_EOD_Specialist_Mask_Black // без слотов, без брони
+TGK_EOD_Specialist_Mask_Orange // без слотов, без брони
 
 Верх
-TGK_EOD_Specialist_Top_Black
-TGK_EOD_Specialist_Top_Green
+TGK_EOD_Specialist_Top_Black // 60 слотов, защита 15/25/25/15
+TGK_EOD_Specialist_Top_Green // 60 слотов, защита 15/25/25/15
 
 Жилет
-TGK_EOD_Specialist_Vest_Black
-TGK_EOD_Specialist_Vest_Green
+TGK_EOD_Specialist_Vest_Black // 40 слотов, защита 80/75/75/60
+TGK_EOD_Specialist_Vest_Green // 40 слотов, защита 80/75/75/60
 
 Пояс
-TGK_EOD_Specialist_Belt_Black
-TGK_EOD_Specialist_Belt_Green
+TGK_EOD_Specialist_Belt_Black // 30 слотов, без брони, навесы: пистолет
+TGK_EOD_Specialist_Belt_Green // 30 слотов, без брони, навесы: пистолет
 
 Штаны
-TGK_EOD_Specialist_Pants_Black
-TGK_EOD_Specialist_Pants_Green
+TGK_EOD_Specialist_Pants_Black // 50 слотов, защита 15/25/25/15
+TGK_EOD_Specialist_Pants_Green // 50 слотов, защита 15/25/25/15
 
 Перчатки
-TGK_EOD_Specialist_Gloves_Black
-TGK_EOD_Specialist_Gloves_Green
+TGK_EOD_Specialist_Gloves_Black // без слотов, защита -/25/25/-
+TGK_EOD_Specialist_Gloves_Green // без слотов, защита -/25/25/-
 
 Обувь
-TGK_EOD_Specialist_Boots
+TGK_EOD_Specialist_Boots // без слотов, защита -/25/25/-
 
 Рюкзак
-TGK_EOD_Specialist_Backpack_Black
-TGK_EOD_Specialist_Backpack_Green
-
+TGK_EOD_Specialist_Backpack_Black // 50 слотов, без брони
+TGK_EOD_Specialist_Backpack_Green // 50 слотов, без брони
 

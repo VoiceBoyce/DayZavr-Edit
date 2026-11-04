@@ -23,11 +23,11 @@ class cfgVehicles
 		vehicleClass = "Clothing";
 		itemInfo[] = {"Clothing","Headgear"};
 		ragQuantity = 6;
-		quickBarBonus = 2;
-		weight = 310;
-		itemSize[] = {4,4};
-		varWetMax = 0.05;
-		heatIsolation = 1;
+		quickBarBonus = 0;
+		weight = 1500;
+		itemSize[] = {3,3};
+		varWetMax = 0.249;
+		heatIsolation = 0.3;
 		repairableWithKits[] = {3,8};
 		repairCosts[] = {25.0};
 		hiddenSelections[] = {"helmet","konektori","nakladki_shlem","trubki","vizor"};
@@ -43,7 +43,7 @@ class cfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 500;
+					hitpoints = 400;
 					transferToAttachmentsCoef = 0.5;
 					healthLevels[] = {{1.0,{"\set_Incite\set\helmet\data\helmet.rvmat","\set_Incite\set\helmet\data\konektori.rvmat","\set_Incite\set\helmet\data\nakladki_shlem.rvmat","\set_Incite\set\helmet\data\trubki.rvmat","\set_Incite\set\helmet\data\vizor.rvmat"}},{0.7,{"\set_Incite\set\helmet\data\helmet.rvmat","\set_Incite\set\helmet\data\konektori.rvmat","\set_Incite\set\helmet\data\nakladki_shlem.rvmat","\set_Incite\set\helmet\data\trubki.rvmat","\set_Incite\set\helmet\data\vizor.rvmat"}},{0.5,{"\set_Incite\set\helmet\data\helmet_damage.rvmat","\set_Incite\set\helmet\data\konektori_damage.rvmat","\set_Incite\set\helmet\data\nakladki_shlem_damage.rvmat","\set_Incite\set\helmet\data\trubki_damage.rvmat","\set_Incite\set\helmet\data\vizor_damage.rvmat"}},{0.3,{"\set_Incite\set\helmet\data\helmet_damage.rvmat","\set_Incite\set\helmet\data\konektori_damage.rvmat","\set_Incite\set\helmet\data\nakladki_shlem_damage.rvmat","\set_Incite\set\helmet\data\trubki_damage.rvmat","\set_Incite\set\helmet\data\vizor_damage.rvmat"}},{0.0,{"\set_Incite\set\helmet\data\helmet_destruct.rvmat","\set_Incite\set\helmet\data\konektori_destruct.rvmat","\set_Incite\set\helmet\data\nakladki_shlem_destruct.rvmat","\set_Incite\set\helmet\data\trubki_destruct.rvmat","\set_Incite\set\helmet\data\vizor_destruct.rvmat"}}};
 				};
@@ -54,7 +54,7 @@ class cfgVehicles
 				{
 					class Health
 					{
-						damage = 0.25;
+						damage = 0.2;
 					};
 					class Blood
 					{
@@ -69,7 +69,7 @@ class cfgVehicles
 				{
 					class Health
 					{
-						damage = 0.55;
+						damage = 0.5;
 					};
 					class Blood
 					{
@@ -77,14 +77,14 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0.5;
+						damage = 0.4;
 					};
 				};
 				class Infected
 				{
 					class Health
 					{
-						damage = 0.55;
+						damage = 0.5;
 					};
 					class Blood
 					{
@@ -99,7 +99,7 @@ class cfgVehicles
 				{
 					class Health
 					{
-						damage = 0.5;
+						damage = 0.4;
 					};
 					class Blood
 					{
@@ -107,7 +107,7 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0.26;
+						damage = 0.4;
 					};
 				};
 			};

@@ -20,11 +20,11 @@ class cfgVehicles {
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing", "Vest"};
 		quickBarBonus = 2;
-		weight = 3000;
-		itemSize[] = {4, 4};
-		varWetMax = 0.05;
+		weight = 7000;
+		itemSize[] = {5,4};
+		varWetMax = 0.249;
 		heatIsolation = 0.5;
-		itemsCargoSize[] = {5, 5};
+		itemsCargoSize[] = {10,4};
 		repairableWithKits[] = {3, 8};
 		repairCosts[] = {75.0, 50.0};
 		hiddenSelections[] = {"vest", "vest2", "vest3", "vest4"};
@@ -37,7 +37,7 @@ class cfgVehicles {
 		class DamageSystem {
 			class GlobalHealth {
 				class Health {
-					hitpoints = 1500;
+					hitpoints = 800;
 					transferToAttachmentsCoef = 0.5;
 					healthLevels[] = {{1.0, {"\set_operator\set\vest\data\vest.rvmat", "\set_operator\set\vest\data\vest2.rvmat", "\set_operator\set\vest\data\vest3.rvmat", "\set_operator\set\vest\data\vest4.rvmat"}},
 									 {0.7, {"\set_operator\set\vest\data\vest.rvmat", "\set_operator\set\vest\data\vest2.rvmat", "\set_operator\set\vest\data\vest3.rvmat", "\set_operator\set\vest\data\vest4.rvmat"}},
@@ -46,69 +46,71 @@ class cfgVehicles {
 									 {0.0, {"\set_operator\set\vest\data\vest_destruct.rvmat", "\set_operator\set\vest\data\vest2_destruct.rvmat", "\set_operator\set\vest\data\vest3_destruct.rvmat", "\set_operator\set\vest\data\vest4_destruct.rvmat"}}};
 				};
 			};
-			class GlobalArmor {
-				class Projectile {
-					class Health {
-						damage = 0.1;
+			class GlobalArmor
+			{
+				class Projectile
+				{
+					class Health
+					{
+						damage = 0.2;
 					};
-					
-					class Blood {
-						damage = 0.1;
+					class Blood
+					{
+						damage = 0;
 					};
-					
-					class Shock {
-						damage = 0.1;
-					};
-				};
-				
-				class Melee {
-					class Health {
-						damage = 0.1;
-					};
-					
-					class Blood {
-						damage = 0.1;
-					};
-					
-					class Shock {
-						damage = 0.1;
+					class Shock
+					{
+						damage = 0.5;
 					};
 				};
-				
-				class Infected {
-					class Health {
-						damage = 0.1;
+				class Melee
+				{
+					class Health
+					{
+						damage = 0.25;
 					};
-					
-					class Blood {
-						damage = 0.1;
+					class Blood
+					{
+						damage = 0;
 					};
-					
-					class Shock {
-						damage = 0.1;
+					class Shock
+					{
+						damage = 0.25;
 					};
 				};
-				
-				class FragGrenade {
-					class Health {
-						damage = 0.1;
+				class Infected
+				{
+					class Health
+					{
+						damage = 0.25;
 					};
-					
-					class Blood {
-						damage = 0.1;
+					class Blood
+					{
+						damage = 0;
 					};
-					
-					class Shock {
-						damage = 0.1;
+					class Shock
+					{
+						damage = 0.25;
+					};
+				};
+				class FragGrenade
+				{
+					class Health
+					{
+						damage = 0.4;
+					};
+					class Blood
+					{
+						damage = 0;
+					};
+					class Shock
+					{
+						damage = 0.4;
 					};
 				};
 			};
 		};
 		
-		class Protection {
-			biological = 1;
-			chemical = 1;
-		};
 		
 		class AnimEvents {
 			class SoundWeapon {

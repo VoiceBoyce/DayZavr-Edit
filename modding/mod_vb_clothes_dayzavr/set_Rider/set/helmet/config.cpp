@@ -24,11 +24,11 @@ class cfgVehicles
 		vehicleClass = "Clothing";
 		itemInfo[] = {"Clothing","Helmet","Mask"};
 		ragQuantity = 6;
-		quickBarBonus = 2;
-		weight = 310;
-		itemSize[] = {4,4};
-		varWetMax = 0.05;
-		heatIsolation = 1;
+		quickBarBonus = 0;
+		weight = 1500;
+		itemSize[] = {3,3};
+		varWetMax = 0.249;
+		heatIsolation = 0.3;
 		repairableWithKits[] = {3,8};
 		repairCosts[] = {25.0};
 		hiddenSelections[] = {"1hole","camo","vizor","vizor2"};
@@ -45,7 +45,7 @@ class cfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 500;
+					hitpoints = 400;
 					transferToAttachmentsCoef = 0.5;
 					healthLevels[] = {{1.0,{"set_Rider\set\helmet\data\Mask.rvmat","set_Rider\set\helmet\data\Helmet.rvmat","set_Rider\set\helmet\data\Vizor.rvmat","set_Rider\set\helmet\data\Vizor2.rvmat"}},{0.7,{"set_Rider\set\helmet\data\Mask.rvmat","set_Rider\set\helmet\data\Helmet.rvmat","set_Rider\set\helmet\data\Vizor.rvmat","set_Rider\set\helmet\data\Vizor2.rvmat"}},{0.5,{"set_Rider\set\helmet\data\Mask_damage.rvmat","set_Rider\set\helmet\data\Helmet_damage.rvmat","set_Rider\set\helmet\data\Vizor_damage.rvmat","set_Rider\set\helmet\data\Vizor2_damage.rvmat"}},{0.3,{"set_Rider\set\helmet\data\Mask_damage.rvmat","set_Rider\set\helmet\data\Helmet_damage.rvmat","set_Rider\set\helmet\data\Vizor_damage.rvmat","set_Rider\set\helmet\data\Vizor2_damage.rvmat"}},{0.0,{"set_Rider\set\helmet\data\Mask_destruct.rvmat","set_Rider\set\helmet\data\Helmet_destruct.rvmat","set_Rider\set\helmet\data\Vizor_destruct.rvmat","set_Rider\set\helmet\data\Vizor2_destruct.rvmat"}}};
 				};
@@ -56,7 +56,7 @@ class cfgVehicles
 				{
 					class Health
 					{
-						damage = 0.5;
+						damage = 0.2;
 					};
 					class Blood
 					{
@@ -64,7 +64,7 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0;
+						damage = 0.5;
 					};
 				};
 				class Melee
@@ -79,7 +79,7 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0;
+						damage = 0.4;
 					};
 				};
 				class Infected
@@ -94,14 +94,14 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0;
+						damage = 0.5;
 					};
 				};
 				class FragGrenade
 				{
 					class Health
 					{
-						damage = 0.5;
+						damage = 0.4;
 					};
 					class Blood
 					{
@@ -109,7 +109,7 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0;
+						damage = 0.4;
 					};
 				};
 			};

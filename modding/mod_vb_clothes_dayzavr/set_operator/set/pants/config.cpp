@@ -19,13 +19,13 @@ class cfgVehicles {
 		attachments[] = {};
 		inventorySlot[] = {"Legs"};
 		itemInfo[] = {"Clothing", "Legs"};
-		quickBarBonus = 2;
-		weight = 310;
+		quickBarBonus = 0;
+		weight = 1200;
 		ragQuantity = 6;
-		itemSize[] = {3, 2};
-		varWetMax = 0.05;
-		heatIsolation = 0.5;
-		itemsCargoSize[] = {10, 4};
+		itemSize[] = {4,3};
+		varWetMax = 0.249;
+		heatIsolation = 0.6;
+		itemsCargoSize[] = {10,5};
 		repairableWithKits[] = {5, 2};
 		repairCosts[] = {75.0, 50.0};
 		hiddenSelections[] = {"pants", "personality"};
@@ -48,60 +48,66 @@ class cfgVehicles {
 				};
 			};
 			
-			class GlobalArmor {
-				class Projectile {
-					class Health {
-						damage = 0.9;
+			class GlobalArmor
+			{
+				class Projectile
+				{
+					class Health
+					{
+						damage = 0.85;
 					};
-					
-					class Blood {
-						damage = 0.9;
+					class Blood
+					{
+						damage = 0.85;
 					};
-					
-					class Shock {
-						damage = 1;
-					};
-				};
-				
-				class Melee {
-					class Health {
-						damage = 0.9;
-					};
-					
-					class Blood {
-						damage = 0.9;
-					};
-					
-					class Shock {
-						damage = 1;
+					class Shock
+					{
+						damage = 0.85;
 					};
 				};
-				
-				class Infected {
-					class Health {
-						damage = 0.9;
+				class Melee
+				{
+					class Health
+					{
+						damage = 0.75;
 					};
-					
-					class Blood {
-						damage = 0.9;
+					class Blood
+					{
+						damage = 0.75;
 					};
-					
-					class Shock {
-						damage = 1;
+					class Shock
+					{
+						damage = 0.75;
 					};
 				};
-				
-				class FragGrenade {
-					class Health {
-						damage = 0.2;
+				class Infected
+				{
+					class Health
+					{
+						damage = 0.75;
 					};
-					
-					class Blood {
-						damage = 0.2;
+					class Blood
+					{
+						damage = 0.75;
 					};
-					
-					class Shock {
-						damage = 0.2;
+					class Shock
+					{
+						damage = 0.75;
+					};
+				};
+				class FragGrenade
+				{
+					class Health
+					{
+						damage = 0.85;
+					};
+					class Blood
+					{
+						damage = 0.85;
+					};
+					class Shock
+					{
+						damage = 0.85;
 					};
 				};
 			};

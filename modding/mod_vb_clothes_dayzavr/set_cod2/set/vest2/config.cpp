@@ -26,14 +26,15 @@ class cfgVehicles
 		scope = 0;
 		displayName = "$STR_VBC_King_Vest2";
 		descriptionShort = "$STR_VBC_King_Vest2_Desc";
+		itemsCargoSize[] = {10,4};
 		model = "set_cod2\set\vest2\model\vest2_g.p3d";
 		attachments[] = {};
 		inventorySlot[] = {"vest"};
 		itemInfo[] = {"Clothing","vest"};
 		quickBarBonus = 2;
-		weight = 6000;
-		itemSize[] = {4,4};
-		varWetMax = 0.05;
+		weight = 7000;
+		itemSize[] = {5,4};
+		varWetMax = 0.249;
 		heatIsolation = 0.5;
 		repairableWithKits[] = {3,8};
 		repairCosts[] = {75.0,50.0};
@@ -49,7 +50,7 @@ class cfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 500;
+					hitpoints = 800;
 					transferToAttachmentsCoef = 0.5;
 					healthLevels[] = {{1.0,{"set_cod2\set\vest2\data\vest2.rvmat","set_cod2\set\vest2\data\plita.rvmat"}},{0.7,{"set_cod2\set\vest2\data\vest2.rvmat","set_cod2\set\vest2\data\plita.rvmat"}},{0.5,{"set_cod2\set\vest2\data\vest2_damage.rvmat","set_cod2\set\vest2\data\plita_damage.rvmat"}},{0.3,{"set_cod2\set\vest2\data\vest2_damage.rvmat","set_cod2\set\vest2\data\plita_damage.rvmat"}},{0.0,{"set_cod2\set\vest2\data\vest2_destruct.rvmat","set_cod2\set\vest2\data\plita_destruct.rvmat"}}};
 				};
@@ -60,7 +61,7 @@ class cfgVehicles
 				{
 					class Health
 					{
-						damage = 0.1;
+						damage = 0.2;
 					};
 					class Blood
 					{
@@ -68,14 +69,14 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0.1;
+						damage = 0.5;
 					};
 				};
 				class Melee
 				{
 					class Health
 					{
-						damage = 0.1;
+						damage = 0.25;
 					};
 					class Blood
 					{
@@ -83,14 +84,14 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0.1;
+						damage = 0.25;
 					};
 				};
 				class Infected
 				{
 					class Health
 					{
-						damage = 0.05;
+						damage = 0.25;
 					};
 					class Blood
 					{
@@ -98,14 +99,14 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0.01;
+						damage = 0.25;
 					};
 				};
 				class FragGrenade
 				{
 					class Health
 					{
-						damage = 0.2;
+						damage = 0.4;
 					};
 					class Blood
 					{
@@ -113,7 +114,7 @@ class cfgVehicles
 					};
 					class Shock
 					{
-						damage = 0.2;
+						damage = 0.4;
 					};
 				};
 			};

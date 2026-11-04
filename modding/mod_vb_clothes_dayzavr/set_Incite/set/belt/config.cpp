@@ -24,12 +24,12 @@ class cfgVehicles
 		simulation = "clothing";
 		inventorySlot[] = {"Hips"};
 		itemInfo[] = {"Clothing","Hips"};
-		itemSize[] = {5,5};
-		itemsCargoSize[] = {10,4};
-		quickBarBonus = 2;
-		varWetMax = 0.049;
-		heatIsolation = 0.5;
-		weight = 550;
+		itemSize[] = {3,2};
+		itemsCargoSize[] = {10,3};
+		quickBarBonus = 1;
+		varWetMax = 0.249;
+		heatIsolation = 0;
+		weight = 800;
 		repairableWithKits[] = {5,3};
 		repairCosts[] = {30.0,25.0};
 		hiddenSelections[] = {"bandage_belt","belt","kobura","magaz_belt","magazi_belt","podkladki_belt","sumka_belt","sumka_belt2","zalypa_belt","zalypa_belt2"};
@@ -46,69 +46,6 @@ class cfgVehicles
 				{
 					hitpoints = 500;
 					healthLevels[] = {{1,{"\set_Incite\set\belt\data\bandage_belt.rvmat","\set_Incite\set\belt\data\belt.rvmat","\set_Incite\set\belt\data\kobura.rvmat","\set_Incite\set\belt\data\magaz_belt.rvmat","\set_Incite\set\belt\data\magazi_belt.rvmat","\set_Incite\set\belt\data\podkladki_belt.rvmat","\set_Incite\set\belt\data\sumka_belt.rvmat","\set_Incite\set\belt\data\sumka_belt2.rvmat","\set_Incite\set\belt\data\zalypa_belt.rvmat","\set_Incite\set\belt\data\zalypa_belt2.rvmat"}},{0.7,{"\set_Incite\set\belt\data\bandage_belt.rvmat","\set_Incite\set\belt\data\belt.rvmat","\set_Incite\set\belt\data\kobura.rvmat","\set_Incite\set\belt\data\magaz_belt.rvmat","\set_Incite\set\belt\data\magazi_belt.rvmat","\set_Incite\set\belt\data\podkladki_belt.rvmat","\set_Incite\set\belt\data\sumka_belt.rvmat","\set_Incite\set\belt\data\sumka_belt2.rvmat","\set_Incite\set\belt\data\zalypa_belt.rvmat","\set_Incite\set\belt\data\zalypa_belt2.rvmat"}},{0.5,{"\set_Incite\set\belt\data\bandage_belt_damage.rvmat","\set_Incite\set\belt\data\belt_damage.rvmat","\set_Incite\set\belt\data\kobura_damage.rvmat","\set_Incite\set\belt\data\magaz_belt_damage.rvmat","\set_Incite\set\belt\data\magazi_belt_damage.rvmat","\set_Incite\set\belt\data\podkladki_belt_damage.rvmat","\set_Incite\set\belt\data\sumka_belt_damage.rvmat","\set_Incite\set\belt\data\sumka_belt2_damage.rvmat","\set_Incite\set\belt\data\zalypa_belt_damage.rvmat","\set_Incite\set\belt\data\zalypa_belt2_damage.rvmat"}},{0.3,{"\set_Incite\set\belt\data\bandage_belt_damage.rvmat","\set_Incite\set\belt\data\belt_damage.rvmat","\set_Incite\set\belt\data\kobura_damage.rvmat","\set_Incite\set\belt\data\magaz_belt_damage.rvmat","\set_Incite\set\belt\data\magazi_belt_damage.rvmat","\set_Incite\set\belt\data\podkladki_belt_damage.rvmat","\set_Incite\set\belt\data\sumka_belt_damage.rvmat","\set_Incite\set\belt\data\sumka_belt2_damage.rvmat","\set_Incite\set\belt\data\zalypa_belt_damage.rvmat","\set_Incite\set\belt\data\zalypa_belt2_damage.rvmat"}},{0,{"\set_Incite\set\belt\data\bandage_belt_destruct.rvmat","\set_Incite\set\belt\data\belt_destruct.rvmat","\set_Incite\set\belt\data\kobura_destruct.rvmat","\set_Incite\set\belt\data\magaz_belt_destruct.rvmat","\set_Incite\set\belt\data\magazi_belt_destruct.rvmat","\set_Incite\set\belt\data\podkladki_belt_destruct.rvmat","\set_Incite\set\belt\data\sumka_belt_destruct.rvmat","\set_Incite\set\belt\data\sumka_belt2_destruct.rvmat","\set_Incite\set\belt\data\zalypa_belt_destruct.rvmat","\set_Incite\set\belt\data\zalypa_belt2_destruct.rvmat"}}};
-				};
-			};
-			class GlobalArmor
-			{
-				class Projectile
-				{
-					class Health
-					{
-						damage = 0.75;
-					};
-					class Blood
-					{
-						damage = 0.6;
-					};
-					class Shock
-					{
-						damage = 0.75;
-					};
-				};
-				class Melee
-				{
-					class Health
-					{
-						damage = 0.75;
-					};
-					class Blood
-					{
-						damage = 0.6;
-					};
-					class Shock
-					{
-						damage = 0.75;
-					};
-				};
-				class Infected
-				{
-					class Health
-					{
-						damage = 0.75;
-					};
-					class Blood
-					{
-						damage = 0.6;
-					};
-					class Shock
-					{
-						damage = 0.75;
-					};
-				};
-				class FragGrenade
-				{
-					class Health
-					{
-						damage = 0.75;
-					};
-					class Blood
-					{
-						damage = 0.6;
-					};
-					class Shock
-					{
-						damage = 0.75;
-					};
 				};
 			};
 		};
