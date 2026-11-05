@@ -1,1 +1,0 @@
-class KOD_Sticker_Base extends Inventory_Base {};
