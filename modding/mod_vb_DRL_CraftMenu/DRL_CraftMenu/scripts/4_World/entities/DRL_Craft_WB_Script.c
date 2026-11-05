@@ -283,8 +283,14 @@ class DRL_Craft_NoteBook extends DRL_Craft_WB
 class DRL_Craft_Microscope extends DRL_Craft_WB
 {
 	override bool CanPutIntoHands (EntityAI parent)
-	{	
+	{
 		return true;
+	}
+
+	// DayZavr: переносной (3×4), можно класть в рюкзак
+	override bool CanPutInCargo (EntityAI parent)
+	{
+		return !IsHologram();
 	}
 };
 
@@ -299,8 +305,14 @@ class DRL_Craft_Microwave extends DRL_Craft_WB
 class DRL_Craft_Sewing extends DRL_Craft_WB
 {
 	override bool CanPutIntoHands (EntityAI parent)
-	{	
+	{
 		return true;
+	}
+
+	// DayZavr: переносная (6×5), можно класть в рюкзак
+	override bool CanPutInCargo (EntityAI parent)
+	{
+		return !IsHologram();
 	}
 };
 

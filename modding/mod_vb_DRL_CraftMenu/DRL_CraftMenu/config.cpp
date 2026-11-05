@@ -589,10 +589,10 @@ class CfgVehicles
 		descriptionShort = "#STR_WB_SCISSORS";
 		model = "DRL_CraftMenu\model\wbp\Details\Sewing_scissors\Sewing_scissors.p3d";
 		inventorySlot[] = {"DRL_CraftPropsScissors"};
-		heavyItem = 1;
-		weight = 10000;
-		itemSize[] = {2,2};
-		itemBehaviour = 0;
+		heavyItem = 0;
+		weight = 300;
+		itemSize[] = {1,3};
+		itemBehaviour = 1;
 		physLayer = "item_large";
 		lootTag[] = {"Work"};
 		class DamageSystem
@@ -630,10 +630,10 @@ class CfgVehicles
 		descriptionShort = "#STR_WB_SPOOL";
 		model = "DRL_CraftMenu\model\wbp\Details\Metalic_thimble\Metalic_thimble.p3d";
 		inventorySlot[] = {"DRL_CraftPropsThimble"};
-		heavyItem = 1;
-		weight = 10000;
-		itemSize[] = {2,2};
-		itemBehaviour = 0;
+		heavyItem = 0;
+		weight = 100;
+		itemSize[] = {1,1};
+		itemBehaviour = 1;
 		physLayer = "item_large";
 		lootTag[] = {"Work"};
 		class DamageSystem
@@ -893,10 +893,10 @@ class CfgVehicles
 		model = "DRL_CraftMenu\model\wbp\Details\Sewing_Table\Sewing_Table.p3d";
 		inventorySlot[] = {"DRL_CraftattachSEWTAB"};
 		attachments[] = {"DRL_CraftattachSEW"};
-		heavyItem = 1;
-		weight = 10000;
-		itemSize[] = {2,2};
-		itemBehaviour = 0;
+		heavyItem = 0;
+		weight = 12000;
+		itemSize[] = {6,5};
+		itemBehaviour = 2;
 		physLayer = "item_large";
 		lootTag[] = {"Work"};
 		class DamageSystem
@@ -934,10 +934,10 @@ class CfgVehicles
 		descriptionShort = "#STR_WB_TOOLS";
 		model = "DRL_CraftMenu\model\wbp\Details\Tools\Tools.p3d";
 		inventorySlot[] = {"DRL_CraftattachT"};
-		heavyItem = 1;
-		weight = 10000;
-		itemSize[] = {2,2};
-		itemBehaviour = 0;
+		heavyItem = 0;
+		weight = 4000;
+		itemSize[] = {4,3};
+		itemBehaviour = 2;
 		physLayer = "item_large";
 		lootTag[] = {"Work"};
 		class DamageSystem
@@ -975,10 +975,10 @@ class CfgVehicles
 		descriptionShort = "#STR_WB_DRILL";
 		model = "DRL_CraftMenu\model\wbp\Details\Drill\Drill.p3d";
 		inventorySlot[] = {"DRL_CraftattachDrill"};
-		heavyItem = 1;
-		weight = 10000;
-		itemSize[] = {2,2};
-		itemBehaviour = 0;
+		heavyItem = 0;
+		weight = 2500;
+		itemSize[] = {3,3};
+		itemBehaviour = 1;
 		physLayer = "item_large";
 		lootTag[] = {"Work"};
 		class DamageSystem
@@ -1057,10 +1057,10 @@ class CfgVehicles
 		descriptionShort = "#STR_WB_ANVIL";
 		model = "DRL_CraftMenu\model\wbp\Details\Anvil\Anvil.p3d";
 		inventorySlot[] = {"DRL_Craftattach2"};
-		heavyItem = 1;
+		heavyItem = 0;
 		weight = 10000;
-		itemSize[] = {2,2};
-		itemBehaviour = 0;
+		itemSize[] = {4,3};
+		itemBehaviour = 2;
 		physLayer = "item_large";
 		lootTag[] = {"Work"};
 		class DamageSystem
@@ -1098,10 +1098,10 @@ class CfgVehicles
 		descriptionShort = "#STR_WB_BOX";
 		model = "DRL_CraftMenu\model\wbp\Details\Box\Box.p3d";
 		inventorySlot[] = {"DRL_CraftattachBX"};
-		heavyItem = 1;
-		weight = 10000;
-		itemSize[] = {12,12};
-		itemBehaviour = 0;
+		heavyItem = 0;
+		weight = 1500;
+		itemSize[] = {5,5};
+		itemBehaviour = 2;
 		physLayer = "item_large";
 		lootTag[] = {"Work"};
 		class Cargo
@@ -1186,10 +1186,10 @@ class CfgVehicles
 		descriptionShort = "#STR_WB_VISE";
 		model = "DRL_CraftMenu\model\wbp\Details\Vice\Vice.p3d";
 		inventorySlot[] = {"DRL_Craftattach1"};
-		heavyItem = 1;
-		weight = 10000;
-		itemSize[] = {2,2};
-		itemBehaviour = 0;
+		heavyItem = 0;
+		weight = 5000;
+		itemSize[] = {3,3};
+		itemBehaviour = 1;
 		physLayer = "item_large";
 		lootTag[] = {"Work"};
 		class DamageSystem
@@ -1227,10 +1227,10 @@ class CfgVehicles
 		descriptionShort = "Наковальня";
 		model = "DZ\structures\Furniture\Various\Anvil.p3d";
 		inventorySlot[] = {"DRL_Craftattach2"};
-		heavyItem = 1;
+		heavyItem = 0;
 		weight = 10000;
-		itemSize[] = {2,2};
-		itemBehaviour = 0;
+		itemSize[] = {4,3};
+		itemBehaviour = 2;
 		physLayer = "item_large";
 		lootTag[] = {"Work"};
 		class DamageSystem
@@ -1350,10 +1350,10 @@ class CfgVehicles
 		descriptionShort = "#STR_WB_TRIPOD";
 		model = "DZ\structures\Furniture\School_equipment\lab_bunsen.p3d";
 		inventorySlot[] = {"DRL_Craftattach5"};
-		heavyItem = 1;
-		weight = 10000;
-		itemSize[] = {2,2};
-		itemBehaviour = 0;
+		heavyItem = 0;
+		weight = 1500;
+		itemSize[] = {2,4};
+		itemBehaviour = 1;
 		physLayer = "item_large";
 		lootTag[] = {"Work"};
 		class DamageSystem
@@ -1713,8 +1713,8 @@ class CfgVehicles
 		descriptionShort = "";
 		model = "DRL_CraftMenu\kit\kit_wbc.p3d";
 		rotationFlags = 17;
-		weight = 980;
-		itemSize[] = {1,1};
+		weight = 20000;
+		itemSize[] = {5,5};
 		itemsCargoSize[] = {0,0};
 		canBeDigged = 1;
 		isMeleeWeapon = 1;
@@ -2435,13 +2435,13 @@ class CfgVehicles
 		model = "DRL_CraftMenu\model\wbp\Details\Sewing\Sewing.p3d";
 		inventorySlot[] = {"DRL_CraftattachSEW"};
 		attachments[] = {"DRL_CraftPropsThimble","DRL_CraftPropsScissors"};
-		weight = 10000;
+		weight = 8000;
 		useEntityHierarchy = "true";
 		carveNavmesh = 1;
 		canBeDigged = 0;
-		heavyItem = 1;
-		itemSize[] = {12,12};
-		itemBehaviour = 0;
+		heavyItem = 0;
+		itemSize[] = {6,5};
+		itemBehaviour = 2;
 		repairKitType = 5;
 		physLayer = "item_large";
 		allowOwnedCargoManipulation = 1;
@@ -2594,13 +2594,13 @@ class CfgVehicles
 		model = "DRL_CraftMenu\model\wbp\Details\Microscope\Microscope.p3d";
 		inventorySlot[] = {"DRL_CraftattachMP"};
 		attachments[] = {};
-		weight = 10000;
+		weight = 4000;
 		useEntityHierarchy = "true";
 		carveNavmesh = 1;
 		canBeDigged = 0;
-		heavyItem = 1;
-		itemSize[] = {12,12};
-		itemBehaviour = 0;
+		heavyItem = 0;
+		itemSize[] = {3,4};
+		itemBehaviour = 2;
 		repairKitType = 5;
 		physLayer = "item_large";
 		allowOwnedCargoManipulation = 1;
@@ -2756,8 +2756,8 @@ class CfgVehicles
 		descriptionShort = "#STR_DRL_TRUCK_LIFT_KIT_DESC";
 		model = "DRL_CraftMenu\kit\kit_wbc.p3d";
 		rotationFlags = 17;
-		weight = 15000;
-		itemSize[] = {5,5};
+		weight = 25000;
+		itemSize[] = {8,6};
 		itemsCargoSize[] = {0,0};
 		canBeDigged = 0;
 		isMeleeWeapon = 0;
@@ -2774,10 +2774,10 @@ class CfgVehicles
 		descriptionShort = "#STR_WB_JACK_DESC";
 		model = "DRL_CraftMenu\model\Truck_Lift\Details\Car_jack\Car_jack.p3d";
 		inventorySlot[] = {"DRL_CraftattachJack"};
-		heavyItem = 1;
-		weight = 10000;
+		heavyItem = 0;
+		weight = 6000;
 		itemSize[] = {3,4};
-		itemBehaviour = 0;
+		itemBehaviour = 2;
 		physLayer = "item_large";
 		lootTag[] = {"Work"};
 		hiddenSelections[] = {"camo"};

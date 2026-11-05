@@ -1,0 +1,18 @@
+{
+    "TeleportDelaySec": 2,
+    "MessageTitle": "Телепорт",
+    "Message": "В этой зоне нельзя выходить из игры. Вас перенесло наружу.",
+    "MessageDelaySec": 15,
+    "MessageTimeSec": 10,
+    "Zones": [
+        {
+            "Name": "Бункер (пример)",
+            "Center": [10109.0, 0.0, 9363.0],
+            "Radius": 120.0,
+            "ExitPoints": [
+                { "Position": [1300.0, 0.0, 5700.0] },
+                { "Position": [1320.0, 0.0, 5650.0] }
+            ]
+        }
+    ]
+}
