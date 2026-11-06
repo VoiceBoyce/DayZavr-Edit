@@ -1,0 +1,159 @@
+class SpawnerBubaku extends PluginBase
+{
+
+	//protected static ref SpawnerBubaku Instance;
+	protected ref map<int, ref TIntArray> spawned_instances;
+	protected ref array<BubakTrigger> m_Triggers;
+	
+	/*
+	SpawnerBubaku GetInstance()
+	{
+		if (!Instance)
+        {
+            Instance = this;
+        }
+		return Instance;
+	}
+	
+	static void ClearInstance()
+	{
+		Instance = null;
+	}
+	*/
+	array<BubakTrigger> GetTriggers()
+	{
+		return m_Triggers;
+	}
+	
+	void AddTrigger(BubakTrigger trigger)
+	{
+		m_Triggers.Insert(trigger);
+		SPBLogger.GetInstance().Log( "Added trigger to pool " + m_Triggers.Count() );
+	}
+	
+	void SpawnerBubaku()
+    {
+        
+		BuBuConfig config;
+		FileAttr fileAttr;
+		string fileName;
+		TStringArray fajly;
+		fajly = new TStringArray();
+		FindFileHandle handle = FindFile("$profile:\\SpawnerBubaku\\SpawnerBubakuV2*.json", fileName, fileAttr, 0);
+		fajly.Insert(fileName);
+		//SPBLogger.GetInstance().Log("Filename " + fileName, SPBLogger.LOGLEVEL_CRITICAL);
+		while ( FindNextFile(handle, fileName, fileAttr))
+		{
+			fajly.Insert(fileName);
+			//SPBLogger.GetInstance().Log("Filename " + fileName, SPBLogger.LOGLEVEL_CRITICAL);
+		}
+		fileName = fajly.GetRandomElement();
+		fileName = fajly.GetRandomElement();
+		if (fajly.Count()>1)
+		{
+			SPBLogger.GetInstance().Log("Selected Filename " + fileName, SPBLogger.LOGLEVEL_CRITICAL);
+		}
+		else
+		{
+			fileName = "SpawnerBubakuV2.json";
+		}
+		BubakConfig.UpgradeConfig(fileName, config);
+        GetDayZGame().SetBubakConfig(config);
+		
+		
+		
+		SPBLogger.GetInstance().Log( "SpawnerBubaku started!" );
+		m_Triggers = new array<BubakTrigger>;
+		spawned_instances = new map<int, ref TIntArray>;
+
+		config = GetDayZGame().GetBubakConfig();
+		BubakTrigger trigger;
+		vector mins, maxs;
+		float radius, cylradius, cylheight, spawnradius;
+		for ( int i=0; i < config.BubakLocations.Count(); i++)
+		{
+			string posrot = config.BubakLocations.Get(i).triggerpos;
+			TStringArray loc = new TStringArray;
+			posrot.Split( "|", loc );
+			string pos = loc.Get(0);
+			string rot = loc.Get(1);
+			if (!rot)
+			{
+				pos = config.BubakLocations.Get(i).triggerpos;
+				rot = "0 0 0";
+			}
+			if (pos.Contains(","))
+			{
+				SPBLogger.GetInstance().Log("Trigger position contains commas, thats wrong! Only one space between numbers! Fix yours config according example!!!", SPBLogger.LOGLEVEL_CRITICAL);
+			}
+			else
+			{
+				SPBLogger.GetInstance().Log("Created trigger " + config.BubakLocations.Get(i).name + " at " + pos + " ori: " + rot, SPBLogger.LOGLEVEL_DEBUG);
+			}
+			trigger = BubakTrigger.Cast(GetGame().CreateObject("BubakTrigger", pos.ToVector() ));
+			trigger.SetOrientation(rot.ToVector());
+			
+			mins = config.BubakLocations.Get(i).triggermins.ToVector();
+			maxs = config.BubakLocations.Get(i).triggermaxs.ToVector();
+			radius = config.BubakLocations.Get(i).triggerradius;
+			cylradius = config.BubakLocations.Get(i).triggercylradius;
+			cylheight = config.BubakLocations.Get(i).triggercylheight;
+			if (radius == 0 && cylradius == 0)
+			{
+				trigger.SetExtents(mins, maxs);
+			} else if (radius > 0 && cylradius == 0)
+			{
+				trigger.SetCollisionSphere(radius);
+			} else if (radius ==0 && cylradius > 0) 
+			{
+				trigger.SetCollisionCylinder(cylradius, cylheight);
+			} 
+			
+			trigger.SetTriggerName(config.BubakLocations.Get(i).name);
+			trigger.SetTriggerNotification(config.BubakLocations.Get(i).notification);
+			trigger.SetTriggerNotificationTime(config.BubakLocations.Get(i).notificationtime);
+			trigger.SetSpawnLocations(config.BubakLocations.Get(i).spawnerpos);
+			trigger.SetSpawnRadius(config.BubakLocations.Get(i).spawnradius);
+
+			
+			trigger.SetLastTriggerTime(-1 * config.BubakLocations.Get(i).triggerdelay);
+			trigger.SetTriggerDelay(config.BubakLocations.Get(i).triggerdelay);
+			
+			
+			trigger.SetWorkingHours(config.BubakLocations.Get(i).workinghours);
+			
+			trigger.SetTriggerDependency(config.BubakLocations.Get(i).triggerdependency);
+			
+			
+			trigger.SetBubaci(config.BubakLocations.Get(i).bubakProps.bubaci);
+			trigger.SetBubakNum(config.BubakLocations.Get(i).bubakProps.bubaknum);
+			trigger.SetOnlyFillUpToBubaknum(config.BubakLocations.Get(i).bubakProps.onlyfilluptobubaknum);
+			trigger.SetRandomDamage(config.BubakLocations.Get(i).bubakProps.itemrandomdmg);
+			trigger.SetBubaciInventory(config.BubakLocations.Get(i).bubakProps.bubakinventory);
+			
+			AddTrigger(trigger);
+		}
+		
+	}
+
+	void AddSpawnedInstance(int trigger_id, int bubak_id)
+	{
+		TIntArray spawned_trigger_instances = spawned_instances.Get(trigger_id);
+		if(!spawned_trigger_instances) spawned_trigger_instances = new TIntArray;
+		spawned_trigger_instances.Insert(bubak_id);
+		spawned_instances.Set(trigger_id, spawned_trigger_instances);
+	}
+
+	void RemoveSpawnedInstance(int trigger_id, int bubak_id)
+	{
+		SPBLogger.GetInstance().Log("SpawnerBubaku.RemoveSpawnedInstance(" + trigger_id + ", " + bubak_id + ")");
+		spawned_instances.Get(trigger_id).RemoveItem(bubak_id);
+	}
+
+	TIntArray GetSpawnedInstances(int trigger_id)
+	{
+		if(spawned_instances) return spawned_instances.Get(trigger_id);
+		return NULL;
+	}
+}
+

@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{83A818074CD29AFE}RF_NICKNAMES_CL/GUI/Icons/playerIcon.edds"
+ Author "root"
+ ChangeDate 1517351308
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "playerIcon.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}
