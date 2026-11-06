@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<territory-type>
+    <territory color="3044171427">
+        <zone name="SFP_Tenevnik" smin="0" smax="1" dmin="0" dmax="0" x="7515" z="2602.5" r="250"/>
+        <zone name="SFP_Tenevnik" smin="0" smax="1" dmin="0" dmax="0" x="4525" z="6425" r="250"/>
+        <zone name="SFP_Tenevnik" smin="0" smax="1" dmin="0" dmax="0" x="687.5" z="1150" r="250"/>
+        <zone name="SFP_Tenevnik" smin="0" smax="1" dmin="0" dmax="0" x="2112.5" z="10962.5" r="250"/>
+        <zone name="SFP_Tenevnik" smin="0" smax="1" dmin="0" dmax="0" x="3912.5" z="10250" r="250"/>
+        <zone name="SFP_Tenevnik" smin="0" smax="1" dmin="0" dmax="0" x="9912.5" z="3775" r="250"/>
+        <zone name="SFP_Tenevnik" smin="0" smax="1" dmin="0" dmax="0" x="8875" z="6612.5" r="250"/>
+        <zone name="SFP_Tenevnik" smin="0" smax="1" dmin="0" dmax="0" x="9812.5" z="8375" r="250"/>
+        <zone name="SFP_Tenevnik" smin="0" smax="1" dmin="0" dmax="0" x="375" z="10800" r="250"/>
+        <zone name="SFP_Tenevnik" smin="0" smax="1" dmin="0" dmax="0" x="11812.5" z="962.5" r="250"/>
+        <zone name="SFP_Tenevnik" smin="0" smax="1" dmin="0" dmax="0" x="5062.5" z="2125" r="250"/>
+    </territory>
+    <territory color="3118224579">
+        <zone name="SFP_Shum_female" smin="0" smax="2" dmin="0" dmax="0" x="1056.25" z="11406.3" r="190"/>
+        <zone name="SFP_Shum_female" smin="0" smax="2" dmin="0" dmax="0" x="7631.25" z="10518.8" r="190"/>
+        <zone name="SFP_Shum_female" smin="0" smax="2" dmin="0" dmax="0" x="4058.93" z="6333.93" r="180"/>
+        <zone name="SFP_Shum_female" smin="0" smax="2" dmin="0" dmax="0" x="11951.4" z="6568.06" r="180"/>
+        <zone name="SFP_Shum_female" smin="0" smax="2" dmin="0" dmax="0" x="2912.5" z="1867.19" r="180"/>
+        <zone name="SFP_Shum_female" smin="0" smax="2" dmin="0" dmax="0" x="7750" z="1006.25" r="180"/>
+        <zone name="SFP_Shum_female" smin="0" smax="2" dmin="0" dmax="0" x="7360.71" z="6357.14" r="180"/>
+        <zone name="SFP_Shum_female" smin="0" smax="2" dmin="0" dmax="0" x="8123.44" z="8643.75" r="180"/>
+    </territory>
+    <territory color="2650800128">
+        <zone name="MSFZ_Mutant_Spiderbl" smin="0" smax="30" dmin="0" dmax="0" x="7387.5" z="6312.5" r="350"/>
+        <zone name="MSFZ_Mutant_Spiderbl" smin="0" smax="30" dmin="0" dmax="0" x="8125" z="8662.5" r="350"/>
+    </territory>
+    <territory color="2872415391">
+        <zone name="SFP_Piyavkbl" smin="0" smax="3" dmin="0" dmax="0" x="3670.63" z="11805.6" r="210"/>
+        <zone name="SFP_Piyavkbl" smin="0" smax="3" dmin="0" dmax="0" x="5077.5" z="9747.5" r="210"/>
+        <zone name="SFP_Piyavkbl" smin="0" smax="3" dmin="0" dmax="0" x="9262.5" z="10853.1" r="210"/>
+        <zone name="SFP_Piyavkbl" smin="0" smax="3" dmin="0" dmax="0" x="11604.2" z="9531.25" r="210"/>
+        <zone name="SFP_Piyavkbl" smin="0" smax="3" dmin="0" dmax="0" x="8402.08" z="8452.08" r="210"/>
+        <zone name="SFP_Piyavkbl" smin="0" smax="3" dmin="0" dmax="0" x="897.5" z="5552.5" r="210"/>
+        <zone name="SFP_Piyavkbl" smin="0" smax="3" dmin="0" dmax="0" x="11415" z="4487.5" r="210"/>
+        <zone name="SFP_Piyavkbl" smin="0" smax="3" dmin="0" dmax="0" x="3373.21" z="2103.57" r="210"/>
+        <zone name="SFP_Piyavkbl" smin="0" smax="3" dmin="0" dmax="0" x="11482.1" z="517.857" r="210"/>
+    </territory>
+    <territory color="1788972089">
+        <zone name="SFP_MozgoTrasbl" smin="0" smax="2" dmin="0" dmax="0" x="6049.5" z="4132.5" r="300"/>
+        <zone name="SFP_MozgoTrasbl" smin="0" smax="2" dmin="0" dmax="0" x="1787.5" z="7337.5" r="300"/>
+        <zone name="SFP_MozgoTrasbl" smin="0" smax="2" dmin="0" dmax="0" x="6425" z="11275" r="300"/>
+        <zone name="SFP_MozgoTrasbl" smin="0" smax="2" dmin="0" dmax="0" x="9275" z="10912.5" r="300"/>
+        <zone name="SFP_MozgoTrasbl" smin="0" smax="2" dmin="0" dmax="0" x="3475" z="12025" r="300"/>
+    </territory>
+    <territory color="2840164941">
+        <zone name="SFP_Shipastiybl" smin="0" smax="4" dmin="0" dmax="0" x="4355.42" z="10394.2" r="240"/>
+        <zone name="SFP_Shipastiybl" smin="0" smax="4" dmin="0" dmax="0" x="9575" z="8545.83" r="240"/>
+        <zone name="SFP_Shipastiybl" smin="0" smax="4" dmin="0" dmax="0" x="7648.44" z="5346.88" r="230"/>
+        <zone name="SFP_Shipastiybl" smin="0" smax="4" dmin="0" dmax="0" x="5000" z="2171.88" r="230"/>
+    </territory>
+    <territory color="3314914709">
+        <zone name="SFP_MutaWolf_black" smin="0" smax="2" dmin="0" dmax="0" x="10157.5" z="7595" r="400"/>
+        <zone name="SFP_MutaWolf_black" smin="0" smax="2" dmin="0" dmax="0" x="7787.5" z="7262.5" r="400"/>
+        <zone name="SFP_MutaWolf_black" smin="0" smax="2" dmin="0" dmax="0" x="3800" z="5975" r="400"/>
+        <zone name="SFP_MutaWolf_black" smin="0" smax="2" dmin="0" dmax="0" x="650" z="4000" r="400"/>
+        <zone name="SFP_MutaWolf_black" smin="0" smax="2" dmin="0" dmax="0" x="1912.5" z="3875" r="400"/>
+        <zone name="SFP_MutaWolf_black" smin="0" smax="2" dmin="0" dmax="0" x="1412.5" z="1312.5" r="400"/>
+        <zone name="SFP_MutaWolf_black" smin="0" smax="2" dmin="0" dmax="0" x="2537.5" z="3037.5" r="400"/>
+        <zone name="SFP_MutaWolf_black" smin="0" smax="2" dmin="0" dmax="0" x="4012.5" z="2425" r="400"/>
+        <zone name="SFP_MutaWolf_black" smin="0" smax="2" dmin="0" dmax="0" x="5862.5" z="2762.5" r="400"/>
+        <zone name="SFP_MutaWolf_black" smin="0" smax="2" dmin="0" dmax="0" x="9400" z="2825" r="400"/>
+        <zone name="SFP_MutaWolf_black" smin="0" smax="2" dmin="0" dmax="0" x="12050" z="2900" r="400"/>
+        <zone name="SFP_MutaWolf_black" smin="0" smax="2" dmin="0" dmax="0" x="10450" z="5575" r="400"/>
+        <zone name="SFP_MutaWolf_black" smin="0" smax="2" dmin="0" dmax="0" x="9825" z="4687.5" r="400"/>
+        <zone name="SFP_MutaWolf_black" smin="0" smax="2" dmin="0" dmax="0" x="8712.5" z="1375" r="400"/>
+        <zone name="SFP_MutaWolf_black" smin="0" smax="2" dmin="0" dmax="0" x="5812.5" z="1512.5" r="400"/>
+        <zone name="SFP_MutaWolf_black" smin="0" smax="2" dmin="0" dmax="0" x="2450" z="512.5" r="400"/>
+        <zone name="SFP_MutaWolf_black" smin="0" smax="2" dmin="0" dmax="0" x="3837.5" z="4312.5" r="400"/>
+        <zone name="SFP_MutaWolf_black" smin="0" smax="2" dmin="0" dmax="0" x="7325" z="1575" r="400"/>
+    </territory>
+    <territory color="3244838194">
+        <zone name="SFP_BearZMB" smin="0" smax="2" dmin="0" dmax="0" x="5750" z="5782.5" r="450"/>
+        <zone name="SFP_BearZMB" smin="0" smax="2" dmin="0" dmax="0" x="1062.5" z="4337.5" r="450"/>
+        <zone name="SFP_BearZMB" smin="0" smax="2" dmin="0" dmax="0" x="1275" z="2887.5" r="450"/>
+        <zone name="SFP_BearZMB" smin="0" smax="2" dmin="0" dmax="0" x="3087.5" z="1312.5" r="450"/>
+        <zone name="SFP_BearZMB" smin="0" smax="2" dmin="0" dmax="0" x="6650" z="1125" r="450"/>
+        <zone name="SFP_BearZMB" smin="0" smax="2" dmin="0" dmax="0" x="5762.5" z="2800" r="450"/>
+        <zone name="SFP_BearZMB" smin="0" smax="2" dmin="0" dmax="0" x="4675" z="4237.5" r="450"/>
+        <zone name="SFP_BearZMB" smin="0" smax="2" dmin="0" dmax="0" x="8600" z="2837.5" r="450"/>
+        <zone name="SFP_BearZMB" smin="0" smax="2" dmin="0" dmax="0" x="10300" z="1612.5" r="450"/>
+        <zone name="SFP_BearZMB" smin="0" smax="2" dmin="0" dmax="0" x="11712.5" z="2975" r="450"/>
+        <zone name="SFP_BearZMB" smin="0" smax="2" dmin="0" dmax="0" x="9487.5" z="4162.5" r="450"/>
+        <zone name="SFP_BearZMB" smin="0" smax="2" dmin="0" dmax="0" x="11287.5" z="5500" r="450"/>
+    </territory>
+    <territory color="3232794898">
+        <zone name="MSFZ_Mutant_Zanozbl" smin="0" smax="15" dmin="0" dmax="0" x="1037.5" z="11387.5" r="350"/>
+        <zone name="MSFZ_Mutant_Zanozbl" smin="0" smax="15" dmin="0" dmax="0" x="7625" z="10525" r="350"/>
+        <zone name="MSFZ_Mutant_Zanozbl" smin="0" smax="15" dmin="0" dmax="0" x="4062.5" z="6312.5" r="350"/>
+        <zone name="MSFZ_Mutant_Zanozbl" smin="0" smax="15" dmin="0" dmax="0" x="11950" z="6587.5" r="350"/>
+        <zone name="MSFZ_Mutant_Zanozbl" smin="0" smax="15" dmin="0" dmax="0" x="7750" z="1012.5" r="350"/>
+        <zone name="MSFZ_Mutant_Zanozbl" smin="0" smax="15" dmin="0" dmax="0" x="2900" z="1862.5" r="350"/>
+    </territory>
+    <territory color="2026893056">
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="11275" z="4350" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="11550" z="475" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="7450" z="2725" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="5025" z="2125" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="600" z="2412.5" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="1650" z="3700" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="6162.5" z="3975" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="9062.5" z="4412.5" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="10750" z="6925" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="4712.5" z="5562.5" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="2512.5" z="5562.5" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="687.5" z="5687.5" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="1762.5" z="7175" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="4775" z="7525" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="9112.5" z="11012.5" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="3637.5" z="11762.5" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="4137.5" z="10287.5" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="1537.5" z="9675" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="9825" z="8487.5" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="3312.5" z="2037.5" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="2150" z="10937.5" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="11850" z="900" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="11225" z="2275" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="725" z="1062.5" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="8775" z="6537.5" r="350"/>
+        <zone name="Era_Zombies" smin="0" smax="2" dmin="0" dmax="0" x="4525" z="6512.5" r="350"/>
+    </territory>
+    <territory color="2885712921">
+        <zone name="MSFZ_Mutant_Entbl" smin="0" smax="2" dmin="0" dmax="0" x="9750" z="5137.5" r="400"/>
+        <zone name="MSFZ_Mutant_Entbl" smin="0" smax="2" dmin="0" dmax="0" x="7875" z="4275" r="400"/>
+        <zone name="MSFZ_Mutant_Entbl" smin="0" smax="2" dmin="0" dmax="0" x="3650" z="5525" r="400"/>
+        <zone name="MSFZ_Mutant_Entbl" smin="0" smax="2" dmin="0" dmax="0" x="1637.5" z="4187.5" r="400"/>
+        <zone name="MSFZ_Mutant_Entbl" smin="0" smax="2" dmin="0" dmax="0" x="3800" z="4287.5" r="400"/>
+        <zone name="MSFZ_Mutant_Entbl" smin="0" smax="2" dmin="0" dmax="0" x="2925" z="3400" r="400"/>
+        <zone name="MSFZ_Mutant_Entbl" smin="0" smax="2" dmin="0" dmax="0" x="1437.5" z="2087.5" r="400"/>
+        <zone name="MSFZ_Mutant_Entbl" smin="0" smax="2" dmin="0" dmax="0" x="1762.5" z="900" r="400"/>
+        <zone name="MSFZ_Mutant_Entbl" smin="0" smax="2" dmin="0" dmax="0" x="5800" z="1500" r="400"/>
+        <zone name="MSFZ_Mutant_Entbl" smin="0" smax="2" dmin="0" dmax="0" x="8687.5" z="1500" r="400"/>
+        <zone name="MSFZ_Mutant_Entbl" smin="0" smax="2" dmin="0" dmax="0" x="9487.5" z="2500" r="400"/>
+        <zone name="MSFZ_Mutant_Entbl" smin="0" smax="2" dmin="0" dmax="0" x="12325" z="3050" r="400"/>
+        <zone name="MSFZ_Mutant_Entbl" smin="0" smax="2" dmin="0" dmax="0" x="4175" z="600" r="400"/>
+    </territory>
+    <territory color="3397331247">
+        <zone name="SFP_Trupojor" smin="0" smax="3" dmin="0" dmax="0" x="12262.5" z="4495" r="240"/>
+        <zone name="SFP_Trupojor" smin="0" smax="3" dmin="0" dmax="0" x="1012.5" z="5062.5" r="240"/>
+        <zone name="SFP_Trupojor" smin="0" smax="3" dmin="0" dmax="0" x="8287.5" z="5075" r="240"/>
+        <zone name="SFP_Trupojor" smin="0" smax="3" dmin="0" dmax="0" x="10487.5" z="5962.5" r="240"/>
+        <zone name="SFP_Trupojor" smin="0" smax="3" dmin="0" dmax="0" x="12237.5" z="7787.5" r="240"/>
+        <zone name="SFP_Trupojor" smin="0" smax="3" dmin="0" dmax="0" x="6337.5" z="8900" r="240"/>
+        <zone name="SFP_Trupojor" smin="0" smax="3" dmin="0" dmax="0" x="2250" z="1375" r="240"/>
+        <zone name="SFP_Trupojor" smin="0" smax="3" dmin="0" dmax="0" x="4362.5" z="2975" r="240"/>
+        <zone name="SFP_Trupojor" smin="0" smax="3" dmin="0" dmax="0" x="7000" z="3362.5" r="240"/>
+        <zone name="SFP_Trupojor" smin="0" smax="3" dmin="0" dmax="0" x="650" z="8200" r="240"/>
+        <zone name="SFP_Trupojor" smin="0" smax="3" dmin="0" dmax="0" x="3000" z="11862.5" r="240"/>
+    </territory>
+    <territory color="3777965919">
+        <zone name="Ricar" smin="0" smax="4" dmin="0" dmax="0" x="11950" z="6587.5" r="250"/>
+        <zone name="Ricar" smin="0" smax="4" dmin="0" dmax="0" x="1037.5" z="11412.5" r="250"/>
+    </territory>
+</territory-type>
