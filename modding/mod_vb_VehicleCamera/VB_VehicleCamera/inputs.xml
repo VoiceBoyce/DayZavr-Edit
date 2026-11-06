@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<modded_inputs>
+	<inputs>
+		<actions>
+			<input name="UAVBCamMenu" loc="STR_VB_VC_INPUT_MENU"/>
+			<input name="UAVBCamLookBack" loc="STR_VB_VC_INPUT_LOOKBACK"/>
+		</actions>
+		<sorting name="vb_vehicle_camera" loc="STR_VB_VC_INPUT_GROUP">
+			<input name="UAVBCamMenu"/>
+			<input name="UAVBCamLookBack"/>
+		</sorting>
+	</inputs>
+	<preset>
+		<input name="UAVBCamMenu">
+			<btn name="kLMenu">
+				<btn name="kV"/>
+			</btn>
+		</input>
+		<input name="UAVBCamLookBack">
+			<btn name="kC"/>
+		</input>
+	</preset>
+</modded_inputs>
