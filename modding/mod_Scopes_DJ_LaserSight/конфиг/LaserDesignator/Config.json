@@ -1,0 +1,62 @@
+{
+    "WorkNonRaised": 0,
+    "ScreenCenterMode": 1,
+    "LaserSettings": [
+        {
+            "classname": "Ri_Laser_Anpeq2",
+            "alpha": 1.0,
+            "red": 0.6422250866889954,
+            "green": 0.6782365441322327,
+            "blue": 0.25540685653686526,
+            "dotptc": "W"
+        },
+        {
+            "classname": "Ri_Laser_Surefire_x400",
+            "alpha": 1.0,
+            "red": 0.45350050926208498,
+            "green": 0.9087100625038147,
+            "blue": 0.9637649059295654,
+            "dotptc": "G"
+        },
+        {
+            "classname": "Ri_Laser_GL21",
+            "alpha": 1.0,
+            "red": 0.6226323843002319,
+            "green": 0.8106245398521423,
+            "blue": 0.828874409198761,
+            "dotptc": "B"
+        },
+        {
+            "classname": "Ri_Laser_Perst3",
+            "alpha": 1.0,
+            "red": 0.25278228521347048,
+            "green": 0.801591157913208,
+            "blue": 0.9168278574943543,
+            "dotptc": "R"
+        },
+        {
+            "classname": "Ri_Laser_Ncstar",
+            "alpha": 1.0,
+            "red": 0.1775854229927063,
+            "green": 0.2717646062374115,
+            "blue": 0.8838682174682617,
+            "dotptc": "B"
+        },
+        {
+            "classname": "Ri_Laser_dbEbal",
+            "alpha": 1.0,
+            "red": 0.6830279231071472,
+            "green": 0.543437659740448,
+            "blue": 0.7226100564002991,
+            "dotptc": "R"
+        },
+        {
+            "classname": "Ri_Laser_Anpeq15",
+            "alpha": 1.0,
+            "red": 0.4732763171195984,
+            "green": 0.09814654290676117,
+            "blue": 0.7055503726005554,
+            "dotptc": "R"
+        }
+    ]
+}

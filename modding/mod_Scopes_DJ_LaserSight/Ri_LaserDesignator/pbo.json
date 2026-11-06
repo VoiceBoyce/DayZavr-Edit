@@ -1,0 +1,19 @@
+{
+    "compress": {
+        "exclude": [
+        ],
+        "include": [
+            "\\.c$",
+            "\\.xml$",
+            "\\.csv$",
+            "\\.rvmat$",
+            "\\.ptc$"
+        ]
+    },
+    "headers": [
+        {
+            "name": "prefix",
+            "value": "Ri_LaserDesignator"
+        }
+    ]
+}

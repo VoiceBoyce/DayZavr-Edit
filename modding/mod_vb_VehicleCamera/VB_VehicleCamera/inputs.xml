@@ -4,10 +4,12 @@
 		<actions>
 			<input name="UAVBCamMenu" loc="STR_VB_VC_INPUT_MENU"/>
 			<input name="UAVBCamLookBack" loc="STR_VB_VC_INPUT_LOOKBACK"/>
+			<input name="UAVBCamAutoCenter" loc="STR_VB_VC_INPUT_AUTOCENTER"/>
 		</actions>
 		<sorting name="vb_vehicle_camera" loc="STR_VB_VC_INPUT_GROUP">
 			<input name="UAVBCamMenu"/>
 			<input name="UAVBCamLookBack"/>
+			<input name="UAVBCamAutoCenter"/>
 		</sorting>
 	</inputs>
 	<preset>
@@ -18,6 +20,11 @@
 		</input>
 		<input name="UAVBCamLookBack">
 			<btn name="kC"/>
+		</input>
+		<input name="UAVBCamAutoCenter">
+			<btn name="kLMenu">
+				<btn name="kB"/>
+			</btn>
 		</input>
 	</preset>
 </modded_inputs>

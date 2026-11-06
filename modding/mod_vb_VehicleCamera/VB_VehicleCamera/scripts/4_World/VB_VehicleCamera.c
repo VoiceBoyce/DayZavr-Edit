@@ -1,7 +1,7 @@
 // Камера транспорта от 3-го лица в стиле GTA: обзор 360° без Alt, возврат за корму на ходу,
-// кочки не передаются в картинку. Камера от 1-го лица не меняется.
-// Ванильный OnUpdate выполняется как обычно (FOV, ПНВ, служебная часть базового класса),
-// а поворот, точка привязки и расстояние перезаписываются в его результате.
+// наклоны машины на кочках не вращают камеру. Камера от 1-го лица не меняется.
+// Ванильный OnUpdate выполняется как обычно (FOV, ПНВ, положение, служебная часть базового класса),
+// а поворот и расстояние перезаписываются в его результате.
 // В режиме «Ванильная» к результату добавляется только дальность игрока.
 
 // Настройки игрока: $profile:VB_Mods/VB_VehicleCamera/settings.json на клиенте.
@@ -9,11 +9,13 @@ class VB_VehicleCameraSeat
 {
 	int Mode;			// VB_VehicleCameraStore.MODE_*
 	float Distance;		// насколько отдалить от ванильного расстояния, метры
+	bool AutoCenter;	// свободная камера возвращается за корму на ходу
 
 	void VB_VehicleCameraSeat()
 	{
 		Mode = VB_VehicleCameraStore.MODE_VANILLA;
 		Distance = 0;
+		AutoCenter = false;
 	}
 
 	void Sanitize()
@@ -135,7 +137,7 @@ class VB_VehicleCameraRig
 	protected static const float PITCH_MAX = 10.0;			// вверх: как ванильный UP_ANGLE_CAP
 	protected static const float PITCH_DEFAULT = -6.0;		// куда наклон камеры возвращается на ходу
 
-	protected static const float RECENTER_DELAY = 1.5;		// сколько секунд без мыши до возврата за корму
+	protected static const float RECENTER_DELAY = 4.0;		// сколько секунд без мыши до возврата за корму
 	protected static const float RECENTER_SPEED = 2.0;		// м/с вперёд, ниже камера не возвращается
 	protected static const float RECENTER_SMOOTH_YAW = 0.35;
 	protected static const float RECENTER_SMOOTH_PITCH = 1.2;
@@ -147,9 +149,6 @@ class VB_VehicleCameraRig
 	protected static const float SLOPE_FOLLOW = 0.5;		// какая доля уклона машины идёт в камеру
 	protected static const float SLOPE_LIMIT = 20.0;		// градусы
 	protected static const float SLOPE_SMOOTH = 0.8;		// большое сглаживание: уклон да, кочки нет
-
-	protected static const float BUMP_SMOOTH = 0.12;		// сглаживание высоты точки привязки
-	protected static const float BUMP_LIMIT = 0.5;			// на сколько метров она может отстать от машины
 
 	protected static const float ZOOM_SMOOTH = 0.15;
 
@@ -163,15 +162,14 @@ class VB_VehicleCameraRig
 	protected float m_ExtraSmooth;		// плавная поправка расстояния
 	protected float m_ExtraVel[1];
 	protected float m_YawWS;			// направление камеры в мире, не зависит от поворота машины
+	protected float m_LastParentYaw;	// поворот машины в прошлом кадре
 	protected float m_Pitch;			// наклон камеры, заданный игроком
 	protected float m_Slope;			// сглаженный уклон машины
-	protected float m_PivotY;			// сглаженная высота точки привязки
 	protected float m_IdleTime;			// сколько секунд мышь не двигалась
 
 	protected float m_YawVel[1];
 	protected float m_PitchVel[1];
 	protected float m_SlopeVel[1];
-	protected float m_PivotVel[1];
 
 	static void SetMenuOpen(bool open)
 	{
@@ -240,7 +238,7 @@ class VB_VehicleCameraRig
 	}
 
 	// Вызывается из обеих камер после ванильного OnUpdate.
-	void Run(DayZPlayer player, HumanInputController input, Transport transport, vector offset, float distance, float startYaw, float startPitch, float dt, DayZPlayerCameraResult result)
+	void Run(DayZPlayer player, HumanInputController input, Transport transport, float distance, float startYaw, float startPitch, float dt, DayZPlayerCameraResult result)
 	{
 		if (!player || !input || !transport || !result)
 			return;
@@ -264,10 +262,10 @@ class VB_VehicleCameraRig
 			return;
 		}
 
-		Update(player, input, transport, driver, offset, distance + m_ExtraSmooth, startYaw, startPitch, dt, result);
+		Update(player, input, transport, seat.AutoCenter, distance + m_ExtraSmooth, startYaw, startPitch, dt, result);
 	}
 
-	protected void Update(DayZPlayer player, HumanInputController input, Transport transport, bool driver, vector offset, float distance, float startYaw, float startPitch, float dt, DayZPlayerCameraResult result)
+	protected void Update(DayZPlayer player, HumanInputController input, Transport transport, bool autoCenter, float distance, float startYaw, float startPitch, float dt, DayZPlayerCameraResult result)
 	{
 		// Вход игрока
 		float yawDelta = 0;
@@ -295,15 +293,14 @@ class VB_VehicleCameraRig
 
 		vector vehicleAngles = transport.GetOrientation();
 		float vehiclePitch = fixAngle_180_180(vehicleAngles[1]);
-		vector vehiclePos = transport.GetOrigin();
 
 		if (!m_Ready)
 		{
 			m_Ready = true;
 			m_YawWS = parentYaw + startYaw;
+			m_LastParentYaw = parentYaw;
 			m_Pitch = Math.Clamp(startPitch, PITCH_MIN, PITCH_MAX);
 			m_Slope = 0;
-			m_PivotY = vehiclePos[1];
 			m_IdleTime = RECENTER_DELAY;
 		}
 
@@ -312,15 +309,19 @@ class VB_VehicleCameraRig
 		else
 			m_IdleTime += dt;
 
+		// Без автовозврата камера держит угол относительно машины, иначе в каждом повороте уходила бы вбок.
+		if (!autoCenter)
+			m_YawWS += fixAngle_180_180(parentYaw - m_LastParentYaw);
+
+		m_LastParentYaw = parentYaw;
 		m_YawWS += yawDelta;
 		m_Pitch = Math.Clamp(m_Pitch + pitchDelta, PITCH_MIN, PITCH_MAX);
 
-		// Возврат за корму: только у водителя и только при движении вперёд.
-		// Пассажир не ведёт машину и может смотреть в сторону сколько хочет.
+		// Возврат за корму: только при движении вперёд и если он включён на этом сиденье.
 		float yawLocal = fixAngle_180_180(m_YawWS - parentYaw);
 		float forwardSpeed = vector.Dot(GetVelocity(transport), transport.GetDirection());
 
-		if (driver && m_IdleTime >= RECENTER_DELAY && forwardSpeed > RECENTER_SPEED)
+		if (autoCenter && m_IdleTime >= RECENTER_DELAY && forwardSpeed > RECENTER_SPEED)
 		{
 			yawLocal = Math.SmoothCD(yawLocal, 0, m_YawVel, RECENTER_SMOOTH_YAW, RECENTER_MAX_YAW_SPEED, dt);
 			m_Pitch = Math.SmoothCD(m_Pitch, PITCH_DEFAULT, m_PitchVel, RECENTER_SMOOTH_PITCH, 1000, dt);
@@ -356,20 +357,12 @@ class VB_VehicleCameraRig
 		float pitchFinal = pitchBase + m_Slope * Math.Cos(yawOut * Math.DEG2RAD);
 		pitchFinal = Math.Clamp(pitchFinal, PITCH_MIN, PITCH_MAX);
 
-		// Точка привязки: центр машины без её наклона, высота сглажена от тряски
-		m_PivotY = Math.SmoothCD(m_PivotY, vehiclePos[1], m_PivotVel, BUMP_SMOOTH, 1000, dt);
-		m_PivotY = Math.Clamp(m_PivotY, vehiclePos[1] - BUMP_LIMIT, vehiclePos[1] + BUMP_LIMIT);
-
-		vector headingTM[3];
-		Math3D.YawPitchRollMatrix(Vector(parentYaw, 0, 0), headingTM);
-
-		vector pivotWS = vehiclePos - playerTM[3];
-		vector pivot = pivotWS.InvMultiply3(headingTM);
-		pivot[1] = pivot[1] + m_PivotY - vehiclePos[1];
-
-		// Результат: крен и тангаж родителя движок уже отбрасывает (флаги ванильной камеры)
+		// Результат: крен и тангаж родителя движок уже отбрасывает (флаги ванильной камеры).
+		// Положение оставляем ванильным. Своё сглаживание высоты убрано: камера отставала от машины,
+		// и машина дёргалась в кадре вверх-вниз. Меняем только поворот и расстояние.
+		vector position = result.m_CameraTM[3];
 		Math3D.YawPitchRollMatrix(Vector(yawOut, pitchFinal, 0), result.m_CameraTM);
-		result.m_CameraTM[3] = pivot + offset;
+		result.m_CameraTM[3] = position;
 		result.m_fDistance = distance;
 	}
 
@@ -391,7 +384,7 @@ modded class DayZPlayerCamera3rdPersonVehicle
 		if (!m_VBRig)
 			m_VBRig = new VB_VehicleCameraRig();
 
-		m_VBRig.Run(m_pPlayer, m_pInput, m_Transport, m_CameraOffsetMS, m_fDistance, m_fLeftRightAngle + m_fLeftRightAngleAdd, m_fUpDownAngle + m_fUpDownAngleAdd, pDt, pOutResult);
+		m_VBRig.Run(m_pPlayer, m_pInput, m_Transport, m_fDistance, m_fLeftRightAngle + m_fLeftRightAngleAdd, m_fUpDownAngle + m_fUpDownAngleAdd, pDt, pOutResult);
 	}
 }
 
@@ -406,6 +399,6 @@ modded class DayZPlayerCamera3rdPersonVehicleMotorbike
 		if (!m_VBRig)
 			m_VBRig = new VB_VehicleCameraRig();
 
-		m_VBRig.Run(m_pPlayer, m_pInput, m_Transport, m_CameraOffsetMS, m_fDistance, m_fLeftRightAngle + m_fLeftRightAngleAdd, m_fUpDownAngle + m_fUpDownAngleAdd, pDt, pOutResult);
+		m_VBRig.Run(m_pPlayer, m_pInput, m_Transport, m_fDistance, m_fLeftRightAngle + m_fLeftRightAngleAdd, m_fUpDownAngle + m_fUpDownAngleAdd, pDt, pOutResult);
 	}
 }

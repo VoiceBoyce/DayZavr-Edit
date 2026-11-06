@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<modded_inputs>
+    <inputs>
+        <actions>
+            <input name="ChgMode" loc="#Change_Tactical_Module_Mode" />
+        </actions>
+		<sorting name="combat" loc="#combat">
+            <input name="ChgMode"/>
+		</sorting>
+    </inputs>
+    <preset>
+		<input name="ChgMode">
+            <btn name="kL"/>
+        </input>
+    </preset>
+</modded_inputs>

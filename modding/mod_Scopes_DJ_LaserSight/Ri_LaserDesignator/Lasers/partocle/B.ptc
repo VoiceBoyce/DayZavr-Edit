@@ -1,0 +1,62 @@
+EffectDef {
+ Emitors {
+  EmitorDef dota {
+   ConeAngle 0 0 0
+   BirthRate 144
+   MaxNum 1
+   BirthRateRND 0
+   LocalTransform 1
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   CenterX 0
+   CenterY 0
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.015
+   SizeRND 0
+   VelAngle 0
+   BillboardingType Full
+   Velocity 0
+   VelocityRND 0
+   RandomFrame 0
+   LifeTime 60
+   LifeTimeRND 0
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    1 1 1 1
+   }
+   EffectTime 0
+   Repeat 1
+  }
+  EmitorDef dota2 {
+   ConeAngle 0 0 0
+   BirthRate 144
+   MaxNum 1
+   BirthRateRND 0
+   LocalTransform 1
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   CenterX 0
+   CenterY 0
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.045
+   SizeRND 0
+   VelAngle 0
+   BillboardingType Full
+   Velocity 0
+   VelocityRND 0
+   RandomFrame 0
+   LifeTime 60
+   LifeTimeRND 0
+   Color {
+    0 0 0 1 0 0 0 1
+   }
+   Alpha {
+    1 1 1 1
+   }
+   EffectTime 0
+   Repeat 1
+  }
+ }
+}

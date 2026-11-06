@@ -5,6 +5,7 @@
 class VB_VehicleCameraRadial
 {
 	protected static const string INPUT_MENU = "UAVBCamMenu";
+	protected static const string INPUT_AUTO_CENTER = "UAVBCamAutoCenter";
 	protected static const string TEX_DIR = "VB_VehicleCamera/gui/textures/";
 
 	protected static const float SIZE = 560;			// размер меню в дизайн-пикселях
@@ -72,6 +73,9 @@ class VB_VehicleCameraRadial
 		if (input && canShow)
 			held = input.LocalValue() > 0;
 
+		if (canShow)
+			CheckAutoCenterToggle();
+
 		if (held && !m_Root)
 			Open();
 
@@ -87,6 +91,26 @@ class VB_VehicleCameraRadial
 
 		UpdateCursor(dt);
 		Refresh(dt);
+	}
+
+	protected void CheckAutoCenterToggle()
+	{
+		UAInput input = GetUApi().GetInputByName(INPUT_AUTO_CENTER);
+		if (!input || !input.LocalPress())
+			return;
+
+		VB_VehicleCameraSeat seat = VB_VehicleCameraRig.GetLocalSeat();
+		if (!seat || seat.Mode != VB_VehicleCameraStore.MODE_FREE)
+			return;
+
+		seat.AutoCenter = !seat.AutoCenter;
+		VB_VehicleCameraStore.Save();
+
+		string state = Widget.TranslateString("#STR_VB_VC_OFF");
+		if (seat.AutoCenter)
+			state = Widget.TranslateString("#STR_VB_VC_ON");
+
+		INT_UIF_Toast.Show(Widget.TranslateString("#STR_VB_VC_AUTOCENTER") + ": " + state, INT_UIF_ToastKind.INFO, 2.0);
 	}
 
 	protected bool CanShow()
@@ -262,7 +286,12 @@ class VB_VehicleCameraRadial
 			return "#STR_VB_VC_VANILLA_DESC";
 
 		if (m_Hover == VB_VehicleCameraStore.MODE_FREE)
-			return "#STR_VB_VC_FREE_DESC";
+		{
+			if (seat.AutoCenter)
+				return "#STR_VB_VC_FREE_DESC";
+
+			return "#STR_VB_VC_FREE_DESC_FIXED";
+		}
 
 		return "#STR_VB_VC_HINT_WHEEL";
 	}
