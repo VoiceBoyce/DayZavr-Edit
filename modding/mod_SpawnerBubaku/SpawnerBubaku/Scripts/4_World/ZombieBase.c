@@ -4,7 +4,7 @@ modded class ZombieBase {
 
     override void EEKilled(Object killer)
 	{
-        SpawnerBubaku plugin = GetPluginManager().GetPluginByType(SpawnerBubaku);
+        SpawnerBubaku plugin = SpawnerBubaku.Cast(GetPluginManager().GetPluginByType(SpawnerBubaku));
 		if(m_trigger_id)
 		{
 			plugin.RemoveSpawnedInstance(m_trigger_id, GetID());

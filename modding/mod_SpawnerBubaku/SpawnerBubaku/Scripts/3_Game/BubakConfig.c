@@ -14,6 +14,9 @@ class BubakPlace
 	int triggerdelay;
     ref TStringArray spawnerpos;
 	float spawnradius;
+	float managedradius;	// Управляемый режим для маппинга над землёй: радиус вокруг игрока. 0 = обычный режим
+	float managedminy;		// Нижняя граница по высоте: ниже игрок не считается внутри, а зомби считается упавшим
+	float managedmaxy;		// Верхняя граница по высоте для игрока
 	ref BubakProperties bubakProps;
 	/*
 	int bubaknum;
@@ -22,7 +25,7 @@ class BubakPlace
 	ref TStringArray bubaci;
 	ref TStringArray bubakinventory;
 	*/
-    void BubakPlace(string nam, string whrs, TStringArray trdep, string trxz, string trmin, string trmax, float trrad, float trclr, float trclh, string notf, int notftim, int trd, TStringArray spawnpos, float spawnr /* int bubn, int onlyfillup, bool dmg, TStringArray bub, TStringArray bubinv*/) 
+    void BubakPlace(string nam, string whrs, TStringArray trdep, string trxz, string trmin, string trmax, float trrad, float trclr, float trclh, string notf, int notftim, int trd, TStringArray spawnpos, float spawnr /* int bubn, int onlyfillup, bool dmg, TStringArray bub, TStringArray bubinv*/)
 	{
         name = nam;
 		workinghours = whrs;
@@ -56,7 +59,7 @@ class BubakProperties
 	bool itemrandomdmg;
 	ref TStringArray bubaci;
 	ref TStringArray bubakinventory;
-	
+
 	void BubakProperties(int bubn, int onlyfillup, bool dmg, TStringArray bub, TStringArray bubinv)
 	{
 		bubaknum = bubn;
@@ -71,7 +74,7 @@ class BuBuConfig
 {
 	int loglevel;
 	ref array< ref BubakPlace > BubakLocations;
-	
+
 	void BuBuConfig()
 	{
 		loglevel = 0;
@@ -112,7 +115,7 @@ class BubakConfig
 
         JsonFileLoader<BuBuConfig>.JsonSaveFile(configPath, configData);
     }
-	
+
 	static void UpgradeConfig(string configName, out BuBuConfig configData)
     {
         string configPath = m_ConfigRoot + configName;
@@ -125,7 +128,7 @@ class BubakConfig
             return;
         }
 		JsonFileLoader<BuBuConfig>.JsonLoadFile(configPath, configData);
-		
+
 		//upgrades...
 
 		if(!configData.loglevel) configData.loglevel = 0;
@@ -137,7 +140,7 @@ class BubakConfig
 				configData.BubakLocations.Get(i).notification = "";
 				configData.BubakLocations.Get(i).notificationtime = 2;
 			}
-			
+
 			if (!configData.BubakLocations.Get(i).triggerradius)
 			{
 				configData.BubakLocations.Get(i).triggerradius = 0;
@@ -164,7 +167,7 @@ class BubakConfig
 			}
 			*/
 		}
-			
+
         JsonFileLoader<BuBuConfig>.JsonSaveFile(configPath, configData);
     }
 

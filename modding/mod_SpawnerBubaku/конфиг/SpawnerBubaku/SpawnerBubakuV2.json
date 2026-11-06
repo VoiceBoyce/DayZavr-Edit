@@ -498,7 +498,10 @@
                     "MSFZ_Troll"
                 ],
                 "bubakinventory": []
-            }
+            },
+            "managedradius": 70.0,
+            "managedminy": 218.0,
+            "managedmaxy": 250.0
         },
         {
             "name": "branzow_zamok_troll",
@@ -1106,7 +1109,10 @@
                     "SFP_ZombieCivilian_9"
                 ],
                 "bubakinventory": []
-            }
+            },
+            "managedradius": 70.0,
+            "managedminy": 218.0,
+            "managedmaxy": 250.0
         },
         {
             "name": "branzow_military_zombie_center_niz",

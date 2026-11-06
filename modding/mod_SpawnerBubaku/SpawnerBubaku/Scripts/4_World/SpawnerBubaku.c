@@ -4,7 +4,9 @@ class SpawnerBubaku extends PluginBase
 	//protected static ref SpawnerBubaku Instance;
 	protected ref map<int, ref TIntArray> spawned_instances;
 	protected ref array<BubakTrigger> m_Triggers;
-	
+
+	protected const int MANAGED_TICK_MS = 3000;
+
 	/*
 	SpawnerBubaku GetInstance()
 	{
@@ -14,7 +16,7 @@ class SpawnerBubaku extends PluginBase
         }
 		return Instance;
 	}
-	
+
 	static void ClearInstance()
 	{
 		Instance = null;
@@ -24,16 +26,16 @@ class SpawnerBubaku extends PluginBase
 	{
 		return m_Triggers;
 	}
-	
+
 	void AddTrigger(BubakTrigger trigger)
 	{
 		m_Triggers.Insert(trigger);
 		SPBLogger.GetInstance().Log( "Added trigger to pool " + m_Triggers.Count() );
 	}
-	
+
 	void SpawnerBubaku()
     {
-        
+
 		BuBuConfig config;
 		FileAttr fileAttr;
 		string fileName;
@@ -59,9 +61,9 @@ class SpawnerBubaku extends PluginBase
 		}
 		BubakConfig.UpgradeConfig(fileName, config);
         GetDayZGame().SetBubakConfig(config);
-		
-		
-		
+
+
+
 		SPBLogger.GetInstance().Log( "SpawnerBubaku started!" );
 		m_Triggers = new array<BubakTrigger>;
 		spawned_instances = new map<int, ref TIntArray>;
@@ -70,6 +72,7 @@ class SpawnerBubaku extends PluginBase
 		BubakTrigger trigger;
 		vector mins, maxs;
 		float radius, cylradius, cylheight, spawnradius;
+		bool hasManaged = false;
 		for ( int i=0; i < config.BubakLocations.Count(); i++)
 		{
 			string posrot = config.BubakLocations.Get(i).triggerpos;
@@ -92,7 +95,7 @@ class SpawnerBubaku extends PluginBase
 			}
 			trigger = BubakTrigger.Cast(GetGame().CreateObject("BubakTrigger", pos.ToVector() ));
 			trigger.SetOrientation(rot.ToVector());
-			
+
 			mins = config.BubakLocations.Get(i).triggermins.ToVector();
 			maxs = config.BubakLocations.Get(i).triggermaxs.ToVector();
 			radius = config.BubakLocations.Get(i).triggerradius;
@@ -104,36 +107,52 @@ class SpawnerBubaku extends PluginBase
 			} else if (radius > 0 && cylradius == 0)
 			{
 				trigger.SetCollisionSphere(radius);
-			} else if (radius ==0 && cylradius > 0) 
+			} else if (radius ==0 && cylradius > 0)
 			{
 				trigger.SetCollisionCylinder(cylradius, cylheight);
-			} 
-			
+			}
+
 			trigger.SetTriggerName(config.BubakLocations.Get(i).name);
 			trigger.SetTriggerNotification(config.BubakLocations.Get(i).notification);
 			trigger.SetTriggerNotificationTime(config.BubakLocations.Get(i).notificationtime);
 			trigger.SetSpawnLocations(config.BubakLocations.Get(i).spawnerpos);
 			trigger.SetSpawnRadius(config.BubakLocations.Get(i).spawnradius);
 
-			
+
 			trigger.SetLastTriggerTime(-1 * config.BubakLocations.Get(i).triggerdelay);
 			trigger.SetTriggerDelay(config.BubakLocations.Get(i).triggerdelay);
-			
-			
+
+
 			trigger.SetWorkingHours(config.BubakLocations.Get(i).workinghours);
-			
+
 			trigger.SetTriggerDependency(config.BubakLocations.Get(i).triggerdependency);
-			
-			
+
+
 			trigger.SetBubaci(config.BubakLocations.Get(i).bubakProps.bubaci);
 			trigger.SetBubakNum(config.BubakLocations.Get(i).bubakProps.bubaknum);
 			trigger.SetOnlyFillUpToBubaknum(config.BubakLocations.Get(i).bubakProps.onlyfilluptobubaknum);
 			trigger.SetRandomDamage(config.BubakLocations.Get(i).bubakProps.itemrandomdmg);
 			trigger.SetBubaciInventory(config.BubakLocations.Get(i).bubakProps.bubakinventory);
-			
+			trigger.SetManaged(config.BubakLocations.Get(i).managedradius, config.BubakLocations.Get(i).managedminy, config.BubakLocations.Get(i).managedmaxy, radius);
+
+			if (trigger.IsManaged())
+				hasManaged = true;
+
 			AddTrigger(trigger);
 		}
-		
+
+		if (hasManaged)
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(ManagedTick, MANAGED_TICK_MS, true);
+	}
+
+	void ManagedTick()
+	{
+		for (int i = 0; i < m_Triggers.Count(); i++)
+		{
+			BubakTrigger trigger = m_Triggers.Get(i);
+			if (trigger && trigger.IsManaged())
+				trigger.ManagedTick();
+		}
 	}
 
 	void AddSpawnedInstance(int trigger_id, int bubak_id)
