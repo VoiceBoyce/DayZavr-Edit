@@ -569,12 +569,14 @@ class VB_TabletMenu extends INT_UIF_Menu
 	{
 		super.OnShow();
 		HoldHud(true);
+		VB_TabletClient.SetAimLock(true);
 	}
 
 	override void OnHide()
 	{
 		SetFocus(null);
 		SetTyping(false);
+		VB_TabletClient.SetAimLock(false);
 		if (m_Page)
 			m_Page.Leave();
 		s_AtmOnly = false;

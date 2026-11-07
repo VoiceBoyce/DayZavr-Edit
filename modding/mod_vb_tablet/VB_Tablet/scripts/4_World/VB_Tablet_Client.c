@@ -65,8 +65,44 @@ class VB_TabletClient
 		return s_Instance;
 	}
 
+	protected static bool s_AimLocked;
+
+	static bool IsAimLocked()
+	{
+		return s_AimLocked;
+	}
+
+	// Планшет открыт: персонаж ходит, камера стоит. Блокировка ванильного меню поворот мышью не держит,
+	// поэтому отключаются сами команды поворота, а PlayerBase ещё и обнуляет поворот каждый кадр.
+	static void SetAimLock(bool on)
+	{
+		if (s_AimLocked == on)
+			return;
+		s_AimLocked = on;
+		array<string> names = {"UAAimLeft", "UAAimRight", "UAAimUp", "UAAimDown"};
+		foreach (string inputName : names)
+		{
+			UAInput aim = GetUApi().GetInputByName(inputName);
+			if (aim)
+				aim.ForceDisable(on);
+		}
+		// Обнуление держится до DISABLED. Снимать обязательно, иначе камера останется стоять.
+		if (on)
+			return;
+		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
+		if (!player)
+			return;
+		HumanInputController hic = player.GetInputController();
+		if (hic)
+		{
+			hic.OverrideAimChangeX(HumanInputControllerOverrideType.DISABLED, 0);
+			hic.OverrideAimChangeY(HumanInputControllerOverrideType.DISABLED, 0);
+		}
+	}
+
 	static void Reset()
 	{
+		SetAimLock(false);
 		s_Instance = null;
 		VB_C_ACCENT = VB_ACCENT_DEFAULT;
 	}
@@ -479,8 +515,21 @@ class VB_TabletClient
 }
 
 modded class PlayerBase
-
 {
+	override void CommandHandler(float pDt, int pCurrentCommandID, bool pCurrentCommandFinished)
+	{
+		if (VB_TabletClient.IsAimLocked() && PlayerBase.Cast(GetGame().GetPlayer()) == this)
+		{
+			HumanInputController aimInput = GetInputController();
+			if (aimInput)
+			{
+				aimInput.OverrideAimChangeX(HumanInputControllerOverrideType.ENABLED, 0);
+				aimInput.OverrideAimChangeY(HumanInputControllerOverrideType.ENABLED, 0);
+			}
+		}
+		super.CommandHandler(pDt, pCurrentCommandID, pCurrentCommandFinished);
+	}
+
 	override void OnRPC(PlayerIdentity sender, int rpc_type, ParamsReadContext ctx)
 	{
 		if (rpc_type == VB_TABLET_RPC_S2C)
