@@ -1,0 +1,85 @@
+/* Макет КПК. Сетка 1920x1080 как у игрового холста: координаты в JS совпадают с исходниками INT_PDA. */
+@font-face{font-family:Metron;src:url(../assets/fonts/MetronBook.ttf)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#050506;overflow:hidden;font-family:Metron,Bahnschrift,sans-serif;user-select:none}
+#stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden;background:#07080a}
+#world{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 25%,#2d3a33 0,#161c1a 45%,#0a0c0c 100%)}
+#world::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(150,170,160,.10),transparent 40%,rgba(0,0,0,.45))}
+#dim{position:absolute;inset:0;background:rgba(4,4,5,.59);transition:opacity .25s}
+
+.a{position:absolute}
+.clip{position:absolute;overflow:hidden}
+.t{position:absolute;display:flex;align-items:center;white-space:nowrap;line-height:1;pointer-events:none}
+.t.c{justify-content:center}
+.t.r{justify-content:flex-end}
+.mt{position:absolute;white-space:pre-wrap;word-break:break-word;pointer-events:none;line-height:1.35}
+.ic{position:absolute;background:currentColor;-webkit-mask-size:100% 100%;mask-size:100% 100%;pointer-events:none}
+.img{position:absolute;background-size:100% 100%;pointer-events:none}
+.box{position:absolute;pointer-events:none}
+.hit{position:absolute;cursor:pointer}
+.tr{transition:background-color .12s,border-color .12s,color .12s}
+
+.btn{position:absolute;display:flex;align-items:center;justify-content:center;gap:10px;border-radius:8px;cursor:pointer;line-height:1;white-space:nowrap;transition:background-color .12s,border-color .12s,filter .12s}
+.btn .ic{position:static;width:16px;height:16px;flex:none}
+.btn.primary{background:#FF7A1A;color:#0B0B0C}
+.btn.primary:hover{background:#FF9648}
+.btn.secondary{background:#19191C;color:#ECE8E1;border:1px solid #3A3A40}
+.btn.secondary:hover{background:#222226}
+.btn.danger{background:#EC4A3C;color:#fff}
+.btn.danger:hover{background:#F66E62}
+.btn.warning{background:#FF9A4D;color:#0B0B0C}
+.btn.warning:hover{background:#FFB274}
+.btn.ghost{background:transparent;color:#8C8982;border:1px solid #3A3A40}
+.btn.ghost:hover{color:#ECE8E1}
+.btn.off{opacity:.45;cursor:default;pointer-events:none}
+
+.inp{position:absolute;background:#19191C;border:1px solid #3A3A40;border-radius:8px;display:flex;align-items:center;transition:border-color .12s}
+.inp:focus-within{border-color:#FF7A1A}
+.inp input{all:unset;flex:1;min-width:0;padding:0 16px;font:16px Metron;color:#ECE8E1;user-select:text}
+.inp input::placeholder{color:#5F5D58}
+.inp>.ic{position:static;margin-left:14px;width:16px;height:16px;color:#8C8982;flex:none}
+.inp>.ic+input{padding-left:10px}
+
+.dd{position:absolute;background:#19191C;border:1px solid #3A3A40;border-radius:8px;cursor:pointer;display:flex;align-items:center;padding:0 12px;font-size:14px;color:#ECE8E1;justify-content:space-between}
+.ddp{position:absolute;background:#222226;border:1px solid rgba(255,255,255,.13);border-radius:10px;padding:6px;box-shadow:0 12px 34px rgba(0,0,0,.66);z-index:50;max-height:264px;overflow:hidden}
+.ddp div{height:36px;line-height:36px;padding:0 12px;border-radius:6px;font-size:14px;color:#ECE8E1;cursor:pointer}
+.ddp div:hover{background:#2c2c31}
+.ddp div.on{color:#FF7A1A}
+
+.sw{position:absolute;border-radius:12px;transition:background-color .15s}
+.sw i{position:absolute;width:18px;height:18px;top:3px;left:3px;border-radius:50%;background:#77767A;transition:left .15s,background-color .15s}
+.sw.on{background:#FF7A1A!important}
+.sw.on i{left:25px;background:#0B0B0C}
+
+.shutter{transition:transform .5s cubic-bezier(.65,0,.35,1)}
+#device{transition:top .42s cubic-bezier(.22,.61,.36,1),opacity .3s}
+.tabline{transition:left .26s cubic-bezier(.22,.61,.36,1),width .26s cubic-bezier(.22,.61,.36,1)}
+
+.pin{position:absolute;width:0;height:0}
+.pin .dot{position:absolute;border-radius:50%;box-shadow:0 0 0 2px rgba(11,11,12,.75)}
+.pin .tag{position:absolute;left:18px;top:-12px;height:24px;padding:0 8px;background:rgba(11,11,12,.86);border-radius:3px;display:flex;align-items:center;white-space:nowrap;font-size:13px;color:#ECE8E1;pointer-events:none}
+@keyframes sosb{50%{opacity:.35}}
+.blink{animation:sosb 1s infinite}
+@keyframes ring{from{transform:scale(.5);opacity:.9}to{transform:scale(2.4);opacity:0}}
+.ring{position:absolute;left:-20px;top:-20px;width:40px;height:40px;border-radius:50%;border:2px solid #FF7A1A;animation:ring 2.2s infinite ease-out}
+
+.toast{position:absolute;right:30px;width:380px;background:#19191C;border:1px solid #3A3A40;border-left:4px solid #FF7A1A;border-radius:8px;padding:0 16px;height:58px;display:flex;align-items:center;gap:12px;font-size:15px;color:#ECE8E1;box-shadow:0 10px 30px rgba(0,0,0,.6);transition:opacity .25s;z-index:90}
+.toast .ic{position:static;width:20px;height:20px;flex:none}
+#hint{position:absolute;left:0;right:0;top:520px;text-align:center;font-size:22px;color:#8C8982;display:none}
+
+body.noanim *{transition:none!important;animation:none!important}
+
+/* панель макета: не часть КПК */
+#mk{position:fixed;right:0;top:0;bottom:0;width:250px;background:#101013;border-left:1px solid #2A2A2F;color:#ECE8E1;font:13px "Segoe UI",sans-serif;padding:14px;overflow:auto;transform:translateX(250px);transition:transform .2s;z-index:1000}
+#mk.open{transform:none}
+#mkb{position:fixed;right:0;top:44%;writing-mode:vertical-rl;background:#FF7A1A;color:#0B0B0C;font:600 13px "Segoe UI",sans-serif;padding:12px 6px;cursor:pointer;z-index:1001;border-radius:6px 0 0 6px;transition:right .2s}
+#mk.open~#mkb{right:250px}
+#mk h4{margin:14px 0 6px;font-size:11px;letter-spacing:.08em;color:#8C8982;text-transform:uppercase;font-weight:600}
+#mk h4:first-child{margin-top:0}
+#mk button{display:block;width:100%;margin:0 0 4px;background:#19191C;border:1px solid #3A3A40;color:#ECE8E1;border-radius:4px;padding:6px 8px;text-align:left;font:13px "Segoe UI",sans-serif;cursor:pointer}
+#mk button:hover{border-color:#FF7A1A}
+#mk button.on{background:#FF7A1A;color:#0B0B0C;border-color:#FF7A1A}
+#mk label{display:flex;align-items:center;gap:8px;margin-bottom:4px;cursor:pointer}
+#mk input[type=range]{width:100%;accent-color:#FF7A1A}
+#mk input[type=checkbox]{accent-color:#FF7A1A}
+#mk p{color:#8C8982;margin:10px 0 0;line-height:1.4}

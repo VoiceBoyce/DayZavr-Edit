@@ -1,0 +1,68 @@
+/* Планшет. Сетка 1920x1080, цвета заданы токенами: тема меняется заменой --accent. */
+@font-face{font-family:Metron;src:url(../assets/fonts/MetronBook.ttf)}
+:root{--bg:#121110;--side:#0E0D0C;--panel:#191816;--panel2:#211F1D;--panel3:#2B2926;--line:#2B2926;--line2:#413D38;
+--text:#ECE8E1;--dim:#938E86;--dim2:#625E58;--accent:#FF7A1A;--accent2:#FF9648;--on:#0E0D0C;--gold:#E9C55B;--inf:#8FA6FF;--ok:#6FBF8E;--bad:#EF5B4C}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#050607;overflow:hidden;font-family:Metron,Bahnschrift,sans-serif;user-select:none}
+#stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden;background:radial-gradient(ellipse at 30% 20%,#2b2a26 0,#151412 50%,#090808 100%)}
+#dim{position:absolute;inset:0;background:rgba(4,5,6,.6)}
+#device{position:absolute;left:190px;top:80px;width:1540px;height:920px;border-radius:34px;background:url(../assets/device.png) 0 0/100% 100%;box-shadow:0 30px 80px rgba(0,0,0,.7)}
+#screen{position:absolute;left:36px;top:36px;width:1468px;height:848px;border-radius:10px;overflow:hidden;background:var(--bg)}
+#glass{position:absolute;left:36px;top:36px;width:1468px;height:848px;border-radius:10px;background:url(../assets/glass.png) 0 0/100% 100%;pointer-events:none;z-index:5}
+.a{position:absolute}
+.clip{position:absolute;overflow:hidden}
+.t{position:absolute;display:flex;align-items:center;white-space:nowrap;line-height:1;pointer-events:none}
+.t.c{justify-content:center}
+.t.r{justify-content:flex-end}
+.mt{position:absolute;white-space:pre-wrap;word-break:break-word;pointer-events:none;line-height:1.4}
+.ic{position:absolute;background:currentColor;-webkit-mask-size:100% 100%;mask-size:100% 100%;pointer-events:none}
+.box{position:absolute;pointer-events:none;transition:background-color .12s,border-color .12s}
+.hit{position:absolute;cursor:pointer}
+.bar{position:absolute;overflow:hidden;background:var(--panel3)}
+.bar i{display:block;height:100%;border-radius:inherit;transition:width .35s}
+.btn{position:absolute;display:flex;align-items:center;justify-content:center;gap:10px;border-radius:8px;cursor:pointer;line-height:1;white-space:nowrap;font-size:15px;transition:background-color .12s,border-color .12s,opacity .12s}
+.btn>.ic{position:static;width:18px;height:18px;flex:none}
+.btn.primary{background:var(--accent);color:var(--on)}
+.btn.primary:hover{background:var(--accent2)}
+.btn.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line2)}
+.btn.secondary:hover{background:var(--panel3)}
+.btn.danger{background:transparent;color:var(--bad);border:1px solid #5a2f2b}
+.btn.danger:hover{background:#2a1a18}
+.btn.gold{background:var(--gold);color:var(--on)}
+.btn.off{opacity:.42;cursor:default;pointer-events:none}
+.inp{position:absolute;background:var(--panel2);border:1px solid var(--line2);border-radius:8px;display:flex;align-items:center;transition:border-color .12s}
+.inp:focus-within{border-color:var(--accent)}
+.inp.bad{border-color:var(--bad)}
+.inp input{all:unset;flex:1;min-width:0;padding:0 16px;font:16px Metron;color:var(--text);user-select:text}
+.inp input::placeholder{color:var(--dim2)}
+.inp.area{align-items:stretch}
+.inp textarea{all:unset;flex:1;min-width:0;padding:12px 16px;font:15px/1.4 Metron;color:var(--text);user-select:text;white-space:pre-wrap;box-sizing:border-box}
+.inp textarea::placeholder{color:var(--dim2)}
+.dd{position:absolute;background:var(--panel2);border:1px solid var(--line2);border-radius:8px;cursor:pointer;display:flex;align-items:center;padding:0 12px;font-size:14px;color:var(--text);justify-content:space-between}
+.ddp{position:absolute;background:var(--panel3);border:1px solid var(--line2);border-radius:10px;padding:6px;box-shadow:0 12px 34px rgba(0,0,0,.66);z-index:50}
+.ddp div{height:36px;line-height:36px;padding:0 12px;border-radius:6px;font-size:14px;color:var(--text);cursor:pointer}
+.ddp div:hover{background:var(--line2)}
+.ddp div.on{color:var(--accent)}
+.nav{position:absolute;left:14px;width:212px;height:48px;border-radius:8px;cursor:pointer;transition:background-color .12s}
+.nav:hover{background:var(--panel)}
+.nav.on{background:var(--panel2)}
+.sw{position:absolute;width:44px;height:24px;border-radius:12px;background:var(--panel3);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);cursor:pointer;transition:background-color .15s}
+.sw i{position:absolute;width:18px;height:18px;top:3px;left:3px;border-radius:50%;background:#77808a;transition:left .15s,background-color .15s}
+.sw.on{background:var(--accent)}
+.sw.on i{left:23px;background:var(--on)}
+.pin{position:absolute;width:0;height:0}
+.pin .dot{position:absolute;border-radius:50%;box-shadow:0 0 0 2px rgba(11,14,15,.8);cursor:pointer}
+.pin .tag{position:absolute;left:15px;top:-10px;height:20px;padding:0 6px;background:rgba(11,14,15,.62);border-radius:3px;display:flex;align-items:center;white-space:nowrap;font-size:12px;color:var(--text);pointer-events:none}
+.toast{position:absolute;left:50%;transform:translateX(-50%);top:24px;min-width:340px;background:var(--panel2);border:1px solid var(--line2);border-radius:10px;padding:0 18px;height:52px;display:flex;align-items:center;gap:12px;font-size:15px;color:var(--text);box-shadow:0 12px 30px rgba(0,0,0,.6);transition:opacity .25s;z-index:90}
+.toast .ic{position:static;width:20px;height:20px;flex:none}
+body.noanim *{transition:none!important;animation:none!important}
+/* панель макета: не часть планшета */
+#mk{position:fixed;right:0;top:0;bottom:0;width:240px;background:#0e0d0c;border-left:1px solid #2b2926;color:#ece8e1;font:13px "Segoe UI",sans-serif;padding:14px;overflow:auto;z-index:1000}
+#mk h4{margin:14px 0 6px;font-size:11px;letter-spacing:.08em;color:#938e86;text-transform:uppercase;font-weight:600}
+#mk h4:first-child{margin-top:0}
+#mk button{display:block;width:100%;margin:0 0 4px;background:#211f1d;border:1px solid #413d38;color:#ece8e1;border-radius:4px;padding:6px 8px;text-align:left;font:13px "Segoe UI",sans-serif;cursor:pointer}
+#mk button.on{background:var(--accent);color:#0e0d0c;border-color:var(--accent)}
+.scroll{overflow-y:auto;overflow-x:hidden}
+.scroll::-webkit-scrollbar{width:8px}
+.scroll::-webkit-scrollbar-track{background:transparent}
+.scroll::-webkit-scrollbar-thumb{background:var(--line2);border-radius:4px}

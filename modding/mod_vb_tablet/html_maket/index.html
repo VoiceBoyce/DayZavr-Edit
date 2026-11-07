@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>КПК: макет</title>
+<link rel="stylesheet" href="css/maket.css">
+<link rel="stylesheet" href="assets/icons.css">
+</head>
+<body>
+<div id="stage">
+  <div id="world"></div>
+  <div id="dim"></div>
+  <div id="hud" class="a" style="left:0;top:0;width:1920px;height:1080px;display:none"></div>
+  <div id="hint">КПК выключен. Нажмите P, чтобы открыть</div>
+</div>
+<div id="mk"></div>
+<div id="mkb">Макет</div>
+
+<script src="js/strings.js"></script>
+<script src="js/data_real.js"></script>
+<script src="js/draw.js"></script>
+<script src="js/data.js"></script>
+<script src="js/hud.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/pages/profile.js"></script>
+<script src="js/pages/auth.js"></script>
+<script src="js/pages/map.js"></script>
+<script src="js/pages/chat.js"></script>
+<script src="js/pages/faction.js"></script>
+<script src="js/pages/char.js"></script>
+<script src="js/pages/admin.js"></script>
+<script src="js/panel.js"></script>
+<script>
+initData();
+// Адрес вида ?s=hud&t=2&r=1&m=gps,map задаёт стартовое состояние: удобно для скриншотов и сравнения.
+const Q=new URLSearchParams(location.search);
+if(Q.has('noanim')){window.NOANIM=true;document.body.classList.add('noanim');}
+if(Q.has('s')) S.screen=Q.get('s');
+if(Q.has('r')) S.role=+Q.get('r');
+if(Q.has('m')) ['gps','map','chat','gp'].forEach(k=>S.mods[k]=Q.get('m').split(',').includes(k));
+if(Q.get('s')==='auth') S.loggedIn=false;
+if(Q.get('reg')==='1'){S.registered=false;S.loggedIn=false;}
+if(Q.has('sub')){Pages.chat.sub=+Q.get('sub');Pages.admin.sub=+Q.get('sub');if(+Q.get('sub')===2)Pages.chat.open='Loki';}
+if(Q.has('t')) Shell.lastTab=+Q.get('t');
+document.fonts.load('16px Metron').then(()=>{Maket.init();Shell.init();Maket.sync();});
+</script>
+</body>
+</html>

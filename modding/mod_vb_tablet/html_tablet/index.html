@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Планшет: макет</title>
+<link rel="stylesheet" href="css/tablet.css">
+<link rel="stylesheet" href="assets/icons.css">
+</head>
+<body>
+<div id="stage"><div id="dim"></div><div id="device"><div id="screen"></div><div id="glass"></div></div></div>
+<div id="mk"></div>
+<script src="js/core.js"></script>
+<script src="js/data.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/pages.js"></script>
+<script src="js/map.js"></script>
+<script>
+// Панель макета: состояние игрока и тема. Не часть планшета.
+const Panel={
+  init(){
+    const m=document.getElementById('mk');
+    m.innerHTML='<h4>Экран</h4><div id="pP"></div><h4>Игрок</h4><div id="pR"></div><h4>Уровень клана</h4><div id="pL"></div><h4>Деньги</h4><div id="pM"></div><h4>Банкомат</h4><div id="pE"></div><h4>Контракты</h4><div id="pX"></div><h4>Налог клана</h4><div id="pT"></div><h4>Заявка игрока</h4><div id="pA"></div><h4>Права</h4><div id="pU"></div><h4>Состав клана</h4><div id="pC"></div><h4>Кланы на сервере</h4><div id="pK"></div><h4>Показатели</h4><div id="pS"></div>';
+    const btn=(host,t,fn)=>{const b=document.createElement('button');b.textContent=t;b.onclick=fn;document.getElementById(host).appendChild(b);return b;};
+    this.pg=['profile','rank','map','rating','create','clan','cmembers','cchat','cjournal','cnews','cranks','contracts','bank','csettings','admin'].map(k=>({k,b:btn('pP',TITLES[k],()=>Shell.go(k))}));
+    this.ro=[[0,'Без клана'],[-1,'Пришло приглашение'],[3,'Лидер'],[2,'Заместитель'],[4,'Разведчик (свой ранг)'],[1,'Участник']].map(([v,t])=>({v,b:btn('pR',t,()=>{S.clan=v>0?demoClan(v===4?1:v):null;if(v===4)Clan.me().rank='scout';S.invite=v<0?INVITE:null;if(v<0)S.page='profile';Shell.refresh();})}));
+    [1,3,5].forEach(n=>btn('pL','Уровень '+n,()=>{if(!S.clan)S.clan=demoClan(3);setLevel(n);Shell.refresh();}));
+    [['Как сейчас',212,18,46,41800],['Много',4000,4000,4000,1250000],['Очень много',125000,48750,1234567,98765000]].forEach(([t,z,m,a,d])=>btn('pS',t,()=>{S.zombies=z;S.mutants=m;S.animals=a;S.dist=d;Shell.go('profile');}));
+    btn('pC','Обычный, 6',()=>{if(!S.clan)S.clan=demoClan(3);S.clan.members=S.clan.members.slice(0,6);Shell.refresh();});btn('pC','Полный, 20',()=>{if(!S.clan)S.clan=demoClan(3);demoFull(S.clan);Shell.refresh();});
+    btn('pE','Открыть банкомат',()=>{if(!S.clan)S.clan=demoClan(3);Shell.refresh();Atm.open();});btn('pE','Инвентарь свободен',()=>{S.invFull=false;});btn('pE','Инвентарь заполнен',()=>{S.invFull=true;});
+    btn('pX','Клановый выполнен',()=>{if(!S.clan)return;const k=S.clan.contracts.find(c=>c.state==='active');if(!k)return;Shell.go('contracts');Pages.contracts.complete(k);});btn('pX','Личный выполнен',()=>{if(!S.clan)return;const k=S.clan.my.find(c=>c.state==='active');if(!k)return;k.have=k.need;k.state='ready';Pages.contracts.tab=1;Shell.go('contracts');});
+    btn('pT','На 80 дней',()=>{if(!S.clan)S.clan=demoClan(3);S.clan.taxFree=0;S.clan.bank=400000;Shell.refresh();});btn('pT','На 3 дня',()=>{if(!S.clan)S.clan=demoClan(3);S.clan.taxFree=0;S.clan.bank=15000;Shell.refresh();});btn('pT','Льготный срок',()=>{if(!S.clan)S.clan=demoClan(3);S.clan.taxFree=TAX_FREE_DAYS;Shell.refresh();});
+    btn('pT','Списать за день',()=>{if(!S.clan)return;if(Clan.payTax()==='dissolved'){Toast('Налог не оплачен: клан распущен','err');Shell.go('profile');}else Shell.refresh();});
+    btn('pA','Клан принял',()=>{if(!S.applied)return;const r=RIVALS.find(x=>x.name===S.applied.clan)||{},c=demoClan(1);S.clan={...c,name:S.applied.clan,tag:r.tag||c.tag,desc:r.desc||'',emblem:r.emblem?{...r.emblem}:c.emblem};S.applied=null;Toast('Вы приняты в клан');Shell.go('clan');});btn('pA','Клан отказал',()=>{if(!S.applied)return;S.applied=null;Toast('Заявка отклонена','inf');Shell.refresh();});
+    btn('pU','Игрок',()=>{S.admin=false;Shell.go(S.page==='admin'?'profile':S.page);});btn('pU','Админ',()=>{S.admin=true;Shell.go('admin');});
+    btn('pC','Сообщение в чат',()=>{if(!S.clan)S.clan=demoClan(3);Clan.say('Loki','Новое сообщение от соклановца');if(S.page==='cchat')Pages.cchat.paintList();else{S.clan.chatUnread++;Shell.navPaint();}});
+    btn('pK','Есть места',()=>{S.extraClans=0;Shell.refresh();});btn('pK','Сервер заполнен',()=>{S.extraClans=MAX_CLANS;Shell.refresh();});
+    btn('pM','Денег хватает',()=>{S.money=1250000;Shell.refresh();});btn('pM','Денег мало',()=>{S.money=12400;Shell.refresh();});
+  },
+  sync(){if(!this.pg)return;this.pg.forEach(o=>o.b.classList.toggle('on',o.k===S.page));const r=S.clan?{leader:3,deputy:2,scout:4,member:1}[Clan.me().rank]:S.invite?-1:0;this.ro.forEach(o=>o.b.classList.toggle('on',o.v===r));},
+};
+// Адрес вида ?p=contracts&c=3&m=12000 задаёт стартовое состояние.
+const Q=new URLSearchParams(location.search);
+if(Q.has('noanim')){window.NOANIM=true;document.body.classList.add('noanim');}
+if(Q.has('p'))S.page=Q.get('p');
+if(Q.has('c')&&+Q.get('c'))S.clan=demoClan(+Q.get('c'));
+if(Q.has('i'))S.invite=INVITE;
+if(Q.has('sel'))window.SEL=+Q.get('sel');
+if(Q.has('pick'))window.PICK=+Q.get('pick');
+if(Q.has('full')&&S.clan)demoFull(S.clan);
+if(Q.has('inv'))window.INV=1;
+if(Q.has('adm'))S.admin=true;
+if(Q.has('pe'))window.PE=1;
+if(Q.has('ct'))Pages.contracts.tab=+Q.get('ct');
+if(Q.has('atm'))window.ATM=1;
+if(Q.has('dr'))Pages.map.drawer=true;
+if(Q.has('rt'))Pages.rank.tab=+Q.get('rt');
+if(Q.has('bk')&&S.clan)S.clan.bank=+Q.get('bk');
+if(Q.has('tab'))Pages.rating.tab=+Q.get('tab');
+if(Q.has('shp'))Pages.create.e.shape=Q.get('shp');
+if(Q.has('m'))S.money=+Q.get('m');
+if(Q.has('n')){const v=+Q.get('n');S.zombies=S.mutants=S.animals=v;S.dist=v*1000;}
+if(Q.has('l')&&S.clan)setLevel(+Q.get('l'));
+document.fonts.load('16px Metron').then(()=>{Panel.init();Shell.init();Panel.sync();if(window.ATM)Atm.open();});
+</script>
+</body>
+</html>

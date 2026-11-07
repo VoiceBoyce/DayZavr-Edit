@@ -1,0 +1,56 @@
+ImageSetClass {
+ Name "vpp_map_ui"
+ RefSize 1920 1080
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "{260286D9ED28FC72}VanillaPPMap/GUI/Textures/UI_Icons.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass icon_expand {
+   Name "icon_expand"
+   Pos 19 8
+   Size 100 100
+   Flags 0
+  }
+  ImageSetDefClass icon_collapse {
+   Name "icon_collapse"
+   Pos 196 7
+   Size 100 100
+   Flags 0
+  }
+  ImageSetDefClass icon_frame {
+   Name "icon_frame"
+   Pos 428 31
+   Size 133 119
+   Flags 0
+  }
+  ImageSetDefClass icon_info {
+   Name "icon_info"
+   Pos 12 151
+   Size 168 168
+   Flags 0
+  }
+  ImageSetDefClass icon_visible {
+   Name "icon_visible"
+   Pos 549 164
+   Size 140 118
+   Flags 0
+  }
+  ImageSetDefClass icon_not_visible {
+   Name "icon_not_visible"
+   Pos 201 166
+   Size 140 118
+   Flags 0
+  }
+  ImageSetDefClass icon_visible_3d {
+   Name "icon_visible_3d"
+   Pos 382 166
+   Size 140 118
+   Flags 0
+  }
+ }
+ Groups {
+ }
+}
