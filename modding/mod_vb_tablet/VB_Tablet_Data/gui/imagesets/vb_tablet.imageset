@@ -1,0 +1,750 @@
+ImageSetClass {
+ Name "vb_tablet"
+ RefSize 1024 1024
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "VB_Tablet_Data/gui/textures/vb_tablet_icons_ca.paa"
+  }
+ }
+ Images {
+  ImageSetDefClass admin {
+   Name "admin"
+   Pos 2 2
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass anomaly {
+   Name "anomaly"
+   Pos 70 2
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass arrow {
+   Name "arrow"
+   Pos 138 2
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass axe {
+   Name "axe"
+   Pos 206 2
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass base {
+   Name "base"
+   Pos 274 2
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass battery {
+   Name "battery"
+   Pos 342 2
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass car {
+   Name "car"
+   Pos 410 2
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass center {
+   Name "center"
+   Pos 478 2
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass chat {
+   Name "chat"
+   Pos 546 2
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass check {
+   Name "check"
+   Pos 614 2
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass chev {
+   Name "chev"
+   Pos 682 2
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass chevron_down {
+   Name "chevron_down"
+   Pos 750 2
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass chevron_left {
+   Name "chevron_left"
+   Pos 818 2
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass chevron_right {
+   Name "chevron_right"
+   Pos 886 2
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass chevron_up {
+   Name "chevron_up"
+   Pos 954 2
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass circleo {
+   Name "circleo"
+   Pos 2 70
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass clock {
+   Name "clock"
+   Pos 70 70
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass close {
+   Name "close"
+   Pos 138 70
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass coin {
+   Name "coin"
+   Pos 206 70
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass compass {
+   Name "compass"
+   Pos 274 70
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass contract {
+   Name "contract"
+   Pos 342 70
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass copy {
+   Name "copy"
+   Pos 410 70
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass crosshair {
+   Name "crosshair"
+   Pos 478 70
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass cursor {
+   Name "cursor"
+   Pos 546 70
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass danger {
+   Name "danger"
+   Pos 614 70
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass discord {
+   Name "discord"
+   Pos 682 70
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass edit {
+   Name "edit"
+   Pos 750 70
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass eye {
+   Name "eye"
+   Pos 818 70
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass eye_off {
+   Name "eye_off"
+   Pos 886 70
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass fish {
+   Name "fish"
+   Pos 954 70
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass flag {
+   Name "flag"
+   Pos 2 138
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass gps {
+   Name "gps"
+   Pos 70 138
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass grip {
+   Name "grip"
+   Pos 138 138
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass hammer {
+   Name "hammer"
+   Pos 206 138
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass heart {
+   Name "heart"
+   Pos 274 138
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass invite {
+   Name "invite"
+   Pos 342 138
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass key {
+   Name "key"
+   Pos 410 138
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass kick {
+   Name "kick"
+   Pos 478 138
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass layers {
+   Name "layers"
+   Pos 546 138
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass lock {
+   Name "lock"
+   Pos 614 138
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass logout {
+   Name "logout"
+   Pos 682 138
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass mail {
+   Name "mail"
+   Pos 750 138
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass map {
+   Name "map"
+   Pos 818 138
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass mate {
+   Name "mate"
+   Pos 886 138
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass minus {
+   Name "minus"
+   Pos 954 138
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass mute {
+   Name "mute"
+   Pos 2 206
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass news {
+   Name "news"
+   Pos 70 206
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass note {
+   Name "note"
+   Pos 138 206
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass pin {
+   Name "pin"
+   Pos 206 206
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass plus {
+   Name "plus"
+   Pos 274 206
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass plusclan {
+   Name "plusclan"
+   Pos 342 206
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass polygon {
+   Name "polygon"
+   Pos 410 206
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass power {
+   Name "power"
+   Pos 478 206
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass radiation {
+   Name "radiation"
+   Pos 546 206
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass rally {
+   Name "rally"
+   Pos 614 206
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass rank {
+   Name "rank"
+   Pos 682 206
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass refresh {
+   Name "refresh"
+   Pos 750 206
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass route {
+   Name "route"
+   Pos 818 206
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass search {
+   Name "search"
+   Pos 886 206
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass send {
+   Name "send"
+   Pos 954 206
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass shp_badge {
+   Name "shp_badge"
+   Pos 2 274
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass shp_banner {
+   Name "shp_banner"
+   Pos 70 274
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass shp_chevron {
+   Name "shp_chevron"
+   Pos 138 274
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass shp_circle {
+   Name "shp_circle"
+   Pos 206 274
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass shp_crest {
+   Name "shp_crest"
+   Pos 274 274
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass shp_diamond {
+   Name "shp_diamond"
+   Pos 342 274
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass shp_hex {
+   Name "shp_hex"
+   Pos 410 274
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass shp_octagon {
+   Name "shp_octagon"
+   Pos 478 274
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass shp_pentagon {
+   Name "shp_pentagon"
+   Pos 546 274
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass shp_shield {
+   Name "shp_shield"
+   Pos 614 274
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass shp_square {
+   Name "shp_square"
+   Pos 682 274
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass shp_star {
+   Name "shp_star"
+   Pos 750 274
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass signal {
+   Name "signal"
+   Pos 818 274
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sos {
+   Name "sos"
+   Pos 886 274
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass star {
+   Name "star"
+   Pos 954 274
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass stash {
+   Name "stash"
+   Pos 2 342
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_anchor {
+   Name "sym_anchor"
+   Pos 70 342
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_arrow {
+   Name "sym_arrow"
+   Pos 138 342
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_axe {
+   Name "sym_axe"
+   Pos 206 342
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_bell {
+   Name "sym_bell"
+   Pos 274 342
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_bolt {
+   Name "sym_bolt"
+   Pos 342 342
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_castle {
+   Name "sym_castle"
+   Pos 410 342
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_cog {
+   Name "sym_cog"
+   Pos 478 342
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_compass {
+   Name "sym_compass"
+   Pos 546 342
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_cross {
+   Name "sym_cross"
+   Pos 614 342
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_crown {
+   Name "sym_crown"
+   Pos 682 342
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_drop {
+   Name "sym_drop"
+   Pos 750 342
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_eye {
+   Name "sym_eye"
+   Pos 818 342
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_feather {
+   Name "sym_feather"
+   Pos 886 342
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_fish {
+   Name "sym_fish"
+   Pos 954 342
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_flame {
+   Name "sym_flame"
+   Pos 2 410
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_gem {
+   Name "sym_gem"
+   Pos 70 410
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_hammer {
+   Name "sym_hammer"
+   Pos 138 410
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_heart {
+   Name "sym_heart"
+   Pos 206 410
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_horseshoe {
+   Name "sym_horseshoe"
+   Pos 274 410
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_hourglass {
+   Name "sym_hourglass"
+   Pos 342 410
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_key {
+   Name "sym_key"
+   Pos 410 410
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_leaf {
+   Name "sym_leaf"
+   Pos 478 410
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_moon {
+   Name "sym_moon"
+   Pos 546 410
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_mountain {
+   Name "sym_mountain"
+   Pos 614 410
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_paw {
+   Name "sym_paw"
+   Pos 682 410
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_skull {
+   Name "sym_skull"
+   Pos 750 410
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_snow {
+   Name "sym_snow"
+   Pos 818 410
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_spear {
+   Name "sym_spear"
+   Pos 886 410
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_star {
+   Name "sym_star"
+   Pos 954 410
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_sun {
+   Name "sym_sun"
+   Pos 2 478
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_sword {
+   Name "sym_sword"
+   Pos 70 478
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_target {
+   Name "sym_target"
+   Pos 138 478
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_tower {
+   Name "sym_tower"
+   Pos 206 478
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_tree {
+   Name "sym_tree"
+   Pos 274 478
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_wave {
+   Name "sym_wave"
+   Pos 342 478
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass sym_wolf {
+   Name "sym_wolf"
+   Pos 410 478
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass trash {
+   Name "trash"
+   Pos 478 478
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass trophy {
+   Name "trophy"
+   Pos 546 478
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass user {
+   Name "user"
+   Pos 614 478
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass users {
+   Name "users"
+   Pos 682 478
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass vault {
+   Name "vault"
+   Pos 750 478
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass volume {
+   Name "volume"
+   Pos 818 478
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass wallet {
+   Name "wallet"
+   Pos 886 478
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass warning {
+   Name "warning"
+   Pos 954 478
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass zombie {
+   Name "zombie"
+   Pos 2 546
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass zoom_in {
+   Name "zoom_in"
+   Pos 70 546
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass zoom_out {
+   Name "zoom_out"
+   Pos 138 546
+   Size 64 64
+   Flags 0
+  }
+ }
+}

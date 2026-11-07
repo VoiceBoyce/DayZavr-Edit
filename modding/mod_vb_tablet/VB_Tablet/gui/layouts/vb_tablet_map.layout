@@ -1,0 +1,35 @@
+FrameWidgetClass VBT_MapRoot {
+ ignorepointer 1
+ clipchildren 1
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ position 0 0
+ size 10 10
+ {
+  MapWidgetClass VBT_Map {
+   visible 1
+   clipchildren 1
+   inheritalpha 0
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   position 0 0
+   size 10 10
+   {
+    CanvasWidgetClass VBT_MapCanvas {
+     ignorepointer 1
+     inheritalpha 0
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     position 0 0
+     size 10 10
+    }
+   }
+  }
+ }
+}
