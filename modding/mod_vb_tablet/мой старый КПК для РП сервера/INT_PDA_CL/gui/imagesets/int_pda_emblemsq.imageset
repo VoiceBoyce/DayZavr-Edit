@@ -1,0 +1,282 @@
+ImageSetClass {
+ Name "int_pda_emblemsq"
+ RefSize 2048 1024
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "INT_PDA_CL/gui/textures/int_pda_emblemsq_ca.paa"
+  }
+ }
+ Images {
+  ImageSetDefClass q01 {
+   Name "q01"
+   Pos 0 0
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q02 {
+   Name "q02"
+   Pos 160 0
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q03 {
+   Name "q03"
+   Pos 320 0
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q04 {
+   Name "q04"
+   Pos 480 0
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q05 {
+   Name "q05"
+   Pos 640 0
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q06 {
+   Name "q06"
+   Pos 800 0
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q07 {
+   Name "q07"
+   Pos 960 0
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q08 {
+   Name "q08"
+   Pos 1120 0
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q09 {
+   Name "q09"
+   Pos 1280 0
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q10 {
+   Name "q10"
+   Pos 1440 0
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q11 {
+   Name "q11"
+   Pos 1600 0
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q12 {
+   Name "q12"
+   Pos 1760 0
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q13 {
+   Name "q13"
+   Pos 0 160
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q14 {
+   Name "q14"
+   Pos 160 160
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q15 {
+   Name "q15"
+   Pos 320 160
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q16 {
+   Name "q16"
+   Pos 480 160
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q17 {
+   Name "q17"
+   Pos 640 160
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q18 {
+   Name "q18"
+   Pos 800 160
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q19 {
+   Name "q19"
+   Pos 960 160
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q20 {
+   Name "q20"
+   Pos 1120 160
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q21 {
+   Name "q21"
+   Pos 1280 160
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q22 {
+   Name "q22"
+   Pos 1440 160
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q23 {
+   Name "q23"
+   Pos 1600 160
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q24 {
+   Name "q24"
+   Pos 1760 160
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q25 {
+   Name "q25"
+   Pos 0 320
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q26 {
+   Name "q26"
+   Pos 160 320
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q27 {
+   Name "q27"
+   Pos 320 320
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q28 {
+   Name "q28"
+   Pos 480 320
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q29 {
+   Name "q29"
+   Pos 640 320
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q30 {
+   Name "q30"
+   Pos 800 320
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q31 {
+   Name "q31"
+   Pos 960 320
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q32 {
+   Name "q32"
+   Pos 1120 320
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q33 {
+   Name "q33"
+   Pos 1280 320
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q34 {
+   Name "q34"
+   Pos 1440 320
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q35 {
+   Name "q35"
+   Pos 1600 320
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q36 {
+   Name "q36"
+   Pos 1760 320
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q37 {
+   Name "q37"
+   Pos 0 480
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q38 {
+   Name "q38"
+   Pos 160 480
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q39 {
+   Name "q39"
+   Pos 320 480
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q40 {
+   Name "q40"
+   Pos 480 480
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q41 {
+   Name "q41"
+   Pos 640 480
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q42 {
+   Name "q42"
+   Pos 800 480
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q43 {
+   Name "q43"
+   Pos 960 480
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q44 {
+   Name "q44"
+   Pos 1120 480
+   Size 160 160
+   Flags 0
+  }
+  ImageSetDefClass q45 {
+   Name "q45"
+   Pos 1280 480
+   Size 160 160
+   Flags 0
+  }
+ }
+}

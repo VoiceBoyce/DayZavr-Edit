@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<modded_inputs>
+	<inputs>
+		<actions>
+			<input name="UAIntPdaOpen" loc="STR_INT_PDA_INPUT_OPEN"/>
+			<input name="UAIntPdaAdmin" loc="STR_INT_PDA_INPUT_ADMIN"/>
+			<input name="UAIntPdaReload" loc="STR_INT_PDA_INPUT_RELOAD"/>
+		</actions>
+		<sorting name="int_pda" loc="STR_INT_PDA_INPUT_GROUP">
+			<input name="UAIntPdaOpen"/>
+			<input name="UAIntPdaAdmin"/>
+			<input name="UAIntPdaReload"/>
+		</sorting>
+	</inputs>
+	<preset>
+		<input name="UAIntPdaOpen">
+			<btn name="kP"/>
+		</input>
+		<input name="UAIntPdaAdmin">
+			<btn name="kLMenu">
+				<btn name="kL"/>
+			</btn>
+		</input>
+		<input name="UAIntPdaReload">
+			<btn name="kLControl">
+				<btn name="kLMenu">
+					<btn name="kP"/>
+				</btn>
+			</btn>
+		</input>
+	</preset>
+</modded_inputs>

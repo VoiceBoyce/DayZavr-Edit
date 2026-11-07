@@ -1,0 +1,56 @@
+{
+    "Version": 1,
+    "Id": "gp008",
+    "Name": "Братва",
+    "Emblem": 33,
+    "Motto": "Было ваше , стало наше",
+    "Base": "Дэпо",
+    "Created": "2026-10-30 19:43:47",
+    "Ranks": [
+        "Шнырь",
+        "Форточник",
+        "Бывалый",
+        "Свояк",
+        "Пахан",
+        "Бугор"
+    ],
+    "Members": [
+        {
+            "SteamId": "76561199527454564",
+            "Callsign": "Otec",
+            "Rank": "Бугор",
+            "Role": 3,
+            "Joined": "2026-11-03"
+        },
+        {
+            "SteamId": "76561201601040341",
+            "Callsign": "Sipliy",
+            "Rank": "Форточник",
+            "Role": 1,
+            "Joined": "2026-11-03"
+        },
+        {
+            "SteamId": "76561200206806141",
+            "Callsign": "Krest",
+            "Rank": "Свояк",
+            "Role": 1,
+            "Joined": "2026-11-04"
+        },
+        {
+            "SteamId": "76561200000065480",
+            "Callsign": "Kryz",
+            "Rank": "Пахан",
+            "Role": 2,
+            "Joined": "2026-11-04"
+        },
+        {
+            "SteamId": "76561199855685693",
+            "Callsign": "Sanya Vozduh",
+            "Rank": "Шнырь",
+            "Role": 1,
+            "Joined": "2026-11-04"
+        }
+    ],
+    "Marks": [],
+    "NextMarkId": 0
+}

@@ -1,0 +1,74 @@
+MapWidgetClass INT_PDA_Map {
+ visible 1
+ clipchildren 1
+ ignorepointer 1
+ color 1 1 1 1
+ position 0 0
+ size 1 1
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ {
+  FrameWidgetClass INT_PDA_MapVeil {
+   visible 1
+   ignorepointer 1
+   clipchildren 0
+   position 0 0
+   size 1 1
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   priority 290
+  }
+  FrameWidgetClass INT_PDA_MapMarks {
+   visible 1
+   ignorepointer 1
+   clipchildren 0
+   position 0 0
+   size 1 1
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   priority 300
+  }
+  FrameWidgetClass INT_PDA_MapLabels {
+   visible 1
+   ignorepointer 1
+   clipchildren 0
+   position 0 0
+   size 1 1
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   priority 310
+  }
+  FrameWidgetClass INT_PDA_MapInput {
+   visible 1
+   ignorepointer 1
+   clipchildren 0
+   position 0 0
+   size 1 1
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   priority 315
+  }
+  FrameWidgetClass INT_PDA_MapOverlay {
+   visible 1
+   ignorepointer 1
+   clipchildren 0
+   position 0 0
+   size 1 1
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   priority 320
+  }
+ }
+}

@@ -1,0 +1,36 @@
+ImageSetClass {
+ Name "int_pda_slots"
+ RefSize 256 256
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "INT_PDA_CL/gui/textures/int_pda_slots_ca.paa"
+  }
+ }
+ Images {
+  ImageSetDefClass gps {
+   Name "gps"
+   Pos 0 0
+   Size 128 128
+   Flags 0
+  }
+  ImageSetDefClass map {
+   Name "map"
+   Pos 128 0
+   Size 128 128
+   Flags 0
+  }
+  ImageSetDefClass chat {
+   Name "chat"
+   Pos 0 128
+   Size 128 128
+   Flags 0
+  }
+  ImageSetDefClass gp {
+   Name "gp"
+   Pos 128 128
+   Size 128 128
+   Flags 0
+  }
+ }
+}

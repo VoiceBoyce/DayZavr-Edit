@@ -1,0 +1,18 @@
+ImageSetClass {
+ Name "int_pda_logo"
+ RefSize 1024 512
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "INT_PDA_CL/gui/textures/int_pda_logo_ca.paa"
+  }
+ }
+ Images {
+  ImageSetDefClass logo {
+   Name "logo"
+   Pos 0 113
+   Size 1024 286
+   Flags 0
+  }
+ }
+}
