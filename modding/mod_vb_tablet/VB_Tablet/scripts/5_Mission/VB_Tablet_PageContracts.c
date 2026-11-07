@@ -108,7 +108,11 @@ class VB_TabletPageContracts extends VB_TabletTabbedPage
 		INT_UIF_Draw.Text(f, 790, 74, 362, 22, VBT.T("#STR_VB_TAB_C_SWAP_LEFT") + " " + left, 14, leftCol);
 		int n = client.MyContracts.Count();
 		for (int i = 0; i < n; i++)
-			PaintCard(0, 128 + i * 200, client.MyContracts.Get(i), 844, true, i, client);
+		{
+			int cardRow = i / 2;
+			int cardCol = i % 2;
+			PaintCard(cardCol * 428, 128 + cardRow * 304, client.MyContracts.Get(i), 412, true, i, client, 288);
+		}
 		Widget u = INT_UIF_Draw.Frame(m_Root, 856, 128, 316, 226);
 		INT_UIF_Surface.Box(u, 0, 0, 316, 226, 10, VB_C_PANEL2);
 		VBT.Corners(u, 316, 226, VB_C_ACCENT, 14);
@@ -175,9 +179,11 @@ class VB_TabletPageContracts extends VB_TabletTabbedPage
 		m_BtnLevels = new VBT_Button(u, 20, 164, 276, 44, "#STR_VB_TAB_C_ALL_LEVELS", false, "rank", m_Menu.GetHitHandler());
 	}
 
-	protected void PaintCard(float x, float y, VB_ClanContract k, float w, bool my, int index, VB_TabletClient client)
+	protected void PaintCard(float x, float y, VB_ClanContract k, float w, bool my, int index, VB_TabletClient client, float h = 192)
 	{
-		float h = 192;
+		// Карточка выше обычной: полоса прогресса к середине, награда к низу.
+		float mid = (h - 192) * 0.5;
+		float low = h - 192;
 		float e = w - 20;
 		Widget f = VBT.Card(m_Root, x, y, w, h);
 		array<int> tierCol = {VB_C_DIM, VB_C_GOLD, VB_C_BAD};
@@ -210,43 +216,43 @@ class VB_TabletPageContracts extends VB_TabletTabbedPage
 		INT_UIF_Draw.Text(f, e - tw0, 22, tw0, 22, tierName, 12, color, INT_UIF_Align.CENTER);
 		int need = Math.Max(1, k.Need);
 		int p = Math.Round(k.Have * 100.0 / need);
-		INT_UIF_Draw.Text(f, 20, 90, 240, 22, k.Have.ToString() + "/" + k.Need.ToString(), 16, VB_C_TEXT);
-		INT_UIF_Draw.Text(f, e - 100, 90, 100, 22, p.ToString() + "%", 15, VB_C_DIM, INT_UIF_Align.RIGHT);
+		INT_UIF_Draw.Text(f, 20, 90 + mid, 240, 22, k.Have.ToString() + "/" + k.Need.ToString(), 16, VB_C_TEXT);
+		INT_UIF_Draw.Text(f, e - 100, 90 + mid, 100, 22, p.ToString() + "%", 15, VB_C_DIM, INT_UIF_Align.RIGHT);
 		int barCol = VB_C_OK;
 		if (active)
 			barCol = VB_C_ACCENT;
 		int cells = Math.Round((e - 20) / 10.3);
-		VBT.Ticks(f, 20, 116, e - 20, 12, cells, k.Have / (need + 0.0), barCol);
-		VBT.Ico(f, 20, 150, 18, "sym_bolt", VB_C_INF);
+		VBT.Ticks(f, 20, 116 + mid, e - 20, 12, cells, k.Have / (need + 0.0), barCol);
+		VBT.Ico(f, 20, 150 + low, 18, "sym_bolt", VB_C_INF);
 		string gain = "+" + k.Reward.ToString();
 		float tw = INT_UIF_Draw.TextWidth(gain, 16) + 8;
-		INT_UIF_Draw.Text(f, 44, 144, tw, 30, gain, 16, VB_C_INF);
+		INT_UIF_Draw.Text(f, 44, 144 + low, tw, 30, gain, 16, VB_C_INF);
 		if (k.Cash > 0)
-			VBK.Money(f, 44 + tw + 18, 149, k.Cash, 16);
+			VBK.Money(f, 44 + tw + 18, 149 + low, k.Cash, 16);
 		if (my)
 		{
 			string xt = "+" + k.Xp.ToString() + " " + VBT.T("#STR_VB_TAB_C_XP");
 			float x0 = 44 + tw + 18;
-			VBT.Ico(f, x0, 150, 18, "rank", VB_C_ACCENT);
-			INT_UIF_Draw.Text(f, x0 + 24, 144, INT_UIF_Draw.TextWidth(xt, 16) + 8, 30, xt, 16, VB_C_ACCENT);
+			VBT.Ico(f, x0, 150 + low, 18, "rank", VB_C_ACCENT);
+			INT_UIF_Draw.Text(f, x0 + 24, 144 + low, INT_UIF_Draw.TextWidth(xt, 16) + 8, 30, xt, 16, VB_C_ACCENT);
 		}
 		if (ready)
 		{
-			m_Buttons.Insert(new VBT_Button(f, e - 120, 140, 120, 38, "#STR_VB_TAB_C_CLAIM", true, "", m_Menu.GetHitHandler(), 14));
+			m_Buttons.Insert(new VBT_Button(f, e - 120, 140 + low, 120, 38, "#STR_VB_TAB_C_CLAIM", true, "", m_Menu.GetHitHandler(), 14));
 			m_ClaimAt.Insert(index);
 			m_SwapAt.Insert(-1);
 		}
 		else if (k.Stage == VB_ContractStage.DONE)
 		{
 			float dw = INT_UIF_Draw.TextWidth("#STR_VB_TAB_C_DONE", 14) + 4;
-			VBT.Ico(f, e - dw - 22, 151, 16, "check", VB_C_OK);
-			INT_UIF_Draw.Text(f, e - dw, 144, dw, 30, "#STR_VB_TAB_C_DONE", 14, VB_C_OK);
+			VBT.Ico(f, e - dw - 22, 151 + low, 16, "check", VB_C_OK);
+			INT_UIF_Draw.Text(f, e - dw, 144 + low, dw, 30, "#STR_VB_TAB_C_DONE", 14, VB_C_OK);
 			// В макете выполненная карточка приглушена. Прозрачность родителя у движка не наследуется.
 			INT_UIF_Surface.Box(f, 0, 0, w, h, 10, INT_UIF_Color.WithAlpha(VB_C_BG, 97));
 		}
 		else if (my && client.MyReplace)
 		{
-			m_Buttons.Insert(new VBT_Button(f, e - 120, 140, 120, 38, "#STR_VB_TAB_C_SWAP", false, "refresh", m_Menu.GetHitHandler(), 14));
+			m_Buttons.Insert(new VBT_Button(f, e - 120, 140 + low, 120, 38, "#STR_VB_TAB_C_SWAP", false, "refresh", m_Menu.GetHitHandler(), 14));
 			m_ClaimAt.Insert(-1);
 			m_SwapAt.Insert(index);
 		}
@@ -352,6 +358,8 @@ class VB_TabletPageContracts extends VB_TabletTabbedPage
 		if (!m_Timer)
 			return;
 		int left = VB_TabletClient.Get().NextDayLeft();
+		if (s_Tab == 1)
+			left = VB_TabletClient.Get().NextMyLeft();
 		int hh = left / 3600;
 		int mm = (left % 3600) / 60;
 		int ss = left % 60;

@@ -9,21 +9,99 @@ class VB_TabletContracts
 	protected static int MixOf(bool my, int level, int tier)
 	{
 		array<int> clan = {6, 0, 0, 5, 1, 0, 4, 2, 0, 3, 3, 0, 3, 2, 1};
-		array<int> mine = {3, 0, 0, 3, 0, 0, 2, 1, 0, 2, 1, 0, 1, 1, 1};
+		array<int> mine = {4, 0, 0, 4, 0, 0, 3, 1, 0, 2, 2, 0, 2, 1, 1};
 		int lv = Math.Clamp(level, 1, VB_CLAN_LEVELS) - 1;
 		if (my)
 			return mine.Get(lv * 3 + tier);
 		return clan.Get(lv * 3 + tier);
 	}
 
-	// Контракт без счётчика никогда не выполнится, такой не выдаём.
-	protected static bool Usable(VB_TabletContractDef d)
+	protected static ref array<ref VB_TabletContractDef> s_Defs;
+	protected static ref array<string> s_Names;
+	protected static ref map<string, bool> s_Boxes;
+
+	// Есть ли на сервере хотя бы один класс из списка: иначе контракт нельзя выполнить.
+	protected static bool AnyExists(array<string> classes)
 	{
-		if (d.Need <= 0)
-			return false;
-		if (d.Kind == "mutant")
-			return VB_TabletConfig.Get().Mutants.Count() > 0;
-		return d.Kind == "zombie" || d.Kind == "animal" || d.Kind == "km" || d.Kind == "hours";
+		if (!s_Names)
+		{
+			s_Names = new array<string>();
+			int n = GetGame().ConfigGetChildrenCount("CfgVehicles");
+			string name;
+			for (int i = 0; i < n; i++)
+			{
+				if (GetGame().ConfigGetChildName("CfgVehicles", i, name))
+					s_Names.Insert(name);
+			}
+		}
+		foreach (string cls : classes)
+		{
+			int star = cls.Length() - 1;
+			if (star > 0 && cls.Get(star) == "*")
+			{
+				string head = cls.Substring(0, star);
+				foreach (string have : s_Names)
+				{
+					if (have.IndexOf(head) == 0)
+						return true;
+				}
+			}
+			else if (GetGame().ConfigIsExisting("CfgVehicles " + cls))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	protected static bool Countable(string kind)
+	{
+		VB_TabletConfig cfg = VB_TabletConfig.Get();
+		if (kind == "mutant")
+			return AnyExists(cfg.Mutants);
+		foreach (VB_TabletKillGroup k : cfg.KillGroups)
+		{
+			if (k.Kind == kind)
+				return AnyExists(k.Classes);
+		}
+		foreach (VB_TabletKillGroup b : cfg.LootGroups)
+		{
+			if (b.Kind == kind)
+				return AnyExists(b.Classes);
+		}
+		array<string> known = {"zombie", "animal", "skin", "km", "car", "hours", "fish", "wood", "bush", "rock", "craft", "repair", "build", "fire"};
+		return known.Find(kind) >= 0;
+	}
+
+	// Общий список: из каждого типа по контракту на сложность. Собирается один раз.
+	protected static array<ref VB_TabletContractDef> Defs()
+	{
+		if (s_Defs)
+			return s_Defs;
+		s_Defs = new array<ref VB_TabletContractDef>();
+		array<ref VB_TabletContractType> types = VB_TabletConfig.Get().Contracts;
+		foreach (VB_TabletContractType t : types)
+		{
+			if (!Countable(t.Kind) || t.Need.Count() != 3)
+				continue;
+			for (int tier = 0; tier < 3; tier++)
+			{
+				if (t.Need.Get(tier) <= 0)
+					continue;
+				VB_TabletContractDef d = new VB_TabletContractDef();
+				d.Code = t.Kind + "_" + tier.ToString();
+				d.Tier = tier;
+				d.Kind = t.Kind;
+				d.Need = t.Need.Get(tier);
+				d.ClanMult = Math.Max(1, t.ClanMult);
+				d.Ico = t.Ico;
+				d.Title = t.Title;
+				d.Hint = t.Hint;
+				s_Defs.Insert(d);
+			}
+		}
+		Print(VB_TABLET_TAG + " контрактов доступно: " + s_Defs.Count());
+		return s_Defs;
 	}
 
 	protected static VB_ClanContract Make(VB_TabletContractDef d, bool my)
@@ -34,41 +112,72 @@ class VB_TabletContracts
 		k.Tier = Math.Clamp(d.Tier, 0, 2);
 		k.Kind = d.Kind;
 		k.Need = d.Need;
-		k.Reward = d.Reward;
 		k.Ico = d.Ico;
 		k.Title = d.Title;
 		k.Hint = d.Hint;
 		if (my)
+		{
+			k.Reward = cfg.RewardMy.Get(k.Tier);
 			k.Xp = cfg.XpMy.Get(k.Tier);
+		}
 		else
 		{
-			k.Cash = d.Cash;
+			k.Need = d.Need * d.ClanMult;
+			k.Reward = cfg.RewardClan.Get(k.Tier);
+			k.Cash = cfg.CashClan.Get(k.Tier);
 			k.Xp = cfg.Rates.XpContract;
 		}
 		return k;
 	}
 
-	protected static void Pick(array<ref VB_TabletContractDef> defs, int tier, int count, bool my, array<ref VB_ClanContract> into)
+	// Подходящие задания. strict 2: без заданий прошлого набора и без второго задания того же типа,
+	// 1: только без второго того же типа, 0: лишь без точного повтора внутри набора.
+	protected static void Pool(array<ref VB_TabletContractDef> defs, int tier, int strict, array<string> last, array<ref VB_ClanContract> into, array<ref VB_TabletContractDef> pool)
 	{
-		array<ref VB_TabletContractDef> pool = new array<ref VB_TabletContractDef>();
+		pool.Clear();
 		foreach (VB_TabletContractDef d : defs)
 		{
-			if (d.Tier == tier && Usable(d))
+			if (d.Tier != tier)
+				continue;
+			if (strict == 2 && last.Find(d.Code) >= 0)
+				continue;
+			bool taken = false;
+			foreach (VB_ClanContract k : into)
+			{
+				if (k.Code == d.Code || (strict > 0 && k.Kind == d.Kind))
+					taken = true;
+			}
+			if (!taken)
 				pool.Insert(d);
 		}
-		for (int i = 0; i < count && pool.Count() > 0; i++)
+	}
+
+	protected static void Pick(array<ref VB_TabletContractDef> defs, int tier, int count, bool my, array<string> last, array<ref VB_ClanContract> into)
+	{
+		array<ref VB_TabletContractDef> pool = new array<ref VB_TabletContractDef>();
+		for (int i = 0; i < count; i++)
 		{
-			int at = Math.RandomInt(0, pool.Count());
-			into.Insert(Make(pool.Get(at), my));
-			pool.Remove(at);
+			// Пока заданий мало, условия смягчаются: лучше повтор, чем пустое место в наборе.
+			for (int strict = 2; strict >= 0; strict--)
+			{
+				Pool(defs, tier, strict, last, into, pool);
+				if (pool.Count() > 0)
+					break;
+			}
+			if (pool.Count() == 0)
+				return;
+			into.Insert(Make(pool.Get(Math.RandomInt(0, pool.Count())), my));
 		}
 	}
 
 	protected static void Fill(array<ref VB_TabletContractDef> defs, int level, bool my, array<ref VB_ClanContract> into)
 	{
+		array<string> last = new array<string>();
+		foreach (VB_ClanContract old : into)
+			last.Insert(old.Code);
 		into.Clear();
 		for (int tier = 0; tier < 3; tier++)
-			Pick(defs, tier, MixOf(my, level, tier), my, into);
+			Pick(defs, tier, MixOf(my, level, tier), my, last, into);
 	}
 
 	protected static void MarkDirty(VB_Clan c)
@@ -77,20 +186,41 @@ class VB_TabletContracts
 			s_Dirty.Insert(c.Id);
 	}
 
+	// Номер текущего периода: часы от начала счёта, делённые на длину периода. Смена приходится на кратные часы от 00:00.
+	protected static int Period(int hours)
+	{
+		int h;
+		int m;
+		int s;
+		GetHourMinuteSecond(h, m, s);
+		return (VB_TabletPlayers.DayKey() * 24 + h) / Math.Max(1, hours);
+	}
+
+	protected static int SecondsLeft(int hours)
+	{
+		int h;
+		int m;
+		int s;
+		GetHourMinuteSecond(h, m, s);
+		int span = Math.Max(1, hours);
+		int passed = (VB_TabletPlayers.DayKey() * 24 + h) % span;
+		return span * 3600 - (passed * 3600 + m * 60 + s);
+	}
+
 	protected static void EnsureDay(VB_Clan c)
 	{
-		int today = VB_TabletPlayers.DayKey();
+		int today = Period(VB_TabletConfig.Get().ClanContractHours);
 		if (c.ContractsDay == today)
 			return;
 		c.ContractsDay = today;
-		Fill(VB_TabletConfig.Get().ClanContracts, c.Level, false, c.Contracts);
+		Fill(Defs(), c.Level, false, c.Contracts);
 		MarkDirty(c);
 	}
 
 	// Набор личных привязан к игроку на день: выход и вступление в клан его не обновляют.
 	protected static void EnsureMy(VB_TabletRecord rec, VB_Clan c)
 	{
-		int today = VB_TabletPlayers.DayKey();
+		int today = Period(VB_TabletConfig.Get().MyContractHours);
 		if (rec.MyDay == today)
 			return;
 		foreach (VB_ClanContract k : rec.MyContracts)
@@ -99,7 +229,7 @@ class VB_TabletContracts
 				PayMy(c, rec, k);
 		}
 		rec.MyDay = today;
-		Fill(VB_TabletConfig.Get().MyContracts, c.Level, true, rec.MyContracts);
+		Fill(Defs(), c.Level, true, rec.MyContracts);
 		rec.Dirty = true;
 		rec.MyDirty = true;
 	}
@@ -268,6 +398,69 @@ class VB_TabletContracts
 		Add(rec, kind, 1, false);
 	}
 
+	// Действие игрока: рыбалка, рубка, крафт и другие счётчики из VB_TabletSE_ContractHooks.
+	static void OnAction(PlayerBase player, string kind)
+	{
+		if (!player || !player.GetIdentity())
+			return;
+		PlayerIdentity id = player.GetIdentity();
+		Add(VB_TabletPlayers.Get(id.GetPlainId(), id.GetName()), kind, 1, false);
+	}
+
+	// Предмет взят из ящика ивента. Один ящик засчитывается игроку один раз.
+	static void OnItemMoved(InventoryLocation oldLoc, InventoryLocation newLoc)
+	{
+		EntityAI from = oldLoc.GetParent();
+		EntityAI to = newLoc.GetParent();
+		if (!from || !to || from.GetHierarchyRootPlayer())
+			return;
+		PlayerBase player = PlayerBase.Cast(to.GetHierarchyRootPlayer());
+		if (!player || !player.GetIdentity())
+			return;
+		EntityAI box = from.GetHierarchyRoot();
+		if (!box)
+			return;
+		array<ref VB_TabletKillGroup> groups = VB_TabletConfig.Get().LootGroups;
+		foreach (VB_TabletKillGroup group : groups)
+		{
+			if (!VB_TabletServer.IsListed(box, group.Classes))
+				continue;
+			int low;
+			int high;
+			box.GetNetworkID(low, high);
+			string key = player.GetIdentity().GetPlainId() + ":" + low.ToString() + ":" + high.ToString();
+			if (!s_Boxes)
+				s_Boxes = new map<string, bool>();
+			if (s_Boxes.Contains(key))
+				return;
+			if (s_Boxes.Count() > 5000)
+				s_Boxes.Clear();
+			s_Boxes.Set(key, true);
+			OnAction(player, group.Kind);
+		}
+	}
+
+	// Поездка: расстояние между проверками, пока игрок в транспорте. Большой скачок это телепорт, он не считается.
+	protected static void TrackCar(VB_TabletRecord rec, PlayerBase player)
+	{
+		vector at = player.GetPosition();
+		bool seated = player.IsInVehicle();
+		if (seated && rec.CarKnown)
+		{
+			float moved = vector.Distance(at, rec.CarAt);
+			if (moved < 2500)
+				rec.CarLeft = rec.CarLeft + moved;
+			if (rec.CarLeft >= 1000)
+			{
+				int km = rec.CarLeft / 1000;
+				rec.CarLeft = rec.CarLeft - km * 1000;
+				Add(rec, "car", km, false);
+			}
+		}
+		rec.CarKnown = seated;
+		rec.CarAt = at;
+	}
+
 	// Метры из статистики движка копятся до целых километров.
 	static void OnWalk(VB_TabletRecord rec, float meters)
 	{
@@ -287,15 +480,6 @@ class VB_TabletContracts
 			Add(rec, "hours", hours, true);
 	}
 
-	protected static int SecondsLeft()
-	{
-		int h;
-		int m;
-		int s;
-		GetHourMinuteSecond(h, m, s);
-		return 86400 - (h * 3600 + m * 60 + s);
-	}
-
 	static void Send(PlayerBase player, PlayerIdentity id)
 	{
 		string uid = id.GetPlainId();
@@ -307,7 +491,9 @@ class VB_TabletContracts
 			EnsureMy(rec, c);
 		}
 		int op = VB_TabletOp.CONTRACTS;
-		int left = SecondsLeft();
+		VB_TabletConfig cfg = VB_TabletConfig.Get();
+		int left = SecondsLeft(cfg.ClanContractHours);
+		int myLeft = SecondsLeft(cfg.MyContractHours);
 		bool free = rec.MyReplaceDay != VB_TabletPlayers.DayKey();
 		int n = 0;
 		if (c)
@@ -315,6 +501,7 @@ class VB_TabletContracts
 		ScriptRPC rpc = new ScriptRPC();
 		rpc.Write(op);
 		rpc.Write(left);
+		rpc.Write(myLeft);
 		rpc.Write(free);
 		rpc.Write(n);
 		if (c)
@@ -411,10 +598,10 @@ class VB_TabletContracts
 		}
 		int tier = rec.MyContracts.Get(index).Tier;
 		VB_TabletContractDef fresh = null;
-		array<ref VB_TabletContractDef> defs = VB_TabletConfig.Get().MyContracts;
+		array<ref VB_TabletContractDef> defs = Defs();
 		foreach (VB_TabletContractDef d : defs)
 		{
-			if (fresh || d.Tier != tier || !Usable(d))
+			if (fresh || d.Tier != tier)
 				continue;
 			bool used = false;
 			foreach (VB_ClanContract k : rec.MyContracts)
@@ -455,6 +642,7 @@ class VB_TabletContracts
 			VB_TabletRecord rec = VB_TabletPlayers.Get(uid, id.GetName());
 			EnsureDay(c);
 			EnsureMy(rec, c);
+			TrackCar(rec, player);
 			if (rec.MyDirty && s_Dirty.Find(c.Id) < 0)
 				Send(player, id);
 		}

@@ -17,6 +17,7 @@ class VB_TabletPageRating extends VB_TabletTabbedPage
 	protected ref array<string> m_ClanIds;
 	protected ref array<ref INT_UIF_Surface> m_ClanBgs;
 	protected ref array<Widget> m_PlayerHits;
+	protected float m_Dy;
 	protected string m_CardName;
 	protected int m_CardXp;
 	protected string m_CardTag;
@@ -139,7 +140,11 @@ class VB_TabletPageRating extends VB_TabletTabbedPage
 			AddClanHit(HitAt(f, 0, 0, w, h), row.Id, null);
 		}
 
-		Widget t = VBT.Card(m_Root, 0, 184, 800, 536);
+		// Без кланов пьедестала нет: таблица и правая колонка поднимаются наверх.
+		m_Dy = 0;
+		if (n == 0)
+			m_Dy = 184;
+		Widget t = VBT.Card(m_Root, 0, 184 - m_Dy, 800, 536 + m_Dy);
 		VBT.Cap(t, 24, 18, 40, "#STR_VB_TAB_NUM");
 		VBT.Cap(t, 76, 18, 300, "#STR_VB_TAB_CLAN");
 		VBT.Cap(t, 400, 18, 70, "#STR_VB_TAB_A_LEVEL_C");
@@ -147,8 +152,8 @@ class VB_TabletPageRating extends VB_TabletTabbedPage
 		INT_UIF_Draw.Text(t, 560, 18, 216, 18, "#STR_VB_TAB_A_INFLUENCE_C", 13, VB_C_DIM, INT_UIF_Align.RIGHT);
 		INT_UIF_Draw.Line(t, 0, 46, 800, 1, VB_C_LINE);
 		if (n == 0)
-			INT_UIF_Draw.Text(t, 0, 252, 800, 32, "#STR_VB_TAB_NO_CLANS", 17, VB_C_DIM, INT_UIF_Align.CENTER);
-		m_ClanScroll = INT_UIF_Draw.Scroll(t, 0, 47, 800, 488);
+			INT_UIF_Draw.Text(t, 0, 252 + m_Dy * 0.5, 800, 32, "#STR_VB_TAB_NO_CLANS", 17, VB_C_DIM, INT_UIF_Align.CENTER);
+		m_ClanScroll = INT_UIF_Draw.Scroll(t, 0, 47, 800, 488 + m_Dy);
 		Widget L = INT_UIF_Draw.ScrollContent(m_ClanScroll);
 		int rest = Math.Max(0, n - 3);
 		INT_UIF_Draw.SetScrollContent(m_ClanScroll, rest * 47 + 6);
@@ -201,15 +206,15 @@ class VB_TabletPageRating extends VB_TabletTabbedPage
 
 	protected void BuildMode()
 	{
-		m_BtnWeek = new VBT_Button(m_Root, 816, 184, 170, 40, "#STR_VB_TAB_A_FOR_WEEK", s_Mode == 0, "", m_Menu.GetHitHandler(), 14);
-		m_BtnAll = new VBT_Button(m_Root, 1002, 184, 170, 40, "#STR_VB_TAB_A_FOR_ALL", s_Mode == 1, "", m_Menu.GetHitHandler(), 14);
+		m_BtnWeek = new VBT_Button(m_Root, 816, 184 - m_Dy, 170, 40, "#STR_VB_TAB_A_FOR_WEEK", s_Mode == 0, "", m_Menu.GetHitHandler(), 14);
+		m_BtnAll = new VBT_Button(m_Root, 1002, 184 - m_Dy, 170, 40, "#STR_VB_TAB_A_FOR_ALL", s_Mode == 1, "", m_Menu.GetHitHandler(), 14);
 	}
 
 	protected void BuildRewards()
 	{
 		array<int> rewards = {100000, 60000, 30000};
 		array<int> medal = {VB_C_GOLD, VB_C_SILVER, VB_C_BRONZE};
-		Widget w = INT_UIF_Draw.Frame(m_Root, 816, 240, 356, 226);
+		Widget w = INT_UIF_Draw.Frame(m_Root, 816, 240 - m_Dy, 356, 226);
 		INT_UIF_Surface.Box(w, 0, 0, 356, 226, 10, VB_C_PANEL, VB_C_LINE);
 		VBT.Corners(w, 356, 226, VB_C_GOLD, 14);
 		VBT.Cap(w, 20, 16, 316, "#STR_VB_TAB_A_WEEK_REWARD_C");
@@ -228,14 +233,14 @@ class VB_TabletPageRating extends VB_TabletTabbedPage
 
 	protected void BuildOwnClan(array<VB_ClanRow> list, int place)
 	{
-		Widget m = VBT.Card(m_Root, 816, 482, 356, 238, "#STR_VB_TAB_A_YOUR_CLAN_C");
+		Widget m = VBT.Card(m_Root, 816, 482 - m_Dy, 356, 238 + m_Dy, "#STR_VB_TAB_A_YOUR_CLAN_C");
 		if (place == 0)
 		{
 			// Клан есть, а список ещё не пришёл: кнопку создания не показываем.
 			if (VB_TabletClient.Get().Clan)
 				return;
 			INT_UIF_Draw.MText(m, 20, 48, 316, 90, "#STR_VB_TAB_A_RATING_HINT", 16, VB_C_DIM);
-			m_BtnCreate = new VBT_Button(m, 20, 170, 316, 48, "#STR_VB_TAB_CREATE", true, "", m_Menu.GetHitHandler());
+			m_BtnCreate = new VBT_Button(m, 20, 170 + m_Dy, 316, 48, "#STR_VB_TAB_CREATE", true, "", m_Menu.GetHitHandler());
 			return;
 		}
 		VB_ClanRow me = list.Get(place - 1);

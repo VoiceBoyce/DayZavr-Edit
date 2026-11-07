@@ -90,9 +90,10 @@ const int VB_C_WHITE = 0xFFFFFFFF;
 const string VB_TABLET_IMAGESET = "VB_Tablet_Data/gui/imagesets/vb_tablet.imageset";
 const string VB_TABLET_LAYOUT_AREA = "VB_Tablet/gui/layouts/vb_tablet_area.layout";
 const string VB_TABLET_ICON = "set:vb_tablet image:";
+const string VB_TABLET_IMAGESET_EM = "VB_Tablet_Data/gui/imagesets/vb_tablet_em.imageset";
+const string VB_TABLET_ICON_EM = "set:vb_tablet_em image:";
 const string VB_TABLET_TEX_DEVICE = "VB_Tablet_Data/gui/textures/vb_tablet_device_ca.paa";
 const string VB_TABLET_TEX_GLASS = "VB_Tablet_Data/gui/textures/vb_tablet_glass_ca.paa";
-const string VB_TABLET_TEX_GLOW = "VB_Tablet_Data/gui/textures/vb_tablet_glow_ca.paa";
 const string VB_TABLET_TEX_HAZARD = "VB_Tablet_Data/gui/textures/vb_tablet_hazard_ca.paa";
 const string VB_TABLET_LAYOUT_PREVIEW = "VB_Tablet/gui/layouts/vb_tablet_preview.layout";
 

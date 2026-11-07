@@ -251,6 +251,7 @@ class VB_TabletMenu extends INT_UIF_Menu
 		{
 			s_AssetsLoaded = true;
 			LoadWidgetImageSet(VB_TABLET_IMAGESET);
+			LoadWidgetImageSet(VB_TABLET_IMAGESET_EM);
 		}
 		return super.Init();
 	}

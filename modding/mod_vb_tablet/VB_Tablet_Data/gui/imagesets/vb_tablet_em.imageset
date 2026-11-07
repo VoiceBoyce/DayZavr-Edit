@@ -1,0 +1,324 @@
+ImageSetClass {
+ Name "vb_tablet_em"
+ RefSize 2048 2048
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "VB_Tablet_Data/gui/textures/vb_tablet_emblem_ca.paa"
+  }
+ }
+ Images {
+  ImageSetDefClass shp_badge {
+   Name "shp_badge"
+   Pos 2 2
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass shp_banner {
+   Name "shp_banner"
+   Pos 262 2
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass shp_chevron {
+   Name "shp_chevron"
+   Pos 522 2
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass shp_circle {
+   Name "shp_circle"
+   Pos 782 2
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass shp_crest {
+   Name "shp_crest"
+   Pos 1042 2
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass shp_diamond {
+   Name "shp_diamond"
+   Pos 1302 2
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass shp_hex {
+   Name "shp_hex"
+   Pos 1562 2
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass shp_octagon {
+   Name "shp_octagon"
+   Pos 2 262
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass shp_pentagon {
+   Name "shp_pentagon"
+   Pos 262 262
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass shp_shield {
+   Name "shp_shield"
+   Pos 522 262
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass shp_square {
+   Name "shp_square"
+   Pos 782 262
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass shp_star {
+   Name "shp_star"
+   Pos 1042 262
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_anchor {
+   Name "sym_anchor"
+   Pos 1302 262
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_arrow {
+   Name "sym_arrow"
+   Pos 1562 262
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_axe {
+   Name "sym_axe"
+   Pos 2 522
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_bell {
+   Name "sym_bell"
+   Pos 262 522
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_bolt {
+   Name "sym_bolt"
+   Pos 522 522
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_castle {
+   Name "sym_castle"
+   Pos 782 522
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_cog {
+   Name "sym_cog"
+   Pos 1042 522
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_compass {
+   Name "sym_compass"
+   Pos 1302 522
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_cross {
+   Name "sym_cross"
+   Pos 1562 522
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_crown {
+   Name "sym_crown"
+   Pos 2 782
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_drop {
+   Name "sym_drop"
+   Pos 262 782
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_eye {
+   Name "sym_eye"
+   Pos 522 782
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_feather {
+   Name "sym_feather"
+   Pos 782 782
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_fish {
+   Name "sym_fish"
+   Pos 1042 782
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_flame {
+   Name "sym_flame"
+   Pos 1302 782
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_gem {
+   Name "sym_gem"
+   Pos 1562 782
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_hammer {
+   Name "sym_hammer"
+   Pos 2 1042
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_heart {
+   Name "sym_heart"
+   Pos 262 1042
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_horseshoe {
+   Name "sym_horseshoe"
+   Pos 522 1042
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_hourglass {
+   Name "sym_hourglass"
+   Pos 782 1042
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_key {
+   Name "sym_key"
+   Pos 1042 1042
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_leaf {
+   Name "sym_leaf"
+   Pos 1302 1042
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_moon {
+   Name "sym_moon"
+   Pos 1562 1042
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_mountain {
+   Name "sym_mountain"
+   Pos 2 1302
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_paw {
+   Name "sym_paw"
+   Pos 262 1302
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_skull {
+   Name "sym_skull"
+   Pos 522 1302
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_snow {
+   Name "sym_snow"
+   Pos 782 1302
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_spear {
+   Name "sym_spear"
+   Pos 1042 1302
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_star {
+   Name "sym_star"
+   Pos 1302 1302
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_sun {
+   Name "sym_sun"
+   Pos 1562 1302
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_sword {
+   Name "sym_sword"
+   Pos 2 1562
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_target {
+   Name "sym_target"
+   Pos 262 1562
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_tower {
+   Name "sym_tower"
+   Pos 522 1562
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_tree {
+   Name "sym_tree"
+   Pos 782 1562
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_wave {
+   Name "sym_wave"
+   Pos 1042 1562
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass sym_wolf {
+   Name "sym_wolf"
+   Pos 1302 1562
+   Size 256 256
+   Flags 0
+  }
+  ImageSetDefClass glow {
+   Name "glow"
+   Pos 8 1834
+   Size 1024 8
+   Flags 0
+  }
+  ImageSetDefClass corner_t {
+   Name "corner_t"
+   Pos 1060 1854
+   Size 128 128
+   Flags 0
+  }
+  ImageSetDefClass corner_b {
+   Name "corner_b"
+   Pos 1220 1854
+   Size 128 128
+   Flags 0
+  }
+  ImageSetDefClass solid {
+   Name "solid"
+   Pos 1416 1862
+   Size 32 32
+   Flags 0
+  }
+ }
+}

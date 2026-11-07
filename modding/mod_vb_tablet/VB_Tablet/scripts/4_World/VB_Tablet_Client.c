@@ -48,6 +48,7 @@ class VB_TabletClient
 	bool HasContracts;
 	bool MyReplace;		// бесплатная замена ещё не истрачена
 	int ContractLeft;
+	int MyContractLeft;
 	float ContractAt;
 	ref array<ref VB_ClanContract> Contracts = new array<ref VB_ClanContract>();
 	ref array<ref VB_ClanContract> MyContracts = new array<ref VB_ClanContract>();
@@ -393,6 +394,15 @@ class VB_TabletClient
 		return 86400 - (h * 3600 + m * 60 + s);
 	}
 
+	// Секунды до нового набора личных контрактов.
+	int NextMyLeft()
+	{
+		if (!HasContracts || !GetGame())
+			return 0;
+		int left = MyContractLeft - (GetGame().GetTickTime() - ContractAt);
+		return Math.Max(0, left);
+	}
+
 	// Сообщение поверх игры: работает и с закрытым планшетом.
 	protected void ReadNotify(ParamsReadContext ctx)
 	{
@@ -435,7 +445,7 @@ class VB_TabletClient
 		int i;
 		if (op == VB_TabletOp.CONTRACTS)
 		{
-			if (!ctx.Read(ContractLeft) || !ctx.Read(MyReplace))
+			if (!ctx.Read(ContractLeft) || !ctx.Read(MyContractLeft) || !ctx.Read(MyReplace))
 				return false;
 			ContractAt = GetGame().GetTickTime();
 			if (!ReadContractList(ctx, Contracts) || !ReadContractList(ctx, MyContracts))

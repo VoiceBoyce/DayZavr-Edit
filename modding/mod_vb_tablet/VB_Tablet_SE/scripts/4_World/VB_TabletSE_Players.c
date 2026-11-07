@@ -18,6 +18,11 @@ class VB_TabletRecord
 	int MyReplaceDay;	// день, когда истрачена бесплатная замена
 	ref array<ref VB_ClanContract> MyContracts = new array<ref VB_ClanContract>();
 
+	float CarLeft;		// метры поездки до целого километра
+	[NonSerialized()]
+	bool CarKnown;
+	[NonSerialized()]
+	vector CarAt;
 	[NonSerialized()]
 	string Uid;
 	[NonSerialized()]

@@ -32,21 +32,37 @@ class VBK
 		return f;
 	}
 
+	// Ширина суммы. Цифры шире оценки TextWidth фреймворка: измерено на экране, 0,585 высоты на знак.
+	static float MoneyW(string txt, float size)
+	{
+		return txt.Length() * size * 0.585;
+	}
+
 	// Сумма: монета и число, цвет золотой.
 	static void Money(Widget p, float x, float y, int val, float size, int color = VB_C_GOLD)
 	{
 		float s = Math.Round(size * 0.95);
 		VBT.Ico(p, x, y + (size * 1.3 - s) * 0.5, s, "coin", color);
 		string txt = VBT.Num(val);
-		INT_UIF_Draw.Text(p, x + s + Math.Round(size * 0.35), y, INT_UIF_Draw.TextWidth(txt, size) + 24, size * 1.3, txt, size, color);
+		INT_UIF_Draw.Text(p, x + s + Math.Round(size * 0.35), y, MoneyW(txt, size) + 24, size * 1.3, txt, size, color);
 	}
 
-	// Сумма по правому краю: right это правая граница числа.
+	// Сумма по правому краю: right это правая граница числа, число прижато к ней самим виджетом.
 	static void MoneyR(Widget p, float right, float y, int val, float size, int color = VB_C_GOLD)
 	{
 		float s = Math.Round(size * 0.95);
-		float w = INT_UIF_Draw.TextWidth(VBT.Num(val), size);
-		Money(p, right - w - s - Math.Round(size * 0.35), y, val, size, color);
+		string txt = VBT.Num(val);
+		float w = MoneyW(txt, size);
+		INT_UIF_Draw.Text(p, right - w - 20, y, w + 20, size * 1.3, txt, size, color, INT_UIF_Align.RIGHT);
+		VBT.Ico(p, right - w - Math.Round(size * 0.35) - s, y + (size * 1.3 - s) * 0.5, s, "coin", color);
+	}
+
+	// Сумма по центру: cx это середина монеты с числом.
+	static void MoneyC(Widget p, float cx, float y, int val, float size, int color = VB_C_GOLD)
+	{
+		float s = Math.Round(size * 0.95);
+		float full = s + Math.Round(size * 0.35) + MoneyW(VBT.Num(val), size);
+		Money(p, cx - full * 0.5, y, val, size, color);
 	}
 
 	// Плитка показателя: подпись, значение, значок справа.

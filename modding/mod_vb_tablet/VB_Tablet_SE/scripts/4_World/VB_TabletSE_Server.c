@@ -352,6 +352,11 @@ class VB_TabletServer
 		VB_TabletConfig cfg = VB_TabletConfig.Get();
 		PlayerIdentity id = player.GetIdentity();
 		VB_TabletRecord rec = VB_TabletPlayers.Get(id.GetPlainId(), id.GetName());
+		foreach (VB_TabletKillGroup group : cfg.KillGroups)
+		{
+			if (IsListed(victim, group.Classes))
+				VB_TabletContracts.OnKill(rec, group.Kind);
+		}
 		string kind;
 		if (IsListed(victim, cfg.Mutants))
 		{
@@ -374,12 +379,22 @@ class VB_TabletServer
 		VB_TabletContracts.OnKill(rec, kind);
 	}
 
-	protected static bool IsListed(EntityAI victim, array<string> classes)
+	static bool IsListed(EntityAI victim, array<string> classes)
 	{
+		string type = victim.GetType();
 		foreach (string cls : classes)
 		{
-			if (victim.IsKindOf(cls))
+			// Звёздочка на конце: совпадение по началу имени, годится и для будущих существ.
+			int star = cls.Length() - 1;
+			if (star > 0 && cls.Get(star) == "*")
+			{
+				if (type.IndexOf(cls.Substring(0, star)) == 0)
+					return true;
+			}
+			else if (victim.IsKindOf(cls))
+			{
 				return true;
+			}
 		}
 		return false;
 	}

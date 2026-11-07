@@ -8,7 +8,11 @@ class VBT
 
 	static ImageWidget Ico(Widget p, float x, float y, float s, string name, int color)
 	{
-		return INT_UIF_Draw.Texture(p, x, y, s, s, VB_TABLET_ICON + name, color);
+		// Формы и символы эмблем крупно берутся из большого атласа.
+		string iconSet = VB_TABLET_ICON;
+		if (s >= 24 && (name.IndexOf("shp_") == 0 || name.IndexOf("sym_") == 0))
+			iconSet = VB_TABLET_ICON_EM;
+		return INT_UIF_Draw.Texture(p, x, y, s, s, iconSet + name, color);
 	}
 
 	static Widget Card(Widget p, float x, float y, float w, float h, string cap = "")
@@ -25,12 +29,34 @@ class VBT
 		return INT_UIF_Draw.Text(p, x, y, w, 18, text, 13, color);
 	}
 
-	// Блик карточки слева. Отступ 3: прямоугольник остаётся внутри скруглённых углов.
+	// Блик карточки слева. Повторяет скругление: левый край собран из уголков и полосы, отступ 1 пиксель до рамки.
 	static void Glow(Widget p, float w, float h, int color = 0)
 	{
 		if (color == 0)
 			color = VB_C_ACCENT;
-		INT_UIF_Draw.Texture(p, 3, 3, w - 6, h - 6, VB_TABLET_TEX_GLOW, INT_UIF_Color.WithAlpha(color, 22));
+		// Радиус как у INT_UIF_Surface.Box(..., 10, ...): он выбирает готовый стиль по экранным пикселям.
+		float f = INT_UIF_Scale.Factor();
+		float px = 10 * f;
+		float r = 4;
+		if (px >= 14)
+			r = 14;
+		else if (px >= 12)
+			r = 12;
+		else if (px >= 10)
+			r = 10;
+		else if (px >= 8)
+			r = 8;
+		else if (px >= 6)
+			r = 6;
+		float inset = 1 / f;
+		float c = (r - 1) / f;
+		float bw = w - inset * 2;
+		float bh = h - inset * 2;
+		int tint = INT_UIF_Color.WithAlpha(color, 22);
+		INT_UIF_Draw.Texture(p, inset, inset, c, c, VB_TABLET_ICON_EM + "corner_t", tint);
+		INT_UIF_Draw.Texture(p, inset, inset + bh - c, c, c, VB_TABLET_ICON_EM + "corner_b", tint);
+		INT_UIF_Draw.Texture(p, inset, inset + c, c, bh - c * 2, VB_TABLET_ICON_EM + "solid", tint);
+		INT_UIF_Draw.Texture(p, inset + c, inset, bw - c, bh, VB_TABLET_ICON_EM + "glow", tint);
 	}
 
 	static void Corners(Widget p, float w, float h, int color = 0, float k = 18)

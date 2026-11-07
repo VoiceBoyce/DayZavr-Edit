@@ -342,7 +342,7 @@ class VB_TabletPageCreate extends VB_TabletPage
 		VBT.Ico(p, 44, 351, 18, "plusclan", ink);
 		INT_UIF_Draw.Text(p, 72, 332, 150, 56, "#STR_VB_TAB_CREATE", 18, ink);
 		INT_UIF_Surface.Box(p, 230, 337, 165, 46, 6, plate);
-		VBK.Money(p, 242, 348, VB_TabletClient.Get().ClanPrice, 18, gold);
+		VBK.MoneyC(p, 312, 348, VB_TabletClient.Get().ClanPrice, 18, gold);
 		if (ready)
 		{
 			m_CreateHit = HitAt(p, 24, 332, 376, 56);

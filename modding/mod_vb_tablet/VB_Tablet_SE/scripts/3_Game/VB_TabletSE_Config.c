@@ -1,4 +1,19 @@
 // Настройки сервера: $profile:VB_Mods/VB_Tablet/config.json, на боевом это Instance_1\\VB_Mods\\VB_Tablet\\.
+// Особая группа существ для отдельных контрактов: Kind пишется в контракт, Classes это классы
+// или начало имени со звёздочкой ("ERA_*"). Убийство считается и в группе, и как обычный зомби.
+class VB_TabletKillGroup
+{
+	string Kind;
+	ref array<string> Classes = new array<string>();
+
+	void VB_TabletKillGroup(string kind = "", array<string> classes = null)
+	{
+		Kind = kind;
+		if (classes)
+			Classes.Copy(classes);
+	}
+}
+
 class VB_TabletDenom
 {
 	string Item;
@@ -11,32 +26,44 @@ class VB_TabletDenom
 	}
 }
 
-// Запись списка контрактов. Kind: zombie, mutant, animal, km, hours. Tier: 0 обычный, 1 сложный, 2 элитный.
-// Title и Hint: ключ таблицы строк с # или обычный текст.
+// Тип контракта: Need это сколько сделать на обычной, сложной и элитной сложности, 0 значит такой сложности нет.
+// ClanMult: во сколько раз больше у клана. Kind: zombie, mutant, animal, skin, km, car, hours, fish, wood, bush, rock,
+// craft, repair, build, fire или Kind из KillGroups и LootGroups. Title и Hint: ключ с # или обычный текст.
+class VB_TabletContractType
+{
+	string Kind;
+	string Ico;
+	string Title;
+	string Hint;
+	ref array<int> Need = new array<int>();
+	int ClanMult = 3;
+
+	void VB_TabletContractType(string kind = "", string ico = "", int need0 = 0, int need1 = 0, int need2 = 0, int mult = 3)
+	{
+		Kind = kind;
+		Ico = ico;
+		ClanMult = mult;
+		if (kind == "")
+			return;
+		Need.Insert(need0);
+		Need.Insert(need1);
+		Need.Insert(need2);
+		Title = "#STR_VB_TAB_CK_" + kind;
+		Hint = "#STR_VB_TAB_CH_" + kind;
+	}
+}
+
+// Один контракт одной сложности, собирается из типа.
 class VB_TabletContractDef
 {
 	string Code;
 	int Tier;
 	string Kind;
 	int Need;
-	int Reward;
-	int Cash;
+	int ClanMult;
 	string Ico;
 	string Title;
 	string Hint;
-
-	void VB_TabletContractDef(string code = "", int tier = 0, string kind = "", int need = 1, int reward = 0, int cash = 0, string ico = "contract", string title = "", string hint = "")
-	{
-		Code = code;
-		Tier = tier;
-		Kind = kind;
-		Need = need;
-		Reward = reward;
-		Cash = cash;
-		Ico = ico;
-		Title = title;
-		Hint = hint;
-	}
 }
 
 class VB_TabletConfig
@@ -58,6 +85,9 @@ class VB_TabletConfig
 	int PriceTag = 15000;
 	int PriceEmblem = 20000;
 	int PriceColor = 5000;
+	int ClanContractHours = 24;	// как часто меняются клановые контракты, отсчёт от 00:00
+	int MyContractHours = 12;	// как часто меняются личные
+	ref array<ref VB_TabletKillGroup> KillGroups = new array<ref VB_TabletKillGroup>();
 	ref array<string> BannedWords = new array<string>();
 	ref array<int> WeekPrizes = new array<int>();	// награда на склад за 1, 2, 3 место недели
 	ref array<ref VB_TabletDenom> Money = new array<ref VB_TabletDenom>();
@@ -66,8 +96,11 @@ class VB_TabletConfig
 	float AtmDist = 4;			// с какого расстояния работает банкомат, метры
 	ref array<int> Levels;		// пороги влияния: Levels[n-1] открывает уровень n
 	ref array<int> XpMy;		// опыт за личный контракт по сложности
-	ref array<ref VB_TabletContractDef> ClanContracts;
-	ref array<ref VB_TabletContractDef> MyContracts;
+	ref array<ref VB_TabletContractType> Contracts;
+	ref array<int> RewardMy;	// влияние за личный контракт по сложности
+	ref array<int> RewardClan;	// влияние за клановый
+	ref array<int> CashClan;	// деньги на склад за клановый
+	ref array<ref VB_TabletKillGroup> LootGroups = new array<ref VB_TabletKillGroup>();
 
 	[NonSerialized()]
 	bool Broken;	// файл с ошибкой: значения по умолчанию, файл не перезаписываем
@@ -82,6 +115,38 @@ class VB_TabletConfig
 	bool FillDefaults()
 	{
 		bool added = false;
+		if (!KillGroups || KillGroups.Count() == 0)
+		{
+			KillGroups = new array<ref VB_TabletKillGroup>();
+			DefaultKillGroups();
+			added = true;
+		}
+		if (!LootGroups || LootGroups.Count() == 0)
+		{
+			LootGroups = new array<ref VB_TabletKillGroup>();
+			DefaultLootGroups();
+			added = true;
+		}
+		if (!Mutants || Mutants.Count() == 0)
+		{
+			Mutants = {"SFP_Trupojor", "SFP_BearZMB", "SFP_Tenevnik", "SFP_Shum*", "SFP_MutaWolf*", "SFP_Piyavka*", "SFP_Shipastiy*", "SFP_MozgoTras*", "MSFZ_Ricar*", "MSFZ_Troll*", "MSFZ_Mutant_*"};
+			added = true;
+		}
+		if (!RewardMy || RewardMy.Count() != 3)
+		{
+			RewardMy = {10, 25, 60};
+			added = true;
+		}
+		if (!RewardClan || RewardClan.Count() != 3)
+		{
+			RewardClan = {30, 120, 400};
+			added = true;
+		}
+		if (!CashClan || CashClan.Count() != 3)
+		{
+			CashClan = {1000, 5000, 15000};
+			added = true;
+		}
 		if (!WeekPrizes || WeekPrizes.Count() == 0)
 		{
 			WeekPrizes = new array<int>();
@@ -123,48 +188,116 @@ class VB_TabletConfig
 			XpMy.Insert(50);
 			added = true;
 		}
-		if (!ClanContracts || ClanContracts.Count() == 0)
+		if (!Contracts || Contracts.Count() == 0)
 		{
-			ClanContracts = new array<ref VB_TabletContractDef>();
-			DefaultClanContracts();
-			added = true;
-		}
-		if (!MyContracts || MyContracts.Count() == 0)
-		{
-			MyContracts = new array<ref VB_TabletContractDef>();
-			DefaultMyContracts();
+			Contracts = new array<ref VB_TabletContractType>();
+			DefaultContracts();
 			added = true;
 		}
 		return added;
 	}
 
-	// Примеры из макета. Настоящий список задаёт владелец сервера.
-	protected void DefaultClanContracts()
+	// Весь список. Контракт на то, чего нет на сервере, не выдаётся: группы проверяются по классам при запуске.
+	protected void DefaultContracts()
 	{
-		ClanContracts.Insert(new VB_TabletContractDef("cl_zombie30", 0, "zombie", 30, 60, 0, "zombie", "#STR_VB_TAB_C_CT_SWEEP", "#STR_VB_TAB_C_CH_ZOMBIE"));
-		ClanContracts.Insert(new VB_TabletContractDef("cl_km5", 0, "km", 5, 40, 5000, "route", "#STR_VB_TAB_C_CT_TRIP", "#STR_VB_TAB_C_CH_KM"));
-		ClanContracts.Insert(new VB_TabletContractDef("cl_animal5", 0, "animal", 5, 50, 0, "crosshair", "#STR_VB_TAB_C_CT_HUNT", "#STR_VB_TAB_C_CH_ANIMAL"));
-		ClanContracts.Insert(new VB_TabletContractDef("cl_zombie15", 0, "zombie", 15, 30, 0, "zombie", "#STR_VB_TAB_C_CT_CLEAN", "#STR_VB_TAB_C_CH_ZOMBIE"));
-		ClanContracts.Insert(new VB_TabletContractDef("cl_km3", 0, "km", 3, 30, 2000, "route", "#STR_VB_TAB_C_CT_WALK", "#STR_VB_TAB_C_CH_KM"));
-		ClanContracts.Insert(new VB_TabletContractDef("cl_animal3", 0, "animal", 3, 30, 0, "stash", "#STR_VB_TAB_C_CT_PREY", "#STR_VB_TAB_C_CH_ANIMAL"));
-		ClanContracts.Insert(new VB_TabletContractDef("cl_hours4", 1, "hours", 4, 120, 0, "heart", "#STR_VB_TAB_C_CT_SURVIVE", "#STR_VB_TAB_C_CH_HOURS"));
-		ClanContracts.Insert(new VB_TabletContractDef("cl_mutant5", 1, "mutant", 5, 200, 10000, "crosshair", "#STR_VB_TAB_C_CT_FIGHTER", "#STR_VB_TAB_C_CH_MUTANT"));
-		ClanContracts.Insert(new VB_TabletContractDef("cl_km10", 1, "km", 10, 150, 0, "route", "#STR_VB_TAB_C_CT_ROAD", "#STR_VB_TAB_C_CH_KM"));
-		ClanContracts.Insert(new VB_TabletContractDef("cl_hours12", 2, "hours", 12, 400, 25000, "heart", "#STR_VB_TAB_C_CT_IRON", "#STR_VB_TAB_C_CH_HOURS"));
-		ClanContracts.Insert(new VB_TabletContractDef("cl_mutant25", 2, "mutant", 25, 500, 40000, "crosshair", "#STR_VB_TAB_C_CT_THREAT", "#STR_VB_TAB_C_CH_MUTANT"));
+		Contracts.Insert(new VB_TabletContractType("zombie", "zombie", 15, 40, 100, 3));
+		Contracts.Insert(new VB_TabletContractType("mutant", "crosshair", 3, 10, 25, 3));
+		Contracts.Insert(new VB_TabletContractType("animal", "sym_paw", 3, 8, 15, 3));
+		Contracts.Insert(new VB_TabletContractType("skin", "sym_axe", 2, 5, 10, 3));
+		Contracts.Insert(new VB_TabletContractType("fish", "fish", 3, 8, 15, 3));
+		Contracts.Insert(new VB_TabletContractType("wood", "sym_tree", 3, 8, 15, 3));
+		Contracts.Insert(new VB_TabletContractType("bush", "sym_leaf", 5, 15, 30, 3));
+		Contracts.Insert(new VB_TabletContractType("rock", "sym_mountain", 3, 8, 15, 3));
+		Contracts.Insert(new VB_TabletContractType("craft", "sym_cog", 5, 15, 30, 3));
+		Contracts.Insert(new VB_TabletContractType("repair", "sym_hammer", 1, 3, 6, 3));
+		Contracts.Insert(new VB_TabletContractType("build", "base", 2, 6, 12, 3));
+		Contracts.Insert(new VB_TabletContractType("fire", "sym_flame", 2, 5, 10, 3));
+		Contracts.Insert(new VB_TabletContractType("z_convoy", "zombie", 3, 8, 15, 2));
+		Contracts.Insert(new VB_TabletContractType("l_convoy", "stash", 1, 2, 3, 2));
+		Contracts.Insert(new VB_TabletContractType("l_air", "vault", 1, 2, 3, 2));
+		Contracts.Insert(new VB_TabletContractType("l_koth", "trophy", 1, 2, 3, 2));
+		Contracts.Insert(new VB_TabletContractType("l_card1", "key", 2, 0, 0, 2));
+		Contracts.Insert(new VB_TabletContractType("l_card2", "key", 0, 2, 0, 2));
+		Contracts.Insert(new VB_TabletContractType("l_card3", "key", 0, 0, 2, 2));
+		Contracts.Insert(new VB_TabletContractType("l_room", "sym_key", 1, 2, 3, 2));
+		Contracts.Insert(new VB_TabletContractType("z_era", "zombie", 3, 8, 15, 3));
+		Contracts.Insert(new VB_TabletContractType("z_army", "zombie", 5, 15, 30, 3));
+		Contracts.Insert(new VB_TabletContractType("z_police", "zombie", 5, 15, 30, 3));
+		Contracts.Insert(new VB_TabletContractType("z_medic", "zombie", 5, 15, 30, 3));
+		Contracts.Insert(new VB_TabletContractType("z_worker", "zombie", 5, 15, 30, 3));
+		Contracts.Insert(new VB_TabletContractType("z_hiker", "zombie", 5, 15, 30, 3));
+		Contracts.Insert(new VB_TabletContractType("z_fire", "zombie", 2, 5, 10, 3));
+		Contracts.Insert(new VB_TabletContractType("z_prison", "zombie", 2, 5, 10, 3));
+		Contracts.Insert(new VB_TabletContractType("z_priest", "zombie", 2, 5, 10, 3));
+		Contracts.Insert(new VB_TabletContractType("z_nbc", "zombie", 2, 5, 10, 3));
+		Contracts.Insert(new VB_TabletContractType("m_wolf", "sym_wolf", 2, 5, 10, 3));
+		Contracts.Insert(new VB_TabletContractType("m_shum", "crosshair", 2, 5, 10, 3));
+		Contracts.Insert(new VB_TabletContractType("m_piyavka", "crosshair", 2, 5, 10, 3));
+		Contracts.Insert(new VB_TabletContractType("m_tenev", "crosshair", 2, 5, 10, 3));
+		Contracts.Insert(new VB_TabletContractType("m_ship", "crosshair", 2, 5, 10, 3));
+		Contracts.Insert(new VB_TabletContractType("m_mozg", "crosshair", 2, 5, 10, 3));
+		Contracts.Insert(new VB_TabletContractType("m_zanoza", "crosshair", 2, 5, 10, 3));
+		Contracts.Insert(new VB_TabletContractType("m_spider", "crosshair", 3, 8, 15, 3));
+		Contracts.Insert(new VB_TabletContractType("m_trup", "crosshair", 1, 3, 5, 2));
+		Contracts.Insert(new VB_TabletContractType("m_bear", "crosshair", 1, 3, 5, 2));
+		Contracts.Insert(new VB_TabletContractType("m_ricar", "crosshair", 1, 2, 3, 2));
+		Contracts.Insert(new VB_TabletContractType("m_troll", "crosshair", 1, 2, 3, 2));
+		Contracts.Insert(new VB_TabletContractType("a_wolf", "sym_wolf", 3, 8, 15, 3));
+		Contracts.Insert(new VB_TabletContractType("a_bear", "sym_paw", 1, 2, 4, 2));
+		Contracts.Insert(new VB_TabletContractType("a_boar", "sym_paw", 2, 5, 10, 3));
+		Contracts.Insert(new VB_TabletContractType("a_pig", "sym_paw", 2, 5, 10, 3));
+		Contracts.Insert(new VB_TabletContractType("a_deer", "sym_paw", 2, 4, 8, 3));
+		Contracts.Insert(new VB_TabletContractType("a_roe", "sym_paw", 2, 4, 8, 3));
+		Contracts.Insert(new VB_TabletContractType("a_fox", "sym_paw", 2, 5, 10, 3));
+		Contracts.Insert(new VB_TabletContractType("a_hare", "sym_paw", 2, 5, 10, 3));
+		Contracts.Insert(new VB_TabletContractType("a_farm", "sym_paw", 2, 4, 8, 3));
 	}
 
-	protected void DefaultMyContracts()
+	protected void DefaultKillGroups()
 	{
-		MyContracts.Insert(new VB_TabletContractDef("my_zombie15", 0, "zombie", 15, 10, 0, "zombie", "#STR_VB_TAB_C_CT_CLEAN", "#STR_VB_TAB_C_CH_ZOMBIE"));
-		MyContracts.Insert(new VB_TabletContractDef("my_km3", 0, "km", 3, 10, 0, "route", "#STR_VB_TAB_C_CT_WALK", "#STR_VB_TAB_C_CH_KM"));
-		MyContracts.Insert(new VB_TabletContractDef("my_animal3", 0, "animal", 3, 10, 0, "stash", "#STR_VB_TAB_C_CT_PREY", "#STR_VB_TAB_C_CH_ANIMAL"));
-		MyContracts.Insert(new VB_TabletContractDef("my_animal5", 0, "animal", 5, 10, 0, "crosshair", "#STR_VB_TAB_C_CT_HUNT", "#STR_VB_TAB_C_CH_ANIMAL"));
-		MyContracts.Insert(new VB_TabletContractDef("my_km10", 1, "km", 10, 25, 0, "route", "#STR_VB_TAB_C_CT_ROAD", "#STR_VB_TAB_C_CH_KM"));
-		MyContracts.Insert(new VB_TabletContractDef("my_mutant3", 1, "mutant", 3, 25, 0, "crosshair", "#STR_VB_TAB_C_CT_MEET", "#STR_VB_TAB_C_CH_MUTANT"));
-		MyContracts.Insert(new VB_TabletContractDef("my_hours2", 1, "hours", 2, 25, 0, "heart", "#STR_VB_TAB_C_CT_HOLD", "#STR_VB_TAB_C_CH_HOURS"));
-		MyContracts.Insert(new VB_TabletContractDef("my_mutant10", 2, "mutant", 10, 60, 0, "crosshair", "#STR_VB_TAB_C_CT_PACK", "#STR_VB_TAB_C_CH_MUTANT"));
-		MyContracts.Insert(new VB_TabletContractDef("my_km25", 2, "km", 25, 60, 0, "route", "#STR_VB_TAB_C_CT_MARATHON", "#STR_VB_TAB_C_CH_KM"));
+		KillGroups.Insert(new VB_TabletKillGroup("z_era", {"ERA_*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("z_convoy", {"ZmbM_Convoy_*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("z_army", {"ZmbM_SoldierNormal*", "ZmbF_SoldierNormal*", "ZmbM_usSoldier*", "ZmbF_usSoldier*", "ZmbM_eastSoldier*", "ZmbF_eastSoldier*", "ZmbM_PatrolNormal*", "ZmbF_ArmyOfficer*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("z_police", {"ZmbM_PolicemanFat*", "ZmbM_PolicemanSpecForce*", "ZmbF_PoliceWomanNormal*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("z_medic", {"ZmbM_DoctorFat*", "ZmbF_DoctorSkinny*", "ZmbF_NurseFat*", "ZmbM_ParamedicNormal*", "ZmbF_ParamedicNormal*", "ZmbM_PatientSkinny*", "ZmbF_PatientOld*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("z_worker", {"ZmbM_ConstrWorkerNormal*", "ZmbM_HandymanNormal*", "ZmbM_HeavyIndustryWorker*", "ZmbM_MechanicSkinny*", "ZmbF_MechanicNormal*", "ZmbM_OffshoreWorker*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("z_hiker", {"ZmbM_HunterOld*", "ZmbM_HikerSkinny*", "ZmbF_HikerSkinny*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("z_fire", {"ZmbM_FirefighterNormal*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("z_prison", {"ZmbM_PrisonerSkinny*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("z_priest", {"ZmbM_priestPopSkinny*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("z_nbc", {"ZmbM_NBC*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("m_wolf", {"SFP_MutaWolf*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("m_shum", {"SFP_Shum*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("m_piyavka", {"SFP_Piyavka*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("m_tenev", {"SFP_Tenevnik*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("m_ship", {"SFP_Shipastiy*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("m_mozg", {"SFP_MozgoTras*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("m_zanoza", {"MSFZ_Mutant_Zanoza*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("m_spider", {"MSFZ_Mutant_Spider*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("m_trup", {"SFP_Trupojor*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("m_bear", {"SFP_BearZMB*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("m_ricar", {"MSFZ_Ricar*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("m_troll", {"MSFZ_Troll*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("a_wolf", {"Animal_CanisLupus*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("a_bear", {"Animal_UrsusArctos*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("a_boar", {"Animal_SusScrofa*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("a_pig", {"Animal_SusDomesticus*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("a_deer", {"Animal_CervusElaphus*", "Animal_RangiferTarandus*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("a_roe", {"Animal_CapreolusCapreolus*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("a_fox", {"Animal_VulpesVulpes*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("a_hare", {"Animal_LepusEuropaeus*"}));
+		KillGroups.Insert(new VB_TabletKillGroup("a_farm", {"Animal_OvisAries*", "Animal_CapraHircus*", "Animal_BosTaurus*"}));
+	}
+
+	protected void DefaultLootGroups()
+	{
+		LootGroups.Insert(new VB_TabletKillGroup("l_convoy", {"CrateForConvoy"}));
+		LootGroups.Insert(new VB_TabletKillGroup("l_air", {"AirdropContainer*"}));
+		LootGroups.Insert(new VB_TabletKillGroup("l_koth", {"KothPoint"}));
+		LootGroups.Insert(new VB_TabletKillGroup("l_card1", {"DNA_Crate_Yellow", "DNA_Crate_Green", "DNA_WoodCrate_Yellow", "DNA_WoodCrate_Green"}));
+		LootGroups.Insert(new VB_TabletKillGroup("l_card2", {"DNA_Crate_Blue", "DNA_WoodCrate_Blue"}));
+		LootGroups.Insert(new VB_TabletKillGroup("l_card3", {"DNA_Crate_Purple", "DNA_Crate_Red", "DNA_WoodCrate_Purple", "DNA_WoodCrate_Red"}));
+		LootGroups.Insert(new VB_TabletKillGroup("l_room", {"DNA_StorageProxy_*"}));
 	}
 
 	// Запись файла после правки с экрана администратора.
