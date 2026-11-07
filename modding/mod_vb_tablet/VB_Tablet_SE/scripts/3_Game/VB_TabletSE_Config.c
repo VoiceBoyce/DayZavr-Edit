@@ -88,6 +88,7 @@ class VB_TabletConfig
 	int ClanContractHours = 24;	// как часто меняются клановые контракты, отсчёт от 00:00
 	int MyContractHours = 12;	// как часто меняются личные
 	ref array<ref VB_TabletKillGroup> KillGroups = new array<ref VB_TabletKillGroup>();
+	ref array<string> Bosses = new array<string>();	// кого считает достижение «Убийца гигантов»
 	ref array<string> BannedWords = new array<string>();
 	ref array<int> WeekPrizes = new array<int>();	// награда на склад за 1, 2, 3 место недели
 	ref array<ref VB_TabletDenom> Money = new array<ref VB_TabletDenom>();
@@ -115,6 +116,11 @@ class VB_TabletConfig
 	bool FillDefaults()
 	{
 		bool added = false;
+		if (!Bosses || Bosses.Count() == 0)
+		{
+			Bosses = {"MSFZ_Ricar*", "MSFZ_Troll*", "SFP_Trupojor*", "SFP_BearZMB*"};
+			added = true;
+		}
 		if (!KillGroups || KillGroups.Count() == 0)
 		{
 			KillGroups = new array<ref VB_TabletKillGroup>();

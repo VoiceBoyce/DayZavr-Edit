@@ -13,6 +13,14 @@ class VB_TabletRecord
 	int LastDay;
 	int Contracts;
 	int ExtraXp;
+	int AchBoss;
+	int AchCar;
+	int AchGather;
+	int AchFish;
+	int AchCraft;
+	int AchBuild;
+	int AchTrophy;
+	int AchCard;
 	string AppliedClan;
 	int MyDay;			// день, на который выдан набор личных контрактов
 	int MyReplaceDay;	// день, когда истрачена бесплатная замена
@@ -47,6 +55,14 @@ class VB_TabletRecord
 		s.Days = Days;
 		s.Contracts = Contracts;
 		s.ExtraXp = ExtraXp;
+		s.AchBoss = AchBoss;
+		s.AchCar = AchCar;
+		s.AchGather = AchGather;
+		s.AchFish = AchFish;
+		s.AchCraft = AchCraft;
+		s.AchBuild = AchBuild;
+		s.AchTrophy = AchTrophy;
+		s.AchCard = AchCard;
 		return s;
 	}
 }

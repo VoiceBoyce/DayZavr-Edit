@@ -398,13 +398,35 @@ class VB_TabletContracts
 		Add(rec, kind, 1, false);
 	}
 
+	// Счётчики достижений идут и без клана.
+	protected static void CountAch(VB_TabletRecord rec, string kind)
+	{
+		if (kind == "wood" || kind == "bush" || kind == "rock")
+			rec.AchGather++;
+		else if (kind == "fish")
+			rec.AchFish++;
+		else if (kind == "craft")
+			rec.AchCraft++;
+		else if (kind == "build" || kind == "repair")
+			rec.AchBuild++;
+		else if (kind == "l_convoy" || kind == "l_air" || kind == "l_koth")
+			rec.AchTrophy++;
+		else if (kind == "l_card1" || kind == "l_card2" || kind == "l_card3" || kind == "l_room")
+			rec.AchCard++;
+		else
+			return;
+		rec.Dirty = true;
+	}
+
 	// Действие игрока: рыбалка, рубка, крафт и другие счётчики из VB_TabletSE_ContractHooks.
 	static void OnAction(PlayerBase player, string kind)
 	{
 		if (!player || !player.GetIdentity())
 			return;
 		PlayerIdentity id = player.GetIdentity();
-		Add(VB_TabletPlayers.Get(id.GetPlainId(), id.GetName()), kind, 1, false);
+		VB_TabletRecord rec = VB_TabletPlayers.Get(id.GetPlainId(), id.GetName());
+		CountAch(rec, kind);
+		Add(rec, kind, 1, false);
 	}
 
 	// Предмет взят из ящика ивента. Один ящик засчитывается игроку один раз.
@@ -454,6 +476,8 @@ class VB_TabletContracts
 			{
 				int km = rec.CarLeft / 1000;
 				rec.CarLeft = rec.CarLeft - km * 1000;
+				rec.AchCar = rec.AchCar + km;
+				rec.Dirty = true;
 				Add(rec, "car", km, false);
 			}
 		}
@@ -636,13 +660,13 @@ class VB_TabletContracts
 				continue;
 			PlayerIdentity id = player.GetIdentity();
 			string uid = id.GetPlainId();
+			VB_TabletRecord rec = VB_TabletPlayers.Get(uid, id.GetName());
+			TrackCar(rec, player);
 			VB_Clan c = VB_TabletClans.OfPlayer(uid);
 			if (!c)
 				continue;
-			VB_TabletRecord rec = VB_TabletPlayers.Get(uid, id.GetName());
 			EnsureDay(c);
 			EnsureMy(rec, c);
-			TrackCar(rec, player);
 			if (rec.MyDirty && s_Dirty.Find(c.Id) < 0)
 				Send(player, id);
 		}

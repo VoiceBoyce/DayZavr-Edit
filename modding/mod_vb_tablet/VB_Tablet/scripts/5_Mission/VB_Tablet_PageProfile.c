@@ -226,7 +226,7 @@ class VB_TabletPageProfile extends VB_TabletPage
 		int gz = GoalOf(0, me.Zombies);
 		int gm = GoalOf(1, me.Mutants);
 		int ga = GoalOf(2, me.Animals);
-		int gd = GoalOf(3, km);
+		int gd = GoalOf(4, km);
 		Cell(f, 0, "#STR_VB_TAB_ZOMBIES", VBT.Num(me.Zombies), gz);
 		VBT.Ticks(f, 20, 86, 162, 20, 24, me.Zombies / (gz + 0.0));
 		Cell(f, 1, "#STR_VB_TAB_MUTANTS", VBT.Num(me.Mutants), gm);

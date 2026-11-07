@@ -62,8 +62,8 @@ class VB_TabletMenu extends INT_UIF_Menu
 	protected Widget m_Screen;
 	protected Widget m_SideRoot;
 	protected Widget m_ScreenBg;
+	protected Widget m_ScreenBack;
 	protected ImageWidget m_DeviceTex;
-	protected ImageWidget m_Glass;
 	protected bool m_AtmShown;
 	protected ref array<ImageWidget> m_TintIcons;
 	protected bool m_Typing;
@@ -71,6 +71,7 @@ class VB_TabletMenu extends INT_UIF_Menu
 	protected ref VBT_Dialog m_Dialog;
 	protected ref VBT_Dialog m_DialogDone;
 	protected ref array<Widget> m_Trash = new array<Widget>();
+	protected ref array<ref VBT_ScrollThumb> m_Thumbs = new array<ref VBT_ScrollThumb>();
 
 	// --- открытие и закрытие ---------------------------------------------------------------
 	static bool CanOpen()
@@ -169,6 +170,45 @@ class VB_TabletMenu extends INT_UIF_Menu
 		{
 			mission.PlayerControlEnable(false);
 			GetGame().GetInput().ChangeGameFocus(-1);
+		}
+	}
+
+	void AddScrollThumb(VBT_ScrollThumb thumb)
+	{
+		m_Thumbs.Insert(thumb);
+	}
+
+	VBT_ScrollThumb ThumbOf(ScrollWidget sw)
+	{
+		foreach (VBT_ScrollThumb t : m_Thumbs)
+		{
+			if (t.List == sw)
+				return t;
+		}
+		return null;
+	}
+
+	// Колесо читается опросом: OnMouseWheel не дойдёт, если под курсором кнопка строки со своим обработчиком.
+	protected void UpdateScrollThumbs()
+	{
+		int wheel = GetMouseState(MouseState.WHEEL);
+		Widget under;
+		if (wheel != 0)
+			under = GetWidgetUnderCursor();
+		for (int i = m_Thumbs.Count() - 1; i >= 0; i--)
+		{
+			VBT_ScrollThumb t = m_Thumbs.Get(i);
+			if (!t.List || !t.Thumb)
+			{
+				m_Thumbs.Remove(i);
+				continue;
+			}
+			if (wheel != 0 && t.Owns(under))
+			{
+				t.Wheel(wheel);
+				wheel = 0;
+			}
+			t.Update();
 		}
 	}
 
@@ -272,6 +312,8 @@ class VB_TabletMenu extends INT_UIF_Menu
 
 		m_Device = INT_UIF_Draw.Frame(body, 0, 0, 1920, 1080, "VBT_Device");
 		m_TintIcons = new array<ImageWidget>();
+		m_ScreenBack = INT_UIF_Draw.Frame(m_Device, SCREEN_X - 4, SCREEN_Y - 4, 1476, 856);
+		m_Surfaces.Insert(INT_UIF_Surface.Box(m_ScreenBack, 0, 0, 1476, 856, 14, VB_C_BG));
 		m_DeviceTex = INT_UIF_Draw.Texture(m_Device, DEVICE_X, DEVICE_Y, 1540, 920, VB_TABLET_TEX_DEVICE, VB_C_WHITE);
 		Widget screen = INT_UIF_Draw.Frame(m_Device, SCREEN_X, SCREEN_Y, 1468, 848, "VBT_Screen");
 		m_Screen = screen;
@@ -280,11 +322,10 @@ class VB_TabletMenu extends INT_UIF_Menu
 		BuildSide(screen);
 		BuildTop(screen);
 		m_Work = INT_UIF_Draw.Clip(screen, 240, 72, 1228, 776, "VBT_Work");
-		m_Glass = INT_UIF_Draw.Texture(m_Device, SCREEN_X, SCREEN_Y, 1468, 848, VB_TABLET_TEX_GLASS, VB_C_WHITE);
 		if (s_AtmOnly)
 		{
 			m_DeviceTex.Show(false);
-			m_Glass.Show(false);
+			m_ScreenBack.Show(false);
 			m_ScreenBg.Show(false);
 			m_SideRoot.Show(false);
 			m_TopBar.Show(false);
@@ -739,6 +780,7 @@ class VB_TabletMenu extends INT_UIF_Menu
 		}
 		if (m_Page)
 			m_Page.Tick(timeslice);
+		UpdateScrollThumbs();
 		if (s_AtmOnly)
 			AtmOnlyTick();
 		m_Second = m_Second + timeslice;

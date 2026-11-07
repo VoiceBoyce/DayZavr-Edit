@@ -357,6 +357,8 @@ class VB_TabletServer
 			if (IsListed(victim, group.Classes))
 				VB_TabletContracts.OnKill(rec, group.Kind);
 		}
+		if (IsListed(victim, cfg.Bosses))
+			rec.AchBoss++;
 		string kind;
 		if (IsListed(victim, cfg.Mutants))
 		{

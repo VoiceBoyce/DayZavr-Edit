@@ -153,7 +153,7 @@ class VB_TabletPageRating extends VB_TabletTabbedPage
 		INT_UIF_Draw.Line(t, 0, 46, 800, 1, VB_C_LINE);
 		if (n == 0)
 			INT_UIF_Draw.Text(t, 0, 252 + m_Dy * 0.5, 800, 32, "#STR_VB_TAB_NO_CLANS", 17, VB_C_DIM, INT_UIF_Align.CENTER);
-		m_ClanScroll = INT_UIF_Draw.Scroll(t, 0, 47, 800, 488 + m_Dy);
+		m_ClanScroll = VBK.Scroll(t, 0, 47, 800, 488 + m_Dy);
 		Widget L = INT_UIF_Draw.ScrollContent(m_ClanScroll);
 		int rest = Math.Max(0, n - 3);
 		INT_UIF_Draw.SetScrollContent(m_ClanScroll, rest * 47 + 6);
@@ -729,7 +729,7 @@ class VB_TabletPageRating extends VB_TabletTabbedPage
 	{
 		if (m_ScrollAt >= 0 && m_ClanScroll)
 		{
-			m_ClanScroll.VScrollToPos(INT_UIF_Draw.S(m_ScrollAt));
+			VBK.ScrollTo(m_ClanScroll, m_ScrollAt);
 			m_ScrollAt = -1;
 		}
 		if (!m_Left)

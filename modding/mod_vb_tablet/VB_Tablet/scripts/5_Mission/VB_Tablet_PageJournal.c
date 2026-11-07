@@ -123,7 +123,7 @@ class VB_TabletPageJournal extends VB_TabletPage
 		m_KindBg = new array<ref INT_UIF_Surface>();
 		m_Top = INT_UIF_Draw.Frame(m_Root, 0, 0, 1172, 152);
 		Widget t = VBT.Card(m_Root, 0, 168, 1172, 552);
-		m_Scroll = INT_UIF_Draw.Scroll(t, 0, 1, 1172, 550);
+		m_Scroll = VBK.Scroll(t, 0, 1, 1172, 550);
 		m_List = INT_UIF_Draw.ScrollContent(m_Scroll);
 		Paint();
 	}
@@ -268,7 +268,7 @@ class VB_TabletPageJournal extends VB_TabletPage
 		if (total == 0)
 		{
 			INT_UIF_Draw.SetScrollContent(m_Scroll, 550);
-			m_Scroll.VScrollToPos(0);
+			VBK.ScrollTo(m_Scroll, 0);
 			INT_UIF_Draw.Text(L, 0, 250, 1172, 30, "#STR_VB_TAB_A_NO_RECORDS", 17, VB_C_DIM2, INT_UIF_Align.CENTER);
 			return;
 		}
@@ -296,7 +296,7 @@ class VB_TabletPageJournal extends VB_TabletPage
 			}
 		}
 		INT_UIF_Draw.SetScrollContent(m_Scroll, y + 12);
-		m_Scroll.VScrollToPos(0);
+		VBK.ScrollTo(m_Scroll, 0);
 	}
 
 	// Левая колонка группы: число и день недели, старше недели просто дата из записи.

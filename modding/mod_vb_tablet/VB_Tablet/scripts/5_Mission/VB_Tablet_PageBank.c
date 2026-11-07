@@ -208,7 +208,7 @@ class VB_TabletPageBank extends VB_TabletPage
 			INT_UIF_Draw.Text(h, 0, 190, 1172, 30, "#STR_VB_TAB_C_H_EMPTY", 17, VB_C_DIM2, INT_UIF_Align.CENTER);
 			return;
 		}
-		ScrollWidget sw = INT_UIF_Draw.Scroll(h, 0, 47, 1172, 348);
+		ScrollWidget sw = VBK.Scroll(h, 0, 47, 1172, 348);
 		Widget list = INT_UIF_Draw.ScrollContent(sw);
 		for (int i = 0; i < n; i++)
 		{
@@ -238,7 +238,7 @@ class VB_TabletPageBank extends VB_TabletPage
 				INT_UIF_Draw.Line(list, 24, y + 64, 1124, 1, VB_C_LINE);
 		}
 		INT_UIF_Draw.SetScrollContent(sw, n * 68 + 12);
-		sw.VScrollToPos(0);
+		VBK.ScrollTo(sw, 0);
 	}
 
 	override void Tick(float dt)

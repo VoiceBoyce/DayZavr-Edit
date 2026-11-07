@@ -38,7 +38,7 @@ class VB_TabletPageChat extends VB_TabletPage
 		}
 		client.Request(VB_TabletOp.CLAN_CHAT);
 		Widget t = VBT.Card(m_Root, 0, 0, 856, 720);
-		m_List = INT_UIF_Draw.Scroll(t, 0, 1, 856, 630);
+		m_List = VBK.Scroll(t, 0, 1, 856, 630);
 		m_Rows = INT_UIF_Draw.ScrollContent(m_List);
 		INT_UIF_Draw.Line(t, 0, 632, 856, 1, VB_C_LINE);
 		m_Input = new VBT_Input(t, 20, 652, 600, 48, "#STR_VB_TAB_B_CHAT_HINT", MSG_MAX);
@@ -255,7 +255,7 @@ class VB_TabletPageChat extends VB_TabletPage
 		}
 		int total = sorted.Count();
 		INT_UIF_Draw.Text(t, 160, 14, 120, 22, online.ToString() + "/" + total.ToString(), 15, VB_C_DIM, INT_UIF_Align.RIGHT);
-		m_SideList = INT_UIF_Draw.Scroll(t, 0, 46, 300, 672);
+		m_SideList = VBK.Scroll(t, 0, 46, 300, 672);
 		Widget l = INT_UIF_Draw.ScrollContent(m_SideList);
 		INT_UIF_Draw.SetScrollContent(m_SideList, total * 44 + 6);
 		for (int i = 0; i < total; i++)
@@ -299,7 +299,7 @@ class VB_TabletPageChat extends VB_TabletPage
 		if (m_ScrollFrames > 0 && m_List)
 		{
 			m_ScrollFrames--;
-			m_List.VScrollToPos01(1);
+			VBK.ScrollTo(m_List, 1000000);
 		}
 	}
 

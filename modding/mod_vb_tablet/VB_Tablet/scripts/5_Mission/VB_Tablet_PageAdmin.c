@@ -79,7 +79,7 @@ class VB_TabletPageAdmin extends VB_TabletPage
 			INT_UIF_Draw.Text(t, 0, 347, 724, 30, "#STR_VB_TAB_C_ADM_EMPTY", 17, VB_C_DIM2, INT_UIF_Align.CENTER);
 			return;
 		}
-		ScrollWidget sw = INT_UIF_Draw.Scroll(t, 0, 47, 724, 672);
+		ScrollWidget sw = VBK.Scroll(t, 0, 47, 724, 672);
 		Widget list = INT_UIF_Draw.ScrollContent(sw);
 		for (int i = 0; i < n; i++)
 		{
@@ -118,7 +118,7 @@ class VB_TabletPageAdmin extends VB_TabletPage
 			m_RowIds.Insert(row.Id);
 		}
 		INT_UIF_Draw.SetScrollContent(sw, n * 50 + 6);
-		sw.VScrollToPos(0);
+		VBK.ScrollTo(sw, 0);
 	}
 
 	protected void BuildCard()

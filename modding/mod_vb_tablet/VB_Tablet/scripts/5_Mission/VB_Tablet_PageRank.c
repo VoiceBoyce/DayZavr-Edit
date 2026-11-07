@@ -1,6 +1,9 @@
 // Ранг: вкладки «Обзор» и «Достижения».
 class VB_TabletPageRank extends VB_TabletTabbedPage
 {
+	protected static float s_AchPos;
+	protected ScrollWidget m_AchScroll;
+	protected int m_AchRestore;
 	static int s_Tab;
 	protected ref array<Widget> m_Hits;
 	protected Widget m_SourceHit;
@@ -164,6 +167,25 @@ class VB_TabletPageRank extends VB_TabletTabbedPage
 		}
 	}
 
+	override void Tick(float dt)
+	{
+		TickAchScroll();
+	}
+
+	// Перестройка экрана не сбрасывает прокрутку. Позиция применяется не сразу: размеры считаются в следующих кадрах.
+	protected void TickAchScroll()
+	{
+		if (!m_AchScroll)
+			return;
+		if (m_AchRestore > 0)
+		{
+			m_AchRestore--;
+			VBK.ScrollTo(m_AchScroll, s_AchPos);
+			return;
+		}
+		s_AchPos = VBK.ScrollPos(m_AchScroll);
+	}
+
 	protected void BuildAch(VB_TabletClient session)
 	{
 		VB_TabletRates r = session.Rates;
@@ -210,34 +232,40 @@ class VB_TabletPageRank extends VB_TabletTabbedPage
 		else
 			INT_UIF_Draw.Text(h, 704, 40, 440, 44, "#STR_VB_TAB_ACH_ALL", 24, VB_C_GOLD);
 
+		// Карточки в четыре столбца, справа место под полосу прокрутки.
+		m_AchScroll = VBK.Scroll(m_Root, 0, 128, 1172, 592);
+		Widget list = INT_UIF_Draw.ScrollContent(m_AchScroll);
+		int rows = (VB_ACH_COUNT + 3) / 4;
+		INT_UIF_Draw.SetScrollContent(m_AchScroll, rows * 304 - 16);
 		for (int i = 0; i < VB_ACH_COUNT; i++)
-			AchCard(me, r, i);
+			AchCard(list, me, r, i);
+		m_AchRestore = 3;
 	}
 
-	protected void AchCard(VB_TabletStats me, VB_TabletRates r, int i)
+	protected void AchCard(Widget parent, VB_TabletStats me, VB_TabletRates r, int i)
 	{
 		array<int> medal = {VB_C_BRONZE, VB_C_SILVER, VB_C_GOLD};
 		int col4 = i % 4;
 		int row = i / 4;
-		float x = col4 * 297;
-		float y = 128 + row * 304;
+		float x = col4 * 293;
+		float y = row * 304;
 		int val = me.AchValue(i, r);
 		int d = me.AchDone(i, r);
 		bool full = d >= VB_ACH_STEPS;
 		int col = VB_C_DIM;
 		if (d > 0)
 			col = medal.Get(d - 1);
-		Widget f = VBT.Card(m_Root, x, y, 281, 288);
+		Widget f = VBT.Card(parent, x, y, 277, 288);
 		int border = VB_C_LINE2;
 		if (d > 0)
 			border = col;
 		INT_UIF_Surface.Box(f, 20, 20, 48, 48, 10, VB_C_PANEL2, border);
 		VBT.Ico(f, 32, 32, 24, VB_TabletAch.IconOf(i), col);
-		INT_UIF_Draw.Text(f, 80, 18, 186, 28, VBT.Fit(VBT.T("#STR_VB_TAB_ACHN_" + i.ToString()), 186, 18), 18, VB_C_TEXT);
-		INT_UIF_Draw.Text(f, 80, 46, 186, 22, VBT.Fit(VBT.T("#STR_VB_TAB_ACHT_" + i.ToString()), 186, 14), 14, VB_C_DIM);
+		INT_UIF_Draw.Text(f, 80, 18, 177, 28, VBT.Fit(VBT.T("#STR_VB_TAB_ACHN_" + i.ToString()), 177, 18), 18, VB_C_TEXT);
+		INT_UIF_Draw.Text(f, 80, 46, 177, 22, VBT.Fit(VBT.T("#STR_VB_TAB_ACHT_" + i.ToString()), 177, 14), 14, VB_C_DIM);
 		for (int k = 0; k < VB_ACH_STEPS; k++)
 		{
-			float sx = 20 + k * 83;
+			float sx = 20 + k * 81;
 			bool on = k < d;
 			int m = medal.Get(k);
 			int sb = 0;
@@ -255,8 +283,8 @@ class VB_TabletPageRank extends VB_TabletTabbedPage
 		}
 		if (full)
 		{
-			INT_UIF_Draw.Text(f, 20, 176, 241, 28, "#STR_VB_TAB_ACH_ALL", 15, VB_C_GOLD);
-			VBT.Ticks(f, 20, 206, 241, 12, 24, 1, VB_C_GOLD);
+			INT_UIF_Draw.Text(f, 20, 176, 237, 28, "#STR_VB_TAB_ACH_ALL", 15, VB_C_GOLD);
+			VBT.Ticks(f, 20, 206, 237, 12, 24, 1, VB_C_GOLD);
 		}
 		else
 		{
@@ -266,8 +294,8 @@ class VB_TabletPageRank extends VB_TabletTabbedPage
 				from = VB_TabletAch.Step(i, d - 1);
 			VBT.Cap(f, 20, 178, 120, VBT.T("#STR_VB_TAB_ACH_STEP") + " " + (d + 1).ToString());
 			INT_UIF_Draw.Text(f, 100, 176, 161, 22, VBT.Num(val) + "/" + VBT.Num(nx), 15, VB_C_TEXT, INT_UIF_Align.RIGHT);
-			VBT.Ticks(f, 20, 206, 241, 12, 24, (val - from) / (nx - from + 0.0));
-			INT_UIF_Draw.Text(f, 20, 232, 241, 24, VBT.T("#STR_VB_TAB_ACH_REWARD") + ": +" + VBT.Num(VB_TabletAch.Reward(d)) + " " + VBT.T("#STR_VB_TAB_XP_L"), 14, VB_C_ACCENT);
+			VBT.Ticks(f, 20, 206, 237, 12, 24, (val - from) / (nx - from + 0.0));
+			INT_UIF_Draw.Text(f, 20, 232, 237, 24, VBT.T("#STR_VB_TAB_ACH_REWARD") + ": +" + VBT.Num(VB_TabletAch.Reward(d)) + " " + VBT.T("#STR_VB_TAB_XP_L"), 14, VB_C_ACCENT);
 		}
 	}
 

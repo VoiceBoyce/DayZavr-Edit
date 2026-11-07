@@ -97,7 +97,7 @@ class VB_TabletPageMembers extends VB_TabletPage
 		Widget t = VBT.Card(m_Root, 0, 0, 664, 720);
 		m_Head = INT_UIF_Draw.Frame(t, 0, 0, 664, 46);
 		INT_UIF_Draw.Line(t, 0, 46, 664, 1, VB_C_LINE);
-		m_Scroll = INT_UIF_Draw.Scroll(t, 0, 47, 664, 672);
+		m_Scroll = VBK.Scroll(t, 0, 47, 664, 672);
 		m_Rows = INT_UIF_Draw.ScrollContent(m_Scroll);
 		m_CardF = INT_UIF_Draw.Frame(m_Root, 680, 0, 492, 720);
 		m_TopF = INT_UIF_Draw.Frame(m_Menu.GetTopBar(), 680, 0, 310, 72);
@@ -595,7 +595,7 @@ class VB_TabletPageMembers extends VB_TabletPage
 			INT_UIF_Draw.Text(b, 28, 76, w - 56, 32, "#STR_VB_TAB_A_REQ_NONE", 16, VB_C_DIM2);
 			return;
 		}
-		ScrollWidget sw = INT_UIF_Draw.Scroll(b, 0, 72, w, rows * 172);
+		ScrollWidget sw = VBK.Scroll(b, 0, 72, w, rows * 172);
 		Widget L = INT_UIF_Draw.ScrollContent(sw);
 		INT_UIF_Draw.SetScrollContent(sw, n * 172);
 		for (int i = 0; i < n; i++)

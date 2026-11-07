@@ -138,9 +138,172 @@ class VBK
 		return code == VB_TabletResult.OK || code == VB_TabletResult.CREATED || code == VB_TabletResult.SAVED || code == VB_TabletResult.SENT;
 	}
 
+	// Список с прокруткой колесом и тонким ползунком в цвете планшета.
+	static ScrollWidget Scroll(Widget parent, float x, float y, float w, float h)
+	{
+		ScrollWidget sw = ScrollWidget.Cast(INT_UIF_Widgets.CreatePath(VB_TABLET_LAYOUT_SCROLL, parent));
+		INT_UIF_Draw.Place(sw, x, y, w, h);
+		ImageWidget track = INT_UIF_Draw.Texture(parent, x + w - 5, y, 4, h, VB_TABLET_ICON_EM + "solid", VB_C_LINE);
+		ImageWidget thumb = INT_UIF_Draw.Texture(parent, x + w - 5, y, 4, 40, VB_TABLET_ICON_EM + "solid", VB_C_ACCENT);
+		track.Show(false);
+		thumb.Show(false);
+		VB_TabletMenu menu = Menu();
+		if (menu)
+			menu.AddScrollThumb(new VBT_ScrollThumb(sw, track, thumb, x + w - 5, y, h));
+		return sw;
+	}
+
+	static void ScrollTo(ScrollWidget sw, float pos)
+	{
+		VB_TabletMenu menu = Menu();
+		if (!menu)
+			return;
+		VBT_ScrollThumb t = menu.ThumbOf(sw);
+		if (t)
+			t.To(pos);
+	}
+
+	static float ScrollPos(ScrollWidget sw)
+	{
+		VB_TabletMenu menu = Menu();
+		if (!menu)
+			return 0;
+		VBT_ScrollThumb t = menu.ThumbOf(sw);
+		if (t)
+			return t.Pos();
+		return 0;
+	}
+
 	static VB_TabletMenu Menu()
 	{
 		return VB_TabletMenu.Cast(GetGame().GetUIManager().GetMenu());
+	}
+}
+
+// Прокрутка списка целиком своя. ScrollWidget с выключенной полосой не двигается ни колесом, ни VScrollToPos,
+// поэтому он только обрезает, а смещение держится здесь: контент сдвигается вверх на m_Pos.
+// Все значения в единицах холста, как у INT_UIF_Draw.
+class VBT_ScrollThumb extends Managed
+{
+	static const float WHEEL_STEP = 90;
+
+	ScrollWidget List;
+	ImageWidget Thumb;
+	ImageWidget Track;
+	protected Widget m_Content;
+	protected float m_X;
+	protected float m_Y;
+	protected float m_H;
+	protected float m_Pos;
+	protected float m_Shown;
+	protected bool m_Drag;
+	protected float m_Grab;
+
+	void VBT_ScrollThumb(ScrollWidget list, ImageWidget track, ImageWidget thumb, float x, float y, float h)
+	{
+		List = list;
+		Track = track;
+		Thumb = thumb;
+		m_Content = INT_UIF_Draw.ScrollContent(list);
+		m_X = x;
+		m_Y = y;
+		m_H = h;
+	}
+
+	// Высота из заданного размера, а не из GetContentHeight: тот меняется вместе со смещением.
+	protected float Full()
+	{
+		float w;
+		float h;
+		m_Content.GetSize(w, h);
+		return h / INT_UIF_Scale.Factor();
+	}
+
+	float Pos()
+	{
+		return m_Pos;
+	}
+
+	// Значение за концом списка ограничится в Update, поэтому «в самый низ» можно задать любым большим числом.
+	void To(float pos)
+	{
+		m_Pos = pos;
+	}
+
+	void Wheel(int wheel)
+	{
+		m_Pos -= wheel * WHEEL_STEP;
+	}
+
+	// Содержит ли список этот виджет: колесо крутит только то, что под курсором и не закрыто окном.
+	bool Owns(Widget w)
+	{
+		while (w)
+		{
+			if (w == List)
+				return true;
+			w = w.GetParent();
+		}
+		return false;
+	}
+
+	// Перетаскивание ползунка и переход по клику на дорожке: кнопка опрашивается, у картинок нет событий нажатия.
+	protected void Drag(float rest)
+	{
+		if ((GetMouseState(MouseState.LEFT) & MB_PRESSED_MASK) == 0 || !Thumb.IsVisibleHierarchy())
+		{
+			m_Drag = false;
+			return;
+		}
+		float f = INT_UIF_Scale.Factor();
+		int mx;
+		int my;
+		GetMousePos(mx, my);
+		float tx;
+		float ty;
+		float tw;
+		float th;
+		float bx;
+		float by;
+		float bw;
+		float bh;
+		Thumb.GetScreenPos(tx, ty);
+		Thumb.GetScreenSize(tw, th);
+		Track.GetScreenPos(bx, by);
+		Track.GetScreenSize(bw, bh);
+		if (!m_Drag)
+		{
+			if (mx < bx - 6 * f || mx > bx + bw + 6 * f || my < by || my > by + bh)
+				return;
+			m_Drag = true;
+			m_Grab = th * 0.5;
+			if (my >= ty && my <= ty + th)
+				m_Grab = my - ty;
+		}
+		float travel = bh - th;
+		if (travel > 0)
+			m_Pos = (my - m_Grab - by) / travel * rest;
+	}
+
+	void Update()
+	{
+		float full = Full();
+		float rest = Math.Max(0, full - m_H);
+		bool need = rest > 1;
+		Track.Show(need);
+		Thumb.Show(need);
+		if (need)
+			Drag(rest);
+		m_Pos = Math.Clamp(m_Pos, 0, rest);
+		if (Math.AbsFloat(m_Pos - m_Shown) > 0.01)
+		{
+			m_Shown = m_Pos;
+			m_Content.SetPos(0, -Math.Round(INT_UIF_Draw.S(m_Pos)));
+		}
+		if (!need)
+			return;
+		float size = Math.Max(36, m_H * m_H / full);
+		INT_UIF_Draw.Place(Thumb, m_X, m_Y + (m_H - size) * m_Pos / rest, 4, size);
 	}
 }
 

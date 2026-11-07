@@ -232,7 +232,7 @@ class VB_TabletPageNews extends VB_TabletPage
 		float rowW = w;
 		if (rest * 104 - 8 > view)
 			rowW = w - 14;
-		ScrollWidget sw = INT_UIF_Draw.Scroll(m_Left, 0, y, w, view);
+		ScrollWidget sw = VBK.Scroll(m_Left, 0, y, w, view);
 		Widget content = INT_UIF_Draw.ScrollContent(sw);
 		INT_UIF_Draw.SetScrollContent(sw, rest * 104);
 		float rowY = 0;

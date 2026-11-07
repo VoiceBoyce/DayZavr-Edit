@@ -88,6 +88,7 @@ const int VB_C_BAD = 0xFFEF5B4C;
 const int VB_C_WHITE = 0xFFFFFFFF;
 
 const string VB_TABLET_IMAGESET = "VB_Tablet_Data/gui/imagesets/vb_tablet.imageset";
+const string VB_TABLET_LAYOUT_SCROLL = "VB_Tablet/gui/layouts/vb_tablet_scroll.layout";
 const string VB_TABLET_LAYOUT_AREA = "VB_Tablet/gui/layouts/vb_tablet_area.layout";
 const string VB_TABLET_ICON = "set:vb_tablet image:";
 const string VB_TABLET_IMAGESET_EM = "VB_Tablet_Data/gui/imagesets/vb_tablet_em.imageset";
@@ -102,7 +103,7 @@ const int VB_C_SILVER = 0xFFCFCAC2;
 const int VB_C_BRONZE = 0xFFC98A5A;
 const int VB_C_INF = 0xFF8FA6FF;
 const int VB_RANK_COUNT = 10;
-const int VB_ACH_COUNT = 8;
+const int VB_ACH_COUNT = 16;
 const int VB_ACH_STEPS = 3;
 const int VB_CLAN_LEVELS = 5;
 
@@ -210,6 +211,14 @@ class VB_TabletStats
 	int Days;
 	int Contracts;
 	int ExtraXp;	// разница между опытом личных контрактов и базовым XpContract
+	int AchBoss;
+	int AchCar;
+	int AchGather;
+	int AchFish;
+	int AchCraft;
+	int AchBuild;
+	int AchTrophy;
+	int AchCard;
 	int Place;
 	int Cash;
 
@@ -228,6 +237,14 @@ class VB_TabletStats
 		rpc.Write(ExtraXp);
 		rpc.Write(Place);
 		rpc.Write(Cash);
+		rpc.Write(AchBoss);
+		rpc.Write(AchCar);
+		rpc.Write(AchGather);
+		rpc.Write(AchFish);
+		rpc.Write(AchCraft);
+		rpc.Write(AchBuild);
+		rpc.Write(AchTrophy);
+		rpc.Write(AchCard);
 	}
 
 	bool Read(ParamsReadContext ctx)
@@ -235,6 +252,8 @@ class VB_TabletStats
 		if (!ctx.Read(PlayerName) || !ctx.Read(Discord) || !ctx.Read(Zombies) || !ctx.Read(Mutants) || !ctx.Read(Animals))
 			return false;
 		if (!ctx.Read(DistM) || !ctx.Read(LifeSec) || !ctx.Read(RecordSec) || !ctx.Read(Days) || !ctx.Read(Contracts) || !ctx.Read(ExtraXp) || !ctx.Read(Place) || !ctx.Read(Cash))
+			return false;
+		if (!ctx.Read(AchBoss) || !ctx.Read(AchCar) || !ctx.Read(AchGather) || !ctx.Read(AchFish) || !ctx.Read(AchCraft) || !ctx.Read(AchBuild) || !ctx.Read(AchTrophy) || !ctx.Read(AchCard))
 			return false;
 		return true;
 	}
@@ -248,6 +267,7 @@ class VB_TabletStats
 	// Значение показателя достижения. Ступень ранга считается без наград за достижения.
 	int AchValue(int ach, VB_TabletRates r)
 	{
+		// Порядок рядами: охота, выживание, ремесло, сервер.
 		switch (ach)
 		{
 			case 0:
@@ -257,13 +277,29 @@ class VB_TabletStats
 			case 2:
 				return Animals;
 			case 3:
-				return DistM / 1000;
+				return AchBoss;
 			case 4:
-				return RecordSec / 3600;
+				return DistM / 1000;
 			case 5:
-				return Days;
+				return RecordSec / 3600;
 			case 6:
+				return Days;
+			case 7:
+				return AchCar;
+			case 8:
+				return AchGather;
+			case 9:
+				return AchFish;
+			case 10:
+				return AchCraft;
+			case 11:
+				return AchBuild;
+			case 12:
 				return Contracts;
+			case 13:
+				return AchTrophy;
+			case 14:
+				return AchCard;
 		}
 		return r.RankOf(BaseXp(r)) + 1;
 	}
@@ -311,7 +347,7 @@ class VB_TabletAch
 {
 	static int Step(int ach, int step)
 	{
-		array<int> all = {100, 1000, 10000, 10, 100, 1000, 25, 250, 2500, 50, 500, 5000, 24, 100, 500, 7, 30, 180, 10, 100, 1000, 3, 6, 10};
+		array<int> all = {100, 1000, 10000, 10, 100, 1000, 25, 250, 2500, 10, 100, 500, 50, 500, 5000, 24, 100, 500, 7, 30, 180, 100, 1000, 10000, 50, 500, 2500, 25, 250, 1000, 50, 500, 5000, 25, 250, 1000, 10, 100, 1000, 5, 50, 250, 15, 75, 300, 3, 6, 10};
 		return all.Get(ach * VB_ACH_STEPS + step);
 	}
 
@@ -326,7 +362,7 @@ class VB_TabletAch
 
 	static string IconOf(int ach)
 	{
-		array<string> all = {"zombie", "crosshair", "stash", "route", "heart", "clock", "contract", "rank"};
+		array<string> all = {"zombie", "crosshair", "stash", "sym_skull", "route", "heart", "clock", "car", "sym_tree", "fish", "sym_cog", "sym_hammer", "contract", "vault", "sym_key", "rank"};
 		return all.Get(ach);
 	}
 }
