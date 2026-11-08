@@ -526,6 +526,12 @@ class VB_TabletServer
 
 	static bool IsListed(EntityAI victim, array<string> classes)
 	{
+		return IsListedObj(victim, classes);
+	}
+
+	// То же для любого объекта (цель действия может быть не EntityAI).
+	static bool IsListedObj(Object victim, array<string> classes)
+	{
 		string type = victim.GetType();
 		foreach (string cls : classes)
 		{

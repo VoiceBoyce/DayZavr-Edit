@@ -103,6 +103,18 @@ modded class RecipeBase
 	}
 }
 
+// Действия из других модов (ActionGroups в конфиге): каждое завершение длительного действия.
+// OnFinishProgress вызывается у всех ActionContinuousBase, моды обычно переопределяют только OnFinishProgressServer.
+modded class ActionContinuousBase
+{
+	override void OnFinishProgress(ActionData action_data)
+	{
+		super.OnFinishProgress(action_data);
+		if (GetGame().IsDedicatedServer())
+			VB_TabletContracts.OnActionDone(this, action_data);
+	}
+}
+
 modded class ItemBase
 {
 	override void EEItemLocationChanged(notnull InventoryLocation oldLoc, notnull InventoryLocation newLoc)

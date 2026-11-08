@@ -14,6 +14,28 @@ class VB_TabletKillGroup
 	}
 }
 
+// Действие игрока из любого мода. Actions: имена классов действий (ActionGoldMine). Targets, если не пусто:
+// цель действия должна быть из этих классов (или начало имени со звёздочкой). Засчитывается каждое
+// завершение длительного действия (у действий с повтором каждый круг). PerTarget 1: одна и та же цель
+// засчитывается игроку один раз и его клану один раз, как ящик ивента (например, «разные жилы»).
+class VB_TabletActionGroup
+{
+	string Kind;
+	ref array<string> Actions = new array<string>();
+	ref array<string> Targets = new array<string>();
+	int PerTarget;
+
+	void VB_TabletActionGroup(string kind = "", array<string> actions = null, array<string> targets = null, int perTarget = 0)
+	{
+		Kind = kind;
+		PerTarget = perTarget;
+		if (actions)
+			Actions.Copy(actions);
+		if (targets)
+			Targets.Copy(targets);
+	}
+}
+
 class VB_TabletDenom
 {
 	string Item;
@@ -27,8 +49,8 @@ class VB_TabletDenom
 }
 
 // Тип контракта: Need это сколько сделать на обычной, сложной и элитной сложности, 0 значит такой сложности нет.
-// ClanMult: во сколько раз больше у клана. Kind: zombie, mutant, animal, skin, km, car, hours, fish, wood, bush, rock,
-// craft, repair, build, fire или Kind из KillGroups и LootGroups. Title и Hint: ключ с # или обычный текст.
+// ClanMult: во сколько раз больше у клана. Kind: zombie, mutant, animal, skin, fish, wood, bush, rock,
+// craft, repair, build, fire или Kind из KillGroups, LootGroups и ActionGroups. Title и Hint: ключ с # или обычный текст.
 class VB_TabletContractType
 {
 	string Kind;
@@ -104,6 +126,7 @@ class VB_TabletConfig
 	ref array<int> RewardClan;	// влияние за клановый
 	ref array<int> CashClan;	// деньги на склад за клановый
 	ref array<ref VB_TabletKillGroup> LootGroups = new array<ref VB_TabletKillGroup>();
+	ref array<ref VB_TabletActionGroup> ActionGroups;	// нет в файле: подставляются группы добычи руды BRDK_GoldRush
 
 	[NonSerialized()]
 	bool Broken;	// файл с ошибкой: значения по умолчанию, файл не перезаписываем
@@ -133,6 +156,13 @@ class VB_TabletConfig
 		{
 			LootGroups = new array<ref VB_TabletKillGroup>();
 			DefaultLootGroups();
+			added = true;
+		}
+		// Только когда поля нет в файле: пустой список [] остаётся пустым.
+		if (!ActionGroups)
+		{
+			ActionGroups = new array<ref VB_TabletActionGroup>();
+			DefaultActionGroups();
 			added = true;
 		}
 		if (!Mutants || Mutants.Count() == 0)
@@ -214,13 +244,15 @@ class VB_TabletConfig
 		Contracts.Insert(new VB_TabletContractType("animal", "sym_paw", 3, 8, 15, 3));
 		Contracts.Insert(new VB_TabletContractType("skin", "sym_axe", 2, 5, 10, 3));
 		Contracts.Insert(new VB_TabletContractType("fish", "fish", 3, 8, 15, 3));
-		Contracts.Insert(new VB_TabletContractType("wood", "sym_tree", 3, 8, 15, 3));
-		Contracts.Insert(new VB_TabletContractType("bush", "sym_leaf", 5, 15, 30, 3));
-		Contracts.Insert(new VB_TabletContractType("rock", "sym_mountain", 3, 8, 15, 3));
-		Contracts.Insert(new VB_TabletContractType("craft", "sym_cog", 5, 15, 30, 3));
+		// Дрова, хворост, камень, крафт, стройка и костры убраны из списка по решению 2026-11-08.
+		// Счётчики остались (достижения «Добытчик», «Мастер», «Строитель»), вид можно вернуть строкой в конфиге.
 		Contracts.Insert(new VB_TabletContractType("repair", "sym_hammer", 1, 3, 6, 3));
-		Contracts.Insert(new VB_TabletContractType("build", "base", 2, 6, 12, 3));
-		Contracts.Insert(new VB_TabletContractType("fire", "sym_flame", 2, 5, 10, 3));
+		// Руда BRDK_GoldRush (ActionGroups): без мода не выдаются.
+		Contracts.Insert(new VB_TabletContractType("ore", "sym_mountain", 5, 15, 40, 3));
+		Contracts.Insert(new VB_TabletContractType("pan", "sym_wave", 5, 15, 30, 3));
+		Contracts.Insert(new VB_TabletContractType("ore_precious", "sym_gem", 2, 5, 12, 2));
+		Contracts.Insert(new VB_TabletContractType("ore_metal", "sym_cog", 4, 12, 30, 3));
+		Contracts.Insert(new VB_TabletContractType("ore_fuel", "sym_flame", 4, 10, 25, 3));
 		Contracts.Insert(new VB_TabletContractType("z_convoy", "zombie", 3, 8, 15, 2));
 		Contracts.Insert(new VB_TabletContractType("l_convoy", "stash", 1, 2, 3, 2));
 		Contracts.Insert(new VB_TabletContractType("l_air", "vault", 1, 2, 3, 2));
@@ -307,6 +339,18 @@ class VB_TabletConfig
 		LootGroups.Insert(new VB_TabletKillGroup("l_card2", {"DNA_Crate_Blue", "DNA_WoodCrate_Blue"}));
 		LootGroups.Insert(new VB_TabletKillGroup("l_card3", {"DNA_Crate_Purple", "DNA_Crate_Red", "DNA_WoodCrate_Purple", "DNA_WoodCrate_Red"}));
 		LootGroups.Insert(new VB_TabletKillGroup("l_room", {"DNA_StorageProxy_*"}));
+	}
+
+	// Добыча руды BRDK_GoldRush: жилы киркой (ActionGoldMine) и промывка в реке (ActionSearchGold).
+	// Жила после добычи исчезает до рестарта, поэтому каждый заход это новая жила, PerTarget не нужен.
+	protected void DefaultActionGroups()
+	{
+		array<string> mine = {"ActionGoldMine"};
+		ActionGroups.Insert(new VB_TabletActionGroup("ore", mine));
+		ActionGroups.Insert(new VB_TabletActionGroup("pan", {"ActionSearchGold"}));
+		ActionGroups.Insert(new VB_TabletActionGroup("ore_precious", mine, {"BRDK_Gold_Ore", "BRDK_Silver_Ore", "BRDK_Rubin_Ore", "BRDK_Nephrite_Ore"}));
+		ActionGroups.Insert(new VB_TabletActionGroup("ore_metal", mine, {"BRDK_Iron_Ore", "BRDK_Bronze_Ore", "BRDK_Titanium_Ore"}));
+		ActionGroups.Insert(new VB_TabletActionGroup("ore_fuel", mine, {"BRDK_Coal_Ore", "BRDK_Sulfur_Ore"}));
 	}
 
 	// Запись файла после правки с экрана администратора.

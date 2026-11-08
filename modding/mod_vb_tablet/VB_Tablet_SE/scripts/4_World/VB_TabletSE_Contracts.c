@@ -69,6 +69,23 @@ class VB_TabletContracts
 			if (b.Kind == kind)
 				return AnyExists(b.Classes);
 		}
+		// Группа действий: класс действия есть в скриптах (мод загружен) и, если задано, есть классы целей.
+		if (cfg.ActionGroups)
+		{
+			foreach (VB_TabletActionGroup a : cfg.ActionGroups)
+			{
+				if (a.Kind != kind)
+					continue;
+				bool any = false;
+				foreach (string act : a.Actions)
+				{
+					typename actType = act.ToType();
+					if (actType)
+						any = true;
+				}
+				return any && (a.Targets.Count() == 0 || AnyExists(a.Targets));
+			}
+		}
 		// km, car и hours убраны: клановый «hours» сравнивал часы одного игрока с суммой клана, а поездка
 		// засчитывалась пассажирам и короткому телепорту. Счётчики пути и поездок остаются для достижений.
 		array<string> known = {"zombie", "animal", "skin", "fish", "wood", "bush", "rock", "craft", "repair", "build", "fire"};
@@ -501,34 +518,71 @@ class VB_TabletContracts
 		array<ref VB_TabletKillGroup> groups = VB_TabletConfig.Get().LootGroups;
 		foreach (VB_TabletKillGroup group : groups)
 		{
-			if (!VB_TabletServer.IsListed(box, group.Classes))
+			if (VB_TabletServer.IsListed(box, group.Classes))
+				CountOnce(player, box, group.Kind);
+		}
+	}
+
+	// Объект (ящик ивента, жила) засчитывается игроку один раз (личные контракты, достижения)
+	// и его клану один раз. Память до рестарта: после него у объекта другой сетевой номер.
+	protected static void CountOnce(PlayerBase player, Object obj, string kind)
+	{
+		int low;
+		int high;
+		obj.GetNetworkID(low, high);
+		string objKey = kind + ":" + low.ToString() + ":" + high.ToString();
+		string uid = player.GetIdentity().GetPlainId();
+		string key = uid + ":" + objKey;
+		if (!s_Boxes)
+			s_Boxes = new map<string, bool>();
+		if (s_Boxes.Contains(key))
+			return;
+		if (s_Boxes.Count() > 5000)
+			s_Boxes.Clear();
+		s_Boxes.Set(key, true);
+		bool toClan = true;
+		VB_Clan c = VB_TabletClans.OfPlayer(uid);
+		if (c)
+		{
+			string clanKey = "clan:" + c.Id + ":" + objKey;
+			if (s_Boxes.Contains(clanKey))
+				toClan = false;
+			else
+				s_Boxes.Set(clanKey, true);
+		}
+		VB_TabletRecord rec = VB_TabletPlayers.Get(uid, player.GetIdentity().GetName());
+		CountAch(rec, kind);
+		Add(rec, kind, 1, false, toClan);
+	}
+
+	// Длительное действие игрока завершилось (каждый круг у действий с повтором): группы ActionGroups из конфига.
+	static void OnActionDone(ActionBase action, ActionData data)
+	{
+		array<ref VB_TabletActionGroup> groups = VB_TabletConfig.Get().ActionGroups;
+		if (!groups || groups.Count() == 0 || !data || !data.m_Player || !data.m_Player.GetIdentity())
+			return;
+		string name = action.ClassName();
+		Object target = null;
+		if (data.m_Target)
+			target = data.m_Target.GetObject();
+		PlayerBase player = data.m_Player;
+		VB_TabletRecord rec = null;
+		foreach (VB_TabletActionGroup g : groups)
+		{
+			if (g.Actions.Find(name) < 0)
 				continue;
-			int low;
-			int high;
-			box.GetNetworkID(low, high);
-			string boxKey = low.ToString() + ":" + high.ToString();
-			string uid = player.GetIdentity().GetPlainId();
-			string key = uid + ":" + boxKey;
-			if (!s_Boxes)
-				s_Boxes = new map<string, bool>();
-			if (s_Boxes.Contains(key))
-				return;
-			if (s_Boxes.Count() > 5000)
-				s_Boxes.Clear();
-			s_Boxes.Set(key, true);
-			bool toClan = true;
-			VB_Clan c = VB_TabletClans.OfPlayer(uid);
-			if (c)
+			if (g.Targets.Count() > 0 && (!target || !VB_TabletServer.IsListedObj(target, g.Targets)))
+				continue;
+			if (g.PerTarget)
 			{
-				string clanKey = "clan:" + c.Id + ":" + boxKey;
-				if (s_Boxes.Contains(clanKey))
-					toClan = false;
-				else
-					s_Boxes.Set(clanKey, true);
+				if (target)
+					CountOnce(player, target, g.Kind);
+				continue;
 			}
-			VB_TabletRecord rec = VB_TabletPlayers.Get(uid, player.GetIdentity().GetName());
-			CountAch(rec, group.Kind);
-			Add(rec, group.Kind, 1, false, toClan);
+			if (!rec)
+				rec = VB_TabletPlayers.Get(player.GetIdentity().GetPlainId(), player.GetIdentity().GetName());
+			CountAch(rec, g.Kind);
+			Add(rec, g.Kind, 1, false);
 		}
 	}
 
