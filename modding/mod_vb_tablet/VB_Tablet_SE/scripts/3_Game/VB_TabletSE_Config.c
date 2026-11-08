@@ -91,10 +91,12 @@ class VB_TabletConfig
 	ref array<string> Bosses = new array<string>();	// кого считает достижение «Убийца гигантов»
 	ref array<string> BannedWords = new array<string>();
 	ref array<int> WeekPrizes = new array<int>();	// награда на склад за 1, 2, 3 место недели
+	// Купюры. При INT_Banking на сервере берутся валюты банка (его INT_BankingConfig.json), этот список только без банка.
 	ref array<ref VB_TabletDenom> Money = new array<ref VB_TabletDenom>();
 	ref VB_MapLimits MapLimits = new VB_MapLimits();
 	int TaxWarnDays = 3;		// предупреждение о налоге при входе: дней до роспуска
-	float AtmDist = 4;			// с какого расстояния работает банкомат, метры
+	int NameTags = 1;			// ники над головами: ник, эмблема клана, ранг
+	float NameTagRange = 15;	// с какого расстояния виден ник, метры (3..50)
 	ref array<int> Levels;		// пороги влияния: Levels[n-1] открывает уровень n
 	ref array<int> XpMy;		// опыт за личный контракт по сложности
 	ref array<ref VB_TabletContractType> Contracts;
@@ -167,6 +169,7 @@ class VB_TabletConfig
 			Money.Insert(new VB_TabletDenom("MoneyRuble1", 1));
 			Money.Insert(new VB_TabletDenom("Bablo5Rubley", 5));
 			Money.Insert(new VB_TabletDenom("Bablo10Rubley", 10));
+			Money.Insert(new VB_TabletDenom("MoneyRuble25", 25));
 			Money.Insert(new VB_TabletDenom("Bablo50Rubley", 50));
 			Money.Insert(new VB_TabletDenom("Bablo100Rubley", 100));
 			Money.Insert(new VB_TabletDenom("Bablo200Rubley", 200));

@@ -23,11 +23,37 @@ class VB_TabletMoney
 		return 1;
 	}
 
-	protected static int ValueOf(string type)
+	protected static ref array<ref VB_TabletDenom> s_BankDenoms;
+
+	// Купюры. При INT_Banking те же, что принимает банк: одна валюта на сервере, сдача и выдача теми же купюрами.
+	// Валюты банка «N штук за номинал» (requiredQuantity > 1) планшет не берёт, их принимает только банк.
+	// Без банка или с пустым списком банка: Money из конфига планшета.
+	static array<ref VB_TabletDenom> Denoms()
+	{
+#ifdef INT_BANKING_SE
+		array<ref INT_BankSE_Denom> bank = INT_BankSE_Money.Denoms();
+		if (bank && bank.Count() > 0)
+		{
+			if (!s_BankDenoms)
+				s_BankDenoms = new array<ref VB_TabletDenom>();
+			s_BankDenoms.Clear();
+			foreach (INT_BankSE_Denom b : bank)
+			{
+				if (b.Unit == 1 && b.Value > 0)
+					s_BankDenoms.Insert(new VB_TabletDenom(b.ClassName, b.Value));
+			}
+			if (s_BankDenoms.Count() > 0)
+				return s_BankDenoms;
+		}
+#endif
+		return VB_TabletConfig.Get().Money;
+	}
+
+	protected static int ValueOf(string type, array<ref VB_TabletDenom> denoms)
 	{
 		string low = type + "";
 		low.ToLower();
-		foreach (VB_TabletDenom d : VB_TabletConfig.Get().Money)
+		foreach (VB_TabletDenom d : denoms)
 		{
 			string cls = d.Item + "";
 			cls.ToLower();
@@ -40,6 +66,7 @@ class VB_TabletMoney
 	protected static void Collect(PlayerBase player, array<ref VB_TabletCash> out_items)
 	{
 		out_items.Clear();
+		array<ref VB_TabletDenom> denoms = Denoms();
 		array<EntityAI> items = new array<EntityAI>();
 		player.GetInventory().EnumerateInventory(InventoryTraversalType.PREORDER, items);
 		foreach (EntityAI e : items)
@@ -48,7 +75,7 @@ class VB_TabletMoney
 				continue;
 			if (e.GetHierarchyRootPlayer() != player)
 				continue;
-			int value = ValueOf(e.GetType());
+			int value = ValueOf(e.GetType(), denoms);
 			if (value <= 0)
 				continue;
 			int pcs = PiecesOf(e);
@@ -90,7 +117,8 @@ class VB_TabletMoney
 		if (amount <= 0)
 			return true;
 		array<ref VB_TabletDenom> denoms = new array<ref VB_TabletDenom>();
-		foreach (VB_TabletDenom d : VB_TabletConfig.Get().Money)
+		array<ref VB_TabletDenom> all = Denoms();
+		foreach (VB_TabletDenom d : all)
 		{
 			int at = denoms.Count();
 			for (int i = 0; i < denoms.Count(); i++)

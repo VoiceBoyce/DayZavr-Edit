@@ -650,9 +650,7 @@ class VBT_Modal extends Managed
 		m_Menu = menu;
 		Root = INT_UIF_Draw.Frame(menu.GetScreen(), 0, 0, 1468, 848);
 		Root.SetSort(200);
-		// У банкомата за окном мир, а не планшет: затемнять нечего.
-		if (!menu.IsAtmOnly())
-			INT_UIF_Draw.Line(Root, 0, 0, 1468, 848, 0x99000000);
+		INT_UIF_Draw.Line(Root, 0, 0, 1468, 848, 0x99000000);
 		Shade = INT_UIF_Draw.Hit(Root, 0, 0, 1468, 848, menu.GetHitHandler());
 		Body = INT_UIF_Draw.Frame(Root, (1468 - w) * 0.5, (848 - h) * 0.5, w, h);
 		INT_UIF_Surface.Box(Body, 0, 0, w, h, 12, VB_C_PANEL, border);

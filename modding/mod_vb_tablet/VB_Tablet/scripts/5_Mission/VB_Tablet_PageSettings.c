@@ -395,6 +395,8 @@ class VB_TabletPageSettings extends VB_TabletPage
 		CollectChanges(c);
 		if (m_ChangeNames.Count() == 0 || Problem(c, ChangesSum()) != "")
 			return;
+		if (VB_TabletBridge.Censored(s_Name) || VB_TabletBridge.Censored(s_Tag) || VB_TabletBridge.Censored(s_Desc))
+			return;
 		string title = TrimCopy(s_Name);
 		string tag = s_Tag;
 		string slogan = TrimCopy(s_Desc);

@@ -11,6 +11,9 @@ const string VB_TABLET_TAG = "[VB_Tablet]";
 const int VB_TABLET_MENU_ID = 9141001;
 const int VB_TABLET_RPC_C2S = 9141011;
 const int VB_TABLET_RPC_S2C = 9141012;
+// Переводы между личным счётом INT_Banking и складом: «второй участник» в истории счёта = VBCLAN:<тег>.
+// По этой метке окно банкомата (VB_Tablet_BANK) пишет «Перевод в клан», а не «Оплата на бирже».
+const string VB_BANK_PEER = "VBCLAN:";
 
 enum VB_TabletOp
 {
@@ -24,6 +27,8 @@ enum VB_TabletOp
 	CLAN_NEWS = 13,	// C2S пусто; S2C: int строк, VB_ClanNews
 	CLAN_CHAT = 14,	// C2S пусто; S2C: int строк, VB_ClanChatRow
 	CLAN_BANK = 15,	// C2S пусто; S2C: int строк, VB_ClanBankRow
+	NAMETAGS = 17,	// C2S пусто; S2C: bool включено, float дальность, int игроков, (string steam64, int ранг, string клан), int кланов, (string клан, string форма, string символ, int цвет)
+	CLAN_FEED = 16,	// S2C: int вид (0 клан-чат, 1 событие журнала), VB_ClanJournalRow: строка «КЛАН» в общий чат
 	CLAN_CREATE = 20,	// string название, тег, слоган, форма, символ, int цвет
 	CLAN_APPLY = 21,	// string клан, текст, discord
 	CLAN_APPLY_CANCEL = 22,
@@ -43,9 +48,9 @@ enum VB_TabletOp
 	CHAT_SEND = 36,		// string текст
 	PLAYER_CARD = 80,	// string uid (или пусто), string имя; S2C: string имя, VB_TabletStats
 	DISCORD_SET = 37,	// string имя
-	ATM_PLACE = 40,		// float x, y, z, угол
-	ATM_DEPOSIT = 41,	// int сумма
-	ATM_WITHDRAW = 42,	// int сумма
+	// 40 был ATM_PLACE: свой банкомат клана убран, склад работает в банкоматах INT_Banking. Номер не занимать.
+	ATM_DEPOSIT = 41,	// int сумма: наличные на склад клана (у банкомата банка)
+	ATM_WITHDRAW = 42,	// int сумма: со склада наличными
 	CONTRACTS = 43,		// C2S пусто; S2C: int секунд до нового набора, bool замена доступна, int строк, VB_ClanContract клановые, int строк, VB_ClanContract личные
 	CONTRACT_CLAIM = 44,	// int индекс личного контракта
 	CONTRACT_REPLACE = 45,	// int индекс личного контракта
@@ -57,6 +62,8 @@ enum VB_TabletOp
 	ADMIN_BANNED = 51,	// C2S пусто; S2C: int строк, string слова
 	ADMIN_BAN_ADD = 52,	// string слово
 	ADMIN_BAN_DEL = 53,	// string слово
+	ATM_FROM_ACCOUNT = 54,	// int сумма: с личного счёта INT_Banking на склад клана
+	ATM_TO_ACCOUNT = 55,	// int сумма: со склада клана на личный счёт INT_Banking
 	MAP_GET = 60,		// C2S пусто; S2C: MAP_CONF, затем MAP_SCOPE по каждой области
 	MAP_CONF = 61,		// S2C: VB_MapLimits, ключи скрытых, ключи 3D, скрытые категории
 	MAP_SCOPE = 62,		// S2C: int область, int строк, VB_MapCat, int строк, VB_MapObject

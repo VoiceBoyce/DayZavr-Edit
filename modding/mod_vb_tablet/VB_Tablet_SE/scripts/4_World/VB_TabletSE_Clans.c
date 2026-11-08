@@ -4,6 +4,8 @@ class VB_TabletClans
 	static const string DIR_CLANS = "$profile:VB_Mods/VB_Tablet/clans";
 	protected static ref map<string, ref VB_Clan> s_Clans;
 	protected static ref map<string, string> s_ByUid;	// игрок -> клан
+	protected static ref ScriptInvoker s_OnJoin;
+	protected static ref ScriptInvoker s_OnLeave;
 	protected static ref map<string, ref array<ref VB_ClanInvite>> s_Invites;
 	protected static int s_NextId = 1;
 	protected static bool s_Loaded;
@@ -126,6 +128,7 @@ class VB_TabletClans
 		c.Journal.InsertAt(row, 0);
 		while (c.Journal.Count() > VB_CLAN_JOURNAL_MAX)
 			c.Journal.Remove(c.Journal.Count() - 1);
+		VB_TabletFeed.Event(c, row);
 	}
 
 	static void AddHistory(VB_Clan c, string who, int kind, int sum)
@@ -377,6 +380,21 @@ class VB_TabletClans
 		return VB_TabletResult.OK;
 	}
 
+	// Для дополнений: (VB_Clan клан, string uid). Вступление после добавления в состав, выход после удаления.
+	static ScriptInvoker OnMemberJoin()
+	{
+		if (!s_OnJoin)
+			s_OnJoin = new ScriptInvoker();
+		return s_OnJoin;
+	}
+
+	static ScriptInvoker OnMemberLeave()
+	{
+		if (!s_OnLeave)
+			s_OnLeave = new ScriptInvoker();
+		return s_OnLeave;
+	}
+
 	static void AddMember(VB_Clan c, string uid, string name, string rank)
 	{
 		VB_ClanMember m = new VB_ClanMember();
@@ -388,6 +406,8 @@ class VB_TabletClans
 		c.Members.Insert(m);
 		s_ByUid.Set(uid, c.Id);
 		s_Invites.Remove(uid);
+		if (s_OnJoin)
+			s_OnJoin.Invoke(c, uid);
 	}
 
 	static void RemoveMember(VB_Clan c, string uid)
@@ -398,17 +418,24 @@ class VB_TabletClans
 				c.Members.Remove(i);
 		}
 		s_ByUid.Remove(uid);
+		if (s_OnLeave)
+			s_OnLeave.Invoke(c, uid);
 	}
 
 	// Роспуск: удаляется всё, что связано с кланом. Копия .bak тоже.
 	static void Dissolve(VB_Clan c)
 	{
-		VB_TabletBank.RemoveAtm(c.Id);
 		array<string> uids = new array<string>();
 		foreach (VB_ClanMember m : c.Members)
 			uids.Insert(m.Uid);
 		foreach (string uid : uids)
 			s_ByUid.Remove(uid);
+		// Роспуск для дополнений это выход каждого, пока состав ещё на месте.
+		if (s_OnLeave)
+		{
+			foreach (string left : uids)
+				s_OnLeave.Invoke(c, left);
+		}
 		string path = DIR_CLANS + "/" + c.Id + ".json";
 		DeleteFile(path);
 		DeleteFile(path + ".bak");

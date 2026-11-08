@@ -1,0 +1,33 @@
+FrameWidgetClass vbt_clan_root {
+ ignorepointer 1
+ position 0 0
+ size 0.4 1
+ halign center_ref
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ {
+  PanelWidgetClass vbt_clan_outline {
+   ignorepointer 1
+   position 0 0
+   size 1 1
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style Outline
+  }
+  ButtonWidgetClass vbt_button_clan {
+   position 0 0.1
+   size 1 0.8
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style Default
+   text "#STR_VB_TAB_VPP_TO_CLAN"
+   font "gui/fonts/metron"
+  }
+ }
+}

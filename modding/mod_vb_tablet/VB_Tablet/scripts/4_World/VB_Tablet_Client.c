@@ -32,6 +32,8 @@ class VB_TabletClient
 	ref array<ref VB_ClanNews> News = new array<ref VB_ClanNews>();
 	ref array<ref VB_ClanChatRow> Chat = new array<ref VB_ClanChatRow>();
 	ref array<ref VB_ClanBankRow> History = new array<ref VB_ClanBankRow>();
+	ref VB_NameTags Tags = new VB_NameTags();	// ники над головами
+	ref ScriptInvoker OnFeed = new ScriptInvoker();	// (int вид, VB_ClanJournalRow): лента клана для общего чата
 	// Цены настроек клана: конфиг сервера, приходят в HELLO.
 	int ClanPrice = 1000000;
 	int ClanRank = 2;
@@ -44,7 +46,6 @@ class VB_TabletClient
 	int PriceEmblem = 20000;
 	int PriceColor = 5000;
 	string PickMember;	// uid участника: кого показать в карточке при переходе на экран «Участники»
-	bool AtmWanted;		// действие у банкомата: открыть окно при следующем кадре миссии
 	bool HasContracts;
 	bool MyReplace;		// бесплатная замена ещё не истрачена
 	int ContractLeft;
@@ -243,6 +244,14 @@ class VB_TabletClient
 		{
 			ReadNotify(ctx);
 		}
+		else if (op == VB_TabletOp.NAMETAGS)
+		{
+			Tags.Read(ctx);
+		}
+		else if (op == VB_TabletOp.CLAN_FEED)
+		{
+			ReadFeed(ctx);
+		}
 		else if (VB_MapState.IsMapOp(op))
 		{
 			Map.OnServer(op, ctx);
@@ -251,6 +260,15 @@ class VB_TabletClient
 		{
 			ReadClanPart(op, ctx);
 		}
+	}
+
+	protected void ReadFeed(ParamsReadContext ctx)
+	{
+		int kind;
+		VB_ClanJournalRow row = new VB_ClanJournalRow();
+		if (!ctx.Read(kind) || !row.Read(ctx))
+			return;
+		OnFeed.Invoke(kind, row);
 	}
 
 	int LastResult;

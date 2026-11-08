@@ -3,7 +3,8 @@
 class VB_TabletPageRanks extends VB_TabletPage
 {
 	protected static const int TAG_DELETE = 1;
-	protected static const int PERM_COUNT = 9;
+	// Права в порядке битов VB_ClanPerm. Девятый бит (банкомат клана) убран вместе с банкоматом.
+	protected static const int PERM_COUNT = 8;
 	protected static const int NAME_MAX = 20;
 
 	// Перестроение создаёт страницу заново, поэтому выбранный ранг в статике.

@@ -307,6 +307,12 @@ class VB_TabletMap
 		int n = 0;
 		if (list)
 			n = list.Count();
+		// Серверный слой: ещё метки карты VPP, только для чтения.
+		array<ref VB_MapObject> vpp = null;
+		if (scope == VB_MapScope.SERVER)
+			vpp = VB_TabletVpp.Marks();
+		if (vpp)
+			n = n + vpp.Count();
 		ScriptRPC rpc = new ScriptRPC();
 		rpc.Write(op);
 		rpc.Write(scope);
@@ -321,6 +327,11 @@ class VB_TabletMap
 		{
 			foreach (VB_MapObject o : list)
 				o.Write(rpc);
+		}
+		if (vpp)
+		{
+			foreach (VB_MapObject v : vpp)
+				v.Write(rpc);
 		}
 		rpc.Send(player, VB_TABLET_RPC_S2C, true, id);
 	}
@@ -667,6 +678,8 @@ class VB_TabletMap
 	{
 		int scope = key / VB_MAP_KEY_STEP;
 		int objId = key % VB_MAP_KEY_STEP;
+		if (scope == VB_MapScope.SERVER && objId >= VB_MAP_VPP_ID)
+			return VB_TabletVpp.Has(objId);
 		array<ref VB_MapObject> list = ListOf(uid, scope);
 		if (!list)
 			return false;

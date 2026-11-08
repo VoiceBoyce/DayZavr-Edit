@@ -492,6 +492,9 @@ class VB_TabletPageCreate extends VB_TabletPage
 		}
 		if (m_CreateHit && w == m_CreateHit)
 		{
+			// Мат проверяется до подтверждения оплаты, а не после.
+			if (VB_TabletBridge.Censored(s_Name) || VB_TabletBridge.Censored(s_Tag) || VB_TabletBridge.Censored(s_Slogan))
+				return true;
 			string text = VBA_Util.Sub("#STR_VB_TAB_A_CREATE_ASK", "{sum}", VBT.Num(VB_TabletClient.Get().ClanPrice));
 			text.Replace("{name}", s_Name);
 			m_Menu.Ask(TAG_CREATE, "#STR_VB_TAB_A_CREATE_TITLE", text, "#STR_VB_TAB_A_CREATE_YES");

@@ -8,6 +8,7 @@ const float VB_MAP_WORLD_MAX = 40000;
 const float VB_MAP_RADIUS_MIN = 20;
 const float VB_MAP_RADIUS_MAX = 20000;
 const int VB_MAP_KEY_STEP = 10000000;	// ключ объекта: область * шаг + номер
+const int VB_MAP_VPP_ID = 9000000;		// серверные метки карты VPP: только чтение, номер = позиция в файле VPP
 
 enum VB_MapKind
 {
@@ -79,6 +80,96 @@ class VB_MapIcons
 		if (i < 0 || i >= all.Count())
 			return all.Get(0);
 		return all.Get(i);
+	}
+
+	// Вид метки VanillaPlusPlusMap по файлу её значка: имя файла без папки и расширения.
+	static string VppGroup(string path)
+	{
+		string p = path + "";
+		p.ToLower();
+		p.Replace("/", "\\");
+		int slash = p.LastIndexOf("\\");
+		if (slash >= 0)
+			p = p.Substring(slash + 1, p.Length() - slash - 1);
+		int dot = p.IndexOf(".");
+		if (dot >= 0)
+			p = p.Substring(0, dot);
+		if (p == "car" || p == "iconcar_ca" || p == "icontruck_ca")
+			return "car";
+		if (p == "fuelstation")
+			return "fuel";
+		if (p == "hospital")
+			return "med";
+		if (p == "watchtower" || p == "radiotower" || p == "lighthouse" || p == "watertower")
+			return "tower";
+		if (p == "tent" || p == "house" || p == "feedshack")
+			return "camp";
+		if (p == "church")
+			return "church";
+		if (p == "warning_ca")
+			return "danger";
+		if (p == "police")
+			return "police";
+		if (p == "shopping")
+			return "shop";
+		if (p == "bar")
+			return "bar";
+		if (p == "deerstand")
+			return "hunt";
+		if (p == "firestation")
+			return "fire";
+		if (p == "waterpump")
+			return "water";
+		if (p == "pictureparachute_ca")
+			return "drop";
+		return "point";
+	}
+
+	// Значок планшета для вида метки VPP: индекс в Marks.
+	static int VppIcon(string group)
+	{
+		string name = "pin";
+		if (group == "car")
+			name = "car";
+		else if (group == "fuel" || group == "water")
+			name = "sym_drop";
+		else if (group == "med")
+			name = "heart";
+		else if (group == "tower")
+			name = "sym_tower";
+		else if (group == "camp")
+			name = "base";
+		else if (group == "church")
+			name = "sym_castle";
+		else if (group == "danger")
+			name = "danger";
+		else if (group == "police")
+			name = "lock";
+		else if (group == "shop")
+			name = "star";
+		else if (group == "bar")
+			name = "rally";
+		else if (group == "hunt")
+			name = "sym_paw";
+		else if (group == "fire")
+			name = "sym_flame";
+		else if (group == "drop")
+			name = "stash";
+		int idx = Marks().Find(name);
+		if (idx < 0)
+			idx = 0;
+		return idx;
+	}
+
+	// Цвет VPP: вектор 0..255 по каналам.
+	static int VppColor(vector c)
+	{
+		int r = Math.Clamp(Math.Round(c[0]), 0, 255);
+		int g = Math.Clamp(Math.Round(c[1]), 0, 255);
+		int b = Math.Clamp(Math.Round(c[2]), 0, 255);
+		if (r + g + b == 0)
+			return 0xFFFFFFFF;
+		return ARGB(255, r, g, b);
 	}
 }
 
@@ -161,6 +252,12 @@ class VB_MapObject extends Managed
 	int ObjKey()
 	{
 		return Scope * VB_MAP_KEY_STEP + ObjId;
+	}
+
+	// Метка из VPPMapConfig.json: правится только в VPP, в лимит администратора не входит.
+	bool IsVpp()
+	{
+		return Scope == VB_MapScope.SERVER && ObjId >= VB_MAP_VPP_ID;
 	}
 
 	int PointCount()
@@ -549,7 +646,7 @@ class VB_MapState
 		int n = 0;
 		foreach (VB_MapObject o : Objects)
 		{
-			if (o.Scope != scope)
+			if (o.Scope != scope || o.IsVpp())
 				continue;
 			if (SameLimit(o.Kind, kind))
 				n++;

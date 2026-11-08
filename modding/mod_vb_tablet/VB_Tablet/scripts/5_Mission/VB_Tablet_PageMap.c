@@ -210,6 +210,7 @@ class VBT_MapPin extends Managed
 	float TagW;
 	Widget Root;
 	Widget Tag;
+	string FriendId;	// друг из INT_PartyMode: место обновляется без перерисовки
 }
 
 // Строка списка объектов.
@@ -386,6 +387,8 @@ class VB_TabletPageMap extends VB_TabletPage
 	protected float m_LabelsIn;
 	protected bool m_LabelsDue;
 	protected VBT_MapPin m_HotPin;
+	protected string m_FriendSig;
+	protected float m_FriendT;
 
 	// Для расчёта штриховки: не создавать массивы на каждую зону.
 	protected ref array<float> m_CutX = new array<float>();
@@ -549,6 +552,7 @@ class VB_TabletPageMap extends VB_TabletPage
 		if (m_ShapesDirty)
 			PaintShapes();
 		PaintMe();
+		TickFriends(dt);
 		HoverPlates();
 		HoverPin();
 		ShowCoords();
@@ -1060,7 +1064,7 @@ class VB_TabletPageMap extends VB_TabletPage
 	protected bool CanEdit(VB_MapObject o)
 	{
 		if (o.Scope == VB_MapScope.SERVER)
-			return m_Client.IsAdmin;
+			return m_Client.IsAdmin && !o.IsVpp();
 		if (o.Scope == VB_MapScope.CLAN)
 			return Access();
 		return true;
@@ -2621,15 +2625,95 @@ class VB_TabletPageMap extends VB_TabletPage
 				AddPin(o, ax, az, 0, "", title, 0);
 		}
 		VB_Clan clan = m_Client.Clan;
-		if (clan && clan.HasAtm && m_State.LayerClan)
-			AddPin(null, clan.AtmX, clan.AtmZ, VB_C_GOLD, "vault", VBT.T("#STR_VB_TAB_D_ATM"), 22);
 		if (clan && m_State.LayerMates)
 		{
 			foreach (VB_MapMate m : m_State.Mates)
 				AddPin(null, m.X, m.Z, VB_C_OK, "", m.Who, 12);
 		}
+		m_FriendSig = "";
+		if (m_State.LayerMates)
+			AddFriends(clan);
 		PlacePinsOnly();
 		m_ShapesDirty = true;
+	}
+
+	// Друзья из INT_PartyMode: те, кого игрок включил в показ, в сети и с известным местом. Соклановцы уже есть.
+	protected void AddFriends(VB_Clan clan)
+	{
+#ifdef INT_PARTYMODE_CL
+		if (!INT_PTY_Client.s_Friends)
+			return;
+		foreach (INT_PTY_Friend fr : INT_PTY_Client.s_Friends)
+		{
+			if (!ShowFriend(fr, clan))
+				continue;
+			vector at = fr.WorldPos();
+			VBT_MapPin pin = AddPin(null, at[0], at[2], INT_PTY_UI.FriendColor(fr.Id), "", INT_PTY_Client.NameOf(fr.Id), 12);
+			pin.FriendId = fr.Id;
+			m_FriendSig = m_FriendSig + fr.Id + ";";
+		}
+#endif
+	}
+
+#ifdef INT_PARTYMODE_CL
+	protected bool ShowFriend(INT_PTY_Friend fr, VB_Clan clan)
+	{
+		if (!fr || !fr.Online || fr.Dead || !fr.KnowsPos() || !INT_PTY_Client.IsShown(fr.Id))
+			return false;
+		if (clan)
+		{
+			foreach (VB_ClanMember m : clan.Members)
+			{
+				if (m.Uid == fr.Id)
+					return false;
+			}
+		}
+		return true;
+	}
+#endif
+
+	// Раз в секунду: тот же набор друзей двигается на месте, другой набор перерисовывает метки.
+	protected void TickFriends(float dt)
+	{
+#ifdef INT_PARTYMODE_CL
+		m_FriendT = m_FriendT - dt;
+		if (m_FriendT > 0)
+			return;
+		m_FriendT = 1;
+		string sig = "";
+		if (m_State.LayerMates && INT_PTY_Client.s_Friends)
+		{
+			foreach (INT_PTY_Friend fr : INT_PTY_Client.s_Friends)
+			{
+				if (ShowFriend(fr, m_Client.Clan))
+					sig = sig + fr.Id + ";";
+			}
+		}
+		if (sig != m_FriendSig)
+		{
+			m_Need = m_Need | NEED_PINS;
+			return;
+		}
+		if (sig == "")
+			return;
+		foreach (VBT_MapPin pin : m_Items)
+		{
+			if (pin.FriendId == "")
+				continue;
+			foreach (INT_PTY_Friend f : INT_PTY_Client.s_Friends)
+			{
+				if (f && f.Id == pin.FriendId)
+				{
+					vector at = f.WorldPos();
+					pin.WX = at[0];
+					pin.WZ = at[2];
+					break;
+				}
+			}
+		}
+		PlacePinsOnly();
+		m_LabelsDue = true;
+#endif
 	}
 
 	protected void PlacePinsOnly()

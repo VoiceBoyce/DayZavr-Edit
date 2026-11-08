@@ -161,7 +161,7 @@ class VB_TabletPageChat extends VB_TabletPage
 	protected void Send()
 	{
 		string v = m_Input.Get();
-		if (v == "")
+		if (v == "" || VB_TabletBridge.Censored(v))
 			return;
 		float now = GetGame().GetTickTime();
 		if (now - s_LastSend < MSG_GAP)

@@ -9,12 +9,6 @@ modded class MissionServer
 		VB_TabletClans.Load();
 	}
 
-	override void OnMissionStart()
-	{
-		super.OnMissionStart();
-		VB_TabletBank.SpawnAll();
-	}
-
 	override void OnUpdate(float timeslice)
 	{
 		super.OnUpdate(timeslice);

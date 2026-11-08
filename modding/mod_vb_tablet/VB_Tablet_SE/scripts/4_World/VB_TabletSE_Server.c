@@ -55,6 +55,9 @@ class VB_TabletServer
 			case VB_TabletOp.RATING:
 				SendRating(player, sender);
 				break;
+			case VB_TabletOp.NAMETAGS:
+				SendNameTags(player, sender);
+				break;
 			case VB_TabletOp.CLAN:
 				SendClan(player, sender);
 				break;
@@ -292,6 +295,103 @@ class VB_TabletServer
 		ScriptRPC rpc = new ScriptRPC();
 		rpc.Write(op);
 		st.Write(rpc);
+		rpc.Send(player, VB_TABLET_RPC_S2C, true, sender);
+	}
+
+	// Таблица ников: собирается не чаще раза в 10 секунд и отдаётся всем, кто спросит.
+	protected static const int TAGS_CACHE_MS = 10000;
+	protected static ref array<string> s_TagIds;
+	protected static ref array<int> s_TagRanks;
+	protected static ref array<string> s_TagClanOf;
+	protected static ref array<string> s_TagClans;
+	protected static ref array<string> s_TagShapes;
+	protected static ref array<string> s_TagSymbols;
+	protected static ref array<int> s_TagColors;
+	protected static int s_TagAt;
+
+	protected static void BuildNameTags()
+	{
+		s_TagAt = GetGame().GetTime();
+		s_TagIds = new array<string>();
+		s_TagRanks = new array<int>();
+		s_TagClanOf = new array<string>();
+		s_TagClans = new array<string>();
+		s_TagShapes = new array<string>();
+		s_TagSymbols = new array<string>();
+		s_TagColors = new array<int>();
+		VB_TabletRates rates = VB_TabletConfig.Get().Rates;
+		array<Man> players = new array<Man>();
+		GetGame().GetPlayers(players);
+		foreach (Man man : players)
+		{
+			PlayerIdentity ident = man.GetIdentity();
+			if (!ident)
+				continue;
+			string uid = ident.GetPlainId();
+			int rank = 0;
+			VB_TabletRecord rec = VB_TabletPlayers.Peek(uid);
+			if (rec)
+			{
+				int xp = rec.ToStats().Xp(rates);
+				rank = rates.RankOf(xp);
+			}
+			string cid = "";
+			VB_Clan c = VB_TabletClans.OfPlayer(uid);
+			if (c)
+			{
+				cid = c.Id;
+				if (s_TagClans.Find(cid) < 0)
+				{
+					s_TagClans.Insert(cid);
+					s_TagShapes.Insert(c.EmbShape);
+					s_TagSymbols.Insert(c.EmbSymbol);
+					s_TagColors.Insert(c.Color);
+				}
+			}
+			s_TagIds.Insert(uid);
+			s_TagRanks.Insert(rank);
+			s_TagClanOf.Insert(cid);
+		}
+	}
+
+	protected static void SendNameTags(PlayerBase player, PlayerIdentity sender)
+	{
+		int now = GetGame().GetTime();
+		if (!s_TagIds || now - s_TagAt > TAGS_CACHE_MS || now < s_TagAt)
+			BuildNameTags();
+		VB_TabletConfig cfg = VB_TabletConfig.Get();
+		int op = VB_TabletOp.NAMETAGS;
+		bool on = cfg.NameTags != 0;
+		float range = cfg.NameTagRange;
+		int n = s_TagIds.Count();
+		int m = s_TagClans.Count();
+		ScriptRPC rpc = new ScriptRPC();
+		rpc.Write(op);
+		rpc.Write(on);
+		rpc.Write(range);
+		rpc.Write(n);
+		int i;
+		for (i = 0; i < n; i++)
+		{
+			string id = s_TagIds.Get(i);
+			int rank = s_TagRanks.Get(i);
+			string cid = s_TagClanOf.Get(i);
+			rpc.Write(id);
+			rpc.Write(rank);
+			rpc.Write(cid);
+		}
+		rpc.Write(m);
+		for (i = 0; i < m; i++)
+		{
+			string key = s_TagClans.Get(i);
+			string shape = s_TagShapes.Get(i);
+			string symbol = s_TagSymbols.Get(i);
+			int color = s_TagColors.Get(i);
+			rpc.Write(key);
+			rpc.Write(shape);
+			rpc.Write(symbol);
+			rpc.Write(color);
+		}
 		rpc.Send(player, VB_TABLET_RPC_S2C, true, sender);
 	}
 

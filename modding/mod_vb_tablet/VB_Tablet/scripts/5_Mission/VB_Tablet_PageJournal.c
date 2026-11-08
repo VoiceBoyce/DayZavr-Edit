@@ -18,6 +18,8 @@ class VBA_Journal
 				return 1;
 			case VB_ClanEvent.DEPOSIT:
 			case VB_ClanEvent.WITHDRAW:
+			case VB_ClanEvent.FROM_ACCOUNT:
+			case VB_ClanEvent.TO_ACCOUNT:
 			case VB_ClanEvent.TAX:
 			case VB_ClanEvent.ATM_SET:
 			case VB_ClanEvent.ATM_MOVE:
@@ -28,7 +30,7 @@ class VBA_Journal
 
 	static string IcoOf(int ev)
 	{
-		array<string> all = {"flag", "users", "logout", "kick", "rank", "star", "news", "sym_cog", "pin", "coin", "coin", "coin", "check", "coin", "coin", "rank"};
+		array<string> all = {"flag", "users", "logout", "kick", "rank", "star", "news", "sym_cog", "pin", "coin", "coin", "coin", "check", "coin", "coin", "rank", "flag", "coin", "coin"};
 		if (ev < 0 || ev >= all.Count())
 			return "flag";
 		return all.Get(ev);

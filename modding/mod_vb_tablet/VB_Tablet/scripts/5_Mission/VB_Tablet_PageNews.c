@@ -384,6 +384,8 @@ class VB_TabletPageNews extends VB_TabletPage
 			INT_UIF_Toast.Error(VBT.T("#STR_VB_TAB_B_NEWS_NEED"));
 			return;
 		}
+		if (VB_TabletBridge.Censored(head) || VB_TabletBridge.Censored(body))
+			return;
 		VB_TabletClient client = VB_TabletClient.Get();
 		int id = s_FormId;
 		int tag = s_FormTag;

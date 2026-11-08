@@ -24,11 +24,9 @@ class VB_TabletMenu extends INT_UIF_Menu
 	static const float DEVICE_Y = 80;
 	static const float SCREEN_X = 226;
 	static const float SCREEN_Y = 116;
-	static const float ATM_REACH = 4.0;
 
 	protected static bool s_AssetsLoaded;
 	protected static string s_StartPage = "profile";
-	protected static bool s_AtmOnly;
 
 	protected Widget m_Device;
 	protected Widget m_NavRoot;
@@ -64,7 +62,6 @@ class VB_TabletMenu extends INT_UIF_Menu
 	protected Widget m_ScreenBg;
 	protected Widget m_ScreenBack;
 	protected ImageWidget m_DeviceTex;
-	protected bool m_AtmShown;
 	protected ref array<ImageWidget> m_TintIcons;
 	protected bool m_Typing;
 	protected int m_ResultVersion;
@@ -95,7 +92,7 @@ class VB_TabletMenu extends INT_UIF_Menu
 		VB_TabletMenu ours = VB_TabletMenu.Cast(current);
 		if (ours)
 		{
-			if (page == "" || page == ours.GetPageId() || s_AtmOnly)
+			if (page == "" || page == ours.GetPageId())
 				ours.RequestClose();
 			else
 				ours.Go(page);
@@ -108,27 +105,6 @@ class VB_TabletMenu extends INT_UIF_Menu
 			s_StartPage = "profile";
 		VB_TabletClient.Get().RequestHello();
 		INT_UIF_Menu.Open(VB_TABLET_MENU_ID);
-	}
-
-	// Действие у банкомата: только его окошко, без планшета.
-	static void OpenAtm()
-	{
-		UIScriptedMenu current = GetGame().GetUIManager().GetMenu();
-		VB_TabletMenu ours = VB_TabletMenu.Cast(current);
-		if (ours)
-		{
-			ours.Go("bank");
-			return;
-		}
-		if (current || !CanOpen())
-			return;
-		s_AtmOnly = true;
-		Toggle("bank");
-	}
-
-	bool IsAtmOnly()
-	{
-		return s_AtmOnly;
 	}
 
 	string GetPageId()
@@ -285,14 +261,19 @@ class VB_TabletMenu extends INT_UIF_Menu
 		return false;
 	}
 
+	// Значки нужны не только окну: 3D метки и слой на карте VPP рисуются и до первого открытия планшета.
+	static void LoadAssets()
+	{
+		if (s_AssetsLoaded)
+			return;
+		s_AssetsLoaded = true;
+		LoadWidgetImageSet(VB_TABLET_IMAGESET);
+		LoadWidgetImageSet(VB_TABLET_IMAGESET_EM);
+	}
+
 	override Widget Init()
 	{
-		if (!s_AssetsLoaded)
-		{
-			s_AssetsLoaded = true;
-			LoadWidgetImageSet(VB_TABLET_IMAGESET);
-			LoadWidgetImageSet(VB_TABLET_IMAGESET_EM);
-		}
+		LoadAssets();
 		return super.Init();
 	}
 
@@ -322,15 +303,6 @@ class VB_TabletMenu extends INT_UIF_Menu
 		BuildSide(screen);
 		BuildTop(screen);
 		m_Work = INT_UIF_Draw.Clip(screen, 240, 72, 1228, 776, "VBT_Work");
-		if (s_AtmOnly)
-		{
-			m_DeviceTex.Show(false);
-			m_ScreenBack.Show(false);
-			m_ScreenBg.Show(false);
-			m_SideRoot.Show(false);
-			m_TopBar.Show(false);
-			m_Work.Show(false);
-		}
 		RevealOnOpen(m_Device);
 		if (VB_TabletClient.Get().Clan)
 			VB_TabletClient.Get().Request(VB_TabletOp.CONTRACTS);
@@ -621,7 +593,6 @@ class VB_TabletMenu extends INT_UIF_Menu
 		VB_TabletClient.SetAimLock(false);
 		if (m_Page)
 			m_Page.Leave();
-		s_AtmOnly = false;
 		GetGame().SaveProfile();
 		super.OnHide();
 		HoldHud(false);
@@ -781,35 +752,12 @@ class VB_TabletMenu extends INT_UIF_Menu
 		if (m_Page)
 			m_Page.Tick(timeslice);
 		UpdateScrollThumbs();
-		if (s_AtmOnly)
-			AtmOnlyTick();
 		m_Second = m_Second + timeslice;
 		if (m_Second >= 1)
 		{
 			m_Second = 0;
 			Second();
 		}
-	}
-
-	// Окно банкомата закрылось или игрок отошёл: закрывается всё.
-	protected void AtmOnlyTick()
-	{
-		VB_TabletPageBank bank = VB_TabletPageBank.Cast(m_Page);
-		if (!bank)
-			return;
-		if (bank.AtmIsOpen())
-			m_AtmShown = true;
-		else if (m_AtmShown)
-			RequestClose();
-		VB_Clan c = VB_TabletClient.Get().Clan;
-		Man player = GetGame().GetPlayer();
-		if (!c || !player)
-			return;
-		vector at = player.GetPosition();
-		float dx = at[0] - c.AtmX;
-		float dz = at[2] - c.AtmZ;
-		if (dx * dx + dz * dz > ATM_REACH * ATM_REACH)
-			RequestClose();
 	}
 
 	protected void Second()

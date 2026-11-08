@@ -28,6 +28,9 @@ class CfgMods
 		type = "mod";
 		dependencies[] = {"Game", "World", "Mission"};
 		inputs = "VB_Tablet/inputs.xml";
+		// Ники над головами теперь в планшете. INT_PartyMode при этом дефайне поднимает метку друга над ником,
+		// как делала для @World_HeadNicknames. Сам @World_HeadNicknames вместе с планшетом не ставить.
+		defines[] = {"RF_NICKNAMES_CL"};
 
 		class defs
 		{

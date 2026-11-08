@@ -4,12 +4,15 @@ modded class MissionGameplay
 	protected UAInput m_VBT_Open;
 	protected UAInput m_VBT_Map;
 	protected UAInput m_VBT_3D;
+	protected UAInput m_VBT_VppMap;	// карта VPP: null, если её нет
+	protected bool m_VBT_VppSync;
 	protected bool m_VBT_Resolved;
 
 	override void OnInit()
 	{
 		super.OnInit();
 		INT_UIF_MenuRegistry.Register(VB_TABLET_MENU_ID, VB_TabletMenu);
+		VB_TabletMenu.LoadAssets();
 	}
 
 	override void OnUpdate(float timeslice)
@@ -20,22 +23,37 @@ modded class MissionGameplay
 			m_VBT_Open = GetUApi().GetInputByName("UAVBTabletOpen");
 			m_VBT_Map = GetUApi().GetInputByName("UAVBTabletMap");
 			m_VBT_3D = GetUApi().GetInputByName("UAVBTablet3D");
+			if (VB_TabletBridge.HasVpp())
+				m_VBT_VppMap = GetUApi().GetInputByName("UAOpenVPPMap");
 		}
 		bool openKey = m_VBT_Open && m_VBT_Open.LocalPress();
 		bool mapKey = m_VBT_Map && m_VBT_Map.LocalPress();
+		// Карта VPP на той же клавише: клавиша остаётся ей, карта планшета открывается из самого планшета.
+		if (mapKey && m_VBT_VppMap && m_VBT_VppMap.LocalPress())
+			mapKey = false;
 		// Стрелка вниз в ванили ещё и дальность голоса: нажатие планшета голос не меняет.
 		if (openKey)
 			GetUApi().GetInputByID(UAVoiceDistanceDown).Supress();
 
 		super.OnUpdate(timeslice);
 
+		// В кадре нажатия K метки VPP могли переключиться и сами: их состояние выставляется кадром позже.
+		if (m_VBT_VppSync)
+		{
+			m_VBT_VppSync = false;
+			VB_TabletBridge.SyncVpp3D();
+		}
 		if (openKey)
 			VB_TabletMenu.Toggle("");
 		else if (mapKey)
 			VB_TabletMenu.Toggle("map");
 		if (m_VBT_3D && m_VBT_3D.LocalPress())
 			VBT_Toggle3D();
+		// HELLO сразу после входа: шапка клана нужна окну банкомата и никам, сервер по нему шлёт предупреждение о налоге.
+		VB_TabletClient.Get().RequestHello();
 		VB_TabletMarks3D.Get().Update(timeslice);
+		VB_TabletBridge.Tick(timeslice);
+		VB_TabletNameplates.Get().Update(timeslice);
 	}
 
 	protected void VBT_Toggle3D()
@@ -45,6 +63,7 @@ modded class MissionGameplay
 			return;
 		VB_TabletClient client = VB_TabletClient.Get();
 		client.Hide3D = !client.Hide3D;
+		m_VBT_VppSync = VB_TabletBridge.HasVpp();
 		if (client.Hide3D)
 			INT_UIF_Toast.Info("#STR_VB_TAB_3D_OFF");
 		else
@@ -68,14 +87,14 @@ modded class MissionGameplay
 			VB_TabletMenu.Toggle("");
 		else if (key == KeyCode.KC_F8)
 			VB_TabletMenu.Toggle("map");
-		else if (key == KeyCode.KC_F9)
-			VB_TabletAtmPlacer.DiagPlace();
 	}
 #endif
 
 	override void OnMissionFinish()
 	{
 		VB_TabletMarks3D.Reset();
+		VB_TabletBridge.Reset();
+		VB_TabletNameplates.Reset();
 		VB_TabletClient.Reset();
 		super.OnMissionFinish();
 	}

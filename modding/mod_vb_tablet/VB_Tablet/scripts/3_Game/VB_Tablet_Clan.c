@@ -11,7 +11,7 @@ enum VB_ClanPerm
 	BANK = 32,
 	SETTINGS = 64,
 	NEWS = 128,
-	ATM = 256,
+	ATM = 256,	// было «ставить банкомат»: банкомат клана убран, бит не используется
 	ALL = 511
 }
 
@@ -34,7 +34,9 @@ enum VB_ClanEvent
 	ATM_SET = 13,
 	ATM_MOVE = 14,
 	LEADER = 15,
-	WEEK_PRIZE = 16
+	WEEK_PRIZE = 16,
+	FROM_ACCOUNT = 17,	// перевод с личного счёта банка на склад
+	TO_ACCOUNT = 18		// со склада на личный счёт
 }
 
 // Ответы сервера на действия. Текст по ключу STR_VB_TAB_R_<номер>.
@@ -62,7 +64,10 @@ enum VB_TabletResult
 	CREATED = 19,
 	SAVED = 20,
 	SENT = 21,
-	NO_ATM = 22,
+	NO_ATM = 22,		// рядом нет банкомата банка
+	ACC_NO_FUNDS = 23,	// на личном счёте банка не хватает денег
+	ACC_FULL = 24,		// личный счёт банка переполнится
+	NO_BANK = 25,		// банк сервера (INT_Banking_SE) не стоит или не готов
 	STORAGE = 40,	// файл не записан, операция отменена
 	MAP_LIMIT = 60,	// лимит объектов карты
 	MAP_D3 = 61		// лимит 3D меток
@@ -262,7 +267,7 @@ class VB_ClanChatRow
 class VB_ClanBankRow
 {
 	string Who;
-	int Kind;	// VB_ClanEvent: DEPOSIT, WITHDRAW, TAX, CONTRACT, SETTINGS
+	int Kind;	// VB_ClanEvent: DEPOSIT, WITHDRAW, FROM_ACCOUNT, TO_ACCOUNT, TAX, CONTRACT, WEEK_PRIZE, SETTINGS
 	int Sum;	// со знаком
 	string Time;
 
@@ -351,11 +356,6 @@ class VB_Clan
 	int NewsTotal;
 	bool Open = true;
 	string Discord;
-	bool HasAtm;
-	float AtmX;
-	float AtmZ;
-	float AtmY;		// только на сервере: высота и угол, клиенту нужна точка на карте
-	float AtmYaw;
 	int ContractsDay;
 	ref array<ref VB_ClanContract> Contracts = new array<ref VB_ClanContract>();
 	ref array<ref VB_ClanRank> Ranks = new array<ref VB_ClanRank>();
@@ -390,9 +390,6 @@ class VB_Clan
 		rpc.Write(TaxFree);
 		rpc.Write(Open);
 		rpc.Write(Discord);
-		rpc.Write(HasAtm);
-		rpc.Write(AtmX);
-		rpc.Write(AtmZ);
 		int n = Ranks.Count();
 		rpc.Write(n);
 		foreach (VB_ClanRank r : Ranks)
@@ -420,7 +417,7 @@ class VB_Clan
 			return false;
 		if (!ctx.Read(Color) || !ctx.Read(Level) || !ctx.Read(Influence) || !ctx.Read(WeekInfluence) || !ctx.Read(Bank) || !ctx.Read(TaxFree))
 			return false;
-		if (!ctx.Read(Open) || !ctx.Read(Discord) || !ctx.Read(HasAtm) || !ctx.Read(AtmX) || !ctx.Read(AtmZ))
+		if (!ctx.Read(Open) || !ctx.Read(Discord))
 			return false;
 		int n;
 		int i;

@@ -4,6 +4,8 @@
 const int VBA_APPLY_MAX = 300;
 const int VBA_TAX_LOW = 7;
 const float VBA_NEAR_M = 50;
+const int VBA_NEAR_MAX = 6;		// строк «кого позвать» в окне приглашения
+const int VBA_FRIENDS_MAX = 4;	// из них друзей INT_PartyMode
 const string VBA_DASH = "—";
 
 // Ответы диалогов выхода и роспуска: общие для сводки и карточки участника.

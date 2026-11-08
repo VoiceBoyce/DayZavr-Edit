@@ -50,6 +50,7 @@ class VB_TabletPageMembers extends VB_TabletPage
 	protected Widget m_NearF;
 	protected ref array<string> m_NearNames;
 	protected ref array<int> m_NearDist;
+	protected ref array<bool> m_NearFriend;	// строка это друг из INT_PartyMode
 	protected ref array<ref VBT_Button> m_NearBtns;
 	protected ref array<string> m_Sent;
 	protected ref VBT_Input m_DcField;
@@ -91,6 +92,7 @@ class VB_TabletPageMembers extends VB_TabletPage
 		m_ReqDiscords = new array<string>();
 		m_NearNames = new array<string>();
 		m_NearDist = new array<int>();
+		m_NearFriend = new array<bool>();
 		m_NearBtns = new array<ref VBT_Button>();
 		m_Sent = new array<string>();
 
@@ -656,11 +658,14 @@ class VB_TabletPageMembers extends VB_TabletPage
 		return false;
 	}
 
-	// Игроки рядом: те, кого видит клиент, кроме соклановцев, не больше пяти, ближние первыми.
+	// Кого позвать: сначала друзья из INT_PartyMode в сети, потом игроки рядом, ближние первыми. Соклановцев нет.
 	protected void FindNear(VB_Clan c)
 	{
 		m_NearNames.Clear();
 		m_NearDist.Clear();
+		m_NearFriend.Clear();
+		AddFriendRows(c);
+		int first = m_NearNames.Count();
 		PlayerBase self = PlayerBase.Cast(GetGame().GetPlayer());
 		if (!self)
 			return;
@@ -675,10 +680,10 @@ class VB_TabletPageMembers extends VB_TabletPage
 			if (dist > VBA_NEAR_M)
 				continue;
 			string name = p.GetIdentity().GetName();
-			if (IsMemberName(c, name))
+			if (IsMemberName(c, name) || m_NearNames.Find(name) >= 0)
 				continue;
 			int slot = m_NearDist.Count();
-			for (int i = 0; i < m_NearDist.Count(); i++)
+			for (int i = first; i < m_NearDist.Count(); i++)
 			{
 				if (dist < m_NearDist.Get(i))
 				{
@@ -688,12 +693,33 @@ class VB_TabletPageMembers extends VB_TabletPage
 			}
 			m_NearDist.InsertAt(dist, slot);
 			m_NearNames.InsertAt(name, slot);
+			m_NearFriend.InsertAt(false, slot);
 		}
-		while (m_NearNames.Count() > 5)
+		while (m_NearNames.Count() > VBA_NEAR_MAX)
 		{
-			m_NearNames.Remove(5);
-			m_NearDist.Remove(5);
+			int last = m_NearNames.Count() - 1;
+			m_NearNames.Remove(last);
+			m_NearDist.Remove(last);
+			m_NearFriend.Remove(last);
 		}
+	}
+
+	protected void AddFriendRows(VB_Clan c)
+	{
+#ifdef INT_PARTYMODE_CL
+		if (!INT_PTY_Client.s_Friends)
+			return;
+		foreach (INT_PTY_Friend fr : INT_PTY_Client.s_Friends)
+		{
+			if (m_NearNames.Count() >= VBA_FRIENDS_MAX)
+				break;
+			if (!fr || !fr.Online || fr.Nick == "" || IsMemberName(c, fr.Nick))
+				continue;
+			m_NearNames.Insert(fr.Nick);
+			m_NearDist.Insert(-1);
+			m_NearFriend.Insert(true);
+		}
+#endif
 	}
 
 	protected void OpenInvite()
@@ -749,9 +775,16 @@ class VB_TabletPageMembers extends VB_TabletPage
 			string nick = m_NearNames.Get(k);
 			string shown = VBT.Fit(nick, 220, 16);
 			INT_UIF_Draw.Text(m_NearF, 28, y, 220, 44, shown, 16, VB_C_TEXT);
-			int meters = m_NearDist.Get(k);
-			string dist = meters.ToString() + " " + VBT.T("#STR_VB_TAB_A_M");
-			INT_UIF_Draw.Text(m_NearF, 260, y, 90, 44, dist, 14, VB_C_DIM);
+			if (m_NearFriend.Get(k))
+			{
+				INT_UIF_Draw.Text(m_NearF, 260, y, 90, 44, "#STR_VB_TAB_A_INV_FRIEND", 14, VB_C_ACCENT);
+			}
+			else
+			{
+				int meters = m_NearDist.Get(k);
+				string dist = meters.ToString() + " " + VBT.T("#STR_VB_TAB_A_M");
+				INT_UIF_Draw.Text(m_NearF, 260, y, 90, 44, dist, 14, VB_C_DIM);
+			}
 			bool sent = m_Sent.Find(nick) >= 0;
 			string lbl = "#STR_VB_TAB_A_INV_CALL";
 			if (sent)

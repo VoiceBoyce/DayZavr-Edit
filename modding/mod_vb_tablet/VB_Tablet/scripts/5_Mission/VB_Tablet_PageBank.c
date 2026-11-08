@@ -1,11 +1,7 @@
-// Склад денег: только просмотр. Пополнение и снятие идут через банкомат клана, он открывает окно на этом экране.
+// Склад денег: только просмотр. Пополнение, снятие и переводы со счёта идут в любом банкомате INT_Banking
+// (аддон VB_Tablet_BANK, вкладка «Клан» в окне банкомата).
 class VB_TabletPageBank extends VB_TabletPage
 {
-	static bool s_OpenAtm;	// действие у банкомата: открыть окно, как только экран готов
-
-	protected ref VB_TabletAtmWindow m_Atm;
-	protected ref VBT_Button m_BtnPlace;
-	protected ref VBT_Button m_BtnMap;
 	protected TextWidget m_TaxT;
 	protected float m_T = 1;
 
@@ -22,7 +18,6 @@ class VB_TabletPageBank extends VB_TabletPage
 		// Часы сервера для отсчёта до списания.
 		if (!client.HasContracts)
 			VBA_Util.Ask(VB_TabletOp.CONTRACTS);
-		m_Atm = new VB_TabletAtmWindow(m_Menu);
 		int days = -1;
 		if (c.TaxFree <= 0)
 			days = c.Bank / VB_TabletClient.Get().ClanTax;
@@ -30,7 +25,7 @@ class VB_TabletPageBank extends VB_TabletPage
 		BuildBalance(c);
 		BuildTax(c, days, low);
 		BuildWeek(c);
-		BuildAtm(c, client);
+		BuildHint();
 		BuildHistory(client);
 		m_T = 1;
 		Tick(0);
@@ -120,62 +115,16 @@ class VB_TabletPageBank extends VB_TabletPage
 		}
 	}
 
-	protected string DistText(float x, float z)
-	{
-		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
-		if (!player)
-			return "";
-		vector own = player.GetPosition();
-		float dx = x - own[0];
-		float dz = z - own[2];
-		int d = Math.Round(Math.Sqrt(dx * dx + dz * dz));
-		if (d >= 1000)
-			return VBT.Km(d);
-		return d.ToString() + " " + VBT.T("#STR_VB_TAB_C_M");
-	}
-
-	// Банкомат один, ставится и переносится бесплатно.
-	protected void BuildAtm(VB_Clan c, VB_TabletClient client)
+	// Пополнение, снятие и переводы со счёта идут в банкоматах банка: здесь только подсказка.
+	protected void BuildHint()
 	{
 		Widget ab = INT_UIF_Draw.Frame(m_Root, 0, 252, 1172, 60);
-		int border = VB_C_GOLD;
-		int iconCol = VB_C_DIM;
-		int ink = VB_C_GOLD;
-		string line = "#STR_VB_TAB_C_ATM_NONE";
-		if (c.HasAtm)
-		{
-			border = VB_C_LINE;
-			iconCol = VB_C_GOLD;
-			ink = VB_C_TEXT;
-			int ax = c.AtmX;
-			int az = c.AtmZ;
-			line = "X " + ax.ToString() + "   Y " + az.ToString() + " · " + DistText(c.AtmX, c.AtmZ);
-			line = line + " " + VBT.T("#STR_VB_TAB_C_FROM_YOU");
-		}
-		INT_UIF_Surface.Box(ab, 0, 0, 1172, 60, 10, VB_C_PANEL, border);
+		INT_UIF_Surface.Box(ab, 0, 0, 1172, 60, 10, VB_C_PANEL, VB_C_LINE);
 		INT_UIF_Surface.Box(ab, 16, 12, 36, 36, 8, VB_C_PANEL2);
-		VBT.Ico(ab, 25, 21, 18, "vault", iconCol);
-		VBT.Cap(ab, 68, 12, 300, "#STR_VB_TAB_C_ATM_TITLE");
-		INT_UIF_Draw.Text(ab, 68, 28, 560, 24, line, 14, ink);
-		float x = 1172 - 16;
-		if (client.Can(VB_ClanPerm.ATM))
-		{
-			float w0 = 214;
-			string text = "#STR_VB_TAB_C_ATM_SET";
-			if (c.HasAtm)
-			{
-				w0 = 140;
-				text = "#STR_VB_TAB_C_ATM_MOVE";
-			}
-			x -= w0;
-			m_BtnPlace = new VBT_Button(ab, x, 12, w0, 36, text, !c.HasAtm, "vault", m_Menu.GetHitHandler(), 13);
-			x -= 10;
-		}
-		if (c.HasAtm)
-		{
-			x -= 120;
-			m_BtnMap = new VBT_Button(ab, x, 12, 120, 36, "#STR_VB_TAB_C_ON_MAP", false, "map", m_Menu.GetHitHandler(), 13);
-		}
+		VBT.Ico(ab, 25, 21, 18, "vault", VB_C_GOLD);
+		VBT.Cap(ab, 68, 12, 300, "#STR_VB_TAB_C_ATM_ANY");
+		INT_UIF_Draw.Text(ab, 68, 28, 560, 24, "#STR_VB_TAB_C_ATM_HINT", 14, VB_C_TEXT);
+		INT_UIF_Draw.Text(ab, 640, 18, 516, 24, "#STR_VB_TAB_C_ATM_HINT2", 13, VB_C_DIM2, INT_UIF_Align.RIGHT);
 	}
 
 	protected string KindText(int kind)
@@ -184,6 +133,10 @@ class VB_TabletPageBank extends VB_TabletPage
 			return "#STR_VB_TAB_C_OP_DEPOSIT";
 		if (kind == VB_ClanEvent.WITHDRAW)
 			return "#STR_VB_TAB_C_OP_WITHDRAW";
+		if (kind == VB_ClanEvent.FROM_ACCOUNT)
+			return "#STR_VB_TAB_C_OP_FROM_ACC";
+		if (kind == VB_ClanEvent.TO_ACCOUNT)
+			return "#STR_VB_TAB_C_OP_TO_ACC";
 		if (kind == VB_ClanEvent.TAX)
 			return "#STR_VB_TAB_C_OP_TAX";
 		if (kind == VB_ClanEvent.CONTRACT)
@@ -243,11 +196,6 @@ class VB_TabletPageBank extends VB_TabletPage
 
 	override void Tick(float dt)
 	{
-		if (s_OpenAtm && m_Atm)
-		{
-			s_OpenAtm = false;
-			m_Atm.Open();
-		}
 		m_T = m_T + dt;
 		if (m_T < 1)
 			return;
@@ -265,91 +213,5 @@ class VB_TabletPageBank extends VB_TabletPage
 		VBT.Pad2(b, mm);
 		VBT.Pad2(c, ss);
 		m_TaxT.SetText(a + ":" + b + ":" + c);
-	}
-
-	// С открытым окном обновляются только суммы: иначе пропадёт введённое число.
-	override bool OnData()
-	{
-		if (m_Atm && m_Atm.IsOpen())
-		{
-			m_Atm.Refresh();
-			return true;
-		}
-		return false;
-	}
-
-	override void OnInput(VBT_Input field)
-	{
-		if (m_Atm)
-			m_Atm.OnInput(field);
-	}
-
-	override void OnSubmit(VBT_Input field)
-	{
-		if (m_Atm)
-			m_Atm.OnSubmit(field);
-	}
-
-	override void OnResult(int code)
-	{
-		if (m_Atm)
-			m_Atm.OnResult(code);
-	}
-
-	bool AtmIsOpen()
-	{
-		return m_Atm && m_Atm.IsOpen();
-	}
-
-	override void Leave()
-	{
-		if (m_Atm)
-			m_Atm.Close();
-	}
-
-	override bool OnHit(Widget w)
-	{
-		if (m_Atm && m_Atm.IsOpen())
-		{
-			bool used = m_Atm.OnHit(w);
-			// Пока окно было открыто, экран под ним не обновлялся.
-			if (!m_Atm.IsOpen())
-				m_Menu.RequestRepaint();
-			if (used)
-				return true;
-		}
-		if (m_BtnPlace && w == m_BtnPlace.Hit)
-		{
-			// Планшет закрывается, дальше голограмма.
-			VB_TabletAtmPlacer.Begin();
-			m_Menu.RequestClose();
-			return true;
-		}
-		if (m_BtnMap && w == m_BtnMap.Hit)
-		{
-			VB_Clan clan = VB_TabletClient.Get().Clan;
-			if (clan)
-				VB_TabletPageMap.FocusOn(clan.AtmX, clan.AtmZ);
-			m_Menu.GoLater("map");
-			return true;
-		}
-		return false;
-	}
-
-	override bool OnHover(Widget w, bool enter)
-	{
-		if (m_Atm && m_Atm.OnHover(w, enter))
-			return true;
-		if (m_BtnPlace && w == m_BtnPlace.Hit)
-		{
-			m_BtnPlace.Hover(enter);
-			return true;
-		}
-		if (m_BtnMap && w == m_BtnMap.Hit)
-		{
-			m_BtnMap.Hover(enter);
-			return true;
-		}
-		return false;
 	}
 }

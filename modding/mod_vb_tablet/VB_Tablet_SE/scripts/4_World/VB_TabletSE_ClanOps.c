@@ -6,8 +6,8 @@ class VB_TabletClanOps
 
 	static void Handle(PlayerBase player, PlayerIdentity id, int op, ParamsReadContext ctx)
 	{
-		// Банкомат, контракты, администратор: диапазон 40..59.
-		if (op >= VB_TabletOp.ATM_PLACE && op < 60)
+		// Склад у банкомата, контракты, администратор: диапазон 40..59.
+		if (op >= 40 && op < 60)
 		{
 			VB_TabletBank.Handle(player, id, op, ctx);
 			return;
@@ -399,6 +399,7 @@ class VB_TabletClanOps
 			if (p)
 				SendChat(p, p.GetIdentity());
 		}
+		VB_TabletFeed.Chat(c, row.Who, row.Msg);
 	}
 
 	protected static void SendJournal(PlayerBase player, PlayerIdentity id)
