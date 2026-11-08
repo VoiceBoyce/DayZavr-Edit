@@ -19,11 +19,15 @@ modded class ActionSkinning
 	}
 }
 
+// Каждая порция дров. Снятие коры (ActionMineTreeBark наследует это действие) не считается: у коры
+// нет предела, и один ствол давал бы счётчик без конца.
 modded class ActionMineTree
 {
 	override void OnFinishProgressServer(ActionData action_data)
 	{
 		super.OnFinishProgressServer(action_data);
+		if (ActionMineTreeBark.Cast(this))
+			return;
 		VB_TabletContracts.OnAction(action_data.m_Player, "wood");
 	}
 }
@@ -73,22 +77,29 @@ modded class ActionBuildPart
 	}
 }
 
+// Костёр засчитывается, только если он загорелся этим действием: не неудачная попытка
+// и не факел, зажжённый от уже горящего костра.
 modded class ActionLightItemOnFire
 {
 	override void OnFinishProgressServer(ActionData action_data)
 	{
+		FireplaceBase fire = FireplaceBase.Cast(action_data.m_Target.GetObject());
+		bool was = fire && fire.IsBurning();
 		super.OnFinishProgressServer(action_data);
-		if (FireplaceBase.Cast(action_data.m_Target.GetObject()))
+		if (fire && !was && fire.IsBurning())
 			VB_TabletContracts.OnAction(action_data.m_Player, "fire");
 	}
 }
 
+// Только рецепт, который действительно выполнился (ванильный PerformRecipe молча выходит, если проверка не прошла).
 modded class RecipeBase
 {
 	override void PerformRecipe(ItemBase item1, ItemBase item2, PlayerBase player)
 	{
+		bool ok = CheckRecipe(item1, item2, player);
 		super.PerformRecipe(item1, item2, player);
-		VB_TabletContracts.OnAction(player, "craft");
+		if (ok)
+			VB_TabletContracts.OnAction(player, "craft");
 	}
 }
 

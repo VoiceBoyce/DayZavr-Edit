@@ -1,21 +1,25 @@
 // Общие детали экранов кланов: эмблема, деньги, поля ввода, переключатель, список, окна поверх экрана.
 class VBK
 {
+	// Списки общие с сервером: VB_ClanLook. Копия, чтобы экран мог её менять, не трогая общий список.
 	static array<string> Shapes()
 	{
-		array<string> a = {"shield", "crest", "chevron", "circle", "hex", "octagon", "pentagon", "diamond", "square", "banner", "badge", "star"};
+		array<string> a = new array<string>();
+		a.Copy(VB_ClanLook.ShapeIds());
 		return a;
 	}
 
 	static array<string> Symbols()
 	{
-		array<string> a = {"crown", "bolt", "flame", "mountain", "star", "cross", "sword", "tree", "target", "gem", "moon", "skull", "wolf", "paw", "fish", "feather", "leaf", "sun", "snow", "wave", "drop", "axe", "hammer", "spear", "arrow", "anchor", "key", "cog", "castle", "tower", "compass", "hourglass", "eye", "bell", "heart", "horseshoe"};
+		array<string> a = new array<string>();
+		a.Copy(VB_ClanLook.SymbolIds());
 		return a;
 	}
 
 	static array<int> Colors()
 	{
-		array<int> a = {0xFFFF7A1A, 0xFFE9C55B, 0xFFB4D455, 0xFF6FBF8E, 0xFF2FC4B2, 0xFF5CB8F0, 0xFF8FA6FF, 0xFFB08CFF, 0xFFD66BB0, 0xFFEF5B4C, 0xFFC98A5A, 0xFFCFCAC2};
+		array<int> a = new array<int>();
+		a.Copy(VB_ClanLook.ColorIds());
 		return a;
 	}
 
@@ -421,6 +425,8 @@ class VBT_Area extends ScriptedWidgetEventHandler
 		m_Hint = INT_UIF_Draw.Text(p, x + 14, y + 10, w - 28, 22, placeholder, 15, VB_C_DIM2);
 		Edit = MultilineEditBoxWidget.Cast(INT_UIF_Widgets.CreatePath(VB_TABLET_LAYOUT_AREA, p));
 		INT_UIF_Draw.Place(Edit, x + 14, y + 10, w - 28, h - 20);
+		// Размер текста в макете задан в экранных пикселях: на 2K и 4K он вышел бы мельче остального.
+		Edit.SetTextExactSize(INT_UIF_Scale.TextPx(15));
 		Edit.SetHandler(this);
 		Edit.SetText(value);
 		m_Last = value;

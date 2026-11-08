@@ -315,7 +315,7 @@ class VB_TabletConfig
 		if (Broken)
 			return false;
 		string error;
-		if (!JsonFileLoader<VB_TabletConfig>.SaveFile(FILE_CONFIG, this, error))
+		if (!VB_SafeJson<VB_TabletConfig>.Save(FILE_CONFIG, this, error))
 		{
 			Print(VB_TABLET_TAG + " не записан конфиг: " + error);
 			return false;
@@ -348,9 +348,18 @@ class VB_TabletConfig
 		if (!JsonFileLoader<VB_TabletConfig>.LoadFile(FILE_CONFIG, data, error))
 		{
 			// Сломанный файл не перезаписываем: админ мог ошибиться в одной запятой.
-			Print(VB_TABLET_TAG + " ошибка в конфиге, работаем со значениями по умолчанию: " + error);
-			s_Instance.Broken = true;
-			return;
+			// Если есть копия (её оставляет запись с экрана администратора), работаем по ней до исправления.
+			Print(VB_TABLET_TAG + " ОШИБКА в конфиге: " + error);
+			data = new VB_TabletConfig();
+			string bakError;
+			if (!JsonFileLoader<VB_TabletConfig>.LoadFile(FILE_CONFIG + ".bak", data, bakError))
+			{
+				Print(VB_TABLET_TAG + " копии конфига нет или она тоже с ошибкой, работаем со значениями по умолчанию");
+				s_Instance.Broken = true;
+				return;
+			}
+			Print(VB_TABLET_TAG + " конфиг взят из копии config.json.bak, исправьте config.json");
+			data.Broken = true;
 		}
 		if (!data.Admins)
 			data.Admins = new array<string>();
@@ -370,7 +379,7 @@ class VB_TabletConfig
 		s_Instance = data;
 		VB_TabletRates.SetLevels(data.Levels);
 		// В старом файле нет новых разделов: дописываем, чтобы их было где править.
-		if (filled)
+		if (filled && !data.Broken)
 			data.Store();
 		Print(VB_TABLET_TAG + " конфиг загружен, администраторов " + data.Admins.Count());
 	}

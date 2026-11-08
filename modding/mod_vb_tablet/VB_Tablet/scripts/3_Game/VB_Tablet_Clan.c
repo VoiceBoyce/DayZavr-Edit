@@ -371,6 +371,9 @@ class VB_Clan
 	ref array<ref VB_MapCat> MapCats = new array<ref VB_MapCat>();
 	int MapNext = 1;
 	int MapNextCat = 2;
+	int WeekDone;		// только на сервере: номер недели, за которую клан уже получил итоги (приз выдаётся один раз)
+	[NonSerialized()]
+	bool Dirty;			// только на сервере: изменения ждут отложенной записи файла
 
 	void WriteHead(ScriptRPC rpc)
 	{

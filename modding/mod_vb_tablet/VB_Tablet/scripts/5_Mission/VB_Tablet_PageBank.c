@@ -20,7 +20,7 @@ class VB_TabletPageBank extends VB_TabletPage
 			VBA_Util.Ask(VB_TabletOp.CONTRACTS);
 		int days = -1;
 		if (c.TaxFree <= 0)
-			days = c.Bank / VB_TabletClient.Get().ClanTax;
+			days = VB_TabletClient.Get().TaxDays(c.Bank);
 		bool low = days >= 0 && days <= VBA_TAX_LOW;
 		BuildBalance(c);
 		BuildTax(c, days, low);

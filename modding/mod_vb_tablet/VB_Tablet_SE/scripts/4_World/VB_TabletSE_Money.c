@@ -24,6 +24,25 @@ class VB_TabletMoney
 	}
 
 	protected static ref array<ref VB_TabletDenom> s_BankDenoms;
+	protected static ref array<ref VB_TabletDenom> s_CfgDenoms;
+	static const int SUM_MAX = 2000000000;	// предел сумм: сложение и умножение не переполняют int
+
+	// Сумма и произведение с потолком SUM_MAX.
+	static int AddSat(int a, int b)
+	{
+		if (a >= SUM_MAX - b)
+			return SUM_MAX;
+		return a + b;
+	}
+
+	static int MulSat(int a, int b)
+	{
+		if (a <= 0 || b <= 0)
+			return 0;
+		if (a > SUM_MAX / b)
+			return SUM_MAX;
+		return a * b;
+	}
 
 	// Купюры. При INT_Banking те же, что принимает банк: одна валюта на сервере, сдача и выдача теми же купюрами.
 	// Валюты банка «N штук за номинал» (requiredQuantity > 1) планшет не берёт, их принимает только банк.
@@ -46,7 +65,20 @@ class VB_TabletMoney
 				return s_BankDenoms;
 		}
 #endif
-		return VB_TabletConfig.Get().Money;
+		// Список планшета без классов, которых нет на сервере: выдача такой купюры не удалась бы целиком.
+		if (!s_CfgDenoms)
+		{
+			s_CfgDenoms = new array<ref VB_TabletDenom>();
+			array<ref VB_TabletDenom> all = VB_TabletConfig.Get().Money;
+			foreach (VB_TabletDenom d : all)
+			{
+				if (d.Value > 0 && GetGame().ConfigIsExisting("CfgVehicles " + d.Item))
+					s_CfgDenoms.Insert(d);
+				else
+					Print(VB_TABLET_TAG + " купюра " + d.Item + " не найдена на сервере, пропущена");
+			}
+		}
+		return s_CfgDenoms;
 	}
 
 	protected static int ValueOf(string type, array<ref VB_TabletDenom> denoms)
@@ -107,7 +139,7 @@ class VB_TabletMoney
 		Collect(player, items);
 		int sum = 0;
 		foreach (VB_TabletCash c : items)
-			sum += c.Value * c.Pieces;
+			sum = AddSat(sum, MulSat(c.Value, c.Pieces));
 		return sum;
 	}
 
@@ -173,7 +205,7 @@ class VB_TabletMoney
 		Collect(player, items);
 		int total = 0;
 		foreach (VB_TabletCash c : items)
-			total += c.Value * c.Pieces;
+			total = AddSat(total, MulSat(c.Value, c.Pieces));
 		if (total < amount)
 			return VB_TabletResult.NO_MONEY;
 
@@ -203,6 +235,9 @@ class VB_TabletMoney
 		if (need > 0)
 		{
 			// Мелких хватает только все вместе: забираем всё и сдаём разницу.
+			// Сумма упёрлась в потолок: сдачу «всё минус цена» не посчитать честно, операция отклоняется.
+			if (total >= SUM_MAX)
+				return VB_TabletResult.BAD_INPUT;
 			foreach (VB_TabletCash f : items)
 				f.Take = f.Pieces;
 			change = total - amount;

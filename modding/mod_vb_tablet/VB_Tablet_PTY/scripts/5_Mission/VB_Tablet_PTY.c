@@ -21,6 +21,7 @@ class VB_TabletPartyLink
 
 	protected static ref VB_PtyLinkFile s_Data;
 	protected static bool s_Busy;	// идёт своё удаление: событие пати не считается отказом игрока
+	protected static bool s_Dirty;	// файл пар изменился: пишется один раз в конце события, а не на каждую пару
 
 	static void Init()
 	{
@@ -54,17 +55,29 @@ class VB_TabletPartyLink
 			s_Data.Declined = new array<string>();
 		if (!s_Data.PendingRemove)
 			s_Data.PendingRemove = new array<string>();
-		Save();
+		s_Dirty = true;
+		Commit();
 		return s_Data;
 	}
 
 	static void Save()
 	{
-		MakeDirectory(VB_TabletConfig.DIR_ROOT);
-		MakeDirectory(VB_TabletConfig.DIR_MOD);
+		s_Dirty = true;
+	}
+
+	// Запись, если были изменения. Вызывается в конце каждого события.
+	static void Commit()
+	{
+		if (!s_Dirty || !s_Data)
+			return;
+		VB_TabletFiles.Dirs();
 		string error;
-		if (!JsonFileLoader<VB_PtyLinkFile>.SaveFile(FILE, s_Data, error))
+		if (!VB_SafeJson<VB_PtyLinkFile>.Save(FILE, s_Data, error))
+		{
 			Print(VB_TABLET_TAG + " не записан party_link.json: " + error);
+			return;
+		}
+		s_Dirty = false;
 	}
 
 	// Пара в одном порядке: меньший Steam64 первым. Строки сравниваются числом по двум половинам.
@@ -127,6 +140,7 @@ class VB_TabletPartyLink
 			if (m.Uid != uid)
 				Befriend(uid, m.Uid);
 		}
+		Commit();
 	}
 
 	static void OnLeave(VB_Clan c, string uid)
@@ -138,6 +152,7 @@ class VB_TabletPartyLink
 			if (m.Uid != uid)
 				Unfriend(uid, m.Uid);
 		}
+		Commit();
 	}
 
 	// Вход на сервер: отложенные удаления и дружба с соклановцами в сети.
@@ -164,6 +179,7 @@ class VB_TabletPartyLink
 		VB_Clan c = VB_TabletClans.OfPlayer(uid);
 		if (c)
 			OnJoin(c, uid);
+		Commit();
 	}
 
 	// Игрок сам удалил или добавил друга: планшет запоминает его выбор.
@@ -179,6 +195,7 @@ class VB_TabletPartyLink
 			{
 				Drop(d.Declined, key);
 				Save();
+				Commit();
 			}
 			return;
 		}
@@ -188,6 +205,7 @@ class VB_TabletPartyLink
 		if (d.Declined.Find(key) < 0)
 			d.Declined.Insert(key);
 		Save();
+		Commit();
 	}
 
 	// --- дружба ----------------------------------------------------------------------------------------------
@@ -255,7 +273,8 @@ modded class INT_PTY_SE_Core
 		VB_TabletPartyLink.SetBusy(true);
 		OnFriendRemove(o, other);
 		VB_TabletPartyLink.SetBusy(false);
-		return true;
+		// Пати откатывает удаление, если свой файл не записался: тогда повторить при следующем входе.
+		return !o.INT_File.Has(other);
 	}
 }
 

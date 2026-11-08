@@ -6,15 +6,16 @@
 class VB_TabletGC
 {
 	static const int CH_CLAN = 100;
-	static const float GAP = 2;		// как MSG_GAP окна клан-чата и CHAT_GAP_SEC сервера
 	static const int MAX = 200;		// как MSG_MAX окна клан-чата
+	static const float WATCH_SEC = 6;	// сколько ждать ответа сервера на отправку
 	static const int R_SENT = 0;
 	static const int R_WAIT = 1;
 	static const int R_BANNED = 2;
 	static const int R_NOCLAN = 3;
 
 	static bool s_Clan;
-	protected static float s_LastSend = -100;
+	protected static int s_WatchVer = -1;
+	protected static float s_WatchUntil;
 
 	static bool CanUse()
 	{
@@ -64,21 +65,49 @@ class VB_TabletGC
 			return R_BANNED;
 		}
 		float now = GetGame().GetTickTime();
-		if (now - s_LastSend < GAP)
+		VB_TabletClient client = VB_TabletClient.Get();
+		if (now - client.ChatSentAt < VB_TabletClient.CHAT_GAP)
 		{
 			INT_GC_Client.Notice(VBT.T("#STR_VB_TAB_B_CHAT_WAIT"), 1);
 			return R_WAIT;
 		}
-		s_LastSend = now;
+		client.ChatSentAt = now;
 		string body = text;
 		if (body.LengthUtf8() > MAX)
 			body = body.SubstringUtf8(0, MAX);
-		VB_TabletClient client = VB_TabletClient.Get();
 		ScriptRPC rpc = client.Begin(VB_TabletOp.CHAT_SEND);
 		rpc.Write(body);
 		client.Post(rpc);
-		INT_GC_Client.SentHistory().Insert(body);
+		// История для стрелки вверх: без повтора подряд и не длиннее, чем держит сам чат.
+		array<string> sent = INT_GC_Client.SentHistory();
+		if (sent.Count() == 0 || sent.Get(sent.Count() - 1) != body)
+			sent.Insert(body);
+		while (sent.Count() > INT_GC_Client.SENT_LIMIT)
+			sent.RemoveOrdered(0);
+		s_WatchVer = client.ResultVersion;
+		s_WatchUntil = now + WATCH_SEC;
 		return R_SENT;
+	}
+
+	// Окно чата уже закрыто, когда сервер отвечает отказом (слишком часто, запрещённое слово):
+	// без этого сообщение пропало бы молча. При открытом планшете отказ показывает он сам.
+	static void Tick()
+	{
+		if (s_WatchVer < 0)
+			return;
+		VB_TabletClient client = VB_TabletClient.Get();
+		if (client.ResultVersion != s_WatchVer)
+		{
+			s_WatchVer = -1;
+			int code = client.LastResult;
+			if (VBK.ResultIsGood(code) || VB_TabletMenu.Cast(GetGame().GetUIManager().GetMenu()))
+				return;
+			string why = VBT.T(VBK.ResultText(code));
+			INT_GC_Client.Notice(VBT.T("#STR_VB_TAB_GC_FAILED") + " " + why, 2);
+			return;
+		}
+		if (GetGame().GetTickTime() > s_WatchUntil)
+			s_WatchVer = -1;
 	}
 }
 
@@ -157,8 +186,12 @@ modded class INT_GC_ChatMenu
 	override void OnBuild(Widget body)
 	{
 		super.OnBuild(body);
-		if (!VB_TabletGC.IsActive())
+		// Узкое окно строит заголовок без кнопки клана: тогда и канал клана не включается.
+		if (!VB_TabletGC.IsActive() || !m_Win || !m_Win.m_VbgBox)
+		{
+			VB_TabletGC.s_Clan = false;
 			return;
+		}
 		m_Channel = VB_TabletGC.CH_CLAN;
 		if (m_Win)
 			m_Win.PaintChannel(m_Channel);
@@ -261,5 +294,14 @@ modded class INT_GC_ChatMenu
 			return;
 		}
 		FocusEdit();
+	}
+}
+
+modded class MissionGameplay
+{
+	override void OnUpdate(float timeslice)
+	{
+		super.OnUpdate(timeslice);
+		VB_TabletGC.Tick();
 	}
 }

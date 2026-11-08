@@ -45,7 +45,7 @@ class VB_TabletServer
 			case VB_TabletOp.HELLO:
 				SendHello(player, sender);
 				SendProfile(player, sender);
-				MemberOnline(uid, true);
+				MemberOnline(uid, true, sender.GetName());
 				SendClan(player, sender);
 				VB_TabletBank.OnHello(player, sender);
 				break;
@@ -74,6 +74,15 @@ class VB_TabletServer
 					VB_TabletClanOps.Handle(player, sender, op, ctx);
 				break;
 		}
+	}
+
+	// Игрок ушёл: счётчики частоты по нему больше не нужны.
+	static void Forget(string uid)
+	{
+		if (s_LastAt)
+			s_LastAt.Remove(uid);
+		if (s_Count)
+			s_Count.Remove(uid);
 	}
 
 	static void SendResult(PlayerBase player, PlayerIdentity id, int code)
@@ -118,17 +127,26 @@ class VB_TabletServer
 		return null;
 	}
 
-	static void MemberOnline(string uid, bool online)
+	// Вход и выход участника. name при входе: игрок мог сменить ник, список клана показывает текущий.
+	static void MemberOnline(string uid, bool online, string name = "")
 	{
 		VB_Clan c = VB_TabletClans.OfPlayer(uid);
 		if (!c)
 			return;
 		VB_ClanMember m = c.Member(uid);
-		if (!m || m.Online == online)
+		if (!m)
+			return;
+		bool renamed = online && name != "" && m.PlayerName != name;
+		if (m.Online == online && !renamed)
 			return;
 		m.Online = online;
 		if (!online)
 			m.LastSeen = VB_TabletClans.Stamp();
+		if (renamed)
+		{
+			m.PlayerName = name;
+			VB_TabletClans.SaveSoon(c);
+		}
 		PushClan(c);
 	}
 
@@ -150,6 +168,13 @@ class VB_TabletServer
 			inv.Write(rpc);
 		VB_TabletRecord rec = VB_TabletPlayers.Get(uid, id.GetName());
 		string applied = rec.AppliedClan;
+		// Клана, куда подана заявка, уже нет (роспуск): пометка снимается, клиент не покажет «заявка в —».
+		if (applied != "" && !VB_TabletClans.Find(applied))
+		{
+			rec.AppliedClan = "";
+			rec.Dirty = true;
+			applied = "";
+		}
 		rpc.Write(applied);
 		rpc.Send(player, VB_TABLET_RPC_S2C, true, id);
 	}
@@ -179,6 +204,11 @@ class VB_TabletServer
 		string uid;
 		string name;
 		if (!ctx.Read(uid) || !ctx.Read(name))
+			return;
+		// uid попадает в путь файла: только Steam64.
+		if (uid != "" && !VB_TabletCheck.IsSteam64(uid))
+			return;
+		if (name.LengthUtf8() > 64)
 			return;
 		if (uid == "")
 		{
@@ -280,6 +310,11 @@ class VB_TabletServer
 		rpc.Write(maxClans);
 		rpc.Write(bankMax);
 		rpc.Write(clanTax);
+		// Награды для экранов рейтинга и контрактов: не вшиты в клиент, берутся из конфига.
+		array<int> prizes = cfg.WeekPrizes;
+		array<int> rewardMy = cfg.RewardMy;
+		rpc.Write(prizes);
+		rpc.Write(rewardMy);
 		rpc.Send(player, VB_TABLET_RPC_S2C, true, sender);
 	}
 

@@ -111,6 +111,12 @@ class VB_TabletClanOps
 		VB_TabletServer.PushClan(c);
 	}
 
+	static void Forget(string uid)
+	{
+		if (s_ChatAt)
+			s_ChatAt.Remove(uid);
+	}
+
 	protected static void Apply(PlayerBase player, PlayerIdentity id, string clanId, string text, string discord)
 	{
 		string uid = id.GetPlainId();
@@ -136,9 +142,14 @@ class VB_TabletClanOps
 			return;
 		}
 		int len = text.LengthUtf8();
-		if (len < 10 || len > 300)
+		if (len < 10 || len > 300 || (discord != "" && VB_TabletCheck.DiscordError(discord) != 0))
 		{
 			VB_TabletServer.SendResult(player, id, VB_TabletResult.BAD_INPUT);
+			return;
+		}
+		if (VB_TabletClans.HasBanned(text))
+		{
+			VB_TabletServer.SendResult(player, id, VB_TabletResult.BANNED_WORD);
 			return;
 		}
 		VB_TabletPlayers.ClearApply(uid);
@@ -173,28 +184,32 @@ class VB_TabletClanOps
 			if (r.Uid == target)
 				q = r;
 		}
+		// Заявку уже рассмотрел другой офицер или игрок её отменил: экран просто обновляется.
 		if (!q)
+		{
+			VB_TabletServer.SendResult(player, id, VB_TabletResult.NOT_FOUND);
+			VB_TabletServer.SendClan(player, id);
 			return;
+		}
 		if (accept && c.Members.Count() >= VB_TabletConfig.Get().ClanMaxMembers)
 		{
 			VB_TabletServer.SendResult(player, id, VB_TabletResult.CLAN_FULL);
 			return;
 		}
 		c.Requests.RemoveItem(q);
-		VB_TabletRecord rec = VB_TabletPlayers.Get(target, q.PlayerName);
-		rec.AppliedClan = "";
-		rec.Dirty = true;
+		// Игрок может быть не в сети: запись правится в файле, в кэш тех, кто в сети, не попадает.
+		VB_TabletPlayers.ClearApplyOf(target, c.Id);
 		if (accept && !VB_TabletClans.OfPlayer(target))
 		{
 			VB_TabletClans.AddMember(c, target, q.PlayerName, "member");
 			VB_ClanMember m = c.Member(target);
-			m.Online = VB_TabletServer.FindPlayer(target) != null;
-			if (q.Discord != "")
+			if (q.Discord != "" && VB_TabletCheck.DiscordError(q.Discord) == 0)
 				m.Discord = q.Discord;
 			VB_TabletClans.Log(c, VB_ClanEvent.JOINED, q.PlayerName);
 		}
 		Done(c);
 		VB_TabletServer.SendNoClan(target);
+		VB_TabletContracts.SendTo(target);
 	}
 
 	protected static void Invite(PlayerBase player, PlayerIdentity id, string nick)
@@ -228,30 +243,45 @@ class VB_TabletClanOps
 		VB_TabletServer.SendResult(player, id, VB_TabletResult.SENT);
 	}
 
+	// Вступить можно только по живому приглашению: id клана клиент знает из списка кланов,
+	// без этой проверки любой попал бы в закрытый клан.
 	protected static void AnswerInvite(PlayerBase player, PlayerIdentity id, string clanId, bool accept)
 	{
 		string uid = id.GetPlainId();
-		VB_TabletClans.DropInvite(uid, clanId);
 		VB_Clan c = VB_TabletClans.Find(clanId);
-		if (!accept || !c)
+		if (!c || !VB_TabletClans.HasInvite(uid, clanId))
 		{
+			VB_TabletClans.DropInvite(uid, clanId);
+			if (accept)
+				VB_TabletServer.SendResult(player, id, VB_TabletResult.NOT_FOUND);
+			VB_TabletServer.SendClan(player, id);
+			return;
+		}
+		if (!accept)
+		{
+			VB_TabletClans.DropInvite(uid, clanId);
 			VB_TabletServer.SendClan(player, id);
 			return;
 		}
 		if (VB_TabletClans.OfPlayer(uid))
 		{
+			VB_TabletClans.DropInvite(uid, clanId);
 			VB_TabletServer.SendResult(player, id, VB_TabletResult.HAS_CLAN);
+			VB_TabletServer.SendClan(player, id);
 			return;
 		}
+		// Клан заполнен: приглашение остаётся, можно принять, когда освободится место.
 		if (c.Members.Count() >= VB_TabletConfig.Get().ClanMaxMembers)
 		{
 			VB_TabletServer.SendResult(player, id, VB_TabletResult.CLAN_FULL);
+			VB_TabletServer.SendClan(player, id);
 			return;
 		}
 		VB_TabletPlayers.ClearApply(uid);
 		VB_TabletClans.AddMember(c, uid, id.GetName(), "member");
 		VB_TabletClans.Log(c, VB_ClanEvent.JOINED, id.GetName());
 		Done(c);
+		VB_TabletContracts.Send(player, id);
 	}
 
 	protected static void Kick(PlayerBase player, PlayerIdentity id, string target)
@@ -268,6 +298,7 @@ class VB_TabletClanOps
 		VB_TabletClans.Log(c, VB_ClanEvent.KICKED, name);
 		Done(c);
 		VB_TabletServer.SendNoClan(target);
+		VB_TabletContracts.SendTo(target);
 	}
 
 	protected static void SetRank(PlayerBase player, PlayerIdentity id, string target, string rank)
@@ -308,6 +339,7 @@ class VB_TabletClanOps
 		VB_TabletClans.Log(c, VB_ClanEvent.LEFT, id.GetName());
 		Done(c);
 		VB_TabletServer.SendClan(player, id);
+		VB_TabletContracts.Send(player, id);
 	}
 
 	protected static void DissolveByLeader(PlayerBase player, PlayerIdentity id, string confirm)
@@ -336,6 +368,7 @@ class VB_TabletClanOps
 		c.Member(uid).RankId = c.Ranks.Get(1).Id;
 		VB_TabletClans.Log(c, VB_ClanEvent.LEADER, m.PlayerName);
 		Done(c);
+		VB_TabletServer.SendResult(player, id, VB_TabletResult.SAVED);
 	}
 
 	protected static void SetDiscord(PlayerBase player, PlayerIdentity id, string name)
@@ -374,7 +407,10 @@ class VB_TabletClanOps
 			return;
 		}
 		if (text == "" || text.LengthUtf8() > 200)
+		{
+			VB_TabletServer.SendResult(player, id, VB_TabletResult.BAD_INPUT);
 			return;
+		}
 		if (VB_TabletClans.HasBanned(text))
 		{
 			VB_TabletServer.SendResult(player, id, VB_TabletResult.BANNED_WORD);
@@ -392,7 +428,8 @@ class VB_TabletClanOps
 		while (c.Chat.Count() > 100)
 			c.Chat.RemoveOrdered(0);
 		Print(VB_TABLET_TAG + " чат " + c.Tag + " " + id.GetName() + ": " + text);
-		VB_TabletClans.Save(c);
+		// Чат не деньги: файл клана пишется пачкой (Flush), а не на каждое сообщение.
+		VB_TabletClans.SaveSoon(c);
 		foreach (VB_ClanMember m : c.Members)
 		{
 			PlayerBase p = VB_TabletServer.FindPlayer(m.Uid);
@@ -424,8 +461,10 @@ class VB_TabletClanOps
 			return;
 		int op = VB_TabletOp.CLAN_NEWS;
 		int n = c.News.Count();
+		int total = c.NewsTotal;
 		ScriptRPC rpc = new ScriptRPC();
 		rpc.Write(op);
+		rpc.Write(total);
 		rpc.Write(n);
 		foreach (VB_ClanNews r : c.News)
 			r.Write(rpc);
@@ -439,8 +478,10 @@ class VB_TabletClanOps
 			return;
 		int op = VB_TabletOp.CLAN_CHAT;
 		int n = c.Chat.Count();
+		int total = c.ChatTotal;
 		ScriptRPC rpc = new ScriptRPC();
 		rpc.Write(op);
+		rpc.Write(total);
 		rpc.Write(n);
 		foreach (VB_ClanChatRow r : c.Chat)
 			r.Write(rpc);
@@ -536,7 +577,10 @@ class VB_TabletClanOps
 		string uid = id.GetPlainId();
 		VB_Clan c = VB_TabletClans.OfPlayer(uid);
 		if (!c || !c.MemberCan(uid, VB_ClanPerm.NEWS))
+		{
+			VB_TabletServer.SendResult(player, id, VB_TabletResult.DENIED);
 			return;
+		}
 		for (int i = c.News.Count() - 1; i >= 0; i--)
 		{
 			if (c.News.Get(i).NewsId == newsId)
@@ -550,7 +594,10 @@ class VB_TabletClanOps
 		string uid = id.GetPlainId();
 		VB_Clan c = VB_TabletClans.OfPlayer(uid);
 		if (!c || !c.MemberCan(uid, VB_ClanPerm.NEWS))
+		{
+			VB_TabletServer.SendResult(player, id, VB_TabletResult.DENIED);
 			return;
+		}
 		foreach (VB_ClanNews r : c.News)
 		{
 			if (r.NewsId == newsId)
@@ -572,7 +619,8 @@ class VB_TabletClanOps
 		int color;
 		bool open;
 		string discord;
-		if (!ctx.Read(title) || !ctx.Read(tag) || !ctx.Read(slogan) || !ctx.Read(shape) || !ctx.Read(symbol) || !ctx.Read(color) || !ctx.Read(open) || !ctx.Read(discord))
+		int mask;
+		if (!ctx.Read(title) || !ctx.Read(tag) || !ctx.Read(slogan) || !ctx.Read(shape) || !ctx.Read(symbol) || !ctx.Read(color) || !ctx.Read(open) || !ctx.Read(discord) || !ctx.Read(mask))
 			return;
 		string uid = id.GetPlainId();
 		VB_Clan c = VB_TabletClans.OfPlayer(uid);
@@ -581,18 +629,44 @@ class VB_TabletClanOps
 			VB_TabletServer.SendResult(player, id, VB_TabletResult.DENIED);
 			return;
 		}
+		// Поля, которых нет в маске, остаются как на сервере: пока у офицера был открыт старый черновик,
+		// другой мог уже переименовать клан, и полный снимок откатил бы это за деньги склада.
+		if ((mask & VB_SetField.TITLE) == 0)
+			title = c.Title;
+		if ((mask & VB_SetField.TAG) == 0)
+			tag = c.Tag;
+		if ((mask & VB_SetField.SLOGAN) == 0)
+			slogan = c.Slogan;
+		if ((mask & VB_SetField.EMBLEM) == 0)
+		{
+			shape = c.EmbShape;
+			symbol = c.EmbSymbol;
+		}
+		if ((mask & VB_SetField.COLOR) == 0)
+			color = c.Color;
+		if ((mask & VB_SetField.OPEN) == 0)
+			open = c.Open;
 		string invite = VB_TabletCheck.ClanInvite(discord);
+		if ((mask & VB_SetField.DISCORD) == 0)
+		{
+			discord = c.Discord;
+			invite = c.Discord;
+		}
 		if (slogan.LengthUtf8() > 60 || (discord != "" && invite == ""))
 		{
 			VB_TabletServer.SendResult(player, id, VB_TabletResult.BAD_INPUT);
+			return;
+		}
+		if (slogan != c.Slogan && VB_TabletClans.HasBanned(slogan))
+		{
+			VB_TabletServer.SendResult(player, id, VB_TabletResult.BANNED_WORD);
 			return;
 		}
 		VB_TabletConfig cfg = VB_TabletConfig.Get();
 		int sum = 0;
 		if (title != c.Title)
 		{
-			int len = title.LengthUtf8();
-			if (len < 3 || len > 24)
+			if (!VB_TabletClans.TitleValid(title))
 			{
 				VB_TabletServer.SendResult(player, id, VB_TabletResult.BAD_INPUT);
 				return;
@@ -611,7 +685,7 @@ class VB_TabletClanOps
 		}
 		if (tag != c.Tag)
 		{
-			if (tag.Length() < 2 || tag.Length() > 4)
+			if (!VB_TabletCheck.TagValid(tag))
 			{
 				VB_TabletServer.SendResult(player, id, VB_TabletResult.BAD_INPUT);
 				return;
@@ -627,6 +701,11 @@ class VB_TabletClanOps
 				return;
 			}
 			sum += cfg.PriceTag;
+		}
+		if ((shape != c.EmbShape || symbol != c.EmbSymbol || color != c.Color) && !VB_ClanLook.Valid(shape, symbol, color))
+		{
+			VB_TabletServer.SendResult(player, id, VB_TabletResult.BAD_INPUT);
+			return;
 		}
 		if (shape != c.EmbShape || symbol != c.EmbSymbol)
 		{
@@ -659,6 +738,8 @@ class VB_TabletClanOps
 		}
 		VB_TabletClans.Log(c, VB_ClanEvent.SETTINGS, id.GetName());
 		Done(c);
+		if (sum > 0)
+			VB_TabletBank.PushHistory(c);
 		VB_TabletServer.SendResult(player, id, VB_TabletResult.SAVED);
 	}
 
@@ -666,14 +747,27 @@ class VB_TabletClanOps
 	protected static void SaveRanks(PlayerBase player, PlayerIdentity id, ParamsReadContext ctx)
 	{
 		int n;
-		if (!ctx.Read(n) || n < 2 || n > VB_CLAN_RANKS_MAX)
+		if (!ctx.Read(n))
 			return;
+		if (n < 2 || n > VB_CLAN_RANKS_MAX)
+		{
+			VB_TabletServer.SendResult(player, id, VB_TabletResult.BAD_INPUT);
+			return;
+		}
 		array<ref VB_ClanRank> list = new array<ref VB_ClanRank>();
+		array<string> ids = new array<string>();
 		for (int i = 0; i < n; i++)
 		{
 			VB_ClanRank r = new VB_ClanRank();
 			if (!r.Read(ctx))
 				return;
+			// Id рангов уникальны и короткие: два «leader» дали бы клану двух лидеров.
+			if (r.Id == "" || r.Id.Length() > 16 || ids.Find(r.Id) >= 0)
+			{
+				VB_TabletServer.SendResult(player, id, VB_TabletResult.BAD_INPUT);
+				return;
+			}
+			ids.Insert(r.Id);
 			list.Insert(r);
 		}
 		string uid = id.GetPlainId();
@@ -708,8 +802,10 @@ class VB_TabletClanOps
 		{
 			VB_ClanRank q = list.Get(j);
 			VB_ClanRank was = c.Rank(q.Id);
-			if (q.Title.LengthUtf8() > 20 || q.Title == "")
+			if (q.Title.LengthUtf8() > 20 || q.Title == "" || VB_TabletClans.HasBanned(q.Title))
 				q.Title = was.Title;
+			if (VB_ClanLook.ColorIds().Find(q.Color) < 0 && q.Color != was.Color)
+				q.Color = was.Color;
 			// Чужие права игрок не выдаёт и не снимает: они остаются как были. У нового ранга их нет.
 			if (!lead && j > myIndex)
 			{

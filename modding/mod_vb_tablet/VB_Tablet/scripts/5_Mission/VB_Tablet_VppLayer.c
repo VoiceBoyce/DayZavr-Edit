@@ -12,6 +12,8 @@ class VBT_VppPin
 	float WZ;
 	float Size;
 	float TagW;
+	bool Mate;		// соклановец: эти метки двигаются и обновляются отдельно от объектов
+	string Label;
 }
 
 class VB_TabletVppLayer
@@ -98,15 +100,22 @@ class VB_TabletVppLayer
 				client.Request(VB_TabletOp.MAP_MATES);
 			}
 		}
-		bool content = st.Version != m_SeenVer || st.MatesVersion != m_SeenMates;
+		// Объекты пересобираются только при смене данных карты. Соклановцы приходят каждые 3 с:
+		// у них двигаются метки, а пересоздаются, только если сменился состав.
+		bool content = st.Version != m_SeenVer;
+		bool mates = st.MatesVersion != m_SeenMates;
 		if (content)
 		{
 			m_SeenVer = st.Version;
-			m_SeenMates = st.MatesVersion;
 			BuildPins(client, st);
 		}
+		if (content || mates)
+		{
+			m_SeenMates = st.MatesVersion;
+			BuildMatePins(client, st);
+		}
 		bool view = ViewChanged();
-		if (content || view)
+		if (content || mates || view)
 			Place(st);
 	}
 
@@ -153,6 +162,9 @@ class VB_TabletVppLayer
 
 	protected void Unbind()
 	{
+		// Карта VPP при открытии показывает все свои 3D метки: если игрок прятал их клавишей K, прячем снова.
+		if (m_Map && VB_TabletClient.Get().Hide3D)
+			VB_TabletBridge.SyncVpp3D();
 		if (m_Host)
 			m_Host.Unlink();
 		m_Host = null;
@@ -222,12 +234,15 @@ class VB_TabletVppLayer
 	protected void BuildPins(VB_TabletClient client, VB_MapState st)
 	{
 		m_F = INT_UIF_Scale.Factor();
-		foreach (VBT_VppPin old : m_Pins)
+		for (int i = m_Pins.Count() - 1; i >= 0; i--)
 		{
+			VBT_VppPin old = m_Pins.Get(i);
+			if (old.Mate)
+				continue;
 			if (old.Root)
 				old.Root.Unlink();
+			m_Pins.Remove(i);
 		}
-		m_Pins.Clear();
 		foreach (VB_MapObject o : st.Objects)
 		{
 			if (o.IsVpp() || !st.IsVisible(o))
@@ -241,14 +256,55 @@ class VB_TabletVppLayer
 			else
 				AddPin(ax, az, 0, "", title, 0);
 		}
-		VB_Clan clan = client.Clan;
-		if (clan && st.LayerMates)
+	}
+
+	// Соклановцы: тот же состав в том же порядке значит только сдвиг меток, без пересоздания виджетов.
+	protected void BuildMatePins(VB_TabletClient client, VB_MapState st)
+	{
+		m_F = INT_UIF_Scale.Factor();
+		array<ref VB_MapMate> want = new array<ref VB_MapMate>();
+		if (client.Clan && st.LayerMates)
 		{
 			foreach (VB_MapMate m : st.Mates)
 			{
 				if (!PartyDrawsMate(m.Who))
-					AddPin(m.X, m.Z, VB_C_OK, "", m.Who, 12);
+					want.Insert(m);
 			}
+		}
+		array<ref VBT_VppPin> have = new array<ref VBT_VppPin>();
+		foreach (VBT_VppPin p : m_Pins)
+		{
+			if (p.Mate)
+				have.Insert(p);
+		}
+		bool same = have.Count() == want.Count();
+		for (int k = 0; same && k < want.Count(); k++)
+		{
+			if (have.Get(k).Label != want.Get(k).Who)
+				same = false;
+		}
+		if (same)
+		{
+			for (int j = 0; j < want.Count(); j++)
+			{
+				have.Get(j).WX = want.Get(j).X;
+				have.Get(j).WZ = want.Get(j).Z;
+			}
+			return;
+		}
+		for (int i = m_Pins.Count() - 1; i >= 0; i--)
+		{
+			VBT_VppPin old = m_Pins.Get(i);
+			if (!old.Mate)
+				continue;
+			if (old.Root)
+				old.Root.Unlink();
+			m_Pins.Remove(i);
+		}
+		foreach (VB_MapMate add : want)
+		{
+			VBT_VppPin pin = AddPin(add.X, add.Z, VB_C_OK, "", add.Who, 12);
+			pin.Mate = true;
 		}
 	}
 
@@ -267,12 +323,13 @@ class VB_TabletVppLayer
 		return false;
 	}
 
-	protected void AddPin(float wx, float wz, int fill, string icon, string label, float size)
+	protected VBT_VppPin AddPin(float wx, float wz, int fill, string icon, string label, float size)
 	{
 		VBT_VppPin pin = new VBT_VppPin();
 		pin.WX = wx;
 		pin.WZ = wz;
 		pin.Size = size;
+		pin.Label = label;
 		pin.Root = INT_UIF_Draw.Frame(m_Host, 0, 0, 1, 1);
 		if (fill != 0)
 		{
@@ -290,6 +347,7 @@ class VB_TabletVppLayer
 		}
 		SortAll(pin.Root);
 		m_Pins.Insert(pin);
+		return pin;
 	}
 
 	// Подпись справа от метки, у правого края карты слева. Подпись зоны стоит по центру точки.

@@ -13,6 +13,7 @@ class VB_TabletPageProfile extends VB_TabletPage
 	protected ref VBT_Button m_BtnFind;
 	protected ref VB_TabletJoinBlock m_Join = new VB_TabletJoinBlock();
 	protected ref VBT_Button m_BtnCreate;
+	protected ref VBT_Button m_BtnClan;
 	protected Widget m_DiscordHit;
 	protected Widget m_DiscordCopy;
 	protected ref INT_UIF_Surface m_DiscordBg;
@@ -20,8 +21,8 @@ class VB_TabletPageProfile extends VB_TabletPage
 	override void Build()
 	{
 		VB_TabletClient session = VB_TabletClient.Get();
-		if (!session.HasProfile)
-			session.Request(VB_TabletOp.PROFILE);
+		// Показатели меняются в игре (убийства, путь, деньги): свежие при каждом открытии, не чаще раза в 5 с.
+		VBA_Util.Ask(VB_TabletOp.PROFILE, 5);
 		VB_TabletStats me = session.Me;
 
 		Widget card = VBT.Card(m_Root, 0, 0, 340, 720);
@@ -59,7 +60,9 @@ class VB_TabletPageProfile extends VB_TabletPage
 		BuildHeader(right, session);
 		BuildLife(right, session);
 		BuildStats(right, session);
-		if (m_Join.HasInvite())
+		if (session.Clan)
+			BuildMyClan(right, session.Clan, session);
+		else if (m_Join.HasInvite())
 			m_Join.BuildInvite(right, m_Menu);
 		else
 			BuildJoin(right);
@@ -92,9 +95,22 @@ class VB_TabletPageProfile extends VB_TabletPage
 		if (shownName == "")
 			shownName = GetGame().GetPlayer().GetIdentity().GetName();
 		INT_UIF_Draw.Text(r, 0, -4, 470, 76, VBT.Fit(shownName, 460, 64), 64, VB_C_TEXT, INT_UIF_Align.LEFT, true);
-		float w = INT_UIF_Draw.TextWidth("#STR_VB_TAB_NO_CLAN", 13) + 26;
-		INT_UIF_Surface.Pill(r, 0, 84, 118, 28, 0, VB_C_LINE2);
-		INT_UIF_Draw.Text(r, 0, 84, 118, 28, "#STR_VB_TAB_NO_CLAN", 13, VB_C_DIM, INT_UIF_Align.CENTER);
+		// Плашка клана под ником: тег в цвете клана или «без клана».
+		VB_Clan clan = session.Clan;
+		if (clan)
+		{
+			string tagText = "[" + clan.Tag + "]  " + clan.Title;
+			float tw = INT_UIF_Draw.TextWidth(tagText, 13) * 1.15 + 30;
+			if (tw > 460)
+				tw = 460;
+			INT_UIF_Surface.Pill(r, 0, 84, tw, 28, 0, INT_UIF_Color.WithAlpha(clan.Color, 160));
+			INT_UIF_Draw.Text(r, 0, 84, tw, 28, VBT.Fit(tagText, tw - 20, 13), 13, clan.Color, INT_UIF_Align.CENTER);
+		}
+		else
+		{
+			INT_UIF_Surface.Pill(r, 0, 84, 118, 28, 0, VB_C_LINE2);
+			INT_UIF_Draw.Text(r, 0, 84, 118, 28, "#STR_VB_TAB_NO_CLAN", 13, VB_C_DIM, INT_UIF_Align.CENTER);
+		}
 
 		int xp = me.Xp(rates);
 		int ri = rates.RankOf(xp);
@@ -237,6 +253,53 @@ class VB_TabletPageProfile extends VB_TabletPage
 		VBT.Route(f, 626, 87, 162, (me.DistM / 1000.0) / gd);
 	}
 
+	// Игрок в клане: вместо «Собери свой клан» карточка его клана и переход в клан.
+	protected void BuildMyClan(Widget r, VB_Clan c, VB_TabletClient session)
+	{
+		Widget f = INT_UIF_Draw.Frame(r, 0, 436, 808, 284);
+		INT_UIF_Surface.Box(f, 0, 0, 808, 284, 10, VB_C_PANEL, VB_C_LINE);
+		int band = INT_UIF_Color.WithAlpha(c.Color, 217);
+		INT_UIF_Draw.Texture(f, 4, 1, 800, 8, VB_TABLET_TEX_HAZARD, band);
+		Widget s = INT_UIF_Draw.Frame(f, 24, 32, 216, 228);
+		INT_UIF_Surface.Box(s, 0, 0, 216, 228, 8, VB_C_PANEL2);
+		VBT.Corners(s, 216, 228, c.Color);
+		VBK.Emblem(s, 44, 26, 128, c.EmbShape, c.EmbSymbol, c.Color);
+		INT_UIF_Draw.Text(s, 0, 170, 216, 22, "[" + c.Tag + "]", 15, c.Color, INT_UIF_Align.CENTER);
+		string level = VBA_Util.Sub("#STR_VB_TAB_C_ADM_LEVEL", "{n}", c.Level.ToString());
+		INT_UIF_Draw.Text(s, 0, 194, 216, 18, level, 13, VB_C_DIM2, INT_UIF_Align.CENTER);
+		INT_UIF_Draw.Text(f, 264, 28, 520, 40, VBT.Fit(c.Title, 520, 32), 32, VB_C_TEXT, INT_UIF_Align.LEFT, true);
+		if (c.Slogan != "")
+			INT_UIF_Draw.MText(f, 264, 72, 520, 44, c.Slogan, 15, VB_C_DIM);
+		VB_ClanMember me = c.Member(session.MyUid());
+		string rank = "";
+		if (me)
+		{
+			VB_ClanRank rk = c.Rank(me.RankId);
+			if (rk)
+				rank = VBA_Util.Title(rk.Title);
+		}
+		int members = c.Members.Count();
+		array<string> icons = {"rank", "users", "vault", "sym_bolt"};
+		// Каждое значение отдельной строкой: два вызова одной функции в одном выражении затирают друг друга.
+		string membersText = members.ToString();
+		string bankText = VBT.Num(c.Bank);
+		string influenceText = VBT.Num(c.Influence);
+		array<string> values = {rank, membersText, bankText, influenceText};
+		array<string> caps = {"#STR_VB_TAB_RANK", "#STR_VB_TAB_A_ALL_MEMBERS", "#STR_VB_TAB_F_BANK", "#STR_VB_TAB_F_INFLUENCE"};
+		for (int k = 0; k < 4; k++)
+		{
+			int col = k % 2;
+			int row = k / 2;
+			float x = 264 + col * 262;
+			float y = 112 + row * 48;
+			INT_UIF_Surface.Box(f, x, y, 40, 40, 8, VB_C_PANEL2);
+			VBT.Ico(f, x + 10, y + 10, 20, icons.Get(k), VB_C_ACCENT);
+			INT_UIF_Draw.Text(f, x + 52, y, 200, 18, caps.Get(k), 12, VB_C_DIM2);
+			INT_UIF_Draw.Text(f, x + 52, y + 18, 200, 22, VBT.Fit(values.Get(k), 200, 16), 16, VB_C_TEXT);
+		}
+		m_BtnClan = new VBT_Button(f, 264, 212, 520, 48, "#STR_VB_TAB_A_OPEN_CLAN", true, "users", m_Menu.GetHitHandler(), 17);
+	}
+
 	protected void BuildJoin(Widget r)
 	{
 		Widget f = INT_UIF_Draw.Frame(r, 0, 436, 808, 284);
@@ -360,6 +423,11 @@ class VB_TabletPageProfile extends VB_TabletPage
 			m_Menu.GoLater("create");
 			return true;
 		}
+		if (m_BtnClan && w == m_BtnClan.Hit)
+		{
+			m_Menu.GoLater("clan");
+			return true;
+		}
 		return false;
 	}
 
@@ -378,6 +446,11 @@ class VB_TabletPageProfile extends VB_TabletPage
 		if (m_BtnFind && w == m_BtnFind.Hit)
 		{
 			m_BtnFind.Hover(enter);
+			return true;
+		}
+		if (m_BtnClan && w == m_BtnClan.Hit)
+		{
+			m_BtnClan.Hover(enter);
 			return true;
 		}
 		if (m_BtnCreate && w == m_BtnCreate.Hit)

@@ -211,6 +211,9 @@ class VBT
 	// 1 234 567
 	static string Num(int value)
 	{
+		// Знак отдельно: иначе у «-500» пробел встал бы после минуса.
+		if (value < 0)
+			return "-" + Num(-value);
 		string digits = value.ToString();
 		string res = "";
 		int n = digits.Length();

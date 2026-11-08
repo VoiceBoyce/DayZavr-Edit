@@ -137,6 +137,8 @@ class VB_TabletPageNews extends VB_TabletPage
 	protected static string s_SentText;
 	protected static int s_DelId;
 	protected static float s_AskedAt = -100;
+	protected static string s_FormClan;		// клан, к которому относится черновик: в другом клане форма пустая
+	protected static float s_SentAt = -100;
 
 	protected bool m_Ed;
 	protected Widget m_Left;
@@ -161,6 +163,7 @@ class VB_TabletPageNews extends VB_TabletPage
 
 	protected static void Blank()
 	{
+		s_Pending = false;
 		s_FormId = 0;
 		s_FormTag = 0;
 		s_FormTitle = "";
@@ -175,6 +178,12 @@ class VB_TabletPageNews extends VB_TabletPage
 		{
 			m_Menu.GoLater("profile");
 			return;
+		}
+		// Черновик прежнего клана не переносится: «правка №5» перезаписала бы новость №5 другого клана.
+		if (s_FormClan != client.Clan.Id)
+		{
+			Blank();
+			s_FormClan = client.Clan.Id;
 		}
 		float now = GetGame().GetTickTime();
 		if (now - s_AskedAt > 5)
@@ -386,6 +395,11 @@ class VB_TabletPageNews extends VB_TabletPage
 		}
 		if (VB_TabletBridge.Censored(head) || VB_TabletBridge.Censored(body))
 			return;
+		// Пока ответа нет, второй клик не отправляет ту же новость ещё раз (сервер создал бы дубль).
+		float now = GetGame().GetTickTime();
+		if (s_Pending && now - s_SentAt < 5)
+			return;
+		s_SentAt = now;
 		VB_TabletClient client = VB_TabletClient.Get();
 		int id = s_FormId;
 		int tag = s_FormTag;
@@ -439,7 +453,6 @@ class VB_TabletPageNews extends VB_TabletPage
 		ScriptRPC rpc = client.Begin(VB_TabletOp.NEWS_DELETE);
 		rpc.Write(id);
 		client.Post(rpc);
-		INT_UIF_Toast.Success(VBT.T("#STR_VB_TAB_B_NEWS_DELETED"));
 		if (s_FormId == id)
 		{
 			Blank();

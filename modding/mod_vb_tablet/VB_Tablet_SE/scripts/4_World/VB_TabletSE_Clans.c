@@ -37,14 +37,40 @@ class VB_TabletClans
 		Print(VB_TABLET_TAG + " кланов загружено: " + s_Clans.Count());
 	}
 
+	// Номер из имени файла cN.json занят, даже если файл не прочитался: новый клан не получит тот же id
+	// и не затрёт его копию.
+	protected static void ReserveId(string file)
+	{
+		int dot = file.IndexOf(".");
+		if (dot < 2 || file.Get(0) != "c")
+			return;
+		string num = file.Substring(1, dot - 1);
+		int n = num.ToInt();
+		if (n + 1 > s_NextId)
+			s_NextId = n + 1;
+	}
+
 	protected static void LoadOne(string file)
 	{
+		ReserveId(file);
 		string path = DIR_CLANS + "/" + file;
-		VB_Clan c = new VB_Clan();
+		VB_Clan c = null;
 		string error;
-		if (!JsonFileLoader<VB_Clan>.LoadFile(path, c, error) || c.Id == "")
+		for (int n = 0; n < 3; n++)
 		{
-			Print(VB_TABLET_TAG + " ошибка в файле клана " + file + ": " + error);
+			VB_Clan read = new VB_Clan();
+			if (VB_SafeJson<VB_Clan>.LoadFrom(VB_TabletFiles.Attempt(path, n), read, error) && read.Id != "")
+			{
+				c = read;
+				VB_TabletFiles.Recovered(path, n);
+				break;
+			}
+			if (n == 0)
+				Print(VB_TABLET_TAG + " ошибка в файле клана " + file + ": " + error);
+		}
+		if (!c)
+		{
+			Print(VB_TABLET_TAG + " ВНИМАНИЕ: клан " + file + " не загружен, его копий нет или они тоже повреждены. Файл не трогаем.");
 			return;
 		}
 		s_Clans.Set(c.Id, c);
@@ -53,22 +79,39 @@ class VB_TabletClans
 			m.Online = false;
 			s_ByUid.Set(m.Uid, c.Id);
 		}
-		string num = c.Id.Substring(1, c.Id.Length() - 1);
-		s_NextId = Math.Max(s_NextId, num.ToInt() + 1);
+		ReserveId(c.Id + ".json");
 	}
 
 	static bool Save(VB_Clan c)
 	{
 		string path = DIR_CLANS + "/" + c.Id + ".json";
-		if (FileExist(path))
-			CopyFile(path, path + ".bak");
 		string error;
-		if (!JsonFileLoader<VB_Clan>.SaveFile(path, c, error))
+		if (!VB_SafeJson<VB_Clan>.Save(path, c, error))
 		{
 			Print(VB_TABLET_TAG + " не записан клан " + c.Id + ": " + error);
+			c.Dirty = true;
 			return false;
 		}
+		c.Dirty = false;
 		return true;
+	}
+
+	// Не срочные изменения (чат): файл пишется пачкой раз в несколько секунд, а не на каждое сообщение.
+	static void SaveSoon(VB_Clan c)
+	{
+		c.Dirty = true;
+	}
+
+	// Из таймера миссии и при остановке сервера.
+	static void Flush()
+	{
+		if (!s_Clans)
+			return;
+		foreach (string id, VB_Clan c : s_Clans)
+		{
+			if (c.Dirty)
+				Save(c);
+		}
 	}
 
 	static VB_Clan Find(string id)
@@ -184,7 +227,6 @@ class VB_TabletClans
 			return;
 		}
 		s_Week = week;
-		StoreWeek(path, week);
 		array<ref VB_Clan> top = new array<ref VB_Clan>();
 		foreach (string id, VB_Clan c : s_Clans)
 		{
@@ -199,10 +241,15 @@ class VB_TabletClans
 			}
 			top.InsertAt(c, at);
 		}
+		// Итоги каждого клана отмечаются в его файле (WeekDone): если сервер упадёт посреди раздачи
+		// или week.txt не запишется, второй раз приз никто не получит.
 		VB_TabletConfig cfg = VB_TabletConfig.Get();
 		for (int place = 0; place < top.Count(); place++)
 		{
 			VB_Clan t = top.Get(place);
+			if (t.WeekDone == week)
+				continue;
+			t.WeekDone = week;
 			int prize = 0;
 			if (t.WeekInfluence > 0 && place < cfg.WeekPrizes.Count())
 				prize = Math.Min(cfg.WeekPrizes.Get(place), cfg.BankMax - t.Bank);
@@ -223,7 +270,9 @@ class VB_TabletClans
 			}
 			Save(t);
 			VB_TabletServer.PushClan(t);
+			VB_TabletBank.PushHistory(t);
 		}
+		StoreWeek(path, week);
 	}
 
 	protected static string VBT_NumText(int v)
@@ -235,7 +284,10 @@ class VB_TabletClans
 	{
 		FileHandle h = OpenFile(path, FileMode.WRITE);
 		if (!h)
+		{
+			Print(VB_TABLET_TAG + " не записан week.txt: итоги недели защищены отметкой в файлах кланов");
 			return;
+		}
 		FPrint(h, week.ToString());
 		CloseFile(h);
 	}
@@ -266,14 +318,15 @@ class VB_TabletClans
 
 	static bool NameFree(string title, VB_Clan except)
 	{
-		string low = title + "";
-		low.ToLower();
-		foreach (string id, VB_Clan c : All())
+		string low = VB_TabletCheck.Lower(title);
+		low.TrimInPlace();
+		map<string, ref VB_Clan> all = All();
+		foreach (string id, VB_Clan c : all)
 		{
 			if (c == except)
 				continue;
-			string other = c.Title + "";
-			other.ToLower();
+			string other = VB_TabletCheck.Lower(c.Title);
+			other.TrimInPlace();
 			if (other == low)
 				return false;
 		}
@@ -282,9 +335,14 @@ class VB_TabletClans
 
 	static bool TagFree(string tag, VB_Clan except)
 	{
-		foreach (string id, VB_Clan c : All())
+		string want = tag + "";
+		want.ToUpper();
+		map<string, ref VB_Clan> all = All();
+		foreach (string id, VB_Clan c : all)
 		{
-			if (c != except && c.Tag == tag)
+			string other = c.Tag + "";
+			other.ToUpper();
+			if (c != except && other == want)
 				return false;
 		}
 		return true;
@@ -292,7 +350,8 @@ class VB_TabletClans
 
 	static bool EmblemFree(string shape, string symbol, VB_Clan except)
 	{
-		foreach (string id, VB_Clan c : All())
+		map<string, ref VB_Clan> all = All();
+		foreach (string id, VB_Clan c : all)
 		{
 			if (c != except && c.EmbShape == shape && c.EmbSymbol == symbol)
 				return false;
@@ -300,18 +359,28 @@ class VB_TabletClans
 		return true;
 	}
 
+	// Запрещённые слова без учёта регистра, в том числе кириллицы.
 	static bool HasBanned(string text)
 	{
-		string low = text + "";
-		low.ToLower();
-		foreach (string w : VB_TabletConfig.Get().BannedWords)
+		string low = VB_TabletCheck.Lower(text);
+		array<string> words = VB_TabletConfig.Get().BannedWords;
+		foreach (string w : words)
 		{
-			string bad = w + "";
-			bad.ToLower();
+			string bad = VB_TabletCheck.Lower(w);
+			bad.TrimInPlace();
 			if (bad != "" && low.Contains(bad))
 				return true;
 		}
 		return false;
+	}
+
+	// Название: без пробелов по краям, 3..24 знака.
+	static bool TitleValid(string title)
+	{
+		string t = title + "";
+		t.TrimInPlace();
+		int len = title.LengthUtf8();
+		return t == title && len >= 3 && len <= 24;
 	}
 
 	// Клан игрока изменился: всем в сети новая шапка.
@@ -319,7 +388,7 @@ class VB_TabletClans
 	{
 		VB_TabletConfig cfg = VB_TabletConfig.Get();
 		string uid = id.GetPlainId();
-		int res = CheckCreate(player, uid, title, tag, slogan, shape, symbol);
+		int res = CheckCreate(player, uid, title, tag, slogan, shape, symbol, color);
 		if (res != VB_TabletResult.OK)
 		{
 			VB_TabletServer.SendResult(player, id, res);
@@ -346,22 +415,33 @@ class VB_TabletClans
 		AddMember(c, uid, id.GetName(), "leader");
 		Log(c, VB_ClanEvent.CREATED, id.GetName());
 		s_Clans.Set(c.Id, c);
-		Save(c);
+		// Клан, которого нет в файле, исчез бы после рестарта вместе с оплатой: деньги возвращаются.
+		if (!Save(c))
+		{
+			s_Clans.Remove(c.Id);
+			s_ByUid.Remove(uid);
+			if (!VB_TabletMoney.Give(player, cfg.ClanPrice))
+				Print(VB_TABLET_TAG + " СОЗДАНИЕ КЛАНА: файл не записан и оплату не вернуть, проверьте вручную: " + uid + " должен получить " + cfg.ClanPrice.ToString());
+			VB_TabletServer.SendResult(player, id, VB_TabletResult.STORAGE);
+			VB_TabletServer.SendProfile(player, id);
+			return;
+		}
 		VB_TabletPlayers.ClearApply(uid);
 		VB_TabletServer.SendResult(player, id, VB_TabletResult.CREATED);
 		VB_TabletServer.PushClan(c);
 		VB_TabletServer.SendProfile(player, id);
 	}
 
-	protected static int CheckCreate(PlayerBase player, string uid, string title, string tag, string slogan, string shape, string symbol)
+	protected static int CheckCreate(PlayerBase player, string uid, string title, string tag, string slogan, string shape, string symbol, int color)
 	{
 		VB_TabletConfig cfg = VB_TabletConfig.Get();
 		if (OfPlayer(uid))
 			return VB_TabletResult.HAS_CLAN;
-		int len = title.LengthUtf8();
-		if (len < 3 || len > 24 || tag.Length() < 2 || tag.Length() > 4 || slogan.LengthUtf8() > 60)
+		if (!TitleValid(title) || !VB_TabletCheck.TagValid(tag) || slogan.LengthUtf8() > 60)
 			return VB_TabletResult.BAD_INPUT;
-		if (HasBanned(title) || HasBanned(tag))
+		if (!VB_ClanLook.Valid(shape, symbol, color))
+			return VB_TabletResult.BAD_INPUT;
+		if (HasBanned(title) || HasBanned(tag) || HasBanned(slogan))
 			return VB_TabletResult.BANNED_WORD;
 		if (All().Count() >= cfg.MaxClans)
 			return VB_TabletResult.SERVER_FULL;
@@ -371,7 +451,7 @@ class VB_TabletClans
 			return VB_TabletResult.TAG_TAKEN;
 		if (!EmblemFree(shape, symbol, null))
 			return VB_TabletResult.EMBLEM_TAKEN;
-		VB_TabletRecord rec = VB_TabletPlayers.Get(uid, "");
+		VB_TabletRecord rec = VB_TabletPlayers.Get(uid, player.GetIdentity().GetName());
 		int xp = rec.ToStats().Xp(cfg.Rates);
 		if (cfg.Rates.RankOf(xp) < cfg.ClanRank)
 			return VB_TabletResult.NO_RANK;
@@ -401,8 +481,11 @@ class VB_TabletClans
 		m.Uid = uid;
 		m.PlayerName = name;
 		m.RankId = rank;
-		m.Online = true;
-		m.Discord = VB_TabletPlayers.Get(uid, name).Discord;
+		m.Online = VB_TabletServer.FindPlayer(uid) != null;
+		// Запись игрока только читается: офлайн-игрок не попадает в кэш тех, кто в сети.
+		VB_TabletRecord rec = VB_TabletPlayers.Peek(uid);
+		if (rec)
+			m.Discord = rec.Discord;
 		c.Members.Insert(m);
 		s_ByUid.Set(uid, c.Id);
 		s_Invites.Remove(uid);
@@ -436,12 +519,22 @@ class VB_TabletClans
 			foreach (string left : uids)
 				s_OnLeave.Invoke(c, left);
 		}
+		// Поданные заявки больше некуда рассматривать: у игроков снимается пометка «заявка подана».
+		array<string> applicants = new array<string>();
+		foreach (VB_ClanRequest q : c.Requests)
+			applicants.Insert(q.Uid);
 		string path = DIR_CLANS + "/" + c.Id + ".json";
 		DeleteFile(path);
 		DeleteFile(path + ".bak");
+		DeleteFile(path + ".tmp");
 		s_Clans.Remove(c.Id);
 		foreach (string gone : uids)
 			VB_TabletServer.SendNoClan(gone);
+		foreach (string who : applicants)
+		{
+			VB_TabletPlayers.ClearApplyOf(who, c.Id);
+			VB_TabletServer.SendNoClan(who);
+		}
 	}
 
 	static void AddInvite(string uid, VB_Clan c, string by)
@@ -483,17 +576,37 @@ class VB_TabletClans
 			if (list.Get(i).ExpiresAt < now || !Find(list.Get(i).ClanId))
 				list.Remove(i);
 		}
+		if (list.Count() == 0)
+		{
+			s_Invites.Remove(uid);
+			return new array<ref VB_ClanInvite>();
+		}
 		return list;
+	}
+
+	static bool HasInvite(string uid, string clanId)
+	{
+		array<ref VB_ClanInvite> list = InvitesOf(uid);
+		foreach (VB_ClanInvite inv : list)
+		{
+			if (inv.ClanId == clanId)
+				return true;
+		}
+		return false;
 	}
 
 	static void DropInvite(string uid, string clanId)
 	{
-		array<ref VB_ClanInvite> list = InvitesOf(uid);
+		array<ref VB_ClanInvite> list;
+		if (!s_Invites || !s_Invites.Find(uid, list))
+			return;
 		for (int i = list.Count() - 1; i >= 0; i--)
 		{
 			if (list.Get(i).ClanId == clanId)
 				list.Remove(i);
 		}
+		if (list.Count() == 0)
+			s_Invites.Remove(uid);
 	}
 
 	// Новый день: налог и обнуление счётчиков «сегодня». Пропущенные дни доначисляются.
@@ -509,11 +622,17 @@ class VB_TabletClans
 			if (c.LastTaxDay == today)
 				continue;
 			int days = today - c.LastTaxDay;
-			if (days < 1 || days > 365)
-				days = 1;
 			c.LastTaxDay = today;
 			foreach (VB_ClanMember m : c.Members)
 				m.Today = 0;
+			// Часы сервера ушли назад: день уже оплачен, налог не берётся второй раз.
+			if (days < 1)
+			{
+				Save(c);
+				continue;
+			}
+			if (days > 365)
+				days = 1;
 			for (int i = 0; i < days; i++)
 			{
 				if (c.TaxFree > 0)
@@ -521,11 +640,16 @@ class VB_TabletClans
 					c.TaxFree = c.TaxFree - 1;
 					continue;
 				}
+				// Налог выключен (0 в конфиге): склад не трогается, клан не распускается.
+				if (cfg.ClanTax <= 0)
+					break;
+				// Клан распускается, только когда заплатить полностью уже нечем. Остаток уходит в налог.
+				// Так совпадает с подсказкой «налога хватит на N дней»: дни без налога + склад / налог.
 				int pay = Math.Min(c.Bank, cfg.ClanTax);
 				c.Bank = c.Bank - pay;
 				AddHistory(c, "", VB_ClanEvent.TAX, -pay);
 				Log(c, VB_ClanEvent.TAX, "", "", "-" + pay.ToString());
-				if (c.Bank <= 0)
+				if (pay < cfg.ClanTax)
 				{
 					gone.Insert(c);
 					break;
@@ -535,6 +659,7 @@ class VB_TabletClans
 			{
 				Save(c);
 				VB_TabletServer.PushClan(c);
+				VB_TabletBank.PushHistory(c);
 			}
 		}
 		foreach (VB_Clan dead : gone)

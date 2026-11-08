@@ -212,7 +212,16 @@ class VB_TabletPageRating extends VB_TabletTabbedPage
 
 	protected void BuildRewards()
 	{
-		array<int> rewards = {100000, 60000, 30000};
+		// Награды недели из конфига сервера (HELLO), а не вшитые числа.
+		array<int> rewards = new array<int>();
+		array<int> prizes = VB_TabletClient.Get().WeekPrizes;
+		for (int p = 0; p < 3; p++)
+		{
+			int prize = 0;
+			if (prizes && p < prizes.Count())
+				prize = prizes.Get(p);
+			rewards.Insert(prize);
+		}
 		array<int> medal = {VB_C_GOLD, VB_C_SILVER, VB_C_BRONZE};
 		Widget w = INT_UIF_Draw.Frame(m_Root, 816, 240 - m_Dy, 356, 226);
 		INT_UIF_Surface.Box(w, 0, 0, 356, 226, 10, VB_C_PANEL, VB_C_LINE);

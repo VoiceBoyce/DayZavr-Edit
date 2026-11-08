@@ -457,7 +457,7 @@ class VB_TabletPageClan extends VB_TabletPage
 		bool free = c.TaxFree > 0;
 		int days = c.TaxFree;
 		if (!free)
-			days = c.Bank / VB_TabletClient.Get().ClanTax;
+			days = VB_TabletClient.Get().TaxDays(c.Bank);
 		bool low = !free && days <= VBA_TAX_LOW;
 		string lbl = "#STR_VB_TAB_A_TAX_FOR";
 		if (free)

@@ -3,6 +3,7 @@ class VB_TabletClient
 {
 	static const float HELLO_GAP_SEC = 2.0;
 	static const float HELLO_TIMEOUT_SEC = 5.0;
+	static const int MAX_ROWS = 1000;	// предел строк в пакете: больше сервер не шлёт, мусор отбрасывается
 
 	protected static ref VB_TabletClient s_Instance;
 
@@ -41,6 +42,12 @@ class VB_TabletClient
 	int MaxClans = 20;
 	int BankMax = 1000000;
 	int ClanTax = 5000;
+	ref array<int> WeekPrizes = {100000, 60000, 30000};	// награды недели за 1, 2, 3 место
+	// Клан-чат: одна пауза на окно планшета и вкладку «Клан» общего чата. Сервер ждёт 2 с,
+	// у клиента запас на задержку сети, иначе сообщение изредка получало бы отказ «слишком часто».
+	static const float CHAT_GAP = 2.3;
+	float ChatSentAt = -100;
+	ref array<int> RewardMy = {10, 25, 60};			// влияние за личный контракт по сложности
 	int PriceName = 25000;
 	int PriceTag = 15000;
 	int PriceEmblem = 20000;
@@ -59,6 +66,8 @@ class VB_TabletClient
 	ref array<string> AdminNames = new array<string>();
 	ref array<bool> AdminLeaders = new array<bool>();
 	protected float m_HelloAt = -100;
+	protected float m_HelloGap = HELLO_GAP_SEC;
+	protected float m_FirstHelloAt = -1;
 
 	static VB_TabletClient Get()
 	{
@@ -114,12 +123,18 @@ class VB_TabletClient
 		if (HasHello || !GetGame() || GetGame().IsDedicatedServer())
 			return;
 		float now = GetGame().GetTickTime();
-		if (now - m_HelloAt < HELLO_GAP_SEC)
+		if (now - m_HelloAt < m_HelloGap)
 			return;
 		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
 		if (!player)
 			return;
+		if (m_FirstHelloAt < 0)
+			m_FirstHelloAt = now;
 		m_HelloAt = now;
+		// Без ответа (нет VB_Tablet_SE или другая версия) пауза растёт до 30 с, сервер не засыпается запросами.
+		m_HelloGap = m_HelloGap * 2;
+		if (m_HelloGap > 30)
+			m_HelloGap = 30;
 		int op = VB_TabletOp.HELLO;
 		ScriptRPC rpc = new ScriptRPC();
 		rpc.Write(op);
@@ -153,6 +168,14 @@ class VB_TabletClient
 		rpc.Write(uid);
 		rpc.Write(name);
 		Post(rpc);
+	}
+
+	// На сколько дней склада хватит налога. Налог выключен (0 в конфиге): 999, деления на ноль нет.
+	int TaxDays(int bank)
+	{
+		if (ClanTax <= 0)
+			return 999;
+		return bank / ClanTax;
 	}
 
 	bool Can(int perm)
@@ -196,9 +219,9 @@ class VB_TabletClient
 	// Без ответа сервера: VB_Tablet_SE не стоит или не загрузился.
 	bool IsServerMissing()
 	{
-		if (HasHello || !GetGame() || m_HelloAt < 0)
+		if (HasHello || !GetGame() || m_FirstHelloAt < 0)
 			return false;
-		return GetGame().GetTickTime() - m_HelloAt > HELLO_TIMEOUT_SEC;
+		return GetGame().GetTickTime() - m_FirstHelloAt > HELLO_TIMEOUT_SEC;
 	}
 
 	void OnServerMessage(ParamsReadContext ctx)
@@ -216,6 +239,12 @@ class VB_TabletClient
 				return;
 			if (!ctx.Read(ClanPrice) || !ctx.Read(ClanRank) || !ctx.Read(ClanMax) || !ctx.Read(MaxClans) || !ctx.Read(BankMax) || !ctx.Read(ClanTax))
 				return;
+			array<int> prizes = new array<int>();
+			array<int> rewardMy = new array<int>();
+			if (!ctx.Read(prizes) || !ctx.Read(rewardMy))
+				return;
+			WeekPrizes = prizes;
+			RewardMy = rewardMy;
 			ServerName = name;
 			IsAdmin = admin;
 			HasHello = true;
@@ -236,8 +265,9 @@ class VB_TabletClient
 		else if (op == VB_TabletOp.RESULT)
 		{
 			int code;
-			if (ctx.Read(code))
-				LastResult = code;
+			if (!ctx.Read(code))
+				return;
+			LastResult = code;
 			ResultVersion++;
 		}
 		else if (op == VB_TabletOp.NOTIFY)
@@ -284,41 +314,68 @@ class VB_TabletClient
 			Request(VB_TabletOp.MAP_GET);
 	}
 
+	// Клан сменился или пропал: списки прежнего клана (журнал, новости, чат, история склада, контракты)
+	// больше не показываются, пока сервер не пришлёт новые.
+	protected void SetClan(VB_Clan c)
+	{
+		string was = "";
+		if (Clan)
+			was = Clan.Id;
+		string now = "";
+		if (c)
+			now = c.Id;
+		Clan = c;
+		if (c)
+			VB_C_ACCENT = c.Color;
+		else
+			VB_C_ACCENT = VB_ACCENT_DEFAULT;
+		if (was == now)
+			return;
+		Journal = new array<ref VB_ClanJournalRow>();
+		News = new array<ref VB_ClanNews>();
+		Chat = new array<ref VB_ClanChatRow>();
+		History = new array<ref VB_ClanBankRow>();
+		Contracts = new array<ref VB_ClanContract>();
+		MyContracts = new array<ref VB_ClanContract>();
+		HasContracts = false;
+	}
+
+	// Списки читаются во временный массив и подменяют прежний только целиком: обрыв пакета
+	// не оставляет экран с половиной списка.
 	protected void ReadClanPart(int op, ParamsReadContext ctx)
 	{
 		int n;
 		int i;
+		int total;
 		switch (op)
 		{
 			case VB_TabletOp.CLAN:
 				bool has;
 				if (!ctx.Read(has))
 					return;
+				VB_Clan head = null;
 				if (has)
 				{
-					VB_Clan c = new VB_Clan();
-					if (!c.ReadHead(ctx))
+					head = new VB_Clan();
+					if (!head.ReadHead(ctx))
 						return;
-					Clan = c;
-					VB_C_ACCENT = c.Color;
 				}
-				else
-				{
-					Clan = null;
-					VB_C_ACCENT = VB_ACCENT_DEFAULT;
-				}
-				if (!ctx.Read(n))
+				if (!ctx.Read(n) || n < 0 || n > MAX_ROWS)
 					return;
-				Invites.Clear();
+				array<ref VB_ClanInvite> invites = new array<ref VB_ClanInvite>();
 				for (i = 0; i < n; i++)
 				{
 					VB_ClanInvite inv = new VB_ClanInvite();
 					if (!inv.Read(ctx))
 						return;
-					Invites.Insert(inv);
+					invites.Insert(inv);
 				}
-				if (!ctx.Read(AppliedClan))
+				string applied;
+				if (!ctx.Read(applied))
 					return;
+				SetClan(head);
+				Invites = invites;
+				AppliedClan = applied;
 				NotifyMapClan();
 				break;
 			case VB_TabletOp.PLAYER_CARD:
@@ -326,67 +383,83 @@ class VB_TabletClient
 				VB_TabletStats card = new VB_TabletStats();
 				if (!ctx.Read(cardName) || !card.Read(ctx))
 					return;
+				// Карточки игроков: не больше сотни в памяти, старые вытесняются целиком.
+				if (Cards.Count() > 100 && !Cards.Contains(cardName))
+				{
+					Cards.Clear();
+					m_CardAt.Clear();
+				}
 				Cards.Set(cardName, card);
 				break;
 			case VB_TabletOp.CLAN_LIST:
-				if (!ctx.Read(n))
+				if (!ctx.Read(n) || n < 0 || n > MAX_ROWS)
 					return;
-				Clans.Clear();
+				array<ref VB_ClanRow> clans = new array<ref VB_ClanRow>();
 				for (i = 0; i < n; i++)
 				{
 					VB_ClanRow row = new VB_ClanRow();
 					if (!row.Read(ctx))
 						return;
-					Clans.Insert(row);
+					clans.Insert(row);
 				}
+				Clans = clans;
 				break;
 			case VB_TabletOp.CLAN_JOURNAL:
-				if (!ctx.Read(n))
+				if (!ctx.Read(n) || n < 0 || n > MAX_ROWS)
 					return;
-				Journal.Clear();
+				array<ref VB_ClanJournalRow> journal = new array<ref VB_ClanJournalRow>();
 				for (i = 0; i < n; i++)
 				{
 					VB_ClanJournalRow jr = new VB_ClanJournalRow();
 					if (!jr.Read(ctx))
 						return;
-					Journal.Insert(jr);
+					journal.Insert(jr);
 				}
+				Journal = journal;
 				break;
 			case VB_TabletOp.CLAN_NEWS:
-				if (!ctx.Read(n))
+				if (!ctx.Read(total) || !ctx.Read(n) || n < 0 || n > MAX_ROWS)
 					return;
-				News.Clear();
+				array<ref VB_ClanNews> news = new array<ref VB_ClanNews>();
 				for (i = 0; i < n; i++)
 				{
 					VB_ClanNews nw = new VB_ClanNews();
 					if (!nw.Read(ctx))
 						return;
-					News.Insert(nw);
+					news.Insert(nw);
 				}
+				News = news;
+				// Счётчик непрочитанного приходит со списком: шапка клана после новости не рассылается.
+				if (Clan)
+					Clan.NewsTotal = total;
 				break;
 			case VB_TabletOp.CLAN_CHAT:
-				if (!ctx.Read(n))
+				if (!ctx.Read(total) || !ctx.Read(n) || n < 0 || n > MAX_ROWS)
 					return;
-				Chat.Clear();
+				array<ref VB_ClanChatRow> chat = new array<ref VB_ClanChatRow>();
 				for (i = 0; i < n; i++)
 				{
 					VB_ClanChatRow cr = new VB_ClanChatRow();
 					if (!cr.Read(ctx))
 						return;
-					Chat.Insert(cr);
+					chat.Insert(cr);
 				}
+				Chat = chat;
+				if (Clan)
+					Clan.ChatTotal = total;
 				break;
 			case VB_TabletOp.CLAN_BANK:
-				if (!ctx.Read(n))
+				if (!ctx.Read(n) || n < 0 || n > MAX_ROWS)
 					return;
-				History.Clear();
+				array<ref VB_ClanBankRow> history = new array<ref VB_ClanBankRow>();
 				for (i = 0; i < n; i++)
 				{
 					VB_ClanBankRow br = new VB_ClanBankRow();
 					if (!br.Read(ctx))
 						return;
-					History.Insert(br);
+					history.Insert(br);
 				}
+				History = history;
 				break;
 			default:
 				if (!ReadBankPart(op, ctx))
@@ -418,7 +491,9 @@ class VB_TabletClient
 		if (!HasContracts || !GetGame())
 			return 0;
 		int left = MyContractLeft - (GetGame().GetTickTime() - ContractAt);
-		return Math.Max(0, left);
+		if (left < 0)
+			left = 0;
+		return left;
 	}
 
 	// Сообщение поверх игры: работает и с закрытым планшетом.
@@ -444,9 +519,8 @@ class VB_TabletClient
 	protected bool ReadContractList(ParamsReadContext ctx, array<ref VB_ClanContract> list)
 	{
 		int n;
-		if (!ctx.Read(n))
+		if (!ctx.Read(n) || n < 0 || n > MAX_ROWS)
 			return false;
-		list.Clear();
 		for (int i = 0; i < n; i++)
 		{
 			VB_ClanContract k = new VB_ClanContract();
@@ -463,35 +537,47 @@ class VB_TabletClient
 		int i;
 		if (op == VB_TabletOp.CONTRACTS)
 		{
-			if (!ctx.Read(ContractLeft) || !ctx.Read(MyContractLeft) || !ctx.Read(MyReplace))
+			int left;
+			int myLeft;
+			bool replace;
+			if (!ctx.Read(left) || !ctx.Read(myLeft) || !ctx.Read(replace))
 				return false;
+			array<ref VB_ClanContract> clanList = new array<ref VB_ClanContract>();
+			array<ref VB_ClanContract> myList = new array<ref VB_ClanContract>();
+			if (!ReadContractList(ctx, clanList) || !ReadContractList(ctx, myList))
+				return false;
+			ContractLeft = left;
+			MyContractLeft = myLeft;
+			MyReplace = replace;
 			ContractAt = GetGame().GetTickTime();
-			if (!ReadContractList(ctx, Contracts) || !ReadContractList(ctx, MyContracts))
-				return false;
+			Contracts = clanList;
+			MyContracts = myList;
 			HasContracts = true;
 			return true;
 		}
 		if (op == VB_TabletOp.ADMIN_BANNED)
 		{
-			if (!ctx.Read(n))
+			if (!ctx.Read(n) || n < 0 || n > MAX_ROWS)
 				return false;
-			Banned.Clear();
+			array<string> words = new array<string>();
 			for (i = 0; i < n; i++)
 			{
 				string word;
 				if (!ctx.Read(word))
 					return false;
-				Banned.Insert(word);
+				words.Insert(word);
 			}
+			Banned = words;
 			return true;
 		}
 		if (op == VB_TabletOp.ADMIN_MEMBERS)
 		{
-			if (!ctx.Read(AdminClan) || !ctx.Read(n))
+			string clanId;
+			if (!ctx.Read(clanId) || !ctx.Read(n) || n < 0 || n > MAX_ROWS)
 				return false;
-			AdminUids.Clear();
-			AdminNames.Clear();
-			AdminLeaders.Clear();
+			array<string> uids = new array<string>();
+			array<string> names = new array<string>();
+			array<bool> leaders = new array<bool>();
 			for (i = 0; i < n; i++)
 			{
 				string uid;
@@ -499,10 +585,14 @@ class VB_TabletClient
 				bool leader;
 				if (!ctx.Read(uid) || !ctx.Read(name) || !ctx.Read(leader))
 					return false;
-				AdminUids.Insert(uid);
-				AdminNames.Insert(name);
-				AdminLeaders.Insert(leader);
+				uids.Insert(uid);
+				names.Insert(name);
+				leaders.Insert(leader);
 			}
+			AdminClan = clanId;
+			AdminUids = uids;
+			AdminNames = names;
+			AdminLeaders = leaders;
 			return true;
 		}
 		return false;
@@ -512,12 +602,12 @@ class VB_TabletClient
 	{
 		int total;
 		int count;
-		if (!ctx.Read(total) || !ctx.Read(count))
+		if (!ctx.Read(total) || !ctx.Read(count) || count < 0 || count > MAX_ROWS)
 			return;
-		RatingNames.Clear();
-		RatingXp.Clear();
-		RatingTags.Clear();
-		RatingRanks.Clear();
+		array<string> names = new array<string>();
+		array<int> xps = new array<int>();
+		array<string> tags = new array<string>();
+		array<int> ranks = new array<int>();
 		for (int i = 0; i < count; i++)
 		{
 			string name;
@@ -525,17 +615,21 @@ class VB_TabletClient
 			string tag;
 			if (!ctx.Read(name) || !ctx.Read(xp) || !ctx.Read(tag))
 				return;
-			RatingNames.Insert(name);
-			RatingXp.Insert(xp);
-			RatingTags.Insert(tag);
+			names.Insert(name);
+			xps.Insert(xp);
+			tags.Insert(tag);
 		}
 		for (int r = 0; r < VB_RANK_COUNT; r++)
 		{
 			int n;
 			if (!ctx.Read(n))
 				return;
-			RatingRanks.Insert(n);
+			ranks.Insert(n);
 		}
+		RatingNames = names;
+		RatingXp = xps;
+		RatingTags = tags;
+		RatingRanks = ranks;
 		RatingTotal = total;
 		HasRating = true;
 		DataVersion++;

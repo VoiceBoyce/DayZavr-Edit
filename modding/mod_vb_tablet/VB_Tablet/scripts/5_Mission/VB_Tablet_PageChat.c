@@ -2,9 +2,7 @@
 class VB_TabletPageChat extends VB_TabletPage
 {
 	protected static const int MSG_MAX = 200;	// как ChatSend на сервере
-	protected static const float MSG_GAP = 2;	// как CHAT_GAP_SEC на сервере
 
-	protected static float s_LastSend = -100;
 
 	protected ScrollWidget m_List;
 	protected Widget m_Rows;
@@ -164,13 +162,13 @@ class VB_TabletPageChat extends VB_TabletPage
 		if (v == "" || VB_TabletBridge.Censored(v))
 			return;
 		float now = GetGame().GetTickTime();
-		if (now - s_LastSend < MSG_GAP)
+		VB_TabletClient client = VB_TabletClient.Get();
+		if (now - client.ChatSentAt < VB_TabletClient.CHAT_GAP)
 		{
 			INT_UIF_Toast.Error(VBT.T("#STR_VB_TAB_B_CHAT_WAIT"));
 			return;
 		}
-		s_LastSend = now;
-		VB_TabletClient client = VB_TabletClient.Get();
+		client.ChatSentAt = now;
 		ScriptRPC rpc = client.Begin(VB_TabletOp.CHAT_SEND);
 		rpc.Write(v);
 		client.Post(rpc);

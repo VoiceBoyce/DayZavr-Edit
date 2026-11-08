@@ -486,6 +486,8 @@ class VB_TabletPageMap extends VB_TabletPage
 		if (GetFocus())
 			SetFocus(null);
 		ClearTip();
+		// Окно категории лежит на экране планшета, а не на странице: без этого оно осталось бы сиротой.
+		CloseCatEdit();
 		if (m_Over)
 		{
 			m_Over.Show(false);
@@ -596,6 +598,8 @@ class VB_TabletPageMap extends VB_TabletPage
 	{
 		if (m_SeenVersion != m_State.Version)
 		{
+			// Сервер прислал область: сохранение принято (успех RESULT не шлёт), ждать ответа больше нечего.
+			m_SavePending = false;
 			m_SeenVersion = m_State.Version;
 			Relink();
 			m_Need = m_Need | NEED_PINS | NEED_SIDE | NEED_DRAFT | NEED_SHAPES;
@@ -842,18 +846,19 @@ class VB_TabletPageMap extends VB_TabletPage
 
 	protected void Drag()
 	{
-		float wx = WorldX(m_MouseA);
-		float wz = WorldZ(m_MouseB);
+		// В пределах мира и радиуса, как проверяет сервер: иначе объект пропал бы с общей ошибкой.
+		float wx = Math.Clamp(WorldX(m_MouseA), 0, VB_MAP_WORLD_MAX);
+		float wz = Math.Clamp(WorldZ(m_MouseB), 0, VB_MAP_WORLD_MAX);
 		if (m_DragNew)
 		{
-			m_DraftR = Hypot(wx - m_DraftPts.Get(0), wz - m_DraftPts.Get(1));
+			m_DraftR = Math.Clamp(Hypot(wx - m_DraftPts.Get(0), wz - m_DraftPts.Get(1)), 0, VB_MAP_RADIUS_MAX);
 			m_ShapesDirty = true;
 			return;
 		}
 		if (m_DragPoint < 0 || !m_Sel)
 			return;
 		if (m_Sel.Kind == VB_MapKind.CIRCLE)
-			m_Sel.Radius = Math.Max(VB_MAP_RADIUS_MIN, Hypot(wx - m_Sel.PX(0), wz - m_Sel.PZ(0)));
+			m_Sel.Radius = Math.Clamp(Hypot(wx - m_Sel.PX(0), wz - m_Sel.PZ(0)), VB_MAP_RADIUS_MIN, VB_MAP_RADIUS_MAX);
 		else
 			m_Sel.SetPoint(m_DragPoint, wx, wz);
 		m_SelDirty = true;
@@ -1267,12 +1272,12 @@ class VB_TabletPageMap extends VB_TabletPage
 		}
 		for (int i = 0; i < count; i++)
 		{
-			int px = Math.Round(m_DraftPts.Get(i * 2));
-			int pz = Math.Round(m_DraftPts.Get(i * 2 + 1));
+			int px = Math.Round(Math.Clamp(m_DraftPts.Get(i * 2), 0, VB_MAP_WORLD_MAX));
+			int pz = Math.Round(Math.Clamp(m_DraftPts.Get(i * 2 + 1), 0, VB_MAP_WORLD_MAX));
 			o.AddPoint(px, pz);
 		}
 		if (kind == VB_MapKind.CIRCLE)
-			o.Radius = Math.Round(m_DraftR);
+			o.Radius = Math.Round(Math.Clamp(m_DraftR, VB_MAP_RADIUS_MIN, VB_MAP_RADIUS_MAX));
 		m_State.Objects.Insert(o);
 		m_DraftKind = -1;
 		m_DraftPts.Clear();
@@ -2123,9 +2128,10 @@ class VB_TabletPageMap extends VB_TabletPage
 	protected void MatesMoved()
 	{
 		int have = 0;
+		// Соклановец: без объекта, размер 12 и не друг из пати (у друга тот же размер, его место ведёт пати).
 		foreach (VBT_MapPin pin : m_Items)
 		{
-			if (!pin.Obj && pin.Size == 12)
+			if (!pin.Obj && pin.Size == 12 && pin.FriendId == "")
 				have++;
 		}
 		int n = m_State.Mates.Count();
@@ -2139,7 +2145,7 @@ class VB_TabletPageMap extends VB_TabletPage
 		int k = 0;
 		foreach (VBT_MapPin item : m_Items)
 		{
-			if (item.Obj || item.Size != 12)
+			if (item.Obj || item.Size != 12 || item.FriendId != "")
 				continue;
 			VB_MapMate m = m_State.Mates.Get(k);
 			item.WX = m.X;
@@ -2556,8 +2562,14 @@ class VB_TabletPageMap extends VB_TabletPage
 		if (field != m_NameField || !m_Sel)
 			return;
 		string text = field.Get();
+		// Пустое поле: новый объект получает имя по умолчанию, у готового остаётся прежнее (а не имя
+		// другого объекта и не пустое, которое сервер отклонит вместе со всей правкой).
 		if (text == "")
+		{
+			if (m_Sel.ObjId > 0 || m_DefaultTitle == "")
+				return;
 			text = m_DefaultTitle;
+		}
 		if (text == m_Sel.Title)
 			return;
 		m_Sel.Title = text;

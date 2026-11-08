@@ -5,6 +5,7 @@ class VB_TabletPageContracts extends VB_TabletTabbedPage
 
 	protected TextWidget m_Timer;
 	protected float m_T = 1;
+	protected float m_SentAt = -100;
 	protected ref array<ref VBT_Button> m_Buttons;
 	protected ref array<int> m_ClaimAt;		// индекс контракта или -1
 	protected ref array<int> m_SwapAt;
@@ -117,7 +118,15 @@ class VB_TabletPageContracts extends VB_TabletTabbedPage
 		INT_UIF_Surface.Box(u, 0, 0, 316, 226, 10, VB_C_PANEL2);
 		VBT.Corners(u, 316, 226, VB_C_ACCENT, 14);
 		VBT.Cap(u, 20, 18, 276, "#STR_VB_TAB_C_REWARD");
-		array<int> rewards = {10, 25, 60};
+		array<int> rewards = new array<int>();
+		array<int> rewardMy = client.RewardMy;
+		for (int rt = 0; rt < 3; rt++)
+		{
+			int fallback = 0;
+			if (rewardMy && rt < rewardMy.Count())
+				fallback = rewardMy.Get(rt);
+			rewards.Insert(fallback);
+		}
 		for (int t = 0; t < 3; t++)
 		{
 			float y = 48 + t * 40;
@@ -360,6 +369,9 @@ class VB_TabletPageContracts extends VB_TabletTabbedPage
 		int left = VB_TabletClient.Get().NextDayLeft();
 		if (s_Tab == 1)
 			left = VB_TabletClient.Get().NextMyLeft();
+		// Набор сменился, пока экран открыт: новый список, кнопки старых карточек больше не годятся.
+		if (left <= 0)
+			VBA_Util.Ask(VB_TabletOp.CONTRACTS, 5);
 		int hh = left / 3600;
 		int mm = (left % 3600) / 60;
 		int ss = left % 60;
@@ -385,11 +397,20 @@ class VB_TabletPageContracts extends VB_TabletTabbedPage
 		m_Modal = null;
 	}
 
+	// Индекс и код контракта: сервер сверит, что набор не сменился. Повторное нажатие до ответа не уходит.
 	protected void PostIndex(int op, int index)
 	{
 		VB_TabletClient client = VB_TabletClient.Get();
+		if (index < 0 || index >= client.MyContracts.Count())
+			return;
+		float now = GetGame().GetTickTime();
+		if (now - m_SentAt < 1.5)
+			return;
+		m_SentAt = now;
+		string code = client.MyContracts.Get(index).Code;
 		ScriptRPC rpc = client.Begin(op);
 		rpc.Write(index);
+		rpc.Write(code);
 		client.Post(rpc);
 	}
 

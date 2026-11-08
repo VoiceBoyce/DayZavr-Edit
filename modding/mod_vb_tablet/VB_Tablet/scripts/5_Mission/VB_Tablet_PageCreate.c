@@ -14,6 +14,7 @@ class VBA_EmblemCell extends Managed
 
 class VB_TabletPageCreate extends VB_TabletPage
 {
+	protected static float s_SentAt = -100;
 	protected static const int TAG_CREATE = 1;
 
 	// Черновик не пропадает при переходе на другой экран.
@@ -239,8 +240,10 @@ class VB_TabletPageCreate extends VB_TabletPage
 		if (!rankOk)
 		{
 			string have = VBT.Num(xp);
-			string goal = VBT.Num(rates.RankNeed.Get(VB_TabletClient.Get().ClanRank));
-			string target = VBT.T(VBT.RankName(VB_TabletClient.Get().ClanRank));
+			// Ранг из конфига сервера может быть больше последнего: индекс ограничен.
+			int need = Math.Clamp(VB_TabletClient.Get().ClanRank, 0, VB_RANK_COUNT - 1);
+			string goal = VBT.Num(rates.RankNeed.Get(need));
+			string target = VBT.T(VBT.RankName(need));
 			rankText = have + "/" + goal + " " + VBT.T("#STR_VB_TAB_TO_RANK") + " «" + target + "»";
 		}
 		Check("#STR_VB_TAB_A_CHK_RANK", rankOk, rankText);
@@ -297,7 +300,9 @@ class VB_TabletPageCreate extends VB_TabletPage
 			cashCol = VB_C_GOLD;
 		VBK.MoneyR(p, 400, 72, cash, 20, cashCol);
 		INT_UIF_Draw.Text(p, 24, 104, 190, 26, "#STR_VB_TAB_A_LEFT_AFTER", 16, VB_C_DIM);
-		int rest = Math.Max(0, cash - VB_TabletClient.Get().ClanPrice);
+		int rest = cash - VB_TabletClient.Get().ClanPrice;
+		if (rest < 0)
+			rest = 0;
 		VBK.MoneyR(p, 400, 102, rest, 20, VB_C_TEXT);
 		INT_UIF_Draw.Line(p, 24, 138, 376, 1, VB_C_LINE);
 
@@ -352,6 +357,11 @@ class VB_TabletPageCreate extends VB_TabletPage
 
 	protected void Send()
 	{
+		// Один запрос за раз: второй клик до ответа сервера не уходит.
+		float now = GetGame().GetTickTime();
+		if (now - s_SentAt < 3)
+			return;
+		s_SentAt = now;
 		VB_TabletClient client = VB_TabletClient.Get();
 		string title = s_Name;
 		string tag = s_Tag;
@@ -406,9 +416,10 @@ class VB_TabletPageCreate extends VB_TabletPage
 		RefreshRight();
 	}
 
+	// Проверки повторяются в момент ответа: за время вопроса могли смениться деньги, клан, занятые имена.
 	override void OnAnswer(int tag, bool yes, string text)
 	{
-		if (tag == TAG_CREATE && yes)
+		if (tag == TAG_CREATE && yes && !VB_TabletClient.Get().Clan && RunChecks())
 			Send();
 	}
 
@@ -422,6 +433,12 @@ class VB_TabletPageCreate extends VB_TabletPage
 	}
 
 	// На экране поля ввода: новые данные обновляют только занятость и правую колонку.
+	// Деньги при себе меняются, пока экран открыт: профиль обновляется, проверка оплаты следует за ним.
+	override void Tick(float dt)
+	{
+		VBA_Util.Ask(VB_TabletOp.PROFILE, 5);
+	}
+
 	override bool OnData()
 	{
 		if (VB_TabletClient.Get().Clan)
@@ -547,6 +564,7 @@ class VB_TabletJoinBlock extends Managed
 	protected ref VBT_Button m_No;
 	protected ref VBT_Button m_Cancel;
 	protected string m_ClanId;
+	protected float m_SentAt = -100;
 
 	bool HasInvite()
 	{
@@ -602,6 +620,10 @@ class VB_TabletJoinBlock extends Managed
 
 	protected void Answer(bool accept)
 	{
+		float now = GetGame().GetTickTime();
+		if (now - m_SentAt < 2)
+			return;
+		m_SentAt = now;
 		VB_TabletClient client = VB_TabletClient.Get();
 		string id = m_ClanId;
 		bool flag = accept;

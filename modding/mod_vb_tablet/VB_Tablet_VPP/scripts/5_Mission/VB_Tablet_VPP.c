@@ -1,14 +1,23 @@
 // Связка планшета с картой VanillaPlusPlusMap, правки только здесь:
-//   - кнопка «В клан» в окне метки VPP: метка уходит в клановые метки планшета, личная метка VPP удаляется;
+//   - кнопка «В клан» в окне метки VPP: метка уходит в клановые метки планшета, личная метка VPP удаляется,
+//     когда метка появилась у клана (отказ сервера или молчание оставляют её в VPP);
 //   - группа «Метки клана» в списке меток слева: глазок (скрыта, 2D, 3D) по настройкам планшета, клик ведёт карту к метке;
 //   - 3D метки VPP остаются скрытыми после окна правки, если игрок спрятал их клавишей K.
 class VB_TabletVppUi
 {
 	static const string LAYOUT_BTN = "VB_Tablet_VPP/gui/vb_vpp_clanbtn.layout";
-	static const float RESULT_WAIT = 5;
+	static const float RESULT_WAIT = 10;
 
+	// Ожидание ответа на «В клан». Успех сервер не подтверждает отдельным ответом, он рассылает карту клана:
+	// метка считается принятой, когда у клана стало больше меток с этим именем в этой точке.
 	protected static int s_ResultSeen;
-	protected static float s_WaitUntil;
+	protected static int s_MapSeen;
+	protected static float s_WaitUntil;		// 0: ничего не ждём
+	protected static string s_PendTitle;
+	protected static vector s_PendPos;
+	protected static bool s_PendCustom;
+	protected static int s_PendBefore;
+	protected static VPPMapMenu s_PendMenu;	// без ref: карта VPP живёт сама по себе, удалённая даёт null
 
 	static bool CanClan()
 	{
@@ -16,10 +25,16 @@ class VB_TabletVppUi
 		return client.Clan && client.Can(VB_ClanPerm.MAP);
 	}
 
-	// Новая клановая метка из окна VPP. true: запрос ушёл, метку VPP можно убирать.
-	static bool SendClanMark(string name, string iconPath, vector color, vector pos)
+	// Новая клановая метка из окна VPP. true: запрос ушёл, окно правки можно закрывать.
+	// Сама метка VPP убирается в Watch, когда сервер её принял.
+	static bool SendClanMark(VPPMapMenu menu, string name, string iconPath, vector color, vector pos, bool isCustom)
 	{
 		VB_TabletClient client = VB_TabletClient.Get();
+		if (s_WaitUntil > 0)
+		{
+			INT_UIF_Toast.Info(VBT.T("#STR_VB_TAB_VPP_WAIT"));
+			return false;
+		}
 		if (!client.Clan)
 		{
 			INT_UIF_Toast.Error(VBT.T("#STR_VB_TAB_GC_NOCLAN"));
@@ -59,27 +74,82 @@ class VB_TabletVppUi
 		o.Write(rpc);
 		client.Post(rpc);
 		s_ResultSeen = client.ResultVersion;
+		s_MapSeen = st.Version;
+		s_PendTitle = title;
+		s_PendPos = pos;
+		s_PendCustom = isCustom;
+		s_PendBefore = CountSame(st, title, pos);
+		s_PendMenu = menu;
 		s_WaitUntil = GetGame().GetTickTime() + RESULT_WAIT;
-		INT_UIF_Toast.Success(VBT.T("#STR_VB_TAB_VPP_SENT"));
 		return true;
 	}
 
-	// Сервер отказал (лимит, слово, права): ответ показывается, пока открыта карта.
-	static void WatchResult()
+	// Клановые метки с этим именем в пределах 2 м от точки.
+	protected static int CountSame(VB_MapState st, string title, vector pos)
+	{
+		int n = 0;
+		foreach (VB_MapObject o : st.Objects)
+		{
+			if (o.Scope != VB_MapScope.CLAN || o.Kind != VB_MapKind.MARK || o.Title != title)
+				continue;
+			float ax;
+			float az;
+			o.AnchorOf(ax, az);
+			float dx = ax - pos[0];
+			float dz = az - pos[2];
+			if (dx * dx + dz * dz < 4)
+				n++;
+		}
+		return n;
+	}
+
+	// Каждый кадр игры (карта VPP может быть уже закрыта): ответ на «В клан».
+	static void Watch()
 	{
 		if (s_WaitUntil <= 0)
 			return;
 		VB_TabletClient client = VB_TabletClient.Get();
+		if (client.Map.Version != s_MapSeen)
+		{
+			s_MapSeen = client.Map.Version;
+			if (CountSame(client.Map, s_PendTitle, s_PendPos) > s_PendBefore)
+			{
+				Finish(true);
+				return;
+			}
+		}
 		if (client.ResultVersion != s_ResultSeen)
 		{
 			s_ResultSeen = client.ResultVersion;
 			if (!VBK.ResultIsGood(client.LastResult))
+			{
 				INT_UIF_Toast.Error(VBT.T(VBK.ResultText(client.LastResult)));
-			s_WaitUntil = 0;
-			return;
+				Finish(false);
+				return;
+			}
 		}
 		if (GetGame().GetTickTime() > s_WaitUntil)
-			s_WaitUntil = 0;
+		{
+			INT_UIF_Toast.Error(VBT.T("#STR_VB_TAB_VPP_NOANSWER"));
+			Finish(false);
+		}
+	}
+
+	// Принятая сервером метка убирается из личных меток VPP (и из её 3D меток).
+	protected static void Finish(bool ok)
+	{
+		s_WaitUntil = 0;
+		VPPMapMenu menu = s_PendMenu;
+		s_PendMenu = null;
+		if (!ok)
+			return;
+		INT_UIF_Toast.Success(VBT.T("#STR_VB_TAB_VPP_SENT"));
+		if (!menu)
+			return;
+		menu.RemoveMarkerExact(s_PendPos, s_PendCustom);
+		// VPP при перерисовке заново показывает все 3D метки: спрятанные клавишей K остаются спрятанными.
+		if (VB_TabletClient.Get().Hide3D)
+			g_Game.HideAll3dMarkers();
 	}
 
 	static string IconPath(VB_MapObject o)
@@ -123,17 +193,27 @@ class VB_TabletVppUi
 		return VB_MapMode.HIDDEN;
 	}
 
+	// Глазок одного объекта: 3D сверх лимита пропускается, по кругу дальше идёт «скрыта».
 	static void SetMode(VB_MapObject o, int mode)
+	{
+		SetModeEx(o, mode, VB_MapMode.HIDDEN, true);
+	}
+
+	// 3D сверх лимита: объект получает fallback, сообщение только если tell. false: лимит 3D не пустил.
+	static bool SetModeEx(VB_MapObject o, int mode, int fallback, bool tell)
 	{
 		VB_TabletClient client = VB_TabletClient.Get();
 		VB_MapState st = client.Map;
+		bool fit = true;
 		if (mode == VB_MapMode.WORLD && st.ModeOf(o) != VB_MapMode.WORLD && st.CountD3() >= st.Limits.D3Max)
 		{
-			INT_UIF_Toast.Error(VBT.T(VBK.ResultText(VB_TabletResult.MAP_D3)));
-			mode = VB_MapMode.HIDDEN;
+			if (tell)
+				INT_UIF_Toast.Error(VBT.T(VBK.ResultText(VB_TabletResult.MAP_D3)));
+			mode = fallback;
+			fit = false;
 		}
 		if (st.ModeOf(o) == mode)
-			return;
+			return fit;
 		st.SetMode(o, mode);
 		ScriptRPC rpc = client.Begin(VB_TabletOp.MAP_PREF);
 		int what = VB_MapPref.OBJECT;
@@ -142,6 +222,7 @@ class VB_TabletVppUi
 		rpc.Write(key);
 		rpc.Write(mode);
 		client.Post(rpc);
+		return fit;
 	}
 }
 
@@ -260,6 +341,8 @@ modded class MarkersListAdapter
 				target = VB_MapMode.WORLD;
 			else if (head.m_VisibleState == VisibleState.VISIBLE_2D_AND_3D)
 				target = VB_MapMode.HIDDEN;
+			// Вся группа в 3D: что не влезло в лимит 3D, остаётся на карте (2D), сообщение одно.
+			bool told = false;
 			foreach (ListItem li : head.m_ListItems)
 			{
 				VB_VppClanItem ci = VB_VppClanItem.Cast(li);
@@ -268,7 +351,8 @@ modded class MarkersListAdapter
 				int mode = target;
 				if (mode == VB_MapMode.WORLD && (ci.m_VbtObj.Kind != VB_MapKind.MARK || !st.Limits.Allow3D))
 					mode = VB_MapMode.FLAT;
-				VB_TabletVppUi.SetMode(ci.m_VbtObj, mode);
+				if (!VB_TabletVppUi.SetModeEx(ci.m_VbtObj, mode, VB_MapMode.FLAT, !told))
+					told = true;
 			}
 			return;
 		}
@@ -313,11 +397,8 @@ modded class EditDialog
 			string iconPath = m_IconListAdapter.GetSelectedIcon();
 			vector color = m_ColorListAdapter.GetSelectedColor();
 			vector pos = m_Marker.GetPosition();
-			if (VB_TabletVppUi.SendClanMark(name, iconPath, color, pos))
-			{
-				m_Menu.RemoveMarkerExact(pos, m_IsCustomServerMarker);
+			if (VB_TabletVppUi.SendClanMark(m_Menu, name, iconPath, color, pos, m_IsCustomServerMarker))
 				m_Menu.HideDialog();
-			}
 			return true;
 		}
 		return super.OnMouseButtonDown(w, x, y, button);
@@ -340,7 +421,6 @@ modded class VPPMapMenu
 			m_VbtSeenClan = clan;
 			m_Adapter.UpdateView();
 		}
-		VB_TabletVppUi.WatchResult();
 	}
 
 	// VPP после окна правки показывает все 3D метки: если игрок спрятал их клавишей K, они остаются скрытыми.
@@ -349,5 +429,15 @@ modded class VPPMapMenu
 		super.HideDialog();
 		if (VB_TabletClient.Get().Hide3D)
 			g_Game.HideAll3dMarkers();
+	}
+}
+
+// Ответ на «В клан» ждётся и после закрытия карты VPP.
+modded class MissionGameplay
+{
+	override void OnUpdate(float timeslice)
+	{
+		super.OnUpdate(timeslice);
+		VB_TabletVppUi.Watch();
 	}
 }

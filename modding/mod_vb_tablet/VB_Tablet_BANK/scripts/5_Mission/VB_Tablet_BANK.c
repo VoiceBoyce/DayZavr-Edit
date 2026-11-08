@@ -78,6 +78,7 @@ modded class INT_Bank_Menu
 	// операция
 	protected bool m_VbBusy;
 	protected float m_VbBusyLeft;
+	protected bool m_VbSegOff;			// кнопка «Клан» выключена: клан пропал, пока окно открыто
 	protected int m_VbOpKind;
 	protected int m_VbOpAmount;
 	protected int m_VbResultSeen;
@@ -101,7 +102,10 @@ modded class INT_Bank_Menu
 		float sw = 196;
 		float pw = sw * 2 + 16;
 		Widget pad = INT_UIF_Draw.Frame(center, (slot - pw) * 0.5, 14, pw, 48, "VbSwitch");
-		INT_UIF_Surface.Box(pad, 0, 0, pw, 48, 12, ARGB(150, 10, 8, 6), INT_Bank_UILook.Hair());
+		// Цвета в локальных: два вызова ARGB в одних аргументах затирают друг друга (Hair тоже зовёт ARGB).
+		int padFill = ARGB(150, 10, 8, 6);
+		int padRim = INT_Bank_UILook.Hair();
+		INT_UIF_Surface.Box(pad, 0, 0, pw, 48, 12, padFill, padRim);
 		m_VbSegMe = INT_Bank_UIButton.CreateFx(m_Bag, pad, 4, 4, sw, 40, "#STR_VB_BANK_ME", INT_UIF_Variant.PRIMARY, "user");
 		m_VbSegMe.SetSound(INT_Bank_Sfx.TAB);
 		m_VbSegMe.OnClick().Insert(VbOnSegMe);
@@ -146,12 +150,15 @@ modded class INT_Bank_Menu
 	{
 		VB_Clan c = VB_TabletClient.Get().Clan;
 		int col = c.Color;
-		int light = INT_UIF_Color.Lerp(col, ARGB(255, 255, 255, 255), 0.55);
+		int white = ARGB(255, 255, 255, 255);
+		int light = INT_UIF_Color.Lerp(col, white, 0.55);
 		m_VbCard = INT_UIF_Draw.Frame(parent, 0, 0, w, h, "VbClanCard");
 		INT_UIF_Surface.Shadow(m_VbCard, -22, -10, w + 44, h + 40, ARGB(190, 0, 0, 0));
 		INT_UIF_Surface.Glow(m_VbCard, -16, -14, w + 32, h + 28, INT_UIF_Color.WithAlpha(col, 46));
 		int deep = INT_UIF_Color.Shade(col, -0.76);
-		INT_UIF_Surface.Box(m_VbCard, 0, 0, w, h, 14, INT_UIF_Color.WithAlpha(deep, 255), INT_UIF_Color.WithAlpha(col, 170));
+		int cardFill = INT_UIF_Color.WithAlpha(deep, 255);
+		int cardRim = INT_UIF_Color.WithAlpha(col, 170);
+		INT_UIF_Surface.Box(m_VbCard, 0, 0, w, h, 14, cardFill, cardRim);
 		Widget clip = INT_UIF_Draw.Clip(m_VbCard, 2, 2, w - 4, h - 4, "VbCardClip");
 		float cw = w - 4;
 		float ch = h - 4;
@@ -170,7 +177,9 @@ modded class INT_Bank_Menu
 			tag.SetBold(true);
 
 		Widget tile = INT_UIF_Draw.Frame(clip, 20, 60, 64, 64, "VbEmblemTile");
-		INT_UIF_Surface.Box(tile, 0, 0, 64, 64, 12, ARGB(150, 0, 0, 0), INT_UIF_Color.WithAlpha(col, 140));
+		int tileFill = ARGB(150, 0, 0, 0);
+		int tileRim = INT_UIF_Color.WithAlpha(col, 140);
+		INT_UIF_Surface.Box(tile, 0, 0, 64, 64, 12, tileFill, tileRim);
 		VBK.Emblem(tile, 8, 8, 48, c.EmbShape, c.EmbSymbol, col);
 		TextWidget title = INT_UIF_Draw.Text(clip, 98, 66, cw - 120, 26, VBT.Fit(c.Title, cw - 120, 18), 18, ARGB(255, 255, 244, 230));
 		if (title)
@@ -194,7 +203,9 @@ modded class INT_Bank_Menu
 	protected void VbBuildBox(Widget parent, float x, float y, float w, float h)
 	{
 		m_VbBox = INT_UIF_Draw.Frame(parent, x, y, w, h, "VbStoreBox");
-		INT_UIF_Surface.Box(m_VbBox, 0, 0, w, h, 12, INT_Bank_UILook.Glass(), INT_Bank_UILook.Hair());
+		int boxFill = INT_Bank_UILook.Glass();
+		int boxRim = INT_Bank_UILook.Hair();
+		INT_UIF_Surface.Box(m_VbBox, 0, 0, w, h, 12, boxFill, boxRim);
 		INT_UIF_Draw.Caption(m_VbBox, 18, 14, w - 36, "#STR_VB_BANK_BOX", "shield");
 		m_VbBoxTax = CdRow(m_VbBox, 18, 46, w - 36, "#STR_VB_BANK_TAX_DAY");
 		m_VbBoxDays = CdRow(m_VbBox, 18, 72, w - 36, "#STR_VB_BANK_TAX_LEFT");
@@ -311,7 +322,9 @@ modded class INT_Bank_Menu
 	protected void VbBuildLock(Widget p, float w, float h)
 	{
 		Widget veil = INT_UIF_Draw.Frame(p, 0, 0, w, h, "VbLock");
-		INT_UIF_Surface.Box(veil, 0, 0, w, h, 14, ARGB(232, 14, 11, 8), INT_Bank_UILook.Hair());
+		int veilFill = ARGB(232, 14, 11, 8);
+		int veilRim = INT_Bank_UILook.Hair();
+		INT_UIF_Surface.Box(veil, 0, 0, w, h, 14, veilFill, veilRim);
 		INT_UIF_Draw.Hit(veil, 0, 0, w, h, null);
 		INT_UIF_Draw.IconTile(veil, w * 0.5 - 28, h * 0.5 - 92, 56, "lock", INT_Bank_UILook.Brass(), 14);
 		TextWidget head = INT_UIF_Draw.Text(veil, 0, h * 0.5 - 20, w, 30, "#STR_VB_BANK_LOCK_TITLE", 20, INT_Bank_UILook.Ink(), INT_UIF_Align.CENTER);
@@ -920,17 +933,21 @@ modded class INT_Bank_Menu
 			RequestRecent();
 			RefreshAll();
 		}
+		// Игрока исключили или клан распущен, пока окно открыто: обратно на личный счёт.
+		// Во время операции или окна поверх переключиться нельзя: проверка повторяется каждый кадр.
+		if (!client.Clan)
+		{
+			if (m_VbClan && !IsBusy() && !HasOverlay())
+				VbSetMode(false);
+			if (m_VbSegClan && !m_VbSegOff)
+			{
+				m_VbSegClan.SetEnabled(false);
+				m_VbSegOff = true;
+			}
+		}
 		if (client.DataVersion != m_VbDataSeen)
 		{
 			m_VbDataSeen = client.DataVersion;
-			// Игрока исключили или клан распущен, пока окно открыто: обратно на личный счёт.
-			if (!client.Clan)
-			{
-				if (m_VbClan && !IsBusy())
-					VbSetMode(false);
-				if (m_VbSegClan)
-					m_VbSegClan.SetEnabled(false);
-			}
 			VbFillHistory(false);
 			RefreshAll();
 		}

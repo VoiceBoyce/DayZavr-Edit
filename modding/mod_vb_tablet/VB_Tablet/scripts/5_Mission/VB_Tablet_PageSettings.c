@@ -17,6 +17,16 @@ class VB_TabletPageSettings extends VB_TabletPage
 	protected static float s_AskedAt = -100;
 	protected static bool s_Dissolving;
 	protected static string s_LeaderUid;
+	// Значения клана, с которых начат черновик: поле, которое игрок не трогал, следует за кланом.
+	protected static string s_BName;
+	protected static string s_BTag;
+	protected static string s_BDesc;
+	protected static bool s_BOpen;
+	protected static string s_BDisc;
+	protected static string s_BShape;
+	protected static string s_BSymbol;
+	protected static int s_BColor;
+	protected static float s_SentAt = -100;
 
 	protected int m_ClanCount;
 	protected Widget m_Right;
@@ -66,6 +76,8 @@ class VB_TabletPageSettings extends VB_TabletPage
 		m_ClanCount = client.Clans.Count();
 		if (s_Owner != c.Id)
 			TakeDraft(c);
+		else
+			SyncDraft(c);
 
 		Widget L = VBT.Card(m_Root, 0, 0, 724, 720);
 		Price(L, 28, 24, 408, "#STR_VB_TAB_B_SET_NAME", client.PriceName);
@@ -110,6 +122,64 @@ class VB_TabletPageSettings extends VB_TabletPage
 		s_Shape = c.EmbShape;
 		s_Symbol = c.EmbSymbol;
 		s_Color = c.Color;
+		Rebase(c);
+	}
+
+	protected void Rebase(VB_Clan c)
+	{
+		s_BName = c.Title;
+		s_BTag = c.Tag;
+		s_BDesc = c.Slogan;
+		s_BOpen = c.Open;
+		s_BDisc = c.Discord;
+		s_BShape = c.EmbShape;
+		s_BSymbol = c.EmbSymbol;
+		s_BColor = c.Color;
+	}
+
+	// Клан изменился (другой офицер, администратор): нетронутые поля черновика берут новое значение.
+	// true: что-то из показанного сменилось, экран надо перестроить.
+	protected bool SyncDraft(VB_Clan c)
+	{
+		bool changed = false;
+		if (s_Name == s_BName && s_Name != c.Title)
+		{
+			s_Name = c.Title;
+			changed = true;
+		}
+		if (s_Tag == s_BTag && s_Tag != c.Tag)
+		{
+			s_Tag = c.Tag;
+			changed = true;
+		}
+		if (s_Desc == s_BDesc && s_Desc != c.Slogan)
+		{
+			s_Desc = c.Slogan;
+			changed = true;
+		}
+		if (s_Open == s_BOpen && s_Open != c.Open)
+		{
+			s_Open = c.Open;
+			changed = true;
+		}
+		if (s_Disc == s_BDisc && s_Disc != c.Discord)
+		{
+			s_Disc = c.Discord;
+			changed = true;
+		}
+		if (s_Shape == s_BShape && s_Symbol == s_BSymbol && (s_Shape != c.EmbShape || s_Symbol != c.EmbSymbol))
+		{
+			s_Shape = c.EmbShape;
+			s_Symbol = c.EmbSymbol;
+			changed = true;
+		}
+		if (s_Color == s_BColor && s_Color != c.Color)
+		{
+			s_Color = c.Color;
+			changed = true;
+		}
+		Rebase(c);
+		return changed;
 	}
 
 	protected void ShowOpen()
@@ -376,7 +446,10 @@ class VB_TabletPageSettings extends VB_TabletPage
 		INT_UIF_Draw.Text(p, 24, 272, 200, 28, "#STR_VB_TAB_B_IN_BANK", 16, VB_C_DIM);
 		VBK.MoneyR(p, 400, 272, c.Bank, 20, VB_C_TEXT);
 		INT_UIF_Draw.Text(p, 24, 306, 200, 28, "#STR_VB_TAB_B_LEFT", 16, VB_C_DIM);
-		VBK.MoneyR(p, 400, 306, Math.Max(0, c.Bank - sum), 20, VB_C_TEXT);
+		int left = c.Bank - sum;
+		if (left < 0)
+			left = 0;
+		VBK.MoneyR(p, 400, 306, left, 20, VB_C_TEXT);
 		INT_UIF_Draw.Text(p, 24, 340, 376, 24, err, 14, VB_C_BAD);
 		m_Apply = new VBT_Button(p, 24, 376, 250, 54, "#STR_VB_TAB_B_APPLY", true, "check", m_Menu.GetHitHandler(), 17);
 		if (n == 0 || err != "")
@@ -397,6 +470,11 @@ class VB_TabletPageSettings extends VB_TabletPage
 			return;
 		if (VB_TabletBridge.Censored(s_Name) || VB_TabletBridge.Censored(s_Tag) || VB_TabletBridge.Censored(s_Desc))
 			return;
+		// Двойной клик не отправляет вторую оплату.
+		float now = GetGame().GetTickTime();
+		if (now - s_SentAt < 2)
+			return;
+		s_SentAt = now;
 		string title = TrimCopy(s_Name);
 		string tag = s_Tag;
 		string slogan = TrimCopy(s_Desc);
@@ -407,6 +485,22 @@ class VB_TabletPageSettings extends VB_TabletPage
 		string discord = "";
 		if (TrimCopy(s_Disc) != "")
 			discord = VB_TabletCheck.ClanInvite(s_Disc);
+		// Маска: только то, что игрок действительно поменял относительно клана сейчас.
+		int mask = 0;
+		if (title != c.Title)
+			mask = mask | VB_SetField.TITLE;
+		if (tag != c.Tag)
+			mask = mask | VB_SetField.TAG;
+		if (slogan != c.Slogan)
+			mask = mask | VB_SetField.SLOGAN;
+		if (shape != c.EmbShape || symbol != c.EmbSymbol)
+			mask = mask | VB_SetField.EMBLEM;
+		if (color != c.Color)
+			mask = mask | VB_SetField.COLOR;
+		if (open != c.Open)
+			mask = mask | VB_SetField.OPEN;
+		if (discord != c.Discord)
+			mask = mask | VB_SetField.DISCORD;
 		ScriptRPC rpc = client.Begin(VB_TabletOp.CLAN_SETTINGS);
 		rpc.Write(title);
 		rpc.Write(tag);
@@ -416,6 +510,7 @@ class VB_TabletPageSettings extends VB_TabletPage
 		rpc.Write(color);
 		rpc.Write(open);
 		rpc.Write(discord);
+		rpc.Write(mask);
 		client.Post(rpc);
 	}
 
@@ -479,13 +574,33 @@ class VB_TabletPageSettings extends VB_TabletPage
 			return true;
 		}
 		// Пришёл список кланов: занятые эмблемы надо затемнить. Черновик в статике не пропадёт.
-		if (client.Clans.Count() != m_ClanCount)
+		// Клан изменили другие (название, цвет, состав для передачи лидерства): экран строится заново.
+		bool drift = SyncDraft(client.Clan);
+		if (client.Clans.Count() != m_ClanCount || drift || OthersChanged(client.Clan))
 		{
 			SetFocus(null);
 			return false;
 		}
 		PaintRight();
 		return true;
+	}
+
+	// Состав для «Передать лидерство» другой, чем при построении экрана.
+	protected bool OthersChanged(VB_Clan c)
+	{
+		if (!m_Others)
+			return false;
+		string me = VB_TabletClient.Get().MyUid();
+		int n = 0;
+		foreach (VB_ClanMember m : c.Members)
+		{
+			if (m.Uid == me)
+				continue;
+			if (m_OtherUids.Find(m.Uid) < 0)
+				return true;
+			n++;
+		}
+		return n != m_OtherUids.Count();
 	}
 
 	override void OnAnswer(int tag, bool yes, string text)
@@ -499,10 +614,11 @@ class VB_TabletPageSettings extends VB_TabletPage
 		if (tag == TAG_LEADER)
 		{
 			string uid = s_LeaderUid;
+			if (!c.Member(uid))
+				return;
 			ScriptRPC give = client.Begin(VB_TabletOp.CLAN_LEADER);
 			give.Write(uid);
 			client.Post(give);
-			INT_UIF_Toast.Success(VBT.T("#STR_VB_TAB_B_SET_GIVEN"));
 			m_Menu.GoLater("clan");
 		}
 		else if (tag == TAG_DISSOLVE)
@@ -557,8 +673,16 @@ class VB_TabletPageSettings extends VB_TabletPage
 		}
 		if (m_Give && w == m_Give.Hit)
 		{
+			if (m_Others.Selected < 0 || m_Others.Selected >= m_OtherUids.Count())
+				return true;
 			s_LeaderUid = m_OtherUids.Get(m_Others.Selected);
 			VB_ClanMember target = c.Member(s_LeaderUid);
+			// Игрок успел выйти из клана: список устарел, экран строится заново.
+			if (!target)
+			{
+				Repaint();
+				return true;
+			}
 			string rank = VBT.T(c.Ranks.Get(1).Title);
 			m_Menu.Ask(TAG_LEADER, "#STR_VB_TAB_B_SET_GIVE_Q", VBB.Sub("#STR_VB_TAB_B_SET_GIVE_T", target.PlayerName, rank), "#STR_VB_TAB_B_SET_GIVE_BTN", true);
 			return true;

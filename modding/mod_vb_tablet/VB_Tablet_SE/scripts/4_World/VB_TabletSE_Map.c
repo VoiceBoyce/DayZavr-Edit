@@ -36,6 +36,8 @@ class VB_TabletMap
 
 	protected static ref map<string, ref VB_MapPlayerFile> s_Players;
 	protected static ref VB_MapServerFile s_Server;
+	protected static bool s_ServerBroken;						// map_server.json не читается: не перезаписываем
+	protected static ref array<string> s_DirtyPlayers = new array<string>();	// личные файлы ждут записи (Flush)
 
 	static void Handle(PlayerBase player, PlayerIdentity id, int op, ParamsReadContext ctx)
 	{
@@ -71,11 +73,22 @@ class VB_TabletMap
 		}
 	}
 
-	// Игрок вышел: файл уже записан при каждом изменении.
+	// Игрок вышел: несохранённое пишется, файл выгружается из памяти.
 	static void Release(string uid)
 	{
+		if (s_DirtyPlayers.Find(uid) >= 0)
+			WritePlayer(uid);
 		if (s_Players)
 			s_Players.Remove(uid);
+	}
+
+	// Из таймера миссии и при остановке: личные файлы карты пишутся пачкой, а не на каждый клик настроек.
+	static void Flush()
+	{
+		array<string> list = new array<string>();
+		list.Copy(s_DirtyPlayers);
+		foreach (string uid : list)
+			WritePlayer(uid);
 	}
 
 	// --- хранение ---------------------------------------------------------------------------
@@ -91,20 +104,20 @@ class VB_TabletMap
 		VB_MapPlayerFile f;
 		if (s_Players.Find(uid, f))
 			return f;
-		f = new VB_MapPlayerFile();
+		f = null;
 		string path = PathOf(uid);
 		string error;
-		bool ok = false;
-		if (FileExist(path))
-			ok = JsonFileLoader<VB_MapPlayerFile>.LoadFile(path, f, error);
-		if (!ok && FileExist(path + ".bak"))
+		for (int n = 0; n < 3; n++)
 		{
-			f = new VB_MapPlayerFile();
-			ok = JsonFileLoader<VB_MapPlayerFile>.LoadFile(path + ".bak", f, error);
-			if (ok)
-				Print(VB_TABLET_TAG + " карта игрока прочитана из копии: " + uid);
+			VB_MapPlayerFile read = new VB_MapPlayerFile();
+			if (VB_SafeJson<VB_MapPlayerFile>.LoadFrom(VB_TabletFiles.Attempt(path, n), read, error))
+			{
+				VB_TabletFiles.Recovered(path, n);
+				f = read;
+				break;
+			}
 		}
-		if (!ok)
+		if (!f)
 			f = new VB_MapPlayerFile();
 		f.Fix();
 		s_Players.Set(uid, f);
@@ -113,14 +126,19 @@ class VB_TabletMap
 
 	protected static void SavePlayer(string uid)
 	{
-		MakeDirectory(VB_TabletConfig.DIR_ROOT);
-		MakeDirectory(VB_TabletConfig.DIR_MOD);
+		if (s_DirtyPlayers.Find(uid) < 0)
+			s_DirtyPlayers.Insert(uid);
+	}
+
+	protected static void WritePlayer(string uid)
+	{
+		s_DirtyPlayers.RemoveItem(uid);
+		if (!VB_TabletCheck.IsSteam64(uid))
+			return;
+		VB_TabletFiles.Dirs();
 		MakeDirectory(VB_TabletPlayers.DIR_PLAYERS);
-		string path = PathOf(uid);
-		if (FileExist(path))
-			CopyFile(path, path + ".bak");
 		string error;
-		if (!JsonFileLoader<VB_MapPlayerFile>.SaveFile(path, FileOf(uid), error))
+		if (!VB_SafeJson<VB_MapPlayerFile>.Save(PathOf(uid), FileOf(uid), error))
 			Print(VB_TABLET_TAG + " не записана карта игрока " + uid + ": " + error);
 	}
 
@@ -128,11 +146,28 @@ class VB_TabletMap
 	{
 		if (s_Server)
 			return s_Server;
-		s_Server = new VB_MapServerFile();
+		s_Server = null;
 		string error;
-		if (FileExist(FILE_SERVER) && !JsonFileLoader<VB_MapServerFile>.LoadFile(FILE_SERVER, s_Server, error))
+		bool any = false;
+		for (int n = 0; n < 3; n++)
 		{
-			Print(VB_TABLET_TAG + " ошибка в map_server.json: " + error);
+			string file = VB_TabletFiles.Attempt(FILE_SERVER, n);
+			if (!FileExist(file))
+				continue;
+			any = true;
+			VB_MapServerFile read = new VB_MapServerFile();
+			if (JsonFileLoader<VB_MapServerFile>.LoadFile(file, read, error))
+			{
+				VB_TabletFiles.Recovered(FILE_SERVER, n);
+				s_Server = read;
+				break;
+			}
+			Print(VB_TABLET_TAG + " ошибка в " + file + ": " + error);
+		}
+		// Файл есть, но ни одна копия не читается: серверные метки не затираем пустым списком.
+		if (!s_Server)
+		{
+			s_ServerBroken = any;
 			s_Server = new VB_MapServerFile();
 		}
 		if (!s_Server.Objects)
@@ -142,10 +177,14 @@ class VB_TabletMap
 
 	protected static void SaveServer()
 	{
+		if (s_ServerBroken)
+		{
+			Print(VB_TABLET_TAG + " map_server.json повреждён, изменения серверных меток не записаны. Почините файл и перезапустите сервер.");
+			return;
+		}
 		string error;
-		if (FileExist(FILE_SERVER))
-			CopyFile(FILE_SERVER, FILE_SERVER + ".bak");
-		if (!JsonFileLoader<VB_MapServerFile>.SaveFile(FILE_SERVER, ServerFile(), error))
+		VB_TabletFiles.Dirs();
+		if (!VB_SafeJson<VB_MapServerFile>.Save(FILE_SERVER, ServerFile(), error))
 			Print(VB_TABLET_TAG + " не записан map_server.json: " + error);
 	}
 
@@ -525,6 +564,16 @@ class VB_TabletMap
 		}
 		if (was && oldScope == o.Scope)
 		{
+			// Вид сменился (метка стала зоной): у нового вида свой лимит.
+			if (!VB_MapState.SameLimit(was.Kind, o.Kind))
+			{
+				int limKind = VB_TabletConfig.Get().MapLimits.Of(o.Scope, o.Kind);
+				if (CountIn(list, o.Kind) >= limKind)
+				{
+					VB_TabletServer.SendResult(player, id, VB_TabletResult.MAP_LIMIT);
+					return;
+				}
+			}
 			o.Author = was.Author;
 			list.Set(list.Find(was), o);
 			Persist(uid, o.Scope);
@@ -575,11 +624,16 @@ class VB_TabletMap
 			return;
 		}
 		array<ref VB_MapObject> list = ListOf(uid, scope);
-		if (!list)
-			return;
-		VB_MapObject o = FindIn(list, objId);
+		VB_MapObject o = null;
+		if (list)
+			o = FindIn(list, objId);
+		// Объекта уже нет (удалил другой соклановец): клиент получает свежий список вместо тишины.
 		if (!o)
+		{
+			if (list)
+				Push(player, id, scope);
 			return;
+		}
 		list.RemoveOrdered(list.Find(o));
 		VB_MapPlayerFile f = FileOf(uid);
 		int key = scope * VB_MAP_KEY_STEP + objId;
@@ -694,8 +748,20 @@ class VB_TabletMap
 		if (what == VB_MapPref.CATEGORY)
 		{
 			f.HiddenCats.RemoveItem(key);
-			if (mode == VB_MapMode.HIDDEN)
+			VB_Clan c = VB_TabletClans.OfPlayer(uid);
+			bool known = false;
+			if (c && c.MapCats)
+			{
+				foreach (VB_MapCat cat : c.MapCats)
+				{
+					if (cat.CatId == key)
+						known = true;
+				}
+			}
+			if (mode == VB_MapMode.HIDDEN && known)
 				f.HiddenCats.Insert(key);
+			while (f.HiddenCats.Count() > VB_TabletConfig.Get().MapLimits.ClanCats + 1)
+				f.HiddenCats.RemoveOrdered(0);
 			SavePlayer(uid);
 			return;
 		}

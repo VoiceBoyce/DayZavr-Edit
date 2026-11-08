@@ -2,6 +2,7 @@
 // Раздел виден только администраторам, сервер всё равно проверяет каждую операцию.
 class VB_TabletPageAdmin extends VB_TabletPage
 {
+	protected float m_ModSentAt = -100;
 	static const int TAG_DISSOLVE = 3001;
 
 	static string s_Sel;	// id выбранного клана
@@ -52,7 +53,7 @@ class VB_TabletPageAdmin extends VB_TabletPage
 	{
 		if (row.TaxFree > 0)
 			return -1;
-		return row.Bank / VB_TabletClient.Get().ClanTax;
+		return VB_TabletClient.Get().TaxDays(row.Bank);
 	}
 
 	protected void BuildTable(array<ref VB_ClanRow> rows)
@@ -394,6 +395,7 @@ class VB_TabletPageAdmin extends VB_TabletPage
 	{
 		if (!m_Modal || !m_Modal.IsOpen())
 			return;
+		m_ModSentAt = -100;
 		if (VBK.ResultIsGood(code))
 		{
 			CloseModal();
@@ -401,6 +403,9 @@ class VB_TabletPageAdmin extends VB_TabletPage
 		}
 		else if (m_ModErr)
 			m_ModErr.SetText(VBK.ResultText(code));
+		// У окна смены лидера нет строки ошибки: клан пропал или отказ, окно закрывается (тост уже показан).
+		else
+			CloseModal();
 	}
 
 	// Пока открыто окно или набрано слово, экран не перестраиваем: иначе пропадёт ввод.
@@ -428,6 +433,11 @@ class VB_TabletPageAdmin extends VB_TabletPage
 				CloseModal();
 			else if (m_ModYes && w == m_ModYes.Hit)
 			{
+				// Один запрос до ответа сервера: второй клик не шлёт повтор.
+				float now = GetGame().GetTickTime();
+				if (now - m_ModSentAt < 3)
+					return true;
+				m_ModSentAt = now;
 				if (m_ModalKind == 1)
 					SaveRename();
 				else

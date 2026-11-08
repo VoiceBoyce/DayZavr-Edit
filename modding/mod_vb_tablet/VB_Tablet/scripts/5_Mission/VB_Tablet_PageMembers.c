@@ -2,6 +2,7 @@
 // Экран обновляется на месте, без полной перестройки: так не сбрасываются прокрутка, выбор и открытые окна.
 class VB_TabletPageMembers extends VB_TabletPage
 {
+	protected string m_LastInvite;	// ник последнего приглашения: при отказе сервера пометка «отправлено» снимается
 	protected static const int TAG_KICK = 1;
 	protected static const int POP_NONE = 0;
 	protected static const int POP_REQUESTS = 1;
@@ -751,7 +752,7 @@ class VB_TabletPageMembers extends VB_TabletPage
 			INT_UIF_Draw.Text(b, 28, 72, w - 56, 32, "#STR_VB_TAB_A_INV_FULL", 16, VB_C_DIM);
 			return;
 		}
-		m_InvField = new VBT_Input(b, 28, 72, 326, 44, "#STR_VB_TAB_A_INV_NICK", 24);
+		m_InvField = new VBT_Input(b, 28, 72, 326, 44, "#STR_VB_TAB_A_INV_NICK", 32);
 		m_InvCall = new VBT_Button(b, 364, 72, 128, 44, "#STR_VB_TAB_A_INV_CALL", true, "", m_Menu.GetHitHandler());
 		INT_UIF_Draw.Line(b, 28, 132, 464, 1, VB_C_LINE);
 		VBT.Cap(b, 28, 146, 300, "#STR_VB_TAB_A_INV_NEAR");
@@ -805,6 +806,17 @@ class VB_TabletPageMembers extends VB_TabletPage
 		client.Post(rpc);
 		if (m_Sent.Find(nick) < 0)
 			m_Sent.Insert(nick);
+		m_LastInvite = nick;
+	}
+
+	// Приглашение не ушло (игрока нет, уже в клане, клан полон): кнопка «Позвать» возвращается.
+	override void OnResult(int code)
+	{
+		if (m_LastInvite == "" || VBK.ResultIsGood(code))
+			return;
+		m_Sent.RemoveItem(m_LastInvite);
+		m_LastInvite = "";
+		PaintNear();
 	}
 
 	protected void CallByField()
@@ -924,8 +936,7 @@ class VB_TabletPageMembers extends VB_TabletPage
 		rpc.Write(target);
 		rpc.Write(rank);
 		client.Post(rpc);
-		string note = m.PlayerName + ": " + m_RankNames.Get(index);
-		INT_UIF_Toast.Success(note);
+		// Без тоста об успехе до ответа: при отказе сервер пришлёт ошибку, при успехе ранг сменится в списке.
 	}
 
 	override void OnAnswer(int tag, bool yes, string text)

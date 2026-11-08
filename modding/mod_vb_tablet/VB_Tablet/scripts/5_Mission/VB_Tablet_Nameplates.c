@@ -238,13 +238,22 @@ class VB_TabletNameplates
 		set<Object> hits = new set<Object>();
 		Object me = GetGame().GetPlayer();
 		DayZPhysics.RaycastRV(from, head, hitPos, hitDir, hitComp, hits, p, me, true, false, ObjIntersectView);
-		if (hits.Count() == 0)
-			return true;
-		Object first = hits.Get(0);
-		if (first == p)
-			return true;
-		EntityAI e = EntityAI.Cast(first);
-		return e && e.GetHierarchyRoot() == p;
+		// Попадания по порядку: свои вещи (рюкзак, оружие за спиной в виде от третьего лица) пропускаются,
+		// вещи цели значат «видно», всё остальное закрывает голову.
+		int n = hits.Count();
+		for (int i = 0; i < n; i++)
+		{
+			Object hit = hits.Get(i);
+			if (!hit || hit == me)
+				continue;
+			EntityAI e = EntityAI.Cast(hit);
+			if (e && e.GetHierarchyRoot() == me)
+				continue;
+			if (hit == p || (e && e.GetHierarchyRoot() == p))
+				return true;
+			return false;
+		}
+		return true;
 	}
 
 	// Пати рисует над этим игроком свою метку: он друг, в сети, включён в показ, метки пати не скрыты.

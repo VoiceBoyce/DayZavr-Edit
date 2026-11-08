@@ -22,10 +22,9 @@ class VB_TabletPageRank extends VB_TabletTabbedPage
 	override void Build()
 	{
 		VB_TabletClient session = VB_TabletClient.Get();
-		if (!session.HasProfile)
-			session.Request(VB_TabletOp.PROFILE);
-		if (!session.HasRating)
-			session.Request(VB_TabletOp.RATING);
+		// Опыт и место растут в игре: свежие при каждом открытии, не чаще раза в 5 с.
+		VBA_Util.Ask(VB_TabletOp.PROFILE, 5);
+		VBA_Util.Ask(VB_TabletOp.RATING, 5);
 		InitTabs(110);
 		m_TabNames.Insert("#STR_VB_TAB_OVERVIEW");
 		m_TabNames.Insert("#STR_VB_TAB_ACHIEVEMENTS");
@@ -129,7 +128,10 @@ class VB_TabletPageRank extends VB_TabletTabbedPage
 		Widget f = VBT.Card(m_Root, 0, 514, 760, 206, "#STR_VB_TAB_SOURCES");
 		float w = 120;
 		string xpl = " " + VBT.T("#STR_VB_TAB_XP_L");
-		Source(f, 20, w, "star", VBT.T("#STR_VB_TAB_SRC_ACH"), VBT.T("#STR_VB_TAB_BY_STEPS"), me.AchXp(r));
+		// Два VBT.T в одних аргументах затирают друг друга: подпись «Достижения» показывала бы «по ступеням».
+		string achName = VBT.T("#STR_VB_TAB_SRC_ACH");
+		string achHint = VBT.T("#STR_VB_TAB_BY_STEPS");
+		Source(f, 20, w, "star", achName, achHint, me.AchXp(r));
 		Source(f, 20 + w, w, "zombie", VBT.T("#STR_VB_TAB_SRC_Z"), "+" + r.XpZombie.ToString() + xpl, me.Zombies * r.XpZombie);
 		Source(f, 20 + w * 2, w, "crosshair", VBT.T("#STR_VB_TAB_SRC_M"), "+" + r.XpMutant.ToString() + xpl, me.Mutants * r.XpMutant);
 		Source(f, 20 + w * 3, w, "stash", VBT.T("#STR_VB_TAB_SRC_A"), "+" + r.XpAnimal.ToString() + xpl, me.Animals * r.XpAnimal);

@@ -17,7 +17,8 @@ const string VB_BANK_PEER = "VBCLAN:";
 
 enum VB_TabletOp
 {
-	HELLO = 1,		// C2S пусто; S2C: string имя сервера, bool администратор, VB_TabletRates, int цены: название, тег, эмблема, цвет
+	HELLO = 1,		// C2S пусто; S2C: string имя сервера, bool администратор, VB_TabletRates, int цены: название, тег, эмблема, цвет,
+					// int цена клана, ранг для клана, участников, кланов, лимит склада, налог, array<int> призы недели, array<int> RewardMy
 	PROFILE = 2,	// C2S пусто; S2C: VB_TabletStats
 	RATING = 3,		// C2S пусто; S2C: int мест всего, int строк, строки (string, int опыт, string тег), int[10] игроков по рангам
 	RESULT = 4,		// S2C: int VB_TabletResult
@@ -40,7 +41,8 @@ enum VB_TabletOp
 	CLAN_LEAVE = 28,
 	CLAN_DISSOLVE = 29,	// string название клана для подтверждения
 	CLAN_LEADER = 30,	// string uid нового лидера
-	CLAN_SETTINGS = 31,	// string название, тег, слоган, форма, символ, int цвет, bool набор, string discord
+	CLAN_SETTINGS = 31,	// string название, тег, слоган, форма, символ, int цвет, bool набор, string discord, int маска VB_SetField
+								// (сервер меняет только отмеченные поля: чужие правки, сделанные пока черновик был открыт, не откатываются)
 	CLAN_RANKS = 32,	// int строк, VB_ClanRank
 	NEWS_SAVE = 33,		// int id (0 новая), int тип, string заголовок, текст, bool закрепить
 	NEWS_DELETE = 34,	// int id
@@ -52,8 +54,8 @@ enum VB_TabletOp
 	ATM_DEPOSIT = 41,	// int сумма: наличные на склад клана (у банкомата банка)
 	ATM_WITHDRAW = 42,	// int сумма: со склада наличными
 	CONTRACTS = 43,		// C2S пусто; S2C: int секунд до нового набора, bool замена доступна, int строк, VB_ClanContract клановые, int строк, VB_ClanContract личные
-	CONTRACT_CLAIM = 44,	// int индекс личного контракта
-	CONTRACT_REPLACE = 45,	// int индекс личного контракта
+	CONTRACT_CLAIM = 44,	// int индекс личного контракта, string его код (набор мог смениться)
+	CONTRACT_REPLACE = 45,	// int индекс личного контракта, string его код
 	NOTIFY = 46,		// S2C: string ключ, string аргумент, int вид (0 инфо, 1 успех, 2 ошибка)
 	ADMIN_MEMBERS = 47,	// C2S string клан; S2C: string клан, int строк, строки (string uid, string ник, bool лидер)
 	ADMIN_RENAME = 48,	// string клан, название, тег
@@ -73,6 +75,18 @@ enum VB_TabletOp
 	MAP_CAT_DELETE = 66,	// int id
 	MAP_PREF = 67,		// int VB_MapPref, int ключ, int VB_MapMode
 	MAP_MATES = 68,		// C2S пусто; S2C: int строк, VB_MapMate
+}
+
+// Поля настроек клана в маске CLAN_SETTINGS.
+enum VB_SetField
+{
+	TITLE = 1,
+	TAG = 2,
+	SLOGAN = 4,
+	EMBLEM = 8,
+	COLOR = 16,
+	OPEN = 32,
+	DISCORD = 64
 }
 
 // Палитра макета. Акцент позже берётся из цвета клана.
@@ -172,13 +186,14 @@ class VB_TabletRates
 	{
 		if (!ctx.Read(XpZombie) || !ctx.Read(XpMutant) || !ctx.Read(XpAnimal) || !ctx.Read(XpKm) || !ctx.Read(XpContract))
 			return false;
-		RankNeed.Clear();
+		// Пороги во временный массив: при обрыве пакета RankNeed остаётся полным (RankOf читает все 10).
+		array<int> needs = new array<int>();
 		for (int i = 0; i < VB_RANK_COUNT; i++)
 		{
 			int need;
 			if (!ctx.Read(need))
 				return false;
-			RankNeed.Insert(need);
+			needs.Insert(need);
 		}
 		array<int> levels = new array<int>();
 		for (int k = 0; k < VB_CLAN_LEVELS; k++)
@@ -188,6 +203,7 @@ class VB_TabletRates
 				return false;
 			levels.Insert(lv);
 		}
+		RankNeed = needs;
 		SetLevels(levels);
 		return true;
 	}
@@ -377,6 +393,9 @@ class VB_TabletAch
 // Проверки ввода, одинаковые на клиенте и на сервере.
 class VB_TabletCheck
 {
+	protected static ref array<string> s_Upper;
+	protected static ref array<string> s_Lower;
+
 	protected static bool OnlyChars(string s, string allowed)
 	{
 		int n = s.Length();
@@ -440,5 +459,75 @@ class VB_TabletCheck
 		if (!OnlyChars(code, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-"))
 			return "";
 		return "discord.gg/" + code;
+	}
+
+	// Тег клана: 2..4 заглавные латинские буквы и цифры. Экраны чистят ввод так же, сервер проверяет.
+	static bool TagValid(string tag)
+	{
+		int n = tag.Length();
+		if (n < 2 || n > 4)
+			return false;
+		return OnlyChars(tag, "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
+	}
+
+	// Steam64: ровно 17 цифр. Всё, что клиент присылает как uid и что может попасть в путь файла.
+	static bool IsSteam64(string uid)
+	{
+		return uid.Length() == 17 && OnlyChars(uid, "0123456789");
+	}
+
+	// Нижний регистр и для кириллицы: string.ToLower меняет только латиницу.
+	static string Lower(string s)
+	{
+		string r = s + "";
+		r.ToLower();
+		if (!s_Upper)
+		{
+			s_Upper = {"А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ы", "Ь", "Э", "Ю", "Я"};
+			s_Lower = {"а", "б", "в", "г", "д", "е", "ё", "ж", "з", "и", "й", "к", "л", "м", "н", "о", "п", "р", "с", "т", "у", "ф", "х", "ц", "ч", "ш", "щ", "ъ", "ы", "ь", "э", "ю", "я"};
+		}
+		int n = s_Upper.Count();
+		for (int i = 0; i < n; i++)
+			r.Replace(s_Upper.Get(i), s_Lower.Get(i));
+		return r;
+	}
+
+}
+
+// Эмблема и цвет клана: одни списки для экранов и для проверки на сервере.
+// Имена методов не Shapes/Colors: Colors это ванильный класс, вызов Colors() внутри класса создаёт его.
+class VB_ClanLook
+{
+	protected static ref array<string> s_Shapes;
+	protected static ref array<string> s_Symbols;
+	protected static ref array<int> s_Colors;
+
+	static array<string> ShapeIds()
+	{
+		if (!s_Shapes)
+			s_Shapes = {"shield", "crest", "chevron", "circle", "hex", "octagon", "pentagon", "diamond", "square", "banner", "badge", "star"};
+		return s_Shapes;
+	}
+
+	static array<string> SymbolIds()
+	{
+		if (!s_Symbols)
+			s_Symbols = {"crown", "bolt", "flame", "mountain", "star", "cross", "sword", "tree", "target", "gem", "moon", "skull", "wolf", "paw", "fish", "feather", "leaf", "sun", "snow", "wave", "drop", "axe", "hammer", "spear", "arrow", "anchor", "key", "cog", "castle", "tower", "compass", "hourglass", "eye", "bell", "heart", "horseshoe"};
+		return s_Symbols;
+	}
+
+	static array<int> ColorIds()
+	{
+		if (!s_Colors)
+			s_Colors = {0xFFFF7A1A, 0xFFE9C55B, 0xFFB4D455, 0xFF6FBF8E, 0xFF2FC4B2, 0xFF5CB8F0, 0xFF8FA6FF, 0xFFB08CFF, 0xFFD66BB0, 0xFFEF5B4C, 0xFFC98A5A, 0xFFCFCAC2};
+		return s_Colors;
+	}
+
+	static bool Valid(string shape, string symbol, int color)
+	{
+		array<string> shapes = ShapeIds();
+		array<string> symbols = SymbolIds();
+		array<int> colors = ColorIds();
+		return shapes.Find(shape) >= 0 && symbols.Find(symbol) >= 0 && colors.Find(color) >= 0;
 	}
 }

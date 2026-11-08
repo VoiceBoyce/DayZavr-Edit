@@ -84,10 +84,18 @@ class VB_TabletPlayers
 {
 	static const string DIR_PLAYERS = "$profile:VB_Mods/VB_Tablet/players";
 	static const string FILE_RATING = "$profile:VB_Mods/VB_Tablet/rating.json";
+	static const int SORT_GAP_MS = 30000;		// порядок рейтинга пересчитывается не чаще
+	static const int RATING_SAVE_MS = 300000;	// rating.json пишется не чаще (это сводка, записи игроков главнее)
 
 	protected static ref map<string, ref VB_TabletRecord> s_Online = new map<string, ref VB_TabletRecord>();
 	protected static ref VB_TabletRatingFile s_Rating;
+	protected static ref map<string, ref VB_TabletRatingRow> s_RowOf;	// uid -> строка рейтинга
+	protected static ref array<ref VB_TabletRatingRow> s_Sorted;		// по убыванию опыта
+	protected static ref map<string, int> s_Place;						// uid -> место, с 1
 	protected static bool s_RatingDirty;
+	protected static bool s_OrderDirty = true;
+	protected static int s_SortedAt = -1000000;
+	protected static int s_RatingSavedAt;
 
 	protected static string PathOf(string uid)
 	{
@@ -109,35 +117,63 @@ class VB_TabletPlayers
 		return 365 * y + y / 4 - y / 100 + y / 400 + (153 * (m - 3) + 2) / 5 + d - 719469;
 	}
 
+	// Запись с диска: основной файл, копия .bak, недописанный .tmp. null: файла нет или он не читается.
+	// uid проверяется: он попадает в путь файла.
+	protected static VB_TabletRecord ReadFile(string uid)
+	{
+		if (!VB_TabletCheck.IsSteam64(uid))
+			return null;
+		string path = PathOf(uid);
+		string error;
+		for (int n = 0; n < 3; n++)
+		{
+			string file = VB_TabletFiles.Attempt(path, n);
+			if (!FileExist(file))
+				continue;
+			VB_TabletRecord rec = new VB_TabletRecord();
+			if (JsonFileLoader<VB_TabletRecord>.LoadFile(file, rec, error))
+			{
+				VB_TabletFiles.Recovered(path, n);
+				rec.Uid = uid;
+				return rec;
+			}
+			Print(VB_TABLET_TAG + " не прочитан игрок " + file + ": " + error);
+		}
+		return null;
+	}
+
+	// Игрок в сети: запись живёт в памяти до выхода. Для офлайн-игроков Peek (чтение) и Edit/Commit (правка).
 	static VB_TabletRecord Get(string uid, string name)
 	{
 		VB_TabletRecord rec;
 		if (s_Online.Find(uid, rec))
+		{
+			if (name != "")
+				rec.PlayerName = name;
 			return rec;
-		rec = new VB_TabletRecord();
-		string path = PathOf(uid);
-		string error;
-		bool ok = false;
-		if (FileExist(path))
-			ok = JsonFileLoader<VB_TabletRecord>.LoadFile(path, rec, error);
-		if (!ok && FileExist(path + ".bak"))
+		}
+		rec = ReadFile(uid);
+		if (!rec)
 		{
 			rec = new VB_TabletRecord();
-			ok = JsonFileLoader<VB_TabletRecord>.LoadFile(path + ".bak", rec, error);
-			if (ok)
-				Print(VB_TABLET_TAG + " запись игрока прочитана из копии: " + uid);
+			rec.Uid = uid;
 		}
-		rec.Uid = uid;
-		rec.PlayerName = name;
-		int today = DayKey();
-		if (rec.LastDay != today)
-		{
-			rec.LastDay = today;
-			rec.Days++;
-			rec.Dirty = true;
-		}
+		if (name != "")
+			rec.PlayerName = name;
+		NewDay(rec);
 		s_Online.Set(uid, rec);
 		return rec;
+	}
+
+	// День на сервере засчитывается и тому, кто играет через полночь.
+	protected static void NewDay(VB_TabletRecord rec)
+	{
+		int today = DayKey();
+		if (rec.LastDay == today)
+			return;
+		rec.LastDay = today;
+		rec.Days++;
+		rec.Dirty = true;
 	}
 
 	// Путь и рекорд из статистики движка. Статистика своя у каждого персонажа и обнуляется после смерти.
@@ -162,32 +198,34 @@ class VB_TabletPlayers
 		}
 	}
 
-	// Контракт засчитан. Игрок мог выйти: тогда правится файл, счётчик дней не трогаем.
-	static void AddContract(string uid, int extraXp)
+	// Запись для правки: из памяти, если игрок в сети, иначе с диска (в память не кладётся). После правки Commit.
+	static VB_TabletRecord Edit(string uid)
 	{
 		VB_TabletRecord rec;
 		if (s_Online.Find(uid, rec))
-		{
-			rec.Contracts++;
-			rec.ExtraXp = rec.ExtraXp + extraXp;
-			rec.Dirty = true;
+			return rec;
+		return ReadFile(uid);
+	}
+
+	// После Edit: запись офлайн-игрока пишется сразу, запись того, кто в сети, запишет Tick.
+	static void Commit(VB_TabletRecord rec)
+	{
+		if (!rec)
 			return;
-		}
-		string path = PathOf(uid);
-		if (!FileExist(path))
+		rec.Dirty = true;
+		if (!s_Online.Contains(rec.Uid))
+			Save(rec);
+	}
+
+	// Контракт засчитан. Игрок мог выйти: тогда правится файл, счётчик дней не трогаем.
+	static void AddContract(string uid, int extraXp)
+	{
+		VB_TabletRecord rec = Edit(uid);
+		if (!rec)
 			return;
-		rec = new VB_TabletRecord();
-		string error;
-		if (!JsonFileLoader<VB_TabletRecord>.LoadFile(path, rec, error))
-		{
-			Print(VB_TABLET_TAG + " не прочитан игрок " + uid + ": " + error);
-			return;
-		}
-		rec.Uid = uid;
 		rec.Contracts++;
 		rec.ExtraXp = rec.ExtraXp + extraXp;
-		rec.Dirty = true;
-		Save(rec);
+		Commit(rec);
 	}
 
 	// Запись игрока только для чтения: онлайн из памяти, остальные из файла, в память не кладётся.
@@ -196,21 +234,14 @@ class VB_TabletPlayers
 		VB_TabletRecord rec;
 		if (s_Online.Find(uid, rec))
 			return rec;
-		string path = PathOf(uid);
-		if (!FileExist(path))
-			return null;
-		rec = new VB_TabletRecord();
-		string error;
-		if (!JsonFileLoader<VB_TabletRecord>.LoadFile(path, rec, error))
-			return null;
-		rec.Uid = uid;
-		return rec;
+		return ReadFile(uid);
 	}
 
+	// Игрок отменил заявку, вступил, создал клан или подал новую: прежняя заявка снимается и в клане.
 	static void ClearApply(string uid)
 	{
-		VB_TabletRecord rec;
-		if (!s_Online.Find(uid, rec) || rec.AppliedClan == "")
+		VB_TabletRecord rec = Edit(uid);
+		if (!rec || rec.AppliedClan == "")
 			return;
 		VB_Clan c = VB_TabletClans.Find(rec.AppliedClan);
 		if (c)
@@ -224,132 +255,272 @@ class VB_TabletPlayers
 			VB_TabletServer.PushClan(c);
 		}
 		rec.AppliedClan = "";
-		rec.Dirty = true;
+		Commit(rec);
 	}
 
-	static void Save(VB_TabletRecord rec)
+	// Заявку рассмотрели или клан распущен: пометка снимается, только если она про этот клан.
+	static void ClearApplyOf(string uid, string clanId)
+	{
+		VB_TabletRecord rec = Edit(uid);
+		if (!rec || rec.AppliedClan != clanId)
+			return;
+		rec.AppliedClan = "";
+		Commit(rec);
+	}
+
+	// true: на диске то же, что в памяти.
+	static bool Save(VB_TabletRecord rec)
 	{
 		if (!rec.Dirty)
-			return;
-		MakeDirectory(VB_TabletConfig.DIR_ROOT);
-		MakeDirectory(VB_TabletConfig.DIR_MOD);
+			return true;
+		if (!VB_TabletCheck.IsSteam64(rec.Uid))
+			return false;
+		VB_TabletFiles.Dirs();
 		MakeDirectory(DIR_PLAYERS);
-		string path = PathOf(rec.Uid);
-		if (FileExist(path))
-			CopyFile(path, path + ".bak");
 		string error;
-		if (!JsonFileLoader<VB_TabletRecord>.SaveFile(path, rec, error))
+		if (!VB_SafeJson<VB_TabletRecord>.Save(PathOf(rec.Uid), rec, error))
 		{
 			Print(VB_TABLET_TAG + " не записан игрок " + rec.Uid + ": " + error);
-			return;
+			return false;
 		}
 		rec.Dirty = false;
 		PutRating(rec);
+		return true;
 	}
 
+	// --- рейтинг -----------------------------------------------------------------------------------------
 	protected static void LoadRating()
 	{
 		if (s_Rating)
 			return;
-		s_Rating = new VB_TabletRatingFile();
+		s_RowOf = new map<string, ref VB_TabletRatingRow>();
+		s_Rating = null;
 		string error;
-		if (FileExist(FILE_RATING) && !JsonFileLoader<VB_TabletRatingFile>.LoadFile(FILE_RATING, s_Rating, error))
+		for (int n = 0; n < 3; n++)
 		{
-			Print(VB_TABLET_TAG + " ошибка в rating.json: " + error);
-			s_Rating = new VB_TabletRatingFile();
+			string file = VB_TabletFiles.Attempt(FILE_RATING, n);
+			if (!FileExist(file))
+				continue;
+			VB_TabletRatingFile read = new VB_TabletRatingFile();
+			if (JsonFileLoader<VB_TabletRatingFile>.LoadFile(file, read, error))
+			{
+				VB_TabletFiles.Recovered(FILE_RATING, n);
+				s_Rating = read;
+				break;
+			}
+			Print(VB_TABLET_TAG + " ошибка в " + file + ": " + error);
 		}
+		if (!s_Rating)
+			s_Rating = new VB_TabletRatingFile();
 		if (!s_Rating.Rows)
 			s_Rating.Rows = new array<ref VB_TabletRatingRow>();
+		// Дубли uid (старые файлы) схлопываются: остаётся строка с большим опытом.
+		array<ref VB_TabletRatingRow> clean = new array<ref VB_TabletRatingRow>();
+		foreach (VB_TabletRatingRow r : s_Rating.Rows)
+		{
+			if (!r || r.Uid == "")
+				continue;
+			VB_TabletRatingRow have;
+			if (s_RowOf.Find(r.Uid, have))
+			{
+				if (r.Xp > have.Xp)
+				{
+					have.Xp = r.Xp;
+					have.PlayerName = r.PlayerName;
+				}
+				continue;
+			}
+			s_RowOf.Set(r.Uid, r);
+			clean.Insert(r);
+		}
+		s_Rating.Rows = clean;
+		s_OrderDirty = true;
 	}
 
 	protected static void PutRating(VB_TabletRecord rec)
 	{
 		LoadRating();
 		VB_TabletRates rates = VB_TabletConfig.Get().Rates;
-		VB_TabletRatingRow row = null;
-		foreach (VB_TabletRatingRow r : s_Rating.Rows)
-		{
-			if (r.Uid == rec.Uid)
-				row = r;
-		}
-		if (!row)
+		VB_TabletRatingRow row;
+		if (!s_RowOf.Find(rec.Uid, row))
 		{
 			row = new VB_TabletRatingRow();
 			row.Uid = rec.Uid;
 			s_Rating.Rows.Insert(row);
+			s_RowOf.Set(rec.Uid, row);
 		}
-		row.PlayerName = rec.PlayerName;
-		row.Xp = rec.ToStats().Xp(rates);
-		s_RatingDirty = true;
+		int xp = rec.ToStats().Xp(rates);
+		if (row.PlayerName != rec.PlayerName || row.Xp != xp)
+		{
+			row.PlayerName = rec.PlayerName;
+			row.Xp = xp;
+			s_RatingDirty = true;
+			s_OrderDirty = true;
+		}
 	}
 
-	// Список по убыванию опыта. Игроков в файле сотни, поэтому простая вставка.
+	// Список по убыванию опыта. Пересчитывается не чаще раза в SORT_GAP_MS, сортировка слиянием:
+	// игроков за всё время бывают тысячи, а спрашивают рейтинг и место на каждом открытии профиля.
 	static array<ref VB_TabletRatingRow> Sorted()
 	{
-		foreach (string uid, VB_TabletRecord rec : s_Online)
-			PutRating(rec);
-		array<ref VB_TabletRatingRow> list = new array<ref VB_TabletRatingRow>();
+		LoadRating();
+		int now = GetGame().GetTime();
+		if (s_Sorted && (!s_OrderDirty || now - s_SortedAt < SORT_GAP_MS))
+			return s_Sorted;
+		s_SortedAt = now;
+		s_OrderDirty = false;
+		s_Sorted = new array<ref VB_TabletRatingRow>();
 		foreach (VB_TabletRatingRow r : s_Rating.Rows)
+			s_Sorted.Insert(r);
+		SortRows(s_Sorted);
+		s_Place = new map<string, int>();
+		int n = s_Sorted.Count();
+		for (int i = 0; i < n; i++)
+			s_Place.Set(s_Sorted.Get(i).Uid, i + 1);
+		return s_Sorted;
+	}
+
+	protected static void SortRows(array<ref VB_TabletRatingRow> list)
+	{
+		int n = list.Count();
+		if (n < 2)
+			return;
+		array<ref VB_TabletRatingRow> tmp = new array<ref VB_TabletRatingRow>();
+		for (int f = 0; f < n; f++)
+			tmp.Insert(null);
+		int width = 1;
+		while (width < n)
 		{
-			int at = list.Count();
-			for (int i = 0; i < list.Count(); i++)
+			int lo = 0;
+			while (lo < n)
 			{
-				if (r.Xp > list.Get(i).Xp)
+				int mid = lo + width;
+				if (mid > n)
+					mid = n;
+				int hi = lo + width * 2;
+				if (hi > n)
+					hi = n;
+				int a = lo;
+				int b = mid;
+				int k = lo;
+				while (a < mid && b < hi)
 				{
-					at = i;
-					break;
+					if (list.Get(b).Xp > list.Get(a).Xp)
+					{
+						tmp.Set(k, list.Get(b));
+						b++;
+					}
+					else
+					{
+						tmp.Set(k, list.Get(a));
+						a++;
+					}
+					k++;
 				}
+				while (a < mid)
+				{
+					tmp.Set(k, list.Get(a));
+					a++;
+					k++;
+				}
+				while (b < hi)
+				{
+					tmp.Set(k, list.Get(b));
+					b++;
+					k++;
+				}
+				lo = hi;
 			}
-			list.InsertAt(r, at);
+			for (int i = 0; i < n; i++)
+				list.Set(i, tmp.Get(i));
+			width = width * 2;
 		}
-		return list;
 	}
 
 	static int PlaceOf(string uid)
 	{
-		array<ref VB_TabletRatingRow> list = Sorted();
-		for (int i = 0; i < list.Count(); i++)
-		{
-			if (list.Get(i).Uid == uid)
-				return i + 1;
-		}
+		Sorted();
+		int place;
+		if (s_Place && s_Place.Find(uid, place))
+			return place;
 		return 0;
 	}
 
-	// Раз в 30 секунд: путь и рекорд у всех в сети, запись изменившихся.
+	protected static void SaveRating(bool force)
+	{
+		if (!s_Rating || !s_RatingDirty)
+			return;
+		int now = GetGame().GetTime();
+		if (!force && now - s_RatingSavedAt < RATING_SAVE_MS)
+			return;
+		VB_TabletFiles.Dirs();
+		string error;
+		if (!VB_SafeJson<VB_TabletRatingFile>.Save(FILE_RATING, s_Rating, error))
+		{
+			Print(VB_TABLET_TAG + " не записан rating.json: " + error);
+			return;
+		}
+		s_RatingDirty = false;
+		s_RatingSavedAt = now;
+	}
+
+	// Раз в 30 секунд: путь, рекорд и смена дня у всех в сети, запись изменившихся.
+	// Записи тех, кого уже нет на сервере (выход без identity), сохраняются и выгружаются.
 	static void Tick()
 	{
 		array<Man> players = new array<Man>();
 		GetGame().GetPlayers(players);
+		map<string, PlayerBase> here = new map<string, PlayerBase>();
 		foreach (Man man : players)
 		{
 			PlayerBase player = PlayerBase.Cast(man);
 			if (!player || !player.GetIdentity())
 				continue;
 			PlayerIdentity id = player.GetIdentity();
-			VB_TabletRecord rec = Get(id.GetPlainId(), id.GetName());
+			string uid = id.GetPlainId();
+			here.Set(uid, player);
+			VB_TabletRecord rec = Get(uid, id.GetName());
+			NewDay(rec);
 			UpdateFromPlayer(rec, player);
 			Save(rec);
 		}
-		if (s_RatingDirty)
+		array<string> stale = new array<string>();
+		foreach (string key, VB_TabletRecord r : s_Online)
 		{
-			s_RatingDirty = false;
-			string error;
-			if (!JsonFileLoader<VB_TabletRatingFile>.SaveFile(FILE_RATING, s_Rating, error))
-				Print(VB_TABLET_TAG + " не записан rating.json: " + error);
+			if (!here.Contains(key))
+				stale.Insert(key);
 		}
+		foreach (string gone : stale)
+			Release(null, gone);
+		SaveRating(false);
 	}
 
+	// Остановка сервера: всё, что в памяти, на диск.
+	static void SaveAll()
+	{
+		foreach (string uid, VB_TabletRecord rec : s_Online)
+		{
+			rec.Dirty = true;
+			Save(rec);
+		}
+		SaveRating(true);
+	}
+
+	// player может быть null: игрок уже ушёл, путь и рекорд не обновляются.
 	static void Release(PlayerBase player, string uid)
 	{
 		VB_TabletRecord rec;
-		if (!s_Online.Find(uid, rec))
-			return;
-		UpdateFromPlayer(rec, player);
-		rec.Dirty = true;
-		Save(rec);
-		s_Online.Remove(uid);
+		if (s_Online.Find(uid, rec))
+		{
+			UpdateFromPlayer(rec, player);
+			rec.Dirty = true;
+			Save(rec);
+			s_Online.Remove(uid);
+		}
 		VB_TabletMap.Release(uid);
 		VB_TabletServer.MemberOnline(uid, false);
+		VB_TabletServer.Forget(uid);
+		VB_TabletClanOps.Forget(uid);
+		VB_TabletBank.Forget(uid);
 	}
 }

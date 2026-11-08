@@ -19,6 +19,7 @@ class VB_TabletBank
 	static void Handle(PlayerBase player, PlayerIdentity id, int op, ParamsReadContext ctx)
 	{
 		int n;
+		string code;
 		switch (op)
 		{
 			case VB_TabletOp.ATM_DEPOSIT:
@@ -41,17 +42,22 @@ class VB_TabletBank
 				VB_TabletContracts.Send(player, id);
 				break;
 			case VB_TabletOp.CONTRACT_CLAIM:
-				if (ctx.Read(n))
-					VB_TabletContracts.Claim(player, id, n);
+				if (ctx.Read(n) && ctx.Read(code))
+					VB_TabletContracts.Claim(player, id, n, code);
 				break;
 			case VB_TabletOp.CONTRACT_REPLACE:
-				if (ctx.Read(n))
-					VB_TabletContracts.Replace(player, id, n);
+				if (ctx.Read(n) && ctx.Read(code))
+					VB_TabletContracts.Replace(player, id, n, code);
 				break;
 			default:
 				VB_TabletAdmin.Handle(player, id, op, ctx);
 				break;
 		}
+	}
+
+	static void Forget(string uid)
+	{
+		s_LastOp.Remove(uid);
 	}
 
 	// Пауза между изменяющими операциями одного игрока.
@@ -316,11 +322,20 @@ class VB_TabletBank
 
 #ifdef INT_BANKING_SE
 	// Ключ перевода для банка: по нему INT_Banking_API.HasKey найдёт запись в истории счёта.
+	// Дата и время в ключе: номер клана и счётчик повторяются после рестарта.
 	protected static string NewKey(VB_Clan c)
 	{
 		s_TxnNo++;
-		int now = GetGame().GetTime();
-		return c.Id + "-" + now.ToString() + "-" + s_TxnNo.ToString();
+		int y;
+		int mo;
+		int d;
+		int h;
+		int mi;
+		int s;
+		GetYearMonthDay(y, mo, d);
+		GetHourMinuteSecond(h, mi, s);
+		string when = y.ToString() + mo.ToString() + d.ToString() + "-" + h.ToString() + mi.ToString() + s.ToString();
+		return c.Id + "-" + when + "-" + s_TxnNo.ToString();
 	}
 
 	// Ответ банка в ответ планшета.

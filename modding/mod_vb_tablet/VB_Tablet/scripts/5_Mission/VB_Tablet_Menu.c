@@ -64,9 +64,13 @@ class VB_TabletMenu extends INT_UIF_Menu
 	protected ImageWidget m_DeviceTex;
 	protected ref array<ImageWidget> m_TintIcons;
 	protected bool m_Typing;
+	protected bool m_EscWas;		// Esc был нажат в прошлом кадре: снятие курсора с поля по нажатию, не по удержанию
 	protected int m_ResultVersion;
 	protected ref VBT_Dialog m_Dialog;
 	protected ref VBT_Dialog m_DialogDone;
+	protected bool m_RebuildAfterDialog;	// пришли данные, пока был открыт вопрос: экран перестроится после ответа
+	protected bool m_WasHidden;			// поверх было другое меню: страница покинута, при возврате строится заново
+	protected bool m_ProfileDirty;			// счётчики прочитанного изменились: профиль игры надо записать
 	protected ref array<Widget> m_Trash = new array<Widget>();
 	protected ref array<ref VBT_ScrollThumb> m_Thumbs = new array<ref VBT_ScrollThumb>();
 
@@ -144,7 +148,11 @@ class VB_TabletMenu extends INT_UIF_Menu
 		}
 		else
 		{
-			mission.PlayerControlEnable(false);
+			// Поверх уже открыто другое меню (его OnShow приходит раньше нашего OnHide): общий запрет
+			// управления теперь его, снимать его нельзя, иначе в том меню персонаж будет ходить.
+			UIScriptedMenu top = GetGame().GetUIManager().GetMenu();
+			if (!top || top == this)
+				mission.PlayerControlEnable(false);
 			GetGame().GetInput().ChangeGameFocus(-1);
 		}
 	}
@@ -231,20 +239,34 @@ class VB_TabletMenu extends INT_UIF_Menu
 			m_Page.OnPick(list, index);
 	}
 
+	// Открытый вопрос закрывается без ответа: при смене экрана, при новом вопросе поверх.
+	protected void DropDialog()
+	{
+		if (!m_Dialog)
+			return;
+		if (m_Dialog.Modal)
+			m_Dialog.Modal.Close();
+		m_DialogDone = m_Dialog;
+		m_Dialog = null;
+	}
+
 	void Ask(int tag, string title, string text, string yes, bool danger = false, float h = 220)
 	{
+		DropDialog();
 		m_Dialog = new VBT_Dialog(this, tag);
 		m_Dialog.BuildAsk(title, text, yes, danger, h);
 	}
 
 	void Prompt(int tag, string title, string hint, string value, int maxLen = 40)
 	{
+		DropDialog();
 		m_Dialog = new VBT_Dialog(this, tag);
 		m_Dialog.BuildPrompt(title, hint, value, maxLen);
 	}
 
 	void ConfirmWord(int tag, string title, string text, string word, string yes)
 	{
+		DropDialog();
 		m_Dialog = new VBT_Dialog(this, tag);
 		m_Dialog.BuildConfirm(title, text, word, yes);
 	}
@@ -305,7 +327,7 @@ class VB_TabletMenu extends INT_UIF_Menu
 		m_Work = INT_UIF_Draw.Clip(screen, 240, 72, 1228, 776, "VBT_Work");
 		RevealOnOpen(m_Device);
 		if (VB_TabletClient.Get().Clan)
-			VB_TabletClient.Get().Request(VB_TabletOp.CONTRACTS);
+			VBA_Util.Ask(VB_TabletOp.CONTRACTS);
 		BuildNavItems();
 		Go(s_StartPage);
 	}
@@ -406,10 +428,11 @@ class VB_TabletMenu extends INT_UIF_Menu
 		for (int i = 0; i < n; i++)
 		{
 			VB_TabletNavItem item = m_Items.Get(i);
-			if (item.NavId == "clan")
+			VB_Clan navClan = VB_TabletClient.Get().Clan;
+			if (item.NavId == "clan" && navClan)
 			{
 				y = y + 14;
-				INT_UIF_Draw.Text(m_NavRoot, 30, y, 190, 18, VBT.Fit(VB_TabletClient.Get().Clan.Title, 190, 13), 13, VB_C_DIM2);
+				INT_UIF_Draw.Text(m_NavRoot, 30, y, 190, 18, VBT.Fit(navClan.Title, 190, 13), 13, VB_C_DIM2);
 				y = y + 26;
 			}
 			if (item.NavId == "admin")
@@ -483,14 +506,21 @@ class VB_TabletMenu extends INT_UIF_Menu
 	protected int Unread(string kind, int total, string page)
 	{
 		string key = "vbt_" + kind + "_" + VB_TabletClient.Get().Clan.Id;
-		if (page == m_PageId)
-		{
-			GetGame().SetProfileString(key, total.ToString());
-			return 0;
-		}
 		string seen;
 		GetGame().GetProfileString(key, seen);
-		return Math.Max(0, total - seen.ToInt());
+		if (page == m_PageId)
+		{
+			if (seen != total.ToString())
+			{
+				GetGame().SetProfileString(key, total.ToString());
+				m_ProfileDirty = true;
+			}
+			return 0;
+		}
+		int unread = total - seen.ToInt();
+		if (unread < 0)
+			unread = 0;
+		return unread;
 	}
 
 	protected bool TaxLow()
@@ -505,6 +535,15 @@ class VB_TabletMenu extends INT_UIF_Menu
 	// --- экраны ------------------------------------------------------------------------------
 	void Go(string id)
 	{
+		// Старая страница уходит вместе со своими полями: вопрос к ней и ввод текста закрываются,
+		// иначе ответ достался бы другой странице, а управление персонажем осталось бы выключенным.
+		DropDialog();
+		m_RebuildAfterDialog = false;
+		SetFocus(null);
+		SetTyping(false);
+		// Состав меню мог смениться в этом же кадре (клан пропал): пункты пересобираются до рисования.
+		if (NavKey() != m_NavKey)
+			BuildNavItems();
 		id = ResolvePage(id);
 		if (m_Page)
 			m_Page.Leave();
@@ -584,6 +623,12 @@ class VB_TabletMenu extends INT_UIF_Menu
 		super.OnShow();
 		HoldHud(true);
 		VB_TabletClient.SetAimLock(true);
+		// Возврат из меню, открытого поверх: в OnHide страница была покинута (вкладки, оверлей карты).
+		if (m_WasHidden)
+		{
+			m_WasHidden = false;
+			RequestRepaint();
+		}
 	}
 
 	override void OnHide()
@@ -593,7 +638,12 @@ class VB_TabletMenu extends INT_UIF_Menu
 		VB_TabletClient.SetAimLock(false);
 		if (m_Page)
 			m_Page.Leave();
-		GetGame().SaveProfile();
+		m_WasHidden = true;
+		if (m_ProfileDirty)
+		{
+			m_ProfileDirty = false;
+			GetGame().SaveProfile();
+		}
 		super.OnHide();
 		HoldHud(false);
 	}
@@ -634,11 +684,14 @@ class VB_TabletMenu extends INT_UIF_Menu
 					if (m_Dialog.Field)
 						text = m_Dialog.Field.Get();
 					int tag = m_Dialog.Tag;
-					m_Dialog.Modal.Close();
-					m_DialogDone = m_Dialog;
-					m_Dialog = null;
+					DropDialog();
 					if (m_Page)
 						m_Page.OnAnswer(tag, result, text);
+					if (m_RebuildAfterDialog)
+					{
+						m_RebuildAfterDialog = false;
+						RequestRepaint();
+					}
 				}
 			}
 			return true;
@@ -704,6 +757,15 @@ class VB_TabletMenu extends INT_UIF_Menu
 		}
 		m_Trash.Clear();
 		m_DialogDone = null;
+		// Курсор в поле ввода: управление игры заглушено вместе с её Esc (UAUIBack не приходит).
+		// Esc снимает курсор с поля, следующий закрывает окно или планшет как обычно.
+		bool esc = KeyState(KeyCode.KC_ESCAPE) != 0;
+		if (esc && !m_EscWas && m_Typing)
+		{
+			SetFocus(null);
+			SetTyping(false);
+		}
+		m_EscWas = esc;
 #ifdef DIAG_DEVELOPER
 		for (int di = s_DiagInputs.Count() - 1; di >= 0; di--)
 		{
@@ -731,7 +793,11 @@ class VB_TabletMenu extends INT_UIF_Menu
 			}
 			else if (!m_Page || !m_Page.OnData())
 			{
-				Go(m_PageId);
+				// Открыт вопрос («Исключить?»): страница с его данными живёт до ответа.
+				if (m_Dialog)
+					m_RebuildAfterDialog = true;
+				else
+					Go(m_PageId);
 			}
 			else
 			{
