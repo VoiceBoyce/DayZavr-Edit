@@ -1,0 +1,14 @@
+{
+    "compress": {
+        "exclude": [
+        ],
+        "include": [
+        ]
+    },
+    "headers": [
+        {
+            "name": "prefix",
+            "value": "INT_GlobalChat_SE"
+        }
+    ]
+}
