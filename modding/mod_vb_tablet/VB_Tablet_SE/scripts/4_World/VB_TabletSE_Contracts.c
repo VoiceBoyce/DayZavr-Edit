@@ -449,18 +449,53 @@ class VB_TabletContracts
 		Add(rec, kind, 1, false);
 	}
 
-	// Предмет взят из ящика ивента. Один ящик засчитывается каждому игроку один раз (личные контракты,
-	// достижения), а клановому контракту один раз на клан: пятеро у одного аирдропа дают клану +1.
+	// Лут у ящика: аирдроп (AirdropUpgraded) раскладывает предметы на землю в нескольких метрах от контейнера,
+	// а сам контейнер без инвентаря.
+	static const float BOX_RADIUS = 8;
+
+	// Ящик ивента рядом с точкой, с которой подняли предмет.
+	protected static EntityAI NearBox(vector pos)
+	{
+		array<Object> objects = new array<Object>();
+		GetGame().GetObjectsAtPosition3D(pos, BOX_RADIUS, objects, null);
+		array<ref VB_TabletKillGroup> groups = VB_TabletConfig.Get().LootGroups;
+		foreach (Object o : objects)
+		{
+			EntityAI e = EntityAI.Cast(o);
+			if (!e || e.IsMan() || e.GetHierarchyParent())
+				continue;
+			foreach (VB_TabletKillGroup g : groups)
+			{
+				if (VB_TabletServer.IsListed(e, g.Classes))
+					return e;
+			}
+		}
+		return null;
+	}
+
+	// Предмет взят из ящика ивента или поднят с земли рядом с ним. Один ящик засчитывается каждому игроку
+	// один раз (личные контракты, достижения), а клановому контракту один раз на клан: пятеро у одного
+	// аирдропа дают клану +1.
 	static void OnItemMoved(InventoryLocation oldLoc, InventoryLocation newLoc)
 	{
-		EntityAI from = oldLoc.GetParent();
 		EntityAI to = newLoc.GetParent();
-		if (!from || !to || from.GetHierarchyRootPlayer())
+		if (!to)
 			return;
 		PlayerBase player = PlayerBase.Cast(to.GetHierarchyRootPlayer());
 		if (!player || !player.GetIdentity())
 			return;
-		EntityAI box = from.GetHierarchyRoot();
+		EntityAI box = null;
+		EntityAI from = oldLoc.GetParent();
+		if (from)
+		{
+			if (from.GetHierarchyRootPlayer())
+				return;
+			box = from.GetHierarchyRoot();
+		}
+		else if (oldLoc.GetType() == InventoryLocationType.GROUND)
+		{
+			box = NearBox(oldLoc.GetPos());
+		}
 		if (!box)
 			return;
 		array<ref VB_TabletKillGroup> groups = VB_TabletConfig.Get().LootGroups;

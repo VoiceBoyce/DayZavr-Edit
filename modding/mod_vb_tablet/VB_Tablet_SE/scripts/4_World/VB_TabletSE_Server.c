@@ -473,16 +473,24 @@ class VB_TabletServer
 		rpc.Send(player, VB_TABLET_RPC_S2C, true, sender);
 	}
 
-	// Счётчики добычи: мутанты проверяются первыми, они часто наследуются от заражённых.
-	static void OnCreatureKilled(EntityAI victim, Object killer)
+	// Игрок за убийцей или источником удара: сам игрок, его оружие, нож в руках.
+	static PlayerBase PlayerOf(Object o)
 	{
-		if (!victim || !killer)
-			return;
-		PlayerBase player = PlayerBase.Cast(killer);
-		EntityAI source = EntityAI.Cast(killer);
-		if (!player && source)
-			player = PlayerBase.Cast(source.GetHierarchyRootPlayer());
-		if (!player || !player.GetIdentity())
+		if (!o)
+			return null;
+		PlayerBase player = PlayerBase.Cast(o);
+		if (player)
+			return player;
+		EntityAI e = EntityAI.Cast(o);
+		if (e)
+			return PlayerBase.Cast(e.GetHierarchyRootPlayer());
+		return null;
+	}
+
+	// Счётчики добычи: мутанты проверяются первыми, они часто наследуются от заражённых.
+	static void OnCreatureKilled(EntityAI victim, PlayerBase player)
+	{
+		if (!victim || !player || !player.GetIdentity())
 			return;
 		VB_TabletConfig cfg = VB_TabletConfig.Get();
 		PlayerIdentity id = player.GetIdentity();
@@ -537,23 +545,86 @@ class VB_TabletServer
 	}
 }
 
+// Кто убил. Животным движок передаёт в EEKilled убийцей само животное (проверено на оленях 1.30),
+// поэтому стрелок запоминается по попаданиям. Порядок EEHitBy и EEKilled на смертельном ударе не важен:
+// смерть без известного стрелка дожидается следующего EEHitBy.
 modded class ZombieBase
 {
+	protected PlayerBase m_VbHitBy;		// без ref: игрок мог выйти, тогда null
+	protected bool m_VbKillOpen;
+	protected bool m_VbCounted;
+
+	override void EEHitBy(TotalDamageResult damageResult, int damageType, EntityAI source, int component, string dmgZone, string ammo, vector modelPos, float speedCoef)
+	{
+		super.EEHitBy(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
+		if (!GetGame().IsDedicatedServer())
+			return;
+		PlayerBase p = VB_TabletServer.PlayerOf(source);
+		if (p)
+			m_VbHitBy = p;
+		if (m_VbKillOpen && !m_VbCounted && m_VbHitBy)
+		{
+			m_VbKillOpen = false;
+			m_VbCounted = true;
+			VB_TabletServer.OnCreatureKilled(this, m_VbHitBy);
+		}
+	}
+
 	override void EEKilled(Object killer)
 	{
 		super.EEKilled(killer);
-		if (GetGame().IsDedicatedServer())
-			VB_TabletServer.OnCreatureKilled(this, killer);
+		if (!GetGame().IsDedicatedServer() || m_VbCounted)
+			return;
+		PlayerBase p = VB_TabletServer.PlayerOf(killer);
+		if (!p)
+			p = m_VbHitBy;
+		if (!p)
+		{
+			m_VbKillOpen = true;
+			return;
+		}
+		m_VbCounted = true;
+		VB_TabletServer.OnCreatureKilled(this, p);
 	}
 }
 
 modded class AnimalBase
 {
+	protected PlayerBase m_VbHitBy;
+	protected bool m_VbKillOpen;
+	protected bool m_VbCounted;
+
+	override void EEHitBy(TotalDamageResult damageResult, int damageType, EntityAI source, int component, string dmgZone, string ammo, vector modelPos, float speedCoef)
+	{
+		super.EEHitBy(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
+		if (!GetGame().IsDedicatedServer())
+			return;
+		PlayerBase p = VB_TabletServer.PlayerOf(source);
+		if (p)
+			m_VbHitBy = p;
+		if (m_VbKillOpen && !m_VbCounted && m_VbHitBy)
+		{
+			m_VbKillOpen = false;
+			m_VbCounted = true;
+			VB_TabletServer.OnCreatureKilled(this, m_VbHitBy);
+		}
+	}
+
 	override void EEKilled(Object killer)
 	{
 		super.EEKilled(killer);
-		if (GetGame().IsDedicatedServer())
-			VB_TabletServer.OnCreatureKilled(this, killer);
+		if (!GetGame().IsDedicatedServer() || m_VbCounted)
+			return;
+		PlayerBase p = VB_TabletServer.PlayerOf(killer);
+		if (!p)
+			p = m_VbHitBy;
+		if (!p)
+		{
+			m_VbKillOpen = true;
+			return;
+		}
+		m_VbCounted = true;
+		VB_TabletServer.OnCreatureKilled(this, p);
 	}
 }
 
