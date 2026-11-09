@@ -343,6 +343,12 @@ Verified errors committed more than once. Check ACTIVELY during implementation. 
 - **E24** — (164200) `Can't find variable 'Workbench'` → `Can't compile "Mission" script module!` — Workbench API is only under `#ifdef WORKBENCH` now; guard the code or update the framework (Dabs `samplemvc.c`)
 - **E25** — (164200) `a.Cross(b)` no longer compiles (unknown method `Cross`) — `vector.Cross` existed only in 164078; write `(a * b)`
 - **E26** — (164200) own `HasCrew()` / `IsMoving()` on a vehicle class clashes with the new `Transport.HasCrew()` (proto native) / `Transport.IsMoving()` — rename with a mod prefix, or `override bool IsMoving()`
+- **E27** — масштаб через `SetTransform` в `EOnPostFrame`/`EOnFrame` умножением матрицы на коэффициент: масштаб копится кадр за кадром, существо раздувается сразу после спавна. Нормализовать оси: `axis.Normalize(); transform[i] = axis * scale;`
+- **E28** — `EOnFrame` у заражённых и животных не вызывается: в маске нет `EntityEvent.FRAME` (ZombieBase ставит INIT|CONTACT, DayZAnimal — CONTACT). Нужен `SetEventMask(EntityEvent.FRAME)` или `POSTFRAME` в конструкторе
+- **E29** — свой класс заражённого без наборов `<Класс>_<CalmIdle|CalmMove|DisturbedIdle|ChaseMove|AlertedIdle|AlertedMove>_SoundSet`: `No sound callback` в лог при каждой синхронизации. Определить наборы или `override protected void HandleSoundEvents() {}`
+- **E30** — своё оружие возвращает ванильную отдачу (`new M4a1Recoil(this)`): если оружие не у игрока (подсказка ItemInfo, предпросмотр), `NULL pointer` в `Recoil.Init`. Подкласс отдачи с проверкой `m_Player` в `Init` и `PostInit`
+- **E31** — магазин в config.cpp без скриптового класса становится `Magazine_Base` (typedef `Magazine`), а не `MagazineStorage`: нельзя снарядить, разрядить, быстрая перезарядка его не видит. На каждый магазин `class X: MagazineStorage {};`
+- **E32** — спутники/призыв вокруг существа ставятся по `SurfaceY`: в бункере или пещере они появляются на поверхности. Если `pos[1] < SurfaceY - 3`, ставить на высоту существа и в меньшем радиусе
 
 ---
 

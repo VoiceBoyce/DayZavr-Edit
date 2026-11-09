@@ -1,5 +1,10 @@
 class MSFZ_Mutant_Ent_Base extends ZmbM_HermitSkinny_Base
 {
+	// Голос ванильных заражённых мутантам не нужен: их рык, шаги и угрозы заданы в CfgAIBehaviours и AnimEvents.
+	// Без этого клиент при каждой синхронизации ищет наборы <Класс>_CalmMove_SoundSet и т.п. и пишет предупреждения в лог.
+	override protected void HandleSoundEvents()
+	{
+	}
     override bool EvaluateDamageHitAnimation( EntityAI pSource, string pComponent, string pAmmoType, out bool pHeavyHit, out int pAnimType, out float pAnimHitDir )
     {
         return false;
@@ -25,16 +30,7 @@ modded class MSFZ_Mutant_Ent
     }
     override void EOnPostFrame(IEntity other, int extra)
     {
-        float scale = 1.6; // Коэффициент увеличения изначально 1
-        vector transform[4];
-        GetTransform(transform);
-
-        transform[0] = transform[0] * scale;
-        transform[1] = transform[1] * scale;
-        transform[2] = transform[2] * scale;
-
-        SetTransform(transform);
-        Update();
+    	MSFZ_Scale.Apply(this, 1.6);
     }
 };
 modded class MSFZ_Mutant_Ent_Medium
@@ -45,16 +41,7 @@ modded class MSFZ_Mutant_Ent_Medium
     }
     override void EOnPostFrame(IEntity other, int extra)
     {
-        float scale = 1.8; // Коэффициент увеличения изначально 1
-        vector transform[4];
-        GetTransform(transform);
-
-        transform[0] = transform[0] * scale;
-        transform[1] = transform[1] * scale;
-        transform[2] = transform[2] * scale;
-
-        SetTransform(transform);
-        Update();
+    	MSFZ_Scale.Apply(this, 1.8);
     }
 };
 modded class MSFZ_Mutant_Ent_Hard
@@ -65,15 +52,6 @@ modded class MSFZ_Mutant_Ent_Hard
     }
     override void EOnPostFrame(IEntity other, int extra)
     {
-        float scale = 2.0; // Коэффициент увеличения изначально 1
-        vector transform[4];
-        GetTransform(transform);
-
-        transform[0] = transform[0] * scale;
-        transform[1] = transform[1] * scale;
-        transform[2] = transform[2] * scale;
-
-        SetTransform(transform);
-        Update();
+    	MSFZ_Scale.Apply(this, 2.0);
     }
 };

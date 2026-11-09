@@ -1,5 +1,10 @@
 class MSFZ_Troll_Base extends ZmbM_HermitSkinny_Base
 {
+	// Голос ванильных заражённых мутантам не нужен: их рык, шаги и угрозы заданы в CfgAIBehaviours и AnimEvents.
+	// Без этого клиент при каждой синхронизации ищет наборы <Класс>_CalmMove_SoundSet и т.п. и пишет предупреждения в лог.
+	override protected void HandleSoundEvents()
+	{
+	}
     override bool EvaluateDamageHitAnimation( EntityAI pSource, string pComponent, string pAmmoType, out bool pHeavyHit, out int pAnimType, out float pAnimHitDir )
     {
         return false;
@@ -23,15 +28,6 @@ class MSFZ_Troll extends MSFZ_Troll_Base
     }
     override void EOnPostFrame(IEntity other, int extra)
     {
-        float scale = 1.8; // Коэффициент увеличения изначально 1
-        vector transform[4];
-        GetTransform(transform);
-
-        transform[0] = transform[0] * scale;
-        transform[1] = transform[1] * scale;
-        transform[2] = transform[2] * scale;
-
-        SetTransform(transform);
-        Update();
+    	MSFZ_Scale.Apply(this, 1.8);
     }
 };

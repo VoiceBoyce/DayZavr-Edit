@@ -36,11 +36,20 @@ modded class MSFZ_Mutant_Spider3
 			return;
 
 		vector center = GetPosition();
+		// Под землёй (бункер, пещера) малыши появляются на высоте матки и ближе к ней, иначе их выносило на поверхность
+		bool underground = center[1] < GetGame().SurfaceY(center[0], center[2]) - 3;
+		float radius = MSFZ_BABY_RADIUS;
+		if (underground)
+			radius = 2;
+
 		for (int i = 0; i < MSFZ_BABY_COUNT; i++)
 		{
-			float x = center[0] + Math.RandomFloat(-MSFZ_BABY_RADIUS, MSFZ_BABY_RADIUS);
-			float z = center[2] + Math.RandomFloat(-MSFZ_BABY_RADIUS, MSFZ_BABY_RADIUS);
-			GetGame().CreateObject("MSFZ_Mutant_Spider1", Vector(x, GetGame().SurfaceY(x, z), z), false, true);
+			float x = center[0] + Math.RandomFloat(-radius, radius);
+			float z = center[2] + Math.RandomFloat(-radius, radius);
+			float y = center[1];
+			if (!underground)
+				y = GetGame().SurfaceY(x, z);
+			GetGame().CreateObject("MSFZ_Mutant_Spider1", Vector(x, y, z), false, true);
 		}
 	}
 };

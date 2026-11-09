@@ -11,16 +11,7 @@ modded class MSFZ_Mutant_Zanoza1
     }
     override void EOnPostFrame(IEntity other, int extra)
     {
-        float scale = 0.75; // Коэффициент увеличения изначально 1
-        vector transform[4];
-        GetTransform(transform);
-
-        transform[0] = transform[0] * scale;
-        transform[1] = transform[1] * scale;
-        transform[2] = transform[2] * scale;
-
-        SetTransform(transform);
-        Update();
+    	MSFZ_Scale.Apply(this, 0.75);
     }
 };
 modded class MSFZ_Mutant_Zanoza2
@@ -31,16 +22,7 @@ modded class MSFZ_Mutant_Zanoza2
     }
     override void EOnPostFrame(IEntity other, int extra)
     {
-        float scale = 0.85; // Коэффициент увеличения изначально 1
-        vector transform[4];
-        GetTransform(transform);
-
-        transform[0] = transform[0] * scale;
-        transform[1] = transform[1] * scale;
-        transform[2] = transform[2] * scale;
-
-        SetTransform(transform);
-        Update();
+    	MSFZ_Scale.Apply(this, 0.85);
     }
 };
 modded class MSFZ_Mutant_Zanoza3
@@ -51,15 +33,6 @@ modded class MSFZ_Mutant_Zanoza3
     }
     override void EOnPostFrame(IEntity other, int extra)
     {
-        float scale = 0.95; // Коэффициент увеличения изначально 1
-        vector transform[4];
-        GetTransform(transform);
-
-        transform[0] = transform[0] * scale;
-        transform[1] = transform[1] * scale;
-        transform[2] = transform[2] * scale;
-
-        SetTransform(transform);
-        Update();
+    	MSFZ_Scale.Apply(this, 0.95);
     }
 };

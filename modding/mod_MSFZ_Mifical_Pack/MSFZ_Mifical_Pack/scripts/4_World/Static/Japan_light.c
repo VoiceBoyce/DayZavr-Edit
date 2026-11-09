@@ -19,6 +19,8 @@ class MSFZ_Japan_light extends House
 	{
 		if ( !GetGame().IsMultiplayer() || GetGame().IsClient() )
 		{
+			// Фонарь могут удалить раньше, чем сработает отложенный запуск частиц
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(SpawnParticle);
 			if ( m_Particle )
 				m_Particle.Stop();
 			if ( m_TreeLight )
@@ -26,6 +28,7 @@ class MSFZ_Japan_light extends House
 			if ( m_AmbientSoundLoop )
 				SEffectManager.DestroyEffect(m_AmbientSoundLoop);
 		}
+		super.EEDelete(parent);
 	}
 	void SpawnParticle()
 	{

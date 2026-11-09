@@ -1394,3 +1394,28 @@ Also: `vector.Cross` removed and Workbench API `#ifdef WORKBENCH` only — an MC
 used either no longer compiles (`dayz-130-migration`). Vanilla navmeshes are v9 now; on a community map
 whose navmesh was not rebuilt, infected/animals stand still (`dayz-ai-patterns` §Navmesh) — not a bug in
 the mod under test.
+
+## Грабли на машине DayZavr (проверено 2026-11-09, dayz-mcp v1.4, DayZ 1.30.164200)
+
+Каждая стоила минимум одного запуска при тесте MSFZ_Mifical_Pack.
+
+- **`invalid_dayz_test_path_authority` при `dayz_test_run`.** Политика лаунчера запечатывает `default_source`
+  и `dev_root` по file id папки. Если папку мода переименовали или пересоздали, запуск отказывает, и пустая
+  папка на старом месте не помогает: у неё другой file id. Лечение (только с согласия пользователя): поправить путь
+  в `%LOCALAPPDATA%\DayZ_MCP\launcher-policy.json` (бэкап в `G:\DayZ_Test\backup\<время>`), затем
+  `build_native_launcher.py --offline --verify-reproducible`, затем
+  `launcher_registry_update replace-dayz-test-v1 --expected-sha256 <SHA256 текущего approved-launchers.json ЗАГЛАВНЫМИ>`.
+  Переподключать `/mcp` после этого не понадобилось.
+- **`world_spawn` → `bad_flags`.** Значения 8388612 и 8388644 не принимаются. Рабочие: **8389668** (без ИИ)
+  и **8391716** (с ИИ, живой заражённый или животное).
+- **Лиз истекает за 120 с без мутирующих вызовов**, в том числе пока агент думает или пишет отчёт.
+  Перед паузой `session_heartbeat`, после истечения — `session_acquire_wait` (подхватывает живой запуск).
+- **`weapon_fire` → `weapon_lifted`**: ствол упирается в цель или препятствие (оружие поднято). Отойти дальше от цели.
+  **`chamber_empty`**: дослать патрон через `action_use` с `FirearmActionMechanicManipulate`, цель — руки (`target=hands`).
+- **Создание сущностей в `EEHitBy` / `ModCommandHandlerAfter`.** Во время теста сервер один раз упал с null deref
+  в движке (минидамп без символов, повторить не удалось). Спавн из этих обработчиков перенесён в
+  `CallLater(..., 0)` с проверкой `IsSetForDeletion()`/`IsAlive()`; после этого падений не было. Связь не доказана,
+  но спавн из обработчиков урона и команд ИИ лучше сразу откладывать на следующий кадр.
+- **Проверка компиляции без dayz-mcp** (ванильный DayZServer, см. память `server-smoke-test`): мод, у которого
+  клиентский скрипт зависит от серверной части другого мода (DRL_CraftMenu), без `-serverMod=@DRL_CraftMenu_Server`
+  падает с `Undefined DRL_Craft_Config.Load`. Это не ошибка мода, нужен полный набор серверных частей.
