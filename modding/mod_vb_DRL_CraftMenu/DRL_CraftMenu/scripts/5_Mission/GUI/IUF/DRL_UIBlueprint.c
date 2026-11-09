@@ -1145,6 +1145,12 @@ class DRL_UIBlueprint extends ScriptedWidgetEventHandler
 		m_DopLabel.SetText(label);
 	}
 
+	// Сет, к которому относится рецепт (для «Раскроя»): части и во что одеть манекен.
+	// «Чертёж» сет не показывает.
+	void SetSet(string name, array<ref DRL_UISetPart> parts, array<string> outfit)
+	{
+	}
+
 	// Число на изделии («×5»), "" - скрыть.
 	void SetBadge(string text)
 	{

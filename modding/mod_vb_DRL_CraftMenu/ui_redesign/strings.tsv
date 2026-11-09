@@ -188,3 +188,27 @@ STR_DRL_UI_C_DARK	Dark	Тёмный
 STR_DRL_UI_C_LIGHT	Light	Светлый
 STR_DRL_UI_C_NOTAIL	No tail	Без хвоста
 STR_DRL_UI_C_TAIL	Tail	С хвостом
+# v3 «Раскрой» (швейная машинка), 2026-11-09
+STR_DRL_UI_STP_PART	SET PART	ЧАСТЬ СЕТА
+STR_DRL_UI_STP_COLORS	COLOURS	РАСЦВЕТОК
+STR_DRL_UI_CUT_SET	SET	СЕТ
+STR_DRL_UI_CUT_NOSET	No set	Без сета
+STR_DRL_UI_CUT_ITEMS	Items: %1	Вещей: %1
+STR_DRL_UI_CUT_COLORS	COLOURS	РАСЦВЕТКА
+STR_DRL_UI_CUT_ONE	one	одна
+STR_DRL_UI_CUT_VARS_N	variants: %1	вариантов: %1
+STR_DRL_UI_CUT_MATS	MATERIALS	МАТЕРИАЛЫ
+STR_DRL_UI_CUT_MATS_N	items: %1	позиций: %1
+STR_DRL_UI_CUT_TOOLS	TOOLS AND MACHINE ATTACHMENTS	ИНСТРУМЕНТЫ И НАВЕСЫ МАШИНКИ
+STR_DRL_UI_CUT_ARMOR	PROTECTION	ЗАЩИТА
+STR_DRL_UI_PART_HEADGEAR	Headgear	Голова
+STR_DRL_UI_PART_EYEWEAR	Eyewear	Очки
+STR_DRL_UI_PART_MASK	Mask	Маска
+STR_DRL_UI_PART_BODY	Jacket	Куртка
+STR_DRL_UI_PART_VEST	Vest	Жилет
+STR_DRL_UI_PART_ARMBAND	Armband	Повязка
+STR_DRL_UI_PART_BACK	Backpack	Рюкзак
+STR_DRL_UI_PART_HIPS	Belt	Пояс
+STR_DRL_UI_PART_GLOVES	Gloves	Перчатки
+STR_DRL_UI_PART_LEGS	Pants	Штаны
+STR_DRL_UI_PART_FEET	Boots	Обувь

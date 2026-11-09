@@ -442,17 +442,33 @@ class DRL_CraftWindow extends INT_UIF_Menu
 	// --- центр: лист ------------------------------------------------------------------------
 	protected void BuildSheet(Widget sheet, float w, float h)
 	{
+		// Вид листа по станции: швейная машинка - «Раскрой», остальные - «Чертёж».
+		bool sew = m_StationKind == DRL_ST_SEW;
+		if (sew)
+		{
+			m_Bp = new DRL_UICutSheet();
+			m_Stage = m_Bp.GetStage();
+		}
+
 		// Подложка и сетка листа (с отступом в пиксель - рамка окна не перекрывается).
 		int bg = ARGB(245, 6, 16, 18);
+		float cellSize = 24;
+		int minor = DRL_UIC.BP(9);
+		int major = DRL_UIC.BP(18);
+		int glow = DRL_UIC.BP(24);
+		if (sew)
+		{
+			// Раскройный стол: тёмно-зелёное сукно, крупная клетка.
+			bg = ARGB(245, 15, 26, 21);
+			cellSize = 40;
+			minor = DRL_UIC.BP(14);
+			major = DRL_UIC.BP(14);
+			glow = ARGB(90, 60, 90, 70);
+		}
 		INT_UIF_Draw.Image(sheet, 0, 1, w, h - 2, "iuf_white", bg);
 		DRL_UICanvas grid = new DRL_UICanvas();
 		if (grid.Build(sheet, 0, 1, w, h - 2))
-		{
-			int minor = DRL_UIC.BP(9);
-			int major = DRL_UIC.BP(18);
-			grid.Grid(w, h - 2, 24, minor, major);
-		}
-		int glow = DRL_UIC.BP(24);
+			grid.Grid(w, h - 2, cellSize, minor, major);
 		INT_UIF_Draw.Image(sheet, w * 0.5 - w * 0.6, h * 0.48 - h * 0.55, w * 1.2, h * 1.1, "iuf_radial", glow);
 		int border = DRL_UIC.BP(56);
 		INT_UIF_Draw.Line(sheet, 0, 1, 1, h - 2, border);
@@ -1804,8 +1820,164 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		UpdateCraftButtonState();
 		RefreshStatuses();
 		RefreshStationSlots();
+		FillSetInfo(r);
 		m_Bp.SetLocked(!DRL_LearnState.HasLearned(r.RecipeId));
 		m_Bp.Relayout();
+	}
+
+	// --- сет для «Раскроя»: части и во что одеть манекен --------------------------------
+	// Слоты одежды по порядку сверху вниз (порядок меток на манекене).
+	protected array<string> BodySlots()
+	{
+		array<string> s = {"headgear", "eyewear", "mask", "body", "vest", "armband", "back", "hips", "gloves", "legs", "feet"};
+		return s;
+	}
+
+	protected string FirstSlotOf(string cls)
+	{
+		string path = "CfgVehicles " + cls + " inventorySlot";
+		if (cls == "" || !GetGame().ConfigIsExisting(path))
+			return "";
+		TStringArray slots = new TStringArray();
+		GetGame().ConfigGetTextArray(path, slots);
+		string first = "";
+		if (slots.Count() > 0)
+			first = slots[0];
+		else
+			GetGame().ConfigGetText(path, first);
+		first.ToLower();
+		return first;
+	}
+
+	// Название части сета по слоту вещи («Жилет», «Штаны»...), иначе название рецепта.
+	protected string PartName(string cls, DRL_Craft_Recipe r)
+	{
+		string slot = FirstSlotOf(cls);
+		if (slot != "" && BodySlots().Find(slot) > -1)
+		{
+			string key = "#STR_DRL_UI_PART_" + slot;
+			key.ToUpper();
+			return DRL_UIText.Tr(key);
+		}
+		if (r)
+			return r.RecipeName;
+		return DRL_UIText.DisplayName(cls);
+	}
+
+	protected int PartOrder(string cls)
+	{
+		int i = BodySlots().Find(FirstSlotOf(cls));
+		if (i < 0)
+			return 100;
+		return i;
+	}
+
+	// Слова расцветки выбранного варианта, которых нет у основного результата
+	// (Vest_Silver_Away против Vest_Silver -> «away»): по ним подбираются части того же цвета.
+	protected array<string> VariantMarks(DRL_Craft_Recipe r, string chosen)
+	{
+		array<string> marks = new array<string>();
+		if (!r || chosen == "" || chosen == r.Result)
+			return marks;
+		array<string> mine = ClassWords(chosen);
+		array<string> baseWords = ClassWords(r.Result);
+		foreach (string wd : mine)
+		{
+			if (baseWords.Find(wd) < 0)
+				marks.Insert(wd);
+		}
+		return marks;
+	}
+
+	protected string PickVariant(DRL_Craft_Recipe pr, array<string> marks)
+	{
+		if (!pr.ResultClasses || pr.ResultClasses.Count() < 2 || marks.Count() == 0)
+			return pr.Result;
+		foreach (string cls : pr.ResultClasses)
+		{
+			array<string> words = ClassWords(cls);
+			bool allMatch = true;
+			foreach (string m : marks)
+			{
+				if (words.Find(m) < 0)
+				{
+					allMatch = false;
+					break;
+				}
+			}
+			if (allMatch)
+				return cls;
+		}
+		return pr.Result;
+	}
+
+	protected void FillSetInfo(DRL_Craft_Recipe r)
+	{
+		if (m_StationKind != DRL_ST_SEW)
+			return;
+		DRL_Craft_Config cfg = Cfg();
+		DRL_Craft_Category cat = ContextCategoryFor(r);
+		array<ref DRL_UISetPart> parts = new array<ref DRL_UISetPart>();
+		array<string> outfit = new array<string>();
+		array<int> orders = new array<int>();
+		string setName = "";
+		string chosen = ChosenResult();
+		array<string> marks = VariantMarks(r, chosen);
+		array<EntityAI> cachedItems = new array<EntityAI>();
+		GetInventorySnapshot(cachedItems);
+		if (cfg && cat && cat.ShowAll != 1 && cat.UseList == 1 && cat.List)
+		{
+			setName = DRL_UIText.Tr(cat.Name);
+			foreach (int id : cat.List)
+			{
+				DRL_Craft_Recipe pr = cfg.FindById(id);
+				if (!pr || !RecipeAllowedByContext(pr))
+					continue;
+				string cls = PickVariant(pr, marks);
+				if (pr == r)
+					cls = chosen;
+				DRL_UISetPart p = new DRL_UISetPart();
+				p.m_RecipeId = pr.RecipeId;
+				p.m_Name = PartName(cls, pr);
+				p.m_Selected = pr == r;
+				p.m_Locked = !DRL_LearnState.HasLearned(pr.RecipeId);
+				p.m_Ok = RecipeStatus(pr, cachedItems) == DRL_UI_STATUS_CAN;
+				// Вставка по порядку слотов сверху вниз.
+				int order = PartOrder(cls);
+				int at = 0;
+				while (at < orders.Count() && orders[at] <= order)
+				{
+					at++;
+				}
+				parts.InsertAt(p, at);
+				orders.InsertAt(order, at);
+				outfit.Insert(cls);
+			}
+		}
+		// Две вещи на один слот (два жилета) - «Жилет», «Жилет 2».
+		array<string> seen = new array<string>();
+		foreach (DRL_UISetPart sp : parts)
+		{
+			string baseName = sp.m_Name;
+			int dup = 1;
+			while (seen.Find(sp.m_Name) > -1)
+			{
+				dup++;
+				sp.m_Name = baseName + " " + dup.ToString();
+			}
+			seen.Insert(sp.m_Name);
+		}
+		if (parts.Count() == 0)
+		{
+			DRL_UISetPart only = new DRL_UISetPart();
+			only.m_RecipeId = r.RecipeId;
+			only.m_Name = PartName(chosen, r);
+			only.m_Selected = true;
+			only.m_Ok = RecipeStatus(r, cachedItems) == DRL_UI_STATUS_CAN;
+			parts.Insert(only);
+			outfit.Insert(chosen);
+		}
+		m_Bp.SetSet(setName, parts, outfit);
 	}
 
 	// «ЧЕРТЁЖ № 800 - АРТЕФАКТЫ»: вид листа, номер рецепта и категория.
@@ -2229,6 +2401,17 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		if (what == "more")
 		{
 			OpenRequirements();
+			return;
+		}
+		// Метка части сета на манекене: рецепт этой части.
+		if (what == "part")
+		{
+			DRL_Craft_Config partCfg = Cfg();
+			if (!partCfg)
+				return;
+			DRL_Craft_Recipe partR = partCfg.FindById(a);
+			if (partR && partR != m_SelectedRecipe)
+				SelectRecipeDirectly(partR);
 			return;
 		}
 		if (what == "var")
@@ -2938,9 +3121,25 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		values.Insert(DRL_UIText.Time(GetTotalCraftTimeSec(r)));
 		colors.Insert(txt);
 
-		labels.Insert("#STR_DRL_UI_STP_OUT");
-		values.Insert("x" + cnt.ToString());
-		colors.Insert(txt);
+		if (m_StationKind == DRL_ST_SEW)
+		{
+			// «Раскрой»: какая это часть сета и сколько у неё расцветок.
+			labels.Insert("#STR_DRL_UI_STP_PART");
+			values.Insert(PartName(chosen, r));
+			colors.Insert(txt);
+			int nColors = 1;
+			if (r.ResultClasses && r.ResultClasses.Count() > 1)
+				nColors = r.ResultClasses.Count();
+			labels.Insert("#STR_DRL_UI_STP_COLORS");
+			values.Insert(nColors.ToString());
+			colors.Insert(txt);
+		}
+		else
+		{
+			labels.Insert("#STR_DRL_UI_STP_OUT");
+			values.Insert("x" + cnt.ToString());
+			colors.Insert(txt);
+		}
 
 		labels.Insert("#STR_DRL_UI_STP_STATE");
 		values.Insert(DRL_UIText.StateFromDamage(r.ResultDamageFrac));
@@ -3027,13 +3226,16 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		if (hp >= 0)
 			hpText = hp.ToString() + " hp";
 
-		// Набор строк зависит от типа предмета: огнестрел, холодное оружие, боеприпасы или защита (как раньше).
+		// Набор строк зависит от типа предмета: огнестрел, одежда и броня (защита),
+		// холодное оружие, боеприпасы. Одежда проверяется до холодного оружия: у неё
+		// тоже есть MeleeModes (удар предметом), и вместо защиты показывался урон.
 		if (basePath.IndexOf("CfgWeapons ") == 0 && GetGame().ConfigIsExisting(basePath + " modes"))
 		{
 			FillStatsFirearm(basePath, hpText);
 			return;
 		}
-		if (GetGame().ConfigIsExisting(basePath + " MeleeModes Default ammo"))
+		bool isClothing = GetGame().IsKindOf(cls, "Clothing_Base") || GetGame().ConfigIsExisting(basePath + " DamageSystem GlobalArmor");
+		if (!isClothing && GetGame().ConfigIsExisting(basePath + " MeleeModes Default ammo"))
 		{
 			FillStatsMelee(basePath, hpText);
 			return;
@@ -3045,7 +3247,6 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		}
 
 		// Защиту показываем только одежде и броне; обычным предметам панель не нужна.
-		bool isClothing = GetGame().IsKindOf(cls, "Clothing_Base") || GetGame().ConfigIsExisting(basePath + " DamageSystem GlobalArmor");
 		if (!isClothing)
 		{
 			m_StatsBox.Show(false);
@@ -4107,6 +4308,12 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			m_Bp.TestClick("go", n, 0);
 			return TestState();
 		}
+		// «Раскрой»: метка части сета на манекене.
+		if (cmd == "part")
+		{
+			m_Bp.TestClick("part", n, 0);
+			return TestState();
+		}
 		// Доп. навесное: галочка, минус, плюс, вариант, переход к рецепту.
 		if (cmd == "drow" || cmd == "chk")
 		{
@@ -4225,6 +4432,8 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			if (n.IndexOf("DRL_Cat_") == 0 && m_Rail && m_Rail.OnClick(w, x, y, button))
 				return true;
 			if (n.IndexOf("DRL_Bp") == 0 && m_Bp && m_Bp.OnClick(w, x, y, button))
+				return true;
+			if (n.IndexOf("DRL_Cut") == 0 && m_Bp && m_Bp.OnClick(w, x, y, button))
 				return true;
 			if (n.IndexOf("DRL_Q") == 0 && m_Queue && m_Queue.OnClick(w, x, y, button))
 				return true;
