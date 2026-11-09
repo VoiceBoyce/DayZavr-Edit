@@ -1,0 +1,178 @@
+EffectDef {
+ Emitors {
+  EmitorDef Swamp {
+   ShapeType Sphere
+   ShapeSize 0 0 0
+   ConeAngle 360 0 360
+   MaxNum 700
+   BirthRate 300
+   BirthRateRND 300
+   Offset 0 1.5 0
+   Angles 0 0 0
+   Material "{37F2C835954FBAF0}graphics/particles/materials/enviroment/fly_swarm_01.emat"
+   SizeMultiplier 1.3
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 100
+   StreakFullUV 0
+   RandomAngle 1
+   Sort 0
+   Velocity 2
+   AirResistance 0.5
+   AirResistanceRND 1
+   GravityMultiply 0.01
+   Spring 0
+   Wind 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   LifeTime 1
+   LifeTimeRND 1
+   Color {
+    0 0.9563 0.4313 0.0063 1 1 0.5188 0
+   }
+   Alpha {
+    0 0 0.27419 1 0.72379 0.2 1 0
+   }
+   EffectTime 4
+   Repeat 0
+   AirResistanceMast {
+    0 1 0.04335 0.625 0.08972 0.74375 1 0.19375
+   }
+  }
+  EmitorDef LightEdge {
+   ShapeType Sphere
+   ShapeSize 0 0 0
+   ConeAngle 0 0 720
+   MaxNum 50
+   BirthRate 20
+   BirthRateRND 20
+   Offset 0 1.5 0
+   Angles 0 0 0
+   Material "{8F9D10702312E504}graphics/particles/materials/weapons/weapon_shot_fnx_01.emat"
+   SizeMultiplier 6
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 20
+   StreakFullUV 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   GravityMultiply 0
+   Spring 0
+   Wind 0
+   AnimFPS 1
+   LifetimeByAnim 0
+   LifeTime 1
+   LifeTimeRND 2
+   Color {
+    0 0.8875 0.6938 0.0875 1 0.5688 0.9937 0
+   }
+   Alpha {
+    0 0 0.1255 0.03125 0.18246 0.13125 0.20464 0.1625 0.23589 0.1 0.26411 0.175 0.29335 0.11875 0.312 0.13125 0.33921 0.11875 0.35635 0.15625 0.37349 0.0875 0.39466 0.1625 0.41885 0.1 0.4496 0.075 0.45212 0 1 0
+   }
+   Size {
+    0 0 0.72883 0.99375 0.73135 0 1 0
+   }
+   EffectTime 3
+   Repeat 0
+   ColorMast {
+    0 0.9063 0.1625 1 0.1709 0.825 0.7312 0.3938 0.256 0.3 1 0.6 0.3317 0.4938 0.9688 0.7937 0.4168 0.8438 0.6187 0.6187 0.4934 0.4 0.3 0.8375 0.5917 0.9125 0.2375 0.6875 0.6623 0.9438 0.3688 0.5875 0.7389 0.2125 0.9563 0.7563 0.8044 0.8625 0.95 0.5562 0.9435 0.425 0.8875 0.8875 1 0.4938 0.8313 0
+   }
+   AirResistanceMast {
+    0 0.75 0.05091 0.79375 0.1245 0.91875 0.19808 0.75625 0.30393 0.93125 0.36744 0.7375 0.44103 0.88125 0.50151 0.78125 0.5625 0.99375 0.63004 0.69375 0.7122 0.9875 0.85131 0.775 0.91986 0.9875 1 0.80625
+   }
+  }
+  EmitorDef Light {
+   ShapeType Sphere
+   ShapeSize 0 0 0
+   ConeAngle 0 0 720
+   MaxNum 150
+   BirthRate 100
+   BirthRateRND 20
+   Offset 0 1.5 0
+   Angles 0 0 0
+   Material "{CB7AF4FD8ACBFDFC}graphics/particles/materials/glow/glow1.emat"
+   SizeMultiplier 5
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 100
+   StreakFullUV 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   GravityMultiply 0
+   Spring 0
+   Wind 0
+   AnimFPS 1
+   LifetimeByAnim 0
+   LifeTime 1
+   LifeTimeRND 1
+   Color {
+    0 0.8875 0.6938 0.0875 1 0.5688 0.9937 0
+   }
+   Alpha {
+    0 0 0.1255 0.03125 0.18246 0 0.20161 0.01875 0.23437 0 0.26512 0.03125 0.29183 0 0.31048 0.025 0.34173 0 0.35585 0.33125 0.37147 0 0.41431 0.60625 0.41683 0 1 0
+   }
+   Size {
+    0 0 0.47177 0.38125 0.48942 0.8375 0.52016 0.16875 0.58266 0.81875 0.6749 0.1875 0.89768 0 1 0
+   }
+   EffectTime 5
+   Repeat 0
+   ColorMast {
+    0 0.9063 0.1625 1 0.1709 0.825 0.7312 0.3938 0.256 0.3 1 0.6 0.3317 0.4938 0.9688 0.7937 0.4168 0.8438 0.6187 0.6187 0.4934 0.4 0.3 0.8375 0.5917 0.9125 0.2375 0.6875 0.6623 0.9438 0.3688 0.5875 0.7389 0.2125 0.9563 0.7563 0.8044 0.8625 0.95 0.5562 0.9435 0.425 0.8875 0.8875 1 0.4938 0.8313 0
+   }
+   SizeMast {
+    0 1 0.65625 1 0.69002 0.40625 0.73639 0.6625 0.77117 0.2625 0.80897 0.625 0.84022 0 1 0
+   }
+   AirResistanceMast {
+    0 0.75 0.05091 0.79375 0.1245 0.91875 0.19808 0.75625 0.30393 0.93125 0.36744 0.7375 0.44103 0.88125 0.50151 0.78125 0.5625 0.99375 0.63004 0.69375 0.7122 0.9875 0.85131 0.775 0.91986 0.9875 1 0.80625
+   }
+  }
+  EmitorDef Light_cloned {
+   ShapeType Sphere
+   ShapeSize 0 0 0
+   ConeAngle 0 0 720
+   MaxNum 150
+   BirthRate 100
+   BirthRateRND 20
+   Offset 0 1.5 0
+   Angles 0 0 0
+   Material "{CB7AF4FD8ACBFDFC}graphics/particles/materials/glow/glow1.emat"
+   SizeMultiplier 2
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 100
+   StreakFullUV 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   GravityMultiply 0
+   Spring 0
+   Wind 0
+   AnimFPS 1
+   LifetimeByAnim 0
+   LifeTime 1
+   LifeTimeRND 1
+   Color {
+    0 0.8875 0.6938 0.0875 1 0.5688 0.9937 0
+   }
+   Alpha {
+    0 0 0.1255 0.03125 0.18246 0 0.20161 0.01875 0.23437 0 0.26512 0.03125 0.29183 0 0.31048 0.025 0.34173 0 0.35585 0.33125 0.37147 0 0.41431 0.60625 0.41683 0 1 0
+   }
+   Size {
+    0 0 0.47177 0.38125 0.48942 0.8375 0.52016 0.16875 0.58266 0.81875 0.6749 0.1875 0.89768 0 1 0
+   }
+   EffectTime 5
+   Repeat 0
+   ColorMast {
+    0 0.9063 0.1625 1 0.1709 0.825 0.7312 0.3938 0.256 0.3 1 0.6 0.3317 0.4938 0.9688 0.7937 0.4168 0.8438 0.6187 0.6187 0.4934 0.4 0.3 0.8375 0.5917 0.9125 0.2375 0.6875 0.6623 0.9438 0.3688 0.5875 0.7389 0.2125 0.9563 0.7563 0.8044 0.8625 0.95 0.5562 0.9435 0.425 0.8875 0.8875 1 0.4938 0.8313 0
+   }
+   SizeMast {
+    0 1 0.65625 1 0.69002 0.40625 0.73639 0.6625 0.77117 0.2625 0.80897 0.625 0.84022 0 1 0
+   }
+   AirResistanceMast {
+    0 0.75 0.05091 0.79375 0.1245 0.91875 0.19808 0.75625 0.30393 0.93125 0.36744 0.7375 0.44103 0.88125 0.50151 0.78125 0.5625 0.99375 0.63004 0.69375 0.7122 0.9875 0.85131 0.775 0.91986 0.9875 1 0.80625
+   }
+  }
+ }
+}

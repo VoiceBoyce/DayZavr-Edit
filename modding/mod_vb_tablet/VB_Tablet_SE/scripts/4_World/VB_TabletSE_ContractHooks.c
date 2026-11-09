@@ -115,11 +115,32 @@ modded class ActionContinuousBase
 	}
 }
 
+// «Найти предмет» (ItemGroups): засчитывается только предмет, появившийся в этой сессии и ещё не бывший
+// у игрока. Отметки в памяти, в сохранение не пишутся.
 modded class ItemBase
 {
+	protected bool m_VbFromStore;	// загружен из базы после рестарта (тайник, инвентарь)
+	protected bool m_VbTaken;		// уже был у игрока: передача и повторный подъём не считаются
+
+	override void AfterStoreLoad()
+	{
+		super.AfterStoreLoad();
+		m_VbFromStore = true;
+	}
+
+	bool VbFreshFind()
+	{
+		return !m_VbFromStore && !m_VbTaken;
+	}
+
+	void VbMarkTaken()
+	{
+		m_VbTaken = true;
+	}
+
 	override void EEItemLocationChanged(notnull InventoryLocation oldLoc, notnull InventoryLocation newLoc)
 	{
 		super.EEItemLocationChanged(oldLoc, newLoc);
-		VB_TabletContracts.OnItemMoved(oldLoc, newLoc);
+		VB_TabletContracts.OnItemMoved(this, oldLoc, newLoc);
 	}
 }

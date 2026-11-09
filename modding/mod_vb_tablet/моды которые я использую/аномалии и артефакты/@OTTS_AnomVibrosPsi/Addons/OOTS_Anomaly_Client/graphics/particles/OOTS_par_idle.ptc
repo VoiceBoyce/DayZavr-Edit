@@ -1,0 +1,101 @@
+EffectDef {
+ Emitors {
+  EmitorDef Spark {
+   ShapeType Point
+   ShapeSize 2 0 2
+   ConeAngle 360 15 15
+   MaxNum 20
+   BirthRate 5
+   BirthRateRND 5
+   BirthRateVel 3
+   Offset 0 0 0
+   Angles 0 0 0
+   LocalTransform 1
+   Material "{06FE1160E94DB657}OOTS_Anomaly_Client/graphics/particles/materials/snow/WhiteSmoke.emat"
+   SizeMultiplier 2
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 20
+   RandomAngle 1
+   Sort 0
+   Velocity 1
+   VelocityRND 0.5
+   VelAffect 0
+   AirResistance 0.01
+   RandomFrame 1
+   LifeTime 1
+   LifeTimeRND 0.5
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.48431 0.02222 1 0
+   }
+   Size {
+    0 0.19259 1 1
+   }
+  }
+  EmitorDef Smoke {
+   ShapeType Box
+   ShapeSize 2 0 2
+   ConeAngle 360 15 15
+   MaxNum 10
+   BirthRateRND 2
+   BirthRateVel 1
+   Offset 0 0 0
+   Angles 0 0 0
+   LocalTransform 1
+   Material "{A6CF8823848E26EA}graphics/particles/materials/smoke/smoke_cloud_01_b_trans_rgd2_02.emat"
+   ScaleX 1
+   ScaleY 0.5
+   SizeMultiplier 4
+   SizeRND 2
+   RandomRotDir 0
+   RotMultiplier 0
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   Spring 0
+   AnimFPS 0
+   RandomFrame 1
+   LifeTime 3
+   LifeTimeRND 0.5
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.46536 0.06667 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+  }
+  EmitorDef SparkLong {
+   ShapeType Box
+   ShapeSize 2 0 2
+   ConeAngle 360 90 0
+   MaxNum 3
+   BirthRate 1
+   BirthRateRND 1
+   Material "{009C2EBAACD2D72A}graphics/particles/materials/fire/sparks1.emat"
+   SizeMultiplier 0.01
+   SizeRND 0.02
+   StretchMultiplier 1.02
+   Velocity 5
+   VelocityRND 3
+   AirResistance 1
+   GravityMultiply 1
+   GravityMultiplyRND 0.1
+   RandomFrame 1
+   LifeTime 1
+   LifeTimeRND 0.5
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.02848 1 0.2682 0.39437 0.31883 0.73239 0.39241 0.11268 0.43434 0.73944 0.48972 0.04225 0.54035 0.56338 0.57991 0.1338 0.62896 0.70423 0.65585 0 0.70411 0.61268 0.74367 0.12676 0.79035 0.06338 1 0
+   }
+  }
+ }
+}

@@ -1,0 +1,131 @@
+EffectDef {
+ MinFPS 20
+ Emitors {
+  EmitorDef Leavse2 {
+   ShapeType Box
+   ShapeSize 3 0 3
+   ConeAngle 360 360 10
+   MaxNum 20
+   BirthRate 2
+   BirthRateRND 2
+   Offset 0 0.2 0
+   Material "{4B4526DC1D37F5C7}graphics/particles/materials/enviroment/leaf_01_autumn.emat"
+   SizeMultiplier 0.09
+   SizeRND 0.04
+   RandomRotDir 1
+   RotMultiplier 30
+   RandomAngle 1
+   Sort 0
+   Velocity 1
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   Spring 0.002
+   AnimOnce 0
+   AnimFPS 15
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 2
+   LifeTimeRND 3
+   Alpha {
+    0 0 0.15675 1 0.5499 0.9125 0.80796 0 0.86298 0 1 0
+   }
+   Size {
+    0 1 0.50706 1 1 1
+   }
+   VelocityMast {
+    0 0 0.16028 0.425 0.2631 0.04375 0.35484 0.4 0.48942 0.0625 0.59577 0.45625 0.68347 0.125 0.75 0.4375 0.84022 0.09375 0.93347 0.4 1 0.475
+   }
+  }
+  EmitorDef LeavseRing {
+   ShapeType Box
+   ShapeSize 1 1 1
+   ConeAngle 360 0 360
+   MaxNum 20
+   BirthRate 2
+   BirthRateRND 2
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{4369448B822FD818}graphics/particles/materials/enviroment/leaves_02.emat"
+   SizeMultiplier 0.05
+   SizeRND 0.02
+   RandomRotDir 1
+   RotMultiplier 20
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 1
+   VelocityRND 1
+   VelAffect 0
+   AirResistance 0.3
+   AirResistanceRND 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution 0
+   Spring 0
+   AnimFPS 24
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 3
+   LifeTimeRND 2
+   Alpha {
+    0 0 0.35276 0 0.44587 1 0.89553 1 1 0
+   }
+   RotationSpeed {
+    0 0 1 1
+   }
+   VelocityMast {
+    0 0 0.05796 0.225 0.11089 0.09375 0.17692 0.20625 0.27419 0.00625 0.32208 0.25 0.42087 0.06875 0.53276 0.24375 0.6003 0.01875 0.70565 0.21875 0.79435 0 0.86845 0.325 0.92994 0.0125 1 0.2125
+   }
+  }
+  EmitorDef Stone {
+   ShapeType Box
+   ShapeSize 2 0 2
+   MaxNum 50
+   BirthRate 5
+   BirthRateRND 5
+   BirthRateVel 5
+   Offset 0 0.1 0
+   Material "{6187242A85D55644}graphics/particles/materials/enviroment/brick_01.emat"
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.04
+   SizeRND 0.08
+   RandomRotDir 1
+   RotMultiplier 20
+   RandomAngle 1
+   Velocity 0.1
+   VelocityRND 0.004
+   GravityMultiplyRND 0.004
+   Spring 0
+   AnimOnce 0
+   AnimFPS 10
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 5
+   LifeTimeRND 4
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.21522 0.06875 0.33921 1 0.67843 1 0.79839 0.3 0.89264 0.09375 1 0
+   }
+   EffectTime 10
+   ColorMast {
+    0 0.7375 0.7375 0.7375 1 0.7437 0.75 0.7437
+   }
+   AlphaMast {
+    0 1 0.51109 1 1 1
+   }
+   SizeMast {
+    0 0.675 0.21976 0.40625 0.29385 0.76875 0.36794 0.4 0.4622 0.6625 0.51058 0.2875 0.56754 0.6625 0.60685 0.3625 0.68347 0.85 0.75857 0.28125 0.81956 0.6625 0.8619 0.28125 0.89617 0.6875 0.92742 0.3 0.96976 0.56875 1 0.225
+   }
+   BRateMast {
+    0 0.5 1 1
+   }
+  }
+ }
+}

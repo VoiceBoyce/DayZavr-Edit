@@ -1,0 +1,54 @@
+EffectDef {
+ Emitors {
+  EmitorDef Leavse2 {
+   ShapeType Box
+   ShapeSize 2 0 2
+   BirthRate 1
+   BirthRateRND 1
+   Material "{1D816DC83DA25617}graphics/particles/materials/enviroment/leaves_01.emat"
+   SizeMultiplier 0.02
+   SizeRND 0.07
+   RandomRotDir 1
+   RotMultiplier 10
+   RandomAngle 1
+   Velocity 0.3
+   AnimFPS 6
+   LifeTimeRND 2
+   Alpha {
+    0 0 0.1518 1 0.85368 1 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+  }
+  EmitorDef Smoke {
+   ShapeType Box
+   ShapeSize 2 0 2
+   MaxNum 20
+   BirthRate 5
+   BirthRateRND 5
+   Material "{68CF090B6BE4ED52}graphics/particles/materials/smoke/steam_random_weapon_01.emat"
+   SizeMultiplier 1
+   SizeRND 2
+   RandomRotDir 1
+   RotMultiplier 20
+   RandomAngle 1
+   Velocity 0.3
+   AirResistance 0.3
+   AirResistanceRND 0.2
+   AnimFPS 0
+   RandomFrame 1
+   LifeTime 2
+   LifeTimeRND 1
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.1915 0.01481 0.4366 0 0.71569 0.01481 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+  }
+ }
+}

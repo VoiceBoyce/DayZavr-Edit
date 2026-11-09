@@ -19,6 +19,8 @@ class VB_TabletContracts
 	protected static ref array<ref VB_TabletContractDef> s_Defs;
 	protected static ref array<string> s_Names;
 	protected static ref map<string, bool> s_Boxes;
+	// Аддон VB_Tablet_DRL загружен и сообщает о крафте (ставит до старта миссии, до Prepare).
+	static bool s_CraftHook;
 
 	// Есть ли на сервере хотя бы один класс из списка: иначе контракт нельзя выполнить.
 	protected static bool AnyExists(array<string> classes)
@@ -68,6 +70,23 @@ class VB_TabletContracts
 		{
 			if (b.Kind == kind)
 				return AnyExists(b.Classes);
+		}
+		if (cfg.ItemGroups)
+		{
+			foreach (VB_TabletKillGroup ig : cfg.ItemGroups)
+			{
+				if (ig.Kind == kind)
+					return AnyExists(ig.Classes);
+			}
+		}
+		// Крафт DRL_CraftMenu: считает только аддон VB_Tablet_DRL, без него контракт не выдаётся.
+		if (cfg.CraftGroups)
+		{
+			foreach (VB_TabletKillGroup cg : cfg.CraftGroups)
+			{
+				if (cg.Kind == kind)
+					return s_CraftHook && AnyExists(cg.Classes);
+			}
 		}
 		// Группа действий: класс действия есть в скриптах (мод загружен) и, если задано, есть классы целей.
 		if (cfg.ActionGroups)
@@ -121,8 +140,13 @@ class VB_TabletContracts
 				d.Need = t.Need.Get(tier);
 				d.ClanMult = Math.Max(1, t.ClanMult);
 				d.Ico = t.Ico;
+				// Title и Hint в contracts.json необязательны: ключи строк по Kind.
 				d.Title = t.Title;
+				if (d.Title == "")
+					d.Title = "#STR_VB_TAB_CK_" + t.Kind;
 				d.Hint = t.Hint;
+				if (d.Hint == "")
+					d.Hint = "#STR_VB_TAB_CH_" + t.Kind;
 				s_Defs.Insert(d);
 			}
 		}
@@ -493,20 +517,31 @@ class VB_TabletContracts
 	// Предмет взят из ящика ивента или поднят с земли рядом с ним. Один ящик засчитывается каждому игроку
 	// один раз (личные контракты, достижения), а клановому контракту один раз на клан: пятеро у одного
 	// аирдропа дают клану +1.
-	static void OnItemMoved(InventoryLocation oldLoc, InventoryLocation newLoc)
+	static void OnItemMoved(ItemBase item, InventoryLocation oldLoc, InventoryLocation newLoc)
 	{
+		EntityAI from = oldLoc.GetParent();
+		// Предмет был у игрока (куплен, передан, выброшен): в «найти предмет» больше не идёт.
+		if (from && from.GetHierarchyRootPlayer())
+		{
+			item.VbMarkTaken();
+			return;
+		}
 		EntityAI to = newLoc.GetParent();
 		if (!to)
 			return;
 		PlayerBase player = PlayerBase.Cast(to.GetHierarchyRootPlayer());
 		if (!player || !player.GetIdentity())
 			return;
+		// Создан сразу у игрока (торговец, награда, админ): прошлого места нет, это не находка.
+		if (!from && oldLoc.GetType() != InventoryLocationType.GROUND)
+		{
+			item.VbMarkTaken();
+			return;
+		}
+		OnItemFound(player, item);
 		EntityAI box = null;
-		EntityAI from = oldLoc.GetParent();
 		if (from)
 		{
-			if (from.GetHierarchyRootPlayer())
-				return;
 			box = from.GetHierarchyRoot();
 		}
 		else if (oldLoc.GetType() == InventoryLocationType.GROUND)
@@ -521,6 +556,71 @@ class VB_TabletContracts
 			if (VB_TabletServer.IsListed(box, group.Classes))
 				CountOnce(player, box, group.Kind);
 		}
+	}
+
+	// Игрок взял предмет с земли или из чужого контейнера: группы ItemGroups («найти артефакт»).
+	// Засчитывается первому, кто взял предмет, появившийся в этой сессии; дальше предмет помечен.
+	protected static void OnItemFound(PlayerBase player, ItemBase item)
+	{
+		bool fresh = item.VbFreshFind();
+		item.VbMarkTaken();
+		if (!fresh)
+			return;
+		array<ref VB_TabletKillGroup> groups = VB_TabletConfig.Get().ItemGroups;
+		if (!groups)
+			return;
+		VB_TabletRecord rec = null;
+		foreach (VB_TabletKillGroup g : groups)
+		{
+			if (!VB_TabletServer.IsListed(item, g.Classes))
+				continue;
+			if (!rec)
+				rec = VB_TabletPlayers.Get(player.GetIdentity().GetPlainId(), player.GetIdentity().GetName());
+			CountAch(rec, g.Kind);
+			Add(rec, g.Kind, 1, false);
+		}
+	}
+
+	// Крафт завершён (аддон VB_Tablet_DRL): count раз получен предмет cls. Группы CraftGroups и достижение крафта.
+	static void OnCrafted(PlayerBase player, string cls, int count)
+	{
+		if (!player || !player.GetIdentity() || cls == "" || count < 1)
+			return;
+		array<ref VB_TabletKillGroup> groups = VB_TabletConfig.Get().CraftGroups;
+		if (!groups)
+			return;
+		VB_TabletRecord rec = null;
+		foreach (VB_TabletKillGroup g : groups)
+		{
+			if (!ClassListed(cls, g.Classes))
+				continue;
+			if (!rec)
+			{
+				rec = VB_TabletPlayers.Get(player.GetIdentity().GetPlainId(), player.GetIdentity().GetName());
+				rec.AchCraft += count;
+				rec.Dirty = true;
+			}
+			Add(rec, g.Kind, count, false);
+		}
+	}
+
+	// Имя класса в списке: точное, по началу со звёздочкой или наследник по конфигу.
+	protected static bool ClassListed(string type, array<string> classes)
+	{
+		foreach (string cls : classes)
+		{
+			int star = cls.Length() - 1;
+			if (star > 0 && cls.Get(star) == "*")
+			{
+				if (type.IndexOf(cls.Substring(0, star)) == 0)
+					return true;
+			}
+			else if (type == cls || GetGame().IsKindOf(type, cls))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	// Объект (ящик ивента, жила) засчитывается игроку один раз (личные контракты, достижения)

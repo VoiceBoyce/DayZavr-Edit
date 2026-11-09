@@ -1,0 +1,7 @@
+Particle {
+ AlbedoMap "{EA243A96B5237E11}OOTS_Anomaly_Client/graphics/particles/materials/teleport/GalaxuTwo.edds" 
+ Emissive 1 1 1 1
+ CastShadow 1
+ Softness 1
+ CameraBlendFar 0.001
+}

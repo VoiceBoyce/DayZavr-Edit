@@ -1,0 +1,9 @@
+Particle {
+ AlbedoMap "{A885DB9B6ED76D96}OOTS_Anomaly_Client/graphics/particles/materials/Glass/GlassMash2.edds" 
+ Emissive 1 1 1 1
+ CastShadow 1
+ NormalMap "{A885DB9B6ED76D96}OOTS_Anomaly_Client/graphics/particles/materials/Glass/GlassMash2.edds" 
+ BlendMode Additive_AlphaModulate
+ Softness 1
+ CameraBlendFar 0.001
+}

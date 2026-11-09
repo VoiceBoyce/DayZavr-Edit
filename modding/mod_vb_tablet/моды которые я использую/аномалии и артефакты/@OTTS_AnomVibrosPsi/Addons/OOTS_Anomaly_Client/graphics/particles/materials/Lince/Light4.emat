@@ -1,0 +1,8 @@
+Particle {
+ AlbedoMap "{660DFD24CD0FFE6A}OOTS_Anomaly_Client/graphics/particles/materials/Lince/Light4.edds" 
+ Emissive 0.8745 1 1 1
+ CastShadow 1
+ BlendMode Additive_AlphaModulate
+ Softness 1
+ CameraBlendFar 0.001
+}

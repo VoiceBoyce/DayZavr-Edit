@@ -1,0 +1,138 @@
+EffectDef {
+ Emitors {
+  EmitorDef Leavse2 {
+   ShapeType Sphere
+   ShapeSize 5 5 5
+   ConeAngle 360 360 10
+   MaxNum 20
+   BirthRate 2
+   BirthRateRND 2
+   Offset 0 0 0
+   Material "{CB7AF4FD8ACBFDFC}graphics/particles/materials/glow/glow1.emat"
+   SizeMultiplier 0.03
+   SizeRND 0.01
+   RandomRotDir 1
+   RotMultiplier 10
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   Spring 0.01
+   AnimFPS 24
+   RandomFrame 0
+   LifeTime 2
+   LifeTimeRND 3
+   Alpha {
+    0 0 0.07124 0.19259 0.14314 0.03704 0.22026 0.19259 0.28039 0.02963 0.36209 0.17037 0.49432 0 0.86298 0 1 0
+   }
+  }
+  EmitorDef LeavseRing {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 360 360 0
+   MaxNum 20
+   BirthRate 2
+   BirthRateRND 2
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{CB7AF4FD8ACBFDFC}graphics/particles/materials/glow/glow1.emat"
+   SizeMultiplier 0.05
+   SizeRND 0.02
+   RandomRotDir 1
+   RotMultiplier 20
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 1
+   VelocityRND 1
+   VelAffect 0
+   AirResistance 1
+   AirResistanceRND 1
+   GravityMultiply 0.001
+   GravityMultiplyRND 0.01
+   Restitution 0
+   Spring 0.001
+   AnimFPS 24
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 6
+   LifeTimeRND 4
+   Alpha {
+    0 0 0.35276 0 0.4268 0.14815 0.50131 0 0.58301 0.15556 0.65817 0 0.76667 0.0963 0.8281 0.00741 0.88824 0.08148 0.92353 0.02963 0.9634 0.14815 1 0
+   }
+   RotationSpeed {
+    0 0 1 1
+   }
+  }
+  EmitorDef Hole {
+   MaxNum 10
+   BirthRate 4
+   BirthRateRND 2
+   Offset 0 0 0
+   Material "{E77CE1C109C00FC5}OOTS_Anomaly_Client/graphics/particles/materials/voronka/BubbleHole.emat"
+   SizeMultiplier 7
+   SizeRND 1
+   Spring 1
+   AnimFPS 25
+   RandomFrame 0
+   LifeTime 2
+   LifeTimeRND 1
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0.11852 0.09477 0.18519 0.20261 0.03704 0.26405 0.25926 0.34837 0.02963 0.4281 0.15556 0.51046 0.03704 0.57255 0.22222 0.6268 0.03704 0.67712 0.18519 0.72418 0.03704 0.77516 0.2 0.83203 0.05185 0.88889 0.32593 0.94118 0.01481 1 0.21481
+   }
+   EffectTime 10
+   ColorMast {
+    0 1 1 1 1 1 1 1
+   }
+   AlphaMast {
+    0 0.14815 0.49085 0.31111 1 0.15556
+   }
+   SizeMast {
+    0 1 1 0.23239
+   }
+   BRateMast {
+    0 0.5 1 1
+   }
+  }
+  EmitorDef smoke {
+   MaxNum 10
+   BirthRate 4
+   BirthRateRND 2
+   Offset 0 0 0
+   Material "{55020E0786F83004}graphics/particles/materials/smoke/smoke_anim_01.emat"
+   SizeMultiplier 4
+   SizeRND 1
+   Spring 1
+   AnimFPS 0
+   RandomFrame 1
+   LifeTime 2
+   LifeTimeRND 1
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.53595 0.01481 1 0
+   }
+   EffectTime 10
+   ColorMast {
+    0 1 1 1 1 1 1 1
+   }
+   AlphaMast {
+    0 1 1 1
+   }
+   SizeMast {
+    0 1 1 0.5
+   }
+   BRateMast {
+    0 0.5 1 1
+   }
+  }
+ }
+}

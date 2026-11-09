@@ -1,0 +1,133 @@
+EffectDef {
+ Emitors {
+  EmitorDef Light {
+   ShapeType Box
+   ShapeSize 0 0 0
+   ConeAngle 0 0 0
+   MaxNum 5
+   BirthRate 1
+   BirthRateRND 1
+   Offset 0 1.5 0
+   Material "{32CF29535EBF2D40}OOTS_Anomaly_Client/graphics/particles/materials/Other/Lighting.emat"
+   SizeMultiplier 3
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 10
+   StreakFullUV 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   Spring 0
+   AnimFPS 30
+   LifeTime 6
+   LifeTimeRND 5
+   Color {
+    0 1 0.6 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.13357 0.72593 0.19052 0.15625 0.21472 0.71875 0.2994 0.3375 0.35383 0.75 0.38155 0.23125 0.4249 0.78125 0.47933 0.325 0.57107 0.69375 0.65524 0.23125 0.71573 0.78125 0.77268 0.1875 0.82157 0.5375 1 0
+   }
+   Size {
+    0 0.78125 0.14667 0.23125 0.21522 0.86875 0.24093 0.05 0.26462 0.9625 0.40776 0.15625 0.44304 0.95 0.49748 0.00625 0.52923 1 0.58921 0.28125 0.63105 1 0.72883 0.35625 0.79536 0.8625 0.90323 0.375 0.94607 1 1 0.275
+   }
+   AlphaMast {
+    0 0.2875 1 0.3125
+   }
+  }
+  EmitorDef Ring {
+   ShapeType Point
+   ShapeSize 2 2 2
+   ConeAngle 360 0 720
+   MaxNum 10
+   BirthRate 3
+   BirthRateRND 2
+   Offset 0 1.5 0
+   Material "{C8185B6EBE58D977}OOTS_Anomaly_Client/graphics/particles/materials/Other/Ring.emat"
+   SizeMultiplier 1.5
+   SizeRND 0.5
+   RandomRotDir 1
+   RotMultiplier 90
+   StreakFullUV 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   Spring 0
+   AnimFPS 30
+   LifeTime 3
+   LifeTimeRND 2
+   Color {
+    0 1 0.6 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.17059 0.72593 0.48758 1 1 0
+   }
+   Size {
+    0 1 1 0.28125
+   }
+   AlphaMast {
+    0 0.575 1 0.55625
+   }
+  }
+  EmitorDef LightMid {
+   ShapeType Box
+   ShapeSize 0 0 0
+   ConeAngle 360 0 720
+   MaxNum 5
+   BirthRate 1
+   BirthRateRND 1
+   Offset 0 1.5 0
+   Material "{8F96A9B22F1651B2}OOTS_Anomaly_Client/graphics/particles/materials/Other/Lighting2.emat"
+   SizeMultiplier 2
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 50
+   StreakFullUV 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   Spring 0
+   AnimFPS 30
+   LifeTime 6
+   LifeTimeRND 3
+   Color {
+    0 1 0.6 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.17059 0.72593 0.48758 1 1 0
+   }
+   Size {
+    0 0.25625 1 1
+   }
+  }
+  EmitorDef SphereLightingHole {
+   ShapeType Point
+   ShapeSize 2 2 2
+   ConeAngle 360 0 720
+   MaxNum 10
+   BirthRate 10
+   BirthRateRND 10
+   Offset 0 1.5 0
+   Material "{E77CE1C109C00FC5}OOTS_Anomaly_Client/graphics/particles/materials/voronka/BubbleHole.emat"
+   SizeMultiplier 1.5
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 30
+   StreakFullUV 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   AirResistance 0
+   Spring 0
+   AnimFPS 24
+   LifetimeByAnim 0
+   LifeTime 6
+   LifeTimeRND 3
+   Color {
+    0 0.2688 0.7481 1 0.3317 0.35 0.4687 0.8438 1 0.4187 0.8519 1
+   }
+   Alpha {
+    0 0 0.04183 0.07407 0.11492 0.2875 0.25958 0.09375 0.33065 0.24375 0.41179 0.06875 0.46421 0.11875 0.51865 0.325 0.56855 0.0625 0.63105 0.38125 0.6754 0.05625 0.74446 0.25625 0.8004 0.175 0.85081 0.36875 0.89412 0.04444 1 0
+   }
+  }
+ }
+}

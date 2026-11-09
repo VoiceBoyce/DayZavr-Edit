@@ -1,0 +1,61 @@
+{
+    "DebugLogs_enabled": 0,
+    "DetectorsConfig": [
+        {
+            "ClassName": "Anomaly_Detector_Otklik",
+            "Radius": 10.0
+        },
+        {
+            "ClassName": "Anomaly_Detector_Medved",
+            "Radius": 15.0
+        },
+        {
+            "ClassName": "Anomaly_Detector_Svarog",
+            "Radius": 20.0
+        }
+    ],
+    "AnomalyList": [
+		{
+			"m_Title" : "Tier_1",
+			"m_Handler" : 
+			{
+				"shapedata" : "2|40|4",
+				"position" : [6331.043457, 92.129990, 755.403137],
+				"orientation" : [0, 0, 0],
+				"enter_smothtime" : 2,
+				"leave_smothtime" : 4,
+				"only_triggers" : 1				
+			},
+			"m_Files" : 
+			[
+				"anomalies\\defaults.json"
+			]
+		},
+		{
+			"m_Title" : "Tier_2",
+			"m_Handler" : 
+			{
+				
+			},
+			"m_Files" : 
+			[
+				"anomalies\\defaults2.json"
+			]
+		}
+    ],
+	"Teleports" : 
+	[
+		{
+			"m_Title" : "teleports",
+			"m_Handler" : 
+			{
+				"shapedata" : "0|<-7.0,-1.0,-5.0>|<9.0,4.0,7.0>",
+				"position" : [6307.39013671875, 92.12999725341797, 679.5250244140625]
+			},
+			"m_Files" : 
+			[
+				"teleports\\defaults.json"
+			]
+		}
+	]
+}

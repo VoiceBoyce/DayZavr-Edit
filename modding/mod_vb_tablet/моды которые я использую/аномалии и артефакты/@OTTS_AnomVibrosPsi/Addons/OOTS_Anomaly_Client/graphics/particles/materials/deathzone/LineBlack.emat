@@ -1,0 +1,14 @@
+Particle {
+ AlbedoMap "{A0D72246D81825FF}OOTS_Anomaly_Client/graphics/particles/materials/deathzone/BlackLine.edds" alpha 
+ Color 0 0 0 1
+ Emissive 0 0 0 1
+ ZEnable 0
+ ZWrite 0
+ CastShadow 1
+ DisableFog 1
+ NormalMap "{A0D72246D81825FF}OOTS_Anomaly_Client/graphics/particles/materials/deathzone/BlackLine.edds" alpha 
+ TileU 8
+ TileV 8
+ Softness 1
+ CameraBlendFar 0.001
+}

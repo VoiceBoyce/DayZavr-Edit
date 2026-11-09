@@ -180,6 +180,7 @@ class VB_TabletRates
 		array<int> levels = Levels();
 		foreach (int lv : levels)
 			rpc.Write(lv);
+		VB_TabletAch.Write(rpc);
 	}
 
 	bool Read(ParamsReadContext ctx)
@@ -205,7 +206,7 @@ class VB_TabletRates
 		}
 		RankNeed = needs;
 		SetLevels(levels);
-		return true;
+		return VB_TabletAch.Read(ctx);
 	}
 
 	int RankOf(int xp)
@@ -365,22 +366,82 @@ class VB_TabletStats
 	}
 }
 
-// Достижения: 8 показателей по 3 ступени. Значок и текст по индексу.
+// Достижения: 16 показателей по 3 ступени. Значок и текст по индексу.
+// Пороги и опыт за ступени сервер берёт из config/achievements.json и присылает клиенту в HELLO (с VB_TabletRates).
 class VB_TabletAch
 {
+	protected static ref array<int> s_Steps;	// VB_ACH_COUNT * VB_ACH_STEPS
+	protected static ref array<int> s_Rewards;	// VB_ACH_STEPS
+
+	static array<int> DefaultSteps()
+	{
+		return {100, 1000, 10000, 10, 100, 1000, 25, 250, 2500, 10, 100, 500, 50, 500, 5000, 24, 100, 500, 7, 30, 180, 100, 1000, 10000, 50, 500, 2500, 25, 250, 1000, 50, 500, 5000, 25, 250, 1000, 10, 100, 1000, 5, 50, 250, 15, 75, 300, 3, 6, 10};
+	}
+
+	static array<int> DefaultRewards()
+	{
+		return {50, 250, 1000};
+	}
+
 	static int Step(int ach, int step)
 	{
-		array<int> all = {100, 1000, 10000, 10, 100, 1000, 25, 250, 2500, 10, 100, 500, 50, 500, 5000, 24, 100, 500, 7, 30, 180, 100, 1000, 10000, 50, 500, 2500, 25, 250, 1000, 50, 500, 5000, 25, 250, 1000, 10, 100, 1000, 5, 50, 250, 15, 75, 300, 3, 6, 10};
-		return all.Get(ach * VB_ACH_STEPS + step);
+		if (!s_Steps)
+			s_Steps = DefaultSteps();
+		return s_Steps.Get(ach * VB_ACH_STEPS + step);
 	}
 
 	static int Reward(int step)
 	{
-		if (step == 0)
-			return 50;
-		if (step == 1)
-			return 250;
-		return 1000;
+		if (!s_Rewards)
+			s_Rewards = DefaultRewards();
+		return s_Rewards.Get(step);
+	}
+
+	// Неполные списки не принимаются: остаются прежние значения.
+	static void Set(array<int> steps, array<int> rewards)
+	{
+		if (!steps || steps.Count() != VB_ACH_COUNT * VB_ACH_STEPS || !rewards || rewards.Count() != VB_ACH_STEPS)
+			return;
+		s_Steps = new array<int>();
+		s_Steps.Copy(steps);
+		s_Rewards = new array<int>();
+		s_Rewards.Copy(rewards);
+	}
+
+	static void Write(ScriptRPC rpc)
+	{
+		if (!s_Steps)
+			s_Steps = DefaultSteps();
+		if (!s_Rewards)
+			s_Rewards = DefaultRewards();
+		foreach (int s : s_Steps)
+			rpc.Write(s);
+		foreach (int r : s_Rewards)
+			rpc.Write(r);
+	}
+
+	// Во временные списки: при обрыве пакета прежние значения не портятся.
+	static bool Read(ParamsReadContext ctx)
+	{
+		array<int> steps = new array<int>();
+		array<int> rewards = new array<int>();
+		int n = VB_ACH_COUNT * VB_ACH_STEPS;
+		for (int i = 0; i < n; i++)
+		{
+			int s;
+			if (!ctx.Read(s))
+				return false;
+			steps.Insert(s);
+		}
+		for (int k = 0; k < VB_ACH_STEPS; k++)
+		{
+			int r;
+			if (!ctx.Read(r))
+				return false;
+			rewards.Insert(r);
+		}
+		Set(steps, rewards);
+		return true;
 	}
 
 	static string IconOf(int ach)

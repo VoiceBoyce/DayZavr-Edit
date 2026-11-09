@@ -1,0 +1,11 @@
+Particle {
+ AlbedoMap "{D676882DF1BFDB1A}OOTS_Anomaly_Client/graphics/particles/materials/zharka/SparkLong.edds" 
+ Emissive 1 1 1 1
+ CastShadow 1
+ NormalMap "{215C6DFE23E51E97}D&D_Amonaly/Graphics/edds/SparkLongNorm.edds" 
+ BlendMode Additive_AlphaModulate
+ TileU 4
+ TileV 4
+ Softness 1
+ CameraBlendFar 0.001
+}

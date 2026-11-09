@@ -1,0 +1,17 @@
+enum DetectorDistancesSignals
+{
+	DISTANCE_NONE = 0,
+	DISTANCE_SPAWN = 1,
+	DISTANCE_CLOSE = 2,
+	DISTANCE_MIDDLE,
+	DISTANCE_FAR,
+	ARTEFACT_SPAWN
+}
+
+enum BlowOutPhases
+{
+	COOLDOWN = 0,
+	WARNING = 1,
+	ACTIVE,
+	END
+}

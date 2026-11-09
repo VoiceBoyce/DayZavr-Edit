@@ -1,0 +1,424 @@
+EffectDef {
+ Emitors {
+  EmitorDef SphereLightingSplash {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 0 0 720
+   MaxNum 200
+   BirthRate 200
+   BirthRateRND 200
+   Offset 0 2 0
+   Angles 0 90 0
+   Material "{4E3998CCD97CB908}OOTS_Anomaly_Client/graphics/particles/materials/electra/Lighting01/Lighting001.emat"
+   SizeMultiplier 6
+   SizeRND 3
+   RandomRotDir 1
+   RotMultiplier 2
+   StreakFullUV 1
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   BillboardingType Full
+   Velocity 40
+   VelocityRND 15
+   VelAffect 0
+   AirResistance 2
+   AirResistanceRND 0
+   GravityMultiply 0.05
+   GravityMultiplyRND 0.02
+   Spring 0
+   AnimOnce 1
+   AnimFPS 30
+   LifetimeByAnim 0
+   LifeTime 2
+   LifeTimeRND 1
+   Color {
+    0 1 0.6 1 1 1 1 1
+   }
+   Alpha {
+    0 1 1 1
+   }
+   EffectTime 3
+   Repeat 0
+   AlphaMast {
+    0 0 0.04706 0.88889 0.09869 0.55556 0.22092 0 1 0
+   }
+   RotationSpeedMast {
+    0 1 0.35817 1 1 0
+   }
+   SizeMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 0 0.01242 1 0.30458 1 0.46601 0 1 0
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 0 0.04902 0 0.07124 1 0.24379 1 0.55229 1 1 1
+   }
+  }
+  EmitorDef SphereLightingLight {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 0 0 720
+   MaxNum 10
+   BirthRate 10
+   BirthRateRND 10
+   Offset 0 2 0
+   Angles 0 90 0
+   Material "{5855301D1406CEBF}OOTS_Anomaly_Client/graphics/particles/materials/electra/Lighting02/SparkElectra.emat"
+   SizeMultiplier 50
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 90
+   StreakFullUV 1
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   BillboardingType Full
+   Velocity 100
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Spring 100
+   AnimOnce 1
+   AnimFPS 30
+   LifetimeByAnim 0
+   LifeTime 2
+   LifeTimeRND 1
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 1 1 1
+   }
+   Size {
+    0 0 0.04575 1 0.13725 0.31852 0.20196 1 0.26144 0.39259 0.31569 0.87407 0.37516 0.36296 0.43137 0.67407 0.49412 0.28148 0.56275 0.51852 0.61895 0.16296 0.68562 0.38519 0.74902 0.18519 0.80196 0.24444 1 0
+   }
+   EffectTime 3
+   Repeat 0
+   AlphaMast {
+    0 0 0.03399 1 0.27255 0 1 0
+   }
+   RotationSpeedMast {
+    0 1 0.35817 1 1 0
+   }
+   SizeMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 0 0.01242 1 0.30458 1 0.46601 0 1 0
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 0 0.04902 0 0.07124 1 0.24379 1 0.55229 1 1 1
+   }
+  }
+  EmitorDef SphereLightingSplashSmoke {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 0 0 720
+   MaxNum 200
+   BirthRate 1000
+   BirthRateRND 200
+   Offset 0 3 0
+   Angles 0 90 0
+   Material "{80F33A254BC889F3}graphics/particles/materials/smoke/smoke_cloud_01_b_heliwreck_01.emat"
+   SizeMultiplier 12
+   SizeRND 6
+   RandomRotDir 1
+   RotMultiplier 2
+   StreakFullUV 1
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   BillboardingType Full
+   Velocity 150
+   VelocityRND 100
+   VelAffect 0
+   AirResistance 5
+   AirResistanceRND 3
+   GravityMultiply 0.3
+   GravityMultiplyRND 0.1
+   Restitution 0
+   Spring 0
+   Wind 1
+   AnimOnce 0
+   AnimFPS 0
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 3
+   LifeTimeRND 2
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.24837 0.22963 0.38693 0.46667 0.59869 0.24444 0.80784 0.1037 1 0
+   }
+   EffectTime 3
+   Repeat 0
+   AlphaMast {
+    0 0 0.34706 0.6 1 0
+   }
+   RotationSpeedMast {
+    0 1 0.35817 1 1 0
+   }
+   SizeMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 0 0.02418 0 0.15163 1 0.36078 0.51852 0.47778 0.31111 1 0
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 0 0.04902 0 0.05229 1 1 1
+   }
+  }
+  EmitorDef SphereLightingSplashSmoke_cloned {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 0 0 720
+   MaxNum 20
+   BirthRate 20
+   BirthRateRND 20
+   Offset 0 3 0
+   Angles 0 90 0
+   Material "{80F33A254BC889F3}graphics/particles/materials/smoke/smoke_cloud_01_b_heliwreck_01.emat"
+   SizeMultiplier 35
+   SizeRND 5
+   RandomRotDir 1
+   RotMultiplier 20
+   StreakFullUV 1
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   BillboardingType Full
+   Velocity 100
+   VelocityRND 60
+   VelAffect 0
+   AirResistance 5
+   AirResistanceRND 3
+   GravityMultiply 1
+   GravityMultiplyRND 0.2
+   Restitution 0
+   Spring 0.001
+   Wind 1
+   AnimOnce 0
+   AnimFPS 0
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 3
+   LifeTimeRND 2
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.22157 0.36296 0.60392 0 1 0
+   }
+   EffectTime 3
+   Repeat 0
+   AlphaMast {
+    0 0 0.04575 0.25926 0.12092 0.55556 0.22092 0 1 0
+   }
+   RotationSpeedMast {
+    0 1 0.35817 1 1 0
+   }
+   SizeMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 0 0.02418 0 0.04706 1 0.18627 0.05185 0.46601 0 1 0
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 1 1
+   }
+  }
+  EmitorDef SphereLighting1SOS {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 0 0 720
+   MaxNum 200
+   BirthRate 200
+   BirthRateRND 200
+   Offset 0 2 0
+   Angles 0 90 0
+   Material "{4E3998CCD97CB908}OOTS_Anomaly_Client/graphics/particles/materials/electra/Lighting01/Lighting001.emat"
+   SizeMultiplier 6
+   SizeRND 3
+   RandomRotDir 0
+   RotMultiplier 0
+   StreakFullUV 1
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   BillboardingType Full
+   Velocity 210
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 5
+   AirResistanceRND 0
+   GravityMultiply 0
+   Spring 0.03
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   LifeTime 2
+   LifeTimeRND 1
+   Color {
+    0 1 0.6 1 1 1 1 1
+   }
+   Alpha {
+    0 1 1 1
+   }
+   Size {
+    0 1 0.97647 1 0.98758 0.43704 1 0
+   }
+   EffectTime 3
+   Repeat 0
+   AlphaMast {
+    0 0 0.13725 1 1 1
+   }
+   SizeMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 0 0.32549 0 0.36928 1 1 1
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 1 1
+   }
+  }
+  EmitorDef SphereLightingSplashHole {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 0 0 0
+   MaxNum 15
+   BirthRate 15
+   BirthRateRND 15
+   Offset 0 2 0
+   Angles 0 90 0
+   Material "{E77CE1C109C00FC5}OOTS_Anomaly_Client/graphics/particles/materials/voronka/BubbleHole.emat"
+   SizeMultiplier 150
+   SizeRND 10
+   RandomRotDir 1
+   RotMultiplier 2
+   StreakFullUV 1
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   BillboardingType Full
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0.05
+   GravityMultiplyRND 0.02
+   Spring 0
+   AnimOnce 1
+   AnimFPS 30
+   LifetimeByAnim 0
+   LifeTime 3
+   LifeTimeRND 1
+   Color {
+    0 0.7407 0.8148 1 1 0.7481 1 1
+   }
+   Alpha {
+    0 1 1 1
+   }
+   EffectTime 3
+   Repeat 0
+   AlphaMast {
+    0 0 0.04837 0.14074 0.18889 0.15556 0.43725 0.11852 1 0
+   }
+   RotationSpeedMast {
+    0 1 0.35817 1 1 0
+   }
+   SizeMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 0 0.01242 1 0.30458 1 0.46601 0 1 0
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 0 0.04902 0 0.07124 1 0.24379 1 0.55229 1 1 1
+   }
+  }
+  EmitorDef SphereLighting1SOSHole {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 0 0 720
+   MaxNum 10
+   BirthRate 10
+   BirthRateRND 10
+   Offset 0 2 0
+   Angles 0 90 0
+   Material "{E77CE1C109C00FC5}OOTS_Anomaly_Client/graphics/particles/materials/voronka/BubbleHole.emat"
+   SizeMultiplier 6
+   SizeRND 3
+   RandomRotDir 0
+   RotMultiplier 0
+   StreakFullUV 1
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   BillboardingType Full
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   Spring 0.03
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   LifeTime 2
+   LifeTimeRND 1
+   Color {
+    0 0.5852 0.6 1 1 0.8148 1 1
+   }
+   Alpha {
+    0 1 1 1
+   }
+   Size {
+    0 1 0.97647 1 0.98758 0.43704 1 0
+   }
+   EffectTime 3
+   Repeat 0
+   AlphaMast {
+    0 0 0.13725 1 1 1
+   }
+   SizeMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 0 0.32549 0 0.36928 1 1 1
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 1 1
+   }
+  }
+ }
+}

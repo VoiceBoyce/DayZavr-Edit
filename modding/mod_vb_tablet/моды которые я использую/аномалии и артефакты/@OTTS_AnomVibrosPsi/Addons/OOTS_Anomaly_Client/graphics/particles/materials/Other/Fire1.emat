@@ -1,0 +1,13 @@
+Particle {
+ AlbedoMap "{990C955016E02CDE}OOTS_Anomaly_Client/graphics/particles/materials/Other/Fire1.edds" 
+ Emissive 1 1 1 1
+ ZEnable 0
+ Sort decal
+ CastShadow 1
+ BlendMode Additive_AlphaModulate
+ TileU 8
+ TileV 8
+ Softness 1
+ CameraBlendNear 0.001
+ CameraBlendFar 0.001
+}
