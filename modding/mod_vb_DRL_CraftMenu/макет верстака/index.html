@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Oasis — Верстак</title>
+<link rel="stylesheet" href="../макет худа/oasis-ui.css">
+<link rel="stylesheet" href="wb.css">
+</head>
+<body>
+<!-- Верстак склада v2 «Чертёж»: слева — рецепты (поиск, разделы, статус «можно ×N / не хватает / закрыт»), по центру — чертёж рецепта
+     (изделие и выноски ингредиентов «есть / нужно», штамп, количество и крафт), справа — очередь верстака. Рецепты — ../макет редактора крафтов/data.js. -->
+<div class="stage" id="stage">
+    <div id="app"></div>
+    <div class="mock">
+        <span class="t">Состояние:</span>
+        <button data-m="tool" class="a">Инструмент</button>
+        <button data-m="weapon">Оружие</button>
+        <button data-m="lack">Не хватает</button>
+        <button data-m="locked">Нужен 3 уровень</button>
+        <button data-m="needtool">Нужен обвес</button>
+        <button data-m="put">Установить обвес</button>
+        <button data-m="toolinfo">Обвес: снять</button>
+        <button data-m="upgrade">Улучшение верстака</button>
+        <button data-m="full">Очередь заполнена</button>
+        <button data-m="member">Я не владелец</button>
+        <span class="br"></span>
+        <span class="t">Обвесов:</span>
+        <button data-m="notools">нет</button>
+        <button data-m="t1">1</button>
+        <button data-m="t2">2</button>
+        <button data-m="t3">3</button>
+        <button data-m="t4">4</button>
+        <span class="t">Верстак:</span>
+        <button data-lv="1">1 ур.</button>
+        <button data-lv="2" class="a">2 ур.</button>
+        <button data-lv="3">3 ур.</button>
+        <span class="t">Игрок:</span>
+        <button data-t="frac" class="a">Во фракции: Ballas</button>
+    </div>
+</div>
+<script src="../макет редактора крафтов/data.js"></script>
+<script src="../макет редактора крафтов/tools.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

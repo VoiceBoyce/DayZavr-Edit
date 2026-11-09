@@ -117,6 +117,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 	protected ref array<TextWidget> m_ResValues;
 	protected Widget m_StatsBox;
 	protected ref array<TextWidget> m_StatValues;
+	protected ref array<TextWidget> m_StatLabels; // подписи строк «Характеристики» (меняются по типу предмета)
 
 	// Разбор.
 	protected TextWidget m_RecraftHead;
@@ -165,6 +166,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		m_ReqTargets = new array<DRL_Craft_Recipe>();
 		m_Procs = new array<ref DRL_UIProc>();
 		m_StatValues = new array<TextWidget>();
+		m_StatLabels = new array<TextWidget>();
 	}
 
 	void ~DRL_CraftWindow()
@@ -440,7 +442,8 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		for (int s = 0; s < labels.Count(); s++)
 		{
 			float sy = 32 + s * 20;
-			INT_UIF_Draw.Text(m_StatsBox, 12, sy, cw * 0.6, 19, labels.Get(s), 13, muted);
+			TextWidget lbl = INT_UIF_Draw.Text(m_StatsBox, 12, sy, cw * 0.6, 19, labels.Get(s), 13, muted);
+			m_StatLabels.Insert(lbl);
 			TextWidget val = INT_UIF_Draw.Text(m_StatsBox, cw * 0.4, sy, cw * 0.6 - 12, 19, "—", 13, text, INT_UIF_Align.RIGHT);
 			val.SetBold(true);
 			m_StatValues.Insert(val);
@@ -2644,11 +2647,209 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		string hpText = "—";
 		if (hp >= 0)
 			hpText = hp.ToString() + " hp";
-		m_StatValues[0].SetText(hpText);
-		m_StatValues[1].SetText(ProtText(ReadArmor(basePath, "Projectile", "", "")));
-		m_StatValues[2].SetText(ProtText(ReadArmor(basePath, "Melee", "", "")));
-		m_StatValues[3].SetText(ProtText(ReadArmor(basePath, "Infected", "Zombie", "MeleeZombie")));
-		m_StatValues[4].SetText(ProtText(ReadArmor(basePath, "FragGrenade", "Explosion", "")));
+
+		// Набор строк зависит от типа предмета: огнестрел, холодное оружие, боеприпасы или защита (как раньше).
+		if (basePath.IndexOf("CfgWeapons ") == 0 && GetGame().ConfigIsExisting(basePath + " modes"))
+		{
+			FillStatsFirearm(basePath, hpText);
+			return;
+		}
+		if (GetGame().ConfigIsExisting(basePath + " MeleeModes Default ammo"))
+		{
+			FillStatsMelee(basePath, hpText);
+			return;
+		}
+		if (basePath.IndexOf("CfgMagazines ") == 0 && GetGame().ConfigIsExisting(basePath + " ammo"))
+		{
+			FillStatsAmmo(basePath, hpText);
+			return;
+		}
+
+		// Защиту показываем только одежде и броне; обычным предметам панель не нужна.
+		bool isClothing = GetGame().IsKindOf(cls, "Clothing_Base") || GetGame().ConfigIsExisting(basePath + " DamageSystem GlobalArmor");
+		if (!isClothing)
+		{
+			m_StatsBox.Show(false);
+			return;
+		}
+
+		SetStatRow(0, "#STR_DRL_UI_STAT_HP", hpText);
+		SetStatRow(1, "#STR_DRL_UI_STAT_BULLET", ProtText(ReadArmor(basePath, "Projectile", "", "")));
+		SetStatRow(2, "#STR_DRL_UI_STAT_MELEE", ProtText(ReadArmor(basePath, "Melee", "", "")));
+		SetStatRow(3, "#STR_DRL_UI_STAT_INFECTED", ProtText(ReadArmor(basePath, "Infected", "Zombie", "MeleeZombie")));
+		SetStatRow(4, "#STR_DRL_UI_STAT_GRENADE", ProtText(ReadArmor(basePath, "FragGrenade", "Explosion", "")));
+	}
+
+	protected void SetStatRow(int idx, string label, string value)
+	{
+		if (idx < 0 || idx >= m_StatValues.Count())
+			return;
+		if (idx < m_StatLabels.Count())
+			m_StatLabels[idx].SetText(DRL_UIText.Tr(label));
+		m_StatValues[idx].SetText(value);
+	}
+
+	protected void ClearStatRow(int idx)
+	{
+		if (idx < m_StatLabels.Count())
+			m_StatLabels[idx].SetText("");
+		if (idx < m_StatValues.Count())
+			m_StatValues[idx].SetText("");
+	}
+
+	// Урон по здоровью из CfgAmmo (DamageApplied Health damage); -1, если не задан.
+	protected float AmmoHealthDamage(string ammo)
+	{
+		float v;
+		if (ammo != "" && DRL_CraftStatsHelper.ReadFloat("CfgAmmo " + ammo + " DamageApplied Health damage", v))
+			return v;
+		return -1.0;
+	}
+
+	protected string DmgText(float dmg)
+	{
+		if (dmg < 0.0)
+			return "—";
+		int d = Math.Round(dmg);
+		return d.ToString();
+	}
+
+	// Холодное оружие и инструменты: урон лёгкого/тяжёлого удара, дальность, кровотечение.
+	protected void FillStatsMelee(string basePath, string hpText)
+	{
+		string lightAmmo = GetGame().ConfigGetTextOut(basePath + " MeleeModes Default ammo");
+		string heavyAmmo = GetGame().ConfigGetTextOut(basePath + " MeleeModes Heavy ammo");
+		float range;
+		string rangeText = "—";
+		if (DRL_CraftStatsHelper.ReadFloat(basePath + " MeleeModes Default range", range))
+			rangeText = range.ToString() + " " + DRL_UIText.Tr("#STR_DRL_UI_UNIT_M");
+
+		float bleed;
+		string bleedText = DRL_UIText.Tr("#STR_DRL_UI_NO");
+		if (DRL_CraftStatsHelper.ReadFloat("CfgAmmo " + heavyAmmo + " DamageApplied bleedThreshold", bleed) && bleed > 0.0)
+			bleedText = DRL_UIText.Tr("#STR_DRL_UI_YES");
+
+		SetStatRow(0, "#STR_DRL_UI_STAT_HP", hpText);
+		SetStatRow(1, "#STR_DRL_UI_STAT_DMG_LIGHT", DmgText(AmmoHealthDamage(lightAmmo)));
+		SetStatRow(2, "#STR_DRL_UI_STAT_DMG_HEAVY", DmgText(AmmoHealthDamage(heavyAmmo)));
+		SetStatRow(3, "#STR_DRL_UI_STAT_RANGE", rangeText);
+		SetStatRow(4, "#STR_DRL_UI_STAT_BLEED", bleedText);
+	}
+
+	// Огнестрел и арбалеты: урон выстрела (с учётом скорости), скорострельность, режимы, калибр.
+	protected void FillStatsFirearm(string basePath, string hpText)
+	{
+		TStringArray rounds = new TStringArray;
+		GetGame().ConfigGetTextArray(basePath + " chamberableFrom", rounds);
+		if (rounds.Count() == 0)
+			GetGame().ConfigGetTextArray(basePath + " magazines", rounds);
+
+		string roundCls = "";
+		if (rounds.Count() > 0)
+			roundCls = rounds[0];
+
+		float mult = 1.0;
+		float multCfg;
+		if (DRL_CraftStatsHelper.ReadFloat(basePath + " initSpeedMultiplier", multCfg) && multCfg > 0.0)
+			mult = multCfg;
+		float dmg = RoundDamage(roundCls, mult);
+
+		// скорострельность — по самому быстрому режиму; режимы — по именам классов режимов
+		TStringArray modes = new TStringArray;
+		GetGame().ConfigGetTextArray(basePath + " modes", modes);
+		float bestReload = -1.0;
+		bool isSingle = false;
+		bool isBurst = false;
+		bool isAuto = false;
+		foreach (string mode : modes)
+		{
+			float rt;
+			if (DRL_CraftStatsHelper.ReadFloat(basePath + " " + mode + " reloadTime", rt) && rt > 0.0)
+			{
+				if (bestReload < 0.0 || rt < bestReload)
+					bestReload = rt;
+			}
+			string ml = mode;
+			ml.ToLower();
+			if (ml.Contains("burst"))
+				isBurst = true;
+			else if (ml.Contains("full") || (ml.Contains("auto") && !ml.Contains("semi")))
+				isAuto = true;
+			else
+				isSingle = true;
+		}
+		string rofText = "—";
+		if (bestReload > 0.0)
+		{
+			int rof = Math.Round(60.0 / bestReload);
+			rofText = rof.ToString() + " " + DRL_UIText.Tr("#STR_DRL_UI_UNIT_RPM");
+		}
+		string modesText = "";
+		if (isSingle)
+			modesText = DRL_UIText.Tr("#STR_DRL_UI_MODE_SINGLE");
+		if (isBurst)
+		{
+			if (modesText != "")
+				modesText = modesText + ", ";
+			modesText = modesText + DRL_UIText.Tr("#STR_DRL_UI_MODE_BURST");
+		}
+		if (isAuto)
+		{
+			if (modesText != "")
+				modesText = modesText + ", ";
+			modesText = modesText + DRL_UIText.Tr("#STR_DRL_UI_MODE_AUTO");
+		}
+		if (modesText == "")
+			modesText = "—";
+
+		string caliberText = "—";
+		if (roundCls != "")
+			caliberText = DRL_UIText.DisplayName(roundCls);
+
+		SetStatRow(0, "#STR_DRL_UI_STAT_HP", hpText);
+		SetStatRow(1, "#STR_DRL_UI_STAT_DMG_SHOT", DmgText(dmg));
+		SetStatRow(2, "#STR_DRL_UI_STAT_ROF", rofText);
+		SetStatRow(3, "#STR_DRL_UI_STAT_MODES", modesText);
+		SetStatRow(4, "#STR_DRL_UI_STAT_CALIBER", caliberText);
+	}
+
+	// Боеприпасы и магазины: урон и ёмкость.
+	protected void FillStatsAmmo(string basePath, string hpText)
+	{
+		string cls = basePath.Substring(13, basePath.Length() - 13); // после "CfgMagazines "
+		int count = 0;
+		string countText = "—";
+		if (DRL_CraftStatsHelper.ReadInt(basePath + " count", count) && count > 0)
+			countText = count.ToString();
+
+		SetStatRow(0, "#STR_DRL_UI_STAT_HP", hpText);
+		SetStatRow(1, "#STR_DRL_UI_STAT_DMG", DmgText(RoundDamage(cls, 1.0)));
+		SetStatRow(2, "#STR_DRL_UI_STAT_CAPACITY", countText);
+		ClearStatRow(3);
+		ClearStatRow(4);
+	}
+
+	// Урон выстрела патроном/болтом из класса CfgMagazines с поправкой на скорость:
+	// урон в DayZ пропорционален скорости, initSpeed (магазина или CfgAmmo) * множитель оружия / typicalSpeed.
+	protected float RoundDamage(string magCls, float weaponMult)
+	{
+		if (magCls == "")
+			return -1.0;
+		string ammo = GetGame().ConfigGetTextOut("CfgMagazines " + magCls + " ammo");
+		float dmg = AmmoHealthDamage(ammo);
+		if (dmg < 0.0)
+			return -1.0;
+		float typical;
+		if (!DRL_CraftStatsHelper.ReadFloat("CfgAmmo " + ammo + " typicalSpeed", typical) || typical <= 0.0)
+			return dmg * weaponMult;
+		float speed = typical;
+		float magSpeed;
+		float ammoSpeed;
+		if (DRL_CraftStatsHelper.ReadFloat("CfgMagazines " + magCls + " initSpeed", magSpeed) && magSpeed > 0.0)
+			speed = magSpeed;
+		else if (DRL_CraftStatsHelper.ReadFloat("CfgAmmo " + ammo + " initSpeed", ammoSpeed) && ammoSpeed > 0.0)
+			speed = ammoSpeed;
+		return dmg * speed * weaponMult / typical;
 	}
 
 	protected float ReadArmor(string basePath, string a, string b, string c)
