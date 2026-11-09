@@ -1,12 +1,3 @@
-﻿////////////////////////////////////////////////////////////////////
-//DeRap: D:\DayZavr\DayZavr-Edit\modding\mod_MSFZ_Mifical_Pack\MSFZ_Mifical_Pack\Weapons\Crossbow\mag\config.bin
-//Produced from mikero's Dos Tools Dll version 10.21
-//https://mikero.bytex.digital/Downloads
-//'now' is Mon Nov 09 15:40:47 2026 : 'file' last modified on Mon Nov 09 15:23:27 2026
-////////////////////////////////////////////////////////////////////
-
-#define _ARMA_
-
 class CfgPatches
 {
 	class MSFZ_Crossbow_Magazines
