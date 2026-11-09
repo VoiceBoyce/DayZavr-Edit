@@ -151,19 +151,19 @@ class VB_CfgGeneral
 // clans.json
 class VB_CfgClans
 {
-	string Comment = "ClanRank: индекс ранга, с которого можно создать клан (2 — «Следопыт»). ClanTax: налог в неделю, TaxFreeDays: льготные дни, TaxWarnDays: за сколько дней до роспуска предупреждать. Price*: цены смены названия, тега, эмблемы и цвета. Levels: влияние для уровней клана 1..5. WeekPrizes: награда на склад за 1, 2, 3 место недели.";
-	int ClanPrice = 1000000;
+	string Comment = "ClanRank: индекс ранга, с которого можно создать клан (2 — «Следопыт»). ClanTax: налог в день, TaxFreeDays: льготные дни, TaxWarnDays: за сколько дней до роспуска предупреждать. Price*: цены смены названия, тега, эмблемы и цвета. Levels: влияние для уровней клана 1..5. WeekPrizes: награда на склад за 1, 2, 3 место недели.";
+	int ClanPrice = 1500000;
 	int ClanRank = 2;
 	int MaxClans = 20;
 	int ClanMaxMembers = 20;
-	int BankMax = 1000000;
-	int ClanTax = 5000;
+	int BankMax = 100000000;
+	int ClanTax = 20000;
 	int TaxFreeDays = 7;
 	int TaxWarnDays = 3;
-	int PriceName = 25000;
-	int PriceTag = 15000;
-	int PriceEmblem = 20000;
-	int PriceColor = 5000;
+	int PriceName = 150000;
+	int PriceTag = 100000;
+	int PriceEmblem = 100000;
+	int PriceColor = 50000;
 	ref array<int> Levels = new array<int>();
 	ref array<int> WeekPrizes = new array<int>();
 
@@ -171,12 +171,12 @@ class VB_CfgClans
 	{
 		if (!Levels || Levels.Count() != VB_CLAN_LEVELS)
 		{
-			Levels = {0, 1000, 2000, 5000, 10000};
+			Levels = {0, 1500, 4000, 9000, 18000};
 			filled.Insert("Levels");
 		}
 		if (!WeekPrizes || WeekPrizes.Count() == 0)
 		{
-			WeekPrizes = {100000, 60000, 30000};
+			WeekPrizes = {500000, 300000, 150000};
 			filled.Insert("WeekPrizes");
 		}
 	}
@@ -232,7 +232,7 @@ class VB_CfgContracts
 		}
 		if (!CashClan || CashClan.Count() != 3)
 		{
-			CashClan = {1000, 5000, 15000};
+			CashClan = {10000, 40000, 120000};
 			filled.Insert("CashClan");
 		}
 		if (!Zombies || Zombies.Count() == 0)

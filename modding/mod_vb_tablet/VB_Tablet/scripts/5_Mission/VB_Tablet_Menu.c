@@ -49,6 +49,13 @@ class VB_TabletMenu extends INT_UIF_Menu
 	protected bool m_ServerTextShown;
 	protected int m_DataVersion;
 	protected Widget m_TopBar;
+	// Многострочные поля открытой страницы: опрашиваются каждый кадр (VBT_Area.Poll).
+	protected static ref array<VBT_Area> s_Areas = new array<VBT_Area>();
+
+	static void WatchArea(VBT_Area field)
+	{
+		s_Areas.Insert(field);
+	}
 #ifdef DIAG_DEVELOPER
 	protected static ref array<VBT_Input> s_DiagInputs = new array<VBT_Input>();
 
@@ -766,6 +773,14 @@ class VB_TabletMenu extends INT_UIF_Menu
 			SetTyping(false);
 		}
 		m_EscWas = esc;
+		for (int ai = s_Areas.Count() - 1; ai >= 0; ai--)
+		{
+			VBT_Area area = s_Areas.Get(ai);
+			if (area)
+				area.Poll();
+			else
+				s_Areas.Remove(ai);
+		}
 #ifdef DIAG_DEVELOPER
 		for (int di = s_DiagInputs.Count() - 1; di >= 0; di--)
 		{

@@ -10,6 +10,7 @@ import base64
 import io
 import json
 import os
+import random
 import re
 import shutil
 import subprocess
@@ -91,12 +92,18 @@ def main():
         rows.append('  ImageSetDefClass %s {\n   Name "%s"\n   Pos %d %d\n   Size %d %d\n   Flags 0\n  }\n' % (name, name, x, y, BIG_CELL, BIG_CELL))
     # Блик и уголки тоже в атласе: у отдельной текстуры край заворачивается и даёт тёмный шов.
     # Вокруг рабочей области запас тех же значений, поэтому выборка у границы чистая.
+    # Блик кладётся цветом клана с прозрачностью ~9%: от края до края всего ~15 оттенков на канал,
+    # на ширине карточки это видимые полосы. Шум по альфе (треугольный, около одного оттенка на экране)
+    # перемешивает соседние оттенки. Блик высокий, чтобы шум не растягивался по вертикали в штрихи.
     gy = 1830
+    glow_h = 192
+    rnd = random.Random(7)
     for x in range(1040):
         k = max(0.0, 1 - max(0, x - 8) / (1024 * 0.58))
-        for y in range(16):
-            atlas.putpixel((x, gy + y), (255, 255, 255, int(255 * k)))
-    rows.append('  ImageSetDefClass glow {\n   Name "glow"\n   Pos 8 %d\n   Size 1024 8\n   Flags 0\n  }\n' % (gy + 4))
+        for y in range(glow_h + 8):
+            a = 255 * k + (rnd.random() - rnd.random()) * 14 if k > 0 else 0
+            atlas.putpixel((x, gy + y), (255, 255, 255, max(0, min(255, int(round(a))))))
+    rows.append('  ImageSetDefClass glow {\n   Name "glow"\n   Pos 8 %d\n   Size 1024 %d\n   Flags 0\n  }\n' % (gy + 4, glow_h))
     for name, cx, cy in (('corner_t', 1060, 256), ('corner_b', 1220, 0)):
         k = Image.new('L', (512, 512), 0)
         for py in range(512):

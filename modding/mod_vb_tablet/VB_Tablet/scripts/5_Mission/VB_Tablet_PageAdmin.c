@@ -155,10 +155,40 @@ class VB_TabletPageAdmin extends VB_TabletPage
 			VBT.Cap(p, cx, cy, 180, caps.Get(i));
 			INT_UIF_Draw.Text(p, cx, cy + 20, 184, 30, VBT.Fit(vals.Get(i), 184, 18), 18, VB_C_TEXT);
 		}
+		// Три кнопки на всю строку 24..400: каждой ширина подписи с отступами, остаток поровну.
+		// Если подписи не влезают и так, шрифт мельче.
 		ScriptedWidgetEventHandler handler = m_Menu.GetHitHandler();
-		m_BtnRename = new VBT_Button(p, 24, 272, 120, 48, "#STR_VB_TAB_C_ADM_RENAME", false, "", handler, 13);
-		m_BtnLeader = new VBT_Button(p, 152, 272, 120, 48, "#STR_VB_TAB_C_ADM_SETLEADER", false, "", handler, 13);
-		m_BtnDissolve = new VBT_Button(p, 280, 272, 120, 48, "#STR_VB_TAB_C_ADM_DISSOLVE", false, "", handler, 13);
+		array<string> names = {"#STR_VB_TAB_C_ADM_RENAME", "#STR_VB_TAB_C_ADM_SETLEADER", "#STR_VB_TAB_C_ADM_DISSOLVE"};
+		float room = 376 - 16;
+		float fs = 13;
+		array<float> widths = new array<float>();
+		float sum = 0;
+		while (true)
+		{
+			widths.Clear();
+			sum = 0;
+			foreach (string nm : names)
+			{
+				float bw = VBT.TextW(p, nm, fs) + 28;
+				widths.Insert(bw);
+				sum += bw;
+			}
+			if (sum <= room || fs <= 11)
+				break;
+			fs -= 1;
+		}
+		float extra = Math.Max(0, (room - sum) / 3);
+		float bx = 24;
+		array<ref VBT_Button> made = new array<ref VBT_Button>();
+		for (int b = 0; b < 3; b++)
+		{
+			float w = widths.Get(b) + extra;
+			made.Insert(new VBT_Button(p, bx, 272, w, 48, names.Get(b), false, "", handler, fs));
+			bx += w + 8;
+		}
+		m_BtnRename = made.Get(0);
+		m_BtnLeader = made.Get(1);
+		m_BtnDissolve = made.Get(2);
 		m_BtnDissolve.Danger = true;
 		m_BtnDissolve.Bg.SetFill(VB_C_BAD);
 	}

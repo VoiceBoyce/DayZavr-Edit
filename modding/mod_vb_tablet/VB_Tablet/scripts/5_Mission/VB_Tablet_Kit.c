@@ -83,10 +83,16 @@ class VBK
 		return f;
 	}
 
+	// Ширина плашки Pill: подпись по метрикам движка и по 14 с каждой стороны.
+	static float PillW(Widget p, string text)
+	{
+		return VBT.TextW(p, text, 13) + 28;
+	}
+
 	// Плашка роли, возвращает ширину.
 	static float Pill(Widget p, float x, float y, string text, int color, int fill = 0)
 	{
-		float w = INT_UIF_Draw.TextWidth(text, 13) + 22;
+		float w = PillW(p, text);
 		INT_UIF_Surface.Box(p, x, y, w, 24, 12, fill, color);
 		INT_UIF_Draw.Text(p, x, y, w, 24, text, 13, color, INT_UIF_Align.CENTER);
 		return w;
@@ -318,15 +324,25 @@ class VBT_Input extends ScriptedWidgetEventHandler
 	EditBoxWidget Edit;
 	protected TextWidget m_Hint;
 	protected ref INT_UIF_Surface m_Bg;
+	protected Widget m_Clip;
 	protected int m_Max;
 	protected string m_Last;
+	protected float m_W;
+	protected float m_H;
+	protected float m_Size;
+	protected bool m_Focused;
 
 	void VBT_Input(Widget p, float x, float y, float w, float h, string placeholder, int maxLen, string value = "", float size = 15)
 	{
 		m_Max = maxLen;
+		m_W = w - 28;
+		m_H = h;
+		m_Size = size;
 		m_Bg = INT_UIF_Surface.Box(p, x, y, w, h, 8, VB_C_PANEL2, VB_C_LINE2);
-		m_Hint = INT_UIF_Draw.Text(p, x + 14, y, w - 28, h, placeholder, size, VB_C_DIM2);
-		Edit = INT_UIF_Draw.Edit(p, x + 14, y, w - 28, h, size);
+		m_Hint = INT_UIF_Draw.Text(p, x + 14, y, m_W, h, placeholder, size, VB_C_DIM2);
+		// Поле в обрезающей рамке: EditBoxWidget сам строку не прокручивает, длинный текст сдвигается в Fit.
+		m_Clip = INT_UIF_Draw.Clip(p, x + 14, y, m_W, h);
+		Edit = INT_UIF_Draw.Edit(m_Clip, 0, 0, m_W, h, size);
 		Edit.SetHandler(this);
 		Edit.SetText(value);
 		if (placeholder.Length() > 1 && placeholder.Get(0) == "#")
@@ -336,6 +352,21 @@ class VBT_Input extends ScriptedWidgetEventHandler
 #ifdef DIAG_DEVELOPER
 		VB_TabletMenu.DiagWatch(this);
 #endif
+	}
+
+	// Пока в поле курсор и текст длиннее поля, поле шире рамки и прижато к её правому краю:
+	// виден конец строки, где печатают. Без курсора видно начало.
+	protected void Fit()
+	{
+		if (!Edit || !m_Clip)
+			return;
+		float need = 0;
+		if (m_Focused)
+			need = VBT.TextW(m_Clip, Edit.GetText(), m_Size, false) + 16;
+		if (need > m_W)
+			INT_UIF_Draw.Place(Edit, m_W - need, (m_H - m_Size) * 0.5, need, m_Size);
+		else
+			INT_UIF_Draw.Place(Edit, 0, (m_H - m_Size) * 0.5, m_W, m_Size);
 	}
 
 #ifdef DIAG_DEVELOPER
@@ -359,6 +390,7 @@ class VBT_Input extends ScriptedWidgetEventHandler
 		Edit.SetText(value);
 		m_Last = value;
 		m_Hint.Show(value == "");
+		Fit();
 	}
 
 	void Focus()
@@ -380,6 +412,7 @@ class VBT_Input extends ScriptedWidgetEventHandler
 			Edit.SetText(s);
 		}
 		m_Hint.Show(s == "");
+		Fit();
 		VB_TabletMenu menu = VBK.Menu();
 		if (s != m_Last)
 		{
@@ -394,6 +427,8 @@ class VBT_Input extends ScriptedWidgetEventHandler
 
 	override bool OnFocus(Widget w, int x, int y)
 	{
+		m_Focused = true;
+		Fit();
 		m_Bg.SetBorder(VB_C_ACCENT);
 		VB_TabletMenu menu = VBK.Menu();
 		if (menu)
@@ -403,6 +438,8 @@ class VBT_Input extends ScriptedWidgetEventHandler
 
 	override bool OnFocusLost(Widget w, int x, int y)
 	{
+		m_Focused = false;
+		Fit();
 		m_Bg.SetBorder(VB_C_LINE2);
 		VB_TabletMenu menu = VBK.Menu();
 		if (menu)
@@ -431,6 +468,9 @@ class VBT_Area extends ScriptedWidgetEventHandler
 		Edit.SetText(value);
 		m_Last = value;
 		m_Hint.Show(value == "");
+		// Многострочное поле не шлёт OnChange на каждый знак: подсказка и счётчик страницы
+		// обновляются опросом из VB_TabletMenu.Update.
+		VB_TabletMenu.WatchArea(this);
 	}
 
 	string Get()
@@ -441,18 +481,24 @@ class VBT_Area extends ScriptedWidgetEventHandler
 		return s;
 	}
 
-	override bool OnChange(Widget w, int x, int y, bool finished)
+	void Poll()
 	{
+		if (!Edit)
+			return;
 		string s;
 		Edit.GetText(s);
+		if (s == m_Last)
+			return;
+		m_Last = s;
 		m_Hint.Show(s == "");
-		if (s != m_Last)
-		{
-			m_Last = s;
-			VB_TabletMenu menu = VBK.Menu();
-			if (menu)
-				menu.AreaChanged(this);
-		}
+		VB_TabletMenu menu = VBK.Menu();
+		if (menu)
+			menu.AreaChanged(this);
+	}
+
+	override bool OnChange(Widget w, int x, int y, bool finished)
+	{
+		Poll();
 		return false;
 	}
 

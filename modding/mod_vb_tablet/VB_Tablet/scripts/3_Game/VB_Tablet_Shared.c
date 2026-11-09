@@ -132,9 +132,9 @@ const int VB_CLAN_LEVELS = 5;
 class VB_TabletRates
 {
 	int XpZombie = 1;
-	int XpMutant = 10;
+	int XpMutant = 3;
 	int XpAnimal = 2;
-	int XpKm = 2;
+	int XpKm = 1;
 	int XpContract = 10;
 	ref array<int> RankNeed = {0, 500, 1500, 4000, 10000, 25000, 60000, 120000, 250000, 500000};
 
@@ -148,10 +148,10 @@ class VB_TabletRates
 		{
 			s_Levels = new array<int>();
 			s_Levels.Insert(0);
-			s_Levels.Insert(1000);
-			s_Levels.Insert(2000);
-			s_Levels.Insert(5000);
-			s_Levels.Insert(10000);
+			s_Levels.Insert(1500);
+			s_Levels.Insert(4000);
+			s_Levels.Insert(9000);
+			s_Levels.Insert(18000);
 		}
 		return s_Levels;
 	}

@@ -299,7 +299,7 @@ ImageSetClass {
   ImageSetDefClass glow {
    Name "glow"
    Pos 8 1834
-   Size 1024 8
+   Size 1024 192
    Flags 0
   }
   ImageSetDefClass corner_t {

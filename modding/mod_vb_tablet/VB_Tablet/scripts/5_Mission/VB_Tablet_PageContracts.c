@@ -220,9 +220,10 @@ class VB_TabletPageContracts extends VB_TabletTabbedPage
 		INT_UIF_Draw.Text(f, 88, 18, 210, 30, k.Title, 20, VB_C_TEXT);
 		INT_UIF_Draw.Text(f, 88, 48, 300, 24, k.Hint, 15, VB_C_DIM);
 		string tierName = "#STR_VB_TAB_C_TIERU_" + k.Tier.ToString();
-		float tw0 = INT_UIF_Draw.TextWidth(tierName, 12) + 20;
-		INT_UIF_Surface.Box(f, e - tw0, 22, tw0, 22, 10, 0, color);
-		INT_UIF_Draw.Text(f, e - tw0, 22, tw0, 22, tierName, 12, color, INT_UIF_Align.CENTER);
+		// Метка сложности: ширина по подписи, по 12 с каждой стороны.
+		float tw0 = VBT.TextW(f, tierName, 12) + 24;
+		INT_UIF_Surface.Box(f, e - tw0, 21, tw0, 24, 11, 0, color);
+		INT_UIF_Draw.Text(f, e - tw0, 21, tw0, 24, tierName, 12, color, INT_UIF_Align.CENTER);
 		int need = Math.Max(1, k.Need);
 		int p = Math.Round(k.Have * 100.0 / need);
 		INT_UIF_Draw.Text(f, 20, 90 + mid, 240, 22, k.Have.ToString() + "/" + k.Need.ToString(), 16, VB_C_TEXT);

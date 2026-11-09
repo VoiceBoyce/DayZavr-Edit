@@ -220,7 +220,7 @@ class VB_TabletPageRanks extends VB_TabletPage
 		{
 			if (c.Rank(m.RankId).Id != k.Id)
 				continue;
-			float pw = INT_UIF_Draw.TextWidth(m.PlayerName, 14) + 22;
+			float pw = VBK.PillW(R, m.PlayerName);
 			if (px + pw > 732)
 			{
 				px = 24;

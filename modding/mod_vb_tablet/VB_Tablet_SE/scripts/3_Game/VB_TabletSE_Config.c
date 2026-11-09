@@ -101,18 +101,18 @@ class VB_TabletConfig
 	// Купюры. При INT_Banking на сервере берутся валюты банка (его INT_BankingConfig.json), этот список только без банка.
 	ref array<ref VB_TabletDenom> Money = new array<ref VB_TabletDenom>();
 	// clans.json
-	int ClanPrice = 1000000;
+	int ClanPrice = 1500000;
 	int ClanRank = 2;			// индекс ранга, с которого можно создать клан: 2 это «Следопыт»
 	int MaxClans = 20;
 	int ClanMaxMembers = 20;
-	int BankMax = 1000000;
-	int ClanTax = 5000;
+	int BankMax = 100000000;
+	int ClanTax = 20000;
 	int TaxFreeDays = 7;
 	int TaxWarnDays = 3;		// предупреждение о налоге при входе: дней до роспуска
-	int PriceName = 25000;
-	int PriceTag = 15000;
-	int PriceEmblem = 20000;
-	int PriceColor = 5000;
+	int PriceName = 150000;
+	int PriceTag = 100000;
+	int PriceEmblem = 100000;
+	int PriceColor = 50000;
 	ref array<int> Levels;		// пороги влияния: Levels[n-1] открывает уровень n
 	ref array<int> WeekPrizes;	// награда на склад за 1, 2, 3 место недели
 	// ranks.json

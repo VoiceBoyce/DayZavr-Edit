@@ -313,7 +313,7 @@ class VB_TabletPageMembers extends VB_TabletPage
 		VB_ClanRank cr = c.Rank(m.RankId);
 		string rankTitle = VBA_Util.Title(cr.Title);
 		rankTitle = VBT.Fit(rankTitle, 160, 13);
-		VBK.Pill(f, 492 - 24 - INT_UIF_Draw.TextWidth(rankTitle, 13) - 22, 58, rankTitle, cr.Color);
+		VBK.Pill(f, 492 - 24 - VBK.PillW(f, rankTitle), 58, rankTitle, cr.Color);
 		INT_UIF_Draw.Line(f, 24, 94, 444, 1, VB_C_LINE);
 
 		PaintDiscord(f, m, isMe, client);

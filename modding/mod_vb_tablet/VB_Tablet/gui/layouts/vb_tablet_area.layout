@@ -7,6 +7,8 @@ MultilineEditBoxWidgetClass VBT_Area {
  position 0 0
  size 10 10
  font "gui/fonts/sdf_MetronBook24"
+ "italic text" 0
+ "bold text" 0
  text ""
  "exact text" 1
  "exact text size" 15

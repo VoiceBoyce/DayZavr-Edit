@@ -279,6 +279,41 @@ class VBT
 		return e;
 	}
 
+	protected static ref map<string, float> s_TextW;
+
+	// Ширина текста по метрикам движка (пробный виджет, в единицах макета). Оценка TextWidth фреймворка
+	// (0,53 высоты на знак) для этого шрифта мала, особенно на заглавных: подписи вылезали из рамок.
+	// cache false: для полей ввода, где текст меняется на каждый знак.
+	static float TextW(Widget p, string text, float size, bool cache = true)
+	{
+		float f = INT_UIF_Scale.Factor();
+		string key = size.ToString() + "|" + f.ToString() + "|" + text;
+		float w;
+		if (cache && s_TextW && s_TextW.Find(key, w))
+			return w;
+		w = INT_UIF_Draw.TextWidth(text, size) * 1.2;
+		if (!p || text == "")
+			return w;
+		TextWidget probe = INT_UIF_Draw.Text(p, 0, 0, 3000, size * 2, text, size, 0);
+		if (!probe)
+			return w;
+		probe.Update();
+		int mw;
+		int mh;
+		probe.GetTextSize(mw, mh);
+		probe.Unlink();
+		if (mw <= 0 || f <= 0)
+			return w;
+		w = mw / f;
+		if (cache)
+		{
+			if (!s_TextW || s_TextW.Count() > 4000)
+				s_TextW = new map<string, float>();
+			s_TextW.Insert(key, w);
+		}
+		return w;
+	}
+
 	static string Fit(string s, float w, float size)
 	{
 		if (INT_UIF_Draw.TextWidth(s, size) <= w)
@@ -323,7 +358,8 @@ class VBT_Button extends Managed
 			ink = VB_C_ON;
 		}
 		Bg = INT_UIF_Surface.Box(parent, x, y, w, h, 8, fill, border);
-		float tw = INT_UIF_Draw.TextWidth(text, size);
+		// Значок с подписью по центру кнопки, ширина подписи по метрикам движка.
+		float tw = VBT.TextW(parent, text, size);
 		float full = tw;
 		if (icon != "")
 			full += 28;

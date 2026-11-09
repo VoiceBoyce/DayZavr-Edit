@@ -36,22 +36,22 @@ class VB_TabletClient
 	ref VB_NameTags Tags = new VB_NameTags();	// ники над головами
 	ref ScriptInvoker OnFeed = new ScriptInvoker();	// (int вид, VB_ClanJournalRow): лента клана для общего чата
 	// Цены настроек клана: конфиг сервера, приходят в HELLO.
-	int ClanPrice = 1000000;
+	int ClanPrice = 1500000;
 	int ClanRank = 2;
 	int ClanMax = 20;
 	int MaxClans = 20;
-	int BankMax = 1000000;
-	int ClanTax = 5000;
-	ref array<int> WeekPrizes = {100000, 60000, 30000};	// награды недели за 1, 2, 3 место
+	int BankMax = 100000000;
+	int ClanTax = 20000;
+	ref array<int> WeekPrizes = {500000, 300000, 150000};	// награды недели за 1, 2, 3 место
 	// Клан-чат: одна пауза на окно планшета и вкладку «Клан» общего чата. Сервер ждёт 2 с,
 	// у клиента запас на задержку сети, иначе сообщение изредка получало бы отказ «слишком часто».
 	static const float CHAT_GAP = 2.3;
 	float ChatSentAt = -100;
 	ref array<int> RewardMy = {10, 25, 60};			// влияние за личный контракт по сложности
-	int PriceName = 25000;
-	int PriceTag = 15000;
-	int PriceEmblem = 20000;
-	int PriceColor = 5000;
+	int PriceName = 150000;
+	int PriceTag = 100000;
+	int PriceEmblem = 100000;
+	int PriceColor = 50000;
 	string PickMember;	// uid участника: кого показать в карточке при переходе на экран «Участники»
 	bool HasContracts;
 	bool MyReplace;		// бесплатная замена ещё не истрачена

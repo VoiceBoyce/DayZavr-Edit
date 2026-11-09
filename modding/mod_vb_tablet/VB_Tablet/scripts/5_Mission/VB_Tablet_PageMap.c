@@ -1503,10 +1503,12 @@ class VB_TabletPageMap extends VB_TabletPage
 	protected void ShowTip(VBT_MapBtn b)
 	{
 		ClearTip();
-		float w = INT_UIF_Draw.TextWidth(b.Tip, 13) + 20;
+		// Ширина по подписи (метрики движка), по 10 с каждой стороны.
+		float tw = VBT.TextW(b.TipParent, b.Tip, 13);
+		float w = tw + 20;
 		m_Tip = INT_UIF_Draw.Frame(b.TipParent, b.TipX, b.TipY, w, 26);
 		INT_UIF_Surface.Box(m_Tip, 0, 0, w, 26, 6, 0xEB0E0D0C);
-		INT_UIF_Draw.Text(m_Tip, 10, 0, w - 12, 26, b.Tip, 13, VB_C_TEXT);
+		INT_UIF_Draw.Text(m_Tip, 10, 0, tw + 10, 26, b.Tip, 13, VB_C_TEXT);
 	}
 
 	protected void BuildZoom()
