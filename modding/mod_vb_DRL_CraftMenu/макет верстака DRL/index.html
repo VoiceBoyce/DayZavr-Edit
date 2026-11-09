@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DRL — крафт на станциях</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="wb.css">
+</head>
+<body>
+<!-- Макет крафта DRL (по мотивам «макет верстака»): слева рецепты, по центру лист станции, справа очередь, обвесы и разбор.
+     Станция меняет центр: верстак — «Чертёж», швейная машинка — «Раскрой» (манекен сета, расцветки, бирки материалов),
+     подъёмник — «Сборка» (схема машины с деталями, окраска, спецификация). Рецепты — конфиг сервера 18 (data.js).
+     Ссылка с параметрами для скриншотов: index.html?st=sew&m=lack -->
+<div class="stage" id="stage">
+    <div id="app"></div>
+    <div class="mock">
+        <span class="t">Станция:</span>
+        <button data-st="wb">Верстак</button>
+        <button data-st="sew">Швейная машинка</button>
+        <button data-st="lift">Подъёмник</button>
+        <button data-st="free">Свободный крафт (F9)</button>
+        <span class="t">Состояние:</span>
+        <button data-m="ok">Можно</button>
+        <button data-m="lack">Не хватает</button>
+        <button data-m="notool">Нет обвеса</button>
+        <button data-m="locked">Не изучен</button>
+        <button data-m="run">Идёт крафт</button>
+        <button data-m="full">Очередь заполнена</button>
+        <button data-m="var">Вариант ингредиента</button>
+        <button data-m="req">Требования</button>
+        <button data-m="learn">Изучение</button>
+        <button data-m="recraft">Разбор</button>
+    </div>
+</div>
+<script src="data.js"></script>
+<script src="icons.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
