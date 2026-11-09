@@ -228,7 +228,7 @@ class VBA_Util
 		array<ref VB_ClanRow> all = VB_TabletClient.Get().Clans;
 		foreach (VB_ClanRow row : all)
 		{
-			if (row.EmbShape == shp && row.EmbSymbol == sym)
+			if (row.EmbSymbol == sym)
 				return row;
 		}
 		return null;
@@ -457,7 +457,7 @@ class VB_TabletPageClan extends VB_TabletPage
 		bool free = c.TaxFree > 0;
 		int days = c.TaxFree;
 		if (!free)
-			days = VB_TabletClient.Get().TaxDays(c.Bank);
+			days = VB_TabletClient.Get().TaxDays(c.Bank, c.Level);
 		bool low = !free && days <= VBA_TAX_LOW;
 		string lbl = "#STR_VB_TAB_A_TAX_FOR";
 		if (free)

@@ -348,12 +348,14 @@ class VB_TabletClans
 		return true;
 	}
 
+	// Символ эмблемы уникален на сервере (решение 2026-11-09): кланов не больше, чем символов (36).
+	// Форма и цвет могут повторяться. shape оставлен для совместимости вызовов.
 	static bool EmblemFree(string shape, string symbol, VB_Clan except)
 	{
 		map<string, ref VB_Clan> all = All();
 		foreach (string id, VB_Clan c : all)
 		{
-			if (c != except && c.EmbShape == shape && c.EmbSymbol == symbol)
+			if (c != except && c.EmbSymbol == symbol)
 				return false;
 		}
 		return true;
@@ -482,6 +484,7 @@ class VB_TabletClans
 		m.PlayerName = name;
 		m.RankId = rank;
 		m.Online = VB_TabletServer.FindPlayer(uid) != null;
+		m.LastDay = VB_TabletPlayers.DayKey();
 		// Запись игрока только читается: офлайн-игрок не попадает в кэш тех, кто в сети.
 		VB_TabletRecord rec = VB_TabletPlayers.Peek(uid);
 		if (rec)
@@ -609,7 +612,10 @@ class VB_TabletClans
 			s_Invites.Remove(uid);
 	}
 
-	// Новый день: налог и обнуление счётчиков «сегодня». Пропущенные дни доначисляются.
+	// Новый день: неактивность, пропавший лидер, налог и обнуление счётчиков «сегодня».
+	// Пропущенные дни налога доначисляются. Решения пользователя 2026-11-09: налог по уровню клана без скидок;
+	// никто из участников не заходил 7 дней — налог ×3, 14 дней — роспуск, склад сгорает; лидер не заходил
+	// 14 дней — лидерство активному участнику со старшим рангом, активных нет — клан распустится по неактивности.
 	static void DailyTick()
 	{
 		Load();
@@ -617,22 +623,41 @@ class VB_TabletClans
 		CheckWeek(today);
 		VB_TabletConfig cfg = VB_TabletConfig.Get();
 		array<ref VB_Clan> gone = new array<ref VB_Clan>();
+		array<ref VB_Clan> idleGone = new array<ref VB_Clan>();
 		foreach (string id, VB_Clan c : s_Clans)
 		{
 			if (c.LastTaxDay == today)
 				continue;
 			int days = today - c.LastTaxDay;
 			c.LastTaxDay = today;
+			int lastActive = 0;
 			foreach (VB_ClanMember m : c.Members)
+			{
 				m.Today = 0;
+				// В сети сейчас — активен сегодня. Запись без даты (до обновления) считается сегодняшней.
+				if (m.Online || m.LastDay <= 0)
+					m.LastDay = today;
+				if (m.LastDay > lastActive)
+					lastActive = m.LastDay;
+			}
 			// Часы сервера ушли назад: день уже оплачен, налог не берётся второй раз.
 			if (days < 1)
 			{
 				Save(c);
 				continue;
 			}
+			int idle = today - lastActive;
+			if (cfg.InactiveDissolveDays > 0 && idle >= cfg.InactiveDissolveDays)
+			{
+				idleGone.Insert(c);
+				continue;
+			}
+			CheckLeader(c, today, cfg);
 			if (days > 365)
 				days = 1;
+			int tax = cfg.TaxOf(c.Level);
+			if (cfg.InactiveTaxDays > 0 && idle >= cfg.InactiveTaxDays)
+				tax = tax * cfg.InactiveTaxMult;
 			for (int i = 0; i < days; i++)
 			{
 				if (c.TaxFree > 0)
@@ -641,15 +666,15 @@ class VB_TabletClans
 					continue;
 				}
 				// Налог выключен (0 в конфиге): склад не трогается, клан не распускается.
-				if (cfg.ClanTax <= 0)
+				if (tax <= 0)
 					break;
 				// Клан распускается, только когда заплатить полностью уже нечем. Остаток уходит в налог.
 				// Так совпадает с подсказкой «налога хватит на N дней»: дни без налога + склад / налог.
-				int pay = Math.Min(c.Bank, cfg.ClanTax);
+				int pay = Math.Min(c.Bank, tax);
 				c.Bank = c.Bank - pay;
 				AddHistory(c, "", VB_ClanEvent.TAX, -pay);
 				Log(c, VB_ClanEvent.TAX, "", "", "-" + pay.ToString());
-				if (pay < cfg.ClanTax)
+				if (pay < tax)
 				{
 					gone.Insert(c);
 					break;
@@ -667,5 +692,51 @@ class VB_TabletClans
 			Print(VB_TABLET_TAG + " клан распущен за неуплату налога: " + dead.Title);
 			Dissolve(dead);
 		}
+		foreach (VB_Clan idleClan : idleGone)
+		{
+			Print(VB_TABLET_TAG + " клан распущен за неактивность (никто не заходил " + cfg.InactiveDissolveDays.ToString() + " дней): " + idleClan.Title + ", склад сгорел: " + idleClan.Bank.ToString());
+			Dissolve(idleClan);
+		}
+	}
+
+	// Лидер не заходил LeaderAwayDays дней: лидерство переходит к участнику, заходившему за этот срок,
+	// со старшим рангом (при равном ранге — с большим вкладом). Прежний лидер получает второй ранг сверху.
+	protected static void CheckLeader(VB_Clan c, int today, VB_TabletConfig cfg)
+	{
+		if (cfg.LeaderAwayDays <= 0 || c.Ranks.Count() < 2)
+			return;
+		VB_ClanMember lead = null;
+		foreach (VB_ClanMember m : c.Members)
+		{
+			if (m.RankId == "leader")
+			{
+				lead = m;
+				break;
+			}
+		}
+		if (!lead || lead.Online || today - lead.LastDay < cfg.LeaderAwayDays)
+			return;
+		VB_ClanMember best = null;
+		int bestRank = 0;
+		foreach (VB_ClanMember o : c.Members)
+		{
+			if (o == lead)
+				continue;
+			if (!o.Online && today - o.LastDay >= cfg.LeaderAwayDays)
+				continue;
+			int r = c.RankIndex(o.RankId);
+			if (!best || r < bestRank || (r == bestRank && o.Total > best.Total))
+			{
+				best = o;
+				bestRank = r;
+			}
+		}
+		if (!best)
+			return;
+		int away = today - lead.LastDay;
+		lead.RankId = c.Ranks.Get(1).Id;
+		best.RankId = "leader";
+		Log(c, VB_ClanEvent.LEADER, best.PlayerName);
+		Print(VB_TABLET_TAG + " клан " + c.Title + ": лидер " + lead.PlayerName + " не заходил " + away.ToString() + " дн., лидерство передано " + best.PlayerName);
 	}
 }

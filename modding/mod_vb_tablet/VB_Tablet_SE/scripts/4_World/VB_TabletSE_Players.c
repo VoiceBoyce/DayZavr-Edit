@@ -72,6 +72,7 @@ class VB_TabletRatingRow
 	string Uid;
 	string PlayerName;
 	int Xp;
+	int LastDay;	// день последнего захода: по нему игрок забывается через PlayerForgetDays
 }
 
 // Сводка для рейтинга: обновляется вместе с записью игрока, чтобы не читать все файлы.
@@ -96,6 +97,7 @@ class VB_TabletPlayers
 	protected static bool s_OrderDirty = true;
 	protected static int s_SortedAt = -1000000;
 	protected static int s_RatingSavedAt;
+	protected static int s_PurgeDay = -1;
 
 	protected static string PathOf(string uid)
 	{
@@ -349,6 +351,11 @@ class VB_TabletPlayers
 			s_Rating.Rows.Insert(row);
 			s_RowOf.Set(rec.Uid, row);
 		}
+		if (row.LastDay != rec.LastDay)
+		{
+			row.LastDay = rec.LastDay;
+			s_RatingDirty = true;
+		}
 		int xp = rec.ToStats().Xp(rates);
 		if (row.PlayerName != rec.PlayerName || row.Xp != xp)
 		{
@@ -492,7 +499,83 @@ class VB_TabletPlayers
 		}
 		foreach (string gone : stale)
 			Release(null, gone);
+		int today = DayKey();
+		if (today != s_PurgeDay)
+		{
+			s_PurgeDay = today;
+			Purge(today);
+		}
 		SaveRating(false);
+	}
+
+	// Игрок не заходил PlayerForgetDays дней (решение 2026-11-09: 90): данные планшета удаляются, при возвращении
+	// он начинает с нуля. Раз в сутки и при старте. Строки рейтинга без даты (до обновления) отсчитываются с сегодня.
+	protected static void Purge(int today)
+	{
+		int days = VB_TabletConfig.Get().PlayerForgetDays;
+		if (days <= 0)
+			return;
+		LoadRating();
+		array<ref VB_TabletRatingRow> keep = new array<ref VB_TabletRatingRow>();
+		int removed = 0;
+		foreach (VB_TabletRatingRow r : s_Rating.Rows)
+		{
+			if (r.LastDay <= 0)
+			{
+				r.LastDay = today;
+				s_RatingDirty = true;
+			}
+			if (today - r.LastDay < days || s_Online.Contains(r.Uid) || !Forget(r.Uid))
+			{
+				keep.Insert(r);
+				continue;
+			}
+			s_RowOf.Remove(r.Uid);
+			removed++;
+			Print(VB_TABLET_TAG + " игрок удалён из планшета (не заходил " + days.ToString() + "+ дней): " + r.PlayerName + " " + r.Uid);
+		}
+		if (removed == 0)
+			return;
+		s_Rating.Rows = keep;
+		s_RatingDirty = true;
+		s_OrderDirty = true;
+		SaveRating(true);
+	}
+
+	// Удаление данных игрока: запись, личная карта, место в клане. false: оставить (лидер клана: такой клан
+	// уже передал бы лидерство или распустился по неактивности, трогать его здесь нельзя).
+	protected static bool Forget(string uid)
+	{
+		if (!VB_TabletCheck.IsSteam64(uid))
+			return false;
+		VB_Clan c = VB_TabletClans.OfPlayer(uid);
+		if (c)
+		{
+			if (c.IsLeader(uid))
+				return false;
+			string name = uid;
+			VB_ClanMember m = c.Member(uid);
+			if (m)
+				name = m.PlayerName;
+			VB_TabletClans.RemoveMember(c, uid);
+			VB_TabletClans.Log(c, VB_ClanEvent.LEFT, name);
+			VB_TabletClans.Save(c);
+			VB_TabletServer.PushClan(c);
+		}
+		DeleteWithCopies(PathOf(uid));
+		VB_TabletMap.Forget(uid);
+		return true;
+	}
+
+	// Файл и его копии .bak и .tmp.
+	static void DeleteWithCopies(string path)
+	{
+		array<string> files = {path, path + ".bak", path + ".tmp"};
+		foreach (string f : files)
+		{
+			if (FileExist(f))
+				DeleteFile(f);
+		}
 	}
 
 	// Остановка сервера: всё, что в памяти, на диск.

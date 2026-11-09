@@ -11,7 +11,7 @@ class VB_NameTags
 	static const int MAX_ROWS = 1000;
 
 	bool Enabled = true;
-	float Range = 15;
+	float Range = 9;
 	bool Loaded;
 	int Version;
 	ref map<string, int> Rank = new map<string, int>();

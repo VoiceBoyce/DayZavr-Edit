@@ -205,20 +205,20 @@ class VB_TabletPageSettings extends VB_TabletPage
 			INT_UIF_Draw.Text(p, x + w - 120, y, 120, 18, "#STR_VB_TAB_B_FREE", 13, VB_C_DIM2, INT_UIF_Align.RIGHT);
 	}
 
-	// Клан, который занял пару «форма + символ». Цвет не считается.
+	// Клан, который занял этот символ: символ уникален на сервере, форма и цвет не считаются.
 	protected VB_ClanRow EmblemOwner(string shape, string symbol)
 	{
 		VB_TabletClient client = VB_TabletClient.Get();
 		array<ref VB_ClanRow> rows = client.Clans;
 		foreach (VB_ClanRow r : rows)
 		{
-			if (r.Id != s_Owner && r.EmbShape == shape && r.EmbSymbol == symbol)
+			if (r.Id != s_Owner && r.EmbSymbol == symbol)
 				return r;
 		}
 		return null;
 	}
 
-	// Занятые пары затемнены и не выбираются: эмблема не должна повторяться.
+	// Занятые символы затемнены и не выбираются: символ не должен повторяться, формы свободны все.
 	protected void Pick(Widget p, float x, float y, array<string> list, bool isShape, string prefix, array<Widget> hits, array<ref INT_UIF_Surface> bgs)
 	{
 		float s = 50;
@@ -241,7 +241,7 @@ class VB_TabletPageSettings extends VB_TabletPage
 				shape = v;
 				symbol = s_Symbol;
 			}
-			bool taken = !sel && EmblemOwner(shape, symbol) != null;
+			bool taken = !isShape && !sel && EmblemOwner(shape, symbol) != null;
 			int fill = VB_C_PANEL2;
 			int border = VB_C_LINE2;
 			int ink = VB_C_DIM;

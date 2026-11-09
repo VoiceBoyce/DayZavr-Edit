@@ -993,7 +993,7 @@ modded class INT_Bank_Menu
 		// карта и сводка
 		SetText(m_VbCardBal, sStore);
 		SetText(m_VbCardAccess, INT_Bank_UILook.Tr(access));
-		SetText(m_VbBoxTax, INT_Bank_UILook.Money(client.ClanTax));
+		SetText(m_VbBoxTax, INT_Bank_UILook.Money(client.MyTax()));
 		SetText(m_VbBoxDays, VbDaysText(c, client));
 		SetText(m_VbBoxAccess, INT_Bank_UILook.Tr(access));
 		if (m_VbBoxAccess)
@@ -1148,14 +1148,15 @@ modded class INT_Bank_Menu
 	// Дней до роспуска за неуплату: дни без налога плюс склад, делённый на налог.
 	protected int VbDays(VB_Clan c, VB_TabletClient client)
 	{
-		if (client.ClanTax <= 0)
+		int tax = client.TaxOf(c.Level);
+		if (tax <= 0)
 			return 9999;
-		return c.TaxFree + c.Bank / client.ClanTax;
+		return c.TaxFree + c.Bank / tax;
 	}
 
 	protected string VbDaysText(VB_Clan c, VB_TabletClient client)
 	{
-		if (client.ClanTax <= 0)
+		if (client.TaxOf(c.Level) <= 0)
 			return "-";
 		int days = VbDays(c, client);
 		return INT_Bank_UILook.Fmt("#STR_VB_BANK_DAYS", days.ToString());

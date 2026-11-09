@@ -136,6 +136,13 @@ class VB_TabletServer
 		VB_ClanMember m = c.Member(uid);
 		if (!m)
 			return;
+		// День захода: по нему считается неактивность клана и пропавший лидер.
+		int today = VB_TabletPlayers.DayKey();
+		if (m.LastDay != today)
+		{
+			m.LastDay = today;
+			VB_TabletClans.SaveSoon(c);
+		}
 		bool renamed = online && name != "" && m.PlayerName != name;
 		if (m.Online == online && !renamed)
 			return;
@@ -303,13 +310,14 @@ class VB_TabletServer
 		int clanMax = cfg.ClanMaxMembers;
 		int maxClans = cfg.MaxClans;
 		int bankMax = cfg.BankMax;
-		int clanTax = cfg.ClanTax;
+		// Налог по уровням 1..5: клиент берёт сумму своего клана по его уровню.
+		array<int> taxes = cfg.TaxByLevel;
 		rpc.Write(clanPrice);
 		rpc.Write(clanRank);
 		rpc.Write(clanMax);
 		rpc.Write(maxClans);
 		rpc.Write(bankMax);
-		rpc.Write(clanTax);
+		rpc.Write(taxes);
 		// Награды для экранов рейтинга и контрактов: не вшиты в клиент, берутся из конфига.
 		array<int> prizes = cfg.WeekPrizes;
 		array<int> rewardMy = cfg.RewardMy;
@@ -432,7 +440,8 @@ class VB_TabletServer
 
 	protected static void SendRating(PlayerBase player, PlayerIdentity sender)
 	{
-		const int ROWS = 13;
+		// Рейтинг игроков: первые 100 (решение 2026-11-09), своё место игрок видит всегда.
+		const int ROWS = 100;
 		VB_TabletRecord rec = VB_TabletPlayers.Get(sender.GetPlainId(), sender.GetName());
 		VB_TabletPlayers.UpdateFromPlayer(rec, player);
 		array<ref VB_TabletRatingRow> list = VB_TabletPlayers.Sorted();

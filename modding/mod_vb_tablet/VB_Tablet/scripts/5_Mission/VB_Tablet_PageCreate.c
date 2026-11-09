@@ -136,7 +136,7 @@ class VB_TabletPageCreate extends VB_TabletPage
 			sy = cell.Value;
 		}
 		cell.Off = false;
-		if (!sel && VBA_Util.EmblemOwner(sh, sy))
+		if (!isShape && !sel && VBA_Util.EmblemOwner(sh, sy))
 			cell.Off = true;
 		int fill = VB_C_PANEL2;
 		int border = VB_C_LINE2;
@@ -162,7 +162,8 @@ class VB_TabletPageCreate extends VB_TabletPage
 		foreach (VBA_EmblemCell cellB : m_Symbols)
 			PaintCell(cellB, false);
 		int used = VB_TabletClient.Get().Clans.Count();
-		int all = m_Shapes.Count() * m_Symbols.Count();
+		// Символ уникален на сервере: свободных эмблем столько, сколько символов.
+		int all = m_Symbols.Count();
 		string line = VBA_Util.Sub("#STR_VB_TAB_A_BUSY", "{n}", used.ToString());
 		line.Replace("{all}", all.ToString());
 		m_Busy.SetText(line);

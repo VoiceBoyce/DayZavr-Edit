@@ -53,7 +53,7 @@ class VB_TabletPageAdmin extends VB_TabletPage
 	{
 		if (row.TaxFree > 0)
 			return -1;
-		return VB_TabletClient.Get().TaxDays(row.Bank);
+		return VB_TabletClient.Get().TaxDays(row.Bank, row.Level);
 	}
 
 	protected void BuildTable(array<ref VB_ClanRow> rows)

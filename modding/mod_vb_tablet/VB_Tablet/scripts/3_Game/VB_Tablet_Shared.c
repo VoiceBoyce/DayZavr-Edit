@@ -20,7 +20,7 @@ enum VB_TabletOp
 	HELLO = 1,		// C2S пусто; S2C: string имя сервера, bool администратор, VB_TabletRates, int цены: название, тег, эмблема, цвет,
 					// int цена клана, ранг для клана, участников, кланов, лимит склада, налог, array<int> призы недели, array<int> RewardMy
 	PROFILE = 2,	// C2S пусто; S2C: VB_TabletStats
-	RATING = 3,		// C2S пусто; S2C: int мест всего, int строк, строки (string, int опыт, string тег), int[10] игроков по рангам
+	RATING = 3,		// C2S пусто; S2C: int мест всего, int строк (до 100), строки (string, int опыт, string тег), int[10] игроков по рангам
 	RESULT = 4,		// S2C: int VB_TabletResult
 	CLAN = 10,		// C2S пусто; S2C: bool есть клан, VB_Clan.WriteHead, инвайты, id клана заявки
 	CLAN_LIST = 11,	// C2S пусто; S2C: int строк, VB_ClanRow

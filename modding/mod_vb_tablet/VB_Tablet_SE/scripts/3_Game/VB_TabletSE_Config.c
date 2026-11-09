@@ -96,19 +96,24 @@ class VB_TabletConfig
 	string ServerName = "DayZ Server";
 	ref array<string> Admins = new array<string>();	// Steam64 администраторов планшета
 	int NameTags = 1;			// ники над головами: ник, эмблема клана, ранг
-	float NameTagRange = 15;	// с какого расстояния виден ник, метры (3..50)
+	float NameTagRange = 9;	// с какого расстояния виден ник, метры (3..50)
+	int PlayerForgetDays = 90;	// игрок не заходил столько дней: данные планшета удаляются (0 — не удалять)
 	ref VB_MapLimits MapLimits = new VB_MapLimits();
 	// Купюры. При INT_Banking на сервере берутся валюты банка (его INT_BankingConfig.json), этот список только без банка.
 	ref array<ref VB_TabletDenom> Money = new array<ref VB_TabletDenom>();
 	// clans.json
 	int ClanPrice = 1500000;
 	int ClanRank = 2;			// индекс ранга, с которого можно создать клан: 2 это «Следопыт»
-	int MaxClans = 20;
+	int MaxClans = 36;
 	int ClanMaxMembers = 20;
 	int BankMax = 100000000;
-	int ClanTax = 20000;
+	ref array<int> TaxByLevel;	// налог в день по уровню клана 1..5
 	int TaxFreeDays = 7;
 	int TaxWarnDays = 3;		// предупреждение о налоге при входе: дней до роспуска
+	int InactiveTaxDays = 7;	// никто из участников не заходил столько дней: налог ×InactiveTaxMult
+	int InactiveTaxMult = 3;
+	int InactiveDissolveDays = 14;	// никто не заходил столько дней: клан распускается
+	int LeaderAwayDays = 14;	// лидер не заходил столько дней: лидерство переходит активному участнику
 	int PriceName = 150000;
 	int PriceTag = 100000;
 	int PriceEmblem = 100000;
@@ -220,6 +225,7 @@ class VB_TabletConfig
 		Admins = d.Admins;
 		NameTags = d.NameTags;
 		NameTagRange = d.NameTagRange;
+		PlayerForgetDays = d.PlayerForgetDays;
 		MapLimits = d.MapLimits;
 		Money = d.Money;
 	}
@@ -242,9 +248,13 @@ class VB_TabletConfig
 		MaxClans = d.MaxClans;
 		ClanMaxMembers = d.ClanMaxMembers;
 		BankMax = d.BankMax;
-		ClanTax = d.ClanTax;
+		TaxByLevel = d.TaxByLevel;
 		TaxFreeDays = d.TaxFreeDays;
 		TaxWarnDays = d.TaxWarnDays;
+		InactiveTaxDays = d.InactiveTaxDays;
+		InactiveTaxMult = Math.Max(1, d.InactiveTaxMult);
+		InactiveDissolveDays = d.InactiveDissolveDays;
+		LeaderAwayDays = d.LeaderAwayDays;
 		PriceName = d.PriceName;
 		PriceTag = d.PriceTag;
 		PriceEmblem = d.PriceEmblem;
@@ -332,6 +342,15 @@ class VB_TabletConfig
 			VB_CfgFile<VB_CfgBanned>.Write(name, d);
 		BannedBroken = st == VB_CFG_BROKEN;
 		BannedWords = d.BannedWords;
+	}
+
+	// Налог в день для уровня клана (без множителя неактивности).
+	int TaxOf(int level)
+	{
+		if (!TaxByLevel || TaxByLevel.Count() == 0)
+			return 0;
+		int i = Math.Clamp(level, 1, TaxByLevel.Count()) - 1;
+		return TaxByLevel.Get(i);
 	}
 
 	bool IsAdmin(string uid)

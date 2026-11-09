@@ -97,6 +97,14 @@ class VB_TabletMap
 		return VB_TabletPlayers.DIR_PLAYERS + "/" + uid + "_map.json";
 	}
 
+	// Игрок забыт планшетом (VB_TabletPlayers.Purge): личная карта удаляется вместе с кэшем.
+	static void Forget(string uid)
+	{
+		if (s_Players)
+			s_Players.Remove(uid);
+		VB_TabletPlayers.DeleteWithCopies(PathOf(uid));
+	}
+
 	protected static VB_MapPlayerFile FileOf(string uid)
 	{
 		if (!s_Players)

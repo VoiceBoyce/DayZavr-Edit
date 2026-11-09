@@ -608,19 +608,20 @@ class VB_TabletPageRating extends VB_TabletTabbedPage
 		INT_UIF_Draw.Line(t, 0, 46, 800, 1, VB_C_LINE);
 		int place = session.Me.Place;
 		int myXp = session.Me.Xp(rates);
-		for (int k = 3; k < 13 && k < n; k++)
+		// Своя строка закреплена сверху таблицы с местом в топе (решение 2026-11-09), под ней черта.
+		// Ниже места с 4-го до 100-го с прокруткой, как список кланов.
+		DrawPlayerRow(t, session, 50, place, own, myXp, MyTag(session), true, -1);
+		INT_UIF_Draw.Line(t, 0, 97, 800, 1, VB_C_LINE);
+		int rest = Math.Max(0, n - 3);
+		m_ClanScroll = VBK.Scroll(t, 0, 98, 800, 437);
+		Widget L = INT_UIF_Draw.ScrollContent(m_ClanScroll);
+		INT_UIF_Draw.SetScrollContent(m_ClanScroll, rest * 47 + 6);
+		for (int k = 3; k < n; k++)
 		{
-			float y = 50 + (k - 3) * 47;
-			// Игрок за пределами присланных 13 строк: как в макете занимает последнюю строку.
-			if (k == 12 && place > 13)
-			{
-				DrawPlayerRow(t, session, y, place, own, myXp, MyTag(session), true, -1);
-				continue;
-			}
 			string rowName = session.RatingNames.Get(k);
 			string rowTag = session.RatingTags.Get(k);
 			int rowXp = session.RatingXp.Get(k);
-			DrawPlayerRow(t, session, y, k + 1, rowName, rowXp, rowTag, rowName == own, k);
+			DrawPlayerRow(L, session, 3 + (k - 3) * 47, k + 1, rowName, rowXp, rowTag, rowName == own, k);
 		}
 		BuildSide(session);
 	}

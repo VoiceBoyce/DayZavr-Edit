@@ -112,11 +112,12 @@ class VB_CfgWriter
 // general.json
 class VB_CfgGeneral
 {
-	string Comment = "Admins: Steam64 администраторов планшета. NameTags 1: ники над головами, NameTagRange: дальность в метрах (3..50). MapLimits: лимиты меток, зон и маршрутов. Money: купюры склада (при INT_Banking берутся валюты банка).";
+	string Comment = "Admins: Steam64 администраторов планшета. NameTags 1: ники над головами, NameTagRange: дальность в метрах (3..50). MapLimits: лимиты меток, зон и маршрутов. PlayerForgetDays: игрок не заходил столько дней — его данные планшета (прогресс, рейтинг, личная карта, место в клане) удаляются, 0 — не удалять. Money: купюры склада (при INT_Banking берутся валюты банка).";
 	string ServerName = "DayZ Server";
 	ref array<string> Admins = {"76561200715668795"};	// по умолчанию в новом general.json
 	int NameTags = 1;
-	float NameTagRange = 15;
+	float NameTagRange = 9;
+	int PlayerForgetDays = 90;	// игрок не заходил столько дней: данные планшета удаляются (0 — не удалять)
 	ref VB_MapLimits MapLimits = new VB_MapLimits();
 	ref array<ref VB_TabletDenom> Money = new array<ref VB_TabletDenom>();
 
@@ -151,15 +152,19 @@ class VB_CfgGeneral
 // clans.json
 class VB_CfgClans
 {
-	string Comment = "ClanRank: индекс ранга, с которого можно создать клан (2 — «Следопыт»). ClanTax: налог в день, TaxFreeDays: льготные дни, TaxWarnDays: за сколько дней до роспуска предупреждать. Price*: цены смены названия, тега, эмблемы и цвета. Levels: влияние для уровней клана 1..5. WeekPrizes: награда на склад за 1, 2, 3 место недели.";
+	string Comment = "ClanRank: индекс ранга, с которого можно создать клан (2 — «Следопыт»). TaxByLevel: налог в день для уровней клана 1..5 (0 — без налога), TaxFreeDays: льготные дни нового клана, TaxWarnDays: за сколько дней до роспуска предупреждать. Неактивность (никто из участников не заходил): с InactiveTaxDays дней налог ×InactiveTaxMult, с InactiveDissolveDays дней клан распускается, склад сгорает. LeaderAwayDays: лидер не заходил столько дней — лидерство переходит к активному участнику со старшим рангом. Price*: цены смены названия, тега, эмблемы и цвета. Levels: влияние для уровней клана 1..5. WeekPrizes: награда на склад за 1, 2, 3 место недели.";
 	int ClanPrice = 1500000;
 	int ClanRank = 2;
-	int MaxClans = 20;
+	int MaxClans = 36;	// не больше числа символов эмблем: символ уникален
 	int ClanMaxMembers = 20;
 	int BankMax = 100000000;
-	int ClanTax = 20000;
+	ref array<int> TaxByLevel = new array<int>();
 	int TaxFreeDays = 7;
 	int TaxWarnDays = 3;
+	int InactiveTaxDays = 7;
+	int InactiveTaxMult = 3;
+	int InactiveDissolveDays = 14;
+	int LeaderAwayDays = 14;
 	int PriceName = 150000;
 	int PriceTag = 100000;
 	int PriceEmblem = 100000;
@@ -173,6 +178,11 @@ class VB_CfgClans
 		{
 			Levels = {0, 1500, 4000, 9000, 18000};
 			filled.Insert("Levels");
+		}
+		if (!TaxByLevel || TaxByLevel.Count() != VB_CLAN_LEVELS)
+		{
+			TaxByLevel = {20000, 25000, 30000, 35000, 40000};
+			filled.Insert("TaxByLevel");
 		}
 		if (!WeekPrizes || WeekPrizes.Count() == 0)
 		{

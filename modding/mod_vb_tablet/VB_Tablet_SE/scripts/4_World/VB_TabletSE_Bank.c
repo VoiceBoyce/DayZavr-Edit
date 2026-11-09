@@ -110,9 +110,10 @@ class VB_TabletBank
 		if (!c || !c.MemberCan(uid, VB_ClanPerm.BANK))
 			return;
 		VB_TabletConfig cfg = VB_TabletConfig.Get();
-		if (cfg.ClanTax <= 0)
+		int tax = cfg.TaxOf(c.Level);
+		if (tax <= 0)
 			return;
-		int days = c.TaxFree + c.Bank / cfg.ClanTax;
+		int days = c.TaxFree + c.Bank / tax;
 		if (days <= cfg.TaxWarnDays)
 			Notify(player, id, "#STR_VB_TAB_C_TAX_WARN", days.ToString(), 2);
 	}

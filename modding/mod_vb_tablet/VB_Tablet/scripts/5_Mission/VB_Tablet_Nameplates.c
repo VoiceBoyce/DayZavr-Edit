@@ -1,5 +1,5 @@
 // Ники над головами (вместо @World_HeadNicknames): эмблема клана и ник, под ними значок и название ранга.
-// Видны в пределах дальности из конфига сервера (15 м) и только при прямой видимости.
+// Видны в пределах дальности из конфига сервера (9 м) и только при прямой видимости.
 // Друг из INT_PartyMode, у которого видна метка пати: только эмблема и ранг, ник и здоровье даёт пати, а её метка
 // по дефайну RF_NICKNAMES_CL поднимается на 34 px в пределах 10 м. Дальше 10 м над другом остаётся одна метка пати.
 // Слой скрыт под любым меню, при скрытом HUD, если игрок мёртв или без сознания.
@@ -12,13 +12,18 @@ class VB_Nameplate extends Managed
 	float LosIn;
 	bool Los;
 	bool Seen;
+	bool NoClan;		// только стенд DayZDiag: манекен показывается игроком без клана
+	bool OtherClan;		// только стенд DayZDiag: манекен показывается игроком другого клана
 }
 
 class VB_TabletNameplates
 {
+#ifdef DIAG_DEVELOPER
+	protected static ref VB_NameTagClan s_DiagClan;	// выдуманный клан для манекена на стенде
+#endif
 	static const float FRIEND_RANGE = 10;	// = RF_NICK_RANGE в INT_PTY_HudTags
 	static const float HEAD_LIFT = 0.32;	// строка под меткой пати: та же точка, что у пати
-	static const float PLATE_LIFT = 0.16;	// полная табличка ближе к голове
+	static const float PLATE_LIFT = 0.28;	// полная табличка: над головой с запасом
 	static const float LOS_GAP = 0.25;
 	static const float ASK_GAP = 30;
 	static const float ASK_UNKNOWN = 5;
@@ -96,12 +101,21 @@ class VB_TabletNameplates
 				steam = ident.GetPlainId();
 				nick = ident.GetName();
 			}
+			bool noClan = false;
+			bool otherClan = false;
 #ifdef DIAG_DEVELOPER
-			// Стенд DayZDiag: манекен без игрока показывается с рангом и кланом самого игрока, чтобы проверить вид.
+			// Стенд DayZDiag: манекен без игрока показывается с рангом самого игрока, чтобы сравнить виды рядом:
+			// мужчина — с его кланом, женщина — без клана, Boris — игрок другого (выдуманного) клана.
 			if (!ident && me.GetIdentity())
 			{
 				steam = me.GetIdentity().GetPlainId();
-				nick = "Dummy";
+				noClan = !p.IsMale();
+				otherClan = p.GetType() == "SurvivorM_Boris";
+				nick = "Соклановец";
+				if (noClan)
+					nick = "Без клана";
+				if (otherClan)
+					nick = "Чужой клан";
 			}
 #endif
 			if (steam == "")
@@ -114,7 +128,10 @@ class VB_TabletNameplates
 				continue;
 			if (!tags.Knows(steam))
 				unknown = true;
-			Paint(PlateOf(p, steam), p, steam, nick, dist, dt, tags);
+			VB_Nameplate plate = PlateOf(p, steam);
+			plate.NoClan = noClan;
+			plate.OtherClan = otherClan;
+			Paint(plate, p, steam, nick, dist, dt, tags);
 		}
 		for (int i = m_Items.Count() - 1; i >= 0; i--)
 		{
@@ -287,7 +304,7 @@ class VB_TabletNameplates
 		return mode + "|" + nick + "|" + rank.ToString() + "|" + cid;
 	}
 
-	// Макет «Над головой в игре»: эмблема 24 и ник 19 белым с тенью; ниже значок 18 и ранг 13 акцентом.
+	// Макет «Над головой в игре»: эмблема 24 и ник 19 белым с тенью; ниже значок 18 и ранг 13 в цвете клана игрока.
 	// Точка привязки внизу по центру: всё рисуется выше неё.
 	protected void Build(VB_Nameplate item, string nick, string steam, bool compact, VB_NameTags tags)
 	{
@@ -298,8 +315,21 @@ class VB_TabletNameplates
 			return;
 		VB_NameTagClan clan = null;
 		string cid;
-		if (tags.ClanOf.Find(steam, cid))
+		if (!item.NoClan && tags.ClanOf.Find(steam, cid))
 			tags.Clans.Find(cid, clan);
+#ifdef DIAG_DEVELOPER
+		if (item.OtherClan)
+		{
+			if (!s_DiagClan)
+			{
+				s_DiagClan = new VB_NameTagClan();
+				s_DiagClan.EmbShape = "hex";
+				s_DiagClan.EmbSymbol = "wolf";
+				s_DiagClan.Color = 0xFFEF5B4C;
+			}
+			clan = s_DiagClan;
+		}
+#endif
 		int rank = -1;
 		if (tags.Knows(steam))
 			rank = tags.Rank.Get(steam);
@@ -327,7 +357,7 @@ class VB_TabletNameplates
 			if (clan)
 				VBK.Emblem(item.Root, cx, cy, 22, clan.EmbShape, clan.EmbSymbol, clan.Color);
 			if (rank >= 0)
-				RankRow(item.Root, cx + ew, cy + 2, rank, rankName, rankW);
+				RankRow(item.Root, cx + ew, cy + 2, rank, rankName, rankW, clan);
 			return;
 		}
 		float es = 0;
@@ -335,22 +365,27 @@ class VB_TabletNameplates
 			es = 24 + 6;
 		float nw = MeasureW(item.Root, nick, 19) + 4;
 		float w1 = es + nw;
+		// Ник и строка ранга плотнее: ранг на 24 ниже ника (было 29).
 		float top = -26;
 		if (rank >= 0)
-			top = -53;
+			top = -48;
 		float x1 = -w1 * 0.5;
 		if (clan)
 			VBK.Emblem(item.Root, x1, top, 24, clan.EmbShape, clan.EmbSymbol, clan.Color);
 		TextWidget name = INT_UIF_Draw.Text(item.Root, x1 + es, top, nw + 8, 24, nick, 19, VB_C_WHITE);
 		Shadow(name);
 		if (rank >= 0)
-			RankRow(item.Root, -rw * 0.5, top + 29, rank, rankName, rankW);
+			RankRow(item.Root, -rw * 0.5, top + 24, rank, rankName, rankW, clan);
 	}
 
-	protected void RankRow(Widget p, float x, float y, int rank, string rankName, float textW)
+	// Ранг в цвете клана этого игрока (решение 2026-11-09), без клана нейтральный светло-серый.
+	protected void RankRow(Widget p, float x, float y, int rank, string rankName, float textW, VB_NameTagClan clan)
 	{
-		VBT.Insignia(p, x, y, 18, rank, VB_C_ACCENT);
-		TextWidget t = INT_UIF_Draw.Text(p, x + 22, y - 1, textW + 8, 20, rankName, 13, VB_C_ACCENT);
+		int col = VB_C_SILVER;
+		if (clan)
+			col = clan.Color;
+		VBT.Insignia(p, x, y, 18, rank, col);
+		TextWidget t = INT_UIF_Draw.Text(p, x + 22, y - 1, textW + 8, 20, rankName, 13, col);
 		Shadow(t);
 	}
 

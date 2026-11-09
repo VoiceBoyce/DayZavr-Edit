@@ -20,7 +20,7 @@ class VB_TabletPageBank extends VB_TabletPage
 			VBA_Util.Ask(VB_TabletOp.CONTRACTS);
 		int days = -1;
 		if (c.TaxFree <= 0)
-			days = VB_TabletClient.Get().TaxDays(c.Bank);
+			days = VB_TabletClient.Get().TaxDays(c.Bank, c.Level);
 		bool low = days >= 0 && days <= VBA_TAX_LOW;
 		BuildBalance(c);
 		BuildTax(c, days, low);
@@ -62,7 +62,7 @@ class VB_TabletPageBank extends VB_TabletPage
 		}
 		INT_UIF_Surface.Box(x, 0, 0, 380, 236, 10, VB_C_PANEL, border);
 		VBT.Cap(x, 24, 24, 160, "#STR_VB_TAB_C_TAX");
-		string perDay = VBA_Util.Sub("#STR_VB_TAB_C_TAX_DAY", "{n}", VBT.Num(VB_TabletClient.Get().ClanTax));
+		string perDay = VBA_Util.Sub("#STR_VB_TAB_C_TAX_DAY", "{n}", VBT.Num(VB_TabletClient.Get().MyTax()));
 		INT_UIF_Draw.Text(x, 170, 22, 186, 20, perDay, 15, VB_C_GOLD, INT_UIF_Align.RIGHT);
 		string head = VBA_Util.Sub("#STR_VB_TAB_C_TAX_LEFT", "{n}", days.ToString());
 		float k = days / 30.0;

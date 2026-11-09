@@ -534,9 +534,10 @@ class VB_TabletMenu extends INT_UIF_Menu
 	{
 		VB_TabletClient client = VB_TabletClient.Get();
 		VB_Clan c = client.Clan;
-		if (!c || c.TaxFree > 0 || client.ClanTax <= 0)
+		int tax = client.MyTax();
+		if (!c || c.TaxFree > 0 || tax <= 0)
 			return false;
-		return c.Bank / client.ClanTax <= 7;
+		return c.Bank / tax <= 7;
 	}
 
 	// --- экраны ------------------------------------------------------------------------------

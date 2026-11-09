@@ -121,6 +121,7 @@ class VB_ClanMember
 	int Total;
 	string Discord;
 	string LastSeen;	// дата последнего выхода
+	int LastDay;		// только на сервере: номер дня последнего захода (неактивность клана, пропавший лидер)
 	ref array<int> Week = {0, 0, 0, 0, 0, 0, 0};	// вклад по дням недели, с понедельника
 	[NonSerialized()]
 	bool Online;

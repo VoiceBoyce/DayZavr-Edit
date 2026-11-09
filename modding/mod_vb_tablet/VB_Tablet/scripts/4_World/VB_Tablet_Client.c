@@ -39,9 +39,9 @@ class VB_TabletClient
 	int ClanPrice = 1500000;
 	int ClanRank = 2;
 	int ClanMax = 20;
-	int MaxClans = 20;
+	int MaxClans = 36;
 	int BankMax = 100000000;
-	int ClanTax = 20000;
+	ref array<int> TaxByLevel = {20000, 25000, 30000, 35000, 40000};	// налог в день по уровню клана 1..5
 	ref array<int> WeekPrizes = {500000, 300000, 150000};	// награды недели за 1, 2, 3 место
 	// Клан-чат: одна пауза на окно планшета и вкладку «Клан» общего чата. Сервер ждёт 2 с,
 	// у клиента запас на задержку сети, иначе сообщение изредка получало бы отказ «слишком часто».
@@ -170,12 +170,29 @@ class VB_TabletClient
 		Post(rpc);
 	}
 
-	// На сколько дней склада хватит налога. Налог выключен (0 в конфиге): 999, деления на ноль нет.
-	int TaxDays(int bank)
+	// Налог в день для уровня клана.
+	int TaxOf(int level)
 	{
-		if (ClanTax <= 0)
+		if (!TaxByLevel || TaxByLevel.Count() == 0)
+			return 0;
+		return TaxByLevel.Get(Math.Clamp(level, 1, TaxByLevel.Count()) - 1);
+	}
+
+	// Налог своего клана в день (0 без клана).
+	int MyTax()
+	{
+		if (!Clan)
+			return 0;
+		return TaxOf(Clan.Level);
+	}
+
+	// На сколько дней склада хватит налога. Налог выключен (0 в конфиге): 999, деления на ноль нет.
+	int TaxDays(int bank, int level)
+	{
+		int tax = TaxOf(level);
+		if (tax <= 0)
 			return 999;
-		return bank / ClanTax;
+		return bank / tax;
 	}
 
 	bool Can(int perm)
@@ -237,8 +254,13 @@ class VB_TabletClient
 				return;
 			if (!ctx.Read(PriceName) || !ctx.Read(PriceTag) || !ctx.Read(PriceEmblem) || !ctx.Read(PriceColor))
 				return;
-			if (!ctx.Read(ClanPrice) || !ctx.Read(ClanRank) || !ctx.Read(ClanMax) || !ctx.Read(MaxClans) || !ctx.Read(BankMax) || !ctx.Read(ClanTax))
+			if (!ctx.Read(ClanPrice) || !ctx.Read(ClanRank) || !ctx.Read(ClanMax) || !ctx.Read(MaxClans) || !ctx.Read(BankMax))
 				return;
+			array<int> taxes = new array<int>();
+			if (!ctx.Read(taxes))
+				return;
+			if (taxes.Count() == VB_CLAN_LEVELS)
+				TaxByLevel = taxes;
 			array<int> prizes = new array<int>();
 			array<int> rewardMy = new array<int>();
 			if (!ctx.Read(prizes) || !ctx.Read(rewardMy))
