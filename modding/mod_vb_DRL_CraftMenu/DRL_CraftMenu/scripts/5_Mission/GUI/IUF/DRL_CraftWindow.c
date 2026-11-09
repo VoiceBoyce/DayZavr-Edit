@@ -154,6 +154,9 @@ class DRL_CraftWindow extends INT_UIF_Menu
 	protected float m_SlotTimer;
 	protected int m_RunRemain = -1;
 	protected float m_LateRefresh;
+	protected string m_VariantLabel;   // подпись выбранного варианта результата
+	protected int m_DopPicked;         // выбрано доп. деталей / всего
+	protected int m_DopTotal;
 
 	void DRL_CraftWindow()
 	{
@@ -442,11 +445,18 @@ class DRL_CraftWindow extends INT_UIF_Menu
 	// --- центр: лист ------------------------------------------------------------------------
 	protected void BuildSheet(Widget sheet, float w, float h)
 	{
-		// Вид листа по станции: швейная машинка - «Раскрой», остальные - «Чертёж».
+		// Вид листа по станции: швейная машинка - «Раскрой», подъёмник - «Сборка»,
+		// остальные - «Чертёж».
 		bool sew = m_StationKind == DRL_ST_SEW;
+		bool lift = m_StationKind == DRL_ST_LIFT;
 		if (sew)
 		{
 			m_Bp = new DRL_UICutSheet();
+			m_Stage = m_Bp.GetStage();
+		}
+		else if (lift)
+		{
+			m_Bp = new DRL_UIAssemblySheet();
 			m_Stage = m_Bp.GetStage();
 		}
 
@@ -464,6 +474,12 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			minor = DRL_UIC.BP(14);
 			major = DRL_UIC.BP(14);
 			glow = ARGB(90, 60, 90, 70);
+		}
+		else if (lift)
+		{
+			// Гараж: тёмно-синий лист.
+			bg = ARGB(245, 8, 12, 20);
+			glow = DRL_UIC.BP(18);
 		}
 		INT_UIF_Draw.Image(sheet, 0, 1, w, h - 2, "iuf_white", bg);
 		DRL_UICanvas grid = new DRL_UICanvas();
@@ -2071,6 +2087,9 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			}
 		}
 		string label = DRL_UIText.Fmt("#STR_DRL_UI_BP_VARS", names.Count().ToString());
+		m_VariantLabel = "";
+		if (sel >= 0 && sel < names.Count())
+			m_VariantLabel = names[sel];
 		m_Bp.SetVariants(names, colors, sel, label);
 	}
 
@@ -2244,6 +2263,9 @@ class DRL_CraftWindow extends INT_UIF_Menu
 				d.m_Need = "";
 			}
 			d.m_Ok = have >= need;
+			d.m_HaveN = have;
+			d.m_NeedN = need;
+			d.m_Cls = activeCls;
 			d.m_Variants = hasVariations;
 			d.m_Selected = m_ActiveVariationMerged != null && m_ActiveVariationMerged == mc;
 			if (!d.m_Ok)
@@ -2280,6 +2302,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 				td.m_Tag = TAG_TOOL + m_ToolComps.Count();
 				m_ToolComps.Insert(tc);
 				td.m_Name = ToolName(token);
+				td.m_Cls = token;
 				td.m_Preview = prevCls;
 				td.m_Ok = present != null;
 				int wear = Math.Round(tc.ApplyDamageFrac * 100.0);
@@ -2449,6 +2472,9 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		m_DopRecipes.Clear();
 		DRL_Craft_Config cfg = Cfg();
 		int picked = 0;
+		array<EntityAI> dopCache = new array<EntityAI>();
+		if (r && r.HasAttachedRecipes())
+			GetInventorySnapshot(dopCache);
 		if (r && r.HasAttachedRecipes() && cfg)
 		{
 			for (int k = 0; k < r.AttachedRecipeIds.Count(); k++)
@@ -2490,6 +2516,12 @@ class DRL_CraftWindow extends INT_UIF_Menu
 					picked++;
 				}
 				dd.m_VarCount = dvars.Count();
+				// Для схемы машины: класс детали, её время с количеством, хватает ли материалов.
+				dd.m_Cls = dopR.Result;
+				if (dvi < dvars.Count())
+					dd.m_Cls = dvars[dvi];
+				dd.m_TimeSec = dopR.CraftTimeSec * dd.m_Qty;
+				dd.m_Ok = CanCraftRecipe(dopR, dopCache);
 				string tip = dopR.RecipeName + " · " + sub;
 				if (dvars.Count() > 1 && dvi < dvars.Count())
 					tip = tip + " · " + DRL_UIText.DisplayName(dvars[dvi]);
@@ -2498,6 +2530,8 @@ class DRL_CraftWindow extends INT_UIF_Menu
 				items.Insert(dd);
 			}
 		}
+		m_DopPicked = picked;
+		m_DopTotal = items.Count();
 		string label = DRL_UIText.Fmt("#STR_DRL_UI_BP_DOP", picked.ToString(), items.Count().ToString());
 		m_Bp.SetDop(items, label);
 	}
@@ -3133,6 +3167,19 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			labels.Insert("#STR_DRL_UI_STP_COLORS");
 			values.Insert(nColors.ToString());
 			colors.Insert(txt);
+		}
+		else if (m_StationKind == DRL_ST_LIFT && m_DopTotal > 0)
+		{
+			// «Сборка»: сколько деталей выбрано и цвет кузова.
+			labels.Insert("#STR_DRL_UI_STP_PARTS");
+			values.Insert(DRL_UIText.Fmt("#STR_DRL_UI_ASM_OF", m_DopPicked.ToString(), m_DopTotal.ToString()));
+			colors.Insert(txt);
+			if (m_VariantLabel != "")
+			{
+				labels.Insert("#STR_DRL_UI_STP_PAINT");
+				values.Insert(m_VariantLabel);
+				colors.Insert(txt);
+			}
 		}
 		else
 		{

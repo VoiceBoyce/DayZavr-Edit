@@ -380,6 +380,9 @@ class DRL_UIBpItem extends Managed
 	int m_Health = -1;     // 0..100 - полоска состояния обвеса
 	int m_GoRecipe = -1;   // RecipeId: недостающее делается здесь же - кнопка «Сделать»
 	string m_Tip;
+	int m_HaveN;           // есть / нужно числами (спецификация «Сборки»)
+	int m_NeedN;
+	string m_Cls;          // класс компонента (группы спецификации)
 }
 
 // Доп. рецепт-навесное (AttachedRecipeIds) под изделием.
@@ -392,6 +395,10 @@ class DRL_UIBpDopData extends Managed
 	int m_Qty = 1;
 	int m_VarCount;
 	string m_Tip;
+	string m_Cls;          // класс результата детали (где она на схеме машины)
+	int m_TimeSec;         // время детали с учётом количества
+	bool m_Ok = true;      // хватает материалов на деталь
+	int m_VarColor;        // цвет выбранного варианта детали (0 - нет вариантов)
 }
 
 // --- выноска ---------------------------------------------------------------------------
@@ -830,6 +837,12 @@ class DRL_UIBpDop extends Managed
 		}
 		if (d.m_Dim || d.m_Locked)
 			fg = DRL_UIC.Dim();
+		// Выбрана, но на деталь не хватает материалов.
+		if (d.m_Checked && !d.m_Ok)
+		{
+			fill = DRL_UIC.No(36);
+			border = DRL_UIC.No(178);
+		}
 		m_Bg.SetFill(fill);
 		m_Bg.SetBorder(border);
 		m_Box.SetFill(boxFill);

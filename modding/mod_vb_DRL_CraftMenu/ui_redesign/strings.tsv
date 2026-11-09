@@ -212,3 +212,22 @@ STR_DRL_UI_PART_HIPS	Belt	Пояс
 STR_DRL_UI_PART_GLOVES	Gloves	Перчатки
 STR_DRL_UI_PART_LEGS	Pants	Штаны
 STR_DRL_UI_PART_FEET	Boots	Обувь
+# v3 «Сборка» (подъёмник), 2026-11-10
+STR_DRL_UI_STP_PARTS	PARTS	ДЕТАЛИ
+STR_DRL_UI_STP_PAINT	PAINT	ЦВЕТ
+STR_DRL_UI_ASM_OF	%1 of %2	%1 из %2
+STR_DRL_UI_ASM_SPEC	SPECIFICATION · BODY + SELECTED PARTS	СПЕЦИФИКАЦИЯ · КУЗОВ + ВЫБРАННЫЕ ДЕТАЛИ
+STR_DRL_UI_ASM_ITEMS	/ %1 items	/ %1 предметов
+STR_DRL_UI_ASM_PAINT	PAINT	ОКРАСКА
+STR_DRL_UI_ASM_G_METAL	Metal and fasteners	Металл и крепёж
+STR_DRL_UI_ASM_G_ELEC	Electrics	Электрика
+STR_DRL_UI_ASM_G_CHEM	Chemicals and fluids	Химия и жидкости
+STR_DRL_UI_ASM_G_BODY	Body and interior	Кузов и салон
+STR_DRL_UI_ASM_G_TOOLS	Tools and lift	Инструменты и подъёмник
+STR_DRL_UI_CARPART_HOOD	Hood	Капот
+STR_DRL_UI_CARPART_KOVH	Air intake	Воздухозаборник
+STR_DRL_UI_CARPART_BUMPER	Bumper	Бампер
+STR_DRL_UI_CARPART_TRUNK	Trunk	Багажник
+STR_DRL_UI_CARPART_DRIVER	Driver door	Водит. дверь
+STR_DRL_UI_CARPART_CODRIVER	Passenger door	Пассаж. дверь
+STR_DRL_UI_CARPART_WHEEL	Wheels	Колёса
