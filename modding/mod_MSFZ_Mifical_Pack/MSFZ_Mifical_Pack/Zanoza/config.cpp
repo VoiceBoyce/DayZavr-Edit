@@ -6,7 +6,7 @@ class CfgPatches
 		weapons[] = {};
 		requiredVersion = 0.1;
 		requiredAddons[] = {"DZ_Animals"};
-		ammo[] = {"MeleeZanoza","MeleeZanoza_Hight"};
+		ammo[] = {"MeleeZanoza","MeleeZanoza_Hight","MeleeZanoza2","MeleeZanoza2_Hight","MeleeZanoza3","MeleeZanoza3_Hight"};
 	};
 };
 class CfgAmmo
@@ -54,6 +54,90 @@ class CfgAmmo
 			additionAnimalMeleeMultiplier = 5;
 		};
 	};
+	class MeleeZanoza2: MeleeWolf
+	{
+		class DamageApplied
+		{
+			type = "Melee";
+			bleedThreshold = 1;
+			class Health
+			{
+				damage = 22;
+			};
+			class Blood
+			{
+				damage = 250;
+			};
+			class Shock
+			{
+				damage = 10;
+			};
+			additionAnimalMeleeMultiplier = 5;
+		};
+	};
+	class MeleeZanoza2_Hight: MeleeWolf
+	{
+		class DamageApplied
+		{
+			type = "Melee";
+			bleedThreshold = 1;
+			class Health
+			{
+				damage = 35;
+			};
+			class Blood
+			{
+				damage = 350;
+			};
+			class Shock
+			{
+				damage = 12;
+			};
+			additionAnimalMeleeMultiplier = 5;
+		};
+	};
+	class MeleeZanoza3: MeleeWolf
+	{
+		class DamageApplied
+		{
+			type = "Melee";
+			bleedThreshold = 1;
+			class Health
+			{
+				damage = 28;
+			};
+			class Blood
+			{
+				damage = 350;
+			};
+			class Shock
+			{
+				damage = 12;
+			};
+			additionAnimalMeleeMultiplier = 5;
+		};
+	};
+	class MeleeZanoza3_Hight: MeleeWolf
+	{
+		class DamageApplied
+		{
+			type = "Melee";
+			bleedThreshold = 1;
+			class Health
+			{
+				damage = 45;
+			};
+			class Blood
+			{
+				damage = 450;
+			};
+			class Shock
+			{
+				damage = 15;
+			};
+			additionAnimalMeleeMultiplier = 5;
+		};
+	};
 };
 class CfgDamages
 {
@@ -75,6 +159,48 @@ class CfgDamages
 	{
 		bone = "rfleg3";
 		ammo = "MeleeZanoza_Hight";
+		radius = 0.7;
+		duration = 0.5;
+	};
+	class Zanoza2BiteDamage
+	{
+		bone = "chest";
+		ammo = "MeleeZanoza2";
+		radius = 0.7;
+		duration = 0.2;
+	};
+	class Zanoza2LowBiteLDamage
+	{
+		bone = "lfleg3";
+		ammo = "MeleeZanoza2_Hight";
+		radius = 0.7;
+		duration = 0.5;
+	};
+	class Zanoza2LowBiteRDamage
+	{
+		bone = "rfleg3";
+		ammo = "MeleeZanoza2_Hight";
+		radius = 0.7;
+		duration = 0.5;
+	};
+	class Zanoza3BiteDamage
+	{
+		bone = "chest";
+		ammo = "MeleeZanoza3";
+		radius = 0.7;
+		duration = 0.2;
+	};
+	class Zanoza3LowBiteLDamage
+	{
+		bone = "lfleg3";
+		ammo = "MeleeZanoza3_Hight";
+		radius = 0.7;
+		duration = 0.5;
+	};
+	class Zanoza3LowBiteRDamage
+	{
+		bone = "rfleg3";
+		ammo = "MeleeZanoza3_Hight";
 		radius = 0.7;
 		duration = 0.5;
 	};
@@ -1335,28 +1461,80 @@ class CfgVehicles
 		scope = 2;
 		model = "MSFZ_Mifical_Pack\Zanoza\MSFZ_Zanoza.p3d";
 		hiddenSelectionsTextures[] = {"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza_telo_medium.paa"};
+		DamageSphereAmmos[] = {"MeleeZanoza2","MeleeZanoza2_Hight"};
+		class AnimEvents: AnimEvents
+		{
+			class Damages: Damages
+			{
+				class Bite: Bite
+				{
+					damage = "Zanoza2BiteDamage";
+				};
+				class BiteLLow: BiteLLow
+				{
+					damage = "Zanoza2LowBiteLDamage";
+				};
+				class BiteRLow: BiteRLow
+				{
+					damage = "Zanoza2LowBiteRDamage";
+				};
+			};
+		};
 		class DamageSystem
 		{
 			class GlobalHealth
 			{
 				class Health
 				{
-					hitpoints = 300;
+					hitpoints = 600;
 					healthLevels[] = {{1,{"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza.rvmat"}},{0.7,{"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza.rvmat"}},{0.5,{"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza_damage.rvmat"}},{0.3,{"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza_damage.rvmat"}},{0,{"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza_destruct.rvmat"}}};
 				};
 				class Blood
 				{
-					hitpoints = 300;
+					hitpoints = 600;
 				};
 				class Shock
 				{
-					hitpoints = 300;
+					hitpoints = 600;
 				};
 			};
 			class DamageZones
 			{
 				class Zone_Head
 				{
+					class ArmorType
+					{
+						class Projectile
+						{
+							class Health
+							{
+								damage = 0.8;
+							};
+							class Blood
+							{
+								damage = 0.8;
+							};
+							class Shock
+							{
+								damage = 0.8;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.8;
+							};
+							class Blood
+							{
+								damage = 0.8;
+							};
+							class Shock
+							{
+								damage = 0.8;
+							};
+						};
+					};
 					componentNames[] = {"Zone_Head"};
 					transferToZonesNames[] = {};
 					transferToZonesCoefs[] = {};
@@ -1364,7 +1542,7 @@ class CfgVehicles
 					canBleed = 0;
 					class Health
 					{
-						hitpoints = 300;
+						hitpoints = 600;
 						transferToGlobalCoef = 1;
 					};
 					class Blood: Health
@@ -1384,7 +1562,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0.05;
 					class Health: Health
 					{
-						hitpoints = 300;
+						hitpoints = 600;
 					};
 				};
 				class Zone_Chest: Zone_Head
@@ -1395,7 +1573,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0.05;
 					class Health: Health
 					{
-						hitpoints = 300;
+						hitpoints = 600;
 					};
 				};
 				class Zone_Belly: Zone_Head
@@ -1406,7 +1584,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0.05;
 					class Health: Health
 					{
-						hitpoints = 300;
+						hitpoints = 600;
 					};
 				};
 				class Zone_Spine: Zone_Head
@@ -1417,7 +1595,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0.05;
 					class Health: Health
 					{
-						hitpoints = 300;
+						hitpoints = 600;
 					};
 				};
 				class Zone_Pelvis: Zone_Head
@@ -1428,7 +1606,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0.05;
 					class Health: Health
 					{
-						hitpoints = 300;
+						hitpoints = 600;
 					};
 				};
 				class Zone_Legs: Zone_Head
@@ -1439,131 +1617,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0;
 					class Health: Health
 					{
-						hitpoints = 300;
-					};
-				};
-			};
-		};
-		class Skinning
-		{
-			class ObtainedPelt
-			{
-				item = "MSFZ_Zanoza_eye";
-				count = 1;
-				itemZones[] = {"Zone_Head","Zone_Neck"};
-			};
-		};
-	};
-	class MSFZ_Mutant_Zanoza3: MSFZ_Mutant_Zanoza_Base
-	{
-		scope = 2;
-		model = "MSFZ_Mifical_Pack\Zanoza\MSFZ_Zanoza.p3d";
-		hiddenSelectionsTextures[] = {"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza_telo_hard.paa"};
-		class DamageSystem
-		{
-			class GlobalHealth
-			{
-				class Health
-				{
-					hitpoints = 300;
-					healthLevels[] = {{1,{"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza.rvmat"}},{0.7,{"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza.rvmat"}},{0.5,{"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza_damage.rvmat"}},{0.3,{"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza_damage.rvmat"}},{0,{"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza_destruct.rvmat"}}};
-				};
-				class Blood
-				{
-					hitpoints = 300;
-				};
-				class Shock
-				{
-					hitpoints = 300;
-				};
-			};
-			class DamageZones
-			{
-				class Zone_Head
-				{
-					componentNames[] = {"Zone_Head"};
-					transferToZonesNames[] = {};
-					transferToZonesCoefs[] = {};
-					fatalInjuryCoef = 0.15;
-					canBleed = 0;
-					class Health
-					{
-						hitpoints = 300;
-						transferToGlobalCoef = 1;
-					};
-					class Blood: Health
-					{
-						hitpoints = 0;
-					};
-					class Shock: Health
-					{
-						hitpoints = 0;
-					};
-				};
-				class Zone_Neck: Zone_Head
-				{
-					componentNames[] = {"Zone_Neck"};
-					transferToZonesNames[] = {};
-					transferToZonesCoefs[] = {};
-					fatalInjuryCoef = 0.05;
-					class Health: Health
-					{
-						hitpoints = 300;
-					};
-				};
-				class Zone_Chest: Zone_Head
-				{
-					componentNames[] = {"Zone_Chest"};
-					transferToZonesNames[] = {};
-					transferToZonesCoefs[] = {};
-					fatalInjuryCoef = 0.05;
-					class Health: Health
-					{
-						hitpoints = 300;
-					};
-				};
-				class Zone_Belly: Zone_Head
-				{
-					componentNames[] = {"Zone_Belly"};
-					transferToZonesNames[] = {};
-					transferToZonesCoefs[] = {};
-					fatalInjuryCoef = 0.05;
-					class Health: Health
-					{
-						hitpoints = 300;
-					};
-				};
-				class Zone_Spine: Zone_Head
-				{
-					componentNames[] = {"Zone_Spine_Front","Zone_Spine_Back"};
-					transferToZonesNames[] = {};
-					transferToZonesCoefs[] = {};
-					fatalInjuryCoef = 0.05;
-					class Health: Health
-					{
-						hitpoints = 300;
-					};
-				};
-				class Zone_Pelvis: Zone_Head
-				{
-					componentNames[] = {"Zone_Pelvis"};
-					transferToZonesNames[] = {"Zone_Spine"};
-					transferToZonesCoefs[] = {0.5};
-					fatalInjuryCoef = 0.05;
-					class Health: Health
-					{
-						hitpoints = 300;
-					};
-				};
-				class Zone_Legs: Zone_Head
-				{
-					componentNames[] = {"Zone_Legs_Front","Zone_Legs_Back"};
-					transferToZonesNames[] = {};
-					transferToZonesCoefs[] = {};
-					fatalInjuryCoef = 0;
-					class Health: Health
-					{
-						hitpoints = 300;
+						hitpoints = 600;
 					};
 				};
 			};
@@ -1573,7 +1627,189 @@ class CfgVehicles
 			class ObtainedSteaks
 			{
 				item = "MSFZ_Zanoza_stick";
+				count = 2;
+				quantityMinMaxCoef[] = {1,1};
+			};
+			class ObtainedPelt
+			{
+				item = "MSFZ_Zanoza_eye";
 				count = 1;
+				quantityMinMaxCoef[] = {1,1};
+			};
+		};
+	};
+	class MSFZ_Mutant_Zanoza3: MSFZ_Mutant_Zanoza_Base
+	{
+		scope = 2;
+		model = "MSFZ_Mifical_Pack\Zanoza\MSFZ_Zanoza.p3d";
+		hiddenSelectionsTextures[] = {"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza_telo_hard.paa"};
+		DamageSphereAmmos[] = {"MeleeZanoza3","MeleeZanoza3_Hight"};
+		class AnimEvents: AnimEvents
+		{
+			class Damages: Damages
+			{
+				class Bite: Bite
+				{
+					damage = "Zanoza3BiteDamage";
+				};
+				class BiteLLow: BiteLLow
+				{
+					damage = "Zanoza3LowBiteLDamage";
+				};
+				class BiteRLow: BiteRLow
+				{
+					damage = "Zanoza3LowBiteRDamage";
+				};
+			};
+		};
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health
+				{
+					hitpoints = 1000;
+					healthLevels[] = {{1,{"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza.rvmat"}},{0.7,{"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza.rvmat"}},{0.5,{"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza_damage.rvmat"}},{0.3,{"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza_damage.rvmat"}},{0,{"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza_destruct.rvmat"}}};
+				};
+				class Blood
+				{
+					hitpoints = 1000;
+				};
+				class Shock
+				{
+					hitpoints = 1000;
+				};
+			};
+			class DamageZones
+			{
+				class Zone_Head
+				{
+					class ArmorType
+					{
+						class Projectile
+						{
+							class Health
+							{
+								damage = 0.6;
+							};
+							class Blood
+							{
+								damage = 0.6;
+							};
+							class Shock
+							{
+								damage = 0.6;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.6;
+							};
+							class Blood
+							{
+								damage = 0.6;
+							};
+							class Shock
+							{
+								damage = 0.6;
+							};
+						};
+					};
+					componentNames[] = {"Zone_Head"};
+					transferToZonesNames[] = {};
+					transferToZonesCoefs[] = {};
+					fatalInjuryCoef = 0.15;
+					canBleed = 0;
+					class Health
+					{
+						hitpoints = 1000;
+						transferToGlobalCoef = 1;
+					};
+					class Blood: Health
+					{
+						hitpoints = 0;
+					};
+					class Shock: Health
+					{
+						hitpoints = 0;
+					};
+				};
+				class Zone_Neck: Zone_Head
+				{
+					componentNames[] = {"Zone_Neck"};
+					transferToZonesNames[] = {};
+					transferToZonesCoefs[] = {};
+					fatalInjuryCoef = 0.05;
+					class Health: Health
+					{
+						hitpoints = 1000;
+					};
+				};
+				class Zone_Chest: Zone_Head
+				{
+					componentNames[] = {"Zone_Chest"};
+					transferToZonesNames[] = {};
+					transferToZonesCoefs[] = {};
+					fatalInjuryCoef = 0.05;
+					class Health: Health
+					{
+						hitpoints = 1000;
+					};
+				};
+				class Zone_Belly: Zone_Head
+				{
+					componentNames[] = {"Zone_Belly"};
+					transferToZonesNames[] = {};
+					transferToZonesCoefs[] = {};
+					fatalInjuryCoef = 0.05;
+					class Health: Health
+					{
+						hitpoints = 1000;
+					};
+				};
+				class Zone_Spine: Zone_Head
+				{
+					componentNames[] = {"Zone_Spine_Front","Zone_Spine_Back"};
+					transferToZonesNames[] = {};
+					transferToZonesCoefs[] = {};
+					fatalInjuryCoef = 0.05;
+					class Health: Health
+					{
+						hitpoints = 1000;
+					};
+				};
+				class Zone_Pelvis: Zone_Head
+				{
+					componentNames[] = {"Zone_Pelvis"};
+					transferToZonesNames[] = {"Zone_Spine"};
+					transferToZonesCoefs[] = {0.5};
+					fatalInjuryCoef = 0.05;
+					class Health: Health
+					{
+						hitpoints = 1000;
+					};
+				};
+				class Zone_Legs: Zone_Head
+				{
+					componentNames[] = {"Zone_Legs_Front","Zone_Legs_Back"};
+					transferToZonesNames[] = {};
+					transferToZonesCoefs[] = {};
+					fatalInjuryCoef = 0;
+					class Health: Health
+					{
+						hitpoints = 1000;
+					};
+				};
+			};
+		};
+		class Skinning
+		{
+			class ObtainedSteaks
+			{
+				item = "MSFZ_Zanoza_stick";
+				count = 3;
 				quantityMinMaxCoef[] = {1,1};
 			};
 			class ObtainedPelt

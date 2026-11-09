@@ -4,23 +4,31 @@ modded class Action_MSFZ_MineRock
     {
         super.OnFinishProgressServer(action_data);
 
-        Object targetObject = action_data.m_Target.GetObject();
-        MSFZ_RuneGathering_Base rune = MSFZ_RuneGathering_Base.Cast(targetObject);
+        PlayerBase player = action_data.m_Player;
+        MSFZ_RuneGathering_Base rune = MSFZ_RuneGathering_Base.Cast(action_data.m_Target.GetObject());
+        if (!rune || !player)
+            return;
+
+        // двое добывали одновременно — руна достаётся тому, кто закончил первым
+        if (rune.MSFZ_RuneGatheredCheck(player))
+        {
+            SendMessageToChat(player, m_message_fail);
+            return;
+        }
+
+        string dropClassName = rune.GetDropItemClassName(rune.GetType());
+        if (dropClassName == "")
+            return;
+
         rune.MSFZ_RuneGatheringTimeout();
 
-        string targetClassName = targetObject.GetType();
-        string m_dropClassName = rune.GetDropItemClassName(targetClassName);
-		string m_message_timeouttime = rune.MSFZ_Timeoutlimit().ToString();
+        // руна сразу в инвентарь, если нет места — на землю под ноги
+        EntityAI droppedRune = player.GetInventory().CreateInInventory(dropClassName);
+        if (!droppedRune)
+            droppedRune = EntityAI.Cast(GetGame().CreateObjectEx(dropClassName, player.GetPosition(), ECE_PLACE_ON_SURFACE));
 
-        // Get the player's position
-        vector playerPosition = action_data.m_Player.GetPosition();
-
-        // Spawn the item at the player's position
-        Object DroppedRune = GetGame().CreateObject(m_dropClassName, playerPosition, false, false, true);
-		
-
-        // Send message to player
-        SendMessageToChat(action_data.m_Player, m_message_gathered_success + " " + DroppedRune.GetDisplayName());
-		SendMessageToChat(action_data.m_Player, m_message_gototimeout);
+        if (droppedRune)
+            SendMessageToChat(player, m_message_gathered_success + " " + droppedRune.GetDisplayName());
+		SendMessageToChat(player, m_message_gototimeout);
     }
 };

@@ -7,19 +7,19 @@ class ActionTeleportToObelisk: ActionInteractBase
         m_Text = "#STR_teleport_to_obelisk";
     }
 
-	override void CreateConditionComponents()  
+	override void CreateConditionComponents()
 	{
 		m_ConditionItem 	= new CCINone();
 		m_ConditionTarget 	= new CCTCursor();
 	}
 
+    // Действие доступно только у портала, у которого есть парный портал
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item)
     {
-        Object targetObject = target.GetObject();
-        if (targetObject || targetObject.IsInherited(MSFZ_Portal_Base))
-        {
-            return true;
-        }
-        return false;  
+        MSFZ_Portal_Base portal = MSFZ_Portal_Base.Cast(target.GetObject());
+        if (!portal)
+            return false;
+
+        return portal.MSFZ_GetDestination(player) != vector.Zero;
 	}
 }

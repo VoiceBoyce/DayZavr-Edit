@@ -16,8 +16,8 @@ class CfgVehicles
 	class MSFZ_Zanoza_eye: Inventory_Base
 	{
 		scope = 2;
-		displayName = "$STR_Zanoza_eye";
-		descriptionShort = "$STR_Zanoza_eye";
+		displayName = "$STR_MSFZ_Name_MSFZ_Zanoza_eye";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Zanoza_eye";
 		model = "MSFZ_Mifical_Pack\Zanoza\skining\MSFZ_Zanoza_eye.p3d";
 		weight = 200;
 		itemSize[] = {2,2};
@@ -38,8 +38,8 @@ class CfgVehicles
 	class MSFZ_Zanoza_stick: Inventory_Base
 	{
 		scope = 2;
-		displayName = "$STR_Zanoza_stick";
-		descriptionShort = "$STR_Zanoza_stick";
+		displayName = "$STR_MSFZ_Name_MSFZ_Zanoza_stick";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Zanoza_stick";
 		model = "MSFZ_Mifical_Pack\Zanoza\skining\MSFZ_Zanoza_stick.p3d";
 		weight = 200;
 		itemSize[] = {2,2};

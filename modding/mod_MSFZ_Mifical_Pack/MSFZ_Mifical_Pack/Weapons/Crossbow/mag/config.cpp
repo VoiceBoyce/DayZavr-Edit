@@ -15,8 +15,8 @@ class CfgMagazines
 	class MSFZ_Crossbow_Mag_10Rnd: Magazine_Base
 	{
 		scope = 2;
-		displayName = "$STR_Crossbow_Mag_10Rnd";
-		descriptionShort = "$STR_Crossbow_Mag_10Rnd_text";
+		displayName = "$STR_MSFZ_Name_MSFZ_Crossbow_Mag_10Rnd";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Crossbow_Mag_10Rnd";
 		model = "MSFZ_Mifical_Pack\Weapons\Crossbow\ammo\MSFZ_Crossbow_BoltMag.p3d";
 		weight = 300;
 		itemSize[] = {2,2};
@@ -41,24 +41,26 @@ class CfgMagazines
 	class MSFZ_Crossbow_Mag_25Rnd: MSFZ_Crossbow_Mag_10Rnd
 	{
 		scope = 2;
-		displayName = "$STR_Crossbow_Mag_25Rnd";
-		descriptionShort = "$STR_Crossbow_Mag_25Rnd_text";
-		weight = 300;
+		displayName = "$STR_MSFZ_Name_MSFZ_Crossbow_Mag_25Rnd";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Crossbow_Mag_25Rnd";
+		weight = 600;
+		itemSize[] = {2,3};
 		count = 25;
 	};
 	class MSFZ_Crossbow_Mag_50Rnd: MSFZ_Crossbow_Mag_10Rnd
 	{
 		scope = 2;
-		displayName = "$STR_Crossbow_Mag_50Rnd";
-		descriptionShort = "$STR_Crossbow_Mag_50Rnd_text";
-		weight = 300;
+		displayName = "$STR_MSFZ_Name_MSFZ_Crossbow_Mag_50Rnd";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Crossbow_Mag_50Rnd";
+		weight = 1000;
+		itemSize[] = {3,3};
 		count = 50;
 	};
 	class MSFZ_Crossbow_AP_Mag_10Rnd: Magazine_Base
 	{
 		scope = 2;
-		displayName = "$STR_Crossbow_AP_Mag_10Rnd";
-		descriptionShort = "$STR_Crossbow_AP_Mag_10Rnd_text";
+		displayName = "$STR_MSFZ_Name_MSFZ_Crossbow_AP_Mag_10Rnd";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Crossbow_AP_Mag_10Rnd";
 		model = "MSFZ_Mifical_Pack\Weapons\Crossbow\ammo\MSFZ_Crossbow_BoltMag.p3d";
 		weight = 300;
 		itemSize[] = {2,2};
@@ -83,24 +85,26 @@ class CfgMagazines
 	class MSFZ_Crossbow_AP_Mag_25Rnd: MSFZ_Crossbow_AP_Mag_10Rnd
 	{
 		scope = 2;
-		displayName = "$STR_Crossbow_AP_Mag_25Rnd";
-		descriptionShort = "$STR_Crossbow_AP_Mag_25Rnd_text";
-		weight = 300;
+		displayName = "$STR_MSFZ_Name_MSFZ_Crossbow_AP_Mag_25Rnd";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Crossbow_AP_Mag_25Rnd";
+		weight = 600;
+		itemSize[] = {2,3};
 		count = 25;
 	};
 	class MSFZ_Crossbow_AP_Mag_50Rnd: MSFZ_Crossbow_AP_Mag_10Rnd
 	{
 		scope = 2;
-		displayName = "$STR_Crossbow_AP_Mag_50Rnd";
-		descriptionShort = "$STR_Crossbow_AP_Mag_50Rnd_text";
-		weight = 300;
+		displayName = "$STR_MSFZ_Name_MSFZ_Crossbow_AP_Mag_50Rnd";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Crossbow_AP_Mag_50Rnd";
+		weight = 1000;
+		itemSize[] = {3,3};
 		count = 50;
 	};
 	class MSFZ_Crossbow_Cupid_Mag_10Rnd: Magazine_Base
 	{
 		scope = 2;
-		displayName = "Магазин для стрел купидона";
-		descriptionShort = "Магазин для стрел купидона на 10 снарядов";
+		displayName = "$STR_MSFZ_Name_MSFZ_Crossbow_Cupid_Mag_10Rnd";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Crossbow_Cupid_Mag_10Rnd";
 		model = "MSFZ_Mifical_Pack\Weapons\Crossbow\ammo\MSFZ_Crossbow_BoltMag.p3d";
 		weight = 300;
 		itemSize[] = {2,2};
@@ -125,17 +129,19 @@ class CfgMagazines
 	class MSFZ_Crossbow_Cupid_Mag_25Rnd: MSFZ_Crossbow_Cupid_Mag_10Rnd
 	{
 		scope = 2;
-		displayName = "Магазин для стрел купидона";
-		descriptionShort = "Магазин для стрел купидона на 25 снарядов";
-		weight = 300;
+		displayName = "$STR_MSFZ_Name_MSFZ_Crossbow_Cupid_Mag_25Rnd";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Crossbow_Cupid_Mag_25Rnd";
+		weight = 600;
+		itemSize[] = {2,3};
 		count = 25;
 	};
 	class MSFZ_Crossbow_Cupid_Mag_50Rnd: MSFZ_Crossbow_Cupid_Mag_10Rnd
 	{
 		scope = 2;
-		displayName = "Магазин для стрел купидона";
-		descriptionShort = "Магазин для стрел купидона на 50 снарядов";
-		weight = 300;
+		displayName = "$STR_MSFZ_Name_MSFZ_Crossbow_Cupid_Mag_50Rnd";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Crossbow_Cupid_Mag_50Rnd";
+		weight = 1000;
+		itemSize[] = {3,3};
 		count = 50;
 	};
 };

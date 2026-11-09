@@ -6,6 +6,11 @@ class MSFZ_Ricar extends MSFZ_Ricar_Base
     {
         return false;
     }
+	// Запрет добивания со спины
+	override bool CanBeBackstabbed()
+    {
+        return false;
+    }
 	override bool CanBeSkinned()
     {
         return true;

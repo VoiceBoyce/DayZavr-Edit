@@ -14,8 +14,8 @@ class CfgVehicles
 	class MSFZ_Magic_Kirka: Pickaxe
 	{
 		scope = 2;
-		displayName = "$STR_Magic_Kirka";
-		descriptionShort = "$STR_Magic_Kirka1";
+		displayName = "$STR_MSFZ_Name_MSFZ_Magic_Kirka";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Magic_Kirka";
 		model = "MSFZ_Mifical_Pack\Weapons\Kirka\MSFZ_Magic_Kirka.p3d";
 		debug_ItemCategory = 2;
 		inventorySlot[] = {"Shoulder","Melee"};
@@ -40,7 +40,7 @@ class CfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 250;
+					hitpoints = 1200;
 					healthLevels[] = {{1,{"MSFZ_Mifical_Pack\Weapons\Kirka\data\MSFZ_Magic_Kirka.rvmat"}},{0.7,{"MSFZ_Mifical_Pack\Weapons\Kirka\data\MSFZ_Magic_Kirka.rvmat"}},{0.5,{"MSFZ_Mifical_Pack\Weapons\Kirka\data\MSFZ_Magic_Kirka_damage.rvmat"}},{0.3,{"MSFZ_Mifical_Pack\Weapons\Kirka\data\MSFZ_Magic_Kirka_damage.rvmat"}},{0,{"MSFZ_Mifical_Pack\Weapons\Kirka\data\MSFZ_Magic_Kirka_destruct.rvmat"}}};
 				};
 			};

@@ -16,8 +16,8 @@ class CfgMagazines
 	class MSFZ_Crossbow_BoltStack: Ammunition_Base
 	{
 		scope = 2;
-		displayName = "$STR_Crossbow_BoltStack";
-		descriptionShort = "$STR_Crossbow_BoltStack_text";
+		displayName = "$STR_MSFZ_Name_MSFZ_Crossbow_BoltStack";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Crossbow_BoltStack";
 		model = "MSFZ_Mifical_Pack\Weapons\Crossbow\ammo\MSFZ_Crossbow_BoltStack.p3d";
 		iconCartridge = 3;
 		weight = 40;
@@ -41,8 +41,8 @@ class CfgMagazines
 	class MSFZ_Crossbow_BoltStack_AP: MSFZ_Crossbow_BoltStack
 	{
 		scope = 2;
-		displayName = "$STR_Crossbow_BoltStack_AP";
-		descriptionShort = "$STR_Crossbow_BoltStack_AP_text";
+		displayName = "$STR_MSFZ_Name_MSFZ_Crossbow_BoltStack_AP";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Crossbow_BoltStack_AP";
 		model = "MSFZ_Mifical_Pack\Weapons\Crossbow\ammo\MSFZ_Crossbow_BoltStack.p3d";
 		iconCartridge = 3;
 		weight = 40;
@@ -55,8 +55,8 @@ class CfgMagazines
 	class MSFZ_Ammo_CupidsBolt: MSFZ_Crossbow_BoltStack
 	{
 		scope = 2;
-		displayName = "$STR_CfgMagazines_Ammo_CupidsBolt0";
-		descriptionShort = "$STR_CfgMagazines_Ammo_CupidsBolt1";
+		displayName = "$STR_MSFZ_Name_MSFZ_Ammo_CupidsBolt";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Ammo_CupidsBolt";
 		model = "MSFZ_Mifical_Pack\Weapons\Crossbow\ammo\MSFZ_Crossbow_BoltStack.p3d";
 		iconCartridge = 3;
 		weight = 40;

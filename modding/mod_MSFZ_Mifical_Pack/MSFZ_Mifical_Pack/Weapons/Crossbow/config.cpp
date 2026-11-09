@@ -98,8 +98,8 @@ class cfgWeapons
 	class MSFZ_Crossbow: MSFZ_Crossbow_base
 	{
 		scope = 2;
-		displayName = "$STR_MSFZ_Crossbow";
-		descriptionShort = "$STR_MSFZ_Crossbow1";
+		displayName = "$STR_MSFZ_Name_MSFZ_Crossbow";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Crossbow";
 		model = "MSFZ_Mifical_Pack\Weapons\Crossbow\MSFZ_Crossbow.p3d";
 		attachments[] = {"weaponWrap","weaponOpticsHunting","weaponOptics","weaponFlashlight"};
 		hiddenSelections[] = {"camo","camo1"};
@@ -119,8 +119,8 @@ class cfgWeapons
 	class MSFZ_Crossbow_Black: MSFZ_Crossbow
 	{
 		scope = 2;
-		displayName = "$STR_MSFZ_Crossbow";
-		descriptionShort = "$STR_MSFZ_Crossbow1";
+		displayName = "$STR_MSFZ_Name_MSFZ_Crossbow";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Crossbow";
 		model = "MSFZ_Mifical_Pack\Weapons\Crossbow\MSFZ_Crossbow.p3d";
 		attachments[] = {"weaponWrap","weaponOpticsHunting","weaponOptics","weaponFlashlight"};
 		hiddenSelections[] = {"camo","camo1"};
@@ -129,8 +129,8 @@ class cfgWeapons
 	class MSFZ_Crossbow_Cosmos: MSFZ_Crossbow
 	{
 		scope = 2;
-		displayName = "$STR_MSFZ_Crossbow";
-		descriptionShort = "$STR_MSFZ_Crossbow1";
+		displayName = "$STR_MSFZ_Name_MSFZ_Crossbow";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Crossbow";
 		model = "MSFZ_Mifical_Pack\Weapons\Crossbow\MSFZ_Crossbow.p3d";
 		attachments[] = {"weaponWrap","weaponOpticsHunting","weaponOptics","weaponFlashlight"};
 		hiddenSelections[] = {"camo","camo1"};
@@ -139,8 +139,8 @@ class cfgWeapons
 	class MSFZ_Crossbow_Forest: MSFZ_Crossbow
 	{
 		scope = 2;
-		displayName = "$STR_MSFZ_Crossbow";
-		descriptionShort = "$STR_MSFZ_Crossbow1";
+		displayName = "$STR_MSFZ_Name_MSFZ_Crossbow";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Crossbow";
 		model = "MSFZ_Mifical_Pack\Weapons\Crossbow\MSFZ_Crossbow.p3d";
 		attachments[] = {"weaponWrap","weaponOpticsHunting","weaponOptics","weaponFlashlight"};
 		hiddenSelections[] = {"camo","camo1"};
@@ -149,8 +149,8 @@ class cfgWeapons
 	class MSFZ_Crossbow_Mix: MSFZ_Crossbow
 	{
 		scope = 2;
-		displayName = "$STR_MSFZ_Crossbow";
-		descriptionShort = "$STR_MSFZ_Crossbow1";
+		displayName = "$STR_MSFZ_Name_MSFZ_Crossbow";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Crossbow";
 		model = "MSFZ_Mifical_Pack\Weapons\Crossbow\MSFZ_Crossbow.p3d";
 		attachments[] = {"weaponWrap","weaponOpticsHunting","weaponOptics","weaponFlashlight"};
 		hiddenSelections[] = {"camo","camo1"};
@@ -159,8 +159,8 @@ class cfgWeapons
 	class MSFZ_Crossbow_Old: MSFZ_Crossbow
 	{
 		scope = 2;
-		displayName = "$STR_MSFZ_Crossbow";
-		descriptionShort = "$STR_MSFZ_Crossbow1";
+		displayName = "$STR_MSFZ_Name_MSFZ_Crossbow";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Crossbow";
 		model = "MSFZ_Mifical_Pack\Weapons\Crossbow\MSFZ_Crossbow.p3d";
 		attachments[] = {"weaponWrap","weaponOpticsHunting","weaponOptics","weaponFlashlight"};
 		hiddenSelections[] = {"camo","camo1"};

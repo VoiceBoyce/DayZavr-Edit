@@ -5,7 +5,95 @@ class CfgPatches
 		units[] = {"MSFZ_Troll"};
 		weapons[] = {};
 		requiredVersion = 0.1;
-		requiredAddons[] = {"DZ_Characters"};
+		requiredAddons[] = {"DZ_Characters","DZ_Characters_Zombies","DZ_Weapons_Melee"};
+	};
+};
+class CfgAmmo
+{
+	class MeleeZombieMale;
+	class MeleeMSFZ_Troll: MeleeZombieMale
+	{
+		class DamageApplied
+		{
+			type = "Infected";
+			bleedThreshold = 0.25;
+			class Health
+			{
+				damage = 30;
+				armorDamage = 0.8;
+			};
+			class Blood
+			{
+				damage = 400;
+			};
+			class Shock
+			{
+				damage = 60;
+			};
+		};
+	};
+	class MeleeMSFZ_Troll_Heavy: MeleeZombieMale
+	{
+		class DamageApplied
+		{
+			type = "Infected";
+			bleedThreshold = 0.25;
+			class Health
+			{
+				damage = 45;
+				armorDamage = 0.8;
+			};
+			class Blood
+			{
+				damage = 500;
+			};
+			class Shock
+			{
+				damage = 90;
+			};
+		};
+	};
+	class MeleeMSFZ_Troll_Blocked: MeleeZombieMale
+	{
+		class DamageApplied
+		{
+			type = "Infected";
+			bleedThreshold = 0.25;
+			class Health
+			{
+				damage = 9;
+				armorDamage = 0.8;
+			};
+			class Blood
+			{
+				damage = 120;
+			};
+			class Shock
+			{
+				damage = 18;
+			};
+		};
+	};
+	class MeleeMSFZ_Troll_Heavy_Blocked: MeleeZombieMale
+	{
+		class DamageApplied
+		{
+			type = "Infected";
+			bleedThreshold = 0.25;
+			class Health
+			{
+				damage = 23;
+				armorDamage = 0.8;
+			};
+			class Blood
+			{
+				damage = 250;
+			};
+			class Shock
+			{
+				damage = 45;
+			};
+		};
 	};
 };
 class CfgAIBehaviours
@@ -29,7 +117,7 @@ class CfgAIBehaviours
 			};
 			class MovementRun
 			{
-				maxSpeed = 2;
+				maxSpeed = 3;
 				minSpeed = 0;
 				acceleration = 10;
 				maxAngleSpeed = 120;
@@ -41,7 +129,7 @@ class CfgAIBehaviours
 			};
 			class MovementSprint
 			{
-				maxSpeed = 4;
+				maxSpeed = 6;
 				minSpeed = 0;
 				acceleration = 27;
 				maxAngleSpeed = 180;
@@ -115,7 +203,7 @@ class CfgAIBehaviours
 					{
 						class Sound1
 						{
-							sounds[] = {"TrollСontrol_SoundSet"};
+							sounds[] = {"TrollControl_SoundSet"};
 						};
 						class Sound2
 						{
@@ -230,7 +318,7 @@ class CfgVehicles
 			class AttackLong
 			{
 				attackName = "attackLong";
-				ammoType = "MeleeZombieMale";
+				ammoType = "MeleeMSFZ_Troll_Heavy";
 				stanceName = "erect";
 				moveAnimNames[] = {"run","sprint"};
 				minDistance = 0.75;
@@ -245,7 +333,7 @@ class CfgVehicles
 			class AttackRun
 			{
 				attackName = "attackRun";
-				ammoType = "MeleeZombieMale";
+				ammoType = "MeleeMSFZ_Troll";
 				stanceName = "erect";
 				moveAnimNames[] = {"run","sprint"};
 				minDistance = 0.5;
@@ -260,7 +348,7 @@ class CfgVehicles
 			class AttackShort
 			{
 				attackName = "attackShort";
-				ammoType = "MeleeZombieMale";
+				ammoType = "MeleeMSFZ_Troll";
 				stanceName = "erect";
 				moveAnimNames[] = {"idle","walk"};
 				minDistance = 0.5;
@@ -275,7 +363,7 @@ class CfgVehicles
 			class AttackShortLow
 			{
 				attackName = "attackShortLow";
-				ammoType = "MeleeZombieMale";
+				ammoType = "MeleeMSFZ_Troll";
 				stanceName = "erect";
 				moveAnimNames[] = {"idle","walk","run"};
 				minDistance = 0;
@@ -290,7 +378,7 @@ class CfgVehicles
 			class CrawlAttackMove
 			{
 				attackName = "crawlAttackMove";
-				ammoType = "MeleeZombieMale";
+				ammoType = "MeleeMSFZ_Troll";
 				stanceName = "crawl";
 				moveAnimNames[] = {"walk"};
 				distance = 2;
@@ -303,7 +391,7 @@ class CfgVehicles
 			class CrawlAttackStill
 			{
 				attackName = "crawlAttackStill";
-				ammoType = "MeleeZombieMale";
+				ammoType = "MeleeMSFZ_Troll";
 				stanceName = "crawl";
 				moveAnimNames[] = {"idle"};
 				distance = 2;
@@ -579,7 +667,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.3;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.25;
 							};
 						};
 					};
@@ -600,7 +695,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.15;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.25;
 							};
 						};
 					};
@@ -621,7 +723,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.15;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.25;
 							};
 						};
 					};
@@ -641,7 +750,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.15;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.25;
 							};
 						};
 					};
@@ -661,7 +777,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.15;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.25;
 							};
 						};
 					};
@@ -682,7 +805,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.15;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.25;
 							};
 						};
 					};
@@ -703,7 +833,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.15;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.25;
 							};
 						};
 					};
@@ -726,7 +863,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.15;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.25;
 							};
 						};
 					};

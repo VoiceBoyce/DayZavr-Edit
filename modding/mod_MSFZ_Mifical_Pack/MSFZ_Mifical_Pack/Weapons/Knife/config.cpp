@@ -8,6 +8,53 @@ class CfgPatches
 		requiredAddons[] = {"DZ_Data","DZ_Weapons_Melee"};
 	};
 };
+class CfgAmmo
+{
+	class MeleeKnife;
+	class MeleeKnife_Heavy;
+	class MeleeMSFZ_Magic_Knife: MeleeKnife
+	{
+		class DamageApplied
+		{
+			type = "Melee";
+			bleedThreshold = 1;
+			transferShockToDamage = 0;
+			class Health
+			{
+				damage = 60;
+			};
+			class Blood
+			{
+				damage = 300;
+			};
+			class Shock
+			{
+				damage = 30;
+			};
+		};
+	};
+	class MeleeMSFZ_Magic_Knife_Heavy: MeleeKnife_Heavy
+	{
+		class DamageApplied
+		{
+			type = "Melee";
+			bleedThreshold = 1;
+			transferShockToDamage = 0;
+			class Health
+			{
+				damage = 100;
+			};
+			class Blood
+			{
+				damage = 400;
+			};
+			class Shock
+			{
+				damage = 50;
+			};
+		};
+	};
+};
 class cfgVehicles
 {
 	class HuntingKnife;
@@ -15,8 +62,8 @@ class cfgVehicles
 	{
 		scope = 2;
 		visibilityModifier = 0.85;
-		displayName = "$STR_Magic_Knife";
-		descriptionShort = "$STR_Magic_Knife1";
+		displayName = "$STR_MSFZ_Name_MSFZ_Magic_Knife";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Magic_Knife";
 		model = "MSFZ_Mifical_Pack\Weapons\Knife\MSFZ_Magic_Knife.p3d";
 		debug_ItemCategory = 2;
 		inventorySlot[] = {"Knife"};
@@ -52,17 +99,17 @@ class cfgVehicles
 		{
 			class Default
 			{
-				ammo = "MeleeKnife";
+				ammo = "MeleeMSFZ_Magic_Knife";
 				range = 1.2;
 			};
 			class Heavy
 			{
-				ammo = "MeleeKnife_Heavy";
+				ammo = "MeleeMSFZ_Magic_Knife_Heavy";
 				range = 1.2;
 			};
 			class Sprint
 			{
-				ammo = "MeleeKnife_Heavy";
+				ammo = "MeleeMSFZ_Magic_Knife_Heavy";
 				range = 3.3;
 			};
 		};
@@ -259,17 +306,17 @@ class cfgVehicles
 		{
 			class Default
 			{
-				ammo = "MeleeKnife";
+				ammo = "MeleeMSFZ_Magic_Knife";
 				range = 1.2;
 			};
 			class Heavy
 			{
-				ammo = "MeleeKnife_Heavy";
+				ammo = "MeleeMSFZ_Magic_Knife_Heavy";
 				range = 1.2;
 			};
 			class Sprint
 			{
-				ammo = "MeleeKnife_Heavy";
+				ammo = "MeleeMSFZ_Magic_Knife_Heavy";
 				range = 3.3;
 			};
 		};
@@ -299,17 +346,17 @@ class cfgVehicles
 		{
 			class Default
 			{
-				ammo = "MeleeKnife";
+				ammo = "MeleeMSFZ_Magic_Knife";
 				range = 1.2;
 			};
 			class Heavy
 			{
-				ammo = "MeleeKnife_Heavy";
+				ammo = "MeleeMSFZ_Magic_Knife_Heavy";
 				range = 1.2;
 			};
 			class Sprint
 			{
-				ammo = "MeleeKnife_Heavy";
+				ammo = "MeleeMSFZ_Magic_Knife_Heavy";
 				range = 3.3;
 			};
 		};
@@ -339,17 +386,17 @@ class cfgVehicles
 		{
 			class Default
 			{
-				ammo = "MeleeKnife";
+				ammo = "MeleeMSFZ_Magic_Knife";
 				range = 1.2;
 			};
 			class Heavy
 			{
-				ammo = "MeleeKnife_Heavy";
+				ammo = "MeleeMSFZ_Magic_Knife_Heavy";
 				range = 1.2;
 			};
 			class Sprint
 			{
-				ammo = "MeleeKnife_Heavy";
+				ammo = "MeleeMSFZ_Magic_Knife_Heavy";
 				range = 3.3;
 			};
 		};
@@ -379,17 +426,17 @@ class cfgVehicles
 		{
 			class Default
 			{
-				ammo = "MeleeKnife";
+				ammo = "MeleeMSFZ_Magic_Knife";
 				range = 1.2;
 			};
 			class Heavy
 			{
-				ammo = "MeleeKnife_Heavy";
+				ammo = "MeleeMSFZ_Magic_Knife_Heavy";
 				range = 1.2;
 			};
 			class Sprint
 			{
-				ammo = "MeleeKnife_Heavy";
+				ammo = "MeleeMSFZ_Magic_Knife_Heavy";
 				range = 3.3;
 			};
 		};

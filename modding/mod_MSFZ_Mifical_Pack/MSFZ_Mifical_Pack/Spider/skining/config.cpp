@@ -16,8 +16,8 @@ class CfgVehicles
 	class MSFZ_Spider_Lapka: Inventory_Base
 	{
 		scope = 2;
-		displayName = "$STR_Spider_Lapka";
-		descriptionShort = "$STR_Spider_Lapka";
+		displayName = "$STR_MSFZ_Name_MSFZ_Spider_Lapka";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Spider_Lapka";
 		model = "MSFZ_Mifical_Pack\Spider\skining\MSFZ_Spider_Lapka.p3d";
 		weight = 200;
 		itemSize[] = {2,2};

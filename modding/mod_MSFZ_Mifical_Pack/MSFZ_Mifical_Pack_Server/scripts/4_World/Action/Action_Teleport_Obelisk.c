@@ -2,17 +2,20 @@ modded class ActionTeleportToObelisk
 {
     override void OnEndServer(ActionData action_data)
 	{
-		Object targetObject = action_data.m_Target.GetObject();
+        MSFZ_Portal_Base portal = MSFZ_Portal_Base.Cast(action_data.m_Target.GetObject());
         PlayerBase player = action_data.m_Player;
+        if (!portal || !player)
+            return;
 
-        if (targetObject.IsInherited(MSFZ_Portal))
-        {
-            player.SetPosition(ObeliskPositions.Obelisk2Position);
-        }
-        else if (targetObject.IsInherited(MSFZ_Portal_Exit))
-        {
-            player.SetPosition(ObeliskPositions.Obelisk1Position);
-        }
+        vector destination = portal.MSFZ_GetDestination(player);
+        if (destination == vector.Zero)
+            return;
+
+        // запомнить вход, чтобы выход вернул игрока туда же
+        if (!portal.MSFZ_IsExit() && player.GetIdentity())
+            MSFZ_PortalRegistry.s_ReturnPoints.Set(player.GetIdentity().GetPlainId(), portal.GetPosition());
+
+        player.SetPosition(destination);
 
         Param1<string> msgParam = new Param1<string>("#STR_MSFZ_teleportation");
         GetGame().RPCSingleParam(player, ERPCs.RPC_USER_ACTION_MESSAGE, msgParam, true, player.GetIdentity());

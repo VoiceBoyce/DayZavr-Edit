@@ -19,8 +19,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Fire: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Fire";
-		descriptionShort = "$STR_RuneStone_Fire1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Fire";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Fire";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones\MSFZ_RuneStone_Fire.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -46,8 +46,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_FireSmall: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_FireSmall";
-		descriptionShort = "$STR_RuneStone_FireSmall1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_FireSmall";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_FireSmall";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones\MSFZ_RuneStone_FireSmall.p3d";
 		animClass = "NoFireClass";
 		weight = 150;
@@ -73,8 +73,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Ice: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Ice";
-		descriptionShort = "$STR_RuneStone_Ice1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Ice";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Ice";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones\MSFZ_RuneStone_Ice.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -100,8 +100,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_IceSmall: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_IceSmall";
-		descriptionShort = "$STR_RuneStone_Ice1Small";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_IceSmall";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_IceSmall";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones\MSFZ_RuneStone_IceSmall.p3d";
 		animClass = "NoFireClass";
 		weight = 150;
@@ -127,8 +127,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Storm: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Storm";
-		descriptionShort = "$STR_RuneStone_Storm1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Storm";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Storm";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones\MSFZ_RuneStone_Storm.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -154,8 +154,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_StormSmall: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_StormSmall";
-		descriptionShort = "$STR_RuneStone_StormSmall1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_StormSmall";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_StormSmall";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones\MSFZ_RuneStone_StormSmall.p3d";
 		animClass = "NoFireClass";
 		weight = 150;

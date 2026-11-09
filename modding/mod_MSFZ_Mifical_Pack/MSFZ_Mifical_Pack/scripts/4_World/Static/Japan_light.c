@@ -2,7 +2,7 @@ class MSFZ_Japan_light extends House
 {
 	protected Particle 		m_Particle;
 	EffectSound 		m_AmbientSoundLoop;
-	Japan_light_light	m_TreeLight
+	Japan_light_light	m_TreeLight;
 	const string		LOOP_SOUND = "Japan_light_SoundSet";
 	void MSFZ_Japan_light()
 	{				

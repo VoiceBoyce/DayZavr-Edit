@@ -8,14 +8,61 @@ class CfgPatches
 		requiredAddons[] = {"DZ_Data","DZ_Weapons_Melee"};
 	};
 };
+class CfgAmmo
+{
+	class MeleeBluntLight_2;
+	class MeleeBluntHeavy_2;
+	class MeleeMSFZ_Magic_Hammer: MeleeBluntLight_2
+	{
+		class DamageApplied
+		{
+			type = "Melee";
+			bleedThreshold = 0;
+			transferShockToDamage = 1;
+			class Health
+			{
+				damage = 800;
+			};
+			class Blood
+			{
+				damage = 100;
+			};
+			class Shock
+			{
+				damage = 100;
+			};
+		};
+	};
+	class MeleeMSFZ_Magic_Hammer_Heavy: MeleeBluntHeavy_2
+	{
+		class DamageApplied
+		{
+			type = "Melee";
+			bleedThreshold = 0;
+			transferShockToDamage = 1;
+			class Health
+			{
+				damage = 3500;
+			};
+			class Blood
+			{
+				damage = 100;
+			};
+			class Shock
+			{
+				damage = 300;
+			};
+		};
+	};
+};
 class cfgVehicles
 {
 	class Hammer;
 	class MSFZ_Magic_Hammer: Hammer
 	{
 		scope = 2;
-		displayName = "$STR_Magic_Hammer";
-		descriptionShort = "$STR_Magic_Hammer1";
+		displayName = "$STR_MSFZ_Name_MSFZ_Magic_Hammer";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Magic_Hammer";
 		model = "MSFZ_Mifical_Pack\Weapons\Hammer\MSFZ_Magic_Hammer.p3d";
 		debug_ItemCategory = 2;
 		build_action_type = 10;
@@ -43,17 +90,17 @@ class cfgVehicles
 		{
 			class Default
 			{
-				ammo = "MeleeBluntLight_2";
+				ammo = "MeleeMSFZ_Magic_Hammer";
 				range = 1.1;
 			};
 			class Heavy
 			{
-				ammo = "MeleeBluntHeavy_2";
+				ammo = "MeleeMSFZ_Magic_Hammer_Heavy";
 				range = 1.1;
 			};
 			class Sprint
 			{
-				ammo = "MeleeBluntHeavy_2";
+				ammo = "MeleeMSFZ_Magic_Hammer_Heavy";
 				range = 3.3;
 			};
 		};

@@ -6,7 +6,7 @@ class CfgPatches
 		weapons[] = {};
 		requiredVersion = 0.1;
 		requiredAddons[] = {"DZ_Animals"};
-		ammo[] = {"MeleeSpider","MeleeSpider_Hight"};
+		ammo[] = {"MeleeSpider","MeleeSpider_Hight","MeleeSpider1","MeleeSpider1_Hight","MeleeSpider3","MeleeSpider3_Hight"};
 	};
 };
 class CfgAmmo
@@ -54,6 +54,90 @@ class CfgAmmo
 			additionAnimalMeleeMultiplier = 5;
 		};
 	};
+	class MeleeSpider1: MeleeWolf
+	{
+		class DamageApplied
+		{
+			type = "Melee";
+			bleedThreshold = 1;
+			class Health
+			{
+				damage = 10;
+			};
+			class Blood
+			{
+				damage = 80;
+			};
+			class Shock
+			{
+				damage = 5;
+			};
+			additionAnimalMeleeMultiplier = 5;
+		};
+	};
+	class MeleeSpider1_Hight: MeleeWolf
+	{
+		class DamageApplied
+		{
+			type = "Melee";
+			bleedThreshold = 1;
+			class Health
+			{
+				damage = 10;
+			};
+			class Blood
+			{
+				damage = 80;
+			};
+			class Shock
+			{
+				damage = 5;
+			};
+			additionAnimalMeleeMultiplier = 5;
+		};
+	};
+	class MeleeSpider3: MeleeWolf
+	{
+		class DamageApplied
+		{
+			type = "Melee";
+			bleedThreshold = 1;
+			class Health
+			{
+				damage = 25;
+			};
+			class Blood
+			{
+				damage = 250;
+			};
+			class Shock
+			{
+				damage = 15;
+			};
+			additionAnimalMeleeMultiplier = 5;
+		};
+	};
+	class MeleeSpider3_Hight: MeleeWolf
+	{
+		class DamageApplied
+		{
+			type = "Melee";
+			bleedThreshold = 1;
+			class Health
+			{
+				damage = 40;
+			};
+			class Blood
+			{
+				damage = 300;
+			};
+			class Shock
+			{
+				damage = 20;
+			};
+			additionAnimalMeleeMultiplier = 5;
+		};
+	};
 };
 class CfgDamages
 {
@@ -75,6 +159,48 @@ class CfgDamages
 	{
 		bone = "rfleg3";
 		ammo = "MeleeSpider_Hight";
+		radius = 0.7;
+		duration = 0.5;
+	};
+	class Spider1BiteDamage
+	{
+		bone = "chest";
+		ammo = "MeleeSpider1";
+		radius = 0.7;
+		duration = 0.2;
+	};
+	class Spider1LowBiteLDamage
+	{
+		bone = "lfleg3";
+		ammo = "MeleeSpider1_Hight";
+		radius = 0.7;
+		duration = 0.5;
+	};
+	class Spider1LowBiteRDamage
+	{
+		bone = "rfleg3";
+		ammo = "MeleeSpider1_Hight";
+		radius = 0.7;
+		duration = 0.5;
+	};
+	class Spider3BiteDamage
+	{
+		bone = "chest";
+		ammo = "MeleeSpider3";
+		radius = 0.7;
+		duration = 0.2;
+	};
+	class Spider3LowBiteLDamage
+	{
+		bone = "lfleg3";
+		ammo = "MeleeSpider3_Hight";
+		radius = 0.7;
+		duration = 0.5;
+	};
+	class Spider3LowBiteRDamage
+	{
+		bone = "rfleg3";
+		ammo = "MeleeSpider3_Hight";
 		radius = 0.7;
 		duration = 0.5;
 	};
@@ -1207,22 +1333,41 @@ class CfgVehicles
 		displayName = "$STR_Mutant_Spider1";
 		descriptionShort = "$STR_Mutant_Spider1";
 		hiddenSelectionsTextures[] = {"MSFZ_Mifical_Pack\Spider\data\MSFZ_Spider.paa"};
+		DamageSphereAmmos[] = {"MeleeSpider1","MeleeSpider1_Hight"};
+		class AnimEvents: AnimEvents
+		{
+			class Damages: Damages
+			{
+				class Bite: Bite
+				{
+					damage = "Spider1BiteDamage";
+				};
+				class BiteLLow: BiteLLow
+				{
+					damage = "Spider1LowBiteLDamage";
+				};
+				class BiteRLow: BiteRLow
+				{
+					damage = "Spider1LowBiteRDamage";
+				};
+			};
+		};
 		class DamageSystem
 		{
 			class GlobalHealth
 			{
 				class Health
 				{
-					hitpoints = 500;
+					hitpoints = 150;
 					healthLevels[] = {{1,{"MSFZ_Mifical_Pack\Spider\data\msfz_Spider.rvmat"}},{0.7,{"MSFZ_Mifical_Pack\Spider\data\msfz_Spider.rvmat"}},{0.5,{"MSFZ_Mifical_Pack\Spider\data\msfz_Spider_damage.rvmat"}},{0.3,{"MSFZ_Mifical_Pack\Spider\data\msfz_Spider_damage.rvmat"}},{0,{"MSFZ_Mifical_Pack\Spider\data\msfz_Spider_destruct.rvmat"}}};
 				};
 				class Blood
 				{
-					hitpoints = 500;
+					hitpoints = 150;
 				};
 				class Shock
 				{
-					hitpoints = 500;
+					hitpoints = 150;
 				};
 			};
 			class DamageZones
@@ -1236,7 +1381,7 @@ class CfgVehicles
 					canBleed = 0;
 					class Health
 					{
-						hitpoints = 500;
+						hitpoints = 150;
 						transferToGlobalCoef = 1;
 					};
 					class Blood: Health
@@ -1256,7 +1401,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0.05;
 					class Health: Health
 					{
-						hitpoints = 500;
+						hitpoints = 150;
 					};
 				};
 				class Zone_Chest: Zone_Head
@@ -1267,7 +1412,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0.05;
 					class Health: Health
 					{
-						hitpoints = 500;
+						hitpoints = 150;
 					};
 				};
 				class Zone_Belly: Zone_Head
@@ -1278,7 +1423,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0.05;
 					class Health: Health
 					{
-						hitpoints = 500;
+						hitpoints = 150;
 					};
 				};
 				class Zone_Spine: Zone_Head
@@ -1289,7 +1434,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0.05;
 					class Health: Health
 					{
-						hitpoints = 500;
+						hitpoints = 150;
 					};
 				};
 				class Zone_Pelvis: Zone_Head
@@ -1300,7 +1445,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0.05;
 					class Health: Health
 					{
-						hitpoints = 500;
+						hitpoints = 150;
 					};
 				};
 				class Zone_Legs: Zone_Head
@@ -1311,7 +1456,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0;
 					class Health: Health
 					{
-						hitpoints = 500;
+						hitpoints = 150;
 					};
 				};
 			};
@@ -1339,22 +1484,55 @@ class CfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 750;
+					hitpoints = 600;
 					healthLevels[] = {{1,{"MSFZ_Mifical_Pack\Spider\data\msfz_Spider.rvmat"}},{0.7,{"MSFZ_Mifical_Pack\Spider\data\msfz_Spider.rvmat"}},{0.5,{"MSFZ_Mifical_Pack\Spider\data\msfz_Spider_damage.rvmat"}},{0.3,{"MSFZ_Mifical_Pack\Spider\data\msfz_Spider_damage.rvmat"}},{0,{"MSFZ_Mifical_Pack\Spider\data\msfz_Spider_destruct.rvmat"}}};
 				};
 				class Blood
 				{
-					hitpoints = 750;
+					hitpoints = 600;
 				};
 				class Shock
 				{
-					hitpoints = 750;
+					hitpoints = 600;
 				};
 			};
 			class DamageZones
 			{
 				class Zone_Head
 				{
+					class ArmorType
+					{
+						class Projectile
+						{
+							class Health
+							{
+								damage = 0.8;
+							};
+							class Blood
+							{
+								damage = 0.8;
+							};
+							class Shock
+							{
+								damage = 0.8;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.8;
+							};
+							class Blood
+							{
+								damage = 0.8;
+							};
+							class Shock
+							{
+								damage = 0.8;
+							};
+						};
+					};
 					componentNames[] = {"Zone_Head"};
 					transferToZonesNames[] = {};
 					transferToZonesCoefs[] = {};
@@ -1362,7 +1540,7 @@ class CfgVehicles
 					canBleed = 0;
 					class Health
 					{
-						hitpoints = 750;
+						hitpoints = 600;
 						transferToGlobalCoef = 1;
 					};
 					class Blood: Health
@@ -1382,7 +1560,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0.05;
 					class Health: Health
 					{
-						hitpoints = 750;
+						hitpoints = 600;
 					};
 				};
 				class Zone_Chest: Zone_Head
@@ -1393,7 +1571,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0.05;
 					class Health: Health
 					{
-						hitpoints = 750;
+						hitpoints = 600;
 					};
 				};
 				class Zone_Belly: Zone_Head
@@ -1404,7 +1582,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0.05;
 					class Health: Health
 					{
-						hitpoints = 750;
+						hitpoints = 600;
 					};
 				};
 				class Zone_Spine: Zone_Head
@@ -1415,7 +1593,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0.05;
 					class Health: Health
 					{
-						hitpoints = 750;
+						hitpoints = 600;
 					};
 				};
 				class Zone_Pelvis: Zone_Head
@@ -1426,7 +1604,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0.05;
 					class Health: Health
 					{
-						hitpoints = 750;
+						hitpoints = 600;
 					};
 				};
 				class Zone_Legs: Zone_Head
@@ -1437,7 +1615,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0;
 					class Health: Health
 					{
-						hitpoints = 750;
+						hitpoints = 600;
 					};
 				};
 			};
@@ -1447,7 +1625,7 @@ class CfgVehicles
 			class ObtainedPelt
 			{
 				item = "MSFZ_Spider_Lapka";
-				count = 3;
+				count = 2;
 				quantityMinMaxCoef[] = {1,1};
 			};
 		};
@@ -1459,28 +1637,80 @@ class CfgVehicles
 		displayName = "$STR_Mutant_Spider3";
 		descriptionShort = "$STR_Mutant_Spider3";
 		hiddenSelectionsTextures[] = {"MSFZ_Mifical_Pack\Spider\data\MSFZ_Spider.paa"};
+		DamageSphereAmmos[] = {"MeleeSpider3","MeleeSpider3_Hight"};
+		class AnimEvents: AnimEvents
+		{
+			class Damages: Damages
+			{
+				class Bite: Bite
+				{
+					damage = "Spider3BiteDamage";
+				};
+				class BiteLLow: BiteLLow
+				{
+					damage = "Spider3LowBiteLDamage";
+				};
+				class BiteRLow: BiteRLow
+				{
+					damage = "Spider3LowBiteRDamage";
+				};
+			};
+		};
 		class DamageSystem
 		{
 			class GlobalHealth
 			{
 				class Health
 				{
-					hitpoints = 1000;
+					hitpoints = 1500;
 					healthLevels[] = {{1,{"MSFZ_Mifical_Pack\Spider\data\msfz_Spider.rvmat"}},{0.7,{"MSFZ_Mifical_Pack\Spider\data\msfz_Spider.rvmat"}},{0.5,{"MSFZ_Mifical_Pack\Spider\data\msfz_Spider_damage.rvmat"}},{0.3,{"MSFZ_Mifical_Pack\Spider\data\msfz_Spider_damage.rvmat"}},{0,{"MSFZ_Mifical_Pack\Spider\data\msfz_Spider_destruct.rvmat"}}};
 				};
 				class Blood
 				{
-					hitpoints = 1000;
+					hitpoints = 1500;
 				};
 				class Shock
 				{
-					hitpoints = 1000;
+					hitpoints = 1500;
 				};
 			};
 			class DamageZones
 			{
 				class Zone_Head
 				{
+					class ArmorType
+					{
+						class Projectile
+						{
+							class Health
+							{
+								damage = 0.5;
+							};
+							class Blood
+							{
+								damage = 0.5;
+							};
+							class Shock
+							{
+								damage = 0.5;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.6;
+							};
+							class Blood
+							{
+								damage = 0.6;
+							};
+							class Shock
+							{
+								damage = 0.6;
+							};
+						};
+					};
 					componentNames[] = {"Zone_Head"};
 					transferToZonesNames[] = {};
 					transferToZonesCoefs[] = {};
@@ -1488,7 +1718,7 @@ class CfgVehicles
 					canBleed = 0;
 					class Health
 					{
-						hitpoints = 1000;
+						hitpoints = 1500;
 						transferToGlobalCoef = 1;
 					};
 					class Blood: Health
@@ -1508,7 +1738,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0.05;
 					class Health: Health
 					{
-						hitpoints = 1000;
+						hitpoints = 1500;
 					};
 				};
 				class Zone_Chest: Zone_Head
@@ -1519,7 +1749,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0.05;
 					class Health: Health
 					{
-						hitpoints = 1000;
+						hitpoints = 1500;
 					};
 				};
 				class Zone_Belly: Zone_Head
@@ -1530,7 +1760,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0.05;
 					class Health: Health
 					{
-						hitpoints = 1000;
+						hitpoints = 1500;
 					};
 				};
 				class Zone_Spine: Zone_Head
@@ -1541,7 +1771,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0.05;
 					class Health: Health
 					{
-						hitpoints = 1000;
+						hitpoints = 1500;
 					};
 				};
 				class Zone_Pelvis: Zone_Head
@@ -1552,7 +1782,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0.05;
 					class Health: Health
 					{
-						hitpoints = 1000;
+						hitpoints = 1500;
 					};
 				};
 				class Zone_Legs: Zone_Head
@@ -1563,7 +1793,7 @@ class CfgVehicles
 					fatalInjuryCoef = 0;
 					class Health: Health
 					{
-						hitpoints = 1000;
+						hitpoints = 1500;
 					};
 				};
 			};
@@ -1573,7 +1803,7 @@ class CfgVehicles
 			class ObtainedPelt
 			{
 				item = "MSFZ_Spider_Lapka";
-				count = 2;
+				count = 3;
 				quantityMinMaxCoef[] = {1,1};
 			};
 		};

@@ -24,45 +24,36 @@ class Action_MSFZ_MineRock: ActionContinuousBase
         m_Text = "#STR_MSFZ_mine";
     }
 
-    override void CreateConditionComponents()  
-    {        
+    override void CreateConditionComponents()
+    {
         m_ConditionTarget = new CCTCursor(UAMaxDistances.DEFAULT);
         m_ConditionItem = new CCINonRuined;
     }
 
+    // Состояние алтаря синхронизировано с клиентом: пока алтарь копит энергию, действие просто не показывается.
+    // (Раньше здесь при каждой проверке условия отправлялось сообщение в чат.)
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item)
-    {    
-        //Action not allowed if player has broken legs
+    {
         if (player.GetBrokenLegs() == eBrokenLegs.BROKEN_LEGS)
             return false;
-        
-        Object targetObject = target.GetObject();
-        if (targetObject && targetObject.IsInherited(MSFZ_RuneGathering_Base))
-        {
-            MSFZ_RuneGathering_Base rune = MSFZ_RuneGathering_Base.Cast(targetObject);
-            if(!rune.MSFZ_RuneGatheredCheck(player))
-            {
-                return true;
-            }
-			else
-			{
-				SendMessageToChat(player, m_message_fail);
-			}
-        }
-        
-        return false;
+
+        MSFZ_RuneGathering_Base rune = MSFZ_RuneGathering_Base.Cast(target.GetObject());
+        if (!rune)
+            return false;
+
+        return !rune.MSFZ_RuneGatheredCheck(player);
     }
 
     override string GetSoundCategory(ActionData action_data)
     {
         ItemBase item = action_data.m_MainItem;
-        if (item.IsKindOf("MSFZ_Magic_Kirka"))
+        if (item && item.IsKindOf("MSFZ_Magic_Kirka"))
         {
             return "MSFZ_Magic_Kirka_Mine_Sound";
         }
         return "";
     }
-	
+
 	void SendMessageToChat(PlayerBase player, string message)
 	{
 		Param1<string> msgParam = new Param1<string>(message);
@@ -76,6 +67,6 @@ modded class ActionConstructor
     {
         super.RegisterActions(actions);
         actions.Insert(Action_MSFZ_MineRock);
-		actions.Insert(ActionTeleportToObelisk);	
+		actions.Insert(ActionTeleportToObelisk);
     }
 };

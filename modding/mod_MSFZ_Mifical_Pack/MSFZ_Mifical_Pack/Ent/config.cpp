@@ -5,7 +5,263 @@ class CfgPatches
 		units[] = {"MSFZ_Mutant_Ent"};
 		weapons[] = {};
 		requiredVersion = 0.1;
-		requiredAddons[] = {"DZ_Characters"};
+		requiredAddons[] = {"DZ_Characters","DZ_Characters_Zombies","DZ_Weapons_Melee"};
+	};
+};
+class CfgAmmo
+{
+	class MeleeZombieMale;
+	class MeleeMSFZ_Ent: MeleeZombieMale
+	{
+		class DamageApplied
+		{
+			type = "Infected";
+			bleedThreshold = 0.25;
+			class Health
+			{
+				damage = 20;
+				armorDamage = 0.8;
+			};
+			class Blood
+			{
+				damage = 300;
+			};
+			class Shock
+			{
+				damage = 40;
+			};
+		};
+	};
+	class MeleeMSFZ_Ent_Heavy: MeleeZombieMale
+	{
+		class DamageApplied
+		{
+			type = "Infected";
+			bleedThreshold = 0.25;
+			class Health
+			{
+				damage = 30;
+				armorDamage = 0.8;
+			};
+			class Blood
+			{
+				damage = 400;
+			};
+			class Shock
+			{
+				damage = 60;
+			};
+		};
+	};
+	class MeleeMSFZ_Ent_Blocked: MeleeZombieMale
+	{
+		class DamageApplied
+		{
+			type = "Infected";
+			bleedThreshold = 0.25;
+			class Health
+			{
+				damage = 6;
+				armorDamage = 0.8;
+			};
+			class Blood
+			{
+				damage = 90;
+			};
+			class Shock
+			{
+				damage = 12;
+			};
+		};
+	};
+	class MeleeMSFZ_Ent_Heavy_Blocked: MeleeZombieMale
+	{
+		class DamageApplied
+		{
+			type = "Infected";
+			bleedThreshold = 0.25;
+			class Health
+			{
+				damage = 15;
+				armorDamage = 0.8;
+			};
+			class Blood
+			{
+				damage = 200;
+			};
+			class Shock
+			{
+				damage = 30;
+			};
+		};
+	};
+	class MeleeMSFZ_Ent_Medium: MeleeZombieMale
+	{
+		class DamageApplied
+		{
+			type = "Infected";
+			bleedThreshold = 0.25;
+			class Health
+			{
+				damage = 25;
+				armorDamage = 0.8;
+			};
+			class Blood
+			{
+				damage = 300;
+			};
+			class Shock
+			{
+				damage = 50;
+			};
+		};
+	};
+	class MeleeMSFZ_Ent_Medium_Heavy: MeleeZombieMale
+	{
+		class DamageApplied
+		{
+			type = "Infected";
+			bleedThreshold = 0.25;
+			class Health
+			{
+				damage = 38;
+				armorDamage = 0.8;
+			};
+			class Blood
+			{
+				damage = 400;
+			};
+			class Shock
+			{
+				damage = 70;
+			};
+		};
+	};
+	class MeleeMSFZ_Ent_Medium_Blocked: MeleeZombieMale
+	{
+		class DamageApplied
+		{
+			type = "Infected";
+			bleedThreshold = 0.25;
+			class Health
+			{
+				damage = 8;
+				armorDamage = 0.8;
+			};
+			class Blood
+			{
+				damage = 90;
+			};
+			class Shock
+			{
+				damage = 15;
+			};
+		};
+	};
+	class MeleeMSFZ_Ent_Medium_Heavy_Blocked: MeleeZombieMale
+	{
+		class DamageApplied
+		{
+			type = "Infected";
+			bleedThreshold = 0.25;
+			class Health
+			{
+				damage = 19;
+				armorDamage = 0.8;
+			};
+			class Blood
+			{
+				damage = 200;
+			};
+			class Shock
+			{
+				damage = 35;
+			};
+		};
+	};
+	class MeleeMSFZ_Ent_Hard: MeleeZombieMale
+	{
+		class DamageApplied
+		{
+			type = "Infected";
+			bleedThreshold = 0.25;
+			class Health
+			{
+				damage = 30;
+				armorDamage = 0.8;
+			};
+			class Blood
+			{
+				damage = 350;
+			};
+			class Shock
+			{
+				damage = 60;
+			};
+		};
+	};
+	class MeleeMSFZ_Ent_Hard_Heavy: MeleeZombieMale
+	{
+		class DamageApplied
+		{
+			type = "Infected";
+			bleedThreshold = 0.25;
+			class Health
+			{
+				damage = 45;
+				armorDamage = 0.8;
+			};
+			class Blood
+			{
+				damage = 450;
+			};
+			class Shock
+			{
+				damage = 80;
+			};
+		};
+	};
+	class MeleeMSFZ_Ent_Hard_Blocked: MeleeZombieMale
+	{
+		class DamageApplied
+		{
+			type = "Infected";
+			bleedThreshold = 0.25;
+			class Health
+			{
+				damage = 9;
+				armorDamage = 0.8;
+			};
+			class Blood
+			{
+				damage = 105;
+			};
+			class Shock
+			{
+				damage = 18;
+			};
+		};
+	};
+	class MeleeMSFZ_Ent_Hard_Heavy_Blocked: MeleeZombieMale
+	{
+		class DamageApplied
+		{
+			type = "Infected";
+			bleedThreshold = 0.25;
+			class Health
+			{
+				damage = 22;
+				armorDamage = 0.8;
+			};
+			class Blood
+			{
+				damage = 225;
+			};
+			class Shock
+			{
+				damage = 40;
+			};
+		};
 	};
 };
 class CfgAIBehaviours
@@ -41,7 +297,7 @@ class CfgAIBehaviours
 			};
 			class MovementSprint
 			{
-				maxSpeed = 9;
+				maxSpeed = 6;
 				minSpeed = 0;
 				acceleration = 27;
 				maxAngleSpeed = 180;
@@ -115,7 +371,7 @@ class CfgAIBehaviours
 					{
 						class Sound1
 						{
-							sounds[] = {"EntСontrol_SoundSet"};
+							sounds[] = {"EntControl_SoundSet"};
 						};
 						class Sound2
 						{
@@ -209,7 +465,7 @@ class CfgVehicles
 	{
 		scope = 0;
 		displayName = "$STR_Mutant_Ent";
-		descriptionShort = "$STR_Mutant_Ent_tЭнт";
+		descriptionShort = "$STR_Mutant_Ent_t";
 		hiddenSelections[] = {"camo"};
 		model = "MSFZ_Mifical_Pack\Ent\MSFZ_Ent.p3d";
 		aiAgentTemplate = "MSFZ_Mutant_Ent";
@@ -230,7 +486,7 @@ class CfgVehicles
 			class AttackLong
 			{
 				attackName = "attackLong";
-				ammoType = "MeleeZombieMale";
+				ammoType = "MeleeMSFZ_Ent_Heavy";
 				stanceName = "erect";
 				moveAnimNames[] = {"run","sprint"};
 				minDistance = 0.75;
@@ -245,7 +501,7 @@ class CfgVehicles
 			class AttackRun
 			{
 				attackName = "attackRun";
-				ammoType = "MeleeZombieMale";
+				ammoType = "MeleeMSFZ_Ent";
 				stanceName = "erect";
 				moveAnimNames[] = {"run","sprint"};
 				minDistance = 0.5;
@@ -260,7 +516,7 @@ class CfgVehicles
 			class AttackShort
 			{
 				attackName = "attackShort";
-				ammoType = "MeleeZombieMale";
+				ammoType = "MeleeMSFZ_Ent";
 				stanceName = "erect";
 				moveAnimNames[] = {"idle","walk"};
 				minDistance = 0.5;
@@ -275,7 +531,7 @@ class CfgVehicles
 			class AttackShortLow
 			{
 				attackName = "attackShortLow";
-				ammoType = "MeleeZombieMale";
+				ammoType = "MeleeMSFZ_Ent";
 				stanceName = "erect";
 				moveAnimNames[] = {"idle","walk","run"};
 				minDistance = 0;
@@ -290,7 +546,7 @@ class CfgVehicles
 			class CrawlAttackMove
 			{
 				attackName = "crawlAttackMove";
-				ammoType = "MeleeZombieMale";
+				ammoType = "MeleeMSFZ_Ent";
 				stanceName = "crawl";
 				moveAnimNames[] = {"walk"};
 				distance = 2;
@@ -303,7 +559,7 @@ class CfgVehicles
 			class CrawlAttackStill
 			{
 				attackName = "crawlAttackStill";
-				ammoType = "MeleeZombieMale";
+				ammoType = "MeleeMSFZ_Ent";
 				stanceName = "crawl";
 				moveAnimNames[] = {"idle"};
 				distance = 2;
@@ -574,7 +830,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.4;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.5;
 							};
 						};
 					};
@@ -595,7 +858,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.15;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.5;
 							};
 						};
 					};
@@ -616,7 +886,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.15;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.5;
 							};
 						};
 					};
@@ -636,7 +913,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.15;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.5;
 							};
 						};
 					};
@@ -656,7 +940,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.15;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.5;
 							};
 						};
 					};
@@ -677,7 +968,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.15;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.5;
 							};
 						};
 					};
@@ -698,7 +996,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.15;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.5;
 							};
 						};
 					};
@@ -721,7 +1026,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.15;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.5;
 							};
 						};
 					};
@@ -751,6 +1063,33 @@ class CfgVehicles
 		model = "MSFZ_Mifical_Pack\Ent\MSFZ_Ent.p3d";
 		hiddenSelectionsTextures[] = {"MSFZ_Mifical_Pack\Ent\data\MSFZ_Ent_Base.paa"};
 		hiddenSelectionsMaterials[] = {"MSFZ_Mifical_Pack\Ent\data\MSFZ_Ent_Base_Medium.rvmat"};
+		class AttackActions: AttackActions
+		{
+			class AttackLong: AttackLong
+			{
+				ammoType = "MeleeMSFZ_Ent_Medium_Heavy";
+			};
+			class AttackRun: AttackRun
+			{
+				ammoType = "MeleeMSFZ_Ent_Medium";
+			};
+			class AttackShort: AttackShort
+			{
+				ammoType = "MeleeMSFZ_Ent_Medium";
+			};
+			class AttackShortLow: AttackShortLow
+			{
+				ammoType = "MeleeMSFZ_Ent_Medium";
+			};
+			class CrawlAttackMove: CrawlAttackMove
+			{
+				ammoType = "MeleeMSFZ_Ent_Medium";
+			};
+			class CrawlAttackStill: CrawlAttackStill
+			{
+				ammoType = "MeleeMSFZ_Ent_Medium";
+			};
+		};
 		class DamageSystem
 		{
 			class GlobalHealth
@@ -776,7 +1115,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.35;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.4;
 							};
 						};
 					};
@@ -797,7 +1143,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.12;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.4;
 							};
 						};
 					};
@@ -818,7 +1171,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.12;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.4;
 							};
 						};
 					};
@@ -838,7 +1198,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.12;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.4;
 							};
 						};
 					};
@@ -858,7 +1225,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.12;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.4;
 							};
 						};
 					};
@@ -879,7 +1253,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.12;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.4;
 							};
 						};
 					};
@@ -900,7 +1281,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.12;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.4;
 							};
 						};
 					};
@@ -923,7 +1311,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.12;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.4;
 							};
 						};
 					};
@@ -953,6 +1348,33 @@ class CfgVehicles
 		model = "MSFZ_Mifical_Pack\Ent\MSFZ_Ent.p3d";
 		hiddenSelectionsTextures[] = {"MSFZ_Mifical_Pack\Ent\data\MSFZ_Ent_Base.paa"};
 		hiddenSelectionsMaterials[] = {"MSFZ_Mifical_Pack\Ent\data\MSFZ_Ent_Base_Hard.rvmat"};
+		class AttackActions: AttackActions
+		{
+			class AttackLong: AttackLong
+			{
+				ammoType = "MeleeMSFZ_Ent_Hard_Heavy";
+			};
+			class AttackRun: AttackRun
+			{
+				ammoType = "MeleeMSFZ_Ent_Hard";
+			};
+			class AttackShort: AttackShort
+			{
+				ammoType = "MeleeMSFZ_Ent_Hard";
+			};
+			class AttackShortLow: AttackShortLow
+			{
+				ammoType = "MeleeMSFZ_Ent_Hard";
+			};
+			class CrawlAttackMove: CrawlAttackMove
+			{
+				ammoType = "MeleeMSFZ_Ent_Hard";
+			};
+			class CrawlAttackStill: CrawlAttackStill
+			{
+				ammoType = "MeleeMSFZ_Ent_Hard";
+			};
+		};
 		class DamageSystem
 		{
 			class GlobalHealth
@@ -978,7 +1400,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.3;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.35;
 							};
 						};
 					};
@@ -1002,6 +1431,13 @@ class CfgVehicles
 								damage = 0.1;
 							};
 						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.35;
+							};
+						};
 					};
 					componentNames[] = {"Spine1","Spine3"};
 					fatalInjuryCoef = -1;
@@ -1021,6 +1457,13 @@ class CfgVehicles
 							class Health
 							{
 								damage = 0.1;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.35;
 							};
 						};
 					};
@@ -1043,6 +1486,13 @@ class CfgVehicles
 								damage = 0.1;
 							};
 						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.35;
+							};
+						};
 					};
 					componentNames[] = {"RightArm","RightForeArm"};
 					fatalInjuryCoef = -1;
@@ -1061,6 +1511,13 @@ class CfgVehicles
 							class Health
 							{
 								damage = 0.1;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.35;
 							};
 						};
 					};
@@ -1084,6 +1541,13 @@ class CfgVehicles
 								damage = 0.1;
 							};
 						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.35;
+							};
+						};
 					};
 					componentNames[] = {"RightLeg","RightUpLeg"};
 					fatalInjuryCoef = -1;
@@ -1103,6 +1567,13 @@ class CfgVehicles
 							class Health
 							{
 								damage = 0.1;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.35;
 							};
 						};
 					};
@@ -1126,6 +1597,13 @@ class CfgVehicles
 							class Health
 							{
 								damage = 0.1;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.35;
 							};
 						};
 					};

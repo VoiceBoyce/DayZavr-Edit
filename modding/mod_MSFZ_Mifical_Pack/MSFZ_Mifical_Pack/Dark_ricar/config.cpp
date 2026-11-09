@@ -5,7 +5,53 @@ class CfgPatches
 		units[] = {"MSFZ_Ricar"};
 		weapons[] = {};
 		requiredVersion = 0.1;
-		requiredAddons[] = {"DZ_Characters"};
+		requiredAddons[] = {"DZ_Characters","DZ_Characters_Zombies","DZ_Weapons_Melee"};
+	};
+};
+class CfgAmmo
+{
+	class MeleeZombieMale;
+	class MeleeMSFZ_Ricar: MeleeZombieMale
+	{
+		class DamageApplied
+		{
+			type = "Infected";
+			bleedThreshold = 0.25;
+			class Health
+			{
+				damage = 10;
+				armorDamage = 0.8;
+			};
+			class Blood
+			{
+				damage = 150;
+			};
+			class Shock
+			{
+				damage = 20;
+			};
+		};
+	};
+	class MeleeMSFZ_Ricar_Heavy: MeleeZombieMale
+	{
+		class DamageApplied
+		{
+			type = "Infected";
+			bleedThreshold = 0.25;
+			class Health
+			{
+				damage = 16;
+				armorDamage = 0.8;
+			};
+			class Blood
+			{
+				damage = 200;
+			};
+			class Shock
+			{
+				damage = 30;
+			};
+		};
 	};
 };
 class CfgAIBehaviours
@@ -115,7 +161,7 @@ class CfgAIBehaviours
 					{
 						class Sound1
 						{
-							sounds[] = {"RicarСontrol_SoundSet"};
+							sounds[] = {"RicarControl_SoundSet"};
 						};
 						class Sound2
 						{
@@ -230,7 +276,7 @@ class CfgVehicles
 			class AttackLong
 			{
 				attackName = "attackLong";
-				ammoType = "MeleeZombieMale";
+				ammoType = "MeleeMSFZ_Ricar_Heavy";
 				stanceName = "erect";
 				moveAnimNames[] = {"run","sprint"};
 				minDistance = 0.75;
@@ -245,7 +291,7 @@ class CfgVehicles
 			class AttackRun
 			{
 				attackName = "attackRun";
-				ammoType = "MeleeZombieMale";
+				ammoType = "MeleeMSFZ_Ricar";
 				stanceName = "erect";
 				moveAnimNames[] = {"run","sprint"};
 				minDistance = 0.5;
@@ -260,7 +306,7 @@ class CfgVehicles
 			class AttackShort
 			{
 				attackName = "attackShort";
-				ammoType = "MeleeZombieMale";
+				ammoType = "MeleeMSFZ_Ricar";
 				stanceName = "erect";
 				moveAnimNames[] = {"idle","walk"};
 				minDistance = 0.5;
@@ -275,7 +321,7 @@ class CfgVehicles
 			class AttackShortLow
 			{
 				attackName = "attackShortLow";
-				ammoType = "MeleeZombieMale";
+				ammoType = "MeleeMSFZ_Ricar";
 				stanceName = "erect";
 				moveAnimNames[] = {"idle","walk","run"};
 				minDistance = 0;
@@ -290,7 +336,7 @@ class CfgVehicles
 			class CrawlAttackMove
 			{
 				attackName = "crawlAttackMove";
-				ammoType = "MeleeZombieMale";
+				ammoType = "MeleeMSFZ_Ricar";
 				stanceName = "crawl";
 				moveAnimNames[] = {"walk"};
 				distance = 2;
@@ -303,7 +349,7 @@ class CfgVehicles
 			class CrawlAttackStill
 			{
 				attackName = "crawlAttackStill";
-				ammoType = "MeleeZombieMale";
+				ammoType = "MeleeMSFZ_Ricar";
 				stanceName = "crawl";
 				moveAnimNames[] = {"idle"};
 				distance = 2;
@@ -560,7 +606,7 @@ class CfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 500;
+					hitpoints = 400;
 					healthLevels[] = {{1,{"MSFZ_Mifical_Pack\Dark_ricar\data\MSFZ_Ricar_Body.rvmat"}},{0.7,{"MSFZ_Mifical_Pack\Dark_ricar\data\MSFZ_Ricar_Body.rvmat"}},{0.5,{"MSFZ_Mifical_Pack\Dark_ricar\data\MSFZ_Ricar_Body_damage.rvmat"}},{0.3,{"MSFZ_Mifical_Pack\Dark_ricar\data\MSFZ_Ricar_Body_damage.rvmat"}},{0,{"MSFZ_Mifical_Pack\Dark_ricar\data\MSFZ_Ricar_Body_destruct.rvmat"}}};
 				};
 			};
@@ -570,7 +616,7 @@ class CfgVehicles
 				{
 					class Health
 					{
-						hitpoints = 300;
+						hitpoints = 200;
 						transferToGlobalCoef = 1;
 					};
 					class ArmorType
@@ -579,7 +625,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 1.0;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.6;
 							};
 						};
 					};
@@ -600,7 +653,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.5;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.6;
 							};
 						};
 					};
@@ -621,7 +681,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.5;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.6;
 							};
 						};
 					};
@@ -641,7 +708,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.5;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.6;
 							};
 						};
 					};
@@ -661,7 +735,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.5;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.6;
 							};
 						};
 					};
@@ -682,7 +763,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.5;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.6;
 							};
 						};
 					};
@@ -703,7 +791,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.5;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.6;
 							};
 						};
 					};
@@ -726,7 +821,14 @@ class CfgVehicles
 						{
 							class Health
 							{
-								damage = 0.1;
+								damage = 0.5;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage = 0.6;
 							};
 						};
 					};

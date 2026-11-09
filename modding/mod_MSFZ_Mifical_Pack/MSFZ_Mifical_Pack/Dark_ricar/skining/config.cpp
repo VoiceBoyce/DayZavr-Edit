@@ -115,8 +115,8 @@ class CfgVehicles
 	class MSFZ_Ricar_Head: Inventory_Base
 	{
 		scope = 2;
-		displayName = "$STR_Ricar_Head";
-		descriptionShort = "$STR_Ricar_Head";
+		displayName = "$STR_MSFZ_Name_MSFZ_Ricar_Head";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Ricar_Head";
 		model = "MSFZ_Mifical_Pack\Dark_ricar\skining\MSFZ_Ricar_Head.p3d";
 		weight = 1200;
 		itemSize[] = {2,2};
@@ -137,8 +137,8 @@ class CfgVehicles
 	class MutantRicarSteakMeat: WolfSteakMeat
 	{
 		scope = 2;
-		displayName = "$STR_Ricar_Steak";
-		descriptionShort = "Стейк Темного";
+		displayName = "$STR_MSFZ_Name_MutantRicarSteakMeat";
+		descriptionShort = "$STR_MSFZ_Desc_MutantRicarSteakMeat";
 		model = "\dz\gear\food\human_meat.p3d";
 		rotationFlags = 34;
 		weight = 0;

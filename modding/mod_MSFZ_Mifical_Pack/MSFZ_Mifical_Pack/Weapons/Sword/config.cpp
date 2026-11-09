@@ -64,8 +64,8 @@ class cfgVehicles
 		scope = 2;
 		visibilityModifier = 0.85;
 		SkinningDurationSpeed = 1.2;
-		displayName = "$STR_Magic_Sword";
-		descriptionShort = "$STR_Magic_Sword1";
+		displayName = "$STR_MSFZ_Name_MSFZ_Magic_Sword";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Magic_Sword";
 		model = "MSFZ_Mifical_Pack\Weapons\Sword\MSFZ_Magic_Sword.p3d";
 		debug_ItemCategory = 2;
 		repairableWithKits[] = {4};

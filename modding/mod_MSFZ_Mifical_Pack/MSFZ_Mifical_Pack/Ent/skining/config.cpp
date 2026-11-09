@@ -14,8 +14,8 @@ class CfgVehicles
 	class MSFZ_Ent_head: Inventory_Base
 	{
 		scope = 2;
-		displayName = "$STR_Ent_head";
-		descriptionShort = "$STR_Ent_head";
+		displayName = "$STR_MSFZ_Name_MSFZ_Ent_head";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Ent_head";
 		model = "MSFZ_Mifical_Pack\Ent\skining\MSFZ_Ent_head.p3d";
 		weight = 1200;
 		itemSize[] = {2,2};
@@ -36,8 +36,8 @@ class CfgVehicles
 	class MSFZ_Ent_head_medium: Inventory_Base
 	{
 		scope = 2;
-		displayName = "$STR_Ent_head_medium";
-		descriptionShort = "$STR_Ent_head_medium";
+		displayName = "$STR_MSFZ_Name_MSFZ_Ent_head_medium";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Ent_head_medium";
 		model = "MSFZ_Mifical_Pack\Ent\skining\MSFZ_Ent_head_Medium.p3d";
 		weight = 1200;
 		itemSize[] = {2,2};
@@ -58,8 +58,8 @@ class CfgVehicles
 	class MSFZ_Ent_head_hard: Inventory_Base
 	{
 		scope = 2;
-		displayName = "$STR_Ent_head_hard";
-		descriptionShort = "$STR_Ent_head_hard";
+		displayName = "$STR_MSFZ_Name_MSFZ_Ent_head_hard";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Ent_head_hard";
 		model = "MSFZ_Mifical_Pack\Ent\skining\MSFZ_Ent_head_Hard.p3d";
 		weight = 1200;
 		itemSize[] = {2,2};

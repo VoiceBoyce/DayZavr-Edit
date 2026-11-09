@@ -115,8 +115,8 @@ class CfgVehicles
 	class MSFZ_Troll_Hand: Inventory_Base
 	{
 		scope = 2;
-		displayName = "$STR_Troll";
-		descriptionShort = "$STR_Troll1";
+		displayName = "$STR_MSFZ_Name_MSFZ_Troll_Hand";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Troll_Hand";
 		model = "MSFZ_Mifical_Pack\Troll\skining\MSFZ_Troll_Hand.p3d";
 		weight = 1200;
 		itemSize[] = {2,2};
@@ -137,8 +137,8 @@ class CfgVehicles
 	class MutantTrollSteakMeat: WolfSteakMeat
 	{
 		scope = 2;
-		displayName = "$STR_TrollSteak";
-		descriptionShort = "$STR_TrollSteak1";
+		displayName = "$STR_MSFZ_Name_MutantTrollSteakMeat";
+		descriptionShort = "$STR_MSFZ_Desc_MutantTrollSteakMeat";
 		model = "\dz\gear\food\human_meat.p3d";
 		rotationFlags = 34;
 		weight = 0;

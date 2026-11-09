@@ -15,8 +15,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Bereza: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Bereza";
-		descriptionShort = "$STR_RuneStone_Bereza1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Bereza";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Bereza";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones_2\MSFZ_RuneStone_2.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -42,8 +42,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Bog: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Bog";
-		descriptionShort = "$STR_RuneStone_Bog1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Bog";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Bog";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones_2\MSFZ_RuneStone_2.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -69,8 +69,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Chelovek: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Chelovek";
-		descriptionShort = "$STR_RuneStone_Chelovek1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Chelovek";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Chelovek";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones_2\MSFZ_RuneStone_2.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -96,8 +96,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Day: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Day";
-		descriptionShort = "$STR_RuneStone_Day1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Day";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Day";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones_2\MSFZ_RuneStone_2.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -123,8 +123,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_KladesPamyati: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_KladesPamyati";
-		descriptionShort = "$STR_RuneStone_KladesPamyati1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_KladesPamyati";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_KladesPamyati";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones_2\MSFZ_RuneStone_2.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -150,8 +150,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Los: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Los";
-		descriptionShort = "$STR_RuneStone_Los1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Los";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Los";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones_2\MSFZ_RuneStone_2.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -177,8 +177,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Nasledie: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Nasledie";
-		descriptionShort = "$STR_RuneStone_Nasledie1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Nasledie";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Nasledie";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones_2\MSFZ_RuneStone_2.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -204,8 +204,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Puti: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Puti";
-		descriptionShort = "$STR_RuneStone_Puti1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Puti";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Puti";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones_2\MSFZ_RuneStone_2.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -231,8 +231,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Solnce: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Solnce";
-		descriptionShort = "$STR_RuneStone_Solnce1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Solnce";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Solnce";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones_2\MSFZ_RuneStone_2.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -258,8 +258,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Tis: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Tis";
-		descriptionShort = "$STR_RuneStone_Tis1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Tis";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Tis";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones_2\MSFZ_RuneStone_2.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -285,8 +285,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Busk: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Busk";
-		descriptionShort = "$STR_RuneStone_Busk1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Busk";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Busk";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones_2\MSFZ_RuneStone_3.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -312,8 +312,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Cherepaha: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Cherepaha";
-		descriptionShort = "$STR_RuneStone_Cherepaha1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Cherepaha";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Cherepaha";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones_2\MSFZ_RuneStone_3.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -339,8 +339,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Kaban: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Kaban";
-		descriptionShort = "$STR_RuneStone_Kaban1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Kaban";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Kaban";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones_2\MSFZ_RuneStone_3.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -366,8 +366,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Medved: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Medved";
-		descriptionShort = "$STR_RuneStone_Medved1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Medved";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Medved";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones_2\MSFZ_RuneStone_3.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -393,8 +393,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Orel: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Orel";
-		descriptionShort = "$STR_RuneStone_Orel1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Orel";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Orel";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones_2\MSFZ_RuneStone_3.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -420,8 +420,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Osa: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Osa";
-		descriptionShort = "$STR_RuneStone_Osa1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Osa";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Osa";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones_2\MSFZ_RuneStone_3.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -447,8 +447,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Tigr: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Tigr";
-		descriptionShort = "$STR_RuneStone_Tigr1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Tigr";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Tigr";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones_2\MSFZ_RuneStone_3.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -474,8 +474,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Wolf: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Wolf";
-		descriptionShort = "$STR_RuneStone_Wolf1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Wolf";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Wolf";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones_2\MSFZ_RuneStone_3.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -501,8 +501,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Zayac: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Zayac";
-		descriptionShort = "$STR_RuneStone_Zayac1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Zayac";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Zayac";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones_2\MSFZ_RuneStone_3.p3d";
 		animClass = "NoFireClass";
 		weight = 300;
@@ -528,8 +528,8 @@ class CfgVehicles
 	class MSFZ_RuneStone_Zmey: MSFZ_RuneStone_Base
 	{
 		scope = 2;
-		displayName = "$STR_RuneStone_Zmey";
-		descriptionShort = "$STR_RuneStone_Zmey1";
+		displayName = "$STR_MSFZ_Name_MSFZ_RuneStone_Zmey";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_RuneStone_Zmey";
 		model = "MSFZ_Mifical_Pack\Items\RuneStones_2\MSFZ_RuneStone_3.p3d";
 		animClass = "NoFireClass";
 		weight = 300;

@@ -8,14 +8,61 @@ class CfgPatches
 		requiredAddons[] = {"DZ_Weapons_Melee"};
 	};
 };
+class CfgAmmo
+{
+	class MeleeSharpLight_2;
+	class MeleeSharpHeavy_2;
+	class MeleeMSFZ_Magic_Hatchet: MeleeSharpLight_2
+	{
+		class DamageApplied
+		{
+			type = "Melee";
+			bleedThreshold = 0.6;
+			transferShockToDamage = 0;
+			class Health
+			{
+				damage = 250;
+			};
+			class Blood
+			{
+				damage = 250;
+			};
+			class Shock
+			{
+				damage = 100;
+			};
+		};
+	};
+	class MeleeMSFZ_Magic_Hatchet_Heavy: MeleeSharpHeavy_2
+	{
+		class DamageApplied
+		{
+			type = "Melee";
+			bleedThreshold = 0.6;
+			transferShockToDamage = 0;
+			class Health
+			{
+				damage = 500;
+			};
+			class Blood
+			{
+				damage = 500;
+			};
+			class Shock
+			{
+				damage = 150;
+			};
+		};
+	};
+};
 class CfgVehicles
 {
 	class Hatchet;
 	class MSFZ_Magic_Hatchet: Hatchet
 	{
 		scope = 2;
-		displayName = "$STR_Magic_Hatchet";
-		descriptionShort = "$STR_Magic_Hatchet1";
+		displayName = "$STR_MSFZ_Name_MSFZ_Magic_Hatchet";
+		descriptionShort = "$STR_MSFZ_Desc_MSFZ_Magic_Hatchet";
 		model = "MSFZ_Mifical_Pack\Weapons\Kirka_2\MSFZ_Magic_Hatchet.p3d";
 		debug_ItemCategory = 2;
 		build_action_type = 10;
@@ -48,18 +95,18 @@ class CfgVehicles
 		{
 			class Default
 			{
-				ammo = "MeleeSharpLight_2";
-				range = 2;
+				ammo = "MeleeMSFZ_Magic_Hatchet";
+				range = 1.4;
 			};
 			class Heavy
 			{
-				ammo = "MeleeSharpHeavy_2";
-				range = 3.5;
+				ammo = "MeleeMSFZ_Magic_Hatchet_Heavy";
+				range = 1.4;
 			};
 			class Sprint
 			{
-				ammo = "MeleeSharpHeavy_2";
-				range = 5.5;
+				ammo = "MeleeMSFZ_Magic_Hatchet_Heavy";
+				range = 3.3;
 			};
 		};
 		isMeleeWeapon = 1;
