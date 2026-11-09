@@ -5,7 +5,7 @@ class CfgPatches
 		units[] = {"MSFZ_Troll"};
 		weapons[] = {};
 		requiredVersion = 0.1;
-		requiredAddons[] = {"DZ_Characters","DZ_Characters_Zombies","DZ_Weapons_Melee"};
+		requiredAddons[] = {"DZ_Data","DZ_Characters","DZ_Characters_Zombies","DZ_Weapons_Melee"};
 	};
 };
 class CfgAmmo
@@ -883,6 +883,13 @@ class CfgVehicles
 			};
 		};
 	};
+	// Грозовая туча, которую поднимает Тролль: из неё выходят Ричары. Пустая модель, всё видимое — частицы и звук.
+	class HouseNoDestruct;
+	class MSFZ_TrollStorm: HouseNoDestruct
+	{
+		scope = 1;
+		model = "\DZ\data\empty.p3d";
+	};
 };
 class CfgSoundShaders
 {
@@ -953,6 +960,25 @@ class CfgSoundShaders
 		range = 100;
 		rangeCurve = "defaultAnimalAttenuationCurve";
 	};
+	// Грозовая туча Тролля: гул грозы, разряд при появлении Ричара, раскат грома
+	class MSFZ_TrollStorm_Loop_SoundShader
+	{
+		samples[] = {{"MSFZ_Mifical_Pack\Troll\storm\sound\MSFZ_Storm_Idle",1}};
+		volume = 1.6;
+		range = 70;
+	};
+	class MSFZ_TrollStorm_Strike_SoundShader
+	{
+		samples[] = {{"MSFZ_Mifical_Pack\Troll\storm\sound\MSFZ_Storm_Strike",1}};
+		volume = 1.8;
+		range = 100;
+	};
+	class MSFZ_TrollStorm_Thunder_SoundShader
+	{
+		samples[] = {{"MSFZ_Mifical_Pack\Troll\storm\sound\MSFZ_Storm_Thunder",1}};
+		volume = 1.5;
+		range = 250;
+	};
 };
 class CfgSoundSets
 {
@@ -991,5 +1017,32 @@ class CfgSoundSets
 	class TrollRun_SoundSet
 	{
 		soundShaders[] = {"TrollRun_SoundShader"};
+	};
+	class MSFZ_TrollStorm_Loop_SoundSet
+	{
+		soundShaders[] = {"MSFZ_TrollStorm_Loop_SoundShader"};
+		sound3DProcessingType = "infected3DProcessingType";
+		volumeCurve = "infectedAttenuationCurve";
+		spatial = 1;
+		doppler = 0;
+		loop = 1;
+	};
+	class MSFZ_TrollStorm_Strike_SoundSet
+	{
+		soundShaders[] = {"MSFZ_TrollStorm_Strike_SoundShader"};
+		sound3DProcessingType = "infected3DProcessingType";
+		volumeCurve = "infectedAttenuationCurve";
+		spatial = 1;
+		doppler = 0;
+		loop = 0;
+	};
+	class MSFZ_TrollStorm_Thunder_SoundSet
+	{
+		soundShaders[] = {"MSFZ_TrollStorm_Thunder_SoundShader"};
+		sound3DProcessingType = "infected3DProcessingType";
+		volumeCurve = "infectedAttenuationCurve";
+		spatial = 1;
+		doppler = 0;
+		loop = 0;
 	};
 };
