@@ -323,11 +323,20 @@ class DRL_UIStage extends ScriptedWidgetEventHandler
 	protected vector m_DragStart;
 	protected float m_Idle;
 	protected int m_HideMask;
+	protected bool m_Bare;
+	protected ImageWidget m_MissingIcon;
 
-	void Build(Widget parent, float x, float y, float w, float h)
+	// bare - без подложки, подсветки и подсказки: модель внутри круга «Чертежа».
+	void Build(Widget parent, float x, float y, float w, float h, bool bare = false)
 	{
 		m_W = w;
 		m_H = h;
+		m_Bare = bare;
+		if (bare)
+		{
+			BuildBare(parent, x, y, w, h);
+			return;
+		}
 		m_Root = INT_UIF_Draw.Frame(parent, x, y, w, h, "DRL_Stage");
 		int tileFill = INT_UIF.Color(INT_UIF_ThemeKeys.TILE);
 		int tileBorder = INT_UIF.Color(INT_UIF_ThemeKeys.TILE_BORDER);
@@ -358,6 +367,37 @@ class DRL_UIStage extends ScriptedWidgetEventHandler
 
 		m_Hit = INT_UIF_Draw.Hit(m_Root, 0, 0, w, h, this);
 		m_Hit.SetName("DRL_StageHit");
+	}
+
+	protected void BuildBare(Widget parent, float x, float y, float w, float h)
+	{
+		m_Root = INT_UIF_Draw.Frame(parent, x, y, w, h, "DRL_Stage");
+		m_Clip = INT_UIF_Draw.Clip(m_Root, 0, 0, w, h, "DRL_StageClip");
+		m_View = new DRL_UIItemView();
+		m_View.Create(m_Clip, true);
+		m_View.SetOrientation(Vector(-8, 30, 0));
+		int faint = INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_FAINT);
+		m_Missing = INT_UIF_Draw.Frame(m_Root, 0, 0, w, h, "DRL_StageMissing");
+		m_MissingIcon = INT_UIF_Draw.Icon(m_Missing, w * 0.5 - 18, h * 0.5 - 18, 36, "info", faint);
+		m_Missing.Show(false);
+		m_Hit = INT_UIF_Draw.Hit(m_Root, 0, 0, w, h, this);
+		m_Hit.SetName("DRL_StageHit");
+	}
+
+	// Размер сцены без подложки (круг «Чертежа» подстраивается под высоту листа).
+	void Resize(float w, float h)
+	{
+		m_W = w;
+		m_H = h;
+		INT_UIF_Draw.Resize(m_Root, w, h);
+		if (m_Bare)
+		{
+			INT_UIF_Draw.Place(m_Clip, 0, 0, w, h);
+			INT_UIF_Draw.Resize(m_Missing, w, h);
+			if (m_MissingIcon)
+				INT_UIF_Draw.Move(m_MissingIcon, w * 0.5 - 18, h * 0.5 - 18);
+		}
+		INT_UIF_Draw.Resize(m_Hit, w, h);
 	}
 
 	Widget GetRoot()
@@ -419,8 +459,17 @@ class DRL_UIStage extends ScriptedWidgetEventHandler
 		if (m_HideMask != 0)
 			m_View.Show(false);
 		m_Missing.Show(cls != "" && !ok);
-		m_HintRow.Show(ok);
+		if (m_HintRow)
+			m_HintRow.Show(ok);
 		if (ok && m_Clip)
+			RevealClip();
+	}
+
+	protected void RevealClip()
+	{
+		if (m_Bare)
+			DRL_UIAnim.Reveal(m_Clip, 0, 0, 0, 8, 0.28);
+		else
 			DRL_UIAnim.Reveal(m_Clip, 10, 10, 0, 8, 0.28);
 	}
 
@@ -440,9 +489,10 @@ class DRL_UIStage extends ScriptedWidgetEventHandler
 		if (m_HideMask != 0)
 			m_View.Show(false);
 		m_Missing.Show(cls != "" && !ok);
-		m_HintRow.Show(ok);
+		if (m_HintRow)
+			m_HintRow.Show(ok);
 		if (ok && changed && m_Clip)
-			DRL_UIAnim.Reveal(m_Clip, 10, 10, 0, 8, 0.28);
+			RevealClip();
 	}
 
 	// Оверлеи (выпадающие панели, диалоги) прячут модель, пока перекрывают её:
@@ -469,6 +519,11 @@ class DRL_UIStage extends ScriptedWidgetEventHandler
 			m_Missing.Show(false);
 		if (m_HintRow)
 			m_HintRow.Show(false);
+	}
+
+	bool HasModel()
+	{
+		return m_View && m_View.GetEntity() != null;
 	}
 
 	void ResetView()

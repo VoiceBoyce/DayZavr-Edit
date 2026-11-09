@@ -349,6 +349,9 @@ Verified errors committed more than once. Check ACTIVELY during implementation. 
 - **E30** — своё оружие возвращает ванильную отдачу (`new M4a1Recoil(this)`): если оружие не у игрока (подсказка ItemInfo, предпросмотр), `NULL pointer` в `Recoil.Init`. Подкласс отдачи с проверкой `m_Player` в `Init` и `PostInit`
 - **E31** — магазин в config.cpp без скриптового класса становится `Magazine_Base` (typedef `Magazine`), а не `MagazineStorage`: нельзя снарядить, разрядить, быстрая перезарядка его не видит. На каждый магазин `class X: MagazineStorage {};`
 - **E32** — спутники/призыв вокруг существа ставятся по `SurfaceY`: в бункере или пещере они появляются на поверхности. Если `pos[1] < SurfaceY - 3`, ставить на высоту существа и в меньшем радиусе
+- **E33** — у `TextWidget` нет `GetText()`: текст хранить в своих полях, иначе весь 5_Mission не компилируется
+- **E34** — после `SetSortDeep` текст на непрозрачной заливке INT_UIF пропадает: тексту/значку `SetSort(N + 1)`
+- **E35** — DRL: после старта/конца крафта предметы ещё `DRL_IsCraftLocked`, статусы врут: пересчитать через ~1,5 с
 
 ---
 

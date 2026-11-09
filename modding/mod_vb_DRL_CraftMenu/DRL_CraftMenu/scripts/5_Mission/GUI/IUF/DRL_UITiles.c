@@ -895,6 +895,7 @@ class DRL_UIRailButton extends Managed
 	Widget m_Root;
 	ref INT_UIF_Surface m_Bg;
 	ImageWidget m_Icon;
+	TextWidget m_CountText;
 	ButtonWidget m_Hit;
 	int m_Entry = -1;
 	bool m_Hover;
@@ -917,6 +918,14 @@ class DRL_UICategoryRail extends ScriptedWidgetEventHandler
 	protected float m_Size;
 	protected float m_H;
 	protected ref ScriptInvoker m_OnSelected;
+	// Сетка значков (макет «Чертёж»): до GRID_COLS в ряд, число рецептов в углу.
+	static const int GRID_COLS = 8;
+	static const float GRID_GAP = 3;
+	protected bool m_GridMode;
+	protected float m_GridW;
+	protected float m_CellH;
+	protected Widget m_GridBg;
+	protected ref INT_UIF_Surface m_GridSurface;
 
 	void DRL_UICategoryRail()
 	{
@@ -955,6 +964,107 @@ class DRL_UICategoryRail extends ScriptedWidgetEventHandler
 		m_Thumb.Show(false);
 	}
 
+	// Сетка значков шириной w; maxCells - сколько категорий помещается всего.
+	void BuildGrid(Widget parent, float x, float y, float w, float cellH, int maxCells)
+	{
+		m_GridMode = true;
+		m_GridW = w;
+		m_CellH = cellH;
+		m_Size = cellH;
+		m_H = cellH + 6;
+		m_Root = INT_UIF_Draw.Frame(parent, x, y, w, m_H, "DRL_CatGrid");
+		int gridFill = ARGB(77, 0, 0, 0);
+		m_GridSurface = INT_UIF_Surface.Box(m_Root, 0, 0, w, m_H, 10, gridFill, 0);
+		m_BgHit = INT_UIF_Draw.Hit(m_Root, 0, 0, w, m_H, this);
+		m_BgHit.SetName("DRL_CatRailBg");
+		int dim = DRL_UIC.Dim();
+		for (int i = 0; i < maxCells; i++)
+		{
+			DRL_UIRailButton b = new DRL_UIRailButton();
+			b.m_Root = INT_UIF_Draw.Frame(m_Root, 0, 0, cellH, cellH, "DRL_CatBtn");
+			b.m_Bg = INT_UIF_Surface.Box(b.m_Root, 0, 0, cellH, cellH, 8, 0, 0);
+			b.m_Icon = INT_UIF_Draw.Image(b.m_Root, 0, 0, 20, 20, "iuf_white", 0);
+			b.m_CountText = INT_UIF_Draw.Text(b.m_Root, 0, 1, 20, 11, "", 8, dim, INT_UIF_Align.RIGHT);
+			b.m_CountText.SetBold(true);
+			b.m_Hit = INT_UIF_Draw.Hit(b.m_Root, 0, 0, cellH, cellH, this);
+			DRL_UIKitUtil.ExposeHit(b.m_Hit, "DRL_Cat_" + i.ToString(), this);
+			b.m_Root.Show(false);
+			m_Buttons.Insert(b);
+		}
+		m_Thumb = INT_UIF_Draw.Line(m_Root, 0, 0, 1, 1, 0);
+		m_Thumb.Show(false);
+	}
+
+	// Высота сетки после SetEntries (один или несколько рядов).
+	float GetHeight()
+	{
+		return m_H;
+	}
+
+	protected int GridCols()
+	{
+		int n = m_Entries.Count();
+		if (n > m_Buttons.Count())
+			n = m_Buttons.Count();
+		if (n > GRID_COLS)
+			n = GRID_COLS;
+		if (n < 1)
+			n = 1;
+		return n;
+	}
+
+	protected void RebindGrid()
+	{
+		int cols = GridCols();
+		float cw = (m_GridW - 6 - (cols - 1) * GRID_GAP) / cols;
+		int total = m_Entries.Count();
+		if (total > m_Buttons.Count())
+			total = m_Buttons.Count();
+		int rows = (total + cols - 1) / cols;
+		if (rows < 1)
+			rows = 1;
+		m_H = rows * m_CellH + (rows - 1) * GRID_GAP + 6;
+		INT_UIF_Draw.Resize(m_Root, m_GridW, m_H);
+		INT_UIF_Draw.Resize(m_GridSurface.GetRoot(), m_GridW, m_H);
+		INT_UIF_Draw.Resize(m_BgHit, m_GridW, m_H);
+		float isz = m_CellH - 16;
+		for (int i = 0; i < m_Buttons.Count(); i++)
+		{
+			DRL_UIRailButton b = m_Buttons.Get(i);
+			DRL_UICategoryEntry e = GetEntry(i);
+			b.m_Entry = -1;
+			if (!e || i >= total)
+			{
+				b.m_Root.Show(false);
+				continue;
+			}
+			b.m_Entry = i;
+			b.m_Root.Show(true);
+			int row = i / cols;
+			int col = i - row * cols;
+			INT_UIF_Draw.Place(b.m_Root, 3 + col * (cw + GRID_GAP), 3 + row * (m_CellH + GRID_GAP), cw, m_CellH);
+			INT_UIF_Draw.Resize(b.m_Bg.GetRoot(), cw, m_CellH);
+			INT_UIF_Draw.Resize(b.m_Hit, cw, m_CellH);
+			INT_UIF_Draw.Place(b.m_Icon, (cw - isz) * 0.5, (m_CellH - isz) * 0.5, isz, isz);
+			INT_UIF_Draw.Place(b.m_CountText, 0, 1, cw - 3, 11);
+			b.m_CountText.SetText(e.m_Count.ToString());
+			b.m_Selected = i == m_Selected;
+			if (e.m_IconPath != "")
+			{
+				b.m_Icon.LoadImageFile(0, e.m_IconPath);
+				b.m_Icon.SetImage(0);
+			}
+			else
+			{
+				string glyph = e.m_Glyph;
+				if (glyph == "")
+					glyph = "list";
+				INT_UIF_Widgets.SetIcon(b.m_Icon, glyph);
+			}
+			Paint(b);
+		}
+	}
+
 	void SetEntries(array<ref DRL_UICategoryEntry> entries, int selected)
 	{
 		m_Entries.Clear();
@@ -964,6 +1074,11 @@ class DRL_UICategoryRail extends ScriptedWidgetEventHandler
 		}
 		m_Selected = selected;
 		m_First = 0;
+		if (m_GridMode)
+		{
+			RebindGrid();
+			return;
+		}
 		EnsureVisible(selected);
 		Rebind();
 		for (int i = 0; i < m_Buttons.Count(); i++)
@@ -996,8 +1111,15 @@ class DRL_UICategoryRail extends ScriptedWidgetEventHandler
 		if (index < 0 || index >= m_Entries.Count())
 			return;
 		m_Selected = index;
-		EnsureVisible(index);
-		Rebind();
+		if (m_GridMode)
+		{
+			RebindGrid();
+		}
+		else
+		{
+			EnsureVisible(index);
+			Rebind();
+		}
 		if (notify)
 			m_OnSelected.Invoke(index, this);
 	}
@@ -1066,8 +1188,38 @@ class DRL_UICategoryRail extends ScriptedWidgetEventHandler
 		}
 	}
 
+	protected void PaintGrid(DRL_UIRailButton b)
+	{
+		int fill = 0;
+		int border = 0;
+		int icon = DRL_UIC.Muted();
+		int count = DRL_UIC.Dim();
+		if (b.m_Hover)
+		{
+			fill = DRL_UIC.White(15);
+			icon = DRL_UIC.Txt();
+		}
+		if (b.m_Selected)
+		{
+			fill = DRL_UIC.A(38);
+			border = DRL_UIC.A(115);
+			icon = DRL_UIC.A();
+			count = DRL_UIC.A(200);
+		}
+		b.m_Bg.SetFill(fill);
+		b.m_Bg.SetBorder(border);
+		b.m_Icon.SetColor(icon);
+		if (b.m_CountText)
+			b.m_CountText.SetColor(count);
+	}
+
 	protected void Paint(DRL_UIRailButton b)
 	{
+		if (m_GridMode)
+		{
+			PaintGrid(b);
+			return;
+		}
 		INT_UIF_ThemeManager tm = INT_UIF_ThemeManager.Get();
 		int fill = ARGB(0, 0, 0, 0);
 		int border = ARGB(0, 0, 0, 0);
@@ -1113,6 +1265,8 @@ class DRL_UICategoryRail extends ScriptedWidgetEventHandler
 	{
 		if (w != m_BgHit && !ButtonOf(w))
 			return false;
+		if (m_GridMode)
+			return true;
 		int target = Math.Clamp(m_First - wheel, 0, MaxFirst());
 		if (target != m_First)
 		{

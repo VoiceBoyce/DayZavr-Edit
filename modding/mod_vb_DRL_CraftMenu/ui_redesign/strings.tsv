@@ -90,3 +90,101 @@ STR_DRL_UI_COUNT_TO_MAKE	Quantity to craft	Количество к создан�
 STR_DRL_UI_COUNT_MAX	max. %1	макс. %1
 STR_DRL_UI_CRAFT_TIME	Crafting time	Время создания
 STR_DRL_UI_NO_ITEM	No item	Нет предмета
+# v3 - окно по макету «макет верстака DRL» (2026-11-09)
+STR_DRL_UI_ST_CAP_FREE	F9 MENU — NO STATION	МЕНЮ F9 — БЕЗ СТАНЦИИ
+STR_DRL_UI_ST_CAP_WB	PLAYER STATION	СТАНЦИЯ ИГРОКА
+STR_DRL_UI_ST_CAP_SEW	SEWING STATION	ШВЕЙНАЯ СТАНЦИЯ
+STR_DRL_UI_ST_CAP_LIFT	VEHICLE ASSEMBLY	СБОРКА ТРАНСПОРТА
+STR_DRL_UI_FREE_TITLE	Free crafting	Свободный крафт
+STR_DRL_UI_QUEUE_CAP	QUEUE	ОЧЕРЕДЬ
+STR_DRL_UI_Q_FREE	Free slot	Свободное место
+STR_DRL_UI_Q_WAIT	queued — starts next	в очереди — начнётся следом
+STR_DRL_UI_Q_RUN	x%1 — crafting	x%1 — идёт крафт
+STR_DRL_UI_ST_TITLE_WB	WORKBENCH ATTACHMENTS	ОБВЕСЫ ВЕРСТАКА
+STR_DRL_UI_ST_TITLE_SEW	MACHINE ATTACHMENTS	ОБВЕСЫ МАШИНКИ
+STR_DRL_UI_ST_TITLE_LIFT	LIFT ATTACHMENTS	ОБВЕСЫ ПОДЪЁМНИКА
+STR_DRL_UI_ST_NOTE	Attachments go into the station inventory. Frame — needed by the selected recipe; wear is applied on every craft.	Обвесы ставятся через инвентарь станции. Рамка — нужен выбранному рецепту, износ списывается за каждый крафт.
+STR_DRL_UI_ST_EMPTY	empty	пусто
+STR_DRL_UI_ST_NEEDED	needed	нужен
+STR_DRL_UI_NOST_CAP	NO STATION	БЕЗ СТАНЦИИ
+STR_DRL_UI_NOST_NOTE	Recipes with station attachments (vise, anvil, tools…) are not crafted from the F9 menu — only at a station.	Рецепты с обвесами (тиски, наковальня, инструменты…) в меню F9 не крафтятся — только на станции.
+STR_DRL_UI_RC_CAP	DISMANTLE	РАЗБОР
+STR_DRL_UI_RC_NONE	This item can't be dismantled	Этот предмет не разбирается
+STR_DRL_UI_INV	Free in inventory	Свободно в инвентаре
+STR_DRL_UI_INV_ST	Free in inventory and station	Свободно в инвентаре и станции
+STR_DRL_UI_INV_VAL	%1 of %2	%1 из %2
+STR_DRL_UI_CAN_OF	craftable: %1 of %2	можно: %1 из %2
+STR_DRL_UI_DOC_WB	BLUEPRINT	ЧЕРТЁЖ
+STR_DRL_UI_DOC_SEW	PATTERN	ВЫКРОЙКА
+STR_DRL_UI_DOC_LIFT	ASSEMBLY	СБОРКА
+STR_DRL_UI_STP_TIME	TIME	ВРЕМЯ
+STR_DRL_UI_STP_OUT	OUTPUT	ВЫХОД
+STR_DRL_UI_STP_STATE	CONDITION	СОСТОЯНИЕ
+STR_DRL_UI_STP_FILL	FILL	НАПОЛНЕНИЕ
+STR_DRL_UI_REQ_OK	Requirements met	Требования выполнены
+STR_DRL_UI_REQ_NO	Requirements not met	Требования не выполнены
+STR_DRL_UI_GET_TIME	YOU GET / TIME	ПОЛУЧИТЕ / ВРЕМЯ
+STR_DRL_UI_MAX_N	Max %1	Макс %1
+STR_DRL_UI_BP_MAKE	Make	Сделать
+STR_DRL_UI_BP_MORE	%1 more	Ещё %1
+STR_DRL_UI_BP_MORE_SUB	all in Requirements	всё — в «Требованиях»
+STR_DRL_UI_BP_LOCKED	Not learned	Не изучен
+STR_DRL_UI_BP_LOCKED_SUB	learn it in the Research window	изучение — в окне «Изучение»
+STR_DRL_UI_BP_VARS	RESULT VARIANT · %1	ВАРИАНТ РЕЗУЛЬТАТА · %1
+STR_DRL_UI_BP_SLOTS	ATTACHMENT SLOTS · %1 OF %2 TAKEN	НАВЕСНОЕ · ЗАНЯТО %1 ИЗ %2
+STR_DRL_UI_BP_DOP	EXTRA ATTACHMENTS · %1 OF %2 SELECTED	ДОП. НАВЕСНОЕ · ВЫБРАНО %1 ИЗ %2
+STR_DRL_UI_BP_TOOL	tool · wear %1%	инструмент · износ %1%
+STR_DRL_UI_BP_TOOL_NO	no tool	нет инструмента
+STR_DRL_UI_BP_ATT	attachment · wear %1% · %2	обвес · износ %1% · %2
+STR_DRL_UI_BP_ATT_NO	not installed — put it on the station	не установлен — поставьте на станцию
+STR_DRL_UI_BP_ATT_FREE	needs a station with this attachment	нужна станция с этим обвесом
+STR_DRL_UI_BP_TIP_MINHP	condition not worse than: %1	состояние не хуже: %1
+STR_DRL_UI_BP_TIP_VARS	click — replacements	клик — замены
+STR_DRL_UI_RL_QUEUE	In craft queue	В очереди крафта
+STR_DRL_UI_RL_LOCKED	Not learned	Не изучен
+STR_DRL_UI_RL_NEEDATT	Needs attachment: %1	Нужен обвес: %1
+STR_DRL_UI_RL_ONLYST	Station only: %1	Только на станции: %1
+STR_DRL_UI_RL_LACK	Missing: %1	Не хватает: %1
+STR_DRL_UI_RL_CAN	Can craft: %1	Можно скрафтить: %1
+STR_DRL_UI_BTN_SETATT	Install attachment:	Установите обвес:
+STR_DRL_UI_BTN_ONLYST	Station only:	Только на станции:
+STR_DRL_UI_BTN_NEEDTOOL	Tool needed:	Нужен инструмент:
+STR_DRL_UI_BTN_RUN	crafting — %1%, %2 left	идёт крафт — %1%, ещё %2
+STR_DRL_UI_VERB_CRAFT	Craft	Скрафтить
+STR_DRL_UI_VERB_SEW	Sew	Сшить
+STR_DRL_UI_VERB_LIFT	Assemble	Собрать
+STR_DRL_UI_TOAST_START	Crafting started: %1 x%2	Крафт запущен: %1 x%2
+STR_DRL_UI_NO_ITEM_INV	No item in inventory	Нет предмета в инвентаре
+STR_DRL_UI_VAR_N	Variant %1	Вариант %1
+STR_DRL_UI_C_BLACK	Black	Чёрный
+STR_DRL_UI_C_WHITE	White	Белый
+STR_DRL_UI_C_RED	Red	Красный
+STR_DRL_UI_C_BLUE	Blue	Синий
+STR_DRL_UI_C_GREEN	Green	Зелёный
+STR_DRL_UI_C_YELLOW	Yellow	Жёлтый
+STR_DRL_UI_C_ORANGE	Orange	Оранжевый
+STR_DRL_UI_C_PINK	Pink	Розовый
+STR_DRL_UI_C_PURPLE	Purple	Фиолетовый
+STR_DRL_UI_C_BROWN	Brown	Коричневый
+STR_DRL_UI_C_GREY	Grey	Серый
+STR_DRL_UI_C_GRAY	Grey	Серый
+STR_DRL_UI_C_OLIVE	Olive	Олива
+STR_DRL_UI_C_KHAKI	Khaki	Хаки
+STR_DRL_UI_C_TAN	Tan	Песочный
+STR_DRL_UI_C_BEIGE	Beige	Бежевый
+STR_DRL_UI_C_CAMO	Camo	Камуфляж
+STR_DRL_UI_C_DESERT	Desert	Пустыня
+STR_DRL_UI_C_PIXEL	Pixel	Пиксель
+STR_DRL_UI_C_WINTER	Winter	Зимний
+STR_DRL_UI_C_SNOW	Snow	Снег
+STR_DRL_UI_C_WOODLAND	Woodland	Лес
+STR_DRL_UI_C_URBAN	Urban	Город
+STR_DRL_UI_C_DIGITAL	Digital	Цифра
+STR_DRL_UI_C_MULTICAM	Multicam	Мультикам
+STR_DRL_UI_C_NAVY	Navy	Тёмно-синий
+STR_DRL_UI_C_GOLD	Gold	Золото
+STR_DRL_UI_C_SILVER	Silver	Серебро
+STR_DRL_UI_C_DARK	Dark	Тёмный
+STR_DRL_UI_C_LIGHT	Light	Светлый
+STR_DRL_UI_C_NOTAIL	No tail	Без хвоста
+STR_DRL_UI_C_TAIL	Tail	С хвостом
