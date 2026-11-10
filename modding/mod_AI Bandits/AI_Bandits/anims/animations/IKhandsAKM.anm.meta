@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{06AE06A622CFD85B}AI_Bandits/anims/animations/IKhandsAKM.anm"
+ Author "mazlik"
+ ChangeDate 309031080
+ Configurations {
+  TXAResourceClass PC {
+   SourceFile "IKhandsAKM.txa"
+  }
+  TXAResourceClass XBOX_ONE : PC {
+  }
+  TXAResourceClass PS4 : PC {
+  }
+  TXAResourceClass LINUX : PC {
+  }
+ }
+}

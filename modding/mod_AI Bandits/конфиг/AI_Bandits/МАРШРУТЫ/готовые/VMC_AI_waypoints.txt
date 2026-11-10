@@ -1,0 +1,23 @@
+void SpawnObject(string objType, vector objPos, vector objOrientation)
+{
+	Object m_Building = Object.Cast(GetGame().CreateObject(objType, objPos));
+	if (m_Building == null) return;
+	m_Building.SetAffectPathgraph(true, false);
+	GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(GetGame().UpdatePathgraphRegionByObject, 100, false, m_Building);
+	m_Building.SetPosition(objPos);
+	m_Building.SetOrientation(objOrientation);
+}
+
+
+
+SpawnObject( "bldr_prop_Barrel_Green", "4442.430176 313.191986 8234.280273", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "4451.580078 313.556000 8220.030273", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "4477.500000 314.110992 8246.820313", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "4435.330078 313.580994 8266.969727", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "4518.229980 316.536011 8343.480469", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "4557.169922 318.119995 8362.900391", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "4538.660156 317.606995 8313.349609", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "4567.029785 318.433014 8310.580078", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "4561.100098 318.057007 8269.030273", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "4582.359863 318.962006 8229.879883", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Red", "4483.859863 314.421997 8247.200195", "0.000000 0.000000 -0.000000" );

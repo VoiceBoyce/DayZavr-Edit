@@ -1,0 +1,123 @@
+AnimSrcGraph {
+ AnimSetTemplate "{6FE517E8AD6D1415}AI_Bandits/anims/animgraph_1.30-fixed/migrated_workspace/bandits.ast"
+ ControlTemplate AnimSrcGCT "{426B028E427B375C}" {
+  Variables {
+   AnimSrcGCTVarFloat MovementSpeed {
+    DefaultValue 0.0
+    MinValue 0.0
+    MaxValue 3.0
+   }
+   AnimSrcGCTVarFloat MovementDirection {
+    DefaultValue 0.0
+    MinValue -180.0
+    MaxValue 180.0
+   }
+   AnimSrcGCTVarFloat LookDirY {
+    DefaultValue 0.0
+    MinValue -90.0
+    MaxValue 90.0
+   }
+   AnimSrcGCTVarFloat LookDirX {
+    DefaultValue 0.0
+    MinValue -180.0
+    MaxValue 180.0
+   }
+   AnimSrcGCTVarBool Raised {
+    DefaultValue 0
+   }
+   AnimSrcGCTVarFloat AimX {
+    DefaultValue 0.0
+    MinValue -180.0
+    MaxValue 180.0
+   }
+   AnimSrcGCTVarFloat AimY {
+    DefaultValue 0.0
+    MinValue -85.0
+    MaxValue 85.0
+   }
+   AnimSrcGCTVarInt VariationsStance {
+    DefaultValue 0
+    MinValue 0
+    MaxValue 3
+   }
+   AnimSrcGCTVarBool Look {
+    DefaultValue 0
+   }
+   AnimSrcGCTVarInt IdleState {
+    DefaultValue 0
+    MinValue 0
+    MaxValue 2
+   }
+   AnimSrcGCTVarFloat TurnDir {
+    DefaultValue 0.0
+    MinValue -180.0
+    MaxValue 180.0
+   }
+   AnimSrcGCTVarInt Pose {
+    DefaultValue 0
+    MinValue -1
+    MaxValue 64
+   }
+   AnimSrcGCTVarBool Talking {
+    DefaultValue 0
+   }
+   AnimSrcGCTVarInt AnimInstance {
+    DefaultValue 0
+    MinValue 0
+    MaxValue 3
+   }
+   AnimSrcGCTVarInt Stance {
+    DefaultValue 0
+    MinValue 0
+    MaxValue 2
+   }
+   AnimSrcGCTVarInt Emote {
+    DefaultValue 0
+    MinValue 0
+    MaxValue 16
+   }
+  }
+  Commands {
+   AnimSrcGCTCmd CMD_HIT_LIGHT {
+    Synchronized 1
+   }
+   AnimSrcGCTCmd CMD_HIT_HEAVY {
+    Synchronized 1
+   }
+   AnimSrcGCTCmd CMD_DEATH {
+    Synchronized 1
+   }
+   AnimSrcGCTCmd CMD_ATTACK {
+    Synchronized 1
+   }
+   AnimSrcGCTCmd CMD_TURN {
+    Synchronized 1
+   }
+   AnimSrcGCTCmd CMD_VAULT {
+    Synchronized 1
+   }
+   AnimSrcGCTCmd CMD_CRAWL {
+    Synchronized 1
+   }
+   AnimSrcGCTCmd CMD_NODEATH {
+    Synchronized 1
+   }
+  }
+ }
+ Debug AnimSrcGD "{426B028E427B375C}" {
+  DebugControlGroups {
+   AnimSrcDebugCtlGroup __unnamed__ {
+    DebugControls {
+     AnimSrcDebugCtlCmd Death {
+      Binding "CMD_Death"
+      FloatVal 0.0
+      IntVal 0
+     }
+    }
+   }
+  }
+ }
+ GraphFilesResourceNames {
+  "{426B058E427B3C75}AI_Bandits/anims/animgraph_1.30-fixed/migrated_workspace/bandits_main.agf"
+ }
+}

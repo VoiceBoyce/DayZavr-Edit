@@ -1,0 +1,221 @@
+$animsettemplate {
+ #ngrouptypes 8
+ $groupType {
+  #ngroupnames 0
+  #nanims 29
+  $anims {
+    "akm"
+    "p_1hd_campfire_idle01"
+    "p_bow_erc_aimspace"
+    "p_campfire_idle01"
+    "p_cro_idle"
+    "p_cro_sit_v2_loop"
+    "p_erc_dance_victory"
+    "p_erc_greeting_loop"
+    "p_erc_idle"
+    "p_fcl_idle_03"
+    "p_fcl_talking"
+    "p_rfl_erc_aimspace"
+    "p_rfl_erc_attackr_buttstock_inplace_ras"
+    "p_rfl_erc_idle_low"
+    "p_rfl_erc_idle_ras"
+    "p_rfl_erc_run_climb_110"
+    "p_rfl_erc_run_jump_110_over_in"
+    "p_rfl_erc_run_jump_110_over_out"
+    "p_rfl_erc_run_jumpf_l_50_in"
+    "p_rfl_erc_run_jumpf_l_50_out"
+    "p_rfl_erc_runf_low"
+    "p_rfl_erc_walkf_low"
+    "p_shoulderw_movement_in"
+    "p_shoulderw_movement_out"
+    "p_shoulderw_walkf"
+    "z_obstacle_110cm"
+    "z_obstacle_160cm"
+    "z_obstacle_210cm"
+    "z_obstacle_50cm"
+   
+  }
+ }
+ $groupType "Damage" {
+  #ngroupnames 6
+  #nanims 8
+  $groupnames {
+    "Cro"
+    "CroRas"
+    "Erc"
+    "ErcRas"
+    "Pne"
+    "PneRas"
+   
+  }
+  $anims {
+    "Heavy B"
+    "Heavy F"
+    "Heavy L"
+    "Heavy R"
+    "Light B"
+    "Light F"
+    "Light L"
+    "Light R"
+   
+  }
+ }
+ $groupType "Deaths" {
+  #ngroupnames 6
+  #nanims 8
+  $groupnames {
+    "Cro"
+    "CroRas"
+    "Erc"
+    "ErcRas"
+    "Pne"
+    "PneRas"
+   
+  }
+  $anims {
+    "BodyBack"
+    "BodyFront"
+    "BodyLeft"
+    "BodyRight"
+    "FastBack"
+    "FastFront"
+    "FastLeft"
+    "FastRight"
+   
+  }
+ }
+ $groupType "Look" {
+  #ngroupnames 4
+  #nanims 4
+  $groupnames {
+    "Knife"
+    "Pistol"
+    "Rifle"
+    "Unarmed"
+   
+  }
+  $anims {
+    "IdleCro"
+    "IdleErc"
+    "MoveCro"
+    "MoveErc"
+   
+  }
+ }
+ $groupType "Moves" {
+  #ngroupnames 5
+  #nanims 32
+  $groupnames {
+    "Knife"
+    "Pistol"
+    "Pne"
+    "Rifle"
+    "Unarmed"
+   
+  }
+  $anims {
+    "AimCro"
+    "AimCroWalk"
+    "AimErc"
+    "AimErcWalk"
+    "AimErcWalkL"
+    "AimErcWalkR"
+    "FireAttack"
+    "IK"
+    "IdleCro"
+    "IdleErc"
+    "IdlePne"
+    "MeleeAttack"
+    "RaisedCro"
+    "RaisedCroWalk"
+    "RaisedErc"
+    "RaisedErcWalk"
+    "RaisedErcWalkL"
+    "RaisedErcWalkR"
+    "ReloadMag"
+    "RunCro"
+    "RunErc"
+    "RunErcL"
+    "RunErcR"
+    "ThrowCro1"
+    "ThrowCro2"
+    "ThrowErc1"
+    "ThrowErc2"
+    "WalkCro"
+    "WalkErc"
+    "WalkErcL"
+    "WalkErcR"
+    "WalkPne"
+   
+  }
+ }
+ $groupType "MovesCro" {
+  #ngroupnames 4
+  #nanims 6
+  $groupnames {
+    "Knife"
+    "Pistol"
+    "Rifle"
+    "Unarmed"
+   
+  }
+  $anims {
+    "Aim"
+    "FireAttack"
+    "IK"
+    "Idle"
+    "Run"
+    "Walk"
+   
+  }
+ }
+ $groupType "MovesPne" {
+  #ngroupnames 4
+  #nanims 5
+  $groupnames {
+    "Knife"
+    "Pistol"
+    "Rifle"
+    "Unarmed"
+   
+  }
+  $anims {
+    "Aim"
+    "Crawl"
+    "FireAttack"
+    "IK"
+    "Idle"
+   
+  }
+ }
+ $groupType "Turns" {
+  #ngroupnames 4
+  #nanims 16
+  $groupnames {
+    "Knife"
+    "Pistol"
+    "Rifle"
+    "Unarmed"
+   
+  }
+  $anims {
+    "CroLow180L"
+    "CroLow180R"
+    "CroLow90L"
+    "CroLow90R"
+    "CroRas180L"
+    "CroRas180R"
+    "CroRas90L"
+    "CroRas90R"
+    "ErcLow180L"
+    "ErcLow180R"
+    "ErcLow90L"
+    "ErcLow90R"
+    "ErcRas180L"
+    "ErcRas180R"
+    "ErcRas90L"
+    "ErcRas90R"
+   
+  }
+ }
+}

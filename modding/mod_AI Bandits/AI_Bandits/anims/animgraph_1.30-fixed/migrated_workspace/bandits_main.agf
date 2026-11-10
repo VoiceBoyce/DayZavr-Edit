@@ -1,0 +1,2636 @@
+AnimSrcGraphFile {
+ Sheets {
+  AnimSrcGraphSheet Main {
+   Nodes {
+    AnimSrcNodeSource AKM_Hands2 {
+ EditorPos -12.8000002 -10
+ Source "Default.Main.akm"
+ Looptype "No Loop"
+}
+    AnimSrcNodePose2 AimingPoseCro {
+ EditorPos -25.0 5.2
+ Source "Moves.AimCro"
+ ValueX "AimX"
+ ValueY "AimY"
+ Table "Y(-90): X(-180)= 0, X(-90) = 3, X(0) = 6, X(90) = 9, X(180) = 12"\
+ "Y(0): X(-180) = 13, X(-90) = 16, X(0) = 19, X(90) = 22, X(180) = 25"\
+ "Y(90): X(-180) = 26, X(-90) = 29, X(0) = 32, X(90) = 35, X(180) = 38"
+}
+    AnimSrcNodePose2 AimingPoseErc {
+ EditorPos -31.6000004 5.2
+ Source "Moves.AimErc"
+ ValueX "AimX"
+ ValueY "AimY"
+ Table "Y(-90): X(-180)= 0, X(-90) = 3, X(0) = 6, X(90) = 9, X(180) = 12"\
+ "Y(0): X(-180) = 13, X(-90) = 16, X(0) = 19, X(90) = 22, X(180) = 25"\
+ "Y(90): X(-180) = 26, X(-90) = 29, X(0) = 32, X(90) = 35, X(180) = 38"
+}
+    AnimSrcNodeSource Attack_Rifle_Close_ANIM {
+ EditorPos 1.0 8.8
+ Source "Moves.MeleeAttack"
+ Looptype "No Loop"
+}
+    AnimSrcNodeStateMachine Attack_SM {
+ Tags {
+  "TagAttack"
+ }
+ EditorPos 1.0 4.9
+ states {
+  AnimSrcNodeState MeleeAttack {
+   EditorPos 1.0 6.7
+   Child "Attack_Rifle_Close_ANIM"
+   StartCondition "GetCommandI(CMD_ATTACK) == 1"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+ }
+ transitions {
+  AnimSrcNodeTransition "{0E8C39B4D708407C}" {
+   FromState ""
+   ToState "MeleeAttack"
+   Duration "0.2"
+   StartTime ""
+   Condition "GetCommandI(CMD_ATTACK) == 1"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+ }
+}
+    AnimSrcNodeSource CroAiming {
+ EditorPos -27.6000004 5.2
+ Source "Moves.RaisedCro"
+ Looptype Loop
+}
+    AnimSrcNodeBlendTAdd CroAimingBlendTAdd {
+ EditorPos -26.3000011 4.2
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "true"
+ Child0 "CroAiming"
+ Child1 "AimingPoseCro"
+ AdditiveAlways 1
+}
+    AnimSrcNodeBlendTAdd CroRasTurn180LAimT {
+ EditorPos 29.0 -24.8
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "true"
+ Child0 "RflRasCroTurn180L_ANIM"
+ Child1 "AimingPoseCro"
+ AdditiveAlways 1
+}
+    AnimSrcNodeBlendTAdd CroRasTurn90LAimT {
+ EditorPos 33.6000023 -16.7
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "true"
+ Child0 "RflRasCroTurn90L_ANIM"
+ Child1 "AimingPoseCro"
+ AdditiveAlways 1
+}
+    AnimSrcNodeSource EmoteGreeting {
+ EditorPos 22.6000004 -2.8
+ Source "Default.Main.p_erc_greeting_loop"
+ Looptype "No Loop"
+}
+    AnimSrcNodeBlendTAdd EmotesBlendTAdd {
+ EditorPos -2.7 -6.6
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Emote > 0"
+ Child0 "HitQ"
+ Child1 "HandEmotes_SM"
+ AdditiveAlways 1
+}
+    AnimSrcNodeSource ErcAiming {
+ EditorPos -34.1000023 5.2
+ Source "Moves.RaisedErc"
+ Looptype Loop
+}
+    AnimSrcNodeBlendTAdd ErcAimingBlendTAdd {
+ EditorPos -32.7999992 4.2
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "true"
+ Child0 "ErcAiming"
+ Child1 "AimingPoseErc"
+ AdditiveAlways 1
+}
+    AnimSrcNodeBlendTAdd ErcCroTurn180RAimT {
+ EditorPos 28.8000011 -39.5
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "true"
+ Child0 "RflRasCroTurn180R_ANIM"
+ Child1 "AimingPoseCro"
+ AdditiveAlways 1
+}
+    AnimSrcNodeBlendTAdd ErcCroTurn90RAimT {
+ EditorPos 33.6000023 -46.4
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "true"
+ Child0 "RflRasCroTurn90R_ANIM"
+ Child1 "AimingPoseCro"
+ AdditiveAlways 1
+}
+    AnimSrcNodeSource ErcIdle_ANIM {
+ EditorPos -37.1000023 -5.5
+ Source "Moves.IdleErc"
+ Looptype Loop
+}
+    AnimSrcNodeBlendTAdd ErcRasTurn180LAimT {
+ EditorPos 23.6000004 -24.8
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "true"
+ Child0 "RflRasErcTurn180L_ANIM"
+ Child1 "AimingPoseErc"
+ AdditiveAlways 1
+}
+    AnimSrcNodeBlendTAdd ErcRasTurn180RAimT {
+ EditorPos 23.8000011 -39.5
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "true"
+ Child0 "RflRasErcTurn180R_ANIM"
+ Child1 "AimingPoseErc"
+ AdditiveAlways 1
+}
+    AnimSrcNodeBlendTAdd ErcRasTurn90LAimT {
+ EditorPos 28.7000008 -16.8
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "true"
+ Child0 "RflRasErcTurn90L_ANIM"
+ Child1 "AimingPoseErc"
+ AdditiveAlways 1
+}
+    AnimSrcNodeBlendTAdd ErcRasTurn90RAimT {
+ EditorPos 28.8000011 -46.4
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "true"
+ Child0 "RflRasErcTurn90R_ANIM"
+ Child1 "AimingPoseErc"
+ AdditiveAlways 1
+}
+    AnimSrcNodeBlendTAdd FacialAdd {
+ EditorPos -2.6000001 -9
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff "IsCommand(CMD_DEATH)"
+ Condition "true"
+ Child0 "IKHandsBlend"
+ Child1 "FacialIdle_ANIM"
+ AdditiveAlways 0
+}
+    AnimSrcNodeSource FacialIdle_ANIM {
+ EditorPos -0.5 -8.3
+ Source "Default.Main.p_fcl_idle_03"
+ Looptype Loop
+}
+    AnimSrcNodeSource FireWeapon_ANIM {
+ EditorPos -47.5 13.4
+ Source "Moves.FireAttack"
+ Looptype "No Loop"
+}
+    AnimSrcNodeStateMachine FireWeapon_SM {
+ Tags {
+  "TagAttack"
+ }
+ EditorPos -47.2999992 9.8
+ states {
+  AnimSrcNodeState WeaponReload {
+   EditorPos -44.5 11
+   Child "WeaponReload_ANIM"
+   StartCondition "GetCommandI(CMD_ATTACK) == 17"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState WeaponFIre {
+   EditorPos -47.5 11
+   Child "FireWeapon_ANIM"
+   StartCondition "GetCommandI(CMD_ATTACK) == 16"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState Throw {
+   EditorPos -41.6000023 11
+   Child "Throwing_SM"
+   StartCondition "GetCommandI(CMD_ATTACK) == 18"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+ }
+ transitions {
+ }
+}
+    AnimSrcNodeStateMachine HandEmotes_SM {
+ EditorPos 22.1000004 -6.1
+ states {
+  AnimSrcNodeState NewState {
+   EditorPos 22.7000008 -4.6
+   Child "EmoteGreeting"
+   StartCondition ""
+   TimeStorage Inherit
+   IsExit 0
+  }
+ }
+ transitions {
+ }
+}
+    AnimSrcNodeBlend HandsBlending2 {
+ EditorPos -14.4000006 -10.9
+ BlendWeight "0.1"
+ Child0 "Idle_AKM2"
+ Child1 "AKM_Hands2"
+ OptimizeMin 1
+ OptimizeMax 1
+}
+    AnimSrcNodeQueue HitQ {
+ EditorPos -2.8 -5.7
+ Child "Master_SM_Old"
+ QueueItems {
+  AnimSrcNodeQueueItem "{0E8C3AB4D708422F}" {
+   Child "HitsSTM"
+   StartExpr "Pose == 0 && (IsCommand(CMD_HIT_LIGHT) || IsCommand(CMD_HIT_HEAVY))"
+   InterruptExpr "IsCommand(CMD_DEATH)"
+   StartTime ""
+   BlendInTime 0.1
+   BlendOutTime 0.2
+   InterruptOthers 1
+   IsReentrant 0
+  }
+ }
+}
+    AnimSrcNodeBlendTAdd IKHandsBlend {
+ EditorPos -2.6000001 -7.7
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "AnimInstance > 0 && Emote == 0"
+ Child0 "EmotesBlendTAdd"
+ Child1 "IK_hands"
+ AdditiveAlways 1
+}
+    AnimSrcNodeSource IK_hands {
+ EditorPos -0.3 -7.1
+ Source "Moves.IK"
+ Looptype Loop
+}
+    AnimSrcNodeBlendT IdleCroBlendT {
+ EditorPos -27.8000011 2.6
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Raised"
+ Child0 "IdleCro_ANIM"
+ Child1 "IdleCroFireQueue"
+ OptimizeMin 1
+ OptimizeMax 1
+ SelectMainPath 0
+}
+    AnimSrcNodeQueue IdleCroFireQueue {
+ EditorPos -26.3000011 3.3
+ Child "CroAimingBlendTAdd"
+ QueueItems {
+  AnimSrcNodeQueueItem "{0E8C3BB4D70843E2}" {
+   Child "FireWeapon_SM"
+   StartExpr "IsCommand(CMD_ATTACK) && GetCommandI(CMD_ATTACK) >= 16"
+   InterruptExpr ""
+   StartTime ""
+   BlendInTime 0.3
+   BlendOutTime 0.3
+   InterruptOthers 0
+   IsReentrant 1
+  }
+ }
+}
+    AnimSrcNodeSource IdleCro_ANIM {
+ EditorPos -29.2000008 3.3
+ Source "Moves.IdleCro"
+ Looptype Loop
+}
+    AnimSrcNodeQueue IdleErcFireQueue {
+ EditorPos -32.7000008 3.2
+ Child "ErcAimingBlendTAdd"
+ QueueItems {
+  AnimSrcNodeQueueItem "{0E8C3CB4D7084595}" {
+   Child "FireWeapon_SM"
+   StartExpr "IsCommand(CMD_ATTACK) && GetCommandI(CMD_ATTACK) >= 16"
+   InterruptExpr ""
+   StartTime ""
+   BlendInTime 0.3
+   BlendOutTime 0.3
+   InterruptOthers 0
+   IsReentrant 1
+  }
+ }
+}
+    AnimSrcNodeSource IdleErc_ANIM {
+ EditorPos -35.2000008 3.5
+ Source "Moves.IdleErc"
+ Looptype Loop
+}
+    AnimSrcNodeBlendTAdd IdleLookCroBlendTAdd {
+ EditorPos -27.8000011 1.6
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Look"
+ Child0 "IdleCroBlendT"
+ Child1 "IdleLookCroPose2"
+ AdditiveAlways 0
+}
+    AnimSrcNodePose2 IdleLookCroPose2 {
+ EditorPos -25.2000008 2.1
+ Source "Look.IdleCro"
+ ValueX "LookDirX"
+ ValueY "LookDirY"
+ Table "Y(-90): X(-180)= 0, X(-90) = 1, X(0) = 2, X(90) = 3, X(180) = 4"\
+ "Y(0): X(-180) = 5, X(-90) = 6, X(0) = 7, X(90) = 8, X(180) = 9"\
+ "Y(90): X(-180) = 10, X(-90) = 11, X(0) = 12, X(90) = 13, X(180) = 14"
+}
+    AnimSrcNodeBlendTAdd IdleLookErcBlendTAdd {
+ EditorPos -34.0 1.5
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Look"
+ Child0 "RaisedErcBlendT"
+ Child1 "IdleLookErcPose2"
+ AdditiveAlways 0
+}
+    AnimSrcNodePose2 IdleLookErcPose2 {
+ EditorPos -31.7000008 2.1
+ Source "Look.IdleErc"
+ ValueX "LookDirX"
+ ValueY "LookDirY"
+ Table "Y(-90): X(-180)= 0, X(-90) = 1, X(0) = 2, X(90) = 3, X(180) = 4"\
+ "Y(0): X(-180) = 5, X(-90) = 6, X(0) = 7, X(90) = 8, X(180) = 9"\
+ "Y(90): X(-180) = 10, X(-90) = 11, X(0) = 12, X(90) = 13, X(180) = 14"
+}
+    AnimSrcNodeSource IdlePne_ANIM {
+ EditorPos -21.0 1.9
+ Source "Moves.IdlePne"
+ Looptype Loop
+}
+    AnimSrcNodeSource Idle_AKM2 {
+ EditorPos -16.0 -9.9
+ Source "Default.Main.p_rfl_erc_idle_low"
+ Looptype Loop
+}
+    AnimSrcNodeStateMachine Idle_SM {
+ EditorPos -30.1000004 -1.8
+ states {
+  AnimSrcNodeState IdleErc {
+   EditorPos -34.0 -0.1
+   Child "IdleLookErcBlendTAdd"
+   StartCondition "Stance == 0"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState IdleCro {
+   EditorPos -27.8000011 -0.1
+   Child "IdleLookCroBlendTAdd"
+   StartCondition "Stance == 1"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState IdlePne {
+   EditorPos -21.1000004 -0.1
+   Child "IdlePne_ANIM"
+   StartCondition "Stance == 2"
+   TimeStorage Inherit
+   IsExit 0
+  }
+ }
+ transitions {
+ }
+}
+    AnimSrcNodeGroupSelect KnifeGS {
+ EditorPos -3.8 -20
+ Child "Stance_SM"
+ Group "Moves"
+ Column "Knife"
+}
+    AnimSrcNodeBlendTAdd LookCroMoveAddT {
+ EditorPos 23.3999996 14.1
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Look"
+ Child0 "WalkRunBlendTCro"
+ Child1 "LookErcMovePose"
+ AdditiveAlways 0
+}
+    AnimSrcNodeBlendTAdd LookErcL {
+ EditorPos 4.2000003 14.4
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Look"
+ Child0 "WalkRunBlendTL"
+ Child1 "LookErcMovePose"
+ AdditiveAlways 0
+}
+    AnimSrcNodeBlendTAdd LookErcMoveAddT {
+ EditorPos -4.0 14.1
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Look"
+ Child0 "WalkRunBlendTErc"
+ Child1 "LookErcMovePose"
+ AdditiveAlways 0
+}
+    AnimSrcNodePose2 LookErcMovePose {
+ EditorPos -2.5 15
+ Source "Look.MoveErc"
+ ValueX "LookDirX"
+ ValueY "LookDirY"
+ Table "Y(-90): X(-90)= 0, X(0) = 1, X(90) = 2"\
+ "Y(0): X(-90) = 3, X(0) = 4, X(90) = 5"\
+ "Y(90): X(-90) = 6, X(0) = 7, X(90) = 8"
+}
+    AnimSrcNodeBlendTAdd LookErcR {
+ EditorPos 12.9000006 14.5
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Look"
+ Child0 "WalkRunBlendTR"
+ Child1 "LookErcMovePose"
+ AdditiveAlways 0
+}
+    AnimSrcNodeStateMachine Master_SM {
+ EditorPos -6.0999999 -25.7
+ states {
+  AnimSrcNodeState Unarmed {
+   EditorPos -6.0 -23.2
+   Child "UnarmedGS"
+   StartCondition "AnimInstance == 0"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState Knife {
+   EditorPos -2.9000001 -24.4
+   Child "KnifeGS"
+   StartCondition "AnimInstance == 1"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState Pistol {
+   EditorPos 0.1 -23.2
+   Child "PistolGS"
+   StartCondition "AnimInstance == 2"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState Rifle {
+   EditorPos -2.9000001 -21.8
+   Child "RifleGS"
+   StartCondition "AnimInstance == 3"
+   TimeStorage Inherit
+   IsExit 0
+  }
+ }
+ transitions {
+  AnimSrcNodeTransition "{0E8C35B4D70839B0}" {
+   FromState "Unarmed"
+   ToState "Knife"
+   Duration ""
+   StartTime ""
+   Condition "AnimInstance == 1"
+   BlendFn S
+   PostEval 0
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E8C36B4D7083B63}" {
+   FromState "Unarmed"
+   ToState "Pistol"
+   Duration ""
+   StartTime ""
+   Condition "AnimInstance == 2"
+   BlendFn S
+   PostEval 0
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E8C37B4D7083D16}" {
+   FromState "Knife"
+   ToState "Unarmed"
+   Duration ""
+   StartTime ""
+   Condition "AnimInstance == 0"
+   BlendFn S
+   PostEval 0
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E8C38B4D7083EC9}" {
+   FromState "Knife"
+   ToState "Pistol"
+   Duration ""
+   StartTime ""
+   Condition "AnimInstance == 2"
+   BlendFn S
+   PostEval 0
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E8C41B4D7084E14}" {
+   FromState "Pistol"
+   ToState "Knife"
+   Duration ""
+   StartTime ""
+   Condition "AnimInstance == 1"
+   BlendFn S
+   PostEval 0
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E8C42B4D7084FC7}" {
+   FromState "Pistol"
+   ToState "Unarmed"
+   Duration ""
+   StartTime ""
+   Condition "AnimInstance == 0"
+   BlendFn S
+   PostEval 0
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E8FBFB4D70B5A05}" {
+   FromState "Pistol"
+   ToState "Rifle"
+   Duration ""
+   StartTime ""
+   Condition "AnimInstance == 3"
+   BlendFn S
+   PostEval 0
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E8FBEB4D70B5852}" {
+   FromState "Unarmed"
+   ToState "Rifle"
+   Duration ""
+   StartTime ""
+   Condition "AnimInstance == 3"
+   BlendFn S
+   PostEval 0
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E8FBDB4D70B569F}" {
+   FromState "Rifle"
+   ToState "Unarmed"
+   Duration ""
+   StartTime ""
+   Condition "AnimInstance == 0"
+   BlendFn S
+   PostEval 0
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E8FBCB4D70B54EC}" {
+   FromState "Rifle"
+   ToState "Pistol"
+   Duration ""
+   StartTime ""
+   Condition "AnimInstance == 2"
+   BlendFn S
+   PostEval 0
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E8FBBB4D70B5339}" {
+   FromState "Rifle"
+   ToState "Knife"
+   Duration ""
+   StartTime ""
+   Condition "AnimInstance == 1"
+   BlendFn S
+   PostEval 0
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E8FBAB4D70B5186}" {
+   FromState "Knife"
+   ToState "Rifle"
+   Duration ""
+   StartTime ""
+   Condition "AnimInstance == 3"
+   BlendFn S
+   PostEval 0
+   MotionVecBlend 0x33 0
+  }
+ }
+}
+    AnimSrcNodeStateMachine Master_SM_Old {
+ EditorPos -2.9000001 -3
+ states {
+  AnimSrcNodeState Idle {
+   EditorPos -3.5 -0
+   Child "Idle_SM"
+   StartCondition ""
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState Move {
+   EditorPos -1.9 1.5
+   Child "Move_SM"
+   StartCondition ""
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState MeleeAttack_ST {
+   EditorPos 0.9 1.5
+   Child "Attack_SM"
+   StartCondition ""
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState StaticPose_ST {
+   EditorPos -4.8000002 -1.7
+   Child "Poses_SM"
+   StartCondition "Pose > 0"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState Vault {
+   EditorPos -4.5 2.2
+   Child "Vault_Master"
+   StartCondition ""
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState Death {
+   EditorPos 1.9 -1.4
+   Child "DeathStanceSTM"
+   StartCondition "IsCommand(CMD_DEATH)"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState Throwing_ST {
+   EditorPos 1.9 -0
+   Child "Throwing_SM"
+   StartCondition ""
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState IdleTurns_ST {
+   EditorPos -1.1 -1.2
+   Child "Turns_SM"
+   StartCondition ""
+   TimeStorage Inherit
+   IsExit 0
+  }
+ }
+ transitions {
+  AnimSrcNodeTransition "{0E8FB9B4D70B4FD3}" {
+   FromState "Idle"
+   ToState "Move"
+   Duration "0.2"
+   StartTime ""
+   Condition "MovementSpeed >= 1"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E8FB8B4D70B4E20}" {
+   FromState "Move"
+   ToState "Idle"
+   Duration "0.2"
+   StartTime ""
+   Condition "MovementSpeed < 1"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E8FC7B4D70B679D}" {
+   FromState "Idle"
+   ToState "MeleeAttack_ST"
+   Duration "0.2"
+   StartTime "0.0"
+   Condition "IsCommand(CMD_ATTACK) && MovementSpeed < 1 && GetCommandI(CMD_ATTACK) < 16"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E8FC6B4D70B65EA}" {
+   FromState "MeleeAttack_ST"
+   ToState "Idle"
+   Duration "0.3"
+   StartTime "0.0"
+   Condition "RemainingTimeLess(0.05)"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E9345B4D70E738E}" {
+   FromState ""
+   ToState "StaticPose_ST"
+   Duration "0.2"
+   StartTime ""
+   Condition "Pose > 0"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E9346B4D70E7541}" {
+   FromState "StaticPose_ST"
+   ToState "Idle"
+   Duration "0.2"
+   StartTime ""
+   Condition "Pose < 1"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E9343B4D70E7028}" {
+   FromState "Move"
+   ToState "Vault"
+   Duration "0.3"
+   StartTime ""
+   Condition "IsCommand(CMD_VAULT) "
+   BlendFn S
+   PostEval 0
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E9344B4D70E71DB}" {
+   FromState "Vault"
+   ToState "Move"
+   Duration "0.5"
+   StartTime "0.8"
+   Condition "RemainingTimeLess(0.2) && MovementSpeed > 0"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E9349B4D70E7A5A}" {
+   FromState ""
+   ToState "Death"
+   Duration "0.2"
+   StartTime ""
+   Condition "IsCommand(CMD_DEATH)"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E934AB4D70E7C0D}" {
+   FromState "Idle"
+   ToState "Throwing_ST"
+   Duration "0.3"
+   StartTime ""
+   Condition "IsCommand(CMD_ATTACK) && MovementSpeed < 1 && GetCommandI(CMD_ATTACK) == 18"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E9347B4D70E76F4}" {
+   FromState "Throwing_ST"
+   ToState "Idle"
+   Duration "0.2"
+   StartTime ""
+   Condition "RemainingTimeLess(0.05)"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E9348B4D70E78A7}" {
+   FromState "Idle"
+   ToState "IdleTurns_ST"
+   Duration "0.1"
+   StartTime ""
+   Condition "IsCommand(CMD_TURN) && !(GetCommandF(CMD_TURN) > -45 && GetCommandF(CMD_TURN) < 45) && AnimInstance >1 "
+   BlendFn S
+   PostEval 0
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E933DB4D70E65F6}" {
+   FromState "IdleTurns_ST"
+   ToState "Idle"
+   Duration "0.2"
+   StartTime ""
+   Condition "RemainingTimeLess(0.2)"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+ }
+}
+    AnimSrcNodeSource MovePne_ANIM {
+ EditorPos 28.7000008 14.9
+ Source "Moves.WalkPne"
+ Looptype Loop
+}
+    AnimSrcNodeStateMachine Move_SM {
+ EditorPos -3.8 9.9
+ states {
+  AnimSrcNodeState MoveErcForward {
+   EditorPos -3.6000001 11.1
+   Child "LookErcMoveAddT"
+   StartCondition "Stance == 0 && MovementDirection > -30 && MovementDirection <30"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState MoveCroForward {
+   EditorPos 22.8000011 11.2
+   Child "LookCroMoveAddT"
+   StartCondition "Stance == 1"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState MovePneForward {
+   EditorPos 28.1000004 11.1
+   Child "MovePne_ANIM"
+   StartCondition "Stance == 2"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState MoveLeft {
+   EditorPos 4.0999999 12
+   Child "LookErcL"
+   StartCondition "Stance == 0 && MovementDirection <= -30 && MovementDirection >= -90"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState MoveRight {
+   EditorPos 12.8000002 11.2
+   Child "LookErcR"
+   StartCondition "Stance == 0 && MovementDirection >= 30 && MovementDirection <= 90"
+   TimeStorage Inherit
+   IsExit 0
+  }
+ }
+ transitions {
+  AnimSrcNodeTransition "{0E933EB4D70E67A9}" {
+   FromState "MoveErcForward"
+   ToState "MoveLeft"
+   Duration "0.5"
+   StartTime ""
+   Condition "MovementDirection <= -30 && MovementDirection >= -90"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E964BB4D710B397}" {
+   FromState "MoveLeft"
+   ToState "MoveErcForward"
+   Duration "0.5"
+   StartTime ""
+   Condition "MovementDirection > -30 && MovementDirection <30"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E964AB4D710B1E4}" {
+   FromState "MoveRight"
+   ToState "MoveErcForward"
+   Duration "0.5"
+   StartTime ""
+   Condition "MovementDirection > -30 && MovementDirection <30"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E964DB4D710B6FD}" {
+   FromState "MoveErcForward"
+   ToState "MoveRight"
+   Duration "0.5"
+   StartTime ""
+   Condition "MovementDirection >= 30 && MovementDirection <= 90"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E964CB4D710B54A}" {
+   FromState "MoveRight"
+   ToState "MoveLeft"
+   Duration "0.5"
+   StartTime ""
+   Condition "MovementDirection <= -30 && MovementDirection >= -90"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E9647B4D710ACCB}" {
+   FromState "MoveLeft"
+   ToState "MoveRight"
+   Duration "0.5"
+   StartTime ""
+   Condition "MovementDirection >= 30 && MovementDirection <= 90"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+ }
+}
+    AnimSrcNodeGroupSelect Pis_GS1 {
+ EditorPos 30.0 -31.3
+ Child "Turn180L_Rifle_SM"
+ Group "Turns"
+ Column "Pistol"
+}
+    AnimSrcNodeGroupSelect Pis_GS2 {
+ EditorPos 32.5 -31.3
+ Child "Turn90L_Rifle_SM"
+ Group "Turns"
+ Column "Pistol"
+}
+    AnimSrcNodeGroupSelect Pis_GS3 {
+ EditorPos 30.0 -37.5
+ Child "Turn180R_Rifle_SM"
+ Group "Turns"
+ Column "Pistol"
+}
+    AnimSrcNodeGroupSelect Pis_GS4 {
+ EditorPos 32.6000023 -37.5
+ Child "Turn90R_Rifle_SM"
+ Group "Turns"
+ Column "Pistol"
+}
+    AnimSrcNodeGroupSelect PistolGS {
+ EditorPos 0.7 -20
+ Child "Stance_SM"
+ Group "Moves"
+ Column "Pistol"
+}
+    AnimSrcNodeSource Pose2_ANIM {
+ EditorPos -34.5 -5.5
+ Source "Default.Main.p_erc_dance_victory"
+ Looptype Loop
+}
+    AnimSrcNodeSource Pose3_ANIM {
+ EditorPos -32.0 -5.5
+ Source "Default.Main.p_cro_sit_v2_loop"
+ Looptype Loop
+}
+    AnimSrcNodeSource Pose4_ANIM {
+ EditorPos -29.6000004 -5.5
+ Source "Default.Main.p_campfire_idle01"
+ Looptype Loop
+}
+    AnimSrcNodeSource Pose5_ANIM {
+ EditorPos -27.1000004 -5.5
+ Source "Default.Main.p_1hd_campfire_idle01"
+ Looptype Loop
+}
+    AnimSrcNodeStateMachine Poses_SM {
+ EditorPos -36.4000015 -8.7
+ states {
+  AnimSrcNodeState ErcIdle {
+   EditorPos -37.1000023 -7.3
+   Child "ErcIdle_ANIM"
+   StartCondition "Pose == 1"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState Pose2 {
+   EditorPos -34.5 -7.3
+   Child "Pose2_ANIM"
+   StartCondition "Pose == 2"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState Pose3 {
+   EditorPos -32.0 -7.3
+   Child "Pose3_ANIM"
+   StartCondition "Pose == 3"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState Pose4 {
+   EditorPos -29.6000004 -7.3
+   Child "Pose4_ANIM"
+   StartCondition "Pose == 4"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState Pose5 {
+   EditorPos -27.1000004 -7.3
+   Child "Pose5_ANIM"
+   StartCondition "Pose == 5"
+   TimeStorage Inherit
+   IsExit 0
+  }
+ }
+ transitions {
+ }
+}
+    AnimSrcNodeBlendT RaisedErcBlendT {
+ EditorPos -34.0 2.5
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Raised"
+ Child0 "IdleErc_ANIM"
+ Child1 "IdleErcFireQueue"
+ OptimizeMin 1
+ OptimizeMax 1
+ SelectMainPath 0
+}
+    AnimSrcNodeBlendT RflCroBlendT180L {
+ EditorPos 27.8999996 -26
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Raised"
+ Child0 "RflLowCroTurn180L_ANIM"
+ Child1 "CroRasTurn180LAimT"
+ OptimizeMin 1
+ OptimizeMax 1
+ SelectMainPath 0
+}
+    AnimSrcNodeBlendT RflCroBlendT180R {
+ EditorPos 27.2000008 -40.6
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Raised"
+ Child0 "RflLowCroTurn180R_ANIM"
+ Child1 "ErcCroTurn180RAimT"
+ OptimizeMin 1
+ OptimizeMax 1
+ SelectMainPath 0
+}
+    AnimSrcNodeBlendT RflCroBlendT90L {
+ EditorPos 32.2999992 -18.2
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Raised"
+ Child0 "RflLowCroTurn90L_ANIM"
+ Child1 "CroRasTurn90LAimT"
+ OptimizeMin 1
+ OptimizeMax 1
+ SelectMainPath 0
+}
+    AnimSrcNodeBlendT RflCroBlendT90R {
+ EditorPos 32.2000008 -47.4
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Raised"
+ Child0 "RflLowCroTurn90R_ANIM"
+ Child1 "ErcCroTurn90RAimT"
+ OptimizeMin 1
+ OptimizeMax 1
+ SelectMainPath 0
+}
+    AnimSrcNodeBlendT RflErcBlendT180L {
+ EditorPos 22.6000004 -26
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Raised"
+ Child0 "RflLowErcTurn180L_ANIM"
+ Child1 "ErcRasTurn180LAimT"
+ OptimizeMin 1
+ OptimizeMax 1
+ SelectMainPath 0
+}
+    AnimSrcNodeBlendT RflErcBlendT180R {
+ EditorPos 22.8000011 -40.7
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Raised"
+ Child0 "RflLowErcTurn180R_ANIM"
+ Child1 "ErcRasTurn180RAimT"
+ OptimizeMin 1
+ OptimizeMax 1
+ SelectMainPath 0
+}
+    AnimSrcNodeBlendT RflErcBlendT90L {
+ EditorPos 27.6000004 -18.2
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Raised"
+ Child0 "RflLowErcTurn90L_ANIM"
+ Child1 "ErcRasTurn90LAimT"
+ OptimizeMin 1
+ OptimizeMax 1
+ SelectMainPath 0
+}
+    AnimSrcNodeBlendT RflErcBlendT90R {
+ EditorPos 27.6000004 -47.3
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Raised"
+ Child0 "RflLowErcTurn90R_ANIM"
+ Child1 "ErcRasTurn90RAimT"
+ OptimizeMin 1
+ OptimizeMax 1
+ SelectMainPath 0
+}
+    AnimSrcNodeSource RflLowCroTurn180L_ANIM {
+ EditorPos 26.3000011 -24.8
+ Source "Turns.CroLow180L"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource RflLowCroTurn180R_ANIM {
+ EditorPos 26.3999996 -39.5
+ Source "Turns.CroLow180R"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource RflLowCroTurn90L_ANIM {
+ EditorPos 31.2000008 -16.8
+ Source "Turns.CroLow90L"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource RflLowCroTurn90R_ANIM {
+ EditorPos 31.2000008 -46.4
+ Source "Turns.CroLow90R"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource RflLowErcTurn180L_ANIM {
+ EditorPos 21.1000004 -24.8
+ Source "Turns.ErcLow180L"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource RflLowErcTurn180R_ANIM {
+ EditorPos 21.5 -39.5
+ Source "Turns.ErcLow180R"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource RflLowErcTurn90L_ANIM {
+ EditorPos 26.3000011 -16.8
+ Source "Turns.ErcLow90L"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource RflLowErcTurn90R_ANIM {
+ EditorPos 26.3999996 -46.4
+ Source "Turns.ErcLow90R"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource RflRasCroTurn180L_ANIM {
+ EditorPos 26.2000008 -23.9
+ Source "Turns.CroRas180L"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource RflRasCroTurn180R_ANIM {
+ EditorPos 26.3999996 -38.6
+ Source "Turns.CroRas180R"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource RflRasCroTurn90L_ANIM {
+ EditorPos 31.0 -15.9
+ Source "Turns.CroRas90L"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource RflRasCroTurn90R_ANIM {
+ EditorPos 31.2000008 -45.5
+ Source "Turns.CroRas90R"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource RflRasErcTurn180L_ANIM {
+ EditorPos 21.1000004 -24
+ Source "Turns.ErcRas180L"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource RflRasErcTurn180R_ANIM {
+ EditorPos 21.5 -38.6
+ Source "Turns.ErcRas180R"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource RflRasErcTurn90L_ANIM {
+ EditorPos 26.3999996 -15.8
+ Source "Turns.ErcRas90L"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource RflRasErcTurn90R_ANIM {
+ EditorPos 26.3999996 -45.4
+ Source "Turns.ErcRas90R"
+ Looptype "No Loop"
+}
+    AnimSrcNodeGroupSelect Rfl_G0 {
+ EditorPos 22.5 -31.2
+ Child "Turn180L_Rifle_SM"
+ Group "Turns"
+ Column "Rifle"
+}
+    AnimSrcNodeGroupSelect Rfl_G1 {
+ EditorPos 27.0 -31.3
+ Child "Turn90L_Rifle_SM"
+ Group "Turns"
+ Column "Rifle"
+}
+    AnimSrcNodeGroupSelect Rfl_G2 {
+ EditorPos 22.5 -37.5
+ Child "Turn180R_Rifle_SM"
+ Group "Turns"
+ Column "Rifle"
+}
+    AnimSrcNodeGroupSelect Rfl_G3 {
+ EditorPos 27.0 -37.5
+ Child "Turn90R_Rifle_SM"
+ Group "Turns"
+ Column "Rifle"
+}
+    AnimSrcNodeSource RflfromShulder_ANIM {
+ EditorPos -1.7 31
+ Source "Default.Main.p_shoulderw_movement_out"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource RfltoShoulder_ANIM {
+ EditorPos -1.4 24
+ Source "Default.Main.p_shoulderw_movement_in"
+ Looptype "No Loop"
+}
+    AnimSrcNodeGroupSelect RifleGS {
+ EditorPos -1.6 -20
+ Child "Stance_SM"
+ Group "Moves"
+ Column "Rifle"
+}
+    AnimSrcNodeBlendTAdd RifleOnShould_Add {
+ EditorPos -3.9000001 23.1
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "true"
+ Child0 "Wlaking_ErcNoloop_ANIM"
+ Child1 "RfltoShoulder_ANIM"
+ AdditiveAlways 1
+}
+    AnimSrcNodeSource RifleonShoulder_ANIM {
+ EditorPos 1.0 27.6
+ Source "Default.Main.p_shoulderw_walkf"
+ Looptype Loop
+}
+    AnimSrcNodeBlendTAdd RifletoLowAdd {
+ EditorPos -4.8000002 30.4
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "true"
+ Child0 "Wlaking_ErcNoloop_ANIM"
+ Child1 "RflfromShulder_ANIM"
+ AdditiveAlways 1
+}
+    AnimSrcNodeSource RunCro_ANIM {
+ EditorPos 24.6000004 16.6
+ Source "Moves.RunCro"
+ Looptype Loop
+}
+    AnimSrcNodeSource RunErcL_ANIM {
+ EditorPos 5.5 17.6
+ Source "Moves.RunErcL"
+ Looptype Loop
+}
+    AnimSrcNodeSource RunErcR_ANIM {
+ EditorPos 15.6000004 18.8
+ Source "Moves.RunErcR"
+ Looptype Loop
+}
+    AnimSrcNodeSource RunErc_ANIM {
+ EditorPos -2.4000001 17.7
+ Source "Moves.RunErc"
+ Looptype Loop
+}
+    AnimSrcNodeStateMachine Stance_SM {
+ EditorPos -5.3000002 -14.7
+ states {
+  AnimSrcNodeState Erected {
+   EditorPos -5.3000002 -12.4
+   Child "TalkingAdd"
+   StartCondition "Stance == 0"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState Crouch {
+   EditorPos -2.5 -13.4
+   Child "TalkingAdd"
+   StartCondition "Stance == 1"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState Prone {
+   EditorPos 0.0 -12.4
+   Child "TalkingAdd"
+   StartCondition "Stance == 2"
+   TimeStorage Inherit
+   IsExit 0
+  }
+ }
+ transitions {
+  AnimSrcNodeTransition "{0E9646B4D710AB18}" {
+   FromState "Erected"
+   ToState "Crouch"
+   Duration "0.5"
+   StartTime ""
+   Condition "Stance == 1"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E9649B4D710B031}" {
+   FromState "Crouch"
+   ToState "Erected"
+   Duration "0.5"
+   StartTime ""
+   Condition "Stance == 0"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E9648B4D710AE7E}" {
+   FromState "Prone"
+   ToState "Erected"
+   Duration "0.5"
+   StartTime ""
+   Condition "Stance == 0"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E9643B4D710A5FF}" {
+   FromState "Erected"
+   ToState "Prone"
+   Duration "0.5"
+   StartTime ""
+   Condition "Stance == 2"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E9642B4D710A44C}" {
+   FromState "Prone"
+   ToState "Crouch"
+   Duration "0.5"
+   StartTime ""
+   Condition "Stance == 1"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E7EC1B4D6FCEA38}" {
+   FromState "Crouch"
+   ToState "Prone"
+   Duration "0.5"
+   StartTime ""
+   Condition "Stance == 2"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+ }
+}
+    AnimSrcNodeBlendTAdd TalkingAdd {
+ EditorPos -2.6000001 -10.2
+ BlendTime 0.1
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Talking"
+ Child0 "FacialAdd"
+ Child1 "Talking_ANIM"
+ AdditiveAlways 0
+}
+    AnimSrcNodeSource Talking_ANIM {
+ EditorPos -0.5 -9.5
+ Source "Default.Main.p_fcl_talking"
+ Looptype Loop
+}
+    AnimSrcNodeSource ThrowBeginCro_ANIM {
+ EditorPos 18.0 4.7
+ Source "Moves.ThrowCro1"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource ThrowBeginErc_ANIM {
+ EditorPos 11.9000006 4.7
+ Source "Moves.ThrowErc1"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource ThrowEndCro_ANIM {
+ EditorPos 20.8000011 4.7
+ Source "Moves.ThrowCro2"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource ThrowEndErc_ANIM {
+ EditorPos 15.0 4.7
+ Source "Moves.ThrowErc2"
+ Looptype "No Loop"
+}
+    AnimSrcNodeStateMachine Throwing_SM {
+ EditorPos 11.6000004 0.9
+ states {
+  AnimSrcNodeState ThrowBeginErc_ST {
+   EditorPos 11.9000006 2.5
+   Child "ThrowBeginErc_ANIM"
+   StartCondition "GetCommandI(CMD_ATTACK) == 18 && Stance == 0"
+   TimeStorage "Real Time"
+   IsExit 0
+  }
+  AnimSrcNodeState TrowEndErc_ST {
+   EditorPos 15.0 2.5
+   Child "ThrowEndErc_ANIM"
+   StartCondition ""
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState ThowBeginCro_ST {
+   EditorPos 18.0 2.5
+   Child "ThrowBeginCro_ANIM"
+   StartCondition "GetCommandI(CMD_ATTACK) == 18 && Stance == 1"
+   TimeStorage "Real Time"
+   IsExit 0
+  }
+  AnimSrcNodeState ThrowEndCro_ST {
+   EditorPos 20.8000011 2.5
+   Child "ThrowEndCro_ANIM"
+   StartCondition ""
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+ }
+ transitions {
+  AnimSrcNodeTransition "{0E7EC2B4D6FCEBEB}" {
+   FromState "ThrowBeginErc_ST"
+   ToState "TrowEndErc_ST"
+   Duration "0.2"
+   StartTime ""
+   Condition "RemainingTimeLess(0.05) "
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E7EC3B4D6FCED9E}" {
+   FromState "ThowBeginCro_ST"
+   ToState "ThrowEndCro_ST"
+   Duration "0.2"
+   StartTime ""
+   Condition "RemainingTimeLess(0.05) "
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+ }
+}
+    AnimSrcNodeStateMachine Turn180L_Rifle_SM {
+ EditorPos 22.5 -30.1
+ states {
+  AnimSrcNodeState Erected {
+   EditorPos 22.6000004 -28.7
+   Child "RflErcBlendT180L"
+   StartCondition "Stance == 0"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState Crouch {
+   EditorPos 27.8999996 -28.7
+   Child "RflCroBlendT180L"
+   StartCondition "Stance == 1"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+ }
+ transitions {
+ }
+}
+    AnimSrcNodeStateMachine Turn180R_Rifle_SM {
+ EditorPos 22.3000011 -43.8
+ states {
+  AnimSrcNodeState Erected {
+   EditorPos 22.8000011 -42.5
+   Child "RflErcBlendT180R"
+   StartCondition "Stance == 0"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState Crouch {
+   EditorPos 27.1000004 -42.5
+   Child "RflCroBlendT180R"
+   StartCondition "Stance == 1"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+ }
+ transitions {
+ }
+}
+    AnimSrcNodeStateMachine Turn90L_Rifle_SM {
+ EditorPos 27.1000004 -21.7
+ states {
+  AnimSrcNodeState Erected {
+   EditorPos 27.6000004 -20.2
+   Child "RflErcBlendT90L"
+   StartCondition "Stance == 0"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState Crouch {
+   EditorPos 32.2999992 -20.1
+   Child "RflCroBlendT90L"
+   StartCondition "Stance == 1"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+ }
+ transitions {
+ }
+}
+    AnimSrcNodeStateMachine Turn90R_Rifle_SM {
+ EditorPos 26.8999996 -50.5
+ states {
+  AnimSrcNodeState Erected {
+   EditorPos 27.6000004 -49.4
+   Child "RflErcBlendT90R"
+   StartCondition "Stance == 0"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState Crouch {
+   EditorPos 32.1000023 -49.4
+   Child "RflCroBlendT90R"
+   StartCondition "Stance == 1"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+ }
+ transitions {
+ }
+}
+    AnimSrcNodeStateMachine Turns_SM {
+ Tags {
+  "TagTurns"
+ }
+ EditorPos 22.3000011 -36
+ states {
+  AnimSrcNodeState Turn180L_Rifle {
+   EditorPos 22.5 -33.5
+   Child "Rfl_G0"
+   StartCondition "(GetCommandF(CMD_TURN) >= -180 && GetCommandF(CMD_TURN) < -135) && GetCommandI(CMD_TURN) == 0  && AnimInstance == 3"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState Turn90L_Rifle {
+   EditorPos 27.0 -33.5
+   Child "Rfl_G1"
+   StartCondition "(GetCommandF(CMD_TURN) >= -135 && GetCommandF(CMD_TURN) <= -45) && GetCommandI(CMD_TURN) == 0 && AnimInstance ==3"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState Turn180R_Rifle {
+   EditorPos 22.5 -34.5
+   Child "Rfl_G2"
+   StartCondition "(GetCommandF(CMD_TURN) <= 180 && GetCommandF(CMD_TURN) > 135) && GetCommandI(CMD_TURN) == 0 && AnimInstance == 3"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState Turn90R_Rifle {
+   EditorPos 27.0 -34.5
+   Child "Rfl_G3"
+   StartCondition "(GetCommandF(CMD_TURN) >= 45 && GetCommandF(CMD_TURN) <= 135) && GetCommandI(CMD_TURN) == 0 && AnimInstance ==3"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState Turn180R_Pistol {
+   EditorPos 30.0 -34.5
+   Child "Pis_GS3"
+   StartCondition "(GetCommandF(CMD_TURN) <= 180 && GetCommandF(CMD_TURN) > 135) && GetCommandI(CMD_TURN) == 0 && AnimInstance == 2"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState Turn90R_Pistol {
+   EditorPos 32.5 -34.5
+   Child "Pis_GS4"
+   StartCondition "(GetCommandF(CMD_TURN) >= 45 && GetCommandF(CMD_TURN) <= 135) && GetCommandI(CMD_TURN) == 0 && AnimInstance ==2"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState Turn180L_Pistol {
+   EditorPos 30.0 -33.5
+   Child "Pis_GS1"
+   StartCondition "(GetCommandF(CMD_TURN) >= -180 && GetCommandF(CMD_TURN) < -135) && GetCommandI(CMD_TURN) == 0  && AnimInstance == 2"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState Turn90L_Pistol {
+   EditorPos 32.5 -33.5
+   Child "Pis_GS2"
+   StartCondition "(GetCommandF(CMD_TURN) >= -135 && GetCommandF(CMD_TURN) <= -45) && GetCommandI(CMD_TURN) == 0 && AnimInstance ==2"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+ }
+ transitions {
+ }
+}
+    AnimSrcNodeGroupSelect UnarmedGS {
+ EditorPos -6.0 -20
+ Child "Stance_SM"
+ Group "Moves"
+ Column "Unarmed"
+}
+    AnimSrcNodeSource Vault160_ANIM {
+ EditorPos -13.9000006 11.6
+ Source "Default.Main.z_obstacle_160cm"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource Vault210_ANIM {
+ EditorPos -11.5 11.6
+ Source "Default.Main.z_obstacle_210cm"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource VaultBigStart_ANIM {
+ EditorPos -16.3000011 11.6
+ Source "Default.Main.p_rfl_erc_runf_low"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource VaultSmallStart_ANIM {
+ EditorPos -21.5 11.6
+ Source "Default.Main.p_rfl_erc_runf_low"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource VaultSmall_ANIM {
+ EditorPos -19.1000004 11.6
+ Source "Default.Main.z_obstacle_110cm"
+ Looptype "No Loop"
+}
+    AnimSrcNodeStateMachine Vault_Master {
+ Tags {
+  "TagVault"
+ }
+ EditorPos -19.2000008 8
+ states {
+  AnimSrcNodeState "Vault160 End" {
+   EditorPos -13.9000006 9.5
+   Child "Vault160_ANIM"
+   StartCondition "GetCommandI(CMD_VAULT) == 2"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState "Vault Small End" {
+   EditorPos -19.1000004 9.5
+   Child "VaultSmall_ANIM"
+   StartCondition "GetCommandI(CMD_VAULT) < 2"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState "Vault210 End" {
+   EditorPos -11.5 9.5
+   Child "Vault210_ANIM"
+   StartCondition "GetCommandI(CMD_VAULT) == 3"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+ }
+ transitions {
+ }
+}
+    AnimSrcNodeSource WalkAimCro {
+ EditorPos 21.8000011 20.9
+ Source "Moves.RaisedCroWalk"
+ Looptype Loop
+}
+    AnimSrcNodePose2 WalkAimCroPose {
+ EditorPos 24.6000004 20.9
+ Source "Moves.AimCroWalk"
+ ValueX "AimX"
+ ValueY "AimY"
+ Table "Y(-90): X(-180)= 0, X(-90) = 1, X(0) = 2, X(90) = 3, X(180) = 4"\
+ "Y(0): X(-180) = 5, X(-90) = 6, X(0) = 7, X(90) = 8, X(180) = 9"\
+ "Y(90): X(-180) = 10, X(-90) = 11, X(0) = 12, X(90) = 13, X(180) = 14"
+}
+    AnimSrcNodeSource WalkAimErc {
+ EditorPos -7.0 20.9
+ Source "Moves.RaisedErcWalk"
+ Looptype Loop
+}
+    AnimSrcNodeSource WalkAimErcL {
+ EditorPos 2.8 20.9
+ Source "Moves.RaisedErcWalkL"
+ Looptype Loop
+}
+    AnimSrcNodePose2 WalkAimErcPose {
+ EditorPos -4.5999999 20.9
+ Source "Moves.AimErcWalk"
+ ValueX "AimX"
+ ValueY "AimY"
+ Table "Y(-90): X(-180)= 0, X(-90) = 1, X(0) = 2, X(90) = 3, X(180) = 4"\
+ "Y(0): X(-180) = 5, X(-90) = 6, X(0) = 7, X(90) = 8, X(180) = 9"\
+ "Y(90): X(-180) = 10, X(-90) = 11, X(0) = 12, X(90) = 13, X(180) = 14"
+}
+    AnimSrcNodeSource WalkAimErcR {
+ EditorPos 11.8000002 21
+ Source "Moves.RaisedErcWalkR"
+ Looptype Loop
+}
+    AnimSrcNodeBlendTAdd WalkCroBlendTAdd {
+ EditorPos 23.1000004 20
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "true"
+ Child0 "WalkAimCro"
+ Child1 "WalkAimCroPose"
+ AdditiveAlways 0
+}
+    AnimSrcNodeQueue WalkCroFireQueue {
+ EditorPos 23.1000004 18.9
+ Child "WalkCroBlendTAdd"
+ QueueItems {
+  AnimSrcNodeQueueItem "{0E7EC4B4D6FCEF51}" {
+   Child "FireWeapon_SM"
+   StartExpr "IsCommand(CMD_ATTACK) && GetCommandI(CMD_ATTACK) >= 16"
+   InterruptExpr ""
+   StartTime ""
+   BlendInTime 0.3
+   BlendOutTime 0.3
+   InterruptOthers 0
+   IsReentrant 1
+  }
+ }
+}
+    AnimSrcNodeBlendT WalkCroRaisedBelndT {
+ EditorPos 22.0 17.7
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Raised"
+ Child0 "WalkCro_ANIM"
+ Child1 "WalkCroFireQueue"
+ OptimizeMin 1
+ OptimizeMax 1
+ SelectMainPath 0
+}
+    AnimSrcNodeSource WalkCro_ANIM {
+ EditorPos 20.8999996 18.9
+ Source "Moves.WalkCro"
+ Looptype Loop
+}
+    AnimSrcNodeBlendTAdd WalkErcBlendTAdd {
+ EditorPos -5.8000002 19.7
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "true"
+ Child0 "WalkAimErc"
+ Child1 "WalkAimErcPose"
+ AdditiveAlways 0
+}
+    AnimSrcNodeQueue WalkErcFireQueue {
+ EditorPos -5.8000002 18.7
+ Child "WalkErcBlendTAdd"
+ QueueItems {
+  AnimSrcNodeQueueItem "{0E7EC5B4D6FCF104}" {
+   Child "FireWeapon_SM"
+   StartExpr "IsCommand(CMD_ATTACK) && GetCommandI(CMD_ATTACK) >= 16"
+   InterruptExpr ""
+   StartTime ""
+   BlendInTime 0.3
+   BlendOutTime 0.3
+   InterruptOthers 0
+   IsReentrant 1
+  }
+ }
+}
+    AnimSrcNodeSource WalkErcL {
+ EditorPos 1.7 18.9
+ Source "Moves.WalkErcL"
+ Looptype Loop
+}
+    AnimSrcNodeBlendTAdd WalkErcLBlendTAdd {
+ EditorPos 3.9000001 19.9
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "true"
+ Child0 "WalkAimErcL"
+ Child1 "WalkAimErcPose"
+ AdditiveAlways 0
+}
+    AnimSrcNodeQueue WalkErcLFireQueue {
+ EditorPos 4.0 18.9
+ Child "WalkErcLBlendTAdd"
+ QueueItems {
+  AnimSrcNodeQueueItem "{0E7EC6B4D6FCF2B7}" {
+   Child "FireWeapon_SM"
+   StartExpr "IsCommand(CMD_ATTACK) && GetCommandI(CMD_ATTACK) >= 16"
+   InterruptExpr ""
+   StartTime ""
+   BlendInTime 0.3
+   BlendOutTime 0.3
+   InterruptOthers 0
+   IsReentrant 1
+  }
+ }
+}
+    AnimSrcNodeSource WalkErcR {
+ EditorPos 10.3000002 18.8
+ Source "Moves.WalkErcR"
+ Looptype Loop
+}
+    AnimSrcNodeBlendTAdd WalkErcRBlendTAdd {
+ EditorPos 12.8000002 19.9
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "true"
+ Child0 "WalkAimErcR"
+ Child1 "WalkAimErcPose"
+ AdditiveAlways 0
+}
+    AnimSrcNodeQueue WalkErcRFireQueue {
+ EditorPos 12.9000006 18.8
+ Child "WalkErcRBlendTAdd"
+ QueueItems {
+  AnimSrcNodeQueueItem "{0E7EC7B4D6FCF46A}" {
+   Child "FireWeapon_SM"
+   StartExpr "IsCommand(CMD_ATTACK) && GetCommandI(CMD_ATTACK) >= 16"
+   InterruptExpr ""
+   StartTime ""
+   BlendInTime 0.3
+   BlendOutTime 0.3
+   InterruptOthers 0
+   IsReentrant 1
+  }
+ }
+}
+    AnimSrcNodeBlendT WalkErcRaisedBelndT {
+ EditorPos -6.9000001 17.7
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Raised"
+ Child0 "WalkingErc_SM"
+ Child1 "WalkErcFireQueue"
+ OptimizeMin 1
+ OptimizeMax 1
+ SelectMainPath 0
+}
+    AnimSrcNodeBlendT WalkErcRaisedBlendTL {
+ EditorPos 2.8 17.6
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Raised"
+ Child0 "WalkErcL"
+ Child1 "WalkErcLFireQueue"
+ OptimizeMin 1
+ OptimizeMax 1
+ SelectMainPath 0
+}
+    AnimSrcNodeBlendT WalkErcRaisedBlendTR {
+ EditorPos 11.5 17.4
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "Raised"
+ Child0 "WalkErcR"
+ Child1 "WalkErcRFireQueue"
+ OptimizeMin 1
+ OptimizeMax 1
+ SelectMainPath 0
+}
+    AnimSrcNodeSource WalkErc_ANIM {
+ EditorPos -10.6999998 25.4
+ Source "Moves.WalkErc"
+ Looptype Loop
+}
+    AnimSrcNodeBlendT WalkRunBlendTCro {
+ EditorPos 23.6000004 15.6
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "MovementSpeed > 2 && !Raised"
+ Child0 "WalkCroRaisedBelndT"
+ Child1 "RunCro_ANIM"
+ OptimizeMin 1
+ OptimizeMax 1
+ SelectMainPath 0
+}
+    AnimSrcNodeBlendT WalkRunBlendTErc {
+ EditorPos -4.7000003 15.8
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "MovementSpeed > 2 && !Raised"
+ Child0 "WalkErcRaisedBelndT"
+ Child1 "RunErc_ANIM"
+ OptimizeMin 1
+ OptimizeMax 1
+ SelectMainPath 0
+}
+    AnimSrcNodeBlendT WalkRunBlendTL {
+ EditorPos 4.0999999 15.8
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "MovementSpeed > 2 && !Raised"
+ Child0 "WalkErcRaisedBlendTL"
+ Child1 "RunErcL_ANIM"
+ OptimizeMin 1
+ OptimizeMax 1
+ SelectMainPath 0
+}
+    AnimSrcNodeBlendT WalkRunBlendTR {
+ EditorPos 12.8000002 15.9
+ BlendTime 0.3
+ BlendFn S
+ TriggerOn ""
+ TriggerOff ""
+ Condition "MovementSpeed > 2 && !Raised"
+ Child0 "WalkErcRaisedBlendTR"
+ Child1 "RunErcR_ANIM"
+ OptimizeMin 1
+ OptimizeMax 1
+ SelectMainPath 0
+}
+    AnimSrcNodeStateMachine WalkingErc_SM {
+ EditorPos -7.5999999 24.8
+ states {
+  AnimSrcNodeState WeaponLow {
+   EditorPos -7.2000003 27
+   Child "WalkErc_ANIM"
+   StartCondition "true"
+   TimeStorage "Real Time"
+   IsExit 0
+  }
+  AnimSrcNodeState WeaponShoulder {
+   EditorPos -2.7 26.9
+   Child "RifleonShoulder_ANIM"
+   StartCondition ""
+   TimeStorage "Real Time"
+   IsExit 0
+  }
+  AnimSrcNodeState TransToShoulder {
+   EditorPos -4.9000001 26.2
+   Child "RifleOnShould_Add"
+   StartCondition ""
+   TimeStorage "Real Time"
+   IsExit 0
+  }
+  AnimSrcNodeState TransFromShoulder {
+   EditorPos -4.9000001 27.8
+   Child "RifletoLowAdd"
+   StartCondition ""
+   TimeStorage "Real Time"
+   IsExit 0
+  }
+ }
+ transitions {
+  AnimSrcNodeTransition "{0E7EC8B4D6FCF61D}" {
+   FromState "WeaponLow"
+   ToState "TransToShoulder"
+   Duration "0.3"
+   StartTime ""
+   Condition "AnimInstance == 3 && GetLowerRTime() > 15 && RandomPerc(10)"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E7EB9B4D6FCDCA0}" {
+   FromState "TransToShoulder"
+   ToState "WeaponShoulder"
+   Duration "0.4"
+   StartTime ""
+   Condition "RemainingTimeLess(0.05)"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E7EBAB4D6FCDE53}" {
+   FromState "WeaponShoulder"
+   ToState "TransFromShoulder"
+   Duration "0.1"
+   StartTime ""
+   Condition "GetLowerRTime() > 15 && RandomPerc(10)"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E8247B4D70003C1}" {
+   FromState "TransFromShoulder"
+   ToState "WeaponLow"
+   Duration "0.4"
+   StartTime ""
+   Condition "RemainingTimeLess(0.05)"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+ }
+}
+    AnimSrcNodeSource WeaponReload_ANIM {
+ EditorPos -44.5 13.4
+ Source "Moves.ReloadMag"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource Wlaking_ErcNoloop_ANIM {
+ EditorPos -10.6000004 27.3
+ Source "Moves.WalkErc"
+ Looptype "No Loop"
+}
+   }
+  }
+  AnimSrcGraphSheet Death {
+   Nodes {
+    AnimSrcNodeSource BodyBackAnim {
+ EditorPos 1.9 -8.1
+ Source "Deaths.BodyBack"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource BodyFrontAnim {
+ EditorPos 1.9 -8.7
+ Source "Deaths.BodyFront"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource BodyLeftAnim {
+ EditorPos 1.9 -7.5
+ Source "Deaths.BodyLeft"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource BodyRightAnim {
+ EditorPos 1.9 -6.9
+ Source "Deaths.BodyRight"
+ Looptype "No Loop"
+}
+    AnimSrcNodeGroupSelect DeathCroG {
+ EditorPos 1.4 -17.3
+ Child "DeathSTM"
+ Group "Deaths"
+ Column "Cro"
+}
+    AnimSrcNodeGroupSelect DeathCroRasG {
+ EditorPos 1.4 -16.6
+ Child "DeathSTM"
+ Group "Deaths"
+ Column "CroRas"
+}
+    AnimSrcNodeGroupSelect DeathErcG {
+ EditorPos -0.7 -17.3
+ Child "DeathSTM"
+ Group "Deaths"
+ Column "Erc"
+}
+    AnimSrcNodeGroupSelect DeathErcRasG {
+ EditorPos -0.7 -16.6
+ Child "DeathSTM"
+ Group "Deaths"
+ Column "ErcRas"
+}
+    AnimSrcNodeGroupSelect DeathPneG {
+ EditorPos 3.5 -17.3
+ Child "DeathSTM"
+ Group "Deaths"
+ Column "Pne"
+}
+    AnimSrcNodeGroupSelect DeathPneRasG {
+ EditorPos 3.5 -16.6
+ Child "DeathSTM"
+ Group "Deaths"
+ Column "PneRas"
+}
+    AnimSrcNodeStateMachine DeathSTM {
+ EditorPos 1.3000001 -14.5
+ states {
+  AnimSrcNodeState BodyLeft {
+   EditorPos 1.9 -12
+   Child "BodyLeftAnim"
+   StartCondition "GetCommandI(CMD_DEATH) == 0 && inRange(GetCommandF(CMD_DEATH), -135.0, -45.0)"
+   TimeStorage "Real Time"
+   IsExit 0
+  }
+  AnimSrcNodeState BodyFront {
+   EditorPos 1.9 -13.2
+   Child "BodyFrontAnim"
+   StartCondition "GetCommandI(CMD_DEATH) == 0 && inRange(GetCommandF(CMD_DEATH), -45.0, 45.0)"
+   TimeStorage "Real Time"
+   IsExit 0
+  }
+  AnimSrcNodeState BodyRight {
+   EditorPos 1.9 -11.4
+   Child "BodyRightAnim"
+   StartCondition "GetCommandI(CMD_DEATH) == 0 && inRange(GetCommandF(CMD_DEATH), 45.0, 135.0)"
+   TimeStorage "Real Time"
+   IsExit 0
+  }
+  AnimSrcNodeState BodyBack {
+   EditorPos 1.9 -12.6
+   Child "BodyBackAnim"
+   StartCondition "GetCommandI(CMD_DEATH) == 0 && !inRange(GetCommandF(CMD_DEATH), -135.0, 135.0)"
+   TimeStorage "Real Time"
+   IsExit 0
+  }
+  AnimSrcNodeState FastFront {
+   EditorPos 8.0 -13.2
+   Child "FastFrontAnim"
+   StartCondition "GetCommandI(CMD_DEATH) == 1 && inRange(GetCommandF(CMD_DEATH), -45.0, 45.0)"
+   TimeStorage "Real Time"
+   IsExit 0
+  }
+  AnimSrcNodeState FastBack {
+   EditorPos 8.0 -12.6
+   Child "FastBackAnim"
+   StartCondition "GetCommandI(CMD_DEATH) == 1 && !inRange(GetCommandF(CMD_DEATH), -135.0, 135.0)"
+   TimeStorage "Real Time"
+   IsExit 0
+  }
+  AnimSrcNodeState FastLeft {
+   EditorPos 8.0 -12
+   Child "FastLeftAnim"
+   StartCondition "GetCommandI(CMD_DEATH) == 1 && inRange(GetCommandF(CMD_DEATH), -135.0, -45.0)"
+   TimeStorage "Real Time"
+   IsExit 0
+  }
+  AnimSrcNodeState FastRight {
+   EditorPos 8.0 -11.4
+   Child "FastRightAnim"
+   StartCondition "GetCommandI(CMD_DEATH) == 1 && inRange(GetCommandF(CMD_DEATH), 45.0, 135.0)"
+   TimeStorage "Real Time"
+   IsExit 0
+  }
+ }
+ transitions {
+ }
+}
+    AnimSrcNodeStateMachine DeathStanceSTM {
+ EditorPos -1.2 -21.2
+ states {
+  AnimSrcNodeState Erc {
+   EditorPos -0.7 -19.7
+   Child "DeathErcG"
+   StartCondition "Stance == 0 && !Raised"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState Cro {
+   EditorPos 1.4 -19.7
+   Child "DeathCroG"
+   StartCondition "Stance == 1 && !Raised"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState Pne {
+   EditorPos 3.5 -19.7
+   Child "DeathPneG"
+   StartCondition "Stance == 2 && !Raised"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState ErcRas {
+   EditorPos -0.7 -19
+   Child "DeathErcRasG"
+   StartCondition "Stance == 0 && Raised"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState CroRas {
+   EditorPos 1.4 -19
+   Child "DeathCroRasG"
+   StartCondition "Stance == 1 && Raised"
+   TimeStorage Inherit
+   IsExit 0
+  }
+  AnimSrcNodeState PneRas {
+   EditorPos 3.5 -19
+   Child "DeathPneRasG"
+   StartCondition "Stance == 2 && Raised"
+   TimeStorage Inherit
+   IsExit 0
+  }
+ }
+ transitions {
+ }
+}
+    AnimSrcNodeSource FastBackAnim {
+ EditorPos 8.0 -8.1
+ Source "Deaths.FastBack"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource FastFrontAnim {
+ EditorPos 8.0 -8.7
+ Source "Deaths.FastFront"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource FastLeftAnim {
+ EditorPos 8.0 -7.5
+ Source "Deaths.FastLeft"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource FastRightAnim {
+ EditorPos 8.0 -6.9
+ Source "Deaths.FastRight"
+ Looptype "No Loop"
+}
+   }
+  }
+  AnimSrcGraphSheet Hits {
+   Nodes {
+    AnimSrcNodeStateMachine DamageFullBodySTM {
+ EditorPos 5.0999999 -10.7
+ states {
+  AnimSrcNodeState DamageHeavyErcRas {
+   EditorPos 5.5999999 -9.4
+   Child "DamageHeavyErcRas"
+   StartCondition "Stance == 0 && Raised && IsCommand(CMD_HIT_HEAVY)"
+   TimeStorage Inherit
+   IsExit 1
+  }
+  AnimSrcNodeState DamageHeavyErc {
+   EditorPos 8.0 -9.4
+   Child "DamageHeavyErc"
+   StartCondition "Stance == 0 && !Raised && IsCommand(CMD_HIT_HEAVY)"
+   TimeStorage Inherit
+   IsExit 1
+  }
+  AnimSrcNodeState DamageHeavyCroRas {
+   EditorPos 11.5 -9.4
+   Child "DamageHeavyCroRas"
+   StartCondition "Stance == 1 && Raised && IsCommand(CMD_HIT_HEAVY)"
+   TimeStorage Inherit
+   IsExit 1
+  }
+  AnimSrcNodeState DamageHeavyCro {
+   EditorPos 13.9000006 -9.4
+   Child "DamageHeavyCro"
+   StartCondition "Stance == 1 && !Raised && IsCommand(CMD_HIT_HEAVY)"
+   TimeStorage Inherit
+   IsExit 1
+  }
+  AnimSrcNodeState DamageHeavyPneRas {
+   EditorPos 17.5 -9.4
+   Child "DamageHeavyPneRas"
+   StartCondition "Stance == 2 && Raised && IsCommand(CMD_HIT_HEAVY)"
+   TimeStorage Inherit
+   IsExit 1
+  }
+  AnimSrcNodeState DamageHeavyPne {
+   EditorPos 20.3999996 -9.4
+   Child "DamageHeavyPne"
+   StartCondition "Stance == 2 && !Raised && IsCommand(CMD_HIT_HEAVY)"
+   TimeStorage Inherit
+   IsExit 1
+  }
+ }
+ transitions {
+ }
+}
+    AnimSrcNodeGroupSelect DamageHeavyCro {
+ EditorPos 13.9000006 -7.6
+ Child "DamageHeavyDirSTM"
+ Group "Damage"
+ Column "Cro"
+}
+    AnimSrcNodeGroupSelect DamageHeavyCroRas {
+ EditorPos 11.5 -7.6
+ Child "DamageHeavyDirSTM"
+ Group "Damage"
+ Column "CroRas"
+}
+    AnimSrcNodeStateMachine DamageHeavyDirSTM {
+ EditorPos 11.6999998 -4.6
+ states {
+  AnimSrcNodeState Back {
+   EditorPos 14.1999998 -2.2
+   Child "HeavyB"
+   StartCondition "(GetCommandI(CMD_HIT_HEAVY) == 1 && !inRange(GetCommandF(CMD_HIT_HEAVY), -135.0, 135.0))"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState Forward {
+   EditorPos 14.1999998 -3.2
+   Child "HeavyF"
+   StartCondition "(GetCommandI(CMD_HIT_HEAVY) == 1 && inRange(GetCommandF(CMD_HIT_HEAVY), -45.0, 45.0))"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState Left {
+   EditorPos 12.0 -2.7
+   Child "HeavyL"
+   StartCondition "(GetCommandI(CMD_HIT_HEAVY) == 1 && inRange(GetCommandF(CMD_HIT_HEAVY), -135.0, -45.0))"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState Right {
+   EditorPos 16.3999996 -2.7
+   Child "HeavyR"
+   StartCondition "(GetCommandI(CMD_HIT_HEAVY) == 1 && inRange(GetCommandF(CMD_HIT_HEAVY), 45.0, 135.0))"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+ }
+ transitions {
+ }
+}
+    AnimSrcNodeGroupSelect DamageHeavyErc {
+ EditorPos 8.0 -7.6
+ Child "DamageHeavyDirSTM"
+ Group "Damage"
+ Column "Erc"
+}
+    AnimSrcNodeGroupSelect DamageHeavyErcRas {
+ EditorPos 5.5999999 -7.6
+ Child "DamageHeavyDirSTM"
+ Group "Damage"
+ Column "ErcRas"
+}
+    AnimSrcNodeGroupSelect DamageHeavyPne {
+ EditorPos 20.3999996 -7.6
+ Child "DamageHeavyDirSTM"
+ Group "Damage"
+ Column "Pne"
+}
+    AnimSrcNodeGroupSelect DamageHeavyPneRas {
+ EditorPos 17.5 -7.6
+ Child "DamageHeavyDirSTM"
+ Group "Damage"
+ Column "PneRas"
+}
+    AnimSrcNodeSource DamageLightBSrc {
+ EditorPos -8.1999998 -0.5
+ Source "Damage.Light B"
+ Looptype "No Loop"
+}
+    AnimSrcNodeGroupSelect DamageLightCro {
+ EditorPos -6.8000002 -7.2
+ Child "DamageLightDirectional"
+ Group "Damage"
+ Column "Cro"
+}
+    AnimSrcNodeGroupSelect DamageLightCroRas {
+ EditorPos -4.7000003 -5.1
+ Child "DamageLightDirectional"
+ Group "Damage"
+ Column "CroRas"
+}
+    AnimSrcNodeBlendN DamageLightDirectional {
+ EditorPos -5.9000001 -1.4
+ BlendWeight "GetCommandF(CMD_HIT_LIGHT)"
+ BlendFn S
+ Thresholds {
+  -180.0
+  -90.0
+  0.0
+  90.0
+  180.0
+ }
+ Children {
+  "DamageLightBSrc"  "DamageLightLSrc"  "DamageLightFSrc"  "DamageLightRSrc"
+ }
+ IsCyclic 1
+}
+    AnimSrcNodeGroupSelect DamageLightErc {
+ EditorPos -1.2 -7.3
+ Child "DamageLightDirectional"
+ Group "Damage"
+ Column "Erc"
+}
+    AnimSrcNodeGroupSelect DamageLightErcRas {
+ EditorPos 1.2 -7.3
+ Child "DamageLightDirectional"
+ Group "Damage"
+ Column "ErcRas"
+}
+    AnimSrcNodeSource DamageLightFSrc {
+ EditorPos -4.8000002 0.2
+ Source "Damage.Light F"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource DamageLightLSrc {
+ EditorPos -7.0999999 0.1
+ Source "Damage.Light L"
+ Looptype "No Loop"
+}
+    AnimSrcNodeGroupSelect DamageLightPne {
+ EditorPos -15.1000004 -7.3
+ Child "DamageLightDirectional"
+ Group "Damage"
+ Column "Pne"
+}
+    AnimSrcNodeBlendN DamageLightPneBackB {
+ EditorPos -9.8000002 -6.7
+ BlendWeight "AimX"
+ BlendFn S
+ Thresholds {
+  -135.0
+  -60.0
+  0.0
+  60.0
+  135.0
+ }
+ Children {
+  "DamageLightCroRas"  "DamageLightPneRas"  "DamageLightPneRas"  "DamageLightPneRas"
+ }
+ IsCyclic 1
+}
+    AnimSrcNodeGroupSelect DamageLightPneRas {
+ EditorPos -9.4000006 -4.9
+ Child "DamageLightDirectional"
+ Group "Damage"
+ Column "PneRas"
+}
+    AnimSrcNodeSource DamageLightRSrc {
+ EditorPos -3.9000001 -0.6
+ Source "Damage.Light R"
+ Looptype "No Loop"
+}
+    AnimSrcNodeStateMachine DamageLightSTM {
+ EditorPos -1.7 -10.7
+ states {
+  AnimSrcNodeState DamageLightErc {
+   EditorPos -1.3000001 -9.4
+   Child "DamageLightErc"
+   StartCondition "Stance == 0 && !Raised && GetCommandI(CMD_HIT_LIGHT) == 0"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState DamageLightErcRas {
+   EditorPos 1.3000001 -9.4
+   Child "DamageLightErcRas"
+   StartCondition "Stance == 0 && Raised && GetCommandI(CMD_HIT_LIGHT) == 0"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState DamageLightCro {
+   EditorPos -6.8000002 -9.4
+   Child "DamageLightCro"
+   StartCondition "Stance == 1 && !Raised && GetCommandI(CMD_HIT_LIGHT) == 0"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState DamageLightPne {
+   EditorPos -15.1000004 -9.4
+   Child "DamageLightPne"
+   StartCondition "Stance == 2 && !Raised && GetCommandI(CMD_HIT_LIGHT) == 0"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState DamageLightCroRas {
+   EditorPos -3.9000001 -9.4
+   Child "DamageLightCroRas"
+   StartCondition "Stance == 1 && Raised && GetCommandI(CMD_HIT_LIGHT) == 0"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState DamageLightPneRas {
+   EditorPos -10.3000002 -9.4
+   Child "DamageLightPneBackB"
+   StartCondition "Stance == 2 && Raised && GetCommandI(CMD_HIT_LIGHT) == 0"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+ }
+ transitions {
+  AnimSrcNodeTransition "{0E8246B4D700020E}" {
+   FromState "DamageLightErc"
+   ToState "DamageLightErcRas"
+   Duration "0.2"
+   StartTime "GetLowerTime()"
+   Condition "Raised"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E8245B4D700005B}" {
+   FromState "DamageLightErcRas"
+   ToState "DamageLightErc"
+   Duration "0.2"
+   StartTime "GetLowerTime()"
+   Condition "!Raised"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E8244B4D6FFFEA8}" {
+   FromState "DamageLightCroRas"
+   ToState "DamageLightCro"
+   Duration "0.2"
+   StartTime "GetLowerTime()"
+   Condition "!Raised"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E824BB4D7000A8D}" {
+   FromState "DamageLightCro"
+   ToState "DamageLightCroRas"
+   Duration "0.2"
+   StartTime "GetLowerTime()"
+   Condition "Raised"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E824AB4D70008DA}" {
+   FromState "DamageLightPneRas"
+   ToState "DamageLightPne"
+   Duration "0.2"
+   StartTime "GetLowerTime()"
+   Condition "!Raised"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+  AnimSrcNodeTransition "{0E8249B4D7000727}" {
+   FromState "DamageLightPne"
+   ToState "DamageLightPneRas"
+   Duration "0.2"
+   StartTime "GetLowerTime()"
+   Condition "Raised"
+   BlendFn S
+   PostEval 1
+   MotionVecBlend 0x33 0
+  }
+ }
+}
+    AnimSrcNodeSource HeavyB {
+ EditorPos 14.1999998 0.5
+ Source "Damage.Heavy B"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource HeavyF {
+ EditorPos 14.1999998 -0.4
+ Source "Damage.Heavy F"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource HeavyL {
+ EditorPos 12.0 -0.4
+ Source "Damage.Heavy L"
+ Looptype "No Loop"
+}
+    AnimSrcNodeSource HeavyR {
+ EditorPos 16.3999996 -0.4
+ Source "Damage.Heavy R"
+ Looptype "No Loop"
+}
+    AnimSrcNodeStateMachine HitsSTM {
+ Tags {
+  "TagDamageHit"
+ }
+ EditorPos 0.8 -14.4
+ states {
+  AnimSrcNodeState LightHit {
+   EditorPos 1.0 -13.2
+   Child "DamageLightSTM"
+   StartCondition "IsCommand(CMD_HIT_LIGHT)"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+  AnimSrcNodeState HeavyHit {
+   EditorPos 3.8 -13.2
+   Child "DamageFullBodySTM"
+   StartCondition "IsCommand(CMD_HIT_HEAVY)"
+   TimeStorage "Real Time"
+   IsExit 1
+  }
+ }
+ transitions {
+ }
+}
+   }
+  }
+ }
+}

@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{077FF79C88177B3B}AI_Bandits/anims/animations/weaponfire.anm"
+ Author "nemysek"
+ ChangeDate -1655016591
+ Configurations {
+  TXAResourceClass PC {
+   SourceFile "weaponfire.txa"
+  }
+  TXAResourceClass XBOX_ONE : PC {
+  }
+  TXAResourceClass PS4 : PC {
+  }
+  TXAResourceClass LINUX : PC {
+  }
+ }
+}

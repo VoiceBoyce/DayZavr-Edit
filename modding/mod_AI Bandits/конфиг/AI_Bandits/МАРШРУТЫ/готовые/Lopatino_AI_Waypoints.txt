@@ -1,0 +1,30 @@
+void SpawnObject(string objType, vector objPos, vector objOrientation)
+{
+	Object m_Building = Object.Cast(GetGame().CreateObject(objType, objPos));
+	if (m_Building == null) return;
+	m_Building.SetAffectPathgraph(true, false);
+	GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(GetGame().UpdatePathgraphRegionByObject, 100, false, m_Building);
+	m_Building.SetPosition(objPos);
+	m_Building.SetOrientation(objOrientation);
+}
+
+
+
+SpawnObject( "bldr_prop_Barrel_Green", "2494.459961 254.632996 9624.889648", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "2516.080078 254.813004 9628.799805", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "2528.959961 256.571014 9738.679688", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "2628.780029 263.686005 9851.969727", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "2695.919922 274.035004 9972.240234", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "2701.050049 273.973999 10031.599609", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "2691.229980 274.032013 10057.700195", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "2727.669922 273.489014 10073.299805", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "2744.350098 274.093994 10002.599609", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "2704.270020 274.089996 9897.580078", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "2781.290039 274.161011 9853.870117", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "2846.550049 272.498993 9793.299805", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "2809.040039 269.057007 9760.379883", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "2715.350098 264.339996 9719.290039", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "2724.370117 262.701996 9679.190430", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "2728.250000 262.695007 9648.360352", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Blue", "2656.959961 259.095001 9562.910156", "0.000000 0.000000 -0.000000" );
+SpawnObject( "bldr_prop_Barrel_Red", "2572.149902 257.678986 9590.629883", "0.000000 0.000000 -0.000000" );

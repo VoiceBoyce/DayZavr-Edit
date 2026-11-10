@@ -1,0 +1,202 @@
+AnimSetTemplateSource {
+ Groups {
+  AnimSetTemplateSource_AnimationGroup "{5AFBFA81927044A2}" {
+   Name "Damage"
+   Animations {
+    "Heavy B"
+    "Heavy F"
+    "Heavy L"
+    "Heavy R"
+    "Light B"
+    "Light F"
+    "Light L"
+    "Light R"
+   }
+   Columns {
+    "Cro"
+    "CroRas"
+    "Erc"
+    "ErcRas"
+    "Pne"
+    "PneRas"
+   }
+  }
+  AnimSetTemplateSource_AnimationGroup "{5AFBF981927042EF}" {
+   Name "Deaths"
+   Animations {
+    "BodyBack"
+    "BodyFront"
+    "BodyLeft"
+    "BodyRight"
+    "FastBack"
+    "FastFront"
+    "FastLeft"
+    "FastRight"
+   }
+   Columns {
+    "Cro"
+    "CroRas"
+    "Erc"
+    "ErcRas"
+    "Pne"
+    "PneRas"
+   }
+  }
+  AnimSetTemplateSource_AnimationGroup "{5AFBF8819270413C}" {
+   Name "Default"
+   Animations {
+    "akm"
+    "p_1hd_campfire_idle01"
+    "p_bow_erc_aimspace"
+    "p_campfire_idle01"
+    "p_cro_idle"
+    "p_cro_sit_v2_loop"
+    "p_erc_dance_victory"
+    "p_erc_greeting_loop"
+    "p_erc_idle"
+    "p_fcl_idle_03"
+    "p_fcl_talking"
+    "p_rfl_erc_aimspace"
+    "p_rfl_erc_attackr_buttstock_inplace_ras"
+    "p_rfl_erc_idle_low"
+    "p_rfl_erc_idle_ras"
+    "p_rfl_erc_run_climb_110"
+    "p_rfl_erc_run_jump_110_over_in"
+    "p_rfl_erc_run_jump_110_over_out"
+    "p_rfl_erc_run_jumpf_l_50_in"
+    "p_rfl_erc_run_jumpf_l_50_out"
+    "p_rfl_erc_runf_low"
+    "p_rfl_erc_walkf_low"
+    "p_shoulderw_movement_in"
+    "p_shoulderw_movement_out"
+    "p_shoulderw_walkf"
+    "z_obstacle_110cm"
+    "z_obstacle_160cm"
+    "z_obstacle_210cm"
+    "z_obstacle_50cm"
+   }
+   Columns {
+    "Main"
+   }
+  }
+  AnimSetTemplateSource_AnimationGroup "{5AFBF78192703F89}" {
+   Name "Look"
+   Animations {
+    "IdleCro"
+    "IdleErc"
+    "MoveCro"
+    "MoveErc"
+   }
+   Columns {
+    "Knife"
+    "Pistol"
+    "Rifle"
+    "Unarmed"
+   }
+  }
+  AnimSetTemplateSource_AnimationGroup "{5AFBF68192703DD6}" {
+   Name "Moves"
+   Animations {
+    "AimCro"
+    "AimCroWalk"
+    "AimErc"
+    "AimErcWalk"
+    "AimErcWalkL"
+    "AimErcWalkR"
+    "FireAttack"
+    "IK"
+    "IdleCro"
+    "IdleErc"
+    "IdlePne"
+    "MeleeAttack"
+    "RaisedCro"
+    "RaisedCroWalk"
+    "RaisedErc"
+    "RaisedErcWalk"
+    "RaisedErcWalkL"
+    "RaisedErcWalkR"
+    "ReloadMag"
+    "RunCro"
+    "RunErc"
+    "RunErcL"
+    "RunErcR"
+    "ThrowCro1"
+    "ThrowCro2"
+    "ThrowErc1"
+    "ThrowErc2"
+    "WalkCro"
+    "WalkErc"
+    "WalkErcL"
+    "WalkErcR"
+    "WalkPne"
+   }
+   Columns {
+    "Knife"
+    "Pistol"
+    "Pne"
+    "Rifle"
+    "Unarmed"
+   }
+  }
+  AnimSetTemplateSource_AnimationGroup "{5AFBF58192703C23}" {
+   Name "MovesCro"
+   Animations {
+    "Aim"
+    "FireAttack"
+    "IK"
+    "Idle"
+    "Run"
+    "Walk"
+   }
+   Columns {
+    "Knife"
+    "Pistol"
+    "Rifle"
+    "Unarmed"
+   }
+  }
+  AnimSetTemplateSource_AnimationGroup "{5AFBF48192703A70}" {
+   Name "MovesPne"
+   Animations {
+    "Aim"
+    "Crawl"
+    "FireAttack"
+    "IK"
+    "Idle"
+   }
+   Columns {
+    "Knife"
+    "Pistol"
+    "Rifle"
+    "Unarmed"
+   }
+  }
+  AnimSetTemplateSource_AnimationGroup "{5AFC0381927053ED}" {
+   Name "Turns"
+   Animations {
+    "CroLow180L"
+    "CroLow180R"
+    "CroLow90L"
+    "CroLow90R"
+    "CroRas180L"
+    "CroRas180R"
+    "CroRas90L"
+    "CroRas90R"
+    "ErcLow180L"
+    "ErcLow180R"
+    "ErcLow90L"
+    "ErcLow90R"
+    "ErcRas180L"
+    "ErcRas180R"
+    "ErcRas90L"
+    "ErcRas90R"
+   }
+   Columns {
+    "Knife"
+    "Pistol"
+    "Rifle"
+    "Unarmed"
+   }
+  }
+ }
+}

@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{65D1B18C29431C98}AI_Bandits/anims/animations/akmfire.anm"
+ Author "mazlik"
+ ChangeDate 1104950018
+ Configurations {
+  TXAResourceClass PC {
+   SourceFile "akmfire.txa"
+  }
+  TXAResourceClass XBOX_ONE : PC {
+  }
+  TXAResourceClass PS4 : PC {
+  }
+  TXAResourceClass LINUX : PC {
+  }
+ }
+}

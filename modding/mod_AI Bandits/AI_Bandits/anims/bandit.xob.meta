@@ -1,0 +1,21 @@
+MetaFileClass {
+ Name "{893AC3E840549D8D}AI_Bandits/anims/bandit.xob"
+ Author "nemysek"
+ ChangeDate -1476086740
+ Configurations {
+  FBXResourceClass PC {
+   SourceFile "bandit.fbx"
+   ExportSkinning 1
+   MaterialAssigns {
+   }
+   GeometryParams {
+   }
+  }
+  FBXResourceClass XBOX_ONE : PC {
+  }
+  FBXResourceClass PS4 : PC {
+  }
+  FBXResourceClass LINUX : PC {
+  }
+ }
+}
