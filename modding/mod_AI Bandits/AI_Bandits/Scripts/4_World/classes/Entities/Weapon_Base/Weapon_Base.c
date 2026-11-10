@@ -6,27 +6,27 @@ modded class Weapon_Base
 	{
 		super.OnRPC(sender, rpc_type, ctx);
 
-	
+
 		if(!GetGame().IsDedicatedServer())
 		{
-			if(rpc_type == 8832135611)
-			{		
+			if(rpc_type == AIB_RPC.WEAPON_FIRE)
+			{
 				int mi = GetCurrentMuzzle();
 				EEFired(mi, GetCurrentMode(mi), string.Empty);
     			WeaponForceFireSound();
 			}
-			if(rpc_type == 8832135612)
-			{		
-				
+			if(rpc_type == AIB_RPC.BULLET_FLYBY)
+			{
+
 				ref Param1<vector> bulletpos = new Param1<vector>(vector.Zero);
-				
+
 				if (ctx.Read(bulletpos))
 				{
 					vector position = bulletpos.param1;
 					//Print("bullet pos " + position);
 					BanditBulletSound(position);
 				}
-    			
+
 			}
 		}
 	}
@@ -36,7 +36,7 @@ modded class Weapon_Base
 	{
 		ref BanditWeaponFireSound ssss = new BanditWeaponFireSound(GetType(), GetPosition());
 	}
-	
+
 	void BanditBulletSound(vector position)
 	{
 		ref BanditBulletFlybyFireSound ssss = new BanditBulletFlybyFireSound(position);
@@ -54,7 +54,7 @@ class BanditWeaponFireSound
 
 		m_Position = pos;
 
-		
+
 
 		auto soundSets = new array<string>;
 
@@ -64,7 +64,7 @@ class BanditWeaponFireSound
 
 		string silencedSoundPath = string.Format("CfgWeapons %1 Single soundSetShot", wpn_type);
 
-		
+
 
 		if(GetGame().ConfigIsExisting(singleSoundPath))
 
@@ -74,14 +74,14 @@ class BanditWeaponFireSound
 
 			GetGame().ConfigGetTextArray(semiAutoSoundPath, soundSets);
 
-		
+
 		foreach(string soundSet : soundSets)
 		{
 			MakeSound(soundSet);
 		}
 	}
 
-	
+
 
 	void MakeSound(string sound_set)
 	{
@@ -95,12 +95,12 @@ class BanditWeaponFireSound
 			builder.AddVariable("houses", 1);
 			builder.AddVariable("meadows", 1);
 			builder.AddVariable("sea", 1);
-			builder.AddVariable("trees", 1);		
+			builder.AddVariable("trees", 1);
 
 			if(GetGame().GetPlayer())
 
 				builder.AddVariable("interior", GetGame().GetPlayer().IsSoundInsideBuilding()); //zmenit na infected (getparent?)
-				
+
 
 			SoundObject soundObject = builder.BuildSoundObject();
 
@@ -120,7 +120,7 @@ class BanditWeaponFireSound
 
 	}
 
-	
+
 
 	protected void AttenuateSoundIfNecessary(SoundObject soundObject)
 
@@ -128,7 +128,7 @@ class BanditWeaponFireSound
 
 		Man pl = GetGame().GetPlayer();
 
-		
+
 
 		if(pl)
 
@@ -152,7 +152,7 @@ class BanditWeaponFireSound
 
 	}
 
-	
+
 
 	AbstractWave PlaySound(SoundObject so, SoundObjectBuilder sob)
 	{
@@ -166,7 +166,7 @@ class BanditWeaponFireSound
 		{
 			return null;
 		}
-	}		
+	}
 }
 
 //SuperSonicCrack_SoundSet
@@ -179,12 +179,12 @@ class BanditBulletFlybyFireSound
 
 	void BanditBulletFlybyFireSound(vector pos)
 	{
-		m_Position = pos;	
+		m_Position = pos;
 		MakeSound("bulletFlyBy_SoundSet");
 		MakeSound("SuperSonicCrack_SoundSet");
 	}
 
-	
+
 
 	void MakeSound(string sound_set)
 	{
@@ -201,11 +201,11 @@ class BanditBulletFlybyFireSound
 			builder.AddVariable("trees", 1); */
 			if (sound_set == "SuperSonicCrack_SoundSet")
 			{
-				builder.AddVariable("Close", 1);		
+				builder.AddVariable("Close", 1);
 			}
 			if(GetGame().GetPlayer() && sound_set == "SuperSonicCrack_SoundSet")
 			{
-				builder.AddVariable("interior", GetGame().GetPlayer().IsSoundInsideBuilding()); 
+				builder.AddVariable("interior", GetGame().GetPlayer().IsSoundInsideBuilding());
 			}
 			SoundObject soundObject = builder.BuildSoundObject();
 
@@ -224,7 +224,7 @@ class BanditBulletFlybyFireSound
 
 	}
 
-	
+
 
 	protected void AttenuateSoundIfNecessary(SoundObject soundObject)
 
@@ -232,7 +232,7 @@ class BanditBulletFlybyFireSound
 
 		Man pl = GetGame().GetPlayer();
 
-		
+
 
 		if(pl)
 
@@ -256,7 +256,7 @@ class BanditBulletFlybyFireSound
 
 	}
 
-	
+
 
 	AbstractWave PlaySound(SoundObject so, SoundObjectBuilder sob)
 	{
@@ -270,5 +270,5 @@ class BanditBulletFlybyFireSound
 		{
 			return null;
 		}
-	}		
+	}
 }

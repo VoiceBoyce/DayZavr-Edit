@@ -1,27 +1,31 @@
 class AIBLogger {
-	
-	static void Log(string txt) {
-		string file_path = "$profile:\\AI_Bandits\\AIB.log";
-		FileHandle logFile = OpenFile(file_path, FileMode.APPEND);
+
+	// Раньше файл открывался при каждом вызове и при выключенной отладке не закрывался: утечка дескрипторов
+	static bool IsDebug() {
 		StaticAIBConfig config = GetDayZGame().GetStaticAIBConfig();
-		if (logFile != 0 && config && config.NPCDebug) {
-				FPrintln(logFile, GetDate() + " [AI Bandits] " + txt);
-				CloseFile(logFile);
-		}
-	}
-	
-	static void Debug(string txt) {
-		string file_path = "$profile:\\AI_Bandits\\AIB.log";
-		FileHandle logFile = OpenFile(file_path, FileMode.APPEND);
-		StaticAIBConfig config = GetDayZGame().GetStaticAIBConfig();
-		if (logFile != 0 && config.NPCDebug) {
-				FPrintln(logFile, GetDate() + " [AI Bandits Debug] " + txt);
-				CloseFile(logFile);
-		}
+		return config && config.NPCDebug;
 	}
 
-	
-		
+	static void Write(string prefix, string txt) {
+		if (!IsDebug())
+			return;
+		FileHandle logFile = OpenFile("$profile:\\AI_Bandits\\AIB.log", FileMode.APPEND);
+		if (logFile == 0)
+			return;
+		FPrintln(logFile, GetDate() + prefix + txt);
+		CloseFile(logFile);
+	}
+
+	static void Log(string txt) {
+		Write(" [AI Bandits] ", txt);
+	}
+
+	static void Debug(string txt) {
+		Write(" [AI Bandits Debug] ", txt);
+	}
+
+
+
 	static private string GetDate(bool fileFriendly = false) {
 		int year, month, day, hour, minute, second;
 

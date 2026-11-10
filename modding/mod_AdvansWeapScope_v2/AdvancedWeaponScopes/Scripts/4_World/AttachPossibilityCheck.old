@@ -1,0 +1,844 @@
+modded class AD_DHF5 extends ItemOptics
+{
+	override bool CanPutAsAttachment( EntityAI parent )
+	{	
+		if( parent.IsKindOf("M14")||parent.IsKindOf("M1A")) 
+		{	
+			if(parent.FindAttachmentBySlotName("m1aScopeRail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}	
+		
+		if( parent.IsKindOf("Doc_M14_marksman") || parent.IsKindOf("Doc_M14_marksman_black")) 
+		{		
+			if(parent.FindAttachmentBySlotName("weaponM14Mount") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;			
+		}
+		
+		if( parent.IsKindOf("MassM110")||parent.IsKindOf("MassMini14")||parent.IsKindOf("MassM300")||parent.IsKindOf("MassM300_Camo")||parent.IsKindOf("MassStevens301")||parent.IsKindOf("MassStevens301SHORT")||parent.IsKindOf("MassStevens301SuperSHORT")||parent.IsKindOf("Massarmsan")||parent.IsKindOf("Massm19")||parent.IsKindOf("MassM19_Wood")||parent.IsKindOf("MassKivaari")||parent.IsKindOf("AD_Weapons_SCARH_Base")||parent.IsKindOf("AD_Weapons_ACR_Base")||parent.IsKindOf("Massm24")||parent.IsKindOf("AD_Weapons_M200_Base"))
+		{	
+			if(parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}				
+        return true;	
+        return super.CanPutAsAttachment(parent);		
+	}
+}
+modded class AD_NFATACR_1_8 extends ItemOptics
+{
+	override bool CanPutAsAttachment( EntityAI parent )
+	{	
+		if( parent.IsKindOf("M14")||parent.IsKindOf("M1A")) 
+		{	
+			if(parent.FindAttachmentBySlotName("m1aScopeRail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}	
+		
+		if( parent.IsKindOf("Doc_M14_marksman") || parent.IsKindOf("Doc_M14_marksman_black")) 
+		{		
+			if(parent.FindAttachmentBySlotName("weaponM14Mount") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;			
+		}
+		
+		if( parent.IsKindOf("MassM110")||parent.IsKindOf("MassMini14")||parent.IsKindOf("MassM300")||parent.IsKindOf("MassM300_Camo")||parent.IsKindOf("MassStevens301")||parent.IsKindOf("MassStevens301SHORT")||parent.IsKindOf("MassStevens301SuperSHORT")||parent.IsKindOf("Massarmsan")||parent.IsKindOf("Massm19")||parent.IsKindOf("MassM19_Wood")||parent.IsKindOf("MassKivaari")||parent.IsKindOf("AD_Weapons_SCARH_Base")||parent.IsKindOf("AD_Weapons_ACR_Base")||parent.IsKindOf("Massm24")||parent.IsKindOf("AD_Weapons_M200_Base"))
+		{	
+			if(parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}				
+        return true;	
+        return super.CanPutAsAttachment(parent);		
+	}
+}
+modded class AD_LeupoldMk4 extends ItemOptics
+{
+	override bool CanPutAsAttachment( EntityAI parent )
+	{	
+		if( parent.IsKindOf("M14")||parent.IsKindOf("M1A")) 
+		{	
+			if(parent.FindAttachmentBySlotName("m1aScopeRail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}	
+		
+		if( parent.IsKindOf("Doc_M14_marksman") || parent.IsKindOf("Doc_M14_marksman_black")) 
+		{		
+			if(parent.FindAttachmentBySlotName("weaponM14Mount") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;			
+		}
+		
+		if( parent.IsKindOf("MassM110")||parent.IsKindOf("MassMini14")||parent.IsKindOf("MassM300")||parent.IsKindOf("MassM300_Camo")||parent.IsKindOf("MassStevens301")||parent.IsKindOf("MassStevens301SHORT")||parent.IsKindOf("MassStevens301SuperSHORT")||parent.IsKindOf("Massarmsan")||parent.IsKindOf("Massm19")||parent.IsKindOf("MassM19_Wood")||parent.IsKindOf("MassKivaari")||parent.IsKindOf("AD_Weapons_SCARH_Base")||parent.IsKindOf("AD_Weapons_ACR_Base")||parent.IsKindOf("Massm24")||parent.IsKindOf("AD_Weapons_M200_Base"))
+		{	
+			if(parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}				
+        return true;	
+        return super.CanPutAsAttachment(parent);		
+	}
+}
+modded class AD_NFATACR extends ItemOptics
+{
+	override bool CanPutAsAttachment( EntityAI parent )
+	{	
+		if( parent.IsKindOf("M14")||parent.IsKindOf("M1A")) 
+		{	
+			if(parent.FindAttachmentBySlotName("m1aScopeRail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}	
+		
+		if( parent.IsKindOf("Doc_M14_marksman") || parent.IsKindOf("Doc_M14_marksman_black")) 
+		{		
+			if(parent.FindAttachmentBySlotName("weaponM14Mount") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;			
+		}
+		
+		if( parent.IsKindOf("MassM110")||parent.IsKindOf("MassMini14")||parent.IsKindOf("MassM300")||parent.IsKindOf("MassM300_Camo")||parent.IsKindOf("MassStevens301")||parent.IsKindOf("MassStevens301SHORT")||parent.IsKindOf("MassStevens301SuperSHORT")||parent.IsKindOf("Massarmsan")||parent.IsKindOf("Massm19")||parent.IsKindOf("MassM19_Wood")||parent.IsKindOf("MassKivaari")||parent.IsKindOf("AD_Weapons_SCARH_Base")||parent.IsKindOf("AD_Weapons_ACR_Base")||parent.IsKindOf("Massm24")||parent.IsKindOf("AD_Weapons_M200_Base"))
+		{	
+			if(parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}				
+        return true;	
+        return super.CanPutAsAttachment(parent);		
+	}
+}
+modded class AD_Pilad extends ItemOptics
+{
+	override bool CanPutAsAttachment( EntityAI parent )
+	{	
+		if( parent.IsKindOf("M14")||parent.IsKindOf("M1A")) 
+		{	
+			if(parent.FindAttachmentBySlotName("m1aScopeRail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )			
+			{
+				return true;
+			}
+			return false;	
+		}	
+		
+		if( parent.IsKindOf("Doc_M14_marksman")||parent.IsKindOf("Doc_M14_marksman_black")) 
+		{		
+			if(parent.FindAttachmentBySlotName("weaponM14Mount") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;			
+		}
+		
+		if( parent.IsKindOf("MassM110")||parent.IsKindOf("MassMini14")||parent.IsKindOf("MassM300")||parent.IsKindOf("MassM300_Camo")||parent.IsKindOf("MassStevens301")||parent.IsKindOf("MassStevens301SHORT")||parent.IsKindOf("MassStevens301SuperSHORT")||parent.IsKindOf("Massarmsan")||parent.IsKindOf("Massm19")||parent.IsKindOf("MassM19_Wood")||parent.IsKindOf("MassKivaari")||parent.IsKindOf("AD_Weapons_SCARH_Base")||parent.IsKindOf("AD_Weapons_ACR_Base")||parent.IsKindOf("Massm24")||parent.IsKindOf("AD_Weapons_M200_Base"))
+		{	
+			if(parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}				
+        return true;	
+        return super.CanPutAsAttachment(parent);		
+	}
+}
+modded class AD_PVS4 extends ItemOptics
+{
+	override bool CanPutAsAttachment( EntityAI parent )
+	{	
+		if( parent.IsKindOf("M14")||parent.IsKindOf("Doc_M14_marksman")||parent.IsKindOf("Doc_M14_marksman_black")) 
+		{	
+			if(parent.FindAttachmentBySlotName("weaponM14Mount") != NULL || parent.FindAttachmentBySlotName("m1aScopeRail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}	
+		
+		if( parent.IsKindOf("M1A")) 
+		{	
+			if(parent.FindAttachmentBySlotName("m1aScopeRail") == NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}			
+
+		if( parent.IsKindOf("MassM110")||parent.IsKindOf("MassMini14")||parent.IsKindOf("MassM300")||parent.IsKindOf("MassM300_Camo")||parent.IsKindOf("MassStevens301")||parent.IsKindOf("MassStevens301SHORT")||parent.IsKindOf("MassStevens301SuperSHORT")||parent.IsKindOf("Massarmsan")||parent.IsKindOf("Massm19")||parent.IsKindOf("MassM19_Wood")||parent.IsKindOf("MassKivaari")||parent.IsKindOf("AD_Weapons_SCARH_Base")||parent.IsKindOf("AD_Weapons_ACR_Base")||parent.IsKindOf("Massm24")||parent.IsKindOf("AD_Weapons_M200_Base")||parent.IsKindOf("Expansion_AWM"))
+		{	
+			if(parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}			
+		
+		if( parent.IsKindOf("Doc_G3A3")||parent.IsKindOf("Doc_G3SG1")) 
+		{
+			if(parent.FindAttachmentBySlotName("weaponG3Rail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;
+		}		
+		return true;		
+        return super.CanPutAsAttachment(parent);		
+	}
+}
+modded class AD_OKP7 extends ItemOptics
+{
+	override bool CanPutAsAttachment( EntityAI parent )
+	{	
+		if( parent.IsKindOf("M14")||parent.IsKindOf("Doc_M14_marksman")||parent.IsKindOf("Doc_M14_marksman_black")) 
+		{	
+			if(parent.FindAttachmentBySlotName("weaponM14Mount") != NULL || parent.FindAttachmentBySlotName("m1aScopeRail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}
+
+		if( parent.IsKindOf("M1A")) 
+		{	
+			if(parent.FindAttachmentBySlotName("m1aScopeRail") == NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}				
+
+		if( parent.IsKindOf("MassM110")||parent.IsKindOf("MassMini14")||parent.IsKindOf("MassM300")||parent.IsKindOf("MassM300_Camo")||parent.IsKindOf("MassStevens301")||parent.IsKindOf("MassStevens301SHORT")||parent.IsKindOf("MassStevens301SuperSHORT")||parent.IsKindOf("Massarmsan")||parent.IsKindOf("Massm19")||parent.IsKindOf("MassM19_Wood")||parent.IsKindOf("MassKivaari")||parent.IsKindOf("AD_Weapons_SCARH_Base")||parent.IsKindOf("AD_Weapons_ACR_Base")||parent.IsKindOf("Massm24")||parent.IsKindOf("AD_Weapons_M200_Base")||parent.IsKindOf("Expansion_AWM"))
+		{	
+			if(parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}			
+		
+		if( parent.IsKindOf("Doc_G3A3")||parent.IsKindOf("Doc_G3SG1")) 
+		{
+			if(parent.FindAttachmentBySlotName("weaponG3Rail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;
+		}		
+		return true;		
+        return super.CanPutAsAttachment(parent);		
+	}
+}
+/*
+modded class M4_T3NRDSOptic extends ItemOptics
+{
+	override bool CanPutAsAttachment( EntityAI parent )
+	{	
+		if( parent.IsKindOf("M14")||parent.IsKindOf("Doc_M14_marksman")||parent.IsKindOf("Doc_M14_marksman_black")) 
+		{	
+			if(parent.FindAttachmentBySlotName("weaponM14Mount") != NULL || parent.FindAttachmentBySlotName("m1aScopeRail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}	
+		
+		if( parent.IsKindOf("M1A")) 
+		{	
+			if(parent.FindAttachmentBySlotName("m1aScopeRail") == NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}				
+
+		if( parent.IsKindOf("MassM110")||parent.IsKindOf("MassMini14")||parent.IsKindOf("MassM300")||parent.IsKindOf("MassM300_Camo")||parent.IsKindOf("MassStevens301")||parent.IsKindOf("MassStevens301SHORT")||parent.IsKindOf("MassStevens301SuperSHORT")||parent.IsKindOf("Massarmsan")||parent.IsKindOf("Massm19")||parent.IsKindOf("MassM19_Wood")||parent.IsKindOf("MassKivaari")||parent.IsKindOf("AD_Weapons_SCARH_Base")||parent.IsKindOf("AD_Weapons_ACR_Base")||parent.IsKindOf("Massm24")||parent.IsKindOf("AD_Weapons_M200_Base")||parent.IsKindOf("Expansion_AWM"))
+		{	
+			if(parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}			
+		
+		if( parent.IsKindOf("Doc_G3A3")||parent.IsKindOf("Doc_G3SG1")) 
+		{
+			if(parent.FindAttachmentBySlotName("weaponG3Rail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;
+		}		
+		return true;	
+        return super.CanPutAsAttachment(parent);		
+	}
+}
+modded class ReflexOptic extends ItemOptics
+{
+	override bool CanPutAsAttachment( EntityAI parent )
+	{	
+		if( parent.IsKindOf("M14")||parent.IsKindOf("Doc_M14_marksman")||parent.IsKindOf("Doc_M14_marksman_black")) 
+		{	
+			if(parent.FindAttachmentBySlotName("weaponM14Mount") != NULL || parent.FindAttachmentBySlotName("m1aScopeRail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}	
+		
+		if( parent.IsKindOf("M1A")) 
+		{	
+			if(parent.FindAttachmentBySlotName("m1aScopeRail") == NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}				
+
+		if( parent.IsKindOf("MassM110")||parent.IsKindOf("MassMini14")||parent.IsKindOf("MassM300")||parent.IsKindOf("MassM300_Camo")||parent.IsKindOf("MassStevens301")||parent.IsKindOf("MassStevens301SHORT")||parent.IsKindOf("MassStevens301SuperSHORT")||parent.IsKindOf("Massarmsan")||parent.IsKindOf("Massm19")||parent.IsKindOf("MassM19_Wood")||parent.IsKindOf("MassKivaari")||parent.IsKindOf("AD_Weapons_SCARH_Base")||parent.IsKindOf("AD_Weapons_ACR_Base")||parent.IsKindOf("Massm24")||parent.IsKindOf("AD_Weapons_M200_Base")||parent.IsKindOf("Expansion_AWM"))
+		{	
+			if(parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}			
+		
+		if( parent.IsKindOf("Doc_G3A3")||parent.IsKindOf("Doc_G3SG1")) 
+		{
+			if(parent.FindAttachmentBySlotName("weaponG3Rail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;
+		}		
+		return true;		
+        return super.CanPutAsAttachment(parent);		
+	}
+}
+*/
+modded class AD_XPS34 extends ItemOptics
+{
+	override bool CanPutAsAttachment( EntityAI parent )
+	{	
+		if( parent.IsKindOf("M14")||parent.IsKindOf("Doc_M14_marksman")||parent.IsKindOf("Doc_M14_marksman_black")) 
+		{	
+			if(parent.FindAttachmentBySlotName("weaponM14Mount") != NULL || parent.FindAttachmentBySlotName("m1aScopeRail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}	
+		
+		if( parent.IsKindOf("M1A")) 
+		{	
+			if(parent.FindAttachmentBySlotName("m1aScopeRail") == NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}				
+
+		if( parent.IsKindOf("MassM110")||parent.IsKindOf("MassMini14")||parent.IsKindOf("MassM300")||parent.IsKindOf("MassM300_Camo")||parent.IsKindOf("MassStevens301")||parent.IsKindOf("MassStevens301SHORT")||parent.IsKindOf("MassStevens301SuperSHORT")||parent.IsKindOf("Massarmsan")||parent.IsKindOf("Massm19")||parent.IsKindOf("MassM19_Wood")||parent.IsKindOf("MassKivaari")||parent.IsKindOf("AD_Weapons_SCARH_Base")||parent.IsKindOf("AD_Weapons_ACR_Base")||parent.IsKindOf("Massm24")||parent.IsKindOf("AD_Weapons_M200_Base")||parent.IsKindOf("Expansion_AWM"))
+		{	
+			if(parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}			
+		
+		if( parent.IsKindOf("Doc_G3A3")||parent.IsKindOf("Doc_G3SG1")) 
+		{
+			if(parent.FindAttachmentBySlotName("weaponG3Rail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;
+		}		
+		return true;		
+        return super.CanPutAsAttachment(parent);		
+	}
+}
+modded class AD_G33 extends ItemOptics
+{
+	override bool CanPutAsAttachment( EntityAI parent )
+	{	
+		if( parent.IsKindOf("M14")||parent.IsKindOf("Doc_M14_marksman")||parent.IsKindOf("Doc_M14_marksman_black")) 
+		{	
+			if(parent.FindAttachmentBySlotName("weaponM14Mount") != NULL || parent.FindAttachmentBySlotName("m1aScopeRail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}	
+		
+		if( parent.IsKindOf("M1A")) 
+		{	
+			if(parent.FindAttachmentBySlotName("m1aScopeRail") == NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}				
+
+		if( parent.IsKindOf("MassM110")||parent.IsKindOf("MassMini14")||parent.IsKindOf("MassM300")||parent.IsKindOf("MassM300_Camo")||parent.IsKindOf("MassStevens301")||parent.IsKindOf("MassStevens301SHORT")||parent.IsKindOf("MassStevens301SuperSHORT")||parent.IsKindOf("Massarmsan")||parent.IsKindOf("Massm19")||parent.IsKindOf("MassM19_Wood")||parent.IsKindOf("MassKivaari")||parent.IsKindOf("AD_Weapons_SCARH_Base")||parent.IsKindOf("AD_Weapons_ACR_Base")||parent.IsKindOf("Massm24")||parent.IsKindOf("AD_Weapons_M200_Base")||parent.IsKindOf("Expansion_AWM"))
+		{	
+			if(parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}			
+		
+		if( parent.IsKindOf("Doc_G3A3")||parent.IsKindOf("Doc_G3SG1")) 
+		{
+			if(parent.FindAttachmentBySlotName("weaponG3Rail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;
+		}		
+		return true;		
+        return super.CanPutAsAttachment(parent);		
+	}
+}
+modded class AD_XPS34_HHS extends ItemOptics
+{
+	override bool CanPutAsAttachment( EntityAI parent )
+	{	
+		if( parent.IsKindOf("M14")||parent.IsKindOf("Doc_M14_marksman")||parent.IsKindOf("Doc_M14_marksman_black")) 
+		{	
+			if(parent.FindAttachmentBySlotName("weaponM14Mount") != NULL || parent.FindAttachmentBySlotName("m1aScopeRail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}	
+		
+		if( parent.IsKindOf("M1A")) 
+		{	
+			if(parent.FindAttachmentBySlotName("m1aScopeRail") == NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}				
+
+		if( parent.IsKindOf("MassM110")||parent.IsKindOf("MassMini14")||parent.IsKindOf("MassM300")||parent.IsKindOf("MassM300_Camo")||parent.IsKindOf("MassStevens301")||parent.IsKindOf("MassStevens301SHORT")||parent.IsKindOf("MassStevens301SuperSHORT")||parent.IsKindOf("Massarmsan")||parent.IsKindOf("Massm19")||parent.IsKindOf("MassM19_Wood")||parent.IsKindOf("MassKivaari")||parent.IsKindOf("AD_Weapons_SCARH_Base")||parent.IsKindOf("AD_Weapons_ACR_Base")||parent.IsKindOf("Massm24")||parent.IsKindOf("AD_Weapons_M200_Base")||parent.IsKindOf("Expansion_AWM"))
+		{	
+			if(parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}			
+		
+		if( parent.IsKindOf("Doc_G3A3")||parent.IsKindOf("Doc_G3SG1")) 
+		{
+			if(parent.FindAttachmentBySlotName("weaponG3Rail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;
+		}		
+		return true;		
+        return super.CanPutAsAttachment(parent);		
+	}
+}
+/*
+modded class LongrangeOptic extends ItemOptics
+{
+	override bool CanPutAsAttachment( EntityAI parent )
+	{	
+		if( parent.IsKindOf("M1A")||parent.IsKindOf("M14")||parent.IsKindOf("Doc_M14_marksman")||parent.IsKindOf("Doc_M14_marksman_black")) 
+		{	
+			if(parent.FindAttachmentBySlotName("weaponM14Mount") != NULL || parent.FindAttachmentBySlotName("m1aScopeRail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}	
+
+		if( parent.IsKindOf("MassM110")||parent.IsKindOf("MassMini14")||parent.IsKindOf("MassM300")||parent.IsKindOf("MassM300_Camo")||parent.IsKindOf("MassStevens301")||parent.IsKindOf("MassStevens301SHORT")||parent.IsKindOf("MassStevens301SuperSHORT")||parent.IsKindOf("Massarmsan")||parent.IsKindOf("Massm19")||parent.IsKindOf("MassM19_Wood")||parent.IsKindOf("MassKivaari")||parent.IsKindOf("AD_Weapons_SCARH_Base")||parent.IsKindOf("AD_Weapons_ACR_Base")||parent.IsKindOf("Massm24")||parent.IsKindOf("AD_Weapons_M200_Base")||parent.IsKindOf("Expansion_AWM"))
+		{	
+			if(parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}			
+		
+		if( parent.IsKindOf("Doc_G3A3")||parent.IsKindOf("Doc_G3SG1")) 
+		{
+			if(parent.FindAttachmentBySlotName("weaponG3Rail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;
+		}		
+		return true;	
+        return super.CanPutAsAttachment(parent);		
+	}
+}
+modded class HuntingOptic extends ItemOptics
+{
+	override bool CanPutAsAttachment( EntityAI parent )
+	{	
+		if( parent.IsKindOf("M1A")||parent.IsKindOf("M14")||parent.IsKindOf("Doc_M14_marksman")||parent.IsKindOf("Doc_M14_marksman_black")) 
+		{	
+			if(parent.FindAttachmentBySlotName("weaponM14Mount") != NULL || parent.FindAttachmentBySlotName("m1aScopeRail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}	
+
+		if( parent.IsKindOf("MassM110")||parent.IsKindOf("MassMini14")||parent.IsKindOf("MassM300")||parent.IsKindOf("MassM300_Camo")||parent.IsKindOf("MassStevens301")||parent.IsKindOf("MassStevens301SHORT")||parent.IsKindOf("MassStevens301SuperSHORT")||parent.IsKindOf("Massarmsan")||parent.IsKindOf("Massm19")||parent.IsKindOf("MassM19_Wood")||parent.IsKindOf("MassKivaari")||parent.IsKindOf("AD_Weapons_SCARH_Base")||parent.IsKindOf("AD_Weapons_ACR_Base")||parent.IsKindOf("Massm24")||parent.IsKindOf("AD_Weapons_M200_Base")||parent.IsKindOf("Expansion_AWM"))
+		{	
+			if(parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}			
+		
+		if( parent.IsKindOf("Doc_G3A3")||parent.IsKindOf("Doc_G3SG1")) 
+		{
+			if(parent.FindAttachmentBySlotName("weaponG3Rail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;
+		}		
+		return true;	
+        return super.CanPutAsAttachment(parent);		
+	}
+}
+modded class M68Optic extends ItemOptics
+{
+	override bool CanPutAsAttachment( EntityAI parent )
+	{	
+		if( parent.IsKindOf("M14")||parent.IsKindOf("Doc_M14_marksman")||parent.IsKindOf("Doc_M14_marksman_black")) 
+		{	
+			if(parent.FindAttachmentBySlotName("weaponM14Mount") != NULL || parent.FindAttachmentBySlotName("m1aScopeRail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}	
+		
+		if( parent.IsKindOf("M1A")) 
+		{	
+			if(parent.FindAttachmentBySlotName("m1aScopeRail") == NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}				
+
+		if( parent.IsKindOf("MassM110")||parent.IsKindOf("MassMini14")||parent.IsKindOf("MassM300")||parent.IsKindOf("MassM300_Camo")||parent.IsKindOf("MassStevens301")||parent.IsKindOf("MassStevens301SHORT")||parent.IsKindOf("MassStevens301SuperSHORT")||parent.IsKindOf("Massarmsan")||parent.IsKindOf("Massm19")||parent.IsKindOf("MassM19_Wood")||parent.IsKindOf("MassKivaari")||parent.IsKindOf("AD_Weapons_SCARH_Base")||parent.IsKindOf("AD_Weapons_ACR_Base")||parent.IsKindOf("Massm24")||parent.IsKindOf("AD_Weapons_M200_Base")||parent.IsKindOf("Expansion_AWM")) 
+		{	
+			if(parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}			
+		
+		if( parent.IsKindOf("Doc_G3A3")||parent.IsKindOf("Doc_G3SG1")) 
+		{
+			if(parent.FindAttachmentBySlotName("weaponG3Rail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;
+		}		
+		return true;		
+        return super.CanPutAsAttachment(parent);		
+	}
+}
+modded class ACOGOptic extends ItemOptics
+{
+	override bool CanPutAsAttachment( EntityAI parent )
+	{	
+		if( parent.IsKindOf("M14")||parent.IsKindOf("Doc_M14_marksman")||parent.IsKindOf("Doc_M14_marksman_black")) 
+		{	
+			if(parent.FindAttachmentBySlotName("weaponM14Mount") != NULL || parent.FindAttachmentBySlotName("m1aScopeRail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}	
+		
+		if( parent.IsKindOf("M1A")) 
+		{	
+			if(parent.FindAttachmentBySlotName("m1aScopeRail") == NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}				
+
+		if( parent.IsKindOf("MassM110")||parent.IsKindOf("MassMini14")||parent.IsKindOf("MassM300")||parent.IsKindOf("MassM300_Camo")||parent.IsKindOf("MassStevens301")||parent.IsKindOf("MassStevens301SHORT")||parent.IsKindOf("MassStevens301SuperSHORT")||parent.IsKindOf("Massarmsan")||parent.IsKindOf("Massm19")||parent.IsKindOf("MassM19_Wood")||parent.IsKindOf("MassKivaari")||parent.IsKindOf("AD_Weapons_SCARH_Base")||parent.IsKindOf("AD_Weapons_ACR_Base")||parent.IsKindOf("Massm24")||parent.IsKindOf("AD_Weapons_M200_Base")||parent.IsKindOf("Expansion_AWM"))
+		{	
+			if(parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}			
+		
+		if( parent.IsKindOf("Doc_G3A3")||parent.IsKindOf("Doc_G3SG1")) 
+		{
+			if(parent.FindAttachmentBySlotName("weaponG3Rail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;
+		}		
+		return true;		
+        return super.CanPutAsAttachment(parent);		
+	}
+}
+*/
+modded class AD_ACOG extends ItemOptics
+{
+	override bool CanPutAsAttachment( EntityAI parent )
+	{	
+		if( parent.IsKindOf("M14")||parent.IsKindOf("Doc_M14_marksman")||parent.IsKindOf("Doc_M14_marksman_black")) 
+		{	
+			if(parent.FindAttachmentBySlotName("weaponM14Mount") != NULL || parent.FindAttachmentBySlotName("m1aScopeRail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}	
+		
+		if( parent.IsKindOf("M1A")) 
+		{	
+			if(parent.FindAttachmentBySlotName("m1aScopeRail") == NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}				
+
+		if( parent.IsKindOf("MassM110")||parent.IsKindOf("MassMini14")||parent.IsKindOf("MassM300")||parent.IsKindOf("MassM300_Camo")||parent.IsKindOf("MassStevens301")||parent.IsKindOf("MassStevens301SHORT")||parent.IsKindOf("MassStevens301SuperSHORT")||parent.IsKindOf("Massarmsan")||parent.IsKindOf("Massm19")||parent.IsKindOf("MassM19_Wood")||parent.IsKindOf("MassKivaari")||parent.IsKindOf("AD_Weapons_SCARH_Base")||parent.IsKindOf("AD_Weapons_ACR_Base")||parent.IsKindOf("Massm24")||parent.IsKindOf("AD_Weapons_M200_Base")||parent.IsKindOf("Expansion_AWM"))
+		{	
+			if(parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}			
+		
+		if( parent.IsKindOf("Doc_G3A3")||parent.IsKindOf("Doc_G3SG1")) 
+		{
+			if(parent.FindAttachmentBySlotName("weaponG3Rail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;
+		}		
+		return true;		
+        return super.CanPutAsAttachment(parent);		
+	}
+}
+modded class AD_ACOG_RMR extends ItemOptics
+{
+	override bool CanPutAsAttachment( EntityAI parent )
+	{	
+		if( parent.IsKindOf("M14")||parent.IsKindOf("Doc_M14_marksman")||parent.IsKindOf("Doc_M14_marksman_black")) 
+		{	
+			if(parent.FindAttachmentBySlotName("weaponM14Mount") != NULL || parent.FindAttachmentBySlotName("m1aScopeRail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}	
+		
+		if( parent.IsKindOf("M1A")) 
+		{	
+			if(parent.FindAttachmentBySlotName("m1aScopeRail") == NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}				
+
+		if( parent.IsKindOf("MassM110")||parent.IsKindOf("MassMini14")||parent.IsKindOf("MassM300")||parent.IsKindOf("MassM300_Camo")||parent.IsKindOf("MassStevens301")||parent.IsKindOf("MassStevens301SHORT")||parent.IsKindOf("MassStevens301SuperSHORT")||parent.IsKindOf("Massarmsan")||parent.IsKindOf("Massm19")||parent.IsKindOf("MassM19_Wood")||parent.IsKindOf("MassKivaari")||parent.IsKindOf("AD_Weapons_SCARH_Base")||parent.IsKindOf("AD_Weapons_ACR_Base")||parent.IsKindOf("Massm24")||parent.IsKindOf("AD_Weapons_M200_Base")||parent.IsKindOf("Expansion_AWM"))
+		{	
+			if(parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}			
+		
+		if( parent.IsKindOf("Doc_G3A3")||parent.IsKindOf("Doc_G3SG1")) 
+		{
+			if(parent.FindAttachmentBySlotName("weaponG3Rail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;
+		}		
+		return true;		
+        return super.CanPutAsAttachment(parent);		
+	}
+}
+modded class AD_RMR_TM extends ItemOptics
+{
+	override bool CanPutAsAttachment( EntityAI parent )
+	{	
+		if( parent.IsKindOf("M14")||parent.IsKindOf("Doc_M14_marksman")||parent.IsKindOf("Doc_M14_marksman_black")) 
+		{	
+			if(parent.FindAttachmentBySlotName("weaponM14Mount") != NULL || parent.FindAttachmentBySlotName("m1aScopeRail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}	
+		
+		if( parent.IsKindOf("M1A")) 
+		{	
+			if(parent.FindAttachmentBySlotName("m1aScopeRail") == NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}				
+
+		if( parent.IsKindOf("MassM110")||parent.IsKindOf("MassMini14")||parent.IsKindOf("MassM300")||parent.IsKindOf("MassM300_Camo")||parent.IsKindOf("MassStevens301")||parent.IsKindOf("MassStevens301SHORT")||parent.IsKindOf("MassStevens301SuperSHORT")||parent.IsKindOf("Massarmsan")||parent.IsKindOf("Massm19")||parent.IsKindOf("MassM19_Wood")||parent.IsKindOf("MassKivaari")||parent.IsKindOf("AD_Weapons_SCARH_Base")||parent.IsKindOf("AD_Weapons_ACR_Base")||parent.IsKindOf("Massm24")||parent.IsKindOf("AD_Weapons_M200_Base")||parent.IsKindOf("Expansion_AWM"))
+		{	
+			if(parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}			
+		
+		if( parent.IsKindOf("Doc_G3A3")||parent.IsKindOf("Doc_G3SG1")) 
+		{
+			if(parent.FindAttachmentBySlotName("weaponG3Rail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;
+		}		
+		return true;		
+        return super.CanPutAsAttachment(parent);		
+	}
+}
+modded class AD_RMR_LM extends ItemOptics
+{
+	override bool CanPutAsAttachment( EntityAI parent )
+	{	
+		if( parent.IsKindOf("M14")||parent.IsKindOf("Doc_M14_marksman")||parent.IsKindOf("Doc_M14_marksman_black")) 
+		{	
+			if(parent.FindAttachmentBySlotName("weaponM14Mount") != NULL || parent.FindAttachmentBySlotName("m1aScopeRail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}	
+		
+		if( parent.IsKindOf("M1A")) 
+		{	
+			if(parent.FindAttachmentBySlotName("m1aScopeRail") == NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}				
+
+		if( parent.IsKindOf("MassM110")||parent.IsKindOf("MassMini14")||parent.IsKindOf("MassM300")||parent.IsKindOf("MassM300_Camo")||parent.IsKindOf("MassStevens301")||parent.IsKindOf("MassStevens301SHORT")||parent.IsKindOf("MassStevens301SuperSHORT")||parent.IsKindOf("Massarmsan")||parent.IsKindOf("Massm19")||parent.IsKindOf("MassM19_Wood")||parent.IsKindOf("MassKivaari")||parent.IsKindOf("AD_Weapons_SCARH_Base")||parent.IsKindOf("AD_Weapons_ACR_Base")||parent.IsKindOf("Massm24")||parent.IsKindOf("AD_Weapons_M200_Base")||parent.IsKindOf("Expansion_AWM"))
+		{	
+			if(parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}			
+		
+		if( parent.IsKindOf("Doc_G3A3")||parent.IsKindOf("Doc_G3SG1")) 
+		{
+			if(parent.FindAttachmentBySlotName("weaponG3Rail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;
+		}		
+		return true;		
+        return super.CanPutAsAttachment(parent);		
+	}
+}
+modded class AD_SpecterDR_Base extends ItemOptics
+{
+	override bool CanPutAsAttachment( EntityAI parent )
+	{	
+		if( parent.IsKindOf("M14")||parent.IsKindOf("Doc_M14_marksman")||parent.IsKindOf("Doc_M14_marksman_black")) 
+		{	
+			if(parent.FindAttachmentBySlotName("weaponM14Mount") != NULL || parent.FindAttachmentBySlotName("m1aScopeRail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}	
+		
+		if( parent.IsKindOf("M1A")) 
+		{	
+			if(parent.FindAttachmentBySlotName("m1aScopeRail") == NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}				
+
+		if( parent.IsKindOf("MassM110")||parent.IsKindOf("MassMini14")||parent.IsKindOf("MassM300")||parent.IsKindOf("MassM300_Camo")||parent.IsKindOf("MassStevens301")||parent.IsKindOf("MassStevens301SHORT")||parent.IsKindOf("MassStevens301SuperSHORT")||parent.IsKindOf("Massarmsan")||parent.IsKindOf("Massm19")||parent.IsKindOf("MassM19_Wood")||parent.IsKindOf("MassKivaari")||parent.IsKindOf("AD_Weapons_SCARH_Base")||parent.IsKindOf("AD_Weapons_ACR_Base")||parent.IsKindOf("Massm24")||parent.IsKindOf("AD_Weapons_M200_Base")||parent.IsKindOf("Expansion_AWM"))
+		{	
+			if(parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL && parent.FindAttachmentBySlotName("sniperOptics") == NULL )
+			{
+				return true;
+			}
+			return false;	
+		}			
+		
+		if( parent.IsKindOf("Doc_G3A3")||parent.IsKindOf("Doc_G3SG1")) 
+		{
+			if(parent.FindAttachmentBySlotName("weaponG3Rail") != NULL && parent.FindAttachmentBySlotName("weaponOptics") == NULL  && parent.FindAttachmentBySlotName("weaponOpticsHunting") == NULL && parent.FindAttachmentBySlotName("weaponOpticsLRS") == NULL )
+			{
+				return true;
+			}
+			return false;
+		}		
+		return true;		
+        return super.CanPutAsAttachment(parent);		
+	}
+}

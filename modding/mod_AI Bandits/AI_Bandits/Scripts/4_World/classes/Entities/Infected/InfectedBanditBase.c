@@ -61,6 +61,45 @@ class InfectedBanditBase extends DayZInfected
 	protected int m_OrientationSynced = -1;
 	protected float m_OrientationTimer;
 	protected float m_MovementSpeed = -1;
+
+	// Прореживание тяжёлых проверок: раньше лучи и поиск цели шли каждый тик у каждого бота
+	protected const float RAY_SCAN_INTERVAL = 0.25;
+	protected const float FAR_SCAN_INTERVAL = 0.2;
+	protected float m_RayScanTimer;
+	protected float m_FarScanTimer;
+	protected ref set<Object> m_RayGeom = new set<Object>;
+	protected ref set<Object> m_RayView = new set<Object>;
+
+
+	// Точность от расстояния, стойки и движения цели
+	protected const float ACC_FULL_DIST = 25.0;		// до этого расстояния точность как в конфиге
+	protected const float ACC_FAR_DIST = 200.0;		// на этом расстоянии и дальше
+	protected const float ACC_FAR_FACTOR = 0.35;	// остаётся такая доля точности
+
+	// Память об угрозе и тревога группы
+	protected const float THREAT_MEMORY_S = 20.0;	// сколько помним стрелявшего
+	protected const float THREAT_RANGE = 300.0;		// дальше не реагируем
+	protected const float GROUP_ALERT_RANGE = 80.0;	// кого из группы поднимаем по тревоге
+	protected PlayerBase m_ThreatPlayer;
+	protected float m_ThreatTime;
+
+	// Застревание на маршруте
+	protected const float STUCK_CHECK_INTERVAL = 3.0;
+	protected const float STUCK_MIN_MOVE = 0.5;		// меньше этого за проверку = стоит на месте
+	protected const float STUCK_WAYPOINT_DIST = 4.0;	// у точки маршрута стоять нормально
+	protected const float STUCK_TIME = 6.0;			// столько стоит вдали от точки = застрял
+	protected const float STUCK_TELEPORT_NO_PLAYER = 60.0;	// переносим, только если игроков нет ближе
+	protected const float ESCAPE_TIME = 2.5;			// сколько секунд бот выходит из тупика сам
+	protected const float ESCAPE_CHECK_DIST = 3.0;		// свободное направление: в эту сторону 3 м без препятствий
+	protected float m_EscapeTime;
+	protected int m_EscapeNextWaypoint = -1;
+	protected vector m_StuckLastPos;
+	protected float m_StuckTimer;
+	protected float m_StuckIdleTime;
+	protected int m_StuckCount;
+
+	// Журнал решений (только при NPCDebug: 1)
+	protected EntityAI m_DbgLastTarget;
 	protected float m_MovementDirection;
 
 	protected vector m_DefaultHitPosition;
@@ -171,6 +210,8 @@ class InfectedBanditBase extends DayZInfected
 		RegisterNetSyncVariableInt("m_TalkingNPC_ID");
 		RegisterNetSyncVariableInt("m_ShouldPlayEmoteID");
 		RegisterNetSyncVariableBool("m_Raised");
+		// Поза («стоять» у статичных NPC) раньше не доходила до клиентов: там она оставалась 1
+		RegisterNetSyncVariableInt("m_Pose", 0, 15);
 
 		//! sets default hit position and cache it here (mainly for impact particles)
 		m_DefaultHitPosition = SetDefaultHitPosition(GetDayZInfectedType().GetDefaultHitPositionComponent());
@@ -184,6 +225,9 @@ class InfectedBanditBase extends DayZInfected
 
 		m_AllTargetObjects = new array<Object>;
 		m_TargetableObjects = new array<typename>;
+		// Разносим проверки разных ботов по разным кадрам
+		m_RayScanTimer = Math.RandomFloat(0, RAY_SCAN_INTERVAL);
+		m_FarScanTimer = Math.RandomFloat(0, FAR_SCAN_INTERVAL);
 		m_TargetableObjects.Insert(PlayerBase);
 		m_TargetableObjects.Insert(AnimalBase);
 		m_TargetableObjects.Insert(ZombieBase);
@@ -250,11 +294,15 @@ class InfectedBanditBase extends DayZInfected
 
 		if (!GetGame().IsDedicatedServer())
 		{
-			if (rpc_type == 8832135811)
+			if (rpc_type == AIB_RPC.WEAPON_VISIBILITY)
 			{
+				// Перед броском гранаты оружие прячется, после броска возвращается.
+				// Раньше оба сообщения прятали оружие, и после гранаты бот стрелял невидимым стволом.
+				Param1<bool> hide = new Param1<bool>(true);
+				ctx.Read(hide);
 				m_WeaponEntity = EntityAI.Cast(GetChildren());
-				m_WeaponEntity.SetInvisible(true);
-				Print(m_WeaponEntity.GetType());
+				if (m_WeaponEntity)
+					m_WeaponEntity.SetInvisible(hide.param1);
 			}
 		}
 	}
@@ -623,6 +671,13 @@ class InfectedBanditBase extends DayZInfected
 	{
 		if (!GetGame().IsServer())
 			return;
+
+		// Повторная выдача (оружие пропало или оказалось в 0 0 0): старое удаляем, иначе оно остаётся в мире
+		if (m_WeaponEntity)
+		{
+			GetGame().ObjectDelete(m_WeaponEntity);
+			m_WeaponEntity = null;
+		}
 		// DeleteHeldItems();
 		// EntityAI weaponEntity = EntityAI.Cast(GetGame().CreateObject(itemhands, GetPosition()));
 		EntityAI weaponEntity, attachment;
@@ -649,18 +704,14 @@ class InfectedBanditBase extends DayZInfected
 					for (i = 0; i < attachments.Count(); i++)
 					{
 						attachmentName = attachments.Get(i);
-						attachment = EntityAI.Cast(GetGame().CreateObjectEx(attachmentName, "0 0 0", ECE_CREATEPHYSICS | ECE_DYNAMIC_PERSISTENCY | ECE_NOPERSISTENCY_WORLD));
-
-						if (attachment)
+						// Тип определяем по конфигу. Раньше для проверки создавался лишний предмет в 0 0 0 и оставался там.
+						if (GetGame().ConfigIsExisting("CfgMagazines " + attachmentName))
 						{
-							if (Magazine_Base.Cast(attachment)) // Ověření, zda je to zásobník
-							{
-								oWpn.SpawnAmmo(attachmentName);
-							}
-							else
-							{
-								oWpn.GetInventory().CreateAttachment(attachmentName);
-							}
+							oWpn.SpawnAmmo(attachmentName);
+						}
+						else
+						{
+							oWpn.GetInventory().CreateAttachment(attachmentName);
 						}
 					}
 				}
@@ -672,13 +723,7 @@ class InfectedBanditBase extends DayZInfected
 					for (i = 0; i < attachments.Count(); i++)
 					{
 						attachmentName = attachments.Get(i);
-						attachment = EntityAI.Cast(GetGame().CreateObjectEx(attachmentName, "0 0 0", ECE_CREATEPHYSICS | ECE_DYNAMIC_PERSISTENCY | ECE_NOPERSISTENCY_WORLD));
-
-						if (attachment)
-						{
-
-							weaponEntity.GetInventory().CreateAttachment(attachmentName);
-						}
+						weaponEntity.GetInventory().CreateAttachment(attachmentName);
 					}
 				}
 			}
@@ -697,6 +742,12 @@ class InfectedBanditBase extends DayZInfected
 
 			// SetupStartingAmmo();
 			m_WeaponEntity.SetTakeable(false);
+
+			// Дальняя сетевая зона только для оружия бота: так его выстрелы доходят до клиентов издалека.
+			// Раньше это стояло в конфиге Rifle_Base и FNX45_Base и касалось всего оружия на сервере.
+			InventoryItem farItem = InventoryItem.Cast(m_WeaponEntity);
+			if (farItem)
+				farItem.ForceFarBubble(true);
 			// m_WeaponSpawnTime = GetGame().GetTime();
 
 			GetGame().RemoteObjectTreeDelete(weaponEntity);
@@ -799,39 +850,39 @@ class InfectedBanditBase extends DayZInfected
 	{
 		return m_Stance;
 	}
-	
+
 	void SetMovementDirection(float dir)
 	{
 		m_MovementDirection = dir;
 	}
-	
+
 	float GetMovementDirection()
 	{
 		return m_MovementDirection;
 	}
-	
+
 	void SetLookX (float lookx)
 	{
 		m_LookX = lookx;
 	}
-	
+
 	float GetLookX()
 	{
 		return m_LookX;
-		
+
 	}
-	
+
 	void SetLookY (float looky)
 	{
 		m_LookY = looky;
 	}
-	
+
 	float GetLookY()
 	{
 		return m_LookY;
-		
+
 	}
-	
+
 
 	// ** GROUPS ** //
 
@@ -1017,6 +1068,8 @@ class InfectedBanditBase extends DayZInfected
 	void SetPose(int pose)
 	{
 		m_Pose = pose;
+		if (GetGame() && GetGame().IsServer())
+			SetSynchDirty();
 	}
 
 	void Raise()
@@ -1352,6 +1405,13 @@ class InfectedBanditBase extends DayZInfected
 			DayZInfectedCommandScript ics = GetCommand_Script();
 			if (BanditCommandStay.Cast(ics) != null)
 			{
+				// Мёртвого бота и бота без позы выпускаем из «стоять».
+				// Иначе смерть не обрабатывалась (оружие выпадало, а бот стоял) и бот замирал на месте.
+				if (!IsAlive() || GetPose() < 1)
+				{
+					ics.SetFlagFinished(true);
+					return false;
+				}
 				return true;
 			}
 		}
@@ -1371,7 +1431,7 @@ class InfectedBanditBase extends DayZInfected
 			{
 				m_AIAgent.SetKeepInIdle(true);
 			}
-			
+
 		}
 		if (!IsSniper() && m_Waypoints.Count() == 1)
 		{
@@ -1386,10 +1446,23 @@ class InfectedBanditBase extends DayZInfected
 	{
 		if (super.ModCommandHandlerAfter(pDt, pCurrentCommandID, pCurrentCommandFinished))
 			return true;
+		// Двери, цель лучом и проверка оружия нужны только серверу и 4 раза в секунду, а не каждый тик
+		if (!GetGame().IsServer())
+			return false;
+
+		m_RayScanTimer -= pDt;
+		if (m_RayScanTimer > 0)
+			return false;
+		m_RayScanTimer = RAY_SCAN_INTERVAL;
+
+		UpdateStuck(RAY_SCAN_INTERVAL);
+
 		vector from = ModelToWorld("0 1 0.1");
 		vector to = ModelToWorld("0 1 2.0");
 		vector to100 = ModelToWorld("0 1 100.0");
-		SearchAndOpenDoors(from, to);
+		// Двери ищем только на ходу
+		if (m_MovementSpeed > 0)
+			SearchAndOpenDoors(from, to);
 		EntityAI ent = SearchTargetByRaycastVector(from,to100,this);
 		// Každých X sekund nebo jen pokud předtím fix nebyl
 		if (GetGame().IsServer() /*&& !m_WeaponFixAttempted*/)
@@ -1563,7 +1636,7 @@ class InfectedBanditBase extends DayZInfected
 		//Print("diff 1: " + diff);
 		diff = Math.Round(diff);
 		//Print("diff 2: " + diff);
-		
+
 		if (m_OrientationTimer >= 2.0 || m_OrientationSynced == -1 || Math.AbsInt(diff) > ORIENTATION_SYNC_THRESHOLD)
 		{
 			m_OrientationTimer = 0.0;
@@ -1962,6 +2035,9 @@ class InfectedBanditBase extends DayZInfected
 
 	void ClearTarget()
 	{
+		if (m_AwareTurning)
+			ReleaseAwareTurn(GetInputController());
+
 		m_ActualTarget = NULL;
 		_targetPlayer = NULL;
 		_targetCreature = NULL;
@@ -1971,100 +2047,101 @@ class InfectedBanditBase extends DayZInfected
 		_attackCount = 0;
 	}
 
+	// Прямая видимость по огневой геометрии: стены, двери, заборы и стволы деревьев закрывают, кусты нет.
+	// Раньше проверка шла через RayCastBullet с маской слоёв, и боты видели и «простреливали» игрока сквозь дома.
+	protected bool AIB_IsMine(Object obj)
+	{
+		if (!obj)
+			return false;
+		if (obj == this)
+			return true;
+		EntityAI e = EntityAI.Cast(obj);
+		return e && e.GetHierarchyRoot() == this;
+	}
+
+	protected bool AIB_IsTargetPart(Object obj, EntityAI target, vector end)
+	{
+		if (!obj)
+			return false;
+		EntityAI e = EntityAI.Cast(obj);
+		EntityAI root;
+		if (e)
+			root = e.GetHierarchyRoot();
+		if (target && (obj == target || root == target))
+			return true;
+		// Человек (или его вещь) у самой точки прицеливания: это и есть цель
+		Man man = Man.Cast(root);
+		if (!man)
+			man = Man.Cast(obj);
+		return man && vector.Distance(man.GetPosition(), end) < 2.0;
+	}
+
+	// Прямая видимость по огневой геометрии через RaycastRVProxy: стены, двери, контейнеры,
+	// жёсткие кусты и стволы закрывают. Раньше проверка шла через RayCastBullet с маской слоёв,
+	// и боты видели и «простреливали» игрока сквозь стены и контейнеры.
+	protected bool AIB_LineBlocked(vector end, EntityAI target)
+	{
+		vector head = GetBonePositionWS(GetBoneIndexByName("Head"));
+		vector dir = end - head;
+		if (dir.Length() < 0.8)
+			return false;
+		dir.Normalize();
+		vector start = head + dir * 0.3;
+
+		RaycastRVParams rp = new RaycastRVParams(start, end, this, 0.05);
+		rp.type = ObjIntersectFire;
+		rp.flags = CollisionFlags.ALLOBJECTS;
+		rp.groundOnly = false;
+
+		array<ref RaycastRVResult> results = new array<ref RaycastRVResult>;
+		if (!DayZPhysics.RaycastRVProxy(rp, results) || results.Count() == 0)
+			return false;
+
+		// Порядок результатов не гарантирован: берём ближайшее к боту попадание (как scene_raycast у dayz-mcp)
+		RaycastRVResult nearest;
+		float nearestSq = float.MAX;
+		foreach (RaycastRVResult r : results)
+		{
+			if (!r)
+				continue;
+			// Свой шлем, оружие, одежда
+			if (AIB_IsMine(r.obj) || AIB_IsMine(r.parent))
+				continue;
+			float dSq = vector.DistanceSq(start, r.pos);
+			if (dSq < nearestSq)
+			{
+				nearestSq = dSq;
+				nearest = r;
+			}
+		}
+		if (!nearest)
+			return false;
+
+		Object obj = nearest.obj;
+		if (nearest.parent)
+			obj = nearest.parent;
+
+		if (AIB_IsTargetPart(nearest.obj, target, end) || AIB_IsTargetPart(obj, target, end))
+			return false;
+
+		// Первое препятствие у самой точки прицеливания не считаем
+		if (vector.Distance(nearest.pos, end) < 0.6)
+			return false;
+
+		return true;
+	}
+
 	bool IsViewOccludedFor(vector end, EntityAI entity)
 	{
-		vector start = GetBonePositionWS(GetBoneIndexByName("Head")); // GetPosition() + "0 1.5 0";
-		// vector head = GetBonePositionMS(GetBoneIndexByName("Head"));
-		// vector start = ModelToWorld(head+Vector(0,0,0.3));
-		vector hitPos, hitNormal;
-		Object hitObject;
-		float hitFraction;
-
-		set<Object> objects = new set<Object>;
-		vector contact_dir;
-		int contact_component;
-
-		PhxInteractionLayers layerMask = PhxInteractionLayers.BUILDING | PhxInteractionLayers.CHARACTER | PhxInteractionLayers.BUILDING | PhxInteractionLayers.VEHICLE | PhxInteractionLayers.TERRAIN;
-		// should do raycast but no navmesh raycast
-		bool raycast = DayZPhysics.RayCastBullet(start, end, layerMask, null, hitObject, hitPos, hitNormal, hitFraction);
-
-		// bool raycast = DayZPhysics.RaycastRV( start, end, hitPos, contact_dir, contact_component, objects, this, this, false, false, ObjIntersectView, 0.005 );
-
-		// Print("RAYCAST " + raycast + " start " + start + " end " + end + " hitpos " + hitPos + " hitObject " + hitObject);
-		// GetGame().ChatPlayer("raycast hit " + hitObject);
-		if (hitObject == entity)
-		{
-			// Print("car hit occluded");
-			return false;
-		}
-		if (raycast)
-		{
-			float dist = vector.Distance(end, hitPos);
-			// GetGame().ChatPlayer("raycast dist " + dist);
-			if (dist < 0.8)
-			{
-				// Print("eAI RAYCAST HIT");
-				// GetGame().ChatPlayer("raycast false " );
-				return false;
-			}
-			// GetGame().ChatPlayer("raycast true " );
-			return true;
-			// Print("RAYCAST TRUE");
-		}
-		else
-		{
-			// GetGame().ChatPlayer("raycast false 2 " );
-			return false;
-		}
-		// return true;
-		// Print("eAI Path Blocked " + PathBlocked(start, end, hitPos, hitNormal));
-		return PathBlocked(start, end, hitPos, hitNormal);
+		return AIB_LineBlocked(end, entity);
 	}
+
 
 	bool IsViewOccluded(vector end)
 	{
-		vector start = GetBonePositionWS(GetBoneIndexByName("Head")); // GetPosition() + "0 1.5 0";
-		// vector head = GetBonePositionMS(GetBoneIndexByName("Head"));
-		// vector start = ModelToWorld(head+Vector(0,0,0.3));
-		vector hitPos, hitNormal;
-		Object hitObject;
-		float hitFraction;
-
-		set<Object> objects = new set<Object>;
-		vector contact_dir;
-		int contact_component;
-
-		PhxInteractionLayers layerMask = PhxInteractionLayers.BUILDING | PhxInteractionLayers.CHARACTER | PhxInteractionLayers.BUILDING | PhxInteractionLayers.VEHICLE | PhxInteractionLayers.TERRAIN;
-		// should do raycast but no navmesh raycast
-		bool raycast = DayZPhysics.RayCastBullet(start, end, layerMask, null, hitObject, hitPos, hitNormal, hitFraction);
-
-		// bool raycast = DayZPhysics.RaycastRV( start, end, hitPos, contact_dir, contact_component, objects, this, this, false, false, ObjIntersectView, 0.005 );
-
-		// Print("RAYCAST " + raycast + " start " + start + " end " + end + " hitpos " + hitPos + " hitObject " + hitObject);
-		// GetGame().ChatPlayer("raycast hit " + hitObject);
-		if (raycast)
-		{
-			float dist = vector.Distance(end, hitPos);
-			// GetGame().ChatPlayer("raycast dist " + dist);
-			if (dist < 0.8)
-			{
-				// Print("eAI RAYCAST HIT");
-				// GetGame().ChatPlayer("raycast false " );
-				return false;
-			}
-			// GetGame().ChatPlayer("raycast true " );
-			return true;
-			// Print("RAYCAST TRUE");
-		}
-		else
-		{
-			// GetGame().ChatPlayer("raycast false 2 " );
-			return false;
-		}
-		// return true;
-		// Print("eAI Path Blocked " + PathBlocked(start, end, hitPos, hitNormal));
-		return PathBlocked(start, end, hitPos, hitNormal);
+		return AIB_LineBlocked(end, null);
 	}
+
 
 	bool PathBlocked(vector start, vector end, out vector hitPos, out vector hitNormal)
 	{
@@ -2128,8 +2205,11 @@ class InfectedBanditBase extends DayZInfected
 		vector contact_pos;
 		vector contact_dir;
 		int contact_component;
-		set<Object> geom = new set<Object>;
-		set<Object> view = new set<Object>;
+		// Наборы общие для бота, чтобы не создавать новые на каждом луче
+		set<Object> geom = m_RayGeom;
+		set<Object> view = m_RayView;
+		geom.Clear();
+		view.Clear();
 		// set< Object > fire = new set< Object >;
 		DayZPhysics.RaycastRV(from, to, contact_pos, contact_dir, contact_component, geom, with, ignore, false, false, ObjIntersectGeom, radius, CollisionFlags.ALLOBJECTS);
 
@@ -2158,14 +2238,17 @@ class InfectedBanditBase extends DayZInfected
 			}
 		}
 	}
-	
+
 	EntityAI SearchTargetByRaycastVector(vector from, vector to, Object ignore = NULL, float radius = 0.05, Object with = NULL)
 	{
 		vector contact_pos;
 		vector contact_dir;
 		int contact_component;
-		set<Object> geom = new set<Object>;
-		set<Object> view = new set<Object>;
+		// Наборы общие для бота, чтобы не создавать новые на каждом луче
+		set<Object> geom = m_RayGeom;
+		set<Object> view = m_RayView;
+		geom.Clear();
+		view.Clear();
 		// set< Object > fire = new set< Object >;
 		DayZPhysics.RaycastRV(from, to, contact_pos, contact_dir, contact_component, geom, with, ignore, false, false, ObjIntersectGeom, radius, CollisionFlags.ALLOBJECTS);
 
@@ -2215,7 +2298,7 @@ class InfectedBanditBase extends DayZInfected
 			Print("DISTURBED " + DayZInfectedConstants.MINDSTATE_DISTURBED);
 			Print("FIGHT " + DayZInfectedConstants.MINDSTATE_FIGHT);
 			Print("CHASE " +  DayZInfectedConstants.MINDSTATE_CHASE);
-			
+
 			Print("MINDSTATE " + mindState);
 			*/
 			if (mindState == DayZInfectedConstants.MINDSTATE_CHASE)
@@ -2344,6 +2427,400 @@ class InfectedBanditBase extends DayZInfected
 		return true;
 	}
 
+	// ---- Журнал решений ----
+	protected void AIB_Dbg(string msg)
+	{
+		if (AIBLogger.IsDebug())
+			AIBLogger.Debug(GetType() + "#" + GetID().ToString() + " " + msg);
+	}
+
+	protected string AIB_DbgPos(vector pos)
+	{
+		return Math.Round(pos[0]).ToString() + " " + Math.Round(pos[2]).ToString();
+	}
+
+	protected bool IsPlayerVisible(PlayerBase player)
+	{
+		if (!player)
+			return false;
+		return !IsViewOccluded(player.GetBonePositionWS(player.GetBoneIndexByName("Head"))) || !IsViewOccluded(player.GetBonePositionWS(player.GetBoneIndexByName("Pelvis")));
+	}
+
+	// ---- Точность ----
+	protected float GetEffectiveAccuracy(PlayerBase target)
+	{
+		float acc = GetAccuracy();
+		if (!target)
+			return acc;
+
+		// Снайперы рассчитаны на дальний бой, им дальность не режем
+		if (!IsSniper())
+		{
+			float dist = vector.Distance(GetPosition(), target.GetPosition());
+			if (dist > ACC_FULL_DIST)
+			{
+				float k = Math.Clamp((dist - ACC_FULL_DIST) / (ACC_FAR_DIST - ACC_FULL_DIST), 0.0, 1.0);
+				acc *= Math.Lerp(1.0, ACC_FAR_FACTOR, k);
+			}
+		}
+
+		HumanMovementState hms = new HumanMovementState();
+		target.GetMovementState(hms);
+		if (hms.m_iStanceIdx == DayZPlayerConstants.STANCEIDX_PRONE || hms.m_iStanceIdx == DayZPlayerConstants.STANCEIDX_RAISEDPRONE)
+			acc *= 0.6;
+		else if (hms.m_iStanceIdx == DayZPlayerConstants.STANCEIDX_CROUCH || hms.m_iStanceIdx == DayZPlayerConstants.STANCEIDX_RAISEDCROUCH)
+			acc *= 0.8;
+
+		float speed = GetVelocity(target).Length();
+		if (speed > 4.0)
+			acc *= 0.7;
+		else if (speed > 1.5)
+			acc *= 0.85;
+
+		return acc;
+	}
+
+	// ---- Угроза и тревога группы ----
+	void RegisterThreat(PlayerBase player)
+	{
+		if (!player || !player.IsAlive() || !IsAlive())
+			return;
+		if (!player.CanBeTargetedByAI(this))
+			return;
+
+		if (m_ThreatPlayer != player && player.GetIdentity())
+			AIB_Dbg("угроза: " + player.GetIdentity().GetName() + " в " + Math.Round(vector.Distance(GetPosition(), player.GetPosition())).ToString() + " м");
+		m_ThreatPlayer = player;
+		m_ThreatTime = GetGame().GetTime() * 0.001;
+	}
+
+	protected void ShareThreat(PlayerBase player)
+	{
+		RegisterThreat(player);
+
+		BanditAIGroup group = GetGroup();
+		if (!group)
+			return;
+		array<InfectedBanditBase> members = group.GetMembers();
+		if (!members)
+			return;
+
+		vector myPos = GetPosition();
+		float rangeSq = GROUP_ALERT_RANGE * GROUP_ALERT_RANGE;
+		for (int i = 0; i < members.Count(); i++)
+		{
+			InfectedBanditBase member = members.Get(i);
+			if (!member || member == this)
+				continue;
+			if (!member.IsAlive())
+				continue;
+			if (vector.DistanceSq(member.GetPosition(), myPos) > rangeSq)
+				continue;
+			member.RegisterThreat(player);
+		}
+	}
+
+	protected PlayerBase GetValidThreat()
+	{
+		if (!m_ThreatPlayer)
+			return null;
+
+		bool expired = (GetGame().GetTime() * 0.001 - m_ThreatTime) > THREAT_MEMORY_S;
+		bool tooFar = vector.DistanceSq(GetPosition(), m_ThreatPlayer.GetPosition()) > THREAT_RANGE * THREAT_RANGE;
+		if (expired || tooFar || !m_ThreatPlayer.IsAlive() || m_ThreatPlayer.IsInVehicle() || !m_ThreatPlayer.CanBeTargetedByAI(this))
+		{
+			m_ThreatPlayer = null;
+			return null;
+		}
+
+		#ifdef VPPADMINTOOLS
+		if (m_ThreatPlayer.InvisibilityStatus())
+			return null;
+		#endif
+		return m_ThreatPlayer;
+	}
+
+	// ---- Застревание на маршруте ----
+	protected bool AnyPlayerWithin(vector pos, float radius)
+	{
+		array<Man> players = new array<Man>;
+		GetGame().GetPlayers(players);
+		float rSq = radius * radius;
+		foreach (Man man : players)
+		{
+			if (man && vector.DistanceSq(man.GetPosition(), pos) < rSq)
+				return true;
+		}
+		return false;
+	}
+
+	// Свободное направление (сначала назад, потом вбок): луч по геометрии на высоте колен
+	protected bool FindEscapeHeading(out float headingDeg)
+	{
+		vector pos = GetPosition();
+		vector from = pos + "0 0.6 0";
+		float baseYaw = Math.NormalizeAngle(ComputeYaw(pos, pos + GetDirection()));
+		TIntArray offsets = {180, 135, -135, 90, -90, 45, -45, 0};
+		for (int i = 0; i < offsets.Count(); i++)
+		{
+			float yaw = Math.NormalizeAngle(baseYaw + offsets.Get(i));
+			float rad = yaw * Math.DEG2RAD;
+			vector dir = Vector(Math.Sin(rad), 0, Math.Cos(rad));
+			vector to = from + dir * ESCAPE_CHECK_DIST;
+
+			vector contactPos;
+			vector contactDir;
+			int contactComponent;
+			set<Object> hits = new set<Object>;
+			bool blocked = DayZPhysics.RaycastRV(from, to, contactPos, contactDir, contactComponent, hits, null, this, false, false, ObjIntersectGeom, 0.25, CollisionFlags.NEARESTCONTACT);
+			if (!blocked)
+			{
+				headingDeg = yaw;
+				return true;
+			}
+		}
+		return false;
+	}
+
+	protected void StartEscape(int nextWaypoint)
+	{
+		DayZInfectedInputController ic = GetInputController();
+		float heading;
+		if (!ic || !FindEscapeHeading(heading))
+		{
+			AIB_Dbg("застрял у " + AIB_DbgPos(GetPosition()) + ", свободного направления нет");
+			return;
+		}
+
+		ic.OverrideTurnSpeed(true, SNIPER_TURN_SPEED_RADIANS);
+		ic.OverrideHeading(true, heading * Math.DEG2RAD);
+		ic.OverrideMovementSpeed(true, 2.0);
+		m_EscapeTime = ESCAPE_TIME;
+		m_EscapeNextWaypoint = nextWaypoint;
+		AIB_Dbg("застрял у " + AIB_DbgPos(GetPosition()) + " (" + m_StuckCount.ToString() + "), выхожу на курс " + Math.Round(heading).ToString());
+	}
+
+	protected void StopEscape(bool resumeRoute)
+	{
+		if (m_EscapeTime <= 0 && m_EscapeNextWaypoint < 0)
+			return;
+
+		DayZInfectedInputController ic = GetInputController();
+		if (ic)
+		{
+			ic.OverrideMovementSpeed(false, 0);
+			ic.OverrideHeading(false, 0);
+			ic.OverrideTurnSpeed(false, 20);
+		}
+		m_EscapeTime = 0;
+
+		if (resumeRoute && m_EscapeNextWaypoint >= 0)
+		{
+			BehaviourGroupInfectedPack bgip;
+			m_AIAgent = GetAIAgent();
+			if (m_AIAgent && m_AIAgent.GetGroup() && m_AIAgent.GetGroup().GetBehaviour())
+				Class.CastTo(bgip, m_AIAgent.GetGroup().GetBehaviour());
+			if (bgip)
+				bgip.SetCurrentWaypoint(m_EscapeNextWaypoint);
+		}
+		m_EscapeNextWaypoint = -1;
+	}
+
+	protected void ResetStuck()
+	{
+		m_StuckTimer = 0;
+		m_StuckIdleTime = 0;
+		m_StuckCount = 0;
+		m_StuckLastPos = GetPosition();
+	}
+
+	protected void UpdateStuck(float dt)
+	{
+		bool patrol = !IsSniper() && GetPose() < 1 && !m_IsCrashSiteGuard && !_isAttacking && m_Waypoints && m_Waypoints.Count() > 1;
+		DayZInfectedInputController ic = GetInputController();
+		if (!patrol || GetValidThreat() || (ic && ic.GetMindState() >= DayZInfectedConstants.MINDSTATE_CHASE))
+		{
+			StopEscape(false);
+			ResetStuck();
+			return;
+		}
+
+		// Идёт выход из тупика: дождаться конца и вернуться на маршрут
+		if (m_EscapeTime > 0)
+		{
+			m_EscapeTime -= dt;
+			if (m_EscapeTime <= 0)
+			{
+				StopEscape(true);
+				m_StuckLastPos = GetPosition();
+				m_StuckTimer = 0;
+			}
+			return;
+		}
+
+		m_StuckTimer += dt;
+		if (m_StuckTimer < STUCK_CHECK_INTERVAL)
+			return;
+		m_StuckTimer = 0;
+
+		vector pos = GetPosition();
+		float moved = vector.Distance(pos, m_StuckLastPos);
+		m_StuckLastPos = pos;
+		if (moved >= STUCK_MIN_MOVE)
+		{
+			m_StuckIdleTime = 0;
+			m_StuckCount = 0;
+			return;
+		}
+
+		// У точки маршрута бот может постоять, это нормально
+		int nearest = -1;
+		float nearestDist = 1000000;
+		for (int i = 0; i < m_Waypoints.Count(); i++)
+		{
+			float d = vector.Distance(pos, m_Waypoints.Get(i).ToVector());
+			if (d < nearestDist)
+			{
+				nearestDist = d;
+				nearest = i;
+			}
+		}
+		if (nearestDist < STUCK_WAYPOINT_DIST)
+		{
+			m_StuckIdleTime = 0;
+			return;
+		}
+
+		m_StuckIdleTime += STUCK_CHECK_INTERVAL;
+		if (m_StuckIdleTime < STUCK_TIME)
+			return;
+		m_StuckIdleTime = 0;
+		m_StuckCount++;
+
+		int next = (nearest + m_StuckCount) % m_Waypoints.Count();
+		if (m_StuckCount >= 3 && !AnyPlayerWithin(pos, STUCK_TELEPORT_NO_PLAYER))
+		{
+			AIB_Dbg("застрял у " + AIB_DbgPos(pos) + " третий раз, перенос к точке " + next.ToString());
+			SetPosition(m_Waypoints.Get(next).ToVector());
+			ResetStuck();
+			return;
+		}
+
+		StartEscape(next);
+	}
+
+	// ---- Обзор вблизи ----
+	protected const float FRONT_CONE_COS = 0.7071;	// ±45° вперёд, как у штатного поиска цели
+	protected const float FAR_TARGET_RANGE = 100.0;	// дальность поиска цели впереди
+	protected const float AWARE_RANGE = 10.0;		// ближе этого бот замечает видимого игрока и за спиной
+	protected const float MIN_FIRE_DIST = 1.2;		// было 2 м: между 1,5 и 2 м бот не бил и не стрелял
+	protected bool m_AwareTurning;
+
+	// Ближайший видимый игрок, которого этот бот может атаковать (правила мода, невидимость админа)
+	protected PlayerBase FindHostilePlayer(float maxDist, bool frontOnly)
+	{
+		array<Man> players = new array<Man>;
+		GetGame().GetPlayers(players);
+
+		vector myPos = GetPosition();
+		vector myDir = GetDirection();
+		myDir[1] = 0;
+		myDir.Normalize();
+
+		PlayerBase best;
+		float bestDistSq = maxDist * maxDist;
+		foreach (Man man : players)
+		{
+			PlayerBase player = PlayerBase.Cast(man);
+			if (!player || !player.IsAlive() || player.IsInVehicle())
+				continue;
+			if (!player.CanBeTargetedByAI(this))
+				continue;
+			#ifdef VPPADMINTOOLS
+			if (player.InvisibilityStatus())
+				continue;
+			#endif
+			#ifdef JM_COT
+			if (player.COTGetCannotBeTargetedByAI())
+				continue;
+			#endif
+
+			vector toPlayer = player.GetPosition() - myPos;
+			float distSq = toPlayer.LengthSq();
+			if (distSq > bestDistSq)
+				continue;
+
+			if (frontOnly)
+			{
+				vector flat = toPlayer;
+				flat[1] = 0;
+				flat.Normalize();
+				if (vector.Dot(flat, myDir) < FRONT_CONE_COS)
+					continue;
+			}
+
+			if (IsViewOccluded(player.GetBonePositionWS(player.GetBoneIndexByName("Head"))) && IsViewOccluded(player.GetBonePositionWS(player.GetBoneIndexByName("Pelvis"))))
+				continue;
+
+			best = player;
+			bestDistSq = distSq;
+		}
+		return best;
+	}
+
+	protected const float FIRE_FACING_DEG = 20.0;	// начинать стрельбу, только если цель не дальше 20° от взгляда
+	protected const float BURST_FACING_DEG = 30.0;	// во время очереди не стрелять, если бот отвернулся больше чем на 30°
+	protected const float BURST_WAIT_MAX = 1.5;		// столько ждём доворота в очереди, потом очередь отменяется
+	protected float m_BurstWaitTime;
+
+	// Угол между взглядом бота и направлением на точку, в градусах (0..180), без учёта высоты
+	protected float AngleToTarget(vector targetPos)
+	{
+		vector dir = GetDirection();
+		dir[1] = 0;
+		dir.Normalize();
+
+		vector toTarget = targetPos - GetPosition();
+		toTarget[1] = 0;
+		if (toTarget.LengthSq() < 0.01)
+			return 0;
+		toTarget.Normalize();
+
+		return Math.Acos(Math.Clamp(vector.Dot(dir, toTarget), -1.0, 1.0)) * Math.RAD2DEG;
+	}
+
+	// Поворот к точке тем же способом, что у снайпера
+	protected void TurnTowardsPos(DayZInfectedInputController inputController, vector targetPos)
+	{
+		if (!m_AwareTurning)
+			AIB_Dbg("разворот к " + AIB_DbgPos(targetPos) + ", угол " + Math.Round(AngleToTarget(targetPos)).ToString());
+		float heading = Math.NormalizeAngle(ComputeYaw(GetPosition(), targetPos));
+		inputController.OverrideTurnSpeed(true, SNIPER_TURN_SPEED_RADIANS);
+		inputController.OverrideHeading(true, heading * Math.DEG2RAD);
+		m_AwareTurning = true;
+	}
+
+	protected void TurnTowardsPlayer(DayZInfectedInputController inputController, PlayerBase player)
+	{
+		TurnTowardsPos(inputController, player.GetPosition());
+	}
+
+	// Доворачиваемся к цели; true, когда уже смотрим на неё и можно стрелять
+	protected bool FaceTargetBeforeFire(DayZInfectedInputController inputController, vector targetPos)
+	{
+		TurnTowardsPos(inputController, targetPos);
+		return AngleToTarget(targetPos) <= FIRE_FACING_DEG;
+	}
+
+	protected void ReleaseAwareTurn(DayZInfectedInputController inputController)
+	{
+		if (!m_AwareTurning || !inputController)
+			return;
+		inputController.OverrideHeading(false, 0);
+		inputController.OverrideTurnSpeed(false, 20);
+		m_AwareTurning = false;
+	}
+
 	bool ChaseAttackLogic(int pCurrentCommandID, DayZInfectedInputController pInputController, float pDt)
 	{
 		m_AIAgent = this.GetAIAgent();
@@ -2406,7 +2883,7 @@ class InfectedBanditBase extends DayZInfected
 			return false;
 		}
 		*/
-		
+
 		//Print("target " + target + " actual " + m_ActualTarget);
 
 		if (target && GetPose() < 1)
@@ -2414,14 +2891,14 @@ class InfectedBanditBase extends DayZInfected
 			// PlayerBase plb = PlayerBase.Cast(target);
 			// if ( GetGroup().GetFaction() == "Bandits" || (GetGroup().GetFaction() == "Guards"  && plb && plb.IsRaised() ) || (GetGroup().GetFaction() == "Guards"  && !plb) )
 			//{
-			
+
 			InfectedBanditBase meleebandit = InfectedBanditBase.Cast(target);
 			if (!IsSniper() && meleebandit && !meleebandit.IsSniper() && ( meleebandit.GetGroup().GetFaction() == this.GetGroup().GetFaction() || meleebandit.GetPose() > 0) )
-			{ 
+			{
 				return false;
 			}
 			m_ActualTarget = EntityAI.Cast(target);
-			
+
 #ifdef DAYZ_DOG
 			Dayz_Doggo dog = Dayz_Doggo.Cast(m_ActualTarget);
 			if (dog)
@@ -2429,7 +2906,7 @@ class InfectedBanditBase extends DayZInfected
 				return false;
 			}
 #endif
-			
+
 			#ifdef VPPADMINTOOLS
 			PlayerBase hrac = PlayerBase.Cast(m_ActualTarget);
 			if (hrac && hrac.InvisibilityStatus())
@@ -2444,7 +2921,7 @@ class InfectedBanditBase extends DayZInfected
 				return false;
 			}
 			#endif
-	
+
 			StartCommand_Attack(m_ActualTarget, 1, 0);
 			m_AttackCooldownTime = 0;
 			return true;
@@ -2452,7 +2929,50 @@ class InfectedBanditBase extends DayZInfected
 		}
 		//}
 
+		// Поиск цели на 100 м достаточно делать 5 раз в секунду
+		m_FarScanTimer -= pDt;
+		if (m_FarScanTimer > 0)
+			return false;
+		m_FarScanTimer = FAR_SCAN_INTERVAL;
+
 		target = DayZPlayerUtils.GetMeleeTarget(this.GetPosition(), this.GetDirection(), 45, 100, -100.0, 100.0, this, m_TargetableObjects, m_AllTargetObjects);
+
+		// Союзник в конусе ближе игрока раньше «закрывал» игрока, и бот не стрелял: ищем видимого игрока отдельно
+		InfectedBanditBase coneBandit = InfectedBanditBase.Cast(target);
+		if (!target || (coneBandit && coneBandit.GetGroup() && GetGroup() && coneBandit.GetGroup().GetFaction() == GetGroup().GetFaction()))
+		{
+			PlayerBase frontPlayer = FindHostilePlayer(FAR_TARGET_RANGE, true);
+			if (frontPlayer)
+				target = frontPlayer;
+			else if (coneBandit)
+				target = null;	// свой впереди, а игроков нет: смотрим дальше по угрозе и вокруг
+		}
+
+		// Тот, кто стрелял в бота или в его группу: бьём, если видим, даже вне конуса
+		if (!target)
+		{
+			PlayerBase threat = GetValidThreat();
+			if (threat && IsPlayerVisible(threat))
+				target = threat;
+		}
+
+		if (target != m_DbgLastTarget)
+		{
+			m_DbgLastTarget = EntityAI.Cast(target);
+			if (target)
+				AIB_Dbg("цель " + target.GetType() + " в " + Math.Round(vector.Distance(GetPosition(), target.GetPosition())).ToString() + " м, угол " + Math.Round(AngleToTarget(target.GetPosition())).ToString());
+		}
+
+		// Видимый игрок рядом, но сбоку или за спиной: разворачиваемся, стрельба начнётся, когда он окажется впереди
+		if (!target)
+		{
+			PlayerBase nearPlayer = FindHostilePlayer(AWARE_RANGE, false);
+			if (nearPlayer)
+			{
+				TurnTowardsPlayer(pInputController, nearPlayer);
+				return false;
+			}
+		}
 
 		//! target is outside the targeting cone; skip attack
 		/*
@@ -2470,26 +2990,26 @@ class InfectedBanditBase extends DayZInfected
 		CarScript car = CarScript.Cast(target);
 		PlayerBase player = PlayerBase.Cast(target);
 		_targetCreature = DayZCreature.Cast(target);
-		
+
 		if (target)
 		{
 			distancesq = vector.DistanceSq(target.GetPosition(), this.GetPosition());
-		}		
-		
+		}
+
 		vector carpos;
 		if (car)
 		{
 			carpos = car.GetPosition();
 			carpos[1] = carpos[1] + 0.8;
 		}
-		
+
 		#ifdef VPPADMINTOOLS
 		if (player && player.InvisibilityStatus())
 		{
 			return false;
 		}
 		#endif
-		
+
 		#ifdef JM_COT
 		if (player && player.COTGetCannotBeTargetedByAI())
 		{
@@ -2497,7 +3017,7 @@ class InfectedBanditBase extends DayZInfected
 		}
 		#endif
 		// If guards were aggroed by a raised player, drop the target once the player lowers the weapon
-		
+
 		if (player && GetGroup() && GetGroup().GetFaction() == "Guards" && !IsSniper() && !player.IsRaised())
 		{
 			ClearTarget();
@@ -2505,13 +3025,17 @@ class InfectedBanditBase extends DayZInfected
 			return false;
 		}
 
-		if ((GetAnimInstance() == IBAnimInstance.RIFLE || GetAnimInstance() == IBAnimInstance.PISTOL) && target && player && (GetGroup().GetFaction() == "Bandits" || (GetGroup().GetFaction() == "Guards" && player.IsRaised())) && vector.DistanceSq(target.GetPosition(), this.GetPosition()) > 2 * 2 && vector.DistanceSq(target.GetPosition(), this.GetPosition()) < 800 * 800 && (!IsViewOccluded(player.GetBonePositionWS(player.GetBoneIndexByName("Head"))) || !IsViewOccluded(player.GetBonePositionWS(player.GetBoneIndexByName("Pelvis")))))
+		if ((GetAnimInstance() == IBAnimInstance.RIFLE || GetAnimInstance() == IBAnimInstance.PISTOL) && target && player && (GetGroup().GetFaction() == "Bandits" || (GetGroup().GetFaction() == "Guards" && player.IsRaised())) && vector.DistanceSq(target.GetPosition(), this.GetPosition()) > MIN_FIRE_DIST * MIN_FIRE_DIST && vector.DistanceSq(target.GetPosition(), this.GetPosition()) < 800 * 800 && (!IsViewOccluded(player.GetBonePositionWS(player.GetBoneIndexByName("Head"))) || !IsViewOccluded(player.GetBonePositionWS(player.GetBoneIndexByName("Pelvis")))))
 		{
+			// Сначала доворачиваемся: раньше бот мог стрелять, глядя на 45° мимо цели
+			if (!FaceTargetBeforeFire(pInputController, target.GetPosition()))
+				return false;
+
 			float randomthrow = Math.RandomFloatInclusive(0.0, 1.0);
 			if (randomthrow < GetGrenadeChance() && vector.Distance(target.GetPosition(), this.GetPosition()) > 30 && vector.Distance(target.GetPosition(), this.GetPosition()) <= 40)
 			{
 				SetRaised(false);
-				GetGame().RPCSingleParam(this, 8832135811, null, true);
+				GetGame().RPCSingleParam(this, AIB_RPC.WEAPON_VISIBILITY, new Param1<bool>(true), true);
 				StartCommand_Attack(m_ActualTarget, 18, 0);
 				m_AttackCooldownTime = 2;
 				pInputController.OverrideMovementSpeed(true, 0);
@@ -2523,6 +3047,7 @@ class InfectedBanditBase extends DayZInfected
 			else
 			{
 				m_ActualTarget = EntityAI.Cast(target);
+				ShareThreat(player);
 				Raise();
 				SetAimY(ComputeAimY(GetBonePositionWS(GetBoneIndexByName("Head")), player.GetBonePositionWS(player.GetBoneIndexByName("Head"))));
 				StartCommand_Attack(m_ActualTarget, 16, 0);
@@ -2537,16 +3062,20 @@ class InfectedBanditBase extends DayZInfected
 			InfectedBanditBase bandit = InfectedBanditBase.Cast(_targetCreature);
 			if ( GetGroup().GetFaction() == "Guards" && ((zombie && zombie.IsDanger()) || (animal && animal.IsDanger())))
 			{
+				if (!FaceTargetBeforeFire(pInputController, _targetCreature.GetPosition()))
+					return false;
 				m_ActualTarget = _targetCreature;
 				Raise();
 				SetAimY(ComputeAimY(GetBonePositionWS(GetBoneIndexByName("Head")), _targetCreature.GetBonePositionWS(_targetCreature.GetBoneIndexByName("Head"))));
 				StartCommand_Attack(m_ActualTarget, 16, 0);
 				m_AttackCooldownTime = 1;
 				return true;
-			
+
 			}
 			else if (!IsSniper() && bandit && !bandit.IsSniper() && bandit.GetGroup().GetFaction() != this.GetGroup().GetFaction())
 			{
+				if (!FaceTargetBeforeFire(pInputController, _targetCreature.GetPosition()))
+					return false;
 				m_ActualTarget = _targetCreature;
 				Raise();
 				SetAimY(ComputeAimY(GetBonePositionWS(GetBoneIndexByName("Head")), _targetCreature.GetBonePositionWS(_targetCreature.GetBoneIndexByName("Head"))));
@@ -2558,6 +3087,8 @@ class InfectedBanditBase extends DayZInfected
 		}
 		else if ((GetAnimInstance() == IBAnimInstance.RIFLE || GetAnimInstance() == IBAnimInstance.PISTOL) && target && car && car.CrewMember(0) && GetGroup().GetFaction() == "Bandits" && distancesq > 4 && distancesq < 10000 && !IsViewOccludedFor(carpos, car))
 		{
+			if (!FaceTargetBeforeFire(pInputController, carpos))
+				return false;
 			m_ActualTarget = EntityAI.Cast(target);
 			Raise();
 			SetAimY(ComputeAimY(GetBonePositionWS(GetBoneIndexByName("Head")), carpos));
@@ -2569,7 +3100,7 @@ class InfectedBanditBase extends DayZInfected
 		else if ( (GetAnimInstance() == IBAnimInstance.KNIFE) && target && player && (GetGroup().GetFaction() == "Bandits" || (GetGroup().GetFaction() == "Guards" && player.IsRaised() ) || IsSniper() ) && vector.DistanceSq(target.GetPosition(), this.GetPosition()) > 2 * 2 && ( !IsViewOccluded(player.GetBonePositionWS(player.GetBoneIndexByName("Head"))) || !IsViewOccluded(player.GetBonePositionWS(player.GetBoneIndexByName("Pelvis"))) ) )
 		{
 			SetRaised(false);
-			GetGame().RPCSingleParam(this, 8832135811, null, true);
+			GetGame().RPCSingleParam(this, AIB_RPC.WEAPON_VISIBILITY, new Param1<bool>(true), true);
 			SetAnimInstance(IBAnimInstance.KNIFE);
 			StartCommand_Attack(m_ActualTarget, 18, 0);
 			m_AttackCooldownTime = 4;
@@ -2579,6 +3110,7 @@ class InfectedBanditBase extends DayZInfected
 		else
 		{
 			SetRaised(false);
+			ReleaseAwareTurn(pInputController);
 		}
 
 		return false;
@@ -2613,7 +3145,7 @@ class InfectedBanditBase extends DayZInfected
 
 	void AfterThrow(DayZInfectedInputController pInputController)
 	{
-		GetGame().RPCSingleParam(this, 8832135811, null, false);
+		GetGame().RPCSingleParam(this, AIB_RPC.WEAPON_VISIBILITY, new Param1<bool>(false), true);
 		pInputController.OverrideMovementSpeed(false, 0);
 		SetStance(2);
 	}
@@ -2919,6 +3451,12 @@ class InfectedBanditBase extends DayZInfected
 			return false;
 		}
 
+		// Ботов нельзя задавить: урон от любого транспорта не проходит (и ванильный, и от модовых машин)
+		if (ammo == "TransportHit" || Transport.Cast(source))
+		{
+			return false;
+		}
+
 		return super.EEOnDamageCalculated(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
 	}
 
@@ -2937,14 +3475,14 @@ class InfectedBanditBase extends DayZInfected
 		{
 			return AI_CanBeTargetedByInfected(ZombieBase.Cast(ai));
 		}
-		
+
 		else
 		{
 			InfectedBanditBase bandit = InfectedBanditBase.Cast(ai);
 			if (bandit)
 				return AI_CanBeTargetedByFaction(bandit);
 		}
-		
+
 		return super.CanBeTargetedByAI(ai);
 	}
 
@@ -3014,6 +3552,16 @@ class InfectedBanditBase extends DayZInfected
 			}
 		}
 
+		// Обычный бот раньше не реагировал на того, кто в него стреляет (только снайперы и охрана крушений)
+		if (GetGame().IsServer() && source && !IsSniper())
+		{
+			PlayerBase hitBy = PlayerBase.Cast(source);
+			if (!hitBy)
+				hitBy = PlayerBase.Cast(source.GetHierarchyRootPlayer());
+			if (hitBy)
+				ShareThreat(hitBy);
+		}
+
 		if (!IsAlive())
 		{
 			dBodySetInteractionLayer(this, PhxInteractionLayers.RAGDOLL);
@@ -3063,14 +3611,7 @@ class InfectedBanditBase extends DayZInfected
 		if (!IsAlive())
 			return;
 
-		Transport transport = Transport.Cast(other);
-		if (transport)
-		{
-			if (GetGame().IsServer())
-			{
-				RegisterTransportHit(transport);
-			}
-		}
+		// Удар транспортом не регистрируем: ботов нельзя задавить, и отбрасывать их тоже не нужно
 	}
 
 	override bool CanReceiveAttachment(EntityAI attachment, int slotId)
@@ -3166,6 +3707,27 @@ class InfectedBanditBase extends DayZInfected
 		target.ProcessDirectDamage(DT_FIRE_ARM, this, damageZone, ammoType, damagePositionMS);
 	}
 
+	// Звук выстрела бота нужен только тем, кто может его услышать. Раньше он уходил всем игрокам сервера.
+	protected void AIB_SendToNearbyPlayers(Object target, int rpcType, Param param)
+	{
+		if (!target)
+			return;
+
+		array<Man> players = new array<Man>;
+		GetGame().GetPlayers(players);
+
+		vector pos = GetPosition();
+		float maxDistSq = AIB_RPC.SOUND_RANGE * AIB_RPC.SOUND_RANGE;
+		foreach (Man man : players)
+		{
+			if (!man || !man.GetIdentity())
+				continue;
+			if (vector.DistanceSq(man.GetPosition(), pos) > maxDistSq)
+				continue;
+			GetGame().RPCSingleParam(target, rpcType, param, true, man.GetIdentity());
+		}
+	}
+
 	void HandleWeaponFireScriptEvent()
 	{
 		if (m_IsCrashSiteGuard && m_CrashSiteGuardReturning)
@@ -3185,6 +3747,11 @@ class InfectedBanditBase extends DayZInfected
 			ClearTarget();
 			return;
 		}
+
+		// Раньше цели не сбрасывались: после смены цели урон получал прежний игрок, даже из-за стены
+		_targetPlayer = null;
+		_targetCreature = null;
+		_targetCar = null;
 
 		if (m_ActualTarget && PlayerBase.Cast(m_ActualTarget))
 		{
@@ -3206,8 +3773,8 @@ class InfectedBanditBase extends DayZInfected
 		Weapon_Base wpn = Weapon_Base.Cast(this.GetFirearm());
 		if (wpn)
 		{
-			GetGame().RPCSingleParam(wpn, 8832135611, null, true);
-		
+			AIB_SendToNearbyPlayers(wpn, AIB_RPC.WEAPON_FIRE, null);
+
 			weaponType = wpn.GetType();
 			bulletType = AIBAmmoTypeDatabase.GetBulletForWeapon(weaponType);
 			// baseBulletDamage = AIBAmmoDamageDatabase.GetDamageForBullet(bulletType);
@@ -3216,17 +3783,33 @@ class InfectedBanditBase extends DayZInfected
 		if (_targetPlayer)
 		{
 			// _targetPlayer.AddHealth("GlobalHealth", "Shock", -15);
+			// Видимость проверяем в момент выстрела: игрок мог уйти за стену во время очереди
+			bool visHead = !IsViewOccluded(_targetPlayer.GetBonePositionWS(_targetPlayer.GetBoneIndexByName("Head")));
+			bool visBody = !IsViewOccluded(_targetPlayer.GetBonePositionWS(_targetPlayer.GetBoneIndexByName("Pelvis")));
+			bool visibleNow = visHead || visBody;
+			float effAcc = GetEffectiveAccuracy(_targetPlayer);
+			// Видна только голова (из окна, из-за укрытия) или только корпус: попасть вдвое труднее
+			if (visHead != visBody)
+				effAcc *= 0.5;
 			float randomhit = Math.RandomFloatInclusive(0.0, 1.0);
-			if (randomhit <= GetAccuracy())
+			string shotResult;
+			if (!visibleNow)
+			{
+				shotResult = "не видно";
+			}
+			else if (randomhit <= effAcc)
 			{
 				ApplySimulatedFireDamage(_targetPlayer, bulletType);
+				shotResult = "попал";
 			}
 			else
 			{
 				// poslat rpc pro prehrani zvuku kulky
 				Param1<vector> bulletpos = new Param1<vector>(_targetPlayer.GetPosition());
-				GetGame().RPCSingleParam(wpn, 8832135612, bulletpos, true);
+				AIB_SendToNearbyPlayers(wpn, AIB_RPC.BULLET_FLYBY, bulletpos);
+				shotResult = "мимо";
 			}
+			AIB_Dbg("выстрел " + Math.Round(vector.Distance(GetPosition(), _targetPlayer.GetPosition())).ToString() + " м, угол " + Math.Round(AngleToTarget(_targetPlayer.GetPosition())).ToString() + ", точность " + Math.Round(effAcc * 100).ToString() + "% (голова " + visHead.ToString() + ", корпус " + visBody.ToString() + "): " + shotResult);
 		}
 		else if (_targetCreature)
 		{
@@ -3282,9 +3865,13 @@ class InfectedBanditBase extends DayZInfected
 						_targetCar.GetRadiator().AddHealth("", "", -40);
 					}
 
-					int randomwheel = Math.RandomIntInclusive(0, -1 + _targetCar.WheelCount());
-					CarWheel wheel = CarWheel.Cast(_targetCar.WheelGetEntity(randomwheel));
-					wheel.AddHealth("", "", -30);
+					if (_targetCar.WheelCount() > 0)
+					{
+						int randomwheel = Math.RandomIntInclusive(0, -1 + _targetCar.WheelCount());
+						CarWheel wheel = CarWheel.Cast(_targetCar.WheelGetEntity(randomwheel));
+						if (wheel)
+							wheel.AddHealth("", "", -30);
+					}
 				}
 			}
 		}
@@ -3316,6 +3903,28 @@ class InfectedBanditBase extends DayZInfected
 			return;
 		}
 
+		// Во время очереди держим направление на цель и не стреляем, пока бот смотрит мимо
+		if (!IsSniper() && m_ActualTarget)
+		{
+			DayZInfectedInputController burstInput = GetInputController();
+			if (burstInput)
+				TurnTowardsPos(burstInput, m_ActualTarget.GetPosition());
+
+			if (AngleToTarget(m_ActualTarget.GetPosition()) > BURST_FACING_DEG)
+			{
+				m_BurstWaitTime += dt;
+				if (m_BurstWaitTime > BURST_WAIT_MAX)
+				{
+					_isAttacking = false;
+					_attackCount = 0;
+					m_BurstWaitTime = 0;
+					ReleaseAwareTurn(burstInput);
+				}
+				return;
+			}
+			m_BurstWaitTime = 0;
+		}
+
 		_attackTimer += dt;
 		if (_attackTimer >= _attackInterval)
 		{
@@ -3326,6 +3935,8 @@ class InfectedBanditBase extends DayZInfected
 			if (_attackCount <= 0)
 			{
 				_isAttacking = false;
+				if (!IsSniper())
+					ReleaseAwareTurn(GetInputController());
 			}
 		}
 	}

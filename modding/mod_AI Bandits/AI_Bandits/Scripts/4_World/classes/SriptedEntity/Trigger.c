@@ -11,129 +11,144 @@ class AIBTalkTrigger extends Trigger
 	protected int m_Whistle;
 	protected InfectedBanditBase m_AssignedNPC = NULL;
 	protected ref EffectSound m_WhistleSound;
-	
+
 	void AIBTalkTrigger()
 	{
 		RegisterNetSyncVariableInt("m_Whistle");
-		
+
 	}
-	
+
 	void StopTalkingNPC()
 	{
 		//Print("STOP TALKING");
 		GetRPCManager().SendRPC( "AIBandits", "StopTalk", new Param1< vector >( this.GetPosition() ) );
 	}
-	
+
 	void AdditionalAction()
 	{
 		// Override this, if you need custom actions serverside
 	}
-	
-	
+
+
 	override void OnVariablesSynchronized()
 	{
 		super.OnVariablesSynchronized();
-		//GetGame().GetMission().OnEvent(ChatMessageEventTypeID, new ChatMessageEventParams(CCDirect, "", "Vars synchronized", ""));		
+		//GetGame().GetMission().OnEvent(ChatMessageEventTypeID, new ChatMessageEventParams(CCDirect, "", "Vars synchronized", ""));
 		if (m_Whistle>0)
 		{
 			WhistleSoundPlay(m_Whistle);
 		}
     }
-	
+
 	void WhistleSoundPlay(int index)
 	{
-		m_WhistleSound = SEffectManager.PlaySoundOnObject( "Talking_SoundSet"+index.ToString(), this );
+		// Озвучка из мода убрана. Если звука нет, NPC просто молчит, а не роняет клиент на null
+		string soundSet = "Talking_SoundSet" + index.ToString();
+		if (!GetGame().ConfigIsExisting("CfgSoundSets " + soundSet))
+		{
+			ResetWhistle();
+			StopTalkingNPC();
+			return;
+		}
+
+		m_WhistleSound = SEffectManager.PlaySoundOnObject( soundSet, this );
+		if (!m_WhistleSound)
+		{
+			ResetWhistle();
+			StopTalkingNPC();
+			return;
+		}
 		m_WhistleSound.Event_OnSoundWaveEnded.Insert(StopTalkingNPC);
 		m_WhistleSound.SetSoundAutodestroy(true);
 		ResetWhistle();
 		// in prison react to player voice
 		// when they say something npc will say shut up
-		
+
 	}
-	
+
 	void BlowWhistle(int index)
 	{
 		m_Whistle = index;
 		SetSynchDirty();
 	}
-	
+
 	void ResetWhistle()
 	{
 		m_Whistle = 0;
 		SetSynchDirty();
 	}
-	
-	
+
+
 	void SetTriggerName(string name)
 	{
 		m_TriggerName = name;
 	}
-	
+
 	string GetTriggerName()
 	{
 		return m_TriggerName;
 	}
-	
+
 	void SetTriggerNPCid(int id)
 	{
 		m_NPCid = id;
 	}
-	
+
 	int GetTriggerNPCid()
 	{
 		return m_NPCid;
 	}
-	
+
 	void SetTriggerNotification(string notification)
 	{
 		m_TriggerNotification = notification;
 	}
-	
+
 	string GetTriggerNotification()
 	{
 		return m_TriggerNotification;
 	}
-	
+
 	void SetTriggerNotificationTime(int notificationtime)
 	{
 		m_TriggerNotificationTime = notificationtime;
 	}
-	
+
 	int GetTriggerNotificationTime()
 	{
 		return m_TriggerNotificationTime;
 	}
-	
+
 	void SetSounds(TStringArray sounds)
 	{
 		m_SoundList = sounds;
 	}
-	
+
 	TStringArray GetSounds()
 	{
 		return m_SoundList;
 	}
-	
+
 	void SetEmotes(TStringArray emotes)
 	{
 		m_EmoteList = emotes;
 	}
-	
+
 	TStringArray GetEmotes()
 	{
 		return m_EmoteList;
 	}
-	
+
 	void SetTriggerCooldown(int cooldown)
 	{
 		m_TriggerCooldown = cooldown;
 	}
-	
+
 	void SetLastTriggerTime(int time)
 	{
 		m_LastTriggerTime = time;
 	}
-	
+
 	bool CanTriggerAction(int time)
 	{
 		if (time > m_LastTriggerTime+m_TriggerCooldown)
@@ -141,20 +156,20 @@ class AIBTalkTrigger extends Trigger
 			m_LastTriggerTime = time;
 			return true;
 		}
-			
+
 		return false;
 	}
-	
+
 	void AssignNPC(InfectedBanditBase npcsurvivor)
 	{
 		m_AssignedNPC = npcsurvivor;
 	}
-	
+
 	InfectedBanditBase GetAssignedNPC()
 	{
 		return m_AssignedNPC;
 	}
-	
+
     override bool CanAddObjectAsInsider(Object object)
     {
         PlayerBase player = PlayerBase.Cast(object);
@@ -164,7 +179,7 @@ class AIBTalkTrigger extends Trigger
 		return false;
 		//return player != null;
     }
-	
+
 	void DetectNPC(vector position)
 	{
 		array<Object> objects_in_vicinity = new array<Object>;
@@ -174,15 +189,15 @@ class AIBTalkTrigger extends Trigger
 		for ( int j = 0; j < objects_in_vicinity.Count(); j++ )
 		{
 			object_in_radius = objects_in_vicinity.Get(j);
-			
+
 			if (object_in_radius.IsInherited(InfectedBanditBase))
 			{
-				AssignNPC(object_in_radius);
+				AssignNPC(InfectedBanditBase.Cast(object_in_radius));
 			}
 		}
 
 	}
-		
+
 	override void OnEnter(Object obj)
     {
 		//SPBLogger.Log( "SpawnerBubaku ENTER" );
@@ -194,9 +209,9 @@ class AIBTalkTrigger extends Trigger
 			//GetGame().CreateObject("Seachest", obj.GetPosition() );
 			//GetGame().CreateObject("ZmbM_ClerkFat_White", obj.GetPosition(), false, true, true );
 			//SPBLogger.Log( "Triggered " + GetTriggerName() + " time " + GetGame().GetTime()/1000);
-			
+
 			DetectNPC(this.GetPosition());
-						
+
 			InfectedBanditBase npcsurvivor;
 			Class.CastTo(npcsurvivor,obj);
 			//Print("npc survivor " + obj);
@@ -214,7 +229,7 @@ class AIBTalkTrigger extends Trigger
 					{
 						AIBLogger.Log("Assigned trigger " + GetTriggerName() + " to NPC " + npcsurvivor.GetType());
 					}
-					
+
 				}
 			}
 			if (CanTriggerAction(GetGame().GetTime()/1000))
@@ -224,7 +239,7 @@ class AIBTalkTrigger extends Trigger
 					if (PlayerBase.Cast(obj).GetIdentity())
 					{
 						if (PlayerBase.Cast(obj).GetIdentity().GetName())
-						{	
+						{
 							//SPBLogger.Log("Can trigger action " + GetGame().GetTime()/1000 + " last " + m_LastTriggerTime + " trigger delay " + m_TriggerCooldown);
 							SetLastTriggerTime(GetGame().GetTime()/1000);
 							//SpawniBubaky();
@@ -246,24 +261,24 @@ class AIBTalkTrigger extends Trigger
 					}
 				}
 			}
-		}	
+		}
     }
 };
 
 class BanditSniperTrigger extends Trigger
 {
 	protected InfectedBanditBase m_AssignedNPC = NULL;
-	
+
 	void AssignNPC(InfectedBanditBase npcsurvivor)
 	{
 		m_AssignedNPC = npcsurvivor;
 	}
-	
+
 	InfectedBanditBase GetAssignedNPC()
 	{
 		return m_AssignedNPC;
 	}
-	
+
 	override bool CanAddObjectAsInsider(Object object)
     {
         PlayerBase player = PlayerBase.Cast(object);
@@ -273,7 +288,7 @@ class BanditSniperTrigger extends Trigger
 		}
 		return false;
     }
-	
+
 	override void OnEnter(Object obj)
     {
 		PlayerBase player = PlayerBase.Cast(obj);
@@ -300,17 +315,17 @@ modded class Apple
 		SetEventMask(EntityEvent.POSTFRAME);
 
 	}
-	
+
 	override void EOnPostFrame(IEntity other, int extra)
     {
         float scale = 4;
         vector transform[4];
         GetTransform(transform);
-        
+
         transform[0] = transform[0] * scale;
         transform[1] = transform[1] * scale;
         transform[2] = transform[2] * scale;
-        
+
         SetTransform(transform);
         Update();
     }
