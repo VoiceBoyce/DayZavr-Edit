@@ -836,7 +836,10 @@ class DRL_UIRecipeGrid extends ScriptedWidgetEventHandler
 		if (idx < 0)
 			return true;
 		if (idx != m_Selected)
+		{
+			DRL_UISound.Select();
 			Select(idx, true);
+		}
 		return true;
 	}
 
@@ -856,6 +859,8 @@ class DRL_UIRecipeGrid extends ScriptedWidgetEventHandler
 		m_HoverSlot = slot;
 		DRL_UIRecipeCard card = m_Cards.Get(slot);
 		card.SetHover(card.m_Index >= 0);
+		if (card.m_Index >= 0)
+			DRL_UISound.Hover();
 		return true;
 	}
 

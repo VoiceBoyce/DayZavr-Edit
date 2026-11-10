@@ -353,6 +353,8 @@ Verified errors committed more than once. Check ACTIVELY during implementation. 
 - **E34** — после `SetSortDeep` текст на непрозрачной заливке INT_UIF пропадает: тексту/значку `SetSort(N + 1)`
 - **E35** — DRL: после старта/конца крафта предметы ещё `DRL_IsCraftLocked`, статусы врут: пересчитать через ~1,5 с
 - **E36** — `PlayerPreviewWidget` рисуется поверх любого 2D, даже с `SetSort`: своя область без наложений; рецепт манекена (локальный PlayerBase) — в каталоге
+- **E37** — груз машины не в корне класса: `CfgVehicles <машина> Cargo itemsCargoSize`; у предметов — `CfgVehicles <класс> itemsCargoSize`
+- **E38** — `PlayerPreviewWidget` режет модель по своему прямоугольнику, масштаб задаёт высота: уменьшать только высоту (`SetSize(1.2, k)`), не `SetSize(k, k)`
 
 ---
 

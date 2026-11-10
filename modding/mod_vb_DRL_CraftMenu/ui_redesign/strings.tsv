@@ -231,3 +231,10 @@ STR_DRL_UI_CARPART_TRUNK	Trunk	Багажник
 STR_DRL_UI_CARPART_DRIVER	Driver door	Водит. дверь
 STR_DRL_UI_CARPART_CODRIVER	Passenger door	Пассаж. дверь
 STR_DRL_UI_CARPART_WHEEL	Wheels	Колёса
+# правки по списку багов, 2026-11-10
+STR_DRL_UI_ASM_INFO	SPECS	ХАРАКТЕРИСТИКИ
+STR_DRL_UI_ASM_CARGO	Cargo: %1 slots	Грузовой отсек: %1 слотов
+STR_DRL_UI_ASM_CARGO_PARTS	parts +%1	в деталях +%1
+STR_DRL_UI_ASM_ATTS	Attachments: %1	Навесное: %1
+STR_DRL_UI_ASM_NOATTS	none	нет
+STR_DRL_UI_SEARCH_RES	Search results	Результаты поиска

@@ -116,6 +116,42 @@ class DRL_UIText
 	}
 }
 
+// Тихие звуки интерфейса окна крафта: наведение и выбор блока
+// (DRL_UI_Hover_SoundSet / DRL_UI_Select_SoundSet в config.cpp, ванильные щелчки).
+class DRL_UISound
+{
+	protected static int s_LastHover;
+
+	static void Hover()
+	{
+		if (!GetGame())
+			return;
+		// Быстрое ведение мышью по списку не должно трещать.
+		int now = GetGame().GetTime();
+		if (now - s_LastHover < 70)
+			return;
+		s_LastHover = now;
+		Play("DRL_UI_Hover_SoundSet");
+	}
+
+	static void Select()
+	{
+		Play("DRL_UI_Select_SoundSet");
+	}
+
+	protected static void Play(string soundSet)
+	{
+		if (!GetGame() || GetGame().IsDedicatedServer())
+			return;
+		Object p = GetGame().GetPlayer();
+		if (!p)
+			return;
+		EffectSound snd = SEffectManager.PlaySoundOnObject(soundSet, p);
+		if (snd)
+			snd.SetSoundAutodestroy(true);
+	}
+}
+
 class DRL_UIAnim
 {
 	// INT_UIF_Animator.Reveal считает «домом» текущую позицию виджета; при
@@ -325,6 +361,8 @@ class DRL_UIStage extends ScriptedWidgetEventHandler
 	protected int m_HideMask;
 	protected bool m_Bare;
 	protected ImageWidget m_MissingIcon;
+	protected float m_ZoomBase = 1;
+	protected float m_UserZoom = 1;
 
 	// bare - без подложки, подсветки и подсказки: модель внутри круга «Чертежа».
 	void Build(Widget parent, float x, float y, float w, float h, bool bare = false)
@@ -449,19 +487,22 @@ class DRL_UIStage extends ScriptedWidgetEventHandler
 	{
 		if (!m_View)
 			return;
-		if (cls != m_View.GetClass())
+		// В «Чертеже» (bare) поворот и масштаб сохраняются, анимации появления нет:
+		// при смене рецепта или варианта изделие не прыгает.
+		if (cls != m_View.GetClass() && !m_Bare)
 		{
 			m_View.SetOrientation(Vector(-8, 30, 0));
-			m_View.SetZoom(1);
+			m_UserZoom = 1;
 			m_Idle = 0;
 		}
 		bool ok = m_View.SetClass(cls);
+		ApplyZoom();
 		if (m_HideMask != 0)
 			m_View.Show(false);
 		m_Missing.Show(cls != "" && !ok);
 		if (m_HintRow)
 			m_HintRow.Show(ok);
-		if (ok && m_Clip)
+		if (ok && m_Clip && !m_Bare)
 			RevealClip();
 	}
 
@@ -479,20 +520,42 @@ class DRL_UIStage extends ScriptedWidgetEventHandler
 		if (!m_View)
 			return;
 		bool changed = cls != m_View.GetClass();
-		if (changed)
+		if (changed && !m_Bare)
 		{
 			m_View.SetOrientation(Vector(-8, 30, 0));
-			m_View.SetZoom(1);
+			m_UserZoom = 1;
 			m_Idle = 0;
 		}
 		bool ok = m_View.Build(cls, attachments);
+		ApplyZoom();
 		if (m_HideMask != 0)
 			m_View.Show(false);
 		m_Missing.Show(cls != "" && !ok);
 		if (m_HintRow)
 			m_HintRow.Show(ok);
-		if (ok && changed && m_Clip)
+		if (ok && changed && m_Clip && !m_Bare)
 			RevealClip();
+	}
+
+	// Масштаб модели = база (доля области показа) x масштаб колёсиком.
+	// Область показа у «Чертежа» больше круга: увеличенная модель не обрезается.
+	void SetZoomBase(float zoomBase)
+	{
+		m_ZoomBase = zoomBase;
+		ApplyZoom();
+	}
+
+	protected void ApplyZoom()
+	{
+		if (m_View)
+			m_View.SetZoom(m_ZoomBase * m_UserZoom);
+	}
+
+	// Тестовый хук: масштаб колёсиком в процентах (60..240).
+	void TestUserZoom(float zoom)
+	{
+		m_UserZoom = Math.Clamp(zoom, 0.6, 2.4);
+		ApplyZoom();
 	}
 
 	// Оверлеи (выпадающие панели, диалоги) прячут модель, пока перекрывают её:
@@ -531,7 +594,8 @@ class DRL_UIStage extends ScriptedWidgetEventHandler
 		if (!m_View)
 			return;
 		m_View.SetOrientation(Vector(-8, 30, 0));
-		m_View.SetZoom(1);
+		m_UserZoom = 1;
+		ApplyZoom();
 		m_Idle = 0;
 	}
 
@@ -591,8 +655,8 @@ class DRL_UIStage extends ScriptedWidgetEventHandler
 	{
 		if (w != m_Hit || !m_View)
 			return false;
-		float z = m_View.GetZoom() + wheel * 0.12;
-		m_View.SetZoom(Math.Clamp(z, 0.6, 2.4));
+		m_UserZoom = Math.Clamp(m_UserZoom + wheel * 0.12, 0.6, 2.4);
+		ApplyZoom();
 		m_Idle = IDLE_RESUME;
 		return true;
 	}

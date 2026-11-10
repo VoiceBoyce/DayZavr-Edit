@@ -3208,6 +3208,19 @@ class CfgSoundShaders
 		range = 5;
 		rangeCurve = "defaultAmpAttenuationCurve";
 	};
+	// Тихие звуки интерфейса окна крафта (наведение и выбор), ванильные сэмплы.
+	class DRL_UI_Hover_SoundShader
+	{
+		samples[] = {{"DZ\sounds\weapons\generic\fireModeSwitch\firemode_switch_simple_click_01",1},{"DZ\sounds\weapons\generic\fireModeSwitch\firemode_switch_simple_click_02",1},{"DZ\sounds\weapons\generic\fireModeSwitch\firemode_switch_simple_click_03",1}};
+		volume = 0.12;
+		range = 5;
+	};
+	class DRL_UI_Select_SoundShader
+	{
+		samples[] = {{"DZ\sounds\Characters\actions\items\digatalLock\digitalLock_buttons_click_01",1},{"DZ\sounds\Characters\actions\items\digatalLock\digitalLock_buttons_click_02",1},{"DZ\sounds\Characters\actions\items\digatalLock\digitalLock_buttons_click_03",1}};
+		volume = 0.3;
+		range = 5;
+	};
 };
 class CfgSoundSets
 {
@@ -3501,6 +3514,22 @@ class CfgSoundSets
 	class DRLLearning_Book_SoundSet
 	{
 		soundShaders[] = {"DRLLearning_Book_SoundShader"};
+		volumeFactor = 1.0;
+		spatial = 0;
+		doppler = 0;
+		loop = 0;
+	};
+	class DRL_UI_Hover_SoundSet
+	{
+		soundShaders[] = {"DRL_UI_Hover_SoundShader"};
+		volumeFactor = 1.0;
+		spatial = 0;
+		doppler = 0;
+		loop = 0;
+	};
+	class DRL_UI_Select_SoundSet
+	{
+		soundShaders[] = {"DRL_UI_Select_SoundShader"};
 		volumeFactor = 1.0;
 		spatial = 0;
 		doppler = 0;

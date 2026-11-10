@@ -142,13 +142,29 @@ class DRL_UIMannequin extends ScriptedWidgetEventHandler
 		}
 	}
 
+	// Базовый масштаб меньше области (при 1.0 макушку срезало) и небольшой сдвиг вниз:
+	// персонаж стоит целиком, с полем сверху. Колесо увеличивает от этой базы.
+	static const float BASE_SIZE = 0.86;
+	static const float BASE_DROP = 0.03;
+	// Превью обрезает модель по своему прямоугольнику: он шире области (лишнее режет
+	// клип области), а масштаб модели задаёт только высота. Поза вполоборота стоит
+	// левее центра - сдвиг вправо выравнивает поля слева и справа.
+	static const float VIEW_W = 1.2;
+	static const float SHIFT_X = 0.06;
+
 	protected void ApplyView()
 	{
 		if (!m_Preview)
 			return;
 		m_Preview.SetModelPosition(Vector(0, 0, 0.605));
 		m_Preview.SetModelOrientation(Vector(0, m_Yaw, 0));
-		m_Preview.SetSize(m_Zoom, m_Zoom);
+		float size = BASE_SIZE * m_Zoom;
+		// При SetSize(size, size) виджет сужался и срезал руку по своему краю.
+		m_Preview.SetSize(VIEW_W, size);
+		// Размер и позиция относительные (layout без exact): по горизонтали центр (center_ref),
+		// по вертикали - по центру области и чуть ниже; увеличение идёт от центра.
+		float drop = (1 - size) * 0.5 + BASE_DROP;
+		m_Preview.SetPos(SHIFT_X, drop);
 	}
 
 	void ResetView()
@@ -341,8 +357,9 @@ class DRL_UICutTag extends Managed
 		else
 			m_View.Clear();
 		m_View.Show(m_HasModel && !m_ModelsHidden);
-		m_Glyph.Show(!m_HasModel);
+		// SetIcon фреймворка сам показывает значок: сначала значок, потом видимость.
 		INT_UIF_Widgets.SetIcon(m_Glyph, d.m_Glyph);
+		m_Glyph.Show(!m_HasModel);
 		m_Swap.Show(d.m_Variants && !m_ModelsHidden);
 
 		float tw = w - 58 - 10;
@@ -470,8 +487,9 @@ class DRL_UICutTool extends Managed
 		else
 			m_View.Clear();
 		m_View.Show(m_HasModel && !m_ModelsHidden);
-		m_Glyph.Show(!m_HasModel);
+		// SetIcon фреймворка сам показывает значок: сначала значок, потом видимость.
 		INT_UIF_Widgets.SetIcon(m_Glyph, d.m_Glyph);
+		m_Glyph.Show(!m_HasModel);
 		m_Name.SetText(d.m_Name);
 		m_Sub.SetText(d.m_Sub);
 
@@ -1224,12 +1242,16 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 		if (pi >= 0)
 		{
 			if (pi < m_Parts.Count())
+			{
+				DRL_UISound.Select();
 				m_OnAction.Invoke("part", m_Parts[pi].m_RecipeId, 0);
+			}
 			return true;
 		}
 		int si = SwatchOf(w);
 		if (si >= 0)
 		{
+			DRL_UISound.Select();
 			m_OnAction.Invoke("var", si, 0);
 			return true;
 		}
@@ -1238,7 +1260,10 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 		{
 			DRL_UIBpItem d = m_Tags[ti].m_Data;
 			if (d)
+			{
+				DRL_UISound.Select();
 				m_OnAction.Invoke("item", d.m_Tag, d.m_Kind);
+			}
 			return true;
 		}
 		if (ToolOf(w) >= 0)
@@ -1247,6 +1272,7 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 		int di = DopOf(w, action);
 		if (di >= 0)
 		{
+			DRL_UISound.Select();
 			m_OnAction.Invoke("dop", di, action);
 			return true;
 		}
@@ -1255,11 +1281,17 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 
 	override bool OnMouseEnter(Widget w, int x, int y)
 	{
+		if (PartOf(w) >= 0 || SwatchOf(w) >= 0)
+		{
+			DRL_UISound.Hover();
+			return true;
+		}
 		int ti = TagOf(w);
 		if (ti >= 0)
 		{
 			DRL_UICutTag tag = m_Tags[ti];
 			tag.SetHover(true);
+			DRL_UISound.Hover();
 			if (tag.m_Data && tag.m_Data.m_Tip != "")
 				INT_UIF_Tooltip.ShowFor(tag.m_Root, tag.m_Data.m_Tip);
 			return true;
@@ -1268,6 +1300,7 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 		if (ki >= 0)
 		{
 			DRL_UICutTool tool = m_Tools[ki];
+			DRL_UISound.Hover();
 			if (tool.m_Data && tool.m_Data.m_Tip != "")
 				INT_UIF_Tooltip.ShowFor(tool.m_Root, tool.m_Data.m_Tip);
 			return true;

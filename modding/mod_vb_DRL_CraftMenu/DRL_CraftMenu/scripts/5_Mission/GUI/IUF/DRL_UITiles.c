@@ -1257,7 +1257,10 @@ class DRL_UICategoryRail extends ScriptedWidgetEventHandler
 		if (!b || b.m_Entry < 0)
 			return w == m_BgHit;
 		if (b.m_Entry != m_Selected)
+		{
+			DRL_UISound.Select();
 			Select(b.m_Entry, true);
+		}
 		return true;
 	}
 
@@ -1283,6 +1286,7 @@ class DRL_UICategoryRail extends ScriptedWidgetEventHandler
 			return false;
 		b.m_Hover = true;
 		Paint(b);
+		DRL_UISound.Hover();
 		DRL_UICategoryEntry e = GetEntry(b.m_Entry);
 		if (e)
 		{

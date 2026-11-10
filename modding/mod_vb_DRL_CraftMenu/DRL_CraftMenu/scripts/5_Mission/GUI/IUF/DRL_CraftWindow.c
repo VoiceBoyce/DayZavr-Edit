@@ -155,6 +155,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 	protected int m_RunRemain = -1;
 	protected float m_LateRefresh;
 	protected string m_VariantLabel;   // подпись выбранного варианта результата
+	protected string m_VariantWidest;  // самая широкая подпись варианта (ширина ячейки штампа)
 	protected int m_DopPicked;         // выбрано доп. деталей / всего
 	protected int m_DopTotal;
 
@@ -369,7 +370,8 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		int n = 0;
 		for (int i = 0; i < cfg.Categories.Count(); i++)
 		{
-			if (cfg.Categories[i] && CountCategoryRecipes(i) > 0)
+			DRL_Craft_Category cat = cfg.Categories[i];
+			if (cat && cat.ShowAll != 1 && CountCategoryRecipes(i) > 0)
 				n++;
 		}
 		return n;
@@ -568,15 +570,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		m_StepPlus.SetColors(0, 0, muted);
 		m_StepPlus.OnClick().Insert(OnStepPlus);
 
-		// ×1 ×5 ×10 «Макс N»: значения ставит RefreshCountUI.
-		for (int i = 0; i < 4; i++)
-		{
-			DRL_UIPill chip = new DRL_UIPill();
-			chip.Build(m_Bar, 0, 17, 38, 8, 12, "DRL_CountChip_" + i.ToString());
-			chip.OnClick().Insert(OnCountChip);
-			m_CountChips.Insert(chip);
-			m_CountChipValues.Insert(1);
-		}
+		// Чипы «x1 / x5 / x10 / Макс» убраны (решение 2026-11-10): хватает счётчика.
 
 		float btnW = 212;
 		m_TotalRight = w - 16 - btnW - 14;
@@ -853,6 +847,9 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			DRL_Craft_Category cat = cfg.Categories[i];
 			if (!cat)
 				continue;
+			// «Все рецепты» (ShowAll) не показываем (решение 2026-11-10): открывается первая категория.
+			if (cat.ShowAll == 1)
+				continue;
 			int count = CountCategoryRecipes(i);
 			if (count <= 0)
 				continue;
@@ -956,6 +953,21 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		return true;
 	}
 
+	// Индекс скрытой категории «Все рецепты» (ShowAll) или -1.
+	protected int FindShowAllCategory()
+	{
+		DRL_Craft_Config cfg = Cfg();
+		if (!cfg || !cfg.Categories)
+			return -1;
+		for (int i = 0; i < cfg.Categories.Count(); i++)
+		{
+			DRL_Craft_Category cat = cfg.Categories[i];
+			if (cat && cat.ShowAll == 1)
+				return i;
+		}
+		return -1;
+	}
+
 	protected int CountCategoryRecipes(int catIdx)
 	{
 		if (!g_Craft_Config)
@@ -998,8 +1010,9 @@ class DRL_CraftWindow extends INT_UIF_Menu
 	// иначе категория из списков (как HandleRecipeSelectionClick).
 	protected DRL_Craft_Category ContextCategoryFor(DRL_Craft_Recipe r)
 	{
+		// Рецепт из поиска может быть не из выбранной категории - тогда ищем его категорию.
 		DRL_Craft_Category selected = GetCurrentCategory();
-		if (selected && selected.ShowAll != 1)
+		if (selected && selected.ShowAll != 1 && RecipePassesCategoryIdx(r, m_CurrentCategoryIdx))
 			return selected;
 		return FindCategoryForRecipe(r);
 	}
@@ -1027,6 +1040,16 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			array<EntityAI> cachedItems = new array<EntityAI>();
 			GetInventorySnapshot(cachedItems);
 			DRL_Craft_Category curCat = GetCurrentCategory();
+			int catIdx = m_CurrentCategoryIdx;
+			// «Все рецепты» скрыта, поэтому поиск идёт по всем категориям
+			// с правилами скрытой категории (если её нет в конфиге — просто по всем).
+			if (m_Query != "")
+			{
+				catIdx = FindShowAllCategory();
+				curCat = null;
+				if (catIdx >= 0)
+					curCat = cfg.Categories[catIdx];
+			}
 			if (all)
 			{
 				for (int i = 0; i < all.Count(); i++)
@@ -1040,7 +1063,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 						continue;
 					if (!RecipeAllowedByContext(r))
 						continue;
-					if (!RecipePassesCategoryIdx(r, m_CurrentCategoryIdx))
+					if (!RecipePassesCategoryIdx(r, catIdx))
 						continue;
 					if (curCat && curCat.ShowOnlyAvailableCraft == 1)
 					{
@@ -1071,7 +1094,10 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			if (e && e.m_Status == DRL_UI_STATUS_CAN)
 				can++;
 		}
-		m_SecTitle.SetText(m_CatTitle);
+		if (m_Query != "")
+			m_SecTitle.SetText("#STR_DRL_UI_SEARCH_RES");
+		else
+			m_SecTitle.SetText(m_CatTitle);
 		m_SecCount.SetText(DRL_UIText.Fmt("#STR_DRL_UI_CAN_OF", can.ToString(), n.ToString()));
 	}
 
@@ -1818,7 +1844,8 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			return;
 		bool sameRecipe = r == m_ShownRecipe;
 		m_ShownRecipe = r;
-		if (!sameRecipe || !m_SheetBody.IsVisible())
+		// Анимация появления - только когда лист был пустым; смена рецепта без сдвигов.
+		if (!m_SheetBody.IsVisible())
 			ShowDetails(true, true);
 		HideVariationList();
 
@@ -1837,8 +1864,118 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		RefreshStatuses();
 		RefreshStationSlots();
 		FillSetInfo(r);
+		FillVehicleInfo(r);
 		m_Bp.SetLocked(!DRL_LearnState.HasLearned(r.RecipeId));
 		m_Bp.Relayout();
+	}
+
+	// --- характеристики машины для «Сборки» ---------------------------------------------
+	protected int CargoSlotsOf(string cls)
+	{
+		if (cls == "")
+			return 0;
+		// У машин отсек в подклассе Cargo (ванилла: class Cargo { itemsCargoSize[] }),
+		// у предметов - в корне класса.
+		string path = "CfgVehicles " + cls + " Cargo itemsCargoSize";
+		if (!GetGame().ConfigIsExisting(path))
+			path = "CfgVehicles " + cls + " itemsCargoSize";
+		if (!GetGame().ConfigIsExisting(path))
+			return 0;
+		TIntArray size = new TIntArray();
+		GetGame().ConfigGetIntArray(path, size);
+		if (size.Count() < 2)
+			return 0;
+		return size[0] * size[1];
+	}
+
+	// Слот - запчасть машины (колёса, двери, капот, аккумулятор, свечи...): не показываем.
+	protected bool IsCarPartSlot(string slot)
+	{
+		string low = slot;
+		low.ToLower();
+		array<string> parts = {"wheel", "door", "hood", "trunk", "battery", "plug", "radiator", "reflector", "headlight", "engine", "belt", "bumper", "bamper", "kovh", "driver", "spare", "glass", "window", "mirror"};
+		foreach (string p : parts)
+		{
+			if (low.IndexOf(p) > -1)
+				return true;
+		}
+		return false;
+	}
+
+	// Груз (слоты отсека машины и выбранных деталей) и навесное для груза и
+	// снаряжения: бочки, ящики, рюкзаки, оружие. Запчасти не показываются.
+	protected void FillVehicleInfo(DRL_Craft_Recipe r)
+	{
+		array<string> lines = new array<string>();
+		string car = ChosenResult();
+		if (m_StationKind != DRL_ST_LIFT || car == "" || !GetGame().IsKindOf(car, "Transport"))
+		{
+			m_Bp.SetInfo(lines);
+			return;
+		}
+		int cargo = CargoSlotsOf(car);
+		int partsCargo = 0;
+		DRL_Craft_Config cfg = Cfg();
+		if (cfg)
+		{
+			foreach (int dopId : m_SelectedAttachedRecipeIds)
+			{
+				DRL_Craft_Recipe dopR = cfg.FindById(dopId);
+				string dopCls = GetSelectedAttachedClass(dopId, dopR);
+				partsCargo = partsCargo + CargoSlotsOf(dopCls) * GetSelectedAttachedQuantity(dopId);
+			}
+		}
+		string cargoLine = DRL_UIText.Fmt("#STR_DRL_UI_ASM_CARGO", cargo.ToString());
+		if (partsCargo > 0)
+			cargoLine = cargoLine + " · " + DRL_UIText.Fmt("#STR_DRL_UI_ASM_CARGO_PARTS", partsCargo.ToString());
+		lines.Insert(cargoLine);
+
+		// Навесное: названия слотов, одинаковые - числом («Бочка x2»).
+		array<string> names = new array<string>();
+		array<int> counts = new array<int>();
+		string path = "CfgVehicles " + car + " attachments";
+		if (GetGame().ConfigIsExisting(path))
+		{
+			TStringArray slots = new TStringArray();
+			GetGame().ConfigGetTextArray(path, slots);
+			foreach (string slot : slots)
+			{
+				if (IsCarPartSlot(slot))
+					continue;
+				string sn = slot;
+				int sid = InventorySlots.GetSlotIdFromString(slot);
+				if (sid != InventorySlots.INVALID)
+				{
+					string dn = InventorySlots.GetSlotDisplayName(sid);
+					if (dn != "")
+						sn = dn;
+				}
+				int at = names.Find(sn);
+				if (at > -1)
+				{
+					counts.Set(at, counts[at] + 1);
+				}
+				else
+				{
+					names.Insert(sn);
+					counts.Insert(1);
+				}
+			}
+		}
+		string attList = "";
+		for (int i = 0; i < names.Count(); i++)
+		{
+			string item = names[i];
+			if (counts[i] > 1)
+				item = item + " x" + counts[i].ToString();
+			if (attList != "")
+				attList = attList + ", ";
+			attList = attList + item;
+		}
+		if (attList == "")
+			attList = DRL_UIText.Tr("#STR_DRL_UI_ASM_NOATTS");
+		lines.Insert(DRL_UIText.Fmt("#STR_DRL_UI_ASM_ATTS", attList));
+		m_Bp.SetInfo(lines);
 	}
 
 	// --- сет для «Раскроя»: части и во что одеть манекен --------------------------------
@@ -2090,6 +2227,19 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		m_VariantLabel = "";
 		if (sel >= 0 && sel < names.Count())
 			m_VariantLabel = names[sel];
+		// Самая широкая подпись: ячейка «Цвет» в штампе держит её ширину,
+		// чтобы штамп не прыгал при смене варианта.
+		m_VariantWidest = "";
+		float widestW = 0;
+		foreach (string wn : names)
+		{
+			float wnW = DRL_UIMeasure.TextW(m_Stamp, wn, 14, true);
+			if (wnW > widestW)
+			{
+				widestW = wnW;
+				m_VariantWidest = wn;
+			}
+		}
 		m_Bp.SetVariants(names, colors, sel, label);
 	}
 
@@ -3201,11 +3351,23 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			values.Insert(DRL_UIText.Pct(r.ResultQuantityFrac));
 			colors.Insert(txt);
 		}
-		SetStamp(labels, values, colors);
+		// Ячейки, значение которых меняется без смены рецепта (цвет, число деталей),
+		// держат ширину самого длинного значения: штамп не прыгает.
+		array<string> mins = new array<string>();
+		foreach (string stampKey : labels)
+		{
+			string minVal = "";
+			if (stampKey == "#STR_DRL_UI_STP_PAINT")
+				minVal = m_VariantWidest;
+			else if (stampKey == "#STR_DRL_UI_STP_PARTS")
+				minVal = DRL_UIText.Fmt("#STR_DRL_UI_ASM_OF", m_DopTotal.ToString(), m_DopTotal.ToString());
+			mins.Insert(minVal);
+		}
+		SetStamp(labels, values, colors, mins);
 		FillStats(chosen);
 	}
 
-	protected void SetStamp(array<string> labels, array<string> values, array<int> colors)
+	protected void SetStamp(array<string> labels, array<string> values, array<int> colors, array<string> mins)
 	{
 		array<float> widths = new array<float>();
 		float total = 0;
@@ -3220,6 +3382,12 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			float cw = lw;
 			if (vw > cw)
 				cw = vw;
+			if (mins && i < mins.Count() && mins[i] != "")
+			{
+				float mw = DRL_UIMeasure.TextW(m_Stamp, mins[i], 14, true);
+				if (mw > cw)
+					cw = mw;
+			}
 			cw = cw + 22;
 			widths.Insert(cw);
 			total = total + cw;
@@ -3541,16 +3709,15 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		m_RetList.SetItems(items, keepScroll);
 		bool hasDrops = items.Count() > 0;
 		m_RecraftPill.Show(hasDrops);
-		if (r && hasDrops)
-		{
+		// Без разбора заголовок - название предмета, «не разбирается» пишет пустой список.
+		if (r)
 			m_RecraftName.SetText(r.RecipeName);
-			m_RecraftTime.SetText(DRL_UIText.Time(r.GetRecraftTimeSec()));
-		}
 		else
-		{
 			m_RecraftName.SetText(DRL_UIText.Tr("#STR_DRL_UI_RC_NONE"));
+		if (r && hasDrops)
+			m_RecraftTime.SetText(DRL_UIText.Time(r.GetRecraftTimeSec()));
+		else
 			m_RecraftTime.SetText("");
-		}
 	}
 
 	protected void UpdateRecraftButton()
@@ -3740,36 +3907,6 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		int top = Math.Max(1, maxN);
 		m_StepMinus.SetEnabled(n > 1);
 		m_StepPlus.SetEnabled(n < top);
-
-		// x1 x5 x10 «Макс N».
-		m_CountChipValues.Clear();
-		m_CountChipValues.Insert(1);
-		m_CountChipValues.Insert(5);
-		m_CountChipValues.Insert(10);
-		m_CountChipValues.Insert(top);
-		float x = 144;
-		for (int i = 0; i < m_CountChips.Count(); i++)
-		{
-			DRL_UIPill chip = m_CountChips[i];
-			int v = m_CountChipValues[i];
-			string label = "x" + v.ToString();
-			if (i == 3)
-				label = DRL_UIText.Fmt("#STR_DRL_UI_MAX_N", v.ToString());
-			float cw = chip.Set(label, "");
-			chip.Move(x, 17);
-			x = x + cw + 4;
-			int fill = DRL_UIC.White(13);
-			int border = 0;
-			int fg = DRL_UIC.Muted();
-			if (v == n)
-			{
-				fill = DRL_UIC.A(41);
-				border = DRL_UIC.A(128);
-				fg = DRL_UIC.A();
-			}
-			chip.SetColors(fill, border, fg);
-			chip.SetEnabled(i == 3 || v <= top);
-		}
 
 		int total = r.ResultCount * n;
 		if (total <= 0)
@@ -4243,7 +4380,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		if (cfg.Categories && m_CurrentCategoryIdx >= 0 && m_CurrentCategoryIdx < cfg.Categories.Count())
 		{
 			DRL_Craft_Category selectedCat = cfg.Categories[m_CurrentCategoryIdx];
-			if (selectedCat && selectedCat.ShowAll != 1)
+			if (selectedCat && selectedCat.ShowAll != 1 && RecipePassesCategoryIdx(r, m_CurrentCategoryIdx))
 				cat = selectedCat;
 			else
 				cat = FindCategoryForRecipe(r);
@@ -4395,6 +4532,12 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		if (cmd == "pclose")
 		{
 			ClosePopover();
+			return TestState();
+		}
+		if (cmd == "zoom")
+		{
+			if (m_Stage)
+				m_Stage.TestUserZoom(n * 0.01);
 			return TestState();
 		}
 		if (cmd == "reqs")

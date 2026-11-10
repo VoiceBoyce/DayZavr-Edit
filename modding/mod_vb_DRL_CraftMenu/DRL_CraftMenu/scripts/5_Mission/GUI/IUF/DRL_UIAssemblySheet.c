@@ -241,6 +241,14 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 	protected ref DRL_UISpecList m_SpecList;
 	protected float m_SpecBarW;
 
+	// Характеристики машины в правом нижнем углу стенда.
+	static const float INFO_W = 280;
+	protected Widget m_Info;
+	protected ref INT_UIF_Surface m_InfoBg;
+	protected TextWidget m_InfoCargo;
+	protected MultilineTextWidget m_InfoAtts;
+	protected ref array<string> m_InfoLines;
+
 	void DRL_UIAssemblySheet()
 	{
 		m_Wheels = new array<ref INT_UIF_Surface>();
@@ -249,6 +257,18 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 		m_PaintRings = new array<ImageWidget>();
 		m_PaintHits = new array<ButtonWidget>();
 		m_SpecList = new DRL_UISpecList();
+		m_InfoLines = new array<string>();
+	}
+
+	override void SetInfo(array<string> lines)
+	{
+		m_InfoLines.Clear();
+		if (!lines)
+			return;
+		foreach (string l : lines)
+		{
+			m_InfoLines.Insert(l);
+		}
 	}
 
 	override void Build(Widget parent, float x, float y, float w, float h)
@@ -332,6 +352,18 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 			hit.Show(false);
 			m_PaintHits.Insert(hit);
 		}
+
+		// Характеристики машины: грузовой отсек и навесное (бочки, ящики, рюкзаки, оружие).
+		m_Info = INT_UIF_Draw.Frame(m_Bay, m_BayW - 18 - INFO_W, m_BayH - 18 - 96, INFO_W, 96, "DRL_AsmInfo");
+		int infoFill = ARGB(215, 8, 12, 20);
+		int infoBorder = DRL_UIC.BP(70);
+		m_InfoBg = INT_UIF_Surface.Box(m_Info, 0, 0, INFO_W, 96, 10, infoFill, infoBorder);
+		TextWidget infoCap = INT_UIF_Draw.Text(m_Info, 12, 8, INFO_W - 24, 14, "#STR_DRL_UI_ASM_INFO", 9, bpText);
+		infoCap.SetBold(true);
+		m_InfoCargo = INT_UIF_Draw.Text(m_Info, 12, 24, INFO_W - 24, 18, "", 12, txt);
+		m_InfoCargo.SetBold(true);
+		m_InfoAtts = INT_UIF_Draw.MText(m_Info, 12, 44, INFO_W - 24, 46, "", 11, muted);
+		m_Info.Show(false);
 
 		// Спецификация.
 		float sx = w - PAD_X - SPEC_W;
@@ -581,6 +613,7 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 		LayoutChips(x0, y0, sc, cx);
 		LayoutPaint();
 		LayoutSpec();
+		LayoutInfo();
 
 		for (int u = m_DotsUsed; u < m_Dots.Count(); u++)
 		{
@@ -719,7 +752,8 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 			}
 			else if (pos == 3)
 			{
-				px = cx;
+				// Левее центра: справа внизу блок характеристик.
+				px = cx - 90;
 				py = y0 + 446 * sc + 40;
 				ax = cx;
 				ay = y0 + 390 * sc;
@@ -828,6 +862,29 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 			INT_UIF_Draw.Place(m_PaintHits[i], dx + 2, y + 2, 26, 26);
 		}
 		INT_UIF_Draw.Place(m_PaintLabel, 18, y + 7, 70, 16);
+	}
+
+	// Блок характеристик: строка груза и навесное (с переносом), высота по тексту.
+	protected void LayoutInfo()
+	{
+		bool show = m_InfoLines.Count() > 0;
+		m_Info.Show(show);
+		if (!show)
+			return;
+		m_InfoCargo.SetText(m_InfoLines[0]);
+		string atts = "";
+		if (m_InfoLines.Count() > 1)
+			atts = m_InfoLines[1];
+		m_InfoAtts.SetText(atts);
+		// Длина навесного в строках по ширине текста (MultilineTextWidget переносит сам).
+		float aw = DRL_UIMeasure.TextW(m_Info, atts, 11, false);
+		int lines = (int)(aw / (INFO_W - 28)) + 1;
+		if (lines > 4)
+			lines = 4;
+		float ih = 48 + lines * 15 + 8;
+		INT_UIF_Draw.Place(m_Info, m_BayW - 18 - INFO_W, m_BayH - 22 - ih, INFO_W, ih);
+		INT_UIF_Draw.Resize(m_InfoBg.GetRoot(), INFO_W, ih);
+		INT_UIF_Draw.Resize(m_InfoAtts, INFO_W - 24, lines * 15 + 4);
 	}
 
 	// Группа компонента по классу.
@@ -961,6 +1018,7 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 		int pi = PaintOf(w);
 		if (pi >= 0)
 		{
+			DRL_UISound.Select();
 			m_OnAction.Invoke("var", pi, 0);
 			return true;
 		}
@@ -968,6 +1026,7 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 		int di = DopOf(w, action);
 		if (di >= 0)
 		{
+			DRL_UISound.Select();
 			m_OnAction.Invoke("dop", di, action);
 			return true;
 		}
@@ -979,11 +1038,14 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 		int pi = PaintOf(w);
 		if (pi >= 0 && pi < m_VarNames.Count())
 		{
+			DRL_UISound.Hover();
 			INT_UIF_Tooltip.ShowFor(m_PaintDots[pi], m_VarNames[pi]);
 			return true;
 		}
 		int action;
 		int di = DopOf(w, action);
+		if (di >= 0 && action == 0)
+			DRL_UISound.Hover();
 		if (di >= 0 && action == 0 && di < m_Dop.Count() && m_Dop[di].m_Tip != "")
 		{
 			INT_UIF_Tooltip.ShowFor(m_DopChips[di].m_Root, m_Dop[di].m_Tip);

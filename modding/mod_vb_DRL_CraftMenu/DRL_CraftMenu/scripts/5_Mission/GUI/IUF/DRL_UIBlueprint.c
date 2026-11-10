@@ -508,8 +508,9 @@ class DRL_UIBpCard extends Managed
 		else
 			m_View.Clear();
 		m_View.Show(m_HasModel && !m_ModelsHidden);
-		m_Glyph.Show(!m_HasModel);
+		// SetIcon фреймворка сам показывает значок: сначала значок, потом видимость.
 		INT_UIF_Widgets.SetIcon(m_Glyph, d.m_Glyph);
+		m_Glyph.Show(!m_HasModel);
 		m_Swap.Show(d.m_Variants && !m_ModelsHidden);
 
 		// «Сделать» справа.
@@ -925,6 +926,7 @@ class DRL_UIBlueprint extends ScriptedWidgetEventHandler
 	protected bool m_Covered;
 	protected bool m_AllOk;
 	protected int m_HoverCard = -1;
+	protected float m_SideBottom;    // низ самой нижней боковой выноски (для ширины характеристик)
 	protected ref ScriptInvoker m_OnAction;
 
 	void DRL_UIBlueprint()
@@ -1164,6 +1166,12 @@ class DRL_UIBlueprint extends ScriptedWidgetEventHandler
 	{
 	}
 
+	// Характеристики изделия строками (для «Сборки»: груз и навесное машины).
+	// «Чертёж» их не показывает.
+	void SetInfo(array<string> lines)
+	{
+	}
+
 	// Число на изделии («×5»), "" - скрыть.
 	void SetBadge(string text)
 	{
@@ -1256,18 +1264,17 @@ class DRL_UIBlueprint extends ScriptedWidgetEventHandler
 		float w = m_W;
 		float h = m_H;
 		float cx = w * 0.5;
-		bool hasTop = m_Top.Count() > 0;
 		bool hasVars = m_VarNames.Count() > 1;
 		bool hasSlots = m_SlotCount > 0;
 		bool hasDop = m_Dop.Count() > 0;
 		bool hasStats = StatsFilled();
 
-		float top = 0;
-		if (hasTop)
-			top = 70;
-		float bottom = 12;
-		if (hasStats)
-			bottom = 12 + 46 + 14;
+		// Места не зависят от рецепта: ряд обвесов сверху зарезервирован всегда,
+		// изделие стоит на постоянной высоте - при смене рецепта или варианта
+		// ничего не прыгает. Поднимаем его только если снизу совсем не хватает места.
+		float top = 70;
+		float r = CORE_R;
+		float cy = top + (h - top) * 0.40;
 		float under = 0;
 		if (hasVars)
 			under = under + 52;
@@ -1275,19 +1282,15 @@ class DRL_UIBlueprint extends ScriptedWidgetEventHandler
 			under = under + 56;
 		if (hasDop)
 			under = under + 54;
-
-		// Изделие по центру свободной части; при нехватке высоты круг меньше.
-		float r = CORE_R;
-		float regionTop = top + 22;
-		float regionBottom = h - bottom - under - 6;
-		float room = (regionBottom - regionTop) * 0.5 - 14;
-		if (room < r)
-			r = room;
-		if (r < 48)
-			r = 48;
-		float cy = (regionTop + regionBottom) * 0.5;
-		if (cy - r - 14 < regionTop)
-			cy = regionTop + r + 14;
+		float statsTop = h - 12 - 46;
+		float needBottom = cy + r + 24 + under;
+		if (needBottom > statsTop - 8)
+		{
+			cy = cy - (needBottom - (statsTop - 8));
+			float minCy = top + 22 + r;
+			if (cy < minCy)
+				cy = minCy;
+		}
 
 		m_Lines.Clear();
 		m_DotsUsed = 0;
@@ -1307,9 +1310,22 @@ class DRL_UIBlueprint extends ScriptedWidgetEventHandler
 		m_Glow.Show(true);
 		INT_UIF_Draw.Place(m_Glow, cx - gs * 0.5, cy - gs * 0.5, gs, gs);
 		m_Glow.SetColor(glow);
-		float ss = r * 1.72;
-		INT_UIF_Draw.Place(m_Stage.GetRoot(), cx - ss * 0.5, cy - ss * 0.5, ss, ss);
-		m_Stage.Resize(ss, ss);
+
+		// Область показа модели - квадрат вокруг изделия до боковых выносок и краёв
+		// листа; модель в нём занимает размер круга, а при увеличении колесом
+		// растёт и не обрезается квадратом круга.
+		float half = cx - (SIDE + CARD_W + 10);
+		float upRoom = cy - top - 4;
+		if (upRoom < half)
+			half = upRoom;
+		float downRoom = h - cy - 4;
+		if (downRoom < half)
+			half = downRoom;
+		float area = half * 2;
+		INT_UIF_Draw.Place(m_Stage.GetRoot(), cx - half, cy - half, area, area);
+		m_Stage.Resize(area, area);
+		float zoomBase = r * 1.72 / area;
+		m_Stage.SetZoomBase(zoomBase);
 
 		m_Badge.Show(m_BadgeValue != "" && !m_Covered);
 		if (m_BadgeValue != "")
@@ -1329,7 +1345,7 @@ class DRL_UIBlueprint extends ScriptedWidgetEventHandler
 		y = LayoutVariants(cx, y, maxW, hasVars);
 		y = LayoutSlots(cx, y, maxW, hasSlots);
 		y = LayoutDop(cx, y, maxW, hasDop);
-		LayoutStats(cx, h - 12 - 46, maxW, hasStats);
+		LayoutStats(cx, maxW, hasStats);
 
 		for (int i = m_DotsUsed; i < m_Dots.Count(); i++)
 		{
@@ -1341,6 +1357,7 @@ class DRL_UIBlueprint extends ScriptedWidgetEventHandler
 
 	protected void LayoutSide(float cx, float cy, float r, float top)
 	{
+		m_SideBottom = 0;
 		int n = m_Side.Count();
 		int capFull = Capacity(top, CARD_H, CARD_GAP);
 		int capCompact = Capacity(top, CARD_H_COMPACT, 4);
@@ -1441,6 +1458,8 @@ class DRL_UIBlueprint extends ScriptedWidgetEventHandler
 		DRL_UIBpCard card = m_Cards[cardIdx];
 		card.Place(d, x, y, CARD_W, ch);
 		card.ShowModel(!m_Covered);
+		if (y + ch > m_SideBottom)
+			m_SideBottom = y + ch;
 
 		float py = y + ch * 0.5;
 		float px = x;
@@ -1608,16 +1627,29 @@ class DRL_UIBlueprint extends ScriptedWidgetEventHandler
 		return false;
 	}
 
-	// Ячейки «подпись / значение» по ширине содержимого.
-	protected void LayoutStats(float cx, float y, float maxW, bool show)
+	// Характеристики у нижнего края: ячейки «подпись / значение» по ширине содержимого,
+	// не влезают в строку - переносятся во второй ряд (тексты не режутся). Если боковые
+	// выноски до низа не доходят, ряд занимает всю ширину листа.
+	protected void LayoutStats(float cx, float maxW, bool show)
 	{
 		if (!show)
 		{
 			m_Stats.Show(false);
 			return;
 		}
+		m_Stats.Show(true);
+		float avail = maxW;
+		float oneRowTop = m_H - 12 - 46;
+		if (m_SideBottom <= oneRowTop - 6)
+			avail = m_W - 2 * SIDE;
+
 		array<float> widths = new array<float>();
-		float total = 0;
+		array<int> rowOf = new array<int>();
+		array<float> xOf = new array<float>();
+		array<float> rowW = new array<float>();
+		int rows = 1;
+		rowW.Insert(0);
+		float x = 0;
 		for (int i = 0; i < STAT_ROWS; i++)
 		{
 			string lt = m_StatLText[i];
@@ -1630,33 +1662,53 @@ class DRL_UIBlueprint extends ScriptedWidgetEventHandler
 				cw = lw;
 				if (vw > cw)
 					cw = vw;
-				cw = cw + 24;
+				cw = cw + 26;
+				if (cw > avail)
+					cw = avail;
 			}
 			widths.Insert(cw);
-			total = total + cw;
+			if (cw <= 0)
+			{
+				rowOf.Insert(-1);
+				xOf.Insert(0);
+				continue;
+			}
+			if (x > 0 && x + cw > avail)
+			{
+				rows++;
+				rowW.Insert(0);
+				x = 0;
+			}
+			rowOf.Insert(rows - 1);
+			xOf.Insert(x);
+			x = x + cw;
+			rowW.Set(rows - 1, x);
 		}
-		float shrink = 1;
-		if (total > maxW && total > 0)
-			shrink = maxW / total;
-		float sw = total * shrink;
-		INT_UIF_Draw.Place(m_Stats, cx - sw * 0.5, y, sw, 46);
-		INT_UIF_Draw.Resize(m_StatsBg.GetRoot(), sw, 46);
-		float x = 0;
-		bool first = true;
+		float boxW = 0;
+		foreach (float rw : rowW)
+		{
+			if (rw > boxW)
+				boxW = rw;
+		}
+		float boxH = rows * 46;
+		float y = m_H - 12 - boxH;
+		INT_UIF_Draw.Place(m_Stats, cx - boxW * 0.5, y, boxW, boxH);
+		INT_UIF_Draw.Resize(m_StatsBg.GetRoot(), boxW, boxH);
 		for (int c = 0; c < STAT_ROWS; c++)
 		{
-			float wc = widths[c] * shrink;
-			bool on = wc > 0;
+			int row = rowOf[c];
+			bool on = row >= 0;
 			m_StatLabels[c].Show(on);
 			m_StatValues[c].Show(on);
-			m_StatSeps[c].Show(on && !first);
+			m_StatSeps[c].Show(on && xOf[c] > 0);
 			if (!on)
 				continue;
-			INT_UIF_Draw.Place(m_StatLabels[c], x + 12, 7, wc - 16, 14);
-			INT_UIF_Draw.Place(m_StatValues[c], x + 12, 20, wc - 16, 20);
-			INT_UIF_Draw.Place(m_StatSeps[c], x, 0, 1, 46);
-			x = x + wc;
-			first = false;
+			float wc = widths[c];
+			float cxl = xOf[c];
+			float ry = row * 46;
+			INT_UIF_Draw.Place(m_StatLabels[c], cxl + 12, ry + 7, wc - 14, 14);
+			INT_UIF_Draw.Place(m_StatValues[c], cxl + 12, ry + 20, wc - 14, 20);
+			INT_UIF_Draw.Place(m_StatSeps[c], cxl, ry, 1, 46);
 		}
 	}
 
@@ -1765,20 +1817,24 @@ class DRL_UIBlueprint extends ScriptedWidgetEventHandler
 				return true;
 			if (isGo && d.m_GoRecipe >= 0)
 			{
+				DRL_UISound.Select();
 				m_OnAction.Invoke("go", d.m_GoRecipe, 0);
 				return true;
 			}
 			if (d.m_Kind == DRL_BP_MORE)
 			{
+				DRL_UISound.Select();
 				m_OnAction.Invoke("more", 0, 0);
 				return true;
 			}
+			DRL_UISound.Select();
 			m_OnAction.Invoke("item", d.m_Tag, d.m_Kind);
 			return true;
 		}
 		int vi = ChipOf(w);
 		if (vi >= 0)
 		{
+			DRL_UISound.Select();
 			m_OnAction.Invoke("var", vi, 0);
 			return true;
 		}
@@ -1786,6 +1842,7 @@ class DRL_UIBlueprint extends ScriptedWidgetEventHandler
 		int di = DopOf(w, action);
 		if (di >= 0)
 		{
+			DRL_UISound.Select();
 			m_OnAction.Invoke("dop", di, action);
 			return true;
 		}
@@ -1800,13 +1857,22 @@ class DRL_UIBlueprint extends ScriptedWidgetEventHandler
 		{
 			DRL_UIBpCard card = m_Cards[ci];
 			card.SetHover(true);
+			if (m_HoverCard != ci)
+				DRL_UISound.Hover();
 			m_HoverCard = ci;
 			if (card.m_Data && card.m_Data.m_Tip != "" && !isGo)
 				INT_UIF_Tooltip.ShowFor(card.m_Root, card.m_Data.m_Tip);
 			return true;
 		}
+		if (ChipOf(w) >= 0)
+		{
+			DRL_UISound.Hover();
+			return true;
+		}
 		int action;
 		int di = DopOf(w, action);
+		if (di >= 0 && action == 0)
+			DRL_UISound.Hover();
 		if (di >= 0 && action == 0 && di < m_Dop.Count() && m_Dop[di].m_Tip != "")
 		{
 			INT_UIF_Tooltip.ShowFor(m_DopChips[di].m_Root, m_Dop[di].m_Tip);

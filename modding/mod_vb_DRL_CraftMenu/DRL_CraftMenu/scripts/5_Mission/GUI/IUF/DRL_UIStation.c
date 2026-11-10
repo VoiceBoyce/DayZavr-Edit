@@ -157,7 +157,10 @@ class DRL_UIPill extends ScriptedWidgetEventHandler
 		if (w != m_Hit)
 			return false;
 		if (m_Enabled && button == MouseState.LEFT)
+		{
+			DRL_UISound.Select();
 			m_OnClick.Invoke(this);
+		}
 		return true;
 	}
 
@@ -167,6 +170,8 @@ class DRL_UIPill extends ScriptedWidgetEventHandler
 			return false;
 		m_Hover = true;
 		Paint();
+		if (m_Enabled)
+			DRL_UISound.Hover();
 		return true;
 	}
 
@@ -373,7 +378,10 @@ class DRL_UIBigBtn extends ScriptedWidgetEventHandler
 		if (w != m_Hit)
 			return false;
 		if (m_Enabled && button == MouseState.LEFT)
+		{
+			DRL_UISound.Select();
 			m_OnClick.Invoke(this);
+		}
 		return true;
 	}
 
@@ -383,6 +391,8 @@ class DRL_UIBigBtn extends ScriptedWidgetEventHandler
 			return false;
 		m_Hover = true;
 		Paint();
+		if (m_Enabled)
+			DRL_UISound.Hover();
 		return true;
 	}
 
@@ -724,10 +734,21 @@ class DRL_UIQueueList extends ScriptedWidgetEventHandler
 			return false;
 		if (i >= m_Procs.Count() || button != MouseState.LEFT)
 			return true;
+		DRL_UISound.Select();
 		if (cancel)
 			m_OnAction.Invoke(i, "cancel", this);
 		else
 			m_OnAction.Invoke(i, "select", this);
+		return true;
+	}
+
+	override bool OnMouseEnter(Widget w, int x, int y)
+	{
+		bool cancel;
+		int i = RowOf(w, cancel);
+		if (i < 0 || i >= m_Procs.Count())
+			return false;
+		DRL_UISound.Hover();
 		return true;
 	}
 }
@@ -870,8 +891,9 @@ class DRL_UIStationSlots extends ScriptedWidgetEventHandler
 				filled++;
 				t.m_HasModel = t.m_View.SetClass(att.GetType());
 				t.m_View.Show(t.m_HasModel && !t.m_ModelsHidden);
-				t.m_Glyph.Show(!t.m_HasModel);
+				// SetIcon фреймворка сам показывает значок: сначала значок, потом видимость.
 				INT_UIF_Widgets.SetIcon(t.m_Glyph, "gear");
+				t.m_Glyph.Show(!t.m_HasModel);
 				t.m_Glyph.SetColor(tl);
 				t.m_Empty.Show(false);
 				int level = att.GetHealthLevel();
@@ -1027,6 +1049,7 @@ class DRL_UIStationSlots extends ScriptedWidgetEventHandler
 		DRL_UISlotTile t = TileOf(w);
 		if (!t)
 			return false;
+		DRL_UISound.Hover();
 		if (t.m_Tip != "")
 			INT_UIF_Tooltip.ShowFor(t.m_Root, t.m_Tip);
 		return true;
