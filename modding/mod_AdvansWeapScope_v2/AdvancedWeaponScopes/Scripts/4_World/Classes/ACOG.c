@@ -94,8 +94,16 @@ class AD_ACOG_B13 : ItemOptics
 	}
 };
 
-class AD_ACOG_RMR_Base : ItemOptics 
+class AD_ACOG_RMR_Base : ItemOptics
 {
+	// Страховка точки RMR: см. AD_RmrDot.c
+	override void OnWork(float consumed_energy)
+	{
+		super.OnWork(consumed_energy);
+
+		AD_RmrDot.CheckUnused(this);
+	}
+
 	void AD_ACOG_RMR_Base()
 	{
 		ShowMountAD();
@@ -159,8 +167,16 @@ class AD_ACOG_RMR_Base : ItemOptics
 	}
 };
 class AD_ACOG_RMR : AD_ACOG_RMR_Base  {};
-class AD_ACOG_RMR_MosinMount : ItemOptics 
+class AD_ACOG_RMR_MosinMount : ItemOptics
 {
+	// Страховка точки RMR: см. AD_RmrDot.c
+	override void OnWork(float consumed_energy)
+	{
+		super.OnWork(consumed_energy);
+
+		AD_RmrDot.CheckUnused(this);
+	}
+
 	override void OnOpticEnter()
 	{
 		super.OnOpticEnter();
@@ -174,8 +190,16 @@ class AD_ACOG_RMR_MosinMount : ItemOptics
 		ShowSelection("hide");
 	}
 };
-class AD_ACOG_RMR_B13 : ItemOptics 
+class AD_ACOG_RMR_B13 : ItemOptics
 {
+	// Страховка точки RMR: см. AD_RmrDot.c
+	override void OnWork(float consumed_energy)
+	{
+		super.OnWork(consumed_energy);
+
+		AD_RmrDot.CheckUnused(this);
+	}
+
 	override void OnOpticEnter()
 	{
 		super.OnOpticEnter();

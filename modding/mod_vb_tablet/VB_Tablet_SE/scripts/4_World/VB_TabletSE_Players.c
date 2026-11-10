@@ -78,6 +78,7 @@ class VB_TabletRatingRow
 // Сводка для рейтинга: обновляется вместе с записью игрока, чтобы не читать все файлы.
 class VB_TabletRatingFile
 {
+	string RatesKey;	// ставки опыта, по которым посчитан Xp строк: другие ставки — рейтинг пересчитывается
 	ref array<ref VB_TabletRatingRow> Rows = new array<ref VB_TabletRatingRow>();
 }
 
@@ -337,6 +338,55 @@ class VB_TabletPlayers
 		}
 		s_Rating.Rows = clean;
 		s_OrderDirty = true;
+		Recount();
+	}
+
+	// Ставки опыта и пороги достижений одной строкой: по ним видно, что ranks.json или achievements.json поменялись.
+	protected static string RatesKey()
+	{
+		VB_TabletRates r = VB_TabletConfig.Get().Rates;
+		string k = r.XpZombie.ToString() + "/" + r.XpMutant.ToString() + "/" + r.XpAnimal.ToString() + "/" + r.XpKm.ToString() + "/" + r.XpContract.ToString();
+		for (int a = 0; a < VB_ACH_COUNT; a++)
+		{
+			for (int s = 0; s < VB_ACH_STEPS; s++)
+			{
+				int step = VB_TabletAch.Step(a, s);
+				k += "/" + step.ToString();
+			}
+		}
+		for (int i = 0; i < VB_ACH_STEPS; i++)
+		{
+			int reward = VB_TabletAch.Reward(i);
+			k += "/" + reward.ToString();
+		}
+		return k;
+	}
+
+	// Ставки поменялись (например, XpKm 0, решение 2026-11-10): опыт в rating.json посчитан по старым, и у тех,
+	// кто сейчас не в игре, он висел бы в рейтинге до их захода. Один раз пересчитываем всех по их файлам.
+	protected static void Recount()
+	{
+		string key = RatesKey();
+		if (s_Rating.RatesKey == key)
+			return;
+		VB_TabletRates rates = VB_TabletConfig.Get().Rates;
+		int changed = 0;
+		foreach (VB_TabletRatingRow row : s_Rating.Rows)
+		{
+			VB_TabletRecord rec = ReadFile(row.Uid);
+			if (!rec)
+				continue;
+			int xp = rec.ToStats().Xp(rates);
+			if (xp != row.Xp)
+			{
+				row.Xp = xp;
+				changed++;
+			}
+		}
+		s_Rating.RatesKey = key;
+		s_RatingDirty = true;
+		s_OrderDirty = true;
+		Print(VB_TABLET_TAG + " ставки опыта изменились: рейтинг пересчитан, строк " + s_Rating.Rows.Count().ToString() + ", изменено " + changed.ToString());
 	}
 
 	protected static void PutRating(VB_TabletRecord rec)

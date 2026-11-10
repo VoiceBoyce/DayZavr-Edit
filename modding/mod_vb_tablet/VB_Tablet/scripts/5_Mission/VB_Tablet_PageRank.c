@@ -126,19 +126,34 @@ class VB_TabletPageRank extends VB_TabletTabbedPage
 		VB_TabletRates r = session.Rates;
 		VB_TabletStats me = session.Me;
 		Widget f = VBT.Card(m_Root, 0, 514, 760, 206, "#STR_VB_TAB_SOURCES");
-		float w = 120;
+		// Путь без опыта (XpKm 0 в ranks.json, решение 2026-11-10: на транспорте набивали ранг) не показывается,
+		// остальные плитки делят ширину карточки.
+		bool showKm = r.XpKm > 0;
+		int tiles = 6;
+		if (!showKm)
+			tiles = 5;
+		float w = 720.0 / tiles;
+		float x = 20;
 		string xpl = " " + VBT.T("#STR_VB_TAB_XP_L");
 		// Два VBT.T в одних аргументах затирают друг друга: подпись «Достижения» показывала бы «по ступеням».
 		string achName = VBT.T("#STR_VB_TAB_SRC_ACH");
 		string achHint = VBT.T("#STR_VB_TAB_BY_STEPS");
-		Source(f, 20, w, "star", achName, achHint, me.AchXp(r));
-		Source(f, 20 + w, w, "zombie", VBT.T("#STR_VB_TAB_SRC_Z"), "+" + r.XpZombie.ToString() + xpl, me.Zombies * r.XpZombie);
-		Source(f, 20 + w * 2, w, "crosshair", VBT.T("#STR_VB_TAB_SRC_M"), "+" + r.XpMutant.ToString() + xpl, me.Mutants * r.XpMutant);
-		Source(f, 20 + w * 3, w, "stash", VBT.T("#STR_VB_TAB_SRC_A"), "+" + r.XpAnimal.ToString() + xpl, me.Animals * r.XpAnimal);
-		int km = me.DistM / 1000;
-		Source(f, 20 + w * 4, w, "route", VBT.T("#STR_VB_TAB_SRC_K"), "+" + r.XpKm.ToString() + xpl, km * r.XpKm);
-		Source(f, 20 + w * 5, w, "contract", VBT.T("#STR_VB_TAB_SRC_C"), "+" + r.XpContract.ToString() + xpl, me.Contracts * r.XpContract + me.ExtraXp);
-		for (int i = 1; i < 6; i++)
+		Source(f, x, w, "star", achName, achHint, me.AchXp(r));
+		x += w;
+		Source(f, x, w, "zombie", VBT.T("#STR_VB_TAB_SRC_Z"), "+" + r.XpZombie.ToString() + xpl, me.Zombies * r.XpZombie);
+		x += w;
+		Source(f, x, w, "crosshair", VBT.T("#STR_VB_TAB_SRC_M"), "+" + r.XpMutant.ToString() + xpl, me.Mutants * r.XpMutant);
+		x += w;
+		Source(f, x, w, "stash", VBT.T("#STR_VB_TAB_SRC_A"), "+" + r.XpAnimal.ToString() + xpl, me.Animals * r.XpAnimal);
+		x += w;
+		if (showKm)
+		{
+			int km = me.DistM / 1000;
+			Source(f, x, w, "route", VBT.T("#STR_VB_TAB_SRC_K"), "+" + r.XpKm.ToString() + xpl, km * r.XpKm);
+			x += w;
+		}
+		Source(f, x, w, "contract", VBT.T("#STR_VB_TAB_SRC_C"), "+" + r.XpContract.ToString() + xpl, me.Contracts * r.XpContract + me.ExtraXp);
+		for (int i = 1; i < tiles; i++)
 			INT_UIF_Draw.Line(f, 10 + i * w, 50, 1, 136, VB_C_LINE);
 		m_SourceHit = HitAt(f, 14, 44, w - 8, 140);
 	}

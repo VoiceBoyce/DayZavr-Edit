@@ -355,6 +355,8 @@ Verified errors committed more than once. Check ACTIVELY during implementation. 
 - **E36** — `PlayerPreviewWidget` рисуется поверх любого 2D, даже с `SetSort`: своя область без наложений; рецепт манекена (локальный PlayerBase) — в каталоге
 - **E37** — груз машины не в корне класса: `CfgVehicles <машина> Cargo itemsCargoSize`; у предметов — `CfgVehicles <класс> itemsCargoSize`
 - **E38** — `PlayerPreviewWidget` режет модель по своему прямоугольнику, масштаб задаёт высота: уменьшать только высоту (`SetSize(1.2, k)`), не `SetSize(k, k)`
+- **E39** — `Engine class 'ItemOptics' cannot be modded`: движковые классы не модятся, переопределять в своих наследниках
+- **E40** — клиентский `SwitchOff()` портит синхронизированный `m_IsSwichedOn`, сервер то же значение не перешлёт: на клиенте не трогать EM
 
 ---
 
