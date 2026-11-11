@@ -1,0 +1,114 @@
+EffectDef {
+ Emitors {
+  EmitorDef spores {
+   ShapeType Sphere
+   ShapeSize 0.25 0 0
+   ConeAngle 360 360 0
+   MaxNum 90
+   BirthRate 999
+   BirthRateRND 0
+   Offset 0 0 0
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   CenterY 0
+   SizeMultiplier 0.06
+   SizeRND 0.04
+   BillboardingType Full
+   VelAngle 0
+   Velocity 1.6
+   VelocityRND 1.2
+   AirResistance 1.6
+   AirResistanceRND 0.6
+   GravityMultiply -0.03
+   GravityMultiplyRND 0.02
+   Wind 0
+   RandomAngle 1
+   LifeTime 3.5
+   LifeTimeRND 1.5
+   Color {
+    0 1 0.25 0.3 0.3 1 0.12 0.2 1 0.8 0.06 0.12
+   }
+   Alpha {
+    0 0 0.05 1 0.7 0.7 1 0
+   }
+   Size {
+    0 1 0.5 0.8 1 0.4
+   }
+   EffectTime 0.1
+   Repeat 0
+  }
+  EmitorDef puff {
+   ShapeType Sphere
+   ShapeSize 0.2 0 0
+   ConeAngle 360 360 0
+   MaxNum 8
+   BirthRate 999
+   BirthRateRND 0
+   Offset 0 0 0
+   Material "{D29B53088A5A3911}Graphics/Particles/materials/smoke/smoke_dust_01_W.emat"
+   CenterY 0
+   SizeMultiplier 1.4
+   SizeRND 0.6
+   BillboardingType Full
+   VelAngle 0
+   Velocity 0.6
+   VelocityRND 0.4
+   AirResistance 2.5
+   AirResistanceRND 0.5
+   GravityMultiply -0.02
+   GravityMultiplyRND 0
+   Wind 1
+   RandomAngle 1
+   RandomRotDir 1
+   RotMultiplier 20
+   LifeTime 2.5
+   LifeTimeRND 0.8
+   Color {
+    0 0.45 0.03 0.06 1 0.25 0.02 0.04
+   }
+   Alpha {
+    0 0 0.1 0.35 1 0
+   }
+   Size {
+    0 0.5 1 1.6
+   }
+   EffectTime 0.1
+   Repeat 0
+  }
+  EmitorDef flash {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 0 0 0
+   MaxNum 2
+   BirthRate 999
+   BirthRateRND 0
+   Offset 0 0 0
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   CenterY 0
+   SizeMultiplier 3
+   SizeRND 0.5
+   BillboardingType Full
+   VelAngle 0
+   Velocity 0
+   VelocityRND 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Wind 0
+   RandomAngle 1
+   LifeTime 0.35
+   LifeTimeRND 0.1
+   Color {
+    0 1 0.15 0.12 1 0.6 0.02 0.04
+   }
+   Alpha {
+    0 0.8 1 0
+   }
+   Size {
+    0 0.6 1 1.2
+   }
+   EffectTime 0.1
+   Repeat 0
+  }
+ }
+}

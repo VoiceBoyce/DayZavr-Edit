@@ -453,6 +453,27 @@ def build_chunk_scene(seed, size=0.16):
             "scale": size / extent, "center": HEART_C.copy()}
 
 
+def build_rootpiece_scene(seed, size=0.28):
+    """Предмет «Корень Изнанки»: обломок корня с парой жил (выпадает из зомби Изнанки).
+    Строится в масштабе корней на земле (шаг DS, радиус ~0.1 м) и уменьшается до size метров в длину."""
+    rng = np.random.default_rng(seed)
+    length = 1.1
+    n = int(length / DS) + 1
+    u = np.linspace(0, 1, n)
+    ph1, ph2 = rng.uniform(0, 2 * math.pi, 2)
+    pts = np.column_stack([u * length - length / 2,
+                           0.07 * np.sin(u * 4.5 + ph1),
+                           0.12 + 0.05 * np.sin(u * 3.3 + ph2)])
+    radii = 0.105 - 0.035 * u
+    tubes = [Tube(pts, radii, "root", lump=0.12, lump_freq=7.0, seed=seed)]
+    for k in range(2):
+        vein = vein_along(pts, radii, rng, 0.0, 0.02)
+        if vein:
+            tubes.append(Tube(vein[0], vein[1], "vein", seed=seed + 10 + k))
+    return {"tubes": tubes, "core": None, "top": None, "heart": False, "no_cut": True,
+            "scale": size / length, "center": np.array([0.0, 0.0, 0.12]), "item_mass": 0.3}
+
+
 def build_hang_scene(seed, kind):
     """Свисающие щупальца: горизонтальный корень-«якорь» и висящие отростки со светящимися каплями.
     Начало координат — середина якоря (точка крепления); ставятся вручную на мосты, скалы, провода."""
@@ -786,7 +807,7 @@ def build_p3d(scene, out_path):
         mem.set_memory_point("cut_%d" % i, (float(x), float(y), 0.0))
     mass = 30.0
     if scene.get("scale"):
-        mass = 0.9 / 8                 # предмет ~0.9 кг
+        mass = scene.get("item_mass", 0.9) / 8     # предмет: масса в кг на 8 точек ящика
     model.lods.append(box_lod(1e13, lo, hi, mass_per_point=mass))
     model.lods.append(mem)
     model.lods.append(box_lod(6e15, lo, hi))
@@ -982,6 +1003,8 @@ VARIANTS = [
     ("vb_rift_hang_drape1", "hang:drape", 805),
     # предмет «Сердце Изнанки» (выпадает при вырезании сердца)
     ("vb_rift_heart_chunk", "chunk", 901),
+    # предмет «Корень Изнанки» (иногда выпадает из зомби Изнанки)
+    ("vb_rift_root_piece", "rootpiece", 902),
 ]
 
 
@@ -994,6 +1017,8 @@ def variant_scene(kind, seed, name=""):
         return build_hang_scene(seed, kind.split(":")[1])
     if kind == "chunk":
         return build_chunk_scene(seed)
+    if kind == "rootpiece":
+        return build_rootpiece_scene(seed)
     return build_roots_scene(seed, kind)
 
 
@@ -1011,9 +1036,15 @@ def write_model_cfg():
 
 
 def main():
-    png_dir = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "_png")
+    """gen_rift_veins.py <папка_для_png> [--only=имя1,имя2]: --only собирает только эти модели
+    (подстрока имени), model.cfg пишет целиком, текстуры и материалы не трогает."""
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    only = [o for a in sys.argv if a.startswith("--only=") for o in a.split("=", 1)[1].split(",") if o]
+    png_dir = args[0] if args else os.path.join(HERE, "_png")
     os.makedirs(DATA_DIR, exist_ok=True)
     for name, kind, seed in VARIANTS:
+        if only and not any(o in name for o in only):
+            continue
         scene = variant_scene(kind, seed, name)
         stats, findings = build_p3d(scene, os.path.join(DATA_DIR, name + ".p3d"))
         allp = np.vstack([tb.pts for tb in scene["tubes"]])
@@ -1024,6 +1055,9 @@ def main():
             if "LOWCONF" not in f.code and "POS_CENTER" not in f.code:
                 print("   validate:", f)
     write_model_cfg()
+    if only:
+        print("готово (только модели):", DATA_DIR)
+        return
     pngs = make_textures(png_dir)
     if "--no-paa" not in sys.argv:
         to_paa(pngs)

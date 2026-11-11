@@ -47,6 +47,25 @@ ZOMBIES = [
     dict(name="vb_rift_zmb_jacket", tex="jacket_grey_co", rvmat="jacket",
          eyes=[(825, 38, 992, 102), (820, 100, 962, 172)],
          no_skin=[(640, 0, 1000, 215)]),
+    dict(name="vb_rift_zmb_hiker", tex="hiker_skinny_m_co", rvmat="hiker_skinny_m",
+         eyes=[(875, 5, 1012, 62), (870, 68, 1010, 128)], pupils=[(941, 30), (941, 95)],
+         no_skin=[(640, 0, 1015, 230)]),
+    # у рабочего одно глазное яблоко на оба глаза (уже кровавое в ванили)
+    dict(name="vb_rift_zmb_worker", tex="coveralls_blue_co", rvmat="coveralls",
+         eyes=[(1928, 8, 2046, 115)], pupils=[(1977, 60)],
+         no_skin=[(1780, 0, 2048, 175)]),
+    dict(name="vb_rift_zmb_sailor", tex="eastSoldier_normal_m_Navy_winter_CO", rvmat="usSoldier_normal_m",
+         eyes=[(876, 8, 1013, 70), (863, 73, 1013, 135)], pupils=[(941, 32), (941, 98)],
+         no_skin=[(680, 0, 1015, 215)]),
+    dict(name="vb_rift_zmb_patient_f", tex="patient_old_f_winter_co", rvmat="patient_old_f",
+         eyes=[(873, 10, 1031, 60), (857, 75, 1017, 125)], pupils=[(937, 35), (937, 100)],
+         no_skin=[(720, 0, 1040, 235)]),
+    dict(name="vb_rift_zmb_citizen_f", tex="citizenA_normal_f_co", rvmat="citizenA_normal_f",
+         eyes=[(873, 5, 1017, 65), (873, 70, 1017, 130)], pupils=[(941, 33), (941, 97)],
+         no_skin=[(720, 0, 1000, 235), (1020, 480, 2048, 2048)]),   # замшевая куртка и обувь по цвету как кожа
+    dict(name="vb_rift_zmb_doctor_f", tex="doctor_skinny_f_CO", rvmat="doctor_skinny_f",
+         eyes=[(723, 18, 830, 50), (706, 72, 816, 102)], pupils=[(776, 33), (761, 87)],
+         no_skin=[(640, 0, 860, 170)]),
 ]
 
 EMISSIVE = 3.0   # emmisive[] материала; яркость каждого пикселя задаёт маска
@@ -279,6 +298,12 @@ def vanilla_stage(rvmat_name, stage):
 
 
 def write_rvmat(z):
+    """<имя>.rvmat — живой (Stage8 маска свечения), <имя>_dead.rvmat — после смерти: глаза и жилы гаснут."""
+    _write_rvmat(z, z["name"] + ".rvmat", True)
+    _write_rvmat(z, z["name"] + "_dead.rvmat", False)
+
+
+def _write_rvmat(z, file_name, glow):
     nohq = vanilla_stage(z["rvmat"], 1)
     smdi = vanilla_stage(z["rvmat"], 5)
     tg = ("class TexGen0\n{\n\tuvSource = \"tex\";\n\tclass uvTransform\n\t{\n"
@@ -289,15 +314,18 @@ def write_rvmat(z):
         (1, nohq, 1), (2, "#(argb,8,8,3)color(0.5,0.5,0.5,1,DT)", 2), (3, "#(argb,8,8,3)color(0,0,0,0,MC)", 3),
         (4, "#(argb,8,8,3)color(1,1,1,1,AS)", 4), (5, smdi, 5), (6, "#(ai,64,64,1)fresnel(1,0.7)", 6),
         (7, "dz" + BS + "data" + BS + "data" + BS + "env_land_co.paa", 7),
-        (8, PREFIX + z["name"] + "_e_co.paa", 0),
     ]
+    em = 0.0
+    if glow:
+        stages.append((8, PREFIX + z["name"] + "_e_co.paa", 0))
+        em = EMISSIVE
     s = "ambient[] = {2,2,2,1};\ndiffuse[] = {1,1,1,1};\nforcedDiffuse[] = {0,0,0,0};\n"
-    s += "emmisive[] = {%.2f,%.2f,%.2f,1};\n" % (EMISSIVE, EMISSIVE, EMISSIVE)
+    s += "emmisive[] = {%.2f,%.2f,%.2f,1};\n" % (em, em, em)
     s += "specular[] = {0.2,0.2,0.2,1};\nspecularPower = 80;\n"
     s += "PixelShaderID = \"Super\";\nVertexShaderID = \"Super\";\n" + tg
     for i, tx, gen in stages:
         s += "class Stage%d\n{\n\ttexture = \"%s\";\n\ttexGen = \"%d\";\n};\n" % (i, tx, gen)
-    with open(os.path.join(OUT_DIR, z["name"] + ".rvmat"), "w", encoding="utf-8", newline="\n") as f:
+    with open(os.path.join(OUT_DIR, file_name), "w", encoding="utf-8", newline="\n") as f:
         f.write(s)
 
 

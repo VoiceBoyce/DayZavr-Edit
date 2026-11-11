@@ -4,6 +4,7 @@
 // Корни рядом с сердцем бьются вместе с ним с задержкой по расстоянию: удар бежит от сердца наружу.
 // Пока сердце режут (VB_IsDisturbed), всё в STIR_DIST от него просыпается даже днём и бьётся в STIR_RATE раз чаще:
 // у каждого объекта свои часы m_VB_Clock с плавно меняющейся скоростью, корни идут по часам своего сердца.
+// Звуки: гул у сердец со спорами (VB_RiftBase.VB_SetHum), редкие скрипы корней и шёпот за спиной (VB_PlayAmbient).
 
 class VB_RiftLight extends PointLightBase
 {
@@ -45,6 +46,18 @@ class VB_RiftPulse
 	static const float SOUND_DIST = 50.0;	// дальше сердцебиение не запускаем
 	static const float SOUND_LEAD = 0.03;	// в файле первый удар через 0.03 с от начала
 
+	// звуки Изнанки: гул у ближайших сердец (вместе со спорами), скрипы корней и шёпот вокруг игрока
+	static const string HUM_SET = "VB_RiftHum_SoundSet";
+	static const string CREAK_SET = "VB_RiftCreak_SoundSet";
+	static const string WHISPER_SET = "VB_RiftWhisper_SoundSet";
+	static const float AMBIENT_DIST = 45.0;		// скрипы и шёпот, только если живое сердце ближе этого
+	static const float WHISPER_DIST = 25.0;		// шёпот — только совсем рядом с сердцем
+	static const float CREAK_DIST = 35.0;		// скрип идёт от корня не дальше этого от игрока
+	static const int AMBIENT_MIN_MS = 6000;		// пауза между звуками, мс
+	static const int AMBIENT_MAX_MS = 15000;
+	static const int AMBIENT_STIR_MIN_MS = 2000;	// пока сердце режут — чаще
+	static const int AMBIENT_STIR_MAX_MS = 5000;
+
 	// сердце режут: в этом радиусе всё бьётся чаще и не спит даже днём
 	static const float STIR_DIST = 50.0;
 	static const float STIR_RATE = 2.5;		// во столько раз чаще (цикл 6 с -> 2.4 с)
@@ -57,6 +70,7 @@ class VB_RiftPulse
 	protected int m_VB_Ticks;
 	protected int m_VB_LastTickMs = -100000;
 	protected float m_VB_LastNow = -1;
+	protected int m_VB_NextAmbientMs;
 
 	void VB_RiftPulse()
 	{
@@ -164,6 +178,9 @@ class VB_RiftPulse
 				m_VB_Stirred.Insert(cand);
 		}
 
+		if (g_Game.GetTime() >= m_VB_NextAmbientMs)
+			VB_PlayAmbient(ppos, night);
+
 		float activeSq = ACTIVE_DIST * ACTIVE_DIST;
 		float soundSq = SOUND_DIST * SOUND_DIST;
 		float soundAt = BEAT_FIRST - SOUND_LEAD;
@@ -224,6 +241,74 @@ class VB_RiftPulse
 			}
 			obj.m_VB_LastT = t;
 		}
+	}
+
+	// Скрип корня или шёпот за спиной, если рядом живое сердце и ночь (или его режут).
+	// Раз в AMBIENT_MIN..MAX мс; пока сердце режут — чаще.
+	protected void VB_PlayAmbient(vector ppos, float night)
+	{
+		float ambSq = AMBIENT_DIST * AMBIENT_DIST;
+		VB_RiftBase heart;
+		float heartSq = ambSq;
+		float dSq;
+		bool stirred = false;
+		foreach (VB_RiftBase cand : m_VB_Objects)
+		{
+			if (!cand.VB_IsHeart() || cand.VB_IsDormant())
+				continue;
+			dSq = vector.DistanceSq(ppos, cand.GetPosition());
+			if (dSq < heartSq)
+			{
+				heartSq = dSq;
+				heart = cand;
+			}
+		}
+		if (heart)
+			stirred = heart.VB_IsDisturbed();
+
+		int wait = Math.RandomIntInclusive(AMBIENT_MIN_MS, AMBIENT_MAX_MS);
+		if (stirred)
+			wait = Math.RandomIntInclusive(AMBIENT_STIR_MIN_MS, AMBIENT_STIR_MAX_MS);
+		m_VB_NextAmbientMs = g_Game.GetTime() + wait;
+
+		if (!heart || (!stirred && night < NIGHT_LIGHT_ABOVE))
+			return;
+
+		vector pos;
+		string soundSet;
+		if (heartSq < WHISPER_DIST * WHISPER_DIST && Math.RandomFloat01() < 0.3)
+		{
+			// шёпот: за спиной, в 2.5–5 м
+			vector back = g_Game.GetCurrentCameraDirection() * -1.0;
+			back[1] = 0;
+			back.Normalize();
+			float sideK = Math.RandomFloat(-1.5, 1.5);
+			float backK = Math.RandomFloat(2.5, 5.0);	// не два вызова в одном выражении: Enforce затирает результат
+			vector side = Vector(back[2], 0, -back[0]) * sideK;
+			pos = ppos + back * backK + side + Vector(0, 1.6, 0);
+			soundSet = WHISPER_SET;
+		}
+		else
+		{
+			// скрип: от случайного живого корня (или сердца) рядом с игроком
+			array<VB_RiftBase> near = new array<VB_RiftBase>;
+			float creakSq = CREAK_DIST * CREAK_DIST;
+			foreach (VB_RiftBase obj : m_VB_Objects)
+			{
+				if (!obj.VB_IsDormant() && vector.DistanceSq(ppos, obj.GetPosition()) < creakSq)
+					near.Insert(obj);
+			}
+			if (near.Count() == 0)
+				return;
+			float offX = Math.RandomFloat(-2, 2);
+			float offZ = Math.RandomFloat(-2, 2);
+			pos = near.GetRandomElement().GetPosition() + Vector(offX, 0.3, offZ);
+			soundSet = CREAK_SET;
+		}
+
+		EffectSound snd = SEffectManager.PlaySound(soundSet, pos);
+		if (snd)
+			snd.SetAutodestroy(true);
 	}
 
 	// рядом (STIR_DIST) потревоженное сердце

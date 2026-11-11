@@ -309,6 +309,17 @@ having any issue** (6 runs, 0 actual mod failures). Check them BEFORE writing fi
   (e.g. `wait_for(log_matches)` on a never-matching pattern with `timeout_s=20`, then `session_heartbeat`)
   before any capture or action that depends on the time of day.**
 
+- **Killing infected without a gun: a grenade under your own feet** (added 2026-11-11, VB_Rift, worked twice).
+  There is no damage verb, and a gun needs a chambered round. Recipe: `inventory_give("M67Grenade", "inventory")`
+  → `hands_take(id)` → `action_use("ActionUnpin", target="hands")` → wait ~2 s (the unpin animation; a drop sent at
+  once returns `action_in_progress`) → `action_use("ActionDropItem", target="hands")`; it goes off ~4 s later.
+  An unpinned grenade held in hands does NOT explode — the lever stays held until it leaves the hands.
+  The player survives in default godmode but is SHOVED ~8 m by the blast (positions after it are not the ones
+  you set). Lethal for infected at 8 m even with doubled health; at 14–17 m damage is shrapnel-random
+  (41–100 % health left), so a grenade cannot measure a health ratio — use a deterministic hit for that.
+  Hands blocked by an old item (`hands_take` → `hands_blocked`, `inventory_give(hands)` → `hands_occupied`):
+  `action_use("ActionDropItem", target="hands")` drops it; `player_respawn` returned `requested` and changed nothing.
+
 ## THE LOOP
 
 1. **Launch** via `dayz-test.ps1 … -ExtraMods "@DayZ_MCP"` (wait until client and server

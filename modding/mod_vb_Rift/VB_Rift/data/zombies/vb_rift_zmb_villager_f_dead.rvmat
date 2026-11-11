@@ -1,0 +1,66 @@
+ambient[] = {2,2,2,1};
+diffuse[] = {1,1,1,1};
+forcedDiffuse[] = {0,0,0,0};
+emmisive[] = {0.00,0.00,0.00,1};
+specular[] = {0.2,0.2,0.2,1};
+specularPower = 80;
+PixelShaderID = "Super";
+VertexShaderID = "Super";
+class TexGen0
+{
+	uvSource = "tex";
+	class uvTransform
+	{
+		aside[] = {1,0,0};
+		up[] = {0,1,0};
+		dir[] = {0,0,1};
+		pos[] = {0,0,0};
+	};
+};
+class TexGen1: TexGen0{};
+class TexGen2: TexGen0{};
+class TexGen3: TexGen0{};
+class TexGen4: TexGen0{};
+class TexGen5: TexGen0{};
+class TexGen6: TexGen0{};
+class TexGen7: TexGen0{};
+class Stage0
+{
+	texture = "VB_Rift\data\zombies\vb_rift_zmb_villager_f_co.paa";
+	texGen = "0";
+};
+class Stage1
+{
+	texture = "dz\characters\zombies\data\villager_old_f_nohq.paa";
+	texGen = "1";
+};
+class Stage2
+{
+	texture = "#(argb,8,8,3)color(0.5,0.5,0.5,1,DT)";
+	texGen = "2";
+};
+class Stage3
+{
+	texture = "#(argb,8,8,3)color(0,0,0,0,MC)";
+	texGen = "3";
+};
+class Stage4
+{
+	texture = "#(argb,8,8,3)color(1,1,1,1,AS)";
+	texGen = "4";
+};
+class Stage5
+{
+	texture = "dz\characters\zombies\data\villager_old_f_smdi.paa";
+	texGen = "5";
+};
+class Stage6
+{
+	texture = "#(ai,64,64,1)fresnel(1,0.7)";
+	texGen = "6";
+};
+class Stage7
+{
+	texture = "dz\data\data\env_land_co.paa";
+	texGen = "7";
+};

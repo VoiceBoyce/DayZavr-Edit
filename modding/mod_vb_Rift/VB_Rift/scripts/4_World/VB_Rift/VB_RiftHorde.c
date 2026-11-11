@@ -16,7 +16,9 @@ class VB_RiftHorde
 	static const string NOISE = "VB_RiftCallNoise";
 	static const float NOISE_TIME = 30.0;	// с, сколько держится шум у сердца
 	protected static const ref TStringArray TYPES = {
-		"VB_RiftZmbM_VillagerOld", "VB_RiftZmbF_VillagerOld", "VB_RiftZmbM_Prisoner", "VB_RiftZmbM_Jacket"
+		"VB_RiftZmbM_VillagerOld", "VB_RiftZmbF_VillagerOld", "VB_RiftZmbM_Prisoner", "VB_RiftZmbM_Jacket",
+		"VB_RiftZmbM_Hiker", "VB_RiftZmbM_Worker", "VB_RiftZmbM_Sailor",
+		"VB_RiftZmbF_Patient", "VB_RiftZmbF_Citizen", "VB_RiftZmbF_Doctor"
 	};
 
 	protected static ref array<ref VB_RiftHorde> s_VB_All;

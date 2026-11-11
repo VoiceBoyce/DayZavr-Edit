@@ -1,3 +1,117 @@
+// Здоровье зомби Изнанки: полная копия ванильного ZombieBase DamageSystem (P:\DZ\characters\zombies\config.cpp),
+// только очки другие: GLOBAL — общее, LIMB — торс, руки, ноги, ступни, HEAD — голова. У ванили 100/100/30.
+// Копия целиком, а не наследование: вложенные классы чужого аддона через «class X: X» здесь не достать.
+#define VB_RIFT_ZMB_DAMAGE(GLOBAL,LIMB,HEAD) \
+	class DamageSystem \
+	{ \
+		class GlobalHealth \
+		{ \
+			class Health \
+			{ \
+				hitpoints = GLOBAL; \
+				healthLevels[] = {{1.0,{}},{0.7,{}},{0.5,{}},{0.3,{}},{0.0,{}}}; \
+			}; \
+		}; \
+		class DamageZones \
+		{ \
+			class Head \
+			{ \
+				class Health \
+				{ \
+					hitpoints = HEAD; \
+					transferToGlobalCoef = 1; \
+				}; \
+				class ArmorType \
+				{ \
+					class Projectile { class Health { damage = 1.5; }; }; \
+					class Melee { class Health { damage = 0.7; }; }; \
+					class FragGrenade { class Health { damage = 3; }; }; \
+				}; \
+				componentNames[] = {"Head","Neck"}; \
+				fatalInjuryCoef = 0.1; \
+				inventorySlots[] = {"Headgear","Mask"}; \
+			}; \
+			class Torso \
+			{ \
+				class Health \
+				{ \
+					hitpoints = LIMB; \
+					transferToGlobalCoef = 1; \
+				}; \
+				class ArmorType \
+				{ \
+					class Melee { class Health { damage = 1.2; }; }; \
+					class FragGrenade { class Health { damage = 2; }; }; \
+					class Projectile { class Health { damage = 1.42; }; }; \
+				}; \
+				componentNames[] = {"Spine1","Spine3"}; \
+				fatalInjuryCoef = -1; \
+				inventorySlots[] = {"Vest","Body","Back"}; \
+				inventorySlotsCoefs[] = {1.0,1.0,0.9}; \
+			}; \
+			class LeftArm: Torso \
+			{ \
+				componentNames[] = {"LeftArm","LeftForeArm"}; \
+				inventorySlots[] = {"Vest","Body"}; \
+				inventorySlotsCoefs[] = {1.0,1.0}; \
+				fatalInjuryCoef = -1; \
+			}; \
+			class RightArm: LeftArm \
+			{ \
+				componentNames[] = {"RightArm","RightForeArm"}; \
+				inventorySlots[] = {"Vest","Body"}; \
+				inventorySlotsCoefs[] = {1.0,1.0}; \
+				fatalInjuryCoef = -1; \
+			}; \
+			class LeftLeg \
+			{ \
+				class Health \
+				{ \
+					hitpoints = LIMB; \
+					transferToGlobalCoef = 0.5; \
+				}; \
+				class ArmorType \
+				{ \
+					class FragGrenade { class Health { damage = 2; }; }; \
+				}; \
+				componentNames[] = {"LeftLeg","LeftUpLeg"}; \
+				fatalInjuryCoef = -1; \
+				inventorySlots[] = {"Legs"}; \
+			}; \
+			class RightLeg: LeftLeg \
+			{ \
+				componentNames[] = {"RightLeg","RightUpLeg"}; \
+				fatalInjuryCoef = -1; \
+				inventorySlots[] = {"Legs"}; \
+			}; \
+			class LeftFoot \
+			{ \
+				class Health \
+				{ \
+					hitpoints = LIMB; \
+					transferToGlobalCoef = 0.1; \
+				}; \
+				class ArmorType \
+				{ \
+					class FragGrenade { class Health { damage = 2; }; }; \
+				}; \
+				transferToZonesNames[] = {"LeftLeg"}; \
+				transferToZonesCoefs[] = {0.1}; \
+				componentNames[] = {"LeftFoot"}; \
+				fatalInjuryCoef = -1; \
+				inventorySlots[] = {"Feet"}; \
+			}; \
+			class RightFoot: LeftFoot \
+			{ \
+				transferToZonesNames[] = {"RightLeg"}; \
+				transferToZonesCoefs[] = {0.1}; \
+				componentNames[] = {"RightFoot"}; \
+				fatalInjuryCoef = -1; \
+				inventorySlots[] = {"Feet"}; \
+			}; \
+		}; \
+	};
+
 class CfgPatches
 {
 	class VB_Rift
@@ -9,8 +123,10 @@ class CfgPatches
 			"VB_RiftRoots_Small1", "VB_RiftRoots_Small2", "VB_RiftCracks1", "VB_RiftCracks2",
 			"VB_RiftWrap_10", "VB_RiftWrap_15", "VB_RiftWrap_20", "VB_RiftWrap_27", "VB_RiftWrap_35", "VB_RiftWrap_45",
 			"VB_RiftHang_Short1", "VB_RiftHang_Short2", "VB_RiftHang_Long1", "VB_RiftHang_Long2", "VB_RiftHang_Drape1",
-			"VB_RiftHeartChunk",
-			"VB_RiftZmbM_VillagerOld", "VB_RiftZmbF_VillagerOld", "VB_RiftZmbM_Prisoner", "VB_RiftZmbM_Jacket"
+			"VB_RiftHeartChunk", "VB_RiftRootPiece",
+			"VB_RiftZmbM_VillagerOld", "VB_RiftZmbF_VillagerOld", "VB_RiftZmbM_Prisoner", "VB_RiftZmbM_Jacket",
+			"VB_RiftZmbM_Hiker", "VB_RiftZmbM_Worker", "VB_RiftZmbM_Sailor",
+			"VB_RiftZmbF_Patient", "VB_RiftZmbF_Citizen", "VB_RiftZmbF_Doctor"
 		};
 		weapons[] = {};
 		requiredVersion = 0.1;
@@ -63,6 +179,38 @@ class CfgSoundShaders
 		range = 45;
 		rangeCurve[] = {{0, 1}, {12, 0.7}, {30, 0.25}, {45, 0}};
 	};
+	// гул-петля у сердца (включается вместе со спорами, VB_RiftBase.VB_SetHum)
+	class VB_RiftHum_SoundShader
+	{
+		samples[] = {{"VB_Rift\sounds\vb_rift_hum", 1}};
+		volume = 0.7;
+		range = 40;
+		rangeCurve[] = {{0, 1}, {10, 0.8}, {25, 0.35}, {40, 0}};
+	};
+	// скрип корня рядом с игроком (VB_RiftPulse.VB_PlayAmbient)
+	class VB_RiftCreak_SoundShader
+	{
+		samples[] = {{"VB_Rift\sounds\vb_rift_creak_1", 1}, {"VB_Rift\sounds\vb_rift_creak_2", 1}, {"VB_Rift\sounds\vb_rift_creak_3", 1}};
+		volume = 0.8;
+		range = 40;
+		rangeCurve[] = {{0, 1}, {15, 0.6}, {40, 0}};
+	};
+	// шёпот за спиной у самого сердца
+	class VB_RiftWhisper_SoundShader
+	{
+		samples[] = {{"VB_Rift\sounds\vb_rift_whisper_1", 1}, {"VB_Rift\sounds\vb_rift_whisper_2", 1}, {"VB_Rift\sounds\vb_rift_whisper_3", 1}};
+		volume = 0.55;
+		range = 15;
+		rangeCurve[] = {{0, 1}, {6, 0.6}, {15, 0}};
+	};
+	// зомби Изнанки лопается при смерти
+	class VB_RiftBurst_SoundShader
+	{
+		samples[] = {{"VB_Rift\sounds\vb_rift_burst_1", 1}, {"VB_Rift\sounds\vb_rift_burst_2", 1}};
+		volume = 1.0;
+		range = 60;
+		rangeCurve[] = {{0, 1}, {20, 0.5}, {60, 0}};
+	};
 };
 
 class CfgSoundSets
@@ -75,6 +223,23 @@ class CfgSoundSets
 		loop = 0;
 		volumeCurve = "LinearCurve";
 		sound3DProcessingType = "ObjectsInner13DProcessingType";
+	};
+	class VB_RiftHum_SoundSet: VB_RiftHeartbeat_SoundSet
+	{
+		soundShaders[] = {"VB_RiftHum_SoundShader"};
+		loop = 1;
+	};
+	class VB_RiftCreak_SoundSet: VB_RiftHeartbeat_SoundSet
+	{
+		soundShaders[] = {"VB_RiftCreak_SoundShader"};
+	};
+	class VB_RiftWhisper_SoundSet: VB_RiftHeartbeat_SoundSet
+	{
+		soundShaders[] = {"VB_RiftWhisper_SoundShader"};
+	};
+	class VB_RiftBurst_SoundSet: VB_RiftHeartbeat_SoundSet
+	{
+		soundShaders[] = {"VB_RiftBurst_SoundShader"};
 	};
 };
 
@@ -98,33 +263,121 @@ class CfgVehicles
 	// Зомби Изнанки: ванильные модели и поведение, свои текстуры и материалы (tools/gen_rift_zombies.py):
 	// мертвенно-серая кожа в светящихся жилах, светящиеся красные глаза, одежда в тёмный бордовый.
 	// Появляются волной, когда игрок начинает вырезать сердце (VB_RiftHorde); можно спавнить и как обычных зомби.
+	// vbRiftZombie = 1 — скрипт VB_RiftZombie: при смерти гаснут (vbRiftDeadMaterial), лопаются спорами,
+	// с шансом оставляют «Корень Изнанки». Здоровье вдвое больше ванильного (VB_RIFT_ZMB_DAMAGE).
 	class ZmbM_VillagerOld_Base;
 	class ZmbF_VillagerOld_Base;
 	class ZmbM_PrisonerSkinny_Base;
 	class ZmbM_Jacket_Base;
+	class ZmbM_HikerSkinny_Base;
+	class ZmbM_HandymanNormal_Base;
+	class ZmbM_usSoldier_normal_Base;
+	class ZmbF_PatientOld_Base;
+	class ZmbF_CitizenANormal_Base;
+	class ZmbF_DoctorSkinny_Base;
 	class VB_RiftZmbM_VillagerOld: ZmbM_VillagerOld_Base
 	{
 		scope = 2;
+		vbRiftZombie = 1;
+		vbRiftDeadMaterial = "VB_Rift\data\zombies\vb_rift_zmb_villager_m_dead.rvmat";
 		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_villager_m_co.paa"};
 		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_villager_m.rvmat"};
+		VB_RIFT_ZMB_DAMAGE(200,200,60)
 	};
 	class VB_RiftZmbF_VillagerOld: ZmbF_VillagerOld_Base
 	{
 		scope = 2;
+		vbRiftZombie = 1;
+		vbRiftDeadMaterial = "VB_Rift\data\zombies\vb_rift_zmb_villager_f_dead.rvmat";
 		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_villager_f_co.paa"};
 		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_villager_f.rvmat"};
+		VB_RIFT_ZMB_DAMAGE(200,200,60)
 	};
 	class VB_RiftZmbM_Prisoner: ZmbM_PrisonerSkinny_Base
 	{
 		scope = 2;
+		vbRiftZombie = 1;
+		vbRiftDeadMaterial = "VB_Rift\data\zombies\vb_rift_zmb_prisoner_dead.rvmat";
 		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_prisoner_co.paa"};
 		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_prisoner.rvmat"};
+		VB_RIFT_ZMB_DAMAGE(200,200,60)
 	};
 	class VB_RiftZmbM_Jacket: ZmbM_Jacket_Base
 	{
 		scope = 2;
+		vbRiftZombie = 1;
+		vbRiftDeadMaterial = "VB_Rift\data\zombies\vb_rift_zmb_jacket_dead.rvmat";
 		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_jacket_co.paa"};
 		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_jacket.rvmat"};
+		VB_RIFT_ZMB_DAMAGE(200,200,60)
+	};
+	class VB_RiftZmbM_Hiker: ZmbM_HikerSkinny_Base
+	{
+		scope = 2;
+		vbRiftZombie = 1;
+		vbRiftDeadMaterial = "VB_Rift\data\zombies\vb_rift_zmb_hiker_dead.rvmat";
+		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_hiker_co.paa"};
+		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_hiker.rvmat"};
+		VB_RIFT_ZMB_DAMAGE(200,200,60)
+	};
+	class VB_RiftZmbM_Worker: ZmbM_HandymanNormal_Base
+	{
+		scope = 2;
+		vbRiftZombie = 1;
+		vbRiftDeadMaterial = "VB_Rift\data\zombies\vb_rift_zmb_worker_dead.rvmat";
+		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_worker_co.paa"};
+		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_worker.rvmat"};
+		VB_RIFT_ZMB_DAMAGE(200,200,60)
+	};
+	// моряк на солдатской базе: у ванильного солдата общее здоровье 115 -> 230
+	class VB_RiftZmbM_Sailor: ZmbM_usSoldier_normal_Base
+	{
+		scope = 2;
+		vbRiftZombie = 1;
+		vbRiftDeadMaterial = "VB_Rift\data\zombies\vb_rift_zmb_sailor_dead.rvmat";
+		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_sailor_co.paa"};
+		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_sailor.rvmat"};
+		VB_RIFT_ZMB_DAMAGE(230,200,60)
+	};
+	class VB_RiftZmbF_Patient: ZmbF_PatientOld_Base
+	{
+		scope = 2;
+		vbRiftZombie = 1;
+		vbRiftDeadMaterial = "VB_Rift\data\zombies\vb_rift_zmb_patient_f_dead.rvmat";
+		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_patient_f_co.paa"};
+		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_patient_f.rvmat"};
+		VB_RIFT_ZMB_DAMAGE(200,200,60)
+	};
+	class VB_RiftZmbF_Citizen: ZmbF_CitizenANormal_Base
+	{
+		scope = 2;
+		vbRiftZombie = 1;
+		vbRiftDeadMaterial = "VB_Rift\data\zombies\vb_rift_zmb_citizen_f_dead.rvmat";
+		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_citizen_f_co.paa"};
+		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_citizen_f.rvmat"};
+		VB_RIFT_ZMB_DAMAGE(200,200,60)
+	};
+	class VB_RiftZmbF_Doctor: ZmbF_DoctorSkinny_Base
+	{
+		scope = 2;
+		vbRiftZombie = 1;
+		vbRiftDeadMaterial = "VB_Rift\data\zombies\vb_rift_zmb_doctor_f_dead.rvmat";
+		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_doctor_f_co.paa"};
+		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_doctor_f.rvmat"};
+		VB_RIFT_ZMB_DAMAGE(200,200,60)
+	};
+
+	// Иногда выпадает из зомби Изнанки (VB_RiftZombie.ROOT_CHANCE, в инвентарь трупа). Пока без применения.
+	// Для types.xml: nominal 0 — сам в лут не спавнится.
+	class VB_RiftRootPiece: Inventory_Base
+	{
+		scope = 2;
+		displayName = "Корень Изнанки";
+		descriptionShort = "Обломок корня, проросшего в теле заражённого. Жилы в нём ещё слабо тлеют.";
+		model = "\VB_Rift\data\vb_rift_root_piece.p3d";
+		weight = 300;
+		itemSize[] = {1, 3};
+		rotationFlags = 17;
 	};
 
 	// Выпадает тому, кто вырезал сердце (действие «Вырезать сердце» ножом/топором). Пока без применения.
