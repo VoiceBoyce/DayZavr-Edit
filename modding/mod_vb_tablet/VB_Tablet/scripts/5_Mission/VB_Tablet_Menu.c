@@ -631,6 +631,7 @@ class VB_TabletMenu extends INT_UIF_Menu
 		super.OnShow();
 		HoldHud(true);
 		VB_TabletClient.SetAimLock(true);
+		VB_TabletClient.SetMouseLock(true);
 		// Возврат из меню, открытого поверх: в OnHide страница была покинута (вкладки, оверлей карты).
 		if (m_WasHidden)
 		{
@@ -643,6 +644,7 @@ class VB_TabletMenu extends INT_UIF_Menu
 	{
 		SetFocus(null);
 		SetTyping(false);
+		VB_TabletClient.SetMouseLock(false);
 		VB_TabletClient.SetAimLock(false);
 		if (m_Page)
 			m_Page.Leave();

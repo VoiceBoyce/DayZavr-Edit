@@ -314,6 +314,12 @@ ImageSetClass {
    Size 128 128
    Flags 0
   }
+  ImageSetDefClass slash {
+   Name "slash"
+   Pos 1500 1850
+   Size 160 72
+   Flags 0
+  }
   ImageSetDefClass solid {
    Name "solid"
    Pos 1416 1862

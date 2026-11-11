@@ -343,8 +343,7 @@ modded class PlayerBase
 		if (overrideCls != "" && r.ResultClasses && r.ResultClasses.Find(overrideCls) > -1)
 			resultCls = overrideCls;
 		
-		if (!DRL_HasRequiredWorkbenchForRecipe(r)) return;
-		if (!DRL_HasRequiredAttachments(r)) return;
+		if (!DRL_CheckStationForCraft(r, resultCls)) return;
 
 		DRL_Craft_WB wb = DRL_Craft_WB.Cast(DRL_GetCurrentWorkbench());
 		string blockReason;
@@ -384,6 +383,7 @@ modded class PlayerBase
 
 			if (!DRL_HasComponent(compCheck, want))
 			{
+				DRL_CraftLogger.Warn("Player " + DRL_GetPlayerIdSafe() + ": recipe " + r.RecipeId.ToString() + " - not enough " + compCheck.Classname);
 				DRL_CraftProcessManager.GetInstance().SendCraftNotification(this, EDRLCraftNotifType.NO_INGREDIENTS, resultCls);
 				return;
 			}
@@ -470,8 +470,7 @@ modded class PlayerBase
 		if (overrideCls != "" && r.ResultClasses && r.ResultClasses.Find(overrideCls) > -1)
 			resultCls = overrideCls;
 
-		if (!DRL_HasRequiredWorkbenchForRecipe(r)) return;
-		if (!DRL_HasRequiredAttachments(r)) return;
+		if (!DRL_CheckStationForCraft(r, resultCls)) return;
 
 		DRL_Craft_WB wbAtt = DRL_Craft_WB.Cast(DRL_GetCurrentWorkbench());
 		string blockReasonAtt;
@@ -811,27 +810,14 @@ modded class PlayerBase
 		
 		if (!r.WorkbenchClasses || r.WorkbenchClasses.Count() == 0)
 			return true;
-	
+
+		// Открытая игроком станция (машинка на столе - вложение, поиск по миру её не видит).
 		float maxDist = 6.0;
-		vector pos = GetPosition();
-	
-		array<Object> objs = new array<Object>();
-		array<CargoBase> prx = new array<CargoBase>();
-		GetGame().GetObjectsAtPosition(pos, maxDist, objs, prx);
-	
-		for (int i = 0; i < objs.Count(); i++)
-		{
-			EntityAI ea = EntityAI.Cast(objs[i]);
-			if (!ea) continue;
-	
-			string t = ea.GetType();
-			for (int j = 0; j < r.WorkbenchClasses.Count(); j++)
-			{
-				if (t == r.WorkbenchClasses[j])
-					return true;
-			}
-		}
-		return false;
+		EntityAI cur = DRL_GetCurrentWorkbench();
+		if (cur && DRL_IsWorkbenchForRecipe(cur, r) && vector.Distance(GetPosition(), cur.GetPosition()) <= maxDist)
+			return true;
+
+		return DRL_StationFinder.FindNear(GetPosition(), maxDist, r.WorkbenchClasses) != null;
 	}
 	
 	protected void DRL_DamageItemByPct(EntityAI item, float pct)
@@ -1048,8 +1034,7 @@ modded class PlayerBase
 	{
 		if (!r || !r.CraftComponents) return;
 
-		EntityAI nearWB = DRL_FindNearbyWorkbenchForRecipe(r, 6.0);
-		if (!nearWB) nearWB = DRL_GetCurrentWorkbench();
+		EntityAI nearWB = DRL_ResolveWorkbenchForRecipe(r, 6.0);
 
 		for (int i = 0; i < r.CraftComponents.Count(); i++)
 		{
@@ -1075,30 +1060,32 @@ modded class PlayerBase
 	protected EntityAI DRL_FindNearbyWorkbenchForRecipe(DRL_Craft_Recipe r, float maxDist = 6.0)
 	{
 		if (!r || !r.WorkbenchClasses || r.WorkbenchClasses.Count() == 0) return null;
-	
-		vector pos = GetPosition();
-		array<Object> objs = new array<Object>();
-		array<CargoBase> prx = new array<CargoBase>();
-		GetGame().GetObjectsAtPosition(pos, maxDist, objs, prx);
-	
-		for (int i = 0; i < objs.Count(); i++)
-		{
-			Object o = objs[i];
-			if (!o) continue;
-			string t = o.GetType(); t.Trim();
-	
-			for (int j = 0; j < r.WorkbenchClasses.Count(); j++)
-			{
-				string reqWb = r.WorkbenchClasses[j];
-				reqWb.Trim();
-				if (reqWb == "") continue;
-				if (o.IsKindOf(reqWb) || t == reqWb)
-					return EntityAI.Cast(o);
-			}
-		}
-		return null;
+		// Включая станции-вложения (машинка на швейном столе).
+		return DRL_StationFinder.FindNear(GetPosition(), maxDist, r.WorkbenchClasses);
 	}
 	
+	// Станция для проверки обвесов: та, что открыл игрок (её присылает клиент), если
+	// она подходит рецепту и стоит рядом; иначе первая подходящая поблизости.
+	// Раньше всегда бралась первая поблизости: при двух машинках рядом обвесы
+	// проверялись не на той, и крафт молча не стартовал.
+	protected EntityAI DRL_ResolveWorkbenchForRecipe(DRL_Craft_Recipe r, float maxDist = 6.0)
+	{
+		EntityAI cur = DRL_GetCurrentWorkbench();
+		if (cur && DRL_IsWorkbenchForRecipe(cur, r) && vector.Distance(GetPosition(), cur.GetPosition()) <= maxDist)
+			return cur;
+		EntityAI nearWB = DRL_FindNearbyWorkbenchForRecipe(r, maxDist);
+		if (nearWB)
+			return nearWB;
+		return cur;
+	}
+
+	protected bool DRL_IsWorkbenchForRecipe(EntityAI wb, DRL_Craft_Recipe r)
+	{
+		if (!wb || !r)
+			return false;
+		return DRL_StationFinder.MatchesClasses(wb, r.WorkbenchClasses);
+	}
+
 	protected bool DRL_AttachmentExistsInSlotsByClass(EntityAI owner, string cls)
 	{
 		if (!owner || !owner.GetInventory()) return false;
@@ -1113,10 +1100,15 @@ modded class PlayerBase
 	
 	bool DRL_HasRequiredAttachments(DRL_Craft_Recipe r, string resultCls = "")
 	{
-		if (!r || !r.CraftComponents) return true;
+		return DRL_FindMissingAttachment(r, resultCls) == "";
+	}
 
-		EntityAI nearWB = DRL_FindNearbyWorkbenchForRecipe(r, 6.0);
-		if (!nearWB) nearWB = DRL_GetCurrentWorkbench();
+	// Класс первого обвеса/инструмента, которого нет на станции и у игрока; "" - всё на месте.
+	string DRL_FindMissingAttachment(DRL_Craft_Recipe r, string resultCls = "")
+	{
+		if (!r || !r.CraftComponents) return "";
+
+		EntityAI nearWB = DRL_ResolveWorkbenchForRecipe(r, 6.0);
 
 		for (int i = 0; i < r.CraftComponents.Count(); i++)
 		{
@@ -1127,8 +1119,38 @@ modded class PlayerBase
 			ItemBase att = DRL_CraftComponentResolver.FindItemForComponent(c, this, nearWB, resultCls);
 			if (!att)
 			{
-				return false;
+				string missing = c.Classname;
+				if (missing == "" && c.Classnames && c.Classnames.Count() > 0)
+					missing = c.Classnames[0];
+				if (missing == "")
+					missing = "?";
+				return missing;
 			}
+		}
+		return "";
+	}
+
+	// Проверка станции перед стартом крафта. Раньше отказ был молчаливым (окно
+	// писало «Требования выполнены», а кнопка ничего не делала) - теперь причина
+	// в логе DRL и уведомление игроку.
+	protected bool DRL_CheckStationForCraft(DRL_Craft_Recipe r, string resultCls)
+	{
+		if (!DRL_HasRequiredWorkbenchForRecipe(r))
+		{
+			DRL_CraftLogger.Warn("Player " + DRL_GetPlayerIdSafe() + ": recipe " + r.RecipeId.ToString() + " - no required station within 6 m");
+			DRL_CraftProcessManager.GetInstance().SendCraftNotification(this, EDRLCraftNotifType.MISSING_TOOLS, resultCls);
+			return false;
+		}
+		string missing = DRL_FindMissingAttachment(r, resultCls);
+		if (missing != "")
+		{
+			string wbInfo = "none";
+			EntityAI wbUsed = DRL_ResolveWorkbenchForRecipe(r, 6.0);
+			if (wbUsed)
+				wbInfo = wbUsed.GetType() + " at " + wbUsed.GetPosition().ToString();
+			DRL_CraftLogger.Warn("Player " + DRL_GetPlayerIdSafe() + ": recipe " + r.RecipeId.ToString() + " - missing attachment/tool " + missing + " (station " + wbInfo + ")");
+			DRL_CraftProcessManager.GetInstance().SendCraftNotification(this, EDRLCraftNotifType.MISSING_TOOLS, resultCls);
+			return false;
 		}
 		return true;
 	}
@@ -1137,8 +1159,7 @@ modded class PlayerBase
 	{
 		if (!r || !r.CraftComponents) return true;
 
-		EntityAI nearWB = DRL_FindNearbyWorkbenchForRecipe(r, 6.0);
-		if (!nearWB) nearWB = DRL_GetCurrentWorkbench();
+		EntityAI nearWB = DRL_ResolveWorkbenchForRecipe(r, 6.0);
 
 		for (int i = 0; i < r.CraftComponents.Count(); i++)
 		{
@@ -1159,8 +1180,7 @@ modded class PlayerBase
 	{
 		if (!r || !r.CraftComponents) return;
 
-		EntityAI nearWB = DRL_FindNearbyWorkbenchForRecipe(r, 6.0);
-		if (!nearWB) nearWB = DRL_GetCurrentWorkbench();
+		EntityAI nearWB = DRL_ResolveWorkbenchForRecipe(r, 6.0);
 
 		for (int i = 0; i < r.CraftComponents.Count(); i++)
 		{
@@ -1366,7 +1386,9 @@ modded class PlayerBase
 			return false;
 		}
 
-		EntityAI wb = DRL_GetCurrentWorkbenchRoot();
+		// Саму станцию, а не корень: резолвер сам смотрит корень и его вложения, а обвесы
+		// станции-вложения (машинка на столе на верстаке) видит только так - как клиент.
+		EntityAI wb = DRL_GetCurrentWorkbench();
 		return DRL_CraftComponentResolver.HasComponentRequirement(c, this, wb, "", craftCount);
 	}
 
@@ -1377,7 +1399,7 @@ modded class PlayerBase
 			return false;
 		}
 
-		EntityAI wb = DRL_GetCurrentWorkbenchRoot();
+		EntityAI wb = DRL_GetCurrentWorkbench();
 		return DRL_CraftComponentResolver.ExecuteComponentConsumption(c, this, wb, "", craftCount);
 	}
 

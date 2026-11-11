@@ -127,6 +127,18 @@ def main():
                 cell.putpixel((px, py), cell.getpixel((px, rows_from)))
         atlas.paste(cell, (cx - 8, gy - 8 + 24))
         rows.append('  ImageSetDefClass %s {\n   Name "%s"\n   Pos %d %d\n   Size 128 128\n   Flags 0\n  }\n' % (name, name, cx, gy + 24))
+    # Косая черта счётчика «пятёрками» (VBT.Tally): готовая наклонная линия, растягивается на пачку палочек.
+    # Поворот тонкой полоски SetRotation в игре давал короткий штрих (баг 2026-11-11). Рисуется в 4 раза крупнее
+    # и уменьшается — края сглажены; запас прозрачных пикселей по краям, чтобы выборка не тянула соседей.
+    sw, sh, ss = 160, 72, 4
+    big_slash = Image.new('L', (sw * ss, sh * ss), 0)
+    from PIL import ImageDraw
+    ImageDraw.Draw(big_slash).line([(8 * ss, (sh - 8) * ss), ((sw - 8) * ss, 8 * ss)], fill=255, width=10 * ss)
+    big_slash = big_slash.resize((sw, sh), Image.LANCZOS)
+    slash = Image.new('RGBA', (sw, sh), (255, 255, 255, 0))
+    slash.putalpha(big_slash)
+    atlas.paste(slash, (1500, 1850))
+    rows.append('  ImageSetDefClass slash {\n   Name "slash"\n   Pos 1500 1850\n   Size %d %d\n   Flags 0\n  }\n' % (sw, sh))
     # Сплошной участок: Line фреймворка растягивает крошечный спрайт, и его край расплывается на десятки пикселей.
     atlas.paste(Image.new('RGBA', (64, 64), (255, 255, 255, 255)), (1400, 1846))
     rows.append('  ImageSetDefClass solid {\n   Name "solid"\n   Pos 1416 1862\n   Size 32 32\n   Flags 0\n  }\n')

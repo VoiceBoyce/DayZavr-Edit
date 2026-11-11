@@ -111,8 +111,84 @@ class VB_TabletClient
 		}
 	}
 
+	protected static ref array<int> s_MouseOff;	// команды мыши, отключённые на время планшета (id)
+
+	// Планшет открыт: команды на кнопках и колесе мыши отключаются, клики идут только в планшет.
+	// Без этого за рулём ЛКМ («действие по умолчанию») глушила двигатель (баг 2026-11-11). Клавиатура не трогается:
+	// персонаж ходит, транспортом можно управлять. Интерфейсные команды UAUI* остаются.
+	static void SetMouseLock(bool on)
+	{
+		if (on == (s_MouseOff != null))
+			return;
+		UAInputAPI api = GetUApi();
+		if (!api)
+			return;
+		if (!on)
+		{
+			foreach (int offId : s_MouseOff)
+			{
+				UAInput back = api.GetInputByID(offId);
+				if (back)
+					back.ForceDisable(false);
+			}
+			s_MouseOff = null;
+			// Поворот мышью тоже был среди команд мыши: если планшет ещё открыт, его блокировка возвращается.
+			if (s_AimLocked)
+			{
+				s_AimLocked = false;
+				SetAimLock(true);
+			}
+			return;
+		}
+		s_MouseOff = new array<int>();
+		array<int> keep = new array<int>();
+		// Свои клавиши планшета тоже: их могли переназначить на кнопку мыши, планшет должен закрываться ей же.
+		array<string> ui = {"UAUISelect", "UAUIBack", "UAUIMenu", "UAUIGesturesOpen", "UAUIQuickbarRadialOpen", "UAVBTabletOpen", "UAVBTabletMap", "UAVBTablet3D"};
+		foreach (string uiName : ui)
+		{
+			UAInput uiInput = api.GetInputByName(uiName);
+			if (uiInput)
+				keep.Insert(uiInput.ID());
+		}
+		TIntArray ids = new TIntArray();
+		api.GetActiveInputs(ids);
+		foreach (int id : ids)
+		{
+			if (keep.Find(id) >= 0)
+				continue;
+			UAInput input = api.GetInputByID(id);
+			if (!input)
+				continue;
+			int was = input.AlternativeIndex();
+			bool mouse = false;
+			for (int a = 0; a < input.AlternativeCount() && !mouse; a++)
+			{
+				input.SelectAlternative(a);
+				for (int k = 0; k < input.BindKeyCount(); k++)
+				{
+					if (input.CheckBindDevice(k, EUAINPUT_DEVICE_MOUSE))
+					{
+						mouse = true;
+						break;
+					}
+				}
+			}
+			input.SelectAlternative(was);
+			if (!mouse)
+				continue;
+			input.ForceDisable(true);
+			s_MouseOff.Insert(id);
+		}
+#ifdef DIAG_DEVELOPER
+		UAInput lmb = api.GetInputByName("UADefaultAction");
+		bool lmbOff = lmb && s_MouseOff.Find(lmb.ID()) >= 0;
+		Print(VB_TABLET_TAG + " команды мыши отключены: " + s_MouseOff.Count().ToString() + ", UADefaultAction среди них: " + lmbOff.ToString());
+#endif
+	}
+
 	static void Reset()
 	{
+		SetMouseLock(false);
 		SetAimLock(false);
 		s_Instance = null;
 		VB_C_ACCENT = VB_ACCENT_DEFAULT;

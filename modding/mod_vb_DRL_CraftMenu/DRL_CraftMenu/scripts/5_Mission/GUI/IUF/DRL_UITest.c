@@ -7,6 +7,7 @@
 //   open              открыть окно крафта (ID 9501)
 //   learn             открыть окно изучения (ID 9503)
 //   close             закрыть окно
+//   station <класс>   открыть станцию рядом (6 м), в т.ч. вложение: машинка на столе
 //   run <x>           любое слово: изменить, чтобы выполнить снова
 // Остальные команды — «команда аргумент» (у всех есть аргумент; где он не
 // нужен — любой, например x); их выполняет открытое окно (TestCommand):
@@ -76,6 +77,13 @@ class DRL_UITest
 
 	protected static void Run(string line)
 	{
+		if (line.IndexOf("station ") == 0)
+		{
+			string stCls = line.Substring(8, line.Length() - 8);
+			stCls = stCls.Trim();
+			OpenStation(stCls);
+			return;
+		}
 		string norm = line;
 		norm.Replace(";", " ");
 		norm.Replace("\t", " ");
@@ -115,6 +123,57 @@ class DRL_UITest
 			return;
 		}
 		ApplyCurrent(rest);
+	}
+
+	// Как ActionOpenDRLWorkbench на клиенте: окно с выбранной станцией. Ищет и во
+	// вложениях (швейная машинка на столе в мире не лежит, dayz-mcp её не находит).
+	protected static void OpenStation(string cls)
+	{
+		PlayerBase p = PlayerBase.Cast(GetGame().GetPlayer());
+		if (!p || cls == "")
+			return;
+		array<Object> objs = new array<Object>();
+		array<CargoBase> prx = new array<CargoBase>();
+		GetGame().GetObjectsAtPosition(p.GetPosition(), 6.0, objs, prx);
+		EntityAI found = null;
+		foreach (Object o : objs)
+		{
+			EntityAI e = EntityAI.Cast(o);
+			if (!e || e.IsInherited(Man))
+				continue;
+			found = FindStation(e, cls, 0);
+			if (found)
+				break;
+		}
+		if (!found)
+		{
+			Log("station " + cls + " not found");
+			return;
+		}
+		DRL_WorkbenchBG.Set(found);
+		GetGame().GetUIManager().EnterScriptedMenu(9502, null);
+		string parentType = "none";
+		EntityAI parentEnt = found.GetHierarchyParent();
+		if (parentEnt)
+			parentType = parentEnt.GetType();
+		Log("station " + cls + " opened, parent=" + parentType);
+	}
+
+	protected static EntityAI FindStation(EntityAI e, string cls, int depth)
+	{
+		if (!e)
+			return null;
+		if (e.IsKindOf(cls))
+			return e;
+		if (depth >= 3 || !e.GetInventory())
+			return null;
+		for (int i = 0; i < e.GetInventory().AttachmentCount(); i++)
+		{
+			EntityAI found = FindStation(e.GetInventory().GetAttachmentFromIndex(i), cls, depth + 1);
+			if (found)
+				return found;
+		}
+		return null;
 	}
 
 	protected static void ApplyCurrent(string commands)

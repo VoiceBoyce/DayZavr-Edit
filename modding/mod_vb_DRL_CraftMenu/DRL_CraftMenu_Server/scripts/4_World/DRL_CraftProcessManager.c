@@ -1538,17 +1538,9 @@ class DRL_CraftProcessManager
             }
         }
 
-        array<Object> nearObjects = new array<Object>();
-        GetGame().GetObjectsAtPosition(data.m_WorkbenchPos, 2.0, nearObjects, null);
-        for (int i = 0; i < nearObjects.Count(); i++)
-        {
-            EntityAI nearEa = EntityAI.Cast(nearObjects[i]);
-            if (nearEa && (nearEa.GetType() == data.m_WorkbenchClass || nearEa.IsKindOf(data.m_WorkbenchClass)))
-            {
-                return nearEa;
-            }
-        }
-        return null;
+        // После рестарта сетевой ID другой: ищем по месту, включая станции-вложения
+        // (швейная машинка на столе в мире не лежит).
+        return DRL_StationFinder.FindNearByClass(data.m_WorkbenchPos, 2.0, data.m_WorkbenchClass);
     }
 
     protected void SaveProcessBin(DRL_CraftProcessData data)
