@@ -1,5 +1,6 @@
-// Объекты Изнанки: сердце (VB_RiftHeart) и корни/трещины без сердца (конфиг-классы на VB_RiftBase).
-// Всё ниже работает только на клиенте: сервер объект просто держит.
+// Объекты Изнанки: сердце (VB_RiftHeart), корни и щупальца (конфиг-классы на VB_RiftBase).
+// Пульс, свет и звук работают только на клиенте: сервер объект просто держит.
+// Где стоят — решает сервер на каждом рестарте (VB_RiftNests: гнёзда из nests.json).
 // Удар = переключение материалов свечения (4 уровня, vb_rift_*_0..3.rvmat); ритм задаёт VB_RiftPulse.
 // Траву выжигают локальные срезатели: ClutterCutter6x6 в точке cut_big (у сердца)
 // и ClutterCutter2x2 по точкам cut_1..cut_N из Memory LOD (вдоль корней и трещин).
@@ -29,9 +30,42 @@ class VB_RiftBase extends House
 	protected string m_VB_TexSuffix = "_co";	// суффикс текстур секций (vbTexSuffix)
 	protected ref array<Object> m_VB_Cutters;
 
+	// «Голый» объект: модель без пульса, света, срезателей травы и обвивок (призрак редактора, замер модели).
+	// s_VB_Bare ставят на время CreateObjectEx, m_VB_Bare — сразу после (на случай, если EEInit придёт позже).
+	static bool s_VB_Bare;
+	bool m_VB_Bare;
+	protected bool m_VB_Highlight;			// подсвечен редактором: стоит материал подсветки, пульс его не трогает
+	protected bool m_VB_Broken;				// корень отломан ножом (VB_ActionBreakRiftRoot): погас до рестарта, синхронизируется
+
+	void VB_RiftBase()
+	{
+		RegisterNetSyncVariableBool("m_VB_Broken");
+	}
+
 	bool VB_IsHeart()
 	{
 		return false;
+	}
+
+	// корень гнезда на земле (VB_RiftRoots_*): от него можно отломить «Корень Изнанки»
+	bool VB_IsGroundRoot()
+	{
+		return GetType().IndexOf("VB_RiftRoots_") == 0;
+	}
+
+	bool VB_IsBroken()
+	{
+		return m_VB_Broken;
+	}
+
+	// сервер: от корня отломили кусок — гаснет до рестарта (гнёзда каждый рестарт ставятся заново)
+	void VB_BreakServer()
+	{
+		if (m_VB_Broken)
+			return;
+
+		m_VB_Broken = true;
+		SetSynchDirty();
 	}
 
 	// сердце вырезано (только у VB_RiftHeart)
@@ -40,10 +74,10 @@ class VB_RiftBase extends House
 		return false;
 	}
 
-	// погас, как днём: само сердце вырезано или вырезано сердце, в ритме которого он бьётся
+	// погас, как днём: от корня отломан кусок, само сердце вырезано или вырезано сердце, в ритме которого он бьётся
 	bool VB_IsDormant()
 	{
-		return m_VB_LinkHeart && m_VB_LinkHeart.VB_IsDead();
+		return m_VB_Broken || (m_VB_LinkHeart && m_VB_LinkHeart.VB_IsDead());
 	}
 
 	// сердце режут прямо сейчас (только у живого VB_RiftHeart): всё рядом бьётся чаще и просыпается даже днём
@@ -56,13 +90,18 @@ class VB_RiftBase extends House
 	{
 		super.EEInit();
 
+		m_VB_IdxCrust = GetHiddenSelectionIndex("crust");
+		m_VB_IdxVeins = GetHiddenSelectionIndex("veins");
+		if (s_VB_Bare)
+			m_VB_Bare = true;
+		if (m_VB_Bare)
+			return;
+
 		VB_AlignToTerrain();	// и на сервере, и на клиенте: у локальных копий результат тот же
 
 		if (g_Game.IsDedicatedServer())
 			return;
 
-		m_VB_IdxCrust = GetHiddenSelectionIndex("crust");
-		m_VB_IdxVeins = GetHiddenSelectionIndex("veins");
 		if (ConfigIsExisting("vbCrustMat"))
 			m_VB_CrustMat = ConfigGetString("vbCrustMat");
 		if (ConfigIsExisting("vbVeinsMat"))
@@ -84,9 +123,78 @@ class VB_RiftBase extends House
 		super.EEDelete(parent);
 	}
 
+	// Поставить в точку с поворотом и заново наклонить по склону (наклон в ori не задан — значит, по рельефу).
+	// Так ставят гнёзда сервер (VB_RiftNests) и редактор (призрак и предпросмотр).
+	void VB_PlaceAt(vector pos, vector ori)
+	{
+		SetPosition(pos);
+		SetOrientation(ori);
+		VB_AlignToTerrain();
+
+		// локальная копия редактора: срезатели травы ставились при создании, ещё без поворота
+		if (m_VB_Cutters && m_VB_Cutters.Count() > 0)
+		{
+			VB_DeleteCutters();
+			VB_CreateCutters();
+		}
+	}
+
+	// Поставить и развернуть «лицом» (+Z модели) по dir, без наклона: корни на стенах и углах домов
+	void VB_PlaceDir(vector pos, vector dir)
+	{
+		SetPosition(pos);
+		SetDirection(dir);
+		if (m_VB_Cutters && m_VB_Cutters.Count() > 0)
+		{
+			VB_DeleteCutters();
+			VB_CreateCutters();
+		}
+	}
+
+	// Призрак и подсветка редактора: полупрозрачная заливка вместо материалов Изнанки.
+	void VB_SetGhostLook(string tex, string mat)
+	{
+		if (m_VB_IdxCrust < 0)
+			m_VB_IdxCrust = GetHiddenSelectionIndex("crust");
+		if (m_VB_IdxVeins < 0)
+			m_VB_IdxVeins = GetHiddenSelectionIndex("veins");
+		if (m_VB_IdxCrust >= 0)
+		{
+			SetObjectTexture(m_VB_IdxCrust, tex);
+			SetObjectMaterial(m_VB_IdxCrust, mat);
+		}
+		if (m_VB_IdxVeins >= 0)
+		{
+			SetObjectTexture(m_VB_IdxVeins, tex);
+			SetObjectMaterial(m_VB_IdxVeins, mat);
+		}
+	}
+
+	// Подсветка в редакторе (только у этого клиента): пока горит, пульс материалы не меняет.
+	void VB_SetHighlight(bool on, string tex = "", string mat = "")
+	{
+		if (on == m_VB_Highlight)
+			return;
+
+		m_VB_Highlight = on;
+		if (on)
+		{
+			VB_SetGhostLook(tex, mat);
+			return;
+		}
+
+		// вернуть свой вид: заставить VB_SetLevel заново выставить текстуры и материалы
+		int level = m_VB_Level;
+		if (level == -100)
+			level = LEVEL_IDLE;
+		m_VB_Level = -100;
+		m_VB_DayTex = (level != LEVEL_DAY);
+		VB_SetLevel(level);
+	}
+
 	// Наклон по склону: плоскость по высотам рельефа в 9 точках (сетка 3x3 с шагом vbAlignRadius),
 	// поворот по горизонтали сохраняется. Если наклон уже задан вручную (в редакторе), не трогаем.
-	protected void VB_AlignToTerrain()
+	void VB_AlignToTerrain()
 	{
 		if (ConfigGetInt("vbAlignToTerrain") != 1)
 			return;
@@ -193,6 +301,8 @@ class VB_RiftBase extends House
 			return;
 
 		m_VB_Level = level;
+		if (m_VB_Highlight)
+			return;
 		bool day = (level == LEVEL_DAY);
 		bool crust = m_VB_IdxCrust >= 0 && m_VB_CrustMat != "";
 		bool veins = m_VB_IdxVeins >= 0 && m_VB_VeinsMat != "";
@@ -239,6 +349,11 @@ class VB_RiftBase extends House
 			m_VB_Light.Destroy();
 			m_VB_Light = null;
 		}
+	}
+
+	// свет внутри домов вокруг сердца (VB_RiftHouses.c); у остальных объектов ничего не делает
+	void VB_HouseTick(bool on, float k, float night)
+	{
 	}
 
 	void VB_SetLightPulse(float k, float night)
@@ -310,10 +425,56 @@ class VB_RiftHeart extends VB_RiftBase
 	protected bool m_VB_Disturbed;			// его режут или резали недавно, синхронизируется
 	protected bool m_VB_HordeCalled;		// сервер: волна зомби уже была (одна на сердце до рестарта)
 
+	// «Споры Изнанки»: у живого сердца ночью их собирают тряпкой (VB_ActionCollectSpores), SPORES_MAX за рестарт
+	static const int SPORES_MAX = 3;
+	protected int m_VB_SporesLeft = SPORES_MAX;	// синхронизируется: клиент не предлагает сбор, когда спор нет
+
+	// сервер: все сердца гнёзд (для «Слушающего корня» — ищет ближайшее живое в 3 км)
+	protected static ref array<VB_RiftHeart> s_VB_ServerHearts;
+
+	static VB_RiftHeart VB_NearestServer(vector pos, float maxDist)
+	{
+		if (!s_VB_ServerHearts)
+			return null;
+
+		VB_RiftHeart best;
+		float bestSq = maxDist * maxDist;
+		float dSq;
+		foreach (VB_RiftHeart h : s_VB_ServerHearts)
+		{
+			if (!h || h.VB_IsDead())
+				continue;
+			dSq = vector.DistanceSq(pos, h.GetPosition());
+			if (dSq < bestSq)
+			{
+				bestSq = dSq;
+				best = h;
+			}
+		}
+		return best;
+	}
+
 	void VB_RiftHeart()
 	{
 		RegisterNetSyncVariableBool("m_VB_Dead");
 		RegisterNetSyncVariableBool("m_VB_Disturbed");
+		RegisterNetSyncVariableInt("m_VB_SporesLeft", 0, SPORES_MAX);
+	}
+
+	int VB_SporesLeft()
+	{
+		return m_VB_SporesLeft;
+	}
+
+	// сервер: забрать одну порцию спор; false — уже нет
+	bool VB_TakeSporesServer()
+	{
+		if (m_VB_Dead || m_VB_SporesLeft <= 0)
+			return false;
+
+		m_VB_SporesLeft--;
+		SetSynchDirty();
+		return true;
 	}
 
 	override bool VB_IsDisturbed()
@@ -321,8 +482,9 @@ class VB_RiftHeart extends VB_RiftBase
 		return m_VB_Disturbed && !m_VB_Dead;
 	}
 
-	// сервер: игрок начал резать — сердце потревожено, шум тянет зомби, первая попытка поднимает волну
-	void VB_DisturbServer(PlayerBase cutter)
+	// сервер: сердце потревожено — бьётся чаще, шум тянет зомби. Резка (horde = true) с первой попытки
+	// поднимает волну, сбор спор только будит сердце и шумит.
+	void VB_DisturbServer(PlayerBase cutter, bool horde = true)
 	{
 		if (m_VB_Dead)
 			return;
@@ -337,7 +499,7 @@ class VB_RiftHeart extends VB_RiftBase
 		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_CalmServer, CALM_MS, false);
 
 		VB_RiftHorde.VB_CallNoise(GetPosition());
-		if (!m_VB_HordeCalled)
+		if (horde && !m_VB_HordeCalled)
 		{
 			m_VB_HordeCalled = true;
 			VB_RiftHorde.VB_Spawn(GetPosition());
@@ -394,17 +556,24 @@ class VB_RiftHeart extends VB_RiftBase
 		}
 
 		VB_RiftStrike.VB_BroadcastServer();
+		VB_RiftNests.VB_OnHeartKilled(this);	// прорастание нового гнезда, если включено в настройках
 	}
 
 	override void EEInit()
 	{
 		super.EEInit();
+		if (m_VB_Bare)
+			return;
 
 		if (!g_Game.IsDedicatedServer())
 			VB_InfectTrees();
 
 		if (g_Game.IsServer() || !g_Game.IsMultiplayer())
 		{
+			if (!s_VB_ServerHearts)
+				s_VB_ServerHearts = new array<VB_RiftHeart>;
+			s_VB_ServerHearts.Insert(this);
+
 			m_VB_HeatSettings = new UniversalTemperatureSourceSettings();
 			m_VB_HeatSettings.m_UpdateInterval = 2;
 			m_VB_HeatSettings.m_Updateable = true;
@@ -440,6 +609,8 @@ class VB_RiftHeart extends VB_RiftBase
 		}
 		if (m_VB_Heat)
 			m_VB_Heat.SetActive(false);
+		if (s_VB_ServerHearts)
+			s_VB_ServerHearts.RemoveItem(this);
 		VB_DeleteWraps();
 		super.VB_Cleanup();
 	}

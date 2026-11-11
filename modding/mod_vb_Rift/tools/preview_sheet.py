@@ -82,6 +82,16 @@ for idx, (name, kind, seed) in enumerate(variants):
         R = float(kind.split(":")[1])
         bpy.ops.mesh.primitive_cylinder_add(radius=R, depth=5.0, location=(col * STEP, -row * STEP, 2.5))
         bpy.context.active_object.data.materials.append(bark)
+    if kind == "corner":                # дом в четверти x < 0, y < 0 (корни на наружном углу)
+        bpy.ops.mesh.primitive_cube_add(size=1, location=(col * STEP - 2.0, -row * STEP - 2.0, 3.0))
+        house = bpy.context.active_object
+        house.scale = (4.0, 4.0, 6.0)
+        house.data.materials.append(bark)
+    if kind.startswith("wall:"):        # стена дома за корнями (корни на стороне +y)
+        bpy.ops.mesh.primitive_cube_add(size=1, location=(col * STEP, -row * STEP - 0.2, 3.0))
+        wall = bpy.context.active_object
+        wall.scale = (6.0, 0.4, 6.0)
+        wall.data.materials.append(bark)
     if kind.startswith("hang:"):        # поднять, чтобы щупальца висели над землёй
         ob.location = (col * STEP, -row * STEP, 5.5)
     # подпись
@@ -123,7 +133,15 @@ cd = bpy.data.cameras.new("cam")
 cd.type = "ORTHO"
 cd.ortho_scale = max(COLS * STEP, rows * STEP * 4 / 3) + 2
 co = bpy.data.objects.new("cam", cd)
-if name_filter:     # сбоку под углом, чтобы были видны высота обвивок и длина щупалец
+if name_filter == "corner":     # углы: смотрим по диагонали снаружи, видны обе стены
+    cd.ortho_scale = COLS * STEP * 0.75
+    co.location = (cx + 30, cy + 30, 6)
+    co.rotation_euler = (math.radians(82), 0, math.radians(135))
+elif name_filter == "wall":   # корни по стене: смотрим на фасад спереди (со стороны +y)
+    cd.ortho_scale = COLS * STEP * 0.9
+    co.location = (cx, cy + 40, 3.5)
+    co.rotation_euler = (math.radians(86), 0, math.radians(180))
+elif name_filter:     # сбоку под углом, чтобы были видны высота обвивок и длина щупалец
     co.location = (cx, cy - 60, 30)
     co.rotation_euler = (math.radians(62), 0, 0)
 else:

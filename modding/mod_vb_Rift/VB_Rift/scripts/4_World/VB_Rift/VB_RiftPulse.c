@@ -29,12 +29,15 @@ class VB_RiftPulse
 	static const float ACTIVE_DIST = 250.0;	// дальше от игрока объект не пульсирует
 	static const float LIGHT_DIST = 150.0;	// свет только у сердец ближе этого
 	static const int MAX_LIGHTS = 3;		// не больше стольких красных источников света сразу
-	static const float LINK_DIST = 30.0;	// корни ближе этого к сердцу бьются вместе с ним
+	// корни ближе этого к сердцу бьются вместе с ним и гаснут, когда его вырежут. Равно радиусу гнезда
+	// (VB_RiftNestNet.NEST_RADIUS): корень принадлежит гнезду ближайшего сердца — с ним и гаснет
+	static const float LINK_DIST = 60.0;
 	static const float WAVE_SPEED = 8.0;	// м/с: так быстро удар бежит от сердца по корням
 	static const float LIGHT_RADIUS = 9.0;
 	static const float LIGHT_BASE = 0.6;
 	static const float LIGHT_BEAT = 2.6;
 	static const int MAX_SPORES = 4;		// споры (частицы) не больше чем у стольких сердец сразу
+	static const float HOUSE_LIGHT_DIST = 150.0;	// свет внутри домов у сердец ближе этого (VB_RiftHouses.c)
 	static const float SPORE_DIST = 80.0;	// и только ближе этого
 
 	// ночь: 0 = день (спит), 1 = ночь; между — сумерки
@@ -112,6 +115,52 @@ class VB_RiftPulse
 		}
 	}
 
+	// клиент: ближайший живой (не погасший) корень гнезда на земле не дальше maxDist; null — нет
+	static VB_RiftBase VB_NearestLiveRoot(vector pos, float maxDist)
+	{
+		if (!s_VB_Instance)
+			return null;
+
+		VB_RiftBase best;
+		float bestSq = maxDist * maxDist;
+		float dSq;
+		foreach (VB_RiftBase obj : s_VB_Instance.m_VB_Objects)
+		{
+			if (!obj || obj.m_VB_Bare || !obj.VB_IsGroundRoot() || obj.VB_IsDormant())
+				continue;
+			dSq = vector.DistanceSq(pos, obj.GetPosition());
+			if (dSq < bestSq)
+			{
+				bestSq = dSq;
+				best = obj;
+			}
+		}
+		return best;
+	}
+
+	// клиент: ближайшее живое сердце не дальше maxDist (из тех, что клиент видит); null — нет
+	static VB_RiftBase VB_NearestLiveHeart(vector pos, float maxDist)
+	{
+		if (!s_VB_Instance)
+			return null;
+
+		VB_RiftBase best;
+		float bestSq = maxDist * maxDist;
+		float dSq;
+		foreach (VB_RiftBase obj : s_VB_Instance.m_VB_Objects)
+		{
+			if (!obj || obj.m_VB_Bare || !obj.VB_IsHeart() || obj.VB_IsDormant())
+				continue;
+			dSq = vector.DistanceSq(pos, obj.GetPosition());
+			if (dSq < bestSq)
+			{
+				bestSq = dSq;
+				best = obj;
+			}
+		}
+		return best;
+	}
+
 	// один удар: быстрый подъём, медленный спад, 0..1
 	static float VB_Beat(float t, float at)
 	{
@@ -183,6 +232,7 @@ class VB_RiftPulse
 
 		float activeSq = ACTIVE_DIST * ACTIVE_DIST;
 		float soundSq = SOUND_DIST * SOUND_DIST;
+		float houseSq = HOUSE_LIGHT_DIST * HOUSE_LIGHT_DIST;
 		float soundAt = BEAT_FIRST - SOUND_LEAD;
 		float dSq;
 		float t;
@@ -207,6 +257,7 @@ class VB_RiftPulse
 
 			if (objNight < NIGHT_DAY_BELOW || obj.VB_IsDormant())	// день или сердце вырезано: спит
 			{
+				obj.VB_HouseTick(false, 0, 0);
 				obj.VB_SetLevel(VB_RiftBase.LEVEL_DAY);
 				obj.m_VB_LastT = -1;
 				continue;
@@ -215,6 +266,7 @@ class VB_RiftPulse
 			dSq = vector.DistanceSq(ppos, obj.GetPosition());
 			if (dSq > activeSq)
 			{
+				obj.VB_HouseTick(false, 0, 0);
 				obj.VB_SetLevel(VB_RiftBase.LEVEL_IDLE);
 				obj.m_VB_LastT = -1;
 				continue;
@@ -232,6 +284,8 @@ class VB_RiftPulse
 
 			obj.VB_SetLevel(level);
 			obj.VB_SetLightPulse(k, objNight);
+			if (obj.VB_IsHeart())
+				obj.VB_HouseTick(objNight >= NIGHT_LIGHT_ABOVE && dSq < houseSq, k, objNight);
 
 			// сердцебиение: запускаем звук на переходе через момент первого удара
 			if (obj.VB_IsHeart() && objNight >= NIGHT_LIGHT_ABOVE && dSq < soundSq && obj.m_VB_LastT >= 0)

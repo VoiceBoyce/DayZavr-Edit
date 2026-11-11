@@ -367,6 +367,8 @@ Verified errors committed more than once. Check ACTIVELY during implementation. 
 - **E47** — дробное значение целочисленного ключа .ptc (`Wind 0.5`) обрывает разбор: цвет, размер и остальные излучатели теряются (`Unexpected data at offset N`)
 - **E48** — приманка зомби шумом: `CfgNoises type = "sound"` не тянет, нужен `type = "shot"` (как ракетница)
 - **E49** — плоская декаль с флагом «On surface» ложится по рельефу, но рисуются только пиксели с альфой 255 и не работает смена текстур; причина не найдена
+- **E50** — сырые `GetMouseState`/`KeyState` ловят клики и клавиши из других окон, пока DayZ не в фокусе: проверять `g_Game.IsAppActive()`
+- **E51** — `local` и `out` — ключевые слова Enforce, не имена переменных/параметров (`Broken expression`, `Expected name, not a keyword`)
 
 ---
 

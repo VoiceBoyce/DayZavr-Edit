@@ -474,8 +474,168 @@ def build_rootpiece_scene(seed, size=0.28):
             "scale": size / length, "center": np.array([0.0, 0.0, 0.12]), "item_mass": 0.3}
 
 
+def build_spores_scene(seed, size=0.11):
+    """Предмет «Споры Изнанки»: маленький тугой мешочек, оплетённый светящимися жилами (собирают у сердца)."""
+    sc = build_chunk_scene(seed, size)
+    sc["item_mass"] = 0.08
+    return sc
+
+
+def build_vein_coil_scene(seed, size=0.13):
+    """Предмет «Жила Изнанки»: смотанная в моток светящаяся жила с парой свободных концов.
+    Строится в масштабе корней (правильный шаг сетки трубок) и уменьшается до size метров."""
+    rng = np.random.default_rng(seed)
+    tubes = []
+    R = 0.55
+    turns = 3.3
+    n = int(turns * 2 * math.pi * R / DS)
+    t = np.linspace(0, 1, n)
+    ang = t * turns * 2 * math.pi + rng.uniform(0, 6.28)
+    rr = R * (1 + 0.07 * np.sin(t * 17 + seed))
+    z = 0.06 + 0.12 * t + 0.03 * np.sin(ang * 2)
+    pts = np.column_stack([rr * np.cos(ang), rr * np.sin(ang), z])
+    r = 0.05 * (1 - 0.25 * t)
+    tubes.append(Tube(pts, r, "vein", lump=0.12, lump_freq=8.0, seed=seed))
+    # второй виток потоньше: «корневая» нить с жилой
+    pts2 = np.column_stack([rr * 0.82 * np.cos(ang + 0.6), rr * 0.82 * np.sin(ang + 0.6), z * 0.8 + 0.02])
+    r2 = 0.03 * (1 - 0.3 * t)
+    tubes.append(Tube(pts2, r2, "root", lump=0.12, lump_freq=9.0, seed=seed + 1))
+    # свободные концы свисают с мотка
+    for k in range(2):
+        a0 = ang[-1] if k == 0 else ang[0]
+        p0 = pts[-1] if k == 0 else pts[0]
+        m = 18
+        u = np.linspace(0, 1, m)
+        dirv = np.array([math.cos(a0 + 1.4), math.sin(a0 + 1.4)])
+        tail = np.column_stack([p0[0] + dirv[0] * 0.35 * u, p0[1] + dirv[1] * 0.35 * u, p0[2] * (1 - u) + 0.04 * u])
+        rt = 0.04 * (1 - 0.85 * u) + 0.004
+        tubes.append(Tube(tail, rt, "vein", lump=0.1, lump_freq=10.0, seed=seed + 5 + k, cap_start=False))
+    return {"tubes": tubes, "core": None, "top": None, "heart": False, "no_cut": True,
+            "scale": size / (2 * R + 0.4), "center": np.array([0.0, 0.0, 0.1]), "item_mass": 0.05}
+
+
+def _small_heart(k):
+    """Поверхность сердца, уменьшенная в k раз вокруг его центра (для фонаря)."""
+    return lambda d: HEART_C + (heart_surface(d) - HEART_C) * k
+
+
+def _equator_vein(seed, z_shift=0.0, r=0.03):
+    """Жила-обвязка по «экватору» сердца."""
+    ph = np.linspace(0, 2 * math.pi, 90)
+    th = math.pi / 2 + 0.12 * np.sin(ph * 3 + seed)
+    dirs = np.column_stack([np.sin(th) * np.cos(ph), np.sin(th) * np.sin(ph), np.cos(th)])
+    pts = heart_surface(dirs) + dirs * (r * 0.4) + np.array([0, 0, z_shift])
+    return Tube(pts, np.full(len(pts), r), "vein", lump=0.1, lump_freq=12.0, seed=seed, cap_start=False, cap_end=False)
+
+
+def build_listen_root_scene(seed, size=0.24):
+    """Предмет «Слушающий корень»: обломок корня, конец которого закручен в раструб-«ухо», по нему жилы.
+    Строится в масштабе корней на земле и уменьшается до size метров."""
+    rng = np.random.default_rng(seed)
+    L = 0.8
+    n = int(L / DS) + 1
+    u = np.linspace(0, 1, n)
+    stem = np.column_stack([u * L - 0.7, 0.05 * np.sin(u * 4 + 1.0), 0.14 + 0.03 * np.sin(u * 3)])
+    turns = 1.6
+    ns = int(turns * 2 * math.pi * 0.2 / DS)
+    t = np.linspace(0, 1, ns)
+    R = 0.32 * (1 - t) + 0.06 * t
+    ang = -math.pi / 2 + t * turns * 2 * math.pi
+    cx, cz = stem[-1, 0], stem[-1, 2] + 0.32
+    sp = np.column_stack([cx + R * np.cos(ang), stem[-1, 1] + 0.12 * t, cz + R * np.sin(ang)])
+    pts = np.vstack([stem, sp[1:]])
+    radii = np.concatenate([0.1 - 0.015 * u, 0.085 * (1 - t[1:]) + 0.022 * t[1:]])
+    tubes = [Tube(pts, radii, "root", lump=0.12, lump_freq=7.0, seed=seed)]
+    for k in range(3):
+        vein = vein_along(pts, radii, rng, 0.0, 0.018)
+        if vein:
+            tubes.append(Tube(vein[0], vein[1], "vein", seed=seed + 10 + k))
+    lo, hi = pts.min(0), pts.max(0)
+    return {"tubes": tubes, "core": None, "top": None, "heart": False, "no_cut": True,
+            "scale": size / float(np.max(hi - lo) + 0.2), "center": (lo + hi) / 2, "item_mass": 0.25}
+
+
+def build_heart_battery_scene(seed, size=0.26):
+    """Предмет «Сердце-аккумулятор»: сердце, перетянутое жилой, с двумя отростками-«клеммами» сверху."""
+    sc = build_chunk_scene(seed, size)
+    for k, side in enumerate((-1, 1)):
+        d = np.array([0.45 * side, 0.15, 0.88])
+        d /= np.linalg.norm(d)
+        p0 = heart_surface(d[None, :])[0] - d * 0.05
+        u = np.linspace(0, 1, 26)
+        pts = p0[None, :] + np.column_stack([side * 0.22 * u ** 2, 0.05 * np.sin(u * 3 + k), 0.34 * u - 0.1 * u ** 3])
+        r = 0.075 * (1 - 0.45 * u)
+        sc["tubes"].append(Tube(pts, r, "root", lump=0.12, lump_freq=7.0, seed=seed * 10 + k))
+        sc["tubes"].append(Tube(pts + np.array([0, 0, 0.004]), r * 0.35, "vein", lump=0.1, lump_freq=10.0,
+                                seed=seed * 10 + 5 + k))
+    sc["tubes"].append(_equator_vein(seed, 0.0, 0.035))
+    sc["tubes"].append(_equator_vein(seed + 1, -0.18, 0.028))
+    sc["item_mass"] = 3.0
+    return sc
+
+
+def build_spore_trap_scene(seed, size=0.15):
+    """Предмет «Споровая ловушка»: мешочек спор с торчащей «трубкой»-отростком сбоку."""
+    sc = build_chunk_scene(seed, size)
+    d = np.array([1.0, 0.0, 0.25])
+    d /= np.linalg.norm(d)
+    p0 = heart_surface(d[None, :])[0] - d * 0.06
+    u = np.linspace(0, 1, 24)
+    pts = p0[None, :] + np.column_stack([0.5 * u, 0.06 * np.sin(u * 4), 0.12 * u ** 2])
+    sc["tubes"].append(Tube(pts, np.full(len(u), 0.07) * (1 - 0.2 * u), "root", lump=0.04, lump_freq=6.0, seed=seed * 10))
+    sc["tubes"].append(_equator_vein(seed, 0.05, 0.03))
+    sc["item_mass"] = 0.3
+    return sc
+
+
+def build_fuel_capsule_scene(seed, size=0.32):
+    """Предмет «Топливная капсула»: толстый корневой стручок с закрытыми концами, обвитый тремя жилами."""
+    L = 1.2
+    n = int(L / DS) + 1
+    u = np.linspace(0, 1, n)
+    axis = np.column_stack([u * L - L / 2, 0.04 * np.sin(u * 3 + seed), 0.3 + 0.03 * np.sin(u * 2.5)])
+    r = 0.24 * np.sin(math.pi * u) ** 0.55 + 0.02
+    tubes = [Tube(axis, r, "root", lump=0.06, lump_freq=5.0, seed=seed)]
+    for k in range(3):
+        a = u * 4 * math.pi + k * 2 * math.pi / 3
+        rr = r + 0.012
+        pts = axis + np.column_stack([np.zeros(n), rr * np.cos(a), rr * np.sin(a)])
+        tubes.append(Tube(pts[3:-3], np.full(n - 6, 0.022), "vein", lump=0.1, lump_freq=12.0, seed=seed + 1 + k))
+    return {"tubes": tubes, "core": None, "top": None, "heart": False, "no_cut": True,
+            "scale": size / (L + 0.05), "center": np.array([0.0, 0.0, 0.3]), "item_mass": 2.0}
+
+
+def build_lantern_scene(seed, size=0.26):
+    """Предмет «Фонарь-сердце»: маленькое сердце в клетке из корней, сверху петля-ручка."""
+    rng = np.random.default_rng(seed)
+    tubes = []
+    cage = HEART_R * 1.05
+    for k in range(5):
+        ph = k * 2 * math.pi / 5 + rng.uniform(-0.15, 0.15)
+        th = np.linspace(0.12 * math.pi, 0.9 * math.pi, 40)
+        dirs = np.column_stack([np.sin(th) * np.cos(ph), np.sin(th) * np.sin(ph), np.cos(th)])
+        pts = HEART_C + dirs * cage
+        tubes.append(Tube(pts, np.full(len(th), 0.045), "root", lump=0.12, lump_freq=7.0, seed=seed * 10 + k))
+    for zc, rad in ((math.cos(0.12 * math.pi), math.sin(0.12 * math.pi)), (math.cos(0.9 * math.pi), math.sin(0.9 * math.pi))):
+        ph = np.linspace(0, 2 * math.pi, 60)
+        pts = HEART_C + np.column_stack([cage[0] * rad * np.cos(ph), cage[1] * rad * np.sin(ph), np.full(60, cage[2] * zc)])
+        tubes.append(Tube(pts, np.full(60, 0.05), "root", lump=0.1, lump_freq=8.0, seed=seed * 10 + 20, cap_start=False, cap_end=False))
+    top = HEART_C[2] + cage[2] * math.cos(0.12 * math.pi)
+    a = np.linspace(0, math.pi, 40)
+    hr = 0.28
+    pts = np.column_stack([hr * np.cos(a), np.zeros(40), top + hr * np.sin(a)])
+    tubes.append(Tube(pts, np.full(40, 0.05), "root", lump=0.1, lump_freq=8.0, seed=seed * 10 + 30))
+    tubes.append(Tube(pts + np.array([0, 0.03, 0.02]), np.full(40, 0.018), "vein", lump=0.1, lump_freq=12.0, seed=seed * 10 + 31))
+    small = _small_heart(0.6)
+    top_c = small(np.array([[0.0, 0.0, 1.0]]))[0]
+    height = top + hr - (HEART_C[2] - cage[2])
+    return {"tubes": tubes, "core": None, "top": None, "heart": False, "no_cut": True,
+            "blobs": [small], "bulbs": [(top_c - np.array([0, 0, 0.03]), 0.09)],
+            "scale": size / (height + 0.1), "center": HEART_C.copy(), "item_mass": 0.6}
+
+
 def build_hang_scene(seed, kind):
-    """Свисающие щупальца: горизонтальный корень-«якорь» и висящие отростки со светящимися каплями.
+    """Свисающие щупальца: горизонтальный корень-«якорь» и висящие отростки с острыми концами.
     Начало координат — середина якоря (точка крепления); ставятся вручную на мосты, скалы, провода."""
     rng = np.random.default_rng(seed)
     tubes, bulbs = [], []
@@ -508,13 +668,177 @@ def build_hang_scene(seed, kind):
         pz = anchor[k, 2] - 0.02 - L * u
         pts = np.column_stack([px, py, pz])
         r0 = rng.uniform(0.035, 0.05)
-        r = r0 * (1 - 0.75 * u ** 0.9)
+        # к концу сходится в острие, как у корней (капель на концах нет — решение пользователя 11-11)
+        r = r0 * (1 - 0.8 * u ** 0.85)
+        tw = smoothstep(0.8, 1.0, u)
+        r = r * (1 - tw) + 0.003 * tw
         tubes.append(Tube(pts, r, "root", lump=0.15, lump_freq=9.0, seed=seed * 10 + 10 + i, cap_start=False))
         vv = vein_along(pts, r, rng, 0.05, 0.008)
         if vv is not None:
             tubes.append(Tube(vv[0], vv[1], "vein", lump=0.08, lump_freq=12.0, seed=seed * 10 + 40 + i))
-        bulbs.append((pts[-1] + np.array([0, 0, -0.01]), rng.uniform(0.03, 0.055)))
     return {"tubes": tubes, "core": None, "top": None, "heart": False, "no_cut": True, "bulbs": bulbs,
+            "handle": ((-0.05, -0.05, -0.05), (0.05, 0.05, 0.05))}
+
+
+CORNER_RC = 0.12     # радиус скругления ребра угла дома для корней, м
+
+
+def _surf_flat(s, v, off):
+    """Плоская стена: плоскость y = 0, наружу +y; s — вдоль стены, v — вверх."""
+    s = np.asarray(s, float)
+    return np.column_stack([s, np.broadcast_to(off, s.shape), np.asarray(v, float)])
+
+
+def _norm_flat(s):
+    s = np.asarray(s, float)
+    return np.column_stack([np.zeros_like(s), np.ones_like(s)])
+
+
+def _surf_corner(s, v, off):
+    """Наружный угол дома: дом в четверти x < 0, y < 0. Грань A — плоскость y = 0 (s < 0, наружу +y),
+    грань B — плоскость x = 0 (s > 0, наружу +x), ребро скруглено радиусом CORNER_RC.
+    s — развёртка по поверхности: отрицательная на грани A, положительная на грани B."""
+    s = np.asarray(s, float)
+    off = np.broadcast_to(np.asarray(off, float), s.shape)
+    rc = CORNER_RC
+    ph = np.clip((s + rc) / (2 * rc), 0.0, 1.0) * (math.pi / 2)
+    x = np.where(s < -rc, s, np.where(s > rc, off, -rc + (rc + off) * np.sin(ph)))
+    y = np.where(s < -rc, off, np.where(s > rc, -s, -rc + (rc + off) * np.cos(ph)))
+    return np.column_stack([x, y, np.asarray(v, float)])
+
+
+def _norm_corner(s):
+    s = np.asarray(s, float)
+    rc = CORNER_RC
+    ph = np.clip((s + rc) / (2 * rc), 0.0, 1.0) * (math.pi / 2)
+    return np.column_stack([np.sin(ph), np.cos(ph)])
+
+
+def _clip_uv(uv, smin, smax, vmax):
+    """Путь по развёртке обрывается там, где выходит за грань или выше vmax."""
+    bad = (uv[:, 0] < smin) | (uv[:, 0] > smax) | (uv[:, 1] > vmax)
+    if bad.any():
+        uv = uv[:int(np.argmax(bad))]
+    return uv
+
+
+def _taper(n_pts, r0, cut=0.8):
+    s = np.linspace(0, 1, n_pts)
+    r = r0 * (1 - cut * s ** 0.9)
+    tw = smoothstep(0.85, 1.0, s)
+    return r * (1 - tw) + 0.003 * tw
+
+
+def _surface_roots(rng, seed, surf, norm, starts, hmin, hmax, smin, smax, n_veins):
+    """Корни на поверхности (стена или угол): из земли перед ней загибаются и ползут вверх, ветвятся;
+    по самой поверхности расходится сеть тонких светящихся жил. Всё в развёртке (s, v), потом на поверхность."""
+    tubes = []
+    climb_uv = []
+    vmax = hmax + 0.4
+    for i, u0 in enumerate(starts):
+        r0 = rng.uniform(0.09, 0.14)
+        H = rng.uniform(hmin, hmax)
+        bend = 0.28
+        yw = r0 * 0.85
+        z0 = SINK * r0
+        n0 = norm([u0])[0]
+        base = surf([u0], [0.0], 0.0)[0, :2]
+        # 1. по земле к поверхности, с лёгким боковым уводом
+        d_out = rng.uniform(0.6, 1.3)
+        ng = max(6, int(d_out / DS))
+        g = np.linspace(0, 1, ng)
+        side = np.array([-n0[1], n0[0]])
+        sway = rng.uniform(-0.5, 0.5) * (1 - g) ** 2 + 0.04 * np.sin(g * 5 + i)
+        gp = base[None, :] + n0[None, :] * (yw + bend + d_out * (1 - g))[:, None] + side[None, :] * sway[:, None]
+        ground = np.column_stack([gp, np.full(ng, z0)])
+        # 2. загиб вверх (четверть окружности)
+        phi = np.linspace(0, math.pi / 2, max(6, int(bend * math.pi / 2 / DS)))[1:]
+        ap = base[None, :] + n0[None, :] * (yw + bend * (1 - np.sin(phi)))[:, None]
+        arc = np.column_stack([ap, z0 + bend * (1 - np.cos(phi))])
+        # 3. вверх по поверхности
+        uv, hs = walk_xy(rng, np.array([u0, 0.0]), math.pi / 2 + rng.uniform(-0.25, 0.25), H, 0.95)
+        uv = _clip_uv(uv, smin, smax, vmax - z0 - bend)
+        if len(uv) < 12:
+            continue
+        hs = hs[:len(uv)]
+        nc = len(uv) - 1
+        tot = len(ground) + len(arc) + nc
+        r_all = _taper(tot, r0)
+        r_all *= 1 + 0.12 * np.sin(np.arange(tot) * DS * rng.uniform(2.5, 4.0) + rng.uniform(0, 6.28)) * np.linspace(1, 0, tot)
+        rc_ = r_all[-nc:]
+        lift = 0.025 * np.maximum(0, np.sin(np.arange(nc) * DS * rng.uniform(1.5, 2.5) + rng.uniform(0, 6.28))) ** 2
+        climb = surf(uv[1:, 0], z0 + bend + uv[1:, 1], rc_ * 0.85 + lift)
+        pts = np.vstack([ground, arc, climb])
+        tubes.append(Tube(pts, r_all, "root", lump=0.14, lump_freq=6.0, seed=seed * 10 + i))
+        v = vein_along(pts, r_all, rng, 0.1, 0.02)
+        if v is not None:
+            tubes.append(Tube(v[0], v[1], "vein", lump=0.08, lump_freq=10.0, seed=seed * 10 + 50 + i))
+        cuv = uv[1:] + np.array([0.0, z0 + bend])
+        climb_uv.append(cuv)
+        # отростки вбок-вверх по поверхности
+        for b in range(int(rng.integers(2, 5))):
+            k = int(rng.uniform(0.25, 0.8) * (len(cuv) - 1))
+            bh = hs[min(k + 1, len(hs) - 1)] + rng.choice([-1, 1]) * rng.uniform(0.7, 1.4)
+            buv, _ = walk_xy(rng, cuv[k], bh, rng.uniform(0.8, 2.0), 0.9)
+            buv = _clip_uv(buv, smin, smax, vmax)
+            if len(buv) < 8:
+                continue
+            br = _taper(len(buv), rc_[k] * 0.62)
+            bp = surf(buv[:, 0], buv[:, 1], br * 0.85)
+            tubes.append(Tube(bp, br, "root", lump=0.14, lump_freq=7.0, seed=seed * 10 + 20 + i * 5 + b, cap_start=False))
+            bv = vein_along(bp, br, rng, 0.05, 0.015)
+            if bv is not None:
+                tubes.append(Tube(bv[0], bv[1], "vein", lump=0.08, lump_freq=12.0, seed=seed * 10 + 70 + i * 5 + b))
+    # сеть тонких светящихся жил прямо по поверхности
+    for j in range(n_veins):
+        if not climb_uv:
+            break
+        src = climb_uv[int(rng.integers(len(climb_uv)))]
+        p0 = src[int(rng.uniform(0.0, 0.8) * (len(src) - 1))]
+        uv, _ = walk_xy(rng, p0, rng.uniform(0.1, math.pi - 0.1), rng.uniform(1.0, 3.0), 1.3)
+        uv = _clip_uv(uv, smin, smax, vmax)
+        if len(uv) < 8:
+            continue
+        u = np.linspace(0, 1, len(uv))
+        rv = 0.02 * (1 - 0.7 * u) + 0.004
+        pts = surf(uv[:, 0], uv[:, 1], rv * 0.45)
+        tubes.append(Tube(pts, rv, "vein", lump=0.1, lump_freq=14.0, seed=seed * 10 + 90 + j))
+    return tubes
+
+
+# ширина грани (м) для корней по стене: скрипт сердца проверяет, что стена есть на всю ширину
+WALL_KINDS = {
+    "low": (3, 2.0, 3.2, 2.4),       # корней, высота от, до, ширина
+    "tall": (4, 3.4, 5.0, 3.0),
+    "wide": (5, 1.8, 3.2, 4.4),
+}
+
+
+def build_wall_scene(seed, kind):
+    """Корни по стене дома: выползают из земли перед стеной, загибаются и лезут вверх по фасаду, ветвятся;
+    по самой стене тянется сеть тонких светящихся жил. Плоскость стены — y = 0, наружу — +y (в игре +Z модели,
+    «вперёд»), земля — z = 0. Начало координат — основание стены. Всё в пределах ширины width/2 + 0.3 в стороны."""
+    rng = np.random.default_rng(seed)
+    n, hmin, hmax, width = WALL_KINDS[kind]
+    starts = [((i + 0.5) / n - 0.5) * width + rng.uniform(-0.2, 0.2) for i in range(n)]
+    lim = width / 2 + 0.3
+    tubes = _surface_roots(rng, seed, _surf_flat, _norm_flat, starts, hmin, hmax, -lim, lim, int(rng.integers(10, 17)))
+    return {"tubes": tubes, "core": None, "top": None, "heart": False,
+            "handle": ((-0.05, -0.05, -0.05), (0.05, 0.05, 0.05))}
+
+
+CORNER_FACE = 2.0    # м: на сколько корни угла заходят на каждую из двух стен
+
+
+def build_corner_scene(seed):
+    """Корни на наружном углу дома: вылезают у ребра, ползут вверх и переваливают через угол на обе стены,
+    сеть жил расходится по обеим граням. Дом — четверть x < 0, y < 0; грань A — y = 0 (наружу +y, в игре +Z),
+    грань B — x = 0 (наружу +x, в игре +X). Начало координат — ребро угла у земли."""
+    rng = np.random.default_rng(seed)
+    starts = [rng.uniform(-0.55, -0.15), rng.uniform(-0.1, 0.1), rng.uniform(0.15, 0.55)]
+    lim = CORNER_FACE
+    tubes = _surface_roots(rng, seed, _surf_corner, _norm_corner, starts, 2.6, 4.4, -lim, lim, int(rng.integers(12, 18)))
+    return {"tubes": tubes, "core": None, "top": None, "heart": False,
             "handle": ((-0.05, -0.05, -0.05), (0.05, 0.05, 0.05))}
 
 
@@ -987,6 +1311,11 @@ VARIANTS = [
     ("vb_rift_roots_arch2", "arch", 402),
     ("vb_rift_roots_small1", "small", 501),
     ("vb_rift_roots_small2", "small", 502),
+    # ещё варианты для разнообразия (2026-11-11)
+    ("vb_rift_roots_crawl3", "crawl", 103),
+    ("vb_rift_roots_fork2", "fork", 202),
+    ("vb_rift_roots_cluster3", "cluster", 303),
+    ("vb_rift_roots_small3", "small", 503),
     # обвивки стволов: число в имени — радиус ствола в сантиметрах (скрипт сердца выбирает ближайший больший)
     ("vb_rift_wrap_10", "wrap:0.10", 701),
     ("vb_rift_wrap_15", "wrap:0.15", 702),
@@ -1000,10 +1329,34 @@ VARIANTS = [
     ("vb_rift_hang_long1", "hang:long", 803),
     ("vb_rift_hang_long2", "hang:long", 804),
     ("vb_rift_hang_drape1", "hang:drape", 805),
+    # корни по стенам домов (ставит скрипт сердца на дома рядом): низкие, высокие, широкие
+    ("vb_rift_wall_low1", "wall:low", 1001),
+    ("vb_rift_wall_low2", "wall:low", 1002),
+    ("vb_rift_wall_tall1", "wall:tall", 1003),
+    ("vb_rift_wall_wide1", "wall:wide", 1004),
+    ("vb_rift_wall_low3", "wall:low", 1005),
+    ("vb_rift_wall_tall2", "wall:tall", 1006),
+    ("vb_rift_wall_wide2", "wall:wide", 1007),
+    # корни на наружном углу дома: переваливают через ребро на обе стены
+    ("vb_rift_wall_corner1", "corner", 1101),
+    ("vb_rift_wall_corner2", "corner", 1102),
+    ("vb_rift_wall_corner3", "corner", 1103),
     # предмет «Сердце Изнанки» (выпадает при вырезании сердца)
     ("vb_rift_heart_chunk", "chunk", 901),
     # предмет «Корень Изнанки» (иногда выпадает из зомби Изнанки)
     ("vb_rift_root_piece", "rootpiece", 902),
+    # предметы-материалы: «Споры Изнанки» (собирают у сердца) и «Жила Изнанки» (разделывают корень)
+    ("vb_rift_spores_item", "spores", 903),
+    ("vb_rift_vein_item", "veincoil", 904),
+    # предметы-изделия: «Слушающий корень», «Сердце-аккумулятор», «Споровая ловушка», «Топливная капсула»,
+    # «Фонарь-сердце», «Живой жгут», «Нить Изнанки»
+    ("vb_rift_listen_root", "listenroot", 905),
+    ("vb_rift_heart_battery", "heartbattery", 906),
+    ("vb_rift_spore_trap", "sporetrap", 907),
+    ("vb_rift_fuel_capsule", "fuelcapsule", 908),
+    ("vb_rift_lantern", "lantern", 909),
+    ("vb_rift_tourniquet", "veincoil:0.12", 910),
+    ("vb_rift_thread", "veincoil:0.07", 911),
 ]
 
 
@@ -1014,10 +1367,32 @@ def variant_scene(kind, seed, name=""):
         return build_wrap_scene(seed, float(kind.split(":")[1]))
     if kind.startswith("hang:"):
         return build_hang_scene(seed, kind.split(":")[1])
+    if kind.startswith("wall:"):
+        return build_wall_scene(seed, kind.split(":")[1])
+    if kind == "corner":
+        return build_corner_scene(seed)
     if kind == "chunk":
         return build_chunk_scene(seed)
     if kind == "rootpiece":
         return build_rootpiece_scene(seed)
+    if kind == "spores":
+        return build_spores_scene(seed)
+    if kind == "veincoil":
+        return build_vein_coil_scene(seed)
+    if kind.startswith("veincoil:"):
+        sc = build_vein_coil_scene(seed, float(kind.split(":")[1]))
+        sc["item_mass"] = 0.04
+        return sc
+    if kind == "listenroot":
+        return build_listen_root_scene(seed)
+    if kind == "heartbattery":
+        return build_heart_battery_scene(seed)
+    if kind == "sporetrap":
+        return build_spore_trap_scene(seed)
+    if kind == "fuelcapsule":
+        return build_fuel_capsule_scene(seed)
+    if kind == "lantern":
+        return build_lantern_scene(seed)
     return build_roots_scene(seed, kind)
 
 

@@ -25,13 +25,16 @@ class VB_RiftHorde
 	protected static ref NoiseParams s_VB_Noise;
 
 	protected vector m_VB_Center;
+	protected float m_VB_DistMin = DIST_MIN;
+	protected float m_VB_DistMax = DIST_MAX;
 	protected int m_VB_Left;
 	protected int m_VB_BornMs;
 	protected bool m_VB_Done;
 	protected ref array<EntityAI> m_VB_Zombies;
 
-	// сервер: новая волна вокруг center
-	static void VB_Spawn(vector center)
+	// сервер: новая волна вокруг center; count = 0 — случайно COUNT_MIN..COUNT_MAX.
+	// Малые «волны» (1–3 зомби) зовут фонарь-сердце и топливная капсула: убираются так же через 10 минут без игроков.
+	static void VB_Spawn(vector center, int count = 0, float distMin = 0, float distMax = 0)
 	{
 		if (!s_VB_All)
 			s_VB_All = new array<ref VB_RiftHorde>;
@@ -42,7 +45,7 @@ class VB_RiftHorde
 				s_VB_All.Remove(i);
 		}
 
-		VB_RiftHorde horde = new VB_RiftHorde(center);
+		VB_RiftHorde horde = new VB_RiftHorde(center, count, distMin, distMax);
 		s_VB_All.Insert(horde);
 		Print("[VB_Rift] волна зомби: " + horde.m_VB_Left.ToString() + " у " + center.ToString());
 	}
@@ -58,11 +61,17 @@ class VB_RiftHorde
 		g_Game.GetNoiseSystem().AddNoiseTarget(pos, NOISE_TIME, s_VB_Noise);
 	}
 
-	void VB_RiftHorde(vector center)
+	void VB_RiftHorde(vector center, int count = 0, float distMin = 0, float distMax = 0)
 	{
 		m_VB_Center = center;
 		m_VB_Zombies = new array<EntityAI>;
-		m_VB_Left = Math.RandomIntInclusive(COUNT_MIN, COUNT_MAX);
+		m_VB_Left = count;
+		if (m_VB_Left <= 0)
+			m_VB_Left = Math.RandomIntInclusive(COUNT_MIN, COUNT_MAX);
+		if (distMin > 0)
+			m_VB_DistMin = distMin;
+		if (distMax > m_VB_DistMin)
+			m_VB_DistMax = distMax;
 		m_VB_BornMs = g_Game.GetTime();
 		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_SpawnNext, STEP_MS, true);
 		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_Check, CHECK_MS, true);
@@ -101,7 +110,7 @@ class VB_RiftHorde
 		for (int i = 0; i < 8; i++)
 		{
 			a = Math.RandomFloat(0, Math.PI2);
-			d = Math.RandomFloat(DIST_MIN, DIST_MAX);
+			d = Math.RandomFloat(m_VB_DistMin, m_VB_DistMax);
 			x = m_VB_Center[0] + Math.Cos(a) * d;
 			z = m_VB_Center[2] + Math.Sin(a) * d;
 			if (g_Game.SurfaceIsSea(x, z) || g_Game.SurfaceIsPond(x, z))

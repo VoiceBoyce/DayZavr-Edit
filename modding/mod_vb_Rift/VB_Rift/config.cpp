@@ -121,16 +121,22 @@ class CfgPatches
 			"VB_RiftRoots_Crawl1", "VB_RiftRoots_Crawl2", "VB_RiftRoots_Fork1",
 			"VB_RiftRoots_Cluster1", "VB_RiftRoots_Cluster2", "VB_RiftRoots_Arch1", "VB_RiftRoots_Arch2",
 			"VB_RiftRoots_Small1", "VB_RiftRoots_Small2",
+			"VB_RiftRoots_Crawl3", "VB_RiftRoots_Fork2", "VB_RiftRoots_Cluster3", "VB_RiftRoots_Small3",
 			"VB_RiftWrap_10", "VB_RiftWrap_15", "VB_RiftWrap_20", "VB_RiftWrap_27", "VB_RiftWrap_35", "VB_RiftWrap_45",
 			"VB_RiftHang_Short1", "VB_RiftHang_Short2", "VB_RiftHang_Long1", "VB_RiftHang_Long2", "VB_RiftHang_Drape1",
-			"VB_RiftHeartChunk", "VB_RiftRootPiece",
+			"VB_RiftWall_Low1", "VB_RiftWall_Low2", "VB_RiftWall_Low3", "VB_RiftWall_Tall1", "VB_RiftWall_Tall2",
+			"VB_RiftWall_Wide1", "VB_RiftWall_Wide2", "VB_RiftWall_Corner1", "VB_RiftWall_Corner2", "VB_RiftWall_Corner3",
+			"VB_RiftHeartChunk", "VB_RiftRootPiece", "VB_RiftHeartDead", "VB_RiftSpores", "VB_RiftVein",
+			"VB_RiftListenRoot", "VB_RiftHeartBattery", "VB_RiftSporeTrap", "VB_RiftLantern", "VB_RiftBlood",
+			"VB_RiftFuelCapsule", "VB_RiftBlade", "VB_RiftCloak", "VB_RiftTourniquet", "VB_RiftThread",
 			"VB_RiftZmbM_VillagerOld", "VB_RiftZmbF_VillagerOld", "VB_RiftZmbM_Prisoner", "VB_RiftZmbM_Jacket",
 			"VB_RiftZmbM_Hiker", "VB_RiftZmbM_Worker", "VB_RiftZmbM_Sailor",
 			"VB_RiftZmbF_Patient", "VB_RiftZmbF_Citizen", "VB_RiftZmbF_Doctor"
 		};
 		weapons[] = {};
 		requiredVersion = 0.1;
-		requiredAddons[] = {"DZ_Data", "DZ_Scripts", "DZ_Characters_Zombies"};
+		// INT_UIFramework — окно редактора гнёзд (должен стоять и на сервере, и у игроков)
+		requiredAddons[] = {"DZ_Data", "DZ_Scripts", "DZ_Characters_Zombies", "DZ_Characters_Tops", "DZ_Gear_Medical", "DZ_Vehicles_Parts", "DZ_Weapons_Melee_Blade", "INT_UIFramework"};
 	};
 };
 
@@ -147,10 +153,11 @@ class CfgMods
 		credits = "";
 		author = "DayZavr";
 		authorID = "";
-		version = "0.2";
+		version = "0.3";
 		extra = 0;
 		type = "mod";
-		dependencies[] = {"Game", "World"};
+		inputs = "VB_Rift/inputs.xml";
+		dependencies[] = {"Game", "World", "Mission"};
 
 		class defs
 		{
@@ -164,6 +171,11 @@ class CfgMods
 				value = "";
 				files[] = {"VB_Rift/scripts/4_World"};
 			};
+			class missionScriptModule
+			{
+				value = "";
+				files[] = {"VB_Rift/scripts/5_Mission"};
+			};
 		};
 	};
 };
@@ -172,6 +184,22 @@ class CfgMods
 // Запускает клиентский VB_RiftPulse ночью у сердец ближе 50 м. Настройки 3D как у ванильной SpookyArea.
 class CfgSoundShaders
 {
+	// «Слушающий корень»: стук в стороне ближайшего живого сердца (VB_RiftGear.c)
+	class VB_RiftListen_SoundShader
+	{
+		samples[] = {{"VB_Rift\sounds\vb_rift_heartbeat_1", 1}, {"VB_Rift\sounds\vb_rift_heartbeat_2", 1}, {"VB_Rift\sounds\vb_rift_heartbeat_3", 1}};
+		volume = 1.0;
+		range = 25;
+		rangeCurve[] = {{0, 1}, {8, 0.8}, {25, 0}};
+	};
+	// «Сердце Изнанки» в руках или рюкзаке: тот же стук, тише и ближе (VB_RiftItems.c)
+	class VB_RiftChunkBeat_SoundShader
+	{
+		samples[] = {{"VB_Rift\sounds\vb_rift_heartbeat_1", 1}, {"VB_Rift\sounds\vb_rift_heartbeat_2", 1}, {"VB_Rift\sounds\vb_rift_heartbeat_3", 1}};
+		volume = 0.55;
+		range = 30;
+		rangeCurve[] = {{0, 1}, {10, 0.6}, {30, 0}};
+	};
 	class VB_RiftHeartbeat_SoundShader
 	{
 		samples[] = {{"VB_Rift\sounds\vb_rift_heartbeat_1", 1}, {"VB_Rift\sounds\vb_rift_heartbeat_2", 1}, {"VB_Rift\sounds\vb_rift_heartbeat_3", 1}};
@@ -215,6 +243,24 @@ class CfgSoundShaders
 
 class CfgSoundSets
 {
+	class VB_RiftListen_SoundSet
+	{
+		soundShaders[] = {"VB_RiftListen_SoundShader"};
+		spatial = 1;
+		doppler = 0;
+		loop = 0;
+		volumeCurve = "LinearCurve";
+		sound3DProcessingType = "ObjectsInner13DProcessingType";
+	};
+	class VB_RiftChunkBeat_SoundSet
+	{
+		soundShaders[] = {"VB_RiftChunkBeat_SoundShader"};
+		spatial = 1;
+		doppler = 0;
+		loop = 0;
+		volumeCurve = "LinearCurve";
+		sound3DProcessingType = "ObjectsInner13DProcessingType";
+	};
 	class VB_RiftHeartbeat_SoundSet
 	{
 		soundShaders[] = {"VB_RiftHeartbeat_SoundShader"};
@@ -248,6 +294,18 @@ class CfgSoundSets
 // Для сравнения: ракетница NoiseFlare 30, АКМ NoiseShoot 80.
 class CfgNoises
 {
+	// облако «Споровой ловушки»: тянет зомби вокруг (метров 60)
+	class VB_RiftTrapNoise
+	{
+		type = "shot";
+		strength = 40;
+	};
+	// стук «Сердца Изнанки», которое несут: слабый шум, зомби поблизости идут проверить
+	class VB_RiftChunkNoise
+	{
+		type = "shot";
+		strength = 18;
+	};
 	class VB_RiftCallNoise
 	{
 		type = "shot";
@@ -259,6 +317,9 @@ class CfgVehicles
 {
 	class HouseNoDestruct;
 	class Inventory_Base;
+	class CarBattery;
+	class FangeKnife;
+	class Raincoat_ColorBase;
 
 	// Зомби Изнанки: ванильные модели и поведение, свои текстуры и материалы (tools/gen_rift_zombies.py):
 	// мертвенно-серая кожа в светящихся жилах, светящиеся красные глаза, одежда в тёмный бордовый.
@@ -367,8 +428,8 @@ class CfgVehicles
 		VB_RIFT_ZMB_DAMAGE(200,200,60)
 	};
 
-	// Иногда выпадает из зомби Изнанки (VB_RiftZombie.ROOT_CHANCE, в инвентарь трупа). Пока без применения.
-	// Для types.xml: nominal 0 — сам в лут не спавнится.
+	// Выпадает из зомби Изнанки (VB_RiftZombie.ROOT_CHANCE) и отламывается ножом от корней гнезда ночью
+	// (VB_ActionBreakRiftRoot). Материал для крафта (из него — «Жила Изнанки»).
 	class VB_RiftRootPiece: Inventory_Base
 	{
 		scope = 2;
@@ -380,8 +441,8 @@ class CfgVehicles
 		rotationFlags = 17;
 	};
 
-	// Выпадает тому, кто вырезал сердце (действие «Вырезать сердце» ножом/топором). Пока без применения.
-	// Для types.xml: nominal 0, lifetime по вкусу — сам предмет в лут не спавнится.
+	// Выпадает тому, кто вырезал сердце (действие «Вырезать сердце» ножом/топором). Пока его несут — бьётся:
+	// стук слышен рядом, зомби идут на шум. После рестарта протухает в VB_RiftHeartDead (VB_RiftItems.c).
 	class VB_RiftHeartChunk: Inventory_Base
 	{
 		scope = 2;
@@ -390,6 +451,179 @@ class CfgVehicles
 		model = "\VB_Rift\data\vb_rift_heart_chunk.p3d";
 		weight = 900;
 		itemSize[] = {2, 2};
+		rotationFlags = 17;
+	};
+
+	// «Сердце Изнанки», пролежавшее рестарт: живое сердце после рестарта заменяется этим (VB_RiftItems.c).
+	// Та же модель в сухих дневных материалах, без свечения.
+	class VB_RiftHeartDead: Inventory_Base
+	{
+		scope = 2;
+		displayName = "Мёртвое сердце Изнанки";
+		descriptionShort = "Сгусток корней Изнанки, остывший и почерневший. Больше не бьётся.";
+		model = "\VB_Rift\data\vb_rift_heart_chunk.p3d";
+		weight = 700;
+		itemSize[] = {2, 2};
+		rotationFlags = 17;
+		hiddenSelections[] = {"crust", "veins"};
+		hiddenSelectionsTextures[] = {"\VB_Rift\data\vb_rift_crust_day_co.paa", "\VB_Rift\data\vb_rift_vein_day_co.paa"};
+		hiddenSelectionsMaterials[] = {"\VB_Rift\data\vb_rift_crust_day.rvmat", "\VB_Rift\data\vb_rift_vein_day.rvmat"};
+	};
+
+	// «Споры Изнанки»: собирают тряпкой у живого сердца ночью (VB_ActionCollectSpores), иногда с зомби Изнанки.
+	// Материал для крафта.
+	class VB_RiftSpores: Inventory_Base
+	{
+		scope = 2;
+		displayName = "Споры Изнанки";
+		descriptionShort = "Тугой мешочек светящихся спор, собранных у живого сердца Изнанки. Тёплый и чуть пульсирует.";
+		model = "\VB_Rift\data\vb_rift_spores_item.p3d";
+		weight = 80;
+		itemSize[] = {1, 1};
+		rotationFlags = 17;
+	};
+
+	// «Жила Изнанки»: разделывают «Корень Изнанки» в крафте (1 корень -> 2 жилы). Материал для крафта.
+	class VB_RiftVein: Inventory_Base
+	{
+		scope = 2;
+		displayName = "Жила Изнанки";
+		descriptionShort = "Смотанная светящаяся жила, вытянутая из корня Изнанки. Прочная, как струна, и тёплая.";
+		model = "\VB_Rift\data\vb_rift_vein_item.p3d";
+		weight = 50;
+		itemSize[] = {1, 1};
+		rotationFlags = 17;
+	};
+
+	// ---------------- изделия Изнанки (скрипты в VB_RiftGear.c) ----------------
+
+	// «Слушающий корень»: ночью «прислушаться» — стук ближайшего живого сердца в 3 км звучит с его стороны,
+	// ближе — громче и чаще, если сердце режут — бешено. Заряды = количество, подзарядка у живого сердца.
+	class VB_RiftListenRoot: Inventory_Base
+	{
+		scope = 2;
+		displayName = "Слушающий корень";
+		descriptionShort = "Корень Изнанки, закрученный в раструб и стянутый жилами. Ночью в нём слышно, как бьётся ближайшее живое сердце: чем ближе, тем громче и чаще. Подпитывается у живого сердца.";
+		model = "\VB_Rift\data\vb_rift_listen_root.p3d";
+		weight = 250;
+		itemSize[] = {1, 2};
+		rotationFlags = 17;
+		quantityBar = 1;
+		varQuantityInit = 10;
+		varQuantityMin = 0;
+		varQuantityMax = 10;
+		varQuantityDestroyOnMin = 0;
+	};
+
+	// «Сердце-аккумулятор»: ставится вместо автомобильного аккумулятора. Ночью сам заряжается, днём садится.
+	// В салоне стучит, когда машина рядом с живым гнездом (500 м).
+	class VB_RiftHeartBattery: CarBattery
+	{
+		scope = 2;
+		displayName = "Сердце-аккумулятор";
+		descriptionShort = "Сердце Изнанки, оплетённое жилами и подключённое к клеммам. Ночью само набирает заряд, днём слабеет. Рядом с живым гнездом бьётся так, что слышно в салоне.";
+		model = "\VB_Rift\data\vb_rift_heart_battery.p3d";
+		weight = 3000;
+		itemSize[] = {3, 3};
+		rotationFlags = 17;
+	};
+
+	// «Споровая ловушка»: раскрыть и бросить. Облако тянет зомби, через 10 с лопается и бьёт зомби рядом.
+	class VB_RiftSporeTrap: Inventory_Base
+	{
+		scope = 2;
+		displayName = "Споровая ловушка";
+		descriptionShort = "Мешочек спор с отростком-запалом. Раскрой и брось: облако спор тянет зомби, а через десять секунд лопается и бьёт тех, кто подошёл. Людей не трогает.";
+		model = "\VB_Rift\data\vb_rift_spore_trap.p3d";
+		weight = 300;
+		itemSize[] = {2, 2};
+		rotationFlags = 17;
+	};
+
+	// «Фонарь-сердце»: красный свет без батареек, пульс чаще, когда рядом зомби. Количество = минуты спор.
+	class VB_RiftLantern: Inventory_Base
+	{
+		scope = 2;
+		displayName = "Фонарь-сердце";
+		descriptionShort = "Маленькое сердце Изнанки в клетке из корней. Светит красным без батареек и бьётся чаще, когда рядом зомби. Ночью на свет приходят зомби Изнанки. Споров хватает часов на шесть.";
+		model = "\VB_Rift\data\vb_rift_lantern.p3d";
+		weight = 600;
+		itemSize[] = {2, 3};
+		rotationFlags = 17;
+		quantityBar = 1;
+		varQuantityInit = 360;
+		varQuantityMin = 0;
+		varQuantityMax = 360;
+		varQuantityDestroyOnMin = 0;
+	};
+
+	// «Кровь Изнанки»: укол — быстро кровь и здоровье; 10 минут зомби рядом светятся, руки дрожат, в глазах красное.
+	class VB_RiftBlood: Inventory_Base
+	{
+		scope = 2;
+		displayName = "Кровь Изнанки";
+		descriptionShort = "Шприц с густой тёмно-красной жидкостью. Быстро возвращает кровь и силы. Минут десять после укола зомби вокруг светятся в темноте, а сердце колотится так, что дрожат руки.";
+		model = "\dz\gear\medical\Epinephrine.p3d";
+		weight = 60;
+		itemSize[] = {1, 2};
+		rotationFlags = 17;
+		hiddenSelections[] = {"zbytek"};
+		hiddenSelectionsTextures[] = {"\VB_Rift\data\retex\vb_rift_blood_co.paa"};
+	};
+
+	// «Топливная капсула»: залить в бак (+20 л). Полчаса за машиной красный шлейф, на остановках сползаются зомби Изнанки.
+	class VB_RiftFuelCapsule: Inventory_Base
+	{
+		scope = 2;
+		displayName = "Топливная капсула";
+		descriptionShort = "Стручок Изнанки, налитый горючим соком. Двадцать литров в бак. Полчаса за машиной тянется красный шлейф, и там, где остановишься, из земли лезут зомби Изнанки.";
+		model = "\VB_Rift\data\vb_rift_fuel_capsule.p3d";
+		weight = 2000;
+		itemSize[] = {2, 3};
+		rotationFlags = 17;
+	};
+
+	// «Голодный клинок»: убийство зомби возвращает кровь, полный заряд — облако спор вокруг. Час без убийств тянет кровь.
+	class VB_RiftBlade: FangeKnife
+	{
+		scope = 2;
+		displayName = "Голодный клинок";
+		descriptionShort = "Нож, проросший жилами Изнанки. Каждое убийство зомби возвращает владельцу немного крови, а насытившись, клинок выпускает облако спор. Если долго не кормить, начинает пить кровь хозяина.";
+		hiddenSelectionsTextures[] = {"\VB_Rift\data\retex\vb_rift_blade_co.paa", "\VB_Rift\data\retex\vb_rift_blade_co.paa"};
+	};
+
+	// «Плащ-кокон»: тёплый дождевик; ночью присел и замер — обычные зомби теряют тебя (зомби Изнанки — нет).
+	class VB_RiftCloak: Raincoat_ColorBase
+	{
+		scope = 2;
+		displayName = "Плащ-кокон";
+		descriptionShort = "Дождевик, проросший жилами Изнанки. Тёплый и не промокает. Ночью, если присесть и замереть, обычные зомби теряют тебя из виду. Зомби Изнанки так не обмануть.";
+		heatIsolation = 0.45;
+		visibilityModifier = 0.7;
+		hiddenSelectionsTextures[] = {"\VB_Rift\data\retex\vb_rift_cloak_g_co.paa", "\VB_Rift\data\retex\vb_rift_cloak_co.paa", "\VB_Rift\data\retex\vb_rift_cloak_co.paa"};
+	};
+
+	// «Живой жгут»: лежит в инвентаре и сам закрывает одно кровотечение, «отпив» немного крови.
+	class VB_RiftTourniquet: Inventory_Base
+	{
+		scope = 2;
+		displayName = "Живой жгут";
+		descriptionShort = "Моток жил Изнанки. Носи с собой: когда пойдёт кровь, он сам стянет рану. Одноразовый и немного крови заберёт себе.";
+		model = "\VB_Rift\data\vb_rift_tourniquet.p3d";
+		weight = 40;
+		itemSize[] = {1, 1};
+		rotationFlags = 17;
+	};
+
+	// «Нить Изнанки»: пришить к одежде (перетащить на вещь) — вещь сама латается около 1 %/мин 3 часа (до рестарта).
+	class VB_RiftThread: Inventory_Base
+	{
+		scope = 2;
+		displayName = "Нить Изнанки";
+		descriptionShort = "Тонкая живая нить. Перетащи на одежду, чтобы пришить: часа три вещь будет сама затягивать прорехи.";
+		model = "\VB_Rift\data\vb_rift_thread.p3d";
+		weight = 20;
+		itemSize[] = {1, 1};
 		rotationFlags = 17;
 	};
 
@@ -501,6 +735,86 @@ class CfgVehicles
 	};
 
 	// Корни без сердца: проходимы, без света; рядом с сердцем (до 30 м) бьются в его ритме.
+	// Корни по стенам домов: ставит сердце само на дома рядом (VB_RiftHouses.c). Начало координат — основание
+	// стены, «вперёд» (+Z) — наружу от стены. К рельефу не привязаны, проходимы.
+	class VB_RiftWallBase: VB_RiftBase
+	{
+		scope = 0;
+		vbAlignToTerrain = 0;
+	};
+	class VB_RiftWall_Low1: VB_RiftWallBase
+	{
+		scope = 2;
+		vbHalfWidth = 1.5;
+		displayName = "Rift Wall Roots Low 1";
+		model = "\VB_Rift\data\vb_rift_wall_low1.p3d";
+	};
+	class VB_RiftWall_Low2: VB_RiftWallBase
+	{
+		scope = 2;
+		vbHalfWidth = 1.5;
+		displayName = "Rift Wall Roots Low 2";
+		model = "\VB_Rift\data\vb_rift_wall_low2.p3d";
+	};
+	class VB_RiftWall_Tall1: VB_RiftWallBase
+	{
+		scope = 2;
+		vbHalfWidth = 1.8;
+		displayName = "Rift Wall Roots Tall 1";
+		model = "\VB_Rift\data\vb_rift_wall_tall1.p3d";
+	};
+	class VB_RiftWall_Wide1: VB_RiftWallBase
+	{
+		scope = 2;
+		vbHalfWidth = 2.5;
+		displayName = "Rift Wall Roots Wide 1";
+		model = "\VB_Rift\data\vb_rift_wall_wide1.p3d";
+	};
+	class VB_RiftWall_Low3: VB_RiftWallBase
+	{
+		scope = 2;
+		displayName = "Rift Wall Roots Low 3";
+		model = "\VB_Rift\data\vb_rift_wall_low3.p3d";
+		vbHalfWidth = 1.5;
+	};
+	class VB_RiftWall_Tall2: VB_RiftWallBase
+	{
+		scope = 2;
+		displayName = "Rift Wall Roots Tall 2";
+		model = "\VB_Rift\data\vb_rift_wall_tall2.p3d";
+		vbHalfWidth = 1.8;
+	};
+	class VB_RiftWall_Wide2: VB_RiftWallBase
+	{
+		scope = 2;
+		displayName = "Rift Wall Roots Wide 2";
+		model = "\VB_Rift\data\vb_rift_wall_wide2.p3d";
+		vbHalfWidth = 2.5;
+	};
+	// Корни на наружном углу дома: переваливают через ребро на обе стены. Начало координат — ребро у земли,
+	// дом сзади-слева: стена A смотрит вперёд (+Z модели), стена B — вправо (+X модели). vbFace — на сколько
+	// метров корни заходят на каждую стену.
+	class VB_RiftWall_Corner1: VB_RiftWallBase
+	{
+		scope = 2;
+		displayName = "Rift Wall Roots Corner 1";
+		model = "\VB_Rift\data\vb_rift_wall_corner1.p3d";
+		vbFace = 2.0;
+	};
+	class VB_RiftWall_Corner2: VB_RiftWallBase
+	{
+		scope = 2;
+		displayName = "Rift Wall Roots Corner 2";
+		model = "\VB_Rift\data\vb_rift_wall_corner2.p3d";
+		vbFace = 2.0;
+	};
+	class VB_RiftWall_Corner3: VB_RiftWallBase
+	{
+		scope = 2;
+		displayName = "Rift Wall Roots Corner 3";
+		model = "\VB_Rift\data\vb_rift_wall_corner3.p3d";
+		vbFace = 2.0;
+	};
 	class VB_RiftRoots_Crawl1: VB_RiftBase
 	{
 		scope = 2;
@@ -554,6 +868,30 @@ class CfgVehicles
 		scope = 2;
 		displayName = "Rift Roots Small 2";
 		model = "\VB_Rift\data\vb_rift_roots_small2.p3d";
+	};
+	class VB_RiftRoots_Crawl3: VB_RiftBase
+	{
+		scope = 2;
+		displayName = "Rift Roots Crawl 3";
+		model = "\VB_Rift\data\vb_rift_roots_crawl3.p3d";
+	};
+	class VB_RiftRoots_Fork2: VB_RiftBase
+	{
+		scope = 2;
+		displayName = "Rift Roots Fork 2";
+		model = "\VB_Rift\data\vb_rift_roots_fork2.p3d";
+	};
+	class VB_RiftRoots_Cluster3: VB_RiftBase
+	{
+		scope = 2;
+		displayName = "Rift Roots Cluster 3";
+		model = "\VB_Rift\data\vb_rift_roots_cluster3.p3d";
+	};
+	class VB_RiftRoots_Small3: VB_RiftBase
+	{
+		scope = 2;
+		displayName = "Rift Roots Small 3";
+		model = "\VB_Rift\data\vb_rift_roots_small3.p3d";
 	};
 
 };
