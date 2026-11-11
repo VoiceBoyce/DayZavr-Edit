@@ -15,6 +15,8 @@ import gen_rift_veins as G  # noqa: E402
 
 argv = sys.argv[sys.argv.index("--") + 1:]
 png_dir, out_path = argv[0], argv[1]
+name_filter = argv[2] if len(argv) > 2 else ""      # подстрока имени: показать только часть вариантов
+variants = [v for v in G.VARIANTS if name_filter in v[0]]
 
 bpy.ops.wm.read_factory_settings(use_empty=True)
 scene = bpy.context.scene
@@ -55,7 +57,12 @@ m_crust = make_mat("crust", "vb_rift_crust_co", "vb_rift_crust_e_co", 3.0)
 m_vein = make_mat("vein", "vb_rift_vein_co", "vb_rift_vein_e_co", 8.0)
 
 COLS, STEP = 4, 17.0
-for idx, (name, kind, seed) in enumerate(G.VARIANTS):
+if name_filter:
+    STEP = 8.0
+bark = bpy.data.materials.new("bark")
+bark.use_nodes = True
+bark.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value = (0.35, 0.33, 0.3, 1)
+for idx, (name, kind, seed) in enumerate(variants):
     sc = G.variant_scene(kind, seed)
     mesh = G.mesh_lod(sc, G.LOD_PARAMS[0])
     P, T, UV, M = mesh["P"], mesh["T"], mesh["UV"], mesh["M"]
@@ -71,6 +78,12 @@ for idx, (name, kind, seed) in enumerate(G.VARIANTS):
     col, row = idx % COLS, idx // COLS
     ob.location = (col * STEP, -row * STEP, 0)
     scene.collection.objects.link(ob)
+    if kind.startswith("wrap:"):        # ствол для наглядности
+        R = float(kind.split(":")[1])
+        bpy.ops.mesh.primitive_cylinder_add(radius=R, depth=5.0, location=(col * STEP, -row * STEP, 2.5))
+        bpy.context.active_object.data.materials.append(bark)
+    if kind.startswith("hang:"):        # поднять, чтобы щупальца висели над землёй
+        ob.location = (col * STEP, -row * STEP, 5.5)
     # подпись
     cu = bpy.data.curves.new(name + "_t", "FONT")
     cu.body = name.replace("vb_rift_", "")
@@ -85,7 +98,8 @@ for idx, (name, kind, seed) in enumerate(G.VARIANTS):
     scene.collection.objects.link(to)
 
 cx = (COLS - 1) * STEP / 2
-cy = -((len(G.VARIANTS) - 1) // COLS) * STEP / 2
+rows = (len(variants) - 1) // COLS + 1
+cy = -(rows - 1) * STEP / 2
 bpy.ops.mesh.primitive_plane_add(size=120, location=(cx, cy, 0))
 gm = bpy.data.materials.new("snow")
 gm.use_nodes = True
@@ -107,10 +121,14 @@ scene.collection.objects.link(so)
 
 cd = bpy.data.cameras.new("cam")
 cd.type = "ORTHO"
-cd.ortho_scale = COLS * STEP + 2
+cd.ortho_scale = max(COLS * STEP, rows * STEP * 4 / 3) + 2
 co = bpy.data.objects.new("cam", cd)
-co.location = (cx, cy - 22, 60)
-co.rotation_euler = (math.radians(20), 0, 0)
+if name_filter:     # сбоку под углом, чтобы были видны высота обвивок и длина щупалец
+    co.location = (cx, cy - 60, 30)
+    co.rotation_euler = (math.radians(62), 0, 0)
+else:
+    co.location = (cx, cy - 22, 60)
+    co.rotation_euler = (math.radians(20), 0, 0)
 scene.collection.objects.link(co)
 scene.camera = co
 bpy.ops.render.render(write_still=True)

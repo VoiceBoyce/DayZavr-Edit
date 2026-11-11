@@ -300,6 +300,15 @@ having any issue** (6 runs, 0 actual mod failures). Check them BEFORE writing fi
   `entities_query` that distance to requested position is as expected, and repeat reading a few
   seconds later to rule out drift.** A playbook verdict looking only at `ok` is invalid.
 
+- **`world_time_set` reaches the CLIENT ~20 s later** (added 2026-11-11, VB_Rift, measured twice on Sakhal).
+  The call echoes the new server time at once (`date_applied=true`, `world_time_get` agrees), but the client
+  keeps rendering — and its scripts keep reading `GetSunOrMoonDirection()` — with the old time for about
+  20 s. A capture or a client-side day/night check made right after the call shows the OLD lighting:
+  a night-only mod object looked "awake at 13:00" and was fine 20 s later. Client action conditions that
+  read the sun disagree with the server for the same window. **Rule: after `world_time_set`, wait ~25 s
+  (e.g. `wait_for(log_matches)` on a never-matching pattern with `timeout_s=20`, then `session_heartbeat`)
+  before any capture or action that depends on the time of day.**
+
 ## THE LOOP
 
 1. **Launch** via `dayz-test.ps1 … -ExtraMods "@DayZ_MCP"` (wait until client and server

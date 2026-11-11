@@ -19,7 +19,7 @@ EffectDef {
    AirResistance 0.6
    AirResistanceRND 0.3
    GravityMultiply 0
-   Wind 0.5
+   Wind 0
    RandomAngle 1
    LifeTime 7
    LifeTimeRND 4
@@ -53,7 +53,7 @@ EffectDef {
    VelocityRND 0.03
    AirResistance 2
    GravityMultiply 0
-   Wind 0.2
+   Wind 0
    RandomAngle 1
    LifeTime 8
    LifeTimeRND 4

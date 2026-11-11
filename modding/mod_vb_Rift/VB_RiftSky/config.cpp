@@ -20,6 +20,22 @@ class CfgPatches
 	};
 };
 
+// Модели разряда для удара молнии при вырезании сердца: скрипт VB_Rift ставит их локально на долю секунды.
+class CfgVehicles
+{
+	class HouseNoDestruct;
+	class VB_RiftStrikeBolt: HouseNoDestruct
+	{
+		scope = 1;
+		model = "\VB_RiftSky\data\vb_blesk1.p3d";
+	};
+	class VB_RiftStrikeBoltHeavy: HouseNoDestruct
+	{
+		scope = 1;
+		model = "\VB_RiftSky\data\vb_blesk2.p3d";
+	};
+};
+
 class CfgWorlds
 {
 	class DefaultWorld;

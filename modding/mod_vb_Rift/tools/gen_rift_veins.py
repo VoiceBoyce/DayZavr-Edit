@@ -382,6 +382,121 @@ def build_roots_scene(seed, kind):
     return {"tubes": tubes, "core": None, "top": None, "heart": False}
 
 
+def build_wrap_scene(seed, R):
+    """Обвивка ствола радиуса R: корни подползают по земле и спиралью лезут вверх, по коре светящиеся жилы.
+    Начало координат — центр ствола на уровне земли. Скрипт сердца ставит её на дерево и подгоняет SetScale."""
+    rng = np.random.default_rng(seed)
+    tubes = []
+    n = int(rng.integers(3, 5))
+    base = rng.uniform(0, 2 * math.pi)
+    rt0 = 0.045 * math.sqrt(R / 0.2) + 0.012
+    for i in range(n):
+        a0 = base + i * 2 * math.pi / n + rng.uniform(-0.4, 0.4)
+        H = rng.uniform(2.2, 3.4)
+        turns = rng.uniform(0.35, 0.9) * rng.choice([-1, 1])
+        d_out = rng.uniform(0.6, 1.3)
+        # по земле к стволу
+        ng = max(6, int(d_out / DS))
+        g = np.linspace(0, 1, ng)
+        ga = a0 + 0.25 * np.sin(g * 3 + i)
+        gr = R + rt0 * 0.5 + d_out * (1 - g)
+        ground = np.column_stack([gr * np.cos(ga), gr * np.sin(ga), np.full(ng, SINK * rt0)])
+        # спираль вверх
+        nh = max(10, int(H / DS))
+        h = np.linspace(0, 1, nh)
+        ang = a0 + turns * 2 * math.pi * h + 0.15 * np.sin(h * 9 + i)
+        rr = R + rt0 * 0.55 * (1 - 0.5 * h)
+        z = SINK * rt0 + H * h ** 0.95
+        up = np.column_stack([rr * np.cos(ang), rr * np.sin(ang), z])
+        pts = np.vstack([ground, up[1:]])
+        s = np.concatenate([[0], np.cumsum(np.linalg.norm(np.diff(pts, axis=0), axis=1))])
+        t = s / s[-1]
+        r = rt0 * (1 - 0.75 * t ** 1.2)
+        tw = smoothstep(0.85, 1.0, t)
+        r = r * (1 - tw) + 0.003 * tw
+        tubes.append(Tube(pts, r, "root", lump=0.15, lump_freq=8.0, seed=seed * 10 + i))
+        v = vein_along(pts, r, rng, 0.05, 0.012)
+        if v is not None:
+            tubes.append(Tube(v[0], v[1], "vein", lump=0.08, lump_freq=12.0, seed=seed * 10 + 50 + i))
+    # тонкие светящиеся жилы прямо по коре
+    for j in range(int(rng.integers(2, 4))):
+        a0 = rng.uniform(0, 2 * math.pi)
+        H = rng.uniform(1.6, 3.0)
+        nh = max(10, int(H / DS))
+        h = np.linspace(0, 1, nh)
+        ang = a0 + rng.uniform(-0.5, 0.5) * 2 * math.pi * h + 0.2 * np.sin(h * 13 + j)
+        rr = R + 0.006
+        pts = np.column_stack([rr * np.cos(ang), rr * np.sin(ang), 0.05 + H * h])
+        rv = 0.012 * (1 - 0.6 * h) + 0.003
+        tubes.append(Tube(pts, rv, "vein", lump=0.1, lump_freq=14.0, seed=seed * 10 + 80 + j))
+    return {"tubes": tubes, "core": None, "top": None, "heart": False, "no_cut": True,
+            "handle": ((-0.05, -0.05, -0.3), (0.05, 0.05, 0.0))}
+
+
+def build_chunk_scene(seed, size=0.16):
+    """Предмет «Сердце Изнанки»: бугристый сгусток, обвитый жилами, со светящимся «глазом».
+    Строится в масштабе большого сердца (там правильный шаг сетки трубок) и уменьшается до size метров."""
+    rng = np.random.default_rng(seed)
+    tubes = []
+    for k in range(6):
+        u = np.linspace(0, 1, 60)
+        th = 0.25 + 2.6 * u
+        ph = rng.uniform(0, 2 * math.pi) + rng.uniform(0.6, 1.4) * np.sin(u * 3 + k)
+        dirs = np.column_stack([np.sin(th) * np.cos(ph), np.sin(th) * np.sin(ph), np.cos(th)])
+        rv = 0.035 - 0.012 * np.abs(u - 0.5)
+        pts = heart_surface(dirs) + dirs * (rv * 0.35)[:, None]
+        tubes.append(Tube(pts, rv, "vein", lump=0.08, lump_freq=9.0, seed=900 + k))
+    top = heart_surface(np.array([[0.0, 0.0, 1.0]]))[0]
+    extent = 2 * float(HEART_R.max()) * 1.16
+    return {"tubes": tubes, "core": None, "top": None, "heart": False, "no_cut": True,
+            "blobs": [heart_surface], "bulbs": [(top - np.array([0, 0, 0.04]), 0.13)],
+            "scale": size / extent, "center": HEART_C.copy()}
+
+
+def build_hang_scene(seed, kind):
+    """Свисающие щупальца: горизонтальный корень-«якорь» и висящие отростки со светящимися каплями.
+    Начало координат — середина якоря (точка крепления); ставятся вручную на мосты, скалы, провода."""
+    rng = np.random.default_rng(seed)
+    tubes, bulbs = [], []
+    if kind == "drape":
+        W, sag, n, Lmin, Lmax = 6.0, 0.5, 9, 0.8, 3.0
+    elif kind == "long":
+        W, sag, n, Lmin, Lmax = 2.6, 0.12, 7, 2.5, 5.0
+    else:
+        W, sag, n, Lmin, Lmax = 2.0, 0.08, 6, 0.8, 2.0
+    na = max(10, int(W / DS))
+    x = np.linspace(-W / 2, W / 2, na)
+    za = -sag * (1 - (2 * x / W) ** 2) + 0.03 * np.sin(x * 4 + seed)
+    ya = 0.05 * np.sin(x * 2.3 + seed)
+    anchor = np.column_stack([x, ya, za])
+    ra = 0.07 * (1 - 0.35 * np.abs(2 * x / W))
+    tubes.append(Tube(anchor, ra, "root", lump=0.15, lump_freq=6.0, seed=seed * 10))
+    v = vein_along(anchor, ra, rng, 0.0, 0.02)
+    if v is not None:
+        tubes.append(Tube(v[0], v[1], "vein", lump=0.08, lump_freq=10.0, seed=seed * 10 + 1))
+    for i in range(n):
+        xi = rng.uniform(-W / 2 * 0.9, W / 2 * 0.9)
+        k = int(np.argmin(np.abs(x - xi)))
+        L = rng.uniform(Lmin, Lmax)
+        m = max(10, int(L / DS))
+        u = np.linspace(0, 1, m)
+        ph1, ph2 = rng.uniform(0, 6.28, 2)
+        amp = rng.uniform(0.05, 0.18) * (L / 2)
+        px = anchor[k, 0] + amp * np.sin(u * rng.uniform(2, 4) + ph1) * u
+        py = anchor[k, 1] + amp * np.cos(u * rng.uniform(2, 4) + ph2) * u
+        pz = anchor[k, 2] - 0.02 - L * u
+        pts = np.column_stack([px, py, pz])
+        r0 = rng.uniform(0.035, 0.05)
+        r = r0 * (1 - 0.75 * u ** 0.9)
+        tubes.append(Tube(pts, r, "root", lump=0.15, lump_freq=9.0, seed=seed * 10 + 10 + i, cap_start=False))
+        vv = vein_along(pts, r, rng, 0.05, 0.008)
+        if vv is not None:
+            tubes.append(Tube(vv[0], vv[1], "vein", lump=0.08, lump_freq=12.0, seed=seed * 10 + 40 + i))
+        bulbs.append((pts[-1] + np.array([0, 0, -0.01]), rng.uniform(0.03, 0.055)))
+    return {"tubes": tubes, "core": None, "top": None, "heart": False, "no_cut": True, "bulbs": bulbs,
+            "handle": ((-0.05, -0.05, -0.05), (0.05, 0.05, 0.05))}
+
+
 # ---------------------------------------------------------------- сетка
 def resample(pts, radii, step):
     d = np.linalg.norm(np.diff(pts, axis=0), axis=1)
@@ -506,8 +621,19 @@ def mesh_lod(scene, prm):
         uv_len = 0.6 if tb.kind == "root" else 0.25
         P, tris, uvs = tube_mesh(tb, step, segs, uv_len)
         mb.add(P, tris, uvs, "crust" if tb.kind == "root" else "vein")
+    for center, radius in scene.get("bulbs", []):
+        cu, cv = prm["core"]
+        P, tris, uvs = sphere_mesh(cu, cv, lambda d, c=center, rr=radius: c + d * rr * (1 + 0.12 * fbm3(d * 3 + rr * 50, 2, 77))[:, None], (1, 1))
+        mb.add(P, tris, uvs, "vein")
+    for surf in scene.get("blobs", []):
+        nu, nv = prm["heart"]
+        P, tris, uvs = sphere_mesh(nu, nv, surf, (3, 2))
+        mb.add(P, tris, uvs, "crust")
     if not scene["heart"]:
-        return mb.finish()
+        mesh = mb.finish()
+        if scene.get("scale"):          # предмет: центрируем и уменьшаем
+            mesh["P"] = (mesh["P"] - scene.get("center", 0)) * scene["scale"]
+        return mesh
     nu, nv = prm["heart"]
     P, tris, uvs = sphere_mesh(nu, nv, heart_surface, (3, 2))
     mb.add(P, tris, uvs, "crust")
@@ -611,6 +737,8 @@ def box_lod(resolution, lo, hi, mass_per_point=None):
 def cut_points(scene):
     """Точки для ClutterCutter2x2 вдоль корней и трещин, чтобы трава не закрывала их."""
     pts = []
+    if scene.get("no_cut"):
+        return pts
     for tb in scene["tubes"]:
         if tb.kind not in ("root", "crack"):
             continue
@@ -643,16 +771,26 @@ def build_p3d(scene, out_path):
         hi = (0.48, 0.43, zt * 0.85)
         mem.set_memory_point("light", (0.0, 0.0, zt + 0.45))
         mem.set_memory_point("cut_big", (0.0, 0.0, 0.0))
+    elif scene.get("scale"):
+        # предмет: коллизия — ящик чуть меньше видимой модели, масса в Geometry
+        pm = meshes[0]["P"]
+        lo = tuple(float(v) * 0.8 for v in pm.min(0))
+        hi = tuple(float(v) * 0.8 for v in pm.max(0))
+    elif scene.get("handle"):
+        lo, hi = scene["handle"]
     else:
         # корни без сердца: плоская «ручка» вровень с землёй, чтобы объект выделялся в редакторе
         lo = (-0.25, -0.25, -0.3)
         hi = (0.25, 0.25, 0.02)
     for i, (x, y) in enumerate(cut_points(scene), start=1):
         mem.set_memory_point("cut_%d" % i, (float(x), float(y), 0.0))
-    model.lods.append(box_lod(1e13, lo, hi, mass_per_point=30.0))
+    mass = 30.0
+    if scene.get("scale"):
+        mass = 0.9 / 8                 # предмет ~0.9 кг
+    model.lods.append(box_lod(1e13, lo, hi, mass_per_point=mass))
     model.lods.append(mem)
     model.lods.append(box_lod(6e15, lo, hi))
-    if scene["heart"]:
+    if scene["heart"] or scene.get("scale"):
         model.lods.append(box_lod(7e15, lo, hi))
     py3d.blender_to_dayz(model)
     model.save(out_path, verify=True)
@@ -829,11 +967,34 @@ VARIANTS = [
     ("vb_rift_roots_small2", "small", 502),
     ("vb_rift_cracks1", "cracks", 601),
     ("vb_rift_cracks2", "cracks", 602),
+    # обвивки стволов: число в имени — радиус ствола в сантиметрах (скрипт сердца выбирает ближайший больший)
+    ("vb_rift_wrap_10", "wrap:0.10", 701),
+    ("vb_rift_wrap_15", "wrap:0.15", 702),
+    ("vb_rift_wrap_20", "wrap:0.20", 703),
+    ("vb_rift_wrap_27", "wrap:0.27", 704),
+    ("vb_rift_wrap_35", "wrap:0.35", 705),
+    ("vb_rift_wrap_45", "wrap:0.45", 706),
+    # свисающие щупальца
+    ("vb_rift_hang_short1", "hang:short", 801),
+    ("vb_rift_hang_short2", "hang:short", 802),
+    ("vb_rift_hang_long1", "hang:long", 803),
+    ("vb_rift_hang_long2", "hang:long", 804),
+    ("vb_rift_hang_drape1", "hang:drape", 805),
+    # предмет «Сердце Изнанки» (выпадает при вырезании сердца)
+    ("vb_rift_heart_chunk", "chunk", 901),
 ]
 
 
 def variant_scene(kind, seed, name=""):
-    return build_scene(seed) if kind == "heart" else build_roots_scene(seed, kind)
+    if kind == "heart":
+        return build_scene(seed)
+    if kind.startswith("wrap:"):
+        return build_wrap_scene(seed, float(kind.split(":")[1]))
+    if kind.startswith("hang:"):
+        return build_hang_scene(seed, kind.split(":")[1])
+    if kind == "chunk":
+        return build_chunk_scene(seed)
+    return build_roots_scene(seed, kind)
 
 
 def write_model_cfg():

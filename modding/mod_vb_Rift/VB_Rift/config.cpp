@@ -6,11 +6,15 @@ class CfgPatches
 			"VB_RiftHeart",
 			"VB_RiftRoots_Crawl1", "VB_RiftRoots_Crawl2", "VB_RiftRoots_Fork1",
 			"VB_RiftRoots_Cluster1", "VB_RiftRoots_Cluster2", "VB_RiftRoots_Arch1", "VB_RiftRoots_Arch2",
-			"VB_RiftRoots_Small1", "VB_RiftRoots_Small2", "VB_RiftCracks1", "VB_RiftCracks2"
+			"VB_RiftRoots_Small1", "VB_RiftRoots_Small2", "VB_RiftCracks1", "VB_RiftCracks2",
+			"VB_RiftWrap_10", "VB_RiftWrap_15", "VB_RiftWrap_20", "VB_RiftWrap_27", "VB_RiftWrap_35", "VB_RiftWrap_45",
+			"VB_RiftHang_Short1", "VB_RiftHang_Short2", "VB_RiftHang_Long1", "VB_RiftHang_Long2", "VB_RiftHang_Drape1",
+			"VB_RiftHeartChunk",
+			"VB_RiftZmbM_VillagerOld", "VB_RiftZmbF_VillagerOld", "VB_RiftZmbM_Prisoner", "VB_RiftZmbM_Jacket"
 		};
 		weapons[] = {};
 		requiredVersion = 0.1;
-		requiredAddons[] = {"DZ_Data", "DZ_Scripts"};
+		requiredAddons[] = {"DZ_Data", "DZ_Scripts", "DZ_Characters_Zombies"};
 	};
 };
 
@@ -74,9 +78,67 @@ class CfgSoundSets
 	};
 };
 
+// Шум у сердца, пока его режут: зомби идут проверить (VB_RiftHorde.VB_CallNoise).
+// Тип как у выстрелов и ракетницы: на "sound" (шаги, рык, strength 10) зомби волны не шли.
+// Для сравнения: ракетница NoiseFlare 30, АКМ NoiseShoot 80.
+class CfgNoises
+{
+	class VB_RiftCallNoise
+	{
+		type = "shot";
+		strength = 50;
+	};
+};
+
 class CfgVehicles
 {
 	class HouseNoDestruct;
+	class Inventory_Base;
+
+	// Зомби Изнанки: ванильные модели и поведение, свои текстуры и материалы (tools/gen_rift_zombies.py):
+	// мертвенно-серая кожа в светящихся жилах, светящиеся красные глаза, одежда в тёмный бордовый.
+	// Появляются волной, когда игрок начинает вырезать сердце (VB_RiftHorde); можно спавнить и как обычных зомби.
+	class ZmbM_VillagerOld_Base;
+	class ZmbF_VillagerOld_Base;
+	class ZmbM_PrisonerSkinny_Base;
+	class ZmbM_Jacket_Base;
+	class VB_RiftZmbM_VillagerOld: ZmbM_VillagerOld_Base
+	{
+		scope = 2;
+		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_villager_m_co.paa"};
+		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_villager_m.rvmat"};
+	};
+	class VB_RiftZmbF_VillagerOld: ZmbF_VillagerOld_Base
+	{
+		scope = 2;
+		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_villager_f_co.paa"};
+		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_villager_f.rvmat"};
+	};
+	class VB_RiftZmbM_Prisoner: ZmbM_PrisonerSkinny_Base
+	{
+		scope = 2;
+		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_prisoner_co.paa"};
+		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_prisoner.rvmat"};
+	};
+	class VB_RiftZmbM_Jacket: ZmbM_Jacket_Base
+	{
+		scope = 2;
+		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_jacket_co.paa"};
+		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_jacket.rvmat"};
+	};
+
+	// Выпадает тому, кто вырезал сердце (действие «Вырезать сердце» ножом/топором). Пока без применения.
+	// Для types.xml: nominal 0, lifetime по вкусу — сам предмет в лут не спавнится.
+	class VB_RiftHeartChunk: Inventory_Base
+	{
+		scope = 2;
+		displayName = "Сердце Изнанки";
+		descriptionShort = "Тёплый сгусток, вырезанный из корней Изнанки. Слабо светится изнутри, будто ещё бьётся.";
+		model = "\VB_Rift\data\vb_rift_heart_chunk.p3d";
+		weight = 900;
+		itemSize[] = {2, 2};
+		rotationFlags = 17;
+	};
 
 	// Объекты Изнанки. Начало координат модели = уровень земли (у корней — место выхода из земли).
 	// Пульс свечения и свет — клиентский скрипт (VB_RiftPulse). Модели генерирует tools/gen_rift_veins.py.
@@ -92,11 +154,97 @@ class CfgVehicles
 	};
 
 	// Сердце: узел с корнями ~12 м, коллизия у узла, красный свет.
+	// На клиенте само надевает обвивки на ближайшие деревья (локальные объекты, по сети не идут).
 	class VB_RiftHeart: VB_RiftBase
 	{
 		scope = 2;
 		displayName = "Rift Heart";
 		model = "\VB_Rift\data\vb_rift_heart.p3d";
+		vbInfectRadius = 18.0;	// радиус заражения деревьев, м (0 — не заражать)
+		vbInfectMax = 10;		// не больше стольких деревьев на одно сердце
+	};
+
+	// Обвивки стволов: число — радиус ствола в см. Обычно их ставит сердце само,
+	// но можно поставить и вручную на любое дерево (начало координат — центр ствола у земли).
+	class VB_RiftWrapBase: VB_RiftBase
+	{
+		scope = 0;
+		vbAlignToTerrain = 0;
+	};
+	class VB_RiftWrap_10: VB_RiftWrapBase
+	{
+		scope = 2;
+		displayName = "Rift Tree Wrap 10";
+		model = "\VB_Rift\data\vb_rift_wrap_10.p3d";
+	};
+	class VB_RiftWrap_15: VB_RiftWrapBase
+	{
+		scope = 2;
+		displayName = "Rift Tree Wrap 15";
+		model = "\VB_Rift\data\vb_rift_wrap_15.p3d";
+	};
+	class VB_RiftWrap_20: VB_RiftWrapBase
+	{
+		scope = 2;
+		displayName = "Rift Tree Wrap 20";
+		model = "\VB_Rift\data\vb_rift_wrap_20.p3d";
+	};
+	class VB_RiftWrap_27: VB_RiftWrapBase
+	{
+		scope = 2;
+		displayName = "Rift Tree Wrap 27";
+		model = "\VB_Rift\data\vb_rift_wrap_27.p3d";
+	};
+	class VB_RiftWrap_35: VB_RiftWrapBase
+	{
+		scope = 2;
+		displayName = "Rift Tree Wrap 35";
+		model = "\VB_Rift\data\vb_rift_wrap_35.p3d";
+	};
+	class VB_RiftWrap_45: VB_RiftWrapBase
+	{
+		scope = 2;
+		displayName = "Rift Tree Wrap 45";
+		model = "\VB_Rift\data\vb_rift_wrap_45.p3d";
+	};
+
+	// Свисающие щупальца: ставятся вручную на мосты, скалы, провода. Начало координат — середина
+	// «якоря» (точка крепления), к рельефу не привязаны. Short ~2 м шириной и до 2 м вниз,
+	// Long до 5 м вниз, Drape — 6 м с провисом (провода, пролёты мостов).
+	class VB_RiftHangBase: VB_RiftBase
+	{
+		scope = 0;
+		vbAlignToTerrain = 0;
+	};
+	class VB_RiftHang_Short1: VB_RiftHangBase
+	{
+		scope = 2;
+		displayName = "Rift Hang Short 1";
+		model = "\VB_Rift\data\vb_rift_hang_short1.p3d";
+	};
+	class VB_RiftHang_Short2: VB_RiftHangBase
+	{
+		scope = 2;
+		displayName = "Rift Hang Short 2";
+		model = "\VB_Rift\data\vb_rift_hang_short2.p3d";
+	};
+	class VB_RiftHang_Long1: VB_RiftHangBase
+	{
+		scope = 2;
+		displayName = "Rift Hang Long 1";
+		model = "\VB_Rift\data\vb_rift_hang_long1.p3d";
+	};
+	class VB_RiftHang_Long2: VB_RiftHangBase
+	{
+		scope = 2;
+		displayName = "Rift Hang Long 2";
+		model = "\VB_Rift\data\vb_rift_hang_long2.p3d";
+	};
+	class VB_RiftHang_Drape1: VB_RiftHangBase
+	{
+		scope = 2;
+		displayName = "Rift Hang Drape 1";
+		model = "\VB_Rift\data\vb_rift_hang_drape1.p3d";
 	};
 
 	// Корни без сердца: проходимы, без света; рядом с сердцем (до 30 м) бьются в его ритме.

@@ -2,6 +2,8 @@
 // Днём Изнанка спит: сухие серо-бурые текстуры, без свечения, света и звука. В сумерках тлеет, ночью горит.
 // Красный свет горит только у ближайших сердец (не больше MAX_LIGHTS одновременно).
 // Корни рядом с сердцем бьются вместе с ним с задержкой по расстоянию: удар бежит от сердца наружу.
+// Пока сердце режут (VB_IsDisturbed), всё в STIR_DIST от него просыпается даже днём и бьётся в STIR_RATE раз чаще:
+// у каждого объекта свои часы m_VB_Clock с плавно меняющейся скоростью, корни идут по часам своего сердца.
 
 class VB_RiftLight extends PointLightBase
 {
@@ -43,15 +45,23 @@ class VB_RiftPulse
 	static const float SOUND_DIST = 50.0;	// дальше сердцебиение не запускаем
 	static const float SOUND_LEAD = 0.03;	// в файле первый удар через 0.03 с от начала
 
+	// сердце режут: в этом радиусе всё бьётся чаще и не спит даже днём
+	static const float STIR_DIST = 50.0;
+	static const float STIR_RATE = 2.5;		// во столько раз чаще (цикл 6 с -> 2.4 с)
+	static const float RATE_EASE = 0.8;		// 1/с: как быстро ритм разгоняется и успокаивается
+
 	protected static ref VB_RiftPulse s_VB_Instance;
 
 	protected ref array<VB_RiftBase> m_VB_Objects;
+	protected ref array<VB_RiftBase> m_VB_Stirred;	// потревоженные сердца на этом тике
 	protected int m_VB_Ticks;
 	protected int m_VB_LastTickMs = -100000;
+	protected float m_VB_LastNow = -1;
 
 	void VB_RiftPulse()
 	{
 		m_VB_Objects = new array<VB_RiftBase>;
+		m_VB_Stirred = new array<VB_RiftBase>;
 	}
 
 	static void VB_Register(VB_RiftBase obj)
@@ -141,16 +151,44 @@ class VB_RiftPulse
 		m_VB_Ticks++;
 
 		float now = g_Game.GetTime() * 0.001;
+		float dt = now - m_VB_LastNow;
+		if (m_VB_LastNow < 0 || dt < 0 || dt > 1.0)
+			dt = TICK_MS * 0.001;
+		m_VB_LastNow = now;
+		float ease = Math.Clamp(dt * RATE_EASE, 0.0, 1.0);
+
+		m_VB_Stirred.Clear();
+		foreach (VB_RiftBase cand : m_VB_Objects)
+		{
+			if (cand.VB_IsHeart() && cand.VB_IsDisturbed())
+				m_VB_Stirred.Insert(cand);
+		}
+
 		float activeSq = ACTIVE_DIST * ACTIVE_DIST;
 		float soundSq = SOUND_DIST * SOUND_DIST;
 		float soundAt = BEAT_FIRST - SOUND_LEAD;
 		float dSq;
 		float t;
 		float k;
+		float clock;
+		float objNight;
+		bool stirred;
 		int level;
 		foreach (VB_RiftBase obj : m_VB_Objects)
 		{
-			if (night < NIGHT_DAY_BELOW)
+			// часы идут всегда, даже у спящих: иначе после пробуждения корни разойдутся с сердцем
+			stirred = VB_IsStirred(obj);
+			if (stirred)
+				obj.m_VB_Rate += (STIR_RATE - obj.m_VB_Rate) * ease;
+			else
+				obj.m_VB_Rate += (1.0 - obj.m_VB_Rate) * ease;
+			obj.m_VB_Clock += dt * obj.m_VB_Rate;
+
+			objNight = night;
+			if (stirred)
+				objNight = 1.0;	// потревоженная Изнанка не спит и днём
+
+			if (objNight < NIGHT_DAY_BELOW || obj.VB_IsDormant())	// день или сердце вырезано: спит
 			{
 				obj.VB_SetLevel(VB_RiftBase.LEVEL_DAY);
 				obj.m_VB_LastT = -1;
@@ -165,23 +203,43 @@ class VB_RiftPulse
 				continue;
 			}
 
-			t = Math.ModFloat(now + obj.m_VB_Phase, BEAT_PERIOD);
+			// корни бьются по часам своего сердца (со сдвигом на пробег волны в m_VB_Phase)
+			clock = obj.m_VB_Clock;
+			if (!obj.VB_IsHeart() && obj.m_VB_LinkHeart)
+				clock = obj.m_VB_LinkHeart.m_VB_Clock;
+			t = Math.ModFloat(clock + obj.m_VB_Phase, BEAT_PERIOD);
 			k = Math.Clamp(VB_Beat(t, BEAT_FIRST) + 0.65 * VB_Beat(t, BEAT_SECOND), 0.0, 1.0);
 			level = Math.Round(k * 3.0);
-			if (night < NIGHT_FULL_ABOVE && level > 1)
+			if (objNight < NIGHT_FULL_ABOVE && level > 1)
 				level = 1;	// сумерки: только тлеет
 
 			obj.VB_SetLevel(level);
-			obj.VB_SetLightPulse(k, night);
+			obj.VB_SetLightPulse(k, objNight);
 
 			// сердцебиение: запускаем звук на переходе через момент первого удара
-			if (obj.VB_IsHeart() && night >= NIGHT_LIGHT_ABOVE && dSq < soundSq && obj.m_VB_LastT >= 0)
+			if (obj.VB_IsHeart() && objNight >= NIGHT_LIGHT_ABOVE && dSq < soundSq && obj.m_VB_LastT >= 0)
 			{
 				if (t >= soundAt && (obj.m_VB_LastT < soundAt || obj.m_VB_LastT > t))
 					obj.VB_PlayBeat();
 			}
 			obj.m_VB_LastT = t;
 		}
+	}
+
+	// рядом (STIR_DIST) потревоженное сердце
+	protected bool VB_IsStirred(VB_RiftBase obj)
+	{
+		if (m_VB_Stirred.Count() == 0)
+			return false;
+
+		float stirSq = STIR_DIST * STIR_DIST;
+		vector pos = obj.GetPosition();
+		foreach (VB_RiftBase heart : m_VB_Stirred)
+		{
+			if (vector.DistanceSq(pos, heart.GetPosition()) < stirSq)
+				return true;
+		}
+		return false;
 	}
 
 	// корни берут ритм ближайшего сердца в LINK_DIST, со сдвигом на время пробега волны
@@ -212,12 +270,15 @@ class VB_RiftPulse
 			}
 
 			if (best)
+			{
 				root.m_VB_Phase = Math.ModFloat(best.m_VB_Phase - Math.Sqrt(bestSq) / WAVE_SPEED + 10.0 * BEAT_PERIOD, BEAT_PERIOD);
+				root.m_VB_LinkHeart = best;
+			}
 		}
 	}
 
-	// до maxCount ближайших к игроку сердец не дальше maxDist
-	protected void VB_PickHearts(vector ppos, int maxCount, float maxDist, array<VB_RiftBase> chosen)
+	// до maxCount ближайших к игроку сердец не дальше maxDist; stirredOnly — только потревоженные (днём)
+	protected void VB_PickHearts(vector ppos, int maxCount, float maxDist, array<VB_RiftBase> chosen, bool stirredOnly)
 	{
 		float maxSq = maxDist * maxDist;
 		VB_RiftBase pick;
@@ -229,7 +290,9 @@ class VB_RiftPulse
 			pickSq = maxSq;
 			foreach (VB_RiftBase cand : m_VB_Objects)
 			{
-				if (!cand.VB_IsHeart() || chosen.Find(cand) >= 0)
+				if (!cand.VB_IsHeart() || cand.VB_IsDormant() || chosen.Find(cand) >= 0)
+					continue;
+				if (stirredOnly && !cand.VB_IsDisturbed())
 					continue;
 
 				cSq = vector.DistanceSq(ppos, cand.GetPosition());
@@ -247,16 +310,14 @@ class VB_RiftPulse
 		}
 	}
 
-	// свет и споры получают ближайшие сердца, остальные гаснут; днём ни света, ни спор
+	// свет и споры получают ближайшие сердца, остальные гаснут; днём — только потревоженные
 	protected void VB_UpdateLights(vector ppos, float night)
 	{
 		array<VB_RiftBase> lit = new array<VB_RiftBase>;
 		array<VB_RiftBase> spored = new array<VB_RiftBase>;
-		if (night >= NIGHT_LIGHT_ABOVE)
-		{
-			VB_PickHearts(ppos, MAX_LIGHTS, LIGHT_DIST, lit);
-			VB_PickHearts(ppos, MAX_SPORES, SPORE_DIST, spored);
-		}
+		bool dayOnlyStirred = night < NIGHT_LIGHT_ABOVE;
+		VB_PickHearts(ppos, MAX_LIGHTS, LIGHT_DIST, lit, dayOnlyStirred);
+		VB_PickHearts(ppos, MAX_SPORES, SPORE_DIST, spored, dayOnlyStirred);
 
 		foreach (VB_RiftBase item : m_VB_Objects)
 		{
