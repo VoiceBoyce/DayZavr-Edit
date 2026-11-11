@@ -1,0 +1,70 @@
+EffectDef {
+ Emitors {
+  EmitorDef spores {
+   ShapeType Ellipse
+   ShapeSize 9 0.4 9
+   ConeAngle 30 30 0
+   MaxNum 70
+   BirthRate 9
+   BirthRateRND 4
+   Offset 0 0.1 0
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   CenterY 0
+   SizeMultiplier 0.05
+   SizeRND 0.03
+   BillboardingType Full
+   VelAngle 0
+   Velocity 0.22
+   VelocityRND 0.15
+   AirResistance 0.6
+   AirResistanceRND 0.3
+   GravityMultiply 0
+   Wind 0.5
+   RandomAngle 1
+   LifeTime 7
+   LifeTimeRND 4
+   Color {
+    0 1 0.12 0.2 0.5 1 0.22 0.3 1 0.8 0.08 0.15
+   }
+   Alpha {
+    0 0 0.15 1 0.75 0.8 1 0
+   }
+   Size {
+    0 0.6 0.3 1 1 0.4
+   }
+   EffectTime 5
+   Repeat 1
+  }
+  EmitorDef haze {
+   ShapeType Ellipse
+   ShapeSize 7 0.1 7
+   ConeAngle 0 0 0
+   MaxNum 10
+   BirthRate 0.8
+   BirthRateRND 0.5
+   Offset 0 0.25 0
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   CenterY 0
+   SizeMultiplier 2.6
+   SizeRND 1.2
+   BillboardingType Full
+   VelAngle 0
+   Velocity 0.03
+   VelocityRND 0.03
+   AirResistance 2
+   GravityMultiply 0
+   Wind 0.2
+   RandomAngle 1
+   LifeTime 8
+   LifeTimeRND 4
+   Color {
+    0 0.8 0.08 0.14 1 0.6 0.05 0.1
+   }
+   Alpha {
+    0 0 0.3 0.12 0.7 0.1 1 0
+   }
+   EffectTime 5
+   Repeat 1
+  }
+ }
+}
