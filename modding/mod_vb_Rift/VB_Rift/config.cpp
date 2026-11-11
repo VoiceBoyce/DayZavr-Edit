@@ -120,7 +120,7 @@ class CfgPatches
 			"VB_RiftHeart",
 			"VB_RiftRoots_Crawl1", "VB_RiftRoots_Crawl2", "VB_RiftRoots_Fork1",
 			"VB_RiftRoots_Cluster1", "VB_RiftRoots_Cluster2", "VB_RiftRoots_Arch1", "VB_RiftRoots_Arch2",
-			"VB_RiftRoots_Small1", "VB_RiftRoots_Small2", "VB_RiftCracks1", "VB_RiftCracks2",
+			"VB_RiftRoots_Small1", "VB_RiftRoots_Small2",
 			"VB_RiftWrap_10", "VB_RiftWrap_15", "VB_RiftWrap_20", "VB_RiftWrap_27", "VB_RiftWrap_35", "VB_RiftWrap_45",
 			"VB_RiftHang_Short1", "VB_RiftHang_Short2", "VB_RiftHang_Long1", "VB_RiftHang_Long2", "VB_RiftHang_Drape1",
 			"VB_RiftHeartChunk", "VB_RiftRootPiece",
@@ -556,16 +556,4 @@ class CfgVehicles
 		model = "\VB_Rift\data\vb_rift_roots_small2.p3d";
 	};
 
-	// Только светящиеся трещины в земле — самый дешёвый вариант для россыпи.
-	class VB_RiftCracks1: VB_RiftBase
-	{
-		scope = 2;
-		displayName = "Rift Cracks 1";
-		model = "\VB_Rift\data\vb_rift_cracks1.p3d";
-	};
-	class VB_RiftCracks2: VB_RiftBase
-	{
-		scope = 2;
-		displayName = "Rift Cracks 2";
-		model = "\VB_Rift\data\vb_rift_cracks2.p3d";
-	};};
+};

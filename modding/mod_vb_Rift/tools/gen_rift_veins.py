@@ -367,7 +367,7 @@ def build_roots_scene(seed, kind):
             add_root_family(rng, tubes, tips, o, hd, rng.uniform(1.4, 2.6), rng.uniform(0.06, 0.09), "ground",
                             sb + i * 7, n_branches=0)
         broken = 3
-    elif kind == "cracks":      # только светящиеся трещины в земле
+    elif kind == "cracks":      # (не используется: старые VB_RiftCracks заменены трещинами gen_rift_fissures.py)
         for c in range(int(rng.integers(2, 4))):
             st = np.array([rng.normal(0, 0.6), rng.normal(0, 0.6), 0.0])
             for _ in range(int(rng.integers(3, 5))):
@@ -974,7 +974,8 @@ def write_materials():
             f.write(rvmat(0.0, **day))
 
 
-# модель -> (вид, зерно). Класс в config.cpp: VB_RiftHeart, VB_RiftRoots_<Вид><N>, VB_RiftCracks<N>.
+# модель -> (вид, зерно). Класс в config.cpp: VB_RiftHeart, VB_RiftRoots_<Вид><N>.
+# Трещин в земле в моде нет: старые VB_RiftCracks и плоские VB_RiftFissure убраны по решению пользователя 2026-11-11.
 VARIANTS = [
     ("vb_rift_heart", "heart", SEED),
     ("vb_rift_roots_crawl1", "crawl", 101),
@@ -986,8 +987,6 @@ VARIANTS = [
     ("vb_rift_roots_arch2", "arch", 402),
     ("vb_rift_roots_small1", "small", 501),
     ("vb_rift_roots_small2", "small", 502),
-    ("vb_rift_cracks1", "cracks", 601),
-    ("vb_rift_cracks2", "cracks", 602),
     # обвивки стволов: число в имени — радиус ствола в сантиметрах (скрипт сердца выбирает ближайший больший)
     ("vb_rift_wrap_10", "wrap:0.10", 701),
     ("vb_rift_wrap_15", "wrap:0.15", 702),

@@ -23,6 +23,10 @@ class VB_RiftBase extends House
 	protected VB_RiftLight m_VB_Light;
 	protected ParticleSource m_VB_Spores;
 	protected EffectSound m_VB_Hum;			// низкий гул-петля у сердца (вместе со спорами)
+	// материалы секций: путь от VB_Rift\data\ без _N.rvmat (в конфиге vbCrustMat / vbVeinsMat; "" — не трогать)
+	protected string m_VB_CrustMat = "vb_rift_crust";
+	protected string m_VB_VeinsMat = "vb_rift_vein";
+	protected string m_VB_TexSuffix = "_co";	// суффикс текстур секций (vbTexSuffix)
 	protected ref array<Object> m_VB_Cutters;
 
 	bool VB_IsHeart()
@@ -59,6 +63,12 @@ class VB_RiftBase extends House
 
 		m_VB_IdxCrust = GetHiddenSelectionIndex("crust");
 		m_VB_IdxVeins = GetHiddenSelectionIndex("veins");
+		if (ConfigIsExisting("vbCrustMat"))
+			m_VB_CrustMat = ConfigGetString("vbCrustMat");
+		if (ConfigIsExisting("vbVeinsMat"))
+			m_VB_VeinsMat = ConfigGetString("vbVeinsMat");
+		if (ConfigIsExisting("vbTexSuffix"))
+			m_VB_TexSuffix = ConfigGetString("vbTexSuffix");
 		m_VB_Phase = Math.RandomFloat(0, VB_RiftPulse.BEAT_PERIOD);	// без сердца рядом бьются не в такт
 		m_VB_Clock = g_Game.GetTime() * 0.001;
 		VB_CreateCutters();
@@ -184,25 +194,27 @@ class VB_RiftBase extends House
 
 		m_VB_Level = level;
 		bool day = (level == LEVEL_DAY);
+		bool crust = m_VB_IdxCrust >= 0 && m_VB_CrustMat != "";
+		bool veins = m_VB_IdxVeins >= 0 && m_VB_VeinsMat != "";
 		if (day != m_VB_DayTex)
 		{
 			m_VB_DayTex = day;
-			string tex = "_co.paa";
+			string tex = m_VB_TexSuffix + ".paa";
 			if (day)
-				tex = "_day_co.paa";
-			if (m_VB_IdxCrust >= 0)
-				SetObjectTexture(m_VB_IdxCrust, MAT_PATH + "vb_rift_crust" + tex);
-			if (m_VB_IdxVeins >= 0)
-				SetObjectTexture(m_VB_IdxVeins, MAT_PATH + "vb_rift_vein" + tex);
+				tex = "_day" + m_VB_TexSuffix + ".paa";
+			if (crust)
+				SetObjectTexture(m_VB_IdxCrust, MAT_PATH + m_VB_CrustMat + tex);
+			if (veins)
+				SetObjectTexture(m_VB_IdxVeins, MAT_PATH + m_VB_VeinsMat + tex);
 		}
 
 		string suffix = "_" + level.ToString();
 		if (day)
 			suffix = "_day";
-		if (m_VB_IdxCrust >= 0)
-			SetObjectMaterial(m_VB_IdxCrust, MAT_PATH + "vb_rift_crust" + suffix + ".rvmat");
-		if (m_VB_IdxVeins >= 0)
-			SetObjectMaterial(m_VB_IdxVeins, MAT_PATH + "vb_rift_vein" + suffix + ".rvmat");
+		if (crust)
+			SetObjectMaterial(m_VB_IdxCrust, MAT_PATH + m_VB_CrustMat + suffix + ".rvmat");
+		if (veins)
+			SetObjectMaterial(m_VB_IdxVeins, MAT_PATH + m_VB_VeinsMat + suffix + ".rvmat");
 	}
 
 	void VB_PlayBeat()
