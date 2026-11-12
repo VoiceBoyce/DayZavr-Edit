@@ -369,6 +369,9 @@ Verified errors committed more than once. Check ACTIVELY during implementation. 
 - **E49** — плоская декаль с флагом «On surface» ложится по рельефу, но рисуются только пиксели с альфой 255 и не работает смена текстур; причина не найдена
 - **E50** — сырые `GetMouseState`/`KeyState` ловят клики и клавиши из других окон, пока DayZ не в фокусе: проверять `g_Game.IsAppActive()`
 - **E51** — `local` и `out` — ключевые слова Enforce, не имена переменных/параметров (`Broken expression`, `Expected name, not a keyword`)
+- **E52** — после `ReplaceItemWithNewLambdaBase` старый объект живёт без места в инвентаре: повтор по таймеру даёт `no inventory location` или дубликат; без места — только `Delete()`
+- **E53** — `rotationFlags = 17` кладёт предмет на бок (передняя/задняя грань); стоя — `2`. Стекло `_ca` у MLOD без бинаризации матовое
+- **E54** — модель без Geometry LOD автоцентрируется: декор через `AddChild` съезжает; нужен кубик-Geometry с `autocenter = 0`
 
 ---
 

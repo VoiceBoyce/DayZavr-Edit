@@ -54,6 +54,17 @@ MATS = {
     "crust": {"tex": PREFIX + "vb_rift_crust_co.paa", "mat": PREFIX + "vb_rift_crust.rvmat", "sel": "crust"},
     "vein": {"tex": PREFIX + "vb_rift_vein_co.paa", "mat": PREFIX + "vb_rift_vein.rvmat", "sel": "veins"},
 }
+# материалы предметов-изделий (без пульса): текстуры и rvmat делает make_prop_textures (--props-tex)
+PROP_MATS = ["wood", "cloth", "plastic", "metal", "bone", "glass", "liquid", "bladesteel", "burlap", "sporecloth", "bark"]
+for _m in PROP_MATS:
+    _tex = PREFIX + "vb_rift_p_%s_%s.paa" % (_m, "ca" if _m == "glass" else "co")
+    MATS[_m] = {"tex": _tex, "mat": PREFIX + "vb_rift_p_%s.rvmat" % _m, "sel": "p_" + _m}
+# стекло берём ванильное медицинское: Super + noZWrite и своя альфа-текстура (своё _ca рисовалось матовым)
+MATS["glass"]["tex"] = BS.join(["dz", "gear", "medical", "data", "glass_CA.paa"])
+MATS["glass"]["mat"] = BS.join(["dz", "gear", "medical", "data", "glass.rvmat"])
+# корпус «Сердца-аккумулятора»: ванильная текстура автомобильного аккумулятора (атлас AMUKA)
+MATS["battery"] = {"tex": BS.join(["dz", "vehicles", "parts", "data", "battery_smallcar_co.paa"]),
+                   "mat": BS.join(["dz", "vehicles", "parts", "data", "battery_smallcar.rvmat"]), "sel": "p_battery"}
 
 # параметры визуальных LOD: шаг вдоль трубки (м) и число сегментов по окружности
 LOD_PARAMS = [
@@ -117,15 +128,26 @@ def bump(x):
 
 # ---------------------------------------------------------------- пути
 class Tube:
-    def __init__(self, pts, radii, kind, lump=0.0, lump_freq=6.0, seed=0, cap_start=True, cap_end=True):
+    def __init__(self, pts, radii, kind, lump=0.0, lump_freq=6.0, seed=0, cap_start=True, cap_end=True,
+                 mat=None, segs=None, fixed_segs=False, uv_len=None, cap_flat=False, raw=False, ang0=0.0, aspect=1.0):
         self.pts = np.asarray(pts, float)
         self.radii = np.asarray(radii, float)
-        self.kind = kind            # root | vein | crack
+        self.kind = kind            # root | vein | crack: шаг и сегменты из LOD_PARAMS
         self.lump = lump
         self.lump_freq = lump_freq
         self.seed = seed
         self.cap_start = cap_start
         self.cap_end = cap_end
+        # для предметов: материал из MATS (wood, cloth, ...), своё число сегментов (fixed — на всех LOD),
+        # шаг UV, плоские торцы, путь без пересэмплирования (резкие ступени профиля), поворот и сплющивание сечения
+        self.mat = mat
+        self.segs = segs
+        self.fixed_segs = fixed_segs
+        self.uv_len = uv_len
+        self.cap_flat = cap_flat
+        self.raw = raw
+        self.ang0 = ang0
+        self.aspect = aspect
 
 
 def walk_xy(rng, start, heading, length, wiggle, crack=False):
@@ -178,6 +200,12 @@ def gen_root(rng, start_xy, heading, length, r0, z_start, blend_len, wiggle=0.9,
 
 def frames(P):
     T = np.gradient(P, axis=0)
+    ln = np.linalg.norm(T, axis=1)
+    # точки-дубликаты (ступени профиля у тел вращения): берём направление соседа, иначе рамка вырождается
+    ok = np.where(ln > 1e-9)[0]
+    if len(ok) and len(ok) < len(P):
+        for i in np.where(ln <= 1e-9)[0]:
+            T[i] = T[ok[np.argmin(np.abs(ok - i))]]
     T /= np.maximum(np.linalg.norm(T, axis=1, keepdims=True), 1e-9)
     up = np.array([0.0, 0.0, 1.0])
     n0 = up - T[0] * np.dot(up, T[0])
@@ -634,6 +662,714 @@ def build_lantern_scene(seed, size=0.26):
             "scale": size / (height + 0.1), "center": HEART_C.copy(), "item_mass": 0.6}
 
 
+# ---------------------------------------------------------------- предметы с «чужими» материалами
+# Строятся в масштабе x10 (1 единица = 10 см, как шаг трубок у корней), потом scale 0.1.
+
+def _tileable(n, rng, beta=2.0):
+    return spectral(n, rng, beta=beta)
+
+
+def make_prop_textures(png_dir):
+    """Плиточные текстуры 256x256 для дерева, ткани, пластика, металла, кости, стекла, жидкости + rvmat."""
+    n = 256
+    rng = np.random.default_rng(4242)
+    yy, xx = np.mgrid[0:n, 0:n] / n
+    out = []
+
+    def save(name, rgb, alpha=None):
+        rgb = np.clip(rgb, 0, 1)
+        if alpha is not None:
+            arr = np.dstack([rgb, np.clip(alpha, 0, 1)[..., None]])
+        else:
+            arr = rgb
+        path = os.path.join(png_dir, name + ".png")
+        write_png(path, (arr * 255).astype(np.uint8))
+        out.append((name, path))
+
+    def col(c, k):
+        return np.asarray(c, float)[None, None, :] * k[..., None]
+
+    nz = _tileable(n, rng, 1.6)
+    grain = np.sin((xx * 3 + nz * 0.08) * 2 * math.pi * 9) * 0.5 + 0.5
+    save("vb_rift_p_wood_co", col((0.36, 0.22, 0.12), 0.75 + 0.25 * grain + 0.06 * nz))
+    weave = (np.sin(xx * 2 * math.pi * 48) * np.sin(yy * 2 * math.pi * 48)) * 0.5 + 0.5
+    dirt = _tileable(n, rng, 2.2)
+    save("vb_rift_p_cloth_co", col((0.34, 0.30, 0.24), 0.82 + 0.1 * weave + 0.1 * dirt))
+    # корпус аккумулятора и запал ловушки: бурый, как перекраски Изнанки (решение пользователя 11-12)
+    save("vb_rift_p_plastic_co", col((0.30, 0.14, 0.075), 0.9 + 0.12 * _tileable(n, rng, 2.5)))
+    brushed = _tileable(n, rng, 1.2)
+    brushed = np.roll(np.repeat(brushed[:, :1], n, axis=1), 0, axis=0) * 0.5 + _tileable(n, rng, 2.4) * 0.15
+    save("vb_rift_p_metal_co", col((0.55, 0.55, 0.56), 0.9 + 0.12 * brushed))
+    pores = (_tileable(n, rng, 0.8) > 1.6).astype(float)
+    save("vb_rift_p_bone_co", col((0.84, 0.79, 0.66), 0.95 + 0.06 * _tileable(n, rng, 2.0) - 0.25 * pores))
+    save("vb_rift_p_glass_ca", col((0.78, 0.86, 0.86), np.ones((n, n))), np.full((n, n), 0.28))
+    swirl = _tileable(n, rng, 1.8)
+    save("vb_rift_p_liquid_co", col((0.55, 0.03, 0.03), 0.8 + 0.25 * swirl))
+    # сталь «Голодного клинка»: бурая, по ней сеть светящихся жил (+ маска свечения)
+    r1 = _tileable(n, rng, 2.4)
+    r2 = _tileable(n, rng, 2.8)
+    m = np.clip(np.exp(-(r1 / 0.09) ** 2) + 0.6 * np.exp(-(r2 / 0.07) ** 2), 0, 1)
+    steel = col((0.36, 0.17, 0.09), 0.85 + 0.15 * _tileable(n, rng, 2.0))
+    vein = np.asarray((0.95, 0.12, 0.10))[None, None, :]
+    save("vb_rift_p_bladesteel_co", steel * (1 - m[..., None]) + vein * m[..., None])
+    save("vb_rift_p_bladesteel_e_co", vein * m[..., None])
+    # мешковина «Спор Изнанки»: грубое плетение, нитки неровной толщины, бурые пятна
+    nx = _tileable(n, rng, 2.6)
+    tx = np.sin(xx * 2 * math.pi * 40 + nx * 0.5) * 0.5 + 0.5
+    ty = np.sin(yy * 2 * math.pi * 40 + nx * 0.5) * 0.5 + 0.5
+    coarse = np.where((np.floor(xx * 40) + np.floor(yy * 40)) % 2 == 0, tx, ty)
+    stain = _tileable(n, rng, 2.0)
+    burlap = col((0.50, 0.33, 0.17), 0.66 + 0.26 * coarse + 0.08 * stain)
+    save("vb_rift_p_burlap_co", burlap)
+    # мешковина, пропитанная спорами: светящиеся пятна и точки проступают сквозь плетение (+ маска свечения)
+    sp = _tileable(n, rng, 1.6)
+    sp2 = _tileable(n, rng, 0.6)
+    spots = np.clip((sp - 1.9) * 2.5, 0, 1) + np.clip((sp2 - 2.3) * 3.0, 0, 1)
+    spots = np.clip(spots * (0.55 + 0.45 * coarse), 0, 1)
+    glow = np.asarray((1.0, 0.22, 0.16))[None, None, :]
+    save("vb_rift_p_sporecloth_co", burlap * (1 - spots[..., None]) + glow * spots[..., None])
+    save("vb_rift_p_sporecloth_e_co", glow * spots[..., None])
+    # кора корней на предметах (аккумулятор): бурая, продольные борозды вдоль корня (v — вдоль трубки), без свечения
+    low = _tileable(n, rng, 2.4)
+    ridge = np.sin(xx * 2 * math.pi * 7 + low * 1.2) * 0.5 + 0.5
+    ridge = ridge ** 0.6
+    save("vb_rift_p_bark_co", col((0.34, 0.19, 0.09), 0.55 + 0.4 * ridge + 0.1 * _tileable(n, rng, 1.8)))
+    return out
+
+
+def write_prop_materials():
+    flat_n = "#(argb,8,8,3)color(0.5,0.5,1,1,NOHQ)"
+    black = "#(argb,8,8,3)color(0,0,0,1,CO)"
+    fres = "#(ai,64,64,1)fresnel(1.3,0.3)"
+    cfg = {
+        "wood": (0.0, "#(argb,8,8,3)color(0.3,0.2,0.3,1,SMDI)", black, 0.1, 20),
+        "cloth": (0.0, "#(argb,8,8,3)color(0.2,0.1,0.2,1,SMDI)", black, 0.05, 10),
+        "plastic": (0.0, "#(argb,8,8,3)color(0.6,0.4,0.6,1,SMDI)", black, 0.35, 60),
+        "metal": (0.0, "#(argb,8,8,3)color(1,0.8,0.9,1,SMDI)", black, 0.8, 120),
+        "bone": (0.0, "#(argb,8,8,3)color(0.5,0.3,0.4,1,SMDI)", black, 0.2, 30),
+        "glass": (0.0, "#(argb,8,8,3)color(1,1,1,1,SMDI)", black, 1.0, 200),
+        "liquid": (1.6, "#(argb,8,8,3)color(1,0.6,0.7,1,SMDI)", PREFIX + "vb_rift_p_liquid_co.paa", 0.6, 90),
+        "bark": (0.0, "#(argb,8,8,3)color(0.2,0.15,0.2,1,SMDI)", black, 0.06, 12),
+        "burlap": (0.0, "#(argb,8,8,3)color(0.15,0.1,0.15,1,SMDI)", black, 0.04, 8),
+        "sporecloth": (1.5, "#(argb,8,8,3)color(0.15,0.1,0.15,1,SMDI)", PREFIX + "vb_rift_p_sporecloth_e_co.paa", 0.04, 8),
+        "bladesteel": (1.4, "#(argb,8,8,3)color(1,0.6,0.8,1,SMDI)", PREFIX + "vb_rift_p_bladesteel_e_co.paa", 0.7, 110),
+    }
+    for m, (e, smdi, etex, spec, power) in cfg.items():
+        with open(os.path.join(DATA_DIR, "vb_rift_p_%s.rvmat" % m), "w", encoding="utf-8", newline="\r\n") as f:
+            f.write(rvmat(e, flat_n, smdi, etex, spec, power, fres))
+
+
+def _helix(c0, c1, radius, turns, n_per_turn=48, phase=0.0, axis=2):
+    """Спираль вокруг оси axis от c0 до c1 (координаты по оси), радиус может быть массивом."""
+    n = int(turns * n_per_turn) + 2
+    t = np.linspace(0, 1, n)
+    a = phase + t * turns * 2 * math.pi
+    r = np.linspace(radius[0], radius[1], n) if isinstance(radius, tuple) else np.full(n, float(radius))
+    pos = c0 + (c1 - c0) * t
+    pts = np.zeros((n, 3))
+    o = [k for k in range(3) if k != axis]
+    pts[:, axis] = pos
+    pts[:, o[0]] = r * np.cos(a)
+    pts[:, o[1]] = r * np.sin(a)
+    return pts
+
+
+def _lathe_z(profile, mat, segs=16, uv_len=0.6, x=0.0, y=0.0, seed=0, lump=0.0, cap_start=True, cap_end=True):
+    """Тело вращения вокруг вертикали: profile = [(z, r), ...] (резкие ступени сохраняются)."""
+    pr = np.asarray(profile, float)
+    pts = np.column_stack([np.full(len(pr), x), np.full(len(pr), y), pr[:, 0]])
+    return Tube(pts, pr[:, 1], "root", lump=lump, lump_freq=5.0, seed=seed, mat=mat, segs=segs, uv_len=uv_len,
+                cap_flat=True, raw=True, cap_start=cap_start, cap_end=cap_end)
+
+
+def _dense_profile(zr, step=0.04):
+    """Профиль с промежуточными точками (плавные участки), но ступени (одинаковый z) остаются ступенями."""
+    out = [zr[0]]
+    for (z0, r0), (z1, r1) in zip(zr[:-1], zr[1:]):
+        k = max(1, int(abs(z1 - z0) / step))
+        for i in range(1, k + 1):
+            out.append((z0 + (z1 - z0) * i / k, r0 + (r1 - r0) * i / k))
+    return out
+
+
+def _item(tubes, blobs=None, bulbs=None, mass=0.1, center=(0, 0, 0)):
+    return {"tubes": tubes, "core": None, "top": None, "heart": False, "no_cut": True,
+            "blobs": blobs or [], "bulbs": bulbs or [], "scale": 0.1, "center": np.asarray(center, float),
+            "item_mass": mass}
+
+
+def _sack_mesh(seed, prof, pleats=9, outer=True, z_min=None):
+    """Мешок из ткани: кольца по высоте, радиус = профиль x (складки + шум); складки сильнее к горловине,
+    верхний край рваный. outer=False — изнанка горловины (грани внутрь, на 10 % уже, верхнее кольцо общее).
+    Возвращает точки, треугольники, UV и число точек в кольце."""
+    rng = np.random.default_rng(seed)
+    zs_all = np.array([a for a, _ in prof])
+    rs_all = np.array([b for _, b in prof])
+    keep = zs_all >= (z_min if z_min is not None else -1e9)
+    zs, rs = zs_all[keep], rs_all[keep]
+    m = 30
+    th = np.linspace(0, 2 * math.pi, m, endpoint=False)
+    ph = rng.uniform(0, 6.28, 5)
+    zmax = zs_all[-1]
+    rag = 0.035 * np.sin(7 * th + ph[3]) + 0.025 * np.sin(12 * th + ph[4]) + 0.02 * np.sin(3 * th + ph[0])
+    rings = []
+    for z, r in zip(zs, rs):
+        k = np.clip((z - 0.25) / (zmax - 0.25), 0, 1) ** 1.2
+        fold = 1 + (0.03 + 0.24 * k) * np.sin(pleats * th + ph[0] + 1.5 * k) + 0.05 * np.sin(4 * th + ph[1] + z * 3)
+        lean = np.array([0.035 * math.sin(z * 2.5 + ph[2]), 0.03 * math.cos(z * 2 + ph[2])])
+        top = z >= zmax - 1e-9
+        rr = r * fold * (1.0 if (outer or top) else 0.9)
+        zz = z + rag * np.clip((z - (zmax - 0.12)) / 0.12, 0, 1)
+        rings.append(np.column_stack([rr * np.cos(th) + lean[0], rr * np.sin(th) + lean[1], zz]))
+    P = np.vstack(rings)
+    nz = len(zs)
+    tris, uvs = [], []
+
+    def add(a, b, c, ua, ub, uc, out):
+        if np.dot(np.cross(P[b] - P[a], P[c] - P[a]), out) < 0:
+            b, c, ub, uc = c, b, uc, ub
+        tris.append((a, b, c))
+        uvs.append((ua, ub, uc))
+
+    for i in range(nz - 1):
+        cen = np.mean(np.vstack([rings[i], rings[i + 1]]), axis=0)
+        for j in range(m):
+            a, b = i * m + j, i * m + (j + 1) % m
+            c, d = (i + 1) * m + (j + 1) % m, (i + 1) * m + j
+            u0, u1 = j / m * 3, (j + 1) / m * 3
+            v0, v1 = zs[i] / 0.9, zs[i + 1] / 0.9
+            out = (P[a] + P[c]) / 2 - cen
+            out[2] = 0
+            if not outer:
+                out = -out
+            add(a, b, c, (u0, v0), (u1, v0), (u1, v1), out)
+            add(a, c, d, (u0, v0), (u1, v1), (u0, v1), out)
+    if outer:
+        bi = len(P)
+        P = np.vstack([P, [np.append(np.mean(rings[0][:, :2], axis=0), zs[0] - 0.01)]])
+        for j in range(m):
+            add(j, (j + 1) % m, bi, (j / m, 0), ((j + 1) / m, 0), (0.5, 0.15), np.array([0, 0, -1.0]))
+    return P, tris, uvs, m
+
+
+def build_spores_sack_scene(seed):
+    """«Споры Изнанки»: мятый мешочек из мешковины, пропитанной спорами (светящиеся пятна сквозь плетение),
+    с вертикальными складками; горловина стянута шнурком и жилой, верх — рваная оборка, изнутри светится
+    комок спор, сквозь ткань пробились гроздья спор. Высота ~12 см, ширина ~10 см (масштаб x10)."""
+    rng = np.random.default_rng(seed)
+    prof = [(0.0, 0.16), (0.03, 0.30), (0.1, 0.39), (0.25, 0.45), (0.42, 0.46), (0.58, 0.40), (0.72, 0.27),
+            (0.82, 0.15), (0.87, 0.12), (0.93, 0.15), (1.02, 0.23), (1.11, 0.28), (1.16, 0.27)]
+    prof = _dense_profile(prof, 0.03)
+    P, tris, uvs, m = _sack_mesh(seed, prof, outer=True)
+    Pi, trisi, uvsi, _ = _sack_mesh(seed, prof, outer=False, z_min=0.9)
+    meshes = [(P, tris, uvs, "sporecloth"), (Pi, trisi, uvsi, "burlap")]
+    tubes = []
+    # шнурок из мешковины, поверх него жила
+    ang = np.linspace(0, 2 * math.pi, 49)[:-1]
+    for k, (r, z, mat, rad) in enumerate(((0.14, 0.86, "burlap", 0.028), (0.155, 0.905, None, 0.02))):
+        ring = np.column_stack([r * np.cos(ang), r * np.sin(ang), z + 0.012 * np.sin(ang * 3 + k)])
+        ring = np.vstack([ring, ring[:1]])
+        tubes.append(Tube(ring, np.full(len(ring), rad), "vein", lump=0.12, lump_freq=12, seed=seed + 1 + k, mat=mat,
+                          segs=7 if mat else None, cap_start=False, cap_end=False))
+    # два хвоста шнурка от узла
+    pz = [a for a, _ in prof]
+    pr = [b for _, b in prof]
+    for k, (a0, a1, z1) in enumerate(((0.25, 0.55, 0.5), (0.25, 0.0, 0.6))):
+        zt = np.linspace(0.86, z1, 9)
+        at = np.linspace(a0, a1, 9)
+        rt = np.interp(zt, pz, pr) * 1.12 + 0.03
+        tail = np.column_stack([rt * np.cos(at), rt * np.sin(at), zt])
+        tubes.append(Tube(tail, np.linspace(0.026, 0.018, 9), "vein", mat="burlap", segs=7, seed=seed + 3 + k))
+    # комок спор в горловине
+    bulbs = [(np.array([0.0, 0.0, 0.99]), 0.15), (np.array([0.06, 0.04, 1.05]), 0.08),
+             (np.array([-0.05, -0.05, 1.04]), 0.07), (np.array([0.01, -0.07, 1.01]), 0.07)]
+    # гроздья спор, пробившихся сквозь ткань: точно на поверхности (точки колец мешка)
+    nz = (len(P) - 1) // m
+    zring = np.array([P[i * m, 2] for i in range(nz)])
+    rows = np.nonzero((zring > 0.12) & (zring < 0.62))[0]
+    for c in range(5):
+        i0 = int(rng.choice(rows))
+        j0 = int(rng.integers(0, m))
+        for t in range(int(rng.integers(3, 6))):
+            i = int(np.clip(i0 + rng.integers(-1, 2), rows[0], rows[-1]))
+            j = (j0 + int(rng.integers(-1, 2))) % m
+            bulbs.append((P[i * m + j].copy(), rng.uniform(0.016, 0.032)))
+    sc = _item(tubes, bulbs=bulbs, mass=0.08, center=(0, 0, 0.58))
+    sc["meshes"] = meshes
+    return sc
+def build_vein_skein_scene(seed):
+    """«Жила Изнанки»: светящаяся жила, смотанная на деревянную палочку."""
+    stick = Tube(np.array([[-0.75, 0, 0], [0.75, 0, 0]]), np.array([0.055, 0.05]), "root", mat="wood", segs=10,
+                 uv_len=0.8, seed=seed)
+    tubes = [stick]
+    for layer, (r, turns) in enumerate(((0.10, 9), (0.14, 8), (0.18, 7))):
+        h = _helix(-0.38 + layer * 0.04, 0.38 - layer * 0.04, r, turns, 40, phase=layer * 1.3, axis=0)
+        tubes.append(Tube(h, np.full(len(h), 0.024), "vein", lump=0.08, lump_freq=14, seed=seed + layer + 1,
+                          cap_start=False, cap_end=False))
+    end = np.array([[0.34, 0.0, 0.18], [0.45, 0.05, 0.26], [0.55, 0.0, 0.33]])
+    tubes.append(Tube(end, np.array([0.024, 0.016, 0.008]), "vein", seed=seed + 9))
+    return _item(tubes, mass=0.05)
+
+
+def build_heart_battery2_scene(seed):
+    """«Сердце-аккумулятор»: корпус автомобильного аккумулятора, из крышки прорастает сердце, корни
+    оплетают корпус и клеммы."""
+    rng = np.random.default_rng(seed)
+    L, W, H = 2.4, 1.7, 1.9
+    r_box = (H / 2) * math.sqrt(2)
+    body = Tube(np.array([[-L / 2, 0, H / 2], [L / 2, 0, H / 2]]), np.array([r_box, r_box]), "root", mat="plastic",
+                segs=4, fixed_segs=True, uv_len=2.0, cap_flat=True, raw=True, ang0=math.pi / 4, aspect=W / H)
+    tubes = [body]
+    for sx in (-0.8, 0.8):
+        tubes.append(_lathe_z([(H - 0.02, 0.14), (H + 0.12, 0.14), (H + 0.16, 0.10)], "metal", segs=12,
+                              uv_len=0.3, x=sx, y=0.45))
+    top = H + 0.05
+    heart_c = np.array([0.0, -0.1, top + 0.35])
+    small = lambda d: (heart_surface(d) - HEART_C) * 0.75 + heart_c
+    # корни: от сердца через ребро крышки вниз по бокам
+    for k, (x0, side) in enumerate(((-0.5, 1), (0.3, 1), (-0.2, -1), (0.6, -1), (-0.85, -1))):
+        yE = side * (W / 2 + 0.04)
+        pts = np.array([[x0 * 0.4, heart_c[1] + side * 0.25, top + 0.15], [x0, side * (W / 2 - 0.15), top + 0.03],
+                        [x0 + 0.05, yE, top - 0.15], [x0 + rng.uniform(-0.15, 0.15), yE, H * 0.5],
+                        [x0 + rng.uniform(-0.2, 0.2), yE + side * 0.02, 0.15], [x0, yE + side * 0.25, 0.02]])
+        rr = np.linspace(0.085, 0.04, len(pts))
+        tubes.append(Tube(pts, rr, "root", lump=0.14, lump_freq=7, seed=seed * 10 + k))
+        v = vein_along(pts, rr, rng, 0.0, 0.015)
+        if v:
+            tubes.append(Tube(v[0], v[1], "vein", seed=seed * 10 + 30 + k))
+    # жилы-провода от клемм к сердцу
+    for k, sx in enumerate((-0.8, 0.8)):
+        pts = np.array([[sx, 0.45, H + 0.16], [sx * 0.8, 0.35, H + 0.45], [sx * 0.4, 0.1, top + 0.55], [0.0, -0.05, top + 0.5]])
+        tubes.append(Tube(pts, np.full(4, 0.035), "vein", lump=0.1, lump_freq=10, seed=seed * 10 + 60 + k))
+    eye = small(np.array([[0.0, 0.0, 1.0]]))[0]
+    return _item(tubes, blobs=[small], bulbs=[(eye - np.array([0, 0, 0.03]), 0.1)], mass=3.0, center=(0, 0, 0))
+
+
+def build_trap_grenade_scene(seed):
+    """«Споровая ловушка»: тугой мешочек спор, перетянутый жилами крест-накрест, сверху трубка-запал и кольцо-чека."""
+    rng = np.random.default_rng(seed)
+    zr = [(0.0, 0.05), (0.05, 0.26), (0.2, 0.38), (0.42, 0.40), (0.62, 0.30), (0.74, 0.14), (0.78, 0.1)]
+    sack = _lathe_z(_dense_profile(zr, 0.03), "cloth", segs=18, uv_len=0.5, lump=0.06, seed=seed)
+    tubes = [sack]
+    for k in range(2):
+        a = k * math.pi / 2
+        t = np.linspace(0.08, math.pi - 0.08, 30)
+        rr = np.interp(0.4 - 0.36 * np.cos(t), [a_ for a_, _ in zr], [b for _, b in zr]) + 0.02
+        z = 0.4 - 0.36 * np.cos(t)
+        pts = np.column_stack([rr * np.cos(a) * np.sign(np.cos(t + 1e-9)) * 0 + rr * np.cos(a), rr * np.sin(a), z])
+        pts2 = np.column_stack([-rr * np.cos(a), -rr * np.sin(a), z])
+        loop = np.vstack([pts, pts2[::-1]])
+        tubes.append(Tube(loop, np.full(len(loop), 0.03), "vein", lump=0.1, lump_freq=12, seed=seed + k))
+    fuse = np.array([[0.0, 0.0, 0.74], [0.02, 0.0, 0.95], [0.1, 0.03, 1.1], [0.22, 0.05, 1.18]])
+    tubes.append(Tube(fuse, np.full(4, 0.06), "root", mat="plastic", segs=10, uv_len=0.3, cap_flat=True, seed=seed + 5))
+    ang = np.linspace(0, 2 * math.pi, 36)
+    ring = np.column_stack([0.12 + 0.17 * np.cos(ang), 0.0 * ang - 0.08, 0.86 + 0.17 * np.sin(ang)])
+    tubes.append(Tube(ring, np.full(36, 0.022), "vein", mat="metal", segs=8, cap_start=False, cap_end=False, seed=seed + 6))
+    pin = np.array([[0.0, -0.08, 0.80], [0.03, -0.02, 0.80], [0.06, 0.06, 0.80]])
+    tubes.append(Tube(pin, np.full(3, 0.018), "vein", mat="metal", segs=8, seed=seed + 7))
+    bulbs = []
+    for i in range(8):
+        z = rng.uniform(0.1, 0.6)
+        rr = np.interp(z, [a for a, _ in zr], [b for _, b in zr])
+        a = rng.uniform(0, 2 * math.pi)
+        bulbs.append((np.array([rr * math.cos(a), rr * math.sin(a), z]), rng.uniform(0.025, 0.04)))
+    return _item(tubes, bulbs=bulbs, mass=0.3, center=(0, 0, 0.5))
+
+
+def build_ampoule_scene(seed):
+    """«Кровь Изнанки»: стеклянная ампула со светящейся кровью, пробка из корня, по стеклу ползут жилы."""
+    rng = np.random.default_rng(seed)
+    # прозрачность стекла у несжатой модели движок не включает: колба там, где кровь, светится красным,
+    # горлышко — светлое стекло (ванильный материал)
+    filled = [(0.0, 0.0), (0.0, 0.2), (0.02, 0.24), (0.06, 0.25), (0.62, 0.25)]
+    tubes = [_lathe_z(_dense_profile(filled, 0.03), "liquid", segs=16, uv_len=0.5, cap_end=False)]
+    neck = [(0.62, 0.25), (0.72, 0.25), (0.8, 0.2), (0.86, 0.11), (0.9, 0.1)]
+    tubes.append(_lathe_z(_dense_profile(neck, 0.03), "glass", segs=16, uv_len=0.5, cap_start=False, cap_end=False))
+    cork = [(0.86, 0.0), (0.86, 0.12), (0.9, 0.13), (1.02, 0.12), (1.06, 0.09), (1.07, 0.0)]
+    tubes.append(_lathe_z(cork, "crust", segs=12, uv_len=0.4, lump=0.1, seed=seed))
+    for k in range(2):
+        h = _helix(0.08, 0.95, (0.27, 0.14), 1.6, 75, phase=k * math.pi + rng.uniform(0, 1), axis=2)
+        tubes.append(Tube(h, np.linspace(0.022, 0.01, len(h)), "vein", lump=0.1, lump_freq=12, seed=seed + 3 + k))
+    return _item(tubes, mass=0.06, center=(0, 0, 0.5))
+
+
+def build_strap_scene(seed):
+    """«Живой жгут»: плоский ремень из корня, свёрнутый в кольцо, с пряжкой из кости и светящейся жилой по ремню."""
+    rng = np.random.default_rng(seed)
+    t = np.linspace(0, 1.25, 120)
+    a = t * 2 * math.pi
+    r = 0.42 - 0.07 * t
+    path = np.column_stack([r * np.cos(a), r * np.sin(a), 0.11 + 0.02 * t])
+    # сечение: N = вертикаль (ширина ремня), B = радиально (толщина)
+    tubes = [Tube(path, np.full(len(t), 0.11), "root", lump=0.05, lump_freq=8, seed=seed, segs=8, fixed_segs=True,
+                  aspect=0.22, uv_len=0.6)]
+    vein = path.copy()
+    vein[:, 0] *= (r + 0.03) / r
+    vein[:, 1] *= (r + 0.03) / r
+    tubes.append(Tube(vein, np.full(len(t), 0.018), "vein", lump=0.12, lump_freq=14, seed=seed + 1, cap_start=False, cap_end=False))
+    end = path[-1]
+    ang = np.linspace(0, 2 * math.pi, 5)[:-1] + math.pi / 4
+    sq = np.column_stack([end[0] + 0.0 * ang, end[1] + 0.13 * np.cos(ang), end[2] + 0.13 * np.sin(ang)])
+    sq = np.vstack([sq, sq[:1]])
+    tubes.append(Tube(sq, np.full(len(sq), 0.035), "vein", mat="bone", segs=6, cap_start=False, cap_end=False, seed=seed + 2))
+    return _item(tubes, mass=0.04, center=(0, 0, 0.11))
+
+
+def build_spool_scene(seed):
+    """«Нить Изнанки»: деревянная катушка, плотно намотанная светящейся нитью, сбоку воткнута игла."""
+    prof = [(0.0, 0.0), (0.0, 0.34), (0.07, 0.34), (0.07, 0.16), (0.63, 0.16), (0.63, 0.34), (0.70, 0.34), (0.70, 0.0)]
+    tubes = [_lathe_z(prof, "wood", segs=20, uv_len=0.6)]
+    for layer, r in enumerate((0.185, 0.22, 0.255)):
+        h = _helix(0.09, 0.61, r, 16, 24, phase=layer * 0.7, axis=2)
+        tubes.append(Tube(h, np.full(len(h), 0.018), "vein", seed=seed + layer, cap_start=False, cap_end=False,
+                          segs=4, fixed_segs=True, uv_len=0.3))
+    needle = np.array([[0.05, -0.32, 0.18], [0.0, 0.0, 0.42], [-0.05, 0.3, 0.66]])
+    tubes.append(Tube(needle, np.array([0.012, 0.012, 0.004]), "vein", mat="metal", segs=6, seed=seed + 9))
+    tail = np.array([[0.25, 0.05, 0.55], [0.32, 0.12, 0.62], [0.36, 0.25, 0.68]])
+    tubes.append(Tube(tail, np.full(3, 0.012), "vein", segs=4, seed=seed + 10))
+    return _item(tubes, mass=0.02, center=(0, 0, 0.35))
+
+
+def build_blade_roots_scene(seed):
+    """Корни на «Голодном клинке» (ванильный FangeKnife): обвивают рукоять и выползают на клинок.
+    Оси модели ножа (замер ClippingInfo/GetCollisionBox на стенде 11-12, в м): X ширина клинка -0.039..0.050,
+    Y вдоль ножа -0.085..0.343 (рукоять у начала), Z толщина -0.021..0.022. Здесь оси Blender: X=X, Z=Y DayZ, Y=Z DayZ.
+    Масштаб x10. Начало координат = начало ножа: объект крепится к ножу без смещения."""
+    rng = np.random.default_rng(seed)
+    tubes = []
+    cx = 0.05
+    for k in range(2):
+        h = _helix(-0.8, 0.55, 0.0, 3.4, 40, phase=k * math.pi, axis=2)
+        a = np.arctan2(h[:, 1], h[:, 0] + 1e-9)
+        t = np.linspace(0, 2 * math.pi * 3.2, len(h)) + k * math.pi
+        h[:, 0] = cx + 0.24 * np.cos(t)
+        h[:, 1] = 0.26 * np.sin(t)
+        rr = np.full(len(h), 0.05)
+        tubes.append(Tube(h, rr, "root", lump=0.15, lump_freq=9, seed=seed + k, cap_start=False))
+        v = vein_along(h, rr, rng, 0.0, 0.012)
+        if v:
+            tubes.append(Tube(v[0], v[1], "vein", seed=seed + 10 + k))
+    for k, side in enumerate((-1, 1)):
+        z = np.linspace(0.5, 2.4, 30)
+        x = 0.25 + 0.08 * np.sin(z * 4 + k) - 0.06 * (z - 0.5)
+        y = side * (0.09 + 0.01 * np.sin(z * 7))
+        pts = np.column_stack([x, y, z])
+        rr = np.linspace(0.04, 0.008, len(z))
+        tubes.append(Tube(pts, rr, "root", lump=0.12, lump_freq=10, seed=seed + 20 + k))
+        tubes.append(Tube(pts + np.array([0, side * 0.03, 0]), rr * 0.35, "vein", seed=seed + 30 + k))
+    sc = _item(tubes, mass=0.01, center=(0, 0, 0))
+    sc["no_geom"] = True
+    return sc
+
+
+def _bowie_profile(t):
+    """Клинок боуи (Blender x10, X = поперёк клинка): обух по +X прямой до 60 % длины, дальше скос к острию;
+    кромка по -X с выпуклым брюшком. Возвращает x обуха, x кромки, полутолщину обуха."""
+    x_tip = 0.09
+    sc = np.clip((t - 0.62) / 0.38, 0, 1)
+    x_s = np.where(t < 0.62, 0.22, 0.22 - (0.22 - x_tip) * (1 - (1 - sc) ** 1.8))   # вогнутый скос обуха
+    x_e = -0.31 + (0.31 + x_tip) * t ** 4.0                                       # брюшко поднимается к острию
+    x_e = np.where(t < 0.045, -0.2, x_e)                                          # чойл у основания
+    ts = 0.03 * (1 - 0.55 * t)
+    return x_s, x_e, ts
+
+
+def _bowie_mesh(z0=0.64, z1=3.42, n=44):
+    """Сетка клинка боуи: сечение — острая кромка, спуски, плоский обух (5 точек), остриё сходится в точку.
+    Грани наружу (против часовой снаружи, как у _box_face)."""
+    t = np.linspace(0.0, 0.985, n)
+    z = z0 + (z1 - z0) * t
+    x_s, x_e, ts = _bowie_profile(t)
+    x_g = x_e + 0.45 * (x_s - x_e)
+    tg = ts * 0.85
+    rings = []
+    for i in range(n):
+        rings.append([(x_e[i], 0.0, z[i]), (x_g[i], tg[i], z[i]), (x_s[i], ts[i], z[i]),
+                      (x_s[i], -ts[i], z[i]), (x_g[i], -tg[i], z[i])])
+    P = [pt for ring in rings for pt in ring]
+    tip_i = len(P)
+    xs1, xe1, _ = _bowie_profile(np.array([1.0]))
+    P.append(((xs1[0] + xe1[0]) / 2, 0.0, z1))
+    base_i = len(P)
+    P.append(tuple(np.mean(np.array(rings[0]), axis=0)))
+    P = np.array(P, float)
+    m = 5
+    per = np.array([np.linalg.norm(P[(k + 1) % m] - P[k]) for k in range(m)])
+    vcum = np.concatenate([[0], np.cumsum(per)]) / 0.6
+    tris, uvs = [], []
+
+    def add(a, b, c, ua, ub, uc, outward):
+        nrm = np.cross(P[b] - P[a], P[c] - P[a])
+        if np.dot(nrm, outward) < 0:
+            b, c, ub, uc = c, b, uc, ub
+        tris.append((a, b, c))
+        uvs.append((ua, ub, uc))
+
+    for i in range(n - 1):
+        ci = np.mean(P[i * m:(i + 1) * m], axis=0)
+        for k in range(m):
+            a = i * m + k
+            b = i * m + (k + 1) % m
+            c = (i + 1) * m + (k + 1) % m
+            d = (i + 1) * m + k
+            mid = (P[a] + P[b] + P[c] + P[d]) / 4
+            out = mid - np.array([ci[0], ci[1], mid[2]])
+            u0, u1 = z[i] / 1.2, z[i + 1] / 1.2
+            v0, v1 = vcum[k], vcum[k + 1]
+            add(a, b, c, (u0, v0), (u0, v1), (u1, v1), out)
+            add(a, c, d, (u0, v0), (u1, v1), (u1, v0), out)
+    o = (n - 1) * m
+    ci = np.mean(P[o:o + m], axis=0)
+    for k in range(m):
+        a, b = o + k, o + (k + 1) % m
+        mid = (P[a] + P[b] + P[tip_i]) / 3
+        add(a, b, tip_i, (z[-1] / 1.2, vcum[k]), (z[-1] / 1.2, vcum[k + 1]), (z1 / 1.2, (vcum[k] + vcum[k + 1]) / 2),
+            mid - np.array([ci[0], ci[1], mid[2] - 0.5]))
+    for k in range(m):
+        add(k, (k + 1) % m, base_i, (0, vcum[k]), (0, vcum[k + 1]), (0.05, 0.5), np.array([0.0, 0.0, -1.0]))
+    return P, tris, uvs
+
+
+def build_blade_full_scene(seed):
+    """«Голодный клинок» целиком своей моделью (корни у прикреплённого декора не видны в руках и в превью, E54):
+    клинок боуи из бурой стали с жилами (прямой обух со скосом к острию, выпуклое брюшко, спуски), костяная гарда,
+    рукоять из корня в витках, навершие. Оси и размеры как у ванильного FangeKnife (рукоять у начала, клинок
+    вдоль +Y DayZ, обух к +X, толщина по Z), хват в руке тот же. Оси Blender: X=X, Z=Y DayZ, Y=Z DayZ. Масштаб x10."""
+    rng = np.random.default_rng(seed)
+    tubes = []
+    cx = 0.03
+    # рукоять и навершие
+    z = np.linspace(-0.85, 0.6, 24)
+    hr = 0.165 + 0.025 * np.sin((z + 0.85) / 1.45 * math.pi)
+    tubes.append(Tube(np.column_stack([np.full(24, cx), np.zeros(24), z]), hr, "root", mat="crust", segs=10,
+                      aspect=1.2, lump=0.08, lump_freq=8, seed=seed + 40, cap_flat=True))
+    tubes.append(Tube(np.array([[cx, 0, -0.98], [cx, 0, -0.9], [cx, 0, -0.82]]), np.array([0.13, 0.21, 0.18]), "root",
+                      mat="bone", segs=12, aspect=1.15, seed=seed + 43))
+    # витки корней по рукояти
+    for k in range(2):
+        t = np.linspace(0, 2 * math.pi * 3.4, 140) + k * math.pi
+        zz = np.linspace(-0.8, 0.56, 140)
+        h = np.column_stack([cx + 0.235 * np.cos(t), 0.26 * np.sin(t), zz])
+        rr = np.full(len(h), 0.05)
+        tubes.append(Tube(h, rr, "root", lump=0.15, lump_freq=9, seed=seed + k, cap_start=False))
+        v = vein_along(h, rr, rng, 0.0, 0.012)
+        if v:
+            tubes.append(Tube(v[0], v[1], "vein", seed=seed + 10 + k))
+    # гарда: кость, к кромке чуть загнута вперёд
+    gx = np.linspace(-0.5, 0.4, 16)
+    gz = 0.63 + 0.06 * np.clip(-gx - 0.2, 0, None) ** 1.2
+    tubes.append(Tube(np.column_stack([gx, np.zeros(16), gz]), np.full(16, 0.055), "root", mat="bone", segs=8,
+                      aspect=1.35, seed=seed + 41))
+    # корни переползают с рукояти через гарду на клинок, по плоскости у обуха
+    for k, side in enumerate((-1, 1)):
+        zr = np.linspace(0.45, 2.25, 34)
+        tr = np.clip((zr - 0.64) / 2.78, 0, 1)
+        _, _, tsr = _bowie_profile(tr)
+        rr = np.linspace(0.042, 0.008, len(zr))
+        xr = 0.13 + 0.035 * np.sin(zr * 4 + k * 2)
+        yr = side * np.where(zr < 0.66, 0.2 - (zr - 0.45) / 0.21 * 0.1, tsr * 0.95 + rr * 0.8)
+        pts = np.column_stack([xr, yr, zr])
+        tubes.append(Tube(pts, rr, "root", lump=0.12, lump_freq=10, seed=seed + 20 + k))
+        tubes.append(Tube(pts + np.array([0, side * 0.02, 0]), rr * 0.35, "vein", seed=seed + 30 + k))
+    P, tris, uvs = _bowie_mesh()
+    sc = _item(tubes, mass=0.2, center=(0, 0, 0))
+    sc["meshes"] = [(P, tris, uvs, "bladesteel")]
+    return sc
+
+
+def _box_face(corners, uv_rect, outward):
+    """Грань-прямоугольник: corners = 4 точки по кругу, uv_rect = (u0, v0, u1, v1) в долях текстуры.
+    Порядок вершин выбирается так, чтобы грань смотрела наружу (против часовой снаружи, как у sphere_mesh)."""
+    c = np.asarray(corners, float)
+    u0, v0, u1, v1 = uv_rect
+    uv = [(u0, v1), (u1, v1), (u1, v0), (u0, v0)]
+    if np.dot(np.cross(c[1] - c[0], c[2] - c[0]), outward) < 0:
+        c = c[[0, 3, 2, 1]]
+        uv = [uv[0], uv[3], uv[2], uv[1]]
+    tris = [(0, 1, 2), (0, 2, 3)]
+    uvs = [(uv[0], uv[1], uv[2]), (uv[0], uv[2], uv[3])]
+    return c, tris, uvs
+
+
+def build_battery_full_scene(seed):
+    """«Сердце-аккумулятор» целиком своей моделью (декор на ванильной модели не виден в руках и превью):
+    корпус в ванильной текстуре аккумулятора AMUKA, свинцовые клеммы, сверху сердце, корни свисают по бокам.
+    Габариты как у ванильного battery_car.p3d (Blender, x10): X ±0.78, Y ±1.25 (длина), Z 0..1.75."""
+    sc = build_battery_heart_scene(seed)
+    W, L, H = 0.78, 1.25, 1.75
+    px = 1.0 / 1024
+    faces = [
+        # (углы, uv-прямоугольник по атласу, нормаль наружу)
+        ([(W, -L, 0), (W, L, 0), (W, L, H), (W, -L, H)], (20 * px, 690 * px, 445 * px, 925 * px), (1, 0, 0)),       # бок AMUKA
+        ([(-W, L, 0), (-W, -L, 0), (-W, -L, H), (-W, L, H)], (470 * px, 625 * px, 895 * px, 875 * px), (-1, 0, 0)),  # бок Pb
+        ([(-W, -L, 0), (W, -L, 0), (W, -L, H), (-W, -L, H)], (470 * px, 92 * px, 740 * px, 350 * px), (0, -1, 0)),   # торец
+        ([(W, L, 0), (-W, L, 0), (-W, L, H), (W, L, H)], (470 * px, 360 * px, 740 * px, 610 * px), (0, 1, 0)),      # торец
+        ([(-W, -L, H), (W, -L, H), (W, L, H), (-W, L, H)], (785 * px, 165 * px, 985 * px, 295 * px), (0, 0, 1)),    # крышка
+        ([(-W, L, 0), (W, L, 0), (W, -L, 0), (-W, -L, 0)], (25 * px, 110 * px, 440 * px, 350 * px), (0, 0, -1)),    # дно
+    ]
+    meshes = []
+    for corners, rect, nrm in faces:
+        c, tris, uvs = _box_face(corners, rect, np.asarray(nrm, float))
+        meshes.append((c, tris, uvs, "battery"))
+    sc["meshes"] = meshes
+    for sx in (-1, 1):
+        sc["tubes"].append(_lathe_z([(H - 0.02, 0.12), (H + 0.13, 0.12), (H + 0.17, 0.09)], "metal", segs=12, uv_len=0.3,
+                                    x=0.5, y=sx * 0.95))
+    sc["no_geom"] = False
+    sc["item_mass"] = 10.0
+    return sc
+
+
+def _side_walk(rng, lat, z, heading, length, nrm, tang, F, S):
+    """Извилистый путь по боковой грани в координатах (вдоль грани, высота); общий курс heading (−pi/2 — вниз).
+    У края грани разворачивается, у дна останавливается."""
+    step = 0.045
+    out = [(lat, z)]
+    h, curv = heading, 0.0
+    for _ in range(max(3, int(length / step))):
+        curv = curv * 0.85 + rng.normal(0, 0.16)
+        h += curv
+        h -= 0.1 * (h - heading)
+        lat += step * math.cos(h)
+        z += step * math.sin(h)
+        if abs(lat) > S - 0.06:
+            lat = math.copysign(S - 0.06, lat)
+            h = math.pi - h
+            heading = math.pi - heading
+        if z < 0.05:
+            break
+        out.append((lat, z))
+    return np.array(out)
+
+
+def _on_face(walk, R, nrm, tang, F, emb=0.45):
+    """Путь по грани -> 3D: центр трубки над гранью на emb·R (остальное «вросло» в корпус)."""
+    xy = (F + emb * R)[:, None] * nrm[None, :] + walk[:, :1] * tang[None, :]
+    return np.column_stack([xy, walk[:, 1]])
+
+
+def _taper_tip(n, r0, r1, tip=0.006, frac=0.25):
+    """Радиусы: плавно r0 -> r1, последние frac пути сходятся в острие."""
+    t = np.linspace(0, 1, n)
+    r = r0 + (r1 - r0) * t
+    w = smoothstep(1 - frac, 1.0, t)
+    return r * (1 - w) + tip * w
+
+
+def _battery_root(rng, start, a, W, L, H, r0):
+    """Корень от сердца: по крышке к ребру (с вилянием), через скруглённое ребро и извилисто вниз по грани,
+    с 1–2 отростками. Корень наполовину врос в корпус. Возвращает [(путь, радиусы, начало_с_торцом)], сведения
+    о грани (нормаль xy, касательная xy, смещение, полуширина) и точки пути по грани для жил."""
+    d = np.array([math.cos(a), math.sin(a)])
+    tx = W / abs(d[0]) if abs(d[0]) > 1e-6 else 1e9
+    ty = L / abs(d[1]) if abs(d[1]) > 1e-6 else 1e9
+    face_x = tx < ty
+    edge = d * min(tx, ty)
+    nrm = np.array([math.copysign(1, d[0]), 0.0]) if face_x else np.array([0.0, math.copysign(1, d[1])])
+    tang = np.array([-nrm[1], nrm[0]])
+    F, S = (W, L) if face_x else (L, W)
+    r_edge = r0 * 0.75
+    # крышка: от сердца к ребру, виляет поперёк
+    s0 = np.asarray(start[:2], float)
+    e0 = edge - nrm * 0.07
+    t = np.linspace(0, 1, 14)
+    side = np.array([-d[1], d[0]])
+    wig = 0.07 * np.sin(t * math.pi * rng.uniform(1.0, 2.0) + rng.uniform(0, 6.28)) * np.sin(t * math.pi)
+    lid_xy = s0[None, :] + (e0 - s0)[None, :] * t[:, None] + side[None, :] * wig[:, None]
+    lid_r = np.linspace(r0, r_edge, len(t))
+    lid = np.column_stack([lid_xy, H + 0.45 * lid_r])
+    lid[0, 2] = start[2]
+    # ребро: скругление на 45°
+    lat0 = float(np.dot(lid_xy[-1], tang))
+    corner = np.array([[*(nrm * (F + 0.32 * r_edge) + tang * lat0), H + 0.32 * r_edge]])
+    # грань: извилисто вниз
+    walk = _side_walk(rng, lat0, H - 0.06, -math.pi / 2 + rng.uniform(-0.5, 0.5), rng.uniform(0.9, 1.7), nrm, tang, F, S)
+    side_r = _taper_tip(len(walk), r_edge * 0.95, r_edge * 0.45)
+    side_p = _on_face(walk, side_r, nrm, tang, F)
+    pts = np.vstack([lid, corner, side_p])
+    rr = np.concatenate([lid_r, [r_edge], side_r])
+    P, R, _ = resample(pts, rr, DS)
+    out = [(P, R, True)]
+    # отростки от корня на грани
+    for b in range(int(rng.integers(1, 3))):
+        if len(walk) < 6:
+            break
+        k = int(rng.integers(2, max(3, len(walk) * 2 // 3)))
+        hb = -math.pi / 2 + rng.choice([-1, 1]) * rng.uniform(0.5, 1.0)
+        wb = _side_walk(rng, float(walk[k, 0]), float(walk[k, 1]), hb, rng.uniform(0.35, 0.8), nrm, tang, F, S)
+        if len(wb) < 4:
+            continue
+        rb = _taper_tip(len(wb), side_r[k] * 0.7, side_r[k] * 0.35, frac=0.35)
+        Pb, Rb, _ = resample(_on_face(wb, rb, nrm, tang, F), rb, DS)
+        out.append((Pb, Rb, False))
+    return out, (nrm, tang, F, S), walk
+def _face_vein(rng, nrm, tang, F, S, lat0, z0, H, steps):
+    """Тонкая жила, ползущая по боковой грани корпуса (наполовину утоплена в неё), в основном вниз и вбок."""
+    lat, z = lat0, z0
+    ang = rng.uniform(-math.pi + 0.4, -0.4)
+    out = []
+    for _ in range(steps):
+        out.append([*(nrm * (F + 0.006) + tang * lat), z])
+        ang += rng.normal(0, 0.45)
+        lat = float(np.clip(lat + 0.06 * math.cos(ang), -S + 0.04, S - 0.04))
+        z = float(np.clip(z + 0.06 * math.sin(ang) - 0.012, 0.06, H - 0.05))
+    return np.array(out)
+
+
+def build_battery_heart_scene(seed):
+    """Сердце на аккумуляторе (габариты как у dz/vehicles/parts/battery_car.p3d): крупное сердце наполовину вросло
+    в крышку, тёмные бугристые корни (светится только жила вдоль них) расползаются вразнобой, переваливают
+    через рёбра и идут по бокам с уводом, по корпусу и крышке ползут тонкие светящиеся жилы, от клемм к сердцу
+    — жилы-провода. Оси Blender: X=X, Y=Z DayZ, Z=Y DayZ. Масштаб x10."""
+    rng = np.random.default_rng(seed)
+    W, L, H = 0.78, 1.26, 1.75
+    tubes = []
+    heart_c = np.array([-0.08, -0.12, H + 0.12])
+    big = lambda d: (heart_surface(d) - HEART_C) * 0.95 + heart_c
+    # направления корней: вразнобой, но не через клеммы (x 0.5, y ±0.95)
+    term = [math.atan2(0.95 - heart_c[1], 0.5 - heart_c[0]), math.atan2(-0.95 - heart_c[1], 0.5 - heart_c[0])]
+    angs = []
+    for a in np.linspace(0, 2 * math.pi, 9, endpoint=False) + rng.uniform(-0.3, 0.3, 9) + 0.2:
+        if min(abs((a - t + math.pi) % (2 * math.pi) - math.pi) for t in term) > 0.3:
+            angs.append(a)
+    for k, a in enumerate(angs):
+        dirv = np.array([math.cos(a), math.sin(a), -0.45])
+        start = big((dirv / np.linalg.norm(dirv))[None, :])[0] * 0.9 + heart_c * 0.1
+        r0 = rng.uniform(0.07, 0.1)
+        parts, (nrm, tang, F, S), walk = _battery_root(rng, start, a, W, L, H, r0)
+        for n_, (P, R, main) in enumerate(parts):
+            tubes.append(Tube(P, R, "root", mat="bark", lump=0.2, lump_freq=7, seed=seed * 10 + k * 5 + n_,
+                              cap_start=main))
+            v = vein_along(P, R, rng, 0.0, 0.018)
+            if v:
+                tubes.append(Tube(v[0], v[1], "vein", seed=seed * 10 + 300 + k * 5 + n_))
+        # от корня по грани расходятся тонкие светящиеся жилы
+        for b in range(int(rng.integers(1, 3)) if len(walk) > 4 else 0):
+            i0 = int(rng.integers(1, len(walk)))
+            q = _face_vein(rng, nrm, tang, F, S, float(walk[i0, 0]), float(walk[i0, 1]), H, int(rng.integers(7, 13)))
+            tubes.append(Tube(q, np.linspace(0.016, 0.006, len(q)), "vein", lump=0.1, lump_freq=14,
+                              seed=seed * 10 + 80 + k * 3 + b))
+    # тонкие жилы по крышке от сердца
+    for b in range(5):
+        a = rng.uniform(0, 2 * math.pi)
+        p0 = heart_c[:2] + 0.5 * np.array([math.cos(a), math.sin(a)])
+        pts = [p0]
+        for _ in range(int(rng.integers(6, 11))):
+            a += rng.normal(0, 0.4)
+            nq = pts[-1] + 0.07 * np.array([math.cos(a), math.sin(a)])
+            nq = np.clip(nq, [-W + 0.05, -L + 0.05], [W - 0.05, L - 0.05])
+            pts.append(nq)
+        pts = np.column_stack([np.array(pts), np.full(len(pts), H + 0.006)])
+        tubes.append(Tube(pts, np.linspace(0.016, 0.006, len(pts)), "vein", lump=0.1, lump_freq=14, seed=seed * 10 + 120 + b))
+    # жилы-провода от клемм к сердцу
+    for k, (x0, y0) in enumerate(((0.5, 0.95), (0.5, -0.95))):
+        pts = np.array([[x0, y0, H + 0.17], [x0 * 0.9, y0 * 0.75, H + 0.42], [x0 * 0.5, y0 * 0.35, H + 0.55],
+                        [heart_c[0] + 0.2, heart_c[1] + y0 * 0.15, H + 0.42]])
+        tubes.append(Tube(pts, np.full(4, 0.035), "vein", lump=0.1, lump_freq=10, seed=seed * 10 + 60 + k))
+    eye = big(np.array([[0.0, 0.0, 1.0]]))[0]
+    sc = _item(tubes, blobs=[big], bulbs=[(eye - np.array([0, 0, 0.06]), 0.13)], mass=0.01, center=(0, 0, 0))
+    sc["no_geom"] = True
+    return sc
 def build_hang_scene(seed, kind):
     """Свисающие щупальца: горизонтальный корень-«якорь» и висящие отростки с острыми концами.
     Начало координат — середина якоря (точка крепления); ставятся вручную на мосты, скалы, провода."""
@@ -875,11 +1611,15 @@ class MeshBuilder:
 
 
 def tube_mesh(tube, step, segs, uv_len):
-    P, R, S = resample(tube.pts, tube.radii, step)
+    if tube.raw:
+        P, R = tube.pts, tube.radii
+        S = np.concatenate([[0.0], np.cumsum(np.linalg.norm(np.diff(P, axis=0), axis=1))])
+    else:
+        P, R, S = resample(tube.pts, tube.radii, step)
     T, N, B = frames(P)
     n = len(P)
-    ang = 2 * math.pi * np.arange(segs) / segs
-    offs = np.cos(ang)[None, :, None] * N[:, None, :] + np.sin(ang)[None, :, None] * B[:, None, :]
+    ang = tube.ang0 + 2 * math.pi * np.arange(segs) / segs
+    offs = np.cos(ang)[None, :, None] * N[:, None, :] + tube.aspect * np.sin(ang)[None, :, None] * B[:, None, :]
     ring = P[:, None, :] + R[:, None, None] * offs
     if tube.lump > 0:
         flat = ring.reshape(-1, 3)
@@ -904,7 +1644,7 @@ def tube_mesh(tube, step, segs, uv_len):
     base = n * segs
     extra = []
     if tube.cap_end:
-        tip = P[-1] + T[-1] * R[-1] * 0.8
+        tip = P[-1] + T[-1] * R[-1] * (0.0 if tube.cap_flat else 0.8)
         ti = base + len(extra)
         extra.append(tip)
         o = (n - 1) * segs
@@ -912,7 +1652,7 @@ def tube_mesh(tube, step, segs, uv_len):
             tris.append((o + j, o + (j + 1) % segs, ti))
             uvs.append(((uj[j], vi[-1]), (uj[j + 1], vi[-1]), ((uj[j] + uj[j + 1]) / 2, vi[-1] + 0.05)))
     if tube.cap_start:
-        tip = P[0] - T[0] * R[0] * 0.8
+        tip = P[0] - T[0] * R[0] * (0.0 if tube.cap_flat else 0.8)
         ti = base + len(extra)
         extra.append(tip)
         for j in range(segs):
@@ -963,13 +1703,17 @@ def mesh_lod(scene, prm):
     mb = MeshBuilder()
     for tb in scene["tubes"]:
         step, segs = prm[tb.kind]
-        uv_len = 0.6 if tb.kind == "root" else 0.25
+        if tb.segs:
+            segs = tb.segs if tb.fixed_segs else max(4, int(round(tb.segs * segs / LOD_PARAMS[0][tb.kind][1])))
+        uv_len = tb.uv_len or (0.6 if tb.kind == "root" else 0.25)
         P, tris, uvs = tube_mesh(tb, step, segs, uv_len)
-        mb.add(P, tris, uvs, "crust" if tb.kind == "root" else "vein")
+        mb.add(P, tris, uvs, tb.mat or ("crust" if tb.kind == "root" else "vein"))
     for center, radius in scene.get("bulbs", []):
         cu, cv = prm["core"]
         P, tris, uvs = sphere_mesh(cu, cv, lambda d, c=center, rr=radius: c + d * rr * (1 + 0.12 * fbm3(d * 3 + rr * 50, 2, 77))[:, None], (1, 1))
         mb.add(P, tris, uvs, "vein")
+    for P, tris, uvs, mat in scene.get("meshes", []):
+        mb.add(P, tris, uvs, mat)
     for surf in scene.get("blobs", []):
         nu, nv = prm["heart"]
         P, tris, uvs = sphere_mesh(nu, nv, surf, (3, 2))
@@ -1132,11 +1876,17 @@ def build_p3d(scene, out_path):
     mass = 30.0
     if scene.get("scale"):
         mass = scene.get("item_mass", 0.9) / 8     # предмет: масса в кг на 8 точек ящика
-    model.lods.append(box_lod(1e13, lo, hi, mass_per_point=mass))
-    model.lods.append(mem)
-    model.lods.append(box_lod(6e15, lo, hi))
-    if scene["heart"] or scene.get("scale"):
-        model.lods.append(box_lod(7e15, lo, hi))
+    if scene.get("no_geom"):
+        # декор на чужом предмете: коллизии по сути нет (кубик 2 мм в начале координат), но Geometry LOD нужен
+        # ради autocenter = 0 — без него движок сдвигает модель к центру габаритов (корни уезжали с рукояти)
+        model.lods.append(box_lod(1e13, (-0.001, -0.001, -0.001), (0.001, 0.001, 0.001), mass_per_point=0.001))
+        model.lods.append(mem)
+    else:
+        model.lods.append(box_lod(1e13, lo, hi, mass_per_point=mass))
+        model.lods.append(mem)
+        model.lods.append(box_lod(6e15, lo, hi))
+        if scene["heart"] or scene.get("scale"):
+            model.lods.append(box_lod(7e15, lo, hi))
     py3d.blender_to_dayz(model)
     model.save(out_path, verify=True)
     findings = [f for f in model.validate() if getattr(f, "severity", "") in ("ERROR", "WARN")]
@@ -1346,17 +2096,18 @@ VARIANTS = [
     # предмет «Корень Изнанки» (иногда выпадает из зомби Изнанки)
     ("vb_rift_root_piece", "rootpiece", 902),
     # предметы-материалы: «Споры Изнанки» (собирают у сердца) и «Жила Изнанки» (разделывают корень)
-    ("vb_rift_spores_item", "spores", 903),
-    ("vb_rift_vein_item", "veincoil", 904),
+    ("vb_rift_spores_item", "sporesack", 903),
+    ("vb_rift_vein_item", "veinskein", 904),
     # предметы-изделия: «Слушающий корень», «Сердце-аккумулятор», «Споровая ловушка», «Топливная капсула»,
     # «Фонарь-сердце», «Живой жгут», «Нить Изнанки»
     ("vb_rift_listen_root", "listenroot", 905),
-    ("vb_rift_heart_battery", "heartbattery", 906),
-    ("vb_rift_spore_trap", "sporetrap", 907),
-    ("vb_rift_fuel_capsule", "fuelcapsule", 908),
+    ("vb_rift_spore_trap", "trapgrenade", 907),
     ("vb_rift_lantern", "lantern", 909),
-    ("vb_rift_tourniquet", "veincoil:0.12", 910),
-    ("vb_rift_thread", "veincoil:0.07", 911),
+    ("vb_rift_tourniquet", "strap", 910),
+    ("vb_rift_thread", "spool", 911),
+    ("vb_rift_blood_ampoule", "ampoule", 912),
+    ("vb_rift_blade", "bladefull", 913),
+    ("vb_rift_heart_battery", "batteryfull", 914),
 ]
 
 
@@ -1383,6 +2134,24 @@ def variant_scene(kind, seed, name=""):
         sc = build_vein_coil_scene(seed, float(kind.split(":")[1]))
         sc["item_mass"] = 0.04
         return sc
+    if kind == "sporesack":
+        return build_spores_sack_scene(seed)
+    if kind == "veinskein":
+        return build_vein_skein_scene(seed)
+    if kind == "heartbattery2":
+        return build_heart_battery2_scene(seed)
+    if kind == "trapgrenade":
+        return build_trap_grenade_scene(seed)
+    if kind == "strap":
+        return build_strap_scene(seed)
+    if kind == "spool":
+        return build_spool_scene(seed)
+    if kind == "ampoule":
+        return build_ampoule_scene(seed)
+    if kind == "bladefull":
+        return build_blade_full_scene(seed)
+    if kind == "batteryfull":
+        return build_battery_full_scene(seed)
     if kind == "listenroot":
         return build_listen_root_scene(seed)
     if kind == "heartbattery":
@@ -1429,6 +2198,11 @@ def main():
             if "LOWCONF" not in f.code and "POS_CENTER" not in f.code:
                 print("   validate:", f)
     write_model_cfg()
+    if "--props-tex" in sys.argv:
+        pngs = make_prop_textures(png_dir)
+        to_paa(pngs)
+        write_prop_materials()
+        print("текстуры предметов:", len(pngs))
     if only:
         print("готово (только модели):", DATA_DIR)
         return

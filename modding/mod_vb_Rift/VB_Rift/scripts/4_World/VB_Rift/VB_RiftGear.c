@@ -25,6 +25,7 @@ class VB_RiftGear
 			hit++;
 		}
 		VB_BurstFxServer(pos);
+		Print("[VB_Rift] хлопок спор в " + pos.ToString() + ": задето зомби " + hit.ToString());
 		return hit;
 	}
 
@@ -203,6 +204,10 @@ class VB_ActionListenRoot : ActionSingleUseBase
 		rpc.Write(pos);
 		rpc.Write(frantic);
 		rpc.Send(player, VB_RiftGear.RPC_LISTEN, true, player.GetIdentity());
+		string res = "сердец в 3 км нет";
+		if (heart)
+			res = "сердце в " + Math.Round(vector.Distance(player.GetPosition(), pos)).ToString() + " м";
+		Print("[VB_Rift] " + VB_RiftItems.VB_Who(player) + " прислушался: " + res + ", зарядов " + root.GetQuantity().ToString());
 	}
 }
 
@@ -556,6 +561,7 @@ class VB_RiftLantern extends Inventory_Base
 			return;
 
 		vector pos = VB_RiftItems.VB_WorldPos(this);
+		Print("[VB_Rift] фонарь-сердце зовёт зомби Изнанки к " + pos.ToString());
 		VB_RiftHorde.VB_Spawn(pos, 1, 45, 70);
 		VB_RiftItems.VB_NoiseAt(pos, CALL_NOISE, 20);
 	}
@@ -748,6 +754,7 @@ class VB_RiftBlood extends Inventory_Base
 		player.AddHealth("", "Blood", BLOOD_ADD);
 		player.AddHealth("", "Health", HEALTH_ADD);
 		player.VB_StartRiftBloodServer();
+		Print("[VB_Rift] " + VB_RiftItems.VB_Who(player) + ": укол Крови Изнанки");
 	}
 }
 
@@ -943,6 +950,7 @@ class VB_ActionPourFuelCapsule : ActionContinuousBase
 
 		car.Fill(CarFluid.FUEL, VB_RiftFuelCapsule.FUEL_LITERS);
 		car.VB_StartRiftFuelServer();
+		Print("[VB_Rift] " + VB_RiftItems.VB_Who(action_data.m_Player) + " залил капсулу в " + car.GetType());
 		VB_RiftItems.VB_ReplaceServer(action_data.m_MainItem, "");
 	}
 }
@@ -1002,6 +1010,7 @@ modded class CarScript
 			return;
 
 		m_VB_LastCallMs = now;
+		Print("[VB_Rift] капсула: машина " + GetType() + " стоит, лезут зомби Изнанки");
 		VB_RiftHorde.VB_Spawn(GetPosition(), Math.RandomIntInclusive(2, 3), 30, 50);
 	}
 
@@ -1104,9 +1113,12 @@ class VB_RiftBlade extends FangeKnife
 	override void EEDelete(EntityAI parent)
 	{
 		if (g_Game)
+		{
 			g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_HungerServer);
+		}
 		super.EEDelete(parent);
 	}
+
 
 	override void OnStoreSave(ParamsWriteContext ctx)
 	{
@@ -1132,6 +1144,7 @@ class VB_RiftBlade extends FangeKnife
 		AddHealth("", "", -EXTRA_WEAR);
 		m_VB_LastFed = VB_RiftItems.VB_NowUtc();
 		m_VB_Charge++;
+		Print("[VB_Rift] " + VB_RiftItems.VB_Who(owner) + ": голодный клинок насытился, заряд " + m_VB_Charge.ToString());
 		if (m_VB_Charge >= CHARGE_MAX)
 		{
 			m_VB_Charge = 0;
@@ -1194,6 +1207,7 @@ class VB_RiftTourniquet extends Inventory_Base
 
 		bleed.RemoveMostSignificantBleedingSource();
 		player.AddHealth("", "Blood", -BLOOD_COST);
+		Print("[VB_Rift] " + VB_RiftItems.VB_Who(player) + ": живой жгут закрыл кровотечение");
 		player.MessageStatus("Живой жгут сам стянул рану.");
 		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_CheckServer);
 		VB_RiftItems.VB_ReplaceServer(this, "");
@@ -1277,6 +1291,7 @@ modded class Clothing
 			return;
 
 		m_VB_ThreadLeft = VB_THREAD_MINUTES;
+		Print("[VB_Rift] нить Изнанки пришита к " + GetType());
 		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_ThreadTickServer);
 		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_ThreadTickServer, 60000, true);
 	}

@@ -148,6 +148,8 @@ class VB_ActionBreakRiftRoot : ActionContinuousBase
 	static const float ROOT_DIST = 3.0;		// м от игрока до места, где корень выходит из земли
 	static const float TOOL_DAMAGE = 4.0;
 	static const string ROOT_TYPE = "VB_RiftRootPiece";
+	static const string NOISE = "VB_RiftChunkNoise";	// тихий треск: зомби рядом проверят, деревня не сбегается
+	static const float NOISE_TIME = 6.0;
 
 	void VB_ActionBreakRiftRoot()
 	{
@@ -214,7 +216,7 @@ class VB_ActionBreakRiftRoot : ActionContinuousBase
 			return;
 
 		root.VB_BreakServer();
-		VB_RiftHorde.VB_CallNoise(root.GetPosition());
+		VB_RiftItems.VB_NoiseAt(root.GetPosition(), NOISE, NOISE_TIME);
 		VB_RiftItems.VB_GiveServer(action_data.m_Player, ROOT_TYPE);
 		if (action_data.m_MainItem)
 			action_data.m_MainItem.AddHealth("", "", -TOOL_DAMAGE);

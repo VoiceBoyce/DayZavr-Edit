@@ -41,8 +41,18 @@ class VB_RiftItems
 		if (!item || item.IsSetForDeletion())
 			return;
 
-		ReplaceItemWithNewLambdaBase lambda = new ReplaceItemWithNewLambdaBase(item, newType);
+		// После удачной ванильной замены старый объект ещё какое-то время живёт в скрипте, но уже без места
+		// в инвентаре: повторная замена такого даёт «no inventory location», а создание нового — дубликат
+		// (проверено на стенде 11-12, E52). Такой объект только удаляем.
+		InventoryLocation loc = new InventoryLocation();
+		if (!item.GetInventory().GetCurrentInventoryLocation(loc))
+		{
+			item.Delete();
+			return;
+		}
+
 		PlayerBase player = PlayerBase.Cast(item.GetHierarchyRootPlayer());
+		ReplaceItemWithNewLambdaBase lambda = new ReplaceItemWithNewLambdaBase(item, newType);
 		if (player)
 			player.ServerReplaceItemWithNew(lambda);
 		else
@@ -78,9 +88,22 @@ class VB_RiftItems
 	static EntityAI VB_GiveServer(PlayerBase player, string type)
 	{
 		EntityAI item = player.GetHumanInventory().CreateInInventory(type);
+		string where = "в инвентарь";
 		if (!item)
+		{
 			item = EntityAI.Cast(g_Game.CreateObjectEx(type, player.GetPosition(), ECE_PLACE_ON_SURFACE));
+			where = "на землю";
+		}
+		Print("[VB_Rift] " + VB_Who(player) + " получил " + type + " " + where);
 		return item;
+	}
+
+	// для логов админа: ник и SteamID
+	static string VB_Who(PlayerBase player)
+	{
+		if (!player || !player.GetIdentity())
+			return "?";
+		return player.GetIdentity().GetName() + " (" + player.GetIdentity().GetPlainId() + ")";
 	}
 }
 
@@ -165,6 +188,15 @@ class VB_RiftHeartChunk extends Inventory_Base
 		if (m_VB_Stamp == VB_RiftItems.VB_Session() || IsSetForDeletion())
 			return;
 
+		// уже заменено (старый объект доживает без места в инвентаре, E52) — только убрать, без лога
+		InventoryLocation loc = new InventoryLocation();
+		if (!GetInventory().GetCurrentInventoryLocation(loc))
+		{
+			Delete();
+			return;
+		}
+
+		Print("[VB_Rift] Сердце Изнанки протухло (" + VB_RiftItems.VB_WorldPos(this).ToString() + ")");
 		VB_RiftItems.VB_ReplaceServer(this, DEAD_TYPE);
 		// при удачной замене старое сердце удалится и EEDelete снимет повтор
 		VB_ScheduleRot(ROT_RETRY_MS);

@@ -80,10 +80,10 @@ def rift_items():
                     "Закручиваешь корни в раструб, стягиваешь жилами и вплетаешь конденсатор. Ночью в нём слышно "
                     "ближайшее живое сердце Изнанки. 10 зарядов, подпитывается у живого сердца.", 10))
     R.append(recipe(902, "Живой жгут", "VB_RiftTourniquet", [mat(VEIN, 2), comp("Rag", 2)],
-                    "Обматываешь жилы тряпкой. Жгут сам стянет рану, когда пойдёт кровь, и немного её выпьет.",
+                    "Сплетаешь жилы в ремень, обматываешь тряпкой. Жгут сам стянет рану, когда пойдёт кровь, и немного её выпьет.",
                     5, free=1))
     R.append(recipe(903, "Нить Изнанки", "VB_RiftThread", [mat(VEIN, 2)] + SEW_TOOLS,
-                    "Скручиваешь жилы в тонкую живую нить. Пришитая к одежде, она часа три сама затягивает прорехи.",
+                    "Скручиваешь жилы в тонкую живую нить и наматываешь на катушку. Пришитая к одежде, она часа три сама затягивает прорехи.",
                     6, bench=SEWING))
     R.append(recipe(904, "Споровая ловушка", "VB_RiftSporeTrap", [mat(SPORES), comp("Rag"), comp("EFT_SiliconTube")],
                     "Заворачиваешь споры в тряпку и вставляешь трубку-запал. Раскрой и брось: облако тянет зомби "
@@ -93,11 +93,11 @@ def rift_items():
                     "Сажаешь споры в бутылку, оплетаешь жилой и проводами. Светит красным часов шесть, "
                     "бьётся чаще рядом с зомби, а ночью на свет приходят зомби Изнанки.", 8))
     R.append(recipe(906, "Кровь Изнанки", "VB_RiftBlood", [mat(SPORES), mat(VEIN, 2), comp("WaterBottle")],
-                    "Выжимаешь жилы в воду и растворяешь в ней споры. Укол быстро возвращает кровь, но минут "
+                    "Выжимаешь жилы в воду, растворяешь споры и запаиваешь в ампулу. Укол быстро возвращает кровь, но минут "
                     "десять трясутся руки и колотится сердце, а зомби вокруг светятся в темноте.", 8))
-    R.append(recipe(907, "Топливная капсула", "VB_RiftFuelCapsule",
+    R.append(recipe(907, "Канистра Изнанки", "VB_RiftFuelCapsule",
                     [mat(SPORES), comp("CanisterGasoline"), comp("EFT_Hose")],
-                    "Сбраживаешь споры в канистре до горючего сока и запечатываешь в стручок. Двадцать литров в бак, "
+                    "Сбраживаешь споры в канистре до горючего сока, канистра прорастает жилами. Двадцать литров в бак, "
                     "но полчаса за машиной тянется красный шлейф.", 8))
     R.append(recipe(908, "Сердце-аккумулятор", "VB_RiftHeartBattery",
                     [mat(HEART), mat(VEIN, 3), comp("EFT_Carbattery"), comp("EFT_Wires"),
@@ -195,11 +195,11 @@ def main():
 
     cfg16 = json.load(io.open(os.path.join(SRV16, "CraftConfig.json"), encoding="utf-8"))
     cat16 = json.load(io.open(os.path.join(SRV16, "CraftCategories.json"), encoding="utf-8"))
+    # повторный запуск: свои прошлые рецепты и категории убираем, остальное не трогаем
     new_ids = {r["RecipeId"] for r in new}
-    clash = [r["RecipeId"] for r in cfg16 if r["RecipeId"] in new_ids]
-    assert not clash, "ID уже заняты на 16: %s" % clash
-    names16 = {c["Name"] for c in cat16}
-    assert not any(c["Name"] in names16 for c in cats), "категория уже есть на 16"
+    cfg16 = [r for r in cfg16 if r["RecipeId"] not in new_ids]
+    cat_names = {c["Name"] for c in cats}
+    cat16 = [c for c in cat16 if c["Name"] not in cat_names]
 
     dump(new, os.path.join(HERE, "rift_recipes_16.json"))
     dump(cats, os.path.join(HERE, "rift_categories_16.json"))

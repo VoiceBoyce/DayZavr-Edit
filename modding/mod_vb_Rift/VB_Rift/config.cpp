@@ -438,7 +438,7 @@ class CfgVehicles
 		model = "\VB_Rift\data\vb_rift_root_piece.p3d";
 		weight = 300;
 		itemSize[] = {1, 3};
-		rotationFlags = 17;
+		rotationFlags = 2;
 	};
 
 	// Выпадает тому, кто вырезал сердце (действие «Вырезать сердце» ножом/топором). Пока его несут — бьётся:
@@ -451,7 +451,7 @@ class CfgVehicles
 		model = "\VB_Rift\data\vb_rift_heart_chunk.p3d";
 		weight = 900;
 		itemSize[] = {2, 2};
-		rotationFlags = 17;
+		rotationFlags = 2;
 	};
 
 	// «Сердце Изнанки», пролежавшее рестарт: живое сердце после рестарта заменяется этим (VB_RiftItems.c).
@@ -464,7 +464,7 @@ class CfgVehicles
 		model = "\VB_Rift\data\vb_rift_heart_chunk.p3d";
 		weight = 700;
 		itemSize[] = {2, 2};
-		rotationFlags = 17;
+		rotationFlags = 2;
 		hiddenSelections[] = {"crust", "veins"};
 		hiddenSelectionsTextures[] = {"\VB_Rift\data\vb_rift_crust_day_co.paa", "\VB_Rift\data\vb_rift_vein_day_co.paa"};
 		hiddenSelectionsMaterials[] = {"\VB_Rift\data\vb_rift_crust_day.rvmat", "\VB_Rift\data\vb_rift_vein_day.rvmat"};
@@ -476,11 +476,11 @@ class CfgVehicles
 	{
 		scope = 2;
 		displayName = "Споры Изнанки";
-		descriptionShort = "Тугой мешочек светящихся спор, собранных у живого сердца Изнанки. Тёплый и чуть пульсирует.";
+		descriptionShort = "Тряпичный мешочек, завязанный жилой. Сквозь ткань пробиваются светящиеся споры, собранные у живого сердца Изнанки. Через сутки выдыхаются.";
 		model = "\VB_Rift\data\vb_rift_spores_item.p3d";
 		weight = 80;
 		itemSize[] = {1, 1};
-		rotationFlags = 17;
+		rotationFlags = 2;
 	};
 
 	// «Жила Изнанки»: разделывают «Корень Изнанки» в крафте (1 корень -> 2 жилы). Материал для крафта.
@@ -488,11 +488,11 @@ class CfgVehicles
 	{
 		scope = 2;
 		displayName = "Жила Изнанки";
-		descriptionShort = "Смотанная светящаяся жила, вытянутая из корня Изнанки. Прочная, как струна, и тёплая.";
+		descriptionShort = "Светящаяся жила, вытянутая из корня Изнанки и намотанная на палочку. Прочная, как струна, и тёплая.";
 		model = "\VB_Rift\data\vb_rift_vein_item.p3d";
 		weight = 50;
-		itemSize[] = {1, 1};
-		rotationFlags = 17;
+		itemSize[] = {1, 2};
+		rotationFlags = 2;
 	};
 
 	// ---------------- изделия Изнанки (скрипты в VB_RiftGear.c) ----------------
@@ -507,7 +507,7 @@ class CfgVehicles
 		model = "\VB_Rift\data\vb_rift_listen_root.p3d";
 		weight = 250;
 		itemSize[] = {1, 2};
-		rotationFlags = 17;
+		rotationFlags = 2;
 		quantityBar = 1;
 		varQuantityInit = 10;
 		varQuantityMin = 0;
@@ -515,17 +515,16 @@ class CfgVehicles
 		varQuantityDestroyOnMin = 0;
 	};
 
-	// «Сердце-аккумулятор»: ставится вместо автомобильного аккумулятора. Ночью сам заряжается, днём садится.
+	// «Сердце-аккумулятор»: своя модель в ванильной текстуре аккумулятора, сверху сердце и корни (видны везде, в руках и превью).
+	// Ставится вместо автомобильного аккумулятора. Ночью сам заряжается, днём садится.
 	// В салоне стучит, когда машина рядом с живым гнездом (500 м).
 	class VB_RiftHeartBattery: CarBattery
 	{
 		scope = 2;
 		displayName = "Сердце-аккумулятор";
-		descriptionShort = "Сердце Изнанки, оплетённое жилами и подключённое к клеммам. Ночью само набирает заряд, днём слабеет. Рядом с живым гнездом бьётся так, что слышно в салоне.";
-		model = "\VB_Rift\data\vb_rift_heart_battery.p3d";
+		descriptionShort = "Корпус аккумулятора, из которого проросло сердце Изнанки: корни оплели клеммы. Ночью само набирает заряд, днём слабеет. Рядом с живым гнездом бьётся так, что слышно в салоне.";
 		weight = 3000;
-		itemSize[] = {3, 3};
-		rotationFlags = 17;
+		model = "\VB_Rift\data\vb_rift_heart_battery.p3d";
 	};
 
 	// «Споровая ловушка»: раскрыть и бросить. Облако тянет зомби, через 10 с лопается и бьёт зомби рядом.
@@ -533,11 +532,11 @@ class CfgVehicles
 	{
 		scope = 2;
 		displayName = "Споровая ловушка";
-		descriptionShort = "Мешочек спор с отростком-запалом. Раскрой и брось: облако спор тянет зомби, а через десять секунд лопается и бьёт тех, кто подошёл. Людей не трогает.";
+		descriptionShort = "Мешочек спор, перетянутый жилами, с трубкой-запалом и кольцом. Раскрой и брось: облако спор тянет зомби, а через десять секунд лопается и бьёт тех, кто подошёл. Людей не трогает.";
 		model = "\VB_Rift\data\vb_rift_spore_trap.p3d";
 		weight = 300;
 		itemSize[] = {2, 2};
-		rotationFlags = 17;
+		rotationFlags = 2;
 	};
 
 	// «Фонарь-сердце»: красный свет без батареек, пульс чаще, когда рядом зомби. Количество = минуты спор.
@@ -549,7 +548,7 @@ class CfgVehicles
 		model = "\VB_Rift\data\vb_rift_lantern.p3d";
 		weight = 600;
 		itemSize[] = {2, 3};
-		rotationFlags = 17;
+		rotationFlags = 2;
 		quantityBar = 1;
 		varQuantityInit = 360;
 		varQuantityMin = 0;
@@ -557,30 +556,30 @@ class CfgVehicles
 		varQuantityDestroyOnMin = 0;
 	};
 
-	// «Кровь Изнанки»: укол — быстро кровь и здоровье; 10 минут зомби рядом светятся, руки дрожат, в глазах красное.
+	// «Кровь Изнанки» (ампула): укол — быстро кровь и здоровье; 10 минут зомби рядом светятся, руки дрожат, в глазах красное.
 	class VB_RiftBlood: Inventory_Base
 	{
 		scope = 2;
 		displayName = "Кровь Изнанки";
-		descriptionShort = "Шприц с густой тёмно-красной жидкостью. Быстро возвращает кровь и силы. Минут десять после укола зомби вокруг светятся в темноте, а сердце колотится так, что дрожат руки.";
-		model = "\dz\gear\medical\Epinephrine.p3d";
+		descriptionShort = "Стеклянная ампула с густой светящейся кровью, оплетённая жилами. Укол быстро возвращает кровь и силы. Минут десять после него зомби вокруг светятся в темноте, а сердце колотится так, что дрожат руки.";
+		model = "\VB_Rift\data\vb_rift_blood_ampoule.p3d";
 		weight = 60;
-		itemSize[] = {1, 2};
+		itemSize[] = {1, 1};
 		rotationFlags = 17;
-		hiddenSelections[] = {"zbytek"};
-		hiddenSelectionsTextures[] = {"\VB_Rift\data\retex\vb_rift_blood_co.paa"};
 	};
 
-	// «Топливная капсула»: залить в бак (+20 л). Полчаса за машиной красный шлейф, на остановках сползаются зомби Изнанки.
+	// «Канистра Изнанки» (класс VB_RiftFuelCapsule): залить в бак (+20 л). Полчаса за машиной красный шлейф, на остановках сползаются зомби Изнанки.
 	class VB_RiftFuelCapsule: Inventory_Base
 	{
 		scope = 2;
-		displayName = "Топливная капсула";
-		descriptionShort = "Стручок Изнанки, налитый горючим соком. Двадцать литров в бак. Полчаса за машиной тянется красный шлейф, и там, где остановишься, из земли лезут зомби Изнанки.";
-		model = "\VB_Rift\data\vb_rift_fuel_capsule.p3d";
-		weight = 2000;
-		itemSize[] = {2, 3};
-		rotationFlags = 17;
+		displayName = "Канистра Изнанки";
+		descriptionShort = "Канистра, проросшая жилами Изнанки и налитая горючим соком. Двадцать литров в бак. Полчаса за машиной тянется красный шлейф, и там, где остановишься, из земли лезут зомби Изнанки.";
+		model = "\dz\vehicles\parts\JerryCan.p3d";
+		weight = 5000;
+		itemSize[] = {4, 5};
+		hiddenSelections[] = {"zbytek"};
+		hiddenSelectionsTextures[] = {"\VB_Rift\data\retex\vb_rift_canister_co.paa"};
+		hiddenSelectionsMaterials[] = {"\VB_Rift\data\retex\vb_rift_canister.rvmat"};
 	};
 
 	// «Голодный клинок»: убийство зомби возвращает кровь, полный заряд — облако спор вокруг. Час без убийств тянет кровь.
@@ -589,7 +588,8 @@ class CfgVehicles
 		scope = 2;
 		displayName = "Голодный клинок";
 		descriptionShort = "Нож, проросший жилами Изнанки. Каждое убийство зомби возвращает владельцу немного крови, а насытившись, клинок выпускает облако спор. Если долго не кормить, начинает пить кровь хозяина.";
-		hiddenSelectionsTextures[] = {"\VB_Rift\data\retex\vb_rift_blade_co.paa", "\VB_Rift\data\retex\vb_rift_blade_co.paa"};
+		model = "\VB_Rift\data\vb_rift_blade.p3d";
+		hiddenSelections[] = {};
 	};
 
 	// «Плащ-кокон»: тёплый дождевик; ночью присел и замер — обычные зомби теряют тебя (зомби Изнанки — нет).
@@ -601,6 +601,7 @@ class CfgVehicles
 		heatIsolation = 0.45;
 		visibilityModifier = 0.7;
 		hiddenSelectionsTextures[] = {"\VB_Rift\data\retex\vb_rift_cloak_g_co.paa", "\VB_Rift\data\retex\vb_rift_cloak_co.paa", "\VB_Rift\data\retex\vb_rift_cloak_co.paa"};
+		hiddenSelectionsMaterials[] = {"\VB_Rift\data\retex\vb_rift_cloak_g.rvmat", "\VB_Rift\data\retex\vb_rift_cloak.rvmat", "\VB_Rift\data\retex\vb_rift_cloak.rvmat"};
 	};
 
 	// «Живой жгут»: лежит в инвентаре и сам закрывает одно кровотечение, «отпив» немного крови.
@@ -608,11 +609,11 @@ class CfgVehicles
 	{
 		scope = 2;
 		displayName = "Живой жгут";
-		descriptionShort = "Моток жил Изнанки. Носи с собой: когда пойдёт кровь, он сам стянет рану. Одноразовый и немного крови заберёт себе.";
+		descriptionShort = "Ремень из корня Изнанки с костяной пряжкой. Носи с собой: когда пойдёт кровь, он сам стянет рану. Одноразовый и немного крови заберёт себе.";
 		model = "\VB_Rift\data\vb_rift_tourniquet.p3d";
 		weight = 40;
 		itemSize[] = {1, 1};
-		rotationFlags = 17;
+		rotationFlags = 2;
 	};
 
 	// «Нить Изнанки»: пришить к одежде (перетащить на вещь) — вещь сама латается около 1 %/мин 3 часа (до рестарта).
@@ -620,11 +621,11 @@ class CfgVehicles
 	{
 		scope = 2;
 		displayName = "Нить Изнанки";
-		descriptionShort = "Тонкая живая нить. Перетащи на одежду, чтобы пришить: часа три вещь будет сама затягивать прорехи.";
+		descriptionShort = "Деревянная катушка с живой светящейся нитью и иглой. Перетащи на одежду, чтобы пришить: часа три вещь будет сама затягивать прорехи.";
 		model = "\VB_Rift\data\vb_rift_thread.p3d";
 		weight = 20;
 		itemSize[] = {1, 1};
-		rotationFlags = 17;
+		rotationFlags = 2;
 	};
 
 	// Объекты Изнанки. Начало координат модели = уровень земли (у корней — место выхода из земли).
