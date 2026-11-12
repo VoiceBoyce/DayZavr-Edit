@@ -1,0 +1,22 @@
+$animsetinstance {
+ #template "{F0C651DE8E24A5DE}DZ/anims/workspaces/player/player_main/player_main.ast"
+ #nparents 1
+ #parent "{7324B2E80BB624A1}DZ/anims/workspaces/player/player_main/player_main_1h.asi"
+ $animations {
+  "ActionContinuous.TakeTempSelfCro.In" "SFP3/2_anm/anim/osmotr_item/osmotr_in.anm"
+   "ActionContinuous.TakeTempSelfCro.Loop" "SFP3/2_anm/anim/osmotr_item/osmotr_loop.anm"
+   "ActionContinuous.TakeTempSelfCro.Out" "SFP3/2_anm/anim/osmotr_item/osmotr_out.anm"
+   "ActionContinuous.TakeTempSelfErc.In" "SFP3/2_anm/anim/osmotr_item/osmotr_in.anm"
+   "ActionContinuous.TakeTempSelfErc.Loop" "SFP3/2_anm/anim/osmotr_item/osmotr_loop.anm"
+   "ActionContinuous.TakeTempSelfErc.Out" "SFP3/2_anm/anim/osmotr_item/osmotr_out.anm"
+   "ActionContinuous.TakeTempSelfPne.In" "SFP3/2_anm/anim/osmotr_item/osmotr_in.anm"
+   "ActionContinuous.TakeTempSelfPne.Loop" "SFP3/2_anm/anim/osmotr_item/osmotr_loop.anm"
+   "ActionContinuous.TakeTempSelfPne.Out" "SFP3/2_anm/anim/osmotr_item/osmotr_out.anm"
+   "ActionOnce.DropItemHandsCro.Once" "SFP3/2_anm/anim/st_bolt_anm/bolt_brosok_00_clear.anm"//лежа
+   "ActionOnce.DropItemHandsErc.Once" "SFP3/2_anm/anim/st_bolt_anm/bolt_brosok_00_clear.anm"//сидя
+   
+   //"ActionOnce.DropItemHandsCro.Once" "{90BFDF5BCDDF6F28}DZ/anims/anm/player/actions/items/dropping/p_1hd_cro_drop_hands.anm"//лежа
+   //"ActionOnce.DropItemHandsErc.Once" "{89DABD652226156E}DZ/anims/anm/player/actions/items/dropping/p_1hd_erc_drop_hands.anm"//сидя
+  
+ }
+//player_main_1h

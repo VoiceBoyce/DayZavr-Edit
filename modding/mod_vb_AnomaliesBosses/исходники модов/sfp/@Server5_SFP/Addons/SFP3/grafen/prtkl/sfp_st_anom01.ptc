@@ -1,0 +1,29 @@
+EffectDef {
+ Emitors {
+  EmitorDef anom {
+   Offset 0 0 0
+   Material "{E7E8D8051A08ECBE}SFP3/grafen/emat/sfp_s_anom03.emat"
+   SizeMultiplier 0.6
+   SizeRND 0.6
+   RandomRotDir 1
+   RandomAngle 1
+   Velocity 0
+   AnimOnce 1
+   AnimFPS 30
+   LifetimeByAnim 1
+   RandomFrame 0
+   LifeTime 1
+   Alpha {
+    0 0.48182 1 0
+   }
+   RotationSpeed {
+    0 1 0.16864 0.99091 0.95596 1 1 1
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 0.5
+   Repeat 0
+  }
+ }
+}

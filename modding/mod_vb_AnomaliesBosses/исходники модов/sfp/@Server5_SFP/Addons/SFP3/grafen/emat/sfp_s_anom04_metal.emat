@@ -1,0 +1,7 @@
+ParticleSprite {
+ AlbedoMap "{C8CF5DE23A792935}SFP3/grafen/dds/pfx_vehmetaldebris_01.edds" 
+ Emissive 1 1 1 0
+ BlendMode Additive_AlphaModulate
+ TileU 2
+ TileV 2
+}

@@ -1,0 +1,7 @@
+ParticleSprite {
+ AlbedoMap "{1EDDF08483249F23}SFP3/grafen/dds/pfx_ani-fire01.edds" 
+ Emissive 1 1 1 0
+ BlendMode Additive_AlphaModulate
+ TileU 11
+ TileV 7
+}

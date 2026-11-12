@@ -1,0 +1,62 @@
+ImageSetClass {
+ Name "sfp"
+ RefSize 1740 1740
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "SFP3/guis/imagesets/sfp_icon_v2.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass casseta {
+   Name "casseta"
+   Pos 176 2
+   Size 170 170
+   Flags 0
+  }
+  ImageSetDefClass modulecpu {
+   Name "modulecpu"
+   Pos 350 2
+   Size 170 170
+   Flags 0
+  }
+  ImageSetDefClass moduleblood {
+   Name "moduleblood"
+   Pos 524 2
+   Size 170 170
+   Flags 0
+  }
+  ImageSetDefClass modulestamina {
+   Name "modulestamina"
+   Pos 698 2
+   Size 170 170
+   Flags 0
+  }
+  ImageSetDefClass modulebonefix {
+   Name "modulebonefix"
+   Pos 1046 2
+   Size 170 170
+   Flags 0
+  }
+  ImageSetDefClass modulehealth {
+   Name "modulehealth"
+   Pos 872 2
+   Size 170 170
+   Flags 0
+  }
+  ImageSetDefClass usb {
+   Name "usb"
+   Pos 2 2
+   Size 170 170
+   Flags 0
+  }
+  ImageSetDefClass jurnal {
+   Name "jurnal"
+   Pos 1218 2
+   Size 170 170
+   Flags 0
+  }
+ }
+ Groups {
+ }
+}

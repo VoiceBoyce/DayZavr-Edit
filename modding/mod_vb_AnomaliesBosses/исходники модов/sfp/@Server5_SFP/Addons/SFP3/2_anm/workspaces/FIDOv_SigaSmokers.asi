@@ -1,0 +1,29 @@
+$animsetinstance {
+ #template "{F0C651DE8E24A5DE}DZ/anims/workspaces/player/player_main/player_main.ast"
+ #nparents 1
+ #parent "{7324B2E80BB624A1}DZ/anims/workspaces/player/player_main/player_main_1h.asi"
+ $animations {
+   "ActionContinuous.EatCro.In" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_in.anm"
+   "ActionContinuous.EatCro.Loop" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_loop.anm"
+   "ActionContinuous.EatCro.Out" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_out.anm"
+   "ActionContinuous.EatErc.In" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_in.anm"
+   "ActionContinuous.EatErc.Loop" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_loop.anm"
+   "ActionContinuous.EatErc.Out" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_out.anm"
+   "ActionContinuous.EatPne.In" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_in.anm"
+   "ActionContinuous.EatPne.Loop" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_in.anm"
+   "ActionContinuous.EatPne.Out" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_out.anm"
+   "ActionOnce.EatTabletCro.Once" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_ALL.anm"
+   "ActionOnce.EatTabletErc.Once" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_ALL.anm"
+   "ActionOnce.EatTabletPne.Once" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_ALL.anm"//леза
+   
+   "ActionContinuous.TakeTempSelfCro.In" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_in.anm"
+   "ActionContinuous.TakeTempSelfCro.Loop" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_loop.anm"
+   "ActionContinuous.TakeTempSelfCro.Out" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_out.anm"
+   "ActionContinuous.TakeTempSelfErc.In" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_in.anm"
+   "ActionContinuous.TakeTempSelfErc.Loop" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_loop.anm"
+   "ActionContinuous.TakeTempSelfErc.Out" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_out.anm"
+   "ActionContinuous.TakeTempSelfPne.In" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_in.anm"
+   "ActionContinuous.TakeTempSelfPne.Loop" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_loop.anm"
+   "ActionContinuous.TakeTempSelfPne.Out" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_out.anm"
+  
+ }

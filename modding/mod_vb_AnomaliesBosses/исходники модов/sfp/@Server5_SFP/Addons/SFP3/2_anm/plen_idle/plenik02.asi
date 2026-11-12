@@ -1,0 +1,9 @@
+$animsetinstance {
+ #template "{F0C651DE8E24A5DE}DZ/anims/workspaces/player/player_main/player_main.ast"
+  #nparents 1
+ #parent "DZ/anims/workspaces/player/player_main/player_main.asi"
+ $animations {
+   "Locomotion.Erc.Idle" "SFP3/2_anm/plen_idle/plenik02.anm"
+   "Locomotion.Erc.SickCold" "SFP3/2_anm/plen_idle/plenik02.anm"
+  
+ }

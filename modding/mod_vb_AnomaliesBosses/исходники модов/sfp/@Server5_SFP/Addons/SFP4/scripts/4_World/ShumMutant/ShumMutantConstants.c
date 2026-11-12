@@ -1,0 +1,262 @@
+// ShumMutant - константы RPC + "тюнинг" (настройки) с загрузкой из JSON.
+// Где крутить характеристики:
+//   $profile:\SFP\ShumMutantConfig.json
+//
+// Если файла нет, он создастся автоматически при первом запуске.
+
+class ShumMutantRPC
+{
+	// Держим высокий диапазон, чтобы не пересекаться с ванильными ERPC.
+	static const int RPC_TINNITUS_ONLY	= 77001;
+	static const int RPC_DEATH_FX		= 77002;
+	static const int RPC_THROW_SHAKE	= 77003; // start/stop сильной тряски камеры во время броска
+}
+
+class ShumMutantTuning
+{
+	// ----------------------------------------------------------
+	// ВНИМАНИЕ:
+	// Это НЕ const - значения берутся из JSON (см. выше).
+	// ----------------------------------------------------------
+
+	// 1) Волна броска (агрессия)
+	static float WIND_RADIUS_M;
+	static float WIND_COOLDOWN_S;
+	static float WIND_FORCE_HORIZONTAL;
+	static float WIND_FORCE_UP;
+	static float WIND_FORCE_RANDOM_YAW;
+
+	// Урон при старте броска + стамина
+	static float THROW_START_HEALTH_COEF;
+	static float THROW_START_SHOCK_COEF;
+	static bool  THROW_ZERO_STAMINA;
+
+	// Порча инвентаря
+	static int   THROW_ITEM_DAMAGE_COUNT;
+	static float THROW_ITEM_DAMAGE_COEF_MIN;
+	static float THROW_ITEM_DAMAGE_COEF_MAX;
+
+	// Урон при приземлении
+	static float THROW_LAND_MIN_HEIGHT_M;
+	static float THROW_LAND_HEALTH_HEIGHT_LOW;
+	static float THROW_LAND_HEALTH_HEIGHT_HIGH;
+	static float THROW_LAND_SHOCK_HEIGHT_LOW;
+	static float THROW_LAND_SHOCK_HEIGHT_HIGH;
+	static float THROW_TRACK_TIMEOUT_S;
+
+	// Тряска камеры во время броска
+	static float THROW_CAMERA_SHAKE_STRENGTH;
+	static float THROW_CAMERA_SHAKE_RADIUS;
+	static float THROW_CAMERA_SHAKE_SMOOTH;
+	static float THROW_CAMERA_SHAKE_DECAY;
+	static float THROW_CAMERA_SHAKE_INTERVAL_S;
+
+	// Искажение воздуха на ИГРОКЕ при толчке (телекинез)
+	static bool  PUSH_HAZE_ENABLED;
+	static float PUSH_HAZE_DURATION_S;
+	static float PUSH_HAZE_RADIUS;
+	static float PUSH_HAZE_POWER;
+	static vector PUSH_HAZE_LOCAL_POS;
+	static float PUSH_HAZE_LIGHT_RADIUS;
+	static float PUSH_HAZE_LIGHT_BRIGHTNESS;
+	static float PUSH_HAZE_LIGHT_COLOR;
+
+
+	// 2) Оглушение звуком по фокусу
+	static float  TINNITUS_RANGE_M;
+	static float  TINNITUS_COOLDOWN_S;
+	static float  TINNITUS_PROGRESS_MIN;
+	static float  TINNITUS_PROGRESS_MAX;
+	static float  TINNITUS_SOUND_MAX;
+	static float  TINNITUS_BASE_DURATION_S;
+	static bool   TINNITUS_FALLBACK_NEAREST;
+	static string TINNITUS_SOUNDSET;
+	static string TINNITUS_ATTENUATION;
+
+	// 2.1) Звуки телекинез/защита
+	static string THROW_HIT_SOUNDSET;
+	static string INVULN_ARMOR_SOUNDSET;
+	static string INVULN_RELOAD_SOUNDSET;
+
+	// 3) Анти-возвышенности
+	static float UNREACHABLE_GRACE_S;
+
+	// 4) Смерть
+	static float  DEATH_RADIUS_M;
+	static float  DEATH_FORCE_HORIZONTAL;
+	static float  DEATH_FORCE_UP;
+	static float  DEATH_CAMERA_SHAKE_STRENGTH;
+	static float  DEATH_CAMERA_SHAKE_RADIUS;
+	static float  DEATH_CAMERA_SHAKE_SMOOTH;
+	static float  DEATH_CAMERA_SHAKE_DECAY;
+	static string DEATH_SOUNDSET;
+	static float  DEATH_SOUND_VOLUME;
+
+	// Искажение воздуха на мутанте (днём и ночью)
+	static float  HEAT_HAZE_RADIUS;
+	static float  HEAT_HAZE_POWER;
+	static vector HEAT_HAZE_LOCAL_POS;
+	static float  HEAT_HAZE_LIGHT_RADIUS;
+	static float  HEAT_HAZE_LIGHT_BRIGHTNESS;
+	static float  HEAT_HAZE_LIGHT_COLOR;
+
+	// Постоянный партикл на мутанте (клиент)
+	static bool   MUTANT_IDLE_PARTICLE_ENABLED;
+	static string MUTANT_IDLE_PARTICLE_NAME;
+	static vector MUTANT_IDLE_PARTICLE_LOCAL_POS;
+
+	// Телекинез предметов (сервер)
+	static bool  ITEM_THROW_ENABLED;
+	static float ITEM_THROW_COOLDOWN_S;        // Отдельный таймер (сек) бросания предметов
+	static float ITEM_THROW_TARGET_RANGE_M;    // Дистанция до цели, при которой кидаем предметы
+	static float ITEM_THROW_RADIUS_M;
+	static int   ITEM_THROW_MAX_ITEMS;
+	static float ITEM_THROW_FORCE_HORIZONTAL;
+	static float ITEM_THROW_FORCE_UP;
+	static float ITEM_THROW_RANDOM_SPREAD_DEG;
+	static float ITEM_THROW_MIN_MASS_KG;
+	static float ITEM_THROW_MAX_MASS_KG;
+	static bool  ITEM_THROW_SCALE_BY_MASS;
+	static float ITEM_THROW_MASS_SCALE_MIN;
+	static float ITEM_THROW_MASS_SCALE_MAX;
+
+	// Неуязвимость
+	static float INVULN_DURATION_MIN_S;
+	static float INVULN_DURATION_MAX_S;
+	static float INVULN_COOLDOWN_MIN_S;
+	static float INVULN_COOLDOWN_MAX_S;
+
+	static vector INVULN_LIGHT_LOCAL_POS;
+	static float  INVULN_LIGHT_RADIUS;
+	static float  INVULN_LIGHT_BRIGHTNESS;
+	static vector INVULN_LIGHT_COLOR_RGB;
+
+	static float  INVULN_HEAT_HAZE_RADIUS;
+	static float  INVULN_HEAT_HAZE_POWER;
+
+	// --- загрузка ---
+	protected static bool s_Loaded;
+
+	static void EnsureLoaded()
+	{
+		if (s_Loaded)
+			return;
+
+		s_Loaded = true;
+
+		ShumMutantConfig cfg = ShumMutantConfigManager.Get();
+		Apply(cfg);
+	}
+
+	protected static void Apply(ShumMutantConfig cfg)
+	{
+		// 1) Волна
+		WIND_RADIUS_M = cfg.WIND_RADIUS_M;
+		WIND_COOLDOWN_S = cfg.WIND_COOLDOWN_S;
+		WIND_FORCE_HORIZONTAL = cfg.WIND_FORCE_HORIZONTAL;
+		WIND_FORCE_UP = cfg.WIND_FORCE_UP;
+		WIND_FORCE_RANDOM_YAW = cfg.WIND_FORCE_RANDOM_YAW;
+
+		THROW_START_HEALTH_COEF = cfg.THROW_START_HEALTH_COEF;
+		THROW_START_SHOCK_COEF  = cfg.THROW_START_SHOCK_COEF;
+		THROW_ZERO_STAMINA      = cfg.THROW_ZERO_STAMINA;
+
+		THROW_ITEM_DAMAGE_COUNT    = cfg.THROW_ITEM_DAMAGE_COUNT;
+		THROW_ITEM_DAMAGE_COEF_MIN = cfg.THROW_ITEM_DAMAGE_COEF_MIN;
+		THROW_ITEM_DAMAGE_COEF_MAX = cfg.THROW_ITEM_DAMAGE_COEF_MAX;
+
+		THROW_LAND_MIN_HEIGHT_M        = cfg.THROW_LAND_MIN_HEIGHT_M;
+		THROW_LAND_HEALTH_HEIGHT_LOW   = cfg.THROW_LAND_HEALTH_HEIGHT_LOW;
+		THROW_LAND_HEALTH_HEIGHT_HIGH  = cfg.THROW_LAND_HEALTH_HEIGHT_HIGH;
+		THROW_LAND_SHOCK_HEIGHT_LOW    = cfg.THROW_LAND_SHOCK_HEIGHT_LOW;
+		THROW_LAND_SHOCK_HEIGHT_HIGH   = cfg.THROW_LAND_SHOCK_HEIGHT_HIGH;
+		THROW_TRACK_TIMEOUT_S          = cfg.THROW_TRACK_TIMEOUT_S;
+
+		THROW_CAMERA_SHAKE_STRENGTH   = cfg.THROW_CAMERA_SHAKE_STRENGTH;
+		THROW_CAMERA_SHAKE_RADIUS     = cfg.THROW_CAMERA_SHAKE_RADIUS;
+		THROW_CAMERA_SHAKE_SMOOTH     = cfg.THROW_CAMERA_SHAKE_SMOOTH;
+		THROW_CAMERA_SHAKE_DECAY      = cfg.THROW_CAMERA_SHAKE_DECAY;
+		THROW_CAMERA_SHAKE_INTERVAL_S = cfg.THROW_CAMERA_SHAKE_INTERVAL_S;
+
+		PUSH_HAZE_ENABLED = cfg.PUSH_HAZE_ENABLED;
+		PUSH_HAZE_DURATION_S = cfg.PUSH_HAZE_DURATION_S;
+		PUSH_HAZE_RADIUS = cfg.PUSH_HAZE_RADIUS;
+		PUSH_HAZE_POWER = cfg.PUSH_HAZE_POWER;
+		PUSH_HAZE_LOCAL_POS = cfg.PUSH_HAZE_LOCAL_POS;
+		PUSH_HAZE_LIGHT_RADIUS = cfg.PUSH_HAZE_LIGHT_RADIUS;
+		PUSH_HAZE_LIGHT_BRIGHTNESS = cfg.PUSH_HAZE_LIGHT_BRIGHTNESS;
+		PUSH_HAZE_LIGHT_COLOR = cfg.PUSH_HAZE_LIGHT_COLOR;
+
+
+		// 2) Оглушение
+		TINNITUS_RANGE_M = cfg.TINNITUS_RANGE_M;
+		TINNITUS_COOLDOWN_S = cfg.TINNITUS_COOLDOWN_S;
+		TINNITUS_PROGRESS_MIN = cfg.TINNITUS_PROGRESS_MIN;
+		TINNITUS_PROGRESS_MAX = cfg.TINNITUS_PROGRESS_MAX;
+		TINNITUS_SOUND_MAX = cfg.TINNITUS_SOUND_MAX;
+		TINNITUS_BASE_DURATION_S = cfg.TINNITUS_BASE_DURATION_S;
+		TINNITUS_FALLBACK_NEAREST = cfg.TINNITUS_FALLBACK_NEAREST;
+		TINNITUS_SOUNDSET = cfg.TINNITUS_SOUNDSET;
+		TINNITUS_ATTENUATION = cfg.TINNITUS_ATTENUATION;
+
+		THROW_HIT_SOUNDSET = cfg.THROW_HIT_SOUNDSET;
+		INVULN_ARMOR_SOUNDSET = cfg.INVULN_ARMOR_SOUNDSET;
+		INVULN_RELOAD_SOUNDSET = cfg.INVULN_RELOAD_SOUNDSET;
+
+		// 3) Анти-возвышенности
+		UNREACHABLE_GRACE_S = cfg.UNREACHABLE_GRACE_S;
+
+		// 4) Смерть
+		DEATH_RADIUS_M = cfg.DEATH_RADIUS_M;
+		DEATH_FORCE_HORIZONTAL = cfg.DEATH_FORCE_HORIZONTAL;
+		DEATH_FORCE_UP = cfg.DEATH_FORCE_UP;
+		DEATH_CAMERA_SHAKE_STRENGTH = cfg.DEATH_CAMERA_SHAKE_STRENGTH;
+		DEATH_CAMERA_SHAKE_RADIUS = cfg.DEATH_CAMERA_SHAKE_RADIUS;
+		DEATH_CAMERA_SHAKE_SMOOTH = cfg.DEATH_CAMERA_SHAKE_SMOOTH;
+		DEATH_CAMERA_SHAKE_DECAY = cfg.DEATH_CAMERA_SHAKE_DECAY;
+		DEATH_SOUNDSET = cfg.DEATH_SOUNDSET;
+		DEATH_SOUND_VOLUME = cfg.DEATH_SOUND_VOLUME;
+
+		// Heat haze
+		HEAT_HAZE_RADIUS = cfg.HEAT_HAZE_RADIUS;
+		HEAT_HAZE_POWER  = cfg.HEAT_HAZE_POWER;
+		HEAT_HAZE_LOCAL_POS = cfg.HEAT_HAZE_LOCAL_POS;
+		HEAT_HAZE_LIGHT_RADIUS = cfg.HEAT_HAZE_LIGHT_RADIUS;
+		HEAT_HAZE_LIGHT_BRIGHTNESS = cfg.HEAT_HAZE_LIGHT_BRIGHTNESS;
+		HEAT_HAZE_LIGHT_COLOR = cfg.HEAT_HAZE_LIGHT_COLOR;
+
+		// Постоянный партикл на мутанте
+		MUTANT_IDLE_PARTICLE_ENABLED = cfg.MUTANT_IDLE_PARTICLE_ENABLED;
+		MUTANT_IDLE_PARTICLE_NAME = cfg.MUTANT_IDLE_PARTICLE_NAME;
+		MUTANT_IDLE_PARTICLE_LOCAL_POS = cfg.MUTANT_IDLE_PARTICLE_LOCAL_POS;
+
+		// Телекинез предметов
+		ITEM_THROW_ENABLED = cfg.ITEM_THROW_ENABLED;
+		ITEM_THROW_COOLDOWN_S = cfg.ITEM_THROW_COOLDOWN_S;
+		ITEM_THROW_TARGET_RANGE_M = cfg.ITEM_THROW_TARGET_RANGE_M;
+		ITEM_THROW_RADIUS_M = cfg.ITEM_THROW_RADIUS_M;
+		ITEM_THROW_MAX_ITEMS = cfg.ITEM_THROW_MAX_ITEMS;
+		ITEM_THROW_FORCE_HORIZONTAL = cfg.ITEM_THROW_FORCE_HORIZONTAL;
+		ITEM_THROW_FORCE_UP = cfg.ITEM_THROW_FORCE_UP;
+		ITEM_THROW_RANDOM_SPREAD_DEG = cfg.ITEM_THROW_RANDOM_SPREAD_DEG;
+		ITEM_THROW_MIN_MASS_KG = cfg.ITEM_THROW_MIN_MASS_KG;
+		ITEM_THROW_MAX_MASS_KG = cfg.ITEM_THROW_MAX_MASS_KG;
+		ITEM_THROW_SCALE_BY_MASS = cfg.ITEM_THROW_SCALE_BY_MASS;
+		ITEM_THROW_MASS_SCALE_MIN = cfg.ITEM_THROW_MASS_SCALE_MIN;
+		ITEM_THROW_MASS_SCALE_MAX = cfg.ITEM_THROW_MASS_SCALE_MAX;
+
+		// Неуязвимость
+		INVULN_DURATION_MIN_S = cfg.INVULN_DURATION_MIN_S;
+		INVULN_DURATION_MAX_S = cfg.INVULN_DURATION_MAX_S;
+		INVULN_COOLDOWN_MIN_S = cfg.INVULN_COOLDOWN_MIN_S;
+		INVULN_COOLDOWN_MAX_S = cfg.INVULN_COOLDOWN_MAX_S;
+
+		INVULN_LIGHT_LOCAL_POS = cfg.INVULN_LIGHT_LOCAL_POS;
+		INVULN_LIGHT_RADIUS = cfg.INVULN_LIGHT_RADIUS;
+		INVULN_LIGHT_BRIGHTNESS = cfg.INVULN_LIGHT_BRIGHTNESS;
+		INVULN_LIGHT_COLOR_RGB = cfg.INVULN_LIGHT_COLOR_RGB;
+
+		INVULN_HEAT_HAZE_RADIUS = cfg.INVULN_HEAT_HAZE_RADIUS;
+		INVULN_HEAT_HAZE_POWER  = cfg.INVULN_HEAT_HAZE_POWER;
+	}
+}

@@ -1,0 +1,251 @@
+EffectDef {
+ MinFPS 30
+ Emitors {
+  EmitorDef emitor1_debris {
+   ShapeType Ellipse
+   ShapeSize 20 2 20
+   MaxNum 150
+   BirthRate 150
+   BirthRateRND 0
+   Material "{118F069016CE1546}graphics/particles/materials/enviroment/stones.emat"
+   SizeMultiplier 0
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 720
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 1
+   VelocityRND 1
+   VelAffect 1
+   AirResistance 1
+   AirResistanceRND 0.5
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 1
+   LifeTimeRND 1
+   Color {
+    0 0.1412 0.1373 0.1373 0.075 0.3529 0.3529 0.3529 1 0.0471 0.0471 0.0471
+   }
+   Alpha {
+    0 1 0.59345 1 1 0
+   }
+   RotationSpeed {
+    0 0 1 0.09091
+   }
+   Size {
+    0 0.1 1 0.15
+   }
+   EffectTime 1
+   Repeat 1
+   AlphaMast {
+    0 1 0.69871 1 1 0
+   }
+   RotationSpeedMast {
+    0 1 1 1
+   }
+  }
+  EmitorDef emitor2 {
+   ShapeType Ellipse
+   ShapeSize 20 1 20
+   MaxNum 100
+   BirthRate 50
+   BirthRateRND 0
+   Material "{6187242A85D55644}graphics/particles/materials/enviroment/brick_01.emat"
+   SizeMultiplier 0
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 720
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 1
+   VelocityRND 1
+   VelAffect 1
+   AirResistance 1
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Spring 0
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 3
+   LifeTimeRND 2
+   Color {
+    0 0.1412 0.1373 0.1373 0.075 0.3529 0.3529 0.3529 1 0.0471 0.0471 0.0471
+   }
+   Alpha {
+    0 1 0.75 1 1 0
+   }
+   RotationSpeed {
+    0 0 1 0.09091
+   }
+   Size {
+    0 0.1 1 0.15
+   }
+   EffectTime 1
+   Repeat 1
+   AlphaMast {
+    0 1 0.80505 1 1 0
+   }
+   RotationSpeedMast {
+    0 1 1 1
+   }
+  }
+  EmitorDef emitor3 {
+   ShapeType Ellipse
+   ShapeSize 20 1 20
+   MaxNum 100
+   BirthRate 50
+   BirthRateRND 0
+   Material "{1D816DC83DA25617}graphics/particles/materials/enviroment/leaves_01.emat"
+   SizeMultiplier 0
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 720
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 1
+   VelocityRND 1
+   VelAffect 1
+   AirResistance 1
+   AirResistanceRND 0.5
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Spring 0
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 2
+   LifeTimeRND 1
+   Color {
+    0 0.1412 0.1373 0.1373 0.075 0.3529 0.3529 0.3529 1 0.0471 0.0471 0.0471
+   }
+   Alpha {
+    0 1 0.75 1 1 0
+   }
+   RotationSpeed {
+    0 0 1 0.09091
+   }
+   Size {
+    0 0.1 1 0.15
+   }
+   EffectTime 1
+   Repeat 1
+   AlphaMast {
+    0 1 0.81149 0.98182 1 0
+   }
+   RotationSpeedMast {
+    0 1 1 1
+   }
+  }
+  EmitorDef emitor4 {
+   ShapeType Ellipse
+   ShapeSize 20 1 20
+   MaxNum 100
+   BirthRate 50
+   BirthRateRND 0
+   Material "{B13B35A28852C79A}graphics/particles/materials/enviroment/glass_02.emat"
+   SizeMultiplier 0.3
+   SizeRND 0.1
+   RandomRotDir 1
+   RotMultiplier 720
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 1
+   VelocityRND 1
+   VelAffect 1
+   AirResistance 1
+   AirResistanceRND 0.5
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Spring 0
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 4
+   LifeTimeRND 1
+   Color {
+    0 0.1412 0.1373 0.1373 0.075 0.3529 0.3529 0.3529 1 0.0471 0.0471 0.0471
+   }
+   Alpha {
+    0 1 0.75 1 1 0
+   }
+   RotationSpeed {
+    0 0 1 0.09091
+   }
+   Size {
+    0 0.1 1 0.15
+   }
+   EffectTime 1
+   Repeat 1
+   AlphaMast {
+    0 1 0.80397 0.98182 1 0
+   }
+   RotationSpeedMast {
+    0 1 1 1
+   }
+  }
+  EmitorDef emitor5 {
+   ShapeType Ellipse
+   ShapeSize 20 1 20
+   MaxNum 100
+   BirthRate 50
+   BirthRateRND 0
+   Material "{D5DF43D89D30A655}graphics/particles/materials/enviroment/leaf_02.emat"
+   SizeMultiplier 1
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 720
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 5
+   VelocityRND 1
+   VelAffect 1
+   AirResistance 1
+   AirResistanceRND 4
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Spring 0
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 2
+   LifeTimeRND 1
+   Color {
+    0 0.1412 0.1373 0.1373 0.075 0.3529 0.3529 0.3529 1 0.0471 0.0471 0.0471
+   }
+   Alpha {
+    0 1 0.75 1 1 0
+   }
+   RotationSpeed {
+    0 0 1 0.09091
+   }
+   Size {
+    0 0.1 1 0.15
+   }
+   EffectTime 1
+   Repeat 1
+   AlphaMast {
+    0 1 0.80021 1 1 0
+   }
+   RotationSpeedMast {
+    0 1 1 1
+   }
+  }
+ }
+}

@@ -1,0 +1,9 @@
+$animsetinstance {
+ #template "{3097480539CE7B70}DZ/animals/animations/!graph_files/wolf/wolf.ast"
+ #nparents 1
+ #parent "DZ/animals/animations/!graph_files/Wolf/wolf_animinstance.asi"
+ $animations {
+   "Default.Normal.stand_tracking_idle_1" "{A38CF9B37464341B}SFP3/2_anm/wolf/eating_idle_1.anm"
+   "Default.Normal.stand_tracking_idle_2" "{3A92402A6983058B}SFP3/2_anm/wolf/eating_idle_2.anm"
+   "Default.Normal.stand_tracking_idle_3" "{4D9828A29D21EAFB}SFP3/2_anm/wolf/eating_idle_3.anm"
+ }

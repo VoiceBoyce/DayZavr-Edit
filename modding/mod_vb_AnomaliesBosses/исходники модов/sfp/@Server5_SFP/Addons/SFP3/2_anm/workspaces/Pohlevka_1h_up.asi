@@ -1,0 +1,13 @@
+$animsetinstance {
+ #template "{F0C651DE8E24A5DE}DZ/anims/workspaces/player/player_main/player_main.ast"
+ #nparents 1
+ #parent "{8F69E288CFC2B70D}DZ/anims/workspaces/player/player_main/props/player_main_1h_torch.asi"
+ $animations {
+	"Locomotion.Cro.Look" "{BEF590E4D5D97BDD}DZ/anims/anm/player/layered/look/p_1hd_torch_cro_look.anm"
+   "Locomotion.Cro.MoveLook" "{CF655C2EE9F04454}DZ/anims/anm/player/layered/look/p_1hd_torch_cro_movelook.anm"
+   "Locomotion.Erc.Look" "{4281AEDB0C42524D}DZ/anims/anm/player/layered/look/p_1hd_torch_erc_look.anm"
+   "Locomotion.Erc.MoveLook" "{2963C905CD87CEE0}DZ/anims/anm/player/layered/look/p_1hd_torch_erc_movelook.anm"
+   "Locomotion.Erc.SprintF" "{32A5233CA02A7CCB}DZ/anims/anm/player/moves/1handed/p_1hd_erc_sprintf_low.anm"
+   "Locomotion.Erc.SprintFL" "{1D5804FD127A4284}DZ/anims/anm/player/moves/1handed/p_1hd_erc_sprintfl_low.anm"
+   "Locomotion.Erc.SprintFR" "{7196AE2C862C23E0}DZ/anims/anm/player/moves/1handed/p_1hd_erc_sprintfr_low.anm"
+ }

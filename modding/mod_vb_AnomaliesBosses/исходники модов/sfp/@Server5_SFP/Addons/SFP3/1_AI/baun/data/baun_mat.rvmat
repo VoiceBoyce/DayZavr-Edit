@@ -1,0 +1,101 @@
+ambient[]={0.85882354,0.85882354,0.85882354,1};
+diffuse[]={0.85882354,0.85882354,0.85882354,1};
+forcedDiffuse[]={0,0,0,0};
+emmisive[]={0.85882354,0.64705884,0,1};
+specular[]={0.74901962,0.74509805,0.75294119,1};
+specularPower=86.099998;
+PixelShaderID="Super";
+VertexShaderID="Super";
+class TexGen0
+{
+	uvSource="tex";
+	class uvTransform
+	{
+		aside[]={1,0,0};
+		up[]={0,1,0};
+		dir[]={0,0,1};
+		pos[]={0,0,0};
+	};
+};
+class Stage1
+{
+	texture="SFP3\1_AI\baun\data\baun_cat_nohq.paa";
+	texGen="tex";
+	class uvTransform
+	{
+		aside[]={1,0,0};
+		up[]={0,1,0};
+		dir[]={0,0,0};
+		pos[]={0,0,0};
+	};
+};
+class Stage2
+{
+	texture="#(argb,8,8,3)color(0.5,0.5,0.5,1,DT)";
+	texGen="tex";
+	class uvTransform
+	{
+		aside[]={1,0,0};
+		up[]={0,1,0};
+		dir[]={0,0,0};
+		pos[]={0,0,0};
+	};
+};
+class Stage3
+{
+	texture="#(argb,8,8,3)color(0,0,0,0,MC)";
+	texGen="tex";
+	class uvTransform
+	{
+		aside[]={1,0,0};
+		up[]={0,1,0};
+		dir[]={0,0,0};
+		pos[]={0,0,0};
+	};
+};
+class Stage4
+{
+	texture="#(argb,8,8,3)color(1,1,1,1,AS)";
+	texGen="tex";
+	class uvTransform
+	{
+		aside[]={1,0,0};
+		up[]={0,1,0};
+		dir[]={0,0,0};
+		pos[]={0,0,0};
+	};
+};
+class Stage5
+{
+	texture="SFP3\1_AI\baun\data\baun_cat_smdi.paa";
+	texGen="tex";
+	class uvTransform
+	{
+		aside[]={1,0,0};
+		up[]={0,1,0};
+		dir[]={0,0,0};
+		pos[]={0,0,0};
+	};
+};
+class Stage6
+{
+	texture="#(ai,64,64,1)fresnel(0.9,0.4)";
+	texGen="none";
+};
+class Stage7
+{
+	texture="dz\data\data\env_land_co.paa";
+	texGen="tex";
+	class uvTransform
+	{
+		aside[]={1,0,0};
+		up[]={0,1,0};
+		dir[]={0,0,0};
+		pos[]={0,0,0};
+	};
+};
+class Stage8
+{
+	texture="SFP3\1_AI\baun\data\baun_cat_e_co.paa";
+	texGen="0";
+};

@@ -1,0 +1,231 @@
+EffectDef {
+ Emitors {
+  EmitorDef fire_middle_burst {
+   ShapeType Ellipse
+   ShapeSize 15 15 15
+   ConeAngle 360 0 60
+   MaxNum 50
+   BirthRate 50
+   BirthRateRND 0.3
+   Offset 0 0.1 0
+   Material "{5600EE2A3E99C261}SFP3/grafen/emat/moln_02.emat"
+   ScaleY 1
+   SizeMultiplier 1
+   SizeRND 0.1
+   RandomRotDir 1
+   RotMultiplier 2
+   StretchMultiplier 1
+   RandomAngle 1
+   Velocity 0
+   VelocityRND 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 10
+   LifetimeByAnim 1
+   RandomFrame 0
+   LifeTime 5
+   LifeTimeRND 0
+   LifetimeShortening 0
+   Color {
+    0 0.4091 0.451 0.451 1 0.4706 0.4667 0.4667
+   }
+   Alpha {
+    0 0.75455 0.50054 1 1 0.57273
+   }
+   Size {
+    0 1 1 0
+   }
+   EffectTime 1
+   Repeat 1
+  }
+  EmitorDef sparks_small {
+   ShapeType Ellipse
+   ShapeSize 15 15 15
+   ConeAngle 360 0 5
+   MaxNum 150
+   BirthRate 150
+   BirthRateRND 2
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{08E8C76981144C6E}SFP3/grafen/emat/moln_01.emat"
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 1
+   SizeRND 1
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   Restitution 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 8
+   LifetimeByAnim 1
+   LifeTime 5
+   LifeTimeRND 5
+   Color {
+    0 0.2182 0.4091 0.3455 0.4855 0.3364 0.4636 0.3364 1 0.2273 0.2455 0.2
+   }
+   Alpha {
+    0 1 0.98389 1 1 0
+   }
+   RotationSpeed {
+    0 1 1 1
+   }
+   Size {
+    0 0 0.34694 1 1 1
+   }
+  }
+  EmitorDef moln2 {
+   ShapeType Ellipse
+   ShapeSize 10 10 10
+   ConeAngle 360 0 5
+   MaxNum 50
+   BirthRate 50
+   BirthRateRND 2
+   Offset 0 0 0
+   Material "{08E8C76981144C6E}SFP3/grafen/emat/moln_01.emat"
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.5
+   SizeRND 0.5
+   RandomRotDir 1
+   RotMultiplier 0
+   StretchMultiplier 1
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   Restitution 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 8
+   LifetimeByAnim 1
+   LifeTime 5
+   LifeTimeRND 5
+   Color {
+    0 0.2182 0.4091 0.3455 0.4855 0.3364 0.4636 0.3364 1 0.2273 0.2455 0.2
+   }
+   Alpha {
+    0 1 0.98389 1 1 0
+   }
+   RotationSpeed {
+    0 1 1 1
+   }
+   Size {
+    0 0 0.34694 1 1 1
+   }
+  }
+  EmitorDef moln3 {
+   ShapeType Ellipse
+   ShapeSize 15 15 15
+   ConeAngle 360 0 5
+   MaxNum 150
+   BirthRate 150
+   BirthRateRND 2
+   Offset 0 0 0
+   Material "{08E8C76981144C6E}SFP3/grafen/emat/moln_01.emat"
+   CenterX 1
+   CenterY 1
+   ScaleX 0.1
+   ScaleY 1
+   SizeMultiplier 2
+   SizeRND 2
+   RandomRotDir 1
+   RotMultiplier 0
+   StretchMultiplier 1
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   Restitution 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 24
+   LifetimeByAnim 1
+   LifeTime 5
+   LifeTimeRND 5
+   Color {
+    0 0.2182 0.4091 0.3455 0.4855 0.3364 0.4636 0.3364 1 0.2273 0.2455 0.2
+   }
+   Alpha {
+    0 1 0.98389 1 1 0
+   }
+   RotationSpeed {
+    0 1 1 1
+   }
+   Size {
+    0 1 0.34694 1 1 1
+   }
+  }
+  EmitorDef moln3_cloned {
+   ShapeType Ellipse
+   ShapeSize 15 15 15
+   ConeAngle 360 0 5
+   MaxNum 150
+   BirthRate 150
+   BirthRateRND 2
+   Offset 0 0 0
+   Material "{08E8C76981144C6E}SFP3/grafen/emat/moln_01.emat"
+   CenterX 1
+   CenterY 1
+   ScaleX 0.1
+   ScaleY 1
+   SizeMultiplier 3
+   SizeRND 3
+   RandomRotDir 1
+   RotMultiplier 0
+   StretchMultiplier 1
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   Restitution 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 24
+   LifetimeByAnim 1
+   LifeTime 5
+   LifeTimeRND 5
+   Color {
+    0 0.2182 0.4091 0.3455 0.4855 0.3364 0.4636 0.3364 1 0.2273 0.2455 0.2
+   }
+   Alpha {
+    0 1 0.98389 1 1 0
+   }
+   RotationSpeed {
+    0 1 1 1
+   }
+   Size {
+    0 1 0.34694 1 1 1
+   }
+  }
+ }
+}

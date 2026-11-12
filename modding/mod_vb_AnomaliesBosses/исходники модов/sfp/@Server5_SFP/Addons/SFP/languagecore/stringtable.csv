@@ -1,0 +1,253 @@
+"Language","original","english","russian","Test"
+"STR_Hat_Black01","Short Hat Black","Short Hat Black","Коротка Шапка Черная",2
+"STR_Hat_01","Regular Beanie Hat","Regular Beanie Hat","Обычная Шапка Бини",3
+"STR_Hat_Blue01","Short Hat blue","Short Hat blue","Коротка Шапка Синия",4
+"STR_Hat_Green01","Short Hat Green","Short Hat Green","Коротка Шапка Зеленая",5
+"STR_Hat_Brown01","Short Hat brown","Short Hat brown","Коротка Шапка Бежевая",6
+"STR_Vest6b5_green01","6-Б-5 vest green","6-Б-5 vest green","6-Б-5 Бронежилет Зеленый",182
+"STR_Vest6b5_tan01","6-Б-5 vest tan","6-Б-5 vest tan","6-Б-5 Бронежилет Песочный",182
+"STR_Vest6b5_black01","6-Б-5 vest black","6-Б-5 vest black","6-Б-5 Бронежилет Черный",182
+"STR_Vest6b5_ColorBase00","Bullet-proof vest, BZh - an element of individual protection of a person, providing protection of the upper body (torso) of a person from the effects of firearms.","Bullet-proof vest, BZh - an element of individual protection of a person, providing protection of the upper body (torso) of a person from the effects of firearms.","Бронежилет БЖ — элемент индивидуальной защиты человека, обеспечивающий защиту верхней части тела (туловища) человека от воздействия огнестрельного оружия.",182
+"STR_SpecOpsTactical_Tors01","Tactical form of special forces","Tactical form of special forces","Тактическая форма спецназа",182
+"STR_SpecOpsTactical_Tors02","A very high-quality special forces uniform. It's cool in summer, not cold in winter. Protective plates of a special alloy, they are durable and lightweight. It is rare to find such a form in good condition","A very high-quality special forces uniform. It's cool in summer, not cold in winter. Protective plates of a special alloy, they are durable and lightweight. It is rare to find such a form in good condition","Очень качественная форма спецназа. Летом прохладно, зимой не холодно. Защитные пластины специального сплава, они прочные и легкие. Такую форму редкость найти в хорошем состоянии",182
+"STR_SpecOpsTactical_Pants01","Tactical Special Forces Pants","Tactical Special Forces Pants","Тактические штаны спецназа",182
+"STR_SpecOpsTactical_Pants02","Very high-quality tactical pants. Comfortable, lightweight, and with protective plates. It is a rare find.","Very high-quality tactical pants. Comfortable, lightweight, and with protective plates. It is a rare find.","Очень качественные штаны спецназа. Удобные, легкие, с защитными пластинами. Найти такие большая редкость",182
+"STR_BadHeavyArmor_tors01","Kit 1D Armor Suit","Kit 1D Armor Suit","Бронекостюм Кит 1Д",182
+"STR_BadHeavyArmor_tors02","The suit is quite old.","The suit is quite old.","Достаточно старый бронекостюм.",182
+"STR_BadHeavyArmor_pants01","Kit 1D Armor Suit Pants","Kit 1D Armor Suit Pants","Штаны Бронекостюма Кит 1Д",182
+"STR_BadHeavyArmor_pants02","Old trousers from an armored suit.","Old trousers from an armored suit.","Старые штаны от бронекостюма.",182
+"STR_Brodaga_Jacket01","Black Winter Jacket","Black Winter Jacket","Зимняя куртка Черная",182
+"STR_Brodaga_Jacket02","Winter jacket with a sweater, that thing doesn't really look new anymore, but it's still okay to wear.","Winter jacket with a sweater, that thing doesn't really look new anymore, but it's still okay to wear.","Зимняя куртка со свитером эта вещь уже не выглядит новой, но ее по-прежнему можно носить.",182
+"STR_EcologBig_Boots01","Ecologists Shoes","Ecologists Shoes","Ботинки Эколога",182
+"STR_EcologBig_Boots02","Special boots for working in infected areas","Special boots for working in infected areas","Специальные ботинки, для работы в зараженных зонах",182
+"STR_EcologBig_tors01","Ecologists form","Ecologists form","Форма эколога",182
+"STR_EcologBig_tors02","A special uniform for working in infected areas","A special uniform for working in infected areas","Специальная форма, для работы в зараженных зонах",182
+"STR_EcologBig_pants01","Environmentalists' protective pants","Environmentalists' protective pants","Защитные штаны экологов",182
+"STR_EcologBig_pants02","A special suit for working in contaminated areas","A special suit for working in contaminated areas","Специальная форма, для работы в зараженных зонах",182
+"STR_EcologBig_Helm01","Ecologists protective helmet","Ecologists protective helmet","Защитный шлем эколога",182
+"STR_EcologBig_Helm02","The eco-warriors' helmet. This thingy was designed to do stuff in really dangerous places.","The eco-warriors' helmet. This thingy was designed to do stuff in really dangerous places.","Шлем эколога. Эта штуковина была разработана для работы в действительно опасных местах.",182
+"STR_ExoArmor_Boots01","Exoskeleton Boots","Exoskeleton Boots","Ботинки Экзоскелета",182
+"STR_ExoArmor_Boots02","Sturdy, good exoskeleton boots.","Sturdy, good exoskeleton boots.","Прочные, хорошие ботинки экзоскелета.",182
+"STR_ExoArmor_Tors01","Exoskeleton Armor","Exoskeleton Armor","Броня экзоскелета",182
+"STR_ExoArmor_Tors02","Heavy protective armor, good protection, good thermal insulation. Without exoskeletal legs, it is very difficult to wear.","Heavy protective armor, good protection, good thermal insulation. Without exoskeletal legs, it is very difficult to wear.","Тяжелая защитная броня, хорошая защита, хорошая теплоизоляция. Без экзоскелетных ног, носить очень тяжело.",182
+"STR_ExoArmor_Pants01","Exoskeleton Pants","Exoskeleton Pants","Штаны Экзоскелета",182
+"STR_ExoArmor_Pants02","Durable exoskeleton pants, adds maximum portable weight","Durable exoskeleton pants, adds maximum portable weight","Прочные штаны экзоскелета, прибавляет максимальный переносимый вес",182
+"STR_ExoArmor_Helm01","Exoskeleton Helmet","Exoskeleton Helmet","Шлем Экзоскелета",182
+"STR_ExoArmor_Helm02","Heavy exoskeleton helmet. You can install a PNV and a flashlight","Heavy exoskeleton helmet. You can install a PNV and a flashlight","Тяжелый шлем экзоскелета. Можно устанавливать ПНВ и фонарик",182
+"STR_ExoClassic_Tors_Dolg00","Up Exoskeleton Dolg","Up Exoskeleton Dolg","Верх Экзоскелета Долг",182
+"STR_ExoClassic_Tors_Svoboda00","Exoskeleton Freedom Top","Exoskeleton Freedom Top","Верх Экзоскелета Свобода",182
+"STR_ExoClassic_Tors_Naem00","Exoskeleton Top Mercenaries","Exoskeleton Top Mercenaries","Верх Экзоскелета Наемники",182
+"STR_ExoClassic_Tors_monolit00","Exoskeleton Top Monolith","Exoskeleton Top Monolith","Верх Экзоскелета Монолит",182
+"STR_ExoClassic_Tors_Neitral00","Exoskeleton Top Neutral","Exoskeleton Top Neutral","Верх Экзоскелета Нейтрал",182
+"STR_ExoClassic_Pants_Dolg00","Exoskeleton Pants DOLG","Exoskeleton Pants DOLG","Штаны Экзоскелета Долг",182
+"STR_ExoClassic_Pants_Svoboda00","Exoskeleton Pants Freedom","Exoskeleton Pants Freedom","Штаны Экзоскелета Свобода",182
+"STR_ExoClassic_Pants_Naem00","Exoskeleton Pants Mercenaries","Exoskeleton Pants Mercenaries","Штаны Экзоскелета Наемник",182
+"STR_ExoClassic_Pants_monolit00","Exoskeleton Pants Monolith","Exoskeleton Pants Monolith","Штаны Экзоскелета Монолит",182
+"STR_ExoClassic_Pants_Neitral00","Exoskeleton Pants Neutral","Exoskeleton Pants Neutral","Штаны Экзоскелета Нейтрал",182
+"STR_ExoClassic_Helmet_Dolg00","Exoskeleton Helmet Dolg","Exoskeleton Helmet Dolg","Шлем Экзоскелета Долг",182
+"STR_ExoClassic_Helmet_Svoboda00","Exoskeleton Helmet Freedom","Exoskeleton Helmet Freedom","Шлем Экзоскелета свобода",182
+"STR_ExoClassic_Helmet_Naem00","Exoskeleton Helmet Mercenaries","Exoskeleton Helmet Mercenaries","Шлем Экзоскелета Наемники",182
+"STR_ExoClassic_Helmet_monolit00","Exoskeleton Helmet Monolith","Exoskeleton Helmet Monolith","Шлем Экзоскелета Монолит",182
+"STR_ExoClassic_Helmet_Neitral00","Exoskeleton Helmet Neutral","Exoskeleton Helmet Neutral","Шлем Экзоскелета Нейтрал",182
+"STR_EXO_Glove01","ExoGloves","ExoGloves","Экзоперчатки",182
+"STR_EXO_Glove00","Exo Gloves strengthen your grip and also protect your hand from injuries","Exo Gloves strengthen your grip and also protect your hand from injuries","Экзо Перчатки усиливают хват, а также защищают повреждений руки",182
+"STR_Stranik_Boots01","Old military boots","Old military boots","Старые военные ботинки",182
+"STR_Stranik_Boots00","Old but not useless","Old but not useless","Старые но не бесполезные",182
+"STR_Stranik_Sweeter01","Thick sweater","Thick sweater","Толстый свитер",182
+"STR_Stranik_Sweeter00","Warm thick sweater with a hood.","Warm thick sweater with a hood.","Теплый толстый свитер с капюшоном.",182
+"STR_Stranik_Pants01","Tight Pants","Tight Pants","Плотные Штаны",182
+"STR_Stranik_Pants00","Old military trousers with knee pads.","Old military trousers with knee pads.","Военные старые штаны с наколенниками.",182
+"STR_Stranik_Hood01","Hood","Hood","Капюшон",182
+"STR_Stranik_Hood00","Hood made of thick fabric material","Hood made of thick fabric material","Капюшон из плотного тканевого материала",182
+"STR_Stranik_FaceMask00","Face mask","Face mask","Маска на лицо",182
+"STR_Stranik_FaceMask01","Mask made from a rag."","Mask made from a rag."","Маска из тряпки."",182
+"STR_TankArmor_Tors01","Armored suit Kit 2D","Armored suit Kit 2D","Бронекостюм Кит 2Д",182
+"STR_TankArmor_Tors00","An improved suit of the old KIT 1D suit.","An improved suit of the old KIT 1D suit.","Усовершенственный костюм старого костюма КИТ 1Д.",182
+"STR_TankArmor_pants01","Armor Suit Pants Kit 2D","Armor Suit Pants Kit 2D","Штаны Бронекостюма Кит 2Д",182
+"STR_TankArmor_pants00","Improved pants from the old KIT 1D suit","Improved pants from the old KIT 1D suit","Усовершенственные штаны от старого костюма КИТ 1Д",182
+"STR_TankArmor_boots01","Boots of Armored Suit Kit 2D","Boots of Armored Suit Kit 2D","Сапоги Бронекостюма Кит 2Д",182
+"STR_TankArmor_boots00","2D armored suit boots","2D armored suit boots","Ботинки бронекостюма 2Д",182
+"STR_GP7GasMask01","GasMask GP7","GasMask GP7","Противогаз ГП7",182
+"STR_GP7GasMask00","Civilian gas mask GP-7 is a filter for personal protection of the respiratory system, eyes and facial skin of a person.","Civilian gas mask GP-7 is a filter for personal protection of the respiratory system, eyes and facial skin of a person.","Гражданский противогаз ГП-7 — фильтрующее средство индивидуальной защиты органов дыхания, глаз и кожи лица человека.",182
+"STR_Hazmat_Boots01","Protective boots for environmentalists","Protective boots for environmentalists","Ботинки защитной формы экологов",182
+"STR_Hazmat_Boots00","Boots from the special protective uniform of environmentalists. This uniform was developed to perform tasks in particularly dangerous places.","Boots from the special protective uniform of environmentalists. This uniform was developed to perform tasks in particularly dangerous places.","Ботинки от специальной защитной формы экологов. Данная форма разрабатывалась для выполнения заданий  в особо опасных местах.",182
+"STR_Hazmat_tors01","Protective uniform of environmentalists","Protective uniform of environmentalists","Защитная форма экологов",182
+"STR_Hazmat_tors00","Environmentalist uniform. This uniform was developed to perform tasks in particularly dangerous places. Usually this uniform is worn by people with extensive military experience","Environmentalist uniform. This uniform was developed to perform tasks in particularly dangerous places. Usually this uniform is worn by people with extensive military experience","Форма экологов. Данная форма разрабатывалась для выполнения заданий  в особо опасных местах. Обычно эту форму носят люди с большим военным опытом",182
+"STR_Hazmat_pants01","Protective pants for environmentalists","Protective pants for environmentalists","Защитные штаны экологов",182
+"STR_Hazmat_pants00","Environmentalist pants. This uniform was developed to perform tasks in particularly dangerous places. Usually this uniform is worn by people with extensive military experience","Environmentalist pants. This uniform was developed to perform tasks in particularly dangerous places. Usually this uniform is worn by people with extensive military experience","Штаны экологов. Данная форма разрабатывалась для выполнения заданий  в особо опасных местах. Обычно эту форму носят люди с большим военным опытом",182
+"STR_Hazmat_Helm01","Protective helmet for environmentalists","Protective helmet for environmentalists","Защитный шлем экологов",182
+"STR_Hazmat_Helm03","Protective helmet for environmentalists mirror","Protective helmet for environmentalists mirror","Защитный шлем экологов Зеркальный",182
+"STR_Hazmat_Helm00","Helmet of environmentalists. This uniform was developed to perform tasks in particularly dangerous places. Usually this uniform is worn by people with extensive military experience","Helmet of environmentalists. This uniform was developed to perform tasks in particularly dangerous places. Usually this uniform is worn by people with extensive military experience","Шлем экологов. Данная форма разрабатывалась для выполнения заданий  в особо опасных местах. Обычно эту форму носят люди с большим военным опытом",182
+"STR_Heavy_Military_armor01","Military special armor","Military special armor","Военная специальная броня",182
+"STR_Heavy_Military_armor00","Military armor, for work in specially hazardous and contaminated areas.","Military armor, for work in specially hazardous and contaminated areas.","Военная броня, для работы в специально опасных и зараженных зонах.",182
+"STR_Heavy_Military_armor_DOLG00","Military special armor DOLG","Military special armor DOLG","Военная специальная броня ДОЛГ",182
+"STR_Heavy_Military_armor_CS00","Military special armor ClearSky","Military special armor ClearSky","Военная специальная броня ЧН",182
+"STR_Heavy_Military_armor_MN00","Military special armor MONOLITH","Military special armor MONOLITH","Военная специальная броня МОНОЛИТ",182
+"STR_Heavy_Military_armor_Naem00","Military special armor MERCENARY","Military special armor MERCENARY","Военная специальная броня НАЕМНИК",182
+"STR_Heavy_Military_armor_voin00","Military special armor MILITARY","Military special armor MILITARY","Военная специальная броня ВОЕННЫЙ",182
+"STR_Heavy_Military_boots00","Durable, good boots","Durable, good boots","Прочные, хорошие ботинки",182
+"STR_Heavy_Military_boots01","Military special boots","Military special boots","Военные специальные ботинки",182
+"STR_Heavy_Military_boots_01","Special military boots DOLG","Special military boots DOLG","Специальные военные ботинки ДОЛГ",182
+"STR_Heavy_Military_boots_02","Special military boots ClearSky","Special military boots ClearSky","Специальные военные ботинки ЧН",182
+"STR_Heavy_Military_boots_03","Special military boots Monolith","Special military boots Monolith","Специальные военные ботинки Монолит",182
+"STR_Heavy_Military_boots_04","Special military boots Mercenaries","Special military boots Mercenaries","Специальные военные ботинки Наемник",182
+"STR_Heavy_Military_boots_05","Special military boots MILITARY","Special military boots MILITARY","Специальные военные ботинки ВОЕННЫЙ",182
+"STR_Heavy_Military_pants01","Military special pants","Military special pants","Военные специальные штаны",182
+"STR_Heavy_Military_pants00","Military special pants, for working in hazardous environments","Military special pants, for working in hazardous environments","Военные специальные штаны, для работы в опасной окружающей среде",182
+"STR_Heavy_Military_pants_01","Special military pants DOLG","Special military pants DOLG","Специальные военные штаны ДОЛГ",182
+"STR_Heavy_Military_pants_02","Special military pants ClearSky","Special military pants ClearSky","Специальные военные штаны ЧН",182
+"STR_Heavy_Military_pants_03","Special military pants Monolith","Special military pants Monolith","Специальные военные штаны Монолит",182
+"STR_Heavy_Military_pants_04","Special military pants Mercenaries","Special military pants Mercenaries","Специальные военные штаны Наемник",182
+"STR_Heavy_Military_pants_05","Special military pants Military","Special military pants Military","Специальные военные штаны Военный",182
+"STR_MilitaryBodyVest01","Heavy protective body armor","Heavy protective body armor","Тяжелый защитный бронежилет на тело",182
+"STR_MilitaryBodyVest02","Protection kit for war.","Protection kit for war.","Комплект защиты для война.",182
+"STR_Novice_bagpack01","Regular backpack","Regular backpack","Обычный рюкзак",182
+"STR_Novice_bagpack00","An ordinary backpack, nothing special about it. Usually suitable for hiking. Easily holds essential items","An ordinary backpack, nothing special about it. Usually suitable for hiking. Easily holds essential items","Обычный рюкзак ничего особенного в нем нет. Обычно подходит для походов. Легко вмещает в себя необходимые предметы",182
+"STR_Novice_jacket_Hood01","Soviet jacket with hood","Soviet jacket with hood","Советская куртка с капюшоном",182
+"STR_Novice_jacket_Hood00","An old Soviet one with a hood, it won’t save you from a bullet, but it will save you from a draft and light rain.","An old Soviet one with a hood, it won’t save you from a bullet, but it will save you from a draft and light rain.","Старая советская с копюшоном, от пули не спасет но от сквозняка и легкого дождя спасет",182
+"STR_Novice_jacket01","Soviet jacket","Soviet jacket","Советская куртка",182
+"STR_Novice_jacket00","Old Soviet, threads are sticking out on the collar, the hood is torn off. It will not save a blind dog from a bullet or bites. But from light rain or wind, quite","Old Soviet, threads are sticking out on the collar, the hood is torn off. It will not save a blind dog from a bullet or bites. But from light rain or wind, quite","Старая советская, торчат нитки на воротнике, капоюшон оторван. От пули или укусов слепого пса не спасет. Но от легкого дождя или ветра, вполне",182
+"STR_Jurnal_Piski_Siski01","journal","journal","Журнал",182
+"STR_Jurnal_Piski_Siski00","An attractive rare item in these parts. Good for a collection","An attractive rare item in these parts. Good for a collection","Привлекательная редкая вещица в этих краях. Для коллекции сойдет",182
+"STR_Collection_lor_jurnal01","Research","Research","Исследования",182
+"STR_Collection_lor_jurnal00","The condition leaves much to be desired. If you try, you can make out the text","The condition leaves much to be desired. If you try, you can make out the text","Состояние оставляет желать лучшего. Если постараться можно разобрать текст",182
+"STR_EXO_Glove01","Exoskeletal gloves","Exoskeletal gloves","Экзоскелетные перчатки",182
+"STR_EXO_Glove00","Exoskeleton gloves, strong hand construction.","Exoskeleton gloves, strong hand construction.","Экзоскелетные перчатки, сильная конструкция для кистей рук.",182
+"STR_SFP_Vodka01","A bottle of vodka, after drinking, you can use this bottle for different liquids, or break it and fight with a rose in a bar","A bottle of vodka, after drinking, you can use this bottle for different liquids, or break it and fight with a rose in a bar","Бутылка водки, после употребления можно использовать эту бутылку под разные жидкости, или разбить и розочкой драться в баре",182
+"STR_ratdog_Otrezano_Lapa01","Rat Wolf's Paw","Rat Wolf's Paw","Лапа Крысоволка",182
+"STR_ratdog_Otrezano_Lapa00","The severed paw of a rat-wolf, it contains a gene that allows it not to perceive radiation. If scientists calculate this gene, there may be a cure or a means to protect against radiation","The severed paw of a rat-wolf, it contains a gene that allows it not to perceive radiation. If scientists calculate this gene, there may be a cure or a means to protect against radiation","Отрезанная лапа крысоволка, в ней содержится ген, который позволяет не воспринимать радиацию. Если ученые вычислят этот ген, возможно будет лекарство или средство по защите от радиации",182
+"STR_RatDog1","Rat-wolf","Rat-wolf","Крысоволк",182
+"STR_SFP_JackDan_Bootle01","Bottle of Whiskey","Bottle of Whiskey","Бутылка Вискаря",182
+"STR_SFP_JackDan_Bootle00","A bottle of good whiskey. Will help you warm up, or get drunk","A bottle of good whiskey. Will help you warm up, or get drunk","Бутылка хорошего вискаря. Поможет согреться, или нажраться",182
+"STR_SFP_Tocarev01","Tokarev pistol","Tokarev pistol","Пистолет Токарева",182
+"STR_SFP_Tocarev00","The first army self-loading pistol of the USSR, developed in 1930 by the Soviet designer Fyodor Vasilyevich Tokarev","The first army self-loading pistol of the USSR, developed in 1930 by the Soviet designer Fyodor Vasilyevich Tokarev","Первый армейский самозарядный пистолет СССР, разработанный в 1930 году советским конструктором Фёдором Васильевичем Токаревым",182
+"STR_SFP_PistolTocarevMagazine_8rnd01","Tocarev Pistol Mag","Tocarev Pistol Mag","Магазин для Токарева",182
+"STR_SFP_PistolTocarevMagazine_8rnd00","Magazine for Tokarev pistol, holds 8 rounds, converted for 380","Magazine for Tokarev pistol, holds 8 rounds, converted for 380","Магазин для пистолета токарева, вмещает 8патронов переделанный под 380",182
+"STR_SFP_UsStevens62001","U.S. Stevens mod.620","U.S. Stevens mod.620","U.S. Stevens mod.620",182
+"STR_SFP_UsStevens62000","An American pump-action shotgun designed by John Browning.","An American pump-action shotgun designed by John Browning.","Американское помповое ружье, разработанное Джоном Браунингом.",182
+"STR_SFP_Fort50001","Fort500 shotgun","Fort500 shotgun","Дробовик Форт500",182
+"STR_SFP_Fort50000","The Fort-500 smoothbore shotgun was developed by the NPO Fort of the Ministry of Internal Affairs of Ukraine in the late 1990s and was intended to arm employees of the Ministry of Internal Affairs and security services of Ukraine.","The Fort-500 smoothbore shotgun was developed by the NPO Fort of the Ministry of Internal Affairs of Ukraine in the late 1990s and was intended to arm employees of the Ministry of Internal Affairs and security services of Ukraine.","Гладкоствольное ружье Форт-500 было разработано в НПО Форт МВД Украины в конце 1990х годов, и предназначалось для вооружения сотрудников МВД и служб безопасности Украины.",182
+"SFP_PMakarov01","Makarov","Makarov","Макаров",182
+"SFP_PMakarov00","Makarov pistol. Magazines from PMM are suitable","Makarov pistol. Magazines from PMM are suitable","Пистолет макарова. Подходят магазины от ИЖ 70",182
+"STR_SFP_Collection_folderSlot","Collectible jurnal","Collectible jurnal","Коллекционный журнал",182
+"STR_SFP_Collection_folder0","Folder for collectible magazines","Folder for collectible magazines","Папка для коллекционных журналов",182
+"STR_SFP_Collection_folder1","During the release of the 5th collection magazine, a folder was also put on sale to store everything in one place. Waterproof material, zipper, 3 convenient pockets inside for wet wipes.","During the release of the 5th collection magazine, a folder was also put on sale to store everything in one place. Waterproof material, zipper, 3 convenient pockets inside for wet wipes.","Во время выпуска 5 коллекционного журнала, в продажу так же поступила папка, для того чтобы хранить все в одном месте. Не промокаемый материал, застежка на молнии, 3 удобный кармашка внутри,  для влажных салфеток. ",182
+"inv_inspect_SFP_CustomVodka","SFP Vodka","SFP Vodka","ВОДОЧКА",182
+"STR_cfgliquiddefinitions_SFP_CustomVodka","$UNT$SFP_CustomVodka","$UNT$SFP_CustomVodka","$UNT$SFP_CustomVodka",182
+"STR_SFP_Vodka_GopStop0","Bootle Vodka Gop-Stop","Bootle Vodka Gop-Stop","Бутылка Водки: ГОП-СТОП",182
+"STR_SFP_Vodka_Fraerok0","Bootle Vodka Fraerok","Bootle Vodka Fraerok","Бутылка Водки: ФРАЕРОК",182
+"STR_SFP_Vodka_EcoAlko0","Bootle Vodka Drunk Eco","Bootle Vodka Drunk Eco","Бутылка Водки: ПЬЯНЫЙ ЭКОЛОГ",182
+"STR_SFP_Vodka_Sovok0","Bootle Vodka Soivet","Bootle Vodka Soivet","Бутылка Водки: СОВЕТСКАЯ",182
+"STR_SFP_Vodka_Pseno0","Bootle Vodka Psenicnaya","Bootle Vodka Psenicnaya","Бутылка Водки: Пшеничная",182
+"STR_SFP_Vodka_Rus0","Bootle Vodka Russian","Bootle Vodka Russian","Бутылка Водки: Русская",182
+"STR_SFP_Vodka_istrinka0","Bootle Vodka Istrinka","Bootle Vodka Istrinka","Бутылка Водки: ИСТРИНКА",182
+"STR_SFP_Vodka_Sibir0","Bootle Vodka: Sibirskaya","Bootle Vodka: Sibirskaya","Бутылка Водки: СИБИРСКАЯ",182
+"STR_SFP_Vodka_Kazak0","Bootle Vodka: Kazaks","Bootle Vodka: Kazaks","Бутылка Водки: Казаки",182
+"STR_SFP_Cognac_Bootle01","Bootle cognac","Bootle cognac","Бутылка Коньяка",182
+"STR_SFP_Cognac_Bootle00","A beautiful glass bottle. The perfect gift.","A beautiful glass bottle. The perfect gift.","Стеклянная красивая бутылка. Идеальный подарок",182
+"STR_SFP_Vodka_Dolgovskaya0","Bootle Vodka Dolg","Bootle Vodka Dolg","Бутылка Водки: ДОЛГОВСКАЯ",182
+"STR_SFP_Vodka_Firmennaya0","Bootle Vodka SFP","Bootle Vodka SFP","Бутылка Водки: СФПшная",182
+"STR_SFP_Vodka_Midnight0","Bootle Vodka MidNight","Bootle Vodka MidNight","Бутылка Водки: Миднайт",182
+"STR_SFP_TACTICAL_PDA01","tactical PDA","tactical PDA","Тактический КПК",182
+"STR_SFP_TACTICAL_PDA00","Convenient tactical PDA. The strap allows you to comfortably attach it to your hand.","Convenient tactical PDA. The strap allows you to comfortably attach it to your hand.","Удобный Тактический КПК. Ремень позволяет удобно закрепить на руке",182
+"STR_SFPArmyRadio16900","Army Radio","Army Radio","Армейская Рация",182
+"STR_SFPArmyRadio16901","original","english","russian",182
+"STR_SFP_DETECTOR_Medved00","Bear Detector","Bear Detector","Детектор Медведь",182
+"STR_SFP_DETECTOR_Medved01","No work","No work","Нет функционала",182
+"STR_SFP_GasStove01","Portable gas stove","Portable gas stove","Портативная газовая плита",182
+"STR_SFP_GasStove00","A handy little gadget for heating food. A blue gas cylinder is required.","A handy little gadget for heating food. A blue gas cylinder is required.","Удобная штука, позволяет разогревать пищу. Требуется газовый синий баллон ",182
+"STR_SFP_BIGGasCanister01","Gas cylinder","Gas cylinder","Газовый баллон",182
+"STR_SFP_BIGGasCanister00","There's a lot of gas, it will last a long time.","There's a lot of gas, it will last a long time.","Очень много газа, надолго хватит",182
+"STR_SFP_Mobile_NUKEA01","Mobile","Mobile","Мобильный телефон",182
+"STR_SFP_Mobile_NUKEA00","There is no connection, the screen is not working, but if you press the hash key, the flashlight turns on.","There is no connection, the screen is not working, but if you press the hash key, the flashlight turns on.","Связи нет, экран что то не работает, но если нажать решетку, включается фонарик.",182
+"STR_SFP_NaseserRuArmy00","Army toiletry bag","Army toiletry bag","Армейский несессер",182
+"STR_SFP_NaseserRuArmy01","A statutory toiletry bag. There's no such thing as "lost," just "fucked."","A statutory toiletry bag. There's no such thing as "lost," just "fucked."","Уставной несессер. Нет слова потерял, есть слово прое0@л",182
+"STR_SFP_RusIRP_Corob01","Big Box of Groceries","Big Box of Groceries","Большая Коробка с продуктами",182
+"STR_SFP_RusIRP_Corob00","The food is a dry ration, you can eat everything, it will last for a long time","The food is a dry ration, you can eat everything, it will last for a long time","Продукты сухпайка, можно кушать все, надолго хватит",182
+"STR_SFP_RusMRE_Box_RacionBase00","Under increased stress, soldiers must replenish their energy. During exercises, deployments to disaster zones, and military conflicts, soldiers receive food boxes. Each country contains different items in these kits.","Under increased stress, soldiers must replenish their energy. During exercises, deployments to disaster zones, and military conflicts, soldiers receive food boxes. Each country contains different items in these kits.","В условиях повышенной нагрузки военнослужащий должен восстанавливать затраченную энергию. Во время учений, пребывания в зонах бедствия и военных конфликтов солдаты получают коробки с продуктами. В каждой стране в состав таких комплектов входит разная продукция.",182
+"STR_SFP_RusMRE_Box_RacionBase04","Army dry rations 4","Army dry rations 4","Армейский сухпаек рацион 4",182
+"STR_SFP_RusMRE_Box_RacionBase03","Army dry rations 4","Army dry rations 3","Армейский сухпаек рацион 3",182
+"STR_SFP_RusMRE_Box_RacionBase06","Army dry rations 6","Army dry rations 6","Армейский сухпаек рацион 6",182
+"STR_SFP_RusIRP_ApplePure00","Applesauce","Applesauce","Запечатаное Яблочное пюре",182
+"STR_SFP_RusIRP_ApplePure_open00","Applesauce","Applesauce","Яблочное пюре",182
+"STR_SFP_RusIRP_Farsh00","Amateur sausage mince","Amateur sausage mince","Фарш колбасный любительский",182
+"STR_SFP_RusIRP_ikraFresh00","Vegetable caviar","Vegetable caviar","Икра из овощей",182
+"SFP_RusIRP_PastetPecen00","Liver pate","Liver pate","Паштет печеночный",182
+"SFP_RusIRP_Plavleniy00","Processed cheese","Processed cheese","Сыр плавленый",182
+"STR_SFP_RusIRP_Spik601","Salted bacon","Salted bacon","Шпик Соленый",182
+"SFP_RusIRP_Goletos_Blue00","Army Biscuits","Army Biscuits","Армейские Галеты",182
+"SFP_RusIRP_Goletos_Blue01","Army biscuits made from whole wheat flour. They taste like wood, but you can still eat them to avoid dying.","Army biscuits made from whole wheat flour. They taste like wood, but you can still eat them to avoid dying.","Армейские Галеты из пшеничной муки обойной. На вкус как дерево, но чтобы не сдохнуть можно и захавать",182
+"STR_SFP_RusIRP_Goletos_Green00","original","english","russian",182
+"STR_SFP_RusIRP_Goletos_Green01","original","english","russian",182
+"STR_SFP_RusIRP_OfficerShocolade00","Officer's Chocolate","Officer's Chocolate","Шоколад Офицерский",182
+"STR_SFP_RusIRP_SuhouNapitokCherry00","Cherry flavor concentrate","Cherry flavor concentrate","Концентрат вкус вишня",182
+"STR_SFP_RusIRP_SuhouNapitokCherry000","It's a concentrate; you should really just add it to water and drink it. Alternatively, you could just swallow it like sugar.","It's a concentrate; you should really just add it to water and drink it. Alternatively, you could just swallow it like sugar.","Концентрат, по правильному надо заливать водой а потом пить. Ну как вариант можно тупо сожрать как сахар",182
+"STR_SFP_RusIRP_SuhouNapitokCherry01","Currant flavor concentrate","Currant flavor concentrate","Концентрат вкус смородина",182
+"STR_SFP_RusIRP_Cofe00","Black ground coffee","Black ground coffee","Черный молотый кофе",182
+"STR_SFP_RusIRP_Cofe01","You have to brew it properly, but that won't work here, so just eat it.","You have to brew it properly, but that won't work here, so just eat it.","По правильному надо заваривать, ну тут так не сработает по этому просто жри",182
+"STR_SFP_RusIRP_Sahar00","Sugar","Sugar","Сахар",182
+"STR_SFP_RusIRP_Zvacka00","Chewing gum","Chewing gum","Жвачка",182
+"STR_SFP_RusIRP_slivki00","Dry cream","Dry cream","Сухие сливки",182
+"STR_SFP_RusIRP_SuhouNapitokKlubnika00","Strawberry flavor concentrate","Strawberry flavor concentrate","Концентрат вкус клубника",182
+"STR_SFP_RusIRP_PovidloApple00","Apple jam","Apple jam","Яблочное повидло",182
+"STR_RusMRE_Big_Porca00","It must be delicious.","It must be delicious.","Наверное вкусно.",182
+"STR_SFP_RusIRP_Buckwheat00","Buckwheat porridge","Buckwheat porridge","Каша гречневая",182
+"STR_SFP_RusIRP_Buckwheat_open00","Buckwheat Porridge with Beef","Buckwheat Porridge with Beef","Каша Гречневая с Говядиной",182
+"STR_SFP_RusIRP_Lard00","Salted bacon","Salted bacon","Шпик Соленый",182
+"STR_SFP_RusIRP_GulashMeatTomato00","Beef Goulash with Tomato Sauce","Beef Goulash with Tomato Sauce","Гуляш Говяжий с Томатным соусом",182
+"STR_SFP_RusIRP_Meat00","Meat with green peas","Meat with green peas","Мясо с зеленым горошком",182
+"STR_SFP_RusIRP_KashaRice00","Rice Porridge with Beef","Rice Porridge with Beef","Каша Рисовая с Говядиной",182
+"STR_SFP_RusIRP_MeatFasol600","Meat with beans and vegetables","Meat with beans and vegetables","Мясо с фасолью и овощами",182
+"STR_SFP_RusIRP_TeftelMeat600","Beef meatballs","Beef meatballs","Тефтели из говядины",182
+"STR_SFP_RusIRP_FrecodelMeat00","Beef meatballs","Beef meatballs","Фрикадельки из говядины",182
+"STR_SFP_RusIRP_FrecodelMeat_open00","Beef meatballs","Beef meatballs","Фрикадельки из говядины",182
+"STR_SFP_RusIRP_KashaGrecaMeat00","Buckwheat porridge with beef","Buckwheat porridge with beef","Каша гречневая с говядиной",182
+"STR_SFP_RusIRP_MeatFasolFresh00","Meat with beans and vegetables","Meat with beans and vegetables","Мясо с фасолью и овощами",182
+"STR_SFP_RusIRP_Shpik00","Canned salted lard","Canned salted lard","Шпик соленый консервированный",182
+"STR_SFP_Soviet_Teapot00","Soviet teapot","Soviet teapot","Советский чайник",182
+"STR_SFP_Soviet_Teapot01","A Soviet kettle. It helps you boil water over a campfire or a gas stove.","A Soviet kettle. It helps you boil water over a campfire or a gas stove.","Советский чайник. Поможет вскипятить воду на костре или на газовой плите.",182
+"STR_SFP_Tenevnik00","Tenevnik","Tenevnik","Теневник",182
+"STR_SFP_Tenevnik_eye00","Tenevnik eye","Tenevnik eye","Глаз Теневника",182
+"STR_SFP_Tenevnik_eye01","A whole eye removed from a shadow box. The eye itself glows faintly in the dark, a clear sign of radiation exposure. How this eye is capable of rendering others' vision at a distance is still unclear. But scientists would be happy to acquire it for study.","A whole eye removed from a shadow box. The eye itself glows faintly in the dark, a clear sign of radiation exposure. How this eye is capable of rendering others' vision at a distance is still unclear. But scientists would be happy to acquire it for study.","целый глаз извлеченный из теневника. Сам глаз слабо светится в темное, явный признак облучения. Как способен этот глаз, вызжигать зрение на дистанции другим пока не ясно. Но ученые срадостью приобретут на иследование",182
+"STR_SFP_MutaWolf_black01","Crap","Crap","Черт",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182

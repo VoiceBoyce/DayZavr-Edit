@@ -1,0 +1,13 @@
+ambient[]={0.29411766,0.29411766,0.29411766,1};
+diffuse[]={0.26666668,0.26666668,0.26666668,1};
+forcedDiffuse[]={0.30980393,0.30980393,0.30980393,1};
+emmisive[]={0,0,0,1};
+specular[]={0.090196081,0.090196081,0.090196081,1};
+specularPower=2.4000001;
+renderFlags[]=
+{
+	"nozwrite"
+};
+PixelShaderID="Super";
+VertexShaderID="Super";
+

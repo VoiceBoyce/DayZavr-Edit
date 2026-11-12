@@ -1,0 +1,7 @@
+Particle {
+ AlbedoMap "{4E86E504B9870040}SFP3/grafen/dds/part_molnShar_white_dds.edds" 
+ Emissive 1 1 1 0
+ BlendMode Additive_AlphaModulate
+ TileU 4
+ TileV 4
+}
