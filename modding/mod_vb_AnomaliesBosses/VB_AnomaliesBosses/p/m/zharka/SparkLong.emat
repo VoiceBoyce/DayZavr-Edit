@@ -1,0 +1,10 @@
+Particle {
+ AlbedoMap "{D676882DF1BFDB1A}VB_AB/p/m/zharka/SparkLong.edds" 
+ Emissive 1 1 1 1
+ CastShadow 1
+ BlendMode Additive_AlphaModulate
+ TileU 4
+ TileV 4
+ Softness 1
+ CameraBlendFar 0.001
+}

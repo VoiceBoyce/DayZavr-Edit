@@ -1,0 +1,40 @@
+$animsetinstance {
+ #template "{F0C651DE8E24A5DE}DZ/anims/workspaces/player/player_main/player_main.ast"
+ #nparents 1
+ #parent "{416372172B0AFA90}DZ/anims/workspaces/player/player_main/player_main_rifle.asi"
+ #ikpose "{F7A52CEE6628658F}DZ/anims/anm/player/ik/weapons/izh18.anm"
+ $animations {
+   "WeaponOperations.ErcRas.ChamberingLoop_Closed_Bullet" "{AFC73259A953470E}DZ/anims/anm/player/reloads/mp133/p_rfl_erc_chambering_bullet_looping_mp133_ras.anm"//перезярядка
+   "WeaponOperations.ErcRas.ChamberingLoop_Closed_NoBullet" "{AFC73259A953470E}DZ/anims/anm/player/reloads/mp133/p_rfl_erc_chambering_bullet_looping_mp133_ras.anm"//перезярядка
+   "WeaponOperations.ErcRas.ChamberingLoop_Open_Bullet" "{AFC73259A953470E}DZ/anims/anm/player/reloads/mp133/p_rfl_erc_chambering_bullet_looping_mp133_ras.anm"//перезярядка
+   "WeaponOperations.ErcRas.ChamberingLoop_Open_NoBullet" "{AFC73259A953470E}DZ/anims/anm/player/reloads/mp133/p_rfl_erc_chambering_bullet_looping_mp133_ras.anm"//перезярядка
+   "WeaponOperations.ErcRas.Fire" "{50EDD1C64CAAF032}DZ/anims/anm/player/reloads/akm/p_erc_fire_akm_ras.anm"
+   "WeaponOperations.ErcRas.FireEmptyAutomatic" "{67DC47B5FE80A981}DZ/anims/anm/player/reloads/akm/p_erc_fire_empty_automatic_akm_ras.anm"
+   "WeaponOperations.ErcRas.FireJam" "{5C1ADE9E222548A6}DZ/anims/anm/player/reloads/akm/p_erc_fire_jam_akm_ras.anm"
+   "WeaponOperations.ErcRas.FireLast" "{5C1ADE9E222548A6}DZ/anims/anm/player/reloads/akm/p_erc_fire_jam_akm_ras.anm"
+   "WeaponOperations.ErcRas.Jamming" "{FFEC58AB2E960063}DZ/anims/anm/player/reloads/sks/p_erc_unjam_sks_ras.anm"
+   "WeaponOperations.ErcRas.Jamming Cancel" "{B57649B759C88C0C}DZ/anims/anm/player/reloads/sks/p_erc_unjam_cancel_sks_ras.anm"
+   "WeaponOperations.ErcRas.ReloadAction_Closed" "{1BBF5FBE4BE9D3F4}DZ/anims/anm/player/reloads/sks/p_erc_reload_action_closed_sks_ras.anm"
+   "WeaponOperations.ErcRas.ReloadAction_Open" "{3832006D2DFF678D}DZ/anims/anm/player/reloads/sks/p_erc_reload_action_open_sks_ras.anm"
+   "WeaponOperations.ErcRas.ReloadClipInBullet" "{F139B5422E8CAF35}DZ/anims/anm/player/reloads/sks/p_erc_fast_chambering_in_bullet_sks_ras.anm"
+   "WeaponOperations.ErcRas.ReloadClipInNoBullet" "{EE7DE8B70550E519}DZ/anims/anm/player/reloads/sks/p_erc_fast_chambering_in_nobullet_sks_ras.anm"
+   "WeaponOperations.ErcRas.ReloadClipOut" "{51D56F0242842526}DZ/anims/anm/player/reloads/sks/p_erc_fast_chambering_out_nobullet_sks_ras.anm"
+   "WeaponOperations.ErcRas.ReloadClipPose" "{8D24BC3D469342B1}DZ/anims/anm/player/reloads/sks/p_erc_fast_chambering_execute_nobullet_sks_ras.anm"
+   "WeaponOperations.PneRas.ChamberingLoop_Closed_Bullet" "{5EF6DC5089915A26}DZ/anims/anm/player/reloads/mp133/p_rfl_pne_chambering_bullet_looping_mp133_ras.anm"
+   "WeaponOperations.PneRas.ChamberingLoop_Closed_NoBullet" "{5EF6DC5089915A26}DZ/anims/anm/player/reloads/mp133/p_rfl_pne_chambering_bullet_looping_mp133_ras.anm"
+   "WeaponOperations.PneRas.ChamberingLoop_Open_Bullet" "{5EF6DC5089915A26}DZ/anims/anm/player/reloads/mp133/p_rfl_pne_chambering_bullet_looping_mp133_ras.anm"
+   "WeaponOperations.PneRas.ChamberingLoop_Open_NoBullet" "{5EF6DC5089915A26}DZ/anims/anm/player/reloads/mp133/p_rfl_pne_chambering_bullet_looping_mp133_ras.anm"
+  "WeaponOperations.PneRas.Fire" "{B0453DB014FECAD9}DZ/anims/anm/player/reloads/akm/p_pne_fire_akm_ras.anm"
+   "WeaponOperations.PneRas.FireEmptyAutomatic" "{0F10D3C2D34170D4}DZ/anims/anm/player/reloads/akm/p_pne_fire_empty_automatic_akm_ras.anm"
+   "WeaponOperations.PneRas.FireJam" "{052835AE09967299}DZ/anims/anm/player/reloads/akm/p_pne_fire_jam_akm_ras.anm"
+   "WeaponOperations.PneRas.FireLast" "{052835AE09967299}DZ/anims/anm/player/reloads/akm/p_pne_fire_jam_akm_ras.anm"
+   "WeaponOperations.PneRas.Jamming" "{B78538D9CC31B55F}DZ/anims/anm/player/reloads/sks/p_pne_unjam_sks_ras.anm"
+   "WeaponOperations.PneRas.Jamming Cancel" "{04D41EEC57F33F18}DZ/anims/anm/player/reloads/sks/p_pne_unjam_cancel_sks_ras.anm"
+   "WeaponOperations.PneRas.ReloadAction_Closed" "{7373CBC966280AA1}DZ/anims/anm/player/reloads/sks/p_pne_reload_action_closed_sks_ras.anm"
+   "WeaponOperations.PneRas.ReloadAction_Open" "{B75237B16080B335}DZ/anims/anm/player/reloads/sks/p_pne_reload_action_open_sks_ras.anm"
+   "WeaponOperations.PneRas.ReloadClipInBullet" "{12A190BE32FA081B}DZ/anims/anm/player/reloads/sks/p_pne_fast_chambering_in_bullet_sks_ras.anm"
+   "WeaponOperations.PneRas.ReloadClipInNoBullet" "{1F4C06BE2592F831}DZ/anims/anm/player/reloads/sks/p_pne_fast_chambering_in_nobullet_sks_ras.anm"
+   "WeaponOperations.PneRas.ReloadClipOut" "{A473E91C0F0FE066}DZ/anims/anm/player/reloads/sks/p_pne_fast_chambering_out_nobullet_sks_ras.anm"
+   "WeaponOperations.PneRas.ReloadClipPose" "{D9B1565046D9C9EE}DZ/anims/anm/player/reloads/sks/p_pne_fast_chambering_execute_nobullet_sks_ras.anm"
+  
+ }

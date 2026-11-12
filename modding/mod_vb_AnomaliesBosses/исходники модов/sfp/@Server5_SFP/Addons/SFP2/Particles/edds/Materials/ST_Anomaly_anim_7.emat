@@ -1,0 +1,7 @@
+ParticleSprite {
+ AlbedoMap "{F35F2ED440266588}SFP2/Particles/edds/pristes/ST_anomaly_7.edds" 
+ Emissive 1 1 1 0
+ BlendMode Additive_AlphaModulate
+ TileU 4
+ TileV 2
+}

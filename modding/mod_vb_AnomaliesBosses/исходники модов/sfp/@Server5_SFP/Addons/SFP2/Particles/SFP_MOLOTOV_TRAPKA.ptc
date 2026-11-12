@@ -1,0 +1,118 @@
+EffectDef {
+ Emitors {
+  EmitorDef red_smoke {
+   MaxNum 50
+   BirthRate 5
+   BirthRateVel 10
+   Material "{008E25684854DAB8}graphics/particles/materials/smoke/steam_small_cook_01.emat"
+   SizeMultiplier 0.1
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 50
+   RandomAngle 1
+   Velocity 1
+   VelocityRND 0.5
+   AirResistanceRND 0.5
+   Wind 1
+   LifeTime 1
+   LifeTimeRND 0.5
+   Color {
+    0 1 0.8431 0.0549 0.2485 0.4745 0.4235 0.3333 1 0.2588 0.1686 0.1686
+   }
+   Alpha {
+    0 0 0.49449 0.15741 1 0
+   }
+   Size {
+    0 0.4 1 1
+   }
+   AlphaMast {
+    0 0.24074 0.2976 0.30556 1 0.27778
+   }
+   RotationSpeedMast {
+    0 0.40741 1 1
+   }
+  }
+  EmitorDef sparks {
+   ShapeType Box
+   ShapeSize 0.1 0 0.1
+   ConeAngle 360 0 45
+   MaxNum 50
+   BirthRate 2
+   BirthRateRND 5
+   BirthRateVel 10
+   Offset 0 -0.1 0
+   LocalTransform 0
+   Material "{009C2EBAACD2D72A}graphics/particles/materials/fire/sparks1.emat"
+   SizeMultiplier 0.02
+   SizeRND 0.02
+   RandomRotDir 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 0
+   VelocityRND 0.5
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 0
+   RandomFrame 0
+   LifeTime 1
+   LifeTimeRND 0.5
+   Color {
+    0 1 0.9843 0.4392 0.5 1 0.2863 0.1451 1 1 0.0078 0.0078
+   }
+   Alpha {
+    0 1 0.80757 0.984 1 0
+   }
+   Size {
+    0 1 0.25966 1 0.62597 1 1 0
+   }
+   Repeat 1
+  }
+  EmitorDef fire_anim {
+   ShapeType Box
+   ShapeSize 0.1 0.2 0.1
+   ConeAngle 360 0 45
+   MaxNum 55
+   BirthRate 55
+   BirthRateVel 50
+   Offset 0 0.00731 0
+   Material "{77B4F1C96D4CB375}graphics/particles/materials/fire/fire_medium_camp_05.emat"
+   ScaleX 0.815
+   ScaleY 0.64
+   SizeMultiplier 0.1
+   SizeRND 0.2
+   RandomRotDir 1
+   RotMultiplier 360
+   StretchMultiplier 0
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 1
+   VelocityRND 1
+   VelAffect 1
+   AirResistance 100
+   AirResistanceRND 0
+   GravityMultiply 0
+   Spring 0
+   Wind 1
+   AnimOnce 1
+   AnimFPS 30
+   LifetimeByAnim 1
+   RandomFrame 0
+   LifeTime 0.2
+   LifeTimeRND 0.2
+   Alpha {
+    0 0 0.125 1 0.6 0.75 1 0
+   }
+   Size {
+    0 0.25 0.28207 0.576 0.625 0.95 1 0
+   }
+  }
+ }
+}

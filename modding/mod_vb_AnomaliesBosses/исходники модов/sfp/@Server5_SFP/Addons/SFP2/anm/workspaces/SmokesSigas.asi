@@ -1,0 +1,17 @@
+$animsetinstance {
+ #template "{F0C651DE8E24A5DE}DZ/anims/workspaces/player/player_main/player_main.ast"
+ #nparents 1
+ #parent "{7324B2E80BB624A1}DZ/anims/workspaces/player/player_main/player_main_1h.asi"
+ $animations {
+  "ActionContinuous.TakeTempSelfCro.In" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_in.anm"//сидя
+   "ActionContinuous.TakeTempSelfCro.Loop" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_loop.anm"//сидя
+   "ActionContinuous.TakeTempSelfCro.Out" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_out.anm"//сидя
+   "ActionContinuous.TakeTempSelfErc.In" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_in.anm"//Стой
+   "ActionContinuous.TakeTempSelfErc.Loop" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_loop.anm"//Стой
+   "ActionContinuous.TakeTempSelfErc.Out" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_out.anm"//Стой
+   "ActionContinuous.TakeTempSelfPne.In" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_inX.anm"//леж
+   "ActionContinuous.TakeTempSelfPne.Loop" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_loop.anm"//леж
+   "ActionContinuous.TakeTempSelfPne.Out" "SFP2/anm/siga_smokes/remastered/2_smoker_siga_out.anm"//леж
+  
+ }
+//player_main_1h

@@ -1,0 +1,11 @@
+$animsetinstance {
+ #template "{F0C651DE8E24A5DE}DZ/anims/workspaces/player/player_main/player_main.ast"
+ #nparents 1
+ #parent "{7324B2E80BB624A1}DZ/anims/workspaces/player/player_main/player_main_1h.asi"
+ $animations {
+
+   "ActionOnce.OpenItemOnceCro.Once" "SFP2/anm/Vodka_Roza/vodka_roza_once.anm"
+   "ActionOnce.OpenItemOnceErc.Once" "SFP2/anm/Vodka_Roza/vodka_roza_once.anm"
+   "ActionOnce.OpenItemOncePne.Once" "SFP2/anm/Vodka_Roza/vodka_roza_once.anm"
+  
+ }

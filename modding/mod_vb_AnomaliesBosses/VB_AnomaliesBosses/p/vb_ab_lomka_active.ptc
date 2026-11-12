@@ -1,0 +1,361 @@
+EffectDef {
+ MinFPS 30
+ Emitors {
+  EmitorDef LightSplash {
+   ConeAngle 360 360 0
+   MaxNum 100
+   BirthRate 1000
+   BirthRateRND 0
+   BirthRateVel 1000
+   Offset 0 0 0
+   Material "{CB7AF4FD8ACBFDFC}graphics/particles/materials/glow/glow1.emat"
+   SizeMultiplier 10
+   SizeRND 4
+   RandomAngle 1
+   Velocity 1
+   VelocityRND 0
+   AirResistance 10
+   AirResistanceRND 5
+   GravityMultiplyRND 0
+   RandomFrame 1
+   LifeTime 0.01
+   LifeTimeRND 0.02
+   Color {
+    0 1 1 1 1 0.95 0.6938 0.2438
+   }
+   Alpha {
+    0 0 0.00958 0.9625 0.04839 1 0.10635 1 0.49798 1 1 0
+   }
+   Size {
+    0 0 0.27671 1 0.29385 0.11875 0.48387 1 0.48639 0.06875 1 1
+   }
+   EffectTime 4
+   Repeat 0
+   AlphaMast {
+    0 0 0.47833 0 0.48085 1 0.4874 1 0.54032 0 1 0
+   }
+   BRateMast {
+    0 0 0.48992 0 0.49244 1 0.49798 1 0.51966 0.00625 1 0.08125
+   }
+  }
+  EmitorDef LightSplashCLOSED {
+   ConeAngle 360 360 0
+   MaxNum 10
+   BirthRate 100
+   BirthRateRND 0
+   BirthRateVel 1000
+   Offset 0 -1 0
+   Material "{CB7AF4FD8ACBFDFC}graphics/particles/materials/glow/glow1.emat"
+   SizeMultiplier 5
+   SizeRND 4
+   RandomAngle 1
+   Velocity 1
+   VelocityRND 0
+   AirResistance 10
+   AirResistanceRND 5
+   GravityMultiplyRND 0
+   RandomFrame 1
+   LifeTime 0.01
+   LifeTimeRND 0.02
+   Alpha {
+    0 0.40625 0.14415 0 1 0
+   }
+   Size {
+    0 1 0.2505 0 1 0
+   }
+   EffectTime 4
+   Repeat 0
+   AlphaMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 1 0.03881 0 0.45464 0 1 0
+   }
+  }
+  EmitorDef SmokeSplash {
+   ConeAngle 0 0 720
+   MaxNum 200
+   BirthRate 10000
+   BirthRateRND 0
+   BirthRateVel 0
+   Offset 0 0 0
+   Angles 0 -90 0
+   Material "{8E25684854DAB008}graphics/particles/materials/smoke/steam_small_cook_01.emat"
+   SizeMultiplier 1
+   SizeRND 2
+   RandomAngle 1
+   Velocity 40
+   VelocityRND 45
+   AirResistance 30
+   AirResistanceRND 15
+   GravityMultiply 0.3
+   GravityMultiplyRND 0.5
+   RandomFrame 1
+   LifeTime 3
+   Alpha {
+    0 0.30625 0.55746 0.275 1 0
+   }
+   EffectTime 4
+   Repeat 0
+   AlphaMast {
+    0 0.17606 0.66885 0.10625 1 0
+   }
+   BRateMast {
+    0 0 0.59829 0 0.60081 1 1 1
+   }
+  }
+  EmitorDef SmokeSplashCLOSED {
+   ShapeType Ellipse
+   ShapeSize 7 0 7
+   ConeAngle 760 0 360
+   MaxNum 200
+   BirthRate 100
+   BirthRateRND 100
+   BirthRateVel 0
+   Offset 0 0 0
+   Material "{8E25684854DAB008}graphics/particles/materials/smoke/steam_small_cook_01.emat"
+   SizeMultiplier 1
+   SizeRND 3
+   RandomRotDir 1
+   RotMultiplier 40
+   RandomAngle 1
+   Velocity 0
+   VelocityRND 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Spring 0.1
+   RandomFrame 1
+   LifeTime 0.2
+   LifeTimeRND 0.5
+   Alpha {
+    0 0.7375 0.47883 0.61875 1 0
+   }
+   Size {
+    0 1 0.54587 0.8875 1 0.44375
+   }
+   EffectTime 4
+   Repeat 0
+   AlphaMast {
+    0 0.17606 0.66885 0.10625 1 0
+   }
+   SizeMast {
+    0 1 0.44355 1 1 0.51875
+   }
+   BRateMast {
+    0 0 0.08921 0 0.09173 1 0.44909 1 0.45161 0 1 0
+   }
+  }
+  EmitorDef SmokeGroundSplash {
+   ShapeType Ellipse
+   ShapeSize 10 0 10
+   ConeAngle 720 0 0
+   MaxNum 100
+   BirthRate 1000
+   BirthRateRND 1000
+   BirthRateVel 0
+   Offset 0 -0.5 0
+   Material "{67FEB95AE2ECC2EA}graphics/particles/materials/smoke/smoke_dust_01.emat"
+   SizeMultiplier 1
+   SizeRND 0.5
+   RandomRotDir 1
+   RotMultiplier 40
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 40
+   VelocityRND 30
+   AirResistance 1000
+   AirResistanceRND 1000
+   GravityMultiply 0.3
+   GravityMultiplyRND 0.6
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 3
+   LifeTimeRND 2
+   Alpha {
+    0 0 0.50554 0.10625 0.688 0.0875 1 0
+   }
+   Size {
+    0 1 0.55696 1 1 0.475
+   }
+   EffectTime 4
+   Repeat 0
+   AlphaMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 0 0.58266 0 0.59526 1 0.61996 0 1 0
+   }
+  }
+  EmitorDef SmokeGroundSplashClOSED {
+   ShapeType Ellipse
+   ShapeSize 10 0 10
+   ConeAngle 720 0 0
+   MaxNum 100
+   BirthRate 20
+   BirthRateRND 20
+   BirthRateVel 0
+   Offset 0 -0.5 0
+   Material "{67FEB95AE2ECC2EA}graphics/particles/materials/smoke/smoke_dust_01.emat"
+   SizeMultiplier 1
+   SizeRND 0.5
+   RandomRotDir 1
+   RotMultiplier 40
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 40
+   VelocityRND 30
+   AirResistance 1000
+   AirResistanceRND 1000
+   GravityMultiply 0.3
+   GravityMultiplyRND 0.6
+   Spring 0.05
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 0.5
+   LifeTimeRND 0.2
+   Alpha {
+    0 0.09375 0.50554 0.10625 0.688 0.0875 1 0
+   }
+   Size {
+    0 1 0.55696 1 1 0.475
+   }
+   EffectTime 4
+   Repeat 0
+   AlphaMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 1 0.38911 1 0.4002 0 1 0
+   }
+  }
+  EmitorDef LeavseSplash {
+   ConeAngle 0 0 720
+   MaxNum 200
+   BirthRate 10000
+   BirthRateRND 200
+   BirthRateVel 0
+   Offset 0 0.5 0
+   Angles 0 90 0
+   Material "{4369448B822FD818}graphics/particles/materials/enviroment/leaves_02.emat"
+   SizeMultiplier 0.02
+   SizeRND 0.15
+   RandomRotDir 1
+   RotMultiplier 20
+   RandomAngle 1
+   Velocity 40
+   VelocityRND 45
+   AirResistance 50
+   AirResistanceRND 40
+   GravityMultiply 0.4
+   GravityMultiplyRND 0.5
+   Wind 1
+   AnimFPS 10
+   RandomFrame 0
+   LifeTime 3
+   LifeTimeRND 2
+   Alpha {
+    0 1 0.47496 1 0.75822 1 1 0
+   }
+   Size {
+    0 1 1 0
+   }
+   EffectTime 4
+   Repeat 0
+   AlphaMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 0 0.61038 0 0.6129 1 0.63256 1 0.64516 0 1 0
+   }
+  }
+  EmitorDef LeavseSplash_cloned {
+   ConeAngle 0 0 720
+   MaxNum 100
+   BirthRate 10000
+   BirthRateRND 200
+   BirthRateVel 0
+   Offset 0 0.6 0
+   Angles 0 90 0
+   Material "{4369448B822FD818}graphics/particles/materials/enviroment/leaves_02.emat"
+   SizeMultiplier 0.02
+   SizeRND 0.15
+   RandomRotDir 1
+   RotMultiplier 20
+   RandomAngle 1
+   Velocity 50
+   VelocityRND 45
+   AirResistance 40
+   AirResistanceRND 30
+   GravityMultiply 0.4
+   GravityMultiplyRND 0.5
+   Wind 1
+   AnimFPS 10
+   RandomFrame 0
+   LifeTime 2
+   LifeTimeRND 1
+   Alpha {
+    0 1 0.47496 1 0.75822 1 1 0
+   }
+   Size {
+    0 1 1 0
+   }
+   EffectTime 4
+   Repeat 0
+   AlphaMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 0 0.61038 0 0.6129 1 0.63256 1 0.64516 0 1 0
+   }
+  }
+  EmitorDef SmokeLeavseCLOSED {
+   ShapeType Ellipse
+   ShapeSize 8 4 8
+   ConeAngle 760 0 360
+   MaxNum 250
+   BirthRate 100
+   BirthRateRND 100
+   BirthRateVel 0
+   Offset 0 0 0
+   Material "{4369448B822FD818}graphics/particles/materials/enviroment/leaves_02.emat"
+   SizeMultiplier 0.12
+   SizeRND 0.05
+   RandomRotDir 1
+   RotMultiplier 40
+   RandomAngle 1
+   Velocity 0
+   VelocityRND 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Spring 0.05
+   RandomFrame 1
+   LifeTime 0.3
+   LifeTimeRND 0.6
+   Alpha {
+    0 0 0.16532 1 0.35736 1 0.61694 0.45 1 0
+   }
+   Size {
+    0 1 0.54587 0.8875 1 0.78125
+   }
+   EffectTime 4
+   Repeat 0
+   AlphaMast {
+    0 0.17606 0.52268 1 1 0
+   }
+   SizeMast {
+    0 1 0.44355 1 1 0.51875
+   }
+   BRateMast {
+    0 0 0.08921 0 0.09173 1 0.44909 1 0.45161 0 1 0
+   }
+  }
+ }
+}

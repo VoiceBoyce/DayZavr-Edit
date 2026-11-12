@@ -1,0 +1,178 @@
+{
+ "STR_VB_AB_Mat_Electra": [
+  "Разрядный кварц",
+  "Discharge Quartz"
+ ],
+ "STR_VB_AB_Mat_Electra_Desc": [
+  "Светлый кварц из сердца Электры. Тонкие прожилки в нём светятся, будто по ним до сих пор бежит ток.",
+  "Pale quartz from the heart of an Electra. Its thin veins glow as if current were still running through them."
+ ],
+ "STR_VB_AB_Mat_EMP": [
+  "Ионная пыль",
+  "Ion Dust"
+ ],
+ "STR_VB_AB_Mat_EMP_Desc": [
+  "Тяжёлая синеватая пыль, осевшая после импульса. Пылинки липнут к пальцам и тихо потрескивают.",
+  "Heavy bluish dust that settled after the pulse. The grains cling to your fingers and crackle softly."
+ ],
+ "STR_VB_AB_Mat_Groza": [
+  "Грозовой кристалл",
+  "Storm Crystal"
+ ],
+ "STR_VB_AB_Mat_Groza_Desc": [
+  "Тёмный кристалл, выросший там, где били молнии. В глубине пробегают голубые разряды, а ладонь от него покалывает.",
+  "A dark crystal grown where lightning struck. Blue discharges run through its depths, and it makes your palm tingle."
+ ],
+ "STR_VB_AB_Mat_MlechniPut": [
+  "Звёздный песок",
+  "Star Sand"
+ ],
+ "STR_VB_AB_Mat_MlechniPut_Desc": [
+  "Тёмный песок, в котором мерцают крошечные искры, как звёзды в ночном небе. Его собирают там, где Млечный путь рассыпал свои брызги.",
+  "Dark sand with tiny sparks twinkling in it like stars in the night sky. It is gathered where the Milky Way scattered its sparks."
+ ],
+ "STR_VB_AB_Mat_Zharka": [
+  "Окалина",
+  "Fire Scale"
+ ],
+ "STR_VB_AB_Mat_Zharka_Desc": [
+  "Хрупкая корка, сброшенная столбом огня. Под чешуйками тлеет раскалённая сердцевина, хотя на ощупь окалина едва тёплая.",
+  "A brittle crust shed by a pillar of fire. A red-hot core smoulders under the flakes, yet the scale is barely warm to the touch."
+ ],
+ "STR_VB_AB_Mat_FireShtorm": [
+  "Пепельное стекло",
+  "Ash Glass"
+ ],
+ "STR_VB_AB_Mat_FireShtorm_Desc": [
+  "Чёрное стекло, сплавленное огненным вихрем из песка и пепла. В трещинах до сих пор тлеет жар.",
+  "Black glass fused from sand and ash by a fiery whirlwind. Heat still smoulders in its cracks."
+ ],
+ "STR_VB_AB_Mat_FireIskra": [
+  "Искровой уголь",
+  "Spark Coal"
+ ],
+ "STR_VB_AB_Mat_FireIskra_Desc": [
+  "Лёгкий чёрный уголь, внутри которого то и дело вспыхивают искры. Он не горит и не гаснет.",
+  "A light black coal with sparks flaring up inside it now and then. It neither burns nor goes out."
+ ],
+ "STR_VB_AB_Mat_Par": [
+  "Горячий конденсат",
+  "Hot Condensate"
+ ],
+ "STR_VB_AB_Mat_Par_Desc": [
+  "Пар аномалии, осевший в запаянной капсуле. Внутри он не остывает и медленно клубится.",
+  "Steam from the anomaly, condensed in a sealed capsule. It never cools inside and keeps slowly swirling."
+ ],
+ "STR_VB_AB_Mat_Snow": [
+  "Вечный лёд",
+  "Eternal Ice"
+ ],
+ "STR_VB_AB_Mat_Snow_Desc": [
+  "Кристалл льда из сердца метели. Он не тает ни у костра, ни за пазухой.",
+  "An ice crystal from the heart of a blizzard. It melts neither by the fire nor inside your coat."
+ ],
+ "STR_VB_AB_Mat_Steklo": [
+  "Острый осколок",
+  "Sharp Shard"
+ ],
+ "STR_VB_AB_Mat_Steklo_Desc": [
+  "Осколок из роя стеклянных лезвий. Края острее бритвы, а внутри мерцают ледяные прожилки.",
+  "A shard from a swarm of glass blades. Its edges are sharper than a razor, and icy veins shimmer inside."
+ ],
+ "STR_VB_AB_Mat_Zastoy": [
+  "Застывший пузырь",
+  "Frozen Bubble"
+ ],
+ "STR_VB_AB_Mat_Zastoy_Desc": [
+  "Пузырь застоявшегося воздуха, затвердевший от холода. Если поднести к уху, кажется, что время внутри стоит.",
+  "A bubble of stagnant air that hardened in the cold. Hold it to your ear and time inside seems to stand still."
+ ],
+ "STR_VB_AB_Mat_Voronka": [
+  "Сжатый камень",
+  "Compressed Stone"
+ ],
+ "STR_VB_AB_Mat_Voronka_Desc": [
+  "Камень, сдавленный воронкой до размера ореха. Для своей величины он удивительно тяжёлый.",
+  "A stone squeezed by a vortex to the size of a walnut. It is surprisingly heavy for its size."
+ ],
+ "STR_VB_AB_Mat_Lomka": [
+  "Скрученный камень",
+  "Twisted Stone"
+ ],
+ "STR_VB_AB_Mat_Lomka_Desc": [
+  "Камень, закрученный вихрем, как мокрая тряпка. Вдоль витков светятся фиолетовые полосы.",
+  "A stone wrung by the whirlwind like a wet rag. Violet streaks glow along its twists."
+ ],
+ "STR_VB_AB_Mat_Tramplin": [
+  "Гравитационная галька",
+  "Gravity Pebble"
+ ],
+ "STR_VB_AB_Mat_Tramplin_Desc": [
+  "Гладкая плоская галька, отшлифованная бесконечными подбрасываниями. По ней расходятся светящиеся кольца, как круги по воде.",
+  "A smooth flat pebble polished by endless tossing. Glowing rings spread across it like ripples on water."
+ ],
+ "STR_VB_AB_Mat_Roy": [
+  "Хитиновая пыль",
+  "Chitin Dust"
+ ],
+ "STR_VB_AB_Mat_Roy_Desc": [
+  "Мелкая шелуха с крыльев и панцирей роя. Иногда в ней вспыхивают зелёные искорки.",
+  "Fine husks from the wings and shells of the swarm. Green sparks flash in it now and then."
+ ],
+ "STR_VB_AB_Mat_Studen": [
+  "Студенистая слизь",
+  "Jelly Slime"
+ ],
+ "STR_VB_AB_Mat_Studen_Desc": [
+  "Кислотный студень, запаянный в капсулу. Медленно колышется и, говорят, разъедает всё, кроме стекла.",
+  "Acidic jelly sealed in a capsule. It sways slowly and is said to eat through everything but glass."
+ ],
+ "STR_VB_AB_Mat_Holera": [
+  "Ядовитая плесень",
+  "Poison Mould"
+ ],
+ "STR_VB_AB_Mat_Holera_Desc": [
+  "Комок плесени с края ядовитой лужи. Он пузырится и светится, нюхать его не стоит.",
+  "A lump of mould from the edge of a poisonous pool. It bubbles and glows; better not sniff it."
+ ],
+ "STR_VB_AB_Mat_Flash": [
+  "Световая пыль",
+  "Light Dust"
+ ],
+ "STR_VB_AB_Mat_Flash_Desc": [
+  "Пыль, оставшаяся от погасшей вспышки. Светится ровным перламутровым светом и переливается, если пересыпать её с ладони на ладонь.",
+  "Dust left over from a faded flash. It glows with an even pearly light and shimmers when poured from palm to palm."
+ ],
+ "STR_VB_AB_Mat_LinceAgr": [
+  "Линзовое стекло",
+  "Lens Glass"
+ ],
+ "STR_VB_AB_Mat_LinceAgr_Desc": [
+  "Круглое стекло из Злой линзы. Сквозь него мир плывёт и кривится, а в глубине бегут тонкие розовые нити.",
+  "A round glass from an Evil Lens. Through it the world swims and warps, and thin pink threads run in its depths."
+ ],
+ "STR_VB_AB_Mat_Lince": [
+  "Пустое стекло",
+  "Empty Glass"
+ ],
+ "STR_VB_AB_Mat_Lince_Desc": [
+  "Мутное стекло, похожее на линзовое, но внутри почти пустое. Безобидная Линза только такое и оставляет.",
+  "Cloudy glass that looks like lens glass but is almost empty inside. A harmless Lens leaves nothing better."
+ ],
+ "STR_VB_AB_Mat_DeadZone": [
+  "Чёрный пепел",
+  "Black Ash"
+ ],
+ "STR_VB_AB_Mat_DeadZone_Desc": [
+  "Жирный чёрный пепел из мёртвой зоны. В нём тлеют редкие жёлтые искры, пахнет гарью и железом.",
+  "Greasy black ash from a dead zone. Rare yellow sparks smoulder in it, and it smells of burning and iron."
+ ],
+ "STR_VB_AB_Mat_Atom": [
+  "Светящийся шлак",
+  "Glowing Slag"
+ ],
+ "STR_VB_AB_Mat_Atom_Desc": [
+  "Оплавленный шлак из эпицентра Атома, весь в светящихся язвах. Тёплый, тяжёлый и тихо потрескивает.",
+  "Fused slag from the epicentre of an Atom, covered in glowing sores. Warm, heavy and softly crackling."
+ ]
+}

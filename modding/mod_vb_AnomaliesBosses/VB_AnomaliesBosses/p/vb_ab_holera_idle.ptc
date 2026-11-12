@@ -1,0 +1,169 @@
+EffectDef {
+ MinFPS 24
+ Emitors {
+  EmitorDef SphereLightingSmoke {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 720 0 720
+   MaxNum 200
+   BirthRate 100
+   BirthRateRND 100
+   BirthRateVel 2000
+   Offset 0 1.5 0
+   Angles 0 0 0
+   Material "{5855301D1406CEBF}VB_AB/p/m/electra/Lighting02/SparkElectra.emat"
+   SizeMultiplier 0.05
+   SizeRND 0.5
+   RandomRotDir 1
+   RotMultiplier 90
+   StreakFullUV 0
+   VelAngle 1
+   RandomAngle 1
+   Sort 0
+   Velocity 50
+   AirResistance 100
+   AirResistanceRND 2
+   Spring 0.05
+   AnimOnce 1
+   AnimFPS 10
+   LifetimeByAnim 0
+   LifeTime 0.5
+   LifeTimeRND 0.1
+   Color {
+    0 0.7926 0.6667 0 1 0.2519 0.6815 0
+   }
+   Alpha {
+    0 0 0.06536 1 0.15098 0.18519 0.1817 1 0.26144 0.25185 0.40915 1 0.4915 0.38519 0.54118 0.93333 0.58758 0.47407 0.63333 0.77778 0.68431 0.25185 0.73595 1 0.89412 0.04444 1 0.31111
+   }
+   EffectTime 10
+   AlphaMast {
+    0 1 0.05556 1 0.14444 0.51111 0.2451 1 0.33987 0.4963 0.47124 1 0.60458 0.6 0.7451 1 0.83007 0.27407 0.88105 1 1 0.48148
+   }
+   SizeMast {
+    0 0.22963 0.16209 0.9037 0.25033 0.22222 0.30327 0.85185 0.40131 0.42222 0.49935 1 0.57582 0.20741 0.66536 0.9037 0.71438 0.40741 0.77712 0.94074 0.82876 0.25185 0.89412 0.84444 1 0
+   }
+   BRateMast {
+    0 1 1 1
+   }
+   AirResistanceMast {
+    0 0.45185 0.07255 0.28148 0.14052 0.94815 0.21503 0.75556 0.27974 0.25926 0.36144 0.57037 0.42418 0.3037 0.48105 0.62963 0.55098 0.26667 0.63268 0.71852 0.70327 0.43704 0.74706 0.85185 1 0
+   }
+   VelocityMast {
+    0 1 0.09412 0.82963 0.16797 0.67407 0.23007 0.88148 0.29935 0.55556 0.35621 0.94815 0.43007 0.73333 0.49608 1 0.66078 0.55556 0.78758 0.8963 0.90719 0.6 1 0.92593
+   }
+  }
+  EmitorDef LightLineUP {
+   ConeAngle 360 0 720
+   MaxNum 1000
+   BirthRate 300
+   BirthRateRND 300
+   Offset 0 1.5 0
+   Material "{5855301D1406CEBF}VB_AB/p/m/electra/Lighting02/SparkElectra.emat"
+   SizeMultiplier 0.2
+   SizeRND 0.01
+   RandomRotDir 1
+   RotMultiplier 900
+   StretchMultiplier 1.1
+   VelAngle 0
+   RandomAngle 1
+   Velocity 3
+   AirResistance 0.5
+   GravityMultiply 0.002
+   Spring 0.001
+   AnimOnce 1
+   AnimFPS 0
+   LifeTime 2
+   LifeTimeRND 1
+   Color {
+    0 0.7481 0.6741 0 1 0.5037 0.8593 0
+   }
+   Alpha {
+    0 0 0.27124 0.08148 0.30915 0.7037 0.3451 0.14074 0.37255 0.54074 0.40327 0.0963 0.4366 0.46667 0.47451 0.16296 0.51569 0.60741 0.55425 0.15556 0.60523 0.66667 0.65752 0.13333 0.69804 0.6 0.73595 0.14074 0.78366 0.58519 1 0
+   }
+   Size {
+    0 0 0.19542 0.72593 0.26797 0.42222 0.30327 0.88889 0.34248 0.27407 0.37255 0.82222 0.40392 0.23704 0.43922 0.93333 0.47974 0.48148 0.52288 0.9037 0.52614 0.19259 0.58758 0.61481 0.71699 0.28148 0.72026 0.81481 0.76209 0.37037 1 0
+   }
+   AlphaMast {
+    0 0.02963 0.47974 0.32593 1 0.02963
+   }
+   AirResistanceMast {
+    0 0.51111 0.14967 0.82222 0.20065 0.34074 0.28105 1 0.37712 0.37037 0.39739 0.86667 0.43464 0.36296 0.48301 0.65926 0.52092 0.44444 0.56601 0.87407 0.61373 0.42222 0.68889 0.82963 0.78431 0.40741 0.85556 0.67407 1 0.81481
+   }
+   VelocityMast {
+    0 0.13333 0.11242 0.28148 0.15686 0.46667 0.21503 0.11111 0.26993 0.4 0.3268 0.2963 0.38497 0.48889 0.45359 0.23704 0.5281 0.37778 0.54902 0.20741 0.64118 0.25926 0.72549 0.16296 0.77386 0.42222 0.8281 0.14815 1 0.37778
+   }
+  }
+  EmitorDef Light {
+   MaxNum 4
+   BirthRate 5
+   BirthRateRND 5
+   Offset 0 1.5 0
+   Angles 0 0 0
+   Material "{5855301D1406CEBF}VB_AB/p/m/electra/Lighting02/SparkElectra.emat"
+   SizeMultiplier 3
+   Spring 1
+   LifeTime 1
+   Color {
+    0 0.6963 0.7481 0 1 0.4963 0.8148 0
+   }
+   Alpha {
+    0 0 0.48824 0.37037 1 0
+   }
+  }
+  EmitorDef Hole {
+   MaxNum 4
+   BirthRate 5
+   BirthRateRND 5
+   Offset 0 1.5 0
+   Angles 0 0 0
+   Material "{85C970019E3A76C9}VB_AB/p/m/voronka/BubbleHole.emat"
+   SizeMultiplier 4
+   SizeRND 1
+   Velocity 10
+   Spring 1
+   AnimFPS 30
+   LifeTime 1
+   Color {
+    0 0.4667 0.7704 0 1 0.7333 0.763 0
+   }
+   Alpha {
+    0 0 0.4732 0.05185 1 0
+   }
+  }
+  EmitorDef Smoke {
+   ConeAngle 360 0 720
+   MaxNum 100
+   BirthRate 45
+   BirthRateRND 45
+   BirthRateVel 0
+   Offset 0 1.5 0
+   Angles 0 0 0
+   Material "{ADDEE13E78378825}graphics/particles/materials/smoke/smoke_cloud_01_b_trans_landmine_01.emat"
+   SizeMultiplier 1
+   SizeRND 0.7
+   RandomRotDir 1
+   RotMultiplier 60
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 12
+   AirResistance 14
+   AirResistanceRND 15
+   Spring 0
+   AnimOnce 1
+   AnimFPS 32
+   LifeTime 2
+   LifeTimeRND 0.5
+   Color {
+    0 0.4667 0.7704 0 1 0.7333 0.763 0
+   }
+   Alpha {
+    0 0 0.49673 0.07407 1 0
+   }
+   AlphaMast {
+    0 0.84444 0.49935 0.9037 1 0.77037
+   }
+  }
+ }
+}

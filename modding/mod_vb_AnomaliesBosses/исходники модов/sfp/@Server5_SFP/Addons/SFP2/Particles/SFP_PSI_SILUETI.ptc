@@ -1,0 +1,206 @@
+EffectDef {
+ MinFPS 30
+ Emitors {
+  EmitorDef Strelok2TEN {
+   ShapeType Ellipse
+   ShapeSize 100 0 100
+   ConeAngle 360 55 20
+   MaxNum 2
+   BirthRate 2
+   Offset 0 1 0
+   LocalTransform 0
+   Material "{83F91AAB3305555D}SFP2/Particles/edds/Materials/Strelok2TEN.emat"
+   CenterY 0.019
+   ScaleX 1
+   SizeMultiplier 2
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 0
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 0.01
+   LifeTime 6
+   Alpha {
+    0 0 0.4898 0.77778 1 0
+   }
+  }
+  EmitorDef StrelokTEN {
+   ShapeType Ellipse
+   ShapeSize 100 0 100
+   ConeAngle 360 55 20
+   MaxNum 1
+   BirthRate 1
+   Offset 0 1 0
+   LocalTransform 0
+   Material "{78C07D714C60C24A}SFP2/Particles/edds/Materials/StrelokTEN.emat"
+   CenterY 0.019
+   ScaleX 1
+   SizeMultiplier 2
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 0
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 0.01
+   LifeTime 8
+   Alpha {
+    0 0 0.48926 0.77778 1 0
+   }
+  }
+  EmitorDef ZombieTEN {
+   ShapeType Ellipse
+   ShapeSize 100 0 100
+   ConeAngle 360 55 20
+   MaxNum 1
+   BirthRate 1
+   Offset 0 1 0
+   LocalTransform 0
+   Material "{999FDC3834AB5742}SFP2/Particles/edds/Materials/ZombieTEN.emat"
+   CenterY 0.019
+   ScaleX 1
+   SizeMultiplier 2
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 0
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 0.01
+   LifeTime 10
+   Alpha {
+    0 0 0.49033 0.81481 1 0
+   }
+  }
+  EmitorDef prizrak1 {
+   ShapeType Ellipse
+   ShapeSize 100 0 100
+   ConeAngle 360 55 20
+   MaxNum 1
+   BirthRate 1
+   Offset 0 1 0
+   LocalTransform 0
+   Material "{FDB357368367993D}SFP2/Particles/edds/Materials/Prizrak1.emat"
+   CenterY 0.019
+   ScaleX 1
+   SizeMultiplier 2
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 0
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 0.01
+   LifeTime 5
+   Alpha {
+    0 0 0.49302 0.72222 1 0
+   }
+  }
+  EmitorDef prizrak2 {
+   ShapeType Ellipse
+   ShapeSize 100 0 100
+   ConeAngle 360 55 20
+   MaxNum 1
+   BirthRate 1
+   Offset 0 1 0
+   LocalTransform 0
+   Material "{A35B7E753CEA1732}SFP2/Particles/edds/Materials/Prizrak2.emat"
+   CenterY 0.019
+   ScaleX 1
+   SizeMultiplier 2
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 0
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 0.01
+   LifeTime 7
+   Alpha {
+    0 0 0.48657 0.75 1 0
+   }
+  }
+  EmitorDef prizrak3 {
+   ShapeType Ellipse
+   ShapeSize 100 0 100
+   ConeAngle 360 55 20
+   MaxNum 1
+   BirthRate 1
+   Offset 0 1 0
+   LocalTransform 0
+   Material "{7E2DA412E7E735F2}SFP2/Particles/edds/Materials/Zombie2TEN.emat"
+   CenterY 0.019
+   ScaleX 1
+   SizeMultiplier 2
+   SizeRND 0
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 0
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 0.01
+   LifeTime 6
+   Alpha {
+    0 0 0.48818 0.71296 1 0
+   }
+  }
+  EmitorDef prizrak4 {
+   ShapeType Ellipse
+   ShapeSize 100 0 100
+   ConeAngle 360 55 20
+   MaxNum 1
+   BirthRate 1
+   Offset 0 1 0
+   LocalTransform 0
+   Material "{1E8B2CF243F10B2C}SFP2/Particles/edds/Materials/Prizrak4.emat"
+   CenterY 0.019
+   ScaleX 1
+   SizeMultiplier 2
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 0
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 0.01
+   LifeTime 8
+   Alpha {
+    0 0 0.48389 0.75 1 0
+   }
+  }
+  EmitorDef prizrak5 {
+   ShapeType Ellipse
+   ShapeSize 100 0 100
+   ConeAngle 360 55 20
+   MaxNum 1
+   BirthRate 1
+   Offset 0 1 0
+   LocalTransform 0
+   Material "{EA836B6A4E2C6358}SFP2/Particles/edds/Materials/Prizrak5.emat"
+   CenterY 0.019
+   ScaleX 1
+   SizeMultiplier 2
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 0
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 0.01
+   LifeTime 5
+   Alpha {
+    0 0 0.49248 0.65741 1 0
+   }
+  }
+ }
+}

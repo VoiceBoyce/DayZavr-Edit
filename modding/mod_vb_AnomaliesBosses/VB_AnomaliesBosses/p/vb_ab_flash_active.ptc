@@ -1,0 +1,147 @@
+EffectDef {
+ Emitors {
+  EmitorDef LightMid {
+   ShapeType Box
+   ShapeSize 0 0 0
+   ConeAngle 360 0 720
+   MaxNum 10
+   BirthRate 100
+   BirthRateRND 100
+   Offset 0 1.5 0
+   Material "{8F96A9B22F1651B2}VB_AB/p/m/Other/Lighting2.emat"
+   SizeMultiplier 9
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 50
+   StreakFullUV 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   Spring 0
+   AnimFPS 30
+   LifeTime 2
+   LifeTimeRND 2
+   Color {
+    0 1 0.6 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.25403 1 0.26663 1 0.26915 0 1 0
+   }
+   Size {
+    0 0 0.00907 0.06875 0.07712 0.08125 0.24294 0.1625 0.25353 1 0.2873 1 0.31149 0 1 0
+   }
+   EffectTime 2
+   Repeat 0
+  }
+  EmitorDef Light {
+   ShapeType Box
+   ShapeSize 0 0 0
+   ConeAngle 0 0 0
+   MaxNum 5
+   BirthRate 10
+   BirthRateRND 10
+   Offset 0 1.5 0
+   Material "{32CF29535EBF2D40}VB_AB/p/m/Other/Lighting.emat"
+   SizeMultiplier 7
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 30
+   StreakFullUV 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   Spring 0
+   AnimFPS 30
+   LifeTime 2
+   LifeTimeRND 2
+   Color {
+    0 1 0.6 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.00252 1 0.08669 1 0.23437 1 0.2369 0 0.35635 0 1 0
+   }
+   Size {
+    0 0 0.01865 0.10625 0.2253 0.14375 0.23992 1 0.44304 1 1 1
+   }
+   EffectTime 2
+   Repeat 0
+   AlphaMast {
+    0 0.2875 1 1
+   }
+  }
+  EmitorDef Ring {
+   ShapeType Point
+   ShapeSize 2 2 2
+   ConeAngle 360 0 720
+   MaxNum 10
+   BirthRate 10
+   BirthRateRND 10
+   Offset 0 1.5 0
+   Material "{C8185B6EBE58D977}VB_AB/p/m/Other/Ring.emat"
+   SizeMultiplier 10
+   SizeRND 0.5
+   RandomRotDir 1
+   RotMultiplier 90
+   StreakFullUV 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   Spring 0
+   AnimFPS 30
+   LifeTime 1
+   LifeTimeRND 0.5
+   Color {
+    0 1 0.6 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.03579 1 0.22026 0 1 0
+   }
+   Size {
+    0 0 0.65222 1 1 1
+   }
+   EffectTime 2
+   Repeat 0
+   AlphaMast {
+    0 0.5 0.49294 0 1 0
+   }
+  }
+  EmitorDef SphereLightingHole {
+   ShapeType Point
+   ShapeSize 2 2 2
+   ConeAngle 360 0 720
+   MaxNum 10
+   BirthRate 10
+   BirthRateRND 10
+   Offset 0 1.5 0
+   Material "{E77CE1C109C00FC5}VB_AB/p/m/voronka/BubbleHole.emat"
+   SizeMultiplier 5
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 30
+   StreakFullUV 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   AirResistance 0
+   Spring 0
+   AnimFPS 24
+   LifetimeByAnim 0
+   LifeTime 0.5
+   LifeTimeRND 0.3
+   Color {
+    0 0.2688 0.7481 1 0.3317 0.35 0.4687 0.8438 1 0.4187 0.8519 1
+   }
+   Alpha {
+    0 0 0.04183 0.07407 0.11946 0.20625 0.25504 0 0.33014 0.08125 0.4128 0 0.46371 0.075 0.50958 0.04375 0.56754 0.00625 0.625 0.125 0.6754 0.00625 0.74194 0.13125 0.79889 0.06875 0.84778 0.14375 0.88911 0 1 0
+   }
+   Size {
+    0 0 1 1
+   }
+   EffectTime 2
+   Repeat 0
+   AlphaMast {
+    0 1 0.63659 0 1 0
+   }
+  }
+ }
+}

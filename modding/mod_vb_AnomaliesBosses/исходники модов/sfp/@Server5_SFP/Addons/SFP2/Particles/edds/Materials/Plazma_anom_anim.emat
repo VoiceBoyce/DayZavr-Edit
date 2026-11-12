@@ -1,0 +1,7 @@
+ParticleSprite {
+ AlbedoMap "{03965B1CD5830201}SFP2/Particles/edds/pristes/plazma_krug.edds" 
+ Emissive 1 1 1 0
+ BlendMode Additive_AlphaModulate
+ TileU 6
+ TileV 3
+}

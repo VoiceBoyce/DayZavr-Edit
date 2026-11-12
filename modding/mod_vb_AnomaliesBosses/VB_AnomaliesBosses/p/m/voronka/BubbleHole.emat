@@ -1,0 +1,11 @@
+Particle {
+ AlbedoMap "{81C74F24F6589EC8}VB_AB/p/m/voronka/BubbleHole.edds" 
+ Emissive 1 1 1 1
+ CastShadow 1
+ NormalMap "{960DE52489FAE99C}VB_AB/p/m/voronka/BubbleHoleNorm.edds" 
+ BlendMode Additive_AlphaModulate
+ TileU 5
+ TileV 4
+ Softness 1
+ CameraBlendFar 0.001
+}

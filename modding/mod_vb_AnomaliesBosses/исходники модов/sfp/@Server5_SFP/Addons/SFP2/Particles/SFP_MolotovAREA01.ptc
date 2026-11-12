@@ -1,0 +1,239 @@
+EffectDef {
+ Emitors {
+  EmitorDef fire_middle {
+   ShapeType Ellipse
+   ShapeSize 0 8 10
+   ConeAngle 0 0 0
+   MaxNum 70
+   BirthRate 60
+   Offset 0 0 0
+   Angles 0 0 90
+   LocalTransform 0
+   Material "{3E6CE4D61F8AC71F}graphics/particles/materials/fire/fire_medium_camp_02.emat"
+   CenterX 0
+   CenterY -1
+   ScaleX 0.618
+   ScaleY 1
+   SizeMultiplier 1.5
+   SizeRND 1.5
+   RandomRotDir 1
+   RotMultiplier 4
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 1
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   VelocityRND 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 5
+   LifeTimeRND 5
+   Color {
+    0 0.251 0.251 0.251 1 0.251 0.251 0.251
+   }
+   Alpha {
+    0 0 0.14608 1 0.44882 1 0.74758 1 1 0
+   }
+   Size {
+    0 0.48101 1 0.99367
+   }
+   EffectTime 1
+   Repeat 1
+  }
+  EmitorDef fire_middle_cloned {
+   ShapeType Ellipse
+   ShapeSize 0 7 10
+   ConeAngle 360 0 60
+   MaxNum 20
+   BirthRate 10
+   Offset 0 0 0
+   Angles 0 0 90
+   Material "{3E6CE4D61F8AC71F}graphics/particles/materials/fire/fire_medium_camp_02.emat"
+   CenterX 0
+   CenterY -1
+   ScaleX 0.618
+   ScaleY 1
+   SizeMultiplier 2
+   SizeRND 2
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 1
+   VelAngle 1
+   RandomAngle 0
+   Velocity 0
+   VelocityRND 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 5
+   LifeTimeRND 5
+   Color {
+    0 0.251 0.251 0.251 1 0.251 0.251 0.251
+   }
+   Alpha {
+    0 0 0.14608 1 0.60258 1 1 0
+   }
+   Size {
+    0 0.48101 1 0.99367
+   }
+   EffectTime 1
+   Repeat 1
+  }
+  EmitorDef fire_middle_burst {
+   ShapeType Ellipse
+   ShapeSize 2 8 10
+   ConeAngle 360 0 60
+   MaxNum 70
+   BirthRate 26
+   BirthRateRND 0.3
+   Offset 0 0 0
+   Angles 0 0 90
+   Material "{83BCB6516091DB01}graphics/particles/materials/fire/fire_medium_camp_04.emat"
+   SizeMultiplier 2
+   RandomRotDir 1
+   RotMultiplier 2
+   StretchMultiplier 1
+   VelAngle 0
+   RandomAngle 0
+   Velocity 0
+   VelocityRND 0.2
+   Wind 0
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 1
+   RandomFrame 0
+   LifeTime 1.2
+   LifeTimeRND 0
+   LifetimeShortening 0
+   Color {
+    0 0.451 0.451 0.451 1 0.4706 0.4667 0.4667
+   }
+   Alpha {
+    0 0 0.45088 0.69182 1 0
+   }
+   Size {
+    0 0.21384 0.50786 0.76101 1 1
+   }
+   EffectTime 1
+   Repeat 1
+  }
+  EmitorDef fire_middle_short {
+   ShapeType Ellipse
+   ShapeSize 1 10 10
+   MaxNum 300
+   BirthRate 300
+   BirthRateRND 20
+   BirthRateVel 0
+   Offset 0 0 0
+   Angles 0 0 90
+   Material "{853257EDA4B1E35D}graphics/particles/materials/fire/fire_flame_01.emat"
+   SizeMultiplier 4
+   SizeRND 4
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 1
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 0
+   VelocityRND 0
+   GravityMultiply -0.1
+   Restitution 0
+   Spring 0
+   Wind 1
+   AnimOnce 0
+   AnimFPS 0
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 0.4
+   LifeTimeRND 0.2
+   Color {
+    0 0.8627 0.8471 0.3451 1 0.502 0.0745 0.0431
+   }
+   Alpha {
+    0 0 0.34055 0.208 0.65354 0.44 1 0
+   }
+   Size {
+    0 0 0.49312 0.46541 1 0.18868
+   }
+  }
+  EmitorDef sparks_small {
+   ShapeType Box
+   ShapeSize 1 5 5
+   ConeAngle 360 0 30
+   MaxNum 80
+   BirthRate 50
+   BirthRateRND 0
+   Angles 0 0 90
+   LocalTransform 0
+   Material "{009C2EBAACD2D72A}graphics/particles/materials/fire/sparks1.emat"
+   SizeMultiplier 0.3
+   SizeRND 0.03
+   StretchMultiplier 1
+   VelAngle 1
+   RandomAngle 1
+   Velocity 0
+   VelocityRND 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply -0.2
+   Spring 0
+   Wind 1
+   LifeTime 1.5
+   LifeTimeRND 0.5
+   Color {
+    0 0.9922 1 0.4471 1 1 0.4392 0.2157
+   }
+   Alpha {
+    0 0 0.06498 1 0.49705 0.30818 1 0
+   }
+  }
+  EmitorDef smoke_middle {
+   ShapeType Box
+   ShapeSize 2 8 8
+   MaxNum 90
+   BirthRate 50
+   Offset 0 -0.01936 0
+   Angles 0 0 90
+   LocalTransform 0
+   Material "{00BEA27443975BEB}graphics/particles/materials/smoke/smoke_anim_02.emat"
+   SizeMultiplier 2
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 2
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Velocity 0
+   VelocityRND 0.5
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply -0.1
+   Wind 1
+   AnimOnce 0
+   AnimFPS 30
+   RandomFrame 1
+   LifeTime 3
+   LifeTimeRND 1
+   Color {
+    0 0.3333 0.302 0.2627 0.1758 0.3836 0.3459 0.2929 0.5549 0.3176 0.2549 0.2353 1 0.1725 0.1608 0.1412
+   }
+   Alpha {
+    0 0 0.55424 0.15741 0.86574 0.01852 1 0
+   }
+   RotationSpeed {
+    0 0 1 0.30189
+   }
+   Size {
+    0 0.20755 1 1
+   }
+   EffectTime 2
+  }
+ }
+}

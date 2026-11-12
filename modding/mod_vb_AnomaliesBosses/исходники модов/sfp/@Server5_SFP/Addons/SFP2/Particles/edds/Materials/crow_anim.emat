@@ -1,0 +1,7 @@
+ParticleSprite {
+ AlbedoMap "{02718947B7BF3A28}SFP2/Particles/edds/pristes/crow_anim.edds" 
+ Emissive 1 1 1 0
+ BlendMode ColorModulate
+ TileU 8
+ TileV 3
+}

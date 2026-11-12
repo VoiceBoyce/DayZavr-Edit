@@ -1,0 +1,17 @@
+$animsetinstance {
+ #template "{F0C651DE8E24A5DE}DZ/anims/workspaces/player/player_main/player_main.ast"
+ #nparents 1
+ #parent "{7324B2E80BB624A1}DZ/anims/workspaces/player/player_main/player_main_1h.asi"
+ $animations {
+  "ActionContinuous.TakeTempSelfCro.In" "SFP2/anm/JurnalOsmotr/player_osmotr_jurnal_in.anm"
+   "ActionContinuous.TakeTempSelfCro.Loop" "SFP2/anm/JurnalOsmotr/player_osmotr_jurnal_loop.anm"
+   "ActionContinuous.TakeTempSelfCro.Out" "SFP2/anm/JurnalOsmotr/player_osmotr_jurnal_out.anm"
+   "ActionContinuous.TakeTempSelfErc.In" "SFP2/anm/JurnalOsmotr/player_osmotr_jurnal_in.anm"
+   "ActionContinuous.TakeTempSelfErc.Loop" "SFP2/anm/JurnalOsmotr/player_osmotr_jurnal_loop.anm"
+   "ActionContinuous.TakeTempSelfErc.Out" "SFP2/anm/JurnalOsmotr/player_osmotr_jurnal_out.anm"
+   "ActionContinuous.TakeTempSelfPne.In" "SFP2/anm/JurnalOsmotr/player_osmotr_jurnal_in.anm"
+   "ActionContinuous.TakeTempSelfPne.Loop" "SFP2/anm/JurnalOsmotr/player_osmotr_jurnal_loop.anm"
+   "ActionContinuous.TakeTempSelfPne.Out" "SFP2/anm/JurnalOsmotr/player_osmotr_jurnal_out.anm"
+  
+ }
+//player_main_1h

@@ -1,0 +1,869 @@
+EffectDef {
+ MinFPS 30
+ Emitors {
+  EmitorDef Buble2 {
+   ShapeType Ellipse
+   ShapeSize 25 0 25
+   ConeAngle 0 0 0
+   MaxNum 150
+   BirthRate 20
+   BirthRateRND 20
+   BirthRateVel 0
+   Offset 0 0 0
+   Material "{51B3F5BBC16A9D96}VB_AB/p/m/deathzone/BubbleBlack.emat"
+   SizeMultiplier 0.05
+   SizeRND 0.15
+   RandomRotDir 1
+   RotMultiplier 20
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 3
+   VelocityRND 2
+   VelAffect 0
+   AirResistance 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution 0
+   Spring 0
+   Wind 1
+   AnimOnce 0
+   AnimFPS 12
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 3
+   LifeTimeRND 2
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.20719 0.43704 0.76144 0.41481 1 0
+   }
+   Size {
+    0 0 0.04967 1 0.15229 0.71852 0.28105 0.55556 0.41111 1 0.53922 0.6963 0.65033 1 0.76536 0.66667 0.89739 1 1 1
+   }
+   EffectTime 10
+   Repeat 0
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 1 1
+   }
+  }
+  EmitorDef Buble2_cloned {
+   ShapeType Ellipse
+   ShapeSize 25 0 25
+   ConeAngle 0 0 0
+   MaxNum 50
+   BirthRate 50
+   BirthRateRND 50
+   BirthRateVel 0
+   Offset 0 0 0
+   Material "{51B3F5BBC16A9D96}VB_AB/p/m/deathzone/BubbleBlack.emat"
+   SizeMultiplier 0.2
+   SizeRND 0.2
+   RandomRotDir 1
+   RotMultiplier 20
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0.5
+   VelocityRND 1
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution 0
+   Spring 0
+   Wind 1
+   AnimOnce 0
+   AnimFPS 8
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 1
+   LifeTimeRND 2
+   Alpha {
+    0 0 0.19216 0.40741 0.7732 0.44444 1 0
+   }
+   Size {
+    0 0 0.04967 1 0.15229 0.71852 0.28105 0.55556 0.41111 1 0.53922 0.6963 0.65033 1 0.76536 0.66667 0.89739 1 1 1
+   }
+   EffectTime 10
+   Repeat 0
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 1 1
+   }
+  }
+  EmitorDef BubleG {
+   ShapeType Ellipse
+   ShapeSize 25 25 0
+   ConeAngle 0 0 0
+   MaxNum 150
+   BirthRate 60
+   BirthRateRND 40
+   BirthRateVel 0
+   Offset 0 0.1 0
+   Angles 0 90 0
+   Material "{51B3F5BBC16A9D96}VB_AB/p/m/deathzone/BubbleBlack.emat"
+   SizeMultiplier 2
+   SizeRND 0.1
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 1
+   StreakFullUV 1
+   VelAngle 1
+   RandomAngle 0
+   Sort 1
+   BillboardingType None
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 3
+   LifetimeByAnim 1
+   RandomFrame 0
+   LifeTime 1
+   LifeTimeRND 0.5
+   Color {
+    0 0.4074 0.3778 0.4 1 0.3481 0.3481 0.3556
+   }
+   Alpha {
+    0 0 0.16797 0.64444 0.44902 0.22963 0.77255 0.78519 1 0
+   }
+   Size {
+    0 0 0.47059 1 1 0
+   }
+   EffectTime 10
+   Repeat 0
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 0.07516 0.86667 0.17255 1 0.27124 0.75556 0.42549 1 0.58954 0.74815 0.8281 1 0.9268 0.6963 1 0.51852
+   }
+  }
+  EmitorDef BloodG {
+   ShapeType Ellipse
+   ShapeSize 25 25 0
+   ConeAngle 0 0 0
+   MaxNum 200
+   BirthRate 20
+   BirthRateRND 20
+   BirthRateVel 0
+   Offset 0 0 0
+   Angles 0 90 0
+   Material "{CF8A36CE7D239262}graphics/particles/materials/smoke/steam_random_m7a2_01.emat"
+   SizeMultiplier 4
+   SizeRND 2
+   RandomRotDir 1
+   RotMultiplier 90
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 1
+   RandomAngle 1
+   Sort 0
+   BillboardingType None
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 12
+   LifetimeByAnim 1
+   RandomFrame 0
+   LifeTime 2
+   LifeTimeRND 1
+   Color {
+    0 0 0 0 1 0 0 0
+   }
+   Alpha {
+    0 0 0.20654 0.2963 0.4549 1 0.69542 0.3037 1 0
+   }
+   Size {
+    0 0 0.47059 1 1 0
+   }
+   EffectTime 10
+   Repeat 0
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 0.07516 0.86667 0.17255 1 0.27124 0.75556 0.42549 1 0.58954 0.74815 0.8281 1 0.9268 0.6963 1 0.51852
+   }
+  }
+  EmitorDef SmokeGlobal {
+   ShapeType Ellipse
+   ShapeSize 30 0 30
+   ConeAngle 0 0 0
+   MaxNum 300
+   BirthRate 40
+   BirthRateRND 40
+   BirthRateVel 0
+   Offset 0 0.1 0
+   Material "{55020E0786F83004}graphics/particles/materials/smoke/smoke_anim_01.emat"
+   SizeMultiplier 2
+   SizeRND 4
+   RandomRotDir 1
+   RotMultiplier 50
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 6
+   VelocityRND 2
+   VelAffect 0
+   AirResistance 0
+   GravityMultiply 0.03
+   GravityMultiplyRND 0.02
+   Restitution 0
+   Spring 0
+   Wind 1
+   AnimOnce 0
+   AnimFPS 10
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 2
+   LifeTimeRND 0
+   Color {
+    0 0 0 0 1 0 0 0
+   }
+   Alpha {
+    0 0 0.16144 0.02963 0.3902 0.02963 0.54967 0.02222 0.77386 0.02222 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 10
+   Repeat 0
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 0.07516 0.86667 0.17255 1 0.27124 0.75556 0.42549 1 0.58954 0.74815 0.8281 1 0.9268 0.6963 1 0.51852
+   }
+  }
+  EmitorDef SmokeGlobal2 {
+   ShapeType Ellipse
+   ShapeSize 30 0 30
+   ConeAngle 0 0 0
+   MaxNum 500
+   BirthRate 150
+   BirthRateRND 150
+   BirthRateVel 0
+   Offset 0 -0.5 0
+   Material "{55020E0786F83004}graphics/particles/materials/smoke/smoke_anim_01.emat"
+   SizeMultiplier 1
+   SizeRND 3
+   RandomRotDir 1
+   RotMultiplier 10
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 3
+   VelocityRND 1
+   VelAffect 0
+   AirResistance 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution 0
+   Spring 0
+   Wind 1
+   AnimOnce 0
+   AnimFPS 10
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 2
+   LifeTimeRND 0
+   Color {
+    0 0 0 0 1 0 0 0
+   }
+   Alpha {
+    0 0 0.16144 0.11111 0.37451 0.03704 0.53333 0.05926 0.7634 0.03704 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 10
+   Repeat 0
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 0.07516 0.86667 0.17255 1 0.27124 0.75556 0.42549 1 0.58954 0.74815 0.8281 1 0.9268 0.6963 1 0.51852
+   }
+  }
+  EmitorDef Muhi {
+   ShapeType Ellipse
+   ShapeSize 30 0 30
+   ConeAngle 0 0 0
+   MaxNum 300
+   BirthRate 100
+   BirthRateRND 100
+   BirthRateVel 0
+   Offset 0 0 0
+   Material "{37F2C835954FBAF0}graphics/particles/materials/enviroment/fly_swarm_01.emat"
+   SizeMultiplier 1
+   SizeRND 2
+   RandomRotDir 1
+   RotMultiplier 50
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 4
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   GravityMultiply 0.03
+   GravityMultiplyRND 0.02
+   Restitution 0
+   Spring 0
+   Wind 1
+   AnimOnce 0
+   AnimFPS 20
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 2
+   LifeTimeRND 0
+   Color {
+    0 0 0 0 1 0 0 0
+   }
+   Alpha {
+    0 0 0.46797 1 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 10
+   Repeat 0
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 0.07516 0.86667 0.17255 1 0.27124 0.75556 0.42549 1 0.58954 0.74815 0.8281 1 0.9268 0.6963 1 0.51852
+   }
+  }
+  EmitorDef MuhiLine {
+   ShapeType Ellipse
+   ShapeSize 1 0 1
+   ConeAngle 0 0 0
+   MaxNum 1000
+   BirthRate 300
+   BirthRateRND 300
+   BirthRateVel 0
+   Offset 0 0.5 0
+   Material "{212185D9321381DC}VB_AB/p/m/deathzone/LineBlack.emat"
+   SizeMultiplier 4
+   SizeRND 0
+   RandomRotDir 1
+   RotMultiplier 180
+   StretchMultiplier 0
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 6
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   GravityMultiply 0.03
+   GravityMultiplyRND 0.02
+   Restitution 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 15
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 2
+   LifeTimeRND 0
+   Color {
+    0 0 0 0 1 0 0 0
+   }
+   Alpha {
+    0 0 0.46797 1 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 10
+   Repeat 0
+   SizeMast {
+    0 0 0.14771 1 0.84641 1 1 0
+   }
+   BRateMast {
+    0 1 0.10261 1 0.42941 1 0.65163 1 0.81765 1 1 1
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 0.07516 0.86667 0.17255 1 0.27124 0.75556 0.42549 1 0.58954 0.74815 0.8281 1 0.9268 0.6963 1 0.51852
+   }
+  }
+  EmitorDef MuhiLine2 {
+   ShapeType Point
+   ShapeSize 30 0 30
+   ConeAngle 0 0 0
+   MaxNum 600
+   BirthRate 300
+   BirthRateRND 200
+   BirthRateVel 0
+   Offset 5 0 10
+   Material "{37F2C835954FBAF0}graphics/particles/materials/enviroment/fly_swarm_01.emat"
+   SizeMultiplier 1
+   SizeRND 0.5
+   RandomRotDir 1
+   RotMultiplier 50
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 1
+   RandomAngle 0
+   Sort 0
+   Velocity 2
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   GravityMultiply 0.03
+   GravityMultiplyRND 0.02
+   Restitution 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 20
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 2
+   LifeTimeRND 0
+   Color {
+    0 0 0 0 1 0 0 0
+   }
+   Alpha {
+    0 0 0.46797 1 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 10
+   Repeat 0
+   BRateMast {
+    0 0 0.07386 0.01481 0.07712 1 0.27124 1 0.27451 0 1 0
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 0.07516 0.86667 0.17255 1 0.27124 0.75556 0.42549 1 0.58954 0.74815 0.8281 1 0.9268 0.6963 1 0.51852
+   }
+  }
+  EmitorDef MuhiLine3 {
+   ShapeType Point
+   ShapeSize 30 0 30
+   ConeAngle 0 0 0
+   MaxNum 600
+   BirthRate 300
+   BirthRateRND 200
+   BirthRateVel 0
+   Offset 3 0 -8
+   Material "{37F2C835954FBAF0}graphics/particles/materials/enviroment/fly_swarm_01.emat"
+   SizeMultiplier 1.3
+   SizeRND 0.6
+   RandomRotDir 1
+   RotMultiplier 50
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 2
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   GravityMultiply 0.03
+   GravityMultiplyRND 0.02
+   Restitution 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 20
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 3
+   LifeTimeRND 0
+   Color {
+    0 0 0 0 1 0 0 0
+   }
+   Alpha {
+    0 0 0.46797 1 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 10
+   Repeat 0
+   BRateMast {
+    0 0 0.27647 0 0.27974 1 0.49412 1 0.49739 0 1 0
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 0.07516 0.86667 0.17255 1 0.27124 0.75556 0.42549 1 0.58954 0.74815 0.8281 1 0.9268 0.6963 1 0.51852
+   }
+  }
+  EmitorDef MuhiLine4 {
+   ShapeType Point
+   ShapeSize 30 0 30
+   ConeAngle 0 0 0
+   MaxNum 600
+   BirthRate 300
+   BirthRateRND 200
+   BirthRateVel 0
+   Offset -9 0 4
+   Material "{37F2C835954FBAF0}graphics/particles/materials/enviroment/fly_swarm_01.emat"
+   SizeMultiplier 1.3
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 50
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 2
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   GravityMultiply 0.03
+   GravityMultiplyRND 0.02
+   Restitution 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 20
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 1
+   LifeTimeRND 0
+   Color {
+    0 0 0 0 1 0 0 0
+   }
+   Alpha {
+    0 0 0.46797 1 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 10
+   Repeat 0
+   BRateMast {
+    0 1 0.23399 1 0.23725 0 1 0
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 0.07516 0.86667 0.17255 1 0.27124 0.75556 0.42549 1 0.58954 0.74815 0.8281 1 0.9268 0.6963 1 0.51852
+   }
+  }
+  EmitorDef MuhiLine5 {
+   ShapeType Point
+   ShapeSize 30 0 30
+   ConeAngle 0 0 0
+   MaxNum 600
+   BirthRate 300
+   BirthRateRND 200
+   BirthRateVel 0
+   Offset -4 0 -6
+   Material "{37F2C835954FBAF0}graphics/particles/materials/enviroment/fly_swarm_01.emat"
+   SizeMultiplier 1.3
+   SizeRND 0.6
+   RandomRotDir 1
+   RotMultiplier 50
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 1
+   Velocity 2
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   GravityMultiply 0.03
+   GravityMultiplyRND 0.02
+   Restitution 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 20
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 3
+   LifeTimeRND 0
+   Color {
+    0 0 0 0 1 0 0 0
+   }
+   Alpha {
+    0 0 0.46797 1 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 10
+   Repeat 0
+   BRateMast {
+    0 0 0.77908 0 0.78235 1 0.94444 1 0.94771 0 1 0
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 0.07516 0.86667 0.17255 1 0.27124 0.75556 0.42549 1 0.58954 0.74815 0.8281 1 0.9268 0.6963 1 0.51852
+   }
+  }
+  EmitorDef MuhiLine6 {
+   ShapeType Point
+   ShapeSize 30 0 30
+   ConeAngle 0 0 0
+   MaxNum 600
+   BirthRate 300
+   BirthRateRND 200
+   BirthRateVel 0
+   Offset -6 0 -2
+   Material "{37F2C835954FBAF0}graphics/particles/materials/enviroment/fly_swarm_01.emat"
+   SizeMultiplier 1
+   SizeRND 0.6
+   RandomRotDir 1
+   RotMultiplier 50
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 1
+   RandomAngle 0
+   Sort 1
+   Velocity 2
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   GravityMultiply 0.03
+   GravityMultiplyRND 0.02
+   Restitution 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 20
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 1
+   LifeTimeRND 0
+   Color {
+    0 0 0 0 1 0 0 0
+   }
+   Alpha {
+    0 0 0.46797 1 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 10
+   Repeat 0
+   BRateMast {
+    0 0 0.67451 0 0.67778 1 0.82026 1 0.82353 0 1 0
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 0.07516 0.86667 0.17255 1 0.27124 0.75556 0.42549 1 0.58954 0.74815 0.8281 1 0.9268 0.6963 1 0.51852
+   }
+  }
+  EmitorDef MuhiLine7 {
+   ShapeType Point
+   ShapeSize 30 0 30
+   ConeAngle 0 0 0
+   MaxNum 600
+   BirthRate 300
+   BirthRateRND 200
+   BirthRateVel 0
+   Offset 6 0 -4
+   Material "{37F2C835954FBAF0}graphics/particles/materials/enviroment/fly_swarm_01.emat"
+   SizeMultiplier 0.9
+   SizeRND 0.3
+   RandomRotDir 1
+   RotMultiplier 50
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 1
+   Velocity 2
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   GravityMultiply 0.03
+   GravityMultiplyRND 0.02
+   Restitution 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 20
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 1.5
+   LifeTimeRND 0
+   Color {
+    0 0 0 0 1 0 0 0
+   }
+   Alpha {
+    0 0 0.46797 1 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 10
+   Repeat 0
+   BRateMast {
+    0 0 0.46013 0 0.4634 1 0.66078 1 0.66405 0 1 0
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 0.07516 0.86667 0.17255 1 0.27124 0.75556 0.42549 1 0.58954 0.74815 0.8281 1 0.9268 0.6963 1 0.51852
+   }
+  }
+  EmitorDef MuhiLine8 {
+   ShapeType Point
+   ShapeSize 30 0 30
+   ConeAngle 0 0 0
+   MaxNum 600
+   BirthRate 300
+   BirthRateRND 200
+   BirthRateVel 0
+   Offset -2 0 6
+   Material "{37F2C835954FBAF0}graphics/particles/materials/enviroment/fly_swarm_01.emat"
+   SizeMultiplier 0.6
+   SizeRND 0.3
+   RandomRotDir 1
+   RotMultiplier 50
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 1
+   Velocity 2
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   GravityMultiply 0.03
+   GravityMultiplyRND 0.02
+   Restitution 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 20
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 3
+   LifeTimeRND 0
+   Color {
+    0 0 0 0 1 0 0 0
+   }
+   Alpha {
+    0 0 0.46797 1 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 10
+   Repeat 0
+   BRateMast {
+    0 0 0.23333 0 0.2366 1 0.4817 1 0.48497 0 1 0
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 0.07516 0.86667 0.17255 1 0.27124 0.75556 0.42549 1 0.58954 0.74815 0.8281 1 0.9268 0.6963 1 0.51852
+   }
+  }
+  EmitorDef MuhiLine9 {
+   ShapeType Point
+   ShapeSize 30 0 30
+   ConeAngle 0 0 0
+   MaxNum 600
+   BirthRate 300
+   BirthRateRND 200
+   BirthRateVel 0
+   Offset 10 0 5
+   Material "{37F2C835954FBAF0}graphics/particles/materials/enviroment/fly_swarm_01.emat"
+   SizeMultiplier 0.3
+   SizeRND 0.3
+   RandomRotDir 1
+   RotMultiplier 50
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 1
+   Velocity 2
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   GravityMultiply 0.03
+   GravityMultiplyRND 0.02
+   Restitution 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 20
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 2
+   LifeTimeRND 0
+   Color {
+    0 0 0 0 1 0 0 0
+   }
+   Alpha {
+    0 0 0.46797 1 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 10
+   Repeat 0
+   BRateMast {
+    0 0 0.23333 0 0.76144 0 0.76471 1 1 1
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 0.07516 0.86667 0.17255 1 0.27124 0.75556 0.42549 1 0.58954 0.74815 0.8281 1 0.9268 0.6963 1 0.51852
+   }
+  }
+ }
+}

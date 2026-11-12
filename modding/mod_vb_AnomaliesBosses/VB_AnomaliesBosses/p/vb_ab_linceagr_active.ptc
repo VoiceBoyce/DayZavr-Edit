@@ -1,0 +1,451 @@
+EffectDef {
+ MinFPS 20
+ Emitors {
+  EmitorDef LightintSplash {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 0 0 0
+   MaxNum 20
+   BirthRate 5
+   BirthRateRND 1
+   BirthRateVel 2
+   Offset 0.2 1.8 0
+   Angles 0 -20 70
+   Material "{496E46DE40511B0D}VB_AB/p/m/Lince/Light3.emat"
+   SizeMultiplier 15
+   SizeRND 0.1
+   RandomRotDir 1
+   RotMultiplier 90
+   StreakFullUV 0
+   VelAngle 1
+   RandomAngle 0
+   Sort 0
+   Velocity 0
+   AirResistance 0
+   AirResistanceRND 2
+   Spring 1
+   AnimOnce 1
+   AnimFPS 10
+   LifetimeByAnim 0
+   LifeTime 1
+   LifeTimeRND 0
+   Color {
+    0 1 0.4519 0 1 1 0.2296 0
+   }
+   Alpha {
+    0 0 0.48105 0.17778 1 0
+   }
+   Size {
+    0 0 0.11438 1 1 1
+   }
+   EffectTime 5
+   Repeat 0
+   AlphaMast {
+    0 1 1 1
+   }
+   SizeMast {
+    0 1 0.49935 1 1 1
+   }
+   BRateMast {
+    0 0 0.77647 0 0.80654 1 0.90915 1 0.9451 0.24444 1 0
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 1 1
+   }
+  }
+  EmitorDef Splash {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 0 0 720
+   MaxNum 300
+   BirthRate 300
+   BirthRateRND 0
+   BirthRateVel 1000
+   Offset 0 1.5 0
+   Angles 0 90 0
+   Material "{CB7AF4FD8ACBFDFC}graphics/particles/materials/glow/glow1.emat"
+   SizeMultiplier 2
+   SizeRND 0.1
+   RandomRotDir 1
+   RotMultiplier 90
+   StreakFullUV 0
+   VelAngle 1
+   RandomAngle 0
+   Sort 0
+   Velocity 50
+   AirResistance 15
+   AirResistanceRND 0
+   Spring 0.02
+   AnimOnce 1
+   AnimFPS 10
+   LifetimeByAnim 0
+   LifeTime 1
+   LifeTimeRND 0
+   Color {
+    0 1 0.4519 0 1 1 0.2296 0
+   }
+   Alpha {
+    0 0 0.48105 0.17778 1 0
+   }
+   Size {
+    0 0 0.11438 1 1 0
+   }
+   EffectTime 5
+   Repeat 0
+   AlphaMast {
+    0 1 1 1
+   }
+   SizeMast {
+    0 0 0.78366 0 0.89216 1 1 0
+   }
+   BRateMast {
+    0 0 0.73333 0 0.73856 1 0.93399 1 0.93725 0 1 0
+   }
+   AirResistanceMast {
+    0 0 0.73464 0 0.75817 0.17037 0.77451 0.83704 0.8183 1 0.86667 0.42222 0.90654 1 0.94379 0.28889 0.96993 0.54074 1 0
+   }
+   VelocityMast {
+    0 1 1 1
+   }
+  }
+  EmitorDef LightSplash {
+   MaxNum 40
+   BirthRate 20
+   BirthRateRND 20
+   BirthRateVel 0
+   Offset 0 1.5 0
+   Angles 0 0 0
+   Material "{5855301D1406CEBF}VB_AB/p/m/electra/Lighting02/SparkElectra.emat"
+   SizeMultiplier 20
+   SizeRND 0
+   Velocity 0
+   Spring 100
+   LifeTime 1
+   LifeTimeRND 0
+   Color {
+    0 1 0.3778 0 0.3373 0.9852 0.7333 0 0.6667 1 0.7778 0 1 1 0.4296 0
+   }
+   Alpha {
+    0 0 0.48497 0.0963 1 0.05185
+   }
+   Size {
+    0 0 0.16275 0 0.30458 0.06667 0.41176 0.23704 0.49739 0.39259 0.60196 0 1 0
+   }
+   EffectTime 5
+   Repeat 0
+   AlphaMast {
+    0 1 1 1
+   }
+   SizeMast {
+    0 0 0.7268 0 0.75556 1 0.86667 1 0.8902 0 1 0
+   }
+   BRateMast {
+    0 0 0.72614 0 0.75556 1 0.86601 1 0.88954 0 1 0
+   }
+  }
+  EmitorDef Lightint1 {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 0 0 0
+   MaxNum 20
+   BirthRate 5
+   BirthRateRND 1
+   BirthRateVel 2
+   Offset 0 1.5 0
+   Angles 0 -20 70
+   Material "{496E46DE40511B0D}VB_AB/p/m/Lince/Light3.emat"
+   SizeMultiplier 2.5
+   SizeRND 0.1
+   RandomRotDir 1
+   RotMultiplier 90
+   StreakFullUV 0
+   VelAngle 1
+   RandomAngle 0
+   Sort 0
+   Velocity 0
+   AirResistance 0
+   AirResistanceRND 2
+   Spring 1
+   AnimOnce 1
+   AnimFPS 10
+   LifetimeByAnim 0
+   LifeTime 1
+   LifeTimeRND 0
+   Color {
+    0 1 0.437 0 1 1 0.6889 0
+   }
+   Alpha {
+    0 0 0.48235 0.8 1 0
+   }
+   Size {
+    0 0 0.06275 0.87407 0.10784 0.0963 0.15882 0.99259 0.20327 0 0.25425 1 0.32222 0.2963 0.35817 0.95556 0.39935 0.18519 0.45948 0.79259 0.48627 0 1 0
+   }
+   EffectTime 5
+   Repeat 0
+   AlphaMast {
+    0 1 1 1
+   }
+   SizeMast {
+    0 1 0.49935 1 1 1
+   }
+   BRateMast {
+    0 1 1 1
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 1 1
+   }
+  }
+  EmitorDef Lightint2 {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 0 0 0
+   MaxNum 10
+   BirthRate 5
+   BirthRateRND 5
+   BirthRateVel 2
+   Offset 0 1.5 0
+   Angles 0 90 0
+   Material "{496E46DE40511B0D}VB_AB/p/m/Lince/Light3.emat"
+   SizeMultiplier 1.5
+   SizeRND 0.1
+   RandomRotDir 1
+   RotMultiplier 90
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 0
+   AirResistance 0
+   AirResistanceRND 2
+   Spring 1
+   AnimOnce 1
+   AnimFPS 10
+   LifetimeByAnim 0
+   LifeTime 1
+   LifeTimeRND 0
+   Color {
+    0 1 0.3333 0 1 1 0.5481 0
+   }
+   Alpha {
+    0 0 0.48889 1 1 0
+   }
+   Size {
+    0 0 0.08758 1 0.11961 0 0.14967 0.92593 0.17647 0.14074 0.20523 1 0.24706 0.1037 0.31895 0.88889 0.34379 0.22963 0.39673 1 0.4268 0.18519 0.45098 0.94815 0.49542 0.01481 1 0
+   }
+   EffectTime 5
+   Repeat 0
+   AlphaMast {
+    0 1 1 1
+   }
+   SizeMast {
+    0 1 0.49935 1 1 1
+   }
+   BRateMast {
+    0 1 1 1
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 1 1
+   }
+  }
+  EmitorDef Lightint3 {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 0 0 0
+   MaxNum 10
+   BirthRate 3
+   BirthRateRND 4
+   BirthRateVel 0
+   Offset 0 1.5 0
+   Angles 0 90 0
+   Material "{00B653C132976F67}VB_AB/p/m/Lince/Light4.emat"
+   SizeMultiplier 2
+   SizeRND 0.1
+   RandomRotDir 1
+   RotMultiplier 20
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 0
+   AirResistance 0
+   AirResistanceRND 2
+   Spring 1
+   AnimOnce 1
+   AnimFPS 10
+   LifetimeByAnim 0
+   LifeTime 1
+   LifeTimeRND 0
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.48235 0.8 1 0
+   }
+   Size {
+    0 0 0.10392 1 0.13529 0.01481 0.16732 0.96296 0.19608 0.11852 0.23595 1 0.27974 0 0.31111 0.97778 0.36601 0.06667 0.40196 0.8963 0.44641 0.32593 0.47843 1 0.5183 0.05926 0.55163 0.85926 0.61438 0.07407 1 0
+   }
+   EffectTime 5
+   Repeat 0
+   AlphaMast {
+    0 1 1 1
+   }
+   SizeMast {
+    0 1 0.49935 1 1 1
+   }
+   BRateMast {
+    0 1 1 1
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 1 1
+   }
+  }
+  EmitorDef Light {
+   MaxNum 30
+   BirthRate 5
+   BirthRateRND 10
+   BirthRateVel 0
+   Offset 0 1.5 0
+   Angles 0 0 0
+   Material "{5855301D1406CEBF}VB_AB/p/m/electra/Lighting02/SparkElectra.emat"
+   SizeMultiplier 1
+   SizeRND 3
+   Velocity 0
+   Spring 100
+   LifeTime 1
+   LifeTimeRND 0.5
+   Color {
+    0 1 0.4074 0 0.3386 0.9852 0.7333 0.0963 0.6634 1 0.6444 0.2074 1 1 0.3333 0
+   }
+   Alpha {
+    0 0 0.48366 0.05185 1 0.05185
+   }
+   Size {
+    0 0 0.06405 0.13333 0.09281 1 0.1098 0.25926 0.13268 1 0.13595 0.0963 0.16144 0.97778 0.20131 0.15556 0.24052 1 0.26863 0.13333 0.34248 1 0.4 0.2 0.43987 1 0.4732 0.46667 0.52745 0.04444 1 0
+   }
+   EffectTime 5
+   Repeat 0
+  }
+  EmitorDef Smoke {
+   MaxNum 10
+   BirthRate 3
+   BirthRateRND 3
+   BirthRateVel 0
+   Offset 0 1.5 0
+   Angles 0 0 0
+   Material "{5829AC63BAF92E5A}graphics/particles/materials/smoke/smoke_cloud_01_b_trans_roadflare_02.emat"
+   SizeMultiplier 3
+   RandomRotDir 1
+   RotMultiplier 90
+   Velocity 0
+   Spring 100
+   LifeTime 1
+   LifeTimeRND 0.5
+   Color {
+    0 1 0.5037 0 1 1 0.3481 0
+   }
+   Alpha {
+    0 0 0.47843 0.02222 1 0.05185
+   }
+   Size {
+    0 0 1 1
+   }
+   EffectTime 5
+   Repeat 0
+   SizeMast {
+    0 0 0.25359 0.96296 0.3 0.28148 0.48693 1 0.56601 0.25926 0.69608 0.88889 1 0
+   }
+  }
+  EmitorDef Hole {
+   MaxNum 20
+   BirthRate 7
+   BirthRateRND 7
+   Offset 0 1.5 0
+   Angles 0 0 0
+   Material "{85C970019E3A76C9}VB_AB/p/m/voronka/BubbleHole.emat"
+   SizeMultiplier 2
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 90
+   Velocity 10
+   Spring 1
+   AnimFPS 30
+   LifeTime 1
+   LifeTimeRND 0
+   Color {
+    0 1 0.5926 0 1 1 0.4148 0
+   }
+   Alpha {
+    0 0 0.47059 0.05926 1 0
+   }
+   Size {
+    0 0 0.08235 1 0.09935 0.37778 0.14314 1 0.15621 0.07407 0.17908 1 0.21111 0.1037 0.24118 1 1 1
+   }
+   EffectTime 5
+   Repeat 0
+  }
+  EmitorDef Spark {
+   ConeAngle 360 0 720
+   MaxNum 50
+   BirthRate 20
+   BirthRateRND 20
+   Offset 0 1.5 0
+   Angles 0 0 0
+   Material "{CB7AF4FD8ACBFDFC}graphics/particles/materials/glow/glow1.emat"
+   SizeMultiplier 0.01
+   SizeRND 0.03
+   Velocity 10
+   AirResistance 10
+   AirResistanceRND 10
+   Spring 0
+   AnimFPS 30
+   LifeTime 1
+   LifeTimeRND 0.5
+   Color {
+    0 1 0.5407 0.0148 1 1 0.5778 0
+   }
+   Alpha {
+    0 0 0.23725 1 0.25098 0.33333 0.30196 1 0.32222 0.19259 0.35425 0.88148 0.41242 0 0.44183 0.96296 0.46601 0.16296 0.50327 1 0.53529 0.28889 0.58627 0.9037 0.61307 0.17778 0.65229 0.97037 0.68824 0.08148 1 0
+   }
+   EffectTime 5
+   Repeat 0
+  }
+  EmitorDef Spark2 {
+   ConeAngle 360 0 720
+   MaxNum 20
+   BirthRate 10
+   BirthRateRND 8
+   Offset 0 1.5 0
+   Angles 0 0 0
+   Material "{CB7AF4FD8ACBFDFC}graphics/particles/materials/glow/glow1.emat"
+   SizeMultiplier 0.01
+   SizeRND 0.1
+   Velocity 20
+   AirResistance 20
+   AirResistanceRND 25
+   Spring 0
+   AnimFPS 30
+   LifeTime 1
+   LifeTimeRND 0.5
+   Color {
+    0 1 0.3556 0 1 1 0.5407 0
+   }
+   Alpha {
+    0 0 0.16993 1 0.22549 0.20741 0.27516 0.82222 0.31373 0.08889 0.3451 1 0.37778 0.21481 0.41307 1 0.45098 0 0.47386 1 0.52876 0.2 0.57386 1 0.60261 0.17037 0.64706 0.91852 0.69216 0.12593 1 0
+   }
+   EffectTime 5
+   Repeat 0
+  }
+ }
+}

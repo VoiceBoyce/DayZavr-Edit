@@ -1,0 +1,10 @@
+Particle {
+ AlbedoMap "{9F0549A7BB8FE0E1}VB_AB/p/m/Other/Smoke.edds" 
+ UVSrcAlbedoMap "UV set 1"
+ Emissive 0 0 0 1
+ AlphaTest 0
+ TileU 8
+ TileV 8
+ Softness 2
+ CameraBlendNear 0.001
+}

@@ -1,0 +1,259 @@
+EffectDef {
+ MinFPS 30
+ Emitors {
+  EmitorDef HoleSplash {
+   ConeAngle 0 0 0
+   MaxNum 10
+   BirthRate 5
+   BirthRateRND 3
+   Offset 0 1 0
+   Material "{E77CE1C109C00FC5}VB_AB/p/m/voronka/BubbleHole.emat"
+   SizeMultiplier 50
+   SizeRND 50
+   Velocity 1000
+   VelocityRND 999
+   Spring 1
+   AnimFPS 25
+   RandomFrame 0
+   LifeTime 4
+   LifeTimeRND 0
+   Color {
+    0 1 0.493 0 1 1 0.5 0
+   }
+   Alpha {
+    0 1 1 1
+   }
+   Size {
+    0 0 1 0.50704
+   }
+   EffectTime 6
+   Repeat 0
+   ColorMast {
+    0 1 0.5 0 1 1 0.5 0
+   }
+   AlphaMast {
+    0 0.01408 1 0.01408
+   }
+   SizeMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 1 0.0124 1 0.01628 0 1 0
+   }
+   VelocityMast {
+    0 0 1 1
+   }
+  }
+  EmitorDef LightSplash {
+   ConeAngle 360 360 0
+   MaxNum 100
+   BirthRate 1000
+   BirthRateRND 0
+   BirthRateVel 1000
+   Offset 0 1 0
+   Material "{CB7AF4FD8ACBFDFC}graphics/particles/materials/glow/glow1.emat"
+   SizeMultiplier 5
+   SizeRND 4
+   RandomAngle 1
+   Velocity 1
+   VelocityRND 0
+   AirResistance 10
+   AirResistanceRND 5
+   GravityMultiplyRND 0
+   RandomFrame 1
+   LifeTime 0.01
+   LifeTimeRND 0.02
+   Alpha {
+    0 1 0.01085 0.61972 0.03333 0.14789 0.05736 0.0493 0.13178 0 1 0
+   }
+   Size {
+    0 0 0.49922 1 1 0
+   }
+   EffectTime 6
+   Repeat 0
+   AlphaMast {
+    0 0 0.50078 1 1 0
+   }
+   BRateMast {
+    0 1 0.00388 0 1 0
+   }
+  }
+  EmitorDef SmokeSplash {
+   ConeAngle 360 360 0
+   MaxNum 200
+   BirthRate 10000
+   BirthRateRND 0
+   BirthRateVel 0
+   Offset 0 1 0
+   Material "{8E25684854DAB008}graphics/particles/materials/smoke/steam_small_cook_01.emat"
+   SizeMultiplier 3
+   SizeRND 2
+   RandomAngle 1
+   Velocity 40
+   VelocityRND 45
+   AirResistance 10
+   AirResistanceRND 5
+   GravityMultiplyRND 0.5
+   RandomFrame 1
+   LifeTime 3
+   Alpha {
+    0 0.14085 0.74178 0.02113 1 0
+   }
+   EffectTime 6
+   Repeat 0
+   AlphaMast {
+    0 0.17606 1 0.1831
+   }
+   BRateMast {
+    0 1 0.12713 1 0.13101 0 1 0
+   }
+  }
+  EmitorDef SmokeGroundSplash {
+   ShapeType Ellipse
+   ShapeSize 20 0 20
+   ConeAngle 360 0 10
+   MaxNum 1000
+   BirthRate 10000
+   BirthRateRND 10000
+   BirthRateVel 0
+   Offset 0 -0.5 0
+   Material "{2E26AC45902AB680}graphics/particles/materials/smoke/smoke_dust_06.emat"
+   SizeMultiplier 1
+   SizeRND 0.5
+   RandomRotDir 1
+   RotMultiplier 20
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 40
+   VelocityRND 30
+   AirResistance 1000
+   AirResistanceRND 1000
+   GravityMultiply 0.1
+   GravityMultiplyRND 0.2
+   RandomFrame 1
+   LifeTime 3
+   LifeTimeRND 2
+   Alpha {
+    0 0.07042 0.259 0.07042 0.57825 0.06338 0.76761 0 1 0
+   }
+   Size {
+    0 1 1 0.5
+   }
+   EffectTime 6
+   Repeat 0
+   AlphaMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 1 0.06589 1 0.06977 0 1 0
+   }
+  }
+  EmitorDef LeavseSplash {
+   ConeAngle 360 360 0
+   MaxNum 200
+   BirthRate 10000
+   BirthRateRND 200
+   BirthRateVel 0
+   Offset 0 1 0
+   Material "{4369448B822FD818}graphics/particles/materials/enviroment/leaves_02.emat"
+   SizeMultiplier 0.03
+   SizeRND 0.15
+   RandomRotDir 1
+   RandomAngle 1
+   Velocity 50
+   VelocityRND 45
+   AirResistance 6
+   AirResistanceRND 5
+   GravityMultiply 0.2
+   GravityMultiplyRND 0.5
+   Wind 1
+   AnimFPS 10
+   RandomFrame 0
+   LifeTime 5
+   LifeTimeRND 6
+   Alpha {
+    0 1 0.47496 1 0.75822 1 1 0
+   }
+   EffectTime 6
+   Repeat 0
+   AlphaMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 1 0.13488 1 0.13876 0 1 0
+   }
+  }
+  EmitorDef GlassSplash {
+   ConeAngle 360 360 0
+   MaxNum 100
+   BirthRate 400
+   BirthRateRND 500
+   BirthRateVel 0
+   Offset 0 1 0
+   Material "{B13B35A28852C79A}graphics/particles/materials/enviroment/glass_02.emat"
+   SizeMultiplier 0.02
+   SizeRND 0.07
+   RandomRotDir 1
+   RandomAngle 1
+   Velocity 40
+   VelocityRND 50
+   AirResistance 2
+   AirResistanceRND 4
+   GravityMultiply 6
+   GravityMultiplyRND 7
+   Wind 1
+   AnimFPS 0
+   RandomFrame 1
+   LifeTime 5
+   LifeTimeRND 6
+   Alpha {
+    0 1 0.47496 1 0.75822 1 1 0
+   }
+   EffectTime 6
+   Repeat 0
+   AlphaMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 1 0.11938 1 0.12326 0 1 0
+   }
+  }
+  EmitorDef StoneSplash {
+   ConeAngle 360 360 0
+   MaxNum 100
+   BirthRate 400
+   BirthRateRND 500
+   BirthRateVel 0
+   Offset 0 1 0
+   Material "{118F069016CE1546}graphics/particles/materials/enviroment/stones.emat"
+   SizeMultiplier 0.05
+   SizeRND 0.1
+   RandomRotDir 1
+   RandomAngle 1
+   Velocity 120
+   VelocityRND 100
+   AirResistance 5
+   AirResistanceRND 10
+   GravityMultiply 14
+   GravityMultiplyRND 16
+   Wind 1
+   AnimFPS 0
+   RandomFrame 1
+   LifeTime 5
+   LifeTimeRND 6
+   Alpha {
+    0 1 0.47496 1 0.75822 1 1 0
+   }
+   EffectTime 6
+   Repeat 0
+   AlphaMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 1 0.09225 1 0.09612 0 1 0
+   }
+  }
+ }
+}

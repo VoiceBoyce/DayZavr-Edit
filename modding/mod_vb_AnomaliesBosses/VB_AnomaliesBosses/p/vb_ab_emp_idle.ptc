@@ -1,0 +1,181 @@
+EffectDef {
+ Emitors {
+  EmitorDef SphereLighting1 {
+   ShapeType Sphere
+   ShapeSize 2 2 2
+   ConeAngle 360 0 720
+   MaxNum 5
+   BirthRate 5
+   BirthRateRND 2
+   Offset 0 2 0
+   Material "{4E3998CCD97CB908}VB_AB/p/m/electra/Lighting01/Lighting001.emat"
+   SizeMultiplier 2
+   SizeRND 1
+   RandomRotDir 0
+   RotMultiplier 0
+   StreakFullUV 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   Spring 0
+   AnimFPS 30
+   LifeTime 6
+   LifeTimeRND 3
+   Color {
+    0 1 0.6 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.17059 0.72593 0.48758 1 1 0
+   }
+  }
+  EmitorDef SphereLighting2 {
+   ShapeType Sphere
+   ShapeSize 2 2 2
+   ConeAngle 360 0 720
+   MaxNum 10
+   BirthRate 5
+   BirthRateRND 5
+   Offset 0 2 0
+   Material "{564BE4EF62ECAEBF}VB_AB/p/m/electra/Lighting02/Lighting002.emat"
+   SizeMultiplier 1.5
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 20
+   StreakFullUV 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   AirResistance 0
+   Spring 0
+   AnimFPS 30
+   LifetimeByAnim 1
+   LifeTime 6
+   LifeTimeRND 3
+   Color {
+    0 1 0.5259 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.17059 0.72593 0.48758 1 1 0
+   }
+  }
+  EmitorDef SphereLighting3 {
+   ShapeType Sphere
+   ShapeSize 2 2 2
+   ConeAngle 360 0 720
+   MaxNum 2
+   BirthRate 1
+   BirthRateRND 2
+   Offset 0 2 0
+   Material "{9FCA6FA8933AB1A3}VB_AB/p/m/electra/Lighting03/Lighting003.emat"
+   SizeMultiplier 1.5
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 20
+   StreakFullUV 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   AirResistance 0
+   Spring 1
+   AnimFPS 30
+   LifeTime 6
+   LifeTimeRND 3
+   Color {
+    0 1 0.5259 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.17059 0.72593 0.48758 1 1 0
+   }
+  }
+  EmitorDef SphereLighting3Righ {
+   ShapeType Point
+   ShapeSize 2 2 2
+   ConeAngle 360 0 720
+   MaxNum 20
+   BirthRate 20
+   BirthRateRND 20
+   Offset 0 2 0
+   Material "{564BE4EF62ECAEBF}VB_AB/p/m/electra/Lighting02/Lighting002.emat"
+   SizeMultiplier 1.5
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 20
+   StreakFullUV 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   AirResistance 0
+   Spring 0
+   AnimFPS 30
+   LifetimeByAnim 1
+   LifeTime 6
+   LifeTimeRND 3
+   Color {
+    0 1 0.5259 1 0.1974 0.8667 0.4 0.2296 0.3431 0.8444 0.7259 0.6519 1 1 1 1
+   }
+   Alpha {
+    0 0 0.17059 0.72593 0.48758 1 1 0
+   }
+  }
+  EmitorDef SphereLightingHole {
+   ShapeType Point
+   ShapeSize 2 2 2
+   ConeAngle 360 0 720
+   MaxNum 10
+   BirthRate 10
+   BirthRateRND 10
+   Offset 0 2 0
+   Material "{E77CE1C109C00FC5}VB_AB/p/m/voronka/BubbleHole.emat"
+   SizeMultiplier 3
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 30
+   StreakFullUV 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   AirResistance 0
+   Spring 0
+   AnimFPS 24
+   LifetimeByAnim 0
+   LifeTime 6
+   LifeTimeRND 3
+   Color {
+    0 0.4074 0.7481 1 1 0.5556 0.8519 1
+   }
+   Alpha {
+    0 0 0.04183 0.07407 0.11176 0.52593 0.26144 0.25185 0.43007 1 0.60588 0.17778 0.75882 0.51852 0.89412 0.04444 1 0
+   }
+  }
+  EmitorDef SphereLightingSmoke {
+   ShapeType Point
+   ShapeSize 2 2 2
+   ConeAngle 360 0 720
+   MaxNum 10
+   BirthRate 10
+   BirthRateRND 10
+   Offset 0 2 0
+   Material "{5855301D1406CEBF}VB_AB/p/m/electra/Lighting02/SparkElectra.emat"
+   SizeMultiplier 2
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 30
+   StreakFullUV 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   AirResistance 0
+   Spring 0
+   AnimFPS 10
+   LifetimeByAnim 0
+   LifeTime 6
+   LifeTimeRND 3
+   Color {
+    0 0.4074 0.7481 1 1 0.5556 0.8519 1
+   }
+   Alpha {
+    0 0 0.04183 0.07407 0.11176 0.52593 0.26144 0.25185 0.43007 1 0.60588 0.17778 0.75882 0.51852 0.89412 0.04444 1 0
+   }
+  }
+ }
+}

@@ -1,0 +1,12 @@
+Particle {
+ AlbedoMap "{E2A9B7A423CB6E10}VB_AB/p/m/studen/Bubble.edds" 
+ Emissive 0.302 1 0.0471 1
+ CastShadow 1
+ NormalMap "{546AA247B13CEE28}VB_AB/p/m/studen/BubbleNorm.edds" 
+ HeightMap "{B5B08296778638A9}VB_AB/p/m/studen/BubbleHigh.edds" 
+ BlendMode Additive_AlphaModulate
+ TileU 4
+ TileV 2
+ Softness 1
+ CameraBlendFar 0.001
+}

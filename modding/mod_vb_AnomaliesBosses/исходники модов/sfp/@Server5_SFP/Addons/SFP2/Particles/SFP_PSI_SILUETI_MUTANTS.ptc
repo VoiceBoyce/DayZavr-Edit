@@ -1,0 +1,230 @@
+EffectDef {
+ MinFPS 30
+ Emitors {
+  EmitorDef krovosos01 {
+   ShapeType Ellipse
+   ShapeSize 100 0 100
+   ConeAngle 360 55 20
+   MaxNum 1
+   BirthRate 1
+   Offset 0 1 0
+   LocalTransform 0
+   Material "{74FBEA67AB9E0C5B}SFP2/Particles/edds/Materials/krovo2TEN.emat"
+   CenterY 0.019
+   ScaleX 1
+   SizeMultiplier 2
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 0
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 0.01
+   LifeTime 5
+   Alpha {
+    0 0 0.4898 0.77778 1 0
+   }
+  }
+  EmitorDef krovosos02 {
+   ShapeType Ellipse
+   ShapeSize 100 0 100
+   ConeAngle 360 55 20
+   MaxNum 1
+   BirthRate 1
+   Offset 0 1 0
+   LocalTransform 0
+   Material "{BA427624CD5F9703}SFP2/Particles/edds/Materials/KrovoTEN2.emat"
+   CenterY 0.019
+   ScaleX 1
+   SizeMultiplier 2
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 0
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 0.01
+   LifeTime 4
+   Alpha {
+    0 0 0.4898 0.77778 1 0
+   }
+  }
+  EmitorDef izlom01 {
+   ShapeType Ellipse
+   ShapeSize 100 0 100
+   ConeAngle 360 55 20
+   MaxNum 1
+   BirthRate 1
+   Offset 0 1 0
+   LocalTransform 0
+   Material "{6FB9064ACFC781ED}SFP2/Particles/edds/Materials/izlomTEN.emat"
+   CenterY 0.019
+   ScaleX 1
+   SizeMultiplier 2
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 0
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 0.01
+   LifeTime 5
+   Alpha {
+    0 0 0.4898 0.77778 1 0
+   }
+  }
+  EmitorDef kontroler01 {
+   ShapeType Ellipse
+   ShapeSize 100 0 100
+   ConeAngle 360 55 20
+   MaxNum 1
+   BirthRate 1
+   Offset 0 1 0
+   LocalTransform 0
+   Material "{B598441AD245BA2D}SFP2/Particles/edds/Materials/KontrolerTEN.emat"
+   CenterY 0.019
+   ScaleX 1
+   SizeMultiplier 2
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 0
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 0.01
+   LifeTime 4
+   Alpha {
+    0 0 0.4898 0.77778 1 0
+   }
+  }
+  EmitorDef zombie01 {
+   ShapeType Ellipse
+   ShapeSize 100 0 100
+   ConeAngle 360 55 20
+   MaxNum 1
+   BirthRate 1
+   Offset 0 1 0
+   LocalTransform 0
+   Material "{999FDC3834AB5742}SFP2/Particles/edds/Materials/ZombieTEN.emat"
+   CenterY 0.019
+   ScaleX 1
+   SizeMultiplier 2
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 0
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 0.01
+   LifeTime 8
+   Alpha {
+    0 0 0.4898 0.77778 1 0
+   }
+  }
+  EmitorDef zombie02 {
+   ShapeType Ellipse
+   ShapeSize 100 0 100
+   ConeAngle 360 55 20
+   MaxNum 1
+   BirthRate 1
+   Offset 0 1 0
+   LocalTransform 0
+   Material "{7E2DA412E7E735F2}SFP2/Particles/edds/Materials/Zombie2TEN.emat"
+   CenterY 0.019
+   ScaleX 1
+   SizeMultiplier 2
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 0
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 0.01
+   LifeTime 7
+   Alpha {
+    0 0 0.4898 0.77778 1 0
+   }
+  }
+  EmitorDef snork01 {
+   ShapeType Ellipse
+   ShapeSize 100 0 100
+   ConeAngle 360 55 20
+   MaxNum 1
+   BirthRate 1
+   Offset 0 1 0
+   LocalTransform 0
+   Material "{AD8B737CDE8486B2}SFP2/Particles/edds/Materials/SnorkTEN.emat"
+   CenterY 0.019
+   ScaleX 1
+   SizeMultiplier 2
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 0
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 0.01
+   LifeTime 5
+   Alpha {
+    0 0 0.4898 0.77778 1 0
+   }
+  }
+  EmitorDef snork02 {
+   ShapeType Ellipse
+   ShapeSize 100 0 100
+   ConeAngle 360 55 20
+   MaxNum 1
+   BirthRate 1
+   Offset 0 1 0
+   LocalTransform 0
+   Material "{89F60FBD7756A71C}SFP2/Particles/edds/Materials/Snork2TEN.emat"
+   CenterY 0.019
+   ScaleX 1
+   SizeMultiplier 2
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 0
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 0.01
+   LifeTime 7
+   Alpha {
+    0 0 0.4898 0.77778 1 0
+   }
+  }
+  EmitorDef prisobak01 {
+   ShapeType Ellipse
+   ShapeSize 100 0 100
+   ConeAngle 360 55 20
+   MaxNum 1
+   BirthRate 1
+   Offset 0 1 0
+   LocalTransform 0
+   Material "{749E7D7B24744440}SFP2/Particles/edds/Materials/PsiSobakTEN.emat"
+   CenterY 0.019
+   ScaleX 1
+   SizeMultiplier 2
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 0
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 0.01
+   LifeTime 4
+   Alpha {
+    0 0 0.4898 0.77778 1 0
+   }
+  }
+ }
+}

@@ -1,0 +1,102 @@
+EffectDef {
+ Emitors {
+  EmitorDef Crow01 {
+   ShapeType Ellipse
+   ShapeSize 355 25 355
+   MaxNum 27
+   BirthRate 8
+   Offset 0 89.12936 0
+   Material "{BC884EDBE9670286}SFP2/Particles/edds/Materials/crow_anim.emat"
+   RandomAngle 0
+   Sort 0
+   Velocity 0.2
+   VelocityRND 0.1
+   Restitution 0
+   Spring 0
+   Wind 1
+   AnimFPS 15
+   LifeTime 10
+   Alpha {
+    0 0 0.0956 1 0.69603 0.87037 1 0
+   }
+   Size {
+    0 0 0.12245 0.76852 0.91085 0.92593 1 0
+   }
+  }
+  EmitorDef Crow011 {
+   ShapeType Ellipse
+   ShapeSize 355 25 355
+   MaxNum 17
+   BirthRate 5
+   Offset 0 71.97955 0
+   Material "{BC884EDBE9670286}SFP2/Particles/edds/Materials/crow_anim.emat"
+   SizeMultiplier 0.7
+   RandomRotDir 1
+   RandomAngle 0
+   Sort 0
+   BillboardingType Full
+   Velocity 0.2
+   VelocityRND 0.1
+   Wind 1
+   AnimFPS 15
+   LifeTime 10
+   Alpha {
+    0 0 0.0956 1 0.69603 0.87037 1 0
+   }
+   Size {
+    0 0 0.12245 0.76852 0.91085 0.92593 1 0
+   }
+  }
+  EmitorDef Crow02 {
+   ShapeType Ellipse
+   ShapeSize 355 25 355
+   MaxNum 17
+   BirthRate 5
+   Offset 0 71.44888 0
+   Angles 66 0 0
+   Material "{BC884EDBE9670286}SFP2/Particles/edds/Materials/crow_anim.emat"
+   SizeMultiplier 0.7
+   RandomAngle 0
+   Sort 0
+   BillboardingType None
+   Velocity 0.2
+   VelocityRND 0.1
+   Wind 1
+   AnimFPS 15
+   LifeTime 10
+   Alpha {
+    0 0 0.0956 1 0.69603 0.87037 1 0
+   }
+   Size {
+    0 0 0.12245 0.76852 0.91085 0.92593 1 0
+   }
+   SizeMast {
+    0 1 0.90977 0.98148 1 1
+   }
+  }
+  EmitorDef Crow03 {
+   ShapeType Ellipse
+   ShapeSize 355 25 355
+   MaxNum 17
+   BirthRate 5
+   Offset 0 73.9699 0
+   Angles 130.00002 0 0
+   Material "{BC884EDBE9670286}SFP2/Particles/edds/Materials/crow_anim.emat"
+   SizeMultiplier 0.5
+   RandomAngle 0
+   Sort 0
+   BillboardingType None
+   Velocity 0.2
+   VelocityRND 0.1
+   Wind 1
+   AnimFPS 15
+   LifeTime 10
+   Alpha {
+    0 0 0.0956 1 0.69603 0.87037 1 0
+   }
+   Size {
+    0 0 0.12245 0.76852 0.91085 0.92593 1 0
+   }
+  }
+ }
+}

@@ -372,6 +372,11 @@ Verified errors committed more than once. Check ACTIVELY during implementation. 
 - **E52** — после `ReplaceItemWithNewLambdaBase` старый объект живёт без места в инвентаре: повтор по таймеру даёт `no inventory location` или дубликат; без места — только `Delete()`
 - **E53** — `rotationFlags = 17` кладёт предмет на бок (передняя/задняя грань); стоя — `2`. Стекло `_ca` у MLOD без бинаризации матовое
 - **E54** — модель без Geometry LOD автоцентрируется: декор через `AddChild` съезжает; нужен кубик-Geometry с `autocenter = 0`
+- **E55** — у ODOL материалы встроены: `.rvmat` рядом по имени не читается; перенос чужой модели = замена путей той же длины (`ab_models.py`)
+- **E56** — `PlayerBase.AddToEnvironmentTemperature` в 1.30 пустой: тепло через `UniversalTemperatureSource`. Поле `Effect` = ванильный класс (как `Pos`)
+- **E57** — `JsonFileLoader` не подставляет начальные значения полей для отсутствующих ключей (остаются 0): нормализовать после загрузки, флаги «включается единицей»
+- **E58** — поле `Debug` = ванильный класс (как `Effect`, `Pos`): перед сборкой `tools/ab_checknames.py`; `SetHealth(0)` даёт `EEKilled(null)` — убийцу помнить в `EEHitBy`
+- **E59** — CE даёт мёртвому зомби ~330 с жизни: тело босса/мутанта исчезает раньше своего таймера; в `EEKilled` `SetLifetimeMax`+`SetLifetime` (и повтор через 1 с)
 
 ---
 

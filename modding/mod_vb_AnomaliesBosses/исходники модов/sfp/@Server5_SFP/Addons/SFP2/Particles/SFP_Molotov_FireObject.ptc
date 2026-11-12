@@ -1,0 +1,236 @@
+EffectDef {
+ Emitors {
+  EmitorDef red_smoke {
+   ShapeType Ellipse
+   ShapeSize 2 2 2
+   MaxNum 30
+   BirthRate 20
+   BirthRateRND 2
+   BirthRateVel 10
+   Material "{8E25684854DAB008}Graphics/Particles/materials/smoke/steam_small_cook_01.emat"
+   CenterX 0.005
+   CenterY 0.01
+   SizeMultiplier 1
+   SizeRND 0.5
+   RandomRotDir 1
+   RotMultiplier 250
+   RandomAngle 1
+   Velocity 1.5
+   VelocityRND 0.25
+   AirResistance 4
+   AirResistanceRND 1
+   GravityMultiply -1
+   Wind 1
+   AnimOnce 1
+   AnimFPS 20
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 0.7
+   LifeTimeRND 0.7
+   Color {
+    0 1 0.8431 0.0549 0.2485 0.4745 0.4235 0.3333 1 0.6076 0.5316 0.4873
+   }
+   Alpha {
+    0 0.12658 0.39313 0.16364 0.62128 0.18987 1 0
+   }
+   Size {
+    0 0.14557 0.32217 0.36709 0.61682 0.58861 1 1
+   }
+   AlphaMast {
+    0 0.47468 0.23437 1 0.54613 0.46203 0.80878 1 1 0.47468
+   }
+   RotationSpeedMast {
+    0 1 0.14807 0.25316 0.35714 0.94304 0.49182 0.27215 0.69122 0.91772 0.83929 0.27848 1 1
+   }
+   SizeMast {
+    0 0.41139 0.18304 0.87975 0.35119 0.60127 0.5186 1 0.6942 0.60127 0.84301 0.83544 1 0.52532
+   }
+   BRateMast {
+    0 0.18354 0.06324 0.44937 0.16964 1 0.39062 0.24684 0.50446 0.77848 0.65476 0.32278 0.83705 1 1 0.27215
+   }
+   VelocityMast {
+    0 0.59494 0.1756 1 0.35193 0.52532 0.52009 0.71519 0.69196 0.46203 0.83854 0.98101 1 0.51899
+   }
+  }
+  EmitorDef sparks {
+   ShapeType Ellipse
+   ShapeSize 0.5 0 0.1
+   ConeAngle 360 0 45
+   MaxNum 30
+   BirthRate 10
+   BirthRateRND 5
+   BirthRateVel 10
+   Offset 0 -0.1 0
+   LocalTransform 0
+   Material "{009C2EBAACD2D72A}graphics/particles/materials/fire/sparks1.emat"
+   CenterX 1
+   CenterY 1
+   SizeMultiplier 0.012
+   SizeRND 0.01
+   RandomRotDir 1
+   RotMultiplier 600
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   BillboardingType Full
+   Velocity 3
+   VelocityRND 0.5
+   VelAffect 0
+   AirResistance 3
+   AirResistanceRND 4
+   GravityMultiply -0.5
+   GravityMultiplyRND 0.2
+   Restitution 0
+   Spring 0
+   Wind 1
+   AnimOnce 0
+   AnimFPS 0
+   RandomFrame 0
+   LifeTime 0.3
+   LifeTimeRND 2
+   Color {
+    0 1 0.9843 0.5696 0.2738 1 0.8101 0.3987 0.6094 1 0.1709 0 1 1 0.0078 0.0078
+   }
+   Alpha {
+    0 1 0.90253 1 1 0
+   }
+   RotationSpeed {
+    0 0 0.29836 1 1 1
+   }
+   Size {
+    0 1 0.25966 1 0.84449 1 1 0
+   }
+   Repeat 1
+  }
+  EmitorDef fire {
+   ShapeType Ellipse
+   ShapeSize 0.5 0.4 0.4
+   ConeAngle 0 0 0
+   MaxNum 80
+   BirthRate 80
+   BirthRateVel 0
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{853257EDA4B1E35D}graphics/particles/materials/fire/fire_flame_01.emat"
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.3
+   SizeRND 0.3
+   RandomRotDir 1
+   RotMultiplier 0
+   VelAngle 1
+   RandomAngle 0
+   Sort 0
+   BillboardingType Full
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply -0.25
+   GravityMultiplyRND 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 30
+   RandomFrame 1
+   LifeTime 1
+   LifeTimeRND 0.1
+   Alpha {
+    0 0 0.37649 0.36076 0.59524 0.57595 1 0
+   }
+   Size {
+    0 0.40506 0.41592 0.76582 0.70015 0.67722 1 0.43038
+   }
+  }
+  EmitorDef fire_anim {
+   ShapeType Ellipse
+   ShapeSize 1 0.4 0.4
+   ConeAngle 360 0 60
+   MaxNum 70
+   BirthRate 90
+   BirthRateVel 50
+   Offset 0 0 0
+   Material "{2BF493CF258D1CBD}graphics/particles/materials/fire/fire_medium_camp_05_emissive.emat"
+   CenterX -0.005
+   SizeMultiplier 0.3
+   SizeRND 0.1
+   RandomRotDir 0
+   RotMultiplier 400
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   BillboardingType Full
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply -0.2
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 120
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 0.2
+   LifeTimeRND 0.1
+   Alpha {
+    0 0 0.16146 0.66456 0.625 0.37975 1 0
+   }
+   RotationSpeed {
+    0 0 0.61533 0.13924 0.81176 0.70253 1 0
+   }
+   Size {
+    0 0.26582 0.09003 0.47468 0.51116 1 1 0.72152
+   }
+  }
+  EmitorDef fire_anim_root {
+   ShapeType Ellipse
+   ShapeSize 1 0.4 0.4
+   ConeAngle 360 0 60
+   MaxNum 50
+   BirthRate 100
+   BirthRateVel 50
+   Offset 0 -0.075 0
+   Material "{853257EDA4B1E35D}graphics/particles/materials/fire/fire_flame_01.emat"
+   CenterX -0.005
+   SizeMultiplier 0.2
+   SizeRND 0
+   RandomRotDir 1
+   RotMultiplier 20
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 1
+   RandomAngle 0
+   Sort 0
+   BillboardingType Full
+   Velocity 0.3
+   VelocityRND 0.1
+   VelAffect 0.3
+   AirResistance 2
+   AirResistanceRND 0
+   GravityMultiply -0.3
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 60
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 1
+   LifeTimeRND 0.025
+   Alpha {
+    0 0 0.09375 0.86076 0.60491 0.4557 1 0
+   }
+   RotationSpeed {
+    0 0 0.40476 0.52532 0.81176 0.70253 1 0
+   }
+   Size {
+    0 0.22785 0.28646 0.58861 0.51414 0.98734 1 0
+   }
+  }
+ }
+}

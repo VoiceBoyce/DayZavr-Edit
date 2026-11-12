@@ -1,0 +1,25 @@
+$animsetinstance {
+ #template "{F0C651DE8E24A5DE}DZ/anims/workspaces/player/player_main/player_main.ast"
+ #nparents 1
+ #parent "{7324B2E80BB624A1}DZ/anims/workspaces/player/player_main/player_main_1h.asi"
+ $animations {
+	"ActionOnce.CloseItemOnceCro.Once" "{405C4E03F79B1CB7}DZ/anims/anm/player/actions/items/p_cro_close_compass.anm"
+   "ActionOnce.CloseItemOnceErc.Once" "{6BA6E05ABEFC6947}DZ/anims/anm/player/actions/items/p_erc_close_compass.anm"
+   "ActionOnce.CloseItemOncePne.Once" "{23CF80285C5BDC7B}DZ/anims/anm/player/actions/items/p_pne_close_compass.anm"
+   "ActionOnce.OpenItemOnceCro.Once" "{5FF44429774E8394}DZ/anims/anm/player/actions/items/p_cro_open_compass.anm"
+   "ActionOnce.OpenItemOnceErc.Once" "{1B4C88E37EE3CA2C}DZ/anims/anm/player/actions/items/p_erc_open_compass.anm"
+   "ActionOnce.OpenItemOncePne.Once" "{FBE4649526B7F0C7}DZ/anims/anm/player/actions/items/p_pne_open_compass.anm"
+   "ActionContinuous.EatCro.In" "SFP2/anm/Medical_ingalator/ingalator_in_x.anm"
+   "ActionContinuous.EatCro.Loop" "SFP2/anm/Medical_ingalator/ingalator_loop_x.anm"
+   "ActionContinuous.EatCro.Out" "SFP2/anm/Medical_ingalator/ingalator_out_x.anm"
+   "ActionContinuous.EatErc.In" "SFP2/anm/Medical_ingalator/ingalator_in_x.anm"
+   "ActionContinuous.EatErc.Loop" "SFP2/anm/Medical_ingalator/ingalator_loop_x.anm"
+   "ActionContinuous.EatErc.Out" "SFP2/anm/Medical_ingalator/ingalator_out_x.anm"
+   "ActionContinuous.EatPne.In" "SFP2/anm/Medical_ingalator/ingalator_leza_in.anm"
+   "ActionContinuous.EatPne.Loop" "SFP2/anm/Medical_ingalator/ingalator_leza_loop.anm"
+   "ActionContinuous.EatPne.Out" "SFP2/anm/Medical_ingalator/ingalator_leza_out.anm"
+   "ActionOnce.EatTabletCro.Once" "SFP2/anm/ai2_medkit/ai2_used.anm"
+   "ActionOnce.EatTabletErc.Once" "SFP2/anm/ai2_medkit/ai2_used.anm"
+   "ActionOnce.EatTabletPne.Once" "SFP2/anm/ai2_medkit/ai2_used_pne.anm"
+  
+ }

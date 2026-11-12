@@ -1,0 +1,86 @@
+EffectDef {
+ Emitors {
+  EmitorDef Main_WaterJet {
+   ConeAngle 360 10 10
+   MaxNum 55
+   BirthRate 55
+   BirthRateVel 0
+   Offset 0.94762 0.174 0.323
+   Angles -180 -90 -180
+   Material "{8FE2383D6913E098}Graphics/Particles/materials/enviroment/water_splash_01_NoEm.emat"
+   SizeMultiplier 0.1
+   SizeRND 0.1
+   RandomRotDir 0
+   RotMultiplier 50
+   RandomAngle 1
+   Velocity -1
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   Wind 0
+   RandomFrame 1
+   LifeTime 0.5
+   LifeTimeRND 0.25
+   Color {
+    0 0.1944 0.1296 0 1 0.3056 0.1296 0
+   }
+   Alpha {
+    0 0 0.11493 1 1 1
+   }
+   RotationSpeed {
+    0 0.33333 1 1
+   }
+   Size {
+    0 0 0.42052 1 1 1
+   }
+   EffectTime 14
+   Repeat 0
+   AlphaMast {
+    0 0 0.16488 0 0.17884 1 0.34533 0 1 0
+   }
+  }
+  EmitorDef ExtraThick_WaterJet {
+   ConeAngle 360 10 10
+   MaxNum 15
+   BirthRate 7515
+   BirthRateVel 0
+   Offset 0.96148 0.17386 0.32255
+   Angles -180 -90 -180
+   Material "{D29B53088A5A3911}Graphics/Particles/materials/smoke/smoke_dust_01_W.emat"
+   SizeMultiplier 0.01
+   SizeRND 0.05
+   RandomRotDir 1
+   RotMultiplier 50
+   StreakFullUV 0
+   RandomAngle 1
+   Velocity -0.5
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   RandomFrame 1
+   LifeTime 0.3
+   LifeTimeRND 0.25
+   Color {
+    0 0.213 0.1204 0 1 0.3241 0.1296 0
+   }
+   Alpha {
+    0 0 0.24554 1 1 1
+   }
+   Size {
+    0 0 1 1
+   }
+   EffectTime 14
+   Repeat 0
+   ColorMast {
+    0 1 1 1 1 1 1 1
+   }
+   AlphaMast {
+    0 0 0.1536 0 0.17723 0.99074 0.32814 0 1 0
+   }
+  }
+ }
+}

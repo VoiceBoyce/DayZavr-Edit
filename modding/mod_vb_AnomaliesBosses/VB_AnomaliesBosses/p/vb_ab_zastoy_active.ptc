@@ -1,0 +1,154 @@
+EffectDef {
+ MinFPS 30
+ Emitors {
+  EmitorDef HoleSplash {
+   ConeAngle 0 0 0
+   MaxNum 10
+   BirthRate 2
+   BirthRateRND 3
+   Offset 0 0 0
+   Material "{E77CE1C109C00FC5}VB_AB/p/m/voronka/BubbleHole.emat"
+   SizeMultiplier 8
+   SizeRND 4
+   Velocity 1000
+   VelocityRND 999
+   Spring 1
+   AnimFPS 25
+   RandomFrame 0
+   LifeTime 4
+   LifeTimeRND 0
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 1 1 1
+   }
+   Size {
+    0 0 0.08497 0 0.19346 1 0.38954 1 0.54641 1 0.54967 0 1 0
+   }
+   EffectTime 6
+   Repeat 0
+   ColorMast {
+    0 1 1 1 1 1 1 1
+   }
+   AlphaMast {
+    0 0 0.49412 0.22963 1 0
+   }
+   SizeMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 1 0.01242 1 0.34641 1 0.34967 0 1 0
+   }
+   VelocityMast {
+    0 0 1 1
+   }
+  }
+  EmitorDef LightSplash {
+   ConeAngle 360 360 0
+   MaxNum 100
+   BirthRate 1000
+   BirthRateRND 100
+   BirthRateVel 1000
+   Offset 0 0 0
+   Material "{CB7AF4FD8ACBFDFC}graphics/particles/materials/glow/glow1.emat"
+   SizeMultiplier 8
+   SizeRND 4
+   RandomAngle 1
+   Velocity 0
+   VelocityRND 0
+   AirResistance 0
+   AirResistanceRND 5
+   GravityMultiplyRND 0
+   RandomFrame 1
+   LifeTime 1
+   LifeTimeRND 2
+   Alpha {
+    0 1 0.02484 0.61972 0.0719 0.24444 0.12614 0.08889 0.27059 0 1 0
+   }
+   Size {
+    0 0 0.12288 0.85185 0.49922 1 0.81307 0.82963 1 0
+   }
+   EffectTime 6
+   Repeat 0
+   AlphaMast {
+    0 0 0.12941 0.05926 0.33007 0 0.47843 0.06667 0.64314 0.01481 0.8183 0.08889 1 0
+   }
+   BRateMast {
+    0 0 0.1268 0.03704 0.31111 0.02963 0.53007 0.02963 1 0
+   }
+  }
+  EmitorDef Smoke {
+   ConeAngle 360 360 0
+   MaxNum 100
+   BirthRate 1000
+   BirthRateRND 100
+   BirthRateVel 1000
+   Offset 0 0 0
+   Material "{55020E0786F83004}graphics/particles/materials/smoke/smoke_anim_01.emat"
+   SizeMultiplier 8
+   SizeRND 4
+   RandomAngle 1
+   Velocity 0
+   VelocityRND 0
+   AirResistance 0
+   AirResistanceRND 5
+   GravityMultiplyRND 0
+   RandomFrame 1
+   LifeTime 1
+   LifeTimeRND 2
+   Alpha {
+    0 1 0.02484 0.61972 0.0719 0.24444 0.12614 0.08889 0.27059 0 1 0
+   }
+   Size {
+    0 0 0.12288 0.85185 0.49922 1 0.81307 0.82963 1 0
+   }
+   EffectTime 6
+   Repeat 0
+   AlphaMast {
+    0 0 0.12941 0.05926 0.33007 0 0.47843 0.06667 0.64314 0.01481 0.8183 0.08889 1 0
+   }
+   BRateMast {
+    0 0 0.1268 0.03704 0.31111 0.02963 0.53007 0.02963 1 0
+   }
+  }
+  EmitorDef LeavseSplash {
+   ShapeType Sphere
+   ShapeSize 8 8 8
+   ConeAngle 360 360 0
+   MaxNum 50
+   BirthRate 10
+   BirthRateRND 10
+   BirthRateVel 0
+   Offset 0 0 0
+   Material "{CB7AF4FD8ACBFDFC}graphics/particles/materials/glow/glow1.emat"
+   SizeMultiplier 0.06
+   SizeRND 0.01
+   RandomRotDir 1
+   RandomAngle 1
+   Velocity 0
+   VelocityRND 0
+   AirResistance 6
+   AirResistanceRND 5
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Spring 0.01
+   Wind 1
+   AnimFPS 10
+   RandomFrame 0
+   LifeTime 5
+   LifeTimeRND 6
+   Alpha {
+    0 0 0.13464 1 0.34379 0 1 0
+   }
+   EffectTime 6
+   Repeat 0
+   AlphaMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 1 0.13488 1 1 0
+   }
+  }
+ }
+}

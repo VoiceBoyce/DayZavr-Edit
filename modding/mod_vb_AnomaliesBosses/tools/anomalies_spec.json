@@ -1,0 +1,1242 @@
+{
+ "Anomaly_Electra": {
+  "idle": {
+   "light": "Anomaly_Electra_Idle_Light",
+   "sound": "electra_idle",
+   "sound_loop": true,
+   "sound_range": 30.0,
+   "particle": "OOTS_ELECTRA_IDLE",
+   "ptc": "OOTS_ELECTRA_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\electra_idle",
+    "volume": 3.0,
+    "pitch": 1.0,
+    "distance": 30.0
+   }
+  },
+  "active": {
+   "light": "Anomaly_Electra_Active_Light",
+   "sound": "electra_active",
+   "sound_loop": false,
+   "sound_range": 100.0,
+   "particle": "OOTS_ELECTRA_ACTIVE",
+   "ptc": "OOTS_ELECTRA_ACTIVE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\electra_active",
+    "volume": 3.0,
+    "pitch": 1.0,
+    "distance": 50.0
+   }
+  },
+  "recharge": 2.5,
+  "active_time": 1.5,
+  "ammo": [
+   "ElectraDmg"
+  ],
+  "ammo_damage": {
+   "ElectraDmg": {
+    "Health": 150.0,
+    "Blood": 0.0,
+    "Shock": 1.0
+   }
+  },
+  "extents": [
+   [
+    2.0,
+    1.5
+   ]
+  ],
+  "hitzones": [
+   "Torso",
+   "LeftHand",
+   "LeftLeg",
+   "LeftFoot",
+   "RightHand",
+   "RightLeg",
+   "RightFoot"
+  ],
+  "server_extra": []
+ },
+ "Anomaly_Studen": {
+  "idle": {
+   "light": "Anomaly_Studen_Idle_Light",
+   "sound": "studen_idle",
+   "sound_loop": true,
+   "sound_range": 20.0,
+   "particle": "OOTS_STUDEN_IDLE",
+   "ptc": "OOTS_STUDEN_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\studen_idle",
+    "volume": 2.0,
+    "pitch": 1.0,
+    "distance": 30.0
+   }
+  },
+  "active": {
+   "light": "Anomaly_Studen_Active_Light",
+   "sound": "studen_active",
+   "sound_loop": false,
+   "sound_range": 100.0,
+   "particle": "OOTS_STUDEN_ACTIVE",
+   "ptc": "OOTS_STUDEN_ACTIVE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\studen_active",
+    "volume": 3.0,
+    "pitch": 1.0,
+    "distance": 30.0
+   }
+  },
+  "recharge": 1.0,
+  "active_time": 0.0,
+  "ammo": [
+   "StudenDmg"
+  ],
+  "ammo_damage": {
+   "StudenDmg": {
+    "Health": 80.0,
+    "Blood": 0.0,
+    "Shock": 1.0
+   }
+  },
+  "extents": [
+   [
+    1.8,
+    1.0
+   ]
+  ],
+  "hitzones": [
+   "Torso",
+   "LeftHand",
+   "LeftLeg",
+   "LeftFoot",
+   "RightHand",
+   "RightLeg",
+   "RightFoot"
+  ],
+  "server_extra": []
+ },
+ "Anomaly_Tramplin": {
+  "idle": {
+   "sound": "tramplin_idle",
+   "sound_loop": true,
+   "sound_range": 50.0,
+   "particle": "OOTS_TRAMPLIN_IDLE",
+   "ptc": "OOTS_TRAMPLIN_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\tramplin_idle",
+    "volume": 1.0,
+    "pitch": 1.0,
+    "distance": 50.0
+   }
+  },
+  "active": {
+   "sound": "tramplin_active",
+   "sound_loop": false,
+   "sound_range": 75.0,
+   "particle": "OOTS_TRAMPLIN_ACTIVE",
+   "ptc": "OOTS_TRAMPLIN_ACTIVE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\tramplin_active",
+    "volume": 6.0,
+    "pitch": 1.0,
+    "distance": 50.0
+   }
+  },
+  "recharge": 3.0,
+  "active_time": 2.0,
+  "ammo": [
+   "TramplinDmg"
+  ],
+  "ammo_damage": {
+   "TramplinDmg": {
+    "Health": 85.0,
+    "Blood": 0.0,
+    "Shock": 0.0
+   }
+  },
+  "extents": [
+   [
+    1.8,
+    1.0
+   ]
+  ],
+  "hitzones": [
+   "LeftLeg",
+   "LeftFoot",
+   "RightLeg",
+   "RightFoot"
+  ],
+  "server_extra": []
+ },
+ "Anomaly_Voronka": {
+  "idle": {
+   "sound": "voronka_idle",
+   "sound_loop": true,
+   "sound_range": 30.0,
+   "particle": "OOTS_VORONKA_IDLE",
+   "ptc": "OOTS_VORONKA_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\voronka_idle",
+    "volume": 1.0,
+    "pitch": 1.0,
+    "distance": 50.0
+   }
+  },
+  "active": {
+   "sound": "voronka_active",
+   "sound_loop": false,
+   "sound_range": 80.0,
+   "particle": "OOTS_VORONKA_ACTIVE_1",
+   "ptc": "OOTS_VORONKA_ACTIVE_1",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\voronka_active",
+    "volume": 6.0,
+    "pitch": 1.0,
+    "distance": 100.0
+   }
+  },
+  "recharge": 3.0,
+  "active_time": 5.0,
+  "ammo": [
+   "VoronkaDmg"
+  ],
+  "ammo_damage": {
+   "VoronkaDmg": {
+    "Health": 200.0,
+    "Blood": 0.0,
+    "Shock": 1.0
+   }
+  },
+  "extents": [
+   [
+    2.5,
+    1.5
+   ],
+   [
+    3.0,
+    3.0
+   ]
+  ],
+  "hitzones": [
+   "Torso",
+   "LeftHand",
+   "LeftLeg",
+   "LeftFoot",
+   "RightHand",
+   "RightLeg",
+   "RightFoot"
+  ],
+  "server_extra": []
+ },
+ "Anomaly_Zharka": {
+  "idle": {
+   "sound": "zharka_idle",
+   "sound_loop": true,
+   "sound_range": 50.0,
+   "particle": "OOTS_ZHARKA_IDLE",
+   "ptc": "OOTS_ZHARKA_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\zharka_idle",
+    "volume": 3.0,
+    "pitch": 1.0,
+    "distance": 50.0
+   }
+  },
+  "active": {
+   "light": "Anomaly_Zharka_Active_Light",
+   "sound": "zharka_active",
+   "sound_loop": false,
+   "sound_range": 75.0,
+   "particle": "OOTS_ZHARKA_ACTIVE",
+   "ptc": "OOTS_ZHARKA_ACTIVE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\zharka_active",
+    "volume": 5.0,
+    "pitch": 1.0,
+    "distance": 50.0
+   }
+  },
+  "recharge": 1.0,
+  "active_time": 10.0,
+  "ammo": [
+   "ZharkaDmg"
+  ],
+  "ammo_damage": {
+   "ZharkaDmg": {
+    "Health": 70.0,
+    "Blood": 0.0,
+    "Shock": 1.0
+   }
+  },
+  "extents": [
+   [
+    1.7,
+    2.5
+   ]
+  ],
+  "hitzones": [
+   "Torso",
+   "LeftHand",
+   "LeftLeg",
+   "LeftFoot",
+   "RightHand",
+   "RightLeg",
+   "RightFoot"
+  ],
+  "server_extra": [
+   "AddToEnvironmentTemperature"
+  ]
+ },
+ "Anomaly_EMP_Blast": {
+  "idle": {
+   "light": "Anomaly_Electra_Idle_Light",
+   "sound": "emp_blast_IDLE",
+   "sound_loop": true,
+   "sound_range": 30.0,
+   "particle": "OOTS_EMP_BLAST_IDLE",
+   "ptc": "OOTS_EMP_BLAST_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\emp_blast_IDLE",
+    "volume": 10.0,
+    "pitch": 1.0,
+    "distance": 100.0
+   }
+  },
+  "active": {
+   "light": "Anomaly_Electra_Active_Light",
+   "sound": "emp_blast",
+   "sound_loop": false,
+   "sound_range": 100.0,
+   "particle": "OOTS_EMP_BLAST_ACTIVE",
+   "ptc": "OOTS_EMP_BLAST_ACTIVE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\emp_blast",
+    "volume": 10.0,
+    "pitch": 1.0,
+    "distance": 30.0
+   }
+  },
+  "recharge": 2.5,
+  "active_time": 1.5,
+  "ammo": [
+   "EmpDmg"
+  ],
+  "ammo_damage": {
+   "EmpDmg": {
+    "Health": 0.0,
+    "Blood": 0.0,
+    "Shock": 15.0
+   }
+  },
+  "extents": [
+   [
+    3.0,
+    2.0
+   ]
+  ],
+  "hitzones": [
+   "Torso",
+   "LeftHand",
+   "LeftLeg",
+   "LeftFoot",
+   "RightHand",
+   "RightLeg",
+   "RightFoot"
+  ],
+  "server_extra": [
+   "SetEnergy"
+  ]
+ },
+ "Anomaly_Steklo": {
+  "idle": {
+   "sound": "Steklo_IDLE",
+   "sound_loop": true,
+   "sound_range": 5.0,
+   "particle": "OOTS_STEKLO_IDLE",
+   "ptc": "OOTS_STEKLO_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\Steklo_IDLE",
+    "volume": 10.0,
+    "pitch": 1.0,
+    "distance": 30.0
+   }
+  },
+  "active": {
+   "sound": "Steklo_ACTIVE",
+   "sound_loop": true,
+   "sound_range": 30.0,
+   "particle": "OOTS_STEKLO_ACTIVE",
+   "ptc": "OOTS_STEKLO_ACTIVE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\Steklo_ACTIVE",
+    "volume": 10.0,
+    "pitch": 1.0,
+    "distance": 25.0
+   }
+  },
+  "recharge": 2.0,
+  "active_time": 3.0,
+  "ammo": [
+   "StekloDmg"
+  ],
+  "ammo_damage": {
+   "StekloDmg": {
+    "Health": 0.0,
+    "Blood": 500.0,
+    "Shock": 1.0
+   }
+  },
+  "extents": [
+   [
+    5.0,
+    5.0
+   ]
+  ],
+  "hitzones": [
+   "Torso",
+   "LeftHand",
+   "LeftLeg",
+   "LeftFoot",
+   "RightHand",
+   "RightLeg",
+   "RightFoot"
+  ],
+  "server_extra": []
+ },
+ "Anomaly_DeadZone": {
+  "idle": {
+   "sound": "DeadZone_IDLE",
+   "sound_loop": true,
+   "sound_range": 35.0,
+   "particle": "OOTS_DEATH_ZONE_IDLE",
+   "ptc": "OOTS_DEATH_ZONE_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\DeadZone_IDLE",
+    "volume": 10.0,
+    "pitch": 1.0,
+    "distance": 70.0
+   }
+  },
+  "active": {
+   "sound": "DeadZone_ACTIVE",
+   "sound_loop": false,
+   "sound_range": 100.0,
+   "particle": "OOTS_DEATH_ZONE_ACTIVE",
+   "ptc": "OOTS_DEATH_ZONE_ACTIVE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\DeadZone_ACTIVE",
+    "volume": 10.0,
+    "pitch": 1.0,
+    "distance": 50.0
+   }
+  },
+  "recharge": 2.0,
+  "active_time": 10.0,
+  "ammo": [
+   "DeadZoneDmg"
+  ],
+  "ammo_damage": {
+   "DeadZoneDmg": {
+    "Health": 50.0,
+    "Blood": 0.0,
+    "Shock": 20.0
+   }
+  },
+  "extents": [
+   [
+    10.0,
+    10.0
+   ]
+  ],
+  "hitzones": [
+   "Torso",
+   "LeftHand",
+   "LeftLeg",
+   "LeftFoot",
+   "RightHand",
+   "RightLeg",
+   "RightFoot"
+  ],
+  "server_extra": []
+ },
+ "Anomaly_Zastoy": {
+  "idle": {
+   "sound": "Zastoy_idle",
+   "sound_loop": true,
+   "sound_range": 25.0,
+   "particle": "OOTS_ZASTOY_IDLE",
+   "ptc": "OOTS_ZASTOY_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\Zastoy_IDLE",
+    "volume": 5.0,
+    "pitch": 0.5,
+    "distance": 30.0
+   }
+  },
+  "active": {
+   "sound": "Zastoy_active",
+   "sound_loop": false,
+   "sound_range": 35.0,
+   "particle": "OOTS_ZASTOY_ACTIVE",
+   "ptc": "OOTS_ZASTOY_ACTIVE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\Zastoy_ACTIVE",
+    "volume": 7.0,
+    "pitch": 0.75,
+    "distance": 50.0
+   }
+  },
+  "recharge": 2.0,
+  "active_time": 5.0,
+  "ammo": [
+   "ZastoyDmg"
+  ],
+  "ammo_damage": {
+   "ZastoyDmg": {
+    "Health": 90.0,
+    "Blood": 0.0,
+    "Shock": 50.0
+   }
+  },
+  "extents": [
+   [
+    2.0,
+    2.0
+   ]
+  ],
+  "hitzones": [
+   "Torso",
+   "LeftHand",
+   "LeftLeg",
+   "LeftFoot",
+   "RightHand",
+   "RightLeg",
+   "RightFoot"
+  ],
+  "server_extra": []
+ },
+ "Anomaly_Snow": {
+  "idle": {
+   "sound": "Snow_idle",
+   "sound_loop": true,
+   "sound_range": 40.0,
+   "particle": "OOTS_SNOW_IDLE",
+   "ptc": "OOTS_SNOW_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\Snow_IDLE",
+    "volume": 15.0,
+    "pitch": 1.0,
+    "distance": 50.0
+   }
+  },
+  "active": {
+   "sound": "Snow_active",
+   "sound_loop": false,
+   "sound_range": 40.0,
+   "particle": "OOTS_SNOW_ACTIVE",
+   "ptc": "OOTS_SNOW_ACTIVE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\Snow_ACTIVE",
+    "volume": 10.0,
+    "pitch": 1.0,
+    "distance": 70.0
+   }
+  },
+  "recharge": 3.0,
+  "active_time": 10.0,
+  "ammo": [
+   "SnowDmg"
+  ],
+  "ammo_damage": {
+   "SnowDmg": {
+    "Health": 35.0,
+    "Blood": 0.0,
+    "Shock": 0.0
+   }
+  },
+  "extents": [
+   [
+    10.0,
+    10.0
+   ]
+  ],
+  "hitzones": [
+   "Torso",
+   "LeftHand",
+   "LeftLeg",
+   "LeftFoot",
+   "RightHand",
+   "RightLeg",
+   "RightFoot"
+  ],
+  "server_extra": [
+   "SetWetMax"
+  ]
+ },
+ "Anomaly_Par": {
+  "idle": {
+   "sound": "Par_idle",
+   "sound_loop": true,
+   "sound_range": 40.0,
+   "particle": "OOTS_PAR_IDLE",
+   "ptc": "OOTS_PAR_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\par_idle",
+    "volume": 5.0,
+    "pitch": 1.0,
+    "distance": 60.0
+   }
+  },
+  "active": {
+   "sound": "Par_active",
+   "sound_loop": false,
+   "sound_range": 70.0,
+   "particle": "OOTS_PAR_ACTIVE",
+   "ptc": "OOTS_PAR_ACTIVE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\par_active",
+    "volume": 7.0,
+    "pitch": 1.0,
+    "distance": 70.0
+   }
+  },
+  "recharge": 1.0,
+  "active_time": 10.0,
+  "ammo": [
+   "ParDmg"
+  ],
+  "ammo_damage": {
+   "ParDmg": {
+    "Health": 70.0,
+    "Blood": 0.0,
+    "Shock": 40.0
+   }
+  },
+  "extents": [
+   [
+    1.5,
+    2.5
+   ]
+  ],
+  "hitzones": [
+   "Torso",
+   "LeftHand",
+   "LeftLeg",
+   "LeftFoot",
+   "RightHand",
+   "RightLeg",
+   "RightFoot"
+  ],
+  "server_extra": [
+   "AddToEnvironmentTemperature"
+  ]
+ },
+ "Anomaly_Groza": {
+  "idle": {
+   "sound": "Groza_idle",
+   "sound_loop": true,
+   "sound_range": 35.0,
+   "particle": "OOTS_GROZA_IDLE",
+   "ptc": "OOTS_GROZA_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\Groza_IDLE",
+    "volume": 15.0,
+    "pitch": 1.0,
+    "distance": 40.0
+   }
+  },
+  "active": {
+   "sound": "Groza_active",
+   "sound_loop": false,
+   "sound_range": 70.0,
+   "particle": "OOTS_GROZA_ACTIVE",
+   "ptc": "OOTS_GROZA_ACTIVE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\Groza_ACTIVE",
+    "volume": 10.0,
+    "pitch": 1.0,
+    "distance": 60.0
+   }
+  },
+  "recharge": 3.0,
+  "active_time": 10.0,
+  "ammo": [
+   "GrozaDmg"
+  ],
+  "ammo_damage": {
+   "GrozaDmg": {
+    "Health": 70.0,
+    "Blood": 0.0,
+    "Shock": 30.0
+   }
+  },
+  "extents": [
+   [
+    10.0,
+    10.0
+   ]
+  ],
+  "hitzones": [
+   "Torso",
+   "LeftHand",
+   "LeftLeg",
+   "LeftFoot",
+   "RightHand",
+   "RightLeg",
+   "RightFoot"
+  ],
+  "server_extra": [
+   "SetWetMax"
+  ]
+ },
+ "Anomaly_Atom": {
+  "idle": {
+   "sound": "Atom_IDLE",
+   "sound_loop": true,
+   "sound_range": 25.0,
+   "particle": "OOTS_ATOM_IDLE",
+   "ptc": "OOTS_ATOM_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\Atom_IDLE",
+    "volume": 15.0,
+    "pitch": 1.0,
+    "distance": 15.0
+   }
+  },
+  "active": {
+   "sound": "Atom_ACTIVE",
+   "sound_loop": false,
+   "sound_range": 35.0,
+   "particle": "OOTS_ATOM_ACTIVE",
+   "ptc": "OOTS_ATOM_ACTIVE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\Atom_ACTIVE",
+    "volume": 25.0,
+    "pitch": 1.0,
+    "distance": 100.0
+   }
+  },
+  "recharge": 5.0,
+  "active_time": 5.0,
+  "ammo": [
+   "AtomDmg"
+  ],
+  "ammo_damage": {
+   "AtomDmg": {
+    "Health": 125.0,
+    "Blood": 2000.0,
+    "Shock": 25.0
+   }
+  },
+  "extents": [
+   [
+    4.0,
+    4.0
+   ]
+  ],
+  "hitzones": [
+   "LeftLeg",
+   "LeftFoot",
+   "RightLeg",
+   "RightFoot"
+  ],
+  "server_extra": [
+   "ProcessDirectDamage",
+   "dBodyApplyImpulse"
+  ]
+ },
+ "Anomaly_Lince": {
+  "idle": {
+   "sound": "Lince_idle",
+   "sound_loop": true,
+   "sound_range": 25.0,
+   "particle": "OOTS_LINCE_IDLE",
+   "ptc": "OOTS_LINCE_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\Lince_idle",
+    "volume": 5.0,
+    "pitch": 1.0,
+    "distance": 30.0
+   }
+  },
+  "active": {
+   "sound": "Lince_active",
+   "sound_loop": false,
+   "sound_range": 35.0,
+   "particle": "OOTS_LINCE_ACTIVE",
+   "ptc": "OOTS_LINCE_ACTIVE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\Lince_active",
+    "volume": 7.0,
+    "pitch": 1.0,
+    "distance": 30.0
+   }
+  },
+  "recharge": 5.0,
+  "active_time": 5.0,
+  "ammo": [],
+  "ammo_damage": {},
+  "extents": [
+   [
+    2.0,
+    2.0
+   ]
+  ],
+  "hitzones": [
+   "Torso",
+   "LeftHand",
+   "LeftLeg",
+   "LeftFoot",
+   "RightHand",
+   "RightLeg",
+   "RightFoot"
+  ],
+  "server_extra": []
+ },
+ "Anomaly_LinceAgr": {
+  "idle": {
+   "sound": "Lince_idle",
+   "sound_loop": true,
+   "sound_range": 25.0,
+   "particle": "OOTS_LINCE_IDLE",
+   "ptc": "OOTS_LINCE_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\Lince_idle",
+    "volume": 5.0,
+    "pitch": 1.0,
+    "distance": 30.0
+   }
+  },
+  "active": {
+   "sound": "LinceAgr_Active",
+   "sound_loop": false,
+   "sound_range": 35.0,
+   "particle": "OOTS_LINCEAGR_ACTIVE",
+   "ptc": "OOTS_LINCEAGR_ACTIVE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\LinceAgr_Active",
+    "volume": 7.0,
+    "pitch": 1.0,
+    "distance": 30.0
+   }
+  },
+  "recharge": 5.0,
+  "active_time": 5.0,
+  "ammo": [
+   "LinceAgrDmg"
+  ],
+  "ammo_damage": {
+   "LinceAgrDmg": {
+    "Health": 0.0,
+    "Blood": 0.0,
+    "Shock": 40.0
+   }
+  },
+  "extents": [
+   [
+    2.0,
+    2.0
+   ]
+  ],
+  "hitzones": [
+   "Torso",
+   "LeftHand",
+   "RightHand"
+  ],
+  "server_extra": []
+ },
+ "Anomaly_Holera": {
+  "idle": {
+   "light": "Anomaly_Holera_Idle_Light",
+   "sound": "Holera_idle",
+   "sound_loop": true,
+   "sound_range": 25.0,
+   "particle": "OOTS_HOLERA_IDLE",
+   "ptc": "OOTS_HOLERA_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\Holera_idle",
+    "volume": 5.0,
+    "pitch": 1.0,
+    "distance": 30.0
+   }
+  },
+  "active": {
+   "light": "Anomaly_Holera_Active_Light",
+   "sound": "Holera_Active",
+   "sound_loop": false,
+   "sound_range": 35.0,
+   "particle": "OOTS_HOLERA_ACTIVE",
+   "ptc": "OOTS_HOLERA_ACTIVE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\Holera_active",
+    "volume": 7.0,
+    "pitch": 1.0,
+    "distance": 30.0
+   }
+  },
+  "recharge": 5.0,
+  "active_time": 5.0,
+  "ammo": [
+   "HoleraDmg"
+  ],
+  "ammo_damage": {
+   "HoleraDmg": {
+    "Health": 15.0,
+    "Blood": 0.0,
+    "Shock": 0.0
+   }
+  },
+  "extents": [
+   [
+    2.0,
+    2.0
+   ]
+  ],
+  "hitzones": [
+   "Torso",
+   "LeftHand",
+   "LeftLeg",
+   "LeftFoot",
+   "RightHand",
+   "RightLeg",
+   "RightFoot"
+  ],
+  "server_extra": []
+ },
+ "Anomaly_FireShtorm": {
+  "idle": {
+   "sound": "electra_idle",
+   "sound_loop": true,
+   "sound_range": 30.0,
+   "particle": "OOTS_FIRE_SHTORM_IDLE",
+   "ptc": "OOTS_FIRE_SHTORM_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\electra_idle",
+    "volume": 3.0,
+    "pitch": 1.0,
+    "distance": 30.0
+   }
+  },
+  "active": {
+   "sound": "electra_active",
+   "sound_loop": false,
+   "sound_range": 100.0,
+   "particle": "OOTS_FIRE_SHTORM_ACTIVE",
+   "ptc": "OOTS_FIRE_SHTORM_ACTIVE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\electra_active",
+    "volume": 3.0,
+    "pitch": 1.0,
+    "distance": 50.0
+   }
+  },
+  "recharge": 2.5,
+  "active_time": 5.0,
+  "ammo": [
+   "FireShtormDmg"
+  ],
+  "ammo_damage": {
+   "FireShtormDmg": {
+    "Health": 100.0,
+    "Blood": 0.0,
+    "Shock": 1.0
+   }
+  },
+  "extents": [
+   [
+    3.0,
+    3.0
+   ]
+  ],
+  "hitzones": [
+   "Torso",
+   "LeftHand",
+   "LeftLeg",
+   "LeftFoot",
+   "RightHand",
+   "RightLeg",
+   "RightFoot"
+  ],
+  "server_extra": []
+ },
+ "Anomaly_Lomka": {
+  "idle": {
+   "sound": "electra_idle",
+   "sound_loop": true,
+   "sound_range": 30.0,
+   "particle": "OOTS_LOMKA_IDLE",
+   "ptc": "OOTS_LOMKA_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\electra_idle",
+    "volume": 3.0,
+    "pitch": 1.0,
+    "distance": 30.0
+   }
+  },
+  "active": {
+   "sound": "electra_active",
+   "sound_loop": false,
+   "sound_range": 100.0,
+   "particle": "OOTS_LOMKA_ACTIVE",
+   "ptc": "OOTS_LOMKA_ACTIVE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\electra_active",
+    "volume": 3.0,
+    "pitch": 1.0,
+    "distance": 50.0
+   }
+  },
+  "recharge": 2.5,
+  "active_time": 5.0,
+  "ammo": [
+   "LomkaDmg"
+  ],
+  "ammo_damage": {
+   "LomkaDmg": {
+    "Health": 100.0,
+    "Blood": 0.0,
+    "Shock": 1.0
+   }
+  },
+  "extents": [
+   [
+    2.0,
+    1.5
+   ]
+  ],
+  "hitzones": [
+   "Torso",
+   "LeftHand",
+   "LeftLeg",
+   "LeftFoot",
+   "RightHand",
+   "RightLeg",
+   "RightFoot"
+  ],
+  "server_extra": []
+ },
+ "Anomaly_Roy": {
+  "idle": {
+   "sound": "roy_idle",
+   "sound_loop": true,
+   "sound_range": 25.0,
+   "particle": "OOTS_ROY_IDLE",
+   "ptc": "OOTS_ROY_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\Roy_idle",
+    "volume": 5.0,
+    "pitch": 1.0,
+    "distance": 30.0
+   }
+  },
+  "active": {
+   "sound": "roy_active",
+   "sound_loop": false,
+   "sound_range": 60.0,
+   "particle": "OOTS_ROY_ACTIVE",
+   "ptc": "OOTS_ROY_ACTIVE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\Roy_active",
+    "volume": 7.0,
+    "pitch": 1.0,
+    "distance": 30.0
+   }
+  },
+  "recharge": 2.5,
+  "active_time": 5.0,
+  "ammo": [
+   "RoyDmg"
+  ],
+  "ammo_damage": {
+   "RoyDmg": {
+    "Health": 100.0,
+    "Blood": 0.0,
+    "Shock": 1.0
+   }
+  },
+  "extents": [
+   [
+    2.0,
+    1.5
+   ]
+  ],
+  "hitzones": [
+   "Torso",
+   "LeftHand",
+   "LeftLeg",
+   "LeftFoot",
+   "RightHand",
+   "RightLeg",
+   "RightFoot"
+  ],
+  "server_extra": []
+ },
+ "Anomaly_Flash": {
+  "idle": {
+   "sound": "flash_idle",
+   "sound_loop": true,
+   "sound_range": 15.0,
+   "particle": "OOTS_FLASH_IDLE",
+   "ptc": "OOTS_FLASH_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\Flash_idle",
+    "volume": 5.0,
+    "pitch": 1.0,
+    "distance": 30.0
+   }
+  },
+  "active": {
+   "sound": "flash_active",
+   "sound_loop": false,
+   "sound_range": 100.0,
+   "particle": "OOTS_FLASH_ACTIVE",
+   "ptc": "OOTS_FLASH_ACTIVE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\Flash_active",
+    "volume": 7.0,
+    "pitch": 1.0,
+    "distance": 30.0
+   }
+  },
+  "recharge": 2.5,
+  "active_time": 5.0,
+  "ammo": [
+   "FlashDmg"
+  ],
+  "ammo_damage": {
+   "FlashDmg": {
+    "Health": 100.0,
+    "Blood": 0.0,
+    "Shock": 1.0
+   }
+  },
+  "extents": [
+   [
+    2.0,
+    1.5
+   ]
+  ],
+  "hitzones": [
+   "Torso",
+   "LeftHand",
+   "LeftLeg",
+   "LeftFoot",
+   "RightHand",
+   "RightLeg",
+   "RightFoot"
+  ],
+  "server_extra": []
+ },
+ "Anomaly_FireIskra": {
+  "idle": {
+   "sound": "fireIskra_idle",
+   "sound_loop": true,
+   "sound_range": 15.0,
+   "particle": "OOTS_FIRE_ISKRA_IDLE",
+   "ptc": "OOTS_FIRE_ISKRA_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\FireIskra_idle",
+    "volume": 5.0,
+    "pitch": 1.0,
+    "distance": 30.0
+   }
+  },
+  "active": {
+   "sound": "fireIskra_active",
+   "sound_loop": false,
+   "sound_range": 100.0,
+   "particle": "OOTS_FIRE_ISKRA_ACTIVE",
+   "ptc": "OOTS_FIRE_ISKRA_ACTIVE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\FireIskra_active",
+    "volume": 7.0,
+    "pitch": 1.0,
+    "distance": 30.0
+   }
+  },
+  "recharge": 2.5,
+  "active_time": 5.0,
+  "ammo": [
+   "FireIskraDmg"
+  ],
+  "ammo_damage": {
+   "FireIskraDmg": {
+    "Health": 100.0,
+    "Blood": 0.0,
+    "Shock": 1.0
+   }
+  },
+  "extents": [
+   [
+    2.0,
+    1.5
+   ]
+  ],
+  "hitzones": [
+   "Torso",
+   "LeftHand",
+   "LeftLeg",
+   "LeftFoot",
+   "RightHand",
+   "RightLeg",
+   "RightFoot"
+  ],
+  "server_extra": []
+ },
+ "Anomaly_MlechniPut": {
+  "idle": {
+   "sound": "mlechniPut_idle",
+   "sound_loop": true,
+   "sound_range": 25.0,
+   "particle": "OOTS_MLECHNIPUT_IDLE",
+   "ptc": "OOTS_MLECHNIPUT_IDLE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\MlechniPut_idle",
+    "volume": 5.0,
+    "pitch": 1.0,
+    "distance": 30.0
+   }
+  },
+  "active": {
+   "sound": "mlechniPut_active",
+   "sound_loop": false,
+   "sound_range": 70.0,
+   "particle": "OOTS_MLECHNIPUT_ACTIVE",
+   "ptc": "OOTS_MLECHNIPUT_ACTIVE",
+   "sound_file": {
+    "file": "\\OOTS_Anomaly_Client\\data\\sounds\\anomalies\\MlechniPut_active",
+    "volume": 7.0,
+    "pitch": 1.0,
+    "distance": 30.0
+   }
+  },
+  "recharge": 2.5,
+  "active_time": 5.0,
+  "ammo": [
+   "FireIskraDmg"
+  ],
+  "ammo_damage": {
+   "FireIskraDmg": {
+    "Health": 100.0,
+    "Blood": 0.0,
+    "Shock": 1.0
+   }
+  },
+  "extents": [
+   [
+    2.0,
+    1.5
+   ]
+  ],
+  "hitzones": [
+   "Torso",
+   "LeftHand",
+   "LeftLeg",
+   "LeftFoot",
+   "RightHand",
+   "RightLeg",
+   "RightFoot"
+  ],
+  "server_extra": []
+ }
+}

@@ -1,0 +1,90 @@
+EffectDef {
+ Emitors {
+  EmitorDef fire_middle_short {
+   ShapeType Point
+   ShapeSize 0.1 0 0.1
+   MaxNum 250
+   BirthRate 150
+   BirthRateRND 20
+   BirthRateVel 0
+   Offset 0 0.2072 0
+   Angles 0 0 -90
+   Material "{853257EDA4B1E35D}graphics/particles/materials/fire/fire_flame_01.emat"
+   SizeMultiplier 6
+   SizeRND 0
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 1
+   VelAngle 1
+   RandomAngle 1
+   Velocity 16
+   VelocityRND 0.25
+   VelAffect 0
+   AirResistance 0.5
+   GravityMultiply -0.2
+   Restitution 0
+   Spring 0.0015
+   Wind 1
+   AnimOnce 0
+   AnimFPS 0
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 1.5
+   LifeTimeRND 0.1
+   Color {
+    0 0.8627 0.8471 0.3451 1 0.502 0.0745 0.0431
+   }
+   Alpha {
+    0 1 0.65354 0.44 1 0
+   }
+   Size {
+    0 0.03704 0.53061 0.55556 1 1
+   }
+  }
+  EmitorDef fire_middle_kaplo {
+   ShapeType Point
+   ShapeSize 0.1 0 0.1
+   MaxNum 150
+   BirthRate 150
+   BirthRateRND 20
+   BirthRateVel 0
+   Offset 0 0.2072 0
+   Angles 0 0 -90
+   Material "{853257EDA4B1E35D}graphics/particles/materials/fire/fire_flame_01.emat"
+   CenterX -0.361
+   CenterY -1
+   ScaleX 0.1
+   ScaleY 0.707
+   SizeMultiplier 2
+   SizeRND 0
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 1
+   VelAngle 1
+   RandomAngle 1
+   Velocity 10
+   VelocityRND 0.25
+   VelAffect 0
+   AirResistance 0.5
+   GravityMultiply -0.2
+   Restitution 0
+   Spring 0.0015
+   Wind 1
+   AnimOnce 0
+   AnimFPS 0
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 1.5
+   LifeTimeRND 0.1
+   Color {
+    0 0.8627 0.8471 0.3451 1 0.502 0.0745 0.0431
+   }
+   Alpha {
+    0 0 0.26423 0.90741 0.65354 0.44 1 0
+   }
+   Size {
+    0 0 0.53061 0.55556 1 1
+   }
+  }
+ }
+}

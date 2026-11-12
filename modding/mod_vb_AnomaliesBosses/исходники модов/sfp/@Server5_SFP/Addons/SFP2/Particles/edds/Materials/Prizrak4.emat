@@ -1,0 +1,7 @@
+Particle {
+ AlbedoMap "{2A0B9C2A75FCEBBD}SFP2/Particles/edds/Prizrak4.edds" 
+ Color 0.6078 0.6078 0.6078 1
+ Diffuse 0.6078 0.6078 0.6078 1
+ Ambient 0.5882 0.5882 0.5882 1
+ Softness 2
+}

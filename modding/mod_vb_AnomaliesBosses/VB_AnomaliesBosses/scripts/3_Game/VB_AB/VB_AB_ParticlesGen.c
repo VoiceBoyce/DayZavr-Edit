@@ -1,0 +1,50 @@
+// СГЕНЕРИРОВАНО tools/ab_anomalies.py — руками не править
+// Частицы аномалий. Номер по имени: ParticleList.GetParticleIDByName("vb_ab_...").
+modded class ParticleList
+{
+	static const int VB_AB_ELECTRA_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_electra_idle");
+	static const int VB_AB_ELECTRA_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_electra_active");
+	static const int VB_AB_EMP_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_emp_idle");
+	static const int VB_AB_EMP_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_emp_active");
+	static const int VB_AB_GROZA_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_groza_idle");
+	static const int VB_AB_GROZA_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_groza_active");
+	static const int VB_AB_MLECHNIPUT_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_mlechniput_idle");
+	static const int VB_AB_MLECHNIPUT_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_mlechniput_active");
+	static const int VB_AB_ZHARKA_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_zharka_idle");
+	static const int VB_AB_ZHARKA_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_zharka_active");
+	static const int VB_AB_FIRESHTORM_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_fireshtorm_idle");
+	static const int VB_AB_FIRESHTORM_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_fireshtorm_active");
+	static const int VB_AB_FIREISKRA_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_fireiskra_idle");
+	static const int VB_AB_FIREISKRA_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_fireiskra_active");
+	static const int VB_AB_PAR_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_par_idle");
+	static const int VB_AB_PAR_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_par_active");
+	static const int VB_AB_SNOW_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_snow_idle");
+	static const int VB_AB_SNOW_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_snow_active");
+	static const int VB_AB_STEKLO_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_steklo_idle");
+	static const int VB_AB_STEKLO_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_steklo_active");
+	static const int VB_AB_ZASTOY_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_zastoy_idle");
+	static const int VB_AB_ZASTOY_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_zastoy_active");
+	static const int VB_AB_VORONKA_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_voronka_idle");
+	static const int VB_AB_VORONKA_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_voronka_active");
+	static const int VB_AB_VORONKA_ACTIVE2 = RegisterParticle("VB_AB/p/", "vb_ab_voronka_active2");
+	static const int VB_AB_LOMKA_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_lomka_idle");
+	static const int VB_AB_LOMKA_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_lomka_active");
+	static const int VB_AB_TRAMPLIN_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_tramplin_idle");
+	static const int VB_AB_TRAMPLIN_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_tramplin_active");
+	static const int VB_AB_ROY_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_roy_idle");
+	static const int VB_AB_ROY_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_roy_active");
+	static const int VB_AB_STUDEN_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_studen_idle");
+	static const int VB_AB_STUDEN_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_studen_active");
+	static const int VB_AB_HOLERA_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_holera_idle");
+	static const int VB_AB_HOLERA_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_holera_active");
+	static const int VB_AB_FLASH_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_flash_idle");
+	static const int VB_AB_FLASH_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_flash_active");
+	static const int VB_AB_LINCEAGR_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_linceagr_idle");
+	static const int VB_AB_LINCEAGR_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_linceagr_active");
+	static const int VB_AB_LINCE_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_lince_idle");
+	static const int VB_AB_LINCE_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_lince_active");
+	static const int VB_AB_DEADZONE_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_deadzone_idle");
+	static const int VB_AB_DEADZONE_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_deadzone_active");
+	static const int VB_AB_ATOM_IDLE = RegisterParticle("VB_AB/p/", "vb_ab_atom_idle");
+	static const int VB_AB_ATOM_ACTIVE = RegisterParticle("VB_AB/p/", "vb_ab_atom_active");
+};

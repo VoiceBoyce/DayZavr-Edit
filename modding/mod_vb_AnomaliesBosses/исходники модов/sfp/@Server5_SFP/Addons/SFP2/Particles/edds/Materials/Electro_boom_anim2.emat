@@ -1,0 +1,7 @@
+ParticleSprite {
+ AlbedoMap "{39D880934F18E7C3}SFP2/Particles/edds/pristes/Electro_boom2.edds" 
+ Emissive 1 1 1 0
+ BlendMode Additive_AlphaModulate
+ TileU 4
+ TileV 2
+}

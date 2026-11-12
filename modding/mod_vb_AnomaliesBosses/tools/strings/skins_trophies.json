@@ -1,0 +1,73 @@
+{
+  "STR_VB_AB_Boss_Ent_Storm": ["Громовой Энт", "Thunder Ent"],
+  "STR_VB_AB_Boss_Ent_Acid": ["Болотный Энт", "Swamp Ent"],
+  "STR_VB_AB_Boss_MozgoTrasRed_Fire": ["Пламенный Мозготряс", "Blazing Brainshaker"],
+  "STR_VB_AB_Boss_MozgoTrasRed_Gravity": ["Давящий Мозготряс", "Crushing Brainshaker"],
+  "STR_VB_AB_Boss_MozgoTras_Psi": ["Пси-Мозготряс", "Psi Brainshaker"],
+  "STR_VB_AB_Boss_MozgoTras_Storm": ["Грозовой Мозготряс", "Storm Brainshaker"],
+  "STR_VB_AB_Boss_MutaWolf_Ice": ["Ледяной Мутаволк", "Frost Mutawolf"],
+  "STR_VB_AB_Boss_MutaWolf_Fire": ["Огненный Мутаволк", "Fire Mutawolf"],
+  "STR_VB_AB_Boss_Shum_Gravity": ["Шум-Воронка", "Shum the Vortex"],
+  "STR_VB_AB_Boss_Shum_Ice": ["Снежная вдова", "Snow Widow"],
+  "STR_VB_AB_Boss_Tenevnik_Psi": ["Теневик-мираж", "Mirage Shade"],
+  "STR_VB_AB_Boss_Tenevnik_Rad": ["Теневик-тьма", "Darkness Shade"],
+  "STR_VB_AB_Boss_Ricar_Acid": ["Кислотный Ричар", "Acid Richar"],
+  "STR_VB_AB_Boss_Ricar_Rad": ["Гнилой Ричар", "Rotten Richar"],
+
+  "STR_VB_AB_Trophy_Ent_Storm": ["Голова Энта, грозовая", "Ent head, storm"],
+  "STR_VB_AB_Trophy_Ent_Storm_Desc": [
+    "Голова Громового Энта. Кора выгорела до пепла, но в трещинах ещё пробегают голубые искры, и от неё пахнет озоном. Редкий трофей, у мастеров и торговцев ценится высоко.",
+    "Head of the Thunder Ent. The bark is burnt to ash, yet blue sparks still crawl through the cracks and it smells of ozone. A rare trophy, highly valued by crafters and traders."],
+  "STR_VB_AB_Trophy_Ent_Acid": ["Голова Энта, кислотная", "Ent head, acid"],
+  "STR_VB_AB_Trophy_Ent_Acid_Desc": [
+    "Голова Болотного Энта. Гнилая мокрая кора, по которой всё ещё сползают зелёные капли кислоты. Редкий трофей, у мастеров и торговцев ценится высоко.",
+    "Head of the Swamp Ent. Rotten wet bark with green drops of acid still sliding down it. A rare trophy, highly valued by crafters and traders."],
+  "STR_VB_AB_Trophy_MozgoTrasRed_Fire": ["Ухо красного Мозготряса, огненное", "Red Brainshaker ear, fire"],
+  "STR_VB_AB_Trophy_MozgoTrasRed_Fire_Desc": [
+    "Ухо Пламенного Мозготряса. Обугленное, но горячее на ощупь: под чёрной коркой ещё тлеют угли.",
+    "Ear of the Blazing Brainshaker. Charred, yet hot to the touch: embers still smoulder under the black crust."],
+  "STR_VB_AB_Trophy_MozgoTrasRed_Gravity": ["Ухо красного Мозготряса, гравитационное", "Red Brainshaker ear, gravity"],
+  "STR_VB_AB_Trophy_MozgoTrasRed_Gravity_Desc": [
+    "Ухо Давящего Мозготряса. Тяжелее, чем должно быть, а фиолетовые кольца на коже будто медленно вращаются.",
+    "Ear of the Crushing Brainshaker. Heavier than it should be, and the violet rings on the skin seem to turn slowly."],
+  "STR_VB_AB_Trophy_MozgoTras_Psi": ["Ухо Мозготряса, псионное", "Brainshaker ear, psi"],
+  "STR_VB_AB_Trophy_MozgoTras_Psi_Desc": [
+    "Ухо Пси-Мозготряса. Бледное, с перламутровыми прожилками. Если поднести к своему уху, слышен чужой шёпот.",
+    "Ear of the Psi Brainshaker. Pale, with pearly veins. Hold it to your own ear and you hear someone else's whisper."],
+  "STR_VB_AB_Trophy_MozgoTras_Storm": ["Ухо Мозготряса, грозовое", "Brainshaker ear, storm"],
+  "STR_VB_AB_Trophy_MozgoTras_Storm_Desc": [
+    "Ухо Грозового Мозготряса. По голубым жилам ещё бежит ток, пальцы слегка покалывает.",
+    "Ear of the Storm Brainshaker. Current still runs through the blue veins, your fingers tingle."],
+  "STR_VB_AB_Trophy_MutaWolf_Ice": ["Коготь Мутаволка, ледяной", "Mutawolf claw, ice"],
+  "STR_VB_AB_Trophy_MutaWolf_Ice_Desc": [
+    "Коготь Ледяного Мутаволка. Покрыт инеем, который не тает даже у костра.",
+    "Claw of the Frost Mutawolf. Covered in rime that does not melt even by the fire."],
+  "STR_VB_AB_Trophy_MutaWolf_Fire": ["Коготь Мутаволка, огненный", "Mutawolf claw, fire"],
+  "STR_VB_AB_Trophy_MutaWolf_Fire_Desc": [
+    "Коготь Огненного Мутаволка. Опалённый, с тлеющими оранжевыми прожилками.",
+    "Claw of the Fire Mutawolf. Scorched, with smouldering orange veins."],
+  "STR_VB_AB_Trophy_Shum_Gravity": ["Челюсть Шум, гравитационная", "Shum jaw, gravity"],
+  "STR_VB_AB_Trophy_Shum_Gravity_Desc": [
+    "Челюсть Шум-Воронки. Мелкий мусор рядом с ней будто сам сползает в её сторону.",
+    "Jaw of Shum the Vortex. Small debris nearby seems to slide towards it on its own."],
+  "STR_VB_AB_Trophy_Shum_Ice": ["Челюсть Шум, ледяная", "Shum jaw, ice"],
+  "STR_VB_AB_Trophy_Shum_Ice_Desc": [
+    "Челюсть Снежной вдовы. Холодная как лёд и в инее, кажется, она ещё пытается закричать.",
+    "Jaw of the Snow Widow. Ice-cold and rimed with frost, it seems to still be trying to scream."],
+  "STR_VB_AB_Trophy_Tenevnik_Psi": ["Глаз Теневика, псионный", "Shade eye, psi"],
+  "STR_VB_AB_Trophy_Tenevnik_Psi_Desc": [
+    "Глаз Теневика-миража. Белёсый, с радужным переливом. Долго смотреть в него не стоит.",
+    "Eye of the Mirage Shade. Whitish, with a rainbow sheen. Better not to stare into it for long."],
+  "STR_VB_AB_Trophy_Tenevnik_Rad": ["Глаз Теневика, радиоактивный", "Shade eye, rad"],
+  "STR_VB_AB_Trophy_Tenevnik_Rad_Desc": [
+    "Глаз Теневика-тьмы. Мутный, в жёлто-зелёных язвах, от него тянет мёртвой землёй.",
+    "Eye of the Darkness Shade. Cloudy, covered in yellow-green sores, it reeks of dead earth."],
+  "STR_VB_AB_Trophy_Ricar_Acid": ["Голова Ричара, кислотная", "Richar head, acid"],
+  "STR_VB_AB_Trophy_Ricar_Acid_Desc": [
+    "Голова Кислотного Ричара. Шлем изъеден кислотой, в подтёках ещё пузырится зелёная слизь.",
+    "Head of the Acid Richar. The helmet is eaten away by acid, green slime still bubbles in the streaks."],
+  "STR_VB_AB_Trophy_Ricar_Rad": ["Голова Ричара, радиоактивная", "Richar head, rad"],
+  "STR_VB_AB_Trophy_Ricar_Rad_Desc": [
+    "Голова Гнилого Ричара. Под шлемом серая гниль и жёлто-зелёные язвы.",
+    "Head of the Rotten Richar. Under the helmet: grey rot and yellow-green sores."]
+}

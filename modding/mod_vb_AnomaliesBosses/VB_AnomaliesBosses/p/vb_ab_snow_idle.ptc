@@ -1,0 +1,324 @@
+EffectDef {
+ MinFPS 30
+ Emitors {
+  EmitorDef snowflake {
+   ShapeType Ellipse
+   ShapeSize 25 0 25
+   ConeAngle 0 0 0
+   MaxNum 150
+   BirthRate 20
+   BirthRateRND 20
+   BirthRateVel 0
+   Offset 0 0 0
+   Material "{E93A41A920705F9C}VB_AB/p/m/snow/snowflake.emat"
+   SizeMultiplier 0.01
+   SizeRND 0.15
+   RandomRotDir 1
+   RotMultiplier 50
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0.6
+   VelocityRND 0.1
+   VelAffect 0
+   AirResistance 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution 0
+   Spring 0
+   Wind 1
+   AnimOnce 0
+   AnimFPS 12
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 4
+   LifeTimeRND 2
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.20719 0.43704 0.76144 0.41481 1 0
+   }
+   Size {
+    0 0 0.04967 1 0.15229 0.71852 0.28105 0.55556 0.41111 1 0.53922 0.6963 0.65033 1 0.76536 0.66667 0.89739 1 1 1
+   }
+   EffectTime 10
+   Repeat 1
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 1 1
+   }
+  }
+  EmitorDef SnowflakeMain {
+   ShapeType Ellipse
+   ShapeSize 25 25 0
+   ConeAngle 0 0 0
+   MaxNum 100
+   BirthRate 20
+   BirthRateRND 20
+   BirthRateVel 0
+   Offset 0 0.2 0
+   Angles 0 90 0
+   Material "{06FE1160E94DB657}VB_AB/p/m/snow/WhiteSmoke.emat"
+   SizeMultiplier 6
+   SizeRND 2
+   RandomRotDir 1
+   RotMultiplier 90
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 1
+   RandomAngle 1
+   Sort 0
+   BillboardingType None
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 1
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 4
+   LifeTimeRND 1
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.20654 0.2963 0.4549 1 0.69542 0.3037 1 0
+   }
+   Size {
+    0 0 0.47059 1 1 0
+   }
+   EffectTime 10
+   Repeat 1
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 0.07516 0.86667 0.17255 1 0.27124 0.75556 0.42549 1 0.58954 0.74815 0.8281 1 0.9268 0.6963 1 0.51852
+   }
+  }
+  EmitorDef Snow {
+   ShapeType Ellipse
+   ShapeSize 25 25 0
+   ConeAngle 0 0 0
+   MaxNum 200
+   BirthRate 20
+   BirthRateRND 20
+   BirthRateVel 0
+   Offset 0 0.3 0
+   Angles 180 90 0
+   Material "{06FE1160E94DB657}VB_AB/p/m/snow/WhiteSmoke.emat"
+   SizeMultiplier 4
+   SizeRND 2
+   RandomRotDir 1
+   RotMultiplier 90
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 1
+   RandomAngle 1
+   Sort 0
+   BillboardingType None
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 1
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 4
+   LifeTimeRND 1
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.20654 0.2963 0.4549 1 0.69542 0.3037 1 0
+   }
+   Size {
+    0 0 0.47059 1 1 0
+   }
+   EffectTime 10
+   Repeat 1
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 0.07516 0.86667 0.17255 1 0.27124 0.75556 0.42549 1 0.58954 0.74815 0.8281 1 0.9268 0.6963 1 0.51852
+   }
+  }
+  EmitorDef SmokeGlobal {
+   ShapeType Ellipse
+   ShapeSize 30 2 30
+   ConeAngle 0 0 0
+   MaxNum 250
+   BirthRate 40
+   BirthRateRND 30
+   BirthRateVel 0
+   Offset 0 0.1 0
+   Material "{06FE1160E94DB657}VB_AB/p/m/snow/WhiteSmoke.emat"
+   SizeMultiplier 3
+   SizeRND 5
+   RandomRotDir 1
+   RotMultiplier 30
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 2
+   VelocityRND 1
+   VelAffect 0
+   AirResistance 0
+   GravityMultiply 0.03
+   GravityMultiplyRND 0.02
+   Restitution 0
+   Spring 0
+   Wind 1
+   AnimOnce 0
+   AnimFPS 6
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 3
+   LifeTimeRND 2
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.15556 0.04444 0.3732 0.02963 0.54902 0.02963 0.77974 0.02222 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 10
+   Repeat 1
+   AlphaMast {
+    0 0 0.0915 0.57037 0.21176 1 0.68889 1 0.86275 0.67407 1 0
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 0.07516 0.86667 0.17255 1 0.27124 0.75556 0.42549 1 0.58954 0.74815 0.8281 1 0.9268 0.6963 1 0.51852
+   }
+  }
+  EmitorDef SmokeGlobal2 {
+   ShapeType Ellipse
+   ShapeSize 30 0 30
+   ConeAngle 0 0 0
+   MaxNum 700
+   BirthRate 150
+   BirthRateRND 200
+   BirthRateVel 0
+   Offset 0 -0.5 0
+   Material "{06FE1160E94DB657}VB_AB/p/m/snow/WhiteSmoke.emat"
+   SizeMultiplier 1
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 10
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0.2
+   VelocityRND 0.1
+   VelAffect 0
+   AirResistance 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution 0
+   Spring 0
+   Wind 1
+   AnimOnce 0
+   AnimFPS 10
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 3
+   LifeTimeRND 2
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.14837 0.06667 0.35359 0.13333 0.55817 0.11852 0.77516 0.05926 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 10
+   Repeat 1
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 0.07516 0.86667 0.17255 1 0.27124 0.75556 0.42549 1 0.58954 0.74815 0.8281 1 0.9268 0.6963 1 0.51852
+   }
+  }
+  EmitorDef Muhi {
+   ShapeType Ellipse
+   ShapeSize 30 0 30
+   ConeAngle 0 0 0
+   MaxNum 600
+   BirthRate 60
+   BirthRateRND 60
+   BirthRateVel 0
+   Offset 0 0 0
+   Material "{E93A41A920705F9C}VB_AB/p/m/snow/snowflake.emat"
+   SizeMultiplier 0.1
+   SizeRND 0.01
+   RandomRotDir 1
+   RotMultiplier 50
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   Velocity 2
+   VelocityRND 1
+   VelAffect 0
+   AirResistance 0
+   GravityMultiply 0.02
+   GravityMultiplyRND 0.01
+   Restitution 0
+   Spring 0
+   Wind 1
+   AnimOnce 0
+   AnimFPS 0
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 4
+   LifeTimeRND 2
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0 0.46797 1 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 10
+   Repeat 1
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 1 0.07516 0.86667 0.17255 1 0.27124 0.75556 0.42549 1 0.58954 0.74815 0.8281 1 0.9268 0.6963 1 0.51852
+   }
+  }
+ }
+}

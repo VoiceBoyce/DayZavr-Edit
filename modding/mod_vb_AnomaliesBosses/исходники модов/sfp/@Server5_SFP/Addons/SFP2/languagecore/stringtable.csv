@@ -1,0 +1,361 @@
+"Language","original","english","russian","Test"
+"STR_Anom_Spec_Tors1","Heavy UGC","Heavy UGC","Тяжелый ОЗК",1
+"STR_Anom_Spec_Tors2","Helps to escape and carry out work in infected areas. After work, turn to face the wind and take off without touching the skin to the outside of the suit.","Helps to escape and carry out work in infected areas. After work, turn to face the wind and take off without touching the skin to the outside of the suit.","Помогает спастись и проводить работы в зараженных зонах. После работы, повернуться лицом к ветру и снимать без прикосновения кожи к внешней стороны костюма.",2
+"STR_Anom_Spec_Tors1_1","Heavy UGC Pants","Heavy UGC Pants","Тяжелый ОЗК Штаны",3
+"STR_Anom_Spec_Tors1_2","Heavy UGC boots","Heavy UGC boots","Тяжелый ОЗК Ботинки",4
+"STR_Anom_Spec_Ballon1","Тяжелый ОЗК Баллон","Тяжелый ОЗК Баллон","Тяжелый ОЗК Баллон",5
+"STR_Anom_Spec_Ballon2","Heavy OZK Compressed Air Cylinder","Heavy OZK Compressed Air Cylinder","Тяжелый ОЗК Баллон сжатым воздухом",6
+"STR_Fighter_Tors01","Leather jacket with protection","Leather jacket with protection","Кожанка с защитой",7
+"STR_Fighter_Tors02","Leather jacket with artisanal protection. You can't bite through, you can catch an olive.","Leather jacket with artisanal protection. You can't bite through, you can catch an olive.","Кожанка с кустарной защитой. Прокусить нельзя, маслину поймать можно.",8
+"STR_Fighter_Pants01","Leather pants with protection","Leather pants with protection","Кожанные штаны с защитой",9
+"STR_Fighter_Pants02","Protection on the knees, a thick lining is sewn in some places so that the bites are not so painful. From a piece of iron, the skull was knocked out, adorns the knee","Protection on the knees, a thick lining is sewn in some places so that the bites are not so painful. From a piece of iron, the skull was knocked out, adorns the knee","Защита на коленях, кое где пришита толстая подкладка, чтобы укусы не так были больны. Из Куска железа, был выбит череп, украшает коленку",10
+"STR_Fighter_Boots01","Leather boots","Leather boots","Кожанные сапоги",11
+"STR_SurvScav01","Old Thick Jacket","Old Thick Jacket","Старая Плотная куртка ",12
+"STR_SurvScav02","It's already hard to call it a jacket.  There are no protective properties. The maximum that it will give is not to die from a cold draft. The appearance, like a pack of dogs or wolves, was constantly being beaten in a circle.","It's already hard to call it a jacket.  There are no protective properties. The maximum that it will give is not to die from a cold draft. The appearance, like a pack of dogs or wolves, was constantly being beaten in a circle.","Курткой это назвать уже тяжело.  Защитных свойств никаких нет. Максимум что она даст, это не подохнуть от холодного сквозняка. Внешний вид, будто стая собак или волков, по кругу драли не переставая.",13
+"STR_SurvScav_Pants01","Old tight pants","Old tight pants","Старые плотные штаны",14
+"STR_SurvScav_Pants02","Ordinary pants that once normally protected from the cold and other things. Now wearing them, you will look like an alcoholic or a homeless person who doesn't care what happens to him in the future. To die from cirrhosis of the liver or from a pack of wolves. Fortunately, we can say that accidentally falling on your knees, you will not hurt them much. Some smart guy, sewed on rubber pads","Ordinary pants that once normally protected from the cold and other things. Now wearing them, you will look like an alcoholic or a homeless person who doesn't care what happens to him in the future. To die from cirrhosis of the liver or from a pack of wolves. Fortunately, we can say that accidentally falling on your knees, you will not hurt them much. Some smart guy, sewed on rubber pads","Обычные штаны, которые когда то нормально так защищали от холода и прочего. Сейчас одев их, вы будете похожи на алкаша или бомжа, которому пофиг что с ним случится в будущем. Умереть от цирроза печени или от стаи волков. К счастью можно сказать, что случайно упав на коленки, вы их не повредите сильно. Какой то умник, пришил резиновые накладки",15
+"STR_BM07_Tors01","High-quality leather jacket","High-quality leather jacket","Качественная кожанная куртка",16
+"STR_BM07_Tors02","High-quality leather jacket with good protection. Metal inserts, give additional protection","High-quality leather jacket with good protection. Metal inserts, give additional protection","Качественная кожанная куртка с неплохой защитой. Металлические вставки, придают дополнительную защиту",17
+"STR_MB07_Pants01","Reinforced leather pants","Reinforced leather pants","Кожанные усиленные штаны",18
+"STR_BM07_Boots01","Quality boots","Quality boots","Качественные сапоги",19
+"STR_BM06_Tors01","Protected tight jacket","Protected tight jacket","Защищенная плотная куртка",20
+"STR_BM06_Tors02","A thick jacket, composite square tiles were sewn under the fabric, there is also light protection.","A thick jacket, composite square tiles were sewn under the fabric, there is also light protection.","Плотная куртка, под ткань были вшиты композитные квадратные плитки, так же есть легкая защита. ",21
+"STR_BM06_Pants01","Tight Pants","Tight Pants","Плотные Штаны",22
+"STR_BM06_Pants02","Tight Pants, they don't look like new anymore, but the quality is normal. Dense material, there is protection on the right knee.","Tight Pants, they don't look like new anymore, but the quality is normal. Dense material, there is protection on the right knee.","Плотные Штаны, внешне выглядят уже не как новые, но по качеству норм. Плотный материал, есть защита на правом колене.",23
+"STR_BM06_Gloves01","Leather Short Gloves","Leather Short Gloves","Кожанные короткие перчатки",24
+"STR_BM06_Gloves02","original","english","russian",25
+"STR_BM06_backpack01","Small backpack","Small backpack","Небольшой рюкзак",26
+"STR_BM06_backpack02","A small backpack with an air balloon,","A small backpack with an air balloon,","Небольшой рюкзак с баллоном воздуха, ",27
+"STR_Boroda_Mask01","false beard","false beard","Накладная Борода",28
+"STR_Boroda_Mask02","Regular Fake Beard","Regular Fake Beard","Обычная Накладная Борода",29
+"STR_EyeLeans_Zombie01","cloudy lenses","cloudy lenses","Замутненые линзы",30
+"STR_EyeLeans_Zombie02","Regular lenses are cloudy like zombie eyes does not work correctly on all characters","Regular lenses are cloudy like zombie eyes does not work correctly on all characters","Обычные Линзы замутненые похоже на глаза зомби. не на всех персонажах работает корректно",31
+"STR_GasMaskHomack01","PBF Hamster","PBF Hamster","ПБФ Хомяк",32
+"STR_GasMaskHomack02","Adopted by the Soviet Army in 1973. It was supplied mainly to the Airborne Forces and the Border Service, and was also exported to the GDR. Now out of service.","Adopted by the Soviet Army in 1973. It was supplied mainly to the Airborne Forces and the Border Service, and was also exported to the GDR. Now out of service.","Принят на вооружение Советской армии в 1973 году. Поставлялся, в основном, в части ВДВ и пограничной службы, а так же экспортировался в ГДР. Ныне снят с вооружения.",33
+"STR_SIGARETA_SMOKE01","cigarette","cigarette","Сигарета",34
+"STR_SIGARETA_SMOKE02","regular cigarette","regular cigarette","Обычная Сигарета",35
+"STR_Stalker_Plash_leather01","Leather Trench Black","Leather Trench Black","Кожаный плащ Черный",36
+"STR_Stalker_Plash_leather02","A suit that does not provide any remarkable protection, but is able to protect against bites from dogs or jerboas to some extent. Very popular among bandits and renegades, also some loners and famous stalkers prefer to wear this cloak","A suit that does not provide any remarkable protection, but is able to protect against bites from dogs or jerboas to some extent. Very popular among bandits and renegades, also some loners and famous stalkers prefer to wear this cloak","Костюм, не предоставляющий какой-либо примечательной защиты, но в какой-то мере способный защитить от укусов собак или тушканов. Очень популярен среди бандитов и ренегатов, также некоторые одиночки и известные сталкеры предпочитают носить этот плащ",37
+"STR_Stalker_Plash_Beige01","Canvas raincoat beige","Canvas raincoat beige","Брезентовый плащ бежевый",38
+"STR_Stalker_Plash_Beige02","A canvas cloak that offers no remarkable protection, but does offer some measure of protection against dog or jerboa bites. Very popular among bandits and renegades, also some loners and famous stalkers prefer to wear this cloak","A canvas cloak that offers no remarkable protection, but does offer some measure of protection against dog or jerboa bites. Very popular among bandits and renegades, also some loners and famous stalkers prefer to wear this cloak","Плащ из брезентовой ткани, не предоставляющий какой-либо примечательной защиты, но в какой-то мере способный защитить от укусов собак или тушканов. Очень популярен среди бандитов и ренегатов, также некоторые одиночки и известные сталкеры предпочитают носить этот плащ ",39
+"STR_CombezBullatHelmet_green01","Helmet Sphere M12","Helmet Sphere M12","Шлем Сфера М12",40
+"STR_CombezBullatHelmet_Dolg01","Helmet Sphere M12 DOLG","Helmet Sphere M12 DOLG","Шлем Сфера М12 Долг",41
+"STR_CombezBullat_green01","Skat 9M","Skat 9M","Скат 9М",42
+"STR_CombezBullat_green02","Well protects not only from bullets and shrapnel, but also from anomalous influences. It has a large weight, almost comparable to some exoskeletons.","Well protects not only from bullets and shrapnel, but also from anomalous influences. It has a large weight, almost comparable to some exoskeletons.","Хорошо защищает не только от пуль и осколков, но и от аномальных воздействий. Имеет большой вес, практически сопоставимый с некоторыми экзоскелетами.",43
+"STR_CombezBullat_Dolg01","PSZ-9d (Armor of Duty)","PSZ-9d (Armor of Duty)","ПСЗ-9д (Броня Долга)",44
+"STR_CombezBullat_Dolg02","An excellent armored suit made by artisans of the Duty group. Standard equipment of debtor veterans.","An excellent armored suit made by artisans of the Duty group. Standard equipment of debtor veterans.","Отличный бронекостюм, изготовленный ремесленниками группировки Долг. Стандартная экипировка ветеранов-долговцев.",45
+"STR_CombezBullatPants_Green01","Pants Skat 9M","Pants Skat 9M","Штаны Скат 9M",46
+"STR_CombezBullatPants_Green02","Well protects not only from bullets and shrapnel, but also from anomalous influences. It has a large weight, almost comparable to some exoskeletons.","Well protects not only from bullets and shrapnel, but also from anomalous influences. It has a large weight, almost comparable to some exoskeletons.","Хорошо защищает не только от пуль и осколков, но и от аномальных воздействий. Имеет большой вес, практически сопоставимый с некоторыми экзоскелетами.",47
+"STR_CombezBullatPants_DOLG01","Dawn Suit Pants","Dawn Suit Pants","Штаны Костюма Заря",48
+"STR_CombezBullatPants_DOLG02","Pants with improved bite and cut protection.","Pants with improved bite and cut protection.","Штаны с улучшенной защитой от укусов и порезов.",49
+"STR_CombezST_Neitral01","Suit PSZ-9 Neutral","Suit PSZ-9 Neutral","Костюм ПСЗ-9 Нейтрал",50
+"STR_CombezST_Neitral02","Suit with improved protection against bites and cuts.","Suit with improved protection against bites and cuts.","Костюм с улучшенной защитой от укусов и порезов.",51
+"STR_CombezST_Dolg01","Hunting PSZ-9 Duty","Hunting PSZ-9 Duty","Охотничий ПСЗ-9 Долг",52
+"STR_CombezST_Dolg02","Dolgov armored suit with improved protection against bites and cuts.","Dolgov armored suit with improved protection against bites and cuts.","Долговский бронекостюм с улучшенной защитой от укусов и порезов.",53
+"STR_CombezST_Free01","Suit PSZ-9 Freedom","Suit PSZ-9 Freedom","Костюм ПСЗ-9 Свобода",54
+"STR_CombezST_Monolit01","Suit PSZ-9 Monolith","Suit PSZ-9 Monolith","Костюм ПСЗ-9 Монолит",55
+"STR_CombezST_Naem01","Suit PSZ-9 mercenary","Suit PSZ-9 mercenary","Костюм ПСЗ-9 Наемник",56
+"STR_CombezST_Zara01","Suit (Dawn)","Suit (Dawn)","Костюм (Заря)",57
+"STR_CombezPantsST_Neitral01","Pants PSZ-9 Neutral","Pants PSZ-9 Neutral","Штаны ПСЗ-9 Нейтрал",58
+"STR_CombezPantsST_Neitral02","Pants with improved bite and cut protection.","Pants with improved bite and cut protection.","Штаны с улучшенной защитой от укусов и порезов.",59
+"STR_CombezPantsST_Dolg01","Pants PSZ-9 DOLG","Pants PSZ-9 DOLG","Штаны ПСЗ-9 Долг",60
+"STR_CombezPantsST_Free01","Pants PSZ-9 Freedom","Pants PSZ-9 Freedom","Штаны ПСЗ-9 Свобода",61
+"STR_CombezPantsST_Monolit01","Pants PSZ-9 Monolith","Pants PSZ-9 Monolith","Штаны ПСЗ-9 Монолит",62
+"STR_CombezPantsST_Naem01","Pants PSZ-9 mercenary","Pants PSZ-9 mercenary","Штаны ПСЗ-9 Наемник",63
+"STR_CombezPantsST_Zara01","Dawn Suit Pants","Dawn Suit Pants","Штаны Костюма Заря",64
+"STR_Respirator_red01","metal respirator","metal respirator","Металлический респиратор",65
+"STR_Respirator_red02","Durable respirator with clean filters. You can use","Durable respirator with clean filters. You can use","Прочный респиратор с чистыми фильтрами. Пользоваться можно",66
+"STR_TacticalHelmet_Green01","Tactical Helmet Green","Tactical Helmet Green","Тактический Шлем Зеленый",67
+"STR_TacticalHelmet_Black01","Tactical Helmet Black","Tactical Helmet Black","Тактический Шлем Черный",68
+"STR_TacticalHelmet_Black2","Tactical Helmet Black, Red Goggles","Tactical Helmet Black, Red Goggles","Тактический Шлем Черный, Красные Очки",69
+"STR_TacticalHelmet_Black3","Tactical Helmet Black, blue Goggles","Tactical Helmet Black, blue Goggles","Тактический Шлем Черный, Синие Очки",70
+"STR_TacticalHelmet_Blue01","Tactical Helmet Blue","Tactical Helmet Blue","Тактический Шлем Синий",71
+"STR_TacticalHelmet_Base01","Good quality tactical helmet.","Good quality tactical helmet.","Тактический шлем хорошего качества.",72
+"STR_JustGloves01","Regular Grade Gloves","Regular Grade Gloves","Перчатки обычного качества",73
+"STR_JustGloves02","Gloves made of inexpensive materials, will last no one knows how long","Gloves made of inexpensive materials, will last no one knows how long","Перчатки из недорогих материалов, прослужат неизвестно сколько",74
+"STR_JustMiniGloves01","Gloves made of inexpensive materials, will last no one knows how long","Gloves made of inexpensive materials, will last no one knows how long","Беспалые Перчатки обычного качества ",75
+"STR_Slanec_Only01","Flip flops","Flip flops","Шлепки",78
+"STR_Slanec_Only02","Loose shoes, the foot breathes and does not sweat. Just right for beach seasons.","Loose shoes, the foot breathes and does not sweat. Just right for beach seasons.","Свободная обувь, нога дышит и не потеет. Для пляжных сезонов самое то.",79
+"STR_Slanec_Nosok01","Flip flops with socks","Flip flops with socks","Шлепки с носками",80
+"STR_Slanec_Nosok02","Flip flops with socks are especially surprising when you see this on another person. Well, if you ran out on an urgent basis to the car that someone is kicking. Well, if you walk like that, well, it really is. I wouldn't risk","Flip flops with socks are especially surprising when you see this on another person. Well, if you ran out on an urgent basis to the car that someone is kicking. Well, if you walk like that, well, it really is. I wouldn't risk","Шлепки с носками, особое удивление вызывает, когда вы увидите это на другом человеке. Ладно если ты выбежал по срочному к машине, которую кто то пинает. Ну а если так ходить, ну такое на самом деле. Я бы не рисковал",81
+"STR_BalalaikaMYZ01","Balalaika","Balalaika","Балалайка",82
+"STR_BalalaikaMYZ02","A common Russian musical instrument. They (foreign guys) think that our bears play the babayka and drink vodka, well, in principle, yes, we are all hardcore! Okay, I have to go feed the bear.","A common Russian musical instrument. They (foreign guys) think that our bears play the babayka and drink vodka, well, in principle, yes, we are all hardcore! Okay, I have to go feed the bear.","Музыкальный инструмент. Медведь с водкой в комплект не входит",83
+"STR_Food_Doshirak_Priprava01","Seasoning doshirak","Seasoning doshirak","Приправа доширак",84
+"STR_Food_Doshirak_Priprava02","Doshirak seasoning is needed to give the noodles a more expressive taste. When we were kids, we ate it just like that.","Doshirak seasoning is needed to give the noodles a more expressive taste. When we were kids, we ate it just like that.","Приправа доширак, нужна для придания лапше более выразительного вкуса. В детстве мы ее жрали просто так",85
+"STR_Food_Doshirak_Open01","open doshirak","open doshirak","Открытый доширак",86
+"STR_Food_Doshirak_Open02","Fill with water and wait, or eat it dry","Fill with water and wait, or eat it dry","Залить водой и подождать, либо сожрать в сухую",87
+"STR_Food_DoshirakRed_pack01","Doshirak Red","Doshirak Red","Доширак Красный",88
+"STR_Food_DoshirakRed_pack02","Pack of Red Doshirak, beef flavor","Pack of Red Doshirak, beef flavor","Пачка Красного доширака, вкус говядина",89
+"STR_Food_DoshirakRed_pack03","Doshirak Blue","Doshirak Blue","Доширак Синий",90
+"STR_Food_DoshirakRed_pack04","A pack of blue doshirak, Seafood with pepper flavor","A pack of blue doshirak, Seafood with pepper flavor","Пачка синего доширака, вкус Морепродукты с перцем",91
+"STR_Food_DoshirakRed_pack05","Doshirak Green","Doshirak Green","Доширак Зеленый",92
+"STR_Food_DoshirakRed_pack06","A pack of green doshirak, chicken flavor","A pack of green doshirak, chicken flavor","Пачка Зеленого доширака, вкус курицы",93
+"STR_Food_DoshirakRed_pack07","Doshirak Brown","Doshirak Brown","Доширак Коричневый",94
+"STR_Food_DoshirakRed_pack08","A pack of cinnamon doshirak, mushroom flavor","A pack of cinnamon doshirak, mushroom flavor","Пачка коричного доширака, вкус грибов",95
+"STR_Food_DoshirakRed_pack09","Doshirak Yellow","Doshirak Yellow","Доширак Желтый",96
+"STR_Food_DoshirakRed_pack10","Pack of Yellow Doshirak, kimchi flavor","Pack of Yellow Doshirak, kimchi flavor","Пачка Желтого доширака, вкус кимчи",97
+"STR_Food_DoshirakRed_pack11","Doshirak Pink","Doshirak Pink","Доширак Розовый",98
+"STR_Food_DoshirakRed_pack12","A pack of Pink Doshirak, veal flavor","A pack of Pink Doshirak, veal flavor","Пачка Розового доширака, вкус телятины",99
+"STR_DrinkCan00","A drink that kind of helps not to fall asleep, and gives cheerfulness.","A drink that kind of helps not to fall asleep, and gives cheerfulness.","Такой напиток помогает не уснуть, придает бодрости.",100
+"STR_DrinkCan01","Energy drink NonStop","Energy drink NonStop","Энергетик NonStop",101
+"STR_DrinkCan02","Energy drink Stalker","Energy drink Stalker","Энергетик Stalker",102
+"STR_DrinkCan03","Energy drink RedBull","Energy drink RedBull","Энергетик RedBull",103
+"STR_DrinkCan04","Energy drink Monster","Energy drink Monster","Энергетик Monster",104
+"STR_DrinkCan05","Energy drink Monster The Doctor","Energy drink Monster The Doctor","Энергетик Monster The Doctor",105
+"STR_DrinkCan06","Beer Baltika 9","Beer Baltika 9","Балтика 9",106
+"STR_DrinkCan07","A strong drink, for real men","A strong drink, for real men","Крепкий напиток для настоящих мужчин",107
+"STR_DrinkCan08","Zhigulevskoe beer","Zhigulevskoe beer","Жигулевское",108
+"STR_DrinkCan09","Tuborg beer","Tuborg beer","Туборг",109
+"STR_DrinkCan10","ESSA","ESSA","ESSA",110
+"STR_DrinkCan11","Compote for girls","Compote for girls","Компотик для девочек",111
+"STR_DrinkCan12","Gin & tonic","Gin & tonic","ДжинТоник",112
+"STR_DrinkCan13","Kozel beer","Kozel beer","Kozel",113
+"STR_DrinkCan14","Cola","Cola","Кола",113
+"STR_GitaraMYZ01","Guitar","Guitar","Гитара",114
+"STR_GitaraMYZ02","Musical instrument. by FIDOv","Musical instrument. by FIDOv","Музыкальный инструмент. by FIDOv",115
+"STR_GubGarmonMYZ01","harmonica","harmonica","Губная гармошка",116
+"STR_GubGarmonMYZ02","Musical instrument of the harmonica family. It is a small bar with many holes on the side. The choice of extracted sounds is carried out by the position of the lips and tongue on the holes, as well as the direction of air movement to inhale or exhale.","Musical instrument of the harmonica family. It is a small bar with many holes on the side. The choice of extracted sounds is carried out by the position of the lips and tongue on the holes, as well as the direction of air movement to inhale or exhale.","Музыкальный инструмент семейства гармоник. Представляет собой небольшой брусок со множеством отверстий сбоку. Выбор извлекаемых звуков осуществляется положением губ и языка на отверстиях, а также направлением движения воздуха на вдох или выдох.",117
+"STR_Food_LomtikHleb01","A piece of bread","A piece of bread","Ломтик Хлеба",118
+"STR_Food_LomtikHleb02","Slice of Bread, just eat or have a bite with white, the choice is yours.","Slice of Bread, just eat or have a bite with white, the choice is yours.","Ломтик Хлеба, просто скушать или закусить с беленькой, выбор твой.",119
+"STR_Food_Buhanka01","A loaf of bread","A loaf of bread","Буханка Хлеба",120
+"STR_Food_Buhanka02","Loaf of Bread, soft yet not hard","Loaf of Bread, soft yet not hard","Буханка Хлеба, мягкий еще не твердый",121
+"STR_USSR_Kruzka01","Soviet Mug","Soviet Mug","Советская Кружка",122
+"STR_USSR_Kruzka02","Soviet aluminum mug. Perfect for pouring and drinking","Soviet aluminum mug. Perfect for pouring and drinking","Советская алюминиевая кружка. Идеально подойдет чтобы налить и выпить",123
+"STR_StakanGranen01","Faceted glass","Faceted glass","Стакан граненый",124
+"STR_StakanGranen02","Perfect for pouring and drinking","Perfect for pouring and drinking","Идеально подойдет чтобы налить и выпить",125
+"STR_Tarelka_KolbasaOgurec01","Plate with sausage and cucumber","Plate with sausage and cucumber","Тарелка с колбасой и огурчиком",126
+"STR_Tarelka_KolbasaOgurec02","A plate with chopped sausage and cucumber will go well with a snack.","A plate with chopped sausage and cucumber will go well with a snack.","Тарелка с порезанной колбасой и огурцом, под закусь хорошо пойдет.",127
+"STR_Tarelka_KolbasaOgurecTomat01","Snack plate","Snack plate","Тарелка с закуской",128
+"STR_Tarelka_KolbasaOgurecTomat02","Snack plate. Belenka will be very good","Snack plate. Belenka will be very good","Тарелка с закуской. С Беленькой будет очень хорошо",129
+"STR_Tarelka_Kolbasa01","Sausage plate","Sausage plate","Тарелка с колбасой",130
+"STR_Tarelka_Kolbasa02","A plate with chopped sausage, goes well with a snack.","A plate with chopped sausage, goes well with a snack.","Тарелка с порезанной колбасой, под закусь хорошо пойдет.",131
+"STR_Food_Kolbasa01","Half a Stick of Raw Smoked Sausage","Half a Stick of Raw Smoked Sausage","Пол Палки Сырокопченой Колбасы",132
+"STR_Food_Kolbasa02","Half a Stick of Raw Smoked Sausage","Half a Stick of Raw Smoked Sausage","Пол палки сырокопченой колбасы. Просто покушать или использовать как закуску, выбор твой.",133
+"STR_Food_Ogurec01","Fresh cucumber","Fresh cucumber","Свежий Огурец",134
+"STR_Food_Ogurec02","Good cucumber, you can use","Good cucumber, you can use","Хороший огурец, можно употреблять",135
+"STR_Food_Shawerma01","Shawarma","Shawarma","Шаурма",136
+"STR_Food_Shawerma02","Good shawarma, juicy mmm. Looks fresh, ready to use","Good shawarma, juicy mmm. Looks fresh, ready to use","Хорошая шаурма, сочная ммм. Вроде еще свежая, употреблять можно",137
+"STR_LapTop_work01","Laptop","Laptop","Ноутбук",138
+"STR_LapTop_work02","2 cores, 2 gigabytes and a gaming video card (256 mb)","2 cores, 2 gigabytes and a gaming video card (256 mb)","2 ядра, 2 гига и игровая видеокарта (на 256мб)",139
+"STR_Camera_old01","Camera","Camera","Фотоаппарат",140
+"STR_SvistokMYZ01","Whistle","Whistle","Свисток",141
+"STR_SvistokMYZ02","Plain plastic whistle.. by FIDOv","Plain plastic whistle.. by FIDOv","Обычный пластиковый свисток.. by FIDOv",142
+"STR_TualBumaga01","Toilet paper","Toilet paper","Туалетная бумага",143
+"STR_TualBumaga02","Can be used as intended, lie down on the ground and press","Can be used as intended, lie down on the ground and press","Можно использовать по назначению, ляжь на землю и нажми",144
+"STR_F1Grenade01","F1 grenade","F1 grenade","Граната Ф1",145
+"STR_F1Grenade02","Hand-held anti-personnel defensive grenade. The grenade is designed to defeat manpower in a defensive battle. Due to the significant radius of fragmentation, it can only be thrown from cover, an armored personnel carrier or a tank.","Hand-held anti-personnel defensive grenade. The grenade is designed to defeat manpower in a defensive battle. Due to the significant radius of fragmentation, it can only be thrown from cover, an armored personnel carrier or a tank.","Ручная противопехотная оборонительная граната. Граната предназначена для поражения живой силы в оборонительном бою. Из-за значительного радиуса разлёта осколков метать её можно только из укрытия, бронетранспортёра или танка.",146
+"STR_MP27M02","The most popular classic gun of the Izhevsk Mechanical Plant, which enjoys well-deserved fame among professional and amateur hunters. Over 30 years of mass production, more than 1.5 million guns have been produced, design solutions have been worked out to the highest level of reliability. Possessing an excellent balance, stable action, simple and reliable design, the MP-27M, in terms of its technical features and operational characteristics, corresponds to guns of higher price classes.","The most popular classic gun of the Izhevsk Mechanical Plant, which enjoys well-deserved fame among professional and amateur hunters. Over 30 years of mass production, more than 1.5 million guns have been produced, design solutions have been worked out to the highest level of reliability. Possessing an excellent balance, stable action, simple and reliable design, the MP-27M, in terms of its technical features and operational characteristics, corresponds to guns of higher price classes.","Самое популярное классическое ружье Ижевского механического завода, пользующееся заслуженной славой среди охотников профессионалов и любителей. За 30 лет серийного производства выпущено более 1,5 миллиона ружей, конструктивные решения отработаны до высочайшего уровня надежности. Обладая прекрасным балансом, стабильным боем, простой и надежной конструкцией, МР-27М по своим техническим особенностям и эксплуатационным характеристикам соответствует ружьям более высоких ценовых классов",147
+"STR_Kiparis01","OC-2 Kiparis","OC-2 Kiparis","OЦ-2 Кипарис",148
+"STR_Kiparis02","The submachine gun was developed in 1972 by order of the Ministry of Defense of the USSR (OKR Kustarnik) by designers of the Central Design Bureau of Tula N. M. Afanasyev, D. P. Pleshkov and N. V. Trukhachev. The layout scheme of the Czechoslovakian Scorpion Vz.61 submachine gun of the 1961 model was taken as a basis","The submachine gun was developed in 1972 by order of the Ministry of Defense of the USSR (OKR Kustarnik) by designers of the Central Design Bureau of Tula N. M. Afanasyev, D. P. Pleshkov and N. V. Trukhachev. The layout scheme of the Czechoslovakian Scorpion Vz.61 submachine gun of the 1961 model was taken as a basis","Пистолет-пулемет разработан в 1972 году по заказу Министерства обороны СССР (ОКР Кустарник) конструкторами Тульского ЦКБ Н. М. Афанасьевым, Д. П. Плешковым и Н. В. Трухачевым. За основу была взята компоновочная схема чехословацкого пистолета-пулемета Scorpion Vz.61 образца 1961 г.",149
+"STR_Kiparis_Mag01","Kiparis Magazine 30rnd","Kiparis Magazine 30rnd","Кипарис Магазин 30Патронов",150
+"STR_Kiparis_Mag02","Magazine for Cypress 30 rounds, 380cal","Magazine for Cypress 30 rounds, 380cal","Магазин на Кипарис 30 патронов, 380кал",151
+"STR_ShotgunMP153Mod02","MP-153 Murka modified. With night fly, picatinny rail and extended magazine up to 8 rounds","MP-153 Murka modified. With night fly, picatinny rail and extended magazine up to 8 rounds","МР-153 Мурка доработаная. С Ночным прицелом, планкой Пикатинни и увеличенным магазином до 8 патронов",152
+"STR_RK6202","The Finnish assault rifle, manufactured by Valmet and SAKO, is based on the Kalashnikov assault rifle.","The Finnish assault rifle, manufactured by Valmet and SAKO, is based on the Kalashnikov assault rifle.","финский автомат, изготовляемый компаниями Valmet и SAKO, создан на базе автомата Калашникова.",153
+"STR_RK62Mag01","RK62 Magazine 30rnd","RK62 Magazine 30rnd","РК62 Магазин на 30 патронов",154
+"STR_Bayan01","accordion","accordion","Баян",155
+"STR_Bayan02","musical instrument that can be played","musical instrument that can be played","Музыкальный инструмент на котором можно играть",156
+"STR_PlayMyz","Play","Play","Играть",157
+"STR_Nout_Work","Work","Work","Работать",158
+"STR_MusicPlayer01","Walkman","Walkman","Плеер",159
+"STR_MusicPlayer02","Old Player, it says on the cassette- My son recorded different things in the car. It's probably some sort of music.","Old Player, it says on the cassette- My son recorded different things in the car. It's probably some sort of music.","Старый Плеер, на кассете написано- Сынок назаписывал разного в машину. Скорее всего тут разного рода музыка",160
+"STR_MusicPlayer03","Old player, for sound playback and recording. Perhaps there is important information on the cassette, or just music.","Old player, for sound playback and recording. Perhaps there is important information on the cassette, or just music.","Старый плеер, для воспроизведения звука и записи. Возможно на кассете есть важная информация, или просто музыка. ",161
+"STR_Big_Kanistra01","Big Canister","Big Canister","Большая Канистра",162
+"STR_Big_Kanistra02","Large Canister 20 liters. Can be filled with various liquids","Large Canister 20 liters. Can be filled with various liquids","Большая Канистра на 20 литров. Можно заливать разные жидкости",163
+"STR_ShotgunMP153ModPlastic","A modified weapon, a folding frame stock with a handle, and a plastic forearm are installed. All this makes the weapon easier and more convenient to use.","A modified weapon, a folding frame stock with a handle, and a plastic forearm are installed. All this makes the weapon easier and more convenient to use.","Модифицированное оружие, установлен приклад рамочный складной с рукояткой, и пластиковое цевье. Это все облегчает оружие и пользоваться удобнее. ",164
+"STR_SPAS1201","SPAS-12","SPAS-12","СПАС-12",165
+"STR_SPAS1202","SPAS-12 An Italian shotgun developed in the late 1970s. Tube size for 6+1 rounds. 12g","SPAS-12 An Italian shotgun developed in the late 1970s. Tube size for 6+1 rounds. 12g","СПАС-12 Итальянское ружьё, разработанное в конце 1970-х годов. Размер трубки на 6+1 патрон. 12g",166
+"STR_TacticalPoncho01","Hooded Poncho","Hooded Poncho","Пончо с Капюшоном",167
+"STR_TacticalPoncho02","Poncho made of good fabric with a membrane lining, does not allow the fabric to get wet in the rain, but do not count on good thermal protection","Poncho made of good fabric with a membrane lining, does not allow the fabric to get wet in the rain, but do not count on good thermal protection","Пончо из хорошей ткани с мембранной подкладкой, не позволяет ткане промокнуть под дождем, но не надо расчитывать на хорошую теплозащиту",168
+"STR_Poncho02","Cape made of tarpaulin fabric, holds back wetting that does not allow to get wet.","Cape made of tarpaulin fabric, holds back wetting that does not allow to get wet.","Накидка из брезентовой ткани, сдерживает намокание что не позволяет намокнуть.",169
+"STR_Poncho03","Poncho Beige","Poncho Beige","Пончо Бежевый",170
+"STR_Poncho04","Poncho Blue","Poncho Beige","Пончо Синий",171
+"STR_Poncho05","Poncho Black","Poncho Black","Пончо Черный",172
+"STR_Poncho06","Poncho Green","Poncho Green","Пончо Зеленый",173
+"STR_BenelliM401","Benelli M4 Super 90","Benelli M4 Super 90","Benelli M4 Super 90",174
+"STR_BenelliM402","The Benelli M4 Super 90 is a smoothbore semi-automatic repeating shotgun developed in Italy by Benelli Armi S.p.A.","The Benelli M4 Super 90 is a smoothbore semi-automatic repeating shotgun developed in Italy by Benelli Armi S.p.A.","Benelli M4 Super 90 — гладкоствольное полуавтоматическое магазинное ружьё, разработанное в Италии фирмой Benelli Armi S.p.A",175
+"STR_CantenUssr01","Soviet Flask","Soviet Flask","Советская Фляга",176
+"STR_CantenUssr02","Soviet metal flask in a canvas case.","Soviet metal flask in a canvas case.","Советская металлическая фляжка в брезентовом чехле. ",177
+"STR_CantenUssr03","Soviet Flask With Tag","Soviet Flask With Tag","Советская Фляга С Биркой",178
+"STR_CantenUssr04","Soviet metal flask in a canvas case. A plywood tag with the name of the fighter who is assigned the flask is sewn on. Something is ringing inside.","Soviet metal flask in a canvas case. A plywood tag with the name of the fighter who is assigned the flask is sewn on. Something is ringing inside.","Советская металлическая фляжка в брезентовом чехле. Пришита бирка из фанеры с фамилией бойца, за кем закреплена фляжка. Внутри что то звенит.",179
+"STR_ActionPopisat01","Censored Square","Censored Square","Цензурный Квадрат",180
+"STR_ActionPopisat02","Special square to hide your python","Special square to hide your python","Специальный квадрат, для того чтобы скрыть твоего питона",181
+"STR_OsmotrJurnal","View magazine","View magazine","Осмотреть журнал",182
+"STR_PlayGitaraMyz","Play guitar","Play guitar","Сыграть на Гитаре",182
+"STR_PlayBayanMyz","Play the accordion","Play the accordion","Сыграть на Баяне",182
+"STR_SvistokSvist","Whistle","Whistle","Свистнуть",182
+"STR_VapeTaga","Make Thrust","Make Thrust","Сделать Тягу",182
+"STR_Popisat","take a piss","take a piss","Отлить",182
+"STR_SmokeSiga","original","english","Сделать Тягу",182
+"STR_PDA01","PDA","PDA","КПК",183
+"STR_PDA02","PDA (Pocket Personal Computer) is a mobile device that is carried by almost every stalker in the Zone. In addition to the walkie-talkie, the PDA has: an interactive map of the Zone, a motion sensor, a Geiger counter, a voice recorder, a clock, an alarm clock, a camera and much more.","PDA (Pocket Personal Computer) is a mobile device that is carried by almost every stalker in the Zone. In addition to the walkie-talkie, the PDA has: an interactive map of the Zone, a motion sensor, a Geiger counter, a voice recorder, a clock, an alarm clock, a camera and much more.","КПК (карманный персональный компьютер), — мобильное устройство, которое носит практически каждый сталкер в Зоне. В КПК, кроме рации, имеются: интерактивная карта Зоны, датчик движения, счётчик Гейгера, диктофон, часы, будильник, камера и многое другое. ",182
+"STR_StartPDA","Open PDA","Open PDA","Открыть КПК",183
+"STR_ingalator_Tetracycline01","Pocket inhaler Tetracycline","Pocket inhaler Tetracycline","Карманный ингалятор Тетрациклин",182
+"STR_ingalator_Tetracycline02","Pocket Tetracycline inhaler. Unlike tablets, the spray begins to act on the body faster. Enough for 30 uses","Pocket Tetracycline inhaler. Unlike tablets, the spray begins to act on the body faster. Enough for 30 uses","Карманный ингалятор Тетрациклин. В Отличии от таблеток, спрей быстрее начинает действовать на организм. Хватает на 30 использований",182
+"STR_ingalator_Project01","Serum GEN01","Serum GEN01","Сыворотка ГЕН01",182
+"STR_ingalator_Project02","Special secret development of scientists. By inhaling the drug, it is absorbed into the lungs and then disperses throughout the body. This serum provides a shock dose of beneficial vitamins, and special GEN01, activates the immune system and blood regeneration. This serum makes the body work at full strength, without depleting a person, but on the contrary, healing him. Side effects are not known.","Special secret development of scientists. By inhaling the drug, it is absorbed into the lungs and then disperses throughout the body. This serum provides a shock dose of beneficial vitamins, and special GEN01, activates the immune system and blood regeneration. This serum makes the body work at full strength, without depleting a person, but on the contrary, healing him. Side effects are not known.","Специальная секретная разработка ученых. Вдыхая препарат, он впитывается в легкие, и дальше расходится по организму. Данная сыворотка, дает ударную дозу полезных витаминов, и специальный ГЕН01, активизирует иммунитет и регенерацию крови. Данная сыворотка заставляет работать организм на полную силу, не истощая человека, а на оборот исцеляя его. Побочные действия не известны.  ",182
+"STR_ingalator_Morphine01","Pocket Morphine inhaler","Pocket Morphine inhaler","Карманный ингалятор Морфин",182
+"STR_ingalator_Morphine02","Morphine solution for inhalation. Works the same way, enough for 3 uses. Unlike a syringe","Morphine solution for inhalation. Works the same way, enough for 3 uses. Unlike a syringe","Раствор морфина, для ингаляции. Действует так же, хватает на 3 раза использования. В Отличии от шприца",182
+"STR_ingalator_Project02_01","original","english","Сыворотка ГЕН02",182
+"STR_ingalator_Project02_02","Little remains of the Information Label. The text cannot be deciphered. It feels like the inscription was erased on purpose. Only GEN02 can be disassembled.","Little remains of the Information Label. The text cannot be deciphered. It feels like the inscription was erased on purpose. Only GEN02 can be disassembled.","От Этикетки с информацией мало что осталось. Разобрать текст нельзя. Такое ощущение, что стерли надпись специально. Разобрать можно только ГЕН02. ",182
+"STR_Rozocka01","Rosette","Rosette","Розочка",182
+"STR_Rozocka02","We keep breaking bottles into roses, And our life is faceted. We are waiting for collection companies, And quietly drinking the burnt drink.","We keep breaking bottles into roses, And our life is faceted. We are waiting for collection companies, And quietly drinking the burnt drink.","Бутылки в розочки всё бьем, И жизнь наша граненная. Коллекторских компаний ждем, И тихо пьем паленую.",182
+"STR_SAMOGON_NastoyX201","Tincture of tinctures","Tincture of tinctures","Настойка из Настоечек",182
+"STR_SAMOGON_NastoyX202","Legendary tincture of the local Moonshiner. Double strength, cleanses the brain and intestines. It will relieve all the illness, perhaps you will fall back, but this is not certain.","Legendary tincture of the local Moonshiner. Double strength, cleanses the brain and intestines. It will relieve all the illness, perhaps you will fall back, but this is not certain.","Легендарная настойка местной Самогонщицы. Двойная крепость, прочищает мозг и кишки. Снимет весь недуг, возможно ты откинешься, но это не точно. ",182
+"STR_SAMOGON_Krotovuha01","Molecat","Molecat","Кротовуха",182
+"STR_SAMOGON_Krotovuha02","It's like a tincture of snake and scorpion. Only domestic version.","It's like a tincture of snake and scorpion. Only domestic version.","Это как настойка из змеи и скорпиона. Только отечественный вариант. ",182
+"STR_SAMOGON_Rabina01","Tincture On Rowan","Tincture On Rowan","Настойка На Рябине",182
+"STR_SAMOGON_Rabina02","Regular rowan tincture.","Regular rowan tincture.","Обычная настойка из рябины. ",182
+"STR_SAMOGON_Maykish01","Moonshine from bread crumb","Moonshine from bread crumb","Самогон из хлебного мякиша",182
+"STR_SAMOGON_Maykish02","Moonshine from bread crumbs, usually made in the zone.","Moonshine from bread crumbs, usually made in the zone.","Самогон из хлебного мякиша, обычно такой делают на зоне. ",182
+"STR_ai2medkit01","AI-2(Simple)","AI-2(Simple)","АИ-2(Простая)",182
+"STR_ai2medkit02","Individual first aid kit AI-2 is an outdated standard means of providing self- and mutual assistance in the event of injury or damage by weapons of mass destruction.","Individual first aid kit AI-2 is an outdated standard means of providing self- and mutual assistance in the event of injury or damage by weapons of mass destruction.","Аптечка индивидуальная АИ-2  устаревшее штатное средство оказания само- и взаимопомощи в случае ранений или поражений оружием массового поражения.",182
+"STR_ai2medkit03","AI-2(Scientific)","AI-2(Scientific)","АИ-2(Научная)",182
+"STR_ai2medkit04","AI-2(Army)","AI-2(Army)","АИ-2(Армейская)",182
+"STR_ai2medkit05","AI-2(experimental)","AI-2(experimental)","АИ-2(экспериментальная)",182
+"STR_ai2medkit06","AI-2(Veteran)","AI-2(Veteran)","АИ-2(Ветеранская)",182
+"STR_ai2medkit06_6","The red first aid kit is the best and most practical. From the most ordinary first aid kit, veteran stalkers collected only the most necessary and essential items that would be needed in the ChEZ","The red first aid kit is the best and most practical. From the most ordinary first aid kit, veteran stalkers collected only the most necessary and essential items that would be needed in the ChEZ","Красная аптечка, сама лучшая и самая практичная. Из самой обычной аптечки ветераны сталкеры, собрали только самое нужное и необходимое что потребуется в ЧЗО",183
+"STR_HardDisk_WD01","Hard disk","Hard disk","Жесткий диск",182
+"STR_HardDisk_WD02","Working hard drive. Perhaps it is clean or stores some information.","Working hard drive. Perhaps it is clean or stores some information.","Рабочий жесткий диск. Возможно он чистый или хранит какую либо информацию. ",182
+"STR_Shapka_old01","Old Hat","Old Hat","Старая Шапка",182
+"STR_Shapka_old02","An old shabby hat does not give beauty, but gives warmth","An old shabby hat does not give beauty, but gives warmth","Старая обшарпанная шапка, красоту не дает, но дает тепло",182
+"STR_Express_Syringe25","Weak Health Booster","Weak Health Booster","Слабый Стимулятор здоровья",182
+"STR_Express_Syringe50","Medium Health Boost","Medium Health Boost","Средний Стимулятор здоровья ",182
+"STR_Express_Syringe75","Good Health Booster","Good Health Booster","Хороший Стимулятор здоровья ",182
+"STR_Express_Syringe100","Maximum Health Booster","Maximum Health Booster","Максимальный Стимулятор здоровья ",182
+"STR_RetroBackPack03","Green Old Big Backpack","Green Old Big Backpack","Зеленый Старый Большой Рюкзак",182
+"STR_RetroBackPack04","Blue Old Big Backpack","Blue Old Big Backpack","Синий Старый Большой Рюкзак",182
+"STR_RetroBackPack05","Black Old Big Backpack","Black Old Big Backpack","Черный Старый Большой Рюкзак",182
+"STR_RetroBackPack06","Beige Old Big Backpack","Beige Old Big Backpack","Бежевый Старый Большой Рюкзак",182
+"STR_RetroBackPack02","An old big backpack, solid and good material, you can still use it","An old big backpack, solid and good material, you can still use it","Старый Большой рюкзак, твердый и хороший материал, пользоваться еще можно",182
+"STR_Express_Syringe02","A metal flask with needles at the end and a button. Serves to quickly introduce the solution into the body. May contain both positive and negative effects.","A metal flask with needles at the end and a button. Serves to quickly introduce the solution into the body. May contain both positive and negative effects.","Металлическая колба с иголками на конце и кнопкой. Служит для быстрого введения раствора в организм. Может содержать как положительные, так и отрицательные эффекты.",182
+"STR_Game_VolkKura01","Game on screen","Game on screen","Игра на экране",182
+"STR_Game_VolkKura02","Electronic game, the most famous and popular of the series of the first Soviet portable electronic games with a liquid crystal screen, produced under the Electronics brand. Produced since 1984.","Electronic game, the most famous and popular of the series of the first Soviet portable electronic games with a liquid crystal screen, produced under the Electronics brand. Produced since 1984.","Электронная игра, самая известная и популярная из серии первых советских портативных электронных игр с жидкокристаллическим экраном, производимых под торговой маркой Электроника. Производилась с 1984 года. ",182
+"STR_PlayGameVolk","Play Game","Play Game","Играть",182
+"STR_SFP_Docemtns01","Research Document","Research Document","Документ об исследованиях",182
+"STR_SFP_Docemtns02","Sample Research Report","Sample Research Report","Доклад об исследовании образцов",182
+"STR_SFP_Docemtns03","Document about experiments","Document about experiments","Документ об экспериментах",182
+"STR_SFP_Docemtns00","Document with classified information.These documents should not fall into the wrong hands: they will clearly be of interest to SBU analysts.","Document with classified information.These documents should not fall into the wrong hands: they will clearly be of interest to SBU analysts.","Документ с секретной информацией. Эти документы не должны попасть в чужие руки: они явно заинтересуют аналитиков СБУ.",182
+"STR_SFP_Docemtns04","Experiment Notes","Experiment Notes","Записи об экспериментах",182
+"STR_SevaMark2_UpModule00","Produced by one of the Kyiv defense research institutes, this module provides an excellent alternative to other home-made stalker protective equipment. Represents a closed-loop breathing system","Produced by one of the Kyiv defense research institutes, this module provides an excellent alternative to other home-made stalker protective equipment. Represents a closed-loop breathing system","Производимый одним из оборонных киевских НИИ данный модуль предоставляет отличную альтернативу другим сталкеровским защитных средств, изготовленным в кустарных условиях. Представляет систему дыхания с замкнутым циклом",183
+"STR_SevaMark2_UpModule_Dolg01","SEVA: Upper module -DOLG","SEVA: Upper module -DOLG","СЕВА: Верхний модуль -ДОЛГ",182
+"STR_SevaMark2_UpModule_ClearSky01","SEVA: Upper module -Clear Sky","SEVA: Upper module -Clear Sky","СЕВА: Верхний модуль -ЧИСТОЕ НЕБО",182
+"STR_SevaMark2_UpModule_FreeDom01","SEVA: Upper module -Freedom","SEVA: Upper module -Freedom","СЕВА: Верхний модуль -СВОБОДА",182
+"STR_SevaMark2_UpModule_Merc01","SEVA: Upper module -Mercenary","SEVA: Upper module -Mercenary","СЕВА: Верхний модуль -НАЕМНИК",182
+"STR_SevaMark2_UpModule_Monolith01","SEVA: Upper module -Monolith","SEVA: Upper module -Monolith","СЕВА: Верхний модуль -МОНОЛИТ",182
+"STR_SevaMark2_UpModule_scienceOrange01","SEVA: Upper module -Orange Eco","SEVA: Upper module -Orange Eco","СЕВА: Верхний модуль -ОРАНЖЕВЫЙ ЭКО",183
+"STR_SevaMark2_UpModule_scienceGreen01","SEVA: Upper module -Green Eco","SEVA: Upper module -Green Eco","СЕВА: Верхний модуль -ЗЕЛЕНЫЙ ЭКО",182
+"STR_SevaMark2_UpModule_Odin01","SEVA: Upper module -Loner","SEVA: Upper module -Loner","СЕВА: Верхний модуль -ОДИНОЧКА",182
+"STR_SevaMark2_Vest00","Body protection from the upper SEVA module","Body protection from the upper SEVA module","Защита на тело от верхнего модуля СЕВА",182
+"STR_SevaMark2_Vest_Dolg01","SEVA: Body protection module - DOLG","SEVA: Body protection module - DOLG","СЕВА: Модуль защиты тела -ДОЛГ",182
+"STR_SevaMark2_Vest_ClearSky01","SEVA: Body protection module - ClearSky","SEVA: Body protection module - ClearSky","СЕВА: Модуль защиты тела -ЧИСТОЕ НЕБО",182
+"STR_SevaMark2_Vest_FreeDom01","SEVA: Body protection module - Freedom","SEVA: Body protection module - Freedom","СЕВА: Модуль защиты тела -СВОБОДА",183
+"STR_SevaMark2_Vest_Merc01","SEVA: Body protection module - Mercenary","SEVA: Body protection module - Mercenary","СЕВА: Модуль защиты тела -НАЕМНИК",182
+"STR_SevaMark2_Vest_Monolith01","SEVA: Body protection module -Monolith","SEVA: Body protection module -Monolith","СЕВА: Модуль защиты тела -МОНОЛИТ",182
+"STR_SevaMark2_Vest_scienceOrange01","SEVA: Body protection module -Orange","SEVA: Body protection module -Orange","СЕВА: Модуль защиты тела -ОРАНЖЕВЫЙ ЭКО",182
+"STR_SevaMark2_Vest_scienceGreen01","SEVA: Body protection module -Green","SEVA: Body protection module -Green","СЕВА: Модуль защиты тела -ЗЕЛЕНЫЙ ЭКО",182
+"STR_SevaMark2_Vest_Odin01","SEVA: Body protection module -Loner","SEVA: Body protection module -Loner","СЕВА: Модуль защиты тела -ОДИНОЧКА",182
+"STR_SevaMark2_UpModule_scienceYellou01","SEVA: Upper module -Yello Eco","SEVA: Upper module -Yellow Eco","СЕВА: Верхний модуль -ЖЕЛТЫЙ ЭКО",183
+"STR_SevaMark2_Vest_scienceYellow01","SEVA: Body protection module -YELLOW","SEVA: Body protection module -YELLOW","СЕВА: Модуль защиты тела -ЖЕЛТЫЙ ЭКО",183
+"STR_SevaMark2_UpModule_scienceGray01","SEVA: Upper module -Gray Eco","SEVA: Upper module -Gray Eco","СЕВА: Верхний модуль -СЕРЫЙ ЭКО",183
+"STR_SevaMark2_Vest_scienceGray01","SEVA: Body protection module -GRAY","SEVA: Body protection module -GRAY","СЕВА: Модуль защиты тела -СЕРЫЙ ЭКО",183
+"STR_BackPack_Minis02","A comfortable bag that does not hinder movement and can be worn over the shoulder. Strong fabric, somewhat similar to tarpaulin. There are luminescent edges along the edges that glow faintly in the dark. Which gives a certain style in night walks.","A comfortable bag that does not hinder movement and can be worn over the shoulder. Strong fabric, somewhat similar to tarpaulin. There are luminescent edges along the edges that glow faintly in the dark. Which gives a certain style in night walks.","Удобная сумка, которая не сковывает движения, одевается через плечо. Крепкая ткань, чем то похожа на брезент. По краям есть люминесцентные края, которые слабо светяться в темноте. Что дает некий стиль в ночных прогулках.  ",182
+"STR_BackPack_Minis03","Convenient bag - YELLOW GLOW","Convenient bag - YELLOW GLOW","Удобная сумка -ЖЕЛТОЕ СВЕЧЕНИЕ",182
+"STR_BackPack_Minis04","Convenient bag - Blue GLOW","Convenient bag - BLUE GLOW","Удобная сумка -НЕБЕСНОЕ СВЕЧЕНИЕ",182
+"STR_BackPack_Minis05","Convenient bag - RED GLOW","Convenient bag - RED GLOW","Удобная сумка -КРАСНОЕ СВЕЧЕНИЕ",182
+"STR_BackPack_Minis06","Convenient bag - GREEN GLOW","Convenient bag - GREEN GLOW","Удобная сумка -ЗЕЛЕНОЕ СВЕЧЕНИЕ",182
+"STR_BackPack_Minis07","Convenient bag - DarkBlue GLOW","Convenient bag - DarkBlue GLOW","Удобная сумка -СИНИЕ СВЕЧЕНИЕ",182
+"STR_BackPack_Minis08","Convenient bag - PINK GLOW","Convenient bag - PINK GLOW","Удобная сумка -РОЗОВОЕ СВЕЧЕНИЕ",182
+"STR_BackPack_Minis09","Convenient bag - PURPLE GLOW","Convenient bag - PURPLE GLOW","Удобная сумка -ПУРПУРНОЕ СВЕЧЕНИЕ",182
+"STR_TestRorshak_mask00","Rorschach test","Rorschach test","Тест Роршаха",183
+"STR_TestRorshak_mask01","Whoever wears this mask sees the true face of his opponent. Tell me what do you see?","Whoever wears this mask sees the true face of his opponent. Tell me what do you see?","Кто носит эту маску, тот видит истинное лицо своего оппонента. Скажи мне, что ты видишь?",182
+"STR_MP27M03","A gun with Yashka’s engraving, is that his emblem or what?","A gun with Yashka’s engraving, is that his emblem or what?","Ружье с гравировкой Яшки, это его валына что ли?",182
+"STR_Soivet_Canten01","army flask","army flask","Армейская фляга",182
+"STR_Soivet_Canten02","This flask is used in the army. Each fighter has his own flask. And if you have lost, there is no word for lost, there is a word for...al","This flask is used in the army. Each fighter has his own flask. And if you have lost, there is no word for lost, there is a word for...al","Такая фляга, используется в армии. За каждым бойцом закреплена своя фляга. А если ты потерял, нет слова потерял, есть слово про..ал",182
+"STR_Shapka_work01","Short Army hat BLACK","Short Army hat BLACK","Армейская Коротка Шапка Черная",182
+"STR_Shapka_work02","Short Army hat GREEN","Short Army hat GREEN","Армейская Коротка Шапка Зеленая",182
+"STR_Shapka_work03","Short Army hat BEIGE","Short Army hat BEIGE","Армейская Коротка Шапка Бежевая",182
+"STR_Shapka_work04","Short Army hat BLUE","Short Army hat BLUE","Армейская Коротка Шапка Синяя",182
+"STR_Shapka_work00","Short army hat, thick fabric, good stitching. The ears are not closed in order to hear well.","Short army hat, thick fabric, good stitching. The ears are not closed in order to hear well.","Армейская коротка шапка, плотная ткань, хороший шов. Уши не закрыты, для того чтобы хорошо слышать.",183
+"STR_Soivet_officer_headgear01","Army Office Winter Hat","Army Office Winter Hat","Армейская Офисная Зимняя Шапка",182
+"STR_Soivet_officer_headgear02","Fur hat for military personnel, with a golden-colored cockade with a star. Turn-down headphones are fixed at the top of the headdress","Fur hat for military personnel, with a golden-colored cockade with a star. Turn-down headphones are fixed at the top of the headdress","Шапка меховая для военнослужащих, с кокардой , золотистого цвета со звездой. Отложные наушники закреплены в верхней части головного убора",182
+"STR_Soivet_boots00","Demi-season ankle boots","Demi-season ankle boots","Берцы демисезонные",182
+"STR_Soivet_boots01","Ordinary army boots. They are hot in summer and cold in winter. They don’t get wet when they’re new, but after a couple of hours on the drill there’s almost nothing left of them.","Ordinary army boots. They are hot in summer and cold in winter. They don’t get wet when they’re new, but after a couple of hours on the drill there’s almost nothing left of them.","Обычные армейские берцы. Летом в них жарко, зимой холодно. Они не промокают, пока новые, но после пары часов на строевой от них почти ничего не остается. ",182
+"STR_Soivet_Bushlat_Camo00","Army Pea Jacket, dense, heavy, and uncomfortable. Windproof, warm.","Army Pea Jacket, dense, heavy, and uncomfortable. Windproof, warm.","Армейский Бушлат, плотный, тяжелый, и неудобный. Ветроустойчивый, теплый. ",182
+"STR_Soivet_Bushlat_Camo01","Soviet Pea Jacket Camouflage","Soviet Pea Jacket Camouflage","Советский Бушлат Камуфляжный",183
+"STR_Soivet_Bushlat_Camo02","Soviet Pea Jacket Beige","Soviet Pea Jacket beige","Советский Бушлат Бежевый",183
+"STR_Soivet_podsumok01","AK USSR pouch","AK USSR pouch","Подсумок ак СССР",182
+"STR_Soivet_podsumok00","Pouch made of canvas fabric. Holds 3 AK magazines or other small items","Pouch made of canvas fabric. Holds 3 AK magazines or other small items","Подсумок из брезентовой ткани. Вмещает 3 магазина АК или другие небольшие предметы",182
+"STR_DrinkCanYashkon01","Yashkon Schriftsteller beer","Yaskon Schriftsteller beer","Yashkon Schriftsteller Пиво",182
+"STR_DrinkCanYashkon02","High quality German beer.","High quality German beer.","Качественное немецкое пиво.  ",182
+"STR_Trupojor_Kogot00","Corpse Eater's Claw","Corpse Eater's Claw","Коготь трупожора",182
+"STR_Trupojor_Kogot01","A long finger with a large claw at the end. The only valuable material of a corpse eater. The bones contain a fragment that helps in the development of new drugs. Scientists or traders may buy it.","A long finger with a large claw at the end. The only valuable material of a corpse eater. The bones contain a fragment that helps in the development of new drugs. Scientists or traders may buy it.","Длинный палец с большим когтем на конце. Единственный ценный материал трупожора. В костях, содержится фрагмент, которым помогает в разработке новых лекарств. Ученые или торговцы возможно купят.",183
+"STR_Trupojor00","Corpse Eater","Corpse Eater","Трупожор",182
+"STR_Shipastiy_Teeth00","Thorn's Teeth","Thorn's Teeth","Зубы Шипастого",182
+"STR_Shipastiy_Teeth01","There is nothing valuable about the mutant Thorn anymore. Except for his teeth. During the mutation process, special glands formed in the teeth. When they bite, they release poison. The poison kills cancer cells and also causes a strong blow to the body. If scientists manage to isolate the necessary fragments from the poison. Perhaps there will be a drug that kills cancer cells.","There is nothing valuable about the mutant Thorn anymore. Except for his teeth. During the mutation process, special glands formed in the teeth. When they bite, they release poison. The poison kills cancer cells and also causes a strong blow to the body. If scientists manage to isolate the necessary fragments from the poison. Perhaps there will be a drug that kills cancer cells.","Ничего ценного в мутанте Шипастого больше нет. Кроме его зубов. В процессе мутации, в зубах образовались специальные железы. При укусе они выделяют яд. Яд убивает раковые клетки, а так же наносит сильный удар по организму. Если ученым получится выделить из яда нужные фрагменты. Возможно появится лекарство которые убивает раковые клетки. ",182
+"STR_Shipastiy00","spiky","spiky","Шипастый",182
+"STR_ChockChockStakan","Clinking Glass","Clinking Glass","Чоканье Стаканом",183
+"STR_StakanRumka01","Rocks","Rocks","Рокс",182
+"STR_StakanRumka02","Rocks are a 250 ml whiskey glass used by bartenders for quick serving.","Rocks are a 250 ml whiskey glass used by bartenders for quick serving.","Рокс (rocks) – стакан для виски емкостью 250 мл, используемый барменами для быстрой подачи.",182
+"STR_DrinkCanYashkon03","Yashka Energy","Yashka Energy","Энергетик Yashka",182
+"STR_DrinkCanYashkon04","Energy drink Yashka has a unique formula that gives an incredible surge of strength. Ginseng and taurine, which are part of the drink, provide the body with essential vitamins. And its unique taste will not allow you to forget this drink. Flavor Energy Kiwi","Energy drink Yashka has a unique formula that gives an incredible surge of strength. Ginseng and taurine, which are part of the drink, provide the body with essential vitamins. And its unique taste will not allow you to forget this drink. Flavor Energy Kiwi","Энергетический напиток «Яшка» обладает уникальной формулой, которая дарит невероятный прилив сил. Женьшень и таурин, входящие в состав напитка, обеспечивают организм необходимыми витаминами. А его неповторимый вкус не позволит вам забыть этот напиток. Вкус Энергетический киви",183
+"STR_Vodka_Roza","Break (make a rose)","Break (make a rose)","Разбить(сделать розочку)",183
+"STR_SFP_Flesh01","Steppe Flesh","Steppe Flesh","Степная Плоть",182
+"STR_SFP_Flesh02","Swamp Flesh","Swamp Flesh","Болотная Плоть",182
+"STR_SFP_Molotov01","Molotov cocktail","Molotov cocktail","Коктейль Молотова",182
+"STR_SFP_Molotov00","The Molotov cocktail is a throwing projectile that is a home-made incendiary grenade.","The Molotov cocktail is a throwing projectile that is a home-made incendiary grenade.","Коктейль Молотова — метательный снаряд, представляющий собой кустарно изготовленную зажигательную гранату. ",182
+"Language","original","english","russian",182
+"Language","original","english","russian",183
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",183
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",183
+"Language","original","english","russian",183
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",183
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",183
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",183
+"Language","original","english","russian",183
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",183
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",183
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",182
+"Language","original","english","russian",183
+"STR_knife_handmade0","homemade knife","homemade knife","Самодельный нож",184
+"STR_knife_handmade1","Homemade knife from a piece of rebar","Homemade knife from a piece of rebar","Самодельный нож из куска арматуры",185
+"STR_knife_Prut_handmade0","sharpening","sharpening","Заточка",186
+"STR_knife_Prut_handmade1","Ordinary sharpening of thin reinforcement","Ordinary sharpening of thin reinforcement","Обычнная заточка из тонкой арматуры",187

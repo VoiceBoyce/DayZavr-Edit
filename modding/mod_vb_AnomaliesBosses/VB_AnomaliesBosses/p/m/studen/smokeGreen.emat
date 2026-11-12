@@ -1,0 +1,11 @@
+Particle {
+ AlbedoMap "{605D1C5852EF6BE2}VB_AB/p/m/studen/SmokeGreen.edds" 
+ Emissive 0.0078 0.5608 0 1
+ CastShadow 1
+ NormalMap "{0CE9B5186A3E661A}VB_AB/p/m/studen/SmokeGreenNorm.edds" 
+ BlendMode Additive_AlphaModulate
+ TileU 5
+ TileV 6
+ Softness 1
+ CameraBlendFar 0.001
+}

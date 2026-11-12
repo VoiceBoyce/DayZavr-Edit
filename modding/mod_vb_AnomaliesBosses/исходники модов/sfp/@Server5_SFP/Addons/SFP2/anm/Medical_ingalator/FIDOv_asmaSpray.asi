@@ -1,0 +1,19 @@
+$animsetinstance {
+ #template "{F0C651DE8E24A5DE}DZ/anims/workspaces/player/player_main/player_main.ast"
+ #nparents 1
+ #parent "{7324B2E80BB624A1}DZ/anims/workspaces/player/player_main/player_main_1h.asi"
+ $animations {
+   "ActionContinuous.EatCro.In" "SFP2/anm/Medical_ingalator/ingalator_in_x.anm"
+   "ActionContinuous.EatCro.Loop" "SFP2/anm/Medical_ingalator/ingalator_loop_x.anm"
+   "ActionContinuous.EatCro.Out" "SFP2/anm/Medical_ingalator/ingalator_out_x.anm"
+   "ActionContinuous.EatErc.In" "SFP2/anm/Medical_ingalator/ingalator_in_x.anm"
+   "ActionContinuous.EatErc.Loop" "SFP2/anm/Medical_ingalator/ingalator_loop_x.anm"
+   "ActionContinuous.EatErc.Out" "SFP2/anm/Medical_ingalator/ingalator_out_x.anm"
+   "ActionContinuous.EatPne.In" "SFP2/anm/Medical_ingalator/ingalator_leza_in.anm"
+   "ActionContinuous.EatPne.Loop" "SFP2/anm/Medical_ingalator/ingalator_leza_loop.anm"
+   "ActionContinuous.EatPne.Out" "SFP2/anm/Medical_ingalator/ingalator_leza_out.anm"
+   "ActionOnce.EatTabletCro.Once" "SFP2/anm/Medical_ingalator/ingalator_full_x.anm"
+   "ActionOnce.EatTabletErc.Once" "SFP2/anm/Medical_ingalator/ingalator_full_x.anm"
+   "ActionOnce.EatTabletPne.Once" "SFP2/anm/Medical_ingalator/ingalator_leza_full.anm"
+  
+ }

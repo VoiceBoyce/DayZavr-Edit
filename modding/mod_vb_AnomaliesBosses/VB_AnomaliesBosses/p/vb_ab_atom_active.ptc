@@ -1,0 +1,316 @@
+EffectDef {
+ Emitors {
+  EmitorDef StartSplashLight {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 0 0 720
+   MaxNum 1000
+   BirthRate 500
+   BirthRateRND 700
+   BirthRateVel 1000
+   Offset 0 5 0
+   Angles 0 90 0
+   Material "{CB7AF4FD8ACBFDFC}graphics/particles/materials/glow/glow1.emat"
+   SizeMultiplier 0.1
+   SizeRND 0.3
+   RandomRotDir 1
+   RotMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   BillboardingType Full
+   Velocity 100
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 10
+   AirResistanceRND 0
+   GravityMultiply 0.5
+   GravityMultiplyRND 0.2
+   Restitution 0
+   Spring 0
+   Wind 1
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 3
+   LifeTimeRND 2
+   Color {
+    0 1 0.6444 0 1 1 0.5704 0
+   }
+   Alpha {
+    0 0 0.22745 1 0.31242 0.05185 0.36275 0.94815 0.39085 0 0.40261 0.80741 0.44771 0 0.45098 0.94815 0.47974 0 0.50065 0.4963 0.52288 0.03704 0.52614 0.65185 0.56732 0.02222 0.58627 0.54815 0.60784 0 1 0
+   }
+   EffectTime 5
+   Repeat 0
+   AlphaMast {
+    0 1 0.17386 1 0.21634 0 0.51046 0.08148 1 0
+   }
+   RotationSpeedMast {
+    0 1 0.35817 1 1 0
+   }
+   SizeMast {
+    0 0 0.09739 1 0.11373 0 1 0
+   }
+   BRateMast {
+    0 1 0.13922 1 0.37647 1 0.37974 0 1 0
+   }
+   AirResistanceMast {
+    0 0 0.01242 0.2 0.01961 0.68889 0.03464 0.95556 0.03791 0.18519 0.09477 1 1 1
+   }
+   VelocityMast {
+    0 1 1 1
+   }
+  }
+  EmitorDef SphereLightingSplashSmoke_cloned {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 180 360 0
+   MaxNum 1000
+   BirthRate 500
+   BirthRateRND 700
+   BirthRateVel 0
+   Offset 0 5 0
+   Angles 0 -90 0
+   Material "{CB7AF4FD8ACBFDFC}graphics/particles/materials/glow/glow1.emat"
+   SizeMultiplier 0.2
+   SizeRND 0.05
+   RandomRotDir 1
+   RotMultiplier 1
+   StretchMultiplier 1.1
+   StreakFullUV 0
+   VelAngle 1
+   RandomAngle 0
+   Sort 0
+   BillboardingType Full
+   Velocity 60
+   VelocityRND 56
+   VelAffect 0
+   AirResistance 1.7
+   AirResistanceRND 0.4
+   GravityMultiply 0.5
+   GravityMultiplyRND 0
+   Restitution 0
+   Spring 0
+   Wind 1
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 5
+   LifeTimeRND 4
+   Color {
+    0 1 0.6444 0 1 1 0.5704 0
+   }
+   Alpha {
+    0 0 0.22745 1 0.31242 0.05185 0.36275 0.94815 0.39085 0 0.40261 0.80741 0.44771 0 0.45098 0.94815 0.47974 0 0.50065 0.4963 0.52288 0.03704 0.52614 0.65185 0.56732 0.02222 0.58627 0.54815 0.60784 0 1 0
+   }
+   EffectTime 5
+   Repeat 0
+   AlphaMast {
+    0 0 0.04575 0.25926 0.1 0.82222 0.16078 0.11852 0.49608 0 1 0
+   }
+   RotationSpeedMast {
+    0 1 0.35817 1 1 0
+   }
+   SizeMast {
+    0 0 0.03856 0.17778 0.05425 1 0.16993 1 0.29608 0.26667 0.35294 0.68148 0.39346 0.1037 0.42157 0.88889 0.47582 0.17037 0.50131 0.80741 0.52026 0 0.53987 0.55556 0.58954 0 1 0
+   }
+   BRateMast {
+    0 0 0.06928 0 0.07255 1 0.18627 0.05185 0.46601 0 1 0
+   }
+   AirResistanceMast {
+    0 0 0.02157 0 0.06732 1 1 1
+   }
+   VelocityMast {
+    0 0 0.02157 0 0.02745 1 0.10784 1 1 1
+   }
+  }
+  EmitorDef GroundSplashSmoke {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 0 0 720
+   MaxNum 2000
+   BirthRate 1000
+   BirthRateRND 1000
+   BirthRateVel 1000
+   Offset 0 1 0
+   Angles 0 90 0
+   Material "{80F33A254BC889F3}graphics/particles/materials/smoke/smoke_cloud_01_b_heliwreck_01.emat"
+   SizeMultiplier 20
+   SizeRND 15
+   RandomRotDir 1
+   RotMultiplier 100
+   StreakFullUV 1
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   BillboardingType Full
+   Velocity 200
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 5
+   AirResistanceRND 0
+   GravityMultiply 0.3
+   GravityMultiplyRND 0
+   Restitution 0
+   Spring 0
+   Wind 1
+   AnimOnce 0
+   AnimFPS 0
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 2
+   LifeTimeRND 3
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 0.14815 1 0
+   }
+   EffectTime 5
+   Repeat 0
+   AlphaMast {
+    0 0 0.12549 0.86667 0.58431 0.02963 1 0
+   }
+   RotationSpeedMast {
+    0 1 0.09085 1 0.18039 0.05926 0.57582 0.31111 1 0.05926
+   }
+   SizeMast {
+    0 0 0.08562 1 0.14641 0 0.21438 1 0.27516 1 1 1
+   }
+   BRateMast {
+    0 0 0.08627 0 0.08954 1 0.18693 1 0.1902 0 0.46797 0 1 0
+   }
+   AirResistanceMast {
+    0 1 0.16013 1 0.21438 0.60741 1 0
+   }
+   VelocityMast {
+    0 1 0.02092 1 0.06144 0 0.14444 1 0.17908 1 1 1
+   }
+  }
+  EmitorDef SphereLightingLight {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 0 0 720
+   MaxNum 20
+   BirthRate 20
+   BirthRateRND 20
+   Offset 0 5 0
+   Angles 0 90 0
+   Material "{5855301D1406CEBF}VB_AB/p/m/electra/Lighting02/SparkElectra.emat"
+   SizeMultiplier 70
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 90
+   StreakFullUV 1
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   BillboardingType Full
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Spring 100
+   AnimOnce 1
+   AnimFPS 30
+   LifetimeByAnim 0
+   LifeTime 2
+   LifeTimeRND 1
+   Color {
+    0 1 0.8148 0.3556 0.1144 1 1 0 0.2118 1 0.3704 0 0.4902 1 0.0222 0 1 1 0.7481 0
+   }
+   Alpha {
+    0 1 0.49085 1 0.57843 0 1 0
+   }
+   Size {
+    0 0 0.04575 1 0.13725 0.31852 0.20196 1 0.26144 0.39259 0.31569 0.87407 0.37516 0.36296 0.43137 0.67407 0.49412 0.28148 0.56275 0.51852 0.61895 0.16296 0.68562 0.38519 0.74902 0.18519 0.80196 0.24444 1 0
+   }
+   EffectTime 3
+   Repeat 0
+   AlphaMast {
+    0 0 0.03399 1 0.14902 1 0.24248 0 0.42353 0 1 0
+   }
+   RotationSpeedMast {
+    0 1 0.35817 1 1 0
+   }
+   SizeMast {
+    0 0 0.02026 0 0.05752 1 0.1366 0.48148 0.20523 0.0963 0.28039 0 0.39346 0 1 0
+   }
+   BRateMast {
+    0 0 0.02353 0 0.0268 1 0.18497 1 0.24183 0.14815 0.3085 0 1 0
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 0 0.04902 0 0.05229 1 0.24379 1 0.55229 1 1 1
+   }
+  }
+  EmitorDef SplashHole {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 0 0 0
+   MaxNum 50
+   BirthRate 15
+   BirthRateRND 15
+   Offset 0 5 0
+   Angles 0 90 0
+   Material "{E77CE1C109C00FC5}VB_AB/p/m/voronka/BubbleHole.emat"
+   SizeMultiplier 130
+   SizeRND 10
+   RandomRotDir 1
+   RotMultiplier 5
+   StreakFullUV 1
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   BillboardingType Full
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0.05
+   GravityMultiplyRND 0.02
+   Spring 1
+   AnimOnce 1
+   AnimFPS 30
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 5
+   LifeTimeRND 4
+   Color {
+    0 1 0.437 0 1 1 1 1
+   }
+   Alpha {
+    0 0 0.04379 1 0.1183 0.03704 0.23725 0 1 0
+   }
+   EffectTime 5
+   Repeat 0
+   AlphaMast {
+    0 0 0.08431 0.08889 0.12941 0.75556 0.33922 0.05926 1 0
+   }
+   RotationSpeedMast {
+    0 1 0.35817 1 1 0
+   }
+   SizeMast {
+    0 0 0.01503 0.0963 0.03791 1 0.05686 0 0.07386 0.74074 0.10588 0.15556 0.10915 0.9037 0.15033 0.18519 0.1915 1 0.22418 0.17037 0.23725 0 1 1
+   }
+   BRateMast {
+    0 0 0.01242 1 0.30458 1 0.50719 0.27407 0.76732 0.02222 1 0
+   }
+   AirResistanceMast {
+    0 1 1 1
+   }
+   VelocityMast {
+    0 0 0.04902 0 0.07124 1 0.24379 1 0.55229 1 1 1
+   }
+  }
+ }
+}

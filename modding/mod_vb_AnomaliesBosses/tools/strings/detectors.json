@@ -1,0 +1,22 @@
+{
+    "STR_VB_AB_Detector_Oko": ["Детектор «Око»", "Detector \"Oko\""],
+    "STR_VB_AB_Detector_Oko_Desc": [
+        "Детектор аномальных находок. Как и «Отклик», ловит только то, что впереди, и подсказывает лишь расстояние, но берёт чуть дальше. Пока работает, светится экран; чем ближе находка, тем чаще пищит и мигает лампа. Работает от батарейки 9 В.",
+        "A detector of anomalous finds. Like the \"Otklik\", it senses only what is ahead and tells just the distance, but reaches a little farther. The screen glows while it is on; the closer the find, the faster it beeps and the lamp blinks. Runs on a 9V battery."
+    ],
+    "STR_VB_AB_Detector_Medved": ["Детектор «Медведь»", "Detector \"Medved\""],
+    "STR_VB_AB_Detector_Medved_Desc": [
+        "Детектор аномальных находок. Ловит то, что впереди, и показывает не только расстояние, но и направление: сектор на экране поворачивается в сторону находки и разгорается по мере приближения. Работает от батарейки 9 В.",
+        "A detector of anomalous finds. Senses what is ahead and shows not only the distance but also the direction: the sector on the screen turns toward the find and grows brighter as you get closer. Runs on a 9V battery."
+    ],
+    "STR_VB_AB_Detector_Svarog": ["Детектор «Сварог»", "Detector \"Svarog\""],
+    "STR_VB_AB_Detector_Svarog_Desc": [
+        "Продвинутый детектор аномальных находок. Видит до четырёх находок сразу в полукруге впереди: каждая отмечена на экране, по метке видно направление и расстояние. Находит то, что простым детекторам недоступно. Работает от батарейки 9 В.",
+        "An advanced detector of anomalous finds. Sees up to four finds at once in the half-circle ahead: each is marked on the screen, and the mark shows its direction and distance. Finds what simple detectors cannot. Runs on a 9V battery."
+    ],
+    "STR_VB_AB_Detector_Veles": ["Детектор «Велес»", "Detector \"Veles\""],
+    "STR_VB_AB_Detector_Veles_Desc": [
+        "Самый дальнобойный детектор аномальных находок. Как и «Сварог», показывает на экране до четырёх находок сразу с направлением и расстоянием до каждой, но берёт дальше. Работает от батарейки 9 В.",
+        "The longest-range detector of anomalous finds. Like the \"Svarog\", it shows up to four finds at once on the screen with the direction and distance to each, but reaches farther. Runs on a 9V battery."
+    ]
+}

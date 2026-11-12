@@ -1,0 +1,49 @@
+EffectDef {
+ Emitors {
+  EmitorDef Main_WaterJet {
+   ConeAngle 360 10 10
+   MaxNum 70
+   BirthRate 70
+   BirthRateVel 0
+   Offset 0 0 0
+   Angles 0.00001 -90 0.00001
+   Material "{8FE2383D6913E098}Graphics/Particles/materials/enviroment/water_splash_01_NoEm.emat"
+   CenterX 0
+   CenterY 0
+   ScaleX 0.881
+   ScaleY 0.873
+   SizeMultiplier 1
+   SizeRND 1
+   RandomRotDir 1
+   RotMultiplier 50
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity -1
+   VelocityRND 0
+   VelAffect 1
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0.5
+   Wind 0
+   RandomFrame 1
+   LifeTime 0.4
+   LifeTimeRND 0.25
+   Color {
+    0 1 1 0.6574 1 1 0.9537 0.4444
+   }
+   Alpha {
+    0 0 0.28303 1 0.88185 0.63889 1 0
+   }
+   RotationSpeed {
+    0 0.47222 1 0.56481
+   }
+   Size {
+    0 0 0.75779 0.06481 1 0.13889
+   }
+   EffectTime 1.5
+  }
+ }
+}

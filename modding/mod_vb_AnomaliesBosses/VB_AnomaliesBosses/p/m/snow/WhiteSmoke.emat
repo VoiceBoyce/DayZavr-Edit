@@ -1,0 +1,8 @@
+Particle {
+ AlbedoMap "{6045BF8516D5275A}VB_AB/p/m/snow/WhiteSmoke.edds" 
+ Emissive 1 1 1 1
+ NormalMap "{F316ECCF052EDA39}VB_AB/p/m/snow/WhiteSmokeNorm.edds" 
+ TileU 2
+ TileV 2
+ Softness 2
+}

@@ -1,0 +1,13 @@
+Particle {
+ AlbedoMap "{B525918640B24E45}VB_AB/p/m/electra/Lighting02/Lighting002.edds" 
+ Emissive 1 1 1 1
+ ZEnable 0
+ Sort decal
+ CastShadow 1
+ BlendMode Additive_AlphaModulate
+ TileU 8
+ TileV 6
+ Softness 1
+ CameraBlendNear 0.001
+ CameraBlendFar 0.001
+}

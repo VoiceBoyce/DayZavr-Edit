@@ -1,0 +1,7 @@
+Particle {
+ AlbedoMap "{990BC3A4E8896623}SFP2/Particles/edds/SnorkTEN.edds" 
+ Color 0.6078 0.6078 0.6078 1
+ Diffuse 0.6078 0.6078 0.6078 1
+ Ambient 0.5882 0.5882 0.5882 1
+ Softness 2
+}

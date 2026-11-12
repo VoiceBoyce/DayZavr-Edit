@@ -1,0 +1,208 @@
+EffectDef {
+ Emitors {
+  EmitorDef Main_WaterJet {
+   ConeAngle 360 10 10
+   MaxNum 50
+   BirthRate 50
+   BirthRateVel 0
+   Offset 0 1.32733 0
+   Material "{8FE2383D6913E098}Graphics/Particles/materials/enviroment/water_splash_01_NoEm.emat"
+   SizeMultiplier 1
+   SizeRND 0.5
+   RandomRotDir 1
+   RotMultiplier 50
+   StretchMultiplier 1
+   RandomAngle 1
+   Velocity -5
+   VelocityRND 1
+   VelAffect 1
+   AirResistance 1
+   AirResistanceRND 1
+   GravityMultiply 0.3
+   Wind 0
+   RandomFrame 1
+   LifeTime 0.4
+   LifeTimeRND 0.25
+   Color {
+    0 0.8418 0.9114 1 1 0.8101 0.9304 1
+   }
+   Alpha {
+    0 0 0.08271 0.25 1 0
+   }
+   Size {
+    0 0 0.31633 0.2963 1 0.46296
+   }
+   EffectTime 1.5
+  }
+  EmitorDef Main_WaterJet_cloned {
+   ConeAngle 360 10 10
+   MaxNum 50
+   BirthRate 50
+   BirthRateVel 0
+   Offset 0.86055 0.62102 0
+   Angles 0 0 65
+   Material "{8FE2383D6913E098}Graphics/Particles/materials/enviroment/water_splash_01_NoEm.emat"
+   SizeMultiplier 1
+   SizeRND 0.5
+   RandomRotDir 1
+   RotMultiplier 50
+   StretchMultiplier 1
+   RandomAngle 1
+   Velocity -2
+   VelocityRND 1
+   VelAffect 1
+   AirResistance 1
+   AirResistanceRND 1
+   GravityMultiply 0.3
+   Wind 0
+   RandomFrame 1
+   LifeTime 0.4
+   LifeTimeRND 0.25
+   Color {
+    0 0.8418 0.9114 1 1 0.8101 0.9304 1
+   }
+   Alpha {
+    0 0 0.12621 0.37963 1 0
+   }
+   Size {
+    0 0 0.67723 0.49074 1 0.37963
+   }
+   EffectTime 1.5
+  }
+  EmitorDef Main_WaterJet_cloned_cloned {
+   ConeAngle 360 10 10
+   MaxNum 50
+   BirthRate 50
+   BirthRateVel 0
+   Offset -0.944 0.621 0
+   Angles 0 0 -65
+   Material "{8FE2383D6913E098}Graphics/Particles/materials/enviroment/water_splash_01_NoEm.emat"
+   ScaleX 1
+   SizeMultiplier 1
+   SizeRND 0.5
+   RandomRotDir 1
+   RotMultiplier 50
+   StretchMultiplier 1
+   RandomAngle 1
+   Velocity -2
+   VelocityRND 1
+   VelAffect 1
+   AirResistance 1
+   AirResistanceRND 1
+   GravityMultiply 0.3
+   Wind 0
+   RandomFrame 1
+   LifeTime 0.4
+   LifeTimeRND 0.25
+   Color {
+    0 0.8418 0.9114 1 1 0.8101 0.9304 1
+   }
+   Alpha {
+    0 0 0.12889 0.40741 1 0
+   }
+   Size {
+    0 0 0.67723 0.49074 1 0.53704
+   }
+   EffectTime 1.5
+  }
+  EmitorDef ExtraThick_WaterJet {
+   ConeAngle 360 10 10
+   MaxNum 50
+   BirthRate 50
+   BirthRateVel 0
+   Offset 0 1.327 0
+   Material "{D29B53088A5A3911}Graphics/Particles/materials/smoke/smoke_dust_01_W.emat"
+   SizeMultiplier 0.5
+   SizeRND 0.5
+   RandomRotDir 1
+   RotMultiplier 50
+   RandomAngle 1
+   Velocity -2
+   VelocityRND 1
+   VelAffect 1
+   AirResistance 1
+   AirResistanceRND 1
+   GravityMultiply 0.5
+   RandomFrame 1
+   LifeTime 0.4
+   LifeTimeRND 0.25
+   Color {
+    0 0.8671 0.943 1 1 0.7975 0.8924 1
+   }
+   Alpha {
+    0 0 0.24651 0.64815 1 0
+   }
+   Size {
+    0 0 0.63695 0.55556 1 0.57407
+   }
+   EffectTime 1.5
+  }
+  EmitorDef ExtraThick_WaterJet_cloned {
+   ConeAngle 360 10 10
+   MaxNum 50
+   BirthRate 50
+   BirthRateVel 0
+   Offset 0.865 0.621 0
+   Angles 0 0 65
+   Material "{D29B53088A5A3911}Graphics/Particles/materials/smoke/smoke_dust_01_W.emat"
+   SizeMultiplier 1
+   SizeRND 0.5
+   RandomRotDir 1
+   RotMultiplier 50
+   RandomAngle 1
+   Velocity -2
+   VelocityRND 1
+   VelAffect 1
+   AirResistance 1
+   AirResistanceRND 1
+   GravityMultiply 0.5
+   RandomFrame 1
+   LifeTime 0.4
+   LifeTimeRND 0.25
+   Color {
+    0 0.8671 0.943 1 1 0.7975 0.8924 1
+   }
+   Alpha {
+    0 0 0.24168 0.50926 1 0
+   }
+   Size {
+    0 0 0.78571 0.4537 1 0.52778
+   }
+   EffectTime 1.5
+  }
+  EmitorDef ExtraThick_WaterJet_cloned_cloned {
+   ConeAngle 360 10 10
+   MaxNum 50
+   BirthRate 50
+   BirthRateVel 0
+   Offset -0.944 0.621 0
+   Angles 0 0 -65
+   Material "{D29B53088A5A3911}Graphics/Particles/materials/smoke/smoke_dust_01_W.emat"
+   SizeMultiplier 1
+   SizeRND 0.5
+   RandomRotDir 1
+   RotMultiplier 50
+   RandomAngle 1
+   Sort 0
+   Velocity -2
+   VelocityRND 1
+   VelAffect 1
+   AirResistance 1
+   AirResistanceRND 1
+   GravityMultiply 0.5
+   RandomFrame 1
+   LifeTime 0.4
+   LifeTimeRND 0.25
+   Color {
+    0 0.8671 0.943 1 1 0.7975 0.8924 1
+   }
+   Alpha {
+    0 0 0.24436 0.47222 1 0
+   }
+   Size {
+    0 0 0.78571 0.4537 1 0.49074
+   }
+   EffectTime 1.5
+  }
+ }
+}

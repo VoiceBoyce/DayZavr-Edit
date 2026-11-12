@@ -1,0 +1,34 @@
+$animsetinstance {
+ #template "{F0C651DE8E24A5DE}DZ/anims/workspaces/player/player_main/player_main.ast"
+ #nparents 1
+ #parent "{8F69E288CFC2B70D}DZ/anims/workspaces/player/player_main/props/player_main_1h_torch.asi"
+ $animations {
+
+   "ActionContinuous.DrinkCro.In" "SFP2/anm/GranenStakan/cro_sid_granen_vodka_in.anm"
+   "ActionContinuous.DrinkCro.Loop" "SFP2/anm/GranenStakan/cro_sid_granen_vodka_loop.anm"
+   "ActionContinuous.DrinkCro.Out" "SFP2/anm/GranenStakan/cro_sid_granen_vodka_out.anm"
+   "ActionContinuous.DrinkCro.Out2" "SFP2/anm/GranenStakan/cro_sid_granen_vodka_out.anm"
+   
+   "ActionContinuous.DrinkErc.In" "SFP2/anm/GranenStakan/granen_vodka_in.anm"
+   "ActionContinuous.DrinkErc.Loop" "SFP2/anm/GranenStakan/granen_vodka_loop.anm"
+   "ActionContinuous.DrinkErc.Out" "SFP2/anm/GranenStakan/granen_vodka_out.anm"
+   "ActionContinuous.DrinkErc.Out2" "SFP2/anm/GranenStakan/granen_vodka_out.anm"
+   
+   "ActionContinuous.DrinkPne.In" "SFP2/anm/GranenStakan/pne_leza_granen_vodka_in2.anm"
+   "ActionContinuous.DrinkPne.Loop" "DZ/anims/anm/player/actions/consumption/p_pne_drink_loop.anm"
+   "ActionContinuous.DrinkPne.Out" "SFP2/anm/GranenStakan/pne_leza_granen_vodka_out2.anm" 
+   "ActionContinuous.DrinkPne.Out2" "SFP2/anm/GranenStakan/pne_leza_granen_vodka_out2.anm" 
+   
+   "ActionContinuous.TakeTempSelfCro.In" "SFP2/anm/GranenStakan/stok/stok_cro_sidya_granen_in.anm"
+   "ActionContinuous.TakeTempSelfCro.Loop" "SFP2/anm/GranenStakan/stok/stok_cro_sidya_granen_loop.anm"
+   "ActionContinuous.TakeTempSelfCro.Out" "SFP2/anm/GranenStakan/stok/stok_cro_sidya_granen_out.anm"
+   
+   "ActionContinuous.TakeTempSelfErc.In" "SFP2/anm/GranenStakan/stok/stok_stoya_granen_in.anm"
+   "ActionContinuous.TakeTempSelfErc.Loop" "SFP2/anm/GranenStakan/stok/stok_stoya_granen_loop.anm"
+   "ActionContinuous.TakeTempSelfErc.Out" "SFP2/anm/GranenStakan/stok/stok_stoya_granen_out.anm"
+   
+   "ActionContinuous.TakeTempSelfPne.In" "SFP2/anm/GranenStakan/stok/stok_cro_sidya_granen_in.anm"
+   "ActionContinuous.TakeTempSelfPne.Loop" "SFP2/anm/GranenStakan/stok/stok_cro_sidya_granen_loop.anm"
+   "ActionContinuous.TakeTempSelfPne.Out" "SFP2/anm/GranenStakan/stok/stok_cro_sidya_granen_out.anm"
+  
+ }
