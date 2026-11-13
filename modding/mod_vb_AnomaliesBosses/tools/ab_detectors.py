@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-"""Детекторы Око, Медведь, Сварог и Велес для VB_AnomaliesBosses: модели, текстуры, материалы и cfg/detectors.hpp.
+"""Детекторы Огонёк, Пеленг, Сито и Невод для VB_AnomaliesBosses: модели, текстуры, материалы и cfg/detectors.hpp.
 
 Что делает:
   1) модели OOTS через ab_models.build_skin (скин x): m/vb_detector_<имя>_x.p3d, t/<код>/ (общие карты),
      t/<код>x/ (цвет и материалы, бинарные .rvmat переводятся в текст);
   2) то, чего нет внутри моделей, но нужно скриптам (VB_AB_Detectors2.c):
-     - Медведь: экраны «пусто / слабый / средний / сильный» (t/dmx/ekran_*.paa) и негорящий материал экрана
+     - Пеленг: экраны «пусто / слабый / средний / сильный» (t/dmx/ekran_*.paa) и негорящий материал экрана
        medved_ekranoff.rvmat (в OOTS он указан в конфиге, но файла нет);
-     - Сварог, Велес: материал «индикаторы горят» для секции emiss (t/dsx/svarog_emiss_on.rvmat,
+     - Сито, Невод: материал «индикаторы горят» для секции emiss (t/dsx/svarog_emiss_on.rvmat,
        t/dvx/veles_emiss_on.rvmat; в OOTS SvarogEmiss/VelesEmiss указаны, но файлов нет);
-  3) cfg/detectors.hpp — классы VB_AB_Detector_Oko/_Medved/_Svarog/_Veles (наследники VB_AB_DetectorBase).
+  3) cfg/detectors.hpp — классы VB_AB_Detector_Ogonek/_Peleng/_Sito/_Nevod (наследники VB_AB_DetectorBase).
 
 Какая секция модели чем покрыта, выяснено разбором секций ODOL (раздел «Секции» ниже). Скрипт читает
 из конфига поля vbAB<часть>Sel / vbAB<часть><состояние>Tex|Mat, поэтому пути живут только здесь.
@@ -19,6 +19,7 @@
 import os
 import re
 import shutil
+import struct
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -32,15 +33,15 @@ OUT_HPP = os.path.join(MOD, "cfg", "detectors.hpp")
 DESTRUCT = "DZ" + BS + "data" + BS + "data" + BS + "default_destruct.rvmat"
 
 # Секции моделей (разбор ODOL v56, LOD 0):
-#   Око:     lampa = okoon_co + oko_lampalight (горит), ecran = okooff_co + oko, корпус okoon_co + oko,
+#   Огонёк:  lampa = okoon_co + oko_lampalight (горит), ecran = okooff_co + oko, корпус okoon_co + oko,
 #            стекло oko_ca + oko_glass;
-#   Медведь: ekran = ekranoff + medved_ekranon (крутится анимацией ekran 0..180°), display = ekranoff без
+#   Пеленг:  ekran = ekranoff + medved_ekranon (крутится анимацией ekran 0..180°), display = ekranoff без
 #            материала, ekrangloss = eckangloss_ca + medved_adef, стекло glass_ca + medved_glass;
-#   Сварог:  ekran = svadog_ekranon.paa + svadog_ekranon.rvmat (экран включён), emiss = svarog_default_co +
-#            svarogmat, метки art1..4 = зелёный цвет + svadog_light;
-#   Велес:   ekran = veles_ekranon.paa + velesmat, emiss = veles_default_co + velesmat,
+#   Сито:    ekran = svadog_ekranon.paa + svadog_ekranon.rvmat (экран включён), emiss = svarog_default_co +
+#            svarogmat, метки art1..4 = процедурный цвет в модели (MODEL_PATCHES) + svadog_light;
+#   Невод:   ekran = veles_ekranon.paa + velesmat, emiss = veles_default_co + velesmat,
 #            метки art1..4 = veles_ekrangreen + veles_light.
-# Анимации меток Сварога/Велеса: art*_rotate -90..+90°, art*_translate 0..1, art*_hide (1 — скрыта).
+# Анимации меток Сита/Невода: art*_rotate -90..+90°, art*_translate 0..1, art*_hide (1 — скрыта).
 
 CODES = ["dk", "dm", "ds", "dv"]
 
@@ -57,7 +58,7 @@ def mapping_for(code):
 
 
 def cfg_path(vp):
-    """vb_ab\\t\\... -> VB_AB\\t\\... (так пути записаны у Отклика)."""
+    """vb_ab\\t\\... -> VB_AB\\t\\... (так пути записаны у Лозы)."""
     return "VB_AB" + vp[len(am.PREFIX):]
 
 
@@ -77,6 +78,34 @@ class Model:
     def extra(self, filename):
         """Свой файл в папке t\\<код>x (не из модели)."""
         return "VB_AB" + BS + "t" + BS + self.code + "x" + BS + filename
+
+
+# Правки внутри перенесённых моделей, байты той же длины (ретекстур 2026-11-13, tools/ab_retex_detectors.py):
+#   Сито:  цвет меток art1..4 — процедурная текстура, записанная строкой в модели: зелёный -> голубой;
+#   Невод: встроенный материал меток veles_light (файл .rvmat на них не влияет, E55): emmisive {1.07,1.36,0} ->
+#          {1.2,1.2,1.2}, чтобы белая текстура меток и светилась белым (разбор материала — E45).
+MODEL_PATCHES = {
+    "vb_detector_svarog_x.p3d": [(b"#(argb,8,8,3)color(0.196078,0.976471,0,1.0,co)",
+                                  b"#(argb,8,8,3)color(0.350000,0.750000,1,1.0,co)")],
+    "vb_detector_veles_x.p3d": [(struct.pack("<4f", 1.07, 1.36, 0.0, 1.0), struct.pack("<4f", 1.2, 1.2, 1.2, 1.0))],
+}
+
+
+def patch_models():
+    """Применить MODEL_PATCHES. Повторный запуск ничего не портит: уже заменённое пропускается."""
+    for fn, pairs in MODEL_PATCHES.items():
+        path = os.path.join(MOD, "m", fn)
+        data = open(path, "rb").read()
+        for old, new in pairs:
+            assert len(old) == len(new), fn
+            n_old, n_new = data.count(old), data.count(new)
+            if n_old == 1:
+                data = data.replace(old, new)
+            elif not (n_old == 0 and n_new == 1):
+                raise SystemExit("%s: правка найдена %d раз (новое %d)" % (fn, n_old, n_new))
+        with open(path, "wb") as f:
+            f.write(data)
+        print("модель поправлена:", fn)
 
 
 def mod_file(cfgp):
@@ -182,10 +211,11 @@ def main():
         bad += len(problems)
     if bad:
         raise SystemExit("модели перенесены с ошибками, cfg/detectors.hpp не записан")
+    patch_models()
 
     ok, md, sv, vl = (Model(c) for c in CODES)
 
-    # Медведь: экраны по силе сигнала и негорящий материал экрана
+    # Пеленг: экраны по силе сигнала и негорящий материал экрана
     ekr = {}
     for state, src in (("empty", "EkranEmpty"), ("low", "EkranLow"), ("mid", "EkranMid"), ("high", "EkranHigh")):
         ekr[state] = md.extra("ekran_%s.paa" % state)
@@ -194,20 +224,20 @@ def main():
     md_off = md.extra("medved_ekranoff.rvmat")
     rvmat_variant(md_on, md_off, {"ambient": "1,1,1,1", "diffuse": "1,1,1,1",
                                   "forcedDiffuse": "0,0,0,1", "emmisive": "0,0,0,1"})
-    # Сварог, Велес: индикаторы emiss горят, пока детектор работает
+    # Сито, Невод: индикаторы emiss горят, пока детектор работает (цвета ретекстура: Сито голубые, Невод белые)
     sv_emiss = sv.extra("svarog_emiss_on.rvmat")
-    rvmat_variant(sv.p("svarogmat.rvmat"), sv_emiss, {"emmisive": "0.3,1.2,0.3,1"})
+    rvmat_variant(sv.p("svarogmat.rvmat"), sv_emiss, {"emmisive": "0.2,0.75,1.5,1"})
     vl_emiss = vl.extra("veles_emiss_on.rvmat")
-    rvmat_variant(vl.p("velesmat.rvmat"), vl_emiss, {"emmisive": "1.2,0.7,0.15,1"})
+    rvmat_variant(vl.p("velesmat.rvmat"), vl_emiss, {"emmisive": "1.1,1.1,1.2,1"})
 
     L = ["// СГЕНЕРИРОВАНО tools/ab_detectors.py — руками не править",
-         "// Детекторы Око, Медведь, Сварог, Велес (ТЗ 2.2). Модели OOTS с заменёнными путями, логика в",
+         "// Детекторы Огонёк, Пеленг, Сито, Невод (ТЗ 2.2). Модели OOTS с заменёнными путями, логика в",
          "// scripts/4_World/VB_AB/VB_AB_Detectors2.c. Поля vbAB<часть>Sel — индекс секции в hiddenSelections,",
          "// vbAB<часть><On|Off>Tex/Mat — что кладёт на неё скрипт во включённом и выключенном состоянии."]
 
-    # Око: экран горит, пока детектор включён; лампа мигает тем чаще, чем ближе находка
+    # Огонёк: экран горит, пока детектор включён; лампа мигает тем чаще, чем ближе находка
     L += det_class(
-        "Oko", "Око: как Отклик (только расстояние, только впереди), лампа мигает, экран горит",
+        "Ogonek", "Огонёк: как Лоза (только расстояние, только впереди), лампа мигает, экран горит",
         "VB_AB" + BS + "m" + BS + "vb_detector_oko_x.p3d",
         ["Lampa", "Ecran"],
         [ok.p("okoon_co.paa"), ok.p("okooff_co.paa")],
@@ -219,9 +249,9 @@ def main():
         [ok.p("oko.rvmat"), ok.p("oko_glass.rvmat"), ok.p("oko_lampalight.rvmat")])
     L.append("")
 
-    # Медведь: экран по силе сигнала, сектор направления — поворотом экрана (анимация ekran)
+    # Пеленг: экран по силе сигнала, сектор направления — поворотом экрана (анимация ekran)
     L += det_class(
-        "Medved", "Медведь: расстояние (картинка экрана) и направление по секторам 15° (поворот экрана)",
+        "Peleng", "Пеленг: расстояние (картинка экрана) и направление по секторам 15° (поворот экрана)",
         "VB_AB" + BS + "m" + BS + "vb_detector_medved_x.p3d",
         ["zbytek", "glass", "ekrangloss", "ekran", "display"],
         [md.p("medved_default_co.paa"), md.p("glass_defaultmaterial_ca.paa"),
@@ -239,9 +269,9 @@ def main():
     for i in range(1, 5):
         multi_anims += [("art%d_translate" % i, 1, 0), ("art%d_rotate" % i, 1, 0.5), ("art%d_hide" % i, 0.1, 1)]
 
-    # Сварог и Велес: до 4 меток на экране
+    # Сито и Невод: до 4 меток на экране
     L += det_class(
-        "Svarog", "Сварог: до 4 находок сразу, расстояние и направление к каждой — метками на экране",
+        "Sito", "Сито: до 4 находок сразу, расстояние и направление к каждой — метками на экране",
         "VB_AB" + BS + "m" + BS + "vb_detector_svarog_x.p3d",
         ["zbytek", "glass", "emiss", "ekran"],
         [sv.p("svarog_default_co.paa"), sv.p("glass_defaultmaterial_ca.paa"), sv.p("svarog_default_co.paa"),
@@ -257,7 +287,7 @@ def main():
     L.append("")
 
     L += det_class(
-        "Veles", "Велес: то же, что Сварог, другая модель (метки оранжевые)",
+        "Nevod", "Невод: то же, что Сито, другая модель (метки белые)",
         "VB_AB" + BS + "m" + BS + "vb_detector_veles_x.p3d",
         ["zbytek", "glass", "emiss", "ekran"],
         [vl.p("veles_default_co.paa"), vl.p("glass_defaultmaterial_ca.paa"), vl.p("veles_default_co.paa"),

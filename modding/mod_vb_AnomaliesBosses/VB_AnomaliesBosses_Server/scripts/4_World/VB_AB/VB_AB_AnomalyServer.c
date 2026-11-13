@@ -16,6 +16,7 @@ modded class VB_AB_AnomalyBase
 	protected float m_VB_DmgMult = 1;
 	protected float m_VB_PushRadius;
 	protected Object m_VB_Owner;				// босс, чьё это поле (его аномалии не бьют)
+	protected bool m_VB_Fading;					// поле хозяина гаснет
 	protected ref UniversalTemperatureSource m_VB_Heat;
 	protected ref UniversalTemperatureSourceSettings m_VB_HeatSettings;
 	protected ref UniversalTemperatureSourceLambdaConstant m_VB_HeatLambda;
@@ -59,6 +60,17 @@ modded class VB_AB_AnomalyBase
 	void VB_SetOwner(Object owner)
 	{
 		m_VB_Owner = owner;
+	}
+
+	// Поле хозяина гаснет (VB_AB_Field.Collapse): аномалия скоро исчезнет вместе с находками (детекторы, ТЗ 8.19).
+	void VB_SetFading(bool on)
+	{
+		m_VB_Fading = on;
+	}
+
+	bool VB_IsFading()
+	{
+		return m_VB_Fading;
 	}
 
 	Object VB_GetOwner()

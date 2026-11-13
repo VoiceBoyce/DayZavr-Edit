@@ -270,11 +270,11 @@ class VB_AB_Cfg
 	{
 		VB_AB_DetectorsFile f = new VB_AB_DetectorsFile;
 		f.Detectors = new array<ref VB_AB_DetectorCfg>;
-		f.Detectors.Insert(MakeDetector("VB_AB_Detector_Otklik", 1, 10, 2, "Own"));
-		f.Detectors.Insert(MakeDetector("VB_AB_Detector_Oko", 1, 12, 2.4, "Own"));
-		f.Detectors.Insert(MakeDetector("VB_AB_Detector_Medved", 2, 15, 3, "Own"));
-		f.Detectors.Insert(MakeDetector("VB_AB_Detector_Svarog", 3, 20, 4, "Own"));
-		f.Detectors.Insert(MakeDetector("VB_AB_Detector_Veles", 3, 25, 5, "Own"));
+		f.Detectors.Insert(MakeDetector("VB_AB_Detector_Loza", 1, 10, 2, "Own"));
+		f.Detectors.Insert(MakeDetector("VB_AB_Detector_Ogonek", 1, 12, 2.4, "Own"));
+		f.Detectors.Insert(MakeDetector("VB_AB_Detector_Peleng", 2, 15, 3, "Own"));
+		f.Detectors.Insert(MakeDetector("VB_AB_Detector_Sito", 3, 20, 4, "Own"));
+		f.Detectors.Insert(MakeDetector("VB_AB_Detector_Nevod", 3, 25, 5, "Own"));
 		// старые имена OOTS — теперь наши детекторы (config.cpp: наследники VB_AB_Detector_*), числа как у родителя
 		f.Detectors.Insert(MakeDetector("Anomaly_Detector_Otklik", 1, 10, 2, "Own"));
 		f.Detectors.Insert(MakeDetector("Anomaly_Detector_Medved", 2, 15, 3, "Own"));
@@ -296,9 +296,17 @@ class VB_AB_Cfg
 		return d;
 	}
 
-	// По умолчанию каждая аномалия мода даёт свой материал VB_AB_Mat_<имя> (1–3 шт., уровень детектора 1).
+	// По умолчанию каждая аномалия мода даёт свой материал VB_AB_Mat_<имя>. Прогрессия детекторов (ТЗ 8.21):
+	//  - обычная находка 1–3 шт.: у тяжёлых аномалий (HEAVY_TIER2) — с детектора уровня 2 (Пеленг), у остальных — с 1;
+	//  - крупная находка 4–6 шт. (в 2–3 раза больше), выпадает редко (вес BIG_WEIGHT против 100 и «ничего» 30,
+	//    ~10 % бросков), видна только детекторам уровня 3 (Сито, Невод).
+	static const string HEAVY_TIER2 = "Electra Voronka Lomka Roy FireShtorm Flash";
+	static const float BIG_WEIGHT = 14;
+
 	protected static VB_AB_AnomaliesFile DefaultAnomalies()
 	{
+		array<string> heavy = new array<string>;
+		HEAVY_TIER2.Split(" ", heavy);
 		VB_AB_AnomaliesFile f = new VB_AB_AnomaliesFile;
 		f.Anomalies = new array<ref VB_AB_AnomalyCfg>;
 		int n = GetGame().ConfigGetChildrenCount("CfgVehicles");
@@ -316,15 +324,25 @@ class VB_AB_Cfg
 			a.Loot.Rolls = 1;
 			a.Loot.Nothing = 30;
 			a.Loot.Items = new array<ref VB_AB_LootItem>;
+			string key = cls.Substring(14, cls.Length() - 14);		// после «VB_AB_Anomaly_»
+			string mat = "VB_AB_Mat_" + key;
+			int tier = 1;
+			if (heavy.Find(key) != -1)
+				tier = 2;
 			VB_AB_LootItem it = new VB_AB_LootItem;
-			string mat = cls;
-			mat.Replace("VB_AB_Anomaly_", "VB_AB_Mat_");
 			it.Classname = mat;
 			it.Chance = 100;
-			it.MinTier = 1;
+			it.MinTier = tier;
 			it.QuantityMin = 1;
 			it.QuantityMax = 3;
 			a.Loot.Items.Insert(it);
+			VB_AB_LootItem big = new VB_AB_LootItem;
+			big.Classname = mat;
+			big.Chance = BIG_WEIGHT;
+			big.MinTier = 3;
+			big.QuantityMin = 4;
+			big.QuantityMax = 6;
+			a.Loot.Items.Insert(big);
 			if (cls == "VB_AB_Anomaly_Atom")
 			{
 				a.MaxInField = 2;

@@ -84,6 +84,19 @@ GEOM_K = 0.9                        # коллизия — ящик чуть м�
 # низа модели): в позе «компас» (VB_AB_HandsAnim.c) предмет лежит на ладони. С началом координат в центре
 # 5-сантиметровый материал целиком уходил в кисть и в руке был не виден (2026-11-13).
 HAND_LIFT = 0.05
+# Сдвиг в плане к центру ладони (баг №8, 2026-11-13: «сдвинуть, чтобы прям от центра ладошки было»). Точка хвата
+# (кость RightHand_Dummy) в позе компаса стоит у запястья — замер костей кисти командой handprobe (VB_AB_Editor.c):
+# начала пястных костей (RightHandIndex1/Middle1) в 1–2 см от неё, костяшки (RightHandMiddle2) в 4,5 см по
+# (+0.033, +0.031) в осях движка. Вдоль пальцев (k = (0.73, 0.69)) — 4 см к костяшкам (3 см пользователю мало).
+# Поперёк (n = (-0.69, 0.73), к мизинцу: начало RightHandPinky1 в 5 см по n, указательного — на линии хвата) — 2 см:
+# камень лежал на стороне большого пальца («ещё левее» от первого лица). Итог 4k + 2n. Числа в осях ДВИЖКА:
+# у модели в игре X и Z противоположны осям p3d (boundingbox_min/max из object_inspect приходят с обратным знаком
+# X и Z), поэтому в Blender (X = p3d X, Y = p3d Z) сдвиг идёт со знаком минус.
+HAND_SHIFT_ENGINE = (0.015, 0.043)
+# Размер: модели в SIZE_K раз больше исходных форм, в инвентаре ITEM_SIZE клеток (пользователь, 2026-11-13:
+# «мелкие — в 2 раза больше, один предмет 4 слота»).
+SIZE_K = 2.0
+ITEM_SIZE = (2, 2)
 
 # лежание (CentralEconomy.c: RF_TOP = 2, RF_FRONT|RF_BACK = 17) и звук удара по форме
 RF = {"crystal": 2, "lump": 2, "pouch": 2, "shard": 17, "pebble": 17, "capsule": 17}
@@ -1243,7 +1256,7 @@ def lod_meshes(m):
     c = (P0.min(0) + P0.max(0)) / 2
     tx, ty = (m["idx"] % COLS) * TS, (m["idx"] // COLS) * TS
     for mm in meshes:
-        mm[0] = mm[0] - c
+        mm[0] = (mm[0] - c) * SIZE_K
         uv = mm[2]
         mm[2] = np.stack([(tx + PAD + uv[..., 0]) / AW, (ty + PAD + uv[..., 1]) / AH], -1)
     return meshes
@@ -1341,7 +1354,8 @@ def build_p3d(m):
     import py3d
     meshes = lod_meshes(m)
     lift = HAND_LIFT - meshes[0][0][:, 2].min()        # оси Blender: Z вверх (в DayZ это Y)
-    meshes = [(P + np.array([0.0, 0.0, lift]), T, UV) for P, T, UV in meshes]
+    shift = np.array([-HAND_SHIFT_ENGINE[0], -HAND_SHIFT_ENGINE[1], lift])   # см. HAND_SHIFT_ENGINE: знак минус
+    meshes = [(P + shift, T, UV) for P, T, UV in meshes]
     model = py3d.P3D()
     for (P, T, UV), res in zip(meshes, LOD_RES):
         model.lods.append(visual_lod(py3d, P, T, UV, res))
@@ -1409,7 +1423,7 @@ def write_hpp():
         "\tclass VB_AB_Mat_Base: Inventory_Base",
         "\t{",
         "\t\tscope = 0;",
-        "\t\titemSize[] = {1, 1};",
+        "\t\titemSize[] = {%d, %d};" % ITEM_SIZE,
         "\t\tweight = 50;",
         "\t\tcanBeSplit = 1;",
         "\t\tvarQuantityInit = 1;",

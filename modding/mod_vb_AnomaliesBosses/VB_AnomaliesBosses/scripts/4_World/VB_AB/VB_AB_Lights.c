@@ -136,7 +136,7 @@ class VB_AB_Light_HoleraActive extends PointLightBase
 	}
 };
 
-// Лампа детектора (Отклик, Око)
+// Лампа детектора (Лоза, Огонёк)
 class VB_AB_Light_DetectorLamp extends PointLightBase
 {
 	void VB_AB_Light_DetectorLamp()
@@ -148,8 +148,17 @@ class VB_AB_Light_DetectorLamp extends PointLightBase
 		EnableSpecular(true);
 		SetBrightnessTo(0.5);
 		SetFadeOutTime(0.15);
-		SetAmbientColor(0.0, 0.5, 0.9);
-		SetDiffuseColor(0.0, 0.5, 0.9);
+		VB_SetColor(LOZA);
+	}
+
+	// цвет лампы под ретекстур (ТЗ 2.2): Лоза — янтарь, Огонёк — зелёный
+	static const vector LOZA = "1.0 0.55 0.05";
+	static const vector OGONEK = "0.15 1.0 0.25";
+
+	void VB_SetColor(vector c)
+	{
+		SetAmbientColor(c[0], c[1], c[2]);
+		SetDiffuseColor(c[0], c[1], c[2]);
 	}
 
 	void VB_SetIntensity(float percent)

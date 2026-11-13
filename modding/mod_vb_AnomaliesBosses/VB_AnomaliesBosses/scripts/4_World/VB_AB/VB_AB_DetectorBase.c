@@ -2,7 +2,7 @@
 // Пока детектор включён и в руках, сервер на каждом такте менеджера энергии ищет ближайшую разрешённую ему
 // находку и выставляет синхронизированное расстояние m_VB_Range (серверный мод VB_AnomaliesBosses_Server,
 // VB_AB_DetectorServer.c). Клиент по m_VB_Range пищит и светит.
-// Здесь база и Отклик; Око, Медведь, Сварог и Велес — в VB_AB_Detectors2.c, чужие детекторы — VB_AB_GenericDetectors.c.
+// Здесь база и Лоза; Огонёк, Пеленг, Сито и Невод — в VB_AB_Detectors2.c, чужие детекторы — VB_AB_GenericDetectors.c.
 
 class VB_AB_DetectorBase extends ItemBase
 {
@@ -11,21 +11,34 @@ class VB_AB_DetectorBase extends ItemBase
 	static const int R_MID = 2;
 	static const int R_CLOSE = 3;
 	static const int RPC_FOUND = 0x56414201;	// «VAB» 01: звук появления находки у клиентов
-	// Направление на экранах (Медведь, Сварог, Велес): фаза анимации 0..1 = от -90° (слева) до +90° (справа)
+	// Направление на экранах (Пеленг, Сито, Невод): фаза анимации 0..1 = от -90° (слева) до +90° (справа)
 	// от взгляда игрока. Если в игре стрелка или метка показывает зеркально — поставить true.
 	static const bool DIR_MIRROR = false;
 
+	// Подсказка, когда в секторе пусто, а находка есть сзади или сбоку (ТЗ 8.18, «холодно — горячо»)
+	static const int HINT_NONE = 0;
+	static const int HINT_BEHIND = 1;		// сзади: редкий низкий писк
+	static const int HINT_SIDE = 2;			// сбоку, почти в секторе: писк чаще и выше
+	static const float BEHIND_DEG = 130;	// дальше этого угла от взгляда — «сзади»
+
 	protected int m_VB_Range;
 	protected int m_VB_RangeSeen = -1;
+	protected int m_VB_Hint;
+	protected bool m_VB_Fading;				// в радиусе есть находка гаснущего поля (ТЗ 8.19)
+	protected bool m_VB_Mute;				// тихий режим (ТЗ 8.20); после рестарта снова со звуком
+	protected bool m_VB_MuteSeen;
 	protected SoundOnVehicle m_VB_Snd;
 	protected bool m_VB_Powered;		// клиент: детектор работает (между OnWorkStart и OnWorkStop)
-	static const int IDLE_TICK_MS = 3000;
+	static const int IDLE_TICK_MS = 1500;
 	static const float LOW_BATTERY = 0.15;
 	protected int m_VB_TickN;
 
 	void VB_AB_DetectorBase()
 	{
 		RegisterNetSyncVariableInt("m_VB_Range", 0, 3);
+		RegisterNetSyncVariableInt("m_VB_Hint", 0, 2);
+		RegisterNetSyncVariableBool("m_VB_Fading");
+		RegisterNetSyncVariableBool("m_VB_Mute");
 	}
 
 	override void EEDelete(EntityAI parent)
@@ -34,6 +47,7 @@ class VB_AB_DetectorBase extends ItemBase
 		{
 			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_IdleTick);
 			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_Beep);
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_Pip);
 		}
 		VB_StopSound();
 		super.EEDelete(parent);
@@ -44,6 +58,22 @@ class VB_AB_DetectorBase extends ItemBase
 		super.SetActions();
 		AddAction(ActionTurnOnWhileInHands);
 		AddAction(ActionTurnOffWhileInHands);
+		AddAction(VB_AB_ActionDetectorMute);
+		AddAction(VB_AB_ActionDetectorUnmute);
+	}
+
+	bool VB_IsMuted()
+	{
+		return m_VB_Mute;
+	}
+
+	// Сервер (действие «Без звука» / «Со звуком»).
+	void VB_SetMuted(bool mute)
+	{
+		if (m_VB_Mute == mute)
+			return;
+		m_VB_Mute = mute;
+		SetSynchDirty();
 	}
 
 	override void OnWorkStart()
@@ -73,21 +103,47 @@ class VB_AB_DetectorBase extends ItemBase
 		}
 	}
 
-	// Видно, что детектор работает (ТЗ 8.16): пока сигнала нет, раз в IDLE_TICK_MS тихий щелчок; батарейка
-	// садится (меньше LOW_BATTERY) — раз в два щелчка двойной писк погромче.
+	// Такт раз в IDLE_TICK_MS (1,5 с), пока детектор работает. В тихом режиме молчит.
+	//  - находки гаснущего поля в радиусе (8.19): раз в 3 с тройной высокий «пип-пип-пип», поверх обычного писка;
+	//  - батарейка садится (8.16): раз в 6 с двойной писк погромче;
+	//  - сигнала в секторе нет (8.16, 8.18): находка сбоку — тихий высокий писк каждые 1,5 с, сзади — низкий раз
+	//    в 3 с, никого нет — тихий щелчок раз в 3 с («работает»).
 	protected void VB_IdleTick()
 	{
-		if (!m_VB_Powered)
+		if (!m_VB_Powered || m_VB_Mute)
 			return;
 		m_VB_TickN++;
-		if (VB_BatteryLow() && m_VB_TickN % 2 == 0)
+		bool even = m_VB_TickN % 2 == 0;
+		if (m_VB_Fading && even)
+		{
+			VB_Pip("vb_ab_detector_fade");
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_Pip, 140, false, "vb_ab_detector_fade");
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_Pip, 280, false, "vb_ab_detector_fade");
+			return;
+		}
+		if (VB_BatteryLow() && m_VB_TickN % 4 == 0)
 		{
 			VB_Beep(0.6);
 			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_Beep, 200, false, 0.6);
 			return;
 		}
-		if (m_VB_RangeSeen == R_NONE)
+		if (m_VB_RangeSeen != R_NONE)
+			return;
+		if (m_VB_Hint == HINT_SIDE)
+			VB_Pip("vb_ab_detector_side");
+		else if (!even)
+			return;
+		else if (m_VB_Hint == HINT_BEHIND)
+			VB_Pip("vb_ab_detector_behind");
+		else
 			VB_Beep(0.12);
+	}
+
+	// Короткий писк из CfgSounds (свой тон и громкость — config.cpp, vb_ab_detector_*).
+	protected void VB_Pip(string snd)
+	{
+		if (m_VB_Powered && !m_VB_Mute)
+			PlaySound(snd, 12);
 	}
 
 	protected void VB_Beep(float vol)
@@ -114,7 +170,7 @@ class VB_AB_DetectorBase extends ItemBase
 	override void OnVariablesSynchronized()
 	{
 		super.OnVariablesSynchronized();
-		if (m_VB_Range != m_VB_RangeSeen)
+		if (m_VB_Range != m_VB_RangeSeen || m_VB_Mute != m_VB_MuteSeen)
 			VB_ClientUpdate(m_VB_Range);
 	}
 
@@ -123,7 +179,8 @@ class VB_AB_DetectorBase extends ItemBase
 		super.OnRPC(sender, rpc_type, ctx);
 		if (rpc_type != RPC_FOUND || GetGame().IsDedicatedServer())
 			return;
-		VB_AB_FoundFx.OnRpc(ctx);		// звук, всплеск частиц и вспышка стихии (VB_AB_Materials.c)
+		// звук, всплеск частиц и вспышка стихии (VB_AB_Materials.c); в тихом режиме без звука
+		VB_AB_FoundFx.OnRpc(ctx, m_VB_Mute);
 	}
 
 	protected void VB_StopSound()
@@ -136,8 +193,12 @@ class VB_AB_DetectorBase extends ItemBase
 	protected void VB_ClientUpdate(int range)
 	{
 		m_VB_RangeSeen = range;
+		m_VB_MuteSeen = m_VB_Mute;
 		VB_StopSound();
-		switch (range)
+		int sndRange = range;
+		if (m_VB_Mute)
+			sndRange = R_NONE;		// тихий режим: экран и лампа работают, писка нет
+		switch (sndRange)
 		{
 			case R_FAR:
 				m_VB_Snd = PlaySoundLoop("vb_ab_detector_far", 10);
@@ -154,7 +215,7 @@ class VB_AB_DetectorBase extends ItemBase
 
 	protected void VB_UpdateVisuals(int range);
 
-	// Клиент: детектор включился или выключился (экраны, индикаторы). У Отклика ничего не делает.
+	// Клиент: детектор включился или выключился (экраны, индикаторы). У Лозы ничего не делает.
 	protected void VB_OnPower(bool on)
 	{
 	}
@@ -191,8 +252,8 @@ class VB_AB_DetectorBase extends ItemBase
 	}
 };
 
-// «Отклик»: только расстояние и только впереди. Лампа на крышке горит тем ярче, чем ближе находка.
-class VB_AB_Detector_Otklik extends VB_AB_DetectorBase
+// «Лоза»: только расстояние и только впереди. Лампа на крышке горит тем ярче, чем ближе находка.
+class VB_AB_Detector_Loza extends VB_AB_DetectorBase
 {
 	static const int LAMP = 1;		// индекс секции Lampa в hiddenSelections
 	static const string LAMP_OFF_TEX = "VB_AB\\t\\dox\\lampa_defaultl_empty_ca__________________________________________.paa";

@@ -36,6 +36,8 @@ class VB_AB_Mat_Base extends Inventory_Base
 	protected static int s_VB_Lights;
 	protected VB_AB_Light_MatGlow m_VB_Light;
 	protected Particle m_VB_Ptc;
+	// центр модели: она сдвинута в плане к центру ладони (HAND_SHIFT_ENGINE в tools/ab_materials.py, баг №8)
+	static const vector GLOW_POS = "0.015 0.15 0.043";
 
 	override void EEInit()
 	{
@@ -79,12 +81,13 @@ class VB_AB_Mat_Base extends Inventory_Base
 				id = ParticleList.GetParticleIDByName("vb_ab_aura_" + pal);
 			if (id > 0)
 			{
-				m_VB_Ptc = Particle.PlayOnObject(id, this, "0 0.1 0");
+				// материал 10–15 см (с 2026-11-13 вдвое крупнее): частицы чуть больше и выше
+				m_VB_Ptc = Particle.PlayOnObject(id, this, GLOW_POS);
 				if (m_VB_Ptc)
 				{
-					m_VB_Ptc.ScaleParticleParamFromOriginal(EmitorParam.SIZE, 0.35);
-					m_VB_Ptc.ScaleParticleParamFromOriginal(EmitorParam.VELOCITY, 0.3);
-					m_VB_Ptc.ScaleParticleParamFromOriginal(EmitorParam.BIRTH_RATE, 0.35);
+					m_VB_Ptc.ScaleParticleParamFromOriginal(EmitorParam.SIZE, 0.5);
+					m_VB_Ptc.ScaleParticleParamFromOriginal(EmitorParam.VELOCITY, 0.35);
+					m_VB_Ptc.ScaleParticleParamFromOriginal(EmitorParam.BIRTH_RATE, 0.45);
 				}
 			}
 		}
@@ -95,7 +98,7 @@ class VB_AB_Mat_Base extends Inventory_Base
 			{
 				s_VB_Lights++;
 				m_VB_Light.VB_SetColor(VB_GlowColor(GetType()));
-				m_VB_Light.AttachOnObject(this, "0 0.15 0");
+				m_VB_Light.AttachOnObject(this, GLOW_POS);
 			}
 		}
 	}
@@ -124,15 +127,19 @@ class VB_AB_Mat_Base extends Inventory_Base
 };
 
 // Находка: звук, всплеск частиц стихии и вспышка её цвета. pal пустая (не материал) — только звук.
+// silent — детектор в тихом режиме (ТЗ 8.20): без звука, всплеск и вспышка остаются.
 class VB_AB_FoundFx
 {
-	static void Play(vector pos, string pal, vector color)
+	static void Play(vector pos, string pal, vector color, bool silent = false)
 	{
 		if (!GetGame() || GetGame().IsDedicatedServer())
 			return;
-		EffectSound s = SEffectManager.PlaySound("VB_AB_Found_SoundSet", pos);
-		if (s)
-			s.SetAutodestroy(true);
+		if (!silent)
+		{
+			EffectSound s = SEffectManager.PlaySound("VB_AB_Found_SoundSet", pos);
+			if (s)
+				s.SetAutodestroy(true);
+		}
 		if (pal == "")
 			return;
 		int id = ParticleList.GetParticleIDByName("vb_ab_aura_" + pal + "_dissolve");
@@ -156,10 +163,10 @@ class VB_AB_FoundFx
 	}
 
 	// разбор RPC_FOUND: позиция, стихия, цвет (сервер — VB_AB_Finds.FoundParam)
-	static void OnRpc(ParamsReadContext ctx)
+	static void OnRpc(ParamsReadContext ctx, bool silent = false)
 	{
 		Param3<vector, string, vector> d = new Param3<vector, string, vector>(vector.Zero, "", vector.Zero);
 		if (ctx.Read(d))
-			Play(d.param1, d.param2, d.param3);
+			Play(d.param1, d.param2, d.param3, silent);
 	}
 };

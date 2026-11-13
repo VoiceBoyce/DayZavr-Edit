@@ -3,9 +3,9 @@
 //
 // Что синхронизируется:
 //   все     m_VB_Range 0..3      — сила сигнала ближайшей показанной находки;
-//   Медведь m_VB_Dir 0..12       — сектор направления по 15°: 0 — нет, 6 — прямо, 1 — слева, 11 — справа;
-//   Сварог,
-//   Велес   m_VB_Slot1..4 0..740 — метки на экране: 0 — пусто, иначе 1 + шаг_расстояния * 37 + шаг_угла.
+//   Пеленг  m_VB_Dir 0..12       — сектор направления по 15°: 0 — нет, 6 — прямо, 1 — слева, 11 — справа;
+//   Сито,
+//   Невод   m_VB_Slot1..4 0..740 — метки на экране: 0 — пусто, иначе 1 + шаг_расстояния * 37 + шаг_угла.
 
 modded class VB_AB_DetectorBase
 {
@@ -25,41 +25,77 @@ modded class VB_AB_DetectorBase
 
 
 	// Ближайшая разрешённая находка в секторе: расстояние в m_VB_Range, ближе SpawnDistance — предмет.
-	// Сварог и Велес ведут до 4 находок сразу и переопределяют весь метод (VB_AB_Detectors2.c).
+	// В секторе пусто, а в радиусе что-то есть — подсказка «сзади / сбоку» (m_VB_Hint, ТЗ 8.18).
+	// В радиусе находка гаснущего поля — m_VB_Fading (ТЗ 8.19).
+	// Сито и Невод ведут до 4 находок сразу и переопределяют весь метод (VB_AB_DetectorMulti ниже).
 	protected void VB_ServerScan()
 	{
 		int range = R_NONE;
+		int hint = HINT_NONE;
+		bool fading = false;
 		VB_AB_Find shown;
 		PlayerBase p = PlayerBase.Cast(GetHierarchyRootPlayer());
 		if (p && p.IsAlive() && p.GetItemInHands() == this)
 		{
 			VB_AB_DetectorCfg cfg = VB_AB_Cfg.Get().GetDetector(GetType());
-			float dist;
-			VB_AB_Find f = VB_AB_Finds.Nearest(p.GetPosition(), cfg.Radius, GetType(), cfg.Tier, dist);
-			if (f && VB_InSector(p, f.m_Pos))
+			array<VB_AB_Find> near = new array<VB_AB_Find>;
+			VB_AB_FindsEx.InRadius(p.GetPosition(), cfg.Radius, GetType(), cfg.Tier, near);
+			fading = VB_AB_FindsEx.AnyFading(near);
+			// ближайшая именно в секторе: ближняя сзади не должна заслонять дальнюю впереди
+			foreach (VB_AB_Find f : near)
 			{
+				if (VB_InSector(p, f.m_Pos))
+				{
+					shown = f;
+					break;
+				}
+			}
+			if (shown)
+			{
+				float dist = vector.Distance(p.GetPosition(), shown.m_Pos);
 				if (dist < cfg.SpawnDistance)
 				{
-					vector at = f.m_Pos;
-					EntityAI found = VB_AB_Finds.Materialize(f, p, GetType());
+					vector at = shown.m_Pos;
+					EntityAI found = VB_AB_Finds.Materialize(shown, p, GetType());
 					GetGame().RPCSingleParam(this, RPC_FOUND, VB_AB_Finds.FoundParam(found, at), true);
+					shown = null;
 				}
 				else
 				{
 					range = VB_RangeOf(dist, cfg.Radius);
-					shown = f;
 				}
 			}
+			else if (near.Count() > 0)
+			{
+				hint = VB_HintOf(p, near[0].m_Pos);
+			}
 		}
-		if (range != m_VB_Range)
-		{
-			m_VB_Range = range;
-			SetSynchDirty();
-		}
+		VB_SetSignal(range, hint, fading);
 		VB_OnScanned(p, shown);
 	}
 
-	// Для наследников: находка, о которой детектор сейчас сигналит (null — сигнала нет). Медведь берёт направление.
+	// Записать сигнал в синхронизируемые поля; true — что-то изменилось (SetSynchDirty уже вызван).
+	protected bool VB_SetSignal(int range, int hint, bool fading)
+	{
+		if (range == m_VB_Range && hint == m_VB_Hint && fading == m_VB_Fading)
+			return false;
+		m_VB_Range = range;
+		m_VB_Hint = hint;
+		m_VB_Fading = fading;
+		SetSynchDirty();
+		return true;
+	}
+
+	// Подсказка для находки вне сектора: сзади (дальше BEHIND_DEG от взгляда) или сбоку.
+	static int VB_HintOf(PlayerBase p, vector target)
+	{
+		float b = Math.AbsFloat(VB_Bearing(p, target));
+		if (b > BEHIND_DEG)
+			return HINT_BEHIND;
+		return HINT_SIDE;
+	}
+
+	// Для наследников: находка, о которой детектор сейчас сигналит (null — сигнала нет). Пеленг берёт направление.
 	protected void VB_OnScanned(PlayerBase p, VB_AB_Find shown)
 	{
 	}
@@ -67,11 +103,7 @@ modded class VB_AB_DetectorBase
 	// Детектор выключился: сбросить синхронизированный сигнал.
 	protected void VB_ServerReset()
 	{
-		if (m_VB_Range != R_NONE)
-		{
-			m_VB_Range = R_NONE;
-			SetSynchDirty();
-		}
+		VB_SetSignal(R_NONE, HINT_NONE, false);
 	}
 
 	// Сила сигнала по расстоянию: ближе 40 % радиуса — близко, ближе 60 % — средне, дальше — далеко.
@@ -123,8 +155,8 @@ modded class VB_AB_DetectorBase
 	}
 };
 
-// «Отклик»: только впереди
-modded class VB_AB_Detector_Otklik
+// «Лоза»: только впереди
+modded class VB_AB_Detector_Loza
 {
 	override protected bool VB_InSector(PlayerBase p, vector target)
 	{
@@ -142,6 +174,30 @@ class VB_AB_FindsEx extends VB_AB_Finds
 		if (!f || !s_Finds)
 			return false;
 		return s_Finds.Find(f) != -1;
+	}
+
+	// Запись гаснет вместе с полем: её аномалия уже гаснет или хозяин — закрывающееся поле (ТЗ 8.19).
+	static bool IsFading(VB_AB_Find f)
+	{
+		if (!f || !f.m_Owner)
+			return false;
+		VB_AB_AnomalyBase a = VB_AB_AnomalyBase.Cast(f.m_Owner);
+		if (a)
+			return a.VB_IsFading();
+		VB_AB_Field fl = VB_AB_Field.Cast(f.m_Owner);
+		if (fl)
+			return fl.IsClosing();
+		return false;
+	}
+
+	static bool AnyFading(array<VB_AB_Find> list)
+	{
+		foreach (VB_AB_Find f : list)
+		{
+			if (IsFading(f))
+				return true;
+		}
+		return false;
 	}
 
 	// Все разрешённые детектору записи ближе radius, от ближней к дальней.
@@ -169,8 +225,8 @@ class VB_AB_FindsEx extends VB_AB_Finds
 	}
 };
 
-// Око: только впереди
-modded class VB_AB_Detector_Oko
+// Огонёк: только впереди
+modded class VB_AB_Detector_Ogonek
 {
 
 	override protected bool VB_InSector(PlayerBase p, vector target)
@@ -179,8 +235,8 @@ modded class VB_AB_Detector_Oko
 	}
 };
 
-// Медведь: направление по секторам (как OOTS: только впереди, ±75°, шаг 15°)
-modded class VB_AB_Detector_Medved
+// Пеленг: направление по секторам (как OOTS: только впереди, ±75°, шаг 15°)
+modded class VB_AB_Detector_Peleng
 {
 
 	override protected bool VB_InSector(PlayerBase p, vector target)
@@ -218,7 +274,7 @@ modded class VB_AB_Detector_Medved
 	}
 };
 
-// Сварог и Велес: до 4 находок сразу. Находка, попавшая в слот, держит его, пока не станет предметом, не уйдёт
+// Сито и Невод: до 4 находок сразу. Находка, попавшая в слот, держит его, пока не станет предметом, не уйдёт
 // за радиус или из полукруга впереди (±90°); свободные слоты занимают ближайшие.
 modded class VB_AB_DetectorMulti
 {
@@ -240,6 +296,10 @@ modded class VB_AB_DetectorMulti
 		bool dirty = false;
 		VB_AB_Find f;
 		vector at;
+		array<VB_AB_Find> cand = new array<VB_AB_Find>;		// слабые ссылки: после шага 3 часть записей уже удалена
+		if (active)
+			VB_AB_FindsEx.InRadius(p.GetPosition(), cfg.Radius, GetType(), cfg.Tier, cand);
+		bool fading = VB_AB_FindsEx.AnyFading(cand);			// до шага 3, пока все записи живы
 
 		// 1. отпустить слоты: находки нет, она за радиусом или не впереди
 		for (i = 0; i < SLOTS; i++)
@@ -254,8 +314,6 @@ modded class VB_AB_DetectorMulti
 		// 2. занять свободные слоты ближайшими новыми находками
 		if (active && VB_FreeSlot() != -1)
 		{
-			array<VB_AB_Find> cand = new array<VB_AB_Find>;
-			VB_AB_FindsEx.InRadius(p.GetPosition(), cfg.Radius, GetType(), cfg.Tier, cand);
 			foreach (VB_AB_Find c : cand)
 			{
 				free = VB_FreeSlot();
@@ -297,14 +355,13 @@ modded class VB_AB_DetectorMulti
 		}
 
 		int range = R_NONE;
+		int hint = HINT_NONE;
 		if (nearest >= 0)
 			range = VB_RangeOf(nearest, cfg.Radius);
-		if (range != m_VB_Range)
-		{
-			m_VB_Range = range;
-			dirty = true;
-		}
-		if (dirty)
+		else if (cand.Count() > 0 && VB_AB_FindsEx.Has(cand[0]))		// Has сверяет указатель, не разыменовывая
+			hint = VB_HintOf(p, cand[0].m_Pos);		// метки пусты: всё, что в радиусе, — сбоку или сзади
+		// VB_SetSignal сам вызывает SetSynchDirty, если сигнал изменился
+		if (!VB_SetSignal(range, hint, fading) && dirty)
 			SetSynchDirty();
 	}
 

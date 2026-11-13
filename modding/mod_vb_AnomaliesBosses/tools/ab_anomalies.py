@@ -274,7 +274,7 @@ def port_detector_assets(sounds):
     base = [f for f in os.listdir(out) if f.startswith("oklik_lampa") and f.endswith(".rvmat") and "_on" not in f]
     if base:
         txt = open(os.path.join(out, base[0]), encoding="utf-8").read()
-        txt = re.sub(r"emmisive\[\]=\{[^}]*\};", "emmisive[]={0.3,0.8,2.5,1};", txt)
+        txt = re.sub(r"emmisive\[\]=\{[^}]*\};", "emmisive[]={2.5,1.1,0,1};", txt)   # янтарь (ретекстур Лозы)
         with open(os.path.join(out, "oklik_lampa_on.rvmat"), "w", encoding="utf-8", newline="\r\n") as f:
             f.write(txt.replace("\r\n", "\n"))
     sys.path.insert(0, HERE)

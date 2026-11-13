@@ -1,17 +1,17 @@
-// Детекторы Око, Медведь, Сварог и Велес (ТЗ 2.2). Модели и материалы OOTS, логика своя, по образцу OOTS.
+// Детекторы Огонёк, Пеленг, Сито и Невод (ТЗ 2.2). Модели и материалы OOTS, логика своя, по образцу OOTS.
 // Пути текстур и материалов экранов/ламп скрипт берёт из config.cpp (cfg/detectors.hpp, генератор tools/ab_detectors.py).
 // Здесь только экраны, лампы и метки; что и как ищется — в серверном моде (VB_AB_DetectorServer.c).
 //
 // Что синхронизируется:
-//   все     m_VB_Range 0..3      — сила сигнала ближайшей показанной находки (писк, как у Отклика);
-//   Медведь m_VB_Dir 0..12       — сектор направления по 15°: 0 — нет, 6 — прямо, 1 — слева, 11 — справа;
-//   Сварог,
-//   Велес   m_VB_Slot1..4 0..740 — метки на экране: 0 — пусто, иначе 1 + шаг_расстояния * 37 + шаг_угла.
+//   все     m_VB_Range 0..3      — сила сигнала ближайшей показанной находки (писк, как у Лозы);
+//   Пеленг  m_VB_Dir 0..12       — сектор направления по 15°: 0 — нет, 6 — прямо, 1 — слева, 11 — справа;
+//   Сито,
+//   Невод   m_VB_Slot1..4 0..740 — метки на экране: 0 — пусто, иначе 1 + шаг_расстояния * 37 + шаг_угла.
 
-// ==================================================================== Око
-// Как Отклик: только расстояние и только впереди (±75°). Своя индикация: экран светится, пока детектор
+// ==================================================================== Огонёк
+// Как Лоза: только расстояние и только впереди (±75°). Своя индикация: экран светится, пока детектор
 // включён; лампа мигает тем чаще и ярче, чем ближе находка (1,2 с / 0,65 с / 0,22 с).
-class VB_AB_Detector_Oko extends VB_AB_DetectorBase
+class VB_AB_Detector_Ogonek extends VB_AB_DetectorBase
 {
 	static const int BLINK_ON_MS = 100;		// сколько горит лампа за одну вспышку
 
@@ -59,7 +59,10 @@ class VB_AB_Detector_Oko extends VB_AB_DetectorBase
 		{
 			m_VB_Lamp = VB_AB_Light_DetectorLamp.Cast(ScriptedLightBase.CreateLight(VB_AB_Light_DetectorLamp, "0 0 0", 0.05));
 			if (m_VB_Lamp)
+			{
+				m_VB_Lamp.VB_SetColor(VB_AB_Light_DetectorLamp.OGONEK);
 				m_VB_Lamp.AttachOnMemoryPoint(this, "light", "");
+			}
 		}
 		if (m_VB_Lamp)
 		{
@@ -97,11 +100,11 @@ class VB_AB_Detector_Oko extends VB_AB_DetectorBase
 	}
 };
 
-// ==================================================================== Медведь
+// ==================================================================== Пеленг
 // Расстояние и направление по секторам (как OOTS: только впереди, ±75°, шаг 15°). Экран показывает силу
 // сигнала (пусто / слабый / средний / сильный), поворот экрана (анимация ekran, 0..180°) — сектор.
 // В OOTS фаза считалась целочисленным делением и всегда была 0, стрелка не двигалась; здесь — по сектору.
-class VB_AB_Detector_Medved extends VB_AB_DetectorBase
+class VB_AB_Detector_Peleng extends VB_AB_DetectorBase
 {
 	static const int SECTOR_DEG = 15;
 	static const int SECTORS = 12;			// фаза поворота = сектор / 12
@@ -110,7 +113,7 @@ class VB_AB_Detector_Medved extends VB_AB_DetectorBase
 	protected int m_VB_DirSeen = -1;
 	protected ref TStringArray m_VB_RangeTex;	// клиент: vbABScreenRangeTex из config.cpp
 
-	void VB_AB_Detector_Medved()
+	void VB_AB_Detector_Peleng()
 	{
 		RegisterNetSyncVariableInt("m_VB_Dir", 0, SECTORS);
 	}
@@ -183,7 +186,7 @@ class VB_AB_Detector_Medved extends VB_AB_DetectorBase
 	}
 };
 
-// ==================================================================== Сварог и Велес
+// ==================================================================== Сито и Невод
 // До 4 находок сразу: метки art1..art4 на экране. Как в OOTS: находка, попавшая в слот, держит его, пока не
 // станет предметом, не уйдёт за радиус или из полукруга впереди (±90°); свободные слоты занимают ближайшие.
 // Метка: art*_translate — расстояние (0 — край радиуса, 1 — SpawnDistance), art*_rotate — угол (0 — -90°,
@@ -303,12 +306,12 @@ class VB_AB_DetectorMulti extends VB_AB_DetectorBase
 	}
 };
 
-// Сварог: метки зелёные.
-class VB_AB_Detector_Svarog extends VB_AB_DetectorMulti
+// Сито: метки голубые (цвет в модели, ab_detectors.py MODEL_PATCHES).
+class VB_AB_Detector_Sito extends VB_AB_DetectorMulti
 {
 };
 
-// Велес: то же, другая модель, метки оранжевые.
-class VB_AB_Detector_Veles extends VB_AB_DetectorMulti
+// Невод: то же, другая модель, метки белые.
+class VB_AB_Detector_Nevod extends VB_AB_DetectorMulti
 {
 };

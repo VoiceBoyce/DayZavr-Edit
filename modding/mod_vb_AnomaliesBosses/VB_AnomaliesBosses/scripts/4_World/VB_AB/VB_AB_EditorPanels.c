@@ -62,6 +62,7 @@ class VB_AB_EditorPanels
 	protected int m_VB_SeenPoint = -1;
 	protected string m_VB_SeenBoss;
 	protected string m_VB_SeenPick;
+	protected string m_VB_SeenCounts;	// числа «(N)» у боссов: на скольких точках стоит
 	protected vector m_VB_FillPos;
 	protected bool m_VB_Filling;
 
@@ -243,6 +244,10 @@ class VB_AB_EditorPanels
 			VB_FillFilters();
 			VB_FillBosses();
 		}
+		else if (m_VB_SeenCounts != VB_CountsSig(VB_BossCounts()))
+		{
+			VB_FillBosses();	// поставили/удалили точку или босса в ней — обновить числа в скобках
+		}
 		VB_FillPoints();
 		if (m_VB_ActiveStep)
 			m_VB_ActiveStep.SetValue(Math.Max(1, VB_AB_EditorClient.s_ActivePerRestart), false);
@@ -317,10 +322,14 @@ class VB_AB_EditorPanels
 
 		VB_AB_Editor ed = VB_AB_Editor.VB_Get();
 		m_VB_SeenPick = ed.m_VB_Pick;
+		map<string, int> counts = VB_BossCounts();
+		m_VB_SeenCounts = VB_CountsSig(counts);
 		m_VB_Filling = true;
 		m_VB_BossList.Clear();
 		VB_AB_EdBoss b;
 		int r;
+		int n;
+		string title;
 		for (int i = 0; i < VB_AB_EditorClient.s_Bosses.Count(); i++)
 		{
 			b = VB_AB_EditorClient.s_Bosses[i];
@@ -328,12 +337,52 @@ class VB_AB_EditorPanels
 				continue;
 			if (m_VB_FilterPal != "" && b.Palette != m_VB_FilterPal)
 				continue;
-			r = m_VB_BossList.AddRow(b.Name, VB_BossSub(b), i);
+			// «Болотный Энт (2)» — на скольких точках уже стоит этот босс
+			n = 0;
+			counts.Find(b.Id, n);
+			title = b.Name + " (" + n.ToString() + ")";
+			r = m_VB_BossList.AddRow(title, VB_BossSub(b), i);
 			m_VB_BossList.SetRowIcon(r, "star", VB_TierHue(b.Tier));
 			if (b.Id == ed.m_VB_Pick)
 				m_VB_BossList.Select(r, false);
 		}
 		m_VB_Filling = false;
+	}
+
+	// сколько точек с каждым боссом (id → число точек; босс дважды в одной точке считается один раз)
+	static map<string, int> VB_BossCounts()
+	{
+		map<string, int> counts = new map<string, int>;
+		TStringArray seen = new TStringArray;
+		int n;
+		foreach (VB_AB_EdPoint p : VB_AB_EditorClient.s_Points)
+		{
+			seen.Clear();
+			foreach (string id : p.Bosses)
+			{
+				if (seen.Find(id) >= 0)
+					continue;
+				seen.Insert(id);
+				n = 0;
+				counts.Find(id, n);
+				counts.Set(id, n + 1);
+			}
+		}
+		return counts;
+	}
+
+	// подпись чисел по порядку каталога: сменилась — список боссов перерисовать
+	static string VB_CountsSig(map<string, int> counts)
+	{
+		string sig = "";
+		int n;
+		foreach (VB_AB_EdBoss b : VB_AB_EditorClient.s_Bosses)
+		{
+			n = 0;
+			counts.Find(b.Id, n);
+			sig += n.ToString() + ",";
+		}
+		return sig;
 	}
 
 	// выбор босса сбросился после установки — снять выделение в списке
@@ -403,14 +452,22 @@ class VB_AB_EditorPanels
 		int r;
 		string title;
 		string sub;
+		string subFmt = Tr("STR_VB_AB_Ed_RowSub");
+		string moreFmt = Tr("STR_VB_AB_Ed_RowMore");
+		int distM;
+		string weightText;
 		foreach (VB_AB_EdPoint p : sorted)
 		{
 			title = "#" + p.Id.ToString();
 			if (p.Bosses.Count() > 0)
 				title += " · " + VB_AB_EditorClient.VB_BossName(p.Bosses[0]);
 			if (p.Bosses.Count() > 1)
-				title += string.Format(Tr("STR_VB_AB_Ed_RowMore"), p.Bosses.Count() - 1);
-			sub = string.Format(Tr("STR_VB_AB_Ed_RowSub"), Math.Round(VB_AB_Editor.VB_DistXZ(p.Position, ppos)), VB_Num(p.Weight));
+				title += string.Format(moreFmt, p.Bosses.Count() - 1);
+			// сначала в локальные: Math.Round в аргументе затирался вызовом Math.Round внутри VB_Num,
+			// и вместо расстояния выводился вес (баг №6: у всех точек «1 м»)
+			distM = Math.Round(VB_AB_Editor.VB_DistXZ(p.Position, ppos));
+			weightText = VB_Num(p.Weight);
+			sub = string.Format(subFmt, distM, weightText);
 			r = m_VB_PointList.AddRow(title, sub, p.Id);
 			VB_PointRowLook(r, p);
 			if (p.Id == ed.m_VB_CurPoint)
@@ -519,7 +576,12 @@ class VB_AB_EditorPanels
 		vector ppos = vector.Zero;
 		if (g_Game.GetPlayer())
 			ppos = g_Game.GetPlayer().GetPosition();
-		string sub = string.Format(Tr("STR_VB_AB_Ed_PointSub"), Math.Round(VB_AB_Editor.VB_DistXZ(p.Position, ppos)), Math.Round(p.Position[0]), Math.Round(p.Position[2]));
+		// каждое число в свою переменную до Format (три Math.Round в одном списке аргументов затирают друг друга)
+		string subFmt = Tr("STR_VB_AB_Ed_PointSub");
+		int distM = Math.Round(VB_AB_Editor.VB_DistXZ(p.Position, ppos));
+		int px = Math.Round(p.Position[0]);
+		int pz = Math.Round(p.Position[2]);
+		string sub = string.Format(subFmt, distM, px, pz);
 		m_VB_PtSub.SetText(sub);
 		m_VB_Enabled.SetOn(p.Disabled == 0, false, false);
 		m_VB_Weight.SetValue(p.Weight, false);
@@ -566,9 +628,16 @@ class VB_AB_EditorPanels
 		{
 			if (alive)
 			{
-				liveText = string.Format(Tr("STR_VB_AB_Ed_LiveAwake"), VB_AB_EditorClient.VB_BossName(lv.BossId), Math.Round(lv.Hp * 100));
+				string awakeFmt = Tr("STR_VB_AB_Ed_LiveAwake");
+				string awakeName = VB_AB_EditorClient.VB_BossName(lv.BossId);
+				int hpPct = Math.Round(lv.Hp * 100);
+				liveText = string.Format(awakeFmt, awakeName, hpPct);
 				if (field)
-					fieldText = string.Format(Tr("STR_VB_AB_Ed_FieldOpenLine"), VB_AB_EdText.Count(lv.Anomalies, "STR_VB_AB_Ed_Anom1", "STR_VB_AB_Ed_Anom2", "STR_VB_AB_Ed_Anom5"));
+				{
+					string fieldFmt = Tr("STR_VB_AB_Ed_FieldOpenLine");
+					string anomText = VB_AB_EdText.Count(lv.Anomalies, "STR_VB_AB_Ed_Anom1", "STR_VB_AB_Ed_Anom2", "STR_VB_AB_Ed_Anom5");
+					fieldText = string.Format(fieldFmt, anomText);
+				}
 				else
 					fieldText = Tr("STR_VB_AB_Ed_FieldClosedLine");
 			}

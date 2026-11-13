@@ -30,14 +30,19 @@ def cls(name):
 
 # Модели (ТЗ 4.4): поле, потолок аномалий, поводок, здоровье, масштаб
 # MeleeMul — во сколько раз удар босса сильнее удара обычного зомби (здоровье и кровь; шок как у зомби)
+# Scale — босс заметно крупнее обычного мутанта той же модели (пользователь, 2026-11-13: +0,2 ко всем).
+# Обычный Энт MSFZ сам бывает ×1,6–2,0 (MSFZ_Scale), поэтому босс-Энт 2,2.
+# Health (пользователь, 2026-11-13: «самый слабый босс от 4000»): лестница по ролям и уровню — уровень 1 = 4000,
+# уровень 2 = 5000–7000, уровень 3 = 8000–12000. Попадание M4 в корпус снимает ~135: Ричару ~30 попаданий,
+# Мутаволку ~45, красному Мозготрясу ~60, Энту ~90; со щитом внутри своей аномалии — больше.
 MODELS = {
-    "Ricar":        dict(Radius=15, MaxAnomalies=8,  LeashRadius=30, Health=2500, Scale=1.0, MeleeMul=1.5),
-    "MutaWolf":     dict(Radius=35, MaxAnomalies=12, LeashRadius=50, Health=3500, Scale=1.1, MeleeMul=2.0),
-    "Tenevnik":     dict(Radius=25, MaxAnomalies=12, LeashRadius=40, Health=3000, Scale=1.0, MeleeMul=1.5),
-    "Shum":         dict(Radius=20, MaxAnomalies=14, LeashRadius=30, Health=3500, Scale=1.0, MeleeMul=1.5),
-    "MozgoTras":    dict(Radius=25, MaxAnomalies=12, LeashRadius=40, Health=4500, Scale=1.1, MeleeMul=2.5),
-    "MozgoTrasRed": dict(Radius=18, MaxAnomalies=12, LeashRadius=30, Health=5000, Scale=1.1, MeleeMul=2.5),
-    "Ent":          dict(Radius=30, MaxAnomalies=16, LeashRadius=45, Health=8000, Scale=1.6, MeleeMul=3.0),
+    "Ricar":        dict(Radius=15, MaxAnomalies=8,  LeashRadius=30, Health=4000,  Scale=1.2, MeleeMul=1.5),
+    "MutaWolf":     dict(Radius=35, MaxAnomalies=12, LeashRadius=50, Health=6000,  Scale=1.3, MeleeMul=2.0),
+    "Tenevnik":     dict(Radius=25, MaxAnomalies=12, LeashRadius=40, Health=5000,  Scale=1.2, MeleeMul=1.5),
+    "Shum":         dict(Radius=20, MaxAnomalies=14, LeashRadius=30, Health=5500,  Scale=1.2, MeleeMul=1.5),
+    "MozgoTras":    dict(Radius=25, MaxAnomalies=12, LeashRadius=40, Health=7000,  Scale=1.3, MeleeMul=2.5),
+    "MozgoTrasRed": dict(Radius=18, MaxAnomalies=12, LeashRadius=30, Health=8000,  Scale=1.3, MeleeMul=2.5),
+    "Ent":          dict(Radius=30, MaxAnomalies=16, LeashRadius=45, Health=12000, Scale=2.2, MeleeMul=3.0),
 }
 
 # «Вырезать трофей», секунд (ТЗ 2.7)

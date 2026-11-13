@@ -6,12 +6,16 @@
 // без известного босса — оранжевый, остальные — белый. Призрак — розовый, вокруг него радиус поля выбранного босса.
 // На месте призрака стоит голограмма — локальная бочка (ECE_LOCAL, есть только у админа) с ванильным материалом
 // голограммы постройки: по линиям было непонятно, куда встанет босс (пользователь, 2026-11-13).
+// Такая же бочка стоит на каждой поставленной точке ближе PROP_DIST, в цвете маркера: линии Shape — отладочная
+// графика, в обычном клиенте пользователь их не видел, и после установки было непонятно, где точка (баг №1).
+// У бочек нет физического тела (dBodyDestroy): сквозь них можно ходить.
 // «Показать радиусы» у выбранной точки: поле — оранжевое, поводок — жёлтое (оба от центра поля, если оно раскрыто),
 // пробуждение — синее (от точки).
 
 class VB_AB_EditorMarks
 {
 	static const float MARK_DIST = 2500.0;		// м: дальше маркеры не рисуем
+	static const float PROP_DIST = 1000.0;		// м: дальше бочки точек не ставим
 	static const float REBUILD_MOVE = 100.0;	// м: камера ушла — пересобрать (новые точки в MARK_DIST)
 	static const float BEAM = 20.0;				// м: луч маркера
 	static const float BEAM_SEL = 40.0;
@@ -39,9 +43,18 @@ class VB_AB_EditorMarks
 	protected string m_VB_Key;
 	protected vector m_VB_BuiltAt;
 	protected EntityAI m_VB_GhostObj;
-	protected float m_VB_GhostLift;				// от низа модели до её начала координат
+	protected ref map<int, EntityAI> m_VB_PointObjs = new map<int, EntityAI>;	// бочки поставленных точек
+	protected static float s_VB_Lift = -1;		// от низа бочки до её начала координат
 
+	// Редактор закрыт: убрать всё.
 	void VB_Clear()
+	{
+		VB_ClearShapes();
+		VB_GhostObjHide();
+		VB_PropsClear();
+	}
+
+	protected void VB_ClearShapes()
 	{
 		foreach (Shape s : m_VB_Shapes)
 		{
@@ -50,7 +63,6 @@ class VB_AB_EditorMarks
 		}
 		m_VB_Shapes.Clear();
 		m_VB_Key = "";
-		VB_GhostObjHide();
 	}
 
 	void VB_Tick(VB_AB_Editor ed)
@@ -61,7 +73,7 @@ class VB_AB_EditorMarks
 		key += "|" + ed.m_VB_ShowRadii.ToString() + "|" + ed.m_VB_CurBoss + "|" + VB_AB_EditorClient.s_WakeRadius.ToString();
 		if (key != m_VB_Key || VB_AB_Editor.VB_DistXZ(cam, m_VB_BuiltAt) > REBUILD_MOVE)
 		{
-			VB_Clear();
+			VB_ClearShapes();		// бочки точек не пересоздаются, а сверяются в VB_Build (без мигания)
 			m_VB_Key = key;
 			m_VB_BuiltAt = cam;
 			VB_Build(ed, cam);
@@ -74,9 +86,12 @@ class VB_AB_EditorMarks
 		int target = ed.VB_TargetId();
 		int color;
 		float beam;
+		float dist;
+		array<int> keep = new array<int>;
 		foreach (VB_AB_EdPoint p : VB_AB_EditorClient.s_Points)
 		{
-			if (VB_AB_Editor.VB_DistXZ(p.Position, cam) > MARK_DIST)
+			dist = VB_AB_Editor.VB_DistXZ(p.Position, cam);
+			if (dist > MARK_DIST)
 				continue;
 			color = VB_PointColor(p);
 			beam = BEAM;
@@ -91,9 +106,89 @@ class VB_AB_EditorMarks
 			VB_Ring(p.Position, MARK_R, color, false, false);
 			if (p.Id == ed.m_VB_CurPoint)
 				VB_Ring(p.Position, MARK_R * 1.8, color, false, false);
+			if (dist <= PROP_DIST && VB_PropShow(p.Id, p.Position, color))
+				keep.Insert(p.Id);
 		}
+		VB_PropsKeepOnly(keep);
 		if (ed.m_VB_ShowRadii)
 			VB_Radii(ed);
+	}
+
+	// Бочка на точке id: создать, если нет, поставить низом на точку и покрасить. false — не создалась.
+	protected bool VB_PropShow(int id, vector pos, int color)
+	{
+		EntityAI obj = m_VB_PointObjs.Get(id);
+		if (!obj)
+		{
+			obj = VB_MakeBarrel(pos);
+			if (!obj)
+				return false;
+			m_VB_PointObjs.Set(id, obj);
+		}
+		obj.SetPosition(pos + Vector(0, s_VB_Lift, 0));
+		obj.SetObjectTexture(0, VB_HoloTex(color));
+		return true;
+	}
+
+	// убрать бочки точек, которых больше нет или которые дальше PROP_DIST
+	protected void VB_PropsKeepOnly(array<int> keep)
+	{
+		array<int> ids = m_VB_PointObjs.GetKeyArray();
+		foreach (int id : ids)
+		{
+			if (keep.Find(id) != -1)
+				continue;
+			EntityAI obj = m_VB_PointObjs.Get(id);
+			if (obj)
+				g_Game.ObjectDelete(obj);
+			m_VB_PointObjs.Remove(id);
+		}
+	}
+
+	protected void VB_PropsClear()
+	{
+		foreach (int id, EntityAI obj : m_VB_PointObjs)
+		{
+			if (obj)
+				g_Game.ObjectDelete(obj);
+		}
+		m_VB_PointObjs.Clear();
+	}
+
+	// Локальная бочка-голограмма: только у этого клиента, без физики (сквозь неё можно ходить), без действий.
+	protected EntityAI VB_MakeBarrel(vector pos)
+	{
+		EntityAI obj = EntityAI.Cast(g_Game.CreateObjectEx(GHOST_CLASS, pos, ECE_LOCAL));
+		if (!obj)
+			return null;
+		obj.SetObjectTexture(0, GHOST_TEX);
+		obj.SetObjectMaterial(0, GHOST_MAT);
+		if (s_VB_Lift < 0)
+		{
+			s_VB_Lift = 0;
+			vector box[2];
+			if (obj.GetCollisionBox(box))
+				s_VB_Lift = -box[0][1];
+		}
+		if (dBodyIsSet(obj))
+			dBodyDestroy(obj);
+		ItemBase ib = ItemBase.Cast(obj);
+		if (ib)
+			ib.SetIsHologram(true);
+		return obj;
+	}
+
+	// цвет маркера 0xAARRGGBB -> процедурная текстура голограммы с прозрачностью 0,75
+	static string VB_HoloTex(int c)
+	{
+		// сдвиги только в int-выражениях (как ванильный LerpARGB): в float-выражении компилятор не знает «>>»
+		int ri = c >> 16 & 0xFF;
+		int gi = c >> 8 & 0xFF;
+		int bi = c & 0xFF;
+		float r = ri / 255.0;
+		float g = gi / 255.0;
+		float b = bi / 255.0;
+		return "#(argb,8,8,3)color(" + r.ToString() + "," + g.ToString() + "," + b.ToString() + ",0.75,ca)";
 	}
 
 	protected int VB_PointColor(VB_AB_EdPoint p)
@@ -154,16 +249,11 @@ class VB_AB_EditorMarks
 	{
 		if (!m_VB_GhostObj)
 		{
-			m_VB_GhostObj = EntityAI.Cast(g_Game.CreateObjectEx(GHOST_CLASS, pos, ECE_LOCAL));
+			m_VB_GhostObj = VB_MakeBarrel(pos);
 			if (!m_VB_GhostObj)
 				return;
-			m_VB_GhostObj.SetObjectTexture(0, GHOST_TEX);
-			m_VB_GhostObj.SetObjectMaterial(0, GHOST_MAT);
-			vector box[2];
-			if (m_VB_GhostObj.GetCollisionBox(box))
-				m_VB_GhostLift = -box[0][1];
 		}
-		m_VB_GhostObj.SetPosition(pos + Vector(0, m_VB_GhostLift, 0));
+		m_VB_GhostObj.SetPosition(pos + Vector(0, s_VB_Lift, 0));
 	}
 
 	protected void VB_GhostObjHide()

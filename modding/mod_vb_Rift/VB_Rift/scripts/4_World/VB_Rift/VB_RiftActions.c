@@ -124,7 +124,7 @@ class VB_ActionCollectSpores : ActionContinuousBase
 		if (!heart || !heart.VB_TakeSporesServer())
 			return;
 
-		VB_RiftItems.VB_GiveServer(action_data.m_Player, SPORES_TYPE);
+		VB_RiftItems.VB_DropAtFeet(action_data.m_Player, SPORES_TYPE);
 		if (action_data.m_MainItem)
 			action_data.m_MainItem.AddQuantity(-1);
 	}
@@ -217,7 +217,7 @@ class VB_ActionBreakRiftRoot : ActionContinuousBase
 
 		root.VB_BreakServer();
 		VB_RiftItems.VB_NoiseAt(root.GetPosition(), NOISE, NOISE_TIME);
-		VB_RiftItems.VB_GiveServer(action_data.m_Player, ROOT_TYPE);
+		VB_RiftItems.VB_DropAtFeet(action_data.m_Player, ROOT_TYPE);
 		if (action_data.m_MainItem)
 			action_data.m_MainItem.AddHealth("", "", -TOOL_DAMAGE);
 	}

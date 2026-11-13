@@ -696,7 +696,7 @@ class VB_AB_Editor
 // Команды: open, exit, wait <мс>, pick <босс|->, height <м>, place <x> <z>, placeh <x> <y> <z>,
 // sel <id>, selnear <x> <z>, tp, del [id], delat <x> <z>, enable, disable, weight <w>, addboss <босс>,
 // rmboss <босс>, boss <босс|->, summon [босс], openfield, reroll, despawn, radii on|off, reload,
-// active <n>, filter <модель|*> <палитра|*>, dump.
+// active <n>, filter <модель|*> <палитра|*>, dump, handprobe (кости кисти в осях предмета в руках).
 // Всё пишет в скриптовый лог клиента «[VB_AB] тест редактора: ...».
 class VB_AB_EditorTest
 {
@@ -847,8 +847,44 @@ class VB_AB_EditorTest
 		}
 		else if (cmd == "dump")
 			VB_Dump(ed);
+		else if (cmd == "handprobe")
+			VB_HandProbe();
 		else
 			Print("[VB_AB] тест редактора: неизвестная команда " + cmd);
+	}
+
+	// Замер хвата (баг №8): кости правой кисти в координатах предмета в руках — где ладонь относительно начала
+	// координат модели. По нему подобран HAND_SHIFT_ENGINE в tools/ab_materials.py. «RightHand» и «RightHandRing1»
+	// у игрока не находятся; RightHandIndex1/Middle1 — начала пястных костей (у запястья), Middle2 — костяшка
+	protected void VB_HandProbe()
+	{
+		PlayerBase player = PlayerBase.Cast(g_Game.GetPlayer());
+		if (!player)
+			return;
+		EntityAI item = player.GetHumanInventory().GetEntityInHands();
+		if (!item)
+		{
+			Print("[VB_AB] HANDPROBE: руки пусты");
+			return;
+		}
+		TStringArray bones = {"RightHand", "RightHand_Dummy", "RightHandThumb1", "RightHandIndex1", "RightHandMiddle1", "RightHandRing1", "RightHandPinky1", "RightHandMiddle2", "RightForeArm"};
+		int idx;
+		vector ws;
+		vector loc;
+		foreach (string bone : bones)
+		{
+			idx = player.GetBoneIndexByName(bone);
+			if (idx < 0)
+			{
+				Print("[VB_AB] HANDPROBE " + item.GetType() + " " + bone + " нет");
+				continue;
+			}
+			ws = player.GetBonePositionWS(idx);
+			loc = item.WorldToModel(ws);
+			Print("[VB_AB] HANDPROBE " + item.GetType() + " " + bone + " " + loc[0].ToString() + " " + loc[1].ToString() + " " + loc[2].ToString());
+		}
+		vector up = item.VectorToLocal("0 1 0");
+		Print("[VB_AB] HANDPROBE " + item.GetType() + " мировой верх в осях предмета " + up[0].ToString() + " " + up[1].ToString() + " " + up[2].ToString());
 	}
 
 	protected void VB_Dump(VB_AB_Editor ed)

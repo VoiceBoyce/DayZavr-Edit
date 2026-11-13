@@ -1,34 +1,42 @@
 {
-    "STR_VB_AB_Detector_Oko": [
-        "Детектор «Око»",
-        "Detector \"Oko\""
+    "STR_VB_AB_Detector_Loza": [
+        "Детектор «Лоза» ДА-1",
+        "Detector \"Loza\" DA-1"
     ],
-    "STR_VB_AB_Detector_Oko_Desc": [
-        "Детектор аномальных находок. Ищет только впереди (±75°) в радиусе 12 м и подсказывает расстояние: чем ближе находка, тем чаще писк и мигание лампы. Ближе 2,4 м находка превращается в предмет. Пока сигнала нет, тихо щёлкает раз в 3 с — значит, работает; двойной писк — садится батарейка. Работает от батарейки 9 В.",
-        "A detector of anomalous finds. Searches only ahead (±75°) within 12 m and tells the distance: the closer the find, the faster it beeps and the lamp blinks. Within 2.4 m the find turns into an item. While there is no signal it clicks softly every 3 s, so you know it works; a double beep means the battery is running low. Runs on a 9V battery."
+    "STR_VB_AB_Detector_Loza_Desc": [
+        "Простейший детектор аномальных находок: ищет впереди (±75°) до 10 м, лампа горит ярче, чем ближе находка. Чувствует материалы лёгких и средних аномалий. Тихий писк — находка сбоку или сзади, тройной — поле гаснет. Батарейка 9 В.",
+        "The simplest detector of anomalous finds: searches ahead (±75°) up to 10 m, the lamp glows brighter as the find gets closer. Senses materials of light and medium anomalies. A soft beep means a find to the side or behind, a triple beep means the field is fading. 9V battery."
     ],
-    "STR_VB_AB_Detector_Medved": [
-        "Детектор «Медведь»",
-        "Detector \"Medved\""
+    "STR_VB_AB_Detector_Ogonek": [
+        "Детектор «Огонёк» ДА-2",
+        "Detector \"Ogonyok\" DA-2"
     ],
-    "STR_VB_AB_Detector_Medved_Desc": [
-        "Детектор аномальных находок с направлением. Ищет впереди (±75°) в радиусе 15 м: сектор на экране поворачивается к находке, экран показывает силу сигнала. Ближе 3 м находка превращается в предмет. Пока сигнала нет, тихо щёлкает раз в 3 с — значит, работает; двойной писк — садится батарейка. Работает от батарейки 9 В.",
-        "A direction-finding detector of anomalous finds. Searches ahead (±75°) within 15 m: the sector on the screen turns toward the find and the screen shows the signal strength. Within 3 m the find turns into an item. While there is no signal it clicks softly every 3 s, so you know it works; a double beep means the battery is running low. Runs on a 9V battery."
+    "STR_VB_AB_Detector_Ogonek_Desc": [
+        "Детектор-маячок: ищет впереди (±75°) до 12 м, лампа мигает чаще, чем ближе находка. Чувствует материалы лёгких и средних аномалий. Тихий писк — находка сбоку или сзади, тройной — поле гаснет. Батарейка 9 В.",
+        "A beacon detector: searches ahead (±75°) up to 12 m, the lamp blinks faster as the find gets closer. Senses materials of light and medium anomalies. A soft beep means a find to the side or behind, a triple beep means the field is fading. 9V battery."
     ],
-    "STR_VB_AB_Detector_Svarog": [
-        "Детектор «Сварог»",
-        "Detector \"Svarog\""
+    "STR_VB_AB_Detector_Peleng": [
+        "Детектор «Пеленг» ДА-3",
+        "Detector \"Peleng\" DA-3"
     ],
-    "STR_VB_AB_Detector_Svarog_Desc": [
-        "Детектор аномальных находок на четыре цели. Видит до четырёх находок сразу в полукруге впереди (±90°) в радиусе 20 м: метка на экране показывает направление и расстояние до каждой. Ближе 4 м находка превращается в предмет. Пока сигнала нет, тихо щёлкает раз в 3 с — значит, работает; двойной писк — садится батарейка. Работает от батарейки 9 В.",
-        "A four-target detector of anomalous finds. Sees up to four finds at once in the half-circle ahead (±90°) within 20 m: a mark on the screen shows the direction and distance to each. Within 4 m the find turns into an item. While there is no signal it clicks softly every 3 s, so you know it works; a double beep means the battery is running low. Runs on a 9V battery."
+    "STR_VB_AB_Detector_Peleng_Desc": [
+        "Детектор со стрелкой: ищет впереди (±75°) до 15 м, стрелка на экране указывает на находку. Чувствует материалы всех аномалий. Тихий писк — находка сбоку или сзади, тройной — поле гаснет. Батарейка 9 В.",
+        "A direction-finding detector: searches ahead (±75°) up to 15 m, the arrow on the screen points to the find. Senses materials of all anomalies. A soft beep means a find to the side or behind, a triple beep means the field is fading. 9V battery."
     ],
-    "STR_VB_AB_Detector_Veles": [
-        "Детектор «Велес»",
-        "Detector \"Veles\""
+    "STR_VB_AB_Detector_Sito": [
+        "Детектор «Сито» ДА-4",
+        "Detector \"Sito\" DA-4"
     ],
-    "STR_VB_AB_Detector_Veles_Desc": [
-        "Самый дальнобойный детектор аномальных находок. Видит до четырёх находок сразу в полукруге впереди (±90°) в радиусе 25 м, метки на экране — направление и расстояние. Ближе 5 м находка превращается в предмет. Пока сигнала нет, тихо щёлкает раз в 3 с — значит, работает; двойной писк — садится батарейка. Работает от батарейки 9 В.",
-        "The longest-range detector of anomalous finds. Sees up to four finds at once in the half-circle ahead (±90°) within 25 m; marks on the screen show direction and distance. Within 5 m the find turns into an item. While there is no signal it clicks softly every 3 s, so you know it works; a double beep means the battery is running low. Runs on a 9V battery."
+    "STR_VB_AB_Detector_Sito_Desc": [
+        "Детектор на четыре цели: до 4 находок сразу в полукруге впереди (±90°) до 20 м, метки на экране показывают направление и расстояние. Чувствует все материалы и редкие крупные находки. Тихий писк — находка сбоку или сзади, тройной — поле гаснет. Батарейка 9 В.",
+        "A four-target detector: up to 4 finds at once in the half-circle ahead (±90°) up to 20 m, screen marks show direction and distance. Senses all materials and the rare large finds. A soft beep means a find to the side or behind, a triple beep means the field is fading. 9V battery."
+    ],
+    "STR_VB_AB_Detector_Nevod": [
+        "Детектор «Невод» ДА-5",
+        "Detector \"Nevod\" DA-5"
+    ],
+    "STR_VB_AB_Detector_Nevod_Desc": [
+        "Самый дальнобойный детектор: до 4 находок сразу в полукруге впереди (±90°) до 25 м. Чувствует все материалы и редкие крупные находки. Тихий писк — находка сбоку или сзади, тройной — поле гаснет. Батарейка 9 В.",
+        "The longest-range detector: up to 4 finds at once in the half-circle ahead (±90°) up to 25 m. Senses all materials and the rare large finds. A soft beep means a find to the side or behind, a triple beep means the field is fading. 9V battery."
     ]
 }

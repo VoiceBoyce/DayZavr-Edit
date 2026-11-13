@@ -8,7 +8,7 @@
 	class VB_AB_Mat_Base: Inventory_Base
 	{
 		scope = 0;
-		itemSize[] = {1, 1};
+		itemSize[] = {2, 2};
 		weight = 50;
 		canBeSplit = 1;
 		varQuantityInit = 1;

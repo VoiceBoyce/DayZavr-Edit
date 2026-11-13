@@ -468,8 +468,10 @@ class VB_AB_Field
 		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(SpawnNext);
 		foreach (VB_AB_AnomalyBase a : m_Anomalies)
 		{
-			if (a)
-				GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(DeleteAnomaly, Math.RandomFloat(0.3, 1.0) * overSec * 1000, false, a);
+			if (!a)
+				continue;
+			a.VB_SetFading(true);		// детекторы меняют писк: находки скоро пропадут (ТЗ 8.19)
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(DeleteAnomaly, Math.RandomFloat(0.3, 1.0) * overSec * 1000, false, a);
 		}
 		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(FinishCollapse, overSec * 1000 + 500, false);
 	}

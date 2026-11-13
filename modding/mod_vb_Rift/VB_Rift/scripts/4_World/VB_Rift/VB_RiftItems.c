@@ -84,17 +84,18 @@ class VB_RiftItems
 		return item.GetPosition();
 	}
 
-	// сервер: предмет игроку в инвентарь, а если места нет — к ногам
-	static EntityAI VB_GiveServer(PlayerBase player, string type)
+	// Сервер: добыча (сбор спор, отлом корня, разделка сердца) — на землю у ног игрока, не в инвентарь.
+	// Правило пользователя для всех наших модов (2026-11-13): игрок видит добычу и сам решает, брать ли её.
+	static EntityAI VB_DropAtFeet(PlayerBase player, string type)
 	{
-		EntityAI item = player.GetHumanInventory().CreateInInventory(type);
-		string where = "в инвентарь";
-		if (!item)
-		{
-			item = EntityAI.Cast(g_Game.CreateObjectEx(type, player.GetPosition(), ECE_PLACE_ON_SURFACE));
-			where = "на землю";
-		}
-		Print("[VB_Rift] " + VB_Who(player) + " получил " + type + " " + where);
+		vector p = player.GetPosition();
+		float a = Math.RandomFloat(0, Math.PI2);
+		float d = Math.RandomFloat(0.2, 0.6);
+		p[0] = p[0] + Math.Cos(a) * d;
+		p[2] = p[2] + Math.Sin(a) * d;
+		p[1] = g_Game.SurfaceY(p[0], p[2]);
+		EntityAI item = EntityAI.Cast(g_Game.CreateObjectEx(type, p, ECE_PLACE_ON_SURFACE));
+		Print("[VB_Rift] " + VB_Who(player) + " добыл " + type + " (на землю у ног)");
 		return item;
 	}
 

@@ -85,6 +85,28 @@ class CfgPatches
 class CfgSounds
 {
 #include "cfg\sounds.hpp"
+	// подсказки детектора (VB_AB_DetectorBase.VB_IdleTick): sound[] = {файл, громкость, тон, дальность}
+	// «сзади» — тихий низкий (ТЗ 8.18)
+	class vb_ab_detector_behind
+	{
+		name = "vb_ab_detector_behind";
+		sound[] = {"VB_AB\s\d\detector_middle", 0.35, 0.75, 8};
+		titles[] = {};
+	};
+	// «сбоку», почти в секторе — чуть громче и выше (ТЗ 8.18)
+	class vb_ab_detector_side
+	{
+		name = "vb_ab_detector_side";
+		sound[] = {"VB_AB\s\d\detector_middle", 0.45, 1.0, 8};
+		titles[] = {};
+	};
+	// поле гаснет, находки скоро пропадут — высокий короткий, тройкой (ТЗ 8.19)
+	class vb_ab_detector_fade
+	{
+		name = "vb_ab_detector_fade";
+		sound[] = {"VB_AB\s\d\detector_middle", 0.7, 1.45, 12};
+		titles[] = {};
+	};
 };
 
 class CfgSoundShaders
@@ -295,11 +317,11 @@ class CfgVehicles
 			};
 		};
 	};
-	class VB_AB_Detector_Otklik: VB_AB_DetectorBase
+	class VB_AB_Detector_Loza: VB_AB_DetectorBase
 	{
 		scope = 2;
-		displayName = "$STR_VB_AB_Detector_Otklik";
-		descriptionShort = "$STR_VB_AB_Detector_Otklik_Desc";
+		displayName = "$STR_VB_AB_Detector_Loza";
+		descriptionShort = "$STR_VB_AB_Detector_Loza_Desc";
 		model = "VB_AB\m\vb_detector_otklik_x.p3d";
 		hiddenSelections[] = {"zbytek", "Lampa", "glass"};
 		hiddenSelectionsTextures[] =
@@ -341,15 +363,15 @@ class CfgVehicles
 	// берётся скрипт родителя). В сохранении OOTS-детекторы ничего своего не пишут (OnStoreSave у них ванильный),
 	// слот батарейки тот же (BatteryD), поэтому батарейка и заряд переживают переход.
 	// Вместе с @OTTS_AnomVibrosPsi мод не ставить: классы с этими именами есть и там.
-	class Anomaly_Detector_Otklik: VB_AB_Detector_Otklik
+	class Anomaly_Detector_Otklik: VB_AB_Detector_Loza
 	{
 		scope = 2;
 	};
-	class Anomaly_Detector_Medved: VB_AB_Detector_Medved
+	class Anomaly_Detector_Medved: VB_AB_Detector_Peleng
 	{
 		scope = 2;
 	};
-	class Anomaly_Detector_Svarog: VB_AB_Detector_Svarog
+	class Anomaly_Detector_Svarog: VB_AB_Detector_Sito
 	{
 		scope = 2;
 	};

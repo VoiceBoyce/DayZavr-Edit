@@ -1,13 +1,13 @@
 // СГЕНЕРИРОВАНО tools/ab_detectors.py — руками не править
-// Детекторы Око, Медведь, Сварог, Велес (ТЗ 2.2). Модели OOTS с заменёнными путями, логика в
+// Детекторы Огонёк, Пеленг, Сито, Невод (ТЗ 2.2). Модели OOTS с заменёнными путями, логика в
 // scripts/4_World/VB_AB/VB_AB_Detectors2.c. Поля vbAB<часть>Sel — индекс секции в hiddenSelections,
 // vbAB<часть><On|Off>Tex/Mat — что кладёт на неё скрипт во включённом и выключенном состоянии.
-	// Око: как Отклик (только расстояние, только впереди), лампа мигает, экран горит
-	class VB_AB_Detector_Oko: VB_AB_DetectorBase
+	// Огонёк: как Лоза (только расстояние, только впереди), лампа мигает, экран горит
+	class VB_AB_Detector_Ogonek: VB_AB_DetectorBase
 	{
 		scope = 2;
-		displayName = "$STR_VB_AB_Detector_Oko";
-		descriptionShort = "$STR_VB_AB_Detector_Oko_Desc";
+		displayName = "$STR_VB_AB_Detector_Ogonek";
+		descriptionShort = "$STR_VB_AB_Detector_Ogonek_Desc";
 		model = "VB_AB\m\vb_detector_oko_x.p3d";
 		hiddenSelections[] = {"Lampa", "Ecran"};
 		hiddenSelectionsTextures[] =
@@ -48,12 +48,12 @@
 		};
 	};
 
-	// Медведь: расстояние (картинка экрана) и направление по секторам 15° (поворот экрана)
-	class VB_AB_Detector_Medved: VB_AB_DetectorBase
+	// Пеленг: расстояние (картинка экрана) и направление по секторам 15° (поворот экрана)
+	class VB_AB_Detector_Peleng: VB_AB_DetectorBase
 	{
 		scope = 2;
-		displayName = "$STR_VB_AB_Detector_Medved";
-		descriptionShort = "$STR_VB_AB_Detector_Medved_Desc";
+		displayName = "$STR_VB_AB_Detector_Peleng";
+		descriptionShort = "$STR_VB_AB_Detector_Peleng_Desc";
 		model = "VB_AB\m\vb_detector_medved_x.p3d";
 		hiddenSelections[] = {"zbytek", "glass", "ekrangloss", "ekran", "display"};
 		hiddenSelectionsTextures[] =
@@ -112,12 +112,12 @@
 		};
 	};
 
-	// Сварог: до 4 находок сразу, расстояние и направление к каждой — метками на экране
-	class VB_AB_Detector_Svarog: VB_AB_DetectorBase
+	// Сито: до 4 находок сразу, расстояние и направление к каждой — метками на экране
+	class VB_AB_Detector_Sito: VB_AB_DetectorBase
 	{
 		scope = 2;
-		displayName = "$STR_VB_AB_Detector_Svarog";
-		descriptionShort = "$STR_VB_AB_Detector_Svarog_Desc";
+		displayName = "$STR_VB_AB_Detector_Sito";
+		descriptionShort = "$STR_VB_AB_Detector_Sito_Desc";
 		model = "VB_AB\m\vb_detector_svarog_x.p3d";
 		hiddenSelections[] = {"zbytek", "glass", "emiss", "ekran"};
 		hiddenSelectionsTextures[] =
@@ -237,12 +237,12 @@
 		};
 	};
 
-	// Велес: то же, что Сварог, другая модель (метки оранжевые)
-	class VB_AB_Detector_Veles: VB_AB_DetectorBase
+	// Невод: то же, что Сито, другая модель (метки белые)
+	class VB_AB_Detector_Nevod: VB_AB_DetectorBase
 	{
 		scope = 2;
-		displayName = "$STR_VB_AB_Detector_Veles";
-		descriptionShort = "$STR_VB_AB_Detector_Veles_Desc";
+		displayName = "$STR_VB_AB_Detector_Nevod";
+		descriptionShort = "$STR_VB_AB_Detector_Nevod_Desc";
 		model = "VB_AB\m\vb_detector_veles_x.p3d";
 		hiddenSelections[] = {"zbytek", "glass", "emiss", "ekran"};
 		hiddenSelectionsTextures[] =

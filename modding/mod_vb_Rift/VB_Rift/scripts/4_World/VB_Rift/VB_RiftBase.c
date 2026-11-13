@@ -549,11 +549,7 @@ class VB_RiftHeart extends VB_RiftBase
 		Print("[VB_Rift] сердце вырезано: " + who + " в " + GetPosition().ToString());
 
 		if (cutter)
-		{
-			EntityAI chunk = cutter.GetHumanInventory().CreateInInventory(CHUNK_TYPE);
-			if (!chunk)
-				g_Game.CreateObjectEx(CHUNK_TYPE, cutter.GetPosition(), ECE_PLACE_ON_SURFACE);
-		}
+			VB_RiftItems.VB_DropAtFeet(cutter, CHUNK_TYPE);		// на землю у ног, не в инвентарь
 
 		VB_RiftStrike.VB_BroadcastServer();
 		VB_RiftNests.VB_OnHeartKilled(this);	// прорастание нового гнезда, если включено в настройках
