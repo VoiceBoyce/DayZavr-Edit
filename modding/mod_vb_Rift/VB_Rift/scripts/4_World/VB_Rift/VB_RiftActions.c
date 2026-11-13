@@ -1,7 +1,8 @@
-// «Вырезать сердце» Изнанки: долгое действие присев, любым инструментом со свежеванием
-// (ножи, топоры, тесаки, пилы, штыки), только ночью. Как только начал — Изнанка в 50 м бьётся чаще, вылезает волна
-// зомби (VB_RiftHorde). Сердце гаснет до рестарта, вырезавший получает «Сердце Изнанки»,
-// у всех игроков бьёт красная молния (VB_RiftStrike).
+// Действия у гнезда Изнанки (клиентская часть: классы, условия, регистрация).
+// «Вырезать сердце» — долгое действие присев, любым инструментом со свежеванием (ножи, топоры, тесаки, пилы, штыки),
+// только ночью. Как только начал — Изнанка в 50 м бьётся чаще, вылезает волна зомби. Сердце гаснет до рестарта,
+// у ног вырезавшего падает «Сердце Изнанки», у всех игроков бьёт красная молния.
+// Что делает сервер (тела OnStartServer/OnFinishProgressServer, поиск корня) — VB_Rift_Server, VB_RiftActionsServer.c.
 
 class VB_ActionCutRiftHeartCB : ActionContinuousBaseCB
 {
@@ -41,32 +42,9 @@ class VB_ActionCutRiftHeart : ActionContinuousBase
 
 		return VB_RiftPulse.VB_NightFactor() >= VB_RiftPulse.NIGHT_FULL_ABOVE;
 	}
-
-	// начал резать: Изнанка вокруг просыпается и бьётся чаще, первая попытка поднимает волну зомби
-	override void OnStartServer(ActionData action_data)
-	{
-		super.OnStartServer(action_data);
-
-		VB_RiftHeart heart = VB_RiftHeart.Cast(action_data.m_Target.GetObject());
-		if (heart)
-			heart.VB_DisturbServer(action_data.m_Player);
-	}
-
-	override void OnFinishProgressServer(ActionData action_data)
-	{
-		super.OnFinishProgressServer(action_data);
-
-		VB_RiftHeart heart = VB_RiftHeart.Cast(action_data.m_Target.GetObject());
-		if (!heart || heart.VB_IsDead())
-			return;
-
-		heart.VB_KillServer(action_data.m_Player);
-		if (action_data.m_MainItem)
-			action_data.m_MainItem.AddHealth("", "", -TOOL_DAMAGE);
-	}
 }
 
-// «Собрать споры»: тряпка в руках, у живого сердца ночью. Тряпка уходит (из пачки — одна), игрок получает
+// «Собрать споры»: тряпка в руках, у живого сердца ночью. Тряпка уходит (из пачки — одна), у ног падают
 // «Споры Изнанки». У сердца SPORES_MAX порций за рестарт. Сердце просыпается и шумит, но волны зомби нет.
 
 class VB_ActionCollectSporesCB : ActionContinuousBaseCB
@@ -106,33 +84,11 @@ class VB_ActionCollectSpores : ActionContinuousBase
 
 		return VB_RiftPulse.VB_NightFactor() >= VB_RiftPulse.NIGHT_FULL_ABOVE;
 	}
-
-	override void OnStartServer(ActionData action_data)
-	{
-		super.OnStartServer(action_data);
-
-		VB_RiftHeart heart = VB_RiftHeart.Cast(action_data.m_Target.GetObject());
-		if (heart)
-			heart.VB_DisturbServer(action_data.m_Player, false);
-	}
-
-	override void OnFinishProgressServer(ActionData action_data)
-	{
-		super.OnFinishProgressServer(action_data);
-
-		VB_RiftHeart heart = VB_RiftHeart.Cast(action_data.m_Target.GetObject());
-		if (!heart || !heart.VB_TakeSporesServer())
-			return;
-
-		VB_RiftItems.VB_DropAtFeet(action_data.m_Player, SPORES_TYPE);
-		if (action_data.m_MainItem)
-			action_data.m_MainItem.AddQuantity(-1);
-	}
 }
 
 // «Отломить корень»: нож (всё, чем свежуют) в руках, рядом живой корень гнезда (VB_RiftRoots_*), ночью.
 // Цель — ближайший корень в ROOT_DIST от игрока, не прицел: «ручка» корня у самой земли, в неё трудно навести.
-// Корень гаснет до рестарта (второй раз с него не взять), игрок получает «Корень Изнанки», рядом шум.
+// Корень гаснет до рестарта (второй раз с него не взять), у ног падает «Корень Изнанки», рядом шум.
 
 class VB_ActionBreakRiftRootCB : ActionContinuousBaseCB
 {
@@ -172,54 +128,17 @@ class VB_ActionBreakRiftRoot : ActionContinuousBase
 		return false;
 	}
 
+	// Клиент ищет живой корень по пульсу (связь корня с сердцем знает только он). На сервере пульса нет:
+	// здесь только ночь, корень рядом ищет серверный мод (VB_RiftActionsServer.c).
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item)
 	{
 		if (VB_RiftPulse.VB_NightFactor() < VB_RiftPulse.NIGHT_FULL_ABOVE)
 			return false;
 
 		if (g_Game.IsDedicatedServer())
-			return VB_FindRootServer(player.GetPosition()) != null;
+			return true;
 
 		return VB_RiftPulse.VB_NearestLiveRoot(player.GetPosition(), ROOT_DIST) != null;
-	}
-
-	// сервер: пульса тут нет, ищем корень среди объектов рядом (связь с сердцем знает только клиент)
-	static VB_RiftBase VB_FindRootServer(vector pos)
-	{
-		array<Object> objs = new array<Object>;
-		g_Game.GetObjectsAtPosition(pos, ROOT_DIST + 0.5, objs, null);
-		VB_RiftBase best;
-		VB_RiftBase root;
-		float bestSq = (ROOT_DIST + 0.5) * (ROOT_DIST + 0.5);
-		float dSq;
-		foreach (Object o : objs)
-		{
-			root = VB_RiftBase.Cast(o);
-			if (!root || !root.VB_IsGroundRoot() || root.VB_IsBroken())
-				continue;
-			dSq = vector.DistanceSq(pos, root.GetPosition());
-			if (dSq < bestSq)
-			{
-				bestSq = dSq;
-				best = root;
-			}
-		}
-		return best;
-	}
-
-	override void OnFinishProgressServer(ActionData action_data)
-	{
-		super.OnFinishProgressServer(action_data);
-
-		VB_RiftBase root = VB_FindRootServer(action_data.m_Player.GetPosition());
-		if (!root)
-			return;
-
-		root.VB_BreakServer();
-		VB_RiftItems.VB_NoiseAt(root.GetPosition(), NOISE, NOISE_TIME);
-		VB_RiftItems.VB_DropAtFeet(action_data.m_Player, ROOT_TYPE);
-		if (action_data.m_MainItem)
-			action_data.m_MainItem.AddHealth("", "", -TOOL_DAMAGE);
 	}
 }
 

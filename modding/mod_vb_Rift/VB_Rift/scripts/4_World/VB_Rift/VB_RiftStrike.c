@@ -2,6 +2,8 @@
 // у каждого клиента бьёт в случайной точке в 250–1200 м от него: модель разряда из VB_RiftSky на долю секунды,
 // красная вспышка, гром с задержкой по расстоянию — как настоящая гроза. Сколько сердец, столько ударов.
 // Нет VB_RiftSky.pbo — модели разряда нет, остаются вспышка и гром.
+// Здесь клиентская часть и номер RPC (нужен обеим сторонам); рассылку делает сервер —
+// VB_RiftStrike.VB_BroadcastServer в VB_Rift_Server (VB_RiftWorldServer.c).
 
 class VB_RiftStrikeLight extends PointLightBase
 {
@@ -32,19 +34,6 @@ class VB_RiftStrike
 	protected vector m_VB_Pos;
 	protected bool m_VB_Heavy;
 	protected bool m_VB_Done;
-
-	// сервер: каждому игроку по удару
-	static void VB_BroadcastServer()
-	{
-		array<Man> players = new array<Man>;
-		g_Game.GetPlayers(players);
-		foreach (Man someone : players)
-		{
-			PlayerBase pb = PlayerBase.Cast(someone);
-			if (pb && pb.GetIdentity())
-				g_Game.RPCSingleParam(pb, RPC_STRIKE, new Param1<bool>(true), true, pb.GetIdentity());
-		}
-	}
 
 	// клиент: удар где-то вокруг center
 	static void VB_Start(vector center)

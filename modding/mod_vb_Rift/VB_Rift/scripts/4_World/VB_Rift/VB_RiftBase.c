@@ -4,6 +4,9 @@
 // Удар = переключение материалов свечения (4 уровня, vb_rift_*_0..3.rvmat); ритм задаёт VB_RiftPulse.
 // Траву выжигают локальные срезатели: ClutterCutter6x6 в точке cut_big (у сердца)
 // и ClutterCutter2x2 по точкам cut_1..cut_N из Memory LOD (вдоль корней и трещин).
+// Здесь только то, что нужно клиенту (и обеим сторонам): синхронизируемые переменные, внешний вид, пульс.
+// Всё, что делает только сервер (отлом корня, вырезание, волна, тепло, споры), — в серверном моде
+// VB_Rift_Server (VB_RiftWorldServer.c, modded class).
 
 class VB_RiftBase extends House
 {
@@ -56,16 +59,6 @@ class VB_RiftBase extends House
 	bool VB_IsBroken()
 	{
 		return m_VB_Broken;
-	}
-
-	// сервер: от корня отломили кусок — гаснет до рестарта (гнёзда каждый рестарт ставятся заново)
-	void VB_BreakServer()
-	{
-		if (m_VB_Broken)
-			return;
-
-		m_VB_Broken = true;
-		SetSynchDirty();
 	}
 
 	// сердце вырезано (только у VB_RiftHeart)
@@ -356,6 +349,12 @@ class VB_RiftBase extends House
 	{
 	}
 
+	// клиент, раз в секунду от VB_RiftPulse: игрок в ppos — пора ли одевать окрестности (обвивки, дома).
+	// Делает только сердце (VB_RiftHeart), у остальных объектов ничего
+	void VB_DecorCheck(vector ppos)
+	{
+	}
+
 	void VB_SetLightPulse(float k, float night)
 	{
 		if (!m_VB_Light)
@@ -405,54 +404,27 @@ class VB_RiftBase extends House
 // Сердце. На клиенте «заражает» ближайшие деревья: меряет ствол лучами и надевает обвивку подходящего
 // размера локальным объектом (VB_RiftWrap_*). Обвивки — тоже VB_RiftBase: пульсируют в ритме сердца,
 // днём засыпают. Удаляются вместе с сердцем.
+// Обвивки и корни на домах (VB_RiftHouses.c) — дорогие: на одно дерево или дом уходят сотни лучей. Поэтому не в EEInit
+// разом (было до ~3800 лучей в одном кадре при каждой подгрузке сердца, баг №37), а когда игрок подошёл ближе DECOR_DIST
+// (проверяет VB_RiftPulse раз в секунду, один раз за жизнь объекта): по одному дереву или дому за вызов CallLater.
+// Раскладка по-прежнему детерминирована по координатам. Серверная часть сердца — VB_Rift_Server, VB_RiftWorldServer.c.
 class VB_RiftHeart extends VB_RiftBase
 {
-	static const string CHUNK_TYPE = "VB_RiftHeartChunk";
-	static const int CALM_MS = 90000;		// столько после последней попытки резать сердце остаётся потревоженным
-
-	// Тепло: живое сердце ночью греет, как слабый костёр (ванильный UniversalTemperatureSource, как у Bonfire).
-	// На морозном Сахале к нему тянет погреться — а там споры, корни и зомби. Сахал сам срезает потолок на 3.
-	static const float HEAT_FULL = 2.5;		// м: полное тепло
-	static const float HEAT_MAX = 7.0;		// м: дальше не греет
-	static const float HEAT_CAP = 18.0;		// потолок температуры для игрока (у костра Bonfire 25)
-	static const int HEAT_CHECK_MS = 15000;	// как часто сервер сверяет «ночь/жив»
+	static const float DECOR_DIST = 300.0;	// м от игрока: ближе — начинаем одевать окрестности
+	static const int DECOR_STEP_MS = 30;	// пауза между деревьями/домами
+	static const int DECOR_WAIT = 0;		// ждём игрока
+	static const int DECOR_RUN = 1;			// одеваем по шагам
+	static const int DECOR_DONE = 2;		// готово (или объект уже очищен)
 
 	protected ref array<Object> m_VB_Wraps;
-	protected ref UniversalTemperatureSource m_VB_Heat;
-	protected ref UniversalTemperatureSourceSettings m_VB_HeatSettings;
-	protected ref UniversalTemperatureSourceLambdaConstant m_VB_HeatLambda;
 	protected bool m_VB_Dead;				// вырезано (до рестарта), синхронизируется всем клиентам
 	protected bool m_VB_Disturbed;			// его режут или резали недавно, синхронизируется
-	protected bool m_VB_HordeCalled;		// сервер: волна зомби уже была (одна на сердце до рестарта)
+	protected int m_VB_DecorState;			// DECOR_*: клиент, обвивки и дома
+	protected ref array<Object> m_VB_TreeQueue;	// деревья, которые ещё предстоит обвить (ближние первыми)
 
 	// «Споры Изнанки»: у живого сердца ночью их собирают тряпкой (VB_ActionCollectSpores), SPORES_MAX за рестарт
 	static const int SPORES_MAX = 3;
 	protected int m_VB_SporesLeft = SPORES_MAX;	// синхронизируется: клиент не предлагает сбор, когда спор нет
-
-	// сервер: все сердца гнёзд (для «Слушающего корня» — ищет ближайшее живое в 3 км)
-	protected static ref array<VB_RiftHeart> s_VB_ServerHearts;
-
-	static VB_RiftHeart VB_NearestServer(vector pos, float maxDist)
-	{
-		if (!s_VB_ServerHearts)
-			return null;
-
-		VB_RiftHeart best;
-		float bestSq = maxDist * maxDist;
-		float dSq;
-		foreach (VB_RiftHeart h : s_VB_ServerHearts)
-		{
-			if (!h || h.VB_IsDead())
-				continue;
-			dSq = vector.DistanceSq(pos, h.GetPosition());
-			if (dSq < bestSq)
-			{
-				bestSq = dSq;
-				best = h;
-			}
-		}
-		return best;
-	}
 
 	void VB_RiftHeart()
 	{
@@ -466,53 +438,9 @@ class VB_RiftHeart extends VB_RiftBase
 		return m_VB_SporesLeft;
 	}
 
-	// сервер: забрать одну порцию спор; false — уже нет
-	bool VB_TakeSporesServer()
-	{
-		if (m_VB_Dead || m_VB_SporesLeft <= 0)
-			return false;
-
-		m_VB_SporesLeft--;
-		SetSynchDirty();
-		return true;
-	}
-
 	override bool VB_IsDisturbed()
 	{
 		return m_VB_Disturbed && !m_VB_Dead;
-	}
-
-	// сервер: сердце потревожено — бьётся чаще, шум тянет зомби. Резка (horde = true) с первой попытки
-	// поднимает волну, сбор спор только будит сердце и шумит.
-	void VB_DisturbServer(PlayerBase cutter, bool horde = true)
-	{
-		if (m_VB_Dead)
-			return;
-
-		if (!m_VB_Disturbed)
-		{
-			m_VB_Disturbed = true;
-			SetSynchDirty();
-			VB_UpdateHeatServer();
-		}
-		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_CalmServer);
-		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_CalmServer, CALM_MS, false);
-
-		VB_RiftHorde.VB_CallNoise(GetPosition());
-		if (horde && !m_VB_HordeCalled)
-		{
-			m_VB_HordeCalled = true;
-			VB_RiftHorde.VB_Spawn(GetPosition());
-		}
-	}
-
-	void VB_CalmServer()
-	{
-		if (!m_VB_Disturbed)
-			return;
-
-		m_VB_Disturbed = false;
-		SetSynchDirty();
 	}
 
 	override bool VB_IsHeart()
@@ -530,90 +458,67 @@ class VB_RiftHeart extends VB_RiftBase
 		return m_VB_Dead;
 	}
 
-	// сервер: сердце вырезано — гаснет до рестарта, вырезавшему «Сердце Изнанки», всем игрокам удар молнии
-	void VB_KillServer(PlayerBase cutter)
+	// игрок подошёл ближе DECOR_DIST — один раз собрать очереди (дешёво) и начать одевать по шагам
+	override void VB_DecorCheck(vector ppos)
 	{
-		if (m_VB_Dead)
+		if (m_VB_DecorState != DECOR_WAIT || !m_VB_Active || m_VB_Bare)
+			return;
+		if (vector.DistanceSq(ppos, GetPosition()) > DECOR_DIST * DECOR_DIST)
 			return;
 
-		m_VB_Dead = true;
-		m_VB_Disturbed = false;
-		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_CalmServer);
-		SetSynchDirty();
-		VB_UpdateHeatServer();
-
-		// для админов: кто и где вырезал (script_*.log сервера)
-		string who = "?";
-		if (cutter && cutter.GetIdentity())
-			who = cutter.GetIdentity().GetName() + " (" + cutter.GetIdentity().GetPlainId() + ")";
-		Print("[VB_Rift] сердце вырезано: " + who + " в " + GetPosition().ToString());
-
-		if (cutter)
-			VB_RiftItems.VB_DropAtFeet(cutter, CHUNK_TYPE);		// на землю у ног, не в инвентарь
-
-		VB_RiftStrike.VB_BroadcastServer();
-		VB_RiftNests.VB_OnHeartKilled(this);	// прорастание нового гнезда, если включено в настройках
+		m_VB_DecorState = DECOR_RUN;
+		VB_DecorPrepare();
+		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_DecorStep, DECOR_STEP_MS, false);
 	}
 
-	override void EEInit()
+	// очереди работы: здесь деревья, дома добавляет VB_RiftHouses.c
+	protected void VB_DecorPrepare()
 	{
-		super.EEInit();
-		if (m_VB_Bare)
-			return;
-
-		if (!g_Game.IsDedicatedServer())
-			VB_InfectTrees();
-
-		if (g_Game.IsServer() || !g_Game.IsMultiplayer())
-		{
-			if (!s_VB_ServerHearts)
-				s_VB_ServerHearts = new array<VB_RiftHeart>;
-			s_VB_ServerHearts.Insert(this);
-
-			m_VB_HeatSettings = new UniversalTemperatureSourceSettings();
-			m_VB_HeatSettings.m_UpdateInterval = 2;
-			m_VB_HeatSettings.m_Updateable = true;
-			m_VB_HeatSettings.m_TemperatureItemCap = GameConstants.ITEM_TEMPERATURE_NEUTRAL_ZONE_MIDDLE;
-			m_VB_HeatSettings.m_TemperatureCap = HEAT_CAP;
-			m_VB_HeatSettings.m_RangeFull = HEAT_FULL;
-			m_VB_HeatSettings.m_RangeMax = HEAT_MAX;
-			m_VB_HeatSettings.m_ItemDryModifier = 2.0;
-			m_VB_HeatLambda = new UniversalTemperatureSourceLambdaConstant();
-			m_VB_Heat = new UniversalTemperatureSource(this, m_VB_HeatSettings, m_VB_HeatLambda);
-			VB_UpdateHeatServer();
-			g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_UpdateHeatServer, HEAT_CHECK_MS, true);
-		}
+		if (!m_VB_Wraps)
+			m_VB_Wraps = new array<Object>;
+		VB_PickTrees();
 	}
 
-	// греет только живое сердце ночью (или пока его режут)
-	void VB_UpdateHeatServer()
+	// одна единица работы (одно дерево; дома — в VB_RiftHouses.c). false — работы больше нет
+	protected bool VB_DecorNext()
 	{
-		if (!m_VB_Heat)
+		if (!m_VB_TreeQueue || m_VB_TreeQueue.Count() == 0)
+			return false;
+
+		Object tree = m_VB_TreeQueue[0];
+		m_VB_TreeQueue.RemoveOrdered(0);
+		if (tree && !tree.IsDamageDestroyed())
+			VB_WrapTree(tree);
+		return true;
+	}
+
+	void VB_DecorStep()
+	{
+		if (!m_VB_Active || m_VB_DecorState != DECOR_RUN)
 			return;
 
-		bool on = !m_VB_Dead && (m_VB_Disturbed || VB_RiftPulse.VB_NightFactor() >= VB_RiftPulse.NIGHT_LIGHT_ABOVE);
-		if (m_VB_Heat.IsActive() != on)
-			m_VB_Heat.SetActive(on);
+		if (VB_DecorNext())
+			g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_DecorStep, DECOR_STEP_MS, false);
+		else
+			m_VB_DecorState = DECOR_DONE;
 	}
 
 	override protected void VB_Cleanup()
 	{
+		// снять отложенные шаги одевания: иначе висячий вызов на удалённое сердце
 		if (g_Game)
-		{
-			g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_CalmServer);
-			g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_UpdateHeatServer);
-		}
-		if (m_VB_Heat)
-			m_VB_Heat.SetActive(false);
-		if (s_VB_ServerHearts)
-			s_VB_ServerHearts.RemoveItem(this);
+			g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_DecorStep);
+		m_VB_DecorState = DECOR_DONE;
+		if (m_VB_TreeQueue)
+			m_VB_TreeQueue.Clear();
 		VB_DeleteWraps();
 		super.VB_Cleanup();
 	}
 
-	protected void VB_InfectTrees()
+	// до vbInfectMax ближайших к сердцу деревьев в vbInfectRadius — в очередь (обвиваются по одному в VB_DecorStep)
+	protected void VB_PickTrees()
 	{
-		m_VB_Wraps = new array<Object>;
+		m_VB_TreeQueue = new array<Object>;
 		float radius = ConfigGetFloat("vbInfectRadius");
 		int maxTrees = ConfigGetInt("vbInfectMax");
 		if (radius <= 0 || maxTrees <= 0)
@@ -654,7 +559,7 @@ class VB_RiftHeart extends VB_RiftBase
 			}
 
 			trees.RemoveItem(pick);
-			VB_WrapTree(pick);
+			m_VB_TreeQueue.Insert(pick);
 		}
 	}
 

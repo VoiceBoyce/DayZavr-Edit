@@ -26,6 +26,7 @@ class VB_RiftPulse
 	static const float BEAT_FIRST = 0.15;	// первый удар в цикле, с
 	static const float BEAT_SECOND = 0.6;	// второй, слабее, с
 	static const int TICK_MS = 40;
+	static const int DECOR_CHECK_TICKS = 25;	// раз в столько тиков (1 с) сердца проверяют, не подошёл ли игрок (обвивки, дома)
 	static const float ACTIVE_DIST = 250.0;	// дальше от игрока объект не пульсирует
 	static const float LIGHT_DIST = 150.0;	// свет только у сердец ближе этого
 	static const int MAX_LIGHTS = 3;		// не больше стольких красных источников света сразу
@@ -177,7 +178,8 @@ class VB_RiftPulse
 		return y * y;
 	}
 
-	// 0 = день, 1 = ночь; по высоте солнца, переход примерно от +7° до -1°
+	// 0 = день, 1 = ночь; по высоте солнца, переход примерно от +7° до -1°.
+	// Нужно обеим сторонам: условия действий и серверная часть (тепло сердца, VB_Rift_Server) зовут это же
 	static float VB_NightFactor()
 	{
 		World wrld = g_Game.GetWorld();
@@ -211,6 +213,8 @@ class VB_RiftPulse
 			VB_Relink();
 		if (m_VB_Ticks % 10 == 0)
 			VB_UpdateLights(ppos, night);
+		if (m_VB_Ticks % DECOR_CHECK_TICKS == 0)
+			VB_CheckDecor(ppos);
 		m_VB_Ticks++;
 
 		float now = g_Game.GetTime() * 0.001;
@@ -363,6 +367,17 @@ class VB_RiftPulse
 		EffectSound snd = SEffectManager.PlaySound(soundSet, pos);
 		if (snd)
 			snd.SetAutodestroy(true);
+	}
+
+	// сердца сами решают, пора ли одевать окрестности (обвивки деревьев, корни на домах): игрок подошёл ближе
+	// VB_RiftHeart.DECOR_DIST — начинают, по одному дереву/дому за шаг (VB_RiftBase.c, VB_RiftHouses.c)
+	protected void VB_CheckDecor(vector ppos)
+	{
+		foreach (VB_RiftBase heart : m_VB_Objects)
+		{
+			if (heart && heart.VB_IsHeart())
+				heart.VB_DecorCheck(ppos);
+		}
 	}
 
 	// рядом (STIR_DIST) потревоженное сердце

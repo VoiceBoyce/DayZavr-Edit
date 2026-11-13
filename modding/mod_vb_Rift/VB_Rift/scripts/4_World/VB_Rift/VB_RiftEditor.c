@@ -71,6 +71,7 @@ class VB_RiftEditor
 	float m_VB_Height;
 	protected bool m_VB_Waiting;				// ждём ответа сервера на вход
 	protected int m_VB_WaitUntil;
+	protected int m_VB_DeniedAt = -100000;		// когда сервер последний раз ответил «нет прав»
 	protected ref VB_RiftEditorPanels m_VB_Panels;
 	protected bool m_VB_MenuOpen;				// поверх открыто чужое меню (пауза, чат, диалог)
 	bool m_VB_Control;							// Пробел: режим управления (курсора нет, всё разблокировано)
@@ -90,15 +91,24 @@ class VB_RiftEditor
 	protected int m_VB_NextPreviewMs;
 	protected int m_VB_TargetId;
 	protected Object m_VB_TargetObj;
+	protected ref VB_RiftNestObj m_VB_TargetData;	// объект под прицелом и его гнездо (ищутся раз в кадр в VB_UpdateTarget)
+	protected ref VB_RiftNest m_VB_TargetNest;
 	protected bool m_VB_PrevLmb;
 	protected bool m_VB_PrevRmb;
 	protected bool m_VB_PrevDel;
 	protected bool m_VB_PrevUp;
 	protected bool m_VB_PrevDown;
+	protected int m_VB_ActivePending = -1;		// «Гнёзд за рестарт»: ещё не отправленное число (-1 — нечего)
+	protected int m_VB_ActiveSendAt;
+#ifdef DIAG_DEVELOPER
 	protected int m_VB_NextTestCheck;
 	protected ref VB_RiftEditorTest m_VB_Test;
+#endif
 	string m_VB_Msg;
 	int m_VB_MsgUntil;
+
+	static const int WAIT_MS = 5000;			// столько ждём ответа сервера на вход
+	static const int ACTIVE_DELAY_MS = 1000;	// счётчик гнёзд уходит на сервер через столько после последнего клика
 
 	static VB_RiftEditor VB_Get()
 	{
@@ -117,24 +127,62 @@ class VB_RiftEditor
 
 	static void VB_OnKey()
 	{
+		// поверх открыто меню (пауза, чат, диалог «Удалить гнездо?») — клавишу не трогаем: выход из редактора
+		// под открытым диалогом оставлял бы диалог без панелей, которые ждут его ответа
+		if (g_Game.GetUIManager().GetMenu())
+			return;
+
 		VB_RiftEditor ed = VB_Get();
 		if (ed.m_VB_Active)
 		{
 			ed.VB_Deactivate();
 			return;
 		}
-		if (!g_Game.GetUIManager().GetMenu())
-			ed.VB_RequestOpen();
+		ed.VB_RequestOpen();
 	}
 
 	void VB_RequestOpen()
 	{
 		if (m_VB_Active || (m_VB_Waiting && g_Game.GetTime() < m_VB_WaitUntil))
 			return;
+		// сервер отвечает не-админу не чаще раза в 5 с, повтор раньше он молча отбросит — не спрашиваем зря
+		if (g_Game.GetTime() < m_VB_DeniedAt + WAIT_MS)
+		{
+			INT_UIF_Toast.Error("Редактор Изнанки: нет прав (" + VB_RiftNestClient.s_VB_DeniedId + ")");
+			return;
+		}
 
 		m_VB_Waiting = true;
-		m_VB_WaitUntil = g_Game.GetTime() + 5000;
+		m_VB_WaitUntil = g_Game.GetTime() + WAIT_MS;
 		VB_RiftNestClient.VB_SendOp(VB_RiftNestNet.OP_OPEN);
+	}
+
+	// «Гнёзд за рестарт»: на сервер уходит последнее число через ACTIVE_DELAY_MS после последнего клика,
+	// а не каждый клик (каждый клик сервер пишет settings.json)
+	void VB_QueueActive(int n)
+	{
+		m_VB_ActivePending = n;
+		m_VB_ActiveSendAt = g_Game.GetTime() + ACTIVE_DELAY_MS;
+	}
+
+	// число, которое сейчас показывать в счётчике: ещё не отправленное или то, что прислал сервер
+	int VB_ActiveShown()
+	{
+		if (m_VB_ActivePending >= 0)
+			return m_VB_ActivePending;
+		return VB_RiftNestClient.s_VB_ActiveNests;
+	}
+
+	protected void VB_FlushActive(bool now)
+	{
+		if (m_VB_ActivePending < 0)
+			return;
+		if (!now && g_Game.GetTime() < m_VB_ActiveSendAt)
+			return;
+
+		int n = m_VB_ActivePending;
+		m_VB_ActivePending = -1;
+		VB_RiftNestClient.VB_SendOp(VB_RiftNestNet.OP_SET_ACTIVE, n);
 	}
 
 	protected void VB_Activate()
@@ -168,6 +216,7 @@ class VB_RiftEditor
 
 		m_VB_Active = false;
 		m_VB_Waiting = false;
+		VB_FlushActive(true);
 		VB_RiftNestClient.VB_SendOp(VB_RiftNestNet.OP_CLOSE);
 		Mission mission = g_Game.GetMission();
 		if (mission)
@@ -199,6 +248,7 @@ class VB_RiftEditor
 			return;
 
 		s_VB_Instance.m_VB_Active = false;
+		s_VB_Instance.m_VB_ActivePending = -1;
 		s_VB_Instance.VB_Cleanup();
 		s_VB_Instance = null;
 	}
@@ -246,9 +296,13 @@ class VB_RiftEditor
 	void VB_Update(float dt)
 	{
 		VB_PollNet();
+		VB_FlushActive(false);
 
-		// автотест: файл команд в профиле клиента проверяется раз в 5 с, прочитанный удаляется
 		PlayerBase player = PlayerBase.Cast(g_Game.GetPlayer());
+#ifdef DIAG_DEVELOPER
+		// автотест: файл команд в профиле клиента проверяется раз в 5 с, прочитанный удаляется. Только в DayZDiag
+		// (стенд): на боевом клиенте файл не читается — забытый файл у админа не выполнит команды на сервере,
+		// а обычный игрок не сделает из него макрос запросов (аудит 2026-11-13, №28)
 		if (m_VB_Test && m_VB_Test.VB_Done())
 			m_VB_Test = null;
 		if (!m_VB_Test && player && player.IsAlive() && g_Game.GetTime() >= m_VB_NextTestCheck)
@@ -258,6 +312,7 @@ class VB_RiftEditor
 		}
 		if (m_VB_Test)
 			m_VB_Test.VB_Tick(this);
+#endif
 
 		if (!m_VB_Active)
 			return;
@@ -337,8 +392,12 @@ class VB_RiftEditor
 		{
 			VB_RiftNestClient.s_VB_Denied = false;
 			m_VB_Waiting = false;
+			m_VB_DeniedAt = g_Game.GetTime();
 			INT_UIF_Toast.Error("Редактор Изнанки: нет прав (" + VB_RiftNestClient.s_VB_DeniedId + ")");
 			Print("[VB_Rift] редактор гнёзд: нет прав, SteamID " + VB_RiftNestClient.s_VB_DeniedId);
+			// права сняли, пока редактор открыт (админа убрали из settings.json): выйти
+			if (m_VB_Active)
+				VB_Deactivate();
 		}
 
 		if (VB_RiftNestClient.s_VB_Granted)
@@ -349,6 +408,15 @@ class VB_RiftEditor
 				m_VB_Waiting = false;
 				VB_Activate();
 			}
+		}
+
+		// сервер молчит: на нём нет серверного мода VB_Rift_Server (или он не загрузился)
+		if (m_VB_Waiting && !m_VB_Active && g_Game.GetTime() >= m_VB_WaitUntil)
+		{
+			m_VB_Waiting = false;
+			int waitSec = WAIT_MS / 1000;
+			INT_UIF_Toast.Error("Редактор Изнанки: сервер не ответил (нет VB_Rift_Server?)");
+			Print("[VB_Rift] редактор гнёзд: сервер не ответил за " + waitSec.ToString() + " с (нет VB_Rift_Server?)");
 		}
 
 		if (VB_RiftNestClient.s_VB_SelectNest != 0)
@@ -492,8 +560,12 @@ class VB_RiftEditor
 
 	// --- объект под курсором ----------------------------------------------------------------------
 
+	// объект гнезда ближе TARGET_DIST к точке прицела. Гнёзда, до которых от прицела дальше их разброса,
+	// не перебираются (заранее посчитанные центры VB_RiftNestClient.VB_Views, аудит №38)
 	protected void VB_UpdateTarget()
 	{
+		m_VB_TargetData = null;
+		m_VB_TargetNest = null;
 		if (!m_VB_AimOk)
 		{
 			VB_SetTarget(0, null);
@@ -501,25 +573,38 @@ class VB_RiftEditor
 		}
 
 		VB_RiftNestObj best;
+		VB_RiftNest bestNest;
 		float bestD = TARGET_DIST;
 		float d;
-		foreach (VB_RiftNest nest : VB_RiftNestClient.s_VB_Nests)
+		array<ref VB_RiftNestView> views = VB_RiftNestClient.VB_Views();
+		foreach (VB_RiftNestView v : views)
 		{
-			foreach (VB_RiftNestObj o : nest.Objects)
+			d = VB_RiftNestUtil.VB_DistXZ(v.Center, m_VB_AimPos);
+			if (d > v.Reach + TARGET_DIST)
+				continue;
+
+			foreach (VB_RiftNestObj o : v.Nest.Objects)
 			{
 				d = vector.Distance(o.Position, m_VB_AimPos);
 				if (d < bestD)
 				{
 					bestD = d;
 					best = o;
+					bestNest = v.Nest;
 				}
 			}
 		}
 
 		if (best)
+		{
+			m_VB_TargetData = best;
+			m_VB_TargetNest = bestNest;
 			VB_SetTarget(best.Id, best);
+		}
 		else
+		{
 			VB_SetTarget(0, null);
+		}
 	}
 
 	protected void VB_SetTarget(int id, VB_RiftNestObj o)
@@ -552,26 +637,19 @@ class VB_RiftEditor
 		g_Game.GetObjectsAtPosition(o.Position, 1.0, found, null);
 		foreach (Object f : found)
 		{
-			if (f && f.GetType() == o.Type && VB_RiftNests.VB_DistXZ(f.GetPosition(), o.Position) < 0.3)
+			if (f && f.GetType() == o.Type && VB_RiftNestUtil.VB_DistXZ(f.GetPosition(), o.Position) < 0.3)
 				return f;
 		}
 		return null;
 	}
 
+	// объект под прицелом (найден в этом кадре VB_UpdateTarget, без нового перебора)
 	VB_RiftNestObj VB_TargetObj(out VB_RiftNest inNest)
 	{
-		foreach (VB_RiftNest nest : VB_RiftNestClient.s_VB_Nests)
-		{
-			foreach (VB_RiftNestObj o : nest.Objects)
-			{
-				if (o.Id == m_VB_TargetId)
-				{
-					inNest = nest;
-					return o;
-				}
-			}
-		}
-		return null;
+		if (m_VB_TargetId == 0 || !m_VB_TargetData || m_VB_TargetData.Id != m_VB_TargetId)
+			return null;
+		inNest = m_VB_TargetNest;
+		return m_VB_TargetData;
 	}
 
 	// --- ввод -------------------------------------------------------------------------------------
@@ -676,22 +754,25 @@ class VB_RiftEditor
 
 	// --- гнёзда -----------------------------------------------------------------------------------
 
+	// центры и сердца гнёзд берутся из VB_RiftNestClient.VB_Views (посчитаны один раз на версию копии):
+	// статус редактора зовёт эти поиски каждый кадр (аудит №38)
 	int VB_NearestNest(vector pos, float maxDist, bool heartlessOnly = false)
 	{
 		int best = 0;
 		float bestD = maxDist;
 		float d;
-		foreach (VB_RiftNest nest : VB_RiftNestClient.s_VB_Nests)
+		array<ref VB_RiftNestView> views = VB_RiftNestClient.VB_Views();
+		foreach (VB_RiftNestView v : views)
 		{
-			if (nest.Objects.Count() == 0 || nest.Id == VB_RiftNestNet.DECOR_ID)
+			if (v.Nest.Objects.Count() == 0 || v.Nest.Id == VB_RiftNestNet.DECOR_ID)
 				continue;
-			if (heartlessOnly && nest.VB_HasHeart())
+			if (heartlessOnly && v.HasHeart)
 				continue;
-			d = VB_RiftNests.VB_DistXZ(nest.VB_Center(), pos);
+			d = VB_RiftNestUtil.VB_DistXZ(v.Center, pos);
 			if (d < bestD)
 			{
 				bestD = d;
-				best = nest.Id;
+				best = v.Nest.Id;
 			}
 		}
 		return best;
@@ -703,19 +784,16 @@ class VB_RiftEditor
 		int best = 0;
 		float bestD = VB_RiftNestNet.NEST_RADIUS;
 		float d;
-		VB_RiftNestObj heart;
-		foreach (VB_RiftNest nest : VB_RiftNestClient.s_VB_Nests)
+		array<ref VB_RiftNestView> views = VB_RiftNestClient.VB_Views();
+		foreach (VB_RiftNestView v : views)
 		{
-			if (nest.Id == VB_RiftNestNet.DECOR_ID)
+			if (v.Nest.Id == VB_RiftNestNet.DECOR_ID || !v.HasHeart)
 				continue;
-			heart = nest.VB_FindHeart();
-			if (!heart)
-				continue;
-			d = VB_RiftNests.VB_DistXZ(heart.Position, pos);
+			d = VB_RiftNestUtil.VB_DistXZ(v.Heart, pos);
 			if (d < bestD)
 			{
 				bestD = d;
-				best = nest.Id;
+				best = v.Nest.Id;
 			}
 		}
 		return best;
@@ -726,14 +804,14 @@ class VB_RiftEditor
 	// щупальца — к ближайшему сердцу, а без сердца рядом — в постоянный декор
 	int VB_NestFor(vector pos)
 	{
-		if (m_VB_Type != "" && VB_RiftNests.VB_IsHangType(m_VB_Type))
+		if (m_VB_Type != "" && VB_RiftNestUtil.VB_IsHangType(m_VB_Type))
 		{
 			int hangNest = VB_NearestHeartNest(pos);
 			if (hangNest == 0)
 				return VB_RiftNestNet.DECOR_ID;
 			return hangNest;
 		}
-		bool heart = m_VB_Type != "" && VB_RiftNests.VB_IsHeartType(m_VB_Type);
+		bool heart = m_VB_Type != "" && VB_RiftNestUtil.VB_IsHeartType(m_VB_Type);
 		return VB_NearestNest(pos, VB_RiftNestNet.NEST_RADIUS, heart);
 	}
 
@@ -950,7 +1028,7 @@ class VB_RiftEditor
 	{
 		foreach (vector u : used)
 		{
-			if (VB_RiftNests.VB_DistXZ(p, u) < gap)
+			if (VB_RiftNestUtil.VB_DistXZ(p, u) < gap)
 				return true;
 		}
 		return false;
@@ -965,14 +1043,18 @@ class VB_RiftEditor
 		set<int> want = new set<int>;
 		Object obj;
 		VB_RiftBase rift;
-		foreach (VB_RiftNest nest : VB_RiftNestClient.s_VB_Nests)
+		array<ref VB_RiftNestView> views = VB_RiftNestClient.VB_Views();
+		foreach (VB_RiftNestView v : views)
 		{
-			if (VB_RiftNests.VB_DistXZ(nest.VB_Center(), ppos) > PREVIEW_DIST)
+			if (VB_RiftNestUtil.VB_DistXZ(v.Center, ppos) > PREVIEW_DIST)
 				continue;
 
-			foreach (VB_RiftNestObj o : nest.Objects)
+			foreach (VB_RiftNestObj o : v.Nest.Objects)
 			{
 				if (VB_RiftNestClient.s_VB_LiveObjs.Find(o.Id) >= 0)
+					continue;
+				// в nests.json вписали руками чужой класс: копию не создаём (сервер его тоже не ставит)
+				if (!VB_RiftNestUtil.VB_IsNestType(o.Type))
 					continue;
 
 				want.Insert(o.Id);
@@ -1048,7 +1130,9 @@ class VB_RiftEditor
 
 // Панели редактора по бокам экрана, открыты всё время, пока редактор включён. Слева — гнёзда (ближние сверху)
 // и что ставить, справа — выбранное гнездо, действия и статус. Середина экрана свободна для расстановки.
-class VB_RiftEditorPanels
+// Managed: на методы панелей подписаны кнопки и диалог подтверждения; если панели снесут раньше, чем придёт
+// ответ, подписчик обнулится, а не позовётся на освобождённой памяти. Открытый диалог VB_Destroy ещё и закрывает.
+class VB_RiftEditorPanels : Managed
 {
 	static const float PANEL_W = 400;
 	static const float TOP = 70;
@@ -1082,6 +1166,7 @@ class VB_RiftEditorPanels
 	protected string m_VB_SeenType;
 	protected vector m_VB_FillPos;
 	protected bool m_VB_Filling;
+	protected INT_UIF_Dialog m_VB_Dialog;		// открытый диалог подтверждения (Managed: обнулится сам, когда закроется)
 
 	void VB_Build()
 	{
@@ -1175,6 +1260,15 @@ class VB_RiftEditorPanels
 
 	void VB_Destroy()
 	{
+		// диалог «Удалить гнездо?» / «Перебросить?» не должен пережить панели: ответ без панелей некому принять
+		if (m_VB_Dialog && !m_VB_Dialog.IsFinished())
+		{
+			m_VB_Dialog.OnResult().Clear();
+			if (!m_VB_Dialog.IsFinished())
+				m_VB_Dialog.Cancel();
+		}
+		m_VB_Dialog = null;
+
 		m_VB_Bag = null;	// сначала компоненты (они сами снимают свои виджеты), потом корни
 		if (m_VB_Left)
 			m_VB_Left.Unlink();
@@ -1203,7 +1297,8 @@ class VB_RiftEditorPanels
 		if (g_Game.GetPlayer())
 			ppos = g_Game.GetPlayer().GetPosition();
 
-		if (m_VB_SeenVersion != VB_RiftNestClient.s_VB_Version || m_VB_SeenNest != ed.m_VB_CurNest || VB_RiftNests.VB_DistXZ(ppos, m_VB_FillPos) > REFILL_MOVE)
+		float moved = VB_RiftNestUtil.VB_DistXZ(ppos, m_VB_FillPos);
+		if (m_VB_SeenVersion != VB_RiftNestClient.s_VB_Version || m_VB_SeenNest != ed.m_VB_CurNest || moved > REFILL_MOVE)
 			VB_Fill();
 		if (m_VB_SeenType != ed.m_VB_Type)
 			VB_FillTypes();
@@ -1264,35 +1359,41 @@ class VB_RiftEditorPanels
 			ppos = g_Game.GetPlayer().GetPosition();
 		m_VB_FillPos = ppos;
 
-		// ближние сверху
-		array<VB_RiftNest> sorted = new array<VB_RiftNest>;
+		// ближние сверху: расстояние до каждого гнезда считается один раз (центры — из VB_Views, без поиска сердца)
+		array<ref VB_RiftNestView> views = VB_RiftNestClient.VB_Views();
+		array<VB_RiftNestView> sorted = new array<VB_RiftNestView>;
+		array<float> dists = new array<float>;
 		VB_RiftNest decor;
-		foreach (VB_RiftNest n : VB_RiftNestClient.s_VB_Nests)
+		foreach (VB_RiftNestView vw : views)
 		{
-			if (n.Id == VB_RiftNestNet.DECOR_ID)
-				decor = n;
-			else
-				sorted.Insert(n);
+			if (vw.Nest.Id == VB_RiftNestNet.DECOR_ID)
+			{
+				decor = vw.Nest;
+				continue;
+			}
+			sorted.Insert(vw);
+			dists.Insert(VB_RiftNestUtil.VB_DistXZ(vw.Center, ppos));
 		}
 		int count = sorted.Count();
 		int bi;
 		float bd;
-		float d;
 		for (int i = 0; i < count; i++)
 		{
 			bi = i;
-			bd = VB_RiftNests.VB_DistXZ(sorted[i].VB_Center(), ppos);
+			bd = dists[i];
 			for (int j = i + 1; j < count; j++)
 			{
-				d = VB_RiftNests.VB_DistXZ(sorted[j].VB_Center(), ppos);
-				if (d < bd)
+				if (dists[j] < bd)
 				{
-					bd = d;
+					bd = dists[j];
 					bi = j;
 				}
 			}
 			if (bi != i)
+			{
 				sorted.SwapItems(i, bi);
+				dists.SwapItems(i, bi);
+			}
 		}
 
 		int pool = 0;
@@ -1303,6 +1404,8 @@ class VB_RiftEditorPanels
 		bool heart;
 		bool isLive;
 		int r;
+		int distM;
+		VB_RiftNest nest;
 
 		// постоянный декор — первой строкой, он стоит всегда
 		if (decor && decor.Objects.Count() > 0)
@@ -1315,9 +1418,10 @@ class VB_RiftEditorPanels
 				m_VB_NestList.Select(r, false);
 		}
 
-		foreach (VB_RiftNest nest : sorted)
+		for (int k = 0; k < count; k++)
 		{
-			heart = nest.VB_HasHeart();
+			nest = sorted[k].Nest;
+			heart = sorted[k].HasHeart;
 			isLive = VB_RiftNestClient.VB_IsLiveNest(nest.Id);
 			if (nest.Enabled == 1 && heart)
 				pool++;
@@ -1325,7 +1429,8 @@ class VB_RiftEditorPanels
 				live++;
 
 			sec = VB_RiftEditor.VB_CountWord(nest.Objects.Count(), "объект", "объекта", "объектов");
-			sec += " · " + Math.Round(VB_RiftNests.VB_DistXZ(nest.VB_Center(), ppos)).ToString() + " м";
+			distM = Math.Round(dists[k]);
+			sec += " · " + distM.ToString() + " м";
 			r = m_VB_NestList.AddRow(nest.Name, sec, nest.Id);
 			if (heart)
 				m_VB_NestList.SetRowIcon(r, "target", INT_UIF_ThemeKeys.RED);
@@ -1344,10 +1449,14 @@ class VB_RiftEditorPanels
 
 		m_VB_TilePool.SetValue(pool.ToString());
 		m_VB_TileLive.SetValue(live.ToString());
+		// пока число ещё не ушло на сервер (задержка после клика), показываем его, а не старое серверное
 		if (m_VB_ActiveStep)
-			m_VB_ActiveStep.SetValue(VB_RiftNestClient.s_VB_ActiveNests, false);
-		string rules = "Встают случайные, не ближе " + Math.Round(VB_RiftNestClient.s_VB_MinDist).ToString() + " м друг к другу";
-		rules += " и не те, что на прошлом рестарте; корней " + VB_RiftNestClient.s_VB_KeepMin.ToString() + "–" + VB_RiftNestClient.s_VB_KeepMax.ToString() + "%.";
+			m_VB_ActiveStep.SetValue(ed.VB_ActiveShown(), false);
+		int minDistM = Math.Round(VB_RiftNestClient.s_VB_MinDist);
+		string rules = "Встают случайные, не ближе " + minDistM.ToString() + " м друг к другу";
+		string keepMin = VB_RiftNestClient.s_VB_KeepMin.ToString();
+		string keepMax = VB_RiftNestClient.s_VB_KeepMax.ToString();
+		rules += " и не те, что на прошлом рестарте; корней " + keepMin + "–" + keepMax + "%.";
 		if (VB_RiftNestClient.s_VB_Regrow > 0)
 			rules += " Новое прорастает через " + VB_RiftNestClient.s_VB_Regrow.ToString() + " мин после вырезания.";
 		if (m_VB_Rules)
@@ -1419,7 +1528,7 @@ class VB_RiftEditorPanels
 			if (VB_RiftNestClient.VB_IsLiveNest(nest.Id))
 				nestLine += " · на карте";
 		}
-		else if (VB_RiftNests.VB_IsHeartType(ed.m_VB_Type))
+		else if (VB_RiftNestUtil.VB_IsHeartType(ed.m_VB_Type))
 		{
 			nestLine = "Сердце начнёт новое гнездо";
 		}
@@ -1494,11 +1603,12 @@ class VB_RiftEditorPanels
 		}
 	}
 
-	// число гнёзд за рестарт: сразу на сервер (settings.json); встанет на следующем рестарте или по «Перебросить»
+	// число гнёзд за рестарт: на сервер (settings.json) через секунду после последнего клика;
+	// встанет на следующем рестарте или по «Перебросить»
 	protected void OnVBActiveChanged(float value, INT_UIF_Stepper stepper)
 	{
 		int n = Math.Round(value);
-		VB_RiftNestClient.VB_SendOp(VB_RiftNestNet.OP_SET_ACTIVE, n);
+		VB_RiftEditor.VB_Get().VB_QueueActive(n);
 	}
 
 	protected void OnVBScatter(INT_UIF_Button b)
@@ -1525,28 +1635,41 @@ class VB_RiftEditorPanels
 	protected void OnVBDelete(INT_UIF_Button b)
 	{
 		VB_RiftNest nest = VB_RiftNestClient.VB_Find(VB_RiftEditor.VB_Get().m_VB_CurNest);
-		if (!nest)
+		if (!nest || (m_VB_Dialog && !m_VB_Dialog.IsFinished()))
 			return;
-		INT_UIF_Dialog d = INT_UIF_Dialog.Confirm("Удалить " + nest.Name + "?", "Гнездо пропадёт из файла и с карты. Копия файла до первой правки за этот запуск сервера — nests_backup.json.", "Удалить", "Отмена", INT_UIF_Variant.DANGER);
+		string title = "Удалить " + nest.Name + "?";
+		string text = "Гнездо пропадёт из файла и с карты. Копия файла на старте сервера — nests_backup.json.";
+		INT_UIF_Dialog d = INT_UIF_Dialog.Confirm(title, text, "Удалить", "Отмена", INT_UIF_Variant.DANGER);
 		if (d)
+		{
+			m_VB_Dialog = d;
 			d.OnResult().Insert(OnVBDeleteConfirm);
+		}
 	}
 
 	protected void OnVBDeleteConfirm(int result, INT_UIF_Dialog dlg)
 	{
+		m_VB_Dialog = null;
 		if (result == INT_UIF_Dialog.RESULT_YES)
 			VB_RiftEditor.VB_Get().VB_DeleteNest();
 	}
 
 	protected void OnVBReroll(INT_UIF_Button b)
 	{
-		INT_UIF_Dialog d = INT_UIF_Dialog.Confirm("Перебросить гнёзда?", "Все гнёзда снимутся с карты, и сервер выберет новые, как на рестарте. Вырезанные сердца оживут.", "Перебросить", "Отмена", INT_UIF_Variant.WARNING);
+		if (m_VB_Dialog && !m_VB_Dialog.IsFinished())
+			return;
+		string text = "Все гнёзда снимутся с карты, и сервер выберет новые, как на рестарте (не у игроков). Гнёзда с вырезанным сердцем до рестарта не вернутся.";
+		INT_UIF_Dialog d = INT_UIF_Dialog.Confirm("Перебросить гнёзда?", text, "Перебросить", "Отмена", INT_UIF_Variant.WARNING);
 		if (d)
+		{
+			m_VB_Dialog = d;
 			d.OnResult().Insert(OnVBRerollConfirm);
+		}
 	}
 
 	protected void OnVBRerollConfirm(int result, INT_UIF_Dialog dlg)
 	{
+		m_VB_Dialog = null;
 		if (result == INT_UIF_Dialog.RESULT_YES)
 			VB_RiftEditor.VB_Get().VB_Reroll();
 	}
@@ -1562,6 +1685,8 @@ class VB_RiftEditorPanels
 // Команды: open, exit, wait <мс>, type <класс>, yaw <град>, height <м>, place <x> <z>, placeh <x> <y> <z>,
 // scatter, undo, toggle, delnest, tp, reroll, del <x> <z>, cur <имя гнезда>, dump.
 // Всё пишет в скриптовый лог клиента «[VB_Rift] тест редактора: ...».
+// Только в DayZDiag (DIAG_DEVELOPER): в боевом клиенте этого класса нет (аудит 2026-11-13, №28).
+#ifdef DIAG_DEVELOPER
 class VB_RiftEditorTest
 {
 	static const string TEST_FILE = "$profile:vb_rift_editor_test.txt";
@@ -1616,6 +1741,8 @@ class VB_RiftEditorTest
 		float x;
 		float y;
 		float z;
+		vector at;
+		vector ori;
 		if (cmd == "open")
 			ed.VB_RequestOpen();
 		else if (cmd == "exit")
@@ -1630,16 +1757,22 @@ class VB_RiftEditorTest
 			ed.m_VB_Height = p[1].ToFloat();
 		else if (cmd == "place" && p.Count() > 2)
 		{
+			// оба вектора — в локальные: два Vector в одном списке аргументов затирают друг друга (E71)
 			x = p[1].ToFloat();
 			z = p[2].ToFloat();
-			ed.VB_SendOne(ed.m_VB_Type, Vector(x, g_Game.SurfaceY(x, z), z), Vector(ed.m_VB_Yaw, 0, 0));
+			y = g_Game.SurfaceY(x, z);
+			at = Vector(x, y, z);
+			ori = Vector(ed.m_VB_Yaw, 0, 0);
+			ed.VB_SendOne(ed.m_VB_Type, at, ori);
 		}
 		else if (cmd == "placeh" && p.Count() > 3)
 		{
 			x = p[1].ToFloat();
 			y = p[2].ToFloat();
 			z = p[3].ToFloat();
-			ed.VB_SendOne(ed.m_VB_Type, Vector(x, y, z), Vector(ed.m_VB_Yaw, 0, 0));
+			at = Vector(x, y, z);
+			ori = Vector(ed.m_VB_Yaw, 0, 0);
+			ed.VB_SendOne(ed.m_VB_Type, at, ori);
 		}
 		else if (cmd == "scatter")
 			ed.VB_Scatter();
@@ -1673,7 +1806,7 @@ class VB_RiftEditorTest
 		{
 			foreach (VB_RiftNestObj o : nest.Objects)
 			{
-				d = VB_RiftNests.VB_DistXZ(o.Position, at);
+				d = VB_RiftNestUtil.VB_DistXZ(o.Position, at);
 				if (d < bestD)
 				{
 					bestD = d;
@@ -1706,9 +1839,15 @@ class VB_RiftEditorTest
 		VB_RiftNest curNest = VB_RiftNestClient.VB_Find(ed.m_VB_CurNest);
 		if (curNest)
 			cur = curNest.Name;
+		// всё, что подставляется, — сначала в локальные: два Count в одном списке аргументов затирают друг друга (E71)
+		int nestCount = VB_RiftNestClient.s_VB_Nests.Count();
+		int copies = ed.VB_PreviewCount();
 		Print(string.Format("[VB_Rift] тест редактора: DUMP активен=%1 гнёзд=%2 выбрано=%3 копий=%4 тип=%5",
-			ed.m_VB_Active, VB_RiftNestClient.s_VB_Nests.Count(), cur, ed.VB_PreviewCount(), ed.m_VB_Type));
+			ed.m_VB_Active, nestCount, cur, copies, ed.m_VB_Type));
 		int liveObjs;
+		int objCount;
+		bool nestLive;
+		string center;
 		foreach (VB_RiftNest nest : VB_RiftNestClient.s_VB_Nests)
 		{
 			liveObjs = 0;
@@ -1717,8 +1856,12 @@ class VB_RiftEditorTest
 				if (VB_RiftNestClient.s_VB_LiveObjs.Find(o.Id) >= 0)
 					liveObjs++;
 			}
+			objCount = nest.Objects.Count();
+			nestLive = VB_RiftNestClient.VB_IsLiveNest(nest.Id);
+			center = nest.VB_Center().ToString();
 			Print(string.Format("[VB_Rift] тест редактора: DUMP %1 id=%2 объектов=%3 на карте=%4/%5 вкл=%6 центр=%7",
-				nest.Name, nest.Id, nest.Objects.Count(), VB_RiftNestClient.VB_IsLiveNest(nest.Id), liveObjs, nest.Enabled, nest.VB_Center().ToString()));
+				nest.Name, nest.Id, objCount, nestLive, liveObjs, nest.Enabled, center));
 		}
 	}
 }
+#endif

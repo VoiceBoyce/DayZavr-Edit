@@ -1,38 +1,19 @@
 // Зомби Изнанки (в конфиге vbRiftZombie = 1, классы VB_RiftZmb*).
 // Смерть: глаза и жилы гаснут (материал vbRiftDeadMaterial без свечения), тело лопается облаком красных спор
-// с мокрым хлопком; на сервере с шансом ROOT_CHANCE в инвентарь трупа кладётся «Корень Изнанки»,
-// с шансом SPORES_CHANCE — «Споры Изнанки» (броски независимые).
-// Труп, который игрок застал уже мёртвым (подгрузился позже), просто тёмный — без облака и звука.
+// с мокрым хлопком. Труп, который игрок застал уже мёртвым (подгрузился позже), просто тёмный — без облака и звука.
+// Лут — разделкой, как у мутантов (решение пользователя 2026-11-13): мёртвого зомби Изнанки можно «Разделать»
+// ножом (ванильное ActionSkinning), с шансом выпадают «Корень Изнанки» и «Споры Изнанки» — на землю у ног.
+// Здесь только разрешение разделки (CanBeSkinned нужно обеим сторонам: условие действия проверяют и клиент,
+// и сервер); что выпадает, решает сервер — VB_Rift_Server, VB_RiftWorldZombie.c (modded ActionSkinning.SpawnItems).
 
 class VB_RiftZombie
 {
-	static const string ROOT_TYPE = "VB_RiftRootPiece";
-	static const float ROOT_CHANCE = 0.25;
-	static const string SPORES_TYPE = "VB_RiftSpores";
-	static const float SPORES_CHANCE = 0.05;
 	static const string BURST_SOUND = "VB_RiftBurst_SoundSet";
 	static const float BURST_HEIGHT = 1.1;	// примерно грудь, м
 
 	static bool VB_Is(EntityAI zmb)
 	{
 		return zmb && zmb.ConfigGetBool("vbRiftZombie");
-	}
-
-	// сервер
-	static void VB_OnKilledServer(ZombieBase zmb)
-	{
-		if (Math.RandomFloat01() < ROOT_CHANCE)
-			VB_DropServer(zmb, ROOT_TYPE);
-		if (Math.RandomFloat01() < SPORES_CHANCE)
-			VB_DropServer(zmb, SPORES_TYPE);
-	}
-
-	// в инвентарь трупа, а если места нет — рядом на землю
-	static void VB_DropServer(ZombieBase zmb, string type)
-	{
-		EntityAI item = zmb.GetInventory().CreateInInventory(type);
-		if (!item)
-			g_Game.CreateObjectEx(type, zmb.GetPosition(), ECE_PLACE_ON_SURFACE);
 	}
 
 	// клиент; justDied = false, если труп просто подгрузился
@@ -59,12 +40,13 @@ class VB_RiftZombie
 
 modded class ZombieBase
 {
-	override void EEKilled(Object killer)
+	// мёртвого зомби Изнанки разделывают ножом, как животных (ванильное «Разделать», ActionSkinning:
+	// нужен CanBeSkinned и не живой). Ванильные зомби (CanBeSkinned = false) не меняются
+	override bool CanBeSkinned()
 	{
-		super.EEKilled(killer);
-
-		if (g_Game.IsServer() && VB_RiftZombie.VB_Is(this))
-			VB_RiftZombie.VB_OnKilledServer(this);
+		if (VB_RiftZombie.VB_Is(this))
+			return true;
+		return super.CanBeSkinned();
 	}
 
 	override void OnDamageDestroyed(int oldLevel)

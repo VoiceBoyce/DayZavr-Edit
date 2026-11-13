@@ -7,9 +7,12 @@
 // Щупальца на дома автоматически не вешаются: криво встают на сложных крышах, их ставят вручную редактором.
 // Раскладка считается от координат дома — у всех игроков одинаковая. По сети ничего не идёт; всё бьётся
 // в ритме сердца, днём спит и гаснет вместе с сердцем (корни связаны с ним, как обвивки деревьев).
+// Одевание — не в EEInit, а когда игрок подошёл к сердцу (VB_RiftHeart.VB_DecorCheck, VB_RiftBase.c): дома
+// выбираются и занимаются сразу, а одеваются по одному за шаг, после обвивок деревьев (баг №37).
 
 modded class VB_RiftHeart
 {
+	static const bool DEBUG_HOUSES = false;		// true — строка в лог клиента на каждый одетый дом
 	static const float HOUSE_RADIUS = 25.0;		// м: дома, чья коробка ближе этого к сердцу
 	static const int HOUSE_MAX = 3;				// не больше стольких домов на сердце
 	static const float HOUSE_MIN_SIZE = 4.0;	// м: уже/короче — не дом (будки, столбы, заборы)
@@ -31,7 +34,8 @@ modded class VB_RiftHeart
 
 	protected static ref array<Object> s_VB_DressedHouses;	// дома, уже одетые каким-то сердцем у этого клиента
 
-	protected ref array<Object> m_VB_Houses;
+	protected ref array<Object> m_VB_Houses;			// дома, занятые этим сердцем (одетые и ждущие очереди)
+	protected ref array<Object> m_VB_HouseQueue;		// ещё не одетые, ближние первыми
 	protected ref array<vector> m_VB_HouseLightPos;
 	protected ref array<float> m_VB_HouseLightRad;
 	protected ref array<VB_RiftLight> m_VB_HouseLights;
@@ -40,17 +44,31 @@ modded class VB_RiftHeart
 	protected vector m_VB_LastDecorPos;					// последний поставленный корень и куда он смотрит
 	protected vector m_VB_LastDecorDir;
 
-	override void EEInit()
+	// после деревьев: выбрать и занять дома (дёшево), одевать — по одному в VB_DecorNext
+	override protected void VB_DecorPrepare()
 	{
-		super.EEInit();
-		if (m_VB_Bare || g_Game.IsDedicatedServer())
-			return;
+		super.VB_DecorPrepare();
+		VB_PickHouses();
+	}
 
-		VB_DressHouses();
+	override protected bool VB_DecorNext()
+	{
+		if (super.VB_DecorNext())
+			return true;		// сначала все деревья
+		if (!m_VB_HouseQueue || m_VB_HouseQueue.Count() == 0)
+			return false;
+
+		Object house = m_VB_HouseQueue[0];
+		m_VB_HouseQueue.RemoveOrdered(0);
+		if (house)
+			VB_DressHouse(house);
+		return true;
 	}
 
 	override protected void VB_Cleanup()
 	{
+		if (m_VB_HouseQueue)
+			m_VB_HouseQueue.Clear();
 		VB_HouseTick(false, 0, 0);
 		if (m_VB_Houses && s_VB_DressedHouses)
 		{
@@ -71,15 +89,15 @@ modded class VB_RiftHeart
 		if (!m_VB_HouseLightPos || m_VB_HouseLightPos.Count() == 0)
 			return;
 
-		if (on && m_VB_HouseLights.Count() == 0)
+		if (on && m_VB_HouseLights.Count() < m_VB_HouseLightPos.Count())
 		{
-			for (int i = 0; i < m_VB_HouseLightPos.Count(); i++)
+			// дома одеваются по одному: подсветку только что одетого добавляем и к уже горящей
+			for (int i = m_VB_HouseLights.Count(); i < m_VB_HouseLightPos.Count(); i++)
 			{
 				VB_RiftLight light = VB_RiftLight.Cast(ScriptedLightBase.CreateLight(VB_RiftLight, m_VB_HouseLightPos[i]));
-				if (!light)
-					continue;
-				light.SetRadiusTo(m_VB_HouseLightRad[i]);
-				m_VB_HouseLights.Insert(light);
+				if (light)
+					light.SetRadiusTo(m_VB_HouseLightRad[i]);
+				m_VB_HouseLights.Insert(light);		// и пустой: номера совпадают с m_VB_HouseLightPos
 			}
 		}
 		else if (!on && m_VB_HouseLights.Count() > 0)
@@ -149,9 +167,11 @@ modded class VB_RiftHeart
 		return Math.Sqrt(dx * dx + dz * dz);
 	}
 
-	protected void VB_DressHouses()
+	// до HOUSE_MAX ближайших домов: занять (другое сердце их уже не возьмёт) и поставить в очередь на одевание
+	protected void VB_PickHouses()
 	{
 		m_VB_Houses = new array<Object>;
+		m_VB_HouseQueue = new array<Object>;
 		m_VB_HouseLightPos = new array<vector>;
 		m_VB_HouseLightRad = new array<float>;
 		m_VB_HouseLights = new array<VB_RiftLight>;
@@ -196,7 +216,7 @@ modded class VB_RiftHeart
 
 			s_VB_DressedHouses.Insert(house);
 			m_VB_Houses.Insert(house);
-			VB_DressHouse(house);
+			m_VB_HouseQueue.Insert(house);
 		}
 	}
 
@@ -269,7 +289,7 @@ modded class VB_RiftHeart
 	{
 		for (int i = 0; i < m_VB_DecorSpots.Count(); i++)
 		{
-			if (VB_RiftNests.VB_DistXZ(p, m_VB_DecorSpots[i]) < hw + m_VB_DecorHalf[i] + 0.2)
+			if (VB_RiftNestUtil.VB_DistXZ(p, m_VB_DecorSpots[i]) < hw + m_VB_DecorHalf[i] + 0.2)
 				return false;
 		}
 		return true;
@@ -354,7 +374,13 @@ modded class VB_RiftHeart
 			m_VB_HouseLightRad.Insert(HOUSE_LIGHT_RADIUS);
 		}
 
-		Print("[VB_Rift] дом " + b.GetType() + ": угол " + corners.ToString() + ", корней на стенах " + walls.ToString());
+		if (DEBUG_HOUSES)
+		{
+			string houseType = b.GetType();
+			string cornersStr = corners.ToString();
+			string wallsStr = walls.ToString();
+			Print("[VB_Rift] дом " + houseType + ": угол " + cornersStr + ", корней на стенах " + wallsStr);
+		}
 	}
 
 	// корни по стене: стена на всю ширину корня (края на 1 м, сверху на 2.4 м — та же плоскость)

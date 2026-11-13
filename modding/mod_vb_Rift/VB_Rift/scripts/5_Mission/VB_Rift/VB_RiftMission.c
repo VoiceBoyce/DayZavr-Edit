@@ -1,14 +1,5 @@
-// Изнанка в миссии: сервер на старте ставит гнёзда (VB_RiftNests), клиент — клавиша и окно редактора (VB_RiftEditor).
-
-modded class MissionServer
-{
-	override void OnInit()
-	{
-		super.OnInit();
-		VB_RiftItems.VB_Session();	// метка этой сессии: «Сердце Изнанки» из прошлой протухнет
-		VB_RiftNests.VB_StartServer();
-	}
-}
+// Изнанка в миссии клиента: клавиша и окно редактора гнёзд (VB_RiftEditor).
+// Серверный запуск (метка сессии предметов, гнёзда) — в серверном моде VB_Rift_Server (VB_RiftMissionServer.c).
 
 modded class MissionGameplay
 {
