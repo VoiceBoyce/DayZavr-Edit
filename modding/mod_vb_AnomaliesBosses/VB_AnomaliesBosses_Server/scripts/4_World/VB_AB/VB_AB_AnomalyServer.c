@@ -17,6 +17,7 @@ modded class VB_AB_AnomalyBase
 	protected float m_VB_PushRadius;
 	protected Object m_VB_Owner;				// босс, чьё это поле (его аномалии не бьют)
 	protected bool m_VB_Fading;					// поле хозяина гаснет
+	protected bool m_VB_NoLoot;					// без материала: временная («под ногами») или поле точки уже давало лут
 	protected ref UniversalTemperatureSource m_VB_Heat;
 	protected ref UniversalTemperatureSourceSettings m_VB_HeatSettings;
 	protected ref UniversalTemperatureSourceLambdaConstant m_VB_HeatLambda;
@@ -62,6 +63,12 @@ modded class VB_AB_AnomalyBase
 		m_VB_Owner = owner;
 	}
 
+	// Ставить сразу после CreateObjectEx: засев идёт через 500 мс (VB_SeedLoot)
+	void VB_SetNoLoot(bool on)
+	{
+		m_VB_NoLoot = on;
+	}
+
 	// Поле хозяина гаснет (VB_AB_Field.Collapse): аномалия скоро исчезнет вместе с находками (детекторы, ТЗ 8.19).
 	void VB_SetFading(bool on)
 	{
@@ -96,8 +103,11 @@ modded class VB_AB_AnomalyBase
 
 	// ---------------------------------------------------------------- сервер
 	// Материал аномалии (ТЗ 2.6): записи у самой аномалии, 0,5–3 м от центра; исчезают вместе с ней.
+	// Без материала: временная аномалия, поле точки уже давало лут в этом рестарте, исчерпан MaxMaterialsPerRestart.
 	void VB_SeedLoot()
 	{
+		if (m_VB_NoLoot || !VB_AB_Server.MaterialsLeft())
+			return;
 		VB_AB_AnomalyCfg cfg = VB_AB_Cfg.Get().GetAnomaly(GetType());
 		if (cfg && cfg.Loot)
 			VB_AB_Finds.SeedTable(cfg.Loot, GetPosition(), 0.5, 3.0, this);
@@ -147,7 +157,8 @@ modded class VB_AB_AnomalyBase
 		m_VB_State = ST_ACTIVE;
 		m_VB_Fire++;
 		SetSynchDirty();
-		VB_AB_Log.Dbg("аномалия " + GetType() + " сработала у " + GetPosition().ToString());
+		if (VB_AB_Log.s_Debug)
+			VB_AB_Log.Dbg("аномалия " + GetType() + " сработала у " + GetPosition().ToString());
 		if (m_VB_Def.EffectKind == "twophase")
 			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_Phase2, Math.Max(0.1, m_VB_Def.ChargeTime) * 1000, false);
 		else
@@ -166,7 +177,8 @@ modded class VB_AB_AnomalyBase
 			r = m_VB_Def.Radius;
 		if (h <= 0)
 			h = m_VB_Def.Height;
-		VB_AB_Log.Dbg("аномалия " + GetType() + ": вторая фаза, радиус " + r);
+		if (VB_AB_Log.s_Debug)
+			VB_AB_Log.Dbg("аномалия " + GetType() + ": вторая фаза, радиус " + r);
 		VB_DamageInside(r, h);
 	}
 
@@ -199,7 +211,8 @@ modded class VB_AB_AnomalyBase
 			if (e.IsMan())
 				zone = m_VB_Def.Zones.GetRandomElement();
 			e.ProcessDirectDamage(DT_CUSTOM, this, zone, m_VB_Def.Ammo, "0 0 0", coef);
-			VB_AB_Log.Dbg("аномалия " + GetType() + " задела " + e.GetType() + " (" + m_VB_Def.Ammo + " ×" + coef + ")");
+			if (VB_AB_Log.s_Debug)
+				VB_AB_Log.Dbg("аномалия " + GetType() + " задела " + e.GetType() + " (" + m_VB_Def.Ammo + " ×" + coef + ")");
 		}
 	}
 
@@ -294,6 +307,7 @@ class VB_AB_AnomalyManager
 	static const float NEAR_PLAYERS_M = 80;	// зомби проверяем, только если рядом есть игрок
 	protected static ref VB_AB_AnomalyManager s_Instance;
 	protected ref array<VB_AB_AnomalyBase> m_List = new array<VB_AB_AnomalyBase>;
+	protected int m_TickNo;
 
 	static void Register(VB_AB_AnomalyBase a)
 	{
@@ -326,6 +340,10 @@ class VB_AB_AnomalyManager
 		array<Man> players = new array<Man>;
 		GetGame().GetPlayers(players);
 		float near2 = NEAR_PLAYERS_M * NEAR_PLAYERS_M;
+		// игроков проверяем каждый такт (0,25 с), зомби и зверей поиском объектов — раз в секунду: это была
+		// самая тяжёлая постоянная нагрузка мода (аудит 2026-11-13)
+		m_TickNo++;
+		bool creatures = (m_TickNo % 4) == 0;
 		for (int i = m_List.Count() - 1; i >= 0; i--)
 		{
 			VB_AB_AnomalyBase a = m_List[i];
@@ -345,7 +363,7 @@ class VB_AB_AnomalyManager
 				}
 			}
 			if (near)
-				a.VB_ServerTick(players, true);
+				a.VB_ServerTick(players, creatures);
 		}
 	}
 };

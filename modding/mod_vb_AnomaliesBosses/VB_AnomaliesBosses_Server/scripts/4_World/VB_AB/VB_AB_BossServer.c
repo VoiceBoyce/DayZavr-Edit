@@ -26,6 +26,11 @@ modded class VB_AB_BossBase
 	protected float m_VB_NoPlayersSec;
 	protected bool m_VB_Dead;
 	protected Man m_VB_LastHitter;		// смерть наступает от SetHealth(0) без убийцы, поэтому помним стрелявшего
+	// Источник тепла/холода способностей (Жар, Ледяное дыхание, Метель) — один на босса на всю его жизнь.
+	// Раньше он жил в способности и удалялся с набором, а босс (EntityAI.m_UniversalTemperatureSource, указатель
+	// без ref на не-Managed класс) смотрел на удалённый объект — окружение игроков рядом обращалось к нему каждый
+	// такт (аудит 2026-11-13). У ледяных боссов два источника ещё и затирали друг друга.
+	protected ref VB_AB_TempSource m_VB_Temp;
 
 	override void EEInit()
 	{
@@ -97,6 +102,13 @@ modded class VB_AB_BossBase
 		SetSynchDirty();
 	}
 
+	VB_AB_TempSource VB_GetTemp()
+	{
+		if (!m_VB_Temp)
+			m_VB_Temp = new VB_AB_TempSource();
+		return m_VB_Temp;
+	}
+
 	// ---------------------------------------------------------------- способности (ТЗ 4.3)
 	// Снять набор: отложенные удары отменяются, поставленное способностями (спутники «Стаи») убирается
 	protected void VB_ClearAbilities()
@@ -105,6 +117,8 @@ modded class VB_AB_BossBase
 		foreach (VB_AB_Ability ab : m_VB_Abil)
 			ab.OnClear(this);
 		m_VB_Abil.Clear();
+		if (m_VB_Temp)
+			m_VB_Temp.Off();
 	}
 
 	// «Перебросить поле» (редактор): свернуть и раскрыть заново с новым броском шансов
@@ -225,14 +239,7 @@ modded class VB_AB_BossBase
 				}
 			}
 		}
-		else
-		{
-			// босс поставлен не из bosses.json: трофей его скина, если такой класс есть (VB_AB_Ent_Storm -> VB_AB_Trophy_Ent_Storm)
-			string t = GetType();
-			t.Replace("VB_AB_", "VB_AB_Trophy_");
-			if (VB_GiveTrophy(player, t))
-				got = " " + t;
-		}
+		// босс не из bosses.json (заспавнен админкой) трофея не даёт: иначе спавн боссов = спавн трофеев (аудит 2026-11-13)
 		string who = "?";
 		if (player && player.GetIdentity())
 			who = player.GetIdentity().GetName() + " (" + player.GetIdentity().GetPlainId() + ")";
@@ -255,7 +262,12 @@ modded class VB_AB_BossBase
 		vector p = GetPosition();
 		if (player)
 			p = player.GetPosition();
-		EntityAI it = EntityAI.Cast(GetGame().CreateObjectEx(cls, VB_AB_Finds.RandomGroundPos(p, 0.2, 0.6), ECE_PLACE_ON_SURFACE));
+		// высота — от ног резавшего: ECE_PLACE_ON_SURFACE трассирует вниз от точки создания и кладёт на пол дома,
+		// моста или бункера (по рельефу трофей оказывался под полом или над бункером)
+		vector at = VB_AB_Finds.RandomGroundPos(p, 0.2, 0.6);
+		if (Math.AbsFloat(p[1] - at[1]) > 0.5)
+			at[1] = p[1] + 0.3;
+		EntityAI it = EntityAI.Cast(GetGame().CreateObjectEx(cls, at, ECE_PLACE_ON_SURFACE));
 		return it != null;
 	}
 
@@ -289,9 +301,15 @@ modded class VB_AB_BossBase
 			return;
 		if (!m_VB_Field)
 		{
-			// агр зомби или чужой вплотную к логову: ИИ иногда долго «не замечает» игрока рядом (на стенде — минуты)
-			if (GetMindStateSynced() >= DayZInfectedConstants.MINDSTATE_CHASE || VB_AB_Server.AnyPlayerNear(GetPosition(), SENSE_RADIUS))
+			// агр зомби или чужой вплотную к логову: ИИ иногда долго «не замечает» игрока рядом (на стенде — минуты).
+			// Только погоня и бой: MINDSTATE_COWER (1.30, песчаная буря) стоит после FIGHT и раскрывал поле без игроков.
+			int ms = GetMindStateSynced();
+			if (ms == DayZInfectedConstants.MINDSTATE_CHASE || ms == DayZInfectedConstants.MINDSTATE_FIGHT || VB_AB_Server.AnyPlayerNear(GetPosition(), SENSE_RADIUS))
+			{
 				VB_OpenField();
+				return;
+			}
+			VB_LeashToPoint();
 			return;
 		}
 		vector pos = GetPosition();
@@ -333,6 +351,12 @@ modded class VB_AB_BossBase
 	{
 		m_VB_Field = new VB_AB_Field(this, m_VB_Cfg, GetPosition());
 		m_VB_NoPlayersSec = 0;
+		m_VB_OutSec = 0;
+		// материалы аномалий — только у первого поля точки за рестарт (сброс и новое раскрытие лута не дают)
+		bool loot = !m_VB_Point || m_VB_Point.TakeLoot();
+		m_VB_Field.SetLoot(loot);
+		if (!loot)
+			VB_AB_Log.Info("поле " + VB_GetId() + ": материалы этой точки в этом рестарте уже были — аномалии без лута");
 		m_VB_Field.Open();
 		VB_RollAbilities();
 		VB_CheckPhases();		// здоровье могли сбить ещё до раскрытия
@@ -343,7 +367,31 @@ modded class VB_AB_BossBase
 	{
 		vector c = VB_AB_Finds.RandomGroundPos(m_VB_Field.GetCenter(), 1, 3);
 		VB_TeleportTo(c);
-		VB_AB_Log.Info("босс " + VB_GetId() + " вернулся в поле: отошёл на " + Math.Round(dist) + " м, поводок " + m_VB_Cfg.Field.LeashRadius + " м");
+		if (VB_AB_Log.s_Debug)
+			VB_AB_Log.Dbg("босс " + VB_GetId() + " вернулся в поле: отошёл на " + Math.Round(dist) + " м, поводок " + m_VB_Cfg.Field.LeashRadius + " м");
+	}
+
+	// До раскрытия поля поводок — от точки: шумом/ракетницей босса уводили куда угодно (к базе, в воду, к трейдеру)
+	protected void VB_LeashToPoint()
+	{
+		if (!m_VB_Point)
+			return;
+		vector pos = GetPosition();
+		vector pt = m_VB_Point.GetPos();
+		float dx = pos[0] - pt[0];
+		float dz = pos[2] - pt[2];
+		float leash = m_VB_Cfg.Field.LeashRadius;
+		if (dx * dx + dz * dz <= leash * leash)
+		{
+			m_VB_OutSec = 0;
+			return;
+		}
+		m_VB_OutSec += TICK_MS / 1000.0;
+		if (m_VB_OutSec < LEASH_GRACE_SEC)
+			return;
+		m_VB_OutSec = 0;
+		VB_TeleportTo(VB_AB_Finds.RandomGroundPos(pt, 1, 3));
+		VB_AB_Log.Info("босс " + VB_GetId() + " ушёл от точки " + m_VB_Point.m_Cfg.Id + " без боя дальше поводка — вернулся");
 	}
 
 	// Перенос босса со сбросом скорости (как DeveloperTeleport): без этого после SetPosition физика
@@ -405,7 +453,8 @@ modded class VB_AB_BossBase
 		m_VB_HP -= dmg;
 		if (source && source.GetHierarchyRootPlayer())
 			m_VB_LastHitter = source.GetHierarchyRootPlayer();
-		VB_AB_Log.Dbg("попадание по " + VB_GetId() + ": " + dmgZone + " " + ammo + " −" + dmg + ", осталось " + m_VB_HP + "/" + m_VB_HPMax);
+		if (VB_AB_Log.s_Debug)
+			VB_AB_Log.Dbg("попадание по " + VB_GetId() + ": " + dmgZone + " " + ammo + " −" + dmg + ", осталось " + m_VB_HP + "/" + m_VB_HPMax);
 		if (m_VB_HP <= 0)
 		{
 			m_VB_HP = 0;
@@ -416,8 +465,9 @@ modded class VB_AB_BossBase
 		SetHealth("", "", GetMaxHealth("", ""));
 		VB_AB_Voice.ServerSay(this, VB_AB_Voice.EV_PAIN);
 		// Выстрел издалека зомби замечает не сразу (на стенде погоня началась через 15 с),
-		// а босс без поля — лёгкая добыча для снайпера. Поэтому попадание игрока раскрывает поле сразу.
-		if (!m_VB_Field && m_VB_Cfg && source && source.GetHierarchyRootPlayer())
+		// а босс без поля — лёгкая добыча для снайпера. Поэтому любое попадание раскрывает поле сразу: и не от
+		// игрока (мина, растяжка, граната, машина) — иначе без фаз, щита и способностей урон копился (аудит 2026-11-13).
+		if (!m_VB_Field && m_VB_Cfg)
 			VB_OpenField();
 		else
 			VB_CheckPhases();
@@ -452,7 +502,12 @@ modded class VB_AB_BossBase
 		m_VB_Dead = true;
 		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_BossTick);
 		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_AbilityFire);
+		// поднятые зомби и спутники «Стаи» уходят через несколько минут (раньше жили до рестарта)
+		foreach (VB_AB_Ability ab : m_VB_Abil)
+			ab.OnBossDead(this);
 		m_VB_Abil.Clear();
+		if (m_VB_Temp)
+			m_VB_Temp.Off();
 		float after = 120;
 		float corpseMin = 15;
 		if (m_VB_Cfg)

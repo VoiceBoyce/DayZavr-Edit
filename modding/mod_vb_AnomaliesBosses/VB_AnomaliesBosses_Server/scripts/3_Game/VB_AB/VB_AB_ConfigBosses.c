@@ -52,13 +52,17 @@ class VB_AB_ChanceLine
 		return OneOf[OneOf.Count() - 1].Classname;
 	}
 
+	static const int MAX_COUNT = 50;		// опечатка [1, 100000] не должна вешать сервер (аудит 2026-11-13)
+
 	int PickCount()
 	{
 		if (!Count || Count.Count() == 0)
 			return 1;
+		int lo = Math.Clamp(Count[0], 0, MAX_COUNT);
 		if (Count.Count() == 1)
-			return Math.Max(0, Count[0]);
-		return Math.RandomIntInclusive(Math.Max(0, Count[0]), Math.Max(Count[0], Count[1]));
+			return lo;
+		int hi = Math.Clamp(Count[1], lo, MAX_COUNT);
+		return Math.RandomIntInclusive(lo, hi);
 	}
 
 	bool RollChance()
@@ -223,9 +227,16 @@ class VB_AB_BossCfg
 		}
 		if (Phases)
 		{
+			// null в списке ронял загрузку и каждое попадание; порядок — по убыванию порога (0.6 раньше 0.3)
+			for (int pi = Phases.Count() - 1; pi >= 0; pi--)
+			{
+				if (!Phases[pi])
+					Phases.RemoveOrdered(pi);
+			}
+			VB_SortPhases();
 			foreach (VB_AB_PhaseCfg ph : Phases)
 			{
-				if (!ph || !ph.Anomalies)
+				if (!ph.Anomalies)
 					continue;
 				foreach (VB_AB_AnomalyLine pl : ph.Anomalies)
 				{
@@ -247,6 +258,20 @@ class VB_AB_BossCfg
 		if (!Trophy)
 			Trophy = new VB_AB_TrophyCfg;
 		Trophy.VB_Norm();
+	}
+
+	// фазы по убыванию Health (вставками: их 1–3)
+	protected void VB_SortPhases()
+	{
+		for (int i = 1; i < Phases.Count(); i++)
+		{
+			int j = i;
+			while (j > 0 && Phases[j - 1].Health < Phases[j].Health)
+			{
+				Phases.SwapItems(j - 1, j);
+				j--;
+			}
+		}
 	}
 };
 
@@ -310,6 +335,7 @@ class VB_AB_SettingsFile
 	int MaxAnomaliesTotal = 80;				// нет или 0 — 80
 	int MaxFieldArtifactsPerRestart = 40;	// нет или 0 — 40
 	float ResetAfterSec = 60;				// все ушли из поля и поводка столько секунд — поле сворачивается, босс лечится
+	int MaxMaterialsPerRestart = 300;		// материалов аномалий (штук) на весь сервер за рестарт; нет или 0 — 300
 	int DebugLog;								// 1 — подробный лог
 
 	void VB_Norm()
@@ -333,6 +359,8 @@ class VB_AB_SettingsFile
 			MaxFieldArtifactsPerRestart = 40;
 		if (ResetAfterSec <= 0)
 			ResetAfterSec = 60;
+		if (MaxMaterialsPerRestart <= 0)
+			MaxMaterialsPerRestart = 300;
 	}
 };
 
@@ -351,6 +379,12 @@ class VB_AB_BossData
 	ref array<ref VB_AB_PointCfg> m_Points = new array<ref VB_AB_PointCfg>;
 	ref VB_AB_StateFile m_State;
 
+	// Файл есть, но не разобрался (опечатка в JSON). Такой набор не подменяет рабочий при «Перечитать»,
+	// а points.json с ошибкой не перезаписывается из памяти — иначе пропали бы все точки (аудит 2026-11-13).
+	bool m_SettingsBroken;
+	bool m_BossesBroken;
+	bool m_PointsBroken;
+
 	void Load()
 	{
 		if (!FileExist("$profile:VB_Mods"))
@@ -364,17 +398,52 @@ class VB_AB_BossData
 		LoadState();
 	}
 
+	bool IsBroken()
+	{
+		return m_SettingsBroken || m_BossesBroken || m_PointsBroken;
+	}
+
+	// Копия рабочего points.json на каждый запуск сервера: ручную ошибку или неудачную правку есть откуда вернуть
+	void BackupPoints()
+	{
+		string path = DIR + "points.json";
+		string bak = DIR + "points_backup.json";
+		if (m_PointsBroken || !FileExist(path))
+			return;
+		if (FileExist(bak))
+			DeleteFile(bak);
+		CopyFile(path, bak);
+	}
+
+	// settings.json во временный объект: null — файла нет или он не разобрался
+	protected VB_AB_SettingsFile ReadSettingsFile(string path, out bool broken)
+	{
+		broken = false;
+		if (!FileExist(path))
+			return null;
+		VB_AB_SettingsFile s;
+		string err;
+		if (!JsonFileLoader<VB_AB_SettingsFile>.LoadFile(path, s, err) || !s)
+		{
+			broken = true;
+			VB_AB_Log.Warn("settings.json не прочитан: " + err);
+			return null;
+		}
+		return s;
+	}
+
 	protected void LoadSettings()
 	{
 		string path = DIR + "settings.json";
-		string err;
-		if (FileExist(path) && !JsonFileLoader<VB_AB_SettingsFile>.LoadFile(path, m_Settings, err))
-			VB_AB_Log.Warn("settings.json не прочитан: " + err);
+		VB_AB_SettingsFile s = ReadSettingsFile(path, m_SettingsBroken);
+		if (s)
+			m_Settings = s;
 		if (!m_Settings)
 		{
 			m_Settings = new VB_AB_SettingsFile;
 			m_Settings.Admins = new array<string>;
 			m_Settings.Admins.Insert("76561200715668795");		// админ по умолчанию (пользователь, 2026-11-13)
+			string err;
 			if (!FileExist(path))
 				JsonFileLoader<VB_AB_SettingsFile>.SaveFile(path, m_Settings, err);
 		}
@@ -389,7 +458,10 @@ class VB_AB_BossData
 		VB_AB_BossesFile f;
 		string err;
 		if (FileExist(path) && !JsonFileLoader<VB_AB_BossesFile>.LoadFile(path, f, err))
+		{
+			m_BossesBroken = true;
 			VB_AB_Log.Warn("bosses.json не прочитан: " + err);
+		}
 		if (!f || !f.Bosses)
 			return;
 		foreach (VB_AB_BossCfg b : f.Bosses)
@@ -470,7 +542,10 @@ class VB_AB_BossData
 		VB_AB_PointsFile f;
 		string err;
 		if (FileExist(path) && !JsonFileLoader<VB_AB_PointsFile>.LoadFile(path, f, err))
-			VB_AB_Log.Warn("points.json не прочитан: " + err);
+		{
+			m_PointsBroken = true;
+			VB_AB_Log.Warn("points.json не прочитан: " + err + " — правки точек в редакторе не сохранятся, пока файл не исправлен (копия: points_backup.json)");
+		}
 		if (!f)
 		{
 			f = new VB_AB_PointsFile;
@@ -494,6 +569,11 @@ class VB_AB_BossData
 
 	void SavePoints()
 	{
+		if (m_PointsBroken)
+		{
+			VB_AB_Log.Warn("points.json не записан: файл с ошибкой, исправьте его и нажмите «Перечитать конфиги»");
+			return;
+		}
 		VB_AB_PointsFile f = new VB_AB_PointsFile;
 		f.Points = m_Points;
 		string err;
@@ -530,7 +610,19 @@ class VB_AB_BossData
 
 	// ---------------------------------------------------------------- редактор (VB_AB_EditorServer.c)
 	// Удалённые точки живут до рестарта: на них ещё может смотреть VB_AB_PointRuntime (указатель без ref).
-	protected ref array<ref VB_AB_PointCfg> m_RemovedPoints = new array<ref VB_AB_PointCfg>;
+	ref array<ref VB_AB_PointCfg> m_RemovedPoints = new array<ref VB_AB_PointCfg>;
+
+	// «Перечитать конфиги»: удалённые в этом запуске точки переходят в новый набор (номер не переиспользуется)
+	void InheritRemoved(VB_AB_BossData old)
+	{
+		if (!old)
+			return;
+		foreach (VB_AB_PointCfg r : old.m_RemovedPoints)
+		{
+			if (r && m_RemovedPoints.Find(r) == -1)
+				m_RemovedPoints.Insert(r);
+		}
+	}
 
 	VB_AB_PointCfg FindPoint(int id)
 	{
@@ -586,17 +678,35 @@ class VB_AB_BossData
 		return true;
 	}
 
-	void SaveSettings()
+	// «Точек за рестарт» из редактора: в файле меняется только это поле, ручные правки (новые админы, радиусы)
+	// не затираются памятью. Файл с ошибкой не трогаем — число действует до рестарта.
+	void SaveActivePoints(int n)
 	{
+		m_Settings.ActivePointsPerRestart = n;
+		string path = DIR + "settings.json";
+		bool broken;
+		VB_AB_SettingsFile s = ReadSettingsFile(path, broken);
+		if (broken)
+		{
+			VB_AB_Log.Warn("settings.json с ошибкой: «Точек за рестарт» не записано в файл");
+			return;
+		}
+		if (!s)
+			s = m_Settings;
+		s.ActivePointsPerRestart = n;
 		string err;
-		if (!JsonFileLoader<VB_AB_SettingsFile>.SaveFile(DIR + "settings.json", m_Settings, err))
+		if (!JsonFileLoader<VB_AB_SettingsFile>.SaveFile(path, s, err))
 			VB_AB_Log.Warn("settings.json не записан: " + err);
 	}
 
-	// settings.json с диска (админа можно дописать без рестарта)
-	void ReloadSettings()
+	// Список админов с диска (админа можно дописать без рестарта). Остальные поля живого сервера не меняются,
+	// файл с ошибкой ничего не сбрасывает.
+	void ReloadAdmins()
 	{
-		m_Settings = null;
-		LoadSettings();
+		bool broken;
+		VB_AB_SettingsFile s = ReadSettingsFile(DIR + "settings.json", broken);
+		if (!s || !s.Admins)
+			return;
+		m_Settings.Admins = s.Admins;
 	}
 };

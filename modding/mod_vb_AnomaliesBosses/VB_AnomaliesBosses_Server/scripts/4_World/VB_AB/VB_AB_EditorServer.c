@@ -12,6 +12,11 @@ class VB_AB_EditorServer
 	protected ref TStringArray m_Editors = new TStringArray;	// SteamID с открытым редактором
 	protected bool m_LiveOn;
 
+	static const float DENY_SEC = 5.0;				// не-админ: один запрос в столько секунд
+	static const float RELOAD_ADMINS_SEC = 30.0;	// список админов с диска — не чаще
+	protected ref map<string, float> m_DenyUntil = new map<string, float>;
+	protected float m_AdminsReloadAt;
+
 	static void VB_OnRpc(PlayerBase player, PlayerIdentity sender, ParamsReadContext ctx)
 	{
 		if (!sender)
@@ -27,23 +32,32 @@ class VB_AB_EditorServer
 		if (!ctx.Read(op))
 			return;
 
-		// действует всегда свой персонаж отправителя
+		// действует всегда свой персонаж отправителя (не объект, на который пришёл RPC)
 		PlayerBase actor = PlayerBase.Cast(sender.GetPlayer());
-		if (!actor)
-			actor = player;
 		if (!actor)
 			return;
 
 		string uid = sender.GetPlainId();
-		string who = sender.GetName() + " (" + uid + ")";
 		VB_AB_BossData data = VB_AB_Server.Data();
 		if (!data)
-		{
-			VB_AB_Log.Warn("редактор: сервер боссов не запущен, " + who);
 			return;
+		if (!data.IsAdmin(uid))
+		{
+			// Не админ: не чаще раза в DENY_SEC, лишнее молча отбрасывается. Раньше каждый запрос читал settings.json
+			// с диска и писал строку в лог — читер (или файл автотеста) заваливал сервер (аудит 2026-11-13).
+			float now = VB_AB_Server.Now();
+			float until;
+			if (m_DenyUntil.Find(uid, until) && now < until)
+				return;
+			m_DenyUntil.Set(uid, now + DENY_SEC);
+			// админа можно дописать в settings.json без рестарта: список перечитывается не чаще раза в RELOAD_ADMINS_SEC
+			if (op == VB_AB_EditorNet.OP_OPEN && now >= m_AdminsReloadAt)
+			{
+				m_AdminsReloadAt = now + RELOAD_ADMINS_SEC;
+				data.ReloadAdmins();
+			}
 		}
-		if (!data.IsAdmin(uid) && op == VB_AB_EditorNet.OP_OPEN)
-			data.ReloadSettings();		// админа можно дописать в settings.json без рестарта
+		string who = sender.GetName() + " (" + uid + ")";
 		if (!data.IsAdmin(uid))
 		{
 			VB_AB_Log.Warn("редактор: нет прав у " + who + " (операция " + op + ")");
@@ -428,7 +442,11 @@ class VB_AB_EditorServer
 	protected void VB_Reload(PlayerBase actor, string who)
 	{
 		VB_AB_Log.Info("редактор: " + who + " перечитал конфиги");
-		VB_AB_Server.ReloadConfigs();
+		if (!VB_AB_Server.ReloadConfigs())
+		{
+			VB_Msg(actor, "STR_VB_AB_Ed_MsgReloadFail");
+			return;
+		}
 		VB_AB_BossData data = VB_AB_Server.Data();
 		foreach (string editor : m_Editors)
 		{
@@ -442,8 +460,7 @@ class VB_AB_EditorServer
 	protected void VB_SetActive(PlayerBase actor, string who, int n)
 	{
 		VB_AB_BossData data = VB_AB_Server.Data();
-		data.m_Settings.ActivePointsPerRestart = Math.Clamp(n, 1, 200);
-		data.SaveSettings();
+		data.SaveActivePoints(Math.Clamp(n, 1, 200));
 		VB_AB_Log.Info("редактор: " + who + " задал точек за рестарт " + data.m_Settings.ActivePointsPerRestart);
 		foreach (string editor : m_Editors)
 		{
@@ -626,13 +643,15 @@ class VB_AB_EditorServer
 
 	protected void VB_LiveToEditors()
 	{
+		VB_AB_BossData data = VB_AB_Server.Data();
 		for (int i = m_Editors.Count() - 1; i >= 0; i--)
 		{
 			PlayerBase ep = VB_FindPlayer(m_Editors[i]);
-			if (ep && ep.GetIdentity())
+			// вышел с сервера, не закрыв редактор, или его убрали из админов — снимки больше не шлём
+			if (ep && ep.GetIdentity() && data && data.IsAdmin(m_Editors[i]))
 				VB_SendLive(ep);
 			else
-				m_Editors.Remove(i);		// вышел с сервера, не закрыв редактор
+				m_Editors.Remove(i);
 		}
 	}
 

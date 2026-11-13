@@ -14,6 +14,13 @@ class VB_AB_Ability
 	VB_AB_AbilityCfg m_Cfg;
 	float m_ReadyAt;
 
+	// Отложенные шаги перемещения не должны пережить способность (набор чистится при сбросе и смерти босса)
+	void ~VB_AB_Ability()
+	{
+		if (GetGame())
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(MoveSteps);
+	}
+
 	void Setup(VB_AB_AbilityCfg cfg, float now)
 	{
 		m_Cfg = cfg;
@@ -39,10 +46,12 @@ class VB_AB_Ability
 		return 15;
 	}
 
+	static const float MAX_DURATION = 60;		// опечатка в bosses.json не даёт минуты ослепления/метели
+
 	float Duration(float def)
 	{
 		if (m_Cfg.DurationSec > 0)
-			return m_Cfg.DurationSec;
+			return Math.Min(m_Cfg.DurationSec, MAX_DURATION);
 		return def;
 	}
 
@@ -68,14 +77,17 @@ class VB_AB_Ability
 		return f && !f.IsClosing() && f.HasAnyOf(m_Cfg.RequiresAnomaly);
 	}
 
-	// Ближайший живой игрок в радиусе способности
+	// Ближайший живой игрок в радиусе способности, которого босс видит (не за стеной)
 	PlayerBase PickTarget(VB_AB_BossBase boss)
 	{
 		array<PlayerBase> ps = new array<PlayerBase>;
 		VB_AB_Server.PlayersNear(boss.GetPosition(), Range(), ps);
-		if (ps.Count() == 0)
-			return null;
-		return ps[0];
+		foreach (PlayerBase p : ps)
+		{
+			if (VB_AB_Server.Sees(boss, p))
+				return p;
+		}
+		return null;
 	}
 
 	void OnOpen(VB_AB_BossBase boss)
@@ -84,6 +96,11 @@ class VB_AB_Ability
 
 	// Набор сбрасывается (сброс босса, переброс поля, уход): убрать то, что способность поставила в мир
 	void OnClear(VB_AB_BossBase boss)
+	{
+	}
+
+	// Босс убит: поставленное способностью доживает несколько минут и уходит (VB_AB_Server.DespawnLater)
+	void OnBossDead(VB_AB_BossBase boss)
 	{
 	}
 
@@ -125,15 +142,41 @@ class VB_AB_Ability
 		return Vector(p[0], GetGame().SurfaceY(p[0], p[2]), p[2]);
 	}
 
-	// Сдвинуть игрока по шагам (толчок/притяжение): SetPosition на сервере, по 0,12 с
+	// Сдвинуть игрока по шагам (толчок/притяжение): SetPosition на сервере, по 0,12 с. Шаг только по земле:
+	// без стены на пути, без обрыва, не в воду и не из дома/с крыши/из бункера (раньше SetPosition по рельефу
+	// проносил сквозь стены, в т.ч. внутрь чужой базы, и ронял под пол, аудит 2026-11-13).
 	void MoveSteps(PlayerBase p, vector dir, float stepLen, int steps)
 	{
-		if (!p || !p.IsAlive() || steps <= 0)
+		if (!p || !p.IsAlive() || steps <= 0 || p.IsInVehicle())
 			return;
-		vector np = Ground(p.GetPosition() + dir * stepLen);
+		vector cur = p.GetPosition();
+		vector np = Ground(cur + dir * stepLen);
+		if (!CanStep(p, cur, np, dir))
+			return;
 		p.SetPosition(np);
 		SetVelocity(p, vector.Zero);
 		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(MoveSteps, 120, false, p, dir, stepLen, steps - 1);
+	}
+
+	static bool CanStep(PlayerBase p, vector cur, vector np, vector dir)
+	{
+		if (Math.AbsFloat(cur[1] - GetGame().SurfaceY(cur[0], cur[2])) > 0.6)
+			return false;		// стоит не на рельефе: пол, крыша, камень, бункер
+		if (Math.AbsFloat(np[1] - cur[1]) > 1.0)
+			return false;		// обрыв или крутой склон
+		if (GetGame().SurfaceIsSea(np[0], np[2]) || GetGame().SurfaceIsPond(np[0], np[2]))
+			return false;
+		vector from = cur + "0 1.2 0";
+		vector to = np + "0 1.2 0";
+		to = to + dir * 0.4;
+		return !VB_AB_Server.RayBlocked(from, to, p, null);		// стена, дом, постройка, дерево, камень, рельеф
+	}
+
+	// Игрок стоит на рельефе (не на полу дома, крыше, мосту, не в бункере)
+	static bool OnGround(PlayerBase p)
+	{
+		vector pp = p.GetPosition();
+		return Math.AbsFloat(pp[1] - GetGame().SurfaceY(pp[0], pp[2])) <= 1.0;
 	}
 
 	static vector FlatDir(vector from, vector to)
@@ -238,7 +281,10 @@ class VB_AB_AbUnderFoot extends VB_AB_Ability
 		VB_AB_Field f = boss.VB_GetField();
 		if (f && m_Cls != "")
 			f.SpawnExtra(m_Cls, at, 40);
-		m_Since.Clear();		// следующая — опять после 3 с стояния
+		// следующая — опять после 3 с стояния; позиции тоже сбрасываются, иначе стоящий на месте игрок
+		// больше никогда не получал аномалию под ноги (Tick не ставил ему время заново)
+		m_Since.Clear();
+		m_Pos.Clear();
 	}
 };
 
@@ -252,9 +298,13 @@ class VB_AB_AbDischarge extends VB_AB_Ability
 
 	override void Fire(VB_AB_BossBase boss, PlayerBase target, vector at)
 	{
-		if (!target || !target.IsAlive() || FlatDist(boss.GetPosition(), target.GetPosition()) > Range() + 5)
+		if (!target || !target.IsAlive() || target.IsInVehicle())
 			return;
-		Fx(boss, "vb_ab_electra_active", "vb_ab_electra_active", target.GetPosition());
+		vector bp = boss.GetPosition();
+		vector tp = target.GetPosition();
+		if (FlatDist(bp, tp) > Range() + 5 || !VB_AB_Server.Sees(boss, target))
+			return;
+		Fx(boss, "vb_ab_electra_active", "vb_ab_electra_active", tp);
 		Hit(boss, target, m_Cfg.Damage);
 	}
 };
@@ -282,6 +332,12 @@ class VB_AB_AbPulse extends VB_AB_Ability
 			KeepOff(p, until);
 	}
 
+	void ~VB_AB_AbPulse()
+	{
+		if (GetGame())
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(KeepOff);
+	}
+
 	void KeepOff(PlayerBase p, float until)
 	{
 		if (!p || !p.IsAlive() || VB_AB_Server.Now() > until)
@@ -294,8 +350,6 @@ class VB_AB_AbPulse extends VB_AB_Ability
 // Жар: волна жара вокруг (Жарка, Огненный шторм): урон, быстрый перегрев, горячий воздух DurationSec
 class VB_AB_AbHeat extends VB_AB_Ability
 {
-	ref VB_AB_TempSource m_Temp = new VB_AB_TempSource();
-
 	override void Warn(VB_AB_BossBase boss, PlayerBase target, vector at)
 	{
 		Fx(boss, "vb_ab_zharka_idle", "vb_ab_zharka_idle", boss.GetPosition());
@@ -304,11 +358,13 @@ class VB_AB_AbHeat extends VB_AB_Ability
 	override void Fire(VB_AB_BossBase boss, PlayerBase target, vector at)
 	{
 		Fx(boss, "vb_ab_fireshtorm_active", "vb_ab_fireshtorm_active", boss.GetPosition());
-		m_Temp.Pulse(boss, 60, Range(), Duration(8));
+		boss.VB_GetTemp().Pulse(boss, 60, Range(), Duration(8));
 		array<PlayerBase> ps = new array<PlayerBase>;
 		VB_AB_Server.PlayersNear(boss.GetPosition(), Range(), ps);
 		foreach (PlayerBase p : ps)
 		{
+			if (!VB_AB_Server.Sees(boss, p))
+				continue;
 			Hit(boss, p, m_Cfg.Damage);
 			VB_AB_PlayerFx.Overheat(p, 0.2);
 		}
@@ -319,7 +375,6 @@ class VB_AB_AbHeat extends VB_AB_Ability
 class VB_AB_AbIceBreath extends VB_AB_Ability
 {
 	static const float CONE_COS = 0.8;		// ±37°
-	ref VB_AB_TempSource m_Temp = new VB_AB_TempSource();
 
 	override void Warn(VB_AB_BossBase boss, PlayerBase target, vector at)
 	{
@@ -332,12 +387,13 @@ class VB_AB_AbIceBreath extends VB_AB_Ability
 		fwd[1] = 0;
 		fwd.Normalize();
 		Fx(boss, "vb_ab_steklo_active", "vb_ab_steklo_active", Ground(boss.GetPosition() + fwd * (Range() * 0.5)));
-		m_Temp.Pulse(boss, -25, Range(), Duration(6));
+		boss.VB_GetTemp().Pulse(boss, -25, Range(), Duration(6));
 		array<PlayerBase> ps = new array<PlayerBase>;
 		VB_AB_Server.PlayersNear(boss.GetPosition(), Range(), ps);
 		foreach (PlayerBase p : ps)
 		{
-			if (vector.Dot(FlatDir(boss.GetPosition(), p.GetPosition()), fwd) < CONE_COS)
+			vector toP = FlatDir(boss.GetPosition(), p.GetPosition());
+			if (vector.Dot(toP, fwd) < CONE_COS || !VB_AB_Server.Sees(boss, p))
 				continue;
 			Hit(boss, p, m_Cfg.Damage);
 			VB_AB_PlayerFx.ZeroStamina(p);
@@ -350,8 +406,6 @@ class VB_AB_AbIceBreath extends VB_AB_Ability
 // Метель: снег вокруг босса, видимость падает (Снег)
 class VB_AB_AbBlizzard extends VB_AB_Ability
 {
-	ref VB_AB_TempSource m_Temp = new VB_AB_TempSource();
-
 	override float WarnSec()
 	{
 		return 1.5;
@@ -365,7 +419,7 @@ class VB_AB_AbBlizzard extends VB_AB_Ability
 	override void Fire(VB_AB_BossBase boss, PlayerBase target, vector at)
 	{
 		Fx(boss, "vb_ab_snow_active", "vb_ab_snow_active", boss.GetPosition());
-		m_Temp.Pulse(boss, -20, Range(), Duration(25));
+		boss.VB_GetTemp().Pulse(boss, -20, Range(), Duration(25));
 		array<PlayerBase> ps = new array<PlayerBase>;
 		VB_AB_Server.PlayersNear(boss.GetPosition(), Range(), ps);
 		foreach (PlayerBase p : ps)
@@ -382,7 +436,7 @@ class VB_AB_AbPull extends VB_AB_Ability
 		VB_AB_Server.PlayersNear(boss.GetPosition(), Range(), ps);
 		foreach (PlayerBase p : ps)
 		{
-			if (FlatDist(boss.GetPosition(), p.GetPosition()) > 4)
+			if (FlatDist(boss.GetPosition(), p.GetPosition()) > 4 && OnGround(p) && VB_AB_Server.Sees(boss, p))
 				return p;
 		}
 		return null;
@@ -431,6 +485,8 @@ class VB_AB_AbKnockback extends VB_AB_Ability
 		VB_AB_Server.PlayersNear(boss.GetPosition(), Range(), ps);
 		foreach (PlayerBase p : ps)
 		{
+			if (!VB_AB_Server.Sees(boss, p))
+				continue;
 			Hit(boss, p, m_Cfg.Damage);
 			Stagger(boss, p);
 			MoveSteps(p, FlatDir(boss.GetPosition(), p.GetPosition()), 0.8, 4);
@@ -454,6 +510,8 @@ class VB_AB_AbGroundSlam extends VB_AB_Ability
 		VB_AB_Server.PlayersNear(boss.GetPosition(), Range(), ps);
 		foreach (PlayerBase p : ps)
 		{
+			if (!VB_AB_Server.Sees(boss, p))
+				continue;
 			Hit(boss, p, m_Cfg.Damage);
 			VB_AB_PlayerFx.KnockDown(boss, p);
 			VB_AB_Fx.SendPlayer(boss, p, VB_AB_Fx.P_SHAKE, 1.5);
@@ -470,7 +528,7 @@ class VB_AB_AbAcidSpit extends VB_AB_Ability
 		VB_AB_Server.PlayersNear(boss.GetPosition(), Range(), ps);
 		foreach (PlayerBase p : ps)
 		{
-			if (FlatDist(boss.GetPosition(), p.GetPosition()) > 3)
+			if (FlatDist(boss.GetPosition(), p.GetPosition()) > 3 && VB_AB_Server.Sees(boss, p))
 				return p;		// вплотную плеваться незачем
 		}
 		return null;
@@ -515,9 +573,13 @@ class VB_AB_AbPsiStrike extends VB_AB_Ability
 
 	override void Fire(VB_AB_BossBase boss, PlayerBase target, vector at)
 	{
-		if (!target || !target.IsAlive() || FlatDist(boss.GetPosition(), target.GetPosition()) > Range() + 5)
+		if (!target || !target.IsAlive() || target.IsInVehicle())
 			return;
-		Fx(boss, "vb_ab_linceagr_active", "", target.GetPosition());
+		vector bp = boss.GetPosition();
+		vector tp = target.GetPosition();
+		if (FlatDist(bp, tp) > Range() + 5 || !VB_AB_Server.Sees(boss, target))
+			return;
+		Fx(boss, "vb_ab_linceagr_active", "", tp);
 		VB_AB_Fx.SendPlayer(boss, target, VB_AB_Fx.P_PSI, Duration(6));
 		if (Math.RandomFloat01() < 0.5)
 			VB_AB_PlayerFx.DropHands(target);
@@ -547,7 +609,8 @@ class VB_AB_AbFlash extends VB_AB_Ability
 			vector look = p.GetDirection();
 			look[1] = 0;
 			look.Normalize();
-			if (vector.Dot(look, FlatDir(p.GetPosition(), boss.GetPosition())) > 0.3)
+			vector toBoss = FlatDir(p.GetPosition(), boss.GetPosition());
+			if (vector.Dot(look, toBoss) > 0.3 && VB_AB_Server.Sees(boss, p))
 				VB_AB_Fx.SendPlayer(boss, p, VB_AB_Fx.P_BLIND, Duration(5));
 		}
 	}
@@ -562,7 +625,7 @@ class VB_AB_AbDash extends VB_AB_Ability
 		VB_AB_Server.PlayersNear(boss.GetPosition(), Range(), ps);
 		foreach (PlayerBase p : ps)
 		{
-			if (FlatDist(boss.GetPosition(), p.GetPosition()) >= 5)
+			if (FlatDist(boss.GetPosition(), p.GetPosition()) >= 5 && OnGround(p) && VB_AB_Server.Sees(boss, p))
 				return p;
 		}
 		return null;
@@ -581,7 +644,7 @@ class VB_AB_AbDash extends VB_AB_Ability
 
 	override void Fire(VB_AB_BossBase boss, PlayerBase target, vector at)
 	{
-		if (!target || !target.IsAlive())
+		if (!target || !target.IsAlive() || target.IsInVehicle() || !OnGround(target))
 			return;
 		vector dir = FlatDir(boss.GetPosition(), target.GetPosition());
 		vector dest = Ground(target.GetPosition() - dir * 1.8);
@@ -657,6 +720,8 @@ class VB_AB_AbScream extends VB_AB_Ability
 		VB_AB_Server.PlayersNear(boss.GetPosition(), Range(), ps);
 		foreach (PlayerBase p : ps)
 		{
+			if (!VB_AB_Server.Sees(boss, p))
+				continue;
 			p.AddHealth("", "Shock", -30);
 			VB_AB_Fx.SendPlayer(boss, p, VB_AB_Fx.P_SCREAM, Duration(4));
 		}
@@ -700,7 +765,13 @@ class VB_AB_AbCall extends VB_AB_Ability
 	{
 		if (!target)
 			return;
-		int n = Math.RandomIntInclusive(3, 5);
+		int alive = 0;
+		foreach (EntityAI c : m_Called)
+		{
+			if (c && c.IsAlive())
+				alive++;
+		}
+		int n = Math.Min(Math.RandomIntInclusive(3, 5), MAX_ALIVE - alive);
 		for (int i = 0; i < n; i++)
 		{
 			vector p = VB_AB_Finds.RandomGroundPos(target.GetPosition(), 10, 18);
@@ -711,7 +782,13 @@ class VB_AB_AbCall extends VB_AB_Ability
 		VB_AB_PlayerFx.NoiseAt(target.GetPosition(), NOISE, 15);
 	}
 
-	// сброс босса (все ушли): поднятые им зомби уходят вместе с полем; после смерти босса — остаются
+	// после смерти босса поднятые зомби доживают 5 минут и уходят (раньше оставались до рестарта)
+	override void OnBossDead(VB_AB_BossBase boss)
+	{
+		VB_AB_Server.DespawnLater(m_Called, 300);
+	}
+
+	// сброс босса (все ушли): поднятые им зомби уходят вместе с полем
 	override void OnClear(VB_AB_BossBase boss)
 	{
 		foreach (EntityAI z : m_Called)
@@ -807,6 +884,12 @@ class VB_AB_AbPack extends VB_AB_Ability
 				m_Pack.Insert(mob);
 			}
 		}
+	}
+
+	// после смерти вожака спутники доживают 5 минут и уходят (раньше бродили до рестарта)
+	override void OnBossDead(VB_AB_BossBase boss)
+	{
+		VB_AB_Server.DespawnLater(m_Pack, 300);
 	}
 
 	// живые спутники уходят вместе с набором (иначе при каждом раскрытии их становилось больше)

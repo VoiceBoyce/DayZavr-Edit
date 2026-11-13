@@ -213,8 +213,11 @@ class VB_AB_Editor
 	{
 		VB_PollNet();
 
-		// автотест: файл команд в профиле клиента проверяется раз в 5 с, прочитанный удаляется
 		PlayerBase player = PlayerBase.Cast(g_Game.GetPlayer());
+#ifdef DIAG_DEVELOPER
+		// автотест: файл команд в профиле клиента проверяется раз в 5 с, прочитанный удаляется. Только в DayZDiag
+		// (стенд): на боевом клиенте файл не читается — забытый файл у админа не выполнит команды на сервере,
+		// а обычный игрок не сделает из него макрос запросов (аудит 2026-11-13)
 		if (m_VB_Test && m_VB_Test.VB_Done())
 			m_VB_Test = null;
 		if (!m_VB_Test && player && player.IsAlive() && g_Game.GetTime() >= m_VB_NextTestCheck)
@@ -224,6 +227,7 @@ class VB_AB_Editor
 		}
 		if (m_VB_Test)
 			m_VB_Test.VB_Tick(this);
+#endif
 
 		if (!m_VB_Active)
 			return;
@@ -441,14 +445,15 @@ class VB_AB_Editor
 			VB_Click();
 		m_VB_PrevLmb = lmb;
 
-		// ПКМ (не над панелями): удалить подсвеченную точку, а мимо точек — снять выбор босса
+		// ПКМ (не над панелями): с выбранным боссом — только снять выбор (раньше ПКМ рядом с точкой удалял её);
+		// без выбора — удалить подсвеченную точку
 		bool rmb = (GetMouseState(MouseState.RIGHT) & MB_PRESSED_MASK) != 0;
 		if (rmb && !m_VB_PrevRmb && !over)
 		{
-			if (m_VB_TargetId != 0)
-				VB_DeletePoint(m_VB_TargetId);
-			else
+			if (m_VB_Pick != "")
 				m_VB_Pick = "";
+			else if (m_VB_TargetId != 0)
+				VB_DeletePoint(m_VB_TargetId);
 		}
 		m_VB_PrevRmb = rmb;
 

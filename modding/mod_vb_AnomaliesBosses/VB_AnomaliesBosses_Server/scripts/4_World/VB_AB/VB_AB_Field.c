@@ -15,7 +15,6 @@ class VB_AB_Field
 	static const int SPAWN_STEP_MS = 400;		// между появлением аномалий
 	static const float BIG_RADIUS = 8;			// аномалия «большая» (Гроза, Снег, Мёртвая зона)
 	static const float BIG_MIN_FIELD = 25;		// большая — только в центр и только в поле от 25 м
-	protected static int s_TotalAnomalies;		// на весь сервер (MaxAnomaliesTotal)
 	// Гаснущие поля. Поле живёт в боссе (m_VB_Field), а тело после разделки удаляется через 1,5 с — раньше, чем
 	// поле догаснет (AfterDeathSec). Без этого списка поле умирало вместе с телом, таймеры снимались в деструкторе,
 	// и аномалии с находками оставались до рестарта (пользователь, 2026-11-13).
@@ -29,6 +28,7 @@ class VB_AB_Field
 	protected bool m_HasCenter;
 	protected bool m_Closing;
 	protected bool m_Seeded;
+	protected bool m_Loot = true;			// аномалии засевают материалы (первое поле точки в рестарте)
 
 	void VB_AB_Field(VB_AB_BossBase boss, VB_AB_BossCfg cfg, vector center)
 	{
@@ -46,6 +46,20 @@ class VB_AB_Field
 			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(ExpireExtra);
 			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(RetryCenter);
 		}
+	}
+
+	// Материалы аномалий в этом поле (VB_AB_PointRuntime.TakeLoot): ставить до Open()
+	void SetLoot(bool on)
+	{
+		m_Loot = on;
+	}
+
+	// Аномалий на сервере сейчас (MaxAnomaliesTotal): по живому списку — счётчик сбивался, если аномалию
+	// удаляли в обход поля (админкой), и потолок со временем закрывал новые поля
+	static bool TotalFull()
+	{
+		int total = VB_AB_Server.GetMaxAnomaliesTotal();
+		return total > 0 && VB_AB_AnomalyManager.Count() >= total;
 	}
 
 	vector GetCenter()
@@ -110,17 +124,14 @@ class VB_AB_Field
 
 	VB_AB_AnomalyBase SpawnExtra(string cls, vector pos, float lifeSec)
 	{
-		if (m_Closing || m_Extra >= MAX_EXTRA)
-			return null;
-		int total = VB_AB_Server.GetMaxAnomaliesTotal();
-		if (total > 0 && s_TotalAnomalies >= total)
+		if (m_Closing || m_Extra >= MAX_EXTRA || TotalFull())
 			return null;
 		VB_AB_AnomalyBase a = VB_AB_AnomalyBase.Cast(GetGame().CreateObjectEx(cls, pos, ECE_PLACE_ON_SURFACE | ECE_NOPERSISTENCY_WORLD));
 		if (!a)
 			return null;
 		a.VB_SetOwner(m_Boss);
+		a.VB_SetNoLoot(true);		// временная — без материала (иначе кран: раз в ~25 с новая находка)
 		m_Anomalies.Insert(a);
-		s_TotalAnomalies++;
 		m_Extra++;
 		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(ExpireExtra, lifeSec * 1000, false, a);
 		return a;
@@ -395,16 +406,15 @@ class VB_AB_Field
 			return;
 		}
 		VB_AB_FieldPlan p = m_Queue[0];
-		m_Queue.Remove(0);
-		int total = VB_AB_Server.GetMaxAnomaliesTotal();
-		if (total <= 0 || s_TotalAnomalies < total)
+		m_Queue.RemoveOrdered(0);		// Remove(0) ставил на место первого последний — волна шла не от центра
+		if (!TotalFull())
 		{
 			VB_AB_AnomalyBase a = VB_AB_AnomalyBase.Cast(GetGame().CreateObjectEx(p.m_Cls, p.m_Pos, ECE_PLACE_ON_SURFACE | ECE_NOPERSISTENCY_WORLD));
 			if (a)
 			{
 				a.VB_SetOwner(m_Boss);
+				a.VB_SetNoLoot(!m_Loot);
 				m_Anomalies.Insert(a);
-				s_TotalAnomalies++;
 				if (p.m_Place == "Center")
 					m_HasCenter = true;
 			}
@@ -481,7 +491,6 @@ class VB_AB_Field
 		if (!a)
 			return;
 		m_Anomalies.RemoveItem(a);
-		s_TotalAnomalies = Math.Max(0, s_TotalAnomalies - 1);
 		GetGame().ObjectDelete(a);
 	}
 
@@ -512,10 +521,7 @@ class VB_AB_Field
 		foreach (VB_AB_AnomalyBase a : m_Anomalies)
 		{
 			if (a)
-			{
-				s_TotalAnomalies = Math.Max(0, s_TotalAnomalies - 1);
 				GetGame().ObjectDelete(a);
-			}
 		}
 		m_Anomalies.Clear();
 		VB_AB_Finds.RemoveByOwner(this);

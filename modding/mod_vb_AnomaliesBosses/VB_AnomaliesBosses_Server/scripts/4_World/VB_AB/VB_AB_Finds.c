@@ -83,6 +83,7 @@ class VB_AB_Finds
 		if (s_Finds)
 			s_Finds.RemoveItem(f);
 		EntityAI e = SpawnItem(f.m_Cls, PushOut(f, player), f.m_QMin, f.m_QMax);
+		Spend(f.m_Owner, e);
 		string who = "?";
 		if (player && player.GetIdentity())
 			who = player.GetIdentity().GetName() + " (" + player.GetIdentity().GetPlainId() + ")";
@@ -139,6 +140,18 @@ class VB_AB_Finds
 		return new Param3<vector, string, vector>(at, pal, color);
 	}
 
+	// Материал аномалии (хозяин — аномалия, не поле с артефактами) списывается из MaxMaterialsPerRestart по штукам
+	static void Spend(Class owner, EntityAI e)
+	{
+		if (!e || !VB_AB_AnomalyBase.Cast(owner))
+			return;
+		int pieces = 1;
+		ItemBase ib;
+		if (Class.CastTo(ib, e) && ib.HasQuantity())
+			pieces = Math.Max(1, Math.Round(ib.GetQuantity()));
+		VB_AB_Server.SpendMaterials(pieces);
+	}
+
 	static EntityAI SpawnItem(string cls, vector pos, int qMin, int qMax)
 	{
 		EntityAI e = EntityAI.Cast(GetGame().CreateObjectEx(cls, pos, ECE_PLACE_ON_SURFACE));
@@ -165,7 +178,7 @@ class VB_AB_Finds
 			vector p = RandomGroundPos(center, rMin, rMax);
 			if (it.Visible != 0)
 			{
-				SpawnItem(it.Classname, p, it.QuantityMin, it.QuantityMax);
+				Spend(owner, SpawnItem(it.Classname, p, it.QuantityMin, it.QuantityMax));
 				n++;
 				continue;
 			}

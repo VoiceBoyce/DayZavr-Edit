@@ -3,15 +3,21 @@
 
 class VB_AB_PointRuntime
 {
+	static const float IDLE_SLEEP_SEC = 180;	// босс без боя (поле не раскрыто) уходит быстрее, чем SleepAfterMin
+
 	VB_AB_PointCfg m_Cfg;
 	VB_AB_BossBase m_Boss;
 	float m_EmptySec;
 	float m_RespawnAt;
-	bool m_Done;
+	bool m_Done;			// до рестарта больше не будит: убит, «Убрать босса», нет подходящего босса
+	bool m_Off;				// выключена в редакторе (отдельно от m_Done: включение не воскрешает убитого)
+	bool m_LootGiven;		// материалы аномалий этой точки в этом рестарте уже были (одно поле с лутом на точку)
 
 	void VB_AB_PointRuntime(VB_AB_PointCfg cfg)
 	{
 		m_Cfg = cfg;
+		if (cfg)
+			m_Off = cfg.Disabled != 0;
 	}
 
 	vector GetPos()
@@ -19,9 +25,21 @@ class VB_AB_PointRuntime
 		return m_Cfg.GetPos();
 	}
 
+	// В лимит MaxAwakeBosses идут только боссы в бою (поле раскрыто): проехавший мимо или база в 300 м
+	// не занимают слот, пока босс просто стоит в логове (аудит 2026-11-13).
 	bool IsAwake()
 	{
-		return m_Boss && m_Boss.IsAlive();
+		return m_Boss && m_Boss.IsAlive() && m_Boss.VB_GetField() != null;
+	}
+
+	// Поле с материалами — одно на точку за рестарт: сброс поля, уход и новый призыв лута больше не дают
+	// (фарм «раскрыл — отошёл — раскрыл», аудит 2026-11-13)
+	bool TakeLoot()
+	{
+		if (m_LootGiven)
+			return false;
+		m_LootGiven = true;
+		return true;
 	}
 
 	void Update(float now, float dt)
@@ -36,16 +54,19 @@ class VB_AB_PointRuntime
 			else
 			{
 				m_EmptySec += dt;
-				if (m_EmptySec >= st.SleepAfterMin * 60)
+				float sleepSec = st.SleepAfterMin * 60;
+				if (!m_Boss.VB_GetField())
+					sleepSec = Math.Min(sleepSec, IDLE_SLEEP_SEC);
+				if (m_EmptySec >= sleepSec)
 				{
-					VB_AB_Log.Info("босс " + m_Boss.VB_GetId() + " на точке " + m_Cfg.Id + " ушёл: рядом никого " + st.SleepAfterMin + " мин");
+					VB_AB_Log.Info("босс " + m_Boss.VB_GetId() + " на точке " + m_Cfg.Id + " ушёл: рядом никого " + Math.Round(sleepSec / 60) + " мин");
 					m_Boss.VB_Despawn();
 					m_Boss = null;
 				}
 			}
 			return;
 		}
-		if (m_Done || now < m_RespawnAt)
+		if (m_Off || m_Done || now < m_RespawnAt)
 			return;
 		if (VB_AB_Server.AwakeCount() >= st.MaxAwakeBosses)
 			return;
@@ -103,6 +124,7 @@ class VB_AB_Server
 	ref VB_AB_BossData m_Data;
 	ref array<ref VB_AB_PointRuntime> m_Active = new array<ref VB_AB_PointRuntime>;
 	int m_ArtifactsLeft;
+	int m_MaterialsLeft;		// материалов аномалий (штук) до конца рестарта (MaxMaterialsPerRestart)
 	protected ref array<Man> m_Players = new array<Man>;
 
 	static void Init()
@@ -145,7 +167,9 @@ class VB_AB_Server
 		VB_AB_Cfg.Get();
 		m_Data = new VB_AB_BossData;
 		m_Data.Load();
+		m_Data.BackupPoints();
 		m_ArtifactsLeft = m_Data.m_Settings.MaxFieldArtifactsPerRestart;
+		m_MaterialsLeft = m_Data.m_Settings.MaxMaterialsPerRestart;
 		PickPoints();
 		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(Tick, TICK_MS, true);
 	}
@@ -243,9 +267,13 @@ class VB_AB_Server
 		float now = Now();
 		foreach (VB_AB_PointRuntime p : m_Active)
 			p.Update(now, TICK_MS / 1000.0);
+		DespawnTick(now);
 	}
 
-	// Живые игроки в радиусе r (по горизонтали) от точки, ближайший первым
+	static const float NEAR_MAX_DY = 8.0;	// м: выше/ниже — другой этаж или бункер под полем, способности не достают
+
+	// Живые игроки в радиусе r (по горизонтали) от точки, ближайший первым. Для способностей: игроки в транспорте
+	// и сильно выше/ниже точки не попадают (аудит 2026-11-13: дёргали водителя, били сквозь перекрытия).
 	static void PlayersNear(vector pos, float r, array<PlayerBase> res)
 	{
 		res.Clear();
@@ -256,9 +284,11 @@ class VB_AB_Server
 		foreach (Man m : s_Instance.m_Players)
 		{
 			PlayerBase p = PlayerBase.Cast(m);
-			if (!p || !p.IsAlive())
+			if (!p || !p.IsAlive() || p.IsInVehicle())
 				continue;
 			vector pp = p.GetPosition();
+			if (Math.AbsFloat(pp[1] - pos[1]) > NEAR_MAX_DY)
+				continue;
 			float dSq = (pp[0] - pos[0]) * (pp[0] - pos[0]) + (pp[2] - pos[2]) * (pp[2] - pos[2]);
 			if (dSq > r2)
 				continue;
@@ -281,6 +311,96 @@ class VB_AB_Server
 				return true;
 		}
 		return false;
+	}
+
+	// Видит ли босс игрока: луч от груди босса к груди игрока. Мешают только рельеф и «твёрдое»: дома и стены,
+	// постройки игроков, деревья, камни (Blocks). Кусты, аномалии, предметы, люди и зомби — нет. Для способностей
+	// (аудит 2026-11-13: били сквозь стены и этажи).
+	static bool Sees(EntityAI from, PlayerBase p)
+	{
+		if (!from || !p)
+			return false;
+		vector a = from.GetPosition() + "0 1.4 0";
+		vector b = p.GetPosition() + "0 1.3 0";
+		return !RayBlocked(a, b, from, p);
+	}
+
+	// Луч a→b упёрся в рельеф или в то, что считается стеной (все объекты по пути, не только первый)
+	static bool RayBlocked(vector a, vector b, Object skip1, Object skip2)
+	{
+		vector cPos;
+		vector cDir;
+		int cComp;
+		set<Object> hits = new set<Object>;
+		if (!DayZPhysics.RaycastRV(a, b, cPos, cDir, cComp, hits, skip1, skip2, false, false, ObjIntersectFire, 0, CollisionFlags.NONE))
+			return false;
+		if (hits.Count() == 0)
+			return true;		// рельеф
+		foreach (Object o : hits)
+		{
+			if (Blocks(o))
+				return true;
+		}
+		return false;
+	}
+
+	static bool Blocks(Object o)
+	{
+		if (!o)
+			return false;
+		return o.IsBuilding() || o.IsInherited(BuildingBase) || o.IsInherited(BaseBuildingBase) || o.IsTree() || o.IsRock();
+	}
+
+	// Материалы аномалий: есть ли ещё запас на рестарт (засев) и списание при появлении предмета
+	static bool MaterialsLeft()
+	{
+		if (!s_Instance)
+			return true;
+		return s_Instance.m_MaterialsLeft > 0;
+	}
+
+	static void SpendMaterials(int n)
+	{
+		if (!s_Instance || n <= 0)
+			return;
+		bool was = s_Instance.m_MaterialsLeft > 0;
+		s_Instance.m_MaterialsLeft -= n;
+		if (was && s_Instance.m_MaterialsLeft <= 0)
+			VB_AB_Log.Info("лимит материалов за рестарт исчерпан (MaxMaterialsPerRestart " + s_Instance.m_Data.m_Settings.MaxMaterialsPerRestart + "): новые аномалии больше не засевают материалы");
+	}
+
+	// Поднятые способностями зомби и спутники «Стаи» после смерти босса: живые уходят через sec (раньше жили
+	// до рестарта). Очередь разбирает Tick раз в секунду; ссылки на сущности обнуляются сами, если их убили.
+	protected ref array<EntityAI> m_DespawnList = new array<EntityAI>;
+	protected ref array<float> m_DespawnAt = new array<float>;
+
+	static void DespawnLater(array<EntityAI> list, float sec)
+	{
+		if (!s_Instance || !list)
+			return;
+		float at = Now() + sec;
+		foreach (EntityAI e : list)
+		{
+			if (e && e.IsAlive())
+			{
+				s_Instance.m_DespawnList.Insert(e);
+				s_Instance.m_DespawnAt.Insert(at);
+			}
+		}
+	}
+
+	protected void DespawnTick(float now)
+	{
+		for (int i = m_DespawnList.Count() - 1; i >= 0; i--)
+		{
+			EntityAI e = m_DespawnList[i];
+			if (e && now < m_DespawnAt[i])
+				continue;
+			if (e && e.IsAlive())
+				GetGame().ObjectDelete(e);
+			m_DespawnList.Remove(i);
+			m_DespawnAt.Remove(i);
+		}
 	}
 
 	static int AwakeCount()
@@ -387,18 +507,16 @@ class VB_AB_Server
 	{
 		VB_AB_PointRuntime r = FindRuntime(pointId);
 		if (r)
-			r.m_Done = true;
+			r.m_Off = true;
 	}
 
-	// Точка снова включена: если босса на ней нет — снова будит его при подходе игрока
+	// Точка снова включена: снова будит босса при подходе игрока. Убитого в этом рестарте не воскрешает
+	// (раньше выключить-включить сбрасывало m_Done — повторный трофей, аудит 2026-11-13); вернуть — «Призвать сейчас».
 	static void ResumePoint(int pointId)
 	{
 		VB_AB_PointRuntime r = FindRuntime(pointId);
-		if (r && !r.m_Boss)
-		{
-			r.m_Done = false;
-			r.m_RespawnAt = 0;
-		}
+		if (r)
+			r.m_Off = false;
 	}
 
 	// Точка удалена: живой босс уходит, точка снимается с рестарта
@@ -418,13 +536,23 @@ class VB_AB_Server
 	// «Перечитать конфиги»: anomalies.json, detectors.json, settings.json, bosses.json, points.json.
 	// Живые боссы доигрывают со старыми настройками, новые и призванные после — с новыми.
 	// Точки рестарта берут новые записи по Id; точку, которой больше нет в points.json, снимаем.
-	static void ReloadConfigs()
+	// false — какой-то из файлов боссов не разобрался: перечитка отменена, сервер работает со старыми настройками
+	// (раньше битый points.json снимал все точки и уводил живых боссов, битый settings.json — админов).
+	static bool ReloadConfigs()
 	{
 		if (!s_Instance)
-			return;
-		VB_AB_Cfg.Reload();
+			return false;
 		VB_AB_BossData fresh = new VB_AB_BossData;
 		fresh.Load();
+		if (fresh.IsBroken())
+		{
+			VB_AB_Log.Warn("«Перечитать конфиги» отменено: settings/bosses/points.json с ошибкой (см. выше), работают прежние");
+			s_Instance.m_OldData.Insert(fresh);		// мог успеть выставить флаги отладки и т.п. — держим до рестарта
+			s_Instance.m_Data.m_Settings.VB_Norm();	// вернуть флаг отладки рабочих настроек
+			return false;
+		}
+		VB_AB_Cfg.Reload();
+		fresh.InheritRemoved(s_Instance.m_Data);	// номера удалённых в этом запуске точек не выдаются снова
 		s_Instance.m_OldData.Insert(s_Instance.m_Data);
 		s_Instance.m_Data = fresh;
 		for (int i = s_Instance.m_Active.Count() - 1; i >= 0; i--)
@@ -434,10 +562,12 @@ class VB_AB_Server
 			if (p)
 			{
 				r.m_Cfg = p;
+				r.m_Off = p.Disabled != 0;
 				continue;
 			}
 			VB_AB_Log.Info("точки " + r.m_Cfg.Id + " больше нет в points.json, снята с рестарта");
 			DropPoint(r.m_Cfg.Id);
 		}
+		return true;
 	}
 };

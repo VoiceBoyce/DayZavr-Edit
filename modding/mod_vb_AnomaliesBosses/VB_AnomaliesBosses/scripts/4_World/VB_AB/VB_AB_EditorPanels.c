@@ -393,8 +393,12 @@ class VB_AB_EditorPanels
 
 	static string VB_BossSub(VB_AB_EdBoss b)
 	{
-		return string.Format(Tr("STR_VB_AB_Ed_BossRow"), VB_AB_EdText.ModelName(b.Model), VB_AB_EdText.PaletteName(b.Palette),
-			b.Tier, Math.Round(b.Radius));
+		// всё в локальные до Format (E71: результат вызова в аргументе затирается повторным вызовом)
+		string fmt = Tr("STR_VB_AB_Ed_BossRow");
+		string model = VB_AB_EdText.ModelName(b.Model);
+		string pal = VB_AB_EdText.PaletteName(b.Palette);
+		int radius = Math.Round(b.Radius);
+		return string.Format(fmt, model, pal, b.Tier, radius);
 	}
 
 	static string VB_TierHue(int tier)
@@ -793,7 +797,13 @@ class VB_AB_EditorPanels
 		VB_AB_Editor ed = VB_AB_Editor.VB_Get();
 		if (ed.m_VB_CurPoint == 0)
 			return;
-		INT_UIF_Dialog d = INT_UIF_Dialog.Confirm(string.Format(Tr("STR_VB_AB_Ed_DelTitle"), ed.m_VB_CurPoint), Tr("STR_VB_AB_Ed_DelText"), Tr("STR_VB_AB_Ed_DelYes"), Tr("STR_VB_AB_Ed_DelNo"), INT_UIF_Variant.DANGER);
+		// тексты в локальные до вызова: четыре Tr в одном списке аргументов давали одинаковые надписи (E71)
+		string titleFmt = Tr("STR_VB_AB_Ed_DelTitle");
+		string title = string.Format(titleFmt, ed.m_VB_CurPoint);
+		string text = Tr("STR_VB_AB_Ed_DelText");
+		string yes = Tr("STR_VB_AB_Ed_DelYes");
+		string no = Tr("STR_VB_AB_Ed_DelNo");
+		INT_UIF_Dialog d = INT_UIF_Dialog.Confirm(title, text, yes, no, INT_UIF_Variant.DANGER);
 		if (d)
 			d.OnResult().Insert(OnVBDeleteConfirm);
 	}

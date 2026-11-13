@@ -107,5 +107,6 @@
     "STR_VB_AB_Ed_MsgNoBoss": ["На точке #%1 нет босса", "There is no boss at point #%1"],
     "STR_VB_AB_Ed_MsgDespawned": ["Босс убран с точки #%1: до рестарта сам не вернётся", "Boss removed from point #%1: it will not come back by itself until restart"],
     "STR_VB_AB_Ed_MsgReloaded": ["Конфиги перечитаны: боссов %1, точек %2", "Configs reloaded: bosses %1, points %2"],
-    "STR_VB_AB_Ed_MsgActive": ["Точек за рестарт: %1 — со следующего рестарта", "Points per restart: %1 — from the next restart"]
+    "STR_VB_AB_Ed_MsgActive": ["Точек за рестарт: %1 — со следующего рестарта", "Points per restart: %1 — from the next restart"],
+    "STR_VB_AB_Ed_MsgReloadFail": ["Не перечитано: в settings/bosses/points.json ошибка (см. лог сервера), работают прежние", "Not reloaded: settings/bosses/points.json has an error (see server log), old configs stay"]
 }
