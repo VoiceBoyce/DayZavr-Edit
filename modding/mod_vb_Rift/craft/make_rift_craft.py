@@ -186,12 +186,13 @@ def dump(obj, path):
 
 def main():
     items = rift_items()
-    arts = rift_artifacts()
+    # С 2026-11-13 артефакты 800–857 собирает крафт аномалий (mod_vb_AnomaliesBosses/craft/make_ab_craft16.py):
+    # артефакт — из материалов аномалий своей стихии, Изнанка только в органике и пси. Здесь их больше не трогаем,
+    # иначе повторный запуск вернул бы старые рецепты. rift_artifacts() оставлен как история.
+    arts = []
     new = items + arts
     cats = [category("Изнанка", "DRL_Core/Icon/drl_bleeding-heart.edds", [r["RecipeId"] for r in items],
-                     "DRLCraft_Generic1_SoundSet"),
-            category("Артефакты", "DRL_Core/Icon/drl_acid.edds", [r["RecipeId"] for r in arts],
-                     "DRLCraft_WaterMix_SoundSet")]
+                     "DRLCraft_Generic1_SoundSet")]
 
     cfg16 = json.load(io.open(os.path.join(SRV16, "CraftConfig.json"), encoding="utf-8"))
     cat16 = json.load(io.open(os.path.join(SRV16, "CraftCategories.json"), encoding="utf-8"))

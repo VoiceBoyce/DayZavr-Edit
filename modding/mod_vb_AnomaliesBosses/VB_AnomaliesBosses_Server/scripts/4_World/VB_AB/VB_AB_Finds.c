@@ -10,7 +10,7 @@ class VB_AB_Find
 	ref array<string> m_Detectors;
 	int m_QMin;
 	int m_QMax;
-	Object m_Owner;
+	Class m_Owner;				// чьё: аномалия или поле босса (не сам босс: тело удаляется раньше, чем гаснет поле)
 
 	bool AllowedFor(string detector, int tier)
 	{
@@ -38,7 +38,7 @@ class VB_AB_Finds
 		s_Finds.Insert(f);
 	}
 
-	static int RemoveByOwner(Object owner)
+	static int RemoveByOwner(Class owner)
 	{
 		if (!s_Finds)
 			return 0;
@@ -82,12 +82,61 @@ class VB_AB_Finds
 			return null;
 		if (s_Finds)
 			s_Finds.RemoveItem(f);
-		EntityAI e = SpawnItem(f.m_Cls, f.m_Pos, f.m_QMin, f.m_QMax);
+		EntityAI e = SpawnItem(f.m_Cls, PushOut(f, player), f.m_QMin, f.m_QMax);
 		string who = "?";
 		if (player && player.GetIdentity())
 			who = player.GetIdentity().GetName() + " (" + player.GetIdentity().GetPlainId() + ")";
-		VB_AB_Log.Info("находка: " + f.m_Cls + " — " + who + ", детектор " + detector + ", " + f.m_Pos.ToString());
+		vector got = f.m_Pos;
+		if (e)
+			got = e.GetPosition();
+		VB_AB_Log.Info("находка: " + f.m_Cls + " — " + who + ", детектор " + detector + ", запись " + f.m_Pos.ToString() + ", предмет " + got.ToString());
 		return e;
+	}
+
+	// ТЗ 8.13: находка у небольшой аномалии (радиус до PUSH_MAX_R) появляется на её краю со стороны игрока, а не
+	// внутри — за подбор не получать удар. У больших (Гроза, Снег, Мёртвая зона по 10 м) игрок и так внутри: там
+	// предмет остаётся на месте, иначе он улетал бы на 10 м от сигнала.
+	static const float PUSH_MAX_R = 4.0;
+
+	static vector PushOut(VB_AB_Find f, PlayerBase player)
+	{
+		vector pos = f.m_Pos;
+		VB_AB_AnomalyBase an = VB_AB_AnomalyBase.Cast(f.m_Owner);
+		if (!an || !player)
+			return pos;
+		float r = an.VB_GetRadius();
+		if (r <= 0 || r > PUSH_MAX_R)
+			return pos;
+		vector c = an.GetPosition();
+		float edge = r + 0.3;
+		if (vector.DistanceSq(Vector(pos[0], 0, pos[2]), Vector(c[0], 0, c[2])) >= edge * edge)
+			return pos;
+		vector dir = player.GetPosition() - c;
+		dir[1] = 0;
+		if (dir.LengthSq() < 0.01)
+			dir = "1 0 0";
+		dir.Normalize();
+		vector edgePos = c + dir * (r + 0.7);
+		edgePos[1] = GetGame().SurfaceY(edgePos[0], edgePos[2]);
+		return edgePos;
+	}
+
+	// Сигнал «найдено» для клиентов (VB_AB_FoundFx.OnRpc): где предмет, его стихия и цвет свечения — для вспышки.
+	static Param3<vector, string, vector> FoundParam(EntityAI item, vector fallback)
+	{
+		vector at = fallback;
+		string pal = "";
+		vector color = "0.6 0.8 1";
+		if (item)
+		{
+			at = item.GetPosition();
+			pal = item.ConfigGetString("vbABPalette");
+			TFloatArray c = new TFloatArray;
+			item.ConfigGetFloatArray("vbABGlow", c);
+			if (c.Count() >= 3)
+				color = Vector(c[0], c[1], c[2]);
+		}
+		return new Param3<vector, string, vector>(at, pal, color);
 	}
 
 	static EntityAI SpawnItem(string cls, vector pos, int qMin, int qMax)
@@ -103,7 +152,7 @@ class VB_AB_Finds
 	}
 
 	// Засеять таблицу у точки center на расстоянии rMin..rMax. Visible — предмет сразу лежит на виду.
-	static int SeedTable(VB_AB_LootTable t, vector center, float rMin, float rMax, Object owner)
+	static int SeedTable(VB_AB_LootTable t, vector center, float rMin, float rMax, Class owner)
 	{
 		if (!t || !t.Items || t.Items.Count() == 0)
 			return 0;

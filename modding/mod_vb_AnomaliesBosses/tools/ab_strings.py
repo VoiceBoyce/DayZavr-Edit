@@ -20,10 +20,14 @@ STRINGS = {
     # детекторы
     "STR_VB_AB_Detector_Otklik": ("Детектор «Отклик»", "Detector \"Otklik\""),
     "STR_VB_AB_Detector_Otklik_Desc": (
-        "Самый простой детектор аномальных находок. Ловит только то, что впереди, и подсказывает лишь расстояние: "
-        "чем ближе находка, тем чаще писк и ярче лампа. Работает от батарейки 9 В.",
-        "The simplest detector of anomalous finds. Senses only what is ahead and tells just the distance: "
-        "the closer the find, the faster the beeping and the brighter the lamp. Runs on a 9V battery."),
+        "Самый простой детектор аномальных находок. Ищет только впереди (±75°) в радиусе 10 м и подсказывает лишь "
+        "расстояние: чем ближе находка, тем чаще писк и ярче лампа. Ближе 2 м находка превращается в предмет. "
+        "Пока сигнала нет, тихо щёлкает раз в 3 с — значит, работает; двойной писк — садится батарейка. "
+        "Работает от батарейки 9 В.",
+        "The simplest detector of anomalous finds. Searches only ahead (±75°) within 10 m and tells just the distance: "
+        "the closer the find, the faster the beeping and the brighter the lamp. Within 2 m the find turns into an item. "
+        "While there is no signal it clicks softly every 3 s, so you know it works; a double beep means the battery "
+        "is running low. Runs on a 9V battery."),
 }
 
 

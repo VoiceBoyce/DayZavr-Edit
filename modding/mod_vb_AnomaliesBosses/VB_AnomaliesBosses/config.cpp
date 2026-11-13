@@ -76,7 +76,8 @@ class CfgPatches
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.1;
-		requiredAddons[] = {"DZ_Data", "DZ_Scripts", "DZ_Characters_Zombies", "DZ_Weapons_Melee", "DZ_Gear_Consumables"};
+		// INT_UIFramework — окно редактора точек (Ctrl+F9); должен стоять и на сервере, и у игроков
+		requiredAddons[] = {"DZ_Data", "DZ_Scripts", "DZ_Characters_Zombies", "DZ_Weapons_Melee", "DZ_Gear_Consumables", "INT_UIFramework"};
 	};
 };
 
@@ -104,6 +105,10 @@ class CfgSoundShaders
 		range = 15;
 		rangeCurve[] = {{0, 1}, {5, 0.6}, {15, 0}};
 	};
+	// звуки аномалий для эффектов способностей в точке (генерирует tools/ab_anomalies.py)
+#include "cfg\soundshaders.hpp"
+	// голоса боссов (генерирует tools/ab_voices.py)
+#include "cfg\voices_shaders.hpp"
 };
 
 class CfgSoundSets
@@ -126,13 +131,47 @@ class CfgSoundSets
 		volumeCurve = "LinearCurve";
 		sound3DProcessingType = "ObjectsInner13DProcessingType";
 	};
+#include "cfg\soundsets.hpp"
+	// голоса боссов (генерирует tools/ab_voices.py, проигрывает VB_AB_Voice.c)
+#include "cfg\voices_sets.hpp"
 };
 
 // Урон аномалий (генерирует tools/ab_anomalies.py). Свой тип урона: броня его не гасит, как и в OOTS.
+// «Зов» Мозготряса: поднятые зомби идут на игрока. Тип shot, как у ракетницы, — на sound-шум зомби не сходятся (E48).
+class CfgNoises
+{
+	class VB_AB_CallNoise
+	{
+		type = "shot";
+		strength = 40;
+	};
+};
+
 class CfgAmmo
 {
 	class MeleeDamage;
 #include "cfg\ammo.hpp"
+	// Урон способностей боссов (VB_AB_Abilities.c): единичный, сила — коэффициентом ProcessDirectDamage
+	// (Damage из bosses.json). Тип VB_AB, как у аномалий: броня не гасит.
+	class VB_AB_AbilityDmg: MeleeDamage
+	{
+		class DamageApplied
+		{
+			type = "VB_AB";
+			class Health
+			{
+				damage = 1;
+			};
+			class Blood
+			{
+				damage = 0;
+			};
+			class Shock
+			{
+				damage = 1.5;
+			};
+		};
+	};
 };
 
 class CfgMods
@@ -151,6 +190,7 @@ class CfgMods
 		version = "0.1";
 		extra = 0;
 		type = "mod";
+		inputs = "VB_AB/inputs.xml";
 		dependencies[] = {"Game", "World", "Mission"};
 
 		class defs
@@ -294,6 +334,25 @@ class CfgVehicles
 		};
 	};
 #include "cfg\detectors.hpp"
+
+	// Старые имена детекторов OOTS (решение пользователя 2026-11-13): на сервере 16 игроки уже играют с ними, а мод
+	// аномалий OOTS отключается. Без этих классов детекторы пропали бы из инвентарей и тайников при загрузке. Здесь это
+	// наши детекторы под старыми именами: модель, экран, поиск, поза в руке — от VB_AB_Detector_* (своего скрипта нет,
+	// берётся скрипт родителя). В сохранении OOTS-детекторы ничего своего не пишут (OnStoreSave у них ванильный),
+	// слот батарейки тот же (BatteryD), поэтому батарейка и заряд переживают переход.
+	// Вместе с @OTTS_AnomVibrosPsi мод не ставить: классы с этими именами есть и там.
+	class Anomaly_Detector_Otklik: VB_AB_Detector_Otklik
+	{
+		scope = 2;
+	};
+	class Anomaly_Detector_Medved: VB_AB_Detector_Medved
+	{
+		scope = 2;
+	};
+	class Anomaly_Detector_Svarog: VB_AB_Detector_Svarog
+	{
+		scope = 2;
+	};
 
 	// База всех боссов. Секции и материалы ванильного отшельника сбрасываем: у Энта и Ричара в модели
 	// есть своя секция camo, и ванильный hermit.rvmat лёг бы на неё.

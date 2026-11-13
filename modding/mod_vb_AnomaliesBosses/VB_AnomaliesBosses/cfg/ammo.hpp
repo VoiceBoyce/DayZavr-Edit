@@ -6,7 +6,7 @@
 			type = "VB_AB";
 			class Health
 			{
-				damage = 150;
+				damage = 45;
 			};
 			class Blood
 			{
@@ -44,7 +44,7 @@
 			type = "VB_AB";
 			class Health
 			{
-				damage = 70;
+				damage = 25;
 			};
 			class Blood
 			{
@@ -63,7 +63,7 @@
 			type = "VB_AB";
 			class Health
 			{
-				damage = 100;
+				damage = 35;
 			};
 			class Blood
 			{
@@ -82,7 +82,7 @@
 			type = "VB_AB";
 			class Health
 			{
-				damage = 70;
+				damage = 25;
 			};
 			class Blood
 			{
@@ -101,7 +101,7 @@
 			type = "VB_AB";
 			class Health
 			{
-				damage = 100;
+				damage = 45;
 			};
 			class Blood
 			{
@@ -120,7 +120,7 @@
 			type = "VB_AB";
 			class Health
 			{
-				damage = 70;
+				damage = 25;
 			};
 			class Blood
 			{
@@ -128,7 +128,7 @@
 			};
 			class Shock
 			{
-				damage = 40;
+				damage = 30;
 			};
 		};
 	};
@@ -139,7 +139,7 @@
 			type = "VB_AB";
 			class Health
 			{
-				damage = 35;
+				damage = 10;
 			};
 			class Blood
 			{
@@ -158,7 +158,7 @@
 			type = "VB_AB";
 			class Health
 			{
-				damage = 0;
+				damage = 10;
 			};
 			class Blood
 			{
@@ -177,7 +177,7 @@
 			type = "VB_AB";
 			class Health
 			{
-				damage = 90;
+				damage = 35;
 			};
 			class Blood
 			{
@@ -185,7 +185,7 @@
 			};
 			class Shock
 			{
-				damage = 50;
+				damage = 40;
 			};
 		};
 	};
@@ -196,7 +196,7 @@
 			type = "VB_AB";
 			class Health
 			{
-				damage = 200;
+				damage = 45;
 			};
 			class Blood
 			{
@@ -215,7 +215,7 @@
 			type = "VB_AB";
 			class Health
 			{
-				damage = 100;
+				damage = 45;
 			};
 			class Blood
 			{
@@ -253,7 +253,7 @@
 			type = "VB_AB";
 			class Health
 			{
-				damage = 100;
+				damage = 45;
 			};
 			class Blood
 			{
@@ -272,7 +272,7 @@
 			type = "VB_AB";
 			class Health
 			{
-				damage = 80;
+				damage = 35;
 			};
 			class Blood
 			{
@@ -291,7 +291,7 @@
 			type = "VB_AB";
 			class Health
 			{
-				damage = 15;
+				damage = 8;
 			};
 			class Blood
 			{
@@ -310,7 +310,7 @@
 			type = "VB_AB";
 			class Health
 			{
-				damage = 100;
+				damage = 45;
 			};
 			class Blood
 			{
@@ -348,7 +348,7 @@
 			type = "VB_AB";
 			class Health
 			{
-				damage = 50;
+				damage = 25;
 			};
 			class Blood
 			{
@@ -367,7 +367,7 @@
 			type = "VB_AB";
 			class Health
 			{
-				damage = 125;
+				damage = 100;
 			};
 			class Blood
 			{

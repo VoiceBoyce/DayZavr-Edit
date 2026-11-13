@@ -1,0 +1,99 @@
+EffectDef {
+ Emitors {
+  EmitorDef sparks {
+   ShapeType Sphere
+   ShapeSize 0.4 0.4 0.4
+   ConeAngle 360 360 0
+   MaxNum 30
+   BirthRate 6
+   BirthRateRND 12
+   BirthRateVel 2
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{009C2EBAACD2D72A}Graphics/Particles/materials/fire/sparks1.emat"
+   SizeMultiplier 0.015
+   SizeRND 0.01
+   BillboardingType Full
+   StretchMultiplier 1.02
+   VelAngle 1
+   RandomAngle 1
+   Velocity 1.6
+   VelocityRND 1.2
+   AirResistance 3
+   AirResistanceRND 1
+   GravityMultiply 0.3
+   Wind 0
+   LifeTime 0.3
+   LifeTimeRND 0.25
+   Color {
+    0 0 0.75 1 0.4 0 0.45 1 1 0 0.2 0.9
+   }
+   Alpha {
+    0 1 0.7 0.8 1 0
+   }
+   Size {
+    0 1 1 0.5
+   }
+   EffectTime 5
+   Repeat 1
+  }
+  EmitorDef arcs {
+   ShapeType Sphere
+   ShapeSize 0.35 0.35 0.35
+   ConeAngle 360 360 0
+   MaxNum 3
+   BirthRate 1.5
+   BirthRateRND 3
+   Offset 0 0 0
+   LocalTransform 1
+   Material "{00D2D6B87126B8FA}Graphics/Particles/materials/flash/electric.emat"
+   SizeMultiplier 0.28
+   SizeRND 0.12
+   BillboardingType Full
+   RandomAngle 1
+   Velocity 0
+   AirResistance 0
+   GravityMultiply 0
+   Wind 0
+   LifeTime 0.09
+   LifeTimeRND 0.06
+   Color {
+    0 0 0.7 1 1 0 0.45 1
+   }
+   Alpha {
+    0 1 1 0
+   }
+   EffectTime 5
+   Repeat 1
+  }
+  EmitorDef glint {
+   ShapeType Sphere
+   ShapeSize 0.3 0.3 0.3
+   ConeAngle 360 360 0
+   MaxNum 4
+   BirthRate 3
+   BirthRateRND 2
+   Offset 0 0 0
+   LocalTransform 1
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   SizeMultiplier 0.3
+   SizeRND 0.1
+   BillboardingType Full
+   RandomAngle 1
+   Velocity 0
+   AirResistance 0
+   GravityMultiply 0
+   Wind 0
+   LifeTime 0.2
+   LifeTimeRND 0.15
+   Color {
+    0 0 0.5 1 1 0 0.3 1
+   }
+   Alpha {
+    0 0.3 1 0
+   }
+   EffectTime 5
+   Repeat 1
+  }
+ }
+}

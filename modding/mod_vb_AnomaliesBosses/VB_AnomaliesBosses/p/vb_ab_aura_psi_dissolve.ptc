@@ -1,0 +1,106 @@
+EffectDef {
+ Emitors {
+  EmitorDef crumble {
+   ShapeType Box
+   ShapeSize 1.3 0.3 1.3
+   ConeAngle 360 360 0
+   MaxNum 140
+   BirthRate 80
+   BirthRateRND 20
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   SizeMultiplier 0.05
+   SizeRND 0.02
+   BillboardingType Full
+   RandomAngle 1
+   Velocity 0.4
+   VelocityRND 0.3
+   AirResistance 0.8
+   GravityMultiply -0.05
+   Wind 0
+   LifeTime 1.8
+   LifeTimeRND 0.6
+   Color {
+    0 0.9 0.8 1 0.5 0.7 0.9 1 1 1 0.85 1
+   }
+   Alpha {
+    0 0 0.08 1 0.7 0.8 1 0
+   }
+   Size {
+    0 1 1 0.3
+   }
+   EffectTime 1.8
+   Repeat 0
+   BRateMast {
+    0 0.35 0.6 0.7 0.85 1 1 0.3
+   }
+  }
+  EmitorDef puff {
+   ShapeType Box
+   ShapeSize 1.3 0.3 1.3
+   ConeAngle 360 360 0
+   MaxNum 14
+   BirthRate 8
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   SizeMultiplier 0.8
+   SizeRND 0.3
+   BillboardingType Full
+   RandomRotDir 1
+   RotMultiplier 15
+   RandomAngle 1
+   Velocity 0.3
+   VelocityRND 0.2
+   AirResistance 1
+   GravityMultiply -0.02
+   Wind 1
+   LifeTime 2.2
+   LifeTimeRND 0.6
+   Color {
+    0 0.8 0.75 1 1 0.7 0.85 1
+   }
+   Alpha {
+    0 0 0.25 0.2 1 0
+   }
+   Size {
+    0 0.4 1 1.5
+   }
+   EffectTime 1.8
+   Repeat 0
+   BRateMast {
+    0 0.35 0.6 0.7 0.85 1 1 0.3
+   }
+  }
+  EmitorDef flash {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 0 0 0
+   MaxNum 1
+   BirthRate 999
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   SizeMultiplier 2.2
+   BillboardingType Full
+   RandomAngle 1
+   Velocity 0
+   AirResistance 0
+   GravityMultiply 0
+   Wind 0
+   LifeTime 2.2
+   Color {
+    0 0.8 0.75 1 1 0.8 0.75 1
+   }
+   Alpha {
+    0 0 0.55 0.45 0.75 0.5 1 0
+   }
+   Size {
+    0 0.5 0.7 1.2 1 1.5
+   }
+   EffectTime 0.1
+   Repeat 0
+  }
+ }
+}

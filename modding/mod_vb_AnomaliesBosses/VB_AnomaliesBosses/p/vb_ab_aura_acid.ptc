@@ -1,0 +1,107 @@
+EffectDef {
+ Emitors {
+  EmitorDef drops {
+   ShapeType Sphere
+   ShapeSize 0.4 0.4 0.4
+   ConeAngle 360 360 0
+   MaxNum 24
+   BirthRate 6
+   BirthRateRND 4
+   BirthRateVel 2
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{009C2EBAACD2D72A}Graphics/Particles/materials/fire/sparks1.emat"
+   SizeMultiplier 0.022
+   SizeRND 0.01
+   BillboardingType Full
+   StretchMultiplier 1.015
+   VelAngle 1
+   RandomAngle 1
+   Velocity 0.15
+   VelocityRND 0.15
+   AirResistance 0.3
+   GravityMultiply 0.7
+   GravityMultiplyRND 0.2
+   Wind 0
+   LifeTime 0.9
+   LifeTimeRND 0.4
+   Color {
+    0 0.35 1 0 1 0.15 0.8 0
+   }
+   Alpha {
+    0 0 0.1 1 0.8 0.9 1 0
+   }
+   Size {
+    0 1 1 0.7
+   }
+   EffectTime 5
+   Repeat 1
+  }
+  EmitorDef vapor {
+   ShapeType Sphere
+   ShapeSize 0.4 0.4 0.4
+   ConeAngle 360 360 0
+   MaxNum 10
+   BirthRate 2.5
+   BirthRateRND 1
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{68A8BAEC9498D2CB}Graphics/Particles/materials/smoke/smoke_dust_01_em3.emat"
+   SizeMultiplier 0.3
+   SizeRND 0.12
+   BillboardingType Full
+   RandomRotDir 1
+   RotMultiplier 15
+   RandomAngle 1
+   Velocity 0.15
+   AirResistance 1
+   GravityMultiply -0.04
+   Wind 1
+   LifeTime 2
+   LifeTimeRND 0.8
+   Color {
+    0 0.25 0.9 0 1 0.1 0.5 0
+   }
+   Alpha {
+    0 0 0.25 0.3 1 0
+   }
+   Size {
+    0 0.5 1 1.4
+   }
+   EffectTime 5
+   Repeat 1
+  }
+  EmitorDef bubbles {
+   ShapeType Sphere
+   ShapeSize 0.35 0.35 0.35
+   ConeAngle 360 360 0
+   MaxNum 6
+   BirthRate 3
+   BirthRateRND 2
+   Offset 0 0 0
+   LocalTransform 1
+   Material "{3E3B5AA16932182E}Graphics/Particles/materials/enviroment/bubbles_01_em.emat"
+   SizeMultiplier 0.05
+   SizeRND 0.02
+   BillboardingType Full
+   RandomAngle 1
+   Velocity 0
+   AirResistance 0
+   GravityMultiply 0
+   Wind 0
+   LifeTime 0.5
+   LifeTimeRND 0.3
+   Color {
+    0 0.35 1 0 1 0.2 0.9 0
+   }
+   Alpha {
+    0 0.8 1 0
+   }
+   Size {
+    0 0.3 1 1
+   }
+   EffectTime 5
+   Repeat 1
+  }
+ }
+}

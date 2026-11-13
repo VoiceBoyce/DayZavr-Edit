@@ -1,8 +1,8 @@
 // «Вырезать трофей» (ТЗ 2.7): по образцу вырезания сердца Изнанки (VB_ActionCutRiftHeart).
 // Резать можно всем, чем в ванили разделывают туши (у предмета есть ActionSkinning), сидя.
 // Время — Trophy.CutTimeSec босса из bosses.json (синхронизируется на клиент, чтобы полоска совпала с сервером).
-// Одно тело — одна разделка: трофеи в инвентарь или на землю рядом, тело исчезает, руки в крови, инструмент
-// теряет Trophy.ToolDamage здоровья. Сама выдача — VB_AB_BossBase.VB_CarveServer.
+// Одно тело — одна разделка: трофеи падают под ноги резавшему, тело исчезает, руки в крови, инструмент
+// теряет Trophy.ToolDamage здоровья. Выдача — в серверном моде (VB_AB_TrophyServer.c, VB_AB_BossBase.VB_CarveServer).
 
 class VB_AB_ActionCutTrophyCB : ActionContinuousBaseCB
 {
@@ -39,22 +39,7 @@ class VB_AB_ActionCutTrophy : ActionContinuousBase
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item)
 	{
 		VB_AB_BossBase boss = VB_AB_BossBase.Cast(target.GetObject());
-		return boss && !boss.IsAlive() && !boss.VB_IsCarved();
-	}
-
-	override void OnFinishProgressServer(ActionData action_data)
-	{
-		super.OnFinishProgressServer(action_data);
-
-		VB_AB_BossBase boss = VB_AB_BossBase.Cast(action_data.m_Target.GetObject());
-		if (!boss || !boss.VB_CarveServer(action_data.m_Player))
-			return;		// второй резавший опоздал: тело уже разрезано
-
-		if (action_data.m_MainItem)
-			MiscGameplayFunctions.DealAbsoluteDmg(action_data.m_MainItem, boss.VB_GetToolDamage());
-		PluginLifespan life = PluginLifespan.Cast(GetPlugin(PluginLifespan));
-		if (life)
-			life.UpdateBloodyHandsVisibility(action_data.m_Player, true);
+		return boss && !boss.IsAlive() && !boss.VB_IsCarved() && !boss.VB_IsMinion();
 	}
 };
 

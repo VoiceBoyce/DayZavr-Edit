@@ -1,0 +1,69 @@
+EffectDef {
+ Emitors {
+  EmitorDef embers {
+   ShapeType Sphere
+   ShapeSize 0.4 0.4 0.4
+   ConeAngle 360 360 0
+   MaxNum 40
+   BirthRate 10
+   BirthRateRND 6
+   BirthRateVel 3
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{009C2EBAACD2D72A}Graphics/Particles/materials/fire/sparks1.emat"
+   SizeMultiplier 0.03
+   SizeRND 0.02
+   BillboardingType Full
+   RandomAngle 1
+   Velocity 0.3
+   VelocityRND 0.3
+   AirResistance 0.8
+   AirResistanceRND 0.4
+   GravityMultiply -0.12
+   GravityMultiplyRND 0.06
+   Wind 1
+   LifeTime 1.4
+   LifeTimeRND 0.8
+   Color {
+    0 1 0.55 0 0.4 1 0.28 0 1 0.7 0.06 0
+   }
+   Alpha {
+    0 0 0.08 1 0.3 0.6 0.45 1 0.7 0.5 1 0
+   }
+   Size {
+    0 1 1 0.4
+   }
+   EffectTime 5
+   Repeat 1
+  }
+  EmitorDef smolder {
+   ShapeType Sphere
+   ShapeSize 0.3 0.3 0.3
+   ConeAngle 360 360 0
+   MaxNum 8
+   BirthRate 4
+   BirthRateRND 2
+   Offset 0 0 0
+   LocalTransform 1
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   SizeMultiplier 0.3
+   SizeRND 0.12
+   BillboardingType Full
+   RandomAngle 1
+   Velocity 0
+   AirResistance 0
+   GravityMultiply 0
+   Wind 0
+   LifeTime 0.9
+   LifeTimeRND 0.5
+   Color {
+    0 1 0.3 0 1 0.8 0.1 0
+   }
+   Alpha {
+    0 0 0.3 0.3 1 0
+   }
+   EffectTime 5
+   Repeat 1
+  }
+ }
+}

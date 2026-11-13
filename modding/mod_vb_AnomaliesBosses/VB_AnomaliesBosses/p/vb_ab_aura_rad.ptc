@@ -1,0 +1,65 @@
+EffectDef {
+ Emitors {
+  EmitorDef sparks {
+   ShapeType Sphere
+   ShapeSize 0.4 0.4 0.4
+   ConeAngle 360 360 0
+   MaxNum 30
+   BirthRate 8
+   BirthRateRND 6
+   BirthRateVel 3
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{009C2EBAACD2D72A}Graphics/Particles/materials/fire/sparks1.emat"
+   SizeMultiplier 0.025
+   SizeRND 0.015
+   BillboardingType Full
+   RandomAngle 1
+   Velocity 0.35
+   VelocityRND 0.3
+   AirResistance 0.8
+   GravityMultiply -0.06
+   GravityMultiplyRND 0.04
+   Wind 1
+   LifeTime 1.3
+   LifeTimeRND 0.7
+   Color {
+    0 0.75 1 0 0.5 0.6 1 0 1 0.35 0.8 0
+   }
+   Alpha {
+    0 0 0.1 1 0.25 0.3 0.4 1 0.55 0.4 0.7 0.9 1 0
+   }
+   EffectTime 5
+   Repeat 1
+  }
+  EmitorDef sores {
+   ShapeType Sphere
+   ShapeSize 0.3 0.3 0.3
+   ConeAngle 360 360 0
+   MaxNum 8
+   BirthRate 4
+   BirthRateRND 2
+   Offset 0 0 0
+   LocalTransform 1
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   SizeMultiplier 0.2
+   SizeRND 0.08
+   BillboardingType Full
+   RandomAngle 1
+   Velocity 0
+   AirResistance 0
+   GravityMultiply 0
+   Wind 0
+   LifeTime 1
+   LifeTimeRND 0.5
+   Color {
+    0 0.65 1 0 1 0.4 0.85 0
+   }
+   Alpha {
+    0 0 0.4 0.35 1 0
+   }
+   EffectTime 5
+   Repeat 1
+  }
+ }
+}

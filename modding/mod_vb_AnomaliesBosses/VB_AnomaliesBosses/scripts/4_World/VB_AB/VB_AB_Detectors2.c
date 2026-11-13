@@ -1,48 +1,12 @@
-// Детекторы Око, Медведь, Сварог и Велес (ТЗ 2.2). Модели и материалы OOTS, логика своя, по образцу OOTS
-// (Detectors.c, Detectors_Server.c), но на нашей схеме находок VB_AB_Finds.
+// Детекторы Око, Медведь, Сварог и Велес (ТЗ 2.2). Модели и материалы OOTS, логика своя, по образцу OOTS.
 // Пути текстур и материалов экранов/ламп скрипт берёт из config.cpp (cfg/detectors.hpp, генератор tools/ab_detectors.py).
+// Здесь только экраны, лампы и метки; что и как ищется — в серверном моде (VB_AB_DetectorServer.c).
 //
 // Что синхронизируется:
 //   все     m_VB_Range 0..3      — сила сигнала ближайшей показанной находки (писк, как у Отклика);
 //   Медведь m_VB_Dir 0..12       — сектор направления по 15°: 0 — нет, 6 — прямо, 1 — слева, 11 — справа;
 //   Сварог,
 //   Велес   m_VB_Slot1..4 0..740 — метки на экране: 0 — пусто, иначе 1 + шаг_расстояния * 37 + шаг_угла.
-
-// Доступ к списку находок для детекторов с несколькими целями. Наследник видит защищённый список VB_AB_Finds.
-class VB_AB_FindsEx extends VB_AB_Finds
-{
-	// Запись ещё в списке: не стала предметом и не убрана вместе с хозяином.
-	static bool Has(VB_AB_Find f)
-	{
-		if (!f || !s_Finds)
-			return false;
-		return s_Finds.Find(f) != -1;
-	}
-
-	// Все разрешённые детектору записи ближе radius, от ближней к дальней.
-	static void InRadius(vector pos, float radius, string detector, int tier, array<VB_AB_Find> result)
-	{
-		result.Clear();
-		if (!s_Finds)
-			return;
-		array<float> dists = new array<float>;
-		int k;
-		float d;
-		foreach (VB_AB_Find f : s_Finds)
-		{
-			if (!f.AllowedFor(detector, tier))
-				continue;
-			d = vector.Distance(pos, f.m_Pos);
-			if (d >= radius)
-				continue;
-			k = 0;
-			while (k < dists.Count() && dists[k] <= d)
-				k++;
-			dists.InsertAt(d, k);
-			result.InsertAt(f, k);
-		}
-	}
-};
 
 // ==================================================================== Око
 // Как Отклик: только расстояние и только впереди (±75°). Своя индикация: экран светится, пока детектор
@@ -54,10 +18,6 @@ class VB_AB_Detector_Oko extends VB_AB_DetectorBase
 	protected VB_AB_Light_DetectorLamp m_VB_Lamp;
 	protected int m_VB_BlinkMs;				// клиент: период мигания, 0 — не мигает
 
-	override protected bool VB_InSector(PlayerBase p, vector target)
-	{
-		return VB_InFront(p, target);
-	}
 
 	override void EEDelete(EntityAI parent)
 	{
@@ -155,40 +115,6 @@ class VB_AB_Detector_Medved extends VB_AB_DetectorBase
 		RegisterNetSyncVariableInt("m_VB_Dir", 0, SECTORS);
 	}
 
-	override protected bool VB_InSector(PlayerBase p, vector target)
-	{
-		return VB_InFront(p, target);
-	}
-
-	// ---------------------------------------------------------------- сервер
-	override protected void VB_OnScanned(PlayerBase p, VB_AB_Find shown)
-	{
-		int dir = 0;
-		if (p && shown)
-		{
-			float b = VB_Bearing(p, shown.m_Pos);
-			dir = Math.Round((b + 90) / SECTOR_DEG);
-			if (dir < 1)
-				dir = 1;
-			if (dir > SECTORS - 1)
-				dir = SECTORS - 1;
-		}
-		if (dir != m_VB_Dir)
-		{
-			m_VB_Dir = dir;
-			SetSynchDirty();
-		}
-	}
-
-	override protected void VB_ServerReset()
-	{
-		super.VB_ServerReset();
-		if (m_VB_Dir != 0)
-		{
-			m_VB_Dir = 0;
-			SetSynchDirty();
-		}
-	}
 
 	// ---------------------------------------------------------------- клиент
 	override void OnVariablesSynchronized()
@@ -273,7 +199,6 @@ class VB_AB_DetectorMulti extends VB_AB_DetectorBase
 	protected int m_VB_Slot2;
 	protected int m_VB_Slot3;
 	protected int m_VB_Slot4;
-	protected ref array<ref VB_AB_Find> m_VB_SlotFinds;	// сервер: находка в каждом слоте
 	protected ref array<int> m_VB_SlotSeen;				// клиент: что уже показано
 
 	void VB_AB_DetectorMulti()
@@ -282,174 +207,6 @@ class VB_AB_DetectorMulti extends VB_AB_DetectorBase
 		RegisterNetSyncVariableInt("m_VB_Slot2", 0, DIST_N * ANG_N);
 		RegisterNetSyncVariableInt("m_VB_Slot3", 0, DIST_N * ANG_N);
 		RegisterNetSyncVariableInt("m_VB_Slot4", 0, DIST_N * ANG_N);
-	}
-
-	// ---------------------------------------------------------------- сервер
-	override protected void VB_ServerScan()
-	{
-		VB_InitSlots();
-		PlayerBase p = PlayerBase.Cast(GetHierarchyRootPlayer());
-		bool active = p && p.IsAlive() && p.GetItemInHands() == this;
-		VB_AB_DetectorCfg cfg = VB_AB_Cfg.Get().GetDetector(GetType());
-		int i;
-		int free;
-		int packed;
-		float d;
-		float bearing;
-		float nearest = -1;
-		bool dirty = false;
-		VB_AB_Find f;
-		vector at;
-
-		// 1. отпустить слоты: находки нет, она за радиусом или не впереди
-		for (i = 0; i < SLOTS; i++)
-		{
-			f = m_VB_SlotFinds[i];
-			if (!f)
-				continue;
-			if (!active || !VB_AB_FindsEx.Has(f) || !f.AllowedFor(GetType(), cfg.Tier) || !VB_SlotSees(p, f.m_Pos, cfg.Radius))
-				m_VB_SlotFinds[i] = null;
-		}
-
-		// 2. занять свободные слоты ближайшими новыми находками
-		if (active && VB_FreeSlot() != -1)
-		{
-			array<VB_AB_Find> cand = new array<VB_AB_Find>;
-			VB_AB_FindsEx.InRadius(p.GetPosition(), cfg.Radius, GetType(), cfg.Tier, cand);
-			foreach (VB_AB_Find c : cand)
-			{
-				free = VB_FreeSlot();
-				if (free == -1)
-					break;
-				if (m_VB_SlotFinds.Find(c) != -1)
-					continue;
-				if (!VB_SlotSees(p, c.m_Pos, cfg.Radius))
-					continue;
-				m_VB_SlotFinds[free] = c;
-			}
-		}
-
-		// 3. значения слотов; ближе SpawnDistance — находка становится предметом
-		for (i = 0; i < SLOTS; i++)
-		{
-			packed = 0;
-			f = m_VB_SlotFinds[i];
-			if (f)
-			{
-				d = vector.Distance(p.GetPosition(), f.m_Pos);
-				if (d < cfg.SpawnDistance)
-				{
-					at = f.m_Pos;
-					VB_AB_Finds.Materialize(f, p, GetType());
-					m_VB_SlotFinds[i] = null;
-					GetGame().RPCSingleParam(this, RPC_FOUND, new Param1<vector>(at), true);
-				}
-				else
-				{
-					bearing = VB_Bearing(p, f.m_Pos);
-					packed = VB_Pack(d, bearing, cfg);
-					if (nearest < 0 || d < nearest)
-						nearest = d;
-				}
-			}
-			if (VB_SetSlot(i, packed))
-				dirty = true;
-		}
-
-		int range = R_NONE;
-		if (nearest >= 0)
-			range = VB_RangeOf(nearest, cfg.Radius);
-		if (range != m_VB_Range)
-		{
-			m_VB_Range = range;
-			dirty = true;
-		}
-		if (dirty)
-			SetSynchDirty();
-	}
-
-	override protected void VB_ServerReset()
-	{
-		super.VB_ServerReset();
-		VB_InitSlots();
-		bool dirty = false;
-		for (int i = 0; i < SLOTS; i++)
-		{
-			m_VB_SlotFinds[i] = null;
-			if (VB_SetSlot(i, 0))
-				dirty = true;
-		}
-		if (dirty)
-			SetSynchDirty();
-	}
-
-	protected void VB_InitSlots()
-	{
-		if (m_VB_SlotFinds)
-			return;
-		m_VB_SlotFinds = new array<ref VB_AB_Find>;
-		for (int i = 0; i < SLOTS; i++)
-			m_VB_SlotFinds.Insert(null);
-	}
-
-	protected int VB_FreeSlot()
-	{
-		for (int i = 0; i < SLOTS; i++)
-		{
-			if (!m_VB_SlotFinds[i])
-				return i;
-		}
-		return -1;
-	}
-
-	// Находка в радиусе и в полукруге впереди игрока.
-	protected bool VB_SlotSees(PlayerBase p, vector target, float radius)
-	{
-		if (vector.Distance(p.GetPosition(), target) >= radius)
-			return false;
-		float b = VB_Bearing(p, target);
-		return Math.AbsFloat(b) <= SECTOR_DEG;
-	}
-
-	protected int VB_Pack(float dist, float bearing, VB_AB_DetectorCfg cfg)
-	{
-		float t = 1;
-		if (cfg.Radius > cfg.SpawnDistance)
-			t = Math.Clamp(Math.InverseLerp(cfg.Radius, cfg.SpawnDistance, dist), 0, 1);
-		int dq = Math.Round(t * (DIST_N - 1));
-		float ang = Math.Clamp(bearing, -SECTOR_DEG, SECTOR_DEG);
-		int aq = Math.Round((ang + SECTOR_DEG) / 5);
-		if (aq > ANG_N - 1)
-			aq = ANG_N - 1;
-		return 1 + dq * ANG_N + aq;
-	}
-
-	protected bool VB_SetSlot(int i, int v)
-	{
-		switch (i)
-		{
-			case 0:
-				if (m_VB_Slot1 == v)
-					return false;
-				m_VB_Slot1 = v;
-				return true;
-			case 1:
-				if (m_VB_Slot2 == v)
-					return false;
-				m_VB_Slot2 = v;
-				return true;
-			case 2:
-				if (m_VB_Slot3 == v)
-					return false;
-				m_VB_Slot3 = v;
-				return true;
-			case 3:
-				if (m_VB_Slot4 == v)
-					return false;
-				m_VB_Slot4 = v;
-				return true;
-		}
-		return false;
 	}
 
 	protected int VB_GetSlot(int i)

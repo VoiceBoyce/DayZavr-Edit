@@ -1,5 +1,6 @@
 // Скины боссов (ТЗ 4.5): модель x палитра. Генерирует tools/ab_skins.py, руками не править.
 // vbABScale и vbABHealth — значения модели по умолчанию (ТЗ 4.4), bosses.json их переопределяет.
+// vbABPalette — палитра скина: по ней клиент выбирает ауру (scripts/4_World/VB_AB/VB_AB_Aura.c).
 class VB_AB_Ent_Storm: VB_AB_BossBase
 {
 	scope = 2;
@@ -7,6 +8,7 @@ class VB_AB_Ent_Storm: VB_AB_BossBase
 	model = "VB_AB\m\vb_ent_storm.p3d";
 	vbABScale = 1.6;
 	vbABHealth = 8000;
+	vbABPalette = "storm";
 };
 class VB_AB_Ent_Acid: VB_AB_BossBase
 {
@@ -15,6 +17,7 @@ class VB_AB_Ent_Acid: VB_AB_BossBase
 	model = "VB_AB\m\vb_ent_acid.p3d";
 	vbABScale = 1.6;
 	vbABHealth = 8000;
+	vbABPalette = "acid";
 };
 class VB_AB_MozgoTrasRed_Fire: VB_AB_BossBase
 {
@@ -23,6 +26,7 @@ class VB_AB_MozgoTrasRed_Fire: VB_AB_BossBase
 	model = "VB_AB\m\vb_mozgotras_red_fire.p3d";
 	vbABScale = 1.1;
 	vbABHealth = 5000;
+	vbABPalette = "fire";
 };
 class VB_AB_MozgoTrasRed_Gravity: VB_AB_BossBase
 {
@@ -31,6 +35,7 @@ class VB_AB_MozgoTrasRed_Gravity: VB_AB_BossBase
 	model = "VB_AB\m\vb_mozgotras_red_gravity.p3d";
 	vbABScale = 1.1;
 	vbABHealth = 5000;
+	vbABPalette = "gravity";
 };
 class VB_AB_MozgoTras_Psi: VB_AB_BossBase
 {
@@ -39,6 +44,7 @@ class VB_AB_MozgoTras_Psi: VB_AB_BossBase
 	model = "VB_AB\m\vb_mozgotras_psi.p3d";
 	vbABScale = 1.1;
 	vbABHealth = 4500;
+	vbABPalette = "psi";
 };
 class VB_AB_MozgoTras_Storm: VB_AB_BossBase
 {
@@ -47,6 +53,7 @@ class VB_AB_MozgoTras_Storm: VB_AB_BossBase
 	model = "VB_AB\m\vb_mozgotras_storm.p3d";
 	vbABScale = 1.1;
 	vbABHealth = 4500;
+	vbABPalette = "storm";
 };
 class VB_AB_MutaWolf_Ice: VB_AB_BossBase
 {
@@ -55,6 +62,7 @@ class VB_AB_MutaWolf_Ice: VB_AB_BossBase
 	model = "VB_AB\m\vb_mutawolf_ice.p3d";
 	vbABScale = 1.1;
 	vbABHealth = 3500;
+	vbABPalette = "ice";
 };
 class VB_AB_MutaWolf_Fire: VB_AB_BossBase
 {
@@ -63,6 +71,7 @@ class VB_AB_MutaWolf_Fire: VB_AB_BossBase
 	model = "VB_AB\m\vb_mutawolf_fire.p3d";
 	vbABScale = 1.1;
 	vbABHealth = 3500;
+	vbABPalette = "fire";
 };
 class VB_AB_Shum_Gravity: VB_AB_BossBase
 {
@@ -71,6 +80,7 @@ class VB_AB_Shum_Gravity: VB_AB_BossBase
 	model = "VB_AB\m\vb_shum_gravity.p3d";
 	vbABScale = 1;
 	vbABHealth = 3500;
+	vbABPalette = "gravity";
 };
 class VB_AB_Shum_Ice: VB_AB_BossBase
 {
@@ -79,6 +89,7 @@ class VB_AB_Shum_Ice: VB_AB_BossBase
 	model = "VB_AB\m\vb_shum_ice.p3d";
 	vbABScale = 1;
 	vbABHealth = 3500;
+	vbABPalette = "ice";
 };
 class VB_AB_Tenevnik_Psi: VB_AB_BossBase
 {
@@ -87,6 +98,7 @@ class VB_AB_Tenevnik_Psi: VB_AB_BossBase
 	model = "VB_AB\m\vb_tenevnik_psi.p3d";
 	vbABScale = 1;
 	vbABHealth = 3000;
+	vbABPalette = "psi";
 };
 class VB_AB_Tenevnik_Rad: VB_AB_BossBase
 {
@@ -95,6 +107,7 @@ class VB_AB_Tenevnik_Rad: VB_AB_BossBase
 	model = "VB_AB\m\vb_tenevnik_rad.p3d";
 	vbABScale = 1;
 	vbABHealth = 3000;
+	vbABPalette = "rad";
 };
 class VB_AB_Ricar_Acid: VB_AB_BossBase
 {
@@ -103,6 +116,7 @@ class VB_AB_Ricar_Acid: VB_AB_BossBase
 	model = "VB_AB\m\vb_ricar_acid.p3d";
 	vbABScale = 1;
 	vbABHealth = 2500;
+	vbABPalette = "acid";
 	// секция camo покрывает тело: свой материал со свечением прожилок (Stage8)
 	hiddenSelections[] = {"camo"};
 	hiddenSelectionsTextures[] = {"VB_AB\t\riacid\msfz_ricar_body___________________.paa"};
@@ -115,6 +129,7 @@ class VB_AB_Ricar_Rad: VB_AB_BossBase
 	model = "VB_AB\m\vb_ricar_rad.p3d";
 	vbABScale = 1;
 	vbABHealth = 2500;
+	vbABPalette = "rad";
 	// секция camo покрывает тело: свой материал со свечением прожилок (Stage8)
 	hiddenSelections[] = {"camo"};
 	hiddenSelectionsTextures[] = {"VB_AB\t\rirad\msfz_ricar_body____________________.paa"};

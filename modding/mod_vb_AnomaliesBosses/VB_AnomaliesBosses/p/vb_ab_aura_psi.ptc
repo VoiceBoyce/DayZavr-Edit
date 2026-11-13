@@ -1,0 +1,67 @@
+EffectDef {
+ Emitors {
+  EmitorDef haze {
+   ShapeType Sphere
+   ShapeSize 0.4 0.4 0.4
+   ConeAngle 360 360 0
+   MaxNum 8
+   BirthRate 2.5
+   BirthRateRND 1
+   Offset 0 0 0
+   LocalTransform 1
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   SizeMultiplier 0.55
+   SizeRND 0.2
+   BillboardingType Full
+   RandomAngle 1
+   Velocity 0.05
+   AirResistance 0
+   GravityMultiply 0
+   Wind 0
+   LifeTime 2.2
+   LifeTimeRND 0.8
+   Color {
+    0 0.8 0.75 1 0.5 0.65 0.85 1 1 0.9 0.7 1
+   }
+   Alpha {
+    0 0 0.35 0.16 0.7 0.12 1 0
+   }
+   Size {
+    0 0.7 1 1.2
+   }
+   EffectTime 5
+   Repeat 1
+  }
+  EmitorDef motes {
+   ShapeType Sphere
+   ShapeSize 0.5 0.5 0.5
+   ConeAngle 360 360 0
+   MaxNum 24
+   BirthRate 6
+   BirthRateRND 3
+   BirthRateVel 2
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   SizeMultiplier 0.035
+   SizeRND 0.015
+   BillboardingType Full
+   RandomAngle 1
+   Velocity 0.15
+   VelocityRND 0.1
+   AirResistance 0.5
+   GravityMultiply -0.03
+   Wind 0
+   LifeTime 2
+   LifeTimeRND 1
+   Color {
+    0 0.9 0.8 1 0.5 0.7 0.9 1 1 1 0.85 1
+   }
+   Alpha {
+    0 0 0.2 0.9 0.7 0.6 1 0
+   }
+   EffectTime 5
+   Repeat 1
+  }
+ }
+}

@@ -245,6 +245,31 @@ class VB_AB_Server
 			p.Update(now, TICK_MS / 1000.0);
 	}
 
+	// Живые игроки в радиусе r (по горизонтали) от точки, ближайший первым
+	static void PlayersNear(vector pos, float r, array<PlayerBase> res)
+	{
+		res.Clear();
+		if (!s_Instance)
+			return;
+		float r2 = r * r;
+		array<float> dist = new array<float>;
+		foreach (Man m : s_Instance.m_Players)
+		{
+			PlayerBase p = PlayerBase.Cast(m);
+			if (!p || !p.IsAlive())
+				continue;
+			vector pp = p.GetPosition();
+			float dSq = (pp[0] - pos[0]) * (pp[0] - pos[0]) + (pp[2] - pos[2]) * (pp[2] - pos[2]);
+			if (dSq > r2)
+				continue;
+			int i = 0;
+			while (i < dist.Count() && dist[i] < dSq)
+				i++;
+			dist.InsertAt(dSq, i);
+			res.InsertAt(p, i);
+		}
+	}
+
 	static bool AnyPlayerNear(vector pos, float r)
 	{
 		if (!s_Instance)
@@ -286,5 +311,133 @@ class VB_AB_Server
 			return false;
 		s_Instance.m_ArtifactsLeft--;
 		return true;
+	}
+
+	// ---------------------------------------------------------------- редактор (VB_AB_EditorServer.c, ТЗ 6)
+	// Старые конфиги после «Перечитать» и снятые точки рестарта: на них ещё смотрят живые боссы, поля и способности
+	// (указатели без ref), поэтому держим до рестарта.
+	protected ref array<ref VB_AB_BossData> m_OldData = new array<ref VB_AB_BossData>;
+	protected ref array<ref VB_AB_PointRuntime> m_Dropped = new array<ref VB_AB_PointRuntime>;
+
+	// Точки этого рестарта (выбранные на старте и добавленные редактором)
+	static array<ref VB_AB_PointRuntime> ActivePoints()
+	{
+		if (!s_Instance)
+			return null;
+		return s_Instance.m_Active;
+	}
+
+	static VB_AB_PointRuntime FindRuntime(int pointId)
+	{
+		if (!s_Instance)
+			return null;
+		foreach (VB_AB_PointRuntime r : s_Instance.m_Active)
+		{
+			if (r && r.m_Cfg && r.m_Cfg.Id == pointId)
+				return r;
+		}
+		return null;
+	}
+
+	// Точка в этом рестарте; если её не выбрали на старте (новая или не выпала) — добавляется к выбранным
+	static VB_AB_PointRuntime EnsureRuntime(VB_AB_PointCfg cfg)
+	{
+		if (!s_Instance || !cfg)
+			return null;
+		VB_AB_PointRuntime r = FindRuntime(cfg.Id);
+		if (r)
+			return r;
+		r = new VB_AB_PointRuntime(cfg);
+		s_Instance.m_Active.Insert(r);
+		VB_AB_Log.Info("точка " + cfg.Id + " добавлена в этот рестарт (редактор)");
+		return r;
+	}
+
+	// «Призвать сейчас»: bossId пусто — случайный из списка точки. Лимит MaxAwakeBosses здесь не действует.
+	// Уже живой босс на точке остаётся (возвращается он).
+	static VB_AB_BossBase SummonAt(VB_AB_PointCfg cfg, string bossId)
+	{
+		VB_AB_PointRuntime r = EnsureRuntime(cfg);
+		if (!r)
+			return null;
+		if (r.m_Boss && r.m_Boss.IsAlive())
+			return r.m_Boss;
+		r.m_Boss = null;
+		r.m_Done = false;
+		r.m_RespawnAt = 0;
+		return r.Spawn(bossId);
+	}
+
+	// «Убрать босса»: босс уходит, точка до рестарта сама его больше не будит (вернуть — «Призвать сейчас»)
+	static bool DespawnAt(int pointId)
+	{
+		VB_AB_PointRuntime r = FindRuntime(pointId);
+		if (!r || !r.m_Boss)
+			return false;
+		VB_AB_BossBase b = r.m_Boss;
+		r.m_Boss = null;
+		r.m_Done = true;
+		if (b.IsAlive())
+			b.VB_Despawn();
+		return true;
+	}
+
+	// Точка выключена в редакторе: в этом рестарте она больше не будит босса (живой доигрывает)
+	static void StopPoint(int pointId)
+	{
+		VB_AB_PointRuntime r = FindRuntime(pointId);
+		if (r)
+			r.m_Done = true;
+	}
+
+	// Точка снова включена: если босса на ней нет — снова будит его при подходе игрока
+	static void ResumePoint(int pointId)
+	{
+		VB_AB_PointRuntime r = FindRuntime(pointId);
+		if (r && !r.m_Boss)
+		{
+			r.m_Done = false;
+			r.m_RespawnAt = 0;
+		}
+	}
+
+	// Точка удалена: живой босс уходит, точка снимается с рестарта
+	static void DropPoint(int pointId)
+	{
+		VB_AB_PointRuntime r = FindRuntime(pointId);
+		if (!r)
+			return;
+		if (r.m_Boss && r.m_Boss.IsAlive())
+			r.m_Boss.VB_Despawn();
+		r.m_Boss = null;
+		r.m_Done = true;
+		s_Instance.m_Dropped.Insert(r);
+		s_Instance.m_Active.RemoveItem(r);
+	}
+
+	// «Перечитать конфиги»: anomalies.json, detectors.json, settings.json, bosses.json, points.json.
+	// Живые боссы доигрывают со старыми настройками, новые и призванные после — с новыми.
+	// Точки рестарта берут новые записи по Id; точку, которой больше нет в points.json, снимаем.
+	static void ReloadConfigs()
+	{
+		if (!s_Instance)
+			return;
+		VB_AB_Cfg.Reload();
+		VB_AB_BossData fresh = new VB_AB_BossData;
+		fresh.Load();
+		s_Instance.m_OldData.Insert(s_Instance.m_Data);
+		s_Instance.m_Data = fresh;
+		for (int i = s_Instance.m_Active.Count() - 1; i >= 0; i--)
+		{
+			VB_AB_PointRuntime r = s_Instance.m_Active[i];
+			VB_AB_PointCfg p = fresh.FindPoint(r.m_Cfg.Id);
+			if (p)
+			{
+				r.m_Cfg = p;
+				continue;
+			}
+			VB_AB_Log.Info("точки " + r.m_Cfg.Id + " больше нет в points.json, снята с рестарта");
+			DropPoint(r.m_Cfg.Id);
+		}
 	}
 };

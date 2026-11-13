@@ -32,6 +32,11 @@ DECL_RE = re.compile(
     r"([A-Za-z_]\w*(?:<[^;(){}]*?>)?)\s+([A-Za-z_]\w*)\s*(?:\[[^\]]*\]\s*)?(?=[;=,)\[])")
 NOT_TYPES = {"return", "else", "new", "delete", "case", "typedef", "class", "enum", "extends", "modded",
              "override", "proto", "native", "event", "goto", "thread"}
+# объявление метода в начале строки: [модификаторы] Тип имя(  — метод тоже не может называться как ванильный тип
+# (VB_AB_Aura: метод LightType при ванильном enum LightType -> «Too many parameters for 'LightType' method»)
+METHOD_RE = re.compile(
+    r"^[ \t]*(?:(?:static|protected|private|override|proto|native|event|external|volatile|sealed)\s+)*"
+    r"([A-Za-z_]\w*(?:<[^;(){}\n]*?>)?)\s+([A-Za-z_]\w*)\s*\(", re.M)
 
 
 def strip_comments(text):
@@ -85,6 +90,16 @@ def main():
                 bad += 1
             elif name in types:
                 print("%s:%d: имя '%s' занято типом (%s)" % (rel, line, name, os.path.relpath(types[name], VANILLA) if types[name].startswith(VANILLA) else "мод"))
+                bad += 1
+        own = {m.group(1) for m in TYPE_RE.finditer(t)}       # конструкторы своих и modded-классов
+        for m in METHOD_RE.finditer(t):
+            typ, name = m.group(1), m.group(2)
+            if typ in NOT_TYPES or name in own:
+                continue
+            if name in types:
+                line = t.count("\n", 0, m.start(2)) + 1
+                rel = os.path.relpath(fn, MOD)
+                print("%s:%d: метод '%s' назван как тип (%s)" % (rel, line, name, os.path.relpath(types[name], VANILLA) if types[name].startswith(VANILLA) else "мод"))
                 bad += 1
     print("конфликтов:", bad)
     sys.exit(1 if bad else 0)

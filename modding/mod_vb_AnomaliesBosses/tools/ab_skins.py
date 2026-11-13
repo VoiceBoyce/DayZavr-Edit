@@ -14,7 +14,8 @@
 Запуск (нужен numpy — Python из Blender):
   "G:\\SteamLibrary\\steamapps\\common\\Blender\\5.2\\python\\bin\\python.exe" ab_skins.py            все 14
   ... ab_skins.py ent_storm ricar_acid     только эти (конфиги всё равно пишутся целиком)
-  ... ab_skins.py --cfg                    только cfg\\bosses.hpp и cfg\\trophies.hpp, без текстур
+  ... ab_skins.py --cfg                    только cfg\\bosses.hpp и cfg\\trophies.hpp, без текстур и моделей
+Конфиг переписывается, только если его содержимое изменилось (иначе файл не трогается).
 """
 import json
 import os
@@ -123,9 +124,24 @@ def build_ricar_glow(pal):
 
 
 # ------------------------------------------------------------------ конфиги
+def write_if_changed(path, text):
+    """Файл переписывается, только если содержимое другое (иначе не трогаем и дату изменения)."""
+    data = text.replace("\r\n", "\n").replace("\n", "\r\n").encode("utf-8")
+    if os.path.exists(path):
+        with open(path, "rb") as f:
+            if f.read() == data:
+                print("   без изменений:", os.path.basename(path))
+                return False
+    with open(path, "wb") as f:
+        f.write(data)
+    print("   записан:", os.path.basename(path))
+    return True
+
+
 def write_bosses():
     L = ["// Скины боссов (ТЗ 4.5): модель x палитра. Генерирует tools/ab_skins.py, руками не править.",
-         "// vbABScale и vbABHealth — значения модели по умолчанию (ТЗ 4.4), bosses.json их переопределяет."]
+         "// vbABScale и vbABHealth — значения модели по умолчанию (ТЗ 4.4), bosses.json их переопределяет.",
+         "// vbABPalette — палитра скина: по ней клиент выбирает ауру (scripts/4_World/VB_AB/VB_AB_Aura.c)."]
     for n, code, pal in SKINS:
         m = MODELS[code]
         sid = skin_id(code, pal)
@@ -135,7 +151,8 @@ def write_bosses():
               '\tdisplayName = "$STR_VB_AB_Boss_%s";' % sid,
               '\tmodel = "VB_AB\\m\\vb_%s_%s.p3d";' % (M.MODELS[code][0], pal),
               "\tvbABScale = %g;" % m["scale"],
-              "\tvbABHealth = %d;" % m["health"]]
+              "\tvbABHealth = %d;" % m["health"],
+              '\tvbABPalette = "%s";' % pal]
         if code == "ri":
             p = ricar_paths(pal)
             L += ["\t// секция camo покрывает тело: свой материал со свечением прожилок (Stage8)",
@@ -143,8 +160,7 @@ def write_bosses():
                   '\thiddenSelectionsTextures[] = {"%s"};' % cfg_path(p["tex"]),
                   '\thiddenSelectionsMaterials[] = {"%s"};' % cfg_path(p["rvmat"])]
         L += ["};"]
-    with open(os.path.join(CFG, "bosses.hpp"), "w", encoding="utf-8", newline="\r\n") as f:
-        f.write("\n".join(L) + "\n")
+    write_if_changed(os.path.join(CFG, "bosses.hpp"), "\n".join(L) + "\n")
 
 
 def write_trophies():
@@ -192,8 +208,7 @@ def write_trophies():
         if m.get("rot"):
             L += ["\trotationFlags = %d;" % m["rot"]]
         L += ["};"]
-    with open(os.path.join(CFG, "trophies.hpp"), "w", encoding="utf-8", newline="\r\n") as f:
-        f.write("\n".join(L) + "\n")
+    write_if_changed(os.path.join(CFG, "trophies.hpp"), "\n".join(L) + "\n")
 
 
 def check_strings():

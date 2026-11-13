@@ -18,8 +18,8 @@
 		vbABRechargeTime = 2.5;
 		vbABAmmo = "VB_AB_ElectraDmg";
 		vbABHitZones[] = {"Torso","LeftHand","LeftLeg","LeftFoot","RightHand","RightLeg","RightFoot"};
-		vbABDmgMin = 0.9;
-		vbABDmgMax = 2.5;
+		vbABDmgMin = 0.7;
+		vbABDmgMax = 1;
 	};
 	class VB_AB_Anomaly_EMP: VB_AB_AnomalyBase
 	{
@@ -254,8 +254,8 @@
 		vbABRechargeTime = 3;
 		vbABAmmo = "VB_AB_VoronkaDmg";
 		vbABHitZones[] = {"Torso","LeftHand","LeftLeg","LeftFoot","RightHand","RightLeg","RightFoot"};
-		vbABDmgMin = 0.1;
-		vbABDmgMax = 0.85;
+		vbABDmgMin = 0.6;
+		vbABDmgMax = 1;
 		vbABEffect = "twophase";
 		vbABChargeTime = 2;
 	};
@@ -338,8 +338,8 @@
 		vbABRechargeTime = 1;
 		vbABAmmo = "VB_AB_StudenDmg";
 		vbABHitZones[] = {"Torso","LeftHand","LeftLeg","LeftFoot","RightHand","RightLeg","RightFoot"};
-		vbABDmgMin = 0.5;
-		vbABDmgMax = 1.3;
+		vbABDmgMin = 0.7;
+		vbABDmgMax = 1;
 	};
 	class VB_AB_Anomaly_Holera: VB_AB_AnomalyBase
 	{

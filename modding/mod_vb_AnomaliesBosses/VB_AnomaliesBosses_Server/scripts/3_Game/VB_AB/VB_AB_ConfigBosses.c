@@ -1,5 +1,5 @@
 // Боссы, точки, общие настройки и состояние рестарта (ТЗ, разделы 4–5).
-// bosses.json по умолчанию лежит в PBO (VB_AB/defaults/bosses.json, генерирует tools/ab_bosses.py)
+// bosses.json по умолчанию лежит в серверном PBO (VB_AnomaliesBosses_Server/defaults/bosses.json, генерирует tools/ab_bosses.py)
 // и копируется в профиль, если там файла нет.
 
 // Нормализация после загрузки: см. комментарий в VB_AB_Config.c (ключи без значения приходят нулями).
@@ -94,9 +94,20 @@ class VB_AB_FieldCfg
 	float KeepFromPlayers;		// нет или 0 — 3
 	float LeashRadius;			// нет или 0 — радиус поля + 15
 	float AfterDeathSec;		// нет или 0 — 120
+	// Щит (ТЗ 8.1, 8.2): внутри своей аномалии босс получает меньше урона и лечится; на пороге фазы — неуязвим.
+	// Отрицательное значение выключает.
+	float ShieldDamage;			// доля урона внутри своей аномалии; нет или 0 — 0,4
+	float ShieldHealPct;		// лечение внутри своей аномалии, % здоровья в секунду; нет или 0 — 1
+	float PhaseShieldSec;		// неуязвимость на пороге фазы, с; нет или 0 — 3
 
 	void VB_Norm()
 	{
+		if (ShieldDamage == 0)
+			ShieldDamage = 0.4;
+		if (ShieldHealPct == 0)
+			ShieldHealPct = 1;
+		if (PhaseShieldSec == 0)
+			PhaseShieldSec = 3;
 		if (Radius <= 0)
 			Radius = 25;
 		if (MaxAnomalies <= 0)
@@ -183,6 +194,7 @@ class VB_AB_BossCfg
 	int Tier;					// нет или 0 — 1
 	float Health;				// нет или 0 — 3000
 	float Scale;				// 0 — из config.cpp (vbABScale)
+	float MeleeMul;				// удар босса × (здоровье и кровь игрока), нет или 0 — 1 (как зомби)
 	ref VB_AB_FieldCfg Field;
 	ref array<ref VB_AB_AnomalyLine> Anomalies;
 	ref array<ref VB_AB_PhaseCfg> Phases;
@@ -196,6 +208,8 @@ class VB_AB_BossCfg
 			Tier = 1;
 		if (Health <= 0)
 			Health = 3000;
+		if (MeleeMul <= 0)
+			MeleeMul = 1;
 		if (!Field)
 			Field = new VB_AB_FieldCfg;
 		Field.VB_Norm();
@@ -261,6 +275,22 @@ class VB_AB_PointCfg
 			return vector.Zero;
 		return Vector(Position[0], Position[1], Position[2]);
 	}
+
+	// Редактор: позиция в формате points.json (три числа, до сантиметра)
+	void SetPos(vector v)
+	{
+		if (!Position)
+			Position = new array<float>;
+		Position.Clear();
+		Position.Insert(Math.Round(v[0] * 100) / 100);
+		Position.Insert(Math.Round(v[1] * 100) / 100);
+		Position.Insert(Math.Round(v[2] * 100) / 100);
+	}
+
+	bool HasBoss(string id)
+	{
+		return Bosses && Bosses.Find(id) != -1;
+	}
 };
 
 class VB_AB_PointsFile
@@ -314,7 +344,7 @@ class VB_AB_StateFile
 class VB_AB_BossData
 {
 	static const string DIR = "$profile:VB_Mods/VB_AnomaliesBosses/";
-	static const string DEFAULT_BOSSES = "VB_AB/defaults/bosses.json";
+	static const string DEFAULT_BOSSES = "VB_AnomaliesBosses_Server/defaults/bosses.json";
 
 	ref VB_AB_SettingsFile m_Settings;
 	ref map<string, ref VB_AB_BossCfg> m_Bosses = new map<string, ref VB_AB_BossCfg>;
@@ -344,7 +374,7 @@ class VB_AB_BossData
 		{
 			m_Settings = new VB_AB_SettingsFile;
 			m_Settings.Admins = new array<string>;
-			m_Settings.Admins.Insert("76561198903710848");
+			m_Settings.Admins.Insert("76561200715668795");		// админ по умолчанию (пользователь, 2026-11-13)
 			if (!FileExist(path))
 				JsonFileLoader<VB_AB_SettingsFile>.SaveFile(path, m_Settings, err);
 		}
@@ -496,5 +526,77 @@ class VB_AB_BossData
 	bool IsAdmin(string plainId)
 	{
 		return m_Settings && m_Settings.Admins.Find(plainId) != -1;
+	}
+
+	// ---------------------------------------------------------------- редактор (VB_AB_EditorServer.c)
+	// Удалённые точки живут до рестарта: на них ещё может смотреть VB_AB_PointRuntime (указатель без ref).
+	protected ref array<ref VB_AB_PointCfg> m_RemovedPoints = new array<ref VB_AB_PointCfg>;
+
+	VB_AB_PointCfg FindPoint(int id)
+	{
+		foreach (VB_AB_PointCfg p : m_Points)
+		{
+			if (p && p.Id == id)
+				return p;
+		}
+		return null;
+	}
+
+	// Новый номер: больше всех живых и удалённых в этом запуске (номер не переиспользуется до рестарта)
+	int NextPointId()
+	{
+		int top = 0;
+		foreach (VB_AB_PointCfg p : m_Points)
+		{
+			if (p && p.Id > top)
+				top = p.Id;
+		}
+		foreach (VB_AB_PointCfg r : m_RemovedPoints)
+		{
+			if (r && r.Id > top)
+				top = r.Id;
+		}
+		return top + 1;
+	}
+
+	// Новая точка с одним боссом (bossId пусто — без босса), сразу в points.json
+	VB_AB_PointCfg AddPoint(vector pos, string bossId)
+	{
+		VB_AB_PointCfg p = new VB_AB_PointCfg;
+		p.Id = NextPointId();
+		p.SetPos(pos);
+		p.Bosses = new array<string>;
+		if (bossId != "")
+			p.Bosses.Insert(bossId);
+		p.Weight = 1;
+		m_Points.Insert(p);
+		SavePoints();
+		return p;
+	}
+
+	// Убрать точку из points.json. Рестартовую часть (босс, PointRuntime) снимает VB_AB_Server.DropPoint — раньше этого.
+	bool RemovePoint(int id)
+	{
+		VB_AB_PointCfg p = FindPoint(id);
+		if (!p)
+			return false;
+		m_RemovedPoints.Insert(p);
+		m_Points.RemoveItem(p);
+		SavePoints();
+		return true;
+	}
+
+	void SaveSettings()
+	{
+		string err;
+		if (!JsonFileLoader<VB_AB_SettingsFile>.SaveFile(DIR + "settings.json", m_Settings, err))
+			VB_AB_Log.Warn("settings.json не записан: " + err);
+	}
+
+	// settings.json с диска (админа можно дописать без рестарта)
+	void ReloadSettings()
+	{
+		m_Settings = null;
+		LoadSettings();
 	}
 };

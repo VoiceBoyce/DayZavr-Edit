@@ -21,7 +21,8 @@
   AUX (строки 180..240) — камень под кристаллами, металл капсулы, пыль и шнурок мешочка.
 
 Геометрия строится в осях Blender (Z вверх, метры, грани против часовой снаружи), потом py3d.blender_to_dayz.
-Начало координат — центр габаритов LOD0: в руке предмет сидит серединой (как предметы Изнанки).
+Начало координат — по центру габаритов LOD0 в плане, низ модели на HAND_LIFT (5 см) над ним — как у компаса:
+в руке (поза компаса) предмет лежит на ладони, а не в ней.
 Лежание на земле (E53): кристалл, комок, мешочек смоделированы стоя -> rotationFlags 2; осколок, галька
 и капсула стоят «на ребре» (тонкая ось — Y Blender = Z DayZ) -> rotationFlags 17: на земле ложатся плашмя,
 а в инвентаре видны широкой стороной.
@@ -79,6 +80,10 @@ AUX_R = (124.0, 180.0, 240.0, 240.0)
 
 LOD_RES = (0.0, 1.0, 4.0)           # как у предметов Изнанки
 GEOM_K = 0.9                        # коллизия — ящик чуть меньше видимой модели
+# Начало координат — точка хвата в руке. Как у ванильного компаса (на стенде его начало координат на 5 см ниже
+# низа модели): в позе «компас» (VB_AB_HandsAnim.c) предмет лежит на ладони. С началом координат в центре
+# 5-сантиметровый материал целиком уходил в кисть и в руке был не виден (2026-11-13).
+HAND_LIFT = 0.05
 
 # лежание (CentralEconomy.c: RF_TOP = 2, RF_FRONT|RF_BACK = 17) и звук удара по форме
 RF = {"crystal": 2, "lump": 2, "pouch": 2, "shard": 17, "pebble": 17, "capsule": 17}
@@ -1335,12 +1340,15 @@ def build_p3d(m):
     sys.path.insert(0, os.path.join(REPO, ".claude", "tools", "py3d"))
     import py3d
     meshes = lod_meshes(m)
+    lift = HAND_LIFT - meshes[0][0][:, 2].min()        # оси Blender: Z вверх (в DayZ это Y)
+    meshes = [(P + np.array([0.0, 0.0, lift]), T, UV) for P, T, UV in meshes]
     model = py3d.P3D()
     for (P, T, UV), res in zip(meshes, LOD_RES):
         model.lods.append(visual_lod(py3d, P, T, UV, res))
     P0 = meshes[0][0]
     lo, hi = P0.min(0), P0.max(0)
-    glo, ghi = lo * GEOM_K, hi * GEOM_K
+    mid, half = (lo + hi) / 2, (hi - lo) / 2 * GEOM_K   # ящик меньше модели — от её центра, не от начала координат
+    glo, ghi = mid - half, mid + half
     pen = BS.join(["dz", "data", "data", "penetration", PENETRATION[m["shape"]] + ".rvmat"])
     model.lods.append(box_lod(py3d, 1e13, glo, ghi, pen, mass_per_point=m["w"] / 1000.0 / 8))
     mem = py3d.LOD()
@@ -1379,6 +1387,16 @@ def write_rvmat():
         f.write(s)
 
 
+# Стихия материала (палитра его аномалии) и цвет свечения: подсветка на земле (VB_AB_Materials.c), вспышка находки.
+PALETTE = {"EMP": "storm", "Groza": "storm", "MlechniPut": "storm", "Electra": "storm",
+           "Par": "fire", "Zharka": "fire", "FireIskra": "fire", "FireShtorm": "fire",
+           "Snow": "ice", "Steklo": "ice", "Zastoy": "ice",
+           "Tramplin": "gravity", "Lomka": "gravity", "Voronka": "gravity",
+           "Holera": "acid", "Studen": "acid", "Roy": "acid",
+           "Lince": "psi", "LinceAgr": "psi", "Flash": "psi",
+           "DeadZone": "rad", "Atom": "rad"}
+
+
 def write_hpp():
     L = [
         "// СГЕНЕРИРОВАНО tools/ab_materials.py — руками не править",
@@ -1414,6 +1432,8 @@ def write_hpp():
             "\t\tweight = %d;" % m["w"],
             "\t\trotationFlags = %d;" % RF[m["shape"]],
             "\t\tsoundImpactType = \"%s\";" % m.get("sound", SOUND[m["shape"]]),
+            "\t\tvbABPalette = \"%s\";" % PALETTE[m["key"]],
+            "\t\tvbABGlow[] = {%g, %g, %g};" % tuple(m["glow"]),
             "\t};",
         ]
     with open(CFG, "w", encoding="utf-8", newline="\n") as f:

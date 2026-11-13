@@ -1,0 +1,103 @@
+EffectDef {
+ Emitors {
+  EmitorDef flakes {
+   ShapeType Sphere
+   ShapeSize 0.45 0.45 0.45
+   ConeAngle 360 360 0
+   MaxNum 30
+   BirthRate 7
+   BirthRateRND 3
+   BirthRateVel 2
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{E93A41A920705F9C}VB_AB/p/m/snow/snowflake.emat"
+   SizeMultiplier 0.035
+   SizeRND 0.015
+   BillboardingType Full
+   RandomRotDir 1
+   RotMultiplier 40
+   RandomAngle 1
+   Velocity 0.2
+   VelocityRND 0.15
+   AirResistance 1.2
+   GravityMultiply 0.04
+   GravityMultiplyRND 0.03
+   Wind 1
+   AnimFPS 0
+   RandomFrame 1
+   LifeTime 1.8
+   LifeTimeRND 0.8
+   Color {
+    0 0.6 0.85 1 1 0.4 0.7 1
+   }
+   Alpha {
+    0 0 0.15 0.9 0.7 0.7 1 0
+   }
+   EffectTime 5
+   Repeat 1
+  }
+  EmitorDef frost {
+   ShapeType Sphere
+   ShapeSize 0.35 0.35 0.35
+   ConeAngle 360 360 0
+   MaxNum 10
+   BirthRate 5
+   BirthRateRND 3
+   Offset 0 0 0
+   LocalTransform 1
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   SizeMultiplier 0.06
+   SizeRND 0.03
+   BillboardingType Full
+   RandomAngle 1
+   Velocity 0
+   AirResistance 0
+   GravityMultiply 0
+   Wind 0
+   LifeTime 0.4
+   LifeTimeRND 0.3
+   Color {
+    0 0.55 0.85 1 1 0.35 0.7 1
+   }
+   Alpha {
+    0 0 0.4 1 1 0
+   }
+   EffectTime 5
+   Repeat 1
+  }
+  EmitorDef mist {
+   ShapeType Sphere
+   ShapeSize 0.45 0.45 0.45
+   ConeAngle 360 360 0
+   MaxNum 6
+   BirthRate 1.2
+   BirthRateRND 0.6
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{D29B53088A5A3911}Graphics/Particles/materials/smoke/smoke_dust_01_W.emat"
+   SizeMultiplier 0.7
+   SizeRND 0.3
+   BillboardingType Full
+   RandomRotDir 1
+   RotMultiplier 10
+   RandomAngle 1
+   Velocity 0.05
+   AirResistance 1
+   GravityMultiply 0.03
+   Wind 1
+   LifeTime 2.5
+   LifeTimeRND 1
+   Color {
+    0 0.7 0.85 1 1 0.6 0.8 1
+   }
+   Alpha {
+    0 0 0.3 0.22 1 0
+   }
+   Size {
+    0 0.6 1 1.3
+   }
+   EffectTime 5
+   Repeat 1
+  }
+ }
+}

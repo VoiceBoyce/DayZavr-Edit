@@ -1,0 +1,1410 @@
+{
+  "Bosses": [
+    {
+      "Id": "ent_storm",
+      "Name": "Громовой Энт",
+      "Classname": "VB_AB_Ent_Storm",
+      "Tier": 3,
+      "Health": 8000,
+      "Scale": 1.6,
+      "MeleeMul": 3.0,
+      "Field": {
+        "Radius": 30,
+        "MaxAnomalies": 16,
+        "MinGap": 4,
+        "KeepFromPlayers": 3,
+        "LeashRadius": 45,
+        "AfterDeathSec": 120
+      },
+      "Anomalies": [
+        {
+          "Classname": "VB_AB_Anomaly_Electra",
+          "Count": [
+            4,
+            6
+          ],
+          "Place": "Ring"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_MlechniPut",
+          "Count": [
+            3,
+            4
+          ],
+          "Place": "Edge"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_EMP",
+          "Count": [
+            1,
+            2
+          ],
+          "Place": "Ring",
+          "Chance": 50
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Groza",
+          "Place": "Center",
+          "Chance": 60
+        }
+      ],
+      "Phases": [
+        {
+          "Health": 0.6,
+          "Anomalies": [
+            {
+              "Classname": "VB_AB_Anomaly_Electra",
+              "Count": [
+                2,
+                2
+              ],
+              "Place": "Ring",
+              "Chance": 50
+            }
+          ]
+        },
+        {
+          "Health": 0.3,
+          "Anomalies": [
+            {
+              "Classname": "VB_AB_Anomaly_Groza",
+              "Place": "Center"
+            }
+          ]
+        }
+      ],
+      "Abilities": [
+        {
+          "Type": "AnomalyUnderFoot",
+          "Cooldown": 25
+        },
+        {
+          "Type": "Discharge",
+          "Cooldown": 12,
+          "Range": 20,
+          "Damage": 25,
+          "RequiresAnomaly": [
+            "VB_AB_Anomaly_Electra",
+            "VB_AB_Anomaly_Groza"
+          ]
+        },
+        {
+          "Type": "Pulse",
+          "Cooldown": 40,
+          "Range": 30,
+          "DurationSec": 20,
+          "RequiresAnomaly": [
+            "VB_AB_Anomaly_EMP"
+          ]
+        },
+        {
+          "Type": "GroundSlam",
+          "Cooldown": 20,
+          "Range": 6,
+          "Damage": 20
+        }
+      ],
+      "Trophy": {
+        "CutTimeSec": 30,
+        "ToolDamage": 15,
+        "CorpseLifetimeMin": 15,
+        "Items": [
+          {
+            "Classname": "VB_AB_Trophy_Ent_Storm"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "ent_acid",
+      "Name": "Болотный Энт",
+      "Classname": "VB_AB_Ent_Acid",
+      "Tier": 3,
+      "Health": 8000,
+      "Scale": 1.6,
+      "MeleeMul": 3.0,
+      "Field": {
+        "Radius": 30,
+        "MaxAnomalies": 16,
+        "MinGap": 4,
+        "KeepFromPlayers": 3,
+        "LeashRadius": 45,
+        "AfterDeathSec": 120
+      },
+      "Anomalies": [
+        {
+          "Classname": "VB_AB_Anomaly_Studen",
+          "Count": [
+            4,
+            5
+          ],
+          "Place": "Ring"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Holera",
+          "Count": [
+            3,
+            4
+          ],
+          "Place": "Edge"
+        },
+        {
+          "OneOf": [
+            {
+              "Classname": "VB_AB_Anomaly_Roy",
+              "Weight": 2
+            },
+            {
+              "Classname": "VB_AB_Anomaly_DeadZone",
+              "Weight": 1
+            }
+          ],
+          "Place": "Center",
+          "Chance": 70
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Par",
+          "Count": [
+            1,
+            2
+          ],
+          "Place": "Ring",
+          "Chance": 30
+        }
+      ],
+      "Phases": [
+        {
+          "Health": 0.3,
+          "Anomalies": [
+            {
+              "Classname": "VB_AB_Anomaly_Roy",
+              "Count": [
+                2,
+                2
+              ],
+              "Place": "Ring"
+            }
+          ]
+        }
+      ],
+      "Abilities": [
+        {
+          "Type": "AnomalyUnderFoot",
+          "Cooldown": 25
+        },
+        {
+          "Type": "AcidSpit",
+          "Cooldown": 10,
+          "Range": 25,
+          "Damage": 15
+        },
+        {
+          "Type": "Decay",
+          "Cooldown": 2,
+          "Range": 9,
+          "Damage": 2,
+          "RequiresAnomaly": [
+            "VB_AB_Anomaly_DeadZone"
+          ]
+        },
+        {
+          "Type": "GroundSlam",
+          "Cooldown": 20,
+          "Range": 6,
+          "Damage": 20
+        }
+      ],
+      "Trophy": {
+        "CutTimeSec": 30,
+        "ToolDamage": 15,
+        "CorpseLifetimeMin": 15,
+        "Items": [
+          {
+            "Classname": "VB_AB_Trophy_Ent_Acid"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "mozgotras_fire",
+      "Name": "Пламенный Мозготряс",
+      "Classname": "VB_AB_MozgoTrasRed_Fire",
+      "Tier": 3,
+      "Health": 5000,
+      "Scale": 1.1,
+      "MeleeMul": 2.5,
+      "Field": {
+        "Radius": 18,
+        "MaxAnomalies": 12,
+        "MinGap": 4,
+        "KeepFromPlayers": 3,
+        "LeashRadius": 30,
+        "AfterDeathSec": 120
+      },
+      "Anomalies": [
+        {
+          "Classname": "VB_AB_Anomaly_Zharka",
+          "Count": [
+            4,
+            5
+          ],
+          "Place": "Ring"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_FireIskra",
+          "Count": [
+            2,
+            2
+          ],
+          "Place": "Edge"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_FireShtorm",
+          "Place": "Center",
+          "Chance": 60
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Par",
+          "Count": [
+            1,
+            2
+          ],
+          "Place": "Ring",
+          "Chance": 40
+        }
+      ],
+      "Phases": [
+        {
+          "Health": 0.3,
+          "Anomalies": [
+            {
+              "Classname": "VB_AB_Anomaly_FireShtorm",
+              "Place": "Center"
+            }
+          ]
+        }
+      ],
+      "Abilities": [
+        {
+          "Type": "AnomalyUnderFoot",
+          "Cooldown": 25
+        },
+        {
+          "Type": "Heat",
+          "Cooldown": 20,
+          "Range": 10,
+          "Damage": 15
+        },
+        {
+          "Type": "Rage"
+        }
+      ],
+      "Trophy": {
+        "CutTimeSec": 20,
+        "ToolDamage": 15,
+        "CorpseLifetimeMin": 15,
+        "Items": [
+          {
+            "Classname": "VB_AB_Trophy_MozgoTrasRed_Fire"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "mozgotras_gravity",
+      "Name": "Давящий Мозготряс",
+      "Classname": "VB_AB_MozgoTrasRed_Gravity",
+      "Tier": 3,
+      "Health": 5000,
+      "Scale": 1.1,
+      "MeleeMul": 2.5,
+      "Field": {
+        "Radius": 18,
+        "MaxAnomalies": 12,
+        "MinGap": 4,
+        "KeepFromPlayers": 3,
+        "LeashRadius": 30,
+        "AfterDeathSec": 120
+      },
+      "Anomalies": [
+        {
+          "Classname": "VB_AB_Anomaly_Lomka",
+          "Count": [
+            3,
+            4
+          ],
+          "Place": "Ring"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Tramplin",
+          "Count": [
+            3,
+            3
+          ],
+          "Place": "Edge"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Voronka",
+          "Place": "Center",
+          "Chance": 70
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Atom",
+          "Count": [
+            1,
+            1
+          ],
+          "Place": "Ring",
+          "Chance": 20
+        }
+      ],
+      "Phases": [
+        {
+          "Health": 0.3,
+          "Anomalies": [
+            {
+              "Classname": "VB_AB_Anomaly_Voronka",
+              "Count": [
+                1,
+                1
+              ],
+              "Place": "Ring"
+            }
+          ]
+        }
+      ],
+      "Abilities": [
+        {
+          "Type": "AnomalyUnderFoot",
+          "Cooldown": 25
+        },
+        {
+          "Type": "Pull",
+          "Cooldown": 20,
+          "Range": 20,
+          "RequiresAnomaly": [
+            "VB_AB_Anomaly_Voronka"
+          ]
+        },
+        {
+          "Type": "Knockback",
+          "Cooldown": 20,
+          "Range": 8,
+          "Damage": 10
+        },
+        {
+          "Type": "Rage"
+        }
+      ],
+      "Trophy": {
+        "CutTimeSec": 20,
+        "ToolDamage": 15,
+        "CorpseLifetimeMin": 15,
+        "Items": [
+          {
+            "Classname": "VB_AB_Trophy_MozgoTrasRed_Gravity"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "mozgotras_psi",
+      "Name": "Пси-Мозготряс",
+      "Classname": "VB_AB_MozgoTras_Psi",
+      "Tier": 2,
+      "Health": 4500,
+      "Scale": 1.1,
+      "MeleeMul": 2.5,
+      "Field": {
+        "Radius": 25,
+        "MaxAnomalies": 12,
+        "MinGap": 4,
+        "KeepFromPlayers": 3,
+        "LeashRadius": 40,
+        "AfterDeathSec": 120
+      },
+      "Anomalies": [
+        {
+          "Classname": "VB_AB_Anomaly_LinceAgr",
+          "Count": [
+            3,
+            5
+          ],
+          "Place": "Ring"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Lince",
+          "Count": [
+            3,
+            3
+          ],
+          "Place": "Any"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Flash",
+          "Place": "Center",
+          "Chance": 60
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Zastoy",
+          "Count": [
+            1,
+            1
+          ],
+          "Place": "Edge",
+          "Chance": 30
+        }
+      ],
+      "Phases": [
+        {
+          "Health": 0.3,
+          "Anomalies": [
+            {
+              "Classname": "VB_AB_Anomaly_LinceAgr",
+              "Count": [
+                2,
+                2
+              ],
+              "Place": "Ring"
+            }
+          ]
+        }
+      ],
+      "Abilities": [
+        {
+          "Type": "AnomalyUnderFoot",
+          "Cooldown": 25
+        },
+        {
+          "Type": "PsiStrike",
+          "Cooldown": 25,
+          "Range": 20,
+          "DurationSec": 6
+        },
+        {
+          "Type": "Flash",
+          "Cooldown": 30,
+          "Range": 15,
+          "DurationSec": 5,
+          "RequiresAnomaly": [
+            "VB_AB_Anomaly_Flash"
+          ]
+        },
+        {
+          "Type": "Call",
+          "Cooldown": 60,
+          "Range": 30
+        }
+      ],
+      "Trophy": {
+        "CutTimeSec": 20,
+        "ToolDamage": 15,
+        "CorpseLifetimeMin": 15,
+        "Items": [
+          {
+            "Classname": "VB_AB_Trophy_MozgoTras_Psi"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "mozgotras_storm",
+      "Name": "Грозовой Мозготряс",
+      "Classname": "VB_AB_MozgoTras_Storm",
+      "Tier": 2,
+      "Health": 4500,
+      "Scale": 1.1,
+      "MeleeMul": 2.5,
+      "Field": {
+        "Radius": 25,
+        "MaxAnomalies": 12,
+        "MinGap": 4,
+        "KeepFromPlayers": 3,
+        "LeashRadius": 40,
+        "AfterDeathSec": 120
+      },
+      "Anomalies": [
+        {
+          "Classname": "VB_AB_Anomaly_EMP",
+          "Place": "Center"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Electra",
+          "Count": [
+            3,
+            4
+          ],
+          "Place": "Ring"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_MlechniPut",
+          "Count": [
+            2,
+            3
+          ],
+          "Place": "Edge",
+          "Chance": 60
+        },
+        {
+          "Classname": "VB_AB_Anomaly_LinceAgr",
+          "Count": [
+            2,
+            2
+          ],
+          "Place": "Ring",
+          "Chance": 30
+        }
+      ],
+      "Phases": [
+        {
+          "Health": 0.3,
+          "Anomalies": [
+            {
+              "Classname": "VB_AB_Anomaly_Electra",
+              "Count": [
+                2,
+                2
+              ],
+              "Place": "Ring"
+            }
+          ]
+        }
+      ],
+      "Abilities": [
+        {
+          "Type": "AnomalyUnderFoot",
+          "Cooldown": 25
+        },
+        {
+          "Type": "Discharge",
+          "Cooldown": 12,
+          "Range": 20,
+          "Damage": 25
+        },
+        {
+          "Type": "Pulse",
+          "Cooldown": 40,
+          "Range": 30,
+          "DurationSec": 20
+        },
+        {
+          "Type": "PsiStrike",
+          "Cooldown": 25,
+          "Range": 20,
+          "DurationSec": 6,
+          "RequiresAnomaly": [
+            "VB_AB_Anomaly_LinceAgr"
+          ]
+        },
+        {
+          "Type": "Call",
+          "Cooldown": 60,
+          "Range": 30
+        }
+      ],
+      "Trophy": {
+        "CutTimeSec": 20,
+        "ToolDamage": 15,
+        "CorpseLifetimeMin": 15,
+        "Items": [
+          {
+            "Classname": "VB_AB_Trophy_MozgoTras_Storm"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "wolf_ice",
+      "Name": "Ледяной Мутаволк",
+      "Classname": "VB_AB_MutaWolf_Ice",
+      "Tier": 2,
+      "Health": 3500,
+      "Scale": 1.1,
+      "MeleeMul": 2.0,
+      "Field": {
+        "Radius": 35,
+        "MaxAnomalies": 12,
+        "MinGap": 4,
+        "KeepFromPlayers": 3,
+        "LeashRadius": 50,
+        "AfterDeathSec": 120
+      },
+      "Anomalies": [
+        {
+          "Classname": "VB_AB_Anomaly_Zastoy",
+          "Count": [
+            4,
+            6
+          ],
+          "Place": "Edge"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Steklo",
+          "Count": [
+            2,
+            3
+          ],
+          "Place": "Ring"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Snow",
+          "Place": "Center",
+          "Chance": 35
+        }
+      ],
+      "Phases": [
+        {
+          "Health": 0.3,
+          "Anomalies": [
+            {
+              "Classname": "VB_AB_Anomaly_Steklo",
+              "Count": [
+                2,
+                2
+              ],
+              "Place": "Ring"
+            }
+          ]
+        }
+      ],
+      "Abilities": [
+        {
+          "Type": "AnomalyUnderFoot",
+          "Cooldown": 25
+        },
+        {
+          "Type": "IceBreath",
+          "Cooldown": 18,
+          "Range": 10,
+          "Damage": 10,
+          "DurationSec": 6
+        },
+        {
+          "Type": "Blizzard",
+          "Cooldown": 60,
+          "Range": 20,
+          "DurationSec": 25,
+          "RequiresAnomaly": [
+            "VB_AB_Anomaly_Snow"
+          ]
+        },
+        {
+          "Type": "Dash",
+          "Cooldown": 12,
+          "Range": 15,
+          "Damage": 20
+        }
+      ],
+      "Trophy": {
+        "CutTimeSec": 15,
+        "ToolDamage": 15,
+        "CorpseLifetimeMin": 15,
+        "Items": [
+          {
+            "Classname": "VB_AB_Trophy_MutaWolf_Ice"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "wolf_fire",
+      "Name": "Огненный Мутаволк",
+      "Classname": "VB_AB_MutaWolf_Fire",
+      "Tier": 2,
+      "Health": 3500,
+      "Scale": 1.1,
+      "MeleeMul": 2.0,
+      "Field": {
+        "Radius": 35,
+        "MaxAnomalies": 12,
+        "MinGap": 4,
+        "KeepFromPlayers": 3,
+        "LeashRadius": 50,
+        "AfterDeathSec": 120
+      },
+      "Anomalies": [
+        {
+          "Classname": "VB_AB_Anomaly_FireIskra",
+          "Count": [
+            4,
+            5
+          ],
+          "Place": "Edge"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Zharka",
+          "Count": [
+            2,
+            2
+          ],
+          "Place": "Ring"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Tramplin",
+          "Count": [
+            2,
+            2
+          ],
+          "Place": "Edge",
+          "Chance": 40
+        },
+        {
+          "Classname": "VB_AB_Anomaly_FireShtorm",
+          "Place": "Center",
+          "Chance": 25
+        }
+      ],
+      "Phases": [
+        {
+          "Health": 0.6,
+          "Anomalies": [
+            {
+              "Classname": "VB_AB_Anomaly_FireIskra",
+              "Count": [
+                2,
+                2
+              ],
+              "Place": "Edge"
+            }
+          ]
+        }
+      ],
+      "Abilities": [
+        {
+          "Type": "AnomalyUnderFoot",
+          "Cooldown": 25
+        },
+        {
+          "Type": "Heat",
+          "Cooldown": 20,
+          "Range": 10,
+          "Damage": 15
+        },
+        {
+          "Type": "Dash",
+          "Cooldown": 12,
+          "Range": 15,
+          "Damage": 20
+        }
+      ],
+      "Trophy": {
+        "CutTimeSec": 15,
+        "ToolDamage": 15,
+        "CorpseLifetimeMin": 15,
+        "Items": [
+          {
+            "Classname": "VB_AB_Trophy_MutaWolf_Fire"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "shum_gravity",
+      "Name": "Шум-Воронка",
+      "Classname": "VB_AB_Shum_Gravity",
+      "Tier": 2,
+      "Health": 3500,
+      "Scale": 1.0,
+      "MeleeMul": 1.5,
+      "Field": {
+        "Radius": 20,
+        "MaxAnomalies": 14,
+        "MinGap": 4,
+        "KeepFromPlayers": 3,
+        "LeashRadius": 30,
+        "AfterDeathSec": 120
+      },
+      "Anomalies": [
+        {
+          "Classname": "VB_AB_Anomaly_Tramplin",
+          "Count": [
+            4,
+            6
+          ],
+          "Place": "Edge"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Voronka",
+          "Count": [
+            2,
+            3
+          ],
+          "Place": "Ring"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Atom",
+          "Place": "Center",
+          "Chance": 40
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Lomka",
+          "Count": [
+            2,
+            2
+          ],
+          "Place": "Ring",
+          "Chance": 50
+        }
+      ],
+      "Phases": [
+        {
+          "Health": 0.6,
+          "Anomalies": [
+            {
+              "Classname": "VB_AB_Anomaly_Tramplin",
+              "Count": [
+                2,
+                2
+              ],
+              "Place": "Edge"
+            }
+          ]
+        }
+      ],
+      "Abilities": [
+        {
+          "Type": "AnomalyUnderFoot",
+          "Cooldown": 25
+        },
+        {
+          "Type": "Pull",
+          "Cooldown": 20,
+          "Range": 20
+        },
+        {
+          "Type": "Knockback",
+          "Cooldown": 20,
+          "Range": 8,
+          "Damage": 10,
+          "RequiresAnomaly": [
+            "VB_AB_Anomaly_Atom"
+          ]
+        },
+        {
+          "Type": "Scream",
+          "Cooldown": 25,
+          "Range": 15,
+          "DurationSec": 4
+        }
+      ],
+      "Trophy": {
+        "CutTimeSec": 15,
+        "ToolDamage": 15,
+        "CorpseLifetimeMin": 15,
+        "Items": [
+          {
+            "Classname": "VB_AB_Trophy_Shum_Gravity"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "shum_ice",
+      "Name": "Снежная вдова",
+      "Classname": "VB_AB_Shum_Ice",
+      "Tier": 2,
+      "Health": 3500,
+      "Scale": 1.0,
+      "MeleeMul": 1.5,
+      "Field": {
+        "Radius": 20,
+        "MaxAnomalies": 14,
+        "MinGap": 4,
+        "KeepFromPlayers": 3,
+        "LeashRadius": 30,
+        "AfterDeathSec": 120
+      },
+      "Anomalies": [
+        {
+          "Classname": "VB_AB_Anomaly_Steklo",
+          "Count": [
+            3,
+            4
+          ],
+          "Place": "Ring"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_LinceAgr",
+          "Count": [
+            2,
+            2
+          ],
+          "Place": "Ring"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Zastoy",
+          "Count": [
+            2,
+            3
+          ],
+          "Place": "Edge",
+          "Chance": 60
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Lince",
+          "Count": [
+            2,
+            2
+          ],
+          "Place": "Any",
+          "Chance": 30
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Steklo",
+          "Place": "Center",
+          "Chance": 50
+        }
+      ],
+      "Phases": [
+        {
+          "Health": 0.3,
+          "Anomalies": [
+            {
+              "Classname": "VB_AB_Anomaly_Zastoy",
+              "Count": [
+                2,
+                2
+              ],
+              "Place": "Edge"
+            }
+          ]
+        }
+      ],
+      "Abilities": [
+        {
+          "Type": "AnomalyUnderFoot",
+          "Cooldown": 25
+        },
+        {
+          "Type": "IceBreath",
+          "Cooldown": 18,
+          "Range": 10,
+          "Damage": 10,
+          "DurationSec": 6
+        },
+        {
+          "Type": "Scream",
+          "Cooldown": 25,
+          "Range": 15,
+          "DurationSec": 4
+        },
+        {
+          "Type": "PsiStrike",
+          "Cooldown": 25,
+          "Range": 20,
+          "DurationSec": 6,
+          "RequiresAnomaly": [
+            "VB_AB_Anomaly_LinceAgr"
+          ]
+        },
+        {
+          "Type": "Blizzard",
+          "Cooldown": 60,
+          "Range": 20,
+          "DurationSec": 25,
+          "Chance": 30
+        }
+      ],
+      "Trophy": {
+        "CutTimeSec": 15,
+        "ToolDamage": 15,
+        "CorpseLifetimeMin": 15,
+        "Items": [
+          {
+            "Classname": "VB_AB_Trophy_Shum_Ice"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "tenevnik_psi",
+      "Name": "Теневик-мираж",
+      "Classname": "VB_AB_Tenevnik_Psi",
+      "Tier": 2,
+      "Health": 3000,
+      "Scale": 1.0,
+      "MeleeMul": 1.5,
+      "Field": {
+        "Radius": 25,
+        "MaxAnomalies": 12,
+        "MinGap": 4,
+        "KeepFromPlayers": 3,
+        "LeashRadius": 40,
+        "AfterDeathSec": 120
+      },
+      "Anomalies": [
+        {
+          "Classname": "VB_AB_Anomaly_Lince",
+          "Count": [
+            3,
+            5
+          ],
+          "Place": "Any"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_LinceAgr",
+          "Count": [
+            2,
+            2
+          ],
+          "Place": "Ring"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Flash",
+          "Count": [
+            1,
+            2
+          ],
+          "Place": "Ring",
+          "Chance": 50
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Zastoy",
+          "Place": "Center",
+          "Chance": 40
+        }
+      ],
+      "Phases": [
+        {
+          "Health": 0.6,
+          "Anomalies": [
+            {
+              "Classname": "VB_AB_Anomaly_Lince",
+              "Count": [
+                2,
+                2
+              ],
+              "Place": "Any"
+            }
+          ]
+        }
+      ],
+      "Abilities": [
+        {
+          "Type": "AnomalyUnderFoot",
+          "Cooldown": 25
+        },
+        {
+          "Type": "Shift",
+          "Cooldown": 20
+        },
+        {
+          "Type": "PsiStrike",
+          "Cooldown": 25,
+          "Range": 20,
+          "DurationSec": 6
+        },
+        {
+          "Type": "Flash",
+          "Cooldown": 30,
+          "Range": 15,
+          "DurationSec": 5,
+          "RequiresAnomaly": [
+            "VB_AB_Anomaly_Flash"
+          ]
+        }
+      ],
+      "Trophy": {
+        "CutTimeSec": 15,
+        "ToolDamage": 15,
+        "CorpseLifetimeMin": 15,
+        "Items": [
+          {
+            "Classname": "VB_AB_Trophy_Tenevnik_Psi"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "tenevnik_rad",
+      "Name": "Теневик-тьма",
+      "Classname": "VB_AB_Tenevnik_Rad",
+      "Tier": 2,
+      "Health": 3000,
+      "Scale": 1.0,
+      "MeleeMul": 1.5,
+      "Field": {
+        "Radius": 25,
+        "MaxAnomalies": 12,
+        "MinGap": 4,
+        "KeepFromPlayers": 3,
+        "LeashRadius": 40,
+        "AfterDeathSec": 120
+      },
+      "Anomalies": [
+        {
+          "Classname": "VB_AB_Anomaly_Roy",
+          "Count": [
+            3,
+            4
+          ],
+          "Place": "Ring"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Holera",
+          "Count": [
+            3,
+            3
+          ],
+          "Place": "Edge"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_DeadZone",
+          "Place": "Center",
+          "Chance": 50
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Atom",
+          "Count": [
+            1,
+            1
+          ],
+          "Place": "Ring",
+          "Chance": 30
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Lince",
+          "Count": [
+            2,
+            2
+          ],
+          "Place": "Any",
+          "Chance": 30
+        }
+      ],
+      "Phases": [
+        {
+          "Health": 0.3,
+          "Anomalies": [
+            {
+              "Classname": "VB_AB_Anomaly_DeadZone",
+              "Place": "Center"
+            }
+          ]
+        }
+      ],
+      "Abilities": [
+        {
+          "Type": "AnomalyUnderFoot",
+          "Cooldown": 25
+        },
+        {
+          "Type": "Decay",
+          "Cooldown": 2,
+          "Range": 9,
+          "Damage": 2,
+          "RequiresAnomaly": [
+            "VB_AB_Anomaly_DeadZone"
+          ]
+        },
+        {
+          "Type": "Shift",
+          "Cooldown": 20
+        },
+        {
+          "Type": "Knockback",
+          "Cooldown": 20,
+          "Range": 8,
+          "Damage": 10,
+          "RequiresAnomaly": [
+            "VB_AB_Anomaly_Atom"
+          ]
+        }
+      ],
+      "Trophy": {
+        "CutTimeSec": 15,
+        "ToolDamage": 15,
+        "CorpseLifetimeMin": 15,
+        "Items": [
+          {
+            "Classname": "VB_AB_Trophy_Tenevnik_Rad"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "ricar_acid",
+      "Name": "Кислотный Ричар",
+      "Classname": "VB_AB_Ricar_Acid",
+      "Tier": 1,
+      "Health": 2500,
+      "Scale": 1.0,
+      "MeleeMul": 1.5,
+      "Field": {
+        "Radius": 15,
+        "MaxAnomalies": 8,
+        "MinGap": 4,
+        "KeepFromPlayers": 3,
+        "LeashRadius": 30,
+        "AfterDeathSec": 120
+      },
+      "Anomalies": [
+        {
+          "Classname": "VB_AB_Anomaly_Studen",
+          "Count": [
+            3,
+            4
+          ],
+          "Place": "Ring"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Holera",
+          "Count": [
+            1,
+            2
+          ],
+          "Place": "Edge",
+          "Chance": 70
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Roy",
+          "Place": "Center",
+          "Chance": 20
+        }
+      ],
+      "Phases": [
+        {
+          "Health": 0.3,
+          "Anomalies": [
+            {
+              "Classname": "VB_AB_Anomaly_Studen",
+              "Count": [
+                1,
+                1
+              ],
+              "Place": "Ring"
+            }
+          ]
+        }
+      ],
+      "Abilities": [
+        {
+          "Type": "AnomalyUnderFoot",
+          "Cooldown": 25
+        },
+        {
+          "Type": "AcidSpit",
+          "Cooldown": 10,
+          "Range": 25,
+          "Damage": 15
+        },
+        {
+          "Type": "Pack",
+          "Cooldown": 90,
+          "Range": 10
+        }
+      ],
+      "Trophy": {
+        "CutTimeSec": 10,
+        "ToolDamage": 15,
+        "CorpseLifetimeMin": 15,
+        "Items": [
+          {
+            "Classname": "VB_AB_Trophy_Ricar_Acid"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "ricar_rad",
+      "Name": "Гнилой Ричар",
+      "Classname": "VB_AB_Ricar_Rad",
+      "Tier": 1,
+      "Health": 2500,
+      "Scale": 1.0,
+      "MeleeMul": 1.5,
+      "Field": {
+        "Radius": 15,
+        "MaxAnomalies": 8,
+        "MinGap": 4,
+        "KeepFromPlayers": 3,
+        "LeashRadius": 30,
+        "AfterDeathSec": 120
+      },
+      "Anomalies": [
+        {
+          "Classname": "VB_AB_Anomaly_Holera",
+          "Count": [
+            2,
+            2
+          ],
+          "Place": "Ring"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Roy",
+          "Count": [
+            1,
+            2
+          ],
+          "Place": "Edge"
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Atom",
+          "Place": "Center",
+          "Chance": 25
+        },
+        {
+          "Classname": "VB_AB_Anomaly_Studen",
+          "Count": [
+            1,
+            2
+          ],
+          "Place": "Ring",
+          "Chance": 30
+        }
+      ],
+      "Phases": [
+        {
+          "Health": 0.3,
+          "Anomalies": [
+            {
+              "Classname": "VB_AB_Anomaly_Roy",
+              "Count": [
+                1,
+                1
+              ],
+              "Place": "Edge"
+            }
+          ]
+        }
+      ],
+      "Abilities": [
+        {
+          "Type": "AnomalyUnderFoot",
+          "Cooldown": 25
+        },
+        {
+          "Type": "Decay",
+          "Cooldown": 2,
+          "Range": 9,
+          "Damage": 2,
+          "Chance": 50
+        },
+        {
+          "Type": "Pack",
+          "Cooldown": 90,
+          "Range": 10
+        },
+        {
+          "Type": "Knockback",
+          "Cooldown": 20,
+          "Range": 8,
+          "Damage": 10,
+          "RequiresAnomaly": [
+            "VB_AB_Anomaly_Atom"
+          ]
+        }
+      ],
+      "Trophy": {
+        "CutTimeSec": 10,
+        "ToolDamage": 15,
+        "CorpseLifetimeMin": 15,
+        "Items": [
+          {
+            "Classname": "VB_AB_Trophy_Ricar_Rad"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""bosses.json по умолчанию: 14 стартовых боссов (ТЗ 4.4, 4.5) -> VB_AnomaliesBosses/defaults/bosses.json.
+"""bosses.json по умолчанию: 14 стартовых боссов (ТЗ 4.4, 4.5) -> VB_AnomaliesBosses_Server/defaults/bosses.json (серверный PBO).
 
 Мод копирует этот файл в профиль сервера, если там bosses.json ещё нет. Дальше сервер правит свою копию.
 Здесь только стартовые значения: модели (4.4), аномалии и способности (4.5), артефакты по уровню, трофей.
@@ -12,7 +12,7 @@ import json
 import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(HERE, "..", "VB_AnomaliesBosses", "defaults", "bosses.json")
+OUT = os.path.join(HERE, "..", "VB_AnomaliesBosses_Server", "defaults", "bosses.json")
 
 A = {   # русское имя из ТЗ -> класс
     "Электра": "Electra", "Млечный путь": "MlechniPut", "ЭМИ": "EMP", "Гроза": "Groza",
@@ -29,14 +29,15 @@ def cls(name):
 
 
 # Модели (ТЗ 4.4): поле, потолок аномалий, поводок, здоровье, масштаб
+# MeleeMul — во сколько раз удар босса сильнее удара обычного зомби (здоровье и кровь; шок как у зомби)
 MODELS = {
-    "Ricar":        dict(Radius=15, MaxAnomalies=8,  LeashRadius=30, Health=2500, Scale=1.0),
-    "MutaWolf":     dict(Radius=35, MaxAnomalies=12, LeashRadius=50, Health=3500, Scale=1.1),
-    "Tenevnik":     dict(Radius=25, MaxAnomalies=12, LeashRadius=40, Health=3000, Scale=1.0),
-    "Shum":         dict(Radius=20, MaxAnomalies=14, LeashRadius=30, Health=3500, Scale=1.0),
-    "MozgoTras":    dict(Radius=25, MaxAnomalies=12, LeashRadius=40, Health=4500, Scale=1.1),
-    "MozgoTrasRed": dict(Radius=18, MaxAnomalies=12, LeashRadius=30, Health=5000, Scale=1.1),
-    "Ent":          dict(Radius=30, MaxAnomalies=16, LeashRadius=45, Health=8000, Scale=1.6),
+    "Ricar":        dict(Radius=15, MaxAnomalies=8,  LeashRadius=30, Health=2500, Scale=1.0, MeleeMul=1.5),
+    "MutaWolf":     dict(Radius=35, MaxAnomalies=12, LeashRadius=50, Health=3500, Scale=1.1, MeleeMul=2.0),
+    "Tenevnik":     dict(Radius=25, MaxAnomalies=12, LeashRadius=40, Health=3000, Scale=1.0, MeleeMul=1.5),
+    "Shum":         dict(Radius=20, MaxAnomalies=14, LeashRadius=30, Health=3500, Scale=1.0, MeleeMul=1.5),
+    "MozgoTras":    dict(Radius=25, MaxAnomalies=12, LeashRadius=40, Health=4500, Scale=1.1, MeleeMul=2.5),
+    "MozgoTrasRed": dict(Radius=18, MaxAnomalies=12, LeashRadius=30, Health=5000, Scale=1.1, MeleeMul=2.5),
+    "Ent":          dict(Radius=30, MaxAnomalies=16, LeashRadius=45, Health=8000, Scale=1.6, MeleeMul=3.0),
 }
 
 # «Вырезать трофей», секунд (ТЗ 2.7)
@@ -236,12 +237,14 @@ def main():
             "Tier": level,
             "Health": m["Health"],
             "Scale": m["Scale"],
+            "MeleeMul": m["MeleeMul"],
             "Field": {"Radius": m["Radius"], "MaxAnomalies": m["MaxAnomalies"], "MinGap": 4, "KeepFromPlayers": 3,
                       "LeashRadius": m["LeashRadius"], "AfterDeathSec": 120},
             "Anomalies": anomalies,
             "Phases": [{"Health": h, "Anomalies": ph} for h, ph in phases],
             "Abilities": [ab("AnomalyUnderFoot")] + abilities,
-            "Artifacts": artifacts(level, pal),
+            # "Artifacts" не пишем: артефакты в полях боссов не спавнятся (решение пользователя 2026-11-13).
+            # Код поля их по-прежнему умеет — таблицу можно вписать боссу в bosses.json руками; artifacts() ниже — её образец.
             "Trophy": {"CutTimeSec": CUT_TIME[model], "ToolDamage": 15, "CorpseLifetimeMin": 15,
                        "Items": [{"Classname": "VB_AB_Trophy_%s_%s" % (model, pal)}]},
         })

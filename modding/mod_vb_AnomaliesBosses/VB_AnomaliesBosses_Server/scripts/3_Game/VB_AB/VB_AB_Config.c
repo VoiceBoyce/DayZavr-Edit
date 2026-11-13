@@ -127,10 +127,27 @@ class VB_AB_Cfg
 
 	VB_AB_DetectorCfg GetDetector(string type)
 	{
-		VB_AB_DetectorCfg d = m_Detectors.Get(type);
+		VB_AB_DetectorCfg d = m_Detectors.Get(DetectorKey(type));
 		if (d)
 			return d;
 		return m_DefaultDetector;
+	}
+
+	// Строка detectors.json для класса: своя, а если её нет — ближайшего родителя по config.cpp. Так старые
+	// Anomaly_Detector_* (наследники VB_AB_Detector_*) ищут как свой родитель, даже если строки для них нет.
+	string DetectorKey(string type)
+	{
+		string t = type;
+		string parentCls;
+		for (int i = 0; i < 6 && t != ""; i++)
+		{
+			if (m_Detectors.Contains(t))
+				return t;
+			if (!GetGame().ConfigGetBaseName("CfgVehicles " + t, parentCls))
+				break;
+			t = parentCls;
+		}
+		return type;
 	}
 
 	bool IsDetector(string type)
@@ -258,11 +275,12 @@ class VB_AB_Cfg
 		f.Detectors.Insert(MakeDetector("VB_AB_Detector_Medved", 2, 15, 3, "Own"));
 		f.Detectors.Insert(MakeDetector("VB_AB_Detector_Svarog", 3, 20, 4, "Own"));
 		f.Detectors.Insert(MakeDetector("VB_AB_Detector_Veles", 3, 25, 5, "Own"));
-		// детекторы OOTS, если они есть на сервере (на остальных строки пропускаются)
-		f.Detectors.Insert(MakeDetector("Anomaly_Detector_Otklik", 1, 10, 2, "Generic"));
+		// старые имена OOTS — теперь наши детекторы (config.cpp: наследники VB_AB_Detector_*), числа как у родителя
+		f.Detectors.Insert(MakeDetector("Anomaly_Detector_Otklik", 1, 10, 2, "Own"));
+		f.Detectors.Insert(MakeDetector("Anomaly_Detector_Medved", 2, 15, 3, "Own"));
+		f.Detectors.Insert(MakeDetector("Anomaly_Detector_Svarog", 3, 20, 4, "Own"));
+		// Око и Велес OOTS — чужие (писк мода), если OOTS остался на сервере; иначе строки пропускаются
 		f.Detectors.Insert(MakeDetector("Anomaly_Detector_Oko", 1, 12, 2.4, "Generic"));
-		f.Detectors.Insert(MakeDetector("Anomaly_Detector_Medved", 2, 15, 3, "Generic"));
-		f.Detectors.Insert(MakeDetector("Anomaly_Detector_Svarog", 3, 20, 4, "Generic"));
 		f.Detectors.Insert(MakeDetector("Anomaly_Detector_Veles", 3, 25, 5, "Generic"));
 		return f;
 	}

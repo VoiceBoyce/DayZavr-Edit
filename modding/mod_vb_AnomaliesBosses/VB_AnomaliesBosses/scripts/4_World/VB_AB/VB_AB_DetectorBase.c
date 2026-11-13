@@ -1,7 +1,7 @@
 // Детекторы мода (ТЗ 2.2). Перенесены из OOTS: модель, звуки, лампа; логика своя.
-// Пока детектор включён и в руках, сервер на каждом такте менеджера энергии (OnWork, updateInterval в config.cpp)
-// ищет ближайшую разрешённую ему находку (VB_AB_Finds) и выставляет синхронизированное расстояние m_VB_Range.
-// Ближе SpawnDistance — находка становится предметом. Клиент по m_VB_Range пищит и светит.
+// Пока детектор включён и в руках, сервер на каждом такте менеджера энергии ищет ближайшую разрешённую ему
+// находку и выставляет синхронизированное расстояние m_VB_Range (серверный мод VB_AnomaliesBosses_Server,
+// VB_AB_DetectorServer.c). Клиент по m_VB_Range пищит и светит.
 // Здесь база и Отклик; Око, Медведь, Сварог и Велес — в VB_AB_Detectors2.c, чужие детекторы — VB_AB_GenericDetectors.c.
 
 class VB_AB_DetectorBase extends ItemBase
@@ -19,6 +19,9 @@ class VB_AB_DetectorBase extends ItemBase
 	protected int m_VB_RangeSeen = -1;
 	protected SoundOnVehicle m_VB_Snd;
 	protected bool m_VB_Powered;		// клиент: детектор работает (между OnWorkStart и OnWorkStop)
+	static const int IDLE_TICK_MS = 3000;
+	static const float LOW_BATTERY = 0.15;
+	protected int m_VB_TickN;
 
 	void VB_AB_DetectorBase()
 	{
@@ -27,6 +30,11 @@ class VB_AB_DetectorBase extends ItemBase
 
 	override void EEDelete(EntityAI parent)
 	{
+		if (GetGame())
+		{
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_IdleTick);
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_Beep);
+		}
 		VB_StopSound();
 		super.EEDelete(parent);
 	}
@@ -46,6 +54,9 @@ class VB_AB_DetectorBase extends ItemBase
 		{
 			m_VB_Powered = true;
 			VB_OnPower(true);
+			m_VB_TickN = 0;
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_IdleTick);
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_IdleTick, IDLE_TICK_MS, true);
 		}
 	}
 
@@ -53,120 +64,50 @@ class VB_AB_DetectorBase extends ItemBase
 	{
 		super.OnWorkStop();
 		SetAnimationPhase("top", 0.0);
-		if (GetGame().IsServer())
-			VB_ServerReset();
 		if (!GetGame().IsDedicatedServer())
 		{
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_IdleTick);
 			VB_ClientUpdate(R_NONE);
 			m_VB_Powered = false;
 			VB_OnPower(false);
 		}
 	}
 
-	override void OnWork(float consumed_energy)
+	// Видно, что детектор работает (ТЗ 8.16): пока сигнала нет, раз в IDLE_TICK_MS тихий щелчок; батарейка
+	// садится (меньше LOW_BATTERY) — раз в два щелчка двойной писк погромче.
+	protected void VB_IdleTick()
 	{
-		super.OnWork(consumed_energy);
-		if (GetGame().IsServer())
-			VB_ServerScan();
-	}
-
-	// ---------------------------------------------------------------- сервер
-	// Ближайшая разрешённая находка в секторе: расстояние в m_VB_Range, ближе SpawnDistance — предмет.
-	// Сварог и Велес ведут до 4 находок сразу и переопределяют весь метод (VB_AB_Detectors2.c).
-	protected void VB_ServerScan()
-	{
-		int range = R_NONE;
-		VB_AB_Find shown;
-		PlayerBase p = PlayerBase.Cast(GetHierarchyRootPlayer());
-		if (p && p.IsAlive() && p.GetItemInHands() == this)
+		if (!m_VB_Powered)
+			return;
+		m_VB_TickN++;
+		if (VB_BatteryLow() && m_VB_TickN % 2 == 0)
 		{
-			VB_AB_DetectorCfg cfg = VB_AB_Cfg.Get().GetDetector(GetType());
-			float dist;
-			VB_AB_Find f = VB_AB_Finds.Nearest(p.GetPosition(), cfg.Radius, GetType(), cfg.Tier, dist);
-			if (f && VB_InSector(p, f.m_Pos))
-			{
-				if (dist < cfg.SpawnDistance)
-				{
-					vector at = f.m_Pos;
-					VB_AB_Finds.Materialize(f, p, GetType());
-					GetGame().RPCSingleParam(this, RPC_FOUND, new Param1<vector>(at), true);
-				}
-				else
-				{
-					range = VB_RangeOf(dist, cfg.Radius);
-					shown = f;
-				}
-			}
+			VB_Beep(0.6);
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_Beep, 200, false, 0.6);
+			return;
 		}
-		if (range != m_VB_Range)
-		{
-			m_VB_Range = range;
-			SetSynchDirty();
-		}
-		VB_OnScanned(p, shown);
+		if (m_VB_RangeSeen == R_NONE)
+			VB_Beep(0.12);
 	}
 
-	// Для наследников: находка, о которой детектор сейчас сигналит (null — сигнала нет). Медведь берёт направление.
-	protected void VB_OnScanned(PlayerBase p, VB_AB_Find shown)
+	protected void VB_Beep(float vol)
 	{
-	}
-
-	// Детектор выключился: сбросить синхронизированный сигнал.
-	protected void VB_ServerReset()
-	{
-		if (m_VB_Range != R_NONE)
+		EffectSound s = SEffectManager.PlaySoundOnObject("VB_AB_DetectorBeep_SoundSet", this);
+		if (s)
 		{
-			m_VB_Range = R_NONE;
-			SetSynchDirty();
+			s.SetSoundVolume(vol);
+			s.SetAutodestroy(true);
 		}
 	}
 
-	// Сила сигнала по расстоянию: ближе 40 % радиуса — близко, ближе 60 % — средне, дальше — далеко.
-	static int VB_RangeOf(float dist, float radius)
+	protected bool VB_BatteryLow()
 	{
-		if (dist < radius * 0.4)
-			return R_CLOSE;
-		if (dist < radius * 0.6)
-			return R_MID;
-		return R_FAR;
-	}
-
-	// Пеленг на точку от взгляда игрока, градусы -180..180: плюс — справа (по часовой стрелке, если смотреть сверху).
-	static float VB_Bearing(PlayerBase p, vector target)
-	{
-		vector to = target - p.GetPosition();
-		to[1] = 0;
-		if (to.LengthSq() < 0.0001)
-			return 0;
-		vector look = p.GetDirection();
-		look[1] = 0;
-		// результаты VectorToAngles — в локальные: два вызова в одном выражении затирают друг друга
-		vector toAng = to.VectorToAngles();
-		vector lookAng = look.VectorToAngles();
-		float b = Math.NormalizeAngle(toAng[0] - lookAng[0]);
-		if (b > 180)
-			b = b - 360;
-		return b;
-	}
-
-	// Видит ли детектор находку в этой стороне. Базовый — во все стороны.
-	protected bool VB_InSector(PlayerBase p, vector target)
-	{
-		return true;
-	}
-
-	// Впереди игрока, в конусе ±75°.
-	protected bool VB_InFront(PlayerBase p, vector target)
-	{
-		vector dir = p.GetDirection();
-		dir[1] = 0;
-		vector to = target - p.GetPosition();
-		to[1] = 0;
-		if (to.Length() < 0.5)
-			return true;
-		dir.Normalize();
-		to.Normalize();
-		return vector.Dot(dir, to) > 0.26;
+		if (!HasEnergyManager())
+			return false;
+		EntityAI src = GetCompEM().GetEnergySource();
+		if (!src || !src.HasEnergyManager())
+			return false;
+		return src.GetCompEM().GetEnergy0To1() < LOW_BATTERY;
 	}
 
 	// ---------------------------------------------------------------- клиент
@@ -182,12 +123,7 @@ class VB_AB_DetectorBase extends ItemBase
 		super.OnRPC(sender, rpc_type, ctx);
 		if (rpc_type != RPC_FOUND || GetGame().IsDedicatedServer())
 			return;
-		Param1<vector> pos = new Param1<vector>(vector.Zero);
-		if (!ctx.Read(pos))
-			return;
-		EffectSound s = SEffectManager.PlaySound("VB_AB_Found_SoundSet", pos.param1);
-		if (s)
-			s.SetAutodestroy(true);
+		VB_AB_FoundFx.OnRpc(ctx);		// звук, всплеск частиц и вспышка стихии (VB_AB_Materials.c)
 	}
 
 	protected void VB_StopSound()
@@ -265,11 +201,6 @@ class VB_AB_Detector_Otklik extends VB_AB_DetectorBase
 	static const string LAMP_ON_MAT = "VB_AB\\t\\dox\\oklik_lampa_on.rvmat";
 
 	protected VB_AB_Light_DetectorLamp m_VB_Light;
-
-	override protected bool VB_InSector(PlayerBase p, vector target)
-	{
-		return VB_InFront(p, target);
-	}
 
 	override void EEDelete(EntityAI parent)
 	{

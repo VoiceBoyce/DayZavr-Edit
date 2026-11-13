@@ -57,6 +57,40 @@ LIGHTS = {
 # Вторая фаза Воронки: своя частица
 EXTRA_PTC = {"Voronka": "OOTS_voronka_active_2"}
 
+# Баланс урона (2026-11-13, пользователь: «с первого раза аномалия не должна убить игрока»).
+# У игрока 100 здоровья. Аномалия бьёт в случайную зону из vbABHitZones; в общее здоровье уходит торс ×1,
+# ноги ×0,25, кисти и стопы ×0,1 (DZ/characters/data/config.cpp, SurvivorBase); кровь из зон в общую не уходит;
+# одежда этот урон не режет (тип "VB_AB"). Худший случай — торс: Health × DmgMax (× DamageMult из anomalies.json).
+# В OOTS было до 375 (Электра 150 × 2,5) — смерть с одного раза. Ступени теперь:
+#   тяжёлые 45 — два срабатывания подряд 90, третье убивает; средние 35 и 25; лёгкие до 10.
+# Рядом с боссом: тяжёлая аномалия 45 + удар Энта ~20 (MeleeMul 3, без брони) + Разряд 25 ≈ 90 — ещё жив,
+# но на грани; уйти из поля и подлечиться — нормальный ход боя.
+# Трамплин и Атом бьют только ноги (в общее ×0,25): Трамплин до 15, Атом до 25 + толчок ~14.
+AMMO_BALANCE = {          # патрон OOTS: поля DamageApplied, которые меняем
+    "ElectraDmg": {"Health": 45},
+    "FireShtormDmg": {"Health": 45},
+    "LomkaDmg": {"Health": 45},
+    "RoyDmg": {"Health": 45},
+    "FlashDmg": {"Health": 45},
+    "VoronkaDmg": {"Health": 45},
+    "FireIskraDmg": {"Health": 35},             # Огненная искра и Млечный путь
+    "ZastoyDmg": {"Health": 35, "Shock": 40},
+    "StudenDmg": {"Health": 35},
+    "GrozaDmg": {"Health": 25},
+    "ZharkaDmg": {"Health": 25},
+    "ParDmg": {"Health": 25, "Shock": 30},
+    "DeadZoneDmg": {"Health": 25},
+    "SnowDmg": {"Health": 10},
+    "StekloDmg": {"Health": 10},
+    "HoleraDmg": {"Health": 8},
+    "AtomDmg": {"Health": 100},
+}
+RATIO_BALANCE = {         # наша аномалия: DmgMin, DmgMax — разброс урона за срабатывание
+    "Electra": (0.7, 1.0),      # в OOTS 0,9..2,5
+    "Voronka": (0.6, 1.0),      # в OOTS 0,1..0,85
+    "Studen": (0.7, 1.0),       # в OOTS 0,5..1,3
+}
+
 MAT_RE = re.compile(r'(Material\s+")(\{[0-9A-Fa-f]+\})?([^"]+)(")')
 MAP_RE = re.compile(r'(\w*Map\s+")(\{[0-9A-Fa-f]+\})?([^"]+)(")')
 
@@ -297,11 +331,12 @@ def main():
         if e["ammo"]:
             a = e["ammo"][-1]
             cls.append('\t\tvbABAmmo = "VB_AB_%s";' % a)
-            d = e["ammo_damage"].get(a) or {}
+            d = dict(e["ammo_damage"].get(a) or {})
+            d.update(AMMO_BALANCE.get(a, {}))
             ammo["VB_AB_" + a] = d
         zones = e.get("hitzones") or ["Torso"]
         cls.append("\t\tvbABHitZones[] = {%s};" % ",".join('"%s"' % z for z in zones))
-        lo_r, hi_r = ratios.get(oots, (1.0, 1.0))
+        lo_r, hi_r = RATIO_BALANCE.get(our) or ratios.get(oots, (1.0, 1.0))
         cls.append("\t\tvbABDmgMin = %g;" % lo_r)
         cls.append("\t\tvbABDmgMax = %g;" % hi_r)
         eff = EFFECTS.get(our, "")
@@ -325,6 +360,21 @@ def main():
         for n, s in sounds.items():
             f.write('\tclass %s\n\t{\n\t\tname = "%s";\n\t\tsound[] = {"%s", %g, %g, %g};\n\t\ttitles[] = {};\n\t};\n'
                     % (n, n, s["path"], s["volume"], s["pitch"], s["distance"]))
+    # Те же звуки как SoundSet: способности боссов играют их в точке (SEffectManager.PlaySound(<имя>_SoundSet, pos)),
+    # а CfgSounds звучит только с объекта. Громкость OOTS (до 25) ужата в 0,3–2.
+    with open(os.path.join(cfg_dir, "soundshaders.hpp"), "w", encoding="utf-8", newline="\n") as f:
+        f.write(head)
+        for n, s in sounds.items():
+            vol = max(0.3, min(2.0, s["volume"] * 0.25))
+            d = max(10.0, s["distance"])
+            f.write('\tclass %s_SoundShader\n\t{\n\t\tsamples[] = {{"%s", 1}};\n\t\tvolume = %g;\n\t\trange = %g;\n'
+                    '\t\trangeCurve[] = {{0, 1}, {%g, 0.6}, {%g, 0}};\n\t};\n' % (n, s["path"], vol, d, d * 0.4, d))
+    with open(os.path.join(cfg_dir, "soundsets.hpp"), "w", encoding="utf-8", newline="\n") as f:
+        f.write(head)
+        for n in sounds:
+            f.write('\tclass %s_SoundSet\n\t{\n\t\tsoundShaders[] = {"%s_SoundShader"};\n\t\tspatial = 1;\n\t\tdoppler = 0;\n'
+                    '\t\tloop = 0;\n\t\tvolumeCurve = "LinearCurve";\n'
+                    '\t\tsound3DProcessingType = "ObjectsInner13DProcessingType";\n\t};\n' % (n, n))
     with open(os.path.join(cfg_dir, "ammo.hpp"), "w", encoding="utf-8", newline="\n") as f:
         f.write(head)
         for n, d in ammo.items():

@@ -16,6 +16,10 @@ class VB_AB_Field
 	static const float BIG_RADIUS = 8;			// аномалия «большая» (Гроза, Снег, Мёртвая зона)
 	static const float BIG_MIN_FIELD = 25;		// большая — только в центр и только в поле от 25 м
 	protected static int s_TotalAnomalies;		// на весь сервер (MaxAnomaliesTotal)
+	// Гаснущие поля. Поле живёт в боссе (m_VB_Field), а тело после разделки удаляется через 1,5 с — раньше, чем
+	// поле догаснет (AfterDeathSec). Без этого списка поле умирало вместе с телом, таймеры снимались в деструкторе,
+	// и аномалии с находками оставались до рестарта (пользователь, 2026-11-13).
+	protected static ref array<ref VB_AB_Field> s_Dying;
 
 	protected VB_AB_BossBase m_Boss;
 	protected VB_AB_BossCfg m_Cfg;
@@ -39,6 +43,8 @@ class VB_AB_Field
 		{
 			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(SpawnNext);
 			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(FinishCollapse);
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(ExpireExtra);
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(RetryCenter);
 		}
 	}
 
@@ -55,6 +61,76 @@ class VB_AB_Field
 	array<VB_AB_AnomalyBase> GetAnomalies()
 	{
 		return m_Anomalies;
+	}
+
+	bool IsClosing()
+	{
+		return m_Closing;
+	}
+
+	// ---------------------------------------------------------------- для способностей (VB_AB_Abilities.c)
+	// Стоит ли в поле хоть одна из перечисленных аномалий (RequiresAnomaly)
+	bool HasAnyOf(array<string> classes)
+	{
+		if (!classes || classes.Count() == 0)
+			return true;
+		foreach (string cls : classes)
+		{
+			if (HasAnomaly(cls))
+				return true;
+		}
+		return false;
+	}
+
+	// Ближайшая к точке аномалия поля одного из классов (пустой список — любая)
+	VB_AB_AnomalyBase NearestOf(vector pos, array<string> classes)
+	{
+		VB_AB_AnomalyBase best;
+		float bestSq = 1e10;
+		foreach (VB_AB_AnomalyBase a : m_Anomalies)
+		{
+			if (!a)
+				continue;
+			if (classes && classes.Count() > 0 && classes.Find(a.GetType()) == -1)
+				continue;
+			float dSq = vector.DistanceSq(pos, a.GetPosition());
+			if (dSq < bestSq)
+			{
+				bestSq = dSq;
+				best = a;
+			}
+		}
+		return best;
+	}
+
+	// Временная аномалия (способность «Аномалия под ногами»): ставится сразу, гаснет через lifeSec.
+	// Считается в общий потолок сервера, но не в MaxAnomalies поля; одновременно не больше MAX_EXTRA.
+	static const int MAX_EXTRA = 3;
+	protected int m_Extra;
+
+	VB_AB_AnomalyBase SpawnExtra(string cls, vector pos, float lifeSec)
+	{
+		if (m_Closing || m_Extra >= MAX_EXTRA)
+			return null;
+		int total = VB_AB_Server.GetMaxAnomaliesTotal();
+		if (total > 0 && s_TotalAnomalies >= total)
+			return null;
+		VB_AB_AnomalyBase a = VB_AB_AnomalyBase.Cast(GetGame().CreateObjectEx(cls, pos, ECE_PLACE_ON_SURFACE | ECE_NOPERSISTENCY_WORLD));
+		if (!a)
+			return null;
+		a.VB_SetOwner(m_Boss);
+		m_Anomalies.Insert(a);
+		s_TotalAnomalies++;
+		m_Extra++;
+		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(ExpireExtra, lifeSec * 1000, false, a);
+		return a;
+	}
+
+	void ExpireExtra(VB_AB_AnomalyBase a)
+	{
+		m_Extra = Math.Max(0, m_Extra - 1);
+		if (a && m_Anomalies.Find(a) != -1)
+			DeleteAnomaly(a);
 	}
 
 	bool HasAnomaly(string cls)
@@ -200,6 +276,13 @@ class VB_AB_Field
 			vector pos;
 			if (!PickPos(p, around, taken, pos))
 			{
+				// центр занят игроком (поле раскрылось, когда тот стоял у босса) — пробуем ещё, пока не отойдёт
+				if (p.m_Place == "Center" && m_CenterRetry < CENTER_RETRIES)
+				{
+					m_CenterPending = p;
+					GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(RetryCenter, CENTER_RETRY_MS, false);
+					continue;
+				}
 				VB_AB_Log.Info("поле " + m_Cfg.Id + ": нет места для " + p.m_Cls + " (" + p.m_Place + ")");
 				continue;
 			}
@@ -211,6 +294,22 @@ class VB_AB_Field
 			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(SpawnNext, 300, false);
 		else if (empty && !m_Seeded)
 			SeedArtifacts();
+	}
+
+	static const int CENTER_RETRIES = 8;
+	static const int CENTER_RETRY_MS = 2000;
+	protected ref VB_AB_FieldPlan m_CenterPending;
+	protected int m_CenterRetry;
+
+	void RetryCenter()
+	{
+		if (m_Closing || !m_CenterPending)
+			return;
+		m_CenterRetry++;
+		array<ref VB_AB_FieldPlan> one = new array<ref VB_AB_FieldPlan>;
+		one.Insert(m_CenterPending);
+		m_CenterPending = null;
+		Enqueue(one, m_Center);
 	}
 
 	protected bool PickPos(VB_AB_FieldPlan p, vector around, array<vector> taken, out vector pos)
@@ -349,7 +448,7 @@ class VB_AB_Field
 					rMax = 3.0;
 				}
 			}
-			n += VB_AB_Finds.SeedTable(one, c, rMin, rMax, m_Boss);
+			n += VB_AB_Finds.SeedTable(one, c, rMin, rMax, this);
 		}
 		VB_AB_Log.Info("поле " + m_Cfg.Id + ": засеяно артефактов " + n);
 	}
@@ -361,6 +460,10 @@ class VB_AB_Field
 		if (m_Closing)
 			return;
 		m_Closing = true;
+		if (!s_Dying)
+			s_Dying = new array<ref VB_AB_Field>;
+		if (s_Dying.Find(this) == -1)
+			s_Dying.Insert(this);
 		m_Queue.Clear();
 		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(SpawnNext);
 		foreach (VB_AB_AnomalyBase a : m_Anomalies)
@@ -383,7 +486,15 @@ class VB_AB_Field
 	void FinishCollapse()
 	{
 		CloseNow();
-		VB_AB_Log.Info("поле " + m_Cfg.Id + " погасло");
+		VB_AB_Log.Info("поле " + m_Cfg.Id + " погасло, находок осталось: " + VB_AB_Finds.Count());
+		// себя из списка — следующим тактом, а не изнутри своего же метода (список держит последнюю ссылку)
+		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_AB_Field.ForgetDying, 0, false, this);
+	}
+
+	static void ForgetDying(VB_AB_Field f)
+	{
+		if (s_Dying)
+			s_Dying.RemoveItem(f);
 	}
 
 	// Сразу: уход босса, сброс, рестарт.
@@ -405,8 +516,7 @@ class VB_AB_Field
 			}
 		}
 		m_Anomalies.Clear();
-		if (m_Boss)
-			VB_AB_Finds.RemoveByOwner(m_Boss);
+		VB_AB_Finds.RemoveByOwner(this);
 	}
 
 	// Босс внутри одной из своих аномалий (щит, этап 7)

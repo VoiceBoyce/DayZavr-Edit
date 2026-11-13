@@ -376,7 +376,14 @@ Verified errors committed more than once. Check ACTIVELY during implementation. 
 - **E56** — `PlayerBase.AddToEnvironmentTemperature` в 1.30 пустой: тепло через `UniversalTemperatureSource`. Поле `Effect` = ванильный класс (как `Pos`)
 - **E57** — `JsonFileLoader` не подставляет начальные значения полей для отсутствующих ключей (остаются 0): нормализовать после загрузки, флаги «включается единицей»
 - **E58** — поле `Debug` = ванильный класс (как `Effect`, `Pos`): перед сборкой `tools/ab_checknames.py`; `SetHealth(0)` даёт `EEKilled(null)` — убийцу помнить в `EEHitBy`
-- **E59** — CE даёт мёртвому зомби ~330 с жизни: тело босса/мутанта исчезает раньше своего таймера; в `EEKilled` `SetLifetimeMax`+`SetLifetime` (и повтор через 1 с)
+- **E59** — CE даёт мёртвому зомби ~330 с жизни: тело босса/мутанта исчезает раньше своего таймера; в `EEKilled` `SetLifetimeMax`+`SetLifetime` и повтор каждые 20 с (CE назначает срок позже, через десятки секунд)
+- **E60** — `PlaySound*` с fadeIn/fadeOut длиннее файла: `EffectSound::SoundError ... longer than sound wave length` — коротким петлям fade 0
+- **E61** — после `SetPosition` зомби/игрока сбрасывать скорость `SetVelocity(ent, vector.Zero)`, иначе физика выбрасывает его на сотни метров
+- **E62** — голос зомби ищет `<ClassName()>_<Состояние>_SoundSet` по скриптовому классу, не по `GetType()`: config-only классам свой проигрыватель
+- **E63** — предмет в руке криво: зарегистрировать позу в `ModItemRegisterCallbacks.RegisterOneHanded` (по базовому классу config)
+- **E64** — мелкий предмет в позе «компас» не виден: начало координат в центре модели — поднять геометрию на ~5 см (как у компаса)
+- **E65** — частицы `PlayInWorld` с `Repeat` висят вечно: своя `Particle.PlayInWorld` + `Stop()` по таймеру
+- **E66** — процесс в объекте-владельце умирает вместе с ним (поле в боссе при разделке): держать в статическом списке до конца
 
 ---
 
