@@ -6,7 +6,8 @@ class VD_AnimalSlot
 	int m_RespawnAt = 0;		// раньше этого времени место не заполняем
 }
 
-//	Зона из конфига: держит своих существ сама, поэтому смена дня и ночи не сбрасывает таймеры
+//	Зона из конфига: держит своих существ сама. При смене дня и ночи таймеры убитых сбрасываются,
+//	живые и трупы остаются на месте
 class VD_GroupAnimals
 {
 	private ref TStringArray m_Classnames;
@@ -69,6 +70,18 @@ class VD_GroupAnimals
 		if (v_Distance < m_NearestPlayer)
 		{
 			m_NearestPlayer = v_Distance;
+		}
+	}
+
+	//	Свежая волна при смене фазы: убитые раньше места снова можно заполнять
+	void ResetRespawnTimers()
+	{
+		foreach (VD_AnimalSlot v_Slot : m_Slots)
+		{
+			if (!v_Slot.m_IsTracked)
+			{
+				v_Slot.m_RespawnAt = 0;
+			}
 		}
 	}
 

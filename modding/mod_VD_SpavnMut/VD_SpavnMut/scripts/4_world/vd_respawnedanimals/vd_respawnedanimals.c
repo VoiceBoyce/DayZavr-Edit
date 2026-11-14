@@ -282,7 +282,14 @@ class VD_RespawnedAnimals
 			return;
 
 		m_IsNight = isNightNow;
-		PrintWithTime(string.Format("[VD_RespawnedAnimals] Смена фазы, ночь: %1", m_IsNight));
+
+		// Свежая волна: убитые в прошлой фазе возвращаются сразу, не дожидаясь таймера
+		foreach (VD_GroupAnimals group : m_VD_GroupsAnimals)
+		{
+			group.ResetRespawnTimers();
+		}
+
+		PrintWithTime(string.Format("[VD_RespawnedAnimals] Смена фазы, ночь: %1, таймеры сброшены", m_IsNight));
 		if (m_IsNight)
 			ADU_SendChatMessage(VD_MESSAGE_NIGHT);
 		else
