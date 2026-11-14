@@ -1,0 +1,41 @@
+{
+    "Version": 1,
+    "Id": 20002,
+    "Order": 3,
+    "Enabled": 1,
+    "Name": "Записка Егерю",
+    "Description": [
+        "Егерь живёт не в лагере — ему тесно среди людей. Отвези ему эти заметки: там про тварей, которых наши видели у дорог. Он ждать не любит, у тебя сорок пять минут. Где он стоит — смотри на карте."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "eger",
+    "Requires": [
+        20000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 2700,
+    "QuestItems": [
+        {
+            "Item": "EFT_q_Document6",
+            "Count": 1
+        }
+    ],
+    "Targets": [],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Silver",
+            "Count": 2,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Серебряная монета"
+        }
+    ],
+    "Note": "make_quests16.py Б3"
+}

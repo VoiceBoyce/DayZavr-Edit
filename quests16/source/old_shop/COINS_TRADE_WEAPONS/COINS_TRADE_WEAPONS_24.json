@@ -1,0 +1,91 @@
+{
+    "Version": 1,
+    "Id": 18323,
+    "Order": 24,
+    "Enabled": 1,
+    "Name": "Покупка 18323. Оружие. MCX Spear 308.",
+    "Description": [
+        "Грядет новая эра огневой мощи — MCX Spear 308 от SIG, революция в мире штурмовых винтовок. .308 калибр, 135 урона, 800 выстрелов в минуту — баланс мощи и точности. Три 50-зарядных магазина, глушитель, прицел Specter. Готов к бою в любых условиях. Эта новинка уже стала легендой. 130 золотых — и ты получишь оружие, опережающее время."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "coins_quests_all",
+    "Requires": [
+        10000,
+        14000,
+        14011,
+        18300
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "COOLDOWN",
+    "Cooldown": 5,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "DZVR_Coin_Gold",
+            "Count": 130.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "1 золотая монета"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_MCX308_Tan",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Mag_MCX308_50rnd",
+            "Count": 3,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_MCX308_Suppressor",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_MCX308_Bttstck_Tan",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "AD_SpecterDR",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        }
+    ],
+    "Note": ""
+}

@@ -1,0 +1,55 @@
+{
+    "Version": 1,
+    "Id": 18039,
+    "Order": 40,
+    "Enabled": 1,
+    "Name": "Покупка 18039. Экипировка. Тяжелая ременная система EMR-80.",
+    "Description": [
+        "35 золотых за легендарную систему, переворачивающую представление о переноске грузов. Тяжёлая ременная система — не просто 80 слотов на поясе, а символ абсолютного превосходства. Пока другие копошатся с рюкзаками, ты носишь целый склад на бедре, руки свободны для оружия. Это не аксессуар — личный склад в аду. Носишь? Значит, не выживаешь — доминируешь."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "coins_quests_all",
+    "Requires": [
+        10000,
+        14000,
+        14011,
+        18000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "COOLDOWN",
+    "Cooldown": 5,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "DZVR_Coin_Gold",
+            "Count": 35.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "1 золотая монета"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "IMP_Belt_BeltSystem_Large_80_EMR",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        }
+    ],
+    "Note": ""
+}

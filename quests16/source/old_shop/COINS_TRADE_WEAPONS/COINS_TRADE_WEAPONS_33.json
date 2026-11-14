@@ -1,0 +1,73 @@
+{
+    "Version": 1,
+    "Id": 18332,
+    "Order": 33,
+    "Enabled": 1,
+    "Name": "Покупка 18332. Оружие. STEN MK III.",
+    "Description": [
+        "STEN MK III — британский ветеран, прошедший сквозь огонь Второй мировой. 9х19, 38 урона, 500 выстрелов в минуту. Скромный, но безотказный, как истинный джентльмен. Три магазина по 32 патрона — 96 шансов напомнить врагам, что старое железо бьёт точнее новых слов. 43 золотых — и этот кусочек военной истории будет исправно служить тебе."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "coins_quests_all",
+    "Requires": [
+        10000,
+        14000,
+        14011,
+        18300
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "COOLDOWN",
+    "Cooldown": 5,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "DZVR_Coin_Gold",
+            "Count": 43.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "1 золотая монета"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Sten",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Sten_32rdMag",
+            "Count": 3,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_SuppressorPistol",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        }
+    ],
+    "Note": ""
+}

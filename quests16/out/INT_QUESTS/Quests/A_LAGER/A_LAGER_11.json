@@ -1,0 +1,82 @@
+{
+    "Version": 1,
+    "Id": 20010,
+    "Order": 11,
+    "Enabled": 1,
+    "Name": "Котёл лагеря",
+    "Description": [
+        "Лагерь ест три раза в день, а консервы на деревьях не растут. Нужны три разные банки: фасоль, персики, сардины. Чем разнообразнее, тем меньше ворчат."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "coins_quests_all",
+    "Requires": [
+        20000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "DAILY",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "BakedBeansCan",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Фасоль"
+        },
+        {
+            "Kind": "DELIVER",
+            "Target": "PeachesCan",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Персики"
+        },
+        {
+            "Kind": "DELIVER",
+            "Target": "SardinesCan",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Сардины"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Copper",
+            "Count": 5,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Медная монета"
+        }
+    ],
+    "Note": "make_quests16.py БД1"
+}

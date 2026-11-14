@@ -1,0 +1,41 @@
+{
+    "Version": 1,
+    "Id": 20004,
+    "Order": 5,
+    "Enabled": 1,
+    "Name": "Пакет Сержанту",
+    "Description": [
+        "Пакет Сержанту, лично в руки. Он держит блокпост и знает, где сидят бандиты. Печати не трогай. Сорок пять минут — и он должен знать, что лагерь о нём помнит."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "serzhant",
+    "Requires": [
+        20000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 2700,
+    "QuestItems": [
+        {
+            "Item": "EFT_q_Letter2",
+            "Count": 1
+        }
+    ],
+    "Targets": [],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Silver",
+            "Count": 2,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Серебряная монета"
+        }
+    ],
+    "Note": "make_quests16.py Б5"
+}

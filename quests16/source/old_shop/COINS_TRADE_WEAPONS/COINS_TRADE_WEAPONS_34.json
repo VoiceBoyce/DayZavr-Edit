@@ -1,0 +1,100 @@
+{
+    "Version": 1,
+    "Id": 18333,
+    "Order": 34,
+    "Enabled": 1,
+    "Name": "Покупка 18333. Оружие. Glock 18c.",
+    "Description": [
+        "Glock 18C — австрийское безумие в твоей руке. Автоматический монстр, 9х19, 38 урона, 1500 выстрелов в минуту — карманный пулемёт. Три 50-зарядных магазина, фонарик, глушитель, прицел RMR. Миниатюрная армейская база в кобуре. 40 золотых — самый яростный пистолет, который можно удержать в одной руке."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "coins_quests_all",
+    "Requires": [
+        10000,
+        14000,
+        14011,
+        18300
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "COOLDOWN",
+    "Cooldown": 5,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "DZVR_Coin_Gold",
+            "Count": 40.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "1 золотая монета"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Glock18C",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Mag_Glock18C_50rnd",
+            "Count": 3,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "TLRLight",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_SuppressorPistol",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "AD_RMR",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "FC_Battery9V_X5",
+            "Count": 2,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        }
+    ],
+    "Note": ""
+}

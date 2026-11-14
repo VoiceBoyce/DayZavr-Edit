@@ -1,0 +1,76 @@
+{
+    "Version": 1,
+    "Id": 23003,
+    "Order": 4,
+    "Enabled": 1,
+    "Name": "Медвежий угол",
+    "Description": [
+        "Медведь-зомби — это медведь, которого Изнанка не отпустила. Трёх таких и двух обычных бурых — сравню шкуры."
+    ],
+    "GiverStart": "eger",
+    "GiverFinish": "eger",
+    "Requires": [
+        23002
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "KILL",
+            "Target": "SFP_BearZMB",
+            "Count": 3.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Медведь-зомби"
+        },
+        {
+            "Kind": "KILL",
+            "Target": "Animal_UrsusArctos",
+            "Count": 2.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Бурый медведь"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 2,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "EFT_chain",
+            "Count": 1,
+            "Quantity": "",
+            "State": "",
+            "Amount": 0,
+            "Text": "Серебряная цепочка"
+        }
+    ],
+    "Note": "make_quests16.py Е4"
+}

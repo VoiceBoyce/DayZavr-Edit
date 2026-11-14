@@ -1,0 +1,82 @@
+{
+    "Version": 1,
+    "Id": 18328,
+    "Order": 29,
+    "Enabled": 1,
+    "Name": "Покупка 18328. Оружие. RAPTR 12.",
+    "Description": [
+        "RAPTR 12 — не дробовик, а ураган свинца. 12 калибр, 31 урона, 462 выстрела в минуту — как бензопила в руках. 30 патронов в магазине, четыре обоймы. Прицел XPS34. 85 золотых — и этот монстр будет рвать врагов в клочья."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "coins_quests_all",
+    "Requires": [
+        10000,
+        14000,
+        14011,
+        18300
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "COOLDOWN",
+    "Cooldown": 5,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "DZVR_Coin_Gold",
+            "Count": 85.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "1 золотая монета"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "KOD_Raptr",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "AD_XPS34",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "KOD_RIS_Bipod",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "Mag_KOD_Raptr_30rnd",
+            "Count": 4,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        }
+    ],
+    "Note": ""
+}

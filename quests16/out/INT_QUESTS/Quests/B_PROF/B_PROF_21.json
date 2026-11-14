@@ -1,0 +1,91 @@
+{
+    "Version": 1,
+    "Id": 21020,
+    "Order": 21,
+    "Enabled": 1,
+    "Name": "Редкие образцы",
+    "Description": [
+        "Раз в неделю мне нужны тяжёлые находки, которые видит только детектор второго уровня: разрядный кварц, хитиновая пыль и сжатый камень, по две штуки."
+    ],
+    "GiverStart": "prof",
+    "GiverFinish": "prof",
+    "Requires": [
+        21002
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "WEEKLY",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "VB_AB_Mat_Electra",
+            "Count": 2.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Разрядный кварц"
+        },
+        {
+            "Kind": "DELIVER",
+            "Target": "VB_AB_Mat_Roy",
+            "Count": 2.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Хитиновая пыль"
+        },
+        {
+            "Kind": "DELIVER",
+            "Target": "VB_AB_Mat_Voronka",
+            "Count": 2.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Сжатый камень"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 2,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "EFT_Capacitors",
+            "Count": 2,
+            "Quantity": "",
+            "State": "",
+            "Amount": 0,
+            "Text": "Конденсаторы"
+        }
+    ],
+    "Note": "make_quests16.py ПН1"
+}

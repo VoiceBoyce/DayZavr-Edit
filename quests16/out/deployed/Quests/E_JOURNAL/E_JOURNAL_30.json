@@ -1,0 +1,58 @@
+{
+    "Version": 1,
+    "Id": 23199,
+    "Order": 30,
+    "Enabled": 1,
+    "Name": "Атлас Изнанки",
+    "Description": [
+        "Все четырнадцать записей. Ты прошёл мой журнал целиком — такого здесь ещё не было. Держи то, что я берёг для такого случая."
+    ],
+    "GiverStart": "eger",
+    "GiverFinish": "eger",
+    "Requires": [
+        23100,
+        23101,
+        23102,
+        23103,
+        23104,
+        23105,
+        23106,
+        23107,
+        23108,
+        23109,
+        23110,
+        23111,
+        23112,
+        23113
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 10,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "OOTS_Jacket_Exo",
+            "Count": 1,
+            "Quantity": "",
+            "State": "",
+            "Amount": 0,
+            "Text": "Куртка экзоскелета"
+        }
+    ],
+    "Note": "make_quests16.py Атлас"
+}

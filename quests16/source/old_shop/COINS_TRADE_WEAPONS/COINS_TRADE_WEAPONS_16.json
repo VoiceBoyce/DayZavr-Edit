@@ -1,0 +1,91 @@
+{
+    "Version": 1,
+    "Id": 18315,
+    "Order": 16,
+    "Enabled": 1,
+    "Name": "Покупка 18315. Оружие. 240B.",
+    "Description": [
+        "Американская надёжность в каждом выстреле — 240B, эволюция легендарного FN MAG. 750 выстрелов в минуту, .308 калибр, 150 урона — идеальный баланс точности и мощи. Два 100-зарядных магазина, прицел SpecterDR, батарейка — готов к бою. Такая мощь редко появляется в продаже. 197 золотых — и этот проверенный боец будет прикрывать твою спину."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "coins_quests_all",
+    "Requires": [
+        10000,
+        14000,
+        14011,
+        18300
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "COOLDOWN",
+    "Cooldown": 5,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "DZVR_Coin_Gold",
+            "Count": 197.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "1 золотая монета"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "BO_M240B",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "AD_SpecterDR",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "BO_Mag_M240B_100rnd",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "BO_Mag_M240B_100rnd",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "Battery9V",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        }
+    ],
+    "Note": ""
+}

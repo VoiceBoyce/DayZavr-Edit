@@ -1,0 +1,55 @@
+{
+    "Version": 1,
+    "Id": 18005,
+    "Order": 6,
+    "Enabled": 1,
+    "Name": "Покупка 18005. Экипировка. Куртка экзоскелета 2-го поколения TAN.",
+    "Description": [
+        "Куртка экзоскелета 2-го поколения TAN. Мобильный арсенал и госпиталь в одном. 100 слотов, защита 50. Главная фишка — слоты под модули: восстановление крови, регенерация и другие скрытые функции. Превратят тебя в машину для выживания. 280 золотых — не просто броня, а технологическое превосходство. В этом аду есть обычные куртки... и есть экзоскелет. Последний рубеж между тобой и смертью."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "coins_quests_all",
+    "Requires": [
+        10000,
+        14000,
+        14011,
+        18000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "COOLDOWN",
+    "Cooldown": 5,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "DZVR_Coin_Gold",
+            "Count": 280.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "1 золотая монета"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "OOTS_Jacket_Exo_Tan",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        }
+    ],
+    "Note": ""
+}

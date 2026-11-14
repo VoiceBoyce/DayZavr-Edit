@@ -1,0 +1,97 @@
+{
+    "Version": 1,
+    "Id": 25000,
+    "Order": 1,
+    "Enabled": 1,
+    "Name": "Высоты",
+    "Description": [
+        "Пакет получил. Работа такая: проверь четыре высоты, за которые дерутся, — аэродром Ногово, Чёрный мыс, военную базу Петропавловска и Сахалаг. Просто доедь и посмотри. Отметки на карте."
+    ],
+    "GiverStart": "serzhant",
+    "GiverFinish": "serzhant",
+    "Requires": [
+        20004
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "EXPLORE",
+            "Target": "",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "6984.8 2.6 7617.9",
+            "Radius": 60.0,
+            "GroundY": 1,
+            "ShowOnMap": 1,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Аэродром Ногово"
+        },
+        {
+            "Kind": "EXPLORE",
+            "Target": "",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "5493.8 2.8 4024.7",
+            "Radius": 60.0,
+            "GroundY": 1,
+            "ShowOnMap": 1,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Чёрный мыс"
+        },
+        {
+            "Kind": "EXPLORE",
+            "Target": "",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "5584.6 2.2 10136.8",
+            "Radius": 60.0,
+            "GroundY": 1,
+            "ShowOnMap": 1,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Военная база Петропавловска"
+        },
+        {
+            "Kind": "EXPLORE",
+            "Target": "",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "12130.0 179.4 9760.9",
+            "Radius": 60.0,
+            "GroundY": 1,
+            "ShowOnMap": 1,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Сахалаг"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        }
+    ],
+    "Note": "make_quests16.py С1"
+}

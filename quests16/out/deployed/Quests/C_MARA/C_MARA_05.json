@@ -1,0 +1,61 @@
+{
+    "Version": 1,
+    "Id": 22004,
+    "Order": 5,
+    "Enabled": 1,
+    "Name": "Голод клинка",
+    "Description": [
+        "Клинок голоден. Корми его: пятнадцать мертвецов, любых, но только им — другое оружие он не простит. Насытится — сошью тебе плащ, в котором корни примут тебя за своего."
+    ],
+    "GiverStart": "mara",
+    "GiverFinish": "mara",
+    "Requires": [
+        22003
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "KILL",
+            "Target": "ZombieBase",
+            "Count": 15.0,
+            "Filter": "VB_RiftBlade",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Убить зомби Голодным клинком"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Silver",
+            "Count": 4,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Серебряная монета"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "VB_RiftCloak",
+            "Count": 1,
+            "Quantity": "",
+            "State": "",
+            "Amount": 0,
+            "Text": "Плащ-кокон"
+        }
+    ],
+    "Note": "make_quests16.py М5"
+}

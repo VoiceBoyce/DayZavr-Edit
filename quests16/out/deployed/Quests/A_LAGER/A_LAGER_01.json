@@ -1,0 +1,68 @@
+{
+    "Version": 1,
+    "Id": 20000,
+    "Order": 1,
+    "Enabled": 1,
+    "Name": "Знакомство с Боссом",
+    "Description": [
+        "Новенький? Я Босс, этот лагерь держится на мне. Расскажу коротко. Когда пришла Изнанка, мёртвые встали, а у некоторых в груди горели монеты — синим, как газ. С тех пор монеты здесь вместо денег: десять медных — серебряная, десять серебряных — золотая. Их не печатают, их зарабатывают. Хочешь жить при лагере — докажи, что от тебя есть толк. Принеси три банки тактического бекона, не вздутые."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "coins_quests_all",
+    "Requires": [],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "TacticalBaconCan",
+            "Count": 3.0,
+            "Filter": "",
+            "WorstState": "DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Тактический бекон"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Copper",
+            "Count": 5,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Медная монета"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "BandageDressing",
+            "Count": 1,
+            "Quantity": "",
+            "State": "",
+            "Amount": 0,
+            "Text": "Бинт"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "Rag",
+            "Count": 1,
+            "Quantity": "3",
+            "State": "",
+            "Amount": 0,
+            "Text": "Тряпки"
+        }
+    ],
+    "Note": "make_quests16.py Б1"
+}

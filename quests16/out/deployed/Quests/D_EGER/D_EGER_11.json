@@ -1,0 +1,82 @@
+{
+    "Version": 1,
+    "Id": 23010,
+    "Order": 11,
+    "Enabled": 1,
+    "Name": "Мясо для лагеря",
+    "Description": [
+        "Лагерю нужно мясо: олень, оленуха и пара зайцев."
+    ],
+    "GiverStart": "eger",
+    "GiverFinish": "eger",
+    "Requires": [
+        23000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "DAILY",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "KILL",
+            "Target": "Animal_RangiferTarandus",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Северный олень"
+        },
+        {
+            "Kind": "KILL",
+            "Target": "Animal_RangiferTarandusF",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Северная оленуха"
+        },
+        {
+            "Kind": "KILL",
+            "Target": "Animal_LepusEuropaeus",
+            "Count": 2.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Заяц"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Silver",
+            "Count": 3,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Серебряная монета"
+        }
+    ],
+    "Note": "make_quests16.py ЕД1"
+}

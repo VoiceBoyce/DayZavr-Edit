@@ -1,0 +1,67 @@
+{
+    "Version": 1,
+    "Id": 24012,
+    "Order": 13,
+    "Enabled": 1,
+    "Name": "Лампы",
+    "Description": [
+        "Две лампы накаливания и кабель питания — освещение лагеря само себя не починит."
+    ],
+    "GiverStart": "gayka",
+    "GiverFinish": "gayka",
+    "Requires": [
+        24001
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "DAILY",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "EFT_incandescentlamp",
+            "Count": 2.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Лампа накаливания"
+        },
+        {
+            "Kind": "DELIVER",
+            "Target": "EFT_PowerCord",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Сетевой кабель питания"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Silver",
+            "Count": 2,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Серебряная монета"
+        }
+    ],
+    "Note": "make_quests16.py ГД3"
+}

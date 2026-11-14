@@ -1,0 +1,54 @@
+{
+    "Version": 1,
+    "Id": 18300,
+    "Order": 1,
+    "Enabled": 1,
+    "Name": "Покупка 18300. Оружие. Начало.",
+    "Description": [
+        "Слушай... у меня есть запасы оружия. Определённого. Редкого. Такого нигде не сыщешь. Все наёмники в округе мечтают о таком. Хочешь взглянуть на каталог? С тебя 1 золотая. За молчание. Не обязательно всем знать, чем я владею. Давай монету сюда, и покажу ящичек."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "coins_quests_all",
+    "Requires": [
+        10000,
+        14000,
+        14011
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "DZVR_Coin_Gold",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "1 золотая монета"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "WD40_Regular",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        }
+    ],
+    "Note": ""
+}

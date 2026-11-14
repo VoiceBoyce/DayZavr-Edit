@@ -1,0 +1,79 @@
+{
+    "Version": 1,
+    "Id": 23100,
+    "Order": 1,
+    "Enabled": 1,
+    "Name": "Журнал: Кислотный Ричар",
+    "Description": [
+        "Запись в журнал: Кислотный Ричар. Прыгает, плюётся, кислота разъедает броню. Вырежи у него трофей — засчитаю тому, кто режет, так что в группе договаривайтесь. Трофей твой, мне нужна запись."
+    ],
+    "GiverStart": "eger",
+    "GiverFinish": "eger",
+    "Requires": [
+        23002
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "ACTION",
+            "Target": "VB_AB_ActionCutTrophy",
+            "Count": 1.0,
+            "Filter": "VB_AB_Ricar_Acid",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Вырезать трофей: Кислотный Ричар"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 2,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "VB_AB_Mat_Holera",
+            "Count": 1,
+            "Quantity": "1",
+            "State": "",
+            "Amount": 0,
+            "Text": "Ядовитая плесень"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "VB_AB_Mat_Studen",
+            "Count": 1,
+            "Quantity": "1",
+            "State": "",
+            "Amount": 0,
+            "Text": "Студенистая слизь"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "VB_AB_Mat_Roy",
+            "Count": 1,
+            "Quantity": "1",
+            "State": "",
+            "Amount": 0,
+            "Text": "Хитиновая пыль"
+        }
+    ],
+    "Note": "make_quests16.py Ж-Ricar_Acid"
+}

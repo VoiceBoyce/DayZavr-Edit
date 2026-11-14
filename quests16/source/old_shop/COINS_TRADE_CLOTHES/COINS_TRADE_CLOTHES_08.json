@@ -1,0 +1,55 @@
+{
+    "Version": 1,
+    "Id": 18007,
+    "Order": 8,
+    "Enabled": 1,
+    "Name": "Покупка 18007. Экипировка. Штаны экзоскелета 2го поколения TAN.",
+    "Description": [
+        "Штаны экзоскелета 2-го поколения. Технологический прорыв, рождённый в аду. Защита 87 — ноги неуязвимы для пуль и осколков. 100 слотов — место для магазинов, медикаментов, всего. 255 золотых — плата за то, чтобы нижняя часть тела была защищена лучше, чем иные целиком. Это не просто штаны. Это мобильная крепость. Часть легендарного комплекта, переписывающего правила выживания."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "coins_quests_all",
+    "Requires": [
+        10000,
+        14000,
+        14011,
+        18000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "COOLDOWN",
+    "Cooldown": 5,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "DZVR_Coin_Gold",
+            "Count": 255.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "1 золотая монета"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "OOTS_Pants_Exo_Tan",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        }
+    ],
+    "Note": ""
+}

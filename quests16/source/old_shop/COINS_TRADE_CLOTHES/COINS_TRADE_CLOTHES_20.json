@@ -1,0 +1,55 @@
+{
+    "Version": 1,
+    "Id": 18019,
+    "Order": 20,
+    "Enabled": 1,
+    "Name": "Покупка 18019. Экипировка. Модуль увеличения выносливости.",
+    "Description": [
+        "Этот модуль — военная разработка для спецподразделений. Вшивается в экзоскелет, впрыскивает эпинефрин при предельных нагрузках. Вчерашний рывок через Тёмный лес — это всё он. 200 золотых — и ты сможешь выдавать ускорения, от которых у обычных сталкеров сердце останавливается. Но помни: после каждого такого рывка организм требует двойного отдыха. Иначе следующий прилив может стать последним."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "coins_quests_all",
+    "Requires": [
+        10000,
+        14000,
+        14011,
+        18000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "COOLDOWN",
+    "Cooldown": 5,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "DZVR_Coin_Gold",
+            "Count": 200.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "1 золотая монета"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "OOTS_ClothesModificatorStamina",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        }
+    ],
+    "Note": ""
+}

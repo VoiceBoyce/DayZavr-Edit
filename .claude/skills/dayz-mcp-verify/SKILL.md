@@ -1476,6 +1476,9 @@ the mod under test.
 - **Длительное действие** (`ActionContinuousBase`, например разделка): `action_hold`, а не `action_use`; оружие из
   рук не убрать (`object_resolve` его не видит) — `player_kill` + `player_respawn`, потом `inventory_give` нужного в руки.
 - **Мод-проект нельзя повторить в `extra_mods` при `project_mod_override=true`** (`bad_dayz_test_request:project_mod_override_includes_original`). Если нужен сам мод проекта (например @MSFZ_Mifical_Pack вместе с тестируемым), запускать без override: проект грузится сам, остальное — в `extra_mods`. Чужие моды для совместного прогона сначала скопировать в `G:\Games\DayZavrTest` (robocopy; код 1 = скопировано).
+- **В DayZDiag не компилируется `@World_StackingAll_STRNK`** (обфусцированные `.iny`: «Unexpected statement 'ref'» →
+  Can't compile "Game", сервер висит и стенд падает с `server_start_hung`). Прогон без него. Монеты DayZavr и так по 1 шт.
+  Если мода нет в `G:\Games\DayZavrTest`, `dayz_test_run` отвечает `bad_mod_authority` без подробностей: сначала скопировать.
 - **В DayZDiag не компилируется `@Server5_SFP_anim_system`** (SFP2_anim_scripts: «Overriding function 'CloseMenu' / 'GetGestureItems' but not marked as 'override'» → Can't compile Mission). Как @Notifications/@INT_Trader — прогон без него; @Server5_SFP без него грузится.
 - **`wait_for(log_matches)` на этом стенде не видит логов** (`scanned.files: []`) — читать `script_*.log` из `G:\DayZ_Test\env111\_server\profiles` через Bash, лиз продлевать `wait_for(file_matches, never_exists.txt)`.
 - **Чужому детектору (OOTS) на стенде нужна батарейка**: `inventory_attach(Battery9V, slot="BatteryD", object_id=<детектор>)`, затем `action_use(ActionTurnOnWhileInHands, target="hands")`.

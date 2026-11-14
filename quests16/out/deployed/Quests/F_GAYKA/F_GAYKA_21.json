@@ -1,0 +1,76 @@
+{
+    "Version": 1,
+    "Id": 24020,
+    "Order": 21,
+    "Enabled": 1,
+    "Name": "Добыча конвоя",
+    "Description": [
+        "Конвой возит военный кабель и сетевые модемы. Не спрашивай, зачем мне. Раз в неделю — по штуке."
+    ],
+    "GiverStart": "gayka",
+    "GiverFinish": "gayka",
+    "Requires": [
+        24002
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "WEEKLY",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "EFT_Military_cable",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Армированный военный кабель"
+        },
+        {
+            "Kind": "DELIVER",
+            "Target": "EFT_Modem",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Сетевой модем"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 2,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "VB_RiftFuelCapsule",
+            "Count": 1,
+            "Quantity": "",
+            "State": "",
+            "Amount": 0,
+            "Text": "Топливная капсула Изнанки"
+        }
+    ],
+    "Note": "make_quests16.py ГН1"
+}

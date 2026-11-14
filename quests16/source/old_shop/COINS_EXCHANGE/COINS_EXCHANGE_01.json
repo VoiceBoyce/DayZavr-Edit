@@ -1,0 +1,52 @@
+{
+    "Version": 1,
+    "Id": 16001,
+    "Order": 1,
+    "Enabled": 1,
+    "Name": "Обмен 100 медных монет на 1 серебрянную.",
+    "Description": [
+        "Ходят слухи, что здесь спрятан запечатанный ящик с серебряными монетами. Такими же проклятыми, как медные, но куда более могущественными. Я собираю медяки, пытаясь вычислить его место по их распределению. Принеси мне 100 медных монет — и я дам тебе одну из тех редких серебряных, что уже удалось найти. Может, именно ты раскроешь эту тайну."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "coins_quests_all",
+    "Requires": [
+        10000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "COOLDOWN",
+    "Cooldown": 5,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "DZVR_Coin_Copper",
+            "Count": 100.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "1 медная монета"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Silver",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "1 серебрянная монета"
+        }
+    ],
+    "Note": ""
+}
