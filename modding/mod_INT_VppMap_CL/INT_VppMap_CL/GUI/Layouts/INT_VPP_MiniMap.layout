@@ -1,0 +1,103 @@
+FrameWidgetClass INT_VPP_MiniRoot {
+ visible 1
+ ignorepointer 1
+ clipchildren 0
+ position 0 0
+ size 302 347
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ priority 0
+ {
+  FrameWidgetClass INT_VPP_MiniMapHost {
+   visible 1
+   ignorepointer 1
+   clipchildren 0
+   position 1 2
+   size 300 300
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   priority 100
+   {
+    MapWidgetClass INT_VPP_MiniMapW {
+     visible 1
+     ignorepointer 1
+     clipchildren 0
+     inheritalpha 1
+     position 0 0
+     size 300 300
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     priority 100
+    }
+   }
+  }
+  FrameWidgetClass INT_VPP_MiniClip {
+   visible 1
+   ignorepointer 1
+   clipchildren 1
+   position 1 2
+   size 300 300
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   priority 300
+   {
+    FrameWidgetClass INT_VPP_MiniWorld {
+     visible 1
+     ignorepointer 1
+     clipchildren 0
+     position 0 0
+     size 300 300
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     priority 300
+     {
+      CanvasWidgetClass INT_VPP_MiniCanvas {
+       visible 1
+       ignorepointer 1
+       position 0 0
+       size 300 300
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       priority 300
+      }
+     }
+    }
+    CanvasWidgetClass INT_VPP_MiniLive {
+     visible 1
+     ignorepointer 1
+     position 0 0
+     size 300 300
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     priority 300
+    }
+    FrameWidgetClass INT_VPP_MiniPins {
+     visible 1
+     ignorepointer 1
+     clipchildren 0
+     position 0 0
+     size 300 300
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     priority 300
+    }
+   }
+  }
+ }
+}

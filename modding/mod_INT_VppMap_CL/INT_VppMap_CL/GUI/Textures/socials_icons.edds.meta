@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{B8337574C4D7CF98}VanillaPPMap/GUI/Textures/socials_icons.edds"
+ Author "daone-pc"
+ ChangeDate 1450534742
+ Configurations {
+  TGAResourceClass PC {
+   SourceFile "socials_icons.tga"
+  }
+  TGAResourceClass XBOX_ONE : PC {
+  }
+  TGAResourceClass PS4 : PC {
+  }
+  TGAResourceClass LINUX : PC {
+  }
+ }
+}

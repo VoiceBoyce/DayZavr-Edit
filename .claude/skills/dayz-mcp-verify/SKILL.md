@@ -1072,6 +1072,21 @@ Measured on DayZDiag 1.29.163709 with one client on localhost [EXACT]:
 - `Print(variable)` prefixes the line with `string name = '…'`, and the CLIENT log cuts lines at 255
   characters (the server log does not): print short expressions.
 
+### Клики мышью через Windows по UI мода ненадёжны (DayZavr, 2026-11-14)
+
+Проверено на DayZDiag 1.30, окно 2560×1440, карта INT_VppMap:
+- `SetCursorPos` + `mouse_event` (scratchpad click.ps1) попадали через раз: часть кликов игра не видит, даже
+  когда координаты сняты из `ui_tree` и точно в кнопке. То же с клавишами через SendInput: первое нажатие после
+  смены фокуса часто теряется.
+- Окно без фокуса почти не перерисовывается: `capture_screenshot` после клика показывает старый кадр
+  (`frame_stale: true` или `render_frozen_signal`). По такому кадру нельзя ни судить о результате, ни брать
+  координаты для следующего клика. Результат проверять по данным (лог, файлы сервера), а не по картинке.
+- Безымянные кнопки (`Hit`, сотни одноимённых) `ui_click` по пути `Имя@N` не находит (`widget_not_found`).
+- Надёжный путь: в своём моде под `#ifdef DIAG_DEVELOPER` отладочные клавиши в `MissionGameplay.OnKeyPress`,
+  которые вызывают те же обработчики, что и клик (у чужого UI часто есть свои тестовые методы, например
+  `INT_TestClickChip`). `key_press(dik=…)` доставляет их всегда. Меню паузы, если всплыло, закрывать
+  `ui_click("continuebtn")`.
+
 ## Visual smokes: bubble follows player, not camera (SP-082, added 2026-08-31)
 
 - Before spawn, read `query_player_state.pos` and place the object next to the player. Free

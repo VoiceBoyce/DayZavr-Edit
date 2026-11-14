@@ -1,0 +1,68 @@
+ImageSetClass {
+ Name "s_icons"
+ RefSize 1920 1080
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "{B8337574C4D7CF98}VanillaPPMap/GUI/Textures/socials_icons.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass icon_discord {
+   Name "icon_discord"
+   Pos 20 20
+   Size 32 32
+   Flags 0
+  }
+  ImageSetDefClass icon_fb {
+   Name "icon_fb"
+   Pos 77 18
+   Size 32 32
+   Flags 0
+  }
+  ImageSetDefClass icon_twitter {
+   Name "icon_twitter"
+   Pos 140 18
+   Size 32 32
+   Flags 0
+  }
+  ImageSetDefClass icon_ts {
+   Name "icon_ts"
+   Pos 201 18
+   Size 32 32
+   Flags 0
+  }
+  ImageSetDefClass icon_yt {
+   Name "icon_yt"
+   Pos 267 17
+   Size 32 32
+   Flags 0
+  }
+  ImageSetDefClass icon_dzsal {
+   Name "icon_dzsal"
+   Pos 327 17
+   Size 32 32
+   Flags 0
+  }
+  ImageSetDefClass icon_vpp_s {
+   Name "icon_vpp_s"
+   Pos 19 512
+   Size 137 131
+   Flags 0
+  }
+  ImageSetDefClass logo_vpp_m {
+   Name "logo_vpp_m"
+   Pos 7 658
+   Size 394 407
+   Flags 0
+  }
+  ImageSetDefClass icon_steam {
+   Name "icon_steam"
+   Pos 397 16
+   Size 34 34
+   Flags 0
+  }
+ }
+ Groups {
+ }
+}

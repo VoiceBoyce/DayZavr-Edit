@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<modded_inputs>
+    <inputs>
+        <actions>
+            <input name="UAOpenVPPMap" loc="Open V++ Map" />
+            <input name="UAToggleVPPMap3DMarkers" loc="Show/Hide all 3D Map Markers" />
+            <!-- INT (2026-11-13): minimap of our map (INT_VPP_MiniMap.c) -->
+            <input name="UAIntVppMiniMap" loc="STR_INT_VPP_INPUT_MINIMAP" />
+            <input name="UAIntVppMiniMapZoomIn" loc="STR_INT_VPP_INPUT_MINI_IN" />
+            <input name="UAIntVppMiniMapZoomOut" loc="STR_INT_VPP_INPUT_MINI_OUT" />
+        </actions>
+        <!-- one common Settings -> Controls group for all DayZavr INT mods: the same sorting name and loc in every mod -->
+        <sorting name="intmods" loc="DAYZAVR INT MODS">
+            <input name="UAIntVppMiniMap" />
+            <input name="UAIntVppMiniMapZoomIn" />
+            <input name="UAIntVppMiniMapZoomOut" />
+        </sorting>
+    </inputs>
+    <preset>
+		<input name="UAOpenVPPMap">
+            <btn name="kM">
+            </btn>
+        </input>
+		<input name="UAToggleVPPMap3DMarkers">
+            <btn name="kK">
+            </btn>
+        </input>
+		<input name="UAIntVppMiniMap">
+            <btn name="kLControl">
+                <btn name="kDivide" />
+            </btn>
+        </input>
+		<input name="UAIntVppMiniMapZoomIn">
+            <btn name="kLControl">
+                <btn name="kAdd" />
+            </btn>
+        </input>
+		<input name="UAIntVppMiniMapZoomOut">
+            <btn name="kLControl">
+                <btn name="kSubstract" />
+            </btn>
+        </input>
+    </preset>
+</modded_inputs>

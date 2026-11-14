@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{260286D9ED28FC72}VanillaPPMap/GUI/Textures/UI_Icons.edds"
+ Author "daone-pc"
+ ChangeDate 1244391156
+ Configurations {
+  TGAResourceClass PC {
+   SourceFile "UI_Icons.tga"
+  }
+  TGAResourceClass XBOX_ONE : PC {
+  }
+  TGAResourceClass PS4 : PC {
+  }
+  TGAResourceClass LINUX : PC {
+  }
+ }
+}

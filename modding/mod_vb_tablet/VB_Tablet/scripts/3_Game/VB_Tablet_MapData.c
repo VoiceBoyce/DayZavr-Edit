@@ -8,7 +8,7 @@ const float VB_MAP_WORLD_MAX = 40000;
 const float VB_MAP_RADIUS_MIN = 20;
 const float VB_MAP_RADIUS_MAX = 20000;
 const int VB_MAP_KEY_STEP = 10000000;	// ключ объекта: область * шаг + номер
-const int VB_MAP_VPP_ID = 9000000;		// серверные метки карты VPP: только чтение, номер = позиция в файле VPP
+const int VB_MAP_VPP_ID = 9000000;		// серверные метки карты VPP: только чтение, номер = номер метки в VPP минус 1
 
 enum VB_MapKind
 {
@@ -82,8 +82,8 @@ class VB_MapIcons
 		return all.Get(i);
 	}
 
-	// Вид метки VanillaPlusPlusMap по файлу её значка: имя файла без папки и расширения.
-	static string VppGroup(string path)
+	// Имя файла значка без папки и расширения, строчными.
+	protected static string VppFile(string path)
 	{
 		string p = path + "";
 		p.ToLower();
@@ -94,6 +94,71 @@ class VB_MapIcons
 		int dot = p.IndexOf(".");
 		if (dot >= 0)
 			p = p.Substring(0, dot);
+		return p;
+	}
+
+	// Значок карты INT_VppMap (форк VPP): «.../INT/Icons/int_vpp_ic_<id>_ca.paa» → id, иначе "".
+	static string VppIntId(string path)
+	{
+		string p = VppFile(path);
+		string head = "int_vpp_ic_";
+		string tail = "_ca";
+		int n = p.Length();
+		if (n <= head.Length() + tail.Length() || p.IndexOf(head) != 0)
+			return "";
+		if (p.Substring(n - tail.Length(), tail.Length()) != tail)
+			return "";
+		return p.Substring(head.Length(), n - head.Length() - tail.Length());
+	}
+
+	protected static ref map<string, string> s_IntMarks;
+	protected static ref map<string, string> s_IntGroups;
+
+	// 60 значков карты INT_VppMap: ближайший значок метки планшета и вид для подписи без названия.
+	protected static void IntTables()
+	{
+		if (s_IntMarks)
+			return;
+		s_IntMarks = new map<string, string>();
+		s_IntGroups = new map<string, string>();
+		array<string> ids = {"base", "flag", "tent", "campfire", "fence", "lock", "stash", "chest", "barrel", "backpack", "key", "wrench", "rifle", "pistol", "ammo", "scope", "grenade", "knife", "car", "truck", "boat", "heli", "bike", "fuel", "drop", "well", "fish", "apple", "mushroom", "can", "medkit", "cross", "pill", "syringe", "bandage", "heart", "warning", "skull", "radiation", "mine", "sniper", "fire", "zombie", "bio", "paw", "bear", "deer", "bird", "trader", "coin", "moneybag", "swap", "tag", "store", "rally", "star", "question", "eye", "tower", "parachute"};
+		array<string> marks = {"base", "flag", "base", "sym_flame", "base", "lock", "stash", "stash", "stash", "stash", "key", "hammer", "crosshair", "crosshair", "crosshair", "sym_target", "danger", "axe", "car", "car", "car", "car", "car", "sym_drop", "sym_drop", "sym_drop", "fish", "sym_tree", "sym_tree", "stash", "heart", "heart", "heart", "heart", "heart", "heart", "danger", "sym_skull", "radiation", "danger", "crosshair", "sym_flame", "zombie", "radiation", "sym_paw", "sym_paw", "sym_paw", "sym_paw", "star", "star", "star", "star", "star", "star", "rally", "star", "pin", "sym_tower", "sym_tower", "stash"};
+		array<string> groups = {"camp", "camp", "camp", "camp", "camp", "camp", "point", "point", "point", "point", "point", "point", "danger", "danger", "danger", "danger", "danger", "danger", "car", "car", "car", "car", "car", "fuel", "water", "water", "water", "point", "point", "point", "med", "med", "med", "med", "med", "med", "danger", "danger", "danger", "danger", "danger", "fire", "danger", "danger", "hunt", "hunt", "hunt", "hunt", "shop", "shop", "shop", "shop", "shop", "shop", "point", "point", "point", "tower", "tower", "drop"};
+		for (int i = 0; i < ids.Count(); i++)
+		{
+			s_IntMarks.Set(ids.Get(i), marks.Get(i));
+			s_IntGroups.Set(ids.Get(i), groups.Get(i));
+		}
+	}
+
+	// Значок планшета (индекс в Marks) для пути значка метки VPP: новые значки INT_VppMap и старые CustomMapIcons.
+	static int VppMark(string path)
+	{
+		string id = VppIntId(path);
+		if (id == "")
+			return VppIcon(VppGroup(path));
+		IntTables();
+		string name = "pin";
+		if (s_IntMarks.Contains(id))
+			name = s_IntMarks.Get(id);
+		int idx = Marks().Find(name);
+		if (idx < 0)
+			idx = 0;
+		return idx;
+	}
+
+	// Вид метки VPP по файлу её значка: подпись метки без названия («Медпункт», «Вышка»).
+	static string VppGroup(string path)
+	{
+		string id = VppIntId(path);
+		if (id != "")
+		{
+			IntTables();
+			if (s_IntGroups.Contains(id))
+				return s_IntGroups.Get(id);
+			return "point";
+		}
+		string p = VppFile(path);
 		if (p == "car" || p == "iconcar_ca" || p == "icontruck_ca")
 			return "car";
 		if (p == "fuelstation")

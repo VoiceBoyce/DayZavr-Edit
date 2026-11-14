@@ -1,5 +1,6 @@
-// VB_Tablet_VPP: связка планшета с картой VanillaPlusPlusMap. Отдельный PBO в папке @VB_Tablet\Addons.
-// Только для серверов, где стоит @VanillaPlusPlusMap: без неё игра не запустится и потребует этот аддон.
+// VB_Tablet_VPP: связка планшета с картой INT_VppMap (@INT_VppMap_CL, форк VanillaPlusPlusMap; аддон карты по-прежнему
+// VanillaPlusPlus). Отдельный PBO в папке @VB_Tablet\Addons. Только для серверов, где стоит эта карта: без неё игра не
+// запустится и потребует этот аддон. Со старой @VanillaPlusPlusMap не собирается (там нет классов INT).
 // Мод карты не меняется, всё через modded class.
 class CfgPatches
 {

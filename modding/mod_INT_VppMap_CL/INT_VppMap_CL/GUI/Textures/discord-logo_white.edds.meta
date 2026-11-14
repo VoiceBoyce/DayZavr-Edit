@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{8FA9297F8EA81E2F}VanillaPPMap/GUI/Textures/discord-logo_white.edds"
+ Author "daone-pc"
+ ChangeDate -220387498
+ Configurations {
+  PAAResourceClass PC {
+   SourceFile "discord-logo_white.paa"
+  }
+  PAAResourceClass XBOX_ONE : PC {
+  }
+  PAAResourceClass PS4 : PC {
+  }
+  PAAResourceClass LINUX : PC {
+  }
+ }
+}
