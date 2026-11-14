@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<modded_inputs>
+	<inputs>
+		<actions>
+			<input name="UAINTQuestsJournal" loc="STR_INT_QST_INPUT_JOURNAL" />
+			<input name="UAINTQuestsTracker" loc="STR_INT_QST_INPUT_TRACKER" />
+		</actions>
+		<!-- one common Settings -> Controls group for all DayZavr INT mods: the same sorting name and loc in every mod -->
+		<sorting name="intmods" loc="DAYZAVR INT MODS">
+			<input name="UAINTQuestsJournal" />
+			<input name="UAINTQuestsTracker" />
+		</sorting>
+	</inputs>
+	<preset>
+		<input name="UAINTQuestsJournal">
+			<btn name="kJ" />
+		</input>
+	</preset>
+</modded_inputs>

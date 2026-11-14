@@ -24,7 +24,7 @@ class VB_RiftEditor
 	static const float SCATTER_GAP = 2.5;		// м: не ближе к другим объектам гнезда
 	static const string GHOST_TEX = "#(argb,8,8,3)color(1,0.25,0.35,0.6,ca)";
 	static const string MARK_TEX = "#(argb,8,8,3)color(1,0.8,0.15,0.75,ca)";
-	static const string GHOST_MAT = "dz\\gear\\camping\\data\\barbed_wire_deployable.rvmat";
+	static const string GHOST_MAT = "\\dz\\gear\\camping\\data\\barbed_wire_deployable.rvmat";	// с «\»: E75
 
 	// что выключаем на время редактора: удары, действия, подъём оружия и прицеливание на ПКМ
 	// (ходьба, бег, колесо и смена вида остаются)

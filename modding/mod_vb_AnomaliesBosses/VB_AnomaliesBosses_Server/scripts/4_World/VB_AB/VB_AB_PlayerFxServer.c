@@ -156,6 +156,7 @@ class VB_AB_PlayerFx
 modded class PlayerBase
 {
 	static const float VB_AB_RAGE_BONUS = 0.5;		// удары разъярённого босса +50 %
+	float m_VB_AB_EmpNext;							// разряд EMP-аномалии не раньше этого времени (только сервер)
 
 	// Удар босса: ванильный удар зомби × MeleeMul из bosses.json, в Ярости ещё +50 %. Шок не усиливаем —
 	// иначе пара ударов Энта валит без сознания. У способностей свой урон (Damage), их не трогаем.

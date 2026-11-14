@@ -1,0 +1,14 @@
+MultilineEditBoxWidgetClass MEdit {
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ position 0 0
+ size 10 10
+ font "gui/fonts/sdf_MetronBook24"
+ text ""
+ "exact text" 1
+ "exact text size" 15
+ lines 12
+ "limit visible" 0
+}

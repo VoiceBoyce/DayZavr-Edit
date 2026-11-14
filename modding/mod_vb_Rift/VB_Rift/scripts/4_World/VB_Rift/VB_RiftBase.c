@@ -12,7 +12,9 @@ class VB_RiftBase extends House
 {
 	static const int LEVEL_IDLE = 1;		// уровень свечения, когда пульс стоит
 	static const int LEVEL_DAY = -2;		// день: сухие текстуры *_day_co, материалы *_day без свечения
-	static const string MAT_PATH = "VB_Rift\\data\\";
+	// путь с ведущим «\»: у бинаризованной модели материал по пути без него не грузится, и секция пропадает
+	// (корни и сердце становились невидимыми; проверено на стенде 2026-11-14, E75)
+	static const string MAT_PATH = "\\VB_Rift\\data\\";
 
 	float m_VB_Phase;						// сдвиг удара в цикле, с (корням его задаёт VB_RiftPulse)
 	float m_VB_Clock;						// свои «часы» пульса, с: идут быстрее, когда сердце рядом потревожено

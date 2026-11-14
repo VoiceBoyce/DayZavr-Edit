@@ -35,6 +35,7 @@ modding\mod_vb_MSFZ_Mifical_Pack\          общая папка мода
 ```powershell
 $pbo = "D:\DayZavr\DayZavr-Edit\.claude\skills\dayzavr-pbo\scripts\pbo.ps1"
 & $pbo build  <папка исходников>               # главная: исходники -> @Мод (lint, сборка, подпись, keys, проверка)
+& $pbo build  <папка исходников> -Binarize     # то же + модели .p3d MLOD -> ODOL (binarize.exe); ключ есть и у pack
 & $pbo lint   <папка или config.cpp>           # синтаксис всех config.cpp (Mikero Rapify)
 & $pbo unpack <файл.pbo> <папка>               # создаст <папка>\<prefix>\, config.bin -> config.cpp
 & $pbo unpack <файл.pbo> <папка> -Raw          # оставить config.bin как есть
@@ -51,11 +52,34 @@ $pbo = "D:\DayZavr\DayZavr-Edit\.claude\skills\dayzavr-pbo\scripts\pbo.ps1"
 
 1. **Lint**: Mikero `Rapify -L` по каждому `config.cpp`. При ошибке сборка останавливается, в сообщении номер строки.
 2. **Staging**: исходники копируются (robocopy) во `%TEMP%`, оригинал не меняется. `pbo.json` и `$PBOPREFIX$*` исключаются.
+2a. **Только с `-Binarize`**: модели MLOD → ODOL через `DayZ Tools\Bin\Binarize\binarize.exe`, бинарные копии заменяют `.p3d`
+   в staging (подробности и грабли — раздел «Бинаризация моделей» ниже).
 3. **CfgConvert** (DayZ Tools): `config.cpp` → `config.bin` в staging-копии.
 4. **FileBank** (DayZ Tools `Bin\PboUtils`): упаковка с `-property` из `pbo.json`
    (или `$PBOPREFIX$.txt`, или prefix = имя папки) и стандартным `exclude.lst`.
 5. Готовый PBO перемещается в `@Мод\Addons\`. При любой ошибке на шагах 1–4 рабочий PBO остаётся прежним.
 6. **DSSignFile** → `.bisign`, `DayZavrN.bikey` → `@Мод\keys\`, затем **DSCheckSignatures**.
+
+## Бинаризация моделей (`-Binarize`, проверено 2026-11-14 на VB_Rift)
+
+Зачем: MLOD-модели игра перегоняет сама при каждой загрузке клиента. VB_Rift: 47 моделей 88 → 13,6 МБ,
+PBO 121 → 41 МБ, binarize занимает ~10 с.
+
+- Бинаризатор ищет текстуры и материалы по путям `<prefix>\...` на диске `P:`, поэтому исходники должны быть видны
+  как `P:\<prefix>`. Скрипт сам создаёт ссылку-junction `P:\<prefix>` → папка исходников; если там уже что-то другое — ошибка,
+  разбираться вручную. Убрать ссылку: `cmd /c rmdir G:\DayZ_P\<prefix>` (удаляет только ссылку; через `P:\` Remove-Item запрещён).
+- Подпапки `binarize.exe` не обходит: скрипт запускает его на каждую папку с моделями.
+- Уже бинарные модели (ODOL, например правленые копии ванильных у VB_RiftSky) пропускаются: на них `binarize.exe` падает
+  с `-1073741819`. Тип модели — первые 4 байта файла (`MLOD`/`ODOL`).
+- Каждая модель проверяется: в выводе должен появиться свежий файл с `ODOL` в начале, иначе сборка падает со списком.
+- Пути внутри `%TEMP%` приходят то с 8.3-именем (`VOICEB~1`), то полным — скрипт приводит к полному (`Get-Item .FullName`),
+  иначе относительные пути считаются неверно (`DirIterator: wrong filespec`).
+- Шум в логе, не ошибка: `No entry '.CfgDefaultSettings'` и прочие `No entry` (бинаризатор без игрового конфига),
+  `Material not loaded: dz\data\data\penetration\flesh.rvmat` и другие ванильные материалы (в нашей распаковке `P:\` нет
+  их `.bisurf`), `Too detailed shadow lod ... shadows disabled` (тени у слишком детальной модели выключены — так было и в MLOD).
+- **После бинаризации проверять на стенде объекты, которым скрипт меняет материал** (E75): `.rvmat` по пути без ведущего `\`
+  у бинарной модели не грузится, и секция становится невидимой. Пути к материалам в `SetObjectMaterial` и
+  `hiddenSelectionsMaterials` писать с `\` в начале.
 
 ## Почему не MakePbo (важно)
 

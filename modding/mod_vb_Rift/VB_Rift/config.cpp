@@ -325,7 +325,7 @@ class CfgVehicles
 	// мертвенно-серая кожа в светящихся жилах, светящиеся красные глаза, одежда в тёмный бордовый.
 	// Появляются волной, когда игрок начинает вырезать сердце (VB_RiftHorde); можно спавнить и как обычных зомби.
 	// vbRiftZombie = 1 — скрипт VB_RiftZombie: при смерти гаснут (vbRiftDeadMaterial), лопаются спорами,
-	// с шансом оставляют «Корень Изнанки». Здоровье вдвое больше ванильного (VB_RIFT_ZMB_DAMAGE).
+	// с шансом оставляют «Корень Изнанки». Здоровье вчетверо больше ванильного (VB_RIFT_ZMB_DAMAGE, Баги №41).
 	class ZmbM_VillagerOld_Base;
 	class ZmbF_VillagerOld_Base;
 	class ZmbM_PrisonerSkinny_Base;
@@ -343,7 +343,7 @@ class CfgVehicles
 		vbRiftDeadMaterial = "VB_Rift\data\zombies\vb_rift_zmb_villager_m_dead.rvmat";
 		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_villager_m_co.paa"};
 		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_villager_m.rvmat"};
-		VB_RIFT_ZMB_DAMAGE(200,200,60)
+		VB_RIFT_ZMB_DAMAGE(400,400,120)
 	};
 	class VB_RiftZmbF_VillagerOld: ZmbF_VillagerOld_Base
 	{
@@ -352,7 +352,7 @@ class CfgVehicles
 		vbRiftDeadMaterial = "VB_Rift\data\zombies\vb_rift_zmb_villager_f_dead.rvmat";
 		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_villager_f_co.paa"};
 		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_villager_f.rvmat"};
-		VB_RIFT_ZMB_DAMAGE(200,200,60)
+		VB_RIFT_ZMB_DAMAGE(400,400,120)
 	};
 	class VB_RiftZmbM_Prisoner: ZmbM_PrisonerSkinny_Base
 	{
@@ -361,7 +361,7 @@ class CfgVehicles
 		vbRiftDeadMaterial = "VB_Rift\data\zombies\vb_rift_zmb_prisoner_dead.rvmat";
 		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_prisoner_co.paa"};
 		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_prisoner.rvmat"};
-		VB_RIFT_ZMB_DAMAGE(200,200,60)
+		VB_RIFT_ZMB_DAMAGE(400,400,120)
 	};
 	class VB_RiftZmbM_Jacket: ZmbM_Jacket_Base
 	{
@@ -370,7 +370,7 @@ class CfgVehicles
 		vbRiftDeadMaterial = "VB_Rift\data\zombies\vb_rift_zmb_jacket_dead.rvmat";
 		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_jacket_co.paa"};
 		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_jacket.rvmat"};
-		VB_RIFT_ZMB_DAMAGE(200,200,60)
+		VB_RIFT_ZMB_DAMAGE(400,400,120)
 	};
 	class VB_RiftZmbM_Hiker: ZmbM_HikerSkinny_Base
 	{
@@ -379,7 +379,7 @@ class CfgVehicles
 		vbRiftDeadMaterial = "VB_Rift\data\zombies\vb_rift_zmb_hiker_dead.rvmat";
 		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_hiker_co.paa"};
 		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_hiker.rvmat"};
-		VB_RIFT_ZMB_DAMAGE(200,200,60)
+		VB_RIFT_ZMB_DAMAGE(400,400,120)
 	};
 	class VB_RiftZmbM_Worker: ZmbM_HandymanNormal_Base
 	{
@@ -388,7 +388,7 @@ class CfgVehicles
 		vbRiftDeadMaterial = "VB_Rift\data\zombies\vb_rift_zmb_worker_dead.rvmat";
 		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_worker_co.paa"};
 		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_worker.rvmat"};
-		VB_RIFT_ZMB_DAMAGE(200,200,60)
+		VB_RIFT_ZMB_DAMAGE(400,400,120)
 	};
 	// моряк на солдатской базе: у ванильного солдата общее здоровье 115 -> 230
 	class VB_RiftZmbM_Sailor: ZmbM_usSoldier_normal_Base
@@ -398,7 +398,7 @@ class CfgVehicles
 		vbRiftDeadMaterial = "VB_Rift\data\zombies\vb_rift_zmb_sailor_dead.rvmat";
 		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_sailor_co.paa"};
 		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_sailor.rvmat"};
-		VB_RIFT_ZMB_DAMAGE(230,200,60)
+		VB_RIFT_ZMB_DAMAGE(460,400,120)
 	};
 	class VB_RiftZmbF_Patient: ZmbF_PatientOld_Base
 	{
@@ -407,7 +407,7 @@ class CfgVehicles
 		vbRiftDeadMaterial = "VB_Rift\data\zombies\vb_rift_zmb_patient_f_dead.rvmat";
 		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_patient_f_co.paa"};
 		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_patient_f.rvmat"};
-		VB_RIFT_ZMB_DAMAGE(200,200,60)
+		VB_RIFT_ZMB_DAMAGE(400,400,120)
 	};
 	class VB_RiftZmbF_Citizen: ZmbF_CitizenANormal_Base
 	{
@@ -416,7 +416,7 @@ class CfgVehicles
 		vbRiftDeadMaterial = "VB_Rift\data\zombies\vb_rift_zmb_citizen_f_dead.rvmat";
 		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_citizen_f_co.paa"};
 		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_citizen_f.rvmat"};
-		VB_RIFT_ZMB_DAMAGE(200,200,60)
+		VB_RIFT_ZMB_DAMAGE(400,400,120)
 	};
 	class VB_RiftZmbF_Doctor: ZmbF_DoctorSkinny_Base
 	{
@@ -425,7 +425,7 @@ class CfgVehicles
 		vbRiftDeadMaterial = "VB_Rift\data\zombies\vb_rift_zmb_doctor_f_dead.rvmat";
 		hiddenSelectionsTextures[] = {"VB_Rift\data\zombies\vb_rift_zmb_doctor_f_co.paa"};
 		hiddenSelectionsMaterials[] = {"VB_Rift\data\zombies\vb_rift_zmb_doctor_f.rvmat"};
-		VB_RIFT_ZMB_DAMAGE(200,200,60)
+		VB_RIFT_ZMB_DAMAGE(400,400,120)
 	};
 
 	// Выпадает из зомби Изнанки (VB_RiftZombie.ROOT_CHANCE) и отламывается ножом от корней гнезда ночью
@@ -637,8 +637,9 @@ class CfgVehicles
 		vbAlignToTerrain = 1;	// скрипт наклоняет объект по склону, если наклон не задан вручную
 		vbAlignRadius = 3.0;	// шаг сетки замера рельефа, м
 		hiddenSelections[] = {"crust", "veins"};
-		hiddenSelectionsTextures[] = {"VB_Rift\data\vb_rift_crust_co.paa", "VB_Rift\data\vb_rift_vein_co.paa"};
-		hiddenSelectionsMaterials[] = {"VB_Rift\data\vb_rift_crust.rvmat", "VB_Rift\data\vb_rift_vein.rvmat"};
+		// пути с ведущим «\»: у бинаризованной модели материал без него не грузится и секция не рисуется (E75)
+		hiddenSelectionsTextures[] = {"\VB_Rift\data\vb_rift_crust_co.paa", "\VB_Rift\data\vb_rift_vein_co.paa"};
+		hiddenSelectionsMaterials[] = {"\VB_Rift\data\vb_rift_crust.rvmat", "\VB_Rift\data\vb_rift_vein.rvmat"};
 	};
 
 	// Сердце: узел с корнями ~12 м, коллизия у узла, красный свет.

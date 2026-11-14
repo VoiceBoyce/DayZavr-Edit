@@ -11,6 +11,8 @@ modded class VB_AB_AnomalyBase
 	static const int ST_ACTIVE = 1;
 	static const int ST_RECHARGE = 2;
 	static const float HEAT_CAP = 45.0;			// потолок температуры у Жарки/Пара (у костра 25)
+	static const float EMP_DRAIN = 0.25;		// разряд снимает 25 % полного заряда источника
+	static const float EMP_COOLDOWN = 8.0;		// и не чаще раза в 8 с на игрока (общий для всех EMP рядом)
 
 	protected int m_VB_State;
 	protected float m_VB_DmgMult = 1;
@@ -266,22 +268,59 @@ modded class VB_AB_AnomalyBase
 		}
 	}
 
+	// Разряд (Баги №42, решение пользователя): только у ВКЛЮЧЁННЫХ приборов снимает EMP_DRAIN полного заряда
+	// их источника (батарейки), не чаще раза в EMP_COOLDOWN на игрока. Запасные батарейки и выключенное не трогает.
+	// Детекторы аномалий и батарейка в них неуязвимы — они для работы в поле. Раньше обнулялось всё с менеджером
+	// энергии по всему инвентарю каждое срабатывание, и детектор после боя было не включить.
 	protected void VB_Emp(EntityAI man)
 	{
+		PlayerBase pb = PlayerBase.Cast(man);
+		if (!pb)
+			return;
+		float now = GetGame().GetTickTime();
+		if (now < pb.m_VB_AB_EmpNext)
+			return;
+		pb.m_VB_AB_EmpNext = now + EMP_COOLDOWN;
 		array<EntityAI> items = new array<EntityAI>;
 		man.GetInventory().EnumerateInventory(InventoryTraversalType.PREORDER, items);
-		PlayerBase pb = PlayerBase.Cast(man);
-		if (pb && pb.GetItemInHands())
+		if (pb.GetItemInHands())
 			items.Insert(pb.GetItemInHands());
+		array<EntityAI> drained = new array<EntityAI>;	// один источник — один раз (руки могут попасть в список дважды)
 		foreach (EntityAI it : items)
 		{
-			if (it && it != man && it.HasEnergyManager())
+			if (!it || it == man || !it.HasEnergyManager() || !it.GetCompEM().IsWorking())
+				continue;
+			if (VB_IsDetector(it) || (it.GetHierarchyParent() && VB_IsDetector(it.GetHierarchyParent())))
+				continue;
+			ComponentEnergyManager em = it.GetCompEM();
+			EntityAI src = em.GetEnergySource();
+			if (src && src.HasEnergyManager())
 			{
-				if (it.GetCompEM().IsWorking())
-					it.GetCompEM().SwitchOff();
-				it.GetCompEM().SetEnergy(0);
+				if (VB_IsDetector(src))
+					continue;
+				em = src.GetCompEM();
 			}
+			else
+			{
+				src = it;
+			}
+			if (drained.Find(src) != -1)
+				continue;
+			drained.Insert(src);
+			float max = em.GetEnergyMax();
+			if (max > 0)
+				em.AddEnergy(-max * EMP_DRAIN);
+			if (VB_AB_Log.s_Debug)
+				VB_AB_Log.Dbg("EMP: " + it.GetType() + " у " + pb.GetCachedName() + " −" + (EMP_DRAIN * 100).ToString() + " % заряда " + src.GetType());
 		}
+	}
+
+	protected static bool VB_IsDetector(EntityAI e)
+	{
+		if (VB_AB_DetectorBase.Cast(e))
+			return true;
+		VB_AB_Cfg cfg = VB_AB_Cfg.Get();
+		return cfg && cfg.IsDetector(cfg.DetectorKey(e.GetType()));
 	}
 
 	protected void VB_CreateHeat()
