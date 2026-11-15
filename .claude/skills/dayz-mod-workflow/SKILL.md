@@ -393,6 +393,7 @@ Verified errors committed more than once. Check ACTIVELY during implementation. 
 - **E73** — UniversalTemperatureSource: ref держать в самой сущности, один на сущность (иначе висячий указатель в EntityAI)
 - **E74** — луч видимости RaycastRV: CollisionFlags.NONE и стеной считать только дома/постройки/деревья/камни
 - **E75** — бинарная модель: `.rvmat` скрытой секции по пути без ведущего `\` не грузится, секция невидима (сердце и корни Изнанки пропадали); пути к материалам — с `\`
+- **E76** — скриптовые NPC живут ~1 ч по CE lifetime и исчезают вдали от игроков: при создании SetLifetimeMax/SetLifetime 3888000
 
 ---
 

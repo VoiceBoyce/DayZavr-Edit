@@ -391,6 +391,7 @@ class InfectedBanditBase extends DayZInfected
 			// m_ConfigAttachments = {"Mag_AKM_30Rnd", "AK_WoodHndgrd", "AK_WoodBttstck"};
 
 			EquipWeapon(m_ConfigWeaponType, m_ConfigAttachments);
+			AIB_SetLifetime(AIB_LIFETIME_ALIVE);
 
 			// TStringArray waypoints = {"5237.821777 9.568775 2157.804199", "4887.835449 9.560701 2578.265625", "4917.622559 9.539299 2599.980469"};
 			// SetWaypoints(waypoints);
@@ -730,6 +731,11 @@ class InfectedBanditBase extends DayZInfected
 
 			int handBone = GetBoneIndexByName("righthand");
 			m_WeaponEntity = weaponEntity;
+			if (IsAlive())
+			{
+				m_WeaponEntity.SetLifetimeMax(AIB_LIFETIME_ALIVE);
+				m_WeaponEntity.SetLifetime(AIB_LIFETIME_ALIVE);
+			}
 			if (handBone != -1)
 			{
 				// weaponEntity.SetOrientation("0 -180 0") ;
@@ -1661,6 +1667,27 @@ class InfectedBanditBase extends DayZInfected
 	float m_DamageHitDirection = 0;
 	int m_DeathType = 0;
 
+	// Срок жизни в центральной экономике. Боты и их оружие созданы скриптом, и движок даёт им около часа:
+	// когда срок вышел и игроков ближе CleanupAvoidance нет, CE их удаляет. Поэтому через час после рестарта
+	// пропадали группы там, где игроки бывают редко (острова). Живому боту срок продлеваем, после смерти
+	// возвращаем обычный, чтобы труп и выпавшее оружие убирались.
+	protected const float AIB_LIFETIME_ALIVE = 3888000.0;	// 45 суток
+	protected const float AIB_LIFETIME_DEAD = 1800.0;		// 30 минут на лут
+
+	protected void AIB_SetLifetime(float seconds)
+	{
+		if (!GetGame().IsServer())
+			return;
+
+		SetLifetimeMax(seconds);
+		SetLifetime(seconds);
+		if (m_WeaponEntity)
+		{
+			m_WeaponEntity.SetLifetimeMax(seconds);
+			m_WeaponEntity.SetLifetime(seconds);
+		}
+	}
+
 	bool HandleDeath(int pCurrentCommandID)
 	{
 		if (pCurrentCommandID == DayZInfectedConstants.COMMANDID_DEATH)
@@ -1670,6 +1697,7 @@ class InfectedBanditBase extends DayZInfected
 
 		if (!IsAlive())
 		{
+			AIB_SetLifetime(AIB_LIFETIME_DEAD);
 
 			StartCommand_Death(m_DeathType, m_DamageHitDirection);
 			m_MovementSpeed = -1;
