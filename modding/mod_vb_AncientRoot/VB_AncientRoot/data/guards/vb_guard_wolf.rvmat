@@ -1,4 +1,4 @@
-// VB_Rift «Древний корень»: страж рощи — копия wolf_grey.rvmat + золотое свечение (Stage8)
+// VB_AncientRoot «Древний корень»: страж рощи — копия wolf_grey.rvmat + золотое свечение (Stage8)
 
 
 ambient[] = {1,1,1,1};
@@ -64,6 +64,6 @@ class Stage7
 };
 class Stage8
 {
-	texture = "VB_Rift\data\guards\vb_guard_wolf_e_co.paa";
+	texture = "VB_AncientRoot\data\guards\vb_guard_wolf_e_co.paa";
 	texGen = "0";
 };

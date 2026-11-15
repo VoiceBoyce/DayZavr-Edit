@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 """Золотые молнии «Древнего корня»: копии ванильных blesk1.p3d / blesk2.p3d с перекрашенным встроенным материалом.
 
-  python gen_ar_lightning.py          (пишет в ../VB_AncientRootSky; префикс PBO внутри — VB_RiftSky)
+  python gen_ar_lightning.py          (пишет в ../VB_AncientRootSky; префикс PBO внутри — VB_ARSky)
 Модели молний ванильные и скомпилированные (ODOL v56). Геометрия белая (#(argb...)color(1,1,1)),
 цвет даёт материал, встроенный в ODOL сразу после имени: uint32 версия, затем emmisive, ambient,
 diffuse, forcedDiffuse (по 4 float). Скрипт:
   1) меняет имя материала на путь той же длины в нашем PBO (dz\\data\\data\\blesk.rvmat ->
-     vb_riftsky\\d\\blesk.rvmat), длина файла и смещения не меняются;
+     vb_arsky\\mat\\blesk.rvmat — префикс VB_ARSky короткий ровно под это), длина файла и смещения не меняются;
   2) умножает RGB этих четырёх цветов на TINT;
-  3) кладёт рядом такие же красные rvmat — на случай, если движок грузит материал по имени.
-Итог: VB_AncientRootSky/data/vb_blesk1.p3d, vb_blesk2.p3d, VB_AncientRootSky/d/blesk.rvmat, blesk2.rvmat.
+  3) кладёт рядом такие же rvmat в цвете темы — на случай, если движок грузит материал по имени.
+Итог: VB_AncientRootSky/data/vb_blesk1.p3d, vb_blesk2.p3d, VB_AncientRootSky/mat/blesk.rvmat, blesk2.rvmat.
 """
 import os
 import struct
@@ -30,9 +30,9 @@ TINT = tuple(RT.theme()["palette"]["lightning_tint"])
 
 RENAME = {
     b"dz" + bytes([92]) + b"data" + bytes([92]) + b"data" + bytes([92]) + b"blesk.rvmat":
-        b"vb_riftsky" + bytes([92]) + b"d" + bytes([92]) + b"blesk.rvmat",
+        b"vb_arsky" + bytes([92]) + b"mat" + bytes([92]) + b"blesk.rvmat",
     b"dz" + bytes([92]) + b"data" + bytes([92]) + b"data" + bytes([92]) + b"blesk2.rvmat":
-        b"vb_riftsky" + bytes([92]) + b"d" + bytes([92]) + b"blesk2.rvmat",
+        b"vb_arsky" + bytes([92]) + b"mat" + bytes([92]) + b"blesk2.rvmat",
 }
 
 # исходные rvmat (P:\DZ\data\data\blesk*.rvmat): emmisive 3 / 1.3, ambient, diffuse, forcedDiffuse по 10
@@ -76,7 +76,7 @@ def patch(data):
 
 def main():
     os.makedirs(os.path.join(SKY_DIR, "data"), exist_ok=True)
-    os.makedirs(os.path.join(SKY_DIR, "d"), exist_ok=True)
+    os.makedirs(os.path.join(SKY_DIR, "mat"), exist_ok=True)
     for name in ("blesk1", "blesk2"):
         src = open(SRC_DIR + name + ".p3d", "rb").read()
         out, hits = patch(src)
@@ -85,7 +85,7 @@ def main():
         open(dst, "wb").write(out)
         print("MODEL", dst, len(out), "материалов перекрашено:", hits)
     for name, e in (("blesk", 3.0), ("blesk2", 1.3)):
-        p = os.path.join(SKY_DIR, "d", name + ".rvmat")
+        p = os.path.join(SKY_DIR, "mat", name + ".rvmat")
         with open(p, "w", encoding="utf-8", newline="\r\n") as f:
             f.write(RVMAT % {"a": rgb(10.0), "e": rgb(e)})
         print("RVMAT", p)

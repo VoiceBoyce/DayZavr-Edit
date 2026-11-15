@@ -1,0 +1,91 @@
+FrameWidgetClass VB_AR_FavorRoot {
+ visible 0
+ ignorepointer 1
+ position 14 114
+ size 120 76
+ halign right_ref
+ valign bottom_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ {
+  ImageWidgetClass VB_AR_FavorGlow {
+   visible 0
+   ignorepointer 1
+   position 0 -12
+   size 76 76
+   halign center_ref
+   valign top_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   mode blend
+   "src alpha" 1
+   stretch 1
+  }
+  ImageWidgetClass VB_AR_FavorDisc {
+   visible 1
+   ignorepointer 1
+   position 0 4
+   size 44 44
+   halign center_ref
+   valign top_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   mode blend
+   "src alpha" 1
+   stretch 1
+  }
+  ImageWidgetClass VB_AR_FavorRune {
+   visible 1
+   ignorepointer 1
+   position 0 4
+   size 44 44
+   halign center_ref
+   valign top_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   mode blend
+   "src alpha" 1
+   stretch 1
+  }
+  TextWidgetClass VB_AR_FavorName {
+   visible 1
+   ignorepointer 1
+   position 0 50
+   size 120 20
+   halign center_ref
+   valign top_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   "exact text size" 15
+   "text halign" center
+   "text valign" center
+  }
+  TextWidgetClass VB_AR_FavorDelta {
+   visible 0
+   ignorepointer 1
+   position 84 8
+   size 48 20
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   "exact text size" 17
+   "text halign" left
+   "text valign" center
+  }
+ }
+}

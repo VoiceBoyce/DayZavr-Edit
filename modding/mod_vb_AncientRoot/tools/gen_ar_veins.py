@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Генератор корней и коры рощ «Древнего корня»: модели .p3d, текстуры .paa, материалы .rvmat.
-Копия генератора Изнанки (gen_rift_veins.py) на момент выделения мода 2026-11-15, цвета — ar_theme.py
+Копия генератора Изнанки (gen_ar_veins.py) на момент выделения мода 2026-11-15, цвета — ar_theme.py
 (кора, мох, золотые трещины), вывод — ../VB_AncientRoot/data.
 
 Запуск (Python из Blender, в нём есть numpy):
@@ -43,7 +43,7 @@ def C(key):
     return np.asarray(PAL[key], float)
 
 BS = chr(92)
-PREFIX = "VB_Rift" + BS + "data" + BS
+PREFIX = "VB_AncientRoot" + BS + "data" + BS
 IMAGE_TO_PAA = os.path.join("D:" + BS, "SteamLibrary", "steamapps", "common", "DayZ Tools",
                             "Bin", "ImageToPAA", "ImageToPAA.exe")
 PENETRATION = BS.join(["dz", "data", "data", "penetration", "flesh.rvmat"])
@@ -55,7 +55,7 @@ VEIN_EMISSIVE = [2.5, 5.0, 9.0, 15.0]
 # Флаг точки MLOD «Keep height» (POINT_KEEPLAND, 0x8) НЕ ставить: на моделях в тысячи вершин клиент DayZDiag
 # 1.30 падает с 0xc0000374 (heap corruption) через секунды после появления объекта — проверено 2026-11-11,
 # и с пульсом, и на голом HouseNoDestruct без скрипта. В VanillaRoadPartsPack флаг 0x1 стоит на моделях из 4 вершин.
-# По склону объекты наклоняет скрипт (VB_RiftBase.VB_AlignToTerrain).
+# По склону объекты наклоняет скрипт (VB_AR_Base.VB_AlignToTerrain).
 POINT_KEEPLAND = 0x8
 CUT_STEP = 0.8      # шаг выборки вдоль корней и трещин для срезателей травы cut_N, м
 CUT_GAP = 1.4        # не ставить срезатель 2x2 ближе этого к уже поставленному, м
@@ -63,14 +63,14 @@ CUT_CENTER = 2.6     # ближе к центру траву режет один
 BASE_LEVEL = 1
 
 MATS = {
-    "crust": {"tex": PREFIX + "vb_rift_crust_co.paa", "mat": PREFIX + "vb_rift_crust.rvmat", "sel": "crust"},
-    "vein": {"tex": PREFIX + "vb_rift_vein_co.paa", "mat": PREFIX + "vb_rift_vein.rvmat", "sel": "veins"},
+    "crust": {"tex": PREFIX + "vb_ar_crust_co.paa", "mat": PREFIX + "vb_ar_crust.rvmat", "sel": "crust"},
+    "vein": {"tex": PREFIX + "vb_ar_vein_co.paa", "mat": PREFIX + "vb_ar_vein.rvmat", "sel": "veins"},
 }
 # материалы предметов-изделий (без пульса): текстуры и rvmat делает make_prop_textures (--props-tex)
 PROP_MATS = ["wood", "cloth", "plastic", "metal", "bone", "glass", "liquid", "bladesteel", "burlap", "sporecloth", "bark"]
 for _m in PROP_MATS:
-    _tex = PREFIX + "vb_rift_p_%s_%s.paa" % (_m, "ca" if _m == "glass" else "co")
-    MATS[_m] = {"tex": _tex, "mat": PREFIX + "vb_rift_p_%s.rvmat" % _m, "sel": "p_" + _m}
+    _tex = PREFIX + "vb_ar_p_%s_%s.paa" % (_m, "ca" if _m == "glass" else "co")
+    MATS[_m] = {"tex": _tex, "mat": PREFIX + "vb_ar_p_%s.rvmat" % _m, "sel": "p_" + _m}
 # стекло берём ванильное медицинское: Super + noZWrite и своя альфа-текстура (своё _ca рисовалось матовым)
 MATS["glass"]["tex"] = BS.join(["dz", "gear", "medical", "data", "glass_CA.paa"])
 MATS["glass"]["mat"] = BS.join(["dz", "gear", "medical", "data", "glass.rvmat"])
@@ -407,7 +407,7 @@ def build_roots_scene(seed, kind):
             add_root_family(rng, tubes, tips, o, hd, rng.uniform(1.4, 2.6), rng.uniform(0.06, 0.09), "ground",
                             sb + i * 7, n_branches=0)
         broken = 3
-    elif kind == "cracks":      # (не используется: старые VB_RiftCracks заменены трещинами gen_rift_fissures.py)
+    elif kind == "cracks":      # (не используется: старые VB_AR_Cracks заменены трещинами gen_ar_fissures.py)
         for c in range(int(rng.integers(2, 4))):
             st = np.array([rng.normal(0, 0.6), rng.normal(0, 0.6), 0.0])
             for _ in range(int(rng.integers(3, 5))):
@@ -703,28 +703,28 @@ def make_prop_textures(png_dir):
 
     nz = _tileable(n, rng, 1.6)
     grain = np.sin((xx * 3 + nz * 0.08) * 2 * math.pi * 9) * 0.5 + 0.5
-    save("vb_rift_p_wood_co", col(PAL["p_wood"], 0.75 + 0.25 * grain + 0.06 * nz))
+    save("vb_ar_p_wood_co", col(PAL["p_wood"], 0.75 + 0.25 * grain + 0.06 * nz))
     weave = (np.sin(xx * 2 * math.pi * 48) * np.sin(yy * 2 * math.pi * 48)) * 0.5 + 0.5
     dirt = _tileable(n, rng, 2.2)
-    save("vb_rift_p_cloth_co", col(PAL["p_cloth"], 0.82 + 0.1 * weave + 0.1 * dirt))
+    save("vb_ar_p_cloth_co", col(PAL["p_cloth"], 0.82 + 0.1 * weave + 0.1 * dirt))
     # корпус аккумулятора и запал ловушки: бурый, как перекраски Изнанки (решение пользователя 11-12)
-    save("vb_rift_p_plastic_co", col(PAL["p_plastic"], 0.9 + 0.12 * _tileable(n, rng, 2.5)))
+    save("vb_ar_p_plastic_co", col(PAL["p_plastic"], 0.9 + 0.12 * _tileable(n, rng, 2.5)))
     brushed = _tileable(n, rng, 1.2)
     brushed = np.roll(np.repeat(brushed[:, :1], n, axis=1), 0, axis=0) * 0.5 + _tileable(n, rng, 2.4) * 0.15
-    save("vb_rift_p_metal_co", col(PAL["p_metal"], 0.9 + 0.12 * brushed))
+    save("vb_ar_p_metal_co", col(PAL["p_metal"], 0.9 + 0.12 * brushed))
     pores = (_tileable(n, rng, 0.8) > 1.6).astype(float)
-    save("vb_rift_p_bone_co", col(PAL["p_bone"], 0.95 + 0.06 * _tileable(n, rng, 2.0) - 0.25 * pores))
-    save("vb_rift_p_glass_ca", col(PAL["p_glass"], np.ones((n, n))), np.full((n, n), 0.28))
+    save("vb_ar_p_bone_co", col(PAL["p_bone"], 0.95 + 0.06 * _tileable(n, rng, 2.0) - 0.25 * pores))
+    save("vb_ar_p_glass_ca", col(PAL["p_glass"], np.ones((n, n))), np.full((n, n), 0.28))
     swirl = _tileable(n, rng, 1.8)
-    save("vb_rift_p_liquid_co", col(PAL["p_liquid"], 0.8 + 0.25 * swirl))
+    save("vb_ar_p_liquid_co", col(PAL["p_liquid"], 0.8 + 0.25 * swirl))
     # сталь «Голодного клинка»: бурая, по ней сеть светящихся жил (+ маска свечения)
     r1 = _tileable(n, rng, 2.4)
     r2 = _tileable(n, rng, 2.8)
     m = np.clip(np.exp(-(r1 / 0.09) ** 2) + 0.6 * np.exp(-(r2 / 0.07) ** 2), 0, 1)
     steel = col(PAL["p_steel"], 0.85 + 0.15 * _tileable(n, rng, 2.0))
     vein = np.asarray(PAL["p_blade_vein"])[None, None, :]
-    save("vb_rift_p_bladesteel_co", steel * (1 - m[..., None]) + vein * m[..., None])
-    save("vb_rift_p_bladesteel_e_co", vein * m[..., None])
+    save("vb_ar_p_bladesteel_co", steel * (1 - m[..., None]) + vein * m[..., None])
+    save("vb_ar_p_bladesteel_e_co", vein * m[..., None])
     # мешковина «Спор Изнанки»: грубое плетение, нитки неровной толщины, бурые пятна
     nx = _tileable(n, rng, 2.6)
     tx = np.sin(xx * 2 * math.pi * 40 + nx * 0.5) * 0.5 + 0.5
@@ -732,15 +732,15 @@ def make_prop_textures(png_dir):
     coarse = np.where((np.floor(xx * 40) + np.floor(yy * 40)) % 2 == 0, tx, ty)
     stain = _tileable(n, rng, 2.0)
     burlap = col(PAL["p_burlap"], 0.66 + 0.26 * coarse + 0.08 * stain)
-    save("vb_rift_p_burlap_co", burlap)
+    save("vb_ar_p_burlap_co", burlap)
     # мешковина, пропитанная спорами: светящиеся пятна и точки проступают сквозь плетение (+ маска свечения)
     sp = _tileable(n, rng, 1.6)
     sp2 = _tileable(n, rng, 0.6)
     spots = np.clip((sp - 1.9) * 2.5, 0, 1) + np.clip((sp2 - 2.3) * 3.0, 0, 1)
     spots = np.clip(spots * (0.55 + 0.45 * coarse), 0, 1)
     glow = np.asarray(PAL["p_spore_glow"])[None, None, :]
-    save("vb_rift_p_sporecloth_co", burlap * (1 - spots[..., None]) + glow * spots[..., None])
-    save("vb_rift_p_sporecloth_e_co", glow * spots[..., None])
+    save("vb_ar_p_sporecloth_co", burlap * (1 - spots[..., None]) + glow * spots[..., None])
+    save("vb_ar_p_sporecloth_e_co", glow * spots[..., None])
     # кора корней на предметах (аккумулятор): бурая, продольные борозды вдоль корня (v — вдоль трубки), без свечения
     low = _tileable(n, rng, 2.4)
     ridge = np.sin(xx * 2 * math.pi * 7 + low * 1.2) * 0.5 + 0.5
@@ -751,7 +751,7 @@ def make_prop_textures(png_dir):
         mrng = np.random.default_rng(4242 + 77)
         mm = np.clip((_tileable(n, mrng, 1.7) - 0.2) * 1.3, 0, 1) * (1 - ridge) ** 0.7
         bark = bark * (1 - mm[..., None]) + col(PAL["p_bark_moss"], 0.8 + 0.3 * _tileable(n, mrng, 0.9)) * mm[..., None]
-    save("vb_rift_p_bark_co", bark)
+    save("vb_ar_p_bark_co", bark)
     return out
 
 
@@ -766,14 +766,14 @@ def write_prop_materials():
         "metal": (0.0, "#(argb,8,8,3)color(1,0.8,0.9,1,SMDI)", black, 0.8, 120),
         "bone": (0.0, "#(argb,8,8,3)color(0.5,0.3,0.4,1,SMDI)", black, 0.2, 30),
         "glass": (0.0, "#(argb,8,8,3)color(1,1,1,1,SMDI)", black, 1.0, 200),
-        "liquid": (1.6, "#(argb,8,8,3)color(1,0.6,0.7,1,SMDI)", PREFIX + "vb_rift_p_liquid_co.paa", 0.6, 90),
+        "liquid": (1.6, "#(argb,8,8,3)color(1,0.6,0.7,1,SMDI)", PREFIX + "vb_ar_p_liquid_co.paa", 0.6, 90),
         "bark": (0.0, "#(argb,8,8,3)color(0.2,0.15,0.2,1,SMDI)", black, 0.06, 12),
         "burlap": (0.0, "#(argb,8,8,3)color(0.15,0.1,0.15,1,SMDI)", black, 0.04, 8),
-        "sporecloth": (1.5, "#(argb,8,8,3)color(0.15,0.1,0.15,1,SMDI)", PREFIX + "vb_rift_p_sporecloth_e_co.paa", 0.04, 8),
-        "bladesteel": (1.4, "#(argb,8,8,3)color(1,0.6,0.8,1,SMDI)", PREFIX + "vb_rift_p_bladesteel_e_co.paa", 0.7, 110),
+        "sporecloth": (1.5, "#(argb,8,8,3)color(0.15,0.1,0.15,1,SMDI)", PREFIX + "vb_ar_p_sporecloth_e_co.paa", 0.04, 8),
+        "bladesteel": (1.4, "#(argb,8,8,3)color(1,0.6,0.8,1,SMDI)", PREFIX + "vb_ar_p_bladesteel_e_co.paa", 0.7, 110),
     }
     for m, (e, smdi, etex, spec, power) in cfg.items():
-        with open(os.path.join(DATA_DIR, "vb_rift_p_%s.rvmat" % m), "w", encoding="utf-8", newline="\r\n") as f:
+        with open(os.path.join(DATA_DIR, "vb_ar_p_%s.rvmat" % m), "w", encoding="utf-8", newline="\r\n") as f:
             f.write(rvmat(e, flat_n, smdi, etex, spec, power, fres))
 
 
@@ -1985,11 +1985,11 @@ def make_textures(png_dir):
         co = co * (1 - moss[..., None]) + C("moss_night") * (1 + 0.3 * np.tanh(hi))[..., None] * moss[..., None]
     co = co * (1 - halo[..., None]) + C("crust_halo") * halo[..., None]
     co = co * (1 - glow[..., None]) + C("crust_glow") * glow[..., None]
-    tex["vb_rift_crust_co"] = to_u8(co)
+    tex["vb_ar_crust_co"] = to_u8(co)
     # маска свечения коры
     e = C("crust_e_glow") * glow[..., None] + C("crust_e_hot") * (glow ** 6)[..., None]
     e += C("crust_e_halo") * halo[..., None] * 0.5
-    tex["vb_rift_crust_e_co"] = to_u8(e)
+    tex["vb_ar_crust_e_co"] = to_u8(e)
     # нормали коры: трещины — бороздки
     h = 0.55 * base + 0.2 * hi - 1.4 * blur(glow, 1.5)
     gx = (np.roll(h, -1, 1) - np.roll(h, 1, 1)) * 0.5
@@ -1998,16 +1998,16 @@ def make_textures(png_dir):
     nx, ny, nz = -gx * k, -gy * k, np.ones_like(h)
     ln = np.sqrt(nx * nx + ny * ny + nz * nz)
     nrm = np.stack([nx / ln, ny / ln, nz / ln], -1) * 0.5 + 0.5
-    tex["vb_rift_crust_nohq"] = to_u8(nrm)
+    tex["vb_ar_crust_nohq"] = to_u8(nrm)
     # жила: тёмно-красная, светится неровно, с яркими узлами
     m = 256
     vb = spectral(m, rng, beta=1.2)
     knots = np.clip(spectral(m, rng, f0=3, bw=1.0), 0, None)
     vco = C("vein_co") * (0.75 + 0.25 * np.tanh(vb))[..., None]
-    tex["vb_rift_vein_co"] = to_u8(vco)
+    tex["vb_ar_vein_co"] = to_u8(vco)
     ve = C("vein_e") * (0.6 + 0.3 * np.tanh(vb))[..., None]
     ve += C("vein_e_knot") * np.clip(knots - 0.6, 0, 1)[..., None]
-    tex["vb_rift_vein_e_co"] = to_u8(ve)
+    tex["vb_ar_vein_e_co"] = to_u8(ve)
     # день: гнездо «спит» — сухая серо-бурая кора, трещины тёмные, жилы тусклые (в теме — ещё зелёный мох)
     day1 = C("day1")
     day2 = C("day2")
@@ -2017,9 +2017,9 @@ def make_textures(png_dir):
         dco = dco * (1 - moss[..., None]) + C("moss_day") * (1 + 0.35 * np.tanh(hi))[..., None] * moss[..., None]
     dco = dco * (1 - 0.6 * halo[..., None]) + C("day_halo") * 0.6 * halo[..., None]
     dco = dco * (1 - glow[..., None]) + C("day_glow") * glow[..., None]
-    tex["vb_rift_crust_day_co"] = to_u8(dco)
+    tex["vb_ar_crust_day_co"] = to_u8(dco)
     vday = C("vein_day") * (0.8 + 0.2 * np.tanh(vb))[..., None]
-    tex["vb_rift_vein_day_co"] = to_u8(vday)
+    tex["vb_ar_vein_day_co"] = to_u8(vday)
     os.makedirs(png_dir, exist_ok=True)
     out = []
     for name, arr in tex.items():
@@ -2061,11 +2061,11 @@ def rvmat(emissive, nohq, smdi, e_tex, spec, spec_power, fresnel):
 
 
 def write_materials():
-    crust = dict(nohq=PREFIX + "vb_rift_crust_nohq.paa", smdi="#(argb,8,8,3)color(1,0.35,0.45,1,SMDI)",
-                 e_tex=PREFIX + "vb_rift_crust_e_co.paa", spec=0.35, spec_power=60, fresnel="#(ai,64,64,1)fresnel(1.3,0.3)")
+    crust = dict(nohq=PREFIX + "vb_ar_crust_nohq.paa", smdi="#(argb,8,8,3)color(1,0.35,0.45,1,SMDI)",
+                 e_tex=PREFIX + "vb_ar_crust_e_co.paa", spec=0.35, spec_power=60, fresnel="#(ai,64,64,1)fresnel(1.3,0.3)")
     vein = dict(nohq="#(argb,8,8,3)color(0.5,0.5,1,1,NOHQ)", smdi="#(argb,8,8,3)color(1,0.5,0.6,1,SMDI)",
-                e_tex=PREFIX + "vb_rift_vein_e_co.paa", spec=0.5, spec_power=90, fresnel="#(ai,64,64,1)fresnel(1.3,0.3)")
-    for name, cfg, levels in (("vb_rift_crust", crust, CRUST_EMISSIVE), ("vb_rift_vein", vein, VEIN_EMISSIVE)):
+                e_tex=PREFIX + "vb_ar_vein_e_co.paa", spec=0.5, spec_power=90, fresnel="#(ai,64,64,1)fresnel(1.3,0.3)")
+    for name, cfg, levels in (("vb_ar_crust", crust, CRUST_EMISSIVE), ("vb_ar_vein", vein, VEIN_EMISSIVE)):
         for i, e in enumerate(levels):
             with open(os.path.join(DATA_DIR, "%s_%d.rvmat" % (name, i)), "w", encoding="utf-8", newline="\r\n") as f:
                 f.write(rvmat(e, **cfg))
@@ -2079,66 +2079,66 @@ def write_materials():
             f.write(rvmat(0.0, **day))
 
 
-# модель -> (вид, зерно). Класс в config.cpp: VB_RiftHeart, VB_RiftRoots_<Вид><N>.
-# Трещин в земле в моде нет: старые VB_RiftCracks и плоские VB_RiftFissure убраны по решению пользователя 2026-11-11.
+# модель -> (вид, зерно). Класс в config.cpp: VB_AR_Heart, VB_AR_Roots_<Вид><N>.
+# Трещин в земле в моде нет: старые VB_AR_Cracks и плоские VB_AR_Fissure убраны по решению пользователя 2026-11-11.
 VARIANTS = [
-    ("vb_rift_heart", "heart", SEED),
-    ("vb_rift_roots_crawl1", "crawl", 101),
-    ("vb_rift_roots_crawl2", "crawl", 102),
-    ("vb_rift_roots_fork1", "fork", 201),
-    ("vb_rift_roots_cluster1", "cluster", 301),
-    ("vb_rift_roots_cluster2", "cluster", 302),
-    ("vb_rift_roots_arch1", "arch", 401),
-    ("vb_rift_roots_arch2", "arch", 402),
-    ("vb_rift_roots_small1", "small", 501),
-    ("vb_rift_roots_small2", "small", 502),
+    ("vb_ar_heart", "heart", SEED),
+    ("vb_ar_roots_crawl1", "crawl", 101),
+    ("vb_ar_roots_crawl2", "crawl", 102),
+    ("vb_ar_roots_fork1", "fork", 201),
+    ("vb_ar_roots_cluster1", "cluster", 301),
+    ("vb_ar_roots_cluster2", "cluster", 302),
+    ("vb_ar_roots_arch1", "arch", 401),
+    ("vb_ar_roots_arch2", "arch", 402),
+    ("vb_ar_roots_small1", "small", 501),
+    ("vb_ar_roots_small2", "small", 502),
     # ещё варианты для разнообразия (2026-11-11)
-    ("vb_rift_roots_crawl3", "crawl", 103),
-    ("vb_rift_roots_fork2", "fork", 202),
-    ("vb_rift_roots_cluster3", "cluster", 303),
-    ("vb_rift_roots_small3", "small", 503),
+    ("vb_ar_roots_crawl3", "crawl", 103),
+    ("vb_ar_roots_fork2", "fork", 202),
+    ("vb_ar_roots_cluster3", "cluster", 303),
+    ("vb_ar_roots_small3", "small", 503),
     # обвивки стволов: число в имени — радиус ствола в сантиметрах (скрипт сердца выбирает ближайший больший)
-    ("vb_rift_wrap_10", "wrap:0.10", 701),
-    ("vb_rift_wrap_15", "wrap:0.15", 702),
-    ("vb_rift_wrap_20", "wrap:0.20", 703),
-    ("vb_rift_wrap_27", "wrap:0.27", 704),
-    ("vb_rift_wrap_35", "wrap:0.35", 705),
-    ("vb_rift_wrap_45", "wrap:0.45", 706),
+    ("vb_ar_wrap_10", "wrap:0.10", 701),
+    ("vb_ar_wrap_15", "wrap:0.15", 702),
+    ("vb_ar_wrap_20", "wrap:0.20", 703),
+    ("vb_ar_wrap_27", "wrap:0.27", 704),
+    ("vb_ar_wrap_35", "wrap:0.35", 705),
+    ("vb_ar_wrap_45", "wrap:0.45", 706),
     # свисающие щупальца
-    ("vb_rift_hang_short1", "hang:short", 801),
-    ("vb_rift_hang_short2", "hang:short", 802),
-    ("vb_rift_hang_long1", "hang:long", 803),
-    ("vb_rift_hang_long2", "hang:long", 804),
-    ("vb_rift_hang_drape1", "hang:drape", 805),
+    ("vb_ar_hang_short1", "hang:short", 801),
+    ("vb_ar_hang_short2", "hang:short", 802),
+    ("vb_ar_hang_long1", "hang:long", 803),
+    ("vb_ar_hang_long2", "hang:long", 804),
+    ("vb_ar_hang_drape1", "hang:drape", 805),
     # корни по стенам домов (ставит скрипт сердца на дома рядом): низкие, высокие, широкие
-    ("vb_rift_wall_low1", "wall:low", 1001),
-    ("vb_rift_wall_low2", "wall:low", 1002),
-    ("vb_rift_wall_tall1", "wall:tall", 1003),
-    ("vb_rift_wall_wide1", "wall:wide", 1004),
-    ("vb_rift_wall_low3", "wall:low", 1005),
-    ("vb_rift_wall_tall2", "wall:tall", 1006),
-    ("vb_rift_wall_wide2", "wall:wide", 1007),
+    ("vb_ar_wall_low1", "wall:low", 1001),
+    ("vb_ar_wall_low2", "wall:low", 1002),
+    ("vb_ar_wall_tall1", "wall:tall", 1003),
+    ("vb_ar_wall_wide1", "wall:wide", 1004),
+    ("vb_ar_wall_low3", "wall:low", 1005),
+    ("vb_ar_wall_tall2", "wall:tall", 1006),
+    ("vb_ar_wall_wide2", "wall:wide", 1007),
     # корни на наружном углу дома: переваливают через ребро на обе стены
-    ("vb_rift_wall_corner1", "corner", 1101),
-    ("vb_rift_wall_corner2", "corner", 1102),
-    ("vb_rift_wall_corner3", "corner", 1103),
+    ("vb_ar_wall_corner1", "corner", 1101),
+    ("vb_ar_wall_corner2", "corner", 1102),
+    ("vb_ar_wall_corner3", "corner", 1103),
     # предмет «Сердце Изнанки» (выпадает при вырезании сердца)
-    ("vb_rift_heart_chunk", "chunk", 901),
+    ("vb_ar_heart_chunk", "chunk", 901),
     # предмет «Корень Изнанки» (иногда выпадает из зомби Изнанки)
-    ("vb_rift_root_piece", "rootpiece", 902),
+    ("vb_ar_root_piece", "rootpiece", 902),
     # предметы-материалы: «Споры Изнанки» (собирают у сердца) и «Жила Изнанки» (разделывают корень)
-    ("vb_rift_spores_item", "sporesack", 903),
-    ("vb_rift_vein_item", "veinskein", 904),
+    ("vb_ar_spores_item", "sporesack", 903),
+    ("vb_ar_vein_item", "veinskein", 904),
     # предметы-изделия: «Слушающий корень», «Сердце-аккумулятор», «Споровая ловушка», «Топливная капсула»,
     # «Фонарь-сердце», «Живой жгут», «Нить Изнанки»
-    ("vb_rift_listen_root", "listenroot", 905),
-    ("vb_rift_spore_trap", "trapgrenade", 907),
-    ("vb_rift_lantern", "lantern", 909),
-    ("vb_rift_tourniquet", "strap", 910),
-    ("vb_rift_thread", "spool", 911),
-    ("vb_rift_blood_ampoule", "ampoule", 912),
-    ("vb_rift_blade", "bladefull", 913),
-    ("vb_rift_heart_battery", "batteryfull", 914),
+    ("vb_ar_listen_root", "listenroot", 905),
+    ("vb_ar_spore_trap", "trapgrenade", 907),
+    ("vb_ar_lantern", "lantern", 909),
+    ("vb_ar_tourniquet", "strap", 910),
+    ("vb_ar_thread", "spool", 911),
+    ("vb_ar_blood_ampoule", "ampoule", 912),
+    ("vb_ar_blade", "bladefull", 913),
+    ("vb_ar_heart_battery", "batteryfull", 914),
 ]
 
 
@@ -2198,26 +2198,26 @@ def variant_scene(kind, seed, name=""):
 
 def write_model_cfg():
     """model.cfg: crust и veins отдельными секциями, иначе SetObjectTexture/SetObjectMaterial не работают."""
-    s = "// VB_Rift: сгенерировано gen_rift_veins.py. Секции нужны для смены материалов (пульс, день/ночь).\n"
+    s = "// VB_AncientRoot: сгенерировано gen_ar_veins.py. Секции нужны для смены материалов (пульс, день/ночь).\n"
     s += "class CfgSkeletons\n{\n\tclass Default\n\t{\n\t\tisDiscrete = 1;\n\t\tskeletonInherit = \"\";\n\t\tskeletonBones[] = {};\n\t};\n};\n"
     s += "class CfgModels\n{\n\tclass Default\n\t{\n\t\tsectionsInherit = \"\";\n\t\tsections[] = {};\n\t\tskeletonName = \"\";\n\t};\n"
-    s += "\tclass vb_rift_base: Default\n\t{\n\t\tsections[] = {\"crust\", \"veins\"};\n\t};\n"
+    s += "\tclass vb_ar_base: Default\n\t{\n\t\tsections[] = {\"crust\", \"veins\"};\n\t};\n"
     for name, _, _ in VARIANTS:
-        s += "\tclass %s: vb_rift_base {};\n" % name
+        s += "\tclass %s: vb_ar_base {};\n" % name
     s += "};\n"
     with open(os.path.join(DATA_DIR, "model.cfg"), "w", encoding="utf-8", newline="\r\n") as f:
         f.write(s)
 
 
 def main():
-    """gen_rift_veins.py <папка_для_png> [--only=имя1,имя2]: --only собирает только эти модели
+    """gen_ar_veins.py <папка_для_png> [--only=имя1,имя2]: --only собирает только эти модели
     (подстрока имени), model.cfg пишет целиком, текстуры и материалы не трогает."""
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     only = [o for a in sys.argv if a.startswith("--only=") for o in a.split("=", 1)[1].split(",") if o]
     png_dir = args[0] if args else os.path.join(HERE, "_png")
     os.makedirs(DATA_DIR, exist_ok=True)
     if "--tex-only" in sys.argv:
-        # только текстуры и материалы (построитель темы: модели общие, берутся из VB_Rift)
+        # только текстуры и материалы (построитель темы: модели общие, берутся из VB_AncientRoot)
         os.makedirs(png_dir, exist_ok=True)
         pngs = make_prop_textures(png_dir)
         to_paa(pngs)

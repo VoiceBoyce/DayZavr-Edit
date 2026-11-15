@@ -1,4 +1,4 @@
-// VB_Rift «Древний корень»: страж рощи — копия msfz_zanoza.rvmat + золотое свечение (Stage8)
+// VB_AncientRoot «Древний корень»: страж рощи — копия msfz_zanoza.rvmat + золотое свечение (Stage8)
 ambient[] = { 1, 1, 1, 1 };
 diffuse[] = { 1, 1, 1, 1 };
 forcedDiffuse[] = { 0, 0, 0, 1 };
@@ -62,6 +62,6 @@ class Stage7
 };
 class Stage8
 {
-	texture = "VB_Rift\data\guards\vb_guard_zanoza_e_co.paa";
+	texture = "VB_AncientRoot\data\guards\vb_guard_zanoza_e_co.paa";
 	texGen = "0";
 };

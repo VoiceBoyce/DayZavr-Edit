@@ -2,8 +2,8 @@
 """Палитра и стражи «Древнего корня» (сервер 18, Ливония) — для генераторов текстур в этой папке.
 
 Мод отдельный (modding/mod_vb_AncientRoot), исходники свои: VB_AncientRoot (клиент), VB_AncientRoot_Server,
-VB_AncientRootSky, VB_AncientRoot_GC. Внутренние имена остались от Изнанки, из которой мод выделен 2026-11-15:
-классы VB_Rift*, префиксы PBO VB_Rift / VB_Rift_Server / VB_RiftSky / VB_Rift_GC (моды на одном сервере не стоят).
+VB_AncientRootSky, VB_AncientRoot_GC. Мод выделен из Изнанки 2026-11-15 и переименован целиком: классы VB_AR_*, файлы data vb_ar_*,
+префиксы PBO VB_AncientRoot / VB_AncientRoot_Server / VB_AncientRoot_GC / VB_ARSky (молнии).
 
 Генераторы (gen_ar_*.py) пишут прямо в исходники: ../VB_AncientRoot/data (или в папку из VB_AR_OUT),
 молнии — в ../VB_AncientRootSky/data. Названия и описания предметов — прямо в config.cpp клиента.
@@ -47,7 +47,7 @@ BASE_PALETTE = {
     "p_liquid": (0.55, 0.03, 0.03), "p_steel": (0.36, 0.17, 0.09), "p_blade_vein": (0.95, 0.12, 0.10),
     "p_burlap": (0.50, 0.33, 0.17), "p_spore_glow": (1.0, 0.22, 0.16), "p_bark": (0.34, 0.19, 0.09),
     "p_bark_moss": None,
-    # gen_ar_zombies.make_zombie
+    # зомби (генератор Изнанки gen_rift_zombies.make_zombie; у «Корня» зомби нет)
     "z_cloth_mul": (0.95, 0.55, 0.55), "z_skin_mul": (0.92, 0.86, 0.90), "z_blot": (0.30, 0.07, 0.08),
     "z_halo": (0.22, 0.03, 0.05), "z_vein": (0.62, 0.06, 0.10),
     "z_e_vein": (1.0, 0.16, 0.24), "z_e_halo": (0.4, 0.02, 0.05),

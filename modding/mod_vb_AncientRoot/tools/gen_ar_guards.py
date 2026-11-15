@@ -29,7 +29,7 @@ T = RT.theme()
 PAL = T["palette"]
 OUT_DIR = os.path.join(RT.mod_dir(), "data", "guards")
 BS = chr(92)
-PREFIX = "VB_Rift" + BS + "data" + BS + "guards" + BS
+PREFIX = "VB_AncientRoot" + BS + "data" + BS + "guards" + BS
 SEED = 5151
 
 
@@ -197,7 +197,7 @@ def write_rvmat(src, name):
     txt = "\n".join(l for l in txt.split("\n") if not l.startswith("////") and not l.startswith("//DeRap")
                     and not l.startswith("//Produced") and not l.startswith("//https") and not l.startswith("//'now'")
                     and l.strip() != "#define _ARMA_")
-    txt = "// VB_Rift «Древний корень»: страж рощи — копия " + os.path.basename(src) + " + золотое свечение (Stage8)\n" + txt
+    txt = "// VB_AncientRoot «Древний корень»: страж рощи — копия " + os.path.basename(src) + " + золотое свечение (Stage8)\n" + txt
     with open(os.path.join(OUT_DIR, name + ".rvmat"), "w", encoding="utf-8", newline="\n") as f:
         f.write(txt)
 
