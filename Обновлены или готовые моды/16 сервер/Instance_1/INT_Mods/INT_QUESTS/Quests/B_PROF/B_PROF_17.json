@@ -1,0 +1,76 @@
+{
+    "Version": 1,
+    "Id": 21016,
+    "Order": 17,
+    "Enabled": 1,
+    "Name": "Образцы: пси",
+    "Description": [
+        "Ежедневный заказ лаборатории, стихия — пси. Нужны пустое стекло ×2, линзовое стекло. Ищи в полях: Пси-Мозготряс и Теневик-мираж. Пакет крови — для артефактов пси."
+    ],
+    "GiverStart": "prof",
+    "GiverFinish": "prof",
+    "Requires": [
+        21001
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "DAILY",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "VB_AB_Mat_Lince",
+            "Count": 2.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Пустое стекло"
+        },
+        {
+            "Kind": "DELIVER",
+            "Target": "VB_AB_Mat_LinceAgr",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Линзовое стекло"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "EFT_Bloodset",
+            "Count": 1,
+            "Quantity": "",
+            "State": "",
+            "Amount": 0,
+            "Text": "Пакет крови"
+        }
+    ],
+    "Note": "make_quests16.py ПД7"
+}

@@ -1,0 +1,76 @@
+{
+    "Version": 1,
+    "Id": 21013,
+    "Order": 14,
+    "Enabled": 1,
+    "Name": "Образцы: кислота",
+    "Description": [
+        "Ежедневный заказ лаборатории, стихия — кислота. Нужны ядовитая плесень ×2, студенистая слизь. Ищи в полях: Кислотный Ричар и Болотный Энт. Трубка — для артефактов кислоты."
+    ],
+    "GiverStart": "prof",
+    "GiverFinish": "prof",
+    "Requires": [
+        21001
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "DAILY",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "VB_AB_Mat_Holera",
+            "Count": 2.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Ядовитая плесень"
+        },
+        {
+            "Kind": "DELIVER",
+            "Target": "VB_AB_Mat_Studen",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Студенистая слизь"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "EFT_SiliconTube",
+            "Count": 1,
+            "Quantity": "",
+            "State": "",
+            "Amount": 0,
+            "Text": "Силиконовая трубка"
+        }
+    ],
+    "Note": "make_quests16.py ПД4"
+}

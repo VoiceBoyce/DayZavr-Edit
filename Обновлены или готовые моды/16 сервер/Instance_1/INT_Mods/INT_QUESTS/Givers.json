@@ -1,0 +1,119 @@
+{
+    "Version": 1,
+    "Givers": [
+        {
+            "Key": "coins_quests_all",
+            "Title": "Босс",
+            "Kind": 0,
+            "Model": "SurvivorM_Peter",
+            "Position": "11841.93 5.37 6624.63",
+            "Orientation": "53.039108 0 0",
+            "Clothes": [
+                "FaceCover_Improvised",
+                "EyePatch_Improvised",
+                "PaddedGloves_Threat",
+                "DressShoes_Black",
+                "UKAssVest_Black",
+                "DownJacket_Green",
+                "HipPack_Black",
+                "Jeans_Black",
+                "HuntingBag_Hannah",
+                "BeanieHat_Brown"
+            ],
+            "InHands": "",
+            "Disabled": 0,
+            "Greeting": "Работа есть всегда. Монеты тоже — если заработаешь."
+        },
+        {
+            "Key": "prof",
+            "Title": "Профессор",
+            "Kind": 0,
+            "Model": "SurvivorM_Oliver",
+            "Position": "11888.9 5.7 6593.57",
+            "Orientation": "74.97 0 0",
+            "Clothes": [
+                "MedicalScrubsShirt_White",
+                "MedicalScrubsPants_White",
+                "SurgicalMask",
+                "ThinFramesGlasses",
+                "SurgicalGloves_White",
+                "WorkingBoots_Grey"
+            ],
+            "InHands": "",
+            "Disabled": 0,
+            "Greeting": "Не трогай пробирки. Что принёс?"
+        },
+        {
+            "Key": "mara",
+            "Title": "Мара",
+            "Kind": 0,
+            "Model": "SurvivorF_Irena",
+            "Position": "11746.1 18.98 6956.79",
+            "Orientation": "-172.07 0 0",
+            "Clothes": [
+                "VB_RiftCloak",
+                "TrackSuitPants_Black",
+                "Wellies_Brown",
+                "BeanieHat_Red"
+            ],
+            "InHands": "VB_RiftLantern",
+            "Disabled": 0,
+            "Greeting": "Тише. Слышишь, как стучит? Это не твоё сердце."
+        },
+        {
+            "Key": "eger",
+            "Title": "Егерь",
+            "Kind": 0,
+            "Model": "SurvivorM_Boris",
+            "Position": "11928 6.44 6583.04",
+            "Orientation": "-96.26 0 0",
+            "Clothes": [
+                "HuntingJacket_Autumn",
+                "HunterPants_Autumn",
+                "BoonieHat_Olive",
+                "MilitaryBoots_Brown",
+                "HuntingBag"
+            ],
+            "InHands": "Mosin9130",
+            "Disabled": 0,
+            "Greeting": "Говори коротко — зверь слышит."
+        },
+        {
+            "Key": "gayka",
+            "Title": "Гайка",
+            "Kind": 0,
+            "Model": "SurvivorF_Keiko",
+            "Position": "11907.1 7.25 6626.19",
+            "Orientation": "-159.06 0 0",
+            "Clothes": [
+                "TShirt_Grey",
+                "CargoPants_Grey",
+                "WorkingBoots_Brown",
+                "WorkingGloves_Brown",
+                "BaseballCap_Black"
+            ],
+            "InHands": "Wrench",
+            "Disabled": 0,
+            "Greeting": "Если ты не с запчастями — у меня перерыв."
+        },
+        {
+            "Key": "serzhant",
+            "Title": "Сержант",
+            "Kind": 0,
+            "Model": "SurvivorM_Jose",
+            "Position": "11860.8 4.33 6586.04",
+            "Orientation": "100.21 0 0",
+            "Clothes": [
+                "GorkaEJacket_Summer",
+                "GorkaPants_Summer",
+                "BallisticHelmet_Green",
+                "MilitaryBoots_Black",
+                "TacticalGloves_Green",
+                "PlateCarrierVest"
+            ],
+            "InHands": "AKM",
+            "Disabled": 0,
+            "Greeting": "Доклад. Коротко."
+        }
+    ]
+}

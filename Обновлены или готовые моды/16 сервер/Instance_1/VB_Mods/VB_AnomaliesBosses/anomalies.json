@@ -1,0 +1,664 @@
+{
+    "Anomalies": [
+        {
+            "Classname": "VB_AB_Anomaly_Electra",
+            "DamageMult": 0.0,
+            "MaxInField": 0,
+            "PushRadius": 0.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_Electra",
+                        "Chance": 100.0,
+                        "MinTier": 2,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_Electra",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        },
+        {
+            "Classname": "VB_AB_Anomaly_EMP",
+            "DamageMult": 0.0,
+            "MaxInField": 0,
+            "PushRadius": 0.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_EMP",
+                        "Chance": 100.0,
+                        "MinTier": 1,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_EMP",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        },
+        {
+            "Classname": "VB_AB_Anomaly_Groza",
+            "DamageMult": 0.0,
+            "MaxInField": 0,
+            "PushRadius": 0.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_Groza",
+                        "Chance": 100.0,
+                        "MinTier": 1,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_Groza",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        },
+        {
+            "Classname": "VB_AB_Anomaly_MlechniPut",
+            "DamageMult": 0.0,
+            "MaxInField": 0,
+            "PushRadius": 0.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_MlechniPut",
+                        "Chance": 100.0,
+                        "MinTier": 1,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_MlechniPut",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        },
+        {
+            "Classname": "VB_AB_Anomaly_Zharka",
+            "DamageMult": 0.0,
+            "MaxInField": 0,
+            "PushRadius": 0.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_Zharka",
+                        "Chance": 100.0,
+                        "MinTier": 1,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_Zharka",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        },
+        {
+            "Classname": "VB_AB_Anomaly_FireShtorm",
+            "DamageMult": 0.0,
+            "MaxInField": 0,
+            "PushRadius": 0.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_FireShtorm",
+                        "Chance": 100.0,
+                        "MinTier": 2,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_FireShtorm",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        },
+        {
+            "Classname": "VB_AB_Anomaly_FireIskra",
+            "DamageMult": 0.0,
+            "MaxInField": 0,
+            "PushRadius": 0.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_FireIskra",
+                        "Chance": 100.0,
+                        "MinTier": 1,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_FireIskra",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        },
+        {
+            "Classname": "VB_AB_Anomaly_Par",
+            "DamageMult": 0.0,
+            "MaxInField": 0,
+            "PushRadius": 0.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_Par",
+                        "Chance": 100.0,
+                        "MinTier": 1,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_Par",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        },
+        {
+            "Classname": "VB_AB_Anomaly_Snow",
+            "DamageMult": 0.0,
+            "MaxInField": 0,
+            "PushRadius": 0.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_Snow",
+                        "Chance": 100.0,
+                        "MinTier": 1,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_Snow",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        },
+        {
+            "Classname": "VB_AB_Anomaly_Steklo",
+            "DamageMult": 0.0,
+            "MaxInField": 0,
+            "PushRadius": 0.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_Steklo",
+                        "Chance": 100.0,
+                        "MinTier": 1,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_Steklo",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        },
+        {
+            "Classname": "VB_AB_Anomaly_Zastoy",
+            "DamageMult": 0.0,
+            "MaxInField": 0,
+            "PushRadius": 0.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_Zastoy",
+                        "Chance": 100.0,
+                        "MinTier": 1,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_Zastoy",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        },
+        {
+            "Classname": "VB_AB_Anomaly_Voronka",
+            "DamageMult": 0.0,
+            "MaxInField": 0,
+            "PushRadius": 0.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_Voronka",
+                        "Chance": 100.0,
+                        "MinTier": 2,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_Voronka",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        },
+        {
+            "Classname": "VB_AB_Anomaly_Lomka",
+            "DamageMult": 0.0,
+            "MaxInField": 0,
+            "PushRadius": 0.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_Lomka",
+                        "Chance": 100.0,
+                        "MinTier": 2,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_Lomka",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        },
+        {
+            "Classname": "VB_AB_Anomaly_Tramplin",
+            "DamageMult": 0.0,
+            "MaxInField": 0,
+            "PushRadius": 0.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_Tramplin",
+                        "Chance": 100.0,
+                        "MinTier": 1,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_Tramplin",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        },
+        {
+            "Classname": "VB_AB_Anomaly_Roy",
+            "DamageMult": 0.0,
+            "MaxInField": 0,
+            "PushRadius": 0.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_Roy",
+                        "Chance": 100.0,
+                        "MinTier": 2,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_Roy",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        },
+        {
+            "Classname": "VB_AB_Anomaly_Studen",
+            "DamageMult": 0.0,
+            "MaxInField": 0,
+            "PushRadius": 0.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_Studen",
+                        "Chance": 100.0,
+                        "MinTier": 1,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_Studen",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        },
+        {
+            "Classname": "VB_AB_Anomaly_Holera",
+            "DamageMult": 0.0,
+            "MaxInField": 0,
+            "PushRadius": 0.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_Holera",
+                        "Chance": 100.0,
+                        "MinTier": 1,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_Holera",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        },
+        {
+            "Classname": "VB_AB_Anomaly_Flash",
+            "DamageMult": 0.0,
+            "MaxInField": 0,
+            "PushRadius": 0.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_Flash",
+                        "Chance": 100.0,
+                        "MinTier": 2,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_Flash",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        },
+        {
+            "Classname": "VB_AB_Anomaly_LinceAgr",
+            "DamageMult": 0.0,
+            "MaxInField": 0,
+            "PushRadius": 0.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_LinceAgr",
+                        "Chance": 100.0,
+                        "MinTier": 1,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_LinceAgr",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        },
+        {
+            "Classname": "VB_AB_Anomaly_Lince",
+            "DamageMult": 0.0,
+            "MaxInField": 0,
+            "PushRadius": 0.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_Lince",
+                        "Chance": 100.0,
+                        "MinTier": 1,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_Lince",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        },
+        {
+            "Classname": "VB_AB_Anomaly_DeadZone",
+            "DamageMult": 0.0,
+            "MaxInField": 0,
+            "PushRadius": 0.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_DeadZone",
+                        "Chance": 100.0,
+                        "MinTier": 1,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_DeadZone",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        },
+        {
+            "Classname": "VB_AB_Anomaly_Atom",
+            "DamageMult": 0.0,
+            "MaxInField": 2,
+            "PushRadius": 8.0,
+            "Loot": {
+                "Rolls": 1,
+                "Nothing": 30.0,
+                "Items": [
+                    {
+                        "Classname": "VB_AB_Mat_Atom",
+                        "Chance": 100.0,
+                        "MinTier": 1,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 1,
+                        "QuantityMax": 3
+                    },
+                    {
+                        "Classname": "VB_AB_Mat_Atom",
+                        "Chance": 14.0,
+                        "MinTier": 3,
+                        "Visible": 0,
+                        "Detectors": [],
+                        "QuantityMin": 4,
+                        "QuantityMax": 6
+                    }
+                ]
+            }
+        }
+    ]
+}

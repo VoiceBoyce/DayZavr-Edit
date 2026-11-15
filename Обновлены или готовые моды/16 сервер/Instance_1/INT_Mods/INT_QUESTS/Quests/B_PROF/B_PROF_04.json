@@ -1,0 +1,169 @@
+{
+    "Version": 1,
+    "Id": 21003,
+    "Order": 4,
+    "Enabled": 1,
+    "Name": "Семь стихий",
+    "Description": [
+        "Я свёл записи. Стихий семь: гроза, огонь, радиация, кислота, лёд, гравитация и пси. Положи их рядом на стол, по одному образцу каждой, и я покажу тебе, почему они одного рода."
+    ],
+    "GiverStart": "prof",
+    "GiverFinish": "prof",
+    "Requires": [
+        21002
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "VB_AB_Mat_EMP",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Ионная пыль"
+        },
+        {
+            "Kind": "DELIVER",
+            "Target": "VB_AB_Mat_Zharka",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Окалина"
+        },
+        {
+            "Kind": "DELIVER",
+            "Target": "VB_AB_Mat_DeadZone",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Чёрный пепел"
+        },
+        {
+            "Kind": "DELIVER",
+            "Target": "VB_AB_Mat_Holera",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Ядовитая плесень"
+        },
+        {
+            "Kind": "DELIVER",
+            "Target": "VB_AB_Mat_Snow",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Вечный лёд"
+        },
+        {
+            "Kind": "DELIVER",
+            "Target": "VB_AB_Mat_Tramplin",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Гравитационная галька"
+        },
+        {
+            "Kind": "DELIVER",
+            "Target": "VB_AB_Mat_Lince",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Пустое стекло"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 4,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "EFT_Capacitors",
+            "Count": 2,
+            "Quantity": "",
+            "State": "",
+            "Amount": 0,
+            "Text": "Конденсаторы"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "EFT_Rele",
+            "Count": 1,
+            "Quantity": "",
+            "State": "",
+            "Amount": 0,
+            "Text": "Реле фазового контроля"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "OOTS_ART_svet",
+            "Count": 1,
+            "Quantity": "",
+            "State": "",
+            "Amount": 0,
+            "Text": "Артефакт «Луна»"
+        }
+    ],
+    "Note": "make_quests16.py П4"
+}

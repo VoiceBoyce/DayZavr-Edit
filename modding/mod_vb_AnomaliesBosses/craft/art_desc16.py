@@ -16,15 +16,15 @@
 - Stamina — доля от ТЕКУЩЕЙ выносливости за тик;
 - Radiation в серверном моде пустой (Process закомментирован) — не описываем;
 - шок: ваниль восстанавливает 5/с в сознании и 1/с без сознания (cfggameplay 16 — ванильные 5 и 1),
-  отключка при шоке ≤ 25, очнуться можно при ≥ 50. Поэтому −20 и сильнее за 3 с вырубают сами,
-  а любой заметный минус не даёт очнуться после нокаута.
+  отключка при шоке ≤ 25. С 2026-11-14 (shock.c серверного мода) минус к шоку не опускает его ниже 30
+  и не действует без сознания: сам не вырубает, только уменьшает запас до отключки. Если минус больше
+  восстановления (сильнее −15 за 3 с), шок сползает к 30 и в бою вырубит любое попадание.
 Классы: OOTS_ART_X наследует DD_Artifact_Y в config.bin (DD_Artifacts\\model\\Artifacts); у номерных версий
 (Plamya2, Glaz3…) свой скриптовый класс от DD_ArtifactBase — у них только свои значения.
 """
 import datetime
 import io
 import json
-import math
 import os
 import re
 import shutil
@@ -63,7 +63,6 @@ OWN = {"Battery3", "Crustal2", "Crustal3", "Drop2", "Drop3", "Glaz2", "Glaz3", "
 TICK = 3.0           # с, тик здоровья/крови/воды/еды/шока/выносливости
 BLEED_TICK = 10.0    # с, тик кровотечений
 SHOCK_REGEN = 5.0    # в секунду, в сознании (cfggameplay 16)
-SHOCK_REGEN_UNCON = 1.0
 STAT_RU = {"Health": "здоровье", "Blood": "кровь", "Water": "вода", "Energy": "сытость", "Stamina": "выносливость"}
 
 
@@ -129,126 +128,128 @@ def times(n):
     return "в %s раз" % num(n)
 
 
-def mult_words(r):
+def join_ru(items):
+    """«а», «а и б», «а, б и в»."""
+    return items[0] if len(items) == 1 else ", ".join(items[:-1]) + " и " + items[-1]
+
+
+def mult_text(stats, r):
     if r < 0:
-        return "×(%s) — переворачивает: трата становится прибавкой и наоборот" % num(r)
-    if r < 1:
-        return "×%s — %s слабее" % (num(r), times(1 / r))
-    if r < 1.5:
-        return "×%s — на %d%% сильнее" % (num(r), round((r - 1) * 100))
-    return "×%s — %s сильнее" % (num(r), times(r))
+        return "%s ×(%s): трата превращается в прибавку" % (join_ru(stats), num(r))
+    return "%s ×%s" % (join_ru(stats), num(r))
+
+
+# Описание влезает в шапку листа рецепта DRL (поле 560×36, шрифт 12) — не длиннее самых длинных на 18 (170).
+MAX_LEN = 170
 
 
 def describe(key):
-    """Текст описания для OOTS_ART_<key>. Возвращает (текст, сырые значения для таблицы)."""
+    """Короткое описание для OOTS_ART_<key>. Возвращает (текст, (скриптовый класс, abs, rel))."""
     cls = script_class(key)
     data = SCRIPTS.get(cls)
     if data is None:
         return "Эффектов на игрока нет.", (cls, {}, {})
     ab, rel = data
     own = {s: ab[s] * rel.get(s, 1.0) for s in ab}           # сам по себе: свой множитель тоже действует
-    plus, minus, danger = [], [], []
+    good, bad, danger = [], [], []
 
-    # здоровье, кровь, вода, сытость — в минуту
+    # здоровье, кровь, вода, еда — в минуту
     per_min = {s: own[s] * 60.0 / TICK for s in ("Health", "Blood", "Water", "Energy") if own.get(s)}
     h = per_min.get("Health")
     if h:
-        txt = "здоровье %s/мин (из 100)" % signed(h)
-        (plus if h > 0 else minus).append(txt)
+        (good if h > 0 else bad).append("здоровье %s/мин" % signed(h))
         if h <= -10:
-            danger.append("убьёт за %s, если не перекрыть лечением" % dur_min(100.0 / -h))
+            danger.append("убьёт за %s" % dur_min(100.0 / -h))
     b = per_min.get("Blood")
     if b:
-        txt = "кровь %s/мин (из 5000)" % signed(b)
-        if b >= 1000:
-            txt += " — восполняет за минуты"
-        (plus if b > 0 else minus).append(txt)
+        (good if b > 0 else bad).append("кровь %s/мин" % signed(b))
         if b <= -250:
-            danger.append("кровь упадёт до смертельной за %s" % dur_min(2500.0 / -b))
+            danger.append("смерть от потери крови за %s" % dur_min(2500.0 / -b))
     w, e = per_min.get("Water"), per_min.get("Energy")
     food = []
     if w is not None and e is not None and w == e:
-        food.append(("вода и сытость", w))
+        food.append(("вода и еда", w))
     else:
         if w is not None:
             food.append(("вода", w))
         if e is not None:
-            food.append(("сытость", e))
+            food.append(("еда", e))
     for name, v in food:
-        txt = "%s %s/мин (запас 5000)" % (name, signed(v))
-        if v <= -150:
-            txt += ", досуха за %s" % dur_min(5000.0 / -v)
-        elif v >= 1000:
-            txt += " — восполняет за минуты"
-        (plus if v > 0 else minus).append(txt)
+        txt = "%s %s/мин" % (name, signed(v))
+        if v < 0 and 5000.0 / -v <= 10:
+            txt += " (досуха за %s)" % dur_min(5000.0 / -v)
+        (good if v > 0 else bad).append(txt)
 
     # кровотечения
     p = own.get("Bleeds")
     if p:
-        every = BLEED_TICK / abs(p)
+        every = "каждые 10 с" if abs(p) >= 1 else "~раз в %s" % dur_sec(BLEED_TICK / abs(p)).lstrip("~")
         if p > 0:
-            plus.append("закрывает кровотечения (%s)" % ("по одному каждые 10 с" if p >= 1 else
-                                                       "в среднем одно за %s" % dur_sec(every)))
+            good.append("лечит кровотечения (%s)" % every)
         else:
-            minus.append("открывает кровотечения (в среднем одно за %s)" % dur_sec(every))
+            bad.append("вызывает кровотечения (%s)" % every)
 
     # выносливость (доля от текущей за тик)
     st = own.get("Stamina")
     if st:
-        txt = "выносливость %s%% от текущей каждые 3 с" % signed(st * 100)
-        (plus if st > 0 else minus).append(txt)
+        (good if st > 0 else bad).append("выносливость %s%% за 3 с" % signed(st * 100))
 
-    # шок
+    # шок (с 2026-11-14 минус не опускает шок ниже SHOCK_FLOOR и не действует без сознания — shock.c)
     s = own.get("Shock")
     if s:
         if s > 0:
-            plus.append("быстрее приходишь в себя после нокаута (+%s к шоку за 3 с)" % num(s))
+            good.append("приводит в чувство (шок +%s)" % num(s))
+        elif s + SHOCK_REGEN * TICK < 0:
+            danger.append("в бою вырубит любое попадание (шок %s)" % num(s))   # шок сползает к SHOCK_FLOOR
         else:
-            net = s + SHOCK_REGEN * TICK
-            if net < 0:
-                n = math.ceil((75.0 + s) / -net) + 1          # 100 + s + (n-1)*net <= 25
-                danger.append("сам вырубает примерно через %s и не даёт очнуться, пока он при тебе (%s шока за 3 с)"
-                              % (dur_sec(n * TICK), num(s)))
-            elif s + SHOCK_REGEN_UNCON * TICK < 0:
-                danger.append("если тебя вырубят, не очнёшься, пока он при тебе (%s шока за 3 с)" % num(s))
+            bad.append("в бою легче вырубить (шок %s)" % num(s))
 
     # множители для других артефактов
-    mults = []
     groups = {}
     for stat, r in rel.items():
         if stat in STAT_RU:
-            groups.setdefault(r, []).append(STAT_RU[stat])
-    for r, stats in sorted(groups.items(), key=lambda x: -abs(x[0])):
-        mults.append("%s %s" % (" и ".join(stats), mult_words(r)))
+            groups.setdefault(r, []).append({"Energy": "еда"}.get(stat, STAT_RU[stat]))
+    mults = [mult_text(stats, r) for r, stats in sorted(groups.items(), key=lambda x: -abs(x[0]))]
 
     parts = []
-    if plus and minus:
-        parts.append("Плюсы: " + ", ".join(plus) + ".")
-        parts.append("Минусы: " + ", ".join(minus) + ".")
-    elif plus:
-        parts.append("Только плюсы: " + ", ".join(plus) + ".")
-    elif minus:
-        parts.append("Только минусы: " + ", ".join(minus) + ".")
-    if danger:
-        parts.append("Опасно: " + "; ".join(danger) + ".")
+    harm = bad + danger
+    if good:
+        txt = ", ".join(good)
+        parts.append(txt[0].upper() + txt[1:] + ".")
+        if harm:
+            parts.append("Но " + ", ".join(harm) + ".")
+    elif harm:
+        parts.append("Только вред: " + ", ".join(harm) + ".")
     if mults:
-        alone = not plus and not minus and not danger
-        parts.append(("Сам ничего не даёт, меняет эффекты других артефактов (и плюсы, и минусы): " if alone else
-                      "Эффекты других артефактов: ") + "; ".join(mults) + ".")
-        if alone:
-            parts.append("На обычный голод и жажду не влияет.")
+        if parts:
+            parts.append("Другим артефактам: " + "; ".join(mults) + ".")
+        else:
+            parts.append("Сам ничего не даёт. Меняет эффекты других артефактов (и плюсы, и минусы): "
+                         + "; ".join(mults) + ".")
     if not parts:
         parts.append("Эффектов на игрока нет.")
-    return " ".join(parts), (cls, ab, rel)
+    return shorten(" ".join(parts)), (cls, ab, rel)
+
+
+def shorten(txt):
+    """Ужать до MAX_LEN по шагам, только если не влезает."""
+    steps = [
+        lambda t: re.sub(r" \(досуха за [^)]*\)", "", t),
+        lambda t: re.sub(r"(кровотечения) \((?:~раз в [^)]*|каждые 10 с)\)", r"\1", t),
+    ]
+    for step in steps:
+        if len(txt) <= MAX_LEN:
+            break
+        txt = step(txt)
+    return txt
 
 
 SCRIPTS = parse_scripts()
 
 
-def full_description(key, elem_ru, tier_roman):
-    text, _ = describe(key)
-    return "%s Стихия «%s», тир %s. Действует из инвентаря, в контейнере для артефактов выключен." % (
-        text, elem_ru, tier_roman)
+def full_description(key, elem_ru=None, tier_roman=None):
+    """Текст поля Description. Стихию и тир не пишем: в шапке листа DRL место на две строки."""
+    return describe(key)[0]
 
 
 def dump(obj, path):
@@ -278,8 +279,9 @@ def main():
         if r.get("Description") != desc:
             changed += 1
         r["Description"] = desc
-        vals = ", ".join("%s %s" % (k, num(v)) for k, v in ab.items() if k != "Radiation")
-        vals += "".join("; ×%s %s" % (num(v), k) for k, v in rel.items())
+        vals = [("%s %g" % (k, v)).replace("-", "−") for k, v in ab.items() if k != "Radiation"]
+        vals += [("×%g %s" % (v, k)).replace("-", "−") for k, v in rel.items()]
+        vals = ", ".join(vals)
         rows.append((r["RecipeId"], r["RecipeName"].replace("Артефакт - ", ""), key, c, vals or "—", desc))
 
     lines = ["# Описания артефактов в крафте 16", "",
@@ -291,7 +293,12 @@ def main():
     with io.open(os.path.join(HERE, "artifacts_effects_16.md"), "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(lines) + "\n")
     longest = max(len(x[5]) for x in rows)
+    over = [(x[2], len(x[5])) for x in rows if len(x[5]) > MAX_LEN]
     print("артефактов %d, изменится описаний %d, самое длинное %d символов" % (len(rows), changed, longest))
+    if over:
+        print("ДЛИННЕЕ %d: %s" % (MAX_LEN, ", ".join("%s %d" % o for o in over)))
+        if "--deploy" in sys.argv[1:]:
+            sys.exit(1)
 
     if "--deploy" in sys.argv[1:]:
         # формат файла не меняем: сверяем, что повторная запись без правок даёт тот же текст

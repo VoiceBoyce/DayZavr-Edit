@@ -18,7 +18,7 @@ modded class DD_Artifact_Crustal
 		//m_Absolutes.Set("Blood", -2);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		m_Absolutes.Set("Bleeds", -0.2); // шанс добавить кровотечение
+		m_Absolutes.Set("Bleeds", -0.2); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", 0.2); //this is stamina percent coef, e.g. -50% per tick
@@ -32,7 +32,7 @@ modded class DD_Artifact_Eye
 	{
 		super.Init();
 		
-		m_Absolutes.Set("Health", -0.75);
+		m_Absolutes.Set("Health", -0.5); // DayZavr 2026-11-14: было -0.75
 		//m_Relatives.Set("Health", -1.25);
 		
 		//m_Absolutes.Set("Water", -2);
@@ -46,7 +46,7 @@ modded class DD_Artifact_Eye
 		//m_Absolutes.Set("Blood", -2);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		//m_Absolutes.Set("Bleeds", -0.2); // шанс добавить кровотечение
+		//m_Absolutes.Set("Bleeds", -0.2); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", 0.2); //this is stamina percent coef, e.g. -50% per tick
@@ -60,13 +60,13 @@ modded class DD_Artifact_FireBall
 	{
 		super.Init();
 		
-		m_Absolutes.Set("Health", -1);
+		//m_Absolutes.Set("Health", -1); // DayZavr 2026-11-14: убрано
 		//m_Relatives.Set("Health", -1.25);
 		
-		m_Absolutes.Set("Water", -25);
+		m_Absolutes.Set("Water", -10); // DayZavr 2026-11-14: было -25
 		//m_Relatives.Set("Water", -2);
 		
-		m_Absolutes.Set("Energy", -25);
+		m_Absolutes.Set("Energy", -10); // DayZavr 2026-11-14: было -25
 		//m_Relatives.Set("Energy", 0.2);
 		
 		//m_Absolutes.Set("Shock", -15);
@@ -74,7 +74,7 @@ modded class DD_Artifact_FireBall
 		//m_Absolutes.Set("Blood", -2);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		m_Absolutes.Set("Bleeds", 0.8); // шанс добавить кровотечение
+		m_Absolutes.Set("Bleeds", 0.8); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", 0.2); //this is stamina percent coef, e.g. -50% per tick
@@ -88,7 +88,7 @@ modded class DD_Artifact_Plasma
 	{
 		super.Init();
 		
-		m_Absolutes.Set("Health", -2);
+		m_Absolutes.Set("Health", -0.5); // DayZavr 2026-11-14: было -2
 		//m_Relatives.Set("Health", -1.25);
 		
 		m_Absolutes.Set("Water", -25);
@@ -102,7 +102,7 @@ modded class DD_Artifact_Plasma
 		//m_Absolutes.Set("Blood", -2);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		//m_Absolutes.Set("Bleeds", -0.2); // шанс добавить кровотечение
+		//m_Absolutes.Set("Bleeds", -0.2); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		m_Absolutes.Set("Stamina", -0.15); //this is stamina percent coef, e.g. -50% per tick
@@ -130,7 +130,7 @@ modded class DD_Artifact_Angel
 		//m_Absolutes.Set("Blood", -2);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		//m_Absolutes.Set("Bleeds", -0.2); // шанс добавить кровотечение
+		//m_Absolutes.Set("Bleeds", -0.2); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", -0.15); //this is stamina percent coef, e.g. -50% per tick
@@ -158,7 +158,7 @@ modded class DD_Artifact_BloodStone_New
 		m_Absolutes.Set("Blood", -1.5);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		//m_Absolutes.Set("Bleeds", -0.2); // шанс добавить кровотечение
+		//m_Absolutes.Set("Bleeds", -0.2); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		m_Absolutes.Set("Stamina", -0.05); //this is stamina percent coef, e.g. -50% per tick
@@ -172,10 +172,10 @@ modded class DD_Artifact_Flame
 	{
 		super.Init();
 		
-		m_Absolutes.Set("Health", -2);
+		m_Absolutes.Set("Health", -0.5); // DayZavr 2026-11-14: было -2
 		//m_Relatives.Set("Health", -1.25);
 		
-		m_Absolutes.Set("Water", -50);
+		m_Absolutes.Set("Water", -25); // DayZavr 2026-11-14: было -50
 		//m_Relatives.Set("Water", -5);
 		
 		//m_Absolutes.Set("Energy", -25);
@@ -186,7 +186,7 @@ modded class DD_Artifact_Flame
 		//m_Absolutes.Set("Blood", -1.5);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		m_Absolutes.Set("Bleeds", 0.3); // шанс добавить кровотечение
+		m_Absolutes.Set("Bleeds", 0.3); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", -0.05); //this is stamina percent coef, e.g. -50% per tick
@@ -214,7 +214,7 @@ modded class DD_Artifact_Drop
 		//m_Absolutes.Set("Blood", -1.5);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		//m_Absolutes.Set("Bleeds", -0.2); // шанс добавить кровотечение
+		//m_Absolutes.Set("Bleeds", -0.2); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", -0.05); //this is stamina percent coef, e.g. -50% per tick
@@ -242,7 +242,7 @@ modded class DD_Artifact_MomisBeads
 		//m_Absolutes.Set("Blood", -1.5);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		m_Absolutes.Set("Bleeds", -0.3); // шанс добавить кровотечение
+		m_Absolutes.Set("Bleeds", -0.3); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", -0.05); //this is stamina percent coef, e.g. -50% per tick
@@ -270,7 +270,7 @@ modded class OOTS_ART_Plamya2
 		m_Absolutes.Set("Blood", 1.5);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		//m_Absolutes.Set("Bleeds", -0.2); // шанс добавить кровотечение
+		//m_Absolutes.Set("Bleeds", -0.2); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", -0.05); //this is stamina percent coef, e.g. -50% per tick
@@ -298,7 +298,7 @@ modded class OOTS_ART_Glaz2
 		//m_Absolutes.Set("Blood", -2);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		m_Absolutes.Set("Bleeds", 0.2); // шанс добавить кровотечение
+		m_Absolutes.Set("Bleeds", 0.2); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", 0.2); //this is stamina percent coef, e.g. -50% per tick
@@ -326,7 +326,7 @@ modded class OOTS_ART_Drop2
 		//m_Absolutes.Set("Blood", -1.5);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		//m_Absolutes.Set("Bleeds", -0.2); // шанс добавить кровотечение
+		//m_Absolutes.Set("Bleeds", -0.2); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", -0.05); //this is stamina percent coef, e.g. -50% per tick
@@ -354,7 +354,7 @@ modded class OOTS_ART_Crustal2
 		//m_Absolutes.Set("Blood", -2);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		m_Absolutes.Set("Bleeds", 0.2); // шанс добавить кровотечение
+		m_Absolutes.Set("Bleeds", 0.2); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", 0.2); //this is stamina percent coef, e.g. -50% per tick
@@ -382,7 +382,7 @@ modded class DD_Artifact_Burn
 		m_Absolutes.Set("Blood", 1.5);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		//m_Absolutes.Set("Bleeds", 0.1); // шанс добавить кровотечение
+		//m_Absolutes.Set("Bleeds", 0.1); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", -0.05); //this is stamina percent coef, e.g. -50% per tick
@@ -410,7 +410,7 @@ modded class OOTS_ART_Plamya3
 		m_Absolutes.Set("Blood", 5);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		m_Absolutes.Set("Bleeds", 0.5); // шанс добавить кровотечение
+		m_Absolutes.Set("Bleeds", 0.5); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", -0.05); //this is stamina percent coef, e.g. -50% per tick
@@ -427,7 +427,7 @@ modded class OOTS_ART_Glaz3
 		m_Absolutes.Set("Health", 0.25);
 		//m_Relatives.Set("Health", -1.25);
 		
-		m_Absolutes.Set("Water", -50);
+		m_Absolutes.Set("Water", -25); // DayZavr 2026-11-14: было -50
 		//m_Relatives.Set("Water", -5);
 		
 		m_Absolutes.Set("Energy", 10);
@@ -438,7 +438,7 @@ modded class OOTS_ART_Glaz3
 		//m_Absolutes.Set("Blood", -2);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		m_Absolutes.Set("Bleeds", 0.75); // шанс добавить кровотечение
+		m_Absolutes.Set("Bleeds", 0.75); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", 0.2); //this is stamina percent coef, e.g. -50% per tick
@@ -466,7 +466,7 @@ modded class OOTS_ART_Drop3
 		m_Absolutes.Set("Blood", 5);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		//m_Absolutes.Set("Bleeds", -0.2); // шанс добавить кровотечение
+		//m_Absolutes.Set("Bleeds", -0.2); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", -0.05); //this is stamina percent coef, e.g. -50% per tick
@@ -494,7 +494,7 @@ modded class OOTS_ART_Crustal3
 		m_Absolutes.Set("Blood", 50);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		m_Absolutes.Set("Bleeds", -0.2); // шанс добавить кровотечение
+		m_Absolutes.Set("Bleeds", -0.2); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", 0.2); //this is stamina percent coef, e.g. -50% per tick
@@ -522,7 +522,7 @@ modded class OOTS_ART_busy2
 		m_Absolutes.Set("Blood", 1.5);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		m_Absolutes.Set("Bleeds", 0.25); // шанс добавить кровотечение
+		m_Absolutes.Set("Bleeds", 0.25); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", -0.05); //this is stamina percent coef, e.g. -50% per tick

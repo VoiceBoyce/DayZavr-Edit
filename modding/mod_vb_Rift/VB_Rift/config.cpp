@@ -156,7 +156,6 @@ class CfgMods
 		version = "0.3";
 		extra = 0;
 		type = "mod";
-		inputs = "VB_Rift/inputs.xml";
 		dependencies[] = {"Game", "World", "Mission"};
 
 		class defs

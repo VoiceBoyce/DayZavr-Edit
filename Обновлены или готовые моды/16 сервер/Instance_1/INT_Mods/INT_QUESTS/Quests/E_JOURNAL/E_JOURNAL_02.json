@@ -1,0 +1,70 @@
+{
+    "Version": 1,
+    "Id": 23101,
+    "Order": 2,
+    "Enabled": 1,
+    "Name": "Журнал: Гнилой Ричар",
+    "Description": [
+        "Запись в журнал: Гнилой Ричар. Гниёт заживо в радиоактивном поле. Вырежи у него трофей — засчитаю тому, кто режет, так что в группе договаривайтесь. Трофей твой, мне нужна запись."
+    ],
+    "GiverStart": "eger",
+    "GiverFinish": "eger",
+    "Requires": [
+        23002
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "ACTION",
+            "Target": "VB_AB_ActionCutTrophy",
+            "Count": 1.0,
+            "Filter": "VB_AB_Ricar_Rad",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Вырезать трофей: Гнилой Ричар"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 2,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "VB_AB_Mat_DeadZone",
+            "Count": 1,
+            "Quantity": "2",
+            "State": "",
+            "Amount": 0,
+            "Text": "Чёрный пепел"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "VB_AB_Mat_Atom",
+            "Count": 1,
+            "Quantity": "1",
+            "State": "",
+            "Amount": 0,
+            "Text": "Светящийся шлак"
+        }
+    ],
+    "Note": "make_quests16.py Ж-Ricar_Rad"
+}

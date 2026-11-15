@@ -76,7 +76,7 @@ class CfgPatches
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.1;
-		// INT_UIFramework — окно редактора точек (Ctrl+F9); должен стоять и на сервере, и у игроков
+		// INT_UIFramework — окно редактора точек (команда /boss); должен стоять и на сервере, и у игроков
 		requiredAddons[] = {"DZ_Data", "DZ_Scripts", "DZ_Characters_Zombies", "DZ_Weapons_Melee", "DZ_Gear_Consumables", "INT_UIFramework"};
 	};
 };
@@ -212,7 +212,6 @@ class CfgMods
 		version = "0.1";
 		extra = 0;
 		type = "mod";
-		inputs = "VB_AB/inputs.xml";
 		dependencies[] = {"Game", "World", "Mission"};
 
 		class defs

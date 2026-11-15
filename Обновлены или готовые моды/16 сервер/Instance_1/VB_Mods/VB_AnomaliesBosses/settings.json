@@ -1,0 +1,16 @@
+{
+    "Admins": [
+        "76561200715668795"
+    ],
+    "ActivePointsPerRestart": 10,
+    "MaxAwakeBosses": 3,
+    "MinPointDistance": 1000.0,
+    "WakeRadius": 300.0,
+    "SleepAfterMin": 10.0,
+    "RespawnMin": 0.0,
+    "MaxAnomaliesTotal": 80,
+    "MaxFieldArtifactsPerRestart": 40,
+    "ResetAfterSec": 60.0,
+    "MaxMaterialsPerRestart": 300,
+    "DebugLog": 0
+}

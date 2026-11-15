@@ -12,7 +12,8 @@
 остальные берут артефакт тира ниже своей стихии по очереди. Изнанка — только в органике и пси (RIFT).
 Детали EFT и лабораторные инструменты берутся из текущего рецепта 16 как есть.
 
-Номера рецептов, названия и результаты те же (800–857, категория «Артефакты», верстак), меняется состав и описание.
+Номера рецептов, названия и результаты те же (800–857, категория «Артефакты», верстак), меняется состав и описание
+(описание — эффекты артефакта на игрока, строит art_desc16.py).
 Пишет рядом:
   ab_artifacts_16.json — 58 новых рецептов;
   CraftConfig_16.json  — полный файл 16-го с заменой (готов к выкладке);
@@ -24,8 +25,11 @@ import io
 import json
 import os
 import re
+import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+import art_desc16 as AD  # noqa: E402
 MOD = os.path.join(HERE, "..", "VB_AnomaliesBosses")
 SRV16 = r"D:\DayZavr\DayZavr-Servers\DayZServer16\Instance_1\DRL_CraftMenu"
 
@@ -207,12 +211,8 @@ def main():
         comps += [dict(c) for c in o["CraftComponents"] if c["Delete"] == 0]      # лабораторные инструменты
         r = dict(o)
         r["CraftComponents"] = comps
-        desc = "Артефакт стихии «%s», тир %s: материалы аномалий своей стихии" % (RU[e], ROMAN[t])
-        if t == 4:
-            desc += " и трофей босса этой стихии"
-        if a in RIFT:
-            desc += ", сырьё Изнанки"
-        r["Description"] = desc + "."
+        # описание = что артефакт делает с игроком (art_desc16.py, из исходников серверного мода артефактов)
+        r["Description"] = AD.full_description(a)
         new.append(r)
         review.append((rid, art_name[a], a, RU[e], ROMAN[t],
                        ", ".join(art_name[x] for x in inputs[a]) or "—",

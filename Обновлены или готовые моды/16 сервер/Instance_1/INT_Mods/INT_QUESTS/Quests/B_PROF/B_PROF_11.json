@@ -1,0 +1,76 @@
+{
+    "Version": 1,
+    "Id": 21010,
+    "Order": 11,
+    "Enabled": 1,
+    "Name": "Образцы: гроза",
+    "Description": [
+        "Ежедневный заказ лаборатории, стихия — гроза. Нужны ионная пыль ×2, звёздный песок. Ищи в полях: Громовой Энт и Грозовой Мозготряс. Конденсаторы пригодятся, если сам возьмёшься за артефакты грозы."
+    ],
+    "GiverStart": "prof",
+    "GiverFinish": "prof",
+    "Requires": [
+        21001
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "DAILY",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "VB_AB_Mat_EMP",
+            "Count": 2.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Ионная пыль"
+        },
+        {
+            "Kind": "DELIVER",
+            "Target": "VB_AB_Mat_MlechniPut",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Звёздный песок"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "EFT_Capacitors",
+            "Count": 1,
+            "Quantity": "",
+            "State": "",
+            "Amount": 0,
+            "Text": "Конденсаторы"
+        }
+    ],
+    "Note": "make_quests16.py ПД1"
+}

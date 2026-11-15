@@ -25,7 +25,7 @@ class VB_RiftNestFile
 
 class VB_RiftNestSettings
 {
-	ref TStringArray Admins;		// SteamID64 тех, кому можно открыть редактор (Ctrl+F8)
+	ref TStringArray Admins;		// SteamID64 тех, кому можно открыть редактор (команда /rift)
 	int ActiveNests = 5;			// гнёзд с сердцем за рестарт
 	float MinNestDistance = 300;	// м: выбранные гнёзда не ближе этого друг к другу
 	int RootsPercentMin = 70;		// сколько процентов корней гнезда встаёт (случайно от Min до Max)

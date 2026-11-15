@@ -1,0 +1,919 @@
+{
+    "M_STATIC_MARKER_ARRAY": [
+        {
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\bar.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11926.116,
+                1.45,
+                6592.87
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+        {
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\objective_CA.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11856.59,
+                1.75,
+                6594.48
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+        {
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\waypoint_CA.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11875.04,
+                1.95,
+                6567.34
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+        {
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\hospital.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11890.81,
+                1.85,
+                6590.65
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+        {
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\shopping.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11870.11,
+                1.95,
+                6572.91
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+        {
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\radiotower.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11835.18,
+                1.15,
+                6648.56
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+        {
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\warning_CA.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11889.16,
+                2.15,
+                6637.66
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+        {
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\tent.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11844.34,
+                1.85,
+                6631.6005
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+        {
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11908.25,
+                1.75,
+                6616.748
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+        {
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11868.03,
+                5.17,
+                6464.38
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+		{
+            "M_MARKER_NAME": "[P]",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                5260.04,
+                1.75,
+                11237.33
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[P]",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                5061.67,
+                1.75,
+                8819.76
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[P]",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                6335.15,
+                1.75,
+                12813.03
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[P]",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11770.22,
+                1.75,
+                12955.58
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[P]",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11351.07,
+                1.75,
+                9729.70
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[P]",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                12662.89,
+                1.75,
+                7514.19
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[P]",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                7847.71,
+                1.75,
+                7682.63
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[FP]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_ruin_ca.paa",
+            "M_COLOR": [
+                200.0,
+                0.0,
+                0.0
+            ],
+            "M_POSITION": [
+                1584,
+                10,
+                8028
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[FP]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_ruin_ca.paa",
+            "M_COLOR": [
+                200.0,
+                0.0,
+                0.0
+            ],
+            "M_POSITION": [
+                8403,
+                10,
+                10214
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[FP]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_ruin_ca.paa",
+            "M_COLOR": [
+                200.0,
+                0.0,
+                0.0
+            ],
+            "M_POSITION": [
+                9502,
+                10,
+                13610
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[FP]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_ruin_ca.paa",
+            "M_COLOR": [
+                200.0,
+                0.0,
+                0.0
+            ],
+            "M_POSITION": [
+                13786,
+                10,
+                11825
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[FP]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_ruin_ca.paa",
+            "M_COLOR": [
+                200.0,
+                0.0,
+                0.0
+            ],
+            "M_POSITION": [
+                5094,
+                10,
+                4499
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[AD]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_hill_ca.paa",
+            "M_COLOR": [
+                0.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                6508,
+                10,
+                12853
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[AD]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_hill_ca.paa",
+            "M_COLOR": [
+                0.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                8540,
+                10,
+                13782
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[AD]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_hill_ca.paa",
+            "M_COLOR": [
+                0.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11032,
+                10,
+                13210
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[AD]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_hill_ca.paa",
+            "M_COLOR": [
+                0.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                14260,
+                10,
+                11504
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[AD]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_hill_ca.paa",
+            "M_COLOR": [
+                0.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                14321,
+                10,
+                8887
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[AD]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_hill_ca.paa",
+            "M_COLOR": [
+                0.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                13898,
+                10,
+                8452
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[AD]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_hill_ca.paa",
+            "M_COLOR": [
+                0.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                12820,
+                10,
+                7312
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[AD]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_hill_ca.paa",
+            "M_COLOR": [
+                0.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                10888,
+                10,
+                6317
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[AD]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_hill_ca.paa",
+            "M_COLOR": [
+                0.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                7828,
+                10,
+                7930
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[AD]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_hill_ca.paa",
+            "M_COLOR": [
+                0.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                6200,
+                10,
+                7285
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[AD]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_hill_ca.paa",
+            "M_COLOR": [
+                0.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                5074,
+                10,
+                8733
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[AD]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_hill_ca.paa",
+            "M_COLOR": [
+                0.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11002,
+                10,
+                9643
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[AD]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_hill_ca.paa",
+            "M_COLOR": [
+                0.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11194,
+                10,
+                7966
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[C]",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [
+                255.0,
+                165.0,
+                0.0
+            ],
+            "M_POSITION": [
+                6186,
+                10,
+                11180
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[C]",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [
+                255.0,
+                165.0,
+                0.0
+            ],
+            "M_POSITION": [
+                10933,
+                10,
+                9771
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[C]",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [
+                255.0,
+                165.0,
+                0.0
+            ],
+            "M_POSITION": [
+                7137,
+                10,
+                7451
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[C]",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [
+                255.0,
+                165.0,
+                0.0
+            ],
+            "M_POSITION": [
+                12780,
+                10,
+                7368
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[C]",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [
+                255.0,
+                165.0,
+                0.0
+            ],
+            "M_POSITION": [
+                8844,
+                10,
+                10033
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[C]",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [
+                255.0,
+                165.0,
+                0.0
+            ],
+            "M_POSITION": [
+                9871,
+                10,
+                13503
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[C]",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [
+                255.0,
+                165.0,
+                0.0
+            ],
+            "M_POSITION": [
+                10917,
+                10,
+                6384
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[C]",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [
+                255.0,
+                165.0,
+                0.0
+            ],
+            "M_POSITION": [
+                6212,
+                10,
+                12790
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[KH]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_church_ca.paa",
+            "M_COLOR": [
+                128.0,
+                0.0,
+                128.0
+            ],
+            "M_POSITION": [
+                6985,
+                10,
+                7618
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[KH]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_church_ca.paa",
+            "M_COLOR": [
+                128.0,
+                0.0,
+                128.0
+            ],
+            "M_POSITION": [
+                5494,
+                10,
+                4025
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[KH]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_church_ca.paa",
+            "M_COLOR": [
+                128.0,
+                0.0,
+                128.0
+            ],
+            "M_POSITION": [
+                5585,
+                10,
+                10137
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[KH]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_church_ca.paa",
+            "M_COLOR": [
+                128.0,
+                0.0,
+                128.0
+            ],
+            "M_POSITION": [
+                12546,
+                10,
+                2414
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[KH]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_church_ca.paa",
+            "M_COLOR": [
+                128.0,
+                0.0,
+                128.0
+            ],
+            "M_POSITION": [
+                13267,
+                10,
+                12015
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[KH]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_church_ca.paa",
+            "M_COLOR": [
+                128.0,
+                0.0,
+                128.0
+            ],
+            "M_POSITION": [
+                12130,
+                10,
+                9761
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[KH]",
+            "M_ICON_PATH": "dz\\gear\\navigation\\data\\map_church_ca.paa",
+            "M_COLOR": [
+                128.0,
+                0.0,
+                128.0
+            ],
+            "M_POSITION": [
+                2644,
+                10,
+                2404
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+        {
+            "M_MARKER_NAME": "Нефтяная вышка",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\radiotower.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                10831,
+                30,
+                14820
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+        {
+            "M_MARKER_NAME": "Босс",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\unknown_CA.paa",
+            "M_COLOR": [
+                255.0,
+                215.0,
+                0.0
+            ],
+            "M_POSITION": [
+                11841.93,
+                5.37,
+                6624.63
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+        {
+            "M_MARKER_NAME": "Профессор",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\unknown_CA.paa",
+            "M_COLOR": [
+                255.0,
+                215.0,
+                0.0
+            ],
+            "M_POSITION": [
+                11888.9,
+                5.7,
+                6593.57
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+        {
+            "M_MARKER_NAME": "Мара",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\unknown_CA.paa",
+            "M_COLOR": [
+                255.0,
+                215.0,
+                0.0
+            ],
+            "M_POSITION": [
+                11746.1,
+                18.98,
+                6956.79
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+        {
+            "M_MARKER_NAME": "Егерь",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\unknown_CA.paa",
+            "M_COLOR": [
+                255.0,
+                215.0,
+                0.0
+            ],
+            "M_POSITION": [
+                11928.0,
+                6.44,
+                6583.04
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+        {
+            "M_MARKER_NAME": "Гайка",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\unknown_CA.paa",
+            "M_COLOR": [
+                255.0,
+                215.0,
+                0.0
+            ],
+            "M_POSITION": [
+                11907.1,
+                7.25,
+                6626.19
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+        {
+            "M_MARKER_NAME": "Сержант",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\unknown_CA.paa",
+            "M_COLOR": [
+                255.0,
+                215.0,
+                0.0
+            ],
+            "M_POSITION": [
+                11860.8,
+                4.33,
+                6586.04
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        }
+      ],
+    "m_CanUse3DMarkers": 1,
+    "m_OwnPositionMarkerDisabled": 0,
+    "m_ForceMapItemOnly": 0
+}

@@ -31,6 +31,8 @@ if ($LASTEXITCODE -ne 0) { throw "client code uses server-only names, see above"
 $pbo = "D:\DayZavr\DayZavr-Edit\.claude\skills\dayzavr-pbo\scripts\pbo.ps1"
 & $pbo build $snap 2>&1 | Select-Object -Last 3
 & $pbo build $snapS 2>&1 | Select-Object -Last 3
+# VB_AB_GC — команда /boss в окне INT_GlobalChat (нужен @INT_GlobalChat_CL, он есть на 16 и 18)
+& $pbo pack "$mod\VB_AB_GC" "$root\@VB_AnomaliesBosses\Addons\VB_AB_GC.pbo" 2>&1 | Select-Object -Last 2
 robocopy "$root\@VB_AnomaliesBosses" "G:\Games\DayZavrTest\@VB_AnomaliesBosses" /MIR /R:2 /W:2 /NFL /NDL /NJH /NJS | Out-Null
 if ($LASTEXITCODE -ge 8) { throw "copy to G:\Games\DayZavrTest failed (stand still running? close it first)" }
 robocopy "$root\@VB_AnomaliesBosses_Server" "G:\DayZ_Test\env111\servermods\@VB_AnomaliesBosses_Server" /MIR /R:2 /W:2 /NFL /NDL /NJH /NJS | Out-Null

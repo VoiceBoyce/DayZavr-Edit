@@ -18,7 +18,7 @@ modded class DD_Artifact_NanoCell
 		//m_Absolutes.Set("Blood", -2);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		//m_Absolutes.Set("Bleeds", 0.5); // шанс добавить кровотечение
+		//m_Absolutes.Set("Bleeds", 0.5); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", 0.2); //this is stamina percent coef, e.g. -50% per tick
@@ -46,7 +46,7 @@ modded class DD_Artifact_ShineOfTheForest
 		m_Absolutes.Set("Blood", 10);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		//m_Absolutes.Set("Bleeds", 0.5); // шанс добавить кровотечение
+		//m_Absolutes.Set("Bleeds", 0.5); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		m_Absolutes.Set("Stamina", 0.15); //this is stamina percent coef, e.g. -50% per tick
@@ -74,7 +74,7 @@ modded class DD_Artifact_Monolit
 		//m_Absolutes.Set("Blood", 10);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		//m_Absolutes.Set("Bleeds", 0.5); // шанс добавить кровотечение
+		//m_Absolutes.Set("Bleeds", 0.5); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", 0.15); //this is stamina percent coef, e.g. -50% per tick
@@ -102,7 +102,7 @@ modded class DD_Artifact_Flower
 		m_Absolutes.Set("Blood", 20);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		//m_Absolutes.Set("Bleeds", 0.5); // шанс добавить кровотечение
+		//m_Absolutes.Set("Bleeds", 0.5); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		m_Absolutes.Set("Stamina", 0.10); //this is stamina percent coef, e.g. -50% per tick
@@ -119,18 +119,18 @@ modded class DD_Artifact_Compass
 		m_Absolutes.Set("Health", 1.5);
 		//m_Relatives.Set("Health", 0.5);
 		
-		m_Absolutes.Set("Water", 250);
+		m_Absolutes.Set("Water", 25); // DayZavr 2026-11-14: было 250
 		//m_Relatives.Set("Water", -0.2);
 		
-		m_Absolutes.Set("Energy", 250);
+		m_Absolutes.Set("Energy", 25); // DayZavr 2026-11-14: было 250
 		//m_Relatives.Set("Energy", -0.8);
 		
 		m_Absolutes.Set("Shock", -30);
 		
-		m_Absolutes.Set("Blood", 250);
+		m_Absolutes.Set("Blood", 25); // DayZavr 2026-11-14: было 250
 		//m_Relatives.Set("Blood", 5.15);
 		
-		m_Absolutes.Set("Bleeds", 1); // шанс добавить кровотечение
+		m_Absolutes.Set("Bleeds", 1); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", 0.10); //this is stamina percent coef, e.g. -50% per tick
@@ -144,7 +144,7 @@ modded class DD_Artifact_SteeringWheel
 	{
 		super.Init();
 		
-		m_Absolutes.Set("Health", -10);
+		m_Absolutes.Set("Health", -0.5); // DayZavr 2026-11-14: было -10
 		//m_Relatives.Set("Health", 0.5);
 		
 		//m_Absolutes.Set("Water", 250);
@@ -158,7 +158,7 @@ modded class DD_Artifact_SteeringWheel
 		//m_Absolutes.Set("Blood", 250);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		m_Absolutes.Set("Bleeds", 0.35); // шанс добавить кровотечение
+		m_Absolutes.Set("Bleeds", 0.35); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", 0.10); //this is stamina percent coef, e.g. -50% per tick
@@ -183,10 +183,10 @@ modded class DD_Artifact_Insulator
 		
 		//m_Absolutes.Set("Shock", -30);
 		
-		m_Absolutes.Set("Blood", -50);
+		m_Absolutes.Set("Blood", -5); // DayZavr 2026-11-14: было -50
 		//m_Relatives.Set("Blood", 5.15);
 		
-		m_Absolutes.Set("Bleeds", 0.5); // шанс добавить кровотечение
+		m_Absolutes.Set("Bleeds", 0.5); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		//m_Absolutes.Set("Stamina", 0.10); //this is stamina percent coef, e.g. -50% per tick
@@ -214,7 +214,7 @@ modded class DD_Artifact_Oasis
 		m_Absolutes.Set("Blood", 10);
 		//m_Relatives.Set("Blood", 5.15);
 		
-		m_Absolutes.Set("Bleeds", 0.1); // шанс добавить кровотечение
+		m_Absolutes.Set("Bleeds", 0.1); // >0 шанс закрыть кровотечение, <0 открыть (раз в 10 с)
 		
 		
 		m_Absolutes.Set("Stamina", 0.15); //this is stamina percent coef, e.g. -50% per tick

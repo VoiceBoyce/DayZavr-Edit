@@ -1,0 +1,79 @@
+{
+    "Version": 1,
+    "Id": 23107,
+    "Order": 8,
+    "Enabled": 1,
+    "Name": "Журнал: Огненный Мутаволк",
+    "Description": [
+        "Запись в журнал: Огненный Мутаволк. Горит и поджигает всё вокруг. Вырежи у него трофей — засчитаю тому, кто режет, так что в группе договаривайтесь. Трофей твой, мне нужна запись."
+    ],
+    "GiverStart": "eger",
+    "GiverFinish": "eger",
+    "Requires": [
+        23002
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "ACTION",
+            "Target": "VB_AB_ActionCutTrophy",
+            "Count": 1.0,
+            "Filter": "VB_AB_MutaWolf_Fire",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Вырезать трофей: Огненный Мутаволк"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 3,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "VB_AB_Mat_Par",
+            "Count": 1,
+            "Quantity": "1",
+            "State": "",
+            "Amount": 0,
+            "Text": "Горячий конденсат"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "VB_AB_Mat_Zharka",
+            "Count": 1,
+            "Quantity": "1",
+            "State": "",
+            "Amount": 0,
+            "Text": "Окалина"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "VB_AB_Mat_FireIskra",
+            "Count": 1,
+            "Quantity": "1",
+            "State": "",
+            "Amount": 0,
+            "Text": "Искровой уголь"
+        }
+    ],
+    "Note": "make_quests16.py Ж-MutaWolf_Fire"
+}

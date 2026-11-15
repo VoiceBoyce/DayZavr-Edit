@@ -13,6 +13,8 @@ if ($LASTEXITCODE -ne 0) { throw "client code uses server-only names, see above"
 & $pbo build "$mod\VB_Rift" -Binarize 2>&1 | Select-Object -Last 4
 # VB_RiftSky — после build (build пересобирает папку Addons)
 & $pbo pack "$mod\VB_RiftSky" "$mod\@VB_Rift\Addons\VB_RiftSky.pbo" -Binarize 2>&1 | Select-Object -Last 3
+# VB_Rift_GC — команда /rift в окне INT_GlobalChat (нужен @INT_GlobalChat_CL, он есть на 16 и 18)
+& $pbo pack "$mod\VB_Rift_GC" "$mod\@VB_Rift\Addons\VB_Rift_GC.pbo" 2>&1 | Select-Object -Last 2
 & $pbo build "$mod\VB_Rift_Server" 2>&1 | Select-Object -Last 3
 
 foreach ($dst in @("G:\Games\DayZavrTest\@VB_Rift", "G:\Games\DayZavr\@VB_Rift")) {

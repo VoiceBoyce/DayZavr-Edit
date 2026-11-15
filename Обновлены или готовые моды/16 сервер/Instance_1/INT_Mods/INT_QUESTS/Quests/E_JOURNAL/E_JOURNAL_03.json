@@ -1,0 +1,79 @@
+{
+    "Version": 1,
+    "Id": 23102,
+    "Order": 3,
+    "Enabled": 1,
+    "Name": "Журнал: Теневик-мираж",
+    "Description": [
+        "Запись в журнал: Теневик-мираж. Двоится в глазах, в поле — миражи и пси. Вырежи у него трофей — засчитаю тому, кто режет, так что в группе договаривайтесь. Трофей твой, мне нужна запись."
+    ],
+    "GiverStart": "eger",
+    "GiverFinish": "eger",
+    "Requires": [
+        23002
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "ACTION",
+            "Target": "VB_AB_ActionCutTrophy",
+            "Count": 1.0,
+            "Filter": "VB_AB_Tenevnik_Psi",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Вырезать трофей: Теневик-мираж"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 2,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "VB_AB_Mat_Lince",
+            "Count": 1,
+            "Quantity": "1",
+            "State": "",
+            "Amount": 0,
+            "Text": "Пустое стекло"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "VB_AB_Mat_LinceAgr",
+            "Count": 1,
+            "Quantity": "1",
+            "State": "",
+            "Amount": 0,
+            "Text": "Линзовое стекло"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "VB_AB_Mat_Flash",
+            "Count": 1,
+            "Quantity": "1",
+            "State": "",
+            "Amount": 0,
+            "Text": "Световая пыль"
+        }
+    ],
+    "Note": "make_quests16.py Ж-Tenevnik_Psi"
+}
