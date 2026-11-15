@@ -394,6 +394,7 @@ Verified errors committed more than once. Check ACTIVELY during implementation. 
 - **E74** — луч видимости RaycastRV: CollisionFlags.NONE и стеной считать только дома/постройки/деревья/камни
 - **E75** — бинарная модель: `.rvmat` скрытой секции по пути без ведущего `\` не грузится, секция невидима (сердце и корни Изнанки пропадали); пути к материалам — с `\`
 - **E76** — скриптовые NPC живут ~1 ч по CE lifetime и исчезают вдали от игроков: при создании SetLifetimeMax/SetLifetime 3888000
+- **E77** — у существ материал ставит `healthLevels` DamageSystem, а не `hiddenSelectionsMaterials`: перекраска со своим .rvmat — копия DamageSystem со своими материалами на 1.0/0.7
 
 ---
 
