@@ -1072,6 +1072,18 @@ Measured on DayZDiag 1.29.163709 with one client on localhost [EXACT]:
 - `Print(variable)` prefixes the line with `string name = '…'`, and the CLIENT log cuts lines at 255
   characters (the server log does not): print short expressions.
 
+### Оружие и длительные действия на стенде (DayZavr, 2026-11-15)
+
+- `inventory_give(M4A1, hands)` + `inventory_attach(Mag_STANAG_30Rnd, slot="magazine", object_id=<M4>)` даёт магазин,
+  но патронник пустой: `weapon_fire` отвечает `chamber_empty`. Дослать — настоящей клавишей R (scratchpad key.ps1,
+  скан 0x13, иногда два раза), проверить `weapon_state.chamber_empty == 0`.
+- Сменить предмет в руках: `hands_take` при занятых руках — `hands_blocked`; сначала `object_delete` того, что в руках.
+- `action_hold` отвечает `not_possible`, если у действия `m_StanceMask = STANCEMASK_CROUCH`, а игрок стоит:
+  присесть настоящей клавишей C (скан 0x2E).
+- Босс VB_AB после раскрытия поля может перестать рисоваться у клиента (на сервере жив, `telemetry_read` видит):
+  выстрелы уходят мимо, попаданий в логе нет. Проверять зачёт по классу проще на обычном зомби, временно добавив его
+  класс в тот же список конфига.
+
 ### Клики мышью через Windows по UI мода ненадёжны (DayZavr, 2026-11-14)
 
 Проверено на DayZDiag 1.30, окно 2560×1440, карта INT_VppMap:

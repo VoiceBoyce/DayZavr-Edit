@@ -112,7 +112,12 @@ class VB_TabletPageRank extends VB_TabletTabbedPage
 	{
 		INT_UIF_Surface.Box(f, x, 50, 44, 44, 8, VB_C_PANEL2);
 		VBT.Ico(f, x + 11, 61, 22, icon, VB_C_ACCENT);
-		INT_UIF_Draw.Text(f, x, 102, w - 18, 24, VBT.Fit(name, w - 18, 15), 15, VB_C_TEXT);
+		// Плиток бывает до 8: подпись уменьшается по точной ширине (INT_UIF_Draw.TextWidth её занижает), потом обрезается.
+		float room = w - 14;
+		float ns = 15;
+		while (ns > 12 && VBT.TextW(f, name, ns) > room)
+			ns = ns - 1;
+		INT_UIF_Draw.Text(f, x, 102, room, 24, VBT.Fit(name, room, ns), ns, VB_C_TEXT);
 		INT_UIF_Draw.Text(f, x, 126, w - 18, 24, gain, 14, VB_C_ACCENT);
 		string line = VBT.T("#STR_VB_TAB_TOTAL") + " " + VBT.Short(total);
 		float size = 14;
@@ -129,9 +134,16 @@ class VB_TabletPageRank extends VB_TabletTabbedPage
 		// Путь без опыта (XpKm 0 в ranks.json, решение 2026-11-10: на транспорте набивали ранг) не показывается,
 		// остальные плитки делят ширину карточки.
 		bool showKm = r.XpKm > 0;
-		int tiles = 6;
-		if (!showKm)
-			tiles = 5;
+		// Босс и сердце Изнанки — только на серверах с этими модами (ставка больше 0).
+		bool showBoss = r.XpBoss > 0;
+		bool showHeart = r.XpRiftHeart > 0;
+		int tiles = 5;
+		if (showKm)
+			tiles++;
+		if (showBoss)
+			tiles++;
+		if (showHeart)
+			tiles++;
 		float w = 720.0 / tiles;
 		float x = 20;
 		string xpl = " " + VBT.T("#STR_VB_TAB_XP_L");
@@ -150,6 +162,16 @@ class VB_TabletPageRank extends VB_TabletTabbedPage
 		{
 			int km = me.DistM / 1000;
 			Source(f, x, w, "route", VBT.T("#STR_VB_TAB_SRC_K"), "+" + r.XpKm.ToString() + xpl, km * r.XpKm);
+			x += w;
+		}
+		if (showBoss)
+		{
+			Source(f, x, w, "anomaly", VBT.T("#STR_VB_TAB_SRC_B"), "+" + r.XpBoss.ToString() + xpl, me.AbBosses * r.XpBoss);
+			x += w;
+		}
+		if (showHeart)
+		{
+			Source(f, x, w, "sym_heart", VBT.T("#STR_VB_TAB_SRC_H"), "+" + r.XpRiftHeart.ToString() + xpl, me.RiftHearts * r.XpRiftHeart);
 			x += w;
 		}
 		Source(f, x, w, "contract", VBT.T("#STR_VB_TAB_SRC_C"), "+" + r.XpContract.ToString() + xpl, me.Contracts * r.XpContract + me.ExtraXp);
@@ -208,7 +230,7 @@ class VB_TabletPageRank extends VB_TabletTabbedPage
 		VB_TabletRates r = session.Rates;
 		VB_TabletStats me = session.Me;
 		int got = me.AchCount(r);
-		int all = VB_ACH_COUNT * VB_ACH_STEPS;
+		int all = VB_TabletAch.EnabledCount() * VB_ACH_STEPS;
 		Widget h = INT_UIF_Draw.Frame(m_Root, 0, 0, 1172, 112);
 		INT_UIF_Surface.Box(h, 0, 0, 1172, 112, 10, VB_C_PANEL, VB_C_LINE);
 		VBT.Glow(h, 1172, 112);
@@ -225,6 +247,8 @@ class VB_TabletPageRank extends VB_TabletTabbedPage
 		float bestK = -1;
 		for (int a = 0; a < VB_ACH_COUNT; a++)
 		{
+			if (!VB_TabletAch.Enabled(a))
+				continue;
 			int d = me.AchDone(a, r);
 			if (d >= VB_ACH_STEPS)
 				continue;
@@ -252,18 +276,25 @@ class VB_TabletPageRank extends VB_TabletTabbedPage
 		// Карточки в четыре столбца, справа место под полосу прокрутки.
 		m_AchScroll = VBK.Scroll(m_Root, 0, 128, 1172, 592);
 		Widget list = INT_UIF_Draw.ScrollContent(m_AchScroll);
-		int rows = (VB_ACH_COUNT + 3) / 4;
+		// Выключенные (ступени 0) пропускаются: «Аномалии и Изнанка» есть только на серверах с этими модами.
+		int rows = (VB_TabletAch.EnabledCount() + 3) / 4;
 		INT_UIF_Draw.SetScrollContent(m_AchScroll, rows * 304 - 16);
+		int slot = 0;
 		for (int i = 0; i < VB_ACH_COUNT; i++)
-			AchCard(list, me, r, i);
+		{
+			if (!VB_TabletAch.Enabled(i))
+				continue;
+			AchCard(list, me, r, i, slot);
+			slot++;
+		}
 		m_AchRestore = 3;
 	}
 
-	protected void AchCard(Widget parent, VB_TabletStats me, VB_TabletRates r, int i)
+	protected void AchCard(Widget parent, VB_TabletStats me, VB_TabletRates r, int i, int slot)
 	{
 		array<int> medal = {VB_C_BRONZE, VB_C_SILVER, VB_C_GOLD};
-		int col4 = i % 4;
-		int row = i / 4;
+		int col4 = slot % 4;
+		int row = slot / 4;
 		float x = col4 * 293;
 		float y = row * 304;
 		int val = me.AchValue(i, r);
@@ -278,8 +309,17 @@ class VB_TabletPageRank extends VB_TabletTabbedPage
 			border = col;
 		INT_UIF_Surface.Box(f, 20, 20, 48, 48, 10, VB_C_PANEL2, border);
 		VBT.Ico(f, 32, 32, 24, VB_TabletAch.IconOf(i), col);
-		INT_UIF_Draw.Text(f, 80, 18, 177, 28, VBT.Fit(VBT.T("#STR_VB_TAB_ACHN_" + i.ToString()), 177, 18), 18, VB_C_TEXT);
-		INT_UIF_Draw.Text(f, 80, 46, 177, 22, VBT.Fit(VBT.T("#STR_VB_TAB_ACHT_" + i.ToString()), 177, 14), 14, VB_C_DIM);
+		// Длинные названия («Чистильщик Изнанки») уменьшаются по точной ширине, а не обрезаются.
+		string achName = VBT.T("#STR_VB_TAB_ACHN_" + i.ToString());
+		string achText = VBT.T("#STR_VB_TAB_ACHT_" + i.ToString());
+		float ns = 18;
+		while (ns > 14 && VBT.TextW(f, achName, ns) > 177)
+			ns = ns - 1;
+		float ts = 14;
+		while (ts > 12 && VBT.TextW(f, achText, ts) > 177)
+			ts = ts - 1;
+		INT_UIF_Draw.Text(f, 80, 18, 177, 28, VBT.Fit(achName, 177, ns), ns, VB_C_TEXT);
+		INT_UIF_Draw.Text(f, 80, 46, 177, 22, VBT.Fit(achText, 177, ts), ts, VB_C_DIM);
 		for (int k = 0; k < VB_ACH_STEPS; k++)
 		{
 			float sx = 20 + k * 81;

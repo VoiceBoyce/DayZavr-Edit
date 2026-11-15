@@ -133,6 +133,10 @@ class VB_TabletConfig
 	ref array<string> Mutants;
 	ref array<string> Animals;
 	ref array<string> Bosses;
+	ref array<string> AnomalyBosses;
+	ref array<string> RiftZombies;
+	ref array<string> RiftHeartActions;
+	ref array<string> AnomalyMaterials;
 	ref array<ref VB_TabletKillGroup> KillGroups;
 	ref array<ref VB_TabletKillGroup> LootGroups;
 	ref array<ref VB_TabletActionGroup> ActionGroups;
@@ -305,6 +309,18 @@ class VB_TabletConfig
 		Mutants = d.Mutants;
 		Animals = d.Animals;
 		Bosses = d.Bosses;
+		AnomalyBosses = d.AnomalyBosses;
+		RiftZombies = d.RiftZombies;
+		RiftHeartActions = d.RiftHeartActions;
+		AnomalyMaterials = d.AnomalyMaterials;
+		if (!AnomalyBosses)
+			AnomalyBosses = new array<string>();
+		if (!RiftZombies)
+			RiftZombies = new array<string>();
+		if (!RiftHeartActions)
+			RiftHeartActions = new array<string>();
+		if (!AnomalyMaterials)
+			AnomalyMaterials = new array<string>();
 		KillGroups = d.KillGroups;
 		LootGroups = d.LootGroups;
 		ActionGroups = d.ActionGroups;

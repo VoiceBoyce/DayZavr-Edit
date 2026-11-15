@@ -300,6 +300,12 @@ class VB_TabletPageRating extends VB_TabletTabbedPage
 		bool hasDc = c.Discord != "";
 		if (hasDc)
 			h = 408;
+		// Боссы и сердца Изнанки клана — только на серверах с этими модами.
+		bool showFeats = client.Rates.RiftOn();
+		float dy = 0;
+		if (showFeats)
+			dy = 70;
+		h = h + dy;
 		m_Modal = new VBT_Modal(m_Menu, w, h);
 		m_Pop = POP_CLAN;
 		Widget b = m_Modal.Body;
@@ -337,15 +343,22 @@ class VB_TabletPageRating extends VB_TabletTabbedPage
 		VBT.Cap(b, 318, 202, 150, "#STR_VB_TAB_A_LEADER_C");
 		string lead = VBT.Fit(c.Leader, 190, 20);
 		INT_UIF_Draw.Text(b, 318, 222, 254, 32, lead, 20, VB_C_TEXT);
+		if (showFeats)
+		{
+			VBT.Cap(b, 28, 272, 150, "#STR_VB_TAB_BOSSES");
+			INT_UIF_Draw.Text(b, 28, 292, 150, 32, VBT.Num(c.AbBosses), 20, VB_C_TEXT);
+			VBT.Cap(b, 188, 272, 200, "#STR_VB_TAB_HEARTS");
+			INT_UIF_Draw.Text(b, 188, 292, 200, 32, VBT.Num(c.RiftHearts), 20, VB_C_TEXT);
+		}
 
 		m_BtnCopy = null;
 		if (hasDc)
 		{
-			INT_UIF_Surface.Box(b, 28, 266, w - 56, 44, 8, VB_C_PANEL2);
-			VBT.Ico(b, 42, 277, 22, "discord", VB_C_ACCENT);
+			INT_UIF_Surface.Box(b, 28, 266 + dy, w - 56, 44, 8, VB_C_PANEL2);
+			VBT.Ico(b, 42, 277 + dy, 22, "discord", VB_C_ACCENT);
 			string dc = VBT.Fit(c.Discord, 430, 15);
-			INT_UIF_Draw.Text(b, 76, 266, 430, 44, dc, 15, VB_C_TEXT);
-			m_BtnCopy = new VBA_IconBtn(b, w - 72, 272, 36, 32, "copy", m_Menu.GetHitHandler());
+			INT_UIF_Draw.Text(b, 76, 266 + dy, 430, 44, dc, 15, VB_C_TEXT);
+			m_BtnCopy = new VBA_IconBtn(b, w - 72, 272 + dy, 36, 32, "copy", m_Menu.GetHitHandler());
 		}
 		BuildClanAction(b, client, c, w, h - 68);
 	}
@@ -468,6 +481,9 @@ class VB_TabletPageRating extends VB_TabletTabbedPage
 		m_CardPlace = place;
 		m_CardMe = isMe;
 		m_CardHas = me != null;
+		// Боссы и сердца Изнанки — только на серверах с этими модами: тогда показателей 8, в четыре столбца.
+		bool showBoss = client.Rates.XpBoss > 0;
+		bool showHeart = client.Rates.XpRiftHeart > 0;
 		float w = 600;
 		float h = 384;
 		m_Modal = new VBT_Modal(m_Menu, w, h);
@@ -499,36 +515,49 @@ class VB_TabletPageRating extends VB_TabletTabbedPage
 			INT_UIF_Draw.Text(b, 160, 98, 300, 28, "#STR_VB_TAB_A_NO_CLAN_L", 15, VB_C_DIM2);
 		}
 		array<string> caps = {"#STR_VB_TAB_ZOMBIES", "#STR_VB_TAB_MUTANTS", "#STR_VB_TAB_ANIMALS", "#STR_VB_TAB_DIST", "#STR_VB_TAB_RECORD", "#STR_VB_TAB_A_ACH_C"};
+		if (showBoss)
+			caps.Insert("#STR_VB_TAB_BOSSES");
+		if (showHeart)
+			caps.Insert("#STR_VB_TAB_HEARTS");
 		array<string> vals = new array<string>();
 		if (me)
 		{
 			int got = me.AchCount(client.Rates);
-			int total = VB_ACH_COUNT * VB_ACH_STEPS;
+			int total = VB_TabletAch.EnabledCount() * VB_ACH_STEPS;
 			vals.Insert(VBT.Num(me.Zombies));
 			vals.Insert(VBT.Num(me.Mutants));
 			vals.Insert(VBT.Num(me.Animals));
 			vals.Insert(VBT.Km(me.DistM));
 			vals.Insert(VBT.LifeText(me.RecordSec));
 			vals.Insert(got.ToString() + "/" + total.ToString());
+			if (showBoss)
+				vals.Insert(VBT.Num(me.AbBosses));
+			if (showHeart)
+				vals.Insert(VBT.Num(me.RiftHearts));
 		}
-		for (int i = 0; i < 6; i++)
+		int cells = caps.Count();
+		int cols = 3;
+		if (cells > 6)
+			cols = 4;
+		float cw = (w - 56 - (cols - 1) * 8) / cols;
+		for (int i = 0; i < cells; i++)
 		{
-			int col2 = i % 3;
-			int row2 = i / 3;
-			float x = 28 + col2 * 184;
+			int col2 = i % cols;
+			int row2 = i / cols;
+			float x = 28 + col2 * (cw + 8);
 			float y = 156 + row2 * 70;
-			INT_UIF_Surface.Box(b, x, y, 176, 62, 8, VB_C_PANEL2);
-			INT_UIF_Draw.Text(b, x + 12, y + 7, 156, 18, caps.Get(i), 12, VB_C_DIM);
+			INT_UIF_Surface.Box(b, x, y, cw, 62, 8, VB_C_PANEL2);
+			INT_UIF_Draw.Text(b, x + 12, y + 7, cw - 20, 18, VBT.Fit(VBT.T(caps.Get(i)), cw - 20, 12), 12, VB_C_DIM);
 			string val = VBA_DASH;
 			int ink = VB_C_DIM2;
 			if (me)
 			{
-				val = VBT.Fit(vals.Get(i), 156, 17);
+				val = VBT.Fit(vals.Get(i), cw - 20, 17);
 				ink = VB_C_TEXT;
 				if (i == 4)
 					ink = VB_C_GOLD;
 			}
-			INT_UIF_Draw.Text(b, x + 12, y + 28, 156, 28, val, 17, ink);
+			INT_UIF_Draw.Text(b, x + 12, y + 28, cw - 20, 28, val, 17, ink);
 		}
 		VBT.Cap(b, 28, 306, 150, "#STR_VB_TAB_PLACE_C");
 		INT_UIF_Draw.Text(b, 28, 326, 150, 34, place.ToString(), 24, VB_C_ACCENT);

@@ -373,6 +373,8 @@ class VB_Clan
 	int MapNext = 1;
 	int MapNextCat = 2;
 	int WeekDone;		// только на сервере: номер недели, за которую клан уже получил итоги (приз выдаётся один раз)
+	int AbBosses;		// хозяева аномалий, засчитанные участникам, пока они в клане (видно всем в карточке клана)
+	int RiftHearts;		// вырезанные сердца Изнанки, так же
 	[NonSerialized()]
 	bool Dirty;			// только на сервере: изменения ждут отложенной записи файла
 
@@ -558,6 +560,8 @@ class VB_ClanRow
 	string Discord;
 	int Bank;	// только для администратора, остальным 0
 	int TaxFree;
+	int AbBosses;
+	int RiftHearts;
 
 	void Write(ScriptRPC rpc)
 	{
@@ -577,6 +581,8 @@ class VB_ClanRow
 		rpc.Write(Discord);
 		rpc.Write(Bank);
 		rpc.Write(TaxFree);
+		rpc.Write(AbBosses);
+		rpc.Write(RiftHearts);
 	}
 
 	bool Read(ParamsReadContext ctx)
@@ -585,7 +591,9 @@ class VB_ClanRow
 			return false;
 		if (!ctx.Read(Level) || !ctx.Read(MemberCount) || !ctx.Read(WeekInfluence) || !ctx.Read(Influence) || !ctx.Read(Open))
 			return false;
-		return ctx.Read(Leader) && ctx.Read(Discord) && ctx.Read(Bank) && ctx.Read(TaxFree);
+		if (!ctx.Read(Leader) || !ctx.Read(Discord) || !ctx.Read(Bank) || !ctx.Read(TaxFree))
+			return false;
+		return ctx.Read(AbBosses) && ctx.Read(RiftHearts);
 	}
 }
 

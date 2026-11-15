@@ -566,10 +566,18 @@ class VB_TabletContracts
 		item.VbMarkTaken();
 		if (!fresh)
 			return;
-		array<ref VB_TabletKillGroup> groups = VB_TabletConfig.Get().ItemGroups;
+		VB_TabletRecord rec = null;
+		VB_TabletConfig cfg = VB_TabletConfig.Get();
+		// Материал аномалий: достижение «Старатель».
+		if (cfg.AnomalyMaterials.Count() > 0 && VB_TabletServer.IsListed(item, cfg.AnomalyMaterials))
+		{
+			rec = VB_TabletPlayers.Get(player.GetIdentity().GetPlainId(), player.GetIdentity().GetName());
+			rec.AbMaterials++;
+			rec.Dirty = true;
+		}
+		array<ref VB_TabletKillGroup> groups = cfg.ItemGroups;
 		if (!groups)
 			return;
-		VB_TabletRecord rec = null;
 		foreach (VB_TabletKillGroup g : groups)
 		{
 			if (!VB_TabletServer.IsListed(item, g.Classes))
@@ -658,10 +666,23 @@ class VB_TabletContracts
 	// Длительное действие игрока завершилось (каждый круг у действий с повтором): группы ActionGroups из конфига.
 	static void OnActionDone(ActionBase action, ActionData data)
 	{
-		array<ref VB_TabletActionGroup> groups = VB_TabletConfig.Get().ActionGroups;
-		if (!groups || groups.Count() == 0 || !data || !data.m_Player || !data.m_Player.GetIdentity())
+		if (!data || !data.m_Player || !data.m_Player.GetIdentity())
 			return;
 		string name = action.ClassName();
+		VB_TabletConfig cfg = VB_TabletConfig.Get();
+		// Вырезанное сердце Изнанки: опыт XpRiftHeart, достижение «Сердцеед», счёт клана.
+		if (cfg.RiftHeartActions.Find(name) >= 0)
+		{
+			PlayerIdentity hid = data.m_Player.GetIdentity();
+			VB_TabletRecord hrec = VB_TabletPlayers.Get(hid.GetPlainId(), hid.GetName());
+			hrec.RiftHearts++;
+			hrec.Dirty = true;
+			VB_TabletServer.CountClanFeat(hrec.Uid, false);
+			Print(VB_TABLET_TAG + " сердце Изнанки засчитано: " + hrec.PlayerName);
+		}
+		array<ref VB_TabletActionGroup> groups = cfg.ActionGroups;
+		if (!groups || groups.Count() == 0)
+			return;
 		Object target = null;
 		if (data.m_Target)
 			target = data.m_Target.GetObject();

@@ -212,6 +212,11 @@ class VB_CfgContracts
 	ref array<string> Mutants = new array<string>();
 	ref array<string> Animals = new array<string>();
 	ref array<string> Bosses = new array<string>();		// кого считает достижение «Убийца гигантов»
+	// Хозяева аномалий и Изнанка: пустые списки — выключено (на сервере без этих модов ничего не считается).
+	ref array<string> AnomalyBosses = new array<string>();		// босс: опыт XpBoss вместо зомби, счётчик игрока и клана
+	ref array<string> RiftZombies = new array<string>();		// зомби Изнанки: достижение (опыт как за зомби)
+	ref array<string> RiftHeartActions = new array<string>();	// действие «вырезать сердце»: опыт XpRiftHeart, счётчики
+	ref array<string> AnomalyMaterials = new array<string>();	// материалы аномалий: достижение «Старатель»
 	ref array<ref VB_TabletKillGroup> KillGroups = new array<ref VB_TabletKillGroup>();
 	ref array<ref VB_TabletKillGroup> LootGroups = new array<ref VB_TabletKillGroup>();
 	ref array<ref VB_TabletActionGroup> ActionGroups = new array<ref VB_TabletActionGroup>();
@@ -321,6 +326,10 @@ class VB_CfgContracts
 		w.Line("    \"Mutants\": " + VB_CfgWriter.Strs(Mutants) + ",");
 		w.Line("    \"Animals\": " + VB_CfgWriter.Strs(Animals) + ",");
 		w.Line("    \"Bosses\": " + VB_CfgWriter.Strs(Bosses) + ",");
+		w.Line("    \"AnomalyBosses\": " + VB_CfgWriter.Strs(AnomalyBosses) + ",");
+		w.Line("    \"RiftZombies\": " + VB_CfgWriter.Strs(RiftZombies) + ",");
+		w.Line("    \"RiftHeartActions\": " + VB_CfgWriter.Strs(RiftHeartActions) + ",");
+		w.Line("    \"AnomalyMaterials\": " + VB_CfgWriter.Strs(AnomalyMaterials) + ",");
 		Groups(w, "KillGroups", KillGroups);
 		Groups(w, "LootGroups", LootGroups);
 		w.Line("    \"ActionGroups\": [");
@@ -533,19 +542,19 @@ class VB_CfgAch
 
 class VB_CfgAchievements
 {
-	string Comment = "Steps: сколько нужно для 1, 2 и 3 ступени (по возрастанию). Rewards: опыт за 1, 2 и 3 ступень любого достижения. Id менять нельзя, Name только для чтения.";
+	string Comment = "Steps: сколько нужно для 1, 2 и 3 ступени (по возрастанию), 0 0 0 — достижение выключено и не показывается. Rewards: опыт за 1, 2 и 3 ступень любого достижения. Id менять нельзя, Name только для чтения.";
 	ref array<int> Rewards = new array<int>();
 	ref array<ref VB_CfgAch> List = new array<ref VB_CfgAch>();
 
 	// Порядок как в планшете (индексы VB_TabletAch).
 	static array<string> Ids()
 	{
-		return {"zombies", "mutants", "animals", "bosses", "travel_km", "life_hours", "days", "drive_km", "gather", "fish", "craft", "build", "contracts", "trophies", "cards", "rank"};
+		return {"zombies", "mutants", "animals", "bosses", "travel_km", "life_hours", "days", "drive_km", "gather", "fish", "craft", "build", "contracts", "trophies", "cards", "rank", "ab_bosses", "rift_hearts", "ab_materials", "rift_zombies"};
 	}
 
 	static array<string> Names()
 	{
-		return {"Чистильщик", "Гроза мутантов", "Зверолов", "Убийца гигантов", "Дальний путь", "Живучий", "Старожил", "Дальнобойщик", "Добытчик", "Рыбак", "Мастер", "Строитель", "Контрактник", "Искатель трофеев", "Взломщик", "Восхождение"};
+		return {"Чистильщик", "Гроза мутантов", "Зверолов", "Убийца гигантов", "Дальний путь", "Живучий", "Старожил", "Дальнобойщик", "Добытчик", "Рыбак", "Мастер", "Строитель", "Контрактник", "Искатель трофеев", "Взломщик", "Восхождение", "Хозяин аномалий", "Сердцеед", "Старатель", "Чистильщик Изнанки"};
 	}
 
 	void Defaults()
@@ -604,7 +613,12 @@ class VB_CfgAchievements
 
 	protected static bool Valid(array<int> steps)
 	{
-		if (!steps || steps.Count() != VB_ACH_STEPS || steps.Get(0) < 1)
+		if (!steps || steps.Count() != VB_ACH_STEPS)
+			return false;
+		// 0 0 0 — выключено
+		if (steps.Get(0) == 0 && steps.Get(1) == 0 && steps.Get(2) == 0)
+			return true;
+		if (steps.Get(0) < 1)
 			return false;
 		return steps.Get(1) > steps.Get(0) && steps.Get(2) > steps.Get(1);
 	}

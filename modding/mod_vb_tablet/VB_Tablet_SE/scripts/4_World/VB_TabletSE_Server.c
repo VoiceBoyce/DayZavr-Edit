@@ -276,6 +276,8 @@ class VB_TabletServer
 			row.Open = c.Open;
 			row.Leader = c.LeaderName();
 			row.Discord = c.Discord;
+			row.AbBosses = c.AbBosses;
+			row.RiftHearts = c.RiftHearts;
 			if (admin)
 			{
 				row.Bank = c.Bank;
@@ -511,6 +513,17 @@ class VB_TabletServer
 		}
 		if (IsListed(victim, cfg.Bosses))
 			rec.AchBoss++;
+		// Хозяин аномалий сделан на основе зомби: в зомби не идёт, опыт за него свой (XpBoss).
+		if (cfg.AnomalyBosses.Count() > 0 && IsListed(victim, cfg.AnomalyBosses))
+		{
+			rec.AbBosses++;
+			rec.Dirty = true;
+			CountClanFeat(rec.Uid, true);
+			Print(VB_TABLET_TAG + " босс " + victim.GetType() + " засчитан: " + rec.PlayerName);
+			return;
+		}
+		if (cfg.RiftZombies.Count() > 0 && IsListed(victim, cfg.RiftZombies))
+			rec.RiftZombies++;
 		string kind;
 		if (IsListed(victim, cfg.Mutants))
 		{
@@ -531,6 +544,19 @@ class VB_TabletServer
 			return;
 		rec.Dirty = true;
 		VB_TabletContracts.OnKill(rec, kind);
+	}
+
+	// Босс или сердце на счёт клана игрока: показывается всем в карточке клана. Ушедший участник счёт не уносит.
+	static void CountClanFeat(string uid, bool boss)
+	{
+		VB_Clan c = VB_TabletClans.OfPlayer(uid);
+		if (!c)
+			return;
+		if (boss)
+			c.AbBosses = c.AbBosses + 1;
+		else
+			c.RiftHearts = c.RiftHearts + 1;
+		VB_TabletClans.SaveSoon(c);
 	}
 
 	static bool IsListed(EntityAI victim, array<string> classes)

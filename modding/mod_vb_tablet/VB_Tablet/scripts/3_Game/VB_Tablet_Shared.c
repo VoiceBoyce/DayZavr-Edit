@@ -124,7 +124,7 @@ const int VB_C_SILVER = 0xFFCFCAC2;
 const int VB_C_BRONZE = 0xFFC98A5A;
 const int VB_C_INF = 0xFF8FA6FF;
 const int VB_RANK_COUNT = 10;
-const int VB_ACH_COUNT = 16;
+const int VB_ACH_COUNT = 20;
 const int VB_ACH_STEPS = 3;
 const int VB_CLAN_LEVELS = 5;
 
@@ -136,6 +136,9 @@ class VB_TabletRates
 	int XpAnimal = 2;
 	int XpKm = 1;
 	int XpContract = 10;
+	// Хозяева аномалий (VB_AnomaliesBosses) и сердца Изнанки (VB_Rift): 0 — выключено, плиток и показателей нет.
+	int XpBoss;
+	int XpRiftHeart;
 	ref array<int> RankNeed = {0, 500, 1500, 4000, 10000, 25000, 60000, 120000, 250000, 500000};
 
 	// Пороги влияния для уровней клана: Levels[n-1] открывает уровень n. Сервер берёт их из конфига.
@@ -172,6 +175,8 @@ class VB_TabletRates
 		rpc.Write(XpAnimal);
 		rpc.Write(XpKm);
 		rpc.Write(XpContract);
+		rpc.Write(XpBoss);
+		rpc.Write(XpRiftHeart);
 		for (int i = 0; i < VB_RANK_COUNT; i++)
 		{
 			int need = RankNeed.Get(i);
@@ -186,6 +191,8 @@ class VB_TabletRates
 	bool Read(ParamsReadContext ctx)
 	{
 		if (!ctx.Read(XpZombie) || !ctx.Read(XpMutant) || !ctx.Read(XpAnimal) || !ctx.Read(XpKm) || !ctx.Read(XpContract))
+			return false;
+		if (!ctx.Read(XpBoss) || !ctx.Read(XpRiftHeart))
 			return false;
 		// Пороги во временный массив: при обрыве пакета RankNeed остаётся полным (RankOf читает все 10).
 		array<int> needs = new array<int>();
@@ -219,6 +226,12 @@ class VB_TabletRates
 		}
 		return r;
 	}
+
+	// Сервер считает боссов или сердца: на его карточках и в «Откуда опыт» есть эти показатели.
+	bool RiftOn()
+	{
+		return XpBoss > 0 || XpRiftHeart > 0;
+	}
 }
 
 // Показатели игрока: сервер считает и присылает, клиент только показывает.
@@ -243,6 +256,10 @@ class VB_TabletStats
 	int AchBuild;
 	int AchTrophy;
 	int AchCard;
+	int AbBosses;		// хозяева аномалий (последний выстрел)
+	int RiftHearts;		// вырезанные сердца Изнанки
+	int AbMaterials;	// найденные материалы аномалий
+	int RiftZombies;	// зомби Изнанки
 	int Place;
 	int Cash;
 
@@ -269,6 +286,10 @@ class VB_TabletStats
 		rpc.Write(AchBuild);
 		rpc.Write(AchTrophy);
 		rpc.Write(AchCard);
+		rpc.Write(AbBosses);
+		rpc.Write(RiftHearts);
+		rpc.Write(AbMaterials);
+		rpc.Write(RiftZombies);
 	}
 
 	bool Read(ParamsReadContext ctx)
@@ -279,13 +300,15 @@ class VB_TabletStats
 			return false;
 		if (!ctx.Read(AchBoss) || !ctx.Read(AchCar) || !ctx.Read(AchGather) || !ctx.Read(AchFish) || !ctx.Read(AchCraft) || !ctx.Read(AchBuild) || !ctx.Read(AchTrophy) || !ctx.Read(AchCard))
 			return false;
+		if (!ctx.Read(AbBosses) || !ctx.Read(RiftHearts) || !ctx.Read(AbMaterials) || !ctx.Read(RiftZombies))
+			return false;
 		return true;
 	}
 
 	int BaseXp(VB_TabletRates r)
 	{
 		int km = DistM / 1000;
-		return Zombies * r.XpZombie + Mutants * r.XpMutant + Animals * r.XpAnimal + km * r.XpKm + Contracts * r.XpContract + ExtraXp;
+		return Zombies * r.XpZombie + Mutants * r.XpMutant + Animals * r.XpAnimal + km * r.XpKm + Contracts * r.XpContract + ExtraXp + AbBosses * r.XpBoss + RiftHearts * r.XpRiftHeart;
 	}
 
 	// Значение показателя достижения. Ступень ранга считается без наград за достижения.
@@ -324,12 +347,24 @@ class VB_TabletStats
 				return AchTrophy;
 			case 14:
 				return AchCard;
+			case 16:
+				return AbBosses;
+			case 17:
+				return RiftHearts;
+			case 18:
+				return AbMaterials;
+			case 19:
+				return RiftZombies;
 		}
+		// 15 — «Восхождение»: ступень ранга.
 		return r.RankOf(BaseXp(r)) + 1;
 	}
 
 	int AchDone(int ach, VB_TabletRates r)
 	{
+		// Выключенное достижение (ступени 0) не выполнено: иначе 0 ≥ 0 дало бы все три ступени и их опыт.
+		if (!VB_TabletAch.Enabled(ach))
+			return 0;
 		int val = AchValue(ach, r);
 		int done = 0;
 		for (int i = 0; i < VB_ACH_STEPS; i++)
@@ -366,7 +401,8 @@ class VB_TabletStats
 	}
 }
 
-// Достижения: 16 показателей по 3 ступени. Значок и текст по индексу.
+// Достижения: 20 показателей по 3 ступени. Ступени 0 0 0 — достижение выключено и не показывается
+// (16–19 «Аномалии и Изнанка» по умолчанию выключены: включаются в achievements.json сервера, где стоят эти моды). Значок и текст по индексу.
 // Пороги и опыт за ступени сервер берёт из config/achievements.json и присылает клиенту в HELLO (с VB_TabletRates).
 class VB_TabletAch
 {
@@ -375,7 +411,7 @@ class VB_TabletAch
 
 	static array<int> DefaultSteps()
 	{
-		return {100, 1000, 10000, 10, 100, 1000, 25, 250, 2500, 10, 100, 500, 50, 500, 5000, 24, 100, 500, 7, 30, 180, 100, 1000, 10000, 50, 500, 2500, 25, 250, 1000, 50, 500, 5000, 25, 250, 1000, 10, 100, 1000, 5, 50, 250, 15, 75, 300, 3, 6, 10};
+		return {100, 1000, 10000, 10, 100, 1000, 25, 250, 2500, 10, 100, 500, 50, 500, 5000, 24, 100, 500, 7, 30, 180, 100, 1000, 10000, 50, 500, 2500, 25, 250, 1000, 50, 500, 5000, 25, 250, 1000, 10, 100, 1000, 5, 50, 250, 15, 75, 300, 3, 6, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	}
 
 	static array<int> DefaultRewards()
@@ -388,6 +424,28 @@ class VB_TabletAch
 		if (!s_Steps)
 			s_Steps = DefaultSteps();
 		return s_Steps.Get(ach * VB_ACH_STEPS + step);
+	}
+
+	// Внутри класса Step(a, b) не компилируется («Too many parameters»): пороги берутся из массива напрямую.
+	static bool Enabled(int ach)
+	{
+		if (!s_Steps)
+			s_Steps = DefaultSteps();
+		return s_Steps.Get(ach * VB_ACH_STEPS) > 0;
+	}
+
+	// Включённых достижений на сервере.
+	static int EnabledCount()
+	{
+		if (!s_Steps)
+			s_Steps = DefaultSteps();
+		int n = 0;
+		for (int a = 0; a < VB_ACH_COUNT; a++)
+		{
+			if (s_Steps.Get(a * VB_ACH_STEPS) > 0)
+				n++;
+		}
+		return n;
 	}
 
 	static int Reward(int step)
@@ -446,7 +504,7 @@ class VB_TabletAch
 
 	static string IconOf(int ach)
 	{
-		array<string> all = {"zombie", "crosshair", "stash", "sym_skull", "route", "heart", "clock", "car", "sym_tree", "fish", "sym_cog", "sym_hammer", "contract", "vault", "sym_key", "rank"};
+		array<string> all = {"zombie", "crosshair", "stash", "sym_skull", "route", "heart", "clock", "car", "sym_tree", "fish", "sym_cog", "sym_hammer", "contract", "vault", "sym_key", "rank", "anomaly", "sym_heart", "sym_gem", "sym_eye"};
 		return all.Get(ach);
 	}
 }

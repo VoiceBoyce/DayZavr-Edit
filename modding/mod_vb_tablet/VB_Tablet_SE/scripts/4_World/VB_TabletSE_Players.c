@@ -21,6 +21,10 @@ class VB_TabletRecord
 	int AchBuild;
 	int AchTrophy;
 	int AchCard;
+	int AbBosses;		// хозяева аномалий (VB_AnomaliesBosses), засчитанные последним выстрелом
+	int RiftHearts;		// вырезанные сердца Изнанки (VB_Rift)
+	int AbMaterials;	// найденные материалы аномалий
+	int RiftZombies;	// убитые зомби Изнанки
 	string AppliedClan;
 	int MyDay;			// день, на который выдан набор личных контрактов
 	int MyReplaceDay;	// день, когда истрачена бесплатная замена
@@ -63,6 +67,10 @@ class VB_TabletRecord
 		s.AchBuild = AchBuild;
 		s.AchTrophy = AchTrophy;
 		s.AchCard = AchCard;
+		s.AbBosses = AbBosses;
+		s.RiftHearts = RiftHearts;
+		s.AbMaterials = AbMaterials;
+		s.RiftZombies = RiftZombies;
 		return s;
 	}
 }
@@ -345,7 +353,7 @@ class VB_TabletPlayers
 	protected static string RatesKey()
 	{
 		VB_TabletRates r = VB_TabletConfig.Get().Rates;
-		string k = r.XpZombie.ToString() + "/" + r.XpMutant.ToString() + "/" + r.XpAnimal.ToString() + "/" + r.XpKm.ToString() + "/" + r.XpContract.ToString();
+		string k = r.XpZombie.ToString() + "/" + r.XpMutant.ToString() + "/" + r.XpAnimal.ToString() + "/" + r.XpKm.ToString() + "/" + r.XpContract.ToString() + "/" + r.XpBoss.ToString() + "/" + r.XpRiftHeart.ToString();
 		for (int a = 0; a < VB_ACH_COUNT; a++)
 		{
 			for (int s = 0; s < VB_ACH_STEPS; s++)
