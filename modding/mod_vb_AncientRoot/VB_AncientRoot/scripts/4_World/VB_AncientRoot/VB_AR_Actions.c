@@ -6,16 +6,32 @@
 
 class VB_ActionCutRootHeartCB : ActionContinuousBaseCB
 {
+	// время резки — по ступени рощи (ТЗ 2б.4): цель известна и клиенту, и серверу
 	override void CreateActionComponent()
 	{
-		m_ActionData.m_ActionComponent = new CAContinuousTime(VB_ActionCutRootHeart.CUT_TIME);
+		int stage = VB_AR_Heart.STAGE_GROVE;
+		VB_AR_Heart heart;
+		if (m_ActionData && m_ActionData.m_Target)
+			heart = VB_AR_Heart.Cast(m_ActionData.m_Target.GetObject());
+		if (heart)
+			stage = heart.VB_Stage();
+		m_ActionData.m_ActionComponent = new CAContinuousTime(VB_ActionCutRootHeart.VB_CutTime(stage));
 	}
 }
 
 class VB_ActionCutRootHeart : ActionContinuousBase
 {
-	static const float CUT_TIME = 15.0;		// секунд держать
+	static const float CUT_TIME = 15.0;		// секунд держать (роща); росток — 8, древняя — 25
 	static const float TOOL_DAMAGE = 15.0;	// урон инструменту за одно сердце
+
+	static float VB_CutTime(int stage)
+	{
+		if (stage <= VB_AR_Heart.STAGE_SPROUT)
+			return 8.0;
+		if (stage >= VB_AR_Heart.STAGE_ANCIENT)
+			return 25.0;
+		return CUT_TIME;
+	}
 
 	void VB_ActionCutRootHeart()
 	{

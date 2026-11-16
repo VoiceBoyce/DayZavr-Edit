@@ -113,6 +113,8 @@ modded class VB_AR_Heart
 			return;
 
 		float brightness = (HOUSE_LIGHT_BASE + HOUSE_LIGHT_BEAT * k) * night;
+		if (m_VB_Stage >= STAGE_ANCIENT)
+			brightness = brightness * 1.4;		// у древней дома светятся ярче
 		foreach (VB_AR_Light lit : m_VB_HouseLights)
 		{
 			if (lit)
@@ -167,7 +169,8 @@ modded class VB_AR_Heart
 		return Math.Sqrt(dx * dx + dz * dz);
 	}
 
-	// до HOUSE_MAX ближайших домов: занять (другое сердце их уже не возьмёт) и поставить в очередь на одевание
+	// до HOUSE_MAX ближайших домов: занять (другое сердце их уже не возьмёт) и поставить в очередь на одевание.
+	// Росток домов не трогает (ТЗ 2б.4).
 	protected void VB_PickHouses()
 	{
 		m_VB_Houses = new array<Object>;
@@ -175,6 +178,8 @@ modded class VB_AR_Heart
 		m_VB_HouseLightPos = new array<vector>;
 		m_VB_HouseLightRad = new array<float>;
 		m_VB_HouseLights = new array<VB_AR_Light>;
+		if (m_VB_Stage <= STAGE_SPROUT)
+			return;
 		if (!m_VB_Wraps)
 			m_VB_Wraps = new array<Object>;
 		if (!s_VB_DressedHouses)

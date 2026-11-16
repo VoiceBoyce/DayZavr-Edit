@@ -71,7 +71,7 @@ class VB_AR_Listen
 	protected float m_VB_Volume;
 	protected int m_VB_Left;
 
-	static void VB_Play(bool night, bool found, vector dir, int step, bool frantic, int storm)
+	static void VB_Play(bool night, bool found, vector dir, int step, bool frantic, int storm, int stage)
 	{
 		PlayerBase player = PlayerBase.Cast(g_Game.GetPlayer());
 		if (!player)
@@ -86,6 +86,7 @@ class VB_AR_Listen
 			if (s_VB_Cur)
 				s_VB_Cur.VB_Stop();
 			s_VB_Cur = new VB_AR_Listen(dir, step, frantic);
+			player.MessageStatus(VB_StageWords(stage));
 		}
 
 		if (storm == VB_AR_ListenRoot.STORM_NOW)
@@ -94,6 +95,16 @@ class VB_AR_Listen
 			player.MessageStatus("Корень гудит: к лесу идёт гроза.");
 
 		player.MessageStatus(VB_ForestMood());
+	}
+
+	// какая сердцевина отозвалась — по ступени рощи (ТЗ 2б.4)
+	static string VB_StageWords(int stage)
+	{
+		if (stage <= VB_AR_Heart.STAGE_SPROUT)
+			return "Корень тихо поёт: где-то проросла молодая сердцевина.";
+		if (stage >= VB_AR_Heart.STAGE_ANCIENT)
+			return "Корень гудит: отозвалась древняя сердцевина.";
+		return "Корень поёт: бьётся живая сердцевина.";
 	}
 
 	// что лес думает об игроке — по ступени расположения (ТЗ 2б.11)
@@ -899,8 +910,9 @@ modded class PlayerBase
 			int step;
 			bool frantic;
 			int storm;
-			if (ctx.Read(night) && ctx.Read(found) && ctx.Read(dir) && ctx.Read(step) && ctx.Read(frantic) && ctx.Read(storm))
-				VB_AR_Listen.VB_Play(night, found, dir, step, frantic, storm);
+			int stage;
+			if (ctx.Read(night) && ctx.Read(found) && ctx.Read(dir) && ctx.Read(step) && ctx.Read(frantic) && ctx.Read(storm) && ctx.Read(stage))
+				VB_AR_Listen.VB_Play(night, found, dir, step, frantic, storm, stage);
 		}
 		else if (rpc_type == VB_AR_Gear.RPC_BURST)
 		{

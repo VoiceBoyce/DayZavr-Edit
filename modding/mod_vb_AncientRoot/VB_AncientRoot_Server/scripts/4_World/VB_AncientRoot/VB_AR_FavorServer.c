@@ -19,6 +19,7 @@ class VB_AR_FavorEntry
 	float Favor;
 	int Hour;			// час UTC (от 1970), до которого возврат к нулю уже посчитан
 	int ReconcileHour = -100000;	// час UTC последнего Отвара примирения (раз в сутки)
+	int MetHour;		// час UTC, когда последний раз был ночью у живой рощи (0 — ни разу): «Голос леса»
 }
 
 class VB_AR_FavorFile
@@ -45,7 +46,9 @@ class VB_AR_FavorServer
 	static const float OFFER_MID = 10;
 	static const float OFFER_BEST = 15;
 	static const float GATHER = -1;			// отросток, пыльца
-	static const float CUT = -25;			// вырезанная сердцевина
+	static const float CUT = -25;			// вырезанная сердцевина (роща)
+	static const float CUT_SPROUT = -10;	// вырезанный росток (ТЗ 2б.4)
+	static const float CUT_ANCIENT = -40;	// вырезанная древняя роща
 	static const float KILL_GUARD = -3;
 	static const float KILL_KEEPER = -10;	// Хранитель рощи
 	// пути вверх
@@ -67,6 +70,13 @@ class VB_AR_FavorServer
 	static const int FOREST_TREES = 8;				// столько деревьев рядом — «в лесу»
 	static const float GROVE_NEAR = 80;				// или живая сердцевина ближе
 	static const float BASE_RADIUS = 60;			// флаг территории ближе — база, волн нет
+
+	// «Голос леса» (решение пользователя 2026-11-16, вариант А): подсказка про выбор при первой встрече с рощей
+	static const int VOICE_CHECK_MS = 10000;
+	static const float VOICE_NEAR = 30;
+	static const int VOICE_REPEAT_HOURS = 168;		// не был у рощ неделю — услышит снова
+	static const string VOICE_TITLE = "Голос леса";
+	static const string VOICE_TEXT = "Лес смотрит на тебя. Роща примет дар — руну, кристалл, трофей или мясо — и отблагодарит. Нож у сердцевины она тоже почувствует.";
 
 	protected static ref VB_AR_FavorFile s_VB_File;
 	protected static ref map<string, VB_AR_FavorEntry> s_VB_Index;
@@ -106,6 +116,45 @@ class VB_AR_FavorServer
 		int n = s_VB_Index.Count();
 		Print("[VB_AncientRoot] расположение леса: игроков в favor.json " + n.ToString());
 		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_WaveTick, WAVE_CHECK_MS, true);
+		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_VoiceTick, VOICE_CHECK_MS, true);
+	}
+
+	// Ночью игрок у живой рощи (VOICE_NEAR): первый раз (или после VOICE_REPEAT_HOURS вдали от рощ) — «Голос леса».
+	// Час встречи пишется в favor.json (MetHour), файл сохраняется отложенно (VB_MarkDirty).
+	static void VB_VoiceTick()
+	{
+		if (VB_AR_Pulse.VB_NightFactor() < VB_AR_Pulse.NIGHT_FULL_ABOVE)
+			return;
+		array<Man> players = new array<Man>;
+		g_Game.GetPlayers(players);
+		int hour = VB_HourNow();
+		PlayerBase p;
+		string id;
+		VB_AR_FavorEntry e;
+		bool fresh;
+		foreach (Man m : players)
+		{
+			p = PlayerBase.Cast(m);
+			id = VB_Id(p);
+			if (id == "" || !p.IsAlive())
+				continue;
+			if (!VB_AR_Recovery.VB_LiveHeartNear(p.GetPosition(), VOICE_NEAR))
+				continue;
+			e = VB_Entry(id, true);
+			if (!e)
+				continue;
+			fresh = e.MetHour <= 0 || hour - e.MetHour >= VOICE_REPEAT_HOURS;
+			if (e.MetHour != hour)
+			{
+				e.MetHour = hour;
+				VB_MarkDirty();
+			}
+			if (fresh)
+			{
+				NotificationSystem.SendNotificationToPlayerExtended(p, 12, VOICE_TITLE, VOICE_TEXT);
+				Print("[VB_AncientRoot] голос леса: " + VB_AR_ItemsServer.VB_Who(p));
+			}
+		}
 	}
 
 	// ------------------------------------------------------------ значение

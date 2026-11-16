@@ -41,6 +41,55 @@ class VB_AR_Offer
 			return TIER_MEAT;
 		return TIER_NONE;
 	}
+
+	static const float GROVE_PART_DIST = 15.0;	// корень или щупальце не дальше этого от своей сердцевины
+
+	// Сердцевина рощи по любой её части (решение пользователя 2026-11-16, вариант Г): сама сердцевина или сетевой корень,
+	// щупальце рядом. Обвивки деревьев и корни на домах — локальные объекты клиента (сетевого ID нет): сервер их не
+	// знает, поэтому через них ничего не делаем. aliveOnly — только живая (для подношения).
+	static VB_AR_Heart VB_HeartOf(Object o, bool aliveOnly = true)
+	{
+		VB_AR_Heart h = VB_AR_Heart.Cast(o);
+		if (h)
+			return h;
+		VB_AR_Base part = VB_AR_Base.Cast(o);
+		if (!part)
+			return null;
+		int low;
+		int high;
+		part.GetNetworkID(low, high);
+		if (low == 0 && high == 0)
+			return null;
+		if (!aliveOnly)
+			return VB_NearestHeartAny(part.GetPosition(), GROVE_PART_DIST);
+		if (g_Game.IsDedicatedServer())
+			return VB_AR_Recovery.VB_LiveHeartNear(part.GetPosition(), GROVE_PART_DIST);
+		return VB_AR_Heart.Cast(VB_AR_Pulse.VB_NearestLiveHeart(part.GetPosition(), GROVE_PART_DIST));	// Pulse отдаёт VB_AR_Base
+	}
+
+	// ближайшая сердцевина, живая или вырезанная (объекты рядом — годится и клиенту, и серверу)
+	static VB_AR_Heart VB_NearestHeartAny(vector pos, float maxDist)
+	{
+		array<Object> objs = new array<Object>;
+		g_Game.GetObjectsAtPosition(pos, maxDist, objs, null);
+		VB_AR_Heart best;
+		float bestD = maxDist * maxDist;
+		float d;
+		VB_AR_Heart h;
+		foreach (Object o : objs)
+		{
+			h = VB_AR_Heart.Cast(o);
+			if (!h)
+				continue;
+			d = vector.DistanceSq(h.GetPosition(), pos);
+			if (d <= bestD)
+			{
+				bestD = d;
+				best = h;
+			}
+		}
+		return best;
+	}
 }
 
 class VB_ActionOfferRootCB : ActionContinuousBaseCB
@@ -74,7 +123,7 @@ class VB_ActionOfferRoot : ActionContinuousBase
 	// ночью, у живой сердцевины, которая ещё принимает дары, с годным даром в руках
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item)
 	{
-		VB_AR_Heart heart = VB_AR_Heart.Cast(target.GetObject());
+		VB_AR_Heart heart = VB_AR_Offer.VB_HeartOf(target.GetObject());	// сердцевина или любой корень рощи
 		if (!heart || heart.VB_IsDead() || heart.VB_OffersLeft() <= 0)
 			return false;
 		if (VB_AR_Offer.VB_Tier(item) == VB_AR_Offer.TIER_NONE)

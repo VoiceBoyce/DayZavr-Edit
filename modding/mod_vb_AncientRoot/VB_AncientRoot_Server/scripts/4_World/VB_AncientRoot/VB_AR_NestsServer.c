@@ -1642,7 +1642,47 @@ class VB_AR_Nests
 				if (ctx.Read(want))
 					VB_EditSetActive(actor, who, want);
 				break;
+
+			case VB_AR_NestNet.OP_STAGE_UP:
+				if (ctx.Read(nestId))
+					VB_EditStage(actor, who, nestId, 1);
+				break;
+
+			case VB_AR_NestNet.OP_STAGE_DOWN:
+				if (ctx.Read(nestId))
+					VB_EditStage(actor, who, nestId, -1);
+				break;
 		}
+	}
+
+	// Ступень живой рощи ±1 (админ, для теста и ручной правки; лимит древних не проверяется). Роща встаёт заново
+	// с новым обликом, пыльцой и подношениями; очки роста и возраст обнуляются.
+	protected void VB_EditStage(PlayerBase actor, string who, int nestId, int delta)
+	{
+		VB_AR_Nest nest = VB_FindNest(nestId);
+		if (!nest)
+			return;
+		if (m_VB_LiveNests.Find(nestId) < 0)
+		{
+			VB_SendMsg(actor, nest.Name + " сейчас не на карте: ступень меняется только у живой рощи");
+			return;
+		}
+		VB_AR_Grove g = VB_NewGrove(nestId);
+		int stage = Math.Clamp(g.Stage + delta, VB_AR_Heart.STAGE_SPROUT, VB_AR_Heart.STAGE_ANCIENT);
+		if (stage == g.Stage)
+		{
+			VB_SendMsg(actor, nest.Name + ": ступень уже " + VB_StageName(stage));
+			return;
+		}
+		g.Stage = stage;
+		g.Growth = 0;
+		g.Age = 0;
+		VB_DespawnNest(nest);
+		VB_SpawnNest(nest, stage);
+		VB_SaveState();
+		Print("[VB_AncientRoot] рощи: " + nest.Name + " — ступень " + VB_StageName(stage) + " (" + who + ")");
+		VB_SendNestToEditors(nest);
+		VB_SendMsg(actor, nest.Name + ": теперь " + VB_StageName(stage));
 	}
 
 	protected void VB_EditReroll(PlayerBase actor, string who)
@@ -2119,6 +2159,11 @@ class VB_AR_Nests
 			objLive = m_VB_Live.Contains(o.Id);
 			rpc.Write(objLive);
 		}
+		int stage = 0;
+		VB_AR_Grove grove = VB_GroveOf(nest.Id);
+		if (grove && nestLive)
+			stage = grove.Stage;
+		rpc.Write(stage);		// ступень живой рощи (0 — не живая роща)
 		rpc.Send(player, VB_AR_NestNet.RPC_REPLY, true, player.GetIdentity());
 	}
 

@@ -1,0 +1,1170 @@
+FrameWidgetClass VB_AR_BookRoot {
+ visible 1
+ ignorepointer 1
+ position 0 0
+ size 1 1
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 0
+ {
+  ImageWidgetClass VB_AR_BookDim {
+   visible 1
+   priority 0
+   position 0 0
+   size 1 1
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   mode blend
+   "src alpha" 1
+   stretch 1
+   color 0 0 0 0.6
+  }
+  FrameWidgetClass VB_AR_Book {
+   visible 1
+   ignorepointer 1
+   priority 1
+   position 41 0
+   size 1450 820
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   halign center_ref
+   valign center_ref
+   {
+    ImageWidgetClass VB_AR_BookCover {
+     visible 1
+     priority 0
+     position 0 0
+     size 1240 820
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     mode blend
+     "src alpha" 1
+     stretch 1
+    }
+    ButtonWidgetClass VB_AR_BookTab0 {
+     visible 1
+     priority 1
+     position 1226 66
+     size 200 52
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style Empty
+     "no focus" 1
+     {
+      ImageWidgetClass VB_AR_BookTabImg0 {
+       visible 1
+       ignorepointer 1
+       position 0 0
+       size 200 52
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       mode blend
+       "src alpha" 1
+       stretch 1
+      }
+      TextWidgetClass VB_AR_BookTabText0 {
+       visible 1
+       ignorepointer 1
+       position 20 0
+       size 156 52
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/AmorSerifPro-Bold"
+       "exact text" 1
+       "exact text size" 21
+       "text halign" left
+       "text valign" center
+      }
+     }
+    }
+    ButtonWidgetClass VB_AR_BookTab1 {
+     visible 1
+     priority 1
+     position 1226 142
+     size 200 52
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style Empty
+     "no focus" 1
+     {
+      ImageWidgetClass VB_AR_BookTabImg1 {
+       visible 1
+       ignorepointer 1
+       position 0 0
+       size 200 52
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       mode blend
+       "src alpha" 1
+       stretch 1
+      }
+      TextWidgetClass VB_AR_BookTabText1 {
+       visible 1
+       ignorepointer 1
+       position 20 0
+       size 156 52
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/AmorSerifPro-Bold"
+       "exact text" 1
+       "exact text size" 21
+       "text halign" left
+       "text valign" center
+      }
+     }
+    }
+    ButtonWidgetClass VB_AR_BookTab2 {
+     visible 1
+     priority 1
+     position 1226 218
+     size 200 52
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style Empty
+     "no focus" 1
+     {
+      ImageWidgetClass VB_AR_BookTabImg2 {
+       visible 1
+       ignorepointer 1
+       position 0 0
+       size 200 52
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       mode blend
+       "src alpha" 1
+       stretch 1
+      }
+      TextWidgetClass VB_AR_BookTabText2 {
+       visible 1
+       ignorepointer 1
+       position 20 0
+       size 156 52
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/AmorSerifPro-Bold"
+       "exact text" 1
+       "exact text size" 21
+       "text halign" left
+       "text valign" center
+      }
+     }
+    }
+    ButtonWidgetClass VB_AR_BookTab3 {
+     visible 1
+     priority 1
+     position 1226 294
+     size 200 52
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style Empty
+     "no focus" 1
+     {
+      ImageWidgetClass VB_AR_BookTabImg3 {
+       visible 1
+       ignorepointer 1
+       position 0 0
+       size 200 52
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       mode blend
+       "src alpha" 1
+       stretch 1
+      }
+      TextWidgetClass VB_AR_BookTabText3 {
+       visible 1
+       ignorepointer 1
+       position 20 0
+       size 156 52
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/AmorSerifPro-Bold"
+       "exact text" 1
+       "exact text size" 21
+       "text halign" left
+       "text valign" center
+      }
+     }
+    }
+    ButtonWidgetClass VB_AR_BookTab4 {
+     visible 1
+     priority 1
+     position 1226 370
+     size 200 52
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style Empty
+     "no focus" 1
+     {
+      ImageWidgetClass VB_AR_BookTabImg4 {
+       visible 1
+       ignorepointer 1
+       position 0 0
+       size 200 52
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       mode blend
+       "src alpha" 1
+       stretch 1
+      }
+      TextWidgetClass VB_AR_BookTabText4 {
+       visible 1
+       ignorepointer 1
+       position 20 0
+       size 156 52
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/AmorSerifPro-Bold"
+       "exact text" 1
+       "exact text size" 21
+       "text halign" left
+       "text valign" center
+      }
+     }
+    }
+    ButtonWidgetClass VB_AR_BookTab5 {
+     visible 1
+     priority 1
+     position 1226 446
+     size 200 52
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style Empty
+     "no focus" 1
+     {
+      ImageWidgetClass VB_AR_BookTabImg5 {
+       visible 1
+       ignorepointer 1
+       position 0 0
+       size 200 52
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       mode blend
+       "src alpha" 1
+       stretch 1
+      }
+      TextWidgetClass VB_AR_BookTabText5 {
+       visible 1
+       ignorepointer 1
+       position 20 0
+       size 156 52
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/AmorSerifPro-Bold"
+       "exact text" 1
+       "exact text size" 21
+       "text halign" left
+       "text valign" center
+      }
+     }
+    }
+    ButtonWidgetClass VB_AR_BookTab6 {
+     visible 1
+     priority 1
+     position 1226 522
+     size 200 52
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style Empty
+     "no focus" 1
+     {
+      ImageWidgetClass VB_AR_BookTabImg6 {
+       visible 1
+       ignorepointer 1
+       position 0 0
+       size 200 52
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       mode blend
+       "src alpha" 1
+       stretch 1
+      }
+      TextWidgetClass VB_AR_BookTabText6 {
+       visible 1
+       ignorepointer 1
+       position 20 0
+       size 156 52
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/AmorSerifPro-Bold"
+       "exact text" 1
+       "exact text size" 21
+       "text halign" left
+       "text valign" center
+      }
+     }
+    }
+    ButtonWidgetClass VB_AR_BookTab7 {
+     visible 1
+     priority 1
+     position 1226 598
+     size 200 52
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style Empty
+     "no focus" 1
+     {
+      ImageWidgetClass VB_AR_BookTabImg7 {
+       visible 1
+       ignorepointer 1
+       position 0 0
+       size 200 52
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       mode blend
+       "src alpha" 1
+       stretch 1
+      }
+      TextWidgetClass VB_AR_BookTabText7 {
+       visible 1
+       ignorepointer 1
+       position 20 0
+       size 156 52
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/AmorSerifPro-Bold"
+       "exact text" 1
+       "exact text size" 21
+       "text halign" left
+       "text valign" center
+      }
+     }
+    }
+    ButtonWidgetClass VB_AR_BookTab8 {
+     visible 1
+     priority 1
+     position 1226 674
+     size 200 52
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style Empty
+     "no focus" 1
+     {
+      ImageWidgetClass VB_AR_BookTabImg8 {
+       visible 1
+       ignorepointer 1
+       position 0 0
+       size 200 52
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       mode blend
+       "src alpha" 1
+       stretch 1
+      }
+      TextWidgetClass VB_AR_BookTabText8 {
+       visible 1
+       ignorepointer 1
+       position 20 0
+       size 156 52
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/AmorSerifPro-Bold"
+       "exact text" 1
+       "exact text size" 21
+       "text halign" left
+       "text valign" center
+      }
+     }
+    }
+    ImageWidgetClass VB_AR_BookPageL {
+     visible 1
+     priority 2
+     position 40 40
+     size 560 740
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     mode blend
+     "src alpha" 1
+     stretch 1
+    }
+    ImageWidgetClass VB_AR_BookPageR {
+     visible 1
+     priority 2
+     position 640 40
+     size 560 740
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     mode blend
+     "src alpha" 1
+     stretch 1
+     "flip u" 1
+    }
+    ImageWidgetClass VB_AR_BookSpine {
+     visible 1
+     ignorepointer 1
+     priority 3
+     position 590 40
+     size 60 740
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     mode blend
+     "src alpha" 1
+     stretch 1
+    }
+    FrameWidgetClass VB_AR_BookSideL {
+     visible 1
+     ignorepointer 1
+     priority 4
+     position 40 40
+     size 560 740
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     {
+      TextWidgetClass VB_AR_BookTitleL {
+       visible 1
+       ignorepointer 1
+       position 44 40
+       size 472 50
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/AmorSerifPro-Bold"
+       "exact text" 1
+       "exact text size" 40
+       "text halign" center
+       "text valign" center
+      }
+      ImageWidgetClass VB_AR_BookOrnL {
+       visible 1
+       ignorepointer 1
+       position 106 92
+       size 348 22
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       mode blend
+       "src alpha" 1
+       stretch 1
+      }
+      ItemPreviewWidgetClass VB_AR_BookPicL {
+       visible 1
+       ignorepointer 1
+       priority 5
+       position 190 110
+       size 180 170
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       "force flip enable" 1
+      }
+      RichTextWidgetClass VB_AR_BookBodyL {
+       visible 1
+       ignorepointer 1
+       position 52 124
+       size 456 460
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/AmorSerifPro"
+       "exact text" 1
+       "exact text size" 16
+       wrap 1
+       "text halign" left
+       "text valign" top
+      }
+      ImageWidgetClass VB_AR_BookNoteBgL {
+       visible 1
+       ignorepointer 1
+       position 48 588
+       size 464 102
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       mode blend
+       "src alpha" 1
+       stretch 1
+      }
+      RichTextWidgetClass VB_AR_BookNoteL {
+       visible 1
+       ignorepointer 1
+       position 62 596
+       size 436 90
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/AmorSerifPro"
+       "exact text" 1
+       "exact text size" 15
+       wrap 1
+       "text halign" left
+       "text valign" top
+      }
+      TextWidgetClass VB_AR_BookNumL {
+       visible 1
+       ignorepointer 1
+       position 230 692
+       size 100 28
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/AmorSerifPro"
+       "exact text" 1
+       "exact text size" 22
+       "text halign" center
+       "text valign" center
+      }
+      ImageWidgetClass VB_AR_BookRunesL {
+       visible 1
+       ignorepointer 1
+       position 60 130
+       size 440 220
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       mode blend
+       "src alpha" 1
+       stretch 1
+      }
+      RichTextWidgetClass VB_AR_BookLockL {
+       visible 1
+       ignorepointer 1
+       position 64 370
+       size 432 210
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/AmorSerifPro"
+       "exact text" 1
+       "exact text size" 16
+       wrap 1
+       "text halign" center
+       "text valign" top
+      }
+      FrameWidgetClass VB_AR_BookEnt1L {
+       visible 1
+       ignorepointer 1
+       position 44 108
+       size 472 276
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       {
+        ItemPreviewWidgetClass VB_AR_BookEntPic1L {
+         visible 1
+         ignorepointer 1
+         priority 5
+         position 0 8
+         size 150 150
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         "force flip enable" 1
+        }
+        TextWidgetClass VB_AR_BookEntName1L {
+         visible 1
+         ignorepointer 1
+         position 160 0
+         size 312 38
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         font "gui/fonts/AmorSerifPro-Bold"
+         "exact text" 1
+         "exact text size" 30
+         "text halign" left
+         "text valign" center
+        }
+        RichTextWidgetClass VB_AR_BookEntText1L {
+         visible 1
+         ignorepointer 1
+         position 160 40
+         size 312 232
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         font "gui/fonts/AmorSerifPro"
+         "exact text" 1
+         "exact text size" 16
+         wrap 1
+         "text halign" left
+         "text valign" top
+        }
+       }
+      }
+      FrameWidgetClass VB_AR_BookEnt2L {
+       visible 1
+       ignorepointer 1
+       position 44 396
+       size 472 276
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       {
+        ItemPreviewWidgetClass VB_AR_BookEntPic2L {
+         visible 1
+         ignorepointer 1
+         priority 5
+         position 0 8
+         size 150 150
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         "force flip enable" 1
+        }
+        TextWidgetClass VB_AR_BookEntName2L {
+         visible 1
+         ignorepointer 1
+         position 160 0
+         size 312 38
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         font "gui/fonts/AmorSerifPro-Bold"
+         "exact text" 1
+         "exact text size" 30
+         "text halign" left
+         "text valign" center
+        }
+        RichTextWidgetClass VB_AR_BookEntText2L {
+         visible 1
+         ignorepointer 1
+         position 160 40
+         size 312 232
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         font "gui/fonts/AmorSerifPro"
+         "exact text" 1
+         "exact text size" 16
+         wrap 1
+         "text halign" left
+         "text valign" top
+        }
+       }
+      }
+     }
+    }
+    FrameWidgetClass VB_AR_BookSideR {
+     visible 1
+     ignorepointer 1
+     priority 4
+     position 640 40
+     size 560 740
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     {
+      TextWidgetClass VB_AR_BookTitleR {
+       visible 1
+       ignorepointer 1
+       position 44 40
+       size 472 50
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/AmorSerifPro-Bold"
+       "exact text" 1
+       "exact text size" 40
+       "text halign" center
+       "text valign" center
+      }
+      ImageWidgetClass VB_AR_BookOrnR {
+       visible 1
+       ignorepointer 1
+       position 106 92
+       size 348 22
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       mode blend
+       "src alpha" 1
+       stretch 1
+      }
+      ItemPreviewWidgetClass VB_AR_BookPicR {
+       visible 1
+       ignorepointer 1
+       priority 5
+       position 190 110
+       size 180 170
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       "force flip enable" 1
+      }
+      RichTextWidgetClass VB_AR_BookBodyR {
+       visible 1
+       ignorepointer 1
+       position 52 124
+       size 456 460
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/AmorSerifPro"
+       "exact text" 1
+       "exact text size" 16
+       wrap 1
+       "text halign" left
+       "text valign" top
+      }
+      ImageWidgetClass VB_AR_BookNoteBgR {
+       visible 1
+       ignorepointer 1
+       position 48 588
+       size 464 102
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       mode blend
+       "src alpha" 1
+       stretch 1
+      }
+      RichTextWidgetClass VB_AR_BookNoteR {
+       visible 1
+       ignorepointer 1
+       position 62 596
+       size 436 90
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/AmorSerifPro"
+       "exact text" 1
+       "exact text size" 15
+       wrap 1
+       "text halign" left
+       "text valign" top
+      }
+      TextWidgetClass VB_AR_BookNumR {
+       visible 1
+       ignorepointer 1
+       position 230 692
+       size 100 28
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/AmorSerifPro"
+       "exact text" 1
+       "exact text size" 22
+       "text halign" center
+       "text valign" center
+      }
+      ImageWidgetClass VB_AR_BookRunesR {
+       visible 1
+       ignorepointer 1
+       position 60 130
+       size 440 220
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       mode blend
+       "src alpha" 1
+       stretch 1
+      }
+      RichTextWidgetClass VB_AR_BookLockR {
+       visible 1
+       ignorepointer 1
+       position 64 370
+       size 432 210
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/AmorSerifPro"
+       "exact text" 1
+       "exact text size" 16
+       wrap 1
+       "text halign" center
+       "text valign" top
+      }
+      FrameWidgetClass VB_AR_BookEnt1R {
+       visible 1
+       ignorepointer 1
+       position 44 108
+       size 472 276
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       {
+        ItemPreviewWidgetClass VB_AR_BookEntPic1R {
+         visible 1
+         ignorepointer 1
+         priority 5
+         position 0 8
+         size 150 150
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         "force flip enable" 1
+        }
+        TextWidgetClass VB_AR_BookEntName1R {
+         visible 1
+         ignorepointer 1
+         position 160 0
+         size 312 38
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         font "gui/fonts/AmorSerifPro-Bold"
+         "exact text" 1
+         "exact text size" 30
+         "text halign" left
+         "text valign" center
+        }
+        RichTextWidgetClass VB_AR_BookEntText1R {
+         visible 1
+         ignorepointer 1
+         position 160 40
+         size 312 232
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         font "gui/fonts/AmorSerifPro"
+         "exact text" 1
+         "exact text size" 16
+         wrap 1
+         "text halign" left
+         "text valign" top
+        }
+       }
+      }
+      FrameWidgetClass VB_AR_BookEnt2R {
+       visible 1
+       ignorepointer 1
+       position 44 396
+       size 472 276
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       {
+        ItemPreviewWidgetClass VB_AR_BookEntPic2R {
+         visible 1
+         ignorepointer 1
+         priority 5
+         position 0 8
+         size 150 150
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         "force flip enable" 1
+        }
+        TextWidgetClass VB_AR_BookEntName2R {
+         visible 1
+         ignorepointer 1
+         position 160 0
+         size 312 38
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         font "gui/fonts/AmorSerifPro-Bold"
+         "exact text" 1
+         "exact text size" 30
+         "text halign" left
+         "text valign" center
+        }
+        RichTextWidgetClass VB_AR_BookEntText2R {
+         visible 1
+         ignorepointer 1
+         position 160 40
+         size 312 232
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         font "gui/fonts/AmorSerifPro"
+         "exact text" 1
+         "exact text size" 16
+         wrap 1
+         "text halign" left
+         "text valign" top
+        }
+       }
+      }
+      FrameWidgetClass VB_AR_BookYou {
+       visible 1
+       ignorepointer 1
+       position 0 0
+       size 560 740
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       {
+        ImageWidgetClass VB_AR_BookYouDisc {
+         visible 1
+         ignorepointer 1
+         position 226 108
+         size 108 108
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         mode blend
+         "src alpha" 1
+         stretch 1
+        }
+        ImageWidgetClass VB_AR_BookYouRune {
+         visible 1
+         ignorepointer 1
+         position 238 120
+         size 84 84
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         mode blend
+         "src alpha" 1
+         stretch 1
+        }
+        TextWidgetClass VB_AR_BookYouTier {
+         visible 1
+         ignorepointer 1
+         position 44 220
+         size 472 50
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         font "gui/fonts/AmorSerifPro-Bold"
+         "exact text" 1
+         "exact text size" 44
+         "text halign" center
+         "text valign" center
+        }
+        FrameWidgetClass VB_AR_BookYouTrack {
+         visible 1
+         ignorepointer 1
+         position 80 272
+         size 400 48
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         {
+          ImageWidgetClass VB_AR_BookYouBranch {
+           visible 1
+           ignorepointer 1
+           position 0 0
+           size 400 48
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           mode blend
+           "src alpha" 1
+           stretch 1
+          }
+          ImageWidgetClass VB_AR_BookYouThorn {
+           visible 1
+           ignorepointer 1
+           position 0 0
+           size 400 48
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           mode blend
+           "src alpha" 1
+           stretch 1
+           Mask "VB_AncientRoot/gui/vb_ar_mask_left_ca.paa"
+           "Transition width" 0.04
+           Progress 0
+          }
+          ImageWidgetClass VB_AR_BookYouBloom {
+           visible 1
+           ignorepointer 1
+           position 0 0
+           size 400 48
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           mode blend
+           "src alpha" 1
+           stretch 1
+           Mask "VB_AncientRoot/gui/vb_ar_mask_right_ca.paa"
+           "Transition width" 0.04
+           Progress 0
+          }
+          ImageWidgetClass VB_AR_BookYouBud {
+           visible 1
+           ignorepointer 1
+           position 189 13
+           size 22 22
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           mode blend
+           "src alpha" 1
+           stretch 1
+          }
+         }
+        }
+        TextWidgetClass VB_AR_BookYouValue {
+         visible 1
+         ignorepointer 1
+         position 44 322
+         size 472 32
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         font "gui/fonts/AmorSerifPro"
+         "exact text" 1
+         "exact text size" 26
+         "text halign" center
+         "text valign" center
+        }
+       }
+      }
+     }
+    }
+    ButtonWidgetClass VB_AR_BookPrev {
+     visible 1
+     priority 6
+     position 66 722
+     size 84 42
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style Empty
+     "no focus" 1
+     {
+      ImageWidgetClass VB_AR_BookPrevImg {
+       visible 1
+       ignorepointer 1
+       position 0 0
+       size 84 42
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       mode blend
+       "src alpha" 1
+       stretch 1
+       "flip u" 1
+      }
+     }
+    }
+    ButtonWidgetClass VB_AR_BookNext {
+     visible 1
+     priority 6
+     position 1090 722
+     size 84 42
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style Empty
+     "no focus" 1
+     {
+      ImageWidgetClass VB_AR_BookNextImg {
+       visible 1
+       ignorepointer 1
+       position 0 0
+       size 84 42
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       mode blend
+       "src alpha" 1
+       stretch 1
+      }
+     }
+    }
+   }
+  }
+ }
+}

@@ -23,6 +23,7 @@ modded class VB_AR_Heart
 	static const string AMBER_INCL = "VB_AR_AmberInclusion";
 	static const string POLLEN = "VB_AR_Spores";
 	static const float BEST_INCL_CHANCE = 0.30;		// лучший дар: янтарь, пыльца и с шансом янтарь с вкраплением
+	static const float ANCIENT_INCL_CHANCE = 0.50;	// у древней рощи вкрапление чаще
 	static const float MID_AMBER_CHANCE = 0.50;		// средний: пыльца и с шансом янтарь
 
 	protected int m_VB_Alarm;
@@ -42,6 +43,7 @@ modded class VB_AR_Heart
 		int lim = VB_LimitByStage(m_VB_Stage);
 		m_VB_SporesLeft = lim;
 		m_VB_OffersLeft = lim;
+		VB_ApplyStageScale();		// размер и коллизия по ступени (клиент ставит тот же размер сам)
 		SetSynchDirty();
 	}
 
@@ -174,7 +176,7 @@ modded class VB_AR_Heart
 		m_VB_Alarm = 0;
 
 		bool isFriend = favorTier == VB_AR_Favor.TIER_FRIEND;
-		string gifts = VB_GiveGiftsServer(player, tier, isFriend);
+		string gifts = VB_GiveGiftsServer(player, tier, isFriend, m_VB_Stage);
 		int blessMs = BLESS_MS;
 		if (isFriend)
 			blessMs = BLESS_MS * 2;		// Друг леса — Благословение вдвое дольше
@@ -202,16 +204,28 @@ modded class VB_AR_Heart
 		return true;
 	}
 
-	protected string VB_GiveGiftsServer(PlayerBase player, int tier, bool isFriend)
+	// дар по ценности подношения и ступени рощи (ТЗ 2б.4): росток даёт только пыльцу, древняя — ещё янтарь
+	// и вкрапление чаще
+	protected string VB_GiveGiftsServer(PlayerBase player, int tier, bool isFriend, int stage)
 	{
 		TStringArray drops = new TStringArray;
 		if (isFriend)
 			drops.Insert(POLLEN);		// Друг леса — дар щедрее
-		if (tier == VB_AR_Offer.TIER_BEST)
+		float inclChance = BEST_INCL_CHANCE;
+		if (stage >= STAGE_ANCIENT)
+		{
+			drops.Insert(AMBER);
+			inclChance = ANCIENT_INCL_CHANCE;
+		}
+		if (stage <= STAGE_SPROUT)
+		{
+			drops.Insert(POLLEN);		// молодая роща: только пыльца
+		}
+		else if (tier == VB_AR_Offer.TIER_BEST)
 		{
 			drops.Insert(AMBER);
 			drops.Insert(POLLEN);
-			if (Math.RandomFloat01() < BEST_INCL_CHANCE)
+			if (Math.RandomFloat01() < inclChance)
 				drops.Insert(AMBER_INCL);
 		}
 		else if (tier == VB_AR_Offer.TIER_MID)
@@ -456,7 +470,7 @@ modded class VB_ActionOfferRoot
 	{
 		super.OnFinishProgressServer(action_data);
 
-		VB_AR_Heart heart = VB_AR_Heart.Cast(action_data.m_Target.GetObject());
+		VB_AR_Heart heart = VB_AR_Offer.VB_HeartOf(action_data.m_Target.GetObject());	// сердцевина или корень рощи
 		if (heart)
 			heart.VB_OfferServer(action_data.m_Player, action_data.m_MainItem);
 	}

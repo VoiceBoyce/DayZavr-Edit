@@ -37,7 +37,9 @@ modded class VB_AR_Heart
 {
 	static const string CHUNK_TYPE = "VB_AR_HeartChunk";
 	static const string SEED_TYPE = "VB_AR_Seed";
-	static const float SEED_CHANCE = 0.5;		// Семя Древнего корня при вырезании
+	static const float SEED_CHANCE = 0.5;		// Семя Древнего корня при вырезании (роща; у древней — всегда)
+	static const string ROOT_TYPE = "VB_AR_RootPiece";
+	static const float ANCIENT_CHUNK2_CHANCE = 0.5;	// вторая сердцевина у древней
 	static const int CALM_MS = 90000;			// столько после последней попытки резать сердце остаётся потревоженным
 	static const int NOISE_COOLDOWN_MS = 10000;	// шум у сердца не чаще (резка и сбор спор зовут его на каждое начало)
 
@@ -193,7 +195,7 @@ modded class VB_AR_Heart
 		SetSynchDirty();
 	}
 
-	// сервер: сердце вырезано — гаснет до рестарта, вырезавшему «Сердце Изнанки» (на землю у ног), всем игрокам удар молнии
+	// сервер: сердце вырезано — гаснет до рестарта, вырезавшему добыча по ступени (на землю у ног), всем удар молнии
 	void VB_KillServer(PlayerBase cutter)
 	{
 		if (m_VB_Dead)
@@ -214,13 +216,35 @@ modded class VB_AR_Heart
 		string at = GetPosition().ToString();
 		Print("[VB_AncientRoot] сердце вырезано: " + who + " в " + at);
 
+		// добыча и расположение — по ступени рощи (ТЗ 2б.4); всё на землю у ног, не в инвентарь
 		if (cutter)
 		{
-			VB_AR_ItemsServer.VB_DropAtFeet(cutter, CHUNK_TYPE);	// на землю у ног, не в инвентарь
-			VB_AR_FavorServer.VB_Add(cutter, VB_AR_FavorServer.CUT, "вырезал сердцевину");
+			if (m_VB_Stage <= STAGE_SPROUT)
+			{
+				// у ростка сердцевины ещё нет — пара отростков
+				int roots = Math.RandomIntInclusive(1, 2);
+				for (int i = 0; i < roots; i++)
+				{
+					VB_AR_ItemsServer.VB_DropAtFeet(cutter, ROOT_TYPE);
+				}
+				VB_AR_FavorServer.VB_Add(cutter, VB_AR_FavorServer.CUT_SPROUT, "вырезал росток рощи");
+			}
+			else if (m_VB_Stage >= STAGE_ANCIENT)
+			{
+				VB_AR_ItemsServer.VB_DropAtFeet(cutter, CHUNK_TYPE);
+				if (Math.RandomFloat01() < ANCIENT_CHUNK2_CHANCE)
+					VB_AR_ItemsServer.VB_DropAtFeet(cutter, CHUNK_TYPE);
+				VB_AR_ItemsServer.VB_DropAtFeet(cutter, SEED_TYPE);		// у древней Семя всегда
+				VB_AR_FavorServer.VB_Add(cutter, VB_AR_FavorServer.CUT_ANCIENT, "вырезал древнюю рощу");
+			}
+			else
+			{
+				VB_AR_ItemsServer.VB_DropAtFeet(cutter, CHUNK_TYPE);
+				if (Math.RandomFloat01() < SEED_CHANCE)
+					VB_AR_ItemsServer.VB_DropAtFeet(cutter, SEED_TYPE);	// Семя — путь назад к лесу (2б.11)
+				VB_AR_FavorServer.VB_Add(cutter, VB_AR_FavorServer.CUT, "вырезал сердцевину");
+			}
 			VB_AR_FavorServer.VB_MarkCutter(cutter);					// оберег гаснет до рестарта
-			if (Math.RandomFloat01() < SEED_CHANCE)
-				VB_AR_ItemsServer.VB_DropAtFeet(cutter, SEED_TYPE);		// Семя — путь назад к лесу (2б.11)
 		}
 
 		VB_AR_Strike.VB_BroadcastServer();

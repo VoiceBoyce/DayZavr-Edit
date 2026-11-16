@@ -1,0 +1,16 @@
+{
+    "Admins": [
+        "76561200715668795",
+        "76561198903710848"
+    ],
+    "ActiveNests": 5,
+    "MinNestDistance": 300.0,
+    "RootsPercentMin": 70,
+    "RootsPercentMax": 100,
+    "NoRepeat": 1,
+    "RegrowMinutes": 0,
+    "GrowRestarts": 2,
+    "FeedOffers": 2,
+    "AncientLife": 4,
+    "MaxAncient": 1
+}

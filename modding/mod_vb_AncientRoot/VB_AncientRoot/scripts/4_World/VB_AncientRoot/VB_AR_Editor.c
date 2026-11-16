@@ -848,6 +848,27 @@ class VB_AR_Editor
 			VB_AR_NestClient.VB_SendOp(VB_AR_NestNet.OP_NEST_TOGGLE, m_VB_CurNest);
 	}
 
+	void VB_StageNest(bool up)
+	{
+		if (m_VB_CurNest == 0 || m_VB_CurNest == VB_AR_NestNet.DECOR_ID)
+			return;
+		if (up)
+			VB_AR_NestClient.VB_SendOp(VB_AR_NestNet.OP_STAGE_UP, m_VB_CurNest);
+		else
+			VB_AR_NestClient.VB_SendOp(VB_AR_NestNet.OP_STAGE_DOWN, m_VB_CurNest);
+	}
+
+	static string VB_StageName(int stage)
+	{
+		if (stage <= 0)
+			return "";
+		if (stage == 1)
+			return "росток";
+		if (stage >= 3)
+			return "древняя";
+		return "роща";
+	}
+
 	void VB_DeleteNest()
 	{
 		if (m_VB_CurNest != 0)
@@ -1151,6 +1172,9 @@ class VB_AR_EditorPanels : Managed
 	protected INT_UIF_Button m_VB_BtnUndo;
 	protected INT_UIF_Button m_VB_BtnTp;
 	protected INT_UIF_Button m_VB_BtnToggle;
+	protected TextWidget m_VB_StageText;
+	protected INT_UIF_Button m_VB_BtnStageDown;
+	protected INT_UIF_Button m_VB_BtnStageUp;
 	protected INT_UIF_Button m_VB_BtnDelete;
 	protected INT_UIF_StatTile m_VB_TilePool;
 	protected INT_UIF_Stepper m_VB_ActiveStep;	// сколько гнёзд встаёт за рестарт (ActiveNests в settings.json)
@@ -1197,7 +1221,7 @@ class VB_AR_EditorPanels : Managed
 			return;
 		m_VB_Right.SetSort(SORT);
 
-		INT_UIF_Card acts = INT_UIF_Card.Create(m_VB_Bag, m_VB_Right, 0, 0, w, 620, "ГНЕЗДО", "pin", "");
+		INT_UIF_Card acts = INT_UIF_Card.Create(m_VB_Bag, m_VB_Right, 0, 0, w, 662, "ГНЕЗДО", "pin", "");
 		Widget c = acts.GetContent();
 		float cw = acts.GetContentW();
 		float y = 0;
@@ -1222,6 +1246,13 @@ class VB_AR_EditorPanels : Managed
 		m_VB_BtnToggle = INT_UIF_Button.Create(m_VB_Bag, c, 0, y, cw, bh, "Выключить из выбора", INT_UIF_Variant.SECONDARY, "eye");
 		m_VB_BtnToggle.OnClick().Insert(OnVBToggle);
 		y += step;
+		// ступень живой рощи (ТЗ 2б.4): «−» и «+» — роща встаёт заново с новым обликом
+		m_VB_StageText = INT_UIF_Draw.Text(c, 0, y, cw - 120, bh, "", 14, INT_UIF.Color(INT_UIF_ThemeKeys.TEXT));
+		m_VB_BtnStageDown = INT_UIF_Button.Create(m_VB_Bag, c, cw - 112, y, 52, bh, "−", INT_UIF_Variant.SECONDARY, "");
+		m_VB_BtnStageDown.OnClick().Insert(OnVBStageDown);
+		m_VB_BtnStageUp = INT_UIF_Button.Create(m_VB_Bag, c, cw - 52, y, 52, bh, "+", INT_UIF_Variant.SECONDARY, "");
+		m_VB_BtnStageUp.OnClick().Insert(OnVBStageUp);
+		y += step;
 		m_VB_BtnDelete = INT_UIF_Button.Create(m_VB_Bag, c, 0, y, cw, bh, "Удалить гнездо", INT_UIF_Variant.DANGER, "trash");
 		m_VB_BtnDelete.OnClick().Insert(OnVBDelete);
 		y += step + 4;
@@ -1245,7 +1276,7 @@ class VB_AR_EditorPanels : Managed
 		INT_UIF_Button quit = INT_UIF_Button.Create(m_VB_Bag, c, 0, y, cw, bh, "Выйти из редактора", INT_UIF_Variant.GHOST, "logout");
 		quit.OnClick().Insert(OnVBQuit);
 
-		INT_UIF_Card status = INT_UIF_Card.Create(m_VB_Bag, m_VB_Right, 0, 632, w, 200, "СТАТУС", "info", "");
+		INT_UIF_Card status = INT_UIF_Card.Create(m_VB_Bag, m_VB_Right, 0, 674, w, 200, "СТАТУС", "info", "");
 		Widget s = status.GetContent();
 		float sw = status.GetContentW();
 		m_VB_StMode = INT_UIF_Draw.Text(s, 0, 0, sw, 20, "", 12, INT_UIF.Color(INT_UIF_ThemeKeys.TEAL));
@@ -1431,6 +1462,8 @@ class VB_AR_EditorPanels : Managed
 			sec = VB_AR_Editor.VB_CountWord(nest.Objects.Count(), "объект", "объекта", "объектов");
 			distM = Math.Round(dists[k]);
 			sec += " · " + distM.ToString() + " м";
+			if (isLive && VB_AR_NestClient.VB_StageOf(nest.Id) > 0)
+				sec += " · " + VB_AR_Editor.VB_StageName(VB_AR_NestClient.VB_StageOf(nest.Id));
 			r = m_VB_NestList.AddRow(nest.Name, sec, nest.Id);
 			if (heart)
 				m_VB_NestList.SetRowIcon(r, "target", INT_UIF_ThemeKeys.RED);
@@ -1475,6 +1508,15 @@ class VB_AR_EditorPanels : Managed
 		m_VB_BtnToggle.SetEnabled(has);
 		m_VB_BtnDelete.SetEnabled(has);
 		m_VB_BtnScatter.SetEnabled(has && nest.VB_HasHeart());
+		int stageNow = 0;
+		if (has)
+			stageNow = VB_AR_NestClient.VB_StageOf(nest.Id);
+		m_VB_BtnStageDown.SetEnabled(stageNow > 1);
+		m_VB_BtnStageUp.SetEnabled(stageNow > 0 && stageNow < 3);
+		if (stageNow > 0)
+			m_VB_StageText.SetText("Ступень рощи: " + VB_AR_Editor.VB_StageName(stageNow));
+		else
+			m_VB_StageText.SetText("Ступень: роща не на карте");
 		if (!has)
 		{
 			m_VB_CurTitle.SetText("Гнездо не выбрано");
@@ -1630,6 +1672,16 @@ class VB_AR_EditorPanels : Managed
 	protected void OnVBToggle(INT_UIF_Button b)
 	{
 		VB_AR_Editor.VB_Get().VB_ToggleNest();
+	}
+
+	protected void OnVBStageDown(INT_UIF_Button b)
+	{
+		VB_AR_Editor.VB_Get().VB_StageNest(false);
+	}
+
+	protected void OnVBStageUp(INT_UIF_Button b)
+	{
+		VB_AR_Editor.VB_Get().VB_StageNest(true);
 	}
 
 	protected void OnVBDelete(INT_UIF_Button b)

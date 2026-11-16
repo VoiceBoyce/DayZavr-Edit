@@ -14,7 +14,7 @@ class CfgPatches
 			"VB_AR_Wall_Wide1", "VB_AR_Wall_Wide2", "VB_AR_Wall_Corner1", "VB_AR_Wall_Corner2", "VB_AR_Wall_Corner3",
 			"VB_AR_HeartChunk", "VB_AR_RootPiece", "VB_AR_HeartDead", "VB_AR_Spores", "VB_AR_Vein",
 			"VB_AR_ListenRoot", "VB_AR_SporeTrap", "VB_AR_Lantern", "VB_AR_Blood", "VB_AR_Blade", "VB_AR_Cloak",
-			"VB_RootGuard_Wolf", "VB_RootGuard_Zanoza", "VB_RootGuard_Ent", "VB_AR_Amber", "VB_AR_AmberInclusion", "VB_AR_Reconcile", "VB_AR_Seed", "VB_AR_WolfFang", "VB_AR_Amulet", "VB_AR_PollenBrew"
+			"VB_RootGuard_Wolf", "VB_RootGuard_Zanoza", "VB_RootGuard_Ent", "VB_AR_Amber", "VB_AR_AmberInclusion", "VB_AR_Reconcile", "VB_AR_Seed", "VB_AR_WolfFang", "VB_AR_Amulet", "VB_AR_PollenBrew", "VB_AR_Book"
 		};
 		weapons[] = {};
 		requiredVersion = 0.1;
@@ -983,6 +983,20 @@ class CfgVehicles
 		model = "\VB_AncientRoot\data\vb_ar_pollen_brew.p3d";
 		weight = 250;
 		itemSize[] = {1, 2};
+		rotationFlags = 17;
+	};
+
+	// «Книга древних» (ТЗ_сервер_18.md, ветка 2в; скрипты VB_AR_Book.c, окно 5_Mission/VB_AR_BookMenu.c, тексты
+	// VB_AR_BookText.c): в руках ЛКМ «Читать» — окно-разворот со справкой о рощах; часть страниц читается только
+	// со ступени расположения «Свой»/«Друг леса». Модель — tools/gen_ar_veins.py (vb_ar_book); получение — крафт DRL 18.
+	class VB_AR_Book: Inventory_Base
+	{
+		scope = 2;
+		displayName = "Книга древних";
+		descriptionShort = "Тяжелая книга в переплете из живой коры, на крышке тлеет золотая руна. В ней записано все, что знали о Древнем корне те, кто жил с лесом в ладу. Иные страницы исписаны языком корней: прочтет их лишь тот, кому лес доверяет.";
+		model = "\VB_AncientRoot\data\vb_ar_book.p3d";
+		weight = 400;
+		itemSize[] = {2, 2};
 		rotationFlags = 17;
 	};
 

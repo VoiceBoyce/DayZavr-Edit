@@ -2154,6 +2154,7 @@ VARIANTS = [
     ("vb_ar_amulet", "amulet", 922),
     ("vb_ar_pollen_brew", "pollenbrew", 923),
     ("vb_ar_wolf_fang", "wolffang", 924),
+    ("vb_ar_book", "book", 925),
 ]
 
 
@@ -2287,6 +2288,111 @@ def build_pollen_brew_scene(seed):
     return _item(tubes, bulbs=bulbs, mass=0.25, center=(0, 0, 0.6))
 
 
+def _box(x0, x1, y0, y1, z0, z1, mat, uv_k=0.6):
+    """Брусок из шести граней (у каждой свои вершины — рёбра остаются острыми), UV по размеру грани."""
+    out = []
+    faces = [
+        ([(x1, y0, z0), (x1, y1, z0), (x1, y1, z1), (x1, y0, z1)], (1, 0, 0), (y1 - y0, z1 - z0)),
+        ([(x0, y1, z0), (x0, y0, z0), (x0, y0, z1), (x0, y1, z1)], (-1, 0, 0), (y1 - y0, z1 - z0)),
+        ([(x0, y0, z0), (x1, y0, z0), (x1, y0, z1), (x0, y0, z1)], (0, -1, 0), (x1 - x0, z1 - z0)),
+        ([(x1, y1, z0), (x0, y1, z0), (x0, y1, z1), (x1, y1, z1)], (0, 1, 0), (x1 - x0, z1 - z0)),
+        ([(x0, y0, z1), (x1, y0, z1), (x1, y1, z1), (x0, y1, z1)], (0, 0, 1), (x1 - x0, y1 - y0)),
+        ([(x0, y1, z0), (x1, y1, z0), (x1, y0, z0), (x0, y0, z0)], (0, 0, -1), (x1 - x0, y1 - y0)),
+    ]
+    for corners, nrm, (du, dv) in faces:
+        c, tris, uvs = _box_face(corners, (0.0, 0.0, du * uv_k, dv * uv_k), np.asarray(nrm, float))
+        out.append((c, tris, uvs, mat))
+    return out
+
+
+def build_book_scene(seed):
+    """«Книга древних»: доски переплёта из коры, стопка пожелтевших листов, круглый корешок с тремя
+    перехватами из лыка, на крышке — золотая руна Альгиз из жил и рамка-корень, янтарь по углам,
+    шнур-застёжка через обрез с янтарной каплей, мох по корешку. Лежит плашмя: X — ширина, Y — высота, Z — толщина.
+    Масштаб предмета 0,1: книга 17 x 22 x 5 см."""
+    rng = np.random.default_rng(seed)
+    W0, W1, L, T = -0.84, 0.84, 1.1, 0.5
+    meshes = []
+    # переплёт: нижняя и верхняя доска
+    meshes += _box(W0, W1, -L, L, 0.0, 0.07, "bark", 0.5)
+    meshes += _box(W0, W1, -L, L, T - 0.07, T, "bark", 0.5)
+    # листы: несколько слоёв с небольшим разбросом кромки — видно, что это стопка страниц
+    n_layers = 6
+    for i in range(n_layers):
+        z0 = 0.07 + (T - 0.14) * i / n_layers
+        z1 = 0.07 + (T - 0.14) * (i + 1) / n_layers
+        jx = rng.uniform(-0.015, 0.0)
+        jy = rng.uniform(-0.012, 0.012)
+        meshes += _box(W0 + 0.06, W1 - 0.05 + jx, -L + 0.05 + jy, L - 0.05 + jy, z0, z1, "ivory", 0.9)
+    tubes = []
+    # корешок: продольная трубка из коры, утоплена в переплёт — снаружи только скруглённый край
+    SX = W0 + 0.1
+    ys = np.linspace(-L, L, 9)
+    sp = np.column_stack([np.full(len(ys), SX), ys, np.full(len(ys), T / 2)])
+    tubes.append(Tube(sp, np.full(len(ys), T / 2 + 0.005), "root", mat="bark", segs=12, lump=0.04, seed=seed,
+                      cap_flat=True))
+    # перехваты корешка
+    a = np.linspace(0, 2 * math.pi, 25)
+    for yb in (-0.62, 0.0, 0.62):
+        ring = np.column_stack([SX + (T / 2 + 0.03) * np.cos(a), np.full(len(a), yb), T / 2 + (T / 2 + 0.03) * np.sin(a)])
+        tubes.append(Tube(ring, np.full(len(a), 0.028), "vein", mat="cloth", segs=6, cap_start=False, cap_end=False,
+                          seed=seed + int(yb * 10)))
+    # руна Альгиз на крышке: ствол и две ветви вверх, жилы светятся золотом
+    zt = T + 0.012
+    stem = np.array([[0.0, -0.62, zt], [0.0, -0.1, zt], [0.0, 0.58, zt]])
+    tubes.append(Tube(stem, np.full(3, 0.03), "vein", segs=6, seed=seed + 1))
+    for sx in (-1, 1):
+        br = np.array([[0.0, 0.02, zt], [sx * 0.2, 0.28, zt], [sx * 0.38, 0.56, zt]])
+        tubes.append(Tube(br, np.array([0.03, 0.026, 0.02]), "vein", segs=6, seed=seed + 2 + sx))
+    # рамка-корень по краю крышки (чуть гуляет)
+    fr = []
+    xi, yi = W1 - 0.14, L - 0.14
+    for k in range(64):
+        u = k / 64.0
+        if u < 0.25:
+            p = (-xi + 2 * xi * u / 0.25, -yi)
+        elif u < 0.5:
+            p = (xi, -yi + 2 * yi * (u - 0.25) / 0.25)
+        elif u < 0.75:
+            p = (xi - 2 * xi * (u - 0.5) / 0.25, yi)
+        else:
+            p = (-xi, yi - 2 * yi * (u - 0.75) / 0.25)
+        fr.append((p[0] + rng.uniform(-0.012, 0.012), p[1] + rng.uniform(-0.012, 0.012), zt - 0.004))
+    fr.append(fr[0])
+    tubes.append(Tube(np.array(fr), np.full(len(fr), 0.016), "vein", segs=5, cap_start=False, cap_end=False,
+                      seed=seed + 5))
+    # шнур-застёжка: от нижней доски через обрез к янтарной капле на крышке
+    cord = np.array([[0.5, 0.0, -0.012], [0.82, 0.0, -0.01], [W1 + 0.04, 0.0, 0.1], [W1 + 0.05, 0.0, T / 2],
+                     [W1 + 0.04, 0.0, T - 0.1], [0.82, 0.0, T + 0.01], [0.62, 0.0, T + 0.02]])
+    tubes.append(Tube(cord, np.full(len(cord), 0.026), "vein", mat="cloth", segs=6, seed=seed + 6))
+    drop = [(0.0, 0.0), (0.0, 0.11), (0.05, 0.12), (0.1, 0.09), (0.13, 0.0)]
+    tubes.append(_lathe_z(drop, "liquid", segs=14, uv_len=0.3, x=0.56, y=0.0, seed=seed + 7))
+    tubes[-1].pts[:, 2] += T - 0.01
+    # мох пучками по корешку и у нижнего угла крышки
+    moss = []
+    # мох: мелкие плоские подушечки на внешней стороне корешка (угол от +X: 2..4.3 рад — снаружи) и у угла крышки
+    for k in range(14):
+        yk = rng.uniform(-L + 0.06, L - 0.06)
+        ang = rng.uniform(2.0, 4.3)
+        rr = T / 2 + 0.008
+        cx, cz = SX + rr * math.cos(ang), T / 2 + rr * math.sin(ang)
+        ln = rng.uniform(0.04, 0.08)
+        p = np.array([[cx, yk - ln, cz], [cx, yk, cz], [cx, yk + ln, cz]])
+        moss.append(Tube(p, np.array([0.012, rng.uniform(0.022, 0.032), 0.012]), "root", mat="herb", segs=6,
+                         lump=0.6, lump_freq=14, seed=seed + 20 + k))
+    for k in range(6):
+        x0, y0 = W0 + 0.1 + rng.uniform(0, 0.22), -L + 0.06 + rng.uniform(0, 0.22)
+        p = np.array([[x0, y0, zt - 0.004], [x0 + 0.03, y0 + 0.015, zt], [x0 + 0.06, y0 + 0.01, zt - 0.004]])
+        moss.append(Tube(p, np.array([0.01, rng.uniform(0.018, 0.026), 0.01]), "root", mat="herb", segs=6,
+                         lump=0.6, lump_freq=14, seed=seed + 40 + k))
+    tubes += moss
+    # янтарь по углам крышки
+    bulbs = [(np.array([sx * (W1 - 0.14), sy * (L - 0.14), zt + 0.01]), 0.045) for sx in (-1, 1) for sy in (-1, 1)]
+    sc = _item(tubes, bulbs=bulbs, mass=0.4, center=(0, 0, T / 2))
+    sc["meshes"] = meshes
+    return sc
+
+
 def variant_scene(kind, seed, name=""):
     if kind == "heart":
         return build_scene(seed)
@@ -2348,6 +2454,8 @@ def variant_scene(kind, seed, name=""):
         return build_pollen_brew_scene(seed)
     if kind == "wolffang":
         return build_wolf_fang_scene(seed)
+    if kind == "book":
+        return build_book_scene(seed)
     return build_roots_scene(seed, kind)
 
 

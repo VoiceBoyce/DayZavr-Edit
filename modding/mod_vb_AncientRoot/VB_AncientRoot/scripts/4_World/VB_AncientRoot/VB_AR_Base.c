@@ -357,13 +357,20 @@ class VB_AR_Base extends House
 	{
 	}
 
+	// свет по ступени рощи (у сердца — VB_AR_Heart.VB_LightScale; у остальных 1)
+	float VB_LightScale()
+	{
+		return 1.0;
+	}
+
 	void VB_SetLightPulse(float k, float night)
 	{
 		if (!m_VB_Light)
 			return;
 
-		m_VB_Light.SetBrightnessTo((VB_AR_Pulse.LIGHT_BASE + VB_AR_Pulse.LIGHT_BEAT * k) * night);
-		m_VB_Light.SetRadiusTo(VB_AR_Pulse.LIGHT_RADIUS * (0.85 + 0.3 * k));
+		float s = VB_LightScale();
+		m_VB_Light.SetBrightnessTo((VB_AR_Pulse.LIGHT_BASE + VB_AR_Pulse.LIGHT_BEAT * k) * night * s);
+		m_VB_Light.SetRadiusTo(VB_AR_Pulse.LIGHT_RADIUS * (0.85 + 0.3 * k) * s);
 	}
 
 	protected void VB_CreateCutters()
@@ -452,6 +459,47 @@ class VB_AR_Heart extends VB_AR_Base
 	int VB_Stage()
 	{
 		return m_VB_Stage;
+	}
+
+	// Облик по ступени (ТЗ 2б.4): росток — маленькое сердце, тусклый свет, пара обвитых деревьев, домов не трогает;
+	// древняя — крупнее, свет шире и ярче, обвивает больше деревьев, дома светятся ярче (VB_AR_Houses.c).
+	// Размер ставится и сервером (коллизия), и клиентом (по синхронизированной ступени).
+	float VB_StageScale()
+	{
+		if (m_VB_Stage <= STAGE_SPROUT)
+			return 0.6;
+		if (m_VB_Stage >= STAGE_ANCIENT)
+			return 1.2;
+		return 1.0;
+	}
+
+	override float VB_LightScale()
+	{
+		if (m_VB_Stage <= STAGE_SPROUT)
+			return 0.6;
+		if (m_VB_Stage >= STAGE_ANCIENT)
+			return 1.5;
+		return 1.0;
+	}
+
+	void VB_ApplyStageScale()
+	{
+		float s = VB_StageScale();
+		if (Math.AbsFloat(GetScale() - s) > 0.01)
+			SetScale(s);
+	}
+
+	override void EEInit()
+	{
+		super.EEInit();
+		if (!g_Game.IsDedicatedServer())
+			VB_ApplyStageScale();
+	}
+
+	override void OnVariablesSynchronized()
+	{
+		super.OnVariablesSynchronized();
+		VB_ApplyStageScale();
 	}
 
 	// пыльцы и подношений за рестарт по ступени: росток 1, роща 3, древняя 5
@@ -559,6 +607,16 @@ class VB_AR_Heart extends VB_AR_Base
 		int maxTrees = ConfigGetInt("vbInfectMax");
 		if (radius <= 0 || maxTrees <= 0)
 			return;
+		if (m_VB_Stage <= STAGE_SPROUT)
+		{
+			radius = Math.Min(radius, 10.0);		// росток обвивает пару деревьев рядом
+			maxTrees = Math.Min(maxTrees, 3);
+		}
+		else if (m_VB_Stage >= STAGE_ANCIENT)
+		{
+			radius = Math.Max(radius, 24.0);		// древняя тянется дальше
+			maxTrees = Math.Max(maxTrees, 16);
+		}
 
 		vector hp = GetPosition();
 		array<Object> found = new array<Object>;

@@ -228,6 +228,19 @@ proto native float GetMaskTransitionWidth();
 proto native void SetMaskTransitionWidth(float value);  // [0,1] softness
 ```
 
+**Маска читает яркость RGB, а не альфу** (замер DayZ 1.30, «Древний корень», 2026-11-16): комментарий движка говорит
+«alpha in mask», но маска с белым RGB и градиентом только в альфе скрывала картинку целиком при любом `SetMaskProgress`.
+С градиентом и в RGB, и в альфе (`rgb = a`) раскрытие заработало. Маску безопаснее объявлять и в разметке, как ванильные
+стрелки машины (`day_z_hud_cars.layout`): `Mask "путь"`, `"Transition width" 0.04`, `Progress 0`; из скрипта — только
+`SetMaskProgress`. Пример: полоса расположения леса `VB_AR_FavorHud.c` / `vb_ar_favor.layout` / `tools/gen_ar_branch.py`.
+
+**TextWidget мельче RichTextWidget при том же `"exact text size"`** (замер DayZ 1.30, 1920×1080, шрифт
+`gui/fonts/AmorSerifPro`, «Книга древних», 2026-11-16): заголовок TextWidget 28 вышел примерно как текст RichText 17,
+подпись TextWidget 22 — мельче него. Размеры для одного окна подбирать по снимку со стенда, а не переносить число из
+одного класса виджета в другой: там тексты RichText 17–18, заголовки и подписи TextWidget 22–44.
+RichTextWidget переносит строки по `\n` и понимает `<color hex="0xFFRRGGBB">…</color>`; `GetContentHeight()` после
+`Update()` — высота текста, по ней видно, что текст не влез (`VB_AR_BookMenu.VB_CheckFit`).
+
 Colour space: images loaded by `LoadImageFile` lacked the SRGB flag before 1.30.164200 and rendered brighter than
 their pixels (measured on 1.30.164078: `28,31,35` → `105,107,111`); 164200 fixes that [reported: BI 1.30.164200 notes],
 not re-measured, layout-set images not mentioned. White mask + `SetColor` works on both builds; see SKILL.md

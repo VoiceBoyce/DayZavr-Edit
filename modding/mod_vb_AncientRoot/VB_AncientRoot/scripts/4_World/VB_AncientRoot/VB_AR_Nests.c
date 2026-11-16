@@ -94,6 +94,8 @@ class VB_AR_NestNet
 	static const int OP_REROLL = 8;				// снять все гнёзда и выбрать заново, как на рестарте
 	static const int OP_TELEPORT = 9;			// int гнездо
 	static const int OP_SET_ACTIVE = 10;		// int сколько гнёзд ставить за рестарт (пишется в settings.json)
+	static const int OP_STAGE_UP = 11;			// int гнездо: ступень живой рощи +1 (ТЗ 2б.4, роща встаёт заново)
+	static const int OP_STAGE_DOWN = 12;		// int гнездо: ступень −1
 
 	static const int R_DENIED = 1;				// string свой SteamID
 	static const int R_BEGIN = 2;				// настройки + число гнёзд, дальше R_NEST по каждому
@@ -130,6 +132,7 @@ class VB_AR_NestClient
 	static ref array<ref VB_AR_Nest> s_VB_Nests;
 	static ref set<int> s_VB_LiveObjs;			// id объектов, которые сервер поставил по-настоящему
 	static ref TIntArray s_VB_LiveNests;
+	static ref map<int, int> s_VB_Stages;		// гнездо -> ступень живой рощи (R_NEST; нет — не живая роща)
 	static int s_VB_Version;
 	static int s_VB_ActiveNests;
 	static float s_VB_MinDist;
@@ -155,6 +158,7 @@ class VB_AR_NestClient
 		s_VB_Nests = new array<ref VB_AR_Nest>;
 		s_VB_LiveObjs = new set<int>;
 		s_VB_LiveNests = new TIntArray;
+		s_VB_Stages = new map<int, int>;
 		s_VB_Msgs = new TStringArray;
 		s_VB_Views = new array<ref VB_AR_NestView>;
 	}
@@ -183,6 +187,16 @@ class VB_AR_NestClient
 	{
 		VB_Init();
 		return s_VB_LiveNests.Find(nestId) >= 0;
+	}
+
+	// ступень живой рощи гнезда; 0 — гнездо сейчас не живая роща
+	static int VB_StageOf(int nestId)
+	{
+		VB_Init();
+		int st;
+		if (s_VB_Stages.Find(nestId, st))
+			return st;
+		return 0;
 	}
 
 	// гнёзда с заранее посчитанными центрами; пересчитываются только при новой версии копии
@@ -344,6 +358,10 @@ class VB_AR_NestClient
 		s_VB_Nests.Insert(nest);
 		if (live)
 			s_VB_LiveNests.Insert(nest.Id);
+		int stage;
+		s_VB_Stages.Remove(nest.Id);
+		if (ctx.Read(stage) && stage > 0)		// ступень — последним полем (сервер с ростом рощ)
+			s_VB_Stages.Set(nest.Id, stage);
 	}
 
 	// --- запросы к серверу ------------------------------------------------------------------------

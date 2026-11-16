@@ -141,8 +141,10 @@ modded class VB_ActionListenRoot
 		int step = 0;
 		bool frantic = false;
 		float dist = 0;
+		int stage = 0;
 		if (heart)
 		{
+			stage = heart.VB_Stage();
 			vector d = heart.GetPosition() - from;
 			d[1] = 0;
 			dist = d.Length();
@@ -164,6 +166,7 @@ modded class VB_ActionListenRoot
 		rpc.Write(step);
 		rpc.Write(frantic);
 		rpc.Write(storm);
+		rpc.Write(stage);
 		rpc.Send(player, VB_AR_Gear.RPC_LISTEN, true, player.GetIdentity());
 
 		string res = "день, сердцевины не слышно";

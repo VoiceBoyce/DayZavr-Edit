@@ -1,37 +1,20 @@
 FrameWidgetClass VB_AR_FavorRoot {
  visible 0
  ignorepointer 1
- position 14 114
- size 120 76
- halign right_ref
+ position 0 4
+ size 640 48
+ halign center_ref
  valign bottom_ref
  hexactpos 1
  vexactpos 1
  hexactsize 1
  vexactsize 1
  {
-  ImageWidgetClass VB_AR_FavorGlow {
-   visible 0
-   ignorepointer 1
-   position 0 -12
-   size 76 76
-   halign center_ref
-   valign top_ref
-   hexactpos 1
-   vexactpos 1
-   hexactsize 1
-   vexactsize 1
-   mode blend
-   "src alpha" 1
-   stretch 1
-  }
   ImageWidgetClass VB_AR_FavorDisc {
    visible 1
    ignorepointer 1
-   position 0 4
-   size 44 44
-   halign center_ref
-   valign top_ref
+   position 82 8
+   size 32 32
    hexactpos 1
    vexactpos 1
    hexactsize 1
@@ -43,10 +26,8 @@ FrameWidgetClass VB_AR_FavorRoot {
   ImageWidgetClass VB_AR_FavorRune {
    visible 1
    ignorepointer 1
-   position 0 4
-   size 44 44
-   halign center_ref
-   valign top_ref
+   position 82 8
+   size 32 32
    hexactpos 1
    vexactpos 1
    hexactsize 1
@@ -55,28 +36,96 @@ FrameWidgetClass VB_AR_FavorRoot {
    "src alpha" 1
    stretch 1
   }
+  FrameWidgetClass VB_AR_FavorTrack {
+   visible 1
+   ignorepointer 1
+   position 120 0
+   size 400 48
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   {
+    ImageWidgetClass VB_AR_FavorBranch {
+     visible 1
+     ignorepointer 1
+     position 0 0
+     size 400 48
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     mode blend
+     "src alpha" 1
+     stretch 1
+    }
+    ImageWidgetClass VB_AR_FavorThorn {
+     visible 1
+     ignorepointer 1
+     position 0 0
+     size 400 48
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     mode blend
+     "src alpha" 1
+     stretch 1
+     Mask "VB_AncientRoot/gui/vb_ar_mask_left_ca.paa"
+     "Transition width" 0.04
+     Progress 0
+    }
+    ImageWidgetClass VB_AR_FavorBloom {
+     visible 1
+     ignorepointer 1
+     position 0 0
+     size 400 48
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     mode blend
+     "src alpha" 1
+     stretch 1
+     Mask "VB_AncientRoot/gui/vb_ar_mask_right_ca.paa"
+     "Transition width" 0.04
+     Progress 0
+    }
+    ImageWidgetClass VB_AR_FavorBud {
+     visible 1
+     ignorepointer 1
+     position 189 13
+     size 22 22
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     mode blend
+     "src alpha" 1
+     stretch 1
+    }
+   }
+  }
   TextWidgetClass VB_AR_FavorName {
    visible 1
    ignorepointer 1
-   position 0 50
-   size 120 20
-   halign center_ref
-   valign top_ref
+   position 528 0
+   size 112 48
    hexactpos 1
    vexactpos 1
    hexactsize 1
    vexactsize 1
    font "gui/fonts/sdf_MetronBook24"
    "exact text" 1
-   "exact text size" 15
-   "text halign" center
+   "exact text size" 16
+   "text halign" left
    "text valign" center
   }
   TextWidgetClass VB_AR_FavorDelta {
    visible 0
    ignorepointer 1
-   position 84 8
-   size 48 20
+   position 0 -20
+   size 60 20
    hexactpos 1
    vexactpos 1
    hexactsize 1
@@ -84,7 +133,7 @@ FrameWidgetClass VB_AR_FavorRoot {
    font "gui/fonts/sdf_MetronBook24"
    "exact text" 1
    "exact text size" 17
-   "text halign" left
+   "text halign" center
    "text valign" center
   }
  }
