@@ -5,7 +5,8 @@
 // Волны сердцевины по нарастающей (2б.10, цифры черновые, подбираются на стенде):
 //   1-я — 2–3 лесовых волка; 2-я — 3–4 волка и Терновая заноза; 3-я — 2–3 волка и две занозы,
 //   в древней роще (ступень 3, рост рощ — шаг 5) ещё Хранитель рощи.
-// Разделка стража: ванильный лут по конфигу (шкура, мясо, трофеи MSFZ) + шанс на отросток и пыльцу.
+// Разделка стража: лут по конфигу (шкура, мясо; волку — Клык лесового волка, Занозе и Энту — трофеи MSFZ)
+// + шанс на отросток, пыльцу и второй клык.
 
 class VB_RootGuards
 {
@@ -14,6 +15,8 @@ class VB_RootGuards
 	static const string ENT = "VB_RootGuard_Ent";
 	static const string ROOT_TYPE = "VB_AR_RootPiece";
 	static const string POLLEN_TYPE = "VB_AR_Spores";
+	static const string FANG_TYPE = "VB_AR_WolfFang";
+	static const float FANG2_CHANCE = 0.25;		// второй клык у волка рощи (первый — всегда, по конфигу)
 
 	// состав волны: wave — номер волны у этой сердцевины (1..), level — ступень рощи (1 росток, 2 роща, 3 древняя)
 	static TStringArray VB_WaveTypes(int wave, int level = 2)
@@ -84,6 +87,13 @@ class VB_RootGuards
 
 		string got = "";
 		EntityAI drop;
+		// один клык волку даёт ванильная разделка (Skinning в config.cpp), второй — шанс у волков рощи
+		if (body.IsKindOf(WOLF) && Math.RandomFloat01() < FANG2_CHANCE)
+		{
+			drop = VB_AR_ItemsServer.VB_DropAtFeet(player, FANG_TYPE);
+			if (drop)
+				got += FANG_TYPE + " ";
+		}
 		if (Math.RandomFloat01() < rootChance)
 		{
 			for (int i = 0; i < roots; i++)

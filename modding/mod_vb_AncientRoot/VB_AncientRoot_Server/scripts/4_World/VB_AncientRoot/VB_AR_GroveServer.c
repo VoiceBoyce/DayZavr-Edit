@@ -162,12 +162,12 @@ modded class VB_AR_Heart
 		bool isFriend = favorTier == VB_AR_Favor.TIER_FRIEND;
 		string gifts = VB_GiveGiftsServer(player, tier, isFriend);
 		int blessMs = BLESS_MS;
-		string blessText = "Благословение рощи на полчаса: раны затягиваются, стражи не нападают первыми.";
 		if (isFriend)
-		{
 			blessMs = BLESS_MS * 2;		// Друг леса — Благословение вдвое дольше
-			blessText = "Благословение рощи на час: раны затягиваются, стражи не нападают первыми.";
-		}
+		if (player.VB_AmuletWorks())
+			blessMs = blessMs * VB_AR_Amulet.BLESS_MUL;	// Янтарный оберег — ещё в полтора раза
+		int blessMin = blessMs / 60000;
+		string blessText = "Благословение рощи на " + blessMin.ToString() + " мин: раны затягиваются, стражи не нападают первыми.";
 		VB_AR_Blessing.VB_Give(player, blessMs);
 		NotificationSystem.SendNotificationToPlayerExtended(player, 7, "Роща приняла дар", blessText);
 		float favorAdd = VB_AR_FavorServer.OFFER_MEAT;

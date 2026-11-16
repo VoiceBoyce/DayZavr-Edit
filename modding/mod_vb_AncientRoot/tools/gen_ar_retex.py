@@ -121,7 +121,6 @@ def main():
     retex("fange_knife_co", "vb_ar_blade", D, V, 6, 0.03, 0.85, 31, tmp, keep=0.1)
     retex("raincoat_black_co", "vb_ar_cloak", cloak, V, 5, 0.025, 0.9, 32, tmp, moss=moss)
     retex("raincoat_g_black_co", "vb_ar_cloak_g", cloak, V, 4, 0.03, 0.9, 33, tmp, moss=moss)
-    retex("jerrycan_co", "vb_ar_canister", D, V, 5, 0.03, 0.85, 35, tmp, keep=0.1)
 
 
 if __name__ == "__main__":

@@ -73,6 +73,7 @@ class VB_AR_FavorServer
 	protected static bool s_VB_Dirty;
 	protected static ref map<string, int> s_VB_Tier;		// последняя ступень (для AI — без чтения часов)
 	protected static ref map<string, int> s_VB_Hostile;		// SteamID -> GetTime(), до которого стражи злы
+	protected static ref map<string, bool> s_VB_Cutters;	// SteamID вырезавших сердцевину в этот рестарт (оберег)
 	protected static ref map<string, int> s_VB_NextWave;	// SteamID -> GetTime(), раньше которого волны нет
 	protected static ref map<string, bool> s_VB_Pardon;		// SteamID -> разовое прощение после Отвара (до рестарта)
 
@@ -332,7 +333,29 @@ class VB_AR_FavorServer
 		s_VB_Hostile.Set(id, g_Game.GetTime() + HOSTILE_MS);
 	}
 
-	// стражи не нападают первыми: не злы, и Благословение или ступень Свой и выше
+	// вырезал сердцевину — до рестарта Янтарный оберег ему не помогает
+	static void VB_MarkCutter(PlayerBase p)
+	{
+		string id = VB_Id(p);
+		if (id == "")
+			return;
+		if (!s_VB_Cutters)
+			s_VB_Cutters = new map<string, bool>;
+		bool had = p.VB_HasAmulet() && !s_VB_Cutters.Contains(id);
+		s_VB_Cutters.Set(id, true);
+		if (had)
+			NotificationSystem.SendNotificationToPlayerExtended(p, 7, "Янтарный оберег потускнел", "Лес не простит вырезанной сердцевины: до рестарта оберег тебя не защитит.");
+	}
+
+	static bool VB_IsCutter(PlayerBase p)
+	{
+		if (!s_VB_Cutters || s_VB_Cutters.Count() == 0)
+			return false;
+		string id = VB_Id(p);
+		return id != "" && s_VB_Cutters.Contains(id);
+	}
+
+	// стражи не нападают первыми: не злы, и Благословение, Янтарный оберег или ступень Свой и выше
 	static bool VB_Peaceful(PlayerBase p)
 	{
 		string id = VB_Id(p);
@@ -343,7 +366,9 @@ class VB_AR_FavorServer
 			return false;
 		if (VB_AR_Blessing.VB_Has(p))
 			return true;
-		return VB_TierCached(p) >= VB_AR_Favor.TIER_OWN;
+		if (VB_TierCached(p) >= VB_AR_Favor.TIER_OWN)
+			return true;
+		return p.VB_AmuletWorks();
 	}
 
 	// ------------------------------------------------------------ волны за рейтинг

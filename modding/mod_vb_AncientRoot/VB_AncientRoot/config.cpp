@@ -14,12 +14,12 @@ class CfgPatches
 			"VB_AR_Wall_Wide1", "VB_AR_Wall_Wide2", "VB_AR_Wall_Corner1", "VB_AR_Wall_Corner2", "VB_AR_Wall_Corner3",
 			"VB_AR_HeartChunk", "VB_AR_RootPiece", "VB_AR_HeartDead", "VB_AR_Spores", "VB_AR_Vein",
 			"VB_AR_ListenRoot", "VB_AR_SporeTrap", "VB_AR_Lantern", "VB_AR_Blood", "VB_AR_Blade", "VB_AR_Cloak",
-			"VB_RootGuard_Wolf", "VB_RootGuard_Zanoza", "VB_RootGuard_Ent", "VB_AR_Amber", "VB_AR_AmberInclusion", "VB_AR_Reconcile", "VB_AR_Seed"
+			"VB_RootGuard_Wolf", "VB_RootGuard_Zanoza", "VB_RootGuard_Ent", "VB_AR_Amber", "VB_AR_AmberInclusion", "VB_AR_Reconcile", "VB_AR_Seed", "VB_AR_WolfFang", "VB_AR_Amulet", "VB_AR_PollenBrew"
 		};
 		weapons[] = {};
 		requiredVersion = 0.1;
 		// INT_UIFramework — окно редактора гнёзд (должен стоять и на сервере, и у игроков)
-		requiredAddons[] = {"DZ_Data", "DZ_Scripts", "DZ_Characters_Zombies", "DZ_Characters_Tops", "DZ_Gear_Medical", "DZ_Vehicles_Parts", "DZ_Weapons_Melee_Blade", "INT_UIFramework", "DZ_Animals_canis_lupus", "Mutant_Zanoza", "MSFZ_Mutant_Ent"};
+		requiredAddons[] = {"DZ_Data", "DZ_Scripts", "DZ_Characters_Zombies", "DZ_Characters_Tops", "DZ_Gear_Medical", "DZ_Weapons_Melee_Blade", "INT_UIFramework", "DZ_Animals_canis_lupus", "Mutant_Zanoza", "MSFZ_Mutant_Ent"};
 	};
 };
 
@@ -66,7 +66,7 @@ class CfgMods
 // Запускает клиентский VB_AR_Pulse ночью у сердец ближе 50 м. Настройки 3D как у ванильной SpookyArea.
 class CfgSoundShaders
 {
-	// «Слушающий корень»: стук в стороне ближайшего живого сердца (VB_AR_Gear.c)
+	// «Корень-вещун»: стук в стороне ближайшей живой сердцевины (VB_AR_Gear.c)
 	class VB_AR_Listen_SoundShader
 	{
 		samples[] = {{"VB_AncientRoot\sounds\vb_ar_heartbeat_1", 1}, {"VB_AncientRoot\sounds\vb_ar_heartbeat_2", 1}, {"VB_AncientRoot\sounds\vb_ar_heartbeat_3", 1}};
@@ -316,6 +316,66 @@ class CfgVehicles
 					{
 						hitpoints = 100;
 					};
+				};
+			};
+		};
+		// ванильная разделка волка (ваниль DZ/animals/canis_lupus/config.cpp) + свой трофей. Вложенный класс в наследнике
+		// заменяет родительский целиком, поэтому блок скопирован полностью. Второй клык с шансом — VB_RootGuards.VB_SkinServer.
+		class Skinning
+		{
+			class ObtainedFang
+			{
+				item = "VB_AR_WolfFang";
+				count = 1;
+			};
+			class ObtainedHead
+			{
+				item = "Headdress_Wolf";
+				count = 1;
+				itemZones[] = {"Zone_Head"};
+				countByZone[] = {1};
+				transferPartDamageCoef = 1;
+			};
+			class ObtainedSteaks
+			{
+				item = "WolfSteakMeat";
+				count = 10;
+				itemZones[] = {"Zone_Chest","Zone_Belly","Zone_Pelvis"};
+				countByZone[] = {3.0,3.0,3.0};
+				quantityMinMaxCoef[] = {0.5,1};
+			};
+			class ObtainedPelt
+			{
+				item = "WolfPelt";
+				count = 1;
+				itemZones[] = {"Zone_Chest","Zone_Belly"};
+				quantityCoef = 1;
+				transferToolDamageCoef = 1;
+			};
+			class ObtainedGuts
+			{
+				item = "Guts";
+				count = 2;
+				quantityMinMaxCoef[] = {0.5,0.8};
+			};
+			class ObtainedLard
+			{
+				item = "Lard";
+				count = 1;
+				quantityMinMaxCoef[] = {0.5,1};
+			};
+			class ObtainedBones
+			{
+				item = "Bone";
+				count = 1;
+				quantityMinMaxCoef[] = {0.7,1};
+				transferToolDamageCoef = 1;
+			};
+			class BloodInfectionSettings
+			{
+				class Salmonella
+				{
+					chance = 0.4;
 				};
 			};
 		};
@@ -690,7 +750,6 @@ class CfgVehicles
 
 	class HouseNoDestruct;
 	class Inventory_Base;
-	class CarBattery;
 	class FangeKnife;
 	class Raincoat_ColorBase;
 
@@ -720,13 +779,13 @@ class CfgVehicles
 		rotationFlags = 2;
 	};
 
-	// «Сердце Изнанки», пролежавшее рестарт: живое сердце после рестарта заменяется этим (VB_AR_Items.c).
+	// Сердцевина, пролежавшая рестарт: живая после рестарта заменяется этой (VB_AR_Items.c). Колется на янтарь (VB_AR_Amber.c).
 	// Та же модель в сухих дневных материалах, без свечения.
 	class VB_AR_HeartDead: Inventory_Base
 	{
 		scope = 2;
 		displayName = "Окаменевшая сердцевина";
-		descriptionShort = "Сердцевина, которая остыла и окаменела, как старый янтарь. Больше не светится.";
+		descriptionShort = "Сердцевина, которая остыла и окаменела. Больше не светится, но под серой коркой — янтарь. Положи на землю и расколи молотком, топором или киркой.";
 		model = "\VB_AncientRoot\data\vb_ar_heart_chunk.p3d";
 		weight = 700;
 		itemSize[] = {2, 2};
@@ -737,7 +796,7 @@ class CfgVehicles
 	};
 
 	// Янтарь (ТЗ 2б.5): дар рощи за подношение (VB_AR_GroveServer.c). Модель — кусок сердцевины, перекраска
-	// tools/gen_ar_amber.py. Раскалывание окаменевшей сердцевины и вкрапления — шаг 4.
+	// tools/gen_ar_amber.py. Окаменевшую сердцевину и янтарь с вкраплением раскалывают на земле (VB_AR_Amber.c, сервер VB_AR_AmberServer.c).
 	class VB_AR_Amber: Inventory_Base
 	{
 		scope = 2;
@@ -754,8 +813,22 @@ class CfgVehicles
 	class VB_AR_AmberInclusion: VB_AR_Amber
 	{
 		displayName = "Янтарь с вкраплением";
-		descriptionShort = "Янтарь, внутри которого что-то застыло: семечко, мошка или тёмный осколок. Говорят, в таком находят руны и кристаллы.";
+		descriptionShort = "Янтарь, внутри которого что-то застыло: тёмный осколок или искра. Положи на землю и расколи молотком, топором или киркой — внутри бывают руны и кристаллы.";
 		hiddenSelectionsTextures[] = {"\VB_AncientRoot\data\items\vb_ar_amber_incl_co.paa", "\VB_AncientRoot\data\items\vb_ar_amber_vein_co.paa"};
+	};
+
+	// Трофей Лесового волка (ТЗ 2б.1): всегда один при разделке (Skinning у VB_RootGuard_Wolf), второй — шанс
+	// у волков рощи (VB_RootGuards.VB_SkinServer). Материал для Янтарного оберега и товар для торговцев (в конце работ).
+	// Модель временная (ванильный костяной крючок) — своя на шаге моделей.
+	class VB_AR_WolfFang: Inventory_Base
+	{
+		scope = 2;
+		displayName = "Клык лесового волка";
+		descriptionShort = "Длинный жёлтый клык, вросший в корешок. Под эмалью тлеет золотая искра — волк был стражем рощи. Охотники носят такие на шнурке, а знахари просят за них хорошую цену.";
+		model = "\dz\gear\crafting\bone_hook.p3d";
+		weight = 40;
+		itemSize[] = {1, 1};
+		rotationFlags = 17;
 	};
 
 	// Пути вверх расположения леса (ТЗ 2б.11; скрипты VB_AR_Recovery.c). Модели временные — свои на шаге 4.
@@ -803,15 +876,15 @@ class CfgVehicles
 		rotationFlags = 2;
 	};
 
-	// ---------------- изделия Изнанки (скрипты в VB_AR_Gear.c) ----------------
+	// ---------------- изделия (скрипты: VB_AR_Gear.c, сервер VB_AR_GearServer.c и VB_AR_CreatureServer.c) ----------------
 
-	// «Слушающий корень»: ночью «прислушаться» — стук ближайшего живого сердца в 3 км звучит с его стороны,
-	// ближе — громче и чаще, если сердце режут — бешено. Заряды = количество, подзарядка у живого сердца.
+	// «Корень-вещун»: ночью «прислушаться» — стук ближайшей живой сердцевины в 3 км звучит с её стороны (1 заряд);
+	// всегда — гроза и что лес думает об игроке. Заряды = количество, подзарядка у живой сердцевины.
 	class VB_AR_ListenRoot: Inventory_Base
 	{
 		scope = 2;
 		displayName = "Корень-вещун";
-		descriptionShort = "Отросток, свёрнутый в раструб и стянутый лыком. Ночью в нём слышно, как поёт ближайшая живая сердцевина: чем ближе, тем громче. Подпитывается у живой сердцевины.";
+		descriptionShort = "Отросток, свёрнутый в раструб и стянутый лыком. Ночью в нём слышно, как поёт ближайшая живая сердцевина: чем ближе, тем громче. Корень гудит перед грозой и шепчет, что лес думает о тебе. Подпитывается у живой сердцевины.";
 		model = "\VB_AncientRoot\data\vb_ar_listen_root.p3d";
 		weight = 250;
 		itemSize[] = {1, 2};
@@ -823,29 +896,24 @@ class CfgVehicles
 		varQuantityDestroyOnMin = 0;
 	};
 
-	// «Сердце-аккумулятор»: своя модель в ванильной текстуре аккумулятора, сверху сердце и корни (видны везде, в руках и превью).
-	// Ставится вместо автомобильного аккумулятора. Ночью сам заряжается, днём садится.
-	// В салоне стучит, когда машина рядом с живым гнездом (500 м).
-
-
-	// «Споровая ловушка»: раскрыть и бросить. Облако тянет зомби, через 10 с лопается и бьёт зомби рядом.
+	// «Пыльцевая ловушка»: раскрыть и бросить. Облако тянет нечисть, через 10 с вспыхивает — зомби и звери рядом спят 20 с.
 	class VB_AR_SporeTrap: Inventory_Base
 	{
 		scope = 2;
 		displayName = "Пыльцевая ловушка";
-		descriptionShort = "Мешочек пыльцы, перетянутый лыком, с запалом и кольцом. Раскрой и брось: золотое облако тянет нечисть и через десять секунд вспыхивает, ударяя по ней. Людей не трогает.";
+		descriptionShort = "Мешочек пыльцы, перетянутый лыком, с запалом и кольцом. Раскрой и брось: золотое облако тянет нечисть и через десять секунд вспыхивает — зверь и нечисть рядом засыпают секунд на двадцать. Удар будит. Людей не трогает.";
 		model = "\VB_AncientRoot\data\vb_ar_spore_trap.p3d";
 		weight = 300;
 		itemSize[] = {2, 2};
 		rotationFlags = 2;
 	};
 
-	// «Фонарь-сердце»: красный свет без батареек, пульс чаще, когда рядом зомби. Количество = минуты спор.
+	// «Светоч корня»: золотой свет без батареек, отпугивает обычных зомби, ночью стражи видят его издалека. Количество = минуты пыльцы.
 	class VB_AR_Lantern: Inventory_Base
 	{
 		scope = 2;
 		displayName = "Светоч корня";
-		descriptionShort = "Маленькая сердцевина в клетке из корней. Светит золотым без батареек и разгорается ярче, когда рядом нечисть. Ночью на свет выходят Стражи корня. Пыльцы хватает часов на шесть.";
+		descriptionShort = "Маленькая сердцевина в клетке из корней. Светит золотым без батареек и разгорается ярче, когда рядом нечисть. Обычная нечисть к этому свету не подходит, но Стражи корня видят его издалека и ночью выходят на него. Пыльцы хватает часов на шесть.";
 		model = "\VB_AncientRoot\data\vb_ar_lantern.p3d";
 		weight = 600;
 		itemSize[] = {2, 3};
@@ -857,48 +925,69 @@ class CfgVehicles
 		varQuantityDestroyOnMin = 0;
 	};
 
-	// «Кровь Изнанки» (ампула): укол — быстро кровь и здоровье; 10 минут зомби рядом светятся, руки дрожат, в глазах красное.
+	// «Живица» (ампула): укол — быстро кровь и здоровье; 10 минут перелом срастается сам, руки дрожат.
 	class VB_AR_Blood: Inventory_Base
 	{
 		scope = 2;
 		displayName = "Живица";
-		descriptionShort = "Ампула с густой золотой живицей, оплетённая лыком. Укол быстро возвращает кровь и силы. Минут десять после него нечисть вокруг светится в темноте, а руки дрожат.";
+		descriptionShort = "Ампула с густой золотой живицей, оплетённая лыком. Укол быстро возвращает кровь и силы, а сломанная кость за несколько минут срастается сама. Минут десять после него дрожат руки.";
 		model = "\VB_AncientRoot\data\vb_ar_blood_ampoule.p3d";
 		weight = 60;
 		itemSize[] = {1, 1};
 		rotationFlags = 17;
 	};
 
-	// «Канистра Изнанки» (класс VB_AR_FuelCapsule): залить в бак (+20 л). Полчаса за машиной красный шлейф, на остановках сползаются зомби Изнанки.
-
-
-	// «Голодный клинок»: убийство зомби возвращает кровь, полный заряд — облако спор вокруг. Час без убийств тянет кровь.
+	// «Терновый клинок»: удар — терновая рана (зверь или нечисть кровоточит и идёт шагом), убийство возвращает кровь. Час без убийств тянет кровь.
 	class VB_AR_Blade: FangeKnife
 	{
 		scope = 2;
 		displayName = "Терновый клинок";
-		descriptionShort = "Нож, проросший терновым корнем. Каждое убийство нечисти возвращает владельцу немного крови, а насытившись, клинок осыпает пыльцой. Если долго не кормить, шипы впиваются в руку хозяина.";
+		descriptionShort = "Нож, проросший терновым корнем. Шипы остаются в ране: зверь или нечисть истекает кровью и уже не может бежать. Каждое убийство возвращает владельцу немного крови. Если долго не кормить, шипы впиваются в руку хозяина.";
 		model = "\VB_AncientRoot\data\vb_ar_blade.p3d";
 		hiddenSelections[] = {};
 	};
 
-	// «Плащ-кокон»: тёплый дождевик; ночью присел и замер — обычные зомби теряют тебя (зомби Изнанки — нет).
+	// «Плащ лешего»: тёплый дождевик; ночью присел и замер — обычные зомби и звери теряют тебя (стражи — нет).
 	class VB_AR_Cloak: Raincoat_ColorBase
 	{
 		scope = 2;
 		displayName = "Плащ лешего";
-		descriptionShort = "Дождевик, обросший корой и мхом. Тёплый и не промокает. Ночью, если присесть и замереть, обычные зомби теряют тебя из виду. Стражей корня так не обмануть.";
+		descriptionShort = "Дождевик, обросший корой и мхом. Тёплый и не промокает. Ночью, если присесть и замереть, ни нечисть, ни звери тебя не замечают. Стражей корня так не обмануть.";
 		heatIsolation = 0.45;
 		visibilityModifier = 0.7;
 		hiddenSelectionsTextures[] = {"\VB_AncientRoot\data\retex\vb_ar_cloak_g_co.paa", "\VB_AncientRoot\data\retex\vb_ar_cloak_co.paa", "\VB_AncientRoot\data\retex\vb_ar_cloak_co.paa"};
 		hiddenSelectionsMaterials[] = {"\VB_AncientRoot\data\retex\vb_ar_cloak_g.rvmat", "\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat", "\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat"};
 	};
 
-	// «Живой жгут»: лежит в инвентаре и сам закрывает одно кровотечение, «отпив» немного крови.
+	// «Янтарный оберег» (ТЗ 2б.5; скрипты VB_AR_Gear.c, сервер VB_AR_GearServer.c, VB_AR_FavorServer.c):
+	// в инвентаре — стражи не нападают первыми, Благословение ×1,5; вырезавшему сердцевину — до рестарта не помогает.
+	// Модель временная (кусок янтаря) — своя на шаге моделей; крафт (янтарь + клык + лыко) — в DRL 18 в конце работ.
+	class VB_AR_Amulet: Inventory_Base
+	{
+		scope = 2;
+		displayName = "Янтарный оберег";
+		descriptionShort = "Кусок янтаря и волчий клык на шнурке из живого лыка. Пока оберег при тебе, стражи рощ не нападают первыми, а Благословение рощи держится дольше. Тому, кто вырезал сердцевину, он не поможет.";
+		model = "\VB_AncientRoot\data\vb_ar_heart_chunk.p3d";
+		weight = 80;
+		itemSize[] = {1, 2};
+		rotationFlags = 17;
+		hiddenSelections[] = {"crust", "veins"};
+		hiddenSelectionsTextures[] = {"\VB_AncientRoot\data\items\vb_ar_amber_co.paa", "\VB_AncientRoot\data\items\vb_ar_amber_vein_co.paa"};
+		hiddenSelectionsMaterials[] = {"\VB_AncientRoot\data\items\vb_ar_amber.rvmat", "\VB_AncientRoot\data\items\vb_ar_amber.rvmat"};
+	};
 
-
-	// «Нить Изнанки»: пришить к одежде (перетащить на вещь) — вещь сама латается около 1 %/мин 3 часа (до рестарта).
-
+	// «Настой пыльцы» (ТЗ 2б.5; скрипты VB_AR_Gear.c): выпить — 10 минут звери и стражи рощи в 60 м подсвечены
+	// золотым светом (видит только выпивший). Модель временная (ванильная бутылка) — своя на шаге моделей.
+	class VB_AR_PollenBrew: Inventory_Base
+	{
+		scope = 2;
+		displayName = "Настой пыльцы";
+		descriptionShort = "Тёплый настой золотой пыльцы на лесных травах. Выпей — и минут десять будешь видеть зверей и стражей рощи: они светятся золотом даже в темноте.";
+		model = "\dz\gear\drinks\MilkBottle.p3d";
+		weight = 250;
+		itemSize[] = {1, 2};
+		rotationFlags = 17;
+	};
 
 	// Объекты Изнанки. Начало координат модели = уровень земли (у корней — место выхода из земли).
 	// Пульс свечения и свет — клиентский скрипт (VB_AR_Pulse). Модели генерирует tools/gen_ar_veins.py.

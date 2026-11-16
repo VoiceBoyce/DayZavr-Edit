@@ -1,17 +1,18 @@
-// Изделия Изнанки (крафт в DRL_CraftMenu): слушающий корень, сердце-аккумулятор, споровая ловушка, фонарь-сердце,
-// кровь Изнанки, топливная капсула, голодный клинок, плащ-кокон, живой жгут, нить Изнанки.
-// Конфиги — config.cpp (раздел «изделия Изнанки»), модели — tools/gen_ar_veins.py, перекраски — data/retex.
+// Изделия «Древнего корня»: Корень-вещун, Пыльцевая ловушка, Светоч корня, Живица, Терновый клинок, Плащ лешего
+// (крафт — в DRL 18, в самом конце работ). Аккумулятор, канистра, жгут и нить убраны (ТЗ 2б.5).
+// Конфиги — config.cpp (раздел «изделия»), модели — tools/gen_ar_veins.py, перекраски — data/retex.
 // Здесь клиентская часть: классы, поля, синхронизация, сохранение, условия действий, эффекты, приём RPC.
-// Серверная часть (таймеры, заряды, вызов зомби, кровь, клинок, жгут, нить, логи) — VB_AncientRoot_Server, VB_AR_GearServer.c.
+// Серверная часть (таймеры, заряды, вызов стражей, Живица, клинок, плащ, логи) — VB_AncientRoot_Server,
+// VB_AR_GearServer.c; сон и терновая рана существ — VB_AR_CreatureServer.c.
 
 class VB_AR_Gear
 {
 	static const int RPC_LISTEN = 1447186012;	// сервер -> клиент: результат «прислушаться»
-	static const int RPC_BURST = 1447186013;	// сервер -> клиенты рядом: хлопок спор в точке
+	static const int RPC_BURST = 1447186013;	// сервер -> клиенты рядом: вспышка пыльцы в точке
 	static const float BURST_FX_DIST = 200.0;
 	static const string BURST_SOUND = "VB_AR_Burst_SoundSet";
 
-	// клиент: облако красных спор и мокрый хлопок
+	// клиент: облако золотой пыльцы и хлопок
 	static void VB_BurstFxClient(vector pos)
 	{
 		ParticleManager pm = ParticleManager.GetInstance();
@@ -31,16 +32,23 @@ class VB_AR_Gear
 }
 
 // ============================================================================================
-// «Слушающий корень»: ночью «прислушаться» (1 заряд) — сервер ищет ближайшее живое сердце в RANGE и отдаёт
-// только направление (по сектору DIR_SECTOR_DEG) и ступень расстояния (DIST_STEP), не координаты сердца.
-// Клиент слышит серию ударов с той стороны: ближе — громче и чаще, если сердце режут — бешеный стук.
-// Подзарядка — у живого сердца ночью (VB_ActionFeedListenRoot): заряды до полного, сердце просыпается.
+// «Корень-вещун» (ТЗ 2б.5): «прислушаться» в любое время.
+//   Ночью (1 заряд) сервер ищет ближайшую живую сердцевину в RANGE и отдаёт только направление (по сектору
+//   DIR_SECTOR_DEG) и ступень расстояния (DIST_STEP), не координаты. Клиент слышит серию ударов с той стороны:
+//   ближе — громче и чаще, если сердцевину режут — бешеный стук. Днём сердцевины молчат, заряд не тратится.
+//   Всегда: гроза (облачность сейчас или прогноз не ниже STORM_OVERCAST — порог молний Ливонии) и что лес думает
+//   об игроке (ступень расположения, VB_AR_Favor).
+// Подзарядка — у живой сердцевины ночью (VB_ActionFeedListenRoot): заряды до полного, сердцевина тревожится.
 
 class VB_AR_ListenRoot extends Inventory_Base
 {
 	static const float RANGE = 3000.0;
 	static const float DIST_STEP = 250.0;		// м: ступень расстояния в ответе сервера
 	static const float DIR_SECTOR_DEG = 10.0;	// направление округляется до сектора
+	static const float STORM_OVERCAST = 0.85;	// порог молний на Ливонии (ваниль: WorldData m_StormThreshold, Enoch не меняет)
+	static const int STORM_NONE = 0;
+	static const int STORM_COMING = 1;			// прогноз облачности дошёл до порога — гроза идёт
+	static const int STORM_NOW = 2;				// облачность уже выше порога
 
 	override void SetActions()
 	{
@@ -63,21 +71,46 @@ class VB_AR_Listen
 	protected float m_VB_Volume;
 	protected int m_VB_Left;
 
-	static void VB_Play(bool found, vector dir, int step, bool frantic)
+	static void VB_Play(bool night, bool found, vector dir, int step, bool frantic, int storm)
 	{
 		PlayerBase player = PlayerBase.Cast(g_Game.GetPlayer());
 		if (!player)
 			return;
 
-		if (!found)
-		{
+		if (!night)
+			player.MessageStatus("Днём сердцевины спят: корень-вещун их не слышит.");
+		else if (!found)
 			player.MessageStatus("Корень-вещун молчит: живых сердцевин поблизости нет.");
-			return;
+		else
+		{
+			if (s_VB_Cur)
+				s_VB_Cur.VB_Stop();
+			s_VB_Cur = new VB_AR_Listen(dir, step, frantic);
 		}
 
-		if (s_VB_Cur)
-			s_VB_Cur.VB_Stop();
-		s_VB_Cur = new VB_AR_Listen(dir, step, frantic);
+		if (storm == VB_AR_ListenRoot.STORM_NOW)
+			player.MessageStatus("Корень дрожит: гроза уже над лесом.");
+		else if (storm == VB_AR_ListenRoot.STORM_COMING)
+			player.MessageStatus("Корень гудит: к лесу идёт гроза.");
+
+		player.MessageStatus(VB_ForestMood());
+	}
+
+	// что лес думает об игроке — по ступени расположения (ТЗ 2б.11)
+	static string VB_ForestMood()
+	{
+		int tier = VB_AR_Favor.TIER_STRANGER;
+		if (VB_AR_Favor.s_VB_Known)
+			tier = VB_AR_Favor.VB_MyTier();
+		if (tier == VB_AR_Favor.TIER_FRIEND)
+			return "Лес поёт тебе навстречу.";
+		if (tier == VB_AR_Favor.TIER_OWN)
+			return "Лес тебя знает.";
+		if (tier == VB_AR_Favor.TIER_ENEMY)
+			return "Лес насторожен.";
+		if (tier == VB_AR_Favor.TIER_CURSED)
+			return "Лес ненавидит тебя.";
+		return "Лес молчит.";
 	}
 
 	void VB_AR_Listen(vector dir, int step, bool frantic)
@@ -148,9 +181,12 @@ class VB_ActionListenRoot : ActionSingleUseBase
 		return false;
 	}
 
+	// днём — всегда (заряд не тратится), ночью — пока есть заряды
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item)
 	{
-		return item.GetQuantity() > 0 && VB_AR_Pulse.VB_NightFactor() >= VB_AR_Pulse.NIGHT_LIGHT_ABOVE;
+		if (VB_AR_Pulse.VB_NightFactor() < VB_AR_Pulse.NIGHT_LIGHT_ABOVE)
+			return true;
+		return item.GetQuantity() > 0;
 	}
 }
 
@@ -192,81 +228,17 @@ class VB_ActionFeedListenRoot : ActionContinuousBase
 }
 
 // ============================================================================================
-// «Сердце-аккумулятор»: автомобильный аккумулятор. Сервер раз в минуту: ночью +CHARGE_PER_MIN, днём -DRAIN_PER_MIN.
-// Клиент: игрок в машине с таким аккумулятором, ночь, живое сердце в CABIN_DIST — стук в салоне, ближе — чаще.
-
-class VB_AR_HeartBattery extends CarBattery
-{
-	static const int SELF_MS = 60000;
-	static const float CHARGE_PER_MIN = 10.0;	// из 500 (2 %): полный за ~50 минут ночи
-	static const float DRAIN_PER_MIN = 1.25;	// 0.25 %
-	static const float CABIN_DIST = 500.0;
-	static const int CABIN_TICK_MS = 250;
-	static const string CABIN_SOUND = "VB_AR_ChunkBeat_SoundSet";
-
-	protected float m_VB_NextBeat;
-
-	override void EEInit()
-	{
-		super.EEInit();
-		if (!g_Game.IsDedicatedServer())
-			g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_CabinClient, CABIN_TICK_MS, true);
-	}
-
-	override void EEDelete(EntityAI parent)
-	{
-		if (g_Game)
-			g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_CabinClient);
-		super.EEDelete(parent);
-	}
-
-	void VB_CabinClient()
-	{
-		CarScript car = CarScript.Cast(GetHierarchyParent());
-		if (!car)
-			return;
-
-		PlayerBase me = PlayerBase.Cast(g_Game.GetPlayer());
-		if (!me)
-			return;
-
-		HumanCommandVehicle hcv = me.GetCommand_Vehicle();
-		if (!hcv || hcv.GetTransport() != car)
-			return;
-
-		if (VB_AR_Pulse.VB_NightFactor() < VB_AR_Pulse.NIGHT_LIGHT_ABOVE)
-			return;
-
-		VB_AR_Base heart = VB_AR_Pulse.VB_NearestLiveHeart(car.GetPosition(), CABIN_DIST);
-		if (!heart)
-			return;
-
-		float now = g_Game.GetTime() * 0.001;
-		if (now < m_VB_NextBeat)
-			return;
-
-		float k = vector.Distance(car.GetPosition(), heart.GetPosition()) / CABIN_DIST;
-		m_VB_NextBeat = now + Math.Lerp(0.9, 3.0, k);
-		EffectSound snd = SEffectManager.PlaySoundOnObject(CABIN_SOUND, me);
-		if (snd)
-		{
-			snd.SetSoundVolume(Math.Lerp(1.0, 0.35, k));
-			snd.SetAutodestroy(true);
-		}
-	}
-}
-
-// ============================================================================================
-// «Споровая ловушка»: «Раскрыть» в руках, потом бросить. Облако спор шумит (зомби идут), через ARM_MS лопается:
-// живым зомби в BURST_RADIUS урон BURST_DAMAGE (обычных с полным здоровьем это почти валит, зомби Изнанки — нет).
+// «Пыльцевая ловушка» (ТЗ 2б.5): «Раскрыть» в руках, потом бросить. Облако пыльцы шумит (нечисть и звери идут),
+// через ARM_MS вспыхивает: все живые зомби и звери в BURST_RADIUS (стражи и мутанты тоже) засыпают на SLEEP_MS —
+// ИИ стоит на месте. Удар будит того, кого ударили. Людей не трогает. Сон — VB_AR_CreatureServer.c.
 
 class VB_AR_SporeTrap extends Inventory_Base
 {
 	static const int ARM_MS = 10000;
 	static const int NOISE_MS = 2000;
 	static const string NOISE = "VB_AR_TrapNoise";
-	static const float BURST_RADIUS = 7.0;
-	static const float BURST_DAMAGE = 70.0;
+	static const float BURST_RADIUS = 8.0;
+	static const int SLEEP_MS = 20000;
 
 	protected bool m_VB_Armed;				// синхронизируется: облако спор над ловушкой
 	protected ParticleSource m_VB_Cloud;
@@ -349,9 +321,10 @@ class VB_ActionArmSporeTrap : ActionSingleUseBase
 }
 
 // ============================================================================================
-// «Фонарь-сердце»: горит красным без батареек (в руках или на земле), количество = минуты спор.
-// Клиент: пульс света, вдвое-втрое чаще, если живой зомби ближе ALARM_DIST; такт идёт только у горящего фонаря.
-// Сервер: ночью раз в CALL_MS с шансом CALL_CHANCE из темноты выходит зомби Изнанки (без лута) и идёт на свет.
+// «Светоч корня» (ТЗ 2б.5): горит золотым без батареек (в руках или на земле), количество = минуты пыльцы.
+// Клиент: пульс света, вдвое-втрое чаще, если живой зомби ближе ALARM_DIST; такт идёт только у горящего светоча.
+// Сервер: обычные зомби не трогают игроков в SCARE_DIST от горящего светоча (CanBeTargetedByAI, стражей это не
+// касается); ночью раз в CALL_MS с шансом CALL_CHANCE стражи видят свет издалека — выходит Лесовой волк (без лута).
 
 class VB_AR_LanternLight extends PointLightBase
 {
@@ -373,6 +346,9 @@ class VB_AR_Lantern extends Inventory_Base
 	static const int CALL_MS = 180000;
 	static const float CALL_CHANCE = 0.45;
 	static const string CALL_NOISE = "VB_AR_ChunkNoise";
+	static const float CALL_DIST_MIN = 60.0;	// стражи выходят на свет издалека
+	static const float CALL_DIST_MAX = 90.0;
+	static const float SCARE_DIST = 12.0;		// обычные зомби не трогают игроков ближе к горящему светочу
 	static const float ALARM_DIST = 30.0;
 	static const int TICK_MS = 50;
 	static const float BEAT_PERIOD = 1.6;
@@ -577,14 +553,19 @@ class VB_ActionLanternOff : VB_ActionLanternOn
 }
 
 // ============================================================================================
-// «Кровь Изнанки»: ванильный укол (себе или другому). Кровь и здоровье сразу (сервер, OnApply); у игрока на время
-// синхронизируемый флаг: руки дрожат при прицеливании (уровень тряски как от холода), у него на клиенте живые зомби
-// в GLOW_DIST светятся красным, экран слабо пульсирует красным в такт сердцу.
+// «Живица» (ТЗ 2б.5): ванильный укол (себе или другому). Кровь и здоровье сразу (сервер, OnApply). Потом BLOOD_MS
+// у игрока синхронизируемый флаг: руки дрожат при прицеливании (тряска как от холода), а перелом сам срастается —
+// раз в HEAL_TICK_MS каждой зоне ног прибавляется LEG_HEAL здоровья; ваниль (BrokenLegsMdfr) снимает перелом,
+// когда обе ноги здоровы (100). С шиной быстрее: ванильное BoneRegen работает тоже. Логика — VB_AR_GearServer.c.
+// Подсветка нечисти, что была у «Крови Изнанки», уходит в «Настой пыльцы» (новое изделие).
 
 class VB_AR_Blood extends Inventory_Base
 {
 	static const float BLOOD_ADD = 1500.0;
 	static const float HEALTH_ADD = 40.0;
+	static const int BLOOD_MS = 600000;
+	static const int HEAL_TICK_MS = 10000;
+	static const float LEG_HEAL = 3.0;		// за такт каждой зоне ног: от 0 до 100 — около 5,5 мин
 
 	override void SetActions()
 	{
@@ -594,29 +575,158 @@ class VB_AR_Blood extends Inventory_Base
 	}
 }
 
-// Клиент: эффект «Крови Изнанки» у своего игрока. Каждый такт проверяет, что у ТЕКУЩЕГО локального персонажа
-// флаг ещё стоит: после смерти, возрождения или перезахода эффект гаснет сам (баг №27).
-class VB_AR_BloodFx
+// ============================================================================================
+// «Терновый клинок» (ТЗ 2б.5): удар по зверю или нечисти (любой DayZCreatureAI: зомби, звери, стражи, мутанты MSFZ)
+// оставляет терновую рану — BLEED_MS цель теряет BLEED_DPS здоровья в секунду и идёт шагом. Убийство (и раной
+// тоже) — владельцу +BLOOD_PER_KILL крови, клинку лишний износ, голод сбрасывается.
+// Голод копится, только пока клинок у игрока в игре: после HUNGER_AFTER_S такой игры без убийств раз в минуту
+// забирает HUNGER_BLOOD крови, но не ниже BLOOD_FLOOR. Голод — в сохранении.
+// Логика — сервер: голод в VB_AR_GearServer.c, рана и кормление в VB_AR_CreatureServer.c.
+
+class VB_AR_Blade extends FangeKnife
 {
-	static const string GLOW_MAT = "VB_AncientRoot\\data\\zombies\\vb_ar_zmb_glow.rvmat";
-	static const float GLOW_DIST = 40.0;
+	static const float BLOOD_PER_KILL = 150.0;
+	static const float EXTRA_WEAR = 1.0;
+	static const int BLEED_MS = 8000;
+	static const float BLEED_DPS = 4.0;
+	static const int HUNGER_AFTER_S = 3600;
+	static const int HUNGER_TICK_MS = 60000;
+	static const float HUNGER_BLOOD = 60.0;
+	static const float BLOOD_FLOOR = 3000.0;	// ниже голод кровь не опускает: клинок не убивает
+	static const int HUNGER_MSG_S = 600;
+	static const int STORE_VER = 1;
+
+	protected int m_VB_Hunger;				// сервер: секунд игры с клинком без убийств, в сохранении
+
+	// формат 1: STORE_MARK, версия, голод (секунды). Мод ещё нигде не стоял — старых форматов нет.
+	override void OnStoreSave(ParamsWriteContext ctx)
+	{
+		super.OnStoreSave(ctx);
+		int mark = VB_AR_Items.STORE_MARK;
+		int ver = STORE_VER;
+		ctx.Write(mark);
+		ctx.Write(ver);
+		ctx.Write(m_VB_Hunger);
+	}
+
+	override bool OnStoreLoad(ParamsReadContext ctx, int version)
+	{
+		if (!super.OnStoreLoad(ctx, version))
+			return false;
+
+		int mark;
+		int ver;
+		int hunger;
+		if (!ctx.Read(mark) || mark != VB_AR_Items.STORE_MARK)
+			return false;
+		if (!ctx.Read(ver) || ver < 1 || ver > STORE_VER)
+			return false;
+		if (!ctx.Read(hunger))
+			return false;
+
+		m_VB_Hunger = Math.Max(hunger, 0);
+		return true;
+	}
+}
+
+// ============================================================================================
+// «Янтарный оберег» (ТЗ 2б.5): лежит где угодно в инвентаре игрока — стражи рощ не нападают на него первыми,
+// Благословение рощи на 50 % дольше. Тому, кто в этот рестарт вырезал сердцевину, не помогает. Сломанный не работает.
+// Всё считает сервер (VB_AR_GearServer.c: PlayerBase.VB_AmuletWorks, раз в AMULET_CHECK_MS перебор инвентаря).
+
+class VB_AR_Amulet extends Inventory_Base
+{
+	static const float BLESS_MUL = 1.5;
+	static const int AMULET_CHECK_MS = 5000;
+}
+
+// ============================================================================================
+// «Настой пыльцы» (ТЗ 2б.5): выпить (VB_ActionDrinkPollenBrew) — BREW_MS у игрока синхронизируемый флаг, и у него на
+// клиенте живые звери (в т. ч. мутанты MSFZ) и стражи рощи в DIST подсвечены золотым светом (VB_AR_BrewFx: лампа на
+// существе, не больше MAX_LIT ближайших). Материалы существ не трогаем: у них материал ставит healthLevels (E77).
+
+class VB_AR_PollenBrew extends Inventory_Base
+{
+	static const int BREW_MS = 600000;
+
+	override void SetActions()
+	{
+		super.SetActions();
+		AddAction(VB_ActionDrinkPollenBrew);
+	}
+}
+
+class VB_ActionDrinkPollenBrewCB : ActionContinuousBaseCB
+{
+	override void CreateActionComponent()
+	{
+		m_ActionData.m_ActionComponent = new CAContinuousTime(VB_ActionDrinkPollenBrew.DRINK_TIME);
+	}
+}
+
+class VB_ActionDrinkPollenBrew : ActionContinuousBase
+{
+	static const float DRINK_TIME = 3.0;
+
+	void VB_ActionDrinkPollenBrew()
+	{
+		m_CallbackClass = VB_ActionDrinkPollenBrewCB;
+		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_DRINK;
+		m_CommandUIDProne = DayZPlayerConstants.CMD_ACTIONFB_DRINK;
+		m_Text = "Выпить настой";
+	}
+
+	override void CreateConditionComponents()
+	{
+		m_ConditionItem = new CCINonRuined();
+		m_ConditionTarget = new CCTNone();
+	}
+
+	override bool HasTarget()
+	{
+		return false;
+	}
+
+	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item)
+	{
+		return VB_AR_PollenBrew.Cast(item) != null;
+	}
+}
+
+class VB_AR_BrewLight extends PointLightBase
+{
+	void VB_AR_BrewLight()
+	{
+		SetVisibleDuringDaylight(true);
+		SetRadiusTo(3.0);
+		SetBrightnessTo(1.4);
+		SetCastShadow(false);
+		SetFlareVisible(false);
+		SetAmbientColor(1.0, 0.62, 0.18);
+		SetDiffuseColor(1.0, 0.62, 0.18);
+	}
+}
+
+// Клиент: подсветка у своего игрока. Каждый такт проверяет, что у ТЕКУЩЕГО локального персонажа флаг ещё стоит:
+// после смерти, возрождения или перезахода эффект гаснет сам (как было у «Крови Изнанки», баг №27).
+class VB_AR_BrewFx
+{
+	static const float DIST = 60.0;
 	static const int SCAN_MS = 1000;
-	static const int BEAT_MS = 1600;
-	static const string BEAT_SOUND = "VB_AR_ChunkBeat_SoundSet";
-	static const float FLASH = 0.05;
+	static const int MAX_LIT = 8;
 
-	protected static ref VB_AR_BloodFx s_VB_Inst;
+	protected static ref VB_AR_BrewFx s_VB_Inst;
 
-	protected ref array<ZombieBase> m_VB_Lit;
-	protected ref array<string> m_VB_LitMat;
-	protected bool m_VB_Halted;				// остановлен изнутри своего такта, ждёт замены/удаления снаружи
+	protected ref array<EntityAI> m_VB_Lit;
+	protected ref array<VB_AR_BrewLight> m_VB_Lights;
+	protected bool m_VB_Halted;			// остановлен изнутри своего такта, ждёт замены/удаления снаружи
 
 	static void VB_Set(bool on)
 	{
 		if (on)
 		{
 			if (!s_VB_Inst || s_VB_Inst.m_VB_Halted)
-				s_VB_Inst = new VB_AR_BloodFx();
+				s_VB_Inst = new VB_AR_BrewFx();
 		}
 		else if (s_VB_Inst)
 		{
@@ -631,12 +741,22 @@ class VB_AR_BloodFx
 		return s_VB_Inst && !s_VB_Inst.m_VB_Halted;
 	}
 
-	void VB_AR_BloodFx()
+	// кого подсвечивать: живые звери (волки, олени, мутанты-звери MSFZ) и стражи рощи (Хранитель — по классу зомби)
+	static bool VB_Wants(Object o)
 	{
-		m_VB_Lit = new array<ZombieBase>;
-		m_VB_LitMat = new array<string>;
+		EntityAI e = EntityAI.Cast(o);
+		if (!e || !e.IsAlive())
+			return false;
+		if (AnimalBase.Cast(e))
+			return true;
+		return ZombieBase.Cast(e) && VB_AR_Guard.VB_Is(e);
+	}
+
+	void VB_AR_BrewFx()
+	{
+		m_VB_Lit = new array<EntityAI>;
+		m_VB_Lights = new array<VB_AR_BrewLight>;
 		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_Scan, SCAN_MS, true);
-		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_Beat, BEAT_MS, true);
 		VB_Scan();
 	}
 
@@ -644,397 +764,115 @@ class VB_AR_BloodFx
 	{
 		m_VB_Halted = true;
 		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_Scan);
-		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_Beat);
-		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_FlashOff);
-		VB_FlashOff();
 		for (int i = m_VB_Lit.Count() - 1; i >= 0; i--)
-			VB_Restore(i);
+			VB_Unlit(i);
 	}
 
-	// Действует ли ещё «Кровь» у текущего локального персонажа. Нет — остановиться (сам объект не удаляем:
-	// мы внутри его же такта; s_VB_Inst заменит или обнулит следующий VB_Set).
 	protected bool VB_StillOn()
 	{
 		PlayerBase me = PlayerBase.Cast(g_Game.GetPlayer());
-		if (me && me.IsAlive() && me.VB_HasRootBlood())
+		if (me && me.IsAlive() && me.VB_HasBrew())
 			return true;
 
 		VB_Stop();
 		return false;
 	}
 
-	protected void VB_Restore(int i)
+	protected void VB_Unlit(int i)
 	{
-		ZombieBase zmb = m_VB_Lit[i];
-		if (zmb)
-		{
-			int idx = zmb.GetHiddenSelectionIndex("camo");
-			if (idx >= 0)
-				zmb.SetObjectMaterial(idx, m_VB_LitMat[i]);
-		}
+		VB_AR_BrewLight l = m_VB_Lights[i];
+		if (l)
+			l.Destroy();
 		m_VB_Lit.Remove(i);
-		m_VB_LitMat.Remove(i);
+		m_VB_Lights.Remove(i);
 	}
 
-	// обычные живые зомби в GLOW_DIST: подсветить новых, вернуть материал ушедшим и умершим
 	void VB_Scan()
 	{
 		if (!VB_StillOn())
 			return;
 
-		Man player = g_Game.GetPlayer();
-		vector ppos = player.GetPosition();
-		float glowSq = GLOW_DIST * GLOW_DIST * 1.2;
+		vector ppos = g_Game.GetPlayer().GetPosition();
+		float keepSq = DIST * DIST * 1.2;
 		for (int i = m_VB_Lit.Count() - 1; i >= 0; i--)
 		{
-			if (!m_VB_Lit[i] || !m_VB_Lit[i].IsAlive() || vector.DistanceSq(ppos, m_VB_Lit[i].GetPosition()) > glowSq)
-				VB_Restore(i);
+			if (!m_VB_Lit[i] || !m_VB_Lit[i].IsAlive() || vector.DistanceSq(ppos, m_VB_Lit[i].GetPosition()) > keepSq)
+				VB_Unlit(i);
 		}
-
-		array<Object> objs = new array<Object>;
-		g_Game.GetObjectsAtPosition(ppos, GLOW_DIST, objs, null);
-		ZombieBase zmb;
-		TStringArray mats = new TStringArray;
-		int idx;
-		foreach (Object o : objs)
-		{
-			zmb = ZombieBase.Cast(o);
-			if (!zmb || !zmb.IsAlive() || VB_AR_Guard.VB_Is(zmb) || m_VB_Lit.Find(zmb) >= 0)
-				continue;
-			idx = zmb.GetHiddenSelectionIndex("camo");
-			if (idx < 0)
-				continue;
-			mats.Clear();
-			zmb.ConfigGetTextArray("hiddenSelectionsMaterials", mats);
-			if (mats.Count() <= idx)
-				continue;	// исходный материал не известен — вернуть было бы нечем
-			zmb.SetObjectMaterial(idx, GLOW_MAT);
-			m_VB_Lit.Insert(zmb);
-			m_VB_LitMat.Insert(mats[idx]);
-		}
-	}
-
-	void VB_Beat()
-	{
-		if (!VB_StillOn())
+		if (m_VB_Lit.Count() >= MAX_LIT)
 			return;
 
-		Man player = g_Game.GetPlayer();
-		EffectSound snd = SEffectManager.PlaySoundOnObject(BEAT_SOUND, player);
-		if (snd)
+		array<Object> objs = new array<Object>;
+		g_Game.GetObjectsAtPosition(ppos, DIST, objs, null);
+		EntityAI e;
+		VB_AR_BrewLight light;
+		foreach (Object o : objs)
 		{
-			snd.SetSoundVolume(0.45);
-			snd.SetAutodestroy(true);
+			if (m_VB_Lit.Count() >= MAX_LIT)
+				break;
+			if (!VB_Wants(o))
+				continue;
+			e = EntityAI.Cast(o);
+			if (m_VB_Lit.Find(e) >= 0)
+				continue;
+			light = VB_AR_BrewLight.Cast(ScriptedLightBase.CreateLight(VB_AR_BrewLight, e.GetPosition()));
+			if (!light)
+				continue;
+			light.AttachOnObject(e, "0 0.9 0");
+			m_VB_Lit.Insert(e);
+			m_VB_Lights.Insert(light);
 		}
-
-		PPERequester_HealthHitReaction req = PPERequester_HealthHitReaction.Cast(PPERequesterBank.GetRequester(PPERequester_HealthHitReaction));
-		if (req)
-		{
-			req.Start();
-			req.SetHitIntensity(FLASH);
-			g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_FlashOff, 180, false);
-		}
-	}
-
-	void VB_FlashOff()
-	{
-		PPERequester_HealthHitReaction req = PPERequester_HealthHitReaction.Cast(PPERequesterBank.GetRequester(PPERequester_HealthHitReaction));
-		if (req)
-			req.Stop();
 	}
 }
 
 // ============================================================================================
-// «Топливная капсула»: залить в бак (+FUEL_LITERS). Машина полчаса тянет красный шлейф спор; если она стоит
-// и рядом игрок, из земли вокруг лезут 2–3 зомби Изнанки без лута (сервер, VB_AR_GearServer.c).
-
-class VB_AR_FuelCapsule extends Inventory_Base
-{
-	static const float FUEL_LITERS = 20.0;
-
-	override void SetActions()
-	{
-		super.SetActions();
-		AddAction(VB_ActionPourFuelCapsule);
-	}
-}
-
-class VB_ActionPourFuelCapsuleCB : ActionContinuousBaseCB
-{
-	override void CreateActionComponent()
-	{
-		m_ActionData.m_ActionComponent = new CAContinuousTime(VB_ActionPourFuelCapsule.POUR_TIME);
-	}
-}
-
-class VB_ActionPourFuelCapsule : ActionContinuousBase
-{
-	static const float POUR_TIME = 6.0;
-
-	void VB_ActionPourFuelCapsule()
-	{
-		m_CallbackClass = VB_ActionPourFuelCapsuleCB;
-		m_CommandUID = DayZPlayerConstants.CMD_ACTIONFB_EMPTY_VESSEL;
-		m_StanceMask = DayZPlayerConstants.STANCEMASK_ERECT | DayZPlayerConstants.STANCEMASK_CROUCH;
-		m_FullBody = true;
-		m_Text = "Залить живицу в бак";
-	}
-
-	override void CreateConditionComponents()
-	{
-		m_ConditionItem = new CCINonRuined();
-		m_ConditionTarget = new CCTCursor(UAMaxDistances.DEFAULT);
-	}
-
-	static CarScript VB_Car(ActionTarget target)
-	{
-		CarScript car = CarScript.Cast(target.GetObject());
-		if (!car)
-			car = CarScript.Cast(target.GetParent());
-		return car;
-	}
-
-	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item)
-	{
-		CarScript car = VB_Car(target);
-		return car && !car.IsRuined() && car.GetFluidFraction(CarFluid.FUEL) < 0.99;
-	}
-}
-
-modded class CarScript
-{
-	protected bool m_VB_AR_Fuel;					// синхронизируется: красный шлейф
-	protected ParticleSource m_VB_Trail;
-
-	void CarScript()
-	{
-		RegisterNetSyncVariableBool("m_VB_AR_Fuel");
-	}
-
-	override void OnVariablesSynchronized()
-	{
-		super.OnVariablesSynchronized();
-		VB_UpdateTrail();
-	}
-
-	protected void VB_UpdateTrail()
-	{
-		if (m_VB_AR_Fuel && !m_VB_Trail)
-		{
-			ParticleManager pm = ParticleManager.GetInstance();
-			if (!pm)
-				return;
-
-			vector mm[2];
-			vector rear = "0 0.5 -2";
-			if (GetCollisionBox(mm))
-				rear = Vector(0, mm[0][1] + 0.5, mm[0][2] - 0.2);
-			m_VB_Trail = pm.PlayOnObject(ParticleList.VB_AR_SPORES, this, rear, "0 0 0", true);
-		}
-		else if (!m_VB_AR_Fuel && m_VB_Trail)
-		{
-			m_VB_Trail.StopParticle();
-			m_VB_Trail = null;
-		}
-	}
-
-	override void EEDelete(EntityAI parent)
-	{
-		if (m_VB_Trail)
-		{
-			m_VB_Trail.StopParticle();
-			m_VB_Trail = null;
-		}
-		super.EEDelete(parent);
-	}
-}
-
-// ============================================================================================
-// «Голодный клинок»: убийство зомби (этим ножом) — владельцу +BLOOD_PER_KILL крови, ножу +1 заряд и лишний износ;
-// на CHARGE_MAX зарядов — хлопок спор вокруг владельца. Бьёт зомби сильнее ванильного ножа (+HIT_BONUS).
-// Голод копится, только пока клинок у игрока в игре: после HUNGER_AFTER_S такой игры без еды раз в минуту забирает
-// HUNGER_BLOOD крови, но не ниже BLOOD_FLOOR. Заряд и накопленный голод — в сохранении. Логика — сервер.
-
-class VB_AR_Blade extends FangeKnife
-{
-	static const int CHARGE_MAX = 10;
-	static const float BLOOD_PER_KILL = 150.0;
-	static const float EXTRA_WEAR = 1.0;
-	static const float STUN_RADIUS = 6.0;
-	static const float STUN_DAMAGE = 60.0;
-	static const int HUNGER_AFTER_S = 3600;
-	static const int HUNGER_TICK_MS = 60000;
-	static const float HUNGER_BLOOD = 60.0;
-	static const float BLOOD_FLOOR = 3000.0;	// ниже голод кровь не опускает: клинок не убивает
-	static const int HUNGER_MSG_S = 600;
-	static const float HIT_BONUS = 30.0;		// доп. урон зомби за удар (расчёт — в VB_AR_GearServer.c)
-	static const int STORE_VER = 1;
-
-	protected int m_VB_Charge;				// синхронизируется, в сохранении
-	protected int m_VB_Hunger;				// сервер: секунд игры с клинком без еды, в сохранении
-
-	void VB_AR_Blade()
-	{
-		RegisterNetSyncVariableInt("m_VB_Charge", 0, CHARGE_MAX);
-	}
-
-	int VB_Charge()
-	{
-		return m_VB_Charge;
-	}
-
-	// формат 1: STORE_MARK, версия, заряд, голод (секунды)
-	override void OnStoreSave(ParamsWriteContext ctx)
-	{
-		super.OnStoreSave(ctx);
-		int mark = VB_AR_Items.STORE_MARK;
-		int ver = STORE_VER;
-		ctx.Write(mark);
-		ctx.Write(ver);
-		ctx.Write(m_VB_Charge);
-		ctx.Write(m_VB_Hunger);
-	}
-
-	override bool OnStoreLoad(ParamsReadContext ctx, int version)
-	{
-		if (!super.OnStoreLoad(ctx, version))
-			return false;
-
-		int first;
-		if (!ctx.Read(first))
-			return false;
-
-		// старый формат: заряд, время последнего убийства (UTC старого календаря). Голод тогда считался и офлайн —
-		// после обновления клинок считается сытым.
-		if (first != VB_AR_Items.STORE_MARK)
-		{
-			int lastFed;
-			if (!ctx.Read(lastFed))
-				return false;
-			m_VB_Charge = Math.Clamp(first, 0, CHARGE_MAX);
-			m_VB_Hunger = 0;
-			return true;
-		}
-
-		int ver;
-		if (!ctx.Read(ver) || ver < 1 || ver > STORE_VER)
-			return false;
-
-		int charge;
-		int hunger;
-		if (!ctx.Read(charge) || !ctx.Read(hunger))
-			return false;
-
-		m_VB_Charge = Math.Clamp(charge, 0, CHARGE_MAX);
-		m_VB_Hunger = Math.Max(hunger, 0);
-		return true;
-	}
-}
-
-// ============================================================================================
-// «Живой жгут»: лежит у игрока где угодно; при кровотечении сам закрывает самое сильное, забирает BLOOD_COST крови
-// и исчезает (сервер).
-
-class VB_AR_Tourniquet extends Inventory_Base
-{
-	static const int CHECK_MS = 3000;
-	static const float BLOOD_COST = 150.0;
-}
-
-// ============================================================================================
-// «Нить Изнанки»: перетащить на одежду (рецепт VB_RecipeRootThread). Вещь THREAD_MINUTES минут сама латается на
-// 1 % в минуту, но не выше THREAD_CAP (70 %, как ванильная починка до «Worn»). Бронежилеты, плитники, шлемы и прочую
-// броню нить не берёт. Состояние только в памяти сервера: рестарт его сбрасывает (в сохранение одежды ничего не
-// пишем, чтобы мод можно было снять без порчи вещей).
-
-class VB_RecipeRootThread extends RecipeBase
-{
-	static const float THREAD_CAP = 0.7;			// доля здоровья, выше которой нить не чинит
-	static const float ARMOR_BELOW = 0.8;			// броня: урон от пуль по вещи режется сильнее этого
-
-	override void Init()
-	{
-		m_Name = "Пришить золотую нить";
-		m_IsInstaRecipe = false;
-		m_AnimationLength = 1.5;
-		m_Specialty = -0.02;
-
-		m_MinDamageIngredient[0] = -1;
-		m_MaxDamageIngredient[0] = 3;
-		m_MinQuantityIngredient[0] = -1;
-		m_MaxQuantityIngredient[0] = -1;
-		m_MinDamageIngredient[1] = -1;
-		m_MaxDamageIngredient[1] = 3;
-		m_MinQuantityIngredient[1] = -1;
-		m_MaxQuantityIngredient[1] = -1;
-
-		InsertIngredient(0, "VB_AR_Thread");
-		m_IngredientAddHealth[0] = 0;
-		m_IngredientSetHealth[0] = -1;
-		m_IngredientAddQuantity[0] = 0;
-		m_IngredientDestroy[0] = true;
-
-		InsertIngredient(1, "Clothing");
-		m_IngredientAddHealth[1] = 0;
-		m_IngredientSetHealth[1] = -1;
-		m_IngredientAddQuantity[1] = 0;
-		m_IngredientDestroy[1] = false;
-	}
-
-	// Броня: шлемы (HelmetBase), плитники (PlateCarrierVest) и всё, у чего GlobalArmor Projectile режет урон от
-	// пуль сильнее ARMOR_BELOW (в ванили: плитник 0.3, пресс/полиция 0.5, нагрудник 0.55, кольчуга 0.7; обычная
-	// одежда — без защиты от пуль). Так же ловится броня из модов одежды.
-	static bool VB_IsArmor(EntityAI item)
-	{
-		if (HelmetBase.Cast(item) || PlateCarrierVest.Cast(item))
-			return true;
-
-		string path = "CfgVehicles " + item.GetType() + " DamageSystem GlobalArmor Projectile Health damage";
-		if (!g_Game.ConfigIsExisting(path))
-			return false;
-
-		return g_Game.ConfigGetFloat(path) < ARMOR_BELOW;
-	}
-
-	// Клиент и сервер: целая не-броня, изношенная хотя бы до «Worn» (здоровье ниже 70 %). Уже прошитую вещь
-	// отсекает серверный мод (состояние нити знает только сервер).
-	override bool CanDo(ItemBase ingredients[], PlayerBase player)
-	{
-		Clothing cloth = Clothing.Cast(ingredients[1]);
-		if (!cloth || cloth.IsRuined() || VB_IsArmor(cloth))
-			return false;
-
-		return cloth.GetHealthLevel() >= GameConstants.STATE_WORN;
-	}
-}
-
-modded class PluginRecipesManagerBase
-{
-	override void RegisterRecipies()
-	{
-		super.RegisterRecipies();
-		RegisterRecipe(new VB_RecipeRootThread);
-	}
-}
-
-// ============================================================================================
-// Игрок: «Кровь Изнанки» (флаг и тряска), RPC «прислушаться» и хлопков спор. Плащ-кокон, таймер крови и снятие
-// флага при смерти — сервер (VB_AR_GearServer.c).
+// Игрок: флаги «Живицы» (тряска) и «Настоя пыльцы» (подсветка), приём RPC «прислушаться» и вспышки пыльцы.
+// Таймеры, сращивание переломов, плащ, светоч и оберег — сервер (VB_AR_GearServer.c).
 
 modded class PlayerBase
 {
 	static const int VB_BLOOD_SHAKE = 3;			// из SHAKE_LEVEL_MAX = 7
 
-	protected bool m_VB_AR_Blood;					// синхронизируется: действует «Кровь Изнанки»
+	protected bool m_VB_AR_Blood;					// синхронизируется: действует «Живица»
+	protected bool m_VB_AR_Brew;					// синхронизируется: действует «Настой пыльцы»
 
 	void PlayerBase()
 	{
 		RegisterNetSyncVariableBool("m_VB_AR_Blood");
+		RegisterNetSyncVariableBool("m_VB_AR_Brew");
 	}
 
 	bool VB_HasRootBlood()
 	{
 		return m_VB_AR_Blood;
+	}
+
+	bool VB_HasBrew()
+	{
+		return m_VB_AR_Brew;
+	}
+
+	override void OnVariablesSynchronized()
+	{
+		super.OnVariablesSynchronized();
+
+		if (PlayerBase.Cast(g_Game.GetPlayer()) != this)
+			return;
+
+		bool want = m_VB_AR_Brew && IsAlive();
+		if (want != VB_AR_BrewFx.VB_IsRunning())
+			VB_AR_BrewFx.VB_Set(want);
+	}
+
+	override void EEDelete(EntityAI parent)
+	{
+		if (g_Game && !g_Game.IsDedicatedServer())
+		{
+			Man me = g_Game.GetPlayer();
+			if (!me || me == this)
+				VB_AR_BrewFx.VB_Set(false);
+		}
+		super.EEDelete(parent);
 	}
 
 	// тряска при прицеливании считается и на сервере, и у клиента: берём синхронизируемый флаг
@@ -1046,29 +884,6 @@ modded class PlayerBase
 		return lvl;
 	}
 
-	override void OnVariablesSynchronized()
-	{
-		super.OnVariablesSynchronized();
-
-		if (PlayerBase.Cast(g_Game.GetPlayer()) != this)
-			return;
-
-		bool want = m_VB_AR_Blood && IsAlive();
-		if (want != VB_AR_BloodFx.VB_IsRunning())
-			VB_AR_BloodFx.VB_Set(want);
-	}
-
-	override void EEDelete(EntityAI parent)
-	{
-		if (g_Game && !g_Game.IsDedicatedServer())
-		{
-			Man me = g_Game.GetPlayer();
-			if (!me || me == this)
-				VB_AR_BloodFx.VB_Set(false);
-		}
-		super.EEDelete(parent);
-	}
-
 	override void OnRPC(PlayerIdentity sender, int rpc_type, ParamsReadContext ctx)
 	{
 		super.OnRPC(sender, rpc_type, ctx);
@@ -1078,12 +893,14 @@ modded class PlayerBase
 
 		if (rpc_type == VB_AR_Gear.RPC_LISTEN)
 		{
+			bool night;
 			bool found;
 			vector dir;
 			int step;
 			bool frantic;
-			if (ctx.Read(found) && ctx.Read(dir) && ctx.Read(step) && ctx.Read(frantic))
-				VB_AR_Listen.VB_Play(found, dir, step, frantic);
+			int storm;
+			if (ctx.Read(night) && ctx.Read(found) && ctx.Read(dir) && ctx.Read(step) && ctx.Read(frantic) && ctx.Read(storm))
+				VB_AR_Listen.VB_Play(night, found, dir, step, frantic, storm);
 		}
 		else if (rpc_type == VB_AR_Gear.RPC_BURST)
 		{
@@ -1104,6 +921,6 @@ modded class ActionConstructor
 		actions.Insert(VB_ActionArmSporeTrap);
 		actions.Insert(VB_ActionLanternOn);
 		actions.Insert(VB_ActionLanternOff);
-		actions.Insert(VB_ActionPourFuelCapsule);
+		actions.Insert(VB_ActionDrinkPollenBrew);
 	}
 }

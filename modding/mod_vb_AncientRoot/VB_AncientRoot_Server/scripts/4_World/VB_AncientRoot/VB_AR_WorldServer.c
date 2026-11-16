@@ -218,6 +218,7 @@ modded class VB_AR_Heart
 		{
 			VB_AR_ItemsServer.VB_DropAtFeet(cutter, CHUNK_TYPE);	// на землю у ног, не в инвентарь
 			VB_AR_FavorServer.VB_Add(cutter, VB_AR_FavorServer.CUT, "вырезал сердцевину");
+			VB_AR_FavorServer.VB_MarkCutter(cutter);					// оберег гаснет до рестарта
 			if (Math.RandomFloat01() < SEED_CHANCE)
 				VB_AR_ItemsServer.VB_DropAtFeet(cutter, SEED_TYPE);		// Семя — путь назад к лесу (2б.11)
 		}
