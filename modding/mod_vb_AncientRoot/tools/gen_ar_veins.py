@@ -67,7 +67,7 @@ MATS = {
     "vein": {"tex": PREFIX + "vb_ar_vein_co.paa", "mat": PREFIX + "vb_ar_vein.rvmat", "sel": "veins"},
 }
 # материалы предметов-изделий (без пульса): текстуры и rvmat делает make_prop_textures (--props-tex)
-PROP_MATS = ["wood", "cloth", "plastic", "metal", "bone", "glass", "liquid", "bladesteel", "burlap", "sporecloth", "bark"]
+PROP_MATS = ["wood", "cloth", "plastic", "metal", "bone", "glass", "liquid", "bladesteel", "burlap", "sporecloth", "bark", "ivory", "herb"]
 for _m in PROP_MATS:
     _tex = PREFIX + "vb_ar_p_%s_%s.paa" % (_m, "ca" if _m == "glass" else "co")
     MATS[_m] = {"tex": _tex, "mat": PREFIX + "vb_ar_p_%s.rvmat" % _m, "sel": "p_" + _m}
@@ -84,6 +84,10 @@ LOD_PARAMS = [
     {"res": 1.0, "root": (0.16, 6), "vein": (0.16, 4), "crack": (0.14, 3), "heart": (18, 10), "core": (8, 5)},
     {"res": 4.0, "root": (0.35, 4), "vein": (0.35, 3), "crack": (0.35, 3), "heart": (10, 6), "core": (6, 4)},
 ]
+
+# предметы: мелкий объект движок рисует дальним LOD уже вблизи (клык 6 см в 30 см от камеры — LOD 4.0),
+# поэтому у предметов первые два уровня полной детали, третий — как средний у объектов мира (2026-11-16)
+ITEM_LOD_PARAMS = [dict(LOD_PARAMS[0]), dict(LOD_PARAMS[0], res=1.0), dict(LOD_PARAMS[1], res=4.0)]
 
 DS = 0.03            # шаг плотного пути, м
 SINK = 0.15          # центр корня над землёй в долях радиуса (остальное в земле)
@@ -752,6 +756,12 @@ def make_prop_textures(png_dir):
         mm = np.clip((_tileable(n, mrng, 1.7) - 0.2) * 1.3, 0, 1) * (1 - ridge) ** 0.7
         bark = bark * (1 - mm[..., None]) + col(PAL["p_bark_moss"], 0.8 + 0.3 * _tileable(n, mrng, 0.9)) * mm[..., None]
     save("vb_ar_p_bark_co", bark)
+    # клык (слоновая кость) и травы — 2026-11-16, свой генератор шума: текстуры выше не меняются
+    irng = np.random.default_rng(4242 + 91)
+    band = np.sin((yy * 2 * math.pi * 3) + _tileable(n, irng, 2.0) * 0.6) * 0.5 + 0.5
+    save("vb_ar_p_ivory_co", col(PAL.get("p_ivory", (0.86, 0.80, 0.62)), 0.9 + 0.08 * band + 0.05 * _tileable(n, irng, 2.4)))
+    vein_h = np.abs(np.sin(xx * 2 * math.pi * 4 + _tileable(n, irng, 1.6) * 0.4)) ** 6
+    save("vb_ar_p_herb_co", col(PAL.get("p_herb", (0.22, 0.34, 0.10)), 0.8 + 0.25 * _tileable(n, irng, 2.2) + 0.15 * vein_h))
     return out
 
 
@@ -771,6 +781,8 @@ def write_prop_materials():
         "burlap": (0.0, "#(argb,8,8,3)color(0.15,0.1,0.15,1,SMDI)", black, 0.04, 8),
         "sporecloth": (1.5, "#(argb,8,8,3)color(0.15,0.1,0.15,1,SMDI)", PREFIX + "vb_ar_p_sporecloth_e_co.paa", 0.04, 8),
         "bladesteel": (1.4, "#(argb,8,8,3)color(1,0.6,0.8,1,SMDI)", PREFIX + "vb_ar_p_bladesteel_e_co.paa", 0.7, 110),
+        "ivory": (0.0, "#(argb,8,8,3)color(0.35,0.3,0.35,1,SMDI)", black, 0.15, 30),
+        "herb": (0.0, "#(argb,8,8,3)color(0.2,0.15,0.2,1,SMDI)", black, 0.08, 14),
     }
     for m, (e, smdi, etex, spec, power) in cfg.items():
         with open(os.path.join(DATA_DIR, "vb_ar_p_%s.rvmat" % m), "w", encoding="utf-8", newline="\r\n") as f:
@@ -813,7 +825,7 @@ def _dense_profile(zr, step=0.04):
 def _item(tubes, blobs=None, bulbs=None, mass=0.1, center=(0, 0, 0)):
     return {"tubes": tubes, "core": None, "top": None, "heart": False, "no_cut": True,
             "blobs": blobs or [], "bulbs": bulbs or [], "scale": 0.1, "center": np.asarray(center, float),
-            "item_mass": mass}
+            "item_mass": mass, "lod_items": True}
 
 
 def _sack_mesh(seed, prof, pleats=9, outer=True, z_min=None):
@@ -1864,7 +1876,7 @@ def build_p3d(scene, out_path):
     model = py3d.P3D()
     stats = []
     meshes = []
-    for prm in LOD_PARAMS:
+    for prm in (ITEM_LOD_PARAMS if scene.get("lod_items") else LOD_PARAMS):
         mesh = mesh_lod(scene, prm)
         meshes.append(mesh)
         model.lods.append(visual_lod(mesh, prm["res"], scene.get("point_flags", 0)))
@@ -2136,7 +2148,143 @@ VARIANTS = [
     ("vb_ar_lantern", "lantern", 909),
     ("vb_ar_blood_ampoule", "ampoule", 912),
     ("vb_ar_blade", "bladefull", 913),
+    # шаг 4 (2026-11-16): пути вверх, новые изделия, трофей волка
+    ("vb_ar_reconcile", "reconcile", 920),
+    ("vb_ar_seed", "seed", 921),
+    ("vb_ar_amulet", "amulet", 922),
+    ("vb_ar_pollen_brew", "pollenbrew", 923),
+    ("vb_ar_wolf_fang", "wolffang", 924),
 ]
+
+
+# ---------------------------------------------------------------- предметы шага 4 (2026-11-16)
+def _ring(z, r, mat="cloth", rad=0.022, seed=0, segs=6):
+    """Обвязка: кольцо вокруг вертикали на высоте z."""
+    a = np.linspace(0, 2 * math.pi, 33)
+    pts = np.column_stack([r * np.cos(a), r * np.sin(a), np.full(len(a), z)])
+    return Tube(pts, np.full(len(a), rad), "vein", mat=mat, segs=segs, cap_start=False, cap_end=False, seed=seed)
+
+
+def _leaf(base, direction, length, width, seed, mat="herb"):
+    """Листик: сплющенная трубка, узкая у черешка и у кончика."""
+    d = np.asarray(direction, float)
+    d = d / np.linalg.norm(d)
+    t = np.linspace(0, 1, 7)
+    side = np.cross(d, [0.0, 0.0, 1.0])
+    if np.linalg.norm(side) < 1e-6:
+        side = np.array([1.0, 0.0, 0.0])
+    side = side / np.linalg.norm(side)
+    pts = np.asarray(base, float)[None, :] + d[None, :] * (t * length)[:, None] + side[None, :] * (0.15 * width * np.sin(t * math.pi))[:, None]
+    radii = np.maximum(width * np.sin(t * math.pi) ** 0.8, 0.004)
+    return Tube(pts, radii, "vein", mat=mat, segs=6, fixed_segs=True, aspect=0.18, seed=seed, cap_start=False, cap_end=False)
+
+
+def build_reconcile_scene(seed):
+    """«Отвар примирения»: фляга из коры во мху, деревянная пробка, обвязка лыком, пучок трав у горлышка
+    и янтарная бусина на шнурке."""
+    rng = np.random.default_rng(seed)
+    body = [(0.0, 0.0), (0.0, 0.30), (0.04, 0.35), (0.5, 0.37), (0.68, 0.32), (0.8, 0.2), (0.86, 0.14), (0.95, 0.13)]
+    tubes = [_lathe_z(_dense_profile(body, 0.04), "bark", segs=18, uv_len=0.6, lump=0.05, seed=seed, cap_end=False)]
+    plug = [(0.9, 0.0), (0.9, 0.145), (1.04, 0.16), (1.1, 0.12), (1.12, 0.0)]
+    tubes.append(_lathe_z(plug, "wood", segs=12, uv_len=0.4, lump=0.04, seed=seed + 1))
+    tubes.append(_ring(0.16, 0.37, "cloth", 0.025, seed + 2))
+    tubes.append(_ring(0.56, 0.385, "cloth", 0.025, seed + 3))
+    tubes.append(_ring(0.88, 0.15, "cloth", 0.02, seed + 4))
+    # пучок трав за обвязкой горлышка
+    for k in range(3):
+        a = k * 0.5 + rng.uniform(-0.15, 0.15)
+        tip = np.array([0.1 + 0.25 * math.cos(a), 0.25 * math.sin(a) - 0.1, 1.3 + 0.08 * k])
+        stem = np.vstack([[0.12, -0.02, 0.84], [0.13 + 0.05 * k, 0.0, 1.0], tip])
+        tubes.append(Tube(stem, np.array([0.014, 0.012, 0.008]), "vein", mat="herb", segs=5, seed=seed + 5 + k))
+        tubes.append(_leaf(tip, tip - stem[1] + np.array([0, 0, 0.05]), 0.18, 0.05, seed + 9 + k))
+        tubes.append(_leaf(stem[1], [0.6, 0.3 * (k - 1), 0.5], 0.15, 0.045, seed + 12 + k))
+    # янтарная бусина на шнурке
+    cord = np.array([[0.15, 0.0, 0.88], [0.28, 0.02, 0.78], [0.36, 0.03, 0.62]])
+    tubes.append(Tube(cord, np.full(3, 0.012), "vein", mat="cloth", segs=5, seed=seed + 20))
+    return _item(tubes, bulbs=[(np.array([0.37, 0.03, 0.57]), 0.05)], mass=0.12, center=(0, 0, 0.56))
+
+
+def build_seed_scene(seed):
+    """«Семя Древнего корня»: жёлудь из коры с золотыми трещинами, чешуйчатая шапочка, из неё — росток с листиком."""
+    rng = np.random.default_rng(seed)
+    body = [(0.0, 0.0), (0.03, 0.10), (0.1, 0.17), (0.25, 0.2), (0.38, 0.185), (0.44, 0.16)]
+    tubes = [_lathe_z(_dense_profile(body, 0.03), "crust", segs=16, uv_len=0.5, lump=0.04, seed=seed, cap_end=False)]
+    cap = [(0.36, 0.0), (0.36, 0.19), (0.42, 0.215), (0.49, 0.205), (0.54, 0.13), (0.56, 0.0)]
+    tubes.append(_lathe_z(cap, "bark", segs=14, uv_len=0.4, lump=0.18, seed=seed + 1))
+    sprout = np.array([[0.0, 0.0, 0.54], [0.02, 0.01, 0.66], [0.08, 0.02, 0.76], [0.16, 0.03, 0.8]])
+    tubes.append(Tube(sprout, np.array([0.03, 0.024, 0.018, 0.012]), "vein", mat="herb", segs=6, seed=seed + 2))
+    tubes.append(_leaf(sprout[-1], [1.0, 0.2, 0.25], 0.16, 0.06, seed + 3))
+    tubes.append(_leaf(sprout[2], [-0.6, 0.5, 0.4], 0.12, 0.045, seed + 4))
+    # золотой корешок снизу
+    rootlet = np.array([[0.0, 0.0, 0.02], [0.03, 0.02, -0.06], [0.02, 0.06, -0.12]])
+    tubes.append(Tube(rootlet, np.array([0.02, 0.012, 0.006]), "vein", segs=5, seed=seed + 5))
+    return _item(tubes, mass=0.03, center=(0, 0, 0.35))
+
+
+def _fang_tubes(seed, base=(0.0, 0.0, 0.0), length=0.62, r0=0.11, flip=1.0, tilt=0.0):
+    """Клык: изогнутый конус из кости, у основания вросший корешок (обмотка корой), вдоль внутренней дуги
+    под эмалью — тонкая золотая жилка."""
+    t = np.linspace(0, 1, 12)
+    ang = t * 0.9
+    R = length / 0.9
+    x = flip * (R * (1 - np.cos(ang)))
+    z = -R * np.sin(ang)
+    pts = np.column_stack([x, np.full(len(t), tilt) * t, z]) + np.asarray(base, float)
+    radii = r0 * (1 - t) ** 0.9 + 0.006
+    tubes = [Tube(pts, radii, "root", mat="ivory", segs=10, lump=0.02, lump_freq=6, seed=seed)]
+    inner = pts.copy()
+    inner[:, 0] += flip * radii * 0.75
+    k = slice(1, 9)
+    tubes.append(Tube(inner[k], np.full(len(inner[k]), 0.012), "vein", segs=4, seed=seed + 1))
+    wrap = _helix(base[2] - 0.02, base[2] + 0.1, r0 + 0.02, 2.2, 30, phase=seed * 0.3, axis=2)
+    wrap[:, 0] += base[0]
+    wrap[:, 1] += base[1]
+    tubes.append(Tube(wrap, np.full(len(wrap), 0.022), "vein", mat="bark", segs=5, seed=seed + 2, cap_start=False))
+    return tubes
+
+
+def build_wolf_fang_scene(seed):
+    """«Клык лесового волка»: длинный изогнутый клык, вросший в корешок, под эмалью — золотая жилка."""
+    tubes = _fang_tubes(seed, base=(0.0, 0.0, 0.0), length=0.62, r0=0.11)
+    root = np.array([[0.0, 0.0, 0.08], [-0.04, 0.02, 0.2], [-0.12, 0.05, 0.28], [-0.22, 0.04, 0.3]])
+    tubes.append(Tube(root, np.array([0.07, 0.055, 0.04, 0.02]), "root", segs=8, lump=0.15, seed=seed + 5))
+    return _item(tubes, mass=0.04, center=(0.1, 0, -0.1))
+
+
+def build_amulet_scene(seed):
+    """«Янтарный оберег»: петля шнурка из лыка, янтарная капля и волчий клык, перехваченные обмоткой."""
+    tubes = []
+    a = np.linspace(0, 2 * math.pi, 49)
+    loop = np.column_stack([0.3 * np.sin(a), 0.02 * np.sin(a * 3), 1.07 + 0.45 * np.cos(a + math.pi)])
+    tubes.append(Tube(loop, np.full(len(a), 0.02), "vein", mat="cloth", segs=6, cap_start=False, cap_end=False, seed=seed))
+    drop = [(0.0, 0.0), (0.04, 0.1), (0.14, 0.18), (0.28, 0.21), (0.42, 0.17), (0.53, 0.085), (0.59, 0.0)]
+    tubes.append(_lathe_z(_dense_profile(drop, 0.025), "liquid", segs=16, uv_len=0.4, x=-0.15, seed=seed + 1))
+    tubes += _fang_tubes(seed + 10, base=(0.17, 0.06, 0.62), length=0.62, r0=0.09, flip=1.0, tilt=0.1)
+    wrap = _helix(0.5, 0.7, 0.3, 3.0, 30, phase=0.4, axis=2)
+    tubes.append(Tube(wrap, np.full(len(wrap), 0.022), "vein", mat="cloth", segs=5, seed=seed + 3))
+    return _item(tubes, mass=0.06, center=(0, 0, 0.6))
+
+
+def build_pollen_brew_scene(seed):
+    """«Настой пыльцы»: пузатая склянка со светящимся золотым настоем, стеклянное горлышко, пробка из мешковины
+    с пыльцой, обвязка лыком; на стекле — искры пыльцы."""
+    rng = np.random.default_rng(seed)
+    body = [(0.0, 0.0), (0.0, 0.12), (0.05, 0.27), (0.15, 0.37), (0.31, 0.4), (0.48, 0.37), (0.6, 0.28), (0.68, 0.18),
+            (0.72, 0.15)]
+    tubes = [_lathe_z(_dense_profile(body, 0.03), "liquid", segs=18, uv_len=0.5, cap_end=False)]
+    neck = [(0.72, 0.15), (0.9, 0.13), (0.96, 0.15), (1.0, 0.14)]
+    tubes.append(_lathe_z(neck, "glass", segs=16, uv_len=0.4, cap_start=False, cap_end=False))
+    plug = [(0.92, 0.0), (0.92, 0.12), (1.0, 0.17), (1.12, 0.18), (1.2, 0.12), (1.24, 0.0)]
+    tubes.append(_lathe_z(plug, "sporecloth", segs=12, uv_len=0.4, lump=0.12, seed=seed + 1))
+    tubes.append(_ring(0.98, 0.165, "cloth", 0.02, seed + 2))
+    tubes.append(_ring(0.82, 0.145, "cloth", 0.018, seed + 3))
+    bulbs = []
+    for i in range(9):
+        z = rng.uniform(0.08, 0.6)
+        rr = np.interp(z, [p[0] for p in body], [p[1] for p in body])
+        ang = rng.uniform(0, 2 * math.pi)
+        bulbs.append((np.array([rr * math.cos(ang), rr * math.sin(ang), z]), rng.uniform(0.012, 0.022)))
+    return _item(tubes, bulbs=bulbs, mass=0.25, center=(0, 0, 0.6))
 
 
 def variant_scene(kind, seed, name=""):
@@ -2190,6 +2338,16 @@ def variant_scene(kind, seed, name=""):
         return build_fuel_capsule_scene(seed)
     if kind == "lantern":
         return build_lantern_scene(seed)
+    if kind == "reconcile":
+        return build_reconcile_scene(seed)
+    if kind == "seed":
+        return build_seed_scene(seed)
+    if kind == "amulet":
+        return build_amulet_scene(seed)
+    if kind == "pollenbrew":
+        return build_pollen_brew_scene(seed)
+    if kind == "wolffang":
+        return build_wolf_fang_scene(seed)
     return build_roots_scene(seed, kind)
 
 

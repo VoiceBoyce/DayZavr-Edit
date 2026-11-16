@@ -432,12 +432,36 @@ class VB_AR_Heart extends VB_AR_Base
 	static const int OFFERS_MAX = 3;
 	protected int m_VB_OffersLeft = OFFERS_MAX;
 
+	// ступень рощи (ТЗ 2б.4, шаг 5): ставит сервер при появлении (VB_AR_Nests), синхронизируется. От неё — пыльца
+	// и подношения за рестарт (SPORES_BY_STAGE, OFFERS_BY_STAGE), волны, вырезание, облик.
+	static const int STAGE_SPROUT = 1;
+	static const int STAGE_GROVE = 2;
+	static const int STAGE_ANCIENT = 3;
+	static const int LIMIT_MAX = 5;			// верх синхронизации пыльцы и подношений (у древней по 5)
+	protected int m_VB_Stage = STAGE_GROVE;
+
 	void VB_AR_Heart()
 	{
 		RegisterNetSyncVariableBool("m_VB_Dead");
 		RegisterNetSyncVariableBool("m_VB_Disturbed");
-		RegisterNetSyncVariableInt("m_VB_SporesLeft", 0, SPORES_MAX);
-		RegisterNetSyncVariableInt("m_VB_OffersLeft", 0, OFFERS_MAX);
+		RegisterNetSyncVariableInt("m_VB_SporesLeft", 0, LIMIT_MAX);
+		RegisterNetSyncVariableInt("m_VB_OffersLeft", 0, LIMIT_MAX);
+		RegisterNetSyncVariableInt("m_VB_Stage", STAGE_SPROUT, STAGE_ANCIENT);
+	}
+
+	int VB_Stage()
+	{
+		return m_VB_Stage;
+	}
+
+	// пыльцы и подношений за рестарт по ступени: росток 1, роща 3, древняя 5
+	static int VB_LimitByStage(int stage)
+	{
+		if (stage <= STAGE_SPROUT)
+			return 1;
+		if (stage >= STAGE_ANCIENT)
+			return 5;
+		return 3;
 	}
 
 	int VB_SporesLeft()

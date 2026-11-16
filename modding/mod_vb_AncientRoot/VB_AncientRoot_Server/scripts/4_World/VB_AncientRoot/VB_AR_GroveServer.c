@@ -35,6 +35,16 @@ modded class VB_AR_Heart
 		return m_VB_Alarm;
 	}
 
+	// ступень рощи (ставит VB_AR_Nests при появлении, ТЗ 2б.4): пыльца и подношения за рестарт — по ступени
+	void VB_SetStageServer(int stage)
+	{
+		m_VB_Stage = Math.Clamp(stage, STAGE_SPROUT, STAGE_ANCIENT);
+		int lim = VB_LimitByStage(m_VB_Stage);
+		m_VB_SporesLeft = lim;
+		m_VB_OffersLeft = lim;
+		SetSynchDirty();
+	}
+
 	// сбор пыльцы, отлом отростка
 	void VB_AlarmServer(PlayerBase who, int add)
 	{
@@ -76,10 +86,13 @@ modded class VB_AR_Heart
 		}
 	}
 
-	// волна стражей номер level (состав — VB_RootGuards.VB_WaveTypes; ступень рощи — шаг 5, пока «роща»)
+	// волна стражей номер level (состав — VB_RootGuards.VB_WaveTypes по ступени рощи). Волна от сбора (1-я, 2-я)
+	// тормозит рост: в этот рестарт роща не растёт (VB_AR_Nests.VB_OnGroveDisturbed).
 	protected VB_AR_Horde VB_GuardWaveServer(int level, PlayerBase who)
 	{
-		VB_AR_Horde wave = VB_AR_Horde.VB_SpawnWaveTypes(GetPosition(), VB_RootGuards.VB_WaveTypes(level));
+		if (level < 3)
+			VB_AR_Nests.VB_OnGroveDisturbed(this);
+		VB_AR_Horde wave = VB_AR_Horde.VB_SpawnWaveTypes(GetPosition(), VB_RootGuards.VB_WaveTypes(level, m_VB_Stage));
 		if (!wave)
 			return null;		// потолок стражей на сервере или рядом
 
@@ -156,6 +169,7 @@ modded class VB_AR_Heart
 
 		m_VB_OffersLeft--;
 		SetSynchDirty();
+		VB_AR_Nests.VB_OnGroveOffer(this);		// подношения кормят рощу: рост на следующем рестарте (ТЗ 2б.4)
 		int alarmBefore = m_VB_Alarm;
 		m_VB_Alarm = 0;
 

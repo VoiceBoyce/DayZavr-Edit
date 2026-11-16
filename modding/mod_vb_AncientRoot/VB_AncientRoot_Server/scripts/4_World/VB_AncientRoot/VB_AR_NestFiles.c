@@ -2,7 +2,7 @@
 //   settings.json — сколько гнёзд ставить, доля корней, расстояние, прорастание, админы редактора
 //   nests.json    — все гнёзда (пишет внутриигровой редактор; можно править руками при выключенном сервере
 //                   или «Перебросить гнёзда» в редакторе — он перечитывает файлы с диска)
-//   state.json    — какие гнёзда стояли на прошлом рестарте (чтобы не повторять подряд)
+//   state.json    — живые рощи со ступенями (Groves, ТЗ 2б.4), гнёзда прошлого рестарта, засеянные Семенем
 //   nests_backup.json — копия nests.json на каждом старте сервера, до любых правок
 //   nests_tmp.json    — новая версия nests.json при записи; остаётся, только если запись прервалась
 // Классы гнезда (VB_AR_Nest, VB_AR_NestObj) лежат в клиентском аддоне VB_AncientRoot: их же получает редактор.
@@ -32,6 +32,11 @@ class VB_AR_NestSettings
 	int RootsPercentMax = 100;
 	int NoRepeat = 1;				// 1 — не ставить подряд те же гнёзда, что на прошлом рестарте (если есть из чего выбрать)
 	int RegrowMinutes = 0;			// через столько минут после вырезания сердца прорастает новое гнездо (0 — выключено)
+	// рост рощ (ТЗ 2б.4, шаг 5): ActiveNests — сколько живых рощ держать на карте
+	int GrowRestarts = 2;			// очков роста на ступень (очко — пережитый невырезанным рестарт)
+	int FeedOffers = 2;				// приняла за рестарт столько подношений — ещё +1 очко
+	int AncientLife = 4;			// древняя живёт столько рестартов и уходит в землю
+	int MaxAncient = 1;				// древних одновременно не больше
 
 	void VB_AR_NestSettings()
 	{
@@ -48,6 +53,10 @@ class VB_AR_NestSettings
 		RootsPercentMax = -1;
 		NoRepeat = -1;
 		RegrowMinutes = -1;
+		GrowRestarts = -1;
+		FeedOffers = -1;
+		AncientLife = -1;
+		MaxAncient = -1;
 	}
 
 	// значения по умолчанию для пропущенных ключей и пределы для ручных правок
@@ -79,18 +88,45 @@ class VB_AR_NestSettings
 			RegrowMinutes = 0;
 		if (RegrowMinutes > 1440)
 			RegrowMinutes = 1440;
+		if (GrowRestarts < 1)
+			GrowRestarts = 2;
+		if (GrowRestarts > 100)
+			GrowRestarts = 100;
+		if (FeedOffers < 1)
+			FeedOffers = 2;
+		if (AncientLife < 1)
+			AncientLife = 4;
+		if (AncientLife > 1000)
+			AncientLife = 1000;
+		if (MaxAncient < 0)
+			MaxAncient = 1;
 	}
+}
+
+// Живая роща (ТЗ 2б.4): гнездо и его ступень. Offers и Disturbed — за текущий рестарт, по ним на следующем старте
+// считается рост (VB_AR_Nests.VB_AdvanceGroves), потом обнуляются. Ключа нет в JSON — поле 0 (E57): ступень
+// приводится к 1..3 при загрузке.
+class VB_AR_Grove
+{
+	int Nest;			// id гнезда в nests.json
+	int Stage = 1;		// 1 росток, 2 роща, 3 древняя
+	int Growth;			// очки роста на текущей ступени
+	int Age;			// сколько рестартов прожила древней
+	int Offers;			// подношений за текущий рестарт
+	int Disturbed;		// 1 — в этот рестарт сбором подняли волну (роста не будет)
 }
 
 class VB_AR_NestState
 {
 	ref TIntArray LastActive;
-	ref TIntArray Seeded;	// гнёзда, где посадили Семя Древнего корня: на следующем рестарте встают первыми
+	ref TIntArray Seeded;	// гнёзда, где посадили Семя Древнего корня: на следующем рестарте встают первыми (ростком)
+	ref array<ref VB_AR_Grove> Groves;	// живые рощи
 
 	void VB_AR_NestState()
 	{
 		LastActive = new TIntArray;
 		Seeded = new TIntArray;
+		Groves = new array<ref VB_AR_Grove>;
 	}
 }
 

@@ -1,6 +1,8 @@
-// Гнёзда Изнанки, сервер. Гнездо — одна точка: сердце, его корни и щупальца. Все гнёзда лежат в nests.json
-// (файлы — VB_AR_NestFiles.c), на каждом рестарте сервер выбирает часть и ставит, поэтому игроки не знают,
-// где Изнанка проросла сегодня. Гнездо без сердца не встаёт никогда (редактор помечает его «без сердца»).
+// Гнёзда «Древнего корня», сервер. Гнездо — одна точка: сердце, его корни и щупальца. Все гнёзда лежат в nests.json
+// (файлы — VB_AR_NestFiles.c). Гнездо без сердца не встаёт никогда (редактор помечает его «без сердца»).
+// Живые рощи (ТЗ 2б.4, шаг 5) живут между рестартами: state.json → Groves (гнездо, ступень, очки роста). На старте
+// VB_AdvanceGroves считает рост за прошлый рестарт, VB_Activate ставит все живые на их ступени и добирает ростками
+// до ActiveNests. Вырезанная роща погибает (из Groves), древняя через AncientLife рестартов уходит в землю.
 //
 // Сервер ставит объекты обычными сетевыми (сердце должно быть сетевым, иначе его не вырезать),
 // без сохранения в мире: после рестарта их нет, сервер выбирает новый набор.
@@ -60,7 +62,22 @@ class VB_AR_Nests
 
 		s_VB_Server = new VB_AR_Nests();
 		s_VB_Server.VB_LoadStart();
+		s_VB_Server.VB_AdvanceGroves();
 		s_VB_Server.VB_Activate(false);
+	}
+
+	// подношение принято (VB_AR_GroveServer.c): копится к росту на следующем рестарте
+	static void VB_OnGroveOffer(VB_AR_Heart heart)
+	{
+		if (s_VB_Server)
+			s_VB_Server.VB_GroveEvent(heart, true);
+	}
+
+	// сбором подняли волну: в этот рестарт роща не растёт
+	static void VB_OnGroveDisturbed(VB_AR_Heart heart)
+	{
+		if (s_VB_Server)
+			s_VB_Server.VB_GroveEvent(heart, false);
 	}
 
 	// сердце вырезано (зовёт серверный VB_AR_Heart.VB_KillServer): гнездо до рестарта больше не встанет
@@ -322,6 +339,22 @@ class VB_AR_Nests
 			m_VB_State = new VB_AR_NestState();
 		if (!m_VB_State.Seeded)
 			m_VB_State.Seeded = new TIntArray;		// state.json прошлых версий — без ключа
+		if (!m_VB_State.Groves)
+			m_VB_State.Groves = new array<ref VB_AR_Grove>;
+		for (int gi = m_VB_State.Groves.Count() - 1; gi >= 0; gi--)
+		{
+			VB_AR_Grove lg = m_VB_State.Groves[gi];
+			if (!lg || lg.Nest == 0)
+			{
+				m_VB_State.Groves.Remove(gi);
+				continue;
+			}
+			lg.Stage = Math.Clamp(lg.Stage, VB_AR_Heart.STAGE_SPROUT, VB_AR_Heart.STAGE_ANCIENT);	// без ключа — 0 (E57)
+			if (lg.Growth < 0)
+				lg.Growth = 0;
+			if (lg.Age < 0)
+				lg.Age = 0;
+		}
 		m_VB_PrevActive.Copy(m_VB_State.LastActive);
 	}
 
@@ -780,6 +813,184 @@ class VB_AR_Nests
 		}
 	}
 
+	// --- рост рощ (ТЗ 2б.4, шаг 5) ----------------------------------------------------------------
+
+	protected VB_AR_Grove VB_GroveOf(int nestId)
+	{
+		if (!m_VB_State || !m_VB_State.Groves)
+			return null;
+		foreach (VB_AR_Grove g : m_VB_State.Groves)
+		{
+			if (g && g.Nest == nestId)
+				return g;
+		}
+		return null;
+	}
+
+	protected VB_AR_Grove VB_NewGrove(int nestId)
+	{
+		VB_AR_Grove g = VB_GroveOf(nestId);
+		if (g)
+			return g;
+		g = new VB_AR_Grove();
+		g.Nest = nestId;
+		g.Stage = VB_AR_Heart.STAGE_SPROUT;
+		m_VB_State.Groves.Insert(g);
+		return g;
+	}
+
+	protected void VB_DropGrove(int nestId)
+	{
+		for (int i = m_VB_State.Groves.Count() - 1; i >= 0; i--)
+		{
+			if (m_VB_State.Groves[i] && m_VB_State.Groves[i].Nest == nestId)
+				m_VB_State.Groves.Remove(i);
+		}
+	}
+
+	protected string VB_NestName(int nestId)
+	{
+		VB_AR_Nest nest = VB_FindNest(nestId);
+		if (nest)
+			return nest.Name;
+		return "гнездо " + nestId.ToString();
+	}
+
+	static string VB_StageName(int stage)
+	{
+		if (stage <= VB_AR_Heart.STAGE_SPROUT)
+			return "росток";
+		if (stage >= VB_AR_Heart.STAGE_ANCIENT)
+			return "древняя";
+		return "роща";
+	}
+
+	// Старт сервера: прошлый рестарт живые рощи пережили. Древние стареют и через AncientLife уходят в землю;
+	// остальным +1 очко (+1 за FeedOffers подношений, 0 — если сбором подняли волну); набрала GrowRestarts — ступень
+	// вверх (за рестарт не больше одной). В древние — не больше MaxAncient, первыми — с большим запасом очков,
+	// остальные ждут на ступени «роща». Потом счётчики рестарта обнуляются.
+	void VB_AdvanceGroves()
+	{
+		if (!m_VB_State || !m_VB_Settings)
+			return;
+		array<ref VB_AR_Grove> gs = m_VB_State.Groves;
+		int grow = m_VB_Settings.GrowRestarts;
+		string log = "";
+		VB_AR_Grove g;
+		int i;
+		int ancient = 0;
+
+		for (i = gs.Count() - 1; i >= 0; i--)
+		{
+			g = gs[i];
+			if (g.Stage < VB_AR_Heart.STAGE_ANCIENT)
+				continue;
+			g.Age = g.Age + 1;
+			if (g.Age >= m_VB_Settings.AncientLife)
+			{
+				log += " " + VB_NestName(g.Nest) + " ушла в землю;";
+				gs.Remove(i);
+				continue;
+			}
+			ancient++;
+		}
+
+		int pts;
+		foreach (VB_AR_Grove gp : gs)
+		{
+			if (gp.Stage >= VB_AR_Heart.STAGE_ANCIENT)
+				continue;
+			pts = 1;
+			if (gp.Offers >= m_VB_Settings.FeedOffers)
+				pts = pts + 1;
+			if (gp.Disturbed != 0)
+				pts = 0;
+			gp.Growth = gp.Growth + pts;
+		}
+
+		// росток -> роща
+		foreach (VB_AR_Grove gs1 : gs)
+		{
+			if (gs1.Stage == VB_AR_Heart.STAGE_SPROUT && gs1.Growth >= grow)
+			{
+				gs1.Stage = VB_AR_Heart.STAGE_GROVE;
+				gs1.Growth = gs1.Growth - grow;
+				log += " " + VB_NestName(gs1.Nest) + " выросла в рощу;";
+			}
+		}
+
+		// роща -> древняя: по лимиту, первыми — с большим запасом очков; кто не прошёл — ждёт с полным запасом
+		VB_AR_Grove best;
+		while (true)
+		{
+			best = null;
+			foreach (VB_AR_Grove gs2 : gs)
+			{
+				if (gs2.Stage != VB_AR_Heart.STAGE_GROVE || gs2.Growth < grow)
+					continue;
+				if (!best || gs2.Growth > best.Growth)
+					best = gs2;
+			}
+			if (!best)
+				break;
+			if (ancient < m_VB_Settings.MaxAncient)
+			{
+				best.Stage = VB_AR_Heart.STAGE_ANCIENT;
+				best.Growth = 0;
+				best.Age = 0;
+				ancient++;
+				log += " " + VB_NestName(best.Nest) + " стала древней;";
+			}
+			else
+			{
+				best.Growth = grow - 1;		// ждёт места: на следующем старте снова кандидат
+			}
+		}
+
+		foreach (VB_AR_Grove gz : gs)
+		{
+			gz.Offers = 0;
+			gz.Disturbed = 0;
+		}
+		VB_SaveState();
+		int liveN = gs.Count();
+		if (log == "")
+			log = " без перемен";
+		Print("[VB_AncientRoot] рощи: живых " + liveN.ToString() + ", рост за рестарт:" + log);
+	}
+
+	// подношение (offer) или волна от сбора у сердцевины heart — в счётчики рестарта её рощи
+	protected void VB_GroveEvent(VB_AR_Heart heart, bool offer)
+	{
+		int nestId = VB_NestOfEntity(heart);
+		if (nestId == 0)
+			return;
+		VB_AR_Grove g = VB_GroveOf(nestId);
+		if (!g)
+			return;
+		if (offer)
+		{
+			g.Offers = g.Offers + 1;
+		}
+		else
+		{
+			if (g.Disturbed != 0)
+				return;
+			g.Disturbed = 1;
+			Print("[VB_AncientRoot] рощи: " + VB_NestName(nestId) + " потревожена сбором — в этот рестарт не растёт");
+		}
+		VB_SaveState();
+	}
+
+	// ступень живой рощи гнезда (сердце не из живой рощи — например, поставлено редактором — роща)
+	protected int VB_StageOfNest(int nestId)
+	{
+		VB_AR_Grove g = VB_GroveOf(nestId);
+		if (g)
+			return g.Stage;
+		return VB_AR_Heart.STAGE_GROVE;
+	}
+
 	// --- выбор и установка ------------------------------------------------------------------------
 
 	// позиции игроков на сервере (новое гнездо у игрока не встаёт)
@@ -842,7 +1053,33 @@ class VB_AR_Nests
 
 		array<VB_AR_Nest> chosen = new array<VB_AR_Nest>;
 		array<vector> centers = new array<vector>;
-		// посаженные Семенем (ТЗ 2б.11) — первыми; забытые из списка, только если встали
+
+		// живые рощи (ТЗ 2б.4) — на своих местах; гнездо удалено, выключено или без сердца — роща пропала
+		VB_AR_Nest gn;
+		VB_AR_Grove lg;
+		for (int gi = 0; gi < m_VB_State.Groves.Count(); gi++)
+		{
+			lg = m_VB_State.Groves[gi];
+			gn = VB_FindNest(lg.Nest);
+			if (!gn || hearts.Find(gn) < 0)
+			{
+				Print("[VB_AncientRoot] рощи: " + VB_NestName(lg.Nest) + " — гнезда нет или оно выключено, роща пропала");
+				m_VB_State.Groves.Remove(gi);
+				gi--;
+				continue;
+			}
+			if (chosen.Count() >= m_VB_Settings.ActiveNests)
+			{
+				Print("[VB_AncientRoot] рощи: " + gn.Name + " — живых больше ActiveNests, роща ушла");
+				m_VB_State.Groves.Remove(gi);
+				gi--;
+				continue;
+			}
+			chosen.Insert(gn);
+			centers.Insert(gn.VB_Center());
+		}
+
+		// посаженные Семенем (ТЗ 2б.11) — ростками первыми; забытые из списка, только если встали
 		int seededN = 0;
 		if (m_VB_State.Seeded && m_VB_State.Seeded.Count() > 0)
 		{
@@ -850,27 +1087,36 @@ class VB_AR_Nests
 			{
 				if (chosen.Count() >= m_VB_Settings.ActiveNests)
 					break;
-				if (m_VB_State.Seeded.Find(sn.Id) < 0)
+				if (m_VB_State.Seeded.Find(sn.Id) < 0 || chosen.Find(sn) >= 0)
 					continue;
 				chosen.Insert(sn);
 				centers.Insert(sn.VB_Center());
 				m_VB_State.Seeded.RemoveItem(sn.Id);
+				VB_NewGrove(sn.Id);
 				seededN++;
 			}
 		}
+		// добрать ростками до ActiveNests
+		int before = chosen.Count();
 		VB_Pick(hearts, m_VB_Settings.ActiveNests - chosen.Count(), avoid, centers, chosen, spots);
+		for (int ni = before; ni < chosen.Count(); ni++)
+		{
+			VB_NewGrove(chosen[ni].Id);
+		}
 		if (seededN > 0)
 			Print("[VB_AncientRoot] гнёзда: проросли посаженные Семенем: " + seededN.ToString());
 
 		string names = "";
+		int stage;
 		m_VB_State.LastActive.Clear();
 		foreach (VB_AR_Nest pick : chosen)
 		{
-			VB_SpawnNest(pick);
+			stage = VB_StageOfNest(pick.Id);
+			VB_SpawnNest(pick, stage);
 			m_VB_State.LastActive.Insert(pick.Id);
 			if (names != "")
 				names += ", ";
-			names += pick.Name;
+			names += pick.Name + " (" + VB_StageName(stage) + ")";
 		}
 		VB_SaveState();
 
@@ -931,21 +1177,37 @@ class VB_AR_Nests
 		return true;
 	}
 
-	// сердце и щупальца встают всегда, корни — случайная доля RootsPercentMin..Max
-	protected void VB_SpawnNest(VB_AR_Nest nest)
+	// По ступени рощи (ТЗ 2б.4): росток — сердце и 30–40 % корней, без щупалец; роща — сердце, щупальца и
+	// RootsPercentMin..Max корней; древняя — всё. Ступень сердцу ставит VB_SpawnObj (по живой роще гнезда).
+	protected void VB_SpawnNest(VB_AR_Nest nest, int stage = 2)
 	{
 		if (m_VB_LiveNests.Find(nest.Id) >= 0)
 			return;
 
 		float lo = Math.Clamp(m_VB_Settings.RootsPercentMin * 0.01, 0.0, 1.0);
 		float hi = Math.Clamp(m_VB_Settings.RootsPercentMax * 0.01, lo, 1.0);
+		if (stage <= VB_AR_Heart.STAGE_SPROUT)
+		{
+			lo = 0.3;
+			hi = 0.4;
+		}
+		else if (stage >= VB_AR_Heart.STAGE_ANCIENT)
+		{
+			lo = 1.0;
+			hi = 1.0;
+		}
 		float keep = Math.RandomFloat(lo, hi);
 
 		array<VB_AR_NestObj> rest = new array<VB_AR_NestObj>;
 		foreach (VB_AR_NestObj o : nest.Objects)
 		{
-			if (VB_AR_NestUtil.VB_IsHeartType(o.Type) || VB_AR_NestUtil.VB_IsHangType(o.Type))
-				VB_SpawnObj(o);		// сердце и щупальца (их ставят поштучно) — всегда
+			if (VB_AR_NestUtil.VB_IsHeartType(o.Type))
+				VB_SpawnObj(o);		// сердце — всегда
+			else if (VB_AR_NestUtil.VB_IsHangType(o.Type))
+			{
+				if (stage > VB_AR_Heart.STAGE_SPROUT)
+					VB_SpawnObj(o);	// щупальца (их ставят поштучно) — у рощи и древней все, у ростка нет
+			}
 			else
 				rest.Insert(o);
 		}
@@ -991,6 +1253,16 @@ class VB_AR_Nests
 		}
 		obj.Update();
 		m_VB_Live.Set(o.Id, obj);
+
+		VB_AR_Heart heart = VB_AR_Heart.Cast(obj);
+		if (heart)
+		{
+			VB_AR_Nest owner = VB_FindNestOfObj(o.Id);
+			int stage = VB_AR_Heart.STAGE_GROVE;
+			if (owner)
+				stage = VB_StageOfNest(owner.Id);
+			heart.VB_SetStageServer(stage);
+		}
 		return obj;
 	}
 
@@ -1072,6 +1344,13 @@ class VB_AR_Nests
 			if (nest)
 				Print("[VB_AncientRoot] гнёзда: сердце вырезано в " + nest.Name + " — до рестарта это гнездо больше не встанет");
 		}
+		if (nestId != 0 && VB_GroveOf(nestId))
+		{
+			string stageName = VB_StageName(VB_StageOfNest(nestId));
+			VB_DropGrove(nestId);		// роща погибла: на следующем рестарте её место займёт росток в другом гнезде
+			VB_SaveState();
+			Print("[VB_AncientRoot] рощи: " + VB_NestName(nestId) + " (" + stageName + ") погибла");
+		}
 
 		if (!m_VB_Settings || m_VB_Settings.RegrowMinutes <= 0)
 			return;
@@ -1146,12 +1425,11 @@ class VB_AR_Nests
 		}
 
 		VB_AR_Nest grown = chosen[0];
-		VB_SpawnNest(grown);
+		VB_NewGrove(grown.Id);
+		VB_SpawnNest(grown, VB_AR_Heart.STAGE_SPROUT);
 		if (m_VB_State.LastActive.Find(grown.Id) < 0)
-		{
 			m_VB_State.LastActive.Insert(grown.Id);
-			VB_SaveState();
-		}
+		VB_SaveState();
 		string at = grown.VB_Center().ToString();
 		Print("[VB_AncientRoot] гнёзда: проросло " + grown.Name + " в " + at);
 		VB_SendNestToEditors(grown);
@@ -1369,9 +1647,10 @@ class VB_AR_Nests
 
 	protected void VB_EditReroll(PlayerBase actor, string who)
 	{
-		Print("[VB_AncientRoot] гнёзда: переброс по команде " + who);
+		Print("[VB_AncientRoot] гнёзда: переброс по команде " + who + " — рощи заново, ростками");
 		VB_CancelRegrow();
 		string note = VB_ReloadFromDisk();
+		m_VB_State.Groves.Clear();		// «Перебросить» — новые места: рост рощ начинается сначала
 		VB_Activate(true);
 		VB_SendAllToEditors();
 

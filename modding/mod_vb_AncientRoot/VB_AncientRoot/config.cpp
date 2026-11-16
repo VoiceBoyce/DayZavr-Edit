@@ -819,25 +819,25 @@ class CfgVehicles
 
 	// Трофей Лесового волка (ТЗ 2б.1): всегда один при разделке (Skinning у VB_RootGuard_Wolf), второй — шанс
 	// у волков рощи (VB_RootGuards.VB_SkinServer). Материал для Янтарного оберега и товар для торговцев (в конце работ).
-	// Модель временная (ванильный костяной крючок) — своя на шаге моделей.
+	// Модель — tools/gen_ar_veins.py (vb_ar_wolf_fang).
 	class VB_AR_WolfFang: Inventory_Base
 	{
 		scope = 2;
 		displayName = "Клык лесового волка";
 		descriptionShort = "Длинный жёлтый клык, вросший в корешок. Под эмалью тлеет золотая искра — волк был стражем рощи. Охотники носят такие на шнурке, а знахари просят за них хорошую цену.";
-		model = "\dz\gear\crafting\bone_hook.p3d";
+		model = "\VB_AncientRoot\data\vb_ar_wolf_fang.p3d";
 		weight = 40;
 		itemSize[] = {1, 1};
 		rotationFlags = 17;
 	};
 
-	// Пути вверх расположения леса (ТЗ 2б.11; скрипты VB_AR_Recovery.c). Модели временные — свои на шаге 4.
+	// Пути вверх расположения леса (ТЗ 2б.11; скрипты VB_AR_Recovery.c). Модели — tools/gen_ar_veins.py.
 	class VB_AR_Reconcile: Inventory_Base
 	{
 		scope = 2;
 		displayName = "Отвар примирения";
 		descriptionShort = "Горький настой лесных трав с крошкой янтаря. Выпей ночью у живой рощи — лес смягчится к тебе, и роща примет дар даже от того, кого ненавидит. Действует не чаще раза в сутки.";
-		model = "\VB_AncientRoot\data\vb_ar_blood_ampoule.p3d";
+		model = "\VB_AncientRoot\data\vb_ar_reconcile.p3d";
 		weight = 120;
 		itemSize[] = {1, 2};
 	};
@@ -846,7 +846,7 @@ class CfgVehicles
 		scope = 2;
 		displayName = "Семя Древнего корня";
 		descriptionShort = "Тёплое семя из вырезанной сердцевины. Посади его на месте погибшей рощи — к следующему рестарту там прорастёт новая, и лес это запомнит.";
-		model = "\dz\gear\cultivation\pumpkin_seeds.p3d";
+		model = "\VB_AncientRoot\data\vb_ar_seed.p3d";
 		weight = 30;
 		itemSize[] = {1, 1};
 	};
@@ -961,29 +961,26 @@ class CfgVehicles
 
 	// «Янтарный оберег» (ТЗ 2б.5; скрипты VB_AR_Gear.c, сервер VB_AR_GearServer.c, VB_AR_FavorServer.c):
 	// в инвентаре — стражи не нападают первыми, Благословение ×1,5; вырезавшему сердцевину — до рестарта не помогает.
-	// Модель временная (кусок янтаря) — своя на шаге моделей; крафт (янтарь + клык + лыко) — в DRL 18 в конце работ.
+	// Модель — tools/gen_ar_veins.py (vb_ar_amulet); крафт (янтарь + клык + лыко) — в DRL 18 в конце работ.
 	class VB_AR_Amulet: Inventory_Base
 	{
 		scope = 2;
 		displayName = "Янтарный оберег";
 		descriptionShort = "Кусок янтаря и волчий клык на шнурке из живого лыка. Пока оберег при тебе, стражи рощ не нападают первыми, а Благословение рощи держится дольше. Тому, кто вырезал сердцевину, он не поможет.";
-		model = "\VB_AncientRoot\data\vb_ar_heart_chunk.p3d";
+		model = "\VB_AncientRoot\data\vb_ar_amulet.p3d";
 		weight = 80;
 		itemSize[] = {1, 2};
 		rotationFlags = 17;
-		hiddenSelections[] = {"crust", "veins"};
-		hiddenSelectionsTextures[] = {"\VB_AncientRoot\data\items\vb_ar_amber_co.paa", "\VB_AncientRoot\data\items\vb_ar_amber_vein_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_AncientRoot\data\items\vb_ar_amber.rvmat", "\VB_AncientRoot\data\items\vb_ar_amber.rvmat"};
 	};
 
 	// «Настой пыльцы» (ТЗ 2б.5; скрипты VB_AR_Gear.c): выпить — 10 минут звери и стражи рощи в 60 м подсвечены
-	// золотым светом (видит только выпивший). Модель временная (ванильная бутылка) — своя на шаге моделей.
+	// золотым светом (видит только выпивший). Модель — tools/gen_ar_veins.py (vb_ar_pollen_brew).
 	class VB_AR_PollenBrew: Inventory_Base
 	{
 		scope = 2;
 		displayName = "Настой пыльцы";
 		descriptionShort = "Тёплый настой золотой пыльцы на лесных травах. Выпей — и минут десять будешь видеть зверей и стражей рощи: они светятся золотом даже в темноте.";
-		model = "\dz\gear\drinks\MilkBottle.p3d";
+		model = "\VB_AncientRoot\data\vb_ar_pollen_brew.p3d";
 		weight = 250;
 		itemSize[] = {1, 2};
 		rotationFlags = 17;
