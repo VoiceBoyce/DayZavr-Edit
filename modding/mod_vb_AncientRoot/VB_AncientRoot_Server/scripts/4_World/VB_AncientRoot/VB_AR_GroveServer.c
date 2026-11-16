@@ -102,9 +102,27 @@ modded class VB_AR_Heart
 		string at = GetPosition().ToString();
 		string lvl = level.ToString();
 		Print("[VB_AncientRoot] роща в " + at + ": волна стражей " + lvl + ", виноват " + whoStr);
+		VB_HowlServer();		// вой стражей со стороны рощи (ТЗ 2в п.5)
 		// кто поднял волну жадным сбором, того стражи больше не щадят (иначе: подношение — и бери даром)
 		VB_AR_FavorServer.VB_Anger(who, "Роща встревожена твоей жадностью.");
 		return wave;
+	}
+
+	// вой Лесовых волков у рощи — игрокам в HOWL_DIST (тот же звук, что перед волной за расположение)
+	static const float HOWL_DIST = 300.0;
+	protected void VB_HowlServer()
+	{
+		array<Man> players = new array<Man>;
+		g_Game.GetPlayers(players);
+		vector hp = GetPosition();
+		float howlSq = HOWL_DIST * HOWL_DIST;
+		PlayerBase pb;
+		foreach (Man m : players)
+		{
+			pb = PlayerBase.Cast(m);
+			if (pb && pb.GetIdentity() && vector.DistanceSq(pb.GetPosition(), hp) < howlSq)
+				g_Game.RPCSingleParam(pb, VB_AR_Favor.RPC_HOWL, new Param1<vector>(hp), true, pb.GetIdentity());
+		}
 	}
 
 	protected void VB_AlarmLog(PlayerBase who, int before)
@@ -149,9 +167,11 @@ modded class VB_AR_Heart
 			return false;
 
 		int tier = VB_AR_Offer.VB_Tier(item);
-		if (tier == VB_AR_Offer.TIER_NONE)
+		int part = VB_AR_Offer.VB_RitualPart(item);
+		if (tier == VB_AR_Offer.TIER_NONE && part == VB_AR_Offer.PART_NONE)
 			return false;
 		int favorTier = VB_AR_FavorServer.VB_TierNow(player);
+		bool usePardon = false;
 		if (favorTier == VB_AR_Favor.TIER_CURSED)
 		{
 			if (!VB_AR_FavorServer.VB_HasPardon(player))
@@ -159,8 +179,19 @@ modded class VB_AR_Heart
 				NotificationSystem.SendNotificationToPlayerExtended(player, 6, "Роща не принимает дар", "Лес тебя ненавидит.");
 				return false;
 			}
-			VB_AR_FavorServer.VB_UsePardon(player);		// Отвар примирения: один дар даже «Проклятому»
+			usePardon = true;		// Отвар примирения: один дар даже «Проклятому» — тратится, только если дар принят
 		}
+
+		// клык, простой янтарь, Семя, пыльца — не дар сам по себе, только часть ритуала (ТЗ 2в п.3, VB_AR_RitualServer.c)
+		if (tier == VB_AR_Offer.TIER_NONE)
+		{
+			bool took = VB_AR_Ritual.VB_OnPart(this, player, item, part);
+			if (took && usePardon)
+				VB_AR_FavorServer.VB_UsePardon(player);
+			return took;
+		}
+		if (usePardon)
+			VB_AR_FavorServer.VB_UsePardon(player);
 
 		string what = item.GetType();
 		// штучные стопки (руны, кристаллы) — одна штука, остальное — целиком
@@ -177,15 +208,7 @@ modded class VB_AR_Heart
 
 		bool isFriend = favorTier == VB_AR_Favor.TIER_FRIEND;
 		string gifts = VB_GiveGiftsServer(player, tier, isFriend, m_VB_Stage);
-		int blessMs = BLESS_MS;
-		if (isFriend)
-			blessMs = BLESS_MS * 2;		// Друг леса — Благословение вдвое дольше
-		if (player.VB_AmuletWorks())
-			blessMs = blessMs * VB_AR_Amulet.BLESS_MUL;	// Янтарный оберег — ещё в полтора раза
-		int blessMin = blessMs / 60000;
-		string blessText = "Благословение рощи на " + blessMin.ToString() + " мин: раны затягиваются, стражи не нападают первыми.";
-		VB_AR_Blessing.VB_Give(player, blessMs);
-		NotificationSystem.SendNotificationToPlayerExtended(player, 7, "Роща приняла дар", blessText);
+		VB_BlessServer(player, "Роща приняла дар");
 		float favorAdd = VB_AR_FavorServer.OFFER_MEAT;
 		if (tier == VB_AR_Offer.TIER_BEST)
 			favorAdd = VB_AR_FavorServer.OFFER_BEST;
@@ -201,7 +224,31 @@ modded class VB_AR_Heart
 		string msg = "[VB_AncientRoot] подношение в " + at + ": " + who + " отдал " + what + " (ценность " + t + "), дар: " + gifts;
 		msg += "; тревога " + ab + " -> 0, подношений осталось " + left;
 		Print("" + msg);
+		VB_AR_Ritual.VB_AfterGift(this, player, part);		// мясо или руна — начало или конец ритуала
 		return true;
+	}
+
+	// Благословение за дар (и за ритуал): полчаса, у Друга леса вдвое, с Янтарным оберегом ещё ×1,5
+	void VB_BlessServer(PlayerBase player, string title)
+	{
+		int blessMs = BLESS_MS;
+		if (VB_AR_FavorServer.VB_TierNow(player) == VB_AR_Favor.TIER_FRIEND)
+			blessMs = BLESS_MS * 2;		// Друг леса — Благословение вдвое дольше
+		if (player.VB_AmuletWorks())
+			blessMs = blessMs * VB_AR_Amulet.BLESS_MUL;	// Янтарный оберег — ещё в полтора раза
+		int blessMin = blessMs / 60000;
+		string blessText = "Благословение рощи на " + blessMin.ToString() + " мин: раны затягиваются, стражи не нападают первыми.";
+		VB_AR_Blessing.VB_Give(player, blessMs);
+		NotificationSystem.SendNotificationToPlayerExtended(player, 7, title, blessText);
+	}
+
+	// часть ритуала принята (VB_AR_RitualServer.c): одно подношение из лимита, тревога в ноль, роща сыта
+	void VB_TakeRitualPartServer()
+	{
+		m_VB_OffersLeft--;
+		m_VB_Alarm = 0;
+		SetSynchDirty();
+		VB_AR_Nests.VB_OnGroveOffer(this);
 	}
 
 	// дар по ценности подношения и ступени рощи (ТЗ 2б.4): росток даёт только пыльцу, древняя — ещё янтарь

@@ -12,5 +12,9 @@
     "GrowRestarts": 2,
     "FeedOffers": 2,
     "AncientLife": 4,
-    "MaxAncient": 1
+    "MaxAncient": 1,
+    "SiegeCheckMinutes": 10,
+    "SiegeChance": 0.15,
+    "SiegeCooldownMinutes": 120,
+    "SiegePlayerDistance": 200.0
 }

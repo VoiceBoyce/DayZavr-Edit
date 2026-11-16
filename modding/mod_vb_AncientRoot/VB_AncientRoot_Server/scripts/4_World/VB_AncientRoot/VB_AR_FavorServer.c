@@ -152,6 +152,10 @@ class VB_AR_FavorServer
 			if (fresh)
 			{
 				NotificationSystem.SendNotificationToPlayerExtended(p, 12, VOICE_TITLE, VOICE_TEXT);
+				// звук «голоса леса» (ТЗ 2в п.5): шёпот рощи со стороны ближайшей сердцевины
+				VB_AR_Heart voiceHeart = VB_AR_Heart.VB_NearestServer(p.GetPosition(), VOICE_NEAR);
+				if (voiceHeart)
+					VB_AR_Memory.VB_WhisperAt(p, voiceHeart.GetPosition() + "0 1 0");
 				Print("[VB_AncientRoot] голос леса: " + VB_AR_ItemsServer.VB_Who(p));
 			}
 		}
@@ -462,8 +466,8 @@ class VB_AR_FavorServer
 			VB_Save();
 	}
 
-	// ночь проверена; здесь — в лесу или у рощи, не в машине, не под крышей, не на базе
-	protected static bool VB_WaveSpotOk(PlayerBase p)
+	// ночь проверена; здесь — в лесу или у рощи, не в машине, не под крышей, не на базе (и «Лес помнит», VB_AR_MemoryServer.c)
+	static bool VB_WaveSpotOk(PlayerBase p)
 	{
 		if (p.IsInVehicle() || MiscGameplayFunctions.IsUnderRoof(p))
 			return false;

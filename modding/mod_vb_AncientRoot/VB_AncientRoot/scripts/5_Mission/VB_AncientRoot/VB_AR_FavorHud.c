@@ -7,6 +7,9 @@
 // Раскладка gui/layouts/vb_ar_favor.layout (единицы 1/1080 высоты экрана), текстуры — tools/gen_ar_branch.py и gen_ar_hud.py.
 // Показывается сам: у рощи, ночью в лесу, недолго после изменения и всегда у «Врага леса» и «Проклятого».
 // Прячется при открытом меню/инвентаре, мёртвом или без сознания. Значение присылает сервер (VB_AR_Favor.RPC_FAVOR).
+// Над ветвью — строка нашествия нечисти (ТЗ 2в п.1): «Нечисть грызёт корни · сила рощи N%», пока рядом (SIEGE_NEAR)
+// роща в осаде; с ней худ виден всегда. Корень раскладки 640×150: сверху строка нашествия (над быстрыми слотами,
+// они между ней и ветвью), ниже «+10» и ветвь.
 
 class VB_AR_FavorHud
 {
@@ -24,6 +27,10 @@ class VB_AR_FavorHud
 	static const float TRACK_W = 400;
 	static const float BUD_SIZE = 22;
 	static const float BUD_Y = 13;
+	static const float DELTA_Y = 82;				// «+10» над почкой (в корне раскладки)
+	static const float SIEGE_NEAR = 150;			// м: строка нашествия у осаждённой рощи
+	static const int SIEGE_CHECK_MS = 500;
+	static const int COLOR_SIEGE = 0xFFFF8A3A;
 
 	static const int SHOW_AFTER_CHANGE_MS = 6000;	// после изменения полоса видна столько
 	static const int DELTA_MS = 2500;				// «+10» висит столько
@@ -53,6 +60,9 @@ class VB_AR_FavorHud
 	protected ImageWidget m_VB_Bud;
 	protected TextWidget m_VB_Name;
 	protected TextWidget m_VB_Delta;
+	protected TextWidget m_VB_Siege;
+	protected VB_AR_Heart m_VB_SiegeHeart;
+	protected int m_VB_NextSiegeCheck;
 	protected float m_VB_Alpha;
 	protected float m_VB_Time;
 	protected float m_VB_Shown;					// показанное значение, плавно догоняет настоящее
@@ -94,7 +104,8 @@ class VB_AR_FavorHud
 		m_VB_Bud = ImageWidget.Cast(m_VB_Root.FindAnyWidget("VB_AR_FavorBud"));
 		m_VB_Name = TextWidget.Cast(m_VB_Root.FindAnyWidget("VB_AR_FavorName"));
 		m_VB_Delta = TextWidget.Cast(m_VB_Root.FindAnyWidget("VB_AR_FavorDelta"));
-		if (!m_VB_Disc || !m_VB_Rune || !m_VB_Branch || !m_VB_Bloom || !m_VB_Thorn || !m_VB_Bud || !m_VB_Name || !m_VB_Delta)
+		m_VB_Siege = TextWidget.Cast(m_VB_Root.FindAnyWidget("VB_AR_FavorSiege"));
+		if (!m_VB_Disc || !m_VB_Rune || !m_VB_Branch || !m_VB_Bloom || !m_VB_Thorn || !m_VB_Bud || !m_VB_Name || !m_VB_Delta || !m_VB_Siege)
 		{
 			m_VB_Root.Unlink();
 			m_VB_Root = null;
@@ -118,6 +129,8 @@ class VB_AR_FavorHud
 		m_VB_Disc.SetColor(COLOR_DISC);
 		m_VB_Name.SetShadow(2, 0xFF000000, 0.9, 1, 1);
 		m_VB_Delta.SetShadow(2, 0xFF000000, 0.9, 1, 1);
+		m_VB_Siege.SetShadow(2, 0xFF000000, 0.9, 1, 1);
+		m_VB_Siege.SetColor(COLOR_SIEGE);
 		m_VB_Root.Show(false);
 		return true;
 	}
@@ -153,7 +166,7 @@ class VB_AR_FavorHud
 			return false;
 		if (g_Game.GetUIManager() && g_Game.GetUIManager().GetMenu())
 			return false;
-		if (tier <= VB_AR_Favor.TIER_ENEMY)
+		if (tier <= VB_AR_Favor.TIER_ENEMY || m_VB_SiegeHeart)
 			return true;
 		if (now - VB_AR_Favor.s_VB_ChangedAt < SHOW_AFTER_CHANGE_MS)
 			return true;
@@ -191,6 +204,11 @@ class VB_AR_FavorHud
 
 		m_VB_Time += dt;
 		int now = g_Game.GetTime();
+		if (now >= m_VB_NextSiegeCheck)
+		{
+			m_VB_NextSiegeCheck = now + SIEGE_CHECK_MS;
+			m_VB_SiegeHeart = VB_AR_Pulse.VB_NearestSiegeHeart(player.GetPosition(), SIEGE_NEAR);
+		}
 		int tier = VB_AR_Favor.VB_MyTier();
 		bool want = VB_WantVisible(player, tier, now);
 
@@ -258,6 +276,20 @@ class VB_AR_FavorHud
 		m_VB_Bud.SetAlpha(budAlpha * m_VB_Alpha);
 		m_VB_Name.SetAlpha(m_VB_Alpha);
 
+		// нашествие нечисти: строка над ветвью, мерцает
+		if (m_VB_SiegeHeart && m_VB_SiegeHeart.VB_UnderSiege())
+		{
+			int power = m_VB_SiegeHeart.VB_SiegePower();
+			m_VB_Siege.SetText("Нечисть грызёт корни · сила рощи " + power.ToString() + "%");
+			m_VB_Siege.SetAlpha((0.75 + 0.25 * Math.Sin(m_VB_Time * Math.PI2 / 1.2)) * m_VB_Alpha);
+			if (!m_VB_Siege.IsVisible())
+				m_VB_Siege.Show(true);
+		}
+		else if (m_VB_Siege.IsVisible())
+		{
+			m_VB_Siege.Show(false);
+		}
+
 		// «+10» / «-25» над почкой после изменения
 		int since = now - VB_AR_Favor.s_VB_ChangedAt;
 		if (since >= 0 && since < DELTA_MS && VB_AR_Favor.s_VB_LastDelta != 0)
@@ -285,7 +317,7 @@ class VB_AR_FavorHud
 				fade = (1 - k) / 0.3;
 			m_VB_Delta.SetAlpha(fade * m_VB_Alpha);
 			float dx = TRACK_X + budX + BUD_SIZE / 2 - 30;
-			m_VB_Delta.SetPos(dx, -20 - 10 * k);		// чуть всплывает
+			m_VB_Delta.SetPos(dx, DELTA_Y - 10 * k);		// чуть всплывает
 			m_VB_Delta.Show(true);
 		}
 		else if (m_VB_Delta.IsVisible())

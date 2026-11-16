@@ -80,11 +80,11 @@ class VB_AR_BookMenu : UIScriptedMenu
 	static const string TEX_ORN = "VB_AncientRoot/gui/book/vb_ar_book_orn_ca.paa";
 	static const string TEX_WHITE = "VB_AncientRoot/gui/book/vb_ar_book_white_ca.paa";
 
-	static const int TABS = 9;					// столько закладок в разметке
+	static const int TABS = 10;					// столько закладок в разметке
 	static const float TAB_X = 1226;			// закладки торчат из-под обложки справа
 	static const float TAB_X_ACTIVE = 1240;		// закладка открытой главы выдвинута
 	static const float TAB_Y0 = 66;
-	static const float TAB_STEP = 76;
+	static const float TAB_STEP = 70;
 	static const float SPIN_SPEED = 22;			// градусов в секунду — вращение моделей на страницах
 	static const float BODY_TOP = 124;			// текст без картинки
 	static const float BODY_TOP_PIC = 288;		// текст под картинкой

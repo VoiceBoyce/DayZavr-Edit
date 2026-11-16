@@ -9,6 +9,8 @@ modded class MissionServer
 		VB_AR_ItemsServer.VB_Session();	// метка этой сессии: сердцевина из прошлой окаменеет
 		VB_AR_Nests.VB_StartServer();
 		VB_AR_FavorServer.VB_Start();
+		VB_AR_Siege.VB_Start();			// «Защита рощи»: жребий нашествия пауков (VB_AR_WorldSiege.c)
+		VB_AR_Memory.VB_Start();		// «Лес помнит»: шёпот и хватка корней у Врага и Проклятого (VB_AR_MemoryServer.c)
 	}
 
 	override void InvokeOnConnect(PlayerBase player, PlayerIdentity identity)

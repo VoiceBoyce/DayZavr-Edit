@@ -162,6 +162,31 @@ class VB_AR_Pulse
 		return best;
 	}
 
+	// клиент: ближайшее сердце в осаде нечисти (ТЗ 2в п.1) не дальше maxDist; null — нет
+	static VB_AR_Heart VB_NearestSiegeHeart(vector pos, float maxDist)
+	{
+		if (!s_VB_Instance)
+			return null;
+
+		VB_AR_Heart best;
+		VB_AR_Heart h;
+		float bestSq = maxDist * maxDist;
+		float dSq;
+		foreach (VB_AR_Base obj : s_VB_Instance.m_VB_Objects)
+		{
+			h = VB_AR_Heart.Cast(obj);
+			if (!h || !h.VB_UnderSiege())
+				continue;
+			dSq = vector.DistanceSq(pos, h.GetPosition());
+			if (dSq < bestSq)
+			{
+				bestSq = dSq;
+				best = h;
+			}
+		}
+		return best;
+	}
+
 	// один удар: быстрый подъём, медленный спад, 0..1
 	static float VB_Beat(float t, float at)
 	{

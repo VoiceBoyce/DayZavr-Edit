@@ -14,7 +14,7 @@ class CfgPatches
 			"VB_AR_Wall_Wide1", "VB_AR_Wall_Wide2", "VB_AR_Wall_Corner1", "VB_AR_Wall_Corner2", "VB_AR_Wall_Corner3",
 			"VB_AR_HeartChunk", "VB_AR_RootPiece", "VB_AR_HeartDead", "VB_AR_Spores", "VB_AR_Vein",
 			"VB_AR_ListenRoot", "VB_AR_SporeTrap", "VB_AR_Lantern", "VB_AR_Blood", "VB_AR_Blade", "VB_AR_Cloak",
-			"VB_RootGuard_Wolf", "VB_RootGuard_Zanoza", "VB_RootGuard_Ent", "VB_AR_Amber", "VB_AR_AmberInclusion", "VB_AR_Reconcile", "VB_AR_Seed", "VB_AR_WolfFang", "VB_AR_Amulet", "VB_AR_PollenBrew", "VB_AR_Book"
+			"VB_RootGuard_Wolf", "VB_RootGuard_Zanoza", "VB_RootGuard_Ent", "VB_AR_Amber", "VB_AR_AmberInclusion", "VB_AR_Reconcile", "VB_AR_Seed", "VB_AR_WolfFang", "VB_AR_Amulet", "VB_AR_PollenBrew", "VB_AR_Book", "VB_AR_KeeperHeart"
 		};
 		weapons[] = {};
 		requiredVersion = 0.1;
@@ -504,6 +504,7 @@ class CfgVehicles
 		displayName = "Хранитель рощи";
 		descriptionShort = "Древний Энт, выросший из корней рощи. Сердцевина в его груди горит золотом. Выходит только к древним рощам.";
 		vbRootGuard = 1;
+		// мини-босс (ТЗ 2в п.2): здоровье ×1,5 к Энту MSFZ (2000 -> 3000, голова 1800 -> 2700); умения — VB_AR_KeeperServer.c
 		hiddenSelectionsTextures[] = {"\VB_AncientRoot\data\guards\vb_guard_ent_co.paa"};
 		hiddenSelectionsMaterials[] = {"\VB_AncientRoot\data\guards\vb_guard_ent.rvmat"};
 		class DamageSystem
@@ -512,7 +513,7 @@ class CfgVehicles
 			{
 				class Health
 				{
-					hitpoints = 2000;
+					hitpoints = 3000;
 					healthLevels[] = {{1,{"\VB_AncientRoot\data\guards\vb_guard_ent.rvmat"}},{0.7,{"\VB_AncientRoot\data\guards\vb_guard_ent.rvmat"}},{0.5,{"MSFZ_Mifical_Pack\Ent\data\MSFZ_Ent_Base_damage.rvmat"}},{0.3,{"MSFZ_Mifical_Pack\Ent\data\MSFZ_Ent_Base_damage.rvmat"}},{0,{"MSFZ_Mifical_Pack\Ent\data\MSFZ_Ent_Base_destruct.rvmat"}}};
 				};
 			};
@@ -522,7 +523,7 @@ class CfgVehicles
 				{
 					class Health
 					{
-						hitpoints = 1800;
+						hitpoints = 2700;
 						transferToGlobalCoef = 1;
 					};
 					class ArmorType
@@ -550,7 +551,7 @@ class CfgVehicles
 				{
 					class Health
 					{
-						hitpoints = 2000;
+						hitpoints = 3000;
 						transferToGlobalCoef = 1;
 					};
 					class ArmorType
@@ -578,7 +579,7 @@ class CfgVehicles
 				{
 					class Health
 					{
-						hitpoints = 2000;
+						hitpoints = 3000;
 						transferToGlobalCoef = 0.33;
 					};
 					class ArmorType
@@ -605,7 +606,7 @@ class CfgVehicles
 				{
 					class Health
 					{
-						hitpoints = 2000;
+						hitpoints = 3000;
 						transferToGlobalCoef = 0.33;
 					};
 					class ArmorType
@@ -632,7 +633,7 @@ class CfgVehicles
 				{
 					class Health
 					{
-						hitpoints = 2000;
+						hitpoints = 3000;
 						transferToGlobalCoef = 0.33;
 					};
 					class ArmorType
@@ -660,7 +661,7 @@ class CfgVehicles
 				{
 					class Health
 					{
-						hitpoints = 2000;
+						hitpoints = 3000;
 						transferToGlobalCoef = 0.33;
 					};
 					class ArmorType
@@ -688,7 +689,7 @@ class CfgVehicles
 				{
 					class Health
 					{
-						hitpoints = 2000;
+						hitpoints = 3000;
 						transferToGlobalCoef = 0.1;
 					};
 					class ArmorType
@@ -718,7 +719,7 @@ class CfgVehicles
 				{
 					class Health
 					{
-						hitpoints = 2000;
+						hitpoints = 3000;
 						transferToGlobalCoef = 0.1;
 					};
 					class ArmorType
@@ -984,6 +985,19 @@ class CfgVehicles
 		weight = 250;
 		itemSize[] = {1, 2};
 		rotationFlags = 17;
+	};
+
+	// «Сердце Хранителя» (ТЗ_сервер_18.md, ветка 2в п.2): трофей мини-босса — всегда при разделке Хранителя рощи
+	// (VB_RootGuards.VB_SkinServer). Для будущих изделий (крафт DRL 18 — в конце работ). Модель — gen_ar_veins.py (vb_ar_keeper_heart).
+	class VB_AR_KeeperHeart: Inventory_Base
+	{
+		scope = 2;
+		displayName = "Сердце Хранителя";
+		descriptionShort = "Узел древней коры, стянутый корнями и костяными шипами. Сквозь трещины горит золотое ядро, и оно всё ещё бьётся. Вырезано из груди Хранителя рощи: знахари отдадут за него многое.";
+		model = "\VB_AncientRoot\data\vb_ar_keeper_heart.p3d";
+		weight = 1500;
+		itemSize[] = {3, 3};
+		rotationFlags = 2;
 	};
 
 	// «Книга древних» (ТЗ_сервер_18.md, ветка 2в; скрипты VB_AR_Book.c, окно 5_Mission/VB_AR_BookMenu.c, тексты

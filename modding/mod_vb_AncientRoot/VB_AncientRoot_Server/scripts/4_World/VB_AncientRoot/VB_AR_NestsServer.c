@@ -1652,7 +1652,98 @@ class VB_AR_Nests
 				if (ctx.Read(nestId))
 					VB_EditStage(actor, who, nestId, -1);
 				break;
+
+			case VB_AR_NestNet.OP_SIEGE:
+				if (ctx.Read(nestId))
+					VB_EditSiege(actor, who, nestId);
+				break;
 		}
+	}
+
+	// админ: нашествие пауков на рощу гнезда сейчас (для проверки; ночь и перерыв не нужны, VB_AR_WorldSiege.c)
+	protected void VB_EditSiege(PlayerBase actor, string who, int nestId)
+	{
+		VB_AR_Nest nest = VB_FindNest(nestId);
+		if (!nest)
+			return;
+		VB_AR_Heart heart = VB_HeartOfNest(nest);
+		if (!heart || heart.VB_IsDead())
+		{
+			VB_SendMsg(actor, nest.Name + ": живой сердцевины нет — нападать не на кого");
+			return;
+		}
+		string res = VB_AR_Siege.VB_BeginByAdmin(heart, who);
+		VB_SendMsg(actor, nest.Name + ": " + res);
+	}
+
+	// поставленное сердце гнезда; null — гнезда нет на карте
+	protected VB_AR_Heart VB_HeartOfNest(VB_AR_Nest nest)
+	{
+		VB_AR_Heart found;
+		foreach (VB_AR_NestObj o : nest.Objects)
+		{
+			if (!VB_AR_NestUtil.VB_IsHeartType(o.Type) || !m_VB_Live.Contains(o.Id))
+				continue;
+			found = VB_AR_Heart.Cast(m_VB_Live.Get(o.Id));
+			if (found)
+				return found;
+		}
+		return null;
+	}
+
+	// «Защита рощи» отбилась (VB_AR_WorldSiege.c): ступень вверх сразу. В древнюю — если есть место по MaxAncient,
+	// иначе очки роста до полного запаса (станет древней на рестарте, когда место освободится). Древней — рестарт
+	// жизни сверху. Роща встаёт заново с новым обликом. Возвращает строку для лога и игроков.
+	static string VB_OnGroveDefended(VB_AR_Heart heart)
+	{
+		if (!s_VB_Server)
+			return "";
+		return s_VB_Server.VB_GroveDefended(heart);
+	}
+
+	protected string VB_GroveDefended(VB_AR_Heart heart)
+	{
+		int nestId = VB_NestOfEntity(heart);
+		VB_AR_Nest nest = VB_FindNest(nestId);
+		VB_AR_Grove g = VB_GroveOf(nestId);
+		if (nestId == 0 || !nest || !g)
+			return "";
+		if (g.Stage >= VB_AR_Heart.STAGE_ANCIENT)
+		{
+			g.Age = g.Age - 1;
+			VB_SaveState();
+			return "древняя роща проживёт на рестарт дольше";
+		}
+		int next = g.Stage + 1;
+		if (next >= VB_AR_Heart.STAGE_ANCIENT && VB_CountAncient() >= m_VB_Settings.MaxAncient)
+		{
+			if (g.Growth < m_VB_Settings.GrowRestarts)
+				g.Growth = m_VB_Settings.GrowRestarts;
+			VB_SaveState();
+			return "роща наберёт силу и станет древней, когда в лесу освободится место";
+		}
+		g.Stage = next;
+		g.Growth = 0;
+		g.Age = 0;
+		VB_DespawnNest(nest);
+		VB_SpawnNest(nest, next);
+		VB_SaveState();
+		VB_SendNestToEditors(nest);
+		Print("[VB_AncientRoot] рощи: " + nest.Name + " отбилась от нечисти — теперь " + VB_StageName(next));
+		if (next >= VB_AR_Heart.STAGE_ANCIENT)
+			return "роща разрослась и стала древней";
+		return "росток окреп и стал рощей";
+	}
+
+	protected int VB_CountAncient()
+	{
+		int n = 0;
+		foreach (VB_AR_Grove g : m_VB_State.Groves)
+		{
+			if (g && g.Stage >= VB_AR_Heart.STAGE_ANCIENT)
+				n++;
+		}
+		return n;
 	}
 
 	// Ступень живой рощи ±1 (админ, для теста и ручной правки; лимит древних не проверяется). Роща встаёт заново

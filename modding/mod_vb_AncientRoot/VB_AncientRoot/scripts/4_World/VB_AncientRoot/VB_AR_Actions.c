@@ -95,8 +95,8 @@ class VB_ActionCollectSpores : ActionContinuousBase
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item)
 	{
 		VB_AR_Heart heart = VB_AR_Heart.Cast(target.GetObject());
-		if (!heart || heart.VB_IsDead() || heart.VB_SporesLeft() <= 0)
-			return false;
+		if (!heart || heart.VB_IsDead() || heart.VB_SporesLeft() <= 0 || heart.VB_UnderSiege())
+			return false;		// в осаде нечисти сбора нет (ТЗ 2в п.1)
 
 		return VB_AR_Pulse.VB_NightFactor() >= VB_AR_Pulse.NIGHT_FULL_ABOVE;
 	}
@@ -154,6 +154,9 @@ class VB_ActionBreakRootRoot : ActionContinuousBase
 		if (g_Game.IsDedicatedServer())
 			return true;
 
+		// в осаде нечисти отлома нет (ТЗ 2в п.1; сервер проверяет сам, VB_AR_ActionsServer.c)
+		if (VB_AR_Pulse.VB_NearestSiegeHeart(player.GetPosition(), VB_AR_Pulse.LINK_DIST))
+			return false;
 		return VB_AR_Pulse.VB_NearestLiveRoot(player.GetPosition(), ROOT_DIST) != null;
 	}
 }

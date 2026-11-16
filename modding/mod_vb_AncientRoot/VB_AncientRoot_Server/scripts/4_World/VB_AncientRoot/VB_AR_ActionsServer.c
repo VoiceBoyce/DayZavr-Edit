@@ -62,7 +62,12 @@ modded class VB_ActionBreakRootRoot
 		if (!super.ActionCondition(player, target, item))
 			return false;
 
-		return VB_FindRootServer(player.GetPosition()) != null;
+		VB_AR_Base root = VB_FindRootServer(player.GetPosition());
+		if (!root)
+			return false;
+		// во время нашествия нечисти сбор у рощи закрыт (ТЗ 2в п.1)
+		VB_AR_Heart heart = VB_AR_Heart.VB_NearestServer(root.GetPosition(), VB_AR_Pulse.LINK_DIST);
+		return !heart || !heart.VB_UnderSiege();
 	}
 
 	// Пульса на сервере нет: ищем корень гнезда среди объектов рядом. Отломанные и спящие (ближайшее сердце

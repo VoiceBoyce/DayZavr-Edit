@@ -42,6 +42,36 @@ class VB_AR_Offer
 		return TIER_NONE;
 	}
 
+	// Части ритуалов (ТЗ 2в п.3; сервер VB_AR_RitualServer.c): два дара одного игрока подряд у рощи или древней.
+	// Клык, простой янтарь, Семя и пыльца сами по себе не дары — роща берёт их только как часть ритуала.
+	static const int PART_NONE = 0;
+	static const int PART_FANG = 1;		// Клык лесового волка
+	static const int PART_MEAT = 2;		// мясо (и обычный дар)
+	static const int PART_RUNE = 3;		// руна или кристалл MSFZ (и лучший дар)
+	static const int PART_AMBER = 4;	// простой янтарь (не с вкраплением)
+	static const int PART_SEED = 5;		// Семя Древнего корня
+	static const int PART_POLLEN = 6;	// Золотая пыльца
+
+	static int VB_RitualPart(EntityAI item)
+	{
+		if (!item || item.IsRuined())
+			return PART_NONE;
+		string type = item.GetType();
+		if (type == "VB_AR_WolfFang")
+			return PART_FANG;
+		if (type == "VB_AR_Amber")
+			return PART_AMBER;
+		if (type == "VB_AR_Seed")
+			return PART_SEED;
+		if (type == "VB_AR_Spores")
+			return PART_POLLEN;
+		if (type.IndexOf("MSFZ_RuneStone") == 0 || type.IndexOf("MSFZ_Crystal_") == 0)
+			return PART_RUNE;
+		if (item.IsMeat())
+			return PART_MEAT;
+		return PART_NONE;
+	}
+
 	static const float GROVE_PART_DIST = 15.0;	// корень или щупальце не дальше этого от своей сердцевины
 
 	// Сердцевина рощи по любой её части (решение пользователя 2026-11-16, вариант Г): сама сердцевина или сетевой корень,
@@ -124,10 +154,14 @@ class VB_ActionOfferRoot : ActionContinuousBase
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item)
 	{
 		VB_AR_Heart heart = VB_AR_Offer.VB_HeartOf(target.GetObject());	// сердцевина или любой корень рощи
-		if (!heart || heart.VB_IsDead() || heart.VB_OffersLeft() <= 0)
-			return false;
+		if (!heart || heart.VB_IsDead() || heart.VB_OffersLeft() <= 0 || heart.VB_UnderSiege())
+			return false;		// в осаде нечисти даров не принимает (ТЗ 2в п.1)
 		if (VB_AR_Offer.VB_Tier(item) == VB_AR_Offer.TIER_NONE)
-			return false;
+		{
+			// часть ритуала (клык, янтарь, Семя, пыльца) — только у рощи и древней (ТЗ 2в п.3)
+			if (VB_AR_Offer.VB_RitualPart(item) == VB_AR_Offer.PART_NONE || heart.VB_Stage() < VB_AR_Heart.STAGE_GROVE)
+				return false;
+		}
 		// «Проклятому» роща даров не принимает (расположение леса, 2б.11); сервер проверяет ещё раз
 		if (!g_Game.IsDedicatedServer() && VB_AR_Favor.VB_MyTier() == VB_AR_Favor.TIER_CURSED && !VB_AR_Favor.s_VB_Pardon)
 			return false;

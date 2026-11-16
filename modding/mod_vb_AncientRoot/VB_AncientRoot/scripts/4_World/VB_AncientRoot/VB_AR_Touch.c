@@ -83,6 +83,11 @@ class VB_ActionTouchGrove : ActionInteractBase
 		title = VB_StageTitle(h.VB_Stage());
 		if (h.VB_IsDead())
 			return "Сердцевина вырезана. Роща умирает и до рестарта не оживёт.";
+		if (h.VB_UnderSiege())
+		{
+			int power = h.VB_SiegePower();
+			return "Нечисть грызёт корни! Сила рощи " + power.ToString() + "%. Убей пауков — роща отблагодарит.";
+		}
 		if (VB_AR_Pulse.VB_NightFactor() < VB_AR_Pulse.NIGHT_FULL_ABOVE)
 			return "Роща спит. Приходи ночью — тогда она примет дар.";
 

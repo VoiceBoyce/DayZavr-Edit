@@ -224,6 +224,18 @@ class VB_AR_Horde
 		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_Check, CHECK_MS, true);
 	}
 
+	// кто уже вылез (живые и мёртвые; удалённые — null) — нашествию пауков (VB_AR_WorldSiege.c), чтобы вести их к роще
+	array<EntityAI> VB_Members()
+	{
+		return m_VB_Zombies;
+	}
+
+	// сколько ещё не вылезло
+	int VB_LeftToSpawn()
+	{
+		return m_VB_Left;
+	}
+
 	// волна кончилась: все вылезли, и живых не осталось (убиты или убраны)
 	bool VB_IsOver()
 	{

@@ -9,6 +9,7 @@ class VB_AR_Favor
 {
 	static const int RPC_FAVOR = 1447186020;		// сервер -> клиент: Param3<float, float, bool> (значение, изменение, прощение)
 	static const int RPC_HOWL = 1447186021;		// сервер -> клиент: Param1<vector> — вой вдали перед волной
+	static const int RPC_SIEGE = 1447186022;	// сервер -> клиент: Param1<vector> — откуда трещат корни (нашествие нечисти)
 
 	static const int TIER_CURSED = -2;
 	static const int TIER_ENEMY = -1;
@@ -90,6 +91,19 @@ modded class PlayerBase
 			EffectSound snd = SEffectManager.PlaySound("WolfHowl_SoundSet", h.param1);
 			if (snd)
 				snd.SetAutodestroy(true);
+		}
+		else if (rpc_type == VB_AR_Favor.RPC_SIEGE)
+		{
+			// нашествие нечисти: треск корней и шёпот рощи с той стороны (звуки мода, ТЗ 2в п.5 — из того, что есть)
+			Param1<vector> sp = new Param1<vector>(vector.Zero);
+			if (!ctx.Read(sp))
+				return;
+			EffectSound crack = SEffectManager.PlaySound(VB_AR_Pulse.CREAK_SET, sp.param1);
+			if (crack)
+				crack.SetAutodestroy(true);
+			EffectSound whisper = SEffectManager.PlaySound(VB_AR_Pulse.WHISPER_SET, sp.param1);
+			if (whisper)
+				whisper.SetAutodestroy(true);
 		}
 	}
 }

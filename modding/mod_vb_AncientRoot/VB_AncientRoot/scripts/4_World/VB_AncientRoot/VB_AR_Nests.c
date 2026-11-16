@@ -96,6 +96,7 @@ class VB_AR_NestNet
 	static const int OP_SET_ACTIVE = 10;		// int сколько гнёзд ставить за рестарт (пишется в settings.json)
 	static const int OP_STAGE_UP = 11;			// int гнездо: ступень живой рощи +1 (ТЗ 2б.4, роща встаёт заново)
 	static const int OP_STAGE_DOWN = 12;		// int гнездо: ступень −1
+	static const int OP_SIEGE = 13;				// int гнездо: нашествие пауков на живую рощу сейчас (ТЗ 2в п.1)
 
 	static const int R_DENIED = 1;				// string свой SteamID
 	static const int R_BEGIN = 2;				// настройки + число гнёзд, дальше R_NEST по каждому

@@ -93,7 +93,7 @@ FrameWidgetClass VB_AR_BookRoot {
     ButtonWidgetClass VB_AR_BookTab1 {
      visible 1
      priority 1
-     position 1226 142
+     position 1226 136
      size 200 52
      hexactpos 1
      vexactpos 1
@@ -135,7 +135,7 @@ FrameWidgetClass VB_AR_BookRoot {
     ButtonWidgetClass VB_AR_BookTab2 {
      visible 1
      priority 1
-     position 1226 218
+     position 1226 206
      size 200 52
      hexactpos 1
      vexactpos 1
@@ -177,7 +177,7 @@ FrameWidgetClass VB_AR_BookRoot {
     ButtonWidgetClass VB_AR_BookTab3 {
      visible 1
      priority 1
-     position 1226 294
+     position 1226 276
      size 200 52
      hexactpos 1
      vexactpos 1
@@ -219,7 +219,7 @@ FrameWidgetClass VB_AR_BookRoot {
     ButtonWidgetClass VB_AR_BookTab4 {
      visible 1
      priority 1
-     position 1226 370
+     position 1226 346
      size 200 52
      hexactpos 1
      vexactpos 1
@@ -261,7 +261,7 @@ FrameWidgetClass VB_AR_BookRoot {
     ButtonWidgetClass VB_AR_BookTab5 {
      visible 1
      priority 1
-     position 1226 446
+     position 1226 416
      size 200 52
      hexactpos 1
      vexactpos 1
@@ -303,7 +303,7 @@ FrameWidgetClass VB_AR_BookRoot {
     ButtonWidgetClass VB_AR_BookTab6 {
      visible 1
      priority 1
-     position 1226 522
+     position 1226 486
      size 200 52
      hexactpos 1
      vexactpos 1
@@ -345,7 +345,7 @@ FrameWidgetClass VB_AR_BookRoot {
     ButtonWidgetClass VB_AR_BookTab7 {
      visible 1
      priority 1
-     position 1226 598
+     position 1226 556
      size 200 52
      hexactpos 1
      vexactpos 1
@@ -387,7 +387,7 @@ FrameWidgetClass VB_AR_BookRoot {
     ButtonWidgetClass VB_AR_BookTab8 {
      visible 1
      priority 1
-     position 1226 674
+     position 1226 626
      size 200 52
      hexactpos 1
      vexactpos 1
@@ -410,6 +410,48 @@ FrameWidgetClass VB_AR_BookRoot {
        stretch 1
       }
       TextWidgetClass VB_AR_BookTabText8 {
+       visible 1
+       ignorepointer 1
+       position 20 0
+       size 156 52
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/AmorSerifPro-Bold"
+       "exact text" 1
+       "exact text size" 21
+       "text halign" left
+       "text valign" center
+      }
+     }
+    }
+    ButtonWidgetClass VB_AR_BookTab9 {
+     visible 1
+     priority 1
+     position 1226 696
+     size 200 52
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style Empty
+     "no focus" 1
+     {
+      ImageWidgetClass VB_AR_BookTabImg9 {
+       visible 1
+       ignorepointer 1
+       position 0 0
+       size 200 52
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       mode blend
+       "src alpha" 1
+       stretch 1
+      }
+      TextWidgetClass VB_AR_BookTabText9 {
        visible 1
        ignorepointer 1
        position 20 0

@@ -2155,6 +2155,7 @@ VARIANTS = [
     ("vb_ar_pollen_brew", "pollenbrew", 923),
     ("vb_ar_wolf_fang", "wolffang", 924),
     ("vb_ar_book", "book", 925),
+    ("vb_ar_keeper_heart", "keeperheart", 926),
 ]
 
 
@@ -2393,6 +2394,63 @@ def build_book_scene(seed):
     return sc
 
 
+def build_keeper_heart_scene(seed, size=0.24):
+    """«Сердце Хранителя» (ТЗ 2в п.2): сердце Энта рощи. Бугристый узел коры, стянутый толстыми корнями, сквозь трещины
+    горит золотое ядро, из коры торчат костяные шипы, снизу свисают обрывки корней. Основа — сердцевина
+    (build_chunk_scene) в масштабе большого сердца, потом всё уменьшается до size метров."""
+    rng = np.random.default_rng(seed)
+    sc = build_chunk_scene(seed, size)
+    tubes = sc["tubes"]
+    # корни-обвязки: толще жил, корой
+    for k in range(5):
+        u = np.linspace(0, 1, 48)
+        th = 0.45 + 2.2 * u
+        ph = rng.uniform(0, 2 * math.pi) + rng.uniform(1.6, 2.6) * u
+        dirs = np.column_stack([np.sin(th) * np.cos(ph), np.sin(th) * np.sin(ph), np.cos(th)])
+        rv = 0.075 - 0.03 * u
+        pts = heart_surface(dirs) + dirs * (rv * 0.45)[:, None]
+        tubes.append(Tube(pts, rv, "root", lump=0.22, lump_freq=7.0, seed=seed + 30 + k))
+    # костяные шипы наружу (не снизу)
+    n_th = 0
+    while n_th < 9:
+        d = rng.normal(size=3)
+        d = d / np.linalg.norm(d)
+        if d[2] < -0.35:
+            continue
+        base = heart_surface(d[None, :])[0] - d * 0.03
+        ln = rng.uniform(0.22, 0.36)
+        tt = np.linspace(0, 1, 6)
+        bend = np.cross(d, [0.0, 0.0, 1.0])
+        if np.linalg.norm(bend) < 1e-3:
+            bend = np.array([1.0, 0.0, 0.0])
+        bend = bend / np.linalg.norm(bend)
+        pts = base[None, :] + d[None, :] * (tt * ln)[:, None] + bend[None, :] * (0.05 * tt ** 2)[:, None]
+        radii = 0.06 * (1 - tt) ** 1.1 + 0.006
+        tubes.append(Tube(pts, radii, "root", mat="ivory", segs=7, seed=seed + 50 + n_th))
+        n_th += 1
+    # обрывки корней снизу
+    for k in range(3):
+        a = rng.uniform(0, 2 * math.pi)
+        d0 = np.array([0.55 * math.cos(a), 0.55 * math.sin(a), -0.83])
+        d0 = d0 / np.linalg.norm(d0)
+        start = heart_surface(d0[None, :])[0]
+        u = np.linspace(0, 1, 9)
+        pts = np.column_stack([start[0] + d0[0] * 0.5 * u + 0.08 * np.sin(u * 5 + k),
+                               start[1] + d0[1] * 0.5 * u + 0.08 * np.cos(u * 4 + k),
+                               start[2] - 0.45 * u])
+        tubes.append(Tube(pts, 0.06 * (1 - u) + 0.01, "root", lump=0.2, lump_freq=8.0, seed=seed + 70 + k))
+    # ядро светится в трещинах между корнями
+    for k in range(4):
+        d = rng.normal(size=3)
+        d = d / np.linalg.norm(d)
+        p = heart_surface(d[None, :])[0] - d * 0.02
+        sc["bulbs"].append((p, rng.uniform(0.05, 0.08)))
+    sc["scale"] = size / 2.3					# с шипами и корнями габарит больше сердцевины
+    sc["item_mass"] = 1.5
+    sc["lod_items"] = True
+    return sc
+
+
 def variant_scene(kind, seed, name=""):
     if kind == "heart":
         return build_scene(seed)
@@ -2456,6 +2514,8 @@ def variant_scene(kind, seed, name=""):
         return build_wolf_fang_scene(seed)
     if kind == "book":
         return build_book_scene(seed)
+    if kind == "keeperheart":
+        return build_keeper_heart_scene(seed)
     return build_roots_scene(seed, kind)
 
 

@@ -16,6 +16,7 @@ class VB_RootGuards
 	static const string ROOT_TYPE = "VB_AR_RootPiece";
 	static const string POLLEN_TYPE = "VB_AR_Spores";
 	static const string FANG_TYPE = "VB_AR_WolfFang";
+	static const string KEEPER_HEART = "VB_AR_KeeperHeart";	// трофей Хранителя (ТЗ 2в п.2) — всегда
 	static const float FANG2_CHANCE = 0.25;		// второй клык у волка рощи (первый — всегда, по конфигу)
 
 	// состав волны: wave — номер волны у этой сердцевины (1..), level — ступень рощи (1 росток, 2 роща, 3 древняя)
@@ -105,6 +106,12 @@ class VB_RootGuards
 			drop = VB_AR_ItemsServer.VB_DropAtFeet(player, FANG_TYPE);
 			if (drop)
 				got += FANG_TYPE + " ";
+		}
+		if (body.IsKindOf(ENT))
+		{
+			drop = VB_AR_ItemsServer.VB_DropAtFeet(player, KEEPER_HEART);
+			if (drop)
+				got += KEEPER_HEART + " ";
 		}
 		if (Math.RandomFloat01() < rootChance)
 		{

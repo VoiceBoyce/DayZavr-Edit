@@ -66,6 +66,20 @@ class VB_AR_CreatureState
 		return blade;
 	}
 
+	// спит от ловушки (нашествие пауков не тянет спящего к роще — VB_AR_WorldSiege.c)
+	static bool VB_AsleepServer(DayZCreatureAI c)
+	{
+		VB_AR_CreatureState st = VB_Of(c, false);
+		return st && st.m_VB_SleepUntil > 0;
+	}
+
+	// терновая рана: идёт шагом
+	static bool VB_SlowedServer(DayZCreatureAI c)
+	{
+		VB_AR_CreatureState st = VB_Of(c, false);
+		return st && st.m_VB_ThornUntil > 0;
+	}
+
 	// ---------------- события существа ----------------
 
 	static void VB_OnHit(DayZCreatureAI c, int damageType, EntityAI source)

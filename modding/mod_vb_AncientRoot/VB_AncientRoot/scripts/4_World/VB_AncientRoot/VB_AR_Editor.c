@@ -848,6 +848,13 @@ class VB_AR_Editor
 			VB_AR_NestClient.VB_SendOp(VB_AR_NestNet.OP_NEST_TOGGLE, m_VB_CurNest);
 	}
 
+	void VB_SiegeNest()
+	{
+		if (m_VB_CurNest == 0 || m_VB_CurNest == VB_AR_NestNet.DECOR_ID)
+			return;
+		VB_AR_NestClient.VB_SendOp(VB_AR_NestNet.OP_SIEGE, m_VB_CurNest);
+	}
+
 	void VB_StageNest(bool up)
 	{
 		if (m_VB_CurNest == 0 || m_VB_CurNest == VB_AR_NestNet.DECOR_ID)
@@ -1175,6 +1182,7 @@ class VB_AR_EditorPanels : Managed
 	protected TextWidget m_VB_StageText;
 	protected INT_UIF_Button m_VB_BtnStageDown;
 	protected INT_UIF_Button m_VB_BtnStageUp;
+	protected INT_UIF_Button m_VB_BtnSiege;
 	protected INT_UIF_Button m_VB_BtnDelete;
 	protected INT_UIF_StatTile m_VB_TilePool;
 	protected INT_UIF_Stepper m_VB_ActiveStep;	// сколько гнёзд встаёт за рестарт (ActiveNests в settings.json)
@@ -1221,7 +1229,7 @@ class VB_AR_EditorPanels : Managed
 			return;
 		m_VB_Right.SetSort(SORT);
 
-		INT_UIF_Card acts = INT_UIF_Card.Create(m_VB_Bag, m_VB_Right, 0, 0, w, 662, "ГНЕЗДО", "pin", "");
+		INT_UIF_Card acts = INT_UIF_Card.Create(m_VB_Bag, m_VB_Right, 0, 0, w, 704, "ГНЕЗДО", "pin", "");
 		Widget c = acts.GetContent();
 		float cw = acts.GetContentW();
 		float y = 0;
@@ -1253,6 +1261,10 @@ class VB_AR_EditorPanels : Managed
 		m_VB_BtnStageUp = INT_UIF_Button.Create(m_VB_Bag, c, cw - 52, y, 52, bh, "+", INT_UIF_Variant.SECONDARY, "");
 		m_VB_BtnStageUp.OnClick().Insert(OnVBStageUp);
 		y += step;
+		// «Защита рощи» (ТЗ 2в п.1): нашествие пауков на эту рощу сейчас — для проверки, без ночи и перерыва
+		m_VB_BtnSiege = INT_UIF_Button.Create(m_VB_Bag, c, 0, y, cw, bh, "Нашествие нечисти", INT_UIF_Variant.WARNING, "bolt");
+		m_VB_BtnSiege.OnClick().Insert(OnVBSiege);
+		y += step;
 		m_VB_BtnDelete = INT_UIF_Button.Create(m_VB_Bag, c, 0, y, cw, bh, "Удалить гнездо", INT_UIF_Variant.DANGER, "trash");
 		m_VB_BtnDelete.OnClick().Insert(OnVBDelete);
 		y += step + 4;
@@ -1276,7 +1288,7 @@ class VB_AR_EditorPanels : Managed
 		INT_UIF_Button quit = INT_UIF_Button.Create(m_VB_Bag, c, 0, y, cw, bh, "Выйти из редактора", INT_UIF_Variant.GHOST, "logout");
 		quit.OnClick().Insert(OnVBQuit);
 
-		INT_UIF_Card status = INT_UIF_Card.Create(m_VB_Bag, m_VB_Right, 0, 674, w, 200, "СТАТУС", "info", "");
+		INT_UIF_Card status = INT_UIF_Card.Create(m_VB_Bag, m_VB_Right, 0, 716, w, 200, "СТАТУС", "info", "");
 		Widget s = status.GetContent();
 		float sw = status.GetContentW();
 		m_VB_StMode = INT_UIF_Draw.Text(s, 0, 0, sw, 20, "", 12, INT_UIF.Color(INT_UIF_ThemeKeys.TEAL));
@@ -1513,6 +1525,7 @@ class VB_AR_EditorPanels : Managed
 			stageNow = VB_AR_NestClient.VB_StageOf(nest.Id);
 		m_VB_BtnStageDown.SetEnabled(stageNow > 1);
 		m_VB_BtnStageUp.SetEnabled(stageNow > 0 && stageNow < 3);
+		m_VB_BtnSiege.SetEnabled(stageNow > 0);
 		if (stageNow > 0)
 			m_VB_StageText.SetText("Ступень рощи: " + VB_AR_Editor.VB_StageName(stageNow));
 		else
@@ -1677,6 +1690,11 @@ class VB_AR_EditorPanels : Managed
 	protected void OnVBStageDown(INT_UIF_Button b)
 	{
 		VB_AR_Editor.VB_Get().VB_StageNest(false);
+	}
+
+	protected void OnVBSiege(INT_UIF_Button b)
+	{
+		VB_AR_Editor.VB_Get().VB_SiegeNest();
 	}
 
 	protected void OnVBStageUp(INT_UIF_Button b)

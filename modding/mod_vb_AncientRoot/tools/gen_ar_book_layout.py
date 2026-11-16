@@ -20,7 +20,7 @@ OUT = os.path.join(HERE, "..", "VB_AncientRoot", "gui", "layouts", "vb_ar_book.l
 
 FONT = "gui/fonts/AmorSerifPro"
 FONT_B = "gui/fonts/AmorSerifPro-Bold"
-TABS = 9
+TABS = 10
 PAGE_W, PAGE_H = 560, 740
 
 
@@ -117,7 +117,7 @@ def main():
             image("VB_AR_BookTabImg%d" % i, 0, 0, 200, 52),
             text("VB_AR_BookTabText%d" % i, 20, 0, 156, 52, 21, bold=True),
         ]
-        book.append(widget("ButtonWidgetClass", "VB_AR_BookTab%d" % i, 1226, 66 + i * 76, 200, 52,
+        book.append(widget("ButtonWidgetClass", "VB_AR_BookTab%d" % i, 1226, 66 + i * 70, 200, 52,
                            ['style Empty', '"no focus" 1'], children=tab, ignore=False, prio=1))
     book.append(image("VB_AR_BookPageL", 40, 40, PAGE_W, PAGE_H, prio=2, ignore=False))
     book.append(image("VB_AR_BookPageR", 640, 40, PAGE_W, PAGE_H, prio=2, ignore=False, extra=['"flip u" 1']))

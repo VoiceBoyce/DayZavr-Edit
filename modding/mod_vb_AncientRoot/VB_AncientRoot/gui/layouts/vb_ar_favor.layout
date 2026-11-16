@@ -2,7 +2,7 @@ FrameWidgetClass VB_AR_FavorRoot {
  visible 0
  ignorepointer 1
  position 0 4
- size 640 48
+ size 640 150
  halign center_ref
  valign bottom_ref
  hexactpos 1
@@ -13,7 +13,7 @@ FrameWidgetClass VB_AR_FavorRoot {
   ImageWidgetClass VB_AR_FavorDisc {
    visible 1
    ignorepointer 1
-   position 82 8
+   position 82 110
    size 32 32
    hexactpos 1
    vexactpos 1
@@ -26,7 +26,7 @@ FrameWidgetClass VB_AR_FavorRoot {
   ImageWidgetClass VB_AR_FavorRune {
    visible 1
    ignorepointer 1
-   position 82 8
+   position 82 110
    size 32 32
    hexactpos 1
    vexactpos 1
@@ -39,7 +39,7 @@ FrameWidgetClass VB_AR_FavorRoot {
   FrameWidgetClass VB_AR_FavorTrack {
    visible 1
    ignorepointer 1
-   position 120 0
+   position 120 102
    size 400 48
    hexactpos 1
    vexactpos 1
@@ -109,7 +109,7 @@ FrameWidgetClass VB_AR_FavorRoot {
   TextWidgetClass VB_AR_FavorName {
    visible 1
    ignorepointer 1
-   position 528 0
+   position 528 102
    size 112 48
    hexactpos 1
    vexactpos 1
@@ -124,8 +124,23 @@ FrameWidgetClass VB_AR_FavorRoot {
   TextWidgetClass VB_AR_FavorDelta {
    visible 0
    ignorepointer 1
-   position 0 -20
+   position 0 82
    size 60 20
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   "exact text size" 17
+   "text halign" center
+   "text valign" center
+  }
+  TextWidgetClass VB_AR_FavorSiege {
+   visible 0
+   ignorepointer 1
+   position 0 0
+   size 640 26
    hexactpos 1
    vexactpos 1
    hexactsize 1

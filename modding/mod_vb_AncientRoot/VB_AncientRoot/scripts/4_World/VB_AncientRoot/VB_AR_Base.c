@@ -447,6 +447,16 @@ class VB_AR_Heart extends VB_AR_Base
 	static const int LIMIT_MAX = 5;			// верх синхронизации пыльцы и подношений (у древней по 5)
 	protected int m_VB_Stage = STAGE_GROVE;
 
+	// «Защита рощи» (ТЗ 2в п.1, сервер VB_AR_WorldSiege.c): роща в осаде пауков и её сила 0..100 — синхронизируются.
+	// Клиент: худ «Нечисть грызёт корни · сила N%», «Коснуться рощи», треск корней, когда сила падает; роща бьётся
+	// чаще (как при резке, VB_IsDisturbed). Даров, сбора и отлома в осаде нет.
+	static const int SIEGE_CRACK_MS = 1200;		// треск не чаще
+	static const float SIEGE_CRACK_DIST = 80.0;
+	protected bool m_VB_Siege;
+	protected int m_VB_SiegePower = 100;
+	protected int m_VB_SiegeSeenPower = 100;	// клиент: прошлое значение — падает, значит грызут
+	protected int m_VB_SiegeCrackMs = -100000;
+
 	void VB_AR_Heart()
 	{
 		RegisterNetSyncVariableBool("m_VB_Dead");
@@ -454,6 +464,37 @@ class VB_AR_Heart extends VB_AR_Base
 		RegisterNetSyncVariableInt("m_VB_SporesLeft", 0, LIMIT_MAX);
 		RegisterNetSyncVariableInt("m_VB_OffersLeft", 0, LIMIT_MAX);
 		RegisterNetSyncVariableInt("m_VB_Stage", STAGE_SPROUT, STAGE_ANCIENT);
+		RegisterNetSyncVariableBool("m_VB_Siege");
+		RegisterNetSyncVariableInt("m_VB_SiegePower", 0, 100);
+	}
+
+	bool VB_UnderSiege()
+	{
+		return m_VB_Siege && !m_VB_Dead;
+	}
+
+	int VB_SiegePower()
+	{
+		return m_VB_SiegePower;
+	}
+
+	// клиент: сила падает — трещат корни (не чаще SIEGE_CRACK_MS, только если игрок рядом)
+	protected void VB_SiegeSoundClient()
+	{
+		int was = m_VB_SiegeSeenPower;
+		m_VB_SiegeSeenPower = m_VB_SiegePower;
+		if (!m_VB_Siege || m_VB_SiegePower >= was)
+			return;
+		int now = g_Game.GetTime();
+		if (now - m_VB_SiegeCrackMs < SIEGE_CRACK_MS)
+			return;
+		Man me = g_Game.GetPlayer();
+		if (!me || vector.DistanceSq(me.GetPosition(), GetPosition()) > SIEGE_CRACK_DIST * SIEGE_CRACK_DIST)
+			return;
+		m_VB_SiegeCrackMs = now;
+		EffectSound snd = SEffectManager.PlaySound(VB_AR_Pulse.CREAK_SET, GetPosition());
+		if (snd)
+			snd.SetAutodestroy(true);
 	}
 
 	int VB_Stage()
@@ -500,6 +541,8 @@ class VB_AR_Heart extends VB_AR_Base
 	{
 		super.OnVariablesSynchronized();
 		VB_ApplyStageScale();
+		if (!g_Game.IsDedicatedServer())
+			VB_SiegeSoundClient();
 	}
 
 	// пыльцы и подношений за рестарт по ступени: росток 1, роща 3, древняя 5
@@ -524,7 +567,7 @@ class VB_AR_Heart extends VB_AR_Base
 
 	override bool VB_IsDisturbed()
 	{
-		return m_VB_Disturbed && !m_VB_Dead;
+		return (m_VB_Disturbed || m_VB_Siege) && !m_VB_Dead;		// режут или грызёт нечисть — роща не спит
 	}
 
 	override bool VB_IsHeart()

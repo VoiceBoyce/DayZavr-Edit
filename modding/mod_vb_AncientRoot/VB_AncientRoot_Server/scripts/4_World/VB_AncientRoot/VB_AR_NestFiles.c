@@ -37,6 +37,11 @@ class VB_AR_NestSettings
 	int FeedOffers = 2;				// приняла за рестарт столько подношений — ещё +1 очко
 	int AncientLife = 4;			// древняя живёт столько рестартов и уходит в землю
 	int MaxAncient = 1;				// древних одновременно не больше
+	// «Защита рощи» — нашествие пауков (ТЗ 2в п.1, VB_AR_WorldSiege.c)
+	int SiegeCheckMinutes = 10;		// как часто ночью бросать жребий
+	float SiegeChance = 0.15;		// шанс нашествия на проверке (0 — выключено)
+	int SiegeCooldownMinutes = 120;	// на одну рощу не чаще
+	float SiegePlayerDistance = 200;	// м: нападают только на рощу, у которой есть игрок
 
 	void VB_AR_NestSettings()
 	{
@@ -57,6 +62,10 @@ class VB_AR_NestSettings
 		FeedOffers = -1;
 		AncientLife = -1;
 		MaxAncient = -1;
+		SiegeCheckMinutes = -1;
+		SiegeChance = -1;
+		SiegeCooldownMinutes = -1;
+		SiegePlayerDistance = -1;
 	}
 
 	// значения по умолчанию для пропущенных ключей и пределы для ручных правок
@@ -100,6 +109,20 @@ class VB_AR_NestSettings
 			AncientLife = 1000;
 		if (MaxAncient < 0)
 			MaxAncient = 1;
+		if (SiegeCheckMinutes < 1)
+			SiegeCheckMinutes = 10;
+		if (SiegeCheckMinutes > 1440)
+			SiegeCheckMinutes = 1440;
+		if (!(SiegeChance >= 0))		// -1 (ключа нет) и NaN
+			SiegeChance = 0.15;
+		if (SiegeChance > 1)
+			SiegeChance = 1;
+		if (SiegeCooldownMinutes < 0)
+			SiegeCooldownMinutes = 120;
+		if (!(SiegePlayerDistance >= 0))
+			SiegePlayerDistance = 200;
+		if (SiegePlayerDistance > 5000)
+			SiegePlayerDistance = 5000;
 	}
 }
 
