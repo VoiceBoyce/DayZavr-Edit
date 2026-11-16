@@ -30,6 +30,7 @@ modded class VB_AR_Heart
 	protected bool m_VB_AlarmDecaying;
 	protected ref VB_AR_Horde m_VB_CutHorde;		// волна вырезания (жива ли — VB_IsOver)
 	protected int m_VB_CutWaves;
+	protected bool m_VB_KeeperDone;				// Хранитель уже выходил на вырезание в этот рестарт
 
 	int VB_AlarmLevel()
 	{
@@ -44,6 +45,27 @@ modded class VB_AR_Heart
 		m_VB_SporesLeft = lim;
 		m_VB_OffersLeft = lim;
 		VB_ApplyStageScale();		// размер и коллизия по ступени (клиент ставит тот же размер сам)
+		SetSynchDirty();
+	}
+
+	// Сколько уже взято у этой сердцевины в этот рестарт. Роща, выросшая посреди рестарта (нашествие, ритуал роста),
+	// встаёт заново новым сердцем — оно получает это через VB_CarryServer, иначе дары и пыльца выдавались бы заново.
+	void VB_SpentServer(out int offers, out int spores, out int cutWaves, out bool keeperDone)
+	{
+		int lim = VB_LimitByStage(m_VB_Stage);
+		offers = Math.Max(0, lim - m_VB_OffersLeft);
+		spores = Math.Max(0, lim - m_VB_SporesLeft);
+		cutWaves = m_VB_CutWaves;
+		keeperDone = m_VB_KeeperDone;
+	}
+
+	void VB_CarryServer(int offers, int spores, int cutWaves, bool keeperDone)
+	{
+		int lim = VB_LimitByStage(m_VB_Stage);
+		m_VB_OffersLeft = Math.Max(0, lim - offers);
+		m_VB_SporesLeft = Math.Max(0, lim - spores);
+		m_VB_CutWaves = cutWaves;
+		m_VB_KeeperDone = keeperDone;
 		SetSynchDirty();
 	}
 
@@ -89,14 +111,18 @@ modded class VB_AR_Heart
 	}
 
 	// волна стражей номер level (состав — VB_RootGuards.VB_WaveTypes по ступени рощи). Волна от сбора (1-я, 2-я)
-	// тормозит рост: в этот рестарт роща не растёт (VB_AR_Nests.VB_OnGroveDisturbed).
+	// тормозит рост: в этот рестарт роща не растёт (VB_AR_Nests.VB_OnGroveDisturbed). Хранитель (3-я волна у древней)
+	// выходит только раз за рестарт: иначе «начал резать и бросил» звал бы его снова без штрафа.
 	protected VB_AR_Horde VB_GuardWaveServer(int level, PlayerBase who)
 	{
 		if (level < 3)
 			VB_AR_Nests.VB_OnGroveDisturbed(this);
-		VB_AR_Horde wave = VB_AR_Horde.VB_SpawnWaveTypes(GetPosition(), VB_RootGuards.VB_WaveTypes(level, m_VB_Stage));
+		bool keeper = level >= 3 && m_VB_Stage >= STAGE_ANCIENT && !m_VB_KeeperDone;
+		VB_AR_Horde wave = VB_AR_Horde.VB_SpawnWaveTypes(GetPosition(), VB_RootGuards.VB_WaveTypes(level, m_VB_Stage, keeper));
 		if (!wave)
 			return null;		// потолок стражей на сервере или рядом
+		if (keeper)
+			m_VB_KeeperDone = true;
 
 		string whoStr = VB_AR_ItemsServer.VB_Who(who);
 		string at = GetPosition().ToString();
@@ -208,6 +234,7 @@ modded class VB_AR_Heart
 
 		bool isFriend = favorTier == VB_AR_Favor.TIER_FRIEND;
 		string gifts = VB_GiveGiftsServer(player, tier, isFriend, m_VB_Stage);
+		bool gaveIncl = gifts.Contains(AMBER_INCL);		// ритуал янтаря не даст второго вкрапления за ту же руну
 		VB_BlessServer(player, "Роща приняла дар");
 		float favorAdd = VB_AR_FavorServer.OFFER_MEAT;
 		if (tier == VB_AR_Offer.TIER_BEST)
@@ -224,7 +251,7 @@ modded class VB_AR_Heart
 		string msg = "[VB_AncientRoot] подношение в " + at + ": " + who + " отдал " + what + " (ценность " + t + "), дар: " + gifts;
 		msg += "; тревога " + ab + " -> 0, подношений осталось " + left;
 		Print("" + msg);
-		VB_AR_Ritual.VB_AfterGift(this, player, part);		// мясо или руна — начало или конец ритуала
+		VB_AR_Ritual.VB_AfterGift(this, player, part, gaveIncl);		// мясо или руна — начало или конец ритуала
 		return true;
 	}
 
@@ -303,7 +330,7 @@ modded class VB_AR_Heart
 }
 
 // Благословение рощи: полчаса медленного лечения, стражи не выбирают целью. Хранится в памяти сервера (до рестарта),
-// по SteamID: перезаход не снимает.
+// по SteamID: перезаход не снимает, смерть снимает (VB_Clear из PlayerBase.EEKilled ниже).
 class VB_AR_Blessing
 {
 	static const int TICK_MS = 10000;
@@ -343,6 +370,16 @@ class VB_AR_Blessing
 		if (id == "" || !s_VB_Until.Contains(id))
 			return false;
 		return s_VB_Until.Get(id) > g_Game.GetTime();
+	}
+
+	// снять молча (смерть)
+	static void VB_Clear(PlayerBase p)
+	{
+		if (!s_VB_Until || s_VB_Until.Count() == 0)
+			return;
+		string id = VB_Id(p);
+		if (id != "")
+			s_VB_Until.Remove(id);
 	}
 
 	// снять (ударил стража)
@@ -408,6 +445,13 @@ modded class PlayerBase
 			return false;
 		return true;
 	}
+
+	// Благословение не переживает смерть: новый персонаж начинает без него
+	override void EEKilled(Object killer)
+	{
+		VB_AR_Blessing.VB_Clear(this);
+		super.EEKilled(killer);
+	}
 }
 
 // ударил стража — Благословение снято (волки и Заноза — животные, Хранитель — по классу зомби)
@@ -424,10 +468,31 @@ class VB_AR_GuardHit
 			VB_AR_FavorServer.VB_Anger(p, "Ты поднял руку на стража рощи.");
 	}
 
-	// страж убит игроком: расположение −3, Хранитель −10
+	// Кто убил: killer, а если существо умерло само (терновая рана — кровь, killer пуст или оно само) — владелец
+	// клинка, ранившего его недавно (VB_AR_CreatureState, VB_AR_CreatureServer.c). Звать ДО super.EEKilled: нижний
+	// слой (CreatureServer) в EEKilled гасит состояние раны.
+	static Object VB_KillerOf(EntityAI body, Object killer)
+	{
+		if (killer && killer != body)
+			return killer;
+		DayZCreatureAI c = DayZCreatureAI.Cast(body);
+		if (!c)
+			return killer;
+		VB_AR_CreatureState st = VB_AR_CreatureState.VB_Of(c, false);
+		if (!st)
+			return killer;
+		PlayerBase owner;
+		st.VB_RecentBlade(owner);
+		if (owner)
+			return owner;
+		return killer;
+	}
+
+	// страж убит игроком: расположение −3, Хранитель −10. Призванный (волна за дурную славу, волк светоча, стая
+	// Хранителя) — без штрафа: самооборона не должна топить расположение ещё ниже
 	static void VB_OnKilled(EntityAI guard, Object killer)
 	{
-		if (!killer || !VB_AR_Guard.VB_Is(guard))
+		if (!killer || !VB_AR_Guard.VB_Is(guard) || VB_RootGuards.VB_Summoned(guard))
 			return;
 		PlayerBase p = PlayerBase.Cast(killer);
 		EntityAI ek = EntityAI.Cast(killer);
@@ -452,9 +517,10 @@ modded class AnimalBase
 
 	override void EEKilled(Object killer)
 	{
+		Object who = VB_AR_GuardHit.VB_KillerOf(this, killer);		// до super: смерть от терновой раны
 		super.EEKilled(killer);
-		VB_AR_GuardHit.VB_OnKilled(this, killer);
-		VB_AR_FavorServer.VB_OnCreatureKilled(this, killer);		// пауки MSFZ — изгнание нечисти
+		VB_AR_GuardHit.VB_OnKilled(this, who);
+		VB_AR_FavorServer.VB_OnCreatureKilled(this, who);		// пауки MSFZ — изгнание нечисти
 	}
 }
 
@@ -468,9 +534,10 @@ modded class ZombieBase
 
 	override void EEKilled(Object killer)
 	{
+		Object who = VB_AR_GuardHit.VB_KillerOf(this, killer);		// до super: смерть от терновой раны
 		super.EEKilled(killer);
-		VB_AR_GuardHit.VB_OnKilled(this, killer);
-		VB_AR_FavorServer.VB_OnCreatureKilled(this, killer);		// ERA-зомби — изгнание нечисти
+		VB_AR_GuardHit.VB_OnKilled(this, who);
+		VB_AR_FavorServer.VB_OnCreatureKilled(this, who);		// ERA-зомби — изгнание нечисти
 	}
 }
 
@@ -500,14 +567,25 @@ modded class VB_ActionPlantSeed
 		VB_AR_Heart heart = VB_AR_Recovery.VB_DeadHeartNear(p.GetPosition(), VB_AR_Recovery.SEED_NEAR);
 		if (!heart)
 			return;
-		if (!VB_AR_Nests.VB_OnSeedPlanted(heart))
+		int res = VB_AR_Nests.VB_OnSeedPlanted(heart);
+		if (res == VB_AR_Nests.SEED_ALREADY)
 		{
 			NotificationSystem.SendNotificationToPlayerExtended(p, 6, "Семя не прижилось", "Здесь уже посажено семя.");
 			return;
 		}
+		if (res != VB_AR_Nests.SEED_OK)
+		{
+			NotificationSystem.SendNotificationToPlayerExtended(p, 6, "Семя не прижилось", "Эта сердцевина не из рощ леса — здесь роща не прорастёт.");
+			return;
+		}
 		item.DeleteSafe();
-		VB_AR_FavorServer.VB_Add(p, VB_AR_FavorServer.SEED, "посадил Семя Древнего корня");
-		NotificationSystem.SendNotificationToPlayerExtended(p, 7, "Семя посажено", "К следующему рестарту здесь прорастёт новая роща.");
+		// расположение за Семя — не тому, кто в этот рестарт вырезал рощу (иначе «вырезал и тут же посадил» почти
+		// бесплатно), и не чаще раза в сутки (VB_AR_FavorServer.VB_SeedFavor)
+		string why = VB_AR_FavorServer.VB_SeedFavor(p);
+		string text = "К следующему рестарту здесь прорастёт новая роща.";
+		if (why != "")
+			text = text + " " + why;
+		NotificationSystem.SendNotificationToPlayerExtended(p, 7, "Семя посажено", text);
 	}
 }
 

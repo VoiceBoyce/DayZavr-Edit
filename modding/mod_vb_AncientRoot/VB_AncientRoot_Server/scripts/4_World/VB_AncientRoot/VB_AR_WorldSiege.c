@@ -14,8 +14,9 @@
 // «за 1,5 минуты игрок не успеет» — было 2/с с паука без потолка и без паузы перед первой волной, роща гибла за ~1,5 мин).
 // Сила и «в осаде» синхронизируются (худ, «Коснуться рощи», треск корней у клиента; роща не принимает даров,
 // сбор и отлом закрыты).
-//   Победа — все три волны вылезли и перебиты не позже FINISH_MS после третьей: каждому защитнику (был в DEFEND_DIST
-//     за время нашествия и сейчас жив) — +WIN_FAVOR расположения, янтарь и пыльца у ног (у древней ещё вкрапление);
+//   Победа — все три волны вылезли и перебиты не позже FINISH_MS после третьей: каждому защитнику (по SteamID провёл
+//     в DEFEND_DIST от рощи суммарно не меньше DEFEND_MIN_MS за нашествие — время копим по тикам — и жив в момент
+//     победы) — +WIN_FAVOR расположения, янтарь и пыльца у ног (у древней ещё вкрапление);
 //     роща сразу на ступень вверх (VB_AR_Nests.VB_OnGroveDefended).
 //   Сила 0 — роща увядает (как вырезанная, но без добычи и без штрафа): гнездо гаснет, прорастание как после резки.
 //   Время вышло — пауки уходят, награды нет, сила возвращается.
@@ -38,6 +39,7 @@ class VB_AR_Siege
 	static const float FIGHT_DIST = 12.0;		// игрок ближе к пауку — паук дерётся сам, не идёт к роще
 	static const float CALL_DIST = 400.0;		// кому слать зов и итог
 	static const float DEFEND_DIST = 80.0;		// кто считается защитником
+	static const int DEFEND_MIN_MS = 60000;		// столько всего пробыть в DEFEND_DIST за нашествие, чтобы получить награду
 	static const float SOUND_DIST = 40.0;		// треск — на этом расстоянии от игрока в сторону рощи
 	static const float WIN_FAVOR = 10.0;
 	static const float MOVE_SPEED = 3.0;		// шкала зверей (ваниль DayZAnimal.c): 2 шаг, 3 рысь, 5 бег
@@ -69,8 +71,9 @@ class VB_AR_Siege
 	protected int m_VB_StartMs;
 	protected int m_VB_Spawned;
 	protected ref array<ref VB_AR_Horde> m_VB_Hordes;
-	protected ref array<EntityAI> m_VB_Spiders;
-	protected ref TStringArray m_VB_Defenders;
+	protected ref array<EntityAI> m_VB_Spiders;		// живые пауки, которых ведём
+	protected ref array<EntityAI> m_VB_Seen;		// все уже учтённые пауки (живые и мёртвые; удалённые — null)
+	protected ref map<string, int> m_VB_DefendMs;	// SteamID -> сколько мс провёл в DEFEND_DIST за нашествие
 	protected bool m_VB_Leaving;
 	protected int m_VB_LeaveUntil;
 	protected string m_VB_Why;
@@ -175,7 +178,8 @@ class VB_AR_Siege
 		m_VB_Why = why;
 		m_VB_Hordes = new array<ref VB_AR_Horde>;
 		m_VB_Spiders = new array<EntityAI>;
-		m_VB_Defenders = new TStringArray;
+		m_VB_Seen = new array<EntityAI>;
+		m_VB_DefendMs = new map<string, int>;
 		m_VB_StartMs = g_Game.GetTime();
 		s_VB_LastAt.Set(VB_Key(m_VB_Center), m_VB_StartMs);
 
@@ -237,7 +241,8 @@ class VB_AR_Siege
 		Print("[VB_AncientRoot] нашествие: волна " + w + ", пауков " + c);
 	}
 
-	// новые пауки из волн — в общий список
+	// новые пауки из волн: каждого учитываем один раз (m_VB_Seen; иначе убитый, выпавший из m_VB_Spiders, вернулся бы
+	// туда из списка волны и посчитался снова), вести — только живых
 	protected void VB_Collect()
 	{
 		array<EntityAI> members;
@@ -248,13 +253,32 @@ class VB_AR_Siege
 			members = h.VB_Members();
 			foreach (EntityAI e : members)
 			{
-				if (e && m_VB_Spiders.Find(e) < 0)
-				{
+				if (!e || m_VB_Seen.Find(e) >= 0)
+					continue;
+				m_VB_Seen.Insert(e);
+				m_VB_Spawned++;
+				if (e.IsAlive())
 					m_VB_Spiders.Insert(e);
-					m_VB_Spawned++;
-				}
 			}
 		}
+	}
+
+	// защитник — SteamID, набравший в DEFEND_DIST не меньше DEFEND_MIN_MS (жив ли он сейчас — проверяет VB_Reward)
+	protected bool VB_IsDefender(string id)
+	{
+		int ms;
+		return m_VB_DefendMs.Find(id, ms) && ms >= DEFEND_MIN_MS;
+	}
+
+	protected int VB_DefenderCount()
+	{
+		int n = 0;
+		foreach (string id, int ms : m_VB_DefendMs)
+		{
+			if (ms >= DEFEND_MIN_MS)
+				n++;
+		}
+		return n;
 	}
 
 	protected bool VB_AllSpawned()
@@ -310,6 +334,8 @@ class VB_AR_Siege
 		ic.OverrideAlertLevel(true, true, 1, 0.2);
 	}
 
+	// отпустить: ИИ решает сам. Скорость сна (0) и шаг от терновой раны не снимаем — их держит состояние существа
+	// (VB_AR_CreatureServer.c, те же значения, что ставит оно)
 	protected static void VB_Release(DayZAnimal an)
 	{
 		DayZAnimalInputController ic = DayZAnimalInputController.Cast(an.GetInputController());
@@ -318,7 +344,12 @@ class VB_AR_Siege
 		ic.OverrideBehaviourSlot(false, 0);
 		ic.OverrideBehaviourAction(false, 0);
 		ic.OverrideTurnSpeed(false, 0);
-		ic.OverrideMovementSpeed(false, 0);
+		if (VB_AR_CreatureState.VB_AsleepServer(an))
+			ic.OverrideMovementSpeed(true, 0);
+		else if (VB_AR_CreatureState.VB_SlowedServer(an))
+			ic.OverrideMovementSpeed(true, VB_AR_CreatureState.ANIMAL_SLOW);
+		else
+			ic.OverrideMovementSpeed(false, 0);
 		ic.OverrideHeading(false, 0);
 		ic.OverrideAlertLevel(false, false, 0, 0);
 	}
@@ -343,8 +374,9 @@ class VB_AR_Siege
 			VB_RaiseWave();
 		VB_Collect();
 
-		// защитники: кто был рядом за время нашествия
+		// защитники: копим время рядом с рощей по SteamID (один тик — TICK_MS)
 		string id;
+		int had;
 		float defSq = DEFEND_DIST * DEFEND_DIST;
 		foreach (Man m : players)
 		{
@@ -353,8 +385,9 @@ class VB_AR_Siege
 			if (vector.DistanceSq(m.GetPosition(), m_VB_Center) > defSq)
 				continue;
 			id = m.GetIdentity().GetPlainId();
-			if (m_VB_Defenders.Find(id) < 0)
-				m_VB_Defenders.Insert(id);
+			had = 0;
+			m_VB_DefendMs.Find(id, had);
+			m_VB_DefendMs.Set(id, had + TICK_MS);
 		}
 
 		// пауки: к сердцевине, у неё — грызть
@@ -425,7 +458,7 @@ class VB_AR_Siege
 	protected void VB_End(int how)
 	{
 		string at = m_VB_Center.ToString();
-		int defCount = m_VB_Defenders.Count();
+		int defCount = VB_DefenderCount();
 		string defN = defCount.ToString();
 		// осаду снять до смены ступени: роща может встать заново другим сердцем
 		if (m_VB_Heart && how != END_WITHER)
@@ -459,7 +492,7 @@ class VB_AR_Siege
 		m_VB_LeaveUntil = g_Game.GetTime() + LEAVE_MS;
 	}
 
-	// победа: каждому живому защитнику — расположение и дар у ног
+	// победа: каждому живому защитнику (набрал DEFEND_MIN_MS у рощи) — расположение и дар у ног
 	protected void VB_Reward(string grew)
 	{
 		array<Man> players = new array<Man>;
@@ -474,7 +507,7 @@ class VB_AR_Siege
 			p = PlayerBase.Cast(m);
 			if (!p || !p.IsAlive() || !p.GetIdentity())
 				continue;
-			if (m_VB_Defenders.Find(p.GetIdentity().GetPlainId()) < 0)
+			if (!VB_IsDefender(p.GetIdentity().GetPlainId()))
 				continue;
 			VB_AR_FavorServer.VB_Add(p, WIN_FAVOR, "отстоял рощу от нечисти");
 			VB_AR_ItemsServer.VB_DropAtFeet(p, AMBER);

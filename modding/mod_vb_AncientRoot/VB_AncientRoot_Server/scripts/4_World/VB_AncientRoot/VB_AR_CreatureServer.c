@@ -4,6 +4,9 @@
 //   Терновая рана — «Терновый клинок»: VB_AR_Blade.BLEED_MS раз в секунду минус BLEED_DPS здоровья и шаг вместо бега
 //   (OverrideMovementSpeed: зомби 1 — шаг, зверю 2 — шаг; шкала зверей из ванили DayZAnimal.c, зомби 0..3).
 //   Кормление клинка: убил клинком или его раной (смерть без убийцы не позже KILL_MS после удара).
+//   Крупные (GetMaxHealth("", "Health") > BIG_HP: Хранитель рощи, боссы VB_AnomaliesBosses, крупные мутанты) не засыпают
+//   и не переходят на шаг — урон раны идёт. Снимаем только те оверрайды (SetKeepInIdle, OverrideMovementSpeed), что
+//   поставили сами: свои ограничения скорости у чужих скриптов (боссы, нашествие) не трогаем.
 // Состояние — отдельный объект у существа (создаётся при первом сне или ране): DayZCreatureAI объявлен в 3_Game,
 // и modded его из 4_World не делаем — поля живут в modded ZombieBase и AnimalBase, логика общая здесь.
 
@@ -12,6 +15,7 @@ class VB_AR_CreatureState
 	static const int KILL_MS = 10000;		// смерть без убийцы позже — уже не от клинка (рана идёт BLEED_MS)
 	static const float ZOMBIE_SLOW = 1.0;
 	static const float ANIMAL_SLOW = 2.0;
+	static const float BIG_HP = 1000.0;		// крупнее — сон и шаг не действуют
 
 	protected DayZCreatureAI m_VB_Owner;	// не ref: удалённое существо становится null
 	protected int m_VB_SleepUntil;			// g_Game.GetTime(); 0 — не спит
@@ -19,6 +23,8 @@ class VB_AR_CreatureState
 	protected VB_AR_Blade m_VB_Blade;		// последний удар клинком
 	protected PlayerBase m_VB_BladeOwner;
 	protected int m_VB_BladeHitMs;
+	protected bool m_VB_IdleSet;			// мы включили SetKeepInIdle — нам и выключать
+	protected bool m_VB_SpeedSet;			// мы включили OverrideMovementSpeed — нам и снимать
 
 	void VB_AR_CreatureState(DayZCreatureAI owner)
 	{
@@ -66,6 +72,12 @@ class VB_AR_CreatureState
 		return blade;
 	}
 
+	// крупное существо: сон и шаг на него не действуют
+	static bool VB_IsBig(DayZCreatureAI c)
+	{
+		return c && c.GetMaxHealth("", "Health") > BIG_HP;
+	}
+
 	// спит от ловушки (нашествие пауков не тянет спящего к роще — VB_AR_WorldSiege.c)
 	static bool VB_AsleepServer(DayZCreatureAI c)
 	{
@@ -73,11 +85,11 @@ class VB_AR_CreatureState
 		return st && st.m_VB_SleepUntil > 0;
 	}
 
-	// терновая рана: идёт шагом
+	// терновая рана держит на шаге (у крупных рана без шага — false)
 	static bool VB_SlowedServer(DayZCreatureAI c)
 	{
 		VB_AR_CreatureState st = VB_Of(c, false);
-		return st && st.m_VB_ThornUntil > 0;
+		return st && st.m_VB_ThornUntil > 0 && !VB_IsBig(c);
 	}
 
 	// ---------------- события существа ----------------
@@ -116,9 +128,10 @@ class VB_AR_CreatureState
 
 	// ---------------- сон ----------------
 
+	// крупных не усыпляет (false — не уснул)
 	bool VB_Sleep(int ms)
 	{
-		if (!m_VB_Owner || !m_VB_Owner.IsAlive())
+		if (!m_VB_Owner || !m_VB_Owner.IsAlive() || VB_IsBig(m_VB_Owner))
 			return false;
 		AIAgent ai = m_VB_Owner.GetAIAgent();
 		if (!ai)
@@ -126,6 +139,7 @@ class VB_AR_CreatureState
 
 		m_VB_SleepUntil = g_Game.GetTime() + ms;
 		ai.SetKeepInIdle(true);
+		m_VB_IdleSet = true;
 		VB_ApplySpeed();
 		ScriptCallQueue q = g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY);
 		q.Remove(VB_Wake);
@@ -141,9 +155,13 @@ class VB_AR_CreatureState
 		m_VB_SleepUntil = 0;
 		if (!m_VB_Owner || !m_VB_Owner.IsAlive())
 			return;
-		AIAgent ai = m_VB_Owner.GetAIAgent();
-		if (ai)
-			ai.SetKeepInIdle(false);
+		if (m_VB_IdleSet)
+		{
+			m_VB_IdleSet = false;
+			AIAgent ai = m_VB_Owner.GetAIAgent();
+			if (ai)
+				ai.SetKeepInIdle(false);
+		}
 		VB_ApplySpeed();
 	}
 
@@ -195,11 +213,15 @@ class VB_AR_CreatureState
 
 	// ---------------- общее ----------------
 
-	// скорость: спит — стоит, ранен — шагом, иначе как решит ИИ
+	// скорость: спит — стоит, ранен — шагом (крупные — нет), иначе как решит ИИ; снимаем только свой оверрайд
 	protected void VB_ApplySpeed()
 	{
 		if (!m_VB_Owner)
 			return;
+		bool sleep = m_VB_SleepUntil > 0;
+		bool walk = m_VB_ThornUntil > 0 && !VB_IsBig(m_VB_Owner);
+		if (!sleep && !walk && !m_VB_SpeedSet)
+			return;					// не ставили — не трогаем (чужой оверрайд скорости останется)
 		DayZCreatureAIInputController ic;
 		float slow = ZOMBIE_SLOW;
 		DayZInfected inf = DayZInfected.Cast(m_VB_Owner);
@@ -217,12 +239,21 @@ class VB_AR_CreatureState
 		if (!ic)
 			return;
 
-		if (m_VB_SleepUntil > 0)
+		if (sleep)
+		{
 			ic.OverrideMovementSpeed(true, 0);
-		else if (m_VB_ThornUntil > 0)
+			m_VB_SpeedSet = true;
+		}
+		else if (walk)
+		{
 			ic.OverrideMovementSpeed(true, slow);
+			m_VB_SpeedSet = true;
+		}
 		else
+		{
 			ic.OverrideMovementSpeed(false, 0);
+			m_VB_SpeedSet = false;
+		}
 	}
 
 	void VB_Stop()

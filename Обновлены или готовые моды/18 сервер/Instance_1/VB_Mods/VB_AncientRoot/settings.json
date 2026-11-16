@@ -13,6 +13,7 @@
     "FeedOffers": 2,
     "AncientLife": 4,
     "MaxAncient": 1,
+    "GrowMinSessionMinutes": 60,
     "SiegeCheckMinutes": 10,
     "SiegeChance": 0.15,
     "SiegeCooldownMinutes": 120,

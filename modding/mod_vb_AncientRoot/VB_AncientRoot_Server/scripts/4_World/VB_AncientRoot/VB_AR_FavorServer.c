@@ -6,7 +6,10 @@
 // убитый страж −3 (Хранитель −10).
 // Пути вверх: время (сутки — на 5 к нулю); изгнание нечисти — паук MSFZ +0.1 (+1 за 10), ERA-зомби +0.2 (+1 за 5);
 // Отвар примирения +15 и разовое прощение (роща примет дар даже у «Проклятого», до рестарта), раз в сутки;
-// Семя на месте вырезанной рощи +20 (гнездо встанет на следующем рестарте, VB_AR_Nests.VB_OnSeedPlanted).
+// Семя на месте вырезанной рощи +20 (гнездо встанет на следующем рестарте, VB_AR_Nests.VB_OnSeedPlanted) — не чаще раза
+// в сутки и не тому, кто в этот рестарт вырезал рощу (VB_SeedFavor).
+// Файл: запись через favor_tmp.json; на старте favor.json → favor_tmp.json → favor_backup.json (копия последнего
+// удачного старта). Файл с ошибкой не затирается молча: сначала копия в favor_broken.json.
 // Последствия:
 //   Свой и Друг леса — стражи не нападают первыми (как Благословение); Друг — Благословение вдвое дольше, дар щедрее;
 //   Враг леса — ночью в лесу изредка стая волков по следу; Проклятый — чаще и с занозами, рощи не принимают даров.
@@ -20,6 +23,7 @@ class VB_AR_FavorEntry
 	int Hour;			// час UTC (от 1970), до которого возврат к нулю уже посчитан
 	int ReconcileHour = -100000;	// час UTC последнего Отвара примирения (раз в сутки)
 	int MetHour;		// час UTC, когда последний раз был ночью у живой рощи (0 — ни разу): «Голос леса»
+	int SeedHour = -100000;		// час UTC, когда последний раз получил расположение за Семя (раз в сутки)
 }
 
 class VB_AR_FavorFile
@@ -37,6 +41,10 @@ class VB_AR_FavorServer
 {
 	static const string FILE = "$profile:VB_Mods\\VB_AncientRoot\\favor.json";
 	static const string FILE_TMP = "$profile:VB_Mods\\VB_AncientRoot\\favor_tmp.json";
+	static const string FILE_BACKUP = "$profile:VB_Mods\\VB_AncientRoot\\favor_backup.json";
+	static const string FILE_BROKEN = "$profile:VB_Mods\\VB_AncientRoot\\favor_broken.json";
+	static const int SEED_HOURS = 24;
+	static const int FORGET_HOURS = 2160;		// 90 суток: давно не заходивший, у кого расположение ушло в ноль, — забыт
 	static const float LIMIT = 100;
 	static const float DECAY_PER_DAY = 5;
 	static const int SAVE_DELAY_MS = 30000;
@@ -94,29 +102,106 @@ class VB_AR_FavorServer
 		s_VB_Hostile = new map<string, int>;
 		s_VB_NextWave = new map<string, int>;
 		s_VB_Pardon = new map<string, bool>;
-		s_VB_File = null;
-		if (FileExist(FILE))
-		{
-			string err;
-			VB_AR_FavorFile f = new VB_AR_FavorFile();
-			if (JsonFileLoader<VB_AR_FavorFile>.LoadFile(FILE, f, err) && f)
-				s_VB_File = f;
-			else
-				Print("[VB_AncientRoot] расположение леса: ОШИБКА в favor.json, файл не тронут, начинаю с пустого: " + err);
-		}
+		s_VB_File = VB_LoadAny();
 		if (!s_VB_File)
 			s_VB_File = new VB_AR_FavorFile();
 		if (!s_VB_File.Players)
 			s_VB_File.Players = new array<ref VB_AR_FavorEntry>;
-		foreach (VB_AR_FavorEntry e : s_VB_File.Players)
+		int hourNow = VB_HourNow();
+		int forgot = 0;
+		for (int i = s_VB_File.Players.Count() - 1; i >= 0; i--)
 		{
-			if (e && e.Id != "")
-				s_VB_Index.Set(e.Id, e);
+			VB_AR_FavorEntry e = s_VB_File.Players[i];
+			if (!e || e.Id == "" || s_VB_Index.Contains(e.Id))
+			{
+				s_VB_File.Players.Remove(i);		// пустая запись (лишняя запятая) или повтор
+				continue;
+			}
+			if (VB_Forgotten(e, hourNow))
+			{
+				s_VB_File.Players.Remove(i);
+				forgot++;
+				continue;
+			}
+			s_VB_Index.Set(e.Id, e);
 		}
+		if (forgot > 0)
+			VB_MarkDirty();
 		int n = s_VB_Index.Count();
-		Print("[VB_AncientRoot] расположение леса: игроков в favor.json " + n.ToString());
+		Print("[VB_AncientRoot] расположение леса: игроков в favor.json " + n.ToString() + ", забыто давно не заходивших " + forgot.ToString());
 		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_WaveTick, WAVE_CHECK_MS, true);
 		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_VoiceTick, VOICE_CHECK_MS, true);
+	}
+
+	// один файл: null — нет или не разобрался (broken = true)
+	protected static VB_AR_FavorFile VB_LoadFrom(string path, out bool broken)
+	{
+		broken = false;
+		if (!FileExist(path))
+			return null;
+		string err;
+		VB_AR_FavorFile f = new VB_AR_FavorFile();
+		if (JsonFileLoader<VB_AR_FavorFile>.LoadFile(path, f, err) && f)
+			return f;
+		broken = true;
+		Print("[VB_AncientRoot] расположение леса: ОШИБКА в " + path + ": " + err);
+		return null;
+	}
+
+	// favor.json, если его нет или он битый — favor_tmp.json (прервалась запись), потом favor_backup.json. Битый
+	// основной сначала копируется в favor_broken.json: следующая запись его заменит, а данные не должны пропасть молча.
+	protected static VB_AR_FavorFile VB_LoadAny()
+	{
+		bool broken;
+		VB_AR_FavorFile f = VB_LoadFrom(FILE, broken);
+		if (f)
+		{
+			VB_CopyOver(FILE, FILE_BACKUP);		// удачный старт — копия на случай беды
+			return f;
+		}
+		if (broken)
+		{
+			VB_CopyOver(FILE, FILE_BROKEN);
+			Print("[VB_AncientRoot] расположение леса: favor.json с ошибкой сохранён как favor_broken.json");
+		}
+		bool b2;
+		f = VB_LoadFrom(FILE_TMP, b2);
+		if (f)
+		{
+			Print("[VB_AncientRoot] расположение леса: взят favor_tmp.json (прошлая запись прервалась)");
+			VB_MarkDirty();
+			return f;
+		}
+		f = VB_LoadFrom(FILE_BACKUP, b2);
+		if (f)
+		{
+			Print("[VB_AncientRoot] расположение леса: взят favor_backup.json (копия прошлого удачного старта)");
+			VB_MarkDirty();
+			return f;
+		}
+		if (broken)
+			Print("[VB_AncientRoot] расположение леса: favor.json не прочитан и копий нет — начинаю с пустого (старый — в favor_broken.json)");
+		return null;
+	}
+
+	// копия файла поверх другого (CopyFile поверх не пишет)
+	static void VB_CopyOver(string from, string to)
+	{
+		if (!FileExist(from))
+			return;
+		if (FileExist(to))
+			DeleteFile(to);
+		if (!CopyFile(from, to))
+			Print("[VB_AncientRoot] не удалось скопировать " + from + " -> " + to);
+	}
+
+	// давно не был (FORGET_HOURS), расположение за это время ушло в ноль, суточных отметок не осталось
+	protected static bool VB_Forgotten(VB_AR_FavorEntry e, int hourNow)
+	{
+		int hours = hourNow - e.Hour;
+		if (hours < FORGET_HOURS || hourNow - e.MetHour < FORGET_HOURS)
+			return false;
+		return Math.AbsFloat(e.Favor) <= DECAY_PER_DAY * hours / 24.0;
 	}
 
 	// Ночью игрок у живой рощи (VOICE_NEAR): первый раз (или после VOICE_REPEAT_HOURS вдали от рощ) — «Голос леса».
@@ -138,7 +223,9 @@ class VB_AR_FavorServer
 			id = VB_Id(p);
 			if (id == "" || !p.IsAlive())
 				continue;
-			if (!VB_AR_Recovery.VB_LiveHeartNear(p.GetPosition(), VOICE_NEAR))
+			// по списку сердец сервера, а не поиском объектов вокруг каждого игрока раз в 10 с
+			VB_AR_Heart voiceHeart = VB_AR_Heart.VB_NearestServer(p.GetPosition(), VOICE_NEAR);
+			if (!voiceHeart)
 				continue;
 			e = VB_Entry(id, true);
 			if (!e)
@@ -153,9 +240,7 @@ class VB_AR_FavorServer
 			{
 				NotificationSystem.SendNotificationToPlayerExtended(p, 12, VOICE_TITLE, VOICE_TEXT);
 				// звук «голоса леса» (ТЗ 2в п.5): шёпот рощи со стороны ближайшей сердцевины
-				VB_AR_Heart voiceHeart = VB_AR_Heart.VB_NearestServer(p.GetPosition(), VOICE_NEAR);
-				if (voiceHeart)
-					VB_AR_Memory.VB_WhisperAt(p, voiceHeart.GetPosition() + "0 1 0");
+				VB_AR_Memory.VB_WhisperAt(p, voiceHeart.GetPosition() + "0 1 0");
 				Print("[VB_AncientRoot] голос леса: " + VB_AR_ItemsServer.VB_Who(p));
 			}
 		}
@@ -193,6 +278,21 @@ class VB_AR_FavorServer
 		GetYearMonthDayUTC(y, mo, d);
 		GetHourMinuteSecondUTC(h, mi, s);
 		return VB_Days(y, mo, d) * 24 + h;
+	}
+
+	// минут UTC от 1970 (длина запуска сервера для роста рощ, VB_AR_Nests)
+	static int VB_MinuteNow()
+	{
+		int y;
+		int mo;
+		int d;
+		int h;
+		int mi;
+		int s;
+		GetYearMonthDayUTC(y, mo, d);
+		GetHourMinuteSecondUTC(h, mi, s);
+		int days = VB_Days(y, mo, d);
+		return (days * 24 + h) * 60 + mi;
 	}
 
 	protected static VB_AR_FavorEntry VB_Entry(string id, bool create)
@@ -337,6 +437,26 @@ class VB_AR_FavorServer
 		return true;
 	}
 
+	// Семя посажено (VB_ActionPlantSeed, VB_AR_GroveServer.c): +SEED, но не тому, кто в этот рестарт вырезал рощу,
+	// и не чаще раза в SEED_HOURS. Вернёт пояснение для игрока ("" — расположение начислено)
+	static string VB_SeedFavor(PlayerBase p)
+	{
+		if (VB_IsCutter(p))
+		{
+			Print("[VB_AncientRoot] расположение леса: " + VB_AR_ItemsServer.VB_Who(p) + " посадил Семя, но в этот рестарт вырезал рощу — без расположения");
+			return "Лес принял семя, но не забыл твоего ножа.";
+		}
+		VB_AR_FavorEntry e = VB_Entry(VB_Id(p), true);
+		if (!e)
+			return "";
+		int now = VB_HourNow();
+		if (now - e.SeedHour < SEED_HOURS)
+			return "Лес благодарен, но за Семя он помнит тебя лишь раз в сутки.";
+		e.SeedHour = now;
+		VB_Add(p, SEED, "посадил Семя Древнего корня");
+		return "";
+	}
+
 	// убита нечисть: паук MSFZ или ERA-зомби — лес благодарен (стражи и обычные звери не в счёт)
 	static void VB_OnCreatureKilled(EntityAI body, Object killer)
 	{
@@ -408,7 +528,8 @@ class VB_AR_FavorServer
 		return id != "" && s_VB_Cutters.Contains(id);
 	}
 
-	// стражи не нападают первыми: не злы, и Благословение, Янтарный оберег или ступень Свой и выше
+	// стражи не нападают первыми: не злы, и Благословение, ступень Свой и выше или Янтарный оберег. Оберег не помогает
+	// Врагу леса и Проклятому: иначе один предмет снимал бы наказание (волны по следу — тоже стражи)
 	static bool VB_Peaceful(PlayerBase p)
 	{
 		string id = VB_Id(p);
@@ -419,8 +540,11 @@ class VB_AR_FavorServer
 			return false;
 		if (VB_AR_Blessing.VB_Has(p))
 			return true;
-		if (VB_TierCached(p) >= VB_AR_Favor.TIER_OWN)
+		int tier = VB_TierCached(p);
+		if (tier >= VB_AR_Favor.TIER_OWN)
 			return true;
+		if (tier <= VB_AR_Favor.TIER_ENEMY)
+			return false;
 		return p.VB_AmuletWorks();
 	}
 
@@ -512,8 +636,14 @@ class VB_AR_FavorServer
 
 	static void VB_SpawnWave(PlayerBase p, int tier)
 	{
-		if (!p || !p.IsAlive())
+		// за 12 с после воя игрок мог выйти, сесть в машину, зайти в дом или на базу, или рассвело — волны нет
+		if (!p || !p.IsAlive() || !p.GetIdentity())
 			return;
+		if (VB_AR_Pulse.VB_NightFactor() < VB_AR_Pulse.NIGHT_FULL_ABOVE || !VB_WaveSpotOk(p))
+		{
+			Print("[VB_AncientRoot] расположение леса: " + VB_AR_ItemsServer.VB_Who(p) + " — волна по следу не пришла (ушёл из леса)");
+			return;
+		}
 		TStringArray types = new TStringArray;
 		int wolves = Math.RandomIntInclusive(2, 3);
 		int zanozas = 0;
@@ -556,6 +686,7 @@ class VB_AR_FavorServer
 			s_VB_Dirty = true;
 			return;
 		}
+		// старт подхватит favor_tmp.json, если запись оборвётся между удалением и копированием
 		if (FileExist(FILE))
 			DeleteFile(FILE);
 		if (CopyFile(FILE_TMP, FILE))

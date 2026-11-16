@@ -35,12 +35,18 @@ class VB_AR_Base extends House
 	protected string m_VB_TexSuffix = "_co";	// суффикс текстур секций (vbTexSuffix)
 	protected ref array<Object> m_VB_Cutters;
 
-	// «Голый» объект: модель без пульса, света, срезателей травы и обвивок (призрак редактора, замер модели).
-	// s_VB_Bare ставят на время CreateObjectEx, m_VB_Bare — сразу после (на случай, если EEInit придёт позже).
+	// «Голый» объект: модель без пульса, света, срезателей травы и обвивок (призрак редактора, замер модели,
+	// сердца предпросмотра редактора — VB_ShowStill). s_VB_Bare ставят на время CreateObjectEx, m_VB_Bare — сразу после
+	// (на случай, если EEInit придёт позже).
 	static bool s_VB_Bare;
 	bool m_VB_Bare;
+	// «Без привязки» (VB_SetFree): локальная обвивка хватки корней (VB_AR_Keeper.c). Пульс не привязывает её к сердцу
+	// и всегда считает ночной: живая и у вырезанной рощи, и днём
+	bool m_VB_Free;
 	protected bool m_VB_Highlight;			// подсвечен редактором: стоит материал подсветки, пульс его не трогает
 	protected bool m_VB_Broken;				// корень отломан ножом (VB_ActionBreakRootRoot): погас до рестарта, синхронизируется
+	protected int m_VB_GroundRoot = -1;		// VB_IsGroundRoot по имени класса: -1 — ещё не считали
+	protected bool m_VB_HasNet;				// сетевой ID уже видели (VB_HasNetId)
 
 	void VB_AR_Base()
 	{
@@ -52,10 +58,39 @@ class VB_AR_Base extends House
 		return false;
 	}
 
-	// корень гнезда на земле (VB_AR_Roots_*): от него можно отломить «Корень Изнанки»
+	// корень гнезда на земле (VB_AR_Roots_*): от него можно отломить отросток. Имя класса не меняется —
+	// считаем один раз (условия действий перебирают все объекты рощи каждый кадр)
 	bool VB_IsGroundRoot()
 	{
-		return GetType().IndexOf("VB_AR_Roots_") == 0;
+		if (m_VB_GroundRoot < 0)
+		{
+			m_VB_GroundRoot = 0;
+			if (GetType().IndexOf("VB_AR_Roots_") == 0)
+				m_VB_GroundRoot = 1;
+		}
+		return m_VB_GroundRoot == 1;
+	}
+
+	// объект пришёл с сервера (есть сетевой ID). Локальные — обвивки деревьев, корни на домах, предпросмотр редактора,
+	// хватка корней — сервер не знает, действия через них не работают. Положительный ответ запоминаем
+	bool VB_HasNetId()
+	{
+		if (m_VB_HasNet)
+			return true;
+		int low;
+		int high;
+		GetNetworkID(low, high);
+		if (low == 0 && high == 0)
+			return false;
+		m_VB_HasNet = true;
+		return true;
+	}
+
+	// без привязки к сердцу и всегда «ночью» (обвивка хватки корней)
+	void VB_SetFree()
+	{
+		m_VB_Free = true;
+		m_VB_LinkHeart = null;
 	}
 
 	bool VB_IsBroken()
@@ -87,6 +122,16 @@ class VB_AR_Base extends House
 
 		m_VB_IdxCrust = GetHiddenSelectionIndex("crust");
 		m_VB_IdxVeins = GetHiddenSelectionIndex("veins");
+		if (!g_Game.IsDedicatedServer())
+		{
+			// материалы из конфига — и «голым» (подсветка редактора и VB_ShowStill ставят свой вид через VB_SetLevel)
+			if (ConfigIsExisting("vbCrustMat"))
+				m_VB_CrustMat = ConfigGetString("vbCrustMat");
+			if (ConfigIsExisting("vbVeinsMat"))
+				m_VB_VeinsMat = ConfigGetString("vbVeinsMat");
+			if (ConfigIsExisting("vbTexSuffix"))
+				m_VB_TexSuffix = ConfigGetString("vbTexSuffix");
+		}
 		if (s_VB_Bare)
 			m_VB_Bare = true;
 		if (m_VB_Bare)
@@ -97,12 +142,6 @@ class VB_AR_Base extends House
 		if (g_Game.IsDedicatedServer())
 			return;
 
-		if (ConfigIsExisting("vbCrustMat"))
-			m_VB_CrustMat = ConfigGetString("vbCrustMat");
-		if (ConfigIsExisting("vbVeinsMat"))
-			m_VB_VeinsMat = ConfigGetString("vbVeinsMat");
-		if (ConfigIsExisting("vbTexSuffix"))
-			m_VB_TexSuffix = ConfigGetString("vbTexSuffix");
 		m_VB_Phase = Math.RandomFloat(0, VB_AR_Pulse.BEAT_PERIOD);	// без сердца рядом бьются не в такт
 		m_VB_Clock = g_Game.GetTime() * 0.001;
 		VB_CreateCutters();
@@ -184,6 +223,17 @@ class VB_AR_Base extends House
 			level = LEVEL_IDLE;
 		m_VB_Level = -100;
 		m_VB_DayTex = (level != LEVEL_DAY);
+		VB_SetLevel(level);
+	}
+
+	// «Голый» объект с видом рощи без пульса (сердца предпросмотра редактора): днём — сухой, иначе — тлеет.
+	// Пульс его не знает, поэтому вид ставится один раз, при создании
+	void VB_ShowStill()
+	{
+		int level = LEVEL_IDLE;
+		if (VB_AR_Pulse.VB_NightFactor() < VB_AR_Pulse.NIGHT_DAY_BELOW)
+			level = LEVEL_DAY;
+		m_VB_DayTex = (level != LEVEL_DAY);		// заставить VB_SetLevel поставить и текстуры
 		VB_SetLevel(level);
 	}
 

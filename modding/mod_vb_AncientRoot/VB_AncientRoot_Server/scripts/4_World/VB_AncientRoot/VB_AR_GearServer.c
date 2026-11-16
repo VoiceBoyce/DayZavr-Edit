@@ -1,13 +1,78 @@
 // Серверная часть изделий «Древнего корня»: заряды, таймеры, вызов стражей, вспышка пыльцы, Живица, клинок, плащ,
 // светоч. Классы, поля, синхронизация, сохранение, условия действий и эффекты — VB_AncientRoot, VB_AR_Gear.c.
 // Сон существ (ловушка) и терновая рана с кормлением клинка — VB_AR_CreatureServer.c.
-// Все события пишутся в script-лог сервера строками [VB_AncientRoot].
+// Все события пишутся в script-лог сервера строками [VB_AncientRoot] (отказы «Прислушаться» — только уведомлением игроку).
 
 class VB_AR_GearServer
 {
 	protected static ref array<VB_AR_Lantern> s_VB_Lanterns;	// горящие светочи (для отпугивания)
+	protected static ref map<string, int> s_VB_BloodUntil;		// SteamID -> g_Game.GetTime() конца «Живицы» (перезаход)
 
-	// вспышка пыльцы: все живые зомби и звери в радиусе засыпают на ms (игроков не трогает), клиентам рядом — хлопок
+	// живой игрок ближе dist к точке
+	static bool VB_PlayerNear(vector pos, float dist)
+	{
+		array<Man> players = new array<Man>;
+		g_Game.GetPlayers(players);
+		float dSq = dist * dist;
+		foreach (Man m : players)
+		{
+			if (m && m.IsAlive() && vector.DistanceSq(m.GetPosition(), pos) < dSq)
+				return true;
+		}
+		return false;
+	}
+
+	static string VB_IdOf(PlayerBase p)
+	{
+		if (!p || !p.GetIdentity())
+			return "";
+		return p.GetIdentity().GetPlainId();
+	}
+
+	// «Живица» по SteamID: конец действия переживает перезаход (сущность игрока пересоздаётся). Истёкшие записи чистим.
+	static void VB_BloodRemember(string id, int until)
+	{
+		if (id == "")
+			return;
+		if (!s_VB_BloodUntil)
+			s_VB_BloodUntil = new map<string, int>;
+		int now = g_Game.GetTime();
+		TStringArray old = new TStringArray;
+		foreach (string key, int endMs : s_VB_BloodUntil)
+		{
+			if (endMs <= now)
+				old.Insert(key);
+		}
+		foreach (string gone : old)
+			s_VB_BloodUntil.Remove(gone);
+		s_VB_BloodUntil.Set(id, until);
+	}
+
+	static void VB_BloodForget(string id)
+	{
+		if (s_VB_BloodUntil && id != "")
+			s_VB_BloodUntil.Remove(id);
+	}
+
+	// сколько мс «Живицы» осталось у SteamID; 0 — нет
+	static int VB_BloodLeft(string id)
+	{
+		if (!s_VB_BloodUntil || id == "")
+			return 0;
+		int until;
+		if (!s_VB_BloodUntil.Find(id, until))
+			return 0;
+		int left = until - g_Game.GetTime();
+		if (left <= 0)
+		{
+			s_VB_BloodUntil.Remove(id);
+			return 0;
+		}
+		return left;
+	}
+
+	// вспышка пыльцы: живые зомби и звери в радиусе засыпают на ms (крупные — нет, VB_AR_CreatureState.VB_IsBig;
+	// игроков не трогает), клиентам рядом — хлопок
 	static int VB_PollenSleepServer(vector pos, float radius, int ms)
 	{
 		array<Object> objs = new array<Object>;
@@ -78,11 +143,15 @@ class VB_AR_GearServer
 			s_VB_Lanterns.Remove(i);
 	}
 
-	// Обычный зомби не трогает игрока ближе SCARE_DIST к горящему светочу (в руках или на земле). Зовётся из
+	// Обычный заражённый (ванильный класс Zmb*, не страж) не трогает игрока ближе SCARE_DIST к горящему светочу (в руках
+	// или на земле). Боссы, мутанты и Хранитель — тоже ZombieBase, но не Zmb*: игрока не теряют. Зовётся из
 	// CanBeTargetedByAI часто: сначала пустой список и тип, конфиг стража — последним.
 	static bool VB_LanternScares(PlayerBase player, EntityAI ai)
 	{
 		if (!s_VB_Lanterns || s_VB_Lanterns.Count() == 0 || !ZombieBase.Cast(ai))
+			return false;
+		string cls = ai.GetType();
+		if (cls.IndexOf("Zmb") != 0)
 			return false;
 
 		vector pos = player.GetPosition();
@@ -116,8 +185,35 @@ class VB_AR_GearServer
 
 modded class VB_ActionListenRoot
 {
+	static const int VB_COOLDOWN_MS = 5000;				// не чаще раза в 5 с на игрока
+	protected static ref map<string, int> s_VB_LastUse;	// SteamID -> g_Game.GetTime() последнего «прислушаться»
+
+	// кулдаун прошёл? Старые записи (старше кулдауна) чистим, когда их набралось много
+	protected static bool VB_CooldownOk(string id, int now)
+	{
+		if (!s_VB_LastUse)
+			s_VB_LastUse = new map<string, int>;
+		int last;
+		if (s_VB_LastUse.Find(id, last) && now - last < VB_COOLDOWN_MS)
+			return false;
+		if (s_VB_LastUse.Count() > 64)
+		{
+			TStringArray old = new TStringArray;
+			foreach (string key, int at : s_VB_LastUse)
+			{
+				if (now - at >= VB_COOLDOWN_MS)
+					old.Insert(key);
+			}
+			foreach (string gone : old)
+				s_VB_LastUse.Remove(gone);
+		}
+		return true;
+	}
+
 	// Клиенту уходит только направление (сектор DIR_SECTOR_DEG) и ступень расстояния (DIST_STEP), не координаты
 	// сердцевины: изменённый клиент не должен узнавать точку за 3 км (№39). Днём заряд не тратится, поиска нет.
+	// Кулдаун VB_COOLDOWN_MS на игрока (без строк в лог). Отказ — уведомлением с причиной: в сумерках клиент может
+	// считать «день» (действие без заряда), а сервер — «ночь» при пустом корне.
 	override void OnExecuteServer(ActionData action_data)
 	{
 		ItemBase root = action_data.m_MainItem;
@@ -125,9 +221,21 @@ modded class VB_ActionListenRoot
 		if (!root || !player || !player.GetIdentity())
 			return;
 
+		int now = g_Game.GetTime();
+		string id = player.GetIdentity().GetPlainId();
+		if (!VB_CooldownOk(id, now))
+		{
+			NotificationSystem.SendNotificationToPlayerExtended(player, 3, "Корень-вещун", "Корень ещё гудит после прошлого раза. Прислушайся через пару секунд.");
+			return;
+		}
+
 		bool night = VB_AR_Pulse.VB_NightFactor() >= VB_AR_Pulse.NIGHT_LIGHT_ABOVE;
 		if (night && root.GetQuantity() <= 0)
+		{
+			NotificationSystem.SendNotificationToPlayerExtended(player, 5, "Корень-вещун молчит", "Ночь уже наступила, а корень пуст: подпитай его у живой сердцевины.");
 			return;
+		}
+		s_VB_LastUse.Set(id, now);
 
 		VB_AR_Heart heart;
 		vector from = player.GetPosition();
@@ -227,12 +335,32 @@ modded class VB_AR_SporeTrap
 		VB_AR_ItemsServer.VB_NoiseAt(at, NOISE, NOISE_MS * 0.001 + 1.0);
 	}
 
+	static const int VB_CLEANUP_MS = 1000;
+
 	void VB_BurstServer()
 	{
 		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_NoiseServer);
 		vector at = VB_AR_Items.VB_WorldPos(this);
 		VB_AR_GearServer.VB_PollenSleepServer(at, BURST_RADIUS, SLEEP_MS);
 		VB_AR_ItemsServer.VB_ReplaceServer(this, "");
+		// замена может не пройти (инвентарь занят) — тогда ловушка висела бы раскрытой вечно: через секунду убрать
+		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_CleanupServer, VB_CLEANUP_MS, false);
+	}
+
+	void VB_CleanupServer()
+	{
+		if (IsSetForDeletion())
+			return;
+		// замена прошла, а объект ещё доживает без места в инвентаре (E52) — только удалить
+		InventoryLocation loc = new InventoryLocation();
+		if (!GetInventory().GetCurrentInventoryLocation(loc))
+		{
+			Delete();
+			return;
+		}
+		vector at = VB_AR_Items.VB_WorldPos(this);
+		Print("[VB_AncientRoot] пыльцевая ловушка не заменилась после вспышки — удалена в " + at.ToString());
+		DeleteSafe();
 	}
 
 	override void EEDelete(EntityAI parent)
@@ -241,6 +369,7 @@ modded class VB_AR_SporeTrap
 		{
 			g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_NoiseServer);
 			g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_BurstServer);
+			g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_CleanupServer);
 		}
 		super.EEDelete(parent);
 	}
@@ -257,15 +386,18 @@ modded class VB_ActionArmSporeTrap
 }
 
 // ============================================================================================
-// «Светоч корня»: расход минуты пыльцы, отпугивание обычных зомби (список горящих — VB_AR_GearServer) и зов стражей
-// на свет (без лута, №26). Гашение не обнуляет таймеры: остаток текущей минуты и остаток до следующего зова
-// сохраняются и продолжаются при следующем включении — гасить и зажигать раз в 50 с, чтобы светоч светил вечно,
-// нельзя (№34). Сломанный светоч гаснет сам (№39).
+// «Светоч корня»: расход пыльцы, отпугивание обычных зомби (список горящих — VB_AR_GearServer) и зов стражей
+// на свет (без лута, №26). Пыльца тратится, только пока светоч на виду (в руках или на земле): раз в BURN_TICK_MS
+// копим время «на виду», набралась минута — минус минута пыльцы; в рюкзаке, на поясе, в ящике не тратится.
+// Гашение не обнуляет таймеры: остаток такта, накопленное время и остаток до следующего зова сохраняются и
+// продолжаются при следующем включении — гасить и зажигать, чтобы светоч светил вечно, нельзя (№34).
+// Страж выходит, только если у светоча (CALL_PLAYER_DIST) есть живой игрок. Сломанный светоч гаснет сам (№39).
 
 modded class VB_AR_Lantern
 {
 	protected bool m_VB_Running;					// сервер: идут таймеры расхода и зова
-	protected int m_VB_MinuteLeftMs = MINUTE_MS;	// сервер: остаток текущей минуты расхода
+	protected int m_VB_TickLeftMs = BURN_TICK_MS;	// сервер: остаток текущего такта расхода
+	protected int m_VB_BurnMs;						// сервер: сколько горел на виду в текущей минуте пыльцы
 	protected int m_VB_CallLeftMs = CALL_MS;		// сервер: остаток до следующей попытки позвать стража
 
 	void VB_SetOnServer(bool on)
@@ -276,20 +408,20 @@ modded class VB_AR_Lantern
 		ScriptCallQueue q = g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY);
 		if (m_VB_Running)
 		{
-			int left = q.GetRemainingTime(VB_MinuteServer);
+			int left = q.GetRemainingTime(VB_BurnServer);
 			if (left > 0)
-				m_VB_MinuteLeftMs = left;
+				m_VB_TickLeftMs = left;
 			left = q.GetRemainingTime(VB_CallServer);
 			if (left > 0)
 				m_VB_CallLeftMs = left;
-			q.Remove(VB_MinuteServer);
+			q.Remove(VB_BurnServer);
 			q.Remove(VB_CallServer);
 			m_VB_Running = false;
 		}
 
 		if (on)
 		{
-			q.CallLater(VB_MinuteServer, m_VB_MinuteLeftMs, false);
+			q.CallLater(VB_BurnServer, m_VB_TickLeftMs, false);
 			q.CallLater(VB_CallServer, m_VB_CallLeftMs, false);
 			m_VB_Running = true;
 		}
@@ -302,17 +434,24 @@ modded class VB_AR_Lantern
 		}
 	}
 
-	// таймеры одноразовые и перезапускают себя сами: так GetRemainingTime всегда видит текущий остаток
-	void VB_MinuteServer()
+	// таймеры одноразовые и перезапускают себя сами: так GetRemainingTime всегда видит текущий остаток.
+	// Такт расхода: на виду — копим время, минута набралась — минус минута пыльцы.
+	void VB_BurnServer()
 	{
-		m_VB_MinuteLeftMs = MINUTE_MS;
-		AddQuantity(-1);
-		if (GetQuantity() <= 0 || IsRuined())
+		m_VB_TickLeftMs = BURN_TICK_MS;
+		if (VB_IsShown())
+			m_VB_BurnMs += BURN_TICK_MS;
+		if (m_VB_BurnMs >= MINUTE_MS)
 		{
-			VB_SetOnServer(false);
-			return;
+			m_VB_BurnMs -= MINUTE_MS;
+			AddQuantity(-1);
+			if (GetQuantity() <= 0 || IsRuined())
+			{
+				VB_SetOnServer(false);
+				return;
+			}
 		}
-		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_MinuteServer, MINUTE_MS, false);
+		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_BurnServer, BURN_TICK_MS, false);
 	}
 
 	void VB_CallServer()
@@ -326,6 +465,8 @@ modded class VB_AR_Lantern
 			return;
 
 		vector pos = VB_AR_Items.VB_WorldPos(this);
+		if (!VB_AR_GearServer.VB_PlayerNear(pos, CALL_PLAYER_DIST))
+			return;			// светоч брошен в лесу без людей — страж не выходит
 		Print("[VB_AncientRoot] стражи увидели светоч корня у " + pos.ToString());
 		VB_AR_Horde.VB_Spawn(pos, 1, CALL_DIST_MIN, CALL_DIST_MAX, false);	// без лута: светоч не ферма (№26)
 		VB_AR_ItemsServer.VB_NoiseAt(pos, CALL_NOISE, 20);
@@ -349,7 +490,7 @@ modded class VB_AR_Lantern
 	{
 		if (g_Game)
 		{
-			g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_MinuteServer);
+			g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_BurnServer);
 			g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(VB_CallServer);
 		}
 		m_VB_Running = false;
@@ -473,7 +614,8 @@ modded class VB_ActionDrinkPollenBrew
 }
 
 // ============================================================================================
-// Игрок: таймер «Живицы» и сращивание перелома (снимается и при смерти, №27); таймер «Настоя пыльцы»;
+// Игрок: таймер «Живицы» и сращивание перелома (снимается и при смерти, №27; перезаход не снимает — конец по SteamID
+// в VB_AR_GearServer, восстановление в OnConnect); таймер «Настоя пыльцы»;
 // «Янтарный оберег» (есть ли в инвентаре — перебор не чаще раза в AMULET_CHECK_MS); «Плащ лешего» (обычные зомби и
 // звери теряют присевшего неподвижного ночью; дешёвые проверки первыми, метка неподвижности сбрасывается при
 // движении, №39); «Светоч корня» (обычные зомби не трогают игрока у горящего светоча).
@@ -488,6 +630,7 @@ modded class PlayerBase
 	protected vector m_VB_CocoonPos;
 	protected ref HumanMovementState m_VB_CocoonMs;
 	protected bool m_VB_LegsMending;				// сервер: Живица сращивает перелом (для сообщения в конце)
+	protected string m_VB_BloodId;					// сервер: SteamID, под которым записан конец Живицы (смерть без identity)
 	protected bool m_VB_HasAmulet;					// сервер: кэш «оберег в инвентаре»
 	protected int m_VB_AmuletCheckMs = -100000;
 
@@ -536,7 +679,15 @@ modded class PlayerBase
 		SetSynchDirty();
 	}
 
+	// укол: конец действия записываем по SteamID (VB_AR_GearServer.VB_BloodRemember) — перезаход его не снимет
 	void VB_StartRootBloodServer()
+	{
+		m_VB_BloodId = VB_AR_GearServer.VB_IdOf(this);
+		VB_AR_GearServer.VB_BloodRemember(m_VB_BloodId, g_Game.GetTime() + VB_AR_Blood.BLOOD_MS);
+		VB_RunRootBloodServer(VB_AR_Blood.BLOOD_MS);
+	}
+
+	protected void VB_RunRootBloodServer(int ms)
 	{
 		m_VB_AR_Blood = true;
 		SetSynchDirty();
@@ -544,8 +695,24 @@ modded class PlayerBase
 		ScriptCallQueue q = g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY);
 		q.Remove(VB_EndRootBloodServer);
 		q.Remove(VB_RootBloodTickServer);
-		q.CallLater(VB_EndRootBloodServer, VB_AR_Blood.BLOOD_MS, false);
+		q.CallLater(VB_EndRootBloodServer, ms, false);
 		q.CallLater(VB_RootBloodTickServer, VB_AR_Blood.HEAL_TICK_MS, true);
+	}
+
+	// вход в игру (новая сущность из базы): «Живица» ещё действует — дрожь и сращивание на остаток времени
+	override void OnConnect()
+	{
+		super.OnConnect();
+		string id = VB_AR_GearServer.VB_IdOf(this);
+		int left = VB_AR_GearServer.VB_BloodLeft(id);
+		if (left <= 0 || !IsAlive())
+			return;
+		m_VB_BloodId = id;
+		VB_RunRootBloodServer(left);
+		int leftS = left / 1000;
+		string who = VB_AR_ItemsServer.VB_Who(this);
+		string secs = leftS.ToString();
+		Print("[VB_AncientRoot] " + who + ": Живица продолжается после входа, осталось " + secs + " с");
 	}
 
 	// перелом срастается: ногам понемногу здоровья, ваниль сама снимает перелом и шину, когда ноги здоровы
@@ -571,11 +738,17 @@ modded class PlayerBase
 		AddHealth("RightFoot", "Health", heal);
 	}
 
+	// конец по таймеру или смерть: запись по SteamID стираем (выход из игры сюда не попадает — EEDelete)
 	void VB_EndRootBloodServer()
 	{
 		ScriptCallQueue q = g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY);
 		q.Remove(VB_EndRootBloodServer);
 		q.Remove(VB_RootBloodTickServer);
+		if (m_VB_BloodId != "")
+		{
+			VB_AR_GearServer.VB_BloodForget(m_VB_BloodId);
+			m_VB_BloodId = "";
+		}
 		if (!m_VB_AR_Blood)
 			return;
 

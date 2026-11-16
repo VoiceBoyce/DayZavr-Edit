@@ -1,7 +1,7 @@
-// Действия у гнезда Изнанки (клиентская часть: классы, условия, регистрация).
-// «Вырезать сердце» — долгое действие присев, любым инструментом со свежеванием (ножи, топоры, тесаки, пилы, штыки),
-// только ночью. Как только начал — Изнанка в 50 м бьётся чаще, вылезает волна зомби. Сердце гаснет до рестарта,
-// у ног вырезавшего падает «Сердце Изнанки», у всех игроков бьёт красная молния.
+// Действия у рощи Древнего корня (клиентская часть: классы, условия, регистрация).
+// «Вырезать сердцевину» — долгое действие присев, любым инструментом со свежеванием (ножи, топоры, тесаки, пилы, штыки),
+// только ночью и не во время нашествия нечисти. Как только начал — роща в 50 м бьётся чаще, выходят стражи.
+// Сердцевина гаснет до рестарта, у ног вырезавшего падает добыча по ступени, у всех игроков бьёт золотая молния.
 // Что делает сервер (тела OnStartServer/OnFinishProgressServer, поиск корня) — VB_AncientRoot_Server, VB_AR_ActionsServer.c.
 
 class VB_ActionCutRootHeartCB : ActionContinuousBaseCB
@@ -49,11 +49,12 @@ class VB_ActionCutRootHeart : ActionContinuousBase
 		m_ConditionTarget = new CCTCursor(UAMaxDistances.DEFAULT);
 	}
 
-	// только ночью, когда Изнанка горит в полную силу (днём и в сумерках сердце спит — резать нечего)
+	// только ночью, когда роща горит в полную силу (днём и в сумерках сердцевина спит — резать нечего).
+	// Во время нашествия нечисти резать нельзя (осада синхронизируется — условие общее для клиента и сервера)
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item)
 	{
 		VB_AR_Heart heart = VB_AR_Heart.Cast(target.GetObject());
-		if (!heart || heart.VB_IsDead())
+		if (!heart || heart.VB_IsDead() || heart.VB_UnderSiege())
 			return false;
 
 		return VB_AR_Pulse.VB_NightFactor() >= VB_AR_Pulse.NIGHT_FULL_ABOVE;
@@ -122,6 +123,10 @@ class VB_ActionBreakRootRoot : ActionContinuousBase
 	static const string ROOT_TYPE = "VB_AR_RootPiece";
 	static const string NOISE = "VB_AR_ChunkNoise";	// тихий треск: зомби рядом проверят, деревня не сбегается
 	static const float NOISE_TIME = 6.0;
+	static const int CACHE_MS = 250;		// условие без цели зовётся каждый кадр, пока нож в руках: перебор рощи не чаще
+
+	protected bool m_VB_LastOk;
+	protected int m_VB_LastAt = -100000;
 
 	void VB_ActionBreakRootRoot()
 	{
@@ -146,6 +151,7 @@ class VB_ActionBreakRootRoot : ActionContinuousBase
 
 	// Клиент ищет живой корень по пульсу (связь корня с сердцем знает только он). На сервере пульса нет:
 	// здесь только ночь, корень рядом ищет серверный мод (VB_AR_ActionsServer.c).
+	// Клиент перебирает объекты рощи не чаще CACHE_MS (как VB_ActionTouchGrove): условие без цели зовётся каждый кадр
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item)
 	{
 		if (VB_AR_Pulse.VB_NightFactor() < VB_AR_Pulse.NIGHT_FULL_ABOVE)
@@ -154,10 +160,18 @@ class VB_ActionBreakRootRoot : ActionContinuousBase
 		if (g_Game.IsDedicatedServer())
 			return true;
 
+		int now = g_Game.GetTime();
+		if (now >= m_VB_LastAt && now - m_VB_LastAt < CACHE_MS)
+			return m_VB_LastOk;
+		m_VB_LastAt = now;
+
 		// в осаде нечисти отлома нет (ТЗ 2в п.1; сервер проверяет сам, VB_AR_ActionsServer.c)
-		if (VB_AR_Pulse.VB_NearestSiegeHeart(player.GetPosition(), VB_AR_Pulse.LINK_DIST))
-			return false;
-		return VB_AR_Pulse.VB_NearestLiveRoot(player.GetPosition(), ROOT_DIST) != null;
+		vector pos = player.GetPosition();
+		if (VB_AR_Pulse.VB_NearestSiegeHeart(pos, VB_AR_Pulse.LINK_DIST))
+			m_VB_LastOk = false;
+		else
+			m_VB_LastOk = VB_AR_Pulse.VB_NearestLiveRoot(pos, ROOT_DIST) != null;
+		return m_VB_LastOk;
 	}
 }
 

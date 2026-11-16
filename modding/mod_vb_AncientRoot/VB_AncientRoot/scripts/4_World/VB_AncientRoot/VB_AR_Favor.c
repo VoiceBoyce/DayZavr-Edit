@@ -29,6 +29,18 @@ class VB_AR_Favor
 	static bool s_VB_Known;
 	static bool s_VB_Pardon;		// после Отвара примирения роща примет один дар даже у «Проклятого»
 
+	// клиент: забыть присланное. Статики переживают переподключение, а время миссии после него снова с нуля —
+	// без сброса старый s_VB_ChangedAt оказывался «в будущем» и ветвь висела на экране. Зовёт VB_AR_Mission.c
+	// на старте и в конце миссии; сервер пришлёт значение заново при заходе
+	static void VB_Reset()
+	{
+		s_VB_Value = 0;
+		s_VB_LastDelta = 0;
+		s_VB_ChangedAt = -100000;
+		s_VB_Known = false;
+		s_VB_Pardon = false;
+	}
+
 	static int VB_TierOf(float v)
 	{
 		if (v >= FRIEND_FROM)

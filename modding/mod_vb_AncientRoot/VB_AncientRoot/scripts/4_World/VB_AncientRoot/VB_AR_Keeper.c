@@ -1,8 +1,9 @@
 // Хранитель рощи — мини-босс (ТЗ_сервер_18.md, ветка 2в п.2): клиентская часть и общее для обеих сторон.
 // Логика умений — сервер (VB_AncientRoot_Server, VB_AR_KeeperServer.c). Здесь:
-//   «Хватка корней» (RPC_GRIP на игрока): у ног жертвы вырастает обвивка (локальная VB_AR_Wrap_27, без коллизии)
+//   «Хватка корней» (RPC_GRIP на игрока): у ног жертвы вырастает обвивка (локальная VB_AR_Wrap_27, без коллизии,
+//     «без привязки» — живая и днём, и у вырезанной рощи; на крыльце и этаже — на высоте жертвы)
 //     на GRIP_SHOW_MS, трещат корни; жертва стоит HOLD_MS, потом идёт только шагом до WALK_MS, бежать не может LIMP_MS
-//     (PlayerBase.CanSprint — его зовут и клиент, и сервер; сервер ставит свой срок сам).
+//     (PlayerBase.CanSprint — его зовут и клиент, и сервер; сервер ставит свой срок сам). Отложенные шаги снимаются в EEDelete.
 //   «Кора» (RPC_BARK на тело Хранителя): золотой свет и вспышка спор на время коры — свечение ярче.
 
 class VB_AR_KeeperFx
@@ -15,13 +16,22 @@ class VB_AR_KeeperFx
 	static const int LIMP_MS = 10000;
 	static const string GRIP_WRAP = "VB_AR_Wrap_27";
 
-	// корни у ног: локальная обвивка (у всех игроков рядом своя), треск и вспышка спор
+	// корни у ног: локальная обвивка (у всех игроков рядом своя), треск и вспышка спор.
+	// Жертва выше рельефа больше чем на 0,5 м (крыльцо, второй этаж) — корни на её высоте, а не на земле под домом.
+	// Обвивка «без привязки» (VB_AR_Base.VB_SetFree): пульс не вешает её на сердце рядом и всегда считает ночной —
+	// иначе у вырезанной рощи и днём она была сухой
 	static void VB_ShowGrip(vector pos)
 	{
-		vector p = Vector(pos[0], g_Game.SurfaceY(pos[0], pos[2]), pos[2]);
+		float y = g_Game.SurfaceY(pos[0], pos[2]);
+		if (pos[1] > y + 0.5)
+			y = pos[1];
+		vector p = Vector(pos[0], y, pos[2]);
 		Object wrap = g_Game.CreateObjectEx(GRIP_WRAP, p, ECE_LOCAL);
 		if (wrap)
 		{
+			VB_AR_Base grip = VB_AR_Base.Cast(wrap);
+			if (grip)
+				grip.VB_SetFree();
 			wrap.SetOrientation(Vector(Math.RandomFloat(0, 360), 0, 0));
 			g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_DeleteLocal, GRIP_SHOW_MS, false, wrap);
 		}
@@ -111,6 +121,18 @@ modded class PlayerBase
 		HumanInputController hic = GetInputController();
 		if (hic)
 			hic.OverrideMovementSpeed(false, 0);
+	}
+
+	// отложенные шаги хватки (свои и «Леса помнит», VB_AR_Memory.c) — снять, иначе висячий вызов на удалённого игрока
+	override void EEDelete(EntityAI parent)
+	{
+		if (g_Game)
+		{
+			ScriptCallQueue q = g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY);
+			q.Remove(VB_AR_GripWalk);
+			q.Remove(VB_AR_GripFree);
+		}
+		super.EEDelete(parent);
 	}
 }
 

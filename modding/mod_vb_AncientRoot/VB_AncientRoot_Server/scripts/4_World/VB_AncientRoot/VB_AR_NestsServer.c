@@ -1,8 +1,10 @@
 // Гнёзда «Древнего корня», сервер. Гнездо — одна точка: сердце, его корни и щупальца. Все гнёзда лежат в nests.json
 // (файлы — VB_AR_NestFiles.c). Гнездо без сердца не встаёт никогда (редактор помечает его «без сердца»).
 // Живые рощи (ТЗ 2б.4, шаг 5) живут между рестартами: state.json → Groves (гнездо, ступень, очки роста). На старте
-// VB_AdvanceGroves считает рост за прошлый рестарт, VB_Activate ставит все живые на их ступени и добирает ростками
-// до ActiveNests. Вырезанная роща погибает (из Groves), древняя через AncientLife рестартов уходит в землю.
+// VB_AdvanceGroves считает рост за прошлый рестарт (только стоявшим рощам и только если прошлый запуск шёл не меньше
+// GrowMinSessionMinutes), VB_Activate ставит живые на их ступени (старшие первыми) и добирает ростками до ActiveNests.
+// Роща пропадает, только когда её гнездо удалено; выключенное гнездо или нехватка мест — роща ждёт. Вырезанная роща
+// погибает (из Groves), древняя через AncientLife рестартов уходит в землю (продлить век может один раз).
 //
 // Сервер ставит объекты обычными сетевыми (сердце должно быть сетевым, иначе его не вырезать),
 // без сохранения в мире: после рестарта их нет, сервер выбирает новый набор.
@@ -18,8 +20,20 @@ class VB_AR_Nests
 	static const string FILE_NESTS = "$profile:VB_Mods\\VB_AncientRoot\\nests.json";
 	static const string FILE_TMP = "$profile:VB_Mods\\VB_AncientRoot\\nests_tmp.json";
 	static const string FILE_BACKUP = "$profile:VB_Mods\\VB_AncientRoot\\nests_backup.json";
+	static const string FILE_BACKUP2 = "$profile:VB_Mods\\VB_AncientRoot\\nests_backup2.json";	// прошлая отличающаяся копия
+	static const string FILE_NESTS_BROKEN = "$profile:VB_Mods\\VB_AncientRoot\\nests_broken.json";
 	static const string FILE_STATE = "$profile:VB_Mods\\VB_AncientRoot\\state.json";
+	static const string FILE_STATE_TMP = "$profile:VB_Mods\\VB_AncientRoot\\state_tmp.json";
+	static const string FILE_STATE_BACKUP = "$profile:VB_Mods\\VB_AncientRoot\\state_backup.json";
+	static const string FILE_STATE_BROKEN = "$profile:VB_Mods\\VB_AncientRoot\\state_broken.json";
+	static const string FILE_SETTINGS_TMP = "$profile:VB_Mods\\VB_AncientRoot\\settings_tmp.json";
 	static const string DEFAULT_ADMIN = "76561198903710848";	// пишется в новый settings.json, если файла нет
+	static const int ALIVE_MS = 300000;				// раз в 5 минут отметка «сервер жив» в state.json (длина запуска)
+
+	// посадка Семени (VB_OnSeedPlanted)
+	static const int SEED_OK = 0;
+	static const int SEED_NOT_NEST = 1;		// сердцевина не из гнёзд
+	static const int SEED_ALREADY = 2;		// уже засеяно
 
 	static const int READ_MAX = 100000000;			// как у JsonFileLoader
 	static const int DENY_MS = 5000;				// не-админ: один запрос в столько мс, лишнее молча отбрасывается
@@ -48,13 +62,17 @@ class VB_AR_Nests
 	protected bool m_VB_BackedUp;			// nests_backup.json в этой сессии уже сделан
 	protected int m_VB_Regrowing;			// сколько прорастаний ждёт таймера
 	protected int m_VB_RegrowGen;			// поколение таймеров: «Перебросить» его меняет, старые таймеры молчат
+	protected bool m_VB_SettingsBroken;		// settings.json не разобрался: числа по умолчанию — рост не считаем
+	protected int m_VB_PrevSessionMin = -1;	// сколько минут шёл прошлый запуск (-1 — неизвестно)
 
 	static VB_AR_Nests VB_Get()
 	{
 		return s_VB_Server;
 	}
 
-	// сервер, из MissionServer.OnInit (VB_AR_MissionServer.c): прочитать файлы и поставить гнёзда
+	// Сервер, из MissionServer.OnInit (VB_AR_MissionServer.c): прочитать файлы и поставить гнёзда. Рост за прошлый
+	// рестарт считается, только если прошлый запуск шёл не меньше GrowMinSessionMinutes (сервер падал и поднимался
+	// несколько раз за минуты — это не рестарты, ростки не должны за полчаса стать древними) и настройки прочитаны.
 	static void VB_StartServer()
 	{
 		if (s_VB_Server)
@@ -62,8 +80,54 @@ class VB_AR_Nests
 
 		s_VB_Server = new VB_AR_Nests();
 		s_VB_Server.VB_LoadStart();
-		s_VB_Server.VB_AdvanceGroves();
+		if (s_VB_Server.VB_GrowthCounts())
+			s_VB_Server.VB_AdvanceGroves();
+		s_VB_Server.VB_MarkStarted();
 		s_VB_Server.VB_Activate(false);
+	}
+
+	// прошлый запуск засчитывается рестартом для роста рощ
+	protected bool VB_GrowthCounts()
+	{
+		if (m_VB_SettingsBroken)
+		{
+			Print("[VB_AncientRoot] рощи: settings.json с ошибкой — рост за прошлый рестарт не считаю");
+			return false;
+		}
+		if (m_VB_PrevSessionMin >= 0 && m_VB_PrevSessionMin < m_VB_Settings.GrowMinSessionMinutes)
+		{
+			Print("[VB_AncientRoot] рощи: прошлый запуск шёл " + m_VB_PrevSessionMin.ToString() + " мин (меньше " + m_VB_Settings.GrowMinSessionMinutes.ToString() + ") — рост не считаю");
+			return false;
+		}
+		return true;
+	}
+
+	// старт этого запуска — в state.json; дальше VB_AliveTick раз в ALIVE_MS двигает «жив до»
+	protected void VB_MarkStarted()
+	{
+		int now = VB_AR_FavorServer.VB_MinuteNow();
+		m_VB_State.StartMin = now;
+		m_VB_State.AliveMin = now;
+		VB_SaveState();
+		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_AliveTick, ALIVE_MS, true);
+	}
+
+	void VB_AliveTick()
+	{
+		if (!m_VB_State)
+			return;
+		m_VB_State.AliveMin = VB_AR_FavorServer.VB_MinuteNow();
+		VB_SaveState();
+	}
+
+	// древняя роща у сердцевины heart ещё может раз продлить век (ритуал роста, нашествие); не древняя — true
+	static bool VB_CanExtend(VB_AR_Heart heart)
+	{
+		if (!s_VB_Server || !heart || heart.VB_Stage() < VB_AR_Heart.STAGE_ANCIENT)
+			return true;
+		int nestId = s_VB_Server.VB_NestOfEntity(heart);
+		VB_AR_Grove g = s_VB_Server.VB_GroveOf(nestId);
+		return !g || g.Extended == 0;
 	}
 
 	// подношение принято (VB_AR_GroveServer.c): копится к росту на следующем рестарте
@@ -90,29 +154,29 @@ class VB_AR_Nests
 	}
 
 	// Семя Древнего корня посажено у вырезанной сердцевины heart: её гнездо встанет первым на следующем рестарте.
-	// false — сердцевина не из гнёзд (поставлена руками) или уже засеяна
-	static bool VB_OnSeedPlanted(VB_AR_Heart heart)
+	// SEED_NOT_NEST — сердцевина не из гнёзд (поставлена руками), SEED_ALREADY — уже засеяна
+	static int VB_OnSeedPlanted(VB_AR_Heart heart)
 	{
 		if (!s_VB_Server)
-			return false;
+			return SEED_NOT_NEST;
 		return s_VB_Server.VB_SeedHeart(heart);
 	}
 
-	protected bool VB_SeedHeart(VB_AR_Heart heart)
+	protected int VB_SeedHeart(VB_AR_Heart heart)
 	{
 		int nestId = VB_NestOfEntity(heart);
 		if (nestId == 0 || !m_VB_State)
-			return false;
+			return SEED_NOT_NEST;
 		if (!m_VB_State.Seeded)
 			m_VB_State.Seeded = new TIntArray;
 		if (m_VB_State.Seeded.Find(nestId) >= 0)
-			return false;
+			return SEED_ALREADY;
 		m_VB_State.Seeded.Insert(nestId);
 		VB_SaveState();
 		VB_AR_Nest nest = VB_FindNest(nestId);
 		if (nest)
 			Print("[VB_AncientRoot] гнёзда: в " + nest.Name + " посажено Семя — встанет на следующем рестарте");
-		return true;
+		return SEED_OK;
 	}
 
 	static void VB_OnEditRpc(PlayerBase player, PlayerIdentity sender, ParamsReadContext ctx)
@@ -200,47 +264,70 @@ class VB_AR_Nests
 		return s;
 	}
 
+	// через временный файл: оборвалось — на диске целый старый settings.json
 	protected bool VB_WriteSettings(VB_AR_NestSettings s)
 	{
 		string err;
-		if (!JsonFileLoader<VB_AR_NestSettings>.SaveFile(FILE_SETTINGS, s, err))
+		if (!JsonFileLoader<VB_AR_NestSettings>.SaveFile(FILE_SETTINGS_TMP, s, err))
 		{
-			Print("[VB_AncientRoot] гнёзда: не удалось записать settings.json: " + err);
+			Print("[VB_AncientRoot] гнёзда: не удалось записать settings_tmp.json: " + err);
 			return false;
 		}
+		if (FileExist(FILE_SETTINGS) && !DeleteFile(FILE_SETTINGS))
+		{
+			Print("[VB_AncientRoot] гнёзда: settings.json не удалось заменить (занят?), новая версия — в settings_tmp.json");
+			return false;
+		}
+		if (!CopyFile(FILE_SETTINGS_TMP, FILE_SETTINGS))
+		{
+			Print("[VB_AncientRoot] гнёзда: settings.json не записан, новая версия — в settings_tmp.json");
+			return false;
+		}
+		DeleteFile(FILE_SETTINGS_TMP);
 		return true;
 	}
 
-	// nests.json во временный объект; enabledKeys — сколько раз в тексте встречается ключ "Enabled"
+	// nests.json (или path) во временный объект; enabledKeys — сколько раз в тексте встречается ключ "Enabled"
 	// (JSON без ключа даёт гнезду Enabled = 0, E57 — так видно, у скольких гнёзд ключа нет)
-	protected VB_AR_NestFile VB_ReadNests(out bool broken, out int enabledKeys)
+	protected VB_AR_NestFile VB_ReadNests(out bool broken, out int enabledKeys, string path = FILE_NESTS)
 	{
 		broken = false;
 		enabledKeys = 0;
-		if (!FileExist(FILE_NESTS))
+		if (!FileExist(path))
 			return null;
 
-		FileHandle fh = OpenFile(FILE_NESTS, FileMode.READ);
-		if (fh == 0)
+		string text = VB_ReadText(path);
+		if (text == "")
 		{
 			broken = true;
-			Print("[VB_AncientRoot] гнёзда: nests.json не открывается на чтение");
+			Print("[VB_AncientRoot] гнёзда: " + path + " пустой или не открывается на чтение");
 			return null;
 		}
-		string text;
-		ReadFile(fh, text, READ_MAX);
-		CloseFile(fh);
 
 		VB_AR_NestFile f = new VB_AR_NestFile();
 		string err;
 		if (!JsonFileLoader<VB_AR_NestFile>.LoadData(text, f, err) || !f)
 		{
 			broken = true;
-			Print("[VB_AncientRoot] гнёзда: ОШИБКА в nests.json: " + err);
+			Print("[VB_AncientRoot] гнёзда: ОШИБКА в " + path + ": " + err);
 			return null;
 		}
 		enabledKeys = VB_CountKey(text, "\"Enabled\"");
 		return f;
+	}
+
+	// текст файла целиком ("" — нет или не открылся)
+	protected static string VB_ReadText(string path)
+	{
+		if (!FileExist(path))
+			return "";
+		FileHandle fh = OpenFile(path, FileMode.READ);
+		if (fh == 0)
+			return "";
+		string text;
+		ReadFile(fh, text, READ_MAX);
+		CloseFile(fh);
+		return text;
 	}
 
 	protected static int VB_CountKey(string text, string key)
@@ -256,21 +343,85 @@ class VB_AR_Nests
 		return n;
 	}
 
-	protected VB_AR_NestState VB_ReadState()
+	// один файл состояния: null — нет или не разобрался (broken = true)
+	protected VB_AR_NestState VB_ReadStateFrom(string path, out bool broken)
 	{
-		if (!FileExist(FILE_STATE))
+		broken = false;
+		if (!FileExist(path))
 			return null;
-
 		VB_AR_NestState s = new VB_AR_NestState();
 		string err;
-		if (!JsonFileLoader<VB_AR_NestState>.LoadFile(FILE_STATE, s, err) || !s)
+		if (!JsonFileLoader<VB_AR_NestState>.LoadFile(path, s, err) || !s)
 		{
-			Print("[VB_AncientRoot] гнёзда: state.json не прочитан (гнёзда прошлого рестарта не учитываются): " + err);
+			broken = true;
+			Print("[VB_AncientRoot] гнёзда: ОШИБКА в " + path + ": " + err);
 			return null;
 		}
+		VB_NormState(s);
+		return s;
+	}
+
+	// state.json; нет или битый — state_tmp.json (прервалась запись), потом state_backup.json (копия удачного старта).
+	// Битый основной сначала копируется в state_broken.json: иначе первая же запись молча стёрла бы все рощи (ревью
+	// 11-16). atStart — удачно прочитанный основной копируется в state_backup.json. null — ничего не прочиталось.
+	protected VB_AR_NestState VB_ReadState(bool atStart = false)
+	{
+		bool broken;
+		VB_AR_NestState s = VB_ReadStateFrom(FILE_STATE, broken);
+		if (s)
+		{
+			if (atStart)
+				VB_AR_FavorServer.VB_CopyOver(FILE_STATE, FILE_STATE_BACKUP);
+			return s;
+		}
+		if (broken)
+		{
+			VB_AR_FavorServer.VB_CopyOver(FILE_STATE, FILE_STATE_BROKEN);
+			Print("[VB_AncientRoot] гнёзда: state.json с ошибкой сохранён как state_broken.json");
+		}
+		bool b2;
+		s = VB_ReadStateFrom(FILE_STATE_TMP, b2);
+		if (s)
+		{
+			Print("[VB_AncientRoot] гнёзда: взят state_tmp.json (прошлая запись прервалась)");
+			return s;
+		}
+		s = VB_ReadStateFrom(FILE_STATE_BACKUP, b2);
+		if (s)
+		{
+			Print("[VB_AncientRoot] гнёзда: взят state_backup.json (копия прошлого удачного старта)");
+			return s;
+		}
+		if (broken)
+			Print("[VB_AncientRoot] гнёзда: state.json не прочитан и копий нет — рощи начнутся заново (старый — в state_broken.json)");
+		return null;
+	}
+
+	// пустые списки, null-элементы (лишняя запятая), ключи, которых нет (E57: 0), пределы
+	protected static void VB_NormState(VB_AR_NestState s)
+	{
 		if (!s.LastActive)
 			s.LastActive = new TIntArray;
-		return s;
+		if (!s.Seeded)
+			s.Seeded = new TIntArray;		// state.json прошлых версий — без ключа
+		if (!s.Groves)
+			s.Groves = new array<ref VB_AR_Grove>;
+		for (int gi = s.Groves.Count() - 1; gi >= 0; gi--)
+		{
+			VB_AR_Grove lg = s.Groves[gi];
+			if (!lg || lg.Nest == 0)
+			{
+				s.Groves.Remove(gi);
+				continue;
+			}
+			lg.Stage = Math.Clamp(lg.Stage, VB_AR_Heart.STAGE_SPROUT, VB_AR_Heart.STAGE_ANCIENT);	// без ключа — 0 (E57)
+			if (lg.Growth < 0)
+				lg.Growth = 0;
+			if (lg.Age < -1)
+				lg.Age = -1;		// −1 — древняя продлила век (VB_GroveDefended), один раз
+			if (lg.Extended != 0)
+				lg.Extended = 1;
+		}
 	}
 
 	protected void VB_LoadStart()
@@ -293,7 +444,8 @@ class VB_AR_Nests
 			m_VB_Settings.VB_Norm();
 			if (broken)
 			{
-				Print("[VB_AncientRoot] гнёзда: settings.json с ошибкой — до исправления настройки по умолчанию, файл не перезаписан");
+				m_VB_SettingsBroken = true;
+				Print("[VB_AncientRoot] гнёзда: settings.json с ошибкой — до исправления настройки по умолчанию, файл не перезаписан, рост рощ за прошлый рестарт не считается");
 			}
 			else
 			{
@@ -309,6 +461,13 @@ class VB_AR_Nests
 			if (CopyFile(FILE_TMP, FILE_NESTS))
 				Print("[VB_AncientRoot] гнёзда: nests.json восстановлен из nests_tmp.json (прошлая запись прервалась)");
 		}
+		// nests.json пропал совсем (неудачная заливка профиля, ручная ошибка) — из копии прошлого старта, а не пустой:
+		// пустой файл на следующем старте затёр бы и копию (ревью 11-16)
+		if (!FileExist(FILE_NESTS) && FileExist(FILE_BACKUP))
+		{
+			if (CopyFile(FILE_BACKUP, FILE_NESTS))
+				Print("[VB_AncientRoot] гнёзда: nests.json не было — восстановлен из nests_backup.json");
+		}
 
 		if (!FileExist(FILE_NESTS))
 		{
@@ -321,10 +480,23 @@ class VB_AR_Nests
 		{
 			int enabledKeys;
 			VB_AR_NestFile f = VB_ReadNests(broken, enabledKeys);
+			// битый nests.json, а рядом целый nests_tmp.json (запись оборвалась на копировании) — взять его
+			if (!f && broken && FileExist(FILE_TMP))
+			{
+				bool tmpBroken;
+				f = VB_ReadNests(tmpBroken, enabledKeys, FILE_TMP);
+				if (f)
+				{
+					VB_AR_FavorServer.VB_CopyOver(FILE_NESTS, FILE_NESTS_BROKEN);
+					VB_AR_FavorServer.VB_CopyOver(FILE_TMP, FILE_NESTS);
+					DeleteFile(FILE_TMP);
+					Print("[VB_AncientRoot] гнёзда: nests.json с ошибкой (сохранён как nests_broken.json) — взят целый nests_tmp.json");
+				}
+			}
 			if (!f)
 			{
 				m_VB_File = null;
-				Print("[VB_AncientRoot] гнёзда: nests.json не прочитан — гнёзда не поставлены, файл не перезаписывается, правка выключена. Исправь файл (копия прошлого старта — nests_backup.json) и нажми в редакторе «Перебросить гнёзда»");
+				Print("[VB_AncientRoot] гнёзда: nests.json не прочитан — гнёзда не поставлены, файл не перезаписывается, правка выключена. Исправь файл (копии прошлых стартов — nests_backup.json, nests_backup2.json) и нажми в редакторе «Перебросить гнёзда»");
 			}
 			else
 			{
@@ -334,27 +506,12 @@ class VB_AR_Nests
 			}
 		}
 
-		m_VB_State = VB_ReadState();
+		m_VB_State = VB_ReadState(true);
 		if (!m_VB_State)
 			m_VB_State = new VB_AR_NestState();
-		if (!m_VB_State.Seeded)
-			m_VB_State.Seeded = new TIntArray;		// state.json прошлых версий — без ключа
-		if (!m_VB_State.Groves)
-			m_VB_State.Groves = new array<ref VB_AR_Grove>;
-		for (int gi = m_VB_State.Groves.Count() - 1; gi >= 0; gi--)
-		{
-			VB_AR_Grove lg = m_VB_State.Groves[gi];
-			if (!lg || lg.Nest == 0)
-			{
-				m_VB_State.Groves.Remove(gi);
-				continue;
-			}
-			lg.Stage = Math.Clamp(lg.Stage, VB_AR_Heart.STAGE_SPROUT, VB_AR_Heart.STAGE_ANCIENT);	// без ключа — 0 (E57)
-			if (lg.Growth < 0)
-				lg.Growth = 0;
-			if (lg.Age < 0)
-				lg.Age = 0;
-		}
+		VB_NormState(m_VB_State);
+		if (m_VB_State.StartMin > 0 && m_VB_State.AliveMin >= m_VB_State.StartMin)
+			m_VB_PrevSessionMin = m_VB_State.AliveMin - m_VB_State.StartMin;
 		m_VB_PrevActive.Copy(m_VB_State.LastActive);
 	}
 
@@ -601,16 +758,26 @@ class VB_AR_Nests
 			Print("[VB_AncientRoot] гнёзда: в nests.json " + bad.ToString() + " объектов не будут ставиться (тип не из редактора или координаты вне мира):" + sample);
 	}
 
-	// копия nests.json как есть на диске (DeleteFile перед CopyFile: CopyFile поверх не пишет)
+	// Копия nests.json как есть на диске (DeleteFile перед CopyFile: CopyFile поверх не пишет). Файл без гнёзд копию
+	// не затирает (иначе случайно опустевший файл уничтожил бы последнюю хорошую). Прежняя копия, если отличается, —
+	// в nests_backup2.json: ошибка в редакторе переживёт ещё один рестарт.
 	protected void VB_BackupNests()
 	{
 		m_VB_BackedUp = true;
-		if (!FileExist(FILE_NESTS))
+		string now = VB_ReadText(FILE_NESTS);
+		if (now == "")
 			return;
-		if (FileExist(FILE_BACKUP))
-			DeleteFile(FILE_BACKUP);
-		if (!CopyFile(FILE_NESTS, FILE_BACKUP))
-			Print("[VB_AncientRoot] гнёзда: не удалось сделать nests_backup.json");
+		if (VB_CountKey(now, "\"Objects\"") == 0)
+		{
+			Print("[VB_AncientRoot] гнёзда: в nests.json нет гнёзд — копия nests_backup.json не перезаписана");
+			return;
+		}
+		string prev = VB_ReadText(FILE_BACKUP);
+		if (prev == now)
+			return;
+		if (prev != "")
+			VB_AR_FavorServer.VB_CopyOver(FILE_BACKUP, FILE_BACKUP2);
+		VB_AR_FavorServer.VB_CopyOver(FILE_NESTS, FILE_BACKUP);
 	}
 
 	// Запись через временный файл: сначала целиком nests_tmp.json, потом он заменяет nests.json. Оборвалось
@@ -626,27 +793,54 @@ class VB_AR_Nests
 		if (!JsonFileLoader<VB_AR_NestFile>.SaveFile(FILE_TMP, m_VB_File, err))
 		{
 			Print("[VB_AncientRoot] гнёзда: не удалось записать nests_tmp.json: " + err);
+			VB_WarnEditors("nests.json не записан — правка останется только до рестарта");
 			return false;
 		}
 		if (FileExist(FILE_NESTS) && !DeleteFile(FILE_NESTS))
 		{
 			Print("[VB_AncientRoot] гнёзда: nests.json не удалось заменить (занят?), свежая версия — в nests_tmp.json");
+			VB_WarnEditors("nests.json занят и не заменён — свежая версия в nests_tmp.json, перенеси её до рестарта");
 			return false;
 		}
 		if (!CopyFile(FILE_TMP, FILE_NESTS))
 		{
 			Print("[VB_AncientRoot] гнёзда: nests.json не записан, свежая версия — в nests_tmp.json");
+			VB_WarnEditors("nests.json не записан — свежая версия в nests_tmp.json");
 			return false;
 		}
 		DeleteFile(FILE_TMP);
 		return true;
 	}
 
+	// сообщение всем открытым редакторам (сбой записи — админ должен узнать сразу, а не из лога)
+	protected void VB_WarnEditors(string text)
+	{
+		if (!m_VB_Editors || m_VB_Editors.Count() == 0)
+			return;
+		array<PlayerBase> eds = VB_EditorPlayers();
+		foreach (PlayerBase ep : eds)
+		{
+			VB_SendMsg(ep, text);
+		}
+	}
+
+	// через временный файл: оборвалось — старт подхватит state_tmp.json (VB_ReadState)
 	protected void VB_SaveState()
 	{
+		if (!m_VB_State)
+			return;
 		string err;
-		if (!JsonFileLoader<VB_AR_NestState>.SaveFile(FILE_STATE, m_VB_State, err))
-			Print("[VB_AncientRoot] гнёзда: не удалось записать state.json: " + err);
+		if (!JsonFileLoader<VB_AR_NestState>.SaveFile(FILE_STATE_TMP, m_VB_State, err))
+		{
+			Print("[VB_AncientRoot] гнёзда: не удалось записать state_tmp.json: " + err);
+			return;
+		}
+		if (FileExist(FILE_STATE))
+			DeleteFile(FILE_STATE);
+		if (CopyFile(FILE_STATE_TMP, FILE_STATE))
+			DeleteFile(FILE_STATE_TMP);
+		else
+			Print("[VB_AncientRoot] гнёзда: state.json не записан, свежая версия — в state_tmp.json");
 	}
 
 	// новый id объекта или гнезда (без x++ в выражении: в Enforce на это не полагаемся)
@@ -865,10 +1059,11 @@ class VB_AR_Nests
 		return "роща";
 	}
 
-	// Старт сервера: прошлый рестарт живые рощи пережили. Древние стареют и через AncientLife уходят в землю;
-	// остальным +1 очко (+1 за FeedOffers подношений, 0 — если сбором подняли волну); набрала GrowRestarts — ступень
-	// вверх (за рестарт не больше одной). В древние — не больше MaxAncient, первыми — с большим запасом очков,
-	// остальные ждут на ступени «роща». Потом счётчики рестарта обнуляются.
+	// Старт сервера: прошлый рестарт живые рощи пережили. Считаются только те, что стояли на карте (LastActive):
+	// ждавшие (гнездо выключено, мест не хватило) не растут и не стареют. Древние стареют и через AncientLife уходят
+	// в землю; остальным +1 очко (+1, если накормлены: FeedOffers подношений, у ростка — его единственное; 0 — если
+	// сбором подняли волну); набрала GrowRestarts — ступень вверх (за рестарт не больше одной). В древние — не больше
+	// MaxAncient, первыми — с большим запасом очков, остальные ждут на ступени «роща». Потом счётчики рестарта обнуляются.
 	void VB_AdvanceGroves()
 	{
 		if (!m_VB_State || !m_VB_Settings)
@@ -879,13 +1074,15 @@ class VB_AR_Nests
 		VB_AR_Grove g;
 		int i;
 		int ancient = 0;
+		TIntArray lived = m_VB_State.LastActive;
 
 		for (i = gs.Count() - 1; i >= 0; i--)
 		{
 			g = gs[i];
 			if (g.Stage < VB_AR_Heart.STAGE_ANCIENT)
 				continue;
-			g.Age = g.Age + 1;
+			if (lived.Find(g.Nest) >= 0)
+				g.Age = g.Age + 1;
 			if (g.Age >= m_VB_Settings.AncientLife)
 			{
 				log += " " + VB_NestName(g.Nest) + " ушла в землю;";
@@ -896,37 +1093,44 @@ class VB_AR_Nests
 		}
 
 		int pts;
+		int fed;
 		foreach (VB_AR_Grove gp : gs)
 		{
-			if (gp.Stage >= VB_AR_Heart.STAGE_ANCIENT)
+			if (gp.Stage >= VB_AR_Heart.STAGE_ANCIENT || lived.Find(gp.Nest) < 0)
 				continue;
 			pts = 1;
-			if (gp.Offers >= m_VB_Settings.FeedOffers)
+			fed = Math.Min(m_VB_Settings.FeedOffers, VB_AR_Heart.VB_LimitByStage(gp.Stage));	// росток берёт 1 дар
+			if (gp.Offers >= fed)
 				pts = pts + 1;
 			if (gp.Disturbed != 0)
 				pts = 0;
 			gp.Growth = gp.Growth + pts;
 		}
 
-		// росток -> роща
+		// росток -> роща (выросшие в этом проходе дальше не идут: не больше ступени за рестарт)
+		array<VB_AR_Grove> grewNow = new array<VB_AR_Grove>;
 		foreach (VB_AR_Grove gs1 : gs)
 		{
 			if (gs1.Stage == VB_AR_Heart.STAGE_SPROUT && gs1.Growth >= grow)
 			{
 				gs1.Stage = VB_AR_Heart.STAGE_GROVE;
 				gs1.Growth = gs1.Growth - grow;
+				grewNow.Insert(gs1);
 				log += " " + VB_NestName(gs1.Nest) + " выросла в рощу;";
 			}
 		}
 
 		// роща -> древняя: по лимиту, первыми — с большим запасом очков; кто не прошёл — ждёт с полным запасом
 		VB_AR_Grove best;
+		array<VB_AR_Grove> waitAncient = new array<VB_AR_Grove>;
 		while (true)
 		{
 			best = null;
 			foreach (VB_AR_Grove gs2 : gs)
 			{
 				if (gs2.Stage != VB_AR_Heart.STAGE_GROVE || gs2.Growth < grow)
+					continue;
+				if (grewNow.Find(gs2) >= 0 || waitAncient.Find(gs2) >= 0)
 					continue;
 				if (!best || gs2.Growth > best.Growth)
 					best = gs2;
@@ -938,12 +1142,14 @@ class VB_AR_Nests
 				best.Stage = VB_AR_Heart.STAGE_ANCIENT;
 				best.Growth = 0;
 				best.Age = 0;
+				best.Extended = 0;
 				ancient++;
 				log += " " + VB_NestName(best.Nest) + " стала древней;";
 			}
 			else
 			{
 				best.Growth = grow - 1;		// ждёт места: на следующем старте снова кандидат
+				waitAncient.Insert(best);
 			}
 		}
 
@@ -1054,30 +1260,40 @@ class VB_AR_Nests
 		array<VB_AR_Nest> chosen = new array<VB_AR_Nest>;
 		array<vector> centers = new array<vector>;
 
-		// живые рощи (ТЗ 2б.4) — на своих местах; гнездо удалено, выключено или без сердца — роща пропала
-		VB_AR_Nest gn;
-		VB_AR_Grove lg;
-		for (int gi = 0; gi < m_VB_State.Groves.Count(); gi++)
+		// Живые рощи (ТЗ 2б.4) — на своих местах. Пропадает роща, только если её гнездо удалено из файла. Гнездо
+		// выключено, без сердца или рощ больше ActiveNests — роща ждёт: остаётся в Groves, не встаёт, не растёт
+		// (VB_AdvanceGroves считает только стоявшие). Временная настройка не должна навсегда стирать рост (ревью 11-16).
+		// Первыми встают старшие: древние, потом рощи, потом ростки.
+		array<VB_AR_Grove> order = new array<VB_AR_Grove>;
+		for (int st = VB_AR_Heart.STAGE_ANCIENT; st >= VB_AR_Heart.STAGE_SPROUT; st--)
 		{
-			lg = m_VB_State.Groves[gi];
-			gn = VB_FindNest(lg.Nest);
-			if (!gn || hearts.Find(gn) < 0)
+			foreach (VB_AR_Grove og : m_VB_State.Groves)
 			{
-				Print("[VB_AncientRoot] рощи: " + VB_NestName(lg.Nest) + " — гнезда нет или оно выключено, роща пропала");
-				m_VB_State.Groves.Remove(gi);
-				gi--;
+				if (og && og.Stage == st)
+					order.Insert(og);
+			}
+		}
+		VB_AR_Nest gn;
+		int waiting = 0;
+		foreach (VB_AR_Grove lg : order)
+		{
+			gn = VB_FindNest(lg.Nest);
+			if (!gn)
+			{
+				Print("[VB_AncientRoot] рощи: " + VB_NestName(lg.Nest) + " — гнезда больше нет в nests.json, роща пропала");
+				m_VB_State.Groves.RemoveItem(lg);
 				continue;
 			}
-			if (chosen.Count() >= m_VB_Settings.ActiveNests)
+			if (hearts.Find(gn) < 0 || chosen.Count() >= m_VB_Settings.ActiveNests)
 			{
-				Print("[VB_AncientRoot] рощи: " + gn.Name + " — живых больше ActiveNests, роща ушла");
-				m_VB_State.Groves.Remove(gi);
-				gi--;
+				waiting++;
 				continue;
 			}
 			chosen.Insert(gn);
 			centers.Insert(gn.VB_Center());
 		}
+		if (waiting > 0)
+			Print("[VB_AncientRoot] рощи: ждут своего часа (гнездо выключено, без сердца или живых больше ActiveNests): " + waiting.ToString());
 
 		// посаженные Семенем (ТЗ 2б.11) — ростками первыми; забытые из списка, только если встали
 		int seededN = 0;
@@ -1226,8 +1442,13 @@ class VB_AR_Nests
 
 	protected Object VB_SpawnObj(VB_AR_NestObj o)
 	{
-		if (m_VB_Live.Contains(o.Id))
-			return m_VB_Live.Get(o.Id);
+		Object have;
+		if (m_VB_Live.Find(o.Id, have))
+		{
+			if (have)
+				return have;
+			m_VB_Live.Remove(o.Id);		// объект удалили со стороны (админка) — поставить заново
+		}
 		// тип не из редактора или координаты вне мира — не ставим (в лог при загрузке, VB_LogBadObjects)
 		if (!VB_ObjOk(o))
 			return null;
@@ -1351,6 +1572,11 @@ class VB_AR_Nests
 			VB_SaveState();
 			Print("[VB_AncientRoot] рощи: " + VB_NestName(nestId) + " (" + stageName + ") погибла");
 		}
+		if (nestId == 0)
+			return;		// сердце не из гнёзд (поставлено руками, VPP) — прорастать нечему
+		VB_AR_Nest dead = VB_FindNest(nestId);
+		if (dead)
+			VB_SendNestToEditors(dead);		// редактор видит гибель рощи (ступень, кнопки) сразу
 
 		if (!m_VB_Settings || m_VB_Settings.RegrowMinutes <= 0)
 			return;
@@ -1425,8 +1651,8 @@ class VB_AR_Nests
 		}
 
 		VB_AR_Nest grown = chosen[0];
-		VB_NewGrove(grown.Id);
-		VB_SpawnNest(grown, VB_AR_Heart.STAGE_SPROUT);
+		VB_AR_Grove rg = VB_NewGrove(grown.Id);		// ждавшая роща (гнездо было выключено) встаёт своей ступенью
+		VB_SpawnNest(grown, rg.Stage);
 		if (m_VB_State.LastActive.Find(grown.Id) < 0)
 			m_VB_State.LastActive.Insert(grown.Id);
 		VB_SaveState();
@@ -1613,6 +1839,13 @@ class VB_AR_Nests
 					m_VB_File.Nests.RemoveItem(nest);
 					VB_SaveNests();
 					VB_SendGoneToEditors(nestId);
+					// роща удалённого гнезда больше не живёт (иначе до рестарта занимала бы место древней)
+					if (VB_GroveOf(nestId) || m_VB_State.Seeded.Find(nestId) >= 0)
+					{
+						VB_DropGrove(nestId);
+						m_VB_State.Seeded.RemoveItem(nestId);
+						VB_SaveState();
+					}
 				}
 				break;
 
@@ -1708,9 +1941,13 @@ class VB_AR_Nests
 		VB_AR_Grove g = VB_GroveOf(nestId);
 		if (nestId == 0 || !nest || !g)
 			return "";
+		// древняя: рестарт жизни, но только раз за её жизнь — иначе ритуал роста раз в рестарт держал бы её вечно
 		if (g.Stage >= VB_AR_Heart.STAGE_ANCIENT)
 		{
+			if (g.Extended != 0)
+				return "древняя роща выстояла, но век её не продлить — время у леса она уже брала";
 			g.Age = g.Age - 1;
+			g.Extended = 1;
 			VB_SaveState();
 			return "древняя роща проживёт на рестарт дольше";
 		}
@@ -1722,17 +1959,56 @@ class VB_AR_Nests
 			VB_SaveState();
 			return "роща наберёт силу и станет древней, когда в лесу освободится место";
 		}
+		// Что уже взято у этой рощи в этот рестарт (дары, пыльца, волны вырезания, Хранитель, отломанные корни) —
+		// на новое сердце: иначе подъём ступени выдавал бы всё заново (ревью 11-16)
+		int spentOffers = 0;
+		int spentSpores = 0;
+		int cutWaves = 0;
+		bool keeperDone = false;
+		heart.VB_SpentServer(spentOffers, spentSpores, cutWaves, keeperDone);
+		TIntArray brokenRoots = VB_BrokenRootsOf(nest);
 		g.Stage = next;
 		g.Growth = 0;
 		g.Age = 0;
+		g.Extended = 0;
 		VB_DespawnNest(nest);
 		VB_SpawnNest(nest, next);
+		VB_AR_Heart fresh = VB_HeartOfNest(nest);
+		if (fresh)
+			fresh.VB_CarryServer(spentOffers, spentSpores, cutWaves, keeperDone);
+		VB_RebreakRoots(brokenRoots);
 		VB_SaveState();
 		VB_SendNestToEditors(nest);
 		Print("[VB_AncientRoot] рощи: " + nest.Name + " отбилась от нечисти — теперь " + VB_StageName(next));
 		if (next >= VB_AR_Heart.STAGE_ANCIENT)
 			return "роща разрослась и стала древней";
 		return "росток окреп и стал рощей";
+	}
+
+	// id отломанных корней гнезда (стоят на карте и погасли)
+	protected TIntArray VB_BrokenRootsOf(VB_AR_Nest nest)
+	{
+		TIntArray ids = new TIntArray;
+		VB_AR_Base b;
+		foreach (VB_AR_NestObj o : nest.Objects)
+		{
+			b = VB_AR_Base.Cast(m_VB_Live.Get(o.Id));
+			if (b && b.VB_IsBroken())
+				ids.Insert(o.Id);
+		}
+		return ids;
+	}
+
+	// после того как роща встала заново: те же корни снова отломаны
+	protected void VB_RebreakRoots(TIntArray ids)
+	{
+		VB_AR_Base b;
+		foreach (int id : ids)
+		{
+			b = VB_AR_Base.Cast(m_VB_Live.Get(id));
+			if (b)
+				b.VB_BreakServer();
+		}
 	}
 
 	protected int VB_CountAncient()
@@ -1758,6 +2034,11 @@ class VB_AR_Nests
 			VB_SendMsg(actor, nest.Name + " сейчас не на карте: ступень меняется только у живой рощи");
 			return;
 		}
+		if (m_VB_Killed.Find(nestId) >= 0)
+		{
+			VB_SendMsg(actor, nest.Name + ": сердцевина вырезана — до рестарта гнездо мёртвое");
+			return;
+		}
 		VB_AR_Grove g = VB_NewGrove(nestId);
 		int stage = Math.Clamp(g.Stage + delta, VB_AR_Heart.STAGE_SPROUT, VB_AR_Heart.STAGE_ANCIENT);
 		if (stage == g.Stage)
@@ -1768,6 +2049,7 @@ class VB_AR_Nests
 		g.Stage = stage;
 		g.Growth = 0;
 		g.Age = 0;
+		g.Extended = 0;
 		VB_DespawnNest(nest);
 		VB_SpawnNest(nest, stage);
 		VB_SaveState();
@@ -1778,6 +2060,16 @@ class VB_AR_Nests
 
 	protected void VB_EditReroll(PlayerBase actor, string who)
 	{
+		if (!m_VB_File)
+		{
+			// nests.json с ошибкой: перечитать с диска можно, но рост рощ не сбрасывать, пока гнёзд нет
+			string fix = VB_ReloadFromDisk();
+			if (!m_VB_File)
+			{
+				VB_SendMsg(actor, "nests.json всё ещё с ошибкой — переброс не сделан, рощи не тронуты. " + fix);
+				return;
+			}
+		}
 		Print("[VB_AncientRoot] гнёзда: переброс по команде " + who + " — рощи заново, ростками");
 		VB_CancelRegrow();
 		string note = VB_ReloadFromDisk();
@@ -1826,6 +2118,11 @@ class VB_AR_Nests
 
 	protected void VB_EditTeleport(PlayerBase actor, int nestId)
 	{
+		if (actor.IsInVehicle())
+		{
+			VB_SendMsg(actor, "Из машины не переношу — выйди сначала");
+			return;
+		}
 		if (nestId == VB_AR_NestNet.DECOR_ID)
 		{
 			// к ближайшему щупальцу декора
@@ -2079,9 +2376,14 @@ class VB_AR_Nests
 		Print("[VB_AncientRoot] редактор гнёзд: " + who + " убрал " + objType + " из " + nest.Name);
 
 		// убрали сердце: корни переходят к ближайшему другому сердцу, если оно рядом; оставшиеся без сердца
-		// снимаются с карты (гнездо без сердца не стоит)
+		// снимаются с карты (гнездо без сердца не стоит). Роща этого гнезда погибла.
 		if (wasHeart)
 		{
+			if (VB_GroveOf(nest.Id))
+			{
+				VB_DropGrove(nest.Id);
+				VB_SaveState();
+			}
 			bool regrouped = VB_Regroup();
 			VB_SyncLive();
 			VB_SpawnDecor();
@@ -2115,6 +2417,13 @@ class VB_AR_Nests
 		array<PlayerBase> res = new array<PlayerBase>;
 		if (m_VB_Editors.Count() == 0)
 			return res;
+		// рассылки (прорастание, гибель рощи) идут и без RPC редактора: снятого из админов не кормить координатами
+		int now = g_Game.GetTime();
+		if (now >= m_VB_AdminsAt)
+		{
+			m_VB_AdminsAt = now + RELOAD_ADMINS_MS;
+			VB_ReloadAdmins();
+		}
 
 		map<string, PlayerBase> online = new map<string, PlayerBase>;
 		array<Man> players = new array<Man>;

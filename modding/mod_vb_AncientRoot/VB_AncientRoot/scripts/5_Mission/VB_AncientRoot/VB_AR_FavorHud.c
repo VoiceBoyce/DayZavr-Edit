@@ -6,7 +6,10 @@
 // руна Альгиз, справа название ступени; при изменении над почкой всплывает «+10» / «-25», а ветвь плавно доезжает.
 // Раскладка gui/layouts/vb_ar_favor.layout (единицы 1/1080 высоты экрана), текстуры — tools/gen_ar_branch.py и gen_ar_hud.py.
 // Показывается сам: у рощи, ночью в лесу, недолго после изменения и всегда у «Врага леса» и «Проклятого».
-// Прячется при открытом меню/инвентаре, мёртвом или без сознания. Значение присылает сервер (VB_AR_Favor.RPC_FAVOR).
+// Прячется при открытом меню/инвентаре, мёртвом или без сознания, а также когда игрок спрятал худ клавишей или выключил
+// его в настройках (IngameHudVisibility: HUD_HIDE, HUD_DISABLE). Значение присылает сервер (VB_AR_Favor.RPC_FAVOR).
+// Дёшево по кадрам: лес и ближайшая роща — раз в CHECK_MS; виджетам значения ставятся, только когда изменились;
+// раскладка не загрузилась — больше не пробуем (до новой миссии).
 // Над ветвью — строка нашествия нечисти (ТЗ 2в п.1): «Нечисть грызёт корни · сила рощи N%», пока рядом (SIEGE_NEAR)
 // роща в осаде; с ней худ виден всегда. Корень раскладки 640×150: сверху строка нашествия (над быстрыми слотами,
 // они между ней и ветвью), ниже «+10» и ветвь.
@@ -69,7 +72,15 @@ class VB_AR_FavorHud
 	protected bool m_VB_ShownSet;
 	protected int m_VB_NextCheck;
 	protected bool m_VB_InForest;
+	protected bool m_VB_NearGrove;					// живая роща ближе GROVE_NEAR (пересчёт раз в CHECK_MS)
 	protected int m_VB_ShownTier = -100;
+	protected bool m_VB_Failed;						// раскладка не загрузилась или в ней нет виджета — не пересоздаём
+	// что уже стоит в виджетах (-1 — ещё ничего): одно и то же значение каждый кадр не ставим
+	protected float m_VB_SetAlpha = -1;
+	protected float m_VB_SetRune = -1;
+	protected float m_VB_SetBud = -1;
+	protected float m_VB_SetShown = -1000;
+	protected int m_VB_SetSiegePower = -1;
 
 	static void VB_Tick(float dt)
 	{
@@ -91,11 +102,15 @@ class VB_AR_FavorHud
 	{
 		if (m_VB_Root)
 			return true;
-		if (!g_Game.GetWorkspace())
+		if (m_VB_Failed || !g_Game.GetWorkspace())
 			return false;
 		m_VB_Root = g_Game.GetWorkspace().CreateWidgets(LAYOUT);
 		if (!m_VB_Root)
+		{
+			m_VB_Failed = true;		// каждый кадр не пересоздаём: раскладка сама не появится
+			Print("[VB_AncientRoot] ветвь расположения: не загрузилась раскладка " + LAYOUT);
 			return false;
+		}
 		m_VB_Disc = ImageWidget.Cast(m_VB_Root.FindAnyWidget("VB_AR_FavorDisc"));
 		m_VB_Rune = ImageWidget.Cast(m_VB_Root.FindAnyWidget("VB_AR_FavorRune"));
 		m_VB_Branch = ImageWidget.Cast(m_VB_Root.FindAnyWidget("VB_AR_FavorBranch"));
@@ -109,6 +124,8 @@ class VB_AR_FavorHud
 		{
 			m_VB_Root.Unlink();
 			m_VB_Root = null;
+			m_VB_Failed = true;
+			Print("[VB_AncientRoot] ветвь расположения: в раскладке нет нужного виджета");
 			return false;
 		}
 		m_VB_Disc.LoadImageFile(0, TEX_DISC);
@@ -160,21 +177,38 @@ class VB_AR_FavorHud
 		return COLOR_STRANGER;
 	}
 
+	// худ спрятан клавишей или выключен в настройках (ванильный IngameHud: HUD_HIDE / HUD_DISABLE)
+	protected bool VB_HudHidden()
+	{
+		Mission mission = g_Game.GetMission();
+		if (!mission)
+			return false;
+		IngameHud hud = IngameHud.Cast(mission.GetHud());
+		if (!hud || !hud.GetHudVisibility())
+			return false;
+		EHudContextFlags hideFlags = EHudContextFlags.HUD_HIDE | EHudContextFlags.HUD_DISABLE;
+		return hud.GetHudVisibility().IsContextFlagActive(hideFlags);
+	}
+
 	protected bool VB_WantVisible(PlayerBase player, int tier, int now)
 	{
 		if (!VB_AR_Favor.s_VB_Known || !player || !player.IsAlive() || player.IsUnconscious())
 			return false;
 		if (g_Game.GetUIManager() && g_Game.GetUIManager().GetMenu())
 			return false;
+		if (VB_HudHidden())
+			return false;
 		if (tier <= VB_AR_Favor.TIER_ENEMY || m_VB_SiegeHeart)
 			return true;
-		if (now - VB_AR_Favor.s_VB_ChangedAt < SHOW_AFTER_CHANGE_MS)
+		int since = now - VB_AR_Favor.s_VB_ChangedAt;		// < 0 — метка из прошлой миссии (время пошло с нуля)
+		if (since >= 0 && since < SHOW_AFTER_CHANGE_MS)
 			return true;
 
-		vector pos = player.GetPosition();
+		// лес и роща рядом — раз в CHECK_MS, а не каждый кадр
 		if (now >= m_VB_NextCheck)
 		{
 			m_VB_NextCheck = now + CHECK_MS;
+			vector pos = player.GetPosition();
 			m_VB_InForest = false;
 			if (VB_AR_Pulse.VB_NightFactor() >= VB_AR_Pulse.NIGHT_FULL_ABOVE)
 			{
@@ -188,10 +222,9 @@ class VB_AR_FavorHud
 				}
 				m_VB_InForest = trees >= FOREST_TREES;
 			}
+			m_VB_NearGrove = VB_AR_Pulse.VB_NearestLiveHeart(pos, GROVE_NEAR) != null;
 		}
-		if (m_VB_InForest)
-			return true;
-		return VB_AR_Pulse.VB_NearestLiveHeart(pos, GROVE_NEAR) != null;
+		return m_VB_InForest || m_VB_NearGrove;
 	}
 
 	void VB_Update(float dt)
@@ -218,12 +251,12 @@ class VB_AR_FavorHud
 		else
 			m_VB_Alpha = Math.Max(0, m_VB_Alpha - dt * FADE_SPEED);
 
-		// ветвь плавно доезжает до настоящего значения (с первого показа — сразу на месте)
+		// ветвь плавно доезжает до настоящего значения (с первого присланного значения — сразу на месте)
 		float target = Math.Clamp(VB_AR_Favor.s_VB_Value, -100, 100);
-		if (!m_VB_ShownSet)
+		if (!m_VB_ShownSet || !VB_AR_Favor.s_VB_Known)
 		{
 			m_VB_Shown = target;
-			m_VB_ShownSet = true;
+			m_VB_ShownSet = VB_AR_Favor.s_VB_Known;
 		}
 		float step = GROW_SPEED * dt;
 		if (Math.AbsFloat(target - m_VB_Shown) <= step)
@@ -252,12 +285,16 @@ class VB_AR_FavorHud
 			m_VB_Name.SetText(VB_AR_Favor.VB_TierName(tier));
 		}
 
-		// ветвь: зелень справа от центра, шипы слева
+		// ветвь: зелень справа от центра, шипы слева (маски и почку двигаем, только пока ветвь едет)
 		float pos01 = (m_VB_Shown + 100) / 200;
-		m_VB_Bloom.SetMaskProgress(Math.Max(0, m_VB_Shown) / 100);
-		m_VB_Thorn.SetMaskProgress(Math.Max(0, -m_VB_Shown) / 100);
 		float budX = pos01 * TRACK_W - BUD_SIZE / 2;
-		m_VB_Bud.SetPos(budX, BUD_Y);
+		if (m_VB_Shown != m_VB_SetShown)
+		{
+			m_VB_SetShown = m_VB_Shown;
+			m_VB_Bloom.SetMaskProgress(Math.Max(0, m_VB_Shown) / 100);
+			m_VB_Thorn.SetMaskProgress(Math.Max(0, -m_VB_Shown) / 100);
+			m_VB_Bud.SetPos(budX, BUD_Y);
+		}
 
 		// пульс: у «Врага» медленно, у «Проклятого» чаще; у «Друга» дышит почка
 		float runeAlpha = 1;
@@ -268,19 +305,37 @@ class VB_AR_FavorHud
 			runeAlpha = 0.65 + 0.35 * Math.Sin(m_VB_Time * Math.PI2 / 1.0);
 		else if (tier == VB_AR_Favor.TIER_FRIEND)
 			budAlpha = 0.75 + 0.25 * Math.Sin(m_VB_Time * Math.PI2 / 3.0);
-		m_VB_Rune.SetAlpha(runeAlpha * m_VB_Alpha);
-		m_VB_Disc.SetAlpha(0.55 * m_VB_Alpha);
-		m_VB_Branch.SetAlpha(m_VB_Alpha);
-		m_VB_Bloom.SetAlpha(m_VB_Alpha);
-		m_VB_Thorn.SetAlpha(m_VB_Alpha);
-		m_VB_Bud.SetAlpha(budAlpha * m_VB_Alpha);
-		m_VB_Name.SetAlpha(m_VB_Alpha);
+		runeAlpha = runeAlpha * m_VB_Alpha;
+		budAlpha = budAlpha * m_VB_Alpha;
+		if (runeAlpha != m_VB_SetRune)
+		{
+			m_VB_SetRune = runeAlpha;
+			m_VB_Rune.SetAlpha(runeAlpha);
+		}
+		if (budAlpha != m_VB_SetBud)
+		{
+			m_VB_SetBud = budAlpha;
+			m_VB_Bud.SetAlpha(budAlpha);
+		}
+		if (m_VB_Alpha != m_VB_SetAlpha)
+		{
+			m_VB_SetAlpha = m_VB_Alpha;
+			m_VB_Disc.SetAlpha(0.55 * m_VB_Alpha);
+			m_VB_Branch.SetAlpha(m_VB_Alpha);
+			m_VB_Bloom.SetAlpha(m_VB_Alpha);
+			m_VB_Thorn.SetAlpha(m_VB_Alpha);
+			m_VB_Name.SetAlpha(m_VB_Alpha);
+		}
 
 		// нашествие нечисти: строка над ветвью, мерцает
 		if (m_VB_SiegeHeart && m_VB_SiegeHeart.VB_UnderSiege())
 		{
 			int power = m_VB_SiegeHeart.VB_SiegePower();
-			m_VB_Siege.SetText("Нечисть грызёт корни · сила рощи " + power.ToString() + "%");
+			if (power != m_VB_SetSiegePower)
+			{
+				m_VB_SetSiegePower = power;
+				m_VB_Siege.SetText("Нечисть грызёт корни · сила рощи " + power.ToString() + "%");
+			}
 			m_VB_Siege.SetAlpha((0.75 + 0.25 * Math.Sin(m_VB_Time * Math.PI2 / 1.2)) * m_VB_Alpha);
 			if (!m_VB_Siege.IsVisible())
 				m_VB_Siege.Show(true);

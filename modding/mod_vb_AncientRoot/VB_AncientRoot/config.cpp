@@ -319,15 +319,11 @@ class CfgVehicles
 				};
 			};
 		};
-		// ванильная разделка волка (ваниль DZ/animals/canis_lupus/config.cpp) + свой трофей. Вложенный класс в наследнике
-		// заменяет родительский целиком, поэтому блок скопирован полностью. Второй клык с шансом — VB_RootGuards.VB_SkinServer.
+		// ванильная разделка волка (ваниль DZ/animals/canis_lupus/config.cpp). Вложенный класс в наследнике заменяет
+		// родительский целиком, поэтому блок скопирован полностью. Клык (VB_AR_WolfFang) здесь не выдаём: его даёт скрипт
+		// VB_RootGuards.VB_SkinServer и только стражам «с лутом» (у призванных волков клыка нет).
 		class Skinning
 		{
-			class ObtainedFang
-			{
-				item = "VB_AR_WolfFang";
-				count = 1;
-			};
 			class ObtainedHead
 			{
 				item = "Headdress_Wolf";
@@ -818,8 +814,8 @@ class CfgVehicles
 		hiddenSelectionsTextures[] = {"\VB_AncientRoot\data\items\vb_ar_amber_incl_co.paa", "\VB_AncientRoot\data\items\vb_ar_amber_vein_co.paa"};
 	};
 
-	// Трофей Лесового волка (ТЗ 2б.1): всегда один при разделке (Skinning у VB_RootGuard_Wolf), второй — шанс
-	// у волков рощи (VB_RootGuards.VB_SkinServer). Материал для Янтарного оберега и товар для торговцев (в конце работ).
+	// Трофей Лесового волка (ТЗ 2б.1): при разделке волка рощи «с лутом» — один всегда, второй с шансом
+	// (VB_RootGuards.VB_SkinServer; призванным волкам не выдаётся). Материал для Янтарного оберега и товар для торговцев (в конце работ).
 	// Модель — tools/gen_ar_veins.py (vb_ar_wolf_fang).
 	class VB_AR_WolfFang: Inventory_Base
 	{
@@ -946,6 +942,20 @@ class CfgVehicles
 		descriptionShort = "Нож, проросший терновым корнем. Шипы остаются в ране: зверь или нечисть истекает кровью и уже не может бежать. Каждое убийство возвращает владельцу немного крови. Если долго не кормить, шипы впиваются в руку хозяина.";
 		model = "\VB_AncientRoot\data\vb_ar_blade.p3d";
 		hiddenSelections[] = {};
+		// Своя модель — свои материалы на всех уровнях износа. Копия DamageSystem ножа (ваниль DZ\weapons\melee\blade\config.cpp,
+		// FangeKnife): там в healthLevels ванильные fange_knife_*.rvmat, а у нас 4 материала модели (сталь, кость, кора, жилы).
+		// Ванильные _destruct под нашу модель не подходят (другая развёртка и карта нормалей), поэтому и сломанный — свои.
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health
+				{
+					hitpoints = 130;
+					healthLevels[] = {{1.0,{"\VB_AncientRoot\data\vb_ar_p_bladesteel.rvmat","\VB_AncientRoot\data\vb_ar_p_bone.rvmat","\VB_AncientRoot\data\vb_ar_crust.rvmat","\VB_AncientRoot\data\vb_ar_vein.rvmat"}},{0.7,{"\VB_AncientRoot\data\vb_ar_p_bladesteel.rvmat","\VB_AncientRoot\data\vb_ar_p_bone.rvmat","\VB_AncientRoot\data\vb_ar_crust.rvmat","\VB_AncientRoot\data\vb_ar_vein.rvmat"}},{0.5,{"\VB_AncientRoot\data\vb_ar_p_bladesteel.rvmat","\VB_AncientRoot\data\vb_ar_p_bone.rvmat","\VB_AncientRoot\data\vb_ar_crust.rvmat","\VB_AncientRoot\data\vb_ar_vein.rvmat"}},{0.3,{"\VB_AncientRoot\data\vb_ar_p_bladesteel.rvmat","\VB_AncientRoot\data\vb_ar_p_bone.rvmat","\VB_AncientRoot\data\vb_ar_crust.rvmat","\VB_AncientRoot\data\vb_ar_vein.rvmat"}},{0.0,{"\VB_AncientRoot\data\vb_ar_p_bladesteel.rvmat","\VB_AncientRoot\data\vb_ar_p_bone.rvmat","\VB_AncientRoot\data\vb_ar_crust.rvmat","\VB_AncientRoot\data\vb_ar_vein.rvmat"}}};
+				};
+			};
+		};
 	};
 
 	// «Плащ лешего»: тёплый дождевик; ночью присел и замер — обычные зомби и звери теряют тебя (стражи — нет).
@@ -958,6 +968,53 @@ class CfgVehicles
 		visibilityModifier = 0.7;
 		hiddenSelectionsTextures[] = {"\VB_AncientRoot\data\retex\vb_ar_cloak_g_co.paa", "\VB_AncientRoot\data\retex\vb_ar_cloak_co.paa", "\VB_AncientRoot\data\retex\vb_ar_cloak_co.paa"};
 		hiddenSelectionsMaterials[] = {"\VB_AncientRoot\data\retex\vb_ar_cloak_g.rvmat", "\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat", "\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat"};
+		// Копия DamageSystem дождевика (ваниль DZ\characters\tops\config.cpp, Raincoat_ColorBase): там в healthLevels ванильные
+		// raincoat*.rvmat, и изношенный плащ терял свой материал. Здесь по материалу на скрытую секцию (camoGround, camoMale,
+		// camoFemale): свои на 1.0…0.3, на 0 — ванильные _destruct (как у ванили; цвет остаётся из hiddenSelectionsTextures).
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health
+				{
+					hitpoints = 120;
+					healthLevels[] = {{1.0,{"\VB_AncientRoot\data\retex\vb_ar_cloak_g.rvmat","\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat","\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat"}},{0.7,{"\VB_AncientRoot\data\retex\vb_ar_cloak_g.rvmat","\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat","\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat"}},{0.5,{"\VB_AncientRoot\data\retex\vb_ar_cloak_g.rvmat","\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat","\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat"}},{0.3,{"\VB_AncientRoot\data\retex\vb_ar_cloak_g.rvmat","\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat","\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat"}},{0.0,{"\DZ\characters\tops\Data\raincoat_g_destruct.rvmat","\DZ\characters\tops\Data\raincoat_destruct.rvmat","\DZ\characters\tops\Data\raincoat_destruct.rvmat"}}};
+				};
+			};
+			class GlobalArmor
+			{
+				class Melee
+				{
+					class Health
+					{
+						damage = 0.95;
+					};
+					class Blood
+					{
+						damage = 1;
+					};
+					class Shock
+					{
+						damage = 1;
+					};
+				};
+				class Infected
+				{
+					class Health
+					{
+						damage = 0.95;
+					};
+					class Blood
+					{
+						damage = 1;
+					};
+					class Shock
+					{
+						damage = 1;
+					};
+				};
+			};
+		};
 	};
 
 	// «Янтарный оберег» (ТЗ 2б.5; скрипты VB_AR_Gear.c, сервер VB_AR_GearServer.c, VB_AR_FavorServer.c):

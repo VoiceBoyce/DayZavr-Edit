@@ -3,6 +3,9 @@
 //   Враг леса  — изредка шёпот рощи за спиной (в среднем раз в ~5 мин);
 //   Проклятый  — шёпот чаще (~раз в 2 мин) и «хватка корней» раз в GRIP_MIN_MS..GRIP_MAX_MS: корни у ног, выносливость
 //                в ноль, пара секунд на месте, без хромоты, «Корни хватают тебя за ноги — лес помнит тебя».
+//                Первая хватка — через FIRST_MIN_MS..FIRST_MAX_MS после того, как он оказался ночью в лесу. Если больше
+//                MISS_TICKS проверок подряд он не подходил (день, ушёл из леса, Проклятым быть перестал, вышел с сервера),
+//                запись стирается — при возвращении снова сначала «первая» через 1–3 мин, а не хватка сразу.
 // Сбой метки на карте не делаем: карта на 18 — сторонние моды. Клиент — VB_AR_Memory.c.
 
 class VB_AR_Memory
@@ -14,10 +17,12 @@ class VB_AR_Memory
 	static const int GRIP_MAX_MS = 600000;
 	static const int FIRST_MIN_MS = 60000;			// первая хватка после того, как Проклятый оказался ночью в лесу
 	static const int FIRST_MAX_MS = 180000;
+	static const int MISS_TICKS = 2;				// столько проверок подряд «не подходил» — ещё та же встреча
 	static const float BEHIND = 6.0;				// м за спиной
 	static const float SEE_DIST = 100.0;			// кто видит корни у ног
 
 	protected static ref map<string, int> s_VB_NextGrip;	// SteamID -> когда следующая хватка
+	protected static ref map<string, int> s_VB_Missed;		// SteamID -> сколько проверок подряд не подходил
 	protected static bool s_VB_Started;
 
 	static void VB_Start()
@@ -26,13 +31,20 @@ class VB_AR_Memory
 			return;
 		s_VB_Started = true;
 		s_VB_NextGrip = new map<string, int>;
+		s_VB_Missed = new map<string, int>;
 		g_Game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(VB_Tick, TICK_MS, true);
 	}
 
 	static void VB_Tick()
 	{
-		if (VB_AR_Pulse.VB_NightFactor() < VB_AR_Pulse.NIGHT_FULL_ABOVE)
-			return;
+		map<string, bool> here = new map<string, bool>;		// Проклятые, подходящие под хватку в эту проверку
+		if (VB_AR_Pulse.VB_NightFactor() >= VB_AR_Pulse.NIGHT_FULL_ABOVE)
+			VB_NightTick(here);
+		VB_CountMissed(here);
+	}
+
+	protected static void VB_NightTick(map<string, bool> here)
+	{
 		array<Man> players = new array<Man>;
 		g_Game.GetPlayers(players);
 		int now = g_Game.GetTime();
@@ -57,7 +69,11 @@ class VB_AR_Memory
 				chance = CURSED_WHISPER;
 			if (Math.RandomFloat01() < chance)
 				VB_WhisperBehind(p);
-			if (tier != VB_AR_Favor.TIER_CURSED || p.IsUnconscious())
+			if (tier != VB_AR_Favor.TIER_CURSED)
+				continue;
+			here.Set(id, true);				// без сознания — тоже «здесь»: встреча не прерывается, просто без хватки
+			s_VB_Missed.Remove(id);
+			if (p.IsUnconscious())
 				continue;
 			if (!s_VB_NextGrip.Find(id, next))
 			{
@@ -68,6 +84,31 @@ class VB_AR_Memory
 				continue;
 			s_VB_NextGrip.Set(id, now + Math.RandomIntInclusive(GRIP_MIN_MS, GRIP_MAX_MS));
 			VB_Grip(p, players);
+		}
+	}
+
+	// кто из записанных не подошёл в эту проверку — счётчик +1; больше MISS_TICKS подряд — запись стираем (и вышедших
+	// с сервера тоже): при возвращении первая хватка снова через FIRST_MIN_MS..FIRST_MAX_MS
+	protected static void VB_CountMissed(map<string, bool> here)
+	{
+		TStringArray gone = new TStringArray;
+		int miss;
+		foreach (string id, int next : s_VB_NextGrip)
+		{
+			if (here.Contains(id))
+				continue;
+			miss = 0;
+			s_VB_Missed.Find(id, miss);
+			miss++;
+			if (miss > MISS_TICKS)
+				gone.Insert(id);
+			else
+				s_VB_Missed.Set(id, miss);
+		}
+		foreach (string g : gone)
+		{
+			s_VB_NextGrip.Remove(g);
+			s_VB_Missed.Remove(g);
 		}
 	}
 

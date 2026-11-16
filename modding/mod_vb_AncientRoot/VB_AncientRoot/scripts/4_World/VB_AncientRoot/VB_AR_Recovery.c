@@ -44,19 +44,29 @@ class VB_AR_Recovery
 		return null;
 	}
 
-	// живая сердцевина рядом (объекты рядом — годится и серверу, где нет пульса)
+	// ближайшая живая сердцевина (объекты рядом — годится и серверу, где нет пульса). Именно ближайшая, а не первая
+	// в списке: две рощи бывают ближе maxDist друг к другу (подношение через корень, VB_AR_Offer.VB_HeartOf)
 	static VB_AR_Heart VB_LiveHeartNear(vector pos, float maxDist)
 	{
 		array<Object> objs = new array<Object>;
 		g_Game.GetObjectsAtPosition(pos, maxDist, objs, null);
+		VB_AR_Heart best;
+		float bestSq;
+		float dSq;
 		VB_AR_Heart h;
 		foreach (Object o : objs)
 		{
 			h = VB_AR_Heart.Cast(o);
-			if (h && !h.VB_IsDead())
-				return h;
+			if (!h || h.VB_IsDead())
+				continue;
+			dSq = vector.DistanceSq(pos, h.GetPosition());
+			if (!best || dSq < bestSq)
+			{
+				bestSq = dSq;
+				best = h;
+			}
 		}
-		return null;
+		return best;
 	}
 }
 

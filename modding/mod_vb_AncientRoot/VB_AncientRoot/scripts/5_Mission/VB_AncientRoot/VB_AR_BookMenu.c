@@ -28,8 +28,11 @@ class VB_AR_BookSide
 	RichTextWidget EntText1;
 	RichTextWidget EntText2;
 
+	// false — в разметке нет нужного виджета (окно тогда закрывается, VB_AR_BookMenu.m_VB_Ready)
 	bool VB_Bind(Widget root, string s)
 	{
+		if (!root)
+			return false;
 		Root = root.FindAnyWidget("VB_AR_BookSide" + s);
 		Title = TextWidget.Cast(root.FindAnyWidget("VB_AR_BookTitle" + s));
 		Orn = ImageWidget.Cast(root.FindAnyWidget("VB_AR_BookOrn" + s));
@@ -589,7 +592,7 @@ class VB_AR_BookMenu : UIScriptedMenu
 		if (VB_AR_Favor.s_VB_Known)
 			m_VB_YouValue.SetText("Расположение леса: " + val);
 		else
-			m_VB_YouValue.SetText("Лес еще не знает тебя");
+			m_VB_YouValue.SetText("Лес ещё не знает тебя");
 
 		// что открыто и что дальше
 		int open = 0;
@@ -600,7 +603,9 @@ class VB_AR_BookMenu : UIScriptedMenu
 		}
 		int total = m_VB_Pages.Count();
 		string txt = VB_AR_BookText.VB_TierSpeech(tier) + "\n";
-		txt += "Открыто страниц: " + open.ToString() + " из " + total.ToString() + ".";
+		string openStr = open.ToString();		// не два ToString в одном выражении (E71)
+		string totalStr = total.ToString();
+		txt += "Открыто страниц: " + openStr + " из " + totalStr + ".";
 		int nextTier = VB_AR_Favor.TIER_FRIEND;
 		if (tier < VB_AR_Favor.TIER_OWN)
 			nextTier = VB_AR_Favor.TIER_OWN;
@@ -641,7 +646,7 @@ class VB_AR_BookMenu : UIScriptedMenu
 		int needValue = VB_AR_BookText.VB_NeedValue(need);
 		string needWord = VB_AR_BookText.VB_NeedWord(need);
 		string tierName = VB_AR_Favor.VB_TierName(tier);
-		string t = "Эти строки написаны языком корней.\nОни проступят, когда лес назовет тебя " + needWord;
+		string t = "Эти строки написаны языком корней.\nОни проступят, когда лес назовёт тебя " + needWord;
 		t += " — расположение +" + needValue.ToString() + " и выше.\n";
 		t += "Сейчас ты для леса — " + tierName + " (" + val + ").";
 		return t;
@@ -698,10 +703,8 @@ class VB_AR_BookMenu : UIScriptedMenu
 			return;
 		if (m_VB_Spin)
 			m_VB_Spin.Clear();
-		if (m_VB_L && m_VB_L.Pic)
-			VB_ClearPreviews(m_VB_L);
-		if (m_VB_R && m_VB_R.Pic)
-			VB_ClearPreviews(m_VB_R);
+		VB_ClearPreviews(m_VB_L);
+		VB_ClearPreviews(m_VB_R);
 		foreach (string type, EntityAI item : m_VB_Items)
 		{
 			if (item && g_Game)
@@ -710,11 +713,17 @@ class VB_AR_BookMenu : UIScriptedMenu
 		m_VB_Items.Clear();
 	}
 
+	// отвязать картинки от удаляемых копий; при битой разметке любой виджет может не найтись
 	protected void VB_ClearPreviews(VB_AR_BookSide s)
 	{
-		s.Pic.SetItem(null);
-		s.EntPic1.SetItem(null);
-		s.EntPic2.SetItem(null);
+		if (!s)
+			return;
+		if (s.Pic)
+			s.Pic.SetItem(null);
+		if (s.EntPic1)
+			s.EntPic1.SetItem(null);
+		if (s.EntPic2)
+			s.EntPic2.SetItem(null);
 	}
 }
 

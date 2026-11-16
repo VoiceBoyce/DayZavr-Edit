@@ -2,9 +2,12 @@
 //   settings.json — сколько гнёзд ставить, доля корней, расстояние, прорастание, админы редактора
 //   nests.json    — все гнёзда (пишет внутриигровой редактор; можно править руками при выключенном сервере
 //                   или «Перебросить гнёзда» в редакторе — он перечитывает файлы с диска)
-//   state.json    — живые рощи со ступенями (Groves, ТЗ 2б.4), гнёзда прошлого рестарта, засеянные Семенем
-//   nests_backup.json — копия nests.json на каждом старте сервера, до любых правок
-//   nests_tmp.json    — новая версия nests.json при записи; остаётся, только если запись прервалась
+//   state.json    — живые рощи со ступенями (Groves, ТЗ 2б.4), гнёзда прошлого рестарта, засеянные Семенем,
+//                   начало и «жив до» текущего запуска (длина запуска — для роста)
+//   nests_backup.json — копия nests.json на старте сервера, до любых правок (файл без гнёзд её не затирает);
+//   nests_backup2.json — прежняя отличающаяся копия
+//   nests_tmp.json, state_tmp.json, settings_tmp.json — новая версия при записи; остаётся, только если запись прервалась
+//   state_backup.json — копия state.json удачного старта; *_broken.json — файл с ошибкой, сохранённый до перезаписи
 // Классы гнезда (VB_AR_Nest, VB_AR_NestObj) лежат в клиентском аддоне VB_AncientRoot: их же получает редактор.
 // Лежит в 4_World, а не в 3_Game: VB_AR_NestFile ссылается на VB_AR_Nest из 4_World клиента.
 
@@ -34,9 +37,10 @@ class VB_AR_NestSettings
 	int RegrowMinutes = 0;			// через столько минут после вырезания сердца прорастает новое гнездо (0 — выключено)
 	// рост рощ (ТЗ 2б.4, шаг 5): ActiveNests — сколько живых рощ держать на карте
 	int GrowRestarts = 2;			// очков роста на ступень (очко — пережитый невырезанным рестарт)
-	int FeedOffers = 2;				// приняла за рестарт столько подношений — ещё +1 очко
+	int FeedOffers = 2;				// приняла за рестарт столько подношений — ещё +1 очко (росток — свой единственный)
 	int AncientLife = 4;			// древняя живёт столько рестартов и уходит в землю
 	int MaxAncient = 1;				// древних одновременно не больше
+	int GrowMinSessionMinutes = 60;	// запуск короче — не рестарт: рост и старение не считаются (падения подряд); 0 — всегда
 	// «Защита рощи» — нашествие пауков (ТЗ 2в п.1, VB_AR_WorldSiege.c)
 	int SiegeCheckMinutes = 10;		// как часто ночью бросать жребий
 	float SiegeChance = 0.15;		// шанс нашествия на проверке (0 — выключено)
@@ -62,6 +66,7 @@ class VB_AR_NestSettings
 		FeedOffers = -1;
 		AncientLife = -1;
 		MaxAncient = -1;
+		GrowMinSessionMinutes = -1;
 		SiegeCheckMinutes = -1;
 		SiegeChance = -1;
 		SiegeCooldownMinutes = -1;
@@ -109,6 +114,10 @@ class VB_AR_NestSettings
 			AncientLife = 1000;
 		if (MaxAncient < 0)
 			MaxAncient = 1;
+		if (GrowMinSessionMinutes < 0)
+			GrowMinSessionMinutes = 60;
+		if (GrowMinSessionMinutes > 1440)
+			GrowMinSessionMinutes = 1440;
 		if (SiegeCheckMinutes < 1)
 			SiegeCheckMinutes = 10;
 		if (SiegeCheckMinutes > 1440)
@@ -119,6 +128,8 @@ class VB_AR_NestSettings
 			SiegeChance = 1;
 		if (SiegeCooldownMinutes < 0)
 			SiegeCooldownMinutes = 120;
+		if (SiegeCooldownMinutes > 10080)
+			SiegeCooldownMinutes = 10080;		// неделя: больше — переполнение мс в int (WorldSiege)
 		if (!(SiegePlayerDistance >= 0))
 			SiegePlayerDistance = 200;
 		if (SiegePlayerDistance > 5000)
@@ -134,13 +145,16 @@ class VB_AR_Grove
 	int Nest;			// id гнезда в nests.json
 	int Stage = 1;		// 1 росток, 2 роща, 3 древняя
 	int Growth;			// очки роста на текущей ступени
-	int Age;			// сколько рестартов прожила древней
+	int Age;			// сколько рестартов прожила древней (−1 — продлила век, VB_GroveDefended)
 	int Offers;			// подношений за текущий рестарт
 	int Disturbed;		// 1 — в этот рестарт сбором подняли волну (роста не будет)
+	int Extended;		// 1 — древняя уже раз продлила век (ритуал роста, нашествие): второй раз нельзя
 }
 
 class VB_AR_NestState
 {
+	int StartMin;		// минута UTC (от 1970) старта текущего запуска
+	int AliveMin;		// и последняя отметка «жив» (раз в 5 мин): разница — длина запуска
 	ref TIntArray LastActive;
 	ref TIntArray Seeded;	// гнёзда, где посадили Семя Древнего корня: на следующем рестарте встают первыми (ростком)
 	ref array<ref VB_AR_Grove> Groves;	// живые рощи

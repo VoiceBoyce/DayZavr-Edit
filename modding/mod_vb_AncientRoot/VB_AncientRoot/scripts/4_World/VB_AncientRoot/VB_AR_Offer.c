@@ -7,7 +7,8 @@
 // Ценность дара (схема утверждена пользователем 2026-11-15):
 //   лучший  — руны и кристаллы MSFZ, трофеи боссов аномалий (VB_AB_Trophy_*);
 //   средний — трофеи мутантов MSFZ (глаз и шип Занозы, лапа паука, голова Ричара, голова Энта);
-//   мясо    — любое мясо (Object.IsMeat: звериное, мутантов, рыба).
+//   мясо    — мясо (Object.IsMeat: звериное, мутантов, рыба), кроме человечины (HumanSteakMeat и классы с «Human»),
+//             тухлого и горелого (Edible_Base.IsFoodRotten / IsFoodBurned) — VB_IsGiftMeat.
 
 class VB_AR_Offer
 {
@@ -37,9 +38,22 @@ class VB_AR_Offer
 			if (type.IndexOf(m) == 0)
 				return TIER_MID;
 		}
-		if (item.IsMeat())
+		if (VB_IsGiftMeat(item))
 			return TIER_MEAT;
 		return TIER_NONE;
+	}
+
+	// мясо, которое роща берёт: не человечина, не тухлое и не горелое (обе стороны — стадия еды синхронизируется)
+	static bool VB_IsGiftMeat(EntityAI item)
+	{
+		if (!item || !item.IsMeat())
+			return false;
+		if (item.IsKindOf("HumanSteakMeat") || item.GetType().IndexOf("Human") >= 0)
+			return false;
+		Edible_Base food = Edible_Base.Cast(item);
+		if (food && (food.IsFoodRotten() || food.IsFoodBurned()))
+			return false;
+		return true;
 	}
 
 	// Части ритуалов (ТЗ 2в п.3; сервер VB_AR_RitualServer.c): два дара одного игрока подряд у рощи или древней.
@@ -67,7 +81,7 @@ class VB_AR_Offer
 			return PART_POLLEN;
 		if (type.IndexOf("MSFZ_RuneStone") == 0 || type.IndexOf("MSFZ_Crystal_") == 0)
 			return PART_RUNE;
-		if (item.IsMeat())
+		if (VB_IsGiftMeat(item))
 			return PART_MEAT;
 		return PART_NONE;
 	}
@@ -76,7 +90,8 @@ class VB_AR_Offer
 
 	// Сердцевина рощи по любой её части (решение пользователя 2026-11-16, вариант Г): сама сердцевина или сетевой корень,
 	// щупальце рядом. Обвивки деревьев и корни на домах — локальные объекты клиента (сетевого ID нет): сервер их не
-	// знает, поэтому через них ничего не делаем. aliveOnly — только живая (для подношения).
+	// знает, поэтому через них ничего не делаем. aliveOnly — только живая (для подношения). Всегда БЛИЖАЙШАЯ к корню
+	// сердцевина: две рощи бывают ближе GROVE_PART_DIST друг к другу.
 	static VB_AR_Heart VB_HeartOf(Object o, bool aliveOnly = true)
 	{
 		VB_AR_Heart h = VB_AR_Heart.Cast(o);

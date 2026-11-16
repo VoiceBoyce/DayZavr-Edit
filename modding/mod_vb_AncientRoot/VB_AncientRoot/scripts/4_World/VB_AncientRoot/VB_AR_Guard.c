@@ -7,9 +7,22 @@
 
 class VB_AR_Guard
 {
+	// VB_Is зовут из CanBeTargetedByAI очень часто: метку конфига читаем один раз на класс
+	protected static ref map<string, bool> s_VB_ByType;
+
 	static bool VB_Is(EntityAI e)
 	{
-		return e && e.ConfigGetBool("vbRootGuard");
+		if (!e)
+			return false;
+		if (!s_VB_ByType)
+			s_VB_ByType = new map<string, bool>;
+		string type = e.GetType();
+		bool isGuard;
+		if (s_VB_ByType.Find(type, isGuard))
+			return isGuard;
+		isGuard = e.ConfigGetBool("vbRootGuard");
+		s_VB_ByType.Set(type, isGuard);
+		return isGuard;
 	}
 }
 

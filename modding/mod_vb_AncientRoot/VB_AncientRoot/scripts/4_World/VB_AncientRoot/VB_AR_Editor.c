@@ -12,6 +12,8 @@
 // не дальше NEST_RADIUS (иначе в новое), щупальца — к ближайшему сердцу, а вдали от сердец — в постоянный декор,
 // который стоит на каждом рестарте (решает сервер).
 // Гнёзда рядом видны целиком: что сервер сейчас не поставил, показывается локальными копиями только у админа.
+// Сердца-копии «голые» (VB_AR_Base.m_VB_Bare): без пульса, обвивок и корней на домах; корни-копии пульсируют, но
+// действия их не видят (нет сетевого ID).
 
 class VB_AR_Editor
 {
@@ -825,6 +827,12 @@ class VB_AR_Editor
 		return m_VB_GhostPos;
 	}
 
+	// точка под курсором (или в центре экрана) с прошлого кадра
+	vector VB_AimPos()
+	{
+		return m_VB_AimPos;
+	}
+
 	string VB_GhostNote()
 	{
 		return m_VB_GhostNote;
@@ -1089,7 +1097,12 @@ class VB_AR_Editor
 				if (m_VB_Preview.Contains(o.Id))
 					continue;
 
-				obj = g_Game.CreateObjectEx(o.Type, o.Position, ECE_LOCAL);
+				// сердце — «голым»: копия не одевает окрестности (обвивки, дома) и не пульсирует, вид ставится один раз
+				bool heartCopy = VB_AR_NestUtil.VB_IsHeartType(o.Type);
+				if (heartCopy)
+					obj = VB_CreateBare(o.Type, o.Position);
+				else
+					obj = g_Game.CreateObjectEx(o.Type, o.Position, ECE_LOCAL);
 				if (!obj)
 					continue;
 
@@ -1097,6 +1110,8 @@ class VB_AR_Editor
 				if (grove)
 				{
 					grove.VB_PlaceAt(o.Position, o.Orientation);
+					if (heartCopy)
+						grove.VB_ShowStill();
 				}
 				else
 				{
@@ -1497,13 +1512,19 @@ class VB_AR_EditorPanels : Managed
 		// пока число ещё не ушло на сервер (задержка после клика), показываем его, а не старое серверное
 		if (m_VB_ActiveStep)
 			m_VB_ActiveStep.SetValue(ed.VB_ActiveShown(), false);
+		// правила как у сервера (VB_AR_NestsServer: VB_Activate, VB_SpawnNest): живые рощи — на своих местах, ростки —
+		// на свободные гнёзда; доля корней по ступени (росток 30–40 %, роща — из settings.json, древняя — все)
 		int minDistM = Math.Round(VB_AR_NestClient.s_VB_MinDist);
-		string rules = "Встают случайные, не ближе " + minDistM.ToString() + " м друг к другу";
+		string minDistStr = minDistM.ToString();
 		string keepMin = VB_AR_NestClient.s_VB_KeepMin.ToString();
 		string keepMax = VB_AR_NestClient.s_VB_KeepMax.ToString();
-		rules += " и не те, что на прошлом рестарте; корней " + keepMin + "–" + keepMax + "%.";
+		string rules = "Рощи растут на своих местах, ростки — на свободных гнёздах дальше " + minDistStr + " м от других.";
+		rules += " Корней: росток 30–40%, роща " + keepMin + "–" + keepMax + "%, древняя все.";
 		if (VB_AR_NestClient.s_VB_Regrow > 0)
-			rules += " Новое прорастает через " + VB_AR_NestClient.s_VB_Regrow.ToString() + " мин после вырезания.";
+		{
+			string regrow = VB_AR_NestClient.s_VB_Regrow.ToString();
+			rules += " После резки росток — через " + regrow + " мин.";
+		}
 		if (m_VB_Rules)
 			m_VB_Rules.SetText(rules);
 
@@ -1565,7 +1586,11 @@ class VB_AR_EditorPanels : Managed
 	protected void VB_UpdateStatus(VB_AR_Editor ed)
 	{
 		string nestLine;
-		int into = ed.VB_NestFor(ed.VB_GhostPos());
+		// ничего не выбрано — призрака нет и его позиция старая: «Рядом» считаем от точки прицела
+		vector at = ed.VB_GhostPos();
+		if (ed.m_VB_Type == "")
+			at = ed.VB_AimPos();
+		int into = ed.VB_NestFor(at);
 		VB_AR_Nest nest = VB_AR_NestClient.VB_Find(into);
 		if (ed.m_VB_Type == "")
 		{
@@ -1728,7 +1753,8 @@ class VB_AR_EditorPanels : Managed
 	{
 		if (m_VB_Dialog && !m_VB_Dialog.IsFinished())
 			return;
-		string text = "Все гнёзда снимутся с карты, и сервер выберет новые, как на рестарте (не у игроков). Гнёзда с вырезанным сердцем до рестарта не вернутся.";
+		string text = "Все живые рощи (ступени, рост, древние) начнутся заново ростками. ";
+		text += "Гнёзда снимутся с карты, и сервер выберет новые, как на рестарте (не у игроков). Гнёзда с вырезанным сердцем до рестарта не вернутся.";
 		INT_UIF_Dialog d = INT_UIF_Dialog.Confirm("Перебросить гнёзда?", text, "Перебросить", "Отмена", INT_UIF_Variant.WARNING);
 		if (d)
 		{

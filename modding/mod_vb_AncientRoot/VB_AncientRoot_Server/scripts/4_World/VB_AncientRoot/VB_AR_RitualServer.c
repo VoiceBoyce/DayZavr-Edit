@@ -1,9 +1,12 @@
 // Ритуалы — сочетания даров (ТЗ_сервер_18.md, ветка 2в п.3) — только сервер. У рощи и древней (у ростка нет).
 // Два подношения одного игрока у одной рощи подряд, не дольше WINDOW_MS между ними, порядок не важен:
 //   «Ритуал волка»  — клык + мясо: WOLF_MS обычные волки не нападают первыми (стражи-волки — как раньше);
-//   «Ритуал янтаря» — руна или кристалл + простой янтарь: янтарь с вкраплением и янтарь у ног;
+//   «Ритуал янтаря» — руна или кристалл + простой янтарь: ровно одно вкрапление за руну. Если руна обычным даром уже
+//                     дала вкрапление (шанс лучшего дара) — второго нет. Простой янтарь назад не возвращается: иначе
+//                     руна -> вкрапление -> руна/кристалл множились (ревью 11-16);
 //   «Ритуал роста»  — Семя + пыльца: роща сразу на ступень вверх (в древнюю — по лимиту, VB_AR_Nests.VB_OnGroveDefended),
-//                     древняя — рестарт жизни.
+//                     древняя — рестарт жизни, но только раз за её жизнь (VB_AR_Nests.VB_CanExtend: продлённая Семя
+//                     и пыльцу не берёт).
 // Клык, янтарь, Семя, пыльца сами по себе не дары: роща берёт их только как часть ритуала («Роща ждёт второго дара»).
 // Мясо и руна — обычные дары (своя награда и Благословение) и заодно часть ритуала. Каждая часть тратит одно подношение
 // из лимита рощи; чтобы начать ритуал компонентом, роще нужно ещё два. Ритуал: Благословение (если вторая часть —
@@ -14,6 +17,7 @@ class VB_AR_RitualPending
 	string Grove;		// место рощи (ключ)
 	int Part;			// VB_AR_Offer.PART_*
 	int At;				// g_Game.GetTime()
+	bool GaveIncl;		// руна-начало обычным даром уже дала вкрапление
 }
 
 class VB_AR_Ritual
@@ -87,7 +91,7 @@ class VB_AR_Ritual
 		return pend;
 	}
 
-	protected static void VB_SetPending(string id, VB_AR_Heart h, int part)
+	protected static void VB_SetPending(string id, VB_AR_Heart h, int part, bool gaveIncl = false)
 	{
 		if (!s_VB_Pending)
 			s_VB_Pending = new map<string, ref VB_AR_RitualPending>;
@@ -95,7 +99,13 @@ class VB_AR_Ritual
 		pend.Grove = VB_GroveKey(h);
 		pend.Part = part;
 		pend.At = g_Game.GetTime();
+		pend.GaveIncl = gaveIncl;
 		s_VB_Pending.Set(id, pend);
+	}
+
+	protected static bool VB_IsComponent(int part)
+	{
+		return part != VB_AR_Offer.PART_NONE && part != VB_AR_Offer.PART_MEAT && part != VB_AR_Offer.PART_RUNE;
 	}
 
 	protected static void VB_Consume(ItemBase item)
@@ -117,6 +127,12 @@ class VB_AR_Ritual
 			NotificationSystem.SendNotificationToPlayerExtended(p, 5, "Росток ещё мал", "Ритуалы примет только взрослая роща.");
 			return false;
 		}
+		// древняя, уже раз продлившая век, ритуал роста не примет (жизнь древней конечна, ТЗ 2б.4)
+		if ((part == VB_AR_Offer.PART_SEED || part == VB_AR_Offer.PART_POLLEN) && !VB_AR_Nests.VB_CanExtend(h))
+		{
+			NotificationSystem.SendNotificationToPlayerExtended(p, 5, "Древняя роща не примет", "Она уже раз продлила свой век — дольше ей не прожить.");
+			return false;
+		}
 		string what = item.GetType();
 		VB_AR_RitualPending pend = VB_PendingOf(id, h);
 		if (pend)
@@ -127,7 +143,7 @@ class VB_AR_Ritual
 				VB_Consume(item);
 				h.VB_TakeRitualPartServer();
 				s_VB_Pending.Remove(id);
-				VB_Complete(h, p, r, true);
+				VB_Complete(h, p, r, true, pend.GaveIncl);
 				return true;
 			}
 		}
@@ -138,7 +154,7 @@ class VB_AR_Ritual
 			return false;
 		}
 		// прежний начатый компонентом ритуал этим даром не сложился — сказать, что тот дар пропал
-		if (pend && pend.Part != VB_AR_Offer.PART_MEAT && pend.Part != VB_AR_Offer.PART_RUNE)
+		if (pend && VB_IsComponent(pend.Part))
 			NotificationSystem.SendNotificationToPlayerExtended(p, 5, "Прежний ритуал не сложился", "Такие дары роща не связывает: начат новый ритуал.");
 		VB_Consume(item);
 		h.VB_TakeRitualPartServer();
@@ -152,8 +168,8 @@ class VB_AR_Ritual
 	}
 
 	// Обычный дар принят (мясо, руна): закончить ритуал, если ждал компонент, иначе стать его началом (без подсказки:
-	// сочетания — тайна «Книги древних»).
-	static void VB_AfterGift(VB_AR_Heart h, PlayerBase p, int part)
+	// сочетания — тайна «Книги древних»). gaveIncl — этот дар уже дал янтарь с вкраплением.
+	static void VB_AfterGift(VB_AR_Heart h, PlayerBase p, int part, bool gaveIncl)
 	{
 		if (part != VB_AR_Offer.PART_MEAT && part != VB_AR_Offer.PART_RUNE)
 			return;
@@ -169,12 +185,18 @@ class VB_AR_Ritual
 			if (r != R_NONE)
 			{
 				s_VB_Pending.Remove(id);
-				VB_Complete(h, p, r, false);		// Благословение уже дал обычный дар
+				VB_Complete(h, p, r, false, gaveIncl);		// Благословение уже дал обычный дар
 				return;
+			}
+			// обычный дар перебил ритуал, начатый компонентом: компонент пропал — сказать, а не молчать
+			if (VB_IsComponent(pend.Part))
+			{
+				s_VB_Pending.Remove(id);
+				NotificationSystem.SendNotificationToPlayerExtended(p, 5, "Прежний ритуал не сложился", "Роща приняла другой дар — прежний ритуал оборвался.");
 			}
 		}
 		if (h.VB_OffersLeft() >= 1)
-			VB_SetPending(id, h, part);
+			VB_SetPending(id, h, part, gaveIncl);
 	}
 
 	// начатый компонентом ритуал не дождался второго дара
@@ -202,7 +224,8 @@ class VB_AR_Ritual
 		}
 	}
 
-	protected static void VB_Complete(VB_AR_Heart h, PlayerBase p, int r, bool bless)
+	// inclGiven — за руну этого ритуала вкрапление уже выдано обычным даром (ритуал янтаря его не повторяет)
+	protected static void VB_Complete(VB_AR_Heart h, PlayerBase p, int r, bool bless, bool inclGiven)
 	{
 		string id = VB_Id(p);
 		string title;
@@ -220,10 +243,16 @@ class VB_AR_Ritual
 		else if (r == R_AMBER)
 		{
 			name = "янтаря";
-			VB_AR_ItemsServer.VB_DropAtFeet(p, AMBER_INCL);
-			VB_AR_ItemsServer.VB_DropAtFeet(p, AMBER);
 			title = "Ритуал янтаря";
-			text = "Роща отдала янтарь с вкраплением и ещё кусок янтаря.";
+			if (inclGiven)
+			{
+				text = "Роща сплавила руну с янтарём — вкрапление ты уже получил с даром.";
+			}
+			else
+			{
+				VB_AR_ItemsServer.VB_DropAtFeet(p, AMBER_INCL);
+				text = "Роща сплавила руну с янтарём: янтарь с вкраплением у твоих ног.";
+			}
 		}
 		else
 		{

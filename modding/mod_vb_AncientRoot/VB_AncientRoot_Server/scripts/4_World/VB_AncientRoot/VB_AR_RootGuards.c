@@ -5,8 +5,10 @@
 // Волны сердцевины по нарастающей (2б.10, цифры черновые, подбираются на стенде):
 //   1-я — 2–3 лесовых волка; 2-я — 3–4 волка и Терновая заноза; 3-я — 2–3 волка и две занозы.
 //   Росток: только волки, вырезание — 3 волка и заноза. Древняя: на волка больше, при вырезании ещё Хранитель рощи.
-// Разделка стража: лут по конфигу (шкура, мясо; волку — Клык лесового волка, Занозе и Энту — трофеи MSFZ)
-// + шанс на отросток, пыльцу и второй клык.
+// Разделка стража рощи: лут по конфигу (шкура, мясо; Занозе и Энту — трофеи MSFZ), волку — Клык лесового волка
+// скриптом (VB_SkinServer), + шанс на отросток, пыльцу и второй клык.
+// Призванные стражи (волна с loot = false: волны за дурную славу, волки светоча, стая Хранителя) — без добычи вовсе
+// (VB_AR_GuardSkin.c: тело рассыпается трухой) и без штрафа расположения за убийство (VB_AR_GuardHit.VB_OnKilled).
 
 class VB_RootGuards
 {
@@ -17,10 +19,17 @@ class VB_RootGuards
 	static const string POLLEN_TYPE = "VB_AR_Spores";
 	static const string FANG_TYPE = "VB_AR_WolfFang";
 	static const string KEEPER_HEART = "VB_AR_KeeperHeart";	// трофей Хранителя (ТЗ 2в п.2) — всегда
-	static const float FANG2_CHANCE = 0.25;		// второй клык у волка рощи (первый — всегда, по конфигу)
+	static const float FANG2_CHANCE = 0.25;		// второй клык у волка рощи (первый — всегда)
 
-	// состав волны: wave — номер волны у этой сердцевины (1..), level — ступень рощи (1 росток, 2 роща, 3 древняя)
-	static TStringArray VB_WaveTypes(int wave, int level = 2)
+	// страж призван (не встал на защиту рощи сам): без добычи и без штрафа за убийство
+	static bool VB_Summoned(EntityAI body)
+	{
+		return body && !VB_AR_Horde.VB_HasLoot(body);
+	}
+
+	// состав волны: wave — номер волны у этой сердцевины (1..), level — ступень рощи (1 росток, 2 роща, 3 древняя);
+	// keeper = false — без Хранителя (он выходит на вырезание древней только раз за рестарт)
+	static TStringArray VB_WaveTypes(int wave, int level = 2, bool keeper = true)
 	{
 		TStringArray types = new TStringArray;
 		int wolves;
@@ -58,7 +67,7 @@ class VB_RootGuards
 			types.Insert(WOLF);
 		for (int k = 0; k < zanozas; k++)
 			types.Insert(ZANOZA);
-		if (level >= 3 && wave >= 3)
+		if (level >= 3 && wave >= 3 && keeper)
 			types.Insert(ENT);				// Хранитель — только у древней рощи, последней волной
 		return types;
 	}
@@ -68,20 +77,15 @@ class VB_RootGuards
 		return body && body.ConfigGetBool("vbRootGuard");
 	}
 
-	// сервер: страж разделан игроком player — шанс на отросток и пыльцу к ногам (ванильный лут уже выпал)
+	// сервер: страж рощи разделан игроком player — клык волку, шанс на отросток и пыльцу к ногам (лут по конфигу уже
+	// выпал). Призванных сюда не зовут: у них разделка без добычи вовсе (VB_AR_GuardSkin.c)
 	static void VB_SkinServer(EntityAI body, PlayerBase player)
 	{
-		if (!body || !player)
+		if (!body || !player || VB_Summoned(body))
 			return;
 
 		string who = VB_AR_ItemsServer.VB_Who(player);
 		string what = body.GetType();
-		// стражи, которых позвал фонарь (волна с loot = false), — только ванильный лут
-		if (!VB_AR_Horde.VB_HasLoot(body))
-		{
-			Print("[VB_AncientRoot] разделал стража " + what + ": " + who + " — страж фонаря, только ванильный лут");
-			return;
-		}
 
 		float rootChance = 0.15;
 		float pollenChance = 0.05;
@@ -100,12 +104,18 @@ class VB_RootGuards
 
 		string got = "";
 		EntityAI drop;
-		// один клык волку даёт ванильная разделка (Skinning в config.cpp), второй — шанс у волков рощи
-		if (body.IsKindOf(WOLF) && Math.RandomFloat01() < FANG2_CHANCE)
+		// клык волку — здесь, а не в Skinning конфига: у призванных волков его быть не должно; второй — шанс
+		if (body.IsKindOf(WOLF))
 		{
-			drop = VB_AR_ItemsServer.VB_DropAtFeet(player, FANG_TYPE);
-			if (drop)
-				got += FANG_TYPE + " ";
+			int fangs = 1;
+			if (Math.RandomFloat01() < FANG2_CHANCE)
+				fangs = 2;
+			for (int f = 0; f < fangs; f++)
+			{
+				drop = VB_AR_ItemsServer.VB_DropAtFeet(player, FANG_TYPE);
+				if (drop)
+					got += FANG_TYPE + " ";
+			}
 		}
 		if (body.IsKindOf(ENT))
 		{

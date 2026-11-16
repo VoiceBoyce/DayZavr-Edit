@@ -5,6 +5,10 @@
 // Пока сердце режут (VB_IsDisturbed), всё в STIR_DIST от него просыпается даже днём и бьётся в STIR_RATE раз чаще:
 // у каждого объекта свои часы m_VB_Clock с плавно меняющейся скоростью, корни идут по часам своего сердца.
 // Звуки: гул у сердец со спорами (VB_AR_Base.VB_SetHum), редкие скрипы корней и шёпот за спиной (VB_PlayAmbient).
+// Объекты «без привязки» (VB_AR_Base.m_VB_Free — обвивка хватки корней) к сердцу не привязываются и всегда «ночные».
+// Новый объект не сбрасывает счёт тиков: связи и свет пересчитываются на ближайшем тике, но не чаще RELINK_SOON_TICKS
+// (пока роща одевается, обвивки регистрируются почти каждый тик).
+// Поиск ближайшего сердца/корня для действий (VB_NearestLive*) пропускает локальные объекты без сетевого ID.
 
 class VB_AR_Light extends PointLightBase
 {
@@ -27,6 +31,7 @@ class VB_AR_Pulse
 	static const float BEAT_SECOND = 0.6;	// второй, слабее, с
 	static const int TICK_MS = 40;
 	static const int DECOR_CHECK_TICKS = 25;	// раз в столько тиков (1 с) сердца проверяют, не подошёл ли игрок (обвивки, дома)
+	static const int RELINK_SOON_TICKS = 5;		// после регистрации нового объекта пересчёт связей и света не чаще (0,2 с)
 	static const float ACTIVE_DIST = 250.0;	// дальше от игрока объект не пульсирует
 	static const float LIGHT_DIST = 150.0;	// свет только у сердец ближе этого
 	static const int MAX_LIGHTS = 3;		// не больше стольких красных источников света сразу
@@ -72,6 +77,8 @@ class VB_AR_Pulse
 	protected ref array<VB_AR_Base> m_VB_Objects;
 	protected ref array<VB_AR_Base> m_VB_Stirred;	// потревоженные сердца на этом тике
 	protected int m_VB_Ticks;
+	protected bool m_VB_RelinkSoon;					// зарегистрирован новый объект: пересчитать связи и свет
+	protected int m_VB_RelinkTick = -1000;			// тик последнего такого пересчёта
 	protected int m_VB_LastTickMs = -100000;
 	protected float m_VB_LastNow = -1;
 	protected int m_VB_NextAmbientMs;
@@ -99,7 +106,9 @@ class VB_AR_Pulse
 		if (s_VB_Instance.m_VB_Objects.Find(obj) < 0)
 			s_VB_Instance.m_VB_Objects.Insert(obj);
 
-		s_VB_Instance.m_VB_Ticks = 0;	// на ближайшем тике пересчитать связи с сердцами и свет
+		// пересчитать связи с сердцами и свет на ближайшем тике (не сбрасывая счёт: при одевании рощи обвивки
+		// регистрируются почти каждый тик, и тяжёлый пересчёт шёл 25 раз в секунду)
+		s_VB_Instance.m_VB_RelinkSoon = true;
 	}
 
 	static void VB_Unregister(VB_AR_Base obj)
@@ -116,7 +125,9 @@ class VB_AR_Pulse
 		}
 	}
 
-	// клиент: ближайший живой (не погасший) корень гнезда на земле не дальше maxDist; null — нет
+	// клиент: ближайший живой (не погасший) корень гнезда на земле не дальше maxDist; null — нет.
+	// Только сетевые: локальные копии (предпросмотр редактора) сервер не знает — отлом через них не пойдёт.
+	// Сначала дешёвое расстояние, потом признаки объекта
 	static VB_AR_Base VB_NearestLiveRoot(vector pos, float maxDist)
 	{
 		if (!s_VB_Instance)
@@ -127,19 +138,21 @@ class VB_AR_Pulse
 		float dSq;
 		foreach (VB_AR_Base obj : s_VB_Instance.m_VB_Objects)
 		{
-			if (!obj || obj.m_VB_Bare || !obj.VB_IsGroundRoot() || obj.VB_IsDormant())
+			if (!obj)
 				continue;
 			dSq = vector.DistanceSq(pos, obj.GetPosition());
-			if (dSq < bestSq)
-			{
-				bestSq = dSq;
-				best = obj;
-			}
+			if (dSq >= bestSq)
+				continue;
+			if (obj.m_VB_Bare || !obj.VB_IsGroundRoot() || obj.VB_IsDormant() || !obj.VB_HasNetId())
+				continue;
+			bestSq = dSq;
+			best = obj;
 		}
 		return best;
 	}
 
-	// клиент: ближайшее живое сердце не дальше maxDist (из тех, что клиент видит); null — нет
+	// клиент: ближайшее живое сердце не дальше maxDist (из тех, что клиент видит); null — нет.
+	// Только сетевые (результат идёт в условия действий), сначала дешёвое расстояние
 	static VB_AR_Base VB_NearestLiveHeart(vector pos, float maxDist)
 	{
 		if (!s_VB_Instance)
@@ -150,14 +163,15 @@ class VB_AR_Pulse
 		float dSq;
 		foreach (VB_AR_Base obj : s_VB_Instance.m_VB_Objects)
 		{
-			if (!obj || obj.m_VB_Bare || !obj.VB_IsHeart() || obj.VB_IsDormant())
+			if (!obj)
 				continue;
 			dSq = vector.DistanceSq(pos, obj.GetPosition());
-			if (dSq < bestSq)
-			{
-				bestSq = dSq;
-				best = obj;
-			}
+			if (dSq >= bestSq)
+				continue;
+			if (obj.m_VB_Bare || !obj.VB_IsHeart() || obj.VB_IsDormant() || !obj.VB_HasNetId())
+				continue;
+			bestSq = dSq;
+			best = obj;
 		}
 		return best;
 	}
@@ -234,11 +248,18 @@ class VB_AR_Pulse
 
 		vector ppos = player.GetPosition();
 		float night = VB_NightFactor();
-		if (m_VB_Ticks % 50 == 0)
+		// новый объект: связи, свет и одевание — на этом тике, но не чаще RELINK_SOON_TICKS
+		bool soon = m_VB_RelinkSoon && m_VB_Ticks - m_VB_RelinkTick >= RELINK_SOON_TICKS;
+		if (soon)
+		{
+			m_VB_RelinkSoon = false;
+			m_VB_RelinkTick = m_VB_Ticks;
+		}
+		if (soon || m_VB_Ticks % 50 == 0)
 			VB_Relink();
-		if (m_VB_Ticks % 10 == 0)
+		if (soon || m_VB_Ticks % 10 == 0)
 			VB_UpdateLights(ppos, night);
-		if (m_VB_Ticks % DECOR_CHECK_TICKS == 0)
+		if (soon || m_VB_Ticks % DECOR_CHECK_TICKS == 0)
 			VB_CheckDecor(ppos);
 		m_VB_Ticks++;
 
@@ -266,6 +287,8 @@ class VB_AR_Pulse
 		float dSq;
 		float t;
 		float k;
+		float b1;
+		float b2;
 		float clock;
 		float objNight;
 		bool stirred;
@@ -281,8 +304,8 @@ class VB_AR_Pulse
 			obj.m_VB_Clock += dt * obj.m_VB_Rate;
 
 			objNight = night;
-			if (stirred)
-				objNight = 1.0;	// потревоженная Изнанка не спит и днём
+			if (stirred || obj.m_VB_Free)
+				objNight = 1.0;	// потревоженная роща и хватка корней не спят и днём
 
 			if (objNight < NIGHT_DAY_BELOW || obj.VB_IsDormant())	// день или сердце вырезано: спит
 			{
@@ -306,7 +329,9 @@ class VB_AR_Pulse
 			if (!obj.VB_IsHeart() && obj.m_VB_LinkHeart)
 				clock = obj.m_VB_LinkHeart.m_VB_Clock;
 			t = Math.ModFloat(clock + obj.m_VB_Phase, BEAT_PERIOD);
-			k = Math.Clamp(VB_Beat(t, BEAT_FIRST) + 0.65 * VB_Beat(t, BEAT_SECOND), 0.0, 1.0);
+			b1 = VB_Beat(t, BEAT_FIRST);		// два вызова одной функции в аргументах затирают результат (E71)
+			b2 = VB_Beat(t, BEAT_SECOND);
+			k = Math.Clamp(b1 + 0.65 * b2, 0.0, 1.0);
 			level = Math.Round(k * 3.0);
 			if (objNight < NIGHT_FULL_ABOVE && level > 1)
 				level = 1;	// сумерки: только тлеет
@@ -421,37 +446,56 @@ class VB_AR_Pulse
 		return false;
 	}
 
-	// корни берут ритм ближайшего сердца в LINK_DIST, со сдвигом на время пробега волны
+	// корни берут ритм ближайшего сердца в LINK_DIST, со сдвигом на время пробега волны.
+	// Сначала список сердец (их единицы), потом корни по нему — без виртуального VB_IsHeart во внутреннем цикле.
+	// Объекты «без привязки» (хватка корней) пропускаем
 	protected void VB_Relink()
 	{
+		array<VB_AR_Base> hearts = new array<VB_AR_Base>;
+		array<vector> heartPos = new array<vector>;
+		array<bool> isHeart = new array<bool>;		// по номерам m_VB_Objects
+		foreach (VB_AR_Base cand : m_VB_Objects)
+		{
+			bool h = cand.VB_IsHeart();
+			isHeart.Insert(h);
+			if (h)
+			{
+				hearts.Insert(cand);
+				heartPos.Insert(cand.GetPosition());
+			}
+		}
+		if (hearts.Count() == 0)
+			return;
+
 		float linkSq = LINK_DIST * LINK_DIST;
-		VB_AR_Base best;
+		int best;
 		float bestSq;
 		float dSq;
-		foreach (VB_AR_Base root : m_VB_Objects)
+		vector rp;
+		VB_AR_Base root;
+		for (int i = 0; i < m_VB_Objects.Count(); i++)
 		{
-			if (root.VB_IsHeart())
+			root = m_VB_Objects[i];
+			if (isHeart[i] || root.m_VB_Free)
 				continue;
 
-			best = null;
+			rp = root.GetPosition();
+			best = -1;
 			bestSq = linkSq;
-			foreach (VB_AR_Base heart : m_VB_Objects)
+			for (int j = 0; j < heartPos.Count(); j++)
 			{
-				if (!heart.VB_IsHeart())
-					continue;
-
-				dSq = vector.DistanceSq(root.GetPosition(), heart.GetPosition());
+				dSq = vector.DistanceSq(rp, heartPos[j]);
 				if (dSq < bestSq)
 				{
 					bestSq = dSq;
-					best = heart;
+					best = j;
 				}
 			}
 
-			if (best)
+			if (best >= 0)
 			{
-				root.m_VB_Phase = Math.ModFloat(best.m_VB_Phase - Math.Sqrt(bestSq) / WAVE_SPEED + 10.0 * BEAT_PERIOD, BEAT_PERIOD);
-				root.m_VB_LinkHeart = best;
+				root.m_VB_Phase = Math.ModFloat(hearts[best].m_VB_Phase - Math.Sqrt(bestSq) / WAVE_SPEED + 10.0 * BEAT_PERIOD, BEAT_PERIOD);
+				root.m_VB_LinkHeart = hearts[best];
 			}
 		}
 	}

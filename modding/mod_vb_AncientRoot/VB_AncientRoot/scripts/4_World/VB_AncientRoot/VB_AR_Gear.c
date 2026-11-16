@@ -240,8 +240,9 @@ class VB_ActionFeedListenRoot : ActionContinuousBase
 
 // ============================================================================================
 // «Пыльцевая ловушка» (ТЗ 2б.5): «Раскрыть» в руках, потом бросить. Облако пыльцы шумит (нечисть и звери идут),
-// через ARM_MS вспыхивает: все живые зомби и звери в BURST_RADIUS (стражи и мутанты тоже) засыпают на SLEEP_MS —
-// ИИ стоит на месте. Удар будит того, кого ударили. Людей не трогает. Сон — VB_AR_CreatureServer.c.
+// через ARM_MS вспыхивает: все живые зомби и звери в BURST_RADIUS (стражи и мутанты тоже, кроме крупных — здоровье
+// больше 1000: Хранитель, боссы) засыпают на SLEEP_MS — ИИ стоит на месте. Удар будит того, кого ударили. Людей не
+// трогает. Сон — VB_AR_CreatureServer.c. Не заменилась после вспышки — сервер через секунду удаляет ловушку.
 
 class VB_AR_SporeTrap extends Inventory_Base
 {
@@ -332,10 +333,11 @@ class VB_ActionArmSporeTrap : ActionSingleUseBase
 }
 
 // ============================================================================================
-// «Светоч корня» (ТЗ 2б.5): горит золотым без батареек (в руках или на земле), количество = минуты пыльцы.
-// Клиент: пульс света, вдвое-втрое чаще, если живой зомби ближе ALARM_DIST; такт идёт только у горящего светоча.
-// Сервер: обычные зомби не трогают игроков в SCARE_DIST от горящего светоча (CanBeTargetedByAI, стражей это не
-// касается); ночью раз в CALL_MS с шансом CALL_CHANCE стражи видят свет издалека — выходит Лесовой волк (без лута).
+// «Светоч корня» (ТЗ 2б.5): горит золотым без батареек (в руках или на земле), количество = минуты пыльцы — тратятся,
+// только пока светоч на виду (в рюкзаке не тратятся). Клиент: пульс света, вдвое-втрое чаще, если живой зомби ближе
+// ALARM_DIST; такт идёт только у горящего светоча. Сервер: обычные заражённые (ванильные Zmb*) не трогают игроков в
+// SCARE_DIST от горящего светоча (CanBeTargetedByAI; стражей, боссов и мутантов это не касается); ночью раз в CALL_MS
+// с шансом CALL_CHANCE стражи видят свет издалека — выходит Лесовой волк (без лута), если у светоча есть игрок.
 
 class VB_AR_LanternLight extends PointLightBase
 {
@@ -354,11 +356,13 @@ class VB_AR_LanternLight extends PointLightBase
 class VB_AR_Lantern extends Inventory_Base
 {
 	static const int MINUTE_MS = 60000;
+	static const int BURN_TICK_MS = 10000;		// сервер: раз в столько проверяем, на виду ли светоч (расход пыльцы)
 	static const int CALL_MS = 180000;
 	static const float CALL_CHANCE = 0.45;
 	static const string CALL_NOISE = "VB_AR_ChunkNoise";
 	static const float CALL_DIST_MIN = 60.0;	// стражи выходят на свет издалека
 	static const float CALL_DIST_MAX = 90.0;
+	static const float CALL_PLAYER_DIST = 150.0;	// страж выходит, только если у светоча есть живой игрок
 	static const float SCARE_DIST = 12.0;		// обычные зомби не трогают игроков ближе к горящему светочу
 	static const float ALARM_DIST = 30.0;
 	static const int TICK_MS = 50;
@@ -654,7 +658,7 @@ class VB_AR_Amulet extends Inventory_Base
 // ============================================================================================
 // «Настой пыльцы» (ТЗ 2б.5): выпить (VB_ActionDrinkPollenBrew) — BREW_MS у игрока синхронизируемый флаг, и у него на
 // клиенте живые звери (в т. ч. мутанты MSFZ) и стражи рощи в DIST подсвечены золотым светом (VB_AR_BrewFx: лампа на
-// существе, не больше MAX_LIT ближайших). Материалы существ не трогаем: у них материал ставит healthLevels (E77).
+// существе, MAX_LIT ближайших, стражи первыми). Материалы существ не трогаем: у них материал ставит healthLevels (E77).
 
 class VB_AR_PollenBrew extends Inventory_Base
 {
@@ -718,19 +722,25 @@ class VB_AR_BrewLight extends PointLightBase
 	}
 }
 
-// Клиент: подсветка у своего игрока. Каждый такт проверяет, что у ТЕКУЩЕГО локального персонажа флаг ещё стоит:
-// после смерти, возрождения или перезахода эффект гаснет сам (как было у «Крови Изнанки», баг №27).
+// Клиент: подсветка у своего игрока. Каждый такт (SCAN_MS) проверяет, что у ТЕКУЩЕГО локального персонажа флаг ещё
+// стоит: после смерти, возрождения или перезахода эффект гаснет сам (как было у «Крови Изнанки», баг №27) — и гасит
+// умерших и ушедших. Полный перебор объектов в DIST — реже (FULL_SCAN_MS): горят MAX_LIT ближайших, стражи рощи
+// первыми, лишние гаснут. Уже горящих держим до DIST * KEEP_K, чтобы свет не мигал на границе.
 class VB_AR_BrewFx
 {
 	static const float DIST = 60.0;
+	static const float KEEP_K = 1.1;			// горящий гаснет дальше DIST * KEEP_K
 	static const int SCAN_MS = 1000;
+	static const int FULL_SCAN_MS = 2500;
 	static const int MAX_LIT = 8;
+	static const float GUARD_FIRST = 1000000.0;	// к квадрату расстояния не-стража: стражи всегда ближе в очереди
 
 	protected static ref VB_AR_BrewFx s_VB_Inst;
 
 	protected ref array<EntityAI> m_VB_Lit;
 	protected ref array<VB_AR_BrewLight> m_VB_Lights;
 	protected bool m_VB_Halted;			// остановлен изнутри своего такта, ждёт замены/удаления снаружи
+	protected int m_VB_FullScanMs = -100000;	// когда был полный перебор
 
 	static void VB_Set(bool on)
 	{
@@ -804,33 +814,78 @@ class VB_AR_BrewFx
 			return;
 
 		vector ppos = g_Game.GetPlayer().GetPosition();
-		float keepSq = DIST * DIST * 1.2;
+		float keepDist = DIST * KEEP_K;
+		float keepSq = keepDist * keepDist;
 		for (int i = m_VB_Lit.Count() - 1; i >= 0; i--)
 		{
 			if (!m_VB_Lit[i] || !m_VB_Lit[i].IsAlive() || vector.DistanceSq(ppos, m_VB_Lit[i].GetPosition()) > keepSq)
 				VB_Unlit(i);
 		}
-		if (m_VB_Lit.Count() >= MAX_LIT)
-			return;
 
+		int now = g_Game.GetTime();
+		if (now - m_VB_FullScanMs < FULL_SCAN_MS)
+			return;
+		m_VB_FullScanMs = now;
+
+		// кандидаты: новые — в DIST, горящие — в DIST * KEEP_K; ключ — квадрат расстояния (+GUARD_FIRST не-стражам)
 		array<Object> objs = new array<Object>;
-		g_Game.GetObjectsAtPosition(ppos, DIST, objs, null);
+		g_Game.GetObjectsAtPosition(ppos, keepDist, objs, null);
+		array<EntityAI> cands = new array<EntityAI>;
+		array<float> keys = new array<float>;
+		float distSq;
+		float maxSq = DIST * DIST;
 		EntityAI e;
-		VB_AR_BrewLight light;
 		foreach (Object o : objs)
 		{
-			if (m_VB_Lit.Count() >= MAX_LIT)
-				break;
 			if (!VB_Wants(o))
 				continue;
 			e = EntityAI.Cast(o);
-			if (m_VB_Lit.Find(e) >= 0)
+			distSq = vector.DistanceSq(ppos, e.GetPosition());
+			if (distSq > maxSq && m_VB_Lit.Find(e) < 0)
 				continue;
-			light = VB_AR_BrewLight.Cast(ScriptedLightBase.CreateLight(VB_AR_BrewLight, e.GetPosition()));
+			if (!VB_AR_Guard.VB_Is(e))
+				distSq += GUARD_FIRST;
+			cands.Insert(e);
+			keys.Insert(distSq);
+		}
+
+		// MAX_LIT лучших: выбор минимума по очереди (кандидатов немного)
+		array<EntityAI> best = new array<EntityAI>;
+		int pick;
+		float pickKey;
+		while (best.Count() < MAX_LIT && cands.Count() > 0)
+		{
+			pick = 0;
+			pickKey = keys[0];
+			for (int k = 1; k < keys.Count(); k++)
+			{
+				if (keys[k] < pickKey)
+				{
+					pick = k;
+					pickKey = keys[k];
+				}
+			}
+			best.Insert(cands[pick]);
+			cands.Remove(pick);
+			keys.Remove(pick);
+		}
+
+		// лишние гаснут, новые загораются
+		for (int j = m_VB_Lit.Count() - 1; j >= 0; j--)
+		{
+			if (best.Find(m_VB_Lit[j]) < 0)
+				VB_Unlit(j);
+		}
+		VB_AR_BrewLight light;
+		foreach (EntityAI b : best)
+		{
+			if (m_VB_Lit.Find(b) >= 0)
+				continue;
+			light = VB_AR_BrewLight.Cast(ScriptedLightBase.CreateLight(VB_AR_BrewLight, b.GetPosition()));
 			if (!light)
 				continue;
-			light.AttachOnObject(e, "0 0.9 0");
-			m_VB_Lit.Insert(e);
+			light.AttachOnObject(b, "0 0.9 0");
+			m_VB_Lit.Insert(b);
 			m_VB_Lights.Insert(light);
 		}
 	}
