@@ -1,0 +1,109 @@
+{
+    "Version": 1,
+    "Id": 18001,
+    "Order": 2,
+    "Enabled": 1,
+    "Name": "Покупка 18001. Экипировка. Сет GHOST.",
+    "Description": [
+        "Ты когда-нибудь задумывался, что значит быть лучшим? Сет GHOST — это не просто одежда. Это символ абсолютного превосходства. Куртка на 100 слотов с защитой 90 — монолит, принимающий любые попадания. Поверх можно надеть ещё один бронежилет. Штаны на 100 слотов — личный склад в аду дефицита. Маска, перчатки, ботинки, шлем — каждый элемент пропитан духом неуязвимости. 400 золотых — не цена, а плата за статус лучшего. Носишь GHOST? Значит, ты живая легенда искусства войны."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "coins_quests_all",
+    "Requires": [
+        10000,
+        14000,
+        14011,
+        18000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "COOLDOWN",
+    "Cooldown": 5,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "DZVR_Coin_Gold",
+            "Count": 400.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "1 золотая монета"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "Candy_Set_Ghost_Ghosted_Pants_100",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "Candy_Set_Ghost_Ghosted_Jacket_100",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "Candy_Set_Ghost_Ghosted_Boots",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "Candy_Set_Ghost_Ghosted_Maskv2",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "Candy_Set_Ghost_Ghosted_Gloves",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "IMP_Helmet_Vulkan_Green",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "Candy_Set_Ghost_Ghosted_Pouch1",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        }
+    ],
+    "Note": ""
+}

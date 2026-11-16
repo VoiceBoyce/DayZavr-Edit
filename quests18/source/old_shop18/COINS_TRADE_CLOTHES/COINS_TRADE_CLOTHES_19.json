@@ -1,0 +1,55 @@
+{
+    "Version": 1,
+    "Id": 18018,
+    "Order": 19,
+    "Enabled": 1,
+    "Name": "Покупка 18018. Экипировка. Модуль регенерации крови.",
+    "Description": [
+        "Свежий трофей с закрытого объекта — биомодуль «Кровоток». Встраивается в экзоскелет, превращая тело в фабрику по производству крови. Гемоглобин как у космонавта, тромбоциты — хоть в пробирку разливай. 215 золотых — и забудешь, что такое слабость от кровопотери. Работает даже при сквозных. Проверено в бою. Хочешь — покажу, как монтируется."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "coins_quests_all",
+    "Requires": [
+        10000,
+        14000,
+        14011,
+        18000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "COOLDOWN",
+    "Cooldown": 5,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "DZVR_Coin_Gold",
+            "Count": 215.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "1 золотая монета"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "OOTS_ClothesModificatorBlood",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        }
+    ],
+    "Note": ""
+}

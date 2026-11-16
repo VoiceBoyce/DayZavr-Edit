@@ -1,0 +1,76 @@
+{
+    "Version": 1,
+    "Id": 32001,
+    "Order": 2,
+    "Enabled": 0,
+    "Name": "Золото рощи",
+    "Description": [
+        "Роща дышит пыльцой. Её можно собрать тряпкой у сердцевины — но знай меру: жадность лес слышит, и на шум выходят стражи. Собери пыльцу сам и принеси мне одну порцию. Я покажу, что с ней делают."
+    ],
+    "GiverStart": "volhv",
+    "GiverFinish": "volhv",
+    "Requires": [
+        32000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "ACTION",
+            "Target": "VB_ActionCollectSpores",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Ночью собрать пыльцу у сердцевины"
+        },
+        {
+            "Kind": "DELIVER",
+            "Target": "VB_AR_Spores",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Золотая пыльца"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Silver",
+            "Count": 4,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Серебряная монета"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "Rag",
+            "Count": 1,
+            "Quantity": "6",
+            "State": "",
+            "Amount": 0,
+            "Text": "Тряпки ×6"
+        }
+    ],
+    "Note": "make_quests18.py Вл2"
+}

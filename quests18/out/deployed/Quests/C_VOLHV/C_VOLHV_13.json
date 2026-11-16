@@ -1,0 +1,52 @@
+{
+    "Version": 1,
+    "Id": 32012,
+    "Order": 13,
+    "Enabled": 0,
+    "Name": "Грызуны корней",
+    "Description": [
+        "Пауки из-за врат грызут корни Мирового древа. Убей шестерых — любых."
+    ],
+    "GiverStart": "volhv",
+    "GiverFinish": "volhv",
+    "Requires": [
+        32000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "DAILY",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "KILL",
+            "Target": "MSFZ_Mutant_Spider_Base",
+            "Count": 6.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Убить паука"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Silver",
+            "Count": 5,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Серебряная монета"
+        }
+    ],
+    "Note": "make_quests18.py ВлД3"
+}

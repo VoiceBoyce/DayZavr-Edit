@@ -1,0 +1,52 @@
+{
+    "Version": 1,
+    "Id": 34114,
+    "Order": 15,
+    "Enabled": 0,
+    "Name": "Бестиарий: лесового волка",
+    "Description": [
+        "Запись в Бестиарий Нави. Разделай лесового волка сам — трофей остаётся тебе. Стража рощи не трогают зря. Но если пришлось — клык твой."
+    ],
+    "GiverStart": "lovchiy",
+    "GiverFinish": "lovchiy",
+    "Requires": [
+        34002
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "ACTION",
+            "Target": "ActionSkinning",
+            "Count": 1.0,
+            "Filter": "VB_RootGuard_Wolf",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Разделать лесового волка"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Silver",
+            "Count": 5,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Серебряная монета"
+        }
+    ],
+    "Note": "make_quests18.py Бест15"
+}

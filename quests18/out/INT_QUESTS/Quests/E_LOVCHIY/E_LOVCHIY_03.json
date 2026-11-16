@@ -1,0 +1,67 @@
+{
+    "Version": 1,
+    "Id": 34002,
+    "Order": 3,
+    "Enabled": 1,
+    "Name": "Колючки",
+    "Description": [
+        "Занозы сторожат алтари. Молодых много, старших — меньше. Мне нужны старшие: трое второго ранга и двое третьего. После этого открою тебе мой бестиарий."
+    ],
+    "GiverStart": "lovchiy",
+    "GiverFinish": "lovchiy",
+    "Requires": [
+        34001
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "KILL",
+            "Target": "MSFZ_Mutant_Zanoza2",
+            "Count": 3.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Убить Занозу второго ранга"
+        },
+        {
+            "Kind": "KILL",
+            "Target": "MSFZ_Mutant_Zanoza3",
+            "Count": 2.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Убить Занозу третьего ранга"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        }
+    ],
+    "Note": "make_quests18.py Л3"
+}

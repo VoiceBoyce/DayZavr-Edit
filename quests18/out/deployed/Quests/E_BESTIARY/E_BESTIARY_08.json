@@ -1,0 +1,52 @@
+{
+    "Version": 1,
+    "Id": 34107,
+    "Order": 8,
+    "Enabled": 1,
+    "Name": "Бестиарий: Шум",
+    "Description": [
+        "Запись в Бестиарий Нави. Разделай Шум сам — трофей остаётся тебе. У Шум челюсть как фильтр. Ведунья её ценит."
+    ],
+    "GiverStart": "lovchiy",
+    "GiverFinish": "lovchiy",
+    "Requires": [
+        34002
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "ACTION",
+            "Target": "ActionSkinning",
+            "Count": 1.0,
+            "Filter": "SFP_Shum_female",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Разделать Шум"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 2,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        }
+    ],
+    "Note": "make_quests18.py Бест8"
+}

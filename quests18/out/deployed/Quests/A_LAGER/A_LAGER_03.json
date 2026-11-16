@@ -1,0 +1,41 @@
+{
+    "Version": 1,
+    "Id": 30002,
+    "Order": 3,
+    "Enabled": 1,
+    "Name": "Записка Волхву",
+    "Description": [
+        "Волхв живёт у озера Янтарь, на северо-западе, возле старого капища. Людей не любит, зато лес слушает его, а не нас. Отвези ему эти заметки: наши видели, как ночью светятся корни. У тебя час — он уходит в лес на закате."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "volhv",
+    "Requires": [
+        30000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 3600,
+    "QuestItems": [
+        {
+            "Item": "EFT_q_Document6",
+            "Count": 1
+        }
+    ],
+    "Targets": [],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Silver",
+            "Count": 3,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Серебряная монета"
+        }
+    ],
+    "Note": "make_quests18.py Б3"
+}

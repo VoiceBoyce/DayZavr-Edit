@@ -1,0 +1,67 @@
+{
+    "Version": 1,
+    "Id": 36000,
+    "Order": 1,
+    "Enabled": 1,
+    "Name": "Сказ первый: три мира",
+    "Description": [
+        "Сядь, путник, не торопись — пекло подождёт. Было три мира: Явь, где ты дышишь, Навь, куда уходят, и Правь, где закон. Стояли меж ними капища, и держали они межу. Порвалась межа — и полезло. Поди к двум капищам, что ближе к нам: на северо-восток, меж Тарновом и Крсником, и на юго-восток, к Потокам. Встань меж столбов и послушай."
+    ],
+    "GiverStart": "skazitel",
+    "GiverFinish": "skazitel",
+    "Requires": [
+        30000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "EXPLORE",
+            "Target": "",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "8756 0 10293",
+            "Radius": 60.0,
+            "GroundY": 1,
+            "ShowOnMap": 1,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Капище на северо-востоке"
+        },
+        {
+            "Kind": "EXPLORE",
+            "Target": "",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "11498 0 1905",
+            "Radius": 60.0,
+            "GroundY": 1,
+            "ShowOnMap": 1,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Капище на юго-востоке"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        }
+    ],
+    "Note": "make_quests18.py Ск1"
+}

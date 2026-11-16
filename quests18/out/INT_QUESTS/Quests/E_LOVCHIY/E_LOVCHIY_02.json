@@ -1,0 +1,52 @@
+{
+    "Version": 1,
+    "Id": 34001,
+    "Order": 2,
+    "Enabled": 1,
+    "Name": "Приспешники",
+    "Description": [
+        "У руин Полкрабца ходят Ричары — тёмные приспешники тролля. Тролль зовёт их грозой, когда чует беду. Убей четверых у руин, но самого не буди без нужды."
+    ],
+    "GiverStart": "lovchiy",
+    "GiverFinish": "lovchiy",
+    "Requires": [
+        34000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "KILL",
+            "Target": "MSFZ_Ricar",
+            "Count": 4.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "11950 0 6588",
+            "ZoneRadius": 300.0,
+            "Text": "Убить Ричара у руин Полкрабца"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Silver",
+            "Count": 6,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Серебряная монета"
+        }
+    ],
+    "Note": "make_quests18.py Л2"
+}

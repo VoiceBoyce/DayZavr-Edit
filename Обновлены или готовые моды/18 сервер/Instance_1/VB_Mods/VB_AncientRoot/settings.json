@@ -3,6 +3,17 @@
         "76561200715668795",
         "76561198903710848"
     ],
+    "SafeZones": [
+        {
+            "Name": "Цербер",
+            "Pos": [
+                11934.9,
+                174.54,
+                11036.44
+            ],
+            "Radius": 100
+        }
+    ],
     "ActiveNests": 5,
     "MinNestDistance": 300.0,
     "RootsPercentMin": 70,

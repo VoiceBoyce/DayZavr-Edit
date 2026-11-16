@@ -1,0 +1,67 @@
+{
+    "Version": 1,
+    "Id": 35002,
+    "Order": 3,
+    "Enabled": 1,
+    "Name": "Зелёные и жёлтые",
+    "Description": [
+        "Зелёная комната — у аэродрома, жёлтая — у Борека. По трое у каждой."
+    ],
+    "GiverStart": "sotnik",
+    "GiverFinish": "sotnik",
+    "Requires": [
+        35001
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "KILL",
+            "Target": "BanditAI_Base",
+            "Count": 3.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "4312 0 10579",
+            "ZoneRadius": 150.0,
+            "Text": "Бандит у зелёной комнаты"
+        },
+        {
+            "Kind": "KILL",
+            "Target": "BanditAI_Base",
+            "Count": 3.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "9687 0 8684",
+            "ZoneRadius": 150.0,
+            "Text": "Бандит у жёлтой комнаты"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 2,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        }
+    ],
+    "Note": "make_quests18.py С3"
+}

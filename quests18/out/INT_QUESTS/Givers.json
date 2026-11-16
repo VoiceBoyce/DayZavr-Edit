@@ -1,0 +1,129 @@
+{
+    "Version": 1,
+    "Givers": [
+        {
+            "Key": "coins_quests_all",
+            "Title": "Босс",
+            "Kind": 0,
+            "Model": "SurvivorM_Peter",
+            "Position": "11903.62 174.41 11057.31",
+            "Orientation": "99.201057 0 0",
+            "Clothes": [
+                "SFP_Fighter_Tors",
+                "SFP_Fighter_Pants",
+                "Headdress_Wolf",
+                "FOG_HalfMask_CB",
+                "SFP_JustMiniGloves",
+                "SFP_Fighter_Boots"
+            ],
+            "InHands": "",
+            "Disabled": 0,
+            "Greeting": ""
+        },
+        {
+            "Key": "vedunya",
+            "Title": "Ведунья",
+            "Kind": 0,
+            "Model": "SurvivorF_Helga",
+            "Position": "11918.5 174.6 11027.0",
+            "Orientation": "40 0 0",
+            "Clothes": [
+                "WoolCoat_Black",
+                "Skirt_Blue",
+                "Wellies_Black",
+                "Bandana_Blackpattern",
+                "SurgicalGloves_White"
+            ],
+            "InHands": "OOTS_ART_svet",
+            "Disabled": 0,
+            "Greeting": "Не трогай руками то, что светится. Что принёс?"
+        },
+        {
+            "Key": "skazitel",
+            "Title": "Сказитель",
+            "Kind": 0,
+            "Model": "SurvivorM_Francis",
+            "Position": "11928.5 174.6 11012.0",
+            "Orientation": "20 0 0",
+            "Clothes": [
+                "WoolCoat_BrownCheck",
+                "CargoPants_Grey",
+                "WorkingBoots_Brown",
+                "Ushanka_Black"
+            ],
+            "InHands": "VB_AR_Book",
+            "Disabled": 0,
+            "Greeting": "Садись к огню. Сказ длинный, а ночь ещё длиннее."
+        },
+        {
+            "Key": "volhv",
+            "Title": "Волхв",
+            "Kind": 0,
+            "Model": "SurvivorM_Elias",
+            "Position": "11896.0 174.5 11062.0",
+            "Orientation": "200 0 0",
+            "Clothes": [
+                "VB_AR_Cloak",
+                "CargoPants_Green",
+                "Wellies_Brown"
+            ],
+            "InHands": "VB_AR_Lantern",
+            "Disabled": 0,
+            "Greeting": "Тише. Лес слушает, как ты дышишь."
+        },
+        {
+            "Key": "kuznec",
+            "Title": "Кузнец",
+            "Kind": 0,
+            "Model": "SurvivorM_Boris",
+            "Position": "11943.0 174.6 11033.0",
+            "Orientation": "250 0 0",
+            "Clothes": [
+                "TShirt_Black",
+                "CargoPants_Black",
+                "WorkingGloves_Black",
+                "WorkingBoots_Grey"
+            ],
+            "InHands": "Sledgehammer",
+            "Disabled": 0,
+            "Greeting": "Железо или вопрос? Вопросы — после железа."
+        },
+        {
+            "Key": "lovchiy",
+            "Title": "Ловчий",
+            "Kind": 0,
+            "Model": "SurvivorM_Seth",
+            "Position": "11896.5 174.5 11044.0",
+            "Orientation": "120 0 0",
+            "Clothes": [
+                "HuntingJacket_Brown",
+                "HunterPants_Brown",
+                "BoonieHat_Olive",
+                "MilitaryBoots_Brown",
+                "HuntingBag"
+            ],
+            "InHands": "Winchester70",
+            "Disabled": 0,
+            "Greeting": "Следы свежие. Говори быстрее."
+        },
+        {
+            "Key": "sotnik",
+            "Title": "Сотник",
+            "Kind": 0,
+            "Model": "SurvivorM_Jose",
+            "Position": "11938.0 174.6 11040.5",
+            "Orientation": "150 0 0",
+            "Clothes": [
+                "GorkaEJacket_Summer",
+                "GorkaPants_Summer",
+                "BallisticHelmet_Green",
+                "MilitaryBoots_Black",
+                "TacticalGloves_Green",
+                "PlateCarrierVest"
+            ],
+            "InHands": "AKM",
+            "Disabled": 0,
+            "Greeting": "Доклад. Коротко."
+        }
+    ]
+}

@@ -1,0 +1,52 @@
+{
+    "Version": 1,
+    "Id": 32010,
+    "Order": 11,
+    "Enabled": 0,
+    "Name": "Ночные дары",
+    "Description": [
+        "Каждую ночь лес ждёт. Два подношения."
+    ],
+    "GiverStart": "volhv",
+    "GiverFinish": "volhv",
+    "Requires": [
+        32000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "DAILY",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "ACTION",
+            "Target": "VB_ActionOfferRoot",
+            "Count": 2.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Ночью сделать подношение роще"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Silver",
+            "Count": 5,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Серебряная монета"
+        }
+    ],
+    "Note": "make_quests18.py ВлД1"
+}

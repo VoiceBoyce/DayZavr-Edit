@@ -596,6 +596,8 @@ class VB_AR_FavorServer
 		if (p.IsInVehicle() || MiscGameplayFunctions.IsUnderRoof(p))
 			return false;
 		vector pos = p.GetPosition();
+		if (VB_AR_Nests.VB_InSafeZone(pos))
+			return false;		// торговая зона (settings.json → SafeZones)
 		bool wild = VB_AR_Heart.VB_NearestServer(pos, GROVE_NEAR) != null;
 		array<Object> objs = new array<Object>;
 		if (!wild)

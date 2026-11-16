@@ -1,0 +1,52 @@
+{
+    "Version": 1,
+    "Id": 33001,
+    "Order": 2,
+    "Enabled": 1,
+    "Name": "Речное золото",
+    "Description": [
+        "Руда не только в камне. Реки несут песок, а в песке — металл. Возьми лоток, встань в реку и промой песок три раза. Не богатство — привычка."
+    ],
+    "GiverStart": "kuznec",
+    "GiverFinish": "kuznec",
+    "Requires": [
+        33000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "ACTION",
+            "Target": "ActionSearchGold",
+            "Count": 3.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Промыть песок в реке"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Silver",
+            "Count": 3,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Серебряная монета"
+        }
+    ],
+    "Note": "make_quests18.py К2"
+}

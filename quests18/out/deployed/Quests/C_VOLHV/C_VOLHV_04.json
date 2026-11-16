@@ -1,0 +1,52 @@
+{
+    "Version": 1,
+    "Id": 32003,
+    "Order": 4,
+    "Enabled": 0,
+    "Name": "Волчья тропа",
+    "Description": [
+        "Лесовые волки — не звери, а сторожа. Если придётся одного убить, возьми клык и принеси мне. Есть старый обряд: клык и мясо, отданные роще одно за другим, — и обычные волки на время забудут твой запах. В книге об этом больше."
+    ],
+    "GiverStart": "volhv",
+    "GiverFinish": "volhv",
+    "Requires": [
+        32002
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "VB_AR_WolfFang",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Клык лесового волка"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Silver",
+            "Count": 6,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Серебряная монета"
+        }
+    ],
+    "Note": "make_quests18.py Вл4"
+}

@@ -1,0 +1,55 @@
+{
+    "Version": 1,
+    "Id": 18027,
+    "Order": 28,
+    "Enabled": 1,
+    "Name": "Покупка 18027. Экипировка. Оружейный ремень передний.",
+    "Description": [
+        "Ремень для переноски оружия спереди — ствол всегда наготове. Крепится в слот повязки, руки свободны, смертоносный арсенал в мгновенной доступности. Пистолет, нож или граната — оружие уже у пояса, где должно быть. 150 золотых — небольшая плата за то, чтобы в критический момент твоя реакция опережала чужой выстрел."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "coins_quests_all",
+    "Requires": [
+        10000,
+        14000,
+        14011,
+        18000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "COOLDOWN",
+    "Cooldown": 5,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "DZVR_Coin_Gold",
+            "Count": 150.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "1 золотая монета"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "IMP_Sling_Front",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        }
+    ],
+    "Note": ""
+}

@@ -1,0 +1,55 @@
+{
+    "Version": 1,
+    "Id": 18011,
+    "Order": 12,
+    "Enabled": 1,
+    "Name": "Покупка 18011. Экипировка. Рюкзак 6H118-Black.",
+    "Description": [
+        "220 золотых — и ты получишь не просто рюкзак, а целый склад на плечах. 6H118 — легендарные 240 слотов, переворачивающие представление о логистике в апокалипсисе. Личный арсенал, госпиталь и продовольственная база в одном флаконе. Пока другие копошатся с мелкими мешками, ты носишь с собой всё необходимое для войны и выживания. Выбор тех, кто привык доминировать."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "coins_quests_all",
+    "Requires": [
+        10000,
+        14000,
+        14011,
+        18000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "COOLDOWN",
+    "Cooldown": 5,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "DZVR_Coin_Gold",
+            "Count": 220.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "1 золотая монета"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "FOG_Bag_6ShBagT_Black",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        }
+    ],
+    "Note": ""
+}

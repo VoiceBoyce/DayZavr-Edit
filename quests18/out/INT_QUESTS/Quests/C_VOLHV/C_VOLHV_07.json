@@ -1,0 +1,70 @@
+{
+    "Version": 1,
+    "Id": 32006,
+    "Order": 7,
+    "Enabled": 0,
+    "Name": "Семя",
+    "Description": [
+        "Кто-то режет рощи. Может, и ты — я не спрашиваю. Там, где вырезана сердцевина, остаётся Семя. Посади его у мёртвой сердцевины — и к следующему рестарту на этом месте снова поднимется лес. Это и есть путь леса: не брать, а возвращать. Вернёшь — дам тебе корень-вещун и светоч."
+    ],
+    "GiverStart": "volhv",
+    "GiverFinish": "volhv",
+    "Requires": [
+        32005
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "ACTION",
+            "Target": "VB_ActionPlantSeed",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Посадить Семя Древнего корня у вырезанной сердцевины"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 4,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "VB_AR_ListenRoot",
+            "Count": 1,
+            "Quantity": "",
+            "State": "",
+            "Amount": 0,
+            "Text": "Корень-вещун"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "VB_AR_Lantern",
+            "Count": 1,
+            "Quantity": "",
+            "State": "",
+            "Amount": 0,
+            "Text": "Светоч корня"
+        }
+    ],
+    "Note": "make_quests18.py Вл7"
+}

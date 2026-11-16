@@ -467,6 +467,8 @@ modded class VB_AR_Lantern
 		vector pos = VB_AR_Items.VB_WorldPos(this);
 		if (!VB_AR_GearServer.VB_PlayerNear(pos, CALL_PLAYER_DIST))
 			return;			// светоч брошен в лесу без людей — страж не выходит
+		if (VB_AR_Nests.VB_InSafeZone(pos))
+			return;			// у торговцев стражи не выходят (settings.json → SafeZones)
 		Print("[VB_AncientRoot] стражи увидели светоч корня у " + pos.ToString());
 		VB_AR_Horde.VB_Spawn(pos, 1, CALL_DIST_MIN, CALL_DIST_MAX, false);	// без лута: светоч не ферма (№26)
 		VB_AR_ItemsServer.VB_NoiseAt(pos, CALL_NOISE, 20);

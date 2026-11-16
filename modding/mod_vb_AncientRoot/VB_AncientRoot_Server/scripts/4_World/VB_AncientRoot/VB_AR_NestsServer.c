@@ -80,6 +80,7 @@ class VB_AR_Nests
 
 		s_VB_Server = new VB_AR_Nests();
 		s_VB_Server.VB_LoadStart();
+		s_VB_Server.VB_LogSafeZones();
 		if (s_VB_Server.VB_GrowthCounts())
 			s_VB_Server.VB_AdvanceGroves();
 		s_VB_Server.VB_MarkStarted();
@@ -118,6 +119,42 @@ class VB_AR_Nests
 			return;
 		m_VB_State.AliveMin = VB_AR_FavorServer.VB_MinuteNow();
 		VB_SaveState();
+	}
+
+	// Точка в безопасной зоне (settings.json → SafeZones, торговцы) с запасом SAFE_MARGIN: волки, позванные к игроку
+	// в 25–45 м, не должны выбегать к торговцам. Там не приходят волны «по следу», «Лес помнит» и волки светоча.
+	static const float SAFE_MARGIN = 50.0;
+
+	protected void VB_LogSafeZones()
+	{
+		string names = "";
+		int n = 0;
+		foreach (VB_AR_SafeZone z : m_VB_Settings.SafeZones)
+		{
+			if (names != "")
+				names += ", ";
+			int r = z.Radius;
+			names += z.Name + " " + r.ToString() + " м";
+			n++;
+		}
+		if (n == 0)
+			names = "нет";
+		int margin = SAFE_MARGIN;
+		Print("[VB_AncientRoot] безопасные зоны (+" + margin.ToString() + " м запаса): " + names);
+	}
+
+	static bool VB_InSafeZone(vector pos)
+	{
+		if (!s_VB_Server || !s_VB_Server.m_VB_Settings || !s_VB_Server.m_VB_Settings.SafeZones)
+			return false;
+		float r;
+		foreach (VB_AR_SafeZone z : s_VB_Server.m_VB_Settings.SafeZones)
+		{
+			r = z.Radius + SAFE_MARGIN;
+			if (VB_AR_NestUtil.VB_DistXZ(z.Pos, pos) < r)
+				return true;
+		}
+		return false;
 	}
 
 	// древняя роща у сердцевины heart ещё может раз продлить век (ритуал роста, нашествие); не древняя — true

@@ -1,0 +1,52 @@
+{
+    "Version": 1,
+    "Id": 33005,
+    "Order": 6,
+    "Enabled": 1,
+    "Name": "Первая плавка",
+    "Description": [
+        "Руда — сырьё. Слиток — дело. Расплавь железо в чаше и принеси два слитка."
+    ],
+    "GiverStart": "kuznec",
+    "GiverFinish": "kuznec",
+    "Requires": [
+        33001
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "BRDK_BigIron",
+            "Count": 2.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Слиток железа"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        }
+    ],
+    "Note": "make_quests18.py К6"
+}

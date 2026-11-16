@@ -26,9 +26,18 @@ class VB_AR_NestFile
 	}
 }
 
+// Безопасная зона (торговцы): рядом с ней лес не посылает стражей — VB_AR_Nests.VB_InSafeZone (+ SAFE_MARGIN)
+class VB_AR_SafeZone
+{
+	string Name;
+	vector Pos;
+	float Radius = 100;
+}
+
 class VB_AR_NestSettings
 {
 	ref TStringArray Admins;		// SteamID64 тех, кому можно открыть редактор (команда /grove)
+	ref array<ref VB_AR_SafeZone> SafeZones;	// торговые зоны: волн «по следу», «Лес помнит» и волков светоча там нет
 	int ActiveNests = 5;			// гнёзд с сердцем за рестарт
 	float MinNestDistance = 300;	// м: выбранные гнёзда не ближе этого друг к другу
 	int RootsPercentMin = 70;		// сколько процентов корней гнезда встаёт (случайно от Min до Max)
@@ -50,6 +59,7 @@ class VB_AR_NestSettings
 	void VB_AR_NestSettings()
 	{
 		Admins = new TStringArray;
+		SafeZones = new array<ref VB_AR_SafeZone>;
 	}
 
 	// Перед чтением файла: ключа нет в JSON — поле остаётся -1 и VB_Norm ставит значение по умолчанию.
@@ -78,6 +88,19 @@ class VB_AR_NestSettings
 	{
 		if (!Admins)
 			Admins = new TStringArray;
+		if (!SafeZones)
+			SafeZones = new array<ref VB_AR_SafeZone>;
+		for (int zi = SafeZones.Count() - 1; zi >= 0; zi--)
+		{
+			VB_AR_SafeZone z = SafeZones[zi];
+			if (!z || !VB_AR_Nests.VB_PosOk(z.Pos) || !(z.Radius > 0))		// лишняя запятая, координаты вне мира, NaN
+			{
+				SafeZones.Remove(zi);
+				continue;
+			}
+			if (z.Radius > 5000)
+				z.Radius = 5000;
+		}
 		if (ActiveNests < 0)
 			ActiveNests = 5;
 		if (ActiveNests > 500)

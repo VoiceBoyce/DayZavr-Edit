@@ -1,0 +1,67 @@
+{
+    "Version": 1,
+    "Id": 34021,
+    "Order": 22,
+    "Enabled": 1,
+    "Name": "Оборотни",
+    "Description": [
+        "Мутоволк зовёт стаю, медведь-зомби ломает всё, что слышит. Два мутоволка и три медведя."
+    ],
+    "GiverStart": "lovchiy",
+    "GiverFinish": "lovchiy",
+    "Requires": [
+        34002
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "WEEKLY",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "KILL",
+            "Target": "SFP_MutaWolf_black",
+            "Count": 2.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Убить мутоволка"
+        },
+        {
+            "Kind": "KILL",
+            "Target": "SFP_BearZMB",
+            "Count": 3.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Убить медведя-зомби"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 2,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        }
+    ],
+    "Note": "make_quests18.py ЛН2"
+}

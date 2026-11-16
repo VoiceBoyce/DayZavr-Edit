@@ -1,0 +1,76 @@
+{
+    "Version": 1,
+    "Id": 31008,
+    "Order": 9,
+    "Enabled": 0,
+    "Name": "Янтарная кровь",
+    "Description": [
+        "Сердцевина рощи, если её вырезать и не трогать до утра, каменеет. Внутри — янтарь, а в янтаре — живица, лучшее средство от потери крови, что я видела. Принеси окаменевшую сердцевину и два куска янтаря. Получишь две ампулы живицы — береги их."
+    ],
+    "GiverStart": "vedunya",
+    "GiverFinish": "vedunya",
+    "Requires": [
+        31005
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "VB_AR_HeartDead",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Окаменевшая сердцевина"
+        },
+        {
+            "Kind": "DELIVER",
+            "Target": "VB_AR_Amber",
+            "Count": 2.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Янтарь"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 2,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "VB_AR_Blood",
+            "Count": 2,
+            "Quantity": "",
+            "State": "",
+            "Amount": 0,
+            "Text": "Живица"
+        }
+    ],
+    "Note": "make_quests18.py В9"
+}

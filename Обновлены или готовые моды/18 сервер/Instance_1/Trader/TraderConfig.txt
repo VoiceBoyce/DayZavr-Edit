@@ -1,0 +1,509 @@
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                             //
+        //      Need Help? The Trader Mod has its own Channel on the DayZ Modders Discord Server!      //
+        //                                                                                             //
+        //      Only Singleline Comments work. Don't use Multiline Comments!                           //
+        //      /* THIS COMMENT WILL CRASH THE SERVER! */                                              //
+        //      // THIS COMMENT WORKS!                                                                 //
+        //                                                                                             //
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+
+<CurrencyName> #tm_ruble							// Currency Name (Only used for the Text in the upper right Corner of the Trader Menu)
+	<Currency> MoneyRuble1, 		1					// Currency Classname, Currency Money Value
+	<Currency> Bablo5Rubley, 		5
+	<Currency> Bablo10Rubley, 		10
+	<Currency> MoneyRuble25, 		25
+	<Currency> Bablo50Rubley, 		50
+	<Currency> Bablo100Rubley, 		100
+	<Currency> Bablo200Rubley, 		200
+	<Currency> Bablo500Rubley, 		500	
+	<Currency> Bablo1000Rubley, 	1000
+	<Currency> Bablo2000Rubley, 	2000
+	<Currency> Bablo5000Rubley, 	5000
+	
+		
+<Trader> Цербер | Cerberus
+	<Category> ПНВ | NVG			                                           
+		NVGHeadstrap,		 		  			*,		    5000,	    	1250
+		NVGoggles,		 		  				*,		    150000,	   		37500
+		------------------- ПНВ ПОД ФИЛЬТРА - NVG FOR FILTERS  -------------------------------------,		*,	-1,	-1 		
+		FC_NVGoggles_1_Black,					*,			180000,			45000	    // 1 глаз	Без фильтра как урезанная ванилла
+		FC_NVGoggles_1_White,					*,			180000,	        45000       // 1 глаз	Без фильтра как урезанная ванилла
+		FC_NVGoggles_1_Green,					*,			180000,	        45000       // 1 глаз	Без фильтра как урезанная ванилла
+		FC_NVGoggles_1_Sand,					*,			180000,	        45000       // 1 глаз	Без фильтра как урезанная ванилла
+		
+		FC_NVGoggles_2_Black,					*,			230000,	        57500		// 1 глаз	Без фильтра как урезанная ванилла
+		FC_NVGoggles_2_White,					*,			230000,	        57500		// 1 глаз	Без фильтра как урезанная ванилла
+		FC_NVGoggles_2_Green,					*,			230000,	        57500       // 1 глаз	Без фильтра как урезанная ванилла
+		FC_NVGoggles_2_Sand,					*,			230000,	        57500		// 1 глаз	Без фильтра как урезанная ванилла
+		
+		FC_NVGoggles_Black,						*,			280000,	        70000	    // 2 глаза	Без фильтра как ванилла
+		FC_NVGoggles_White,						*,			280000,	        70000		// 2 глаза	Без фильтра как ванилла
+		FC_NVGoggles_Green,						*,			280000,	        70000	    // 2 глаза  Без фильтра как ванилла
+		FC_NVGoggles_Sand,						*,			280000,	        70000	    // 2 глаза  Без фильтра как ванилла
+				
+		FC_NVGoggles_3_Black,					*,			350000,	        87500	    // 4 глаза  Без фильтра чуть лучше ванилла
+		FC_NVGoggles_3_White,					*,			350000,	        87500		// 4 глаза  Без фильтра чуть лучше ванилла
+		FC_NVGoggles_3_Green,					*,			350000,	        87500	    // 4 глаза  Без фильтра чуть лучше ванилла
+		FC_NVGoggles_3_Sand,					*,			350000,	        87500       // 4 глаза  Без фильтра чуть лучше ванилла
+	
+	--------------------- ФИЛЬТРА РАМОЧНЫЕ - FILTER OCL -------------------------------------,		*,	-1,	-1  
+	
+		FC_Nvg_Filter_H_Purple,					*,			300000,			75000	 	//  просто раскрашивает
+		FC_Nvg_Filter_H_LightBlue,				*,			300000,			75000       //  просто раскрашивает
+		FC_Nvg_Filter_H_Yellow,					*,			300000,			75000       //  просто раскрашивает
+		FC_Nvg_Filter_H_LightGreen,				*,			300000,			75000       //  просто раскрашивает
+		FC_Nvg_Filter_H_Beige,					*,			300000,			75000       //  просто раскрашивает
+																				    
+		FC_Nvg_Filter_Purple,					*,			300000,			75000	 	//  просто раскрашивает
+		FC_Nvg_Filter_LightBlue,				*,			300000,			75000	 	//  просто раскрашивает
+		FC_Nvg_Filter_Yellow,					*,			300000,			75000	 	//  просто раскрашивает
+		FC_Nvg_Filter_LightGreen,				*,			300000,			75000	 	//  просто раскрашивает
+		FC_Nvg_Filter_Beige,					*,			300000,			75000	 	//  просто раскрашивает
+		FC_Nvg_Filter_White,					*,			300000,			75000       //  просто раскрашивает
+
+	------------------- ФИЛЬТРА БЕЗРАМОЧНЫЕ - FILTER NVG NO OCL -------------------------------------,		*,	-1,	-1  
+				
+		FC_Nvg_Filter_H_Purple_NoOcl,			*,			750000,			187500		// делает любой пнв безрамочным, но очень контрастным, не оч приятно
+		FC_Nvg_Filter_H_LightBlue_NoOcl,		*,			750000,			187500      // делает любой пнв безрамочным, но очень контрастным, не оч приятно
+		FC_Nvg_Filter_H_Yellow_NoOcl,			*,			750000,			187500      // делает любой пнв безрамочным, но очень контрастным, не оч приятно
+		FC_Nvg_Filter_H_LightGreen_NoOcl,		*,			750000,			187500      // делает любой пнв безрамочным, но очень контрастным, не оч приятно
+		FC_Nvg_Filter_H_Beige_NoOcl,			*,			750000,			187500      // делает любой пнв безрамочным, но очень контрастным, не оч приятно
+				
+		FC_Nvg_Filter_Purple_NoOcl,				*,			900000,			225000		// делает идеальным любое пнв
+		FC_Nvg_Filter_LightBlue_NoOcl,			*,			900000,			225000      // делает идеальным любое пнв
+		FC_Nvg_Filter_Yellow_NoOcl,				*,			900000,			225000      // делает идеальным любое пнв
+		FC_Nvg_Filter_LightGreen_NoOcl,			*,			900000,			225000      // делает идеальным любое пнв
+		FC_Nvg_Filter_Beige_NoOcl,				*,			900000,			225000      // делает идеальным любое пнв
+		FC_Nvg_Filter_White_NoOcl,				*,			900000,			225000		// делает идеальным любое пнв
+		
+	--------------------- Кейс для фильтров - Filter case -------------------------------------,		*,	-1,	-1  
+		FC_Nvg_Filter_Container_Black,			*,			140000,		 35000          // котейнер для фильтров
+
+	-------------------------- Кейс для ПНВ - NVG case ---------------------------------------------,		*,	-1,	-1  		
+		FC_Nvg_Container_Black,					*,			140000,		 35000          // котейнер для фильтров, ПНВ, батареек и ремешка для ПНВ
+
+		
+	<Category> Магазины | Weapon Shops
+		BO_Mag_PP2000_20rnd,					M,			900,		220
+		BO_Mag_ASVAL_30rnd,						M,			1050,		260
+		BO_Mag_WA2000_6rnd,						M,			1100,		270
+		BO_Mag_VR80_10rnd,						M,			1100,		270
+		BO_Mag_SCARH_Tan_20rnd,					M,			1100,		270
+		BO_Mag_PP2000_40rnd,		    		M,			1100,		270
+		BO_Mag_R700Timberwolf_8rnd,				M,			1300,		320
+		BO_Mag_HKG28_20rnd,						M,			1400,		350
+		BO_Mag_PMAGWindow_30rnd,				M,			1600,		400
+		BO_Mag_USAS12_10rnd,					M,			1800,		450
+		BO_Mag_MRAD_10rnd,						M,			2000,		500
+		BO_Mag_SAKOTRG_5rnd,					M,			2000,		500
+		BO_Mag_Ruger_5rnd,						M,			2000,		500
+		BO_Mag_PMAG300_30rnd,					M,			2000,		500
+		BO_Mag_RPK16_96rnd,						M,			2000,		500
+		BO_Mag_TheFix_10rnd,					M,			2200,		550
+		BO_Mag_USAS12_20rnd,					M,			2200,		550
+		BO_Mag_Delta5_10rnd,					M,			2250,		560
+		BO_Mag_Tac21_5rnd,						M,			2500,		620
+		BO_Mag_SR25_20rnd,						M,			2700,		670
+		BO_Mag_D60_60rnd,						M,			2800,		700
+		BO_Mag_T5000_5rnd,						M,			3000,		750
+		BO_Mag_ARX160_30rnd,					M,			3000,		750
+		BO_Mag_ACR17_30rnd,   					M,			3000,		750
+		Mag_KOD_Glock17_Black_16rnd,			M,			3000,		750
+		Mag_KOD_Glock17_Tan_16rnd,				M,			3000,		750
+		BO_Mag_PKM_100rnd,						M,			3200,		800
+		BO_Mag_SRSA2_10rnd,						M,			3200,		800
+		BO_Mag_M96_5rnd,						M,			3200,		800
+		BO_Mag_M200_7rnd,						M,			3200,		800
+		BO_Mag_M300_7rnd,						M,			3200,		800
+		BO_Mag_SA58_50rnd,			    		M,			3500,		870
+		BO_Mag_PKP_250rnd,						M,			4000,		1000
+		Mag_KOD_VSS_20rnd,						M,			4000,		1000
+		Mag_KOD_AK47_20rnd,						M,			4000,		1000
+		Mag_KOD_Vector_30rnd,					M,			5000,		1250
+		Mag_KOD_M1928A1_30rnd,					M,			5000,		1250
+		Mag_KOD_SUB2000_30rnd,					M,			5000,		1250
+		BO_Mag_DVL10M1_5rnd,					M,			5500,		1370
+		Mag_KOD_AKALPHA_30rnd,					M,			6000,		1500
+		Mag_KOD_Alligator_5rnd,					M,			6000,		1500
+		Mag_KOD_AS50_10Rnd,						M,			6000,		1500
+		Mag_KOD_CS5_10rnd,						M,			6000,		1500
+		Mag_KOD_DVL10_5rnd,						M,			6000,		1500
+		Mag_KOD_HK417_20rnd,					M,			6000,		1500
+		Mag_KOD_KSVK_5rnd,						M,			6000,		1500
+		Mag_KOD_SA58_20Rnd,						M,			6000,		1500
+		Mag_KOD_Scorpion_30rnd,					M,			6000,		1500
+		Mag_KOD_DrumShotgun_30rnd,				M,			6000,		1500
+		Mag_KOD_SKS_20rnd,						M,			6000,		1500
+		Mag_KOD_SV98_10rnd,						M,			6000,		1500
+		Mag_KOD_VSSK_5rnd,						M,			6000,		1500
+		Mag_KOD_VR80_10rnd,						M,			6000,		1500
+		Mag_KOD_VSK94_20rnd,					M,			6000,		1500
+		Mag_KOD_Kivaari_10rnd,					M,			6000,		1500
+		Mag_KOD_M110_10rnd,						M,			6000,		1500
+		Mag_KOD_MDR_30rnd,						M,			6000,		1500
+		Mag_KOD_AK458_20rnd,					M,			6000,		1500
+		Mag_KOD_GM6Lynx_5Rnd,					M,			7000,		1750
+		Mag_KOD_SCARH_30rnd,					M,			7000,		1750
+		Mag_KOD_Glock17_Black_30rnd,			M,			8000,		2000
+		Mag_KOD_Glock17_Tan_30rnd,				M,			8000,		2000
+		Mag_KOD_HK21_50rnd,						M,			8000,		2000
+		Mag_KOD_M1928A1_100rnd,					M,			8000,		2000
+		Mag_KOD_M200_7rnd,						M,			8000,		2000
+		Mag_KOD_M60_100rnd,						M,			8000,		2000
+		Mag_KOD_PKP_150rnd,						M,			8000,		2000
+		Mag_KOD_VR80_30rnd,						M,			8000,		2000
+		Mag_KOD_Beowulf_10rnd,					M,			8000,		2000
+		Mag_KOD_ASH12_20rnd,					M,			8000,		2000
+		Mag_KOD_AWM_5rnd,						M,			8000,		2000
+		Mag_KOD_DVL10M1_5rnd,					M,			8000,		2000
+		Mag_KOD_M110_20rnd,						M,			8000,		2000
+		Mag_KOD_M82A2_10rnd,					M,			8000,		2000
+		Mag_KOD_R700_7rnd,						M,			8000,		2000
+		Mag_KOD_Ruger_5rnd,						M,			8000,		2000
+		Mag_KOD_AX50_5rnd,						M,			9000,		2250
+		Mag_KOD_RPK16_96rnd,					M,			10000,		2500
+		Mag_KOD_Evolys_100rnd,					M,			10000,		2500
+		Mag_KOD_PKM_100rnd,						M,			10000,		2500
+		Mag_KOD_PPSh_71rnd,						M,			10000,		2500
+		Mag_KOD_M249_200rnd,					M,			12000,		3000
+
+		
+	<Category> Боеприпасы | Ammunition
+------------------------------------------------------------ Патроны без упаковки | Cartridges without packaging ----------------------------------------------------------------------------, *, -1,-1
+		Ammo_12gaRubberSlug,			*,		400,		100										// Резиновые пули 12 калибра
+		Ammo_22,						*,		850,		210										// Патроны .22 LR
+		Ammo_380,						*,		950,		230										// Патроны .380 АСР
+		Ammo_9x19,						*,		1050,		260										// Патроны 9х19 мм
+		Ammo_45ACP,						*,		1150,		280										// Патроны .45 АСР
+		Ammo_12gaPellets,				*,		1250,		310										// Ружейные патроны 12 калибра
+		Ammo_12gaSlug,					*,		1450,		360										// Патроны 12 калибра с нарезами
+		Ammo_357,						*,		1550,		380										// Патроны .357
+		Ammo_545x39,					*,		1900,		470										// Патроны 5,45x39 mm
+		Ammo_556x45,					*,		2000,		500										// Патроны 5,56x45 mm
+		KOD_Ammo_762x25,				*,		2100,		520										// Патроны 7,62х25 мм тт
+		Ammo_762x39,					*,		2300,		570										// Патроны 7,62х39 мм
+		Ammo_545x39Tracer,				*,		2300,		570										// Трассирующие патроны 5,45x39 mm
+		Ammo_556x45Tracer,				*,		2400,		600										// Трассирующие патроны 5,56x45 mm
+		Ammo_9x39,						*,		2600,		650										// Патроны 9х39 мм
+		Ammo_762x54,					*,		2700,		670										// Патроны 7,62x54 мм R
+		Ammo_762x39Tracer,				*,		2700,		670										// Трассирующие патроны 7,62х39 мм
+		Ammo_AE300,						*,		2950,		730										// Патроны .300 Blackout Rounds
+		Ammo_308Win,					*,		2950,		730										// Патроны .308 WIN
+		Ammo_308WinTracer,				*,		3150,		780										// Трассирующие патроны .308 WIN
+		Ammo_762x54Tracer,				*,		3150,		780										// Трассирующие патроны 7,62x54 мм R
+		KOD_Ammo_458,					*,		3150,		780										// Патроны .458 SOCOM
+		Ammo_BO_65C,					*,		3150,		780										// Патроны 6.5 Creedmoor Rounds
+		Ammo_9x39AP,					*,		3350,		830										// Бронебойные патроны 9х39 мм
+		Ammo_50calBW,					*,		3650,		910										// Патроны 12,7x42 mm
+		KOD_Ammo_127x108,				*,		3650,		910										// Патроны 12,7x108 mm
+		Ammo_BO_86B,					*,		3650,		910										// Патроны 8.6 Blackout Rounds
+		KOD_Ammo_50BMG,					*,		4400,		1100									// Патроны .50 BMG
+		KOD_Ammo_338,					*,		4750,		1180									// Патроны .338 Lapua Magnum
+		Ammo_AE338,						*,		4750,		1180									// Патроны .338 Lapua Magnum Rounds
+		Ammo_127x55,					*,		4900,		1220									// Патроны 12,7x55 mm
+		Ammo_AE408,						*,		5250,		1310									// Патроны .408 CheyTac Rounds
+		KOD_Ammo_408,					*,		5250,		1310									// Патроны .408 CheyTac
+		Ammo_BO_300WinMag,				*,		5250,		1310									// Патроны 300 Winchester Magnum
+		KOD_Ammo_145x114,				*,		5750,		1430									// Патроны 14,5x114 mm
+		KOD_Ammo_20mm,					*,		6300,		1570									// Снаряды 20x102 mm
+------------------------------------------------------------ Патроны в упаковке | Cartridges in the package ----------------------------------------------------------------------------, *, -1,-1
+		AmmoBox_12gaRubberSlug_10Rnd,	*,		400,		100										// Резиновые патроны
+		AmmoBox_22_50Rnd,				*,		800,		200										// Коробка патронов .22 LR
+		AmmoBox_380_35rnd,				*,		900,		220										// Коробка патронов .380 АСР
+		AmmoBox_9x19_25rnd,				*,		1000,		250										// Коробка патронов 9х19 мм
+		AmmoBox_45ACP_25rnd,			*,		1100,		270										// Коробка патронов .45 АСР
+		AmmoBox_00buck_10rnd,			*,		1200,		300										// Коробка ружейных патронов 12 калибра
+		AmmoBox_12gaSlug_10Rnd,			*,		1400,		350										// Нарезные патроны 12 калибра
+		AmmoBox_357_20Rnd,				*,		1500,		370										// Коробка патронов .357
+		AmmoBox_545x39_20Rnd,			*,		1800,		450										// Коробка патронов 5,45x39 mm
+		AmmoBox_556x45_20Rnd,			*,		1900,		470										// Коробка патронов 5,56x45 mm
+		KOD_AmmoBox_762x25_50rnd,		*,		2000,		500										// 762x25 50 Rounds
+		AmmoBox_762x39_20Rnd,			*,		2200,		550										// Коробка патронов 7,62x39 мм
+		AmmoBox_545x39Tracer_20Rnd,		*,		2200,		550										// Коробка трассирующий патронов 5,45x39 mm
+		AmmoBox_556x45Tracer_20Rnd,		*,		2300,		570										// Коробка трассирующий патронов 5,56x45 mm
+		AmmoBox_9x39_20Rnd,				*,		2500,		620										// Коробка патронов 9х39 мм
+		AmmoBox_762x54_20Rnd,			*,		2600,		650										// Коробка патронов 7,62x54 мм R
+		AmmoBox_762x39Tracer_20Rnd,		*,		2600,		650										// Коробка трассирующий патронов 7,62x39 mm
+		AE_AmmoBox_300_20rnd,           *,      2800,		700										// Boxed .300 Blackout Rounds
+		AmmoBox_308Win_20Rnd,			*,		2800,		700										// Коробка патронов .308 WIN
+		AmmoBox_308WinTracer_20Rnd,		*,		3000,		750										// Коробка трассирующий патронов .308 WIN
+		AmmoBox_762x54Tracer_20Rnd,		*,		3000,		750										// Коробка трассирующий патронов 7,62x54 мм R
+		KOD_AmmoBox_458_30Rnd,			*,		3000,		750										// Коробка патронов .458 SOCOM
+		BO_AmmoBox_65C_20rnd,           *,      3000,		750										// Boxed 6.5 Creedmoor Rounds
+		AmmoBox_9x39AP_20Rnd,			*,		3200,		800										// Коробка бронебойных патронов 9х39 мм
+		KOD_AmmoBox_50calBW_20Rnd,		*,		3500,		870										// Коробка патронов 12,7x42 mm
+		KOD_AmmoBox_127x108_10Rnd,		*,		3500,		870										// Коробка патронов 12,7x108 mm
+		BO_AmmoBox_86B_20rnd,           *,      3500,		870										// Boxed 8.6 Blackout Rounds
+		KOD_AmmoBox_50BMG_10Rnd,		*,		4200,		1050									// Коробка патронов .50 BMG
+		KOD_AmmoBox_338_20Rnd,			*,		4500,		1120									// Коробка патронов .338 Lapua Magnum
+		AE_AmmoBox_338_20rnd,           *,      4500,		1120									// Boxed .338 Lapua Magnum Rounds
+		KOD_AmmoBox_127x55_20Rnd,		*,		4600,		1150									// Коробка патронов 12,7x55 mm
+		AE_AmmoBox_408_20rnd,           *,      5000,		1250									// Boxed .408 CheyTac Rounds
+		KOD_AmmoBox_408_10Rnd,			*,		5000,		1250									// Коробка патронов .408 CheyTac
+		BO_Ammobox_300WinMag_20rnd,     *,      5000,		1250									// Boxed 300 Winchester Magnum Rounds
+		KOD_AmmoBox_145x114_10Rnd,		*,		5500,		1370									// Коробка патронов 14,5x114 mm
+		KOD_AmmoBox_20mm_5Rnd,			*,		6000,		1500									// Цинк патронов 20x102 mm
+
+
+	<Category> Обвесы | Body kits
+		BO_PKPScopeMount_Black,					*,			4000,		1000
+		BO_PKPScopeMount_FDE,					*,			4000,		1000
+		BO_VSS_Rail,							*,			4000,		1000
+		BO_MCXTacops_Bttstck_Black,				*,			4000,		1000
+		BO_MCXTacops_Handguard,					*,			4000,		1000
+		BO_MK18Bttstck,							*,			4000,		1000
+		BO_MCXSpear_Bttstck_Tan,				*,			4000,		1000
+		BO_MCXTacops_Bttstck_FDE,				*,			4000,		1000
+		KOD_Vector_Handguard,					*,			4000,		1000
+		KOD_KSVK_Bipod,							*,			4500,		1125
+		KOD_AK_PolymerHndgrd_Black,				*,			5000,		1250
+		KOD_AK_PolymerHndgrd_FDE,				*,			5000,		1250
+		KOD_Grip_RK2_Black,						*,			5000,		1250
+		KOD_Grip_Angled_FDE,					*,			5000,		1250
+		KOD_Grip_Shift_Black,					*,			5000,		1250
+		KOD_Grip_Vertical_Black,				*,			5000,		1250
+		KOD_RIS_Bipod,							*,			5000,		1250
+		KOD_Alligator_Bipod,					*,			5000,		1250
+		KOD_FAMAS_Bipod,						*,			5000,		1250
+		KOD_Vector_Buttstock,					*,			5000,		1250
+		KOD_M200_Bipod_Grey,					*,			5000,		1250
+		KOD_M60E3_Bipod,						*,			5000,		1250
+		KOD_PKP_Bipod,							*,			5000,		1250
+		KOD_PKP_Tac_Handguard_Black,			*,			5000,		1250
+		KOD_PKP_Tac_Handguard_FDE,				*,			5000,		1250
+		KOD_PKP_Tac_Buttstock_Black,			*,			5000,		1250
+		KOD_PKP_Tac_Buttstock_FDE,				*,			5000,		1250
+		KOD_PKP_Tac_Rail_Black,					*,			5000,		1250
+		KOD_PKP_Tac_Rail_FDE,					*,			5000,		1250
+		KOD_SA58_Bttstck,						*,			5000,		1250
+		KOD_VSSK_Bipod,							*,			5000,		1250
+		KOD_M200_Bipod_Black,					*,			5500,		1375
+		KOD_VSK94_Hndgrd_Accs,					*,			5500,		1375
+		KOD_VSK94_Hndgrd,						*,			5500,		1375
+		KOD_VSK94_Bttstck,						*,			5500,		1375
+		KOD_AK_Bttstck,							*,			5500,		1375
+		KOD_AR15Skeleton_Buttstock,				*,			5500,		1375
+
+	
+<Category> Прицелы | Optic
+------------------------------------------------------------ Прицелы | Scopes ----------------------------------------------------------------------------, *, -1,-1
+		BO_GrozaOptic,							*,			4150,		720									// PO4x34 Score
+		BO_HAMROptic,							*,			3200,		560									// Leupold HAMR Optic
+		BO_VortexAMG_UH1_Optic,					*,			4100,		710									// Vortex RAZOR AMG UH-1
+		BO_LeupoldCarbineOptics,				*,			5400,		940									// Leupold Carbine Optics
+		BO_Bravo4,								*,			6200,		1080								// Bravo4 Score
+		BO_AimpointCS,							*,			7600,		1330								// Aimpoint CS Sight
+		BO_ACOGOptic_ACSS_Red,					*,			9000,		1570								// Trijicon ACOG ACSS Red
+		BO_ACOGOptic_Chevron_Green,				*,			11000,		1920								// Trijicon ACOG Chevron Green
+		BO_ACOGOptic_300blk_Red,				*,			12800,		2240								// Trijicon ACOG 300blk Red
+		BO_ACOGOptic_300blk_Blue,				*,			14000,		2450								// Trijicon ACOG 300blk Blue
+		BO_ACOGOptic_Crosshair_Red,				*,			17000,		2970								// Trijicon ACOG Red Crosshair
+		BO_DragonScope,							*,			19200,		3360								// Dragon Scope
+		BO_ShmidtBender20,                      *,			   -1,		3670								// HK-Schmidt & Bender 3-20x50 G28
+		BO_AccuPowerOptic,                      *,			22000,		3850								// Trijicon AccoPower
+------------------------------------------------------------ Улучшенные прицелы | Improved sights ----------------------------------------------------------------------------, *, -1,-1
+        AD_G33,                         		*,			-1,			1400								// EOTech G33.STS
+        AD_RMR,                         		*,			-1,			2100								// Прицел RMR
+        AD_RMR_LM,                      		*,			-1,			2450								// Прицел RMR (низкое кр.)
+        AD_MRS,                         		*,			-1,			2450								// Прицел MRS
+        AD_XPS34,                       		*,			-1,			2450								// EOTech XPS3-4
+        AD_XPS34_HHS,                   		*,			-1,			2800								// EOTech HHS I
+        AD_RMR_TM,                      		*,			-1,			2800								// Прицел RMR (высокое кр.)
+        AD_OKP7,                        		*,			-1,			3150								// ОКП-7
+        AD_Pilad,                       		*,			-1,			3500								// Пилад 4х32
+        AD_ACOG,                        		*,			-1,			3850								// Прицел AGOG
+        AD_ACOG_RMR,                    		*,			-1,			4550								// Прицел AGOG (RMR)
+        AD_LeupoldMk4,                  		*,			-1,			5250								// Leupold 3.5-10x40 Mark 4 Score
+        AD_DHF5,                        		*,			-1,			5600								// Dedal DHF 5-20x56
+        AD_SpecterDR,                   		*,			-1,			5950								// Прицел SpecterDR 1.5-6x
+        AD_NFATACR_1_8,                 		*,			-1,			6650								// Прицел NF ATACR 1-8x24
+        AD_PVS4,                        		*,			-1,			9100								// AN/PVS-4 Ночной прицел
+        AD_NFATACR,                     		*,			-1,			9100								// Прицел NF ATACR 7-35x56
+------------------------------------------------------------ Крепления | Fasteners ----------------------------------------------------------------------------, *, -1,-1
+		AD_MosinMount,                  		*,			7000,		1220								// Крепление для прицела для винтовки Мосина
+        AD_B13Mount,                    		*,			8000,		1400								// Кронштейн Зеник Б-13
+------------------------------------------------------------ Прицельные модули | Sighting modules ----------------------------------------------------------------------------, *, -1,-1
+		Ri_Laser_Ncstar,						*,			-1,			3500								// Тактический ЛЦУ NsSTAR-TBL
+		Ri_Laser_Anpeq2,						*,			-1,			4370								// Тактический блок AN-PEQ2
+		Ri_Laser_Surefire_x400,					*,			-1,			5250								// Тактический фонарь SureFire X400
+		Ri_Laser_dbEbal,						*,			-1,			6120								// Тактический блок DB-E|Bal
+		Ri_Laser_GL21,							*,			-1,			6650								// Тактический фонарь с ЛЦУ GTL 21
+		Ri_Laser_Anpeq15,						*,			-1,			7000								// Тактический блок AN-PEQ15
+		Ri_Laser_Perst3,						*,			-1,			7870								// Тактический блок Zenit Perst-3
+
+
+<Category> Глушители | Silencers
+		KOD_Glock17_FlashHider,					*,			1750,		430		// Glock 17 Flash Hider
+		KOD_Glock17_Compensator,				*,			1750,		430		// Glock 17 Compensator
+		BO_MCXTacops_Suppressor_QD,				*,			2450,		610		// MCX Tacops QD Silencer
+		BO_CorduraSuppressor,					*,			2800,		700		// Cordura Suppressor
+		BO_CorduraSuppressor_Green,				*,			2800,		700		// Cordura Suppressor
+		BO_CorduraSuppressor_Black,				*,			3150,		780		// Cordura Suppressor
+		BO_MCXTacops_Suppressor_MODX,			*,			3150,		780		// MCX Tacops MODX Silencer
+		BO_SPAS12_Suppressor,					*,			3150,		780		// Shotgun Suppressor
+		BO_300WinMag_Suppressor_FDE,			*,			3500,		870		// 300 WinMag Suppressor
+		BO_TheFix_Suppressor,					*,			3850,		960		// jumbo SHRIMP by Q
+		BO_TacticalSuppressor,					*,			4900,		1220	// Tactical Suppressor
+		BO_HarvesterSuppressor,					*,			4900,		1220	// .338 Harvester Suppressor
+		KOD_PBS1Suppressor,						*,			4900,		1220	// PBS-1 Suppressor
+		KOD_Compensator_AR,						*,			5600,		1400	// AR Compensator
+		KOD_Compensator_AK,						*,			5600,		1400	// AK Compensator
+		BO_LegionSuppressor_Black,				*,			5950,		1480	// Legion Suppressor
+		BO_LegionSuppressor_Tan,				*,			5950,		1480	// Legion Suppressor
+		BO_MCXSpear_Suppressor,					*,			7000,		1750	// MCX SPEAR Silencer
+		KOD_Vector_Suppressor,					*,			7000,		1750	// Vector Suppressor
+		BO_M200_Suppressor,						*,			8050,		2010	// .408 Suppressor
+		KOD_VSK94_Silencer,						*,			8400,		2100	// VSK-94 Silencer
+		KOD_VSK94_Silencer_Wrap,				*,			8400,		2100	// VSK-94 Silencer Wrap
+		KOD_Suppressor_308,						*,			8400,		2100	// .308 Suppressor
+		KOD_DTKPutnik_Black,					*,			9100,		2270	// DTK Putnik Black
+		KOD_DTKPutnik_White,					*,			9100,		2270	// DTK Putnik White
+		KOD_DTKPutnik_Tan,						*,			9100,		2270	// DTK Putnik Tan
+		KOD_M200_Suppressor,					*,			9800,		2450	// M200 Suppressor
+		KOD_M82A2_Suppressor_Grey,				*,			10500,		2620	// M82A2 Suppressor
+		KOD_M82A2_Suppressor_Black,				*,			10500,		2620	// M82A2 Suppressor
+		KOD_M82A2_Suppressor_Tan,				*,			10500,		2620	// M82A2 Suppressor
+		KOD_M82A2_Suppressor_Red,				*,			10500,		2620	// M82A2 Suppressor
+		KOD_M82A2_Suppressor_Green,				*,			10500,		2620	// M82A2 Suppressor
+		KOD_M82A2_Suppressor_CamoBlue,			*,			10500,		2620	// M82A2 Suppressor
+		KOD_M82A2_Suppressor_Leaves,			*,			10500,		2620	// M82A2 Suppressor
+		KOD_M4Suppressor_NoCover,				*,			10500,		2620	// M4 Suppressor
+		KOD_M4Suppressor_Black,					*,			10500,		2620	// M4 Suppressor
+		KOD_M4Suppressor_Tan,					*,			10500,		2620	// M4 Suppressor
+		KOD_M4Suppressor_Camo,					*,			10500,		2620	// M4 Suppressor
+		KOD_AWM_Suppressor,						*,			10500,		2620	// AWM Suppressor
+		
+<Category> Скупка оружия | Purchase of weapons
+		BO_Winchester1873,						W,			-1,			1200	// Winchester 1873
+		BO_PP2000,								W,			-1,			1800	// PP-2000
+		KOD_Glock17_Custom_Black,				W,			-1,			2000	// Glock 17 Custom
+		KOD_Glock17_Custom_Tan,					W,			-1,			2000	// Glock 17 Custom
+		KOD_Glock17_Custom_BlackTan,			W,			-1,			2000	// Glock 17 Custom
+		KOD_Glock17_Custom_TanBlack,			W,			-1,			2000	// Glock 17 Custom
+		BO_G36C,								W,			-1,			3000	// Gewehr 36C
+		BO_AN94,								W,			-1,			3500	// AN-94
+		BO_Groza_762,							W,	 		-1,			4000	// OTs-14 Groza-1
+		BO_TKB0146,								W,			-1,			4000	// TKB-0146
+		SV98,									W,			-1,			4500	// СВ-98
+		BO_AKM_FDE,								W,	 		-1,			5000	// AKM
+		BO_AKM,									W,	 		-1,			5000	// AKM
+		M79,									W,	 		-1,			8000	// M79
+		KOD_KS23,								W,			-1,			8000	// КС-23
+		BO_USAS12,								W,			-1,			8500	// USAS-12
+		BO_AK5C,								W,			-1,			9000	// AK5C
+		KOD_SUB2000,							W,			-1,			9000	// Kel-Tec SUB2000
+		BO_SCARH_Tan,							W,			-1,			10000	// FN SCAR-H
+		KOD_DrumShotgun,						W,			-1,			10000	// Ш-12
+		KOD_Scorpion,							W,			-1,			10000	// CZ Scorpion
+		KOD_SUB2000_Suppressed, 				W,			-1,			10000	// Kel-Tec SUB2000 (С глушителем)
+		KOD_VR80,								W,			-1,			10000	// VR80
+		BO_VR80,								W,			-1,			10000	// VR80
+		BO_M4A1_CQB,							W,			-1,			11000	// M4A1
+		KOD_Vector,								W,			-1,			11000	// KRISS Vector
+		KOD_M1928A1,							W,			-1,			11000	// M1928A1
+		BO_ASVAL,								W,			-1,			12000	// AS Val
+		KOD_VSK94,								W,			-1,			12000	// VSK-94
+		KOD_MP5SD,								W,			-1,			12000	// MP5SD
+		BO_MCXTacops_Black,						W,			-1,			13000	// MCX Virtus Tacops
+		BO_SVU,									W,			-1,			14000	// SVU
+		BO_WA2000,								W,			-1,			15000	// WA 2000
+		KOD_K98,								W,			-1,			15000	// Karabiner 98k
+		BO_T5000,								W,			-1,			16000	// Orsis T-5000
+		BO_TheFix,					    		W,			-1,			17000	// The Fix
+		BO_TheFix_BlueTiger,					W,			-1,			17000	// The Fix
+		BO_TheFix_RedTiger,						W,			-1,			17000	// The Fix
+		BO_TheFix_Multicam,						W,			-1,			17000	// The Fix
+		BO_Tigr_Tactical,						W,			-1,			18000	// SVD Tactical
+		BO_HKG28,								W,			-1,			19000	// G28
+		BO_Delta5,								W,			-1,			20000	// Delta 5 PRO
+		BO_Delta5_Camo1,						W,			-1,			20000	// Delta 5 PRO
+		BO_Delta5_Camo2,						W,			-1,			20000	// Delta 5 PRO
+		BO_Delta5_Camo3,						W,			-1,			20000	// Delta 5 PRO
+		BO_Delta5_Camo4,						W,			-1,			20000	// Delta 5 PRO
+		BO_Delta5_Camo5,						W,			-1,			20000	// Delta 5 PRO
+		BO_Delta5_Camo6,						W,			-1,			20000	// Delta 5 PRO
+		BO_Delta5_Camo7,						W,			-1,			20000	// Delta 5 PRO
+		BO_Delta5_Camo8,						W,			-1,			20000	// Delta 5 PRO
+		BO_Delta5_Camo9,						W,			-1,			20000	// Delta 5 PRO
+		BO_Delta5_Camo10,						W,			-1,			20000	// Delta 5 PRO
+		BO_R700Timberwolf,						W,			-1,			22000	// C14 TimberWolf
+		KOD_TAR21_Black,						W,			-1,			22000	// TAR-21
+		KOD_TAR21_Tan,							W,			-1,			22000	// TAR-21
+		KOD_TAR21_Green,						W,			-1,			22000	// TAR-21
+		BO_Mk14,								W,			-1,			23000	// Mk 14 EBR
+		BO_DVL10M1,								W,			-1,			24000	// DVL-10
+		KOD_DVL10,								W,			-1,			24000	// ДВЛ-10 М2 Урбана
+		KOD_ASH12,								W,			-1,			25000	// АШ-12
+		KOD_Kivaari_Grey,						W,			-1,			25000	// Kivaari
+		KOD_Kivaari_Black,						W,			-1,			25000	// Kivaari
+		KOD_Kivaari_Green,						W,			-1,			25000	// Kivaari
+		KOD_Kivaari_Tan,						W,			-1,			25000	// Kivaari
+		KOD_SV98_Green,							W,			-1,			25000	// СВ-98
+		KOD_SV98_Black,							W,			-1,			25000	// СВ-98
+		KOD_MBR_Black,							W,	 	    -1,			26000	// MBR
+		KOD_MBR_Tan,							W,	 	   	-1,			26000	// MBR
+		KOD_MBR_UCPCamo,						W,	 	   	-1,			26000	// MBR
+		KOD_MBR_WoodlandCamo,					W,	 	   	-1,			26000	// MBR
+		KOD_MBR_DesertCamo,						W,	 	   	-1,			26000	// MBR
+		KOD_M200_Grey,							W,			-1,			28000	// CheyTac M200
+		KOD_M200_Black,							W,			-1,			28000	// CheyTac M200
+		KOD_AEK971,								W,	 	    -1,			28000	// AEK-971
+		KOD_MCR_Black,							W,			-1,			28000	// MCR
+		KOD_MCR_Tan,							W,			-1,			28000	// MCR
+		KOD_MCR_BlackTan,						W,			-1,			28000	// MCR
+		KOD_MCR_TanCamo,						W,			-1,			28000	// MCR
+		KOD_MCR_UCPCamo,						W,			-1,			28000	// MCR
+		KOD_MCR_WoodlandCamo,					W,			-1,			28000	// MCR
+		KOD_AX50,								W,			-1,			30000	// AX-50
+		KOD_AX50_Black,							W,			-1,			30000	// AX-50
+		KOD_SVU,								W,			-1,			30000	// SVU
+		KOD_RPK16,								W,			-1,			30000	// RPK-16
+		KOD_AR15Skeleton,						W,			-1,			30000	// AR-15
+		BO_RPK16,								W,			-1,			30000	// RPK-16
+		KOD_AS50_Black,							W,			-1,			32000	// AS50
+		KOD_AS50_Camo1,							W,			-1,			32000	// AS50
+		KOD_AS50_Camo2,							W,			-1,			32000	// AS50
+		KOD_AS50_Camo3,							W,			-1,			32000	// AS50
+		KOD_AS50_Camo4,							W,			-1,			32000	// AS50
+		KOD_Beowulf,							W,			-1,			32000	// AR-15 .50 Beowulf
+		KOD_Mk18,								W,			-1,			32000	// MK18
+		KOD_FAMAS,								W,			-1,			34000	// FAMAS
+		KOD_AK47,								W,			-1,			34000	// AK-47
+		KOD_GM6Lynx,							W,			-1,			34000	// GM6 Lynx
+		KOD_CS5,								W,			-1,			35000	// McMillan CS5
+		KOD_AKALPHA,							W,	 	    -1,			35000	// AK-ALPHA
+		KOD_M110_Black,							W,			-1,			35000	// M110
+		KOD_M110_Tan,							W,			-1,			35000	// M110
+		KOD_M82A2_Grey,							W,			-1,			36000	// M82A2
+		KOD_M82A2_Tan,							W,			-1,			36000	// M82A2
+		KOD_M82A2_Black,						W,			-1,			36000	// M82A2
+		KOD_M82A2_Red,							W,			-1,			36000	// M82A2
+		KOD_M82A2_Green,						W,			-1,			36000	// M82A2
+		KOD_M82A2_CamoBlue,						W,			-1,			36000	// M82A2
+		KOD_M82A2_Leaves,						W,			-1,			36000	// M82A2
+		KOD_AK15,								W,			-1,			37000	// AK-15
+		KOD_Alligator,							W,			-1,			38000	// Snipex Alligator
+		KOD_R700,		    					W,			-1,			38000	// R700
+		KOD_HK21_Old,							W,			-1,			38000	// HK21
+		KOD_VSSK,								W,			-1,			40000	// ВССК
+		KOD_M249,								W,			-1,			40000	// M249
+		KOD_HK21_Black,							W,			-1,			40000	// HK21
+		KOD_KSVK,								W,			-1,			42000	// КСВК
+		KOD_AWM,								W,			-1,			42000	// AWM
+		KOD_HK417,								W,			-1,			42000	// HK417
+		KOD_Evolys,								W,			-1,			43000	// FN Evolys
+		KOD_SA58,								W,			-1,			44000	// DSA SA58
+		KOD_AR50A1,								W,			-1,			45000	// ArmaLite-50A1
+		KOD_M60E3,								W,			-1,			45000	// M60E3
+		KOD_SCARH,								W,			-1,			46000	// SCAR-H
+		KOD_PKM,								W,			-1,			47000	// ПКМ
+		BO_PKM,									W,			-1,			47000	// PKM
+		KOD_PKP,								W,			-1,			48000	// ПКП
+		KOD_PKP_Tac_Black,						W,			-1,			50000	// ПКП Тактический
+		KOD_PKP_Tac_FDE,						W,			-1,			50000	// ПКП Тактический
+
+
+<OpenFile> TraderConfig2_Khimza.txt
+<FileEnd>

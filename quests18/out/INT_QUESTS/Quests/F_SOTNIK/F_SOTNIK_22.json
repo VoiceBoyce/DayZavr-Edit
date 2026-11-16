@@ -1,0 +1,52 @@
+{
+    "Version": 1,
+    "Id": 35021,
+    "Order": 22,
+    "Enabled": 1,
+    "Name": "Сварог",
+    "Description": [
+        "База у холма Сварог кишит мертвецами. Двадцать пять — на базе и в бункере."
+    ],
+    "GiverStart": "sotnik",
+    "GiverFinish": "sotnik",
+    "Requires": [
+        35001
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "WEEKLY",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "KILL",
+            "Target": "ZombieBase",
+            "Count": 25.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "4928 0 2236",
+            "ZoneRadius": 250.0,
+            "Text": "Убить зомби на базе Сварог"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 2,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        }
+    ],
+    "Note": "make_quests18.py СН2"
+}

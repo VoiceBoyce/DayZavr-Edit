@@ -1,0 +1,37 @@
+{
+    "Version": 1,
+    "Id": 36006,
+    "Order": 7,
+    "Enabled": 0,
+    "Name": "Твой путь",
+    "Description": [
+        "Ты ходил к Волхву или к Кузнецу — а может, к обоим. Один говорит: лес надо слушать. Другой: лес надо брать. Расскажи, какой дорогой ты шёл до конца. Мне не важно какой. Важно, что ты дошёл."
+    ],
+    "GiverStart": "skazitel",
+    "GiverFinish": "skazitel",
+    "Requires": [
+        32006,
+        33006
+    ],
+    "RequireAny": 1,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Silver",
+            "Count": 5,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Серебряная монета"
+        }
+    ],
+    "Note": "make_quests18.py Ск7"
+}

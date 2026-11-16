@@ -1,0 +1,61 @@
+{
+    "Version": 1,
+    "Id": 30011,
+    "Order": 12,
+    "Enabled": 1,
+    "Name": "Дрова на ночь",
+    "Description": [
+        "Ночи у озера сырые. Две полные связки дров, двенадцать поленьев, — и спички тебе за труды."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "coins_quests_all",
+    "Requires": [
+        30000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "DAILY",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "Firewood",
+            "Count": 12.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Дрова"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Copper",
+            "Count": 5,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Медная монета"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "Matchbox",
+            "Count": 1,
+            "Quantity": "",
+            "State": "",
+            "Amount": 0,
+            "Text": "Спички"
+        }
+    ],
+    "Note": "make_quests18.py БД2"
+}

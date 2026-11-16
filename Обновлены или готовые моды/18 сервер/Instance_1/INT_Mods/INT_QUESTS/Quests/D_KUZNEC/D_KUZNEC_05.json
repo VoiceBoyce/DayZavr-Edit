@@ -1,0 +1,82 @@
+{
+    "Version": 1,
+    "Id": 33004,
+    "Order": 5,
+    "Enabled": 1,
+    "Name": "Три святилища",
+    "Description": [
+        "Большие руны огня, льда и бури дают только три алтаря: на Скале, в Радунине и в Западлиско. Два последних — за вратами, у пауков. Выбей по руне в каждом. Это не прогулка."
+    ],
+    "GiverStart": "kuznec",
+    "GiverFinish": "kuznec",
+    "Requires": [
+        33003
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "ACTION",
+            "Target": "Action_MSFZ_MineRock",
+            "Count": 1.0,
+            "Filter": "msfz_stone_2",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Выбить руну на Скале (огонь)"
+        },
+        {
+            "Kind": "ACTION",
+            "Target": "Action_MSFZ_MineRock",
+            "Count": 1.0,
+            "Filter": "msfz_stone_altar_1",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Выбить руну в Радунине (лёд)"
+        },
+        {
+            "Kind": "ACTION",
+            "Target": "Action_MSFZ_MineRock",
+            "Count": 1.0,
+            "Filter": "msfz_stone_altar_4",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Выбить руну в Западлиско (буря)"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 4,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        }
+    ],
+    "Note": "make_quests18.py К5"
+}

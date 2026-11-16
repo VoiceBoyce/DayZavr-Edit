@@ -1,0 +1,52 @@
+{
+    "Version": 1,
+    "Id": 34110,
+    "Order": 11,
+    "Enabled": 1,
+    "Name": "Бестиарий: Шипастого",
+    "Description": [
+        "Запись в Бестиарий Нави. Разделай Шипастого сам — трофей остаётся тебе. Шипастый умеет прятаться. Найди и вскрой."
+    ],
+    "GiverStart": "lovchiy",
+    "GiverFinish": "lovchiy",
+    "Requires": [
+        34002
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "ACTION",
+            "Target": "ActionSkinning",
+            "Count": 1.0,
+            "Filter": "SFP_Shipastiy",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Разделать Шипастого"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        }
+    ],
+    "Note": "make_quests18.py Бест11"
+}

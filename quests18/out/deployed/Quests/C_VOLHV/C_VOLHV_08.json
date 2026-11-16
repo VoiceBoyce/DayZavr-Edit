@@ -1,0 +1,61 @@
+{
+    "Version": 1,
+    "Id": 32007,
+    "Order": 8,
+    "Enabled": 0,
+    "Name": "Сердце — корням",
+    "Description": [
+        "Хранитель рощи пал — я слышал, как стонали корни. Его сердце не должно лежать в чьём-то рюкзаке. Принеси его мне, я верну его лесу. За это возьми терновый клинок: он пьёт кровь нечисти и делится с хозяином."
+    ],
+    "GiverStart": "volhv",
+    "GiverFinish": "volhv",
+    "Requires": [
+        32002
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "VB_AR_KeeperHeart",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Сердце Хранителя"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 5,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "VB_AR_Blade",
+            "Count": 1,
+            "Quantity": "",
+            "State": "",
+            "Amount": 0,
+            "Text": "Терновый клинок"
+        }
+    ],
+    "Note": "make_quests18.py Вл8"
+}

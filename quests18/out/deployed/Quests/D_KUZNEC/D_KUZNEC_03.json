@@ -1,0 +1,76 @@
+{
+    "Version": 1,
+    "Id": 33002,
+    "Order": 3,
+    "Enabled": 1,
+    "Name": "Курица и яйцо",
+    "Description": [
+        "Руны выбивают из алтарей магической киркой. А чтобы выковать магическую кирку, нужна руна. Смешно? Мне — нет. Руну Кабана носят навьи — мертвецы, что пришли из-за врат. Голову Энта найдёшь в лесу. Принеси обе — и кирка твоя."
+    ],
+    "GiverStart": "kuznec",
+    "GiverFinish": "kuznec",
+    "Requires": [
+        33001
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "MSFZ_RuneStone_Kaban",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Руна Кабана"
+        },
+        {
+            "Kind": "DELIVER",
+            "Target": "MSFZ_Ent_head",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Голова Энта"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "MSFZ_Magic_Kirka",
+            "Count": 1,
+            "Quantity": "",
+            "State": "",
+            "Amount": 0,
+            "Text": "Магическая кирка"
+        }
+    ],
+    "Note": "make_quests18.py К3"
+}

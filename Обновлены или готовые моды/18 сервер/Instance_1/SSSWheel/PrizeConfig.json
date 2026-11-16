@@ -1,0 +1,2145 @@
+{
+    "Prizes": [
+        {
+            "PrizeName": "Случайный напиток",
+            "Items": [
+                {
+                    "ItemType": "SodaCan_Kvass",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SodaCan_Fronta",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SodaCan_Cola",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SodaCan_Pipsi",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SodaCan_Spite",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SFP_DrinkCan_Stalker",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SFP_DrinkCan_NonStop",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SFP_DrinkCan_Monster",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SFP_DrinkCan_RedBull",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SFP_DrinkCan_Zhigulevskoe",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SFP_DrinkCan_Baltica9",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SFP_DrinkCan_Kozel",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SFP_DrinkCan_ESSA",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SFP_DrinkCan_Tuborg",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SFP_DrinkCan_GinTonik",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                }
+            ],
+            "PrizeChance": 33.0,
+            "showNotificationToAllPlayers": 0,
+            "NotificationText": "",
+            "givePrizeOnlyInHands": 0
+        },
+        {
+            "PrizeName": "Случайная еда",
+            "Items": [
+                {
+                    "ItemType": "SFP_Food_Buhanka",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SaltySticks",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Chips",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Crackers",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Pajka",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SFP_Food_Shawerma",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "BakedBeansCan",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Pate",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SpaghettiCan",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SFP_Food_Kolbasa",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SardinesCan",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "BrisketSpread",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "TunaCan",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "PeachesCan",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Marmalade",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "PowderedMilk",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "TacticalBaconCan",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                }
+            ],
+            "PrizeChance": 28.0,
+            "showNotificationToAllPlayers": 0,
+            "NotificationText": "",
+            "givePrizeOnlyInHands": 0
+        },
+        {
+            "PrizeName": "Пачка патронов случайного калибра",
+            "Items": [
+                {
+                    "ItemType": "AmmoBox_00buck_10rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AmmoBox_12gaSlug_10Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AmmoBox_22_50Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AmmoBox_308WinTracer_20Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AmmoBox_308Win_20Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AmmoBox_357_20Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AmmoBox_380_35rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AmmoBox_45ACP_25rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AmmoBox_545x39Tracer_20Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AmmoBox_545x39_20Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AmmoBox_556x45Tracer_20Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AmmoBox_556x45_20Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AmmoBox_762x39Tracer_20Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AmmoBox_762x39_20Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AmmoBox_762x54Tracer_20Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AmmoBox_762x54_20Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AmmoBox_9x19_25rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AmmoBox_9x39AP_20Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AmmoBox_9x39_20Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "KOD_AmmoBox_762x25_50rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "KOD_AmmoBox_458_30Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "KOD_AmmoBox_50calBW_20Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "KOD_AmmoBox_127x108_10Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "KOD_AmmoBox_127x55_20Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "KOD_AmmoBox_50BMG_10Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "KOD_AmmoBox_338_20Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "KOD_AmmoBox_408_10Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "KOD_AmmoBox_145x114_10Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "KOD_AmmoBox_20mm_5Rnd",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                }
+            ],
+            "PrizeChance": 17.0,
+            "showNotificationToAllPlayers": 0,
+            "NotificationText": "",
+            "givePrizeOnlyInHands": 0
+        },
+        {
+            "PrizeName": "Случайный медикамент",
+            "Items": [
+                {
+                    "ItemType": "BandageDressing",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "BloodTestKit",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "TetracyclineAntibiotics",
+                    "IsCar": 0,
+                    "ItemQuantity": 12,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "PurificationTablets",
+                    "IsCar": 0,
+                    "ItemQuantity": 12,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "BloodBagEmpty",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SalineBag",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "CharcoalTablets",
+                    "IsCar": 0,
+                    "ItemQuantity": 12,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Epinephrine",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "BloodBagEmpty",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "BloodTestKit",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Morphine",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "PainkillerTablets",
+                    "IsCar": 0,
+                    "ItemQuantity": 12,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                }
+            ],
+            "PrizeChance": 10.0,
+            "showNotificationToAllPlayers": 0,
+            "NotificationText": "",
+            "givePrizeOnlyInHands": 0
+        },
+        {
+            "PrizeName": "Случайное огнестрельное оружие",
+            "Items": [
+                {
+                    "ItemType": "MKII",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Deagle_Gold",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Deagle",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Glock19",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Colt1911",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Engraved1911",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Magnum",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "MakarovIJ70",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "CZ75",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "FNX45",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Izh18",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Repeater",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Mosin9130",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "CZ527",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Winchester70",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SKS",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Mp133Shotgun",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Izh43Shotgun",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Saiga",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Aug",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "PP19",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AugShort",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "UMP45",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "MP5K",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AKS74U",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AKM",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "FAL",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AK101",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "M4A1",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "M16A2",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "ASVAL",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AK74",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "FAMAS",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "CZ550",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "SVD",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "VSS",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Ruger1022",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                }
+            ],
+            "PrizeChance": 5.0,
+            "showNotificationToAllPlayers": 1,
+            "NotificationText": "выиграл огнестрельное оружие!",
+            "givePrizeOnlyInHands": 0
+        },
+        {
+            "PrizeName": "Случайный прицел для оружия",
+            "Items": [
+                {
+                    "ItemType": "M4_CarryHandleOptic",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "BUISOptic",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "FNP45_MRDSOptic",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "PistolOptic",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "ReflexOptic",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "ACOGOptic",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "M68Optic",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "ACOGOptic_6x",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "M4_T3NRDSOptic",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "KobraOptic",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "KashtanOptic",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "PUScopeOptic",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "HuntingOptic",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "PSO1Optic",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "PSO11Optic",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AD_G33",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AD_MRS",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AD_RMR",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AD_RMR_LM",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AD_RMR_TM",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AD_XPS34",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AD_XPS34_HHS",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AD_OKP7",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AD_Pilad",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AD_ACOG",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AD_ACOG_RMR",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AD_LeupoldMk4",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AD_LeupoldMk4",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AD_DHF5",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AD_SpecterDR",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AD_NFATACR_1_8",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AD_NFATACR",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AD_PVS4",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                }
+            ],
+            "PrizeChance": 3.0,
+            "showNotificationToAllPlayers": 1,
+            "NotificationText": "выиграл прицел для оружия. Теперь он будет выцеливать своих врагов. Будьте внимательны!",
+            "givePrizeOnlyInHands": 0
+        },
+        {
+            "PrizeName": "Случайная кассета",
+            "Items": [
+                {
+                    "ItemType": "AudioCassette_BOBER",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_BOBER1",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_EGK41",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_kosmos",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Dudez",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_bububu",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Lyube",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Aqua",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Bumer",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Serega",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Ivanushki",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_RukiVverh",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_LinkinPark",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_30SecondToMars",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_ACDC",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_ImagineDragons",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Neffex",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Oxxxymiron",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Sbornik",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_EvaR",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_NissanSky",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Soil",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Proshliy",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_luck124",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Professor",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_morz1k",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_EvaR_2",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_EvaR_3",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_FEAR",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_SkyHanter",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Qwil",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Stan",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Luna",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_VeryBad",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Monturano",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_STALKER",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_VeRsuta",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_IceCoffee",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_IceCoffee1",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_VoiceBoyce",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_NOMAD1",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Apostol",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Mentos",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Ruby",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Raspil",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Raspil1",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_FeliX",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Prokuror",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Prokuror1",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Prokuror2",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Linkoln",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Sector",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Intenso",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Alone",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Er1taga",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Er1taga1",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Tushkan",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Er1taga2",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Garsios",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Liberty",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Liberty1",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_MaxRed",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_MaxRed1",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Moroz",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Naruto",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_NOMAD2",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_MocKBa",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_izzi",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_izzi2",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_izzi3",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_izzi4",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_izzi5",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_ucakoB",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Huleeo",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Viiy",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Shelby",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_RoiMang",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Tizer",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_DoMoVoi",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_SMERTNIK39",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_TECAK",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Shuler",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_EGK4",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Qvadr",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "AudioCassette_Qvadr1",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                }
+            ],
+            "PrizeChance": 2.0,
+            "showNotificationToAllPlayers": 1,
+            "NotificationText": "выиграл касету! Так держать!",
+            "givePrizeOnlyInHands": 1
+        },
+        {
+            "PrizeName": "Бочка или Матросский сундук",
+            "Items": [
+                {
+                    "ItemType": "SeaChest",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Barrel_Blue",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Barrel_Green",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Barrel_Red",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Barrel_Yellow",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                }
+            ],
+            "PrizeChance": 1.0,
+            "showNotificationToAllPlayers": 1,
+            "NotificationText": "выиграл то ли бочку, то ли матросский сундук. Кто знает?",
+            "givePrizeOnlyInHands": 1
+        },
+        {
+            "PrizeName": "Случайный артефакт",
+            "Items": [
+                {
+                    "ItemType": "OOTS_ART_DarkSoul",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_kameniy_cvetok3",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_kameniy_cvetok2",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_puzir",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Burn",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Glaz3",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Glaz2",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Glaz",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Crustal2",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Crustal",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Crustal3",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_busy2",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Plamya3",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Plamya",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Angel",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_MoonLight",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_FireBall",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Mohovik",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_DemonEye",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_snejinka",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_vspishka",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Sparkler",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_NanoCell",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Light",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Compas",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Spring",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Oasis",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Flower",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_ribka",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Monolit",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_krov_kamnya",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_vivert",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Gravi",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_NightStar",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_ShineOfTheForest",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Mikrob",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Braen",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_svet",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Drop",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Plasma",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Drop2",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Plamya2",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_kameniy_cvetok",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Medusa",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_SeaUrchin",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Klyaksa",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_myaso",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_kolobok",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Drop3",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Battery",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Thorn",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_AngelFool",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_CrustalThorn",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_izolator",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_BloodStone_New",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_Battery3",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_shturval",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "OOTS_ART_DevelHert",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                }
+            ],
+            "PrizeChance": 0.5,
+            "showNotificationToAllPlayers": 1,
+            "NotificationText": "выиграл классный артефакт. Так держать!",
+            "givePrizeOnlyInHands": 0
+        },
+        {
+            "PrizeName": "Бочка Заврa или Сундук Завра ",
+            "Items": [
+                {
+                    "ItemType": "Zavr_Sea",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                },
+                {
+                    "ItemType": "Zavr_Barrel",
+                    "IsCar": 0,
+                    "ItemQuantity": -1,
+                    "ItemAttachments": [],
+                    "CargoItems": []
+                }
+            ],
+            "PrizeChance": 0.5,
+            "showNotificationToAllPlayers": 1,
+            "NotificationText": "выиграл бочку Завра или сундук Завра. Завр восхищается Вашей удачей и желает процветания Вашей базе!",
+            "givePrizeOnlyInHands": 1
+        }
+    ]
+}

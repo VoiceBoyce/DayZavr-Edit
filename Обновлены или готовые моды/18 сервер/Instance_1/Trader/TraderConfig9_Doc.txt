@@ -1,0 +1,174 @@
+<Trader> Док | Doc
+	<Category> Медицина | Medicine
+		Heatpack,								*,		600,		150			// Химическая грелка
+		Thermometer,							*,		800,		200			// Медицинский термометр
+		AMS_BandAid,							*,		800,		200			// Лейкопластырь
+		FirstAidKit,							*,		1200,		300			// Аптечка
+		AMS_Absorbent,							*,		1200,		300			// Впитывающая вата
+		AMS_AntiSept,							*,		1400,		350			// Антисептический дезинфицирующий порошок
+		BandageDressing,						*,		1500,		370			// Бинт
+		AMS_Tourniquet,							*,		1500,		370			// Жгут
+		BloodBagEmpty,							*,		1800,		450			// Комплект для сбора крови
+		AMS_Polaris,							*,		1800,		450			// Полярис
+		CharcoalTablets,						*,		2000,		500			// Активированный уголь
+		AMS_Aspirin,							*,		2000,		500			// Аспирин
+		PurificationTablets,					*,		2200,		550			// Хлорные таблетки
+		BloodTestKit,							*,		2500,		620			// Набор для определения группы крови
+		AMS_Poter,								*,		2500,		620			// Потер
+		AMS_Energy,								*,		2800,		700			// Энергетик
+		DisinfectantAlcohol,					*,		3000,		750			// Алкогольная настойка
+		AMS_Splint,								*,		3000,		750			// AMS шина
+		AMS_Heatpack,							*,		3500,		870			// Многоразовая термосумка
+		AMS_Vikasol,							*,		3800,		950			// Викасол
+		Epinephrine,							*,		4000,		1000		// Адреналин
+		AMS_Narcotics,							*,		4000,		1000		// Иньектор опиоидов
+		PainkillerTablets,						*,		4500,		1120		// Таблетки с кодеином
+		AMS_Methadone,							*,		4500,		1120		// Шприц с метадоном
+		Morphine,								*,		5000,		1250		// Морфин
+		DisinfectantSpray,						*,		5500,		1370		// Дезинфицирующий спрей
+		VitaminBottle,							*,		8000,		2000		// Таблетка с мультивитаминами
+		TetracyclineAntibiotics,				*,		9000,		2250		// Таблетки тетрациклина
+		AntiChemInjector,						*,		14000,		3500		// Противоядие PO-X
+		
+		SFP_Express_Syringe25,					*,		2500,		620			// Слабый стимулятр здоровья
+		SFP_Express_Syringe50,					*,		4000,		1000		// Средний стимулятр здоровья
+		SFP_Express_Syringe75,					*,		6000,		1500		// Хороший стимулятр здоровья
+		SFP_Express_Syringe100,					*,		9000,		2250		// Лучший стимулятр здоровья
+		SFP_ingalator_Morphine,					*,		6000,		1500		// Карманный ингалятор морфин
+		SFP_ingalator_Tetracycline,				*,		7000,		1750		// Карманный ингалятор тетрациклин
+		SFP_AI2_medkit_standart,				*,		2000,		500			// АИ-2 (Простая)
+		SFP_AI2_medkit_Yello,					*,		3000,		750			// АИ-2 (Научная)
+		SFP_AI2_medkit_Blue,					*,		4000,		1000		// АИ-2 (Армейская)
+		SFP_AI2_medkit_Green,					*,		5500,		1370		// АИ-2 (Экспериментальная)
+		
+	<Category> Снаряжение для артефактов | Artifacts Gear
+------------------------------------------------------------ Контейнеры для артефактов | Containers for artifacts ------------------------------------------------------------------------------, *, -1,-1
+		OOTS_ART_CASELow,         				*,      1600,       480 		// продается 30% от стоимости													// 1 слот просто в инвентарь (занимает 6 слотов)
+		OOTS_ART_CASE,         					*,      9100,       2800 		// продается 30% от стоимости													// на пояс 2 слота для артов  (занимает 6 слотов)		
+		OOTS_ART_CASEBig,         				*,      13700,      4150 		// продается 30% от стоимости													// 3 слота просто в инвентарь (занимает 12 слотов)	
+------------------------------------------------------------ Ремни для контейнеров | Straps for containers ------------------------------------------------------------------------------, *, -1,-1
+		OOTS_ART_Belt,         					*,      15200,      4800 		// продается 30% от стоимости													// 3 слот для  OOTS_ART_CASE
+		OOTS_ART_Belt2,         				*,      13000,      3700 		// продается 30% от стоимости													// 1 слот для  OOTS_ART_CASE
+		
+
+<Category> Трофеи от мутантов | Trophies from mutants
+		MutantRicarSteakMeat,					S,		-1,		 	100      	// Стейк темного (MSFZ_Troll)
+		MutantTrollSteakMeat,					S,		-1,		 	500      	// Стейк из троля (MSFZ_Troll)
+		MSFZ_Ricar_Head,						S,		-1,		 	600      	// Шлем темного
+		MSFZ_Spider_Lapka,						S,		-1,		 	600      	// Лапка паука (MSFZ_Mutant_Spider)
+		MSFZ_Zanoza_stick,						S,		-1,		 	840      	// Хвост занозы (MSFZ_Mutant_Zanoza)
+		MSFZ_Zanoza_eye,						S,		-1,		 	950      	// Глаз занозы (MSFZ_Mutant_Zanoza)
+		SFP_ZombieCivilian_hand,				S,		-1,		 	1800     	// Рука зомби (SFP_ZombieCivilian)
+		SFP_Trupojor_Kogot,						S,		-1,		 	2600     	// Коготь трупожора (SFP_Trupojor)
+		SFP_Piyavka_Yazik,						S,		-1,		 	3300		// Язык пиявки (SFP_Piyavka)
+		SFP_MozgoTras_ear,						S,		-1,		 	3900     	// Ухо Мозгодава (SFP_MozgoTras)
+		SFP_MozgoTrasRed_ear,					S,		-1,		 	4100     	// Красное ухо Мозгодава (SFP_MozgoTras_red)
+		SFP_MutoWolf_kogot,						S,		-1,		 	4400     	// Коготь оборотня (SFP_MutaWolf_black)
+		SFP_BearZMB_Kogot,						S,		-1,		 	5200 		// Коготь мутированного медведя (SFP_BearZMB)
+		SFP_Shipastiy_Teeth,					S,		-1,		 	5700     	// Зубы Шипастого (SFP_Shipastiy)
+		MSFZ_Ent_head,							S,		-1,		 	8900     	// Голова Энта (MSFZ_Mutant_Ent)
+		MSFZ_Ent_head_medium,					S,		-1,		 	9000     	// Голова мудрого Энта (MSFZ_Mutant_Ent_Medium)
+		MSFZ_Ent_head_hard,						S,		-1,		 	9100     	// Голова сильного Энта (MSFZ_Mutant_Ent_Hard)
+		SFP_tenevnik_eye,						S,		-1,		 	9200     	// Глаз Теневника (SFP_Tenevnik)
+		SFP_Shum_jaw,							S,		-1,		 	10800     	// Челюсть с языком (SFP_Shum_female)
+		MSFZ_Troll_Hand,						S,		-1,		 	15200     	// Рука троля (MSFZ_Troll)
+
+	<Category> Дары леса | Forest gifts
+		VB_AR_Spores,							*,		-1,			300		// Золотая пыльца — 3 порции у рощи за рестарт, дар за мясо; гаснет за сутки
+		VB_AR_RootPiece,						*,		-1,			500		// Отросток Древнего корня — отлом ночью у корня
+		VB_AR_WolfFang,							*,		-1,			800		// Клык лесового волка — со стража рощи
+		VB_AR_Amber,							*,		-1,			1500		// Янтарь — дар рощи, раскол окаменевшей сердцевины
+		VB_AR_HeartDead,						*,		-1,			3000		// Окаменевшая сердцевина — вырезанная к рестарту каменеет
+		VB_AR_AmberInclusion,					*,		-1,			4000		// Янтарь с вкраплением — внутри руна или кристалл
+		VB_AR_HeartChunk,						*,		-1,			10000		// Сердцевина Древнего корня — вырезать ночью, к рестарту каменеет
+		VB_AR_KeeperHeart,						*,		-1,			15000		// Сердце Хранителя — с мини-босса древней рощи
+
+	<Category> Скупка документов | Purchase of documents
+		SFP_xFiles_01,							*,		-1,			1600		// Тетрадь с записью об эксперименте
+		SFP_xFiles_02,							*,		-1,			1600		// Документы об исследованиях
+		SFP_xFiles_03,							*,		-1,			1600		// Доклад об исследовании образцов
+		SFP_xFiles_04,							*,		-1,			1600		// Распоряжение о переводе
+		SFP_xFiles_05,							*,		-1,			1600		// Инструкция к (изделию №62)
+		SFP_xFiles_06,							*,		-1,			1600		// Излучатель (Радуга) - основые ТТХ
+		SFP_xFiles_07,							*,		-1,			1600		// Административные документы
+		SFP_xFiles_08,							*,		-1,			1600		// Приказ №562
+		SFP_xFiles_09,							*,		-1,			1600		// Документы из лаборатории X16
+		SFP_Document01,							*,		-1,			2400		// Документ об исследованиях
+		SFP_Document02,							*,		-1,			2400		// Доклад об исследовании образцов
+		SFP_Document03,							*,		-1,			2400		// Документ об эксперементах
+		SFP_Document04,							*,		-1,			2400		// Записи об экспереметах
+
+	<Category> Скупка артефактов | Purchase of artifacts
+		-------------------------------------------------- 1 ТИР АРТЕФАКТОВ - 1 TIER ATREFACTS -----------------------------------------------, *, -1,-1
+		
+		OOTS_ART_svet,                          *,		-1,			4200		// Луна
+		OOTS_ART_Crustal,                       *,		-1,			5200		// Кристалл
+		OOTS_ART_Drop,                          *,		-1,			6900		// Капля
+		OOTS_ART_Plamya,                        *,		-1,			8200		// Пламя
+		OOTS_ART_Plasma,                        *,		-1,			11000		// Плазма
+		OOTS_ART_Glaz,                          *,		-1,			12000		// Глаз
+		OOTS_ART_Drop2,                         *,		-1,			12500		// Капля II
+		OOTS_ART_Plamya2,                       *,		-1,			14000		// Пламя II
+		OOTS_ART_vspishka,                      *,		-1,			14500		// Вспышка
+		OOTS_ART_kameniy_cvetok,                *,		-1,			17000		// Каменный цветок
+		OOTS_ART_Medusa,                        *,		-1,			19000		// Медуза
+		OOTS_ART_NightStar,                     *,		-1,			20000		// Ночная звезда
+		OOTS_ART_SeaUrchin,                     *,		-1,			22000		// Морской еж
+		OOTS_ART_Klyaksa,                       *,		-1,			23500		// Клякса
+		OOTS_ART_myaso,                         *,		-1,			24500		// Ломоть мяса
+		
+		-------------------------------------------------- 2 ТИР АРТЕФАКТОВ - 2 TIER ATREFACTS -----------------------------------------------, *, -1,-1
+		
+		OOTS_ART_kolobok,                       *,		-1,			26500		// Колобок
+		OOTS_ART_Crustal2,                      *,		-1,			27000		// Кристалл II
+		OOTS_ART_Gravi,                         *,		-1,			27500		// Грави
+		OOTS_ART_Drop3,                         *,		-1,			28000		// Капля III
+		OOTS_ART_Battery,                       *,		-1,			28500		// Батарейка
+		OOTS_ART_Plamya3,                       *,		-1,			30000		// Пламя III
+		OOTS_ART_Thorn,                         *,		-1,			31500		// Колючка
+		OOTS_ART_AngelFool,                     *,		-1,			32500		// Темный ангел
+		OOTS_ART_Flower,                        *,		-1,			33500		// Аномальное растение
+		OOTS_ART_Angel,                         *,		-1,			36500		// Ангел
+		OOTS_ART_Sparkler,                      *,		-1,			38500		// Бенгальский огонь
+		OOTS_ART_Glaz2,                         *,		-1,			40000		// Глаз II
+		OOTS_ART_kameniy_cvetok2,               *,		-1,			43500		// Каменный цветок II
+		OOTS_ART_Light,                         *,		-1,			45000		// Светляк
+		
+		-------------------------------------------------- 3 ТИР АРТЕФАКТОВ - 3 TIER ATREFACTS -----------------------------------------------, *, -1,-1
+		
+		OOTS_ART_puzir,                         *,		-1,			53000		// Пузырь
+		OOTS_ART_vivert,                        *,		-1,			55000		// Выверт
+		OOTS_ART_Mohovik,                       *,		-1,			56500		// Моховик
+		OOTS_ART_Burn,                          *,		-1,			60000		// Огонь
+		OOTS_ART_CrustalThorn,                  *,		-1,			61500		// Кристальная колючка
+		OOTS_ART_izolator,                      *,		-1,			66500		// Видоизменненный изолятор
+		OOTS_ART_ribka,                         *,		-1,			68000		// Золотая рыбка
+		OOTS_ART_Mikrob,                        *,		-1,			70000		// Микроб
+		OOTS_ART_Glaz3,                         *,		-1,			73000		// Глаз III
+		OOTS_ART_FireBall,                      *,		-1,			76500		// Огненный шар
+		OOTS_ART_Crustal3,                      *,		-1,			79000		// Кристалл III
+		OOTS_ART_BloodStone_New,                *,		-1,			83500		// Кровь камня (BloodStone_New)
+		OOTS_ART_Battery3,                      *,		-1,			87000		// Батарейка III
+		OOTS_ART_snejinka,                      *,		-1,			93000		// Снежинка
+		OOTS_ART_krov_kamnya,                   *,		-1,			103000		// Кровь камня (krov_kamnya)
+		OOTS_ART_DemonEye,                      *,		-1,			104000		// Демонический глаз
+		OOTS_ART_Braen,                         *,		-1,			106000		// Мозг
+		
+		-------------------------------------------------- 4 ТИР АРТЕФАКТОВ - 4 TIER ATREFACTS -----------------------------------------------, *, -1,-1
+		
+		OOTS_ART_kameniy_cvetok3,               *,		-1,			116000		// Каменный цветок III
+		OOTS_ART_MoonLight,                     *,		-1,			118000		// Лунный свет
+		OOTS_ART_ShineOfTheForest,              *,		-1,			119000		// Сияние леса
+		OOTS_ART_Oasis,                         *,		-1,			120000		// Сердце Оазиса
+		OOTS_ART_shturval,                      *,		-1,			173000		// Видоизменненный штурвал
+		OOTS_ART_busy2,                         *,		-1,			186000		// Мамины бусы II
+		OOTS_ART_DevelHert,                     *,		-1,			201000		// Демоническое сердце
+		OOTS_ART_DarkSoul,                      *,		-1,			238000		// Темная душа
+		OOTS_ART_Spring,                        *,		-1,			269000		// Пружина
+		OOTS_ART_NanoCell,                      *,		-1,			307000		// Нано клетка
+		OOTS_ART_Monolit,                       *,		-1,			309000		// Монолит
+		OOTS_ART_Compas,                        *,		-1,			329000		// Компас
+
+
+<OpenFile> TraderConfig10_Skipper.txt
+<FileEnd>

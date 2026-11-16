@@ -1,0 +1,73 @@
+{
+    "Version": 1,
+    "Id": 18002,
+    "Order": 3,
+    "Enabled": 1,
+    "Name": "Покупка 18002. Экипировка. Сервопривод экзоскелета 2го поколения.",
+    "Description": [
+        "Сервопривод экзоскелета 2-го поколения. Твой билет в категорию «сверхчеловек». Крепится на пояс, превращая каждое движение в проявление силы. 100 слотов для грузов + увеличенная грузоподъёмность — носишь арсенал целого отряда. Встроенная батарея и контейнер под два артефакта. 350 золотых — и гравитация перестаёт быть законом. В этом аду есть грузчики... и есть ты."
+    ],
+    "GiverStart": "coins_quests_all",
+    "GiverFinish": "coins_quests_all",
+    "Requires": [
+        10000,
+        14000,
+        14011,
+        18000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "COOLDOWN",
+    "Cooldown": 5,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "DZVR_Coin_Gold",
+            "Count": 350.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "1 золотая монета"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "OOTS_Exo_Servoprivod_black_BeltSlot",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "OOTS_Exo_ServoprivodBattery_Big",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "OOTS_ART_CASE",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": ""
+        }
+    ],
+    "Note": ""
+}

@@ -1,0 +1,67 @@
+{
+    "Version": 1,
+    "Id": 36003,
+    "Order": 4,
+    "Enabled": 1,
+    "Name": "Сказ четвёртый: Навь",
+    "Description": [
+        "Южные врата ведут в Радунин, где холод. Северные — в Западлиско, где гроза. Там паутина до неба и кладки в рост человека. Пройди через врата и встань у выходов — в Радунине и в Западлиско. Возвращайся тем же путём: выход помнит, кто пришёл."
+    ],
+    "GiverStart": "skazitel",
+    "GiverFinish": "skazitel",
+    "Requires": [
+        36002
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "EXPLORE",
+            "Target": "",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "7136 0 6419",
+            "Radius": 60.0,
+            "GroundY": 1,
+            "ShowOnMap": 1,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Выход врат в Радунине"
+        },
+        {
+            "Kind": "EXPLORE",
+            "Target": "",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "7909 0 8725",
+            "Radius": 60.0,
+            "GroundY": 1,
+            "ShowOnMap": 1,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Выход врат в Западлиско"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 2,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        }
+    ],
+    "Note": "make_quests18.py Ск4"
+}

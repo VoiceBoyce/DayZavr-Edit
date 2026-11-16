@@ -1,0 +1,67 @@
+{
+    "Version": 1,
+    "Id": 36005,
+    "Order": 6,
+    "Enabled": 1,
+    "Name": "Сказ шестой: громовник",
+    "Description": [
+        "Есть на северо-западе холм, что зовут Перуном. Ни капища, ни алтаря — только ветер. Говорят, там громовник бил змея. Поднимись туда с Руной Бури — пусть громовник её увидит. Потом отдай руну мне: в Перунов день я сам положу её на камень."
+    ],
+    "GiverStart": "skazitel",
+    "GiverFinish": "skazitel",
+    "Requires": [
+        36004
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "EXPLORE",
+            "Target": "",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "646 0 12159",
+            "Radius": 80.0,
+            "GroundY": 1,
+            "ShowOnMap": 1,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Холм Перун"
+        },
+        {
+            "Kind": "DELIVER",
+            "Target": "MSFZ_RuneStone_Storm",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Руна Бури"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 3,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        }
+    ],
+    "Note": "make_quests18.py Ск6"
+}

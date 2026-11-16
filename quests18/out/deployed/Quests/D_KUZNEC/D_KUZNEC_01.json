@@ -1,0 +1,61 @@
+{
+    "Version": 1,
+    "Id": 33000,
+    "Order": 1,
+    "Enabled": 1,
+    "Name": "Кирка и кайло",
+    "Description": [
+        "Журнал привёз? Хорошо. Здесь всё держится на железе: руда, слитки, руны. Жилы — по всей Ливонии, железо почти везде. Принеси пять кусков железной руды. Кирку дам — у тебя её, вижу, нет."
+    ],
+    "GiverStart": "kuznec",
+    "GiverFinish": "kuznec",
+    "Requires": [
+        30003
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "DELIVER",
+            "Target": "BRDK_Iron",
+            "Count": 5.0,
+            "Filter": "",
+            "WorstState": "BADLY_DAMAGED",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Железная руда"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Silver",
+            "Count": 4,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Серебряная монета"
+        },
+        {
+            "Kind": "ITEM",
+            "Item": "Pickaxe",
+            "Count": 1,
+            "Quantity": "",
+            "State": "",
+            "Amount": 0,
+            "Text": "Кирка"
+        }
+    ],
+    "Note": "make_quests18.py К1"
+}

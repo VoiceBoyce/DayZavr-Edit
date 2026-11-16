@@ -1,0 +1,82 @@
+{
+    "Version": 1,
+    "Id": 35012,
+    "Order": 13,
+    "Enabled": 1,
+    "Name": "Навьи на дорогах",
+    "Description": [
+        "Навьи выходят к дорогам. По трое-четверо каждого вида: мертвецы, убийцы, мумии."
+    ],
+    "GiverStart": "sotnik",
+    "GiverFinish": "sotnik",
+    "Requires": [
+        35000
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "DAILY",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "KILL",
+            "Target": "Era_Zombies_Zombie_HARD",
+            "Count": 4.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Убить: Навий-мертвец"
+        },
+        {
+            "Kind": "KILL",
+            "Target": "Era_Zombies_MurderZmb_HARD",
+            "Count": 3.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Убить: Навий-убийца"
+        },
+        {
+            "Kind": "KILL",
+            "Target": "Era_Zombies_MumiaSlowZmb_HARD",
+            "Count": 3.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "",
+            "Radius": 0.0,
+            "GroundY": 0,
+            "ShowOnMap": 0,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Убить: Навий-мумия"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Silver",
+            "Count": 8,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Серебряная монета"
+        }
+    ],
+    "Note": "make_quests18.py СД3"
+}

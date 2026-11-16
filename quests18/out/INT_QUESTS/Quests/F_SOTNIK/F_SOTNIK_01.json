@@ -1,0 +1,97 @@
+{
+    "Version": 1,
+    "Id": 35000,
+    "Order": 1,
+    "Enabled": 1,
+    "Name": "Высоты",
+    "Description": [
+        "Доклад принят. Прежде чем воевать, знай местность. Четыре высоты, за которые каждый час дерутся: аэродром Глиниска, Розтока, базы Борек и Сварог. Обойди все четыре."
+    ],
+    "GiverStart": "sotnik",
+    "GiverFinish": "sotnik",
+    "Requires": [
+        30005
+    ],
+    "RequireAny": 0,
+    "RepeatMode": "ONCE",
+    "Cooldown": 0,
+    "ResetHour": 6,
+    "ResetMinute": 0,
+    "ResetWeekDay": 1,
+    "TimeLimit": 0,
+    "QuestItems": [],
+    "Targets": [
+        {
+            "Kind": "EXPLORE",
+            "Target": "",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "4287 0 10414",
+            "Radius": 80.0,
+            "GroundY": 1,
+            "ShowOnMap": 1,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Высота у аэродрома Глиниска"
+        },
+        {
+            "Kind": "EXPLORE",
+            "Target": "",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "7663 0 5328",
+            "Radius": 80.0,
+            "GroundY": 1,
+            "ShowOnMap": 1,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Высота у Розтоки"
+        },
+        {
+            "Kind": "EXPLORE",
+            "Target": "",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "9678 0 8500",
+            "Radius": 80.0,
+            "GroundY": 1,
+            "ShowOnMap": 1,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Военная база Борек"
+        },
+        {
+            "Kind": "EXPLORE",
+            "Target": "",
+            "Count": 1.0,
+            "Filter": "",
+            "WorstState": "",
+            "MinQuantity": 0,
+            "Position": "4918 0 2135",
+            "Radius": 80.0,
+            "GroundY": 1,
+            "ShowOnMap": 1,
+            "ZoneCenter": "",
+            "ZoneRadius": 0.0,
+            "Text": "Военная база Сварог"
+        }
+    ],
+    "Rewards": [
+        {
+            "Kind": "ITEM",
+            "Item": "DZVR_Coin_Gold",
+            "Count": 1,
+            "Quantity": "",
+            "State": "PRISTINE",
+            "Amount": 0,
+            "Text": "Золотая монета"
+        }
+    ],
+    "Note": "make_quests18.py С1"
+}
