@@ -1,0 +1,218 @@
+{
+  "VB_MR_Gold_Sand": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_sand.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_gold_sand_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_gold_sand.rvmat",
+    "selection": "camo",
+    "shape": "sand",
+    "resource": "gold"
+  },
+  "VB_MR_Silver_Sand": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_sand.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_silver_sand_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_silver_sand.rvmat",
+    "selection": "camo",
+    "shape": "sand",
+    "resource": "silver"
+  },
+  "VB_MR_Bronze_Sand": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_sand.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_bronze_sand_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_bronze_sand.rvmat",
+    "selection": "camo",
+    "shape": "sand",
+    "resource": "bronze"
+  },
+  "VB_MR_Iron_Sand": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_sand.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_iron_sand_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_iron_sand.rvmat",
+    "selection": "camo",
+    "shape": "sand",
+    "resource": "iron"
+  },
+  "VB_MR_Titanium_Sand": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_sand.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_titanium_sand_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_titanium_sand.rvmat",
+    "selection": "camo",
+    "shape": "sand",
+    "resource": "titanium"
+  },
+  "VB_MR_Coal_Sand": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_sand.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_coal_sand_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_coal_sand.rvmat",
+    "selection": "camo",
+    "shape": "sand",
+    "resource": "coal"
+  },
+  "VB_MR_Rubin_Sand": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_sand.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_rubin_sand_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_rubin_sand.rvmat",
+    "selection": "camo",
+    "shape": "sand",
+    "resource": "rubin"
+  },
+  "VB_MR_Nephrite_Sand": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_sand.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_nephrite_sand_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_nephrite_sand.rvmat",
+    "selection": "camo",
+    "shape": "sand",
+    "resource": "nephrite"
+  },
+  "VB_MR_Sulfur_Sand": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_sand.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_sulfur_sand_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_sulfur_sand.rvmat",
+    "selection": "camo",
+    "shape": "sand",
+    "resource": "sulfur"
+  },
+  "VB_MR_Gold": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_nugget.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_gold_nugget_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_gold_nugget.rvmat",
+    "selection": "camo",
+    "shape": "nugget",
+    "resource": "gold"
+  },
+  "VB_MR_Silver": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_nugget.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_silver_nugget_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_silver_nugget.rvmat",
+    "selection": "camo",
+    "shape": "nugget",
+    "resource": "silver"
+  },
+  "VB_MR_Bronze": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_nugget.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_bronze_nugget_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_bronze_nugget.rvmat",
+    "selection": "camo",
+    "shape": "nugget",
+    "resource": "bronze"
+  },
+  "VB_MR_Iron": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_nugget.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_iron_nugget_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_iron_nugget.rvmat",
+    "selection": "camo",
+    "shape": "nugget",
+    "resource": "iron"
+  },
+  "VB_MR_Titanium": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_nugget.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_titanium_nugget_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_titanium_nugget.rvmat",
+    "selection": "camo",
+    "shape": "nugget",
+    "resource": "titanium"
+  },
+  "VB_MR_Coal": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_chunk.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_coal_chunk_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_coal_chunk.rvmat",
+    "selection": "camo",
+    "shape": "chunk",
+    "resource": "coal"
+  },
+  "VB_MR_Rubin": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_chunk.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_rubin_chunk_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_rubin_chunk.rvmat",
+    "selection": "camo",
+    "shape": "chunk",
+    "resource": "rubin"
+  },
+  "VB_MR_Nephrite": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_chunk.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_nephrite_chunk_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_nephrite_chunk.rvmat",
+    "selection": "camo",
+    "shape": "chunk",
+    "resource": "nephrite"
+  },
+  "VB_MR_Sulfur": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_chunk.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_sulfur_chunk_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_sulfur_chunk.rvmat",
+    "selection": "camo",
+    "shape": "chunk",
+    "resource": "sulfur"
+  },
+  "VB_MR_Gold_Bar": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_ingot.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_gold_ingot_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_gold_ingot.rvmat",
+    "selection": "camo",
+    "shape": "ingot",
+    "resource": "gold"
+  },
+  "VB_MR_Silver_Bar": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_ingot.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_silver_ingot_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_silver_ingot.rvmat",
+    "selection": "camo",
+    "shape": "ingot",
+    "resource": "silver"
+  },
+  "VB_MR_Bronze_Bar": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_ingot.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_bronze_ingot_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_bronze_ingot.rvmat",
+    "selection": "camo",
+    "shape": "ingot",
+    "resource": "bronze"
+  },
+  "VB_MR_Iron_Bar": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_ingot.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_iron_ingot_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_iron_ingot.rvmat",
+    "selection": "camo",
+    "shape": "ingot",
+    "resource": "iron"
+  },
+  "VB_MR_Titanium_Bar": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_ingot.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_titanium_ingot_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_titanium_ingot.rvmat",
+    "selection": "camo",
+    "shape": "ingot",
+    "resource": "titanium"
+  },
+  "VB_MR_Coal_Bar": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_briquette.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_coal_briquette_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_coal_briquette.rvmat",
+    "selection": "camo",
+    "shape": "briquette",
+    "resource": "coal"
+  },
+  "VB_MR_Rubin_Bar": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_briquette.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_rubin_briquette_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_rubin_briquette.rvmat",
+    "selection": "camo",
+    "shape": "briquette",
+    "resource": "rubin"
+  },
+  "VB_MR_Nephrite_Bar": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_briquette.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_nephrite_briquette_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_nephrite_briquette.rvmat",
+    "selection": "camo",
+    "shape": "briquette",
+    "resource": "nephrite"
+  },
+  "VB_MR_Sulfur_Bar": {
+    "model": "VB_MiningResources\\data\\items\\vb_mr_briquette.p3d",
+    "texture": "VB_MiningResources\\data\\items\\vb_mr_sulfur_briquette_co.paa",
+    "material": "\\VB_MiningResources\\data\\items\\vb_mr_sulfur_briquette.rvmat",
+    "selection": "camo",
+    "shape": "briquette",
+    "resource": "sulfur"
+  }
+}

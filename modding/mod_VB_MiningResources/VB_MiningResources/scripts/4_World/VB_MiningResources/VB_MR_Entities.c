@@ -1,17 +1,18 @@
 // VB_MiningResources: классы предметов и объектов (общая часть клиента и сервера).
-// Логика перенесена 1:1 из BRDK_GoldRush. Серверная часть (результаты, пресс, плавка, настройки)
-// лежит в VB_MiningResources_Server. Старые классы BRDK_* в конфиге наследуют эти.
+// Серверная часть (результаты, пресс, плавка, настройки) лежит в VB_MiningResources_Server.
+// Старые классы BRDK_* в конфиге наследуют эти.
+
+// Состояние станка (пресс, чаша), его видит игрок в подсказке
+const int VB_MR_STATION_IDLE = 0;
+const int VB_MR_STATION_WORK = 1;
+
+// набор пресса ставится не дальше этого от игрока, м (голограмма ванили — до 6 м)
+const float VB_MR_KIT_MAX_DISTANCE = 7.0;
 
 // ---------------------------------------------------------------- жила
+// Время добычи берётся из данных сервера (VB_MR_Shared), своих полей у жилы нет
 class VB_MR_Vein_Base extends House
 {
-	// время добычи из настроек, сервер присылает его клиенту
-	float m_VB_MR_MineTime;
-
-	void VB_MR_Vein_Base()
-	{
-		RegisterNetSyncVariableFloat("m_VB_MR_MineTime");
-	}
 }
 
 // ---------------------------------------------------------------- ресурсы
@@ -21,19 +22,12 @@ class VB_MR_StoneNugget_Base extends ItemBase {}	// кусок камня: пр�
 class VB_MR_StoneSand_Base extends ItemBase {}	// песок камня: прессуется в кусок
 class VB_MR_MetalBar_Base extends ItemBase {}	// слиток
 class VB_MR_StoneBar_Base extends ItemBase {}	// брикет (угольный горит в костре)
+class VB_MR_Gem_Base extends ItemBase {}		// редкий огранённый камень
 
 // ---------------------------------------------------------------- инструмент добычи и сковорода
+// Действие есть у любого предмета, а можно ли им добывать — решает список инструментов с сервера
 modded class ItemBase
 {
-	// предмет из списка MineTools настроек, сервер присылает признак клиенту
-	bool m_VB_MR_IsMineTool;
-
-	override void InitItemVariables()
-	{
-		super.InitItemVariables();
-		RegisterNetSyncVariableBool("m_VB_MR_IsMineTool");
-	}
-
 	override void SetActions()
 	{
 		super.SetActions();
@@ -43,15 +37,6 @@ modded class ItemBase
 
 modded class FryingPan
 {
-	// время промывки из настроек, сервер присылает его клиенту
-	float m_VB_MR_PanTime;
-
-	override void InitItemVariables()
-	{
-		super.InitItemVariables();
-		RegisterNetSyncVariableFloat("m_VB_MR_PanTime");
-	}
-
 	override void SetActions()
 	{
 		super.SetActions();
@@ -61,19 +46,43 @@ modded class FryingPan
 
 // ---------------------------------------------------------------- плавильная чаша
 // Своего скриптового класса у чаши нет: костёр пускает на треногу только предмет с типом ровно Cauldron
-// (Fireplace.c сравнивает item.Type()). Поэтому чаша — это Cauldron, а признак берётся из конфига.
+// (Fireplace.c сравнивает item.Type(), E83). Поэтому чаша — это Cauldron, а признак берётся из конфига.
 modded class Cauldron
 {
 	protected bool m_VB_MR_IsMeltingBowl;
+	protected int m_VB_MR_State;			// VB_MR_STATION_*
+	protected float m_VB_MR_Done;			// сколько уже плавится порция, с
+	protected float m_VB_MR_Total;			// сколько всего плавить порцию, с
 
 	void Cauldron()
 	{
 		m_VB_MR_IsMeltingBowl = IsKindOf("VB_MR_MeltingBowl");
+		if (m_VB_MR_IsMeltingBowl)
+		{
+			RegisterNetSyncVariableInt("m_VB_MR_State", 0, 1);
+			RegisterNetSyncVariableFloat("m_VB_MR_Done", 0, 100000, 1);
+			RegisterNetSyncVariableFloat("m_VB_MR_Total", 0, 100000, 1);
+		}
 	}
 
 	bool VB_MR_IsMeltingBowl()
 	{
 		return m_VB_MR_IsMeltingBowl;
+	}
+
+	int VB_MR_GetState()
+	{
+		return m_VB_MR_State;
+	}
+
+	float VB_MR_GetDone()
+	{
+		return m_VB_MR_Done;
+	}
+
+	float VB_MR_GetTotal()
+	{
+		return m_VB_MR_Total;
 	}
 
 	// в хранилище чаши кладётся только металл
@@ -86,6 +95,13 @@ modded class Cauldron
 			return true;
 
 		return item.IsKindOf("VB_MR_Nugget_Base") || item.IsKindOf("VB_MR_Sand_Base") || item.IsKindOf("VB_MR_MetalBar_Base");
+	}
+
+	// подсказка о плавке раньше ванильных действий: иначе её закрывает «Взять» (видна только прокруткой)
+	override void SetActions()
+	{
+		AddAction(VB_MR_ActionStationInfo);
+		super.SetActions();
 	}
 }
 
@@ -110,6 +126,17 @@ class VB_MR_Press_Kit extends ItemBase
 		return true;
 	}
 
+	// позицию присылает игрок; ванильная голограмма уходит не дальше 6 м — дальше значит подмена (сквозь стену, на другой конец карты)
+	override bool CanBePlaced(Man player, vector position)
+	{
+		if (!super.CanBePlaced(player, position))
+			return false;
+		if (!player)
+			return true;
+
+		return vector.DistanceSq(player.GetPosition(), position) <= VB_MR_KIT_MAX_DISTANCE * VB_MR_KIT_MAX_DISTANCE;
+	}
+
 	override void OnPlacementComplete(Man player, vector position = "0 0 0", vector orientation = "0 0 0")
 	{
 		super.OnPlacementComplete(player, position, orientation);
@@ -122,7 +149,8 @@ class VB_MR_Press_Kit extends ItemBase
 				press.SetPosition(position);
 				press.SetOrientation(orientation);
 			}
-			Delete();
+			// набор удалит сама ваниль в конце действия (ActionDeployObject.OnEndServer), как у забора
+			HideAllSelections();
 		}
 	}
 }
@@ -130,12 +158,53 @@ class VB_MR_Press_Kit extends ItemBase
 // ---------------------------------------------------------------- пресс
 class VB_MR_Press extends Container_Base
 {
-	// пресс работает: инвентарь закрыт, пока не выйдет результат
-	protected bool m_VB_MR_IsPressing;
+	protected int m_VB_MR_State;			// VB_MR_STATION_*: работает — инвентарь закрыт
+	protected float m_VB_MR_Done;
+	protected float m_VB_MR_Total;
+
+	// только у игрока: звук и дым, пока пресс работает
+	protected EffectSound m_VB_MR_Sound;
+	protected Particle m_VB_MR_Smoke;
 
 	void VB_MR_Press()
 	{
-		RegisterNetSyncVariableBool("m_VB_MR_IsPressing");
+		RegisterNetSyncVariableInt("m_VB_MR_State", 0, 1);
+		RegisterNetSyncVariableFloat("m_VB_MR_Done", 0, 100000, 1);
+		RegisterNetSyncVariableFloat("m_VB_MR_Total", 0, 100000, 1);
+	}
+
+	int VB_MR_GetState()
+	{
+		return m_VB_MR_State;
+	}
+
+	float VB_MR_GetDone()
+	{
+		return m_VB_MR_Done;
+	}
+
+	float VB_MR_GetTotal()
+	{
+		return m_VB_MR_Total;
+	}
+
+	ItemBase VB_MR_GetStone()
+	{
+		return ItemBase.Cast(FindAttachmentBySlotName("BRDK_STONES"));
+	}
+
+	// в слоте целый камень или песок, которого хватает на порцию
+	bool VB_MR_CanStart()
+	{
+		if (m_VB_MR_State != VB_MR_STATION_IDLE)
+			return false;
+
+		ItemBase stone = VB_MR_GetStone();
+		if (!stone || stone.IsRuined())
+			return false;
+
+		VB_MR_RecipeInfo recipe = VB_MR_Shared.FindRecipe(stone);
+		return recipe && stone.GetQuantity() >= recipe.Portion;
 	}
 
 	override bool IsInventoryVisible()
@@ -143,17 +212,7 @@ class VB_MR_Press extends Container_Base
 		if (!super.IsInventoryVisible())
 			return false;
 
-		return !m_VB_MR_IsPressing;
-	}
-
-	// в слоте полный стак целого камня или песка
-	bool VB_MR_HasFullStack()
-	{
-		ItemBase stone = ItemBase.Cast(FindAttachmentBySlotName("BRDK_STONES"));
-		if (!stone || stone.IsRuined())
-			return false;
-
-		return stone.GetQuantity() == stone.GetQuantityMax();
+		return m_VB_MR_State == VB_MR_STATION_IDLE;
 	}
 
 	override bool CanPutInCargo(EntityAI parent)
@@ -170,6 +229,48 @@ class VB_MR_Press extends Container_Base
 	{
 		super.SetActions();
 		AddAction(VB_MR_ActionPress);
+		AddAction(VB_MR_ActionStationInfo);
+	}
+
+	override void OnVariablesSynchronized()
+	{
+		super.OnVariablesSynchronized();
+		if (!GetGame().IsDedicatedServer())
+			VB_MR_UpdateEffects();
+	}
+
+	protected void VB_MR_UpdateEffects()
+	{
+		if (m_VB_MR_State == VB_MR_STATION_WORK)
+		{
+			if (!m_VB_MR_Sound)
+				PlaySoundSetLoop(m_VB_MR_Sound, "powerGeneratorLoop_SoundSet", 0.5, 0.5);
+			if (!m_VB_MR_Smoke)
+				// дым генератора (у smoking_barrel в 1.30 нет материала — частица не рисуется)
+				m_VB_MR_Smoke = ParticleManager.GetInstance().PlayOnObject(ParticleList.POWER_GENERATOR_SMOKE, this, "0 1.1 0");
+		}
+		else
+		{
+			VB_MR_StopEffects();
+		}
+	}
+
+	protected void VB_MR_StopEffects()
+	{
+		if (m_VB_MR_Sound)
+			StopSoundSet(m_VB_MR_Sound);
+		if (m_VB_MR_Smoke)
+		{
+			m_VB_MR_Smoke.StopParticle();
+			m_VB_MR_Smoke = null;
+		}
+	}
+
+	override void EEDelete(EntityAI parent)
+	{
+		super.EEDelete(parent);
+		if (!GetGame().IsDedicatedServer())
+			VB_MR_StopEffects();
 	}
 }
 
@@ -211,6 +312,7 @@ modded class ModItemRegisterCallbacks
 		pType.AddItemInHandsProfileIK("VB_MR_StoneBar_Base", "dz/anims/workspaces/player/player_main/player_main_1h.asi", pBehavior, "dz/anims/anm/player/ik/gear/meat_steak.anm");
 		pType.AddItemInHandsProfileIK("VB_MR_Nugget_Base", "dz/anims/workspaces/player/player_main/player_main_1h.asi", pBehavior, "dz/anims/anm/player/ik/gear/SmallStone.anm");
 		pType.AddItemInHandsProfileIK("VB_MR_StoneNugget_Base", "dz/anims/workspaces/player/player_main/player_main_1h.asi", pBehavior, "dz/anims/anm/player/ik/gear/SmallStone.anm");
+		pType.AddItemInHandsProfileIK("VB_MR_Gem_Base", "dz/anims/workspaces/player/player_main/player_main_1h.asi", pBehavior, "dz/anims/anm/player/ik/gear/SmallStone.anm");
 		pType.AddItemInHandsProfileIK("VB_MR_Sand_Base", "dz/anims/workspaces/player/player_main/props/player_main_1h_compass.asi", pBehavior, "dz/anims/anm/player/ik/gear/compass.anm");
 		pType.AddItemInHandsProfileIK("VB_MR_StoneSand_Base", "dz/anims/workspaces/player/player_main/props/player_main_1h_compass.asi", pBehavior, "dz/anims/anm/player/ik/gear/compass.anm");
 	}

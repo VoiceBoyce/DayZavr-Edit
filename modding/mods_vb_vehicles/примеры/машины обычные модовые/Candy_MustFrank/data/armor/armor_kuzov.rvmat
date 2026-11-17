@@ -1,0 +1,18 @@
+////////////////////////////////////////////////////////////////////
+//DeRap: data\armor\armor_kuzov.rvmat
+//Produced from mikero's Dos Tools Dll version 9.10
+//https://mikero.bytex.digital/Downloads
+//'now' is Thu May 11 22:23:45 2023 : 'file' last modified on Thu Dec 29 21:22:30 2022
+////////////////////////////////////////////////////////////////////
+
+#define _ARMA_
+
+surfaceInfo = "Candy_MustFrank\data\armor\armor_kuzov.bisurf";
+ambient[] = {0.490196,0.592157,0.556863,1};
+diffuse[] = {0.490196,0.592157,0.556863,1};
+forcedDiffuse[] = {0,0,0,0};
+emmisive[] = {0,0,0,1};
+specular[] = {0,0,0,1};
+specularPower = 1;
+PixelShaderID = "Normal";
+VertexShaderID = "Basic";

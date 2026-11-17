@@ -1,5 +1,5 @@
 {
-    "ConfigVersion": 1,
+    "ConfigVersion": 2,
     "GoldInRiverSearchTime": 20.0,
     "MinCountInRiver": 1,
     "MaxCountInRiver": 3,
@@ -8,9 +8,21 @@
     ],
     "MeltUpdatePeriod": 30.0,
     "MeltTempTreshold": 150.0,
+    "PressUpdatePeriod": 5.0,
     "MineTools": [
-        "Pickaxe",
-        "MSFZ_Magic_Kirka"
+        "Pickaxe"
+    ],
+    "MineToolsData": [
+        {
+            "Tool": "MSFZ_Magic_Kirka",
+            "MineTimeMul": 0.7,
+            "ToolDamageMul": 0.5,
+            "OreChanceAdd": 10.0,
+            "ExtraRollsMin": 0,
+            "ExtraRollsMax": 0,
+            "RareChanceAdd": 0.0,
+            "Veins": []
+        }
     ],
     "VeineDataDataList": [
         {
@@ -23,7 +35,9 @@
             "GoodOre": "VB_MR_Gold",
             "BadOre": "Stone",
             "ToolDamageOnUse": 40.0,
-            "MineTime": 25.0
+            "MineTime": 25.0,
+            "RareItem": "",
+            "RareChance": 0.0
         },
         {
             "VeinName": "VB_MR_Bronze_Vein",
@@ -35,7 +49,9 @@
             "GoodOre": "VB_MR_Bronze",
             "BadOre": "Stone",
             "ToolDamageOnUse": 25.0,
-            "MineTime": 12.0
+            "MineTime": 12.0,
+            "RareItem": "",
+            "RareChance": 0.0
         },
         {
             "VeinName": "VB_MR_Silver_Vein",
@@ -47,7 +63,9 @@
             "GoodOre": "VB_MR_Silver",
             "BadOre": "Stone",
             "ToolDamageOnUse": 35.0,
-            "MineTime": 20.0
+            "MineTime": 20.0,
+            "RareItem": "",
+            "RareChance": 0.0
         },
         {
             "VeinName": "VB_MR_Coal_Vein",
@@ -59,7 +77,9 @@
             "GoodOre": "VB_MR_Coal",
             "BadOre": "Stone",
             "ToolDamageOnUse": 25.0,
-            "MineTime": 12.0
+            "MineTime": 12.0,
+            "RareItem": "",
+            "RareChance": 0.0
         },
         {
             "VeinName": "VB_MR_Rubin_Vein",
@@ -71,7 +91,9 @@
             "GoodOre": "VB_MR_Rubin",
             "BadOre": "Stone",
             "ToolDamageOnUse": 35.0,
-            "MineTime": 20.0
+            "MineTime": 20.0,
+            "RareItem": "VB_MR_Rubin_Gem",
+            "RareChance": 2.0
         },
         {
             "VeinName": "VB_MR_Nephrite_Vein",
@@ -83,7 +105,9 @@
             "GoodOre": "VB_MR_Nephrite",
             "BadOre": "Stone",
             "ToolDamageOnUse": 30.0,
-            "MineTime": 15.0
+            "MineTime": 15.0,
+            "RareItem": "VB_MR_Nephrite_Gem",
+            "RareChance": 2.0
         },
         {
             "VeinName": "VB_MR_Sulfur_Vein",
@@ -95,7 +119,9 @@
             "GoodOre": "VB_MR_Sulfur",
             "BadOre": "Stone",
             "ToolDamageOnUse": 30.0,
-            "MineTime": 15.0
+            "MineTime": 15.0,
+            "RareItem": "",
+            "RareChance": 0.0
         },
         {
             "VeinName": "VB_MR_Iron_Vein",
@@ -107,7 +133,9 @@
             "GoodOre": "VB_MR_Iron",
             "BadOre": "Stone",
             "ToolDamageOnUse": 25.0,
-            "MineTime": 12.0
+            "MineTime": 12.0,
+            "RareItem": "",
+            "RareChance": 0.0
         },
         {
             "VeinName": "VB_MR_Titanium_Vein",
@@ -119,7 +147,9 @@
             "GoodOre": "VB_MR_Titanium",
             "BadOre": "Stone",
             "ToolDamageOnUse": 40.0,
-            "MineTime": 25.0
+            "MineTime": 25.0,
+            "RareItem": "",
+            "RareChance": 0.0
         }
     ],
     "SandDataList": [
@@ -129,7 +159,8 @@
             "MinQuant": 1,
             "MaxQuant": 5,
             "OreName": "VB_MR_Gold",
-            "MeltPressTime": 60.0
+            "MeltPressTime": 60.0,
+            "Portion": 0
         },
         {
             "SandName": "VB_MR_Silver_Sand",
@@ -137,7 +168,8 @@
             "MinQuant": 1,
             "MaxQuant": 5,
             "OreName": "VB_MR_Silver",
-            "MeltPressTime": 60.0
+            "MeltPressTime": 60.0,
+            "Portion": 0
         },
         {
             "SandName": "VB_MR_Bronze_Sand",
@@ -145,7 +177,8 @@
             "MinQuant": 1,
             "MaxQuant": 5,
             "OreName": "VB_MR_Bronze",
-            "MeltPressTime": 60.0
+            "MeltPressTime": 60.0,
+            "Portion": 0
         },
         {
             "SandName": "VB_MR_Iron_Sand",
@@ -153,7 +186,8 @@
             "MinQuant": 1,
             "MaxQuant": 5,
             "OreName": "VB_MR_Iron",
-            "MeltPressTime": 60.0
+            "MeltPressTime": 60.0,
+            "Portion": 0
         },
         {
             "SandName": "VB_MR_Titanium_Sand",
@@ -161,7 +195,8 @@
             "MinQuant": 1,
             "MaxQuant": 5,
             "OreName": "VB_MR_Titanium",
-            "MeltPressTime": 60.0
+            "MeltPressTime": 60.0,
+            "Portion": 0
         },
         {
             "SandName": "VB_MR_Rubin_Sand",
@@ -169,7 +204,8 @@
             "MinQuant": 1,
             "MaxQuant": 5,
             "OreName": "VB_MR_Rubin",
-            "MeltPressTime": 60.0
+            "MeltPressTime": 60.0,
+            "Portion": 0
         },
         {
             "SandName": "VB_MR_Sulfur_Sand",
@@ -177,7 +213,8 @@
             "MinQuant": 1,
             "MaxQuant": 5,
             "OreName": "VB_MR_Sulfur",
-            "MeltPressTime": 60.0
+            "MeltPressTime": 60.0,
+            "Portion": 0
         },
         {
             "SandName": "VB_MR_Coal_Sand",
@@ -185,7 +222,8 @@
             "MinQuant": 1,
             "MaxQuant": 5,
             "OreName": "VB_MR_Coal",
-            "MeltPressTime": 60.0
+            "MeltPressTime": 60.0,
+            "Portion": 0
         },
         {
             "SandName": "VB_MR_Nephrite_Sand",
@@ -193,54 +231,69 @@
             "MinQuant": 1,
             "MaxQuant": 5,
             "OreName": "VB_MR_Nephrite",
-            "MeltPressTime": 60.0
+            "MeltPressTime": 60.0,
+            "Portion": 0
         }
     ],
     "OreDataList": [
         {
             "OreName": "VB_MR_Gold",
             "IngotName": "VB_MR_Gold_Bar",
-            "MeltPressTime": 120.0
+            "MeltPressTime": 120.0,
+            "Portion": 0
         },
         {
             "OreName": "VB_MR_Silver",
             "IngotName": "VB_MR_Silver_Bar",
-            "MeltPressTime": 120.0
+            "MeltPressTime": 120.0,
+            "Portion": 0
         },
         {
             "OreName": "VB_MR_Bronze",
             "IngotName": "VB_MR_Bronze_Bar",
-            "MeltPressTime": 120.0
+            "MeltPressTime": 120.0,
+            "Portion": 0
         },
         {
             "OreName": "VB_MR_Titanium",
             "IngotName": "VB_MR_Titanium_Bar",
-            "MeltPressTime": 120.0
+            "MeltPressTime": 120.0,
+            "Portion": 0
         },
         {
             "OreName": "VB_MR_Iron",
             "IngotName": "VB_MR_Iron_Bar",
-            "MeltPressTime": 120.0
+            "MeltPressTime": 120.0,
+            "Portion": 0
         },
         {
             "OreName": "VB_MR_Rubin",
             "IngotName": "VB_MR_Rubin_Bar",
-            "MeltPressTime": 120.0
+            "MeltPressTime": 120.0,
+            "Portion": 0
         },
         {
             "OreName": "VB_MR_Sulfur",
             "IngotName": "VB_MR_Sulfur_Bar",
-            "MeltPressTime": 120.0
+            "MeltPressTime": 120.0,
+            "Portion": 0
         },
         {
             "OreName": "VB_MR_Nephrite",
             "IngotName": "VB_MR_Nephrite_Bar",
-            "MeltPressTime": 120.0
+            "MeltPressTime": 120.0,
+            "Portion": 0
         },
         {
             "OreName": "VB_MR_Coal",
             "IngotName": "VB_MR_Coal_Bar",
-            "MeltPressTime": 120.0
+            "MeltPressTime": 120.0,
+            "Portion": 0
         }
-    ]
+    ],
+    "PanZones": [],
+    "AmberItem": "VB_AR_Amber",
+    "AmberSourceClass": "VB_AR_Heart",
+    "AmberRadius": 60.0,
+    "AmberChance": 3.0
 }

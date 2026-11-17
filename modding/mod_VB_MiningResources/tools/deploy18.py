@@ -88,6 +88,18 @@ def tr_trader(t):
     return nl.join(out)
 
 
+def tr_trader_gems(t):
+    """Пакет 2: скупка огранённых камней у Мастера (цены — предложение, правятся в файле трейдера)."""
+    if 'VB_MR_Rubin_Gem' in t:
+        return t
+    nl = '\r\n' if '\r\n' in t else '\n'
+    lines = t.split(nl)
+    i = next(k for k, l in enumerate(lines) if l.strip().startswith('VB_MR_Titanium,'))
+    lines[i + 1:i + 1] = ['\t\tVB_MR_Nephrite_Gem,\t\t\t\t\t\t*,\t\t\t\t-1,\t\t\t\t13000\t\t\t// Огранённый нефрит (редкая находка в жиле)',
+                          '\t\tVB_MR_Rubin_Gem,\t\t\t\t\t\t*,\t\t\t\t-1,\t\t\t\t16000\t\t\t// Огранённый рубин (редкая находка в жиле)']
+    return nl.join(lines)
+
+
 def tr_craft(t):
     rx = re.compile(r'\{[^{}]*"Classname"\s*:\s*"BRDK_\w+"[^{}]*\}')
 
@@ -161,6 +173,7 @@ def apply(rel, fn):
 
 os.makedirs(BACKUP, exist_ok=True)
 apply(TRADER, tr_trader)
+apply(TRADER, tr_trader_gems)
 apply(CRAFT, tr_craft)
 apply(RF, tr_rf)
 apply(KT, tr_insert)

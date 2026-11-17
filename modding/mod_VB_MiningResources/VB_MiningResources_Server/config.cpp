@@ -18,13 +18,18 @@ class CfgMods
 		name = "VB_MiningResources_Server";
 		author = "DayZavr";
 		type = "mod";
-		dependencies[] = {"World"};
+		dependencies[] = {"World","Mission"};
 		class defs
 		{
 			class worldScriptModule
 			{
 				value = "";
 				files[] = {"VB_MiningResources_Server/scripts/4_World"};
+			};
+			class missionScriptModule
+			{
+				value = "";
+				files[] = {"VB_MiningResources_Server/scripts/5_Mission"};
 			};
 		};
 	};

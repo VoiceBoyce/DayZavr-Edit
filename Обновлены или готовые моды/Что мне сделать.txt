@@ -1,0 +1,95 @@
+НАПОМИНАЛКА: что сделать с этой папкой
+Обновлено: 2026-11-17
+
+Всё здесь сделано и проверено локально, но ещё не залито на прод.
+Ставить ВМЕСТЕ, за один рестарт. После заливки папку очистить (пустая папка = всё на проде).
+
+
+!!! VB_MiningResources ПОКА НЕ ЗАЛИВАТЬ: идёт ревью кода (найдена дыра в RPC), будет пересборка
+!!! клиента и сервера руды. Этот пункт уберу, когда исправленная сборка ляжет в папку.
+
+1. РЕШИТЬ ДО ЗАЛИВКИ
+--------------------
+[ ] Цены скупки огранённых камней у Мастера (сейчас мои: рубин 16000, нефрит 13000).
+    Файл: 18 сервер\Instance_1\Trader\TraderConfig12_Master.txt, строки после VB_MR_Titanium.
+[ ] Посмотреть рендеры новых ресурсов: D:\DayZavr\DayZavr-Edit\Рендеры\VB_MiningResources\_сводка.png
+
+
+2. ПРОВЕРИТЬ РУКАМИ В ИГРЕ (на 111 или локальном 18)
+----------------------------------------------------
+Руда VB_MiningResources:
+[ ] Промывка сковородой у настоящей реки.
+[ ] Плавка в чаше на настоящем костре.
+[ ] Установка набора пресса и разборка пресса плоскогубцами.
+[ ] Брикет угля горит в костре.
+[ ] Звук пресса во время работы.
+[ ] Цвета новых ресурсов: на земле, в руках, иконки (на стенде агента текстуры не видны).
+
+
+3. СЕРВЕР 16 (только планшет)
+-----------------------------
+[ ] 16 сервер\VB_Tablet_SE.pbo, VB_Tablet_PTY.pbo, VB_Tablet_DRL.pbo -> @Servermod\Addons
+[ ] @VB_Tablet\Addons -> клиентский мод на сервере 16 и у игроков
+    ВАЖНО: планшет ставить на 16 и 18 ОДНОВРЕМЕННО (общий клиент, протокол изменился).
+
+
+4. СЕРВЕР 18
+------------
+Моды (клиент, на сервере и у игроков, ключ тот же DayZavrN):
+[ ] @VB_AncientRoot\Addons -> G:\Games\DayZavr\@VB_AncientRoot
+[ ] @VB_Tablet\Addons -> G:\Games\DayZavr\@VB_Tablet
+[ ] @VB_MiningResources\Addons -> G:\Games\DayZavr\@VB_MiningResources
+
+Руда, замена BRDK_GoldRush (ОСТОРОЖНО):
+[ ] Сделать за ОДИН рестарт. Не запускать сервер ни без старого, ни без нового мода,
+    иначе вещи игроков BRDK_* пропадут из сохранения.
+[ ] Из @Servermod\Addons УДАЛИТЬ BRDK_GoldRush_SERVER.pbo.
+[ ] @BRDK_GoldRush убрать из запуска (его заменяет @VB_MiningResources в modlist).
+
+Серверные PBO -> @Servermod\Addons:
+[ ] VB_AncientRoot_Server.pbo
+[ ] VB_MiningResources_Server.pbo
+[ ] ArtifactScriptsServer.pbo
+[ ] VB_Tablet_SE.pbo, VB_Tablet_PTY.pbo, VB_Tablet_DRL.pbo
+
+Файлы по тем же путям от корня сервера:
+[ ] modlist_18server.txt, ServerManagerPanelModsServer18.txt (+@VB_AncientRoot, @BRDK_GoldRush -> @VB_MiningResources)
+    ПРОВЕРИТЬ: в ServerManagerPanelModsServer18.txt нет @VB_AncientRoot (в modlist_18server.txt есть).
+    Если сервер запускается через панель - дописать туда @VB_AncientRoot.
+[ ] Instance_1\VB_Mods\ (VB_AncientRoot, VB_MiningResources, VB_Tablet\config)
+[ ] Instance_1\DRL_CraftMenu\CraftConfig.json и CraftCategories.json
+[ ] Instance_1\Trader\TraderConfig12_Master.txt, TraderConfig9_Doc.txt
+[ ] Instance_1\SSSWheel\PrizeConfig.json
+[ ] Instance_1\RF\CONTAINERS\PRESETS\Preset_Pool_Items.json
+[ ] Instance_1\KTPrivateTerritory\Config.json
+[ ] Instance_1\INT_Mods\INT_BaseBoxAuthorization\INT_BaseBoxAuthorization_Building_Config.json
+[ ] mpmissions\dayzOffline.enoch\cfgrandompresets.xml
+[ ] mpmissions\dayzOffline.enoch\_Types_Server_18\DayZavr\Furniture_BRDK.xml
+[ ] mpmissions\dayzOffline.enoch\_Types_Server_18\DayZavr\AncientRoot.xml
+    + ВРУЧНУЮ строка в cfgeconomycore.xml, в блок _Types_Server_18/DayZavr:
+      <file name="AncientRoot.xml" type="types" />
+    (cfgeconomycore.xml целиком НЕ класть: локальная копия старше прода)
+
+Квесты INT_QUESTS:
+[ ] НА ПРОДЕ ДО КОПИРОВАНИЯ переименовать старые ветки в _old_<имя>:
+    COINS_START_QUEST, COINS_COOPER_QUESTS, COINS_SILVER_QUESTS, COINS_GOLDEN_QUESTS,
+    COINS_TRADE_CLOTHES, COINS_TRADE_WEAPONS, COINS_TRADE_MATERIAL.
+[ ] Папку COINS_EXCHANGE заменить целиком.
+[ ] Скопировать Instance_1\INT_Mods\INT_QUESTS\ (Givers.json + ветки).
+    Если на проде Босса с начала ноября двигали или переодевали: из Givers.json перенести только 6 новых записей.
+
+Файлы, которые на проде могли править (это целые файлы с локальной копии начала ноября):
+[ ] serverDZ.cfg - если правили, перенести только serverTimeAcceleration = 5, serverNightTimeAcceleration = 2.5,
+    disableBaseDamage = 1, disableContainerDamage = 1.
+[ ] mpmissions\dayzOffline.enoch\cfggameplay.json - если правили, перенести только два true (урон базам и контейнерам).
+[ ] Instance_1\Trader\TraderConfig.txt - если правили, только строка <Currency> MoneyRuble25, 25 после Bablo10Rubley.
+
+
+5. ПОСЛЕ ЗАЛИВКИ
+----------------
+[ ] DayZ Editor: переименовать жилы в .dze (SPAWN_ORE, ZONE_RADUNIN, ZONE_ZAPADLISKO): BRDK_*_Ore -> VB_MR_*_Vein.
+    Старые жилы пока тоже работают, но новые имена нужны на будущее.
+[ ] Расставить рощи Древнего корня командой /grove в чате (пока не расставлены, рощ на карте нет;
+    часть квестов Волхва и контракты Корня ждут рощ).
+[ ] Объявление игрокам: текст в "Что было сделано.txt" (сразу для Discord).
+[ ] Очистить эту папку.

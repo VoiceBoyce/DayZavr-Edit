@@ -1,5 +1,5 @@
 // Настройки VB_MiningResources: $profile:VB_Mods\VB_MiningResources\settings.json.
-// Поля и смысл те же, что в GoldRush.json старого мода, классы новые (VB_MR_*).
+// Поля прежние из GoldRush.json + новые с версии 2 (инструменты, редкие камни, порции, реки, янтарь).
 // Старые классы BRDK_* находятся через наследование (IsKindOf), отдельно их перечислять не нужно.
 
 class VB_MR_VeinData
@@ -14,6 +14,8 @@ class VB_MR_VeinData
 	string BadOre;				// что выпадает при неудаче (пусто = ничего)
 	float ToolDamageOnUse;		// урон инструменту, HP
 	float MineTime;				// время добычи, с
+	string RareItem;			// редкая находка (пусто = нет), один бросок на всю добычу с жилы
+	float RareChance;			// шанс редкой находки, %
 
 	void VB_MR_VeinData(string vein = "", string good = "", float chance = 35, float damage = 25, float time = 12)
 	{
@@ -27,6 +29,8 @@ class VB_MR_VeinData
 		BadOre = "Stone";
 		ToolDamageOnUse = damage;
 		MineTime = time;
+		RareItem = "";
+		RareChance = 0;
 	}
 }
 
@@ -37,7 +41,8 @@ class VB_MR_SandData
 	int MinQuant;
 	int MaxQuant;
 	string OreName;				// во что перерабатывается (чаша или пресс)
-	float MeltPressTime;		// время переработки, с
+	float MeltPressTime;		// время переработки порции, с
+	int Portion;				// сколько штук берётся за раз (0 = полный стак)
 
 	void VB_MR_SandData(string sand = "", float chance = 35, string ore = "")
 	{
@@ -47,6 +52,7 @@ class VB_MR_SandData
 		MaxQuant = 5;
 		OreName = ore;
 		MeltPressTime = 60;
+		Portion = 0;
 	}
 }
 
@@ -54,18 +60,36 @@ class VB_MR_OreData
 {
 	string OreName;				// самородок или кусок
 	string IngotName;			// во что перерабатывается (слиток или брикет)
-	float MeltPressTime;		// время переработки, с
+	float MeltPressTime;		// время переработки порции, с
+	int Portion;				// сколько штук берётся за раз (0 = полный стак)
 
 	void VB_MR_OreData(string ore = "", string ingot = "")
 	{
 		OreName = ore;
 		IngotName = ingot;
 		MeltPressTime = 120;
+		Portion = 0;
 	}
+}
+
+// Зона «золотоносной реки»: в радиусе от точки указанные виды песка попадаются чаще
+class VB_MR_PanZoneSand
+{
+	string SandName;
+	float ChanceMul = 1.0;
+}
+
+class VB_MR_PanZone
+{
+	string Name;
+	vector Position;
+	float Radius = 100;
+	ref array<ref VB_MR_PanZoneSand> Sands = new array<ref VB_MR_PanZoneSand>;
 }
 
 class VB_MR_Settings
 {
+	protected static const int VERSION = 2;
 	protected static const string DIR_MODS = "$profile:VB_Mods";
 	protected static const string DIR = "$profile:VB_Mods\\VB_MiningResources";
 	protected static const string FILE = "$profile:VB_Mods\\VB_MiningResources\\settings.json";
@@ -76,17 +100,28 @@ class VB_MR_Settings
 	int MinCountInRiver;				// бросков при промывке, минимум
 	int MaxCountInRiver;				// бросков при промывке, максимум
 	ref array<string> BadRiverBounty;	// что выпадает при неудачной промывке
-	float MeltUpdatePeriod;				// как часто чаша проверяет плавку, с
+	float MeltUpdatePeriod;				// как часто чаша добавляет время плавки, с
 	float MeltTempTreshold;				// температура чаши, с которой идёт плавка
-	ref array<string> MineTools;		// чем можно добывать
+	float PressUpdatePeriod;			// как часто пресс добавляет время прессовки, с
+	ref array<string> MineTools;		// инструменты без бонусов (старый список)
+	ref array<ref VB_MR_ToolData> MineToolsData;	// инструменты с настройками
 	ref array<ref VB_MR_VeinData> VeineDataDataList;
 	ref array<ref VB_MR_SandData> SandDataList;
 	ref array<ref VB_MR_OreData> OreDataList;
+	ref array<ref VB_MR_PanZone> PanZones;
+	string AmberItem;					// находка при промывке у рощи (пусто = выключено)
+	string AmberSourceClass;			// объект рощи
+	float AmberRadius;					// радиус от рощи, м
+	float AmberChance;					// шанс за одну промывку, %
 
+	// при первой загрузке сразу собираются общие данные: они нужны и серверным проверкам действий
 	static VB_MR_Settings Get()
 	{
 		if (!s_Instance)
+		{
 			s_Instance = Load();
+			VB_MR_Shared.s_Data = s_Instance.BuildShared();
+		}
 		return s_Instance;
 	}
 
@@ -98,44 +133,232 @@ class VB_MR_Settings
 		{
 			if (JsonFileLoader<VB_MR_Settings>.LoadFile(FILE, settings, error) && settings)
 			{
-				Print("[VB_MiningResources] Настройки загружены: " + FILE);
 				settings.FixEmpty();
+				// пустой или обрезанный файл ({}) — не «старая версия»: иначе миграция перезаписала бы его пустыми списками
+				if (settings.VeineDataDataList.Count() == 0 && settings.SandDataList.Count() == 0 && settings.OreDataList.Count() == 0)
+				{
+					Print("[VB_MiningResources] ОШИБКА: в настройках нет ни жил, ни песка, ни руды — взяты значения по умолчанию, файл не перезаписан: " + FILE);
+					settings = new VB_MR_Settings();
+					settings.SetDefaults();
+					settings.Validate();
+					return settings;
+				}
+				if (settings.ConfigVersion < VERSION)
+				{
+					settings.Migrate();
+					settings.Save("Настройки обновлены до версии 2: ");
+				}
+				settings.Validate();
+				Print("[VB_MiningResources] Настройки загружены: " + FILE);
 				return settings;
 			}
 			Print("[VB_MiningResources] ОШИБКА в настройках, взяты значения по умолчанию: " + error);
 			settings = new VB_MR_Settings();
 			settings.SetDefaults();
+			settings.Validate();
 			return settings;
 		}
 
 		settings.SetDefaults();
+		settings.Validate();
 		if (!FileExist(DIR_MODS))
 			MakeDirectory(DIR_MODS);
 		if (!FileExist(DIR))
 			MakeDirectory(DIR);
-		if (JsonFileLoader<VB_MR_Settings>.SaveFile(FILE, settings, error))
-			Print("[VB_MiningResources] Создан файл настроек: " + FILE);
-		else
-			Print("[VB_MiningResources] Не удалось записать настройки: " + error);
+		settings.Save("Создан файл настроек: ");
 		return settings;
 	}
 
-	// JsonFileLoader создаёт пустые массивы для полей, которых нет в файле
+	protected void Save(string what)
+	{
+		string error;
+		if (JsonFileLoader<VB_MR_Settings>.SaveFile(FILE, this, error))
+			Print("[VB_MiningResources] " + what + FILE);
+		else
+			Print("[VB_MiningResources] Не удалось записать настройки: " + error);
+	}
+
+	// JsonFileLoader создаёт пустые массивы для полей, которых нет в файле; null бывает у битых записей
 	protected void FixEmpty()
 	{
 		if (!BadRiverBounty)
 			BadRiverBounty = new array<string>;
 		if (!MineTools)
 			MineTools = new array<string>;
+		if (!MineToolsData)
+			MineToolsData = new array<ref VB_MR_ToolData>;
 		if (!VeineDataDataList)
 			VeineDataDataList = new array<ref VB_MR_VeinData>;
 		if (!SandDataList)
 			SandDataList = new array<ref VB_MR_SandData>;
 		if (!OreDataList)
 			OreDataList = new array<ref VB_MR_OreData>;
+		if (!PanZones)
+			PanZones = new array<ref VB_MR_PanZone>;
+
+		// пустые записи ([null], лишняя запятая, {} без имени) выкидываются: JsonFileLoader делает из null
+		// запись с пустыми полями, а дальше по ней искали бы инструмент или жилу с именем ""
+		int i;
+		for (i = MineTools.Count() - 1; i >= 0; i--)
+		{
+			if (MineTools[i] == "")
+				MineTools.Remove(i);
+		}
+		for (i = MineToolsData.Count() - 1; i >= 0; i--)
+		{
+			if (!MineToolsData[i] || MineToolsData[i].Tool == "")
+				MineToolsData.Remove(i);
+			else if (!MineToolsData[i].Veins)
+				MineToolsData[i].Veins = new array<string>;
+		}
+		for (i = VeineDataDataList.Count() - 1; i >= 0; i--)
+		{
+			if (!VeineDataDataList[i] || VeineDataDataList[i].VeinName == "" || VeineDataDataList[i].GoodOre == "")
+				VeineDataDataList.Remove(i);
+		}
+		for (i = SandDataList.Count() - 1; i >= 0; i--)
+		{
+			if (!SandDataList[i] || SandDataList[i].SandName == "")
+				SandDataList.Remove(i);
+		}
+		for (i = OreDataList.Count() - 1; i >= 0; i--)
+		{
+			if (!OreDataList[i] || OreDataList[i].OreName == "")
+				OreDataList.Remove(i);
+		}
+		for (i = PanZones.Count() - 1; i >= 0; i--)
+		{
+			if (!PanZones[i])
+			{
+				PanZones.Remove(i);
+				continue;
+			}
+			if (!PanZones[i].Sands)
+				PanZones[i].Sands = new array<ref VB_MR_PanZoneSand>;
+			for (int s = PanZones[i].Sands.Count() - 1; s >= 0; s--)
+			{
+				if (!PanZones[i].Sands[s])
+					PanZones[i].Sands.Remove(s);
+			}
+		}
 	}
 
-	// Значения по умолчанию = рабочие значения сервера 18 из GoldRush.json (2026-11-17)
+	// Значения вне разумных пределов поправляются в памяти (файл не трогается), в лог — предупреждение
+	protected void Validate()
+	{
+		if (GoldInRiverSearchTime <= 0)
+			GoldInRiverSearchTime = Warn("GoldInRiverSearchTime", 20);
+		if (MinCountInRiver < 0)
+			MinCountInRiver = WarnI("MinCountInRiver", 0);
+		if (MaxCountInRiver < MinCountInRiver)
+			MaxCountInRiver = WarnI("MaxCountInRiver", MinCountInRiver);
+		if (MeltUpdatePeriod <= 0)
+			MeltUpdatePeriod = Warn("MeltUpdatePeriod", 30);
+		if (PressUpdatePeriod <= 0)
+			PressUpdatePeriod = Warn("PressUpdatePeriod", 5);
+		if (MeltTempTreshold <= 0)
+			MeltTempTreshold = Warn("MeltTempTreshold", 150);
+		float bowlMax = GetGame().ConfigGetFloat("CfgVehicles VB_MR_MeltingBowl varTemperatureMax");
+		if (bowlMax > 0 && MeltTempTreshold > bowlMax)
+			Print(string.Format("[VB_MiningResources] ВНИМАНИЕ: MeltTempTreshold %1 выше предела чаши %2 — чаша не будет плавить", MeltTempTreshold, bowlMax));
+
+		foreach (VB_MR_ToolData tool : MineToolsData)
+		{
+			if (tool.MineTimeMul <= 0)
+				tool.MineTimeMul = Warn(tool.Tool + ".MineTimeMul", 1);
+			if (tool.ToolDamageMul < 0)
+				tool.ToolDamageMul = Warn(tool.Tool + ".ToolDamageMul", 0);
+			if (tool.ExtraRollsMin < 0)
+				tool.ExtraRollsMin = WarnI(tool.Tool + ".ExtraRollsMin", 0);
+			if (tool.ExtraRollsMax < 0)
+				tool.ExtraRollsMax = WarnI(tool.Tool + ".ExtraRollsMax", 0);
+		}
+		foreach (VB_MR_VeinData vein : VeineDataDataList)
+		{
+			if (vein.MinCount < 0)
+				vein.MinCount = WarnI(vein.VeinName + ".MinCount", 0);
+			if (vein.MaxCount < vein.MinCount)
+				vein.MaxCount = WarnI(vein.VeinName + ".MaxCount", vein.MinCount);
+			if (vein.MinQuant < 1)
+				vein.MinQuant = WarnI(vein.VeinName + ".MinQuant", 1);
+			if (vein.MaxQuant < vein.MinQuant)
+				vein.MaxQuant = WarnI(vein.VeinName + ".MaxQuant", vein.MinQuant);
+			if (vein.MineTime <= 0)
+				vein.MineTime = Warn(vein.VeinName + ".MineTime", 12);
+			if (vein.ToolDamageOnUse < 0)
+				vein.ToolDamageOnUse = Warn(vein.VeinName + ".ToolDamageOnUse", 0);
+		}
+		foreach (VB_MR_SandData sand : SandDataList)
+		{
+			if (sand.MinQuant < 1)
+				sand.MinQuant = WarnI(sand.SandName + ".MinQuant", 1);
+			if (sand.MaxQuant < sand.MinQuant)
+				sand.MaxQuant = WarnI(sand.SandName + ".MaxQuant", sand.MinQuant);
+			if (sand.MeltPressTime <= 0)
+				sand.MeltPressTime = Warn(sand.SandName + ".MeltPressTime", 60);
+		}
+		foreach (VB_MR_OreData ore : OreDataList)
+		{
+			if (ore.MeltPressTime <= 0)
+				ore.MeltPressTime = Warn(ore.OreName + ".MeltPressTime", 120);
+		}
+	}
+
+	protected float Warn(string field, float value)
+	{
+		Print(string.Format("[VB_MiningResources] ВНИМАНИЕ: неверное значение %1 в настройках, взято %2", field, value));
+		return value;
+	}
+
+	protected int WarnI(string field, int value)
+	{
+		Print(string.Format("[VB_MiningResources] ВНИМАНИЕ: неверное значение %1 в настройках, взято %2", field, value));
+		return value;
+	}
+
+	// Версия 1 (перенос с GoldRush.json) -> 2: новые поля со стартовыми значениями из ТЗ v0.3
+	protected void Migrate()
+	{
+		if (PressUpdatePeriod <= 0)
+			PressUpdatePeriod = 5;
+		// MSFZ_Magic_Kirka получает бонусы, только если она и раньше добывала; остальные из старого списка — как раньше
+		if (MineToolsData.Count() == 0 && MineTools.Find("MSFZ_Magic_Kirka") != -1)
+		{
+			MineToolsData.Insert(new VB_MR_ToolData("MSFZ_Magic_Kirka", 0.7, 0.5, 10));
+			array<string> plain = new array<string>;
+			foreach (string tool : MineTools)
+			{
+				if (tool != "MSFZ_Magic_Kirka")
+					plain.Insert(tool);
+			}
+			MineTools = plain;
+		}
+		foreach (VB_MR_VeinData vein : VeineDataDataList)
+		{
+			if (vein.RareItem != "")
+				continue;
+			if (vein.VeinName == "VB_MR_Rubin_Vein")
+			{
+				vein.RareItem = "VB_MR_Rubin_Gem";
+				vein.RareChance = 2;
+			}
+			if (vein.VeinName == "VB_MR_Nephrite_Vein")
+			{
+				vein.RareItem = "VB_MR_Nephrite_Gem";
+				vein.RareChance = 2;
+			}
+		}
+		if (AmberItem == "" && AmberSourceClass == "")
+		{
+			AmberItem = "VB_AR_Amber";
+			AmberSourceClass = "VB_AR_Heart";
+			AmberRadius = 60;
+			AmberChance = 3;
+		}
+		ConfigVersion = VERSION;
+	}
+
+	// Значения по умолчанию = рабочие значения сервера 18 из GoldRush.json (2026-11-17) + новые из ТЗ v0.3
 	protected void SetDefaults()
 	{
 		ConfigVersion = 1;
@@ -146,6 +369,8 @@ class VB_MR_Settings
 		MeltUpdatePeriod = 30;
 		MeltTempTreshold = 150;
 		MineTools = {"Pickaxe", "MSFZ_Magic_Kirka"};
+		MineToolsData = new array<ref VB_MR_ToolData>;
+		PanZones = new array<ref VB_MR_PanZone>;
 
 		VeineDataDataList = new array<ref VB_MR_VeinData>;
 		VeineDataDataList.Insert(new VB_MR_VeinData("VB_MR_Gold_Vein", "VB_MR_Gold", 35, 40, 25));
@@ -179,17 +404,72 @@ class VB_MR_Settings
 		OreDataList.Insert(new VB_MR_OreData("VB_MR_Sulfur", "VB_MR_Sulfur_Bar"));
 		OreDataList.Insert(new VB_MR_OreData("VB_MR_Nephrite", "VB_MR_Nephrite_Bar"));
 		OreDataList.Insert(new VB_MR_OreData("VB_MR_Coal", "VB_MR_Coal_Bar"));
+
+		Migrate();
 	}
 
-	bool IsMineTool(string type)
+	// ---------------------------------------------------------------- данные для игроков
+	VB_MR_SharedData BuildShared()
 	{
-		return MineTools && MineTools.Find(type) != -1;
+		VB_MR_SharedData data = new VB_MR_SharedData();
+		data.PanTime = GoldInRiverSearchTime;
+		data.MeltTemp = MeltTempTreshold;
+
+		foreach (VB_MR_ToolData tool : MineToolsData)
+			data.Tools.Insert(tool);
+		foreach (string plain : MineTools)
+		{
+			bool known = false;
+			foreach (VB_MR_ToolData existing : MineToolsData)
+			{
+				if (existing.Tool == plain)
+					known = true;
+			}
+			if (!known)
+				data.Tools.Insert(new VB_MR_ToolData(plain));
+		}
+
+		foreach (VB_MR_VeinData vein : VeineDataDataList)
+		{
+			VB_MR_VeinInfo info = new VB_MR_VeinInfo();
+			info.VeinName = vein.VeinName;
+			info.MineTime = vein.MineTime;
+			data.Veins.Insert(info);
+		}
+		foreach (VB_MR_SandData sand : SandDataList)
+			data.Recipes.Insert(MakeRecipe(sand.SandName, sand.OreName, sand.MeltPressTime, sand.Portion));
+		foreach (VB_MR_OreData ore : OreDataList)
+			data.Recipes.Insert(MakeRecipe(ore.OreName, ore.IngotName, ore.MeltPressTime, ore.Portion));
+		return data;
 	}
 
-	// Поиск записи: сначала точное имя класса, потом наследование (старые BRDK_* наследуют VB_MR_*)
+	// порция 0 = полный стак предмета, как в старом моде
+	protected VB_MR_RecipeInfo MakeRecipe(string item, string result, float time, int portion)
+	{
+		VB_MR_RecipeInfo recipe = new VB_MR_RecipeInfo();
+		recipe.Item = item;
+		recipe.Result = result;
+		recipe.Time = time;
+		recipe.Portion = portion;
+		int stackMax = GetGame().ConfigGetInt("CfgVehicles " + item + " varQuantityMax");
+		if (recipe.Portion <= 0)
+			recipe.Portion = stackMax;
+		// порция больше стопки — станок не запустится никогда
+		if (stackMax > 0 && recipe.Portion > stackMax)
+		{
+			Print(string.Format("[VB_MiningResources] ВНИМАНИЕ: порция %1 у %2 больше стопки %3, взята %3", recipe.Portion, item, stackMax));
+			recipe.Portion = stackMax;
+		}
+		if (recipe.Portion <= 0)
+			recipe.Portion = 1;
+		return recipe;
+	}
+
+	// ---------------------------------------------------------------- поиск записей
+	// Сначала точное имя класса, потом наследование (старые BRDK_* наследуют VB_MR_*)
 	VB_MR_VeinData FindVein(Object obj)
 	{
-		if (!obj || !VeineDataDataList)
+		if (!obj)
 			return null;
 
 		string type = obj.GetType();
@@ -206,41 +486,23 @@ class VB_MR_Settings
 		return null;
 	}
 
-	VB_MR_SandData FindSand(EntityAI item)
+	// множитель шанса песка по зонам «золотоносных рек» (берётся наибольший)
+	float PanZoneMul(vector pos, string sandName)
 	{
-		if (!item || !SandDataList)
-			return null;
-
-		string type = item.GetType();
-		foreach (VB_MR_SandData exact : SandDataList)
+		float mul = 1.0;
+		foreach (VB_MR_PanZone zone : PanZones)
 		{
-			if (exact.SandName == type)
-				return exact;
+			// расстояние по горизонтали; локальные переменные — два вызова одной функции в аргументах затирают результат
+			float dx = pos[0] - zone.Position[0];
+			float dz = pos[2] - zone.Position[2];
+			if (dx * dx + dz * dz > zone.Radius * zone.Radius)
+				continue;
+			foreach (VB_MR_PanZoneSand sand : zone.Sands)
+			{
+				if (sand.SandName == sandName && sand.ChanceMul > mul)
+					mul = sand.ChanceMul;
+			}
 		}
-		foreach (VB_MR_SandData parent : SandDataList)
-		{
-			if (item.IsKindOf(parent.SandName))
-				return parent;
-		}
-		return null;
-	}
-
-	VB_MR_OreData FindOre(EntityAI item)
-	{
-		if (!item || !OreDataList)
-			return null;
-
-		string type = item.GetType();
-		foreach (VB_MR_OreData exact : OreDataList)
-		{
-			if (exact.OreName == type)
-				return exact;
-		}
-		foreach (VB_MR_OreData parent : OreDataList)
-		{
-			if (item.IsKindOf(parent.OreName))
-				return parent;
-		}
-		return null;
+		return mul;
 	}
 }

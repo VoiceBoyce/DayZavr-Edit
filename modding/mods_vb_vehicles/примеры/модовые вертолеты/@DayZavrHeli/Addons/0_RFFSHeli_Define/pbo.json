@@ -1,0 +1,22 @@
+{
+    "compress": {
+        "exclude": [
+        ],
+        "include": [
+        ]
+    },
+    "headers": [
+        {
+            "name": "prefix",
+            "value": "0_RFFSHeli_Define"
+        },
+        {
+            "name": "Mikero",
+            "value": "DePbo.dll.9.94"
+        },
+        {
+            "name": "version",
+            "value": "25020610"
+        }
+    ]
+}
