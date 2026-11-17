@@ -110,7 +110,10 @@ if opts.get("sel"):                              # hiddenSelections из кон�
                 lod["face_mat"][fi] = mat
         print("SEL", s["name"], len(s["face_set"]), os.path.basename(tex.replace(BS, "/")), os.path.basename(mat.replace(BS, "/")))
 faces, face_src = [], []                        # без вырожденных граней (повтор вершины роняет Blender на нормалях)
+MAXEDGE = float(opts.get("maxedge", 0) or 0)     # --maxedge=1.5: выкинуть огромные грани (скрытые «лучи фар» у модовых машин)
 for fi, f in enumerate(lod["faces"]):
+    if MAXEDGE and max(math.dist(lod["points"][f[k]], lod["points"][f[(k + 1) % len(f)]]) for k in range(len(f))) > MAXEDGE:
+        continue
     if len(set(f)) == len(f) >= 3:
         faces.append(list(f))
         face_src.append(fi)

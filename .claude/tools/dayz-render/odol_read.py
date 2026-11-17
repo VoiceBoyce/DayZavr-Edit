@@ -177,11 +177,17 @@ def lzo1x(src, ip, out_len):
 
 # ------------------------------------------------------------------ структуры LOD
 def skip_proxy(r):
-    r.asciiz()
-    r.raw(48)                                   # Matrix4P: 3x3 + позиция
-    r.i32(); r.i32(); r.i32()
+    read_proxy(r)
+
+
+def read_proxy(r):
+    """Прокси LOD: имя модели, матрица 3x3 + позиция (12 float), номер, выделение, кость, секция."""
+    name = r.asciiz()
+    m = struct.unpack_from("<12f", r.raw(48))
+    ids = [r.i32(), r.i32(), r.i32()]
     if r.v >= 40:
-        r.i32()
+        ids.append(r.i32())
+    return {"name": name, "matrix": m, "ids": ids}
 
 
 def read_material(r):
@@ -230,6 +236,10 @@ def skip_materials(r, nmat, vcount, vi):
     массив распаковывается и сразу за ним стоит vcount. Имена материалов — строки *.rvmat в блоке, по порядку."""
     start = r.p
     d = r.d
+    if nmat == 0 and start + 12 <= len(d):          # LOD без граней (память, контакт с землёй): два пустых массива и nf=0
+        a, b, nf0 = struct.unpack_from("<III", d, start)
+        if a == 0 and b == 0 and nf0 == 0:
+            return []
     for off in range(start, min(len(d) - 16, start + 50000)):
         nf, sz, z = struct.unpack_from("<IIH", d, off)
         if nf == 0 or nf > 1000000 or z != 0 or not (nf * 8 <= sz <= nf * 10):
@@ -291,11 +301,14 @@ def read_named_selection(r):
     r.i32()
     sectional = r.boolean()
     ns, sdata = r.compressed_array(4)
-    r.compressed_array(vi)
-    r.compressed(r.i32())
-    fmt = "<%dH" % nf if vi == 2 else "<%di" % nf
-    return {"name": name, "faces": list(struct.unpack_from(fmt, fdata)) if nf else [],
-            "sectional": sectional, "sections": list(struct.unpack_from("<%di" % ns, sdata)) if ns else []}
+    nv, vdata = r.compressed_array(vi)
+    nw = r.i32()
+    wdata = r.compressed(nw)
+    fmt = "<%dH" if vi == 2 else "<%di"
+    return {"name": name, "faces": list(struct.unpack_from(fmt % nf, fdata)) if nf else [],
+            "sectional": sectional, "sections": list(struct.unpack_from("<%di" % ns, sdata)) if ns else [],
+            "vertices": list(struct.unpack_from(fmt % nv, vdata)) if nv else [],
+            "weights": list(wdata) if nw else []}
 
 
 def read_uvset(r):
@@ -324,8 +337,7 @@ def read_uvset(r):
 
 
 def read_lod(r, res):
-    for _ in range(r.i32()):
-        skip_proxy(r)
+    proxies = [read_proxy(r) for _ in range(r.i32())]
     n = r.i32(); r.raw(4 * n)                   # subSkeletonsToSkeleton
     for _ in range(r.i32()):                    # skeletonToSubSkeleton
         k = r.i32(); r.raw(4 * k)
@@ -410,7 +422,8 @@ def read_lod(r, res):
             sel["face_set"] = [fi for fi in sel["faces"] if fi < nf]
     return {"res": res, "points": points, "normals": normals, "uv": uvsets[0], "faces": faces,
             "face_tex": face_tex, "face_mat": face_mat, "face_sec": face_sec, "textures": textures,
-            "materials": materials, "sections": sections, "selections": selections, "props": props}
+            "materials": materials, "sections": sections, "selections": selections, "props": props,
+            "proxies": proxies}
 
 
 # ------------------------------------------------------------------ заголовок
