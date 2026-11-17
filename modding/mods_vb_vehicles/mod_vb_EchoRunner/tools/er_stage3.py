@@ -38,7 +38,7 @@ TEXMAP = {"body": "body", "steel_in": "inner", "pipe": "metal_rust", "steel": "m
           "hose": "rubber", "tire": "rubber", "clamp": "chrome", "chrome": "chrome", "black": "plastic",
           "dash": "plastic", "rim": "rim", "engine": "engine", "seat": "seat", "floor": "floor", "net": "net",
           "lamp": "lamp", "tail": "tail", "amber": "amber", "neon": "neon",
-          "strap": "strap", "screen": "screen", "crate": "crate"}
+          "strap": "strap", "screen": "screen", "crate": "crate", "redpaint": "redpaint"}
 # rvmat: блик, сила блика, френель, отражение
 RV = {
     # Кузов: как металл ванили на Super (hatchback_02 engine_plate: 0.2–0.3 / 100–200 / fresnel 0.4,0.7, без
@@ -62,6 +62,7 @@ RV = {
     "strap":      ((0.08, 0.06, 0.06), 15, (0.3, 0.3), None),
     "screen":     ((0.50, 0.50, 0.50), 300, (0.7, 0.2), None),
     "crate":      ((0.15, 0.15, 0.13), 30, (0.4, 0.4), None),
+    "redpaint":   ((0.25, 0.22, 0.22), 40, (0.4, 0.4), None),
 }
 
 

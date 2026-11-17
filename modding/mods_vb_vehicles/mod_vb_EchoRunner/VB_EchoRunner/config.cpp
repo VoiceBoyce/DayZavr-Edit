@@ -124,7 +124,7 @@ class CfgVehicles
 		rotationFlags = 8;
 		radiusByDamage[] = {0, 0.36, 0.3, 0.34, 0.9998, 0.30, 0.9999, 0.26};
 		radius = 0.36;
-		width = 0.26;
+		width = 0.28;
 		tyreType = 0;
 		tyreOffroadResistance = 0.7;
 		tyreRollResistance = 0.012;
@@ -136,7 +136,7 @@ class CfgVehicles
 	class VB_EchoRunner_Wheel_Ruined: VB_EchoRunner_Wheel
 	{
 		radius = 0.28;
-		width = 0.26;
+		width = 0.28;
 		tyreOffroadResistance = 0.02;
 		tyreRollResistance = 0.6;
 		tyreGrip = 0.35;

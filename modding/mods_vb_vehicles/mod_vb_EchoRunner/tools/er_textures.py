@@ -292,14 +292,14 @@ def paint_body(seed=1607):
     hgt = np.where(lv, 0.004 * ph, hgt)
 
     # --- капот в грунте (с другой машины)
-    hood = T & (np.abs(X) < 0.72) & (Y > -2.05) & (Y < -0.66)
+    hood = T & (np.abs(X) < M.HOOD["x"]) & (Y > M.HOOD["y0"]) & (Y < M.HOOD["y1"])
     pn = fbm(H, W, 48, 48, rng, 4)
     primer = (0.34 + 0.06 * (pn - 0.5))[..., None] * rgb((0.97, 1.0, 0.95))     # серо-оливковый грунт
     sun = smooth(0.45, 0.75, fbm(H, W, 5, 5, rng, 3))
     primer = mix(primer, rgb((0.44, 0.44, 0.42)), sun * 0.35)                 # выгорел на солнце
     sand = vnoise(H, W, 30, 600, rng)                                           # следы шкурки поперёк
     primer = primer * (0.94 + 0.08 * sand)[..., None]
-    hsd = rect_sd(X, Y, (0.0, -1.355), (0.72, 0.695))
+    hsd = rect_sd(X, Y, (0.0, -1.355), (M.HOOD["x"], 0.695))
     wear_n = fbm(H, W, 70, 70, rng, 4)
     bare = smooth(-0.07, -0.01, hsd) * smooth(0.40, 0.55, wear_n)              # протёрто до металла у кромок
     primer = mix(primer, rgb((0.50, 0.50, 0.52)), bare)
@@ -410,6 +410,16 @@ def paint_body(seed=1607):
     col = col * shade[..., None]
     gloss = gloss * (0.4 + 0.6 * shade)
 
+    # --- ряды заклёпок по швам (по макету): периметр дверей, передних крыльев и задних четвертей
+    for (cy, cz), (hy, hz) in (((-0.05, 0.59), (0.50, 0.27)), ((-1.40, 0.56), (0.62, 0.15)),
+                               ((1.42, 0.62), (0.58, 0.20))):
+        dome_s, _ = rivets_along_rect(Y, Z, (cy, cz), (hy, hz), 0.018, 0.065, 0.0055)
+        for isl in (Lf, Rt):
+            dm = dome_s * isl
+            col = mix(col, rgb((0.30, 0.17, 0.09)), smooth(0.0, 0.3, dm) * 0.5)       # ржавый ободок
+            col = mix(col, rgb((0.52, 0.52, 0.53)), dm * 0.6)                          # шляпка
+            hgt = hgt + 0.0014 * dm
+
     # --- рёбра на задней панели (между фонарями и бампером)
     rib = Bk & (np.abs(X) < 0.80) & (Z > 0.44) & (Z < 0.86)
     rph = 0.5 + 0.5 * np.sin(2 * math.pi * Z / 0.022)
@@ -417,7 +427,7 @@ def paint_body(seed=1607):
     col = np.where(rib[..., None], col * (0.80 + 0.20 * rph)[..., None], col)
 
     # --- «зебра» на носу под фарами
-    zeb = Fr & (np.abs(X) < 0.66) & (Z > 0.315) & (Z < 0.455)
+    zeb = Fr & (np.abs(X) < 0.66) & (Z > 0.38) & (Z < 0.505)
     stripe = np.mod(X - Z * 1.0 + 1.0, 0.09) < 0.045
     wear_z = smooth(0.30, 0.42, fbm(H, W, 90, 90, rng, 3))
     zc = np.where(stripe[..., None], rgb((0.80, 0.62, 0.06)), rgb((0.05, 0.05, 0.05)))
@@ -431,15 +441,15 @@ def paint_body(seed=1607):
     maps = [col, hgt, gloss, spec, metal]
     white = (0.86, 0.86, 0.84)
     # «16» в круге на левой двери (левый борт смотрят снаружи — строка идёт к носу, то есть в −Y)
-    c16 = (-0.06, 0.56)
+    c16 = (-0.06, 0.60)
     spray(maps, Lf, Y, Z, circle_segs(c16, 0.175, 40, rng), 0.022, white, wear, 0.26, drips=0)
     spray(maps, Lf, Y, Z, text_segs("16", (c16[0] + 0.125, c16[1] - 0.075), (-1, 0), (0, 1), 0.15), 0.026, white,
           wear, 0.24, drips=6, rng=rng, down=(0, -1))
     # зарубки у водителя: три пятёрки на красной двери (левый борт машины = правый островок атласа R, x>0)
     for gi in range(3):
         y0 = 0.17 + gi * 0.07
-        tl = [((y0 + k * 0.011, 0.70), (y0 + k * 0.011, 0.78)) for k in range(4)]
-        tl.append(((y0 - 0.006, 0.715), (y0 + 0.044, 0.765)))
+        tl = [((y0 + k * 0.011, 0.74), (y0 + k * 0.011, 0.82)) for k in range(4)]
+        tl.append(((y0 - 0.006, 0.755), (y0 + 0.044, 0.805)))
         spray(maps, Rt, Y, Z, tl, 0.006, white, wear, 0.20, halo=0.003)
     # трафарет на капоте (в грунте): читается спереди, строка вдоль +X, «вверх» к стеклу (+Y)
     hood_txt = text_segs("ECHO RUNNER", (-0.453, -1.72), (1, 0), (0, 1), 0.085)
@@ -496,7 +506,7 @@ def paint_body(seed=1607):
     gloss = gloss * (1 - 0.7 * bub)
     hgt = hgt + 0.0007 * bub * (vnoise(H, W, 300, 300, rng) - 0.3)
     # рыжие потёки: от пояса стёкол, низа дверей и случайных точек ржавчины
-    belt = lambda: 0.80 + rng.normal(0, 0.012)
+    belt = lambda: 0.86 + rng.normal(0, 0.012)
     rust_dr = drips(110, ("L", "R"), (-2.0, 2.0), belt, (0.04, 0.28)) \
         + drips(90, ("L", "R"), (-2.0, 2.0), lambda: rng.uniform(0.40, 0.75), (0.03, 0.18)) \
         + drips(40, ("L", "R"), (-0.55, 0.45), lambda: 0.31, (0.02, 0.09)) \
@@ -505,7 +515,7 @@ def paint_body(seed=1607):
     col = mix(col, rgb((0.44, 0.20, 0.07)), rust_dr * 0.85)
     gloss = gloss * (1 - 0.4 * rust_dr)
     # тёмные дождевые полосы
-    grime = drips(260, ("L", "R"), (-2.0, 2.0), lambda: rng.uniform(0.70, 0.92), (0.10, 0.45), width_px=5)
+    grime = drips(260, ("L", "R"), (-2.0, 2.0), lambda: rng.uniform(0.75, 0.97), (0.10, 0.45), width_px=5)
     col = col * (1.0 - 0.28 * np.clip(grime, 0, 1) * (~low))[..., None]
     # дыры от пуль на красной двери (водительская, островок R): чёрная дыра, светлая кромка, ржавый ореол
     for _ in range(16):
@@ -672,6 +682,15 @@ def tile(kind, seed, n=512, m_per_tile=0.6):
         col = mix(col, rgb((0.30, 0.15, 0.07)), (smooth(0.78, 0.84, f2) * 0.8)[..., None])
         gloss, spec, metal = 0.2 + 0.2 * chip, 0.15 + 0.2 * chip, 0.6 * chip
         hgt = 0.002 * rib - 0.0003 * chip
+    elif kind == "redpaint":
+        # красная краска по металлу: сколы до тёмной стали, ржавчина в сколах, грязь
+        col = mix(rgb((0.48, 0.06, 0.04)), rgb((0.62, 0.16, 0.10)), (smooth(0.4, 0.8, f1) * 0.6)[..., None])
+        chip = smooth(0.62, 0.68, f2)
+        col = mix(col, rgb((0.16, 0.15, 0.15)), chip[..., None])
+        col = mix(col, rgb((0.35, 0.16, 0.07)), (smooth(0.72, 0.80, f2) * 0.8)[..., None])
+        col = mix(col, rgb((0.18, 0.15, 0.12)), (smooth(0.65, 0.85, f3) * 0.35)[..., None])
+        gloss, spec, metal = 0.30 - 0.15 * chip, 0.20 + 0 * f1, 0.6 * chip
+        hgt = -0.0003 * chip
     elif kind == "neon":
         # трубка красного неона: яркая середина, тёмные края (без света; свечение даёт _e.rvmat)
         v = (np.arange(n) + 0.5) / n
@@ -708,7 +727,7 @@ def tile(kind, seed, n=512, m_per_tile=0.6):
 
 
 TILES = ["metal_rust", "copper", "rubber", "plastic", "chrome", "inner", "engine", "seat", "floor", "rim", "net",
-         "lamp", "tail", "amber", "neon", "strap", "screen", "crate"]
+         "lamp", "tail", "amber", "neon", "strap", "screen", "crate", "redpaint"]
 
 
 def all_textures():

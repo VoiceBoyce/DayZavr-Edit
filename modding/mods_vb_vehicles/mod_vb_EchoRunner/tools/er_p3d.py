@@ -43,7 +43,7 @@ TEXMAP = {"body": "body", "steel_in": "inner", "pipe": "metal_rust", "steel": "m
           "hose": "rubber", "tire": "rubber", "clamp": "chrome", "chrome": "chrome", "black": "plastic",
           "dash": "plastic", "rim": "rim", "engine": "engine", "seat": "seat", "floor": "floor", "net": "net",
           "lamp": "lamp", "tail": "tail", "amber": "amber", "neon": "neon",
-          "strap": "strap", "screen": "screen", "crate": "crate"}
+          "strap": "strap", "screen": "screen", "crate": "crate", "redpaint": "redpaint"}
 GLASS = ("dz\\vehicles\\wheeled\\civiliansedan\\data\\sedan_glass_ca.paa",
          "dz\\vehicles\\wheeled\\sedan_02\\data\\glass_i.rvmat")
 
@@ -292,13 +292,13 @@ def visual_lod(res, src, with_proxies=True):
 
 
 # --- компоненты коллизии (оси Blender до подъёма)
-FRONT = [(sx * 0.78, -2.12, z) for sx in (-1, 1) for z in (0.30, 0.58)] + \
-        [(sx * 0.88, -0.70, z) for sx in (-1, 1) for z in (0.20, 0.78)]
+FRONT = [(sx * 0.78, -2.12, z) for sx in (-1, 1) for z in (0.30, 0.70)] + \
+        [(sx * 0.88, -0.70, z) for sx in (-1, 1) for z in (0.20, 0.85)]
 MID = box_pts((0, 0.04, 0.47), (0.90, 0.74, 0.36))
-REAR = [(sx * 0.88, 0.78, z) for sx in (-1, 1) for z in (0.20, 0.88)] + \
-       [(sx * 0.78, 2.12, z) for sx in (-1, 1) for z in (0.30, 0.88)]
-CABIN = [(sx * 0.86, -0.62, 0.80) for sx in (-1, 1)] + [(sx * 0.86, 1.68, 0.86) for sx in (-1, 1)] + \
-        [(sx * 0.62, -0.08, 1.13 + M.ROOF_UP) for sx in (-1, 1)] + [(sx * 0.62, 0.80, 1.13 + M.ROOF_UP) for sx in (-1, 1)]
+REAR = [(sx * 0.88, 0.78, z) for sx in (-1, 1) for z in (0.20, 0.92)] + \
+       [(sx * 0.78, 2.12, z) for sx in (-1, 1) for z in (0.30, 0.92)]
+CABIN = [(sx * 0.86, -0.62, 0.88) for sx in (-1, 1)] + [(sx * 0.86, 1.68, 0.94) for sx in (-1, 1)] + \
+        [(sx * 0.68, -0.20, 1.13 + M.ROOF_UP) for sx in (-1, 1)] + [(sx * 0.68, 0.80, 1.13 + M.ROOF_UP) for sx in (-1, 1)]
 
 
 def L(pts):
@@ -327,11 +327,11 @@ VIEW_CABIN = [
     box_pts((0, 0.04, 0.155), (0.88, 0.74, 0.035)),                                         # пол
     box_pts((0.85, -0.05, 0.25), (0.05, 0.55, 0.06)),                                       # порог левый
     box_pts((-0.85, -0.05, 0.25), (0.05, 0.55, 0.06)),                                      # порог правый
-    [(s * 0.84, -0.66, 0.78) for s in SX] + [(s * 0.84, -0.62, 0.74) for s in SX] +
-    [(s * 0.62, -0.08, 1.13 + M.ROOF_UP) for s in SX] + [(s * 0.62, -0.04, 1.09 + M.ROOF_UP) for s in SX],  # лобовое
+    [(s * 0.84, -0.66, 0.86) for s in SX] + [(s * 0.84, -0.62, 0.82) for s in SX] +
+    [(s * 0.68, -0.20, 1.13 + M.ROOF_UP) for s in SX] + [(s * 0.68, -0.16, 1.09 + M.ROOF_UP) for s in SX],  # лобовое
     box_pts((0, 0.36, 1.11 + M.ROOF_UP), (M.DOOR["x_hinge"], 0.44, 0.03)),                  # гребень крыши
-    [(s * 0.62, 0.80, 1.13 + M.ROOF_UP) for s in SX] + [(s * 0.86, 0.78, 0.84) for s in SX] +
-    [(s * 0.86, 1.68, 0.84) for s in SX] + [(s * 0.86, 1.68, 0.88) for s in SX],            # заднее стекло
+    [(s * 0.62, 0.80, 1.13 + M.ROOF_UP) for s in SX] + [(s * 0.86, 0.78, 0.90) for s in SX] +
+    [(s * 0.86, 1.68, 0.92) for s in SX] + [(s * 0.86, 1.68, 0.96) for s in SX],            # заднее стекло
 ]
 
 
@@ -359,7 +359,7 @@ def collision_lod(res, kind):
             b.hull(L(box_pts((h.x + sgn * 0.06, h.y - 0.15, h.z + 0.05), (0.32, 0.28, 0.20))),
                    "Component%02d" % n, ["seat_" + k])
         n += 1
-        b.hull(L(box_pts((-0.80, -1.72, 0.74), (0.07, 0.07, 0.06))), "Component%02d" % n, ["refill"])
+        b.hull(L(box_pts((-0.97, -1.80, 0.66), (0.06, 0.07, 0.07))), "Component%02d" % n, ["refill"])
     add_proxies(b)
     return b.finish()
 
@@ -403,7 +403,7 @@ def memory_lod():
              "dmgZone_fender_1_2": (0.85, M.Y_RA, 0.6), "dmgZone_fender_2_2": (-0.85, M.Y_RA, 0.6)}
     for k, v in zones.items():
         b.mem(k, lifted(v))
-    b.mem("refill", lifted((-0.80, -1.72, 0.77)))
+    b.mem("refill", lifted((-1.00, -1.80, 0.66)))
     for k, v in M.MOUNTS.items():                              # места под будущие обвесы
         b.mem("mount_" + k, lifted(v))
     return b.finish()
@@ -472,7 +472,7 @@ def part_model(obj, center, act, mass, inv_dir, ratio2=0.4, hull_pts=None):
 for k, (obj, fname, act, bone, mass, inv) in PARTS.items():
     save(part_model(obj, CENTERS[k], act, mass, inv), os.path.join(ADDON, "proxy", fname + ".p3d"))
 CYL = [Vector((x, M.R * math.cos(2 * math.pi * k / 16), M.R * math.sin(2 * math.pi * k / 16)))
-       for k in range(16) for x in (-0.13, 0.13)]       # коллизия колеса — простой 16-гранный цилиндр
+       for k in range(16) for x in (-0.14, 0.14)]       # коллизия колеса — простой 16-гранный цилиндр
 save(part_model(WHEEL_OBJ, WHEEL_C, "wheel", 20.0, Vector((1, 0, 0.2)), 0.35, CYL),
      os.path.join(ADDON, "proxy", "er_wheel.p3d"))
 
