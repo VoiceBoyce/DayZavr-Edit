@@ -1,9 +1,9 @@
-// Echo Runner: copper. Шаблон Super — vanilla DZ\vehicles\parts\data\aircraft_battery.rvmat.
+// Echo Runner: copper. Super template from vanilla aircraft_battery.rvmat (ASCII only)
 ambient[] = {1.0,1.0,1.0,1.0};
 diffuse[] = {1.0,1.0,1.0,1.0};
 forcedDiffuse[] = {0.0,0.0,0.0,0.0};
 emmisive[] = {0.0,0.0,0.0,1.0};
-specular[] = {0.70,0.55,0.45,1.0};
+specular[] = {0.45,0.36,0.30,1.0};
 specularPower = 90;
 PixelShaderID = "Super";
 VertexShaderID = "Super";
@@ -69,7 +69,7 @@ class Stage5
 };
 class Stage6
 {
-	texture = "#(ai,64,64,1)fresnel(0.60,0.45)";
+	texture = "#(ai,64,64,1)fresnel(0.45,0.60)";
 	uvSource = "tex";
 	class uvTransform
 	{
@@ -81,7 +81,7 @@ class Stage6
 };
 class Stage7
 {
-	texture = "dz\data\data\env_land_co.paa";
+	texture = "#(argb,8,8,3)color(0,0,0,1,CO)";
 	uvSource = "tex";
 	class uvTransform
 	{

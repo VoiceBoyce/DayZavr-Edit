@@ -1,4 +1,4 @@
-// Echo Runner: inner. Шаблон Super — vanilla DZ\vehicles\parts\data\aircraft_battery.rvmat.
+// Echo Runner: inner. Super template from vanilla aircraft_battery.rvmat (ASCII only)
 ambient[] = {1.0,1.0,1.0,1.0};
 diffuse[] = {1.0,1.0,1.0,1.0};
 forcedDiffuse[] = {0.0,0.0,0.0,0.0};

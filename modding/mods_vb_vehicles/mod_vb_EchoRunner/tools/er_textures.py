@@ -253,16 +253,23 @@ def paint_body(seed=1607):
     side = Lf | Rt
     ends = Fr | Bk
 
-    # --- нержавейка, шлифованная вдоль машины
+    # --- нержавейка, шлифованная вдоль машины. В игре светлая основа (0.63) читалась белым пластиком
+    # (стенд 2026-11-17): основа темнее, штрихи шлифовки и пятна побежалости контрастнее.
     fine = vnoise(H, W, 900, 5, rng)
+    hair = vnoise(H, W, 1700, 3, rng)
     med = vnoise(H, W, 220, 22, rng)
     mott = fbm(H, W, 6, 6, rng, 4)
-    lum = 0.63 + 0.05 * (fine - 0.5) + 0.03 * (med - 0.5) + 0.07 * (mott - 0.5)
+    lum = 0.49 + 0.07 * (fine - 0.5) + 0.05 * (hair - 0.5) + 0.04 * (med - 0.5) + 0.10 * (mott - 0.5)
     col = lum[..., None] * rgb((1.0, 1.012, 1.035))
-    spec = 0.55 + 0.12 * (med - 0.5)
-    gloss = 0.60 + 0.14 * (fine - 0.5) - 0.12 * (mott - 0.5)
+    tea = smooth(0.52, 0.80, fbm(H, W, 4, 5, rng, 4))                  # «чайные» пятна окисла
+    col = mix(col, col * rgb((1.06, 0.97, 0.86)), tea * 0.55)
+    spec = 0.50 + 0.14 * (med - 0.5)
+    gloss = 0.56 + 0.20 * (fine - 0.5) - 0.18 * (mott - 0.5)
+    smudge = smooth(0.60, 0.80, fbm(H, W, 22, 22, rng, 3))            # залапанные места
+    gloss = gloss * (1.0 - 0.35 * smudge)
     metal = np.ones((H, W), np.float32)
-    hgt = 0.00004 * (fine - 0.5)
+    dents = fbm(H, W, 12, 12, rng, 3)                                    # волна листа, вмятины
+    hgt = 0.00006 * (fine - 0.5) + 0.006 * (dents - 0.5)
 
     # --- низ (порог, днище, арки): тёмный, шершавый
     low = (side & (Z < 0.30)) | Dk
@@ -287,16 +294,22 @@ def paint_body(seed=1607):
     # --- капот в грунте (с другой машины)
     hood = T & (np.abs(X) < 0.72) & (Y > -2.05) & (Y < -0.66)
     pn = fbm(H, W, 48, 48, rng, 4)
-    primer = (0.43 + 0.07 * (pn - 0.5))[..., None] * rgb((1.0, 1.01, 1.02))
-    over = smooth(0.55, 0.75, fbm(H, W, 10, 14, rng, 3))           # пятна другой краски
-    primer = mix(primer, rgb((0.30, 0.33, 0.31)), over * 0.6)
-    edge_rust = smooth(-1.88, -2.04, Y) * smooth(0.5, 0.75, fbm(H, W, 64, 64, rng, 3))
-    primer = mix(primer, rgb((0.36, 0.17, 0.08)), edge_rust)
+    primer = (0.34 + 0.06 * (pn - 0.5))[..., None] * rgb((0.97, 1.0, 0.95))     # серо-оливковый грунт
+    sun = smooth(0.45, 0.75, fbm(H, W, 5, 5, rng, 3))
+    primer = mix(primer, rgb((0.44, 0.44, 0.42)), sun * 0.35)                 # выгорел на солнце
+    sand = vnoise(H, W, 30, 600, rng)                                           # следы шкурки поперёк
+    primer = primer * (0.94 + 0.08 * sand)[..., None]
+    hsd = rect_sd(X, Y, (0.0, -1.355), (0.72, 0.695))
+    wear_n = fbm(H, W, 70, 70, rng, 4)
+    bare = smooth(-0.07, -0.01, hsd) * smooth(0.40, 0.55, wear_n)              # протёрто до металла у кромок
+    primer = mix(primer, rgb((0.50, 0.50, 0.52)), bare)
+    edge_rust = smooth(-0.05, -0.005, hsd) * smooth(0.55, 0.70, wear_n)
+    primer = mix(primer, mix(rgb((0.42, 0.20, 0.08)), rgb((0.18, 0.08, 0.04)), wear_n), edge_rust)
     col = np.where(hood[..., None], primer, col)
-    gloss = np.where(hood, 0.14 + 0.05 * pn, gloss)
-    spec = np.where(hood, 0.12, spec)
-    metal = np.where(hood, 0.0, metal)
-    hgt = hgt + np.where(hood, 0.0002 * (pn - 0.5), 0)
+    gloss = np.where(hood, 0.12 + 0.05 * pn + 0.25 * bare - 0.08 * edge_rust, gloss)
+    spec = np.where(hood, 0.10 + 0.25 * bare, spec)
+    metal = np.where(hood, 0.6 * bare, metal)
+    hgt = hgt + np.where(hood, 0.0003 * (pn - 0.5) - 0.0003 * bare + 0.0005 * edge_rust * (wear_n - 0.5), 0)
 
     # --- правая дверь: красная, выцветшая, со сколами (донор)
     red = (Rt & (Y > -0.55) & (Y < 0.45) & (Z > 0.30)) | (T & (X > 0.16) & (Y > -0.55) & (Y < 0.45))
@@ -404,7 +417,7 @@ def paint_body(seed=1607):
     col = np.where(rib[..., None], col * (0.80 + 0.20 * rph)[..., None], col)
 
     # --- «зебра» на носу под фарами
-    zeb = Fr & (np.abs(X) < 0.62) & (Z > 0.335) & (Z < 0.445)
+    zeb = Fr & (np.abs(X) < 0.66) & (Z > 0.315) & (Z < 0.455)
     stripe = np.mod(X - Z * 1.0 + 1.0, 0.09) < 0.045
     wear_z = smooth(0.30, 0.42, fbm(H, W, 90, 90, rng, 3))
     zc = np.where(stripe[..., None], rgb((0.80, 0.62, 0.06)), rgb((0.05, 0.05, 0.05)))
@@ -436,11 +449,93 @@ def paint_body(seed=1607):
           halo=0.004, drips=4, rng=rng, down=(0, -1))
     col, hgt, gloss, spec, metal = maps
 
+    # === слои износа по концепту пользователя (2026-11-17): ржавчина россыпью, потёки, дыры от пуль, грязь ===
+    metal_area = (I >= 0) & (~low) & (~lv)
+
+    def drips(n, islands, y_rng, z_pick, len_rng, width_px=4):
+        """Вертикальные потёки на бортах/торцах: линии в пикселях атласа (на бортах вниз = вниз по строкам)."""
+        segs = []
+        for _ in range(n):
+            g = islands[rng.integers(len(islands))]
+            u0, v0, w_, h_ = M.ATLAS_ISL[g]
+            x = rng.uniform(-0.8, 0.8)
+            y = rng.uniform(*y_rng)
+            z = z_pick()
+            ln = rng.uniform(*len_rng)
+            a, b_ = M.atlas_local(g, x, y, z)
+            r0, c0 = (v0 + b_) * S, (u0 + a) * S
+            r1, c1 = r0 + ln * S, c0 + rng.normal(0, 0.003) * S
+            for k in range(4):
+                t0, t1 = k / 4, (k + 1) / 4
+                segs.append((r0 + (r1 - r0) * t0, c0 + (c1 - c0) * t0, r0 + (r1 - r0) * t1, c0 + (c1 - c0) * t1,
+                             1.0 - 0.22 * k))
+        m = draw_lines((H, W), segs)
+        out = m.copy()
+        for d in range(1, width_px):
+            out = np.maximum(out, np.roll(m, d, 1) * (1 - d / width_px))
+            out = np.maximum(out, np.roll(m, -d, 1) * (1 - d / width_px))
+        return out * (I >= 0)
+
+    # ржавчина россыпью: точки с тёмной серединой и рыжим ореолом, раковинки в рельефе
+    # очаги: крупные зоны + книзу гуще; пятна неровной формы (fbm), а не квадраты value-noise
+    cluster = smooth(0.48, 0.72, fbm(H, W, 7, 7, rng, 4))
+    lowness = smooth(0.85, 0.35, Z) * (side | ends)
+    wgt = np.clip(cluster * 0.85 + lowness * 0.45, 0, 1) * metal_area
+    fr_n = fbm(H, W, 64, 64, rng, 4)
+    fr_core = smooth(0.66, 0.72, fr_n) * wgt
+    fr_halo = smooth(0.56, 0.70, fr_n) * wgt
+    col = mix(col, rgb((0.50, 0.25, 0.10)), fr_halo * 0.75)
+    col = mix(col, rgb((0.16, 0.07, 0.035)), fr_core * 0.9)
+    gloss = gloss * (1 - 0.7 * fr_halo)
+    metal = metal * (1 - 0.6 * fr_halo)
+    hgt = hgt - 0.0005 * fr_core + 0.0002 * fr_halo
+    # ржавчина по низу бортов (пузыри под краской/на металле)
+    band = side & (Z > 0.28) & (Z < 0.46)
+    bub = smooth(0.55, 0.70, fbm(H, W, 60, 60, rng, 4)) * smooth(0.46, 0.33, Z) * band
+    col = mix(col, mix(rgb((0.45, 0.21, 0.08)), rgb((0.20, 0.09, 0.04)), fbm(H, W, 120, 120, rng, 3)), bub * 0.9)
+    gloss = gloss * (1 - 0.7 * bub)
+    hgt = hgt + 0.0007 * bub * (vnoise(H, W, 300, 300, rng) - 0.3)
+    # рыжие потёки: от пояса стёкол, низа дверей и случайных точек ржавчины
+    belt = lambda: 0.80 + rng.normal(0, 0.012)
+    rust_dr = drips(110, ("L", "R"), (-2.0, 2.0), belt, (0.04, 0.28)) \
+        + drips(90, ("L", "R"), (-2.0, 2.0), lambda: rng.uniform(0.40, 0.75), (0.03, 0.18)) \
+        + drips(40, ("L", "R"), (-0.55, 0.45), lambda: 0.31, (0.02, 0.09)) \
+        + drips(40, ("F", "B"), (-2.13, -2.13), lambda: rng.uniform(0.45, 0.70), (0.03, 0.15))
+    rust_dr = np.clip(rust_dr, 0, 1) * (~low)
+    col = mix(col, rgb((0.44, 0.20, 0.07)), rust_dr * 0.85)
+    gloss = gloss * (1 - 0.4 * rust_dr)
+    # тёмные дождевые полосы
+    grime = drips(260, ("L", "R"), (-2.0, 2.0), lambda: rng.uniform(0.70, 0.92), (0.10, 0.45), width_px=5)
+    col = col * (1.0 - 0.28 * np.clip(grime, 0, 1) * (~low))[..., None]
+    # дыры от пуль на красной двери (водительская, островок R): чёрная дыра, светлая кромка, ржавый ореол
+    for _ in range(16):
+        yc, zc = rng.uniform(-0.45, 0.38), rng.uniform(0.40, 0.86)
+        d = np.sqrt((Y - yc) ** 2 + (Z - zc) ** 2)
+        hole = Rt & red & (d < 0.032)
+        if not hole.any():
+            continue
+        dd = np.where(hole, d, 1.0)
+        core = dd < 0.0055
+        rim = (dd >= 0.0055) & (dd < 0.010)
+        halo = smooth(0.032, 0.010, dd) * hole
+        col = mix(col, rgb((0.40, 0.18, 0.07)), halo * 0.7)
+        col = np.where(rim[..., None], rgb((0.60, 0.60, 0.62)), col)
+        col = np.where(core[..., None], rgb((0.015, 0.012, 0.01)), col)
+        hgt = hgt - np.where(core, 0.003, 0) + np.where(rim, 0.0008, 0)
+        gloss = np.where(core, 0.02, gloss)
+    # комья грязи за колёсами (колесо кидает назад)
+    for ya in (M.Y_FA, M.Y_RA):
+        de = np.sqrt(((Y - (ya + 0.36)) / 0.40) ** 2 + ((Z - 0.26) / 0.30) ** 2)
+        mud = side * smooth(1.0, 0.35, de) * smooth(0.50, 0.70, vnoise(H, W, 260, 260, rng))
+        col = mix(col, rgb((0.17, 0.14, 0.11)), mud * 0.85)
+        gloss = gloss * (1 - 0.8 * mud)
+        hgt = hgt + 0.0008 * mud
+
     # --- грязь снизу, брызги, иней Сахала, дождевые потёки, пыль сверху
-    dirt_t = (np.clip((0.62 - Z) / 0.42, 0, 1) ** 1.4) * (side | ends)
+    dirt_t = (np.clip((0.78 - Z) / 0.55, 0, 1) ** 1.5) * (side | ends)
     dn = fbm(H, W, 30, 60, rng, 4)
-    col = mix(col, rgb((0.27, 0.24, 0.20)), (dirt_t * (0.35 + 0.45 * dn))[..., None] * 0.8)
-    gloss = gloss * (1 - 0.6 * dirt_t)
+    col = mix(col, rgb((0.22, 0.19, 0.15)), (dirt_t * (0.40 + 0.50 * dn))[..., None] * 0.85)
+    gloss = gloss * (1 - 0.7 * dirt_t)
     zone = (side | ends).astype(np.float32)
     splat = zone * smooth(0.48, 0.30, Z) * smooth(0.80, 0.90, vnoise(H, W, 220, 220, rng))
     col = mix(col, rgb((0.20, 0.17, 0.14)), splat * 0.6)
@@ -469,7 +564,7 @@ def paint_body(seed=1607):
 
     empty = I < 0
     col = np.where(empty[..., None], rgb((0.55, 0.56, 0.57)), col)
-    return pack(col, hgt, spec, gloss, metal, S, nstrength=1.0)
+    return pack(col, hgt, spec, gloss, metal, S, nstrength=1.8)
 
 
 # ------------------------------------------------------------------ плитки 512
@@ -512,17 +607,79 @@ def tile(kind, seed, n=512, m_per_tile=0.6):
         col = mix(col, rgb((0.05, 0.045, 0.04)), (smooth(0.55, 0.75, f2) * 0.7)[..., None])
         gloss, spec, metal = 0.35 + 0.2 * smooth(0.55, 0.75, f2), 0.35 + 0 * f1, 0.7 + 0 * f1
     elif kind == "seat":
-        col = mix(rgb((0.20, 0.12, 0.08)), rgb((0.33, 0.24, 0.17)), smooth(0.5, 0.8, f1)[..., None])
+        # стёганая кожа ромбом: подушечки, швы со строчкой, протёртые до светлого верхушки, трещины
+        u = (np.arange(n) + 0.5) / n
+        uu, vv = np.meshgrid(u, u)
+        k = 6
+        d1 = np.abs(np.mod((uu + vv) * k, 1.0) - 0.5)
+        d2 = np.abs(np.mod((uu - vv) * k, 1.0) - 0.5)
+        seam = np.maximum(smooth(0.44, 0.49, d1), smooth(0.44, 0.49, d2))
+        puff = (1 - seam) * np.minimum(0.5 - d1, 0.5 - d2) * 2
+        stitch = (np.maximum(smooth(0.405, 0.42, d1) * smooth(0.435, 0.42, d1),
+                             smooth(0.405, 0.42, d2) * smooth(0.435, 0.42, d2))
+                  * (np.sin((uu + vv) * 2 * math.pi * 90) > 0.2))
+        col = mix(rgb((0.10, 0.065, 0.045)), rgb((0.27, 0.18, 0.12)), (smooth(0.5, 0.85, f1) * puff)[..., None])
         crack = smooth(0.48, 0.5, np.abs(vnoise(n, n, 40, 40, rng) - 0.5) * -1 + 0.5)
-        col = mix(col, rgb((0.10, 0.06, 0.04)), (crack * 0.6)[..., None])
-        gloss, spec, metal = 0.28 - 0.15 * f1, 0.15 + 0 * f1, 0 * f1
-        hgt = 0.0004 * (f2 - 0.5) - 0.0003 * crack
+        col = mix(col, rgb((0.05, 0.035, 0.025)), (crack * 0.6 + seam * 0.5)[..., None])
+        col = mix(col, rgb((0.45, 0.40, 0.32)), (stitch * 0.6)[..., None])
+        gloss, spec, metal = 0.30 - 0.15 * f1 - 0.1 * seam, 0.18 + 0 * f1, 0 * f1
+        hgt = 0.004 * puff - 0.0003 * crack
     elif kind == "floor":
-        rib = (np.sin(np.arange(n) / n * 2 * math.pi * 24) > 0.3).astype(np.float32)[None, :].repeat(n, 0)
-        col = (0.06 + 0.02 * rib + 0.04 * f1)[..., None] * rgb((1, 0.98, 0.95))
-        col = mix(col, rgb((0.25, 0.22, 0.18)), (smooth(0.6, 0.8, f2) * 0.6)[..., None])
-        gloss, spec, metal = 0.12 + 0 * f1, 0.08 + 0 * f1, 0 * f1
-        hgt = 0.002 * rib
+        # рифлёный лист «чечевица»: ячейки с наклоном ±45° через одну, грязь в низинах, вытерто на выступах
+        u = (np.arange(n) + 0.5) / n
+        uu, vv = np.meshgrid(u, u)
+        k = 16
+        cu, cv = np.mod(uu * k, 1.0) - 0.5, np.mod(vv * k, 1.0) - 0.5
+        odd = (np.floor(uu * k) + np.floor(vv * k)) % 2
+        a = np.where(odd > 0, 1.0, -1.0) * 0.7071
+        pu, pv = cu + a * cv, -a * cu + cv
+        lens = np.clip(1 - (pu / 0.36) ** 2 - (pv / 0.09) ** 2, 0, 1)
+        col = (0.16 + 0.06 * f1)[..., None] * rgb((1, 0.99, 0.97))
+        col = mix(col, rgb((0.30, 0.30, 0.31)), (smooth(0.2, 0.6, lens) * 0.7)[..., None])
+        col = mix(col, rgb((0.20, 0.13, 0.08)), (smooth(0.55, 0.8, f2) * (1 - lens) * 0.8)[..., None])
+        gloss, spec, metal = 0.18 + 0.3 * lens, 0.2 + 0.3 * lens, 0.5 + 0.4 * lens
+        hgt = 0.0015 * smooth(0.0, 0.6, lens)
+    elif kind == "strap":
+        # красная тканая стропа: поперечное плетение, потёртости, грязь
+        v = (np.arange(n) + 0.5) / n
+        weave = (0.5 + 0.5 * np.sin(v * 2 * math.pi * 120))[None, :].repeat(n, 0)
+        col = mix(rgb((0.42, 0.05, 0.035)), rgb((0.55, 0.12, 0.08)), (weave * 0.5 + 0.3 * f1)[..., None])
+        col = mix(col, rgb((0.20, 0.14, 0.10)), (smooth(0.6, 0.85, f2) * 0.6)[..., None])
+        gloss, spec, metal = 0.15 + 0 * f1, 0.08 + 0 * f1, 0 * f1
+        hgt = 0.0003 * weave
+    elif kind == "screen":
+        # зелёный экран-карта: сетка, изолинии, дороги, метка по центру
+        u = (np.arange(n) + 0.5) / n
+        uu, vv = np.meshgrid(u, u)
+        grid = np.maximum(smooth(0.46, 0.5, np.abs(np.mod(uu * 8, 1.0) - 0.5)),
+                          smooth(0.46, 0.5, np.abs(np.mod(vv * 8, 1.0) - 0.5)))
+        iso = smooth(0.40, 0.48, np.abs(np.mod(f1 * 9, 1.0) - 0.5) * -1 + 0.5)
+        road = smooth(0.012, 0.004, np.abs(vv - 0.5 - 0.15 * np.sin(uu * 7)))
+        dot = smooth(0.03, 0.02, np.sqrt((uu - 0.5) ** 2 + (vv - 0.5) ** 2))
+        col = rgb((0.02, 0.10, 0.05)) + 0 * f1[..., None]
+        col = mix(col, rgb((0.10, 0.45, 0.20)), (grid * 0.5 + iso * 0.6)[..., None])
+        col = mix(col, rgb((0.55, 0.95, 0.55)), (road * 0.9)[..., None])
+        col = mix(col, rgb((0.95, 0.20, 0.10)), dot[..., None])
+        gloss, spec, metal = 0.9 + 0 * f1, 0.8 + 0 * f1, 0 * f1
+        hgt = 0 * f1
+    elif kind == "crate":
+        # военный короб: оливковая краска, сколы до металла, рёбра жёсткости
+        u = (np.arange(n) + 0.5) / n
+        rib = (np.abs(np.mod(u * 5, 1.0) - 0.5) < 0.04)[None, :].repeat(n, 0).astype(np.float32)
+        col = mix(rgb((0.20, 0.22, 0.13)), rgb((0.27, 0.28, 0.17)), (f1 * 0.8)[..., None])
+        chip = smooth(0.70, 0.75, f2)
+        col = mix(col, rgb((0.35, 0.33, 0.30)), chip[..., None])
+        col = mix(col, rgb((0.30, 0.15, 0.07)), (smooth(0.78, 0.84, f2) * 0.8)[..., None])
+        gloss, spec, metal = 0.2 + 0.2 * chip, 0.15 + 0.2 * chip, 0.6 * chip
+        hgt = 0.002 * rib - 0.0003 * chip
+    elif kind == "neon":
+        # трубка красного неона: яркая середина, тёмные края (без света; свечение даёт _e.rvmat)
+        v = (np.arange(n) + 0.5) / n
+        core = (1 - np.abs(np.mod(v * 4, 1.0) - 0.5) * 2)[:, None].repeat(n, 1)
+        col = mix(rgb((0.30, 0.02, 0.02)), rgb((0.95, 0.10, 0.06)), smooth(0.2, 0.9, core)[..., None])
+        col = mix(col, rgb((0.25, 0.22, 0.20)), (smooth(0.7, 0.85, f2) * 0.25)[..., None])
+        gloss, spec, metal = 0.85 + 0 * f1, 0.8 + 0 * f1, 0 * f1
+        hgt = 0.0002 * core
     elif kind == "rim":
         col = (0.20 + 0.05 * (f1 - 0.5))[..., None] * rgb((1, 1.02, 1.05))
         col = mix(col, rgb((0.38, 0.18, 0.08)), (smooth(0.68, 0.8, f2) * 0.8)[..., None])
@@ -551,7 +708,7 @@ def tile(kind, seed, n=512, m_per_tile=0.6):
 
 
 TILES = ["metal_rust", "copper", "rubber", "plastic", "chrome", "inner", "engine", "seat", "floor", "rim", "net",
-         "lamp", "tail", "amber"]
+         "lamp", "tail", "amber", "neon", "strap", "screen", "crate"]
 
 
 def all_textures():

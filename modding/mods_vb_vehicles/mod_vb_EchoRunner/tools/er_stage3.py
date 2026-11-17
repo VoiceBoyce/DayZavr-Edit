@@ -37,12 +37,15 @@ os.makedirs(OUT, exist_ok=True)
 TEXMAP = {"body": "body", "steel_in": "inner", "pipe": "metal_rust", "steel": "metal_rust", "copper": "copper",
           "hose": "rubber", "tire": "rubber", "clamp": "chrome", "chrome": "chrome", "black": "plastic",
           "dash": "plastic", "rim": "rim", "engine": "engine", "seat": "seat", "floor": "floor", "net": "net",
-          "lamp": "lamp", "tail": "tail", "amber": "amber"}
+          "lamp": "lamp", "tail": "tail", "amber": "amber", "neon": "neon",
+          "strap": "strap", "screen": "screen", "crate": "crate"}
 # rvmat: блик, сила блика, френель, отражение
 RV = {
-    "body":       ((0.80, 0.80, 0.82), 120, (0.6, 0.45), "dz\\data\\data\\env_land_co.paa"),
+    # Кузов: как металл ванили на Super (hatchback_02 engine_plate: 0.2–0.3 / 100–200 / fresnel 0.4,0.7, без
+    # отражения неба). С 0.8 и env_land в игре нержавейка отражала небо и выглядела белой (стенд 2026-11-17).
+    "body":       ((0.42, 0.42, 0.44), 160, (0.45, 0.70), None),
     "metal_rust": ((0.30, 0.28, 0.26), 40, (0.4, 0.4), None),
-    "copper":     ((0.70, 0.55, 0.45), 90, (0.6, 0.45), "dz\\data\\data\\env_land_co.paa"),
+    "copper":     ((0.45, 0.36, 0.30), 90, (0.45, 0.6), None),
     "rubber":     ((0.10, 0.10, 0.10), 20, (0.3, 0.3), None),
     "plastic":    ((0.25, 0.25, 0.25), 40, (0.4, 0.4), None),
     "chrome":     ((0.90, 0.90, 0.92), 500, (0.71, 0.18), "dz\\data\\data\\env_land_chrome_co.paa"),
@@ -55,6 +58,10 @@ RV = {
     "lamp":       ((0.90, 0.90, 0.90), 300, (0.7, 0.2), "dz\\data\\data\\env_land_co.paa"),
     "tail":       ((0.80, 0.80, 0.80), 300, (0.7, 0.2), "dz\\data\\data\\env_land_co.paa"),
     "amber":      ((0.80, 0.80, 0.80), 300, (0.7, 0.2), "dz\\data\\data\\env_land_co.paa"),
+    "neon":       ((0.60, 0.60, 0.60), 200, (0.7, 0.3), None),
+    "strap":      ((0.08, 0.06, 0.06), 15, (0.3, 0.3), None),
+    "screen":     ((0.50, 0.50, 0.50), 300, (0.7, 0.2), None),
+    "crate":      ((0.15, 0.15, 0.13), 30, (0.4, 0.4), None),
 }
 
 
@@ -68,7 +75,7 @@ def stage(n, tex, ident=True):
 def rvmat_text(name, alpha=False):
     spec, spow, fr, env = RV[name]
     p = PBO_DATA + "er_" + name
-    head = ("// Echo Runner: %s. Шаблон Super — vanilla DZ\\vehicles\\parts\\data\\aircraft_battery.rvmat.\n"
+    head = ("// Echo Runner: %s. Super template from vanilla aircraft_battery.rvmat (ASCII only)\n"
             "ambient[] = {1.0,1.0,1.0,1.0};\ndiffuse[] = {1.0,1.0,1.0,1.0};\nforcedDiffuse[] = {0.0,0.0,0.0,0.0};\n"
             "emmisive[] = {0.0,0.0,0.0,1.0};\nspecular[] = {%.2f,%.2f,%.2f,1.0};\nspecularPower = %d;\n"
             "PixelShaderID = \"Super\";\nVertexShaderID = \"Super\";\n") % (name, spec[0], spec[1], spec[2], spow)
@@ -107,7 +114,16 @@ def export_all():
     for name in TEX:
         with open(os.path.join(DATA, "er_%s.rvmat" % name), "w", encoding="utf-8") as f:
             f.write(rvmat_text(name, alpha=TEX[name]["alpha"] is not None))
-    print("RVMAT", len(TEX))
+    # включённые фары/стопы/приборы (config: *MatOn); яркость как у vanilla Sedan_02 (*_e.rvmat)
+    for base, em in (("lamp", "{1,1,0.95,60}"), ("tail", "{1,0.08,0.05,40}"), ("neon", "{1,0.06,0.04,30}"), ("chrome", "{3.0,1.5,0.4,6}")):
+        txt = rvmat_text(base).replace("emmisive[] = {0.0,0.0,0.0,1.0};", "emmisive[] = %s;" % em)
+        with open(os.path.join(DATA, "er_%s_e.rvmat" % base), "w", encoding="utf-8") as f:
+            f.write(txt)
+    # экран в салоне светится всегда (зелёная карта)
+    txt = rvmat_text("screen").replace("emmisive[] = {0.0,0.0,0.0,1.0};", "emmisive[] = {0.2,1.0,0.4,5};")
+    with open(os.path.join(DATA, "er_screen.rvmat"), "w", encoding="utf-8") as f:
+        f.write(txt)
+    print("RVMAT", len(TEX) + 4)
 
 
 # ------------------------------------------------------------------ материалы предпросмотра
@@ -266,7 +282,7 @@ def bake_ao():
 
 def apply_ao(ao):
     t = TEX["body"]
-    k = 0.30 + 0.70 * ao ** 1.25
+    k = 0.20 + 0.80 * ao ** 1.4                       # AO контрастнее (концепт: глубокие тени в швах)
     t["co"] = t["co"] * k[..., None]
     t["smdi"][..., 1] *= 0.45 + 0.55 * ao
     t["smdi"][..., 2] *= 0.55 + 0.45 * ao
