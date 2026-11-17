@@ -3,6 +3,9 @@ class VBT
 {
 	static string T(string key)
 	{
+		// Обычный текст (подписи с сервера, Labels) не переводится — только ключи «#STR_…».
+		if (key == "" || key.Get(0) != "#")
+			return key;
 		return Widget.TranslateString(key);
 	}
 

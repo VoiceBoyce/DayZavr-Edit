@@ -23,7 +23,7 @@
     "Targets": [
         {
             "Kind": "DELIVER",
-            "Target": "BRDK_Iron",
+            "Target": "VB_MR_Iron",
             "Count": 5.0,
             "Filter": "",
             "WorstState": "BADLY_DAMAGED",

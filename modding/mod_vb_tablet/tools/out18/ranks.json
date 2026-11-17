@@ -1,0 +1,47 @@
+{
+    "XpZombie": 1,
+    "XpMutant": 3,
+    "XpAnimal": 1,
+    "XpKm": 0,
+    "XpContract": 10,
+    "XpBoss": 5,
+    "XpRiftHeart": 2,
+    "RankNeed": [
+        0,
+        500,
+        1500,
+        4000,
+        10000,
+        25000,
+        60000,
+        120000,
+        250000,
+        500000
+    ],
+    "Labels": {
+        "SrcBoss": "Хранитель",
+        "SrcHeart": "Подношение",
+        "SrcBossIco": "sym_tree",
+        "SrcHeartIco": "sym_leaf",
+        "CardBoss": "ХРАНИТЕЛЕЙ",
+        "CardHeart": "ПОДНОШЕНИЙ",
+        "AchName": [
+            "Победитель Хранителя",
+            "Друг леса",
+            "Янтарщик",
+            "Защитник корней"
+        ],
+        "AchText": [
+            "Одолеть Хранителя рощи",
+            "Сделать подношения роще",
+            "Найти янтарь",
+            "Убить пауков-мутантов"
+        ],
+        "AchIco": [
+            "sym_tree",
+            "sym_leaf",
+            "sym_drop",
+            "sym_target"
+        ]
+    }
+}

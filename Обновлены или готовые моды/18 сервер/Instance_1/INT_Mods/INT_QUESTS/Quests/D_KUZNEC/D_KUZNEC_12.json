@@ -23,7 +23,7 @@
     "Targets": [
         {
             "Kind": "DELIVER",
-            "Target": "BRDK_Coal",
+            "Target": "VB_MR_Coal",
             "Count": 3.0,
             "Filter": "",
             "WorstState": "BADLY_DAMAGED",
@@ -38,7 +38,7 @@
         },
         {
             "Kind": "DELIVER",
-            "Target": "BRDK_Sulfur",
+            "Target": "VB_MR_Sulfur",
             "Count": 1.0,
             "Filter": "",
             "WorstState": "BADLY_DAMAGED",

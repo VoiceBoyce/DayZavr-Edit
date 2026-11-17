@@ -665,7 +665,7 @@
         },
         {
             "spawnChance": 1.0,
-            "className": "BRDK_MeltingBowl",
+            "className": "VB_MR_MeltingBowl",
             "quantity": 1000,
             "amount": 1,
             "attachments": []

@@ -23,7 +23,7 @@
     "Targets": [
         {
             "Kind": "DELIVER",
-            "Target": "BRDK_BigIron",
+            "Target": "VB_MR_Iron_Bar",
             "Count": 2.0,
             "Filter": "",
             "WorstState": "BADLY_DAMAGED",

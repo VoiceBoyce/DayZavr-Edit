@@ -345,9 +345,11 @@ class VB_TabletPageRating extends VB_TabletTabbedPage
 		INT_UIF_Draw.Text(b, 318, 222, 254, 32, lead, 20, VB_C_TEXT);
 		if (showFeats)
 		{
-			VBT.Cap(b, 28, 272, 150, "#STR_VB_TAB_BOSSES");
+			string capBoss = VB_TabletLabels.Card(true);
+			string capHeart = VB_TabletLabels.Card(false);
+			VBT.Cap(b, 28, 272, 150, capBoss);
 			INT_UIF_Draw.Text(b, 28, 292, 150, 32, VBT.Num(c.AbBosses), 20, VB_C_TEXT);
-			VBT.Cap(b, 188, 272, 200, "#STR_VB_TAB_HEARTS");
+			VBT.Cap(b, 188, 272, 200, capHeart);
 			INT_UIF_Draw.Text(b, 188, 292, 200, 32, VBT.Num(c.RiftHearts), 20, VB_C_TEXT);
 		}
 
@@ -516,9 +518,9 @@ class VB_TabletPageRating extends VB_TabletTabbedPage
 		}
 		array<string> caps = {"#STR_VB_TAB_ZOMBIES", "#STR_VB_TAB_MUTANTS", "#STR_VB_TAB_ANIMALS", "#STR_VB_TAB_DIST", "#STR_VB_TAB_RECORD", "#STR_VB_TAB_A_ACH_C"};
 		if (showBoss)
-			caps.Insert("#STR_VB_TAB_BOSSES");
+			caps.Insert(VB_TabletLabels.Card(true));
 		if (showHeart)
-			caps.Insert("#STR_VB_TAB_HEARTS");
+			caps.Insert(VB_TabletLabels.Card(false));
 		array<string> vals = new array<string>();
 		if (me)
 		{

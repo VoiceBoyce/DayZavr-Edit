@@ -128,6 +128,146 @@ const int VB_ACH_COUNT = 20;
 const int VB_ACH_STEPS = 3;
 const int VB_CLAN_LEVELS = 5;
 
+// Подписи четырёх особых счётчиков (боссы, сердца, материалы, зомби Изнанки) с сервера: ranks.json → Labels.
+// На 16 блока нет — клиент пишет свои строки; на 18 те же счётчики считают «Древний корень» (ТЗ_планшет_18.md).
+// Пустое поле — строка клиента. Ach* — достижения 16–19 по порядку.
+class VB_TabletLabels
+{
+	string SrcBoss;		// плитка «Откуда опыт» за босса
+	string SrcHeart;	// плитка за сердце
+	string SrcBossIco;
+	string SrcHeartIco;
+	string CardBoss;	// показатель в карточках игрока и клана
+	string CardHeart;
+	ref array<string> AchName = new array<string>();
+	ref array<string> AchText = new array<string>();
+	ref array<string> AchIco = new array<string>();
+
+	// Подписи, полученные клиентом в HELLO (на сервере — из конфига).
+	[NonSerialized()]
+	static ref VB_TabletLabels s_Cur;
+
+	protected static string Pick(array<string> a, int i)
+	{
+		if (a && i >= 0 && i < a.Count())
+			return a.Get(i);
+		return "";
+	}
+
+	protected static string Pref(string own, string def)
+	{
+		if (own != "")
+			return own;
+		return def;
+	}
+
+	void Write(ScriptRPC rpc)
+	{
+		rpc.Write(SrcBoss);
+		rpc.Write(SrcHeart);
+		rpc.Write(SrcBossIco);
+		rpc.Write(SrcHeartIco);
+		rpc.Write(CardBoss);
+		rpc.Write(CardHeart);
+		for (int i = 0; i < 4; i++)
+		{
+			string n = Pick(AchName, i);
+			string t = Pick(AchText, i);
+			string c = Pick(AchIco, i);
+			rpc.Write(n);
+			rpc.Write(t);
+			rpc.Write(c);
+		}
+	}
+
+	bool Read(ParamsReadContext ctx)
+	{
+		if (!ctx.Read(SrcBoss) || !ctx.Read(SrcHeart) || !ctx.Read(SrcBossIco) || !ctx.Read(SrcHeartIco))
+			return false;
+		if (!ctx.Read(CardBoss) || !ctx.Read(CardHeart))
+			return false;
+		AchName = new array<string>();
+		AchText = new array<string>();
+		AchIco = new array<string>();
+		for (int i = 0; i < 4; i++)
+		{
+			string n;
+			string t;
+			string c;
+			if (!ctx.Read(n) || !ctx.Read(t) || !ctx.Read(c))
+				return false;
+			AchName.Insert(n);
+			AchText.Insert(t);
+			AchIco.Insert(c);
+		}
+		return true;
+	}
+
+	// Возвращают текст сервера или ключ строки клиента (VBT.T переводит только ключи с «#»).
+	static string Src(bool boss)
+	{
+		if (boss)
+		{
+			if (s_Cur)
+				return Pref(s_Cur.SrcBoss, "#STR_VB_TAB_SRC_B");
+			return "#STR_VB_TAB_SRC_B";
+		}
+		if (s_Cur)
+			return Pref(s_Cur.SrcHeart, "#STR_VB_TAB_SRC_H");
+		return "#STR_VB_TAB_SRC_H";
+	}
+
+	static string SrcIco(bool boss)
+	{
+		if (boss)
+		{
+			if (s_Cur)
+				return Pref(s_Cur.SrcBossIco, "anomaly");
+			return "anomaly";
+		}
+		if (s_Cur)
+			return Pref(s_Cur.SrcHeartIco, "sym_heart");
+		return "sym_heart";
+	}
+
+	static string Card(bool boss)
+	{
+		if (boss)
+		{
+			if (s_Cur)
+				return Pref(s_Cur.CardBoss, "#STR_VB_TAB_BOSSES");
+			return "#STR_VB_TAB_BOSSES";
+		}
+		if (s_Cur)
+			return Pref(s_Cur.CardHeart, "#STR_VB_TAB_HEARTS");
+		return "#STR_VB_TAB_HEARTS";
+	}
+
+	static string AchTitle(int ach)
+	{
+		string def = "#STR_VB_TAB_ACHN_" + ach.ToString();
+		if (!s_Cur || ach < 16)
+			return def;
+		return Pref(Pick(s_Cur.AchName, ach - 16), def);
+	}
+
+	static string AchHint(int ach)
+	{
+		string def = "#STR_VB_TAB_ACHT_" + ach.ToString();
+		if (!s_Cur || ach < 16)
+			return def;
+		return Pref(Pick(s_Cur.AchText, ach - 16), def);
+	}
+
+	// Значок достижения 16–19 с сервера; пусто — значок по умолчанию.
+	static string AchIcon(int ach)
+	{
+		if (!s_Cur || ach < 16)
+			return "";
+		return Pick(s_Cur.AchIco, ach - 16);
+	}
+}
+
 // Опыт за действия и пороги рангов. Значения из конфига сервера, клиент получает их в HELLO.
 class VB_TabletRates
 {
@@ -140,6 +280,8 @@ class VB_TabletRates
 	int XpBoss;
 	int XpRiftHeart;
 	ref array<int> RankNeed = {0, 500, 1500, 4000, 10000, 25000, 60000, 120000, 250000, 500000};
+	// Подписи этих счётчиков для сервера, где они считают другое (18: «Древний корень»). Нет блока — строки клиента.
+	ref VB_TabletLabels Labels = new VB_TabletLabels();
 
 	// Пороги влияния для уровней клана: Levels[n-1] открывает уровень n. Сервер берёт их из конфига.
 	[NonSerialized()]
@@ -186,6 +328,10 @@ class VB_TabletRates
 		foreach (int lv : levels)
 			rpc.Write(lv);
 		VB_TabletAch.Write(rpc);
+		VB_TabletLabels lab = Labels;
+		if (!lab)
+			lab = new VB_TabletLabels();
+		lab.Write(rpc);
 	}
 
 	bool Read(ParamsReadContext ctx)
@@ -213,7 +359,14 @@ class VB_TabletRates
 		}
 		RankNeed = needs;
 		SetLevels(levels);
-		return VB_TabletAch.Read(ctx);
+		if (!VB_TabletAch.Read(ctx))
+			return false;
+		VB_TabletLabels lab = new VB_TabletLabels();
+		if (!lab.Read(ctx))
+			return false;
+		Labels = lab;
+		VB_TabletLabels.s_Cur = lab;
+		return true;
 	}
 
 	int RankOf(int xp)
@@ -504,6 +657,10 @@ class VB_TabletAch
 
 	static string IconOf(int ach)
 	{
+		// 16–19: значок может прийти с сервера (Labels.AchIco), иначе свой.
+		string own = VB_TabletLabels.AchIcon(ach);
+		if (own != "")
+			return own;
 		array<string> all = {"zombie", "crosshair", "stash", "sym_skull", "route", "heart", "clock", "car", "sym_tree", "fish", "sym_cog", "sym_hammer", "contract", "vault", "sym_key", "rank", "anomaly", "sym_heart", "sym_gem", "sym_eye"};
 		return all.Get(ach);
 	}

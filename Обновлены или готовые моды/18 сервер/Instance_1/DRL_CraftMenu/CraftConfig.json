@@ -610,9 +610,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_BigTitanium",
+                "Classname": "VB_MR_Titanium_Bar",
                 "Classnames": [
-                    "BRDK_BigTitanium"
+                    "VB_MR_Titanium_Bar"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -623,7 +623,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -718,9 +718,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Coal",
+                "Classname": "VB_MR_Coal",
                 "Classnames": [
-                    "BRDK_Coal"
+                    "VB_MR_Coal"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -731,7 +731,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -829,9 +829,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_BigTitanium",
+                "Classname": "VB_MR_Titanium_Bar",
                 "Classnames": [
-                    "BRDK_BigTitanium"
+                    "VB_MR_Titanium_Bar"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -842,7 +842,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -937,9 +937,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Coal",
+                "Classname": "VB_MR_Coal",
                 "Classnames": [
-                    "BRDK_Coal"
+                    "VB_MR_Coal"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -950,7 +950,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -1066,9 +1066,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_BigTitanium",
+                "Classname": "VB_MR_Titanium_Bar",
                 "Classnames": [
-                    "BRDK_BigTitanium"
+                    "VB_MR_Titanium_Bar"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -1079,7 +1079,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -1842,9 +1842,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Titanium",
+                "Classname": "VB_MR_Titanium",
                 "Classnames": [
-                    "BRDK_Titanium"
+                    "VB_MR_Titanium"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -1855,7 +1855,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -2425,9 +2425,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Bronze",
+                "Classname": "VB_MR_Bronze",
                 "Classnames": [
-                    "BRDK_Bronze"
+                    "VB_MR_Bronze"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -2438,7 +2438,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -2697,9 +2697,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Iron",
+                "Classname": "VB_MR_Iron",
                 "Classnames": [
-                    "BRDK_Iron"
+                    "VB_MR_Iron"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -2710,7 +2710,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -2951,9 +2951,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Iron",
+                "Classname": "VB_MR_Iron",
                 "Classnames": [
-                    "BRDK_Iron"
+                    "VB_MR_Iron"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -2964,7 +2964,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -3115,9 +3115,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Titanium",
+                "Classname": "VB_MR_Titanium",
                 "Classnames": [
-                    "BRDK_Titanium"
+                    "VB_MR_Titanium"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -3128,7 +3128,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -3279,9 +3279,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Titanium",
+                "Classname": "VB_MR_Titanium",
                 "Classnames": [
-                    "BRDK_Titanium"
+                    "VB_MR_Titanium"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -3292,7 +3292,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -3425,9 +3425,9 @@
         "ResultDamageFrac": 0.0,
         "CraftComponents": [
             {
-                "Classname": "BRDK_BigTitanium",
+                "Classname": "VB_MR_Titanium_Bar",
                 "Classnames": [
-                    "BRDK_BigTitanium"
+                    "VB_MR_Titanium_Bar"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -3438,7 +3438,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -6332,9 +6332,9 @@
         "ResultDamageFrac": 0.0,
         "CraftComponents": [
             {
-                "Classname": "BRDK_Coal",
+                "Classname": "VB_MR_Coal",
                 "Classnames": [
-                    "BRDK_Coal"
+                    "VB_MR_Coal"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -6345,7 +6345,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -6368,9 +6368,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Gold_Sand",
+                "Classname": "VB_MR_Gold_Sand",
                 "Classnames": [
-                    "BRDK_Gold_Sand"
+                    "VB_MR_Gold_Sand"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -6381,7 +6381,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -6404,9 +6404,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Iron",
+                "Classname": "VB_MR_Iron",
                 "Classnames": [
-                    "BRDK_Iron"
+                    "VB_MR_Iron"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -6417,7 +6417,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -6824,9 +6824,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Sulfur",
+                "Classname": "VB_MR_Sulfur",
                 "Classnames": [
-                    "BRDK_Sulfur"
+                    "VB_MR_Sulfur"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -6837,14 +6837,14 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Coal",
+                "Classname": "VB_MR_Coal",
                 "Classnames": [
-                    "BRDK_Coal"
+                    "VB_MR_Coal"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -6855,7 +6855,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -7152,9 +7152,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Nephrite",
+                "Classname": "VB_MR_Nephrite",
                 "Classnames": [
-                    "BRDK_Nephrite"
+                    "VB_MR_Nephrite"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -7165,7 +7165,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -7316,9 +7316,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Nephrite_Sand",
+                "Classname": "VB_MR_Nephrite_Sand",
                 "Classnames": [
-                    "BRDK_Nephrite_Sand"
+                    "VB_MR_Nephrite_Sand"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -7329,7 +7329,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -7462,9 +7462,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Titanium",
+                "Classname": "VB_MR_Titanium",
                 "Classnames": [
-                    "BRDK_Titanium"
+                    "VB_MR_Titanium"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -7475,7 +7475,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -7900,9 +7900,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Bronze",
+                "Classname": "VB_MR_Bronze",
                 "Classnames": [
-                    "BRDK_Bronze"
+                    "VB_MR_Bronze"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -7913,14 +7913,14 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Titanium",
+                "Classname": "VB_MR_Titanium",
                 "Classnames": [
-                    "BRDK_Titanium"
+                    "VB_MR_Titanium"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -7931,7 +7931,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -8082,9 +8082,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Coal",
+                "Classname": "VB_MR_Coal",
                 "Classnames": [
-                    "BRDK_Coal"
+                    "VB_MR_Coal"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -8095,14 +8095,14 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Sulfur",
+                "Classname": "VB_MR_Sulfur",
                 "Classnames": [
-                    "BRDK_Sulfur"
+                    "VB_MR_Sulfur"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -8113,7 +8113,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -8628,9 +8628,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Silver_Sand",
+                "Classname": "VB_MR_Silver_Sand",
                 "Classnames": [
-                    "BRDK_Silver_Sand"
+                    "VB_MR_Silver_Sand"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -8641,14 +8641,14 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Gold_Sand",
+                "Classname": "VB_MR_Gold_Sand",
                 "Classnames": [
-                    "BRDK_Gold_Sand"
+                    "VB_MR_Gold_Sand"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -8659,7 +8659,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -8810,9 +8810,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Nephrite",
+                "Classname": "VB_MR_Nephrite",
                 "Classnames": [
-                    "BRDK_Nephrite"
+                    "VB_MR_Nephrite"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -8823,7 +8823,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -9010,9 +9010,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Sulfur",
+                "Classname": "VB_MR_Sulfur",
                 "Classnames": [
-                    "BRDK_Sulfur"
+                    "VB_MR_Sulfur"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -9023,14 +9023,14 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Bronze",
+                "Classname": "VB_MR_Bronze",
                 "Classnames": [
-                    "BRDK_Bronze"
+                    "VB_MR_Bronze"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -9041,7 +9041,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -9538,9 +9538,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Bronze",
+                "Classname": "VB_MR_Bronze",
                 "Classnames": [
-                    "BRDK_Bronze"
+                    "VB_MR_Bronze"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -9551,7 +9551,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -9720,9 +9720,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Silver",
+                "Classname": "VB_MR_Silver",
                 "Classnames": [
-                    "BRDK_Silver"
+                    "VB_MR_Silver"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -9733,7 +9733,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -10084,9 +10084,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Sulfur",
+                "Classname": "VB_MR_Sulfur",
                 "Classnames": [
-                    "BRDK_Sulfur"
+                    "VB_MR_Sulfur"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -10097,14 +10097,14 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Coal",
+                "Classname": "VB_MR_Coal",
                 "Classnames": [
-                    "BRDK_Coal"
+                    "VB_MR_Coal"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -10115,7 +10115,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -10922,9 +10922,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Titanium_Sand",
+                "Classname": "VB_MR_Titanium_Sand",
                 "Classnames": [
-                    "BRDK_Titanium_Sand"
+                    "VB_MR_Titanium_Sand"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -10935,7 +10935,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -11268,9 +11268,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Iron",
+                "Classname": "VB_MR_Iron",
                 "Classnames": [
-                    "BRDK_Iron"
+                    "VB_MR_Iron"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -11281,7 +11281,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -11632,9 +11632,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Rubin",
+                "Classname": "VB_MR_Rubin",
                 "Classnames": [
-                    "BRDK_Rubin"
+                    "VB_MR_Rubin"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -11645,14 +11645,14 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Sulfur",
+                "Classname": "VB_MR_Sulfur",
                 "Classnames": [
-                    "BRDK_Sulfur"
+                    "VB_MR_Sulfur"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -11663,7 +11663,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -12032,9 +12032,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Silver_Sand",
+                "Classname": "VB_MR_Silver_Sand",
                 "Classnames": [
-                    "BRDK_Silver_Sand"
+                    "VB_MR_Silver_Sand"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -12045,7 +12045,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -12196,9 +12196,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Gold_Sand",
+                "Classname": "VB_MR_Gold_Sand",
                 "Classnames": [
-                    "BRDK_Gold_Sand"
+                    "VB_MR_Gold_Sand"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -12209,7 +12209,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -12378,9 +12378,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Nephrite",
+                "Classname": "VB_MR_Nephrite",
                 "Classnames": [
-                    "BRDK_Nephrite"
+                    "VB_MR_Nephrite"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -12391,7 +12391,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -12760,9 +12760,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Sulfur",
+                "Classname": "VB_MR_Sulfur",
                 "Classnames": [
-                    "BRDK_Sulfur"
+                    "VB_MR_Sulfur"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -12773,7 +12773,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -12942,9 +12942,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Rubin",
+                "Classname": "VB_MR_Rubin",
                 "Classnames": [
-                    "BRDK_Rubin"
+                    "VB_MR_Rubin"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -12955,7 +12955,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -13142,9 +13142,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Coal",
+                "Classname": "VB_MR_Coal",
                 "Classnames": [
-                    "BRDK_Coal"
+                    "VB_MR_Coal"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -13155,14 +13155,14 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Sulfur",
+                "Classname": "VB_MR_Sulfur",
                 "Classnames": [
-                    "BRDK_Sulfur"
+                    "VB_MR_Sulfur"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -13173,7 +13173,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -13324,9 +13324,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Coal",
+                "Classname": "VB_MR_Coal",
                 "Classnames": [
-                    "BRDK_Coal"
+                    "VB_MR_Coal"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -13337,7 +13337,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -13506,9 +13506,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Nephrite",
+                "Classname": "VB_MR_Nephrite",
                 "Classnames": [
-                    "BRDK_Nephrite"
+                    "VB_MR_Nephrite"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -13519,7 +13519,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -13852,9 +13852,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Silver_Sand",
+                "Classname": "VB_MR_Silver_Sand",
                 "Classnames": [
-                    "BRDK_Silver_Sand"
+                    "VB_MR_Silver_Sand"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -13865,7 +13865,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -14034,9 +14034,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Rubin",
+                "Classname": "VB_MR_Rubin",
                 "Classnames": [
-                    "BRDK_Rubin"
+                    "VB_MR_Rubin"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -14047,7 +14047,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -14398,9 +14398,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Iron",
+                "Classname": "VB_MR_Iron",
                 "Classnames": [
-                    "BRDK_Iron"
+                    "VB_MR_Iron"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -14411,7 +14411,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -14580,9 +14580,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Gold",
+                "Classname": "VB_MR_Gold",
                 "Classnames": [
-                    "BRDK_Gold"
+                    "VB_MR_Gold"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -14593,7 +14593,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -14780,9 +14780,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Silver",
+                "Classname": "VB_MR_Silver",
                 "Classnames": [
-                    "BRDK_Silver"
+                    "VB_MR_Silver"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -14793,7 +14793,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -14998,9 +14998,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Iron",
+                "Classname": "VB_MR_Iron",
                 "Classnames": [
-                    "BRDK_Iron"
+                    "VB_MR_Iron"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -15011,7 +15011,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -15198,9 +15198,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Rubin",
+                "Classname": "VB_MR_Rubin",
                 "Classnames": [
-                    "BRDK_Rubin"
+                    "VB_MR_Rubin"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -15211,7 +15211,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -15398,9 +15398,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Coal",
+                "Classname": "VB_MR_Coal",
                 "Classnames": [
-                    "BRDK_Coal"
+                    "VB_MR_Coal"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -15411,7 +15411,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -15598,9 +15598,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Iron",
+                "Classname": "VB_MR_Iron",
                 "Classnames": [
-                    "BRDK_Iron"
+                    "VB_MR_Iron"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -15611,14 +15611,14 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Titanium",
+                "Classname": "VB_MR_Titanium",
                 "Classnames": [
-                    "BRDK_Titanium"
+                    "VB_MR_Titanium"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -15629,7 +15629,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -16270,9 +16270,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Gold_Sand",
+                "Classname": "VB_MR_Gold_Sand",
                 "Classnames": [
-                    "BRDK_Gold_Sand"
+                    "VB_MR_Gold_Sand"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -16283,7 +16283,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
@@ -16470,9 +16470,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Iron",
+                "Classname": "VB_MR_Iron",
                 "Classnames": [
-                    "BRDK_Iron"
+                    "VB_MR_Iron"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -16483,14 +16483,14 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "BRDK_Bronze",
+                "Classname": "VB_MR_Bronze",
                 "Classnames": [
-                    "BRDK_Bronze"
+                    "VB_MR_Bronze"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -16501,7 +16501,7 @@
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
+                "UseInheritance": 1,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             },

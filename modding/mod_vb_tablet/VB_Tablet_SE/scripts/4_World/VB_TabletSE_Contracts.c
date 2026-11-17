@@ -678,7 +678,7 @@ class VB_TabletContracts
 			hrec.RiftHearts++;
 			hrec.Dirty = true;
 			VB_TabletServer.CountClanFeat(hrec.Uid, false);
-			Print(VB_TABLET_TAG + " сердце Изнанки засчитано: " + hrec.PlayerName);
+			Print(VB_TABLET_TAG + " " + name + " засчитано (RiftHeartActions): " + hrec.PlayerName);
 		}
 		array<ref VB_TabletActionGroup> groups = cfg.ActionGroups;
 		if (!groups || groups.Count() == 0)

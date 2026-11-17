@@ -164,14 +164,19 @@ class VB_TabletPageRank extends VB_TabletTabbedPage
 			Source(f, x, w, "route", VBT.T("#STR_VB_TAB_SRC_K"), "+" + r.XpKm.ToString() + xpl, km * r.XpKm);
 			x += w;
 		}
+		// Подписи и значки — с сервера, если он их задал (18: Хранитель и подношение), иначе свои.
 		if (showBoss)
 		{
-			Source(f, x, w, "anomaly", VBT.T("#STR_VB_TAB_SRC_B"), "+" + r.XpBoss.ToString() + xpl, me.AbBosses * r.XpBoss);
+			string bIco = VB_TabletLabels.SrcIco(true);
+			string bName = VBT.T(VB_TabletLabels.Src(true));
+			Source(f, x, w, bIco, bName, "+" + r.XpBoss.ToString() + xpl, me.AbBosses * r.XpBoss);
 			x += w;
 		}
 		if (showHeart)
 		{
-			Source(f, x, w, "sym_heart", VBT.T("#STR_VB_TAB_SRC_H"), "+" + r.XpRiftHeart.ToString() + xpl, me.RiftHearts * r.XpRiftHeart);
+			string hIco = VB_TabletLabels.SrcIco(false);
+			string hName = VBT.T(VB_TabletLabels.Src(false));
+			Source(f, x, w, hIco, hName, "+" + r.XpRiftHeart.ToString() + xpl, me.RiftHearts * r.XpRiftHeart);
 			x += w;
 		}
 		Source(f, x, w, "contract", VBT.T("#STR_VB_TAB_SRC_C"), "+" + r.XpContract.ToString() + xpl, me.Contracts * r.XpContract + me.ExtraXp);
@@ -266,7 +271,8 @@ class VB_TabletPageRank extends VB_TabletTabbedPage
 		{
 			int bd = me.AchDone(best, r);
 			VBT.Ico(h, 704, 46, 26, VB_TabletAch.IconOf(best), VB_C_ACCENT);
-			INT_UIF_Draw.Text(h, 742, 38, 220, 28, VBT.Fit(VBT.T("#STR_VB_TAB_ACHN_" + best.ToString()), 220, 19), 19, VB_C_TEXT);
+			string bestName = VBT.T(VB_TabletLabels.AchTitle(best));
+			INT_UIF_Draw.Text(h, 742, 38, 220, 28, VBT.Fit(bestName, 220, 19), 19, VB_C_TEXT);
 			INT_UIF_Draw.Text(h, 742, 66, 220, 24, VBT.Num(me.AchValue(best, r)) + "/" + VBT.Num(VB_TabletAch.Step(best, bd)), 15, VB_C_DIM);
 			VBT.Ticks(h, 966, 56, 182, 14, 20, bestK);
 		}
@@ -310,8 +316,8 @@ class VB_TabletPageRank extends VB_TabletTabbedPage
 		INT_UIF_Surface.Box(f, 20, 20, 48, 48, 10, VB_C_PANEL2, border);
 		VBT.Ico(f, 32, 32, 24, VB_TabletAch.IconOf(i), col);
 		// Длинные названия («Чистильщик Изнанки») уменьшаются по точной ширине, а не обрезаются.
-		string achName = VBT.T("#STR_VB_TAB_ACHN_" + i.ToString());
-		string achText = VBT.T("#STR_VB_TAB_ACHT_" + i.ToString());
+		string achName = VBT.T(VB_TabletLabels.AchTitle(i));
+		string achText = VBT.T(VB_TabletLabels.AchHint(i));
 		float ns = 18;
 		while (ns > 14 && VBT.TextW(f, achName, ns) > 177)
 			ns = ns - 1;

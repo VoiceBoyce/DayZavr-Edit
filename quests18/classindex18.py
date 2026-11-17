@@ -29,7 +29,8 @@ MISSION = os.path.join(SRV18, "mpmissions", "dayzOffline.enoch")
 OUR_MODS18 = ["modding/mod_EscapeFromDayZ", "modding/mod_vb_DRL_Core", "modding/mod_vb_DRL_CraftMenu",
               "modding/mod_MSFZ_Mifical_Pack", "modding/mod_AdvansWeapScope_v2", "modding/mod_Scopes_DJ_LaserSight",
               "modding/mod_AI Bandits", "modding/mod_vb_clothes_dayzavr", "modding/mod_vb_AncientRoot",
-              "modding/mod_OTTS_Artifacts", "modding/mod_vb_tablet"]
+              "modding/mod_OTTS_Artifacts", "modding/mod_vb_tablet",
+              "modding/mod_VB_MiningResources/VB_MiningResources"]
 # Старые ветки покупок 18 — источник лавки; в «уже работают» не берём, иначе проверка лавки сама себя подтверждает.
 SHOP_BRANCHES = {"COINS_TRADE_CLOTHES", "COINS_TRADE_WEAPONS", "COINS_TRADE_MATERIAL"}
 # Длительные действия чужих модов без исходников (BRDK GoldRush) — из ТЗ, засчитывание проверить на стенде

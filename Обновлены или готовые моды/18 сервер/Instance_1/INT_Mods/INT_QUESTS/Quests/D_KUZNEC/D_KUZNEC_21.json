@@ -23,7 +23,7 @@
     "Targets": [
         {
             "Kind": "DELIVER",
-            "Target": "BRDK_Gold",
+            "Target": "VB_MR_Gold",
             "Count": 1.0,
             "Filter": "",
             "WorstState": "BADLY_DAMAGED",
@@ -38,7 +38,7 @@
         },
         {
             "Kind": "DELIVER",
-            "Target": "BRDK_Titanium",
+            "Target": "VB_MR_Titanium",
             "Count": 1.0,
             "Filter": "",
             "WorstState": "BADLY_DAMAGED",
@@ -53,7 +53,7 @@
         },
         {
             "Kind": "DELIVER",
-            "Target": "BRDK_Rubin",
+            "Target": "VB_MR_Rubin",
             "Count": 1.0,
             "Filter": "",
             "WorstState": "BADLY_DAMAGED",
