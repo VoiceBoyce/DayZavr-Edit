@@ -1,0 +1,36 @@
+"Language","original","english","german","russian",
+
+"STR_Interceptor_name","Interceptor","Interceptor","Interceptor","Перехватчик",
+"STR_Interceptor_Blue_name","Interceptor Blue","Interceptor Blue","Interceptor Blau","Перехватчик Синий",
+"STR_Interceptor_Red_name","Interceptor Red","Interceptor Red","Interceptor Rot","Перехватчик Красный",
+"STR_Interceptor_Yellow_name","Interceptor Yellow","Interceptor Yellow","Interceptor Gelb","Перехватчик Желтый",
+"STR_Interceptor_Black_name","Interceptor Black","Interceptor Black","Interceptor Black","Перехватчик Чёрный",
+"STR_Interceptor_Sonic_name","Interceptor Sonic","Interceptor Sonic","Interceptor Sonic","Перехватчик Соник",
+
+"STR_Interceptor_Wheel_name","Interceptor Wheel","Interceptor Wheel","Interceptor Reifen","Колесо от Перехватчика",
+"STR_Interceptor_wheel_disc","A wheel of the Interceptor.","A wheel of the Interceptor .","Ein Reifen des Interceptor .","Колесо от Перехватчика .",
+
+"STR_Interceptor_hood_name","Interceptor Hood","Interceptor Hood","Interceptor Motorhaube","Капот от Перехватчика",
+"STR_Interceptor_Blue_hood_name","Interceptor Blue Hood","Interceptor Blue Hood","Interceptor Blaue Motorhaube","Капот от Перехватчика Синий",
+"STR_Interceptor_Red_hood_name","Interceptor Red Hood","Interceptor Red Hood","Interceptor Rote Motorhaube","Капот от Перехватчика Красный",
+"STR_Interceptor_Yellow_hood_name","Interceptor Yellow Hood","Interceptor Yellow Hood","Interceptor Gelbe Motorhaube","Капот от Перехватчика Желтый",
+"STR_Interceptor_Black_hood_name","Interceptor Black Hood","Interceptor Black Hood","Interceptor Black Motorhaube","Капот от Перехватчика Чёрный",
+"STR_Interceptor_Sonic_hood_name","Interceptor Sonic Hood","Interceptor Sonic Hood","Interceptor Sonic Motorhaube","Капот от Перехватчика Соник",
+"STR_Interceptor_hood_disc","Hood of the Interceptor. Helps protect the engine and other sensitive car parts.","Hood of the Interceptor. Helps protect the engine and other sensitive car parts.","Motorhaube des Interceptor. Schützt den Motor und andere empfindliche Autoteile.","Капот от Перехватчика. Помогает защитить двигатель и другие важные детали автомобиля.",
+
+"STR_Interceptor_driver_name","Interceptor Left Door","Interceptor Left Door","Interceptor Linke Tür","Левая дверь от Перехватчика",
+"STR_Interceptor_Blue_driver_name","Interceptor Blue Left Door","Interceptor Blue Left Door","Interceptor Blaue Linke Tür","Левая дверь от Перехватчика Синий",
+"STR_Interceptor_Red_driver_name","Interceptor Red Left Door","Interceptor Red Left Door","Interceptor Rote Linke Tür","Левая дверь от Перехватчика Красный",
+"STR_Interceptor_Yellow_driver_name","Interceptor Yellow Left Door","Interceptor Yellow Left Door","Interceptor Gelbe Linke Tür","Левая дверь от Перехватчика Желтый",
+"STR_Interceptor_Black_driver_name","Interceptor Black Left Door","Interceptor Black Left Door","Interceptor Black Linke Tür","Левая дверь от Перехватчика Чёрный",
+"STR_Interceptor_Sonic_driver_name","Interceptor Sonic Left Door","Interceptor Sonic Left Door","Interceptor Sonic Linke Tür","Левая дверь от Перехватчика Соник",
+"STR_Interceptor_doors_driver_disc","Front left door of the Interceptor. Keeps the driver safe inside the vehicle.","Front left door of the Interceptor. Keeps the driver safe inside the vehicle.","Vordere linke Tür des Interceptors. Schützt den Fahrer im Fahrzeug.","Передняя левая дверь от Перехватчика. Обеспечивает безопасность водителя внутри автомобиля.",
+
+"STR_Interceptor_codriver_name","Interceptor Right Door","Interceptor Right Door","Interceptor Rechte Tür","Правая дверь от Перехватчика",
+"STR_Interceptor_Blue_codriver_name","Interceptor Blue Right Door","Interceptor Blue Right Door","Interceptor Blaue Rechte Tür","Правая дверь от Перехватчика Синий",
+"STR_Interceptor_Red_codriver_name","Interceptor Red Right Door","Interceptor Red Right Door","Interceptor Rote Rechte Tür","Правая дверь от Перехватчика Красный",
+"STR_Interceptor_Yellow_codriver_name","Interceptor Yellow Right Door","Interceptor Yellow Right Door","Interceptor Gelbe Rechte Tür","Правая дверь от Перехватчика Желтый",
+"STR_Interceptor_Black_codriver_name","Interceptor Black Right Door","Interceptor Black Right Door","Interceptor Black Rechte Tür","Правая дверь от Перехватчика Чёрный",
+"STR_Interceptor_Sonic_codriver_name","Interceptor Sonic Right Door","Interceptor Sonic Right Door","Interceptor Sonic Rechte Tür","Правая дверь от Перехватчика Соник",
+"STR_Interceptor_doors_codriver_disc","Front right door of the Interceptor. Keeps the co-driver safe inside the vehicle.","Front right door of the Interceptor. Keeps the co-driver safe inside the vehicle.","Vordere rechte Tür des Interceptors. Schützt den Beifahrer im Fahrzeug.","Передняя правая дверь от Перехватчика. Обеспечивает безопасность сменного водителя внутри автомобиля.",
+
