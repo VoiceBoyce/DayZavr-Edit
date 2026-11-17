@@ -5,6 +5,8 @@ r"""Рендер машины из MLOD: кузов + детали-прокси 
       --proxydir=<папка с MLOD деталей> [--root=<корень текстур>[;<ещё>]]
       [--views=f34,r34,side,side2,front,rear,top] [--size=1400] [--samples=48] [--lod=1]
       [--extra=<доп.p3d>[;...]]  (детали в координатах машины, без прокси: черновики навесных)
+      [--night]  (ночь: тёмное небо, слабая луна — видно свечение)
+      [--skip=doors,hood] [--clipz=1.45] [--shots="имя:cx,cy,cz:tx,ty,tz:объектив;..."]
 Оси и прокси — см. er_common.py.
 """
 import math
@@ -26,7 +28,7 @@ if opts.get("root"):
     C.set_roots(str(opts["root"]).split(";"))
 SIZE = int(opts.get("size", 1400))
 SAMPLES = int(opts.get("samples", 48))
-VIEWS = str(opts.get("views", "f34,r34,side,side2,front,rear,top")).split(",")
+VIEWS = [v for v in str(opts.get("views", "f34,r34,side,side2,front,rear,top")).split(",") if v]
 
 bpy.ops.wm.read_factory_settings(use_empty=True)
 scene = bpy.context.scene
@@ -62,7 +64,20 @@ for vt in ("AgX", "Filmic"):
 
 extra = [e for e in str(opts.get("extra", "")).split(";") if e]
 objs, _ = C.load_car(MODEL, opts.get("proxydir", ""), float(opts.get("lod", 1)), True, extra)
+if opts.get("skip"):                              # --skip=doors,hood: не грузить детали с такими именами
+    for k in list(objs):
+        if any(w and w in k for w in str(opts["skip"]).split(",")):
+            bpy.data.objects.remove(objs.pop(k))
 objs = list(objs.values())
+if opts.get("clipz"):                             # --clipz=1.45: срезать всё выше (вид в салон сверху)
+    import bmesh
+    zc = float(opts["clipz"])
+    for o in objs:
+        bm = bmesh.new()
+        bm.from_mesh(o.data)
+        bmesh.ops.delete(bm, geom=[v for v in bm.verts if v.co.z > zc], context="VERTS")
+        bm.to_mesh(o.data)
+        bm.free()
 
 
 def used_verts(o):
@@ -83,9 +98,12 @@ world = bpy.data.worlds.new("w")
 world.use_nodes = True
 world.node_tree.nodes["Background"].inputs["Color"].default_value = (0.42, 0.44, 0.47, 1)
 world.node_tree.nodes["Background"].inputs["Strength"].default_value = float(opts.get("world", 0.9))
+if opts.get("night"):                            # ночь: видно свечение Изнанки
+    world.node_tree.nodes["Background"].inputs["Color"].default_value = (0.05, 0.06, 0.09, 1)
+    world.node_tree.nodes["Background"].inputs["Strength"].default_value = 0.35
 scene.world = world
 sun = bpy.data.objects.new("sun", bpy.data.lights.new("sun", "SUN"))
-sun.data.energy = float(opts.get("sun", 3.2))
+sun.data.energy = float(opts.get("sun", 0.12 if opts.get("night") else 3.2))
 sun.data.angle = math.radians(8)
 sun.rotation_euler = (math.radians(40), math.radians(-25), math.radians(-35))
 scene.collection.objects.link(sun)
@@ -140,5 +158,21 @@ for v in VIEWS:
     cam_d.clip_end = dist * 10
     cam.location = tuple(center + d * dist)
     scene.render.filepath = os.path.join(OUTDIR, v + ".png")
+    bpy.ops.render.render(write_still=True)
+    print("RENDERED", scene.render.filepath)
+
+# свои ракурсы: --shots="имя:cx,cy,cz:tx,ty,tz:объектив;..." (оси Blender: нос -Y, верх +Z, водитель +X)
+for shot in [x for x in str(opts.get("shots", "")).split(";") if x]:
+    nm, c, t, lens = shot.split(":")
+    cam_d.type = "PERSP"
+    cam_d.lens = float(lens)
+    cam_d.sensor_width = 36
+    cam_d.clip_start = 0.02
+    cam_d.clip_end = 100
+    tgt.location = tuple(float(v) for v in t.split(","))
+    cam.location = tuple(float(v) for v in c.split(","))
+    scene.render.resolution_x = SIZE
+    scene.render.resolution_y = int(SIZE * 0.62)
+    scene.render.filepath = os.path.join(OUTDIR, nm + ".png")
     bpy.ops.render.render(write_still=True)
     print("RENDERED", scene.render.filepath)

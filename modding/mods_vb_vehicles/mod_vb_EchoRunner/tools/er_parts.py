@@ -26,6 +26,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import er_common as C  # noqa: E402
 import er_mlod as M  # noqa: E402
+import er_interior  # noqa: E402
 
 py3d = C.py3d
 args = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
@@ -37,100 +38,7 @@ OUT = os.path.join(WD, "final")
 W = float(opts.get("W", 0.36))
 WR = None   # радиус колеса — из модели колеса
 
-COL = {
-    "flare": ("#(argb,8,8,3)color(0.045,0.045,0.045,1,co)", ""),
-    "steel": ("#(argb,8,8,3)color(0.11,0.11,0.11,1,co)", "metal"),
-    "net": ("#(argb,8,8,3)color(0.08,0.08,0.08,1,co)", "metal"),
-    "plate": ("#(argb,8,8,3)color(0.17,0.10,0.06,1,co)", "metal"),
-    "bolt": ("#(argb,8,8,3)color(0.52,0.49,0.45,1,co)", "metal"),
-    "lens": ("#(argb,8,8,3)color(0.86,0.83,0.72,1,co)", ""),
-    "house": ("#(argb,8,8,3)color(0.035,0.035,0.035,1,co)", ""),
-    "vent": ("#(argb,8,8,3)color(0.02,0.02,0.02,1,co)", ""),
-}
-MATS = list(COL)
-
-
-# ---------------------------------------------------------------- построение
-class Part:
-    def __init__(self, name, target, lods, sels):
-        self.name, self.target, self.lods, self.sels = name, target, lods, sels
-        self.bm = bmesh.new()
-
-    def face(self, vs, mat):
-        try:
-            f = self.bm.faces.new(vs)
-        except ValueError:
-            return None
-        f.material_index = MATS.index(mat)
-        return f
-
-
-def V(*a):
-    return Vector(a)
-
-
-def perp(d):
-    d = d.normalized()
-    a = Vector((0, 0, 1)) if abs(d.z) < 0.9 else Vector((1, 0, 0))
-    u = d.cross(a).normalized()
-    return u, d.cross(u).normalized()
-
-
-def bar(part, p0, p1, size, mat, up=None):
-    """Брусок квадратного сечения от p0 до p1."""
-    d = (p1 - p0)
-    if d.length < 1e-5:
-        return
-    if up is not None:
-        u = d.cross(up).normalized()
-        v = d.normalized().cross(u).normalized()
-    else:
-        u, v = perp(d)
-    h = size / 2
-    corners = [u * h + v * h, -u * h + v * h, -u * h - v * h, u * h - v * h]
-    bm = part.bm
-    a = [bm.verts.new(p0 + c) for c in corners]
-    b = [bm.verts.new(p1 + c) for c in corners]
-    for i in range(4):
-        j = (i + 1) % 4
-        part.face((a[i], a[j], b[j], b[i]), mat)
-    part.face(list(reversed(a)), mat)
-    part.face(b, mat)
-
-
-def box(part, c, ex, ey, ez, hx, hy, hz, mat):
-    bm = part.bm
-    vs = [bm.verts.new(c + ex * (sx * hx) + ey * (sy * hy) + ez * (sz * hz))
-          for sx in (-1, 1) for sy in (-1, 1) for sz in (-1, 1)]
-    for q in ((0, 1, 3, 2), (4, 6, 7, 5), (0, 4, 5, 1), (2, 3, 7, 6), (0, 2, 6, 4), (1, 5, 7, 3)):
-        part.face([vs[i] for i in q], mat)
-
-
-def cyl(part, c, axis, r, h, segs, mat):
-    u, v = perp(axis)
-    ax = axis.normalized()
-    bm = part.bm
-    a = [bm.verts.new(c + (u * math.cos(2 * math.pi * i / segs) + v * math.sin(2 * math.pi * i / segs)) * r)
-         for i in range(segs)]
-    b = [bm.verts.new(p.co + ax * h) for p in a]
-    for i in range(segs):
-        j = (i + 1) % segs
-        part.face((a[i], a[j], b[j], b[i]), mat)
-    part.face(list(reversed(a)), mat)
-    part.face(b, mat)
-
-
-def sweep(part, rings, mat, cap=True):
-    bm = part.bm
-    vr = [[bm.verts.new(p) for p in ring] for ring in rings]
-    n = len(rings[0])
-    for i in range(len(vr) - 1):
-        for k in range(n):
-            m = (k + 1) % n
-            part.face((vr[i][k], vr[i][m], vr[i + 1][m], vr[i + 1][k]), mat)
-    if cap:
-        part.face(vr[0], mat)
-        part.face(list(reversed(vr[-1])), mat)
+from er_geom import COL, MATS, Part, V, perp, bar, box, cyl, sweep, part_data, append  # noqa: E402
 
 
 # ---------------------------------------------------------------- лучи
@@ -149,6 +57,16 @@ def ray(name, o, d, dist=4.0):
     if n.dot(-d) < 0:
         n = -n
     return loc, n
+
+
+def hit(o, d, names, dist=1.2):
+    """Ближайшее попадание луча по объектам names (точка) или None."""
+    best = None
+    for nm in names:
+        loc, n = ray(nm, o, d, dist)
+        if loc is not None and (best is None or (loc - Vector(o)).length < (best - Vector(o)).length):
+            best = loc
+    return best
 
 
 def side_hit(names, y, z, s, xmin=0.55):
@@ -409,7 +327,7 @@ def surface_patch(names, s, y0, y1, z0, z1, nu, nv):
 
 def vents():
     for s in (1, -1):
-        g = surface_patch(["body"], s, -0.725, -0.555, 0.79, 0.93, 4, 4)
+        g = surface_patch(["body"], s, -0.80, -0.68, 0.80, 0.94, 4, 4)
         if not g:
             print("WARN нет поверхности под решётку", s)
             continue
@@ -481,63 +399,6 @@ def plates():
 
 
 # ---------------------------------------------------------------- MLOD
-def part_data(part, xf_inv=None):
-    bm = part.bm
-    bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-6)
-    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
-    bmesh.ops.triangulate(bm, faces=[f for f in bm.faces if len(f.verts) > 4])
-    bm.verts.index_update()
-    pts = []
-    for v in bm.verts:
-        d = np.array((v.co.x, v.co.z, v.co.y))
-        if xf_inv is not None:
-            a, M = xf_inv
-            d = M @ (d - a)
-        pts.append(tuple(float(c) for c in d))
-    faces = []
-    for f in bm.faces:
-        n = f.normal
-        nd = np.array((-n.x, -n.z, -n.y))
-        if xf_inv is not None:
-            nd = xf_inv[1] @ nd
-        uvs = []
-        for v in f.verts:
-            ax = max(range(3), key=lambda i: abs(f.normal[i]))
-            c = v.co
-            uv = {0: (c.y, c.z), 1: (c.x, c.z), 2: (c.x, c.y)}[ax]
-            uvs.append((uv[0] * 0.5 % 1.0, uv[1] * 0.5 % 1.0))
-        faces.append(([v.index for v in f.verts], uvs, tuple(float(c) for c in nd), COL[MATS[f.material_index]]))
-    return pts, faces
-
-
-def append(lod, data, sels):
-    pts, faces = data
-    base = len(lod.points)
-    for co in pts:
-        p = py3d.Point()
-        p.coords = co
-        lod.points.append(p)
-    newf = []
-    for idx, uvs, n, (tex, rv) in faces:
-        ni = len(lod.facenormals)
-        lod.facenormals.append(n)
-        fa = py3d.Face(lod.points, lod.facenormals)
-        fa.texture, fa.material = tex, rv
-        for k, vi in enumerate(idx):
-            vx = py3d.Vertex(lod.points, lod.facenormals)
-            vx.point_index = base + vi
-            vx.normal_index = ni
-            vx.uv = (uvs[k][0], 1.0 - uvs[k][1])
-            fa.vertices.append(vx)
-        lod.faces.append(fa)
-        newf.append(fa)
-    newp = lod.points[base:]
-    for s in sels:
-        sel = lod.new_selection(s)
-        sel.points.update({p: 1 for p in newp})
-        sel.faces.update({f: 1 for f in newf})
-
-
 def remove_spare(m):
     """Запаски у Echo Runner нет (решение пользователя 2026-11-17): прокси, выделение слота и цепь ALEX — долой."""
     SPARE_BOX = ((-0.70, 0.0), (1.35, 1.72), (1.20, 1.95))     # оси DayZ: запаска лежала на баках
@@ -554,6 +415,7 @@ def remove_spare(m):
         if lod.resolution > 1e4 and not C.is_res(lod, 1e15):
             continue
         names = [n for n in lod.selections if n.lower().endswith("interceptor_wheel.005")] + ["wheel_spare_1"]
+        names += [n for n in lod.selections if "55galdrum" in n.lower()]          # места ALEX под бочки
         if lod.resolution < 1e4:
             names.append("lancuch")
         k = M.prune_selection(lod, names)
@@ -567,6 +429,9 @@ def main():
     lightbar()
     vents()
     plates()
+    ctx = type("ctx", (), {})()
+    ctx.PARTS, ctx.DOOR, ctx.hit = PARTS, DOOR, hit
+    er_interior.build(ctx)
     os.makedirs(os.path.join(OUT, "proxy"), exist_ok=True)
     car = C.load_p3d(os.path.join(WD, "interceptor.p3d"))
     doors = {"door_driver": "interceptor_doors_driver", "door_codriver": "interceptor_doors_codriver"}

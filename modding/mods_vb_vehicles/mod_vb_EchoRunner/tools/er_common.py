@@ -141,9 +141,14 @@ def material(tex, rvmat):
     if tex.startswith("#"):
         c = proc_color(tex) or (0.5, 0.5, 0.5, 1)
         bsdf.inputs["Base Color"].default_value = c
-        if rvmat == EMISSIVE_HINT:
-            bsdf.inputs["Emission Color"].default_value = c
-            bsdf.inputs["Emission Strength"].default_value = 6.0
+        if rvmat == EMISSIVE_HINT:                  # неон: тёмно-красное стекло + насыщенное красное свечение
+            bsdf.inputs["Base Color"].default_value = (c[0] * 0.30, c[1] * 0.30, c[2] * 0.30, 1)
+            bsdf.inputs["Emission Color"].default_value = (1.0, 0.025, 0.01, 1)
+            bsdf.inputs["Emission Strength"].default_value = 1.5
+            bsdf.inputs["Roughness"].default_value = 0.25
+        if rvmat == "glass":                        # стекло колбы
+            bsdf.inputs["Transmission Weight"].default_value = 0.85
+            bsdf.inputs["Roughness"].default_value = 0.05
         if rvmat == "metal":
             bsdf.inputs["Metallic"].default_value = 0.8
             bsdf.inputs["Roughness"].default_value = 0.45

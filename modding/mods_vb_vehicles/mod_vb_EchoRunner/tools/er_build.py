@@ -9,7 +9,7 @@ r"""Сборка модели Echo Runner из MLOD ALEX (этап 2: кузов
 
 Что делает:
   1. вырезает встроенные баки ALEX из всех LOD (визуальные, виды из кабины, Fire/View Geometry);
-     вырезанное из LOD 1 пишет в work/<вариант>/tank_alex.p3d — для рендера и как основа навесного бака;
+     вырезанное из LOD 1–4 пишет в work/<вариант>/tank_alex.p3d — для рендера и как основа навесного бака;
   2. подъём: колёса и подвеска опускаются на dc = R - R_ALEX - raise (кузов на месте), стойки и рычаги
      тянутся (вес по высоте/вылету), земля (pos_*, LandContact, damper_land) опускается на
      drop = dc + (R - R_ALEX);
@@ -57,7 +57,7 @@ def inside(bb, box):
 
 
 def cut_tanks(m):
-    tank_lod1 = None
+    tank_lods = []
     for lod in m.lods:
         proxyf = set()
         for n, s in lod.selections.items():
@@ -79,11 +79,12 @@ def cut_tanks(m):
                     rm.extend(s.faces.keys())
         if not rm:
             continue
-        if is_res(lod, 1.0):
-            tank_lod1 = copy_faces_to_lod(lod, rm)
+        for r in (1.0, 2.0, 3.0, 4.0):
+            if is_res(lod, r):
+                tank_lods.append(copy_faces_to_lod(lod, rm, r))
         print("  баки: LOD %g — убрано граней %d" % (lod.resolution, len(rm)))
         prune(lod, rm)
-    return tank_lod1
+    return tank_lods
 
 
 def lift(m):
@@ -164,9 +165,9 @@ def main():
     lift(m)
     os.makedirs(os.path.join(OUTDIR, "proxy"), exist_ok=True)
     m.save(os.path.join(OUTDIR, "interceptor.p3d"))
-    if tank is not None:
+    if tank:
         t = py3d.P3D()
-        t.lods.append(tank)
+        t.lods.extend(tank)
         t.save(os.path.join(OUTDIR, "tank_alex.p3d"))
     for n in ("interceptor_doors_driver", "interceptor_doors_codriver", "interceptor_doors_hood"):
         shutil.copy2(os.path.join(BASE, "proxy", n + ".p3d"), os.path.join(OUTDIR, "proxy", n + ".p3d"))
