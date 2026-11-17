@@ -166,12 +166,20 @@ def flange(part, p, t, r, segs):
         cyl(part, p + (u * math.cos(a) + w * math.sin(a)) * r * 1.4 + t * 0.006, t, 0.0045, 0.008, 6, "bolt")
 
 
-def pipe_run(parts, path, sideX, res, glow=True, couple_every=0.33, hose=None, brackets=None, end_flanges=True):
+def pipe_run(parts, path, sideX, res, glow=True, couple_every=0.33, hose=None, brackets=None, end_flanges=True,
+             glow_to=1.0):
     """Главная (светящаяся) труба + параллельная вторая (сталь; на участке hose=(доля0, доля1) — гофро-рукав).
     parts: {"neon": Part, "metal": Part}. sideX: Vector наружу (для смещения второй трубы)."""
     segs = SEGS[res]
     main = catmull(path, 0.025 if res <= 2 else 0.06)
-    tube(parts["neon" if glow else "metal"], main, R_MAIN, segs, "neon" if glow else "pipe")
+    if glow and glow_to < 1.0:                       # светится только начало (glow_to — доля длины), дальше сталь
+        k = max(2, int(glow_to * (len(main) - 1)))
+        tube(parts["neon"], main[:k + 1], R_MAIN, segs, "neon")
+        tube(parts["metal"], main[k:], R_MAIN, segs, "pipe")
+        cyl(parts["metal"], main[k] - (main[k + 1] - main[k]).normalized() * 0.02, (main[k + 1] - main[k]).normalized(),
+            R_MAIN * 1.4, 0.04, segs, "rustm")
+    else:
+        tube(parts["neon" if glow else "metal"], main, R_MAIN, segs, "neon" if glow else "pipe")
     sec = offset_path(main, sideX, R_MAIN + R_SEC + 0.012)
     if hose is not None and res <= 2.0:
         a, b = int(hose[0] * (len(sec) - 1)), int(hose[1] * (len(sec) - 1))
@@ -246,7 +254,8 @@ def pipes_engine():
         parts = {"neon": Part("neon", "", [], ["neon", "pipes"]), "metal": Part("metal", "", [], ["pipes"])}
         for s in (1, -1):
             r = engine_route(s)
-            pipe_run(parts, r, V(s, 0, 0), res, hose=(0.06, 0.36), brackets=(0.10, 0.30, -0.65, -0.55))
+            pipe_run(parts, r, V(s, 0, 0), res, hose=(0.06, 0.36), brackets=(0.10, 0.30, -0.65, -0.55),
+                     glow_to=0.40)          # над капотом без свечения: не слепит водителя ночью (этап 4)
         out[res] = list(parts.values())
     boxes = []
     for s in (1, -1):

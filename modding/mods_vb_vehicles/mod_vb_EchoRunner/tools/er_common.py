@@ -24,12 +24,13 @@ BS = chr(92)
 IMAGE_TO_PAA = r"D:\SteamLibrary\steamapps\common\DayZ Tools\Bin\ImageToPAA\ImageToPAA.exe"
 CACHE = os.path.join(TOOLS, "dayz-render", "texcache")
 ALEX_ROOT = r"d:\DayZavr\DayZavr-Edit\modding\mods_vb_vehicles\купленные модели\Interceptor"
-ROOTS = [ALEX_ROOT, "P:" + BS]
+MOD_ROOT = r"d:\DayZavr\DayZavr-Edit\modding\mods_vb_vehicles\mod_vb_EchoRunner"   # vb_echorunner\... -> VB_EchoRunner\...
+ROOTS = [MOD_ROOT, ALEX_ROOT, "P:" + BS]
 MAXEDGE = 1.5
 
 
 def set_roots(roots):
-    ROOTS[:] = [r for r in roots if r] + ["P:" + BS]
+    ROOTS[:] = [r for r in roots if r] + [MOD_ROOT, "P:" + BS]
 
 
 def load_p3d(path):
@@ -199,9 +200,23 @@ def material(tex, rvmat):
         bsdf.inputs["Roughness"].default_value = 0.6
         bsdf.inputs["Specular IOR Level"].default_value = 0.3
     em = rv.get("emmisive") or [0, 0, 0, 1]
-    if max(em[:3]) > 0.001:
+    if max(em[:3]) > 0.001 and len(em) > 3 and em[3] > 1.0 and tex and not tex.startswith("#") and load_img(tex):
+        # как у ванильных фонарей: emmisive {1,1,1,N} — светится цвет текстуры, N — яркость
+        t = tnode(load_img(tex))
+        L.new(t.outputs["Color"], bsdf.inputs["Emission Color"])
+        bsdf.inputs["Emission Strength"].default_value = 1.5
+    elif max(em[:3]) > 0.001:
         bsdf.inputs["Emission Color"].default_value = (min(1, em[0]), min(1, em[1]), min(1, em[2]), 1)
         bsdf.inputs["Emission Strength"].default_value = max(1.0, max(em[:3]))
+    dif = rv.get("diffuse") or [1, 1, 1, 1]
+    if max(dif[:3]) < 0.99 and tex and not tex.startswith("#") and load_img(tex):        # выключенный неон и т. п.
+        mul = Nn.new("ShaderNodeMix")
+        mul.data_type = "RGBA"
+        mul.blend_type = "MULTIPLY"
+        mul.inputs[0].default_value = 1.0
+        L.new(tnode(load_img(tex)).outputs["Color"], mul.inputs[6])
+        mul.inputs[7].default_value = (dif[0], dif[1], dif[2], 1)
+        L.new(mul.outputs[2], bsdf.inputs["Base Color"])
     if alpha:
         try:
             mat.surface_render_method = "BLENDED"

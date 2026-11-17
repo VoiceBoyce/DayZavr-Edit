@@ -152,8 +152,19 @@ def lod_to_mlod(od, bones, mass_total=None):
         n = nrm[i] if i < len(nrm) else (0.0, 1.0, 0.0)
         lod.facenormals.append((float(n[0]), float(n[1]), float(n[2])))
     uv = od["uv"]
+    # Треугольники прокси ODOL (грани выделений «proxy:*») НЕ переносим: прокси ниже создаются заново
+    # (add_proxy). Иначе старый треугольник остаётся обычной гранью без текстуры в выделении места крепления
+    # (у ALEX — до 2 м: серые клинья и тонкая линия в салоне; найдено 2026-11-17 на Interceptor, 21 грань/LOD).
+    proxy_faces = set()
+    for s in od["selections"]:
+        if s["name"].startswith("proxy:"):
+            proxy_faces.update(s["face_set"])
+
+    def keep_face(fi, f):
+        return len(set(f)) == len(f) >= 3 and fi not in proxy_faces
+
     for fi, f in enumerate(od["faces"]):
-        if len(set(f)) != len(f) or len(f) < 3:
+        if not keep_face(fi, f):
             continue
         fa = py3d.Face(lod.points, lod.facenormals)
         fa.flags = 0
@@ -170,15 +181,18 @@ def lod_to_mlod(od, bones, mass_total=None):
     face_remap = {}
     k = 0
     for fi, f in enumerate(od["faces"]):
-        if len(set(f)) == len(f) >= 3:
+        if keep_face(fi, f):
             face_remap[fi] = k
             k += 1
     sel_faces = {}
+    used_kept = {v for fi in face_remap for v in od["faces"][fi]}
+    proxy_only = {v for fi in proxy_faces for v in od["faces"][fi]} - used_kept   # точки только старых прокси
     for s in od["selections"]:
         if s["name"].startswith("proxy:"):
             continue
         fl = sorted(face_remap[fi] for fi in s["face_set"] if fi in face_remap)
-        pl = sorted(set(s.get("vertices", [])) | {v for fi in s["face_set"] for v in od["faces"][fi]})
+        pl = sorted((set(s.get("vertices", [])) - proxy_only) | {v for fi in s["face_set"] if fi in face_remap
+                                                                 for v in od["faces"][fi]})
         sel_faces[s["name"]] = (fl, pl)
     # прокси: треугольник + выделение «proxy:...»; грань прокси — в выделение своей кости
     for px in od.get("proxies", []):

@@ -82,6 +82,7 @@ def build(ctx):
     ey = n.cross(ex).normalized()
     box(scr, c, ex, ey, n, 0.105, 0.07, 0.022, "house")
     box(glow, c + n * 0.023, ex, ey, n, 0.088, 0.055, 0.002, "screen")
+    glow.uvframe = (c + n * 0.023, ex, ey, 0.088, 0.055)               # карта на весь экран
     for sx in (-1, 1):                                         # кронштейны
         bar(scr, c + ex * sx * 0.08 - n * 0.02, c + ex * sx * 0.08 - n * 0.06 - ey * 0.05, 0.012, "steel")
     tp = c - ey * 0.105 + n * 0.005

@@ -15,24 +15,33 @@ import er_common as C
 
 py3d = C.py3d
 
+VP = "vb_echorunner\\data\\parts\\"
+
+
+def _m(name, ca=False):
+    return (VP + "er_%s_%s.paa" % (name, "ca" if ca else "co"), VP + "er_%s.rvmat" % name)
+
+
+# материалы деталей — библиотека er_tex_parts.py (плитка 1 м)
 COL = {
-    "flare": ("#(argb,8,8,3)color(0.045,0.045,0.045,1,co)", ""),
-    "steel": ("#(argb,8,8,3)color(0.11,0.11,0.11,1,co)", "metal"),
-    "net": ("#(argb,8,8,3)color(0.08,0.08,0.08,1,co)", "metal"),
-    "plate": ("#(argb,8,8,3)color(0.17,0.10,0.06,1,co)", "metal"),
-    "bolt": ("#(argb,8,8,3)color(0.52,0.49,0.45,1,co)", "metal"),
-    "lens": ("#(argb,8,8,3)color(0.86,0.83,0.72,1,co)", ""),
-    "house": ("#(argb,8,8,3)color(0.035,0.035,0.035,1,co)", ""),
-    "vent": ("#(argb,8,8,3)color(0.02,0.02,0.02,1,co)", ""),
-    "neon": ("#(argb,8,8,3)color(0.95,0.06,0.03,1,co)", "emit"),
-    "pipe": ("#(argb,8,8,3)color(0.16,0.12,0.10,1,co)", "metal"),
-    "hose": ("#(argb,8,8,3)color(0.03,0.03,0.03,1,co)", ""),
-    "rustm": ("#(argb,8,8,3)color(0.22,0.12,0.07,1,co)", "metal"),
-    "screen": ("#(argb,8,8,3)color(0.85,0.08,0.05,1,co)", "emit"),
-    "red": ("#(argb,8,8,3)color(0.55,0.04,0.03,1,co)", ""),
-    "glass": ("#(argb,8,8,3)color(0.60,0.10,0.08,1,co)", "glass"),
-    "cable": ("#(argb,8,8,3)color(0.30,0.03,0.02,1,co)", ""),
+    "flare": _m("flare"),
+    "steel": _m("steel_dark"),
+    "net": _m("steel_dark"),
+    "plate": _m("steel_rust"),
+    "bolt": _m("bolt"),
+    "lens": _m("lens"),
+    "house": _m("flare"),
+    "vent": _m("flare"),
+    "neon": _m("neon"),
+    "pipe": _m("steel_rust"),
+    "hose": _m("rubber"),
+    "rustm": _m("steel_rust"),
+    "screen": _m("screen"),
+    "red": _m("paint_red"),
+    "glass": _m("glass", True),
+    "cable": _m("cable"),
 }
+UV_TILE = 1.0          # метров на плитку
 MATS = list(COL)
 
 
@@ -140,11 +149,17 @@ def part_data(part, xf_inv=None):
         if xf_inv is not None:
             nd = xf_inv[1] @ nd
         uvs = []
+        frame = getattr(part, "uvframe", None)          # (начало, ex, ey, полуширина, полувысота) — картинка на грань
         for v in f.verts:
-            ax = max(range(3), key=lambda i: abs(f.normal[i]))
             c = v.co
+            if frame is not None:
+                o, ex, ey, hx, hy = frame
+                d = c - o
+                uvs.append((d.dot(ex) / (2 * hx) + 0.5, d.dot(ey) / (2 * hy) + 0.5))
+                continue
+            ax = max(range(3), key=lambda i: abs(f.normal[i]))
             uv = {0: (c.y, c.z), 1: (c.x, c.z), 2: (c.x, c.y)}[ax]
-            uvs.append((uv[0] * 0.5 % 1.0, uv[1] * 0.5 % 1.0))
+            uvs.append((uv[0] / UV_TILE, uv[1] / UV_TILE))
         faces.append(([v.index for v in f.verts], uvs, tuple(float(c) for c in nd), COL[MATS[f.material_index]]))
     return pts, faces
 

@@ -34,13 +34,15 @@ TB = R - 0.024                    # основание протектора
 TH = 0.026                        # высота шашки
 
 # материалы предпросмотра (на этапе ретекстура заменятся атласом колеса)
-MATS = {
-    "tyre": ("#(argb,8,8,3)color(0.075,0.07,0.065,1,co)", ""),
-    "rim": ("#(argb,8,8,3)color(0.42,0.055,0.045,1,co)", ""),
-    "ring": ("#(argb,8,8,3)color(0.16,0.15,0.14,1,co)", ""),
-    "bolt": ("#(argb,8,8,3)color(0.50,0.47,0.43,1,co)", ""),
-    "hub": ("#(argb,8,8,3)color(0.13,0.12,0.115,1,co)", ""),
+VP = "vb_echorunner\\data\\parts\\"
+MATS = {                                    # библиотека er_tex_parts.py
+    "tyre": (VP + "er_rubber_co.paa", VP + "er_rubber.rvmat"),
+    "rim": (VP + "er_paint_red_co.paa", VP + "er_paint_red.rvmat"),
+    "ring": (VP + "er_steel_dark_co.paa", VP + "er_steel_dark.rvmat"),
+    "bolt": (VP + "er_bolt_co.paa", VP + "er_bolt.rvmat"),
+    "hub": (VP + "er_steel_dark_co.paa", VP + "er_steel_dark.rvmat"),
 }
+TILE = 0.5                                  # м на плитку (колесо — мельче, чем кузовные детали)
 MAT_ORDER = list(MATS)
 
 
@@ -225,7 +227,8 @@ def build(level):
 
 
 def uv_and_export(ob, res):
-    """UV: шина — цилиндрическая развёртка (верх атласа), остальное — плоская проекция по оси (низ атласа)."""
+    """UV в метрах (плитка TILE): протектор и плечи — по окружности (u = дуга, v = вдоль оси), боковины и диск —
+    плоская проекция на плоскость колеса. Угол разворачивается относительно центра грани (без скачка на ±pi)."""
     me = ob.data
     me.set_sharp_from_angle(angle=math.radians(35))
     bm = new_bm()
@@ -233,15 +236,20 @@ def uv_and_export(ob, res):
     bmesh.ops.triangulate(bm, faces=[f for f in bm.faces if len(f.verts) > 4])
     uvl = bm.loops.layers.uv.new("UV")
     for f in bm.faces:
-        mat = MAT_ORDER[f.material_index]
+        cen = f.calc_center_median()
+        ac = math.atan2(cen.z, cen.y)
+        radial = abs(f.normal.x) < 0.7
         for lp in f.loops:
             x, y, z = lp.vert.co
-            r = math.hypot(y, z)
-            a = (math.atan2(z, y) / (2 * math.pi)) % 1.0
-            if mat == "tyre" and r > RIM + 0.6 * (R - RIM) and abs(f.normal.x) < 0.7:
-                lp[uvl].uv = (a * 4 % 1.0, 0.5 + 0.5 * (x / W + 0.5))
+            if radial:
+                a = math.atan2(z, y)
+                while a - ac > math.pi:
+                    a -= 2 * math.pi
+                while a - ac < -math.pi:
+                    a += 2 * math.pi
+                lp[uvl].uv = (a * R / TILE, x / TILE)
             else:
-                lp[uvl].uv = (0.25 + 0.25 * y / R, 0.25 + 0.25 * z / R) if x >= 0 else (0.75 + 0.25 * y / R, 0.25 + 0.25 * z / R)
+                lp[uvl].uv = (y / TILE, z / TILE)
     bm.to_mesh(me)
     bm.free()
     me.update()

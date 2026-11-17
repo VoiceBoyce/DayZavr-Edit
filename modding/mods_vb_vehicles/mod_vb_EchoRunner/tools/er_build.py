@@ -56,6 +56,87 @@ def inside(bb, box):
     return all(box[i][0] <= bb[i][0] and bb[i][1] <= box[i][1] for i in range(3))
 
 
+# ---------------------------------------------------------------- свои пути текстур (мод не зависит от пака ALEX)
+ALEX_DATA = os.path.join(os.path.dirname(MOD), "купленные модели", "Interceptor", "Interceptor_byALEX", "data")
+OUR_DATA = os.path.join(MOD, "VB_EchoRunner", "data")
+SRC_PFX, DST_PFX = "interceptor_byalex\\data\\", "vb_echorunner\\data\\"
+PARTS_PFX = "vb_echorunner\\data\\parts\\"
+FOREIGN = {                                   # чужие моды из пака ALEX -> наши материалы
+    "mod_tuning\\data\\plate\\numer_mil_co.paa": PARTS_PFX + "er_steel_rust_co.paa",
+    "mod_tuning\\data\\plate\\numer.rvmat": PARTS_PFX + "er_steel_rust.rvmat",
+}
+USED = set()
+
+
+def remap_path(path):
+    pl = path.lower()
+    if pl.startswith(SRC_PFX):
+        USED.add(pl[len(SRC_PFX):])
+        return DST_PFX + pl[len(SRC_PFX):]
+    return FOREIGN.get(pl, path)
+
+
+def remap_model(m):
+    for lod in m.lods:
+        for f in lod.faces:
+            f.texture = remap_path(f.texture) if f.texture else f.texture
+            f.material = remap_path(f.material) if f.material else f.material
+
+
+def _alex_file(rel):
+    """Файл ALEX без учёта регистра (Body_nohq.paa и т. п.)."""
+    d, name = os.path.split(os.path.join(ALEX_DATA, rel))
+    for f in os.listdir(d):
+        if f.lower() == name.lower():
+            return os.path.join(d, f)
+    return None
+
+
+def ensure_data():
+    """Копирует использованные текстуры ALEX под свои пути (только если файла ещё нет — перекрашенные
+    этапом 5 не затираются); бинарные rvmat ALEX переписывает текстом с нашими путями стадий."""
+    sys.path.insert(0, r"d:\DayZavr\DayZavr-Edit\.claude\tools\dayz-render")
+    import rvmat_read
+    os.makedirs(OUR_DATA, exist_ok=True)
+    todo = set(USED)
+    for rel in sorted(USED):
+        if rel.endswith(".rvmat"):
+            src = _alex_file(rel)
+            rv = rvmat_read.read_rvmat(src)
+            lines = []
+            for k in ("ambient", "diffuse", "forcedDiffuse", "emmisive", "specular"):
+                if k in rv:
+                    lines.append("%s[] = {%s};" % (k, ",".join("%g" % x for x in rv[k])))
+            lines.append("specularPower = %g;" % rv.get("specularPower", 40))
+            lines.append('PixelShaderID = "%s";' % rv.get("PixelShaderID", "Super"))
+            lines.append('VertexShaderID = "%s";' % rv.get("VertexShaderID", "Super"))
+            for st in sorted((k for k in rv if k.startswith("Stage")), key=lambda k: int(k[5:])):
+                t = rv[st].get("texture", "")
+                if t.lower().startswith(SRC_PFX):
+                    todo.add(t.lower()[len(SRC_PFX):])
+                    t = DST_PFX + t.lower()[len(SRC_PFX):]
+                lines.append('class %s\n{\n\ttexture = "%s";\n\tuvSource = "%s";\n\tclass uvTransform\n\t{\n'
+                             '\t\taside[] = {1,0,0};\n\t\tup[] = {0,1,0};\n\t\tdir[] = {0,0,1};\n\t\tpos[] = {0,0,0};\n'
+                             '\t};\n};' % (st, t, rv[st].get("uvSource", "tex")))
+            dst = os.path.join(OUR_DATA, rel)
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+            with open(dst, "w", encoding="ascii", newline="\r\n") as f:
+                f.write("\n".join(lines) + "\n")
+    copied = 0
+    for rel in sorted(todo):
+        if rel.endswith(".rvmat"):
+            continue
+        dst = os.path.join(OUR_DATA, rel)
+        if os.path.exists(dst):
+            continue
+        src = _alex_file(rel)
+        if src:
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+            shutil.copy2(src, dst)
+            copied += 1
+    print("  данные: путей ALEX %d, скопировано файлов %d -> %s" % (len(todo), copied, OUR_DATA))
+
+
 def cut_tanks(m):
     tank_lods = []
     for lod in m.lods:
@@ -161,6 +242,7 @@ def main():
           % (VAR, R_NEW, RAISE, DC, DROP))
     with open(os.path.join(BASE, "interceptor.p3d"), "rb") as f:
         m = py3d.P3D(f)
+    remap_model(m)
     tank = cut_tanks(m)
     lift(m)
     os.makedirs(os.path.join(OUTDIR, "proxy"), exist_ok=True)
@@ -170,7 +252,11 @@ def main():
         t.lods.extend(tank)
         t.save(os.path.join(OUTDIR, "tank_alex.p3d"))
     for n in ("interceptor_doors_driver", "interceptor_doors_codriver", "interceptor_doors_hood"):
-        shutil.copy2(os.path.join(BASE, "proxy", n + ".p3d"), os.path.join(OUTDIR, "proxy", n + ".p3d"))
+        with open(os.path.join(BASE, "proxy", n + ".p3d"), "rb") as f:
+            d = py3d.P3D(f)
+        remap_model(d)
+        d.save(os.path.join(OUTDIR, "proxy", n + ".p3d"))
+    ensure_data()
     print("OK", OUTDIR)
 
 
