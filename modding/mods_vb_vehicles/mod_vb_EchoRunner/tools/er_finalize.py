@@ -41,6 +41,8 @@ PARTS = {    # файл в full/proxy (или work) -> (имя в моде, ма
     "interceptor_doors_codriver": ("vb_er_door_codriver", 20.0),
     "interceptor_doors_hood": ("vb_er_hood", 15.0),
     "vb_er_tank": ("vb_er_tank", None),
+    "vb_er_tank_1": ("vb_er_tank_1", None),        # модели прокси баков — копии бака (er_attach.py)
+    "vb_er_tank_2": ("vb_er_tank_2", None),
     "vb_er_pipes_l": ("vb_er_pipes_l", None),
     "vb_er_pipes_r": ("vb_er_pipes_r", None),
     "vb_er_pipes_engine": ("vb_er_pipes_engine", None),
@@ -137,7 +139,8 @@ def model_cfg():
 		skeletonInherit = "";
 		skeletonBones[] =
 		{
-			"tilt", "",
+			"pitch", "",
+			"tilt", "pitch",
 			"rotor", "tilt",
 			"rotor_b", "tilt",
 			"spin", "tilt"
@@ -197,7 +200,7 @@ def model_cfg():
 			{
 				type = "rotation";
 				source = "tilt_x";
-				selection = "tilt";
+				selection = "pitch";
 				axis = "tilt_axis_x";
 				memory = 1;
 				minValue = 0;
@@ -225,6 +228,8 @@ def model_cfg():
 	class vb_er_door_codriver: Default { sections[] = {"camo1", "neon"}; };
 	class vb_er_hood: Default { sections[] = {"camo1"}; };
 	class vb_er_tank: Default { sections[] = {"neon"}; };
+	class vb_er_tank_1: Default { sections[] = {"neon"}; };
+	class vb_er_tank_2: Default { sections[] = {"neon"}; };
 	class vb_er_pipes_l: Default { sections[] = {"neon"}; };
 	class vb_er_pipes_r: Default { sections[] = {"neon"}; };
 	class vb_er_pipes_engine: Default { sections[] = {"neon"}; };

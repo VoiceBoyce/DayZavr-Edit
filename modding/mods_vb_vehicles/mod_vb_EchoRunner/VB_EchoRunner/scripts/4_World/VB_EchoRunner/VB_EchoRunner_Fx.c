@@ -129,20 +129,14 @@ class VB_EchoRunnerFx : Managed
 		bool driven = ready && engine;					// мотор заведён — летит или висит на 1.2 м
 		bool park = ready && !engine;					// стоянка на подушке
 		float hv = Vector(m_Vel[0], 0, m_Vel[2]).Length();
-		float vF = vector.Dot(Vector(m_Vel[0], 0, m_Vel[2]), Vector(fwd[0], 0, fwd[2]).Normalized());
 
-		// --- сила газа: водитель — по клавишам, остальные — по оборотам мотора
-		float gasT = 0;
+		// --- нажатия водителя (у водителя — свои, у остальных — с сервера) и сила газа по ним
+		float kF = 0;
+		float kT = 0;
+		float kU = 0;
 		if (driven)
-		{
-			float idle = car.EngineGetRPMIdle();
-			float red = car.EngineGetRPMRedline();
-			if (red > idle + 100)
-				gasT = Math.Clamp((car.EngineGetRPM() - idle * 1.15) / (red - idle * 1.15), 0, 1);
-			Human driver = car.CrewDriver();
-			if (driver && driver == GetGame().GetPlayer())
-				gasT = Math.Max(gasT, car.VB_Thrust());
-		}
+			car.VB_PilotInput(kF, kT, kU);
+		float gasT = VB_EchoRunner.VB_ThrustOf(kF, kT, kU);
 		m_Gas = VB_ERFlight.Approach(m_Gas, gasT, 3.0 * dt);
 
 		// --- скорости вращения
@@ -170,12 +164,9 @@ class VB_EchoRunnerFx : Managed
 		m_SpinPhase = m_SpinPhase - Math.Floor(m_SpinPhase);
 
 		// --- модули: роторы, наклон, свет и марево, частицы
-		vector vl = car.VectorToLocal(m_Vel);
-		float leanZcar = Math.Clamp(vl[2] / 22.0, -1, 1) * 0.45;		// к движению вдоль z модели
-		float pushDir = car.m_VB_FwdSign;								// газ вперёд — верх задних модулей к носу
-		if (vF < -1.0)
-			pushDir = -pushDir;
-		float turnK = Math.Clamp(m_YawRate / 1.2, -1, 1);
+		// наклоны только от клавиш (просьба пользователя 11-18): видно, что машину двигают модули; ничего не нажато —
+		// модули плавно возвращаются вниз
+		float keyZ = kF * car.m_VB_FwdSign;						// «вперёд» по оси z модели
 		float rightX = -car.m_VB_LeftSign;						// «вправо» в осях машины
 		for (int i = 0; i < 4; i++)
 		{
@@ -188,27 +179,30 @@ class VB_EchoRunnerFx : Managed
 				m_TiltZ[i] = 0;
 				continue;
 			}
-			// наклон в осях машины: по ходу — верх модуля вперёд; задние под газом сильнее (толкают машину);
-			// в повороте передние к центру поворота, задние наружу. Фаза ±1 = ±25°.
+			// наклон в осях машины: вперёд/назад — верх модуля по ходу, излучатель назад, задние сильнее (толкают);
+			// влево/вправо — передние к повороту, задние наружу. Фаза ±1 = ±25°, общий наклон не больше 25°.
 			bool isFront = car.m_VB_ModFront[i];
 			float front = -1.0;
-			float lzc = leanZcar;
+			float lzc = keyZ * 0.85;
 			if (isFront)
 			{
 				front = 1.0;
+				lzc = keyZ * 0.45;
 			}
-			else
-			{
-				lzc = leanZcar * 1.4 + m_Gas * 0.55 * pushDir;
-			}
-			float leanXcar = Math.Clamp(vl[0] / 10.0, -1, 1) * 0.35 + front * turnK * 0.3 * rightX;
+			float leanXcar = front * kT * 0.5 * rightX;
 			// модуль справа повёрнут на 180° вокруг вертикали (прокси ALEX): его x и z — наоборот
 			float side = car.m_VB_ModSide[i];
-			float lz = lzc * side;
-			float lx = leanXcar * side;
+			float tgX = Math.Clamp(TILT_SX * lzc * side, -1, 1);
+			float tgZ = Math.Clamp(TILT_SZ * leanXcar * side, -1, 1);
+			float tgLen = Math.Sqrt(tgX * tgX + tgZ * tgZ);
+			if (tgLen > 1.0)
+			{
+				tgX /= tgLen;
+				tgZ /= tgLen;
+			}
 			float kk = Math.Min(1.0, TILT_GAIN * dt);
-			m_TiltX[i] = m_TiltX[i] + (Math.Clamp(TILT_SX * lz, -1, 1) - m_TiltX[i]) * kk;
-			m_TiltZ[i] = m_TiltZ[i] + (Math.Clamp(TILT_SZ * lx, -1, 1) - m_TiltZ[i]) * kk;
+			m_TiltX[i] = m_TiltX[i] + (tgX - m_TiltX[i]) * kk;
+			m_TiltZ[i] = m_TiltZ[i] + (tgZ - m_TiltZ[i]) * kk;
 			mod.SetAnimationPhaseNow("rotor", m_Phase);
 			mod.SetAnimationPhaseNow("spin", m_SpinPhase);
 			// фаза user-источника — только 0..1 (отрицательные движок режет в 0): 0.5 — ровно, 0/1 — ±25°

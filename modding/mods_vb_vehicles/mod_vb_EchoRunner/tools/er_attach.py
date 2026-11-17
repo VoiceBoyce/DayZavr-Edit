@@ -6,7 +6,7 @@ r"""Навесные Echo Runner (этап 3): бак Изнанки (ориги
   вход:  work/<вариант>/final/ (после er_parts.py), work/<вариант>/tank_alex.p3d (после er_build.py)
   выход: work/<вариант>/full/interceptor.p3d (+ прокси навесных), full/proxy/ (детали машины + навесные)
 
-Прокси навесных: \vb_echorunner\proxy\vb_er_tank (.001 левый, .002 правый), vb_er_pipes_l, vb_er_pipes_r,
+Прокси навесных: \vb_echorunner\proxy\vb_er_tank_1 (левый), vb_er_tank_2 (правый), vb_er_pipes_l, vb_er_pipes_r,
 vb_er_pipes_engine — в LOD 1–4 и видах из кабины 1100/1201; рамка = тождественная (детали в осях машины).
 Светящееся — выделение «neon» в моделях навесных (на этапе мода — hiddenSelection, включается скриптом).
 """
@@ -279,8 +279,10 @@ def main():
     car = C.load_p3d(os.path.join(SRC, "interceptor.p3d"))
     tank, tank_pos = tank_item()
     tank.save(os.path.join(OUT, "proxy", "vb_er_tank.p3d"))
-    add_proxy(car, "vb_er_tank", 1, tank_pos[0])
-    add_proxy(car, "vb_er_tank", 2, tank_pos[1])
+    # у каждого бака свой прокси (как у трубок): общий прокси на два слота бак на машине не рисовал (стенд 11-18)
+    for i in (1, 2):
+        shutil.copy2(os.path.join(OUT, "proxy", "vb_er_tank.p3d"), os.path.join(OUT, "proxy", "vb_er_tank_%d.p3d" % i))
+        add_proxy(car, "vb_er_tank_%d" % i, 1, tank_pos[i - 1])
     for s, nm in ((1, "vb_er_pipes_l"), (-1, "vb_er_pipes_r")):
         m, c = pipes_side(s)
         m.save(os.path.join(OUT, "proxy", nm + ".p3d"))

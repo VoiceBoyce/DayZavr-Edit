@@ -40,7 +40,7 @@ class VB_EchoRunner_GravModule extends CarWheel
 	{
 		super.EEInit();
 		if (!GetGame().IsDedicatedServer() && !VB_EchoRunner.Cast(GetHierarchyParent()))
-			VB_EchoRunner.VB_SetSelMaterial(this, "neon", VB_EchoRunner.VB_NEON_OFF);
+			VB_EchoRunner.VB_SetSelMaterial(this, "neon", VB_EchoRunner.VB_NEON_IDLE);
 	}
 
 	override int GetMeleeTargetType()
@@ -54,8 +54,8 @@ class VB_EchoRunner_RiftPart extends Inventory_Base
 	override void EEInit()
 	{
 		super.EEInit();
-		// не на машине — не светится (на машине материал выставляет VB_EchoRunner)
+		// не на машине — только тлеет (на машине материал выставляет VB_EchoRunner)
 		if (!GetGame().IsDedicatedServer() && !VB_EchoRunner.Cast(GetHierarchyParent()))
-			VB_EchoRunner.VB_SetSelMaterial(this, "neon", VB_EchoRunner.VB_NEON_OFF);
+			VB_EchoRunner.VB_SetSelMaterial(this, "neon", VB_EchoRunner.VB_NEON_IDLE);
 	}
 }

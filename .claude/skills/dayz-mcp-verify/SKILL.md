@@ -711,6 +711,11 @@ Visual smoke of a CarScript vehicle driven by MCP, verified end-to-end on Merced
 
 ## DRIVABILITY + ACCEPTANCE LADDER (summary — detail in reference)
 
+> **Никогда не удалять машину, в которой сидит игрок** (DayZavr, 2026-11-18). `object_delete` занятой машины
+> роняет клиент DayZDiag 1.30 (баг движка, без модов тоже; проверено ещё на VB_VehicleCamera). После
+> `vehicle_get_in_client` выхода нет, `player_teleport` сидящего отвечает `occupant_client_seated`. Если стенд после
+> проверки в машине нужен человеку: `dayz_test_stop` → `dayz_test_run` → машину спавнить рядом, не сажая.
+
 Phase 5 of DayZ-MCP project added and gated in-game owner-side verbs that DO **drive** the
 car (client takes ownership and handles throttle/steer): `vehicle_get_in_client(pos)` (seats +
 ownership), `engine_set("start"/"stop")`, `vehicle_control(throttle, steer, brake, handbrake,

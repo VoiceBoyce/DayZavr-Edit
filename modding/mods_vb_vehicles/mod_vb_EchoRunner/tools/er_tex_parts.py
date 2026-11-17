@@ -130,6 +130,9 @@ def m_neon(n):
     # выключенное состояние — та же текстура, тёмное стекло без свечения (скрипт меняет материал)
     T.write_rvmat(os.path.join(OUT, "er_neon_off.rvmat"), VP + "er_neon_nohq.paa", VP + "er_neon_smdi.paa",
                   specular=0.9, power=120, diffuse=(0.3, 0.3, 0.3, 1))
+    # снятая с машины деталь (на земле, в инвентаре, превью): еле тлеет — с er_neon_off превью было почти чёрным (11-18)
+    T.write_rvmat(os.path.join(OUT, "er_neon_idle.rvmat"), VP + "er_neon_nohq.paa", VP + "er_neon_smdi.paa",
+                  specular=0.9, power=120, emissive=(1, 1, 1, 2))
 
 
 def m_glass(n):

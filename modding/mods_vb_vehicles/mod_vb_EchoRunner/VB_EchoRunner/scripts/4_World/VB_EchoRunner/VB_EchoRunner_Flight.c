@@ -84,6 +84,7 @@ class VB_ERFlight
 	static const float PARK_HOVER = 0.45;	// м: стоянка на подушке (мотор заглушён / нет водителя, энергия есть)
 	static const float PARK_DAMP = 6.0;		// м/с²: на стоянке машину не сносит
 	static const float PARK_DRAIN = 0.004;	// ед./с: расход на стоянке (2 полных бака ~14 ч)
+	static const float RPM_FLY = 4000;		// об/мин мотора при полной тяге (на нейтрали; выше — перегазовка, отзыв 11-18)
 	static const float FOLLOW_AGL = 8.0;	// м: ниже — держим высоту над рельефом, выше — абсолютную
 	static const float VMAX = 33.0;			// м/с вперёд (~120 км/ч)
 	static const float VBACK = 10.0;		// м/с назад
@@ -96,7 +97,8 @@ class VB_ERFlight
 	static const float VACC = 10.0;			// м/с² вертикальный разгон
 	static const float FALL = 3.0;			// м/с: без тяги машина опускается не быстрее
 	static const float YAW_RATE = 1.3;		// рад/с поворот (A/D)
-	static const float YAW_ACC = 4.0;		// рад/с²
+	static const float YAW_ACC = 3.5;		// рад/с²: предел разгона поворота (было 4 — рывок на старте, отзыв 11-18)
+	static const float YAW_TAU = 0.25;		// с: плавный выход на скорость поворота и плавная остановка
 	static const float PITCH_UP = 14.0;		// град: нос вверх/вниз от Shift/Ctrl
 	static const float PITCH_ACC = 4.0;		// град: нос вниз при разгоне вперёд
 	static const float BANK = 16.0;			// град: крен в повороте
@@ -158,6 +160,24 @@ class VB_ERFlight
 		return rot * (ang / sinA);
 	}
 
+	// Скорость рыскания корпуса сейчас, рад/с (+ вправо, как yawRate в Attitude). Берём из физики тела, а не из своей
+	// переменной: угловую скорость движок восстанавливает при сетевой сверке и повторе ходов, свою переменную — нет,
+	// и сервер с клиентом водителя расходились именно в поворотах (рывки, отзыв 11-18; скилл dayz-aviation LL-194).
+	static float s_YawSign;
+	static float YawRateOf(IEntity body)
+	{
+		if (s_YawSign == 0)
+		{
+			// знак оси y мира для поворота «вправо» — той же формулой, что строит угловую скорость в Attitude
+			vector probe = RotationBetween("0 0 0", Vector(Math.RAD2DEG, 0, 0));
+			s_YawSign = 1;
+			if (probe[1] < 0)
+				s_YawSign = -1;
+		}
+		vector w = dBodyGetAngularVelocity(body);
+		return w[1] * s_YawSign;
+	}
+
 	// высота опоры под точкой: земля, крыши/дороги/заборы (луч физики, своя машина не мешает) и вода
 	static float GroundY(Object self, vector p)
 	{
@@ -193,7 +213,6 @@ class VB_EchoRunnerFlight : Managed
 	protected bool m_HoldAbs;		// true — абсолютная высота (высоко), false — над рельефом
 	protected float m_HoldY;
 	protected float m_HoldAgl;
-	protected float m_YawRate;
 
 	// сервер
 	protected float m_CheckTimer;
@@ -233,7 +252,6 @@ class VB_EchoRunnerFlight : Managed
 			// стоянка на подушке (просьба пользователя 11-17): мотор заглушён или водителя нет, но энергия есть —
 			// машина держится низко над землёй, ровно, не дрейфует
 			m_HoldSet = false;
-			m_YawRate = 0;
 			float parkY = ground + VB_ERFlight.PARK_HOVER - car.m_VB_BottomLS;
 			vector pv = vel;
 			float pvy = Math.Clamp((parkY - pos[1]) * 2.5, -VB_ERFlight.FALL, 3.0);
@@ -249,7 +267,6 @@ class VB_EchoRunnerFlight : Managed
 		if (!active)
 		{
 			m_HoldSet = false;
-			m_YawRate = 0;
 			if (agl > 0.35 && car.m_VB_ModulesFitted)
 			{
 				// энергия кончилась / мотор заглох / водитель вышел: плавно опускаемся и выравниваемся
@@ -321,13 +338,20 @@ class VB_EchoRunnerFlight : Managed
 		nv[1] = vy + VB_ERFlight.G * dt;		// тело само вычтет g*dt после нас (скилл dayz-aviation, LFHeli)
 		SetVelocity(car, nv);
 
-		// --- поворот, нос, крен
+		// --- поворот, нос, крен. Плавно (отзыв 11-18 «повороты дёрганые»): скорость поворота выходит на цель
+		// по экспоненте (YAW_TAU) с пределом разгона, текущая — из тела (YawRateOf); крен следует за самим поворотом,
+		// а не за клавишей — нажал A/D, корпус сначала начинает поворачивать и вместе с этим ложится в крен
 		float speedK = Math.Clamp(Math.AbsFloat(vF) / VB_ERFlight.VMAX, 0, 1);
-		float yrT = inT * VB_ERFlight.YAW_RATE * (1.0 - 0.3 * speedK);
-		m_YawRate = VB_ERFlight.Approach(m_YawRate, yrT, VB_ERFlight.YAW_ACC * dt);
+		float yrMax = VB_ERFlight.YAW_RATE * (1.0 - 0.3 * speedK);
+		float yrT = inT * yrMax;
+		float yr = VB_ERFlight.YawRateOf(car);
+		float dYr = (yrT - yr) * Math.Min(1.0, dt / VB_ERFlight.YAW_TAU);
+		float maxDYr = VB_ERFlight.YAW_ACC * dt;
+		yr = yr + Math.Clamp(dYr, -maxDYr, maxDYr);
 		float noseUp = inU * VB_ERFlight.PITCH_UP - inF * VB_ERFlight.PITCH_ACC;
-		float bank = inT * VB_ERFlight.BANK * Math.Clamp(Math.AbsFloat(vF) / 12.0, 0.25, 1.0);
-		Attitude(noseUp, bank, m_YawRate, dt);
+		float turnK = Math.Clamp(yr / yrMax, -1, 1);
+		float bank = turnK * VB_ERFlight.BANK * Math.Clamp(Math.AbsFloat(vF) / 12.0, 0.25, 1.0);
+		Attitude(noseUp, bank, yr, dt);
 		dBodyActive(car, ActiveState.ACTIVE);
 	}
 

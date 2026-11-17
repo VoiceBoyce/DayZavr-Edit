@@ -157,10 +157,15 @@ class CfgNonAIVehicles
 		model="VB_EchoRunner\proxy\vb_er_hood.p3d";
 		inventorySlot[]={"VB_ER_Hood"};
 	};
-	class Proxyvb_er_tank: ProxyVehiclePart
+	class Proxyvb_er_tank_1: ProxyVehiclePart
 	{
-		model="VB_EchoRunner\proxy\vb_er_tank.p3d";
-		inventorySlot[]={"VB_ER_Tank_1","VB_ER_Tank_2"};
+		model="VB_EchoRunner\proxy\vb_er_tank_1.p3d";
+		inventorySlot[]={"VB_ER_Tank_1"};
+	};
+	class Proxyvb_er_tank_2: ProxyVehiclePart
+	{
+		model="VB_EchoRunner\proxy\vb_er_tank_2.p3d";
+		inventorySlot[]={"VB_ER_Tank_2"};
 	};
 	class Proxyvb_er_pipes_l: ProxyVehiclePart
 	{
@@ -516,7 +521,7 @@ class CfgVehicles
 			};
 			class Gearbox
 			{
-				type="GEARBOX_AUTOMATIC";
+				type="GEARBOX_MANUAL";
 				reverse=4.526;
 				ratios[]={4.2670002,2.0999999,1.561,1.0700001,0.80699998};
 			};
@@ -1880,7 +1885,7 @@ class CfgVehicles
 		rotationFlags=0;
 		hiddenSelections[]={"neon"};
 		hiddenSelectionsTextures[]={"vb_echorunner\data\parts\er_neon_co.paa"};
-		hiddenSelectionsMaterials[]={"vb_echorunner\data\parts\er_neon_off.rvmat"};
+		hiddenSelectionsMaterials[]={"vb_echorunner\data\parts\er_neon_idle.rvmat"};		// снятая деталь еле тлеет (превью, 11-18)
 		class DamageSystem
 		{
 			class GlobalHealth
@@ -1931,7 +1936,7 @@ class CfgVehicles
 		tyreTread=0.5;
 		hiddenSelections[]={"neon"};
 		hiddenSelectionsTextures[]={"vb_echorunner\data\parts\er_neon_co.paa"};
-		hiddenSelectionsMaterials[]={"vb_echorunner\data\parts\er_neon_off.rvmat"};
+		hiddenSelectionsMaterials[]={"vb_echorunner\data\parts\er_neon_idle.rvmat"};		// снятая деталь еле тлеет (превью, 11-18)
 		class AnimationSources
 		{
 			class rotor

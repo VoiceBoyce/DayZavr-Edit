@@ -6,6 +6,7 @@ class VB_EchoRunner extends CarScript
 {
 	static const string VB_NEON_ON = "vb_echorunner\\data\\parts\\er_neon.rvmat";
 	static const string VB_NEON_OFF = "vb_echorunner\\data\\parts\\er_neon_off.rvmat";
+	static const string VB_NEON_IDLE = "vb_echorunner\\data\\parts\\er_neon_idle.rvmat";	// деталь не на машине: еле тлеет (превью было тёмным, 11-18)
 	static const string VB_SCREEN_ON = "vb_echorunner\\data\\parts\\er_screen.rvmat";
 	static const string VB_SCREEN_OFF = "vb_echorunner\\data\\parts\\er_screen_off.rvmat";
 
@@ -26,6 +27,9 @@ class VB_EchoRunner extends CarScript
 	bool m_VB_FlyReady;				// сервер: 4 модуля + 3 трубопровода + энергия (синхр.)
 	bool m_VB_Flying;				// сервер: в воздухе (синхр., для эффектов)
 	float m_VB_Energy;				// энергия баков 0..1 (синхр.)
+	float m_VB_SyncFwd;				// нажатия водителя для остальных игроков (синхр., шаг 0.5)
+	float m_VB_SyncTurn;
+	float m_VB_SyncUp;
 	bool m_VB_ModulesFitted;		// хоть один модуль на месте колеса (считается везде по навескам)
 	float m_VB_InFwd;				// ввод водителя: W - S
 	float m_VB_InTurn;				// D - A
@@ -47,6 +51,9 @@ class VB_EchoRunner extends CarScript
 		RegisterNetSyncVariableBool("m_VB_FlyReady");
 		RegisterNetSyncVariableBool("m_VB_Flying");
 		RegisterNetSyncVariableFloat("m_VB_Energy", 0, 1, 2);
+		RegisterNetSyncVariableFloat("m_VB_SyncFwd", -1, 1, 1);
+		RegisterNetSyncVariableFloat("m_VB_SyncTurn", -1, 1, 1);
+		RegisterNetSyncVariableFloat("m_VB_SyncUp", -1, 1, 1);
 		m_VB_WheelSlots = {"VB_ER_Wheel_1_1", "VB_ER_Wheel_1_2", "VB_ER_Wheel_2_1", "VB_ER_Wheel_2_2"};
 		VB_InitGeometry();
 		m_VB_Fly = new VB_EchoRunnerFlight(this);
@@ -245,7 +252,7 @@ class VB_EchoRunner extends CarScript
 		VB_UpdateModulesFitted();
 		if (item && !GetGame().IsDedicatedServer())
 		{
-			VB_SetSelMaterial(item, "neon", VB_NEON_OFF);       // снятая деталь не светится
+			VB_SetSelMaterial(item, "neon", VB_NEON_IDLE);      // снятая деталь не горит, только тлеет
 			if (item.IsInherited(VB_EchoRunner_GravModule))
 				VB_EchoRunnerFx.ResetModule(item);
 		}
@@ -417,19 +424,47 @@ class VB_EchoRunner extends CarScript
 	{
 		super.OnUpdate(dt);
 		if (GetGame().IsServer() && m_VB_Fly)
+		{
 			m_VB_Fly.ServerTick(dt);
+			VB_SyncPilotInput();
+		}
 	}
 
-	// на модулях колёсного хода нет: тормоза зажаты и без водителя, руль прямо — модули в слотах колёс не проворачиваются
-	// (баг 11-17: на ручной коробке с передачей мотор раскрутил «колёса» в воздухе, модули встали поперёк).
-	// В полёте газ мотору даёт тяга модулей — мотор ревёт по оборотам (просьба пользователя 11-17);
-	// обороты видят и другие игроки — по ним эффекты считают силу тяги.
+	// сервер раздаёт нажатия водителя остальным игрокам: по ним наклоны модулей, луч, шлейф и гул (отзыв 11-18:
+	// наклоны — от клавиш); шаг 0.5, отправка только при изменении
+	protected void VB_SyncPilotInput()
+	{
+		float f = 0;
+		float t = 0;
+		float u = 0;
+		if (m_VB_ModulesFitted && VB_FlightActive())
+		{
+			f = Math.Round(m_VB_InFwd * 2.0) * 0.5;
+			t = Math.Round(m_VB_InTurn * 2.0) * 0.5;
+			u = Math.Round(m_VB_InUp * 2.0) * 0.5;
+		}
+		if (f != m_VB_SyncFwd || t != m_VB_SyncTurn || u != m_VB_SyncUp)
+		{
+			m_VB_SyncFwd = f;
+			m_VB_SyncTurn = t;
+			m_VB_SyncUp = u;
+			SetSynchDirty();
+		}
+	}
+
+	// На модулях колёсного хода нет (решение пользователя 11-18): коробка всегда на нейтрали, переключить нельзя —
+	// с передачей газ проворачивал колёса, а модули сидят в их слотах и кувыркались; тормоза зажаты и без водителя,
+	// руль прямо. На колёсах (модулей нет) машина обычная, ручная коробка.
+	// Мотор в полёте: на нейтрали газ в пол давал перегазовку (отзыв 11-18) — держим обороты по силе тяги:
+	// холостые без клавиш, VB_ERFlight.RPM_FLY при полной тяге.
 	override void OnInput(float dt)
 	{
 		super.OnInput(dt);
 		if (!m_VB_ModulesFitted)
 			return;
-		// коробка — автомат (11-17): передачу ведёт сама, в полёте держим тормоза — колёса-модули не крутятся
+		int neutral = GetNeutralGear();
+		if (GetGear() != neutral)
+			ShiftTo(neutral);
 		SetBrake(1.0);
 		SetHandbrake(1.0);
 		SetBrakesActivateWithoutDriver(true);
@@ -437,16 +472,45 @@ class VB_EchoRunner extends CarScript
 		float thrust = 0;
 		if (VB_FlightActive())
 			thrust = VB_Thrust();
-		SetThrottle(thrust);
+		float throttle = 0;
+		if (thrust > 0.02)
+		{
+			float idle = EngineGetRPMIdle();
+			float target = idle + (VB_ERFlight.RPM_FLY - idle) * thrust;
+			throttle = Math.Clamp((target - EngineGetRPM()) / 1500.0 + 0.1 * thrust, 0, 1);
+		}
+		SetThrottle(throttle);
+	}
+
+	// ввод водителя для эффектов: у самого водителя — свои клавиши, у остальных — с сервера (m_VB_Sync*)
+	void VB_PilotInput(out float fwd, out float turn, out float up)
+	{
+		Human drv = CrewDriver();
+		if (drv && drv == GetGame().GetPlayer())
+		{
+			fwd = m_VB_InFwd;
+			turn = m_VB_InTurn;
+			up = m_VB_InUp;
+			return;
+		}
+		fwd = m_VB_SyncFwd;
+		turn = m_VB_SyncTurn;
+		up = m_VB_SyncUp;
+	}
+
+	// сила тяги по вводу 0..1 (W/S, набор высоты, поворот)
+	static float VB_ThrustOf(float fwd, float turn, float up)
+	{
+		float t = Math.AbsFloat(fwd);
+		t = Math.Max(t, Math.Max(up, 0) * 0.75);
+		t = Math.Max(t, Math.AbsFloat(turn) * 0.35);
+		return Math.Clamp(t, 0, 1);
 	}
 
 	// сила тяги по вводу водителя 0..1 (W/S, набор высоты, поворот)
 	float VB_Thrust()
 	{
-		float t = Math.AbsFloat(m_VB_InFwd);
-		t = Math.Max(t, Math.Max(m_VB_InUp, 0) * 0.75);
-		t = Math.Max(t, Math.AbsFloat(m_VB_InTurn) * 0.35);
-		return Math.Clamp(t, 0, 1);
+		return VB_ThrustOf(m_VB_InFwd, m_VB_InTurn, m_VB_InUp);
 	}
 
 	override void EOnPostFrame(IEntity other, int extra)

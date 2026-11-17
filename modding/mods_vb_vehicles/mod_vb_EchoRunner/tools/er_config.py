@@ -130,7 +130,7 @@ car = rep(car, '\t\t\t"vb_echorunner\\data\\body.rvmat"\n\t\t};\n\t\tdashboardMa
           '\t\t\t"vb_echorunner\\data\\body.rvmat",\n\t\t\t"%ser_neon_off.rvmat",\n\t\t\t"%ser_screen_off.rvmat"\n\t\t};\n'
           '\t\tdashboardMatOn=' % (P, P))
 car = rep(car, "ratio=4.0999999;", "ratio=5.2;", 2)                       # колесо 0.42 вместо 0.33: ×1.27
-car = rep(car, 'type="GEARBOX_MANUAL";', 'type="GEARBOX_AUTOMATIC";')        # автомат (просьба пользователя 11-17), как Offroad_02
+# коробка — ручная, как у ALEX (11-18 пользователь вернул ручную; автомат 11-17 убран)
 car = rep(car, "wheelHubRadius=0.25;", "wheelHubRadius=0.30;", 2)
 car = re.sub(r"class GUIInventoryAttachmentsProps\s*\{.*?\n\t\t\};\n", """class GUIInventoryAttachmentsProps
 		{
@@ -193,7 +193,7 @@ ITEMS = '''
 		rotationFlags=0;
 		hiddenSelections[]={"neon"};
 		hiddenSelectionsTextures[]={"%(P)ser_neon_co.paa"};
-		hiddenSelectionsMaterials[]={"%(P)ser_neon_off.rvmat"};
+		hiddenSelectionsMaterials[]={"%(P)ser_neon_idle.rvmat"};		// снятая деталь еле тлеет (превью, 11-18)
 		class DamageSystem
 		{
 			class GlobalHealth
@@ -244,7 +244,7 @@ ITEMS = '''
 		tyreTread=0.5;
 		hiddenSelections[]={"neon"};
 		hiddenSelectionsTextures[]={"%(P)ser_neon_co.paa"};
-		hiddenSelectionsMaterials[]={"%(P)ser_neon_off.rvmat"};
+		hiddenSelectionsMaterials[]={"%(P)ser_neon_idle.rvmat"};		// снятая деталь еле тлеет (превью, 11-18)
 		class AnimationSources
 		{
 			class rotor
@@ -335,7 +335,10 @@ for cls, model, slots in (("vb_er_wheel", "vb_er_wheel", ["VB_ER_Wheel_1_1", "VB
                           ("vb_er_door_driver", "vb_er_door_driver", ["VB_ER_Door_Driver"]),
                           ("vb_er_door_codriver", "vb_er_door_codriver", ["VB_ER_Door_CoDriver"]),
                           ("vb_er_hood", "vb_er_hood", ["VB_ER_Hood"]),
-                          ("vb_er_tank", "vb_er_tank", ["VB_ER_Tank_1", "VB_ER_Tank_2"]),
+                          # у каждого бака свой прокси, как у трубок: с одним прокси на два слота баки на машине
+                          # не рисовались (стенд 11-18), модель прокси — копия модели бака
+                          ("vb_er_tank_1", "vb_er_tank_1", ["VB_ER_Tank_1"]),
+                          ("vb_er_tank_2", "vb_er_tank_2", ["VB_ER_Tank_2"]),
                           ("vb_er_pipes_l", "vb_er_pipes_l", ["VB_ER_Pipes_L"]),
                           ("vb_er_pipes_r", "vb_er_pipes_r", ["VB_ER_Pipes_R"]),
                           ("vb_er_pipes_engine", "vb_er_pipes_engine", ["VB_ER_Pipes_Engine"])):
