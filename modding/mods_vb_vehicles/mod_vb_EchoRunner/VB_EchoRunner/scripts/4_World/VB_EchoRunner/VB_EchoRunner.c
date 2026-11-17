@@ -1,0 +1,741 @@
+// Echo Runner (сервер 16). Основа — Interceptor ALEX (скрипт Borizz.k для ALEX.P, 2021; переделка разрешена
+// владельцем пака). Своё: урона от столкновений машина не получает, неон Изнанки и экран горят при работающем
+// моторе, свои слоты и детали (VB_ER_*).
+
+class VB_EchoRunner extends CarScript
+{
+	static const string VB_NEON_ON = "vb_echorunner\\data\\parts\\er_neon.rvmat";
+	static const string VB_NEON_OFF = "vb_echorunner\\data\\parts\\er_neon_off.rvmat";
+	static const string VB_SCREEN_ON = "vb_echorunner\\data\\parts\\er_screen.rvmat";
+	static const string VB_SCREEN_OFF = "vb_echorunner\\data\\parts\\er_screen_off.rvmat";
+
+	protected ref UniversalTemperatureSource m_UTSource;
+	protected ref UniversalTemperatureSourceSettings m_UTSSettings;
+	protected ref UniversalTemperatureSourceLambdaEngine m_UTSLEngine;
+
+	protected ref EffVehicleSmoke m_exhaustFxR;
+	protected int m_exhaustPtcFxR;
+	protected vector m_exhaustPtcPosR;
+	protected vector m_exhaustPtcDirR;
+	bool m_IsSecondExhaustPresent = false;
+
+	protected int m_VB_NeonKey = -1;
+	protected bool m_VB_NeonDirty = true;
+
+	// ------------------------------------------------ полёт (этап 8): VB_EchoRunner_Flight.c, эффекты — VB_EchoRunner_Fx.c
+	bool m_VB_FlyReady;				// сервер: 4 модуля + 3 трубопровода + энергия (синхр.)
+	bool m_VB_Flying;				// сервер: в воздухе (синхр., для эффектов)
+	float m_VB_Energy;				// энергия баков 0..1 (синхр.)
+	bool m_VB_ModulesFitted;		// хоть один модуль на месте колеса (считается везде по навескам)
+	float m_VB_InFwd;				// ввод водителя: W - S
+	float m_VB_InTurn;				// D - A
+	float m_VB_InUp;				// Shift - Ctrl
+	float m_VB_FwdSign = 1;			// нос машины по оси z модели (у ALEX: -1)
+	float m_VB_LeftSign = 1;		// левый борт по оси x модели
+	float m_VB_BottomLS;			// низ колёс/модулей по y модели
+	float m_VB_ModSide[4];			// модуль на борту +x модели (прокси без поворота) = 1, иначе -1
+	bool m_VB_ModFront[4];
+	ref array<string> m_VB_WheelSlots;
+	ref VB_EchoRunnerFlight m_VB_Fly;
+	ref VB_EchoRunnerFx m_VB_Fx;
+	protected int m_VB_MoveTime = -100000;
+	protected float m_VB_FxTime;
+
+	void VB_EchoRunner()
+	{
+		SetEventMask(EntityEvent.SIMULATE);			// у CarScript только POSTSIMULATE/POSTFRAME (скилл dayz-aviation)
+		RegisterNetSyncVariableBool("m_VB_FlyReady");
+		RegisterNetSyncVariableBool("m_VB_Flying");
+		RegisterNetSyncVariableFloat("m_VB_Energy", 0, 1, 2);
+		m_VB_WheelSlots = {"VB_ER_Wheel_1_1", "VB_ER_Wheel_1_2", "VB_ER_Wheel_2_1", "VB_ER_Wheel_2_2"};
+		VB_InitGeometry();
+		m_VB_Fly = new VB_EchoRunnerFlight(this);
+		if (!GetGame().IsDedicatedServer())
+			m_VB_Fx = new VB_EchoRunnerFx(this);
+
+		m_dmgContactCoef = 0.0010;
+		m_EngineStartOK 		= "VB_ER_Engine_start_SoundSet";
+		m_EngineStartBattery 	= "VB_ER_Engine_failed_start_battery_SoundSet";
+		m_EngineStartPlug 		= "VB_ER_Engine_failed_start_sparkplugs_SoundSet";
+		m_EngineStartFuel 		= "VB_ER_Engine_failed_start_fuel_SoundSet";
+		m_EngineStopFuel 		= "VB_ER_Engine_stop_fuel_SoundSet";
+
+		m_CarDoorOpenSound 		= "Truck_01_door_open_SoundSet";
+		m_CarDoorCloseSound 	= "Truck_01_door_close_SoundSet";
+
+		m_HornComponent.RegisterSound(VehicleHornMode.SHORT, "Offroad_02_Horn_Short_SoundSet");
+		m_HornComponent.RegisterSound(VehicleHornMode.LONG, "Offroad_02_Horn_SoundSet");
+		m_LightsComponent.RegisterLight("Front", new VehicleLightData(new VB_EchoRunnerLightProfileFront()));
+		m_LightsComponent.RegisterLight("Rear", new VehicleLightData(new VB_EchoRunnerLightProfileRear()));
+
+		SetEnginePos("0 0.7 1.2");
+		if (MemoryPointExists("ptcExhaust1_end"))
+		{
+			m_exhaustPtcPosR = GetMemoryPointPos("ptcExhaust1_end");
+			if (MemoryPointExists("ptcExhaust1_start"))
+			{
+				vector exhaustStartR = GetMemoryPointPos("ptcExhaust1_start");
+				if (m_exhaustPtcPosR && exhaustStartR)
+				{
+					m_IsSecondExhaustPresent = true;
+					vector tempOriR = vector.Direction(exhaustStartR, m_exhaustPtcPosR);
+					m_exhaustPtcDirR[0] = -tempOriR[2];
+					m_exhaustPtcDirR[1] = tempOriR[1];
+					m_exhaustPtcDirR[2] = tempOriR[0];
+					m_exhaustPtcDirR = m_exhaustPtcDirR.Normalized().VectorToAngles();
+				}
+			}
+		}
+	}
+
+	override void EEInit()
+	{
+		super.EEInit();
+
+		if (GetGame().IsServer() || !GetGame().IsMultiplayer())
+		{
+			m_UTSSettings 					= new UniversalTemperatureSourceSettings();
+			m_UTSSettings.m_ManualUpdate 	= true;
+			m_UTSSettings.m_TemperatureMin	= 0;
+			m_UTSSettings.m_TemperatureMax	= 30;
+			m_UTSSettings.m_RangeFull		= 0.5;
+			m_UTSSettings.m_RangeMax		= 2;
+			m_UTSSettings.m_TemperatureCap	= 25;
+			m_UTSLEngine					= new UniversalTemperatureSourceLambdaEngine();
+			m_UTSource						= new UniversalTemperatureSource(this, m_UTSSettings, m_UTSLEngine);
+		}
+		VB_UpdateModulesFitted();
+		if (!GetGame().IsDedicatedServer())
+		{
+			GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(VB_UpdateNeon, 400, true);
+			VB_UpdateNeon();
+		}
+	}
+
+	override void EEDelete(EntityAI parent)
+	{
+		super.EEDelete(parent);
+		if (!GetGame().IsDedicatedServer())
+			GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(VB_UpdateNeon);
+		if (m_VB_Fx)
+			m_VB_Fx.Stop();
+		if (GetGame().IsClient() || !GetGame().IsMultiplayer())
+		{
+			if (m_IsSecondExhaustPresent && SEffectManager.IsEffectExist(m_exhaustPtcFxR))
+				SEffectManager.Stop(m_exhaustPtcFxR);
+		}
+	}
+
+	// ------------------------------------------------ урона от столкновений нет (машина эксклюзивная, 2026-11-17)
+	// Как ванильный CarScript.CheckContactCache: звук удара и урон экипажу (по настройкам сервера) остаются,
+	// урон самой машине (ProcessDirectDamage) не наносится. Мод сервера, глушащий OnContact, этому не мешает.
+	override void CheckContactCache()
+	{
+		int count = m_ContactCache.Count();
+		if (count == 0)
+			return;
+
+		for (int i = 0; i < count; ++i)
+		{
+			array<ref VehicleContactData> data = m_ContactCache.GetElement(i);
+			if (!data || data.Count() == 0)
+				continue;
+
+			float dmg = Math.AbsFloat(data[0].m_Impulse * m_dmgContactCoef);
+			float crewDmgBase = Math.AbsFloat((data[0].m_Impulse / dBodyGetMass(this)) * 1000 * m_dmgContactCoef);
+			if (dmg < GameConstants.CARS_CONTACT_DMG_MIN)
+				continue;
+
+			if (dmg < GameConstants.CARS_CONTACT_DMG_THRESHOLD)
+			{
+				SynchCrashLightSound(true);
+			}
+			else
+			{
+				DamageCrew(crewDmgBase);
+				SynchCrashHeavySound(true);
+			}
+		}
+
+		UpdateHeadlightState();
+		UpdateLights();
+		m_ContactCache.Clear();
+	}
+
+	// ------------------------------------------------ неон Изнанки и экран (клиент)
+	// Кузов, двери, экран — при работающем моторе. Баки — мотор + энергия в этом баке. Трубопроводы — мотор + энергия
+	// хоть в одном баке. Антиграв-модули — мотор + машина готова к полёту (m_VB_FlyReady).
+	void VB_UpdateNeon()
+	{
+		bool engine = EngineIsOn();
+		int key = 0;
+		if (engine)
+			key += 1;
+		if (m_VB_FlyReady)
+			key += 2;
+		if (VB_TankHasEnergy("VB_ER_Tank_1"))
+			key += 4;
+		if (VB_TankHasEnergy("VB_ER_Tank_2"))
+			key += 8;
+		if (key == m_VB_NeonKey && !m_VB_NeonDirty)
+			return;
+		m_VB_NeonKey = key;
+		m_VB_NeonDirty = false;
+		bool energy = (key & 12) != 0;
+
+		VB_SetSelMaterial(this, "neon", VB_NeonMat(engine));
+		if (engine)
+			VB_SetSelMaterial(this, "screen", VB_SCREEN_ON);
+		else
+			VB_SetSelMaterial(this, "screen", VB_SCREEN_OFF);
+		for (int i = 0; i < GetInventory().AttachmentCount(); i++)
+		{
+			EntityAI att = GetInventory().GetAttachmentFromIndex(i);
+			if (!att)
+				continue;
+			bool on = engine;
+			if (att.IsInherited(VB_EchoRunner_GravModule))
+			{
+				on = engine && m_VB_FlyReady;
+			}
+			else if (att.IsKindOf("VB_EchoRunner_Tank"))
+			{
+				ItemBase tank = ItemBase.Cast(att);
+				on = engine && tank && tank.GetQuantity() > 0;
+			}
+			else if (att.IsInherited(VB_EchoRunner_RiftPart))
+			{
+				on = engine && energy;
+			}
+			VB_SetSelMaterial(att, "neon", VB_NeonMat(on));
+		}
+	}
+
+	static string VB_NeonMat(bool on)
+	{
+		if (on)
+			return VB_NEON_ON;
+		return VB_NEON_OFF;
+	}
+
+	protected bool VB_TankHasEnergy(string slot)
+	{
+		ItemBase tank = ItemBase.Cast(FindAttachmentBySlotName(slot));
+		return tank && tank.GetQuantity() > 0;
+	}
+
+	static void VB_SetSelMaterial(EntityAI ent, string selection, string material)
+	{
+		int idx = ent.GetHiddenSelectionIndex(selection);
+		if (idx >= 0)
+			ent.SetObjectMaterial(idx, material);
+	}
+
+	override void EEItemAttached(EntityAI item, string slot_name)
+	{
+		super.EEItemAttached(item, slot_name);
+		m_VB_NeonDirty = true;
+		VB_UpdateModulesFitted();
+	}
+
+	override void EEItemDetached(EntityAI item, string slot_name)
+	{
+		super.EEItemDetached(item, slot_name);
+		m_VB_NeonDirty = true;
+		VB_UpdateModulesFitted();
+		if (item && !GetGame().IsDedicatedServer())
+		{
+			VB_SetSelMaterial(item, "neon", VB_NEON_OFF);       // снятая деталь не светится
+			if (item.IsInherited(VB_EchoRunner_GravModule))
+				VB_EchoRunnerFx.ResetModule(item);
+		}
+	}
+
+	override void OnVariablesSynchronized()
+	{
+		super.OnVariablesSynchronized();
+		m_VB_NeonDirty = true;
+	}
+
+	// ------------------------------------------------ полёт (этап 8)
+	// оси машины по памяти модели: перед — ось колеса 1_1, левый борт — колёса 1_x; низ модулей = ось - радиус 0.42
+	protected void VB_InitGeometry()
+	{
+		vector fl = GetMemoryPointPos("wheel_1_1_axis");
+		vector rl = GetMemoryPointPos("wheel_1_2_axis");
+		m_VB_FwdSign = 1;
+		if (fl[2] < rl[2])
+			m_VB_FwdSign = -1;
+		m_VB_LeftSign = 1;
+		if (fl[0] < 0)
+			m_VB_LeftSign = -1;
+		float ysum = 0;
+		for (int i = 0; i < 4; i++)
+		{
+			string suf = m_VB_WheelSlots[i].Substring(12, 3);		// "VB_ER_Wheel_1_1" -> "1_1"
+			vector p = GetMemoryPointPos("wheel_" + suf + "_axis");
+			ysum += p[1];
+			m_VB_ModSide[i] = 1;
+			if (p[0] < 0)
+				m_VB_ModSide[i] = -1;
+			m_VB_ModFront[i] = suf.Substring(2, 1) == "1";
+		}
+		m_VB_BottomLS = ysum / 4.0 - 0.42;
+	}
+
+	EntityAI VB_ModuleAt(int i)
+	{
+		EntityAI e = FindAttachmentBySlotName(m_VB_WheelSlots[i]);
+		if (e && e.IsInherited(VB_EchoRunner_GravModule))
+			return e;
+		return null;
+	}
+
+	protected void VB_UpdateModulesFitted()
+	{
+		bool any = false;
+		for (int i = 0; i < 4; i++)
+		{
+			if (VB_ModuleAt(i))
+				any = true;
+		}
+		m_VB_ModulesFitted = any;
+	}
+
+	int VB_ModulesWorking()
+	{
+		int n = 0;
+		for (int i = 0; i < 4; i++)
+		{
+			EntityAI m = VB_ModuleAt(i);
+			if (m && !m.IsRuined())
+				n++;
+		}
+		return n;
+	}
+
+	bool VB_PipesFitted()
+	{
+		EntityAI l = FindAttachmentBySlotName("VB_ER_Pipes_L");
+		EntityAI r = FindAttachmentBySlotName("VB_ER_Pipes_R");
+		EntityAI e = FindAttachmentBySlotName("VB_ER_Pipes_Engine");
+		return l && r && e && !l.IsRuined() && !r.IsRuined() && !e.IsRuined();
+	}
+
+	float VB_TankEnergy()
+	{
+		float sum = 0;
+		ItemBase t1 = ItemBase.Cast(FindAttachmentBySlotName("VB_ER_Tank_1"));
+		ItemBase t2 = ItemBase.Cast(FindAttachmentBySlotName("VB_ER_Tank_2"));
+		if (t1 && !t1.IsRuined())
+			sum += t1.GetQuantity();
+		if (t2 && !t2.IsRuined())
+			sum += t2.GetQuantity();
+		return sum;
+	}
+
+	// сервер: списать энергию поровну с непустых баков
+	void VB_DrainEnergy(float amount)
+	{
+		for (int pass = 0; pass < 2 && amount > 0.00001; pass++)
+		{
+			array<ItemBase> tanks = new array<ItemBase>;
+			ItemBase t1 = ItemBase.Cast(FindAttachmentBySlotName("VB_ER_Tank_1"));
+			ItemBase t2 = ItemBase.Cast(FindAttachmentBySlotName("VB_ER_Tank_2"));
+			if (t1 && !t1.IsRuined() && t1.GetQuantity() > 0)
+				tanks.Insert(t1);
+			if (t2 && !t2.IsRuined() && t2.GetQuantity() > 0)
+				tanks.Insert(t2);
+			if (tanks.Count() == 0)
+				return;
+			float share = amount / tanks.Count();
+			amount = 0;
+			foreach (ItemBase t : tanks)
+			{
+				float q = t.GetQuantity();
+				float take = Math.Min(q, share);
+				t.SetQuantity(q - take);
+				amount += share - take;
+			}
+		}
+	}
+
+	// идёт управляемый полёт: всё на месте, мотор заведён, водитель в сознании
+	bool VB_FlightActive()
+	{
+		if (!m_VB_ModulesFitted || !m_VB_FlyReady || !EngineIsOn())
+			return false;
+		Human driver = CrewDriver();
+		return driver && driver.IsControllingVehicle();
+	}
+
+	// клиент водителя: свои клавиши полёта (SyncedValue заодно отправляет их серверу — как у RFFS)
+	protected void VB_ReadLocalInputs()
+	{
+		PlayerBase pl = PlayerBase.Cast(CrewDriver());
+		if (!pl || pl != GetGame().GetPlayer())
+			return;
+		VB_ReadInputsOf(pl);
+	}
+
+	protected void VB_ReadInputsOf(PlayerBase pl)
+	{
+		m_VB_InFwd = 0;
+		m_VB_InTurn = 0;
+		m_VB_InUp = 0;
+		if (!pl)
+			return;
+		UAInterface ui = pl.GetInputInterface();
+		if (!ui)
+			return;
+		m_VB_InFwd = ui.SyncedValue("UAVBERForward") - ui.SyncedValue("UAVBERBack");
+		m_VB_InTurn = ui.SyncedValue("UAVBERRight") - ui.SyncedValue("UAVBERLeft");
+		m_VB_InUp = ui.SyncedValue("UAVBERUp") - ui.SyncedValue("UAVBERDown");
+#ifdef DIAG_DEVELOPER
+		// стенд dayz-mcp: цифровой блок клиента (VB_ERDebug, 5_Mission) — только DayZDiag
+		if (!GetGame().IsDedicatedServer() && pl == GetGame().GetPlayer())
+		{
+			m_VB_InFwd = Math.Clamp(m_VB_InFwd + VB_ERDebug.s_Fwd, -1, 1);
+			m_VB_InTurn = Math.Clamp(m_VB_InTurn + VB_ERDebug.s_Turn, -1, 1);
+			m_VB_InUp = Math.Clamp(m_VB_InUp + VB_ERDebug.s_Up, -1, 1);
+		}
+#endif
+	}
+
+	override void EOnSimulate(IEntity other, float dt)
+	{
+		super.EOnSimulate(other, dt);
+		if (!m_VB_ModulesFitted || !IsServerOrOwner())
+			return;
+		// сервер: ввод приходит в ходах машины; если ходов давно нет — читаем синхронизированный ввод водителя
+		if (GetGame().IsServer() && GetGame().GetTime() - m_VB_MoveTime > 300)
+			VB_ReadInputsOf(PlayerBase.Cast(CrewDriver()));
+		m_VB_Fly.Step(dt);
+	}
+
+	override void OnUpdate(float dt)
+	{
+		super.OnUpdate(dt);
+		if (GetGame().IsServer() && m_VB_Fly)
+			m_VB_Fly.ServerTick(dt);
+	}
+
+	// на модулях колёсного хода нет: тормоза зажаты и без водителя, руль прямо — модули в слотах колёс не проворачиваются
+	// (баг 11-17: на ручной коробке с передачей мотор раскрутил «колёса» в воздухе, модули встали поперёк).
+	// В полёте газ мотору даёт тяга модулей — мотор ревёт по оборотам (просьба пользователя 11-17);
+	// обороты видят и другие игроки — по ним эффекты считают силу тяги.
+	override void OnInput(float dt)
+	{
+		super.OnInput(dt);
+		if (!m_VB_ModulesFitted)
+			return;
+		// коробка — автомат (11-17): передачу ведёт сама, в полёте держим тормоза — колёса-модули не крутятся
+		SetBrake(1.0);
+		SetHandbrake(1.0);
+		SetBrakesActivateWithoutDriver(true);
+		SetSteering(0);
+		float thrust = 0;
+		if (VB_FlightActive())
+			thrust = VB_Thrust();
+		SetThrottle(thrust);
+	}
+
+	// сила тяги по вводу водителя 0..1 (W/S, набор высоты, поворот)
+	float VB_Thrust()
+	{
+		float t = Math.AbsFloat(m_VB_InFwd);
+		t = Math.Max(t, Math.Max(m_VB_InUp, 0) * 0.75);
+		t = Math.Max(t, Math.AbsFloat(m_VB_InTurn) * 0.35);
+		return Math.Clamp(t, 0, 1);
+	}
+
+	override void EOnPostFrame(IEntity other, int extra)
+	{
+		super.EOnPostFrame(other, extra);
+		if (!m_VB_Fx)
+			return;
+		float now = GetGame().GetTickTime();
+		float dt = Math.Clamp(now - m_VB_FxTime, 0, 0.1);
+		m_VB_FxTime = now;
+		if (!m_VB_ModulesFitted && m_VB_Fx.GetSpin() <= 0)
+			return;
+		if (m_VB_ModulesFitted)
+			VB_ReadLocalInputs();
+		m_VB_Fx.Update(dt);
+	}
+
+#ifdef FEATURE_NETWORK_RECONCILIATION
+	protected override event typename GetMoveType()
+	{
+		return VB_EchoRunnerMove;
+	}
+
+	// клиент водителя: ввод полёта в ход (сервер повторит ход с тем же вводом)
+	protected override event void ObtainMove(PawnMove pMove)
+	{
+		super.ObtainMove(pMove);
+		VB_EchoRunnerMove move = VB_EchoRunnerMove.Cast(pMove);
+		if (!move)
+			return;
+		if (m_VB_ModulesFitted)
+			VB_ReadLocalInputs();
+		move.m_VB_Fwd = m_VB_InFwd;
+		move.m_VB_Turn = m_VB_InTurn;
+		move.m_VB_Up = m_VB_InUp;
+	}
+
+	protected override event void ConsumeMove(PawnMove pMove)
+	{
+		super.ConsumeMove(pMove);
+		VB_EchoRunnerMove move = VB_EchoRunnerMove.Cast(pMove);
+		if (!move)
+			return;
+		m_VB_InFwd = move.m_VB_Fwd;
+		m_VB_InTurn = move.m_VB_Turn;
+		m_VB_InUp = move.m_VB_Up;
+		m_VB_MoveTime = GetGame().GetTime();
+	}
+
+	protected override event bool ReplayMove(PawnMove pMove)
+	{
+		if (!super.ReplayMove(pMove))
+			return false;
+		VB_EchoRunnerMove move = VB_EchoRunnerMove.Cast(pMove);
+		if (move)
+		{
+			m_VB_InFwd = move.m_VB_Fwd;
+			m_VB_InTurn = move.m_VB_Turn;
+			m_VB_InUp = move.m_VB_Up;
+		}
+		return true;
+	}
+#endif
+
+	// ------------------------------------------------ из Interceptor ALEX (второй выхлоп, тепло мотора)
+	override void OnEngineStart()
+	{
+		super.OnEngineStart();
+		if (GetGame().IsServer() || !GetGame().IsMultiplayer())
+			m_UTSource.SetDefferedActive(true, 20.0);
+		m_VB_NeonDirty = true;
+	}
+
+	override void OnEngineStop()
+	{
+		super.OnEngineStop();
+		if (GetGame().IsServer() || !GetGame().IsMultiplayer())
+			m_UTSource.SetDefferedActive(false, 10.0);
+		m_VB_NeonDirty = true;
+	}
+
+	override void EOnPostSimulate(IEntity other, float timeSlice)
+	{
+		super.EOnPostSimulate(other, timeSlice);
+
+		if (GetGame().IsServer() || !GetGame().IsMultiplayer())
+		{
+			if (m_UTSource && m_UTSource.IsActive())
+				m_UTSource.Update(m_UTSSettings, m_UTSLEngine);
+		}
+
+		if ((GetGame().IsClient() || !GetGame().IsMultiplayer()) && m_IsSecondExhaustPresent)
+		{
+			if (EngineIsOn())
+			{
+				if (!SEffectManager.IsEffectExist(m_exhaustPtcFxR))
+				{
+					m_exhaustFxR = new EffExhaustSmoke();
+					m_exhaustPtcFxR = SEffectManager.PlayOnObject(m_exhaustFxR, this, m_exhaustPtcPosR, m_exhaustPtcDirR);
+				}
+				if (m_exhaustFxR)
+					m_exhaustFxR.SetParticleStateLight();
+			}
+			else if (SEffectManager.IsEffectExist(m_exhaustPtcFxR))
+			{
+				SEffectManager.Stop(m_exhaustPtcFxR);
+			}
+		}
+	}
+
+	override float GetActionDistanceCoolant() { return 6.0; }
+	override float GetActionDistanceFuel() { return 4.0; }
+	override float GetActionDistanceOil() { return 4.0; }
+	override float GetActionDistanceBrakes() { return 4.0; }
+	override float GetTransportCameraDistance() { return 5.5; }
+	override vector GetTransportCameraOffset() { return "0 1.6 0"; }
+	override int GetAnimInstance() { return VehicleAnimInstances.SEDAN; }
+
+	override int GetSeatAnimationType(int posIdx)
+	{
+		switch (posIdx)
+		{
+		case 0:
+			return DayZPlayerConstants.VEHICLESEAT_DRIVER;
+		case 1:
+			return DayZPlayerConstants.VEHICLESEAT_CODRIVER;
+		}
+		return 0;
+	}
+
+	override bool CanReleaseAttachment(EntityAI attachment)
+	{
+		if (!super.CanReleaseAttachment(attachment))
+			return false;
+
+		// в воздухе модули, баки и трубопроводы не снять
+		if (m_VB_Flying && (attachment.IsInherited(VB_EchoRunner_GravModule) || attachment.IsInherited(VB_EchoRunner_RiftPart)))
+			return false;
+
+		if (EngineIsOn() || GetCarDoorsState("VB_ER_Hood") == CarDoorState.DOORS_CLOSED)
+		{
+			string attType = attachment.GetType();
+			if (attType == "CarRadiator" || attType == "CarBattery" || attType == "SparkPlug")
+				return false;
+		}
+		return true;
+	}
+
+	override bool CanDisplayAttachmentCategory(string category_name)
+	{
+		if (!super.CanDisplayAttachmentCategory(category_name))
+			return false;
+
+		category_name.ToLower();
+		if (category_name.Contains("engine"))
+		{
+			if (GetCarDoorsState("VB_ER_Hood") == CarDoorState.DOORS_CLOSED)
+				return false;
+		}
+		return true;
+	}
+
+	override bool CanDisplayCargo()
+	{
+		if (!super.CanDisplayCargo())
+			return false;
+		if (GetCarDoorsState("VB_ER_Door_Driver") == CarDoorState.DOORS_CLOSED)
+			return false;
+		return true;
+	}
+
+	override int GetCarDoorsState(string slotType)
+	{
+		CarDoor carDoor;
+		Class.CastTo(carDoor, FindAttachmentBySlotName(slotType));
+		if (!carDoor)
+			return CarDoorState.DOORS_MISSING;
+
+		switch (slotType)
+		{
+		case "VB_ER_Door_Driver":
+			return TranslateAnimationPhaseToCarDoorState("DoorsDriver");
+		case "VB_ER_Door_CoDriver":
+			return TranslateAnimationPhaseToCarDoorState("DoorsCoDriver");
+		case "VB_ER_Hood":
+			return TranslateAnimationPhaseToCarDoorState("DoorsHood");
+		}
+		return CarDoorState.DOORS_MISSING;
+	}
+
+	override bool CrewCanGetThrough(int posIdx)
+	{
+		switch (posIdx)
+		{
+		case 0:
+			return GetCarDoorsState("VB_ER_Door_Driver") != CarDoorState.DOORS_CLOSED;
+		case 1:
+			return GetCarDoorsState("VB_ER_Door_CoDriver") != CarDoorState.DOORS_CLOSED;
+		}
+		return false;
+	}
+
+	override string GetDoorSelectionNameFromSeatPos(int posIdx)
+	{
+		switch (posIdx)
+		{
+		case 0:
+			return "doors_driver";
+		case 1:
+			return "doors_codriver";
+		}
+		return super.GetDoorSelectionNameFromSeatPos(posIdx);
+	}
+
+	override string GetDoorInvSlotNameFromSeatPos(int posIdx)
+	{
+		switch (posIdx)
+		{
+		case 0:
+			return "VB_ER_Door_Driver";
+		case 1:
+			return "VB_ER_Door_CoDriver";
+		}
+		return super.GetDoorInvSlotNameFromSeatPos(posIdx);
+	}
+
+	override string GetAnimSourceFromSelection(string selection)
+	{
+		switch (selection)
+		{
+		case "doors_driver":
+			return "DoorsDriver";
+		case "doors_codriver":
+			return "DoorsCoDriver";
+		case "doors_hood":
+			return "DoorsHood";
+		}
+		return "";
+	}
+
+	override bool IsVitalGlowPlug() { return false; }
+	override bool IsVitalSparkPlug() { return false; }
+
+	// аккумулятор — контракт 1.30
+	override bool NeedElectricitySourceDevice() { return true; }
+	override EntityAI GetElectricitySourceDevice() { return GetInventory().FindAttachment(CarBattery.SLOT_ID); }
+	override string GetElectricitySourceDeviceType() { return "CarBattery"; }
+
+	override bool CanReachSeatFromSeat(int currentSeat, int nextSeat) { return false; }
+
+	override bool CanReachDoorsFromSeat(string pDoorsSelection, int pCurrentSeat)
+	{
+		switch (pCurrentSeat)
+		{
+		case 0:
+			return pDoorsSelection == "DoorsDriver";
+		case 1:
+			return pDoorsSelection == "DoorsCoDriver";
+		}
+		return false;
+	}
+
+	override void OnDebugSpawn()
+	{
+		EntityAI entity;
+		if (Class.CastTo(entity, this))
+		{
+			entity.GetInventory().CreateInInventory("VB_EchoRunner_Door_Driver");
+			entity.GetInventory().CreateInInventory("VB_EchoRunner_Door_CoDriver");
+			entity.GetInventory().CreateInInventory("VB_EchoRunner_Hood");
+			for (int w = 0; w < 4; w++)
+				entity.GetInventory().CreateInInventory("VB_EchoRunner_Wheel");
+			for (int t = 0; t < 2; t++)
+			{
+				ItemBase tank = ItemBase.Cast(entity.GetInventory().CreateInInventory("VB_EchoRunner_Tank"));
+				if (tank && GetGame().IsServer())
+					tank.SetQuantity(100);		// отладочная машина — с полными баками энергии (стенд зовёт и на клиенте)
+			}
+			entity.GetInventory().CreateInInventory("VB_EchoRunner_Pipes_L");
+			entity.GetInventory().CreateInInventory("VB_EchoRunner_Pipes_R");
+			entity.GetInventory().CreateInInventory("VB_EchoRunner_Pipes_Engine");
+			entity.GetInventory().CreateInInventory("CarBattery");
+			entity.GetInventory().CreateInInventory("SparkPlug");
+			entity.GetInventory().CreateInInventory("CarRadiator");
+			entity.GetInventory().CreateInInventory("HeadlightH7");
+			entity.GetInventory().CreateInInventory("HeadlightH7");
+		}
+		Fill(CarFluid.FUEL, 50);
+		Fill(CarFluid.COOLANT, 6.0);
+		Fill(CarFluid.OIL, 4.0);
+	}
+}

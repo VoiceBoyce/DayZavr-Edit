@@ -30,6 +30,7 @@ ALEX = opts.get("alex", r"d:\DayZavr\DayZavr-Edit\modding\mods_vb_vehicles\mod_v
 ALEX_R, ALEX_W = 0.366, 0.288
 
 RIM = 0.51 * R                    # радиус обода (посадка шины)
+DESTROYED = bool(opts.get("destroyed"))   # --destroyed: разбитое колесо — шина спущена (просела к ободу), без шашек
 TB = R - 0.024                    # основание протектора
 TH = 0.026                        # высота шашки
 
@@ -136,11 +137,13 @@ def build(level):
             (TB - 0.012, -0.49 * W), (TB, -0.44 * W)]
     prof = side + [(TB + 0.002, 0.0)] + [(r, -x) for (r, x) in reversed(side)]
     prof += [(RIM + 0.004, 0.0)]
-    if level >= 3:                                   # без шашек: корона на полном радиусе
+    if level >= 3 and not DESTROYED:                 # без шашек: корона на полном радиусе
         prof = [(r + (TH * 0.8 if r >= TB - 0.013 else 0), x) for (r, x) in prof]
+    if DESTROYED:                                    # спущенная шина: профиль просел к ободу, боковины раздуты
+        prof = [(RIM + (r - RIM) * 0.55, x * (1.12 if r > RIM + 0.01 else 1.0)) for (r, x) in prof]
     lathe(bm, prof, segs, "tyre")
     # --- шашки
-    if level <= 2:
+    if level <= 2 and not DESTROYED:
         pitches = 20 if level == 1 else 16
         bev = 0.006 if level == 1 else 0.0
         for i in range(pitches):

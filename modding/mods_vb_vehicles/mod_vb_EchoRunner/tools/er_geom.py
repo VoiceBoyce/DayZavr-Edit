@@ -40,6 +40,7 @@ COL = {
     "red": _m("paint_red"),
     "glass": _m("glass", True),
     "cable": _m("cable"),
+    "perf": _m("perf"),
 }
 UV_TILE = 1.0          # метров на плитку
 MATS = list(COL)

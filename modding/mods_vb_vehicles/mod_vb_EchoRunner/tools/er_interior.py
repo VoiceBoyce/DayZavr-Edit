@@ -75,7 +75,7 @@ def build(ctx):
 
     # ------------------------------------------------ экран и тумблеры (на торпедо справа от руля)
     scr = Part("screen", "body", INT_LODS, ["er_int"])
-    glow = Part("screen_glow", "body", INT_LODS, ["er_int", "neon"])
+    glow = Part("screen_glow", "body", INT_LODS, ["er_int", "screen"])   # своё скрытое выделение: экран вкл/выкл
     c = V(-0.17, -0.37, 1.055)
     n = (EYE - c).normalized()
     ex = Vector((0, 0, 1)).cross(n).normalized()
@@ -117,7 +117,7 @@ def build(ctx):
         a = 2 * math.pi * k / 4 + math.pi / 4
         p0 = fc + V(0.047 * math.cos(a), 0.047 * math.sin(a), 0.03)
         bar(fl, p0, p0 + V(0, 0, 0.16), 0.008, "steel")
-    cyl(fg, fc + V(0, 0, 0.03), V(0, 0, 1), 0.036, 0.16, 16, "glass")       # стекло
+    cyl(fl, fc + V(0, 0, 0.03), V(0, 0, 1), 0.036, 0.16, 16, "glass")       # стекло — не в «neon»
     core = [fc + V(0.012 * math.sin(k * 1.7), 0.012 * math.cos(k * 2.3), 0.045 + 0.13 * k / 8) for k in range(9)]
     tube(fg, catmull(core, 0.008), 0.0045, 6, "neon")                       # «молния» внутри
     P.extend([fl, fg])

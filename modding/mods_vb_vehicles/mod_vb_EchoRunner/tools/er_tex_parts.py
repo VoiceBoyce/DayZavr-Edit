@@ -172,6 +172,8 @@ def m_screen(n):
     c = c * scan[..., None]
     emit("screen", c, np.zeros((n, n)), np.full((n, n), 0.6), np.full((n, n), 0.8), 1.0,
          rv=dict(specular=0.7, power=100, emissive=(1, 1, 1, 10)))
+    T.write_rvmat(os.path.join(OUT, "er_screen_off.rvmat"), VP + "er_screen_nohq.paa", VP + "er_screen_smdi.paa",
+                  specular=0.7, power=100, diffuse=(0.12, 0.12, 0.12, 1))
 
 
 def m_cable(n):
@@ -184,7 +186,29 @@ def m_cable(n):
     emit("cable", c, braid * 0.6, 0.3 * braid + 0.05, 0.35 * braid + 0.1, 3.0, rv=dict(specular=0.4, power=40))
 
 
-ALL = [m_steel_dark, m_steel_rust, m_flare, m_bolt, m_rubber, m_paint_red, m_neon, m_glass, m_lens, m_screen, m_cable]
+def m_perf(n):
+    """Перфорированная ржавая сталь (кожух антиграв-модуля, концепт 02): ряды круглых отверстий со смещением."""
+    c, var, grime = steel_base(n, 91, (0.12, 0.112, 0.105))
+    r = T.smooth(T.fbm(n, 2.4, 92), 0.40, 0.62)
+    rust = T.lerp(T.col((0.30, 0.14, 0.06), n), T.col((0.15, 0.065, 0.03), n), T.fbm(n, 1.6, 93))
+    c = T.lerp(c, rust, r)
+    yy, xx = np.mgrid[0:n, 0:n].astype(np.float32)
+    step = n / 16.0                                    # 16 рядов отверстий на плитку (1 м) — шаг ~6 см
+    row = np.floor(yy / step)
+    cx = (xx + (row % 2) * step * 0.5) % step - step * 0.5
+    cy = yy % step - step * 0.5
+    d = np.sqrt(cx * cx + cy * cy) / step
+    hole = T.smooth(0.24 - d, 0.0, 0.025)
+    rim = T.smooth(0.30 - d, 0.0, 0.03) - hole
+    c = c * (1 - hole[..., None] * 0.92) + np.array([0.012, 0.008, 0.006]) * hole[..., None]
+    c = T.lerp(c, T.col((0.26, 0.12, 0.05), n), np.clip(rim, 0, 1) * 0.5)
+    h = -0.9 * hole + 0.25 * np.clip(rim, 0, 1) + 0.25 * r * T.fbm(n, 1.0, 94)
+    emit("perf", c, h, 0.3 * (1 - r) * (1 - hole) + 0.05, 0.4 * (1 - r) * (1 - hole) + 0.08, 5.0,
+         rv=dict(specular=0.45, power=40))
+
+
+ALL = [m_steel_dark, m_steel_rust, m_flare, m_bolt, m_rubber, m_paint_red, m_neon, m_glass, m_lens, m_screen, m_cable,
+       m_perf]
 for fn in ALL:
     name = fn.__name__[2:]
     if ONLY and name not in ONLY:

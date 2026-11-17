@@ -1,0 +1,194 @@
+EffectDef {
+ Emitors {
+  EmitorDef core {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 8 8 0
+   MaxNum 120
+   BirthRate 70
+   BirthRateRND 0
+   Offset 0 0 0
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   CenterY 0
+   SizeMultiplier 0.3
+   SizeRND 0.06
+   BillboardingType Full
+   StretchMultiplier 1
+   VelAngle 0
+   Velocity 0
+   VelocityRND 0.1
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 1.6
+   GravityMultiplyRND 0.3
+   Wind 0
+   RandomAngle 1
+   LifeTime 0.45
+   LifeTimeRND 0.08
+   Color {
+    0 1 0.12 0.08 0.3 1 0.05 0.05 1 0.7 0.01 0.03
+   }
+   Alpha {
+    0 0 0.06 0.9 0.6 0.55 1 0
+   }
+   Size {
+    0 1 1 0.2
+   }
+   EffectTime 1
+   Repeat 1
+  }
+  EmitorDef trail {
+   ShapeType Sphere
+   ShapeSize 0.08 0 0
+   ConeAngle 360 360 0
+   MaxNum 90
+   BirthRate 0
+   BirthRateRND 0
+   Offset 0 0 0
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   CenterY 0
+   SizeMultiplier 0.5
+   SizeRND 0.12
+   BillboardingType Full
+   StretchMultiplier 1
+   VelAngle 0
+   Velocity 0.2
+   VelocityRND 0.2
+   AirResistance 1
+   AirResistanceRND 0.3
+   GravityMultiply 0.25
+   GravityMultiplyRND 0.1
+   Wind 0
+   RandomAngle 1
+   LifeTime 0.7
+   LifeTimeRND 0.15
+   Color {
+    0 1 0.1 0.08 0.3 0.9 0.04 0.05 1 0.5 0.01 0.03
+   }
+   Alpha {
+    0 0.7 0.4 0.4 1 0
+   }
+   Size {
+    0 0.8 1 1.4
+   }
+   EffectTime 1
+   Repeat 1
+  }
+  EmitorDef rings {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 0 0 0
+   MaxNum 4
+   BirthRate 1.6
+   BirthRateRND 0
+   Offset 0 -0.05 0
+   Angles 180 90 180
+   Material "{EA2686148E09D4DD}Graphics/Particles/materials/enviroment/ring_01.emat"
+   SizeMultiplier 1.8
+   SizeRND 0.1
+   RandomRotDir 0
+   RotMultiplier 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 1
+   BillboardingType None
+   Velocity 0
+   VelocityRND 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0.12
+   GravityMultiplyRND 0.02
+   Wind 0
+   LifeTime 1.1
+   LifeTimeRND 0.1
+   Color {
+    0 1 0.12 0.15 1 0.9 0.03 0.08
+   }
+   Alpha {
+    0 0 0.15 1 0.6 0.6 1 0
+   }
+   Size {
+    0 0.12 1 1
+   }
+   EffectTime 1
+   Repeat 1
+  }
+  EmitorDef haze {
+   ShapeType Sphere
+   ShapeSize 0.25 0 0
+   ConeAngle 360 360 0
+   MaxNum 14
+   BirthRate 7
+   BirthRateRND 0
+   Offset 0 -0.15 0
+   Material "{D29B53088A5A3911}Graphics/Particles/materials/smoke/smoke_dust_01_W.emat"
+   CenterY 0
+   SizeMultiplier 0.9
+   SizeRND 0.3
+   BillboardingType Full
+   StretchMultiplier 1
+   VelAngle 0
+   RandomAngle 1
+   RandomRotDir 1
+   RotMultiplier 60
+   Velocity 0.3
+   VelocityRND 0.2
+   AirResistance 2
+   AirResistanceRND 0.5
+   GravityMultiply 0.35
+   GravityMultiplyRND 0.1
+   Wind 0
+   LifeTime 0.9
+   LifeTimeRND 0.2
+   Color {
+    0 0.5 0.1 0.1 1 0.35 0.05 0.06
+   }
+   Alpha {
+    0 0 0.25 0.06 0.7 0.04 1 0
+   }
+   Size {
+    0 0.6 1 1.6
+   }
+   EffectTime 1
+   Repeat 1
+  }
+  EmitorDef arcs {
+   ShapeType Sphere
+   ShapeSize 0.2 0 0
+   ConeAngle 360 360 0
+   MaxNum 4
+   BirthRate 3
+   BirthRateRND 3
+   Offset 0 -0.1 0
+   Material "{9833D8BE7A512C63}Graphics/Particles/materials/flash/electric.emat"
+   CenterY 0
+   SizeMultiplier 0.16
+   SizeRND 0.5
+   BillboardingType Full
+   StretchMultiplier 1
+   VelAngle 0
+   RandomAngle 1
+   RotMultiplier 0
+   Velocity 0
+   VelocityRND 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Wind 0
+   LifeTime 0.08
+   LifeTimeRND 0.03
+   Color {
+    0 1 0.35 0.35 1 1 0.08 0.1
+   }
+   Alpha {
+    0 1 1 0
+   }
+   Size {
+    0 0.6 1 1
+   }
+   EffectTime 1
+   Repeat 1
+  }
+ }
+}

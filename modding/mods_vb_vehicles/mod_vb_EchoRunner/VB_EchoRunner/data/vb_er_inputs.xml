@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<modded_inputs>
+	<inputs>
+		<actions>
+			<input name="UAVBERForward" loc="STR_VB_ER_in_forward" />
+			<input name="UAVBERBack" loc="STR_VB_ER_in_back" />
+			<input name="UAVBERLeft" loc="STR_VB_ER_in_left" />
+			<input name="UAVBERRight" loc="STR_VB_ER_in_right" />
+			<input name="UAVBERUp" loc="STR_VB_ER_in_up" />
+			<input name="UAVBERDown" loc="STR_VB_ER_in_down" />
+		</actions>
+		<sorting name="vb_echorunner" loc="STR_VB_ER_in_group">
+			<input name="UAVBERForward" />
+			<input name="UAVBERBack" />
+			<input name="UAVBERLeft" />
+			<input name="UAVBERRight" />
+			<input name="UAVBERUp" />
+			<input name="UAVBERDown" />
+		</sorting>
+	</inputs>
+	<preset>
+		<input name="UAVBERForward">
+			<btn name="kW"/>
+		</input>
+		<input name="UAVBERBack">
+			<btn name="kS"/>
+		</input>
+		<input name="UAVBERLeft">
+			<btn name="kA"/>
+		</input>
+		<input name="UAVBERRight">
+			<btn name="kD"/>
+		</input>
+		<input name="UAVBERUp">
+			<btn name="kLShift"/>
+		</input>
+		<input name="UAVBERDown">
+			<btn name="kLControl"/>
+		</input>
+	</preset>
+</modded_inputs>
