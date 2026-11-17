@@ -322,8 +322,8 @@ def camera(name, loc, target, ortho=None, lens=45):
 
 
 VIEWS = [
-    ("1_bok_levyi", camera("sideL", (-12.0, 0.0, 0.62), (0.0, 0.0, 0.62), ortho=4.9), False, False),
-    ("2_bok_pravyi", camera("sideR", (12.0, 0.0, 0.62), (0.0, 0.0, 0.62), ortho=4.9), False, False),
+    ("1_bok_levyi", camera("sideL", (-12.0, 0.0, 0.66), (0.0, 0.0, 0.66), ortho=5.6), False, False),
+    ("2_bok_pravyi", camera("sideR", (12.0, 0.0, 0.66), (0.0, 0.0, 0.66), ortho=5.6), False, False),
     ("3_34_pered", camera("p34f", (-5.2, -6.8, 2.3), (0.0, -0.3, 0.55), lens=50), False, False),
     ("4_34_zad", camera("p34r", (5.0, 6.4, 2.1), (0.0, 0.3, 0.6), lens=50), False, False),
     ("5_otkryto", camera("open", (4.9, -5.4, 3.3), (0.0, 0.0, 0.75), lens=45), True, False),

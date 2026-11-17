@@ -122,8 +122,8 @@ class CfgVehicles
 		model = "\VB_EchoRunner\proxy\er_wheel.p3d";
 		inventorySlot[] = {"VB_ER_Wheel_1_1", "VB_ER_Wheel_1_2", "VB_ER_Wheel_2_1", "VB_ER_Wheel_2_2"};
 		rotationFlags = 8;
-		radiusByDamage[] = {0, 0.36, 0.3, 0.34, 0.9998, 0.30, 0.9999, 0.26};
-		radius = 0.36;
+		radiusByDamage[] = {0, 0.40, 0.3, 0.38, 0.9998, 0.34, 0.9999, 0.30};
+		radius = 0.40;
 		width = 0.28;
 		tyreType = 0;
 		tyreOffroadResistance = 0.7;
@@ -135,7 +135,7 @@ class CfgVehicles
 	};
 	class VB_EchoRunner_Wheel_Ruined: VB_EchoRunner_Wheel
 	{
-		radius = 0.28;
+		radius = 0.32;
 		width = 0.28;
 		tyreOffroadResistance = 0.02;
 		tyreRollResistance = 0.6;

@@ -209,6 +209,12 @@ def decimated(obj, ratio):
 
 
 def lifted(v):
+    """Точка в старых осях модели (до вытяжки): вытянуть по длине (M.warp_y) и поднять."""
+    return Vector((v[0], M.warp_y(v[1]), v[2] + Z_LIFT))
+
+
+def lifted_n(v):
+    """Точка, уже снятая с готовых (вытянутых) объектов: только поднять."""
     return Vector((v[0], v[1], v[2] + Z_LIFT))
 
 
@@ -245,7 +251,7 @@ CENTERS = {k: center_of(v[0]) for k, v in PARTS.items()}
 for _k, _sx in (("door_driver", 1), ("door_codriver", -1)):
     CENTERS[_k] = Vector((_sx * 0.90, CENTERS[_k].y, 0.50))
 WHEEL_OBJ = objs["wheel_f_r"]                    # колесо с внешней стороной +X (side=+1)
-WHEEL_C = WHEELS["1_1"][0]
+WHEEL_C = M.warp_pt(WHEELS["1_1"][0])
 CREW = {"driver": ("\\dz\\vehicles\\wheeled\\proxies\\crew_driver", 1, "crewdriver"),
         "codriver": ("\\dz\\vehicles\\wheeled\\proxies\\crew_cargo", 1, "crewcodriver")}
 
@@ -275,7 +281,7 @@ def add_proxies(b):
         idx = {"1_1": 1, "2_1": 2, "1_2": 3, "2_2": 4}[n]
         b.proxy("\\%s\\proxy\\er_wheel" % PFX, idx, lifted(h), None if side > 0 else YAW180, bones=["wheel_" + n])
     for k, (obj, fname, act, bone, mass, inv) in PARTS.items():
-        b.proxy("\\%s\\proxy\\%s" % (PFX, fname), 1, lifted(CENTERS[k]), None, bones=[bone])
+        b.proxy("\\%s\\proxy\\%s" % (PFX, fname), 1, lifted_n(CENTERS[k]), None, bones=[bone])
     for k, (path, idx, bone) in CREW.items():
         b.proxy(path, idx, lifted(M.SEAT[k]), M.crew_rotation(), bones=[bone])
 
@@ -292,12 +298,12 @@ def visual_lod(res, src, with_proxies=True):
 
 
 # --- компоненты коллизии (оси Blender до подъёма)
-FRONT = [(sx * 0.78, -2.12, z) for sx in (-1, 1) for z in (0.30, 0.70)] + \
-        [(sx * 0.88, -0.70, z) for sx in (-1, 1) for z in (0.20, 0.85)]
+FRONT = [(sx * 0.78, -2.12, z) for sx in (-1, 1) for z in (0.30, 0.78)] + \
+        [(sx * 0.88, -0.70, z) for sx in (-1, 1) for z in (0.20, 0.90)]
 MID = box_pts((0, 0.04, 0.47), (0.90, 0.74, 0.36))
-REAR = [(sx * 0.88, 0.78, z) for sx in (-1, 1) for z in (0.20, 0.92)] + \
-       [(sx * 0.78, 2.12, z) for sx in (-1, 1) for z in (0.30, 0.92)]
-CABIN = [(sx * 0.86, -0.62, 0.88) for sx in (-1, 1)] + [(sx * 0.86, 1.68, 0.94) for sx in (-1, 1)] + \
+REAR = [(sx * 0.88, 0.78, z) for sx in (-1, 1) for z in (0.20, 0.95)] + \
+       [(sx * 0.78, 2.12, z) for sx in (-1, 1) for z in (0.30, 0.95)]
+CABIN = [(sx * 0.86, -0.62, 0.93) for sx in (-1, 1)] + [(sx * 0.86, 1.68, 0.98) for sx in (-1, 1)] + \
         [(sx * 0.68, -0.20, 1.13 + M.ROOF_UP) for sx in (-1, 1)] + [(sx * 0.68, 0.80, 1.13 + M.ROOF_UP) for sx in (-1, 1)]
 
 
@@ -327,11 +333,11 @@ VIEW_CABIN = [
     box_pts((0, 0.04, 0.155), (0.88, 0.74, 0.035)),                                         # пол
     box_pts((0.85, -0.05, 0.25), (0.05, 0.55, 0.06)),                                       # порог левый
     box_pts((-0.85, -0.05, 0.25), (0.05, 0.55, 0.06)),                                      # порог правый
-    [(s * 0.84, -0.66, 0.86) for s in SX] + [(s * 0.84, -0.62, 0.82) for s in SX] +
+    [(s * 0.84, -0.66, 0.91) for s in SX] + [(s * 0.84, -0.62, 0.87) for s in SX] +
     [(s * 0.68, -0.20, 1.13 + M.ROOF_UP) for s in SX] + [(s * 0.68, -0.16, 1.09 + M.ROOF_UP) for s in SX],  # лобовое
     box_pts((0, 0.36, 1.11 + M.ROOF_UP), (M.DOOR["x_hinge"], 0.44, 0.03)),                  # гребень крыши
-    [(s * 0.62, 0.80, 1.13 + M.ROOF_UP) for s in SX] + [(s * 0.86, 0.78, 0.90) for s in SX] +
-    [(s * 0.86, 1.68, 0.92) for s in SX] + [(s * 0.86, 1.68, 0.96) for s in SX],            # заднее стекло
+    [(s * 0.62, 0.80, 1.13 + M.ROOF_UP) for s in SX] + [(s * 0.86, 0.60, 0.95) for s in SX] +
+    [(s * 0.86, 1.68, 0.97) for s in SX] + [(s * 0.86, 1.68, 1.01) for s in SX],            # заднее стекло
 ]
 
 
@@ -376,11 +382,11 @@ def memory_lod():
     for k, (obj, fname, act, bone, mass, inv) in PARTS.items():
         p, ax = pivots[{"door_driver": "door_r", "door_codriver": "door_l", "hood": "hood",
                         "trunk": "engine_lid"}[k]]
-        p, ax = lifted(p), Vector(ax)
+        p, ax = lifted_n(p), Vector(ax)
         span = (Vector((0, -0.40, 0)), Vector((0, 0.30, 0))) if ax.y else (Vector((-0.5, 0, 0)), Vector((0.5, 0, 0)))
         b.mem(bone + "_axis", p + span[0], p + span[1])
     st_c, st_ax = pivots["steering"]
-    b.mem("drivewheel_axis", lifted(st_c), lifted(Vector(st_c) + Vector(st_ax) * 0.2))
+    b.mem("drivewheel_axis", lifted_n(st_c), lifted_n(Vector(st_c) + Vector(st_ax) * 0.2))
     for k, sx in (("driver", 1), ("coDriver", -1)):
         b.mem("pos_" + k, lifted((sx * 1.55, -0.05, 0.0)))     # коробка «место свободно» 1.30–1.80 мимо кромки
                                                                 # открытого «крыла» (x≈1.25)
@@ -388,8 +394,8 @@ def memory_lod():
     b.mem("seat_con_1_1", lifted((0.95, -0.05, 0.55)))
     b.mem("seat_con_2_1", lifted((-0.95, -0.05, 0.55)))
     for name, x in (("light_left", 0.58), ("light_right", -0.58)):
-        b.mem(name, lifted((x, -2.17, 0.515)))
-        b.mem(name + "_dir", lifted((x, -3.17, 0.47)))
+        b.mem(name, lifted((x, -2.17, 0.585)))
+        b.mem(name + "_dir", lifted((x, -3.17, 0.54)))
     b.mem("light_reverse", lifted((0.0, 2.18, 0.60)))
     b.mem("ptcExhaust_start", lifted((0.58, 2.18, 0.215)))
     b.mem("ptcExhaust_end", lifted((0.58, 2.32, 0.24)))
