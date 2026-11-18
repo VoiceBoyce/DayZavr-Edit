@@ -83,7 +83,6 @@
 # @HUD_PercentageHUD
 @World_StackingAll_STRNK
 # @World_AutorunSchana
-@Inventory_Hover_Loot_KGB
 # @RF_Killfeed
 @World_NvgUseInCar
 @Inventory_AttachmentViewer
@@ -100,7 +99,6 @@
 @Server4_Erapulsar_Zombies
 @RF_Containers
 @Objects_AzraelsHorribleObjects
-@VB_MiningResources
 @MSFZ_Mifical_Pack
 @MSFZ_MineralPack
 @DRL_CraftMenu
@@ -165,4 +163,6 @@
 @INT_CorpsePlayerSettings_CL
 @INT_VppMap_CL
 @INT_CreatureSpawner_CL
+@INT_InventoryMover_CL
 @VB_AncientRoot
+@VB_MiningResources

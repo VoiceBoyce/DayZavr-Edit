@@ -1,0 +1,447 @@
+{
+    "M_STATIC_MARKER_ARRAY": [
+        {
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\waypoint_CA.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11934.90,
+                3.35,
+                11036.44
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+		{
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\waypoint_CA.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11915.25,
+                3.75,
+                11030.50
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+		{
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11959.07,
+                2.02,
+                11069.25
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+		{
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\radiotower.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11979.12,
+                1.25,
+                11055.06
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+		{
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\waypointeditor_CA.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11915.01,
+                4.82,
+                11024.34
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+		{
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\waypoint_CA.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11929.56,
+                3.35,
+                11036.51
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+		{
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\tent.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11914.99,
+                6.25,
+                11017.78
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+		{
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\bar.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11899.72,
+                1.85,
+                11048.46
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+		{
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\hospital.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11921.88,
+                5.15,
+                11023.08
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+		{
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\waypoint_CA.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11953.26,
+                4.85,
+                11018.64
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+		{
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\shopping.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11937.83,
+                4.85,
+                11023.49
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+		{
+            "M_MARKER_NAME": " ",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\warning_CA.paa",
+            "M_COLOR": [
+                255.0,
+                255.0,
+                255.0
+            ],
+            "M_POSITION": [
+                11938.78,
+                3.85,
+                11029.86
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 1
+        },
+		{
+            "M_MARKER_NAME": "[P]",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [255.0, 255.0, 255.0],
+            "M_POSITION": [3827.14, 1.75, 11544.50],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[P]",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [255.0, 255.0, 255.0],
+            "M_POSITION": [1544.71, 1.75, 7596.24],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[P]",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [255.0, 255.0, 255.0],
+            "M_POSITION": [8574.95, 1.75, 8737.33],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[P]",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [255.0, 255.0, 255.0],
+            "M_POSITION": [5391.51, 1.75, 3787.63],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "[P]",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\car.paa",
+            "M_COLOR": [255.0, 255.0, 255.0],
+            "M_POSITION": [11400.97, 1.75, 4413.53],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+        {
+            "M_MARKER_NAME": "Arsenal Bunker Military",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\watchtower.paa",
+            "M_COLOR": [
+                200.0,
+                0.0,
+                0.0
+            ],
+            "M_POSITION": [
+                10112,
+                307,
+                9381
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "Branzow Military Base",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\watchtower.paa",
+            "M_COLOR": [
+                200.0,
+                0.0,
+                0.0
+            ],
+            "M_POSITION": [
+                388,
+                417,
+                10735
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "Lukov Military Base",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\watchtower.paa",
+            "M_COLOR": [
+                200.0,
+                0.0,
+                0.0
+            ],
+            "M_POSITION": [
+                2186,
+                389,
+                10869
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "Swarog Military Base",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\watchtower.paa",
+            "M_COLOR": [
+                200.0,
+                0.0,
+                0.0
+            ],
+            "M_POSITION": [
+                5036,
+                616,
+                2160
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "Dolnik Military Base",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\watchtower.paa",
+            "M_COLOR": [
+                200.0,
+                0.0,
+                0.0
+            ],
+            "M_POSITION": [
+                11888,
+                418,
+                958
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+		{
+            "M_MARKER_NAME": "Airfield Military Base",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\watchtower.paa",
+            "M_COLOR": [
+                200.0,
+                0.0,
+                0.0
+            ],
+            "M_POSITION": [
+                4168,
+                338,
+                10336
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+        {
+            "M_MARKER_NAME": "Босс",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\unknown_CA.paa",
+            "M_COLOR": [
+                255.0,
+                215.0,
+                0.0
+            ],
+            "M_POSITION": [
+                11903.62,
+                174.41,
+                11057.31
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+        {
+            "M_MARKER_NAME": "Ведунья",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\unknown_CA.paa",
+            "M_COLOR": [
+                255.0,
+                215.0,
+                0.0
+            ],
+            "M_POSITION": [
+                11925.1,
+                174.58,
+                11023.9
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+        {
+            "M_MARKER_NAME": "Сказитель",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\unknown_CA.paa",
+            "M_COLOR": [
+                255.0,
+                215.0,
+                0.0
+            ],
+            "M_POSITION": [
+                11938.9,
+                174.55,
+                11020.4
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+        {
+            "M_MARKER_NAME": "Волхв",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\unknown_CA.paa",
+            "M_COLOR": [
+                255.0,
+                215.0,
+                0.0
+            ],
+            "M_POSITION": [
+                3446.74,
+                171.24,
+                9002.72
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+        {
+            "M_MARKER_NAME": "Кузнец",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\unknown_CA.paa",
+            "M_COLOR": [
+                255.0,
+                215.0,
+                0.0
+            ],
+            "M_POSITION": [
+                4896.72,
+                524.81,
+                2123.31
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+        {
+            "M_MARKER_NAME": "Ловчий",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\unknown_CA.paa",
+            "M_COLOR": [
+                255.0,
+                215.0,
+                0.0
+            ],
+            "M_POSITION": [
+                11867.6,
+                359.71,
+                6555.7
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        },
+        {
+            "M_MARKER_NAME": "Сотник",
+            "M_ICON_PATH": "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\unknown_CA.paa",
+            "M_COLOR": [
+                255.0,
+                215.0,
+                0.0
+            ],
+            "M_POSITION": [
+                11477.6,
+                182.35,
+                9600.82
+            ],
+            "M_ISACTIVE": 1,
+            "M_IS_3D_ACTIVE": 0
+        }
+      ],
+    "m_CanUse3DMarkers": 1,
+    "m_OwnPositionMarkerDisabled": 0,
+    "m_ForceMapItemOnly": 0
+}

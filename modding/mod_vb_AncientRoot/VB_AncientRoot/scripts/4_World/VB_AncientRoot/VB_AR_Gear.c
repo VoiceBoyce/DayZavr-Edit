@@ -467,7 +467,7 @@ class VB_AR_Lantern extends Inventory_Base
 		{
 			m_VB_Light = VB_AR_LanternLight.Cast(ScriptedLightBase.CreateLight(VB_AR_LanternLight, GetPosition()));
 			if (m_VB_Light)
-				m_VB_Light.AttachOnObject(this, "0 0.12 0");
+				m_VB_Light.AttachOnObject(this, "0 0.158 0");	// модель поднята на 0,038 под хват газовой лампы (HAND_XF)
 		}
 		else if (!on && m_VB_Light)
 		{

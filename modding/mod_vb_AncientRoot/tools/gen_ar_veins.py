@@ -1752,6 +1752,8 @@ def mesh_lod(scene, prm):
         mesh = mb.finish()
         if scene.get("scale"):          # предмет: центрируем и уменьшаем
             mesh["P"] = (mesh["P"] - scene.get("center", 0)) * scene["scale"]
+        if scene.get("hand_xf"):        # предмет: под ванильный хват в руках (HAND_XF)
+            mesh["P"] = hand_xf(mesh["P"], scene["hand_xf"])
         return mesh
     nu, nv = prm["heart"]
     P, tris, uvs = sphere_mesh(nu, nv, heart_surface, (3, 2))
@@ -1893,8 +1895,15 @@ def build_p3d(scene, out_path):
     elif scene.get("scale"):
         # предмет: коллизия — ящик чуть меньше видимой модели, масса в Geometry
         pm = meshes[0]["P"]
-        lo = tuple(float(v) * 0.8 for v in pm.min(0))
-        hi = tuple(float(v) * 0.8 for v in pm.max(0))
+        if scene.get("hand_xf"):
+            # модель сдвинута от начала координат: ящик — 0,8 габарита вокруг середины модели
+            c = (pm.min(0) + pm.max(0)) / 2
+            h = (pm.max(0) - pm.min(0)) / 2 * 0.8
+            lo = tuple(float(v) for v in c - h)
+            hi = tuple(float(v) for v in c + h)
+        else:
+            lo = tuple(float(v) * 0.8 for v in pm.min(0))
+            hi = tuple(float(v) * 0.8 for v in pm.max(0))
     elif scene.get("handle"):
         lo, hi = scene["handle"]
     else:
@@ -2157,6 +2166,35 @@ VARIANTS = [
     ("vb_ar_book", "book", 925),
     ("vb_ar_keeper_heart", "keeperheart", 926),
 ]
+
+# Хват в руках (2026-11-18). Положение в руке задаёт ванильный ikpose, под который предмет зарегистрирован
+# (скрипт 4_World/VB_AncientRoot/VB_AR_Hands.c), а он рассчитан на начало координат и оси ванильной модели-образца.
+# Поэтому модель двигаем/поворачиваем под образец (оси Blender: Z — вверх, в DayZ это Y):
+#   сердцевина (и янтарь) — начало у основания, как у ванильного апельсина/камня (orange_fresh.p3d, Stone.p3d);
+#   Сердце Хранителя — так же, под двуручный камень;
+#   Светоч — петля-ручка на высоте ручки газовой лампы (GasLight.p3d, верх 0,19 м);
+#   отвар примирения — середина бутылки в начале координат, как у WaterBottle.p3d;
+#   Книга древних — стоймя, толщина вдоль Z DayZ, как Book_kniga.p3d (до этого лежала плашмя).
+# Значения — по габаритам LOD0 до правки. Свет Светоча прикреплён смещением от начала модели (VB_AR_Gear.c) —
+# при смене сдвига поправить и его.
+HAND_XF = {
+    "vb_ar_heart_chunk": ("up", 0.055),
+    "vb_ar_keeper_heart": ("up", 0.089),
+    "vb_ar_lantern": ("up", 0.038),
+    "vb_ar_reconcile": ("up", -0.026),
+    "vb_ar_book": ("stand", 0.0),
+}
+
+
+def hand_xf(P, xf):
+    kind, v = xf
+    P = P.copy()
+    if kind == "up":
+        P[:, 2] += v
+    elif kind == "stand":
+        # поворот на 90° вокруг X: высота (Y Blender) уходит вверх, толщина (Z) — вдоль Y Blender
+        P = np.column_stack([P[:, 0], -P[:, 2], P[:, 1]])
+    return P
 
 
 # ---------------------------------------------------------------- предметы шага 4 (2026-11-16)
@@ -2554,6 +2592,8 @@ def main():
         if only and not any(o in name for o in only):
             continue
         scene = variant_scene(kind, seed, name)
+        if name in HAND_XF:
+            scene["hand_xf"] = HAND_XF[name]
         stats, findings = build_p3d(scene, os.path.join(DATA_DIR, name + ".p3d"))
         allp = np.vstack([tb.pts for tb in scene["tubes"]])
         span = float(np.max(np.linalg.norm(allp[:, :2], axis=1)))
