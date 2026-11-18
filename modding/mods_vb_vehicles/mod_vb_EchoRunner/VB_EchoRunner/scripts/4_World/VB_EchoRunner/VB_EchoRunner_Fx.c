@@ -210,10 +210,13 @@ class VB_EchoRunnerFx : Managed
 			float kk = Math.Min(1.0, TILT_GAIN * dt);
 			m_TiltX[i] = m_TiltX[i] + (tgX - m_TiltX[i]) * kk;
 			m_TiltZ[i] = m_TiltZ[i] + (tgZ - m_TiltZ[i]) * kk;
-			// у каждой анимации свой источник (rotor_b — отдельно): с общим источником запись уезжала на соседнюю
-			mod.SetAnimationPhaseNow("rotor", m_Phase);
-			mod.SetAnimationPhaseNow("rotor_b", m_Phase);
-			mod.SetAnimationPhaseNow("spin", m_SpinPhase);
+			// у каждой анимации свой источник (rotor_b — отдельно): с общим источником запись уезжала на соседнюю.
+			// Вращение — как пользователь видел и одобрил, пока фазы путались (E104): кольцо и крестовина медленно, на
+			// скорости SPIN_*, корпус стоит. С задуманными ROT_* светящиеся прорези крестовины (вдвое быстрее, навстречу)
+			// давали стробоскоп — «подушка мерцает» (отзыв 11-18). m_Rot остаётся для гула.
+			mod.SetAnimationPhaseNow("rotor", m_SpinPhase);
+			mod.SetAnimationPhaseNow("rotor_b", m_SpinPhase);
+			mod.SetAnimationPhaseNow("spin", 0.5);
 			// фаза user-источника — только 0..1 (отрицательные движок режет в 0): 0.5 — ровно, 0/1 — ±25°
 			mod.SetAnimationPhaseNow("tilt_x", (m_TiltX[i] + 1.0) * 0.5);
 			mod.SetAnimationPhaseNow("tilt_z", (m_TiltZ[i] + 1.0) * 0.5);

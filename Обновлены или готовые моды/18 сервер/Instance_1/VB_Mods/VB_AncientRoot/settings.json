@@ -14,7 +14,7 @@
             "Radius": 100
         }
     ],
-    "ActiveNests": 5,
+    "ActiveNests": 10,
     "MinNestDistance": 300.0,
     "RootsPercentMin": 70,
     "RootsPercentMax": 100,

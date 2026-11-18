@@ -51,10 +51,17 @@ class VB_ERDebug
 	// поза наклона модулей на стоящей машине (баг 49, проверка знаков со стороны): 5 — следующая, 7 — выключить.
 	// 1 — как при W, 2 — D, 3 — S, 4 — A (VB_EchoRunnerFx подменяет нажатия)
 	static int s_TiltTest;
+	static bool s_YawOld;		// цифровой блок 1: старый замер скорости поворота (сравнение, болтанка Shift+W)
 
 	static void Key(int key, float v)
 	{
 #ifdef DIAG_DEVELOPER
+		if (key == KeyCode.KC_NUMPAD1 && v > 0.5)
+		{
+			s_YawOld = !s_YawOld;
+			Print("[VB_ER] старый замер поворота: " + s_YawOld);
+			return;
+		}
 		if (key == KeyCode.KC_NUMPAD5 && v > 0.5)
 		{
 			s_TiltTest = (s_TiltTest + 1) % 5;
@@ -63,8 +70,12 @@ class VB_ERDebug
 		}
 		if (key == KeyCode.KC_NUMPAD7 && v > 0.5)
 		{
+			// выключить позу и отпустить клавиши полёта (стенд жмёт клавиши без отпускания)
 			s_TiltTest = 0;
-			Print("[VB_ER] опыт наклона: 0");
+			s_Fwd = 0;
+			s_Turn = 0;
+			s_Up = 0;
+			Print("[VB_ER] опыт наклона: 0, клавиши отпущены");
 			return;
 		}
 		switch (key)
@@ -175,22 +186,37 @@ class VB_ERFlight
 		return rot * (ang / sinA);
 	}
 
-	// Скорость рыскания корпуса сейчас, рад/с (+ вправо, как yawRate в Attitude). Берём из физики тела, а не из своей
-	// переменной: угловую скорость движок восстанавливает при сетевой сверке и повторе ходов, свою переменную — нет,
-	// и сервер с клиентом водителя расходились именно в поворотах (рывки, отзыв 11-18; скилл dayz-aviation LL-194).
-	static float s_YawSign;
-	static float YawRateOf(IEntity body)
+	// Скорость рыскания корпуса сейчас, рад/с (+ вправо, как yawRate в Attitude) — скорость изменения угла курса ori[0].
+	// Берём из физики тела, а не из своей переменной: угловую скорость движок восстанавливает при сетевой сверке и
+	// повторе ходов, свою переменную — нет, и сервер с клиентом водителя расходились в поворотах (рывки, отзыв 11-18;
+	// скилл dayz-aviation LL-194).
+	// Нельзя брать просто вертикальную составляющую угловой скорости (так было сначала): с задранным носом (Shift) ось
+	// крена наклонена, выравнивание крена попадало в «поворот», поворот давал крен — машину болтало из стороны в сторону
+	// на Shift+W (отзыв 11-18). Угловую скорость раскладываем на вращения по курсу, тангажу и крену (оси — той же
+	// RotationBetween, что строит угловую скорость в Attitude) и берём только курс.
+	static float YawRateOf(Object body)		// Object, не IEntity: GetOrientation есть только у Object
 	{
-		if (s_YawSign == 0)
-		{
-			// знак оси y мира для поворота «вправо» — той же формулой, что строит угловую скорость в Attitude
-			vector probe = RotationBetween("0 0 0", Vector(Math.RAD2DEG, 0, 0));
-			s_YawSign = 1;
-			if (probe[1] < 0)
-				s_YawSign = -1;
-		}
+		vector ori = body.GetOrientation();
+		float d = 0.5;		// град: шаг для осей
+		vector ay = RotationBetween(ori, ori + Vector(d, 0, 0));
+		vector ap = RotationBetween(ori, ori + Vector(0, d, 0));
+		vector ar = RotationBetween(ori, ori + Vector(0, 0, d));
+		vector n = ap * ar;						// перпендикуляр к осям тангажа и крена (векторное произведение)
+		float den = vector.Dot(ay, n);
 		vector w = dBodyGetAngularVelocity(body);
-		return w[1] * s_YawSign;
+#ifdef DIAG_DEVELOPER
+		// стенд: старый замер (вертикальная составляющая) для сравнения, цифровой блок 1
+		if (VB_ERDebug.s_YawOld)
+		{
+			vector probe = RotationBetween("0 0 0", Vector(Math.RAD2DEG, 0, 0));
+			if (probe[1] < 0)
+				return -w[1];
+			return w[1];
+		}
+#endif
+		if (Math.AbsFloat(den) < 0.0000001)
+			return 0;							// нос отвесно — курс не определён
+		return d * vector.Dot(w, n) / den * Math.DEG2RAD;
 	}
 
 	// высота опоры под точкой: земля, крыши/дороги/заборы (луч физики, своя машина не мешает) и вода
@@ -231,6 +257,7 @@ class VB_EchoRunnerFlight : Managed
 
 	// сервер
 	protected float m_CheckTimer;
+	protected float m_DiagT;		// только отладка на стенде
 
 	void VB_EchoRunnerFlight(VB_EchoRunner car)
 	{
@@ -367,6 +394,19 @@ class VB_EchoRunnerFlight : Managed
 		float turnK = Math.Clamp(yr / yrMax, -1, 1);
 		float bank = turnK * VB_ERFlight.BANK * Math.Clamp(Math.AbsFloat(vF) / 12.0, 0.25, 1.0);
 		Attitude(noseUp, bank, yr, dt);
+#ifdef DIAG_DEVELOPER
+		// стенд: полёт с цифрового блока — курс, тангаж, крен и скорость поворота 4 раза в секунду (болтанка Shift+W)
+		if (VB_ERDebug.s_Fwd != 0 || VB_ERDebug.s_Up != 0 || VB_ERDebug.s_Turn != 0)
+		{
+			m_DiagT += dt;
+			if (m_DiagT > 0.25)
+			{
+				m_DiagT = 0;
+				vector o = car.GetOrientation();
+				Print("[VB_ER] полёт ori " + o + " yr " + yr + " vF " + vF + " y " + pos[1]);
+			}
+		}
+#endif
 		dBodyActive(car, ActiveState.ACTIVE);
 	}
 

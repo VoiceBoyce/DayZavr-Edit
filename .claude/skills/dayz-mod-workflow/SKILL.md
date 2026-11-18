@@ -408,6 +408,7 @@ Verified errors committed more than once. Check ACTIVELY during implementation. 
 - **E103** — перечень коробки в игре R=0,N=1,D=2 (без P, P:\ устарел): `GearboxGetMode() != want`
 - **E104** — одна user-анимация общим источником у двух анимаций → `SetAnimationPhaseNow` пишет в соседний источник; у каждой анимации свой источник, сверять запись и `GetAnimationPhase`
 - **E105** — деталь не рисуется на машине при одном прокси на два слота (не колесо): свой прокси и класс на каждый слот
+- **E106** — `IEntity` без `GetOrientation`: параметр `Object`; сервер падает, каскад `Can't find class Param1` — следствие
 
 ---
 

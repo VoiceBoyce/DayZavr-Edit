@@ -141,13 +141,13 @@
         {"Kind": "a_fox", "Ico": "sym_paw", "Need": [2, 5, 10], "ClanMult": 3},
         {"Kind": "a_hare", "Ico": "sym_paw", "Need": [2, 5, 10], "ClanMult": 3},
         {"Kind": "a_farm", "Ico": "sym_paw", "Need": [2, 4, 8], "ClanMult": 3},
-        {"Kind": "ar_offer", "Title": "Дары роще", "Hint": "Ночью сделать подношение роще", "Ico": "sym_leaf", "Need": [0, 0, 0], "ClanMult": 3},
-        {"Kind": "ar_spores", "Title": "Золотая пыльца", "Hint": "Ночью собрать пыльцу у сердцевины", "Ico": "sym_star", "Need": [0, 0, 0], "ClanMult": 3},
-        {"Kind": "ar_root", "Title": "Отростки корня", "Hint": "Ночью отломить отросток Древнего корня", "Ico": "sym_tree", "Need": [0, 0, 0], "ClanMult": 3},
-        {"Kind": "ar_amber", "Title": "Расколоть янтарь", "Hint": "Расколоть окаменевшую сердцевину или янтарь с вкраплением", "Ico": "sym_drop", "Need": [0, 0, 0], "ClanMult": 3},
-        {"Kind": "ar_seed", "Title": "Вернуть лес", "Hint": "Посадить Семя у вырезанной сердцевины", "Ico": "sym_sun", "Need": [0, 0, 0], "ClanMult": 2},
-        {"Kind": "craft_ar", "Title": "Изделия леса", "Hint": "Скрафтить изделие Древнего корня", "Ico": "sym_hammer", "Need": [0, 0, 0], "ClanMult": 3},
-        {"Kind": "ab_boss", "Title": "Хранитель рощи", "Hint": "Одолеть Хранителя древней рощи", "Ico": "trophy", "Need": [0, 0, 0], "ClanMult": 1},
+        {"Kind": "ar_offer", "Title": "Дары роще", "Hint": "Ночью сделать подношение роще", "Ico": "sym_leaf", "Need": [1, 3, 6], "ClanMult": 3},
+        {"Kind": "ar_spores", "Title": "Золотая пыльца", "Hint": "Ночью собрать пыльцу у сердцевины", "Ico": "sym_star", "Need": [1, 3, 6], "ClanMult": 3},
+        {"Kind": "ar_root", "Title": "Отростки корня", "Hint": "Ночью отломить отросток Древнего корня", "Ico": "sym_tree", "Need": [2, 5, 10], "ClanMult": 3},
+        {"Kind": "ar_amber", "Title": "Расколоть янтарь", "Hint": "Расколоть окаменевшую сердцевину или янтарь с вкраплением", "Ico": "sym_drop", "Need": [1, 2, 4], "ClanMult": 3},
+        {"Kind": "ar_seed", "Title": "Вернуть лес", "Hint": "Посадить Семя у вырезанной сердцевины", "Ico": "sym_sun", "Need": [0, 1, 1], "ClanMult": 2},
+        {"Kind": "craft_ar", "Title": "Изделия леса", "Hint": "Скрафтить изделие Древнего корня", "Ico": "sym_hammer", "Need": [1, 2, 4], "ClanMult": 3},
+        {"Kind": "ab_boss", "Title": "Хранитель рощи", "Hint": "Одолеть Хранителя древней рощи", "Ico": "trophy", "Need": [0, 0, 1], "ClanMult": 1},
         {"Kind": "m_ent", "Title": "Энты", "Hint": "Убить Энта", "Ico": "crosshair", "Need": [1, 2, 3], "ClanMult": 2}
     ]
 }

@@ -1,5 +1,5 @@
 НАПОМИНАЛКА: что сделать с этой папкой
-Обновлено: 2026-11-17
+Обновлено: 2026-11-18
 
 Всё здесь сделано и проверено локально, но ещё не залито на прод.
 Ставить ВМЕСТЕ, за один рестарт. После заливки папку очистить (пустая папка = всё на проде).
@@ -56,6 +56,8 @@
     ПРОВЕРИТЬ: в ServerManagerPanelModsServer18.txt нет @VB_AncientRoot (в modlist_18server.txt есть).
     Если сервер запускается через панель - дописать туда @VB_AncientRoot.
 [ ] Instance_1\VB_Mods\ (VB_AncientRoot, VB_MiningResources, VB_Tablet\config)
+    VB_AncientRoot: settings.json (живых рощ 10, зона Цербера) и nests.json (40 расставленных рощ).
+    state.json НЕ класть - сервер создаст сам.
 [ ] Instance_1\DRL_CraftMenu\CraftConfig.json и CraftCategories.json
 [ ] Instance_1\Trader\TraderConfig12_Master.txt, TraderConfig9_Doc.txt
 [ ] Instance_1\SSSWheel\PrizeConfig.json
@@ -88,7 +90,5 @@
 ----------------
 [ ] DayZ Editor: переименовать жилы в .dze (SPAWN_ORE, ZONE_RADUNIN, ZONE_ZAPADLISKO): BRDK_*_Ore -> VB_MR_*_Vein.
     Старые жилы пока тоже работают, но новые имена нужны на будущее.
-[ ] Расставить рощи Древнего корня командой /grove в чате (пока не расставлены, рощ на карте нет;
-    часть квестов Волхва и контракты Корня ждут рощ).
 [ ] Объявление игрокам: текст в "Что было сделано.txt" (сразу для Discord).
 [ ] Очистить эту папку.

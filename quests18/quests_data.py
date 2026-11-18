@@ -9,7 +9,7 @@ Id 30000+: старые квесты 18 (10000–18692) у игроков отм
 расставляются в самом конце. Расставили — GROVES_ON = True и перевыложить.
 """
 
-GROVES_ON = False
+GROVES_ON = True
 
 BOSS, VED, VOLHV, KUZ, LOV, SOT, SKAZ = "coins_quests_all", "vedunya", "volhv", "kuznec", "lovchiy", "sotnik", "skazitel"
 
