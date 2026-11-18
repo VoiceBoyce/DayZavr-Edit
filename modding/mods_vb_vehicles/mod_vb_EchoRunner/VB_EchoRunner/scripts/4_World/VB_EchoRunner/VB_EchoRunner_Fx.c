@@ -166,6 +166,17 @@ class VB_EchoRunnerFx : Managed
 		// --- модули: роторы, наклон, свет и марево, частицы
 		// наклоны только от клавиш (просьба пользователя 11-18): видно, что машину двигают модули; ничего не нажато —
 		// модули плавно возвращаются вниз
+#ifdef DIAG_DEVELOPER
+		// стенд (баг 49): поза наклона без полёта — 1 W, 2 D, 3 S, 4 A (цифровой блок 5 — следующая, 7 — выкл.)
+		if (VB_ERDebug.s_TiltTest == 1)
+			kF = 1;
+		else if (VB_ERDebug.s_TiltTest == 2)
+			kT = 1;
+		else if (VB_ERDebug.s_TiltTest == 3)
+			kF = -1;
+		else if (VB_ERDebug.s_TiltTest == 4)
+			kT = -1;
+#endif
 		float keyZ = kF * car.m_VB_FwdSign;						// «вперёд» по оси z модели
 		float rightX = -car.m_VB_LeftSign;						// «вправо» в осях машины
 		for (int i = 0; i < 4; i++)
@@ -179,8 +190,10 @@ class VB_EchoRunnerFx : Managed
 				m_TiltZ[i] = 0;
 				continue;
 			}
-			// наклон в осях машины: вперёд/назад — верх модуля по ходу, излучатель назад, задние сильнее (толкают);
-			// влево/вправо — передние к повороту, задние наружу. Фаза ±1 = ±25°, общий наклон не больше 25°.
+			// Наклон. A/D — ровно так, как пользователь одобрил (11-18): до исправления сдвига фаз (общий источник
+			// «rotor» у кольца и крестовины, E104) значение поворота попадало в оба наклона — вокруг оси колеса (tilt_x)
+			// и вокруг продольной оси (tilt_z); передние к повороту, задние наружу. W/S (баг 49) — добавка к наклону
+			// вокруг оси колеса: верх модуля по ходу, излучатель назад, задние сильнее (толкают). Фаза ±1 = ±25°.
 			bool isFront = car.m_VB_ModFront[i];
 			float front = -1.0;
 			float lzc = keyZ * 0.85;
@@ -189,21 +202,17 @@ class VB_EchoRunnerFx : Managed
 				front = 1.0;
 				lzc = keyZ * 0.45;
 			}
-			float leanXcar = front * kT * 0.5 * rightX;
 			// модуль справа повёрнут на 180° вокруг вертикали (прокси ALEX): его x и z — наоборот
 			float side = car.m_VB_ModSide[i];
-			float tgX = Math.Clamp(TILT_SX * lzc * side, -1, 1);
-			float tgZ = Math.Clamp(TILT_SZ * leanXcar * side, -1, 1);
-			float tgLen = Math.Sqrt(tgX * tgX + tgZ * tgZ);
-			if (tgLen > 1.0)
-			{
-				tgX /= tgLen;
-				tgZ /= tgLen;
-			}
+			float turn = Math.Clamp(TILT_SZ * front * kT * 0.5 * rightX * side, -1, 1);
+			float tgX = Math.Clamp(turn + TILT_SX * lzc * side, -1, 1);
+			float tgZ = turn;
 			float kk = Math.Min(1.0, TILT_GAIN * dt);
 			m_TiltX[i] = m_TiltX[i] + (tgX - m_TiltX[i]) * kk;
 			m_TiltZ[i] = m_TiltZ[i] + (tgZ - m_TiltZ[i]) * kk;
+			// у каждой анимации свой источник (rotor_b — отдельно): с общим источником запись уезжала на соседнюю
 			mod.SetAnimationPhaseNow("rotor", m_Phase);
+			mod.SetAnimationPhaseNow("rotor_b", m_Phase);
 			mod.SetAnimationPhaseNow("spin", m_SpinPhase);
 			// фаза user-источника — только 0..1 (отрицательные движок режет в 0): 0.5 — ровно, 0/1 — ±25°
 			mod.SetAnimationPhaseNow("tilt_x", (m_TiltX[i] + 1.0) * 0.5);
@@ -220,6 +229,9 @@ class VB_EchoRunnerFx : Managed
 		{
 			m_DiagT = 0;
 			Print("[VB_ER] gear " + car.GetGear() + " mode " + car.GearboxGetMode() + " rpm " + car.EngineGetRPM() + " wfl " + car.GetAnimationPhase("wheelfrontleft") + " wbl " + car.GetAnimationPhase("wheelbackleft") + " wfr " + car.GetAnimationPhase("wheelfrontright") + " wbr " + car.GetAnimationPhase("wheelbackright") + " tilt " + m_TiltX[1] + " " + m_TiltX[3]);
+			EntityAI m1 = car.VB_ModuleAt(1);
+			if (m1)
+				Print("[VB_ER] поза " + VB_ERDebug.s_TiltTest + " модуль 1: записано x " + ((m_TiltX[1] + 1.0) * 0.5) + " z " + ((m_TiltZ[1] + 1.0) * 0.5) + " rotor " + m_Phase + " spin " + m_SpinPhase + "; прочитано x " + m1.GetAnimationPhase("tilt_x") + " z " + m1.GetAnimationPhase("tilt_z") + " rotor " + m1.GetAnimationPhase("rotor") + " rotor_b " + m1.GetAnimationPhase("rotor_b") + " spin " + m1.GetAnimationPhase("spin"));
 		}
 #endif
 	}

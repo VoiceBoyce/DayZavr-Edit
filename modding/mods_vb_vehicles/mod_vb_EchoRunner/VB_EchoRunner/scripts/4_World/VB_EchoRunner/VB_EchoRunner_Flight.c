@@ -48,10 +48,25 @@ class VB_ERDebug
 	static float s_Fwd;
 	static float s_Turn;
 	static float s_Up;
+	// поза наклона модулей на стоящей машине (баг 49, проверка знаков со стороны): 5 — следующая, 7 — выключить.
+	// 1 — как при W, 2 — D, 3 — S, 4 — A (VB_EchoRunnerFx подменяет нажатия)
+	static int s_TiltTest;
 
 	static void Key(int key, float v)
 	{
 #ifdef DIAG_DEVELOPER
+		if (key == KeyCode.KC_NUMPAD5 && v > 0.5)
+		{
+			s_TiltTest = (s_TiltTest + 1) % 5;
+			Print("[VB_ER] опыт наклона: " + s_TiltTest);
+			return;
+		}
+		if (key == KeyCode.KC_NUMPAD7 && v > 0.5)
+		{
+			s_TiltTest = 0;
+			Print("[VB_ER] опыт наклона: 0");
+			return;
+		}
 		switch (key)
 		{
 		case KeyCode.KC_NUMPAD8:

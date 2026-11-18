@@ -173,7 +173,7 @@ def model_cfg():
 			class rotor_b
 			{
 				type = "rotation";
-				source = "rotor";
+				source = "rotor_b";
 				selection = "rotor_b";
 				axis = "rotor_axis";
 				memory = 1;

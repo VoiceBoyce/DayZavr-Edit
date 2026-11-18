@@ -1945,6 +1945,14 @@ class CfgVehicles
 				animPeriod=0.01;
 				initPhase=0;
 			};
+			// у каждой анимации свой источник: общий «rotor» у кольца и крестовины сдвигал запись фаз на соседнюю
+			// анимацию (баг 49, E104)
+			class rotor_b
+			{
+				source="user";
+				animPeriod=0.01;
+				initPhase=0;
+			};
 			class spin
 			{
 				source="user";
