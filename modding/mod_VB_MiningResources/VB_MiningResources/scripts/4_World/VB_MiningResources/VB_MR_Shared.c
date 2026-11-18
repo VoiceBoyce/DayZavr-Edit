@@ -15,7 +15,9 @@ class VB_MR_ToolData
 	float OreChanceAdd = 0;			// прибавка к шансу руды за бросок, %
 	int ExtraRollsMin = 0;			// дополнительные броски добычи, минимум
 	int ExtraRollsMax = 0;			// дополнительные броски добычи, максимум
-	float RareChanceAdd = 0;		// прибавка к шансу редкого камня, %
+	float RareChanceAdd = 0;		// прибавка к шансу редкой находки жилы, %
+	string BonusItem;				// находка инструмента при добыче любой жилы (пусто — нет), только на сервере
+	float BonusChance = 0;			// шанс находки инструмента за добычу жилы, %
 	ref array<string> Veins;		// какие жилы можно добывать (пусто — все)
 
 	void VB_MR_ToolData(string tool = "", float timeMul = 1.0, float damageMul = 1.0, float oreAdd = 0)

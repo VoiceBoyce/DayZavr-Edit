@@ -3,7 +3,7 @@ r"""Модели и текстуры 27 новых ресурсов VB_MiningRes
 
 Формы (MLOD .p3d, бинаризуются при сборке `pbo.ps1 build ... -Binarize`). У каждой ОДНА скрытая секция `camo`
 на всех видимых гранях, текстуру и материал ресурса ставит конфиг (hiddenSelectionsTextures/Materials):
-  vb_mr_sand.p3d       — холщовый мешочек, горловина стянута бечёвкой с узлом, сверху горка песка (1x1, 190 г);
+  vb_mr_sand.p3d       — крупицы: горсть из 12 неровных угловатых зёрен разного размера (1x1, 190 г);
   vb_mr_nugget.p3d     — металлический самородок: лепестки, складки, раковины (2x2, 500 г);
   vb_mr_chunk.p3d      — сколотый кусок камня/кристалла: плоские раковистые грани, острые рёбра (2x2, 500 г);
   vb_mr_ingot.p3d      — литой слиток-трапеция со скруглёнными рёбрами, клеймо на верхней грани (3x3, 5,5 кг);
@@ -63,12 +63,23 @@ CLASS_RES = {"gold": "Gold", "silver": "Silver", "bronze": "Bronze", "iron": "Ir
              "coal": "Coal", "rubin": "Rubin", "nephrite": "Nephrite", "sulfur": "Sulfur"}
 # форма -> ресурсы, шаблон класса, масса (кг) для Geometry, материал проникновения
 SHAPES = {
-    "sand": {"res": METALS + STONES, "cls": "VB_MR_%s_Sand", "mass": 0.19, "pen": "cloth"},
+    "sand": {"res": METALS + STONES, "cls": "VB_MR_%s_Sand", "mass": 0.19, "pen": "granite"},
     "nugget": {"res": METALS, "cls": "VB_MR_%s", "mass": 0.5, "pen": "iron"},
     "chunk": {"res": STONES, "cls": "VB_MR_%s", "mass": 0.5, "pen": "granite"},
     "ingot": {"res": METALS, "cls": "VB_MR_%s_Bar", "mass": 5.5, "pen": "iron"},
     "briquette": {"res": STONES, "cls": "VB_MR_%s_Bar", "mass": 0.3, "pen": "granite"},
 }
+# Формы, которые держат в позе компаса (на открытой ладони, VB_MR_Entities.c, ModItemRegisterCallbacks).
+# Точка хвата этой позы (кость RightHand_Dummy) стоит у запястья: с началом координат в центре модель уходила в кисть
+# и в руке её не было видно (2026-11-18). Числа — замер для материалов аномалий (mod_vb_AnomaliesBosses,
+# tools/ab_materials.py): низ модели на HAND_LIFT над точкой хвата, сдвиг к центру ладони в осях движка (в Blender —
+# со знаком минус, оси X и Z модели в игре противоположны p3d).
+# Для маленькой горсти (3 см) сдвиг меньше, чем у материалов (там 4 см к костяшкам + 2 см к мизинцу): на стенде
+# горсть с тем сдвигом лежала на основаниях пальцев. Здесь 1,5 см вдоль пальцев k = (0.73, 0.69) и 1 см к мизинцу
+# n = (-0.69, 0.73) — середина ладони; низ на 4,5 см над точкой хвата.
+PALM_SHAPES = {"sand"}
+HAND_LIFT = 0.045
+HAND_SHIFT_ENGINE = (0.0041, 0.0177)
 DEFAULT_RES = {"sand": "gold", "nugget": "gold", "chunk": "rubin", "ingot": "gold", "briquette": "coal"}
 
 # палитра ресурсов (sRGB 0..1): base — основной, hi — блик/выпуклость, lo — тень, crev — грязь в углублениях
@@ -125,9 +136,9 @@ MAT = {
     "nephrite": ((0.40, 0.46, 0.40), 50, (1.60, 0.20), 1.0),
     "sulfur": ((0.12, 0.12, 0.10), 12, (1.30, 0.20), 1.0),
 }
-# песок в мешочке: матовый, у металлов слабые блёстки
-SAND_MAT_K = {"gold": 0.45, "silver": 0.45, "bronze": 0.40, "iron": 0.30, "titanium": 0.35,
-              "coal": 0.30, "rubin": 0.45, "nephrite": 0.25, "sulfur": 0.6}
+# крупицы: блеск чуть слабее самородка (мелкие, с грязью), камни — как кусок
+SAND_MAT_K = {"gold": 0.85, "silver": 0.85, "bronze": 0.80, "iron": 0.70, "titanium": 0.75,
+              "coal": 0.60, "rubin": 0.75, "nephrite": 0.55, "sulfur": 0.8}
 
 
 def log(*a):
@@ -513,143 +524,131 @@ def pack_charts(sizes, gutter):
 # ================================================================ формы
 # Все размеры в метрах, оси Blender: Z вверх, -Y — перёд. Центр модели — центр габарита.
 
-# ---------------------------------------------------------------- 1. мешочек с песком
-BAG_PATH = np.array([
-    (0.0000, 0.0000), (0.0120, 0.0000), (0.0200, 0.0008), (0.0255, 0.0030), (0.0292, 0.0075), (0.0315, 0.0140),
-    (0.0322, 0.0215), (0.0315, 0.0290), (0.0292, 0.0360), (0.0262, 0.0420), (0.0236, 0.0470), (0.0222, 0.0510),
-    (0.0218, 0.0545), (0.0222, 0.0580),                                           # шейка под бечёвкой
-    (0.0250, 0.0603), (0.0295, 0.0615), (0.0335, 0.0627),                         # отворот снизу
-    (0.0353, 0.0647), (0.0352, 0.0672), (0.0338, 0.0697), (0.0312, 0.0714),       # закатанный край
-    (0.0288, 0.0714), (0.0274, 0.0699), (0.0266, 0.0676), (0.0262, 0.0650),       # изнанка края (в мешок)
-])
-BAG_NECK_END = 13            # точки 0..13 — внешняя сторона снизу до шейки (z растёт)
-TWINE_Z = (0.0527, 0.0558)
-TWINE_R = 0.0016
-TWINE_LREF = 0.17            # длина бечёвки на всю ширину её куска атласа, м
-TWINE_V0, TWINE_DV, TWINE_VH = 0.503, 0.082, 0.074   # полосы бечёвки в атласе (u 0.5..1): начало, шаг, высота
+# ---------------------------------------------------------------- 1. крупицы: горсть зёрен
+# 12 неровных угловатых зёрен разного размера (как намытые крупицы): девять лежат кучкой, три сверху на соседях.
+# Каждое зерно — кубосфера, как самородок, только мельче и площе; в атласе своя клетка 4x3, грани куба — 3x2 внутри.
+GRAIN_N = 12
+GRAIN_COLS, GRAIN_ROWS = 4, 3              # клетки атласа под зёрна
+GRAIN_CAT = [0, 1, 0, 1, 0, 2, 1, 0, 1, 0, 2, 1]   # оттенок зерна из SAND_MIX (только основные цвета ресурса)
 
 
-def _resample_path(path, step):
-    seg = np.linalg.norm(np.diff(path, axis=0), axis=1)
-    s = np.concatenate([[0.0], np.cumsum(seg)])
-    out_s = [0.0]
-    for k in range(len(path) - 1):
-        m = max(1, int(math.ceil(seg[k] / step)))
-        out_s += list(s[k] + seg[k] * np.arange(1, m + 1) / m)
-    out_s = np.array(out_s)
-    return np.column_stack([np.interp(out_s, s, path[:, 0]), np.interp(out_s, s, path[:, 1])]), out_s, s[-1]
+def _fib_dirs(n):
+    i = np.arange(n) + 0.5
+    z = 1 - 2 * i / n
+    r = np.sqrt(1 - z * z)
+    a = i * math.pi * (3 - math.sqrt(5))
+    return np.column_stack([r * np.cos(a), r * np.sin(a), z])
 
 
-BAG_S = np.concatenate([[0.0], np.cumsum(np.linalg.norm(np.diff(BAG_PATH, axis=0), axis=1))])
-BAG_STOT = BAG_S[-1]
+def _rot(yaw, tilt_axis, tilt):
+    cy, sy = math.cos(yaw), math.sin(yaw)
+    Rz = np.array([[cy, -sy, 0], [sy, cy, 0], [0, 0, 1.0]])
+    ax = normalize(np.array([tilt_axis[0], tilt_axis[1], 0.0]))
+    K = np.array([[0, -ax[2], ax[1]], [ax[2], 0, -ax[0]], [-ax[1], ax[0], 0]])
+    Rt = np.eye(3) + math.sin(tilt) * K + (1 - math.cos(tilt)) * (K @ K)
+    return Rt @ Rz
 
 
-def bag_mod(theta, sf, z):
-    """Множитель радиуса мешка: мягкие вмятины тела, сборки у шейки, крупные складки закатанного края."""
-    g = sstep(0.42, 0.62, sf) * (1 - sstep(0.66, 0.74, sf))
-    g = g * (1 - 0.65 * np.exp(-((z - 0.0542) / 0.0032) ** 2))     # под бечёвкой ткань прижата
-    lip = sstep(0.64, 0.78, sf)
-    body = np.clip(1 - sstep(0.30, 0.55, sf), 0, 1)
-    gathers = 0.6 * np.sin(13 * theta + 0.7 + 9 * z) + 0.4 * np.sin(21 * theta + 1.9)
-    folds = 0.75 * np.sin(7 * theta + 0.3) + 0.25 * np.sin(11 * theta + 2.2)
-    soft = 0.5 * np.sin(3 * theta + 0.4 + 20 * z) + 0.5 * np.sin(5 * theta + 1.1 - 35 * z)
-    m = 1 + 0.03 * soft * body + 0.085 * gathers * g + 0.085 * folds * lip
-    crease = np.clip(-(0.085 * gathers * g + 0.085 * folds * lip + 0.03 * soft * body) / 0.085, 0, 1)
-    return m, crease
+def grain_local(d, g):
+    """Точка поверхности зерна по направлению d (в осях зерна) и признаки: cav — впадина, high — выпуклость."""
+    abc = g["abc"]
+    re = 1.0 / np.sqrt(((d / abc) ** 2).sum(1))
+    lob = np.zeros(len(d))
+    lob_wide = np.zeros(len(d))
+    for u, a, w in g["lobes"]:
+        lob += a * np.exp(-(1 - d @ u) / w)
+        lob_wide += a * 0.5 * np.exp(-(1 - d @ u) / (3 * w))
+    det = 0.11 * fbm(d * 3.2 + g["off"], 4, seed=g["seed"]) + 0.06 * fbm(d * 8.5 + g["off"], 3, seed=g["seed"] + 1)
+    smooth = re * (1 + lob_wide)
+    r = re * (1 + lob) * (1 + det)
+    p = d * r[:, None]
+    zf = 0.70 * abc[2]                                # снизу плоско — лежит, а не катается
+    k = 16.0 / abc[2]
+    p[:, 2] = -zf + np.logaddexp(0, k * (p[:, 2] + zf)) / k
+    rel = (r - smooth) / smooth
+    return p, np.clip(-rel / 0.08, 0, 1), np.clip(rel / 0.10, 0, 1)
 
 
-def bag_outer_radius(theta, z):
-    """Радиус внешней стороны мешка на высоте z (только тело до шейки)."""
-    zs = BAG_PATH[:BAG_NECK_END + 1, 1]
-    rs = BAG_PATH[:BAG_NECK_END + 1, 0]
-    ss = BAG_S[:BAG_NECK_END + 1]
-    r = np.interp(z, zs, rs)
-    sf = np.interp(z, zs, ss) / BAG_STOT
-    m, _ = bag_mod(theta, sf, z)
-    return r * m
+def _grain_params():
+    rng = np.random.default_rng(4242)
+    sizes = np.sort(rng.uniform(0.0028, 0.0062, GRAIN_N))[::-1]      # полудлина зерна, м
+    grains = []
+    for i, a in enumerate(sizes):
+        g = {"abc": np.array([a, a * rng.uniform(0.60, 0.85), a * rng.uniform(0.42, 0.62)]),
+             "seed": 300 + 11 * i, "off": rng.uniform(-50, 50, 3), "lobes": []}
+        for _ in range(9):
+            u = normalize(rng.normal(size=3) * np.array([1.0, 1.0, 0.5]))
+            g["lobes"].append((u, rng.uniform(0.10, 0.30), rng.uniform(0.03, 0.10)))
+        grains.append(g)
+    # раскладка: 9 на земле плотной кучкой, 3 мелких сверху на крупных
+    placed = []
+    for i, g in enumerate(grains[:9]):
+        a = g["abc"][0]
+        best = None
+        for _ in range(600):
+            ang = rng.uniform(0, 2 * math.pi)
+            rad = 0.0 if i == 0 else rng.uniform(0.004, 0.014)
+            x, y = rad * math.cos(ang), 0.8 * rad * math.sin(ang)
+            gap = min([math.hypot(x - px, y - py) - 0.68 * (a + pa) for px, py, pa in placed] or [1.0])
+            if gap > 0:
+                best = (x, y)
+                break
+            if best is None or gap > best[2]:
+                best = (x, y, gap)
+        placed.append((best[0], best[1], a))
+        g["xy"] = (best[0], best[1])
+        g["zb"] = 0.0
+        g["R"] = _rot(rng.uniform(0, 2 * math.pi), rng.normal(size=2), rng.uniform(-0.12, 0.12))
+    for j, g in enumerate(grains[9:]):
+        host = grains[j]
+        hx, hy = host["xy"]
+        ang = rng.uniform(0, 2 * math.pi)
+        g["xy"] = (hx + 0.35 * host["abc"][0] * math.cos(ang), hy + 0.35 * host["abc"][1] * math.sin(ang))
+        g["zb"] = 1.45 * host["abc"][2]
+        g["R"] = _rot(rng.uniform(0, 2 * math.pi), (math.cos(ang), math.sin(ang)), rng.uniform(0.18, 0.32))
+    # низ каждого зерна на своей высоте (по плотной выборке направлений — одинаково для всех LOD)
+    dirs = _fib_dirs(1500)
+    for g in grains:
+        p = grain_local(dirs, g)[0] @ g["R"].T
+        g["t"] = np.array([g["xy"][0], g["xy"][1], g["zb"] - p[:, 2].min()])
+    return grains
+
+
+GRAINS = _grain_params()
 
 
 def build_sand(detail):
     """detail 0 — полная деталь, 1 — проще (LOD 4.0)."""
-    step, segs, dome_rings, tw_segs = ((0.0038, 44, 8, 5), (0.0070, 22, 4, 4))[detail]
+    N = (8, 4)[detail]
     mesh = Mesh()
-    # --- мешок: тело вращения по профилю BAG_PATH; строки — профиль, колонки — угол
-    pr, ps, stot = _resample_path(BAG_PATH, step)
-    th = np.linspace(0, 2 * math.pi, segs + 1)
-    sf = ps / stot
-    m, crease = bag_mod(th[None, :], sf[:, None], pr[:, 1][:, None])
-    lean = np.column_stack([0.0016 * np.sin(pr[:, 1] * 40 + 0.5), 0.0012 * np.cos(pr[:, 1] * 33)])
-    R = pr[:, 0][:, None] * m
-    G = np.stack([R * np.cos(th)[None, :] + lean[:, :1], R * np.sin(th)[None, :] + lean[:, 1:], np.broadcast_to(pr[:, 1][:, None], R.shape)], -1)
-    G[:, -1] = G[:, 0]
-    UVg = np.stack(np.broadcast_arrays(th[None, :] / (2 * math.pi), 0.004 + 0.492 * sf[:, None]), -1)
-    P, T, UV = grid_mesh(G, UVg)
-    # атрибуты: ao — затенение складок, под отворотом и внутри; dust — где оседает пыль ресурса
-    s_under0, s_under1 = BAG_S[13] / stot, BAG_S[16] / stot
-    s_inner = BAG_S[20] / stot
-    ao = 1 - 0.45 * crease
-    sfg = np.broadcast_to(sf[:, None], ao.shape)
-    ao = ao * np.where((sfg > s_under0 + 0.01) & (sfg < s_under1), 0.55, 1.0)
-    ao = ao * np.where(sfg > s_inner, 0.62, 1.0)
-    ao = ao * (0.8 + 0.2 * sstep(0.0, 0.08, sfg))
-    inner = (sfg > s_inner).astype(float)
-    tags = np.where(inner.reshape(-1)[T[:, 0]] > 0.5, 1, 0)
-    mesh.add(P, T, UV, tag=tags, attrs={"ao": ao.reshape(-1), "crease": np.broadcast_to(crease, ao.shape).reshape(-1)})
-    # --- горка песка: строки от края к центру (нормаль вверх)
-    rho = np.linspace(1, 0, dome_rings + 1)
-    th2 = np.linspace(0, 2 * math.pi, segs + 1)
-    s_edge = (BAG_S[21] + BAG_S[22]) / 2 / BAG_STOT
-    me, _ = bag_mod(th2, s_edge, 0.0705)
-    r_edge = 0.0283 * me
-    rr = rho[:, None] * r_edge[None, :]
-    x = rr * np.cos(th2)[None, :] + 0.0003
-    y = rr * np.sin(th2)[None, :]
-    pts = np.column_stack([x.ravel(), y.ravel(), np.zeros(x.size)])
-    bump = 0.0016 * fbm(pts * np.array([90, 90, 0]) + 3.1, 3, seed=5) + 0.0009 * fbm(pts * np.array([260, 260, 0]), 2, seed=6)
-    hdome = 0.0108 * (1 - rho[:, None] ** 2) ** 0.75
-    z = 0.0682 + hdome + bump.reshape(x.shape) * (1 - rho[:, None] ** 4) + 0.0012 * (x / 0.028)
-    G = np.stack([x, y, z], -1)
-    G[:, -1] = G[:, 0]
-    UVg = np.stack([0.25 + x / 0.031 * 0.24, 0.75 + y / 0.031 * 0.24], -1)
-    P, T, UV = grid_mesh(G, UVg)
-    mesh.add(P, T, UV, tag=2, attrs={"ao": (0.75 + 0.25 * (1 - rho[:, None] ** 6) * np.ones_like(x)).reshape(-1)})
-
-    # --- бечёвка: две петли, узел спереди (-Y), два хвоста; у каждого куска своя полоса атласа
-    def tw_uv(piece):
-        return lambda s, a: (0.5 + 0.495 * np.clip(s / TWINE_LREF, 0, 1), TWINE_V0 + piece * TWINE_DV + TWINE_VH * a)
-    ang = np.linspace(0, 2 * math.pi, (49, 29)[detail])
-    for k, zt in enumerate(TWINE_Z):
-        zz = zt + 0.0004 * np.sin(ang * 3 + k)
-        rr = bag_outer_radius(ang, zz)
-        rr = 0.4 * rr + 0.6 * np.convolve(np.r_[rr[-4:], rr, rr[:4]], np.ones(9) / 9, "valid") + TWINE_R * 0.75
-        ring = np.column_stack([rr * np.cos(ang), rr * np.sin(ang), zz])
-        ring[-1] = ring[0]
-        P, T, UV = tube(ring, TWINE_R, tw_segs, tw_uv(k), cap_start=False, cap_end=False)
-        mesh.add(P, T, UV, tag=3, attrs={"ao": np.full(len(P), 0.95)})
-    a0 = -math.pi / 2
-    zk = sum(TWINE_Z) / 2
-    rk = float(bag_outer_radius(np.array([a0]), np.array([zk]))[0]) + TWINE_R * 1.9
-    knot_c = np.array([rk * math.cos(a0), rk * math.sin(a0), zk])
-    radial = np.array([math.cos(a0), math.sin(a0), 0.0])
-    tang = np.array([-math.sin(a0), math.cos(a0), 0.0])
-    for k, (rot, rad) in enumerate(((0.35, 0.0029), (-0.55, 0.0026))):
-        aa = np.linspace(0, 2 * math.pi, 25)
-        ax1 = math.cos(rot) * tang + math.sin(rot) * np.array([0, 0, 1.0])
-        loop = knot_c[None, :] + rad * (np.cos(aa)[:, None] * radial[None, :] + np.sin(aa)[:, None] * np.cross(ax1, radial)[None, :])
-        loop += ax1[None, :] * (0.0012 * (k - 0.5))
-        loop[-1] = loop[0]
-        P, T, UV = tube(loop, TWINE_R * 0.95, tw_segs, tw_uv(2 + k), cap_start=False, cap_end=False)
-        mesh.add(P, T, UV, tag=3, attrs={"ao": np.full(len(P), 0.9)})
-    for k, (da, z1, curl) in enumerate(((0.16, 0.030, 1.0), (-0.24, 0.035, -1.0))):
-        n_t = 14 if detail == 0 else 7
-        zt = np.linspace(zk - 0.002, z1, n_t)
-        at = a0 + np.linspace(0.0, da, n_t) + curl * 0.04 * np.sin(np.linspace(0, 3, n_t))
-        rt = bag_outer_radius(at, zt) + TWINE_R * 0.9
-        path = np.column_stack([rt * np.cos(at), rt * np.sin(at), zt])
-        path[0] = knot_c + np.array([0.0012 * curl, 0, -0.0022])
-        rad = np.linspace(TWINE_R * 0.95, TWINE_R * 0.8, n_t)
-        P, T, UV = tube(path, rad, tw_segs, tw_uv(4 + k), tip=0.9)
-        mesh.add(P, T, UV, tag=3, attrs={"ao": np.full(len(P), 0.95)})
+    t = np.tan(np.linspace(-1, 1, N + 1) * math.pi / 4)
+    ins = 0.02
+    for gi, g in enumerate(GRAINS):
+        cu, cv = gi % GRAIN_COLS, gi // GRAIN_COLS
+        for fi, (ax, au, av) in enumerate(CUBE_FACES):
+            S, Tt = np.meshgrid(t, t, indexing="xy")
+            d = normalize(ax[None, None, :] + S[..., None] * au + Tt[..., None] * av).reshape(-1, 3)
+            p, cav, high = grain_local(d, g)
+            e = 2e-3
+            t1 = normalize(np.cross(d, np.where(np.abs(d[:, 2:3]) < 0.9, [[0, 0, 1.0]], [[1.0, 0, 0]])))
+            t2 = np.cross(d, t1)
+            pa = grain_local(normalize(d + e * t1), g)[0] - grain_local(normalize(d - e * t1), g)[0]
+            pb = grain_local(normalize(d + e * t2), g)[0] - grain_local(normalize(d - e * t2), g)[0]
+            nrm = normalize(np.cross(pa, pb))
+            nrm = np.where((nrm * d).sum(1, keepdims=True) < 0, -nrm, nrm)
+            pw = p @ g["R"].T + g["t"]
+            nw = nrm @ g["R"].T
+            su = np.linspace(0, 1, N + 1)
+            U, V = np.meshgrid(su, su[::-1], indexing="xy")
+            col_i, row_i = fi % 3, fi // 3
+            UVg = np.stack([(cu + (col_i + ins + U * (1 - 2 * ins)) / 3) / GRAIN_COLS,
+                            (cv + (row_i + ins + V * (1 - 2 * ins)) / 2) / GRAIN_ROWS], -1)
+            P, T, UV = grid_mesh(pw.reshape(N + 1, N + 1, 3), UVg)
+            fn = np.cross(P[T[:, 1]] - P[T[:, 0]], P[T[:, 2]] - P[T[:, 0]])
+            if np.mean((fn * (P[T].mean(1) - g["t"])).sum(1)) < 0:
+                T = T[:, [0, 2, 1]]
+                UV = UV[:, [0, 2, 1]]
+            mesh.add(P, T, UV, N=nw, tag=gi, attrs={"cav": cav, "high": high})
     return mesh.finish()
 
 
@@ -1252,112 +1251,52 @@ def save_tex(name, img, png_dir, paa=True):
 
 
 # ================================================================ рисунки форм
-# --- мешочек
-WEAVE_U, WEAVE_V = 104, 56
-
-
+# --- крупицы
 def sand_fields(ctx, need_color=True):
-    n = ctx.n
-    F = {"h": np.zeros(n), "weave": np.zeros(n), "thread": np.ones(n), "gid": np.zeros(n), "dome": np.zeros(n),
-         "lump": np.zeros(n), "strand": np.zeros(n), "fib": np.zeros(n), "dirt": np.zeros(n)}
-    tag = ctx.tag
-    cm = tag <= 1
-    if cm.any():
-        u = ctx.uv[cm, 0]
-        v = ctx.uv[cm, 1]
-        cu = u * WEAVE_U
-        cv = (v - 0.004) / 0.492 * WEAVE_V
-        fu, fv = cu - np.floor(cu), cv - np.floor(cv)
-        par = (np.floor(cu) + np.floor(cv)) % 2
-        tu = 0.8 + 0.4 * hash1(np.floor(cu) % WEAVE_U, 3)
-        tv = 0.8 + 0.4 * hash1(np.floor(cv), 4)
-        warp = np.sin(math.pi * fu) * (0.55 + 0.45 * np.sin(math.pi * fv)) * tu
-        weft = np.sin(math.pi * fv) * (0.55 + 0.45 * np.sin(math.pi * fu)) * tv
-        w = np.where(par == 0, warp, weft)
-        F["weave"][cm] = w
-        F["thread"][cm] = np.where(par == 0, tu, tv)
-        wr = fbm(ctx.pos[cm] * 170, 3, seed=11)
-        F["h"][cm] = 0.00016 * w + 0.00022 * wr
-        if need_color:
-            F["dirt"][cm] = fbm(ctx.pos[cm] * 45, 4, seed=12)
-    sm = tag == 2
-    if sm.any():
-        f1, f2, gid = worley(ctx.pos[sm] / 0.00078, seed=21)
-        dome = sstep(0.0, 0.42, f2 - f1)
-        lump = fbm(ctx.pos[sm] * 110, 3, seed=22)
-        F["gid"][sm] = gid
-        F["dome"][sm] = dome
-        F["lump"][sm] = lump
-        F["h"][sm] = 0.00026 * dome + 0.00035 * lump
-    tm = tag == 3
-    if tm.any():
-        lu = (ctx.uv[tm, 0] - 0.5) / 0.495 * TWINE_LREF
-        lv = np.clip(((ctx.uv[tm, 1] - TWINE_V0) % TWINE_DV) / TWINE_VH, 0, 1)
-        st = 0.5 + 0.5 * np.sin(2 * math.pi * (lu / 0.0042 + 3 * lv))
-        fib = fbm(ctx.pos[tm] * 2200, 2, seed=31)
-        F["strand"][tm] = st
-        F["fib"][tm] = fib
-        F["h"][tm] = 0.00022 * st ** 0.7 + 0.00004 * fib
+    p = ctx.pos
+    warp = np.column_stack([gnoise(p * 900, 61), gnoise(p * 900 + 7.7, 62), gnoise(p * 900 + 3.1, 63)])
+    f1, f2, pid = worley(p / 0.0007 + 0.45 * warp, seed=64)
+    pit = sstep(0.42, 0.12, f1) * (pid > 0.72)
+    mid = fbm(p * 700, 3, seed=65)
+    fine = fbm(p * 2600, 2, seed=66)
+    h = 0.00007 * mid + 0.000015 * fine - 0.00010 * pit
+    F = {"h": h, "pit": pit, "mid": mid, "fine": fine}
+    if need_color:
+        F["big"] = fbm(p * 160, 3, seed=67)
     return F
+
+
+def grain_cat(tag, res):
+    return np.clip(np.array(GRAIN_CAT)[np.clip(tag, 0, GRAIN_N - 1)], 0, len(SAND_MIX[res]) - 1)
 
 
 def sand_color(ctx, F, res):
     n = ctx.n
-    pal = PAL[res]
-    out = np.zeros((n, 3))
-    tag = ctx.tag
-    ao = np.clip(ctx.attr.get("ao", np.ones(n)), 0, 1)
-    dust_c = np.asarray(pal["base"]) * 0.85 + 0.15 * np.asarray(pal["lo"])
-    cm = tag <= 1
-    if cm.any():
-        k = cm
-        base = np.array([0.63, 0.55, 0.42])
-        c = col(base, k.sum()) * (0.80 + 0.22 * F["weave"][k])[:, None] * (0.92 + 0.08 * F["thread"][k])[:, None]
-        c *= (0.95 + 0.05 * fbm(ctx.pos[k] * 400, 2, seed=13))[:, None]
-        dirt = sstep(0.1, 0.9, F["dirt"][k])
-        c = lerp(c, c * np.array([0.72, 0.64, 0.52]), dirt * 0.5)
-        # пыль ресурса: к горловине гуще, пятнами
-        z = ctx.pos[k, 2]
-        dm = sstep(-0.2, 0.8, fbm(ctx.pos[k] * 60, 3, seed=14)) * (0.25 + 0.75 * sstep(0.035, 0.07, z))
-        dm = np.where(tag[k] == 1, 0.85, dm * 0.75)
-        dm *= (0.6 + 0.4 * sstep(0.3, 1.0, F["weave"][k]))
-        c = lerp(c, col(dust_c, k.sum()) * (0.85 + 0.3 * F["weave"][k])[:, None], dm)
-        out[k] = c * ao[k][:, None]
-    sm = tag == 2
-    if sm.any():
-        mix = SAND_MIX[res]
-        wts = np.cumsum([w for _, w, _ in mix])
-        wts = wts / wts[-1]
-        g = F["gid"][sm]
-        cat = np.searchsorted(wts, g, side="right").clip(0, len(mix) - 1)
-        cols = np.array([c for c, _, _ in mix])
-        jit = hash1((g * 1e6).astype(np.int64), 5)
-        c = cols[cat] * (0.82 + 0.3 * jit)[:, None]
-        shade = 0.55 + 0.45 * F["dome"][sm]
-        c = c * shade[:, None] * (0.88 + 0.12 * F["lump"][sm])[:, None]
-        out[sm] = c * ao[sm][:, None]
-    tm = tag == 3
-    if tm.any():
-        base = np.array([0.56, 0.45, 0.29])
-        c = col(base, tm.sum()) * (0.68 + 0.32 * F["strand"][tm])[:, None] * (0.9 + 0.1 * F["fib"][tm])[:, None]
-        dm = 0.25 * sstep(0.2, 1.0, fbm(ctx.pos[tm] * 120, 2, seed=15))
-        c = lerp(c, col(dust_c, tm.sum()), dm)
-        out[tm] = c * ao[tm][:, None]
-    return out
+    mix = SAND_MIX[res]
+    cols = np.array([c for c, _, _ in mix])
+    cat = grain_cat(ctx.tag, res)
+    base = cols[cat] * (0.92 + 0.16 * hash1(ctx.tag, 7))[:, None]
+    cav = np.clip(ctx.attr["cav"], 0, 1)
+    high = np.clip(ctx.attr["high"], 0, 1)
+    tt = np.clip(0.55 + 0.25 * F["big"] + 0.25 * F["mid"] + 0.45 * high - 0.4 * cav, 0, 1)
+    c = lerp(base * 0.55, base, sstep(0.0, 0.55, tt))
+    c = lerp(c, np.clip(base * 1.25 + 0.08, 0, 1), sstep(0.6, 1.0, tt) * 0.7)
+    c *= (0.94 + 0.06 * F["fine"])[:, None]
+    dirt = np.clip(cav * 1.2 + F["pit"] * 0.8, 0, 1)
+    if res in METALS:
+        k = cat <= 1                                   # основные зёрна металла: ржавчина, патина, побежалость
+        if k.any():
+            c[k] = metal_tint(res, c[k], ctx.pos[k], dirt[k], {"fine": F["fine"][k]}, int(k.sum()))
+    return lerp(c, col(PAL[res]["crev"], n), dirt * 0.55)
 
 
 def sand_smdi(ctx, F):
     n = ctx.n
-    g = np.full(n, 0.06)
-    b = np.full(n, 0.10)
-    sm = ctx.tag == 2
-    if sm.any():
-        sp = (hash1((F["gid"][sm] * 1e6).astype(np.int64), 9) > 0.55).astype(float) * F["dome"][sm]
-        g[sm] = 0.18 + 0.82 * sp
-        b[sm] = 0.25 + 0.65 * sp
-    tm = ctx.tag == 3
-    g[tm] = 0.05
-    b[tm] = 0.08
+    spark = np.array([s for _, _, s in SAND_MIX["gold"]])          # блёстки одинаковы для всех ресурсов (_smdi общий)
+    s = spark[grain_cat(ctx.tag, "gold")]
+    dirt = np.clip(np.clip(ctx.attr["cav"], 0, 1) * 1.2 + F["pit"], 0, 1)
+    g = (0.30 + 0.65 * s) * (1 - 0.75 * dirt)
+    b = np.clip(0.30 + 0.45 * s - 0.4 * dirt + 0.1 * F["mid"] + 0.15 * np.clip(ctx.attr["high"], 0, 1), 0.05, 1)
     return np.column_stack([np.ones(n), g, b])
 
 
@@ -1785,8 +1724,8 @@ def rvmat_text(res, shape):
     spec, power, (fn_, fk), dif = MAT[res]
     if shape == "sand":
         k = SAND_MAT_K[res]
-        spec = tuple(min(1.0, s * k) for s in spec)
-        power = max(12, int(power * 0.4))
+        spec = tuple(s * k for s in spec)
+        power = max(12, int(power * 0.75))
     elif shape == "briquette":
         spec = tuple(s * (0.6 if res != "sulfur" else 1.0) for s in spec)
         power = max(10, int(power * 0.6))
@@ -1890,7 +1829,12 @@ def build_shape(shape, png_dir, models=True, textures=True, paa=True):
     meshes.append(meshes[0])                       # LOD 1.0 = полная деталь (E79)
     meshes.append(BUILDERS[shape](1))
     if shape not in ("ingot",):
-        ctr = center_mesh(meshes[0])
+        ctr = (meshes[0]["P"].min(0) + meshes[0]["P"].max(0)) / 2
+        if shape in PALM_SHAPES:
+            # поза компаса: начало координат — точка хвата у запястья; модель поднята над ней и сдвинута к ладони
+            low = meshes[0]["P"][:, 2].min() - ctr[2]
+            ctr = ctr - np.array([-HAND_SHIFT_ENGINE[0], -HAND_SHIFT_ENGINE[1], HAND_LIFT - low])
+        center_mesh(meshes[0], ctr)
         center_mesh(meshes[2], ctr)
     else:
         ctr = np.zeros(3)

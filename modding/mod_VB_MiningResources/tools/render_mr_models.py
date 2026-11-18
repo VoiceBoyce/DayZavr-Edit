@@ -8,7 +8,7 @@ r"""Рендер 27 новых ресурсов VB_MiningResources в PNG на �
 Для каждого класса из data\items\mapping.json: модель формы, на секцию camo — текстура и rvmat класса
 (как hiddenSelections в конфиге). Если секции camo нет или она покрывает не все грани — WARN.
 Шейдер: _co — цвет, _nohq — нормали (DirectX -> инверсия G), _smdi — блик (G) и глянец (B);
-слиток и самородок — металл (Metallic 1). Освещение и «небо» для отражений одинаковы для всех предметов.
+слиток, самородок и крупицы металлов — металл (Metallic 1). Освещение и «небо» для отражений одинаковы для всех предметов.
 Текстуры PAA -> TGA через ImageToPAA в кэш %TEMP%\vb_mr_texcache.
 """
 import json
@@ -47,8 +47,9 @@ ONLY = [o for o in str(opts.get("only", "")).split(",") if o]
 RES_ORDER = ["gold", "silver", "bronze", "iron", "titanium", "coal", "rubin", "nephrite", "sulfur"]
 RES_RU = {"gold": "Золото", "silver": "Серебро", "bronze": "Медь", "iron": "Железо", "titanium": "Титан",
           "coal": "Уголь", "rubin": "Рубин", "nephrite": "Нефрит", "sulfur": "Сера"}
-ROW_RU = ["Песок", "Самородок / кусок", "Слиток / брикет"]
+ROW_RU = ["Крупицы", "Самородок / кусок", "Слиток / брикет"]
 METAL_SHAPES = {"nugget", "ingot"}
+METAL_RES = {"gold", "silver", "bronze", "iron", "titanium"}     # крупицы этих ресурсов — металл
 VIEW = {"sand": (30, -32), "nugget": (38, -30), "chunk": (32, -34), "ingot": (30, -28), "briquette": (34, -32)}
 
 
@@ -320,7 +321,8 @@ def render_item(sc, cls, info):
     dims = hi - lo
     s = float(max(dims))
     center = (lo + hi) / 2
-    mat = make_material(info["texture"], info["material"], shape in METAL_SHAPES)
+    metal = shape in METAL_SHAPES or (shape == "sand" and info.get("resource") in METAL_RES)
+    mat = make_material(info["texture"], info["material"], metal)
     ob = build_object(P, faces, luv, ln, mat)
     k = (s / 0.05) ** 2
 

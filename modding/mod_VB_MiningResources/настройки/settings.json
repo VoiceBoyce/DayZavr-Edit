@@ -1,5 +1,5 @@
 {
-    "ConfigVersion": 2,
+    "ConfigVersion": 3,
     "GoldInRiverSearchTime": 20.0,
     "MinCountInRiver": 1,
     "MaxCountInRiver": 3,
@@ -21,6 +21,20 @@
             "ExtraRollsMin": 0,
             "ExtraRollsMax": 0,
             "RareChanceAdd": 0.0,
+            "Veins": [],
+            "BonusItem": "",
+            "BonusChance": 0.0
+        },
+        {
+            "Tool": "VB_MR_Pickaxe_Veles",
+            "MineTimeMul": 0.6,
+            "ToolDamageMul": 0.35,
+            "OreChanceAdd": 15.0,
+            "ExtraRollsMin": 0,
+            "ExtraRollsMax": 1,
+            "RareChanceAdd": 0.0,
+            "BonusItem": "VB_AR_Amber",
+            "BonusChance": 5.0,
             "Veins": []
         }
     ],
@@ -92,8 +106,8 @@
             "BadOre": "Stone",
             "ToolDamageOnUse": 35.0,
             "MineTime": 20.0,
-            "RareItem": "VB_MR_Rubin_Gem",
-            "RareChance": 2.0
+            "RareItem": "",
+            "RareChance": 0.0
         },
         {
             "VeinName": "VB_MR_Nephrite_Vein",
@@ -106,8 +120,8 @@
             "BadOre": "Stone",
             "ToolDamageOnUse": 30.0,
             "MineTime": 15.0,
-            "RareItem": "VB_MR_Nephrite_Gem",
-            "RareChance": 2.0
+            "RareItem": "",
+            "RareChance": 0.0
         },
         {
             "VeinName": "VB_MR_Sulfur_Vein",

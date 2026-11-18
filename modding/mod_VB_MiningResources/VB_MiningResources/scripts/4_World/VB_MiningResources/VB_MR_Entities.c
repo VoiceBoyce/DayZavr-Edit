@@ -22,7 +22,6 @@ class VB_MR_StoneNugget_Base extends ItemBase {}	// кусок камня: пр�
 class VB_MR_StoneSand_Base extends ItemBase {}	// песок камня: прессуется в кусок
 class VB_MR_MetalBar_Base extends ItemBase {}	// слиток
 class VB_MR_StoneBar_Base extends ItemBase {}	// брикет (угольный горит в костре)
-class VB_MR_Gem_Base extends ItemBase {}		// редкий огранённый камень
 
 // ---------------------------------------------------------------- инструмент добычи и сковорода
 // Действие есть у любого предмета, а можно ли им добывать — решает список инструментов с сервера
@@ -312,7 +311,6 @@ modded class ModItemRegisterCallbacks
 		pType.AddItemInHandsProfileIK("VB_MR_StoneBar_Base", "dz/anims/workspaces/player/player_main/player_main_1h.asi", pBehavior, "dz/anims/anm/player/ik/gear/meat_steak.anm");
 		pType.AddItemInHandsProfileIK("VB_MR_Nugget_Base", "dz/anims/workspaces/player/player_main/player_main_1h.asi", pBehavior, "dz/anims/anm/player/ik/gear/SmallStone.anm");
 		pType.AddItemInHandsProfileIK("VB_MR_StoneNugget_Base", "dz/anims/workspaces/player/player_main/player_main_1h.asi", pBehavior, "dz/anims/anm/player/ik/gear/SmallStone.anm");
-		pType.AddItemInHandsProfileIK("VB_MR_Gem_Base", "dz/anims/workspaces/player/player_main/player_main_1h.asi", pBehavior, "dz/anims/anm/player/ik/gear/SmallStone.anm");
 		pType.AddItemInHandsProfileIK("VB_MR_Sand_Base", "dz/anims/workspaces/player/player_main/props/player_main_1h_compass.asi", pBehavior, "dz/anims/anm/player/ik/gear/compass.anm");
 		pType.AddItemInHandsProfileIK("VB_MR_StoneSand_Base", "dz/anims/workspaces/player/player_main/props/player_main_1h_compass.asi", pBehavior, "dz/anims/anm/player/ik/gear/compass.anm");
 	}

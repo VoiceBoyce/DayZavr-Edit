@@ -89,7 +89,7 @@ class VB_MR_PanZone
 
 class VB_MR_Settings
 {
-	protected static const int VERSION = 2;
+	protected static const int VERSION = 3;
 	protected static const string DIR_MODS = "$profile:VB_Mods";
 	protected static const string DIR = "$profile:VB_Mods\\VB_MiningResources";
 	protected static const string FILE = "$profile:VB_Mods\\VB_MiningResources\\settings.json";
@@ -146,7 +146,7 @@ class VB_MR_Settings
 				if (settings.ConfigVersion < VERSION)
 				{
 					settings.Migrate();
-					settings.Save("Настройки обновлены до версии 2: ");
+					settings.Save("Настройки обновлены до версии " + VERSION.ToString() + ": ");
 				}
 				settings.Validate();
 				Print("[VB_MiningResources] Настройки загружены: " + FILE);
@@ -272,6 +272,15 @@ class VB_MR_Settings
 				tool.ExtraRollsMin = WarnI(tool.Tool + ".ExtraRollsMin", 0);
 			if (tool.ExtraRollsMax < 0)
 				tool.ExtraRollsMax = WarnI(tool.Tool + ".ExtraRollsMax", 0);
+			if (tool.BonusChance < 0)
+				tool.BonusChance = Warn(tool.Tool + ".BonusChance", 0);
+			// находка инструмента из мода, которого нет на этом сервере (янтарь без «Древнего корня») — выключить
+			if (tool.BonusItem != "" && !GetGame().ConfigIsExisting("CfgVehicles " + tool.BonusItem))
+			{
+				Print("[VB_MiningResources] ВНИМАНИЕ: предмета " + tool.BonusItem + " нет в игре, находка инструмента " + tool.Tool + " выключена");
+				tool.BonusItem = "";
+				tool.BonusChance = 0;
+			}
 		}
 		foreach (VB_MR_VeinData vein : VeineDataDataList)
 		{
@@ -287,6 +296,13 @@ class VB_MR_Settings
 				vein.MineTime = Warn(vein.VeinName + ".MineTime", 12);
 			if (vein.ToolDamageOnUse < 0)
 				vein.ToolDamageOnUse = Warn(vein.VeinName + ".ToolDamageOnUse", 0);
+			// редкая находка из удалённого или чужого мода — выключить, а не создавать несуществующий предмет
+			if (vein.RareItem != "" && !GetGame().ConfigIsExisting("CfgVehicles " + vein.RareItem))
+			{
+				Print("[VB_MiningResources] ВНИМАНИЕ: предмета " + vein.RareItem + " нет в игре, редкая находка у " + vein.VeinName + " выключена");
+				vein.RareItem = "";
+				vein.RareChance = 0;
+			}
 		}
 		foreach (VB_MR_SandData sand : SandDataList)
 		{
@@ -316,7 +332,8 @@ class VB_MR_Settings
 		return value;
 	}
 
-	// Версия 1 (перенос с GoldRush.json) -> 2: новые поля со стартовыми значениями из ТЗ v0.3
+	// Версия 1 (перенос с GoldRush.json) -> 2 -> 3: новые поля со стартовыми значениями (ТЗ v0.3, Велесова кирка);
+	// каждый шаг проверяет, не сделан ли он уже, поэтому файл любой старой версии доводится до текущей
 	protected void Migrate()
 	{
 		if (PressUpdatePeriod <= 0)
@@ -333,27 +350,29 @@ class VB_MR_Settings
 			}
 			MineTools = plain;
 		}
-		foreach (VB_MR_VeinData vein : VeineDataDataList)
-		{
-			if (vein.RareItem != "")
-				continue;
-			if (vein.VeinName == "VB_MR_Rubin_Vein")
-			{
-				vein.RareItem = "VB_MR_Rubin_Gem";
-				vein.RareChance = 2;
-			}
-			if (vein.VeinName == "VB_MR_Nephrite_Vein")
-			{
-				vein.RareItem = "VB_MR_Nephrite_Gem";
-				vein.RareChance = 2;
-			}
-		}
+		// редкая находка в жиле (RareItem) по умолчанию выключена: огранённые камни убраны 2026-11-18
 		if (AmberItem == "" && AmberSourceClass == "")
 		{
 			AmberItem = "VB_AR_Amber";
 			AmberSourceClass = "VB_AR_Heart";
 			AmberRadius = 60;
 			AmberChance = 3;
+		}
+		// версия 3: Велесова кирка (ТЗ_Велесова_кирка.md) — быстрее, бережнее, +15 % руды, 0–1 бросок, янтарь 5 %
+		bool hasVeles = false;
+		foreach (VB_MR_ToolData known : MineToolsData)
+		{
+			if (known.Tool == "VB_MR_Pickaxe_Veles")
+				hasVeles = true;
+		}
+		if (!hasVeles)
+		{
+			VB_MR_ToolData veles = new VB_MR_ToolData("VB_MR_Pickaxe_Veles", 0.6, 0.35, 15);
+			veles.ExtraRollsMin = 0;
+			veles.ExtraRollsMax = 1;
+			veles.BonusItem = "VB_AR_Amber";
+			veles.BonusChance = 5;
+			MineToolsData.Insert(veles);
 		}
 		ConfigVersion = VERSION;
 	}

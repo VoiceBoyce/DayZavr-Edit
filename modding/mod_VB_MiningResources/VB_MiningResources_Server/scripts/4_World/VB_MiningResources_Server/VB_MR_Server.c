@@ -255,9 +255,13 @@ modded class VB_MR_ActionMine
 			}
 		}
 
-		// редкий камень — один бросок на всю добычу с жилы
+		// редкая находка жилы — один бросок на всю добычу с жилы
 		if (data.RareItem != "" && Math.RandomFloat(0, 100) < rareChance)
 			GetGame().CreateObjectEx(data.RareItem, pos, ECE_PLACE_ON_SURFACE);
+
+		// находка инструмента (Велесова кирка — «Дар Велеса»: янтарь) — тоже один бросок на жилу, к ногам
+		if (tool && tool.BonusItem != "" && Math.RandomFloat(0, 100) < tool.BonusChance)
+			GetGame().CreateObjectEx(tool.BonusItem, pos, ECE_PLACE_ON_SURFACE);
 
 		action_data.m_MainItem.AddHealth(-damage);
 		vein.Delete();

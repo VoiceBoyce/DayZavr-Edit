@@ -1,7 +1,8 @@
 # Генератор VB_MiningResources/config.cpp и stringtable.csv.
 # Параметры предметов перенесены из BRDK_GoldRush (старый мод/_разбор/client_config.cpp), правки ТЗ v0.3:
 #   И6 — брикеты рубина, серы, нефрита 300 г; И8 — цепочка Bronze называется «медь»;
-#   пакет 2 — огранённые рубин и нефрит; пакет 3 — новые модели и описания новых ресурсов.
+#   пакет 3 — новые модели и описания новых ресурсов. Огранённые рубин и нефрит (пакет 2) убраны 2026-11-18
+#   по решению пользователя — не используются.
 # Старые классы BRDK_* — наследники новых VB_MR_*: своё старое название, старая модель и «Старый образец» в описании.
 # Новые модели берутся из VB_MiningResources/data/items/mapping.json (делает tools/gen_mr_models.py), если он есть.
 # python -I gen_config.py
@@ -42,20 +43,29 @@ STONE_BAR = {'Coal': ('Брикет угля', 'Прессованный кам�
              'Sulfur': ('Брикет серы', 'Прессованная сера. Нужна на производстве, ценится у торговцев.', 'Sulfur briquette', 'Pressed sulfur. Used in production, valued by traders.')}
 
 
+def en_a(word):
+    return 'an' if word[:1] in 'aeiou' else 'a'
+
+
+STONE_GEN = {'Coal': ('угля', 'Coal'), 'Rubin': ('рубина', 'Ruby'), 'Nephrite': ('нефрита', 'Jade'), 'Sulfur': ('серы', 'Sulfur')}
+
+
 def new_texts(r, form):
+    # крупицы: модель — горсть зёрен (не мешочек: игрок намывает их сковородой)
     if form == 'sand':
         if r in METALS:
             g1, g2, adj = METAL_RU[r]
-            return ('Мешочек %sого песка' % g1, 'Крупицы %s, намытые в реке. 10 штук плавятся в плавильной чаше в %s самородок.' % (g2, adj),
-                    'Pouch of %s sand' % METAL_EN[r], '%s grains washed from a river. Melt 10 in a melting bowl to get a %s nugget.' % (METAL_EN[r].capitalize(), METAL_EN[r]))
+            return ('Крупицы %s' % g2, 'Намыты сковородой в реке. 10 штук плавятся в плавильной чаше в %s самородок.' % adj,
+                    '%s grains' % METAL_EN[r].capitalize(), 'Panned from a river. Melt 10 in a melting bowl to get %s %s nugget.' % (en_a(METAL_EN[r]), METAL_EN[r]))
         n, d, res, en_n, en_res = STONE_SAND[r]
-        return ('Мешочек ' + n, '%s, намытые в реке. 10 штук прессуются в прессе в %s.' % (d, res),
-                'Pouch of ' + en_n, '%s washed from a river. Press 10 in a press to get %s.' % (en_n.capitalize(), en_res))
+        gen, en = STONE_GEN[r]
+        return ('Крупицы ' + gen, 'Намыты сковородой в реке. 10 штук прессуются в прессе в %s.' % res,
+                en + ' grains', 'Panned from a river. Press 10 in a press to get %s.' % en_res)
     if form == 'nugget':
         if r in METALS:
             g1, g2, adj = METAL_RU[r]
             return ('%s самородок' % adj.capitalize(), 'Самородок %s из рудной жилы или плавильной чаши. 5 штук плавятся в чаше в слиток %s.' % (g2, g2),
-                    '%s nugget' % METAL_EN[r].capitalize(), 'A %s nugget from an ore vein or a melting bowl. Melt 5 in a melting bowl to get a %s ingot.' % (METAL_EN[r], METAL_EN[r]))
+                    '%s nugget' % METAL_EN[r].capitalize(), '%s %s nugget from an ore vein or a melting bowl. Melt 5 in a melting bowl to get %s %s ingot.' % (en_a(METAL_EN[r]).capitalize(), METAL_EN[r], en_a(METAL_EN[r]), METAL_EN[r]))
         n, d, res, en_n, en_res = STONE_CHUNK[r]
         return (n, '%s из рудной жилы или пресса. 5 штук прессуются в прессе в %s.' % (d, res),
                 en_n, '%s from an ore vein or a press. Press 5 to get a %s.' % (en_n, en_res))
@@ -65,9 +75,6 @@ def new_texts(r, form):
                 '%s ingot' % METAL_EN[r].capitalize(), 'A cast %s ingot with a stamp. A valuable crafting material and trade good.' % METAL_EN[r])
     return STONE_BAR[r]
 
-
-GEM_TEXTS = {'Rubin': ('Огранённый рубин', 'Редкая находка в рубиновой жиле. Дорого ценится у торговцев.', 'Cut ruby', 'A rare find in a ruby vein. Traders pay well for it.'),
-             'Nephrite': ('Огранённый нефрит', 'Редкая находка в нефритовой жиле. Дорого ценится у торговцев.', 'Cut jade', 'A rare find in a jade vein. Traders pay well for it.')}
 
 INFO_TEXTS = {
     'STR_VB_MR_INFO_PRESS': ('Прессовка: %1/%2 с', 'Pressing: %1/%2 s'),
@@ -148,12 +155,6 @@ for r in ALL:
         base, old_model = 'VB_MR_StoneBar_Base', '%sKamens\\Big%sStone.p3d' % (M, r)
     add_item('VB_MR_%s_Bar' % r, 'BRDK_Big' + r, base, 'STR_BRDK_Big' + r, body, old_model, new_texts(r, 'bar'))
 
-# пакет 2: огранённые камни (модели Diamonds из старого мода)
-for r in ('Rubin', 'Nephrite'):
-    add_item('VB_MR_%s_Gem' % r, None, 'VB_MR_Gem_Base', None,
-             '\t\tweight = 50;\n\t\titemSize[] = {1,1};\n\t\trotationFlags = 17;\n%s' % (HP_ITEM % (9900, '0.1')),
-             '%sDiamonds\\%sDiamond.p3d' % (M, r), GEM_TEXTS[r])
-
 # оборудование (модели и тексты прежние)
 equipment = []
 kit_mats = five(M + 'KIT\\data\\box_kit.rvmat', M + 'KIT\\data\\box_kitDam.rvmat', M + 'KIT\\data\\box_kitDes.rvmat')
@@ -230,7 +231,6 @@ w('\tclass VB_MR_StoneSand_Base: Inventory_Base\n\t{\n\t\tscope = 0;\n\t\tvarQua
   '\t\tvarQuantityDestroyOnMin = 1;\n\t\tcanBeSplit = 1;\n\t\tinventorySlot[] += {"BRDK_STONES"};\n\t};\n')
 w('\tclass VB_MR_MetalBar_Base: Inventory_Base\n\t{\n\t\tscope = 0;\n\t};\n')
 w('\tclass VB_MR_StoneBar_Base: Inventory_Base\n\t{\n\t\tscope = 0;\n\t};\n')
-w('\tclass VB_MR_Gem_Base: Inventory_Base\n\t{\n\t\tscope = 0;\n\t};\n')
 
 w('\n\t// ---------------------------------------------------------------- ресурсы: новый класс и старый\n')
 for new, old, base, body, old_model in items:

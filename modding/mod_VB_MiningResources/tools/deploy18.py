@@ -88,15 +88,12 @@ def tr_trader(t):
     return nl.join(out)
 
 
-def tr_trader_gems(t):
-    """Пакет 2: скупка огранённых камней у Мастера (цены — предложение, правятся в файле трейдера)."""
-    if 'VB_MR_Rubin_Gem' in t:
+def tr_trader_no_gems(t):
+    """Огранённые камни убраны из мода 2026-11-18 — их строки скупки у Мастера тоже (если остались с пакета 2)."""
+    if '_Gem,' not in t:
         return t
     nl = '\r\n' if '\r\n' in t else '\n'
-    lines = t.split(nl)
-    i = next(k for k, l in enumerate(lines) if l.strip().startswith('VB_MR_Titanium,'))
-    lines[i + 1:i + 1] = ['\t\tVB_MR_Nephrite_Gem,\t\t\t\t\t\t*,\t\t\t\t-1,\t\t\t\t13000\t\t\t// Огранённый нефрит (редкая находка в жиле)',
-                          '\t\tVB_MR_Rubin_Gem,\t\t\t\t\t\t*,\t\t\t\t-1,\t\t\t\t16000\t\t\t// Огранённый рубин (редкая находка в жиле)']
+    lines = [l for l in t.split(nl) if not re.match(r'^\s*VB_MR_(Rubin|Nephrite)_Gem\s*,', l)]
     return nl.join(lines)
 
 
@@ -143,6 +140,17 @@ def tr_types(t):
         '  <type name="BRDK_MeltingBowl">', '\t\t<lifetime>14400</lifetime>', '  </type>', '', '</types>', ''])
 
 
+def tr_types_veles(t):
+    """Велесова кирка: в луте нет (только крафт DRL), на земле живёт как кирка — 4 ч."""
+    if 'VB_MR_Pickaxe_Veles' in t:
+        return t
+    nl = '\r\n' if '\r\n' in t else '\n'
+    block = nl.join(['  <!-- VB_MiningResources: Велесова кирка — только крафт -->',
+                     '  <type name="VB_MR_Pickaxe_Veles">', '\t\t<lifetime>14400</lifetime>', '  </type>', ''])
+    i = t.rindex('</types>')
+    return t[:i] + block + t[i:]
+
+
 def tr_modlist(t):
     return re.sub(r'@BRDK_GoldRush(?![\w])', '@VB_MiningResources', t)
 
@@ -173,12 +181,13 @@ def apply(rel, fn):
 
 os.makedirs(BACKUP, exist_ok=True)
 apply(TRADER, tr_trader)
-apply(TRADER, tr_trader_gems)
+apply(TRADER, tr_trader_no_gems)
 apply(CRAFT, tr_craft)
 apply(RF, tr_rf)
 apply(KT, tr_insert)
 apply(BASEBOX, tr_insert)
 apply(TYPES, tr_types)
+apply(TYPES, tr_types_veles)
 for ml in MODLISTS:
     apply(ml, tr_modlist)
 

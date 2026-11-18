@@ -11,7 +11,7 @@ import os, re, shutil, subprocess, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'старый мод', 'BRDK_GoldRush_CLIENT')
 DST = os.path.join(ROOT, 'VB_MiningResources', 'm')
-FOLDERS = ['Diamonds', 'KIT', 'Kamens', 'metall', 'pot', 'press', 'stones']
+FOLDERS = ['KIT', 'Kamens', 'metall', 'pot', 'press', 'stones']   # Diamonds (огранённые камни) убраны 2026-11-18
 DERAP = r'C:\Program Files (x86)\Mikero\DePboTools\bin\DeRap.exe'
 
 OLD = b'brdk_goldrush_client'

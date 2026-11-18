@@ -20,7 +20,7 @@ def item(name):
     return name
 
 
-RARE = {'VB_MR_Rubin_Vein': 'VB_MR_Rubin_Gem', 'VB_MR_Nephrite_Vein': 'VB_MR_Nephrite_Gem'}
+RARE = {}   # редкая находка в жиле: огранённые камни убраны 2026-11-18, по умолчанию выключено
 veins = []
 for v in d['VeineDataDataList']:
     v['VeinName'] = item(v['VeinName'])
@@ -43,7 +43,7 @@ for o in d['OreDataList']:
 
 tools = [t for t in d['MineTools'] if t != 'MSFZ_Magic_Kirka']
 out = {
-    'ConfigVersion': 2,
+    'ConfigVersion': 3,
     'GoldInRiverSearchTime': d['GoldInRiverSearchTime'],
     'MinCountInRiver': d['MinCountInRiver'],
     'MaxCountInRiver': d['MaxCountInRiver'],
@@ -54,7 +54,11 @@ out = {
     'MineTools': tools,
     'MineToolsData': [{
         'Tool': 'MSFZ_Magic_Kirka', 'MineTimeMul': 0.7, 'ToolDamageMul': 0.5, 'OreChanceAdd': 10.0,
-        'ExtraRollsMin': 0, 'ExtraRollsMax': 0, 'RareChanceAdd': 0.0, 'Veins': []}],
+        'ExtraRollsMin': 0, 'ExtraRollsMax': 0, 'RareChanceAdd': 0.0, 'BonusItem': '', 'BonusChance': 0.0, 'Veins': []}, {
+        # Велесова кирка (ТЗ_Велесова_кирка.md): «Дар Велеса» — янтарь 5 % за жилу
+        'Tool': 'VB_MR_Pickaxe_Veles', 'MineTimeMul': 0.6, 'ToolDamageMul': 0.35, 'OreChanceAdd': 15.0,
+        'ExtraRollsMin': 0, 'ExtraRollsMax': 1, 'RareChanceAdd': 0.0, 'BonusItem': 'VB_AR_Amber', 'BonusChance': 5.0,
+        'Veins': []}],
     'VeineDataDataList': veins,
     'SandDataList': sands,
     'OreDataList': ores,

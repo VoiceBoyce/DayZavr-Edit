@@ -3,8 +3,8 @@ ambient[] = {1.00,1.00,1.00,1};
 diffuse[] = {1.00,1.00,1.00,1};
 forcedDiffuse[] = {0,0,0,0};
 emmisive[] = {0,0,0,1};
-specular[] = {0.585,0.585,0.612,1};
-specularPower = 40;
+specular[] = {1.105,1.105,1.156,1};
+specularPower = 75;
 PixelShaderID = "Super";
 VertexShaderID = "Super";
 class TexGen0

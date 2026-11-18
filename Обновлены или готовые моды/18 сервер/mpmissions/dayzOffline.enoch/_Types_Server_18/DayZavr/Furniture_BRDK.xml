@@ -32,4 +32,8 @@
 		<lifetime>14400</lifetime>
   </type>
 
+  <!-- VB_MiningResources: Велесова кирка — только крафт -->
+  <type name="VB_MR_Pickaxe_Veles">
+		<lifetime>14400</lifetime>
+  </type>
 </types>

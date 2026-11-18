@@ -1030,6 +1030,206 @@
         ]
     },
     {
+        "RecipeId": 303,
+        "ShowInFreeMenu": 1,
+        "WorkbenchClasses": [
+            "DRL_Craft_Workbench"
+        ],
+        "RecipeName": "Велесова кирка",
+        "Result": "VB_MR_Pickaxe_Veles",
+        "ResultClasses": [],
+        "PreviewClassname": "",
+        "CraftIcon": "",
+        "Description": "Магическая кирка, перекованная из титана и живого корня. Чует руду рядом, добывает быстрее и почти не тупится.",
+        "CraftTimeSec": 20,
+        "RecraftTimeSec": 20,
+        "ResultCount": 1,
+        "ResultQuantityFrac": 0.0,
+        "ResultDamageFrac": 0.0,
+        "CraftComponents": [
+            {
+                "Classname": "MSFZ_Magic_Kirka",
+                "Classnames": [
+                    "MSFZ_Magic_Kirka"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Titanium_Bar",
+                "Classnames": [
+                    "VB_MR_Titanium_Bar"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 1,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Gold_Bar",
+                "Classnames": [
+                    "VB_MR_Gold_Bar"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 1,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Coal_Bar",
+                "Classnames": [
+                    "VB_MR_Coal_Bar"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 3,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 1,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AR_RootPiece",
+                "Classnames": [
+                    "VB_AR_RootPiece"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 3,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AR_Amber",
+                "Classnames": [
+                    "VB_AR_Amber"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "MSFZ_RuneStone_Medved",
+                "Classnames": [
+                    "MSFZ_RuneStone_Medved"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "MSFZ_Troll_Hand",
+                "Classnames": [
+                    "MSFZ_Troll_Hand"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "MSFZ_Magic_Hammer",
+                "Classnames": [
+                    "MSFZ_Magic_Hammer"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 0,
+                "ApplyDamageFrac": 0.2,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "DRL_Craft_Anvil",
+                "Classnames": [
+                    "DRL_Craft_Anvil"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 0,
+                "ApplyDamageFrac": 0.02,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            }
+        ]
+    },
+    {
         "RecipeId": 302,
         "ShowInFreeMenu": 1,
         "WorkbenchClasses": [
