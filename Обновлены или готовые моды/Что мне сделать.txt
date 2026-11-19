@@ -1,8 +1,27 @@
 НАПОМИНАЛКА: что сделать с этой папкой
-Обновлено: 2026-11-18
+Обновлено: 2026-11-19
 
 Всё здесь сделано и проверено локально, но ещё не залито на прод.
 Ставить ВМЕСТЕ, за один рестарт. После заливки папку очистить (пустая папка = всё на проде).
+ИСКЛЮЧЕНИЕ — сеты одежды (раздел 0): их можно и нужно залить отдельно и как можно раньше.
+
+
+0. СРОЧНО: СЕТЫ ОДЕЖДЫ, СЕРВЕРЫ 16 И 18 (баг №52, пропажа жилетов)
+--------------------------------------------------------------------
+Пока не залито, ВСЕ жилеты 12 сетов (обычные и _vb) пропадают из хранилищ, машин и с земли на КАЖДОМ рестарте.
+Причина найдена и исправление проверено на стенде (жилеты в сундуках, ящике, бочке и на земле пережили рестарт).
+[ ] 12 папок @DayZavrClothes_*\Addons (Cod2Set, DemonSet, EODSet, ElegantSet, GhostSet2, HeavySet, InciteSet,
+    LegionSet, MilitarySet, OniSet, OperatorSet, RiderSet) -> G:\Games\DayZavr\@DayZavrClothes_*\Addons
+    с заменой (имена PBO те же). Это клиентские моды: на 16 и 18 и у игроков. Ключ тот же DayZavrN.
+[ ] Вайп не нужен: классы и имена PBO не менялись. Уже пропавшие жилеты не вернутся — только выдать заново.
+
+0.1 СРОЧНО: @imp_clothes, СЕРВЕРЫ 16 И 18 (баг №53, штаны TTSKO)
+-----------------------------------------------------------------
+IMP переопределял ванильный класс TTSKOPants пустым, без родителя: ванильные штаны TTSKO и 4 ретекстуры IMP
+(IMP_Pants_TTSKO_EMR/MARPAT/NWU/UCP) пропадали на каждом рестарте. Исправлено в самом IMPGMOD
+(VanillaRetexture\config.cpp), проверено на обычном сервере. KOD_Weapons проверен — там всё в порядке, менять не нужно.
+[ ] @imp_clothes\Addons -> G:\Games\DayZavr\@imp_clothes\Addons. Изменился ТОЛЬКО IMPGMOD.pbo (+ .bisign), 1,4 ГБ —
+    игроки скачают его заново. IMPCOREMOD.pbo тот же, что на проде. Клиентский мод: на 16, 18 и у игроков.
 
 
 Руда VB_MiningResources: ревью кода сделано, исправленная сборка уже в папке (клиент + сервер).
@@ -32,8 +51,11 @@
 [ ] Иконка кирки в инвентаре.
 
 
-3. СЕРВЕР 16 (только планшет)
------------------------------
+3. СЕРВЕР 16 (планшет и лавка лагеря)
+-------------------------------------
+[ ] 16 сервер\Instance_1\DRL_CraftMenu\CraftConfig.json и CraftCategories.json - лавка лагеря: магазины теперь
+    за монеты + болты/металлические детали, обои за монеты + бумагу, ковры + тряпки. Если крафт 16 на проде правили
+    после 19.11 - перенести только рецепты лавки 5400-5459 и 5501-5507.
 [ ] 16 сервер\VB_Tablet_SE.pbo, VB_Tablet_PTY.pbo, VB_Tablet_DRL.pbo -> @Servermod\Addons
 [ ] @VB_Tablet\Addons -> клиентский мод на сервере 16 и у игроков
     ВАЖНО: планшет ставить на 16 и 18 ОДНОВРЕМЕННО (общий клиент, протокол изменился).
@@ -60,9 +82,8 @@
 [ ] VB_Tablet_SE.pbo, VB_Tablet_PTY.pbo, VB_Tablet_DRL.pbo
 
 Файлы по тем же путям от корня сервера:
-[ ] modlist_18server.txt, ServerManagerPanelModsServer18.txt - взяты 2026-11-18 из локального 18 (твоя свежая
-    правка: INT_VppMap, InventoryMover, CreatureSpawner; @VB_AncientRoot, @VB_MiningResources; без @BRDK_GoldRush).
-    Если на проде после этого меняли - перенести только эти отличия.
+[ ] Списки модов (modlist_18server.txt, ServerManagerPanelModsServer18.txt) правишь сам, файлов в папке нет:
+    добавить @VB_AncientRoot и @VB_MiningResources, убрать @BRDK_GoldRush.
 [ ] Instance_1\VB_Mods\ (VB_AncientRoot, VB_MiningResources, VB_Tablet\config)
     VB_AncientRoot: settings.json (живых рощ 10, зона Цербера) и nests.json (40 расставленных рощ).
     state.json НЕ класть - сервер создаст сам.
@@ -71,6 +92,8 @@
 [ ] Instance_1\SSSWheel\PrizeConfig.json
 [ ] Instance_1\RF\CONTAINERS\PRESETS\Preset_Pool_Items.json
 [ ] Instance_1\KTPrivateTerritory\Config.json
+    (рабочий список - в INT_BaseBoxAuthorization ниже; в обоих: пресс и набор пресса.
+    Если на проде правили - перенести только строки VB_MR_Press и VB_MR_Press_Kit)
 [ ] Instance_1\INT_Mods\INT_VppMap\VPPMapConfig.json - +7 меток квестодателей (золотые «?»).
     Если на проде метки меняли - перенести только 7 записей в конце (Босс ... Сотник).
 [ ] Instance_1\INT_Mods\INT_BaseBoxAuthorization\INT_BaseBoxAuthorization_Building_Config.json

@@ -219,6 +219,7 @@ EXTRA_RU = {
     "OOTS_Exo_Servoprivod_black": "обычный сервопривод экзоскелета",
     "SFP_Trupojor_Kogot": "коготь трупожора", "SFP_Piyavka_Yazik": "язык пиявки",
     "SFP_MutoWolf_kogot": "коготь мутоволка", "SFP_BearZMB_Kogot": "коготь медведя-зомби",
+    "VB_MR_Iron": "железный самородок", "VB_MR_Iron_Bar": "слиток железа", "Paper": "бумага", "Rag": "тряпки",
 }
 # Одежда: Id -> [(класс, сколько)] — как на 16, только трофей босса -> трофей сильного мутанта
 CLOTHES_EXTRA = {
@@ -269,6 +270,16 @@ WEAPON_EXTRA_OVERRIDE = {  # Gauss — электромагнитная винт
 }
 # Обвес от 1 з: прицелы — объектив, глушители — металлические детали
 ADDON_EXTRA = {"optic": [("EFT_Lens", 1)], "suppressor": [("EFT_MetalParts", 1)]}
+# Магазины (решение пользователя 2026-11-19: «не только за монеты», логично и не сложно): металл с добычи руды 18
+# (VB_MiningResources; на 16 руды нет — там металлические детали EFT). (от патронов, ингредиенты), по убыванию.
+MAG_EXTRA_TIERS = [
+    (101, [("VB_MR_Iron_Bar", 1)]),                          # пулемётный короб 200–250: слиток железа
+    (50, [("VB_MR_Iron", 2), ("EFT_Bolts", 1)]),            # ёмкий 50–100 (порог как у цены, MAG_BIG_ROUNDS)
+    (0, [("VB_MR_Iron", 1)]),                                # обычный, до 30
+]
+# Для базы: обои печатают на бумаге, ковры ткут из тряпок; шпатлёвка и сундук — только монеты
+BASE_EXTRA = {gid: [("Paper", 2)] for gid in (5501, 5502, 5503, 5504, 5505, 5506)}
+BASE_EXTRA[5507] = [("Rag", 3)]
 MAX_INGREDIENTS = 8
 
 
@@ -277,6 +288,13 @@ def weapon_extra(cls, kit_gold):
         return WEAPON_EXTRA_OVERRIDE[cls]
     for floor, extra in WEAPON_EXTRA_TIERS:
         if kit_gold >= floor:
+            return extra
+    return []
+
+
+def mag_extra(rounds):
+    for floor, extra in MAG_EXTRA_TIERS:
+        if rounds >= floor:
             return extra
     return []
 

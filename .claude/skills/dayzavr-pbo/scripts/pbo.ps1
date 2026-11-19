@@ -145,6 +145,13 @@ function Invoke-BinarizeModels([string]$Src, [string]$Stage, [string]$Prefix, [s
         $sizeBin += (Get-Item -LiteralPath $b).Length
     }
     if ($bad) { Get-Content $log -Tail 40 | Out-Host; throw "Бинаризатор не сделал ODOL для: $($bad -join ', ')" }
+    # Свои материалы должны загрузиться (иначе модель без вшитого материала и на ~30 % меньше; см. SKILL.md, 2026-11-19)
+    $pat = 'Material not loaded: ' + [regex]::Escape($Prefix) + '\\'
+    $miss = @(Select-String -LiteralPath $log -Pattern $pat | ForEach-Object { ($_.Line -split ': ', 2)[1].Trim() } | Sort-Object -Unique)
+    if ($miss) {
+        Write-Host "ВНИМАНИЕ: Бинаризатор не загрузил свои материалы ($($miss.Count)): $($miss -join ', ')" -ForegroundColor Yellow
+        Write-Host 'Для теста годится; для выдачи собрать ещё раз позже (см. SKILL.md, «Размер бинарных моделей»)' -ForegroundColor Yellow
+    }
     $sizeSrc = ($models | Measure-Object Length -Sum).Sum
     "Бинаризовано моделей: $($models.Count), $([math]::Round($sizeSrc / 1MB, 1)) -> $([math]::Round($sizeBin / 1MB, 1)) МБ"
 }

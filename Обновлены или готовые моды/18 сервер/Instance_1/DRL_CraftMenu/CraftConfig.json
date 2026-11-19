@@ -39497,6 +39497,1101 @@
         "AttachedRecipeIds": []
     },
     {
+        "RecipeId": 900,
+        "ShowInFreeMenu": 1,
+        "WorkbenchClasses": [
+            "DRL_Craft_Workbench"
+        ],
+        "RecipeName": "Живое лыко",
+        "Result": "VB_AR_Vein",
+        "ResultClasses": [],
+        "PreviewClassname": "",
+        "CraftIcon": "",
+        "Description": "Снимаешь с отростка живое волокно и сматываешь на палочку. Из одного отростка — два мотка лыка.",
+        "CraftTimeSec": 5,
+        "RecraftTimeSec": 5,
+        "ResultCount": 2,
+        "ResultQuantityFrac": 1.0,
+        "ResultDamageFrac": 0.0,
+        "CraftComponents": [
+            {
+                "Classname": "VB_AR_RootPiece",
+                "Classnames": [
+                    "VB_AR_RootPiece"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "KitchenKnife",
+                "Classnames": [
+                    "KitchenKnife",
+                    "SteakKnife",
+                    "HuntingKnife",
+                    "CombatKnife",
+                    "KukriKnife",
+                    "FangeKnife",
+                    "Machete",
+                    "CrudeMachete",
+                    "OrientalMachete",
+                    "Cleaver",
+                    "StoneKnife",
+                    "BoneKnife",
+                    "VB_AR_Blade"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 0,
+                "ApplyDamageFrac": 0.02,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 2,
+                "RecraftNeedAttachments": 0
+            }
+        ]
+    },
+    {
+        "RecipeId": 901,
+        "ShowInFreeMenu": 0,
+        "WorkbenchClasses": [
+            "DRL_Craft_Workbench"
+        ],
+        "RecipeName": "Корень-вещун",
+        "Result": "VB_AR_ListenRoot",
+        "ResultClasses": [],
+        "PreviewClassname": "",
+        "CraftIcon": "",
+        "Description": "Отросток в раструбе, стянутом лыком, с пыльцой внутри. Ночью слышит ближайшую сердцевину, гудит перед грозой. 10 зарядов.",
+        "CraftTimeSec": 8,
+        "RecraftTimeSec": 8,
+        "ResultCount": 1,
+        "ResultQuantityFrac": 1.0,
+        "ResultDamageFrac": 0.0,
+        "CraftComponents": [
+            {
+                "Classname": "VB_AR_RootPiece",
+                "Classnames": [
+                    "VB_AR_RootPiece"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AR_Vein",
+                "Classnames": [
+                    "VB_AR_Vein"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AR_Spores",
+                "Classnames": [
+                    "VB_AR_Spores"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "KitchenKnife",
+                "Classnames": [
+                    "KitchenKnife",
+                    "SteakKnife",
+                    "HuntingKnife",
+                    "CombatKnife",
+                    "KukriKnife",
+                    "FangeKnife",
+                    "Machete",
+                    "CrudeMachete",
+                    "OrientalMachete",
+                    "Cleaver",
+                    "StoneKnife",
+                    "BoneKnife",
+                    "VB_AR_Blade"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 0,
+                "ApplyDamageFrac": 0.02,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 2,
+                "RecraftNeedAttachments": 0
+            }
+        ]
+    },
+    {
+        "RecipeId": 902,
+        "ShowInFreeMenu": 1,
+        "WorkbenchClasses": [
+            "DRL_Craft_Workbench"
+        ],
+        "RecipeName": "Пыльцевая ловушка",
+        "Result": "VB_AR_SporeTrap",
+        "ResultClasses": [],
+        "PreviewClassname": "",
+        "CraftIcon": "",
+        "Description": "Пыльца в мешочке, перетянутом лыком. Раскрой и брось: через 10 с звери и нечисть рядом уснут секунд на двадцать.",
+        "CraftTimeSec": 6,
+        "RecraftTimeSec": 6,
+        "ResultCount": 1,
+        "ResultQuantityFrac": 1.0,
+        "ResultDamageFrac": 0.0,
+        "CraftComponents": [
+            {
+                "Classname": "VB_AR_Spores",
+                "Classnames": [
+                    "VB_AR_Spores"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AR_Vein",
+                "Classnames": [
+                    "VB_AR_Vein"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "Rag",
+                "Classnames": [
+                    "Rag"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            }
+        ]
+    },
+    {
+        "RecipeId": 903,
+        "ShowInFreeMenu": 0,
+        "WorkbenchClasses": [
+            "DRL_Craft_Workbench"
+        ],
+        "RecipeName": "Светоч корня",
+        "Result": "VB_AR_Lantern",
+        "ResultClasses": [],
+        "PreviewClassname": "",
+        "CraftIcon": "",
+        "Description": "Живая сердцевина в клетке из отростков. Горит часов шесть, заражённые к нему не подходят. Сердцевина каменеет к рестарту — собирай в ту же ночь.",
+        "CraftTimeSec": 10,
+        "RecraftTimeSec": 10,
+        "ResultCount": 1,
+        "ResultQuantityFrac": 1.0,
+        "ResultDamageFrac": 0.0,
+        "CraftComponents": [
+            {
+                "Classname": "VB_AR_HeartChunk",
+                "Classnames": [
+                    "VB_AR_HeartChunk"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AR_RootPiece",
+                "Classnames": [
+                    "VB_AR_RootPiece"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 3,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AR_Vein",
+                "Classnames": [
+                    "VB_AR_Vein"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AR_Spores",
+                "Classnames": [
+                    "VB_AR_Spores"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            }
+        ]
+    },
+    {
+        "RecipeId": 904,
+        "ShowInFreeMenu": 0,
+        "WorkbenchClasses": [
+            "DRL_Craft_Workbench"
+        ],
+        "RecipeName": "Живица",
+        "Result": "VB_AR_Blood",
+        "ResultClasses": [],
+        "PreviewClassname": "",
+        "CraftIcon": "",
+        "Description": "Янтарь растапливаешь до густой живицы и набираешь в шприц, оплетённый лыком. Укол: кровь и силы, кость срастается.",
+        "CraftTimeSec": 8,
+        "RecraftTimeSec": 8,
+        "ResultCount": 1,
+        "ResultQuantityFrac": 1.0,
+        "ResultDamageFrac": 0.0,
+        "CraftComponents": [
+            {
+                "Classname": "VB_AR_Amber",
+                "Classnames": [
+                    "VB_AR_Amber"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AR_Vein",
+                "Classnames": [
+                    "VB_AR_Vein"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "Syringe",
+                "Classnames": [
+                    "Syringe"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            }
+        ]
+    },
+    {
+        "RecipeId": 905,
+        "ShowInFreeMenu": 0,
+        "WorkbenchClasses": [
+            "DRL_Craft_Workbench"
+        ],
+        "RecipeName": "Терновый клинок",
+        "Result": "VB_AR_Blade",
+        "ResultClasses": [],
+        "PreviewClassname": "",
+        "CraftIcon": "",
+        "Description": "Клинок, обвитый терновым отростком, с шипами Занозы. Рана кровоточит, жертва не может бежать; убийства возвращают кровь.",
+        "CraftTimeSec": 12,
+        "RecraftTimeSec": 12,
+        "ResultCount": 1,
+        "ResultQuantityFrac": 1.0,
+        "ResultDamageFrac": 0.0,
+        "CraftComponents": [
+            {
+                "Classname": "FangeKnife",
+                "Classnames": [
+                    "FangeKnife",
+                    "CombatKnife",
+                    "HuntingKnife",
+                    "KukriKnife"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AR_RootPiece",
+                "Classnames": [
+                    "VB_AR_RootPiece"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AR_Vein",
+                "Classnames": [
+                    "VB_AR_Vein"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "MSFZ_Zanoza_stick",
+                "Classnames": [
+                    "MSFZ_Zanoza_stick"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AR_Amber",
+                "Classnames": [
+                    "VB_AR_Amber"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            }
+        ]
+    },
+    {
+        "RecipeId": 906,
+        "ShowInFreeMenu": 0,
+        "WorkbenchClasses": [
+            "DRL_Craft_Sewing"
+        ],
+        "RecipeName": "Плащ лешего",
+        "Result": "VB_AR_Cloak",
+        "ResultClasses": [],
+        "PreviewClassname": "",
+        "CraftIcon": "",
+        "Description": "Дождевик, обшитый корой отростков и мешковиной на живом лыке. Ночью присел и замер — нечисть и звери тебя не видят.",
+        "CraftTimeSec": 15,
+        "RecraftTimeSec": 15,
+        "ResultCount": 1,
+        "ResultQuantityFrac": 1.0,
+        "ResultDamageFrac": 0.0,
+        "CraftComponents": [
+            {
+                "Classname": "Raincoat_ColorBase",
+                "Classnames": [
+                    "Raincoat_ColorBase"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 1,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AR_Vein",
+                "Classnames": [
+                    "VB_AR_Vein"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 4,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 4,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AR_RootPiece",
+                "Classnames": [
+                    "VB_AR_RootPiece"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "BurlapSack",
+                "Classnames": [
+                    "BurlapSack"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Sewing",
+                "Classnames": [
+                    "EFT_Sewing"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 0,
+                "ApplyDamageFrac": 0.05,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 2,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "DRL_Craft_Sewing_scissors",
+                "Classnames": [
+                    "DRL_Craft_Sewing_scissors"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 0,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 1,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "DRL_Craft_Metalic_thimble",
+                "Classnames": [
+                    "DRL_Craft_Metalic_thimble"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 0,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 1,
+                "RecraftNeedAttachments": 0
+            }
+        ]
+    },
+    {
+        "RecipeId": 907,
+        "ShowInFreeMenu": 1,
+        "WorkbenchClasses": [
+            "DRL_Craft_Workbench"
+        ],
+        "RecipeName": "Янтарный оберег",
+        "Result": "VB_AR_Amulet",
+        "ResultClasses": [],
+        "PreviewClassname": "",
+        "CraftIcon": "",
+        "Description": "Кусок янтаря и волчий клык на шнурке из живого лыка. При тебе — стражи рощ не нападают первыми, Благословение дольше.",
+        "CraftTimeSec": 6,
+        "RecraftTimeSec": 6,
+        "ResultCount": 1,
+        "ResultQuantityFrac": 1.0,
+        "ResultDamageFrac": 0.0,
+        "CraftComponents": [
+            {
+                "Classname": "VB_AR_Amber",
+                "Classnames": [
+                    "VB_AR_Amber"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AR_WolfFang",
+                "Classnames": [
+                    "VB_AR_WolfFang"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AR_Vein",
+                "Classnames": [
+                    "VB_AR_Vein"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            }
+        ]
+    },
+    {
+        "RecipeId": 908,
+        "ShowInFreeMenu": 0,
+        "WorkbenchClasses": [
+            "DRL_Craft_Workbench"
+        ],
+        "RecipeName": "Настой пыльцы",
+        "Result": "VB_AR_PollenBrew",
+        "ResultClasses": [],
+        "PreviewClassname": "",
+        "CraftIcon": "",
+        "Description": "Пыльца, настоянная на шиповнике. Выпей — минут десять звери и стражи рощи светятся золотом даже в темноте.",
+        "CraftTimeSec": 6,
+        "RecraftTimeSec": 6,
+        "ResultCount": 1,
+        "ResultQuantityFrac": 1.0,
+        "ResultDamageFrac": 0.0,
+        "CraftComponents": [
+            {
+                "Classname": "VB_AR_Spores",
+                "Classnames": [
+                    "VB_AR_Spores"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "CaninaBerry",
+                "Classnames": [
+                    "CaninaBerry"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "WaterBottle",
+                "Classnames": [
+                    "WaterBottle"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            }
+        ]
+    },
+    {
+        "RecipeId": 909,
+        "ShowInFreeMenu": 0,
+        "WorkbenchClasses": [
+            "DRL_Craft_Workbench"
+        ],
+        "RecipeName": "Отвар примирения",
+        "Result": "VB_AR_Reconcile",
+        "ResultClasses": [],
+        "PreviewClassname": "",
+        "CraftIcon": "",
+        "Description": "Травы, паучий яд и крошка янтаря. Выпей ночью у живой рощи — лес смягчится и примет дар даже от Проклятого. Раз в сутки.",
+        "CraftTimeSec": 8,
+        "RecraftTimeSec": 8,
+        "ResultCount": 1,
+        "ResultQuantityFrac": 1.0,
+        "ResultDamageFrac": 0.0,
+        "CraftComponents": [
+            {
+                "Classname": "VB_AR_Amber",
+                "Classnames": [
+                    "VB_AR_Amber"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "MSFZ_Spider_Lapka",
+                "Classnames": [
+                    "MSFZ_Spider_Lapka"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "CaninaBerry",
+                "Classnames": [
+                    "CaninaBerry"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "WaterBottle",
+                "Classnames": [
+                    "WaterBottle"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            }
+        ]
+    },
+    {
+        "RecipeId": 910,
+        "ShowInFreeMenu": 0,
+        "WorkbenchClasses": [
+            "DRL_Craft_Workbench"
+        ],
+        "RecipeName": "Семя Древнего корня",
+        "Result": "VB_AR_Seed",
+        "ResultClasses": [],
+        "PreviewClassname": "",
+        "CraftIcon": "",
+        "Description": "Окаменевшую сердцевину не колешь, а будишь пыльцой и янтарём — выходит семя. Посади у вырезанной сердцевины — роща вернётся.",
+        "CraftTimeSec": 10,
+        "RecraftTimeSec": 10,
+        "ResultCount": 1,
+        "ResultQuantityFrac": 1.0,
+        "ResultDamageFrac": 0.0,
+        "CraftComponents": [
+            {
+                "Classname": "VB_AR_HeartDead",
+                "Classnames": [
+                    "VB_AR_HeartDead"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AR_Spores",
+                "Classnames": [
+                    "VB_AR_Spores"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AR_Amber",
+                "Classnames": [
+                    "VB_AR_Amber"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            }
+        ]
+    },
+    {
+        "RecipeId": 911,
+        "ShowInFreeMenu": 0,
+        "WorkbenchClasses": [
+            "DRL_Craft_Workbench"
+        ],
+        "RecipeName": "Книга древних",
+        "Result": "VB_AR_Book",
+        "ResultClasses": [],
+        "PreviewClassname": "",
+        "CraftIcon": "",
+        "Description": "Листы в переплёте из коры, корешок из лыка, янтарь по углам, Руна Дня на крышке. Всё, что знали о Древнем корне.",
+        "CraftTimeSec": 15,
+        "RecraftTimeSec": 15,
+        "ResultCount": 1,
+        "ResultQuantityFrac": 1.0,
+        "ResultDamageFrac": 0.0,
+        "CraftComponents": [
+            {
+                "Classname": "Paper",
+                "Classnames": [
+                    "Paper"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 4,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 4,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AR_RootPiece",
+                "Classnames": [
+                    "VB_AR_RootPiece"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AR_Vein",
+                "Classnames": [
+                    "VB_AR_Vein"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AR_Amber",
+                "Classnames": [
+                    "VB_AR_Amber"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "MSFZ_RuneStone_Day",
+                "Classnames": [
+                    "MSFZ_RuneStone_Day"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            }
+        ]
+    },
+    {
         "RecipeId": 5100,
         "ShowInFreeMenu": 0,
         "WorkbenchClasses": [
@@ -46807,6 +47902,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -46957,6 +48070,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -47069,6 +48200,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -47103,6 +48252,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -47145,6 +48312,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -47179,6 +48364,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -47295,6 +48498,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -47407,6 +48628,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -47441,6 +48680,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -47539,6 +48796,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -47573,6 +48848,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -47615,6 +48908,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -47649,6 +48960,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 4,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron_Bar",
+                "Classnames": [
+                    "VB_MR_Iron_Bar"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -47691,6 +49020,42 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -47725,6 +49090,42 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 4,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -47801,6 +49202,42 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 4,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -47919,6 +49356,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron_Bar",
+                "Classnames": [
+                    "VB_MR_Iron_Bar"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -48029,6 +49484,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -48165,6 +49638,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -48199,6 +49690,42 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 5,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -48543,6 +50070,42 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -48713,6 +50276,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -48751,6 +50332,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -48785,6 +50384,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -48903,6 +50520,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -48975,6 +50610,42 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 4,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -49055,6 +50726,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -49089,6 +50778,42 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 4,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -49203,6 +50928,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_MR_Iron",
+                "Classnames": [
+                    "VB_MR_Iron"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -49342,6 +51085,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "Paper",
+                "Classnames": [
+                    "Paper"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -49387,6 +51148,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "Paper",
+                "Classnames": [
+                    "Paper"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -49438,6 +51217,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "Paper",
+                "Classnames": [
+                    "Paper"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -49477,6 +51274,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "Paper",
+                "Classnames": [
+                    "Paper"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -49544,6 +51359,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "Paper",
+                "Classnames": [
+                    "Paper"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -49599,6 +51432,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "Paper",
+                "Classnames": [
+                    "Paper"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -49647,6 +51498,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "Rag",
+                "Classnames": [
+                    "Rag"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 3,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -49681,1101 +51550,6 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 3,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            }
-        ]
-    },
-    {
-        "RecipeId": 900,
-        "ShowInFreeMenu": 1,
-        "WorkbenchClasses": [
-            "DRL_Craft_Workbench"
-        ],
-        "RecipeName": "Живое лыко",
-        "Result": "VB_AR_Vein",
-        "ResultClasses": [],
-        "PreviewClassname": "",
-        "CraftIcon": "",
-        "Description": "Снимаешь с отростка живое волокно и сматываешь на палочку. Из одного отростка — два мотка лыка.",
-        "CraftTimeSec": 5,
-        "RecraftTimeSec": 5,
-        "ResultCount": 2,
-        "ResultQuantityFrac": 1.0,
-        "ResultDamageFrac": 0.0,
-        "CraftComponents": [
-            {
-                "Classname": "VB_AR_RootPiece",
-                "Classnames": [
-                    "VB_AR_RootPiece"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "KitchenKnife",
-                "Classnames": [
-                    "KitchenKnife",
-                    "SteakKnife",
-                    "HuntingKnife",
-                    "CombatKnife",
-                    "KukriKnife",
-                    "FangeKnife",
-                    "Machete",
-                    "CrudeMachete",
-                    "OrientalMachete",
-                    "Cleaver",
-                    "StoneKnife",
-                    "BoneKnife",
-                    "VB_AR_Blade"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 0,
-                "ApplyDamageFrac": 0.02,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 2,
-                "RecraftNeedAttachments": 0
-            }
-        ]
-    },
-    {
-        "RecipeId": 901,
-        "ShowInFreeMenu": 0,
-        "WorkbenchClasses": [
-            "DRL_Craft_Workbench"
-        ],
-        "RecipeName": "Корень-вещун",
-        "Result": "VB_AR_ListenRoot",
-        "ResultClasses": [],
-        "PreviewClassname": "",
-        "CraftIcon": "",
-        "Description": "Отросток в раструбе, стянутом лыком, с пыльцой внутри. Ночью слышит ближайшую сердцевину, гудит перед грозой. 10 зарядов.",
-        "CraftTimeSec": 8,
-        "RecraftTimeSec": 8,
-        "ResultCount": 1,
-        "ResultQuantityFrac": 1.0,
-        "ResultDamageFrac": 0.0,
-        "CraftComponents": [
-            {
-                "Classname": "VB_AR_RootPiece",
-                "Classnames": [
-                    "VB_AR_RootPiece"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 2,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 2,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "VB_AR_Vein",
-                "Classnames": [
-                    "VB_AR_Vein"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 2,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 2,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "VB_AR_Spores",
-                "Classnames": [
-                    "VB_AR_Spores"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "KitchenKnife",
-                "Classnames": [
-                    "KitchenKnife",
-                    "SteakKnife",
-                    "HuntingKnife",
-                    "CombatKnife",
-                    "KukriKnife",
-                    "FangeKnife",
-                    "Machete",
-                    "CrudeMachete",
-                    "OrientalMachete",
-                    "Cleaver",
-                    "StoneKnife",
-                    "BoneKnife",
-                    "VB_AR_Blade"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 0,
-                "ApplyDamageFrac": 0.02,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 2,
-                "RecraftNeedAttachments": 0
-            }
-        ]
-    },
-    {
-        "RecipeId": 902,
-        "ShowInFreeMenu": 1,
-        "WorkbenchClasses": [
-            "DRL_Craft_Workbench"
-        ],
-        "RecipeName": "Пыльцевая ловушка",
-        "Result": "VB_AR_SporeTrap",
-        "ResultClasses": [],
-        "PreviewClassname": "",
-        "CraftIcon": "",
-        "Description": "Пыльца в мешочке, перетянутом лыком. Раскрой и брось: через 10 с звери и нечисть рядом уснут секунд на двадцать.",
-        "CraftTimeSec": 6,
-        "RecraftTimeSec": 6,
-        "ResultCount": 1,
-        "ResultQuantityFrac": 1.0,
-        "ResultDamageFrac": 0.0,
-        "CraftComponents": [
-            {
-                "Classname": "VB_AR_Spores",
-                "Classnames": [
-                    "VB_AR_Spores"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 2,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 2,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "VB_AR_Vein",
-                "Classnames": [
-                    "VB_AR_Vein"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "Rag",
-                "Classnames": [
-                    "Rag"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            }
-        ]
-    },
-    {
-        "RecipeId": 903,
-        "ShowInFreeMenu": 0,
-        "WorkbenchClasses": [
-            "DRL_Craft_Workbench"
-        ],
-        "RecipeName": "Светоч корня",
-        "Result": "VB_AR_Lantern",
-        "ResultClasses": [],
-        "PreviewClassname": "",
-        "CraftIcon": "",
-        "Description": "Живая сердцевина в клетке из отростков. Горит часов шесть, заражённые к нему не подходят. Сердцевина каменеет к рестарту — собирай в ту же ночь.",
-        "CraftTimeSec": 10,
-        "RecraftTimeSec": 10,
-        "ResultCount": 1,
-        "ResultQuantityFrac": 1.0,
-        "ResultDamageFrac": 0.0,
-        "CraftComponents": [
-            {
-                "Classname": "VB_AR_HeartChunk",
-                "Classnames": [
-                    "VB_AR_HeartChunk"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "VB_AR_RootPiece",
-                "Classnames": [
-                    "VB_AR_RootPiece"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 3,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 3,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "VB_AR_Vein",
-                "Classnames": [
-                    "VB_AR_Vein"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 2,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 2,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "VB_AR_Spores",
-                "Classnames": [
-                    "VB_AR_Spores"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            }
-        ]
-    },
-    {
-        "RecipeId": 904,
-        "ShowInFreeMenu": 0,
-        "WorkbenchClasses": [
-            "DRL_Craft_Workbench"
-        ],
-        "RecipeName": "Живица",
-        "Result": "VB_AR_Blood",
-        "ResultClasses": [],
-        "PreviewClassname": "",
-        "CraftIcon": "",
-        "Description": "Янтарь растапливаешь до густой живицы и набираешь в шприц, оплетённый лыком. Укол: кровь и силы, кость срастается.",
-        "CraftTimeSec": 8,
-        "RecraftTimeSec": 8,
-        "ResultCount": 1,
-        "ResultQuantityFrac": 1.0,
-        "ResultDamageFrac": 0.0,
-        "CraftComponents": [
-            {
-                "Classname": "VB_AR_Amber",
-                "Classnames": [
-                    "VB_AR_Amber"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "VB_AR_Vein",
-                "Classnames": [
-                    "VB_AR_Vein"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "Syringe",
-                "Classnames": [
-                    "Syringe"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            }
-        ]
-    },
-    {
-        "RecipeId": 905,
-        "ShowInFreeMenu": 0,
-        "WorkbenchClasses": [
-            "DRL_Craft_Workbench"
-        ],
-        "RecipeName": "Терновый клинок",
-        "Result": "VB_AR_Blade",
-        "ResultClasses": [],
-        "PreviewClassname": "",
-        "CraftIcon": "",
-        "Description": "Клинок, обвитый терновым отростком, с шипами Занозы. Рана кровоточит, жертва не может бежать; убийства возвращают кровь.",
-        "CraftTimeSec": 12,
-        "RecraftTimeSec": 12,
-        "ResultCount": 1,
-        "ResultQuantityFrac": 1.0,
-        "ResultDamageFrac": 0.0,
-        "CraftComponents": [
-            {
-                "Classname": "FangeKnife",
-                "Classnames": [
-                    "FangeKnife",
-                    "CombatKnife",
-                    "HuntingKnife",
-                    "KukriKnife"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "VB_AR_RootPiece",
-                "Classnames": [
-                    "VB_AR_RootPiece"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 2,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 2,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "VB_AR_Vein",
-                "Classnames": [
-                    "VB_AR_Vein"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 2,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 2,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "MSFZ_Zanoza_stick",
-                "Classnames": [
-                    "MSFZ_Zanoza_stick"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 2,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 2,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "VB_AR_Amber",
-                "Classnames": [
-                    "VB_AR_Amber"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            }
-        ]
-    },
-    {
-        "RecipeId": 906,
-        "ShowInFreeMenu": 0,
-        "WorkbenchClasses": [
-            "DRL_Craft_Sewing"
-        ],
-        "RecipeName": "Плащ лешего",
-        "Result": "VB_AR_Cloak",
-        "ResultClasses": [],
-        "PreviewClassname": "",
-        "CraftIcon": "",
-        "Description": "Дождевик, обшитый корой отростков и мешковиной на живом лыке. Ночью присел и замер — нечисть и звери тебя не видят.",
-        "CraftTimeSec": 15,
-        "RecraftTimeSec": 15,
-        "ResultCount": 1,
-        "ResultQuantityFrac": 1.0,
-        "ResultDamageFrac": 0.0,
-        "CraftComponents": [
-            {
-                "Classname": "Raincoat_ColorBase",
-                "Classnames": [
-                    "Raincoat_ColorBase"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 1,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "VB_AR_Vein",
-                "Classnames": [
-                    "VB_AR_Vein"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 4,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 4,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "VB_AR_RootPiece",
-                "Classnames": [
-                    "VB_AR_RootPiece"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 2,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 2,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "BurlapSack",
-                "Classnames": [
-                    "BurlapSack"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "EFT_Sewing",
-                "Classnames": [
-                    "EFT_Sewing"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 0,
-                "ApplyDamageFrac": 0.05,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 2,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "DRL_Craft_Sewing_scissors",
-                "Classnames": [
-                    "DRL_Craft_Sewing_scissors"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 0,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 1,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "DRL_Craft_Metalic_thimble",
-                "Classnames": [
-                    "DRL_Craft_Metalic_thimble"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 0,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 1,
-                "RecraftNeedAttachments": 0
-            }
-        ]
-    },
-    {
-        "RecipeId": 907,
-        "ShowInFreeMenu": 1,
-        "WorkbenchClasses": [
-            "DRL_Craft_Workbench"
-        ],
-        "RecipeName": "Янтарный оберег",
-        "Result": "VB_AR_Amulet",
-        "ResultClasses": [],
-        "PreviewClassname": "",
-        "CraftIcon": "",
-        "Description": "Кусок янтаря и волчий клык на шнурке из живого лыка. При тебе — стражи рощ не нападают первыми, Благословение дольше.",
-        "CraftTimeSec": 6,
-        "RecraftTimeSec": 6,
-        "ResultCount": 1,
-        "ResultQuantityFrac": 1.0,
-        "ResultDamageFrac": 0.0,
-        "CraftComponents": [
-            {
-                "Classname": "VB_AR_Amber",
-                "Classnames": [
-                    "VB_AR_Amber"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "VB_AR_WolfFang",
-                "Classnames": [
-                    "VB_AR_WolfFang"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "VB_AR_Vein",
-                "Classnames": [
-                    "VB_AR_Vein"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            }
-        ]
-    },
-    {
-        "RecipeId": 908,
-        "ShowInFreeMenu": 0,
-        "WorkbenchClasses": [
-            "DRL_Craft_Workbench"
-        ],
-        "RecipeName": "Настой пыльцы",
-        "Result": "VB_AR_PollenBrew",
-        "ResultClasses": [],
-        "PreviewClassname": "",
-        "CraftIcon": "",
-        "Description": "Пыльца, настоянная на шиповнике. Выпей — минут десять звери и стражи рощи светятся золотом даже в темноте.",
-        "CraftTimeSec": 6,
-        "RecraftTimeSec": 6,
-        "ResultCount": 1,
-        "ResultQuantityFrac": 1.0,
-        "ResultDamageFrac": 0.0,
-        "CraftComponents": [
-            {
-                "Classname": "VB_AR_Spores",
-                "Classnames": [
-                    "VB_AR_Spores"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 2,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 2,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "CaninaBerry",
-                "Classnames": [
-                    "CaninaBerry"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 2,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 2,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "WaterBottle",
-                "Classnames": [
-                    "WaterBottle"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            }
-        ]
-    },
-    {
-        "RecipeId": 909,
-        "ShowInFreeMenu": 0,
-        "WorkbenchClasses": [
-            "DRL_Craft_Workbench"
-        ],
-        "RecipeName": "Отвар примирения",
-        "Result": "VB_AR_Reconcile",
-        "ResultClasses": [],
-        "PreviewClassname": "",
-        "CraftIcon": "",
-        "Description": "Травы, паучий яд и крошка янтаря. Выпей ночью у живой рощи — лес смягчится и примет дар даже от Проклятого. Раз в сутки.",
-        "CraftTimeSec": 8,
-        "RecraftTimeSec": 8,
-        "ResultCount": 1,
-        "ResultQuantityFrac": 1.0,
-        "ResultDamageFrac": 0.0,
-        "CraftComponents": [
-            {
-                "Classname": "VB_AR_Amber",
-                "Classnames": [
-                    "VB_AR_Amber"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "MSFZ_Spider_Lapka",
-                "Classnames": [
-                    "MSFZ_Spider_Lapka"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 2,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 2,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "CaninaBerry",
-                "Classnames": [
-                    "CaninaBerry"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 2,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 2,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "WaterBottle",
-                "Classnames": [
-                    "WaterBottle"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            }
-        ]
-    },
-    {
-        "RecipeId": 910,
-        "ShowInFreeMenu": 0,
-        "WorkbenchClasses": [
-            "DRL_Craft_Workbench"
-        ],
-        "RecipeName": "Семя Древнего корня",
-        "Result": "VB_AR_Seed",
-        "ResultClasses": [],
-        "PreviewClassname": "",
-        "CraftIcon": "",
-        "Description": "Окаменевшую сердцевину не колешь, а будишь пыльцой и янтарём — выходит семя. Посади у вырезанной сердцевины — роща вернётся.",
-        "CraftTimeSec": 10,
-        "RecraftTimeSec": 10,
-        "ResultCount": 1,
-        "ResultQuantityFrac": 1.0,
-        "ResultDamageFrac": 0.0,
-        "CraftComponents": [
-            {
-                "Classname": "VB_AR_HeartDead",
-                "Classnames": [
-                    "VB_AR_HeartDead"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "VB_AR_Spores",
-                "Classnames": [
-                    "VB_AR_Spores"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 2,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 2,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "VB_AR_Amber",
-                "Classnames": [
-                    "VB_AR_Amber"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            }
-        ]
-    },
-    {
-        "RecipeId": 911,
-        "ShowInFreeMenu": 0,
-        "WorkbenchClasses": [
-            "DRL_Craft_Workbench"
-        ],
-        "RecipeName": "Книга древних",
-        "Result": "VB_AR_Book",
-        "ResultClasses": [],
-        "PreviewClassname": "",
-        "CraftIcon": "",
-        "Description": "Листы в переплёте из коры, корешок из лыка, янтарь по углам, Руна Дня на крышке. Всё, что знали о Древнем корне.",
-        "CraftTimeSec": 15,
-        "RecraftTimeSec": 15,
-        "ResultCount": 1,
-        "ResultQuantityFrac": 1.0,
-        "ResultDamageFrac": 0.0,
-        "CraftComponents": [
-            {
-                "Classname": "Paper",
-                "Classnames": [
-                    "Paper"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 4,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 4,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "VB_AR_RootPiece",
-                "Classnames": [
-                    "VB_AR_RootPiece"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 2,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 2,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "VB_AR_Vein",
-                "Classnames": [
-                    "VB_AR_Vein"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 2,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 2,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "VB_AR_Amber",
-                "Classnames": [
-                    "VB_AR_Amber"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "MSFZ_RuneStone_Day",
-                "Classnames": [
-                    "MSFZ_RuneStone_Day"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.5,
-                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,

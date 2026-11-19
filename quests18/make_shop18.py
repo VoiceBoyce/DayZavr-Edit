@@ -214,7 +214,7 @@ def build():
             rounds = mag_rounds(cls)
             p = SD.MAG_OVERRIDE.get(cls, SD.MAG_BIG_PRICE if rounds >= SD.MAG_BIG_ROUNDS else SD.MAG_PRICE)
             nm = "Магазин %s" % weapon_name + (" (%d)" % rounds if rounds else "")
-            r = recipe(rid, nm, SD.WB, [cls], price_comps(p), "Лавка лагеря. Магазин полный.")
+            r = recipe(rid, nm, SD.WB, [cls], price_comps(p) + extras(SD.mag_extra(rounds)), "Лавка лагеря. Магазин полный.")
         addon_ids[key], addon_price[key] = rid, p
         put("addons", r, p, wb=SD.WB)
         return rid, p
@@ -267,7 +267,8 @@ def build():
             raise SystemExit("для базы: в группе «%s» разные старые цены %s" % (name, sorted(gprice[gid])))
         g = SD.from_old_gold(gprice[gid].pop())
         desc = "Лавка лагеря." + (" Выберите вариант (%d)." % len(groups[gid]) if len(groups[gid]) > 1 else "")
-        put("base", recipe(gid, name, SD.WB, groups[gid], price_comps(g), desc), g, wb=SD.WB)
+        put("base", recipe(gid, name, SD.WB, groups[gid], price_comps(g) + extras(SD.BASE_EXTRA.get(gid, [])), desc), g,
+            wb=SD.WB)
     return shop
 
 

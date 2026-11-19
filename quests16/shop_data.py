@@ -204,6 +204,7 @@ EXTRA_RU = {
     "EFT_Poxearm": "холодная сварка", "EFT_Lens": "фотообъектив", "EFT_OrgGlass": "оргстекло",
     "EFT_Capacitors": "конденсаторы", "EFT_Rele": "реле", "EFT_Military_cable": "военный кабель", "EFT_Engine": "электродвигатель",
     "EFT_Magnet": "электромагнит", "EFT_Modem": "сетевой модем", "EFT_Bloodset": "пакет крови",
+    "Paper": "бумага", "Rag": "тряпки",
     "OOTS_Exo_Servoprivod_black": "обычный сервопривод экзоскелета", "VB_RiftVein": "жила Изнанки", "VB_AB_Mat_Snow": "вечный лёд", "VB_AB_Mat_Studen": "студенистая слизь",
     "VB_AB_Mat_EMP": "ионная пыль", "VB_AB_Mat_Voronka": "сжатый камень", "VB_AB_Mat_Tramplin": "гравитационная галька",
     "VB_AB_Mat_Groza": "грозовой кристалл", "VB_AB_Mat_Flash": "световая пыль",
@@ -258,6 +259,22 @@ WEAPON_EXTRA_OVERRIDE = {  # Gauss — электромагнитная винт
 }
 # Обвес от 1 з: прицелы — объектив, глушители — металлические детали
 ADDON_EXTRA = {"optic": [("EFT_Lens", 1)], "suppressor": [("EFT_MetalParts", 1)]}
+# Магазины (2026-11-19, как на 18, но без руды — мода добычи на 16 нет): металл из бартера EFT. (от патронов, ингредиенты)
+MAG_EXTRA_TIERS = [
+    (101, [("EFT_MetalParts", 2)]),                          # пулемётный короб 200–250
+    (50, [("EFT_MetalParts", 1), ("EFT_Bolts", 1)]),         # ёмкий 50–100 (порог как у цены, MAG_BIG_ROUNDS)
+    (0, [("EFT_Bolts", 1)]),                                 # обычный, до 50
+]
+# Для базы: обои печатают на бумаге, ковры ткут из тряпок; шпатлёвка и сундук — только монеты
+BASE_EXTRA = {gid: [("Paper", 2)] for gid in (5501, 5502, 5503, 5504, 5505, 5506)}
+BASE_EXTRA[5507] = [("Rag", 3)]
+
+
+def mag_extra(rounds):
+    for floor, extra in MAG_EXTRA_TIERS:
+        if rounds >= floor:
+            return extra
+    return []
 MAX_INGREDIENTS = 8
 
 

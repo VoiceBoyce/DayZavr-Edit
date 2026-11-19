@@ -1,0 +1,143 @@
+class CfgPatches
+{
+	class Vp_SET14
+	{
+		units[] = {"Vp_SET14_Top_Black"};
+		weapons[] = {};
+		requiredVersion = 0.1;
+		requiredAddons[] = {"DZ_Data","DZ_Characters"};
+	};
+	// DayZavr: уникальное имя аддона, чтобы _vb-конфиг сета грузился после этого файла (баг №52)
+	class VBC_set_Ghost_Top
+	{
+		units[] = {};
+		weapons[] = {};
+		requiredVersion = 0.1;
+		requiredAddons[] = {"DZ_Data","DZ_Characters"};
+	};
+};
+class cfgVehicles
+{
+	class Clothing_Base;
+	class Clothing: Clothing_Base{};
+	class Vp_SET14_Top_ColorBase: Clothing
+	{
+		scope = 0;
+		displayName = "$STR_VBC_Ghost_Top";
+		descriptionShort = "$STR_VBC_Ghost_Top_Desc";
+		model = "set_Ghost\set\Top\model\Top_g.p3d";
+		attachments[] = {};
+		inventorySlot[] = {"Body"};
+		itemInfo[] = {"Clothing","Body"};
+		quickBarBonus = 0;
+		weight = 1500;
+		itemSize[] = {4,3};
+		varWetMax = 0.249;
+		heatIsolation = 0.7;
+		itemsCargoSize[] = {10,6};
+		repairableWithKits[] = {5,2};
+		repairCosts[] = {75.0,50.0};
+		hiddenSelections[] = {"camo"};
+		class ClothingTypes
+		{
+			male = "set_Ghost\set\Top\model\Top_mf.p3d";
+			female = "set_Ghost\set\Top\model\Top_mf.p3d";
+		};
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health
+				{
+					hitpoints = 500;
+					transferToAttachmentsCoef = 0.5;
+					healthLevels[] = {{1.0,{"set_Ghost\set\Top\data\Top.rvmat"}},{0.7,{"set_Ghost\set\Top\data\Top.rvmat"}},{0.5,{"set_Ghost\set\Top\data\Top_damage.rvmat"}},{0.3,{"set_Ghost\set\Top\data\Top_damage.rvmat"}},{0.0,{"set_Ghost\set\Top\data\Top_destruct.rvmat"}}};
+				};
+			};
+			class GlobalArmor
+			{
+				class Projectile
+				{
+					class Health
+					{
+						damage = 0.85;
+					};
+					class Blood
+					{
+						damage = 0.85;
+					};
+					class Shock
+					{
+						damage = 0.85;
+					};
+				};
+				class Melee
+				{
+					class Health
+					{
+						damage = 0.75;
+					};
+					class Blood
+					{
+						damage = 0.75;
+					};
+					class Shock
+					{
+						damage = 0.75;
+					};
+				};
+				class Infected
+				{
+					class Health
+					{
+						damage = 0.75;
+					};
+					class Blood
+					{
+						damage = 0.75;
+					};
+					class Shock
+					{
+						damage = 0.75;
+					};
+				};
+				class FragGrenade
+				{
+					class Health
+					{
+						damage = 0.85;
+					};
+					class Blood
+					{
+						damage = 0.85;
+					};
+					class Shock
+					{
+						damage = 0.85;
+					};
+				};
+			};
+		};
+		class AnimEvents
+		{
+			class SoundWeapon
+			{
+				class pickUpItem
+				{
+					soundSet = "Shirt_pickup_SoundSet";
+					id = 797;
+				};
+				class drop
+				{
+					soundset = "Shirt_drop_SoundSet";
+					id = 898;
+				};
+			};
+		};
+	};
+	class Vp_SET14_Top_Black: Vp_SET14_Top_ColorBase
+	{
+		scope = 2;
+		hiddenSelectionsTextures[] = {"set_Ghost\set\Top\data\Top_co.paa"};
+	};
+};

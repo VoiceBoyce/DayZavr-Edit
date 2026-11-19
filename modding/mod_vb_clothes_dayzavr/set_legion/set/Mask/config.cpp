@@ -1,0 +1,79 @@
+class CfgPatches
+{
+	class Vp_SET20
+	{
+		units[] = {"Vp_SET20_Mask"};
+		weapons[] = {};
+		requiredVersion = 0.1;
+		requiredAddons[] = {"DZ_Data","DZ_Characters","DZ_Scripts"};
+	};
+	// DayZavr: уникальное имя аддона, чтобы _vb-конфиг сета грузился после этого файла (баг №52)
+	class VBC_set_legion_Mask
+	{
+		units[] = {};
+		weapons[] = {};
+		requiredVersion = 0.1;
+		requiredAddons[] = {"DZ_Data","DZ_Characters","DZ_Scripts"};
+	};
+};
+class CfgVehicles
+{
+	class Clothing_Base;
+	class Clothing: Clothing_Base{};
+	class Vp_SET20_Mask_ColorBase: Clothing
+	{
+		displayName = "$STR_VBC_Legion_Mask";
+		descriptionShort = "$STR_VBC_Legion_Mask_Desc";
+		quickBarBonus = 0;
+		model = "set_legion\set\Mask\model\balaclava_g.p3d";
+		inventorySlot[] = {"Mask"};
+		itemInfo[] = {"Clothing","Mask"};
+		rotationFlags = 17;
+		weight = 150;
+		itemSize[] = {2,2};
+		ragQuantity = 2;
+		varWetMax = 0.249;
+		heatIsolation = 0.6;
+		repairableWithKits[] = {5,2};
+		repairCosts[] = {30,25};
+		headSelectionsToHide[] = {"Clipping_Balaclava"};
+		hiddenSelections[] = {"balaclava"};
+		class ClothingTypes
+		{
+			male = "set_legion\set\Mask\model\balaclava_mf.p3d";
+			female = "set_legion\set\Mask\model\balaclava_mf.p3d";
+		};
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health
+				{
+					hitpoints = 300;
+					healthLevels[] = {{1,{"set_legion\set\Mask\data\balaclava.rvmat"}},{0.7,{"set_legion\set\Mask\data\balaclava.rvmat"}},{0.5,{"set_legion\set\Mask\data\balaclava_damage.rvmat"}},{0.3,{"set_legion\set\Mask\data\balaclava_damage.rvmat"}},{0,{"set_legion\set\Mask\data\balaclava_destruct.rvmat"}}};
+				};
+			};
+		};
+		class AnimEvents
+		{
+			class SoundWeapon
+			{
+				class pickUpItem
+				{
+					soundSet = "Shirt_pickup_SoundSet";
+					id = 797;
+				};
+				class drop
+				{
+					soundset = "Shirt_drop_SoundSet";
+					id = 898;
+				};
+			};
+		};
+	};
+	class Vp_SET20_Mask: Vp_SET20_Mask_ColorBase
+	{
+		scope = 2;
+		hiddenSelectionsTextures[] = {"set_legion\set\Mask\data\balaclava_co.paa"};
+	};
+};

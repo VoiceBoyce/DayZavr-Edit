@@ -409,6 +409,7 @@ Verified errors committed more than once. Check ACTIVELY during implementation. 
 - **E104** — одна user-анимация общим источником у двух анимаций → `SetAnimationPhaseNow` пишет в соседний источник; у каждой анимации свой источник, сверять запись и `GetAnimationPhase`
 - **E105** — деталь не рисуется на машине при одном прокси на два слота (не колесо): свой прокси и класс на каждый слот
 - **E106** — `IEntity` без `GetOrientation`: параметр `Object`; сервер падает, каскад `Can't find class Param1` — следствие
+- **E110** — вещи с временем жизни 0 пропадают на рестарте: надстройка `X_vb` с `class X;` грузится раньше файла с `X` (общее имя `CfgPatches` у файлов мода) → уникальные `CfgPatches` и все в `requiredAddons`
 
 ---
 

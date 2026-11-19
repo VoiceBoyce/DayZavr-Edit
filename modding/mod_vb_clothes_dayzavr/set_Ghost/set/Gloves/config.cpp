@@ -1,0 +1,111 @@
+class CfgPatches
+{
+	class Vp_SET14
+	{
+		units[] = {"Vp_SET14_Gloves_Black"};
+		weapons[] = {};
+		requiredVersion = 0.1;
+		requiredAddons[] = {"DZ_Data","DZ_Characters","DZ_Scripts"};
+	};
+	// DayZavr: уникальное имя аддона, чтобы _vb-конфиг сета грузился после этого файла (баг №52)
+	class VBC_set_Ghost_Gloves
+	{
+		units[] = {};
+		weapons[] = {};
+		requiredVersion = 0.1;
+		requiredAddons[] = {"DZ_Data","DZ_Characters","DZ_Scripts"};
+	};
+};
+class cfgVehicles
+{
+	class Clothing;
+	class Vp_SET14_Gloves_ColorBase: Clothing
+	{
+		scope = 0;
+		displayName = "$STR_VBC_Ghost_Gloves";
+		descriptionShort = "$STR_VBC_Ghost_Gloves_Desc";
+		quickBarBonus = 0;
+		model = "set_Ghost\set\Gloves\model\Gloves_g.p3d";
+		inventorySlot[] = {"Gloves"};
+		simulation = "clothing";
+		itemInfo[] = {"Clothing","Gloves"};
+		rotationFlags = 34;
+		weight = 400;
+		itemSize[] = {2,2};
+		varWetMax = 0.249;
+		heatIsolation = 0.7;
+		repairableWithKits[] = {5,2};
+		repairCosts[] = {30,25};
+		hiddenSelections[] = {"camo","personality"};
+		class ClothingTypes
+		{
+			male = "set_Ghost\set\Gloves\model\Gloves_m.p3d";
+			female = "set_Ghost\set\Gloves\model\Gloves_f.p3d";
+		};
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health
+				{
+					hitpoints = 400;
+					healthLevels[] = {{1.0,{"set_Ghost\set\Gloves\data\Gloves.rvmat"}},{0.7,{"set_Ghost\set\Gloves\data\Gloves.rvmat"}},{0.5,{"set_Ghost\set\Gloves\data\Gloves_damage.rvmat"}},{0.3,{"set_Ghost\set\Gloves\data\Gloves_damage.rvmat"}},{0.0,{"set_Ghost\set\Gloves\data\Gloves_destruct.rvmat"}}};
+				};
+			};
+			class GlobalArmor
+			{
+				class Melee
+				{
+					class Health
+					{
+						damage = 0.75;
+					};
+					class Blood
+					{
+						damage = 0.75;
+					};
+					class Shock
+					{
+						damage = 0.75;
+					};
+				};
+				class Infected
+				{
+					class Health
+					{
+						damage = 0.75;
+					};
+					class Blood
+					{
+						damage = 0.75;
+					};
+					class Shock
+					{
+						damage = 0.75;
+					};
+				};
+			};
+		};
+		class AnimEvents
+		{
+			class SoundWeapon
+			{
+				class pickUpItem
+				{
+					soundSet = "WorkingGloves_pickup_SoundSet";
+					id = 797;
+				};
+				class drop
+				{
+					soundset = "WorkingGloves_drop_SoundSet";
+					id = 898;
+				};
+			};
+		};
+	};
+	class VP_SET14_Gloves_Black: Vp_SET14_Gloves_ColorBase
+	{
+		scope = 2;
+		hiddenSelectionsTextures[] = {"set_Ghost\set\Gloves\data\Gloves_co.paa"};
+	};
+};

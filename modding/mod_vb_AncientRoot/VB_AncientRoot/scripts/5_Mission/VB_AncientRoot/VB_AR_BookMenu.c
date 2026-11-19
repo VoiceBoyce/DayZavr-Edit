@@ -95,6 +95,15 @@ class VB_AR_BookMenu : UIScriptedMenu
 	static const float BODY_BOTTOM = 582;		// над заметкой на полях (RichText сам ужимает шрифт, если текст не влез)
 	static const float BODY_BOTTOM_FREE = 680;	// без заметки
 	static const float YOU_BODY_TOP = 364;
+	static const float BODY_X = 52;				// как VB_AR_BookBody в разметке
+	static const float BODY_W = 456;
+	static const float NOTE_W = 436;			// размеры RichText из разметки (gen_ar_book_layout.py), для VB_FitInk
+	static const float NOTE_H = 90;
+	static const float LOCK_W = 432;
+	static const float LOCK_H = 210;
+	static const float ENT_TEXT_W = 312;
+	static const float ENT_TEXT_H = 232;
+	static const float LINE_MAX = 36;			// px: строка атласа 28 — 28 px, атласа 48 — 48 px (замер 2560x1440)
 	static const float BRANCH_W = 400;
 	static const float BUD = 22;
 
@@ -461,6 +470,7 @@ class VB_AR_BookMenu : UIScriptedMenu
 			if (m_VB_Chapters[c].Page <= spread * 2 + 1)
 				active = c;
 		}
+		float k = VB_K();
 		for (int t = 0; t < m_VB_Chapters.Count() && t < TABS; t++)
 		{
 			float tx = TAB_X;
@@ -470,7 +480,7 @@ class VB_AR_BookMenu : UIScriptedMenu
 				tx = TAB_X_ACTIVE;
 				alpha = 1;
 			}
-			m_VB_Tabs[t].SetPos(tx, TAB_Y0 + t * TAB_STEP);
+			m_VB_Tabs[t].SetPos(tx * k, (TAB_Y0 + t * TAB_STEP) * k);
 			m_VB_TabImgs[t].SetAlpha(alpha);
 		}
 	}
@@ -499,8 +509,8 @@ class VB_AR_BookMenu : UIScriptedMenu
 		if (tier < p.Need)
 		{
 			s.Runes.Show(true);
-			s.Lock.SetText(VB_LockText(p.Need, tier));
 			s.Lock.Show(true);
+			VB_FitInk(s.Lock, VB_LockText(p.Need, tier), LOCK_W, LOCK_H);
 			return;
 		}
 
@@ -526,28 +536,62 @@ class VB_AR_BookMenu : UIScriptedMenu
 		if (p.Note != "")
 		{
 			bottom = BODY_BOTTOM;
-			s.Note.SetText(p.Note);
 			s.Note.Show(true);
 			s.NoteBg.Show(true);
+			VB_FitInk(s.Note, p.Note, NOTE_W, NOTE_H);
 		}
 		VB_PlaceBody(s.Body, top, bottom, p.Body, index);
 	}
 
+	// Разметка в точных единицах (1/1080 высоты экрана) масштабируется движком, а SetPos/SetSize из скрипта ставят
+	// физические пиксели: на 2560x1440 текст вставал на «сырые» 288 px и налезал на картинку, закладки уходили под
+	// обложку (баг №55). Всё, что двигаем из скрипта, задаём в единицах разметки и умножаем на этот множитель.
+	protected float VB_K()
+	{
+		int sw, sh;
+		GetScreenSize(sw, sh);
+		if (sh <= 0)
+			return 1;
+		float h = sh;
+		return h / 1080;
+	}
+
 	protected void VB_PlaceBody(RichTextWidget body, float top, float bottom, string text, int index)
 	{
-		float x, y, w, h;
-		body.GetPos(x, y);
-		body.GetSize(w, h);
-		body.SetPos(x, top);
-		body.SetSize(w, bottom - top);
-		body.SetText(text);
+		float k = VB_K();
+		body.SetPos(BODY_X * k, top * k);
 		body.Show(true);
-		body.Update();
+		VB_FitInk(body, text, BODY_W, bottom - top);
 		VB_CheckFit(body, index);
 	}
 
+	// RichText не держит "exact text size": он берет самый крупный атлас шрифта (у AmorSerifPro 12/14/16/22/28/48/58),
+	// при котором текст влезает в рамку. Атласы в физических пикселях, а рамки растут с экраном, поэтому на 2560x1440
+	// короткий текст («Друг леса» на «Ты и лес», «Плащ лешего» в каталоге) влезал в атлас 48 и выходил вдвое крупнее
+	// соседних страниц (замер на стенде 2026-11-19, баг №55). Если строка вышла выше обычной — ужимаем рамку до высоты
+	// текста без пикселя: крупный атлас перестает влезать, и движок берет следующий (58 -> 48 -> 28, по шагу за проход).
+	// Текст раскладывается при SetText по текущему размеру: размер ставить ДО текста, иначе цветные слова наезжают
+	// на соседние (стенд 2026-11-19). w, h — размер рамки в единицах разметки.
+	protected void VB_FitInk(RichTextWidget text, string str, float w, float h)
+	{
+		float k = VB_K();
+		text.SetSize(w * k, h * k);
+		text.SetText(str);
+		text.Update();
+		for (int i = 0; i < 6; i++)
+		{
+			int lines = text.GetNumLines();
+			float content = text.GetContentHeight();
+			if (lines <= 0 || content / lines <= LINE_MAX)
+				return;
+			text.SetSize(w * k, content - 1);
+			text.SetText(str);
+			text.Update();
+		}
+	}
+
 	// разработчику: текст не влез в страницу — строка в лог клиента (один раз за открытие книги). На стенде 2026-11-16
-	// не сработала ни разу: RichText сам ужимает шрифт, когда текст не влезает, — длину страниц проверять снимком.
+	// не сработала ни разу: RichText сам берет атлас мельче, когда текст не влезает, — длину страниц проверять снимком.
 	protected void VB_CheckFit(RichTextWidget body, int index)
 	{
 		float sw, sh;
@@ -567,7 +611,7 @@ class VB_AR_BookMenu : UIScriptedMenu
 			return;
 		frame.Show(true);
 		name.SetText(title);
-		text.SetText(body);
+		VB_FitInk(text, body, ENT_TEXT_W, ENT_TEXT_H);
 		VB_SetPicture(pic, type);
 	}
 
@@ -584,7 +628,8 @@ class VB_AR_BookMenu : UIScriptedMenu
 		m_VB_YouBloom.SetMaskProgress(Math.Max(0, v) / 100);
 		m_VB_YouThorn.SetMaskProgress(Math.Max(0, -v) / 100);
 		float pos01 = (v + 100) / 200;
-		m_VB_YouBud.SetPos(pos01 * BRANCH_W - BUD / 2, 13);
+		float k = VB_K();
+		m_VB_YouBud.SetPos((pos01 * BRANCH_W - BUD / 2) * k, 13 * k);
 		int shown = Math.Round(v);
 		string val = shown.ToString();
 		if (shown > 0)

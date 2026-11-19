@@ -247,7 +247,12 @@ Every rule below caused a real crash or visual failure in production.
    fits in 1080 units of height fits vertically at every resolution; only the horizontal room
    changes with the aspect ratio. Do not reason in physical pixels (a reviewer who did flagged an
    overflow that did not exist), and do not rescale exact widgets from script by height/1080: the
-   engine already did, and the script doubles it (TEXT SIZING LAWS). The header comment
+   engine already did, and the script doubles it (TEXT SIZING LAWS). *(scoped 2026-11-19)* That holds for sizes the
+   layout declares. Values a script passes to `SetPos`/`SetSize` are PHYSICAL pixels, and `GetPos`/`GetSize` return
+   pixels: measured on 1.30 at 2560x1440, a body declared at x=52 read back 69.33 (52 x 1.333) and `SetPos(x, 288)`
+   landed at 288 px, under a picture the layout had scaled to 147-373 px. A layout constant moved from script must be
+   multiplied by screen height / 1080 (`GetScreenSize`); a value read with `GetPos`/`GetSize` must not be. Dayzavr
+   error catalog E111/E112, `mod_vb_AncientRoot` `VB_AR_BookMenu.c` (`VB_K`, `VB_FitInk`). The header comment
    `EXACTPOS //< Uses physical resolution (g_iWidth, h_iHeight)` (`enwidgets.c:68-71`) does not
    describe what is drawn. `0` = **fraction of parent (0.0–1.0)**, which is what vanilla
    predominantly uses (`gui/layouts` stat: `hexactsize 0` 5851× vs `hexactsize 1` 2727× in the

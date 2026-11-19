@@ -1,0 +1,144 @@
+class CfgPatches
+{
+	class Vp_SET20
+	{
+		units[] = {"Vp_SET20_Pants"};
+		weapons[] = {};
+		requiredVersion = 0.1;
+		requiredAddons[] = {"DZ_Data","DZ_Characters","DZ_Scripts"};
+	};
+	// DayZavr: уникальное имя аддона, чтобы _vb-конфиг сета грузился после этого файла (баг №52)
+	class VBC_set_legion_Pants
+	{
+		units[] = {};
+		weapons[] = {};
+		requiredVersion = 0.1;
+		requiredAddons[] = {"DZ_Data","DZ_Characters","DZ_Scripts"};
+	};
+};
+class cfgVehicles
+{
+	class Clothing_Base;
+	class Clothing: Clothing_Base{};
+	class Vp_SET20_Pants_ColorBase: Clothing
+	{
+		displayName = "$STR_VBC_Legion_Pants";
+		descriptionShort = "$STR_VBC_Legion_Pants_Desc";
+		heatIsolation = 0.6;
+		model = "set_legion\set\Pants\model\Pants_g.p3d";
+		inventorySlot[] = {"Legs"};
+		simulation = "clothing";
+		itemInfo[] = {"Clothing","Legs"};
+		itemSize[] = {4,3};
+		itemsCargoSize[] = {10,5};
+		weight = 1200;
+		ragQuantity = 3;
+		varWetMax = 0.249;
+		visibilityModifier = 0.8;
+		repairableWithKits[] = {5,2};
+		repairCosts[] = {30,25};
+		quickBarBonus = 0;
+		hiddenSelections[] = {"koleno","pants","personality"};
+		hiddenSelectionsTextures[] = {};
+		class ClothingTypes
+		{
+			male = "set_legion\set\Pants\model\Pants_m.p3d";
+			female = "set_legion\set\Pants\model\Pants_f.p3d";
+		};
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health
+				{
+					hitpoints = 500;
+					healthLevels[] = {{1,{"set_legion\set\Pants\data\koleno.rvmat","set_legion\set\Pants\data\pants.rvmat"}},{0.7,{"set_legion\set\Pants\data\koleno.rvmat","set_legion\set\Pants\data\pants.rvmat"}},{0.5,{"set_legion\set\Pants\data\koleno_damage.rvmat","set_legion\set\Pants\data\pants_damage.rvmat"}},{0.3,{"set_legion\set\Pants\data\koleno_damage.rvmat","set_legion\set\Pants\data\pants_damage.rvmat"}},{0,{"set_legion\set\Pants\data\koleno_destruct.rvmat","set_legion\set\Pants\data\pants_destruct.rvmat"}}};
+				};
+			};
+			class GlobalArmor
+			{
+				class Projectile
+				{
+					class Health
+					{
+						damage = 0.85;
+					};
+					class Blood
+					{
+						damage = 0.85;
+					};
+					class Shock
+					{
+						damage = 0.85;
+					};
+				};
+				class Melee
+				{
+					class Health
+					{
+						damage = 0.75;
+					};
+					class Blood
+					{
+						damage = 0.75;
+					};
+					class Shock
+					{
+						damage = 0.75;
+					};
+				};
+				class Infected
+				{
+					class Health
+					{
+						damage = 0.75;
+					};
+					class Blood
+					{
+						damage = 0.75;
+					};
+					class Shock
+					{
+						damage = 0.75;
+					};
+				};
+				class FragGrenade
+				{
+					class Health
+					{
+						damage = 0.85;
+					};
+					class Blood
+					{
+						damage = 0.85;
+					};
+					class Shock
+					{
+						damage = 0.85;
+					};
+				};
+			};
+		};
+		class AnimEvents
+		{
+			class SoundWeapon
+			{
+				class pickUpItem
+				{
+					soundSet = "Shirt_pickup_SoundSet";
+					id = 797;
+				};
+				class drop
+				{
+					soundset = "Shirt_drop_SoundSet";
+					id = 898;
+				};
+			};
+		};
+	};
+	class Vp_SET20_Pants: Vp_SET20_Pants_ColorBase
+	{
+		scope = 2;
+		hiddenSelectionsTextures[] = {"set_legion\set\Pants\data\koleno_co.paa","set_legion\set\Pants\data\pants_co.paa"};
+	};
+};

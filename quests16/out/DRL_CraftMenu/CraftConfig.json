@@ -1510,7 +1510,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Пси», тир IV: материалы аномалий своей стихии и трофей босса этой стихии, сырьё Изнанки.",
+        "Description": "Здоровье +20/мин, выносливость +10% за 3 с, приводит в чувство (шок +30). Но еда −100/мин.",
         "CraftTimeSec": 5,
         "RecraftTimeSec": 5,
         "ResultCount": 1,
@@ -1765,7 +1765,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Пси», тир I: материалы аномалий своей стихии.",
+        "Description": "Только вред: здоровье −5/мин, кровь −20/мин, вода −40/мин, еда −20/мин.",
         "CraftTimeSec": 7,
         "RecraftTimeSec": 7,
         "ResultCount": 1,
@@ -1893,7 +1893,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Лёд», тир I: материалы аномалий своей стихии.",
+        "Description": "Только вред: вода и еда −40/мин, вызывает кровотечения (~раз в 50 с).",
         "CraftTimeSec": 7,
         "RecraftTimeSec": 7,
         "ResultCount": 1,
@@ -2021,7 +2021,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Кислота», тир I: материалы аномалий своей стихии.",
+        "Description": "Только вред: здоровье −4/мин, вода и еда −20/мин.",
         "CraftTimeSec": 7,
         "RecraftTimeSec": 7,
         "ResultCount": 1,
@@ -2149,7 +2149,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Огонь», тир I: материалы аномалий своей стихии.",
+        "Description": "Лечит кровотечения (~раз в 35 с). Но здоровье −10/мин, вода −500/мин (досуха за ~10 мин), убьёт за ~10 мин.",
         "CraftTimeSec": 7,
         "RecraftTimeSec": 7,
         "ResultCount": 1,
@@ -2277,7 +2277,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Пси», тир II: материалы аномалий своей стихии, сырьё Изнанки.",
+        "Description": "Только вред: здоровье −10/мин, в бою легче вырубить (шок −15), убьёт за ~10 мин. Другим артефактам: вода и еда ×0,25.",
         "CraftTimeSec": 7,
         "RecraftTimeSec": 7,
         "ResultCount": 1,
@@ -2477,7 +2477,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Гравитация», тир I: материалы аномалий своей стихии.",
+        "Description": "Только вред: здоровье −10/мин, вода −20/мин, еда −40/мин, вызывает кровотечения, убьёт за ~10 мин, в бою вырубит любое попадание (шок −20). Другим артефактам: кровь ×2.",
         "CraftTimeSec": 7,
         "RecraftTimeSec": 7,
         "ResultCount": 1,
@@ -2605,7 +2605,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Гравитация», тир II: материалы аномалий своей стихии.",
+        "Description": "Сам ничего не даёт. Меняет эффекты других артефактов (и плюсы, и минусы): вода, еда и кровь ×0,1.",
         "CraftTimeSec": 7,
         "RecraftTimeSec": 7,
         "ResultCount": 1,
@@ -2769,7 +2769,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Кислота», тир I: материалы аномалий своей стихии.",
+        "Description": "Только вред: здоровье −7/мин, кровь −40/мин, вода −40/мин, еда −10/мин, в бою легче вырубить (шок −15).",
         "CraftTimeSec": 7,
         "RecraftTimeSec": 7,
         "ResultCount": 1,
@@ -2897,7 +2897,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Кислота», тир II: материалы аномалий своей стихии, сырьё Изнанки.",
+        "Description": "Здоровье +10/мин. Но кровь −10/мин, вода и еда −50/мин.",
         "CraftTimeSec": 7,
         "RecraftTimeSec": 7,
         "ResultCount": 1,
@@ -3097,7 +3097,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Гравитация», тир I: материалы аномалий своей стихии.",
+        "Description": "Только вред: здоровье −10/мин, кровь −20/мин, вода −20/мин, еда −16/мин, в бою легче вырубить (шок −5), убьёт за ~10 мин.",
         "CraftTimeSec": 7,
         "RecraftTimeSec": 7,
         "ResultCount": 1,
@@ -3225,7 +3225,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Гроза», тир II: материалы аномалий своей стихии.",
+        "Description": "Выносливость +5% за 3 с. Но вода и еда −300/мин.",
         "CraftTimeSec": 7,
         "RecraftTimeSec": 7,
         "ResultCount": 1,
@@ -3389,7 +3389,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Огонь», тир II: материалы аномалий своей стихии.",
+        "Description": "Кровь +30/мин. Но здоровье −5/мин, вода −500/мин (досуха за ~10 мин).",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -3553,7 +3553,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Пси», тир III: материалы аномалий своей стихии, сырьё Изнанки.",
+        "Description": "Еда +40/мин, лечит кровотечения (~раз в 50 с), приводит в чувство (шок +15). Но здоровье −5/мин. Другим артефактам: вода ×0,1.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -3771,7 +3771,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Лёд», тир II: материалы аномалий своей стихии.",
+        "Description": "Вода и еда +20/мин, лечит кровотечения (~раз в 50 с). Но здоровье −2/мин.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -3935,7 +3935,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Кислота», тир II: материалы аномалий своей стихии.",
+        "Description": "Вода и еда +20/мин. Но здоровье −4/мин.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -4099,7 +4099,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Гравитация», тир II: материалы аномалий своей стихии.",
+        "Description": "Здоровье +10/мин. Но кровь −100/мин, вода и еда −500/мин (досуха за ~10 мин), вызывает кровотечения (~раз в 3 мин), в бою вырубит любое попадание (шок −20).",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -4263,7 +4263,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Гроза», тир III: материалы аномалий своей стихии.",
+        "Description": "Выносливость +15% за 3 с. Но вода и еда −100/мин, вызывает кровотечения (~раз в 3 мин), в бою легче вырубить (шок −10). Другим артефактам: кровь ×0,25.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -4463,7 +4463,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Пси», тир IV: материалы аномалий своей стихии и трофей босса этой стихии.",
+        "Description": "Здоровье +10/мин, кровь +100/мин, еда +50/мин, лечит кровотечения (~раз в 35 с). Но вода −50/мин.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -4664,7 +4664,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Кислота», тир I: материалы аномалий своей стихии.",
+        "Description": "Вода +800/мин, еда +500/мин, лечит кровотечения (~раз в 100 с), приводит в чувство (шок +15). Но здоровье −10/мин, убьёт за ~10 мин.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -4792,7 +4792,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Кислота», тир III: материалы аномалий своей стихии.",
+        "Description": "Кровь +20/мин. Но вода и еда −60/мин, вызывает кровотечения (~раз в 3 мин).",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -4974,7 +4974,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Пси», тир II: материалы аномалий своей стихии.",
+        "Description": "Только вред: вода −100/мин. Другим артефактам: еда ×0,1.",
         "CraftTimeSec": 13,
         "RecraftTimeSec": 13,
         "ResultCount": 1,
@@ -5156,7 +5156,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Радиация», тир I: материалы аномалий своей стихии.",
+        "Description": "Только вред: здоровье −10/мин, кровь −50/мин, вода и еда −200/мин, убьёт за ~10 мин.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -5284,7 +5284,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Гроза», тир II: материалы аномалий своей стихии.",
+        "Description": "Только вред: здоровье −10/мин, кровь −60/мин, вода и еда −200/мин, вызывает кровотечения (~раз в 100 с), убьёт за ~10 мин.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -5448,7 +5448,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Гроза», тир I: материалы аномалий своей стихии.",
+        "Description": "Только вред: здоровье −10/мин, вода и еда −500/мин (досуха за ~10 мин), выносливость −15% за 3 с, убьёт за ~10 мин.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -5576,7 +5576,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Гроза», тир III: материалы аномалий своей стихии.",
+        "Description": "Кровь +20/мин, приводит в чувство (шок +20). Но здоровье −10/мин, вода и еда −300/мин, убьёт за ~10 мин.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -5758,7 +5758,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Лёд», тир I: материалы аномалий своей стихии.",
+        "Description": "Выносливость +20% за 3 с. Но здоровье −10/мин, вода и еда −200/мин, вызывает кровотечения (~раз в 50 с), убьёт за ~10 мин.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -5886,7 +5886,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Гравитация», тир IV: материалы аномалий своей стихии и трофей босса этой стихии.",
+        "Description": "Вода и еда +50/мин. Другим артефактам: вода и еда ×2,5.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -6087,7 +6087,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Гравитация», тир IV: материалы аномалий своей стихии и трофей босса этой стихии.",
+        "Description": "Вода +100/мин. Другим артефактам: вода ×2,5; еда ×0,5.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -6288,7 +6288,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Гроза», тир IV: материалы аномалий своей стихии и трофей босса этой стихии.",
+        "Description": "Еда +100/мин. Другим артефактам: еда ×2,5; вода ×0,5.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -6507,7 +6507,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Кислота», тир II: материалы аномалий своей стихии.",
+        "Description": "Только вред: вызывает кровотечения (~раз в 40 с). Другим артефактам: кровь ×0,2.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -6671,7 +6671,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Радиация», тир III: материалы аномалий своей стихии, сырьё Изнанки.",
+        "Description": "Здоровье +10/мин, выносливость +10% за 3 с. Но вызывает кровотечения (~раз в 100 с). Другим артефактам: вода ×(−1,25): трата превращается в прибавку; кровь ×0,5.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -6871,7 +6871,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Огонь», тир III: материалы аномалий своей стихии.",
+        "Description": "Здоровье +7/мин, кровь +100/мин, лечит кровотечения (~раз в 20 с). Но вода −50/мин.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -7071,7 +7071,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Пси», тир III: материалы аномалий своей стихии, сырьё Изнанки.",
+        "Description": "Здоровье +5/мин, еда +200/мин, лечит кровотечения (~раз в 13 с), приводит в чувство (шок +25). Но вода −500/мин (досуха за ~10 мин).",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -7307,7 +7307,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Лёд», тир III: материалы аномалий своей стихии.",
+        "Description": "Кровь +1000/мин. Но вызывает кровотечения (~раз в 50 с).",
         "CraftTimeSec": 13,
         "RecraftTimeSec": 13,
         "ResultCount": 1,
@@ -7507,7 +7507,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Кислота», тир III: материалы аномалий своей стихии.",
+        "Description": "Здоровье +10/мин, кровь +100/мин, вода и еда +100/мин.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -7707,7 +7707,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Гравитация», тир III: материалы аномалий своей стихии.",
+        "Description": "Здоровье +14/мин, лечит кровотечения (~раз в 100 с), выносливость +3,5% за 3 с. Но кровь −100/мин, вода и еда −250/мин, в бою легче вырубить (шок −15).",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -7907,7 +7907,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Кислота», тир IV: материалы аномалий своей стихии и трофей босса этой стихии, сырьё Изнанки.",
+        "Description": "Кровь +400/мин, вода и еда +400/мин, выносливость +10% за 3 с.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -8162,7 +8162,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Радиация», тир II: материалы аномалий своей стихии.",
+        "Description": "Здоровье +10/мин, кровь +30/мин, лечит кровотечения (~раз в 40 с), приводит в чувство (шок +50).",
         "CraftTimeSec": 13,
         "RecraftTimeSec": 13,
         "ResultCount": 1,
@@ -8344,7 +8344,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Радиация», тир IV: материалы аномалий своей стихии и трофей босса этой стихии.",
+        "Description": "Кровь +80/мин, лечит кровотечения (~раз в 50 с). Другим артефактам: кровь ×2.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -8545,7 +8545,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Огонь», тир IV: материалы аномалий своей стихии и трофей босса этой стихии.",
+        "Description": "Лечит кровотечения (~раз в 12 с). Но вода и еда −200/мин.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -8764,7 +8764,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Огонь», тир II: материалы аномалий своей стихии.",
+        "Description": "Здоровье +15/мин, кровь +30/мин. Но вода и еда −200/мин.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -8928,7 +8928,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Гроза», тир I: материалы аномалий своей стихии.",
+        "Description": "Лечит кровотечения (~раз в 20 с). Но кровь −100/мин.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -9056,7 +9056,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Пси», тир III: материалы аномалий своей стихии, сырьё Изнанки.",
+        "Description": "Здоровье +12/мин, лечит кровотечения (~раз в 20 с). Но выносливость −20% за 3 с, в бою вырубит любое попадание (шок −25).",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -9274,7 +9274,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Кислота», тир III: материалы аномалий своей стихии.",
+        "Description": "Кровь +20/мин, вода +500/мин. Но еда −500/мин (досуха за ~10 мин), выносливость −10% за 3 с. Другим артефактам: здоровье ×0,25.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -9456,7 +9456,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Радиация», тир I: материалы аномалий своей стихии.",
+        "Description": "Только вред: кровь −30/мин, вода −200/мин, выносливость −5% за 3 с.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -9584,7 +9584,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Кислота», тир IV: материалы аномалий своей стихии и трофей босса этой стихии.",
+        "Description": "Кровь +200/мин, выносливость +15% за 3 с. Но вода и еда −60/мин.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -9785,7 +9785,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Лёд», тир II: материалы аномалий своей стихии.",
+        "Description": "Только вред: вызывает кровотечения (~раз в 3 мин), выносливость −10% за 3 с, в бою вырубит любое попадание (шок −20). Другим артефактам: кровь ×5.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -9949,7 +9949,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Гравитация», тир III: материалы аномалий своей стихии.",
+        "Description": "Здоровье +10/мин. Но выносливость −10% за 3 с. Другим артефактам: здоровье ×2.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -10131,7 +10131,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Лёд», тир III: материалы аномалий своей стихии.",
+        "Description": "Еда +600/мин. Но здоровье −10/мин, кровь −50/мин, вода −500/мин (досуха за ~10 мин), в бою легче вырубить (шок −15), убьёт за ~10 мин.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -10313,7 +10313,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Гравитация», тир IV: материалы аномалий своей стихии и трофей босса этой стихии.",
+        "Description": "Здоровье +30/мин, кровь +500/мин, вода и еда +500/мин, лечит кровотечения (каждые 10 с). Но в бою вырубит любое попадание (шок −30).",
         "CraftTimeSec": 13,
         "RecraftTimeSec": 13,
         "ResultCount": 1,
@@ -10532,7 +10532,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Огонь», тир I: материалы аномалий своей стихии, сырьё Изнанки.",
+        "Description": "Кровь +100/мин, вода и еда +100/мин, приводит в чувство (шок +15). Но здоровье −10/мин, убьёт за ~10 мин.",
         "CraftTimeSec": 13,
         "RecraftTimeSec": 13,
         "ResultCount": 1,
@@ -10696,7 +10696,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Радиация», тир III: материалы аномалий своей стихии.",
+        "Description": "Здоровье +10/мин. Но кровь −100/мин, вода и еда −500/мин (досуха за ~10 мин), в бою легче вырубить (шок −15).",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -10860,7 +10860,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Гравитация», тир I: материалы аномалий своей стихии.",
+        "Description": "Лечит кровотечения (~раз в 30 с). Но здоровье −10/мин, убьёт за ~10 мин.",
         "CraftTimeSec": 13,
         "RecraftTimeSec": 13,
         "ResultCount": 1,
@@ -10988,7 +10988,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Радиация», тир IV: материалы аномалий своей стихии и трофей босса этой стихии.",
+        "Description": "Здоровье +60/мин.",
         "CraftTimeSec": 13,
         "RecraftTimeSec": 13,
         "ResultCount": 1,
@@ -11207,7 +11207,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Пси», тир IV: материалы аномалий своей стихии и трофей босса этой стихии.",
+        "Description": "Здоровье +60/мин.",
         "CraftTimeSec": 13,
         "RecraftTimeSec": 13,
         "ResultCount": 1,
@@ -11426,7 +11426,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Лёд», тир IV: материалы аномалий своей стихии и трофей босса этой стихии.",
+        "Description": "Здоровье +50/мин, кровь +200/мин, вода и еда +300/мин, лечит кровотечения (~раз в 100 с), выносливость +15% за 3 с, приводит в чувство (шок +10).",
         "CraftTimeSec": 13,
         "RecraftTimeSec": 13,
         "ResultCount": 1,
@@ -11645,7 +11645,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Артефакт стихии «Гравитация», тир IV: материалы аномалий своей стихии и трофей босса этой стихии.",
+        "Description": "Выносливость +10% за 3 с. Другим артефактам: выносливость ×2; здоровье ×1,2.",
         "CraftTimeSec": 13,
         "RecraftTimeSec": 13,
         "ResultCount": 1,
@@ -44033,6 +44033,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -44183,6 +44201,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -44295,6 +44331,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -44329,6 +44383,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -44371,6 +44443,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -44405,6 +44495,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -44521,6 +44629,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -44633,6 +44759,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -44667,6 +44811,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -44765,6 +44927,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -44799,6 +44979,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -44841,6 +45039,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -44875,6 +45091,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 4,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_MetalParts",
+                "Classnames": [
+                    "EFT_MetalParts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -44917,6 +45151,42 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_MetalParts",
+                "Classnames": [
+                    "EFT_MetalParts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -44951,6 +45221,42 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 4,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_MetalParts",
+                "Classnames": [
+                    "EFT_MetalParts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -45027,6 +45333,42 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 4,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_MetalParts",
+                "Classnames": [
+                    "EFT_MetalParts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -45145,6 +45487,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_MetalParts",
+                "Classnames": [
+                    "EFT_MetalParts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -45255,6 +45615,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -45391,6 +45769,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -45425,6 +45821,42 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 5,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_MetalParts",
+                "Classnames": [
+                    "EFT_MetalParts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -45769,6 +46201,42 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_MetalParts",
+                "Classnames": [
+                    "EFT_MetalParts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -45939,6 +46407,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -45977,6 +46463,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -46011,6 +46515,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -46129,6 +46651,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -46201,6 +46741,42 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 4,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_MetalParts",
+                "Classnames": [
+                    "EFT_MetalParts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -46281,6 +46857,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -46315,6 +46909,42 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 4,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_MetalParts",
+                "Classnames": [
+                    "EFT_MetalParts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -46429,6 +47059,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -46568,6 +47216,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "Paper",
+                "Classnames": [
+                    "Paper"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -46613,6 +47279,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "Paper",
+                "Classnames": [
+                    "Paper"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -46664,6 +47348,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "Paper",
+                "Classnames": [
+                    "Paper"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -46703,6 +47405,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "Paper",
+                "Classnames": [
+                    "Paper"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -46770,6 +47490,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "Paper",
+                "Classnames": [
+                    "Paper"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -46825,6 +47563,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "Paper",
+                "Classnames": [
+                    "Paper"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -46869,6 +47625,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "Rag",
+                "Classnames": [
+                    "Rag"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 3,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 3,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
