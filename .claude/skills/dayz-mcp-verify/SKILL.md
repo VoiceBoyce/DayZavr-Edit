@@ -242,6 +242,21 @@ changed, and `@DayZ_MCP` as additional dependency:
    silence** with a female character: 300 s timeout with player already in world and
    `Create entity type 'SurvivorF_Helga'` written to RPT. Use `Create entity type 'Survivor`.
 
+## DayZavr-стенд: подмена файлов через filePatching и вход клиента (2026-11-19)
+
+- **Подменные файлы мода в корне игры** (`G:\Games\DayZavrTest\<префикс>\...`, клиент с `-filePatching`) —
+  сервер стенда проверяет подписи и выкидывает клиента при входе: в серверном RPT `kicked from server: 124
+  (Клиент использует исправленный PBO ... <мод>.pbo)`. Проверять правки материалов/моделей только пересборкой мода.
+- **Клиент, выкинутый при входе, висит в главном меню**, а `wait_for(players_at_least, 1)` молча ждёт весь
+  `timeout_s`. После перезапуска клиента (`mode=client`) через 30–60 с смотреть серверный RPT на `kicked` / `Login`
+  и script-лог клиента на `Creating Mission: ...dayzOffline` (миссия сервера, не `intro`), а не ждать до таймаута.
+- **Живой клиент `mode=client` не заменит** (`client_already_polling`): сначала закрыть процесс клиента
+  (`Stop-Process` его PID), потом `mode=client` с `run_id`. Сервер и разложенные предметы остаются.
+- **Инвентарь стенд открыть не может** (`UAGear` читается вводом). Временный хук в клиентском моде:
+  `modded class MissionGameplay` + `OnKeyPress(KC_F9) → ShowInventory()` под `#ifdef DIAG_DEVELOPER`, затем
+  `key_press(67)`. Закрыть инвентарь инструментами тоже нельзя (ESC не доходит) — только перезапуск клиента.
+  Хук убрать до выдачи мода.
+
 ## BRIDGE GOTCHAS THAT COST ONE RUN EACH (added 2026-08-18)
 
 Verified in-game on 2026-08-18 during ATM cell test battery. All six cost at least

@@ -78,6 +78,8 @@ SHAPES = {
 # горсть с тем сдвигом лежала на основаниях пальцев. Здесь 1,5 см вдоль пальцев k = (0.73, 0.69) и 1 см к мизинцу
 # n = (-0.69, 0.73) — середина ладони; низ на 4,5 см над точкой хвата.
 PALM_SHAPES = {"sand"}
+# плоские формы клеймом к камере превью инвентаря (write_p3d): (наклон вокруг длинной оси, градусы; подъём, м)
+PREVIEW_TILT = {"ingot": (55, 0.08), "briquette": (55, 0.0)}
 HAND_LIFT = 0.045
 HAND_SHIFT_ENGINE = (0.0041, 0.0177)
 DEFAULT_RES = {"sand": "gold", "nugget": "gold", "chunk": "rubin", "ingot": "gold", "briquette": "coal"}
@@ -1134,6 +1136,20 @@ def write_p3d(shape, meshes, hull, out_path):
     model.lods.append(hull_lod(6e15, hull, pen))
     model.lods.append(hull_lod(7e15, hull, pen))
     py3d.blender_to_dayz(model)
+    tilt = PREVIEW_TILT.get(shape)
+    if tilt:
+        # превью инвентаря показывает модель в её собственных осях, камера смотрит с +Z: плоский предмет, лежащий
+        # плашмя, виден ребром (серый прямоугольник без клейма, 2026-11-19, каталог E109). Разворот на 180° вокруг
+        # вертикали (иначе клеймо вверх ногами) и наклон вокруг X ставят верх (+Y, клеймо) к камере; подъём —
+        # чтобы ладони двуручного хвата камня (слиток) лежали на предмете, а не над ним. На землю ложится физикой.
+        deg, lift = tilt
+        a = math.radians(deg)
+        c, s = math.cos(a), math.sin(a)
+        model.transform(((-1, 0, 0), (0, c, s), (0, s, -c)))      # R_x(deg) · R_y(180°), det = +1
+        if lift:
+            for lod in model.lods:
+                for p in lod.points:
+                    p.coords = (p.coords[0], p.coords[1] + lift, p.coords[2])
     model.save(out_path, verify=True)
     return [f for f in model.validate() if getattr(f, "severity", "") in ("ERROR", "WARN")]
 

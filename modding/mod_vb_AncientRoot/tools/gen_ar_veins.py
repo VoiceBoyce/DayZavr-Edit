@@ -74,6 +74,11 @@ for _m in PROP_MATS:
 # стекло берём ванильное медицинское: Super + noZWrite и своя альфа-текстура (своё _ca рисовалось матовым)
 MATS["glass"]["tex"] = BS.join(["dz", "gear", "medical", "data", "glass_CA.paa"])
 MATS["glass"]["mat"] = BS.join(["dz", "gear", "medical", "data", "glass.rvmat"])
+# Предметам — свои текстуры (2026-11-19, gen_ar_item_tex.py): превью инвентаря не рисует свечение, и золото жил в
+# инвентаре гасло; у предметов свечение «запечено» в цвет, тёмные пропы светлее. Рощи и сердце в мире — прежние.
+ITEM_TEX = {"crust": PREFIX + "vb_ar_i_crust_co.paa", "vein": PREFIX + "vb_ar_i_vein_co.paa"}
+for _m in ("bark", "wood", "burlap", "cloth", "herb", "sporecloth"):
+    ITEM_TEX[_m] = PREFIX + "vb_ar_i_%s_co.paa" % _m
 # корпус «Сердца-аккумулятора»: ванильная текстура автомобильного аккумулятора (атлас AMUKA)
 MATS["battery"] = {"tex": BS.join(["dz", "vehicles", "parts", "data", "battery_smallcar_co.paa"]),
                    "mat": BS.join(["dz", "vehicles", "parts", "data", "battery_smallcar.rvmat"]), "sel": "p_battery"}
@@ -1778,7 +1783,8 @@ def vertex_normals(P, T):
 
 
 # ---------------------------------------------------------------- p3d
-def visual_lod(mesh, resolution, point_flags=0):
+def visual_lod(mesh, resolution, point_flags=0, tex_override=None):
+    tex_override = tex_override or {}
     lod = py3d.LOD()
     lod.resolution = resolution
     P, T, UV, M = mesh["P"], mesh["T"], mesh["UV"], mesh["M"]
@@ -1797,7 +1803,7 @@ def visual_lod(mesh, resolution, point_flags=0):
     for k in range(len(T)):
         mat = M[k]
         f = py3d.Face(lod.points, lod.facenormals)
-        f.texture = MATS[mat]["tex"]
+        f.texture = tex_override.get(mat, MATS[mat]["tex"])
         f.material = MATS[mat]["mat"]
         flat_idx = None
         for c in range(3):
@@ -1881,7 +1887,8 @@ def build_p3d(scene, out_path):
     for prm in (ITEM_LOD_PARAMS if scene.get("lod_items") else LOD_PARAMS):
         mesh = mesh_lod(scene, prm)
         meshes.append(mesh)
-        model.lods.append(visual_lod(mesh, prm["res"], scene.get("point_flags", 0)))
+        model.lods.append(visual_lod(mesh, prm["res"], scene.get("point_flags", 0),
+                                     ITEM_TEX if scene.get("item_tex") else None))
         stats.append((prm["res"], len(mesh["P"]), len(mesh["T"])))
     mem = py3d.LOD()
     mem.resolution = 1e15
@@ -2177,6 +2184,9 @@ VARIANTS = [
 #   Книга древних — стоймя, толщина вдоль Z DayZ, как Book_kniga.p3d (до этого лежала плашмя).
 # Значения — по габаритам LOD0 до правки. Свет Светоча прикреплён смещением от начала модели (VB_AR_Gear.c) —
 # при смене сдвига поправить и его.
+# модели предметов (всё начиная с сердцевины): текстуры из ITEM_TEX
+ITEM_MODELS = {v[0] for v in VARIANTS[[v[0] for v in VARIANTS].index("vb_ar_heart_chunk"):]}
+
 HAND_XF = {
     "vb_ar_heart_chunk": ("up", 0.055),
     "vb_ar_keeper_heart": ("up", 0.089),
@@ -2192,8 +2202,9 @@ def hand_xf(P, xf):
     if kind == "up":
         P[:, 2] += v
     elif kind == "stand":
-        # поворот на 90° вокруг X: высота (Y Blender) уходит вверх, толщина (Z) — вдоль Y Blender
-        P = np.column_stack([P[:, 0], -P[:, 2], P[:, 1]])
+        # поворот на 90° вокруг X: высота (Y Blender) уходит вверх, толщина (Z) — вдоль Y Blender;
+        # затем на 180° вокруг вертикали — обложкой к камере превью инвентаря (2026-11-19: было видно заднюю крышку)
+        P = np.column_stack([-P[:, 0], P[:, 2], P[:, 1]])
     return P
 
 
@@ -2594,6 +2605,8 @@ def main():
         scene = variant_scene(kind, seed, name)
         if name in HAND_XF:
             scene["hand_xf"] = HAND_XF[name]
+        if name in ITEM_MODELS:
+            scene["item_tex"] = True
         stats, findings = build_p3d(scene, os.path.join(DATA_DIR, name + ".p3d"))
         allp = np.vstack([tb.pts for tb in scene["tubes"]])
         span = float(np.max(np.linalg.norm(allp[:, :2], axis=1)))
