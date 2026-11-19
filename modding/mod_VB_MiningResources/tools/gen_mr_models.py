@@ -80,6 +80,13 @@ SHAPES = {
 PALM_SHAPES = {"sand"}
 # плоские формы клеймом к камере превью инвентаря (write_p3d): (наклон вокруг длинной оси, градусы; подъём, м)
 PREVIEW_TILT = {"ingot": (55, 0.08), "briquette": (55, 0.0)}
+# Камера превью инвентаря точками памяти (write_p3d, как у ванили): invview — где камера, boundingbox_min/max — что
+# держать в кадре. Без них камера смотрит сбоку, и плоская горсть видна тонкой полоской (2026-11-19). Наклонять
+# саму модель, как слиток, нельзя: крупицы лежат на ладони. Ракурс (высота над горизонтом, азимут, градусы) —
+# как у рендеров (render_mr_models.VIEW); расстояние — в диагоналях рамки, как у ванили (горсть гвоздей 1,95,
+# изолента 2,3; Nails_loose_10.p3d — камера на 40° сверху).
+PREVIEW_VIEW = {"sand": (30, -32)}
+PREVIEW_DIST = 2.2
 HAND_LIFT = 0.045
 HAND_SHIFT_ENGINE = (0.0041, 0.0177)
 DEFAULT_RES = {"sand": "gold", "nugget": "gold", "chunk": "rubin", "ingot": "gold", "briquette": "coal"}
@@ -1150,6 +1157,18 @@ def write_p3d(shape, meshes, hull, out_path):
             for lod in model.lods:
                 for p in lod.points:
                     p.coords = (p.coords[0], p.coords[1] + lift, p.coords[2])
+    view = PREVIEW_VIEW.get(shape)
+    if view:
+        # оси уже DayZ (Y вверх); направление — как камера рендера: Blender (x, y, z) = DayZ (x, z, y)
+        P = np.array([p.coords for p in model.lods[0].points], np.float64)
+        lo, hi = P.min(0), P.max(0)
+        e, a = (math.radians(v) for v in view)
+        d = np.array([math.cos(e) * math.sin(a), math.sin(e), -math.cos(e) * math.cos(a)])
+        cam = (lo + hi) / 2 + d * PREVIEW_DIST * float(np.linalg.norm(hi - lo))
+        # как у ванили: в boundingbox_min максимум по Z, в boundingbox_max минимум
+        mem.set_memory_point("boundingbox_min", (float(lo[0]), float(lo[1]), float(hi[2])))
+        mem.set_memory_point("boundingbox_max", (float(hi[0]), float(hi[1]), float(lo[2])))
+        mem.set_memory_point("invview", tuple(float(v) for v in cam))
     model.save(out_path, verify=True)
     return [f for f in model.validate() if getattr(f, "severity", "") in ("ERROR", "WARN")]
 

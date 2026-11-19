@@ -597,8 +597,10 @@ class VB_RiftHeart extends VB_RiftBase
 	{
 		vector tp = tree.GetPosition();
 		array<vector> hits = new array<vector>;
+		array<vector> bestHits = new array<vector>;
 		vector bestAim = tp;
 		int bestCount = VB_ProbeTrunk(tree, tp, hits);
+		bestHits.Copy(hits);
 		int cnt;
 		vector aim;
 		for (int gx = -3; gx <= 3 && bestCount < 5; gx++)
@@ -613,8 +615,30 @@ class VB_RiftHeart extends VB_RiftBase
 				{
 					bestCount = cnt;
 					bestAim = aim;
+					bestHits.Copy(hits);
 				}
 			}
+		}
+
+		// Тонкий ствол (берёзы r 0.05–0.09 м, яблони 0.17–0.19): сетка с шагом 0.6 м проходит мимо, лучи задевают
+		// ствол краем — 1–2 попадания, и обвивки не было (найдено на «Древнем корне», стенд 2026-11-19). Попадания
+		// лежат на коре, их середина — внутри ствола: целимся туда, тогда в ствол попадают все лучи.
+		vector mean;
+		for (int refine = 0; refine < 3 && bestCount > 0 && bestCount < 5; refine++)
+		{
+			mean = vector.Zero;
+			foreach (vector hp : bestHits)
+			{
+				mean = mean + hp;
+			}
+			mean = mean * (1.0 / bestHits.Count());
+			aim = Vector(mean[0], tp[1], mean[2]);
+			cnt = VB_ProbeTrunk(tree, aim, hits);
+			if (cnt <= bestCount)
+				break;
+			bestCount = cnt;
+			bestAim = aim;
+			bestHits.Copy(hits);
 		}
 
 		if (bestCount < 3)

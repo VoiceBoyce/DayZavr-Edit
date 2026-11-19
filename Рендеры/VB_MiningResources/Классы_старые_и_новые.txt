@@ -1,66 +1,34 @@
-﻿Добыча руды: старые и новые классы предметов (мод VB_MiningResources вместо BRDK_GoldRush)
-Обновлено: 2026-11-18
-
+﻿Обновить картинки, названия, класснеймы, ориентироваться по старому класснейму
 Формат: старый класс -> новый класс — название в игре.
-Старые предметы у игроков остаются, в описании у них «Старый образец»; добыча, промывка и переработка дают только новые.
 
-== Золото ==
 BRDK_Gold_Sand       -> VB_MR_Gold_Sand        — Крупицы золота
 BRDK_Gold            -> VB_MR_Gold             — Золотой самородок
 BRDK_BigGold         -> VB_MR_Gold_Bar         — Слиток золота
-
-== Серебро ==
 BRDK_Silver_Sand     -> VB_MR_Silver_Sand      — Крупицы серебра
 BRDK_Silver          -> VB_MR_Silver           — Серебряный самородок
 BRDK_BigSilver       -> VB_MR_Silver_Bar       — Слиток серебра
-
-== Медь ==
 BRDK_Bronze_Sand     -> VB_MR_Bronze_Sand      — Крупицы меди
 BRDK_Bronze          -> VB_MR_Bronze           — Медный самородок
 BRDK_BigBronze       -> VB_MR_Bronze_Bar       — Слиток меди
-
-== Железо ==
 BRDK_Iron_Sand       -> VB_MR_Iron_Sand        — Крупицы железа
 BRDK_Iron            -> VB_MR_Iron             — Железный самородок
 BRDK_BigIron         -> VB_MR_Iron_Bar         — Слиток железа
-
-== Титан ==
 BRDK_Titanium_Sand   -> VB_MR_Titanium_Sand    — Крупицы титана
 BRDK_Titanium        -> VB_MR_Titanium         — Титановый самородок
 BRDK_BigTitanium     -> VB_MR_Titanium_Bar     — Слиток титана
-
-== Уголь ==
 BRDK_Coal_Sand       -> VB_MR_Coal_Sand        — Крупицы угля
 BRDK_Coal            -> VB_MR_Coal             — Кусок угля
 BRDK_BigCoal         -> VB_MR_Coal_Bar         — Брикет угля
-
-== Рубин ==
 BRDK_Rubin_Sand      -> VB_MR_Rubin_Sand       — Крупицы рубина
 BRDK_Rubin           -> VB_MR_Rubin            — Необработанный рубин
 BRDK_BigRubin        -> VB_MR_Rubin_Bar        — Брикет рубина
-
-== Нефрит ==
 BRDK_Nephrite_Sand   -> VB_MR_Nephrite_Sand    — Крупицы нефрита
 BRDK_Nephrite        -> VB_MR_Nephrite         — Кусок нефрита
 BRDK_BigNephrite     -> VB_MR_Nephrite_Bar     — Брикет нефрита
-
-== Сера ==
 BRDK_Sulfur_Sand     -> VB_MR_Sulfur_Sand      — Крупицы серы
 BRDK_Sulfur          -> VB_MR_Sulfur           — Кусок серы
 BRDK_BigSulfur       -> VB_MR_Sulfur_Bar       — Брикет серы
 
-== Оборудование ==
-BRDK_Press_kit       -> VB_MR_Press_Kit        — Набор для установки пресса
-BRDK_Stone_Press     -> VB_MR_Press            — Электрический пресс
-BRDK_MeltingBowl     -> VB_MR_MeltingBowl      — Плавильная чаша
-
-== Жилы (объекты на карте) ==
-BRDK_Gold_Ore        -> VB_MR_Gold_Vein        — жила: золото
-BRDK_Silver_Ore      -> VB_MR_Silver_Vein      — жила: серебро
-BRDK_Bronze_Ore      -> VB_MR_Bronze_Vein      — жила: медь
-BRDK_Iron_Ore        -> VB_MR_Iron_Vein        — жила: железо
-BRDK_Titanium_Ore    -> VB_MR_Titanium_Vein    — жила: титан
-BRDK_Coal_Ore        -> VB_MR_Coal_Vein        — жила: уголь
-BRDK_Rubin_Ore       -> VB_MR_Rubin_Vein       — жила: рубин
-BRDK_Nephrite_Ore    -> VB_MR_Nephrite_Vein    — жила: нефрит
-BRDK_Sulfur_Ore      -> VB_MR_Sulfur_Vein      — жила: сера
+Новый донат предмет на 18 сервере, в категории база:
+VB_MR_Pickaxe_Veles - Велесова кирка - 360 рублей
+Описание: Велесова кирка — магическая кирка из титана и живого корня: копает на 40 % быстрее и изнашивается в 3 раза медленнее обычной, даёт больше хорошей руды и иногда янтарь. В руках светится и гудит рядом с рудной жилой (до 30 м) и выбивает руны из алтарей и обелисков.

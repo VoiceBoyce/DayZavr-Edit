@@ -258,6 +258,8 @@ looks up memory points with the matching prefixed names at runtime.
 | `boundingbox_min` / `boundingbox_max` | Yes | Tight bbox corners used by inventory preview framing and some collision logic |
 | `invview` | Optional | Camera anchor for the inventory preview thumbnail (offset forward from the model) |
 
+*(Verified in-game 2026-11-19, DayZ 1.30, VB_MiningResources sand pile.)* `ItemPreviewWidget.SetView(0)` uses `boundingbox_min` + `boundingbox_max` + `invview` (`P:\scripts\3_Game\gameplay.c:292-298`; view 1/2 use the `2`/`3` suffixes). Without these points the preview camera looks at the model horizontally from +Z, so a flat pile reads as a thin strip. Putting `invview` above and in front of the box (30-40 deg elevation, about 2x the box diagonal away — vanilla `Nails_loose_10.p3d`: 40 deg, 1.95x) shows the pile from above without touching geometry; the points survive binarization unchanged (autocenter 0).
+
 **Example: electrical port layout for a wall-mounted device** (Z+ = back
 = wall side; cables exit through the wall):
 
