@@ -7,6 +7,12 @@
 // внизу окраска (варианты результата). Справа спецификация: материалы кузова
 // и выбранных деталей по группам, итог «есть / нужно», инструменты.
 // Данные те же, что у «Чертежа» (DRL_UIBlueprint), меняется только вид.
+//
+// Переключатель «Схема | Модель» над стендом (2026-11-20): в «Модели» вместо
+// схемы 3D кузова машины с выбранной окраской, метки деталей рядами сверху.
+// Колёса и двери на модели не видны: ItemPreviewWidget у транспорта рисует только
+// кузов. Вращается как любое изделие (сама, тянуть - повернуть, колесо - зум),
+// центр вращения - центр габаритов, чтобы машина не ходила по кругу.
 // ============================================================================
 
 class DRL_UISpecData extends Managed
@@ -249,6 +255,13 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 	protected MultilineTextWidget m_InfoAtts;
 	protected ref array<string> m_InfoLines;
 
+	// Вид стенда: схема (по умолчанию) или модель. Выбор помнится до выхода из игры.
+	static const float VIEW_TABS_W = 220;
+	static const float DOP_ROW_H = 38;
+	protected static bool s_ModelView;
+	protected ref INT_UIF_Tabs m_ViewTabs;
+	protected TextWidget m_ModelHint;
+
 	void DRL_UIAssemblySheet()
 	{
 		m_Wheels = new array<ref INT_UIF_Surface>();
@@ -280,11 +293,6 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 		int muted = DRL_UIC.Muted();
 		int dim = DRL_UIC.Dim();
 		int bpText = DRL_UIC.BP(220);
-
-		// Невидимая сцена: логика окна (слоты навесного, конфликты деталей) читает её объект.
-		m_StageHost = INT_UIF_Draw.Frame(m_Root, 0, 0, 2, 2, "DRL_AsmStageHost");
-		m_Stage.Build(m_StageHost, 0, 0, 2, 2, true);
-		m_StageHost.Show(false);
 
 		// Стенд.
 		m_BayX = PAD_X;
@@ -321,6 +329,13 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 		}
 		m_BayLines = new DRL_UICanvas();
 		m_BayLines.Build(m_Bay, 0, 0, m_BayW, m_BayH);
+
+		// Сцена изделия. В «Схеме» скрыта: логика окна (слоты навесного, конфликты деталей)
+		// читает её объект. В «Модели» - 3D машины на стенде (поверх сетки, под метками).
+		m_StageHost = INT_UIF_Draw.Frame(m_Bay, 0, 0, 2, 2, "DRL_AsmStageHost");
+		m_Stage.Build(m_StageHost, 0, 0, 2, 2, true);
+		m_Stage.SetCenterPivot(true);
+		m_StageHost.Show(false);
 
 		for (int d = 0; d < MAX_SIDE; d++)
 		{
@@ -364,6 +379,21 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 		m_InfoCargo.SetBold(true);
 		m_InfoAtts = INT_UIF_Draw.MText(m_Info, 12, 44, INFO_W - 24, 46, "", 11, muted);
 		m_Info.Show(false);
+		// В «Модели» блок может лечь на угол модели: 3D рисуется поверх 2D с приоритетом не выше своего.
+		DRL_UIKitUtil.SetSortDeep(m_Info, DRL_UI_SORT_OVER_MODEL);
+
+		// Переключатель «Схема | Модель» и подсказка управления моделью.
+		m_ViewTabs = INT_UIF_Tabs.Create(null, m_Bay, 18, 20, VIEW_TABS_W, 34);
+		m_ViewTabs.AddTab(DRL_UIText.Tr("#STR_DRL_UI_ASM_VIEW_SCHEME"), "target");
+		m_ViewTabs.AddTab(DRL_UIText.Tr("#STR_DRL_UI_ASM_VIEW_MODEL"), "eye");
+		if (s_ModelView)
+			m_ViewTabs.Select(1, false, false);
+		m_ViewTabs.OnChanged().Insert(OnViewTab);
+		m_ViewTabs.Show(false);
+		int faint = INT_UIF.Color(INT_UIF_ThemeKeys.TEXT_FAINT);
+		float hintX = 18 + VIEW_TABS_W + 14;
+		m_ModelHint = INT_UIF_Draw.Text(m_Bay, hintX, 20, m_BayW - hintX - 18, 34, "#STR_DRL_UI_PV_HINT", 11, faint, INT_UIF_Align.RIGHT);
+		m_ModelHint.Show(false);
 
 		// Спецификация.
 		float sx = w - PAD_X - SPEC_W;
@@ -415,6 +445,7 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 		sealTitle.SetBold(true);
 		INT_UIF_Draw.Text(m_Seal, 62, 42, 190, 20, "#STR_DRL_UI_BP_LOCKED_SUB", 11, muted);
 		m_Seal.Show(false);
+		DRL_UIKitUtil.SetSortDeep(m_Seal, DRL_UI_SORT_OVER_MODEL);
 	}
 
 	// Полоса из косых жёлтых штрихов между y0 и y1 (по всей ширине стенда).
@@ -449,8 +480,11 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 		m_Seal.Show(m_Locked && !covered);
 	}
 
+	// Вращение модели (в «Схеме» сцена скрыта).
 	override void Tick(float dt)
 	{
+		if (s_ModelView)
+			m_Stage.Tick(dt);
 	}
 
 	override void ClearModels()
@@ -481,6 +515,12 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 		m_Locked = false;
 		m_Seal.Show(false);
 		m_Stage.Clear();
+		if (m_ViewTabs)
+			m_ViewTabs.Show(false);
+		if (m_ModelHint)
+			m_ModelHint.Show(false);
+		if (m_StageHost)
+			m_StageHost.Show(false);
 	}
 
 	override int VisibleCards()
@@ -536,6 +576,42 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 		m_BayLines.Clear();
 		m_DotsUsed = 0;
 
+		bool model = s_ModelView;
+		m_ViewTabs.Show(true);
+		m_ModelHint.Show(model);
+		m_Body.Show(!model);
+		foreach (INT_UIF_Surface wheelW : m_Wheels)
+		{
+			wheelW.Show(!model);
+		}
+		if (model)
+		{
+			foreach (INT_UIF_Surface zoneW : m_Zones)
+			{
+				zoneW.Show(false);
+			}
+			LayoutModelView();
+		}
+		else
+		{
+			m_StageHost.Show(false);
+			LayoutScheme();
+		}
+		LayoutPaint();
+		LayoutSpec();
+		LayoutInfo();
+
+		for (int u = m_DotsUsed; u < m_Dots.Count(); u++)
+		{
+			m_Dots[u].Show(false);
+		}
+		INT_UIF_Draw.Move(m_Seal, m_BayX + m_BayW * 0.5 - 130, m_H * 0.5 - 40);
+		m_Seal.Show(m_Locked && !m_Covered);
+	}
+
+	// «Схема»: машина сверху, детали метками с выносками к своему месту.
+	protected void LayoutScheme()
+	{
 		// Масштаб схемы под высоту стенда; машина по центру (координаты схемы 150 x 446).
 		float sc = (m_BayH - 170) / 470;
 		if (sc > 1.05)
@@ -611,16 +687,65 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 		}
 
 		LayoutChips(x0, y0, sc, cx);
-		LayoutPaint();
-		LayoutSpec();
-		LayoutInfo();
+	}
 
-		for (int u = m_DotsUsed; u < m_Dots.Count(); u++)
+	// «Модель»: метки деталей рядами под переключателем, ниже на весь стенд -
+	// 3D машины с выбранной окраской и отмеченными деталями.
+	protected void LayoutModelView()
+	{
+		float left = 18;
+		float right = m_BayW - 18;
+		float top = 64;
+		float x = left;
+		float y = top;
+		int placed = 0;
+		for (int c = 0; c < MAX_DOP; c++)
 		{
-			m_Dots[u].Show(false);
+			DRL_UIBpDop chip = m_DopChips[c];
+			if (c >= m_Dop.Count())
+			{
+				chip.Hide();
+				continue;
+			}
+			DRL_UIBpDopData shown = ShownDop(m_Dop[c]);
+			float w = chip.Measure(shown);
+			if (placed > 0 && x + w > right)
+			{
+				x = left;
+				y = y + DOP_ROW_H;
+			}
+			chip.Place(x, y, w, shown);
+			x = x + w + 8;
+			placed++;
 		}
-		INT_UIF_Draw.Move(m_Seal, m_BayX + m_BayW * 0.5 - 130, m_H * 0.5 - 40);
-		m_Seal.Show(m_Locked && !m_Covered);
+		float areaTop = top;
+		if (placed > 0)
+			areaTop = y + DOP_ROW_H + 4;
+		// Снизу место под окраску, если она есть; блок характеристик лежит поверх модели.
+		float areaBottom = m_BayH - 18;
+		if (m_VarNames.Count() > 1)
+			areaBottom = m_BayH - 66;
+		float areaW = m_BayW - 28;
+		float areaH = areaBottom - areaTop;
+		if (areaH < 80)
+			areaH = 80;
+		INT_UIF_Draw.Place(m_StageHost, 14, areaTop, areaW, areaH);
+		m_Stage.Resize(areaW, areaH);
+		m_StageHost.Show(true);
+	}
+
+	protected void OnViewTab(int index, INT_UIF_Tabs tabs)
+	{
+		DRL_UISound.Select();
+		SetModelView(index == 1);
+	}
+
+	protected void SetModelView(bool model)
+	{
+		if (s_ModelView == model)
+			return;
+		s_ModelView = model;
+		Relayout();
 	}
 
 	protected void DashRect(float x, float y, float w, float h, int color)
@@ -688,6 +813,23 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 		}
 	}
 
+	// Данные метки детали: короткое имя по месту на машине и время.
+	protected DRL_UIBpDopData ShownDop(DRL_UIBpDopData d)
+	{
+		DRL_UIBpDopData shown = new DRL_UIBpDopData();
+		shown.m_Checked = d.m_Checked;
+		shown.m_Locked = d.m_Locked;
+		shown.m_Dim = d.m_Dim;
+		shown.m_Qty = d.m_Qty;
+		shown.m_VarCount = d.m_VarCount;
+		shown.m_Ok = d.m_Ok;
+		string label = PartLabel(PartPos(d.m_Cls), d.m_Name);
+		if (d.m_TimeSec > 0)
+			label = label + "  +" + DRL_UIText.Time(d.m_TimeSec);
+		shown.m_Name = label;
+		return shown;
+	}
+
 	// Метки деталей вокруг машины с выносками к их месту.
 	protected void LayoutChips(float x0, float y0, float sc, float cx)
 	{
@@ -704,17 +846,7 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 			}
 			DRL_UIBpDopData d = m_Dop[c];
 			int pos = PartPos(d.m_Cls);
-			DRL_UIBpDopData shown = new DRL_UIBpDopData();
-			shown.m_Checked = d.m_Checked;
-			shown.m_Locked = d.m_Locked;
-			shown.m_Dim = d.m_Dim;
-			shown.m_Qty = d.m_Qty;
-			shown.m_VarCount = d.m_VarCount;
-			shown.m_Ok = d.m_Ok;
-			string label = PartLabel(pos, d.m_Name);
-			if (d.m_TimeSec > 0)
-				label = label + "  +" + DRL_UIText.Time(d.m_TimeSec);
-			shown.m_Name = label;
+			DRL_UIBpDopData shown = ShownDop(d);
 			float w = chip.Measure(shown);
 
 			float px = 0;
@@ -1065,12 +1197,17 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 		return false;
 	}
 
-	// Тестовый хук: «var» - окраска, «dop» - деталь.
+	// Тестовый хук: «var» - окраска, «dop» - деталь, «view» - 0 схема / 1 модель.
 	override void TestClick(string what, int index, int action)
 	{
 		if (what == "var" && index >= 0 && index < m_PaintHits.Count())
 		{
 			OnClick(m_PaintHits[index], 0, 0, MouseState.LEFT);
+			return;
+		}
+		if (what == "view" && m_ViewTabs)
+		{
+			m_ViewTabs.Select(index, true, false);
 			return;
 		}
 		super.TestClick(what, index, action);

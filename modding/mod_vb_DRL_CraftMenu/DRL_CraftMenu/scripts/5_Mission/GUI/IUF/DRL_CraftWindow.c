@@ -4528,6 +4528,22 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			m_Bp.TestClick("dop", n, 3);
 			return TestState();
 		}
+		// «Сборка»: вид стенда 0 - схема, 1 - модель машины.
+		if (cmd == "view")
+		{
+			m_Bp.TestClick("view", n, 0);
+			return TestState();
+		}
+		// Угол модели в градусах: opitch - наклон, oyaw - поворот.
+		if (cmd == "opitch" || cmd == "oyaw")
+		{
+			int axis = 0;
+			if (cmd == "oyaw")
+				axis = 1;
+			if (m_Stage)
+				m_Stage.TestOrient(axis, n);
+			return "orient " + axis.ToString() + "=" + n.ToString();
+		}
 		if (cmd == "info")
 		{
 			HandleDopAction(n, "info", 0);

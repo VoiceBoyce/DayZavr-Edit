@@ -190,6 +190,7 @@ class DRL_UIItemView extends Managed
 	protected string m_Class;
 	protected vector m_Orientation;
 	protected float m_Zoom = 1;
+	protected bool m_CenterPivot;
 
 	void ~DRL_UIItemView()
 	{
@@ -243,7 +244,7 @@ class DRL_UIItemView extends Managed
 		if (view < 0)
 			view = 0;
 		m_Widget.SetView(view);
-		m_Widget.SetModelPosition(Vector(0, 0, 0));
+		ApplyModelPos();
 		m_Widget.SetModelOrientation(m_Orientation);
 		m_Widget.Show(true);
 		return true;
@@ -268,6 +269,8 @@ class DRL_UIItemView extends Managed
 			m_Widget.Show(false);
 			return false;
 		}
+		// У машин навесное не ставим: ItemPreviewWidget у транспорта рисует только
+		// кузов, колёса и двери на нём не видны (проверено 2026-11-20).
 		bool isTransport = m_Entity.IsInherited(Transport);
 		if (!isTransport && attachments && m_Entity.GetInventory())
 		{
@@ -285,10 +288,31 @@ class DRL_UIItemView extends Managed
 		if (view < 0)
 			view = 0;
 		m_Widget.SetView(view);
-		m_Widget.SetModelPosition(Vector(0, 0, 0));
+		ApplyModelPos();
 		m_Widget.SetModelOrientation(m_Orientation);
 		m_Widget.Show(true);
 		return true;
+	}
+
+	// Центр вращения в центре габаритов (у машин начало координат модели не в центре,
+	// и модель ходит по кругу вместо вращения на месте).
+	void SetCenterPivot(bool on)
+	{
+		m_CenterPivot = on;
+		ApplyModelPos();
+	}
+
+	protected void ApplyModelPos()
+	{
+		if (!m_Widget || !m_Entity)
+			return;
+		vector p = Vector(0, 0, 0);
+		if (m_CenterPivot)
+		{
+			vector c = m_Entity.GetBoundingCenter();
+			p = c * -1.0;
+		}
+		m_Widget.SetModelPosition(p);
 	}
 
 	void Clear()
@@ -313,6 +337,7 @@ class DRL_UIItemView extends Managed
 		if (m_Widget && m_Entity)
 			m_Widget.SetModelOrientation(o);
 	}
+
 
 	vector GetOrientation()
 	{
@@ -535,6 +560,25 @@ class DRL_UIStage extends ScriptedWidgetEventHandler
 			m_HintRow.Show(ok);
 		if (ok && changed && m_Clip && !m_Bare)
 			RevealClip();
+	}
+
+	// Центр вращения в центре габаритов: крупная модель (машина в «Сборке») крутится
+	// на месте, а не ходит по кругу.
+	void SetCenterPivot(bool on)
+	{
+		if (m_View)
+			m_View.SetCenterPivot(on);
+	}
+
+	// Тестовый хук: угол модели (0 наклон, 1 поворот), автоповорот замирает.
+	void TestOrient(int axis, float deg)
+	{
+		if (!m_View || axis < 0 || axis > 1)
+			return;
+		m_Idle = 100000;
+		vector o = m_View.GetOrientation();
+		o[axis] = deg;
+		m_View.SetOrientation(o);
 	}
 
 	// Масштаб модели = база (доля области показа) x масштаб колёсиком.
