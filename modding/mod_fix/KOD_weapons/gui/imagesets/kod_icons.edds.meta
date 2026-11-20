@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{3646413A842FC33E}KOD_weapons/gui/imagesets/kod_icons.tga"
+ Author "desktop-i9eb87f"
+ ChangeDate -2054902382
+ Configurations {
+  TGAResourceClass PC {
+   SourceFile "kod_icons.tga"
+  }
+  TGAResourceClass XBOX_ONE : PC {
+  }
+  TGAResourceClass PS4 : PC {
+  }
+  TGAResourceClass LINUX : PC {
+  }
+ }
+}

@@ -18,6 +18,7 @@ class VB_EchoSpec
 	bool m_Infinite;
 	bool m_Transfer = true;
 	bool m_StorageEnergy;			// true — заряд EnergyManager (аккумулятор), false — количество предмета
+	float m_PerE = 1;				// единиц носителя в 1 kE (бак — 1, аккумулятор — 3.90625: 2000 ед. = 512 kE)
 };
 
 class VB_Echo
@@ -55,6 +56,10 @@ class VB_Echo
 			string storageName;
 			GetGame().ConfigGetText(path + " storage", storageName);
 			sp.m_StorageEnergy = storageName == "energy";
+			if (GetGame().ConfigIsExisting(path + " perE"))
+				sp.m_PerE = GetGame().ConfigGetFloat(path + " perE");
+			if (sp.m_PerE <= 0)
+				sp.m_PerE = 1;
 		}
 		s_Specs.Insert(type, sp);
 		return sp;
@@ -193,8 +198,48 @@ class VB_Echo
 				ib.ConvertEnergyToQuantity();		// полоска в инвентаре = заряд (SetEnergy сам её не трогает)
 			return;
 		}
+		// destroy_config = false: у ванильного Inventory_Base varQuantityDestroyOnMin = 1 — разряженный до нуля носитель
+		// удалялся бы (так пропадал преобразователь базы, E117)
 		if (ib)
-			ib.SetQuantity(value);
+			ib.SetQuantity(value, false);
+	}
+
+	// ---- в kE (зарядка от сети базы: баки, аккумуляторы, ячейки — у всех своя единица заряда)
+	static float PerE(EntityAI e)
+	{
+		VB_EchoSpec sp = Spec(e);
+		if (!sp || !sp.m_Carrier)
+			return 1;
+		return sp.m_PerE;
+	}
+
+	// сколько kE ещё влезет (бесконечный, разрушенный, не-носитель — 0)
+	static float SpaceE(EntityAI e)
+	{
+		VB_EchoSpec sp = Spec(e);
+		if (!sp || !sp.m_Carrier || sp.m_Infinite || e.IsRuined())
+			return 0;
+		return Math.Max(0, Capacity(e) - Get(e)) / sp.m_PerE;
+	}
+
+	// сервер: добавить до amountE kE, вернуть, сколько kE принято
+	static float AddE(EntityAI e, float amountE)
+	{
+		float per = PerE(e);
+		return Add(e, amountE * per) / per;
+	}
+
+	// сервер: списать до amountE kE, вернуть, сколько kE списано (разрядка ячейки в сеть базы)
+	static float DrainE(EntityAI e, float amountE)
+	{
+		float per = PerE(e);
+		return Drain(e, amountE * per) / per;
+	}
+
+	// заряд в kE — годится и на клиенте (количество и энергия синхронизируются ванилью)
+	static float GetE(EntityAI e)
+	{
+		return Get(e) / PerE(e);
 	}
 
 	static vector ColorOf(int kind)

@@ -963,7 +963,7 @@ class VB_EchoRunner extends CarScript
 			{
 				ItemBase tank = ItemBase.Cast(entity.GetInventory().CreateInInventory("VB_EchoRunner_Tank"));
 				if (tank && GetGame().IsServer())
-					tank.SetQuantity(100);		// отладочная машина — с полными баками энергии (стенд зовёт и на клиенте)
+					tank.SetQuantity(tank.GetQuantityMax());		// отладочная машина — с полными баками (стенд зовёт и на клиенте)
 			}
 			entity.GetInventory().CreateInInventory("VB_EchoRunner_Pipes_L");
 			entity.GetInventory().CreateInInventory("VB_EchoRunner_Pipes_R");

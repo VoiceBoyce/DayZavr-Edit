@@ -160,7 +160,7 @@ car = re.sub(r"class GUIInventoryAttachmentsProps\s*\{.*?\n\t\t\};\n", """class 
 				name="$STR_VB_ER_cat_rift";
 				description="";
 				attachmentSlots[]={"VB_ER_Tank_1","VB_ER_Tank_2","VB_ER_Pipes_L","VB_ER_Pipes_R","VB_ER_Pipes_Engine"};
-				icon="cat_vehicle_engine";
+				icon="set:vb_echo_icons image:tank";
 			};
 			class BaseBuildingContainers
 			{
@@ -213,40 +213,43 @@ ITEMS = '''
 		model="VB_EchoRunner\\proxy\\vb_er_tank.p3d";
 		weight=35000;
 		itemSize[]={6,5};
-		inventorySlot[]={"VB_ER_Tank_1","VB_ER_Tank_2"};
+		// + гнёзда зарядной станции базы (VB_EchoBase, слоты в ядре VB_EchoCore; станция v2 — 11-20)
+		inventorySlot[]={"VB_ER_Tank_1","VB_ER_Tank_2","VB_Echo_ChargeTank1","VB_Echo_ChargeTank2"};
 		hiddenSelectionsTextures[]={"%(P)ser_neon_empty_co.paa"};		// новый бак пустой — серый; заряженный красит скрипт (11-20)
 		hiddenSelectionsMaterials[]={"%(P)ser_neon_empty.rvmat"};
-		// энергия Эхо 0–100 Э = количество предмета (полоса в инвентаре, сохраняется ванилью); расход — скрипт машины.
+		// энергия Эхо 0–512 kE = количество предмета (полоса в инвентаре, сохраняется ванилью); расход — скрипт машины
+		// (полёт 2 kE/tick, висение 1 kE/tick, тик = 10 с; решение пользователя 11-20 — единица kE, степени двойки).
 		// Носитель энергии ядра VB_EchoCore (блок VB_Echo, ТЗ modding/mod_vb_Echo/ТЗ_VB_Echo.md)
 		stackedUnit="percentage";
 		quantityBar=1;
 		varQuantityInit=0;
 		varQuantityMin=0;
-		varQuantityMax=100;
+		varQuantityMax=512;
 		varQuantityDestroyOnMin=0;
 		class VB_Echo
 		{
 			kind="echo";
-			capacity=100;
+			capacity=512;
 			infinite=0;
 			transfer=1;
 			storage="quantity";
 		};
 	};
 	// бак холодного синтеза (донат): та же модель, бирюзовый неон; заряд всегда полный, расход не списывается,
-	// перелить нельзя; хотя бы один такой бак — машина летает без расхода (решения пользователя 11-20)
+	// перелить нельзя; работает только парой, с баком Эхо не смешивается (решения пользователя 11-20)
 	class VB_EchoRunner_TankFusion: VB_EchoRunner_Tank
 	{
 		scope=2;
 		displayName="$STR_VB_ER_tank_fusion_name";
 		descriptionShort="$STR_VB_ER_tank_fusion_disc";
+		inventorySlot[]={"VB_ER_Tank_1","VB_ER_Tank_2"};		// синтез не заряжают: гнёзд станции нет
 		hiddenSelectionsTextures[]={"%(P)ser_neon_fusion_co.paa"};
 		hiddenSelectionsMaterials[]={"%(P)ser_neon_idle.rvmat"};
-		varQuantityInit=100;
+		varQuantityInit=512;
 		class VB_Echo
 		{
 			kind="fusion";
-			capacity=100;
+			capacity=512;
 			infinite=1;
 			transfer=0;
 			storage="quantity";
@@ -364,11 +367,12 @@ for name, disp, icon, sel in (("VB_ER_Wheel_1_1", "$STR_VB_ER_Wheel_name", "whee
                               ("VB_ER_Door_Driver", "$STR_VB_ER_driver_name", "doorfront", "doors_driver"),
                               ("VB_ER_Door_CoDriver", "$STR_VB_ER_codriver_name", "doorfront", "doors_codriver"),
                               ("VB_ER_Hood", "$STR_VB_ER_hood_name", "hood", "doors_hood"),
-                              ("VB_ER_Tank_1", "$STR_VB_ER_tank_name", "barrel", ""),
-                              ("VB_ER_Tank_2", "$STR_VB_ER_tank_name", "barrel", ""),
-                              ("VB_ER_Pipes_L", "$STR_VB_ER_pipes_l_name", "rope", ""),
-                              ("VB_ER_Pipes_R", "$STR_VB_ER_pipes_r_name", "rope", ""),
-                              ("VB_ER_Pipes_Engine", "$STR_VB_ER_pipes_e_name", "rope", "")):
+                              # свои иконки семейства (imageset vb_echo_icons в VB_EchoCore, решение пользователя 11-20)
+                              ("VB_ER_Tank_1", "$STR_VB_ER_tank_name", "set:vb_echo_icons image:tank", ""),
+                              ("VB_ER_Tank_2", "$STR_VB_ER_tank_name", "set:vb_echo_icons image:tank", ""),
+                              ("VB_ER_Pipes_L", "$STR_VB_ER_pipes_l_name", "set:vb_echo_icons image:pipes", ""),
+                              ("VB_ER_Pipes_R", "$STR_VB_ER_pipes_r_name", "set:vb_echo_icons image:pipes", ""),
+                              ("VB_ER_Pipes_Engine", "$STR_VB_ER_pipes_e_name", "set:vb_echo_icons image:pipes_engine", "")):
     selline = ('\t\tselection="%s";\n' % sel) if sel else ""
     SLOTS.append('\tclass Slot_%s\n\t{\n\t\tname="%s";\n\t\tdisplayName="%s";\n%s\t\tghostIcon="%s";\n\t};'
                  % (name, name, disp, selline, icon))
@@ -540,8 +544,8 @@ S = {
     "STR_VB_ER_hood_name": ("Echo Runner Hood", "Капот Echo Runner"),
     "STR_VB_ER_hood_disc": ("Hood of the Echo Runner. Protects the engine.", "Капот Echo Runner. Защищает двигатель."),
     "STR_VB_ER_tank_name": ("Echo Tank", "Бак Эхо"),
-    "STR_VB_ER_tank_disc": ("Tank of Echo condensate (red energy). Mounts in the Echo Runner's trunk; two full tanks give about 20 minutes of flight, one works too. Cannot be mixed with a cold fusion tank.",
-                            "Бак эхо-конденсата (красная энергия). Ставится в багажник Echo Runner; два полных бака — около 20 минут полёта, работает и один. С баком холодного синтеза не смешивается."),
+    "STR_VB_ER_tank_disc": ("Tank of Echo condensate (red energy). Mounts in the Echo Runner's trunk; holds 512 kE: about 43 minutes of forward flight, twice as long hovering. Cannot be mixed with a cold fusion tank.",
+                            "Бак эхо-конденсата (красная энергия). Ставится в багажник Echo Runner; вмещает 512 kE: около 43 минут полёта вперёд, висеть — вдвое дольше. С баком холодного синтеза не смешивается."),
     "STR_VB_ER_tank_fusion_name": ("Cold Fusion Tank", "Бак холодного синтеза"),
     "STR_VB_ER_tank_fusion_disc": ("A sealed cold fusion chamber: the reaction never stops and the charge never runs out. Works only in a pair: with two tanks in the Echo Runner's trunk the car flies without using energy, a single tank does not power it. Cannot be mixed with Echo tanks.",
                                    "Запаянная камера холодного синтеза: реакция не гаснет, заряд не кончается. Работает только в паре: с двумя баками в багажнике Echo Runner машина летает без расхода, один бак её не питает. С баками Эхо не смешивается."),

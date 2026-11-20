@@ -51,8 +51,9 @@ class CfgVehicles
 		model="VB_EchoVehicleParts\data\vb_echo_battery.p3d";
 		attachments[]={};
 		weight=12000;
-		// в любую машину: легковой, грузовой и большой слоты ванили (решение пользователя 11-20)
-		inventorySlot[]={"CarBattery","TruckBattery","LargeBattery"};
+		// в любую машину: легковой, грузовой и большой слоты ванили (решение пользователя 11-20);
+		// + гнездо зарядной станции базы (VB_EchoBase, слот в ядре VB_EchoCore; станция v2 — 11-20)
+		inventorySlot[]={"CarBattery","TruckBattery","LargeBattery","VB_Echo_ChargeBattery"};
 		attachSoundSet[]={"carbattery_attach_SoundSet","carbattery_attach_SoundSet","carbattery_attach_SoundSet"};
 		attachSoundSlot[]={"CarBattery","TruckBattery","LargeBattery"};
 		detachSoundSet[]={"carbattery_detach_SoundSet","carbattery_detach_SoundSet","carbattery_detach_SoundSet"};
@@ -82,6 +83,7 @@ class CfgVehicles
 			infinite=0;
 			transfer=1;
 			storage="energy";
+			perE=3.90625;	// единиц EnergyManager в 1 kE: 2000 ед. = 512 kE (один бак) — для зарядки от сети базы
 		};
 	};
 	class VB_EchoBatteryFusion: VB_EchoBattery
@@ -89,6 +91,7 @@ class CfgVehicles
 		scope=2;
 		displayName="$STR_VB_EP_battery_fusion_name";
 		descriptionShort="$STR_VB_EP_battery_fusion_disc";
+		inventorySlot[]={"CarBattery","TruckBattery","LargeBattery"};		// синтез не заряжают: гнезда станции нет
 		hiddenSelectionsTextures[]={"vb_echovehicleparts\data\er_neon_fusion_co.paa"};
 		class VB_Echo
 		{

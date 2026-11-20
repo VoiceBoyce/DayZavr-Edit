@@ -102,31 +102,31 @@ class CfgSlots
 	{
 		name="VB_ER_Tank_1";
 		displayName="$STR_VB_ER_tank_name";
-		ghostIcon="barrel";
+		ghostIcon="set:vb_echo_icons image:tank";
 	};
 	class Slot_VB_ER_Tank_2
 	{
 		name="VB_ER_Tank_2";
 		displayName="$STR_VB_ER_tank_name";
-		ghostIcon="barrel";
+		ghostIcon="set:vb_echo_icons image:tank";
 	};
 	class Slot_VB_ER_Pipes_L
 	{
 		name="VB_ER_Pipes_L";
 		displayName="$STR_VB_ER_pipes_l_name";
-		ghostIcon="rope";
+		ghostIcon="set:vb_echo_icons image:pipes";
 	};
 	class Slot_VB_ER_Pipes_R
 	{
 		name="VB_ER_Pipes_R";
 		displayName="$STR_VB_ER_pipes_r_name";
-		ghostIcon="rope";
+		ghostIcon="set:vb_echo_icons image:pipes";
 	};
 	class Slot_VB_ER_Pipes_Engine
 	{
 		name="VB_ER_Pipes_Engine";
 		displayName="$STR_VB_ER_pipes_e_name";
-		ghostIcon="rope";
+		ghostIcon="set:vb_echo_icons image:pipes_engine";
 	};
 };
 class CfgNonAIVehicles
@@ -1436,7 +1436,7 @@ class CfgVehicles
 				name="$STR_VB_ER_cat_rift";
 				description="";
 				attachmentSlots[]={"VB_ER_Tank_1","VB_ER_Tank_2","VB_ER_Pipes_L","VB_ER_Pipes_R","VB_ER_Pipes_Engine"};
-				icon="cat_vehicle_engine";
+				icon="set:vb_echo_icons image:tank";
 			};
 			class BaseBuildingContainers
 			{
@@ -1905,40 +1905,43 @@ class CfgVehicles
 		model="VB_EchoRunner\proxy\vb_er_tank.p3d";
 		weight=35000;
 		itemSize[]={6,5};
-		inventorySlot[]={"VB_ER_Tank_1","VB_ER_Tank_2"};
+		// + гнёзда зарядной станции базы (VB_EchoBase, слоты в ядре VB_EchoCore; станция v2 — 11-20)
+		inventorySlot[]={"VB_ER_Tank_1","VB_ER_Tank_2","VB_Echo_ChargeTank1","VB_Echo_ChargeTank2"};
 		hiddenSelectionsTextures[]={"vb_echorunner\data\parts\er_neon_empty_co.paa"};		// новый бак пустой — серый; заряженный красит скрипт (11-20)
 		hiddenSelectionsMaterials[]={"vb_echorunner\data\parts\er_neon_empty.rvmat"};
-		// энергия Эхо 0–100 Э = количество предмета (полоса в инвентаре, сохраняется ванилью); расход — скрипт машины.
+		// энергия Эхо 0–512 kE = количество предмета (полоса в инвентаре, сохраняется ванилью); расход — скрипт машины
+		// (полёт 2 kE/tick, висение 1 kE/tick, тик = 10 с; решение пользователя 11-20 — единица kE, степени двойки).
 		// Носитель энергии ядра VB_EchoCore (блок VB_Echo, ТЗ modding/mod_vb_Echo/ТЗ_VB_Echo.md)
 		stackedUnit="percentage";
 		quantityBar=1;
 		varQuantityInit=0;
 		varQuantityMin=0;
-		varQuantityMax=100;
+		varQuantityMax=512;
 		varQuantityDestroyOnMin=0;
 		class VB_Echo
 		{
 			kind="echo";
-			capacity=100;
+			capacity=512;
 			infinite=0;
 			transfer=1;
 			storage="quantity";
 		};
 	};
 	// бак холодного синтеза (донат): та же модель, бирюзовый неон; заряд всегда полный, расход не списывается,
-	// перелить нельзя; хотя бы один такой бак — машина летает без расхода (решения пользователя 11-20)
+	// перелить нельзя; работает только парой, с баком Эхо не смешивается (решения пользователя 11-20)
 	class VB_EchoRunner_TankFusion: VB_EchoRunner_Tank
 	{
 		scope=2;
 		displayName="$STR_VB_ER_tank_fusion_name";
 		descriptionShort="$STR_VB_ER_tank_fusion_disc";
+		inventorySlot[]={"VB_ER_Tank_1","VB_ER_Tank_2"};		// синтез не заряжают: гнёзд станции нет
 		hiddenSelectionsTextures[]={"vb_echorunner\data\parts\er_neon_fusion_co.paa"};
 		hiddenSelectionsMaterials[]={"vb_echorunner\data\parts\er_neon_idle.rvmat"};
-		varQuantityInit=100;
+		varQuantityInit=512;
 		class VB_Echo
 		{
 			kind="fusion";
-			capacity=100;
+			capacity=512;
 			infinite=1;
 			transfer=0;
 			storage="quantity";

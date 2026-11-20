@@ -1,0 +1,60 @@
+ImageSetClass {
+ Name "vb_echo_icons"
+ RefSize 1024 512
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "VB_EchoCore/gui/vb_echo_icons_ca.paa"
+  }
+ }
+ Images {
+  ImageSetDefClass crystal {
+   Name "crystal"
+   Pos 0 0
+   Size 170 170
+   Flags 0
+  }
+  ImageSetDefClass tank {
+   Name "tank"
+   Pos 170 0
+   Size 170 170
+   Flags 0
+  }
+  ImageSetDefClass pipes {
+   Name "pipes"
+   Pos 340 0
+   Size 170 170
+   Flags 0
+  }
+  ImageSetDefClass pipes_engine {
+   Name "pipes_engine"
+   Pos 510 0
+   Size 170 170
+   Flags 0
+  }
+  ImageSetDefClass battery {
+   Name "battery"
+   Pos 680 0
+   Size 170 170
+   Flags 0
+  }
+  ImageSetDefClass cell {
+   Name "cell"
+   Pos 850 0
+   Size 170 170
+   Flags 0
+  }
+  ImageSetDefClass cell_charge {
+   Name "cell_charge"
+   Pos 0 170
+   Size 170 170
+   Flags 0
+  }
+  ImageSetDefClass cell_drain {
+   Name "cell_drain"
+   Pos 170 170
+   Size 170 170
+   Flags 0
+  }
+ }
+}

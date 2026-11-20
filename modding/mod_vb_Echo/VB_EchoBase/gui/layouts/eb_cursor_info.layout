@@ -1,0 +1,642 @@
+GridSpacerWidgetClass vb_eb_info {
+ visible 0
+ clipchildren 0
+ inheritalpha 0
+ ignorepointer 1
+ position 0 0
+ size 350 24
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ scaled 1
+ Padding 0
+ Margin 0
+ "Size To Content H" 1
+ "Size To Content V" 1
+ Columns 1
+ Rows 17
+ {
+  PanelWidgetClass vb_eb_row0 {
+   visible 0
+   clipchildren 0
+   inheritalpha 0
+   ignorepointer 1
+   position 0 0
+   size 350 18
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   scaled 1
+   {
+    TextWidgetClass vb_eb_txt0 {
+     visible 1
+     clipchildren 0
+     inheritalpha 0
+     ignorepointer 1
+     position 70 0
+     size 275 14
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scaled 1
+     style Normal
+     text ""
+     font "gui/fonts/sdf_MetronBook72"
+     "shadow size" 3
+     "shadow color" 0 0 0 1
+     "italic text" 0
+     "bold text" 0
+     "exact text" 0
+     "text valign" center
+    }
+   }
+  }
+  PanelWidgetClass vb_eb_row1 {
+   visible 0
+   clipchildren 0
+   inheritalpha 0
+   ignorepointer 1
+   position 0 0
+   size 350 18
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   scaled 1
+   {
+    TextWidgetClass vb_eb_txt1 {
+     visible 1
+     clipchildren 0
+     inheritalpha 0
+     ignorepointer 1
+     position 70 0
+     size 275 14
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scaled 1
+     style Normal
+     text ""
+     font "gui/fonts/sdf_MetronBook72"
+     "shadow size" 3
+     "shadow color" 0 0 0 1
+     "italic text" 0
+     "bold text" 0
+     "exact text" 0
+     "text valign" center
+    }
+   }
+  }
+  PanelWidgetClass vb_eb_row2 {
+   visible 0
+   clipchildren 0
+   inheritalpha 0
+   ignorepointer 1
+   position 0 0
+   size 350 18
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   scaled 1
+   {
+    TextWidgetClass vb_eb_txt2 {
+     visible 1
+     clipchildren 0
+     inheritalpha 0
+     ignorepointer 1
+     position 70 0
+     size 275 14
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scaled 1
+     style Normal
+     text ""
+     font "gui/fonts/sdf_MetronBook72"
+     "shadow size" 3
+     "shadow color" 0 0 0 1
+     "italic text" 0
+     "bold text" 0
+     "exact text" 0
+     "text valign" center
+    }
+   }
+  }
+  PanelWidgetClass vb_eb_row3 {
+   visible 0
+   clipchildren 0
+   inheritalpha 0
+   ignorepointer 1
+   position 0 0
+   size 350 18
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   scaled 1
+   {
+    TextWidgetClass vb_eb_txt3 {
+     visible 1
+     clipchildren 0
+     inheritalpha 0
+     ignorepointer 1
+     position 70 0
+     size 275 14
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scaled 1
+     style Normal
+     text ""
+     font "gui/fonts/sdf_MetronBook72"
+     "shadow size" 3
+     "shadow color" 0 0 0 1
+     "italic text" 0
+     "bold text" 0
+     "exact text" 0
+     "text valign" center
+    }
+   }
+  }
+  PanelWidgetClass vb_eb_row4 {
+   visible 0
+   clipchildren 0
+   inheritalpha 0
+   ignorepointer 1
+   position 0 0
+   size 350 18
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   scaled 1
+   {
+    TextWidgetClass vb_eb_txt4 {
+     visible 1
+     clipchildren 0
+     inheritalpha 0
+     ignorepointer 1
+     position 70 0
+     size 275 14
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scaled 1
+     style Normal
+     text ""
+     font "gui/fonts/sdf_MetronBook72"
+     "shadow size" 3
+     "shadow color" 0 0 0 1
+     "italic text" 0
+     "bold text" 0
+     "exact text" 0
+     "text valign" center
+    }
+   }
+  }
+  PanelWidgetClass vb_eb_row5 {
+   visible 0
+   clipchildren 0
+   inheritalpha 0
+   ignorepointer 1
+   position 0 0
+   size 350 18
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   scaled 1
+   {
+    TextWidgetClass vb_eb_txt5 {
+     visible 1
+     clipchildren 0
+     inheritalpha 0
+     ignorepointer 1
+     position 70 0
+     size 275 14
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scaled 1
+     style Normal
+     text ""
+     font "gui/fonts/sdf_MetronBook72"
+     "shadow size" 3
+     "shadow color" 0 0 0 1
+     "italic text" 0
+     "bold text" 0
+     "exact text" 0
+     "text valign" center
+    }
+   }
+  }
+  PanelWidgetClass vb_eb_row6 {
+   visible 0
+   clipchildren 0
+   inheritalpha 0
+   ignorepointer 1
+   position 0 0
+   size 350 18
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   scaled 1
+   {
+    TextWidgetClass vb_eb_txt6 {
+     visible 1
+     clipchildren 0
+     inheritalpha 0
+     ignorepointer 1
+     position 70 0
+     size 275 14
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scaled 1
+     style Normal
+     text ""
+     font "gui/fonts/sdf_MetronBook72"
+     "shadow size" 3
+     "shadow color" 0 0 0 1
+     "italic text" 0
+     "bold text" 0
+     "exact text" 0
+     "text valign" center
+    }
+   }
+  }
+  PanelWidgetClass vb_eb_row7 {
+   visible 0
+   clipchildren 0
+   inheritalpha 0
+   ignorepointer 1
+   position 0 0
+   size 350 18
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   scaled 1
+   {
+    TextWidgetClass vb_eb_txt7 {
+     visible 1
+     clipchildren 0
+     inheritalpha 0
+     ignorepointer 1
+     position 70 0
+     size 275 14
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scaled 1
+     style Normal
+     text ""
+     font "gui/fonts/sdf_MetronBook72"
+     "shadow size" 3
+     "shadow color" 0 0 0 1
+     "italic text" 0
+     "bold text" 0
+     "exact text" 0
+     "text valign" center
+    }
+   }
+  }
+  PanelWidgetClass vb_eb_row8 {
+   visible 0
+   clipchildren 0
+   inheritalpha 0
+   ignorepointer 1
+   position 0 0
+   size 350 18
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   scaled 1
+   {
+    TextWidgetClass vb_eb_txt8 {
+     visible 1
+     clipchildren 0
+     inheritalpha 0
+     ignorepointer 1
+     position 70 0
+     size 275 14
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scaled 1
+     style Normal
+     text ""
+     font "gui/fonts/sdf_MetronBook72"
+     "shadow size" 3
+     "shadow color" 0 0 0 1
+     "italic text" 0
+     "bold text" 0
+     "exact text" 0
+     "text valign" center
+    }
+   }
+  }
+  PanelWidgetClass vb_eb_row9 {
+   visible 0
+   clipchildren 0
+   inheritalpha 0
+   ignorepointer 1
+   position 0 0
+   size 350 18
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   scaled 1
+   {
+    TextWidgetClass vb_eb_txt9 {
+     visible 1
+     clipchildren 0
+     inheritalpha 0
+     ignorepointer 1
+     position 70 0
+     size 275 14
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scaled 1
+     style Normal
+     text ""
+     font "gui/fonts/sdf_MetronBook72"
+     "shadow size" 3
+     "shadow color" 0 0 0 1
+     "italic text" 0
+     "bold text" 0
+     "exact text" 0
+     "text valign" center
+    }
+   }
+  }
+  PanelWidgetClass vb_eb_row10 {
+   visible 0
+   clipchildren 0
+   inheritalpha 0
+   ignorepointer 1
+   position 0 0
+   size 350 18
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   scaled 1
+   {
+    TextWidgetClass vb_eb_txt10 {
+     visible 1
+     clipchildren 0
+     inheritalpha 0
+     ignorepointer 1
+     position 70 0
+     size 275 14
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scaled 1
+     style Normal
+     text ""
+     font "gui/fonts/sdf_MetronBook72"
+     "shadow size" 3
+     "shadow color" 0 0 0 1
+     "italic text" 0
+     "bold text" 0
+     "exact text" 0
+     "text valign" center
+    }
+   }
+  }
+  PanelWidgetClass vb_eb_row11 {
+   visible 0
+   clipchildren 0
+   inheritalpha 0
+   ignorepointer 1
+   position 0 0
+   size 350 18
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   scaled 1
+   {
+    TextWidgetClass vb_eb_txt11 {
+     visible 1
+     clipchildren 0
+     inheritalpha 0
+     ignorepointer 1
+     position 70 0
+     size 275 14
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scaled 1
+     style Normal
+     text ""
+     font "gui/fonts/sdf_MetronBook72"
+     "shadow size" 3
+     "shadow color" 0 0 0 1
+     "italic text" 0
+     "bold text" 0
+     "exact text" 0
+     "text valign" center
+    }
+   }
+  }
+  PanelWidgetClass vb_eb_row12 {
+   visible 0
+   clipchildren 0
+   inheritalpha 0
+   ignorepointer 1
+   position 0 0
+   size 350 18
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   scaled 1
+   {
+    TextWidgetClass vb_eb_txt12 {
+     visible 1
+     clipchildren 0
+     inheritalpha 0
+     ignorepointer 1
+     position 70 0
+     size 275 14
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scaled 1
+     style Normal
+     text ""
+     font "gui/fonts/sdf_MetronBook72"
+     "shadow size" 3
+     "shadow color" 0 0 0 1
+     "italic text" 0
+     "bold text" 0
+     "exact text" 0
+     "text valign" center
+    }
+   }
+  }
+  PanelWidgetClass vb_eb_row13 {
+   visible 0
+   clipchildren 0
+   inheritalpha 0
+   ignorepointer 1
+   position 0 0
+   size 350 18
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   scaled 1
+   {
+    TextWidgetClass vb_eb_txt13 {
+     visible 1
+     clipchildren 0
+     inheritalpha 0
+     ignorepointer 1
+     position 70 0
+     size 275 14
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scaled 1
+     style Normal
+     text ""
+     font "gui/fonts/sdf_MetronBook72"
+     "shadow size" 3
+     "shadow color" 0 0 0 1
+     "italic text" 0
+     "bold text" 0
+     "exact text" 0
+     "text valign" center
+    }
+   }
+  }
+  PanelWidgetClass vb_eb_row14 {
+   visible 0
+   clipchildren 0
+   inheritalpha 0
+   ignorepointer 1
+   position 0 0
+   size 350 18
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   scaled 1
+   {
+    TextWidgetClass vb_eb_txt14 {
+     visible 1
+     clipchildren 0
+     inheritalpha 0
+     ignorepointer 1
+     position 70 0
+     size 275 14
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scaled 1
+     style Normal
+     text ""
+     font "gui/fonts/sdf_MetronBook72"
+     "shadow size" 3
+     "shadow color" 0 0 0 1
+     "italic text" 0
+     "bold text" 0
+     "exact text" 0
+     "text valign" center
+    }
+   }
+  }
+  PanelWidgetClass vb_eb_row15 {
+   visible 0
+   clipchildren 0
+   inheritalpha 0
+   ignorepointer 1
+   position 0 0
+   size 350 18
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   scaled 1
+   {
+    TextWidgetClass vb_eb_txt15 {
+     visible 1
+     clipchildren 0
+     inheritalpha 0
+     ignorepointer 1
+     position 70 0
+     size 275 14
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scaled 1
+     style Normal
+     text ""
+     font "gui/fonts/sdf_MetronBook72"
+     "shadow size" 3
+     "shadow color" 0 0 0 1
+     "italic text" 0
+     "bold text" 0
+     "exact text" 0
+     "text valign" center
+    }
+   }
+  }
+  PanelWidgetClass vb_eb_pad {
+   visible 1
+   clipchildren 0
+   inheritalpha 0
+   ignorepointer 1
+   position 0 0
+   size 350 6
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   scaled 1
+  }
+ }
+}

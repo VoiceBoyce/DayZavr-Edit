@@ -413,6 +413,10 @@ Verified errors committed more than once. Check ACTIVELY during implementation. 
 - **E106** — `IEntity` без `GetOrientation`: параметр `Object`; сервер падает, каскад `Can't find class Param1` — следствие
 - **E110** — вещи с временем жизни 0 пропадают на рестарте: надстройка `X_vb` с `class X;` грузится раньше файла с `X` (общее имя `CfgPatches` у файлов мода) → уникальные `CfgPatches` и все в `requiredAddons`
 - **E116** — яркий неон днём уходит в оранжевый: примесь G/B в красной `_co` растёт при `emmisive` ×22 → у горящего состояния своя текстура чистого цвета
+- **E117** — предмет с зарядом в количестве (буфер, накопитель) исчезает при разрядке до нуля: у ванильного `Inventory_Base` `varQuantityDestroyOnMin = 1` → в конфиге `0` и `SetQuantity(v, false)`
+- **E118** — `GridSpacerWidget.AddChildAfter(child, w)` ставит `child` ПЕРЕД `w` (блок «после item» встал над названием в курсоре) → указывать следующего соседа
+- **E119** — курсор действий не показывает название у предмета, который нельзя взять (`IsTakeable` false), пока у него нет доступного действия → `override bool IsActionTargetVisible() { return true; }` (как Fence)
+- **E120** — у поставленного на землю предмета (ItemBase) `EOnFrame` не вызывается даже с `SetEventMask(EntityEvent.FRAME)`: клиентская анимация стоит → один обработчик в `GetGame().GetUpdateQueue(CALL_CATEGORY_GUI).Insert(inst.Update)`, dt по `GetTickTime()`
 
 ---
 
