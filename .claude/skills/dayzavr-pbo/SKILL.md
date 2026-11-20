@@ -36,6 +36,9 @@ modding\mod_vb_MSFZ_Mifical_Pack\          общая папка мода
 $pbo = "D:\DayZavr\DayZavr-Edit\.claude\skills\dayzavr-pbo\scripts\pbo.ps1"
 & $pbo build  <папка исходников>               # главная: исходники -> @Мод (lint, сборка, подпись, keys, проверка)
 & $pbo build  <папка исходников> -Binarize     # то же + модели .p3d MLOD -> ODOL (binarize.exe); ключ есть и у pack
+& $pbo build  <папка исходников> -Mod <путь\@Мод>  # PBO в чужую @-папку: несколько PBO в одном моде (с 2026-11-20,
+                                               # @VB_EchoVehicles: каждая машина — свой PBO); прочие PBO в папке не трогает,
+                                               # проверка подписей — по всем PBO папки
 & $pbo lint   <папка или config.cpp>           # синтаксис всех config.cpp (Mikero Rapify)
 & $pbo unpack <файл.pbo> <папка>               # создаст <папка>\<prefix>\, config.bin -> config.cpp
 & $pbo unpack <файл.pbo> <папка> -Raw          # оставить config.bin как есть

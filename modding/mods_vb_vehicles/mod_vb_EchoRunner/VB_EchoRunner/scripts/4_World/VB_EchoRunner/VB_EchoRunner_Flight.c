@@ -109,7 +109,9 @@ class VB_ERFlight
 	static const float HOVER = 1.2;			// м: высота парения низа модулей над землёй/водой
 	static const float PARK_HOVER = 0.45;	// м: стоянка на подушке (мотор заглушён / нет водителя, энергия есть)
 	static const float PARK_DAMP = 6.0;		// м/с²: на стоянке машину не сносит
-	static const float PARK_DRAIN = 0.004;	// ед./с: расход на стоянке (2 полных бака ~14 ч)
+	// стоянка на подушке держится только аккумулятором Эхо/синтеза (решение 11-20) и тратит его заряд, не баки:
+	// 500 ед. полного аккумулятора Эхо ~2 ч висения; мотор подзаряжает его, как ванильный (0,15 ед./с); синтез не убывает
+	static const float PARK_BATTERY_DRAIN = 0.07;
 	static const float RPM_FLY = 4000;		// об/мин мотора при полной тяге (на нейтрали; выше — перегазовка, отзыв 11-18)
 	static const float FOLLOW_AGL = 8.0;	// м: ниже — держим высоту над рельефом, выше — абсолютную
 	static const float VMAX = 33.0;			// м/с вперёд (~120 км/ч)
@@ -289,10 +291,11 @@ class VB_EchoRunnerFlight : Managed
 		vector vel = GetVelocity(car);
 
 		bool active = car.VB_FlightActive();
-		if (!active && car.m_VB_ModulesFitted && car.m_VB_FlyReady)
+		if (!active && car.m_VB_ModulesFitted && car.m_VB_ParkReady)
 		{
-			// стоянка на подушке (просьба пользователя 11-17): мотор заглушён или водителя нет, но энергия есть —
-			// машина держится низко над землёй, ровно, не дрейфует
+			// стоянка на подушке (просьба пользователя 11-17): мотор заглушён или водителя нет — машина держится низко
+			// над землёй, ровно, не дрейфует. Держит только аккумулятор Эхо/синтеза с зарядом (решение 11-20);
+			// с обычным аккумулятором заглушенная машина плавно садится (ветка ниже)
 			m_HoldSet = false;
 			float parkY = ground + VB_ERFlight.PARK_HOVER - car.m_VB_BottomLS;
 			vector pv = vel;
@@ -447,8 +450,11 @@ class VB_EchoRunnerFlight : Managed
 
 		VB_EchoRunner car = m_Car;
 		float energy = car.VB_TankEnergy();
-		bool ready = car.VB_ModulesWorking() == 4 && car.VB_PipesFitted() && energy > 0;
-		if (ready)
+		bool rig = car.VB_ModulesWorking() == 4 && car.VB_PipesFitted();
+		bool ready = rig && energy > 0;							// полёт — от баков
+		EntityAI battery = car.VB_ParkBattery();
+		bool parkReady = rig && battery != null;				// подушка у заглушенной — от аккумулятора Эхо/синтеза
+		if (ready || parkReady)
 			dBodyActive(car, ActiveState.ACTIVE);		// стоящее тело засыпает — без шага физики подушки нет
 
 		bool flying = false;
@@ -466,18 +472,17 @@ class VB_EchoRunnerFlight : Managed
 			if (energy <= 0)
 				ready = false;
 		}
-		else if (ready)
+		else if (parkReady)
 		{
-			car.VB_DrainEnergy(VB_ERFlight.PARK_DRAIN * step);		// стоянка на подушке
-			energy = car.VB_TankEnergy();
-			if (energy <= 0)
-				ready = false;
+			VB_Echo.Drain(battery, VB_ERFlight.PARK_BATTERY_DRAIN * step);		// стоянка на подушке — заряд аккумулятора
+			parkReady = VB_Echo.Get(battery) > 0;
 		}
 
 		float e01 = Math.Clamp(energy / 200.0, 0, 1);
-		if (ready != car.m_VB_FlyReady || flying != car.m_VB_Flying || Math.AbsFloat(e01 - car.m_VB_Energy) > 0.01)
+		if (ready != car.m_VB_FlyReady || parkReady != car.m_VB_ParkReady || flying != car.m_VB_Flying || Math.AbsFloat(e01 - car.m_VB_Energy) > 0.01)
 		{
 			car.m_VB_FlyReady = ready;
+			car.m_VB_ParkReady = parkReady;
 			car.m_VB_Flying = flying;
 			car.m_VB_Energy = e01;
 			car.SetSynchDirty();

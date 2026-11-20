@@ -6,6 +6,7 @@
 .EXAMPLE
   pbo.ps1 build  D:\DayZavr\DayZavr-Edit\modding\mod_vb_X\X   # X -> ..\@X\Addons\X.pbo + подпись + keys + проверка
   pbo.ps1 build  D:\...\mod_vb_X\X -Binarize                  # то же, модели .p3d бинаризуются (MLOD -> ODOL)
+  pbo.ps1 build  D:\...\mod_vb_X\X -Mod D:\...\@Общий          # PBO в чужую @-папку (много PBO в одном моде), прочие PBO там не трогает
   pbo.ps1 list   D:\path\Mod.pbo
   pbo.ps1 unpack D:\path\Mod.pbo D:\work\unpacked          # создаст D:\work\unpacked\<prefix>\
   pbo.ps1 unpack D:\path\Mod.pbo D:\work\unpacked -Raw     # не конвертировать config.bin в config.cpp
@@ -22,6 +23,7 @@ param(
     [switch]$Raw,
     [switch]$NoSign,
     [switch]$Binarize,
+    [string]$Mod,          # build: путь к готовому моду (@...), куда класть PBO; по умолчанию <корень>\@<Мод>
     [string]$Key = 'DayZavrN'
 )
 
@@ -224,9 +226,10 @@ function Invoke-Check([string]$AddonsDir) {
 try {
     switch ($Action) {
         'build' {
-            # Source — папка исходников <корень>\<Мод>; результат — <корень>\@<Мод>
+            # Source — папка исходников <корень>\<Мод>; результат — <корень>\@<Мод> или папка из -Mod
+            # (несколько PBO в одном моде, например @VB_EchoVehicles: каждая машина — свой PBO)
             $name = Split-Path $Source -Leaf
-            $modDir = Join-Path (Split-Path $Source) "@$name"
+            $modDir = if ($Mod) { [IO.Path]::GetFullPath($Mod) } else { Join-Path (Split-Path $Source) "@$name" }
             Invoke-Pack $Source "$modDir\Addons\$name.pbo"
             Invoke-Sign "$modDir\Addons\$name.pbo"
             New-Item -ItemType Directory -Force "$modDir\keys" | Out-Null

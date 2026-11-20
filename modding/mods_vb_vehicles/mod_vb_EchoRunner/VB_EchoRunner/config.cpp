@@ -7,7 +7,7 @@ class CfgPatches
 		units[]={"VB_EchoRunner"};
 		weapons[]={};
 		requiredVersion=0.1;
-		requiredAddons[]={"DZ_Data","DZ_Vehicles_Wheeled","DZ_Vehicles_Parts","DZ_Sounds_Effects"};
+		requiredAddons[]={"DZ_Data","DZ_Vehicles_Wheeled","DZ_Vehicles_Parts","DZ_Sounds_Effects","VB_EchoCore"};
 	};
 };
 class CfgMods
@@ -1906,13 +1906,41 @@ class CfgVehicles
 		weight=35000;
 		itemSize[]={6,5};
 		inventorySlot[]={"VB_ER_Tank_1","VB_ER_Tank_2"};
-		// энергия Изнанки 0–100 (проценты) = количество предмета (полоса в инвентаре, сохраняется ванилью); расход — скрипт машины
+		// энергия Эхо 0–100 Э = количество предмета (полоса в инвентаре, сохраняется ванилью); расход — скрипт машины.
+		// Носитель энергии ядра VB_EchoCore (блок VB_Echo, ТЗ modding/mod_vb_Echo/ТЗ_VB_Echo.md)
 		stackedUnit="percentage";
 		quantityBar=1;
 		varQuantityInit=0;
 		varQuantityMin=0;
 		varQuantityMax=100;
 		varQuantityDestroyOnMin=0;
+		class VB_Echo
+		{
+			kind="echo";
+			capacity=100;
+			infinite=0;
+			transfer=1;
+			storage="quantity";
+		};
+	};
+	// бак холодного синтеза (донат): та же модель, бирюзовый неон; заряд всегда полный, расход не списывается,
+	// перелить нельзя; хотя бы один такой бак — машина летает без расхода (решения пользователя 11-20)
+	class VB_EchoRunner_TankFusion: VB_EchoRunner_Tank
+	{
+		scope=2;
+		displayName="$STR_VB_ER_tank_fusion_name";
+		descriptionShort="$STR_VB_ER_tank_fusion_disc";
+		hiddenSelectionsTextures[]={"vb_echorunner\data\parts\er_neon_fusion_co.paa"};
+		hiddenSelectionsMaterials[]={"vb_echorunner\data\parts\er_neon_idle.rvmat"};
+		varQuantityInit=100;
+		class VB_Echo
+		{
+			kind="fusion";
+			capacity=100;
+			infinite=1;
+			transfer=0;
+			storage="quantity";
+		};
 	};
 	// антиграв-модуль ДВ-4 (этап 8): ставится вместо колеса; наклон и роторы — источники user (скрипт машины).
 	// Пара «_Ruined» обязательна для любого CarWheel (InventoryItemType.SetReplacementTypes, иначе ошибка VM)

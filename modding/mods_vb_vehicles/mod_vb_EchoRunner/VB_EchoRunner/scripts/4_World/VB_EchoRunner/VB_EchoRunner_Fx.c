@@ -68,6 +68,8 @@ class VB_EchoRunnerFx : Managed
 	protected EntityAI m_LightOn[4];
 	protected ParticleSource m_Ptc[4];
 	protected EntityAI m_PtcOn[4];
+	protected bool m_PtcFusion[4];		// частицы созданы бирюзовыми (бак синтеза)
+	protected int m_LightKind[4];		// цвет света: VB_EchoKind
 	protected EffectSound m_HumIdle;
 	protected EffectSound m_HumFly;
 	protected EffectSound m_HumThrust;
@@ -127,7 +129,7 @@ class VB_EchoRunnerFx : Managed
 		bool engine = car.EngineIsOn();
 		bool ready = fitted && car.m_VB_FlyReady;
 		bool driven = ready && engine;					// мотор заведён — летит или висит на 1.2 м
-		bool park = ready && !engine;					// стоянка на подушке
+		bool park = fitted && car.m_VB_ParkReady && !driven;	// стоянка на подушке (держит аккумулятор Эхо/синтеза)
 		float hv = Vector(m_Vel[0], 0, m_Vel[2]).Length();
 
 		// --- нажатия водителя (у водителя — свои, у остальных — с сервера) и сила газа по ним
@@ -261,6 +263,18 @@ class VB_EchoRunnerFx : Managed
 			l.AttachOnObject(mod, mod.GetMemoryPointPos("light"));
 			m_Lights[i] = l;
 			m_LightOn[i] = mod;
+			m_LightKind[i] = VB_EchoKind.NONE;
+		}
+		// цвет энергии полёта: Эхо — красный, холодный синтез — бирюзовый
+		int kind = VB_EchoKind.ECHO;
+		if (m_Car.m_VB_Fusion)
+			kind = VB_EchoKind.FUSION;
+		if (m_LightKind[i] != kind)
+		{
+			m_LightKind[i] = kind;
+			vector col = VB_Echo.ColorOf(kind);
+			l.SetAmbientColor(col[0], col[1], col[2]);
+			l.SetDiffuseColor(col[0], col[1], col[2]);
 		}
 		float flicker = 0.88 + 0.08 * Math.Sin(m_Time * 23.0 + i * 1.7) + 0.04 * Math.Sin(m_Time * 61.0 + i * 0.6);
 		float bright = 0.25;
@@ -294,7 +308,8 @@ class VB_EchoRunnerFx : Managed
 			return;
 		}
 		ParticleSource ps = m_Ptc[i];
-		if (ps && m_PtcOn[i] != mod)
+		bool fusion = m_Car.m_VB_Fusion;
+		if (ps && (m_PtcOn[i] != mod || m_PtcFusion[i] != fusion))
 		{
 			KillPtc(i);
 			ps = null;
@@ -307,11 +322,15 @@ class VB_EchoRunnerFx : Managed
 			// низ излучателя; поворот — по осям модуля: с force_world_rotation смещение OX считалось по осям мира,
 			// и у правых модулей (прокси повёрнут на 180°) луч уходил на 0.38 м наружу (замечено пользователем 11-17)
 			vector lp = mod.GetMemoryPointPos("light") + "0 0.2 0";
-			ps = pm.PlayOnObject(ParticleList.VB_ER_GRAV, mod, lp, "0 0 0", false);
+			int ptcId = ParticleList.VB_ER_GRAV;
+			if (fusion)
+				ptcId = ParticleList.VB_ER_GRAV_FUSION;		// луч, шлейф, кольца — бирюзовые (бак синтеза)
+			ps = pm.PlayOnObject(ptcId, mod, lp, "0 0 0", false);
 			if (!ps)
 				return;
 			m_Ptc[i] = ps;
 			m_PtcOn[i] = mod;
+			m_PtcFusion[i] = fusion;
 		}
 		float gas = m_Gas;
 		if (gas < 0.05)

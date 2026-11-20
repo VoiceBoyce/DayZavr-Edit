@@ -6,4 +6,6 @@
 modded class ParticleList
 {
 	static const int VB_ER_GRAV = RegisterParticle("VB_EchoRunner/particles/", "vb_er_grav");
+	// то же, бирюзовое — машина на баке холодного синтеза (ТЗ_VB_Echo; файл — перекраска vb_er_grav.ptc)
+	static const int VB_ER_GRAV_FUSION = RegisterParticle("VB_EchoRunner/particles/", "vb_er_grav_fusion");
 }

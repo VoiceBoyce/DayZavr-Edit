@@ -214,13 +214,41 @@ ITEMS = '''
 		weight=35000;
 		itemSize[]={6,5};
 		inventorySlot[]={"VB_ER_Tank_1","VB_ER_Tank_2"};
-		// энергия Изнанки 0–100 (проценты) = количество предмета (полоса в инвентаре, сохраняется ванилью); расход — скрипт машины
+		// энергия Эхо 0–100 Э = количество предмета (полоса в инвентаре, сохраняется ванилью); расход — скрипт машины.
+		// Носитель энергии ядра VB_EchoCore (блок VB_Echo, ТЗ modding/mod_vb_Echo/ТЗ_VB_Echo.md)
 		stackedUnit="percentage";
 		quantityBar=1;
 		varQuantityInit=0;
 		varQuantityMin=0;
 		varQuantityMax=100;
 		varQuantityDestroyOnMin=0;
+		class VB_Echo
+		{
+			kind="echo";
+			capacity=100;
+			infinite=0;
+			transfer=1;
+			storage="quantity";
+		};
+	};
+	// бак холодного синтеза (донат): та же модель, бирюзовый неон; заряд всегда полный, расход не списывается,
+	// перелить нельзя; хотя бы один такой бак — машина летает без расхода (решения пользователя 11-20)
+	class VB_EchoRunner_TankFusion: VB_EchoRunner_Tank
+	{
+		scope=2;
+		displayName="$STR_VB_ER_tank_fusion_name";
+		descriptionShort="$STR_VB_ER_tank_fusion_disc";
+		hiddenSelectionsTextures[]={"%(P)ser_neon_fusion_co.paa"};
+		hiddenSelectionsMaterials[]={"%(P)ser_neon_idle.rvmat"};
+		varQuantityInit=100;
+		class VB_Echo
+		{
+			kind="fusion";
+			capacity=100;
+			infinite=1;
+			transfer=0;
+			storage="quantity";
+		};
 	};
 	// антиграв-модуль ДВ-4 (этап 8): ставится вместо колеса; наклон и роторы — источники user (скрипт машины).
 	// Пара «_Ruined» обязательна для любого CarWheel (InventoryItemType.SetReplacementTypes, иначе ошибка VM)
@@ -362,7 +390,7 @@ class CfgPatches
 		units[]={"VB_EchoRunner"};
 		weapons[]={};
 		requiredVersion=0.1;
-		requiredAddons[]={"DZ_Data","DZ_Vehicles_Wheeled","DZ_Vehicles_Parts","DZ_Sounds_Effects"};
+		requiredAddons[]={"DZ_Data","DZ_Vehicles_Wheeled","DZ_Vehicles_Parts","DZ_Sounds_Effects","VB_EchoCore"};
 	};
 };
 class CfgMods
@@ -503,18 +531,21 @@ S = {
     "STR_VB_ER_doors_codriver_disc": ("Riveted co-driver door with a window net.", "Клёпаная дверь пассажира с сеткой на окне."),
     "STR_VB_ER_hood_name": ("Echo Runner Hood", "Капот Echo Runner"),
     "STR_VB_ER_hood_disc": ("Hood of the Echo Runner. Protects the engine.", "Капот Echo Runner. Защищает двигатель."),
-    "STR_VB_ER_tank_name": ("Rift Tank", "Бак Изнанки"),
-    "STR_VB_ER_tank_disc": ("Storage tank for Rift energy. Mounts in the Echo Runner's trunk.",
-                            "Накопитель энергии Изнанки. Ставится в багажник Echo Runner."),
+    "STR_VB_ER_tank_name": ("Echo Tank", "Бак Эхо"),
+    "STR_VB_ER_tank_disc": ("Tank of Echo condensate (red energy). Mounts in the Echo Runner's trunk; two full tanks give about 20 minutes of flight.",
+                            "Бак эхо-конденсата (красная энергия). Ставится в багажник Echo Runner; два полных бака — около 20 минут полёта."),
+    "STR_VB_ER_tank_fusion_name": ("Cold Fusion Tank", "Бак холодного синтеза"),
+    "STR_VB_ER_tank_fusion_disc": ("A sealed cold fusion chamber: the reaction never stops and the charge never runs out. Mounts in the Echo Runner's trunk; with it the car flies without using energy.",
+                                   "Запаянная камера холодного синтеза: реакция не гаснет, заряд не кончается. Ставится в багажник Echo Runner; с ним машина летает без расхода."),
     "STR_VB_ER_pipes_l_name": ("Rift Line (left)", "Трубопровод Изнанки (левый)"),
     "STR_VB_ER_pipes_r_name": ("Rift Line (right)", "Трубопровод Изнанки (правый)"),
     "STR_VB_ER_pipes_e_name": ("Rift Line (engine)", "Трубопровод Изнанки (мотор)"),
-    "STR_VB_ER_pipes_disc": ("Glowing line that carries Rift energy from the tanks. Fits only the Echo Runner.",
-                             "Светящаяся магистраль: несёт энергию Изнанки от баков. Подходит только к Echo Runner."),
+    "STR_VB_ER_pipes_disc": ("Glowing line that carries energy from the tanks to the antigravity modules. Fits only the Echo Runner.",
+                             "Светящаяся магистраль: несёт энергию от баков к антиграв-модулям. Подходит только к Echo Runner."),
     "STR_VB_ER_cat_rift": ("Rift", "Изнанка"),
     "STR_VB_ER_grav_name": ("DV-4 Antigravity Module", "Антиграв-модуль ДВ-4"),
-    "STR_VB_ER_grav_disc": ("Mounts in place of an Echo Runner wheel. With all four modules, the Rift lines and charged Rift tanks the car flies.",
-                            "Ставится вместо колеса Echo Runner. С четырьмя модулями, трубопроводами и заряженными баками Изнанки машина летает."),
+    "STR_VB_ER_grav_disc": ("Mounts in place of an Echo Runner wheel. With all four modules, the lines and charged tanks the car flies; with an Echo or cold fusion battery it also floats on its cushion when switched off.",
+                            "Ставится вместо колеса Echo Runner. С четырьмя модулями, трубопроводами и заряженными баками машина летает; с аккумулятором Эхо или синтеза — ещё и висит на подушке заглушенной."),
     # клавиши полёта (data/vb_er_inputs.xml)
     "STR_VB_ER_in_group": ("Echo Runner (flight)", "Echo Runner (полёт)"),
     "STR_VB_ER_in_forward": ("Flight: forward", "Полёт: вперёд"),

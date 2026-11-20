@@ -7,6 +7,9 @@ class VB_EchoRunner extends CarScript
 	static const string VB_NEON_ON = "vb_echorunner\\data\\parts\\er_neon.rvmat";
 	static const string VB_NEON_OFF = "vb_echorunner\\data\\parts\\er_neon_off.rvmat";
 	static const string VB_NEON_IDLE = "vb_echorunner\\data\\parts\\er_neon_idle.rvmat";	// деталь не на машине: еле тлеет (превью было тёмным, 11-18)
+	// цвет энергии полёта: Эхо — красный, холодный синтез — бирюзовый (трубопроводы и модули перекрашиваются по баку)
+	static const string VB_NEON_TEX = "vb_echorunner\\data\\parts\\er_neon_co.paa";
+	static const string VB_NEON_TEX_FUSION = "vb_echorunner\\data\\parts\\er_neon_fusion_co.paa";
 	static const string VB_SCREEN_ON = "vb_echorunner\\data\\parts\\er_screen.rvmat";
 	static const string VB_SCREEN_OFF = "vb_echorunner\\data\\parts\\er_screen_off.rvmat";
 
@@ -24,7 +27,10 @@ class VB_EchoRunner extends CarScript
 	protected bool m_VB_NeonDirty = true;
 
 	// ------------------------------------------------ полёт (этап 8): VB_EchoRunner_Flight.c, эффекты — VB_EchoRunner_Fx.c
-	bool m_VB_FlyReady;				// сервер: 4 модуля + 3 трубопровода + энергия (синхр.)
+	bool m_VB_FlyReady;				// сервер: 4 модуля + 3 трубопровода + энергия в баках (синхр.)
+	bool m_VB_ParkReady;			// сервер: стоянка на подушке — 4 модуля + трубопроводы + аккумулятор Эхо/синтеза
+									// с зарядом (синхр.; решение 11-20: держит заглушенную машину только такой аккумулятор)
+	bool m_VB_Fusion;				// стоит бак холодного синтеза: полёт без расхода, эффекты бирюзовые (по навескам, везде)
 	bool m_VB_Flying;				// сервер: в воздухе (синхр., для эффектов)
 	float m_VB_Energy;				// энергия баков 0..1 (синхр.)
 	float m_VB_SyncFwd;				// нажатия водителя для остальных игроков (синхр., шаг 0.5)
@@ -49,6 +55,7 @@ class VB_EchoRunner extends CarScript
 	{
 		SetEventMask(EntityEvent.SIMULATE);			// у CarScript только POSTSIMULATE/POSTFRAME (скилл dayz-aviation)
 		RegisterNetSyncVariableBool("m_VB_FlyReady");
+		RegisterNetSyncVariableBool("m_VB_ParkReady");
 		RegisterNetSyncVariableBool("m_VB_Flying");
 		RegisterNetSyncVariableFloat("m_VB_Energy", 0, 1, 2);
 		RegisterNetSyncVariableFloat("m_VB_SyncFwd", -1, 1, 1);
@@ -170,8 +177,9 @@ class VB_EchoRunner extends CarScript
 	}
 
 	// ------------------------------------------------ неон Изнанки и экран (клиент)
-	// Кузов, двери, экран — при работающем моторе. Баки — мотор + энергия в этом баке. Трубопроводы — мотор + энергия
-	// хоть в одном баке. Антиграв-модули — мотор + машина готова к полёту (m_VB_FlyReady).
+	// Кузов, двери, экран — при работающем моторе. Баки — мотор + энергия в этом баке (бак синтеза светится всегда).
+	// Трубопроводы — мотор + энергия хоть в одном баке. Антиграв-модули — мотор + машина готова к полёту (m_VB_FlyReady).
+	// Трубопроводы и модули — цвета энергии полёта: на баке синтеза бирюзовые (кузов остаётся красным).
 	void VB_UpdateNeon()
 	{
 		bool engine = EngineIsOn();
@@ -184,11 +192,16 @@ class VB_EchoRunner extends CarScript
 			key += 4;
 		if (VB_TankHasEnergy("VB_ER_Tank_2"))
 			key += 8;
+		if (m_VB_Fusion)
+			key += 16;
 		if (key == m_VB_NeonKey && !m_VB_NeonDirty)
 			return;
 		m_VB_NeonKey = key;
 		m_VB_NeonDirty = false;
 		bool energy = (key & 12) != 0;
+		string flightTex = VB_NEON_TEX;
+		if (m_VB_Fusion)
+			flightTex = VB_NEON_TEX_FUSION;
 
 		VB_SetSelMaterial(this, "neon", VB_NeonMat(engine));
 		if (engine)
@@ -204,18 +217,26 @@ class VB_EchoRunner extends CarScript
 			if (att.IsInherited(VB_EchoRunner_GravModule))
 			{
 				on = engine && m_VB_FlyReady;
+				VB_SetSelTexture(att, "neon", flightTex);
 			}
 			else if (att.IsKindOf("VB_EchoRunner_Tank"))
 			{
-				ItemBase tank = ItemBase.Cast(att);
-				on = engine && tank && tank.GetQuantity() > 0;
+				on = VB_Echo.IsInfinite(att) || (engine && VB_Echo.HasCharge(att));
 			}
 			else if (att.IsInherited(VB_EchoRunner_RiftPart))
 			{
 				on = engine && energy;
+				VB_SetSelTexture(att, "neon", flightTex);
 			}
 			VB_SetSelMaterial(att, "neon", VB_NeonMat(on));
 		}
+	}
+
+	static void VB_SetSelTexture(EntityAI ent, string selection, string texture)
+	{
+		int idx = ent.GetHiddenSelectionIndex(selection);
+		if (idx >= 0)
+			ent.SetObjectTexture(idx, texture);
 	}
 
 	static string VB_NeonMat(bool on)
@@ -227,8 +248,7 @@ class VB_EchoRunner extends CarScript
 
 	protected bool VB_TankHasEnergy(string slot)
 	{
-		ItemBase tank = ItemBase.Cast(FindAttachmentBySlotName(slot));
-		return tank && tank.GetQuantity() > 0;
+		return VB_Echo.HasCharge(FindAttachmentBySlotName(slot));
 	}
 
 	static void VB_SetSelMaterial(EntityAI ent, string selection, string material)
@@ -307,6 +327,7 @@ class VB_EchoRunner extends CarScript
 				any = true;
 		}
 		m_VB_ModulesFitted = any;
+		m_VB_Fusion = VB_HasFusionTank();
 	}
 
 	int VB_ModulesWorking()
@@ -329,42 +350,51 @@ class VB_EchoRunner extends CarScript
 		return l && r && e && !l.IsRuined() && !r.IsRuined() && !e.IsRuined();
 	}
 
+	// энергия баков, Э (носители ядра VB_EchoCore; бак синтеза — всегда полный)
 	float VB_TankEnergy()
 	{
-		float sum = 0;
-		ItemBase t1 = ItemBase.Cast(FindAttachmentBySlotName("VB_ER_Tank_1"));
-		ItemBase t2 = ItemBase.Cast(FindAttachmentBySlotName("VB_ER_Tank_2"));
-		if (t1 && !t1.IsRuined())
-			sum += t1.GetQuantity();
-		if (t2 && !t2.IsRuined())
-			sum += t2.GetQuantity();
-		return sum;
+		return VB_Echo.Get(FindAttachmentBySlotName("VB_ER_Tank_1")) + VB_Echo.Get(FindAttachmentBySlotName("VB_ER_Tank_2"));
 	}
 
-	// сервер: списать энергию поровну с непустых баков
+	// стоит целый бак холодного синтеза
+	bool VB_HasFusionTank()
+	{
+		EntityAI t1 = FindAttachmentBySlotName("VB_ER_Tank_1");
+		EntityAI t2 = FindAttachmentBySlotName("VB_ER_Tank_2");
+		return (t1 && !t1.IsRuined() && VB_Echo.IsInfinite(t1)) || (t2 && !t2.IsRuined() && VB_Echo.IsInfinite(t2));
+	}
+
+	// сервер: списать энергию поровну с непустых баков. С баком синтеза расход не списывается (решение 11-20).
 	void VB_DrainEnergy(float amount)
 	{
+		if (VB_HasFusionTank())
+			return;
 		for (int pass = 0; pass < 2 && amount > 0.00001; pass++)
 		{
-			array<ItemBase> tanks = new array<ItemBase>;
-			ItemBase t1 = ItemBase.Cast(FindAttachmentBySlotName("VB_ER_Tank_1"));
-			ItemBase t2 = ItemBase.Cast(FindAttachmentBySlotName("VB_ER_Tank_2"));
-			if (t1 && !t1.IsRuined() && t1.GetQuantity() > 0)
+			array<EntityAI> tanks = new array<EntityAI>;
+			EntityAI t1 = FindAttachmentBySlotName("VB_ER_Tank_1");
+			EntityAI t2 = FindAttachmentBySlotName("VB_ER_Tank_2");
+			if (VB_Echo.Get(t1) > 0)
 				tanks.Insert(t1);
-			if (t2 && !t2.IsRuined() && t2.GetQuantity() > 0)
+			if (VB_Echo.Get(t2) > 0)
 				tanks.Insert(t2);
 			if (tanks.Count() == 0)
 				return;
 			float share = amount / tanks.Count();
 			amount = 0;
-			foreach (ItemBase t : tanks)
-			{
-				float q = t.GetQuantity();
-				float take = Math.Min(q, share);
-				t.SetQuantity(q - take);
-				amount += share - take;
-			}
+			foreach (EntityAI t : tanks)
+				amount += share - VB_Echo.Drain(t, share);
 		}
+	}
+
+	// аккумулятор, который держит заглушенную машину на подушке: носитель ядра (Эхо или синтез) с зарядом; иначе null.
+	// Обычный автомобильный аккумулятор подушку не держит (решение пользователя 11-20).
+	EntityAI VB_ParkBattery()
+	{
+		EntityAI b = GetInventory().FindAttachment(CarBattery.SLOT_ID);
+		if (b && VB_Echo.IsCarrier(b) && VB_Echo.Get(b) > 0)
+			return b;
+		return null;
 	}
 
 	// идёт управляемый полёт: всё на месте, мотор заведён, водитель в сознании
@@ -792,7 +822,9 @@ class VB_EchoRunner extends CarScript
 			entity.GetInventory().CreateInInventory("VB_EchoRunner_Pipes_L");
 			entity.GetInventory().CreateInInventory("VB_EchoRunner_Pipes_R");
 			entity.GetInventory().CreateInInventory("VB_EchoRunner_Pipes_Engine");
-			entity.GetInventory().CreateInInventory("CarBattery");
+			// аккумулятор Эхо (общие детали @VB_EchoVehicles) — держит заглушенную машину на подушке; без мода деталей — обычный
+			if (!entity.GetInventory().CreateInInventory("VB_EchoBattery"))
+				entity.GetInventory().CreateInInventory("CarBattery");
 			entity.GetInventory().CreateInInventory("SparkPlug");
 			entity.GetInventory().CreateInInventory("CarRadiator");
 			entity.GetInventory().CreateInInventory("HeadlightH7");
