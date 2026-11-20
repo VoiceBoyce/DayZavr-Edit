@@ -43,9 +43,30 @@ class VB_EB_Device extends ItemBase
 		return VB_EBKind.NONE;
 	}
 
+	protected VB_EB_Rating m_VB_RatingCached;	// сервер: показатели класса (держит кэш VB_EB_Rating — тут без ref)
+
 	VB_EB_Rating VB_Rating()
 	{
-		return VB_EB_Rating.Of(this, VB_EB_Network.GetSettings());
+		if (!m_VB_RatingCached)
+			m_VB_RatingCached = VB_EB_Rating.Of(this, VB_EB_Network.GetSettings());
+		return m_VB_RatingCached;
+	}
+
+	// ветряк и панель: крыша над устройством — луч раз в COVER_EVERY_MS (устройство не двигается; раньше луч на каждый
+	// тик и на каждый ответ курсору)
+	protected bool m_VB_Covered;
+	protected int m_VB_CoverAt = -1000000;
+	static const int COVER_EVERY_MS = 60000;
+
+	bool VB_IsCovered(VB_EB_Settings s)
+	{
+		int now = GetGame().GetTime();
+		if (now - m_VB_CoverAt >= COVER_EVERY_MS)
+		{
+			m_VB_CoverAt = now;
+			m_VB_Covered = VB_EB_Network.IsCovered(this, s);
+		}
+		return m_VB_Covered;
 	}
 
 	// стоит на земле (не в руках, не в инвентаре), цело и не голограмма установки — участвует в сети.
@@ -143,10 +164,115 @@ class VB_EB_Device extends ItemBase
 		SetSynchDirty();
 	}
 
-	// сервер: выработка тока источником сейчас, kE/tick; dtTicks — длина счёта в тиках (печь сжигает топливо)
+	// сервер: выработка тока источником сейчас, kE/tick (ветер, солнце; у печи — есть ли горящая порция)
 	float VB_SourceOutput(VB_EB_Settings s, float dtTicks)
 	{
 		return 0;
+	}
+
+	// ---------------------------------------------------------------- буферы (ТЗ_VB_EchoBase_буферы.md, 11-20)
+	// Ток — энергия ванильного EnergyManager (источники и преобразователь), Эхо — количество предмета (VB_Echo:
+	// преобразователь, накопитель, станция, платформа). Ваниль сохраняет и шлёт клиенту оба; своих полей нет.
+	bool VB_HasCurBuf()
+	{
+		return GetCompEM() != null;
+	}
+
+	// всё через локальные: GetCompEM() второй раз внутри аргументов того же выражения затирает первый результат —
+	// «NULL pointer» в VB_CurAdd на стенде 11-20 (E71)
+	float VB_CurGet()
+	{
+		ComponentEnergyManager em = GetCompEM();
+		if (!em)
+			return 0;
+		return em.GetEnergy();
+	}
+
+	float VB_CurMax()
+	{
+		ComponentEnergyManager em = GetCompEM();
+		if (!em)
+			return 0;
+		return em.GetEnergyMax();
+	}
+
+	float VB_CurSpace()
+	{
+		ComponentEnergyManager em = GetCompEM();
+		if (!em)
+			return 0;
+		float cur = em.GetEnergy();
+		float max = em.GetEnergyMax();
+		return Math.Max(0, max - cur);
+	}
+
+	// сервер: положить до e kE тока, вернуть, сколько влезло (SetEnergy сам клиенту не шлёт — SetSynchDirty)
+	float VB_CurAdd(float e)
+	{
+		ComponentEnergyManager em = GetCompEM();
+		if (e <= 0 || !em)
+			return 0;
+		float cur = em.GetEnergy();
+		float max = em.GetEnergyMax();
+		float put = Math.Min(e, max - cur);
+		if (put <= 0)
+			return 0;
+		em.SetEnergy(cur + put);
+		SetSynchDirty();
+		return put;
+	}
+
+	// сервер: взять до e kE тока, вернуть, сколько взято
+	float VB_CurTake(float e)
+	{
+		ComponentEnergyManager em = GetCompEM();
+		if (e <= 0 || !em)
+			return 0;
+		float cur = em.GetEnergy();
+		float take = Math.Min(e, cur);
+		if (take <= 0)
+			return 0;
+		em.SetEnergy(cur - take);
+		SetSynchDirty();
+		return take;
+	}
+
+	// сервер, источники: выработать ток в свой буфер за dtTicks, вернуть, сколько легло (полный буфер — лишнее
+	// пропадает). Ветряк и панель — по погоде, печь переопределяет (жжёт, только пока есть место)
+	float VB_Generate(VB_EB_Settings s, float dtTicks)
+	{
+		float rate = VB_SourceOutput(s, 0);
+		return VB_CurAdd(rate * dtTicks);
+	}
+
+	// курсор: строка буфера тока (жёлтая, пустой — серый)
+	protected void VB_CursorCur(VB_EB_Lines lines, string label)
+	{
+		if (!VB_HasCurBuf())
+			return;
+		float cur = VB_CurGet();
+		float curMax = VB_CurMax();
+		string tCur = VB_EB_Lines.N(cur);
+		string tMax = VB_EB_Lines.N(curMax);
+		int c = VB_EB_Colors.CURRENT;
+		if (cur <= 0)
+			c = VB_EB_Colors.DIM;
+		lines.Add(label + " " + tCur + "/" + tMax + " kE", c);
+	}
+
+	// курсор: строка буфера Эхо (красная, пустой — серый)
+	protected void VB_CursorEcho(VB_EB_Lines lines, string label)
+	{
+		float e = VB_Echo.GetE(this);
+		float cap = VB_Echo.Capacity(this);
+		float per = VB_Echo.PerE(this);
+		float eMax = cap / per;
+		string tE = VB_EB_Lines.N(e);
+		string tMax = VB_EB_Lines.N(eMax);
+		int c = VB_EB_Colors.ECHO;
+		if (e <= 0)
+			c = VB_EB_Colors.DIM;
+		lines.Add(label + " " + tE + "/" + tMax + " kE", c);
 	}
 
 	// ---------------------------------------------------------------- курсор действий (VB_EB_Info.c)
@@ -184,11 +310,23 @@ class VB_EB_Device extends ItemBase
 		}
 	}
 
-	// сервер
+	// сервер: одному игроку — не чаще раза в SERVER_INFO_MS по всем устройствам (свой клиент спрашивает раз в секунду,
+	// чаще — только подделанный: не даём засыпать сервер запросами)
+	static const int SERVER_INFO_MS = 300;
+	protected static ref map<string, int> s_VB_InfoSentAt;
+
 	protected void VB_SendInfo(PlayerIdentity sender)
 	{
 		if (!sender || !VB_IsPlaced())
 			return;
+		if (!s_VB_InfoSentAt)
+			s_VB_InfoSentAt = new map<string, int>;
+		string pid = sender.GetId();
+		int now = GetGame().GetTime();
+		int last;
+		if (s_VB_InfoSentAt.Find(pid, last) && now - last < SERVER_INFO_MS)
+			return;
+		s_VB_InfoSentAt.Set(pid, now);
 		Man man = sender.GetPlayer();
 		if (!man || vector.Distance(man.GetPosition(), GetPosition()) > INFO_MAX_DIST)
 			return;
@@ -251,21 +389,47 @@ class VB_EB_Device extends ItemBase
 	// ---------------------------------------------------------------- гнёзда зарядки и разрядки (станция, накопитель)
 	// Слоты — в ядре (config.cpp VB_EchoCore): Charge* — устройство заряжает вложенное, Drain* — ячейка отдаёт
 	// энергию в запас сети (станция v2 и накопитель, решения пользователя 11-20)
+	// номера слотов — один раз (поиск по имени — строковый, а спрашивают каждый тик и каждый кадр курсора)
+	protected static bool s_VB_SlotsReady;
+	protected static int s_VB_SlotDrain1;
+	protected static int s_VB_SlotDrain2;
+	protected static int s_VB_SlotCell1;
+	protected static int s_VB_SlotCell2;
+	protected static int s_VB_SlotTank1;
+	protected static int s_VB_SlotTank2;
+	protected static int s_VB_SlotBattery;
+
+	protected static void VB_InitSlots()
+	{
+		if (s_VB_SlotsReady)
+			return;
+		s_VB_SlotsReady = true;
+		s_VB_SlotDrain1 = InventorySlots.GetSlotIdFromString("VB_Echo_DrainCell1");
+		s_VB_SlotDrain2 = InventorySlots.GetSlotIdFromString("VB_Echo_DrainCell2");
+		s_VB_SlotCell1 = InventorySlots.GetSlotIdFromString("VB_Echo_ChargeCell1");
+		s_VB_SlotCell2 = InventorySlots.GetSlotIdFromString("VB_Echo_ChargeCell2");
+		s_VB_SlotTank1 = InventorySlots.GetSlotIdFromString("VB_Echo_ChargeTank1");
+		s_VB_SlotTank2 = InventorySlots.GetSlotIdFromString("VB_Echo_ChargeTank2");
+		s_VB_SlotBattery = InventorySlots.GetSlotIdFromString("VB_Echo_ChargeBattery");
+	}
+
 	static bool VB_IsDrainSlot(int slotId)
 	{
-		return slotId == InventorySlots.GetSlotIdFromString("VB_Echo_DrainCell1") || slotId == InventorySlots.GetSlotIdFromString("VB_Echo_DrainCell2");
+		VB_InitSlots();
+		return slotId == s_VB_SlotDrain1 || slotId == s_VB_SlotDrain2;
 	}
 
 	static bool VB_IsChargeCellSlot(int slotId)
 	{
-		return slotId == InventorySlots.GetSlotIdFromString("VB_Echo_ChargeCell1") || slotId == InventorySlots.GetSlotIdFromString("VB_Echo_ChargeCell2");
+		VB_InitSlots();
+		return slotId == s_VB_SlotCell1 || slotId == s_VB_SlotCell2;
 	}
 
 	static bool VB_IsChargeSlot(int slotId)
 	{
 		if (VB_IsChargeCellSlot(slotId))
 			return true;
-		return slotId == InventorySlots.GetSlotIdFromString("VB_Echo_ChargeTank1") || slotId == InventorySlots.GetSlotIdFromString("VB_Echo_ChargeTank2") || slotId == InventorySlots.GetSlotIdFromString("VB_Echo_ChargeBattery");
+		return slotId == s_VB_SlotTank1 || slotId == s_VB_SlotTank2 || slotId == s_VB_SlotBattery;
 	}
 
 	// вложенное в гнёздах разрядки (drain = true) или зарядки (false), в порядке гнёзд
@@ -284,9 +448,9 @@ class VB_EB_Device extends ItemBase
 		}
 	}
 
-	// в гнёзда зарядки и разрядки — только переливаемые носители Эхо (синтез — нет). Ячейки: с зарядом — только в
-	// разрядку, неполная — в зарядку; так «бросить на устройство» само выбирает гнездо (движок берёт первое, куда
-	// можно). Свои слоты устройств (кристалл преобразователя) — как в ванили
+	// в гнёзда зарядки и разрядки — только переливаемые носители Эхо (синтез — нет). Гнездо разрядки — только с зарядом,
+	// гнездо зарядки ячейки — только неполная: полная ячейка идёт лишь в разрядку, пустая — лишь в зарядку, начатая —
+	// в первое свободное (движок берёт первое гнездо, куда можно). Свои слоты (кристалл преобразователя) — как в ванили
 	override bool CanReceiveAttachment(EntityAI attachment, int slotId)
 	{
 		if (!super.CanReceiveAttachment(attachment, slotId))
@@ -521,7 +685,7 @@ class VB_EB_WindTurbine extends VB_EB_Device
 
 	override float VB_SourceOutput(VB_EB_Settings s, float dtTicks)
 	{
-		if (VB_EB_Network.IsCovered(this, s))
+		if (VB_IsCovered(s))
 			return 0;
 		Weather w = GetGame().GetWeather();
 		float maxSpeed = w.GetWindMaximumSpeed();
@@ -532,27 +696,28 @@ class VB_EB_WindTurbine extends VB_EB_Device
 
 	override void VB_FillInfo(VB_EB_Settings s, VB_EB_NetInfo info)
 	{
-		info.m_Covered = VB_EB_Network.IsCovered(this, s);
+		info.m_Covered = VB_IsCovered(s);
 		info.m_Wind = GetGame().GetWeather().GetWindSpeed();
 		info.m_Out = VB_SourceOutput(s, 0);
 	}
 
 	override protected void VB_CursorOwn(VB_EB_NetInfo i, VB_EB_Lines lines)
 	{
-		if (!i)
-			return;
-		if (i.m_Covered)
+		if (i && i.m_Covered)
 		{
 			lines.Add("Крыша над ветряком — не крутится", VB_EB_Colors.WARN);
-			return;
 		}
-		string tWind = VB_EB_Lines.N(i.m_Wind);
-		string tOut = VB_EB_Lines.N(i.m_Out);
-		string tMax = VB_EB_Lines.N(i.m_OutMax);
-		int c = VB_EB_Colors.CURRENT;
-		if (i.m_Out <= 0)
-			c = VB_EB_Colors.DIM;
-		lines.Add("Ветер " + tWind + " м/с · ток " + tOut + " из " + tMax + " kE/tick", c);
+		else if (i)
+		{
+			string tWind = VB_EB_Lines.N(i.m_Wind);
+			string tOut = VB_EB_Lines.N(i.m_Out);
+			string tMax = VB_EB_Lines.N(i.m_OutMax);
+			int c = VB_EB_Colors.CURRENT;
+			if (i.m_Out <= 0)
+				c = VB_EB_Colors.DIM;
+			lines.Add("Ветер " + tWind + " м/с · ток " + tOut + " из " + tMax + " kE/tick", c);
+		}
+		VB_CursorCur(lines, "Буфер тока");
 	}
 };
 
@@ -575,7 +740,7 @@ class VB_EB_SolarPanel extends VB_EB_Device
 
 	override float VB_SourceOutput(VB_EB_Settings s, float dtTicks)
 	{
-		if (VB_EB_Network.IsCovered(this, s))
+		if (VB_IsCovered(s))
 			return 0;
 		float overcast = GetGame().GetWeather().GetOvercast().GetActual();
 		return VB_Rating().outMax * VB_SunFactor() * (1 - s.solarOvercastLoss * overcast);
@@ -583,13 +748,19 @@ class VB_EB_SolarPanel extends VB_EB_Device
 
 	override void VB_FillInfo(VB_EB_Settings s, VB_EB_NetInfo info)
 	{
-		info.m_Covered = VB_EB_Network.IsCovered(this, s);
+		info.m_Covered = VB_IsCovered(s);
 		info.m_Sun = VB_SunFactor();
 		info.m_Cloud = GetGame().GetWeather().GetOvercast().GetActual();
 		info.m_Out = VB_SourceOutput(s, 0);
 	}
 
 	override protected void VB_CursorOwn(VB_EB_NetInfo i, VB_EB_Lines lines)
+	{
+		VB_CursorSolar(i, lines);
+		VB_CursorCur(lines, "Буфер тока");
+	}
+
+	protected void VB_CursorSolar(VB_EB_NetInfo i, VB_EB_Lines lines)
 	{
 		if (!i)
 			return;
@@ -619,44 +790,93 @@ class VB_EB_SolarPanel extends VB_EB_Device
 
 class VB_EB_Furnace extends VB_EB_Device
 {
-	protected float m_VB_FuelLeft;		// kE: сколько ещё в текущей порции (после рестарта пропадает — она уже сожжена)
-	protected string m_VB_BurnType;
+	protected string m_VB_BurnType;		// сервер: что горит (для курсора; после рестарта пусто — порция догорит молча)
 
 	override int VB_Kind()
 	{
 		return VB_EBKind.FURNACE;
 	}
 
-	// жжёт со скоростью своего выхода; вызывается, только когда сеть может принять энергию (топливо не тратится зря)
+	// kE, что осталось в горящей порции, — количество предмета: ваниль сохраняет его, порция переживает рестарт
+	// (раньше было поле в памяти — после рестарта недогоревшее пропадало)
+	float VB_FuelLeft()
+	{
+		return GetQuantity();
+	}
+
+	protected void VB_SetFuelLeft(float v)
+	{
+		SetQuantity(Math.Max(0, v), false);
+	}
+
+	// в отсек — только топливо из списка конфига vbFuel (точный класс, как ищет настройки VB_TakeFuel). Загрузку из
+	// сохранения не трогаем (CanLoadItemIntoCargo): что уже лежит — не пропадёт
+	override bool CanReceiveItemIntoCargo(EntityAI item)
+	{
+		if (!super.CanReceiveItemIntoCargo(item))
+			return false;
+		return item && VB_IsFuelType(item.GetType());
+	}
+
+	override bool CanSwapItemInCargo(EntityAI child_entity, EntityAI new_entity)
+	{
+		if (!super.CanSwapItemInCargo(child_entity, new_entity))
+			return false;
+		return new_entity && VB_IsFuelType(new_entity.GetType());
+	}
+
+	protected static ref TStringArray s_VB_FuelTypes;
+
+	static bool VB_IsFuelType(string type)
+	{
+		if (!s_VB_FuelTypes)
+		{
+			s_VB_FuelTypes = new TStringArray;
+			GetGame().ConfigGetTextArray("CfgVehicles VB_EB_Furnace vbFuel", s_VB_FuelTypes);
+		}
+		return s_VB_FuelTypes.Find(type) >= 0;
+	}
+
+	// горит ли сейчас (для курсора): есть горящая порция — выработка на полную
 	override float VB_SourceOutput(VB_EB_Settings s, float dtTicks)
 	{
-		if (dtTicks <= 0)
-		{
-			if (m_VB_FuelLeft > 0)
-				return VB_Rating().outMax;
-			return 0;
-		}
-		float want = VB_Rating().outMax * dtTicks;
+		if (VB_FuelLeft() > 0)
+			return VB_Rating().outMax;
+		return 0;
+	}
+
+	// жжёт со скоростью своего выхода в свой буфер тока и только пока в нём есть место — топливо зря не горит
+	// (ТЗ_VB_EchoBase_буферы.md; в сети печь или нет — неважно, буфер свой)
+	override float VB_Generate(VB_EB_Settings s, float dtTicks)
+	{
+		float want = Math.Min(VB_Rating().outMax * dtTicks, VB_CurSpace());
 		float got = 0;
+		float left = VB_FuelLeft();
 		int portions = 0;
 		while (got < want && portions < 16)		// предел — на случай огромного выхода из настроек
 		{
 			portions++;
-			if (m_VB_FuelLeft <= 0 && !VB_TakeFuel(s))
-				break;
-			float take = Math.Min(m_VB_FuelLeft, want - got);
-			m_VB_FuelLeft -= take;
+			if (left <= 0)
+			{
+				left = VB_TakeFuel(s);
+				if (left <= 0)
+					break;
+			}
+			float take = Math.Min(left, want - got);
+			left -= take;
 			got += take;
 		}
-		return got / dtTicks;
+		if (left != VB_FuelLeft())
+			VB_SetFuelLeft(left);
+		return VB_CurAdd(got);
 	}
 
-	// первая подходящая штука из отсека: из стопки — одна, иначе предмет целиком
-	protected bool VB_TakeFuel(VB_EB_Settings s)
+	// первая подходящая штука из отсека: из стопки — одна, иначе предмет целиком. Вернёт kE порции (0 — нечего жечь)
+	protected float VB_TakeFuel(VB_EB_Settings s)
 	{
 		CargoBase cargo = GetInventory().GetCargo();
 		if (!cargo)
-			return false;
+			return 0;
 		for (int i = 0; i < cargo.GetItemCount(); i++)
 		{
 			EntityAI e = cargo.GetItem(i);
@@ -665,24 +885,24 @@ class VB_EB_Furnace extends VB_EB_Device
 			VB_EB_FuelEntry f = s.FindFuel(e.GetType());
 			if (!f)
 				continue;
-			m_VB_FuelLeft = f.energy;
 			m_VB_BurnType = f.type;
 			ItemBase ib = ItemBase.Cast(e);
 			if (ib && ib.GetQuantity() > 1)
 				ib.AddQuantity(-1);
 			else
 				e.Delete();
-			return true;
+			return f.energy;
 		}
-		return false;
+		return 0;
 	}
 
 	override void VB_FillInfo(VB_EB_Settings s, VB_EB_NetInfo info)
 	{
-		info.m_FuelLeft = m_VB_FuelLeft;
+		float left = VB_FuelLeft();
+		info.m_FuelLeft = left;
 		info.m_BurnType = m_VB_BurnType;
 		// свой запас печи (решение 11-20): kE в горящей порции + топливо в отсеке (стопка — по штукам, как жжёт VB_TakeFuel)
-		info.m_FuelStock = m_VB_FuelLeft;
+		info.m_FuelStock = left;
 		CargoBase cargo = GetInventory().GetCargo();
 		if (!cargo)
 			return;
@@ -703,37 +923,36 @@ class VB_EB_Furnace extends VB_EB_Device
 		}
 	}
 
-	// m_Out — сколько печь выработала в последнем тике: она жжёт, только когда сеть может принять энергию
+	// m_Out — сколько печь выработала в последнем тике: жжёт, только пока в её буфере тока есть место
 	override protected void VB_CursorOwn(VB_EB_NetInfo i, VB_EB_Lines lines)
 	{
-		if (!i)
-			return;
-		if (i.m_Out > 0)
+		if (i)
 		{
-			if (i.m_BurnType != "")
+			if (i.m_Out > 0)
 			{
-				string burn = VB_EB_Lines.ClassName(i.m_BurnType);
-				lines.Add("Горит: " + burn, VB_EB_Colors.CURRENT);
+				if (i.m_BurnType != "")
+				{
+					string burn = VB_EB_Lines.ClassName(i.m_BurnType);
+					lines.Add("Горит: " + burn, VB_EB_Colors.CURRENT);
+				}
+				string tOut = VB_EB_Lines.N(i.m_Out);
+				lines.Add("Ток " + tOut + " kE/tick", VB_EB_Colors.CURRENT);
 			}
-			string tOut = VB_EB_Lines.N(i.m_Out);
-			lines.Add("Ток " + tOut + " kE/tick", VB_EB_Colors.CURRENT);
-			string tStock = VB_EB_Lines.N(i.m_FuelStock);
-			lines.Add("Запас топлива " + tStock + " kE", VB_EB_Colors.CURRENT);
-			return;
+			else if (i.m_FuelLeft <= 0 && !i.m_HasFuel)
+			{
+				lines.Add("Не горит: положи топливо в отсек", VB_EB_Colors.WARN);
+			}
+			else if (VB_CurSpace() <= 0)
+			{
+				lines.Add("Не горит: буфер тока полон", VB_EB_Colors.DIM);
+			}
 		}
-		if (i.m_FuelStock > 0)
+		VB_CursorCur(lines, "Буфер тока");
+		if (i && i.m_FuelStock > 0)
 		{
-			string tStock2 = VB_EB_Lines.N(i.m_FuelStock);
-			lines.Add("Запас топлива " + tStock2 + " kE", VB_EB_Colors.TEXT);
+			string tStock = VB_EB_Lines.N(i.m_FuelStock);
+			lines.Add("Запас топлива " + tStock + " kE", VB_EB_Colors.TEXT);
 		}
-		if (i.m_FuelLeft <= 0 && !i.m_HasFuel)
-			lines.Add("Не горит: положи топливо в отсек", VB_EB_Colors.WARN);
-		else if (!i.m_InNet)
-			lines.Add("Не горит: печь не в сети", VB_EB_Colors.DIM);
-		else if (i.m_Crystal == 0)
-			lines.Add("Не горит: в сети нет кристалла", VB_EB_Colors.DIM);
-		else
-			lines.Add("Не горит: запас сети полон", VB_EB_Colors.DIM);
 	}
 };
 
@@ -792,17 +1011,11 @@ class VB_EB_Converter extends VB_EB_Device
 		return ib && ib.GetQuantity() > 0;
 	}
 
-	// буфер — количество предмета, клиент знает сам; состав сети — из ответа сервера
+	// свои буферы (ток — EnergyManager, Эхо — количество) клиент знает сам; состав сети — из ответа сервера
 	override protected void VB_CursorOwn(VB_EB_NetInfo i, VB_EB_Lines lines)
 	{
-		float buf = VB_Echo.Get(this);
-		float bufMax = VB_Echo.Capacity(this);
-		string tBuf = VB_EB_Lines.N(buf);
-		string tBufMax = VB_EB_Lines.N(bufMax);
-		int c = VB_EB_Colors.ECHO;
-		if (buf <= 0)
-			c = VB_EB_Colors.DIM;
-		lines.Add("Буфер " + tBuf + "/" + tBufMax + " kE", c);
+		VB_CursorCur(lines, "Ток");
+		VB_CursorEcho(lines, "Эхо");
 		if (!i)
 			return;
 		// общий запас сети — только здесь (решение пользователя 11-20)
@@ -903,14 +1116,14 @@ class VB_EB_ChargeStation extends VB_EB_Device
 
 	override protected void VB_CursorOwn(VB_EB_NetInfo i, VB_EB_Lines lines)
 	{
+		VB_CursorEcho(lines, "Буфер Эхо");
 		if (!i)
 			return;
 		bool busy = false;
-		if (i.m_In > 0)
+		if (i.m_Out > 0)
 		{
-			string tIn = VB_EB_Lines.N(i.m_In);
-			string tMax = VB_EB_Lines.N(i.m_InMax);
-			lines.Add("Заряжает " + tIn + " из " + tMax + " kE/tick", VB_EB_Colors.ECHO);
+			string tGive = VB_EB_Lines.N(i.m_Out);
+			lines.Add("Заряжает " + tGive + " kE/tick", VB_EB_Colors.ECHO);
 			busy = true;
 		}
 		if (i.m_Drain > 0)
@@ -923,10 +1136,8 @@ class VB_EB_ChargeStation extends VB_EB_Device
 			return;
 		if (GetInventory().AttachmentCount() == 0)
 			lines.Add("Повесь бак, аккумулятор или ячейку", VB_EB_Colors.DIM);
-		else if (!i.m_InNet)
-			return;					// строка «Не в сети» — ниже
-		else if (i.m_Pool <= 0)
-			lines.Add("Ждёт: в запасе сети нет энергии", VB_EB_Colors.DIM);
+		else if (VB_Echo.Get(this) <= 0 && (!i.m_InNet || i.m_Pool <= 0))
+			lines.Add("Ждёт: нет энергии в буфере и в сети", VB_EB_Colors.DIM);
 		else
 			lines.Add("Всё заряжено", VB_EB_Colors.TEXT);
 	}
@@ -974,13 +1185,13 @@ class VB_EB_ChargePad extends VB_EB_Device
 
 	override protected void VB_CursorOwn(VB_EB_NetInfo i, VB_EB_Lines lines)
 	{
+		VB_CursorEcho(lines, "Буфер Эхо");
 		if (!i)
 			return;
 		if (i.m_Out > 0)
 		{
 			string tOut = VB_EB_Lines.N(i.m_Out);
-			string tIn = VB_EB_Lines.N(i.m_In);
-			lines.Add("Отдаёт " + tOut + " kE/tick · берёт из сети " + tIn, VB_EB_Colors.ECHO);
+			lines.Add("Отдаёт " + tOut + " kE/tick (потери 50 %)", VB_EB_Colors.ECHO);
 			return;
 		}
 		string tInMax = VB_EB_Lines.N(i.m_InMax);

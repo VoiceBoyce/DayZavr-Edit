@@ -18,7 +18,7 @@ class VB_EchoSpec
 	bool m_Infinite;
 	bool m_Transfer = true;
 	bool m_StorageEnergy;			// true — заряд EnergyManager (аккумулятор), false — количество предмета
-	float m_PerE = 1;				// единиц носителя в 1 kE (бак — 1, аккумулятор — 3.90625: 2000 ед. = 512 kE)
+	float m_PerE = 1;				// единиц носителя в 1 kE (бак и ячейка — 1, аккумулятор — 0.1: 2000 ед. = 20 000 kE, шкала ×32)
 };
 
 class VB_Echo
@@ -27,6 +27,11 @@ class VB_Echo
 	static const vector COLOR_FUSION = "0.1 0.95 0.85";	// бирюзовый — холодный синтез
 
 	protected static ref map<string, ref VB_EchoSpec> s_Specs;
+
+	// сервер: заряд меняется (зарядка, разрядка, износ кристалла) — без ванильного звука вложения. Ваниль на каждое
+	// изменение количества предмета в слоте или отсеке шлёт ITEM_ATTACH/ITEM_DETACH (ItemBase.SetQuantity) — у
+	// бака на станции щёлкало бы раз в тик. Глушит modded ItemBase.StartItemSoundServer ниже
+	static bool s_Quiet;
 
 	// блок VB_Echo класса (читается один раз на класс)
 	static VB_EchoSpec Spec(EntityAI e)
@@ -189,19 +194,24 @@ class VB_Echo
 	protected static void SetCharge(EntityAI e, VB_EchoSpec sp, float value)
 	{
 		ItemBase ib = ItemBase.Cast(e);
+		s_Quiet = true;
 		if (sp.m_StorageEnergy)
 		{
-			if (!e.GetCompEM())
-				return;
-			e.GetCompEM().SetEnergy(value);
-			if (ib)
-				ib.ConvertEnergyToQuantity();		// полоска в инвентаре = заряд (SetEnergy сам её не трогает)
-			return;
+			ComponentEnergyManager em = e.GetCompEM();
+			if (em)
+			{
+				em.SetEnergy(value);
+				if (ib)
+					ib.ConvertEnergyToQuantity();		// полоска в инвентаре = заряд (SetEnergy сам её не трогает)
+			}
 		}
-		// destroy_config = false: у ванильного Inventory_Base varQuantityDestroyOnMin = 1 — разряженный до нуля носитель
-		// удалялся бы (так пропадал преобразователь базы, E117)
-		if (ib)
+		else if (ib)
+		{
+			// destroy_config = false: у ванильного Inventory_Base varQuantityDestroyOnMin = 1 — разряженный до нуля
+			// носитель удалялся бы (так пропадал преобразователь базы, E117)
 			ib.SetQuantity(value, false);
+		}
+		s_Quiet = false;
 	}
 
 	// ---- в kE (зарядка от сети базы: баки, аккумуляторы, ячейки — у всех своя единица заряда)
@@ -247,5 +257,16 @@ class VB_Echo
 		if (kind == VB_EchoKind.FUSION)
 			return COLOR_FUSION;
 		return COLOR_ECHO;
+	}
+};
+
+// звук вложения при смене заряда носителя — глушим (VB_Echo.s_Quiet); настоящие вложить/снять звучат как в ванили
+modded class ItemBase
+{
+	override void StartItemSoundServer(int id, int slotId)
+	{
+		if (VB_Echo.s_Quiet && (id == SoundConstants.ITEM_ATTACH || id == SoundConstants.ITEM_DETACH))
+			return;
+		super.StartItemSoundServer(id, slotId);
 	}
 };

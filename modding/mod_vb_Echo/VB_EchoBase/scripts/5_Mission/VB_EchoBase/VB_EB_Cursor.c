@@ -1,6 +1,7 @@
 // Курсор действий: под названием устройства базы — состояние сети и вложенное (VB_EB_Info.c).
 // Свой блок строк (gui/layouts/eb_cursor_info.layout) вставлен в ванильный GridSpacer курсора сразу после
-// строки «item». Строки обновляются вместе с содержимым курсора (PrepareCursorContent, полный проход).
+// строки «item». Строки обновляются вместе с содержимым курсора (PrepareCursorContent, полный проход), но
+// собираются заново не чаще раза в VB_EB_REBUILD_MS или при смене устройства.
 
 modded class ActionTargetsCursor
 {
@@ -12,6 +13,9 @@ modded class ActionTargetsCursor
 	protected ref array<TextWidget> m_VB_EB_Texts = new array<TextWidget>;
 	protected ref array<string> m_VB_EB_Shown = new array<string>;	// что сейчас написано (не трогать без изменений)
 	protected ref VB_EB_Lines m_VB_EB_Lines = new VB_EB_Lines;
+	protected VB_EB_Device m_VB_EB_LastDev;		// для кого собраны строки
+	protected int m_VB_EB_LastBuild = -100000;	// когда, мс
+	protected static const int VB_EB_REBUILD_MS = 250;	// строки — не каждый кадр: цифры сервера меняются раз в секунду
 
 	override protected void OnWidgetScriptInit(Widget w)
 	{
@@ -79,6 +83,11 @@ modded class ActionTargetsCursor
 			return;
 		}
 		d.VB_RequestInfo();
+		int now = GetGame().GetTime();
+		if (d == m_VB_EB_LastDev && now - m_VB_EB_LastBuild < VB_EB_REBUILD_MS && m_VB_EB_Info.IsVisible())
+			return;
+		m_VB_EB_LastDev = d;
+		m_VB_EB_LastBuild = now;
 		d.VB_CursorLines(m_VB_EB_Lines);
 		int n = Math.Min(m_VB_EB_Lines.Count(), m_VB_EB_Rows.Count());
 		for (int i = 0; i < m_VB_EB_Rows.Count(); i++)

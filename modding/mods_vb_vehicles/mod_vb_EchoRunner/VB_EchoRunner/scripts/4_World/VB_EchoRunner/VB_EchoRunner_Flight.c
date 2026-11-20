@@ -137,10 +137,10 @@ class VB_ERFlight
 	static const float PITCH_SGN = 1.0;
 	static const float ROLL_SGN = -1.0;
 
-	// энергия в kE (решение пользователя 11-20: единица kE, тик = 10 с, степени двойки): бак 512 kE;
-	// полёт вперёд ровно 2 kE/tick (бак ~43 мин), висение 1 kE/tick (~85 мин), набор высоты ×1.5
-	static const float DRAIN_HOVER = 0.1;		// kE/с = 1 kE/tick
-	static const float DRAIN_MOVE = 0.1;		// kE/с сверху при полном ходе (вместе 2 kE/tick: 512 / 0.2 = 2560 с)
+	// энергия в kE (решение пользователя 11-20: единица kE, тик = 10 с; шкала ×32 — ТЗ_VB_EchoBase_буферы.md): бак
+	// 20 000 kE; полёт вперёд 64 kE/tick (бак ~52 мин), висение 32 kE/tick (~104 мин), набор высоты ×1.5
+	static const float DRAIN_HOVER = 3.2;		// kE/с = 32 kE/tick
+	static const float DRAIN_MOVE = 3.2;		// kE/с сверху при полном ходе (вместе 64 kE/tick: 20 000 / 6.4 = 3125 с)
 	static const float DRAIN_CLIMB = 1.5;		// множитель при наборе высоты
 	static const float CHECK_PERIOD = 0.5;		// с: проверка условий и списание на сервере
 

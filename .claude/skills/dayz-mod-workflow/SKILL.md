@@ -417,6 +417,8 @@ Verified errors committed more than once. Check ACTIVELY during implementation. 
 - **E118** — `GridSpacerWidget.AddChildAfter(child, w)` ставит `child` ПЕРЕД `w` (блок «после item» встал над названием в курсоре) → указывать следующего соседа
 - **E119** — курсор действий не показывает название у предмета, который нельзя взять (`IsTakeable` false), пока у него нет доступного действия → `override bool IsActionTargetVisible() { return true; }` (как Fence)
 - **E120** — у поставленного на землю предмета (ItemBase) `EOnFrame` не вызывается даже с `SetEventMask(EntityEvent.FRAME)`: клиентская анимация стоит → один обработчик в `GetGame().GetUpdateQueue(CALL_CATEGORY_GUI).Insert(inst.Update)`, dt по `GetTickTime()`
+- **E121** — добавил `class EnergyManager` (или другой сохраняемый компонент) классу, который уже стоит в мире: поток сохранения меняется, старые объекты грузятся битыми (`Scripted variables corrupted`, ошибки CF ModStorage) → менять до выкладки или новым классом
+- **E122** — смена количества предмета в слоте/отсеке (зарядка, расход, износ) щёлкает звуком вложения: ванильный SetQuantity шлёт ITEM_ATTACH/DETACH — глушить флагом в override StartItemSoundServer
 
 ---
 

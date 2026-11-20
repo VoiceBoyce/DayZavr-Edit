@@ -1909,19 +1909,19 @@ class CfgVehicles
 		inventorySlot[]={"VB_ER_Tank_1","VB_ER_Tank_2","VB_Echo_ChargeTank1","VB_Echo_ChargeTank2"};
 		hiddenSelectionsTextures[]={"vb_echorunner\data\parts\er_neon_empty_co.paa"};		// новый бак пустой — серый; заряженный красит скрипт (11-20)
 		hiddenSelectionsMaterials[]={"vb_echorunner\data\parts\er_neon_empty.rvmat"};
-		// энергия Эхо 0–512 kE = количество предмета (полоса в инвентаре, сохраняется ванилью); расход — скрипт машины
+		// энергия Эхо 0–20 000 kE (шкала ×32, 11-20) = количество предмета (полоса в инвентаре, сохраняется ванилью); расход — скрипт машины
 		// (полёт 2 kE/tick, висение 1 kE/tick, тик = 10 с; решение пользователя 11-20 — единица kE, степени двойки).
 		// Носитель энергии ядра VB_EchoCore (блок VB_Echo, ТЗ modding/mod_vb_Echo/ТЗ_VB_Echo.md)
 		stackedUnit="percentage";
 		quantityBar=1;
 		varQuantityInit=0;
 		varQuantityMin=0;
-		varQuantityMax=512;
+		varQuantityMax=20000;
 		varQuantityDestroyOnMin=0;
 		class VB_Echo
 		{
 			kind="echo";
-			capacity=512;
+			capacity=20000;
 			infinite=0;
 			transfer=1;
 			storage="quantity";
@@ -1937,11 +1937,11 @@ class CfgVehicles
 		inventorySlot[]={"VB_ER_Tank_1","VB_ER_Tank_2"};		// синтез не заряжают: гнёзд станции нет
 		hiddenSelectionsTextures[]={"vb_echorunner\data\parts\er_neon_fusion_co.paa"};
 		hiddenSelectionsMaterials[]={"vb_echorunner\data\parts\er_neon_idle.rvmat"};
-		varQuantityInit=512;
+		varQuantityInit=20000;
 		class VB_Echo
 		{
 			kind="fusion";
-			capacity=512;
+			capacity=20000;
 			infinite=1;
 			transfer=0;
 			storage="quantity";

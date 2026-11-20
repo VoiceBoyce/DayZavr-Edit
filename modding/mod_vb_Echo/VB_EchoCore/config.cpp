@@ -3,11 +3,11 @@
 //   class VB_Echo
 //   {
 //       kind = "echo";        // "echo" — Эхо (красная, расходуется), "fusion" — холодный синтез (бирюзовая)
-//       capacity = 512;       // kE (для storage = "energy" берётся energyStorageMax EnergyManager)
+//       capacity = 20000;     // kE (для storage = "energy" берётся energyStorageMax EnergyManager)
 //       infinite = 0;         // 1 — всегда полный, расход не списывается
 //       transfer = 1;         // 0 — энергию нельзя перелить в другой носитель / станцию / сеть
 //       storage = "quantity"; // "quantity" — количество предмета (баки, ячейки), "energy" — EnergyManager (аккумуляторы)
-//       perE = 1;             // единиц заряда в 1 kE (необязательно, по умолчанию 1; аккумулятор Эхо — 3.90625)
+//       perE = 1;             // единиц заряда в 1 kE (необязательно, по умолчанию 1; аккумулятор Эхо — 0.1)
 //   };
 // Логика — scripts/4_World/VB_EchoCore/VB_Echo.c.
 // Ещё в ядре (11-20): энергоячейки VB_EchoCell_* (одна модель, кольцо на крышке — уровень, ядро — заряд), общие
@@ -107,7 +107,7 @@ class CfgVehicles
 	class Inventory_Base;
 	// Энергоячейка: заряд = количество предмета (kE). Новая — пустая. Неон «neon»: пустая серая, Эхо красная,
 	// синтез бирюзовая (скрипт VB_EchoCell.c); «tier» — кольцо уровня на крышке (Mk I–IV: жёлтый, зелёный, синий,
-	// фиолетовый). Ёмкости — степени двойки (решение пользователя 11-20).
+	// фиолетовый). Ёмкости: 2048 / 4096 / 10 000 / 20 000 kE — шкала ×32, выше 4096 круглые (решение 11-20).
 	class VB_EchoCell_Base: Inventory_Base
 	{
 		scope=0;
@@ -120,7 +120,7 @@ class CfgVehicles
 		canBeSplit=0;
 		varQuantityInit=0;
 		varQuantityMin=0;
-		varQuantityMax=64;
+		varQuantityMax=2048;
 		varQuantityDestroyOnMin=0;		// пустая ячейка не исчезает (E117)
 		quantityBar=1;
 		stackedUnit="percentage";		// заряд в процентах, не в штуках (11-20)
@@ -141,7 +141,7 @@ class CfgVehicles
 		class VB_Echo
 		{
 			kind="echo";
-			capacity=64;
+			capacity=2048;
 			infinite=0;
 			transfer=1;
 			storage="quantity";
@@ -153,12 +153,12 @@ class CfgVehicles
 		displayName="$STR_VB_Echo_cell_mk1";
 		descriptionShort="$STR_VB_Echo_cell_mk1_disc";
 		varQuantityInit=0;
-		varQuantityMax=64;
+		varQuantityMax=2048;
 		hiddenSelectionsTextures[]={"vb_echocore\data\er_neon_empty_co.paa","vb_echocore\data\eb_neon_t1_co.paa"};
 		class VB_Echo
 		{
 			kind="echo";
-			capacity=64;
+			capacity=2048;
 			infinite=0;
 			transfer=1;
 			storage="quantity";
@@ -170,12 +170,12 @@ class CfgVehicles
 		displayName="$STR_VB_Echo_cell_mk2";
 		descriptionShort="$STR_VB_Echo_cell_mk2_disc";
 		varQuantityInit=0;
-		varQuantityMax=128;
+		varQuantityMax=4096;
 		hiddenSelectionsTextures[]={"vb_echocore\data\er_neon_empty_co.paa","vb_echocore\data\eb_neon_t2_co.paa"};
 		class VB_Echo
 		{
 			kind="echo";
-			capacity=128;
+			capacity=4096;
 			infinite=0;
 			transfer=1;
 			storage="quantity";
@@ -187,12 +187,12 @@ class CfgVehicles
 		displayName="$STR_VB_Echo_cell_mk3";
 		descriptionShort="$STR_VB_Echo_cell_mk3_disc";
 		varQuantityInit=0;
-		varQuantityMax=256;
+		varQuantityMax=10000;
 		hiddenSelectionsTextures[]={"vb_echocore\data\er_neon_empty_co.paa","vb_echocore\data\eb_neon_t3_co.paa"};
 		class VB_Echo
 		{
 			kind="echo";
-			capacity=256;
+			capacity=10000;
 			infinite=0;
 			transfer=1;
 			storage="quantity";
@@ -204,12 +204,12 @@ class CfgVehicles
 		displayName="$STR_VB_Echo_cell_mk4";
 		descriptionShort="$STR_VB_Echo_cell_mk4_disc";
 		varQuantityInit=0;
-		varQuantityMax=512;
+		varQuantityMax=20000;
 		hiddenSelectionsTextures[]={"vb_echocore\data\er_neon_empty_co.paa","vb_echocore\data\eb_neon_t4_co.paa"};
 		class VB_Echo
 		{
 			kind="echo";
-			capacity=512;
+			capacity=20000;
 			infinite=0;
 			transfer=1;
 			storage="quantity";
@@ -222,15 +222,15 @@ class CfgVehicles
 		scope=2;
 		displayName="$STR_VB_Echo_cell_fusion";
 		descriptionShort="$STR_VB_Echo_cell_fusion_disc";
-		varQuantityInit=512;
-		varQuantityMax=512;
+		varQuantityInit=20000;
+		varQuantityMax=20000;
 		inventorySlot[]={};
 		hiddenSelectionsTextures[]={"vb_echocore\data\er_neon_fusion_co.paa","vb_echocore\data\er_neon_fusion_co.paa"};
 		hiddenSelectionsMaterials[]={"vb_echocore\data\er_neon_idle.rvmat","vb_echocore\data\er_neon_idle.rvmat"};
 		class VB_Echo
 		{
 			kind="fusion";
-			capacity=512;
+			capacity=20000;
 			infinite=1;
 			transfer=0;
 			storage="quantity";

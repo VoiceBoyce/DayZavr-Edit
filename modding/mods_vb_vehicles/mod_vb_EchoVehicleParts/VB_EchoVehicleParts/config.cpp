@@ -83,7 +83,7 @@ class CfgVehicles
 			infinite=0;
 			transfer=1;
 			storage="energy";
-			perE=3.90625;	// единиц EnergyManager в 1 kE: 2000 ед. = 512 kE (один бак) — для зарядки от сети базы
+			perE=0.1;	// единиц EnergyManager в 1 kE: 2000 ед. = 20 000 kE (один бак, шкала ×32 11-20) — для зарядки от сети базы
 		};
 	};
 	class VB_EchoBatteryFusion: VB_EchoBattery

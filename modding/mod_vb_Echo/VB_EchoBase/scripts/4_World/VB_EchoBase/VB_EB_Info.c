@@ -140,6 +140,8 @@ class VB_EB_Lines
 		if (Math.AbsFloat(v) >= 100)
 		{
 			int whole = Math.Round(v);
+			if (whole >= 10000)
+				return Group(whole);
 			return whole.ToString();
 		}
 		float r = Math.Round(v * 10) / 10;
@@ -149,6 +151,21 @@ class VB_EB_Lines
 			return i.ToString();
 		}
 		return r.ToString();
+	}
+
+	// 100000 → «100 000» (ТЗ_VB_EchoBase_буферы.md: числа от 10 000 — с пробелом между тысячами)
+	static string Group(int v)
+	{
+		string d = v.ToString();
+		string res = "";
+		int n = d.Length();
+		for (int k = 0; k < n; k++)
+		{
+			if (k > 0 && (n - k) % 3 == 0)
+				res += " ";
+			res += d.Get(k);
+		}
+		return res;
 	}
 
 	// название класса на языке игрока (ConfigGetText переводит $STR_ сам); вызывать на клиенте

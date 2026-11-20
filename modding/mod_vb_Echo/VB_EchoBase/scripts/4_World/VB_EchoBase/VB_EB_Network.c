@@ -1,14 +1,19 @@
 // Сеть базы (только сервер): один таймер на все сети, у устройств нет своего OnUpdate (ТЗ_VB_EchoBase.md, раздел 4).
 // Единицы: kE, kE/tick (тик = 10 с). Показатели устройств — VB_EB_Rating (конфиг + настройки).
-// Тик: сеть = преобразователь + ретрансляторы волной (каждый в радиусе уже подключённого узла) + всё остальное
-// в радиусе любого узла (у каждого узла свой range), с лимитами по видам. Порядок в сети:
-//   1) выдача — станции (предметы в отсеке, до inMax) и платформы (вложения машин и игроков в зоне; берут inMax,
-//      отдают outMax — разница теряется) берут из запаса;
-//   2) ток источников (печь жжёт топливо, только если запас может принять энергию);
-//   3) преобразователь с кристаллом: min(ток, inMax) × ночной множитель → в запас (буфер, потом накопители);
-//      износ кристалла по принятому (кристалл синтеза не изнашивается).
-// Запас = буфер преобразователя + накопители (носители ядра, kE = количество предмета); у накопителя свой
-// предел входа и выхода за тик (io).
+// Буферы и порядок тика — ТЗ_VB_EchoBase_буферы.md (11-20).
+// Состав: сеть = преобразователь + ретрансляторы волной (каждый в радиусе уже подключённого узла) + всё остальное
+// в радиусе любого узла (у каждого узла свой range), с лимитами по видам (лишние — в счёт «сверх лимита»).
+// Порядок тика в сети (RunNet):
+//   1) источники вырабатывают ток в свои буферы (EnergyManager; печь жжёт, только пока в её буфере есть место);
+//   2) преобразователь собирает ток в свой буфер: каждый источник — до своего outMax за тик, места мало — поровну;
+//   3) с кристаллом: из буфера тока min(ток, inMax) × ночной множитель → Эхо в запас (буфер преобразователя, потом
+//      накопители); кристалл не даёт больше своего остатка, износ — по сделанному (синтез не изнашивается);
+//   4) ячейки в гнёздах разрядки станций и накопителей отдают энергию в запас;
+//   5) станции и платформы набирают свои буферы Эхо из запаса (поровну по запросам; весь доступный запас идёт туда,
+//      где есть место — решение пользователя 11-20) и заряжают вложенное уже из них.
+// Запас = буфер Эхо преобразователя + накопители (носители ядра, kE = количество предмета); у накопителя свой предел
+// входа и выхода за тик (io). Вне сети (RunAlone) источник копит ток в свой буфер, станция и платформа доводят
+// зарядку из своего.
 
 class VB_EB_Network
 {
@@ -18,6 +23,8 @@ class VB_EB_Network
 	protected ref VB_EB_Settings m_S;
 	protected ref array<Object> m_Objs = new array<Object>;
 	protected ref array<EntityAI> m_Items = new array<EntityAI>;	// вложения станции на этот проход
+	protected ref array<float> m_Amounts = new array<float>;		// запросы на этот проход (параллельно спискам)
+	protected ref array<VB_EB_Device> m_Consumers = new array<VB_EB_Device>;	// станции и платформы сети
 	protected bool m_Started;
 	protected int m_TickCount;
 	static const int LIFE_EVERY_TICKS = 360;		// при тике 10 с — раз в час
@@ -107,10 +114,44 @@ class VB_EB_Network
 			if (wt && wt.VB_IsPlaced())
 				wt.VB_UpdateSpeed(m_S);
 			if (!rest.m_VB_Net && !VB_EB_Converter.Cast(rest))
-				rest.VB_SetState(VB_EBState.NONE);
+				RunAlone(rest, dtTicks);
 			if (refreshLife && rest.m_VB_Net && rest.VB_IsPlaced())
 				rest.SetLifetime(rest.GetLifetimeMax());
 		}
+	}
+
+	// вне сети (ТЗ_VB_EchoBase_буферы.md): источник копит ток в свой буфер, станция и платформа доводят зарядку из своего
+	// буфера; остальное — серое
+	protected void RunAlone(VB_EB_Device d, float dtTicks)
+	{
+		if (!d.VB_IsPlaced())
+		{
+			d.VB_SetState(VB_EBState.NONE);
+			return;
+		}
+		if (d.VB_IsSource())
+		{
+			float gen = d.VB_Generate(m_S, dtTicks);
+			d.m_VB_LastOut = gen / dtTicks;
+			SetSourceState(d, d.m_VB_LastOut);
+			return;
+		}
+		int kind = d.VB_Kind();
+		if (kind == VB_EBKind.STATION)
+		{
+			float gs = ChargeStationItems(d, dtTicks);
+			d.m_VB_LastOut = gs / dtTicks;
+			SetConsumerState(null, d, gs);
+			return;
+		}
+		if (kind == VB_EBKind.PAD)
+		{
+			float gp = ChargePadFromBuffer(d, dtTicks);
+			d.m_VB_LastOut = gp / dtTicks;
+			SetConsumerState(null, d, gp);
+			return;
+		}
+		d.VB_SetState(VB_EBState.NONE);
 	}
 
 	// ------------------------------------------------------------------ состав сети
@@ -137,6 +178,15 @@ class VB_EB_Network
 				conv.m_VB_Relays.Insert(rel);
 				conv.m_VB_Nodes.Insert(rel);
 				grew = true;
+			}
+		}
+		// ретрансляторы сверх лимита — тоже в счёт «не подключено» (раньше молча пропадали)
+		if (conv.m_VB_Relays.Count() >= m_S.maxRelays)
+		{
+			foreach (VB_EB_Device relX : m_Devices)
+			{
+				if (relX && !relX.m_VB_Net && relX.VB_Kind() == VB_EBKind.RELAY && relX.VB_IsPlaced() && InReach(conv, relX))
+					conv.m_VB_StatSkipped++;
 			}
 		}
 
@@ -196,7 +246,11 @@ class VB_EB_Network
 		return false;
 	}
 
-	// ------------------------------------------------------------------ работа сети
+	// ------------------------------------------------------------------ работа сети (ТЗ_VB_EchoBase_буферы.md, раздел 4)
+	// 1) источники копят ток в своих буферах; 2) преобразователь собирает ток к себе: каждый источник отдаёт не больше
+	// своего выхода за тик, места мало — поровну; 3) из своего буфера тока делает Эхо (до inMax, ночью ×) в свой буфер
+	// Эхо, излишек — в накопители; 4) ячейки в гнёздах разрядки — в запас сети; 5) станции и платформы набирают свои
+	// буферы Эхо из запаса (поровну) и заряжают уже из них
 	protected void RunNet(VB_EB_Converter conv, float dtTicks, bool night)
 	{
 		// пределы накопителей на этот тик
@@ -207,79 +261,115 @@ class VB_EB_Network
 			stIo.m_VB_IoOutLeft = ioTick;
 		}
 
-		// 1. выдача
-		float used = 0;
-		// станция v2: заряжает вложенное в гнёздах зарядки (inMax), ячейки в гнёздах разрядки отдают в запас (outMax)
-		foreach (VB_EB_Device st : conv.m_VB_Stations)
-		{
-			VB_EB_Rating stR = st.VB_Rating();
-			float gs = ChargeStation(conv, st, stR.inMax * dtTicks);
-			float ds = DrainCells(conv, st, stR.outMax * dtTicks);
-			st.m_VB_LastIn = gs / dtTicks;		// заряжено, kE/tick
-			st.m_VB_LastOut = ds / dtTicks;		// отдано в сеть из ячеек, kE/tick
-			st.m_VB_LastDrain = ds / dtTicks;
-			used += gs;
-			SetConsumerState(conv, st, gs + ds);
-		}
-		// накопитель: ячейки в его гнёздах разрядки отдают в запас (идея пользователя 11-20), до io за тик
-		foreach (VB_EB_Device stoD : conv.m_VB_Storages)
-		{
-			float dsto = DrainCells(conv, stoD, stoD.VB_Rating().io * dtTicks);
-			stoD.m_VB_LastDrain = dsto / dtTicks;
-		}
-		foreach (VB_EB_Device pad : conv.m_VB_Pads)
-		{
-			float padDrawn = 0;
-			float gp = ChargePad(conv, pad, dtTicks, padDrawn);
-			pad.m_VB_LastOut = gp / dtTicks;
-			pad.m_VB_LastIn = padDrawn / dtTicks;
-			used += padDrawn;
-			SetConsumerState(conv, pad, gp);
-		}
-
-		// 2. ток источников
-		bool ready = conv.VB_CrystalReady();
-		bool accept = ready && PoolSpace(conv) > 0.001;
+		// 1. выработка — в буферы источников
 		float prod = 0;
 		foreach (VB_EB_Device src : conv.m_VB_Sources)
 		{
-			float o = 0;
-			if (src.VB_Kind() != VB_EBKind.FURNACE || accept)
-				o = src.VB_SourceOutput(m_S, dtTicks);
-			src.m_VB_LastOut = o;
-			prod += o;
-			if (o > 0)
-				src.VB_SetState(VB_EBState.WORK);
-			else
-				src.VB_SetState(VB_EBState.NONE);
+			float gen = src.VB_Generate(m_S, dtTicks);
+			src.m_VB_LastOut = gen / dtTicks;
+			prod += gen;
 		}
 
-		// 3. преобразование в Эхо
+		// 2. сбор тока в буфер преобразователя
+		m_Amounts.Clear();
+		float offerSum = 0;
+		foreach (VB_EB_Device srcO : conv.m_VB_Sources)
+		{
+			float offer = Math.Min(srcO.VB_CurGet(), srcO.VB_Rating().outMax * dtTicks);
+			m_Amounts.Insert(offer);
+			offerSum += offer;
+		}
+		float collected = 0;
+		float room = conv.VB_CurSpace();
+		if (offerSum > 0.00001 && room > 0.00001)
+		{
+			float kCur = Math.Min(1, room / offerSum);
+			for (int si = 0; si < conv.m_VB_Sources.Count(); si++)
+			{
+				VB_EB_Device srcT = conv.m_VB_Sources[si];
+				float took = srcT.VB_CurTake(m_Amounts[si] * kCur);
+				collected += conv.VB_CurAdd(took);
+			}
+		}
+		foreach (VB_EB_Device srcS : conv.m_VB_Sources)
+			SetSourceState(srcS, srcS.m_VB_LastOut);
+
+		// 3. преобразование: из буфера тока в Эхо (буфер преобразователя, потом накопители)
+		bool ready = conv.VB_CrystalReady();
 		bool fusion = conv.VB_HasFusionCrystal();
 		bool nightNow = night || (fusion && m_S.fusionCrystalNightAllDay == 1);
 		float mul = 1;
 		if (nightNow)
 			mul = m_S.nightMultiplier;
 		float made = 0;
-		if (accept)
+		if (ready)
 		{
-			float inMax = conv.VB_Rating().inMax;
-			made = PoolAdd(conv, Math.Min(prod, inMax) * mul * dtTicks);
-			if (made > 0 && !fusion)
+			float canCur = Math.Min(conv.VB_CurGet(), conv.VB_Rating().inMax * dtTicks);
+			float wantEcho = Math.Min(canCur * mul, PoolSpace(conv));
+			ItemBase crystal = null;
+			if (!fusion)
+				crystal = ItemBase.Cast(conv.VB_Crystal());
+			// кристалл не делает больше своего остатка (раньше последний огрызок давал целый тик)
+			if (crystal && m_S.crystalWearPerKE > 0)
+				wantEcho = Math.Min(wantEcho, crystal.GetQuantity() / m_S.crystalWearPerKE);
+			if (wantEcho > 0.00001)
 			{
-				ItemBase crystal = ItemBase.Cast(conv.VB_Crystal());
-				if (crystal)
-					crystal.AddQuantity(-made * m_S.crystalWearPerKE);		// до нуля — рассыпается (varQuantityDestroyOnMin)
+				made = PoolAdd(conv, wantEcho);
+				conv.VB_CurTake(made / mul);
+				if (made > 0 && crystal)
+				{
+					// без звука вложения на каждый тик (VB_Echo.s_Quiet); до нуля — рассыпается (varQuantityDestroyOnMin)
+					VB_Echo.s_Quiet = true;
+					crystal.AddQuantity(-made * m_S.crystalWearPerKE);
+					VB_Echo.s_Quiet = false;
+				}
 			}
 		}
-		conv.m_VB_StatProd = prod;
+		// сразу: по нему решается, тлеют ли станции и платформы в этом же тике (раньше неон отставал на тик)
 		conv.m_VB_StatConv = made / dtTicks;
+
+		// 4. ячейки в гнёздах разрядки — в запас сети (станция: на гнездо drainCell; накопитель: всего его вход io)
+		foreach (VB_EB_Device stD : conv.m_VB_Stations)
+		{
+			float perCell = stD.VB_Rating().drainCell * dtTicks;
+			float ds = DrainCells(conv, stD, perCell, perCell * 2);
+			stD.m_VB_LastDrain = ds / dtTicks;
+		}
+		foreach (VB_EB_Device stoD : conv.m_VB_Storages)
+		{
+			float ioD = stoD.VB_Rating().io * dtTicks;
+			float dsto = DrainCells(conv, stoD, ioD, ioD);
+			stoD.m_VB_LastDrain = dsto / dtTicks;
+		}
+
+		// 5. станции и платформы: свои буферы из запаса, зарядка из них
+		m_Consumers.Clear();
+		foreach (VB_EB_Device cSt : conv.m_VB_Stations)
+			m_Consumers.Insert(cSt);
+		foreach (VB_EB_Device cPad : conv.m_VB_Pads)
+			m_Consumers.Insert(cPad);
+		float used = FillBuffers(conv, dtTicks);
+		foreach (VB_EB_Device st : conv.m_VB_Stations)
+		{
+			float gs = ChargeStationItems(st, dtTicks);
+			st.m_VB_LastOut = gs / dtTicks;
+			SetConsumerState(conv, st, gs + st.m_VB_LastDrain);
+		}
+		foreach (VB_EB_Device pad : conv.m_VB_Pads)
+		{
+			float gp = ChargePadFromBuffer(pad, dtTicks);
+			pad.m_VB_LastOut = gp / dtTicks;
+			SetConsumerState(conv, pad, gp);
+		}
+
+		// итоги тика
+		conv.m_VB_StatProd = prod / dtTicks;
 		conv.m_VB_StatUse = used / dtTicks;
 		conv.m_VB_StatNight = nightNow;
+		conv.m_VB_LastIn = collected / dtTicks;
 		conv.m_VB_LastOut = made / dtTicks;
-		conv.m_VB_LastIn = Math.Min(prod, conv.VB_Rating().inMax);
 
-		// 4. вид
+		// вид
 		if (!ready)
 			conv.VB_SetState(VB_EBState.NONE);
 		else if (made > 0)
@@ -304,9 +394,12 @@ class VB_EB_Network
 
 #ifdef DIAG_DEVELOPER
 		// значения — в локальные: два вызова одной функции в аргументах затирают друг друга (E71)
-		string dProd = Fmt(prod);
+		string dProd = Fmt(conv.m_VB_StatProd);
+		string dCol = Fmt(conv.m_VB_LastIn);
 		string dConv = Fmt(conv.m_VB_StatConv);
 		string dUse = Fmt(conv.m_VB_StatUse);
+		float curNow = conv.VB_CurGet();
+		string dCur = Fmt(curNow);
 		float poolNow = PoolGet(conv);
 		string dPool = Fmt(poolNow);
 		int nSrc = conv.m_VB_Sources.Count();
@@ -315,66 +408,123 @@ class VB_EB_Network
 		int nStor = conv.m_VB_Storages.Count();
 		int nRel = conv.m_VB_Relays.Count();
 		string dHead = "[VB_EB] сеть: ист " + nSrc + " накоп " + nStor + " стан " + nSt + " плат " + nPad + " ретр " + nRel;
-		Print(dHead + " | ток " + dProd + " крист " + ready + " эхо " + dConv + " взято " + dUse + " запас " + dPool + " kE ночь " + nightNow);
+		Print(dHead + " | выработка " + dProd + " собрано " + dCol + " ток " + dCur + " крист " + ready + " эхо " + dConv + " взято " + dUse + " запас " + dPool + " kE ночь " + nightNow);
 #endif
 	}
 
-	// заряжает — горит; сеть делает Эхо (прошлый тик) или в запасе что-то есть — тлеет; иначе серый.
-	// По одному запасу нельзя: станция в этом же тике может выбрать всё, и платформа казалась бы без энергии
+	// источник: вырабатывает — горит; ток в буфере есть — тлеет; иначе серый
+	protected void SetSourceState(VB_EB_Device src, float rate)
+	{
+		if (rate > 0)
+			src.VB_SetState(VB_EBState.WORK);
+		else if (src.VB_CurGet() > 0)
+			src.VB_SetState(VB_EBState.IDLE);
+		else
+			src.VB_SetState(VB_EBState.NONE);
+	}
+
+	// станция и платформа: заряжает — горит; в своём буфере или в сети есть Эхо — тлеет; иначе серый (conv — null вне сети)
 	protected void SetConsumerState(VB_EB_Converter conv, VB_EB_Device d, float given)
 	{
 		if (given > 0)
 			d.VB_SetState(VB_EBState.WORK);
-		else if (conv.m_VB_StatConv > 0 || PoolGet(conv) > 0)
+		else if (VB_Echo.Get(d) > 0 || (conv && (conv.m_VB_StatConv > 0 || PoolGet(conv) > 0)))
 			d.VB_SetState(VB_EBState.IDLE);
 		else
 			d.VB_SetState(VB_EBState.NONE);
 	}
 
-	// ------------------------------------------------------------------ зарядка
-	// станция: вложенное в гнёздах зарядки (баки, аккумулятор, ячейки), без потерь, всего до budget kE за тик
-	protected float ChargeStation(VB_EB_Converter conv, VB_EB_Device st, float budget)
+	// ------------------------------------------------------------------ буферы станций и платформ
+	// набрать свои буферы Эхо из запаса сети: каждой — до inMax за тик и до места в буфере. Энергия идёт туда, где
+	// есть место (решение пользователя 11-20); доступного мало — поровну по запросам. Доступно = буфер
+	// преобразователя + из каждого накопителя не больше его остатка выхода (io) — раньше доля считалась от всего
+	// запаса, накопители упирались в io, и первые станции в списке забирали больше остальных. Вернёт взятое из запаса
+	protected float FillBuffers(VB_EB_Converter conv, float dtTicks)
 	{
-		VB_EB_ChargeStation cs = VB_EB_ChargeStation.Cast(st);
-		if (!cs)
-			return 0;
-		m_Items.Clear();
-		cs.VB_SlotItems(false, m_Items);
-		int n = m_Items.Count();
-		if (n == 0)
-			return 0;
-		// поровну (стенд 11-20: первая по очереди ячейка забирала всю малую выработку, бак не заряжался):
-		// сначала каждому равная доля того, что есть в запасе, потом остаток по очереди
-		float avail = Math.Min(budget, PoolGet(conv));
-		float share = avail / n;
-		float given = 0;
-		foreach (EntityAI it : m_Items)
+		m_Amounts.Clear();
+		float wantSum = 0;
+		foreach (VB_EB_Device c : m_Consumers)
 		{
-			float drawnSt = 0;
-			given += ChargeItem(conv, it, Math.Min(share, budget - given), 1, drawnSt);
+			float inTick = c.VB_Rating().inMax * dtTicks;
+			float space = VB_Echo.SpaceE(c);
+			float w = Math.Min(inTick, space);
+			m_Amounts.Insert(w);
+			wantSum += w;
 		}
-		foreach (EntityAI rest : m_Items)
+		if (wantSum <= 0.00001)
+			return 0;
+		float k = Math.Min(1, PoolAvail(conv) / wantSum);
+		float used = 0;
+		for (int i = 0; i < m_Consumers.Count(); i++)
 		{
-			if (budget - given <= 0.00001)
-				break;
-			float drawnRest = 0;
-			given += ChargeItem(conv, rest, budget - given, 1, drawnRest);
+			VB_EB_Device cd = m_Consumers[i];
+			float got = PoolDraw(conv, m_Amounts[i] * k);
+			if (got <= 0)
+				continue;
+			float put = VB_Echo.AddE(cd, got);
+			if (got - put > 0.00001)
+				PoolAdd(conv, got - put);
+			cd.m_VB_LastIn = put / dtTicks;
+			used += put;
+		}
+		return used;
+	}
+
+	// станция: из своего буфера — вложенному в гнёздах зарядки, без потерь: бак и аккумулятор до chargeItem, ячейка
+	// до chargeCell за тик (ТЗ 3.3). В буфере мало — поровну по запросам. Вернёт отданное
+	protected float ChargeStationItems(VB_EB_Device st, float dtTicks)
+	{
+		VB_EB_Rating r = st.VB_Rating();
+		GameInventory inv = st.GetInventory();
+		m_Items.Clear();
+		m_Amounts.Clear();
+		float wantSum = 0;
+		for (int a = 0; a < inv.GetAttachmentSlotsCount(); a++)
+		{
+			int slotId = inv.GetAttachmentSlotId(a);
+			if (!VB_EB_Device.VB_IsChargeSlot(slotId))
+				continue;
+			EntityAI it = inv.FindAttachment(slotId);
+			if (!it)
+				continue;
+			float rate = r.chargeItem;
+			if (VB_EB_Device.VB_IsChargeCellSlot(slotId))
+				rate = r.chargeCell;
+			float w = Math.Min(rate * dtTicks, VB_Echo.SpaceE(it));
+			if (w <= 0.00001)
+				continue;
+			m_Items.Insert(it);
+			m_Amounts.Insert(w);
+			wantSum += w;
+		}
+		if (wantSum <= 0.00001)
+			return 0;
+		float k = Math.Min(1, VB_Echo.GetE(st) / wantSum);
+		float given = 0;
+		for (int i = 0; i < m_Items.Count(); i++)
+		{
+			float taken = VB_Echo.DrainE(st, m_Amounts[i] * k);
+			float put = VB_Echo.AddE(m_Items[i], taken);
+			if (taken - put > 0.00001)
+				VB_Echo.AddE(st, taken - put);
+			given += put;
 		}
 		return given;
 	}
 
-	// станция и накопитель: ячейки в гнёздах разрядки отдают энергию в запас сети (буфер, накопители с их пределом входа),
-	// всего до budget kE за тик. Что запас не принял — обратно в ячейку. Синтез не переливается (CanTransfer)
-	protected float DrainCells(VB_EB_Converter conv, VB_EB_Device dev, float budget)
+	// станция и накопитель: ячейки в гнёздах разрядки отдают энергию в запас сети (буфер преобразователя, накопители с
+	// их пределом входа): каждая до perItem, все вместе до total kE за тик. Что запас не принял — обратно в ячейку.
+	// Синтез не переливается (CanTransfer)
+	protected float DrainCells(VB_EB_Converter conv, VB_EB_Device dev, float perItem, float total)
 	{
-		if (!dev || budget <= 0)
+		if (!dev || total <= 0)
 			return 0;
 		m_Items.Clear();
 		dev.VB_SlotItems(true, m_Items);
 		float taken = 0;
 		foreach (EntityAI it : m_Items)
 		{
-			float left = budget - taken;
+			float left = total - taken;
 			if (left <= 0.00001)
 				break;
 			if (!VB_Echo.CanTransfer(it))
@@ -383,7 +533,10 @@ class VB_EB_Network
 			if (space <= 0.00001)
 				break;
 			float haveE = VB_Echo.GetE(it);
-			float want = Math.Min(left, Math.Min(space, haveE));
+			// Math.Min дважды в аргументах одного выражения затирает результат (E71) — по шагам
+			float want = Math.Min(left, perItem);
+			want = Math.Min(want, space);
+			want = Math.Min(want, haveE);
 			if (want <= 0.00001)
 				continue;
 			float got = VB_Echo.DrainE(it, want);
@@ -395,15 +548,13 @@ class VB_EB_Network
 		return taken;
 	}
 
-	// платформа: машины и живые игроки в прямоугольнике над ней; заряжается только установленное — вложения
-	// (баки и аккумулятор машины, надетое игроком), не содержимое рюкзаков (решение 11-20).
-	// Отдаёт до outMax за тик, из сети берёт в inMax/outMax раз больше (Mk I: 8 → 4, потери 50 %, решение 11-20).
-	// Вернёт, сколько отдано; drawn — сколько взято из запаса
-	protected float ChargePad(VB_EB_Converter conv, VB_EB_Device pad, float dtTicks, out float drawn)
+	// платформа: из своего буфера — вложениям машин и живых игроков в прямоугольнике над ней (заряжается только
+	// установленное — баки и аккумулятор машины, надетое игроком, не рюкзаки; решение 11-20). Отдаёт до outMax за
+	// тик, из буфера уходит в inMax/outMax раз больше (Mk I: 256 → 128, потери 50 %). Вернёт отданное
+	protected float ChargePadFromBuffer(VB_EB_Device pad, float dtTicks)
 	{
-		drawn = 0;
 		VB_EB_Rating r = pad.VB_Rating();
-		if (r.outMax <= 0 || r.inMax <= 0)
+		if (r.outMax <= 0 || r.inMax <= 0 || VB_Echo.Get(pad) <= 0)
 			return 0;
 		float eff = Math.Clamp(r.outMax / r.inMax, 0.01, 1);
 		float budget = r.outMax * dtTicks;
@@ -435,34 +586,26 @@ class VB_EB_Network
 			{
 				if (budget - given <= 0.00001)
 					break;
-				float drawnPad = 0;
-				given += ChargeItem(conv, inv.GetAttachmentFromIndex(ai), budget - given, eff, drawnPad);
-				drawn += drawnPad;
+				given += GiveFromBuffer(pad, inv.GetAttachmentFromIndex(ai), budget - given, eff);
 			}
 		}
 		return given;
 	}
 
-	// отдать носителю до budget kE (столько он получит); eff — доля, что доходит (станция 1, платформа out/in):
-	// из запаса берётся budget / eff. Не носитель, бесконечный, разрушенный, полный — ничего (VB_Echo.SpaceE = 0).
-	// Вернёт отданное, drawn — взятое из запаса
-	protected float ChargeItem(VB_EB_Converter conv, EntityAI it, float budget, float eff, out float drawn)
+	// отдать носителю до budget kE из буфера Эхо устройства; eff — доля, что доходит (из буфера уходит give / eff).
+	// Не носитель, бесконечный, разрушенный, полный — ничего (VB_Echo.SpaceE = 0). Вернёт отданное
+	protected float GiveFromBuffer(VB_EB_Device dev, EntityAI it, float budget, float eff)
 	{
-		drawn = 0;
 		if (!it || budget <= 0)
 			return 0;
-		float space = VB_Echo.SpaceE(it);
-		if (space <= 0)
+		float give = Math.Min(VB_Echo.SpaceE(it), budget);
+		float have = VB_Echo.GetE(dev);
+		if (give / eff > have)
+			give = have * eff;
+		if (give <= 0.00001)
 			return 0;
-		float give = Math.Min(space, budget);
-		float got = PoolDraw(conv, give / eff);
-		if (got <= 0)
-			return 0;
-		float put = VB_Echo.AddE(it, got * eff);
-		float back = got - put / eff;
-		if (back > 0.00001)
-			PoolAdd(conv, back);
-		drawn = got - back;
+		float put = VB_Echo.AddE(it, give);
+		VB_Echo.DrainE(dev, put / eff);
 		return put;
 	}
 
@@ -472,6 +615,18 @@ class VB_EB_Network
 		float e = VB_Echo.Get(conv);
 		foreach (VB_EB_Device st : conv.m_VB_Storages)
 			e += VB_Echo.Get(st);
+		return e;
+	}
+
+	// сколько можно взять в этом тике (с учётом пределов выхода накопителей)
+	protected float PoolAvail(VB_EB_Converter conv)
+	{
+		float e = VB_Echo.Get(conv);
+		foreach (VB_EB_Device st : conv.m_VB_Storages)
+		{
+			float have = VB_Echo.Get(st);
+			e += Math.Min(have, st.m_VB_IoOutLeft);
+		}
 		return e;
 	}
 

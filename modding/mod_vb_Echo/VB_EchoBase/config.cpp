@@ -1,7 +1,8 @@
 // VB_EchoBase — энергия Эхо на базе (ТЗ: modding/mod_vb_Echo/ТЗ_VB_EchoBase.md, гайд: modding/mod_vb_Echo/ГАЙД.md).
 // Цепочка: источники (ветряк, солнечная панель, печь) дают ток → преобразователь с кристаллом делает Эхо →
-// буфер преобразователя и накопители → зарядная станция (предметы в отсеке) и беспроводная платформа (машина, игрок).
-// Единицы (решение 11-20): kE и kE/tick, тик = 10 с, степени двойки. Вход/выход/радиус — class VB_EchoRating у
+// буфер преобразователя и накопители → зарядная станция (вложенное в гнёздах) и беспроводная платформа (машина, игрок).
+// Единицы (решение 11-20): kE и kE/tick, тик = 10 с, до 4096 степени двойки, выше круглые; шкала ×32 и буферы —
+// ТЗ_VB_EchoBase_буферы.md. Вход/выход/радиус — class VB_EchoRating у
 // каждого класса (Mk I; улучшенные уровни пользователю пока не нужны).
 // Модели — свои (tools/eb_models.py, концепты одобрены 11-20). Неон (hiddenSelection «neon»): без энергии серый,
 // у устройств с Эхо красный, у источников цвет уровня (Mk I — жёлтый); «tier» — метка уровня. Красит скрипт по
@@ -107,7 +108,16 @@ class CfgVehicles
 		descriptionShort="$STR_VB_EB_wind_disc";
 		model="VB_EchoBase\data\eb_wind.p3d";
 		vbKit="VB_EB_Kit_WindTurbine";
-		class VB_EchoRating { tier=1; outMax=2; };	// kE/tick при максимальном ветре
+		class VB_EchoRating { tier=1; outMax=64; };	// kE/tick при максимальном ветре (шкала ×32, 11-20)
+		// буфер тока (ТЗ_VB_EchoBase_буферы.md): энергия EnergyManager — ваниль сама сохраняет и шлёт клиенту;
+		// пассивный — сам не включается и не тратит
+		class EnergyManager
+		{
+			isPassiveDevice=1;
+			energyStorageMax=1024;
+			energyAtSpawn=0;
+			convertEnergyToQuantity=0;
+		};
 		class AnimationSources
 		{
 			class rotor
@@ -125,7 +135,16 @@ class CfgVehicles
 		descriptionShort="$STR_VB_EB_solar_disc";
 		model="VB_EchoBase\data\eb_solar.p3d";
 		vbKit="VB_EB_Kit_SolarPanel";
-		class VB_EchoRating { tier=1; outMax=1; };	// kE/tick при солнце в зените
+		class VB_EchoRating { tier=1; outMax=32; };	// kE/tick при солнце в зените
+		// буфер тока (ТЗ_VB_EchoBase_буферы.md): энергия EnergyManager — ваниль сама сохраняет и шлёт клиенту;
+		// пассивный — сам не включается и не тратит
+		class EnergyManager
+		{
+			isPassiveDevice=1;
+			energyStorageMax=512;
+			energyAtSpawn=0;
+			convertEnergyToQuantity=0;
+		};
 	};
 	class VB_EB_Furnace: VB_EB_DeviceBase
 	{
@@ -135,7 +154,26 @@ class CfgVehicles
 		model="VB_EchoBase\data\eb_furnace.p3d";
 		vbKit="VB_EB_Kit_Furnace";
 		itemsCargoSize[]={10,6};						// отсек топлива
-		class VB_EchoRating { tier=1; outMax=2; };	// kE/tick: так быстро жжёт топливо (kE за штуку — в настройках)
+		// в отсек — только топливо (точные классы; kE за штуку — в настройках сервера, fuel). Клиент настроек не знает,
+		// поэтому список здесь: иначе предмет «ложился» бы у клиента и возвращался сервером. Новое топливо — сюда и в fuel
+		vbFuel[]={"WoodenStick","Firewood","VB_RiftRootPiece","VB_RiftBlood","VB_RiftFuelCapsule","VB_RiftHeartChunk"};
+		// kE, что осталось в горящей порции — количество предмета (ваниль его сохраняет: порция переживает рестарт).
+		// Не показывается (quantityShow=0); ноль — не повод исчезать (varQuantityDestroyOnMin=0 у базы)
+		varQuantityInit=0;
+		varQuantityMin=0;
+		varQuantityMax=100000;
+		quantityShow=0;
+		quantityBar=0;
+		class VB_EchoRating { tier=1; outMax=64; };	// kE/tick: так быстро жжёт топливо (kE за штуку — в настройках)
+		// буфер тока (ТЗ_VB_EchoBase_буферы.md): энергия EnergyManager — ваниль сама сохраняет и шлёт клиенту;
+		// пассивный — сам не включается и не тратит
+		class EnergyManager
+		{
+			isPassiveDevice=1;
+			energyStorageMax=1024;
+			energyAtSpawn=0;
+			convertEnergyToQuantity=0;
+		};
 	};
 	// ---------------- ядро сети
 	class VB_EB_Converter: VB_EB_DeviceBase
@@ -148,15 +186,24 @@ class CfgVehicles
 		attachments[]={"VB_EB_Crystal"};
 		varQuantityInit=0;
 		varQuantityMin=0;
-		varQuantityMax=256;
+		varQuantityMax=10000;
 		quantityBar=1;
 		stackedUnit="percentage";		// заряд в процентах, не в штуках (11-20)
-		// буфер преобразователя 256 kE — носитель ядра (kE в количестве предмета)
-		class VB_EchoRating { tier=1; inMax=8; outMax=8; range=32; };	// ток до 8 kE/tick → Эхо (ночью ×1,5); радиус 32 м
+		// буфер Эхо преобразователя 10 000 kE — носитель ядра (kE в количестве предмета), первая часть запаса сети
+		class VB_EchoRating { tier=1; inMax=256; outMax=256; range=32; };	// ток до 256 kE/tick → Эхо (ночью ×1,5); радиус 32 м
+		// буфер тока (ТЗ_VB_EchoBase_буферы.md): энергия EnergyManager — ваниль сама сохраняет и шлёт клиенту;
+		// пассивный — сам не включается и не тратит
+		class EnergyManager
+		{
+			isPassiveDevice=1;
+			energyStorageMax=2048;
+			energyAtSpawn=0;
+			convertEnergyToQuantity=0;
+		};
 		class VB_Echo
 		{
 			kind="echo";
-			capacity=256;
+			capacity=10000;
 			infinite=0;
 			transfer=1;
 			storage="quantity";
@@ -172,7 +219,7 @@ class CfgVehicles
 		vbKit="VB_EB_Kit_Storage";
 		varQuantityInit=0;
 		varQuantityMin=0;
-		varQuantityMax=2048;
+		varQuantityMax=100000;
 		quantityBar=1;
 		stackedUnit="percentage";		// заряд в процентах, не в штуках (11-20)
 		// уровень заряда (решение пользователя 11-20): секции колб lvl0..11 и лампы шкалы lamp0..7 — заполненное
@@ -193,11 +240,11 @@ class CfgVehicles
 				icon="set:vb_echo_icons image:cell_drain";
 			};
 		};
-		class VB_EchoRating { tier=1; io=16; };		// 2048 kE, вход и выход до 16 kE/tick
+		class VB_EchoRating { tier=1; io=2048; };		// 100 000 kE, вход и выход до 2048 kE/tick (шкала ×32, 11-20)
 		class VB_Echo
 		{
 			kind="echo";
-			capacity=2048;
+			capacity=100000;
 			infinite=0;
 			transfer=1;
 			storage="quantity";
@@ -231,7 +278,23 @@ class CfgVehicles
 				icon="set:vb_echo_icons image:cell_drain";
 			};
 		};
-		class VB_EchoRating { tier=1; inMax=8; outMax=8; };	// kE/tick на всю станцию: зарядка без потерь / разрядка в сеть
+		// из сети в свой буфер до inMax; каждому гнезду: бак и аккумулятор chargeItem, ячейка chargeCell, разрядка ячейки
+		// в сеть drainCell (kE/tick, ТЗ_VB_EchoBase_буферы.md 3.3: ячейки быстрее, разрядка ещё быстрее)
+		class VB_EchoRating { tier=1; inMax=2048; chargeItem=256; chargeCell=1024; drainCell=2048; };
+		// буфер Эхо (ТЗ_VB_EchoBase_буферы.md): количество предмета, из него станция заряжает вложенное
+		varQuantityInit=0;
+		varQuantityMin=0;
+		varQuantityMax=4096;
+		quantityBar=1;
+		stackedUnit="percentage";
+		class VB_Echo
+		{
+			kind="echo";
+			capacity=4096;
+			infinite=0;
+			transfer=0;
+			storage="quantity";
+		};
 	};
 	class VB_EB_ChargePad: VB_EB_DeviceBase
 	{
@@ -242,7 +305,21 @@ class CfgVehicles
 		vbKit="VB_EB_Kit_ChargePad";
 		slopeTolerance=0.15;							// только на ровное (решение 11-20)
 		yawPitchRollLimit[]={10,10,10};
-		class VB_EchoRating { tier=1; inMax=8; outMax=4; };	// берёт 8, отдаёт 4 kE/tick (потери 50 %, решение 11-20)
+		class VB_EchoRating { tier=1; inMax=256; outMax=128; };	// из сети 256, машине 128 kE/tick (потери 50 %, решение 11-20)
+		// буфер Эхо (ТЗ_VB_EchoBase_буферы.md): количество предмета, из него платформа заряжает машины и игроков
+		varQuantityInit=0;
+		varQuantityMin=0;
+		varQuantityMax=2048;
+		quantityBar=1;
+		stackedUnit="percentage";
+		class VB_Echo
+		{
+			kind="echo";
+			capacity=2048;
+			infinite=0;
+			transfer=0;
+			storage="quantity";
+		};
 	};
 	// ---------------- сеть
 	class VB_EB_Relay: VB_EB_DeviceBase
@@ -264,9 +341,9 @@ class CfgVehicles
 		weight=300;
 		itemSize[]={1,2};
 		inventorySlot[]={"VB_EB_Crystal"};
-		varQuantityInit=2048;			// ресурс 2048 kE (4 бака)
+		varQuantityInit=100000;			// ресурс 100 000 kE Эхо (5 баков; шкала ×32, 11-20)
 		varQuantityMin=0;
-		varQuantityMax=2048;
+		varQuantityMax=100000;
 		varQuantityDestroyOnMin=1;		// износился — рассыпался
 		quantityBar=1;
 		stackedUnit="percentage";		// заряд в процентах, не в штуках (11-20)

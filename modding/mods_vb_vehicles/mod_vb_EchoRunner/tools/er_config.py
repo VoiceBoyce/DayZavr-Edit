@@ -217,19 +217,19 @@ ITEMS = '''
 		inventorySlot[]={"VB_ER_Tank_1","VB_ER_Tank_2","VB_Echo_ChargeTank1","VB_Echo_ChargeTank2"};
 		hiddenSelectionsTextures[]={"%(P)ser_neon_empty_co.paa"};		// новый бак пустой — серый; заряженный красит скрипт (11-20)
 		hiddenSelectionsMaterials[]={"%(P)ser_neon_empty.rvmat"};
-		// энергия Эхо 0–512 kE = количество предмета (полоса в инвентаре, сохраняется ванилью); расход — скрипт машины
+		// энергия Эхо 0–20 000 kE (шкала ×32, 11-20) = количество предмета (полоса в инвентаре, сохраняется ванилью); расход — скрипт машины
 		// (полёт 2 kE/tick, висение 1 kE/tick, тик = 10 с; решение пользователя 11-20 — единица kE, степени двойки).
 		// Носитель энергии ядра VB_EchoCore (блок VB_Echo, ТЗ modding/mod_vb_Echo/ТЗ_VB_Echo.md)
 		stackedUnit="percentage";
 		quantityBar=1;
 		varQuantityInit=0;
 		varQuantityMin=0;
-		varQuantityMax=512;
+		varQuantityMax=20000;
 		varQuantityDestroyOnMin=0;
 		class VB_Echo
 		{
 			kind="echo";
-			capacity=512;
+			capacity=20000;
 			infinite=0;
 			transfer=1;
 			storage="quantity";
@@ -245,11 +245,11 @@ ITEMS = '''
 		inventorySlot[]={"VB_ER_Tank_1","VB_ER_Tank_2"};		// синтез не заряжают: гнёзд станции нет
 		hiddenSelectionsTextures[]={"%(P)ser_neon_fusion_co.paa"};
 		hiddenSelectionsMaterials[]={"%(P)ser_neon_idle.rvmat"};
-		varQuantityInit=512;
+		varQuantityInit=20000;
 		class VB_Echo
 		{
 			kind="fusion";
-			capacity=512;
+			capacity=20000;
 			infinite=1;
 			transfer=0;
 			storage="quantity";
@@ -544,8 +544,8 @@ S = {
     "STR_VB_ER_hood_name": ("Echo Runner Hood", "Капот Echo Runner"),
     "STR_VB_ER_hood_disc": ("Hood of the Echo Runner. Protects the engine.", "Капот Echo Runner. Защищает двигатель."),
     "STR_VB_ER_tank_name": ("Echo Tank", "Бак Эхо"),
-    "STR_VB_ER_tank_disc": ("Tank of Echo condensate (red energy). Mounts in the Echo Runner's trunk; holds 512 kE: about 43 minutes of forward flight, twice as long hovering. Cannot be mixed with a cold fusion tank.",
-                            "Бак эхо-конденсата (красная энергия). Ставится в багажник Echo Runner; вмещает 512 kE: около 43 минут полёта вперёд, висеть — вдвое дольше. С баком холодного синтеза не смешивается."),
+    "STR_VB_ER_tank_disc": ("Tank of Echo condensate (red energy). Mounts in the Echo Runner's trunk; holds 20 000 kE: about 52 minutes of forward flight, twice as long hovering. Cannot be mixed with a cold fusion tank.",
+                            "Бак эхо-конденсата (красная энергия). Ставится в багажник Echo Runner; вмещает 20 000 kE: около 52 минут полёта вперёд, висеть — вдвое дольше. С баком холодного синтеза не смешивается."),
     "STR_VB_ER_tank_fusion_name": ("Cold Fusion Tank", "Бак холодного синтеза"),
     "STR_VB_ER_tank_fusion_disc": ("A sealed cold fusion chamber: the reaction never stops and the charge never runs out. Works only in a pair: with two tanks in the Echo Runner's trunk the car flies without using energy, a single tank does not power it. Cannot be mixed with Echo tanks.",
                                    "Запаянная камера холодного синтеза: реакция не гаснет, заряд не кончается. Работает только в паре: с двумя баками в багажнике Echo Runner машина летает без расхода, один бак её не питает. С баками Эхо не смешивается."),
