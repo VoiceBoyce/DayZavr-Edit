@@ -214,6 +214,8 @@ ITEMS = '''
 		weight=35000;
 		itemSize[]={6,5};
 		inventorySlot[]={"VB_ER_Tank_1","VB_ER_Tank_2"};
+		hiddenSelectionsTextures[]={"%(P)ser_neon_empty_co.paa"};		// новый бак пустой — серый; заряженный красит скрипт (11-20)
+		hiddenSelectionsMaterials[]={"%(P)ser_neon_empty.rvmat"};
 		// энергия Эхо 0–100 Э = количество предмета (полоса в инвентаре, сохраняется ванилью); расход — скрипт машины.
 		// Носитель энергии ядра VB_EchoCore (блок VB_Echo, ТЗ modding/mod_vb_Echo/ТЗ_VB_Echo.md)
 		stackedUnit="percentage";
@@ -271,8 +273,8 @@ ITEMS = '''
 		tyreRoughness=1.0;
 		tyreTread=0.5;
 		hiddenSelections[]={"neon"};
-		hiddenSelectionsTextures[]={"%(P)ser_neon_co.paa"};
-		hiddenSelectionsMaterials[]={"%(P)ser_neon_idle.rvmat"};		// снятая деталь еле тлеет (превью, 11-18)
+		hiddenSelectionsTextures[]={"%(P)ser_neon_empty_co.paa"};		// без энергии — пустой серый (11-20)
+		hiddenSelectionsMaterials[]={"%(P)ser_neon_empty.rvmat"};
 		class AnimationSources
 		{
 			class rotor
@@ -328,6 +330,8 @@ ITEMS = '''
 		descriptionShort="$STR_VB_ER_pipes_disc";
 		model="VB_EchoRunner\\proxy\\vb_er_pipes_l.p3d";
 		inventorySlot[]={"VB_ER_Pipes_L"};
+		hiddenSelectionsTextures[]={"%(P)ser_neon_empty_co.paa"};		// без энергии — пустой серый (11-20)
+		hiddenSelectionsMaterials[]={"%(P)ser_neon_empty.rvmat"};
 	};
 	class VB_EchoRunner_Pipes_R: VB_EchoRunner_RiftPart
 	{
@@ -336,6 +340,8 @@ ITEMS = '''
 		descriptionShort="$STR_VB_ER_pipes_disc";
 		model="VB_EchoRunner\\proxy\\vb_er_pipes_r.p3d";
 		inventorySlot[]={"VB_ER_Pipes_R"};
+		hiddenSelectionsTextures[]={"%(P)ser_neon_empty_co.paa"};		// без энергии — пустой серый (11-20)
+		hiddenSelectionsMaterials[]={"%(P)ser_neon_empty.rvmat"};
 	};
 	class VB_EchoRunner_Pipes_Engine: VB_EchoRunner_RiftPart
 	{
@@ -344,6 +350,8 @@ ITEMS = '''
 		descriptionShort="$STR_VB_ER_pipes_disc";
 		model="VB_EchoRunner\\proxy\\vb_er_pipes_engine.p3d";
 		inventorySlot[]={"VB_ER_Pipes_Engine"};
+		hiddenSelectionsTextures[]={"%(P)ser_neon_empty_co.paa"};		// без энергии — пустой серый (11-20)
+		hiddenSelectionsMaterials[]={"%(P)ser_neon_empty.rvmat"};
 	};
 ''' % {"P": P}
 
@@ -532,11 +540,11 @@ S = {
     "STR_VB_ER_hood_name": ("Echo Runner Hood", "Капот Echo Runner"),
     "STR_VB_ER_hood_disc": ("Hood of the Echo Runner. Protects the engine.", "Капот Echo Runner. Защищает двигатель."),
     "STR_VB_ER_tank_name": ("Echo Tank", "Бак Эхо"),
-    "STR_VB_ER_tank_disc": ("Tank of Echo condensate (red energy). Mounts in the Echo Runner's trunk; two full tanks give about 20 minutes of flight.",
-                            "Бак эхо-конденсата (красная энергия). Ставится в багажник Echo Runner; два полных бака — около 20 минут полёта."),
+    "STR_VB_ER_tank_disc": ("Tank of Echo condensate (red energy). Mounts in the Echo Runner's trunk; two full tanks give about 20 minutes of flight, one works too. Cannot be mixed with a cold fusion tank.",
+                            "Бак эхо-конденсата (красная энергия). Ставится в багажник Echo Runner; два полных бака — около 20 минут полёта, работает и один. С баком холодного синтеза не смешивается."),
     "STR_VB_ER_tank_fusion_name": ("Cold Fusion Tank", "Бак холодного синтеза"),
-    "STR_VB_ER_tank_fusion_disc": ("A sealed cold fusion chamber: the reaction never stops and the charge never runs out. Mounts in the Echo Runner's trunk; with it the car flies without using energy.",
-                                   "Запаянная камера холодного синтеза: реакция не гаснет, заряд не кончается. Ставится в багажник Echo Runner; с ним машина летает без расхода."),
+    "STR_VB_ER_tank_fusion_disc": ("A sealed cold fusion chamber: the reaction never stops and the charge never runs out. Works only in a pair: with two tanks in the Echo Runner's trunk the car flies without using energy, a single tank does not power it. Cannot be mixed with Echo tanks.",
+                                   "Запаянная камера холодного синтеза: реакция не гаснет, заряд не кончается. Работает только в паре: с двумя баками в багажнике Echo Runner машина летает без расхода, один бак её не питает. С баками Эхо не смешивается."),
     "STR_VB_ER_pipes_l_name": ("Rift Line (left)", "Трубопровод Изнанки (левый)"),
     "STR_VB_ER_pipes_r_name": ("Rift Line (right)", "Трубопровод Изнанки (правый)"),
     "STR_VB_ER_pipes_e_name": ("Rift Line (engine)", "Трубопровод Изнанки (мотор)"),

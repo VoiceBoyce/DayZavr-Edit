@@ -10,6 +10,16 @@ class VB_EchoRunner extends CarScript
 	// цвет энергии полёта: Эхо — красный, холодный синтез — бирюзовый (трубопроводы и модули перекрашиваются по баку)
 	static const string VB_NEON_TEX = "vb_echorunner\\data\\parts\\er_neon_co.paa";
 	static const string VB_NEON_TEX_FUSION = "vb_echorunner\\data\\parts\\er_neon_fusion_co.paa";
+	// горящий неон (er_neon.rvmat, свечение 22) — чистый цвет без примеси: днём примесь зелёного в er_neon_co
+	// пережигала красный в оранжевый (скриншоты пользователя 11-20); делает tools/er_neon_variants.py
+	static const string VB_NEON_TEX_HOT = "vb_echorunner\\data\\parts\\er_neon_hot_co.paa";
+	static const string VB_NEON_TEX_FUSION_HOT = "vb_echorunner\\data\\parts\\er_neon_fusion_hot_co.paa";
+	// энергии нет совсем — светящиеся части пустые, серые, как металл трубок (просьба пользователя 11-20)
+	static const string VB_NEON_TEX_EMPTY = "vb_echorunner\\data\\parts\\er_neon_empty_co.paa";
+	static const string VB_NEON_EMPTY = "vb_echorunner\\data\\parts\\er_neon_empty.rvmat";
+	static const int VB_GLOW_OFF = 0;	// цвет энергии без свечения
+	static const int VB_GLOW_IDLE = 1;	// еле тлеет (энергия есть, мотор заглушён)
+	static const int VB_GLOW_ON = 2;	// горит
 	static const string VB_SCREEN_ON = "vb_echorunner\\data\\parts\\er_screen.rvmat";
 	static const string VB_SCREEN_OFF = "vb_echorunner\\data\\parts\\er_screen_off.rvmat";
 
@@ -30,7 +40,8 @@ class VB_EchoRunner extends CarScript
 	bool m_VB_FlyReady;				// сервер: 4 модуля + 3 трубопровода + энергия в баках (синхр.)
 	bool m_VB_ParkReady;			// сервер: стоянка на подушке — 4 модуля + трубопроводы + аккумулятор Эхо/синтеза
 									// с зарядом (синхр.; решение 11-20: держит заглушенную машину только такой аккумулятор)
-	bool m_VB_Fusion;				// стоит бак холодного синтеза: полёт без расхода, эффекты бирюзовые (по навескам, везде)
+	bool m_VB_Fusion;				// стоит бак холодного синтеза: полёт без расхода (по навескам, везде)
+	int m_VB_EnergyKind = -1;		// клиент: какая энергия есть на машине — VB_EchoKind (цвет неона, света, частиц)
 	bool m_VB_Flying;				// сервер: в воздухе (синхр., для эффектов)
 	float m_VB_Energy;				// энергия баков 0..1 (синхр.)
 	float m_VB_SyncFwd;				// нажатия водителя для остальных игроков (синхр., шаг 0.5)
@@ -177,12 +188,19 @@ class VB_EchoRunner extends CarScript
 	}
 
 	// ------------------------------------------------ неон Изнанки и экран (клиент)
-	// Кузов, двери, экран — при работающем моторе. Баки — мотор + энергия в этом баке (бак синтеза светится всегда).
-	// Трубопроводы — мотор + энергия хоть в одном баке. Антиграв-модули — мотор + машина готова к полёту (m_VB_FlyReady).
-	// Трубопроводы и модули — цвета энергии полёта: на баке синтеза бирюзовые (кузов остаётся красным).
+	// Кузов, двери, экран — горят при работающем моторе (кузов всегда красный).
+	// Модули, трубопроводы, баки (просьба пользователя 11-20): энергии нет совсем — пустые серые, как металл; энергия есть —
+	// цвет энергии (Эхо — красный, синтез — бирюзовый): мотор заглушён — еле тлеют, мотор заведён — горят.
+	// Модули горят, когда машина готова к полёту (m_VB_FlyReady); баки — каждый по своему заряду
+	// (пара синтеза горит всегда, одиночный бак синтеза только тлеет — без пары не работает).
+	// Модули красит любая энергия машины (и аккумулятор — на нём они держат подушку), трубопроводы — только энергия
+	// баков: без баков трубки серые, сразу видно, что машина висит, но не полетит (решение пользователя 11-20).
 	void VB_UpdateNeon()
 	{
 		bool engine = EngineIsOn();
+		int kind = VB_EnergyKind();
+		int pipeKind = VB_TankKind();
+		m_VB_EnergyKind = kind;
 		int key = 0;
 		if (engine)
 			key += 1;
@@ -192,17 +210,17 @@ class VB_EchoRunner extends CarScript
 			key += 4;
 		if (VB_TankHasEnergy("VB_ER_Tank_2"))
 			key += 8;
-		if (m_VB_Fusion)
-			key += 16;
+		key += 16 * (kind + 1);
 		if (key == m_VB_NeonKey && !m_VB_NeonDirty)
 			return;
 		m_VB_NeonKey = key;
 		m_VB_NeonDirty = false;
-		bool energy = (key & 12) != 0;
-		string flightTex = VB_NEON_TEX;
-		if (m_VB_Fusion)
-			flightTex = VB_NEON_TEX_FUSION;
+		bool tanksCharged = (key & 12) != 0;
 
+		if (engine)
+			VB_SetSelTexture(this, "neon", VB_NEON_TEX_HOT);
+		else
+			VB_SetSelTexture(this, "neon", VB_NEON_TEX);
 		VB_SetSelMaterial(this, "neon", VB_NeonMat(engine));
 		if (engine)
 			VB_SetSelMaterial(this, "screen", VB_SCREEN_ON);
@@ -213,23 +231,107 @@ class VB_EchoRunner extends CarScript
 			EntityAI att = GetInventory().GetAttachmentFromIndex(i);
 			if (!att)
 				continue;
-			bool on = engine;
 			if (att.IsInherited(VB_EchoRunner_GravModule))
 			{
-				on = engine && m_VB_FlyReady;
-				VB_SetSelTexture(att, "neon", flightTex);
+				int modGlow = VB_GLOW_IDLE;
+				if (engine && m_VB_FlyReady)
+					modGlow = VB_GLOW_ON;
+				VB_PaintNeon(att, kind, modGlow);
 			}
 			else if (att.IsKindOf("VB_EchoRunner_Tank"))
 			{
-				on = VB_Echo.IsInfinite(att) || (engine && VB_Echo.HasCharge(att));
+				int tankKind = VB_EchoKind.NONE;
+				if (VB_Echo.HasCharge(att))
+					tankKind = VB_Echo.Kind(att);
+				// горит, только когда питает машину: Эхо — при заведённом моторе, пара синтеза — всегда;
+				// одиночный бак синтеза только тлеет — без пары он не работает
+				int tankGlow = VB_GLOW_IDLE;
+				if (VB_TankPowers(att) && (engine || VB_Echo.IsInfinite(att)))
+					tankGlow = VB_GLOW_ON;
+				VB_PaintNeon(att, tankKind, tankGlow);
 			}
 			else if (att.IsInherited(VB_EchoRunner_RiftPart))
 			{
-				on = engine && energy;
-				VB_SetSelTexture(att, "neon", flightTex);
+				int pipeGlow = VB_GLOW_IDLE;
+				if (engine && tanksCharged)
+					pipeGlow = VB_GLOW_ON;
+				VB_PaintNeon(att, pipeKind, pipeGlow);
 			}
-			VB_SetSelMaterial(att, "neon", VB_NeonMat(on));
 		}
+	}
+
+	// энергия баков (цвет трубопроводов): пара синтеза > бак Эхо с зарядом; иначе VB_EchoKind.NONE
+	int VB_TankKind()
+	{
+		if (VB_FusionPair())
+			return VB_EchoKind.FUSION;
+		if (VB_TankHasEnergy("VB_ER_Tank_1") || VB_TankHasEnergy("VB_ER_Tank_2"))
+			return VB_EchoKind.ECHO;
+		return VB_EchoKind.NONE;
+	}
+
+	// какая энергия есть на машине (цвет модулей, света, частиц): энергия баков > аккумулятор Эхо/синтеза с зарядом;
+	// ничего нет — VB_EchoKind.NONE (детали серые). Годится на клиенте (заряд — по синхронизированному количеству).
+	int VB_EnergyKind()
+	{
+		int tk = VB_TankKind();
+		if (tk != VB_EchoKind.NONE)
+			return tk;
+		EntityAI b = GetInventory().FindAttachment(CarBattery.SLOT_ID);
+		if (b && VB_Echo.IsCarrier(b) && VB_Echo.HasCharge(b))
+			return VB_Echo.Kind(b);
+		return VB_EchoKind.NONE;
+	}
+
+	// неон детали полёта: нет энергии — серый пустой; есть — цвет энергии с нужным свечением
+	static void VB_PaintNeon(EntityAI part, int kind, int glow)
+	{
+		int idx = part.GetHiddenSelectionIndex("neon");
+		if (idx < 0)
+			return;
+		if (kind == VB_EchoKind.NONE)
+		{
+			part.SetObjectTexture(idx, VB_NEON_TEX_EMPTY);
+			part.SetObjectMaterial(idx, VB_NEON_EMPTY);
+			return;
+		}
+		bool hot = (glow == VB_GLOW_ON);
+		if (kind == VB_EchoKind.FUSION)
+		{
+			if (hot)
+				part.SetObjectTexture(idx, VB_NEON_TEX_FUSION_HOT);
+			else
+				part.SetObjectTexture(idx, VB_NEON_TEX_FUSION);
+		}
+		else
+		{
+			if (hot)
+				part.SetObjectTexture(idx, VB_NEON_TEX_HOT);
+			else
+				part.SetObjectTexture(idx, VB_NEON_TEX);
+		}
+		if (glow == VB_GLOW_ON)
+			part.SetObjectMaterial(idx, VB_NEON_ON);
+		else if (glow == VB_GLOW_IDLE)
+			part.SetObjectMaterial(idx, VB_NEON_IDLE);
+		else
+			part.SetObjectMaterial(idx, VB_NEON_OFF);
+	}
+
+	// деталь не на машине: бак — цвет своей энергии (пустой — серый), модуль и трубопровод — пустые серые
+	static void VB_PaintDetached(EntityAI item)
+	{
+		if (!item)
+			return;
+		int kind = VB_EchoKind.NONE;
+		if (item.IsKindOf("VB_EchoRunner_Tank") && VB_Echo.HasCharge(item))
+			kind = VB_Echo.Kind(item);
+		VB_PaintNeon(item, kind, VB_GLOW_IDLE);
+#ifdef DIAG_DEVELOPER
+		ItemBase dbgItem = ItemBase.Cast(item);
+		if (dbgItem)
+			Print("[VB_ER] снятая деталь " + item.GetType() + " кол-во " + dbgItem.GetQuantity() + "/" + dbgItem.GetQuantityMax() + " вид " + kind + " неон " + item.GetHiddenSelectionIndex("neon"));
+#endif
 	}
 
 	static void VB_SetSelTexture(EntityAI ent, string selection, string texture)
@@ -246,9 +348,10 @@ class VB_EchoRunner extends CarScript
 		return VB_NEON_OFF;
 	}
 
+	// бак в слоте питает машину (одиночный бак синтеза — нет, см. VB_TankPowers)
 	protected bool VB_TankHasEnergy(string slot)
 	{
-		return VB_Echo.HasCharge(FindAttachmentBySlotName(slot));
+		return VB_TankPowers(FindAttachmentBySlotName(slot));
 	}
 
 	static void VB_SetSelMaterial(EntityAI ent, string selection, string material)
@@ -272,7 +375,13 @@ class VB_EchoRunner extends CarScript
 		VB_UpdateModulesFitted();
 		if (item && !GetGame().IsDedicatedServer())
 		{
-			VB_SetSelMaterial(item, "neon", VB_NEON_IDLE);      // снятая деталь не горит, только тлеет
+			VB_PaintDetached(item);		// снятая деталь: бак — тлеет цветом своей энергии, модуль/трубопровод — серые
+			VB_EchoRunner_GravModule detachedMod = VB_EchoRunner_GravModule.Cast(item);
+			if (detachedMod)
+				detachedMod.VB_PaintSoon();
+			VB_EchoRunner_RiftPart detachedPart = VB_EchoRunner_RiftPart.Cast(item);
+			if (detachedPart)
+				detachedPart.VB_PaintSoon();
 			if (item.IsInherited(VB_EchoRunner_GravModule))
 				VB_EchoRunnerFx.ResetModule(item);
 		}
@@ -327,7 +436,7 @@ class VB_EchoRunner extends CarScript
 				any = true;
 		}
 		m_VB_ModulesFitted = any;
-		m_VB_Fusion = VB_HasFusionTank();
+		m_VB_Fusion = VB_FusionPair();
 	}
 
 	int VB_ModulesWorking()
@@ -350,33 +459,69 @@ class VB_EchoRunner extends CarScript
 		return l && r && e && !l.IsRuined() && !r.IsRuined() && !e.IsRuined();
 	}
 
-	// энергия баков, Э (носители ядра VB_EchoCore; бак синтеза — всегда полный)
+	// энергия баков, Э (носители ядра VB_EchoCore): считаются только баки, которые питают машину (VB_TankPowers)
 	float VB_TankEnergy()
 	{
-		return VB_Echo.Get(FindAttachmentBySlotName("VB_ER_Tank_1")) + VB_Echo.Get(FindAttachmentBySlotName("VB_ER_Tank_2"));
+		float e = 0;
+		EntityAI t1 = FindAttachmentBySlotName("VB_ER_Tank_1");
+		EntityAI t2 = FindAttachmentBySlotName("VB_ER_Tank_2");
+		if (VB_TankPowers(t1))
+			e += VB_Echo.Get(t1);
+		if (VB_TankPowers(t2))
+			e += VB_Echo.Get(t2);
+		return e;
 	}
 
-	// стоит целый бак холодного синтеза
-	bool VB_HasFusionTank()
+	// стоит пара целых баков холодного синтеза. Синтез работает только парой: один бак машину не питает
+	// (решение пользователя 11-20 — в донате баки идут парой, одна пара = одна машина)
+	bool VB_FusionPair()
 	{
 		EntityAI t1 = FindAttachmentBySlotName("VB_ER_Tank_1");
 		EntityAI t2 = FindAttachmentBySlotName("VB_ER_Tank_2");
-		return (t1 && !t1.IsRuined() && VB_Echo.IsInfinite(t1)) || (t2 && !t2.IsRuined() && VB_Echo.IsInfinite(t2));
+		return t1 && t2 && !t1.IsRuined() && !t2.IsRuined() && VB_Echo.IsInfinite(t1) && VB_Echo.IsInfinite(t2);
 	}
 
-	// сервер: списать энергию поровну с непустых баков. С баком синтеза расход не списывается (решение 11-20).
+	// бак питает машину: Эхо — пока есть заряд (и один бак летает, с половиной запаса); синтез — только в паре
+	bool VB_TankPowers(EntityAI tank)
+	{
+		if (!tank || !VB_Echo.HasCharge(tank))
+			return false;
+		if (VB_Echo.IsInfinite(tank))
+			return VB_FusionPair();
+		return true;
+	}
+
+	// баки Эхо и синтеза не смешивать (решение пользователя 11-20): во второй слот встаёт только бак того же вида.
+	// Загрузку из сохранения (CanLoadAsAttachment) не трогаем — старая машина со смесью загрузится как есть.
+	override bool CanReceiveAttachment(EntityAI attachment, int slotId)
+	{
+		if (!super.CanReceiveAttachment(attachment, slotId))
+			return false;
+		if (attachment && attachment.IsKindOf("VB_EchoRunner_Tank"))
+		{
+			string otherSlot = "VB_ER_Tank_1";
+			if (slotId == InventorySlots.GetSlotIdFromString("VB_ER_Tank_1"))
+				otherSlot = "VB_ER_Tank_2";
+			EntityAI other = FindAttachmentBySlotName(otherSlot);
+			if (other && other != attachment && VB_Echo.Kind(other) != VB_Echo.Kind(attachment))
+				return false;
+		}
+		return true;
+	}
+
+	// сервер: списать энергию поровну с баков, которые питают машину. С парой синтеза расход не списывается.
 	void VB_DrainEnergy(float amount)
 	{
-		if (VB_HasFusionTank())
+		if (VB_FusionPair())
 			return;
 		for (int pass = 0; pass < 2 && amount > 0.00001; pass++)
 		{
 			array<EntityAI> tanks = new array<EntityAI>;
 			EntityAI t1 = FindAttachmentBySlotName("VB_ER_Tank_1");
 			EntityAI t2 = FindAttachmentBySlotName("VB_ER_Tank_2");
-			if (VB_Echo.Get(t1) > 0)
+			if (VB_TankPowers(t1) && VB_Echo.Get(t1) > 0)
 				tanks.Insert(t1);
-			if (VB_Echo.Get(t2) > 0)
+			if (VB_TankPowers(t2) && VB_Echo.Get(t2) > 0)
 				tanks.Insert(t2);
 			if (tanks.Count() == 0)
 				return;
@@ -682,8 +827,9 @@ class VB_EchoRunner extends CarScript
 
 		if (EngineIsOn() || GetCarDoorsState("VB_ER_Hood") == CarDoorState.DOORS_CLOSED)
 		{
+			// аккумулятор — по наследнику CarBattery: аккумуляторы Эхо/синтеза (VB_EchoBattery) тоже не вынуть
 			string attType = attachment.GetType();
-			if (attType == "CarRadiator" || attType == "CarBattery" || attType == "SparkPlug")
+			if (attType == "CarRadiator" || attType == "SparkPlug" || attachment.IsKindOf("CarBattery"))
 				return false;
 		}
 		return true;

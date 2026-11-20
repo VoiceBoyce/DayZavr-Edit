@@ -1,6 +1,7 @@
 // VB_EchoVehicleParts — общие комплектующие машин семейства VB_Echo (в моде @VB_EchoVehicles).
 // Подходят к любой машине, и к ванильной (слоты ванили). ТЗ: modding/mod_vb_Echo/ТЗ_VB_Echo.md, раздел 3.2.
-// Аккумуляторы: Эхо (красный, заряжается от мотора) и холодного синтеза (бирюзовый, всегда полный, донат).
+// Аккумуляторы: Эхо (красный, служит вчетверо дольше ванильного, заряжается от мотора) и холодного синтеза
+// (бирюзовый, бесконечный, донат). Встают в любую машину: слоты CarBattery, TruckBattery, LargeBattery.
 // Только благодаря такому аккумулятору антиграв-модули держат заглушенную машину на подушке (решение пользователя 11-20).
 
 class CfgPatches
@@ -50,6 +51,27 @@ class CfgVehicles
 		model="VB_EchoVehicleParts\data\vb_echo_battery.p3d";
 		attachments[]={};
 		weight=12000;
+		// в любую машину: легковой, грузовой и большой слоты ванили (решение пользователя 11-20)
+		inventorySlot[]={"CarBattery","TruckBattery","LargeBattery"};
+		attachSoundSet[]={"carbattery_attach_SoundSet","carbattery_attach_SoundSet","carbattery_attach_SoundSet"};
+		attachSoundSlot[]={"CarBattery","TruckBattery","LargeBattery"};
+		detachSoundSet[]={"carbattery_detach_SoundSet","carbattery_detach_SoundSet","carbattery_detach_SoundSet"};
+		detachSoundSlot[]={"CarBattery","TruckBattery","LargeBattery"};
+		// Эхо «просто служит долго»: заряд 2000 вместо 500 у ванильного (вчетверо дольше; подушка ~8 ч)
+		class EnergyManager
+		{
+			hasIcon=1;
+			switchOnAtSpawn=1;
+			isPassiveDevice=1;
+			convertEnergyToQuantity=1;
+			energyStorageMax=2000;
+			energyAtSpawn=2000;
+			reduceMaxEnergyByDamageCoef=0.5;
+			powerSocketsCount=1;
+			plugType=4;
+			compatiblePlugTypes[]={5,8,6};
+			attachmentAction=2;
+		};
 		hiddenSelections[]={"neon"};
 		hiddenSelectionsTextures[]={"vb_echovehicleparts\data\er_neon_co.paa"};
 		hiddenSelectionsMaterials[]={"vb_echovehicleparts\data\er_neon_soft.rvmat"};

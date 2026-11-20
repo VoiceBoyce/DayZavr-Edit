@@ -133,6 +133,9 @@ def m_neon(n):
     # снятая с машины деталь (на земле, в инвентаре, превью): еле тлеет — с er_neon_off превью было почти чёрным (11-18)
     T.write_rvmat(os.path.join(OUT, "er_neon_idle.rvmat"), VP + "er_neon_nohq.paa", VP + "er_neon_smdi.paa",
                   specular=0.9, power=120, emissive=(1, 1, 1, 2))
+    # энергии нет совсем — пустая серая трубка без свечения (текстура — серый цвет из скрипта/конфига, 11-20)
+    T.write_rvmat(os.path.join(OUT, "er_neon_empty.rvmat"), VP + "er_neon_nohq.paa", VP + "er_neon_smdi.paa",
+                  specular=0.6, power=60)
 
 
 def m_glass(n):

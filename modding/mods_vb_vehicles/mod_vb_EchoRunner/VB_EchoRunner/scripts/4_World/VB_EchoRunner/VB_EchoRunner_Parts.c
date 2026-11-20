@@ -39,8 +39,31 @@ class VB_EchoRunner_GravModule extends CarWheel
 	override void EEInit()
 	{
 		super.EEInit();
-		if (!GetGame().IsDedicatedServer() && !VB_EchoRunner.Cast(GetHierarchyParent()))
-			VB_EchoRunner.VB_SetSelMaterial(this, "neon", VB_EchoRunner.VB_NEON_IDLE);
+		// не на машине — пустой, серый (энергии нет); на машине неон красит VB_EchoRunner
+		if (!GetGame().IsDedicatedServer())
+		{
+			VB_PaintSelf();
+			VB_PaintSoon();
+		}
+	}
+
+	override void EEDelete(EntityAI parent)
+	{
+		super.EEDelete(parent);
+		if (!GetGame().IsDedicatedServer())
+			GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(VB_PaintSelf);
+	}
+
+	// ещё раз чуть позже: сразу после появления движок может наложить текстуры из конфига поверх нашей покраски
+	void VB_PaintSoon()
+	{
+		GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(VB_PaintSelf, 300, false);
+	}
+
+	void VB_PaintSelf()
+	{
+		if (!VB_EchoRunner.Cast(GetHierarchyParent()))
+			VB_EchoRunner.VB_PaintDetached(this);
 	}
 
 	override int GetMeleeTargetType()
@@ -54,8 +77,37 @@ class VB_EchoRunner_RiftPart extends Inventory_Base
 	override void EEInit()
 	{
 		super.EEInit();
-		// не на машине — только тлеет (на машине материал выставляет VB_EchoRunner)
-		if (!GetGame().IsDedicatedServer() && !VB_EchoRunner.Cast(GetHierarchyParent()))
-			VB_EchoRunner.VB_SetSelMaterial(this, "neon", VB_EchoRunner.VB_NEON_IDLE);
+		// не на машине: бак — тлеет цветом своей энергии (пустой — серый), трубопровод — серый; на машине красит VB_EchoRunner
+		if (!GetGame().IsDedicatedServer())
+		{
+			VB_PaintSelf();
+			VB_PaintSoon();
+		}
+	}
+
+	override void EEDelete(EntityAI parent)
+	{
+		super.EEDelete(parent);
+		if (!GetGame().IsDedicatedServer())
+			GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(VB_PaintSelf);
+	}
+
+	// бак не на машине: заряд меняется (зарядка, админ) — перекрасить
+	override void OnVariablesSynchronized()
+	{
+		super.OnVariablesSynchronized();
+		VB_PaintSelf();
+	}
+
+	// ещё раз чуть позже: сразу после появления движок может наложить текстуры из конфига поверх нашей покраски
+	void VB_PaintSoon()
+	{
+		GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(VB_PaintSelf, 300, false);
+	}
+
+	void VB_PaintSelf()
+	{
+		if (!VB_EchoRunner.Cast(GetHierarchyParent()))
+			VB_EchoRunner.VB_PaintDetached(this);
 	}
 }

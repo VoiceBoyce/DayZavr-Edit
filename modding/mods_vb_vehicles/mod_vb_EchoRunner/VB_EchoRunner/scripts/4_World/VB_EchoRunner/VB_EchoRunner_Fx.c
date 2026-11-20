@@ -267,7 +267,7 @@ class VB_EchoRunnerFx : Managed
 		}
 		// цвет энергии полёта: Эхо — красный, холодный синтез — бирюзовый
 		int kind = VB_EchoKind.ECHO;
-		if (m_Car.m_VB_Fusion)
+		if (m_Car.m_VB_EnergyKind == VB_EchoKind.FUSION)
 			kind = VB_EchoKind.FUSION;
 		if (m_LightKind[i] != kind)
 		{
@@ -308,7 +308,7 @@ class VB_EchoRunnerFx : Managed
 			return;
 		}
 		ParticleSource ps = m_Ptc[i];
-		bool fusion = m_Car.m_VB_Fusion;
+		bool fusion = m_Car.m_VB_EnergyKind == VB_EchoKind.FUSION;
 		if (ps && (m_PtcOn[i] != mod || m_PtcFusion[i] != fusion))
 		{
 			KillPtc(i);

@@ -1906,6 +1906,8 @@ class CfgVehicles
 		weight=35000;
 		itemSize[]={6,5};
 		inventorySlot[]={"VB_ER_Tank_1","VB_ER_Tank_2"};
+		hiddenSelectionsTextures[]={"vb_echorunner\data\parts\er_neon_empty_co.paa"};		// новый бак пустой — серый; заряженный красит скрипт (11-20)
+		hiddenSelectionsMaterials[]={"vb_echorunner\data\parts\er_neon_empty.rvmat"};
 		// энергия Эхо 0–100 Э = количество предмета (полоса в инвентаре, сохраняется ванилью); расход — скрипт машины.
 		// Носитель энергии ядра VB_EchoCore (блок VB_Echo, ТЗ modding/mod_vb_Echo/ТЗ_VB_Echo.md)
 		stackedUnit="percentage";
@@ -1963,8 +1965,8 @@ class CfgVehicles
 		tyreRoughness=1.0;
 		tyreTread=0.5;
 		hiddenSelections[]={"neon"};
-		hiddenSelectionsTextures[]={"vb_echorunner\data\parts\er_neon_co.paa"};
-		hiddenSelectionsMaterials[]={"vb_echorunner\data\parts\er_neon_idle.rvmat"};		// снятая деталь еле тлеет (превью, 11-18)
+		hiddenSelectionsTextures[]={"vb_echorunner\data\parts\er_neon_empty_co.paa"};		// без энергии — пустой серый (11-20)
+		hiddenSelectionsMaterials[]={"vb_echorunner\data\parts\er_neon_empty.rvmat"};
 		class AnimationSources
 		{
 			class rotor
@@ -2020,6 +2022,8 @@ class CfgVehicles
 		descriptionShort="$STR_VB_ER_pipes_disc";
 		model="VB_EchoRunner\proxy\vb_er_pipes_l.p3d";
 		inventorySlot[]={"VB_ER_Pipes_L"};
+		hiddenSelectionsTextures[]={"vb_echorunner\data\parts\er_neon_empty_co.paa"};		// без энергии — пустой серый (11-20)
+		hiddenSelectionsMaterials[]={"vb_echorunner\data\parts\er_neon_empty.rvmat"};
 	};
 	class VB_EchoRunner_Pipes_R: VB_EchoRunner_RiftPart
 	{
@@ -2028,6 +2032,8 @@ class CfgVehicles
 		descriptionShort="$STR_VB_ER_pipes_disc";
 		model="VB_EchoRunner\proxy\vb_er_pipes_r.p3d";
 		inventorySlot[]={"VB_ER_Pipes_R"};
+		hiddenSelectionsTextures[]={"vb_echorunner\data\parts\er_neon_empty_co.paa"};		// без энергии — пустой серый (11-20)
+		hiddenSelectionsMaterials[]={"vb_echorunner\data\parts\er_neon_empty.rvmat"};
 	};
 	class VB_EchoRunner_Pipes_Engine: VB_EchoRunner_RiftPart
 	{
@@ -2036,6 +2042,8 @@ class CfgVehicles
 		descriptionShort="$STR_VB_ER_pipes_disc";
 		model="VB_EchoRunner\proxy\vb_er_pipes_engine.p3d";
 		inventorySlot[]={"VB_ER_Pipes_Engine"};
+		hiddenSelectionsTextures[]={"vb_echorunner\data\parts\er_neon_empty_co.paa"};		// без энергии — пустой серый (11-20)
+		hiddenSelectionsMaterials[]={"vb_echorunner\data\parts\er_neon_empty.rvmat"};
 	};
 };
 class CfgSoundShaders
