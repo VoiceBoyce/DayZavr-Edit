@@ -40,7 +40,9 @@ class DRL_CraftWindow extends INT_UIF_Menu
 	static const float RET_TILE_H = 50;
 	static const int MAX_QUEUE_ROWS = 5;
 	static const int MAX_STATION_SLOTS = 12;
-	static const int MAX_CATS = 16;
+	// Ячеек в сетке разделов (по 8 в ряд). Было 16: у швейной машинки 20 разделов,
+	// и последние 4 («Лавка: …») молча не показывались (2026-11-20). Сейчас 3 ряда.
+	static const int MAX_CATS = 24;
 	// Кнопка «Изучение» в правой колонке (пока не нужна - скрыта).
 	static const bool SHOW_LEARNING = false;
 
@@ -865,6 +867,13 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		}
 		if (defaultEntry < 0 && entries.Count() > 0)
 			defaultEntry = 0;
+		// Не влезли в сетку - пишем в лог клиента, а не теряем молча.
+		int shownCats = entries.Count();
+		if (shownCats > MAX_CATS)
+		{
+			int maxCats = MAX_CATS;
+			Print("[DRL_CraftMenu] разделов " + shownCats.ToString() + ", в сетке " + maxCats.ToString() + ": последние не показаны");
+		}
 		m_Rail.SetEntries(entries, defaultEntry);
 		int key = -1;
 		DRL_UICategoryEntry def = m_Rail.GetEntry(defaultEntry);
