@@ -87,6 +87,8 @@ class VB_EB_Device extends ItemBase
 	static const string TEX_EMPTY = "vb_echobase\\data\\er_neon_empty_co.paa";
 	static const string TEX_ECHO = "vb_echobase\\data\\er_neon_co.paa";
 	static const string TEX_ECHO_HOT = "vb_echobase\\data\\er_neon_hot_co.paa";	// горящий — чистый красный (E116)
+	static const string TEX_FUSION = "vb_echobase\\data\\er_neon_fusion_co.paa";			// холодный синтез — бирюзовый
+	static const string TEX_FUSION_HOT = "vb_echobase\\data\\er_neon_fusion_hot_co.paa";
 	static const string MAT_EMPTY = "vb_echobase\\data\\er_neon_empty.rvmat";
 	static const string MAT_IDLE = "vb_echobase\\data\\er_neon_idle.rvmat";
 	static const string MAT_ON = "vb_echobase\\data\\er_neon.rvmat";
@@ -148,6 +150,11 @@ class VB_EB_Device extends ItemBase
 	{
 		super.OnVariablesSynchronized();
 		VB_Paint();
+	}
+
+	// клиент, каждый кадр (VB_EB_RotorSpinner): анимация — ротор ветряка, кристалл преобразователя
+	void VB_Spin(float dt)
+	{
 	}
 
 	int VB_GetState()
@@ -673,7 +680,7 @@ class VB_EB_WindTurbine extends VB_EB_Device
 	}
 
 	// клиент, каждый кадр: до ~0,7 оборота в секунду при сильном ветре
-	void VB_Spin(float dt)
+	override void VB_Spin(float dt)
 	{
 		if (m_VB_Speed <= 0 || IsHologram() || GetHierarchyParent())
 			return;
@@ -993,6 +1000,109 @@ class VB_EB_Converter extends VB_EB_Device
 		return FindAttachmentBySlotName("VB_EB_Crystal");
 	}
 
+	// ---------------- кристалл в колбе (клиент, решение пользователя 11-20): виден только вставленный, его цвет
+	// (Эхо красный, синтез бирюзовый, разрушенный серый), чистый цвет, когда преобразователь делает Эхо; крутится
+	// вокруг своей оси — быстрее в работе. Кость crystal, анимации crystal_hide / crystal_spin (model.cfg)
+	protected bool m_VB_CrystalShown;
+	protected float m_VB_CrystalPhase;
+
+	override void VB_Paint()
+	{
+		super.VB_Paint();
+		VB_PaintCrystal();
+	}
+
+	protected void VB_PaintCrystal()
+	{
+		EntityAI c = VB_Crystal();
+		m_VB_CrystalShown = c && !IsHologram();
+		if (!m_VB_CrystalShown)
+		{
+			SetAnimationPhaseNow("crystal_hide", 1);
+			return;
+		}
+		SetAnimationPhaseNow("crystal_hide", 0);
+		int idx = GetHiddenSelectionIndex("crystal_glow");
+		if (idx < 0)
+			return;
+		// материал всегда «тлеющий»: у горящего (er_neon, свечение 22) грани сливаются в ровное пятно и вращения не
+		// видно (стенд 11-20); работу показывает чистый цвет (hot) и скорость вращения
+		bool hot = m_VB_State == VB_EBState.WORK;
+		string tex;
+		string mat = MAT_IDLE;
+		if (c.IsRuined())
+		{
+			tex = TEX_EMPTY;
+			mat = MAT_EMPTY;
+		}
+		else if (c.IsKindOf("VB_EB_CrystalFusion"))
+		{
+			tex = TEX_FUSION;
+			if (hot)
+				tex = TEX_FUSION_HOT;
+		}
+		else
+		{
+			tex = TEX_ECHO;
+			if (hot)
+				tex = TEX_ECHO_HOT;
+		}
+		SetObjectTexture(idx, tex);
+		SetObjectMaterial(idx, mat);
+	}
+
+	// вставили или вынули кристалл (и при подгрузке объекта): перекрасить чуть позже — в момент снятия вложение
+	// ещё числится в слоте
+	override void EEItemAttached(EntityAI item, string slot_name)
+	{
+		super.EEItemAttached(item, slot_name);
+		VB_PaintCrystalSoon();
+	}
+
+	override void EEItemDetached(EntityAI item, string slot_name)
+	{
+		super.EEItemDetached(item, slot_name);
+		VB_PaintCrystalSoon();
+	}
+
+	protected void VB_PaintCrystalSoon()
+	{
+		if (GetGame().IsDedicatedServer())
+			return;
+		GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(VB_Paint);
+		GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(VB_Paint, 100, false);
+	}
+
+	override void EEInit()
+	{
+		super.EEInit();
+		if (!GetGame().IsDedicatedServer())
+			VB_EB_RotorSpinner.Add(this);
+	}
+
+	override void EEDelete(EntityAI parent)
+	{
+		super.EEDelete(parent);
+		if (!GetGame().IsDedicatedServer())
+			VB_EB_RotorSpinner.Remove(this);
+	}
+
+	// об/с: делает Эхо — 0,3; в сети, но ждёт — 0,12; иначе едва поворачивается
+	override void VB_Spin(float dt)
+	{
+		if (!m_VB_CrystalShown || IsHologram() || GetHierarchyParent())
+			return;
+		float speed = 0.05;
+		if (m_VB_State == VB_EBState.WORK)
+			speed = 0.3;
+		else if (m_VB_State == VB_EBState.IDLE)
+			speed = 0.12;
+		m_VB_CrystalPhase += dt * speed;
+		if (m_VB_CrystalPhase >= 1)
+			m_VB_CrystalPhase -= Math.Floor(m_VB_CrystalPhase);
+		SetAnimationPhaseNow("crystal_spin", m_VB_CrystalPhase);
+	}
+
 	bool VB_HasFusionCrystal()
 	{
 		EntityAI c = VB_Crystal();
@@ -1219,17 +1329,17 @@ class VB_EB_Relay extends VB_EB_Device
 // ------------------------------------------------------------------ расходник преобразователя
 class VB_EB_Crystal extends ItemBase {};
 
-// ------------------------------------------------------------------ клиент: вращение роторов ветряков
-// Один обработчик на все ветряки в покадровой очереди игры (как SoftSkillsManager.OnUpdate ванили); дальние
-// (дальше SPIN_DIST от камеры) не крутятся — их не видно, а кадр не тратится
+// ------------------------------------------------------------------ клиент: вращение (ротор ветряка, кристалл преобразователя)
+// Один обработчик на все устройства в покадровой очереди игры (как SoftSkillsManager.OnUpdate ванили; EOnFrame у
+// поставленного предмета не вызывается, E120); дальние (дальше SPIN_DIST от камеры) не крутятся — их не видно
 class VB_EB_RotorSpinner
 {
 	static const float SPIN_DIST = 300;
 	protected static ref VB_EB_RotorSpinner s_Inst;
-	protected ref array<VB_EB_WindTurbine> m_List = new array<VB_EB_WindTurbine>;
+	protected ref array<VB_EB_Device> m_List = new array<VB_EB_Device>;
 	protected float m_Last = -1;
 
-	static void Add(VB_EB_WindTurbine t)
+	static void Add(VB_EB_Device t)
 	{
 		if (!t)
 			return;
@@ -1242,7 +1352,7 @@ class VB_EB_RotorSpinner
 			s_Inst.m_List.Insert(t);
 	}
 
-	static void Remove(VB_EB_WindTurbine t)
+	static void Remove(VB_EB_Device t)
 	{
 		if (s_Inst)
 			s_Inst.m_List.RemoveItem(t);
@@ -1260,7 +1370,7 @@ class VB_EB_RotorSpinner
 		float maxSq = SPIN_DIST * SPIN_DIST;
 		for (int i = m_List.Count() - 1; i >= 0; i--)
 		{
-			VB_EB_WindTurbine t = m_List[i];
+			VB_EB_Device t = m_List[i];
 			if (!t)
 			{
 				m_List.Remove(i);

@@ -489,16 +489,18 @@ class VB_CfgContracts
 		LootGroups.Insert(new VB_TabletKillGroup("l_room", {"DNA_StorageProxy_*"}));
 	}
 
-	// Добыча руды BRDK_GoldRush: жилы киркой (ActionGoldMine) и промывка в реке (ActionSearchGold).
-	// Жила после добычи исчезает до рестарта, поэтому каждый заход это новая жила, PerTarget не нужен.
+	// Добыча руды VB_MiningResources (с 2026-11-17 вместо BRDK_GoldRush, баг №59): жилы киркой
+	// (VB_MR_ActionMine) и промывка сковородой (VB_MR_ActionPan). Цели - родители VB_MR_*_Vein: подходят
+	// и старые жилы BRDK_*_Ore из .dze (наследники), и новые. Жила после добычи исчезает до рестарта,
+	// поэтому каждый заход это новая жила, PerTarget не нужен.
 	protected void DefaultActionGroups()
 	{
-		array<string> mine = {"ActionGoldMine"};
+		array<string> mine = {"VB_MR_ActionMine"};
 		ActionGroups.Insert(new VB_TabletActionGroup("ore", mine));
-		ActionGroups.Insert(new VB_TabletActionGroup("pan", {"ActionSearchGold"}));
-		ActionGroups.Insert(new VB_TabletActionGroup("ore_precious", mine, {"BRDK_Gold_Ore", "BRDK_Silver_Ore", "BRDK_Rubin_Ore", "BRDK_Nephrite_Ore"}));
-		ActionGroups.Insert(new VB_TabletActionGroup("ore_metal", mine, {"BRDK_Iron_Ore", "BRDK_Bronze_Ore", "BRDK_Titanium_Ore"}));
-		ActionGroups.Insert(new VB_TabletActionGroup("ore_fuel", mine, {"BRDK_Coal_Ore", "BRDK_Sulfur_Ore"}));
+		ActionGroups.Insert(new VB_TabletActionGroup("pan", {"VB_MR_ActionPan"}));
+		ActionGroups.Insert(new VB_TabletActionGroup("ore_precious", mine, {"VB_MR_Gold_Vein", "VB_MR_Silver_Vein", "VB_MR_Rubin_Vein", "VB_MR_Nephrite_Vein"}));
+		ActionGroups.Insert(new VB_TabletActionGroup("ore_metal", mine, {"VB_MR_Iron_Vein", "VB_MR_Bronze_Vein", "VB_MR_Titanium_Vein"}));
+		ActionGroups.Insert(new VB_TabletActionGroup("ore_fuel", mine, {"VB_MR_Coal_Vein", "VB_MR_Sulfur_Vein"}));
 	}
 
 	// Артефакты OOTS (OTTS_Artifacts) по наборам аномалий сервера 16: детектор выкладывает артефакт на землю у аномалии.

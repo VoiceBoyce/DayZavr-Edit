@@ -92,7 +92,9 @@ D, W = "DAILY", "WEEKLY"
 
 # ---------------------------------------------------------------------------------------------- классы и места
 OFFER, SPORES, SPLIT, PLANT = "VB_ActionOfferRoot", "VB_ActionCollectSpores", "VB_ActionSplitAmber", "VB_ActionPlantSeed"
-MINE_RUNE, MINE_ORE, PAN, SKIN = "Action_MSFZ_MineRock", "ActionGoldMine", "ActionSearchGold", "ActionSkinning"
+# Руда и промывка — действия VB_MiningResources (с 2026-11-17 он заменил BRDK_GoldRush; ActionGoldMine /
+# ActionSearchGold на 18 больше нет, К2 и КД1 из-за них не засчитывались — баг №59).
+MINE_RUNE, MINE_ORE, PAN, SKIN = "Action_MSFZ_MineRock", "VB_MR_ActionMine", "VB_MR_ActionPan", "ActionSkinning"
 
 CAMP = "11935 0 11036"
 SHRINE_S, SHRINE_SE, SHRINE_NW, SHRINE_NE = "6857 0 1127", "11498 0 1905", "3492 0 9264", "8756 0 10293"
@@ -353,7 +355,7 @@ add(Q(33000, "D_KUZNEC", 1, "Кирка и кайло", KUZ, KUZ,
       "Принеси пять кусков железной руды. Кирку дам — у тебя её, вижу, нет.",
       [deliver("VB_MR_Iron", 5, "Железная руда")], [silver(4), item("Pickaxe", "Кирка")], requires=[30003], code="К1"))
 add(Q(33001, "D_KUZNEC", 2, "Речное золото", KUZ, KUZ,
-      "Руда не только в камне. Реки несут песок, а в песке — металл. Возьми лоток, встань в реку и промой песок три раза. "
+      "Руда не только в камне. Реки несут песок, а в песке — металл. Возьми сковороду, присядь у реки и промой песок три раза. "
       "Не богатство — привычка.",
       [action(PAN, 3, "Промыть песок в реке")], [silver(3)], requires=[33000], code="К2"))
 add(Q(33002, "D_KUZNEC", 3, "Курица и яйцо", KUZ, KUZ,

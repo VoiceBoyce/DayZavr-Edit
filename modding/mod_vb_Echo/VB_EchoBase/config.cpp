@@ -184,6 +184,26 @@ class CfgVehicles
 		model="VB_EchoBase\data\eb_converter.p3d";
 		vbKit="VB_EB_Kit_Converter";
 		attachments[]={"VB_EB_Crystal"};
+		// кристалл в колбе = вставленный в слот (11-20): crystal_glow красит скрипт (Эхо красный, синтез бирюзовый),
+		// crystal_hide — без кристалла скрыт (начальная фаза 1), crystal_spin — вращение (скрипт клиента, model.cfg)
+		hiddenSelections[]={"neon","tier","crystal_glow"};
+		hiddenSelectionsTextures[]={"vb_echobase\data\er_neon_empty_co.paa","vb_echobase\data\er_neon_empty_co.paa","vb_echobase\data\er_neon_co.paa"};
+		hiddenSelectionsMaterials[]={"vb_echobase\data\er_neon_empty.rvmat","vb_echobase\data\er_neon_empty.rvmat","vb_echobase\data\er_neon_idle.rvmat"};
+		class AnimationSources
+		{
+			class crystal_spin
+			{
+				source="user";
+				animPeriod=0.01;
+				initPhase=0;
+			};
+			class crystal_hide
+			{
+				source="user";
+				animPeriod=0.01;
+				initPhase=1;
+			};
+		};
 		varQuantityInit=0;
 		varQuantityMin=0;
 		varQuantityMax=10000;

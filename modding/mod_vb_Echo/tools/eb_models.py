@@ -286,12 +286,12 @@ def converter():
     # стеклянная колба с парящим кристаллом и кольцами резонатора
     cyl(body, V(0, 0, 1.10), Z, 0.30, 0.06, SEG, "steel")
     cyl(body, V(0, 0, 1.16), Z, 0.26, 0.62, SEG, "glass")
-    rings = [[V(0, 0, 1.30)], [], [V(0, 0, 1.68)]]
-    mid = [V(math.cos(a), math.sin(a), 0) * 0.09 + V(0, 0, 1.47) for a in [2 * math.pi * k / 6 for k in range(6)]]
-    for i in range(6):
-        j = (i + 1) % 6
-        glow.face([glow.bm.verts.new(rings[0][0]), glow.bm.verts.new(mid[j]), glow.bm.verts.new(mid[i])], "neon")
-        glow.face([glow.bm.verts.new(rings[2][0]), glow.bm.verts.new(mid[i]), glow.bm.verts.new(mid[j])], "neon")
+    # кристалл — вставленный в слот (решение пользователя 11-20): та же форма, что у предмета (crystal_shape), ×CONV_CRYSTAL_S
+    # под колбу. Кость «crystal» (вращение вокруг crystal_axis, скрытие без кристалла — model.cfg), светящееся —
+    # выделение crystal_glow (скрипт красит: Эхо красный, синтез бирюзовый)
+    cbody = Part("crystal", "", [], ["crystal"])
+    cglow = Part("crystal_glow", "", [], ["crystal_glow", "crystal"])
+    crystal_shape(cbody, cglow, CONV_CRYSTAL_S, CONV_CRYSTAL_Z0)
     for z in (1.24, 1.47, 1.70):
         ring(body, V(0, 0, z), Z, 0.26, 0.33, 0.05, SEG, "rustm")
     for k in range(4):
@@ -319,7 +319,7 @@ def converter():
             cyl(body, V(sx * 0.55, y, 0.5), V(sx, 0, 0), 0.05, 0.08, 10, "rustm")
             cyl(tin, V(sx * 0.63, y, 0.5), V(sx, 0, 0), 0.03, 0.012, 10, TM)
         bar(tin, V(sx * 0.556, -0.35, 0.95), V(sx * 0.556, 0.35, 0.95), 0.025, TM)
-    return [body, glow, tin]
+    return [body, glow, tin, cbody, cglow]
 
 
 # ---------------------------------------------------------------- 5. накопитель
@@ -558,20 +558,29 @@ def relay():
 
 
 # ---------------------------------------------------------------- 9. кристалл
-def crystal():
-    body, glow = parts("crystal")
-    h, r = 0.075, 0.022
-    top, bot = V(0, 0, h * 2), V(0, 0, 0.0)
-    mid = [V(math.cos(a) * r, math.sin(a) * r, h * 1.15) for a in [2 * math.pi * k / 6 for k in range(6)]]
-    low = [V(math.cos(a) * r * 0.8, math.sin(a) * r * 0.8, h * 0.35) for a in [2 * math.pi * k / 6 + 0.3 for k in range(6)]]
+CONV_CRYSTAL_S = 3.0           # кристалл в колбе преобразователя — форма предмета, увеличенная под колбу (0,45 м)
+CONV_CRYSTAL_Z0 = 1.245        # низ кристалла: середина по высоте колбы (1,16–1,78); ось — memory crystal_axis
+
+
+def crystal_shape(body, glow, s=1.0, z0=0.0):
+    """Шестигранная бипирамида-кристалл с двумя обручами: предмет (s = 1) и он же в колбе преобразователя."""
+    h, r = 0.075 * s, 0.022 * s
+    top, bot = V(0, 0, z0 + h * 2), V(0, 0, z0)
+    mid = [V(math.cos(a) * r, math.sin(a) * r, z0 + h * 1.15) for a in [2 * math.pi * k / 6 for k in range(6)]]
+    low = [V(math.cos(a) * r * 0.8, math.sin(a) * r * 0.8, z0 + h * 0.35) for a in [2 * math.pi * k / 6 + 0.3 for k in range(6)]]
     bm = glow.bm
     for i in range(6):
         j = (i + 1) % 6
         glow.face([bm.verts.new(top), bm.verts.new(mid[i]), bm.verts.new(mid[j])], "neon")
         glow.face([bm.verts.new(mid[i]), bm.verts.new(low[i]), bm.verts.new(low[j]), bm.verts.new(mid[j])], "neon")
         glow.face([bm.verts.new(bot), bm.verts.new(low[j]), bm.verts.new(low[i])], "neon")
-    ring(body, V(0, 0, h * 0.75), Z, r * 0.95, r * 1.25, 0.012, 12, "rustm")
-    ring(body, V(0, 0, h * 1.25), Z, r * 0.95, r * 1.25, 0.008, 12, "steel")
+    ring(body, V(0, 0, z0 + h * 0.75), Z, r * 0.95, r * 1.25, 0.012 * s, 12, "rustm")
+    ring(body, V(0, 0, z0 + h * 1.25), Z, r * 0.95, r * 1.25, 0.008 * s, 12, "steel")
+
+
+def crystal():
+    body, glow = parts("crystal")
+    crystal_shape(body, glow)
     return [body, glow]
 
 
@@ -726,6 +735,8 @@ def memory_lod(name, parts_list):
     groups = {k: [v] for k, v in pts.items()}
     if name == "wind":
         groups["rotor_axis"] = [(0.0, 4.05, 0.0), (0.0, 6.7, 0.0)]
+    if name == "converter":           # ось кристалла в колбе (вертикаль через центр)
+        groups["crystal_axis"] = [(0.0, CONV_CRYSTAL_Z0, 0.0), (0.0, CONV_CRYSTAL_Z0 + 0.15 * CONV_CRYSTAL_S, 0.0)]
     for sel_name, cos in groups.items():
         sel = l.new_selection(sel_name)
         for co in cos:

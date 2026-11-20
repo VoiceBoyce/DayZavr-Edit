@@ -216,6 +216,10 @@ modded class VB_MR_ActionMine
 		if (!data)
 			return;
 
+		// Базовый метод пустой, но на него вешаются другие моды: квесты INT_QUESTS (цель ACTION)
+		// и планшет. Без super добыча им не видна (баг №59). Здесь, после проверок: только реальная добыча.
+		super.OnFinishProgressServer(action_data);
+
 		float chance = data.OreChance;
 		float damage = data.ToolDamageOnUse;
 		float rareChance = data.RareChance;
@@ -275,6 +279,9 @@ modded class VB_MR_ActionPan
 {
 	override void OnFinishProgressServer(ActionData action_data)
 	{
+		// для квестов INT_QUESTS и планшета (см. добычу выше, баг №59)
+		super.OnFinishProgressServer(action_data);
+
 		VB_MR_Settings settings = VB_MR_Settings.Get();
 		ItemBase pan = action_data.m_MainItem;
 		vector pos = action_data.m_Player.GetPosition();

@@ -23,7 +23,7 @@
     "Targets": [
         {
             "Kind": "ACTION",
-            "Target": "ActionGoldMine",
+            "Target": "VB_MR_ActionMine",
             "Count": 5.0,
             "Filter": "",
             "WorstState": "",

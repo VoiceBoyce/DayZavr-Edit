@@ -33,8 +33,9 @@ OUR_MODS18 = ["modding/mod_EscapeFromDayZ", "modding/mod_vb_DRL_Core", "modding/
               "modding/mod_VB_MiningResources/VB_MiningResources"]
 # Старые ветки покупок 18 — источник лавки; в «уже работают» не берём, иначе проверка лавки сама себя подтверждает.
 SHOP_BRANCHES = {"COINS_TRADE_CLOTHES", "COINS_TRADE_WEAPONS", "COINS_TRADE_MATERIAL"}
-# Длительные действия чужих модов без исходников (BRDK GoldRush) — из ТЗ, засчитывание проверить на стенде
-FOREIGN_LONG_ACTIONS = {"ActionGoldMine", "ActionSearchGold"}
+# Длительные действия чужих модов без исходников. Было BRDK GoldRush (ActionGoldMine, ActionSearchGold), но с
+# 2026-11-17 руду на 18 делает VB_MiningResources (его действия находятся по исходникам), BRDK на сервере нет — баг №59.
+FOREIGN_LONG_ACTIONS = set()
 RX = re.compile(r"^\s*class\s+(\w+)\s*(?::\s*(\w+))?\s*\{", re.M)
 RX_SCRIPT = re.compile(r"^\s*(?:modded\s+)?class\s+(\w+)\s*(?:extends|:)\s*(\w+)", re.M)
 RX_TRADER = re.compile(r"^\s*([A-Za-z_]\w*)\s*,\s*[^,]*,\s*-?\d+\s*,\s*-?\d+", re.M)
