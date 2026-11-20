@@ -466,7 +466,7 @@ class CfgVehicles
 		rotationFlags = 2;
 		hiddenSelections[] = {"crust", "veins"};
 		hiddenSelectionsTextures[] = {"\VB_Rift\data\vb_rift_crust_day_co.paa", "\VB_Rift\data\vb_rift_vein_day_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_Rift\data\vb_rift_crust_day.rvmat", "\VB_Rift\data\vb_rift_vein_day.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_Rift\data\vb_rift_crust_day.rvmat", "VB_Rift\data\vb_rift_vein_day.rvmat"};
 	};
 
 	// «Споры Изнанки»: собирают тряпкой у живого сердца ночью (VB_ActionCollectSpores), иногда с зомби Изнанки.
@@ -578,7 +578,7 @@ class CfgVehicles
 		itemSize[] = {4, 5};
 		hiddenSelections[] = {"zbytek"};
 		hiddenSelectionsTextures[] = {"\VB_Rift\data\retex\vb_rift_canister_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_Rift\data\retex\vb_rift_canister.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_Rift\data\retex\vb_rift_canister.rvmat"};
 	};
 
 	// «Голодный клинок»: убийство зомби возвращает кровь, полный заряд — облако спор вокруг. Час без убийств тянет кровь.
@@ -600,7 +600,7 @@ class CfgVehicles
 		heatIsolation = 0.45;
 		visibilityModifier = 0.7;
 		hiddenSelectionsTextures[] = {"\VB_Rift\data\retex\vb_rift_cloak_g_co.paa", "\VB_Rift\data\retex\vb_rift_cloak_co.paa", "\VB_Rift\data\retex\vb_rift_cloak_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_Rift\data\retex\vb_rift_cloak_g.rvmat", "\VB_Rift\data\retex\vb_rift_cloak.rvmat", "\VB_Rift\data\retex\vb_rift_cloak.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_Rift\data\retex\vb_rift_cloak_g.rvmat", "VB_Rift\data\retex\vb_rift_cloak.rvmat", "VB_Rift\data\retex\vb_rift_cloak.rvmat"};
 	};
 
 	// «Живой жгут»: лежит в инвентаре и сам закрывает одно кровотечение, «отпив» немного крови.
@@ -636,9 +636,9 @@ class CfgVehicles
 		vbAlignToTerrain = 1;	// скрипт наклоняет объект по склону, если наклон не задан вручную
 		vbAlignRadius = 3.0;	// шаг сетки замера рельефа, м
 		hiddenSelections[] = {"crust", "veins"};
-		// пути с ведущим «\»: у бинаризованной модели материал без него не грузится и секция не рисуется (E75)
+		// пути к .rvmat БЕЗ ведущего «\»: с ним движок материал не загружает и секция не светится (стенд 2026-11-20, E75)
 		hiddenSelectionsTextures[] = {"\VB_Rift\data\vb_rift_crust_co.paa", "\VB_Rift\data\vb_rift_vein_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_Rift\data\vb_rift_crust.rvmat", "\VB_Rift\data\vb_rift_vein.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_Rift\data\vb_rift_crust.rvmat", "VB_Rift\data\vb_rift_vein.rvmat"};
 	};
 
 	// Сердце: узел с корнями ~12 м, коллизия у узла, красный свет.

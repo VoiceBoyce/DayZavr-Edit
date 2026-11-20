@@ -59,8 +59,9 @@ def own_emissive(g, tmp, h, w):
     return lum
 
 
-def recolor(rgb, rng, vein_keep, own=None, e_base=0.0):
-    """Текстура -> (цвет, маска свечения): бурая кора, пятна мха, сеть золотых прожилок."""
+def recolor(rgb, rng, vein_keep, own=None, e_base=0.0, own_veins=False, moss_amount=None):
+    """Текстура -> (цвет, маска свечения): бурая кора, пятна мха, сеть золотых прожилок.
+    own_veins — прожилки не из шума, а из собственной маски модели own (Энт: борозды коры вдоль волокон)."""
     h, w, _ = rgb.shape
     n = max(h, w)
     lum = rgb @ np.array([0.3, 0.59, 0.11], np.float32)
@@ -69,10 +70,22 @@ def recolor(rgb, rng, vein_keep, own=None, e_base=0.0):
     base = (0.25 + 0.95 * lum)[..., None] * C("g_body")
     base = base * (1 - PAL["g_keep"]) + rgb * PAL["g_keep"]
     # пятна мха
-    thr = 1.0 - 2.0 * PAL["g_moss_amount"]
+    thr = 1.0 - 2.0 * (PAL["g_moss_amount"] if moss_amount is None else moss_amount)
     mm = smoothstep(thr, thr + 0.7, spectral(n, rng, beta=1.5)[:h, :w]) * 0.85
     mtone = (0.35 + 0.9 * lum)[..., None] * (0.85 + 0.25 * spectral(n, rng, beta=0.8)[:h, :w, None].clip(-1, 1))
     base = base * (1 - mm[..., None]) + C("g_moss") * mtone * mm[..., None]
+    if own_veins and own is not None:
+        # Дерево (баг-просьба 2026-11-20: «жилки волнами — нелогично»): светятся борозды самой коры — собственная
+        # маска модели идёт вдоль волокон. Крошку сводим в линии (лёгкое размытие + порог), силу слегка меняем
+        # крупными пятнами, чтобы ствол не горел ровно. Шумовой сети нет.
+        o = blur(own.astype(np.float32), 0.8)
+        veins = smoothstep(0.20, 0.40, o)
+        veins *= (0.55 + 0.45 * smoothstep(-0.8, 1.2, spectral(n, rng, beta=1.8)))[:h, :w]
+        halo = np.clip(blur(veins, 2.0) * 1.2, 0, 1)
+        co = base * (1 - 0.35 * halo[..., None]) + C("g_halo") * 0.35 * halo[..., None]
+        co = co * (1 - 0.85 * veins[..., None]) + C("g_vein") * 0.85 * veins[..., None]
+        e = C("g_e_vein") * np.clip(veins * PAL["g_e_gain"] + halo * 0.08, 0, 1)[..., None]
+        return co, e
     # золотые прожилки: редкая сеть, местами пропадает
     n1 = spectral(n, rng, f0=18, bw=6.0)
     k0, k1 = vein_keep                              # выше порог — реже прожилки (у волка шерсть, им мало места)
@@ -103,12 +116,13 @@ def make_guard(g, tmp):
     h, w, _ = rgb.shape
     rng = np.random.default_rng(SEED + sum(map(ord, g["file"])))
     own = own_emissive(g, tmp, h, w)
-    co, e = recolor(rgb, rng, g.get("vein_keep", (-0.2, 0.7)), own, g.get("e_base", 0.0))
+    co, e = recolor(rgb, rng, g.get("vein_keep", (-0.2, 0.7)), own, g.get("e_base", 0.0),
+                    g.get("own_veins", False), g.get("moss_amount"))
     has_alpha = float(alpha.min()) < 0.999
     co_arr = np.concatenate([to_u8(co), to_u8(alpha)[..., None]], -1) if has_alpha else to_u8(co)
     write_tex(tmp, g["file"] + "_co", co_arr)
     write_tex(tmp, g["file"] + "_e_co", to_u8(e))
-    write_rvmat(g["rvmat"], g["file"])
+    write_rvmat(g["rvmat"], g["file"], g.get("emissive"))
 
     fur = g.get("fur")
     if fur:
@@ -118,7 +132,7 @@ def make_guard(g, tmp):
         fco, fe = recolor(frgb, frng, fur.get("vein_keep", (0.9, 1.7)), None, fur.get("e_base", 0.0))
         write_tex(tmp, g["file"] + "_fur_ca", np.concatenate([to_u8(fco), to_u8(falpha)[..., None]], -1))
         write_tex(tmp, g["file"] + "_fur_e_co", to_u8(fe))
-        write_rvmat(fur["rvmat"], g["file"] + "_fur")
+        write_rvmat(fur["rvmat"], g["file"] + "_fur", g.get("emissive"))
     print("страж", g["cls"], w, h, "своё свечение" if own is not None else "", "шерсть" if fur else "")
 
 
@@ -163,12 +177,14 @@ def rebuild_texgen(txt, e_tex):
     return "\n".join(out) + "\n"
 
 
-def write_rvmat(src, name):
-    """Исходный материал + наша маска свечения в Stage8 (заменить или добавить по образцу Stage7)."""
+def write_rvmat(src, name, k=None):
+    """Исходный материал + наша маска свечения в Stage8 (заменить или добавить по образцу Stage7).
+    k — сила свечения стража (поле emissive в AR_GUARDS), иначе общая g_emissive палитры."""
     with open(src, encoding="utf-8", errors="replace") as f:
         txt = f.read()
     e_tex = PREFIX + name + "_e_co.paa"
-    k = PAL.get("g_emissive", 1.0)
+    if k is None:
+        k = PAL.get("g_emissive", 1.0)
     emis = "emmisive[] = {%g,%g,%g,1};" % (k, k, k)
     txt, n = re.subn(r"emmisive\[\]\s*=\s*\{[^}]*\}\s*;", emis, txt, count=1)
     if not n:

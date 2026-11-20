@@ -41,12 +41,12 @@ class CfgVehicles
 		descriptionShort = "$STR_VB_MR_Pickaxe_Veles_D";
 		model = "VB_MiningResources\data\veles\vb_mr_pickaxe_veles.p3d";
 		// секция золотых прожилок и руны: «чует жилу» меняет её материал на светящийся (VB_MR_Veles.c).
-		// Пути к .rvmat — с ведущим «\»: у бинаризованной модели новый материал без него не подхватывается (E75)
+		// Пути к .rvmat БЕЗ ведущего «\»: с ним движок материал не загружает, свечения нет (стенд 2026-11-20, E75)
 		hiddenSelections[] = {"vbmr_glow"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\veles\vb_mr_veles_glow_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\veles\vb_mr_veles_glow.rvmat"};
-		vbmrGlowOff = "\VB_MiningResources\data\veles\vb_mr_veles_glow.rvmat";
-		vbmrGlowOn = "\VB_MiningResources\data\veles\vb_mr_veles_glow_on.rvmat";
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\veles\vb_mr_veles_glow.rvmat"};
+		vbmrGlowOff = "VB_MiningResources\data\veles\vb_mr_veles_glow.rvmat";
+		vbmrGlowOn = "VB_MiningResources\data\veles\vb_mr_veles_glow_on.rvmat";
 		vbmrSenseRadius = 30;
 		// износ: свои материалы металла, рукояти и янтаря (у родителя — материалы модели Магической кирки)
 		class DamageSystem
@@ -59,9 +59,9 @@ class CfgVehicles
 					healthLevels[] = {
 						{1.0,{"VB_MiningResources\data\veles\vb_mr_veles_metal.rvmat","VB_MiningResources\data\veles\vb_mr_veles_wood.rvmat","VB_MiningResources\data\veles\vb_mr_veles_amber.rvmat"}},
 						{0.7,{"VB_MiningResources\data\veles\vb_mr_veles_metal.rvmat","VB_MiningResources\data\veles\vb_mr_veles_wood.rvmat","VB_MiningResources\data\veles\vb_mr_veles_amber.rvmat"}},
-						{0.5,{"\VB_MiningResources\data\veles\vb_mr_veles_metal_damage.rvmat","\VB_MiningResources\data\veles\vb_mr_veles_wood_damage.rvmat","\VB_MiningResources\data\veles\vb_mr_veles_amber_damage.rvmat"}},
-						{0.3,{"\VB_MiningResources\data\veles\vb_mr_veles_metal_damage.rvmat","\VB_MiningResources\data\veles\vb_mr_veles_wood_damage.rvmat","\VB_MiningResources\data\veles\vb_mr_veles_amber_damage.rvmat"}},
-						{0.0,{"\VB_MiningResources\data\veles\vb_mr_veles_metal_destruct.rvmat","\VB_MiningResources\data\veles\vb_mr_veles_wood_destruct.rvmat","\VB_MiningResources\data\veles\vb_mr_veles_amber_destruct.rvmat"}}
+						{0.5,{"VB_MiningResources\data\veles\vb_mr_veles_metal_damage.rvmat","VB_MiningResources\data\veles\vb_mr_veles_wood_damage.rvmat","VB_MiningResources\data\veles\vb_mr_veles_amber_damage.rvmat"}},
+						{0.3,{"VB_MiningResources\data\veles\vb_mr_veles_metal_damage.rvmat","VB_MiningResources\data\veles\vb_mr_veles_wood_damage.rvmat","VB_MiningResources\data\veles\vb_mr_veles_amber_damage.rvmat"}},
+						{0.0,{"VB_MiningResources\data\veles\vb_mr_veles_metal_destruct.rvmat","VB_MiningResources\data\veles\vb_mr_veles_wood_destruct.rvmat","VB_MiningResources\data\veles\vb_mr_veles_amber_destruct.rvmat"}}
 					};
 				};
 			};

@@ -208,7 +208,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_nugget.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_gold_nugget_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_gold_nugget.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_gold_nugget.rvmat"};
 		animClass = "NoFireClass";
 		weight = 500;
 		itemSize[] = {2,2};
@@ -243,7 +243,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_sand.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_gold_sand_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_gold_sand.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_gold_sand.rvmat"};
 		animClass = "Compass";
 		itemSize[] = {1,1};
 		weight = 190;
@@ -277,7 +277,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_ingot.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_gold_ingot_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_gold_ingot.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_gold_ingot.rvmat"};
 		animClass = "NoFireClass";
 		weight = 5500;
 		itemSize[] = {3,3};
@@ -312,7 +312,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_nugget.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_silver_nugget_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_silver_nugget.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_silver_nugget.rvmat"};
 		animClass = "NoFireClass";
 		weight = 500;
 		itemSize[] = {2,2};
@@ -347,7 +347,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_sand.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_silver_sand_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_silver_sand.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_silver_sand.rvmat"};
 		animClass = "Compass";
 		itemSize[] = {1,1};
 		weight = 190;
@@ -381,7 +381,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_ingot.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_silver_ingot_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_silver_ingot.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_silver_ingot.rvmat"};
 		animClass = "NoFireClass";
 		weight = 5500;
 		itemSize[] = {3,3};
@@ -416,7 +416,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_nugget.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_bronze_nugget_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_bronze_nugget.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_bronze_nugget.rvmat"};
 		animClass = "NoFireClass";
 		weight = 500;
 		itemSize[] = {2,2};
@@ -451,7 +451,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_sand.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_bronze_sand_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_bronze_sand.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_bronze_sand.rvmat"};
 		animClass = "Compass";
 		itemSize[] = {1,1};
 		weight = 190;
@@ -485,7 +485,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_ingot.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_bronze_ingot_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_bronze_ingot.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_bronze_ingot.rvmat"};
 		animClass = "NoFireClass";
 		weight = 5500;
 		itemSize[] = {3,3};
@@ -520,7 +520,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_nugget.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_iron_nugget_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_iron_nugget.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_iron_nugget.rvmat"};
 		animClass = "NoFireClass";
 		weight = 500;
 		itemSize[] = {2,2};
@@ -555,7 +555,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_sand.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_iron_sand_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_iron_sand.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_iron_sand.rvmat"};
 		animClass = "Compass";
 		itemSize[] = {1,1};
 		weight = 190;
@@ -589,7 +589,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_ingot.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_iron_ingot_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_iron_ingot.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_iron_ingot.rvmat"};
 		animClass = "NoFireClass";
 		weight = 5500;
 		itemSize[] = {3,3};
@@ -624,7 +624,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_nugget.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_titanium_nugget_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_titanium_nugget.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_titanium_nugget.rvmat"};
 		animClass = "NoFireClass";
 		weight = 500;
 		itemSize[] = {2,2};
@@ -659,7 +659,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_sand.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_titanium_sand_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_titanium_sand.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_titanium_sand.rvmat"};
 		animClass = "Compass";
 		itemSize[] = {1,1};
 		weight = 190;
@@ -693,7 +693,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_ingot.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_titanium_ingot_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_titanium_ingot.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_titanium_ingot.rvmat"};
 		animClass = "NoFireClass";
 		weight = 5500;
 		itemSize[] = {3,3};
@@ -728,7 +728,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_chunk.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_coal_chunk_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_coal_chunk.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_coal_chunk.rvmat"};
 		animClass = "NoFireClass";
 		weight = 500;
 		itemSize[] = {2,2};
@@ -763,7 +763,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_sand.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_coal_sand_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_coal_sand.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_coal_sand.rvmat"};
 		animClass = "Compass";
 		itemSize[] = {1,1};
 		weight = 190;
@@ -797,7 +797,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_briquette.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_coal_briquette_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_coal_briquette.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_coal_briquette.rvmat"};
 		inventorySlot[] += {"Firewood"};
 		canBeSplit = 1;
 		varQuantityInit = 1;
@@ -837,7 +837,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_chunk.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_rubin_chunk_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_rubin_chunk.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_rubin_chunk.rvmat"};
 		animClass = "NoFireClass";
 		weight = 500;
 		itemSize[] = {2,2};
@@ -872,7 +872,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_sand.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_rubin_sand_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_rubin_sand.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_rubin_sand.rvmat"};
 		animClass = "Compass";
 		itemSize[] = {1,1};
 		weight = 190;
@@ -906,7 +906,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_briquette.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_rubin_briquette_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_rubin_briquette.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_rubin_briquette.rvmat"};
 		weight = 300;
 		itemSize[] = {2,2};
 		class DamageSystem
@@ -939,7 +939,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_chunk.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_nephrite_chunk_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_nephrite_chunk.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_nephrite_chunk.rvmat"};
 		animClass = "NoFireClass";
 		weight = 500;
 		itemSize[] = {2,2};
@@ -974,7 +974,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_sand.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_nephrite_sand_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_nephrite_sand.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_nephrite_sand.rvmat"};
 		animClass = "Compass";
 		itemSize[] = {1,1};
 		weight = 190;
@@ -1008,7 +1008,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_briquette.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_nephrite_briquette_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_nephrite_briquette.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_nephrite_briquette.rvmat"};
 		weight = 300;
 		itemSize[] = {2,2};
 		class DamageSystem
@@ -1041,7 +1041,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_chunk.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_sulfur_chunk_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_sulfur_chunk.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_sulfur_chunk.rvmat"};
 		animClass = "NoFireClass";
 		weight = 500;
 		itemSize[] = {2,2};
@@ -1076,7 +1076,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_sand.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_sulfur_sand_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_sulfur_sand.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_sulfur_sand.rvmat"};
 		animClass = "Compass";
 		itemSize[] = {1,1};
 		weight = 190;
@@ -1110,7 +1110,7 @@ class CfgVehicles
 		model = "VB_MiningResources\data\items\vb_mr_briquette.p3d";
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"VB_MiningResources\data\items\vb_mr_sulfur_briquette_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_MiningResources\data\items\vb_mr_sulfur_briquette.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_MiningResources\data\items\vb_mr_sulfur_briquette.rvmat"};
 		weight = 300;
 		itemSize[] = {2,2};
 		class DamageSystem

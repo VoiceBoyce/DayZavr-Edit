@@ -17,7 +17,7 @@ r"""Модели и текстуры 27 новых ресурсов VB_MiningRes
   vb_mr_<ресурс>_ingot_nohq.paa (в клейме знак элемента: Au, Ag, Cu, Fe, Ti);
   vb_mr_<ресурс>_<форма>.rvmat   — материал (Super): металлы с блеском и отражением, кристаллы глянец, остальное матовое.
 Ещё model.cfg (sections[] = {"camo"}) и mapping.json: класс -> модель, текстура, материал (пути для конфига;
-у .rvmat ведущий «\» — правило E75 для бинаризованных моделей).
+у .rvmat БЕЗ ведущего «\»: с ним движок материал не загружает — E75, стенд 2026-11-20).
 
 Текстуры «запекаются»: каждый тексель атласа растеризацией треугольников получает точку и нормаль на модели,
 рисунок считается 3D-шумом в этой точке (без швов на стыках кусков развёртки); _nohq — из производных высоты
@@ -1803,7 +1803,8 @@ def write_mapping():
             cls = sd["cls"] % CLASS_RES[res]
             out[cls] = {"model": PREFIX + "vb_mr_%s.p3d" % shape,
                         "texture": PREFIX + "vb_mr_%s_%s_co.paa" % (res, shape),
-                        "material": BS + PREFIX + "vb_mr_%s_%s.rvmat" % (res, shape),
+                        # без ведущего «\»: с ним движок материал не загружает (стенд 2026-11-20, E75 исправлен)
+                        "material": PREFIX + "vb_mr_%s_%s.rvmat" % (res, shape),
                         "selection": "camo", "shape": shape, "resource": res}
     with open(os.path.join(OUT_DIR, "mapping.json"), "w", encoding="utf-8", newline="\n") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)

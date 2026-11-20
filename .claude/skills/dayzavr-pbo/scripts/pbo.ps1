@@ -128,7 +128,10 @@ function Invoke-BinarizeModels([string]$Src, [string]$Stage, [string]$Prefix, [s
         $masks = if (@(Get-ChildItem $dir -Filter *.p3d).Count -eq $grp.Count) { @('*.p3d') } else { @($grp.Group | ForEach-Object { $_.Name }) }
         foreach ($mask in $masks) {
             $argLine = "-always -maxProcesses=0 `"-addon=$pPath`" `"-textures=$Work\bintex`" `"$srcDir`" `"$dstDir`" `"$mask`""
-            $p = Start-Process -FilePath $exe -ArgumentList $argLine -NoNewWindow -Wait -PassThru `
+            # Рабочая папка — P:\: пути материалов в модели относительные (vb_ancientroot\data\x.rvmat), бинаризатор
+            # ищет их от рабочей папки. Из другой папки материалы «не загружаются», модель собирается без них
+            # (на ~30 % меньше, свечение не работает). Причина «плавающего размера» сборок (замер 2026-11-20).
+            $p = Start-Process -FilePath $exe -ArgumentList $argLine -WorkingDirectory 'P:\' -NoNewWindow -Wait -PassThru `
                 -RedirectStandardOutput "$log.out" -RedirectStandardError "$log.err"
             Get-Content "$log.out", "$log.err" -ErrorAction SilentlyContinue | Add-Content $log
             if ($p.ExitCode -ne 0) { Get-Content $log -Tail 30 | Out-Host; throw "binarize.exe завершился с кодом $($p.ExitCode) на $srcDir\$mask" }

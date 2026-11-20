@@ -117,6 +117,8 @@ AR_GUARDS = [
              "rvmat": "P:\\DZ\\animals\\canis_lupus\\data\\fur_alpha.rvmat",
              "vein_keep": (0.3, 1.1)},
      "vein_keep": (0.7, 1.5),
+     # баг №58 (2026-11-20): при общей 2.2 прожилки ночью еле видны — тело закрыто шерстью, светит в основном она
+     "emissive": 7.0,
      # у существ материал ставит только healthLevels (стенд 11-15), у ванильного волка списки пустые
      "damage_cfg": ("P:\\DZ\\animals\\canis_lupus\\config.cpp", "Animal_CanisLupus_Grey")},
     {"cls": "VB_RootGuard_Zanoza", "base": "MSFZ_Mutant_Zanoza1", "file": "vb_guard_zanoza",
@@ -126,6 +128,8 @@ AR_GUARDS = [
      "rvmat": os.path.join(MSFZ_SRC, "Zanoza", "data", "msfz_zanoza.rvmat"),
      # Заноза — тонкие ветки, сеть прожилок на них не читается: ещё слабое ровное свечение всего тела
      "e_base": 0.12,
+     # баг №58 (2026-11-20): при общей 2.2 шипы ночью почти не светятся
+     "emissive": 6.0,
      # у MSFZ в DamageSystem healthLevels свои материалы — движок ставит их поверх hiddenSelectionsMaterials
      # (стенд 11-15: наш материал не доходил). DamageSystem класса из этого конфига скопирован в config.cpp
      # с нашим материалом на здоровье 1.0 и 0.7
@@ -136,6 +140,11 @@ AR_GUARDS = [
      "desc": "Древний Энт, выросший из корней рощи. Сердцевина в его груди горит золотом. Выходит только к древним рощам.",
      "tex": os.path.join(MSFZ_SRC, "Ent", "data", "MSFZ_Ent_Base.paa"),
      "rvmat": os.path.join(MSFZ_SRC, "Ent", "data", "MSFZ_Ent_Base.rvmat"),
+     # 2026-11-20 (просьба пользователя: «жилки волнами, а он дерево»): светятся борозды коры по собственной маске
+     # Энта (_em, вдоль волокон), без шумовой сети; мха меньше — не закрывает кору
+     "own_veins": True,
+     "moss_amount": 0.18,
+     "emissive": 9.0,               # стенд 2026-11-20: при 3.5 борозды ночью еле видны
      "damage_cfg": (os.path.join(MSFZ_SRC, "Ent", "config.cpp"), "MSFZ_Mutant_Ent"),
      "keep_tex": []},
 ]

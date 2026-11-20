@@ -209,7 +209,7 @@ class CfgVehicles
 		descriptionShort = "Волк, обросший корой и мхом. Под шерстью тлеют золотые прожилки: роща сама зовёт его на защиту.";
 		vbRootGuard = 1;
 		hiddenSelectionsTextures[] = {"\VB_AncientRoot\data\guards\vb_guard_wolf_co.paa", "\VB_AncientRoot\data\guards\vb_guard_wolf_fur_ca.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_AncientRoot\data\guards\vb_guard_wolf.rvmat", "\VB_AncientRoot\data\guards\vb_guard_wolf_fur.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_AncientRoot\data\guards\vb_guard_wolf.rvmat", "VB_AncientRoot\data\guards\vb_guard_wolf_fur.rvmat"};
 		class DamageSystem
 		{
 			class GlobalHealth
@@ -217,7 +217,7 @@ class CfgVehicles
 				class Health
 				{
 					hitpoints = 200;
-					healthLevels[] = {{1.0,{"\VB_AncientRoot\data\guards\vb_guard_wolf.rvmat","\VB_AncientRoot\data\guards\vb_guard_wolf_fur.rvmat"}},{0.7,{"\VB_AncientRoot\data\guards\vb_guard_wolf.rvmat","\VB_AncientRoot\data\guards\vb_guard_wolf_fur.rvmat"}},{0.5,{}},{0.3,{}},{0.0,{}}};
+					healthLevels[] = {{1.0,{"VB_AncientRoot\data\guards\vb_guard_wolf.rvmat","VB_AncientRoot\data\guards\vb_guard_wolf_fur.rvmat"}},{0.7,{"VB_AncientRoot\data\guards\vb_guard_wolf.rvmat","VB_AncientRoot\data\guards\vb_guard_wolf_fur.rvmat"}},{0.5,{}},{0.3,{}},{0.0,{}}};
 				};
 				class Blood
 				{
@@ -383,7 +383,7 @@ class CfgVehicles
 		descriptionShort = "Заноза, проросшая терновником. Шипы на её спине светятся золотом и рвут кожу до крови.";
 		vbRootGuard = 1;
 		hiddenSelectionsTextures[] = {"\VB_AncientRoot\data\guards\vb_guard_zanoza_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_AncientRoot\data\guards\vb_guard_zanoza.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_AncientRoot\data\guards\vb_guard_zanoza.rvmat"};
 		class DamageSystem
 		{
 			class GlobalHealth
@@ -391,7 +391,7 @@ class CfgVehicles
 				class Health
 				{
 					hitpoints = 300;
-					healthLevels[] = {{1,{"\VB_AncientRoot\data\guards\vb_guard_zanoza.rvmat"}},{0.7,{"\VB_AncientRoot\data\guards\vb_guard_zanoza.rvmat"}},{0.5,{"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza_damage.rvmat"}},{0.3,{"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza_damage.rvmat"}},{0,{"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza_destruct.rvmat"}}};
+					healthLevels[] = {{1,{"VB_AncientRoot\data\guards\vb_guard_zanoza.rvmat"}},{0.7,{"VB_AncientRoot\data\guards\vb_guard_zanoza.rvmat"}},{0.5,{"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza_damage.rvmat"}},{0.3,{"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza_damage.rvmat"}},{0,{"MSFZ_Mifical_Pack\Zanoza\data\msfz_zanoza_destruct.rvmat"}}};
 				};
 				class Blood
 				{
@@ -502,7 +502,7 @@ class CfgVehicles
 		vbRootGuard = 1;
 		// мини-босс (ТЗ 2в п.2): здоровье ×1,5 к Энту MSFZ (2000 -> 3000, голова 1800 -> 2700); умения — VB_AR_KeeperServer.c
 		hiddenSelectionsTextures[] = {"\VB_AncientRoot\data\guards\vb_guard_ent_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_AncientRoot\data\guards\vb_guard_ent.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_AncientRoot\data\guards\vb_guard_ent.rvmat"};
 		class DamageSystem
 		{
 			class GlobalHealth
@@ -510,7 +510,7 @@ class CfgVehicles
 				class Health
 				{
 					hitpoints = 3000;
-					healthLevels[] = {{1,{"\VB_AncientRoot\data\guards\vb_guard_ent.rvmat"}},{0.7,{"\VB_AncientRoot\data\guards\vb_guard_ent.rvmat"}},{0.5,{"MSFZ_Mifical_Pack\Ent\data\MSFZ_Ent_Base_damage.rvmat"}},{0.3,{"MSFZ_Mifical_Pack\Ent\data\MSFZ_Ent_Base_damage.rvmat"}},{0,{"MSFZ_Mifical_Pack\Ent\data\MSFZ_Ent_Base_destruct.rvmat"}}};
+					healthLevels[] = {{1,{"VB_AncientRoot\data\guards\vb_guard_ent.rvmat"}},{0.7,{"VB_AncientRoot\data\guards\vb_guard_ent.rvmat"}},{0.5,{"MSFZ_Mifical_Pack\Ent\data\MSFZ_Ent_Base_damage.rvmat"}},{0.3,{"MSFZ_Mifical_Pack\Ent\data\MSFZ_Ent_Base_damage.rvmat"}},{0,{"MSFZ_Mifical_Pack\Ent\data\MSFZ_Ent_Base_destruct.rvmat"}}};
 				};
 			};
 			class DamageZones
@@ -789,7 +789,7 @@ class CfgVehicles
 		rotationFlags = 2;
 		hiddenSelections[] = {"crust", "veins"};
 		hiddenSelectionsTextures[] = {"\VB_AncientRoot\data\vb_ar_crust_day_co.paa", "\VB_AncientRoot\data\vb_ar_vein_day_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_AncientRoot\data\vb_ar_crust_day.rvmat", "\VB_AncientRoot\data\vb_ar_vein_day.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_AncientRoot\data\vb_ar_crust_day.rvmat", "VB_AncientRoot\data\vb_ar_vein_day.rvmat"};
 	};
 
 	// Янтарь (ТЗ 2б.5): дар рощи за подношение (VB_AR_GroveServer.c). Модель — кусок сердцевины, перекраска
@@ -805,7 +805,7 @@ class CfgVehicles
 		rotationFlags = 2;
 		hiddenSelections[] = {"crust", "veins"};
 		hiddenSelectionsTextures[] = {"\VB_AncientRoot\data\items\vb_ar_amber_co.paa", "\VB_AncientRoot\data\items\vb_ar_amber_vein_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_AncientRoot\data\items\vb_ar_amber.rvmat", "\VB_AncientRoot\data\items\vb_ar_amber.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_AncientRoot\data\items\vb_ar_amber.rvmat", "VB_AncientRoot\data\items\vb_ar_amber.rvmat"};
 	};
 	class VB_AR_AmberInclusion: VB_AR_Amber
 	{
@@ -952,7 +952,7 @@ class CfgVehicles
 				class Health
 				{
 					hitpoints = 130;
-					healthLevels[] = {{1.0,{"\VB_AncientRoot\data\vb_ar_p_bladesteel.rvmat","\VB_AncientRoot\data\vb_ar_p_bone.rvmat","\VB_AncientRoot\data\vb_ar_crust.rvmat","\VB_AncientRoot\data\vb_ar_vein.rvmat"}},{0.7,{"\VB_AncientRoot\data\vb_ar_p_bladesteel.rvmat","\VB_AncientRoot\data\vb_ar_p_bone.rvmat","\VB_AncientRoot\data\vb_ar_crust.rvmat","\VB_AncientRoot\data\vb_ar_vein.rvmat"}},{0.5,{"\VB_AncientRoot\data\vb_ar_p_bladesteel.rvmat","\VB_AncientRoot\data\vb_ar_p_bone.rvmat","\VB_AncientRoot\data\vb_ar_crust.rvmat","\VB_AncientRoot\data\vb_ar_vein.rvmat"}},{0.3,{"\VB_AncientRoot\data\vb_ar_p_bladesteel.rvmat","\VB_AncientRoot\data\vb_ar_p_bone.rvmat","\VB_AncientRoot\data\vb_ar_crust.rvmat","\VB_AncientRoot\data\vb_ar_vein.rvmat"}},{0.0,{"\VB_AncientRoot\data\vb_ar_p_bladesteel.rvmat","\VB_AncientRoot\data\vb_ar_p_bone.rvmat","\VB_AncientRoot\data\vb_ar_crust.rvmat","\VB_AncientRoot\data\vb_ar_vein.rvmat"}}};
+					healthLevels[] = {{1.0,{"VB_AncientRoot\data\vb_ar_p_bladesteel.rvmat","VB_AncientRoot\data\vb_ar_p_bone.rvmat","VB_AncientRoot\data\vb_ar_crust.rvmat","VB_AncientRoot\data\vb_ar_vein.rvmat"}},{0.7,{"VB_AncientRoot\data\vb_ar_p_bladesteel.rvmat","VB_AncientRoot\data\vb_ar_p_bone.rvmat","VB_AncientRoot\data\vb_ar_crust.rvmat","VB_AncientRoot\data\vb_ar_vein.rvmat"}},{0.5,{"VB_AncientRoot\data\vb_ar_p_bladesteel.rvmat","VB_AncientRoot\data\vb_ar_p_bone.rvmat","VB_AncientRoot\data\vb_ar_crust.rvmat","VB_AncientRoot\data\vb_ar_vein.rvmat"}},{0.3,{"VB_AncientRoot\data\vb_ar_p_bladesteel.rvmat","VB_AncientRoot\data\vb_ar_p_bone.rvmat","VB_AncientRoot\data\vb_ar_crust.rvmat","VB_AncientRoot\data\vb_ar_vein.rvmat"}},{0.0,{"VB_AncientRoot\data\vb_ar_p_bladesteel.rvmat","VB_AncientRoot\data\vb_ar_p_bone.rvmat","VB_AncientRoot\data\vb_ar_crust.rvmat","VB_AncientRoot\data\vb_ar_vein.rvmat"}}};
 				};
 			};
 		};
@@ -967,7 +967,7 @@ class CfgVehicles
 		heatIsolation = 0.45;
 		visibilityModifier = 0.7;
 		hiddenSelectionsTextures[] = {"\VB_AncientRoot\data\retex\vb_ar_cloak_g_co.paa", "\VB_AncientRoot\data\retex\vb_ar_cloak_co.paa", "\VB_AncientRoot\data\retex\vb_ar_cloak_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_AncientRoot\data\retex\vb_ar_cloak_g.rvmat", "\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat", "\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_AncientRoot\data\retex\vb_ar_cloak_g.rvmat", "VB_AncientRoot\data\retex\vb_ar_cloak.rvmat", "VB_AncientRoot\data\retex\vb_ar_cloak.rvmat"};
 		// Копия DamageSystem дождевика (ваниль DZ\characters\tops\config.cpp, Raincoat_ColorBase): там в healthLevels ванильные
 		// raincoat*.rvmat, и изношенный плащ терял свой материал. Здесь по материалу на скрытую секцию (camoGround, camoMale,
 		// camoFemale): свои на 1.0…0.3, на 0 — ванильные _destruct (как у ванили; цвет остаётся из hiddenSelectionsTextures).
@@ -978,7 +978,7 @@ class CfgVehicles
 				class Health
 				{
 					hitpoints = 120;
-					healthLevels[] = {{1.0,{"\VB_AncientRoot\data\retex\vb_ar_cloak_g.rvmat","\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat","\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat"}},{0.7,{"\VB_AncientRoot\data\retex\vb_ar_cloak_g.rvmat","\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat","\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat"}},{0.5,{"\VB_AncientRoot\data\retex\vb_ar_cloak_g.rvmat","\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat","\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat"}},{0.3,{"\VB_AncientRoot\data\retex\vb_ar_cloak_g.rvmat","\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat","\VB_AncientRoot\data\retex\vb_ar_cloak.rvmat"}},{0.0,{"\DZ\characters\tops\Data\raincoat_g_destruct.rvmat","\DZ\characters\tops\Data\raincoat_destruct.rvmat","\DZ\characters\tops\Data\raincoat_destruct.rvmat"}}};
+					healthLevels[] = {{1.0,{"VB_AncientRoot\data\retex\vb_ar_cloak_g.rvmat","VB_AncientRoot\data\retex\vb_ar_cloak.rvmat","VB_AncientRoot\data\retex\vb_ar_cloak.rvmat"}},{0.7,{"VB_AncientRoot\data\retex\vb_ar_cloak_g.rvmat","VB_AncientRoot\data\retex\vb_ar_cloak.rvmat","VB_AncientRoot\data\retex\vb_ar_cloak.rvmat"}},{0.5,{"VB_AncientRoot\data\retex\vb_ar_cloak_g.rvmat","VB_AncientRoot\data\retex\vb_ar_cloak.rvmat","VB_AncientRoot\data\retex\vb_ar_cloak.rvmat"}},{0.3,{"VB_AncientRoot\data\retex\vb_ar_cloak_g.rvmat","VB_AncientRoot\data\retex\vb_ar_cloak.rvmat","VB_AncientRoot\data\retex\vb_ar_cloak.rvmat"}},{0.0,{"DZ\characters\tops\Data\raincoat_g_destruct.rvmat","DZ\characters\tops\Data\raincoat_destruct.rvmat","DZ\characters\tops\Data\raincoat_destruct.rvmat"}}};
 				};
 			};
 			class GlobalArmor
@@ -1080,9 +1080,9 @@ class CfgVehicles
 		vbAlignToTerrain = 1;	// скрипт наклоняет объект по склону, если наклон не задан вручную
 		vbAlignRadius = 3.0;	// шаг сетки замера рельефа, м
 		hiddenSelections[] = {"crust", "veins"};
-		// пути с ведущим «\»: у бинаризованной модели материал без него не грузится и секция не рисуется (E75)
+		// пути к .rvmat БЕЗ ведущего «\»: с ним движок материал не загружает и секция не светится (стенд 2026-11-20, E75)
 		hiddenSelectionsTextures[] = {"\VB_AncientRoot\data\vb_ar_crust_co.paa", "\VB_AncientRoot\data\vb_ar_vein_co.paa"};
-		hiddenSelectionsMaterials[] = {"\VB_AncientRoot\data\vb_ar_crust.rvmat", "\VB_AncientRoot\data\vb_ar_vein.rvmat"};
+		hiddenSelectionsMaterials[] = {"VB_AncientRoot\data\vb_ar_crust.rvmat", "VB_AncientRoot\data\vb_ar_vein.rvmat"};
 	};
 
 	// Сердце: узел с корнями ~12 м, коллизия у узла, красный свет.

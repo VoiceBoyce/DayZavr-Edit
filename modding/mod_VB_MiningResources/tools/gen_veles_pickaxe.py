@@ -27,7 +27,7 @@ View Geometry — те же куски, Fire Geometry — те же с прон�
   vb_mr_veles_glow_co.paa — золото прожилок и руны (повторяется вдоль валика), vb_mr_veles_glow_e_co.paa — свечение.
 Материалы (Super): vb_mr_veles_metal / _wood / _amber (+ _damage, _destruct для healthLevels),
   vb_mr_veles_glow.rvmat (золото, обычное) и vb_mr_veles_glow_on.rvmat (золото со свечением, Stage8 + emmisive,
-  как у ванильных светящихся вещей). В конфиге и скрипте пути к .rvmat — с ведущим «\» (правило E75).
+  как у ванильных светящихся вещей). В конфиге и скрипте пути к .rvmat — БЕЗ ведущего «\» (E75, стенд 2026-11-20).
 model.cfg: класс vb_mr_pickaxe_veles, sections[] = {"vbmr_glow"}.
 
 Запуск (Python из Blender, в нём есть numpy):
@@ -1545,7 +1545,7 @@ def rvmat(spec, power, fresnel, nohq, smdi, emissive=(0, 0, 0), e_tex=None, dt=0
     return s
 
 
-GLOW_ON_EMISSIVE = 2.2               # как у светящихся трещин «Древнего корня» (стенд 11-15)
+GLOW_ON_EMISSIVE = 9.0               # стенд 2026-11-20: при 2.2 прожилки ночью еле видны (как у стражей Корня, баг №58)
 DMG_MC = BS.join(["dz", "characters", "data", "generic_damage_mc.paa"])
 DST_MC = BS.join(["dz", "weapons", "data", "weapons_destruct_metal_mc.paa"])
 
