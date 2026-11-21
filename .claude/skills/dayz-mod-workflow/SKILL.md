@@ -394,6 +394,7 @@ Verified errors committed more than once. Check ACTIVELY during implementation. 
 - **E74** — луч видимости RaycastRV: CollisionFlags.NONE и стеной считать только дома/постройки/деревья/камни
 - **E75** — путь к `.rvmat` с ведущим `\` движок не загружает: свечения нет, объект с материалом модели; пути к материалам — БЕЗ `\` (исправлено 2026-11-20, прежняя редакция была ошибкой)
 - **E114** — `binarize.exe` ищет материалы от рабочей папки: запускать из `P:\`, иначе модели без материалов («плавающий» размер PBO)
+- **E116** — `INT_UIF_Draw.Rich` не переносит строки (однострочный `px_rich_*.layout`, valign center): для многострочного текста `MText`
 - **E115** — `ItemPreviewWidget` у машин рисует только кузов (навесное не видно), крен и поворот объекта игнорирует: ровно вокруг своей оси машину не повернуть
 - **E76** — скриптовые NPC живут ~1 ч по CE lifetime и исчезают вдали от игроков: при создании SetLifetimeMax/SetLifetime 3888000
 - **E77** — у существ материал ставит `healthLevels` DamageSystem, а не `hiddenSelectionsMaterials`: перекраска со своим .rvmat — копия DamageSystem со своими материалами на 1.0/0.7
@@ -419,6 +420,7 @@ Verified errors committed more than once. Check ACTIVELY during implementation. 
 - **E120** — у поставленного на землю предмета (ItemBase) `EOnFrame` не вызывается даже с `SetEventMask(EntityEvent.FRAME)`: клиентская анимация стоит → один обработчик в `GetGame().GetUpdateQueue(CALL_CATEGORY_GUI).Insert(inst.Update)`, dt по `GetTickTime()`
 - **E121** — добавил `class EnergyManager` (или другой сохраняемый компонент) классу, который уже стоит в мире: поток сохранения меняется, старые объекты грузятся битыми (`Scripted variables corrupted`, ошибки CF ModStorage) → менять до выкладки или новым классом
 - **E122** — смена количества предмета в слоте/отсеке (зарядка, расход, износ) щёлкает звуком вложения: ванильный SetQuantity шлёт ITEM_ATTACH/DETACH — глушить флагом в override StartItemSoundServer
+- **E123** — `Cannot convert ... to method 'Slot'` и следом лавина ошибок в ванили: короткое имя своего метода (`Slot`, `Load`, `Flag`, `L`) совпало с существующей функцией — давать служебным методам префикс мода.
 
 ---
 

@@ -39,7 +39,7 @@ def clothes_category(rid):
     """Категория лавки для одежды и снаряжения по Id рецепта."""
     if 5100 <= rid <= 5106:
         return "ghost"
-    if 5110 <= rid <= 5113:
+    if 5110 <= rid <= 5113 or 5115 <= rid <= 5116:     # перчатки и ботинки экзо добавлены 2026-11-21
         return "exo"
     if rid == 5114 or 5120 <= rid <= 5122:
         return "bags"
@@ -68,6 +68,8 @@ CLOTHES = [
     (5111, "Куртка экзоскелета", ["OOTS_Jacket_Exo", "OOTS_Jacket_Exo_Tan"], 28),
     (5112, "Штаны экзоскелета", ["OOTS_Pants_Exo", "OOTS_Pants_Exo_Tan"], 25.5),
     (5113, "Бронежилет экзоскелета", ["OOTS_Vest_Exo"], 22.5),
+    (5115, "Перчатки экзоскелета", ["OOTS_Gloves_Exo"], 12),
+    (5116, "Ботинки экзоскелета", ["OOTS_Boots_Exo"], 14),
     (5114, "Кобура на бронежилет", ["PlateCarrierHolster_Black"], 0.7),
     (5120, "Рюкзак 6Ш118", ["FOG_Bag_6ShBagT_Green", "FOG_Bag_6ShBagT_BlackEMR", "FOG_Bag_6ShBagT_Black",
                             "FOG_Bag_6ShBagT_RG", "FOG_Bag_6ShBagT_CB", "FOG_Bag_6ShBagT_White",
@@ -108,7 +110,10 @@ CLOTHES = [
 ]
 # Класс, исправленный при переносе (в старом квесте 18031 был с лишней точкой). В чужом моде не проверяем —
 # генератор предупреждает, пользователь проверяет в игре.
-UNVERIFIED = {"kr_swatsuit_combatShirt_multicam"}
+UNVERIFIED = {"kr_swatsuit_combatShirt_multicam",
+              # перчатки и ботинки экзо (2026-11-21): классы назвал пользователь, в модах репозитория и types
+              # серверов их нет, чужие PBO не смотрим — проверить в игре
+              "OOTS_Gloves_Exo", "OOTS_Boots_Exo"}
 
 # Снаряжение (верстак, в нём хранилище на 100 клеток): Id, название, класс, цена в золоте
 GEAR = [
@@ -120,9 +125,9 @@ GEAR = [
     (5214, "Модуль увеличения объёма", "OOTS_ClothesModificatorSlot", 20),
     (5215, "Модуль снижения веса", "OOTS_ClothesModificatorWeight", 20),
 ]
-# Описания рецептов снаряжения (по умолчанию «Лавка лагеря.»)
+# Описания рецептов снаряжения (по умолчанию пусто — окно покажет описание предмета; слова «Лавка лагеря» убраны 2026-11-21)
 GEAR_DESC = {
-    5200: "Лавка лагеря. Сервопривод экзоскелета 2-го поколения: мощнее обычного, вмещает 120 слотов. "
+    5200: "Сервопривод экзоскелета 2-го поколения: мощнее обычного, вмещает 120 слотов. "
           "Вставляется в слот повязки.",
 }
 # Убраны из лавки по решению пользователя 2026-11-14: отпугиватель мутантов (5220), граната РГД-5 (5221),
@@ -222,6 +227,8 @@ CLOTHES_EXTRA = {
     5111: [("EFT_Cloth_aramid", 2), ("EFT_Military_cable", 1), (TROPHY, 1)],                        # куртка экзо
     5112: [("EFT_Cloth_aramid", 2), ("EFT_Engine", 1), (TROPHY, 1)],                                # штаны экзо
     5113: [("EFT_Cloth_aramid", 2), ("EFT_MetalParts", 2)],                                         # бронежилет экзо
+    5115: [("EFT_Cloth_aramid", 1), ("EFT_Military_cable", 1), ("EFT_Capacitors", 1)],              # перчатки экзо
+    5116: [("EFT_Cloth_aramid", 1), ("EFT_MetalParts", 2), ("EFT_Military_cable", 1)],              # ботинки экзо
     5120: [("EFT_Cloth_cordura", 3), ("EFT_Cloth_paracord", 2), ("EFT_Cloth_aramid", 1)],           # рюкзак 6Ш118
     5121: [("EFT_Cloth_cordura", 1), ("EFT_Cloth_paracord", 1)],          # ременная система
     5122: [("EFT_Cloth_paracord", 2), ("EFT_Cloth_cordura", 1), ("EFT_Cloth_aramid", 1)],           # оружейный ремень

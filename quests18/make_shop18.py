@@ -7,7 +7,7 @@
   python make_shop18.py --to <папка DRL_CraftMenu>  — выложить в другую папку (стенд), без бэкапа
 
 Основа сборки — текущие CraftConfig.json и CraftCategories.json 18: добавляются или заменяются только рецепты лавки
-(Id 5100–5999, описание «Лавка…») и категории «Лавка: …»; чужие рецепты и категории остаются как есть, формат файла
+(Id 5100–5999, они же в категориях «Лавка: …») и категории «Лавка: …»; чужие рецепты и категории остаются как есть, формат файла
 тоже (CRLF, отступ 4, UTF-8 без экранирования, перевод строки в конце — как в исходном файле).
 
 Особенности DRL (проверено по коду на 16):
@@ -37,7 +37,6 @@ OUT = os.path.join(HERE, "out", "DRL_CraftMenu")
 OLD = os.path.join(HERE, "source", "old_shop18")
 BACKUP = r"G:\DayZ_Test\backup"
 ID_MIN, ID_MAX = 5100, 5999
-MARK = ("Лавка",)          # описание рецептов лавки начинается так — по нему узнаём свои рецепты прошлых выкладок
 COINS = {"g": "DZVR_Coin_Gold", "s": "DZVR_Coin_Silver", "m": "DZVR_Coin_Copper"}
 BRANCHES = ("COINS_TRADE_CLOTHES", "COINS_TRADE_WEAPONS", "COINS_TRADE_MATERIAL")
 
@@ -183,14 +182,14 @@ def build():
     put = shop.put
     # одежда
     for rid, name, variants, g in SD.CLOTHES:
-        desc = "Лавка лагеря." + (" Выберите расцветку." if len(variants) > 1 else "")
+        desc = ""  # расцветки видно по вариантам, подсказку «Выберите расцветку.» убрали 2026-11-21
         put(SD.clothes_category(rid), recipe(rid, name, SD.SEW, variants,
                                              price_comps(g) + extras(SD.CLOTHES_EXTRA.get(rid, [])), desc), g, wb=SD.SEW)
     # снаряжение (сервопривод и модули OOTS — верстак)
     for rid, name, cls, g in SD.GEAR:
         put(SD.clothes_category(rid), recipe(rid, name, SD.WB, [cls],
                                              price_comps(g) + extras(SD.GEAR_EXTRA.get(rid, [])),
-                                             SD.GEAR_DESC.get(rid, "Лавка лагеря.")), g, wb=SD.WB)
+                                             SD.GEAR_DESC.get(rid, "")), g, wb=SD.WB)
 
     # оружие и обвес
     addon_ids, addon_price, next_addon = {}, {}, [5400]
@@ -205,16 +204,16 @@ def build():
         if cls in SD.AMMO:
             nm, each = SD.AMMO[cls]
             p = each * n
-            r = recipe(rid, "%s ×%d" % (nm, n), SD.WB, [cls], price_comps(p), "Лавка лагеря: пачка %d шт." % n,
+            r = recipe(rid, "%s ×%d" % (nm, n), SD.WB, [cls], price_comps(p), "Пачка %d шт." % n,
                        count=n, frac=0.0)
         elif cls in SD.ADDONS:
             nm, p = SD.ADDONS[cls]
-            r = recipe(rid, nm, SD.WB, [cls], price_comps(p) + extras(SD.addon_extra(cls, p)), "Лавка лагеря.")
+            r = recipe(rid, nm, SD.WB, [cls], price_comps(p) + extras(SD.addon_extra(cls, p)), "")
         else:  # магазин
             rounds = mag_rounds(cls)
             p = SD.MAG_OVERRIDE.get(cls, SD.MAG_BIG_PRICE if rounds >= SD.MAG_BIG_ROUNDS else SD.MAG_PRICE)
             nm = "Магазин %s" % weapon_name + (" (%d)" % rounds if rounds else "")
-            r = recipe(rid, nm, SD.WB, [cls], price_comps(p) + extras(SD.mag_extra(rounds)), "Лавка лагеря. Магазин полный.")
+            r = recipe(rid, nm, SD.WB, [cls], price_comps(p) + extras(SD.mag_extra(rounds)), "")  # «Магазин полный.» убрали 2026-11-21
         addon_ids[key], addon_price[key] = rid, p
         put("addons", r, p, wb=SD.WB)
         return rid, p
@@ -242,8 +241,9 @@ def build():
             att.append(aid)
         wp = SD.nice(max(kit - spent, kit * SD.WEAPON_MIN_SHARE))
         rid = 5300 + (q["Id"] - 18301)
-        desc = ("Лавка лагеря. Ствол без обвеса. Ниже отметьте магазины и обвес из прежнего набора — встанут на оружие "
-                "или лягут рядом. Набор целиком: %s." % price_text(wp + spent))
+        # Цену «Набор целиком: …» из описания убрали 2026-11-21 — она и так видна в окне.
+        desc = ("Ствол без обвеса. Ниже отметьте магазины и обвес из прежнего набора — встанут на оружие "
+                "или лягут рядом.")
         put("weapons", recipe(rid, wname, SD.WB, [wcls], price_comps(wp) + extras(SD.weapon_extra(wcls, kit)), desc,
                               attached=att, sec=5), wp,
             "набор %s (старый %d з)" % (price_text(wp + spent), old_kit), wb=SD.WB)
@@ -266,7 +266,7 @@ def build():
         if len(gprice[gid]) != 1:
             raise SystemExit("для базы: в группе «%s» разные старые цены %s" % (name, sorted(gprice[gid])))
         g = SD.from_old_gold(gprice[gid].pop())
-        desc = "Лавка лагеря." + (" Выберите вариант (%d)." % len(groups[gid]) if len(groups[gid]) > 1 else "")
+        desc = "Выберите вариант (%d)." % len(groups[gid]) if len(groups[gid]) > 1 else ""
         put("base", recipe(gid, name, SD.WB, groups[gid], price_comps(g) + extras(SD.BASE_EXTRA.get(gid, [])), desc), g,
             wb=SD.WB)
     return shop
@@ -365,10 +365,14 @@ def validate(ix, shop, live, live_cats):
     for rid in ids:
         if incat.count(rid) != 1:
             err.append("Id %d в %d категориях" % (rid, incat.count(rid)))
-    # чужие Id и категории не трогаем
+    # чужие Id и категории не трогаем. Свой рецепт прошлых выкладок — тот, что стоит в категории «Лавка: …»
+    # (раньше узнавали по описанию «Лавка лагеря…», с 2026-11-21 этих слов в описаниях нет).
+    shop_live = {i for c in live_cats
+                 if c["Name"].startswith(SD.CATEGORY_PREFIX) or c["Name"] in SD.OBSOLETE_CATEGORIES
+                 for i in c.get("List", [])}
     for lr in live:
         lid = lr["RecipeId"]
-        theirs = not str(lr.get("Description", "")).startswith(MARK)
+        theirs = lid not in shop_live
         if theirs and (lid in ids or ID_MIN <= lid <= ID_MAX):
             err.append("Id %d «%s» на 18 занят чужим рецептом" % (lid, lr.get("RecipeName", "")))
     names = {v[0] for v in SD.CATEGORIES.values()}
@@ -441,7 +445,8 @@ def dump(obj, path, tail=b""):
 
 
 def is_ours(r, ours):
-    return r["RecipeId"] in ours or (ID_MIN <= r["RecipeId"] <= ID_MAX and str(r.get("Description", "")).startswith(MARK))
+    # Диапазон Id лавки занят только ею (чужие там ловит self_check), как на 16.
+    return r["RecipeId"] in ours or ID_MIN <= r["RecipeId"] <= ID_MAX
 
 
 def merged(src_dir, shop):

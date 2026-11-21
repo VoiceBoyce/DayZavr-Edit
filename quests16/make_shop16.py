@@ -147,14 +147,14 @@ def build():
                                count=cnt, frac=0.0, sec=2), 0, "%s ×%d → %s ×%d" % (cls[10:], n, res[10:], cnt))
     # одежда (цены в серебре)
     for rid, name, variants, s in SD.CLOTHES:
-        desc = "Лавка лагеря." + (" Выберите расцветку." if len(variants) > 1 else "")
+        desc = ""  # расцветки видно по вариантам, подсказку «Выберите расцветку.» убрали 2026-11-21
         put(SD.clothes_category(rid), recipe(rid, name, SD.SEW, variants,
                                              price_comps(s) + extras(SD.CLOTHES_EXTRA.get(rid, [])), desc), s)
     # снаряжение (сервопривод — к экзоскелету, модули — своя категория)
     for rid, name, cls, s in SD.GEAR:
         put(SD.clothes_category(rid), recipe(rid, name, SD.WB, [cls],
                                              price_comps(s) + extras(SD.GEAR_EXTRA.get(rid, [])),
-                                             SD.GEAR_DESC.get(rid, "Лавка лагеря.")), s)
+                                             SD.GEAR_DESC.get(rid, "")), s)
     if SD.RECHARGE:
         rid, name, cls, s = SD.RECHARGE
         batt = coin(cls, 1)
@@ -174,16 +174,16 @@ def build():
         if cls in SD.AMMO:
             nm, each = SD.AMMO[cls]
             p = each * n
-            r = recipe(rid, "%s ×%d" % (nm, n), SD.WB, [cls], price_comps(p), "Лавка лагеря: пачка %d шт." % n,
+            r = recipe(rid, "%s ×%d" % (nm, n), SD.WB, [cls], price_comps(p), "Пачка %d шт." % n,
                        count=n, frac=0.0)
         elif cls in SD.ADDONS:
             nm, p = SD.ADDONS[cls]
-            r = recipe(rid, nm, SD.WB, [cls], price_comps(p) + extras(SD.addon_extra(cls, p)), "Лавка лагеря.")
+            r = recipe(rid, nm, SD.WB, [cls], price_comps(p) + extras(SD.addon_extra(cls, p)), "")
         else:  # магазин
             rounds = mag_rounds(cls)
             p = SD.MAG_OVERRIDE.get(cls, SD.MAG_BIG_PRICE if rounds >= SD.MAG_BIG_ROUNDS else SD.MAG_PRICE)
             nm = "Магазин %s" % weapon_name + (" (%d)" % rounds if rounds else "")
-            r = recipe(rid, nm, SD.WB, [cls], price_comps(p) + extras(SD.mag_extra(rounds)), "Лавка лагеря. Магазин полный.")
+            r = recipe(rid, nm, SD.WB, [cls], price_comps(p) + extras(SD.mag_extra(rounds)), "")  # «Магазин полный.» убрали 2026-11-21
         addon_ids[key], addon_price[key] = rid, p
         put("addons", r, p)
         return rid, p
@@ -211,8 +211,9 @@ def build():
             att.append(aid)
         wp = SD.nice(max(kit - spent, kit * SD.WEAPON_MIN_SHARE))
         rid = 5300 + (q["Id"] - 18301)
-        desc = ("Лавка лагеря. Ствол без обвеса. Ниже отметьте магазины и обвес из прежнего набора — встанут на оружие "
-                "или лягут рядом. Набор целиком: %s." % price_text(wp + spent))
+        # Цену «Набор целиком: …» из описания убрали 2026-11-21 — она и так видна в окне.
+        desc = ("Ствол без обвеса. Ниже отметьте магазины и обвес из прежнего набора — встанут на оружие "
+                "или лягут рядом.")
         put("weapons", recipe(rid, wname, SD.WB, [wcls], price_comps(wp) + extras(SD.weapon_extra(wcls, kit)), desc,
                               attached=att, sec=5), wp,
             "набор %s (старый %d з)" % (price_text(wp + spent), old_kit))
@@ -234,7 +235,7 @@ def build():
             continue
         assert len(gprice[gid]) == 1, (name, gprice[gid])
         s = SD.from_old_gold(gprice[gid].pop())
-        desc = "Лавка лагеря." + (" Выберите вариант (%d)." % len(groups[gid]) if len(groups[gid]) > 1 else "")
+        desc = "Выберите вариант (%d)." % len(groups[gid]) if len(groups[gid]) > 1 else ""
         put("base", recipe(gid, name, SD.WB, groups[gid], price_comps(s) + extras(SD.BASE_EXTRA.get(gid, [])), desc), s)
     return recipes, cats, rows
 
@@ -268,8 +269,15 @@ def validate(ix, recipes, live):
         for a in r.get("AttachedRecipeIds", []):
             if a not in seen and a not in {x["RecipeId"] for x in recipes}:
                 err.append("Id %d: навес %d не найден" % (rid, a))
+    # Свой рецепт прошлых выкладок — стоит в категории лавки. По описанию «Лавка лагеря…» узнавать больше нельзя:
+    # с 2026-11-21 этих слов в описаниях нет.
+    names = {v[0] for v in SD.CATEGORIES.values()} | set(SD.OBSOLETE_CATEGORIES)
+    cats_path = os.path.join(LIVE, "CraftCategories.json")
+    live_cats = json.load(io.open(cats_path, encoding="utf-8-sig")) if os.path.isfile(cats_path) else []
+    shop_live = {i for c in live_cats if c.get("Name") in names for i in c.get("List", [])}
     for rid in seen:
-        if rid in live_ids and not str(live_ids[rid].get("Description", "")).startswith(("Лавка", "Курс", "Старая")):
+        own = rid in shop_live or str(live_ids.get(rid, {}).get("Description", "")).startswith(("Курс", "Старая"))
+        if rid in live_ids and not own:
             err.append("Id %d уже занят чужим рецептом на 16" % rid)
     # перепродажа: лавка не продаёт то, что квесты просят принести или показать (купил дёшево — сдал за награду)
     import quests_data as QD

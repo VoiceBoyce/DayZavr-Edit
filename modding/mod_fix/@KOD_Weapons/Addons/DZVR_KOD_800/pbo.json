@@ -1,0 +1,18 @@
+{
+    "compress": {
+        "exclude": [
+        ],
+        "include": [
+        ]
+    },
+    "headers": [
+        {
+            "name": "prefix",
+            "value": "DZVR_KOD_800"
+        },
+        {
+            "name": "product",
+            "value": "dayz ugc"
+        }
+    ]
+}

@@ -2,6 +2,7 @@
 // DRL_CraftMenu - панели нового окна крафта:
 //   DRL_UIVariantStrip  плитки вариантов результата (ResultClasses);
 //   DRL_UIHoverCard     подсказка ингредиента поверх сцены превью;
+//   DRL_UIDescTip       описание изделия в шапке листа: 2 строки, полный текст при наведении;
 //   DRL_UIPopover       выезжающая панель (вариации ингредиента, требования);
 //   DRL_UIProc          процесс крафта на клиенте (как DRL_CraftProcessEntryWidget);
 //   DRL_UIQueueBar      очередь процессов в шапке окна.
@@ -365,6 +366,191 @@ class DRL_UIHoverCard
 	{
 		if (m_Root)
 			m_Root.Show(false);
+	}
+}
+
+// --- описание изделия в шапке листа -----------------------------------------------------
+// Длинное описание (у вещей сетов до ~450 знаков: что за вещь, «Улучшено: …», «Полный сет …»)
+// в шапку не влезало и обрезалось посреди строки. Теперь в шапке не больше LINES строк с «…»,
+// полный текст - карточкой под шапкой при наведении на описание (2026-11-21).
+class DRL_UIDescTip extends ScriptedWidgetEventHandler
+{
+	static const int LINES = 2;
+	static const float SIZE = 12;
+	// Шаг строк MultilineTextWidget при шрифте 12 (замер по скриншоту 2026-11-21: ~17 px).
+	static const float LINE_H = 17.5;
+	static const float PAD = 12;
+	// MultilineTextWidget переносит чуть раньше нашего замера: запас по ширине.
+	static const float WRAP_K = 0.96;
+
+	protected Widget m_Parent;
+	protected ButtonWidget m_Hit;
+	protected Widget m_Card;
+	protected ref INT_UIF_Surface m_CardBg;
+	protected ref INT_UIF_Surface m_CardShadow;
+	// MultilineText. RichText с замером GetContentHeight пробовали 2026-11-21: раскладка ломается
+	// (текст в одну строку посередине пустой карточки) - не возвращать.
+	protected MultilineTextWidget m_CardText;
+	protected float m_W;
+	protected float m_CardW;
+	protected string m_Full;
+	protected bool m_Cut;
+
+	// x, y, w, h - место описания; cardY - верх карточки с полным текстом.
+	void Build(Widget parent, float x, float y, float w, float h, float cardY)
+	{
+		m_Parent = parent;
+		m_W = w;
+		m_Hit = INT_UIF_Draw.Hit(parent, x, y, w, h, this);
+		m_Hit.SetName("DRL_DescHit");
+		m_CardW = w + 24;
+		m_Card = INT_UIF_Draw.Frame(parent, x - 12, cardY, m_CardW, 60, "DRL_DescCard");
+		int fill = INT_UIF.Color(INT_UIF_ThemeKeys.PANEL);
+		int border = INT_UIF.Soft(INT_UIF_ThemeKeys.TEAL, 110);
+		m_CardShadow = INT_UIF_Surface.Shadow(m_Card, -14, -10, m_CardW + 28, 90, ARGB(130, 0, 0, 0));
+		m_CardBg = INT_UIF_Surface.Box(m_Card, 0, 0, m_CardW, 60, 10, fill, border);
+		int text = INT_UIF.Color(INT_UIF_ThemeKeys.TEXT);
+		m_CardText = INT_UIF_Draw.MText(m_Card, PAD, PAD - 2, m_CardW - PAD * 2, 40, "", SIZE, text);
+		// Над 3D-моделью листа (манекен «Раскроя», изделие «Чертежа»): 3D рисуется поверх 2D с приоритетом не выше своего.
+		DRL_UIKitUtil.SetSortDeep(m_Card, DRL_UI_SORT_OVER_MODEL);
+		m_Card.Show(false);
+	}
+
+	// Полный текст; возвращает текст для шапки (обрезанный, если не влез).
+	string Set(string full)
+	{
+		Hide();
+		m_Full = full;
+		bool cut;
+		string shown = Fit(full, m_W * WRAP_K, cut);
+		m_Cut = cut;
+		return shown;
+	}
+
+	// Не больше LINES строк ширины w; иначе обрезано по слову с «…».
+	protected string Fit(string text, float w, out bool cut)
+	{
+		cut = false;
+		TStringArray words = new TStringArray();
+		text.Split(" ", words);
+		string done = "";
+		string line = "";
+		int lineNo = 1;
+		foreach (string word : words)
+		{
+			if (word == "")
+				continue;
+			string cand = word;
+			if (line != "")
+				cand = line + " " + word;
+			if (DRL_UIMeasure.TextW(m_Parent, cand, SIZE, false) <= w)
+			{
+				line = cand;
+				continue;
+			}
+			if (lineNo >= LINES)
+			{
+				cut = true;
+				break;
+			}
+			if (done != "")
+				done = done + " ";
+			done = done + line;
+			line = word;
+			lineNo++;
+		}
+		if (!cut)
+			return text;
+		// Три точки, а не «…»: глифа многоточия в игровом шрифте может не быть.
+		string ell = "...";
+		while (line != "" && DRL_UIMeasure.TextW(m_Parent, line + ell, SIZE, false) > w)
+		{
+			int sp = line.LastIndexOf(" ");
+			if (sp <= 0)
+			{
+				line = "";
+				break;
+			}
+			line = line.Substring(0, sp);
+		}
+		// Без висящих запятых и точек перед многоточием.
+		while (line.Length() > 0)
+		{
+			string last = line.Substring(line.Length() - 1, 1);
+			if (last != "," && last != "." && last != ":" && last != ";")
+				break;
+			line = line.Substring(0, line.Length() - 1);
+		}
+		string res = done;
+		if (res != "" && line != "")
+			res = res + " ";
+		return res + line + ell;
+	}
+
+	// Сколько строк займёт текст при ширине w (перенос по словам, как в Fit).
+	protected int CountLines(string text, float w)
+	{
+		TStringArray words = new TStringArray();
+		text.Split(" ", words);
+		string line = "";
+		int lines = 1;
+		foreach (string word : words)
+		{
+			if (word == "")
+				continue;
+			string cand = word;
+			if (line != "")
+				cand = line + " " + word;
+			if (line == "" || DRL_UIMeasure.TextW(m_Parent, cand, SIZE, false) <= w)
+			{
+				line = cand;
+				continue;
+			}
+			line = word;
+			lines++;
+		}
+		return lines;
+	}
+
+	// Карточка под текст: строки считаются тем же переносом, что и обрезка шапки (с запасом по
+	// ширине - иногда остаётся пустая строка снизу, зато последняя не срезается; так одобрено 2026-11-21).
+	protected void ShowCard()
+	{
+		if (!m_Cut || m_Full == "")
+			return;
+		float innerW = m_CardW - PAD * 2;
+		int lines = CountLines(m_Full, innerW * WRAP_K);
+		float th = lines * LINE_H + 2;
+		float ch = th + PAD * 2 - 4;
+		m_CardText.SetText(m_Full);
+		INT_UIF_Draw.Resize(m_CardText, innerW, th);
+		INT_UIF_Draw.Resize(m_Card, m_CardW, ch);
+		INT_UIF_Draw.Resize(m_CardBg.GetRoot(), m_CardW, ch);
+		if (m_CardShadow)
+			INT_UIF_Draw.Resize(m_CardShadow.GetRoot(), m_CardW + 28, ch + 30);
+		m_Card.Show(true);
+	}
+
+	void Hide()
+	{
+		if (m_Card)
+			m_Card.Show(false);
+	}
+
+	override bool OnMouseEnter(Widget w, int x, int y)
+	{
+		if (w != m_Hit)
+			return false;
+		ShowCard();
+		return true;
+	}
+
+	override bool OnMouseLeave(Widget w, Widget enterW, int x, int y)
+	{
+		if (w != m_Hit)
+			return false;
+		Hide();
+		return true;
 	}
 }
 

@@ -120,6 +120,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 	protected TextWidget m_DocLine;
 	protected TextWidget m_RecipeTitle;
 	protected MultilineTextWidget m_RecipeDesc;
+	protected ref DRL_UIDescTip m_DescTip;   // 2 строки описания, полный текст при наведении
 	protected Widget m_Stamp;
 	protected ref INT_UIF_Surface m_StampBg;
 	protected ref array<TextWidget> m_StampLabels;
@@ -513,6 +514,8 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		m_RecipeTitle = INT_UIF_Draw.Text(m_SheetBody, 20, 32, w - 400, 32, "", 24, txt);
 		m_RecipeTitle.SetBold(true);
 		m_RecipeDesc = INT_UIF_Draw.MText(m_SheetBody, 20, 66, 560, 36, "", 12, muted);
+		m_DescTip = new DRL_UIDescTip();
+		m_DescTip.Build(m_SheetBody, 20, 66, 560, 36, 108);
 
 		// Штамп: время, выход, состояние, наполнение.
 		m_Stamp = INT_UIF_Draw.Frame(m_SheetBody, w - 20 - 300, 16, 300, 46, "DRL_Stamp");
@@ -3242,7 +3245,8 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		}
 		if (body == "")
 			body = "#STR_DRL_Craft_Recipe_Detail";
-		m_RecipeDesc.SetText(DRL_UIText.Tr(body));
+		string full = DRL_UIText.Tr(body);
+		m_RecipeDesc.SetText(m_DescTip.Set(full));
 		FillSlots(r);
 	}
 
