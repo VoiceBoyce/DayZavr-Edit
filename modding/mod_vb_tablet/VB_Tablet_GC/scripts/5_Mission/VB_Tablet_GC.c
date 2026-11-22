@@ -113,43 +113,46 @@ class VB_TabletGC
 
 modded class INT_GC_Window
 {
-	ref INT_UIF_Surface m_VbgBox;
+	Widget m_VbgBox;
 	TextWidget m_VbgText;
 	ImageWidget m_VbgIcon;
 	ButtonWidget m_VbgHit;
 
-	// Третья кнопка правее «Рядом». Узкое окно: только значок; совсем узкое: кнопки нет, Tab тоже без клана.
-	override protected void BuildHeader()
+	// С 2026-11-22 (вид чата «Экспедиция») каналы — ряд «◆ ГЛОБАЛЬНЫЙ  ◇ РЯДОМ» под шапкой. «◇ КЛАН» третьим справа
+	// от «Рядом», тем же видом; не влезает в ширину окна — вкладки нет, Tab тоже без клана.
+	override protected void BuildChannels()
 	{
-		super.BuildHeader();
 		m_VbgBox = null;
 		m_VbgText = null;
 		m_VbgIcon = null;
 		m_VbgHit = null;
-		if (!VB_TabletGC.CanUse() || !m_Header)
+		super.BuildChannels();
+		if (!VB_TabletGC.CanUse())
 			return;
-		string gl = Widget.TranslateString("#STR_INT_GC_CH_GLOBAL");
-		string lo = Widget.TranslateString("#STR_INT_GC_CH_LOCAL");
-		string cl = Widget.TranslateString("#STR_VB_TAB_GC_TAG");
-		float gw = INT_GC_Measure.Width(gl, 13) + 42;
-		float lw = INT_GC_Measure.Width(lo, 13) + 42;
-		float cw = INT_GC_Measure.Width(cl, 13) + 42;
-		float px = 66 + gw + 6 + lw + 6;
-		float room = m_W - 84;
-		bool compact = px + cw > room;
-		if (compact)
-			cw = 36;
-		if (px + cw > room)
+		float size = 11;
+		float mark = 9;
+		string gl = INT_GC_Look.Caps("#STR_INT_GC_CH_GLOBAL");
+		string lo = INT_GC_Look.Caps("#STR_INT_GC_CH_LOCAL");
+		string cl = INT_GC_Look.Caps("#STR_VB_TAB_GC_TAG");
+		float gw = INT_GC_Measure.Width(gl, size);
+		float lw = INT_GC_Measure.Width(lo, size);
+		float cw = INT_GC_Measure.Width(cl, size);
+		float y = HEADER_H + 1;
+		float lx = LEFT + mark + 8 + gw + 22;
+		float cx = lx + mark + 8 + lw + 22;
+		float cTotal = mark + 8 + cw;
+		if (cx + cTotal + 12 > m_W)
 			return;
-		int sand = INT_GC_Look.Text();
-		Widget cf = INT_UIF_Draw.Frame(m_Header, px, 10, cw, 26, "ChannelClan");
-		m_VbgBox = INT_UIF_Surface.Pill(cf, 0, 0, cw, 26, 0, 0);
-		m_VbgIcon = VBT.Ico(cf, 11, 6, 14, "flag", sand);
-		if (!compact)
-			m_VbgText = INT_UIF_Draw.Text(cf, 30, 0, cw - 34, 26, cl, 13, sand);
-		Part("ChannelClan", cf);
+		int muted = INT_GC_Look.Muted();
+		float my = (CHAN_H - mark) * 0.5;
+		m_VbgBox = INT_UIF_Draw.Frame(m_Root, cx, y, cTotal + 6, CHAN_H, "ChannelClan");
+		if (!m_VbgBox)
+			return;
+		m_VbgIcon = INT_GC_Look.Diamond(m_VbgBox, 0, my, mark, muted, false);
+		m_VbgText = INT_UIF_Draw.Text(m_VbgBox, mark + 8, 0, cw + 6, CHAN_H, cl, size, muted);
+		Part("ChannelClan", m_VbgBox);
 		if (m_Interactive)
-			m_VbgHit = INT_UIF_Draw.Hit(m_Header, px, 10, cw, 26, m_Handler);
+			m_VbgHit = INT_UIF_Draw.Hit(m_Root, cx - 4, y, cTotal + 12, CHAN_H, m_Handler);
 		PaintChannel(INT_GC_UI.Settings().Channel);
 	}
 
@@ -159,15 +162,21 @@ modded class INT_GC_Window
 		if (!m_VbgBox)
 			return;
 		bool clan = VB_TabletGC.IsActive();
-		int bright = ARGB(255, 250, 244, 232);
-		int muted = INT_GC_Look.Muted();
-		int idle = INT_GC_Look.BrassA(70);
 		if (clan)
 		{
-			PaintPill(m_ChanGlobalBox, m_ChanGlobalText, m_ChanGlobalIcon, false, INT_GC_Look.Brass(), bright, muted, idle);
-			PaintPill(m_ChanLocalBox, m_ChanLocalText, m_ChanLocalIcon, false, INT_GC_Look.Local(), bright, muted, idle);
+			PaintTab(m_ChanGlobalText, m_ChanGlobalMark, false);
+			PaintTab(m_ChanLocalText, m_ChanLocalMark, false);
 		}
-		PaintPill(m_VbgBox, m_VbgText, m_VbgIcon, clan, VB_TabletGC.Color(), bright, muted, idle);
+		PaintTab(m_VbgText, m_VbgIcon, clan);
+		// Активный клан — цветом клана, а не оранжевым чата.
+		if (clan)
+		{
+			int col = VB_TabletGC.Color();
+			if (m_VbgText)
+				m_VbgText.SetColor(col);
+			if (m_VbgIcon)
+				m_VbgIcon.SetColor(col);
+		}
 		UpdatePlaceholder(channel);
 	}
 

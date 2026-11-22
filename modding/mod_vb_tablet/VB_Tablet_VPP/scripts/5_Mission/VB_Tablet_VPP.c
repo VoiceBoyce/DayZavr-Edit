@@ -399,9 +399,10 @@ modded class INT_VPP_EditorCard
 	protected ref INT_VPPX_HButton m_VbtClanBtn;
 	protected bool m_VbtShown;
 
-	override protected void INT_BuildButtons()
+	// С 2026-11-21 редактор — колонка карты высотой h (CARD_H больше нет), панель «В клан» — у её нижнего угла снаружи.
+	override protected void INT_BuildButtons(float h)
 	{
-		super.INT_BuildButtons();
+		super.INT_BuildButtons(h);
 		m_VbtPlate = null;
 		m_VbtClanBtn = null;
 		if (!m_INT_Root || !VB_TabletVppUi.CanClan())
@@ -412,7 +413,7 @@ modded class INT_VPP_EditorCard
 		float px = -pw - VB_TabletVppUi.PLATE_GAP;
 		if (m_INT_Left)
 			px = CARD_W + VB_TabletVppUi.PLATE_GAP;
-		m_VbtPlate = INT_VPP_Ui.INT_Panel(m_INT_Root, px, CARD_H - ph, pw, ph, INT_VPP_Ui.CARD_BG, INT_VPP_Ui.CARD_EDGE, true, "VbtClanPlate");
+		m_VbtPlate = INT_VPP_Ui.INT_Panel(m_INT_Root, px, h - ph, pw, ph, INT_VPP_Ui.CARD_BG, INT_VPP_Ui.CARD_EDGE, true, "VbtClanPlate");
 		if (!m_VbtPlate)
 			return;
 		m_VbtClanBtn = new INT_VPPX_HButton();

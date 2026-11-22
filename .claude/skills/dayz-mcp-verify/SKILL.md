@@ -1564,3 +1564,19 @@ the mod under test.
    DIK цифрового блока: 8=72, 2=80, 4=75, 6=77, 9=73, 3=81.
 4. эффект читать `vehicle_telemetry` (pos_real, direction, speedo_max): серверный `telemetry_read object_at` машину,
    которую ведёт клиент, не находит. Камера из кабины не выходит (`camera_unmoved_cabin`) — вид снаружи не снять.
+
+## (добавлено 2026-11-23) Одежда на стенде и смена набора модов
+
+- **Одеть без игрока**: `world_spawn(SurvivorM_Mirek / SurvivorF_Eva, flags=8389668)` — голый манекен, затем
+  `inventory_attach(dest="attachment", slot="Body|Legs|Feet|Gloves|Vest|Hips|Mask|Headgear", object_id=<манекен>)`.
+  Так видны надетые модели `_m`/`_f` обоих полов; правила совместимости слотов при этом не проверяются (создание
+  скриптом на сервере).
+- **`@imp_clothes` не компилируется в DayZDiag**: `IMPGMOD/Scripts/4_World/recipe/allowrecipe.c,3: Overriding function
+  'SetActions' but not marked as 'override'` → Can't compile World, сервер стенда падает (`readiness_server_pid_dead`).
+  Обычный сервер это пропускает. Прогон без IMP (или исправить сам IMP — он наш).
+- **Смена набора модов откладывает мир**: dayz_test_run сравнивает печать набора (`storage_1.modset.json`) и при
+  несовпадении переименовывает `storage_1` в `storage_1.modset-<время>-<печать>` (`storage_rotated: true`) — постройки
+  пользователя «пропадают». Вернуть мир под новый набор: остановить стенд, текущий `storage_1` переименовать (не удалять),
+  скопировать нужную копию в `storage_1`, `storage_1.modset.json` оставить как есть (печать нового набора), запустить тем
+  же набором — `storage_rotated: false`, мир загружается (база Эхо 11-23). Набор должен содержать все моды, чьи классы
+  стоят в мире.
