@@ -245,7 +245,7 @@ class CfgVehicles
 		varWetMax=0.049;
 		heatIsolation=1;
 		visibilityModifier=0.75;
-		hiddenSelections[]={"camoflage","glass"};	// glass — стёкла: горят светом сервопривода (этап 3б), без энергии — обычное стекло
+		hiddenSelections[]={"camoflage","glass","vbglow"};	// glass — стёкла, vbglow — прорези решётки и индикаторы на рельсах (этап 3б): горят светом сервопривода, без энергии — обычное стекло и серый неон
 		headSelectionsToHide[]={"Clipping_GP5GasMask"};
 		class Protection
 		{
@@ -265,7 +265,7 @@ class CfgVehicles
 				{
 					hitpoints=600;
 					transferToAttachmentsCoef=0.5;
-					healthLevels[]={{1.0,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy.rvmat","dz\weapons\attachments\optics\data\lensglass_clearer.rvmat"}},{0.7,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy.rvmat","dz\weapons\attachments\optics\data\lensglass_clearer.rvmat"}},{0.5,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy_damage.rvmat","dz\weapons\attachments\optics\data\lensglass_clearer.rvmat"}},{0.3,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy_damage.rvmat","dz\weapons\attachments\optics\data\lensglass_clearer.rvmat"}},{0.0,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy_destruct.rvmat","dz\weapons\attachments\optics\data\lensglass_clearer.rvmat"}}};
+					healthLevels[]={{1.0,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy.rvmat","dz\weapons\attachments\optics\data\lensglass_clearer.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat"}},{0.7,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy.rvmat","dz\weapons\attachments\optics\data\lensglass_clearer.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat"}},{0.5,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy_damage.rvmat","dz\weapons\attachments\optics\data\lensglass_clearer.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat"}},{0.3,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy_damage.rvmat","dz\weapons\attachments\optics\data\lensglass_clearer.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat"}},{0.0,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy_destruct.rvmat","dz\weapons\attachments\optics\data\lensglass_clearer.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat"}}};
 				};
 			};
 			class GlobalArmor
@@ -308,8 +308,8 @@ class CfgVehicles
 	class VB_EC_Exo_Helmet: VB_EC_Exo_Helmet_Base
 	{
 		scope=2;
-		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy_Black_echo_co.paa","VB_EchoClothes\exo_set\helmet\ronin_light\data\glass_ca.paa"};
-		hiddenSelectionsMaterials[]={"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy.rvmat","dz\weapons\attachments\optics\data\lensglass_clearer.rvmat"};
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy_Black_echo_co.paa","VB_EchoClothes\exo_set\helmet\ronin_light\data\glass_ca.paa","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_empty_co.paa"};
+		hiddenSelectionsMaterials[]={"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy.rvmat","dz\weapons\attachments\optics\data\lensglass_clearer.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat"};
 	};
 
 	// ---------------- маска (была OOTS_Mask_MaskGhost): дыхание — газ и зараза без фильтра; надевается под шлем

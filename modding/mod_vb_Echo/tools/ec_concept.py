@@ -43,7 +43,7 @@ SAMPLES = int(opts.get("samples", 96))
 NIGHT = bool(opts.get("night", False))
 PARTS = opts.get("parts", "all")
 TEX_ECHO = bool(opts.get("tex_echo", False))         # брать готовые ретекстуры *_echo_co.paa (этап 3а), где есть
-# --built=<папка exo_set распакованного PBO> — сервопривод и маска из собранного мода (этап 3б: исходники уже MLOD);
+# --built=<папка exo_set распакованного PBO> — сервопривод, маска и шлем из собранного мода (этап 3б: исходники MLOD);
 # --glow — свет собранной модели (выделение vbglow) включённым
 BUILT = opts.get("built")
 GLOW = bool(opts.get("glow", False))
@@ -54,7 +54,7 @@ HELM_CONCEPT = bool(opts.get("helmet_concept", False))
 X = os.path.join(CLOTHES, "exo_set")
 # модель, выделение -> (текстура, материал) — как hiddenSelections конфига
 SET = [
-    ("helmet", os.path.join(X, "helmet", "ronin_heavy", "models", "RoninHeavy.p3d"),
+    ("helmet", os.path.join(HERE, "..", "исходники_моделей", "RoninHeavy.odol.p3d"),   # в моде с 11-23 — MLOD
      {"camoflage": ("vb_echoclothes\\exo_set\\helmet\\ronin_heavy\\data\\roninheavy_black.paa", "")}),
     ("mask", os.path.join(X, "Mask", "MaskGhost", "MaskGhost.p3d"),
      {"como": ("vb_echoclothes\\exo_set\\mask\\maskghost\\data\\maskghost_co.paa",
@@ -81,7 +81,8 @@ SET = [
                "vb_echoclothes\\exo_set\\boots\\exoboots\\data\\exoboots.rvmat")}),
 ]
 if BUILT:
-    _rel = {"servo": ("Backpacks", "ExoPrivod", "ExoPrivod_m.p3d"), "mask": ("Mask", "MaskGhost", "MaskGhost.p3d")}
+    _rel = {"servo": ("Backpacks", "ExoPrivod", "ExoPrivod_m.p3d"), "mask": ("Mask", "MaskGhost", "MaskGhost.p3d"),
+            "helmet": ("helmet", "ronin_heavy", "models", "RoninHeavy.p3d")}
     SET = [(n, os.path.join(BUILT, *_rel[n]) if n in _rel else p, s) for n, p, s in SET]
 if PARTS != "all":
     SET = [s for s in SET if s[0] in PARTS.split("+")]
@@ -204,7 +205,7 @@ def make_material(tex, rvmat_path, echo):
     stage_tex = {k: v.get("texture", "") for k, v in rv.items() if isinstance(v, dict) and k.startswith("Stage")}
     color_out = None
     glow_on = GLOW and ("vb_ec_neon_empty_co" in tex.lower()       # свет собранной модели (vbglow) — включённым
-                        or (HELM_CONCEPT and "glass_ca" in tex.lower()))   # стёкла шлема (как в игре от сервопривода)
+                        or ((HELM_CONCEPT or BUILT) and "glass_ca" in tex.lower()))   # стёкла шлема (как в игре)
     if glow_on:
         tex = tex.lower().replace("vb_ec_neon_empty_co", "vb_ec_neon_co")
         bsdf.inputs["Emission Color"].default_value = (1.0, 0.04, 0.05, 1)
@@ -700,7 +701,7 @@ if ECHO:
 
     # 4) полоса забрала шлема и знак семейства на жилете (кольцо резонатора)
     helm = LODS.get("helmet")
-    if helm:
+    if helm and not (BUILT or HELM_CONCEPT):         # старая идея; шлем по одобренному концепту — без полосы (11-23)
         HP = USED["helmet"]
         lo, hi = HP.min(0), HP.max(0)
         add_obj("visor_strip", lambda: bpy.ops.mesh.primitive_cube_add(size=1), neon_r,

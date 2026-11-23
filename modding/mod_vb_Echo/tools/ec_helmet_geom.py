@@ -22,10 +22,16 @@ sys.path.insert(0, HERE)
 import odol_read as O  # noqa: E402
 import ec_geom as G  # noqa: E402
 
-HELMET = os.path.join(HERE, "..", "VB_EchoClothes", "exo_set", "helmet", "ronin_heavy", "models", "RoninHeavy.p3d")
+# оригиналы ODOL IMP (в мод не входят): в моде с 11-23 лежит собранная из них модель со светом (ec_helmet_model.py)
+HELMET = os.path.join(HERE, "..", "исходники_моделей", "RoninHeavy.odol.p3d")
+HELMET_F = os.path.join(HERE, "..", "исходники_моделей", "RoninHeavy_f.odol.p3d")
+HELMET_DATA = os.path.join(HERE, "..", "VB_EchoClothes", "exo_set", "helmet", "ronin_heavy", "data")
 STEP = 0.0005
 INSET = 0.004
 GRILL = (-0.085, 0.085, 1.49, 1.68)          # x0, x1, y0, y1 — область решётки
+# высота знака Эхо на висках: в концепте 1,735 — на стыке верхней пластины и боковой плиты с рельсом; в текстуре
+# нижняя половина кольца рассыпалась по краю плиты. 1,765 — целиком на верхней пластине, одна область UV (11-23)
+EMBLEM_Y = 1.765
 
 
 def load(path=HELMET, lod=0):
@@ -269,18 +275,34 @@ def helmet_texture(name="RoninHeavy_Black_echo_co"):
     import tempfile
     i2p = os.path.join("D:" + chr(92), "SteamLibrary", "steamapps", "common", "DayZ Tools", "Bin", "ImageToPAA",
                        "ImageToPAA.exe")
-    src = os.path.join(os.path.dirname(HELMET), "..", "data", name + ".paa")
-    tga = os.path.join(tempfile.mkdtemp(), name + ".tga")
-    subprocess.run([i2p, src, tga], capture_output=True)
-    return read_tga(tga)
+    src = os.path.join(HELMET_DATA, name + ".paa")
+    with tempfile.TemporaryDirectory() as tmp:          # TGA 16 МБ — удаляется сразу после чтения (11-23)
+        tga = os.path.join(tmp, name + ".tga")
+        subprocess.run([i2p, src, tga], capture_output=True)
+        return read_tga(tga)
 
 
-def grill_glow_meshes():
+def grill_glow_meshes(path=HELMET, tex=None):
     """Готовые ленты света во всех прорезях решётки (для концепта и модели)."""
-    l = O.read_visual_lod(HELMET, 0)
-    P, N, tris = load()
-    D, grid, slots = grill_slots_tex(P, N, tris, np.array(l["uv"]), helmet_texture())
+    l = O.read_visual_lod(path, 0)
+    P, N, tris = load(path)
+    tex = helmet_texture() if tex is None else tex
+    D, grid, slots = grill_slots_tex(P, N, tris, np.array(l["uv"]), tex)
     return [slot_glow(D, grid, s) for s in slots], slots
+
+
+def rail_indicators(P):
+    """Индикаторы на боковых рельсах (как в одобренном концепте): брусок 3×6×30 мм у крайней точки рельса по бокам
+    на высоте 1,65–1,70, утоплен в поверхность на 0,5 мм (без щели)."""
+    out = []
+    for side in (-1, 1):
+        m = (P[:, 0] * side > 0.118) & (P[:, 1] > 1.65) & (P[:, 1] < 1.70)
+        if not m.any():
+            continue
+        c = P[m].mean(0)
+        x = side * ((P[m][:, 0] * side).max() + 0.001)
+        out.append(G.fix_winding(G.box((x, c[1], c[2]), (0.0015, 0.003, 0.015))))
+    return out
 
 
 # ------------------------------------------------------------------ знак Эхо на висках
@@ -293,8 +315,9 @@ def emblem_strokes(scale=1.0):
     return [ring, pulse]
 
 
-def side_emblems(P, N, tris, center_y=1.735, center_z=0.0, width=0.0024, lift=0.0006):
+def side_emblems(P, N, tris, center_y=None, center_z=0.0, width=0.0024, lift=0.0006):
     """Знак на каждом виске: ленты по ломаным, спроецированные на боковую поверхность (карта глубины по x)."""
+    center_y = EMBLEM_Y if center_y is None else center_y
     out = []
     for side in (-1, 1):
         box = (center_z - 0.04, center_z + 0.04, center_y - 0.03, center_y + 0.03)       # (z, y)
@@ -325,6 +348,47 @@ def side_emblems(P, N, tris, center_y=1.735, center_z=0.0, width=0.0024, lift=0.
                 m.faces.append(ids)
         out.append(G.fix_winding(m))
     return out
+
+
+def _seg_dist(px, py, a, b):
+    ax, ay = a
+    bx, by = b
+    dx, dy = bx - ax, by - ay
+    t = np.clip(((px - ax) * dx + (py - ay) * dy) / (dx * dx + dy * dy + 1e-12), 0, 1)
+    return np.hypot(px - (ax + t * dx), py - (ay + t * dy))
+
+
+def emblem_alpha(tex_h, tex_w, path=HELMET, center_y=None, center_z=0.0, width=0.0024, step=0.0002, aa=0.0004):
+    """Знак Эхо на висках краской в текстуре (модель не трогается, знак есть и на шлеме на земле): раскладка — как
+    side_emblems (одобренный концепт), только вместо полосок геометрии — альфа по UV. Боковая карта глубины с UV
+    (шаг step), в каждой её точке — расстояние до ломаных знака в плоскости виска, точки переносятся в текстуру по
+    своим UV. -> (альфа (tex_h, tex_w) 0..1, строка 0 — верх файла; [(сторона, u0, u1, v0, v1) в пикселях])."""
+    center_y = EMBLEM_Y if center_y is None else center_y
+    l = O.read_visual_lod(path, 0)
+    P, N, tris = load(path)
+    UV = np.array(l["uv"], dtype=np.float64)
+    A = np.zeros((tex_h, tex_w))
+    info = []
+    for side in (-1, 1):
+        box = (center_z - 0.04, center_z + 0.04, center_y - 0.03, center_y + 0.03)       # (z, y)
+        D, (a0, b0, st), UVm = raster(P, N, tris, (2, 1), 0, side, box, step=step, uv=UV)
+        H, W = D.shape
+        jj, ii = np.mgrid[0:H, 0:W]
+        u = side * (center_z - (a0 + ii * st))          # как в side_emblems: «вправо» на виске — к лицу
+        v = (b0 + jj * st) - center_y
+        d = np.full(D.shape, np.inf)
+        for stroke in emblem_strokes():
+            for k in range(len(stroke) - 1):
+                d = np.minimum(d, _seg_dist(u, v, stroke[k], stroke[k + 1]))
+        a = np.clip(0.5 - (d - width / 2) / aa, 0, 1)
+        ok = (a > 0) & ~np.isnan(UVm[..., 0])
+        if not ok.any():
+            continue
+        cols = np.clip((UVm[..., 0][ok] % 1.0) * tex_w, 0, tex_w - 1).astype(int)
+        rows = np.clip((UVm[..., 1][ok] % 1.0) * tex_h, 0, tex_h - 1).astype(int)
+        np.maximum.at(A, (rows, cols), a[ok])
+        info.append((side, int(cols.min()), int(cols.max()), int(rows.min()), int(rows.max())))
+    return A, info
 
 
 if __name__ == "__main__":

@@ -82,6 +82,7 @@ def main():
     tmp = os.path.join(tempfile.mkdtemp(), "MaskGhost.p3d")
     m = M2.convert(SRC, tmp, cfg=CFG)
     os.remove(tmp)
+    os.rmdir(os.path.dirname(tmp))
     data = open(SRC, "rb").read()
     ver, nl, res, p = O.header(data)
     skel = M2.parse_skeleton(data, p)

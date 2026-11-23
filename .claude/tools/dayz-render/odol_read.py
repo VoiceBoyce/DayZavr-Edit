@@ -518,8 +518,30 @@ def scan_lod_starts(data):
             continue
         k = struct.unpack_from("<i", data, off + 8 + 4 * n)[0]
         if max(ids) < k <= 512:
-            out.append(off)
+            out.append(_proxy_prefixed_start(data, off))
     return out
+
+
+def _proxy_prefixed_start(data, off):
+    """Сигнатура scan_lod_starts требует «0 прокси», но у LOD с прокси этот 0 — последнее поле последней записи
+    прокси (шлем IMP RoninHeavy: фонарь и ПНВ, настоящее начало на 205 байт раньше; без этого прокси терялись при
+    переводе в MLOD, 11-23). Ищем назад i32 k (1..32), после которого k записей прокси кончаются ровно на off + 4."""
+    ver = struct.unpack_from("<I", data, 4)[0]
+    for o in range(off - 4, max(0, off - 6000), -1):
+        k = struct.unpack_from("<i", data, o)[0]
+        if not 1 <= k <= 32:
+            continue
+        try:
+            r = R(data, o + 4, ver)
+            names = []
+            for _ in range(k):
+                px = read_proxy(r)
+                names.append(px["name"])
+        except Exception:  # noqa: BLE001
+            continue
+        if r.p == off + 4 and all(nm and all(32 <= ord(c) < 127 for c in nm) for nm in names):
+            return o
+    return off
 
 
 def read_visual_lod(path, index=0):

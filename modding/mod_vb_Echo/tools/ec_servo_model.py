@@ -270,6 +270,7 @@ def main():
     tmp = os.path.join(tempfile.mkdtemp(), "ExoPrivod_m.p3d")      # имя файла = имя класса в model.cfg
     m = M2.convert(SRC, tmp, cfg=CFG)
     os.remove(tmp)
+    os.rmdir(os.path.dirname(tmp))
     data = open(SRC, "rb").read()
     ver, nl, res, p = O.header(data)
     skel = M2.parse_skeleton(data, p)

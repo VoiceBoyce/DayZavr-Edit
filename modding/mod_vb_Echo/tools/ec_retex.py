@@ -17,6 +17,7 @@ r"""Ретекстур одежды VB_EchoClothes (этап 3а): из исхо
 Промежуточный PNG — в --preview (или временная папка), PAA — рядом с исходной _co (ImageToPAA). Исходник не трогается.
 """
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -44,8 +45,10 @@ ITEMS = {
     "servo2": (os.path.join(CLOTHES, "Backpacks", "ExoPrivod", "data"), "ExoPrivod2_co.paa", {"metal_k": 0.8}),
     "mask": (os.path.join(CLOTHES, "Mask", "MaskGhost", "Data"), "MaskGhost_co.paa",
              {"metal_k": 0.5, "no_accent": True, "wear": 0.3}),
-    "helmet": (os.path.join(CLOTHES, "helmet", "ronin_heavy", "data"), "RoninHeavy_Black.paa", {"metal_k": 1.0}),
+    "helmet": (os.path.join(CLOTHES, "helmet", "ronin_heavy", "data"), "RoninHeavy_Black.paa",
+               {"metal_k": 1.0, "emblem_geo": True}),
 }
+# emblem_geo — знак на висках шлема по его геометрии (ec_helmet_geom.emblem_alpha: раскладка концепта через UV)
 # палитры (sRGB 0..1): fabric — ткань; metal — множитель тона металла; accent — окантовка кромок; steel — потёртость
 # граней; dust — пыль в углублениях; paint — знак и изолента
 PALETTES = {
@@ -109,6 +112,8 @@ def load(paa):
     w, h = im.size
     px = np.empty(w * h * 4, dtype=np.float32)
     im.pixels.foreach_get(px)
+    bpy.data.images.remove(im)
+    shutil.rmtree(tmp, ignore_errors=True)             # TGA 16 МБ на вещь — не оставлять в TEMP (11-23)
     return px.reshape(h, w, 4).astype(np.float64)
 
 
@@ -162,6 +167,8 @@ def retex(src, prm):
     out = out * (1 - cav[..., None]) + dust * cav[..., None]
     if prm.get("emblem"):
         out = emblem(out, L, *prm["emblem"])
+    if prm.get("emblem_geo"):
+        out = emblem_geo(out, L)
     res = src.copy()
     res[..., :3] = np.clip(out, 0, 1)
     print("  доли: ткань %.2f окантовка %.3f металл/прочее %.2f, потёртость %.3f" %
@@ -192,17 +199,39 @@ def emblem(out, L, cx, cy, k):
     line = np.min([seg_dist(xx, yy, pts[i], pts[i + 1]) for i in range(len(pts) - 1)], axis=0) - 5 * k
     d = np.minimum(ring, line)
     a = np.clip(0.5 - d / 1.5, 0, 1)                             # сглаженный край
-    rng = np.random.default_rng(7)
-    noise = box_blur(rng.random(a.shape), 3)
     rows = (h - 1) - yy.astype(int)                               # массив снизу вверх
     cols = xx.astype(int)
+    out = paint_alpha(out, L, a, rows, cols)
+    print("  знак Эхо в (%d, %d)" % (cx, cy))
+    return out
+
+
+def paint_alpha(out, L, a, rows, cols):
+    """Трафаретная краска по альфе a (на пикселях rows×cols массива bpy, снизу вверх): потёртость — по шуму и
+    светлым царапинам исходника; яркость краски следует исходнику (грязь и вмятины остаются)."""
+    rng = np.random.default_rng(7)
+    noise = box_blur(rng.random(a.shape), 3)
     lw = L[rows, cols]
     scratch = smooth(lw - box_blur(L, 4)[rows, cols], 0.02, 0.06)
     a = a * smooth(noise, 0.38, 0.55) * (1 - scratch) * 0.9
     lm = float(np.median(lw)) + 1e-3
     paint = PAL["paint"][None, None, :] * np.clip(lw / lm, 0.5, 1.4)[..., None]
     out[rows, cols] = out[rows, cols] * (1 - a[..., None]) + paint * a[..., None]
-    print("  знак Эхо в (%d, %d)" % (cx, cy))
+    return out
+
+
+def emblem_geo(out, L):
+    """Знак Эхо на висках шлема: альфа в пространстве текстуры по геометрии (как в одобренном концепте)."""
+    sys.path.insert(0, HERE)
+    import ec_helmet_geom as HG
+    h, w = L.shape
+    A, info = HG.emblem_alpha(h, w)
+    A = A[::-1]                                                   # строка 0 — верх файла -> массив bpy снизу вверх
+    for side, u0, u1, v0, v1 in info:
+        r0, r1 = (h - 1) - v1, (h - 1) - v0
+        rows, cols = np.mgrid[r0:r1 + 1, u0:u1 + 1]
+        out = paint_alpha(out, L, A[r0:r1 + 1, u0:u1 + 1], rows, cols)
+        print("  знак Эхо (висок %+d): UV x %d..%d y %d..%d" % (side, u0, u1, v0, v1))
     return out
 
 
@@ -225,3 +254,5 @@ for name in NAMES:
         paa = os.path.join(folder, out_name + ".paa")
         r = subprocess.run([IMAGE_TO_PAA, png, paa], capture_output=True, text=True)
         print("  PAA", paa, "ok" if os.path.exists(paa) else ("ОШИБКА " + r.stdout + r.stderr))
+    if not PREVIEW and not NOPAA:
+        shutil.rmtree(png_dir, ignore_errors=True)               # временный PNG больше не нужен

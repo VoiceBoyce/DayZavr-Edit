@@ -257,7 +257,8 @@ modded class StaminaHandler
 // действия по этому классу); тёмное забрало — затемнение экрана, как у спортивных очков
 class VB_EC_Exo_Helmet_Base extends Mich2001Helmet
 {
-	// стёкла (выделение glass, этап 3б): горят светом сервопривода на этом бойце; без энергии — обычное стекло
+	// стёкла (выделение glass) и свет в прорезях решётки и на рельсах (vbglow, этап 3б): горят светом сервопривода
+	// на этом бойце; без энергии — обычное стекло и серый неон (как у сервопривода)
 	static const string GLASS_TEX = "VB_EchoClothes\\exo_set\\helmet\\ronin_light\\data\\glass_ca.paa";
 	static const string GLASS_MAT = "dz\\weapons\\attachments\\optics\\data\\lensglass_clearer.rvmat";
 	protected int m_VB_GlowShown = -1;
@@ -273,6 +274,7 @@ class VB_EC_Exo_Helmet_Base extends Mich2001Helmet
 			return;
 		m_VB_GlowShown = kind;
 		VB_EC_Glow.Apply(this, "glass", kind, GLASS_TEX, GLASS_MAT);
+		VB_EC_Glow.Apply(this, "vbglow", kind, VB_EC_Exo_Servo_Base.GLOW_TEX_OFF, VB_EC_Exo_Servo_Base.GLOW_MAT_OFF);
 	}
 
 	protected void VB_SyncGlow()
