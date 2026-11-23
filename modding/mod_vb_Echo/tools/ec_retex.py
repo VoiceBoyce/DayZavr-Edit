@@ -1,0 +1,227 @@
+# -*- coding: utf-8 -*-
+r"""Ретекстур одежды VB_EchoClothes (этап 3а): из исходной _co OOTS/IMP делает <имя>_<палитра>_co.paa.
+
+  blender.exe -b --factory-startup --python ec_retex.py -- <вещь[,вещь...]|all> [--palette=echo] [--preview=<папка>]
+      [--nopaa]
+
+Вещи: jacket, pants, vest, gloves, boots, servo1, servo2, mask, helmet (all — все). Палитра echo — «чёрная броня Эхо»
+(решение пользователя 11-23: без ржавчины, чтобы хотелось носить; расцветки потом — новая палитра в PALETTES и тот же
+запуск с --palette=<имя>, файлы <имя>_<палитра>_co.paa, классы-расцветки в config.cpp).
+Разделение по материалу — по цвету исходника:
+- ткань (оливковая OOTS: цветность > ~0,02, оттенок 50–130°) -> графит с холодным оттенком, складки по яркости;
+- розовато-бурые кромки накладок (пример 62,53,58) -> окантовка цветом акцента палитры; такие же пятна посреди ткани
+  (грязь OOTS) -> в общий тон, без акцента;
+- металл, ремни, нашивки (серые) -> тёмный сатиновый металл; светлые грани и царапины -> потёртость до стали;
+- углубления (темнее соседей) -> нейтральная пыль.
+Яркость берётся из исходника (детали и складки сохраняются), меняется только тон. Альфа — как была.
+Промежуточный PNG — в --preview (или временная папка), PAA — рядом с исходной _co (ImageToPAA). Исходник не трогается.
+"""
+import os
+import subprocess
+import sys
+import tempfile
+
+import bpy
+import numpy as np
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+BS = chr(92)
+CLOTHES = os.path.join(HERE, "..", "VB_EchoClothes", "exo_set")
+IMAGE_TO_PAA = os.path.join("D:" + BS, "SteamLibrary", "steamapps", "common", "DayZ Tools", "Bin", "ImageToPAA",
+                            "ImageToPAA.exe")
+
+# вещь -> (папка data, исходная текстура, параметры)
+# metal_k — яркость металла/прочего; tape — синюю изоленту в краску палитры; emblem — (x, y, масштаб) знака Эхо в
+# координатах файла 2048 (сверху вниз); no_accent — без окантовки (маска: бежевая кость — не кромка); wear — сила потёртости
+ITEMS = {
+    "jacket": (os.path.join(CLOTHES, "Tops", "ExoJacket", "data"), "ExoJacket_co.paa", {}),
+    "pants": (os.path.join(CLOTHES, "Pants", "ExoPants", "data"), "ExoPants_co.paa", {}),
+    "vest": (os.path.join(CLOTHES, "Vest", "ExoVest", "data"), "ExoVest_co.paa",
+             {"metal_k": 0.8, "emblem": (1235, 190, 1.0)}),
+    "gloves": (os.path.join(CLOTHES, "Gloves", "ExoGloves", "data"), "ExoGloves_co.paa", {"metal_k": 1.0, "tape": True}),
+    "boots": (os.path.join(CLOTHES, "Boots", "ExoBoots", "data"), "ExoBoots_co.paa", {"metal_k": 1.0}),
+    "servo1": (os.path.join(CLOTHES, "Backpacks", "ExoPrivod", "data"), "ExoPrivod1_co.paa", {"metal_k": 0.8}),
+    "servo2": (os.path.join(CLOTHES, "Backpacks", "ExoPrivod", "data"), "ExoPrivod2_co.paa", {"metal_k": 0.8}),
+    "mask": (os.path.join(CLOTHES, "Mask", "MaskGhost", "Data"), "MaskGhost_co.paa",
+             {"metal_k": 0.5, "no_accent": True, "wear": 0.3}),
+    "helmet": (os.path.join(CLOTHES, "helmet", "ronin_heavy", "data"), "RoninHeavy_Black.paa", {"metal_k": 1.0}),
+}
+# палитры (sRGB 0..1): fabric — ткань; metal — множитель тона металла; accent — окантовка кромок; steel — потёртость
+# граней; dust — пыль в углублениях; paint — знак и изолента
+PALETTES = {
+    "echo": {
+        "fabric": (0.165, 0.17, 0.18),
+        "metal": (0.94, 0.97, 1.03),
+        "accent": (0.30, 0.04, 0.05),
+        "steel": (0.58, 0.60, 0.64),
+        "dust": (0.13, 0.135, 0.14),
+        "paint": (0.50, 0.05, 0.06),
+    },
+}
+
+args = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
+opts = {a.split("=", 1)[0][2:]: (a.split("=", 1)[1] if "=" in a else True) for a in args if a.startswith("--")}
+NAMES = [a for a in args if not a.startswith("--")][0].split(",")
+if NAMES == ["all"]:
+    NAMES = list(ITEMS)
+PAL_NAME = str(opts.get("palette", "echo"))
+PAL = {k: np.array(v) for k, v in PALETTES[PAL_NAME].items()}
+PREVIEW = opts.get("preview")
+NOPAA = bool(opts.get("nopaa", False))
+
+
+def smooth(x, a, b):
+    t = np.clip((x - a) / (b - a), 0.0, 1.0)
+    return t * t * (3 - 2 * t)
+
+
+def box_blur(a, r):
+    """Размытие квадратом (2r+1) по суммам."""
+    p = np.pad(a, r, mode="edge")
+    c = p.cumsum(0).cumsum(1)
+    c = np.pad(c, ((1, 0), (1, 0)))
+    n = 2 * r + 1
+    s = c[n:, n:] - c[:-n, n:] - c[n:, :-n] + c[:-n, :-n]
+    return s / (n * n)
+
+
+def hue_of(rgb):
+    mx = rgb.max(-1)
+    mn = rgb.min(-1)
+    d = mx - mn
+    r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
+    h = np.zeros_like(mx)
+    m = d > 1e-6
+    rm = m & (mx == r)
+    gm = m & (mx == g) & ~rm
+    bm = m & ~rm & ~gm
+    h[rm] = ((g - b)[rm] / d[rm]) % 6
+    h[gm] = (b - r)[gm] / d[gm] + 2
+    h[bm] = (r - g)[bm] / d[bm] + 4
+    return h * 60.0
+
+
+def load(paa):
+    tmp = tempfile.mkdtemp()
+    tga = os.path.join(tmp, "src.tga")
+    subprocess.run([IMAGE_TO_PAA, paa, tga], capture_output=True)
+    im = bpy.data.images.load(tga)
+    w, h = im.size
+    px = np.empty(w * h * 4, dtype=np.float32)
+    im.pixels.foreach_get(px)
+    return px.reshape(h, w, 4).astype(np.float64)
+
+
+def save_png(arr, path):
+    h, w = arr.shape[:2]
+    im = bpy.data.images.new(os.path.basename(path), w, h, alpha=True)
+    im.pixels.foreach_set(arr.astype(np.float32).ravel())
+    im.filepath_raw = path
+    im.file_format = "PNG"
+    im.save()
+
+
+def med(L, m, default):
+    return float(np.median(L[m > 0.5])) if (m > 0.5).any() else default
+
+
+def retex(src, prm):
+    rgb = src[..., :3]
+    L = 0.299 * rgb[..., 0] + 0.587 * rgb[..., 1] + 0.114 * rgb[..., 2]
+    hue = hue_of(rgb)
+    chroma = rgb.max(-1) - rgb.min(-1)              # у тёмных пикселей насыщенность шумит — считаем по цветности
+    olive = smooth(chroma, 0.012, 0.03) * smooth(hue, 45, 55) * (1 - smooth(hue, 120, 140))
+    # кромки накладок: розовато-бурые (оттенок 290–45°, цветность ~0,035, яркость ~0,22); посреди ткани — не кромки
+    warm = ((hue > 290) | (hue < 45)).astype(np.float64)
+    edge = smooth(chroma, 0.018, 0.04) * smooth(L, 0.13, 0.2) * warm * (1 - olive)
+    # окантовка — только тонкие линии кромок: пятна (густые области) и всё рядом с тканью — в общий тон
+    line_like = 1 - smooth(box_blur(edge, 6), 0.3, 0.5)
+    accent = edge * line_like * (1 - smooth(box_blur(olive, 10), 0.15, 0.35)) * 0.8
+    if prm.get("no_accent"):
+        accent = accent * 0
+    metal = np.clip(1 - olive - accent, 0, 1)
+    lf = med(L, olive, 0.22)
+    fabric = PAL["fabric"][None, None, :] * (L / lf)[..., None]
+    la = med(L, accent, 0.22)
+    acc_c = PAL["accent"][None, None, :] * np.clip(L / la, 0.5, 1.4)[..., None]
+    metal_c = (L * prm.get("metal_k", 0.85))[..., None] * PAL["metal"][None, None, :]
+    out = fabric * olive[..., None] + acc_c * accent[..., None] + metal_c * metal[..., None]
+    if prm.get("tape"):
+        tape = smooth(chroma, 0.06, 0.12) * smooth(hue, 195, 210) * (1 - smooth(hue, 255, 270))
+        lt = med(L, tape, 0.3)
+        tape_c = PAL["paint"][None, None, :] * 0.8 * np.clip(L / lt, 0.4, 1.1)[..., None]
+        out = out * (1 - tape[..., None]) + tape_c * tape[..., None]
+        print("  изолента: доля %.4f" % tape.mean())
+    # потёртость граней металла до стали: светлее соседей (рёбра, царапины, винты)
+    ridge = smooth(L - box_blur(L, 4), 0.03, 0.09) * metal * prm.get("wear", 0.55)
+    steel = PAL["steel"][None, None, :] * np.clip(L / max(float(np.median(L)), 1e-3), 0.6, 1.3)[..., None]
+    out = out * (1 - ridge[..., None]) + steel * ridge[..., None]
+    # углубления: темнее соседей -> нейтральная пыль
+    cav = smooth(box_blur(L, 6) - L, 0.015, 0.08) * 0.4
+    dust = PAL["dust"][None, None, :] * np.clip(L / lf, 0.3, 1.2)[..., None]
+    out = out * (1 - cav[..., None]) + dust * cav[..., None]
+    if prm.get("emblem"):
+        out = emblem(out, L, *prm["emblem"])
+    res = src.copy()
+    res[..., :3] = np.clip(out, 0, 1)
+    print("  доли: ткань %.2f окантовка %.3f металл/прочее %.2f, потёртость %.3f" %
+          (olive.mean(), accent.mean(), metal.mean(), (ridge > 0.2).mean()))
+    return res
+
+
+def seg_dist(px, py, a, b):
+    """Расстояние от точек до отрезка a-b."""
+    ax, ay = a
+    bx, by = b
+    dx, dy = bx - ax, by - ay
+    t = np.clip(((px - ax) * dx + (py - ay) * dy) / (dx * dx + dy * dy + 1e-9), 0, 1)
+    return np.hypot(px - (ax + t * dx), py - (ay + t * dy))
+
+
+def emblem(out, L, cx, cy, k):
+    """Знак Эхо трафаретной краской: кольцо и линия пульса сквозь него. Потёртость — по шуму и светлым царапинам
+    исходника; яркость краски следует исходнику (грязь и вмятины остаются)."""
+    h, w = L.shape
+    r = int(110 * k)
+    y0, y1 = max(0, cy - r), min(h, cy + r)
+    x0, x1 = max(0, cx - r), min(w, cx + r)
+    yy, xx = np.mgrid[y0:y1, x0:x1].astype(np.float64)        # координаты файла (сверху вниз)
+    ring = np.abs(np.hypot(xx - cx, yy - cy) - 62 * k) - 7 * k
+    pulse = [(-92, 0), (-34, 0), (-20, -30), (-6, 44), (10, -62), (24, 0), (92, 0)]
+    pts = [(cx + px * k, cy + py * k) for px, py in pulse]
+    line = np.min([seg_dist(xx, yy, pts[i], pts[i + 1]) for i in range(len(pts) - 1)], axis=0) - 5 * k
+    d = np.minimum(ring, line)
+    a = np.clip(0.5 - d / 1.5, 0, 1)                             # сглаженный край
+    rng = np.random.default_rng(7)
+    noise = box_blur(rng.random(a.shape), 3)
+    rows = (h - 1) - yy.astype(int)                               # массив снизу вверх
+    cols = xx.astype(int)
+    lw = L[rows, cols]
+    scratch = smooth(lw - box_blur(L, 4)[rows, cols], 0.02, 0.06)
+    a = a * smooth(noise, 0.38, 0.55) * (1 - scratch) * 0.9
+    lm = float(np.median(lw)) + 1e-3
+    paint = PAL["paint"][None, None, :] * np.clip(lw / lm, 0.5, 1.4)[..., None]
+    out[rows, cols] = out[rows, cols] * (1 - a[..., None]) + paint * a[..., None]
+    print("  знак Эхо в (%d, %d)" % (cx, cy))
+    return out
+
+
+for name in NAMES:
+    folder, co, prm = ITEMS[name]
+    src_paa = os.path.join(folder, co)
+    print("ВЕЩЬ", name, src_paa, "палитра", PAL_NAME)
+    res = retex(load(src_paa), prm)
+    base = co[:-len(".paa")]
+    if base.lower().endswith("_co"):
+        base = base[:-len("_co")]
+    out_name = base + "_" + PAL_NAME + "_co"                     # исходник не перезаписывается никогда
+    assert out_name.lower() + ".paa" != co.lower()
+    png_dir = PREVIEW or tempfile.mkdtemp()
+    os.makedirs(png_dir, exist_ok=True)
+    png = os.path.join(png_dir, out_name + ".png")
+    save_png(res, png)
+    print("  PNG", png)
+    if not NOPAA:
+        paa = os.path.join(folder, out_name + ".paa")
+        r = subprocess.run([IMAGE_TO_PAA, png, paa], capture_output=True, text=True)
+        print("  PAA", paa, "ok" if os.path.exists(paa) else ("ОШИБКА " + r.stdout + r.stderr))

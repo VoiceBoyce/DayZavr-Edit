@@ -56,5 +56,11 @@ ImageSetClass {
    Size 170 170
    Flags 0
   }
+  ImageSetDefClass artcase {
+   Name "artcase"
+   Pos 340 170
+   Size 170 170
+   Flags 0
+  }
  }
 }

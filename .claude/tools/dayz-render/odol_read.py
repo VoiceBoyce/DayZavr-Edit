@@ -338,7 +338,8 @@ def read_uvset(r):
 
 def read_lod(r, res):
     proxies = [read_proxy(r) for _ in range(r.i32())]
-    n = r.i32(); r.raw(4 * n)                   # subSkeletonsToSkeleton
+    n = r.i32()                                 # subSkeletonsToSkeleton: кость подскелета LOD -> кость скелета
+    sub2skel = list(struct.unpack_from("<%di" % n, r.raw(4 * n))) if n > 0 else []
     for _ in range(r.i32()):                    # skeletonToSubSkeleton
         k = r.i32(); r.raw(4 * k)
     vcount = None
@@ -393,7 +394,7 @@ def read_lod(r, res):
                 c -= 1024
             comp.append(c * -0.00195694715)
         normals.append(tuple(comp))
-    # дальше STCoords, кости — для рендера не нужны
+    after_normals = r.p                         # дальше STCoords и веса костей (read_bone_weights)
 
     # грани секций (смещения в байтах: 8 на треугольник, +2 на четырёхугольник при 16-бит индексах)
     step, extra = (8, 2) if vi == 2 else (16, 4)
@@ -423,7 +424,37 @@ def read_lod(r, res):
     return {"res": res, "points": points, "normals": normals, "uv": uvsets[0], "faces": faces,
             "face_tex": face_tex, "face_mat": face_mat, "face_sec": face_sec, "textures": textures,
             "materials": materials, "sections": sections, "selections": selections, "props": props,
-            "proxies": proxies}
+            "proxies": proxies, "after_normals": after_normals, "nvert": nv, "sub2skel": sub2skel}
+
+
+def read_bone_weights(data, lod):
+    """Веса костей вершин LOD (сразу за нормалями: STCoords по 8 байт, затем AnimationRTWeight по 12 байт:
+    int nSmall + 4 пары (кость подскелета u8, вес u8, сумма весов = 255)). Проверено на ExoPrivod_m (ODOL v54,
+    2026-11-23). Возвращает список на вершину [(кость скелета, вес 0..1)] или None, если весов нет."""
+    nv = lod["nvert"]
+    r = R(data, lod["after_normals"], lod["version"])
+    n_st = r.i32()
+    if n_st not in (0, nv):
+        return None
+    r.p -= 4
+    r.compressed_array(8)                       # STCoords (касательные) — не нужны
+    n_w = struct.unpack_from("<i", data, r.p)[0]
+    if n_w != nv or nv == 0:
+        return None
+    _, w = r.compressed_array(12)
+    s2s = lod.get("sub2skel") or []
+    out = []
+    for i in range(nv):
+        k = struct.unpack_from("<i", w, i * 12)[0]
+        pr = struct.unpack_from("<8B", w, i * 12 + 4)
+        vw = []
+        for j in range(max(0, min(k, 4))):
+            sub, wb = pr[2 * j], pr[2 * j + 1]
+            if wb == 0:
+                continue
+            vw.append((s2s[sub] if sub < len(s2s) else sub, wb / 255.0))
+        out.append(vw)
+    return out
 
 
 # ------------------------------------------------------------------ заголовок
@@ -470,13 +501,38 @@ def find_table(data, n, start):
     return best
 
 
+def scan_lod_starts(data):
+    """Запасной путь, когда таблицы адресов LOD нет (защищённые модели, например шлем IMP RoninHeavy, ODOL v53):
+    LOD со скелетом начинается так: i32 0 (прокси), i32 n и n разных номеров костей подскелета, затем i32 —
+    число костей скелета (больше любого из номеров). Найдено 2026-11-23."""
+    out = []
+    size = len(data)
+    for off in range(0, size - 16):
+        if struct.unpack_from("<i", data, off)[0] != 0:
+            continue
+        n = struct.unpack_from("<i", data, off + 4)[0]
+        if not 1 <= n <= 512 or off + 12 + 4 * n > size:
+            continue
+        ids = struct.unpack_from("<%di" % n, data, off + 8)
+        if min(ids) < 0 or len(set(ids)) != n:
+            continue
+        k = struct.unpack_from("<i", data, off + 8 + 4 * n)[0]
+        if max(ids) < k <= 512:
+            out.append(off)
+    return out
+
+
 def read_visual_lod(path, index=0):
     data = open(path, "rb").read()
     ver, n, res, p = header(data)
     tab = find_table(data, n, p)
-    if not tab:
-        raise ValueError("таблица LOD не найдена")
-    score, off, ls, le, pm = tab
+    if tab and len(set(tab[2])) == len(tab[2]):
+        score, off, ls, le, pm = tab
+    else:                                       # таблица ложная (все начала одинаковые) или её нет
+        st = scan_lod_starts(data)
+        if index >= len(st):
+            raise ValueError("таблица LOD не найдена, по структуре найдено LOD: %d" % len(st))
+        score, off, ls, le, pm = -1, -1, st, [len(data)] * len(st), [1] * len(st)
     r = R(data, ls[index], ver)
     lod = read_lod(r, res[index])
     lod.update({"version": ver, "resolutions": res, "table_off": off, "table_score": score,

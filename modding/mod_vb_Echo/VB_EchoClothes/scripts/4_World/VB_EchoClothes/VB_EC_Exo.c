@@ -257,9 +257,63 @@ modded class StaminaHandler
 // действия по этому классу); тёмное забрало — затемнение экрана, как у спортивных очков
 class VB_EC_Exo_Helmet_Base extends Mich2001Helmet
 {
+	// стёкла (выделение glass, этап 3б): горят светом сервопривода на этом бойце; без энергии — обычное стекло
+	static const string GLASS_TEX = "VB_EchoClothes\\exo_set\\helmet\\ronin_light\\data\\glass_ca.paa";
+	static const string GLASS_MAT = "dz\\weapons\\attachments\\optics\\data\\lensglass_clearer.rvmat";
+	protected int m_VB_GlowShown = -1;
+
 	override int GetGlassesEffectID()
 	{
 		return PPERequesterBank.REQ_GLASSESSPORTBLACK;
+	}
+
+	void VB_SetGlow(int kind)
+	{
+		if (GetGame().IsDedicatedServer() || kind == m_VB_GlowShown)
+			return;
+		m_VB_GlowShown = kind;
+		VB_EC_Glow.Apply(this, "glass", kind, GLASS_TEX, GLASS_MAT);
+	}
+
+	protected void VB_SyncGlow()
+	{
+		int kind = 0;
+		PlayerBase p = PlayerBase.Cast(GetHierarchyParent());
+		if (p)
+			kind = p.VB_EC_ServoGlowKind();
+		VB_SetGlow(kind);
+	}
+
+	override void EEInit()
+	{
+		super.EEInit();
+		VB_SyncGlow();
+	}
+
+	override void OnWasAttached(EntityAI parent, int slot_id)
+	{
+		super.OnWasAttached(parent, slot_id);
+		VB_SyncGlow();
+		PlayerBase p = PlayerBase.Cast(parent);
+		if (p)
+			p.VB_EC_UpdateMaskPlate(true);			// маска экзо под шлемом — пластину черепа спрятать
+	}
+
+	override void OnWasDetached(EntityAI parent, int slot_id)
+	{
+		super.OnWasDetached(parent, slot_id);
+		VB_SetGlow(0);
+		PlayerBase p = PlayerBase.Cast(parent);
+		if (p)
+			p.VB_EC_UpdateMaskPlate(false);
+	}
+
+	override void EEHealthLevelChanged(int oldLevel, int newLevel, string zone)
+	{
+		super.EEHealthLevelChanged(oldLevel, newLevel, zone);
+		int kind = m_VB_GlowShown;
+		m_VB_GlowShown = -1;
+		VB_SetGlow(Math.Max(kind, 0));
 	}
 };
 

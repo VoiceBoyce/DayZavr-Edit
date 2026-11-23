@@ -183,10 +183,24 @@ def cell_drain():
     return im
 
 
+def artcase():
+    """Капсула для артефактов экзо (VB_EchoClothes, слот на сервоприводе): корпус, крышка, обручи, окно с артефактом."""
+    im, d = canvas()
+    rect(d, 220, 170, 460, 610, W, 40)                     # корпус
+    rect(d, 200, 120, 480, 190, W, 14)                     # крышка
+    rect(d, 300, 90, 380, 130, W, 8)                       # колпачок
+    rect(d, 212, 190, 468, 204, T)                         # шов крышки
+    for y in (250, 540):                                   # обручи
+        rect(d, 208, y - 7, 472, y + 7, T)
+    rect(d, 286, 290, 394, 500, T, 22)                     # окно
+    d.polygon(P((340, 318), (378, 395), (340, 472), (302, 395)), fill=W)   # артефакт в окне
+    return im
+
+
 ICONS = [("crystal", crystal, "Кристалл"), ("tank", tank, "Бак Эхо"), ("pipes", pipes_side, "Трубки (бок)"),
          ("pipes_engine", pipes_engine, "Трубки мотора"), ("battery", battery, "Аккумулятор Эхо"),
          ("cell", cell, "Энергоячейка"), ("cell_charge", cell_charge, "Ячейка: зарядка"),
-         ("cell_drain", cell_drain, "Ячейка: разрядка")]
+         ("cell_drain", cell_drain, "Ячейка: разрядка"), ("artcase", artcase, "Капсула артефактов")]
 COLS = 6
 ATLAS = (1024, 512)
 

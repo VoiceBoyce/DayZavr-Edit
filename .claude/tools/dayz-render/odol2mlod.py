@@ -133,7 +133,9 @@ def parse_anims(d, start, nlods, nbones, limit=4000):
 
 
 # ------------------------------------------------------------------ LOD -> py3d
-def lod_to_mlod(od, bones, mass_total=None):
+def lod_to_mlod(od, bones, mass_total=None, weights=None):
+    """weights — веса костей вершин (odol_read.read_bone_weights) для одежды и персонажей: выделения костей
+    пишутся с весами вершин (MLOD хранит вес в выделении), а не «точка целиком в кости»."""
     lod = py3d.LOD()
     lod.resolution = float(od["res"])
     pts = od["points"]
@@ -194,6 +196,30 @@ def lod_to_mlod(od, bones, mass_total=None):
         pl = sorted((set(s.get("vertices", [])) - proxy_only) | {v for fi in s["face_set"] if fi in face_remap
                                                                  for v in od["faces"][fi]})
         sel_faces[s["name"]] = (fl, pl)
+    # веса костей: выделение кости = вершины с ненулевым весом этой кости (с весом); выделения с именем кости,
+    # у которой в LOD нет весов, — без точек (иначе MLOD привяжет их к кости целиком)
+    weighted = {}
+    if weights:
+        bone_pts = {}
+        for vi, vw in enumerate(weights):
+            if vi in proxy_only:
+                continue
+            for b, w in vw:
+                if 0 <= b < len(bones):
+                    bone_pts.setdefault(b, {})[vi] = w
+        by_low = {name.lower(): name for name in sel_faces}
+        bone_low = {b[0].lower() for b in bones}
+        for b, pw in bone_pts.items():
+            bname = bones[b][0]
+            key = by_low.get(bname.lower(), bname)
+            fl, _ = sel_faces.get(key, ([], []))
+            if not fl:
+                fl = [face_remap[fi] for fi in face_remap if all(v in pw for v in od["faces"][fi])]
+            sel_faces[key] = (fl, sorted(pw))
+            weighted[key] = pw
+        for name in list(sel_faces):
+            if name.lower() in bone_low and name not in weighted:
+                sel_faces[name] = (sel_faces[name][0], [])
     # прокси: треугольник + выделение «proxy:...»; грань прокси — в выделение своей кости
     for px in od.get("proxies", []):
         m = px["matrix"]
@@ -216,6 +242,10 @@ def lod_to_mlod(od, bones, mass_total=None):
             pl.extend(range(len(lod.points) - 3, len(lod.points)))
     for name, (fl, pl) in sel_faces.items():
         lod.set_selection(name, face_idx=sorted(set(fl)), point_idx=sorted(set(pl)))
+        pw = weighted.get(name)
+        if pw:                                       # вес точки в выделении кости (точки прокси — 1)
+            sel = lod.selections[name]
+            sel.points = {lod.points[i]: (1 if pw.get(i, 1.0) >= 0.999 else pw[i]) for i in sorted(set(pl))}
     for kk, vv in od["props"]:
         lod.properties[kk] = vv
     return lod, nf_kept
@@ -316,15 +346,16 @@ def convert(src, dst, cfg=None, mass=1800.0):
         od = O.read_visual_lod(src, i)
         r = od["res"]
         is_geo = abs(r - 1e13) / 1e13 < 1e-3
-        lod, nf = lod_to_mlod(od, bones, mass if is_geo else None)
+        W = O.read_bone_weights(data, od) if bones else None
+        lod, nf = lod_to_mlod(od, bones, mass if is_geo else None, W)
         m.lods.append(lod)
         if abs(r - 1e15) / 1e15 < 1e-3:
             mem = od
         if i == 0:
             lod0 = od
-        print("  LOD %-12.4g точки %6d грани %6d выделения %3d прокси %2d" % (r, len(od["points"]), nf,
-                                                                         len(od["selections"]),
-                                                                         len(od.get("proxies", []))))
+        print("  LOD %-12.4g точки %6d грани %6d выделения %3d прокси %2d веса %s" % (
+            r, len(od["points"]), nf, len(od["selections"]), len(od.get("proxies", [])),
+            "да" if W else "нет"))
     os.makedirs(os.path.dirname(os.path.abspath(dst)), exist_ok=True)
     m.save(dst)
     print("  -> MLOD", dst)

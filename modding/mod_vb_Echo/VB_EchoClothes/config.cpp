@@ -19,7 +19,7 @@ class CfgPatches
 		units[]={"VB_EC_Exo_Helmet","VB_EC_Exo_Mask","VB_EC_Exo_Vest","VB_EC_Exo_Servo","VB_EC_Exo_Jacket","VB_EC_Exo_Pants","VB_EC_Exo_Gloves","VB_EC_Exo_Boots"};
 		weapons[]={};
 		requiredVersion=0.1;
-		requiredAddons[]={"DZ_Data","DZ_Scripts","DZ_Characters","DZ_Characters_Headgear","DZ_Characters_Masks","DZ_Characters_Vests","DZ_Characters_Tops","DZ_Characters_Pants","DZ_Characters_Gloves","DZ_Characters_Shoes","DZ_Characters_Backpacks","VB_EchoCore"};
+		requiredAddons[]={"DZ_Data","DZ_Scripts","DZ_Characters","DZ_Characters_Headgear","DZ_Characters_Masks","DZ_Characters_Vests","DZ_Characters_Tops","DZ_Characters_Pants","DZ_Characters_Gloves","DZ_Characters_Shoes","DZ_Characters_Backpacks","DZ_Sounds_Effects","DZ_Gear_Containers","VB_EchoCore"};
 	};
 };
 class CfgMods
@@ -78,6 +78,63 @@ class CfgVB_EchoClothes
 		drainPerKg=0.12;		// + kE/tick за каждый снятый килограмм (50 кг -> 8, 85 кг -> 12,2)
 		sprintMul=1.5;			// при беге расход ×
 		tickSeconds=10;			// как часто сервер списывает энергию (единица kE/tick — 10 с)
+		// без энергии (надет, ячеек нет или пустые) — тяжёлая мёртвая рама, как у OOTS: только шагом, без прыжка и
+		// залезания (VB_EC_Servo.c); 1 — шаг, 2 — бег трусцой
+		noPowerMaxSpeed=1;
+	};
+};
+// звуки сервопривода (из OOTS, у него были такие же): шаг рамы — всегда, когда надет; мотор — когда работает
+// (шагом — мягкий, бегом — смешанный, спринтом — тяжёлый). Играются на каждый шаг (VB_EC_Servo.c, OnStepEvent).
+class CfgSoundShaders
+{
+	class baseCharacter_SoundShader;
+	class VB_EC_Servo_Step_SoundShader: baseCharacter_SoundShader
+	{
+		samples[]={{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\sounds\vb_ec_servo_step1",1},{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\sounds\vb_ec_servo_step2",1},{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\sounds\vb_ec_servo_step3",1}};
+		volume=0.02;
+	};
+	class VB_EC_Servo_MotorLight_SoundShader: baseCharacter_SoundShader
+	{
+		samples[]={{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\sounds\vb_ec_servo_motor_mid1",1},{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\sounds\vb_ec_servo_motor_mid2",1}};
+		volume=0.15;
+	};
+	class VB_EC_Servo_MotorMixed_SoundShader: baseCharacter_SoundShader
+	{
+		samples[]={{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\sounds\vb_ec_servo_motor_mid1",1},{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\sounds\vb_ec_servo_motor_heavy1",1},{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\sounds\vb_ec_servo_motor_mid2",1},{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\sounds\vb_ec_servo_motor_heavy2",1}};
+		volume=0.1;
+	};
+	class VB_EC_Servo_MotorHeavy_SoundShader: baseCharacter_SoundShader
+	{
+		samples[]={{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\sounds\vb_ec_servo_motor_heavy1",1},{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\sounds\vb_ec_servo_motor_heavy2",1}};
+		volume=0.1;
+	};
+};
+class CfgSoundSets
+{
+	class baseCharacter_SoundSet;
+	class VB_EC_Servo_Step_SoundSet: baseCharacter_SoundSet
+	{
+		soundShaders[]={"VB_EC_Servo_Step_SoundShader"};
+		frequencyRandomizerMin=0.5;
+		frequencyRandomizer=0.5;
+	};
+	class VB_EC_Servo_MotorLight_SoundSet: baseCharacter_SoundSet
+	{
+		soundShaders[]={"VB_EC_Servo_MotorLight_SoundShader"};
+		frequencyRandomizerMin=0.5;
+		frequencyRandomizer=0.5;
+	};
+	class VB_EC_Servo_MotorMixed_SoundSet: baseCharacter_SoundSet
+	{
+		soundShaders[]={"VB_EC_Servo_MotorMixed_SoundShader"};
+		frequencyRandomizerMin=0.5;
+		frequencyRandomizer=0.5;
+	};
+	class VB_EC_Servo_MotorHeavy_SoundSet: baseCharacter_SoundSet
+	{
+		soundShaders[]={"VB_EC_Servo_MotorHeavy_SoundShader"};
+		frequencyRandomizerMin=0.5;
+		frequencyRandomizer=0.5;
 	};
 };
 class CfgNonAIVehicles
@@ -96,6 +153,22 @@ class CfgNonAIVehicles
 		inventorySlot[]={"VB_Echo_GearCell2"};
 		model="VB_EchoClothes\exo_set\Backpacks\ExoPrivod\vb_exocell_slot_2.p3d";
 	};
+	// капсула для артефактов на левом бедре сервопривода (бывший кейс OOTS, этап 3б)
+	class Proxyvb_ec_artcase_box: ProxyAttachment
+	{
+		scope=2;
+		inventorySlot[]={"VB_EC_ArtCase"};
+		model="VB_EchoClothes\exo_set\vb_ec_artcase_box.p3d";
+	};
+};
+class CfgSlots
+{
+	class Slot_VB_EC_ArtCase
+	{
+		name="VB_EC_ArtCase";
+		displayName="$STR_VB_EC_slot_artcase";
+		ghostIcon="set:vb_echo_icons image:artcase";
+	};
 };
 
 class CfgVehicles
@@ -105,6 +178,48 @@ class CfgVehicles
 	class PlateCarrierVest;
 	class TacticalGloves_ColorBase;
 	class MilitaryBoots_ColorBase;
+	class Container_Base;
+
+	// ---------------- капсула для артефактов (этап 3б, ТЗ 8.4): держатель на сервоприводе, видна на костюме.
+	// Только артефакты (vbArtPrefixes, кроме vbArtExclude — кейсы-экраны OOTS); артефакты в ней действуют, как в
+	// кармане. Окна горят, когда внутри артефакт (скрипт VB_EC_ArtCase, выделение vbglow).
+	class VB_EC_ArtCase: Container_Base
+	{
+		scope=2;
+		displayName="$STR_VB_EC_ArtCase";
+		descriptionShort="$STR_VB_EC_ArtCase_disc";
+		model="VB_EchoClothes\exo_set\artcase\vb_ec_artcase.p3d";
+		inventorySlot[]={"VB_EC_ArtCase"};
+		weight=600;
+		itemSize[]={2,3};
+		itemsCargoSize[]={2,3};
+		canBeDigged=0;
+		allowOwnedCargoManipulation=1;
+		rotationFlags=17;
+		vbArtPrefixes[]={"OOTS_ART_"};
+		vbArtExclude[]={"OOTS_ART_CASE"};
+		hiddenSelections[]={"vbbody","vbglow"};
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_steel_dark_co.paa","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_empty_co.paa"};
+		hiddenSelectionsMaterials[]={"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_steel_dark.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat"};
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health
+				{
+					hitpoints=300;
+				};
+			};
+		};
+		class AnimEvents
+		{
+			class SoundWeapon
+			{
+				class pickUpItem { soundSet="pickUpBackPack_Plastic_SoundSet"; id=797; };
+				class drop { soundset="taloonbag_drop_SoundSet"; id=898; };
+			};
+		};
+	};
 
 	// ---------------- шлем (был IMP_Helmet_RoninHeavy_ColorBase / _Black): скрипт — тёмное стекло, хват в руках.
 	// С маской совместим (11-23): noMask убран — в 1.30 он ещё запрещает маску (EntityAI.InitLegacySlotExclusionValuesDerived)
@@ -130,7 +245,7 @@ class CfgVehicles
 		varWetMax=0.049;
 		heatIsolation=1;
 		visibilityModifier=0.75;
-		hiddenSelections[]={"camoflage"};
+		hiddenSelections[]={"camoflage","glass"};	// glass — стёкла: горят светом сервопривода (этап 3б), без энергии — обычное стекло
 		headSelectionsToHide[]={"Clipping_GP5GasMask"};
 		class Protection
 		{
@@ -150,7 +265,7 @@ class CfgVehicles
 				{
 					hitpoints=600;
 					transferToAttachmentsCoef=0.5;
-					healthLevels[]={{1.0,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy.rvmat"}},{0.7,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy.rvmat"}},{0.5,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy_damage.rvmat"}},{0.3,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy_damage.rvmat"}},{0.0,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy_destruct.rvmat"}}};
+					healthLevels[]={{1.0,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy.rvmat","dz\weapons\attachments\optics\data\lensglass_clearer.rvmat"}},{0.7,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy.rvmat","dz\weapons\attachments\optics\data\lensglass_clearer.rvmat"}},{0.5,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy_damage.rvmat","dz\weapons\attachments\optics\data\lensglass_clearer.rvmat"}},{0.3,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy_damage.rvmat","dz\weapons\attachments\optics\data\lensglass_clearer.rvmat"}},{0.0,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy_destruct.rvmat","dz\weapons\attachments\optics\data\lensglass_clearer.rvmat"}}};
 				};
 			};
 			class GlobalArmor
@@ -193,7 +308,8 @@ class CfgVehicles
 	class VB_EC_Exo_Helmet: VB_EC_Exo_Helmet_Base
 	{
 		scope=2;
-		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy_Black.paa"};
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy_Black_echo_co.paa","VB_EchoClothes\exo_set\helmet\ronin_light\data\glass_ca.paa"};
+		hiddenSelectionsMaterials[]={"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy.rvmat","dz\weapons\attachments\optics\data\lensglass_clearer.rvmat"};
 	};
 
 	// ---------------- маска (была OOTS_Mask_MaskGhost): дыхание — газ и зараза без фильтра; надевается под шлем
@@ -217,6 +333,7 @@ class CfgVehicles
 		visibilityModifier=0.75;
 		headSelectionsToHide[]={"Clipping_GP5GasMask"};
 		hiddenSelections[]={"como"};
+		simpleHiddenSelections[]={"vbplate"};	// пластина черепа: прячется под шлемом экзо (скрипт), иначе торчит сквозь него
 		class ClothingTypes
 		{
 			male="VB_EchoClothes\exo_set\Mask\MaskGhost\MaskGhost.p3d";
@@ -251,7 +368,7 @@ class CfgVehicles
 	{
 		scope=2;
 		color="black";
-		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Mask\MaskGhost\Data\MaskGhost_co.paa"};
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Mask\MaskGhost\Data\MaskGhost_echo_co.paa"};
 		hiddenSelectionsMaterials[]={"VB_EchoClothes\exo_set\Mask\MaskGhost\Data\MaskGhost.rvmat"};
 	};
 
@@ -338,7 +455,7 @@ class CfgVehicles
 	{
 		scope=2;
 		color="black";
-		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Vest\ExoVest\data\ExoVest_co.paa"};
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Vest\ExoVest\data\ExoVest_echo_co.paa"};
 		hiddenSelectionsMaterials[]={"VB_EchoClothes\exo_set\Vest\ExoVest\data\ExoPlate.rvmat"};
 	};
 
@@ -353,7 +470,7 @@ class CfgVehicles
 		descriptionShort="$STR_VB_EC_Exo_Servo_disc";
 		model="VB_EchoClothes\exo_set\Backpacks\ExoPrivod\ExoPrivod_g.p3d";
 		debug_ItemCategory=9;
-		attachments[]={"VB_Echo_GearCell1","VB_Echo_GearCell2"};
+		attachments[]={"VB_Echo_GearCell1","VB_Echo_GearCell2","VB_EC_ArtCase"};
 		inventorySlot[]={"Hips"};
 		itemInfo[]={"Clothing","Back"};
 		rotationFlags=16;
@@ -367,7 +484,7 @@ class CfgVehicles
 		repairCosts[]={25,25,25,25};
 		soundAttType="Outdoor";
 		visibilityModifier=0.75;
-		hiddenSelections[]={"Pr1","Pr2"};
+		hiddenSelections[]={"Pr1","Pr2","vbglow","vbparts"};	// vbglow — свет (скрипт: Эхо / синтез / серый), vbparts — новые детали (этап 3б)
 		class Protection
 		{
 			biological=1;
@@ -386,7 +503,7 @@ class CfgVehicles
 				{
 					hitpoints=750;
 					transferToAttachmentsCoef=0.5;
-					healthLevels[]={{1.0,{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod1.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod2.rvmat"}},{0.7,{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod1.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod2.rvmat"}},{0.5,{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod1_damage.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod2_damage.rvmat"}},{0.3,{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod1_damage.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod2_damage.rvmat"}},{0.0,{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod1_destruct.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod2_destruct.rvmat"}}};
+					healthLevels[]={{1.0,{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod1.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod2.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_steel_dark.rvmat"}},{0.7,{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod1.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod2.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_steel_dark.rvmat"}},{0.5,{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod1_damage.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod2_damage.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_steel_dark.rvmat"}},{0.3,{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod1_damage.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod2_damage.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_steel_dark.rvmat"}},{0.0,{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod1_destruct.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod2_destruct.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_steel_dark.rvmat"}}};
 				};
 			};
 		};
@@ -403,8 +520,8 @@ class CfgVehicles
 	class VB_EC_Exo_Servo: VB_EC_Exo_Servo_Base
 	{
 		scope=2;
-		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod1_co.paa","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod2_co.paa"};
-		hiddenSelectionsMaterials[]={"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod1.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod2.rvmat"};
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod1_echo_co.paa","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod2_echo_co.paa","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_empty_co.paa","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_steel_dark_co.paa"};
+		hiddenSelectionsMaterials[]={"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod1.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod2.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_steel_dark.rvmat"};
 	};
 
 	// ---------------- куртка (была OOTS_Jacket_Exo); модули OOTS Clothes*Mod не перенесены
@@ -490,7 +607,7 @@ class CfgVehicles
 	class VB_EC_Exo_Jacket: VB_EC_Exo_Jacket_Base
 	{
 		scope=2;
-		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Tops\ExoJacket\data\ExoJacket_co.paa"};
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Tops\ExoJacket\data\ExoJacket_echo_co.paa"};
 		hiddenSelectionsMaterials[]={"VB_EchoClothes\exo_set\Tops\ExoJacket\data\ExoJacket.rvmat"};
 	};
 
@@ -579,7 +696,7 @@ class CfgVehicles
 	{
 		scope=2;
 		color="black";
-		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Pants\ExoPants\data\ExoPants_co.paa"};
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Pants\ExoPants\data\ExoPants_echo_co.paa"};
 		hiddenSelectionsMaterials[]={"VB_EchoClothes\exo_set\Pants\ExoPants\data\ExoPants.rvmat"};
 	};
 
@@ -652,7 +769,7 @@ class CfgVehicles
 	{
 		scope=2;
 		color="black";
-		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Gloves\ExoGloves\data\ExoGloves_co.paa"};
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Gloves\ExoGloves\data\ExoGloves_echo_co.paa"};
 		hiddenSelectionsMaterials[]={"VB_EchoClothes\exo_set\Gloves\ExoGloves\data\ExoGloves.rvmat"};
 	};
 
@@ -728,7 +845,7 @@ class CfgVehicles
 	{
 		scope=2;
 		color="black";
-		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Boots\ExoBoots\data\ExoBoots_co.paa"};
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Boots\ExoBoots\data\ExoBoots_echo_co.paa"};
 		hiddenSelectionsMaterials[]={"VB_EchoClothes\exo_set\Boots\ExoBoots\data\ExoBoots.rvmat"};
 	};
 };

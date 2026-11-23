@@ -42,6 +42,14 @@ SIZE = int(opts.get("size", 1400))
 SAMPLES = int(opts.get("samples", 96))
 NIGHT = bool(opts.get("night", False))
 PARTS = opts.get("parts", "all")
+TEX_ECHO = bool(opts.get("tex_echo", False))         # брать готовые ретекстуры *_echo_co.paa (этап 3а), где есть
+# --built=<папка exo_set распакованного PBO> — сервопривод и маска из собранного мода (этап 3б: исходники уже MLOD);
+# --glow — свет собранной модели (выделение vbglow) включённым
+BUILT = opts.get("built")
+GLOW = bool(opts.get("glow", False))
+# --helmet_concept — концепт шлема (этап 3б): свет в пазах дыхательной решётки, знак Эхо на лбу, индикаторы на
+# боковых рельсах; со --glow стёкла горят (как в игре)
+HELM_CONCEPT = bool(opts.get("helmet_concept", False))
 
 X = os.path.join(CLOTHES, "exo_set")
 # модель, выделение -> (текстура, материал) — как hiddenSelections конфига
@@ -72,6 +80,9 @@ SET = [
      {"como": ("vb_echoclothes\\exo_set\\boots\\exoboots\\data\\exoboots_co.paa",
                "vb_echoclothes\\exo_set\\boots\\exoboots\\data\\exoboots.rvmat")}),
 ]
+if BUILT:
+    _rel = {"servo": ("Backpacks", "ExoPrivod", "ExoPrivod_m.p3d"), "mask": ("Mask", "MaskGhost", "MaskGhost.p3d")}
+    SET = [(n, os.path.join(BUILT, *_rel[n]) if n in _rel else p, s) for n, p, s in SET]
 if PARTS != "all":
     SET = [s for s in SET if s[0] in PARTS.split("+")]
 
@@ -93,7 +104,7 @@ def paa_png(vpath):
         return None
     os.makedirs(CACHE, exist_ok=True)
     dst = os.path.join(CACHE, vpath.replace(BS, "__").replace("/", "__").replace(":", "") + ".tga")
-    if not os.path.exists(dst):
+    if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src):   # перегенерировать устаревший кэш
         subprocess.run([IMAGE_TO_PAA, src, dst], capture_output=True)
     return dst if os.path.exists(dst) else None
 
@@ -192,6 +203,12 @@ def make_material(tex, rvmat_path, echo):
                 print("WARN rvmat", rvmat_path, e)
     stage_tex = {k: v.get("texture", "") for k, v in rv.items() if isinstance(v, dict) and k.startswith("Stage")}
     color_out = None
+    glow_on = GLOW and ("vb_ec_neon_empty_co" in tex.lower()       # свет собранной модели (vbglow) — включённым
+                        or (HELM_CONCEPT and "glass_ca" in tex.lower()))   # стёкла шлема (как в игре от сервопривода)
+    if glow_on:
+        tex = tex.lower().replace("vb_ec_neon_empty_co", "vb_ec_neon_co")
+        bsdf.inputs["Emission Color"].default_value = (1.0, 0.04, 0.05, 1)
+        bsdf.inputs["Emission Strength"].default_value = 6.0 if NIGHT else 3.0
     if tex and not tex.startswith("#"):
         im = load_img(tex)
         if im:
@@ -200,7 +217,7 @@ def make_material(tex, rvmat_path, echo):
             if "_ca." in tex.lower():
                 L.new(t.outputs["Alpha"], bsdf.inputs["Alpha"])
     if color_out is not None:
-        if echo:
+        if echo and "_echo_co" not in tex.lower():   # готовый ретекстур не перекрашиваем
             # палитра Эхо: темнее и холоднее, лёгкая ржавчина в средних тонах (концепт перекраски _co)
             hsv = Nn.new("ShaderNodeHueSaturation")
             hsv.inputs["Saturation"].default_value = 0.45
@@ -449,6 +466,11 @@ for name, path, sels in SET:
     LODS[name] = lod
     by = {s["name"].lower(): s for s in lod["selections"]}
     for sn, (tx, mt) in sels.items():
+        if TEX_ECHO and tx.lower().endswith(".paa"):
+            base = tx[:-len("_co.paa")] if tx.lower().endswith("_co.paa") else tx[:-len(".paa")]
+            tx2 = base + "_echo_co.paa"                 # у шлема исходник без _co: RoninHeavy_Black_echo_co.paa
+            if resolve(tx2):
+                tx = tx2
         s = by.get(sn)
         if not s:
             print("WARN нет выделения", name, sn)
@@ -550,7 +572,7 @@ if ECHO:
     neon_r = neon_mat("neon_red", RED, 18 if NIGHT else 9)
     neon_t = neon_mat("neon_turq", TURQ, 18 if NIGHT else 9)
     dark = metal_mat("dark_metal", (0.05, 0.05, 0.055), 0.35, 0.9)
-    rust = metal_mat("rust", (0.2, 0.08, 0.04), 0.75, 0.4)
+    rust = metal_mat("steel", (0.42, 0.43, 0.46), 0.35, 0.9)      # бывшая ржавчина -> сталь (без ржавчины, 11-23)
     glass = bpy.data.materials.new("glass")
     glass.use_nodes = True
     gb = glass.node_tree.nodes["Principled BSDF"]
@@ -708,6 +730,50 @@ if ECHO:
             bpy.context.active_object.scale = ((hi_[0] - lo_[0]) * 0.42, 0.006, (hi_[2] - lo_[2]) * 0.42)
             print("LENS", gi, np.round(c, 3), np.round(hi_ - lo_, 3))
     # знак на груди убран: метку Эхо рисовать в текстуре жилета
+
+# ---------------------------------------------------------------- концепт шлема (этап 3б)
+if HELM_CONCEPT and LODS.get("helmet"):
+    HN = neon_mat("helm_neon", RED, 14 if NIGHT else 7)
+    HPAINT = bpy.data.materials.new("helm_paint")
+    HPAINT.use_nodes = True
+    _b = HPAINT.node_tree.nodes["Principled BSDF"]
+    _b.inputs["Base Color"].default_value = (0.35, 0.02, 0.03, 1)
+    _b.inputs["Roughness"].default_value = 0.6
+    HU = USED["helmet"]                                         # точки шлема (Blender: x, -z DayZ, y DayZ)
+
+    def front_y(x, y):
+        """Передняя поверхность шлема (Blender y — минимальный -z DayZ... лицо смотрит в +Y) в точке (x, высота)."""
+        m = (np.abs(HU[:, 0] - x) < 0.006) & (np.abs(HU[:, 2] - y) < 0.01)
+        return float(HU[m][:, 1].max()) if m.any() else None
+    # 1) и 2) по поверхности шлема (tools/ec_helmet_geom.py — тот же код соберёт модель): свет в прорезях решётки
+    #    (контуры — по текстуре, спроецированной спереди; вставка на видимой поверхности) и знак Эхо на висках
+    #    (кольцо и пульс, спроецированы на боковую поверхность)
+    sys.path.insert(0, HERE)
+    import ec_helmet_geom as HG
+
+    def gmesh(name, gm, mat):
+        me = bpy.data.meshes.new(name)
+        me.from_pydata(d2b_arr(np.array(gm.pts)).tolist(), [], [list(f) for f in gm.faces])
+        me.update()
+        ob = bpy.data.objects.new(name, me)
+        ob.data.materials.append(mat)
+        scene.collection.objects.link(ob)
+        return ob
+    vents, _slots = HG.grill_glow_meshes()
+    for k, gm in enumerate(vents):
+        gmesh("helm_vent_%d" % k, gm, HN)
+    _P, _N, _T = HG.load()
+    for k, gm in enumerate(HG.side_emblems(_P, _N, _T)):
+        gmesh("helm_emblem_%d" % k, gm, HPAINT)
+    print("HELMET прорезей", len(vents))
+    # 3) индикаторы на боковых рельсах (крайние точки шлема по бокам, высота 1,66–1,69)
+    for side in (-1, 1):
+        m = (HU[:, 0] * side > 0.118) & (HU[:, 2] > 1.65) & (HU[:, 2] < 1.70)
+        if m.any():
+            c = HU[m].mean(0)
+            add_obj("helm_side", lambda: bpy.ops.mesh.primitive_cube_add(size=1), HN,
+                    (side * (HU[m][:, 0].max() * side + 0.002), c[1], c[2]))
+            bpy.context.active_object.scale = (0.003, 0.03, 0.006)
 
 # ---------------------------------------------------------------- свет, камера, ракурсы
 ALL = np.vstack(all_pts)

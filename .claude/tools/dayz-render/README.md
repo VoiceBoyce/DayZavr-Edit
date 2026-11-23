@@ -34,3 +34,12 @@ blender.exe -b --factory-startup --python render_p3d.py -- <model.p3d> <out.png>
 
 `render_mat.py <Ключ> <out.png> --transparent --frame=1.1 --size=2000`. Геометрия берётся из `tools/ab_materials.py` мода.
 Текстуры ожидаются как TGA в `tex\` рядом со скриптом: распаковать `.paa` мода через ImageToPAA.
+
+## Одежда и персонажи: веса костей (2026-11-23)
+
+- `odol_read.read_bone_weights(data, lod)` — веса вершин LOD: сразу за нормалями STCoords (по 8 байт), затем на вершину
+  `AnimationRTWeight` 12 байт: int число костей + 4 пары (кость подскелета u8, вес u8; сумма = 255). Кость подскелета ->
+  кость скелета — `lod["sub2skel"]` (таблица в начале LOD). Проверено на ExoPrivod_m (ODOL v54).
+- `odol2mlod.py` для моделей со скелетом пишет выделения костей с весами (MLOD хранит вес в выделении). Круг
+  ODOL -> MLOD -> binarize на сервоприводе OOTS: те же LOD, грани и прокси, веса совпали у всех вершин. Скелет
+  восстанавливается в model.cfg (у одежды OOTS — `DayzTemporarySkeleton`, 159 костей).
