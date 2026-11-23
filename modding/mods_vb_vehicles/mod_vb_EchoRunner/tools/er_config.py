@@ -187,6 +187,7 @@ ITEMS = '''
 	{
 		scope=0;
 		weight=12000;
+		weightPerQuantityUnit=0;		// у Inventory_Base 1 г на единицу: полный бак (20 000 kE) весил бы +20 кг (E123, 11-23)
 		itemSize[]={6,3};
 		itemBehaviour=0;
 		physLayer="item_large";

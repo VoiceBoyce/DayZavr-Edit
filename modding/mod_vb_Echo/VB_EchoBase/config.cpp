@@ -71,6 +71,7 @@ class CfgVehicles
 		displayName="$STR_VB_EB_device";
 		descriptionShort="$STR_VB_EB_device_disc";
 		weight=30000;
+		weightPerQuantityUnit=0;	// буфер Эхо — количество предмета; без 0 вес рос бы с зарядом (E123, 11-23)
 		itemSize[]={10,10};
 		itemBehaviour=0;
 		heavyItem=1;
@@ -359,6 +360,7 @@ class CfgVehicles
 		descriptionShort="$STR_VB_EB_crystal_disc";
 		model="VB_EchoBase\data\eb_crystal.p3d";
 		weight=300;
+		weightPerQuantityUnit=0;	// у Inventory_Base 1 г на единицу: кристалл (100 000) весил бы +100 кг (E123, 11-23)
 		itemSize[]={1,2};
 		inventorySlot[]={"VB_EB_Crystal"};
 		varQuantityInit=100000;			// ресурс 100 000 kE Эхо (5 баков; шкала ×32, 11-20)

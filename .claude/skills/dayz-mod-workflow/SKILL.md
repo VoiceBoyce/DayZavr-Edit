@@ -420,6 +420,7 @@ Verified errors committed more than once. Check ACTIVELY during implementation. 
 - **E120** — у поставленного на землю предмета (ItemBase) `EOnFrame` не вызывается даже с `SetEventMask(EntityEvent.FRAME)`: клиентская анимация стоит → один обработчик в `GetGame().GetUpdateQueue(CALL_CATEGORY_GUI).Insert(inst.Update)`, dt по `GetTickTime()`
 - **E121** — добавил `class EnergyManager` (или другой сохраняемый компонент) классу, который уже стоит в мире: поток сохранения меняется, старые объекты грузятся битыми (`Scripted variables corrupted`, ошибки CF ModStorage) → менять до выкладки или новым классом
 - **E122** — смена количества предмета в слоте/отсеке (зарядка, расход, износ) щёлкает звуком вложения: ванильный SetQuantity шлёт ITEM_ATTACH/DETACH — глушить флагом в override StartItemSoundServer
+- **E123** — предмет с количеством тяжелеет с зарядом: у `Inventory_Base` `weightPerQuantityUnit = 1` (1 г на единицу), у носителей энергии/процентов ставить `weightPerQuantityUnit=0`
 - **E123** — `Cannot convert ... to method 'Slot'` и следом лавина ошибок в ванили: короткое имя своего метода (`Slot`, `Load`, `Flag`, `L`) совпало с существующей функцией — давать служебным методам префикс мода.
 
 ---

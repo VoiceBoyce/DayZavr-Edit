@@ -95,6 +95,19 @@ class CfgSlots
 		displayName="$STR_VB_Echo_slot_cell_drain";
 		ghostIcon="set:vb_echo_icons image:cell_drain";
 	};
+	// питание снаряжения (11-23): сервопривод экзоскелета VB_EchoClothes — две ячейки, видны на модели
+	class Slot_VB_Echo_GearCell1
+	{
+		name="VB_Echo_GearCell1";
+		displayName="$STR_VB_Echo_slot_gearcell";
+		ghostIcon="set:vb_echo_icons image:cell";
+	};
+	class Slot_VB_Echo_GearCell2
+	{
+		name="VB_Echo_GearCell2";
+		displayName="$STR_VB_Echo_slot_gearcell";
+		ghostIcon="set:vb_echo_icons image:cell";
+	};
 	class Slot_VB_Echo_DrainCell2
 	{
 		name="VB_Echo_DrainCell2";
@@ -115,6 +128,7 @@ class CfgVehicles
 		descriptionShort="$STR_VB_Echo_cell_disc";
 		model="VB_EchoCore\data\eb_cell.p3d";
 		weight=400;
+		weightPerQuantityUnit=0;	// у Inventory_Base 1 г на единицу заряда: полная Mk IV весила бы +20 кг (E123, 11-23)
 		itemSize[]={1,2};
 		rotationFlags=0;
 		canBeSplit=0;
@@ -124,7 +138,7 @@ class CfgVehicles
 		varQuantityDestroyOnMin=0;		// пустая ячейка не исчезает (E117)
 		quantityBar=1;
 		stackedUnit="percentage";		// заряд в процентах, не в штуках (11-20)
-		inventorySlot[]={"VB_Echo_ChargeCell1","VB_Echo_ChargeCell2","VB_Echo_DrainCell1","VB_Echo_DrainCell2"};
+		inventorySlot[]={"VB_Echo_ChargeCell1","VB_Echo_ChargeCell2","VB_Echo_DrainCell1","VB_Echo_DrainCell2","VB_Echo_GearCell1","VB_Echo_GearCell2"};
 		hiddenSelections[]={"neon","tier"};
 		hiddenSelectionsTextures[]={"vb_echocore\data\er_neon_empty_co.paa","vb_echocore\data\eb_neon_t1_co.paa"};
 		hiddenSelectionsMaterials[]={"vb_echocore\data\er_neon_empty.rvmat","vb_echocore\data\er_neon_idle.rvmat"};
@@ -224,7 +238,7 @@ class CfgVehicles
 		descriptionShort="$STR_VB_Echo_cell_fusion_disc";
 		varQuantityInit=20000;
 		varQuantityMax=20000;
-		inventorySlot[]={};
+		inventorySlot[]={"VB_Echo_GearCell1","VB_Echo_GearCell2"};	// только питание снаряжения (сервопривод экзо)
 		hiddenSelectionsTextures[]={"vb_echocore\data\er_neon_fusion_co.paa","vb_echocore\data\er_neon_fusion_co.paa"};
 		hiddenSelectionsMaterials[]={"vb_echocore\data\er_neon_idle.rvmat","vb_echocore\data\er_neon_idle.rvmat"};
 		class VB_Echo

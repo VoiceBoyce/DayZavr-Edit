@@ -1,12 +1,16 @@
 // VB_EchoClothes — одежда семейства VB_Echo (ТЗ: modding/mod_vb_Echo/ТЗ_VB_EchoClothes.md, гайд: ГАЙД.md).
-// Экзоскелет Эхо (этап 1, 11-23): перенесён из наших модов под свои имена, вид и числа — как были на сервере 16:
+// Экзоскелет Эхо. Этап 1 (11-23): перенесён из наших модов под свои имена —
 //   шлем   — IMP_Helmet_RoninHeavy_Black (IMPGMOD);
-//   маска  — OOTS_Mask_MaskGhost; жилет, куртка, штаны, перчатки, ботинки — OOTS_*_Exo (оригинал OOTS + наша заплатка
-//            OOTS_ClothesPack_DayZavr_Expansion); сервопривод — OOTS_Exo_Servoprivod_black_BeltSlot_120 (заплатка).
+//   маска  — OOTS_Mask_MaskGhost; жилет, куртка, штаны, перчатки, ботинки — OOTS_*_Exo;
+//   сервопривод — OOTS_Exo_Servoprivod_black_BeltSlot_120 (наша заплатка OOTS_ClothesPack_DayZavr_Expansion).
 // Модели, текстуры, материалы — в exo_set (tools/ec_import.py: пути в моделях заменены строкой той же длины).
 // От старых модов не зависит: вложения со слотами OOTS (батарея и ArtCase сервопривода, модули Clothes*Mod куртки,
-// ArmorPlateFront/Back жилета) и логика OOTS (playerHandlerType="Exo") не перенесены — механика экзо будет своя (этап 4).
-// «Грузоподъёмность» пока как была — отрицательный вес предмета (сервопривод −120 кг, куртка и штаны по −30 кг).
+// ArmorPlateFront/Back жилета) и логика OOTS (playerHandlerType="Exo") не перенесены.
+// Этап 2 (11-23, ТЗ раздел 6): характеристики по схеме сетов одежды DayZavr (вещи _vb), на ступень выше — броня ×0,7
+// от сетов, прочность ×1,5, вместимость +20; вес вещей нормальный (без отрицательного веса OOTS), помощь каркаса —
+// скриптом (scripts/4_World/VB_EchoClothes/VB_EC_Exo.c, множители — class CfgVB_EchoClothes ниже). Полный комплект —
+// 7 вещей с меткой vbExo=1 (шлем, маска, жилет, куртка, штаны, перчатки, ботинки). Сервопривод в комплект НЕ входит
+// (решение пользователя 11-23): самостоятельный модуль на энергии Эхо, носится с любой одеждой (этап 4).
 
 class CfgPatches
 {
@@ -44,6 +48,56 @@ class CfgMods
 		};
 	};
 };
+
+// Бонусы экзо (скрипт VB_EC_Exo.c читает отсюда, баланс — без правки скриптов). Сеты _vb для сравнения:
+// карманы 0,5; падение 0,6; голод/жажда 0,7; кровь/здоровье 1,5; выносливость 0,75.
+class CfgVB_EchoClothes
+{
+	class Exo
+	{
+		contentsWeight=0.4;		// содержимое карманов вещи экзо весит 40 %
+		setOwnWeight=0.4;		// в полном комплекте и сами надетые вещи комплекта весят 40 % (каркас держит себя)
+		fallHeight=0.5;			// ботинки экзо: высота падения ×0,5
+		setHungerThirst=0.6;	// полный комплект: голод и жажда ×0,6
+		setBlood=1.75;			// полный комплект: восстановление крови ×1,75
+		setHealth=1.75;			// полный комплект: восстановление здоровья ×1,75
+		setStamina=0.6;			// полный комплект: расход выносливости ×0,6
+		// слоты полного комплекта (сервопривода нет: он отдельный модуль)
+		setSlots[]={"Headgear","Mask","Body","Vest","Legs","Gloves","Feet"};
+	};
+	// Сервопривод (этап 4, 11-23, ТЗ раздел 7): работает сам, когда надет на пояс и в гнёздах есть энергия Эхо
+	// (энергоячейки ядра, синтез — бесконечно); с любой одеждой. Числа «чуть увеличены» по просьбе пользователя.
+	class Servo
+	{
+		assistKg=50;			// снимает с нагрузки бойца (запас выносливости считается, как будто груза меньше), кг
+		assistKgFullExo=85;		// с полным комплектом экзо («полный экзоскелет»)
+		staminaUse=0.8;			// расход выносливости ×
+		contentsWeight=0.4;		// включённый: сам весит 0, содержимое — 40 %
+		fallHeightFullExo=0.3;	// полный экзоскелет: высота падения × (у ботинок экзо без сервопривода — 0,5)
+		drainBase=2;			// kE/tick, пока работает
+		drainPerKg=0.12;		// + kE/tick за каждый снятый килограмм (50 кг -> 8, 85 кг -> 12,2)
+		sprintMul=1.5;			// при беге расход ×
+		tickSeconds=10;			// как часто сервер списывает энергию (единица kE/tick — 10 с)
+	};
+};
+class CfgNonAIVehicles
+{
+	class ProxyAttachment;
+	// крепления на модели сервопривода (бывшие батареи OOTS; tools/ec_servo_proxies.py): энергоячейки видны на спине
+	class Proxyvb_exocell_slot_1: ProxyAttachment
+	{
+		scope=2;
+		inventorySlot[]={"VB_Echo_GearCell1"};
+		model="VB_EchoClothes\exo_set\Backpacks\ExoPrivod\vb_exocell_slot_1.p3d";
+	};
+	class Proxyvb_exocell_slot_2: ProxyAttachment
+	{
+		scope=2;
+		inventorySlot[]={"VB_Echo_GearCell2"};
+		model="VB_EchoClothes\exo_set\Backpacks\ExoPrivod\vb_exocell_slot_2.p3d";
+	};
+};
+
 class CfgVehicles
 {
 	class Clothing_Base;
@@ -52,16 +106,18 @@ class CfgVehicles
 	class TacticalGloves_ColorBase;
 	class MilitaryBoots_ColorBase;
 
-	// ---------------- шлем (был IMP_Helmet_RoninHeavy_ColorBase / _Black): скрипт — тёмное стекло, хват в руках
+	// ---------------- шлем (был IMP_Helmet_RoninHeavy_ColorBase / _Black): скрипт — тёмное стекло, хват в руках.
+	// С маской совместим (11-23): noMask убран — в 1.30 он ещё запрещает маску (EntityAI.InitLegacySlotExclusionValuesDerived)
 	class VB_EC_Exo_Helmet_Base: Clothing
 	{
 		scope=0;
+		vbExo=1;
 		displayName="$STR_VB_EC_Exo_Helmet";
 		descriptionShort="$STR_VB_EC_Exo_Helmet_disc";
 		model="VB_EchoClothes\exo_set\helmet\ronin_heavy\models\RoninHeavy_g.p3d";
 		attachments[]={"NVG","helmetFlashlight"};
-		repairableWithKits[]={8};
-		repairCosts[]={25.0};
+		repairableWithKits[]={2,3,5,8};
+		repairCosts[]={25,25,25,25};
 		inventorySlot[]={"Headgear","Helmet"};
 		simulation="clothing";
 		vehicleClass="Clothing";
@@ -69,13 +125,18 @@ class CfgVehicles
 		quickBarBonus=2;
 		weight=2000;
 		itemSize[]={4,4};
-		noMask=1;
 		noNVStrap=1;
 		noEyewear=1;
 		varWetMax=0.049;
 		heatIsolation=1;
+		visibilityModifier=0.75;
 		hiddenSelections[]={"camoflage"};
 		headSelectionsToHide[]={"Clipping_GP5GasMask"};
+		class Protection
+		{
+			biological=1;
+			chemical=1;
+		};
 		class ClothingTypes
 		{
 			male="VB_EchoClothes\exo_set\helmet\ronin_heavy\models\RoninHeavy.p3d";
@@ -87,7 +148,8 @@ class CfgVehicles
 			{
 				class Health
 				{
-					hitpoints=160;
+					hitpoints=600;
+					transferToAttachmentsCoef=0.5;
 					healthLevels[]={{1.0,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy.rvmat"}},{0.7,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy.rvmat"}},{0.5,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy_damage.rvmat"}},{0.3,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy_damage.rvmat"}},{0.0,{"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy_destruct.rvmat"}}};
 				};
 			};
@@ -95,27 +157,27 @@ class CfgVehicles
 			{
 				class Projectile
 				{
-					class Health { damage=0.12; };
-					class Blood { damage=0.12; };
-					class Shock { damage=0.12; };
+					class Health { damage=0.07; };
+					class Blood { damage=0; };
+					class Shock { damage=0.18; };
 				};
 				class Melee
 				{
-					class Health { damage=0.12; };
-					class Blood { damage=0.12; };
-					class Shock { damage=0.12; };
+					class Health { damage=0.18; };
+					class Blood { damage=0; };
+					class Shock { damage=0.07; };
 				};
 				class Infected
 				{
-					class Health { damage=0.12; };
-					class Blood { damage=0.12; };
-					class Shock { damage=0.12; };
+					class Health { damage=0.18; };
+					class Blood { damage=0; };
+					class Shock { damage=0.18; };
 				};
 				class FragGrenade
 				{
-					class Health { damage=0.12; };
-					class Blood { damage=0.12; };
-					class Shock { damage=0.05; };
+					class Health { damage=0.07; };
+					class Blood { damage=0; };
+					class Shock { damage=0.07; };
 				};
 			};
 		};
@@ -134,10 +196,11 @@ class CfgVehicles
 		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\helmet\ronin_heavy\data\RoninHeavy_Black.paa"};
 	};
 
-	// ---------------- маска (была OOTS_Mask_MaskGhost): защита от газа и заразы без фильтра — как была
+	// ---------------- маска (была OOTS_Mask_MaskGhost): дыхание — газ и зараза без фильтра; надевается под шлем
 	class VB_EC_Exo_Mask_Base: Clothing
 	{
 		scope=0;
+		vbExo=1;
 		displayName="$STR_VB_EC_Exo_Mask";
 		descriptionShort="$STR_VB_EC_Exo_Mask_disc";
 		model="VB_EchoClothes\exo_set\Mask\MaskGhost\MaskGhost_g.p3d";
@@ -147,11 +210,11 @@ class CfgVehicles
 		weight=170;
 		itemSize[]={2,2};
 		ragQuantity=1;
-		varWetMax=1;
+		varWetMax=0.1;
 		heatIsolation=1;
-		repairableWithKits[]={5,2};
-		repairCosts[]={30,25};
-		visibilityModifier=0.85;
+		repairableWithKits[]={2,3,5,8};
+		repairCosts[]={25,25,25,25};
+		visibilityModifier=0.75;
 		headSelectionsToHide[]={"Clipping_GP5GasMask"};
 		hiddenSelections[]={"como"};
 		class ClothingTypes
@@ -165,7 +228,7 @@ class CfgVehicles
 			{
 				class Health
 				{
-					hitpoints=100;
+					hitpoints=450;
 					healthLevels[]={{1.0,{"VB_EchoClothes\exo_set\Mask\MaskGhost\Data\MaskGhost.rvmat"}},{0.7,{"VB_EchoClothes\exo_set\Mask\MaskGhost\Data\MaskGhost.rvmat"}},{0.5,{"VB_EchoClothes\exo_set\Mask\MaskGhost\Data\MaskGhost_damage.rvmat"}},{0.3,{"VB_EchoClothes\exo_set\Mask\MaskGhost\Data\MaskGhost_damage.rvmat"}},{0.0,{"VB_EchoClothes\exo_set\Mask\MaskGhost\Data\MaskGhost_destruct.rvmat"}}};
 				};
 			};
@@ -196,6 +259,7 @@ class CfgVehicles
 	class VB_EC_Exo_Vest_Base: PlateCarrierVest
 	{
 		scope=0;
+		vbExo=1;
 		displayName="$STR_VB_EC_Exo_Vest";
 		descriptionShort="$STR_VB_EC_Exo_Vest_disc";
 		model="VB_EchoClothes\exo_set\Vest\ExoVest\ExoPlate_g.p3d";
@@ -208,10 +272,15 @@ class CfgVehicles
 		quickBarBonus=5;
 		varWetMax=0.1;
 		heatIsolation=0.85;
-		repairableWithKits[]={3,8};
-		repairCosts[]={75,50};
-		visibilityModifier=0.85;
+		repairableWithKits[]={2,3,5,8};
+		repairCosts[]={25,25,25,25};
+		visibilityModifier=0.75;
 		hiddenSelections[]={"como"};
+		class Protection
+		{
+			biological=1;
+			chemical=1;
+		};
 		class ClothingTypes
 		{
 			male="VB_EchoClothes\exo_set\Vest\ExoVest\ExoPlate_m.p3d";
@@ -223,7 +292,7 @@ class CfgVehicles
 			{
 				class Health
 				{
-					hitpoints=3500;
+					hitpoints=1200;
 					transferToAttachmentsCoef=0.5;
 					healthLevels[]={{1.0,{"VB_EchoClothes\exo_set\Vest\ExoVest\data\ExoPlate.rvmat"}},{0.7,{"VB_EchoClothes\exo_set\Vest\ExoVest\data\ExoPlate.rvmat"}},{0.5,{"VB_EchoClothes\exo_set\Vest\ExoVest\data\ExoPlate_damage.rvmat"}},{0.3,{"VB_EchoClothes\exo_set\Vest\ExoVest\data\ExoPlate_damage.rvmat"}},{0.0,{"VB_EchoClothes\exo_set\Vest\ExoVest\data\ExoPlate_destruct.rvmat"}}};
 				};
@@ -232,27 +301,27 @@ class CfgVehicles
 			{
 				class Projectile
 				{
-					class Health { damage=0.13; };
-					class Blood { damage=0.1; };
-					class Shock { damage=0.1; };
+					class Health { damage=0.1; };
+					class Blood { damage=0; };
+					class Shock { damage=0.3; };
 				};
 				class Melee
 				{
-					class Health { damage=0.13; };
-					class Blood { damage=0.1; };
-					class Shock { damage=0.2; };
+					class Health { damage=0.14; };
+					class Blood { damage=0; };
+					class Shock { damage=0.14; };
 				};
 				class Infected
 				{
-					class Health { damage=0.13; };
+					class Health { damage=0.14; };
 					class Blood { damage=0; };
-					class Shock { damage=0.15; };
+					class Shock { damage=0.14; };
 				};
 				class FragGrenade
 				{
-					class Health { damage=0.5; };
+					class Health { damage=0.25; };
 					class Blood { damage=0; };
-					class Shock { damage=0.26; };
+					class Shock { damage=0.25; };
 				};
 			};
 		};
@@ -273,29 +342,37 @@ class CfgVehicles
 		hiddenSelectionsMaterials[]={"VB_EchoClothes\exo_set\Vest\ExoVest\data\ExoPlate.rvmat"};
 	};
 
-	// ---------------- сервопривод (был OOTS_Exo_Servoprivod_black_BeltSlot_120): на поясе, отсек 10×12, −120 кг.
-	// Батарея и ArtCase — слоты OOTS, не перенесены; питание будет от энергоячейки Эхо (этап 4)
+	// ---------------- сервопривод (был OOTS_Exo_Servoprivod_black_BeltSlot_120): на поясе (решение 11-23: чтобы
+	// оставался любой рюкзак), 100 ячеек, 4 кг. НЕ часть комплекта (vbExo нет): самостоятельный модуль на энергии Эхо,
+	// бонусы — class CfgVB_EchoClothes Servo и скрипт VB_EC_Servo.c. Две энергоячейки видны на спине (крепления выше)
 	class VB_EC_Exo_Servo_Base: Clothing
 	{
 		scope=0;
+		vbExoServo=1;
 		displayName="$STR_VB_EC_Exo_Servo";
 		descriptionShort="$STR_VB_EC_Exo_Servo_disc";
 		model="VB_EchoClothes\exo_set\Backpacks\ExoPrivod\ExoPrivod_g.p3d";
 		debug_ItemCategory=9;
+		attachments[]={"VB_Echo_GearCell1","VB_Echo_GearCell2"};
 		inventorySlot[]={"Hips"};
 		itemInfo[]={"Clothing","Back"};
 		rotationFlags=16;
-		weight=-120000;
+		weight=4000;
 		itemSize[]={4,5};
-		itemsCargoSize[]={10,12};
+		itemsCargoSize[]={10,10};
 		quickBarBonus=5;
 		varWetMax=0.1;
 		heatIsolation=0.7;
-		repairableWithKits[]={5,2};
-		repairCosts[]={30,25};
+		repairableWithKits[]={2,3,5,8};
+		repairCosts[]={25,25,25,25};
 		soundAttType="Outdoor";
-		visibilityModifier=0.85;
+		visibilityModifier=0.75;
 		hiddenSelections[]={"Pr1","Pr2"};
+		class Protection
+		{
+			biological=1;
+			chemical=1;
+		};
 		class ClothingTypes
 		{
 			male="VB_EchoClothes\exo_set\Backpacks\ExoPrivod\ExoPrivod_m.p3d";
@@ -307,7 +384,7 @@ class CfgVehicles
 			{
 				class Health
 				{
-					hitpoints=5000;
+					hitpoints=750;
 					transferToAttachmentsCoef=0.5;
 					healthLevels[]={{1.0,{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod1.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod2.rvmat"}},{0.7,{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod1.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod2.rvmat"}},{0.5,{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod1_damage.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod2_damage.rvmat"}},{0.3,{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod1_damage.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod2_damage.rvmat"}},{0.0,{"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod1_destruct.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod2_destruct.rvmat"}}};
 				};
@@ -330,27 +407,33 @@ class CfgVehicles
 		hiddenSelectionsMaterials[]={"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod1.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\ExoPrivod2.rvmat"};
 	};
 
-	// ---------------- куртка (была OOTS_Jacket_Exo): −30 кг, отсек 10×10; модули OOTS Clothes*Mod не перенесены
+	// ---------------- куртка (была OOTS_Jacket_Exo); модули OOTS Clothes*Mod не перенесены
 	class VB_EC_Exo_Jacket_Base: Clothing
 	{
 		scope=0;
+		vbExo=1;
 		displayName="$STR_VB_EC_Exo_Jacket";
 		descriptionShort="$STR_VB_EC_Exo_Jacket_disc";
 		model="VB_EchoClothes\exo_set\Tops\ExoJacket\ExoJacket_g.p3d";
 		inventorySlot[]={"Body"};
 		itemInfo[]={"Clothing","Body"};
-		weight=-30000;
+		weight=4000;
 		itemSize[]={4,3};
 		itemsCargoSize[]={10,10};
 		quickBarBonus=5;
 		varWetMax=0.1;
 		heatIsolation=0.9;
 		ragQuantity=4;
-		repairableWithKits[]={5,2};
-		repairCosts[]={30,25};
+		repairableWithKits[]={2,3,5,8};
+		repairCosts[]={25,25,25,25};
 		soundAttType="WoolShirt";
-		visibilityModifier=0.85;
+		visibilityModifier=0.75;
 		hiddenSelections[]={"como"};
+		class Protection
+		{
+			biological=1;
+			chemical=1;
+		};
 		class ClothingTypes
 		{
 			male="VB_EchoClothes\exo_set\Tops\ExoJacket\ExoJacket_m.p3d";
@@ -362,7 +445,8 @@ class CfgVehicles
 			{
 				class Health
 				{
-					hitpoints=2500;
+					hitpoints=750;
+					transferToAttachmentsCoef=0.5;
 					healthLevels[]={{1.0,{"VB_EchoClothes\exo_set\Tops\ExoJacket\data\ExoJacket.rvmat"}},{0.7,{"VB_EchoClothes\exo_set\Tops\ExoJacket\data\ExoJacket.rvmat"}},{0.5,{"VB_EchoClothes\exo_set\Tops\ExoJacket\data\ExoJacket_damage.rvmat"}},{0.3,{"VB_EchoClothes\exo_set\Tops\ExoJacket\data\ExoJacket_damage.rvmat"}},{0.0,{"VB_EchoClothes\exo_set\Tops\ExoJacket\data\ExoJacket_destruct.rvmat"}}};
 				};
 			};
@@ -376,21 +460,21 @@ class CfgVehicles
 				};
 				class Melee
 				{
-					class Health { damage=0.5; };
-					class Blood { damage=0.5; };
-					class Shock { damage=0.5; };
+					class Health { damage=0.4; };
+					class Blood { damage=0.4; };
+					class Shock { damage=0.4; };
 				};
 				class Infected
 				{
-					class Health { damage=0.5; };
-					class Blood { damage=0.5; };
-					class Shock { damage=0.5; };
+					class Health { damage=0.4; };
+					class Blood { damage=0.4; };
+					class Shock { damage=0.4; };
 				};
 				class FragGrenade
 				{
-					class Health { damage=0.7; };
-					class Blood { damage=0.7; };
-					class Shock { damage=0.7; };
+					class Health { damage=0.5; };
+					class Blood { damage=0.5; };
+					class Shock { damage=0.5; };
 				};
 			};
 		};
@@ -410,10 +494,11 @@ class CfgVehicles
 		hiddenSelectionsMaterials[]={"VB_EchoClothes\exo_set\Tops\ExoJacket\data\ExoJacket.rvmat"};
 	};
 
-	// ---------------- штаны (были OOTS_Pants_Exo): −30 кг, отсек 10×10; «personality» берёт текстуру модели
+	// ---------------- штаны (были OOTS_Pants_Exo); «personality» берёт текстуру модели
 	class VB_EC_Exo_Pants_Base: Clothing
 	{
 		scope=0;
+		vbExo=1;
 		displayName="$STR_VB_EC_Exo_Pants";
 		descriptionShort="$STR_VB_EC_Exo_Pants_disc";
 		model="VB_EchoClothes\exo_set\Pants\ExoPants\ExoPants_g.p3d";
@@ -421,17 +506,22 @@ class CfgVehicles
 		inventorySlot[]={"Legs"};
 		simulation="clothing";
 		itemInfo[]={"Clothing","Legs"};
-		weight=-30000;
+		weight=1500;
 		itemSize[]={3,2};
-		itemsCargoSize[]={10,10};
+		itemsCargoSize[]={10,9};
 		quickBarBonus=5;
 		ragQuantity=3;
 		varWetMax=0.1;
 		heatIsolation=0.9;
-		repairableWithKits[]={5,2};
-		repairCosts[]={30,25};
-		visibilityModifier=0.85;
+		repairableWithKits[]={2,3,5,8};
+		repairCosts[]={25,25,25,25};
+		visibilityModifier=0.75;
 		hiddenSelections[]={"como","personality"};
+		class Protection
+		{
+			biological=1;
+			chemical=1;
+		};
 		class ClothingTypes
 		{
 			male="VB_EchoClothes\exo_set\Pants\ExoPants\ExoPants_m.p3d";
@@ -443,7 +533,8 @@ class CfgVehicles
 			{
 				class Health
 				{
-					hitpoints=2500;
+					hitpoints=750;
+					transferToAttachmentsCoef=0.5;
 					healthLevels[]={{1.0,{"VB_EchoClothes\exo_set\Pants\ExoPants\data\ExoPants.rvmat"}},{0.7,{"VB_EchoClothes\exo_set\Pants\ExoPants\data\ExoPants.rvmat"}},{0.5,{"VB_EchoClothes\exo_set\Pants\ExoPants\data\ExoPants_damage.rvmat"}},{0.3,{"VB_EchoClothes\exo_set\Pants\ExoPants\data\ExoPants_damage.rvmat"}},{0.0,{"VB_EchoClothes\exo_set\Pants\ExoPants\data\ExoPants_destruct.rvmat"}}};
 				};
 			};
@@ -451,27 +542,27 @@ class CfgVehicles
 			{
 				class Projectile
 				{
-					class Health { damage=0.13; };
-					class Blood { damage=0.1; };
-					class Shock { damage=0.1; };
+					class Health { damage=0.5; };
+					class Blood { damage=0.5; };
+					class Shock { damage=0.5; };
 				};
 				class Melee
 				{
-					class Health { damage=0.13; };
-					class Blood { damage=0.1; };
-					class Shock { damage=0.2; };
+					class Health { damage=0.4; };
+					class Blood { damage=0.4; };
+					class Shock { damage=0.4; };
 				};
 				class Infected
 				{
-					class Health { damage=0.13; };
-					class Blood { damage=0; };
-					class Shock { damage=0.15; };
+					class Health { damage=0.4; };
+					class Blood { damage=0.4; };
+					class Shock { damage=0.4; };
 				};
 				class FragGrenade
 				{
 					class Health { damage=0.5; };
-					class Blood { damage=0; };
-					class Shock { damage=0.26; };
+					class Blood { damage=0.5; };
+					class Shock { damage=0.5; };
 				};
 			};
 		};
@@ -496,6 +587,7 @@ class CfgVehicles
 	class VB_EC_Exo_Gloves_Base: TacticalGloves_ColorBase
 	{
 		scope=0;
+		vbExo=1;
 		displayName="$STR_VB_EC_Exo_Gloves";
 		descriptionShort="$STR_VB_EC_Exo_Gloves_disc";
 		model="VB_EchoClothes\exo_set\Gloves\ExoGloves\ExoGloves_g.p3d";
@@ -503,17 +595,17 @@ class CfgVehicles
 		simulation="clothing";
 		itemInfo[]={"Gloves"};
 		rotationFlags=34;
-		repairableWithKits[]={5,2};
-		repairCosts[]={30,25};
+		repairableWithKits[]={2,3,5,8};
+		repairCosts[]={25,25,25,25};
 		weight=454;
 		itemSize[]={2,2};
 		varWetMax=0.1;
 		heatIsolation=0.8;
-		visibilityModifier=0.85;
+		visibilityModifier=0.75;
 		hiddenSelections[]={"como","personality"};
 		class Protection
 		{
-			biological=0;
+			biological=1;
 			chemical=1;
 		};
 		class ClothingTypes
@@ -527,7 +619,7 @@ class CfgVehicles
 			{
 				class Health
 				{
-					hitpoints=1250;
+					hitpoints=600;
 					healthLevels[]={{1.0,{"VB_EchoClothes\exo_set\Gloves\ExoGloves\data\ExoGloves.rvmat"}},{0.7,{"VB_EchoClothes\exo_set\Gloves\ExoGloves\data\ExoGloves.rvmat"}},{0.5,{"VB_EchoClothes\exo_set\Gloves\ExoGloves\data\ExoGloves_damage.rvmat"}},{0.3,{"VB_EchoClothes\exo_set\Gloves\ExoGloves\data\ExoGloves_damage.rvmat"}},{0.0,{"VB_EchoClothes\exo_set\Gloves\ExoGloves\data\ExoGloves_destruct.rvmat"}}};
 				};
 			};
@@ -535,9 +627,15 @@ class CfgVehicles
 			{
 				class Melee
 				{
-					class Health { damage=0.65; };
-					class Blood { damage=0.3; };
-					class Shock { damage=0.3; };
+					class Health { damage=0.4; };
+					class Blood { damage=0.4; };
+					class Shock { damage=0.4; };
+				};
+				class Infected
+				{
+					class Health { damage=0.4; };
+					class Blood { damage=0.4; };
+					class Shock { damage=0.4; };
 				};
 			};
 		};
@@ -558,10 +656,11 @@ class CfgVehicles
 		hiddenSelectionsMaterials[]={"VB_EchoClothes\exo_set\Gloves\ExoGloves\data\ExoGloves.rvmat"};
 	};
 
-	// ---------------- ботинки (были OOTS_Boots_Exo): ножны для ножа
+	// ---------------- ботинки (были OOTS_Boots_Exo): ножны для ножа; мягкое падение — скрипт
 	class VB_EC_Exo_Boots_Base: MilitaryBoots_ColorBase
 	{
 		scope=0;
+		vbExo=1;
 		displayName="$STR_VB_EC_Exo_Boots";
 		descriptionShort="$STR_VB_EC_Exo_Boots_disc";
 		model="VB_EchoClothes\exo_set\Boots\ExoBoots\ExoBoots_g.p3d";
@@ -574,12 +673,17 @@ class CfgVehicles
 		quickBarBonus=2;
 		varWetMax=0.1;
 		heatIsolation=0.9;
-		visibilityModifier=0.85;
-		repairableWithKits[]={3};
-		repairCosts[]={25};
+		visibilityModifier=0.75;
+		repairableWithKits[]={2,3,5,8};
+		repairCosts[]={25,25,25,25};
 		soundAttType="Boots";
 		soundImpactType="default";
 		hiddenSelections[]={"como"};
+		class Protection
+		{
+			biological=1;
+			chemical=1;
+		};
 		class ClothingTypes
 		{
 			male="VB_EchoClothes\exo_set\Boots\ExoBoots\ExoBoots_m.p3d";
@@ -591,7 +695,7 @@ class CfgVehicles
 			{
 				class Health
 				{
-					hitpoints=2250;
+					hitpoints=750;
 					healthLevels[]={{1.0,{"VB_EchoClothes\exo_set\Boots\ExoBoots\data\ExoBoots.rvmat"}},{0.7,{"VB_EchoClothes\exo_set\Boots\ExoBoots\data\ExoBoots.rvmat"}},{0.5,{"VB_EchoClothes\exo_set\Boots\ExoBoots\data\ExoBoots_damage.rvmat"}},{0.3,{"VB_EchoClothes\exo_set\Boots\ExoBoots\data\ExoBoots_damage.rvmat"}},{0.0,{"VB_EchoClothes\exo_set\Boots\ExoBoots\data\ExoBoots_destruct.rvmat"}}};
 				};
 			};
@@ -599,15 +703,15 @@ class CfgVehicles
 			{
 				class Melee
 				{
-					class Health { damage=0.5; };
-					class Blood { damage=0.6; };
-					class Shock { damage=0.6; };
+					class Health { damage=0.4; };
+					class Blood { damage=0.4; };
+					class Shock { damage=0.4; };
 				};
 				class Infected
 				{
-					class Health { damage=0.5; };
-					class Blood { damage=0.6; };
-					class Shock { damage=0.6; };
+					class Health { damage=0.4; };
+					class Blood { damage=0.4; };
+					class Shock { damage=0.4; };
 				};
 			};
 		};

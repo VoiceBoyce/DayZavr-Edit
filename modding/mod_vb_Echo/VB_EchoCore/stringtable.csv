@@ -3,6 +3,7 @@
 "STR_VB_Echo_slot_battery","Echo battery (charging)","Echo battery (charging)","Аккумулятор Эхо — зарядка",
 "STR_VB_Echo_slot_cell_charge","Energy cell — charging","Energy cell — charging","Энергоячейка — зарядка",
 "STR_VB_Echo_slot_cell_drain","Energy cell — into the grid","Energy cell — into the grid","Энергоячейка — разрядка в сеть",
+"STR_VB_Echo_slot_gearcell","Energy cell — gear power","Energy cell — gear power","Энергоячейка — питание снаряжения",
 "STR_VB_Echo_cell_disc","Echo energy cell.","Echo energy cell.","Энергоячейка Эхо.",
 "STR_VB_Echo_cell_mk1","Echo energy cell Mk I","Echo energy cell Mk I","Энергоячейка Эхо Mk I",
 "STR_VB_Echo_cell_mk2","Echo energy cell Mk II","Echo energy cell Mk II","Энергоячейка Эхо Mk II",
