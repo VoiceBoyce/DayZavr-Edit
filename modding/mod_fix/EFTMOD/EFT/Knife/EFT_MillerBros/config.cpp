@@ -21,8 +21,8 @@ class CfgVehicles
 class EFT_MillerBros_ColorBase: CombatKnife
 	{
 		scope=0;
-		displayName="M-2";
-		descriptionShort="Miller Bros. Blades M-2 Tactical Sword  ";
+		displayName="#EFT_MillerBros_displayName";
+		descriptionShort="#EFT_MillerBros_descriptionShort";
 		model="EFT\Knife\EFT_MillerBros\EFT_MillerBros.p3d";
 		animClass="Knife";
 		repairableWithKits[]={4};

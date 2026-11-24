@@ -25,8 +25,8 @@ class CfgVehicles
 	class EFT_food_Icegreen: SodaCan_Pipsi
 	{
 		scope=2;
-		displayName="Icegreen";
-		descriptionShort="Icegreen Soda can.";
+		displayName="#EFT_food_Icegreen_displayName";
+		descriptionShort="#EFT_food_Icegreen_descriptionShort";
 		model="\EFT\Food\Icegreen\EFT_Icegreen.p3d";
 		itemSize[]={1,1};
 		weight=100;

@@ -24,8 +24,8 @@ class CfgVehicles
 class TM_knife1_ColorBase: CombatKnife
 	{
 		scope=0;
-		displayName="Knife";
-		descriptionShort="PMC Knife ";
+		displayName="#TM_knife1_displayName";
+		descriptionShort="#TM_knife1_descriptionShort";
 		model="EFT\Knife\TM_knife1\TM_knife1.p3d";
 		animClass="Knife";
 		repairableWithKits[]={4};

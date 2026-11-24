@@ -14,8 +14,8 @@ class CfgVehicles
 	class MountainBag_ColorBase;
 	class EFT_bag_TriZip_ColorBase : MountainBag_ColorBase {
 		scope = 0;
-		displayName = "Tri-Zip";
-		descriptionShort = "Assault backpack Camelbak Tri-Zip ";
+		displayName = "#EFT_bag_TriZip_displayName";
+		descriptionShort = "#EFT_bag_TriZip_descriptionShort";
 		model = "EFT\Bags\TriZip\TriZip_g.p3d";
 		inventorySlot[] = {"Back"};
 		attachments[] = {};

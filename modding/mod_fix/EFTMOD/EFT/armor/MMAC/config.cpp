@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_Vest_MMAC_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "MMAC";
-		descriptionShort = "Armor class:4 Durability:60 ";
+		displayName = "#EFT_Vest_MMAC_displayName";
+		descriptionShort = "#EFT_Vest_MMAC_descriptionShort";
 		model = "EFT\armor\MMAC\MMAC_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

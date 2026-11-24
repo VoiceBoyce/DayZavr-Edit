@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_vest_cs_Assault_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "CSA";
-		descriptionShort = "CSA ";
+		displayName = "#EFT_vest_cs_Assault_displayName";
+		descriptionShort = "#EFT_vest_cs_Assault_descriptionShort";
 		model = "EFT\vest\vest_cs_Assault\vest_cs_Assault_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

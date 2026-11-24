@@ -21,8 +21,8 @@ class CfgVehicles
 class EFT_Bars95x18_ColorBase: CombatKnife
 	{
 		scope=0;
-		displayName="Knife Bars";
-		descriptionShort="Knife Bars A-2607 95x18 ";
+		displayName="#EFT_Bars95x18_displayName";
+		descriptionShort="#EFT_Bars95x18_descriptionShort";
 		model="EFT\Knife\EFT_Bars95x18\EFT_Bars95x18.p3d";
 		animClass="Knife";
 		repairableWithKits[]={4};
@@ -244,8 +244,8 @@ class EFT_Bars95x18_ColorBase: CombatKnife
 	class EFT_Bars95x18_damask: EFT_Bars95x18_ColorBase
 	{
 		scope = 2;
-		displayName="Нож Барс Дамаск";
-		descriptionShort="Нож Барс А-2607 Дамаск";
+		displayName="#EFT_Bars95x18_damask_displayName";
+		descriptionShort="#EFT_Bars95x18_damask_descriptionShort";
 		hiddenSelectionsTextures[] = {"EFT\Knife\EFT_Bars95x18\Data\knife_damask.paa"};
 	};
 };

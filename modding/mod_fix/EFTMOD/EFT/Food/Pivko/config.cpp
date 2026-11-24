@@ -25,8 +25,8 @@ class CfgVehicles
 	class EFT_food_Pivko: SodaCan_Pipsi
 	{
 		scope=2;
-		displayName="Kvass";
-		descriptionShort="Kvass Norvinsky Yadrenyi, Premium";
+		displayName="#EFT_food_Pivko_displayName";
+		descriptionShort="#EFT_food_Pivko_descriptionShort";
 		model="\EFT\Food\Kvass\EFT_Kvass.p3d";
 		weight=900;
 		stackedUnit="";

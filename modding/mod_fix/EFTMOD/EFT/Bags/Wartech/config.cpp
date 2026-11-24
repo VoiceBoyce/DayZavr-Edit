@@ -14,8 +14,8 @@ class CfgVehicles
 	class MountainBag_ColorBase;
 	class EFT_bag_Wartech_ColorBase : MountainBag_ColorBase {
 		scope = 0;
-		displayName = "Berkut BB-102";
-		descriptionShort = "Backpack WARTECH Berkut BB-102 ";
+		displayName = "#EFT_bag_Wartech_displayName";
+		descriptionShort = "#EFT_bag_Wartech_descriptionShort";
 		model = "EFT\Bags\Wartech\Wartech_g.p3d";
 		inventorySlot[] = {"Back"};
 		attachments[] = {};

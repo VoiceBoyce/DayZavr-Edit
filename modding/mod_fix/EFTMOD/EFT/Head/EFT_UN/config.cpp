@@ -20,8 +20,8 @@ class CfgVehicles
 	class EFT_UN_ColorBase: Clothing
 	{
 		scope=0;
-		displayName="UNTAR helmet";
-		descriptionShort="Grade:3 Durability:25 ";
+		displayName="#EFT_UN_displayName";
+		descriptionShort="#EFT_UN_descriptionShort";
 		model="EFT\Head\EFT_UN\EFT_UN_g.p3d";
 		repairableWithKits[]={8};
 		repairCosts[]={50};

@@ -14,8 +14,8 @@ class CfgVehicles
 	class MountainBag_ColorBase;
 	class EFT_bag_Drawbridge_ColorBase : MountainBag_ColorBase {
 		scope = 0;
-		displayName = "Draw Bridge 70";
-		descriptionShort = "Backpack Hazard 4 Drawbridge ";
+		displayName = "#EFT_bag_Drawbridge_displayName";
+		descriptionShort = "#EFT_bag_Drawbridge_descriptionShort";
 		model = "EFT\Bags\Drawbridge\Drawbridge_g.p3d";
 		inventorySlot[] = {"Back"};
 		attachments[] = {};

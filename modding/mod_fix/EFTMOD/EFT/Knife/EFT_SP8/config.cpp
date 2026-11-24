@@ -21,8 +21,8 @@ class CfgVehicles
 class EFT_SP8_ColorBase: CombatKnife
 	{
 		scope=0;
-		displayName="SP-8";
-		descriptionShort="SP-8 Survival Machete ";
+		displayName="#EFT_SP8_displayName";
+		descriptionShort="#EFT_SP8_descriptionShort";
 		model="EFT\Knife\EFT_SP8\EFT_SP8.p3d";
 		animClass="Knife";
 		repairableWithKits[]={4};

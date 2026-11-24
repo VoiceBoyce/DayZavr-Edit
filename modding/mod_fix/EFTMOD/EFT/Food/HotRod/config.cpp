@@ -25,8 +25,8 @@ class CfgVehicles
 	class EFT_food_HotRod: SodaCan_Pipsi
 	{
 		scope=2;
-		displayName="HotRod";
-		descriptionShort="HotRod Energy drink. Be as rod in ass!";
+		displayName="#EFT_food_HotRod_displayName";
+		descriptionShort="#EFT_food_HotRod_descriptionShort";
 		model="\EFT\Food\HotRod\EFT_HotRod.p3d";
 		itemSize[]={1,1};
 		weight=100;

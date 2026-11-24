@@ -28,8 +28,8 @@ class CfgVehicles
 	class EFT_food_Samogon: WaterBottle
 	{
 		scope=2;
-		displayName="Samogon";
-		descriptionShort="Bottle of samogon. 99.9 degrees clean alcohol";
+		displayName="#EFT_food_Samogon_displayName";
+		descriptionShort="#EFT_food_Samogon_descriptionShort";
 		model="\EFT\Food\Samogon\EFT_Samogon.p3d";
 		itemSize[]={1,2};
 		destroyOnEmpty=1;

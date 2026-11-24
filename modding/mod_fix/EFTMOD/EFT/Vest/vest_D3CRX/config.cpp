@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_vest_D3CRX_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "D3CRX";
-		descriptionShort = "D3CRX ";
+		displayName = "#EFT_vest_D3CRX_displayName";
+		descriptionShort = "#EFT_vest_D3CRX_descriptionShort";
 		model = "EFT\vest\vest_D3CRX\vest_D3CRX_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

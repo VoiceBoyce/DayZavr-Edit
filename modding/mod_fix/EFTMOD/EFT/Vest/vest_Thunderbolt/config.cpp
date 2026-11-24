@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_vest_Thunderbolt_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "Thunderbolt";
-		descriptionShort = "Thunderbolt ";
+		displayName = "#EFT_vest_Thunderbolt_displayName";
+		descriptionShort = "#EFT_vest_Thunderbolt_descriptionShort";
 		model = "EFT\vest\vest_Thunderbolt\vest_Thunderbolt_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

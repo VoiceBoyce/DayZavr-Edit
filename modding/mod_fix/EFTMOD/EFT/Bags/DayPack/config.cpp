@@ -14,8 +14,8 @@ class CfgVehicles
 	class MountainBag_ColorBase;
 	class EFT_bag_DayPack_ColorBase : MountainBag_ColorBase {
 		scope = 0;
-		displayName = "Day Pack 60";
-		descriptionShort = "Backpack LBT-8005A Day Pack ";
+		displayName = "#EFT_bag_DayPack_displayName";
+		descriptionShort = "#EFT_bag_DayPack_descriptionShort";
 		model = "EFT\Bags\DayPack\DayPack_g.p3d";
 		inventorySlot[] = {"Back"};
 		attachments[] = {};

@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_vest_Bearning_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "LBT 1961A Goons Edition";
-		descriptionShort = "LBT-1961A Goons Edition ";
+		displayName = "#EFT_vest_Bearning_displayName";
+		descriptionShort = "#EFT_vest_Bearning_descriptionShort";
 		model = "EFT\vest\vest_Bearning\vest_Bearning_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

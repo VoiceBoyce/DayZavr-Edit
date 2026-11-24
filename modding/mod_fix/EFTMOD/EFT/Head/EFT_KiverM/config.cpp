@@ -21,7 +21,7 @@ class CfgVehicles
 	{
 		scope=0;
 		displayName="#EFT_KiverM_displayName";
-		descriptionShort="#EFT_KiverM_displayName";
+		descriptionShort="#EFT_KiverM_descriptionShort";
 		model="EFT\Head\EFT_KiverM\EFT_KiverM_g.p3d";
 		repairableWithKits[]={8};
 		repairCosts[]={50};

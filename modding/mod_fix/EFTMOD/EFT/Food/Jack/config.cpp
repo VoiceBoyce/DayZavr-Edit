@@ -32,8 +32,8 @@ class CfgVehicles
 	class EFT_food_Jack: WaterBottle
 	{
 		scope=2;
-		displayName="Jack Daniels";
-		descriptionShort="All knows this whiskey. But it can be only bottle...";
+		displayName="#EFT_food_Jack_displayName";
+		descriptionShort="#EFT_food_Jack_descriptionShort";
 		model="\EFT\Food\Jack\EFT_Jack.p3d";
 		itemSize[]={1,2};
 		destroyOnEmpty=1;

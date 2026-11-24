@@ -21,8 +21,8 @@ class CfgVehicles
 class EFT_KibaAxe_ColorBase: CombatKnife
 	{
 		scope=0;
-		displayName="Tomahawk";
-		descriptionShort="Kiba Arms Tactical Tomahawk ";
+		displayName="#EFT_KibaAxe_displayName";
+		descriptionShort="#EFT_KibaAxe_descriptionShort";
 		model="EFT\Knife\EFT_KibaAxe\EFT_KibaAxe.p3d";
 		animClass="Knife";
 		repairableWithKits[]={4};

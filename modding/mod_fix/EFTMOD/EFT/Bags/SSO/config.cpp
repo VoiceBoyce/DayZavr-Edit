@@ -14,8 +14,8 @@ class CfgVehicles
 	class MountainBag_ColorBase;
 	class EFT_bag_SSO_ColorBase : MountainBag_ColorBase {
 		scope = 0;
-		displayName = "SSO 70";
-		descriptionShort = "Backpack Eberlestock F5 SSO ";
+		displayName = "#EFT_bag_SSO_displayName";
+		descriptionShort = "#EFT_bag_SSO_descriptionShort";
 		model = "EFT\Bags\SSO\SSO_g.p3d";
 		inventorySlot[] = {"Back"};
 		attachments[] = {};

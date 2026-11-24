@@ -14,8 +14,8 @@ class CfgVehicles
 	class MountainBag_ColorBase;
 	class EFT_bag_BlackJack_ColorBase : MountainBag_ColorBase {
 		scope = 0;
-		displayName = "BlackJack 130";
-		descriptionShort = "Backpack Mystery Ranch Blackjack ";
+		displayName = "#EFT_bag_BlackJack_displayName";
+		descriptionShort = "#EFT_bag_BlackJack_descriptionShort";
 		model = "EFT\Bags\BlackJack\BlackJack_g.p3d";
 		inventorySlot[] = {"Back"};
 		attachments[] = {};

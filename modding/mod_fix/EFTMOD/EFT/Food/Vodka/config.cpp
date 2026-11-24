@@ -28,8 +28,8 @@ class CfgVehicles
 	class EFT_food_Vodka: WaterBottle
 	{
 		scope=2;
-		displayName="Vodka";
-		descriptionShort="Vodka Tarkovskaya";
+		displayName="#EFT_food_Vodka_displayName";
+		descriptionShort="#EFT_food_Vodka_descriptionShort";
 		model="\EFT\Food\Vodka\EFT_Vodka.p3d";
 		itemSize[]={1,2};
 		destroyOnEmpty=1;

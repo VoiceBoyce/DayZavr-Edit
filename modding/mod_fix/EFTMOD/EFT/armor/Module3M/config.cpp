@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_Vest_Module3M_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "Module3M";
-		descriptionShort = "Armor class:2 Durability:60 ";
+		displayName = "#EFT_Vest_Module3M_displayName";
+		descriptionShort = "#EFT_Vest_Module3M_descriptionShort";
 		model = "EFT\armor\Module3M\Module3M_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

@@ -21,8 +21,8 @@ class CfgVehicles
 class EFT_Taiga1_ColorBase: CombatKnife
 	{
 		scope=0;
-		displayName="Taiga-1";
-		descriptionShort="Machete Taiga-1   ";
+		displayName="#EFT_Taiga1_displayName";
+		descriptionShort="#EFT_Taiga1_descriptionShort";
 		model="EFT\Knife\EFT_Taiga1\EFT_Taiga1.p3d";
 		animClass="Knife";
 		repairableWithKits[]={4};
