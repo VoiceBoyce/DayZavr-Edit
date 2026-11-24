@@ -423,6 +423,7 @@ Verified errors committed more than once. Check ACTIVELY during implementation. 
 - **E123** — предмет с количеством тяжелеет с зарядом: у `Inventory_Base` `weightPerQuantityUnit = 1` (1 г на единицу), у носителей энергии/процентов ставить `weightPerQuantityUnit=0`
 - **E123** — `Cannot convert ... to method 'Slot'` и следом лавина ошибок в ванили: короткое имя своего метода (`Slot`, `Load`, `Flag`, `L`) совпало с существующей функцией — давать служебным методам префикс мода.
 - **E125** — предмет не находится поиском по названию (админка VPP, другие моды): в config `displayName="#KEY"` — `ConfigGetText` переводит только `$STR_`, `#` отдаёт как есть → ключи в stringtable с префиксом `STR_`, в config `"$STR_KEY"`
+- **E126** — уменьшить/увеличить вложение (предмет в слоте с прокси) нельзя: `SetScale` движок сбрасывает за кадр, и разово, и каждый кадр из `EOnPostFrame` родителя. Работает копия-модель на клиенте: `CreateStaticObjectUsingP3D(p3d, локальная точка, ориентация, масштаб, true)` + `предмет.AddChild(obj, -1)` без `SetOrientation`/`SetPosition` после создания (они сбрасывают масштаб) или `SetTransform` с осями × масштаб после `AddChild`; `GetScale` сразу после `AddChild` = 1, через кадр верный; размер копии — не по `ClippingInfo` (габарит заголовка + ~2 см)
 
 ---
 

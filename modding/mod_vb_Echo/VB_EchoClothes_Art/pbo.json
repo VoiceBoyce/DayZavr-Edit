@@ -1,0 +1,8 @@
+{
+    "compress": {"exclude": [], "include": []},
+    "headers": [
+        {"name": "prefix", "value": "VB_EchoClothes_Art"},
+        {"name": "product", "value": "dayz ugc"},
+        {"name": "version", "value": "1"}
+    ]
+}

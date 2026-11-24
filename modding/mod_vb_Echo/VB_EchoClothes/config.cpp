@@ -153,7 +153,7 @@ class CfgNonAIVehicles
 		inventorySlot[]={"VB_Echo_GearCell2"};
 		model="VB_EchoClothes\exo_set\Backpacks\ExoPrivod\vb_exocell_slot_2.p3d";
 	};
-	// капсула для артефактов на левом бедре сервопривода (бывший кейс OOTS, этап 3б)
+	// гнездо пояса с баночками для артефактов на сервоприводе (бывший кейс OOTS; с 11-24 вместо капсулы, ТЗ 8.4)
 	class Proxyvb_ec_artcase_box: ProxyAttachment
 	{
 		scope=2;
@@ -169,6 +169,13 @@ class CfgSlots
 		displayName="$STR_VB_EC_slot_artcase";
 		ghostIcon="set:vb_echo_icons image:artcase";
 	};
+	// баночки пояса: по артефакту в каждой (слоты артефактам OOTS добавляет PBO VB_EchoClothes_Art)
+	class Slot_VB_EC_ArtJar1 { name="VB_EC_ArtJar1"; displayName="$STR_VB_EC_slot_artjar"; ghostIcon="set:vb_echo_icons image:artjar"; };
+	class Slot_VB_EC_ArtJar2 { name="VB_EC_ArtJar2"; displayName="$STR_VB_EC_slot_artjar"; ghostIcon="set:vb_echo_icons image:artjar"; };
+	class Slot_VB_EC_ArtJar3 { name="VB_EC_ArtJar3"; displayName="$STR_VB_EC_slot_artjar"; ghostIcon="set:vb_echo_icons image:artjar"; };
+	class Slot_VB_EC_ArtJar4 { name="VB_EC_ArtJar4"; displayName="$STR_VB_EC_slot_artjar"; ghostIcon="set:vb_echo_icons image:artjar"; };
+	class Slot_VB_EC_ArtJar5 { name="VB_EC_ArtJar5"; displayName="$STR_VB_EC_slot_artjar"; ghostIcon="set:vb_echo_icons image:artjar"; };
+	class Slot_VB_EC_ArtJar6 { name="VB_EC_ArtJar6"; displayName="$STR_VB_EC_slot_artjar"; ghostIcon="set:vb_echo_icons image:artjar"; };
 };
 
 class CfgVehicles
@@ -178,29 +185,21 @@ class CfgVehicles
 	class PlateCarrierVest;
 	class TacticalGloves_ColorBase;
 	class MilitaryBoots_ColorBase;
-	class Container_Base;
+	class Inventory_Base;
 
-	// ---------------- капсула для артефактов (этап 3б, ТЗ 8.4): держатель на сервоприводе, видна на костюме.
-	// Только артефакты (vbArtPrefixes, кроме vbArtExclude — кейсы-экраны OOTS); артефакты в ней действуют, как в
-	// кармане. Окна горят, когда внутри артефакт (скрипт VB_EC_ArtCase, выделение vbglow).
-	class VB_EC_ArtCase: Container_Base
+	// ---------------- пояс с баночками для артефактов (ТЗ 8.4, концепт одобрен 11-24; вместо капсулы 11-23).
+	// Гнездо VB_EC_ArtCase сервопривода (прокси vb_ec_artcase_box, кость pelvis); без экзо — в инвентаре и в руках.
+	// Артефакт лежит в ячейке VB_EC_ArtJar<N> без прокси (сам не виден), клиент рисует в баночке его уменьшенную
+	// копию по точке vbart<N> модели (скрипт VB_EC_ArtBelt, каталог E126: масштаб вложения движок сбрасывает).
+	// Кольцо vbjar<N> горит, когда баночка занята. Артефакты в баночках действуют, как в кармане (ArtifactScriptsServer
+	// регистрирует их по цепочке родителей). Ячейки артефактам OOTS даёт PBO VB_EchoClothes_Art.
+	class VB_EC_ArtBelt_Base: Inventory_Base
 	{
-		scope=2;
-		displayName="$STR_VB_EC_ArtCase";
-		descriptionShort="$STR_VB_EC_ArtCase_disc";
-		model="VB_EchoClothes\exo_set\artcase\vb_ec_artcase.p3d";
+		scope=0;
 		inventorySlot[]={"VB_EC_ArtCase"};
-		weight=600;
-		itemSize[]={2,3};
-		itemsCargoSize[]={2,3};
 		canBeDigged=0;
-		allowOwnedCargoManipulation=1;
-		rotationFlags=17;
-		vbArtPrefixes[]={"OOTS_ART_"};
-		vbArtExclude[]={"OOTS_ART_CASE"};
-		hiddenSelections[]={"vbbody","vbglow"};
-		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_steel_dark_co.paa","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_empty_co.paa"};
-		hiddenSelectionsMaterials[]={"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_steel_dark.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat"};
+		rotationFlags=0;
+		vbArtFit=0.05;			// самый большой размер уменьшенной копии артефакта, м (стекло баночки 6 см)
 		class DamageSystem
 		{
 			class GlobalHealth
@@ -219,6 +218,45 @@ class CfgVehicles
 				class drop { soundset="taloonbag_drop_SoundSet"; id=898; };
 			};
 		};
+	};
+	class VB_EC_ArtBelt_Small: VB_EC_ArtBelt_Base
+	{
+		scope=2;
+		displayName="$STR_VB_EC_ArtBelt_Small";
+		descriptionShort="$STR_VB_EC_ArtBelt_Small_disc";
+		model="VB_EchoClothes\exo_set\artjar\vb_ec_artjar_s.p3d";
+		weight=300;
+		itemSize[]={2,2};
+		attachments[]={"VB_EC_ArtJar1","VB_EC_ArtJar2"};
+		hiddenSelections[]={"vbjar1","vbjar2"};
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_empty_co.paa","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_empty_co.paa"};
+		hiddenSelectionsMaterials[]={"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat"};
+	};
+	class VB_EC_ArtBelt_Medium: VB_EC_ArtBelt_Base
+	{
+		scope=2;
+		displayName="$STR_VB_EC_ArtBelt_Medium";
+		descriptionShort="$STR_VB_EC_ArtBelt_Medium_disc";
+		model="VB_EchoClothes\exo_set\artjar\vb_ec_artjar_m.p3d";
+		weight=550;
+		itemSize[]={3,2};
+		attachments[]={"VB_EC_ArtJar1","VB_EC_ArtJar2","VB_EC_ArtJar3","VB_EC_ArtJar4"};
+		hiddenSelections[]={"vbjar1","vbjar2","vbjar3","vbjar4"};
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_empty_co.paa","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_empty_co.paa","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_empty_co.paa","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_empty_co.paa"};
+		hiddenSelectionsMaterials[]={"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat"};
+	};
+	class VB_EC_ArtBelt_Large: VB_EC_ArtBelt_Base
+	{
+		scope=2;
+		displayName="$STR_VB_EC_ArtBelt_Large";
+		descriptionShort="$STR_VB_EC_ArtBelt_Large_disc";
+		model="VB_EchoClothes\exo_set\artjar\vb_ec_artjar_l.p3d";
+		weight=800;
+		itemSize[]={4,2};
+		attachments[]={"VB_EC_ArtJar1","VB_EC_ArtJar2","VB_EC_ArtJar3","VB_EC_ArtJar4","VB_EC_ArtJar5","VB_EC_ArtJar6"};
+		hiddenSelections[]={"vbjar1","vbjar2","vbjar3","vbjar4","vbjar5","vbjar6"};
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_empty_co.paa","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_empty_co.paa","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_empty_co.paa","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_empty_co.paa","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_empty_co.paa","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_empty_co.paa"};
+		hiddenSelectionsMaterials[]={"VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat","VB_EchoClothes\exo_set\Backpacks\ExoPrivod\data\vb_ec_neon_off.rvmat"};
 	};
 
 	// ---------------- шлем (был IMP_Helmet_RoninHeavy_ColorBase / _Black): скрипт — тёмное стекло, хват в руках.
