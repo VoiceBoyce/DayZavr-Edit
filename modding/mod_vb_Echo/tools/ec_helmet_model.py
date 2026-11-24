@@ -50,14 +50,25 @@ def build(name, tex):
     ed = S.LodEditor(lod, od, W, bones)
     P = ed.P
     allv = np.arange(len(P))
+    used = sorted({v for fi in ed.mlod_face for v in od["faces"][fi]})     # без точек треугольников прокси (у
+    Pu = P[used]                                                           # фонаря есть точка на x = 1,09)
+    # обход новых граней — по геометрии оболочки: нормали лицевой пластины IMP смотрят внутрь, по ним обход выходил
+    # наоборот, и плоские ленты прорезей игра не рисовала (11-24, стенд)
+    w_norm = ed.winding
+    ed.winding, share = ed.winding_outward(
+        (Pu.min(0) + Pu.max(0)) / 2,
+        pick=lambda c: abs(c[0]) < 0.06 and 1.53 < c[1] < 1.64 and c[2] < -0.10,       # лицевая пластина, решётка
+        direction=(0.0, 0.0, -1.0))                                                    # смотрит к лицу (-z)
+    print("   обход: по нормалям %+d, по геометрии %+d (%.0f%% граней пластины), берём по геометрии" % (
+        w_norm, ed.winding, share * 100))
+    assert share > 0.65, "обход лицевой пластины не определён"
 
     def near(mesh, r=0.06):
         c = np.mean(mesh.pts, axis=0)
         return set(allv[np.linalg.norm(P - c, axis=1) < r].tolist()) or set(allv.tolist())
     vents, slots = HG.grill_glow_meshes(src, tex)
     nv = sum(ed.add_mesh(m, S.TEX_GLOW, S.MAT_GLOW, "vbglow", near(m)) for m in vents)
-    used = sorted({v for fi in ed.mlod_face for v in od["faces"][fi]})     # без точек треугольников прокси (у
-    rails = HG.rail_indicators(P[used])                                    # фонаря есть точка на x = 1,09)
+    rails = HG.rail_indicators(Pu)
     nr = sum(ed.add_mesh(m, S.TEX_GLOW, S.MAT_GLOW, "vbglow", near(m)) for m in rails)
     m = py3d.P3D()
     m.lods.append(lod)

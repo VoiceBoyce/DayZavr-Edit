@@ -7,13 +7,19 @@ r"""Ретекстур одежды VB_EchoClothes (этап 3а): из исхо
 Вещи: jacket, pants, vest, gloves, boots, servo1, servo2, mask, helmet (all — все). Палитра echo — «чёрная броня Эхо»
 (решение пользователя 11-23: без ржавчины, чтобы хотелось носить; расцветки потом — новая палитра в PALETTES и тот же
 запуск с --palette=<имя>, файлы <имя>_<палитра>_co.paa, классы-расцветки в config.cpp).
-Разделение по материалу — по цвету исходника:
-- ткань (оливковая OOTS: цветность > ~0,02, оттенок 50–130°) -> графит с холодным оттенком, складки по яркости;
+ТКАНЬ — отдельный слой (11-24, решение пользователя: ткань чёрная в цвет шлема, металл не трогать; ткань — то, что
+перекрашивают расцветки): маска по карте блеска _smdi (у ткани блеска нет, у пластин, кожи, резины — есть; порог —
+своя пара на вещь, параметр fabric), сглаженная — без дыр в переплетении (из них были белые точки: нити без оливкового
+оттенка считались металлом и получали потёртость стали). Цвет — PAL["fabric"], по ткани — крупные складки и потёртости
+исходника, мелкое переплетение приглушено. Ложится поверх базы: где маска ткани 0, пиксели как раньше байт в байт.
+База (всё, что не ткань) — по цвету исходника, как на этапе 3а:
+- оливковая ткань OOTS -> base_fabric (прежний графит; почти вся под слоем ткани, видна только вне его);
 - розовато-бурые кромки накладок (пример 62,53,58) -> окантовка цветом акцента палитры; такие же пятна посреди ткани
   (грязь OOTS) -> в общий тон, без акцента;
 - металл, ремни, нашивки (серые) -> тёмный сатиновый металл; светлые грани и царапины -> потёртость до стали;
 - углубления (темнее соседей) -> нейтральная пыль.
 Яркость берётся из исходника (детали и складки сохраняются), меняется только тон. Альфа — как была.
+Сервопривод и шлем ткани не имеют — их ретекстур этим слоем не меняется.
 Промежуточный PNG — в --preview (или временная папка), PAA — рядом с исходной _co (ImageToPAA). Исходник не трогается.
 """
 import os
@@ -34,26 +40,32 @@ IMAGE_TO_PAA = os.path.join("D:" + BS, "SteamLibrary", "steamapps", "common", "D
 # вещь -> (папка data, исходная текстура, параметры)
 # metal_k — яркость металла/прочего; tape — синюю изоленту в краску палитры; emblem — (x, y, масштаб) знака Эхо в
 # координатах файла 2048 (сверху вниз); no_accent — без окантовки (маска: бежевая кость — не кромка); wear — сила потёртости
+# fabric — слой ткани: (порог блеска G «ещё ткань», «уже не ткань») по _smdi рядом; dark — ещё и только тёмное
+# в исходнике (у маски блеска нет нигде: балаклава — ткань, светлая пластина черепа — нет)
 ITEMS = {
-    "jacket": (os.path.join(CLOTHES, "Tops", "ExoJacket", "data"), "ExoJacket_co.paa", {}),
-    "pants": (os.path.join(CLOTHES, "Pants", "ExoPants", "data"), "ExoPants_co.paa", {}),
+    "jacket": (os.path.join(CLOTHES, "Tops", "ExoJacket", "data"), "ExoJacket_co.paa", {"fabric": (0.03, 0.07)}),
+    "pants": (os.path.join(CLOTHES, "Pants", "ExoPants", "data"), "ExoPants_co.paa", {"fabric": (0.03, 0.07)}),
     "vest": (os.path.join(CLOTHES, "Vest", "ExoVest", "data"), "ExoVest_co.paa",
-             {"metal_k": 0.8, "emblem": (1235, 190, 1.0)}),
-    "gloves": (os.path.join(CLOTHES, "Gloves", "ExoGloves", "data"), "ExoGloves_co.paa", {"metal_k": 1.0, "tape": True}),
-    "boots": (os.path.join(CLOTHES, "Boots", "ExoBoots", "data"), "ExoBoots_co.paa", {"metal_k": 1.0}),
+             {"metal_k": 0.8, "emblem": (1235, 190, 1.0), "fabric": (0.03, 0.07)}),
+    "gloves": (os.path.join(CLOTHES, "Gloves", "ExoGloves", "data"), "ExoGloves_co.paa",
+               {"metal_k": 1.0, "tape": True, "fabric": (0.01, 0.025)}),
+    "boots": (os.path.join(CLOTHES, "Boots", "ExoBoots", "data"), "ExoBoots_co.paa",
+              {"metal_k": 1.0, "fabric": (0.045, 0.06), "fabric_blur": 10}),     # пик ткани G 0,03–0,045
     "servo1": (os.path.join(CLOTHES, "Backpacks", "ExoPrivod", "data"), "ExoPrivod1_co.paa", {"metal_k": 0.8}),
     "servo2": (os.path.join(CLOTHES, "Backpacks", "ExoPrivod", "data"), "ExoPrivod2_co.paa", {"metal_k": 0.8}),
     "mask": (os.path.join(CLOTHES, "Mask", "MaskGhost", "Data"), "MaskGhost_co.paa",
-             {"metal_k": 0.5, "no_accent": True, "wear": 0.3}),
+             {"metal_k": 0.5, "no_accent": True, "wear": 0.3, "fabric": (0.02, 0.05), "dark": (0.18, 0.28)}),
     "helmet": (os.path.join(CLOTHES, "helmet", "ronin_heavy", "data"), "RoninHeavy_Black.paa",
                {"metal_k": 1.0, "emblem_geo": True}),
 }
 # emblem_geo — знак на висках шлема по его геометрии (ec_helmet_geom.emblem_alpha: раскладка концепта через UV)
-# палитры (sRGB 0..1): fabric — ткань; metal — множитель тона металла; accent — окантовка кромок; steel — потёртость
-# граней; dust — пыль в углублениях; paint — знак и изолента
+# палитры (sRGB 0..1): fabric — слой ткани (ЭТО и перекрашивают расцветки); base_fabric — оливковая ткань в базе
+# (прежний графит этапа 3а, видна только вне слоя ткани — например, у маски); metal — множитель тона металла;
+# accent — окантовка кромок; steel — потёртость граней; dust — пыль в углублениях; paint — знак и изолента
 PALETTES = {
     "echo": {
-        "fabric": (0.165, 0.17, 0.18),
+        "fabric": (0.098, 0.102, 0.11),         # чёрная, в цвет шлема (медиана шлема 25,27,29) — 11-24
+        "base_fabric": (0.165, 0.17, 0.18),
         "metal": (0.94, 0.97, 1.03),
         "accent": (0.30, 0.04, 0.05),
         "steel": (0.58, 0.60, 0.64),
@@ -130,7 +142,37 @@ def med(L, m, default):
     return float(np.median(L[m > 0.5])) if (m > 0.5).any() else default
 
 
-def retex(src, prm):
+def resample(a, h, w):
+    """К размеру (h, w) ближайшим соседом (у _smdi бывает другой размер, чем у _co)."""
+    if a.shape[:2] == (h, w):
+        return a
+    return a[np.arange(h) * a.shape[0] // h][:, np.arange(w) * a.shape[1] // w]
+
+
+def fabric_layer(out, L, prm, smdi_paa, exclude):
+    """Слой ткани поверх базы (см. шапку). -> (out, маска F 0..1)."""
+    h, w = L.shape
+    # блеск, сглаженный — переплетение не рвёт маску; fabric_blur — окно побольше, где у кожи блеск пятнами (ботинки)
+    G = box_blur(resample(load(smdi_paa), h, w)[..., 1], prm.get("fabric_blur", 3))
+    t0, t1 = prm["fabric"]
+    F = 1 - smooth(G, t0, t1)
+    if prm.get("dark"):
+        a, b = prm["dark"]
+        F = F * (1 - smooth(box_blur(L, 3), a, b))
+    F = smooth(box_blur(F, 2), 0.3, 0.7)                          # без дыр и одиночных точек, мягкий край 2–3 px
+    F = F * (1 - exclude)
+    lf = max(med(L, F * (L > 0.02), 0.2), 0.02)                  # пустые (чёрные) места развёртки — не в счёт
+    Lb = box_blur(L, 2)
+    # крупные складки и потёртости — по исходнику, мелкое переплетение приглушено, светлые точки ограничены
+    ratio = np.clip(Lb / lf + 0.3 * (L - Lb) / lf, 0.55, 1.45)
+    fab = PAL["fabric"][None, None, :] * ratio[..., None]
+    out = out * (1 - F[..., None]) + fab * F[..., None]
+    print("  ткань: доля %.2f (с пустыми местами развёртки), медиана яркости ткани исходника %.3f" % (
+        (F > 0.5).mean(), lf))
+    return out, F
+
+
+def retex(src, prm, smdi_paa=None):
     rgb = src[..., :3]
     L = 0.299 * rgb[..., 0] + 0.587 * rgb[..., 1] + 0.114 * rgb[..., 2]
     hue = hue_of(rgb)
@@ -146,11 +188,12 @@ def retex(src, prm):
         accent = accent * 0
     metal = np.clip(1 - olive - accent, 0, 1)
     lf = med(L, olive, 0.22)
-    fabric = PAL["fabric"][None, None, :] * (L / lf)[..., None]
+    fabric = PAL["base_fabric"][None, None, :] * (L / lf)[..., None]
     la = med(L, accent, 0.22)
     acc_c = PAL["accent"][None, None, :] * np.clip(L / la, 0.5, 1.4)[..., None]
     metal_c = (L * prm.get("metal_k", 0.85))[..., None] * PAL["metal"][None, None, :]
     out = fabric * olive[..., None] + acc_c * accent[..., None] + metal_c * metal[..., None]
+    tape = np.zeros_like(L)
     if prm.get("tape"):
         tape = smooth(chroma, 0.06, 0.12) * smooth(hue, 195, 210) * (1 - smooth(hue, 255, 270))
         lt = med(L, tape, 0.3)
@@ -165,15 +208,18 @@ def retex(src, prm):
     cav = smooth(box_blur(L, 6) - L, 0.015, 0.08) * 0.4
     dust = PAL["dust"][None, None, :] * np.clip(L / lf, 0.3, 1.2)[..., None]
     out = out * (1 - cav[..., None]) + dust * cav[..., None]
+    F = None
+    if prm.get("fabric") and smdi_paa:
+        out, F = fabric_layer(out, L, prm, smdi_paa, tape)        # изолента перчаток — не ткань
     if prm.get("emblem"):
         out = emblem(out, L, *prm["emblem"])
     if prm.get("emblem_geo"):
         out = emblem_geo(out, L)
     res = src.copy()
     res[..., :3] = np.clip(out, 0, 1)
-    print("  доли: ткань %.2f окантовка %.3f металл/прочее %.2f, потёртость %.3f" %
+    print("  доли базы: олива %.2f окантовка %.3f металл/прочее %.2f, потёртость %.3f" %
           (olive.mean(), accent.mean(), metal.mean(), (ridge > 0.2).mean()))
-    return res
+    return res, F
 
 
 def seg_dist(px, py, a, b):
@@ -239,10 +285,11 @@ for name in NAMES:
     folder, co, prm = ITEMS[name]
     src_paa = os.path.join(folder, co)
     print("ВЕЩЬ", name, src_paa, "палитра", PAL_NAME)
-    res = retex(load(src_paa), prm)
     base = co[:-len(".paa")]
     if base.lower().endswith("_co"):
         base = base[:-len("_co")]
+    smdi = os.path.join(folder, base + "_smdi.paa")
+    res, F = retex(load(src_paa), prm, smdi if os.path.exists(smdi) else None)
     out_name = base + "_" + PAL_NAME + "_co"                     # исходник не перезаписывается никогда
     assert out_name.lower() + ".paa" != co.lower()
     png_dir = PREVIEW or tempfile.mkdtemp()
@@ -250,6 +297,8 @@ for name in NAMES:
     png = os.path.join(png_dir, out_name + ".png")
     save_png(res, png)
     print("  PNG", png)
+    if PREVIEW and F is not None:                                # маска слоя ткани — для проверки
+        save_png(np.dstack([F, F, F, np.ones_like(F)]), os.path.join(png_dir, base + "_fabric_mask.png"))
     if not NOPAA:
         paa = os.path.join(folder, out_name + ".paa")
         r = subprocess.run([IMAGE_TO_PAA, png, paa], capture_output=True, text=True)

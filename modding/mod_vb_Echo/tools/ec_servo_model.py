@@ -153,6 +153,26 @@ class LodEditor:
             s += 1 if np.dot(np.cross(b - a, c - a), n) > 0 else -1
         return 1 if s >= 0 else -1
 
+    def winding_outward(self, center, pick=None, rmin=0.06, direction=None):
+        """Обход по геометрии, без нормалей модели: в выбранной области (pick(центр грани) -> bool) лицевые грани
+        смотрят наружу от center. Для моделей с вывернутыми нормалями (шлем IMP: лицевая пластина — нормали внутрь)
+        _measure_winding ошибается, и добавленные плоские детали выходят изнанкой — игра их не рисует (ленты прорезей
+        шлема, 11-24). direction — постоянное «наружу» для области (лицевая пластина: (0, 0, -1)) вместо «от center».
+        -> (+1/-1, доля граней «наружу»)."""
+        c0 = np.asarray(center, dtype=np.float64)
+        pos = neg = 0
+        for fa in self.lod.faces:
+            v = fa.vertices
+            a, b, c = (np.array(self.lod.points[x.point_index].coords) for x in v[:3])
+            m = (a + b + c) / 3
+            out = m - c0 if direction is None else np.asarray(direction, dtype=np.float64)
+            if np.linalg.norm(m - c0) < rmin or (pick and not pick(m)):
+                continue
+            d = np.dot(np.cross(b - a, c - a), out)
+            pos += d > 0
+            neg += d < 0
+        return (1 if pos >= neg else -1), max(pos, neg) / max(pos + neg, 1)
+
     def sel(self, name):
         key = self.sel_low.get(name.lower())
         if key is None:
