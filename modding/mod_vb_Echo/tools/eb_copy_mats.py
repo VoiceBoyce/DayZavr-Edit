@@ -4,7 +4,7 @@ r"""Материалы Echo Runner (er_*) — копией в VB_EchoBase/data �
   python eb_copy_mats.py          — в VB_EchoBase/data
   python eb_copy_mats.py core     — в VB_EchoCore/data (энергоячейка ядра, 11-20): только её материалы,
                                     неон и метки уровней eb_neon_t1..4 (из VB_EchoBase/data)
-
+  python eb_copy_mats.py materials — в VB_EchoMaterials/data (материалы крафта, 11-24): болты и пустой серый неон
 Как у общих деталей машин (VB_EchoVehicleParts/data). Берутся только материалы, которые есть в моделях eb_models.py,
 и все варианты неона (красный, «горящий» чистый, синтез, пустой серый) — их ставит скрипт по состоянию устройства.
 """
@@ -28,6 +28,13 @@ if len(sys.argv) > 1 and sys.argv[1] == "core":
 NEON_TEX = ["er_neon_co", "er_neon_hot_co", "er_neon_fusion_co", "er_neon_fusion_hot_co", "er_neon_empty_co",
             "er_neon_nohq", "er_neon_smdi"]
 NEON_RV = ["er_neon", "er_neon_idle", "er_neon_off", "er_neon_empty", "er_screen_off"]
+if len(sys.argv) > 1 and sys.argv[1] == "materials":
+    # материалы крафта (11-24): отдельный мод @VB_EchoMaterials, ни от чего не зависит — болты и пустой серый неон
+    DST = os.path.abspath(os.path.join(HERE, "..", "VB_EchoMaterials", "data"))
+    NEW = "vb_echomaterials\\data\\"
+    MATS = ["bolt"]
+    NEON_TEX = ["er_neon_empty_co", "er_neon_nohq", "er_neon_smdi"]
+    NEON_RV = ["er_neon_empty"]
 
 
 def copy_rvmat(name):
