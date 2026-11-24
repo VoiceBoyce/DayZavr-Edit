@@ -13,8 +13,8 @@ class CfgVehicles {
 	class EFT_Rolex : Inventory_Base {
 		scope = 2;
 
-displayName = "#EFT_Rolex_displayName";
-descriptionShort = "#EFT_Rolex_descriptionShort";
+displayName = "$STR_EFT_Rolex_displayName";
+descriptionShort = "$STR_EFT_Rolex_descriptionShort";
 		model = "EFT\barter\Rolex\EFT_Rolex.p3d";
 		isMeleeWeapon = 1;
 		weight = 180;

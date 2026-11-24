@@ -21,8 +21,8 @@ class CfgVehicles
 	
 	class EFT_armband: Armband_ColorBase
 	{
-		displayName="#EFT_armband_displayName";
-		descriptionShort="#EFT_armband_descriptionShort";
+		displayName="$STR_EFT_armband_displayName";
+		descriptionShort="$STR_EFT_armband_descriptionShort";
 		model="EFT\armband\EFT_armband_g.p3d";
 		inventorySlot[]=
 		{

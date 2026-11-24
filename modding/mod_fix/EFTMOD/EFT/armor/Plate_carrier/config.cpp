@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_Vest_Plate_carrier_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "#EFT_Vest_Plate_carrier_displayName";
-		descriptionShort = "#EFT_Vest_Plate_carrier_descriptionShort";
+		displayName = "$STR_EFT_Vest_Plate_carrier_displayName";
+		descriptionShort = "$STR_EFT_Vest_Plate_carrier_descriptionShort";
 		model = "EFT\armor\Plate_carrier\Plate_carrier_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

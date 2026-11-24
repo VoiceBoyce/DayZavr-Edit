@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_PipeCleaner : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_PipeCleaner_displayName";
-descriptionShort = "#EFT_PipeCleaner_descriptionShort";
+displayName = "$STR_EFT_PipeCleaner_displayName";
+descriptionShort = "$STR_EFT_PipeCleaner_descriptionShort";
 		model = "EFT\barter\PipeCleaner\EFT_PipeCleaner.p3d";
 		isMeleeWeapon = 1;
 		weight = 600;

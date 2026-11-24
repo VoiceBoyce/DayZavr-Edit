@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Maps : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Maps_displayName";
-descriptionShort = "#EFT_Maps_descriptionShort";
+displayName = "$STR_EFT_Maps_displayName";
+descriptionShort = "$STR_EFT_Maps_descriptionShort";
 		model = "EFT\barter\Maps\EFT_Maps.p3d";
 		isMeleeWeapon = 1;
 		weight = 270;

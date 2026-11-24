@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_vest_Azimut_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "#EFT_vest_Azimut_displayName";
-		descriptionShort = "#EFT_vest_Azimut_descriptionShort";
+		displayName = "$STR_EFT_vest_Azimut_displayName";
+		descriptionShort = "$STR_EFT_vest_Azimut_descriptionShort";
 		model = "EFT\vest\vest_Azimut\vest_Azimut_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};
@@ -128,14 +128,14 @@ class CfgVehicles
 	class EFT_vest_Azimut_black: EFT_vest_Azimut_ColorBase
 	{
 		scope = 2;
-		displayName = "#EFT_vest_Azimut_black_displayName";
+		displayName = "$STR_EFT_vest_Azimut_black_displayName";
 		hiddenSelections[] = {"zbytek"};
 		hiddenSelectionsTextures[] = {"EFT\vest\vest_Azimut\Data\vest_black.paa"};
 	};
 	class EFT_vest_Azimut_pixel: EFT_vest_Azimut_ColorBase
 	{
 		scope = 2;
-		displayName = "#EFT_vest_Azimut_pixel_displayName";
+		displayName = "$STR_EFT_vest_Azimut_pixel_displayName";
 		hiddenSelections[] = {"zbytek"};
 		hiddenSelectionsTextures[] = {"EFT\vest\vest_Azimut\Data\vest_pixel.paa"};
 	};

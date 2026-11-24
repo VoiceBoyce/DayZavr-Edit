@@ -20,8 +20,8 @@ class CfgVehicles
 	class EFT_RysT_ColorBase: Clothing
 	{
 		scope=0;
-		displayName="#EFT_RysT_v_displayName";
-		descriptionShort="#EFT_RysT_v_descriptionShort";
+		displayName="$STR_EFT_RysT_v_displayName";
+		descriptionShort="$STR_EFT_RysT_v_descriptionShort";
 		model="EFT\Head\EFT_RysT\EFT_RysT_g.p3d";
 		repairableWithKits[]={8};
 		repairCosts[]={50};

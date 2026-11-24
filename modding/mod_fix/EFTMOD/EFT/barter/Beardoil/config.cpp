@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Beardoil : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Beardoil_displayName";
-		descriptionShort = "#EFT_Beardoil_descriptionShort";
+		displayName = "$STR_EFT_Beardoil_displayName";
+		descriptionShort = "$STR_EFT_Beardoil_descriptionShort";
 		model = "EFT\barter\Beardoil\EFT_Beardoil.p3d";
 		isMeleeWeapon = 1;
 		weight = 100;

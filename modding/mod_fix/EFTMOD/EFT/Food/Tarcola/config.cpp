@@ -25,8 +25,8 @@ class CfgVehicles
 	class EFT_food_Tarcola: SodaCan_Pipsi
 	{
 		scope=2;
-		displayName="#EFT_food_Tarcola_displayName";
-		descriptionShort="#EFT_food_Tarcola_descriptionShort";
+		displayName="$STR_EFT_food_Tarcola_displayName";
+		descriptionShort="$STR_EFT_food_Tarcola_descriptionShort";
 		model="\EFT\Food\Tarcola\EFT_Tarcola.p3d";
 		itemSize[]={1,1};
 		weight=300;

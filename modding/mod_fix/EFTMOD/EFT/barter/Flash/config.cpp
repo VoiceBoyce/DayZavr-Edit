@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Military_flash : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Military_flash_displayName";
-		descriptionShort = "#EFT_Military_flash_descriptionShort";
+		displayName = "$STR_EFT_Military_flash_displayName";
+		descriptionShort = "$STR_EFT_Military_flash_descriptionShort";
 		model = "EFT\barter\Flash\EFT_Military_flash.p3d";
 		isMeleeWeapon = 1;
 		weight = 140;

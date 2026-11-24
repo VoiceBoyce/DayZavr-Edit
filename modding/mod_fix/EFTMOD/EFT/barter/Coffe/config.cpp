@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Coffe : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Coffe_displayName";
-		descriptionShort = "#EFT_Coffe_descriptionShort";
+		displayName = "$STR_EFT_Coffe_displayName";
+		descriptionShort = "$STR_EFT_Coffe_descriptionShort";
 		model = "EFT\barter\Coffe\EFT_Coffe.p3d";
 		isMeleeWeapon = 1;
 		weight = 500;

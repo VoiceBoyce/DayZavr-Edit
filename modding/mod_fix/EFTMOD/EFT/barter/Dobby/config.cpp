@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Dobby : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Dobby_displayName";
-		descriptionShort = "#EFT_Dobby_descriptionShort";
+		displayName = "$STR_EFT_Dobby_displayName";
+		descriptionShort = "$STR_EFT_Dobby_descriptionShort";
 		model = "EFT\barter\Dobby\EFT_Dobby.p3d";
 		isMeleeWeapon = 1;
 		weight = 100;

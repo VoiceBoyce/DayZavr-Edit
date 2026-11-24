@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_SSD : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_SSD_displayName";
-descriptionShort = "#EFT_SSD_descriptionShort";
+displayName = "$STR_EFT_SSD_displayName";
+descriptionShort = "$STR_EFT_SSD_descriptionShort";
 		model = "EFT\barter\SSD\EFT_SSD.p3d";
 		isMeleeWeapon = 1;
 		weight = 100;

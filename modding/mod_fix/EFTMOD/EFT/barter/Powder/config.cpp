@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Powder : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Powder_displayName";
-descriptionShort = "#EFT_Powder_descriptionShort";
+displayName = "$STR_EFT_Powder_displayName";
+descriptionShort = "$STR_EFT_Powder_descriptionShort";
 		model = "EFT\barter\Powder\EFT_Powder.p3d";
 		isMeleeWeapon = 1;
 		weight = 600;

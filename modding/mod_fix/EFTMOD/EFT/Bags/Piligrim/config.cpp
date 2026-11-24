@@ -14,8 +14,8 @@ class CfgVehicles
 	class MountainBag_ColorBase;
 	class EFT_bag_Piligrim_ColorBase : MountainBag_ColorBase {
 		scope = 0;
-		displayName = "#EFT_bag_Piligrim_displayName";
-		descriptionShort = "#EFT_bag_Piligrim_descriptionShort";
+		displayName = "$STR_EFT_bag_Piligrim_displayName";
+		descriptionShort = "$STR_EFT_bag_Piligrim_descriptionShort";
 		model = "EFT\Bags\Piligrim\Piligrim_g.p3d";
 		inventorySlot[] = {"Back"};
 		attachments[] = {};

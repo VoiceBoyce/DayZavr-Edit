@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_FAR : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_FAR_displayName";
-		descriptionShort = "#EFT_FAR_descriptionShort";
+		displayName = "$STR_EFT_FAR_displayName";
+		descriptionShort = "$STR_EFT_FAR_descriptionShort";
 		model = "EFT\barter\FAR\EFT_FAR.p3d";
 		isMeleeWeapon = 1;
 		weight = 1700;

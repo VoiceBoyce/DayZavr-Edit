@@ -14,8 +14,8 @@ class CfgVehicles
 	class MountainBag_ColorBase;
 	class EFT_bag_Gunslinger_ColorBase : MountainBag_ColorBase {
 		scope = 0;
-		displayName = "#EFT_bag_Gunslinger_displayName";
-		descriptionShort = "#EFT_bag_Gunslinger_descriptionShort";
+		displayName = "$STR_EFT_bag_Gunslinger_displayName";
+		descriptionShort = "$STR_EFT_bag_Gunslinger_descriptionShort";
 		model = "EFT\Bags\Gunslinger\Gunslinger_g.p3d";
 		inventorySlot[] = {"Back"};
 		attachments[] = {};

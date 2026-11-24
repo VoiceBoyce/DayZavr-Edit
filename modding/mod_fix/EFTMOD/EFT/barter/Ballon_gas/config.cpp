@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Ballon_gas : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Ballon_gas_displayName";
-		descriptionShort = "#EFT_Ballon_gas_descriptionShort";
+		displayName = "$STR_EFT_Ballon_gas_displayName";
+		descriptionShort = "$STR_EFT_Ballon_gas_descriptionShort";
 		model = "EFT\barter\Ballon_gas\EFT_Ballon_gas.p3d";
 		isMeleeWeapon = 1;
 		weight = 5300;

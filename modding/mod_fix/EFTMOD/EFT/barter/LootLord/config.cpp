@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_LootLord : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_LootLord_displayName";
-descriptionShort = "#EFT_LootLord_descriptionShort";
+displayName = "$STR_EFT_LootLord_displayName";
+descriptionShort = "$STR_EFT_LootLord_descriptionShort";
 		model = "EFT\barter\LootLord\EFT_LootLord.p3d";
 		isMeleeWeapon = 1;
 		weight = 200;

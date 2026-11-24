@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_vest_BSSMK1_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "#EFT_vest_BSSMK1_displayName";
-		descriptionShort = "#EFT_vest_BSSMK1_descriptionShort";
+		displayName = "$STR_EFT_vest_BSSMK1_displayName";
+		descriptionShort = "$STR_EFT_vest_BSSMK1_descriptionShort";
 		model = "EFT\vest\vest_BSSMK1\vest_BSSMK1_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

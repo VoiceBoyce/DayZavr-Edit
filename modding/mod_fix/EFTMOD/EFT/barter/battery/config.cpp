@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_battery_AA : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_battery_AA_displayName";
-		descriptionShort = "#EFT_battery_AA_descriptionShort";
+		displayName = "$STR_EFT_battery_AA_displayName";
+		descriptionShort = "$STR_EFT_battery_AA_descriptionShort";
 		model = "EFT\barter\battery\EFT_battery_AA.p3d";
 		isMeleeWeapon = 1;
 		weight = 8;
@@ -33,8 +33,8 @@ class CfgVehicles {
 	
 	class EFT_battery_D : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_battery_D_displayName";
-		descriptionShort = "#EFT_battery_D_descriptionShort";
+		displayName = "$STR_EFT_battery_D_displayName";
+		descriptionShort = "$STR_EFT_battery_D_descriptionShort";
 		model = "EFT\barter\battery\EFT_battery_D.p3d";
 		isMeleeWeapon = 1;
 		weight = 8;

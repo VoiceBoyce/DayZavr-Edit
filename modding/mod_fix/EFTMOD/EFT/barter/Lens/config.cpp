@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Lens : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Lens_displayName";
-descriptionShort = "#EFT_Lens_descriptionShort";
+displayName = "$STR_EFT_Lens_displayName";
+descriptionShort = "$STR_EFT_Lens_descriptionShort";
 		model = "EFT\barter\Lens\EFT_Lens.p3d";
 		isMeleeWeapon = 1;
 		weight = 150;

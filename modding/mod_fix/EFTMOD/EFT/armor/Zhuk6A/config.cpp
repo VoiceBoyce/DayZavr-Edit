@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_Vest_Zhuk6A_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "#EFT_Vest_Zhuk6A_displayName";
-		descriptionShort = "#EFT_Vest_Zhuk6A_descriptionShort";
+		displayName = "$STR_EFT_Vest_Zhuk6A_displayName";
+		descriptionShort = "$STR_EFT_Vest_Zhuk6A_descriptionShort";
 		model = "EFT\armor\Zhuk6A\Zhuk6A_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

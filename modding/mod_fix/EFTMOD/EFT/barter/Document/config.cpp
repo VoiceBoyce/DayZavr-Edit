@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_q_Document1 : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_q_Document1_displayName";
-		descriptionShort = "#EFT_q_Document1_descriptionShort";
+		displayName = "$STR_EFT_q_Document1_displayName";
+		descriptionShort = "$STR_EFT_q_Document1_descriptionShort";
 		model = "EFT\barter\Document\EFT_Document1.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;
@@ -33,8 +33,8 @@ class CfgVehicles {
 	
 	class EFT_q_Document2 : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_q_Document2_displayName";
-		descriptionShort = "#EFT_q_Document2_descriptionShort";
+		displayName = "$STR_EFT_q_Document2_displayName";
+		descriptionShort = "$STR_EFT_q_Document2_descriptionShort";
 		model = "EFT\barter\Document\EFT_Document2.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;
@@ -54,8 +54,8 @@ class CfgVehicles {
 	
 	class EFT_q_Document3 : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_q_Document3_displayName";
-		descriptionShort = "#EFT_q_Document3_descriptionShort";
+		displayName = "$STR_EFT_q_Document3_displayName";
+		descriptionShort = "$STR_EFT_q_Document3_descriptionShort";
 		model = "EFT\barter\Document\EFT_Document3.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;
@@ -75,8 +75,8 @@ class CfgVehicles {
 	
 	class EFT_q_Document4 : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_q_Document4_displayName";
-		descriptionShort = "#EFT_q_Document4_descriptionShort";
+		displayName = "$STR_EFT_q_Document4_displayName";
+		descriptionShort = "$STR_EFT_q_Document4_descriptionShort";
 		model = "EFT\barter\Document\EFT_Document4.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;
@@ -96,8 +96,8 @@ class CfgVehicles {
 	
 	class EFT_q_Document5 : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_q_Document5_displayName";
-		descriptionShort = "#EFT_q_Document5_descriptionShort";
+		displayName = "$STR_EFT_q_Document5_displayName";
+		descriptionShort = "$STR_EFT_q_Document5_descriptionShort";
 		model = "EFT\barter\Document\EFT_Document5.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;
@@ -117,8 +117,8 @@ class CfgVehicles {
 	
 	class EFT_q_Document6 : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_q_Document6_displayName";
-		descriptionShort = "#EFT_q_Document6_descriptionShort";
+		displayName = "$STR_EFT_q_Document6_displayName";
+		descriptionShort = "$STR_EFT_q_Document6_descriptionShort";
 		model = "EFT\barter\Document\EFT_Document6.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;

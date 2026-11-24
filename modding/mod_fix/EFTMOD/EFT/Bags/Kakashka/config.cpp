@@ -14,8 +14,8 @@ class CfgVehicles
 	class MountainBag_ColorBase;
 	class EFT_bag_Kakashka_ColorBase : MountainBag_ColorBase {
 		scope = 0;
-		displayName = "#EFT_bag_Kakashka_displayName";
-		descriptionShort = "#EFT_bag_Kakashka_descriptionShort";
+		displayName = "$STR_EFT_bag_Kakashka_displayName";
+		descriptionShort = "$STR_EFT_bag_Kakashka_descriptionShort";
 		model = "EFT\Bags\Kakashka\Kakashka_g.p3d";
 		inventorySlot[] = {"Back"};
 		attachments[] = {};

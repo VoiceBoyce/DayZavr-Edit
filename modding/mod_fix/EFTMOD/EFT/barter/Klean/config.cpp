@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Klean : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Klean_displayName";
-descriptionShort = "#EFT_Klean_descriptionShort";
+displayName = "$STR_EFT_Klean_displayName";
+descriptionShort = "$STR_EFT_Klean_descriptionShort";
 		model = "EFT\barter\Klean\EFT_Klean.p3d";
 		isMeleeWeapon = 1;
 		weight = 200;

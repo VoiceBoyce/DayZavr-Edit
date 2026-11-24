@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Ratchetwrench : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Ratchetwrench_displayName";
-descriptionShort = "#EFT_Ratchetwrench_descriptionShort";
+displayName = "$STR_EFT_Ratchetwrench_displayName";
+descriptionShort = "$STR_EFT_Ratchetwrench_descriptionShort";
 		model = "EFT\barter\Ratchetwrench\EFT_Ratchetwrench.p3d";
 		isMeleeWeapon = 1;
 		weight = 1200;

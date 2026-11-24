@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_FlashStorage : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_FlashStorage_displayName";
-		descriptionShort = "#EFT_FlashStorage_descriptionShort";
+		displayName = "$STR_EFT_FlashStorage_displayName";
+		descriptionShort = "$STR_EFT_FlashStorage_descriptionShort";
 		model = "EFT\barter\FlashStorage\EFT_FlashStorage.p3d";
 		isMeleeWeapon = 1;
 		weight = 800;

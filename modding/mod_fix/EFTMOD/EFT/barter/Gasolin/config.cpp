@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Gasolin : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Gasolin_displayName";
-		descriptionShort = "#EFT_Gasolin_descriptionShort";
+		displayName = "$STR_EFT_Gasolin_displayName";
+		descriptionShort = "$STR_EFT_Gasolin_descriptionShort";
 		model = "EFT\barter\Gasolin\EFT_Gasolin.p3d";
 		isMeleeWeapon = 1;
 		weight = 8600;

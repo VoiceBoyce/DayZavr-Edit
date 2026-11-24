@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Nyball3 : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Nyball3_displayName";
-descriptionShort = "#EFT_Nyball3_descriptionShort";
+displayName = "$STR_EFT_Nyball3_displayName";
+descriptionShort = "$STR_EFT_Nyball3_descriptionShort";
 		model = "EFT\barter\Nyball3\EFT_Nyball3.p3d";
 		isMeleeWeapon = 1;
 		weight = 50;

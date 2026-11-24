@@ -28,8 +28,8 @@ class CfgVehicles
 	class EFT_food_Samogon: WaterBottle
 	{
 		scope=2;
-		displayName="#EFT_food_Samogon_displayName";
-		descriptionShort="#EFT_food_Samogon_descriptionShort";
+		displayName="$STR_EFT_food_Samogon_displayName";
+		descriptionShort="$STR_EFT_food_Samogon_descriptionShort";
 		model="\EFT\Food\Samogon\EFT_Samogon.p3d";
 		itemSize[]={1,2};
 		destroyOnEmpty=1;

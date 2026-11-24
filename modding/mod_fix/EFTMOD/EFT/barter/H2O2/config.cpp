@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_H2O2 : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_H2O2_displayName";
-		descriptionShort = "#EFT_H2O2_descriptionShort";
+		displayName = "$STR_EFT_H2O2_displayName";
+		descriptionShort = "$STR_EFT_H2O2_descriptionShort";
 		model = "EFT\barter\H2O2\EFT_H2O2.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;

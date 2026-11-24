@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Military_board : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Military_board_displayName";
-descriptionShort = "#EFT_Military_board_descriptionShort";
+displayName = "$STR_EFT_Military_board_displayName";
+descriptionShort = "$STR_EFT_Military_board_descriptionShort";
 		model = "EFT\barter\Military_board\EFT_Military_board.p3d";
 		isMeleeWeapon = 1;
 		weight = 520;

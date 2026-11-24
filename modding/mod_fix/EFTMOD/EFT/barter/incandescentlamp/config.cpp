@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_incandescentlamp : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_incandescentlamp_displayName";
-		descriptionShort = "#EFT_incandescentlamp_descriptionShort";
+		displayName = "$STR_EFT_incandescentlamp_displayName";
+		descriptionShort = "$STR_EFT_incandescentlamp_descriptionShort";
 		model = "EFT\barter\incandescentlamp\EFT_incandescentlamp.p3d";
 		isMeleeWeapon = 1;
 		weight = 90;

@@ -20,8 +20,8 @@ class CfgVehicles
 	class EFT_Shlemofon_ColorBase: Clothing
 	{
 		scope=0;
-		displayName="#EFT_Shlemofon_displayName";
-		descriptionShort="#EFT_Shlemofon_descriptionShort";
+		displayName="$STR_EFT_Shlemofon_displayName";
+		descriptionShort="$STR_EFT_Shlemofon_descriptionShort";
 		model="EFT\Head\EFT_Shlemofon\EFT_Shlemofon_g.p3d";
 		repairableWithKits[]={8};
 		repairCosts[]={50};

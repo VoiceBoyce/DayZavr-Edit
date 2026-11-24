@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_ProKill : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_ProKill_displayName";
-descriptionShort = "#EFT_ProKill_descriptionShort";
+displayName = "$STR_EFT_ProKill_displayName";
+descriptionShort = "$STR_EFT_ProKill_descriptionShort";
 		model = "EFT\barter\ProKill\EFT_ProKill.p3d";
 		isMeleeWeapon = 1;
 		weight = 100;

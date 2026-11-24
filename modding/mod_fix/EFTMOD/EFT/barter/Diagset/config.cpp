@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Diagset : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Diagset_displayName";
-		descriptionShort = "#EFT_Diagset_descriptionShort";
+		displayName = "$STR_EFT_Diagset_displayName";
+		descriptionShort = "$STR_EFT_Diagset_descriptionShort";
 		model = "EFT\barter\Diagset\EFT_Diagset.p3d";
 		isMeleeWeapon = 1;
 		weight = 400;

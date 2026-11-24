@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_q_ClochingBook1 : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_q_ClochingBook1_displayName";
-		descriptionShort = "#EFT_q_ClochingBook1_descriptionShort";
+		displayName = "$STR_EFT_q_ClochingBook1_displayName";
+		descriptionShort = "$STR_EFT_q_ClochingBook1_descriptionShort";
 		model = "EFT\barter\ClochingBook\EFT_ClochingBook.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;
@@ -33,8 +33,8 @@ class CfgVehicles {
 	
 	class EFT_q_ClochingBook2 : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_q_ClochingBook2_displayName";
-		descriptionShort = "#EFT_q_ClochingBook2_descriptionShort";
+		displayName = "$STR_EFT_q_ClochingBook2_displayName";
+		descriptionShort = "$STR_EFT_q_ClochingBook2_descriptionShort";
 		model = "EFT\barter\ClochingBook\EFT_ClochingBook2.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;

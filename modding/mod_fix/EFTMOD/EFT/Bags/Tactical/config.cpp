@@ -14,8 +14,8 @@ class CfgVehicles
 	class MountainBag_ColorBase;
 	class EFT_bag_Tactical_ColorBase : MountainBag_ColorBase {
 		scope = 0;
-		displayName = "#EFT_bag_Tactical_displayName";
-		descriptionShort = "#EFT_bag_Tactical_descriptionShort";
+		displayName = "$STR_EFT_bag_Tactical_displayName";
+		descriptionShort = "$STR_EFT_bag_Tactical_descriptionShort";
 		model = "EFT\Bags\Tactical\Tactical_g.p3d";
 		inventorySlot[] = {"Back"};
 		attachments[] = {};

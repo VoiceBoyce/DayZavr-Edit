@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_GyroScope : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_GyroScope_displayName";
-		descriptionShort = "#EFT_GyroScope_descriptionShort";
+		displayName = "$STR_EFT_GyroScope_displayName";
+		descriptionShort = "$STR_EFT_GyroScope_descriptionShort";
 		model = "EFT\barter\GyroScope\EFT_GyroScope.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;

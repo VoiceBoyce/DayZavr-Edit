@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_kusajki : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_kusajki_displayName";
-descriptionShort = "#EFT_kusajki_descriptionShort";
+displayName = "$STR_EFT_kusajki_displayName";
+descriptionShort = "$STR_EFT_kusajki_descriptionShort";
 		model = "EFT\barter\kusajki\EFT_kusajki.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;

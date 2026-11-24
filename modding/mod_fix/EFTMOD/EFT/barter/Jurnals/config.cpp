@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_q_Jurnals1 : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_q_Jurnals1_displayName";
-		descriptionShort = "#EFT_q_Jurnals1_descriptionShort";
+		displayName = "$STR_EFT_q_Jurnals1_displayName";
+		descriptionShort = "$STR_EFT_q_Jurnals1_descriptionShort";
 		model = "EFT\barter\Jurnals\EFT_Jurnals1.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;
@@ -33,8 +33,8 @@ class CfgVehicles {
 	
 	class EFT_q_Jurnals2 : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_q_Jurnals2_displayName";
-		descriptionShort = "#EFT_q_Jurnals2_descriptionShort";
+		displayName = "$STR_EFT_q_Jurnals2_displayName";
+		descriptionShort = "$STR_EFT_q_Jurnals2_descriptionShort";
 		model = "EFT\barter\Jurnals\EFT_Jurnals2.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;
@@ -54,8 +54,8 @@ class CfgVehicles {
 	
 	class EFT_q_Jurnals3 : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_q_Jurnals3_displayName";
-		descriptionShort = "#EFT_q_Jurnals3_descriptionShort";
+		displayName = "$STR_EFT_q_Jurnals3_displayName";
+		descriptionShort = "$STR_EFT_q_Jurnals3_descriptionShort";
 		model = "EFT\barter\Jurnals\EFT_Jurnals3.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;

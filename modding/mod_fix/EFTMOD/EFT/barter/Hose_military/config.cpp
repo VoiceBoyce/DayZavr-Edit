@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Hose_military : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Hose_military_displayName";
-		descriptionShort = "#EFT_Hose_military_descriptionShort";
+		displayName = "$STR_EFT_Hose_military_displayName";
+		descriptionShort = "$STR_EFT_Hose_military_descriptionShort";
 		model = "EFT\barter\Hose_military\EFT_Hose_military.p3d";
 		isMeleeWeapon = 1;
 		weight = 400;

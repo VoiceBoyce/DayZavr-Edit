@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_Vest_M2_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "#EFT_Vest_M2_displayName";
-		descriptionShort = "#EFT_Vest_M2_descriptionShort";
+		displayName = "$STR_EFT_Vest_M2_displayName";
+		descriptionShort = "$STR_EFT_Vest_M2_descriptionShort";
 		model = "EFT\armor\M2\M2_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

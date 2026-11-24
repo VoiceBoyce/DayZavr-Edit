@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Bloodset : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Bloodset_displayName";
-		descriptionShort = "#EFT_Bloodset_descriptionShort";
+		displayName = "$STR_EFT_Bloodset_displayName";
+		descriptionShort = "$STR_EFT_Bloodset_descriptionShort";
 		model = "EFT\barter\Bloodset\EFT_Bloodset.p3d";
 		isMeleeWeapon = 1;
 		weight = 200;

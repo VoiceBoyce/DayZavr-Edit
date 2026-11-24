@@ -14,8 +14,8 @@ class CfgVehicles
 	class MountainBag_ColorBase;
 	class EFT_bag_Wild_ColorBase : MountainBag_ColorBase {
 		scope = 0;
-		displayName = "#EFT_bag_Wild_displayName";
-		descriptionShort = "#EFT_bag_Wild_descriptionShort";
+		displayName = "$STR_EFT_bag_Wild_displayName";
+		descriptionShort = "$STR_EFT_bag_Wild_descriptionShort";
 		model = "EFT\Bags\Wild\Wild_g.p3d";
 		inventorySlot[] = {"Back"};
 		attachments[] = {};

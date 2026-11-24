@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_q_GALSD3 : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_q_GALSD3_displayName";
-		descriptionShort = "#EFT_q_GALSD3_descriptionShort";
+		displayName = "$STR_EFT_q_GALSD3_displayName";
+		descriptionShort = "$STR_EFT_q_GALSD3_descriptionShort";
 		model = "EFT\barter\GALSD3\EFT_GALSD3.p3d";
 		isMeleeWeapon = 1;
 		weight = 2000;

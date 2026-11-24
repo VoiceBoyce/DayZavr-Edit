@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Vertex : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Vertex_displayName";
-		descriptionShort = "#EFT_Vertex_descriptionShort";
+		displayName = "$STR_EFT_Vertex_displayName";
+		descriptionShort = "$STR_EFT_Vertex_descriptionShort";
 		model = "EFT\barter\Vertex\EFT_Vertex.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;

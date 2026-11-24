@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Tee : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Tee_displayName";
-descriptionShort = "#EFT_Tee_descriptionShort";
+displayName = "$STR_EFT_Tee_displayName";
+descriptionShort = "$STR_EFT_Tee_descriptionShort";
 		model = "EFT\barter\Tee\EFT_Tee.p3d";
 		isMeleeWeapon = 1;
 		weight = 200;

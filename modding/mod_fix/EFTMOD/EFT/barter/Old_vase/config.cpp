@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Old_vase : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Old_vase_displayName";
-descriptionShort = "#EFT_Old_vase_descriptionShort";
+displayName = "$STR_EFT_Old_vase_displayName";
+descriptionShort = "$STR_EFT_Old_vase_descriptionShort";
 		model = "EFT\barter\Old_vase\EFT_Old_vase.p3d";
 		isMeleeWeapon = 1;
 		weight = 2000;

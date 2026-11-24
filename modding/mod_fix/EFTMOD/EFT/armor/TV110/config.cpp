@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_Vest_TV110_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "#EFT_Vest_TV110_displayName";
-		descriptionShort = "#EFT_Vest_TV110_descriptionShort";
+		displayName = "$STR_EFT_Vest_TV110_displayName";
+		descriptionShort = "$STR_EFT_Vest_TV110_descriptionShort";
 		model = "EFT\armor\TV110\TV110_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

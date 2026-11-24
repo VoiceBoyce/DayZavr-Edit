@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Wires : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Wires_displayName";
-descriptionShort = "#EFT_Wires_descriptionShort";
+displayName = "$STR_EFT_Wires_displayName";
+descriptionShort = "$STR_EFT_Wires_descriptionShort";
 		model = "EFT\barter\Wires\EFT_Wires.p3d";
 		isMeleeWeapon = 1;
 		weight = 250;

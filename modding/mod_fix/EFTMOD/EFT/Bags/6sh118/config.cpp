@@ -14,8 +14,8 @@ class CfgVehicles
 	class MountainBag_ColorBase;
 	class EFT_bag_6sh118_ColorBase : MountainBag_ColorBase {
 		scope = 0;
-		displayName = "#EFT_bag_6sh118_displayName";
-		descriptionShort = "#EFT_bag_6sh118_descriptionShort";
+		displayName = "$STR_EFT_bag_6sh118_displayName";
+		descriptionShort = "$STR_EFT_bag_6sh118_descriptionShort";
 		model = "EFT\Bags\6sh118\6sh118_g.p3d";
 		inventorySlot[] = {"Back"};
 		attachments[] = {};

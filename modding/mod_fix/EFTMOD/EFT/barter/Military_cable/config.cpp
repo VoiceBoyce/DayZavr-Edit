@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Military_cable : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Military_cable_displayName";
-descriptionShort = "#EFT_Military_cable_descriptionShort";
+displayName = "$STR_EFT_Military_cable_displayName";
+descriptionShort = "$STR_EFT_Military_cable_descriptionShort";
 		model = "EFT\barter\Military_cable\EFT_Military_cable.p3d";
 		isMeleeWeapon = 1;
 		weight = 650;

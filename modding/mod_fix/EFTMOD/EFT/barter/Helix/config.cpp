@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Helix : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Helix_displayName";
-		descriptionShort = "#EFT_Helix_descriptionShort";
+		displayName = "$STR_EFT_Helix_displayName";
+		descriptionShort = "$STR_EFT_Helix_descriptionShort";
 		model = "EFT\barter\Helix\EFT_Helix.p3d";
 		isMeleeWeapon = 1;
 		weight = 420;

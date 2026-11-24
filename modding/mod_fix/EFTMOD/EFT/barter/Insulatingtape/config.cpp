@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Insulatingtape : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Insulatingtape_displayName";
-		descriptionShort = "#EFT_Insulatingtape_descriptionShort";
+		displayName = "$STR_EFT_Insulatingtape_displayName";
+		descriptionShort = "$STR_EFT_Insulatingtape_descriptionShort";
 		model = "EFT\barter\Insulatingtape\EFT_Insulatingtape.p3d";
 		isMeleeWeapon = 1;
 		weight = 50;

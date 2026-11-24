@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Egg : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Egg_displayName";
-		descriptionShort = "#EFT_Egg_descriptionShort";
+		displayName = "$STR_EFT_Egg_displayName";
+		descriptionShort = "$STR_EFT_Egg_descriptionShort";
 		model = "EFT\barter\Egg\EFT_Egg.p3d";
 		isMeleeWeapon = 1;
 		weight = 200;

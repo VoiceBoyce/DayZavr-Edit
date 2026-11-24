@@ -13,8 +13,8 @@ class CfgVehicles {
 	class EFT_Shilo : Inventory_Base {
 		scope = 2;
 
-displayName = "#EFT_Shilo_displayName";
-descriptionShort = "#EFT_Shilo_descriptionShort";
+displayName = "$STR_EFT_Shilo_displayName";
+descriptionShort = "$STR_EFT_Shilo_descriptionShort";
 		model = "EFT\barter\Shilo\EFT_Shilo.p3d";
 		isMeleeWeapon = 1;
 		weight = 100;

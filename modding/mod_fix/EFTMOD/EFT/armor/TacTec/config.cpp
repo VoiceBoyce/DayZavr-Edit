@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_Vest_TacTec_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "#EFT_Vest_TacTec_displayName";
-		descriptionShort = "#EFT_Vest_TacTec_descriptionShort";
+		displayName = "$STR_EFT_Vest_TacTec_displayName";
+		descriptionShort = "$STR_EFT_Vest_TacTec_descriptionShort";
 		model = "EFT\armor\TacTec\TacTec_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

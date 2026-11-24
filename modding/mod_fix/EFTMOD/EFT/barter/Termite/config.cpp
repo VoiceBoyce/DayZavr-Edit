@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Termite : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Termite_displayName";
-descriptionShort = "#EFT_Termite_descriptionShort";
+displayName = "$STR_EFT_Termite_displayName";
+descriptionShort = "$STR_EFT_Termite_descriptionShort";
 		model = "EFT\barter\Termite\EFT_Termite.p3d";
 		isMeleeWeapon = 1;
 		weight = 650;

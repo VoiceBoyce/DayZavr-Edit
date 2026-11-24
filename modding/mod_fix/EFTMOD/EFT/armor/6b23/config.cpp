@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_Vest_6b23_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "#EFT_Vest_6b23_dig_displayName";
-		descriptionShort = "#EFT_Vest_6b23_dig_descriptionShort";
+		displayName = "$STR_EFT_Vest_6b23_dig_displayName";
+		descriptionShort = "$STR_EFT_Vest_6b23_dig_descriptionShort";
 		model = "EFT\armor\6b23\6b23_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};
@@ -135,8 +135,8 @@ class CfgVehicles
 	class EFT_Vest_6b23_Heavy_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "#EFT_Vest_6b23_Heavy_displayName";
-		descriptionShort = "#EFT_Vest_6b23_Heavy_descriptionShort";
+		displayName = "$STR_EFT_Vest_6b23_Heavy_displayName";
+		descriptionShort = "$STR_EFT_Vest_6b23_Heavy_descriptionShort";
 		model = "EFT\armor\6b23\6b23_Heavy_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

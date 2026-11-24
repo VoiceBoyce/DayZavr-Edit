@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Airfilter : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Airfilter_displayName";
-		descriptionShort = "#EFT_Airfilter_descriptionShort";
+		displayName = "$STR_EFT_Airfilter_displayName";
+		descriptionShort = "$STR_EFT_Airfilter_descriptionShort";
 		model = "EFT\barter\Airfilter\EFT_Airfilter.p3d";
 		isMeleeWeapon = 1;
 		weight = 13000;

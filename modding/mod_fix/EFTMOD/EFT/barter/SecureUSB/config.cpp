@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_SecureUSB1 : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_SecureUSB1_displayName";
-descriptionShort = "#EFT_SecureUSB1_descriptionShort";
+displayName = "$STR_EFT_SecureUSB1_displayName";
+descriptionShort = "$STR_EFT_SecureUSB1_descriptionShort";
 		model = "EFT\barter\SecureUSB\EFT_SecureUSB1.p3d";
 		isMeleeWeapon = 1;
 		weight = 20;
@@ -33,8 +33,8 @@ descriptionShort = "#EFT_SecureUSB1_descriptionShort";
 	
 	class EFT_SecureUSB2 : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_SecureUSB2_displayName";
-descriptionShort = "#EFT_SecureUSB2_descriptionShort";
+displayName = "$STR_EFT_SecureUSB2_displayName";
+descriptionShort = "$STR_EFT_SecureUSB2_descriptionShort";
 		model = "EFT\barter\SecureUSB\EFT_SecureUSB2.p3d";
 		isMeleeWeapon = 1;
 		weight = 20;

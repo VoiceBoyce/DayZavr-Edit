@@ -20,8 +20,8 @@ class CfgVehicles
 	class EFT_Kolpac1C_ColorBase: Clothing
 	{
 		scope=0;
-		displayName="#EFT_Kolpac1C_v_displayName";
-		descriptionShort="#EFT_Kolpac1C_v_descriptionShort";
+		displayName="$STR_EFT_Kolpac1C_v_displayName";
+		descriptionShort="$STR_EFT_Kolpac1C_v_descriptionShort";
 		model="EFT\Head\EFT_Kolpac1C\EFT_Kolpac1C_g.p3d";
 		repairableWithKits[]={8};
 		repairCosts[]={50};

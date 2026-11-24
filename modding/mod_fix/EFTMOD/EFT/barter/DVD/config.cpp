@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_DVD : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_DVD_displayName";
-		descriptionShort = "#EFT_DVD_descriptionShort";
+		displayName = "$STR_EFT_DVD_displayName";
+		descriptionShort = "$STR_EFT_DVD_descriptionShort";
 		model = "EFT\barter\DVD\EFT_DVD.p3d";
 		isMeleeWeapon = 1;
 		weight = 600;

@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Syringer : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Syringer_displayName";
-descriptionShort = "#EFT_Syringer_descriptionShort";
+displayName = "$STR_EFT_Syringer_displayName";
+descriptionShort = "$STR_EFT_Syringer_descriptionShort";
 		model = "EFT\barter\Syringer\EFT_Syringer.p3d";
 		isMeleeWeapon = 1;
 		weight = 60;

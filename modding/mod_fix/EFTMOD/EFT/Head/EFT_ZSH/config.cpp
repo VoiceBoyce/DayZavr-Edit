@@ -20,8 +20,8 @@ class CfgVehicles
 	class EFT_ZSH_ColorBase: Clothing
 	{
 		scope=0;
-		displayName="#EFT_ZSH_displayName";
-		descriptionShort="#EFT_ZSH_descriptionShort";
+		displayName="$STR_EFT_ZSH_displayName";
+		descriptionShort="$STR_EFT_ZSH_descriptionShort";
 		model="EFT\Head\EFT_ZSH\EFT_ZSH_g.p3d";
 		repairableWithKits[]={8};
 		repairCosts[]={50};

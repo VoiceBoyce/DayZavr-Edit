@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Shampoo : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Shampoo_displayName";
-descriptionShort = "#EFT_Shampoo_descriptionShort";
+displayName = "$STR_EFT_Shampoo_displayName";
+descriptionShort = "$STR_EFT_Shampoo_descriptionShort";
 		model = "EFT\barter\Shampoo\EFT_Shampoo.p3d";
 		isMeleeWeapon = 1;
 		weight = 450;

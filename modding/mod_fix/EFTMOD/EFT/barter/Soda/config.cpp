@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Soda : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Soda_displayName";
-descriptionShort = "#EFT_Soda_descriptionShort";
+displayName = "$STR_EFT_Soda_displayName";
+descriptionShort = "$STR_EFT_Soda_descriptionShort";
 		model = "EFT\barter\Soda\EFT_Soda.p3d";
 		isMeleeWeapon = 1;
 		weight = 500;

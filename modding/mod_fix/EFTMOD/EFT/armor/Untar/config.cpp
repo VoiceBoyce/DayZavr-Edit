@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_Vest_Untar_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "#EFT_Vest_Untar_displayName";
-		descriptionShort = "#EFT_Vest_Untar_descriptionShort";
+		displayName = "$STR_EFT_Vest_Untar_displayName";
+		descriptionShort = "$STR_EFT_Vest_Untar_descriptionShort";
 		model = "EFT\armor\Untar\Untar_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

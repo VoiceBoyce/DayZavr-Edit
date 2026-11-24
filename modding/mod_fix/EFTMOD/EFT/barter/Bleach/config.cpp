@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Bleach : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Bleach_displayName";
-		descriptionShort = "#EFT_Bleach_descriptionShort";
+		displayName = "$STR_EFT_Bleach_displayName";
+		descriptionShort = "$STR_EFT_Bleach_descriptionShort";
 		model = "EFT\barter\Bleach\EFT_Bleach.p3d";
 		isMeleeWeapon = 1;
 		weight = 500;

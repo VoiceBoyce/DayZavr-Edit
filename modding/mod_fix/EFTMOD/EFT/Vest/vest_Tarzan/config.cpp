@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_vest_Tarzan_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "#EFT_vest_Tarzan_displayName";
-		descriptionShort = "#EFT_vest_Tarzan_descriptionShort";
+		displayName = "$STR_EFT_vest_Tarzan_displayName";
+		descriptionShort = "$STR_EFT_vest_Tarzan_descriptionShort";
 		model = "EFT\vest\vest_Tarzan\vest_Tarzan_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

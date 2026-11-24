@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_SkullRing : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_SkullRing_displayName";
-descriptionShort = "#EFT_SkullRing_descriptionShort";
+displayName = "$STR_EFT_SkullRing_displayName";
+descriptionShort = "$STR_EFT_SkullRing_descriptionShort";
 		model = "EFT\barter\SkullRing\EFT_SkullRing.p3d";
 		isMeleeWeapon = 1;
 		weight = 6;

@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Cyclon : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Cyclon_displayName";
-		descriptionShort = "#EFT_Cyclon_descriptionShort";
+		displayName = "$STR_EFT_Cyclon_displayName";
+		descriptionShort = "$STR_EFT_Cyclon_descriptionShort";
 		model = "EFT\barter\Cyclon\EFT_Cyclon.p3d";
 		isMeleeWeapon = 1;
 		weight = 1700;

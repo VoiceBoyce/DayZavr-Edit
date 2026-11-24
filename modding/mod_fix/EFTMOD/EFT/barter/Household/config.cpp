@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Household : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Household_displayName";
-		descriptionShort = "#EFT_Household_descriptionShort";
+		displayName = "$STR_EFT_Household_displayName";
+		descriptionShort = "$STR_EFT_Household_descriptionShort";
 		model = "EFT\barter\Household\EFT_Household.p3d";
 		isMeleeWeapon = 1;
 		weight = 500;

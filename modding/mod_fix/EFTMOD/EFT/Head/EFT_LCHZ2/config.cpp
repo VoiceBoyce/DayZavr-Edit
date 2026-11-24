@@ -20,8 +20,8 @@ class CfgVehicles
 	class EFT_LCHZ2_ColorBase: Clothing
 	{
 		scope=0;
-		displayName="#EFT_LCHZ2_v_displayName";
-		descriptionShort="#EFT_LCHZ2_v_descriptionShort";
+		displayName="$STR_EFT_LCHZ2_v_displayName";
+		descriptionShort="$STR_EFT_LCHZ2_v_descriptionShort";
 		model="EFT\Head\EFT_LCHZ2\EFT_LCHZ2_g.p3d";
 		repairableWithKits[]={8};
 		repairCosts[]={50};

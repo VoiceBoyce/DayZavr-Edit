@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Cablecutter : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Cablecutter_displayName";
-		descriptionShort = "#EFT_Cablecutter_descriptionShort";
+		displayName = "$STR_EFT_Cablecutter_displayName";
+		descriptionShort = "$STR_EFT_Cablecutter_descriptionShort";
 		model = "EFT\barter\Cablecutter\EFT_Cablecutter.p3d";
 		isMeleeWeapon = 1;
 		weight = 550;

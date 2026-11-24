@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_RecipeBook : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_RecipeBook_displayName";
-descriptionShort = "#EFT_RecipeBook_descriptionShort";
+displayName = "$STR_EFT_RecipeBook_displayName";
+descriptionShort = "$STR_EFT_RecipeBook_descriptionShort";
 		model = "EFT\barter\RecipeBook\EFT_RecipeBook.p3d";
 		isMeleeWeapon = 1;
 		weight = 250;

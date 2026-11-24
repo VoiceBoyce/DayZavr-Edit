@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_Vest_Kordun_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "#EFT_Vest_Kordun_black_displayName";
-		descriptionShort = "#EFT_Vest_Kordun_black_descriptionShort";
+		displayName = "$STR_EFT_Vest_Kordun_black_displayName";
+		descriptionShort = "$STR_EFT_Vest_Kordun_black_descriptionShort";
 		model = "EFT\armor\Kordun\Kordun_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

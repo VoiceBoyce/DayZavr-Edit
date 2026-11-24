@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Parrot : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Parrot_displayName";
-descriptionShort = "#EFT_Parrot_descriptionShort";
+displayName = "$STR_EFT_Parrot_displayName";
+descriptionShort = "$STR_EFT_Parrot_descriptionShort";
 		model = "EFT\barter\Parrot\EFT_Parrot.p3d";
 		isMeleeWeapon = 1;
 		weight = 330;

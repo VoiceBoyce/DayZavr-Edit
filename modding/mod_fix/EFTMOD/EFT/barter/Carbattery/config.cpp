@@ -16,8 +16,8 @@ class CfgVehicles
 	class EFT_Carbattery : Inventory_Base 
 	{
 		scope = 2;
-		displayName = "#EFT_Carbattery_displayName";
-		descriptionShort = "#EFT_Carbattery_descriptionShort";
+		displayName = "$STR_EFT_Carbattery_displayName";
+		descriptionShort = "$STR_EFT_Carbattery_descriptionShort";
 		model = "EFT\barter\Carbattery\EFT_Carbattery.p3d";
 		isMeleeWeapon = 1;
 		weight = 12000;

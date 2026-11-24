@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Cloth_aramid : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Cloth_aramid_displayName";
-		descriptionShort = "#EFT_Cloth_aramid_descriptionShort";
+		displayName = "$STR_EFT_Cloth_aramid_displayName";
+		descriptionShort = "$STR_EFT_Cloth_aramid_descriptionShort";
 		model = "EFT\barter\Cloth\EFT_Cloth.p3d";
 		isMeleeWeapon = 1;
 		weight = 200;
@@ -35,8 +35,8 @@ class CfgVehicles {
 	
 	class EFT_Cloth_cordura : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Cloth_cordura_displayName";
-		descriptionShort = "#EFT_Cloth_cordura_descriptionShort";
+		displayName = "$STR_EFT_Cloth_cordura_displayName";
+		descriptionShort = "$STR_EFT_Cloth_cordura_descriptionShort";
 		model = "EFT\barter\Cloth\EFT_Cloth.p3d";
 		isMeleeWeapon = 1;
 		weight = 200;
@@ -58,8 +58,8 @@ class CfgVehicles {
 	
 	class EFT_Cloth_fleece : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Cloth_fleece_displayName";
-		descriptionShort = "#EFT_Cloth_fleece_descriptionShort";
+		displayName = "$STR_EFT_Cloth_fleece_displayName";
+		descriptionShort = "$STR_EFT_Cloth_fleece_descriptionShort";
 		model = "EFT\barter\Cloth\EFT_Cloth.p3d";
 		isMeleeWeapon = 1;
 		weight = 200;
@@ -81,8 +81,8 @@ class CfgVehicles {
 	
 	class EFT_Cloth_ripstop : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Cloth_ripstop_displayName";
-		descriptionShort = "#EFT_Cloth_ripstop_descriptionShort";
+		displayName = "$STR_EFT_Cloth_ripstop_displayName";
+		descriptionShort = "$STR_EFT_Cloth_ripstop_descriptionShort";
 		model = "EFT\barter\Cloth\EFT_Cloth.p3d";
 		isMeleeWeapon = 1;
 		weight = 200;
@@ -104,8 +104,8 @@ class CfgVehicles {
 	
 	class EFT_Cloth_paracord : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Cloth_paracord_displayName";
-		descriptionShort = "#EFT_Cloth_paracord_descriptionShort";
+		displayName = "$STR_EFT_Cloth_paracord_displayName";
+		descriptionShort = "$STR_EFT_Cloth_paracord_descriptionShort";
 		model = "EFT\barter\Cloth\EFT_Cloth_Paracord.p3d";
 		isMeleeWeapon = 1;
 		weight = 350;

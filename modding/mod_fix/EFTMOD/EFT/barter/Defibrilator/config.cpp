@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Defibrilator : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Defibrilator_displayName";
-		descriptionShort = "#EFT_Defibrilator_descriptionShort";
+		displayName = "$STR_EFT_Defibrilator_displayName";
+		descriptionShort = "$STR_EFT_Defibrilator_descriptionShort";
 		model = "EFT\barter\Defibrilator\EFT_Defibrilator.p3d";
 		isMeleeWeapon = 1;
 		weight = 350;

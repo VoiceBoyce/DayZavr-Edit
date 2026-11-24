@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_SiliconTube : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_SiliconTube_displayName";
-descriptionShort = "#EFT_SiliconTube_descriptionShort";
+displayName = "$STR_EFT_SiliconTube_displayName";
+descriptionShort = "$STR_EFT_SiliconTube_descriptionShort";
 		model = "EFT\barter\SiliconTube\EFT_SiliconTube.p3d";
 		isMeleeWeapon = 1;
 		weight = 220;

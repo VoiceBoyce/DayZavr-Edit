@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Videocassette : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Videocassette_displayName";
-descriptionShort = "#EFT_Videocassette_descriptionShort";
+displayName = "$STR_EFT_Videocassette_displayName";
+descriptionShort = "$STR_EFT_Videocassette_descriptionShort";
 		model = "EFT\barter\Videocassette\EFT_Videocassette.p3d";
 		isMeleeWeapon = 1;
 		weight = 150;

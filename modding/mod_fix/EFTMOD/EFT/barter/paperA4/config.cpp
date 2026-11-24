@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_paperA4 : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_paperA4_displayName";
-descriptionShort = "#EFT_paperA4_descriptionShort";
+displayName = "$STR_EFT_paperA4_displayName";
+descriptionShort = "$STR_EFT_paperA4_descriptionShort";
 		model = "EFT\barter\paperA4\EFT_paperA4.p3d";
 		isMeleeWeapon = 1;
 		weight = 700;

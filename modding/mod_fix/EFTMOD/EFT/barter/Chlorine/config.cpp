@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Chlorine : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Chlorine_displayName";
-		descriptionShort = "#EFT_Chlorine_descriptionShort";
+		displayName = "$STR_EFT_Chlorine_displayName";
+		descriptionShort = "$STR_EFT_Chlorine_descriptionShort";
 		model = "EFT\barter\Chlorine\EFT_Chlorine.p3d";
 		isMeleeWeapon = 1;
 		weight = 350;

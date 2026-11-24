@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_LCD_broken : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_LCD_broken_displayName";
-descriptionShort = "#EFT_LCD_broken_descriptionShort";
+displayName = "$STR_EFT_LCD_broken_displayName";
+descriptionShort = "$STR_EFT_LCD_broken_descriptionShort";
 		model = "EFT\barter\LCD_broken\EFT_LCD_broken.p3d";
 		isMeleeWeapon = 1;
 		weight = 50;

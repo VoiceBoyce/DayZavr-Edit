@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_propan : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_propan_displayName";
-descriptionShort = "#EFT_propan_descriptionShort";
+displayName = "$STR_EFT_propan_displayName";
+descriptionShort = "$STR_EFT_propan_descriptionShort";
 		model = "EFT\barter\propan\EFT_propan.p3d";
 		isMeleeWeapon = 1;
 		weight = 5300;

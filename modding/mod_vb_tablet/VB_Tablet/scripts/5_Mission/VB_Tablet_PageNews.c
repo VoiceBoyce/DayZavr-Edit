@@ -66,6 +66,46 @@ class VBB
 			res.Insert(line);
 	}
 
+	// Перенос с абзацами: Enter в тексте — новая строка, пустая строка между абзацами сохраняется
+	// (Split пустые куски выбрасывает, поэтому делим сами). p — виджет для замера шрифта.
+	static void WrapText(Widget p, string s, float w, float size, array<string> res)
+	{
+		res.Clear();
+		string t = s + "";
+		t.Replace("\r", "");
+		// Оценка Wrap (0,53 высоты на знак) мала для настоящего шрифта: поправка по замеру образца этого текста.
+		string flat = t + "";
+		flat.Replace("\n", " ");
+		int n = flat.LengthUtf8();
+		if (n > 120)
+			n = 120;
+		string sample = flat.SubstringUtf8(0, n);
+		float est = INT_UIF_Draw.TextWidth(sample, size);
+		float real = VBT.TextW(p, sample, size, false);
+		float k = 1;
+		if (est > 0 && real > est)
+			k = real / est;
+		float room = w / (k * 1.04);
+		array<string> part = new array<string>();
+		while (true)
+		{
+			int at = t.IndexOf("\n");
+			string para = t;
+			if (at >= 0)
+				para = t.Substring(0, at);
+			Wrap(para, room, size, part);
+			if (part.Count() == 0)
+				res.Insert("");
+			foreach (string ln : part)
+				res.Insert(ln);
+			if (at < 0)
+				break;
+			t = t.Substring(at + 1, t.Length() - at - 1);
+		}
+		while (res.Count() > 0 && res.Get(res.Count() - 1) == "")
+			res.Remove(res.Count() - 1);
+	}
+
 	protected static string Stamp(int d, int m)
 	{
 		string dd;
@@ -139,8 +179,17 @@ class VB_TabletPageNews extends VB_TabletPage
 	protected static float s_AskedAt = -100;
 	protected static string s_FormClan;		// клан, к которому относится черновик: в другом клане форма пустая
 	protected static float s_SentAt = -100;
+	// Новость, открытая на чтение целиком (0 — лента). s_WantId: открыть при входе (плитка на странице клана);
+	// s_Keep: страницу перестраивает она сама — открытая новость остаётся, при входе из меню — лента.
+	protected static int s_OpenId;
+	protected static int s_WantId;
+	protected static bool s_Keep;
 
 	protected bool m_Ed;
+	protected ref array<Widget> m_CardHits = new array<Widget>();
+	protected ref array<int> m_CardIds = new array<int>();
+	protected ref array<ref INT_UIF_Surface> m_CardBoxes = new array<ref INT_UIF_Surface>();
+	protected ref VBT_Button m_Back;
 	protected Widget m_Left;
 	protected ref array<Widget> m_ActHits = new array<Widget>();
 	protected ref array<int> m_ActKinds = new array<int>();
@@ -171,6 +220,11 @@ class VB_TabletPageNews extends VB_TabletPage
 		s_FormPin = false;
 	}
 
+	static void OpenLater(int id)
+	{
+		s_WantId = id;
+	}
+
 	override void Build()
 	{
 		VB_TabletClient client = VB_TabletClient.Get();
@@ -179,6 +233,10 @@ class VB_TabletPageNews extends VB_TabletPage
 			m_Menu.GoLater("profile");
 			return;
 		}
+		if (!s_Keep)
+			s_OpenId = s_WantId;
+		s_WantId = 0;
+		s_Keep = false;
 		// Черновик прежнего клана не переносится: «правка №5» перезаписала бы новость №5 другого клана.
 		if (s_FormClan != client.Clan.Id)
 		{
@@ -205,6 +263,10 @@ class VB_TabletPageNews extends VB_TabletPage
 		m_ActKinds.Clear();
 		m_ActIds.Clear();
 		m_ActIcons.Clear();
+		m_CardHits.Clear();
+		m_CardIds.Clear();
+		m_CardBoxes.Clear();
+		m_Back = null;
 		VB_TabletClient client = VB_TabletClient.Get();
 		array<ref VB_ClanNews> all = client.News;
 		float w = 1172;
@@ -220,6 +282,17 @@ class VB_TabletPageNews extends VB_TabletPage
 				hint = "#STR_VB_TAB_B_NEWS_NONE_WRITE";
 			INT_UIF_Draw.Text(f, 0, 366, w, 26, hint, 16, VB_C_DIM, INT_UIF_Align.CENTER);
 			return;
+		}
+		// Открытая новость удалена или пропала из списка — снова лента.
+		if (s_OpenId != 0)
+		{
+			VB_ClanNews opened = Find(s_OpenId);
+			if (opened)
+			{
+				Reader(opened, w);
+				return;
+			}
+			s_OpenId = 0;
 		}
 		VB_ClanNews pinned = null;
 		int rest = 0;
@@ -276,36 +349,103 @@ class VB_TabletPageNews extends VB_TabletPage
 		}
 	}
 
+	// Вся карточка — кнопка «читать целиком»; значки действий создаются позже и лежат поверх.
+	protected void CardHit(Widget f, float w, float h, VB_ClanNews n, INT_UIF_Surface box)
+	{
+		m_CardHits.Insert(HitAt(f, 0, 0, w, h));
+		m_CardIds.Insert(n.NewsId);
+		m_CardBoxes.Insert(box);
+	}
+
 	protected void Hero(VB_ClanNews n, float w)
 	{
 		Widget f = INT_UIF_Draw.Frame(m_Left, 0, 0, w, 190);
-		INT_UIF_Surface.Box(f, 0, 0, w, 190, 10, VB_C_PANEL, VB_C_LINE);
+		INT_UIF_Surface box = INT_UIF_Surface.Box(f, 0, 0, w, 190, 10, VB_C_PANEL, VB_C_LINE);
 		VBT.Glow(f, w, 190);
 		VBT.Corners(f, w, 190, VB_C_ACCENT, 16);
 		VBT.Ico(f, 24, 23, 18, "pin", VB_C_ACCENT);
 		VBT.Cap(f, 50, 24, 160, "#STR_VB_TAB_B_PINNED", VB_C_ACCENT);
 		TagPill(f, 170, 20, n.TagIdx);
+		INT_UIF_Draw.Text(f, 24, 54, w - 48, 42, VBT.Fit(n.Head, w - 48, 30), 30, VB_C_TEXT);
+		// Две строки текста с ровным шагом; не влезло — «...» и «Читать полностью».
+		array<string> lines = new array<string>();
+		VBB.WrapText(f, n.Body, w - 48, 16, lines);
+		bool more = lines.Count() > 2;
+		for (int i = 0; i < lines.Count() && i < 2; i++)
+		{
+			string ln = lines.Get(i);
+			if (i == 1 && more)
+				ln = VBT.Fit(ln + " " + lines.Get(2) + "...", w - 48, 16);
+			INT_UIF_Draw.Text(f, 24, 98 + i * 24, w - 48, 24, ln, 16, VB_C_DIM);
+		}
+		INT_UIF_Draw.Text(f, 24, 156, w - 48, 22, n.Author + " · " + n.Time, 13, VB_C_DIM2);
+		if (more)
+			INT_UIF_Draw.Text(f, 24, 156, w - 48, 22, "#STR_VB_TAB_B_NEWS_MORE", 13, VB_C_ACCENT, INT_UIF_Align.RIGHT);
+		CardHit(f, w, 190, n, box);
 		if (m_Ed)
 			Actions(f, w - 10, 16, n);
-		INT_UIF_Draw.Text(f, 24, 54, w - 48, 42, VBT.Fit(n.Head, w - 48, 30), 30, VB_C_TEXT);
-		INT_UIF_Draw.MText(f, 24, 100, w - 48, 50, n.Body, 16, VB_C_DIM);
-		INT_UIF_Draw.Text(f, 24, 156, w - 48, 22, n.Author + " · " + n.Time, 13, VB_C_DIM2);
 	}
 
 	protected void Row(Widget p, VB_ClanNews n, float y, float w)
 	{
 		Widget f = INT_UIF_Draw.Frame(p, 0, y, w, 96);
-		INT_UIF_Surface.Box(f, 0, 0, w, 96, 10, VB_C_PANEL, VB_C_LINE);
+		INT_UIF_Surface box = INT_UIF_Surface.Box(f, 0, 0, w, 96, 10, VB_C_PANEL, VB_C_LINE);
 		INT_UIF_Surface.Box(f, 0, 14, 3, 68, 2, TagColor(n.TagIdx));
 		float tw = TagPill(f, 20, 14, n.TagIdx);
 		float room = w - tw - 210;
 		INT_UIF_Draw.Text(f, 20 + tw + 12, 12, room, 28, VBT.Fit(n.Head, room, 19), 19, VB_C_TEXT);
 		string one = n.Body + "";
+		one.Replace("\r", "");
 		one.Replace("\n", " ");
-		INT_UIF_Draw.Text(f, 20, 44, w - 40, 24, VBT.Fit(one, w - 40, 15), 15, VB_C_DIM);
+		string fit = VBT.Fit(one, w - 40, 15);
+		INT_UIF_Draw.Text(f, 20, 44, w - 40, 24, fit, 15, VB_C_DIM);
 		INT_UIF_Draw.Text(f, 20, 68, w - 40, 20, n.Author + " · " + n.Time, 13, VB_C_DIM2);
+		if (fit != one)
+			INT_UIF_Draw.Text(f, 20, 68, w - 40, 20, "#STR_VB_TAB_B_NEWS_MORE", 13, VB_C_ACCENT, INT_UIF_Align.RIGHT);
+		CardHit(f, w, 96, n, box);
 		if (m_Ed)
 			Actions(f, w - 8, 10, n);
+	}
+
+	// Новость целиком: «К новостям», тип, заголовок и весь текст с переносом; длинный текст прокручивается.
+	protected void Reader(VB_ClanNews n, float w)
+	{
+		Widget f = INT_UIF_Draw.Frame(m_Left, 0, 0, w, 720);
+		INT_UIF_Surface.Box(f, 0, 0, w, 720, 10, VB_C_PANEL, VB_C_LINE);
+		m_Back = new VBT_Button(f, 24, 20, 190, 38, "#STR_VB_TAB_B_NEWS_BACK", false, "", m_Menu.GetHitHandler(), 14);
+		float x = 232;
+		if (n.Pin)
+		{
+			VBT.Ico(f, x, 30, 18, "pin", VB_C_ACCENT);
+			x += 28;
+		}
+		TagPill(f, x, 24, n.TagIdx);
+		if (m_Ed)
+			Actions(f, w - 10, 24, n);
+		array<string> head = new array<string>();
+		VBB.WrapText(f, n.Head, w - 48, 28, head);
+		float y = 80;
+		foreach (string hl : head)
+		{
+			INT_UIF_Draw.Text(f, 24, y, w - 48, 38, hl, 28, VB_C_TEXT);
+			y += 38;
+		}
+		INT_UIF_Draw.Text(f, 24, y + 2, w - 48, 22, n.Author + " · " + n.Time, 13, VB_C_DIM2);
+		y += 34;
+		INT_UIF_Draw.Line(f, 24, y, w - 48, 1, VB_C_LINE);
+		y += 16;
+		array<string> body = new array<string>();
+		VBB.WrapText(f, n.Body, w - 62, 17, body);
+		float view = 720 - y - 20;
+		ScrollWidget sw = VBK.Scroll(f, 24, y, w - 48, view);
+		Widget content = INT_UIF_Draw.ScrollContent(sw);
+		INT_UIF_Draw.SetScrollContent(sw, body.Count() * 27);
+		float ly = 0;
+		foreach (string bl : body)
+		{
+			INT_UIF_Draw.Text(content, 0, ly, w - 62, 27, bl, 17, VB_C_TEXT);
+			ly += 27;
+		}
 	}
 
 	protected void BuildForm()
@@ -369,6 +509,7 @@ class VB_TabletPageNews extends VB_TabletPage
 
 	protected void Repaint()
 	{
+		s_Keep = true;
 		SetFocus(null);
 		m_Menu.RequestRepaint();
 	}
@@ -528,6 +669,20 @@ class VB_TabletPageNews extends VB_TabletPage
 			RunAction(m_ActKinds.Get(i), m_ActIds.Get(i));
 			return true;
 		}
+		// Открыть/закрыть чтение — через перестроение: виджет, по которому щёлкнули, внутри обработчика не удаляем.
+		if (m_Back && w == m_Back.Hit)
+		{
+			s_OpenId = 0;
+			Repaint();
+			return true;
+		}
+		i = m_CardHits.Find(w);
+		if (i >= 0)
+		{
+			s_OpenId = m_CardIds.Get(i);
+			Repaint();
+			return true;
+		}
 		i = m_TagHits.Find(w);
 		if (i >= 0)
 		{
@@ -572,6 +727,20 @@ class VB_TabletPageNews extends VB_TabletPage
 					col = VB_C_BAD;
 			}
 			m_ActIcons.Get(i).SetColor(col);
+			return true;
+		}
+		int card = m_CardHits.Find(w);
+		if (card >= 0)
+		{
+			int edge = VB_C_LINE;
+			if (enter)
+				edge = VB_C_ACCENT;
+			m_CardBoxes.Get(card).SetBorder(edge);
+			return true;
+		}
+		if (m_Back && w == m_Back.Hit)
+		{
+			m_Back.Hover(enter);
 			return true;
 		}
 		if (m_Save && w == m_Save.Hit)

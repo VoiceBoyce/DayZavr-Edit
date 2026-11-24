@@ -309,6 +309,8 @@ class VB_TabletPageClan extends VB_TabletPage
 	protected ref VBT_Button m_BtnBank;
 	protected ref VBT_Button m_BtnMembers;
 	protected ref VBT_Button m_BtnNews;
+	protected Widget m_NewsOpen;		// щелчок по плитке «Последняя новость» — эта новость целиком
+	protected int m_NewsOpenId;
 	protected ref VBT_Button m_BtnJournal;
 	protected ref VBT_Button m_BtnSettings;
 	protected ref VBT_Button m_BtnSetDc;
@@ -531,6 +533,8 @@ class VB_TabletPageClan extends VB_TabletPage
 			if (body.LengthUtf8() > 130)
 				body = body.SubstringUtf8(0, 130) + "...";
 			INT_UIF_Draw.MText(n, 20, 108, 532, 50, body, 15, VB_C_DIM);
+			m_NewsOpenId = w.NewsId;
+			m_NewsOpen = HitAt(n, 0, 36, 572, 130);
 		}
 		else
 		{
@@ -628,6 +632,12 @@ class VB_TabletPageClan extends VB_TabletPage
 		}
 		if (w == m_BtnNews.Hit)
 		{
+			m_Menu.GoLater("cnews");
+			return true;
+		}
+		if (m_NewsOpen && w == m_NewsOpen)
+		{
+			VB_TabletPageNews.OpenLater(m_NewsOpenId);
 			m_Menu.GoLater("cnews");
 			return true;
 		}

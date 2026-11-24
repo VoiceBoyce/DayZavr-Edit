@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Mediator : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Mediator_displayName";
-descriptionShort = "#EFT_Mediator_descriptionShort";
+displayName = "$STR_EFT_Mediator_displayName";
+descriptionShort = "$STR_EFT_Mediator_descriptionShort";
 		model = "EFT\barter\Mediator\EFT_Mediator.p3d";
 		isMeleeWeapon = 1;
 		weight = 10;

@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_HDD : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_HDD_displayName";
-		descriptionShort = "#EFT_HDD_descriptionShort";
+		displayName = "$STR_EFT_HDD_displayName";
+		descriptionShort = "$STR_EFT_HDD_descriptionShort";
 		model = "EFT\barter\HDD\EFT_HDD.p3d";
 		isMeleeWeapon = 1;
 		weight = 250;

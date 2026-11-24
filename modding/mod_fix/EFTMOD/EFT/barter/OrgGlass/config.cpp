@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_OrgGlass : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_OrgGlass_displayName";
-descriptionShort = "#EFT_OrgGlass_descriptionShort";
+displayName = "$STR_EFT_OrgGlass_displayName";
+descriptionShort = "$STR_EFT_OrgGlass_descriptionShort";
 		model = "EFT\barter\OrgGlass\EFT_OrgGlass.p3d";
 		isMeleeWeapon = 1;
 		weight = 700;

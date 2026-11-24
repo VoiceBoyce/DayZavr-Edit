@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_Vest_RedutM_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "#EFT_Vest_RedutM_displayName";
-		descriptionShort = "#EFT_Vest_RedutM_descriptionShort";
+		displayName = "$STR_EFT_Vest_RedutM_displayName";
+		descriptionShort = "$STR_EFT_Vest_RedutM_descriptionShort";
 		model = "EFT\armor\RedutM\RedutM_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

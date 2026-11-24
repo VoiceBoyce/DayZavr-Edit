@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Capacitors : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Capacitors_displayName";
-		descriptionShort = "#EFT_Capacitors_descriptionShort";
+		displayName = "$STR_EFT_Capacitors_displayName";
+		descriptionShort = "$STR_EFT_Capacitors_descriptionShort";
 		model = "EFT\barter\Capacitors\EFT_Capacitors.p3d";
 		isMeleeWeapon = 1;
 		weight = 100;

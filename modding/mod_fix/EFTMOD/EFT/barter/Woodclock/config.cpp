@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Woodclock : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Woodclock_displayName";
-descriptionShort = "#EFT_Woodclock_descriptionShort";
+displayName = "$STR_EFT_Woodclock_displayName";
+descriptionShort = "$STR_EFT_Woodclock_descriptionShort";
 		model = "EFT\barter\Woodclock\EFT_Woodclock.p3d";
 		isMeleeWeapon = 1;
 		weight = 3000;

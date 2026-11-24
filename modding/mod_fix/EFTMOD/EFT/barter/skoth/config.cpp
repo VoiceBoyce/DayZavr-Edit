@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_skoth : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_skoth_displayName";
-descriptionShort = "#EFT_skoth_descriptionShort";
+displayName = "$STR_EFT_skoth_displayName";
+descriptionShort = "$STR_EFT_skoth_descriptionShort";
 		model = "EFT\barter\skoth\EFT_skoth.p3d";
 		isMeleeWeapon = 1;
 		weight = 100;

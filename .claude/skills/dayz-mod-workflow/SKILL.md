@@ -422,6 +422,7 @@ Verified errors committed more than once. Check ACTIVELY during implementation. 
 - **E122** — смена количества предмета в слоте/отсеке (зарядка, расход, износ) щёлкает звуком вложения: ванильный SetQuantity шлёт ITEM_ATTACH/DETACH — глушить флагом в override StartItemSoundServer
 - **E123** — предмет с количеством тяжелеет с зарядом: у `Inventory_Base` `weightPerQuantityUnit = 1` (1 г на единицу), у носителей энергии/процентов ставить `weightPerQuantityUnit=0`
 - **E123** — `Cannot convert ... to method 'Slot'` и следом лавина ошибок в ванили: короткое имя своего метода (`Slot`, `Load`, `Flag`, `L`) совпало с существующей функцией — давать служебным методам префикс мода.
+- **E125** — предмет не находится поиском по названию (админка VPP, другие моды): в config `displayName="#KEY"` — `ConfigGetText` переводит только `$STR_`, `#` отдаёт как есть → ключи в stringtable с префиксом `STR_`, в config `"$STR_KEY"`
 
 ---
 

@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Salt : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Salt_displayName";
-descriptionShort = "#EFT_Salt_descriptionShort";
+displayName = "$STR_EFT_Salt_displayName";
+descriptionShort = "$STR_EFT_Salt_descriptionShort";
 		model = "EFT\barter\Salt\EFT_Salt.p3d";
 		isMeleeWeapon = 1;
 		weight = 320;

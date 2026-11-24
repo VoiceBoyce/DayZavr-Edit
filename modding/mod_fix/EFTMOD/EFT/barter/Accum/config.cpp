@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Accum : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Accum_displayName";
-		descriptionShort = "#EFT_Accum_descriptionShort";
+		displayName = "$STR_EFT_Accum_displayName";
+		descriptionShort = "$STR_EFT_Accum_descriptionShort";
 		model = "EFT\barter\accum\EFT_Accum.p3d";
 		isMeleeWeapon = 1;
 		weight = 100;

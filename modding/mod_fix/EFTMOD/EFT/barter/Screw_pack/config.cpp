@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Screw_pack : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Screw_pack_displayName";
-descriptionShort = "#EFT_Screw_pack_descriptionShort";
+displayName = "$STR_EFT_Screw_pack_displayName";
+descriptionShort = "$STR_EFT_Screw_pack_descriptionShort";
 		model = "EFT\barter\Screw_pack\EFT_Screw_pack.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;

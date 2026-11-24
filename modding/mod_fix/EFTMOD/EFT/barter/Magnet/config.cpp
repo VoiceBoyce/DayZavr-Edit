@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Magnet : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Magnet_displayName";
-descriptionShort = "#EFT_Magnet_descriptionShort";
+displayName = "$STR_EFT_Magnet_displayName";
+descriptionShort = "$STR_EFT_Magnet_descriptionShort";
 		model = "EFT\barter\Magnet\EFT_Magnet.p3d";
 		isMeleeWeapon = 1;
 		weight = 400;

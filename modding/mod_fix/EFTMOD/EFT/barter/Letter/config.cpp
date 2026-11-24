@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_q_Letter1 : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_q_Letter1_displayName";
-descriptionShort = "#EFT_q_Letter1_descriptionShort";
+displayName = "$STR_EFT_q_Letter1_displayName";
+descriptionShort = "$STR_EFT_q_Letter1_descriptionShort";
 		model = "EFT\barter\Letter\EFT_Letter1.p3d";
 		isMeleeWeapon = 1;
 		weight = 50;
@@ -33,8 +33,8 @@ descriptionShort = "#EFT_q_Letter1_descriptionShort";
 	
 	class EFT_q_Letter2 : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_q_Letter2_displayName";
-descriptionShort = "#EFT_q_Letter2_descriptionShort";
+displayName = "$STR_EFT_q_Letter2_displayName";
+descriptionShort = "$STR_EFT_q_Letter2_descriptionShort";
 		model = "EFT\barter\Letter\EFT_Letter2.p3d";
 		isMeleeWeapon = 1;
 		weight = 50;

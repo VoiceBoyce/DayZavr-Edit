@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_SAS : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_SAS_displayName";
-descriptionShort = "#EFT_SAS_descriptionShort";
+displayName = "$STR_EFT_SAS_displayName";
+descriptionShort = "$STR_EFT_SAS_descriptionShort";
 		model = "EFT\barter\SAS\EFT_SAS.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;

@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_vest_BankRobber_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "#EFT_vest_BankRobber_displayName";
-		descriptionShort = "#EFT_vest_BankRobber_descriptionShort";
+		displayName = "$STR_EFT_vest_BankRobber_displayName";
+		descriptionShort = "$STR_EFT_vest_BankRobber_descriptionShort";
 		model = "EFT\vest\vest_BankRobber\vest_BankRobber_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_PowerCord : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_PowerCord_displayName";
-descriptionShort = "#EFT_PowerCord_descriptionShort";
+displayName = "$STR_EFT_PowerCord_displayName";
+descriptionShort = "$STR_EFT_PowerCord_descriptionShort";
 		model = "EFT\barter\PowerCord\EFT_PowerCord.p3d";
 		isMeleeWeapon = 1;
 		weight = 600;

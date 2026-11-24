@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_q_doc_Goshan : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_q_doc_Goshan_displayName";
-descriptionShort = "#EFT_q_doc_Goshan_descriptionShort";
+displayName = "$STR_EFT_q_doc_Goshan_displayName";
+descriptionShort = "$STR_EFT_q_doc_Goshan_descriptionShort";
 		model = "EFT\barter\QuestDoc\EFT_QuestDoc1.p3d";
 		isMeleeWeapon = 1;
 		weight = 100;
@@ -33,8 +33,8 @@ descriptionShort = "#EFT_q_doc_Goshan_descriptionShort";
 	
 	class EFT_q_doc_IDEA : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_q_doc_IDEA_displayName";
-descriptionShort = "#EFT_q_doc_IDEA_descriptionShort";
+displayName = "$STR_EFT_q_doc_IDEA_displayName";
+descriptionShort = "$STR_EFT_q_doc_IDEA_descriptionShort";
 		model = "EFT\barter\QuestDoc\EFT_QuestDoc2.p3d";
 		isMeleeWeapon = 1;
 		weight = 100;
@@ -54,8 +54,8 @@ descriptionShort = "#EFT_q_doc_IDEA_descriptionShort";
 	
 	class EFT_q_doc_OLI : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_q_doc_OLI_displayName";
-descriptionShort = "#EFT_q_doc_OLI_descriptionShort";
+displayName = "$STR_EFT_q_doc_OLI_displayName";
+descriptionShort = "$STR_EFT_q_doc_OLI_descriptionShort";
 		model = "EFT\barter\QuestDoc\EFT_QuestDoc3.p3d";
 		isMeleeWeapon = 1;
 		weight = 100;
@@ -75,8 +75,8 @@ descriptionShort = "#EFT_q_doc_OLI_descriptionShort";
 	
 	class EFT_q_doc_OLIroute : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_q_doc_OLIroute_displayName";
-descriptionShort = "#EFT_q_doc_OLIroute_descriptionShort";
+displayName = "$STR_EFT_q_doc_OLIroute_displayName";
+descriptionShort = "$STR_EFT_q_doc_OLIroute_descriptionShort";
 		model = "EFT\barter\QuestDoc\EFT_QuestDoc4.p3d";
 		isMeleeWeapon = 1;
 		weight = 100;

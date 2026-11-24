@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_vest_Commando_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "#EFT_vest_Commando_displayName";
-		descriptionShort = "#EFT_vest_Commando_descriptionShort";
+		displayName = "$STR_EFT_vest_Commando_displayName";
+		descriptionShort = "$STR_EFT_vest_Commando_descriptionShort";
 		model = "EFT\vest\vest_Commando\vest_Commando_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

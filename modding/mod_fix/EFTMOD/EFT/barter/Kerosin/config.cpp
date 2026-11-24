@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Kerosin : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Kerosin_displayName";
-descriptionShort = "#EFT_Kerosin_descriptionShort";
+displayName = "$STR_EFT_Kerosin_displayName";
+descriptionShort = "$STR_EFT_Kerosin_descriptionShort";
 		model = "EFT\barter\Kerosin\EFT_Kerosin.p3d";
 		isMeleeWeapon = 1;
 		weight = 5600;

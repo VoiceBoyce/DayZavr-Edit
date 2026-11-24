@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_PressureGauge : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_PressureGauge_displayName";
-descriptionShort = "#EFT_PressureGauge_descriptionShort";
+displayName = "$STR_EFT_PressureGauge_displayName";
+descriptionShort = "$STR_EFT_PressureGauge_descriptionShort";
 		model = "EFT\barter\PressureGauge\EFT_PressureGauge.p3d";
 		isMeleeWeapon = 1;
 		weight = 800;

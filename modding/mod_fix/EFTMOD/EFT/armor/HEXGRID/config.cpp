@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_Vest_HEXGRID_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "#EFT_Vest_HEXGRID_displayName";
-		descriptionShort = "#EFT_Vest_HEXGRID_descriptionShort";
+		displayName = "$STR_EFT_Vest_HEXGRID_displayName";
+		descriptionShort = "$STR_EFT_Vest_HEXGRID_descriptionShort";
 		model = "EFT\armor\HEXGRID\HEXGRID_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

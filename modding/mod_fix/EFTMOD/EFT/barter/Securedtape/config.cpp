@@ -13,8 +13,8 @@ class CfgVehicles {
 	class EFT_Securedtape : Inventory_Base {
 		scope = 2;
 
-displayName = "#EFT_Securedtape_displayName";
-descriptionShort = "#EFT_Securedtape_descriptionShort";
+displayName = "$STR_EFT_Securedtape_displayName";
+descriptionShort = "$STR_EFT_Securedtape_descriptionShort";
 		model = "EFT\barter\Securedtape\EFT_Securedtape.p3d";
 		isMeleeWeapon = 1;
 		weight = 250;

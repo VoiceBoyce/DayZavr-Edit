@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_vest_Triton_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "#EFT_vest_Triton_displayName";
-		descriptionShort = "#EFT_vest_Triton_descriptionShort";
+		displayName = "$STR_EFT_vest_Triton_displayName";
+		descriptionShort = "$STR_EFT_vest_Triton_descriptionShort";
 		model = "EFT\vest\vest_Triton\vest_Triton_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

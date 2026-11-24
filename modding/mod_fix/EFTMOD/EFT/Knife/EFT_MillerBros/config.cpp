@@ -21,8 +21,8 @@ class CfgVehicles
 class EFT_MillerBros_ColorBase: CombatKnife
 	{
 		scope=0;
-		displayName="#EFT_MillerBros_displayName";
-		descriptionShort="#EFT_MillerBros_descriptionShort";
+		displayName="$STR_EFT_MillerBros_displayName";
+		descriptionShort="$STR_EFT_MillerBros_descriptionShort";
 		model="EFT\Knife\EFT_MillerBros\EFT_MillerBros.p3d";
 		animClass="Knife";
 		repairableWithKits[]={4};

@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_RFIDreader : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_RFIDreader_displayName";
-descriptionShort = "#EFT_RFIDreader_descriptionShort";
+displayName = "$STR_EFT_RFIDreader_displayName";
+descriptionShort = "$STR_EFT_RFIDreader_descriptionShort";
 		model = "EFT\barter\RFIDreader\EFT_RFIDreader.p3d";
 		isMeleeWeapon = 1;
 		weight = 500;

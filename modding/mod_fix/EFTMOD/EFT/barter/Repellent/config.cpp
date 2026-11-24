@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Repellent : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Repellent_displayName";
-descriptionShort = "#EFT_Repellent_descriptionShort";
+displayName = "$STR_EFT_Repellent_displayName";
+descriptionShort = "$STR_EFT_Repellent_descriptionShort";
 		model = "EFT\barter\Repellent\EFT_Repellent.p3d";
 		isMeleeWeapon = 1;
 		weight = 600;

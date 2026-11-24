@@ -25,8 +25,8 @@ class CfgVehicles
 	class EFT_food_MaxEnergy: SodaCan_Pipsi
 	{
 		scope=2;
-		displayName="#EFT_food_MaxEnergy_displayName";
-		descriptionShort="#EFT_food_MaxEnergy_descriptionShort";
+		displayName="$STR_EFT_food_MaxEnergy_displayName";
+		descriptionShort="$STR_EFT_food_MaxEnergy_descriptionShort";
 		model="\EFT\Food\MaxEnergy\EFT_MaxEnergy.p3d";
 		itemSize[]={1,1};
 		weight=100;

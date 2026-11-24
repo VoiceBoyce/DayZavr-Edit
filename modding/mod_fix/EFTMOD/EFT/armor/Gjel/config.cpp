@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_Vest_Gjel_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "#EFT_Vest_Gjel_displayName";
-		descriptionShort = "#EFT_Vest_Gjel_descriptionShort";
+		displayName = "$STR_EFT_Vest_Gjel_displayName";
+		descriptionShort = "$STR_EFT_Vest_Gjel_descriptionShort";
 		model = "EFT\armor\Gjel\Gjel_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_HandDrill : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_HandDrill_displayName";
-		descriptionShort = "#EFT_HandDrill_descriptionShort";
+		displayName = "$STR_EFT_HandDrill_displayName";
+		descriptionShort = "$STR_EFT_HandDrill_descriptionShort";
 		model = "EFT\barter\HandDrill\EFT_HandDrill.p3d";
 		isMeleeWeapon = 1;
 		weight = 2300;

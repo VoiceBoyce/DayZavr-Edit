@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Sheloch : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Sheloch_displayName";
-descriptionShort = "#EFT_Sheloch_descriptionShort";
+displayName = "$STR_EFT_Sheloch_displayName";
+descriptionShort = "$STR_EFT_Sheloch_descriptionShort";
 		model = "EFT\barter\Sheloch\EFT_Sheloch.p3d";
 		isMeleeWeapon = 1;
 		weight = 600;

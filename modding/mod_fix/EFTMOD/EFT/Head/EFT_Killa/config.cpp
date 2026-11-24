@@ -20,8 +20,8 @@ class CfgVehicles
 	class EFT_Killa_ColorBase: Clothing
 	{
 		scope=0;
-		displayName="#EFT_Killa_v_displayName";
-		descriptionShort="#EFT_Killa_v_descriptionShort";
+		displayName="$STR_EFT_Killa_v_displayName";
+		descriptionShort="$STR_EFT_Killa_v_descriptionShort";
 		model="EFT\Head\EFT_Killa\EFT_Killa_g.p3d";
 		repairableWithKits[]={8};
 		repairCosts[]={50};

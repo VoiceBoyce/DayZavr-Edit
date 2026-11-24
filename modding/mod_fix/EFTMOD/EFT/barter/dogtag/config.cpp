@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_dogtag : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_dogtag_displayName";
-		descriptionShort = "#EFT_dogtag_descriptionShort";
+		displayName = "$STR_EFT_dogtag_displayName";
+		descriptionShort = "$STR_EFT_dogtag_descriptionShort";
 		model = "EFT\barter\dogtag\EFT_dogtag.p3d";
 		isMeleeWeapon = 1;
 		weight = 10;

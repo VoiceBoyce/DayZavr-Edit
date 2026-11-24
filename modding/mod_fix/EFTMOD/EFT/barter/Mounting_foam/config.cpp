@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Mounting_foam : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Mounting_foam_displayName";
-descriptionShort = "#EFT_Mounting_foam_descriptionShort";
+displayName = "$STR_EFT_Mounting_foam_displayName";
+descriptionShort = "$STR_EFT_Mounting_foam_descriptionShort";
 		model = "EFT\barter\Mounting_foam\EFT_polyurethane_foam.p3d";
 		isMeleeWeapon = 1;
 		weight = 800;

@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_geger : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_geger_displayName";
-		descriptionShort = "#EFT_geger_descriptionShort";
+		displayName = "$STR_EFT_geger_displayName";
+		descriptionShort = "$STR_EFT_geger_descriptionShort";
 		model = "EFT\barter\geger\EFT_geger.p3d";
 		isMeleeWeapon = 1;
 		weight = 400;

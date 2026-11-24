@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_roulette : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_roulette_displayName";
-descriptionShort = "#EFT_roulette_descriptionShort";
+displayName = "$STR_EFT_roulette_displayName";
+descriptionShort = "$STR_EFT_roulette_descriptionShort";
 		model = "EFT\barter\roulette\EFT_roulette.p3d";
 		isMeleeWeapon = 1;
 		weight = 150;

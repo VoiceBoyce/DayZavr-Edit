@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_Vest_PACA_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "#EFT_Vest_PACA_displayName";
-		descriptionShort = "#EFT_Vest_PACA_descriptionShort";
+		displayName = "$STR_EFT_Vest_PACA_displayName";
+		descriptionShort = "$STR_EFT_Vest_PACA_descriptionShort";
 		model = "EFT\armor\PACA\PACA_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

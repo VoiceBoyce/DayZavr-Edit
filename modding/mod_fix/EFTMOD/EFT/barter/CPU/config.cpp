@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_CPU : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_CPU_displayName";
-		descriptionShort = "#EFT_CPU_descriptionShort";
+		displayName = "$STR_EFT_CPU_displayName";
+		descriptionShort = "$STR_EFT_CPU_descriptionShort";
 		model = "EFT\barter\CPU\EFT_CPU.p3d";
 		isMeleeWeapon = 1;
 		weight = 8;

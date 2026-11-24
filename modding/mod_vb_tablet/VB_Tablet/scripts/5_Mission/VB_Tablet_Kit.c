@@ -455,6 +455,11 @@ class VBT_Area extends ScriptedWidgetEventHandler
 	protected TextWidget m_Hint;
 	protected ref INT_UIF_Surface m_Bg;
 	protected string m_Last;
+	// Поле движка само строки не переносит: без фокуса текст показан переносом поверх (m_Prev), щелчок — снова поле.
+	protected Widget m_Prev;
+	protected ButtonWidget m_PrevHit;
+	protected float m_PrevW;
+	protected float m_PrevH;
 
 	void VBT_Area(Widget p, float x, float y, float w, float h, string placeholder, string value = "")
 	{
@@ -468,9 +473,50 @@ class VBT_Area extends ScriptedWidgetEventHandler
 		Edit.SetText(value);
 		m_Last = value;
 		m_Hint.Show(value == "");
+		m_PrevW = w - 28;
+		m_PrevH = h - 20;
+		m_Prev = INT_UIF_Draw.Frame(p, x + 14, y + 10, m_PrevW, m_PrevH);
+		m_PrevHit = INT_UIF_Draw.Hit(p, x, y, w, h, this);
+		Preview(true);
 		// Многострочное поле не шлёт OnChange на каждый знак: подсказка и счётчик страницы
 		// обновляются опросом из VB_TabletMenu.Update.
 		VB_TabletMenu.WatchArea(this);
+	}
+
+	// on: показать текст переносом вместо поля (если текст есть); false — снова поле.
+	protected void Preview(bool on)
+	{
+		if (!m_Prev || !m_PrevHit || !Edit)
+			return;
+		string s;
+		Edit.GetText(s);
+		bool show = on && s != "";
+		INT_UIF_Widgets.ClearChildren(m_Prev);
+		if (show)
+		{
+			array<string> lines = new array<string>();
+			VBB.WrapText(m_Prev, s, m_PrevW, 15, lines);
+			int rows = m_PrevH / 21;
+			for (int i = 0; i < lines.Count() && i < rows; i++)
+			{
+				string ln = lines.Get(i);
+				if (i == rows - 1 && lines.Count() > rows)
+					ln = VBT.Fit(ln + " " + lines.Get(i + 1) + "...", m_PrevW, 15);
+				INT_UIF_Draw.Text(m_Prev, 0, i * 21, m_PrevW, 21, ln, 15, VB_C_TEXT);
+			}
+		}
+		m_Prev.Show(show);
+		m_PrevHit.Show(show);
+		Edit.Show(!show);
+	}
+
+	override bool OnClick(Widget w, int x, int y, int button)
+	{
+		if (w != m_PrevHit)
+			return false;
+		Preview(false);
+		SetFocus(Edit);
+		return true;
 	}
 
 	string Get()
@@ -502,8 +548,11 @@ class VBT_Area extends ScriptedWidgetEventHandler
 		return false;
 	}
 
+	// Фокус только самого поля: кнопка-превью тоже шлёт сюда события фокуса.
 	override bool OnFocus(Widget w, int x, int y)
 	{
+		if (w != Edit)
+			return false;
 		m_Bg.SetBorder(VB_C_ACCENT);
 		VB_TabletMenu menu = VBK.Menu();
 		if (menu)
@@ -513,10 +562,13 @@ class VBT_Area extends ScriptedWidgetEventHandler
 
 	override bool OnFocusLost(Widget w, int x, int y)
 	{
+		if (w != Edit)
+			return false;
 		m_Bg.SetBorder(VB_C_LINE2);
 		VB_TabletMenu menu = VBK.Menu();
 		if (menu)
 			menu.SetTyping(false);
+		Preview(true);
 		return false;
 	}
 }

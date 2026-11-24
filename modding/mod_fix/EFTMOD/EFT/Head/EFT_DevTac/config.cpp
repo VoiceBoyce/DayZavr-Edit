@@ -20,8 +20,8 @@ class CfgVehicles
 	class EFT_DevTac_ColorBase: Clothing
 	{
 		scope=0;
-		displayName="#EFT_DevTac_displayName";
-		descriptionShort="#EFT_DevTac_descriptionShort";
+		displayName="$STR_EFT_DevTac_displayName";
+		descriptionShort="$STR_EFT_DevTac_descriptionShort";
 		model="EFT\Head\EFT_DevTac\EFT_DevTac_g.p3d";
 		repairableWithKits[]={8};
 		repairCosts[]={50};

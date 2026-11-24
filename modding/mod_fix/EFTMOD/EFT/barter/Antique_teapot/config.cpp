@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Antique_teapot : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Antique_teapot_displayName";
-		descriptionShort = "#EFT_Antique_teapot_descriptionShort";
+		displayName = "$STR_EFT_Antique_teapot_displayName";
+		descriptionShort = "$STR_EFT_Antique_teapot_descriptionShort";
 		model = "EFT\barter\Antique_teapot\EFT_Antique_teapot.p3d";
 		isMeleeWeapon = 1;
 		weight = 1100;

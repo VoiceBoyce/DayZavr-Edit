@@ -20,8 +20,8 @@ class CfgVehicles
 	class EFT_Bastion_ColorBase: Clothing
 	{
 		scope=0;
-		displayName="#EFT_Bastion_displayName";
-		descriptionShort="#EFT_Bastion_descriptionShort";
+		displayName="$STR_EFT_Bastion_displayName";
+		descriptionShort="$STR_EFT_Bastion_descriptionShort";
 		model="EFT\Head\EFT_Bastion\EFT_Bastion_g.p3d";
 		repairableWithKits[]={8};
 		repairCosts[]={50};

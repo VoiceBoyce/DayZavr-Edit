@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Lupo : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Lupo_displayName";
-descriptionShort = "#EFT_Lupo_descriptionShort";
+displayName = "$STR_EFT_Lupo_displayName";
+descriptionShort = "$STR_EFT_Lupo_descriptionShort";
 		model = "EFT\barter\Lupo\EFT_Lupo.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;

@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Surv : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Surv_displayName";
-descriptionShort = "#EFT_Surv_descriptionShort";
+displayName = "$STR_EFT_Surv_displayName";
+descriptionShort = "$STR_EFT_Surv_descriptionShort";
 
 		model = "EFT\barter\Surv\EFT_Surv.p3d";
 		isMeleeWeapon = 1;

@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_RAM : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_RAM_displayName";
-descriptionShort = "#EFT_RAM_descriptionShort";
+displayName = "$STR_EFT_RAM_displayName";
+descriptionShort = "$STR_EFT_RAM_descriptionShort";
 		model = "EFT\barter\RAM\EFT_RAM.p3d";
 		isMeleeWeapon = 1;
 		weight = 80;

@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Advwrench : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Advwrench_displayName";
-		descriptionShort = "#EFT_Advwrench_descriptionShort";
+		displayName = "$STR_EFT_Advwrench_displayName";
+		descriptionShort = "$STR_EFT_Advwrench_descriptionShort";
 		model = "EFT\barter\Advwrench\EFT_Advwrench.p3d";
 		isMeleeWeapon = 1;
 		weight = 1500;

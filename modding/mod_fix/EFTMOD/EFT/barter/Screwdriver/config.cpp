@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Screwdriver : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Screwdriver_displayName";
-descriptionShort = "#EFT_Screwdriver_descriptionShort";
+displayName = "$STR_EFT_Screwdriver_displayName";
+descriptionShort = "$STR_EFT_Screwdriver_descriptionShort";
 		model = "EFT\barter\Screwdriver\EFT_Screwdriver.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;

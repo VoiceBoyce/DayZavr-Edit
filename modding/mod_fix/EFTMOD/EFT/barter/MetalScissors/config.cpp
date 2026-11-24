@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_MetalScissors : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_MetalScissors_displayName";
-descriptionShort = "#EFT_MetalScissors_descriptionShort";
+displayName = "$STR_EFT_MetalScissors_displayName";
+descriptionShort = "$STR_EFT_MetalScissors_descriptionShort";
 		model = "EFT\barter\MetalScissors\EFT_MetalScissors.p3d";
 		isMeleeWeapon = 1;
 		weight = 890;

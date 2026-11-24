@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Chiken : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Chiken_displayName";
-		descriptionShort = "#EFT_Chiken_descriptionShort";
+		displayName = "$STR_EFT_Chiken_displayName";
+		descriptionShort = "$STR_EFT_Chiken_descriptionShort";
 		model = "EFT\barter\Chiken\EFT_Chiken.p3d";
 		isMeleeWeapon = 1;
 		weight = 3800;

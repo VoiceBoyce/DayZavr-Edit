@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_crikent : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_crikent_displayName";
-		descriptionShort = "#EFT_crikent_descriptionShort";
+		displayName = "$STR_EFT_crikent_displayName";
+		descriptionShort = "$STR_EFT_crikent_descriptionShort";
 		model = "EFT\barter\crikent\EFT_crikent.p3d";
 		isMeleeWeapon = 1;
 		weight = 5;

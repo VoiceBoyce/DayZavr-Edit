@@ -20,8 +20,8 @@ class CfgVehicles
 	class EFT_Jeta_ColorBase: Clothing
 	{
 		scope=0;
-		displayName="#EFT_Jeta_v_displayName";
-		descriptionShort="#EFT_Jeta_v_descriptionShort";
+		displayName="$STR_EFT_Jeta_v_displayName";
+		descriptionShort="$STR_EFT_Jeta_v_descriptionShort";
 		model="EFT\Head\EFT_Jeta\EFT_Jeta_g.p3d";
 		repairableWithKits[]={8};
 		repairCosts[]={50};

@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_NaCl : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_NaCl_displayName";
-descriptionShort = "#EFT_NaCl_descriptionShort";
+displayName = "$STR_EFT_NaCl_displayName";
+descriptionShort = "$STR_EFT_NaCl_descriptionShort";
 		model = "EFT\barter\NaCl\EFT_NaCl.p3d";
 		isMeleeWeapon = 1;
 		weight = 400;

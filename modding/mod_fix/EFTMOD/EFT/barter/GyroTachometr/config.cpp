@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_GyroTachometr : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_GyroTachometr_displayName";
-		descriptionShort = "#EFT_GyroTachometr_descriptionShort";
+		displayName = "$STR_EFT_GyroTachometr_displayName";
+		descriptionShort = "$STR_EFT_GyroTachometr_descriptionShort";
 		model = "EFT\barter\GyroTachometr\EFT_GyroTachometr.p3d";
 		isMeleeWeapon = 1;
 		weight = 900;

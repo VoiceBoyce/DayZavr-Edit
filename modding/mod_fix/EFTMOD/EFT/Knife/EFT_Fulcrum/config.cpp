@@ -24,8 +24,8 @@ class CfgVehicles
 class EFT_Fulcrum_ColorBase: CombatKnife
 	{
 		scope=0;
-		displayName="#EFT_Fulcrum_displayName";
-		descriptionShort="#EFT_Fulcrum_descriptionShort";
+		displayName="$STR_EFT_Fulcrum_displayName";
+		descriptionShort="$STR_EFT_Fulcrum_descriptionShort";
 		model="EFT\Knife\EFT_Fulcrum\EFT_Fulcrum.p3d";
 		animClass="Knife";
 		repairableWithKits[]={4};

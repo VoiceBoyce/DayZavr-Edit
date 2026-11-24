@@ -50,6 +50,12 @@ GLOW = bool(opts.get("glow", False))
 # --helmet_concept — концепт шлема (этап 3б): свет в пазах дыхательной решётки, знак Эхо на лбу, индикаторы на
 # боковых рельсах; со --glow стёкла горят (как в игре)
 HELM_CONCEPT = bool(opts.get("helmet_concept", False))
+# --flask=small|medium|large|all — колба для артефактов в гнезде капсулы на левом бедре (ТЗ 8.4, 11-24; all — три
+# колбы рядом вдоль бедра); --flask_only — без костюма; --flask_fill=N — занятых ячеек (у пустых кольцо серое);
+# --art_root=<папка, где распакован DD_Artifacts: модели и текстуры артефактов OOTS> (в мод не входят)
+FLASK = opts.get("flask")
+FLASK_ONLY = bool(opts.get("flask_only", False))
+ART_ROOT = opts.get("art_root", "")
 
 X = os.path.join(CLOTHES, "exo_set")
 # модель, выделение -> (текстура, материал) — как hiddenSelections конфига
@@ -86,6 +92,8 @@ if BUILT:
     SET = [(n, os.path.join(BUILT, *_rel[n]) if n in _rel else p, s) for n, p, s in SET]
 if PARTS != "all":
     SET = [s for s in SET if s[0] in PARTS.split("+")]
+if FLASK_ONLY:
+    SET = []
 
 
 def resolve(vpath):
@@ -93,6 +101,9 @@ def resolve(vpath):
     low = vp.lower()
     if low.startswith("vb_echoclothes" + BS):
         p = os.path.join(CLOTHES, vp[len("vb_echoclothes") + 1:])
+        return p if os.path.exists(p) else None
+    if ART_ROOT and low.startswith("dd_artifacts" + BS):
+        p = os.path.join(ART_ROOT, vp)
         return p if os.path.exists(p) else None
     p = os.path.join("P:" + BS, vp)
     return p if os.path.exists(p) else None
@@ -776,6 +787,117 @@ if HELM_CONCEPT and LODS.get("helmet"):
                     (side * (HU[m][:, 0].max() * side + 0.002), c[1], c[2]))
             bpy.context.active_object.scale = (0.003, 0.03, 0.006)
 
+# ---------------------------------------------------------------- колбы для артефактов (ТЗ 8.4, 11-24)
+if FLASK:
+    sys.path.insert(0, HERE)
+    import ec_artflask_geom as AF
+    FILL_ARTS = ["FireBall/ArtFireBall", "Flame/ArtFlame", "SnowFlake/ArtSnowFlake", "JellyFish/ArtJellyFish",
+                 "NightStar/ArtNightStar", "Compass/ArtCompass", "Soul/ArtSoul", "Monolit/ArtMonolit",
+                 "Gravy/ArtGravy", "Spring/ArtSpring"]
+    _steel = "vb_echoclothes\\exo_set\\backpacks\\exoprivod\\data\\vb_ec_steel_dark"
+    steel_m = make_material(_steel + "_co.paa", _steel + ".rvmat", False)
+    glass_m = bpy.data.materials.new("flask_glass")
+    glass_m.use_nodes = True
+    _g = glass_m.node_tree.nodes["Principled BSDF"]
+    _g.inputs["Base Color"].default_value = (0.82, 0.9, 0.92, 1)
+    _g.inputs["Transmission Weight"].default_value = 1.0
+    _g.inputs["Roughness"].default_value = 0.03
+    _g.inputs["IOR"].default_value = 1.45
+    ring_on = neon_mat("cell_on", (1.0, 0.06, 0.08), 16 if NIGHT else 8)
+    ring_off = metal_mat("cell_off", (0.1, 0.1, 0.11), 0.45, 0.6)
+
+    def add_mesh(name, m, mat, off):
+        P = d2b_arr(np.array(m.pts) + off)
+        me = bpy.data.meshes.new(name)
+        me.from_pydata(P.tolist(), [], [list(f) for f in m.faces])
+        uvl = me.uv_layers.new(name="UV")
+        luv = []
+        for f in m.faces:
+            for vi in f:
+                luv.extend([m.uv[vi][0], m.uv[vi][1]])
+        uvl.data.foreach_set("uv", luv)
+        me.materials.append(mat)
+        me.update()
+        ob = bpy.data.objects.new(name, me)
+        scene.collection.objects.link(ob)
+        all_pts.append(P)
+        return ob
+
+    def add_artifact(rel, R, t):
+        """Модель артефакта OOTS (ODOL) в точке прокси: начало модели -> t, оси модели -> столбцы R."""
+        path = os.path.join(ART_ROOT, "DD_Artifacts", "model", "Artifacts", *rel.split("/")) + ".p3d"
+        lod = odol_read.read_visual_lod(path, 0)
+        skip = set()
+        for s in lod["selections"]:
+            if s["name"].lower().startswith("proxy:"):
+                skip.update(s["face_set"])
+        RAW = np.array(lod["points"], dtype=np.float64) @ R.T + t
+        P = d2b_arr(RAW)
+        N = d2b_arr(np.array(lod["normals"], dtype=np.float64) @ R.T)
+        UV = np.array(lod["uv"], dtype=np.float64)
+        faces, src = [], []
+        for fi, f in enumerate(lod["faces"]):
+            if fi not in skip and len(set(f)) == len(f) >= 3:
+                faces.append(list(f))
+                src.append(fi)
+        agree = sum(1 if np.dot(np.cross(P[f[1]] - P[f[0]], P[f[2]] - P[f[0]]), N[f[0]] + N[f[1]] + N[f[2]]) > 0
+                    else -1 for f in faces[:4000])
+        if agree < 0:
+            faces = [f[::-1] for f in faces]
+        me = bpy.data.meshes.new(rel)
+        me.from_pydata(P.tolist(), [], faces)
+        uvl = me.uv_layers.new(name="UV")
+        luv = []
+        for f in faces:
+            for vi in f:
+                luv.extend([UV[vi, 0], 1.0 - UV[vi, 1]])
+        uvl.data.foreach_set("uv", luv)
+        mats, keys = {}, []
+        for fi in src:
+            key = (lod["face_tex"][fi] or "", lod["face_mat"][fi] or "")
+            if key not in mats:
+                mats[key] = len(mats)
+                mt = make_material(key[0], key[1], False)
+                rp = resolve(key[1]) if key[1] else None          # свечение артефакта (emmisive в rvmat)
+                em = None
+                if rp:
+                    try:
+                        em = rvmat_read.read_rvmat(rp).get("emmisive")
+                    except Exception:
+                        em = None
+                if em and max(em[:3]) > 0:
+                    b = mt.node_tree.nodes["Principled BSDF"]
+                    b.inputs["Emission Color"].default_value = (em[0], em[1], em[2], 1)
+                    b.inputs["Emission Strength"].default_value = 2.5 if NIGHT else 1.2
+                me.materials.append(mt)
+            keys.append(mats[key])
+        me.polygons.foreach_set("material_index", keys)
+        me.polygons.foreach_set("use_smooth", [True] * len(faces))
+        me.update()
+        ob = bpy.data.objects.new(rel, me)
+        scene.collection.objects.link(ob)
+
+    kinds = list(AF.KINDS) if FLASK == "all" else [FLASK]
+    ART_SCALE = float(opts.get("art_scale", 1.0))      # --art_scale=0.6 — артефакты уменьшены, колбы меньше
+    art_i = 0
+    for ki, kind in enumerate(kinds):
+        # несколько колб — рядом вдоль бедра (z), каждая на своём месте
+        off = np.array([0.0, 0.0, (ki - (len(kinds) - 1) / 2) * 0.6 * max(ART_SCALE, 0.7)]) if len(kinds) > 1 \
+            else np.zeros(3)
+        b = AF.build(kind, art_scale=ART_SCALE)
+        fill = int(opts.get("flask_fill", {"small": 1, "medium": 3, "large": 6}[kind]))
+        add_mesh("flask_steel_" + kind, b["steel"], steel_m, off)
+        add_mesh("flask_glass_" + kind, b["glass"], glass_m, off)
+        for ci, (cm, (R, t)) in enumerate(zip(b["cells"], b["proxies"])):
+            on = ci < fill
+            add_mesh("flask_cell_%s_%d" % (kind, ci), cm, ring_on if on else ring_off, off)
+            if on:
+                add_artifact(FILL_ARTS[art_i % len(FILL_ARTS)], R * ART_SCALE, t + off)
+                art_i += 1
+        lo_, hi_ = b["hull"]
+        print("FLASK", kind, "ячеек", len(b["cells"]), "занято", min(fill, len(b["cells"])),
+              "размер см", np.round((hi_ - lo_) * 100, 1).tolist())
+
 # ---------------------------------------------------------------- свет, камера, ракурсы
 ALL = np.vstack(all_pts)
 lo, hi = ALL.min(0), ALL.max(0)
@@ -839,8 +961,10 @@ for gi, pos in LABELS:                             # номера трубок (
     lo_.show_in_front = True
     scene.collection.objects.link(lo_)
 height = float(hi[2] - lo[2])
-dist = height * 2.1 if PARTS == "all" else max(float(np.linalg.norm(hi - lo)) * 2.2, 1.2)
-AZ = {"front": 0, "back": 180, "left": 90, "right": -90, "front34": 30, "back34": 150}
+dist = height * 2.1 if PARTS == "all" and not FLASK_ONLY else max(float(np.linalg.norm(hi - lo)) * 2.2, 1.2)
+# «lside»/«lfront34» — левый бок персонажа (камера в -x DayZ): колбы на левом бедре
+AZ = {"front": 0, "back": 180, "left": 90, "right": -90, "front34": 30, "back34": 150, "lside": -90,
+      "lfront34": -40, "lback34": -140}
 os.makedirs(OUTDIR, exist_ok=True)
 for v in VIEWS:
     az = math.radians(AZ.get(v, 180))

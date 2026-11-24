@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_USBadapter : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_USBadapter_displayName";
-descriptionShort = "#EFT_USBadapter_descriptionShort";
+displayName = "$STR_EFT_USBadapter_displayName";
+descriptionShort = "$STR_EFT_USBadapter_descriptionShort";
 		model = "EFT\barter\USBadapter\EFT_USBadapter.p3d";
 		isMeleeWeapon = 1;
 		weight = 400;

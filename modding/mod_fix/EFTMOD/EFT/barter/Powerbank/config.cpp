@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Powerbank : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Powerbank_displayName";
-descriptionShort = "#EFT_Powerbank_descriptionShort";
+displayName = "$STR_EFT_Powerbank_displayName";
+descriptionShort = "$STR_EFT_Powerbank_descriptionShort";
 		model = "EFT\barter\Powerbank\EFT_Powerbank.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;

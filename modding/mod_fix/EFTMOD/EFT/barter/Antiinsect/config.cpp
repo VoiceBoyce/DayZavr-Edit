@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Antiinsect : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Antiinsect_displayName";
-		descriptionShort = "#EFT_Antiinsect_descriptionShort";
+		displayName = "$STR_EFT_Antiinsect_displayName";
+		descriptionShort = "$STR_EFT_Antiinsect_descriptionShort";
 		model = "EFT\barter\Antiinsect\EFT_Antiinsect.p3d";
 		isMeleeWeapon = 1;
 		weight = 500;

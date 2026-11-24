@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Sewing : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Sewing_displayName";
-descriptionShort = "#EFT_Sewing_descriptionShort";
+displayName = "$STR_EFT_Sewing_displayName";
+descriptionShort = "$STR_EFT_Sewing_descriptionShort";
 		model = "EFT\barter\Sewing\EFT_Sewing.p3d";
 		isMeleeWeapon = 1;
 		weight = 360;

@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_LCD_worker : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_LCD_worker_displayName";
-descriptionShort = "#EFT_LCD_worker_descriptionShort";
+displayName = "$STR_EFT_LCD_worker_displayName";
+descriptionShort = "$STR_EFT_LCD_worker_descriptionShort";
 		model = "EFT\barter\LCD_worker\EFT_LCD_worker.p3d";
 		isMeleeWeapon = 1;
 		weight = 50;

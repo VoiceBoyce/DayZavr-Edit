@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_GP : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_GP_displayName";
-		descriptionShort = "#EFT_GP_descriptionShort";
+		displayName = "$STR_EFT_GP_displayName";
+		descriptionShort = "$STR_EFT_GP_descriptionShort";
 		model = "EFT\barter\GP\EFT_GP.p3d";
 		isMeleeWeapon = 1;
 		weight = 10;

@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_model_nuts : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_model_nuts_displayName";
-descriptionShort = "#EFT_model_nuts_descriptionShort";
+displayName = "$STR_EFT_model_nuts_displayName";
+descriptionShort = "$STR_EFT_model_nuts_descriptionShort";
 		model = "EFT\barter\nuts\EFT_model_nuts.p3d";
 		isMeleeWeapon = 1;
 		weight = 400;

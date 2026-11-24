@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Iridium : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Iridium_displayName";
-		descriptionShort = "#EFT_Iridium_descriptionShort";
+		displayName = "$STR_EFT_Iridium_displayName";
+		descriptionShort = "$STR_EFT_Iridium_descriptionShort";
 		model = "EFT\barter\Iridium\EFT_Iridium.p3d";
 		isMeleeWeapon = 1;
 		weight = 210;

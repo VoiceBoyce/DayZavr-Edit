@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_zibbo : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_zibbo_displayName";
-		descriptionShort = "#EFT_zibbo_descriptionShort";
+		displayName = "$STR_EFT_zibbo_displayName";
+		descriptionShort = "$STR_EFT_zibbo_descriptionShort";
 		model = "EFT\barter\zibbo\EFT_zibbo.p3d";
 		isMeleeWeapon = 1;
 		weight = 100;

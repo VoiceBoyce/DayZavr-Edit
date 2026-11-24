@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_q_ProtectedCase0013 : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_q_ProtectedCase0013_displayName";
-descriptionShort = "#EFT_q_ProtectedCase0013_descriptionShort";
+displayName = "$STR_EFT_q_ProtectedCase0013_displayName";
+descriptionShort = "$STR_EFT_q_ProtectedCase0013_descriptionShort";
 		model = "EFT\barter\ProtectedCase\EFT_ProtectedCase.p3d";
 		isMeleeWeapon = 1;
 		weight = 100;
@@ -33,8 +33,8 @@ descriptionShort = "#EFT_q_ProtectedCase0013_descriptionShort";
 	
 	class EFT_q_ProtectedCase0022 : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_q_ProtectedCase0022_displayName";
-descriptionShort = "#EFT_q_ProtectedCase0022_descriptionShort";
+displayName = "$STR_EFT_q_ProtectedCase0022_displayName";
+descriptionShort = "$STR_EFT_q_ProtectedCase0022_descriptionShort";
 		model = "EFT\barter\ProtectedCase\EFT_ProtectedCase.p3d";
 		isMeleeWeapon = 1;
 		weight = 100;
@@ -54,8 +54,8 @@ descriptionShort = "#EFT_q_ProtectedCase0022_descriptionShort";
 	
 	class EFT_q_ProtectedCase0031 : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_q_ProtectedCase0031_displayName";
-descriptionShort = "#EFT_q_ProtectedCase0031_descriptionShort";
+displayName = "$STR_EFT_q_ProtectedCase0031_displayName";
+descriptionShort = "$STR_EFT_q_ProtectedCase0031_descriptionShort";
 		model = "EFT\barter\ProtectedCase\EFT_ProtectedCase.p3d";
 		isMeleeWeapon = 1;
 		weight = 100;
@@ -75,8 +75,8 @@ descriptionShort = "#EFT_q_ProtectedCase0031_descriptionShort";
 	
 	class EFT_q_ProtectedCase0048 : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_q_ProtectedCase0048_displayName";
-descriptionShort = "#EFT_q_ProtectedCase0048_descriptionShort";
+displayName = "$STR_EFT_q_ProtectedCase0048_displayName";
+descriptionShort = "$STR_EFT_q_ProtectedCase0048_descriptionShort";
 		model = "EFT\barter\ProtectedCase\EFT_ProtectedCase.p3d";
 		isMeleeWeapon = 1;
 		weight = 100;
@@ -96,8 +96,8 @@ descriptionShort = "#EFT_q_ProtectedCase0048_descriptionShort";
 	// made by intenso
 	class EFT_q_ProtectedCase0052 : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_q_ProtectedCase0052_displayName";
-descriptionShort = "#EFT_q_ProtectedCase0052_descriptionShort";
+displayName = "$STR_EFT_q_ProtectedCase0052_displayName";
+descriptionShort = "$STR_EFT_q_ProtectedCase0052_descriptionShort";
 		model = "EFT\barter\ProtectedCase\EFT_ProtectedCase.p3d";
 		isMeleeWeapon = 1;
 		weight = 100;
@@ -117,8 +117,8 @@ descriptionShort = "#EFT_q_ProtectedCase0052_descriptionShort";
 	
 	class EFT_q_ProtectedCase0060 : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_q_ProtectedCase0060_displayName";
-descriptionShort = "#EFT_q_ProtectedCase0060_descriptionShort";
+displayName = "$STR_EFT_q_ProtectedCase0060_displayName";
+descriptionShort = "$STR_EFT_q_ProtectedCase0060_descriptionShort";
 		model = "EFT\barter\ProtectedCase\EFT_ProtectedCase.p3d";
 		isMeleeWeapon = 1;
 		weight = 100;

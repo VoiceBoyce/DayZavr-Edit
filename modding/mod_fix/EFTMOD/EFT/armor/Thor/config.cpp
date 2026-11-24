@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_Vest_Thor_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "#EFT_Vest_Thor_displayName";
-		descriptionShort = "#EFT_Vest_Thor_descriptionShort";
+		displayName = "$STR_EFT_Vest_Thor_displayName";
+		descriptionShort = "$STR_EFT_Vest_Thor_descriptionShort";
 		model = "EFT\armor\Thor\Thor_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Nails_pack : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Nails_pack_displayName";
-descriptionShort = "#EFT_Nails_pack_descriptionShort";
+displayName = "$STR_EFT_Nails_pack_displayName";
+descriptionShort = "$STR_EFT_Nails_pack_descriptionShort";
 		model = "EFT\barter\Nails_pack\EFT_Nails_pack.p3d";
 		isMeleeWeapon = 1;
 		weight = 600;

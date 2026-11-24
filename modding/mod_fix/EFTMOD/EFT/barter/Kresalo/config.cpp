@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Kresalo : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Kresalo_displayName";
-descriptionShort = "#EFT_Kresalo_descriptionShort";
+displayName = "$STR_EFT_Kresalo_displayName";
+descriptionShort = "$STR_EFT_Kresalo_descriptionShort";
 		model = "EFT\barter\Kresalo\EFT_Kresalo.p3d";
 		isMeleeWeapon = 1;
 		weight = 500;

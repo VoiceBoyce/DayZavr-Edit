@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Uzrgm : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_Uzrgm_displayName";
-descriptionShort = "#EFT_Uzrgm_descriptionShort";
+displayName = "$STR_EFT_Uzrgm_displayName";
+descriptionShort = "$STR_EFT_Uzrgm_descriptionShort";
 		model = "EFT\barter\Uzrgm\EFT_Uzrgm.p3d";
 		isMeleeWeapon = 1;
 		weight = 55;

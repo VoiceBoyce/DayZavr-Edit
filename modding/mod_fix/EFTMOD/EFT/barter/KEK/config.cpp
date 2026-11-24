@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_KEK : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_KEK_displayName";
-		descriptionShort = "#EFT_KEK_descriptionShort";
+		displayName = "$STR_EFT_KEK_displayName";
+		descriptionShort = "$STR_EFT_KEK_descriptionShort";
 		model = "EFT\barter\KEK\EFT_KEK.p3d";
 		isMeleeWeapon = 1;
 		weight = 150;

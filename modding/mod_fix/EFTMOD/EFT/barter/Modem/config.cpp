@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Modem : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Modem_displayName";
-		descriptionShort = "#EFT_Modem_descriptionShort";
+		displayName = "$STR_EFT_Modem_displayName";
+		descriptionShort = "$STR_EFT_Modem_descriptionShort";
 		model = "EFT\barter\Modem\EFT_Modem.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;

@@ -20,8 +20,8 @@ class CfgVehicles
 	class EFT_SHPM_ColorBase: Clothing
 	{
 		scope=0;
-		displayName="#EFT_SHPM_v_displayName";
-		descriptionShort="#EFT_SHPM_v_descriptionShort";
+		displayName="$STR_EFT_SHPM_v_displayName";
+		descriptionShort="$STR_EFT_SHPM_v_descriptionShort";
 		model="EFT\Head\EFT_SHPM\EFT_SHPM_g.p3d";
 		repairableWithKits[]={8};
 		repairCosts[]={50};

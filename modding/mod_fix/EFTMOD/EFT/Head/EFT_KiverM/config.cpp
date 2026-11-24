@@ -20,8 +20,8 @@ class CfgVehicles
 	class EFT_KiverM_ColorBase: Clothing
 	{
 		scope=0;
-		displayName="#EFT_KiverM_displayName";
-		descriptionShort="#EFT_KiverM_descriptionShort";
+		displayName="$STR_EFT_KiverM_displayName";
+		descriptionShort="$STR_EFT_KiverM_descriptionShort";
 		model="EFT\Head\EFT_KiverM\EFT_KiverM_g.p3d";
 		repairableWithKits[]={8};
 		repairCosts[]={50};

@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_Cooler : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_Cooler_displayName";
-		descriptionShort = "#EFT_Cooler_descriptionShort";
+		displayName = "$STR_EFT_Cooler_displayName";
+		descriptionShort = "$STR_EFT_Cooler_descriptionShort";
 		model = "EFT\barter\Cooler\EFT_Cooler.p3d";
 		isMeleeWeapon = 1;
 		weight = 100;

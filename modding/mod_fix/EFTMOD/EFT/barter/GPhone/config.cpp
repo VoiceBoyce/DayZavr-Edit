@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_GPhone : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_GPhone_displayName";
-		descriptionShort = "#EFT_GPhone_descriptionShort";
+		displayName = "$STR_EFT_GPhone_displayName";
+		descriptionShort = "$STR_EFT_GPhone_descriptionShort";
 		model = "EFT\barter\GPhone\EFT_GPhone.p3d";
 		isMeleeWeapon = 1;
 		weight = 300;
@@ -33,8 +33,8 @@ class CfgVehicles {
 	
 	class EFT_GPhone_G : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_GPhone_G_displayName";
-		descriptionShort = "#EFT_GPhone_G_descriptionShort";
+		displayName = "$STR_EFT_GPhone_G_displayName";
+		descriptionShort = "$STR_EFT_GPhone_G_descriptionShort";
 		model = "EFT\barter\GPhone\EFT_GPhone_G.p3d";
 		isMeleeWeapon = 1;
 		weight = 350;

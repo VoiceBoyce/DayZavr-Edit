@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_PowerFilter : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_PowerFilter_displayName";
-descriptionShort = "#EFT_PowerFilter_descriptionShort";
+displayName = "$STR_EFT_PowerFilter_displayName";
+descriptionShort = "$STR_EFT_PowerFilter_descriptionShort";
 		model = "EFT\barter\PowerFilter\EFT_PowerFilter.p3d";
 		isMeleeWeapon = 1;
 		weight = 200;

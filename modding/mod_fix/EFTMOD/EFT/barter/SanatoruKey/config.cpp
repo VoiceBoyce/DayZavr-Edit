@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_SanatoruKey : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_SanatoruKey_displayName";
-descriptionShort = "#EFT_SanatoruKey_descriptionShort";
+displayName = "$STR_EFT_SanatoruKey_displayName";
+descriptionShort = "$STR_EFT_SanatoruKey_descriptionShort";
 		model = "EFT\barter\SanatoruKey\EFT_SanatoruKey.p3d";
 		isMeleeWeapon = 1;
 		weight = 20;

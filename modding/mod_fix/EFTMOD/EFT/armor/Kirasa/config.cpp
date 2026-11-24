@@ -14,8 +14,8 @@ class CfgVehicles
 	class EFT_Vest_Kirasa_ColorBase: Clothing
 	{
 		scope = 0;
-		displayName = "#EFT_Vest_Kirasa_displayName";
-		descriptionShort = "#EFT_Vest_Kirasa_descriptionShort";
+		displayName = "$STR_EFT_Vest_Kirasa_displayName";
+		descriptionShort = "$STR_EFT_Vest_Kirasa_descriptionShort";
 		model = "EFT\armor\Kirasa\Kirasa_g.p3d";
 		inventorySlot[] = {"Vest"};
 		itemInfo[] = {"Clothing","Vest"};

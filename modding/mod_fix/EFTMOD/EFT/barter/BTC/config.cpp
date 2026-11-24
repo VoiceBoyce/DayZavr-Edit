@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_BTC : Inventory_Base {
 		scope = 2;
-		displayName = "#EFT_BTC_displayName";
-		descriptionShort = "#EFT_BTC_descriptionShort";
+		displayName = "$STR_EFT_BTC_displayName";
+		descriptionShort = "$STR_EFT_BTC_descriptionShort";
 		model = "EFT\barter\BTC\EFT_BTC.p3d";
 		isMeleeWeapon = 1;
 		weight = 10;

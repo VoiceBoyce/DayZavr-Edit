@@ -14,8 +14,8 @@ class CfgVehicles
 	class MountainBag_ColorBase;
 	class EFT_bag_Paratus_ColorBase : MountainBag_ColorBase {
 		scope = 0;
-		displayName = "#EFT_bag_Paratus_displayName";
-		descriptionShort = "#EFT_bag_Paratus_descriptionShort";
+		displayName = "$STR_EFT_bag_Paratus_displayName";
+		descriptionShort = "$STR_EFT_bag_Paratus_descriptionShort";
 		model = "EFT\Bags\Paratus\Paratus_g.p3d";
 		inventorySlot[] = {"Back"};
 		attachments[] = {};

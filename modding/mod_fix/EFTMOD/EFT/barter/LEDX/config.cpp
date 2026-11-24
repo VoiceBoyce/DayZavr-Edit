@@ -12,8 +12,8 @@ class CfgVehicles {
 	
 	class EFT_LEDX : Inventory_Base {
 		scope = 2;
-displayName = "#EFT_LEDX_displayName";
-descriptionShort = "#EFT_LEDX_descriptionShort";
+displayName = "$STR_EFT_LEDX_displayName";
+descriptionShort = "$STR_EFT_LEDX_descriptionShort";
 		model = "EFT\barter\LEDX\EFT_LEDX.p3d";
 		isMeleeWeapon = 1;
 		weight = 200;
