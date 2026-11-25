@@ -688,6 +688,59 @@ class VB_EchoRunner extends CarScript
 		return VB_ThrustOf(m_VB_InFwd, m_VB_InTurn, m_VB_InUp);
 	}
 
+#ifdef DIAG_DEVELOPER
+	// стенд (Баги №60): раз в 2 с — где колесо в физике (WheelGetPositionLS) и где нарисовано (кость колеса), фаза damper
+	protected float m_VB_SuspDiagT;
+	protected void VB_SuspDiag(float dt)
+	{
+		m_VB_SuspDiagT += dt;
+		if (m_VB_SuspDiagT < 0.5)
+			return;
+		m_VB_SuspDiagT = 0;
+		// колёса движка: 0 левое переднее, 1 правое переднее, 2 левое заднее, 3 правое заднее (Car.c); касание — в осях модели
+		string s = "[VB_ER] подвеска v" + GetSpeedometerAbsolute();
+		TStringArray wtag = {"1_1", "2_1", "1_2", "2_2"};
+		for (int w = 0; w < WheelCount() && w < 4; w++)
+		{
+			string cy = "-";
+			if (WheelHasContact(w))
+			{
+				vector cp = WorldToModel(WheelGetContactPosition(w));
+				cy = cp[1].ToString();
+			}
+			s = s + " | k" + wtag[w] + " " + cy;
+		}
+		TStringArray src = {"wheelfrontleft", "wheelbackleft", "wheelfrontright", "wheelbackright"};
+		TStringArray tag = {"1_1", "1_2", "2_1", "2_2"};
+		TIntArray levels = {GetViewGeometryLevel(), GetFireGeometryLevel(), GetGeometryLevel(), 0};
+		TIntArray pv = new TIntArray();
+		for (int i = 0; i < 4; i++)
+		{
+			int pivot = -1;
+			foreach (int lvl : levels)
+			{
+				if (lvl < 0 || pivot >= 0)
+					continue;
+				pv.Clear();
+				GetBonePivotsForAnimationSource(lvl, src[i], pv);
+				if (pv.Count() > 0)
+					pivot = pv[0];
+			}
+			vector c = GetMemoryPointPos("wheel_" + tag[i] + "_axis");
+			string vis = "-";
+			if (pivot >= 0)
+			{
+				vector m[4];
+				GetBoneTransformMS(pivot, m);
+				vector v = m[0] * c[0] + m[1] * c[1] + m[2] * c[2] + m[3];
+				vis = v[1].ToString();
+			}
+			s = s + " | " + tag[i] + " p " + GetAnimationPhase("damper_" + tag[i]) + " рис " + vis;
+		}
+		Print(s);
+	}
+#endif
+
 	override void EOnPostFrame(IEntity other, int extra)
 	{
 		super.EOnPostFrame(other, extra);
@@ -696,6 +749,9 @@ class VB_EchoRunner extends CarScript
 		float now = GetGame().GetTickTime();
 		float dt = Math.Clamp(now - m_VB_FxTime, 0, 0.1);
 		m_VB_FxTime = now;
+#ifdef DIAG_DEVELOPER
+		VB_SuspDiag(dt);
+#endif
 		if (!m_VB_ModulesFitted && m_VB_Fx.GetSpin() <= 0)
 			return;
 		if (m_VB_ModulesFitted)

@@ -313,6 +313,12 @@ ITEMS = '''
 				animPeriod=0.01;
 				initPhase=0.5;		// фаза 0..1, 0.5 — ровно (user-источник отрицательные режет)
 			};
+			class unspin
+			{
+				source="user";
+				animPeriod=0.01;
+				initPhase=0;		// Баги №61: поворот модуля обратно на угол колеса (кость hub, VB_EchoRunnerFx)
+			};
 		};
 		class DamageSystem
 		{

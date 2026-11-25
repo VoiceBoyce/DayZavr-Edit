@@ -19,6 +19,8 @@ import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import er_common as C  # noqa: E402
+import er_modelcfg_fix  # noqa: E402
+import er_gravmodule_hub  # noqa: E402
 from er_geom import Part, V, box, part_data, append  # noqa: E402
 
 py3d = C.py3d
@@ -236,6 +238,7 @@ def model_cfg():
 };"""
     i = src.rstrip().rfind("};")
     src = src[:i].rstrip() + "\n" + extra + "\n"
+    src = er_modelcfg_fix.apply(src)        # Баги №60 (подвеска: видимое колесо = физическое), №61 (vb_unspin_*)
     return head + src.split("\n", 1)[1] if src.startswith("//") else head + src
 
 
@@ -256,6 +259,7 @@ def main():
     gm = os.path.join(WD, "proxy", "vb_er_gravmodule.p3d")          # tools/er_gravmodule.py (этап 8)
     if os.path.isfile(gm):
         shutil.copy2(gm, os.path.join(SRC, "proxy", "vb_er_gravmodule.p3d"))
+        er_gravmodule_hub.patch(os.path.join(SRC, "proxy", "vb_er_gravmodule.p3d"))   # кость hub, ось hub_axis (№61)
     with open(os.path.join(SRC, "model.cfg"), "w", encoding="utf-8", newline="\r\n") as f:
         f.write(model_cfg())
     print("OK", SRC)

@@ -222,6 +222,12 @@ class VB_EchoRunnerFx : Managed
 			// фаза user-источника — только 0..1 (отрицательные движок режет в 0): 0.5 — ровно, 0/1 — ±25°
 			mod.SetAnimationPhaseNow("tilt_x", (m_TiltX[i] + 1.0) * 0.5);
 			mod.SetAnimationPhaseNow("tilt_z", (m_TiltZ[i] + 1.0) * 0.5);
+			// Баги №61: модуль висит на кости колеса машины, а она после езды держит угол прокрутки — гасим его своей
+			// корневой костью hub (ось колеса). Колесо крутится на +v вокруг −x модели машины; у модуля слева (side −1)
+			// ось +x совпадает с +x машины — обратно +v, справа прокси повёрнут на 180° — обратно −v. Только источник
+			// модуля: свои источники машины ломали двери (E130).
+			float un = -side * car.GetAnimationPhase(WheelSource(i)) / Math.PI2;
+			mod.SetAnimationPhaseNow("unspin", un - Math.Floor(un));
 			UpdateLight(i, mod, park, driven);
 			UpdatePtc(i, mod, driven && m_Air, hv);
 		}
@@ -236,9 +242,21 @@ class VB_EchoRunnerFx : Managed
 			Print("[VB_ER] gear " + car.GetGear() + " mode " + car.GearboxGetMode() + " rpm " + car.EngineGetRPM() + " wfl " + car.GetAnimationPhase("wheelfrontleft") + " wbl " + car.GetAnimationPhase("wheelbackleft") + " wfr " + car.GetAnimationPhase("wheelfrontright") + " wbr " + car.GetAnimationPhase("wheelbackright") + " tilt " + m_TiltX[1] + " " + m_TiltX[3]);
 			EntityAI m1 = car.VB_ModuleAt(1);
 			if (m1)
-				Print("[VB_ER] поза " + VB_ERDebug.s_TiltTest + " модуль 1: записано x " + ((m_TiltX[1] + 1.0) * 0.5) + " z " + ((m_TiltZ[1] + 1.0) * 0.5) + " rotor " + m_Phase + " spin " + m_SpinPhase + "; прочитано x " + m1.GetAnimationPhase("tilt_x") + " z " + m1.GetAnimationPhase("tilt_z") + " rotor " + m1.GetAnimationPhase("rotor") + " rotor_b " + m1.GetAnimationPhase("rotor_b") + " spin " + m1.GetAnimationPhase("spin"));
+				Print("[VB_ER] поза " + VB_ERDebug.s_TiltTest + " модуль 1: записано x " + ((m_TiltX[1] + 1.0) * 0.5) + " z " + ((m_TiltZ[1] + 1.0) * 0.5) + " rotor " + m_Phase + " spin " + m_SpinPhase + "; прочитано x " + m1.GetAnimationPhase("tilt_x") + " z " + m1.GetAnimationPhase("tilt_z") + " rotor " + m1.GetAnimationPhase("rotor") + " rotor_b " + m1.GetAnimationPhase("rotor_b") + " spin " + m1.GetAnimationPhase("spin") + " unspin " + m1.GetAnimationPhase("unspin"));
 		}
 #endif
+	}
+
+	// источник прокрутки колеса слота (порядок m_VB_WheelSlots: 1_1, 1_2, 2_1, 2_2), радианы 0..2π
+	protected string WheelSource(int i)
+	{
+		if (i == 0)
+			return "wheelfrontleft";
+		if (i == 1)
+			return "wheelbackleft";
+		if (i == 2)
+			return "wheelfrontright";
+		return "wheelbackright";
 	}
 
 	// красный свет под модулем + марево (подушка): на стоянке слабее
@@ -405,6 +423,7 @@ class VB_EchoRunnerFx : Managed
 			return;
 		mod.SetAnimationPhaseNow("tilt_x", 0.5);
 		mod.SetAnimationPhaseNow("tilt_z", 0.5);
+		mod.SetAnimationPhaseNow("unspin", 0);		// №61: снятый модуль не должен лежать повёрнутым
 	}
 
 	void Stop()
