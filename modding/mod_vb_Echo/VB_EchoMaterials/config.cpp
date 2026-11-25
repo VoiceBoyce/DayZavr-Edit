@@ -2,18 +2,46 @@
 // пользователем 11-24: 7 появляются в мире (types/события), 7 крафтятся на верстаке DRL. Своей логики нет — только
 // предметы. Модели и текстуры — tools/em_models.py, tools/em_tex.py (собирать pbo.ps1 -Binarize).
 // Отдельный мод @VB_EchoMaterials, ни от чего не зависит (решение пользователя 11-24: по раскладке ТЗ_VB_Echo ядро —
-// только энергия). Новые материалы следующих уровней добавлять сюда же.
+// только энергия). Новые материалы следующих уровней добавлять сюда же. Мод УНИВЕРСАЛЬНЫЙ, не только под 16
+// (пользователь 11-25): обычные детали без свечения; «Эхо» в текстах — название энергии по лору 16.
 
 class CfgPatches
 {
 	class VB_EchoMaterials
 	{
-		units[]={"VB_EM_ArmorPlate","VB_EM_CarbonProfile","VB_EM_ServoMotor","VB_EM_HydraulicCylinder","VB_EM_EchoShard",
+		units[]={"VB_EM_ArmorPlate","VB_EM_CarbonProfile","VB_EM_ServoMotor","VB_EM_HydraulicCylinder","VB_EM_CopperSpool",
 			"VB_EM_ShockAbsorber","VB_EM_ECU","VB_EM_DamperPad","VB_EM_ExoController","VB_EM_EchoConduit",
 			"VB_EM_ResonanceCoil","VB_EM_PowerFrame","VB_EM_BodyPanel","VB_EM_ArmorGlass"};
 		weapons[]={};
 		requiredVersion=0.1;
 		requiredAddons[]={"DZ_Data","DZ_Scripts"};
+	};
+};
+// Скрипты — только хват крупных материалов двумя руками (VB_EM_Hands.c, 11-25)
+class CfgMods
+{
+	class VB_EchoMaterials
+	{
+		dir="VB_EchoMaterials";
+		picture="";
+		action="";
+		hideName=1;
+		hidePicture=1;
+		name="VB_EchoMaterials";
+		credits="DayZavr";
+		author="DayZavr";
+		version="1";
+		extra=0;
+		type="mod";
+		dependencies[]={"World"};
+		class defs
+		{
+			class worldScriptModule
+			{
+				value="";
+				files[]={"VB_EchoMaterials/scripts/4_World"};
+			};
+		};
 	};
 };
 class CfgVehicles
@@ -73,21 +101,15 @@ class CfgVehicles
 		weight=2500;
 		itemSize[]={4,1};
 	};
-	class VB_EM_EchoShard: VB_EM_Base
+	// 11-25 вместо «Осколка Эхо» (пользователь: нужно приземлённое; мод универсальный, не только под 16)
+	class VB_EM_CopperSpool: VB_EM_Base
 	{
 		scope=2;
-		displayName="$STR_VB_EM_EchoShard";
-		descriptionShort="$STR_VB_EM_EchoShard_disc";
-		model="VB_EchoMaterials\data\em_shard.p3d";
-		weight=0;
-		weightPerQuantityUnit=150;	// у Inventory_Base по умолчанию 1 г на единицу (E123)
-		itemSize[]={1,1};
-		canBeSplit=1;
-		varQuantityInit=1;
-		varQuantityMin=0;
-		varQuantityMax=10;
-		varQuantityDestroyOnMin=1;
-		varStackMax=10;
+		displayName="$STR_VB_EM_CopperSpool";
+		descriptionShort="$STR_VB_EM_CopperSpool_disc";
+		model="VB_EchoMaterials\data\em_spool.p3d";
+		weight=1500;
+		itemSize[]={2,2};
 	};
 	class VB_EM_ShockAbsorber: VB_EM_Base
 	{
@@ -152,6 +174,7 @@ class CfgVehicles
 		model="VB_EchoMaterials\data\em_frame.p3d";
 		weight=8000;
 		itemSize[]={6,3};
+		itemBehaviour=0;	// тяжёлый, двумя руками (хват листового металла — VB_EM_Hands.c)
 	};
 	class VB_EM_BodyPanel: VB_EM_Base
 	{
@@ -161,6 +184,7 @@ class CfgVehicles
 		model="VB_EchoMaterials\data\em_panel.p3d";
 		weight=6000;
 		itemSize[]={7,4};
+		itemBehaviour=0;	// тяжёлый, двумя руками (хват листового металла — VB_EM_Hands.c)
 	};
 	class VB_EM_ArmorGlass: VB_EM_Base
 	{

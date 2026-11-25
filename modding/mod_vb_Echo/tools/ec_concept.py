@@ -43,6 +43,10 @@ SAMPLES = int(opts.get("samples", 96))
 NIGHT = bool(opts.get("night", False))
 PARTS = opts.get("parts", "all")
 TEX_ECHO = bool(opts.get("tex_echo", False))         # брать готовые ретекстуры *_echo_co.paa (этап 3а), где есть
+# --tex_pal=<палитра> --tex_dir=<папка> (вместе с --tex_echo) — превью расцветки: <имя>_<палитра>_co.png из папки
+# (ec_retex.py --palette=<палитра> --preview=<папка> --nopaa); где PNG нет — *_echo_co.paa
+TEX_PAL = opts.get("tex_pal", "")
+TEX_DIR = opts.get("tex_dir", "")
 # --built=<папка exo_set распакованного PBO> — сервопривод, маска и шлем из собранного мода (этап 3б: исходники MLOD);
 # --glow — свет собранной модели (выделение vbglow) включённым
 BUILT = opts.get("built")
@@ -111,6 +115,8 @@ def resolve(vpath):
 
 
 def paa_png(vpath):
+    if os.path.isabs(vpath) and vpath.lower().endswith(".png") and os.path.exists(vpath):   # превью расцветки
+        return vpath
     src = resolve(vpath)
     if not src:
         print("WARN нет текстуры", vpath)
@@ -482,7 +488,11 @@ for name, path, sels in SET:
         if TEX_ECHO and tx.lower().endswith(".paa"):
             base = tx[:-len("_co.paa")] if tx.lower().endswith("_co.paa") else tx[:-len(".paa")]
             tx2 = base + "_echo_co.paa"                 # у шлема исходник без _co: RoninHeavy_Black_echo_co.paa
-            if resolve(tx2):
+            png = os.path.join(TEX_DIR, base.replace("/", BS).split(BS)[-1] + "_" + TEX_PAL + "_co.png") \
+                if TEX_PAL and TEX_DIR else ""
+            if png and os.path.exists(png):            # превью расцветки (ec_retex.py --preview --nopaa)
+                tx = png
+            elif resolve(tx2):
                 tx = tx2
         s = by.get(sn)
         if not s:

@@ -42,15 +42,22 @@ IMAGE_TO_PAA = os.path.join("D:" + BS, "SteamLibrary", "steamapps", "common", "D
 # координатах файла 2048 (сверху вниз); no_accent — без окантовки (маска: бежевая кость — не кромка); wear — сила потёртости
 # fabric — слой ткани: (порог блеска G «ещё ткань», «уже не ткань») по _smdi рядом; dark — ещё и только тёмное
 # в исходнике (у маски блеска нет нигде: балаклава — ткань, светлая пластина черепа — нет)
+# Заливка дыр ткани (11-25, расцветки): блестящие пятна грязи OOTS посреди ткани маска считала «не тканью» — на чёрной
+# ткани не видно, на светлых расцветках выходили чёрные пятна. Дыра = не-ткань, не связанная с крупной сплошной деталью
+# (в ней помещается квадрат ~(2*fill_rs+1)*4 px) и без сильного блеска (fill_hard). fill_rs — меньше у вещей с мелкими
+# отдельными деталями (ремешки ботинок); fill_coarse=(c0, c1, R) — ещё и по среднему блеску в окне R (перчатки: грязь
+# там сплошная и крупная, а накладки костяшек блестят сильно)
 ITEMS = {
     "jacket": (os.path.join(CLOTHES, "Tops", "ExoJacket", "data"), "ExoJacket_co.paa", {"fabric": (0.03, 0.07)}),
     "pants": (os.path.join(CLOTHES, "Pants", "ExoPants", "data"), "ExoPants_co.paa", {"fabric": (0.03, 0.07)}),
     "vest": (os.path.join(CLOTHES, "Vest", "ExoVest", "data"), "ExoVest_co.paa",
              {"metal_k": 0.8, "emblem": (1235, 190, 1.0), "fabric": (0.03, 0.07)}),
     "gloves": (os.path.join(CLOTHES, "Gloves", "ExoGloves", "data"), "ExoGloves_co.paa",
-               {"metal_k": 1.0, "tape": True, "fabric": (0.01, 0.025)}),
+               {"metal_k": 1.0, "tape": True, "fabric": (0.01, 0.025), "fill_coarse": (0.045, 0.075, 16),
+                "fill_hard": (0.12, 0.2)}),
     "boots": (os.path.join(CLOTHES, "Boots", "ExoBoots", "data"), "ExoBoots_co.paa",
-              {"metal_k": 1.0, "fabric": (0.045, 0.06), "fabric_blur": 10}),     # пик ткани G 0,03–0,045
+              {"metal_k": 1.0, "fabric": (0.045, 0.06), "fabric_blur": 10, "fill_rs": 8,      # пик ткани G 0,03–0,045
+               "fabric_open": 40, "fabric_edge": 28}),
     "servo1": (os.path.join(CLOTHES, "Backpacks", "ExoPrivod", "data"), "ExoPrivod1_co.paa", {"metal_k": 0.8}),
     "servo2": (os.path.join(CLOTHES, "Backpacks", "ExoPrivod", "data"), "ExoPrivod2_co.paa", {"metal_k": 0.8}),
     "mask": (os.path.join(CLOTHES, "Mask", "MaskGhost", "Data"), "MaskGhost_co.paa",
@@ -73,6 +80,12 @@ PALETTES = {
         "paint": (0.50, 0.05, 0.06),
     },
 }
+# расцветки (утверждены пользователем 11-25): отличаются ТОЛЬКО тканью, всё остальное — как у echo (металл общий)
+# fabric_contrast — сила складок и потёртостей исходника на ткани (1 = как у echo; светлым — меньше)
+for _name, _fabric, _k in (("ranger", (0.155, 0.175, 0.125), 0.85),  # «Рейнджер» — тёмная олива, лес
+                           ("coyote", (0.44, 0.36, 0.25), 0.7),    # «Койот» — песочно-коричневая, степь/пустыня/осень
+                           ("arctic", (0.60, 0.62, 0.64), 0.55)):  # «Арктика» — светло-серая, почти белая, зима
+    PALETTES[_name] = dict(PALETTES["echo"], fabric=_fabric, fabric_contrast=_k)
 
 args = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 opts = {a.split("=", 1)[0][2:]: (a.split("=", 1)[1] if "=" in a else True) for a in args if a.startswith("--")}
@@ -149,22 +162,59 @@ def resample(a, h, w):
     return a[np.arange(h) * a.shape[0] // h][:, np.arange(w) * a.shape[1] // w]
 
 
+def fabric_holes(F, rs, k=4):
+    """Дыры маски ткани (0/1): не-ткань, не связанная с крупной сплошной деталью. Считается с шагом k px:
+    зерно — не-ткань, где квадрат (2*rs+1) целиком не-ткань; зерно растёт по не-ткани, пока растёт; всё, куда не
+    дошло, — дыра."""
+    h, w = F.shape
+    Fs = F[:h // k * k, :w // k * k].reshape(h // k, k, w // k, k).mean((1, 3))
+    non = Fs < 0.5
+    reach = (box_blur(non.astype(np.float64), rs) > 0.97) & non
+    while True:
+        new = (box_blur(reach.astype(np.float64), 1) > 1e-6) & non
+        if (new == reach).all():
+            break
+        reach = new
+    hole = (non & ~reach).astype(np.float64)
+    out = np.zeros_like(F)
+    out[:h // k * k, :w // k * k] = np.repeat(np.repeat(hole, k, 0), k, 1)
+    print("  дыры ткани (залиты): %.3f" % hole.mean())
+    return out
+
+
 def fabric_layer(out, L, prm, smdi_paa, exclude):
     """Слой ткани поверх базы (см. шапку). -> (out, маска F 0..1)."""
     h, w = L.shape
     # блеск, сглаженный — переплетение не рвёт маску; fabric_blur — окно побольше, где у кожи блеск пятнами (ботинки)
-    G = box_blur(resample(load(smdi_paa), h, w)[..., 1], prm.get("fabric_blur", 3))
+    G0 = resample(load(smdi_paa), h, w)[..., 1]
+    G = box_blur(G0, prm.get("fabric_blur", 3))
     t0, t1 = prm["fabric"]
     F = 1 - smooth(G, t0, t1)
     if prm.get("dark"):
         a, b = prm["dark"]
         F = F * (1 - smooth(box_blur(L, 3), a, b))
     F = smooth(box_blur(F, 2), 0.3, 0.7)                          # без дыр и одиночных точек, мягкий край 2–3 px
+    fill = fabric_holes(F, prm.get("fill_rs", 16))               # пятна грязи посреди ткани — тоже ткань (см. ITEMS)
+    if prm.get("fill_coarse"):
+        c0, c1, r = prm["fill_coarse"]
+        fill = np.maximum(fill, 1 - smooth(box_blur(G0, r), c0, c1))
+    fill = smooth(box_blur(fill, 6), 0.02, 0.25)                 # чуть шире дыры — без контура по её краю
+    h0, h1 = prm.get("fill_hard", (0.14, 0.22))
+    F = np.maximum(F, fill * (1 - smooth(box_blur(G0, 3), h0, h1)))
+    if prm.get("fabric_open"):                                  # без узких полос: светлые кромки кожи ботинок
+        r = prm["fabric_open"]                                   # (на чёрной ткани не видно, на светлой — белые линии)
+        core = smooth(box_blur(F, r), 0.85, 0.97)
+        F = np.minimum(F, smooth(box_blur(core, r + 3), 0.01, 0.15))
+    if prm.get("fabric_edge"):                                  # ткань — на fabric_edge px дальше от кожи: поля
+        r = prm["fabric_edge"]                                   # развёртки у края кожи иначе дают белую каёмку
+        F = F * (1 - smooth(box_blur((F < 0.5).astype(np.float64), r), 0.02, 0.2))
     F = F * (1 - exclude)
     lf = max(med(L, F * (L > 0.02), 0.2), 0.02)                  # пустые (чёрные) места развёртки — не в счёт
     Lb = box_blur(L, 2)
     # крупные складки и потёртости — по исходнику, мелкое переплетение приглушено, светлые точки ограничены
     ratio = np.clip(Lb / lf + 0.3 * (L - Lb) / lf, 0.55, 1.45)
+    # на светлой ткани тот же разброс яркости даёт пятнистость «грязи» — сила складок у палитры своя (11-25)
+    ratio = 1 + float(PAL.get("fabric_contrast", 1.0)) * (ratio - 1)
     fab = PAL["fabric"][None, None, :] * ratio[..., None]
     out = out * (1 - F[..., None]) + fab * F[..., None]
     print("  ткань: доля %.2f (с пустыми местами развёртки), медиана яркости ткани исходника %.3f" % (

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- @VB_EchoMaterials: материалы крафта брони экзоскелета и машин (16 сервер, список утверждён 11-24).
      Значения как у EFT-материалов 16 (_Types_Server_16/DayZavr/EFT_Items.xml): время жизни 8 ч, nominal 3–5.
-     Осколок Эхо в мире сам не появляется (nominal 0): его раздают события — бункеры Bubaku, нефтевышка, тайники 3–4
-     (настраивается при выкладке). Семь крафтовых — nominal 0, crafted 1, живут 14 дней.
+     Семь крафтовых — nominal 0, crafted 1, живут 14 дней. Мод универсальный (не только 16): usage — общие
+     ванильные Military/Industrial/Farm/Town.
      Для сервера: вставить в types (папка _Types_Server_16/DayZavr) при выкладке @VB_EchoMaterials. -->
 <types>
     <!-- ================= в мире -->
@@ -38,11 +38,14 @@
         <usage name="Industrial"/>
         <usage name="Farm"/>
     </type>
-    <!-- Осколок Эхо: только события (бункеры, нефтевышка, тайники) -->
-    <type name="VB_EM_EchoShard">
-        <nominal>0</nominal><lifetime>28800</lifetime><restock>0</restock><min>0</min><quantmin>-1</quantmin><quantmax>-1</quantmax><cost>100</cost>
+    <!-- Бухта медного провода (11-25 вместо осколка Эхо) -->
+    <type name="VB_EM_CopperSpool">
+        <nominal>5</nominal><lifetime>28800</lifetime><restock>0</restock><min>2</min><quantmin>-1</quantmin><quantmax>-1</quantmax><cost>100</cost>
         <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
         <category name="tools"/>
+        <tag name="shelves"/>
+        <usage name="Industrial"/>
+        <usage name="Town"/>
     </type>
     <!-- Амортизатор -->
     <type name="VB_EM_ShockAbsorber">

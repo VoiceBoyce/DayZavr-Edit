@@ -7,12 +7,13 @@ r"""Модели 14 материалов крафта VB_EchoMaterials (спис
 View/Fire Geometry. Для мода папка вывода = ../VB_EchoMaterials/data (бинаризует pbo.ps1 -Binarize).
 Текстуры — em_tex.py (vb_echomaterials\data\em_*), болты и пустой неон — копии er_* (eb_copy_mats.py materials).
 Отдельный мод @VB_EchoMaterials, ни от чего не зависит (решение пользователя 11-24); новые материалы — сюда же.
+Мод УНИВЕРСАЛЬНЫЙ, не только под 16 (пользователь 11-25): материалы — обычные детали, ничем не светятся и не опираются
+на контент одного сервера; «Эхо» — только слово в текстах (так энергия называется по лору 16).
 Оси Blender: X вправо, Y назад, Z вверх, предмет лежит на Z = 0. Геометрия — er_geom Echo Runner (порядок граней
 в MLOD верный: запись (x, z, y) зеркалит, см. ГАЙД). Масштаб плитки текстуры — uvtile детали, картинка на грань — uvframe.
 """
 import math
 import os
-import random
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -32,14 +33,15 @@ ONLY = set(str(opts.get("only", "")).split(",")) - {""}
 
 EM = "vb_echomaterials\\data\\"
 for _n in ("steel", "alu", "primer_k", "primer_g", "chrome", "paint_red", "copper", "carbon", "coating", "fabric",
-           "hexpad", "rubber", "plastic", "shard", "rock", "glass", "label", "pcb"):
+           "hexpad", "rubber", "plastic", "glass", "label", "pcb"):
     G.COL["e_" + _n] = (EM + "em_%s_%s.paa" % (_n, "ca" if _n == "glass" else "co"), EM + "em_%s.rvmat" % _n)
     G.MATS.append("e_" + _n)
 # Болты и пустой неон — копии er_* в своей data (eb_copy_mats.py materials): мод отдельный, ни от чего не зависит
 # (решение пользователя 11-24: по раскладке ТЗ_VB_Echo ядро — только энергия, материалов крафта в нём нет).
 G.COL["e_bolt"] = (EM + "er_bolt_co.paa", EM + "er_bolt.rvmat")
 # Свет — по логике энергии (решение пользователя 11-24): у снятого провода и блока энергии нет — трубка и огоньки
-# серые пустые, как трубки Echo Runner без энергии. Светится только сам кристалл Эхо (осколок, сердечник катушки).
+# серые пустые, как трубки Echo Runner без энергии. В материалах не светится ничего (11-25: осколок Эхо и кристалл
+# в катушке убраны — заменены бухтой медного провода и ферритовым сердечником).
 G.COL["e_neon"] = (EM + "er_neon_empty_co.paa", EM + "er_neon_empty.rvmat")
 G.MATS += ["e_bolt", "e_neon"]
 ALIAS = {"e_pk": "e_primer_k", "e_pg": "e_primer_g", "e_red": "e_paint_red", "e_coat": "e_coating", "e_hex": "e_hexpad"}
@@ -106,40 +108,6 @@ def hollow(part, outer, inner, a0, a1, mat, axis="x", c=(0.0, 0.0)):
         part.face((i0[k], i1[k], i1[m], i0[m]), M(mat))
         part.face((o0[k], i0[k], i0[m], o0[m]), M(mat))
         part.face((o1[k], o1[m], i1[m], i1[k]), M(mat))
-
-
-def hull(part, pts, mat):
-    """Выпуклая оболочка точек (камень-порода)."""
-    bm = part.bm
-    vs = [bm.verts.new(V(*p)) for p in pts]
-    res = bmesh.ops.convex_hull(bm, input=vs)
-    idx = G.MATS.index(M(mat))
-    for g in res["geom"]:
-        if isinstance(g, bmesh.types.BMFace):
-            g.material_index = idx
-    dead = list({g for g in res["geom_interior"] + res["geom_unused"] if isinstance(g, bmesh.types.BMVert)})
-    if dead:
-        bmesh.ops.delete(bm, geom=dead, context="VERTS")
-
-
-def crystal(part, base, axis, r, h, mat, rng, tip=0.3):
-    """Шестигранный кристалл с острием, чуть неровный."""
-    ax = axis.normalized()
-    u, v = perp(ax)
-    bm = part.bm
-    rot = rng.uniform(0, math.pi)
-    j = [rng.uniform(0.85, 1.12) for _ in range(6)]
-    r0 = [bm.verts.new(base + (u * math.cos(rot + k * math.pi / 3) + v * math.sin(rot + k * math.pi / 3)) * r * 0.8 * j[k])
-          for k in range(6)]
-    r1 = [bm.verts.new(base + ax * (h * (1 - tip)) +
-                       (u * math.cos(rot + k * math.pi / 3) + v * math.sin(rot + k * math.pi / 3)) * r * j[k])
-          for k in range(6)]
-    top = bm.verts.new(base + ax * h + u * (r * rng.uniform(-0.25, 0.25)))
-    part.face(list(reversed(r0)), M(mat))
-    for k in range(6):
-        m = (k + 1) % 6
-        part.face((r0[k], r0[m], r1[m], r1[k]), M(mat))
-        part.face((r1[k], r1[m], top), M(mat))
 
 
 def shell_x(part, r_in, r_out, a_deg, x0, x1, mat, cz, n=10):
@@ -270,28 +238,30 @@ def hydraulic():
     return [b, lab]
 
 
-# ---------------------------------------------------------------- 5. осколок Эхо
-def shard():
-    rock, cr = P("rock", 0.1), P("cry", 0.08)
-    rng = random.Random(5)
-    pts = []
-    for _ in range(46):
-        a = rng.uniform(0, 2 * math.pi)
-        e = rng.uniform(-0.2, 1.2)
-        r = rng.uniform(0.022, 0.031)
-        pts.append((math.cos(a) * r * math.cos(e * 0.6) * 1.2, math.sin(a) * r * math.cos(e * 0.6),
-                    0.011 + math.sin(e) * 0.013))
-    for k in range(10):
-        a = 2 * math.pi * k / 10 + rng.uniform(-0.2, 0.2)
-        pts.append((math.cos(a) * 0.027, math.sin(a) * 0.021, 0.0))
-    hull(rock, pts, "e_rock")
-    for base, d, r, h in ((V(0.004, 0.0, 0.016), V(0.15, 0.1, 1), 0.010, 0.058),
-                          (V(-0.012, 0.006, 0.016), V(-0.6, 0.3, 0.8), 0.0075, 0.042),
-                          (V(0.014, -0.008, 0.014), V(0.6, -0.5, 0.7), 0.0066, 0.036),
-                          (V(-0.004, -0.012, 0.014), V(-0.2, -0.8, 0.6), 0.005, 0.027),
-                          (V(0.016, 0.012, 0.012), V(0.7, 0.6, 0.4), 0.0045, 0.023)):
-        crystal(cr, base, d, r, h, "e_shard", rng)
-    return [rock, cr]
+# ---------------------------------------------------------------- 5. бухта медного провода
+# (11-24 вместо «Осколка Эхо»: пользователь — «не подойдёт, придумай что-то приземлённое»)
+def poly(n, r, rot=0.0):
+    return [(r * math.cos(rot + 2 * math.pi * k / n), r * math.sin(rot + 2 * math.pi * k / n)) for k in range(n)]
+
+
+def spool():
+    """Обмоточный медный провод в лаке на пластиковой катушке: щёки, ступица с отверстием, конец провода заправлен
+    в прорезь щеки, этикетка сверху."""
+    b, w, lab = P("spool", 0.15), P("wire", 0.05), P("label", 1.0)
+    R_fl, R_w, R_hub, R_hole, t, H = 0.06, 0.047, 0.02, 0.012, 0.006, 0.08
+    n = SEG
+    for z0 in (0.0, H - t):
+        hollow(b, poly(n, R_fl), poly(n, R_hole), z0, z0 + t, "e_plastic", "z")
+    hollow(b, poly(n, R_hub), poly(n, R_hole), t, H - t, "e_plastic", "z")
+    hollow(w, poly(n, R_w), poly(n, R_hub + 0.001), t, H - t, "e_copper", "z")
+    a0, a1 = math.radians(20), math.radians(38)
+    d0, d1 = V(math.cos(a0), math.sin(a0), 0), V(math.cos(a1), math.sin(a1), 0)
+    tube(w, catmull([tuple(d0 * (R_w + 0.0008) + V(0, 0, H - 0.026)), tuple(d0 * (R_w + 0.006) + V(0, 0, H - 0.012)),
+                     tuple(d1 * (R_fl + 0.0015) + V(0, 0, H - 0.002)), tuple(d1 * (R_fl - 0.006) + V(0, 0, H + 0.0016)),
+                     tuple(d1 * (R_fl - 0.014) + V(0, 0, H + 0.0016))], 0.004), 0.0012, 6, M("e_copper"))
+    box(lab, V(-0.036, 0, H + 0.0004), X, Y, Z, 0.016, 0.016, 0.0004, "e_label")
+    lab.uvframe = (V(-0.036, 0, 0), X, -Y, 0.016, 0.016)
+    return [b, w, lab]
 
 
 # ---------------------------------------------------------------- 6. амортизатор (койловер)
@@ -425,13 +395,13 @@ def conduit():
 
 # ---------------------------------------------------------------- 11. резонансная катушка
 def coil():
-    b, w, glow = P("coil", 0.15), P("wind", 0.05), P("core", 0.08)
-    rng = random.Random(11)
+    """Медная обмотка на ферритовом сердечнике между стальными щеками (11-25: без кристалла Эхо — мод универсальный,
+    материалы ничем не светятся; сердечник выходит в окно верхней щеки)."""
+    b, w = P("coil", 0.15), P("wind", 0.05)
     prism(b, chamfer_rect(0.045, 0.045, 0.008), 0.0, 0.01, "e_steel")
     hollow(b, chamfer_rect(0.045, 0.045, 0.008), chamfer_rect(0.017, 0.017, 0.007), 0.08, 0.09, "e_steel", "z")
     cyl(w, V(0, 0, 0.01), Z, 0.036, 0.07, SEG, "e_copper")
-    cyl(b, V(0, 0, 0.01), Z, 0.016, 0.07, 12, "e_steel")
-    crystal(glow, V(0, 0, 0.055), Z, 0.013, 0.052, "e_shard", rng, tip=0.28)
+    cyl(b, V(0, 0, 0.01), Z, 0.0145, 0.086, SEG, "e_coat")
     for sx in (-1, 1):
         for sy in (-1, 1):
             cyl(b, V(sx * 0.035, sy * 0.035, 0.0), Z, 0.0035, 0.096, 8, "e_steel")
@@ -440,7 +410,7 @@ def coil():
         cyl(b, V(sx * 0.03, 0, 0.096), Z, 0.0075, 0.004, 6, "e_bolt")
         tube(w, catmull([(sx * 0.036, 0.0, 0.072), (sx * 0.05, 0.0, 0.078), (sx * 0.05, 0.0, 0.098),
                          (sx * 0.031, 0.0, 0.103)], 0.006), 0.0016, 6, M("e_copper"))
-    return [b, w, glow]
+    return [b, w]
 
 
 # ---------------------------------------------------------------- 12. силовая рама
@@ -510,11 +480,30 @@ def glass():
     return [b, gl, lab]
 
 
-BUILDERS = {"armorplate": armorplate, "carbon": carbon, "servo": servo, "hydraulic": hydraulic, "shard": shard,
+BUILDERS = {"armorplate": armorplate, "carbon": carbon, "servo": servo, "hydraulic": hydraulic, "spool": spool,
             "shock": shock, "ecu": ecu, "damper": damper, "exoctrl": exoctrl, "conduit": conduit, "coil": coil,
             "frame": frame, "panel": panel, "glass": glass}
-MASS = {"armorplate": 1.8, "carbon": 0.6, "servo": 0.9, "hydraulic": 2.5, "shard": 0.15, "shock": 3.0, "ecu": 0.8,
+MASS = {"armorplate": 1.8, "carbon": 0.6, "servo": 0.9, "hydraulic": 2.5, "spool": 1.5, "shock": 3.0, "ecu": 0.8,
         "damper": 0.3, "exoctrl": 0.6, "conduit": 0.4, "coil": 1.2, "frame": 8.0, "panel": 6.0, "glass": 4.0}
+
+
+# Хват двумя руками как у ванильного ящика WoodenCrate (VB_EM_Hands.c, стенд 11-25): ящик держат поперёк груди на руках
+# снизу, его длинная ось — Z модели (wooden_case.p3d: x ±0.21, z ±0.40). Панель и раму строим длинной стороной по X —
+# для хвата поворачиваем на 90° вокруг вертикали (X Blender -> Y Blender = Z DayZ), вместе с рамками этикеток (uvframe).
+CRATE_HOLD = {"panel", "frame"}
+
+
+def rot_z90(parts_list):
+    def r(v):
+        return V(-v.y, v.x, v.z)
+
+    for p in parts_list:
+        for v in p.bm.verts:
+            v.co = r(v.co)
+        fr = getattr(p, "uvframe", None)
+        if fr is not None:
+            o, ex, ey, hx, hy = fr
+            p.uvframe = (r(o), r(ex), r(ey), hx, hy)
 
 
 # ---------------------------------------------------------------- запись
@@ -583,6 +572,8 @@ for name, fn in BUILDERS.items():
     for res, seg in ((1.0, 24), (2.0, 14), (3.0, 8)):
         SEG = seg
         built = fn()
+        if name in CRATE_HOLD:
+            rot_z90(built)
         if first is None:
             lo, hi = bounds(built)
             first = built
