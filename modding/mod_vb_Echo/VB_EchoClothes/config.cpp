@@ -16,7 +16,10 @@ class CfgPatches
 {
 	class VB_EchoClothes
 	{
-		units[]={"VB_EC_Exo_Helmet","VB_EC_Exo_Mask","VB_EC_Exo_Vest","VB_EC_Exo_Servo","VB_EC_Exo_Jacket","VB_EC_Exo_Pants","VB_EC_Exo_Gloves","VB_EC_Exo_Boots"};
+		units[]={"VB_EC_Exo_Helmet","VB_EC_Exo_Mask","VB_EC_Exo_Vest","VB_EC_Exo_Servo","VB_EC_Exo_Jacket","VB_EC_Exo_Pants","VB_EC_Exo_Gloves","VB_EC_Exo_Boots",
+			"VB_EC_Exo_Mask_Ranger","VB_EC_Exo_Mask_Coyote","VB_EC_Exo_Mask_Arctic","VB_EC_Exo_Vest_Ranger","VB_EC_Exo_Vest_Coyote","VB_EC_Exo_Vest_Arctic",
+			"VB_EC_Exo_Jacket_Ranger","VB_EC_Exo_Jacket_Coyote","VB_EC_Exo_Jacket_Arctic","VB_EC_Exo_Pants_Ranger","VB_EC_Exo_Pants_Coyote","VB_EC_Exo_Pants_Arctic",
+			"VB_EC_Exo_Gloves_Ranger","VB_EC_Exo_Gloves_Coyote","VB_EC_Exo_Gloves_Arctic","VB_EC_Exo_Boots_Ranger","VB_EC_Exo_Boots_Coyote","VB_EC_Exo_Boots_Arctic"};
 		weapons[]={};
 		requiredVersion=0.1;
 		requiredAddons[]={"DZ_Data","DZ_Scripts","DZ_Characters","DZ_Characters_Headgear","DZ_Characters_Masks","DZ_Characters_Vests","DZ_Characters_Tops","DZ_Characters_Pants","DZ_Characters_Gloves","DZ_Characters_Shoes","DZ_Characters_Backpacks","DZ_Sounds_Effects","DZ_Gear_Containers","VB_EchoCore"};
@@ -885,5 +888,118 @@ class CfgVehicles
 		color="black";
 		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Boots\ExoBoots\data\ExoBoots_echo_co.paa"};
 		hiddenSelectionsMaterials[]={"VB_EchoClothes\exo_set\Boots\ExoBoots\data\ExoBoots.rvmat"};
+	};
+
+	// ---------------- расцветки (утверждены 11-25): меняется только ткань (tools/ec_retex.py --palette=<п>), металл,
+	// пластины, окантовка — общие; числа, слоты и метка комплекта vbExo — от ..._Base. Шлема и сервопривода в
+	// расцветках нет (ткани у них нет — один вид на все). «Рейнджер» — тёмная олива, «Койот» — песочная, «Арктика» —
+	// светло-серая. Полный комплект собирается из вещей любых расцветок вперемешку.
+	class VB_EC_Exo_Mask_Ranger: VB_EC_Exo_Mask
+	{
+		displayName="$STR_VB_EC_Exo_Mask_Ranger";
+		color="ranger";
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Mask\MaskGhost\Data\MaskGhost_ranger_co.paa"};
+	};
+	class VB_EC_Exo_Mask_Coyote: VB_EC_Exo_Mask
+	{
+		displayName="$STR_VB_EC_Exo_Mask_Coyote";
+		color="coyote";
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Mask\MaskGhost\Data\MaskGhost_coyote_co.paa"};
+	};
+	class VB_EC_Exo_Mask_Arctic: VB_EC_Exo_Mask
+	{
+		displayName="$STR_VB_EC_Exo_Mask_Arctic";
+		color="arctic";
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Mask\MaskGhost\Data\MaskGhost_arctic_co.paa"};
+	};
+	class VB_EC_Exo_Vest_Ranger: VB_EC_Exo_Vest
+	{
+		displayName="$STR_VB_EC_Exo_Vest_Ranger";
+		color="ranger";
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Vest\ExoVest\data\ExoVest_ranger_co.paa"};
+	};
+	class VB_EC_Exo_Vest_Coyote: VB_EC_Exo_Vest
+	{
+		displayName="$STR_VB_EC_Exo_Vest_Coyote";
+		color="coyote";
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Vest\ExoVest\data\ExoVest_coyote_co.paa"};
+	};
+	class VB_EC_Exo_Vest_Arctic: VB_EC_Exo_Vest
+	{
+		displayName="$STR_VB_EC_Exo_Vest_Arctic";
+		color="arctic";
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Vest\ExoVest\data\ExoVest_arctic_co.paa"};
+	};
+	class VB_EC_Exo_Jacket_Ranger: VB_EC_Exo_Jacket
+	{
+		displayName="$STR_VB_EC_Exo_Jacket_Ranger";
+		color="ranger";
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Tops\ExoJacket\data\ExoJacket_ranger_co.paa"};
+	};
+	class VB_EC_Exo_Jacket_Coyote: VB_EC_Exo_Jacket
+	{
+		displayName="$STR_VB_EC_Exo_Jacket_Coyote";
+		color="coyote";
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Tops\ExoJacket\data\ExoJacket_coyote_co.paa"};
+	};
+	class VB_EC_Exo_Jacket_Arctic: VB_EC_Exo_Jacket
+	{
+		displayName="$STR_VB_EC_Exo_Jacket_Arctic";
+		color="arctic";
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Tops\ExoJacket\data\ExoJacket_arctic_co.paa"};
+	};
+	class VB_EC_Exo_Pants_Ranger: VB_EC_Exo_Pants
+	{
+		displayName="$STR_VB_EC_Exo_Pants_Ranger";
+		color="ranger";
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Pants\ExoPants\data\ExoPants_ranger_co.paa"};
+	};
+	class VB_EC_Exo_Pants_Coyote: VB_EC_Exo_Pants
+	{
+		displayName="$STR_VB_EC_Exo_Pants_Coyote";
+		color="coyote";
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Pants\ExoPants\data\ExoPants_coyote_co.paa"};
+	};
+	class VB_EC_Exo_Pants_Arctic: VB_EC_Exo_Pants
+	{
+		displayName="$STR_VB_EC_Exo_Pants_Arctic";
+		color="arctic";
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Pants\ExoPants\data\ExoPants_arctic_co.paa"};
+	};
+	class VB_EC_Exo_Gloves_Ranger: VB_EC_Exo_Gloves
+	{
+		displayName="$STR_VB_EC_Exo_Gloves_Ranger";
+		color="ranger";
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Gloves\ExoGloves\data\ExoGloves_ranger_co.paa"};
+	};
+	class VB_EC_Exo_Gloves_Coyote: VB_EC_Exo_Gloves
+	{
+		displayName="$STR_VB_EC_Exo_Gloves_Coyote";
+		color="coyote";
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Gloves\ExoGloves\data\ExoGloves_coyote_co.paa"};
+	};
+	class VB_EC_Exo_Gloves_Arctic: VB_EC_Exo_Gloves
+	{
+		displayName="$STR_VB_EC_Exo_Gloves_Arctic";
+		color="arctic";
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Gloves\ExoGloves\data\ExoGloves_arctic_co.paa"};
+	};
+	class VB_EC_Exo_Boots_Ranger: VB_EC_Exo_Boots
+	{
+		displayName="$STR_VB_EC_Exo_Boots_Ranger";
+		color="ranger";
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Boots\ExoBoots\data\ExoBoots_ranger_co.paa"};
+	};
+	class VB_EC_Exo_Boots_Coyote: VB_EC_Exo_Boots
+	{
+		displayName="$STR_VB_EC_Exo_Boots_Coyote";
+		color="coyote";
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Boots\ExoBoots\data\ExoBoots_coyote_co.paa"};
+	};
+	class VB_EC_Exo_Boots_Arctic: VB_EC_Exo_Boots
+	{
+		displayName="$STR_VB_EC_Exo_Boots_Arctic";
+		color="arctic";
+		hiddenSelectionsTextures[]={"VB_EchoClothes\exo_set\Boots\ExoBoots\data\ExoBoots_arctic_co.paa"};
 	};
 };
