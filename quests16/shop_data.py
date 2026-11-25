@@ -16,14 +16,12 @@ OLD_DIV = 10            # старая цена в золоте / OLD_DIV = но
 RATE = 10               # 1 з = RATE с, 1 с = RATE м
 
 CATEGORIES = {  # ключ: (название, иконка, звук). Одежда — по сетам, как категории сетов крафта (решение 2026-11-14)
-    "exo": ("Лавка: экзоскелет", "DRL_Core/Icon/drl_robot-helmet.edds", "DRLCraft_Paper_SoundSet"),
     "ghost": ("Лавка: сет GHOST", "DRL_Core/Icon/drl_ghost.edds", "DRLCraft_Paper_SoundSet"),
     "swat": ("Лавка: сет SWAT", "DRL_Core/Icon/drl_chest-armor.edds", "DRLCraft_Paper_SoundSet"),
     "merc": ("Лавка: сет наёмника", "DRL_Core/Icon/drl_polo-shirt.edds", "DRLCraft_Paper_SoundSet"),
     "palace": ("Лавка: сет PALACE", "DRL_Core/Icon/drl_shirt.edds", "DRLCraft_Paper_SoundSet"),
     "raijin": ("Лавка: сет RAIJIN", "DRL_Core/Icon/drl_fur-shirt.edds", "DRLCraft_Paper_SoundSet"),
     "bags": ("Лавка: рюкзаки и ремни", "DRL_Core/Icon/drl_backpack.edds", "DRLCraft_Paper_SoundSet"),
-    "modules": ("Лавка: модули OOTS", "DRL_Core/Icon/drl_battle-gear.edds", "DRLCraft_Metal_SoundSet"),
     "weapons": ("Лавка: оружие", "DRL_Core/Icon/drl_rifle.edds", "DRLCraft_Metal_SoundSet"),
     "addons": ("Лавка: обвесы и магазины", "DRL_Core/Icon/drl_machine-gun-magazine.edds", "DRLCraft_Metal_SoundSet"),
     "base": ("Лавка: для базы", "DRL_Core/Icon/drl_paint-roller.edds", "DRLCraft_Generic1_SoundSet"),
@@ -32,15 +30,15 @@ CATEGORIES = {  # ключ: (название, иконка, звук). Одеж
 # Обмен монет — у Босса квестами 16001–16004 (решение пользователя 2026-11-14): в крафте его нет.
 # Рецепты 5000–5003 и категория «Обмен монет» снимаются с сервера при выкладке.
 EXCHANGE = []
-OBSOLETE_CATEGORIES = {"Обмен монет", "Лавка: одежда", "Лавка: снаряжение"}
+# 2026-11-25 (решение пользователя): мод OOTS уходит, его вещи на 16 — только в скупке у Коллекционера
+# (Trader/TraderConfig5_Collector.txt). Экзоскелет OOTS (5110–5116), сервопривод (5200) и модули (5210–5215) сняты.
+OBSOLETE_CATEGORIES = {"Обмен монет", "Лавка: одежда", "Лавка: снаряжение", "Лавка: экзоскелет", "Лавка: модули OOTS"}
 
 
 def clothes_category(rid):
     """Категория лавки для одежды и снаряжения по Id рецепта."""
     if 5100 <= rid <= 5106:
         return "ghost"
-    if 5110 <= rid <= 5113 or 5115 <= rid <= 5116:     # перчатки и ботинки экзо добавлены 2026-11-21
-        return "exo"
     if rid == 5114 or 5120 <= rid <= 5122:
         return "bags"
     if 5130 <= rid <= 5135:
@@ -51,8 +49,6 @@ def clothes_category(rid):
         return "raijin"
     if 5150 <= rid <= 5157:
         return "swat"
-    if rid == 5200 or 5210 <= rid <= 5215:
-        return "modules"        # сервопривод — к модулям (решение пользователя 2026-11-14)
     raise ValueError("нет категории для %d" % rid)
 
 # Одежда (швейная машинка — у неё нет хранилища, монеты при себе): Id, название, варианты, цена в золоте
@@ -64,12 +60,6 @@ CLOTHES = [
     (5104, "Ботинки GHOST", ["Candy_Set_Ghost_Ghosted_Boots"], 3),
     (5105, "Перчатки GHOST", ["Candy_Set_Ghost_Ghosted_Gloves"], 3),
     (5106, "Подсумок GHOST", ["Candy_Set_Ghost_Ghosted_Pouch1"], 2),
-    (5110, "Шлем экзоскелета", ["OOTS_Helmet_Exo"], 32),
-    (5111, "Куртка экзоскелета", ["OOTS_Jacket_Exo", "OOTS_Jacket_Exo_Tan"], 28),
-    (5112, "Штаны экзоскелета", ["OOTS_Pants_Exo", "OOTS_Pants_Exo_Tan"], 25.5),
-    (5113, "Бронежилет экзоскелета", ["OOTS_Vest_Exo"], 22.5),
-    (5115, "Перчатки экзоскелета", ["OOTS_Gloves_Exo"], 12),
-    (5116, "Ботинки экзоскелета", ["OOTS_Boots_Exo"], 14),
     (5114, "Кобура на бронежилет", ["PlateCarrierHolster_Black"], 0.7),
     (5120, "Рюкзак 6Ш118", ["FOG_Bag_6ShBagT_Green", "FOG_Bag_6ShBagT_BlackEMR", "FOG_Bag_6ShBagT_Black",
                             "FOG_Bag_6ShBagT_RG", "FOG_Bag_6ShBagT_CB", "FOG_Bag_6ShBagT_White",
@@ -110,28 +100,16 @@ CLOTHES = [
 ]
 # Класс, исправленный при переносе (в старом квесте 18031 был с лишней точкой). В чужом моде не проверяем —
 # генератор предупреждает, пользователь проверяет в игре.
-UNVERIFIED = {"kr_swatsuit_combatShirt_multicam",
-              # перчатки и ботинки экзо (2026-11-21): классы назвал пользователь, в модах репозитория и types
-              # серверов их нет, чужие PBO не смотрим — проверить в игре
-              "OOTS_Gloves_Exo", "OOTS_Boots_Exo"}
+UNVERIFIED = {"kr_swatsuit_combatShirt_multicam"}
 
 # Снаряжение (верстак, в нём хранилище на 100 клеток): Id, название, класс, цена в золоте
-GEAR = [
-    (5200, "Сервопривод экзоскелета", "OOTS_Exo_Servoprivod_black_BeltSlot", 32),
-    (5210, "Модуль восстановления еды и воды", "OOTS_ClothesModificatorFood", 22.5),
-    (5211, "Модуль восстановления здоровья", "OOTS_ClothesModificatorHealth", 22.5),
-    (5212, "Модуль регенерации крови", "OOTS_ClothesModificatorBlood", 21.5),
-    (5213, "Модуль увеличения выносливости", "OOTS_ClothesModificatorStamina", 20),
-    (5214, "Модуль увеличения объёма", "OOTS_ClothesModificatorSlot", 20),
-    (5215, "Модуль снижения веса", "OOTS_ClothesModificatorWeight", 20),
-]
+# 2026-11-25: сервопривод OOTS (5200) и модули OOTS (5210–5215) сняты — вещи OOTS только в скупке у Коллекционера.
+GEAR = []
 # Описания рецептов снаряжения (по умолчанию пусто — окно покажет описание предмета; слова «Лавка лагеря» убраны 2026-11-21)
-GEAR_DESC = {
-    5200: "Сервопривод экзоскелета 2-го поколения: мощнее обычного, вмещает 120 слотов. "
-          "Вставляется в слот повязки.",
-}
+GEAR_DESC = {}
 # Убраны из лавки по решению пользователя 2026-11-14: отпугиватель мутантов (5220), граната РГД-5 (5221),
 # контейнер для артефактов (5201), батарея экзоскелета (5202), зарядка батареи экзоскелета (5203).
+# 2026-11-25: экзоскелет OOTS (5110–5116), сервопривод (5200), модули OOTS (5210–5215).
 RECHARGE = None
 
 # Оружие (верстак): старые квесты 18301–18335 по порядку, Id 5300 + (номер - 18301); название ствола
@@ -223,12 +201,6 @@ CLOTHES_EXTRA = {
     5104: [("EFT_Cloth_paracord", 1), ("EFT_Cloth_cordura", 1)],          # ботинки GHOST
     5105: [("EFT_Cloth_fleece", 1), ("EFT_Cloth_cordura", 1)],            # перчатки GHOST
     5106: [("EFT_Cloth_cordura", 1), ("EFT_Cloth_paracord", 1)],          # подсумок GHOST
-    5110: [("EFT_Cloth_aramid", 1), ("EFT_Military_cable", 1), ("EFT_Capacitors", 2), (TROPHY, 1)],  # шлем экзо
-    5111: [("EFT_Cloth_aramid", 2), ("EFT_Military_cable", 1), (TROPHY, 1)],                        # куртка экзо
-    5112: [("EFT_Cloth_aramid", 2), ("EFT_Engine", 1), (TROPHY, 1)],                                # штаны экзо
-    5113: [("EFT_Cloth_aramid", 2), ("EFT_MetalParts", 2)],                                         # бронежилет экзо
-    5115: [("EFT_Cloth_aramid", 1), ("EFT_Military_cable", 1), ("EFT_Capacitors", 1)],              # перчатки экзо
-    5116: [("EFT_Cloth_aramid", 1), ("EFT_MetalParts", 2), ("EFT_Military_cable", 1)],              # ботинки экзо
     5120: [("EFT_Cloth_cordura", 3), ("EFT_Cloth_paracord", 2), ("EFT_Cloth_aramid", 1)],           # рюкзак 6Ш118
     5121: [("EFT_Cloth_cordura", 1), ("EFT_Cloth_paracord", 1)],          # ременная система
     5122: [("EFT_Cloth_paracord", 2), ("EFT_Cloth_cordura", 1), ("EFT_Cloth_aramid", 1)],           # оружейный ремень
@@ -243,15 +215,7 @@ CLOTHES_EXTRA = {
 }
 # Снаряжение: Id -> [(класс, сколько)]. Модули OOTS — по стихии (материалы аномалий) + электроника.
 GEAR_EXTRA = {
-    5200: [("OOTS_Exo_Servoprivod_black", 1), ("EFT_Engine", 1), ("EFT_Capacitors", 2), ("EFT_Military_cable", 1),
-           (TROPHY, 1)],     # сервопривод 2-го поколения: улучшение обычного (решение пользователя 2026-11-14)
     5201: [("EFT_MetalParts", 1), ("EFT_OrgGlass", 1)],                                           # контейнер артефактов
-    5210: [("VB_AB_Mat_Snow", 3), ("EFT_Capacitors", 1), ("EFT_Rele", 1)],       # еда и вода — лёд
-    5211: [("VB_AB_Mat_Studen", 3), ("EFT_Capacitors", 1), ("EFT_Rele", 1)],     # здоровье — слизь
-    5212: [("VB_RiftVein", 2), ("EFT_Bloodset", 1), ("EFT_Capacitors", 1), ("EFT_Rele", 1)],     # кровь — Изнанка
-    5213: [("VB_AB_Mat_EMP", 3), ("EFT_Capacitors", 1), ("EFT_Rele", 1)],        # выносливость — гроза
-    5214: [("VB_AB_Mat_Voronka", 3), ("EFT_Capacitors", 1), ("EFT_Rele", 1)],    # объём — сжатый камень
-    5215: [("VB_AB_Mat_Tramplin", 3), ("EFT_Capacitors", 1), ("EFT_Rele", 1)],   # вес — гравитационная галька
     5220: [(TROPHY, 2), ("EFT_Modem", 1), ("EFT_Capacitors", 2), ("VB_AB_Mat_Flash", 2)],         # отпугиватель
 }
 # Оружие (ствол) по цене всего набора в золоте: (от, ингредиенты)

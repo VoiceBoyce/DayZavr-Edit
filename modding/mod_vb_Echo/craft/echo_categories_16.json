@@ -1,0 +1,64 @@
+[
+    {
+        "Name": "Энергия Эхо",
+        "Icon": "DRL_Core/Icon/drl_battery-pack.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "ShowOnlyAvailableCraft": 0,
+        "ShowOnlyAvailableStudy": 0,
+        "CategoryFonImagePath": "set:drl_craft_work image:work",
+        "CategoryCraftFonImagePath": "set:drl_craft_recipemanu_part image:recipemanu_part",
+        "CategoryCraftSoundSet": "DRLCraft_Generic1_SoundSet",
+        "List": [
+            30,
+            31,
+            32,
+            33,
+            34
+        ]
+    },
+    {
+        "Name": "Экзоскелет Эхо",
+        "Icon": "DRL_Core/Icon/drl_battle-mech.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "ShowOnlyAvailableCraft": 0,
+        "ShowOnlyAvailableStudy": 0,
+        "CategoryFonImagePath": "set:drl_craft_work image:work",
+        "CategoryCraftFonImagePath": "set:drl_craft_recipemanu_armor image:recipemanu_armor",
+        "CategoryCraftSoundSet": "DRLCraft_Paper_SoundSet",
+        "List": [
+            3201,
+            3202,
+            3203,
+            3204,
+            3205,
+            3206,
+            3207,
+            3208
+        ]
+    },
+    {
+        "Name": "Echo Runner",
+        "Icon": "DRL_Core/Icon/drl_f1-car.edds",
+        "ShowAll": 0,
+        "UseList": 1,
+        "ShowOnlyAvailableCraft": 0,
+        "ShowOnlyAvailableStudy": 0,
+        "CategoryFonImagePath": "set:drl_craft_work image:work",
+        "CategoryCraftFonImagePath": "set:drl_craft_recipemanu_armor image:recipemanu_armor",
+        "CategoryCraftSoundSet": "DRLCraft_Metal_SoundSet",
+        "List": [
+            4301,
+            4302,
+            4303,
+            4304,
+            4305,
+            4306,
+            4307,
+            4308,
+            4309,
+            4310
+        ]
+    }
+]

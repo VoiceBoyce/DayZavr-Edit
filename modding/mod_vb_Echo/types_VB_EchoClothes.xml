@@ -1,4 +1,7 @@
-<!-- VB_EchoClothes: экзоскелет Эхо. nominal 0 — в лут не спавнится (выдача — торговцы, крафт, квесты; решим на этапе 5) -->
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- VB_EchoClothes: экзоскелет Эхо. nominal 0 — в лут не спавнится; на 16 — крафт DRL 3201–3211
+     (mod_vb_Echo/craft/make_echo_craft16.py). Для сервера: общий файл VB_Echo.xml (tools/make_types16.py). -->
+<types>
 	<type name="VB_EC_Exo_Helmet">
 		<nominal>0</nominal>
 		<lifetime>14400</lifetime>
@@ -319,3 +322,4 @@
 		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
 		<category name="clothes"/>
 	</type>
+</types>

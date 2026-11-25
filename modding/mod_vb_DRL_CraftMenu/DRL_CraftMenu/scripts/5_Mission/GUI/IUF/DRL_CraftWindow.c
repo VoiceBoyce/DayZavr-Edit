@@ -1877,6 +1877,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		RefreshStationSlots();
 		FillSetInfo(r);
 		FillVehicleInfo(r);
+		FillCargoInfo();
 		m_Bp.SetLocked(!DRL_LearnState.HasLearned(r.RecipeId));
 		m_Bp.Relayout();
 	}
@@ -1898,6 +1899,78 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		if (size.Count() < 2)
 			return 0;
 		return size[0] * size[1];
+	}
+
+	// Размер груза cols×rows (машины — подкласс Cargo, предметы — корень класса). false — груза нет.
+	protected bool CargoSizeOf(string cls, out int cols, out int rows)
+	{
+		cols = 0;
+		rows = 0;
+		if (cls == "")
+			return false;
+		string path = "CfgVehicles " + cls + " Cargo itemsCargoSize";
+		if (!GetGame().ConfigIsExisting(path))
+			path = "CfgVehicles " + cls + " itemsCargoSize";
+		if (!GetGame().ConfigIsExisting(path))
+			return false;
+		TIntArray size = new TIntArray();
+		GetGame().ConfigGetIntArray(path, size);
+		if (size.Count() < 2 || size[0] <= 0 || size[1] <= 0)
+			return false;
+		cols = size[0];
+		rows = size[1];
+		return true;
+	}
+
+	// Сколько слотов у того, что игрок носит сейчас в слоте изделия: 0 — надето без груза, -1 — ничего не надето
+	// (или у изделия нет слота).
+	protected int WornCargoFor(string cls)
+	{
+		PlayerBase pl = PlayerBase.Cast(GetGame().GetPlayer());
+		if (!pl || cls == "")
+			return -1;
+		string path = "CfgVehicles " + cls + " inventorySlot";
+		TStringArray slots = new TStringArray();
+		int ct = GetGame().ConfigGetType(path);
+		if (ct == CT_ARRAY)
+		{
+			GetGame().ConfigGetTextArray(path, slots);
+		}
+		else if (ct == CT_STRING)
+		{
+			string one;
+			GetGame().ConfigGetText(path, one);
+			if (one != "")
+				slots.Insert(one);
+		}
+		foreach (string slotName : slots)
+		{
+			EntityAI worn = pl.FindAttachmentBySlotName(slotName);
+			if (!worn)
+				continue;
+			CargoBase wornCargo = worn.GetInventory().GetCargo();
+			if (!wornCargo)
+				return 0;
+			return wornCargo.GetWidth() * wornCargo.GetHeight();
+		}
+		return -1;
+	}
+
+	// Блок «Вместимость» (Баги №75): груз изделия и сравнение с надетым; у машин — без сравнения.
+	protected void FillCargoInfo()
+	{
+		string cls = ChosenResult();
+		int cols;
+		int rows;
+		if (!CargoSizeOf(cls, cols, rows))
+		{
+			m_Bp.SetCargo(0, 0, -1);
+			return;
+		}
+		int worn = -1;
+		if (m_StationKind != DRL_ST_LIFT)
+			worn = WornCargoFor(cls);
+		m_Bp.SetCargo(cols, rows, worn);
 	}
 
 	// Слот - запчасть машины (колёса, двери, капот, аккумулятор, свечи...): не показываем.
@@ -1975,6 +2048,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			}
 		}
 		string attList = "";
+		int attTotal = 0;
 		for (int i = 0; i < names.Count(); i++)
 		{
 			string item = names[i];
@@ -1983,10 +2057,18 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			if (attList != "")
 				attList = attList + ", ";
 			attList = attList + item;
+			attTotal = attTotal + counts[i];
 		}
 		if (attList == "")
+		{
 			attList = DRL_UIText.Tr("#STR_DRL_UI_ASM_NOATTS");
-		lines.Insert(DRL_UIText.Fmt("#STR_DRL_UI_ASM_ATTS", attList));
+			lines.Insert(DRL_UIText.Fmt("#STR_DRL_UI_ASM_ATTS", attList));
+		}
+		else
+		{
+			// Баги №75: число мест навесного в начале строки.
+			lines.Insert(DRL_UIText.Fmt("#STR_DRL_UI_ASM_ATTS_N", attTotal.ToString(), attList));
+		}
 		m_Bp.SetInfo(lines);
 	}
 

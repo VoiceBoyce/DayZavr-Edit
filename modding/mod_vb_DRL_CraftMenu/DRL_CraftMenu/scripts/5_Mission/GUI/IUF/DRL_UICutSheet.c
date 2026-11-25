@@ -550,7 +550,9 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 	static const int MAX_TAGS = 15;
 	static const int MAX_TOOLS = 8;
 	static const int MAX_PARTS = 12;
-	static const int SECTIONS = 6;
+	static const int SECTIONS = 7;
+	static const float CARGO_H = 58;     // блок «Вместимость» (Баги №75)
+	static const float CARGO_GRID_W = 170;
 
 	protected ref DRL_UIMannequin m_Doll;
 	protected Widget m_Panel;
@@ -578,6 +580,17 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 	protected ref array<ImageWidget> m_ArmorTracks;
 	protected ref array<ImageWidget> m_ArmorFills;
 	protected int m_HoverTag = -1;
+
+	// Вместимость: мини-сетка груза, слоты и сравнение с надетым.
+	protected Widget m_CargoBox;
+	protected ref INT_UIF_Surface m_CargoBg;
+	protected ref DRL_UICargoGrid m_CargoGrid;
+	protected TextWidget m_CargoValue;
+	protected TextWidget m_CargoWorn;
+	protected TextWidget m_CargoDelta;
+	protected int m_CargoCols;
+	protected int m_CargoRows;
+	protected int m_CargoWornSlots = -1;
 
 	void DRL_UICutSheet()
 	{
@@ -733,6 +746,19 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 		}
 		m_Stats.Show(false);
 
+		// Вместимость: сетка груза слева, слоты и «сейчас на вас» справа (Баги №75).
+		m_CargoBox = INT_UIF_Draw.Frame(m_Cut, 0, 0, m_CutW, CARGO_H, "DRL_CutCargo");
+		m_CargoBg = INT_UIF_Surface.Box(m_CargoBox, 0, 0, m_CutW, CARGO_H, 10, armorFill, armorBorder);
+		m_CargoGrid = new DRL_UICargoGrid();
+		m_CargoGrid.Build(m_CargoBox, 12, 9, CARGO_GRID_W, CARGO_H - 18);
+		float cx = 12 + CARGO_GRID_W + 18;
+		m_CargoValue = INT_UIF_Draw.Text(m_CargoBox, cx, 9, m_CutW - cx - 12, 20, "", 14, txt);
+		m_CargoValue.SetBold(true);
+		m_CargoWorn = INT_UIF_Draw.Text(m_CargoBox, cx, 31, 200, 16, "", 11, muted);
+		m_CargoDelta = INT_UIF_Draw.Text(m_CargoBox, cx, 31, 80, 16, "", 11, txt);
+		m_CargoDelta.SetBold(true);
+		m_CargoBox.Show(false);
+
 		// Печать «не изучен» - на манекене.
 		m_Seal = INT_UIF_Draw.Frame(m_Root, PAD_X + PANEL_W * 0.5 - 130, h * 0.5 - 40, 260, 80, "DRL_BpSeal");
 		int sealFill = ARGB(225, 30, 22, 4);
@@ -769,6 +795,13 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 				m_Outfit.Insert(c);
 			}
 		}
+	}
+
+	override void SetCargo(int cols, int rows, int worn)
+	{
+		m_CargoCols = cols;
+		m_CargoRows = rows;
+		m_CargoWornSlots = worn;
 	}
 
 	override void SetCovered(bool covered)
@@ -853,6 +886,7 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 		}
 		m_SlotsHost.Show(false);
 		m_Stats.Show(false);
+		m_CargoBox.Show(false);
 		m_Locked = false;
 		m_Seal.Show(false);
 		m_Stage.Clear();
@@ -952,10 +986,23 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 			y = Section(sec, y, "#STR_DRL_UI_CUT_ARMOR", "");
 			sec++;
 			LayoutArmor(y);
+			y = y + 62 + 12;
 		}
 		else
 		{
 			m_Stats.Show(false);
+		}
+
+		// Вместимость (Баги №75).
+		if (m_CargoCols > 0 && m_CargoRows > 0)
+		{
+			y = Section(sec, y, "#STR_DRL_UI_CUT_CARGO", "");
+			sec++;
+			LayoutCargo(y);
+		}
+		else
+		{
+			m_CargoBox.Show(false);
 		}
 
 		for (int i = sec; i < SECTIONS; i++)
@@ -1132,6 +1179,44 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 			INT_UIF_Draw.Resize(m_ArmorFills[i], fw, 4);
 			m_ArmorFills[i].SetColor(DRL_UIC.HealthColor(pct));
 		}
+	}
+
+	// Вместимость: «120 слотов (12×10)», ниже «сейчас на вас: 80» и разница зелёным/красным.
+	protected void LayoutCargo(float y)
+	{
+		m_CargoBox.Show(true);
+		INT_UIF_Draw.Move(m_CargoBox, 0, y);
+		m_CargoGrid.Set(m_CargoCols, m_CargoRows);
+		int slots = m_CargoCols * m_CargoRows;
+		string dims = m_CargoCols.ToString() + "×" + m_CargoRows.ToString();
+		m_CargoValue.SetText(DRL_UIText.Fmt("#STR_DRL_UI_CARGO_SLOTS", slots.ToString(), dims));
+		float cx = 12 + m_CargoGrid.Width() + 18;
+		INT_UIF_Draw.Place(m_CargoValue, cx, 9, m_CutW - cx - 12, 20);
+		bool cmp = m_CargoWornSlots >= 0;
+		m_CargoWorn.Show(cmp);
+		m_CargoDelta.Show(cmp);
+		if (!cmp)
+			return;
+		string wt = DRL_UIText.Fmt("#STR_DRL_UI_CARGO_WORN", m_CargoWornSlots.ToString(), "");
+		m_CargoWorn.SetText(wt);
+		float ww = DRL_UIMeasure.TextW(m_CargoBox, wt, 11, false);
+		INT_UIF_Draw.Place(m_CargoWorn, cx, 32, ww + 4, 16);
+		int diff = slots - m_CargoWornSlots;
+		string dt = "±0";
+		int dc = DRL_UIC.Muted();
+		if (diff > 0)
+		{
+			dt = "+" + diff.ToString();
+			dc = DRL_UIC.Ok();
+		}
+		else if (diff < 0)
+		{
+			dt = diff.ToString();
+			dc = DRL_UIC.No();
+		}
+		m_CargoDelta.SetText(dt);
+		m_CargoDelta.SetColor(dc);
+		INT_UIF_Draw.Place(m_CargoDelta, cx + ww + 10, 32, 80, 16);
 	}
 
 	// «80%» -> 80; без процента -> -1.

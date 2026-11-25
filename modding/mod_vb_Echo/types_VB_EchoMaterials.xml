@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- @VB_EchoMaterials: материалы крафта брони экзоскелета и машин (16 сервер, список утверждён 11-24).
-     Значения как у EFT-материалов 16 (_Types_Server_16/DayZavr/EFT_Items.xml): время жизни 8 ч, nominal 3–5.
+     Значения как у EFT-материалов 16 (_Types_Server_16/DayZavr/EFT_Items.xml): время жизни 8 ч, nominal 3–6 (бронепластина и карбон 6: на полный экзо их 5 и 6).
      Семь крафтовых — nominal 0, crafted 1, живут 14 дней. Мод универсальный (не только 16): usage — общие
      ванильные Military/Industrial/Farm/Town.
      Для сервера: вставить в types (папка _Types_Server_16/DayZavr) при выкладке @VB_EchoMaterials. -->
@@ -8,14 +8,14 @@
     <!-- ================= в мире -->
     <!-- Бронепластина -->
     <type name="VB_EM_ArmorPlate">
-        <nominal>4</nominal><lifetime>28800</lifetime><restock>0</restock><min>1</min><quantmin>-1</quantmin><quantmax>-1</quantmax><cost>100</cost>
+        <nominal>6</nominal><lifetime>28800</lifetime><restock>0</restock><min>2</min><quantmin>-1</quantmin><quantmax>-1</quantmax><cost>100</cost>
         <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
         <category name="tools"/>
         <usage name="Military"/>
     </type>
     <!-- Карбоновый профиль -->
     <type name="VB_EM_CarbonProfile">
-        <nominal>4</nominal><lifetime>28800</lifetime><restock>0</restock><min>1</min><quantmin>-1</quantmin><quantmax>-1</quantmax><cost>100</cost>
+        <nominal>6</nominal><lifetime>28800</lifetime><restock>0</restock><min>2</min><quantmin>-1</quantmin><quantmax>-1</quantmax><cost>100</cost>
         <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
         <category name="tools"/>
         <usage name="Military"/>

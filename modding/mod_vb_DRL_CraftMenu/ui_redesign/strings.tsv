@@ -240,3 +240,8 @@ STR_DRL_UI_ASM_NOATTS	none	нет
 STR_DRL_UI_SEARCH_RES	Search results	Результаты поиска
 STR_DRL_UI_ASM_VIEW_SCHEME	Scheme	Схема
 STR_DRL_UI_ASM_VIEW_MODEL	Model	Модель
+# 2026-11-25 Баги №75: блок «Вместимость»
+STR_DRL_UI_CUT_CARGO	CAPACITY	ВМЕСТИМОСТЬ
+STR_DRL_UI_CARGO_SLOTS	%1 slots (%2)	%1 слотов (%2)
+STR_DRL_UI_CARGO_WORN	worn now: %1	сейчас на вас: %1
+STR_DRL_UI_ASM_ATTS_N	Attachments (%1): %2	Навесное (%1): %2

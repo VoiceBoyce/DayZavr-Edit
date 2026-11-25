@@ -1,0 +1,170 @@
+// ------------------------------------------------------ Trader Markers -------------------------------------------------------
+// Трейд зона:
+<TraderMarker> 			0									// Цербер
+<TraderMarkerPosition>	11856.59, 4.95, 6594.48
+<TraderMarkerSafezone>	0
+
+<TraderMarker> 			1									// Химза
+<TraderMarkerPosition>	11875.04, 4.45, 6567.34
+<TraderMarkerSafezone>	0
+
+<TraderMarker> 			2									// Дизель
+<TraderMarkerPosition>	11908.25, 7.24, 6616.748
+<TraderMarkerSafezone>	0
+<VehicleSpawn>			11916.987305, 6.750905, 6615.158203
+<VehicleSpawnOri>		-125.160805, -4.299901, -0.966916
+
+<TraderMarker> 			3									// Ворон
+<TraderMarkerPosition>	11835.18, 5.12, 6648.56
+<TraderMarkerSafezone>	0
+<VehicleSpawn>			11826.840820, 5.937717, 6669.276855
+<VehicleSpawnOri>		-0.289877, 4.702208, -1.579355
+
+<TraderMarker> 			4									// Коллекционер
+<TraderMarkerPosition>	11889.16, 7.39, 6637.66
+<TraderMarkerSafezone>	100
+
+<TraderMarker> 			5									// Мусорщик
+<TraderMarkerPosition>	11870.11, 4.45, 6572.91
+<TraderMarkerSafezone>	0
+
+<TraderMarker> 			6									// Кладовщик
+<TraderMarkerPosition>	11844.34, 5.402, 6631.6005
+<TraderMarkerSafezone>	0
+
+<TraderMarker> 			7									// Охотник
+<TraderMarkerPosition>	11926.116, 6.43, 6592.87
+<TraderMarkerSafezone>	0
+
+<TraderMarker> 			8									// Док
+<TraderMarkerPosition>	11890.81, 5.7006, 6590.65
+<TraderMarkerSafezone>	0
+
+<TraderMarker> 			8									// Док
+<TraderMarkerPosition>	11890.81, 5.7006, 6590.65
+<TraderMarkerSafezone>	0
+
+<TraderMarker> 			9									// Шкипер
+<TraderMarkerPosition>	11868.03, 3.47, 6464.38
+<TraderMarkerSafezone>	0
+<VehicleSpawn>			11877.642578, 0.351274, 6445.781250
+<VehicleSpawnOri>		-168.990799, 0.604763, 0.742571
+
+<TraderMarker> 			10									// Камертон
+<TraderMarkerPosition>	11841.93, 5.37, 6624.63
+<TraderMarkerSafezone>	0
+
+// ------------------------------------------------------ Objects to Spawn ------------------------------------------------------
+// Трейд зона:
+<Object> 			BanditAI_Rolf							// Цербер
+<ObjectPosition>	11856.59, 4.95, 6594.48
+<ObjectOrientation>	145.885681, 0.000000, -0.000000
+<ObjectAttachment>	IMP_Vest_JPC_Black
+<ObjectAttachment>	FOG_UFJ_Shirt_Grey
+<ObjectAttachment>	IMP_Belt_BeltSystem_Medium_Black
+<ObjectAttachment>	FOG_UFP_Pants_Grey
+<ObjectAttachment>	IMP_Helmet_Altyn_Black
+<ObjectAttachment>	FOG_HalfMask_Grey
+<ObjectAttachment>	FOG_FerroGloves_Grey
+<ObjectAttachment>	FOG_Combat_HikingBoots_Grey
+
+<Object> 			BanditAI_Taiki							// Химза
+<ObjectPosition>	11875.04, 4.45, 6567.34
+<ObjectOrientation>	-34.193703, 0.000000, -0.000000
+<ObjectAttachment>	SherpaHat_Black					
+<ObjectAttachment>	FOG_Shirt_ISOF_Jacket_MCAL
+<ObjectAttachment>	FOG_Pants_Crye_G3_White
+<ObjectAttachment>	FOG_Belt_RTGFB_AOR1
+<ObjectAttachment>	FOG_FerroGloves_White
+<ObjectAttachment>	FOG_Zypher_Boots_RG_Socks
+
+<Object> 			BanditAI_Seth							// Дизель
+<ObjectPosition>	11908.25, 7.24, 6616.748
+<ObjectOrientation>	-42.495865, 0.000000, -0.000000
+<ObjectAttachment>	FOG_Watchcap_RG					
+<ObjectAttachment>	FOG_HalfMask_RG
+<ObjectAttachment>	ReflexVest
+<ObjectAttachment>	OMKJacket_Navy
+<ObjectAttachment>	OMKPants_Navy					
+<ObjectAttachment>	FOG_BISON_Belt_MCB
+<ObjectAttachment>	PaddedGloves_Beige
+<ObjectAttachment>	FOG_Operator_Boots_Black
+
+<Object> 			BanditAI_Peter							// Ворон
+<ObjectPosition>	11835.18, 5.12, 6648.56
+<ObjectOrientation>	57.210239, 0.000000, 0.000000
+<ObjectAttachment>	FOG_M32_Headset_RG					
+<ObjectAttachment>	FOG_Shirt_ArcticJacket_MC
+<ObjectAttachment>	FOG_ArcticPants_MC
+<ObjectAttachment>	FOG_Tactical_Fingerless_Gloves_Black					
+<ObjectAttachment>	FOG_Operator_Boots_Black
+
+<Object> 			BanditAI_Jose							// Коллекционер
+<ObjectPosition>	11889.16, 7.39, 6637.66
+<ObjectOrientation>	-120.441444, 0.000000, 0.000000
+<ObjectAttachment>	AviatorGlasses					
+<ObjectAttachment>	FOG_Shirt_ArcticJacket_Red
+<ObjectAttachment>	FOG_G99_Pants_Black
+<ObjectAttachment>	FOG_HalfMask_White
+<ObjectAttachment>	SFP_Mechanics_Gloves_BlackRED					
+<ObjectAttachment>	FOG_Zypher_Boots_Black_Socks
+
+<Object> 			BanditAI_Niki							// Мусорщик
+<ObjectPosition>	11870.11, 4.45, 6572.91
+<ObjectOrientation>	147.472748, 0.000000, -0.000000
+<ObjectAttachment>	FOG_HalfMask_Black					
+<ObjectAttachment>	Candy_Set_Ghost_Ghosted_Jacket
+<ObjectAttachment>	Candy_Set_Ghost_Ghosted_Pants
+<ObjectAttachment>	Candy_Set_Ghost_Ghosted_Gloves
+<ObjectAttachment>	Candy_Set_Ghost_Ghosted_Boots
+
+<Object> 			BanditAI_Cyril							// Кладовщик
+<ObjectPosition>	11844.34, 5.402, 6631.6005
+<ObjectOrientation>	145.776794, 0.000000, -0.000000
+<ObjectAttachment>	FOG_Watchcap_RG
+<ObjectAttachment>	DownJacket_Orange
+<ObjectAttachment>	FOG_FieldPants_KHK
+<ObjectAttachment>	WorkingGloves_Beige					
+<ObjectAttachment>	FOG_Zypher_Boots_Tan_NoSocks
+
+<Object> 			BanditAI_Oliver						 	// Охотник
+<ObjectPosition>	11926.116, 6.43, 6592.87
+<ObjectOrientation>	48.025715, 0.000000, 0.000000
+<ObjectAttachment>	FOG_Fleececap_CB					
+<ObjectAttachment>	HuntingJacket_Brown
+<ObjectAttachment>	HunterPants_Brown
+<ObjectAttachment>	HuntingVest					
+<ObjectAttachment>	SFP_Mechanics_Gloves_Brown
+<ObjectAttachment>	FOG_Combat_HikingBoots_Khaki
+<ObjectAttachment>	Crossbow_Summer
+
+<Object> 			SFP_NPC_DrZnahar						// Док
+<ObjectPosition>	11890.81, 5.7006, 6590.65
+<ObjectOrientation>	59.765648, 0.000000, 0.000000
+<ObjectAttachment>	NPC_DUMMY
+
+<Object> 			BanditAI_Adam						 	// Шкипер
+<ObjectPosition>	11868.03, 3.47, 6464.38
+<ObjectOrientation>	101.057419, 0.000000, 0.000000
+<ObjectAttachment>	SFP_Gorka4_Jacket_TanBlack
+<ObjectAttachment>	SFP_Gorka4_Vest				
+<ObjectAttachment>	SFP_Gorka4_Pants
+<ObjectAttachment>	OMNOGloves_Brown
+<ObjectAttachment>	JungleBoots_Brown
+
+
+<Object> 			BanditAI_Elias							// Камертон (механизмы Эхо), одет в экзоскелет Эхо «Арктика»
+<ObjectPosition>	11841.93, 5.37, 6624.63
+<ObjectOrientation>	53.039108, 0.000000, 0.000000
+<ObjectAttachment>	VB_EC_Exo_Helmet
+<ObjectAttachment>	VB_EC_Exo_Mask_Arctic
+<ObjectAttachment>	VB_EC_Exo_Jacket_Arctic
+<ObjectAttachment>	VB_EC_Exo_Vest_Arctic
+<ObjectAttachment>	VB_EC_Exo_Pants_Arctic
+<ObjectAttachment>	VB_EC_Exo_Gloves_Arctic
+<ObjectAttachment>	VB_EC_Exo_Boots_Arctic
+<ObjectAttachment>	VB_EC_Exo_Servo
+
+
+//<OpenFile> FileName.txt								// Links to another File; Must be right above <FileEnd>!
+<FileEnd>												// This has to be on the End of this File and is very importand!

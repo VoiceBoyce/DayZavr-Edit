@@ -204,3 +204,14 @@ claude.ai «DRL Крафт — макет v2», исходники артбор�
    Окно изучения открывает команда `learn` (дальше `cat`, `recipe`, `var`, `row`, `study`, `state`);
    его хит-зоны: `DRL_StudyBtn`, `DRL_Learn_<слот>[_chk|_info]`.
 Код нового UI: `DRL_CraftMenu/scripts/5_Mission/GUI/IUF/`. Строки: `ui_redesign/strings.tsv` + `drl_add_strings.py`.
+
+## Вместимость и защита содержимого (2026-11-25, Баги №74–75)
+
+- `IUF/DRL_UICargo.c` — `DRL_UICargoGrid`: мини-сетка груза cols×rows в пропорции (длинная сторона по горизонтали, ячейка 4–11 px, при большом грузе линии через k ячеек).
+- Окно: `FillCargoInfo()` после `FillVehicleInfo` → `m_Bp.SetCargo(cols, rows, worn)`; размер — `CargoSizeOf` (машины — подкласс `Cargo`), надетое — `WornCargoFor` (слот из `inventorySlot` результата, `FindAttachmentBySlotName`; -1 — ничего не надето, 0 — без груза). У машин без сравнения.
+- «Раскрой» (`DRL_UICutSheet`): седьмой раздел «Вместимость» после «Защиты» (`SECTIONS = 7`, блок `CARGO_H` 58): сетка, «N слотов (W×H)», «сейчас на вас: M» и разница зелёным/красным; у вещей без груза скрыт.
+- «Сборка» (`DRL_UIAssemblySheet`): блок характеристик ярче (фон 238, рамка BP 150, груз 14 bold, навесное обычным текстом), сетка отсека под строкой груза, строка «Навесное (N): …» (`STR_DRL_UI_ASM_ATTS_N`).
+- Строки: `STR_DRL_UI_CUT_CARGO`, `STR_DRL_UI_CARGO_SLOTS`, `STR_DRL_UI_CARGO_WORN`, `STR_DRL_UI_ASM_ATTS_N` (в `ui_redesign/strings.tsv` и stringtable).
+- `DRL_CraftComponentResolver.DoesItemMatchComponent`: расходник (Delete=1) с навесным или грузом не подходит — `ObjectDelete` удалял ингредиент вместе с содержимым (артефакты в поясе, вещи в кейсе). Инструменты не затронуты.
+- Компиляция проверена ванильным DayZServer (CF + INT_UIFramework + DRL_Core + DRL_CraftMenu + сервер DRL), в игре не смотрели: стенд dayz-mcp 11-25 отказал (`unapproved_debug_image`).
+

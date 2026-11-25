@@ -6,6 +6,25 @@
  */
 class DRL_CraftComponentResolver
 {
+    // Есть ли в предмете что-то навешенное или в грузе.
+    static bool HasContents(ItemBase item)
+    {
+        if (!item || !item.GetInventory())
+        {
+            return false;
+        }
+        if (item.GetInventory().AttachmentCount() > 0)
+        {
+            return true;
+        }
+        CargoBase cargo = item.GetInventory().GetCargo();
+        if (cargo && cargo.GetItemCount() > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
     static bool DoesItemMatchComponent(ItemBase item, DRL_Craft_Component c)
     {
         if (!item || item.IsRuined() || !c)
@@ -15,6 +34,13 @@ class DRL_CraftComponentResolver
 
         int lvl = item.GetHealthLevel();
         if (lvl > c.MinHealthFrac)
+        {
+            return false;
+        }
+
+        // DayZavr 2026-11-25: расходник с навесным или грузом в крафт не берём — ObjectDelete удалил бы и
+        // содержимое (артефакты в баночках пояса, вещи в кейсе). Инструменты (Delete = 0) не трогаем.
+        if (c.Delete && HasContents(item))
         {
             return false;
         }

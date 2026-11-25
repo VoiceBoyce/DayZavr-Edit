@@ -1172,6 +1172,12 @@ class DRL_UIBlueprint extends ScriptedWidgetEventHandler
 	{
 	}
 
+	// Вместимость изделия: груз cols×rows ячеек (0 — груза нет), worn — слотов у того, что надето сейчас
+	// в тот же слот (-1 — сравнивать не с чем). «Раскрой» и «Сборка» показывают, «Чертёж» — нет (DayZavr 2026-11-25).
+	void SetCargo(int cols, int rows, int worn)
+	{
+	}
+
 	// Число на изделии («×5»), "" - скрыть.
 	void SetBadge(string text)
 	{

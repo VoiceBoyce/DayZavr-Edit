@@ -254,6 +254,11 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 	protected TextWidget m_InfoCargo;
 	protected MultilineTextWidget m_InfoAtts;
 	protected ref array<string> m_InfoLines;
+	// Мини-сетка грузового отсека (Баги №75).
+	static const float INFO_GRID_H = 22;
+	protected ref DRL_UICargoGrid m_InfoGrid;
+	protected int m_CargoCols;
+	protected int m_CargoRows;
 
 	// Вид стенда: схема (по умолчанию) или модель. Выбор помнится до выхода из игры.
 	static const float VIEW_TABS_W = 220;
@@ -271,6 +276,12 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 		m_PaintHits = new array<ButtonWidget>();
 		m_SpecList = new DRL_UISpecList();
 		m_InfoLines = new array<string>();
+	}
+
+	override void SetCargo(int cols, int rows, int worn)
+	{
+		m_CargoCols = cols;
+		m_CargoRows = rows;
 	}
 
 	override void SetInfo(array<string> lines)
@@ -369,15 +380,19 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 		}
 
 		// Характеристики машины: грузовой отсек и навесное (бочки, ящики, рюкзаки, оружие).
+		// Баги №75 (2026-11-25): блок ярче (был блёклый) — плотнее фон, яркая рамка, крупнее груз, навесное
+		// обычным цветом текста, мини-сетка отсека под строкой груза.
 		m_Info = INT_UIF_Draw.Frame(m_Bay, m_BayW - 18 - INFO_W, m_BayH - 18 - 96, INFO_W, 96, "DRL_AsmInfo");
-		int infoFill = ARGB(215, 8, 12, 20);
-		int infoBorder = DRL_UIC.BP(70);
+		int infoFill = ARGB(238, 8, 12, 20);
+		int infoBorder = DRL_UIC.BP(150);
 		m_InfoBg = INT_UIF_Surface.Box(m_Info, 0, 0, INFO_W, 96, 10, infoFill, infoBorder);
-		TextWidget infoCap = INT_UIF_Draw.Text(m_Info, 12, 8, INFO_W - 24, 14, "#STR_DRL_UI_ASM_INFO", 9, bpText);
+		TextWidget infoCap = INT_UIF_Draw.Text(m_Info, 12, 8, INFO_W - 24, 14, "#STR_DRL_UI_ASM_INFO", 9, DRL_UIC.BP());
 		infoCap.SetBold(true);
-		m_InfoCargo = INT_UIF_Draw.Text(m_Info, 12, 24, INFO_W - 24, 18, "", 12, txt);
+		m_InfoCargo = INT_UIF_Draw.Text(m_Info, 12, 24, INFO_W - 24, 20, "", 14, txt);
 		m_InfoCargo.SetBold(true);
-		m_InfoAtts = INT_UIF_Draw.MText(m_Info, 12, 44, INFO_W - 24, 46, "", 11, muted);
+		m_InfoGrid = new DRL_UICargoGrid();
+		m_InfoGrid.Build(m_Info, 12, 48, INFO_W - 24, INFO_GRID_H);
+		m_InfoAtts = INT_UIF_Draw.MText(m_Info, 12, 76, INFO_W - 24, 46, "", 11, txt);
 		m_Info.Show(false);
 		// В «Модели» блок может лечь на угол модели: 3D рисуется поверх 2D с приоритетом не выше своего.
 		DRL_UIKitUtil.SetSortDeep(m_Info, DRL_UI_SORT_OVER_MODEL);
@@ -1008,15 +1023,20 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 		if (m_InfoLines.Count() > 1)
 			atts = m_InfoLines[1];
 		m_InfoAtts.SetText(atts);
+		// Мини-сетка отсека под строкой груза (Баги №75); нет груза — без сетки.
+		m_InfoGrid.Set(m_CargoCols, m_CargoRows);
+		float gy = 48;
+		if (m_CargoCols > 0 && m_CargoRows > 0)
+			gy = 48 + m_InfoGrid.Height() + 8;
 		// Длина навесного в строках по ширине текста (MultilineTextWidget переносит сам).
 		float aw = DRL_UIMeasure.TextW(m_Info, atts, 11, false);
 		int lines = (int)(aw / (INFO_W - 28)) + 1;
 		if (lines > 4)
 			lines = 4;
-		float ih = 48 + lines * 15 + 8;
+		float ih = gy + lines * 15 + 10;
 		INT_UIF_Draw.Place(m_Info, m_BayW - 18 - INFO_W, m_BayH - 22 - ih, INFO_W, ih);
 		INT_UIF_Draw.Resize(m_InfoBg.GetRoot(), INFO_W, ih);
-		INT_UIF_Draw.Resize(m_InfoAtts, INFO_W - 24, lines * 15 + 4);
+		INT_UIF_Draw.Place(m_InfoAtts, 12, gy, INFO_W - 24, lines * 15 + 4);
 	}
 
 	// Группа компонента по классу.
