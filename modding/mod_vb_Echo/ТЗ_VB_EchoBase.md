@@ -166,7 +166,7 @@
 
 Как у DRL: **одна модель на все наборы** (`DRL_CraftMenu\kit\kit_wbc.p3d` у них — у нас `eb_kit.p3d`, концепт
 `концепт/рендеры/kit_*.png`), у каждого устройства свой класс набора и название.
-- Классы: `VB_EB_KitBase` (scope 0, модель кейса) → `VB_EB_Kit_WindTurbine`, `_SolarPanel`, `_Furnace`, `_Converter`,
+- Классы: `VB_EB_KitBase` (scope 0, модель кейса) → `VB_EB_WindTurbine_Kit`, `_SolarPanel`, `_Furnace`, `_Converter`,
   `_Storage`, `_ChargeStation`, `_ChargePad`, `_Relay`. Название «Набор: Ветряк» и т. д. Носится в двух руках
   (`itemBehaviour = 2`), лезет в багажник машины.
 - Установка (как `DRL_Craft_Kit`): `IsDeployable()`, действия `ActionTogglePlaceObject` + `ActionDeployObject`;

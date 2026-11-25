@@ -148,7 +148,7 @@
         <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="1" deloot="0" />
         <category name="tools" />
     </type>
-    <type name="VB_EB_Kit_WindTurbine">
+    <type name="VB_EB_WindTurbine_Kit">
         <nominal>0</nominal>
         <lifetime>1209600</lifetime>
         <restock>0</restock>
@@ -159,7 +159,7 @@
         <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="1" deloot="0" />
         <category name="tools" />
     </type>
-    <type name="VB_EB_Kit_SolarPanel">
+    <type name="VB_EB_SolarPanel_Kit">
         <nominal>0</nominal>
         <lifetime>1209600</lifetime>
         <restock>0</restock>
@@ -170,7 +170,7 @@
         <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="1" deloot="0" />
         <category name="tools" />
     </type>
-    <type name="VB_EB_Kit_Furnace">
+    <type name="VB_EB_Furnace_Kit">
         <nominal>0</nominal>
         <lifetime>1209600</lifetime>
         <restock>0</restock>
@@ -181,7 +181,7 @@
         <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="1" deloot="0" />
         <category name="tools" />
     </type>
-    <type name="VB_EB_Kit_Converter">
+    <type name="VB_EB_Converter_Kit">
         <nominal>0</nominal>
         <lifetime>1209600</lifetime>
         <restock>0</restock>
@@ -192,7 +192,7 @@
         <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="1" deloot="0" />
         <category name="tools" />
     </type>
-    <type name="VB_EB_Kit_Storage">
+    <type name="VB_EB_Storage_Kit">
         <nominal>0</nominal>
         <lifetime>1209600</lifetime>
         <restock>0</restock>
@@ -203,7 +203,7 @@
         <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="1" deloot="0" />
         <category name="tools" />
     </type>
-    <type name="VB_EB_Kit_ChargeStation">
+    <type name="VB_EB_ChargeStation_Kit">
         <nominal>0</nominal>
         <lifetime>1209600</lifetime>
         <restock>0</restock>
@@ -214,7 +214,7 @@
         <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="1" deloot="0" />
         <category name="tools" />
     </type>
-    <type name="VB_EB_Kit_ChargePad">
+    <type name="VB_EB_ChargePad_Kit">
         <nominal>0</nominal>
         <lifetime>1209600</lifetime>
         <restock>0</restock>
@@ -225,7 +225,7 @@
         <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="1" deloot="0" />
         <category name="tools" />
     </type>
-    <type name="VB_EB_Kit_Relay">
+    <type name="VB_EB_Relay_Kit">
         <nominal>0</nominal>
         <lifetime>1209600</lifetime>
         <restock>0</restock>

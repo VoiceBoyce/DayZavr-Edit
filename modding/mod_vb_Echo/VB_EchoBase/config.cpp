@@ -15,7 +15,7 @@ class CfgPatches
 {
 	class VB_EchoBase
 	{
-		units[]={"VB_EB_WindTurbine","VB_EB_SolarPanel","VB_EB_Furnace","VB_EB_Converter","VB_EB_Storage","VB_EB_ChargeStation","VB_EB_ChargePad","VB_EB_Relay","VB_EB_Crystal","VB_EB_CrystalFusion","VB_EB_Kit_WindTurbine","VB_EB_Kit_SolarPanel","VB_EB_Kit_Furnace","VB_EB_Kit_Converter","VB_EB_Kit_Storage","VB_EB_Kit_ChargeStation","VB_EB_Kit_ChargePad","VB_EB_Kit_Relay"};
+		units[]={"VB_EB_WindTurbine","VB_EB_SolarPanel","VB_EB_Furnace","VB_EB_Converter","VB_EB_Storage","VB_EB_ChargeStation","VB_EB_ChargePad","VB_EB_Relay","VB_EB_Crystal","VB_EB_CrystalFusion","VB_EB_WindTurbine_Kit","VB_EB_SolarPanel_Kit","VB_EB_Furnace_Kit","VB_EB_Converter_Kit","VB_EB_Storage_Kit","VB_EB_ChargeStation_Kit","VB_EB_ChargePad_Kit","VB_EB_Relay_Kit"};
 		weapons[]={};
 		requiredVersion=0.1;
 		requiredAddons[]={"DZ_Data","DZ_Scripts","VB_EchoCore"};
@@ -108,7 +108,7 @@ class CfgVehicles
 		displayName="$STR_VB_EB_wind";
 		descriptionShort="$STR_VB_EB_wind_disc";
 		model="VB_EchoBase\data\eb_wind.p3d";
-		vbKit="VB_EB_Kit_WindTurbine";
+		vbKit="VB_EB_WindTurbine_Kit";
 		class VB_EchoRating { tier=1; outMax=64; };	// kE/tick при максимальном ветре (шкала ×32, 11-20)
 		// буфер тока (ТЗ_VB_EchoBase_буферы.md): энергия EnergyManager — ваниль сама сохраняет и шлёт клиенту;
 		// пассивный — сам не включается и не тратит
@@ -135,7 +135,7 @@ class CfgVehicles
 		displayName="$STR_VB_EB_solar";
 		descriptionShort="$STR_VB_EB_solar_disc";
 		model="VB_EchoBase\data\eb_solar.p3d";
-		vbKit="VB_EB_Kit_SolarPanel";
+		vbKit="VB_EB_SolarPanel_Kit";
 		class VB_EchoRating { tier=1; outMax=32; };	// kE/tick при солнце в зените
 		// буфер тока (ТЗ_VB_EchoBase_буферы.md): энергия EnergyManager — ваниль сама сохраняет и шлёт клиенту;
 		// пассивный — сам не включается и не тратит
@@ -153,7 +153,7 @@ class CfgVehicles
 		displayName="$STR_VB_EB_furnace";
 		descriptionShort="$STR_VB_EB_furnace_disc";
 		model="VB_EchoBase\data\eb_furnace.p3d";
-		vbKit="VB_EB_Kit_Furnace";
+		vbKit="VB_EB_Furnace_Kit";
 		itemsCargoSize[]={10,6};						// отсек топлива
 		// в отсек — только топливо (точные классы; kE за штуку — в настройках сервера, fuel). Клиент настроек не знает,
 		// поэтому список здесь: иначе предмет «ложился» бы у клиента и возвращался сервером. Новое топливо — сюда и в fuel
@@ -183,7 +183,7 @@ class CfgVehicles
 		displayName="$STR_VB_EB_converter";
 		descriptionShort="$STR_VB_EB_converter_disc";
 		model="VB_EchoBase\data\eb_converter.p3d";
-		vbKit="VB_EB_Kit_Converter";
+		vbKit="VB_EB_Converter_Kit";
 		attachments[]={"VB_EB_Crystal"};
 		// кристалл в колбе = вставленный в слот (11-20): crystal_glow красит скрипт (Эхо красный, синтез бирюзовый),
 		// crystal_hide — без кристалла скрыт (начальная фаза 1), crystal_spin — вращение (скрипт клиента, model.cfg)
@@ -237,7 +237,7 @@ class CfgVehicles
 		displayName="$STR_VB_EB_storage";
 		descriptionShort="$STR_VB_EB_storage_disc";
 		model="VB_EchoBase\data\eb_storage.p3d";
-		vbKit="VB_EB_Kit_Storage";
+		vbKit="VB_EB_Storage_Kit";
 		varQuantityInit=0;
 		varQuantityMin=0;
 		varQuantityMax=100000;
@@ -277,7 +277,7 @@ class CfgVehicles
 		displayName="$STR_VB_EB_station";
 		descriptionShort="$STR_VB_EB_station_disc";
 		model="VB_EchoBase\data\eb_station.p3d";
-		vbKit="VB_EB_Kit_ChargeStation";
+		vbKit="VB_EB_ChargeStation_Kit";
 		// станция v2 (идея пользователя 11-20): заряжаемое вешается на станцию и видно на модели (прокси), отсека нет.
 		// Слоты — в ядре (VB_EchoCore): Charge* заряжает, Drain* разряжает ячейку в запас сети; полная ячейка сама
 		// встаёт в разрядку, пустая — в зарядку (скрипт CanReceiveAttachment)
@@ -323,7 +323,7 @@ class CfgVehicles
 		displayName="$STR_VB_EB_pad";
 		descriptionShort="$STR_VB_EB_pad_disc";
 		model="VB_EchoBase\data\eb_pad.p3d";
-		vbKit="VB_EB_Kit_ChargePad";
+		vbKit="VB_EB_ChargePad_Kit";
 		slopeTolerance=0.15;							// только на ровное (решение 11-20)
 		yawPitchRollLimit[]={10,10,10};
 		class VB_EchoRating { tier=1; inMax=256; outMax=128; };	// из сети 256, машине 128 kE/tick (потери 50 %, решение 11-20)
@@ -349,7 +349,7 @@ class CfgVehicles
 		displayName="$STR_VB_EB_relay";
 		descriptionShort="$STR_VB_EB_relay_disc";
 		model="VB_EchoBase\data\eb_relay.p3d";
-		vbKit="VB_EB_Kit_Relay";
+		vbKit="VB_EB_Relay_Kit";
 		class VB_EchoRating { tier=1; range=32; };	// м
 	};
 	// ---------------- расходник преобразователя
@@ -411,49 +411,49 @@ class CfgVehicles
 			};
 		};
 	};
-	class VB_EB_Kit_WindTurbine: VB_EB_KitBase
+	class VB_EB_WindTurbine_Kit: VB_EB_KitBase
 	{
 		scope=2;
 		displayName="$STR_VB_EB_kit_wind";
 		projectionTypename="VB_EB_WindTurbine";		// голограмма — само устройство (ваниль, Hologram.c)
 	};
-	class VB_EB_Kit_SolarPanel: VB_EB_KitBase
+	class VB_EB_SolarPanel_Kit: VB_EB_KitBase
 	{
 		scope=2;
 		displayName="$STR_VB_EB_kit_solar";
 		projectionTypename="VB_EB_SolarPanel";
 	};
-	class VB_EB_Kit_Furnace: VB_EB_KitBase
+	class VB_EB_Furnace_Kit: VB_EB_KitBase
 	{
 		scope=2;
 		displayName="$STR_VB_EB_kit_furnace";
 		projectionTypename="VB_EB_Furnace";
 	};
-	class VB_EB_Kit_Converter: VB_EB_KitBase
+	class VB_EB_Converter_Kit: VB_EB_KitBase
 	{
 		scope=2;
 		displayName="$STR_VB_EB_kit_converter";
 		projectionTypename="VB_EB_Converter";
 	};
-	class VB_EB_Kit_Storage: VB_EB_KitBase
+	class VB_EB_Storage_Kit: VB_EB_KitBase
 	{
 		scope=2;
 		displayName="$STR_VB_EB_kit_storage";
 		projectionTypename="VB_EB_Storage";
 	};
-	class VB_EB_Kit_ChargeStation: VB_EB_KitBase
+	class VB_EB_ChargeStation_Kit: VB_EB_KitBase
 	{
 		scope=2;
 		displayName="$STR_VB_EB_kit_station";
 		projectionTypename="VB_EB_ChargeStation";
 	};
-	class VB_EB_Kit_ChargePad: VB_EB_KitBase
+	class VB_EB_ChargePad_Kit: VB_EB_KitBase
 	{
 		scope=2;
 		displayName="$STR_VB_EB_kit_pad";
 		projectionTypename="VB_EB_ChargePad";
 	};
-	class VB_EB_Kit_Relay: VB_EB_KitBase
+	class VB_EB_Relay_Kit: VB_EB_KitBase
 	{
 		scope=2;
 		displayName="$STR_VB_EB_kit_relay";

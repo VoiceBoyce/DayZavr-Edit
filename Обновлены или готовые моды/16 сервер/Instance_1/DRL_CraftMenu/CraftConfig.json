@@ -584,7 +584,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Стёгаешь флис с арамидом и проливаешь пеной пополам со студенистой слизью. Слизь застывает гелем и гасит удар внутри брони.",
+        "Description": "Стёгаешь флис с арамидом в чехле из рипстопа и проливаешь пеной пополам со студенистой слизью. Слизь застывает гелем и гасит удар.",
         "CraftTimeSec": 6,
         "RecraftTimeSec": 6,
         "ResultCount": 2,
@@ -595,6 +595,24 @@
                 "Classname": "EFT_Cloth_fleece",
                 "Classnames": [
                     "EFT_Cloth_fleece"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 3,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Cloth_aramid",
+                "Classnames": [
+                    "EFT_Cloth_aramid"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -610,9 +628,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "EFT_Mounting_foam",
+                "Classname": "EFT_Cloth_ripstop",
                 "Classnames": [
-                    "EFT_Mounting_foam"
+                    "EFT_Cloth_ripstop"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -628,18 +646,18 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "EFT_Cloth_aramid",
+                "Classname": "EFT_Mounting_foam",
                 "Classnames": [
-                    "EFT_Cloth_aramid"
+                    "EFT_Mounting_foam"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 1,
+                "Amount": 2,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -649,6 +667,24 @@
                 "Classname": "VB_AB_Mat_Studen",
                 "Classnames": [
                     "VB_AB_Mat_Studen"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Poxearm",
+                "Classnames": [
+                    "EFT_Poxearm"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -676,7 +712,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Мотаешь медный провод на ферритовый сердечник электромагнита, вплавляешь грозовые кристаллы — они держат заряд. Сердце сервопривода.",
+        "Description": "Мотаешь медь на сердечник электромагнита, вплавляешь грозовые кристаллы и выводишь концы через конденсатор. Кристаллы держат заряд.",
         "CraftTimeSec": 8,
         "RecraftTimeSec": 8,
         "ResultCount": 1,
@@ -754,6 +790,82 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Capacitors",
+                "Classnames": [
+                    "EFT_Capacitors"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Wires",
+                "Classnames": [
+                    "EFT_Wires"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "Pliers",
+                "Classnames": [
+                    "Pliers",
+                    "EFT_kusajki",
+                    "EFT_Cablecutter"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 0,
+                "ApplyDamageFrac": 0.02,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 2,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "Screwdriver",
+                "Classnames": [
+                    "Screwdriver",
+                    "EFT_Screwdriver",
+                    "EFT_Screwdriver_krest"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 0,
+                "ApplyDamageFrac": 0.02,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 2,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -768,7 +880,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Перепаиваешь ЭБУ под экзоскелет: конденсаторы и реле на питание, разрядный кварц — стабилизатор. Мозг сервопривода.",
+        "Description": "Перепаиваешь ЭБУ под экзоскелет: конденсаторы и реле на питание, военный кабель к сервомоторам, разрядный кварц — стабилизатор.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -800,12 +912,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 2,
+                "Amount": 3,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
-                "RecraftAmount": 2,
+                "RecraftAmount": 3,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -818,12 +930,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 1,
+                "Amount": 2,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -836,6 +948,24 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Military_cable",
+                "Classnames": [
+                    "EFT_Military_cable"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
                 "Amount": 1,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
@@ -845,6 +975,82 @@
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Wires",
+                "Classnames": [
+                    "EFT_Wires"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Insulatingtape",
+                "Classnames": [
+                    "EFT_Insulatingtape"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "Pliers",
+                "Classnames": [
+                    "Pliers",
+                    "EFT_kusajki",
+                    "EFT_Cablecutter"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 0,
+                "ApplyDamageFrac": 0.02,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 2,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "Screwdriver",
+                "Classnames": [
+                    "Screwdriver",
+                    "EFT_Screwdriver",
+                    "EFT_Screwdriver_krest"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 0,
+                "ApplyDamageFrac": 0.02,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 2,
                 "RecraftNeedAttachments": 0
             }
         ]
@@ -860,7 +1066,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Протягиваешь жилы Изнанки в силиконовой трубке вместе с медью. По проводнику энергия Эхо идёт в броне и машине.",
+        "Description": "Протягиваешь жилы Изнанки с медью в силиконовой трубке и заматываешь концы изолентой. По проводнику энергия Эхо идёт в броне и машине.",
         "CraftTimeSec": 6,
         "RecraftTimeSec": 6,
         "ResultCount": 2,
@@ -920,6 +1126,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Insulatingtape",
+                "Classnames": [
+                    "EFT_Insulatingtape"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -934,7 +1158,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Свариваешь трубы и листы в секцию каркаса и стягиваешь болтами. Основа кузова машины.",
+        "Description": "Свариваешь трубы и листы в секцию каркаса, ставишь косынки и стягиваешь болтами и проволокой. Основа кузова машины.",
         "CraftTimeSec": 12,
         "RecraftTimeSec": 12,
         "ResultCount": 1,
@@ -945,6 +1169,24 @@
                 "Classname": "Pipe",
                 "Classnames": [
                     "Pipe"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 4,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 4,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "MetalPlate",
+                "Classnames": [
+                    "MetalPlate"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -960,36 +1202,18 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "MetalPlate",
-                "Classnames": [
-                    "MetalPlate"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 2,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 2,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
                 "Classname": "EFT_Bolts",
                 "Classnames": [
                     "EFT_Bolts"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 2,
+                "Amount": 3,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
-                "RecraftAmount": 2,
+                "RecraftAmount": 3,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -999,6 +1223,42 @@
                 "Classname": "EFT_model_nuts",
                 "Classnames": [
                     "EFT_model_nuts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 3,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_MetalParts",
+                "Classnames": [
+                    "EFT_MetalParts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "MetalWire",
+                "Classnames": [
+                    "MetalWire"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -1065,7 +1325,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Выколачиваешь лист, обрезаешь по шаблону и проклеиваешь рёбра холодной сваркой. Идёт на двери и капоты.",
+        "Description": "Выколачиваешь лист, травишь щёлочью, обрезаешь по шаблону, проклеиваешь рёбра холодной сваркой и пеной изнутри. Идёт на двери и капоты.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -1079,12 +1339,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 3,
+                "Amount": 4,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
-                "RecraftAmount": 3,
+                "RecraftAmount": 4,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -1094,6 +1354,24 @@
                 "Classname": "EFT_Screw_pack",
                 "Classnames": [
                     "EFT_Screw_pack"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Poxearm",
+                "Classnames": [
+                    "EFT_Poxearm"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -1109,9 +1387,45 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "EFT_Poxearm",
+                "Classname": "EFT_MetalParts",
                 "Classnames": [
-                    "EFT_Poxearm"
+                    "EFT_MetalParts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Mounting_foam",
+                "Classnames": [
+                    "EFT_Mounting_foam"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Sheloch",
+                "Classnames": [
+                    "EFT_Sheloch"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -1175,7 +1489,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Склеиваешь оргстекло слоями пепельного стекла. Многослойное бронестекло для визоров шлемов и стёкол машин.",
+        "Description": "Склеиваешь оргстекло слоями пепельного и линзового стекла с арамидной сеткой. Бронестекло для визоров шлемов и стёкол машин.",
         "CraftTimeSec": 8,
         "RecraftTimeSec": 8,
         "ResultCount": 1,
@@ -1189,12 +1503,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 2,
+                "Amount": 3,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
-                "RecraftAmount": 2,
+                "RecraftAmount": 3,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -1222,6 +1536,60 @@
                 "Classname": "EFT_Poxearm",
                 "Classnames": [
                     "EFT_Poxearm"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_AB_Mat_LinceAgr",
+                "Classnames": [
+                    "VB_AB_Mat_LinceAgr"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Cloth_aramid",
+                "Classnames": [
+                    "EFT_Cloth_aramid"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Klean",
+                "Classnames": [
+                    "EFT_Klean"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -2599,9 +2967,9 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Кожаный пояс с 2 баночками из оргстекла, вешается на сервопривод. Артефакты в баночках действуют.",
-        "CraftTimeSec": 10,
-        "RecraftTimeSec": 10,
+        "Description": "Кожаный пояс на кордуре с 2 баночками из оргстекла, вешается на сервопривод. Артефакты в баночках действуют.",
+        "CraftTimeSec": 8,
+        "RecraftTimeSec": 8,
         "ResultCount": 1,
         "ResultQuantityFrac": 0.0,
         "ResultDamageFrac": 0.0,
@@ -2613,12 +2981,30 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 1,
+                "Amount": 3,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.5,
-                "RecraftAmount": 1,
+                "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Cloth_cordura",
+                "Classnames": [
+                    "EFT_Cloth_cordura"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -2710,8 +3096,8 @@
         "PreviewClassname": "",
         "CraftIcon": "",
         "Description": "Малый пояс + ещё 2 баночки из пустого стекла — 4 артефакта. Перед крафтом выньте артефакты из баночек: пояс с ними не берётся.",
-        "CraftTimeSec": 20,
-        "RecraftTimeSec": 20,
+        "CraftTimeSec": 10,
+        "RecraftTimeSec": 10,
         "ResultCount": 1,
         "ResultQuantityFrac": 0.0,
         "ResultDamageFrac": 0.0,
@@ -2741,12 +3127,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 1,
+                "Amount": 2,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.5,
-                "RecraftAmount": 1,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -2838,8 +3224,8 @@
         "PreviewClassname": "",
         "CraftIcon": "",
         "Description": "Средний пояс + 2 баночки, где застывший пузырь держит артефакт в покое — 6 артефактов. Перед крафтом выньте артефакты из баночек.",
-        "CraftTimeSec": 30,
-        "RecraftTimeSec": 30,
+        "CraftTimeSec": 12,
+        "RecraftTimeSec": 12,
         "ResultCount": 1,
         "ResultQuantityFrac": 0.0,
         "ResultDamageFrac": 0.0,
@@ -2869,12 +3255,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 1,
+                "Amount": 2,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.5,
-                "RecraftAmount": 1,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -34509,9 +34895,9 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Две бронепластины в углепластиковой основе, визор из бронестекла и линзового стекла, замок — трофей босса. Стёкла горят от сервопривода. Носится с маской.",
-        "CraftTimeSec": 60,
-        "RecraftTimeSec": 60,
+        "Description": "Две бронепластины в углепластиковой основе на арамидном подбое, визор из бронестекла и линзового стекла, замок — трофей босса. Носится с маской.",
+        "CraftTimeSec": 15,
+        "RecraftTimeSec": 15,
         "ResultCount": 1,
         "ResultQuantityFrac": 0.0,
         "ResultDamageFrac": 0.0,
@@ -34619,6 +35005,42 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Cloth_aramid",
+                "Classnames": [
+                    "EFT_Cloth_aramid"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 3,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Wires",
+                "Classnames": [
+                    "EFT_Wires"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -34745,9 +35167,9 @@
         ],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Фильтр и линзы из линзового стекла под флисовой балаклавой. Защищает от газа, носится со шлемом, входит в комплект экзо.",
-        "CraftTimeSec": 40,
-        "RecraftTimeSec": 40,
+        "Description": "Фильтр с клапаном и линзы из линзового стекла под флисовой балаклавой. Защищает от газа, носится со шлемом, входит в комплект экзо.",
+        "CraftTimeSec": 10,
+        "RecraftTimeSec": 10,
         "ResultCount": 1,
         "ResultQuantityFrac": 0.0,
         "ResultDamageFrac": 0.0,
@@ -34795,12 +35217,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 2,
+                "Amount": 6,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.5,
-                "RecraftAmount": 2,
+                "RecraftAmount": 6,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -34828,6 +35250,24 @@
                 "Classname": "VB_EM_DamperPad",
                 "Classnames": [
                     "VB_EM_DamperPad"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_SiliconTube",
+                "Classnames": [
+                    "EFT_SiliconTube"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -34933,8 +35373,8 @@
         "PreviewClassname": "",
         "CraftIcon": "",
         "Description": "Четыре бронепластины, уплотнённые сжатым камнем, на арамиде и кордуре, замок плит — трофей босса. Карго 80, входит в комплект экзо.",
-        "CraftTimeSec": 60,
-        "RecraftTimeSec": 60,
+        "CraftTimeSec": 15,
+        "RecraftTimeSec": 15,
         "ResultCount": 1,
         "ResultQuantityFrac": 0.0,
         "ResultDamageFrac": 0.0,
@@ -35000,12 +35440,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 3,
+                "Amount": 9,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.5,
-                "RecraftAmount": 3,
+                "RecraftAmount": 9,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -35018,12 +35458,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 2,
+                "Amount": 6,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.5,
-                "RecraftAmount": 2,
+                "RecraftAmount": 6,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -35051,6 +35491,24 @@
                 "Classname": "EFT_Carbonecase",
                 "Classnames": [
                     "EFT_Carbonecase"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_EM_EchoConduit",
+                "Classnames": [
+                    "VB_EM_EchoConduit"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -35186,9 +35644,9 @@
         ],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Карбоновый каркас рук с сервомоторами на военном кабеле, по рукавам — жилы Изнанки, замок — трофей босса. Карго 100, входит в комплект экзо.",
-        "CraftTimeSec": 60,
-        "RecraftTimeSec": 60,
+        "Description": "Карбоновый каркас рук с сервомоторами на военном кабеле, демпферы в локтях, по рукавам — жилы Изнанки, замок — трофей босса. Карго 100.",
+        "CraftTimeSec": 15,
+        "RecraftTimeSec": 15,
         "ResultCount": 1,
         "ResultQuantityFrac": 0.0,
         "ResultDamageFrac": 0.0,
@@ -35272,12 +35730,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 3,
+                "Amount": 9,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.5,
-                "RecraftAmount": 3,
+                "RecraftAmount": 9,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -35290,12 +35748,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 2,
+                "Amount": 6,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.5,
-                "RecraftAmount": 2,
+                "RecraftAmount": 6,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -35314,6 +35772,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.5,
                 "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_EM_DamperPad",
+                "Classnames": [
+                    "VB_EM_DamperPad"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -35423,8 +35899,8 @@
         "PreviewClassname": "",
         "CraftIcon": "",
         "Description": "Карбоновый каркас ног с гидроцилиндрами, демпферы в коленях, жилы Изнанки, замок — трофей босса. Карго 90, входит в комплект экзо.",
-        "CraftTimeSec": 60,
-        "RecraftTimeSec": 60,
+        "CraftTimeSec": 15,
+        "RecraftTimeSec": 15,
         "ResultCount": 1,
         "ResultQuantityFrac": 0.0,
         "ResultDamageFrac": 0.0,
@@ -35508,12 +35984,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 3,
+                "Amount": 9,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.5,
-                "RecraftAmount": 3,
+                "RecraftAmount": 9,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -35526,12 +36002,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 2,
+                "Amount": 6,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.5,
-                "RecraftAmount": 2,
+                "RecraftAmount": 6,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -35541,6 +36017,24 @@
                 "Classname": "EFT_Military_cable",
                 "Classnames": [
                     "EFT_Military_cable"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_EM_EchoConduit",
+                "Classnames": [
+                    "VB_EM_EchoConduit"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -35658,9 +36152,9 @@
         ],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Кожа и арамид, сервомотор усиливает хват, демпферы на костяшках, пальцы в изоленте. Входят в комплект экзо.",
-        "CraftTimeSec": 40,
-        "RecraftTimeSec": 40,
+        "Description": "Кожа и арамид на карбоновых фалангах, проводка к сервомотору усиливает хват, демпферы на костяшках. Входят в комплект экзо.",
+        "CraftTimeSec": 8,
+        "RecraftTimeSec": 8,
         "ResultCount": 1,
         "ResultQuantityFrac": 0.0,
         "ResultDamageFrac": 0.0,
@@ -35672,12 +36166,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 2,
+                "Amount": 6,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.5,
-                "RecraftAmount": 2,
+                "RecraftAmount": 6,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -35690,12 +36184,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 2,
+                "Amount": 6,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.5,
-                "RecraftAmount": 2,
+                "RecraftAmount": 6,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -35759,6 +36253,60 @@
                 "Classname": "VB_EM_ServoMotor",
                 "Classnames": [
                     "VB_EM_ServoMotor"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_EM_CarbonProfile",
+                "Classnames": [
+                    "VB_EM_CarbonProfile"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_EM_EchoConduit",
+                "Classnames": [
+                    "VB_EM_EchoConduit"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Wires",
+                "Classnames": [
+                    "EFT_Wires"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -35845,9 +36393,9 @@
         ],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Кожа, бронепластины и гидроцилиндр в голени, в подошве гравитационная галька: урон от падения вдвое меньше. Входят в комплект экзо.",
-        "CraftTimeSec": 40,
-        "RecraftTimeSec": 40,
+        "Description": "Кожа, бронепластины и гидроцилиндр на карбоновой голени, в подошве гравитационная галька: урон от падения вдвое меньше.",
+        "CraftTimeSec": 12,
+        "RecraftTimeSec": 12,
         "ResultCount": 1,
         "ResultQuantityFrac": 0.0,
         "ResultDamageFrac": 0.0,
@@ -35859,12 +36407,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 3,
+                "Amount": 9,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.5,
-                "RecraftAmount": 3,
+                "RecraftAmount": 9,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -35931,12 +36479,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 1,
+                "Amount": 3,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.5,
-                "RecraftAmount": 1,
+                "RecraftAmount": 3,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -35964,6 +36512,42 @@
                 "Classname": "VB_EM_HydraulicCylinder",
                 "Classnames": [
                     "VB_EM_HydraulicCylinder"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_EM_CarbonProfile",
+                "Classnames": [
+                    "VB_EM_CarbonProfile"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_EM_EchoConduit",
+                "Classnames": [
+                    "VB_EM_EchoConduit"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -36063,9 +36647,9 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Сердце привода — артефакт «Батарейка», замок — трофей босса. От ячеек Эхо несёт за тебя 50 кг (с полным экзо 85), бег быстрее.",
-        "CraftTimeSec": 120,
-        "RecraftTimeSec": 120,
+        "Description": "Сердце привода — артефакт «Батарейка» на кордурных ремнях, замок — трофей босса. От ячеек Эхо несёт 50 кг (с полным экзо 85), бег быстрее.",
+        "CraftTimeSec": 15,
+        "RecraftTimeSec": 15,
         "ResultCount": 1,
         "ResultQuantityFrac": 0.0,
         "ResultDamageFrac": 0.0,
@@ -36191,6 +36775,24 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Cloth_cordura",
+                "Classnames": [
+                    "EFT_Cloth_cordura"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 3,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.5,
+                "RecraftAmount": 3,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -39922,9 +40524,189 @@
         "ResultDamageFrac": 0.0,
         "CraftComponents": [
             {
-                "Classname": "VB_EM_PowerFrame",
+                "Classname": "MetalPlate",
                 "Classnames": [
-                    "VB_EM_PowerFrame"
+                    "MetalPlate"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 30,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 30,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_MetalParts",
+                "Classnames": [
+                    "EFT_MetalParts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 15,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 15,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 15,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 15,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_model_nuts",
+                "Classnames": [
+                    "EFT_model_nuts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 15,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 15,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Screw_pack",
+                "Classnames": [
+                    "EFT_Screw_pack"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 10,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 10,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Poxearm",
+                "Classnames": [
+                    "EFT_Poxearm"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 5,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 5,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Wires",
+                "Classnames": [
+                    "EFT_Wires"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 10,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 10,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Military_cable",
+                "Classnames": [
+                    "EFT_Military_cable"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 5,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 5,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Insulatingtape",
+                "Classnames": [
+                    "EFT_Insulatingtape"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 10,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 10,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Rele",
+                "Classnames": [
+                    "EFT_Rele"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 5,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 5,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Capacitors",
+                "Classnames": [
+                    "EFT_Capacitors"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -39940,9 +40722,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "VB_EM_BodyPanel",
+                "Classname": "EFT_Magnet",
                 "Classnames": [
-                    "VB_EM_BodyPanel"
+                    "EFT_Magnet"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -39958,9 +40740,45 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "VB_EM_ECU",
+                "Classname": "EFT_Hose_military",
                 "Classnames": [
-                    "VB_EM_ECU"
+                    "EFT_Hose_military"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 5,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 5,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_SiliconTube",
+                "Classnames": [
+                    "EFT_SiliconTube"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 5,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 5,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_PressureGauge",
+                "Classnames": [
+                    "EFT_PressureGauge"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -39970,6 +40788,186 @@
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
                 "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EngineOil",
+                "Classnames": [
+                    "EngineOil"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 5,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 5,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "SparkPlug",
+                "Classnames": [
+                    "SparkPlug"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 8,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 8,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Gasolin",
+                "Classnames": [
+                    "EFT_Gasolin"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "TannedLeather",
+                "Classnames": [
+                    "TannedLeather"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 10,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 10,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Mounting_foam",
+                "Classnames": [
+                    "EFT_Mounting_foam"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 5,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 5,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "CarRadiator",
+                "Classnames": [
+                    "CarRadiator"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Engine",
+                "Classnames": [
+                    "EFT_Engine"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "HeadlightH7",
+                "Classnames": [
+                    "HeadlightH7"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_EM_PowerFrame",
+                "Classnames": [
+                    "VB_EM_PowerFrame"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 6,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 6,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_EM_BodyPanel",
+                "Classnames": [
+                    "VB_EM_BodyPanel"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 4,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 4,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -39982,12 +40980,30 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 1,
+                "Amount": 3,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
+                "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_EM_ECU",
+                "Classnames": [
+                    "VB_EM_ECU"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -39997,6 +41013,24 @@
                 "Classname": "VB_EM_EchoConduit",
                 "Classnames": [
                     "VB_EM_EchoConduit"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 4,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.0,
+                "RecraftAmount": 4,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_EM_ResonanceCoil",
+                "Classnames": [
+                    "VB_EM_ResonanceCoil"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -40018,30 +41052,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 4,
+                "Amount": 8,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.0,
-                "RecraftAmount": 4,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "EFT_Engine",
-                "Classnames": [
-                    "EFT_Engine"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.0,
-                "RecraftAmount": 1,
+                "RecraftAmount": 8,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -40223,9 +41239,119 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Две кузовные панели на петлях, стянутые саморезами.",
+        "Description": "Три кузовные панели на стальном каркасе, на петлях и болтах, швы проклеены холодной сваркой.",
         "CraftTimeSec": 8,
         "RecraftTimeSec": 8,
+        "ResultCount": 1,
+        "ResultQuantityFrac": 0.0,
+        "ResultDamageFrac": 0.0,
+        "CraftComponents": [
+            {
+                "Classname": "VB_EM_BodyPanel",
+                "Classnames": [
+                    "VB_EM_BodyPanel"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 3,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.3,
+                "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "MetalPlate",
+                "Classnames": [
+                    "MetalPlate"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 4,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.3,
+                "RecraftAmount": 4,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_MetalParts",
+                "Classnames": [
+                    "EFT_MetalParts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.3,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Bolts",
+                "Classnames": [
+                    "EFT_Bolts"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 4,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.3,
+                "RecraftAmount": 4,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Poxearm",
+                "Classnames": [
+                    "EFT_Poxearm"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.3,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            }
+        ]
+    },
+    {
+        "RecipeId": 4303,
+        "ShowInFreeMenu": 0,
+        "WorkbenchClasses": [
+            "DRL_Craft_Truck_Lift"
+        ],
+        "RecipeName": "Дверь водителя Echo Runner",
+        "Result": "VB_EchoRunner_Door_Driver",
+        "ResultClasses": [],
+        "PreviewClassname": "",
+        "CraftIcon": "",
+        "Description": "Две кузовные панели с бронестеклом, проводка стеклоподъёмника, кожаная обивка, замок и петли.",
+        "CraftTimeSec": 10,
+        "RecraftTimeSec": 10,
         "ResultCount": 1,
         "ResultQuantityFrac": 0.0,
         "ResultDamageFrac": 0.0,
@@ -40249,80 +41375,6 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "EFT_MetalParts",
-                "Classnames": [
-                    "EFT_MetalParts"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.3,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
-                "Classname": "EFT_Screw_pack",
-                "Classnames": [
-                    "EFT_Screw_pack"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.3,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            }
-        ]
-    },
-    {
-        "RecipeId": 4303,
-        "ShowInFreeMenu": 0,
-        "WorkbenchClasses": [
-            "DRL_Craft_Truck_Lift"
-        ],
-        "RecipeName": "Дверь водителя Echo Runner",
-        "Result": "VB_EchoRunner_Door_Driver",
-        "ResultClasses": [],
-        "PreviewClassname": "",
-        "CraftIcon": "",
-        "Description": "Кузовная панель с бронестеклом, замок и петли из набора деталей.",
-        "CraftTimeSec": 10,
-        "RecraftTimeSec": 10,
-        "ResultCount": 1,
-        "ResultQuantityFrac": 0.0,
-        "ResultDamageFrac": 0.0,
-        "CraftComponents": [
-            {
-                "Classname": "VB_EM_BodyPanel",
-                "Classnames": [
-                    "VB_EM_BodyPanel"
-                ],
-                "EnableVariationSelection": 1,
-                "MinHealthFrac": 3,
-                "Amount": 1,
-                "QuantityFrac": 0.0,
-                "Delete": 1,
-                "ApplyDamageFrac": 0.0,
-                "RecraftDropChance": 0.3,
-                "RecraftAmount": 1,
-                "RecraftQuantityFrac": 0.0,
-                "UseInheritance": 0,
-                "AttachmentsEx": 0,
-                "RecraftNeedAttachments": 0
-            },
-            {
                 "Classname": "VB_EM_ArmorGlass",
                 "Classnames": [
                     "VB_EM_ArmorGlass"
@@ -40341,18 +41393,36 @@
                 "RecraftNeedAttachments": 0
             },
             {
+                "Classname": "MetalPlate",
+                "Classnames": [
+                    "MetalPlate"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 4,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.3,
+                "RecraftAmount": 4,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
                 "Classname": "EFT_MetalParts",
                 "Classnames": [
                     "EFT_MetalParts"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 1,
+                "Amount": 2,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.3,
-                "RecraftAmount": 1,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -40365,12 +41435,48 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 1,
+                "Amount": 2,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.3,
-                "RecraftAmount": 1,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Wires",
+                "Classnames": [
+                    "EFT_Wires"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.3,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "TannedLeather",
+                "Classnames": [
+                    "TannedLeather"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.3,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -40389,7 +41495,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Кузовная панель с бронестеклом, замок и петли из набора деталей.",
+        "Description": "Две кузовные панели с бронестеклом, проводка стеклоподъёмника, кожаная обивка, замок и петли.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -40403,12 +41509,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 1,
+                "Amount": 2,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.3,
-                "RecraftAmount": 1,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -40433,18 +41539,36 @@
                 "RecraftNeedAttachments": 0
             },
             {
+                "Classname": "MetalPlate",
+                "Classnames": [
+                    "MetalPlate"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 4,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.3,
+                "RecraftAmount": 4,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
                 "Classname": "EFT_MetalParts",
                 "Classnames": [
                     "EFT_MetalParts"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 1,
+                "Amount": 2,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.3,
-                "RecraftAmount": 1,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -40457,12 +41581,48 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 1,
+                "Amount": 2,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.3,
-                "RecraftAmount": 1,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Wires",
+                "Classnames": [
+                    "EFT_Wires"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.3,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "TannedLeather",
+                "Classnames": [
+                    "TannedLeather"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.3,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -40513,12 +41673,30 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 1,
+                "Amount": 4,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.3,
-                "RecraftAmount": 1,
+                "RecraftAmount": 4,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "MetalPlate",
+                "Classnames": [
+                    "MetalPlate"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 4,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.3,
+                "RecraftAmount": 4,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -40559,6 +41737,24 @@
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_SiliconTube",
+                "Classnames": [
+                    "EFT_SiliconTube"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.3,
+                "RecraftAmount": 1,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
             }
         ]
     },
@@ -40573,7 +41769,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Резонансная катушка раскручивает гравитационную гальку и сжатый камень. Ставится вместо колеса; для полёта нужно 4 модуля.",
+        "Description": "Резонансная катушка раскручивает гравитационную гальку и сжатый камень, сервомотор наклоняет модуль. Для полёта нужно 4 модуля.",
         "CraftTimeSec": 12,
         "RecraftTimeSec": 12,
         "ResultCount": 1,
@@ -40605,12 +41801,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 1,
+                "Amount": 2,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.3,
-                "RecraftAmount": 1,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -40620,6 +41816,24 @@
                 "Classname": "VB_AB_Mat_Tramplin",
                 "Classnames": [
                     "VB_AB_Mat_Tramplin"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 3,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.3,
+                "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_EM_EchoConduit",
+                "Classnames": [
+                    "VB_EM_EchoConduit"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -40635,9 +41849,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "VB_EM_EchoConduit",
+                "Classname": "VB_EM_ServoMotor",
                 "Classnames": [
-                    "VB_EM_EchoConduit"
+                    "VB_EM_ServoMotor"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -40677,6 +41891,24 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.3,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Military_cable",
+                "Classnames": [
+                    "EFT_Military_cable"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
                 "Amount": 1,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
@@ -40701,7 +41933,7 @@
         "ResultClasses": [],
         "PreviewClassname": "",
         "CraftIcon": "",
-        "Description": "Бронированная колба для энергии Эхо. Выходит пустой — заряжается на станции Эхо. Echo Runner берёт два бака.",
+        "Description": "Бронированная колба с катушкой-накопителем для энергии Эхо. Выходит пустой — заряжается на станции Эхо. Машина берёт два бака.",
         "CraftTimeSec": 10,
         "RecraftTimeSec": 10,
         "ResultCount": 1,
@@ -40715,12 +41947,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 1,
+                "Amount": 2,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.3,
-                "RecraftAmount": 1,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -40733,12 +41965,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 1,
+                "Amount": 2,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.3,
-                "RecraftAmount": 1,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -40751,12 +41983,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 1,
+                "Amount": 2,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.3,
-                "RecraftAmount": 1,
+                "RecraftAmount": 2,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -40787,6 +42019,24 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
+                "Amount": 3,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.3,
+                "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Poxearm",
+                "Classnames": [
+                    "EFT_Poxearm"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
                 "Amount": 2,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
@@ -40799,9 +42049,27 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "EFT_Poxearm",
+                "Classname": "EFT_Capacitors",
                 "Classnames": [
-                    "EFT_Poxearm"
+                    "EFT_Capacitors"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 2,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.3,
+                "RecraftAmount": 2,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "VB_EM_ResonanceCoil",
+                "Classnames": [
+                    "VB_EM_ResonanceCoil"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
@@ -40843,12 +42111,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 2,
+                "Amount": 3,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.3,
-                "RecraftAmount": 2,
+                "RecraftAmount": 3,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -40861,12 +42129,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 2,
+                "Amount": 3,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.3,
-                "RecraftAmount": 2,
+                "RecraftAmount": 3,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -40879,12 +42147,30 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 2,
+                "Amount": 3,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.3,
-                "RecraftAmount": 2,
+                "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Hose_military",
+                "Classnames": [
+                    "EFT_Hose_military"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.3,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -40935,12 +42221,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 2,
+                "Amount": 3,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.3,
-                "RecraftAmount": 2,
+                "RecraftAmount": 3,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -40953,12 +42239,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 2,
+                "Amount": 3,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.3,
-                "RecraftAmount": 2,
+                "RecraftAmount": 3,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -40971,12 +42257,30 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 2,
+                "Amount": 3,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.3,
-                "RecraftAmount": 2,
+                "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Hose_military",
+                "Classnames": [
+                    "EFT_Hose_military"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
+                "Amount": 1,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.3,
+                "RecraftAmount": 1,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -41027,12 +42331,12 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
-                "Amount": 3,
+                "Amount": 4,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
                 "ApplyDamageFrac": 0.0,
                 "RecraftDropChance": 0.3,
-                "RecraftAmount": 3,
+                "RecraftAmount": 4,
                 "RecraftQuantityFrac": 0.0,
                 "UseInheritance": 0,
                 "AttachmentsEx": 0,
@@ -41063,6 +42367,24 @@
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,
+                "Amount": 3,
+                "QuantityFrac": 0.0,
+                "Delete": 1,
+                "ApplyDamageFrac": 0.0,
+                "RecraftDropChance": 0.3,
+                "RecraftAmount": 3,
+                "RecraftQuantityFrac": 0.0,
+                "UseInheritance": 0,
+                "AttachmentsEx": 0,
+                "RecraftNeedAttachments": 0
+            },
+            {
+                "Classname": "EFT_Hose_military",
+                "Classnames": [
+                    "EFT_Hose_military"
+                ],
+                "EnableVariationSelection": 1,
+                "MinHealthFrac": 3,
                 "Amount": 2,
                 "QuantityFrac": 0.0,
                 "Delete": 1,
@@ -41075,9 +42397,9 @@
                 "RecraftNeedAttachments": 0
             },
             {
-                "Classname": "EFT_Hose_military",
+                "Classname": "EFT_PressureGauge",
                 "Classnames": [
-                    "EFT_Hose_military"
+                    "EFT_PressureGauge"
                 ],
                 "EnableVariationSelection": 1,
                 "MinHealthFrac": 3,

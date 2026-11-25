@@ -1686,14 +1686,14 @@
             "Key": "G:EchoKits",
             "Name": "Наборы Эхо|Echo kits",
             "Types": [
-                "VB_EB_Kit_WindTurbine",
-                "VB_EB_Kit_SolarPanel",
-                "VB_EB_Kit_Furnace",
-                "VB_EB_Kit_Converter",
-                "VB_EB_Kit_Storage",
-                "VB_EB_Kit_ChargeStation",
-                "VB_EB_Kit_ChargePad",
-                "VB_EB_Kit_Relay"
+                "VB_EB_WindTurbine_Kit",
+                "VB_EB_SolarPanel_Kit",
+                "VB_EB_Furnace_Kit",
+                "VB_EB_Converter_Kit",
+                "VB_EB_Storage_Kit",
+                "VB_EB_ChargeStation_Kit",
+                "VB_EB_ChargePad_Kit",
+                "VB_EB_Relay_Kit"
             ]
         }	
     ],
