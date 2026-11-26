@@ -109,9 +109,6 @@ class VB_ERFlight
 	static const float HOVER = 1.2;			// м: высота парения низа модулей над землёй/водой
 	static const float PARK_HOVER = 0.45;	// м: стоянка на подушке (мотор заглушён / нет водителя, энергия есть)
 	static const float PARK_DAMP = 6.0;		// м/с²: на стоянке машину не сносит
-	// стоянка на подушке держится только аккумулятором Эхо/синтеза (решение 11-20) и тратит его заряд, не баки:
-	// 2000 ед. полного аккумулятора Эхо ~8 ч висения; мотор подзаряжает его, как ванильный (0,15 ед./с); синтез не убывает
-	static const float PARK_BATTERY_DRAIN = 0.07;
 	static const float RPM_FLY = 4000;		// об/мин мотора при полной тяге (на нейтрали; выше — перегазовка, отзыв 11-18)
 	static const float FOLLOW_AGL = 8.0;	// м: ниже — держим высоту над рельефом, выше — абсолютную
 	static const float VMAX = 33.0;			// м/с вперёд (~120 км/ч)
@@ -137,12 +134,7 @@ class VB_ERFlight
 	static const float PITCH_SGN = 1.0;
 	static const float ROLL_SGN = -1.0;
 
-	// энергия в kE (решение пользователя 11-20: единица kE, тик = 10 с; шкала ×32 — ТЗ_VB_EchoBase_буферы.md): бак
-	// 20 000 kE; полёт вперёд 64 kE/tick (бак ~52 мин), висение 32 kE/tick (~104 мин), набор высоты ×1.5
-	static const float DRAIN_HOVER = 3.2;		// kE/с = 32 kE/tick
-	static const float DRAIN_MOVE = 3.2;		// kE/с сверху при полном ходе (вместе 64 kE/tick: 20 000 / 6.4 = 3125 с)
-	static const float DRAIN_CLIMB = 1.5;		// множитель при наборе высоты
-	static const float CHECK_PERIOD = 0.5;		// с: проверка условий и списание на сервере
+	// расход энергии и проверка условий полёта — серверный мод VB_Echo_Server (VB_ERS_Flight.c)
 
 	static const string MODULE = "VB_EchoRunner_GravModule";
 	static const string TANK = "VB_EchoRunner_Tank";
@@ -258,8 +250,6 @@ class VB_EchoRunnerFlight : Managed
 	protected float m_HoldY;
 	protected float m_HoldAgl;
 
-	// сервер
-	protected float m_CheckTimer;
 	protected float m_DiagT;		// только отладка на стенде
 
 	void VB_EchoRunnerFlight(VB_EchoRunner car)
@@ -441,52 +431,9 @@ class VB_EchoRunnerFlight : Managed
 	}
 
 	// ------------------------------------------------ сервер: условия полёта и расход энергии
+	// Пропуск в полёт и на подушку (m_VB_FlyReady / m_VB_ParkReady) и списание энергии — серверный мод VB_Echo_Server.
+	// Без него флаги не включаются: машина ездит, но не взлетает и не висит
 	void ServerTick(float dt)
 	{
-		m_CheckTimer += dt;
-		if (m_CheckTimer < VB_ERFlight.CHECK_PERIOD)
-			return;
-		float step = m_CheckTimer;
-		m_CheckTimer = 0;
-
-		VB_EchoRunner car = m_Car;
-		float energy = car.VB_TankEnergy();
-		bool rig = car.VB_ModulesWorking() == 4 && car.VB_PipesFitted();
-		bool ready = rig && energy > 0;							// полёт — от баков
-		EntityAI battery = car.VB_ParkBattery();
-		bool parkReady = rig && battery != null;				// подушка у заглушенной — от аккумулятора Эхо/синтеза
-		if (ready || parkReady)
-			dBodyActive(car, ActiveState.ACTIVE);		// стоящее тело засыпает — без шага физики подушки нет
-
-		bool flying = false;
-		if (ready && car.VB_FlightActive())
-		{
-			vector pos = car.GetPosition();
-			float agl = pos[1] + car.m_VB_BottomLS - VB_ERFlight.GroundY(car, pos);
-			flying = agl > 0.4;
-			// расход: висение, ход вперёд, набор высоты
-			float rate = VB_ERFlight.DRAIN_HOVER + VB_ERFlight.DRAIN_MOVE * Math.AbsFloat(car.m_VB_InFwd);
-			if (car.m_VB_InUp > 0.05)
-				rate *= VB_ERFlight.DRAIN_CLIMB;
-			car.VB_DrainEnergy(rate * step);
-			energy = car.VB_TankEnergy();
-			if (energy <= 0)
-				ready = false;
-		}
-		else if (parkReady)
-		{
-			VB_Echo.Drain(battery, VB_ERFlight.PARK_BATTERY_DRAIN * step);		// стоянка на подушке — заряд аккумулятора
-			parkReady = VB_Echo.Get(battery) > 0;
-		}
-
-		float e01 = Math.Clamp(energy / 200.0, 0, 1);
-		if (ready != car.m_VB_FlyReady || parkReady != car.m_VB_ParkReady || flying != car.m_VB_Flying || Math.AbsFloat(e01 - car.m_VB_Energy) > 0.01)
-		{
-			car.m_VB_FlyReady = ready;
-			car.m_VB_ParkReady = parkReady;
-			car.m_VB_Flying = flying;
-			car.m_VB_Energy = e01;
-			car.SetSynchDirty();
-		}
 	}
 };

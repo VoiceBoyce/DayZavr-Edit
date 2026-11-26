@@ -509,29 +509,6 @@ class VB_EchoRunner extends CarScript
 		return true;
 	}
 
-	// сервер: списать энергию поровну с баков, которые питают машину. С парой синтеза расход не списывается.
-	void VB_DrainEnergy(float amount)
-	{
-		if (VB_FusionPair())
-			return;
-		for (int pass = 0; pass < 2 && amount > 0.00001; pass++)
-		{
-			array<EntityAI> tanks = new array<EntityAI>;
-			EntityAI t1 = FindAttachmentBySlotName("VB_ER_Tank_1");
-			EntityAI t2 = FindAttachmentBySlotName("VB_ER_Tank_2");
-			if (VB_TankPowers(t1) && VB_Echo.Get(t1) > 0)
-				tanks.Insert(t1);
-			if (VB_TankPowers(t2) && VB_Echo.Get(t2) > 0)
-				tanks.Insert(t2);
-			if (tanks.Count() == 0)
-				return;
-			float share = amount / tanks.Count();
-			amount = 0;
-			foreach (EntityAI t : tanks)
-				amount += share - VB_Echo.Drain(t, share);
-		}
-	}
-
 	// аккумулятор, который держит заглушенную машину на подушке: носитель ядра (Эхо или синтез) с зарядом; иначе null.
 	// Обычный автомобильный аккумулятор подушку не держит (решение пользователя 11-20).
 	EntityAI VB_ParkBattery()

@@ -1,3 +1,4 @@
+// VB_Echo_Server (2026-11-26): настройки сети базы перенесены из клиентского VB_EchoBase/VB_EB_Settings.c.
 // Настройки сети базы (только сервер): Instance_1\VB_Mods\VB_EchoBase\settings.json.
 // Единицы (решение пользователя 11-20): энергия — kE, скорость — kE/tick, тик = 10 с (постоянная единица, не зависит
 // от того, как часто сервер считает сеть). Объёмы и скорости — до 4096 степени двойки, выше круглые; шкала ×32 и
@@ -175,18 +176,10 @@ class VB_EB_Settings
 	}
 };
 
-// показатели класса устройства: конфиг (class VB_EchoRating) + переопределение из настроек; читается один раз на класс
-class VB_EB_Rating
+// показатели класса с переопределением из настроек сервера (devices[]): копия рейтинга по конфигу (клиентский
+// VB_EB_Rating.Of) + перекрытие; свой кэш на класс
+class VB_EBS_Rating
 {
-	int tier = 1;
-	float outMax;		// kE/tick: источник — выработка, преобразователь — Эхо, платформа — отдаёт
-	float inMax;		// kE/tick: преобразователь — ток, станция и платформа — берут из сети
-	float io;			// kE/tick: накопитель — вход и выход
-	float range;		// м: досягаемость преобразователя и ретранслятора
-	float chargeItem;	// kE/tick: станция — бак и аккумулятор, на гнездо
-	float chargeCell;	// kE/tick: станция — ячейка на зарядке, на гнездо
-	float drainCell;	// kE/tick: станция — ячейка на разрядке в сеть, на гнездо
-
 	protected static ref map<string, ref VB_EB_Rating> s_Cache;
 
 	static VB_EB_Rating Of(EntityAI e, VB_EB_Settings s)
@@ -197,20 +190,16 @@ class VB_EB_Rating
 		VB_EB_Rating r;
 		if (s_Cache.Find(type, r))
 			return r;
+		VB_EB_Rating c = VB_EB_Rating.Of(e);
 		r = new VB_EB_Rating;
-		string path = "CfgVehicles " + type + " VB_EchoRating";
-		if (GetGame().ConfigIsExisting(path))
-		{
-			if (GetGame().ConfigIsExisting(path + " tier"))
-				r.tier = GetGame().ConfigGetInt(path + " tier");
-			r.outMax = GetGame().ConfigGetFloat(path + " outMax");
-			r.inMax = GetGame().ConfigGetFloat(path + " inMax");
-			r.io = GetGame().ConfigGetFloat(path + " io");
-			r.range = GetGame().ConfigGetFloat(path + " range");
-			r.chargeItem = GetGame().ConfigGetFloat(path + " chargeItem");
-			r.chargeCell = GetGame().ConfigGetFloat(path + " chargeCell");
-			r.drainCell = GetGame().ConfigGetFloat(path + " drainCell");
-		}
+		r.tier = c.tier;
+		r.outMax = c.outMax;
+		r.inMax = c.inMax;
+		r.io = c.io;
+		r.range = c.range;
+		r.chargeItem = c.chargeItem;
+		r.chargeCell = c.chargeCell;
+		r.drainCell = c.drainCell;
 		if (s)
 		{
 			VB_EB_DeviceOverride o = s.FindOverride(type);
