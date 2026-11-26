@@ -243,14 +243,18 @@ def make_material(tex, rvmat_path):
 
     # цвет
     has_alpha = False
+    base_src = None                     # выход текстуры цвета: свечение берёт её цвет, как в игре (2026-11-26)
+    base_rgb = None
     if tex.startswith("#"):
         c = proc_color(tex) or (0.5, 0.5, 0.5, 1)
         bsdf.inputs["Base Color"].default_value = c
+        base_rgb = c[:3]
     elif tex:
         im = load_img(tex)
         if im:
             t = tex_node(im)
             L.new(t.outputs["Color"], bsdf.inputs["Base Color"])
+            base_src = t.outputs["Color"]
             low = tex.lower()
             if "_ca." in low or low.endswith("_ca.paa"):
                 L.new(t.outputs["Alpha"], bsdf.inputs["Alpha"])
@@ -306,8 +310,21 @@ def make_material(tex, rvmat_path):
     # свечение
     em = rv.get("emmisive") or [0, 0, 0, 1]
     if max(em[:3]) > 0.001:
-        bsdf.inputs["Emission Color"].default_value = (min(1, em[0]), min(1, em[1]), min(1, em[2]), 1)
-        bsdf.inputs["Emission Strength"].default_value = max(em[:3]) if max(em[:3]) > 1 else 1.0
+        ec = (min(1, em[0]), min(1, em[1]), min(1, em[2]))
+        # В игре свечение = цвет текстуры × emmisive. Раньше бралось только emmisive: неон с emmisive 1,1,1 выходил
+        # белым вместо красного / бирюзового (2026-11-26, предметы холодного синтеза)
+        if base_src is not None:
+            mul = Nn.new("ShaderNodeVectorMath")
+            mul.operation = "MULTIPLY"
+            L.new(base_src, mul.inputs[0])
+            mul.inputs[1].default_value = ec
+            L.new(mul.outputs["Vector"], bsdf.inputs["Emission Color"])
+        elif base_rgb is not None:
+            bsdf.inputs["Emission Color"].default_value = tuple(b * e for b, e in zip(base_rgb, ec)) + (1,)
+        else:
+            bsdf.inputs["Emission Color"].default_value = ec + (1,)
+        strength = max(em[:3]) if max(em[:3]) > 1 else 1.0
+        bsdf.inputs["Emission Strength"].default_value = strength * float(opts.get("emit", 1.0))
     if has_alpha:
         try:
             mat.surface_render_method = "BLENDED"
