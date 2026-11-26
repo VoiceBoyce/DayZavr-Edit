@@ -1985,6 +1985,9 @@ class DRL_CraftWindow extends INT_UIF_Menu
 	{
 		string low = slot;
 		low.ToLower();
+		// трубопроводы Эхо - навесное, хотя в имени слота мотора есть «engine» (№ 85)
+		if (low.IndexOf("pipes") > -1)
+			return false;
 		array<string> parts = {"wheel", "door", "hood", "trunk", "battery", "plug", "radiator", "reflector", "headlight", "engine", "belt", "bumper", "bamper", "kovh", "driver", "spare", "glass", "window", "mirror"};
 		foreach (string p : parts)
 		{
@@ -1992,6 +1995,31 @@ class DRL_CraftWindow extends INT_UIF_Menu
 				return true;
 		}
 		return false;
+	}
+
+	// Название слота навесного. У части чужих слотов в CfgSlots нет перевода - движок отдаёт имя как есть
+	// (CanisterGasoline, Weapon, Back, Cassette, № 85): для них свои строки.
+	protected string AsmSlotName(string slot)
+	{
+		string low = slot;
+		low.ToLower();
+		if (low == "canistergasoline")
+			return DRL_UIText.Tr("#STR_DRL_UI_ASM_SLOT_CANISTER");
+		if (low == "shoulder" || low == "melee")
+			return DRL_UIText.Tr("#STR_DRL_UI_ASM_SLOT_WEAPON");
+		if (low == "back")
+			return DRL_UIText.Tr("#STR_DRL_UI_ASM_SLOT_BACK");
+		if (low == "cassette")
+			return DRL_UIText.Tr("#STR_DRL_UI_ASM_SLOT_CASSETTE");
+		string sn = slot;
+		int sid = InventorySlots.GetSlotIdFromString(slot);
+		if (sid != InventorySlots.INVALID)
+		{
+			string dn = InventorySlots.GetSlotDisplayName(sid);
+			if (dn != "")
+				sn = dn;
+		}
+		return sn;
 	}
 
 	// Груз (слоты отсека машины и выбранных деталей) и навесное для груза и
@@ -2034,14 +2062,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			{
 				if (IsCarPartSlot(slot))
 					continue;
-				string sn = slot;
-				int sid = InventorySlots.GetSlotIdFromString(slot);
-				if (sid != InventorySlots.INVALID)
-				{
-					string dn = InventorySlots.GetSlotDisplayName(sid);
-					if (dn != "")
-						sn = dn;
-				}
+				string sn = AsmSlotName(slot);
 				int at = names.Find(sn);
 				if (at > -1)
 				{
@@ -2205,6 +2226,12 @@ class DRL_CraftWindow extends INT_UIF_Menu
 				p.m_Ok = RecipeStatus(pr, cachedItems) == DRL_UI_STATUS_CAN;
 				// Вставка по порядку слотов сверху вниз.
 				int order = PartOrder(cls);
+				// Галочка «примерить» (Баги №92): вещь части и признак одежды (слот на теле, порядок < 100)
+				p.m_Class = cls;
+				bool partWear = false;
+				if (order < 100)
+					partWear = true;
+				p.m_Wearable = partWear;
 				int at = 0;
 				while (at < orders.Count() && orders[at] <= order)
 				{
@@ -2245,6 +2272,12 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			only.m_Name = PartName(chosen, r);
 			only.m_Selected = true;
 			only.m_Ok = RecipeStatus(r, cachedItems) == DRL_UI_STATUS_CAN;
+			only.m_Class = chosen;
+			int onlyOrder = PartOrder(chosen);
+			bool onlyWear = false;
+			if (onlyOrder < 100)
+				onlyWear = true;
+			only.m_Wearable = onlyWear;
 			parts.Insert(only);
 			outfit.Insert(chosen);
 		}

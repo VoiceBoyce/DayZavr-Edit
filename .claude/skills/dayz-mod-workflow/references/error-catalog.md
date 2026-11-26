@@ -159,8 +159,21 @@ DRL «Раскрой» 2026-11-26 (Баги № 91): манекен швейно
 без кожи, серые. Ванильный `Man` (`P:\scripts\3_Game\Entities\Man.c:33-35`): `SetFaceTexture` / `SetFaceMaterial` —
 «текстура лица и рук»; живому игроку её ставит движок, локально созданному — нет. Лицо персонажа по умолчанию —
 `CfgFaces <faceType> Default texture/material` (`faceType` из класса персонажа, `P:\DZ\characters\data\config.cpp`,
-`P:\DZ\characters\heads\config.cpp`). Голова — вложение слота Head (`Head_Default`): при переодевании манекена её не
-удалять. Исправление: `DRL_UIMannequin.ApplyFace()` и пропуск `Head` в `Dress()` (`DRL_UICutSheet.c`).
+`P:\DZ\characters\heads\config.cpp`).
+
+**Проверено на стенде 2026-11-27: из скрипта НЕ лечится, исправление 26.11 убрано.** `PlayerPreviewWidget` рисует не
+переданного ему персонажа, а свою копию (`GetDummyPlayer()`, `P:\scripts\3_Game\gameplay.c:310`). У копии в
+инвентаре 0 вложений и нет «пустых» частей (`FindPlaceholderForSlot(Head)` = null), а движок кладёт лицо именно на
+пустую голову. Не помогло ничего (лицо серое во всех пяти прогонах):
+- `SetFaceTexture`/`SetFaceMaterial` манекену сразу после `CreateObjectEx`, через 250 мс и при каждом переодевании;
+- то же копии `GetDummyPlayer()` после `SetPlayer`/`Refresh`;
+- ванильное «без бороды» из `PluginLifespan.SetPlayerLifespanLevel` (сброс бороды головы, материал рук
+  `BloodyHands mat_normal` в слот Gloves) — `personality` у голов не в `hiddenSelections`, `GetHiddenSelectionIndex` = -1;
+- не оставлять голову при переодевании (копия тогда без головы-вложения, но лицо всё равно серое);
+- включить симуляцию манекена на 400 мс (лицо ставится на 250-й мс).
+
+Кисти на стенде и так в цвет кожи. Не тратить прогоны: лицо в превью — только своим решением (например, свои классы
+голов с `personality` в `hiddenSelections`), и только если пользователь попросит.
 
 ### E133 — `RegisterHeavy` у модов машин длиннее предела стека
 

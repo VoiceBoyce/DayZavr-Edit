@@ -493,6 +493,12 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 		m_Covered = covered;
 		m_Stage.SetHidden(DRL_UIStage.HIDE_POPOVER, covered);
 		m_Seal.Show(m_Locked && !covered);
+		// блок характеристик стоит выше попапа (поверх 3D) - под открытым попапом прячем (№ 84)
+		// без «a && f()» прямо в аргументе (осторожность после E134) — через локальную
+		bool infoShow = false;
+		if (!covered && m_InfoLines.Count() > 0)
+			infoShow = true;
+		m_Info.Show(infoShow);
 	}
 
 	// Вращение модели (в «Схеме» сцена скрыта).
@@ -1015,7 +1021,10 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 	protected void LayoutInfo()
 	{
 		bool show = m_InfoLines.Count() > 0;
-		m_Info.Show(show);
+		bool infoVisible = false;
+		if (show && !m_Covered)
+			infoVisible = true;
+		m_Info.Show(infoVisible);
 		if (!show)
 			return;
 		m_InfoCargo.SetText(m_InfoLines[0]);
