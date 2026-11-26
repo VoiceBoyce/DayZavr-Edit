@@ -335,16 +335,6 @@ class DRL_CraftNotificationManager
 				break;
 			}
 
-			case EDRLCraftNotifType.RANK_REQUIRED:
-			{
-				toastKind = INT_UIF_ToastKind.ERROR;
-				duration = 6.5;
-				if (title == "") title = Widget.TranslateString("#STR_DRL_NOTIF_TITLE_RANK");
-				if (text == "") text = string.Format(Widget.TranslateString("#STR_DRL_NOTIF_MSG_RANK"), dName, DRL_RankBridge.Title(extraParam.ToInt()));
-				statusIcon = "DRL_CraftMenu/UI/data/lock.edds";
-				break;
-			}
-
 			case EDRLCraftNotifType.SYSTEM_INFO:
 			{
 				if (title == "") title = Widget.TranslateString("#STR_DRL_NOTIF_TITLE_SYSTEM");

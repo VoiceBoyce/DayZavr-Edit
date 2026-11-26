@@ -233,7 +233,6 @@ class DRL_UIItemView extends Managed
 			return false;
 		EntityAI ent = null;
 		DRL_CraftPreviewHelper.CreatePreviewObject(cls, ent);
-		DRL_StrGuard.Check("превью: создано " + cls);
 		m_Entity = ent;
 		if (!m_Entity)
 		{
@@ -321,10 +320,7 @@ class DRL_UIItemView extends Managed
 		if (m_Widget)
 			m_Widget.SetItem(null);
 		if (m_Entity && GetGame())
-		{
 			GetGame().ObjectDelete(m_Entity);
-			DRL_StrGuard.Check("превью: удалено " + m_Class);
-		}
 		m_Entity = null;
 		m_Class = "";
 	}

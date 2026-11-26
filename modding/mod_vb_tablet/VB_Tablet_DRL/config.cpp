@@ -1,7 +1,6 @@
-// VB_Tablet_DRL: крафт DRL_CraftMenu в контрактах планшета и ранг планшета для рецептов с RequiredRank (только сервер).
-// Отдельный PBO рядом с VB_Tablet_SE.pbo. Только для серверов, где стоит DRL_CraftMenu_Server: без него сервер не
-// запустится и потребует этот аддон. С 2026-11-26 нужен DRL_CraftMenu_Server с DRL_RankProvider (ставить вместе).
-// Мод крафта не меняется, завершение крафта и ранг перехватываются через modded class.
+// VB_Tablet_DRL: крафт DRL_CraftMenu в контрактах планшета (только сервер). Отдельный PBO рядом с VB_Tablet_SE.pbo.
+// Только для серверов, где стоит DRL_CraftMenu_Server: без него сервер не запустится и потребует этот аддон.
+// Мод крафта не меняется, завершение крафта перехватывается через modded class.
 class CfgPatches
 {
 	class VB_Tablet_DRL

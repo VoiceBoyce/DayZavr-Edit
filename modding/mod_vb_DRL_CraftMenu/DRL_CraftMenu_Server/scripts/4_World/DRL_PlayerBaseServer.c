@@ -317,8 +317,6 @@ modded class PlayerBase
 					reqWb = EntityAI.Cast(oReq);
 				}
 
-				// окно станции открыли: свежая ступень (ранг мог вырасти за игру) — раньше списка процессов
-				DRL_SendRank();
 				array<ref DRL_CraftProcessSyncInfo> activeList;
 				DRL_CraftProcessManager.GetInstance().GetActiveProcessesForPlayerOrWorkbench(this, reqWb, activeList);
 				RPCSingleParam(DRL_CraftRPC.STC_SYNC_ACTIVE_PROCESSES, new Param1<array<ref DRL_CraftProcessSyncInfo>>(activeList), true, sender);
@@ -326,38 +324,6 @@ modded class PlayerBase
 			}
 		}
     }
-
-	// ---------------------------------------------------------------- ранг (RequiredRank, 2026-11-26)
-	bool DRL_HasRank(DRL_Craft_Recipe r)
-	{
-		if (!r || r.RequiredRank <= 0)
-			return true;
-		return DRL_RankProvider.Get().Level(this) >= r.RequiredRank;
-	}
-
-	// мала ступень — отказ с уведомлением и свежей ступенью для окна
-	bool DRL_CheckRank(DRL_Craft_Recipe r, string resultCls)
-	{
-		if (DRL_HasRank(r))
-			return true;
-		DRL_CraftLogger.Warn("Player " + DRL_GetPlayerIdSafe() + ": recipe " + r.RecipeId.ToString() + " needs rank " + r.RequiredRank.ToString());
-		DRL_SendRank();
-		DRL_CraftProcessManager.GetInstance().SendCraftNotification(this, EDRLCraftNotifType.RANK_REQUIRED, resultCls, r.RequiredRank.ToString());
-		return false;
-	}
-
-	// ступень и названия ступеней — окну крафта (STC_SYNC_RANK)
-	void DRL_SendRank()
-	{
-		PlayerIdentity rankId = GetIdentity();
-		if (!rankId)
-			return;
-		DRL_RankProvider prov = DRL_RankProvider.Get();
-		array<string> rankNames = new array<string>();
-		prov.Names(rankNames);
-		int rankLevel = prov.Level(this);
-		RPCSingleParam(DRL_CraftRPC.STC_SYNC_RANK, new Param2<int, array<string>>(rankLevel, rankNames), true, rankId);
-	}
 
 	void TryCraftRecipeWithResultCount(int id, string overrideCls, int count)
 	{
@@ -369,16 +335,14 @@ modded class PlayerBase
 			DRL_CraftLogger.Warn("Player " + DRL_GetPlayerIdSafe() + " tried to craft recipe " + id.ToString() + " without learning it first!");
 			return;
 		}
-
+	
 		int want = count;
 		if (want < 1) want = 1;
-
+	
 		string resultCls = r.Result;
 		if (overrideCls != "" && r.ResultClasses && r.ResultClasses.Find(overrideCls) > -1)
 			resultCls = overrideCls;
-
-		if (!DRL_CheckRank(r, resultCls)) return;
-
+		
 		if (!DRL_CheckStationForCraft(r, resultCls)) return;
 
 		DRL_Craft_WB wb = DRL_Craft_WB.Cast(DRL_GetCurrentWorkbench());
@@ -506,8 +470,6 @@ modded class PlayerBase
 		if (overrideCls != "" && r.ResultClasses && r.ResultClasses.Find(overrideCls) > -1)
 			resultCls = overrideCls;
 
-		if (!DRL_CheckRank(r, resultCls)) return;
-
 		if (!DRL_CheckStationForCraft(r, resultCls)) return;
 
 		DRL_Craft_WB wbAtt = DRL_Craft_WB.Cast(DRL_GetCurrentWorkbench());
@@ -531,9 +493,6 @@ modded class PlayerBase
 					DRL_Craft_Recipe dopR = GetCraft_Config().FindById(dopId);
 					if (dopR)
 					{
-						// доп. деталь со своим рангом: мал — отказ всему крафту (окно такую деталь не отмечает)
-						if (!DRL_CheckRank(dopR, dopR.Result))
-							return;
 						validAttachedIds.Insert(dopId);
 						validAttachedRecipes.Insert(dopR);
 					}
@@ -1261,7 +1220,6 @@ modded class PlayerBase
 	{
 		DRL_Craft_Recipe r = GetCraft_Config().FindById(id);
 		if (!r) return;
-		if (!DRL_CheckRank(r, r.Result)) return;
 
 		for (int i = 0; i < r.CraftComponents.Count(); i++)
 		{
@@ -1318,11 +1276,10 @@ modded class PlayerBase
 	{
 		DRL_Craft_Recipe r = GetCraft_Config().FindById(id);
 		if (!r) return;
-
+		
 		string resultCls = r.Result;
 		if (overrideCls && overrideCls != "" && r.ResultClasses && r.ResultClasses.Find(overrideCls) > -1)
 			resultCls = overrideCls;
-		if (!DRL_CheckRank(r, resultCls)) return;
 		
 		for (int i2 = 0; i2 < r.CraftComponents.Count(); i2++)
 		{

@@ -458,9 +458,7 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 		INT_UIF_Draw.Icon(m_Seal, 20, 26, 28, "lock", lk);
 		TextWidget sealTitle = INT_UIF_Draw.Text(m_Seal, 62, 14, 190, 28, "#STR_DRL_UI_BP_LOCKED", 20, lk);
 		sealTitle.SetBold(true);
-		TextWidget sealSub = INT_UIF_Draw.Text(m_Seal, 62, 42, 190, 20, "#STR_DRL_UI_BP_LOCKED_SUB", 11, muted);
-		m_SealTitle = sealTitle;
-		m_SealSub = sealSub;
+		INT_UIF_Draw.Text(m_Seal, 62, 42, 190, 20, "#STR_DRL_UI_BP_LOCKED_SUB", 11, muted);
 		m_Seal.Show(false);
 		DRL_UIKitUtil.SetSortDeep(m_Seal, DRL_UI_SORT_OVER_MODEL);
 	}
@@ -495,8 +493,6 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 		m_Covered = covered;
 		m_Stage.SetHidden(DRL_UIStage.HIDE_POPOVER, covered);
 		m_Seal.Show(m_Locked && !covered);
-		// блок характеристик стоит выше попапа (поверх 3D) - под открытым попапом прячем (№ 84)
-		m_Info.Show(!covered && m_InfoLines.Count() > 0);
 	}
 
 	// Вращение модели (в «Схеме» сцена скрыта).
@@ -1019,7 +1015,7 @@ class DRL_UIAssemblySheet extends DRL_UIBlueprint
 	protected void LayoutInfo()
 	{
 		bool show = m_InfoLines.Count() > 0;
-		m_Info.Show(show && !m_Covered);
+		m_Info.Show(show);
 		if (!show)
 			return;
 		m_InfoCargo.SetText(m_InfoLines[0]);
