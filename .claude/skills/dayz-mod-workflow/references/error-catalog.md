@@ -173,3 +173,18 @@ DRL «Раскрой» 2026-11-26 (Баги № 91): манекен швейно
 `heavyItemBehaviour` (`DayZPlayerCfgBase.c:356-357`, `RegisterCustom` вызывается после `RegisterHeavy`, `:1568`), свои
 `AddItemInHandsProfileIK` — до `super.RegisterCustom`. Сделано в VB_EchoRunner_Hands, VB_EB_Hands, VB_EM_Hands,
 VB_MR_Entities. Чужие моды не трогаем.
+
+### E134 — `obj.поле = !A() || !B()` портит память клиента
+
+DRL_CraftMenu, 2026-11-26/27 (ранг в крафте, Баги № 89): строка в `FillSetInfo` окна крафта
+`p.m_Locked = !DRL_LearnState.HasLearned(pr.RecipeId) || !DRL_RankMeets(pr.RequiredRank);` — присваивание ПОЛЮ
+объекта логического выражения с `||` и вызовами функций справа — тихо портила память клиента DayZDiag 1.30: через
+2–30 щелчков у рецептов в конфиге «плыли» строки `Result`/`Description` (описание «Детали рецепта», части сета
+названы именами рецептов, манекен голый, превью «i»), затем ACCESS_VIOLATION в любом месте окна (FindLocalRecipeFor,
+ChosenResult, FillVariants), клиент не закрывается штатно. То же выражение в `if (...)` (RecipeStatus) безвредно;
+локальные `bool x = A() || B()` в DRL работают. Найдено бисекцией на стенде dayz-mcp (25 прогонов по 23 щелчка):
+ветки ранга при этом могли вообще не срабатывать — порчу давала сама строка. Исправление: считать в локальную через
+`if` и присваивать полю готовое значение:
+`bool partLocked = false; if (!A()) partLocked = true; if (!B()) partLocked = true; p.m_Locked = partLocked;`.
+Заодно: `array.InsertAt(x, Count())` вне контракта (`EnScript.c`: «Must be less than GetCardinality») — вставка в
+конец только `Insert` (порчу не давала, но исправлено там же).
