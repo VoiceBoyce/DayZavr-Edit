@@ -156,6 +156,13 @@ class CfgNonAIVehicles
 		inventorySlot[]={"VB_Echo_GearCell2"};
 		model="VB_EchoClothes\exo_set\Backpacks\ExoPrivod\vb_exocell_slot_2.p3d";
 	};
+	// сдвоенная ячейка синтеза (2026-11-26): крепление посередине между гнёздами, кость spine3 (tools/ep_proxies.py)
+	class Proxyvb_exocell_pair: ProxyAttachment
+	{
+		scope=2;
+		inventorySlot[]={"VB_Echo_GearCellPair"};
+		model="VB_EchoClothes\exo_set\Backpacks\ExoPrivod\vb_exocell_pair.p3d";
+	};
 	// гнездо пояса с баночками для артефактов на сервоприводе (бывший кейс OOTS; с 11-24 вместо капсулы, ТЗ 8.4)
 	class Proxyvb_ec_artcase_box: ProxyAttachment
 	{
@@ -511,7 +518,7 @@ class CfgVehicles
 		descriptionShort="$STR_VB_EC_Exo_Servo_disc";
 		model="VB_EchoClothes\exo_set\Backpacks\ExoPrivod\ExoPrivod_g.p3d";
 		debug_ItemCategory=9;
-		attachments[]={"VB_Echo_GearCell1","VB_Echo_GearCell2","VB_EC_ArtCase"};
+		attachments[]={"VB_Echo_GearCell1","VB_Echo_GearCell2","VB_Echo_GearCellPair","VB_EC_ArtCase"};
 		inventorySlot[]={"Hips"};
 		itemInfo[]={"Clothing","Back"};
 		rotationFlags=16;

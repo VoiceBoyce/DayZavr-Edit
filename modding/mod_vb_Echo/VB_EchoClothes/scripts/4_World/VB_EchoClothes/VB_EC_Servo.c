@@ -158,12 +158,56 @@ class VB_EC_Exo_Servo_Base extends Clothing
 	protected void VB_Cells(array<EntityAI> cells)
 	{
 		cells.Clear();
+		EntityAI pair = FindAttachmentBySlotName("VB_Echo_GearCellPair");		// сдвоенная ячейка синтеза
+		if (pair)
+			cells.Insert(pair);
 		EntityAI c1 = FindAttachmentBySlotName("VB_Echo_GearCell1");
 		if (c1)
 			cells.Insert(c1);
 		EntityAI c2 = FindAttachmentBySlotName("VB_Echo_GearCell2");
 		if (c2)
 			cells.Insert(c2);
+	}
+
+	// ---------------------------------------------------------------- гнёзда (2026-11-26)
+	// Сдвоенная ячейка синтеза — одним предметом вместо обеих ячеек: стоит она — ячейки Эхо не вставить и их пустые
+	// гнёзда не показываются, стоят ячейки Эхо — наоборот (решение пользователя: «чтобы игрок не путался»)
+	protected static int s_VB_SlotCell1 = -2;
+	protected static int s_VB_SlotCell2;
+	protected static int s_VB_SlotPair;
+
+	protected static void VB_InitSlots()
+	{
+		if (s_VB_SlotCell1 != -2)
+			return;
+		s_VB_SlotCell1 = InventorySlots.GetSlotIdFromString("VB_Echo_GearCell1");
+		s_VB_SlotCell2 = InventorySlots.GetSlotIdFromString("VB_Echo_GearCell2");
+		s_VB_SlotPair = InventorySlots.GetSlotIdFromString("VB_Echo_GearCellPair");
+	}
+
+	// гнездо slotId сейчас закрыто другим видом ячеек
+	protected bool VB_SlotBlocked(int slotId)
+	{
+		VB_InitSlots();
+		if (slotId == s_VB_SlotPair)
+			return GetInventory().FindAttachment(s_VB_SlotCell1) != null || GetInventory().FindAttachment(s_VB_SlotCell2) != null;
+		if (slotId == s_VB_SlotCell1 || slotId == s_VB_SlotCell2)
+			return GetInventory().FindAttachment(s_VB_SlotPair) != null;
+		return false;
+	}
+
+	override bool CanReceiveAttachment(EntityAI attachment, int slotId)
+	{
+		if (!super.CanReceiveAttachment(attachment, slotId))
+			return false;
+		return !VB_SlotBlocked(slotId);
+	}
+
+	override bool CanDisplayAttachmentSlot(int slot_id)
+	{
+		if (!super.CanDisplayAttachmentSlot(slot_id))
+			return false;
+		return !VB_SlotBlocked(slot_id);
 	}
 
 	bool VB_HasEnergy()

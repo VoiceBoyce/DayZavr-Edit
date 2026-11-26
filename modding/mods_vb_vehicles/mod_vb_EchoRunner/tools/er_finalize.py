@@ -21,6 +21,8 @@ sys.path.insert(0, HERE)
 import er_common as C  # noqa: E402
 import er_modelcfg_fix  # noqa: E402
 import er_gravmodule_hub  # noqa: E402
+import er_invview  # noqa: E402
+import er_drop_placeholders  # noqa: E402
 from er_geom import Part, V, box, part_data, append  # noqa: E402
 
 py3d = C.py3d
@@ -232,6 +234,7 @@ def model_cfg():
 	class vb_er_tank: Default { sections[] = {"neon"}; };
 	class vb_er_tank_1: Default { sections[] = {"neon"}; };
 	class vb_er_tank_2: Default { sections[] = {"neon"}; };
+	class vb_er_tank_pair: Default { sections[] = {"neon"}; };
 	class vb_er_pipes_l: Default { sections[] = {"neon"}; };
 	class vb_er_pipes_r: Default { sections[] = {"neon"}; };
 	class vb_er_pipes_engine: Default { sections[] = {"neon"}; };
@@ -246,12 +249,19 @@ def main():
     os.makedirs(os.path.join(SRC, "proxy"), exist_ok=True)
     car = C.load_p3d(os.path.join(FULL, "interceptor.p3d"))
     print("прокси переименовано:", rename_proxies(car))
+    print("заглушек оружия/рюкзака убрано:", er_drop_placeholders.drop(car))     # 2026-11-26, силуэт автомата в салоне
     add_collision(car, collision_boxes(car))
+    # крепление сдвоенного бака холодного синтеза между баками (2026-11-26, mod_vb_Echo/tools/ep_proxies.py)
+    sys.path.insert(0, os.path.join(MOD, "..", "..", "mod_vb_Echo", "tools"))
+    import ep_proxies  # noqa: E402
+    print("прокси пары баков:", ep_proxies.patch_car(car))
     car.save(os.path.join(SRC, "vb_echorunner.p3d"))
     for src, (dst, kg) in PARTS.items():
         m = C.load_p3d(os.path.join(FULL, "proxy", src + ".p3d"))
         if kg:
             set_mass(m, kg)
+        if dst == "vb_er_tank":            # превью в инвентаре сбоку, а не с торца (2026-11-26, er_invview.py)
+            er_invview.set_side_view(m)
         m.save(os.path.join(SRC, "proxy", dst + ".p3d"))
     d = C.load_p3d(os.path.join(WD, "proxy", "vb_er_wheel_destroyed.p3d"))
     set_mass(d, 25.0)

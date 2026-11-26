@@ -13,13 +13,13 @@
 // Ещё в ядре (11-20): энергоячейки VB_EchoCell_* (одна модель, кольцо на крышке — уровень, ядро — заряд), общие
 // слоты зарядки и разрядки (станция базы, баки, аккумуляторы, ячейки) и свои иконки слотов (imageset vb_echo_icons,
 // генератор tools/ec_icons.py): ghostIcon="set:vb_echo_icons image:<crystal|tank|pipes|pipes_engine|battery|cell|
-// cell_charge|cell_drain>".
+// cell_charge|cell_drain|cell_pair|tank_pair>".
 
 class CfgPatches
 {
 	class VB_EchoCore
 	{
-		units[]={"VB_EchoCell_Mk1","VB_EchoCell_Mk2","VB_EchoCell_Mk3","VB_EchoCell_Mk4","VB_EchoCell_Fusion"};
+		units[]={"VB_EchoCell_Mk1","VB_EchoCell_Mk2","VB_EchoCell_Mk3","VB_EchoCell_Mk4","VB_EchoCell_FusionPair"};
 		weapons[]={};
 		requiredVersion=0.1;
 		requiredAddons[]={"DZ_Data","DZ_Scripts"};
@@ -107,6 +107,14 @@ class CfgSlots
 		name="VB_Echo_GearCell2";
 		displayName="$STR_VB_Echo_slot_gearcell";
 		ghostIcon="set:vb_echo_icons image:cell";
+	};
+	// сдвоенная энергоячейка холодного синтеза (2026-11-26): одним предметом вместо двух ячеек; с ячейками Эхо не
+	// ставится (запрет и скрытие лишних гнёзд — в скрипте снаряжения)
+	class Slot_VB_Echo_GearCellPair
+	{
+		name="VB_Echo_GearCellPair";
+		displayName="$STR_VB_Echo_slot_gearcellpair";
+		ghostIcon="set:vb_echo_icons image:cell_pair";
 	};
 	class Slot_VB_Echo_DrainCell2
 	{
@@ -230,15 +238,20 @@ class CfgVehicles
 		};
 	};
 	// донат (решение пользователя 11-20): не разряжается, энергию не отдаёт (синтез не переливается) — только
-	// питание снаряжения Эхо; на станции не заряжается и не разряжается (слотов станции нет)
-	class VB_EchoCell_Fusion: VB_EchoCell_Base
+	// питание снаряжения Эхо; на станции не заряжается и не разряжается (слотов станции нет).
+	// С 2026-11-26 — сдвоенная: две ячейки, спаянные в одну (модель eb_cell_pair.p3d — tools/ep_fusion_pairs.py),
+	// одним предметом в своё гнездо сервопривода; одиночной ячейки синтеза больше нет
+	class VB_EchoCell_FusionPair: VB_EchoCell_Base
 	{
 		scope=2;
-		displayName="$STR_VB_Echo_cell_fusion";
-		descriptionShort="$STR_VB_Echo_cell_fusion_disc";
+		displayName="$STR_VB_Echo_cell_fusion_pair";
+		descriptionShort="$STR_VB_Echo_cell_fusion_pair_disc";
+		model="VB_EchoCore\data\eb_cell_pair.p3d";
+		weight=800;
+		itemSize[]={3,2};
 		varQuantityInit=20000;
 		varQuantityMax=20000;
-		inventorySlot[]={"VB_Echo_GearCell1","VB_Echo_GearCell2"};	// только питание снаряжения (сервопривод экзо)
+		inventorySlot[]={"VB_Echo_GearCellPair"};		// только питание снаряжения (сервопривод экзо)
 		hiddenSelectionsTextures[]={"vb_echocore\data\er_neon_fusion_co.paa","vb_echocore\data\er_neon_fusion_co.paa"};
 		hiddenSelectionsMaterials[]={"vb_echocore\data\er_neon_idle.rvmat","vb_echocore\data\er_neon_idle.rvmat"};
 		class VB_Echo

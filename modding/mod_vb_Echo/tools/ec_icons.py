@@ -210,11 +210,38 @@ def artjar():
     return im
 
 
+def cell_pair():
+    """Сдвоенная ячейка синтеза (2026-11-26): две ячейки, перемычки и значок спайки."""
+    im, d = canvas()
+    for cx in (190, 490):
+        cell_shape(d, cx)
+    rect(d, 262, 228, 418, 252, W, 6)                      # перемычки
+    rect(d, 262, 490, 418, 514, W, 6)
+    circle(d, 340, 240, 40)                                # значок спайки
+    circle(d, 340, 240, 20, T)
+    return im
+
+
+def tank_pair():
+    """Сдвоенный бак синтеза (2026-11-26): два торца баков в общих стяжках, коллектор в ложбине сверху."""
+    im, d = canvas()
+    for cx in (192, 488):
+        circle(d, cx, 372, 146)                            # торец бака
+        circle(d, cx, 372, 116, T)
+        circle(d, cx, 372, 92)                             # крышка торца
+    rect(d, 120, 206, 560, 232, W, 8)                      # стяжки сверху и снизу
+    rect(d, 120, 512, 560, 538, W, 8)
+    circle(d, 340, 238, 46)                                # коллектор синтеза
+    circle(d, 340, 238, 22, T)
+    return im
+
+
 ICONS = [("crystal", crystal, "Кристалл"), ("tank", tank, "Бак Эхо"), ("pipes", pipes_side, "Трубки (бок)"),
          ("pipes_engine", pipes_engine, "Трубки мотора"), ("battery", battery, "Аккумулятор Эхо"),
          ("cell", cell, "Энергоячейка"), ("cell_charge", cell_charge, "Ячейка: зарядка"),
          ("cell_drain", cell_drain, "Ячейка: разрядка"), ("artcase", artcase, "Пояс с баночками"),
-         ("artjar", artjar, "Баночка артефакта")]
+         ("artjar", artjar, "Баночка артефакта"), ("cell_pair", cell_pair, "Сдвоенная ячейка синтеза"),
+         ("tank_pair", tank_pair, "Сдвоенный бак синтеза")]
 COLS = 6
 ATLAS = (1024, 512)
 
@@ -242,7 +269,7 @@ def main():
         f.write("\n".join(lines))
     if PREVIEW:
         tile_w, tile_h = 230, 250
-        sheet = Image.new("RGBA", (tile_w * 4 + 20, tile_h * 2 + 20), (24, 24, 24, 255))
+        sheet = Image.new("RGBA", (tile_w * 4 + 20, tile_h * ((len(imgs) + 3) // 4) + 20), (24, 24, 24, 255))
         font = ImageFont.truetype("C:/Windows/Fonts/arial.ttf", 18)
         dr = ImageDraw.Draw(sheet)
         for i, (ic, label) in enumerate(imgs):

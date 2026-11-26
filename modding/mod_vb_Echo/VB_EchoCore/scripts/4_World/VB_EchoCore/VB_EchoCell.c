@@ -58,4 +58,4 @@ class VB_EchoCell_Mk1 extends VB_EchoCell_Base {};
 class VB_EchoCell_Mk2 extends VB_EchoCell_Base {};
 class VB_EchoCell_Mk3 extends VB_EchoCell_Base {};
 class VB_EchoCell_Mk4 extends VB_EchoCell_Base {};
-class VB_EchoCell_Fusion extends VB_EchoCell_Base {};
+class VB_EchoCell_FusionPair extends VB_EchoCell_Base {};		// сдвоенная ячейка синтеза (2026-11-26)

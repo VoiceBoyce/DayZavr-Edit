@@ -356,6 +356,9 @@ def main():
         rep["удалено граней"] = ed.delete_faces(dead)
         rep["крепления повёрнуты"] = ed.tilt_cell_proxies()
         print("  ", rep)
+    # крепление сдвоенной ячейки холодного синтеза между гнёздами, кость spine3 (2026-11-26, ep_proxies.py)
+    import ep_proxies
+    print("   прокси пары ячеек:", ep_proxies.patch_servo(m, ep_proxies.ident_template(ep_proxies.load(ep_proxies.CAR))))
     m.save(DST)
     print("MLOD ->", DST)
     # секции vbglow/vbparts — в model.cfg (без них hiddenSelections не работают)

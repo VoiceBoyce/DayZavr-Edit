@@ -192,7 +192,7 @@ class VB_EchoRunner extends CarScript
 	// Модули, трубопроводы, баки (просьба пользователя 11-20): энергии нет совсем — пустые серые, как металл; энергия есть —
 	// цвет энергии (Эхо — красный, синтез — бирюзовый): мотор заглушён — еле тлеют, мотор заведён — горят.
 	// Модули горят, когда машина готова к полёту (m_VB_FlyReady); баки — каждый по своему заряду
-	// (пара синтеза горит всегда, одиночный бак синтеза только тлеет — без пары не работает).
+	// (сдвоенный бак синтеза горит всегда).
 	// Модули красит любая энергия машины (и аккумулятор — на нём они держат подушку), трубопроводы — только энергия
 	// баков: без баков трубки серые, сразу видно, что машина висит, но не полетит (решение пользователя 11-20).
 	void VB_UpdateNeon()
@@ -210,6 +210,8 @@ class VB_EchoRunner extends CarScript
 			key += 4;
 		if (VB_TankHasEnergy("VB_ER_Tank_2"))
 			key += 8;
+		if (VB_TankHasEnergy("VB_ER_TankPair"))			// сдвоенный бак синтеза — как оба бака сразу
+			key += 12;
 		key += 16 * (kind + 1);
 		if (key == m_VB_NeonKey && !m_VB_NeonDirty)
 			return;
@@ -243,8 +245,7 @@ class VB_EchoRunner extends CarScript
 				int tankKind = VB_EchoKind.NONE;
 				if (VB_Echo.HasCharge(att))
 					tankKind = VB_Echo.Kind(att);
-				// горит, только когда питает машину: Эхо — при заведённом моторе, пара синтеза — всегда;
-				// одиночный бак синтеза только тлеет — без пары он не работает
+				// горит, только когда питает машину: Эхо — при заведённом моторе, сдвоенный бак синтеза — всегда
 				int tankGlow = VB_GLOW_IDLE;
 				if (VB_TankPowers(att) && (engine || VB_Echo.IsInfinite(att)))
 					tankGlow = VB_GLOW_ON;
@@ -260,7 +261,7 @@ class VB_EchoRunner extends CarScript
 		}
 	}
 
-	// энергия баков (цвет трубопроводов): пара синтеза > бак Эхо с зарядом; иначе VB_EchoKind.NONE
+	// энергия баков (цвет трубопроводов): сдвоенный бак синтеза > бак Эхо с зарядом; иначе VB_EchoKind.NONE
 	int VB_TankKind()
 	{
 		if (VB_FusionPair())
@@ -348,7 +349,7 @@ class VB_EchoRunner extends CarScript
 		return VB_NEON_OFF;
 	}
 
-	// бак в слоте питает машину (одиночный бак синтеза — нет, см. VB_TankPowers)
+	// бак в слоте питает машину (см. VB_TankPowers)
 	protected bool VB_TankHasEnergy(string slot)
 	{
 		return VB_TankPowers(FindAttachmentBySlotName(slot));
@@ -465,48 +466,74 @@ class VB_EchoRunner extends CarScript
 		float e = 0;
 		EntityAI t1 = FindAttachmentBySlotName("VB_ER_Tank_1");
 		EntityAI t2 = FindAttachmentBySlotName("VB_ER_Tank_2");
+		EntityAI tp = FindAttachmentBySlotName("VB_ER_TankPair");
 		if (VB_TankPowers(t1))
 			e += VB_Echo.Get(t1);
 		if (VB_TankPowers(t2))
 			e += VB_Echo.Get(t2);
+		if (VB_TankPowers(tp))
+			e += VB_Echo.Get(tp);
 		return e;
 	}
 
-	// стоит пара целых баков холодного синтеза. Синтез работает только парой: один бак машину не питает
-	// (решение пользователя 11-20 — в донате баки идут парой, одна пара = одна машина)
+	// стоит целый сдвоенный бак холодного синтеза (решение пользователя 2026-11-26: синтез — одним предметом
+	// в своём слоте VB_ER_TankPair вместо пары одиночных баков; одна пара = одна машина)
 	bool VB_FusionPair()
 	{
-		EntityAI t1 = FindAttachmentBySlotName("VB_ER_Tank_1");
-		EntityAI t2 = FindAttachmentBySlotName("VB_ER_Tank_2");
-		return t1 && t2 && !t1.IsRuined() && !t2.IsRuined() && VB_Echo.IsInfinite(t1) && VB_Echo.IsInfinite(t2);
+		EntityAI tp = FindAttachmentBySlotName("VB_ER_TankPair");
+		return tp && !tp.IsRuined() && VB_Echo.IsInfinite(tp);
 	}
 
-	// бак питает машину: Эхо — пока есть заряд (и один бак летает, с половиной запаса); синтез — только в паре
+	// бак питает машину: Эхо — пока есть заряд (и один бак летает, с половиной запаса); сдвоенный синтез — пока цел
 	bool VB_TankPowers(EntityAI tank)
 	{
 		if (!tank || !VB_Echo.HasCharge(tank))
 			return false;
 		if (VB_Echo.IsInfinite(tank))
-			return VB_FusionPair();
+			return !tank.IsRuined();
 		return true;
 	}
 
-	// баки Эхо и синтеза не смешивать (решение пользователя 11-20): во второй слот встаёт только бак того же вида.
-	// Загрузку из сохранения (CanLoadAsAttachment) не трогаем — старая машина со смесью загрузится как есть.
+	// ---------------------------------------------------------------- слоты баков (2026-11-26)
+	// Сдвоенный бак синтеза и баки Эхо не вместе: стоит сдвоенный — баки Эхо не вставить и их пустые слоты не
+	// показываются, стоят баки Эхо — наоборот (решение пользователя: «чтобы игрок не путался»). Загрузку из
+	// сохранения (CanLoadAsAttachment) не трогаем.
+	protected static int s_VB_SlotTank1 = -2;
+	protected static int s_VB_SlotTank2;
+	protected static int s_VB_SlotTankPair;
+
+	protected static void VB_InitTankSlots()
+	{
+		if (s_VB_SlotTank1 != -2)
+			return;
+		s_VB_SlotTank1 = InventorySlots.GetSlotIdFromString("VB_ER_Tank_1");
+		s_VB_SlotTank2 = InventorySlots.GetSlotIdFromString("VB_ER_Tank_2");
+		s_VB_SlotTankPair = InventorySlots.GetSlotIdFromString("VB_ER_TankPair");
+	}
+
+	// слот slotId сейчас закрыт баками другого вида
+	protected bool VB_TankSlotBlocked(int slotId)
+	{
+		VB_InitTankSlots();
+		if (slotId == s_VB_SlotTankPair)
+			return GetInventory().FindAttachment(s_VB_SlotTank1) != null || GetInventory().FindAttachment(s_VB_SlotTank2) != null;
+		if (slotId == s_VB_SlotTank1 || slotId == s_VB_SlotTank2)
+			return GetInventory().FindAttachment(s_VB_SlotTankPair) != null;
+		return false;
+	}
+
 	override bool CanReceiveAttachment(EntityAI attachment, int slotId)
 	{
 		if (!super.CanReceiveAttachment(attachment, slotId))
 			return false;
-		if (attachment && attachment.IsKindOf("VB_EchoRunner_Tank"))
-		{
-			string otherSlot = "VB_ER_Tank_1";
-			if (slotId == InventorySlots.GetSlotIdFromString("VB_ER_Tank_1"))
-				otherSlot = "VB_ER_Tank_2";
-			EntityAI other = FindAttachmentBySlotName(otherSlot);
-			if (other && other != attachment && VB_Echo.Kind(other) != VB_Echo.Kind(attachment))
-				return false;
-		}
-		return true;
+		return !VB_TankSlotBlocked(slotId);
+	}
+
+	override bool CanDisplayAttachmentSlot(int slot_id)
+	{
+		if (!super.CanDisplayAttachmentSlot(slot_id))
+			return false;
+		return !VB_TankSlotBlocked(slot_id);
 	}
 
 	// аккумулятор, который держит заглушенную машину на подушке: носитель ядра (Эхо или синтез) с зарядом; иначе null.
@@ -868,6 +895,13 @@ class VB_EchoRunner extends CarScript
 		return true;
 	}
 
+	// Закрытая машина — начинку не видно (просьба пользователя 2026-11-26): разделы и груз показываются, только когда
+	// открыта или снята хотя бы одна дверь; двигатель — только при открытом (или снятом) капоте
+	bool VB_DoorOpen()
+	{
+		return GetCarDoorsState("VB_ER_Door_Driver") != CarDoorState.DOORS_CLOSED || GetCarDoorsState("VB_ER_Door_CoDriver") != CarDoorState.DOORS_CLOSED;
+	}
+
 	override bool CanDisplayAttachmentCategory(string category_name)
 	{
 		if (!super.CanDisplayAttachmentCategory(category_name))
@@ -875,20 +909,15 @@ class VB_EchoRunner extends CarScript
 
 		category_name.ToLower();
 		if (category_name.Contains("engine"))
-		{
-			if (GetCarDoorsState("VB_ER_Hood") == CarDoorState.DOORS_CLOSED)
-				return false;
-		}
-		return true;
+			return GetCarDoorsState("VB_ER_Hood") != CarDoorState.DOORS_CLOSED;
+		return VB_DoorOpen();
 	}
 
 	override bool CanDisplayCargo()
 	{
 		if (!super.CanDisplayCargo())
 			return false;
-		if (GetCarDoorsState("VB_ER_Door_Driver") == CarDoorState.DOORS_CLOSED)
-			return false;
-		return true;
+		return VB_DoorOpen();
 	}
 
 	override int GetCarDoorsState(string slotType)

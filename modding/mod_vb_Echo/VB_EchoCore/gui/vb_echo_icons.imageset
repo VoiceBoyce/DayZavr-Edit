@@ -68,5 +68,17 @@ ImageSetClass {
    Size 170 170
    Flags 0
   }
+  ImageSetDefClass cell_pair {
+   Name "cell_pair"
+   Pos 680 170
+   Size 170 170
+   Flags 0
+  }
+  ImageSetDefClass tank_pair {
+   Name "tank_pair"
+   Pos 850 170
+   Size 170 170
+   Flags 0
+  }
  }
 }

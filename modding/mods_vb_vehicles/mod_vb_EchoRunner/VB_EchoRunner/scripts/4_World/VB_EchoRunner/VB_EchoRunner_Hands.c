@@ -12,7 +12,7 @@ modded class ModItemRegisterCallbacks
 		pType.AddItemInHandsProfileIK("VB_EchoRunner_Wheel_Ruined", asi, pBehavior, wheel);
 		pType.AddItemInHandsProfileIK("VB_EchoRunner_Wheel_Destroyed", asi, pBehavior, wheel);
 		pType.AddItemInHandsProfileIK("VB_EchoRunner_Tank", asi, pBehavior, wheel);
-		pType.AddItemInHandsProfileIK("VB_EchoRunner_TankFusion", asi, pBehavior, wheel);
+		pType.AddItemInHandsProfileIK("VB_EchoRunner_TankFusionPair", asi, pBehavior, wheel);
 		pType.AddItemInHandsProfileIK("VB_EchoRunner_GravModule", asi, pBehavior, wheel);
 		pType.AddItemInHandsProfileIK("VB_EchoRunner_GravModule_Ruined", asi, pBehavior, wheel);
 		pType.AddItemInHandsProfileIK("VB_EchoRunner_Door_Driver", asi, pBehavior, "dz/anims/anm/player/ik/vehicles/hatchback_02/Hatchback_02_Door_driver.anm");

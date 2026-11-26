@@ -110,6 +110,12 @@ class CfgSlots
 		displayName="$STR_VB_ER_tank_name";
 		ghostIcon="set:vb_echo_icons image:tank";
 	};
+	class Slot_VB_ER_TankPair
+	{
+		name="VB_ER_TankPair";
+		displayName="$STR_VB_ER_tank_pair_slot";
+		ghostIcon="set:vb_echo_icons image:tank_pair";
+	};
 	class Slot_VB_ER_Pipes_L
 	{
 		name="VB_ER_Pipes_L";
@@ -166,6 +172,11 @@ class CfgNonAIVehicles
 	{
 		model="VB_EchoRunner\proxy\vb_er_tank_2.p3d";
 		inventorySlot[]={"VB_ER_Tank_2"};
+	};
+	class Proxyvb_er_tank_pair: ProxyVehiclePart
+	{
+		model="VB_EchoRunner\proxy\vb_er_tank_pair.p3d";
+		inventorySlot[]={"VB_ER_TankPair"};
 	};
 	class Proxyvb_er_pipes_l: ProxyVehiclePart
 	{
@@ -324,6 +335,7 @@ class CfgVehicles
 			"VB_ER_Hood",
 			"VB_ER_Tank_1",
 			"VB_ER_Tank_2",
+			"VB_ER_TankPair",
 			"VB_ER_Pipes_L",
 			"VB_ER_Pipes_R",
 			"VB_ER_Pipes_Engine",
@@ -1435,7 +1447,7 @@ class CfgVehicles
 			{
 				name="$STR_VB_ER_cat_rift";
 				description="";
-				attachmentSlots[]={"VB_ER_Tank_1","VB_ER_Tank_2","VB_ER_Pipes_L","VB_ER_Pipes_R","VB_ER_Pipes_Engine"};
+				attachmentSlots[]={"VB_ER_Tank_1","VB_ER_Tank_2","VB_ER_TankPair","VB_ER_Pipes_L","VB_ER_Pipes_R","VB_ER_Pipes_Engine"};
 				icon="set:vb_echo_icons image:tank";
 			};
 			class BaseBuildingContainers
@@ -1928,14 +1940,19 @@ class CfgVehicles
 			storage="quantity";
 		};
 	};
-	// бак холодного синтеза (донат): та же модель, бирюзовый неон; заряд всегда полный, расход не списывается,
-	// перелить нельзя; работает только парой, с баком Эхо не смешивается (решения пользователя 11-20)
-	class VB_EchoRunner_TankFusion: VB_EchoRunner_Tank
+	// сдвоенный бак холодного синтеза (донат; решение пользователя 2026-11-26 — одним предметом вместо пары баков):
+	// два бака в стяжках с коллектором синтеза (модель vb_er_tank_pair.p3d — mod_vb_Echo/tools/ep_fusion_pairs.py),
+	// свой слот посередине между баками; заряд всегда полный, расход не списывается, перелить нельзя; с баками Эхо
+	// не ставится (запрет и скрытие лишних слотов — скрипт машины). Одиночного бака синтеза больше нет
+	class VB_EchoRunner_TankFusionPair: VB_EchoRunner_Tank
 	{
 		scope=2;
-		displayName="$STR_VB_ER_tank_fusion_name";
-		descriptionShort="$STR_VB_ER_tank_fusion_disc";
-		inventorySlot[]={"VB_ER_Tank_1","VB_ER_Tank_2"};		// синтез не заряжают: гнёзд станции нет
+		displayName="$STR_VB_ER_tank_fusion_pair_name";
+		descriptionShort="$STR_VB_ER_tank_fusion_pair_disc";
+		model="VB_EchoRunner\proxy\vb_er_tank_pair.p3d";
+		weight=70000;
+		itemSize[]={10,5};
+		inventorySlot[]={"VB_ER_TankPair"};		// синтез не заряжают: гнёзд станции нет
 		hiddenSelectionsTextures[]={"vb_echorunner\data\parts\er_neon_fusion_co.paa"};
 		hiddenSelectionsMaterials[]={"vb_echorunner\data\parts\er_neon_idle.rvmat"};
 		varQuantityInit=20000;

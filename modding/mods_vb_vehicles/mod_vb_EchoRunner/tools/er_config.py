@@ -111,6 +111,7 @@ car = re.sub(r"attachments\[\]=\s*\{.*?\};", """attachments[]=
 			"VB_ER_Hood",
 			"VB_ER_Tank_1",
 			"VB_ER_Tank_2",
+			"VB_ER_TankPair",
 			"VB_ER_Pipes_L",
 			"VB_ER_Pipes_R",
 			"VB_ER_Pipes_Engine",
@@ -159,7 +160,7 @@ car = re.sub(r"class GUIInventoryAttachmentsProps\s*\{.*?\n\t\t\};\n", """class 
 			{
 				name="$STR_VB_ER_cat_rift";
 				description="";
-				attachmentSlots[]={"VB_ER_Tank_1","VB_ER_Tank_2","VB_ER_Pipes_L","VB_ER_Pipes_R","VB_ER_Pipes_Engine"};
+				attachmentSlots[]={"VB_ER_Tank_1","VB_ER_Tank_2","VB_ER_TankPair","VB_ER_Pipes_L","VB_ER_Pipes_R","VB_ER_Pipes_Engine"};
 				icon="set:vb_echo_icons image:tank";
 			};
 			class BaseBuildingContainers
@@ -236,14 +237,19 @@ ITEMS = '''
 			storage="quantity";
 		};
 	};
-	// бак холодного синтеза (донат): та же модель, бирюзовый неон; заряд всегда полный, расход не списывается,
-	// перелить нельзя; работает только парой, с баком Эхо не смешивается (решения пользователя 11-20)
-	class VB_EchoRunner_TankFusion: VB_EchoRunner_Tank
+	// сдвоенный бак холодного синтеза (донат; решение пользователя 2026-11-26 — одним предметом вместо пары баков):
+	// два бака в стяжках с коллектором синтеза (модель vb_er_tank_pair.p3d — mod_vb_Echo/tools/ep_fusion_pairs.py),
+	// свой слот посередине между баками; заряд всегда полный, расход не списывается, перелить нельзя; с баками Эхо
+	// не ставится (запрет и скрытие лишних слотов — скрипт машины). Одиночного бака синтеза больше нет
+	class VB_EchoRunner_TankFusionPair: VB_EchoRunner_Tank
 	{
 		scope=2;
-		displayName="$STR_VB_ER_tank_fusion_name";
-		descriptionShort="$STR_VB_ER_tank_fusion_disc";
-		inventorySlot[]={"VB_ER_Tank_1","VB_ER_Tank_2"};		// синтез не заряжают: гнёзд станции нет
+		displayName="$STR_VB_ER_tank_fusion_pair_name";
+		descriptionShort="$STR_VB_ER_tank_fusion_pair_disc";
+		model="VB_EchoRunner\\proxy\\vb_er_tank_pair.p3d";
+		weight=70000;
+		itemSize[]={10,5};
+		inventorySlot[]={"VB_ER_TankPair"};		// синтез не заряжают: гнёзд станции нет
 		hiddenSelectionsTextures[]={"%(P)ser_neon_fusion_co.paa"};
 		hiddenSelectionsMaterials[]={"%(P)ser_neon_idle.rvmat"};
 		varQuantityInit=20000;
@@ -377,6 +383,7 @@ for name, disp, icon, sel in (("VB_ER_Wheel_1_1", "$STR_VB_ER_Wheel_name", "whee
                               # свои иконки семейства (imageset vb_echo_icons в VB_EchoCore, решение пользователя 11-20)
                               ("VB_ER_Tank_1", "$STR_VB_ER_tank_name", "set:vb_echo_icons image:tank", ""),
                               ("VB_ER_Tank_2", "$STR_VB_ER_tank_name", "set:vb_echo_icons image:tank", ""),
+                              ("VB_ER_TankPair", "$STR_VB_ER_tank_pair_slot", "set:vb_echo_icons image:tank_pair", ""),
                               ("VB_ER_Pipes_L", "$STR_VB_ER_pipes_l_name", "set:vb_echo_icons image:pipes", ""),
                               ("VB_ER_Pipes_R", "$STR_VB_ER_pipes_r_name", "set:vb_echo_icons image:pipes", ""),
                               ("VB_ER_Pipes_Engine", "$STR_VB_ER_pipes_e_name", "set:vb_echo_icons image:pipes_engine", "")):
@@ -394,6 +401,8 @@ for cls, model, slots in (("vb_er_wheel", "vb_er_wheel", ["VB_ER_Wheel_1_1", "VB
                           # не рисовались (стенд 11-18), модель прокси — копия модели бака
                           ("vb_er_tank_1", "vb_er_tank_1", ["VB_ER_Tank_1"]),
                           ("vb_er_tank_2", "vb_er_tank_2", ["VB_ER_Tank_2"]),
+                          # сдвоенный бак синтеза: свой прокси посередине (mod_vb_Echo/tools/ep_proxies.py), модель — сам предмет
+                          ("vb_er_tank_pair", "vb_er_tank_pair", ["VB_ER_TankPair"]),
                           ("vb_er_pipes_l", "vb_er_pipes_l", ["VB_ER_Pipes_L"]),
                           ("vb_er_pipes_r", "vb_er_pipes_r", ["VB_ER_Pipes_R"]),
                           ("vb_er_pipes_engine", "vb_er_pipes_engine", ["VB_ER_Pipes_Engine"])):
@@ -551,17 +560,18 @@ S = {
     "STR_VB_ER_hood_name": ("Echo Runner Hood", "Капот Echo Runner"),
     "STR_VB_ER_hood_disc": ("Hood of the Echo Runner. Protects the engine.", "Капот Echo Runner. Защищает двигатель."),
     "STR_VB_ER_tank_name": ("Echo Tank", "Бак Эхо"),
-    "STR_VB_ER_tank_disc": ("Tank of Echo condensate (red energy). Mounts in the Echo Runner's trunk; holds 20 000 kE: about 52 minutes of forward flight, twice as long hovering. Cannot be mixed with a cold fusion tank.",
-                            "Бак эхо-конденсата (красная энергия). Ставится в багажник Echo Runner; вмещает 20 000 kE: около 52 минут полёта вперёд, висеть — вдвое дольше. С баком холодного синтеза не смешивается."),
-    "STR_VB_ER_tank_fusion_name": ("Cold Fusion Tank", "Бак холодного синтеза"),
-    "STR_VB_ER_tank_fusion_disc": ("A sealed cold fusion chamber: the reaction never stops and the charge never runs out. Works only in a pair: with two tanks in the Echo Runner's trunk the car flies without using energy, a single tank does not power it. Cannot be mixed with Echo tanks.",
-                                   "Запаянная камера холодного синтеза: реакция не гаснет, заряд не кончается. Работает только в паре: с двумя баками в багажнике Echo Runner машина летает без расхода, один бак её не питает. С баками Эхо не смешивается."),
+    "STR_VB_ER_tank_disc": ("Tank of Echo condensate (red energy). Mounts in the Echo Runner's trunk; holds 20 000 kE: about 52 minutes of forward flight, twice as long hovering. Cannot be fitted together with a twin cold fusion tank.",
+                            "Бак эхо-конденсата (красная энергия). Ставится в багажник Echo Runner; вмещает 20 000 kE: около 52 минут полёта вперёд, висеть — вдвое дольше. Вместе со сдвоенным баком холодного синтеза не ставится."),
+    "STR_VB_ER_tank_fusion_pair_name": ("Twin Cold Fusion Tank", "Сдвоенный бак холодного синтеза"),
+    "STR_VB_ER_tank_fusion_pair_disc": ("Two sealed cold fusion chambers strapped into one unit with a fusion manifold: the reaction never stops and the charge never runs out. Goes into the Echo Runner's trunk as one piece, in place of both tanks: the car flies without using energy. Cannot be fitted together with Echo tanks.",
+                                        "Две запаянные камеры холодного синтеза в общих стяжках с коллектором: реакция не гаснет, заряд не кончается. Ставится в багажник Echo Runner одним предметом вместо обоих баков — машина летает без расхода. Вместе с баками Эхо не ставится."),
+    "STR_VB_ER_tank_pair_slot": ("Twin cold fusion tank", "Сдвоенный бак синтеза"),
     "STR_VB_ER_pipes_l_name": ("Rift Line (left)", "Трубопровод Изнанки (левый)"),
     "STR_VB_ER_pipes_r_name": ("Rift Line (right)", "Трубопровод Изнанки (правый)"),
     "STR_VB_ER_pipes_e_name": ("Rift Line (engine)", "Трубопровод Изнанки (мотор)"),
     "STR_VB_ER_pipes_disc": ("Glowing line that carries energy from the tanks to the antigravity modules. Fits only the Echo Runner.",
                              "Светящаяся магистраль: несёт энергию от баков к антиграв-модулям. Подходит только к Echo Runner."),
-    "STR_VB_ER_cat_rift": ("Rift", "Изнанка"),
+    "STR_VB_ER_cat_rift": ("Power system", "Энергосистема"),      # баки и трубопроводы (было «Изнанка», 2026-11-26)
     "STR_VB_ER_grav_name": ("DV-4 Antigravity Module", "Антиграв-модуль ДВ-4"),
     "STR_VB_ER_grav_disc": ("Mounts in place of an Echo Runner wheel. With all four modules, the lines and charged tanks the car flies; with an Echo or cold fusion battery it also floats on its cushion when switched off.",
                             "Ставится вместо колеса Echo Runner. С четырьмя модулями, трубопроводами и заряженными баками машина летает; с аккумулятором Эхо или синтеза — ещё и висит на подушке заглушенной."),

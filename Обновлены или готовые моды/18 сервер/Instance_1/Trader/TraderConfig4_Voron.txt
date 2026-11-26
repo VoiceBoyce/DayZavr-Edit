@@ -1,0 +1,35 @@
+<Trader> Ворон | Voron
+	<Category> Вертолёты | Helicopters
+		RFFSHeli_R22,			    			VNK,		5000000,		500000		// 300 слотов 	| 2 места
+		RFFSHeli_LittleBird,			    	VNK,		5000000,		500000		// 300 слотов 	| 4 места
+		RFFSHeli_Bo105m,			    		VNK,		6000000,		600000		// 600 слотов	| 4 места
+		RFFSHeli_Bo105m_blackcamo,			    VNK,		6000000,		600000		// 600 слотов	| 4 места
+		RFFSHeli_Mi2,			    			VNK,		6350000,		635000		// 600 слотов	| 4 места
+		RFFSHeli_Mi2_Hornet,					VNK,		6350000,		635000		// 600 слотов	| 4 места	
+		RFFSHeli_Ka26,			    			VNK,		6500000,		650000		// 800 слотов	| 8 мест
+		RFFSHeli_AS350,			    			VNK,		6700000,		670000		// 800 слотов	| 4 места		
+		RFFSHeli_UH1H,			    			VNK,		6800000,		680000		// 600 слотов	| 6 мест	
+		RFFSHeli_EC135,			    			VNK,		6900000,		690000		// 800 слотов	| 6 мест
+		RFFSHeli_EC135_BlackCamo,				VNK,		6900000,		690000		// 800 слотов   | 6 мест				
+		RFFSHeli_CH53e,			    		    VNK,		7000000,		700000		// 1000 слотов	| 10 мест
+		RFFSHeli_Apache,			    		VNK,		8400000,		840000		// 800 слотов 	| 2 места
+		RFFSHeli_Apache_Desert,			    	VNK,		8400000,		840000		// 800 слотов 	| 2 места
+		RFFSHeli_Blackhawk,			    		VNK,		8500000,		850000		// 800 слотов 	| 12 мест
+		RFFSHeli_Blackhawk_Budhawk,			    VNK,		8500000,		850000		// 800 слотов 	| 12 мест
+		RFFSHeli_S76,			    			VNK,		8900000,		890000		// 850 слотов	| 6 мест
+		RFFSHeli_S76_WoodlandCamo,				VNK,		8900000,		890000		// 850 слотов   | 6 мест		
+		RFFSHeli_CH47,			    			VNK,		9200000,		920000		// 1900 слотов  | 12 мест | (1000 свои + 6 деревянных ящиков)
+	
+	<Category> Запчасти | Spare parts
+------------------------------------------------------------ Расходники | Consumables ------------------------------------------------------------------------------, *, -1,-1
+		RFFSHeli_wiring_harness,			      *,		  16000,		4000
+        RFFSHeli_igniter_plug,			    	  *,		  18000,		4500   
+        RFFSHeli_hydraulic_hoses,			      *,		  19000,		4750
+		RFFSHeli_aviation_battery,			      *,		  45000,		11250
+------------------------------------------------------------ Ремонт и обслуживание | Repair and maintenance ------------------------------------------------------------------------------, *, -1,-1
+		RFFSHeli_hydraulic_fluid,			      *,		  25000,		6250
+		RFFSHeli_aviation_toolbox,			      *,		  35000,		8750
+
+
+<OpenFile> TraderConfig5_Collector.txt
+<FileEnd>
