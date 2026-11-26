@@ -215,3 +215,13 @@ claude.ai «DRL Крафт — макет v2», исходники артбор�
 - `DRL_CraftComponentResolver.DoesItemMatchComponent`: расходник (Delete=1) с навесным или грузом не подходит — `ObjectDelete` удалял ингредиент вместе с содержимым (артефакты в поясе, вещи в кейсе). Инструменты не затронуты.
 - Компиляция проверена ванильным DayZServer (CF + INT_UIFramework + DRL_Core + DRL_CraftMenu + сервер DRL), в игре не смотрели: стенд dayz-mcp 11-25 отказал (`unapproved_debug_image`).
 
+## Ранг в крафте: `RequiredRank` (2026-11-26)
+
+- Поле рецепта `int RequiredRank` (`DRL_CraftMenuClasses.c`): ступень 1..N, 0 или нет в JSON — без ранга. Идёт клиенту вместе с конфигом (`Param1<DRL_Craft_Config>`).
+- Сервер: `DRL_CraftMenu_Server/scripts/4_World/DRL_RankProvider.c` — крючок `Level(PlayerBase)` (по умолчанию 0) и `Names(array<string>)`; систему рангов подключает дополнение `modded class DRL_RankProvider` (`VB_Tablet_DRL` — ранг планшета: ступень = `RankOf(xp) + 1`, названия `#STR_VB_TAB_RANKN_*`). Без дополнения рецепты с рангом закрыты.
+- Проверка `PlayerBase.DRL_CheckRank` во всех путях запуска: `TryCraftRecipeWithResultCount`, `TryCraftRecipeWithAttachments` (и каждый доп. рецепт), старые `TryCraftRecipe`/`TryCraftRecipeWithResult`. Отказ — уведомление `EDRLCraftNotifType.RANK_REQUIRED` (extraParam = ступень). Разборка не проверяется.
+- Ступень клиенту: RPC `STC_SYNC_RANK` (`Param2<int, array<string>>`) — при входе (`InvokeOnConnect`), с конфигом, при открытии станции (перед списком процессов) и при отказе. Клиент: `DRL_RankBridge` (`DRL_WorkbenchBridge.c`): `Meets(r)`, `Title(level)`, `s_OnChanged` → окно `OnRankChanged()` перерисовывает статусы и лист.
+- Окно: статус LOCKED, строка «Нужен ранг: %1» (важнее «Не изучен»), кнопка `STR_DRL_UI_BTN_RANK` + название, раздел «Ранг» в «Требованиях», печать листа `SetLockText` (у чертежа, «Раскроя» и «Сборки» общие `m_SealTitle/m_SealSub`), доп. детали с рангом не отмечаются.
+- Строки `STR_DRL_UI_RL_RANK`, `_BTN_RANK`, `_BP_RANK(_SUB)`, `_REQ_RANK`, `_RANK_SUB/_OK/_YOURS`, `STR_DRL_RANK_STEP/NONE`, `STR_DRL_NOTIF_TITLE/MSG_RANK` (в `ui_redesign/strings.tsv` и stringtable; украинский в stringtable свой).
+- Ставить вместе: клиент `@DRL_CraftMenu`, `DRL_CraftMenu_Server.pbo`, `VB_Tablet_DRL.pbo`. Проверено: компиляция и загрузка конфига 16 (351 рецепт) ванильным DayZServer; в игре не смотрели.
+

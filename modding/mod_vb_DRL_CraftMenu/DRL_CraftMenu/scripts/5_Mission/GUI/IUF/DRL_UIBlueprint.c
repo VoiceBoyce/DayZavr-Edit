@@ -922,6 +922,8 @@ class DRL_UIBlueprint extends ScriptedWidgetEventHandler
 	protected ref array<string> m_StatVText;
 
 	protected Widget m_Seal;
+	protected TextWidget m_SealTitle;	// «Не изучен» / «Нужен ранг» (SetLockText); ставят все три листа
+	protected TextWidget m_SealSub;
 	protected bool m_Locked;
 	protected bool m_Covered;
 	protected bool m_AllOk;
@@ -1091,6 +1093,8 @@ class DRL_UIBlueprint extends ScriptedWidgetEventHandler
 		sealIcon.SetSort(DRL_UI_SORT_OVER_MODEL + 1);
 		sealTitle.SetSort(DRL_UI_SORT_OVER_MODEL + 1);
 		sealSub.SetSort(DRL_UI_SORT_OVER_MODEL + 1);
+		m_SealTitle = sealTitle;
+		m_SealSub = sealSub;
 		m_Seal.Show(false);
 	}
 
@@ -1194,6 +1198,15 @@ class DRL_UIBlueprint extends ScriptedWidgetEventHandler
 	{
 		m_Locked = locked;
 		m_Seal.Show(locked && !m_Covered);
+	}
+
+	// Текст печати (уже переведённый): «Не изучен» или «Нужен ранг» с названием ранга
+	void SetLockText(string title, string sub)
+	{
+		if (m_SealTitle)
+			m_SealTitle.SetText(title);
+		if (m_SealSub)
+			m_SealSub.SetText(sub);
 	}
 
 	DRL_UIBpItem GetSideItem(int i)

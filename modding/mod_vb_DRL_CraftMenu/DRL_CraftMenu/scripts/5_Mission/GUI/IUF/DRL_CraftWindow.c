@@ -1133,7 +1133,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 
 	protected int RecipeStatus(DRL_Craft_Recipe r, array<EntityAI> cachedItems)
 	{
-		if (!DRL_LearnState.HasLearned(r.RecipeId))
+		if (!DRL_LearnState.HasLearned(r.RecipeId) || !DRL_RankBridge.Meets(r))
 			return DRL_UI_STATUS_LOCKED;
 		if (CanCraftRecipe(r, cachedItems))
 			return DRL_UI_STATUS_CAN;
@@ -1195,7 +1195,11 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		}
 		if (e.m_Status == DRL_UI_STATUS_LOCKED)
 		{
-			e.m_LineText = DRL_UIText.Tr("#STR_DRL_UI_RL_LOCKED");
+			// ранг важнее изучения: изучение без ранга крафт не откроет
+			if (!DRL_RankBridge.Meets(r))
+				e.m_LineText = DRL_UIText.Fmt("#STR_DRL_UI_RL_RANK", DRL_RankBridge.Title(r.RequiredRank));
+			else
+				e.m_LineText = DRL_UIText.Tr("#STR_DRL_UI_RL_LOCKED");
 			e.m_LineIcon = "lock";
 			e.m_LineColor = DRL_UIC.Lk();
 			return;
@@ -1441,6 +1445,8 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		if (GetProcForCurrentRecipe() != null)
 			return false;
 		if (!m_SelectedRecipe)
+			return false;
+		if (!DRL_RankBridge.Meets(m_SelectedRecipe))
 			return false;
 		if (m_Procs.Count() >= MaxQueueSlots())
 			return false;
@@ -1745,7 +1751,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		}
 
 		// Строка или чекбокс: включить / выключить.
-		if (!DRL_LearnState.HasLearned(id))
+		if (!DRL_LearnState.HasLearned(id) || !DRL_RankBridge.Meets(dopR))
 			return;
 		if (isChecked)
 		{
@@ -1878,7 +1884,18 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		FillSetInfo(r);
 		FillVehicleInfo(r);
 		FillCargoInfo();
-		m_Bp.SetLocked(!DRL_LearnState.HasLearned(r.RecipeId));
+		// печать на чертеже: «нужен ранг» важнее «не изучен»
+		bool rankLocked = !DRL_RankBridge.Meets(r);
+		if (rankLocked)
+		{
+			string rankSub = DRL_UIText.Fmt("#STR_DRL_UI_BP_RANK_SUB", DRL_RankBridge.Title(r.RequiredRank));
+			m_Bp.SetLockText(DRL_UIText.Tr("#STR_DRL_UI_BP_RANK"), rankSub);
+		}
+		else
+		{
+			m_Bp.SetLockText(DRL_UIText.Tr("#STR_DRL_UI_BP_LOCKED"), DRL_UIText.Tr("#STR_DRL_UI_BP_LOCKED_SUB"));
+		}
+		m_Bp.SetLocked(rankLocked || !DRL_LearnState.HasLearned(r.RecipeId));
 		m_Bp.Relayout();
 	}
 
@@ -2187,7 +2204,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 				p.m_RecipeId = pr.RecipeId;
 				p.m_Name = PartName(cls, pr);
 				p.m_Selected = pr == r;
-				p.m_Locked = !DRL_LearnState.HasLearned(pr.RecipeId);
+				p.m_Locked = !DRL_LearnState.HasLearned(pr.RecipeId) || !DRL_RankBridge.Meets(pr);
 				p.m_Ok = RecipeStatus(pr, cachedItems) == DRL_UI_STATUS_CAN;
 				// Вставка по порядку слотов сверху вниз.
 				int order = PartOrder(cls);
@@ -2728,7 +2745,8 @@ class DRL_CraftWindow extends INT_UIF_Menu
 				if (!dopR)
 					continue;
 				bool isChecked = m_SelectedAttachedRecipeIds.Find(attachedId) > -1;
-				bool learned = DRL_LearnState.HasLearned(attachedId);
+				bool dopRankOk = DRL_RankBridge.Meets(dopR);
+				bool learned = DRL_LearnState.HasLearned(attachedId) && dopRankOk;
 				array<string> dvars = DopVariants(dopR);
 				int dvi = DopVariantIndex(attachedId, dvars);
 				bool slotOk = isChecked;
@@ -2736,7 +2754,11 @@ class DRL_CraftWindow extends INT_UIF_Menu
 					slotOk = CanAttachToCurrentBuild(dopR.Result);
 
 				string sub = "";
-				if (!learned)
+				if (!dopRankOk)
+				{
+					sub = DRL_UIText.Fmt("#STR_DRL_UI_RL_RANK", DRL_RankBridge.Title(dopR.RequiredRank));
+				}
+				else if (!learned)
 				{
 					sub = DRL_UIText.Tr("#STR_DRL_UI_CHIP_LOCKED");
 				}
@@ -3069,6 +3091,8 @@ class DRL_CraftWindow extends INT_UIF_Menu
 	{
 		if (!r)
 			return true;
+		if (!DRL_RankBridge.Meets(r))
+			return false;
 		DRL_Learning_Config lcfg = GetLearning_Config();
 		if (lcfg && lcfg.RecipeRequiresLearning(r.RecipeId))
 		{
@@ -3133,6 +3157,19 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			return rows;
 
 		int totalReqCount = 0;
+
+		// ранг: строка «Боец · ранг в планшете — достигнут / у вас: Выживший»
+		if (r.RequiredRank > 0)
+		{
+			rows.Insert(DRL_UIRowData.Header("#STR_DRL_UI_REQ_RANK"));
+			bool rankOk = DRL_RankBridge.Meets(r);
+			string rankStatus = "#STR_DRL_UI_RANK_OK";
+			if (!rankOk)
+				rankStatus = DRL_UIText.Fmt("#STR_DRL_UI_RANK_YOURS", DRL_RankBridge.Title(DRL_RankBridge.Level()));
+			AddReqRow(rows, DRL_RankBridge.Title(r.RequiredRank), "#STR_DRL_UI_RANK_SUB", "", rankOk, rankStatus, null);
+			totalReqCount++;
+		}
+
 		DRL_Learning_Config lcfg = GetLearning_Config();
 		bool recipeNeedsLearning = false;
 		if (lcfg)
@@ -4056,6 +4093,11 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			SetCraftButton("#STR_No_Recipe", "", DRL_BTN_OFF, "error", false);
 			return;
 		}
+		if (!DRL_RankBridge.Meets(m_SelectedRecipe))
+		{
+			SetCraftButton("#STR_DRL_UI_BTN_RANK", DRL_RankBridge.Title(m_SelectedRecipe.RequiredRank), DRL_BTN_OFF, "lock", false);
+			return;
+		}
 		if (!DRL_LearnState.HasLearned(m_SelectedRecipe.RecipeId))
 		{
 			SetCraftButton("#STR_LearningLockTitel", "", DRL_BTN_OFF, "lock", false);
@@ -4131,7 +4173,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		if (!m_Bp)
 			return;
 		bool ok = false;
-		if (m_SelectedRecipe && DRL_LearnState.HasLearned(m_SelectedRecipe.RecipeId))
+		if (m_SelectedRecipe && DRL_LearnState.HasLearned(m_SelectedRecipe.RecipeId) && DRL_RankBridge.Meets(m_SelectedRecipe))
 			ok = CanCraftRecipe(m_SelectedRecipe);
 		m_Bp.SetAllOk(ok);
 	}
@@ -4160,7 +4202,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			return;
 		if (m_Procs.Count() >= MaxQueueSlots())
 			return;
-		if (!DRL_LearnState.HasLearned(m_SelectedRecipe.RecipeId) || !HasRequiredAttachments(m_SelectedRecipe))
+		if (!DRL_LearnState.HasLearned(m_SelectedRecipe.RecipeId) || !DRL_RankBridge.Meets(m_SelectedRecipe) || !HasRequiredAttachments(m_SelectedRecipe))
 		{
 			UpdateCraftButtonState();
 			return;
@@ -4268,6 +4310,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		DRL_CraftProcessBridge.s_OnProcessesSync.Insert(OnProcessSyncReceived);
 		DRL_CraftProcessBridge.s_OnProcessStarted.Insert(OnProcessStartedReceived);
 		DRL_CraftProcessBridge.s_OnProcessFinished.Insert(OnProcessFinishedReceived);
+		DRL_RankBridge.s_OnChanged.Insert(OnRankChanged);
 	}
 
 	protected void UnhookProcesses()
@@ -4278,6 +4321,20 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			DRL_CraftProcessBridge.s_OnProcessStarted.Remove(OnProcessStartedReceived);
 		if (DRL_CraftProcessBridge.s_OnProcessFinished)
 			DRL_CraftProcessBridge.s_OnProcessFinished.Remove(OnProcessFinishedReceived);
+		if (DRL_RankBridge.s_OnChanged)
+			DRL_RankBridge.s_OnChanged.Remove(OnRankChanged);
+	}
+
+	// Сервер прислал другую ступень (окно открыли после роста ранга): статусы, кнопка и печать заново
+	void OnRankChanged()
+	{
+		if (!m_Grid || !m_CraftBtn)
+			return;
+		RefreshStatuses();
+		if (m_SelectedRecipe)
+			FillDetails();
+		else
+			UpdateCraftButtonState();
 	}
 
 	void RequestActiveCraftProcesses()

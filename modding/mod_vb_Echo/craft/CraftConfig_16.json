@@ -35149,7 +35149,8 @@
                 "AttachmentsEx": 2,
                 "RecraftNeedAttachments": 0
             }
-        ]
+        ],
+        "RequiredRank": 5
     },
     {
         "RecipeId": 3202,
@@ -35354,7 +35355,8 @@
                 "AttachmentsEx": 2,
                 "RecraftNeedAttachments": 0
             }
-        ]
+        ],
+        "RequiredRank": 5
     },
     {
         "RecipeId": 3203,
@@ -35626,7 +35628,8 @@
                 "AttachmentsEx": 2,
                 "RecraftNeedAttachments": 0
             }
-        ]
+        ],
+        "RequiredRank": 5
     },
     {
         "RecipeId": 3204,
@@ -35880,7 +35883,8 @@
                 "AttachmentsEx": 1,
                 "RecraftNeedAttachments": 0
             }
-        ]
+        ],
+        "RequiredRank": 5
     },
     {
         "RecipeId": 3205,
@@ -36134,7 +36138,8 @@
                 "AttachmentsEx": 1,
                 "RecraftNeedAttachments": 0
             }
-        ]
+        ],
+        "RequiredRank": 5
     },
     {
         "RecipeId": 3206,
@@ -36375,7 +36380,8 @@
                 "AttachmentsEx": 1,
                 "RecraftNeedAttachments": 0
             }
-        ]
+        ],
+        "RequiredRank": 5
     },
     {
         "RecipeId": 3207,
@@ -36634,7 +36640,8 @@
                 "AttachmentsEx": 2,
                 "RecraftNeedAttachments": 0
             }
-        ]
+        ],
+        "RequiredRank": 5
     },
     {
         "RecipeId": 3208,
@@ -36901,7 +36908,8 @@
                 "AttachmentsEx": 2,
                 "RecraftNeedAttachments": 0
             }
-        ]
+        ],
+        "RequiredRank": 5
     },
     {
         "RecipeId": 4001,
@@ -41226,7 +41234,8 @@
             4303,
             4304,
             4305
-        ]
+        ],
+        "RequiredRank": 5
     },
     {
         "RecipeId": 4302,
@@ -41336,7 +41345,8 @@
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             }
-        ]
+        ],
+        "RequiredRank": 5
     },
     {
         "RecipeId": 4303,
@@ -41482,7 +41492,8 @@
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             }
-        ]
+        ],
+        "RequiredRank": 5
     },
     {
         "RecipeId": 4304,
@@ -41628,7 +41639,8 @@
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             }
-        ]
+        ],
+        "RequiredRank": 5
     },
     {
         "RecipeId": 4305,
@@ -41756,7 +41768,8 @@
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             }
-        ]
+        ],
+        "RequiredRank": 5
     },
     {
         "RecipeId": 4306,
@@ -41920,7 +41933,8 @@
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             }
-        ]
+        ],
+        "RequiredRank": 5
     },
     {
         "RecipeId": 4307,
@@ -42084,7 +42098,8 @@
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             }
-        ]
+        ],
+        "RequiredRank": 5
     },
     {
         "RecipeId": 4308,
@@ -42194,7 +42209,8 @@
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             }
-        ]
+        ],
+        "RequiredRank": 5
     },
     {
         "RecipeId": 4309,
@@ -42304,7 +42320,8 @@
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             }
-        ]
+        ],
+        "RequiredRank": 5
     },
     {
         "RecipeId": 4310,
@@ -42432,7 +42449,8 @@
                 "AttachmentsEx": 0,
                 "RecraftNeedAttachments": 0
             }
-        ]
+        ],
+        "RequiredRank": 5
     },
     {
         "RecipeId": 5100,

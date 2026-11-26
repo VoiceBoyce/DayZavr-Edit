@@ -93,6 +93,14 @@ modded class PlayerBase
 				break;
 			}
 
+			case DRL_CraftRPC.STC_SYNC_RANK:
+			{
+				Param2<int, array<string>> pRank;
+				if (ctx.Read(pRank))
+					DRL_RankBridge.Set(pRank.param1, pRank.param2);
+				break;
+			}
+
 			case DRL_CraftRPC.STC_STUDY_RECIPE_RESPONSE:
 			{
 				Param3<bool, int, array<int>> pResp;

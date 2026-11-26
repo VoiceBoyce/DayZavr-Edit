@@ -32,6 +32,7 @@ modded class MissionServer
 						if (pb && pb.GetIdentity() == sender)
 						{
 							pb.RPCSingleParam(DRL_CraftRPC.STC_SYNC_LEARNED_RECIPES, new Param1<array<int>>(pData.LearnedRecipeIds), true, sender);
+							pb.DRL_SendRank();
 							break;
 						}
 					}
@@ -150,6 +151,7 @@ modded class MissionServer
 			{
 				player.RPCSingleParam(DRL_CraftRPC.STC_SYNC_LEARNED_RECIPES, new Param1<array<int>>(pData.LearnedRecipeIds), true, identity);
 			}
+			player.DRL_SendRank();
 		}
 	}
 

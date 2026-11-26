@@ -11,7 +11,8 @@ enum DRL_CraftRPC
 	STC_SYNC_ACTIVE_PROCESSES = 57864586,
 	STC_CRAFT_PROCESS_STARTED = 57864587,
 	STC_CRAFT_PROCESS_FINISHED = 57864588,
-	STC_CRAFT_NOTIFICATION = 57864589
+	STC_CRAFT_NOTIFICATION = 57864589,
+	STC_SYNC_RANK = 57864590			// ступень игрока и названия ступеней (RequiredRank рецептов), Param2<int, array<string>>
 }
 
 enum DRL_CraftProcessStatus
@@ -34,7 +35,8 @@ enum EDRLCraftNotifType
 	MISSING_TOOLS,
 	NOT_LEARNED,
 	RECIPE_LEARNED,
-	SYSTEM_INFO
+	SYSTEM_INFO,
+	RANK_REQUIRED		// мала ступень игрока; extraParam — нужная ступень числом
 }
 
 enum EDRLWeaponAttachType
@@ -277,7 +279,12 @@ class DRL_Craft_Recipe
 	
 	ref array<ref DRL_Craft_Component> CraftComponents;
 	ref array<int> AttachedRecipeIds;
-	
+
+	// Ранг (2026-11-26): с какой ступени игрока рецепт доступен, 1..N; 0 или нет в JSON — без ранга.
+	// Ступень даёт дополнение с системой рангов (VB_Tablet_DRL: ранг планшета, «Ступень 5 из 10» = Боец).
+	// Без такого дополнения у всех ступень 0 и рецепты с рангом закрыты.
+	int RequiredRank;
+
 	int GetId()
     {
         return RecipeId;
@@ -299,6 +306,7 @@ class DRL_Craft_Recipe
 		ResultCount        	= 1;
 		ResultQuantityFrac 	= 0.0;
 		ResultDamageFrac   	= 0.0;
+		RequiredRank       	= 0;
 		Description        	= "";
 		CraftComponents    	= new array<ref DRL_Craft_Component>();
 		WorkbenchClasses 	= new array<string>();

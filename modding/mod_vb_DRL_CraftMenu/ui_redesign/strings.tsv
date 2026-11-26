@@ -245,3 +245,16 @@ STR_DRL_UI_CUT_CARGO	CAPACITY	ВМЕСТИМОСТЬ
 STR_DRL_UI_CARGO_SLOTS	%1 slots (%2)	%1 слотов (%2)
 STR_DRL_UI_CARGO_WORN	worn now: %1	сейчас на вас: %1
 STR_DRL_UI_ASM_ATTS_N	Attachments (%1): %2	Навесное (%1): %2
+# Ранг в крафте (RequiredRank, 2026-11-26). В stringtable украинский вписан вручную (scratchpad drl_rank_strings.py); drl_add_strings.py поставит туда русский
+STR_DRL_UI_RL_RANK	Rank needed: %1	Нужен ранг: %1
+STR_DRL_UI_BTN_RANK	Rank needed:	Нужен ранг:
+STR_DRL_UI_BP_RANK	Rank needed	Нужен ранг
+STR_DRL_UI_BP_RANK_SUB	%1 - your rank is in the tablet	%1 — свой ранг смотрите в планшете
+STR_DRL_UI_REQ_RANK	Rank	Ранг
+STR_DRL_UI_RANK_SUB	Tablet rank	Ранг в планшете
+STR_DRL_UI_RANK_OK	Reached	Достигнут
+STR_DRL_UI_RANK_YOURS	Yours: %1	У вас: %1
+STR_DRL_RANK_STEP	step %1	ступень %1
+STR_DRL_RANK_NONE	no rank	нет ранга
+STR_DRL_NOTIF_TITLE_RANK	Rank needed	Нужен ранг
+STR_DRL_NOTIF_MSG_RANK	%1: rank %2 is needed. Check your rank in the tablet.	%1: нужен ранг «%2». Свой ранг смотрите в планшете.

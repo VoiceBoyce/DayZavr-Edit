@@ -773,6 +773,8 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 		sealIcon.SetSort(DRL_UI_SORT_OVER_MODEL + 1);
 		sealTitle.SetSort(DRL_UI_SORT_OVER_MODEL + 1);
 		sealSub.SetSort(DRL_UI_SORT_OVER_MODEL + 1);
+		m_SealTitle = sealTitle;
+		m_SealSub = sealSub;
 		m_Seal.Show(false);
 	}
 
