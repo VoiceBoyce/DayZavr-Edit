@@ -241,6 +241,7 @@ STR_DRL_UI_ASM_SLOT_CANISTER	Canister	Канистра
 STR_DRL_UI_ASM_SLOT_WEAPON	Weapon	Оружие
 STR_DRL_UI_ASM_SLOT_BACK	Backpack	Рюкзак
 STR_DRL_UI_ASM_SLOT_CASSETTE	Cassette	Кассета
+STR_DRL_UI_CUT_WEAR	Try on the mannequin	Примерить на манекен
 STR_DRL_UI_SEARCH_RES	Search results	Результаты поиска
 STR_DRL_UI_ASM_VIEW_SCHEME	Scheme	Схема
 STR_DRL_UI_ASM_VIEW_MODEL	Model	Модель

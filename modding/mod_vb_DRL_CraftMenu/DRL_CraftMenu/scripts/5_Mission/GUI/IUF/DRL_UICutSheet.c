@@ -13,6 +13,7 @@ class DRL_UISetPart extends Managed
 {
 	int m_RecipeId = -1;
 	string m_Name;
+	string m_Class;     // вещь части (с выбранной расцветкой) - её надевает галочка у метки
 	bool m_Ok;
 	bool m_Selected;
 	bool m_Locked;
@@ -84,18 +85,30 @@ class DRL_UIMannequin extends ScriptedWidgetEventHandler
 		if (key == m_OutfitKey && m_Doll)
 			return;
 		m_OutfitKey = key;
+		DRL_StrGuard.Check("манекен: SetOutfit, начало");
 		if (!m_Preview || !EnsureDoll())
 		{
 			m_Missing.Show(true);
 			return;
 		}
 		m_Missing.Show(false);
+		// Виджет делает свою копию персонажа с одеждой: пока переодеваем, он манекен не держит.
+		m_Preview.SetPlayer(null);
+		DRL_StrGuard.Check("манекен: виджет отпустил");
 		Dress(classes);
 		m_Preview.SetPlayer(m_Doll);
+		DRL_StrGuard.Check("манекен: SetPlayer");
 		m_Preview.Refresh();
+		DRL_StrGuard.Check("манекен: Refresh");
 		ApplyView();
 		m_Host.Show(!m_Hidden);
 	}
+
+	// Один манекен на всю игровую сессию (2026-11-26, Баги №89): раньше локальный PlayerBase удалялся при каждой
+	// смене категории и создавался заново, и после этого строки рецептов в памяти оказывались испорчены (превью «i»,
+	// манекен голый). Ваниль персонажа из PlayerPreviewWidget не удаляет никогда - и мы больше не удаляем.
+	// Сменился тип персонажа игрока (возрождение другим) - делаем новый, старый остаётся под землёй до конца сессии.
+	protected static PlayerBase s_SharedDoll;
 
 	protected bool EnsureDoll()
 	{
@@ -109,6 +122,11 @@ class DRL_UIMannequin extends ScriptedWidgetEventHandler
 			type = me.GetType();
 			pos = me.GetPosition();
 		}
+		if (s_SharedDoll && s_SharedDoll.GetType() == type)
+		{
+			m_Doll = s_SharedDoll;
+			return true;
+		}
 		// Глубоко под землёй и без симуляции: в мире его не видно и не слышно.
 		pos[1] = pos[1] - 300;
 		Object obj = GetGame().CreateObjectEx(type, pos, ECE_LOCAL | ECE_NOLIFETIME);
@@ -120,8 +138,11 @@ class DRL_UIMannequin extends ScriptedWidgetEventHandler
 			Print("[DRL_CraftMenu] манекен не создан: " + type);
 			return false;
 		}
+		DRL_StrGuard.Check("манекен: создан");
 		m_Doll.DisableSimulation(true);
 		ApplyFace();
+		DRL_StrGuard.Check("манекен: лицо");
+		s_SharedDoll = m_Doll;
 		return true;
 	}
 
@@ -153,6 +174,7 @@ class DRL_UIMannequin extends ScriptedWidgetEventHandler
 			if (a && !a.IsInherited(Head))
 				GetGame().ObjectDelete(a);
 		}
+		DRL_StrGuard.Check("манекен: старые вещи удалены");
 		m_Retry = new array<string>();
 		if (!classes)
 			return;
@@ -163,6 +185,7 @@ class DRL_UIMannequin extends ScriptedWidgetEventHandler
 			if (!inv.CreateAttachment(cls))
 				m_Retry.Insert(cls);
 		}
+		DRL_StrGuard.Check("манекен: вещи надеты");
 		m_RetryLeft = RETRY_TRIES;
 		ScheduleRetry();
 	}
@@ -209,6 +232,7 @@ class DRL_UIMannequin extends ScriptedWidgetEventHandler
 			m_Preview.SetPlayer(m_Doll);
 			m_Preview.Refresh();
 		}
+		DRL_StrGuard.Check("манекен: повтор надевания");
 		ScheduleRetry();
 	}
 
@@ -254,6 +278,7 @@ class DRL_UIMannequin extends ScriptedWidgetEventHandler
 
 	void Tick(float dt)
 	{
+		DRL_StrGuard.Frame();
 		if (!m_Dragging)
 			return;
 		if (!(GetMouseState(MouseState.LEFT) & MB_PRESSED_MASK))
@@ -275,8 +300,8 @@ class DRL_UIMannequin extends ScriptedWidgetEventHandler
 		m_Retry = null;
 		if (m_Preview)
 			m_Preview.SetPlayer(null);
-		if (m_Doll && GetGame())
-			GetGame().ObjectDelete(m_Doll);
+		DRL_StrGuard.Check("манекен: Clear, виджет отпустил");
+		// Сам манекен не удаляем: он общий на сессию (s_SharedDoll), в следующий раз переоденется.
 		m_Doll = null;
 		m_OutfitKey = "";
 	}
@@ -623,6 +648,9 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 	static const int MAX_TAGS = 15;
 	static const int MAX_TOOLS = 8;
 	static const int MAX_PARTS = 12;
+	static const float WEAR_BOX_X = 6;    // квадратик-галочка в метке части
+	static const float WEAR_TEXT_X = 26;  // название части после квадратика
+	static const float WEAR_HIT_W = 23;   // клик по квадратику, правее - клик по названию
 	static const int SECTIONS = 7;
 	static const float CARGO_H = 58;     // блок «Вместимость» (Баги №75)
 	static const float CARGO_GRID_W = 170;
@@ -641,6 +669,13 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 	protected ref array<ButtonWidget> m_PartHits;
 	protected ref array<string> m_Outfit;
 	protected string m_SetTitle;
+	// Галочки «надеть на манекен» у меток (Баги №92): по умолчанию на манекене только выбранная вещь,
+	// отмеченные части сета надеваются вместе с ней. Держатся внутри сета, при смене сета сбрасываются.
+	protected ref array<ref INT_UIF_Surface> m_WearBoxes;
+	protected ref array<ImageWidget> m_WearIcons;
+	protected ref array<ButtonWidget> m_WearHits;
+	protected ref array<int> m_Worn;
+	protected string m_SetKey;
 
 	protected Widget m_Cut;
 	protected float m_CutX;
@@ -675,6 +710,10 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 		m_PartTexts = new array<TextWidget>();
 		m_PartHits = new array<ButtonWidget>();
 		m_Outfit = new array<string>();
+		m_WearBoxes = new array<ref INT_UIF_Surface>();
+		m_WearIcons = new array<ImageWidget>();
+		m_WearHits = new array<ButtonWidget>();
+		m_Worn = new array<int>();
 		m_SecLabels = new array<TextWidget>();
 		m_SecRight = new array<TextWidget>();
 		m_Swatches = new array<ref DRL_UICutSwatch>();
@@ -725,23 +764,34 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 		m_SetName.SetSort(DRL_UI_SORT_OVER_MODEL + 1);
 		m_SetInfo.SetSort(DRL_UI_SORT_OVER_MODEL + 1);
 
-		// Метки частей сета - столбиком по левому краю манекена, над 3D.
+		// Метки частей сета - столбиком по левому краю манекена, над 3D. Слева в метке квадратик-галочка
+		// «надеть на манекен» (свой клик), дальше название (клик - рецепт части).
 		for (int p = 0; p < MAX_PARTS; p++)
 		{
 			Widget pr = INT_UIF_Draw.Frame(m_Panel, 10, 14, 90, 24, "DRL_CutPart");
 			INT_UIF_Surface pbg = INT_UIF_Surface.Pill(pr, 0, 0, 90, 24, 0, 0);
-			TextWidget pt = INT_UIF_Draw.Text(pr, 10, 0, 76, 24, "", 11, muted);
+			INT_UIF_Surface wbox = INT_UIF_Surface.Box(pr, WEAR_BOX_X, 5, 14, 14, 3, 0, 0);
+			ImageWidget wicon = INT_UIF_Draw.Icon(pr, WEAR_BOX_X + 2, 7, 10, "check", 0);
+			TextWidget pt = INT_UIF_Draw.Text(pr, WEAR_TEXT_X, 0, 76, 24, "", 11, muted);
 			pt.SetBold(true);
-			ButtonWidget ph2 = INT_UIF_Draw.Hit(pr, 0, 0, 90, 24, this);
+			ButtonWidget wh = INT_UIF_Draw.Hit(pr, 0, 0, WEAR_HIT_W, 24, this);
+			DRL_UIKitUtil.ExposeHit(wh, "DRL_CutWear_" + p.ToString(), this);
+			ButtonWidget ph2 = INT_UIF_Draw.Hit(pr, WEAR_HIT_W, 0, 90 - WEAR_HIT_W, 24, this);
 			DRL_UIKitUtil.ExposeHit(ph2, "DRL_CutPart_" + p.ToString(), this);
 			DRL_UIKitUtil.SetSortDeep(pr, DRL_UI_SORT_OVER_MODEL);
+			DRL_UIKitUtil.SetSortDeep(wbox.GetRoot(), DRL_UI_SORT_OVER_MODEL + 1);
+			wicon.SetSort(DRL_UI_SORT_OVER_MODEL + 2);
 			pt.SetSort(DRL_UI_SORT_OVER_MODEL + 1);
-			ph2.SetSort(DRL_UI_SORT_OVER_MODEL + 2);
+			wh.SetSort(DRL_UI_SORT_OVER_MODEL + 3);
+			ph2.SetSort(DRL_UI_SORT_OVER_MODEL + 3);
 			pr.Show(false);
 			m_PartRoots.Insert(pr);
 			m_PartBgs.Insert(pbg);
 			m_PartTexts.Insert(pt);
 			m_PartHits.Insert(ph2);
+			m_WearBoxes.Insert(wbox);
+			m_WearIcons.Insert(wicon);
+			m_WearHits.Insert(wh);
 		}
 
 		// Правая часть: раскрой.
@@ -857,12 +907,20 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 	{
 		m_SetTitle = name;
 		m_Parts.Clear();
+		string setKey = name;
 		if (parts)
 		{
 			foreach (DRL_UISetPart p : parts)
 			{
 				m_Parts.Insert(p);
+				setKey = setKey + ";" + p.m_RecipeId.ToString();
 			}
+		}
+		// Другой сет - галочки «надеть» сбрасываются, внутри сета (другая вещь, расцветка) держатся.
+		if (setKey != m_SetKey)
+		{
+			m_SetKey = setKey;
+			m_Worn.Clear();
 		}
 		m_Outfit.Clear();
 		if (outfit)
@@ -992,9 +1050,28 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 	}
 
 	// --- раскладка --------------------------------------------------------------------------
+	// Что надето на манекен: выбранная вещь (первой - ей слот при совпадении) и отмеченные галочкой части.
+	protected array<string> WornOutfit()
+	{
+		array<string> res = new array<string>();
+		foreach (DRL_UISetPart sel : m_Parts)
+		{
+			if (sel && sel.m_Selected && sel.m_Class != "")
+				res.Insert(sel.m_Class);
+		}
+		foreach (DRL_UISetPart p : m_Parts)
+		{
+			if (!p || p.m_Selected || p.m_Class == "")
+				continue;
+			if (m_Worn.Find(p.m_RecipeId) > -1)
+				res.Insert(p.m_Class);
+		}
+		return res;
+	}
+
 	override void Relayout()
 	{
-		m_Doll.SetOutfit(m_Outfit);
+		m_Doll.SetOutfit(WornOutfit());
 		m_Doll.Show(!m_Covered);
 		LayoutPanel();
 
@@ -1333,13 +1410,14 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 			}
 			DRL_UISetPart p = m_Parts[i];
 			float tw = DRL_UIMeasure.TextW(m_Panel, p.m_Name, 11, true);
-			float w = tw + 22;
+			float w = tw + WEAR_TEXT_X + 11;
 			root.Show(!m_Covered);
 			INT_UIF_Draw.Place(root, 10, y, w, 24);
 			INT_UIF_Draw.Resize(m_PartBgs[i].GetRoot(), w, 24);
-			INT_UIF_Draw.Place(m_PartTexts[i], 11, 0, tw + 4, 24);
-			INT_UIF_Draw.Resize(m_PartHits[i], w, 24);
+			INT_UIF_Draw.Place(m_PartTexts[i], WEAR_TEXT_X, 0, tw + 4, 24);
+			INT_UIF_Draw.Place(m_PartHits[i], WEAR_HIT_W, 0, w - WEAR_HIT_W, 24);
 			m_PartTexts[i].SetText(p.m_Name);
+			PaintWear(i, p);
 			int fill = ARGB(225, 10, 16, 13);
 			int border = DRL_UIC.BP(102);
 			int fg = DRL_UIC.Muted();
@@ -1360,7 +1438,59 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 		}
 	}
 
+	// Квадратик «надеть на манекен»: у выбранной вещи отмечен всегда (тёмный на янтарной метке),
+	// у отмеченной части - янтарный с галочкой, у остальных пустой.
+	protected void PaintWear(int i, DRL_UISetPart p)
+	{
+		bool worn = p.m_Selected || m_Worn.Find(p.m_RecipeId) > -1;
+		int ink = ARGB(255, 43, 26, 0);
+		int fill = ARGB(255, 10, 16, 13);
+		int border = DRL_UIC.BP(140);
+		if (p.m_Selected)
+		{
+			fill = ARGB(60, 43, 26, 0);
+			border = ink;
+		}
+		else if (worn)
+		{
+			fill = DRL_UIC.A();
+			border = 0;
+		}
+		m_WearBoxes[i].SetFill(fill);
+		m_WearBoxes[i].SetBorder(border);
+		m_WearIcons[i].SetColor(ink);
+		m_WearIcons[i].Show(worn);
+	}
+
+	protected void ToggleWear(int i)
+	{
+		if (i < 0 || i >= m_Parts.Count())
+			return;
+		DRL_UISetPart p = m_Parts[i];
+		// выбранная вещь надета всегда
+		if (!p || p.m_Selected)
+			return;
+		int at = m_Worn.Find(p.m_RecipeId);
+		if (at > -1)
+			m_Worn.Remove(at);
+		else
+			m_Worn.Insert(p.m_RecipeId);
+		DRL_UISound.Select();
+		m_Doll.SetOutfit(WornOutfit());
+		PaintWear(i, p);
+	}
+
 	// --- события ----------------------------------------------------------------------------
+	protected int WearOf(Widget w)
+	{
+		for (int i = 0; i < m_WearHits.Count(); i++)
+		{
+			if (m_WearHits[i] == w)
+				return i;
+		}
+		return -1;
+	}
+
 	protected int PartOf(Widget w)
 	{
 		for (int i = 0; i < m_PartHits.Count(); i++)
@@ -1405,6 +1535,12 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 	{
 		if (button != MouseState.LEFT)
 			return false;
+		int wi = WearOf(w);
+		if (wi >= 0)
+		{
+			ToggleWear(wi);
+			return true;
+		}
 		int pi = PartOf(w);
 		if (pi >= 0)
 		{
@@ -1448,6 +1584,13 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 
 	override bool OnMouseEnter(Widget w, int x, int y)
 	{
+		int wi = WearOf(w);
+		if (wi >= 0)
+		{
+			DRL_UISound.Hover();
+			INT_UIF_Tooltip.ShowFor(m_WearBoxes[wi].GetRoot(), DRL_UIText.Tr("#STR_DRL_UI_CUT_WEAR"));
+			return true;
+		}
 		if (PartOf(w) >= 0 || SwatchOf(w) >= 0)
 		{
 			DRL_UISound.Hover();
@@ -1491,7 +1634,7 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 			INT_UIF_Tooltip.HideTip();
 			return true;
 		}
-		if (ToolOf(w) >= 0)
+		if (ToolOf(w) >= 0 || WearOf(w) >= 0)
 		{
 			INT_UIF_Tooltip.HideTip();
 			return true;
@@ -1505,9 +1648,15 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 		return false;
 	}
 
-	// Тестовый хук: «card» - бирка, «var» - лоскут, «part» - метка части, «dop» - доп. навесное.
+	// Тестовый хук: «card» - бирка, «var» - лоскут, «part» - метка части, «wear» - галочка «надеть»,
+	// «dop» - доп. навесное.
 	override void TestClick(string what, int index, int action)
 	{
+		if (what == "wear" && index >= 0 && index < m_WearHits.Count())
+		{
+			OnClick(m_WearHits[index], 0, 0, MouseState.LEFT);
+			return;
+		}
 		if (what == "card" && index >= 0 && index < m_Tags.Count())
 		{
 			OnClick(m_Tags[index].m_Hit, 0, 0, MouseState.LEFT);

@@ -894,7 +894,9 @@ class DRL_CraftWindow extends INT_UIF_Menu
 
 	void SelectCategory(int idx)
 	{
+		DRL_StrGuard.Check("окно: смена категории, начало");
 		DeselectRecipe();
+		DRL_StrGuard.Check("окно: рецепт снят");
 		m_CurrentCategoryIdx = idx;
 		DRL_Craft_Category cat = GetCurrentCategory();
 		string title = "#STR_DRL_ALL_RECIPES";
@@ -1091,6 +1093,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		}
 		m_Grid.SetItems(entries, m_SelectedRecipe);
 		UpdateSectionLine();
+		DRL_StrGuard.Check("окно: список рецептов построен");
 	}
 
 	// «Артефакты · можно: 3 из 58» над списком.
@@ -2215,6 +2218,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 					cls = chosen;
 				DRL_UISetPart p = new DRL_UISetPart();
 				p.m_RecipeId = pr.RecipeId;
+				p.m_Class = cls;
 				p.m_Name = PartName(cls, pr);
 				p.m_Selected = pr == r;
 				p.m_Locked = !DRL_LearnState.HasLearned(pr.RecipeId) || !DRL_RankBridge.Meets(pr);
@@ -2248,6 +2252,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		{
 			DRL_UISetPart only = new DRL_UISetPart();
 			only.m_RecipeId = r.RecipeId;
+			only.m_Class = chosen;
 			only.m_Name = PartName(chosen, r);
 			only.m_Selected = true;
 			only.m_Ok = RecipeStatus(r, cachedItems) == DRL_UI_STATUS_CAN;

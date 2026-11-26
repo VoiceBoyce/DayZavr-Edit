@@ -43,6 +43,7 @@ modded class MissionGameplay
 				if (g_Craft_Config.Categories) catCount = g_Craft_Config.Categories.Count();
 			}
 			Print("[DRL_CraftMenu][CLIENT] Config received from server. Recipes=" + recCount.ToString() + ", Categories=" + catCount.ToString());
+			DRL_StrGuard.Snap();
 		}
 	}
 
