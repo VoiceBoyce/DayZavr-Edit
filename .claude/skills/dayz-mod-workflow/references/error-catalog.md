@@ -152,3 +152,24 @@ Echo Runner 2026-11-25: в config.cpp машины добавлены 4 `Animati
 ### E131 — подвеска машины рисуется не там, где колесо в физике: мерить, а не считать
 
 Echo Runner 2026-11-25: колёса уходили под землю. Расчёт по модели (фаза damper → ход, LL-512) дважды не совпал с игрой. Помог замер в DayZDiag: `WheelGetContactPosition(i)` → `WorldToModel` (касание, колёса 0..3 = ЛП, ПП, ЛЗ, ПЗ), `GetAnimationPhase("damper_X_Y")`, кость колеса (`GetBonePivotsForAnimationSource` + `GetBoneTransformMS` × точка оси). Физика: колесо = база + (up+down)·фаза, где база может НЕ совпадать с осью колеса в памяти модели (у нас — старая высота до подъёма модели, +0.064). `WheelGetPositionLS` — от центра масс, для этого не годится. Две точки (левое/правое колесо оси при разной фазе) дают и наклон. Перенос в model.cfg — в долях длины оси (проверено).
+
+### E132 — лицо и кисти локального манекена серые
+
+DRL «Раскрой» 2026-11-26 (Баги № 91): манекен швейной — локальный `PlayerBase` (E36) — одет правильно, но лицо и кисти
+без кожи, серые. Ванильный `Man` (`P:\scripts\3_Game\Entities\Man.c:33-35`): `SetFaceTexture` / `SetFaceMaterial` —
+«текстура лица и рук»; живому игроку её ставит движок, локально созданному — нет. Лицо персонажа по умолчанию —
+`CfgFaces <faceType> Default texture/material` (`faceType` из класса персонажа, `P:\DZ\characters\data\config.cpp`,
+`P:\DZ\characters\heads\config.cpp`). Голова — вложение слота Head (`Head_Default`): при переодевании манекена её не
+удалять. Исправление: `DRL_UIMannequin.ApplyFace()` и пропуск `Head` в `Dress()` (`DRL_UICutSheet.c`).
+
+### E133 — `RegisterHeavy` у модов машин длиннее предела стека
+
+Сервер 16, 2026-11-26 (Баги № 90): при входе в лог клиента дважды `Virtual Machine Exception — Stack overflow` в
+`ModItemRegisterCallbacks.RegisterHeavy`; в трассе 124 кадра `RegisterHeavy` + 3 ванильных. Исключение обрывает только
+самый глубокий вызов: внешние переопределения дорабатывают, а моды дальше по цепочке не вызываются ни разу (наш
+`VB_EM_Hands` в трассу не попал — хват панели и рамы не регистрировался). Сколько модов в цепочке — решает modlist,
+своё место в ней не выбрать. Исправление: тяжёлые предметы регистрировать в короткой цепочке `RegisterCustom(pType)`:
+`DayzPlayerItemBehaviorCfg heavy = new DayzPlayerItemBehaviorCfg; heavy.SetHeavyItems();` — так ваниль создаёт
+`heavyItemBehaviour` (`DayZPlayerCfgBase.c:356-357`, `RegisterCustom` вызывается после `RegisterHeavy`, `:1568`), свои
+`AddItemInHandsProfileIK` — до `super.RegisterCustom`. Сделано в VB_EchoRunner_Hands, VB_EB_Hands, VB_EM_Hands,
+VB_MR_Entities. Чужие моды не трогаем.

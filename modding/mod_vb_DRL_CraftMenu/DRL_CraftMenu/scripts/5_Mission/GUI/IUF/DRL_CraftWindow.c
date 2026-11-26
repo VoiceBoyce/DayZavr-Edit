@@ -1884,18 +1884,10 @@ class DRL_CraftWindow extends INT_UIF_Menu
 		FillSetInfo(r);
 		FillVehicleInfo(r);
 		FillCargoInfo();
-		// печать на чертеже: «нужен ранг» важнее «не изучен»
-		bool rankLocked = !DRL_RankBridge.Meets(r);
-		if (rankLocked)
-		{
-			string rankSub = DRL_UIText.Fmt("#STR_DRL_UI_BP_RANK_SUB", DRL_RankBridge.Title(r.RequiredRank));
-			m_Bp.SetLockText(DRL_UIText.Tr("#STR_DRL_UI_BP_RANK"), rankSub);
-		}
-		else
-		{
-			m_Bp.SetLockText(DRL_UIText.Tr("#STR_DRL_UI_BP_LOCKED"), DRL_UIText.Tr("#STR_DRL_UI_BP_LOCKED_SUB"));
-		}
-		m_Bp.SetLocked(rankLocked || !DRL_LearnState.HasLearned(r.RecipeId));
+		// печать на чертеже - только «не изучен»; нужный ранг и так виден в списке, на кнопке
+		// и в «Требованиях» (пользователь 2026-11-26, № 83)
+		m_Bp.SetLockText(DRL_UIText.Tr("#STR_DRL_UI_BP_LOCKED"), DRL_UIText.Tr("#STR_DRL_UI_BP_LOCKED_SUB"));
+		m_Bp.SetLocked(!DRL_LearnState.HasLearned(r.RecipeId));
 		m_Bp.Relayout();
 	}
 
@@ -1995,6 +1987,9 @@ class DRL_CraftWindow extends INT_UIF_Menu
 	{
 		string low = slot;
 		low.ToLower();
+		// трубопроводы Эхо - навесное, хотя в имени слота мотора есть «engine» (№ 85)
+		if (low.IndexOf("pipes") > -1)
+			return false;
 		array<string> parts = {"wheel", "door", "hood", "trunk", "battery", "plug", "radiator", "reflector", "headlight", "engine", "belt", "bumper", "bamper", "kovh", "driver", "spare", "glass", "window", "mirror"};
 		foreach (string p : parts)
 		{
@@ -2002,6 +1997,31 @@ class DRL_CraftWindow extends INT_UIF_Menu
 				return true;
 		}
 		return false;
+	}
+
+	// Название слота навесного. У части чужих слотов в CfgSlots нет перевода - движок отдаёт имя как есть
+	// (CanisterGasoline, Weapon, Back, Cassette, № 85): для них свои строки.
+	protected string AsmSlotName(string slot)
+	{
+		string low = slot;
+		low.ToLower();
+		if (low == "canistergasoline")
+			return DRL_UIText.Tr("#STR_DRL_UI_ASM_SLOT_CANISTER");
+		if (low == "shoulder" || low == "melee")
+			return DRL_UIText.Tr("#STR_DRL_UI_ASM_SLOT_WEAPON");
+		if (low == "back")
+			return DRL_UIText.Tr("#STR_DRL_UI_ASM_SLOT_BACK");
+		if (low == "cassette")
+			return DRL_UIText.Tr("#STR_DRL_UI_ASM_SLOT_CASSETTE");
+		string sn = slot;
+		int sid = InventorySlots.GetSlotIdFromString(slot);
+		if (sid != InventorySlots.INVALID)
+		{
+			string dn = InventorySlots.GetSlotDisplayName(sid);
+			if (dn != "")
+				sn = dn;
+		}
+		return sn;
 	}
 
 	// Груз (слоты отсека машины и выбранных деталей) и навесное для груза и
@@ -2044,14 +2064,7 @@ class DRL_CraftWindow extends INT_UIF_Menu
 			{
 				if (IsCarPartSlot(slot))
 					continue;
-				string sn = slot;
-				int sid = InventorySlots.GetSlotIdFromString(slot);
-				if (sid != InventorySlots.INVALID)
-				{
-					string dn = InventorySlots.GetSlotDisplayName(sid);
-					if (dn != "")
-						sn = dn;
-				}
+				string sn = AsmSlotName(slot);
 				int at = names.Find(sn);
 				if (at > -1)
 				{

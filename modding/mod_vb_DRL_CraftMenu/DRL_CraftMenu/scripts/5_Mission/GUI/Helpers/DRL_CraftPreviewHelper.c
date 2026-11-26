@@ -1,5 +1,8 @@
 class DRL_CraftPreviewHelper
 {
+    static int s_DRL_Made;
+    static int s_DRL_Fails;
+
     static void CreatePreviewObject(string className, inout EntityAI preview)
     {
         className = DRL_ItemTypeHelper.GetSafePreviewClass(className);
@@ -54,6 +57,17 @@ class DRL_CraftPreviewHelper
         }
 
         preview = EntityAI.Cast(GetGame().CreateObjectEx(className, vector.Zero, ECE_LOCAL|ECE_NOLIFETIME));
+        // DayZavr 2026-11-26 (№ 89): после долгой работы окна превью переставали создаваться, в логе пусто.
+        // Пишем отказ (первые 20) и сколько превью создано за сессию - чтобы в следующий раз было видно причину.
+        if (preview)
+        {
+            s_DRL_Made++;
+        }
+        else if (s_DRL_Fails < 20)
+        {
+            s_DRL_Fails++;
+            Print("[DRL_CraftMenu] превью не создано: " + className + " (создано за сессию: " + s_DRL_Made.ToString() + ")");
+        }
         if (preview && !GetGame().IsServer())
         {
             Transport transport;

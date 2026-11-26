@@ -221,7 +221,16 @@ claude.ai «DRL Крафт — макет v2», исходники артбор�
 - Сервер: `DRL_CraftMenu_Server/scripts/4_World/DRL_RankProvider.c` — крючок `Level(PlayerBase)` (по умолчанию 0) и `Names(array<string>)`; систему рангов подключает дополнение `modded class DRL_RankProvider` (`VB_Tablet_DRL` — ранг планшета: ступень = `RankOf(xp) + 1`, названия `#STR_VB_TAB_RANKN_*`). Без дополнения рецепты с рангом закрыты.
 - Проверка `PlayerBase.DRL_CheckRank` во всех путях запуска: `TryCraftRecipeWithResultCount`, `TryCraftRecipeWithAttachments` (и каждый доп. рецепт), старые `TryCraftRecipe`/`TryCraftRecipeWithResult`. Отказ — уведомление `EDRLCraftNotifType.RANK_REQUIRED` (extraParam = ступень). Разборка не проверяется.
 - Ступень клиенту: RPC `STC_SYNC_RANK` (`Param2<int, array<string>>`) — при входе (`InvokeOnConnect`), с конфигом, при открытии станции (перед списком процессов) и при отказе. Клиент: `DRL_RankBridge` (`DRL_WorkbenchBridge.c`): `Meets(r)`, `Title(level)`, `s_OnChanged` → окно `OnRankChanged()` перерисовывает статусы и лист.
-- Окно: статус LOCKED, строка «Нужен ранг: %1» (важнее «Не изучен»), кнопка `STR_DRL_UI_BTN_RANK` + название, раздел «Ранг» в «Требованиях», печать листа `SetLockText` (у чертежа, «Раскроя» и «Сборки» общие `m_SealTitle/m_SealSub`), доп. детали с рангом не отмечаются.
-- Строки `STR_DRL_UI_RL_RANK`, `_BTN_RANK`, `_BP_RANK(_SUB)`, `_REQ_RANK`, `_RANK_SUB/_OK/_YOURS`, `STR_DRL_RANK_STEP/NONE`, `STR_DRL_NOTIF_TITLE/MSG_RANK` (в `ui_redesign/strings.tsv` и stringtable; украинский в stringtable свой).
+- Окно: статус LOCKED, строка «Нужен ранг: %1» (важнее «Не изучен»), кнопка `STR_DRL_UI_BTN_RANK` + название, раздел «Ранг» в «Требованиях», доп. детали с рангом не отмечаются. Печати «Нужен ранг» на листе нет (убрана 11-26, № 83): печать только «Не изучен»; `SetLockText` (общие `m_SealTitle/m_SealSub` у чертежа, «Раскроя» и «Сборки») оставлен. Манекен «Раскроя» одевается и для закрытых рецептов — смотреть можно, крафтить нельзя.
+- Строки `STR_DRL_UI_RL_RANK`, `_BTN_RANK`, `_REQ_RANK`, `_RANK_SUB/_OK/_YOURS`, `STR_DRL_RANK_STEP/NONE`, `STR_DRL_NOTIF_TITLE/MSG_RANK` (в `ui_redesign/strings.tsv` и stringtable; украинский в stringtable свой).
 - Ставить вместе: клиент `@DRL_CraftMenu`, `DRL_CraftMenu_Server.pbo`, `VB_Tablet_DRL.pbo`. Проверено: компиляция и загрузка конфига 16 (351 рецепт) ванильным DayZServer; в игре не смотрели.
+
+## Пачка Баги №82–91 (2026-11-26)
+
+- Манекен «Раскроя» (`DRL_UIMannequin`, `DRL_UICutSheet.c`): `ApplyFace()` — кожа лица и кистей локальной копии из `CfgFaces <faceType> Default texture/material` (`Man.SetFaceTexture/SetFaceMaterial`, иначе серые, №91); в `Dress()` вложение-голова (`Head`) не удаляется; что не встало в слот — повтор через 150 мс до 3 раз, затем строка `[DRL_CraftMenu] манекен: не удалось надеть <класс>` (№82). Закрытый по рангу рецепт одевает манекен как обычный.
+- Печать «Нужен ранг» убрана (№83): `FillDetails` → `SetLocked(!HasLearned)` с текстами «Не изучен».
+- Над попапом: блок «Характеристики» «Сборки» (`m_Info`) и подпись сета «Раскроя» (`m_Foot`, `m_SetCap/Name/Info`) стоят с `DRL_UI_SORT_OVER_MODEL` — в `SetCovered` прячутся (№84).
+- «Навесное (N)» (`FillVehicleInfo`): `AsmSlotName` — свои строки `STR_DRL_UI_ASM_SLOT_CANISTER/WEAPON/BACK/CASSETTE` для слотов без перевода в CfgSlots; `IsCarPartSlot` пропускает слоты с `pipes` (трубопровод мотора отсеивался по «engine», №85).
+- Диагностика превью (№89): `DRL_CraftPreviewHelper.CreatePreviewObject` пишет первые 20 отказов `[DRL_CraftMenu] превью не создано: <класс> (создано за сессию: N)`; манекен — `манекен не создан: <тип>`.
+- Компиляция проверена ванильным DayZServer со всеми изменёнными модами; в игре не смотрели.
 

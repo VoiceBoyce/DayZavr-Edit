@@ -40,6 +40,8 @@ class DRL_UIMannequin extends ScriptedWidgetEventHandler
 	protected float m_Yaw;
 	protected float m_Zoom = 1;
 	protected bool m_Hidden;
+	protected ref array<string> m_Retry;
+	protected int m_RetryLeft;
 
 	void ~DRL_UIMannequin()
 	{
@@ -115,10 +117,28 @@ class DRL_UIMannequin extends ScriptedWidgetEventHandler
 		{
 			if (obj)
 				GetGame().ObjectDelete(obj);
+			Print("[DRL_CraftMenu] манекен не создан: " + type);
 			return false;
 		}
 		m_Doll.DisableSimulation(true);
+		ApplyFace();
 		return true;
+	}
+
+	// Кожа лица и кистей: живому игроку её ставит движок, локальной копии - нет (лицо и руки серые).
+	// Берём лицо персонажа по умолчанию: CfgFaces <faceType> Default (как у ванильного персонажа).
+	protected void ApplyFace()
+	{
+		string face = m_Doll.ConfigGetString("faceType");
+		if (face == "")
+			return;
+		string path = "CfgFaces " + face + " Default ";
+		string tex = GetGame().ConfigGetTextOut(path + "texture");
+		string mat = GetGame().ConfigGetTextOut(path + "material");
+		if (tex != "")
+			m_Doll.SetFaceTexture(tex);
+		if (mat != "")
+			m_Doll.SetFaceMaterial(mat);
 	}
 
 	protected void Dress(array<string> classes)
@@ -129,17 +149,67 @@ class DRL_UIMannequin extends ScriptedWidgetEventHandler
 		for (int i = inv.AttachmentCount() - 1; i >= 0; i--)
 		{
 			EntityAI a = inv.GetAttachmentFromIndex(i);
-			if (a)
+			// голову (слот Head) не трогаем - это само лицо персонажа, не одежда
+			if (a && !a.IsInherited(Head))
 				GetGame().ObjectDelete(a);
 		}
+		m_Retry = new array<string>();
 		if (!classes)
 			return;
 		foreach (string cls : classes)
 		{
 			if (cls == "" || !GetGame().ConfigIsExisting("CfgVehicles " + cls))
 				continue;
-			inv.CreateAttachment(cls);
+			if (!inv.CreateAttachment(cls))
+				m_Retry.Insert(cls);
 		}
+		m_RetryLeft = RETRY_TRIES;
+		ScheduleRetry();
+	}
+
+	// Вещь не встала с первого раза (слот ещё держит удаляемая вещь прошлого сета) - пробуем
+	// ещё раз через пару кадров; не вышло за RETRY_TRIES - пишем в лог, чтобы было видно, что именно.
+	static const int RETRY_TRIES = 3;
+	static const int RETRY_MS = 150;
+
+	protected void ScheduleRetry()
+	{
+		if (!GetGame())
+			return;
+		GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(RetryDress);
+		if (!m_Retry || m_Retry.Count() == 0)
+			return;
+		if (m_RetryLeft > 0)
+		{
+			GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(RetryDress, RETRY_MS, false);
+			return;
+		}
+		foreach (string cls : m_Retry)
+		{
+			Print("[DRL_CraftMenu] манекен: не удалось надеть " + cls);
+		}
+		m_Retry.Clear();
+	}
+
+	protected void RetryDress()
+	{
+		if (!m_Doll || !m_Retry)
+			return;
+		m_RetryLeft--;
+		GameInventory inv = m_Doll.GetInventory();
+		if (!inv)
+			return;
+		for (int i = m_Retry.Count() - 1; i >= 0; i--)
+		{
+			if (inv.CreateAttachment(m_Retry[i]))
+				m_Retry.Remove(i);
+		}
+		if (m_Preview)
+		{
+			m_Preview.SetPlayer(m_Doll);
+			m_Preview.Refresh();
+		}
+		ScheduleRetry();
 	}
 
 	// Базовый масштаб меньше области (при 1.0 макушку срезало) и небольшой сдвиг вниз:
@@ -200,6 +270,9 @@ class DRL_UIMannequin extends ScriptedWidgetEventHandler
 
 	void Clear()
 	{
+		if (GetGame())
+			GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(RetryDress);
+		m_Retry = null;
 		if (m_Preview)
 			m_Preview.SetPlayer(null);
 		if (m_Doll && GetGame())
@@ -560,6 +633,7 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 	protected TextWidget m_SetCap;
 	protected TextWidget m_SetName;
 	protected TextWidget m_SetInfo;
+	protected Widget m_Foot;
 	protected ref array<ref DRL_UISetPart> m_Parts;
 	protected ref array<Widget> m_PartRoots;
 	protected ref array<ref INT_UIF_Surface> m_PartBgs;
@@ -645,7 +719,8 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 		m_SetName.SetBold(true);
 		m_SetInfo = INT_UIF_Draw.Text(m_Panel, 14, ph - 34, PANEL_W - 28, 18, "", 11, muted);
 		m_SetInfo.SetBold(true);
-		DRL_UIKitUtil.SetSortDeep(footShade.GetRoot(), DRL_UI_SORT_OVER_MODEL);
+		m_Foot = footShade.GetRoot();
+		DRL_UIKitUtil.SetSortDeep(m_Foot, DRL_UI_SORT_OVER_MODEL);
 		m_SetCap.SetSort(DRL_UI_SORT_OVER_MODEL + 1);
 		m_SetName.SetSort(DRL_UI_SORT_OVER_MODEL + 1);
 		m_SetInfo.SetSort(DRL_UI_SORT_OVER_MODEL + 1);
@@ -824,6 +899,11 @@ class DRL_UICutSheet extends DRL_UIBlueprint
 			m_PartRoots[i].Show(!covered && i < m_Parts.Count());
 		}
 		m_Seal.Show(m_Locked && !covered);
+		// подпись сета стоит выше попапа (поверх 3D) - под открытым попапом прячем, как в «Сборке» (№ 84)
+		m_Foot.Show(!covered);
+		m_SetCap.Show(!covered);
+		m_SetName.Show(!covered);
+		m_SetInfo.Show(!covered);
 	}
 
 	override void Tick(float dt)

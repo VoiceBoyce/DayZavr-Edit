@@ -237,6 +237,10 @@ STR_DRL_UI_ASM_CARGO	Cargo: %1 slots	Грузовой отсек: %1 слото�
 STR_DRL_UI_ASM_CARGO_PARTS	parts +%1	в деталях +%1
 STR_DRL_UI_ASM_ATTS	Attachments: %1	Навесное: %1
 STR_DRL_UI_ASM_NOATTS	none	нет
+STR_DRL_UI_ASM_SLOT_CANISTER	Canister	Канистра
+STR_DRL_UI_ASM_SLOT_WEAPON	Weapon	Оружие
+STR_DRL_UI_ASM_SLOT_BACK	Backpack	Рюкзак
+STR_DRL_UI_ASM_SLOT_CASSETTE	Cassette	Кассета
 STR_DRL_UI_SEARCH_RES	Search results	Результаты поиска
 STR_DRL_UI_ASM_VIEW_SCHEME	Scheme	Схема
 STR_DRL_UI_ASM_VIEW_MODEL	Model	Модель
@@ -248,8 +252,6 @@ STR_DRL_UI_ASM_ATTS_N	Attachments (%1): %2	Навесное (%1): %2
 # Ранг в крафте (RequiredRank, 2026-11-26). В stringtable украинский вписан вручную (scratchpad drl_rank_strings.py); drl_add_strings.py поставит туда русский
 STR_DRL_UI_RL_RANK	Rank needed: %1	Нужен ранг: %1
 STR_DRL_UI_BTN_RANK	Rank needed:	Нужен ранг:
-STR_DRL_UI_BP_RANK	Rank needed	Нужен ранг
-STR_DRL_UI_BP_RANK_SUB	%1 - your rank is in the tablet	%1 — свой ранг смотрите в планшете
 STR_DRL_UI_REQ_RANK	Rank	Ранг
 STR_DRL_UI_RANK_SUB	Tablet rank	Ранг в планшете
 STR_DRL_UI_RANK_OK	Reached	Достигнут

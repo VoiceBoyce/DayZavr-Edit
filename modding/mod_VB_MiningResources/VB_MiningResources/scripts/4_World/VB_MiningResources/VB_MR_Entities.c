@@ -315,9 +315,14 @@ modded class ModItemRegisterCallbacks
 		pType.AddItemInHandsProfileIK("VB_MR_StoneSand_Base", "dz/anims/workspaces/player/player_main/props/player_main_1h_compass.asi", pBehavior, "dz/anims/anm/player/ik/gear/compass.anm");
 	}
 
-	override void RegisterHeavy(DayZPlayerType pType, DayzPlayerItemBehaviorCfg pBehavior)
+	// Тяжёлый набор пресса - не через RegisterHeavy (№ 90, 2026-11-26): у модов машин эта цепочка длиннее предела
+	// стека Enforce (Stack overflow), её конец не вызывается. RegisterCustom короткая; «тяжёлое» поведение - как у
+	// ванили (heavyItemBehaviour.SetHeavyItems()); свой предмет - до super.
+	override void RegisterCustom(DayZPlayerType pType)
 	{
-		super.RegisterHeavy(pType, pBehavior);
-		pType.AddItemInHandsProfileIK("VB_MR_Press_Kit", "dz/anims/workspaces/player/player_main/player_main_heavy.asi", pBehavior, "dz/anims/anm/player/ik/heavy/wooden_crate.anm");
+		DayzPlayerItemBehaviorCfg heavy = new DayzPlayerItemBehaviorCfg;
+		heavy.SetHeavyItems();
+		pType.AddItemInHandsProfileIK("VB_MR_Press_Kit", "dz/anims/workspaces/player/player_main/player_main_heavy.asi", heavy, "dz/anims/anm/player/ik/heavy/wooden_crate.anm");
+		super.RegisterCustom(pType);
 	}
 }
