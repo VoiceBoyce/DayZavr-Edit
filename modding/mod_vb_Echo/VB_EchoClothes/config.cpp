@@ -430,7 +430,9 @@ class CfgVehicles
 		model="VB_EchoClothes\exo_set\Vest\ExoVest\ExoPlate_g.p3d";
 		inventorySlot[]={"Vest"};
 		itemInfo[]={"Clothing","Vest"};
-		attachments[]={"VestHolster","VestGrenadeA","VestGrenadeB","VestGrenadeC","VestGrenadeD"};
+		// 11-27: 3 подсумка под магазины вместо 4 гранат — ванильные слоты magazine/2/3, как у «Берилла» OOTS: их несут
+		// почти все магазины (и модовые). Без прокси — на модели не видны. Пачки патронов отсекает VB_EC_Exo_Vest.c.
+		attachments[]={"VestHolster","magazine","magazine2","magazine3"};
 		weight=6000;
 		itemSize[]={3,3};
 		itemsCargoSize[]={10,8};
