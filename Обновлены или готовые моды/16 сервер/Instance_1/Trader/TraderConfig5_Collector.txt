@@ -118,92 +118,42 @@
 		EFT_Egg,									*,			-1,				25000	// золотое яйцо
 		EFT_Chiken,									*,			-1,				35000	// золотой петух
 		
-	<Category> Скупка снаряжения OOTS | Buying OOTS gear
---------------------------------------------------------- Экзоскелет | Exoskeleton ----------------------------------------------------------------------------, *, -1,-1
-		OOTS_Helmet_Exo,								*,			-1,				9000	// Шлем экзоскелета
-		OOTS_Helmet_Exo_20,								*,			-1,				9000	// Шлем экзоскелета 20
-		OOTS_Jacket_Exo,								*,			-1,				9000	// Куртка экзоскелета
-		OOTS_Jacket_Exo_Tan,							*,			-1,				9000	// Куртка экзоскелета (Tan)
-		OOTS_Jacket_Exo_120,							*,			-1,				9000	// Куртка экзоскелета 120
-		OOTS_Vest_Exo,									*,			-1,				8000	// Бронежилет экзоскелета
-		OOTS_Vest_Exo_100,								*,			-1,				8000	// Бронежилет экзоскелета 100
-		OOTS_Pants_Exo,									*,			-1,				8000	// Штаны экзоскелета
-		OOTS_Pants_Exo_Tan,								*,			-1,				8000	// Штаны экзоскелета (Tan)
-		OOTS_Pants_Exo_120,								*,			-1,				8000	// Штаны экзоскелета 120
-		OOTS_Boots_Exo,									*,			-1,				5000	// Ботинки экзоскелета
-		OOTS_Gloves_Exo,								*,			-1,				4000	// Перчатки экзоскелета
---------------------------------------------------------- Сервоприводы и батареи | Servo drives and batteries ----------------------------------------------------------------------------, *, -1,-1
-		OOTS_Exo_Servoprivod_black,						*,			-1,				10000	// Сервопривод экзоскелета
-		OOTS_Exo_Servoprivod_black_BeltSlot,			*,			-1,				12000	// Сервопривод экзоскелета (пояс)
-		OOTS_Exo_Servoprivod_black_BeltSlot_120,		*,			-1,				12000	// Сервопривод экзоскелета 120
-		OOTS_Exo_ServoprivodBattery,					*,			-1,				3000	// Малый аккумулятор экзоскелета
-		OOTS_Exo_ServoprivodBattery_Medium,				*,			-1,				7000	// Средний аккумулятор экзоскелета
-		OOTS_Exo_ServoprivodBattery_Big,				*,			-1,				11000	// Большой аккумулятор экзоскелета
---------------------------------------------------------- Модули одежды | Clothing modules ----------------------------------------------------------------------------, *, -1,-1
-		OOTS_ClothesModificatorFood,					*,			-1,				6000	// Модуль восстановления еды и воды
-		OOTS_ClothesModificatorHealth,					*,			-1,				6000	// Модуль восстановления здоровья
-		OOTS_ClothesModificatorBlood,					*,			-1,				6000	// Модуль регенерации крови
-		OOTS_ClothesModificatorStamina,					*,			-1,				6000	// Модуль увеличения выносливости
-		OOTS_ClothesModificatorSlot,					*,			-1,				6000	// Модуль увеличения объёма
-		OOTS_ClothesModificatorWeight,					*,			-1,				6000	// Модуль снижения веса
---------------------------------------------------------- Комбинезоны «Сева» и ССП-99 | Seva and SSP-99 suits ----------------------------------------------------------------------------, *, -1,-1
-		OOTS_Jacket_Seva_NoSet,							*,			-1,				5000	// Куртка комбинезона Сева
-		OOTS_Jacket_Seva_Bandit_NoSet,					*,			-1,				5000	// Куртка комбинезона Сева Бандиты
-		OOTS_Jacket_Seva_Dolg_NoSet,					*,			-1,				5000	// Куртка комбинезона Сева Долг
-		OOTS_Jacket_Seva_Svoboda_NoSet,					*,			-1,				5000	// Куртка комбинезона Сева Свобода
-		OOTS_Jacket_Seva_Mercenary_NoSet,				*,			-1,				5000	// Куртка комбинезона Сева Наёмники
-		OOTS_Jacket_Seva_ClearSky_NoSet,				*,			-1,				5000	// Куртка комбинезона Сева Чистое небо
-		OOTS_Jacket_Seva_Monolit_NoSet,					*,			-1,				5000	// Куртка комбинезона Сева Монолит
-		OOTS_Pants_Seva_NoSet,							*,			-1,				4000	// Штаны комбинезона Сева
-		OOTS_Pants_Seva_Bandit_NoSet,					*,			-1,				4000	// Штаны комбинезона Сева Бандиты
-		OOTS_Pants_Seva_Dolg_NoSet,						*,			-1,				4000	// Штаны комбинезона Сева Долг
-		OOTS_Pants_Seva_Svoboda_NoSet,					*,			-1,				4000	// Штаны комбинезона Сева Свобода
-		OOTS_Pants_Seva_Mercenary_NoSet,				*,			-1,				4000	// Штаны комбинезона Сева Наёмники
-		OOTS_Pants_Seva_ClearSky_NoSet,					*,			-1,				4000	// Штаны комбинезона Сева Чистое небо
-		OOTS_Pants_Seva_Monolit_NoSet,					*,			-1,				4000	// Штаны комбинезона Сева Монолит
-		OOTS_Vest_Seva_NoSet,							*,			-1,				4000	// Бронежилет комбинезона Сева
-		OOTS_Vest_Seva_Bandit_NoSet,					*,			-1,				4000	// Бронежилет комбинезона Сева Бандиты
-		OOTS_Vest_Seva_Dolg_NoSet,						*,			-1,				4000	// Бронежилет комбинезона Сева Долг
-		OOTS_Vest_Seva_Svoboda_NoSet,					*,			-1,				4000	// Бронежилет комбинезона Сева Свобода
-		OOTS_Vest_Seva_Mercenary_NoSet,					*,			-1,				4000	// Бронежилет комбинезона Сева Наёмники
-		OOTS_Vest_Seva_ClearSky_NoSet,					*,			-1,				4000	// Бронежилет комбинезона Сева Чистое небо
-		OOTS_Vest_Seva_Monolit_NoSet,					*,			-1,				4000	// Бронежилет комбинезона Сева Монолит
-		OOTS_Vest_Seva2_NoSet,							*,			-1,				4000	// Бронеразгрузка комбинезона Сева
-		OOTS_Vest_Seva2_Bandit_NoSet,					*,			-1,				4000	// Бронеразгрузка комбинезона Сева Бандиты
-		OOTS_Vest_Seva2_Dolg_NoSet,						*,			-1,				4000	// Бронеразгрузка комбинезона Сева Долг
-		OOTS_Vest_Seva2_Svoboda_NoSet,					*,			-1,				4000	// Бронеразгрузка комбинезона Сева Свобода
-		OOTS_Vest_Seva2_Mercenary_NoSet,				*,			-1,				4000	// Бронеразгрузка комбинезона Сева Наёмники
-		OOTS_Vest_Seva2_ClearSky_NoSet,					*,			-1,				4000	// Бронеразгрузка комбинезона Сева Чистое небо
-		OOTS_Vest_Seva2_Monolit_NoSet,					*,			-1,				4000	// Бронеразгрузка комбинезона Сева Монолит
-		OOTS_BackPack_Seva_NoSet,						*,			-1,				3000	// Рюкзак комбинезона Сева
-		OOTS_BackPack_Seva_Bandit_NoSet,				*,			-1,				3000	// Рюкзак комбинезона Сева Бандиты
-		OOTS_BackPack_Seva_Dolg,						*,			-1,				3000	// Рюкзак комбинезона Сева Долг
-		OOTS_BackPack_Seva_Svoboda_NoSet,				*,			-1,				3000	// Рюкзак комбинезона Сева Свобода
-		OOTS_BackPack_Seva_Mercenary_NoSet,				*,			-1,				3000	// Рюкзак комбинезона Сева Наёмники
-		OOTS_BackPack_Seva_ClearSky_NoSet,				*,			-1,				3000	// Рюкзак комбинезона Сева Чистое небо
-		OOTS_BackPack_Seva_Monolit_NoSet,				*,			-1,				3000	// Рюкзак комбинезона Сева Монолит
-		OOTS_Jacket_SSP_NoSet,							*,			-1,				4000	// Куртка ССП-99 Эколог
-		OOTS_Jacket_SSP_Green_NoSet,					*,			-1,				4000	// Куртка ССП-99М
-		OOTS_Pants_SSP_NoSet,							*,			-1,				3000	// Штаны ССП-99 Эколог
-		OOTS_Pants_SSP_Green_NoSet,						*,			-1,				3000	// Штаны ССП-99М
-		OOTS_BackPack_SSP_NoSet,						*,			-1,				2500	// Рюкзак ССП-99 Эколог
-		OOTS_BackPack_SSP_Green_NoSet,					*,			-1,				2500	// Рюкзак ССП-99М
-		OOTS_Gloves_Seva_NoSet,							*,			-1,				1500	// Перчатки комбинезона Сева
-		OOTS_Gloves_SSP_NoSet,							*,			-1,				1500	// Перчатки SSP
-		OOTS_Boots_Seva_NoSet,							*,			-1,				2000	// Ботинки комбинезона Сева
---------------------------------------------------------- Бронежилеты «Берилл» | Berill vests ----------------------------------------------------------------------------, *, -1,-1
-		OOTS_Vest_Berill_Voennie,						*,			-1,				5000	// Бронежилет «Берилл» военный
-		OOTS_Vest_Berill_Pouch_Bandit,					*,			-1,				4000	// Разгрузка «Берилл» Бандиты
-		OOTS_Vest_Berill_Pouch_Dolg,					*,			-1,				4000	// Разгрузка «Берилл» Долг
-		OOTS_Vest_Berill_Pouch_Mercenary,				*,			-1,				4000	// Разгрузка «Берилл» Наёмники
---------------------------------------------------------- Шлемы и прочее | Helmets and other ----------------------------------------------------------------------------, *, -1,-1
-		OOTS_Helmet_CPcompany_Black,					*,			-1,				2500	// Шлем CP Company (чёрный)
-		OOTS_Helmet_CPcompany_Blue,						*,			-1,				2500	// Шлем CP Company (синий)
-		OOTS_Helmet_CPcompany_Gray,						*,			-1,				2500	// Шлем CP Company (серый)
-		OOTS_Helmet_CPcompany_Green,					*,			-1,				2500	// Шлем CP Company (зелёный)
-		OOTS_Helmet_CPcompany_Sand,						*,			-1,				2500	// Шлем CP Company (песочный)
-		OOTS_Helmet_CPcompany_White,					*,			-1,				2500	// Шлем CP Company (белый)
-		OOTS_Item_Bolt,									*,			-1,				10	// Болт
+	<Category> Скупка старого снаряжения | Buying old gear
+--------------------------------------------------------- Данные вещи скоро будут удалены с сервера | These items will soon be removed from the server ----------------------------------------------------------------------------, *, -1,-1
+		OOTS_Helmet_Exo,								*,			-1,				36000	// Шлем экзоскелета
+		OOTS_Helmet_Exo_20,								*,			-1,				36000	// Шлем экзоскелета 20
+		OOTS_Jacket_Exo,								*,			-1,				36000	// Куртка экзоскелета
+		OOTS_Jacket_Exo_Tan,							*,			-1,				36000	// Куртка экзоскелета (Tan)
+		OOTS_Jacket_Exo_120,							*,			-1,				36000	// Куртка экзоскелета 120
+		OOTS_Vest_Exo,									*,			-1,				32000	// Бронежилет экзоскелета
+		OOTS_Vest_Exo_100,								*,			-1,				32000	// Бронежилет экзоскелета 100
+		OOTS_Pants_Exo,									*,			-1,				32000	// Штаны экзоскелета
+		OOTS_Pants_Exo_Tan,								*,			-1,				32000	// Штаны экзоскелета (Tan)
+		OOTS_Pants_Exo_120,								*,			-1,				32000	// Штаны экзоскелета 120
+		OOTS_Boots_Exo,									*,			-1,				20000	// Ботинки экзоскелета
+		OOTS_Gloves_Exo,								*,			-1,				16000	// Перчатки экзоскелета
+		OOTS_Exo_Servoprivod_black,						*,			-1,				40000	// Сервопривод экзоскелета
+		OOTS_Exo_Servoprivod_black_BeltSlot,			*,			-1,				48000	// Сервопривод экзоскелета (пояс)
+		OOTS_Exo_Servoprivod_black_BeltSlot_120,		*,			-1,				48000	// Сервопривод экзоскелета 120
+		OOTS_Exo_ServoprivodBattery,					*,			-1,				12000	// Малый аккумулятор экзоскелета
+		OOTS_Exo_ServoprivodBattery_Medium,				*,			-1,				28000	// Средний аккумулятор экзоскелета
+		OOTS_Exo_ServoprivodBattery_Big,				*,			-1,				44000	// Большой аккумулятор экзоскелета
+		OOTS_ClothesModificatorFood,					*,			-1,				24000	// Модуль восстановления еды и воды
+		OOTS_ClothesModificatorHealth,					*,			-1,				24000	// Модуль восстановления здоровья
+		OOTS_ClothesModificatorBlood,					*,			-1,				24000	// Модуль регенерации крови
+		OOTS_ClothesModificatorStamina,					*,			-1,				24000	// Модуль увеличения выносливости
+		OOTS_ClothesModificatorSlot,					*,			-1,				24000	// Модуль увеличения объёма
+		OOTS_ClothesModificatorWeight,					*,			-1,				24000	// Модуль снижения веса
+		OOTS_Vest_Berill_Voennie,						*,			-1,				20000	// Бронежилет «Берилл» военный
+		OOTS_Vest_Berill_Pouch_Bandit,					*,			-1,				16000	// Разгрузка «Берилл» Бандиты
+		OOTS_Vest_Berill_Pouch_Dolg,					*,			-1,				16000	// Разгрузка «Берилл» Долг
+		OOTS_Vest_Berill_Pouch_Mercenary,				*,			-1,				16000	// Разгрузка «Берилл» Наёмники
+		OOTS_Helmet_CPcompany_Black,					*,			-1,				10000	// Шлем CP Company (чёрный)
+		OOTS_Helmet_CPcompany_Blue,						*,			-1,				10000	// Шлем CP Company (синий)
+		OOTS_Helmet_CPcompany_Gray,						*,			-1,				10000	// Шлем CP Company (серый)
+		OOTS_Helmet_CPcompany_Green,					*,			-1,				10000	// Шлем CP Company (зелёный)
+		OOTS_Helmet_CPcompany_Sand,						*,			-1,				10000	// Шлем CP Company (песочный)
+		OOTS_Helmet_CPcompany_White,					*,			-1,				10000	// Шлем CP Company (белый)
 		
 	<Category> Скупка кассет | Buying cassettes
 		AudioCassette_BOBER,					 	*,		  	-1,			4000
